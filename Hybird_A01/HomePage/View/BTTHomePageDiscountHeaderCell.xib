@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTHomePageDiscountHeaderCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="热门优惠" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIb-Os-E2m">
+                        <rect key="frame" x="15" y="15.5" width="65.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TAN-M4-h8f">
+                        <rect key="frame" x="344" y="17" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="3Mu-hq-Zhx"/>
+                            <constraint firstAttribute="height" constant="16" id="uTG-pW-cns"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdh-Bh-2tX">
+                        <rect key="frame" x="282" y="11.5" width="62" height="27"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="查看下一组">
+                            <color key="titleColor" red="0.40000000000000002" green="0.70196078431372544" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="nextBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="VPO-PK-yoU"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="gIb-Os-E2m" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="67x-Ir-GCx"/>
+                <constraint firstItem="TAN-M4-h8f" firstAttribute="leading" secondItem="vdh-Bh-2tX" secondAttribute="trailing" id="9TL-Po-N4l"/>
+                <constraint firstItem="gIb-Os-E2m" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="Fyd-sy-C1L"/>
+                <constraint firstItem="vdh-Bh-2tX" firstAttribute="centerY" secondItem="SEy-5g-ep8" secondAttribute="centerY" id="WxU-e9-YVo"/>
+                <constraint firstItem="TAN-M4-h8f" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="bIo-PJ-WaM"/>
+                <constraint firstAttribute="trailing" secondItem="TAN-M4-h8f" secondAttribute="trailing" constant="15" id="df9-Ej-cRR"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <connections>
+                <outlet property="nextBtn" destination="vdh-Bh-2tX" id="kRs-ct-tKJ"/>
+                <outlet property="titleLabel" destination="gIb-Os-E2m" id="TDx-qu-Ows"/>
+            </connections>
+            <point key="canvasLocation" x="-938.39999999999998" y="77.361319340329842"/>
+        </collectionViewCell>
+    </objects>
+</document>

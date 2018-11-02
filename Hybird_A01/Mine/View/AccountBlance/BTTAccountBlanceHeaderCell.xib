@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTAccountBlanceHeaderCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blance_bg" translatesAutoresizingMaskIntoConstraints="NO" id="gnG-qx-wVb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总余额 (元)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngn-ns-BGG">
+                        <rect key="frame" x="156.5" y="15" width="62" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" ¥ 3,000,000.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngI-LR-0Uo">
+                        <rect key="frame" x="55.5" y="44.5" width="264" height="43"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账户总余额=本地余额+各厅额度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9VG-ZJ-p3r">
+                        <rect key="frame" x="100" y="107.5" width="175" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vq4-X7-Dax">
+                        <rect key="frame" x="112.5" y="137" width="150" height="35"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <state key="normal" title=" 全部转回本地" image="blance_refresh" backgroundImage="blance_btn"/>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="9VG-ZJ-p3r" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="3PM-T3-6SP"/>
+                <constraint firstAttribute="trailing" secondItem="gnG-qx-wVb" secondAttribute="trailing" id="4Gp-rM-vXm"/>
+                <constraint firstItem="9VG-ZJ-p3r" firstAttribute="top" secondItem="ngI-LR-0Uo" secondAttribute="bottom" constant="20" id="78P-Jq-U0o"/>
+                <constraint firstItem="gnG-qx-wVb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="AMP-5k-EfB"/>
+                <constraint firstItem="ngn-ns-BGG" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="J8I-q2-MOO"/>
+                <constraint firstItem="Vq4-X7-Dax" firstAttribute="top" secondItem="9VG-ZJ-p3r" secondAttribute="bottom" constant="15" id="KWR-12-6kP"/>
+                <constraint firstAttribute="bottom" secondItem="gnG-qx-wVb" secondAttribute="bottom" id="N7q-kY-7I0"/>
+                <constraint firstItem="Vq4-X7-Dax" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Qvx-B7-wgB"/>
+                <constraint firstItem="gnG-qx-wVb" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="SXp-jb-jWx"/>
+                <constraint firstItem="ngI-LR-0Uo" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="hSq-Kl-aQ4"/>
+                <constraint firstItem="ngI-LR-0Uo" firstAttribute="top" secondItem="ngn-ns-BGG" secondAttribute="bottom" constant="15" id="l3g-Lw-JIR"/>
+                <constraint firstItem="ngn-ns-BGG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="yM6-um-yTv"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="375" height="190"/>
+            <point key="canvasLocation" x="130.40000000000001" y="162.81859070464768"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="blance_bg" width="375" height="170"/>
+        <image name="blance_btn" width="150" height="35"/>
+        <image name="blance_refresh" width="17" height="18"/>
+    </resources>
+</document>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTBindingMobileBtnCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUW-RZ-C87">
+                        <rect key="frame" x="15" y="48" width="345" height="44"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <state key="normal" title="确定" backgroundImage="binding_confirm_enable_normal">
+                            <color key="titleColor" red="0.12941176470588234" green="0.13333333333333333" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <state key="disabled" backgroundImage="binding_confirm_disable"/>
+                        <state key="highlighted" backgroundImage="binding_confirm_enable_press"/>
+                        <connections>
+                            <action selector="btnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="sOB-Si-yVz"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="验证码已发送, 15分钟内输入有效, 请勿泄漏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SDx-nR-too">
+                        <rect key="frame" x="60.5" y="15" width="254.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="AUW-RZ-C87" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="38h-U1-oM9"/>
+                <constraint firstItem="SDx-nR-too" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="Cx0-bZ-V1u"/>
+                <constraint firstItem="SDx-nR-too" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="XD0-ZU-rS3"/>
+                <constraint firstItem="AUW-RZ-C87" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="20" id="qLa-a6-74t"/>
+                <constraint firstAttribute="trailing" secondItem="AUW-RZ-C87" secondAttribute="trailing" constant="15" id="vxW-3T-zkR"/>
+                <constraint firstItem="AUW-RZ-C87" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="zST-h7-jaU"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <connections>
+                <outlet property="Yconstants" destination="qLa-a6-74t" id="YWb-XA-1sc"/>
+                <outlet property="btn" destination="AUW-RZ-C87" id="mMj-lU-q2K"/>
+                <outlet property="warningLabel" destination="SDx-nR-too" id="55v-T3-AIc"/>
+            </connections>
+            <point key="canvasLocation" x="-257" y="154"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="binding_confirm_disable" width="345" height="44"/>
+        <image name="binding_confirm_enable_normal" width="345" height="44"/>
+        <image name="binding_confirm_enable_press" width="345" height="44"/>
+    </resources>
+</document>

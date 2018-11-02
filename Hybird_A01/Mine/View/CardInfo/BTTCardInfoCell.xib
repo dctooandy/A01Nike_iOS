@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTCardInfoCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_bg" translatesAutoresizingMaskIntoConstraints="NO" id="DqY-Xg-Csz">
+                        <rect key="frame" x="15" y="57.5" width="345" height="173"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="绑定银行卡 (1)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuK-g8-afn">
+                        <rect key="frame" x="15" y="20" width="105" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" tag="6006" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OH1-Ca-XIR">
+                        <rect key="frame" x="303" y="20" width="57" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <state key="normal" title=" 删除" image="card_delete">
+                            <color key="titleColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="deleteClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="I0B-L0-YAT"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="6005" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kEm-o8-uMt">
+                        <rect key="frame" x="221" y="20" width="57" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <state key="normal" title=" 修改" image="card_edit">
+                            <color key="titleColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="modifyClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="8Bf-kN-URT"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_ccb" translatesAutoresizingMaskIntoConstraints="NO" id="JP5-YE-eQZ">
+                        <rect key="frame" x="30" y="82.5" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="2m8-Cj-mtA"/>
+                            <constraint firstAttribute="width" constant="20" id="YOG-c4-JtM"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中国建设银行" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckL-Ws-Y19">
+                        <rect key="frame" x="55" y="80.5" width="122.5" height="24"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                        <color key="textColor" white="1" alpha="0.75720730633802813" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="借记卡| 北京支行" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gxe-PU-59k">
+                        <rect key="frame" x="58" y="114.5" width="108.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.85098039215686272" green="0.92156862745098034" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7  ∗∗  ∗∗∗∗  ∗∗∗∗  ∗7855" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9h-gI-u3b">
+                        <rect key="frame" x="58" y="146.5" width="180.5" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="北京市朝阳区朝阳北路青年路开户网点" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Th4-ub-dmv">
+                        <rect key="frame" x="55" y="188.5" width="243" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="DqY-Xg-Csz" firstAttribute="top" secondItem="JP5-YE-eQZ" secondAttribute="top" constant="-25" id="0wl-YW-dvh"/>
+                <constraint firstItem="OH1-Ca-XIR" firstAttribute="leading" secondItem="kEm-o8-uMt" secondAttribute="trailing" constant="25" id="38j-W9-GOr"/>
+                <constraint firstItem="DqY-Xg-Csz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="3lj-ri-KSl"/>
+                <constraint firstItem="i9h-gI-u3b" firstAttribute="leading" secondItem="JP5-YE-eQZ" secondAttribute="trailing" constant="8" id="CCA-py-efo"/>
+                <constraint firstItem="cuK-g8-afn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="DZz-NC-bg2"/>
+                <constraint firstItem="ckL-Ws-Y19" firstAttribute="leading" secondItem="JP5-YE-eQZ" secondAttribute="trailing" constant="5" id="E2C-Fk-kVv"/>
+                <constraint firstAttribute="trailing" secondItem="DqY-Xg-Csz" secondAttribute="trailing" constant="15" id="EDG-Vp-lxn"/>
+                <constraint firstItem="kEm-o8-uMt" firstAttribute="centerY" secondItem="OH1-Ca-XIR" secondAttribute="centerY" id="LKh-1N-idf"/>
+                <constraint firstItem="gxe-PU-59k" firstAttribute="leading" secondItem="JP5-YE-eQZ" secondAttribute="trailing" constant="8" id="QbX-ei-sro"/>
+                <constraint firstItem="cuK-g8-afn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="THJ-Ra-xtc"/>
+                <constraint firstItem="i9h-gI-u3b" firstAttribute="top" secondItem="gxe-PU-59k" secondAttribute="bottom" constant="15" id="Wh3-e5-uVr"/>
+                <constraint firstItem="DqY-Xg-Csz" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="24" id="YXT-pz-uK4"/>
+                <constraint firstAttribute="trailing" secondItem="OH1-Ca-XIR" secondAttribute="trailing" constant="15" id="dFP-t4-NTw"/>
+                <constraint firstItem="Th4-ub-dmv" firstAttribute="bottom" secondItem="DqY-Xg-Csz" secondAttribute="bottom" constant="-25" id="gI2-8C-xoF"/>
+                <constraint firstItem="DqY-Xg-Csz" firstAttribute="leading" secondItem="JP5-YE-eQZ" secondAttribute="leading" constant="-15" id="iQH-AY-v1h"/>
+                <constraint firstItem="Th4-ub-dmv" firstAttribute="top" secondItem="i9h-gI-u3b" secondAttribute="bottom" constant="18" id="lGS-da-ncM"/>
+                <constraint firstItem="ckL-Ws-Y19" firstAttribute="centerY" secondItem="JP5-YE-eQZ" secondAttribute="centerY" id="mFX-Ot-8uq"/>
+                <constraint firstItem="OH1-Ca-XIR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="pNF-iQ-WKM"/>
+                <constraint firstItem="gxe-PU-59k" firstAttribute="top" secondItem="ckL-Ws-Y19" secondAttribute="bottom" constant="10" id="urZ-hM-HSP"/>
+                <constraint firstItem="Th4-ub-dmv" firstAttribute="leading" secondItem="JP5-YE-eQZ" secondAttribute="trailing" constant="5" id="w93-j9-zvx"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="375" height="236"/>
+            <connections>
+                <outlet property="adressLabel" destination="Th4-ub-dmv" id="tnS-bD-JGl"/>
+                <outlet property="bankIcon" destination="JP5-YE-eQZ" id="yAm-Ps-5SW"/>
+                <outlet property="bankNameLabel" destination="ckL-Ws-Y19" id="eQj-OD-mpl"/>
+                <outlet property="cardNoLabel" destination="cuK-g8-afn" id="cy0-6n-K05"/>
+                <outlet property="cardNumLabel" destination="i9h-gI-u3b" id="tFC-rj-lR9"/>
+                <outlet property="classLabel" destination="gxe-PU-59k" id="9JI-l8-63e"/>
+            </connections>
+            <point key="canvasLocation" x="128.80000000000001" y="122.78860569715144"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="card_bg" width="345" height="169"/>
+        <image name="card_ccb" width="19.5" height="20"/>
+        <image name="card_delete" width="20" height="20"/>
+        <image name="card_edit" width="20" height="20"/>
+    </resources>
+</document>

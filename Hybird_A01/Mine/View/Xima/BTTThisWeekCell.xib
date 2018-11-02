@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTThisWeekCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="107"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="107"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xima_select" translatesAutoresizingMaskIntoConstraints="NO" id="EKN-mZ-pwo">
+                        <rect key="frame" x="15" y="15" width="19" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="19" id="sWm-lI-Arm"/>
+                            <constraint firstAttribute="width" constant="19" id="uud-1a-lnq"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AG旗舰厅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbM-nJ-Xjd">
+                        <rect key="frame" x="42" y="15" width="71" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.85490196078431369" green="0.74117647058823533" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GA4-wp-TFK">
+                        <rect key="frame" x="320.5" y="15" width="39.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.85490196080000003" green="0.74117647060000003" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="总有效投注额:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gyt-mm-cX6">
+                        <rect key="frame" x="42" y="49.5" width="83.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123,456,789.01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rs-ym-TCS">
+                        <rect key="frame" x="133.5" y="49.5" width="93.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.85490196080000003" green="0.74117647060000003" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="比率:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5G-DS-dvy">
+                        <rect key="frame" x="42" y="75.5" width="30.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.50588235290000005" green="0.52941176469999995" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.2%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPU-yY-vBU">
+                        <rect key="frame" x="80.5" y="75.5" width="28" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.85490196080000003" green="0.74117647060000003" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="GA4-wp-TFK" secondAttribute="trailing" constant="15" id="2oE-7U-C63"/>
+                <constraint firstItem="O5G-DS-dvy" firstAttribute="top" secondItem="Gyt-mm-cX6" secondAttribute="bottom" constant="10" id="6vE-Le-2hs"/>
+                <constraint firstItem="GA4-wp-TFK" firstAttribute="centerY" secondItem="pbM-nJ-Xjd" secondAttribute="centerY" id="FEA-w7-mN8"/>
+                <constraint firstItem="pbM-nJ-Xjd" firstAttribute="leading" secondItem="EKN-mZ-pwo" secondAttribute="trailing" constant="8" id="Pub-DA-NvI"/>
+                <constraint firstItem="Gyt-mm-cX6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="42" id="UNt-HZ-GjF"/>
+                <constraint firstItem="UPU-yY-vBU" firstAttribute="leading" secondItem="O5G-DS-dvy" secondAttribute="trailing" constant="8" id="es4-Yz-H6n"/>
+                <constraint firstItem="2Rs-ym-TCS" firstAttribute="centerY" secondItem="Gyt-mm-cX6" secondAttribute="centerY" id="jhY-sI-aja"/>
+                <constraint firstItem="O5G-DS-dvy" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="42" id="ksh-G6-yh6"/>
+                <constraint firstItem="Gyt-mm-cX6" firstAttribute="top" secondItem="pbM-nJ-Xjd" secondAttribute="bottom" constant="15" id="nMA-67-Uur"/>
+                <constraint firstItem="2Rs-ym-TCS" firstAttribute="leading" secondItem="Gyt-mm-cX6" secondAttribute="trailing" constant="8" id="oUh-gB-pwo"/>
+                <constraint firstItem="UPU-yY-vBU" firstAttribute="centerY" secondItem="O5G-DS-dvy" secondAttribute="centerY" id="pYp-Is-vuC"/>
+                <constraint firstItem="pbM-nJ-Xjd" firstAttribute="centerY" secondItem="EKN-mZ-pwo" secondAttribute="centerY" id="rAM-yn-X1F"/>
+                <constraint firstItem="EKN-mZ-pwo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="tgC-BD-9sk"/>
+                <constraint firstItem="EKN-mZ-pwo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="x3k-zx-ubc"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="375" height="105"/>
+            <point key="canvasLocation" x="128.80000000000001" y="111.0944527736132"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="xima_select" width="19" height="19"/>
+    </resources>
+</document>

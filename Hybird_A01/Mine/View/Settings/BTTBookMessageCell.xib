@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTBookMessageCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="网站收款账号变更" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75p-NK-6or">
+                        <rect key="frame" x="15" y="12.5" width="131" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DGd-lW-Eg8">
+                        <rect key="frame" x="311" y="6.5" width="51" height="31"/>
+                        <color key="onTintColor" red="0.14117647058823529" green="0.52941176470588236" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <connections>
+                            <action selector="emailBook:" destination="gTV-IL-0wX" eventType="valueChanged" id="SQO-ET-zTI"/>
+                        </connections>
+                    </switch>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="邮件" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AS7-Mk-GAZ">
+                        <rect key="frame" x="274" y="13.5" width="29" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qw1-We-zDP">
+                        <rect key="frame" x="205" y="6.5" width="51" height="31"/>
+                        <color key="onTintColor" red="0.14117647058823529" green="0.52941176470588236" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <connections>
+                            <action selector="messageBook:" destination="gTV-IL-0wX" eventType="valueChanged" id="God-g2-wW9"/>
+                        </connections>
+                    </switch>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="短信" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FOt-Ig-9xd">
+                        <rect key="frame" x="168" y="13.5" width="29" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="qw1-We-zDP" firstAttribute="leading" secondItem="FOt-Ig-9xd" secondAttribute="trailing" constant="8" id="1gh-d3-9mf"/>
+                <constraint firstAttribute="trailing" secondItem="DGd-lW-Eg8" secondAttribute="trailing" constant="15" id="3xr-Cw-dA8"/>
+                <constraint firstItem="75p-NK-6or" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="E0V-iD-Jby"/>
+                <constraint firstItem="75p-NK-6or" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="Hnh-u6-O7V"/>
+                <constraint firstItem="DGd-lW-Eg8" firstAttribute="leading" secondItem="AS7-Mk-GAZ" secondAttribute="trailing" constant="8" id="dug-lX-qQ1"/>
+                <constraint firstItem="AS7-Mk-GAZ" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="hfG-9N-LXa"/>
+                <constraint firstItem="AS7-Mk-GAZ" firstAttribute="leading" secondItem="qw1-We-zDP" secondAttribute="trailing" constant="20" id="o6m-Yc-tvW"/>
+                <constraint firstItem="qw1-We-zDP" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="p2d-tY-GoU"/>
+                <constraint firstItem="DGd-lW-Eg8" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="qeL-0V-Abp"/>
+                <constraint firstItem="FOt-Ig-9xd" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="qoe-LQ-55m"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <connections>
+                <outlet property="emailLabel" destination="AS7-Mk-GAZ" id="tnh-st-aha"/>
+                <outlet property="messageLabel" destination="FOt-Ig-9xd" id="1fs-cf-JaI"/>
+                <outlet property="titleLabel" destination="75p-NK-6or" id="5Oo-5F-VCh"/>
+            </connections>
+            <point key="canvasLocation" x="-402" y="21"/>
+        </collectionViewCell>
+    </objects>
+</document>
