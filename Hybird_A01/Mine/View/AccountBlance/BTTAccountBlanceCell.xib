@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTAccountBlanceCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blance_local" translatesAutoresizingMaskIntoConstraints="NO" id="8p8-La-D7L">
+                        <rect key="frame" x="15" y="17.5" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="6cA-ra-en9"/>
+                            <constraint firstAttribute="width" constant="25" id="cDa-07-HFW"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本地额度(元)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPg-cp-EbQ">
+                        <rect key="frame" x="50" y="21.5" width="82" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="82" id="bCU-uk-suP"/>
+                            <constraint firstAttribute="height" constant="17" id="h9N-ke-cGL"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,000,000.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVY-6h-ydl">
+                        <rect key="frame" x="148" y="18" width="125" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="RVY-6h-ydl" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="0V4-lW-eKK"/>
+                <constraint firstItem="sPg-cp-EbQ" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="4Kl-YD-4l2"/>
+                <constraint firstItem="RVY-6h-ydl" firstAttribute="leading" secondItem="sPg-cp-EbQ" secondAttribute="trailing" constant="16" id="5u4-8r-pj7"/>
+                <constraint firstItem="8p8-La-D7L" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="EXo-sD-KDr"/>
+                <constraint firstItem="sPg-cp-EbQ" firstAttribute="leading" secondItem="8p8-La-D7L" secondAttribute="trailing" constant="10" id="aKf-Ff-U9t"/>
+                <constraint firstItem="8p8-La-D7L" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="foL-gA-IuJ"/>
+                <constraint firstItem="sPg-cp-EbQ" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="rEk-Yn-09I"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="blance_local" width="25" height="25"/>
+    </resources>
+</document>

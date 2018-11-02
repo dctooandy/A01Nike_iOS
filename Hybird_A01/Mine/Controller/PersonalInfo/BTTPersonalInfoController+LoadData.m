@@ -1,0 +1,40 @@
+//
+//  BTTPersonalInfoController+LoadData.m
+//  Hybird_A01
+//
+//  Created by Domino on 22/10/2018.
+//  Copyright © 2018 BTT. All rights reserved.
+//
+
+#import "BTTPersonalInfoController+LoadData.h"
+#import "BTTMeMainModel.h"
+
+@implementation BTTPersonalInfoController (LoadData)
+
+- (void)loadMainData {
+    NSArray *names = @[@"预留信息",@"真实姓名",@"性别",@"出生日期",@"邮箱地址",@"地址",@"备注"];
+    NSArray *placeholders = @[@"1-16位数字, 字母或者文字组合",@"需与取款银行卡持卡人姓名相同",@"请选择性别",@"请选择出生日期",@"请填写邮箱地址",@"请填写地址",@"请填写备注"];
+    for (NSString *name in names) {
+        NSInteger index = [names indexOfObject:name];
+        BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
+        model.name = name;
+        model.iconName = placeholders[index];
+        [self.sheetDatas addObject:model];
+    }
+    [self setupElements];
+}
+
+- (NSMutableArray *)sheetDatas {
+    NSMutableArray *sheetDatas = objc_getAssociatedObject(self, _cmd);
+    if (!sheetDatas) {
+        sheetDatas = [NSMutableArray array];
+        [self setSheetDatas:sheetDatas];
+    }
+    return sheetDatas;
+}
+
+- (void)setSheetDatas:(NSMutableArray *)sheetDatas {
+    objc_setAssociatedObject(self, @selector(sheetDatas), sheetDatas, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+@end

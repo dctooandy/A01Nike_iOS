@@ -1,0 +1,219 @@
+//
+//  Constants.h
+//  A01_Sports
+//
+//  Created by Domino on 2018/9/21.
+//  Copyright © 2018年 BTT. All rights reserved.
+//
+
+#ifndef Constants_h
+#define Constants_h
+
+#import "BTTBaseViewController.h"
+#import "BTTBaseNavigationController.h"
+#import "BTTTabbarController.h"
+#import "NSDate+Extension.h"
+#import "UIColor+Util.h"
+#import "UIView+Frame.h"
+#import "BTTProgressHUD.h"
+#import <IVNetworkLibrary/IVNetwork.h>
+#import <IVGameLibrary/IVGame.h>
+#import "PublicMethod.h"
+#import <GJRedDot/GJRedDot.h>
+#import "BTTRedDotManager.h"
+#import "NSString+Expand.h"
+#import "BridgeModel.h"
+#import "WebConfigModel.h"
+#import "HAConstant.h"
+#import "SVProgressHUD.h"
+#import "MBProgressHUD+Add.h"
+
+typedef enum {
+    BTTMobileCodeTypeBindMobile,           // 绑定
+    BTTMobileCodeTypeVerifyMobileAddBankCard,      // 添加银行卡
+    BTTMobileCodeTypeVerifyMobileAddBTC,     // 添加比特币
+    BTTMobileCodeTypeVerifyMobileUpdate    // 更新
+}BTTMobileCodeType; // 手机验证码类型
+
+/***********************************************存储关键字******************************************************/
+
+
+
+/**********************************************通知常量*******************************************************/
+
+//Flurry
+#define FlurryKey  @"RY7GPP2V792PMZK3PYNX"
+
+//live800相关
+#define Live800SkillId  @"10"
+
+//听云相关
+#define TingYunAppId  @"402c4df0e9124425ba0b2feb76d120b0"
+
+// VOIP
+#define BTTVoiceCallNumKey @"BTTVoiceCallNumKey"
+
+#define BTTUIDKey          @"BTTUIDKey"
+
+#define BTTVoiceCallResetTabbar  @"BTTVoiceCallResetTabbar"
+
+#define BTTWelcomePage     @"BTTWelcomePage"
+#define BTTLaunchScreenTime 3
+
+// 验证码发送按钮控制通知
+
+#define BTTVerifyCodeEnableNotification @"BTTVerifyCodeEnableNotification"
+
+#define BTTVerifyCodeDisableNotification @"BTTVerifyCodeDisableNotification"
+
+#define BTTVerifyCodeSendNotification    @"BTTVerifyCodeSendNotification"
+
+//状态栏样式
+#define StatusBarStyle UIStatusBarStyleLightContent
+
+// 小红点常量宏
+
+// 主页
+#define BTTHomePage @"HomePage"
+#define BTTHomePageItemsKey @"HomePageItemsKey"
+#define BTTHomePageMessage  @"HomePageMessage"
+
+// 个人中心
+#define BTTMineCenter @"MineCenter"
+#define BTTMineCenterItemsKey @"MineCenterItemsKey"
+#define BTTMineCenterMessage  @"MineCenterMessage"
+#define BTTMineCenterVersion  @"MineCenterVersion"
+
+
+/*********************************************API********************************************************/
+
+#define BTTVoiceCall        @"/A01/phones/appCall"
+#define BTTVoiceCallLogin        @"/A01/phones/appCallByLogin"
+
+/********************************************常用宏*********************************************************/
+
+#define kFontSystem(X)  ([UIFont systemFontOfSize:X])
+#define kFontWeightLight(X) ([UIFont systemFontOfSize:X weight:UIFontWeightLight])
+#define kFontSystemBold(X) ([UIFont boldSystemFontOfSize:X])
+#define kFontMedium(X) ([UIFont fontWithName:@"STHeitiSC-Medium" size:X])
+#define kFontLight(X) ([UIFont fontWithName:@"STHeitiSC-Light" size:X])
+#define kFontArialMT(X) ([UIFont fontWithName:@"ArialMT" size:X])
+
+// app_version版本号
+#define app_version   [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
+#define build_version   [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]
+
+//沙盒中web资源目录
+#define WebAppPath   [NSString stringWithFormat:@"%@/webApp",[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]]
+//沙盒中热更资源目录
+#define HotAppPath   [NSString stringWithFormat:@"%@/hotApp",[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]]
+//沙盒中h5增量更新资源目录
+#define ZLAppPath [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"zl.zip"]
+#define LocalHtmlPath(url) [NSString stringWithFormat:@"%@/__html/%@",WebAppPath,url]
+
+//带有RGBA的颜色设置
+#define COLOR_RGBA(R, G, B, A) [UIColor colorWithRed:R/255.0 green:G/255.0 blue:B/255.0 alpha:A]
+
+//定义UIImage对象
+#define ImageNamed(A) [UIImage imageNamed:A]
+
+// 定义弱引用
+#define weakSelf(weakSelf) __weak __typeof(&*self) weakSelf = self;
+#define strongSelf(strongSelf) __strong __typeof(&*weakSelf)strongSelf = weakSelf;
+
+
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+// tabbar 适配iPhone X
+#define kTabbarHeight (KIsiPhoneX ? (BTTDangerousAreaH + 49) : 49)
+// 是否为iPhoneX
+#define KIsiPhoneX (((int)((SCREEN_HEIGHT / SCREEN_WIDTH) * 100) == 216) ? YES : NO)
+#define BTTDangerousAreaH 34
+
+//导航栏title样式
+#define NavigationBarTitleTextAttributes [NSDictionary dictionaryWithObjectsAndKeys:\
+[UIColor whiteColor], NSForegroundColorAttributeName,\
+kFontSystem(17.0),    NSFontAttributeName,\
+nil]
+
+// 判断obj是否为空
+#define A01IsEmpty(_object) (_object == nil \
+|| [_object isKindOfClass:[NSNull class]] \
+|| ([_object respondsToSelector:@selector(length)] && [(NSData *)_object length] == 0) \
+|| ([_object respondsToSelector:@selector(count)] && [(NSArray *)_object count] == 0))
+
+//主题
+#define App_Theme [NSDictionary dictionaryWithObjectsAndKeys:\
+[UIColor whiteColor],      NSForegroundColorAttributeName,\
+COLOR_RGBA(42, 45, 53, 1), NSBackgroundColorAttributeName,\
+[UIColor whiteColor],      NSLaunchTitleColorAttributeName,\
+nil]
+
+
+//----------------------单例---------------------------
+#define SingletonInterface(Class) \
++ (Class *)sharedInstance;
+
+
+#define SingletonImplementation(Class) \
+static Class *__ ## sharedSingleton; \
+\
+\
++ (void)initialize \
+{ \
+static BOOL initialized = NO; \
+if(!initialized) \
+{ \
+initialized = YES; \
+__ ## sharedSingleton = [[Class alloc] init]; \
+} \
+} \
+\
+\
++ (Class *)sharedInstance \
+{ \
+return __ ## sharedSingleton; \
+} \
+\
+
+
+//----------防止在主线程调用dispatch_main出现同步锁死----
+#define dispatch_main_sync_safe(block){\
+if ([NSThread isMainThread]) {\
+block();\
+} else {\
+dispatch_sync(dispatch_get_main_queue(), block);\
+}}
+//----------防止在主线程调用dispatch_main出现异步问题----
+#define dispatch_main_async_safe(block)\
+if ([NSThread isMainThread]) {\
+block();\
+} else {\
+dispatch_async(dispatch_get_main_queue(), block);\
+}
+
+//Alert
+#define SHOWALERT(title, msg, cancel) do{ \
+UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:cancel otherButtonTitles:nil, nil]; \
+[alertview show]; }while(0)
+
+#endif
+
+#ifndef isDictWithCountMoreThan0
+
+#define isDictWithCountMoreThan0(__dict__) \
+(__dict__!=nil && \
+[__dict__ isKindOfClass:[NSDictionary class] ] && \
+__dict__.count>0)
+
+#endif
+
+#ifndef isArrayWithCountMoreThan0
+
+#define isArrayWithCountMoreThan0(__array__) \
+(__array__!=nil && \
+[__array__ isKindOfClass:[NSArray class] ] && \
+__array__.count>0)
+
+
+#endif /* Constants_h */

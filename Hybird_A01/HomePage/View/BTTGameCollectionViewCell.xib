@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BTTGameCollectionViewCell" id="gTV-IL-0wX" customClass="BTTGameCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="113"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="113"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AGQJ" translatesAutoresizingMaskIntoConstraints="NO" id="EPB-D8-Rie">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="113"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AG旗舰厅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26Q-jM-QVD">
+                        <rect key="frame" x="8" y="87" width="66.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tryPlay" translatesAutoresizingMaskIntoConstraints="NO" id="ZXt-lJ-MHq">
+                        <rect key="frame" x="120" y="19" width="25" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="JTk-Ll-DD7"/>
+                            <constraint firstAttribute="height" constant="18" id="Ssz-KI-AUW"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="26Q-jM-QVD" secondAttribute="bottom" constant="8" id="1mh-fQ-acD"/>
+                <constraint firstAttribute="bottom" secondItem="EPB-D8-Rie" secondAttribute="bottom" id="ESY-Jx-csj"/>
+                <constraint firstItem="EPB-D8-Rie" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="HKZ-Hi-wPD"/>
+                <constraint firstAttribute="trailing" secondItem="EPB-D8-Rie" secondAttribute="trailing" id="IaH-ek-tfB"/>
+                <constraint firstItem="EPB-D8-Rie" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="J17-7f-b0R"/>
+                <constraint firstItem="EPB-D8-Rie" firstAttribute="top" secondItem="ZXt-lJ-MHq" secondAttribute="top" constant="-19" id="LIa-ts-6Bg"/>
+                <constraint firstItem="26Q-jM-QVD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="RsW-hg-Bzq"/>
+                <constraint firstItem="ZXt-lJ-MHq" firstAttribute="trailing" secondItem="EPB-D8-Rie" secondAttribute="trailing" constant="-5" id="hj1-vl-fVS"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <connections>
+                <outlet property="gameIconImageView" destination="EPB-D8-Rie" id="vyl-rG-e7O"/>
+                <outlet property="gameNameLabel" destination="26Q-jM-QVD" id="T9V-Ig-1AA"/>
+                <outlet property="tryPlayIcon" destination="ZXt-lJ-MHq" id="sU8-m1-K3z"/>
+            </connections>
+            <point key="canvasLocation" x="24" y="50.824587706146929"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="AGQJ" width="150" height="113"/>
+        <image name="tryPlay" width="25" height="18"/>
+    </resources>
+</document>

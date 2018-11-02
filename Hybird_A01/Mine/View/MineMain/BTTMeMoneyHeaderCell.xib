@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTMeMoneyHeaderCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="63"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_deposit" translatesAutoresizingMaskIntoConstraints="NO" id="Eb2-Ph-UNr">
+                        <rect key="frame" x="15" y="15" width="21.5" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="21.5" id="CwS-0X-cHb"/>
+                            <constraint firstAttribute="height" constant="18" id="opa-I4-8qQ"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="存款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKd-ph-uLn">
+                        <rect key="frame" x="51.5" y="15" width="33" height="19.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="19.5" id="ecQ-6E-lKQ"/>
+                            <constraint firstAttribute="width" constant="33" id="xOi-CV-NqA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="存款前务必核对最新收款账户，入款至停用账户将无法添加额度!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afh-Wv-WXP">
+                        <rect key="frame" x="92.5" y="15" width="267.5" height="31.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="0.2953345070422535" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Eb2-Ph-UNr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="1Z6-xK-yMb"/>
+                <constraint firstItem="pKd-ph-uLn" firstAttribute="leading" secondItem="Eb2-Ph-UNr" secondAttribute="trailing" constant="15" id="4bS-gc-GHL"/>
+                <constraint firstAttribute="trailing" secondItem="afh-Wv-WXP" secondAttribute="trailing" constant="15" id="Ryh-kl-NzT"/>
+                <constraint firstItem="afh-Wv-WXP" firstAttribute="leading" secondItem="pKd-ph-uLn" secondAttribute="trailing" constant="8" id="Zn9-1p-k00"/>
+                <constraint firstItem="Eb2-Ph-UNr" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="ZvI-KH-ul5"/>
+                <constraint firstItem="pKd-ph-uLn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="hQt-3Y-iXP"/>
+                <constraint firstItem="afh-Wv-WXP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="kqG-h5-qqV"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="375" height="67"/>
+            <point key="canvasLocation" x="128.80000000000001" y="138.98050974512745"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="me_deposit" width="21" height="18"/>
+    </resources>
+</document>
