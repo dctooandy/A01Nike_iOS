@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param successBlock 主线程中成功回调
  @param failedBlock 主线程中失败回调
  */
-+ (void)setupLive800ChatWithSuccessBlock:(void(^)(void))successBlock
++ (void)setupLive800ChatWithSuccessBlock:(void(^)())successBlock
                              failedBlock:(void(^)(NSError * error))failedBlock;
 
 
@@ -56,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param failedBlock 异步失败回调
  */
 + (void)removeMessagesForUserAccount:(NSString * _Nullable)userAccount
-                        successBlock:(void(^)(void))successBlock
+                        successBlock:(void(^)())successBlock
                          failedBlock:(void(^)(NSError * error))failedBlock;
 
 @end

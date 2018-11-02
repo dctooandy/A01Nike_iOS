@@ -2,6 +2,7 @@ platform :ios, ‘9.0’
 inhibit_all_warnings!
 
 target ‘Hybird_A01’ do
+  pod 'SDWebImage'
   pod 'YYImage'
   pod 'WCDB'
   pod 'FMDB'
