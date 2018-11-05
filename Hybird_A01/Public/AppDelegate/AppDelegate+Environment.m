@@ -33,7 +33,7 @@
     //设置初始数据
     [IVWebViewManager sharaManager].delegate = [IVWebViewUtility new];
     [self setupLive800];
-    [IVNetwork setOldApi:YES];
+//    [IVNetwork setOldApi:YES];
     [WebViewUserAgaent writeIOSUserAgent];
     [IVNetwork setBundleId:[HAInitConfig bundleId]];
     [IVNetwork setAppid:[HAInitConfig appId]];
