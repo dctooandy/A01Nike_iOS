@@ -12,7 +12,7 @@
 #import "BTTRedDotManager.h"
 #import "WebViewUserAgaent.h"
 #import "HAInitConfig.h"
-
+#import "IVWebViewUtility.h"
 @implementation AppDelegate (Environment)
 
 /**
@@ -31,6 +31,7 @@
             break;
     }
     //设置初始数据
+    [IVWebViewManager sharaManager].delegate = [IVWebViewUtility new];
     [self setupLive800];
     [IVNetwork setOldApi:YES];
     [WebViewUserAgaent writeIOSUserAgent];
