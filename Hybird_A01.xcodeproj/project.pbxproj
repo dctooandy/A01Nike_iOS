@@ -140,15 +140,6 @@
 		3AD9CF02216C423900685B43 /* tingyunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD9CF01216C423900685B43 /* tingyunApp.framework */; };
 		3AD9CF04216C425200685B43 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD9CF03216C425200685B43 /* CoreTelephony.framework */; };
 		3AD9CF08216C71F500685B43 /* NSString+Expand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF06216C71F500685B43 /* NSString+Expand.m */; };
-		3AD9CF22216C72C100685B43 /* BridgeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF0D216C72C100685B43 /* BridgeModel.m */; };
-		3AD9CF23216C72C100685B43 /* WebConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF0F216C72C100685B43 /* WebConfigModel.m */; };
-		3AD9CF24216C72C100685B43 /* BridgeProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF12216C72C100685B43 /* BridgeProtocol.m */; };
-		3AD9CF25216C72C100685B43 /* HADNSProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF15216C72C100685B43 /* HADNSProtocol.m */; };
-		3AD9CF26216C72C100685B43 /* AGQJWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF18216C72C100685B43 /* AGQJWebViewController.m */; };
-		3AD9CF27216C72C100685B43 /* HABaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF1A216C72C100685B43 /* HABaseViewController.m */; };
-		3AD9CF28216C72C100685B43 /* HAWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF1C216C72C100685B43 /* HAWebViewController.m */; };
-		3AD9CF29216C72C100685B43 /* HAWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF1F216C72C100685B43 /* HAWebView.m */; };
-		3AD9CF2A216C72C100685B43 /* HAWKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF21216C72C100685B43 /* HAWKWebView.m */; };
 		3AD9CF2F216C763800685B43 /* UIView+FrameCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF2D216C763800685B43 /* UIView+FrameCategory.m */; };
 		3AD9CF32216C7AC100685B43 /* HDSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF30216C7AC100685B43 /* HDSocketManager.m */; };
 		3AD9CF35216C7AEF00685B43 /* HAInitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF34216C7AEF00685B43 /* HAInitConfig.m */; };
@@ -248,6 +239,7 @@
 		3AE1EB2021805E980073A32D /* BTTAddCardBtnsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1EB1E21805E980073A32D /* BTTAddCardBtnsCell.m */; };
 		3AE1EB2121805E980073A32D /* BTTAddCardBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE1EB1F21805E980073A32D /* BTTAddCardBtnsCell.xib */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_A01.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */; };
+		EACCD202218FE1680090B5E6 /* IVWebViewUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */; };
 		EAE89DCB218C3A7400C29393 /* SDWebImage+Compat3_8_1.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE89DC9218C3A7300C29393 /* SDWebImage+Compat3_8_1.m */; };
 		EAE89E86218C3ABD00C29393 /* angry.gif in Resources */ = {isa = PBXBuildFile; fileRef = EAE89DCE218C3ABC00C29393 /* angry.gif */; };
 		EAE89E87218C3ABD00C29393 /* cool_eye.gif in Resources */ = {isa = PBXBuildFile; fileRef = EAE89DCF218C3ABC00C29393 /* cool_eye.gif */; };
@@ -690,24 +682,6 @@
 		3AD9CF05216C71C800685B43 /* AppInitializeConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppInitializeConfig.h; sourceTree = "<group>"; };
 		3AD9CF06216C71F500685B43 /* NSString+Expand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Expand.m"; sourceTree = "<group>"; };
 		3AD9CF07216C71F500685B43 /* NSString+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Expand.h"; sourceTree = "<group>"; };
-		3AD9CF0C216C72C100685B43 /* BridgeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeModel.h; sourceTree = "<group>"; };
-		3AD9CF0D216C72C100685B43 /* BridgeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeModel.m; sourceTree = "<group>"; };
-		3AD9CF0E216C72C100685B43 /* WebConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebConfigModel.h; sourceTree = "<group>"; };
-		3AD9CF0F216C72C100685B43 /* WebConfigModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebConfigModel.m; sourceTree = "<group>"; };
-		3AD9CF11216C72C100685B43 /* BridgeProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeProtocol.h; sourceTree = "<group>"; };
-		3AD9CF12216C72C100685B43 /* BridgeProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeProtocol.m; sourceTree = "<group>"; };
-		3AD9CF14216C72C100685B43 /* HADNSProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HADNSProtocol.h; sourceTree = "<group>"; };
-		3AD9CF15216C72C100685B43 /* HADNSProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HADNSProtocol.m; sourceTree = "<group>"; };
-		3AD9CF17216C72C100685B43 /* AGQJWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGQJWebViewController.h; sourceTree = "<group>"; };
-		3AD9CF18216C72C100685B43 /* AGQJWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGQJWebViewController.m; sourceTree = "<group>"; };
-		3AD9CF19216C72C100685B43 /* HABaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HABaseViewController.h; sourceTree = "<group>"; };
-		3AD9CF1A216C72C100685B43 /* HABaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HABaseViewController.m; sourceTree = "<group>"; };
-		3AD9CF1B216C72C100685B43 /* HAWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAWebViewController.h; sourceTree = "<group>"; };
-		3AD9CF1C216C72C100685B43 /* HAWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAWebViewController.m; sourceTree = "<group>"; };
-		3AD9CF1E216C72C100685B43 /* HAWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAWebView.h; sourceTree = "<group>"; };
-		3AD9CF1F216C72C100685B43 /* HAWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAWebView.m; sourceTree = "<group>"; };
-		3AD9CF20216C72C100685B43 /* HAWKWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAWKWebView.h; sourceTree = "<group>"; };
-		3AD9CF21216C72C100685B43 /* HAWKWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAWKWebView.m; sourceTree = "<group>"; };
 		3AD9CF2D216C763800685B43 /* UIView+FrameCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameCategory.m"; sourceTree = "<group>"; };
 		3AD9CF2E216C763800685B43 /* UIView+FrameCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameCategory.h"; sourceTree = "<group>"; };
 		3AD9CF30216C7AC100685B43 /* HDSocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDSocketManager.m; sourceTree = "<group>"; };
@@ -878,6 +852,8 @@
 		3AE1EB1E21805E980073A32D /* BTTAddCardBtnsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTAddCardBtnsCell.m; sourceTree = "<group>"; };
 		3AE1EB1F21805E980073A32D /* BTTAddCardBtnsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTAddCardBtnsCell.xib; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_A01.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVWebViewUtility.m; sourceTree = "<group>"; };
+		EACCD201218FE1680090B5E6 /* IVWebViewUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVWebViewUtility.h; sourceTree = "<group>"; };
 		EAE89DC9218C3A7300C29393 /* SDWebImage+Compat3_8_1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImage+Compat3_8_1.m"; sourceTree = "<group>"; };
 		EAE89DCA218C3A7400C29393 /* SDWebImage+Compat3_8_1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDWebImage+Compat3_8_1.h"; sourceTree = "<group>"; };
 		EAE89DCE218C3ABC00C29393 /* angry.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = angry.gif; sourceTree = "<group>"; };
@@ -1480,15 +1456,6 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		3A8D6E9D216342FC000530DF /* Bridge */ = {
-			isa = PBXGroup;
-			children = (
-				3A8D6E9E21634306000530DF /* BridgeProtocolExternal.h */,
-				3A8D6E9F21634306000530DF /* BridgeProtocolExternal.m */,
-			);
-			path = Bridge;
-			sourceTree = "<group>";
-		};
 		3A8F5122215F74CF0069D1B3 = {
 			isa = PBXGroup;
 			children = (
@@ -1801,7 +1768,6 @@
 				3A8F51C3215F78230069D1B3 /* NoticePopview */,
 				3A8F51BD215F78170069D1B3 /* BTTActionSheet */,
 				3A8F51EC215F7C9D0069D1B3 /* Loading */,
-				3A8D6E9D216342FC000530DF /* Bridge */,
 				3AD9CD4C2165B2C900685B43 /* PopoverView */,
 				3A37E1362164A29600FB13A1 /* RefreshTool */,
 			);
@@ -1884,74 +1850,12 @@
 				3AD9CF37216C7D9400685B43 /* HAConstant.m */,
 				3AD9CF33216C7AEE00685B43 /* HAInitConfig.h */,
 				3AD9CF34216C7AEF00685B43 /* HAInitConfig.m */,
-				3AD9CF0A216C72C100685B43 /* Bridge */,
-				3AD9CF16216C72C100685B43 /* Controller */,
-				3AD9CF1D216C72C100685B43 /* View */,
+				3A8D6E9E21634306000530DF /* BridgeProtocolExternal.h */,
+				3A8D6E9F21634306000530DF /* BridgeProtocolExternal.m */,
+				EACCD201218FE1680090B5E6 /* IVWebViewUtility.h */,
+				EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */,
 			);
 			path = Hybird;
-			sourceTree = "<group>";
-		};
-		3AD9CF0A216C72C100685B43 /* Bridge */ = {
-			isa = PBXGroup;
-			children = (
-				3AD9CF0B216C72C100685B43 /* Model */,
-				3AD9CF10216C72C100685B43 /* Protocol */,
-				3AD9CF13216C72C100685B43 /* Utility */,
-			);
-			path = Bridge;
-			sourceTree = "<group>";
-		};
-		3AD9CF0B216C72C100685B43 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				3AD9CF0C216C72C100685B43 /* BridgeModel.h */,
-				3AD9CF0D216C72C100685B43 /* BridgeModel.m */,
-				3AD9CF0E216C72C100685B43 /* WebConfigModel.h */,
-				3AD9CF0F216C72C100685B43 /* WebConfigModel.m */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		3AD9CF10216C72C100685B43 /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				3AD9CF11216C72C100685B43 /* BridgeProtocol.h */,
-				3AD9CF12216C72C100685B43 /* BridgeProtocol.m */,
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
-		3AD9CF13216C72C100685B43 /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				3AD9CF14216C72C100685B43 /* HADNSProtocol.h */,
-				3AD9CF15216C72C100685B43 /* HADNSProtocol.m */,
-			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
-		3AD9CF16216C72C100685B43 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				3AD9CF17216C72C100685B43 /* AGQJWebViewController.h */,
-				3AD9CF18216C72C100685B43 /* AGQJWebViewController.m */,
-				3AD9CF19216C72C100685B43 /* HABaseViewController.h */,
-				3AD9CF1A216C72C100685B43 /* HABaseViewController.m */,
-				3AD9CF1B216C72C100685B43 /* HAWebViewController.h */,
-				3AD9CF1C216C72C100685B43 /* HAWebViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		3AD9CF1D216C72C100685B43 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				3AD9CF1E216C72C100685B43 /* HAWebView.h */,
-				3AD9CF1F216C72C100685B43 /* HAWebView.m */,
-				3AD9CF20216C72C100685B43 /* HAWKWebView.h */,
-				3AD9CF21216C72C100685B43 /* HAWKWebView.m */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		3AD9CF39216EDC6C00685B43 /* View */ = {
@@ -2939,7 +2843,6 @@
 				3A8F519F215F77EC0069D1B3 /* UIView+Frame.m in Sources */,
 				3ADD23852178184A00FA959A /* BTTMineViewController+LoadData.m in Sources */,
 				3A11ADEA21819B0500B1AFF4 /* BTTBindEmailController.m in Sources */,
-				3AD9CF28216C72C100685B43 /* HAWebViewController.m in Sources */,
 				3A11ADD521816E5800B1AFF4 /* SVProgressHUD.m in Sources */,
 				3AD9CF50216EFB3700685B43 /* BTTHomePageBannerCell.m in Sources */,
 				3AE0582021704D5C00C7E70D /* UUMarqueeView.m in Sources */,
@@ -2949,12 +2852,12 @@
 				3AE1EAFC218021080073A32D /* BTTVerifyTypeSelectController+LoadData.m in Sources */,
 				3ADD23EF2179B97A00FA959A /* TAPageControl.m in Sources */,
 				3A8F51C6215F78230069D1B3 /* BTTNoticeView.m in Sources */,
-				3AD9CF2A216C72C100685B43 /* HAWKWebView.m in Sources */,
 				3ADD23EC2179B97A00FA959A /* TAAbstractDotView.m in Sources */,
 				3A8F5188215F77AC0069D1B3 /* BTTIntroductoryPagesView.m in Sources */,
 				3AD9CF7F216F462600685B43 /* BTTHomePageSeparateCell.m in Sources */,
 				3AD9CF41216EDC9800685B43 /* BTTVoiceCallModel.m in Sources */,
 				3A11ADD321816E5800B1AFF4 /* SVRadialGradientLayer.m in Sources */,
+				EACCD202218FE1680090B5E6 /* IVWebViewUtility.m in Sources */,
 				3ADD237B2177366B00FA959A /* BTTMeMainCell.m in Sources */,
 				3AE1EB15218048940073A32D /* BTTCardModifyVerifyController+LoadData.m in Sources */,
 				3AE1EAF2218019400073A32D /* BTTBindingMobileController+LoadData.m in Sources */,
@@ -3016,7 +2919,6 @@
 				3AD9CD532165B2C900685B43 /* BTTPopoverAction.m in Sources */,
 				3A8F513E215F74D00069D1B3 /* main.m in Sources */,
 				3A8F5187215F77AC0069D1B3 /* BTTIntroductoryPagesHelper.m in Sources */,
-				3AD9CF25216C72C100685B43 /* HADNSProtocol.m in Sources */,
 				3A37E1192164A20100FB13A1 /* BTTTabbarController+VoiceCall.m in Sources */,
 				3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */,
 				3AD9CF54216EFD0700685B43 /* BTTBannerModel.m in Sources */,
@@ -3026,7 +2928,6 @@
 				3AE05828217066FE00C7E70D /* BTTAmountModel.m in Sources */,
 				3ADD238F217836B300FA959A /* BTTMineViewController+Nav.m in Sources */,
 				3ADD23672177230300FA959A /* BTTMeHeaderNotLoginCell.m in Sources */,
-				3AD9CF27216C72C100685B43 /* HABaseViewController.m in Sources */,
 				3A8F51F2215F7C9D0069D1B3 /* BTTProgressHUD.m in Sources */,
 				3ADD23622176FFB700FA959A /* BTTLoginAndRegisterViewController.m in Sources */,
 				3AD9CEF0216B3DD900685B43 /* WebViewUserAgaent.m in Sources */,
@@ -3051,7 +2952,6 @@
 				3A11ADDA218187B600B1AFF4 /* MBProgressHUD+Add.m in Sources */,
 				3ADD23F02179B97A00FA959A /* SDCollectionViewCell.m in Sources */,
 				3A11AE622186CDA100B1AFF4 /* BTTXimaHeaderCell.m in Sources */,
-				3AD9CF24216C72C100685B43 /* BridgeProtocol.m in Sources */,
 				3A11AE6C2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.m in Sources */,
 				3A37E1262164A22700FB13A1 /* BTTDiscountsViewController.m in Sources */,
 				3AD9CF40216EDC9800685B43 /* BTTHomePageViewController.m in Sources */,
@@ -3060,10 +2960,8 @@
 				3AE0581A2170314900C7E70D /* BTTActivityModel.m in Sources */,
 				3A514E432186F3CB00B83881 /* BTTLastWeekCell.m in Sources */,
 				3AD9CF89216F4E5400685B43 /* BTTHomePageDiscountCell.m in Sources */,
-				3AD9CF29216C72C100685B43 /* HAWebView.m in Sources */,
 				3A8F5173215F77A50069D1B3 /* BTTAdvertiseView.m in Sources */,
 				3AD9CF38216C7D9400685B43 /* HAConstant.m in Sources */,
-				3AD9CF22216C72C100685B43 /* BridgeModel.m in Sources */,
 				3AD9CF7B216F400A00685B43 /* BTTAppIconModel.m in Sources */,
 				3AD9CF32216C7AC100685B43 /* HDSocketManager.m in Sources */,
 				3AE1EB1C21805B460073A32D /* BTTAddCardController+LoadData.m in Sources */,
@@ -3075,13 +2973,11 @@
 				3A8D6EA021634306000530DF /* BridgeProtocolExternal.m in Sources */,
 				3A8F51E5215F78F50069D1B3 /* BTTCollectionViewFlowlayout.m in Sources */,
 				3A11AE582186A71100B1AFF4 /* BTTBookMessageCell.m in Sources */,
-				3AD9CF23216C72C100685B43 /* WebConfigModel.m in Sources */,
 				3A11AE5D2186B71600B1AFF4 /* BTTXimaController.m in Sources */,
 				3AD9CD5B21661BE800685B43 /* BTTRedDotManager.m in Sources */,
 				3A11AE072181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.m in Sources */,
 				3AD9CF84216F482B00685B43 /* BTTHomePageDiscountHeaderCell.m in Sources */,
 				3AE1EABE217DB7040073A32D /* BTTPersonalInfoController.m in Sources */,
-				3AD9CF26216C72C100685B43 /* AGQJWebViewController.m in Sources */,
 				3A11AE4B21869B2200B1AFF4 /* BTTSettingsController.m in Sources */,
 				3A11AE4F2186A09700B1AFF4 /* BTTModifyLimitViewController.m in Sources */,
 				3A11ADF12181A1E200B1AFF4 /* BTTWithdrawalController.m in Sources */,

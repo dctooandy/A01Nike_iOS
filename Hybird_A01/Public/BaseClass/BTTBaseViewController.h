@@ -7,11 +7,11 @@
 //
 
 #import "HABaseViewController.h"
-
+#import "BTTProgressHUD.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTBaseViewController : HABaseViewController
-
+@property(nonatomic, strong)BTTProgressHUD *hud;
 + (BTTBaseViewController *)getVCFromStoryboard;
 
 @end
