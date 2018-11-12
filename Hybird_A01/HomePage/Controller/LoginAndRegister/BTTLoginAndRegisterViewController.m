@@ -16,13 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self registerNotification];
-    
-//    NSArray *cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies;
-//    for (NSHTTPCookie *cookie in cookies) {
-//        id isLoged = [cookie valueForKey:NSHTTPCookieValue];
-//        
-//    }
+//    [self registerNotification];
 }
 
 - (void)registerNotification {

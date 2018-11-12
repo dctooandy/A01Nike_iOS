@@ -91,7 +91,9 @@ typedef NS_ENUM(NSInteger, BTTProgressHUDMaskType) {
 
 #pragma mark - init
 
-+(instancetype)progressHUD;
++ (instancetype)shareInstance;
+
++ (instancetype)progressHUD;
 
 #pragma mark - show
 
