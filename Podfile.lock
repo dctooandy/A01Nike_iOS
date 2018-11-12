@@ -24,29 +24,29 @@ PODS:
   - GJRedDot (1.1.1):
     - GJRedDot/GJDeallocBlockExecutor (= 1.1.1)
   - GJRedDot/GJDeallocBlockExecutor (1.1.1)
-  - IVGameLibrary (0.0.9):
-    - IVGameLibrary/GameController (= 0.0.9)
-  - IVGameLibrary/GameController (0.0.9)
-  - IVNetworkLibrary (0.0.8):
+  - IVGameLibrary (0.0.14):
+    - IVGameLibrary/GameController (= 0.0.14)
+  - IVGameLibrary/GameController (0.0.14)
+  - IVNetworkLibrary (0.0.12):
     - AFNetworking (~> 3.2.1)
     - FCUUID (~> 1.3.1)
-    - IVNetworkLibrary/IVNetwork (= 0.0.8)
+    - IVNetworkLibrary/IVNetwork (= 0.0.12)
     - JSONModel (~> 1.7.0)
     - UICKeyChainStore (~> 2.1.2)
     - YTKNetwork (~> 2.0.4)
     - ZipArchive (~> 1.4.0)
-  - IVNetworkLibrary/IVNetwork (0.0.8):
+  - IVNetworkLibrary/IVNetwork (0.0.12):
     - AFNetworking (~> 3.2.1)
     - FCUUID (~> 1.3.1)
     - JSONModel (~> 1.7.0)
     - UICKeyChainStore (~> 2.1.2)
     - YTKNetwork (~> 2.0.4)
     - ZipArchive (~> 1.4.0)
-  - IVWebViewLibrary (0.0.5):
-    - IVWebViewLibrary/IVWebViewLibrary (= 0.0.5)
+  - IVWebViewLibrary (0.0.8):
+    - IVWebViewLibrary/IVWebViewLibrary (= 0.0.8)
     - JSONModel (~> 1.7.0)
     - MJExtension (~> 3.0.15.1)
-  - IVWebViewLibrary/IVWebViewLibrary (0.0.5):
+  - IVWebViewLibrary/IVWebViewLibrary (0.0.8):
     - JSONModel (~> 1.7.0)
     - MJExtension (~> 3.0.15.1)
   - JSONModel (1.7.0)
@@ -123,13 +123,13 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   IVGameLibrary:
-    :commit: 8f0558f1d76f660630691594d134653e2ef5971b
+    :commit: 1aa04fff10584067d7505689cb283014b16bab17
     :git: http://10.66.72.115/mobile-iOS/IVGameLibrary.git
   IVNetworkLibrary:
-    :commit: a1682dcbf3434f182bed0a9d93979fc69ffa30fa
+    :commit: f58cf77d6dfd54a29cfa6c01af41503c4d982805
     :git: http://10.66.72.115/mobile-iOS/IVNetworkLibrary.git
   IVWebViewLibrary:
-    :commit: 814b5d6b3f9688fba2bf88f57c6d804572ae6ba0
+    :commit: 645ceb513f631ff98b293b6551b35de72ab419db
     :git: http://10.66.72.115/mobile-iOS/IVWebViewLibrary.git
 
 SPEC CHECKSUMS:
@@ -139,9 +139,9 @@ SPEC CHECKSUMS:
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GJRedDot: de661162a700f3395f0cd70f3629e4d3abe8e181
-  IVGameLibrary: ae04169993848eca4eda1503ca97648c0b0a8dd4
-  IVNetworkLibrary: a318798c12d17545b86b2859e907cc5be945ad13
-  IVWebViewLibrary: 3251073252c9e6e6539c63e16c47b102edcd98eb
+  IVGameLibrary: 8d2b78824c6bc4515e4f28dad00509c3f1e16d71
+  IVNetworkLibrary: 3185d9bc8ed1ac82e2aa2118a3b25712db37cec2
+  IVWebViewLibrary: 6fba8be45ba1b236e5a8e30d477b233a9852255d
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9

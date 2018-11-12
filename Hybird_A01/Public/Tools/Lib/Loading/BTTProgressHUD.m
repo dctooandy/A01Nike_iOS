@@ -134,6 +134,15 @@
 
 #pragma mark - init
 
++ (instancetype)shareInstance {
+    static BTTProgressHUD *_shareManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _shareManager = [BTTProgressHUD progressHUD];
+    });
+    return _shareManager;
+}
+
 + (instancetype)progressHUD {
     return [[self alloc] init];
 }

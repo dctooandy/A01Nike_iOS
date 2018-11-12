@@ -55,6 +55,10 @@
     return @(YES);
 }
 
+- (id)forward_inside:(BridgeModel *)bridgeModel {
+    return [super forward_inside:bridgeModel];
+}
+
 - (id)forward_outside:(BridgeModel *)bridgeModel { // custom/VOIP
     WebConfigModel *webConfigModel = [[WebConfigModel alloc] initWithDictionary:bridgeModel.data error:nil];
     if ([webConfigModel.url isEqualToString:@"custom/VOIP"]) {
@@ -63,8 +67,17 @@
     } else if ([webConfigModel.url isEqualToString:@"a01/versionUpdate"]) {
         [IVNetwork checkAppUpdate];
         return @(YES);
+    } else {
+        if (webConfigModel.newView) {
+            BTTBaseWebViewController *webVC = [[BTTBaseWebViewController alloc] init];
+            webVC.webConfigModel = webConfigModel;
+            [self.controller.navigationController pushViewController:webVC animated:YES];
+        } else {
+            self.controller.webConfigModel = webConfigModel;
+            [self.controller loadWebView];
+        }
+        return @(NO);
     }
-    return [super forward_outside:bridgeModel];
 }
 
 - (id)driver_ui:(BridgeModel *)bridgeModel {

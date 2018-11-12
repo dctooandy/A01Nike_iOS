@@ -27,6 +27,7 @@
 #import "HAConstant.h"
 #import "SVProgressHUD.h"
 #import "MBProgressHUD+Add.h"
+#import "BTTBaseWebViewController.h"
 
 typedef enum {
     BTTMobileCodeTypeBindMobile,           // 绑定

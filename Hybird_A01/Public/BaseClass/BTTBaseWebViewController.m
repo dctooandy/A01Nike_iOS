@@ -8,7 +8,7 @@
 
 #import "BTTBaseWebViewController.h"
 
-@interface BTTBaseWebViewController ()
+@interface BTTBaseWebViewController ()<UIWebViewDelegate>
 
 @end
 
@@ -23,20 +23,26 @@
     self.edgesForExtendedLayout = UIRectEdgeBottom;
 }
 
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [self showLoading];
+    [super webViewDidStartLoad:webView];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [super webViewDidFinishLoad:webView];
+    [self hideLoading];
+}
+
 #pragma mark --------------------加载框-----------------------------------------
 - (void)showLoading {
-    dispatch_main_async_safe((^{
-        //       self.hud = [BTTProgressHUD showLoadingCircletoView:self.view];
-        self.hud = [BTTProgressHUD showOnlyHUDOrCustom:BTTProgressHUDCustom images:@[@"dropdown_loading_01",@"dropdown_loading_02",@"dropdown_loading_03"] toView:self.view];
-    }));
-    
+    if (self.hud) {
+        [self hideLoading];
+    }
+    self.hud = [BTTProgressHUD showOnlyHUDOrCustom:BTTProgressHUDCustom images:@[@"dropdown_loading_01",@"dropdown_loading_02",@"dropdown_loading_03"] toView:self.view];
 }
 
 - (void)hideLoading {
-    dispatch_main_async_safe(^{
-        [self.hud dismiss];
-    });
-    
+    [self.hud dismiss];
 }
 
 @end
