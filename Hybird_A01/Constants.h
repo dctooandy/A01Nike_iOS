@@ -36,6 +36,13 @@ typedef enum {
     BTTMobileCodeTypeVerifyMobileUpdate    // 更新
 }BTTMobileCodeType; // 手机验证码类型
 
+typedef enum {
+    BTTRegisterOrLoginTypeLogin,
+    BTTRegisterOrLoginTypeRegisterNormal, // 普通开户
+    BTTRegisterOrLoginTypeRegisterQuick  // 极速开户
+    
+}BTTRegisterOrLoginType;
+
 /***********************************************存储关键字******************************************************/
 
 
