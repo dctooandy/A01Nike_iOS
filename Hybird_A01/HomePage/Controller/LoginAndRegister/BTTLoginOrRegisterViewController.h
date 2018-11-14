@@ -8,11 +8,27 @@
 
 #import "BTTCollectionViewController.h"
 
+typedef enum {
+    BTTLoginCellTypeNormal,    // 无码
+    BTTLoginCellTypeCode       // 有码
+}BTTLoginCellType;
+
+typedef enum {
+    BTTQuickRegisterTypeAuto,   // 自动
+    BTTQuickRegisterTypeManual  // 手动
+}BTTQuickRegisterType;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLoginOrRegisterViewController : BTTCollectionViewController
 
 @property (nonatomic, assign) BTTRegisterOrLoginType registerOrLoginType;
+
+@property (nonatomic, assign) BTTLoginCellType loginCellType;
+
+@property (nonatomic, assign) BTTQuickRegisterType qucikRegisterType;
+
+@property (nonatomic, strong) UIImage *codeImage;
 
 @end
 

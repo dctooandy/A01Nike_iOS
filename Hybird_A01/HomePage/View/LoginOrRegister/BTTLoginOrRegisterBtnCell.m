@@ -12,7 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 
-
 @end
 
 @implementation BTTLoginOrRegisterBtnCell
@@ -20,6 +19,15 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
+}
+
+- (void)setCellBtnType:(BTTBtnCellType)cellBtnType {
+    _cellBtnType = cellBtnType;
+    if (_cellBtnType == BTTBtnCellTypeLogin) {
+        [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];
+    } else {
+        [self.loginBtn setTitle:@"立即开户" forState:UIControlStateNormal];
+    }
 }
 
 

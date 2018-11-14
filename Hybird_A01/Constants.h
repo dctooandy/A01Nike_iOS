@@ -99,6 +99,20 @@ typedef enum {
 #define BTTVoiceCall        @"/A01/phones/appCall"
 #define BTTVoiceCallLogin        @"/A01/phones/appCallByLogin"
 
+// 登录注册
+
+#define BTTLoginName        @"login_name"
+#define BTTPassword         @"password"
+#define BTTTimestamp        @"timestamp"
+
+#define BTTParentID         @"parent_id"
+#define BTTPhone            @"phone"
+
+#define BTTUserLoginAPI        @"/users/login"
+#define BTTUserCreateAPI       @"/users/create"
+#define BTTVerifyCaptcha       @"/otherVerify/captcha"
+#define BTTUserFastRegister    @"/users/fastRegister"
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)  ([UIFont systemFontOfSize:X])

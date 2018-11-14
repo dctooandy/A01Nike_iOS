@@ -35,7 +35,11 @@
 
 
 - (IBAction)confrimClick:(UIButton *)sender {
-    
+    if (self.nameTextField.text.length || self.phoneTextField.text.length || self.infoTextField.text.length) {
+        
+    } else {
+        
+    }
 }
 
 

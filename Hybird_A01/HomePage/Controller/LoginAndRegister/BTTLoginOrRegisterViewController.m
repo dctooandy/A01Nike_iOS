@@ -17,23 +17,15 @@
 #import "BTTRegisterQuickManualCell.h"
 #import "BTTLoginOrRegisterViewController+UI.h"
 #import "BTTLoginCodeCell.h"
+#import "BTTLoginOrRegisterViewController+API.h"
 
-typedef enum {
-    BTTQuickRegisterTypeAuto,   // 自动
-    BTTQuickRegisterTypeManual  // 手动
-}BTTQuickRegisterType;
 
-typedef enum {
-    BTTLoginCellTypeNormal,    // 无码
-    BTTLoginCellTypeCode       // 有码
-}BTTLoginCellType;
+
 
 
 @interface BTTLoginOrRegisterViewController ()<BTTElementsFlowLayoutDelegate>
 
-@property (nonatomic, assign) BTTQuickRegisterType qucikRegisterType;
 
-@property (nonatomic, assign) BTTLoginCellType loginCellType;
 
 @end
 
@@ -43,7 +35,7 @@ typedef enum {
     [super viewDidLoad];
     self.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
     self.qucikRegisterType = BTTQuickRegisterTypeAuto;
-    self.loginCellType = BTTLoginCellTypeCode;
+    self.loginCellType = BTTLoginCellTypeNormal;
     if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
         self.title = @"登录";
     } else {
@@ -84,6 +76,7 @@ typedef enum {
                 strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
             } else if (button.tag == 10012) {
                 strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
+                [strongSelf loadVerifyCode];
             }
             [strongSelf setupElements];
         };
@@ -100,6 +93,7 @@ typedef enum {
         } else {
             if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
                 BTTRegisterNormalCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterNormalCell" forIndexPath:indexPath];
+                cell.codeImageView.image = self.codeImage;
                 weakSelf(weakSelf);
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                     strongSelf(strongSelf);
@@ -159,15 +153,22 @@ typedef enum {
                 return cell;
             } else {
                 BTTLoginOrRegisterBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginOrRegisterBtnCell" forIndexPath:indexPath];
+                cell.cellBtnType = BTTBtnCellTypeLogin;
                 weakSelf(weakSelf);
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                     strongSelf(strongSelf);
-                    [strongSelf showPopView];
+                    [strongSelf login];
                 };
                 return cell;
             }
         } else {
             BTTLoginOrRegisterBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginOrRegisterBtnCell" forIndexPath:indexPath];
+            cell.cellBtnType = BTTBtnCellTypeRegister;
+            weakSelf(weakSelf);
+            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                strongSelf(strongSelf);
+                [strongSelf registerAction];
+            };
             return cell;
         }
     }
@@ -210,6 +211,7 @@ typedef enum {
 - (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView linesMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
     return 0;
 }
+
 
 - (void)setupElements {
     if (self.elementsHight.count) {

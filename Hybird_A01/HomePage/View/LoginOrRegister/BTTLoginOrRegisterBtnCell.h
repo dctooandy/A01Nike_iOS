@@ -8,9 +8,16 @@
 
 #import "BTTBaseCollectionViewCell.h"
 
+typedef enum {
+    BTTBtnCellTypeLogin,
+    BTTBtnCellTypeRegister
+}BTTBtnCellType;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLoginOrRegisterBtnCell : BTTBaseCollectionViewCell
+
+@property (nonatomic, assign) BTTBtnCellType cellBtnType;
 
 @end
 

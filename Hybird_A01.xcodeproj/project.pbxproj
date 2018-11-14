@@ -118,6 +118,9 @@
 		3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8F520D2161EB370069D1B3 /* GLKit.framework */; };
 		3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8F520F2161EB510069D1B3 /* libc++.tbd */; };
 		3A8F52352161EE9E0069D1B3 /* DeviceModelsForIOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A8F52342161EE9E0069D1B3 /* DeviceModelsForIOS.plist */; };
+		3A92940C219BBCCD00764E7E /* BTTLoginOrRegisterViewController+API.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A92940B219BBCCD00764E7E /* BTTLoginOrRegisterViewController+API.m */; };
+		3A929412219BBD4F00764E7E /* BTTLoginAPIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A929410219BBD4F00764E7E /* BTTLoginAPIModel.m */; };
+		3A929415219BFEE100764E7E /* BTTCreateAPIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A929414219BFEE100764E7E /* BTTCreateAPIModel.m */; };
 		3AAE81FA219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAE81F8219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m */; };
 		3AAE8214219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAE81FC219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m */; };
 		3AAE8215219A738B003EC8B0 /* BTTRegisterQuickAutoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAE81FE219A738B003EC8B0 /* BTTRegisterQuickAutoCell.m */; };
@@ -673,6 +676,12 @@
 		3A8F520D2161EB370069D1B3 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		3A8F520F2161EB510069D1B3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		3A8F52342161EE9E0069D1B3 /* DeviceModelsForIOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DeviceModelsForIOS.plist; sourceTree = "<group>"; };
+		3A92940A219BBCCD00764E7E /* BTTLoginOrRegisterViewController+API.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTTLoginOrRegisterViewController+API.h"; sourceTree = "<group>"; };
+		3A92940B219BBCCD00764E7E /* BTTLoginOrRegisterViewController+API.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTTLoginOrRegisterViewController+API.m"; sourceTree = "<group>"; };
+		3A929410219BBD4F00764E7E /* BTTLoginAPIModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLoginAPIModel.m; sourceTree = "<group>"; };
+		3A929411219BBD4F00764E7E /* BTTLoginAPIModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLoginAPIModel.h; sourceTree = "<group>"; };
+		3A929413219BFEE100764E7E /* BTTCreateAPIModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTCreateAPIModel.h; sourceTree = "<group>"; };
+		3A929414219BFEE100764E7E /* BTTCreateAPIModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTCreateAPIModel.m; sourceTree = "<group>"; };
 		3AAE81F8219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLoginOrRegisterViewController.m; sourceTree = "<group>"; };
 		3AAE81F9219A737E003EC8B0 /* BTTLoginOrRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLoginOrRegisterViewController.h; sourceTree = "<group>"; };
 		3AAE81FC219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLoginOrRegisterHeaderCell.m; sourceTree = "<group>"; };
@@ -2042,6 +2051,10 @@
 				3AE0580C21702C1F00C7E70D /* BTTHomePageHeaderModel.m */,
 				3AE058192170314900C7E70D /* BTTActivityModel.h */,
 				3AE058182170314900C7E70D /* BTTActivityModel.m */,
+				3A929411219BBD4F00764E7E /* BTTLoginAPIModel.h */,
+				3A929410219BBD4F00764E7E /* BTTLoginAPIModel.m */,
+				3A929413219BFEE100764E7E /* BTTCreateAPIModel.h */,
+				3A929414219BFEE100764E7E /* BTTCreateAPIModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2055,6 +2068,8 @@
 				3AAE81F8219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m */,
 				3AC3FFA7219ACD48008AECCB /* BTTLoginOrRegisterViewController+UI.h */,
 				3AC3FFA8219ACD48008AECCB /* BTTLoginOrRegisterViewController+UI.m */,
+				3A92940A219BBCCD00764E7E /* BTTLoginOrRegisterViewController+API.h */,
+				3A92940B219BBCCD00764E7E /* BTTLoginOrRegisterViewController+API.m */,
 			);
 			path = LoginAndRegister;
 			sourceTree = "<group>";
@@ -2960,6 +2975,7 @@
 				3A11AE122182AAB300B1AFF4 /* BTTPTTransferCell.m in Sources */,
 				3AAE8220219A738B003EC8B0 /* BTTLoginOrRegisterBtnCell.m in Sources */,
 				3AD9CF6D216F33F300685B43 /* BTTGameCollectionViewCell.m in Sources */,
+				3A929415219BFEE100764E7E /* BTTCreateAPIModel.m in Sources */,
 				3A8F51F3215F7C9D0069D1B3 /* BTTProgressHUDInfo.m in Sources */,
 				3A514E3E2186E24000B83881 /* BTTThisWeekTotalCell.m in Sources */,
 				3A8F519F215F77EC0069D1B3 /* UIView+Frame.m in Sources */,
@@ -3031,6 +3047,8 @@
 				3AC3FFAD219BB19E008AECCB /* BTTLoginCodeCell.m in Sources */,
 				3AE1EAB5217D986A0073A32D /* BTTMeInfoHiddenCell.m in Sources */,
 				3A37E0FA2164685600FB13A1 /* AppDelegate+Environment.m in Sources */,
+				3A929412219BBD4F00764E7E /* BTTLoginAPIModel.m in Sources */,
+				3A92940C219BBCCD00764E7E /* BTTLoginOrRegisterViewController+API.m in Sources */,
 				3AD9CF44216EDCE300685B43 /* BTTBaseCollectionViewCell.m in Sources */,
 				3AD9CF35216C7AEF00685B43 /* HAInitConfig.m in Sources */,
 				3A514E482186FCE800B83881 /* BTTXimaFooterCell.m in Sources */,

@@ -24,7 +24,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="994-Q4-XIl"/>
                         </constraints>
-                        <state key="normal" title="立即登录" backgroundImage="login_btn_normal">
+                        <state key="normal" title="登录" backgroundImage="login_btn_normal">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <state key="highlighted" backgroundImage="login_btn_press"/>
