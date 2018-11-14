@@ -63,10 +63,12 @@
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+    [IVNetwork applicationDidEnterBackground:application];
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
+    [IVNetwork applicationWillEnterForeground:application];
 }
 
 
