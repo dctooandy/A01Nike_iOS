@@ -28,6 +28,7 @@
 #import "SVProgressHUD.h"
 #import "MBProgressHUD+Add.h"
 #import "BTTBaseWebViewController.h"
+#import "BTTAnimationPopView.h"
 
 typedef enum {
     BTTMobileCodeTypeBindMobile,           // 绑定
@@ -35,6 +36,13 @@ typedef enum {
     BTTMobileCodeTypeVerifyMobileAddBTC,     // 添加比特币
     BTTMobileCodeTypeVerifyMobileUpdate    // 更新
 }BTTMobileCodeType; // 手机验证码类型
+
+typedef enum {
+    BTTRegisterOrLoginTypeLogin,
+    BTTRegisterOrLoginTypeRegisterNormal, // 普通开户
+    BTTRegisterOrLoginTypeRegisterQuick  // 极速开户
+    
+}BTTRegisterOrLoginType;
 
 /***********************************************存储关键字******************************************************/
 
@@ -90,6 +98,20 @@ typedef enum {
 
 #define BTTVoiceCall        @"/A01/phones/appCall"
 #define BTTVoiceCallLogin        @"/A01/phones/appCallByLogin"
+
+// 登录注册
+
+#define BTTLoginName        @"login_name"
+#define BTTPassword         @"password"
+#define BTTTimestamp        @"timestamp"
+
+#define BTTParentID         @"parent_id"
+#define BTTPhone            @"phone"
+
+#define BTTUserLoginAPI        @"/users/login"
+#define BTTUserCreateAPI       @"/users/create"
+#define BTTVerifyCaptcha       @"/otherVerify/captcha"
+#define BTTUserFastRegister    @"/users/fastRegister"
 
 /********************************************常用宏*********************************************************/
 

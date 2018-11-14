@@ -14,10 +14,14 @@
 #import "CLive800Manager.h"
 #import "BTTTabbarController+VoiceCall.h"
 #import "BTTVoiceCallViewController.h"
+#import "BTTLoginOrRegisterViewController.h"
+
 
 static const char *BTTHeaderViewKey = "headerView";
 
 @implementation BTTHomePageViewController (Nav)
+
+
 
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:LoginSuccessNotification object:nil];
@@ -67,9 +71,10 @@ static const char *BTTHeaderViewKey = "headerView";
                 
             case 2003:
             {
-                BTTLoginAndRegisterViewController *loginAndRegister = [[BTTLoginAndRegisterViewController alloc] init];
-                loginAndRegister.webConfigModel.url = @"common/login.htm"; // common/register.htm
-                loginAndRegister.webConfigModel.newView = YES;
+//                BTTLoginAndRegisterViewController *loginAndRegister = [[BTTLoginAndRegisterViewController alloc] init];
+//                loginAndRegister.webConfigModel.url = @"common/login.htm"; // common/register.htm
+//                loginAndRegister.webConfigModel.newView = YES;
+                BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
                 [strongSelf.navigationController pushViewController:loginAndRegister animated:YES];
             }
                 break;

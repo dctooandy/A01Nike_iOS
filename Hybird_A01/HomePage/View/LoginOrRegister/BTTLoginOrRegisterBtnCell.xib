@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTLoginOrRegisterBtnCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DhJ-aL-Owc">
+                        <rect key="frame" x="30" y="28" width="315" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="994-Q4-XIl"/>
+                        </constraints>
+                        <state key="normal" title="登录" backgroundImage="login_btn_normal">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <state key="highlighted" backgroundImage="login_btn_press"/>
+                        <connections>
+                            <action selector="loginBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="TOR-zU-rGa"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="DhJ-aL-Owc" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="AWh-f4-5D3"/>
+                <constraint firstAttribute="trailing" secondItem="DhJ-aL-Owc" secondAttribute="trailing" constant="30" id="dxY-MP-4GQ"/>
+                <constraint firstItem="DhJ-aL-Owc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="30" id="xdT-8a-eJL"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <connections>
+                <outlet property="loginBtn" destination="DhJ-aL-Owc" id="Iw1-y4-DBN"/>
+            </connections>
+            <point key="canvasLocation" x="-410" y="59"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="login_btn_normal" width="310" height="41"/>
+        <image name="login_btn_press" width="310" height="41"/>
+    </resources>
+</document>
