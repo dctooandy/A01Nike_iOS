@@ -116,14 +116,40 @@ static const char *BTTHeaderViewKey = "headerView";
     
     BTTPopoverAction *action3 = [BTTPopoverAction actionWithImage:ImageNamed(@"callBack") title:@"VIP经理回拨" handler:^(BTTPopoverAction *action) {
         
+        NSString *url = nil;
+        NSMutableDictionary *params = @{}.mutableCopy;
+        if ([IVNetwork userInfo]) {
+            url = @"public/phones/memberCall";
+            [params setValue:@"15234234234" forKey:@"phone"];
+            [params setValue:@"memberphone" forKey:@"phone_type"];
+        } else {
+            url = @"phones/customCall";
+            [params setValue:@"15234234234" forKey:@"phone_number"];
+        }
+        weakSelf(weakSelf)
+        [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+        [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+            __strong typeof(weakSelf)strongSelf = weakSelf;
+            [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
+            if (result.status) {
+                [MBProgressHUD showSuccess:@"申请成功，请等待回电" toView:nil];
+            } else {
+                NSString *errInfo = [NSString stringWithFormat:@"申请失败,%@",result.message];
+                [MBProgressHUD showError:errInfo toView:nil];
+            }
+        }];
     }];
     
     BTTPopoverAction *action4 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineVoice") title:@"语音聊天" handler:^(BTTPopoverAction *action) {
         [[CLive800Manager sharedInstance] startLive800Chat:self];
     }];
     
-    BTTPopoverAction *action5 = [BTTPopoverAction actionWithTitle:@"     客服热线\n400-120-3618" detailTitle:@"400-120-3618" handler:^(BTTPopoverAction *action) {
-        
+    BOOL isNormalUser = (![IVNetwork userInfo] || [IVNetwork userInfo].customerLevel < 5);
+    NSString *telUrl = isNormalUser ? @"tel://4001203618" : @"tel://4001203616";
+    NSString *title = isNormalUser ? @"400-120-3618" : @"400-120-3616";
+    title = [NSString stringWithFormat:@"     客服热线\n%@",title];
+    BTTPopoverAction *action5 = [BTTPopoverAction actionWithTitle:title detailTitle:title handler:^(BTTPopoverAction *action) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telUrl]];
     }];
     BTTPopoverView *popView = [BTTPopoverView PopoverView];
     popView.style = BTTPopoverViewStyleDark;
