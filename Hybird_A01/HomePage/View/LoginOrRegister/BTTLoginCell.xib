@@ -22,9 +22,8 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G2R-fp-ypM">
                         <rect key="frame" x="30" y="0.0" width="315" height="100"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HSA-HN-glg">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_account" translatesAutoresizingMaskIntoConstraints="NO" id="HSA-HN-glg">
                                 <rect key="frame" x="15" y="15" width="20" height="20"/>
-                                <color key="backgroundColor" red="0.81960784310000001" green="0.21960784310000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="5cw-Vg-HI3"/>
                                     <constraint firstAttribute="height" constant="20" id="ipT-nL-jq0"/>
@@ -32,44 +31,59 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N3w-DA-ub3">
                                 <rect key="frame" x="15" y="50" width="285" height="0.5"/>
-                                <color key="backgroundColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="ggs-X2-pHh"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZmH-k5-hlM">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_pwd" translatesAutoresizingMaskIntoConstraints="NO" id="ZmH-k5-hlM">
                                 <rect key="frame" x="15" y="65" width="20" height="20"/>
-                                <color key="backgroundColor" red="0.81960784310000001" green="0.21960784310000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="O6p-XM-1hb"/>
                                     <constraint firstAttribute="height" constant="20" id="y2U-27-sPi"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="g" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmg-eS-b1X">
-                                <rect key="frame" x="43" y="14.5" width="10" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="g" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmg-eS-b1X">
+                                <rect key="frame" x="43" y="10.5" width="20" height="29"/>
+                                <color key="backgroundColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="J3I-3l-SQz"/>
+                                    <constraint firstAttribute="height" constant="29" id="eRW-os-mEW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="用户名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Yh-EA-nkk">
-                                <rect key="frame" x="61" y="16.5" width="239" height="17"/>
+                                <rect key="frame" x="71" y="10" width="229" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="KFe-53-FdS"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lVa-oq-bJ3">
-                                <rect key="frame" x="43" y="66.5" width="229" height="17"/>
+                                <rect key="frame" x="43" y="60" width="229" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="kFz-s1-ELO"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfK-Ca-KJS">
                                 <rect key="frame" x="280" y="65" width="20" height="20"/>
-                                <color key="backgroundColor" red="0.81960784310000001" green="0.21960784310000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="3wI-HM-P6o"/>
                                     <constraint firstAttribute="height" constant="20" id="awF-wb-j1U"/>
                                 </constraints>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" backgroundImage="accountSafe_close"/>
+                                <state key="selected" backgroundImage="accountSafe_Open"/>
+                                <connections>
+                                    <action selector="showPwdClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Gqv-dY-o3g"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -103,9 +117,18 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
+                <outlet property="accountTextField" destination="2Yh-EA-nkk" id="xYz-8N-d5C"/>
                 <outlet property="bgView" destination="G2R-fp-ypM" id="lJF-TV-Md3"/>
+                <outlet property="codeLabel" destination="bmg-eS-b1X" id="4PB-GN-RNk"/>
+                <outlet property="pwdTextField" destination="lVa-oq-bJ3" id="xhb-OZ-pur"/>
             </connections>
-            <point key="canvasLocation" x="-55.200000000000003" y="163.71814092953525"/>
+            <point key="canvasLocation" x="126" y="162"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="accountSafe_Open" width="30" height="30"/>
+        <image name="accountSafe_close" width="30" height="30"/>
+        <image name="login_account" width="20" height="20"/>
+        <image name="login_pwd" width="20" height="20"/>
+    </resources>
 </document>

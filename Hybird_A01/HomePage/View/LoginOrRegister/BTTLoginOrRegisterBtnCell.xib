@@ -24,9 +24,13 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="994-Q4-XIl"/>
                         </constraints>
-                        <state key="normal" title="立即登录" backgroundImage="me_loginBtn">
+                        <state key="normal" title="立即登录" backgroundImage="login_btn_normal">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
+                        <state key="highlighted" backgroundImage="login_btn_press"/>
+                        <connections>
+                            <action selector="loginBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="TOR-zU-rGa"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
@@ -36,9 +40,14 @@
                 <constraint firstItem="DhJ-aL-Owc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="30" id="xdT-8a-eJL"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <connections>
+                <outlet property="loginBtn" destination="DhJ-aL-Owc" id="Iw1-y4-DBN"/>
+            </connections>
+            <point key="canvasLocation" x="-410" y="59"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="me_loginBtn" width="98" height="27"/>
+        <image name="login_btn_normal" width="310" height="41"/>
+        <image name="login_btn_press" width="310" height="41"/>
     </resources>
 </document>

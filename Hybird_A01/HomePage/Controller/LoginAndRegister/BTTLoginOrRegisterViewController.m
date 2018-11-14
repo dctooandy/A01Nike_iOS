@@ -15,16 +15,25 @@
 #import "BTTRegisterNormalCell.h"
 #import "BTTRegisterQuickAutoCell.h"
 #import "BTTRegisterQuickManualCell.h"
+#import "BTTLoginOrRegisterViewController+UI.h"
+#import "BTTLoginCodeCell.h"
 
 typedef enum {
     BTTQuickRegisterTypeAuto,   // 自动
     BTTQuickRegisterTypeManual  // 手动
 }BTTQuickRegisterType;
 
+typedef enum {
+    BTTLoginCellTypeNormal,    // 无码
+    BTTLoginCellTypeCode       // 有码
+}BTTLoginCellType;
+
 
 @interface BTTLoginOrRegisterViewController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, assign) BTTQuickRegisterType qucikRegisterType;
+
+@property (nonatomic, assign) BTTLoginCellType loginCellType;
 
 @end
 
@@ -34,6 +43,7 @@ typedef enum {
     [super viewDidLoad];
     self.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
     self.qucikRegisterType = BTTQuickRegisterTypeAuto;
+    self.loginCellType = BTTLoginCellTypeCode;
     if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
         self.title = @"登录";
     } else {
@@ -53,6 +63,7 @@ typedef enum {
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterNormalCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterNormalCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterQuickAutoCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterQuickAutoCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterQuickManualCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterQuickManualCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTLoginCodeCell" bundle:nil] forCellWithReuseIdentifier:@"BTTLoginCodeCell"];
 }
 
 
@@ -66,21 +77,81 @@ typedef enum {
         return cell;
     } else if (indexPath.row == 1) {
         BTTLoginOrRegisterTypeSelectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginOrRegisterTypeSelectCell" forIndexPath:indexPath];
+        weakSelf(weakSelf);
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            strongSelf(strongSelf);
+            if (button.tag == 10011) {
+                strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
+            } else if (button.tag == 10012) {
+                strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
+            }
+            [strongSelf setupElements];
+        };
         return cell;
     } else if (indexPath.row == 2) {
         if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
-            BTTLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginCell" forIndexPath:indexPath];
-            return cell;
-        } else {
-            if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
-                BTTRegisterQuickAutoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterQuickAutoCell" forIndexPath:indexPath];
+            if (self.loginCellType == BTTLoginCellTypeNormal) {
+                BTTLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginCell" forIndexPath:indexPath];
                 return cell;
-            } else {
-                BTTRegisterQuickManualCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterQuickManualCell" forIndexPath:indexPath];
+            } else{
+                BTTLoginCodeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginCodeCell" forIndexPath:indexPath];
                 return cell;
             }
+        } else {
+            if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
+                BTTRegisterNormalCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterNormalCell" forIndexPath:indexPath];
+                weakSelf(weakSelf);
+                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                    strongSelf(strongSelf);
+                    if (button.tag == 10013) {
+                        strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
+                    } else if (button.tag == 10014) {
+                        strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
+                        strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
+                    }
+                    [strongSelf setupElements];
+                };
+                return cell;
+            } else {
+                if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
+                    BTTRegisterQuickAutoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterQuickAutoCell" forIndexPath:indexPath];
+                    weakSelf(weakSelf);
+                    cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                        strongSelf(strongSelf);
+                        if (button.tag == 10015) {
+                            strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
+                        } else if (button.tag == 10016) {
+                            strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
+                            strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
+                        } else if (button.tag == 10017) {
+                            strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
+                        } else if (button.tag == 10018) {
+                            strongSelf.qucikRegisterType = BTTQuickRegisterTypeManual;
+                        }
+                        [strongSelf setupElements];
+                    };
+                    return cell;
+                } else {
+                    BTTRegisterQuickManualCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterQuickManualCell" forIndexPath:indexPath];
+                    weakSelf(weakSelf);
+                    cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                        strongSelf(strongSelf);
+                        if (button.tag == 10019) {
+                            strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
+                        } else if (button.tag == 10020) {
+                            strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
+                            strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
+                        } else if (button.tag == 10021) {
+                            strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
+                        } else if (button.tag == 10022) {
+                            strongSelf.qucikRegisterType = BTTQuickRegisterTypeManual;
+                        }
+                        [strongSelf setupElements];
+                    };
+                    return cell;
+                }
+            }
         }
-        
     } else {
         if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
             if (indexPath.row == 3) {
@@ -88,6 +159,11 @@ typedef enum {
                 return cell;
             } else {
                 BTTLoginOrRegisterBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginOrRegisterBtnCell" forIndexPath:indexPath];
+                weakSelf(weakSelf);
+                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                    strongSelf(strongSelf);
+                    [strongSelf showPopView];
+                };
                 return cell;
             }
         } else {
@@ -136,6 +212,9 @@ typedef enum {
 }
 
 - (void)setupElements {
+    if (self.elementsHight.count) {
+        [self.elementsHight removeAllObjects];
+    }
     NSInteger total = 0;
     if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
         total = 5;
@@ -144,7 +223,7 @@ typedef enum {
     }
     for (int i = 0; i < total; i++) {
         if (i == 0) {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 150)]];
+            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 182)]];
         } else if (i == 1) {
             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         } else if (i == 2) {
@@ -157,9 +236,12 @@ typedef enum {
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 244)]];
                 }
             } else {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+                if (self.loginCellType == BTTLoginCellTypeNormal) {
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+                } else {
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 150)]];
+                }
             }
-            
         } else {
             if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
                 if (i == 3) {

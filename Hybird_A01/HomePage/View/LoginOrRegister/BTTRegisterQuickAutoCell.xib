@@ -24,14 +24,14 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9kP-ol-cBO">
                                 <rect key="frame" x="15" y="40" width="142.5" height="1"/>
-                                <color key="backgroundColor" red="0.14117647059999999" green="0.52941176469999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="QWs-m2-R64"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jkf-Su-7gc">
                                 <rect key="frame" x="157.5" y="40" width="142.5" height="1"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.14117647059999999" green="0.52941176469999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="7Jv-uJ-A93"/>
                                 </constraints>
@@ -50,17 +50,15 @@
                                     <constraint firstAttribute="height" constant="1" id="MXq-1A-Lhq"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Ks-PL-SQ1">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_phone" translatesAutoresizingMaskIntoConstraints="NO" id="4Ks-PL-SQ1">
                                 <rect key="frame" x="15" y="56" width="20" height="20"/>
-                                <color key="backgroundColor" red="0.81960784310000001" green="0.21960784310000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="D2s-Kt-ibk"/>
                                     <constraint firstAttribute="width" constant="20" id="U3h-We-yFJ"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j1B-um-axR">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_verify" translatesAutoresizingMaskIntoConstraints="NO" id="j1B-um-axR">
                                 <rect key="frame" x="15" y="158" width="20" height="20"/>
-                                <color key="backgroundColor" red="0.81960784310000001" green="0.21960784310000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="fwg-cF-auv"/>
                                     <constraint firstAttribute="width" constant="20" id="moY-Yk-Dqe"/>
@@ -75,8 +73,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6V-Of-DwC">
-                                <rect key="frame" x="43" y="153" width="162" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6V-Of-DwC">
+                                <rect key="frame" x="43" y="153" width="157" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="OrQ-J9-FsS"/>
                                 </constraints>
@@ -84,48 +82,65 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HY2-5p-Mgv">
+                            <button opaque="NO" tag="10015" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HY2-5p-Mgv">
                                 <rect key="frame" x="15" y="0.0" width="142.5" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="hFl-hV-nfH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="普通开户"/>
+                                <state key="normal" title="普通开户">
+                                    <color key="titleColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="normalBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="DTA-P9-Ll3"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4mR-sE-0kd">
+                            <button opaque="NO" tag="10016" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4mR-sE-0kd">
                                 <rect key="frame" x="157.5" y="0.0" width="142.5" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="dVZ-gb-odO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="极速开户">
-                                    <color key="titleColor" red="0.50588235290000005" green="0.52941176469999995" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="quickBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="XnJ-dT-T7P"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fzu-7V-xjS">
+                            <button opaque="NO" tag="10017" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fzu-7V-xjS">
                                 <rect key="frame" x="15" y="92" width="142.5" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="bNJ-A9-0i5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="自动生成游戏账号"/>
+                                <state key="normal" title="自动生成游戏账号" image="login_select">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="autoBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="nbO-dS-cep"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7pQ-S5-NJI">
+                            <button opaque="NO" tag="10018" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7pQ-S5-NJI">
                                 <rect key="frame" x="157.5" y="92" width="142.5" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="18r-it-0cB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="设置游戏账号"/>
+                                <state key="normal" title="设置游戏账号" image="login_unselect">
+                                    <color key="titleColor" red="0.50588235290000005" green="0.52941176469999995" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="manualBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="NXl-uM-vmt"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6hB-3z-iL6">
-                                <rect key="frame" x="220" y="154" width="80" height="28"/>
-                                <color key="backgroundColor" red="0.81960784310000001" green="0.21960784310000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="215" y="150.5" width="85" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="2Th-f6-TEO"/>
+                                    <constraint firstAttribute="width" constant="85" id="2Th-f6-TEO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="获取验证码">
+                                <state key="normal" title="获取验证码" backgroundImage="me_viewBtn">
                                     <color key="titleColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
@@ -179,7 +194,20 @@
                 <constraint firstItem="QFU-wX-7E1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="30" id="s9o-28-1Wm"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
-            <point key="canvasLocation" x="136.80000000000001" y="152.47376311844079"/>
+            <connections>
+                <outlet property="autoBtn" destination="Fzu-7V-xjS" id="Lxd-Eo-o3V"/>
+                <outlet property="manualBtn" destination="7pQ-S5-NJI" id="NJ1-e2-0C5"/>
+                <outlet property="normalBtn" destination="HY2-5p-Mgv" id="DUq-bq-AoO"/>
+                <outlet property="quickBtn" destination="4mR-sE-0kd" id="FoX-mw-cFM"/>
+            </connections>
+            <point key="canvasLocation" x="-308" y="152"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="login_phone" width="20" height="20"/>
+        <image name="login_select" width="24" height="24"/>
+        <image name="login_unselect" width="24" height="24"/>
+        <image name="login_verify" width="20" height="20"/>
+        <image name="me_viewBtn" width="95" height="35"/>
+    </resources>
 </document>

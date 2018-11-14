@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLoginCell : BTTBaseCollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UITextField *accountTextField;
+
+@property (weak, nonatomic) IBOutlet UITextField *pwdTextField;
+
 @end
 
 NS_ASSUME_NONNULL_END

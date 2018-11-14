@@ -12,6 +12,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTRegisterNormalCell : BTTBaseCollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UITextField *accountTextField;
+
+@property (weak, nonatomic) IBOutlet UITextField *pwdTextField;
+
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+
+@property (weak, nonatomic) IBOutlet UITextField *verifyTextField;
+
+@property (weak, nonatomic) IBOutlet UIImageView *codeImageView;
+
 @end
 
 NS_ASSUME_NONNULL_END

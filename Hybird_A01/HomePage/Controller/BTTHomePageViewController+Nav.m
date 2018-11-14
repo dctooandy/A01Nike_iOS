@@ -16,9 +16,12 @@
 #import "BTTVoiceCallViewController.h"
 #import "BTTLoginOrRegisterViewController.h"
 
+
 static const char *BTTHeaderViewKey = "headerView";
 
 @implementation BTTHomePageViewController (Nav)
+
+
 
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:LoginSuccessNotification object:nil];
