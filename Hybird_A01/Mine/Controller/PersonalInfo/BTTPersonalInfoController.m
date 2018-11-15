@@ -69,6 +69,8 @@
         } cancelBlock:^{
             NSLog(@"点击了背景或取消按钮");
         }];
+    } else if (indexPath.item == 7) {//点击提交
+        [self submitChange];
     }
 }
 
@@ -121,5 +123,61 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
+}
+- (void)submitChange
+{
+    UITextField *retentionTF = [self getCellTextFieldWithIndex:0];
+    UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
+    UITextField *sexTF = [self getCellTextFieldWithIndex:2];
+    UITextField *birthdayTF = [self getCellTextFieldWithIndex:3];
+    UITextField *emailTF = [self getCellTextFieldWithIndex:4];
+    UITextField *addressTF = [self getCellTextFieldWithIndex:5];
+    UITextField *remarkTF = [self getCellTextFieldWithIndex:6];
+    
+    NSMutableDictionary *params = @{}.mutableCopy;
+    if (![PublicMethod leaveMessageDisable:retentionTF.text]) {
+        [MBProgressHUD showError:@"输入的预留信息格式有误！" toView:self.view];
+        return;
+    }
+    if (![PublicMethod checkRealName:realNameTF.text]) {
+        [MBProgressHUD showError:@"输入的真实姓名格式有误！" toView:self.view];
+        return;
+    }
+    if (emailTF.text.length !=0 && ![PublicMethod isValidateEmail:emailTF.text]) {
+        [MBProgressHUD showError:@"输入的邮箱地址格式有误！" toView:self.view];
+        return;
+    }
+    if (sexTF.text.length != 0 ) {
+        params[@"sex"] = [sexTF.text isEqualToString:@"男"] ? @"M" : @"F";
+    }
+    if (birthdayTF.text.length != 0) {
+        params[@"birth_date"] = [birthdayTF.text stringByAppendingString:@" 00:00:00"];
+    }
+    params[@"verify_code"] = retentionTF.text;
+    params[@"real_name"] = realNameTF.text;
+    params[@"email"] = emailTF.text;
+    params[@"address"] = addressTF.text;
+    params[@"remarks"] = remarkTF.text;
+    
+    weakSelf(weakSelf)
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [IVNetwork sendRequestWithSubURL:@"public/users/completeInfo" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+        if (result.status) {
+            [MBProgressHUD showSuccess:@"完善资料成功!" toView:nil];
+            NSDictionary *userInfo = [[IVCacheManager sharedInstance] nativeReadDictionaryForKey:KCacheUserInfo];
+            NSMutableDictionary *mUserInfo = userInfo.mutableCopy;
+            [mUserInfo setValuesForKeysWithDictionary:result.data];
+            [[IVCacheManager sharedInstance] nativeWriteValue:mUserInfo.copy forKey:KCacheUserInfo];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }
+    }];
+}
+- (UITextField *)getCellTextFieldWithIndex:(NSInteger)index
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.textField;
 }
 @end
