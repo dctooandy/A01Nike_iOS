@@ -39,6 +39,7 @@
         model.password = cell.pwdTextField.text;
         model.code = cell.codeTextField.text;
         isValid = [predicate evaluateWithObject:model.login_name];
+        
     }
     if (model.login_name.length == 1) {
         [MBProgressHUD showMessagNoActivity:@"请输入账号" toView:self.view];
@@ -48,7 +49,7 @@
         [MBProgressHUD showMessagNoActivity:@"请输入密码" toView:self.view];
         return;
     }
-    if (!model.code.length) {
+    if (!model.code.length && self.loginCellType == BTTLoginCellTypeCode) {
         [MBProgressHUD showMessagNoActivity:@"请输入验证码" toView:self.view];
         return;
     }
@@ -78,7 +79,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccessNotification object:nil];
         } else {
             if (result.code_system == 202020) {
-                [self showAlert];
+                [self showAlertWithModle:model];
             } else if(result.code_system == 202006 || result.code_system == 202018) {
                 [MBProgressHUD showMessagNoActivity:@"账号或密码错误,请重新输入" toView:self.view];
                 self.wrongPwdNum++;
@@ -94,7 +95,7 @@
     }];
 }
 
-- (void)showAlert {
+- (void)showAlertWithModle:(BTTLoginAPIModel *)model {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"很抱歉!" message:@"多次密码输入错误, 已被锁住!" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"五分钟再试" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -102,7 +103,7 @@
     [alertVC addAction:cancel];
     UIAlertAction *unlock = [UIAlertAction actionWithTitle:@"立即解锁" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self showPopView];
+            [self showPopViewWithAccount:model.login_name];
         });
     }];
     [alertVC addAction:unlock];

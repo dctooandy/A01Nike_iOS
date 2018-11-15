@@ -11,14 +11,19 @@
 
 @implementation BTTLoginOrRegisterViewController (UI)
 
-- (void)showPopView {
+- (void)showPopViewWithAccount:(NSString *)account {
     BTTUnlockPopView *customView = [BTTUnlockPopView viewFromXib];
+    
+    customView.account = account;
     customView.layer.cornerRadius = 5;
     customView.clipsToBounds = YES;
     customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 50, 313);
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
     popView.isClickBGDismiss = YES;
     [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
 }
 
 @end

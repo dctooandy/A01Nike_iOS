@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^BTTUnlockDismissBlock)(void);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTUnlockPopView : UIView
 
 + (instancetype)viewFromXib;
+
+@property (nonatomic, copy) NSString *account;
+
+@property (nonatomic, copy) BTTUnlockDismissBlock dismissBlock;
 
 @end
 
