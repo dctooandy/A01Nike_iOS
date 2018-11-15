@@ -22,6 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *codeBtn;
 
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 @end
 
 @implementation BTTRegisterQuickManualCell
@@ -30,6 +31,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.tagLabel.layer.cornerRadius = 2;
+    self.bgView.layer.cornerRadius = 4;
 }
 
 

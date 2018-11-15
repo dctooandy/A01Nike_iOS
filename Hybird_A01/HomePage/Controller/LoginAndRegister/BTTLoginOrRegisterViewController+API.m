@@ -37,6 +37,7 @@
         BTTLoginCodeCell *cell = (BTTLoginCodeCell *)[self.collectionView cellForItemAtIndexPath:loginCellIndexPath];
         model.login_name = [NSString stringWithFormat:@"g%@",cell.accountTextField.text];
         model.password = cell.pwdTextField.text;
+        model.code = cell.codeTextField.text;
         isValid = [predicate evaluateWithObject:model.login_name];
     }
     if (model.login_name.length == 1) {
@@ -45,6 +46,10 @@
     }
     if (!model.password.length) {
         [MBProgressHUD showMessagNoActivity:@"请输入密码" toView:self.view];
+        return;
+    }
+    if (!model.code.length) {
+        [MBProgressHUD showMessagNoActivity:@"请输入验证码" toView:self.view];
         return;
     }
     [self loginWithLoginAPIModel:model isBack:YES];
@@ -57,6 +62,9 @@
     [parameters setObject:model.login_name forKey:BTTLoginName];
     [parameters setObject:model.password forKey:BTTPassword];
     [parameters setObject:model.timestamp forKey:BTTTimestamp];
+    if (model.code.length) {
+        [parameters setObject:model.code forKey:@"code"];
+    }
     [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTUserLoginAPI paramters:parameters completionBlock:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
@@ -197,14 +205,18 @@
         NSLog(@"%@",response);
         [self hideLoading];
         if (result.code_http == 200) {
-            BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-            
-            BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
-            loginModel.login_name = model.login_name;
-            loginModel.password = model.password;
-            loginModel.timestamp = [PublicMethod timeIntervalSince1970];
-            [self loginWithLoginAPIModel:loginModel isBack:NO];
+            if (result.data) {
+                BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
+                vc.account = result.data[@"login_name"];
+                [self.navigationController pushViewController:vc animated:YES];
+                
+                BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
+                loginModel.login_name = model.login_name;
+                loginModel.password = model.password;
+                loginModel.timestamp = [PublicMethod timeIntervalSince1970];
+                [self loginWithLoginAPIModel:loginModel isBack:NO];
+            }
+           
         }
     }];
 }

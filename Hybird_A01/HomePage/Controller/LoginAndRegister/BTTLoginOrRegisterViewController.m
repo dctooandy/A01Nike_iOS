@@ -30,7 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
     self.qucikRegisterType = BTTQuickRegisterTypeAuto;
     self.loginCellType = BTTLoginCellTypeNormal;
     if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
@@ -86,6 +85,7 @@
         return cell;
     } else if (indexPath.row == 1) {
         BTTLoginOrRegisterTypeSelectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginOrRegisterTypeSelectCell" forIndexPath:indexPath];
+        cell.registerOrLoginType = self.registerOrLoginType;
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);

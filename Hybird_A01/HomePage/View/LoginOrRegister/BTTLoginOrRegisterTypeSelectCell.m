@@ -29,6 +29,21 @@
     self.registerIcon.hidden = YES;
 }
 
+- (void)setRegisterOrLoginType:(BTTRegisterOrLoginType)registerOrLoginType {
+    _registerOrLoginType = registerOrLoginType;
+    if (_registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
+        [self.loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.registerBtn setTitleColor:[UIColor colorWithHexString:@"818791"] forState:UIControlStateNormal];
+        self.loginIcon.hidden = NO;
+        self.registerIcon.hidden = YES;
+    } else {
+        [self.loginBtn setTitleColor:[UIColor colorWithHexString:@"818791"] forState:UIControlStateNormal];
+        [self.registerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.loginIcon.hidden = YES;
+        self.registerIcon.hidden = NO;
+    }
+}
+
 
 - (IBAction)loginBtnClick:(UIButton *)sender {
     [self.loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
