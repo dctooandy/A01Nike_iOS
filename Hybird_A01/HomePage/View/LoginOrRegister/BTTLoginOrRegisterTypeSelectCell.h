@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLoginOrRegisterTypeSelectCell : BTTBaseCollectionViewCell
 
+@property (nonatomic, assign) BTTRegisterOrLoginType registerOrLoginType;
+
 @end
 
 NS_ASSUME_NONNULL_END

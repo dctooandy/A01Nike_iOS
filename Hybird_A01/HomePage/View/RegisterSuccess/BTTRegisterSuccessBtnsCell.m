@@ -15,4 +15,17 @@
     self.mineSparaterType = BTTMineSparaterTypeNone;
 }
 
+
+- (IBAction)gamesPageClick:(UIButton *)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
+}
+
+- (IBAction)chargeBtnClick:(UIButton *)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
+}
+
 @end

@@ -44,6 +44,8 @@ typedef enum {
     
 }BTTRegisterOrLoginType;
 
+typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
+
 /***********************************************存储关键字******************************************************/
 
 
@@ -72,10 +74,13 @@ typedef enum {
 // 验证码发送按钮控制通知
 
 #define BTTVerifyCodeEnableNotification @"BTTVerifyCodeEnableNotification"
-
 #define BTTVerifyCodeDisableNotification @"BTTVerifyCodeDisableNotification"
-
 #define BTTVerifyCodeSendNotification    @"BTTVerifyCodeSendNotification"
+
+// 注册成功页面通知: 1. 首页. 2. 个人中心
+
+#define BTTRegisterSuccessGotoHomePageNotification  @"BTTRegisterSuccessGotoHomePageNotification"
+#define BTTRegisterSuccessGotoMineNotification      @"BTTRegisterSuccessGotoMineNotification"
 
 //状态栏样式
 #define StatusBarStyle UIStatusBarStyleLightContent
@@ -111,8 +116,12 @@ typedef enum {
 #define BTTUserLoginAPI        @"/users/login"
 #define BTTUserCreateAPI       @"/users/create"
 #define BTTVerifyCaptcha       @"/otherVerify/captcha"
-#define BTTUserFastRegister    @"/users/fastRegister"
+#define BTTUserFastRegister    @"/A01/users/fastRegister"
 #define BTTNoLoginMobileCodeAPI @"/otherVerify/send"
+#define BTTStepOneSendCode     @"/public/forgot/stepOneSendCode"
+#define BTTValidateCaptcha     @"/otherVerify/validateCaptcha"
+#define BTTStepTwoCheckCode    @"/public/forgot/stepTwoCheckCode"
+#define BTTStepThreeUpdatePassword @"/public/forgot/stepThreeUpdatePassword"
 
 /********************************************常用宏*********************************************************/
 

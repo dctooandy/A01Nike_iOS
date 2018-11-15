@@ -1,8 +1,8 @@
 //
-//  BTTRegisterSuccessController.h
+//  BTTForgetPasswordStepThreeController.h
 //  Hybird_A01
 //
-//  Created by Domino on 14/11/2018.
+//  Created by Domino on 15/11/2018.
 //  Copyright © 2018 BTT. All rights reserved.
 //
 
@@ -10,7 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BTTRegisterSuccessController : BTTCollectionViewController
+@interface BTTForgetPasswordStepThreeController : BTTCollectionViewController
+
+@property (nonatomic, copy) NSString *accessID;
 
 @property (nonatomic, copy) NSString *account;
 

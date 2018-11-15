@@ -249,6 +249,7 @@
             <connections>
                 <outlet property="accountField" destination="ayi-w3-iJO" id="pci-Zg-Vs7"/>
                 <outlet property="autoBtn" destination="Fzu-7V-xjS" id="thr-nr-KlE"/>
+                <outlet property="bgView" destination="QFU-wX-7E1" id="UdI-7q-q1v"/>
                 <outlet property="codeBtn" destination="6hB-3z-iL6" id="xug-jc-Pqo"/>
                 <outlet property="codeField" destination="v6V-Of-DwC" id="eLp-gt-b58"/>
                 <outlet property="manualBtn" destination="7pQ-S5-NJI" id="oql-wX-JvN"/>
@@ -257,7 +258,7 @@
                 <outlet property="quickBtn" destination="4mR-sE-0kd" id="SiF-Kx-i6K"/>
                 <outlet property="tagLabel" destination="dCd-e0-kzQ" id="zxy-7c-UTa"/>
             </connections>
-            <point key="canvasLocation" x="-1028" y="116"/>
+            <point key="canvasLocation" x="-458" y="237"/>
         </collectionViewCell>
     </objects>
     <resources>
