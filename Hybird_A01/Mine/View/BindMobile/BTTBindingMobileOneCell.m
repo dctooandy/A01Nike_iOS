@@ -37,6 +37,8 @@
     _model = model;
     self.nameLabel.text = model.name;
     self.textField.placeholder = model.iconName;
+    self.textField.text = model.val;
+    [self.textField setEnabled:model.canEdit];
     if ([model.name isEqualToString:@"性别"] ||
         [model.name isEqualToString:@"出生日期"] ||
         [model.name isEqualToString:@"开户行"] ||

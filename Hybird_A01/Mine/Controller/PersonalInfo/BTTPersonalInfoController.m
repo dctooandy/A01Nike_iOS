@@ -135,17 +135,30 @@
     UITextField *remarkTF = [self getCellTextFieldWithIndex:6];
     
     NSMutableDictionary *params = @{}.mutableCopy;
-    if (![PublicMethod leaveMessageDisable:retentionTF.text]) {
-        [MBProgressHUD showError:@"输入的预留信息格式有误！" toView:self.view];
-        return;
+    if ([IVNetwork userInfo].verify_code.length == 0) {
+        if (![PublicMethod leaveMessageDisable:retentionTF.text]) {
+            [MBProgressHUD showError:@"输入的预留信息格式有误！" toView:self.view];
+            return;
+        } else {
+            params[@"verify_code"] = retentionTF.text;
+        }
     }
-    if (![PublicMethod checkRealName:realNameTF.text]) {
-        [MBProgressHUD showError:@"输入的真实姓名格式有误！" toView:self.view];
-        return;
+    if ([IVNetwork userInfo].real_name.length == 0) {
+        if (![PublicMethod checkRealName:realNameTF.text]) {
+            [MBProgressHUD showError:@"输入的真实姓名格式有误！" toView:self.view];
+            return;
+        } else {
+            params[@"real_name"] = realNameTF.text;
+        }
     }
-    if (emailTF.text.length !=0 && ![PublicMethod isValidateEmail:emailTF.text]) {
-        [MBProgressHUD showError:@"输入的邮箱地址格式有误！" toView:self.view];
-        return;
+    BOOL isOldEmail = ([IVNetwork userInfo].email.length !=0 && [emailTF.text isEqualToString:[IVNetwork userInfo].email]);
+    if (!isOldEmail) {
+        if ((emailTF.text.length !=0 && ![PublicMethod isValidateEmail:emailTF.text])) {
+            [MBProgressHUD showError:@"输入的邮箱地址格式有误！" toView:self.view];
+            return;
+        } else {
+            params[@"email"] = emailTF.text;
+        }
     }
     if (sexTF.text.length != 0 ) {
         params[@"sex"] = [sexTF.text isEqualToString:@"男"] ? @"M" : @"F";
@@ -153,21 +166,17 @@
     if (birthdayTF.text.length != 0) {
         params[@"birth_date"] = [birthdayTF.text stringByAppendingString:@" 00:00:00"];
     }
-    params[@"verify_code"] = retentionTF.text;
-    params[@"real_name"] = realNameTF.text;
-    params[@"email"] = emailTF.text;
+    
     params[@"address"] = addressTF.text;
     params[@"remarks"] = remarkTF.text;
-    
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     [IVNetwork sendRequestWithSubURL:@"public/users/completeInfo" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         if (result.status) {
             [MBProgressHUD showSuccess:@"完善资料成功!" toView:nil];
-            NSDictionary *userInfo = [[IVCacheManager sharedInstance] nativeReadDictionaryForKey:KCacheUserInfo];
-            NSMutableDictionary *mUserInfo = userInfo.mutableCopy;
-            [mUserInfo setValuesForKeysWithDictionary:result.data];
-            [[IVCacheManager sharedInstance] nativeWriteValue:mUserInfo.copy forKey:KCacheUserInfo];
+            IVUserInfoModel *userInfo = [[IVUserInfoModel alloc] initWithDictionary:result.data error:nil];
+            [IVNetwork updateUserInfo:userInfo];
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }else{
             [MBProgressHUD showError:result.message toView:weakSelf.view];
