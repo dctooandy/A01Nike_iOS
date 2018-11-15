@@ -13,8 +13,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *sendBtn;
 
-@property (weak, nonatomic) IBOutlet UITextField *textField;
-
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @end
 
@@ -42,6 +40,9 @@
 
 - (IBAction)sendBtnClick:(UIButton *)sender {
     [self countDown];
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
 }
 
 

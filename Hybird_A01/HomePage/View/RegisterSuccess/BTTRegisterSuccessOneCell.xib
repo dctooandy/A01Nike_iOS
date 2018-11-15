@@ -50,7 +50,10 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="375" height="239"/>
-            <point key="canvasLocation" x="136.80000000000001" y="126.38680659670166"/>
+            <connections>
+                <outlet property="accountLabel" destination="yu0-e2-LW9" id="Zsm-GG-KnD"/>
+            </connections>
+            <point key="canvasLocation" x="-250" y="97"/>
         </collectionViewCell>
     </objects>
     <resources>

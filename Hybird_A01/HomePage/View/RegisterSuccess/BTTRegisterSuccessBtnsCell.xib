@@ -19,17 +19,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehU-ZR-ffF">
+                    <button opaque="NO" tag="40010" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehU-ZR-ffF">
                         <rect key="frame" x="15" y="15" width="165" height="41"/>
                         <state key="normal" title="游戏大厅" backgroundImage="xima_btn1">
                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
+                        <connections>
+                            <action selector="gamesPageClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Qyd-GF-gWg"/>
+                        </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5n-kQ-IUP">
+                    <button opaque="NO" tag="40011" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5n-kQ-IUP">
                         <rect key="frame" x="195" y="15" width="165" height="41"/>
                         <state key="normal" title="立即充值" backgroundImage="xima_btn2">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
+                        <connections>
+                            <action selector="chargeBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Sel-7Q-mph"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
@@ -42,7 +48,7 @@
                 <constraint firstItem="ehU-ZR-ffF" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="y8p-Wu-9Fc"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
-            <point key="canvasLocation" x="136.80000000000001" y="153.82308845577214"/>
+            <point key="canvasLocation" x="-201" y="156"/>
         </collectionViewCell>
     </objects>
     <resources>
