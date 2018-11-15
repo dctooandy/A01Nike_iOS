@@ -46,6 +46,19 @@
     [self customTabbar];
 }
 
+- (void)registerNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccessGotoHomePageNotification) name:BTTRegisterSuccessGotoHomePageNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccessGotoMineNotification) name:BTTRegisterSuccessGotoMineNotification object:nil];
+}
+
+- (void)registerSuccessGotoHomePageNotification {
+    [self.myTabbar setSeletedIndex:0];
+}
+
+- (void)registerSuccessGotoMineNotification {
+    [self.myTabbar setSeletedIndex:4];
+}
+
 /**
  自定义tabbar
  */

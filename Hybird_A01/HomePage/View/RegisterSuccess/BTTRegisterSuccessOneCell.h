@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTRegisterSuccessOneCell : BTTBaseCollectionViewCell
 
+
+@property (weak, nonatomic) IBOutlet UILabel *accountLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

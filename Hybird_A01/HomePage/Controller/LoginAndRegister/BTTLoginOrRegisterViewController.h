@@ -22,13 +22,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLoginOrRegisterViewController : BTTCollectionViewController
 
-@property (nonatomic, assign) BTTRegisterOrLoginType registerOrLoginType;
+@property (nonatomic, assign) BTTRegisterOrLoginType registerOrLoginType;///< 登录注册页面类型
 
-@property (nonatomic, assign) BTTLoginCellType loginCellType;
+@property (nonatomic, assign) BTTLoginCellType loginCellType;            ///< 登录cell类型
 
-@property (nonatomic, assign) BTTQuickRegisterType qucikRegisterType;
+@property (nonatomic, assign) BTTQuickRegisterType qucikRegisterType;    ///< 快速注册类型
 
-@property (nonatomic, strong) UIImage *codeImage;
+@property (nonatomic, strong) UIImage *codeImage;     ///< 图形验证码
+
+@property (nonatomic, assign) NSInteger wrongPwdNum;  ///< 密码错误次数
 
 @end
 

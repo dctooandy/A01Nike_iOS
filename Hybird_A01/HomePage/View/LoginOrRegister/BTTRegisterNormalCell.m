@@ -29,15 +29,7 @@
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.bgView.layer.cornerRadius = 5;
     self.tagLabel.layer.cornerRadius = 2;
-    self.accountTextField.delegate = self;
-    self.pwdTextField.delegate = self;
-    self.phoneTextField.delegate = self;
-    self.verifyTextField.delegate = self;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField endEditing:YES];
-    return YES;
+    
 }
 
 - (IBAction)normalBtnClick:(UIButton *)sender {
@@ -57,6 +49,8 @@
     sender.selected = !sender.selected;
     self.pwdTextField.secureTextEntry = !sender.selected;
 }
+
+
 
 
 @end

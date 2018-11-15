@@ -15,4 +15,12 @@
     self.mineSparaterType = BTTMineSparaterTypeNone;
 }
 
+
+- (IBAction)forgetClick:(UIButton *)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
+}
+
+
 @end

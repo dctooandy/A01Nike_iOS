@@ -62,6 +62,7 @@
         [self hideLoading];
         NSLog(@"%@",response);
         if (result.code_http == 200) {
+            self.wrongPwdNum = 0;
             if (isback) {
                 [self.navigationController popViewControllerAnimated:YES];
             }
@@ -72,6 +73,14 @@
                 [self showAlert];
             } else if(result.code_system == 202006 || result.code_system == 202018) {
                 [MBProgressHUD showMessagNoActivity:@"账号或密码错误,请重新输入" toView:self.view];
+                self.wrongPwdNum++;
+                if (self.wrongPwdNum >= 2) {
+                    self.loginCellType = BTTLoginCellTypeCode;
+                    [self loadVerifyCode];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self setupElements];
+                    });
+                }
             }
         }
     }];
@@ -213,14 +222,17 @@
     }
     [IVNetwork sendRequestWithSubURL:BTTUserFastRegister paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         if (result.code_http == 200) {
-            BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-            
-//            BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
-//            loginModel.login_name = model.login_name;
-//            loginModel.password = model.password;
-//            loginModel.timestamp = [PublicMethod timeIntervalSince1970];
-//            [self loginWithLoginAPIModel:loginModel isBack:NO];
+            if (result.data) {
+                BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
+                vc.account = result.data[@"login_name"];
+                [self.navigationController pushViewController:vc animated:YES];
+                
+                BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
+                loginModel.login_name = result.data[@"login_name"];
+                loginModel.password = result.data[@"password"];
+                loginModel.timestamp = [PublicMethod timeIntervalSince1970];
+                [self loginWithLoginAPIModel:loginModel isBack:NO];
+            }
         }
     }];
 }

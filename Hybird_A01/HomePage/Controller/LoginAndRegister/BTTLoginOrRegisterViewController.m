@@ -18,14 +18,11 @@
 #import "BTTLoginOrRegisterViewController+UI.h"
 #import "BTTLoginCodeCell.h"
 #import "BTTLoginOrRegisterViewController+API.h"
+#import "BTTForgetPasswordController.h"
 
+@interface BTTLoginOrRegisterViewController ()<BTTElementsFlowLayoutDelegate, UITextFieldDelegate>
 
-
-
-
-@interface BTTLoginOrRegisterViewController ()<BTTElementsFlowLayoutDelegate>
-
-
+@property (nonatomic, assign) CGRect activedTextFieldRect;
 
 @end
 
@@ -43,6 +40,26 @@
     }
     [self setupCollectionView];
     [self setupElements];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    //取出键盘最终的frame
+    CGRect rect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    //取出键盘弹出需要花费的时间
+    double duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    //获取最佳位置距离屏幕上方的距离
+    if ((self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height) >  ([UIScreen mainScreen].bounds.size.height - rect.size.height)) {//键盘的高度 高于textView的高度 需要滚动
+        [UIView animateWithDuration:duration animations:^{
+            self.collectionView.contentOffset = CGPointMake(0, 64 + self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height - ([UIScreen mainScreen].bounds.size.height - rect.size.height));
+        }];
+    }
+    
+}
+
+- (void)keyboardWillHide:(NSNotification *)notify {
+    [UIView animateWithDuration:.25 animations:^{
+        self.collectionView.contentOffset = CGPointMake(0, 0);
+    }];
 }
 
 - (void)setupCollectionView {
@@ -85,15 +102,25 @@
         if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
             if (self.loginCellType == BTTLoginCellTypeNormal) {
                 BTTLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginCell" forIndexPath:indexPath];
+                cell.accountTextField.delegate = self;
+                cell.pwdTextField.delegate = self;
                 return cell;
             } else{
                 BTTLoginCodeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginCodeCell" forIndexPath:indexPath];
+                cell.accountTextField.delegate = self;
+                cell.pwdTextField.delegate = self;
+                cell.codeTextField.delegate = self;
+                cell.codeImageView.image = self.codeImage;
                 return cell;
             }
         } else {
             if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
                 BTTRegisterNormalCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterNormalCell" forIndexPath:indexPath];
                 cell.codeImageView.image = self.codeImage;
+                cell.accountTextField.delegate = self;
+                cell.pwdTextField.delegate = self;
+                cell.phoneTextField.delegate = self;
+                cell.verifyTextField.delegate = self;
                 weakSelf(weakSelf);
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                     strongSelf(strongSelf);
@@ -109,6 +136,9 @@
             } else {
                 if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
                     BTTRegisterQuickAutoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterQuickAutoCell" forIndexPath:indexPath];
+                    cell.phoneTextField.delegate = self;
+                    cell.verifyTextField.delegate = self;
+                    
                     weakSelf(weakSelf);
                     cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                         strongSelf(strongSelf);
@@ -134,6 +164,9 @@
                     return cell;
                 } else {
                     BTTRegisterQuickManualCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterQuickManualCell" forIndexPath:indexPath];
+                    cell.phoneTextField.delegate = self;
+                    cell.accountField.delegate = self;
+                    cell.codeField.delegate = self;
                     weakSelf(weakSelf);
                     cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                         strongSelf(strongSelf);
@@ -161,6 +194,12 @@
         if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
             if (indexPath.row == 3) {
                 BTTForgetPasswordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTForgetPasswordCell" forIndexPath:indexPath];
+                weakSelf(weakSelf);
+                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                    strongSelf(strongSelf);
+                    BTTForgetPasswordController *vc = [[BTTForgetPasswordController alloc] init];
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                };
                 return cell;
             } else {
                 BTTLoginOrRegisterBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginOrRegisterBtnCell" forIndexPath:indexPath];
@@ -168,6 +207,7 @@
                 weakSelf(weakSelf);
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                     strongSelf(strongSelf);
+                    [collectionView endEditing:YES];
                     [strongSelf login];
                 };
                 return cell;
@@ -178,6 +218,7 @@
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
+                [collectionView endEditing:YES];
                 [strongSelf registerAction];
             };
             return cell;
@@ -221,6 +262,18 @@
  */
 - (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView linesMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
     return 0;
+}
+
+
+#pragma mark - textfielddelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField endEditing:YES];
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.activedTextFieldRect = [textField convertRect:textField.frame toView:self.collectionView];
 }
 
 

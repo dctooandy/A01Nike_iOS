@@ -18,15 +18,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem = nil;
+    [self setupNav];
     [self setupCollectionView];
+    [self setupElements];
 }
 
 - (void)setupCollectionView {
     [super setupCollectionView];
+    self.collectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 126);
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessOneCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessBtnsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessBtnsCell"];
-    
+    UIImageView *adImageview = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 126, SCREEN_WIDTH, 126)];
+    [self.view addSubview:adImageview];
+    adImageview.image = ImageNamed(@"login_ad");
+}
+
+- (void)setupNav {
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(leftClick)];
+    self.navigationItem.leftBarButtonItem = leftItem;
+}
+
+- (void)leftClick {
     
 }
 
@@ -37,9 +49,28 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         BTTRegisterSuccessOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterSuccessOneCell" forIndexPath:indexPath];
+        NSString *accountStr = [NSString stringWithFormat:@"您的账号为: %@",self.account];
+        NSRange accountRange = [accountStr rangeOfString:self.account];
+        NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:accountStr];
+        [attstr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:accountRange];
+        cell.accountLabel.attributedText = attstr;
         return cell;
     } else {
         BTTRegisterSuccessBtnsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterSuccessBtnsCell" forIndexPath:indexPath];
+        weakSelf(weakSelf);
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            strongSelf(strongSelf);
+            [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                if (button.tag == 40010) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoHomePageNotification object:nil];
+                } else if (button.tag == 40011) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoMineNotification object:nil];
+                }
+            });
+            
+        };
+    
         return cell;
     }
 }

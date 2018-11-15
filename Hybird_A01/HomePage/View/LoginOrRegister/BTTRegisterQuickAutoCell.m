@@ -8,7 +8,7 @@
 
 #import "BTTRegisterQuickAutoCell.h"
 
-@interface BTTRegisterQuickAutoCell ()<UITextFieldDelegate>
+@interface BTTRegisterQuickAutoCell ()
 
 @property (weak, nonatomic) IBOutlet UIButton *normalBtn;
 
@@ -25,14 +25,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.phoneTextField.delegate = self;
-    self.verifyTextField.delegate = self;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField endEditing:YES];
-    return YES;
-}
 
 
 - (IBAction)normalBtnClick:(UIButton *)sender {
