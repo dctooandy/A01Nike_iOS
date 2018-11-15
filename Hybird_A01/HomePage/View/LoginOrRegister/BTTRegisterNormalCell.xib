@@ -147,7 +147,6 @@
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kMn-e2-GbC">
                                 <rect key="frame" x="245" y="204" width="55" height="30"/>
-                                <color key="backgroundColor" red="0.81960784310000001" green="0.21960784310000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3WQ-7C-mTj"/>
                                     <constraint firstAttribute="width" constant="55" id="iUY-CU-AjS"/>

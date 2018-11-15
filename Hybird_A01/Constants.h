@@ -122,6 +122,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTValidateCaptcha     @"/otherVerify/validateCaptcha"
 #define BTTStepTwoCheckCode    @"/public/forgot/stepTwoCheckCode"
 #define BTTStepThreeUpdatePassword @"/public/forgot/stepThreeUpdatePassword"
+#define BTTUnlockAccount       @"/A01/users/unlockAccount"
 
 /********************************************常用宏*********************************************************/
 

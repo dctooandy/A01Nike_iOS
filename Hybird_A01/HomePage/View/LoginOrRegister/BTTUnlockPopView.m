@@ -50,5 +50,20 @@
     return YES;
 }
 
+- (void)unluckAccountWithName:(NSString *)name
+                        phone:(NSString *)phone
+                         info:(NSString *)info
+                    loginName:(NSString *)loginName {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:name forKey:@"realName"];
+    [params setObject:phone forKey:@"phone"];
+    [params setObject:info forKey:@"verifyCode"];
+    [params setObject:loginName forKey:@"loginName"];
+    
+    [IVNetwork sendRequestWithSubURL:BTTUnlockAccount paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+        
+    }];
+}
+
 
 @end
