@@ -13,6 +13,7 @@
 #import "BTTRegisterNormalCell.h"
 #import "BTTRegisterQuickAutoCell.h"
 #import "BTTRegisterQuickManualCell.h"
+#import "BTTRegisterSuccessController.h"
 
 
 @implementation BTTLoginOrRegisterViewController (API)
@@ -46,12 +47,12 @@
         [MBProgressHUD showMessagNoActivity:@"请输入密码" toView:self.view];
         return;
     }
-    [self loginWithLoginAPIModel:model];
+    [self loginWithLoginAPIModel:model isBack:YES];
 }
 
 
 // 登录逻辑处理
-- (void)loginWithLoginAPIModel:(BTTLoginAPIModel *)model {
+- (void)loginWithLoginAPIModel:(BTTLoginAPIModel *)model isBack:(BOOL)isback {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setObject:model.login_name forKey:BTTLoginName];
     [parameters setObject:model.password forKey:BTTPassword];
@@ -61,7 +62,9 @@
         [self hideLoading];
         NSLog(@"%@",response);
         if (result.code_http == 200) {
-            [self.navigationController popViewControllerAnimated:YES];
+            if (isback) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
             [[IVCacheManager sharedInstance] nativeWriteValue:result.data[@"WSCustomers"] forKey:KCacheUserInfo];
             [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccessNotification object:nil];
         } else {
@@ -142,9 +145,30 @@
     } else if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
         if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
             BTTRegisterQuickAutoCell *cell = (BTTRegisterQuickAutoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            model.phone = cell.phoneTextField.text;
+            model.verify_code = cell.verifyTextField.text;
+            model.parent_id = [IVNetwork parentId];
+            [self fastRegisterAPIModel:model];
         } else {
             BTTRegisterQuickManualCell *cell = (BTTRegisterQuickManualCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-        }
+            model.phone = cell.phoneTextField.text;
+            model.verify_code = cell.codeField.text;
+            model.login_name = cell.accountField.text;
+            model.parent_id = [IVNetwork parentId];
+            NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+            BOOL isAccount = [predicate evaluateWithObject:model.login_name];
+            if (!isAccount) {
+                [MBProgressHUD showMessagNoActivity:@"用户名为4-9位的数字或字母" toView:self.view];
+                return;
+            }
+            
+            if (!model.login_name.length) {
+                [MBProgressHUD showMessagNoActivity:@"请输入账号" toView:self.view];
+                return;
+            }
+            [self fastRegisterAPIModel:model];
+        } 
     }
 }
 
@@ -164,29 +188,43 @@
         NSLog(@"%@",response);
         [self hideLoading];
         if (result.code_http == 200) {
+            BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            
             BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
             loginModel.login_name = model.login_name;
             loginModel.password = model.password;
             loginModel.timestamp = [PublicMethod timeIntervalSince1970];
-            [self loginWithLoginAPIModel:loginModel];
-            
+            [self loginWithLoginAPIModel:loginModel isBack:NO];
         }
     }];
 }
 
-
 // 极速开户
-- (void)fastRegisterAutoWithAPIModel:(BTTCreateAPIModel *)model {
+- (void)fastRegisterAPIModel:(BTTCreateAPIModel *)model {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:model.phone forKey:BTTPhone];
     [params setObject:model.verify_code forKey:@"verify_code"];
-    [params setObject:model.parent_id forKey:BTTParentID];
+    if (model.parent_id.length) {
+        [params setObject:model.parent_id forKey:BTTParentID];
+    }
+    if (model.login_name.length) {
+        [params setObject:model.login_name forKey:BTTLoginName];
+    }
     [IVNetwork sendRequestWithSubURL:BTTUserFastRegister paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         if (result.code_http == 200) {
+            BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
             
+//            BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
+//            loginModel.login_name = model.login_name;
+//            loginModel.password = model.password;
+//            loginModel.timestamp = [PublicMethod timeIntervalSince1970];
+//            [self loginWithLoginAPIModel:loginModel isBack:NO];
         }
     }];
 }
+
 
 // 图形验证码
 - (void)loadVerifyCode {
@@ -203,6 +241,18 @@
             self.codeImage = decodedImage;
             [self.collectionView reloadData];
         }
+    }];
+}
+
+// 手机验证码
+- (void)loadMobileVerifyCodeWithPhone:(NSString *)phone {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:phone forKey:@"send_to"];
+    [params setObject:@(1) forKey:@"type"];
+    [params setObject:@(6) forKey:@"v_type"];
+    [params setObject:[PublicMethod timeIntervalSince1970] forKey:BTTTimestamp];
+    [IVNetwork sendRequestWithSubURL:BTTNoLoginMobileCodeAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
     }];
 }
 

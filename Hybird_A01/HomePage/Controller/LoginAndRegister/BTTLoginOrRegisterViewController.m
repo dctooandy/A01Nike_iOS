@@ -112,6 +112,7 @@
                     weakSelf(weakSelf);
                     cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                         strongSelf(strongSelf);
+                        
                         if (button.tag == 10015) {
                             strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
                         } else if (button.tag == 10016) {
@@ -123,6 +124,12 @@
                             strongSelf.qucikRegisterType = BTTQuickRegisterTypeManual;
                         }
                         [strongSelf setupElements];
+                        
+                    };
+                    
+                    cell.verifyCodeBlock = ^(NSString *phone) {
+                        strongSelf(strongSelf);
+                        [strongSelf loadMobileVerifyCodeWithPhone:phone];
                     };
                     return cell;
                 } else {
@@ -141,6 +148,10 @@
                             strongSelf.qucikRegisterType = BTTQuickRegisterTypeManual;
                         }
                         [strongSelf setupElements];
+                    };
+                    cell.verifyCodeBlock = ^(NSString *phone) {
+                        strongSelf(strongSelf);
+                        [strongSelf loadMobileVerifyCodeWithPhone:phone];
                     };
                     return cell;
                 }
@@ -176,7 +187,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
+    [collectionView endEditing:YES];
     NSLog(@"%zd", indexPath.item);
 }
 

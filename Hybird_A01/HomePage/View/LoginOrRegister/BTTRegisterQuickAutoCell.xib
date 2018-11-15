@@ -71,16 +71,16 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6V-Of-DwC">
-                                <rect key="frame" x="43" y="153" width="157" height="30"/>
+                                <rect key="frame" x="43" y="153" width="142" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="OrQ-J9-FsS"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" tag="10015" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HY2-5p-Mgv">
                                 <rect key="frame" x="15" y="0.0" width="142.5" height="40"/>
@@ -134,15 +134,21 @@
                                     <action selector="manualBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="NXl-uM-vmt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6hB-3z-iL6">
-                                <rect key="frame" x="215" y="150.5" width="85" height="35"/>
+                            <button opaque="NO" tag="20010" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6hB-3z-iL6">
+                                <rect key="frame" x="200" y="152.5" width="100" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="85" id="2Th-f6-TEO"/>
+                                    <constraint firstAttribute="width" constant="100" id="2Th-f6-TEO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="获取验证码" backgroundImage="me_viewBtn">
-                                    <color key="titleColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="获取验证码" backgroundImage="binding_btn_enable_normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <state key="disabled" backgroundImage="binding_btn_disable">
+                                    <color key="titleColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="codeBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="6r8-SW-Bey"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -196,18 +202,22 @@
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
                 <outlet property="autoBtn" destination="Fzu-7V-xjS" id="Lxd-Eo-o3V"/>
+                <outlet property="codeBtn" destination="6hB-3z-iL6" id="qkC-fb-COQ"/>
                 <outlet property="manualBtn" destination="7pQ-S5-NJI" id="NJ1-e2-0C5"/>
                 <outlet property="normalBtn" destination="HY2-5p-Mgv" id="DUq-bq-AoO"/>
+                <outlet property="phoneTextField" destination="aNt-YK-C4f" id="glA-hn-NIx"/>
                 <outlet property="quickBtn" destination="4mR-sE-0kd" id="FoX-mw-cFM"/>
+                <outlet property="verifyTextField" destination="v6V-Of-DwC" id="dlW-xD-mmr"/>
             </connections>
-            <point key="canvasLocation" x="-308" y="152"/>
+            <point key="canvasLocation" x="-706" y="122"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="binding_btn_disable" width="120" height="31"/>
+        <image name="binding_btn_enable_normal" width="120" height="31"/>
         <image name="login_phone" width="20" height="20"/>
         <image name="login_select" width="24" height="24"/>
         <image name="login_unselect" width="24" height="24"/>
         <image name="login_verify" width="20" height="20"/>
-        <image name="me_viewBtn" width="95" height="35"/>
     </resources>
 </document>
