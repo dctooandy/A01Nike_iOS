@@ -110,6 +110,7 @@
                 cell.accountTextField.delegate = self;
                 cell.pwdTextField.delegate = self;
                 cell.codeTextField.delegate = self;
+                cell.codeImageView.image = self.codeImage;
                 return cell;
             }
         } else {
