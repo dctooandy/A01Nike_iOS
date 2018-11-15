@@ -112,6 +112,7 @@ typedef enum {
 #define BTTUserCreateAPI       @"/users/create"
 #define BTTVerifyCaptcha       @"/otherVerify/captcha"
 #define BTTUserFastRegister    @"/users/fastRegister"
+#define BTTNoLoginMobileCodeAPI @"/otherVerify/send"
 
 /********************************************常用宏*********************************************************/
 

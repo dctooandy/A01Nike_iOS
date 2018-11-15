@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadVerifyCode;
 
+- (void)loadMobileVerifyCodeWithPhone:(NSString *)phone;
+
 @end
 
 NS_ASSUME_NONNULL_END

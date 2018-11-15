@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTRegisterSuccessOneCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="234"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="234"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="withdrawal_successicon" translatesAutoresizingMaskIntoConstraints="NO" id="Ftk-9d-2pJ">
+                        <rect key="frame" x="146.5" y="50" width="82" height="82"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="82" id="02m-Xr-U3O"/>
+                            <constraint firstAttribute="height" constant="82" id="Jmv-OE-TMW"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恭喜您, 开户成功" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qK2-6l-vw6">
+                        <rect key="frame" x="122.5" y="162" width="130.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的账号为: gdomino02" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yu0-e2-LW9">
+                        <rect key="frame" x="106" y="200.5" width="163" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="qK2-6l-vw6" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="0k7-Q7-qYS"/>
+                <constraint firstItem="Ftk-9d-2pJ" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="720-UJ-nHF"/>
+                <constraint firstItem="yu0-e2-LW9" firstAttribute="top" secondItem="qK2-6l-vw6" secondAttribute="bottom" constant="17.5" id="EKf-De-fB3"/>
+                <constraint firstItem="qK2-6l-vw6" firstAttribute="top" secondItem="Ftk-9d-2pJ" secondAttribute="bottom" constant="30" id="ohf-bX-crG"/>
+                <constraint firstItem="Ftk-9d-2pJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="50" id="vOQ-pi-BKf"/>
+                <constraint firstItem="yu0-e2-LW9" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="yOM-Zm-jzS"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="375" height="239"/>
+            <point key="canvasLocation" x="136.80000000000001" y="126.38680659670166"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="withdrawal_successicon" width="82" height="82"/>
+    </resources>
+</document>

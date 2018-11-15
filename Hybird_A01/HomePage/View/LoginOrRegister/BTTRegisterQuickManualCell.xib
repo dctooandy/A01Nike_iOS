@@ -81,7 +81,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6V-Of-DwC">
-                                <rect key="frame" x="43" y="204" width="157" height="30"/>
+                                <rect key="frame" x="43" y="204" width="142" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="OrQ-J9-FsS"/>
                                 </constraints>
@@ -146,14 +146,18 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6hB-3z-iL6">
-                                <rect key="frame" x="215" y="201.5" width="85" height="35"/>
+                                <rect key="frame" x="200" y="203.5" width="100" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="85" id="2Th-f6-TEO"/>
+                                    <constraint firstAttribute="width" constant="100" id="2Th-f6-TEO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <state key="normal" title="获取验证码" backgroundImage="me_viewBtn">
+                                <state key="normal" title="获取验证码" backgroundImage="binding_btn_enable_normal">
                                     <color key="titleColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <state key="disabled" backgroundImage="binding_btn_disable"/>
+                                <connections>
+                                    <action selector="codeBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="pra-UA-ZTP"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_pwd" translatesAutoresizingMaskIntoConstraints="NO" id="c6T-r7-xnN">
                                 <rect key="frame" x="15" y="158" width="20" height="20"/>
@@ -243,21 +247,26 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
+                <outlet property="accountField" destination="ayi-w3-iJO" id="pci-Zg-Vs7"/>
                 <outlet property="autoBtn" destination="Fzu-7V-xjS" id="thr-nr-KlE"/>
+                <outlet property="codeBtn" destination="6hB-3z-iL6" id="xug-jc-Pqo"/>
+                <outlet property="codeField" destination="v6V-Of-DwC" id="eLp-gt-b58"/>
                 <outlet property="manualBtn" destination="7pQ-S5-NJI" id="oql-wX-JvN"/>
                 <outlet property="normalBtn" destination="HY2-5p-Mgv" id="bQY-4c-3xD"/>
+                <outlet property="phoneTextField" destination="aNt-YK-C4f" id="hOP-xm-6lg"/>
                 <outlet property="quickBtn" destination="4mR-sE-0kd" id="SiF-Kx-i6K"/>
                 <outlet property="tagLabel" destination="dCd-e0-kzQ" id="zxy-7c-UTa"/>
             </connections>
-            <point key="canvasLocation" x="-474" y="151"/>
+            <point key="canvasLocation" x="-1028" y="116"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="binding_btn_disable" width="120" height="31"/>
+        <image name="binding_btn_enable_normal" width="120" height="31"/>
         <image name="login_phone" width="20" height="20"/>
         <image name="login_pwd" width="20" height="20"/>
         <image name="login_select" width="24" height="24"/>
         <image name="login_unselect" width="24" height="24"/>
         <image name="login_verify" width="20" height="20"/>
-        <image name="me_viewBtn" width="95" height="35"/>
     </resources>
 </document>

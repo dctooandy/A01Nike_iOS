@@ -20,6 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *tagLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *codeBtn;
 
 @end
 
@@ -57,5 +58,59 @@
 }
 
 
+- (IBAction)codeBtnClick:(id)sender {
+    if (!self.phoneTextField.text.length) {
+        [MBProgressHUD showMessagNoActivity:@"请填写手机号码" toView:nil];
+        return;
+    }
+    NSString *phoneregex = @"^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
+    NSPredicate *phonepredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneregex];
+    BOOL isphone = [phonepredicate evaluateWithObject:self.phoneTextField.text];
+    if (!isphone) {
+        [MBProgressHUD showMessagNoActivity:@"请填写正确的手机号码" toView:nil];
+        return;
+    }
+    
+    [self countDown];
+    if (_verifyCodeBlock) {
+        _verifyCodeBlock(self.phoneTextField.text);
+    }
+}
+
+- (void)countDown {
+    __block int timeout = 60; // 倒计时时间
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0 * NSEC_PER_SEC, 0); // 每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        if(timeout <= 0){ //倒计时结束，关闭
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                self.codeBtn.enabled = YES;
+                self.codeBtn.titleLabel.text = @"重新发送";
+                [self.codeBtn setTitle:@"重新发送" forState:UIControlStateNormal];
+            });
+        } else {
+            int seconds = timeout;
+            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];;
+            if (seconds < 10) {
+                strTime = [NSString stringWithFormat:@"%.1d", seconds];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                self.codeBtn.titleLabel.text = [NSString stringWithFormat:@"重新发送(%@)",strTime];
+                [self.codeBtn setTitle:[NSString stringWithFormat:@"重新发送(%@)",strTime] forState:UIControlStateNormal];
+                
+                self.codeBtn.enabled = NO;
+            });
+            
+            timeout--;
+        }
+        
+    });
+    dispatch_resume(_timer);
+    
+}
 
 @end
