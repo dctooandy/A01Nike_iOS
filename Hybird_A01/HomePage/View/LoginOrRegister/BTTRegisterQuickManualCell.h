@@ -8,9 +8,19 @@
 
 #import "BTTBaseCollectionViewCell.h"
 
+typedef void (^BTTMobileVerifyCodeNotLoginBlock)(NSString *phone);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTRegisterQuickManualCell : BTTBaseCollectionViewCell
+
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+
+@property (weak, nonatomic) IBOutlet UITextField *accountField;
+
+@property (weak, nonatomic) IBOutlet UITextField *codeField;
+
+@property (nonatomic, copy) BTTMobileVerifyCodeNotLoginBlock verifyCodeBlock;
 
 @end
 
