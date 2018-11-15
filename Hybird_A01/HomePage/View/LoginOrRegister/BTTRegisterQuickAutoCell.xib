@@ -202,6 +202,7 @@
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
                 <outlet property="autoBtn" destination="Fzu-7V-xjS" id="Lxd-Eo-o3V"/>
+                <outlet property="bgView" destination="QFU-wX-7E1" id="NVL-cC-njL"/>
                 <outlet property="codeBtn" destination="6hB-3z-iL6" id="qkC-fb-COQ"/>
                 <outlet property="manualBtn" destination="7pQ-S5-NJI" id="NJ1-e2-0C5"/>
                 <outlet property="normalBtn" destination="HY2-5p-Mgv" id="DUq-bq-AoO"/>
@@ -209,7 +210,7 @@
                 <outlet property="quickBtn" destination="4mR-sE-0kd" id="FoX-mw-cFM"/>
                 <outlet property="verifyTextField" destination="v6V-Of-DwC" id="dlW-xD-mmr"/>
             </connections>
-            <point key="canvasLocation" x="-706" y="122"/>
+            <point key="canvasLocation" x="-985" y="73"/>
         </collectionViewCell>
     </objects>
     <resources>

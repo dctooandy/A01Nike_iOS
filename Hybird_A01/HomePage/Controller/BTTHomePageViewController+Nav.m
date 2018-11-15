@@ -71,19 +71,16 @@ static const char *BTTHeaderViewKey = "headerView";
                 
             case 2003:
             {
-//                BTTLoginAndRegisterViewController *loginAndRegister = [[BTTLoginAndRegisterViewController alloc] init];
-//                loginAndRegister.webConfigModel.url = @"common/login.htm"; // common/register.htm
-//                loginAndRegister.webConfigModel.newView = YES;
                 BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
+                loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
                 [strongSelf.navigationController pushViewController:loginAndRegister animated:YES];
             }
                 break;
                 
             case 2004:
             {
-                BTTLoginAndRegisterViewController *loginAndRegister = [[BTTLoginAndRegisterViewController alloc] init];
-                loginAndRegister.webConfigModel.url = @"common/register.htm";
-                loginAndRegister.webConfigModel.newView = YES;
+                BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
+                loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
                 [strongSelf.navigationController pushViewController:loginAndRegister animated:YES];
             }
                 break;

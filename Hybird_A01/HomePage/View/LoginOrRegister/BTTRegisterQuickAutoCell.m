@@ -19,12 +19,17 @@
 @property (weak, nonatomic) IBOutlet UIButton *manualBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *codeBtn;
+
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+
+
 @end
 
 @implementation BTTRegisterQuickAutoCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.bgView.layer.cornerRadius = 4;
 }
 
 
