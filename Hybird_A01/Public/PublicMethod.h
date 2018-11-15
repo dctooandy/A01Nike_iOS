@@ -138,7 +138,18 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSURL *)createFolderWithName:(NSString *)folderName inDirectory:(NSString *)directory;
 
 + (NSString*)dataPath;
-
+//检测预留信息是否合法
++ (BOOL)leaveMessageDisable:(NSString *)leaveMessage;
+//检查真实姓名是否合法
++ (BOOL)checkRealName:(NSString *)realName;
+//检查比特币地址是否合法
++ (BOOL)checkBitcoinAddress:(NSString *)btcAddress;
+//正则表达式验证手机号码
++ (BOOL)isValidatePhone:(NSString *)phone;
+//正则表达式验证邮箱是否合法
++ (BOOL)isValidateEmail:(NSString *)originalEmail;
+//正则表达式验证密码是否合法
++ (BOOL)isValidatePwd:(NSString *)originalPwd;
 @end
 
 NS_ASSUME_NONNULL_END

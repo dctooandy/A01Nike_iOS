@@ -735,6 +735,49 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     return _dataPath;
 }
 
-
++ (BOOL)leaveMessageDisable:(NSString *)leaveMessage{
+    //预留信息只支持数字,英文小写或中文字符.务必牢记,保护您的交易安全
+    NSString *regular = @"^[a-zA-Z0-9\u4e00-\u9fa5]{1,16}";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self MATCHES %@",regular];
+    BOOL result = [predicate evaluateWithObject:leaveMessage];
+    return result;
+}
++ (BOOL)checkRealName:(NSString *)realName {
+    //中文，英文，·符号，长度2~14位
+    NSString *realNameRegex = @"[a-zA-Z·\u4e00-\u9fa5]{2,14}";
+    NSPredicate *realNamePredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",realNameRegex];
+    if (![realNamePredicate evaluateWithObject:realName]) {
+        return NO;
+    }
+    return YES;
+}
++ (BOOL)checkBitcoinAddress:(NSString *)btcAddress {
+    NSString *bitcoinRegex = @"^[a-zA-Z0-9]{6,40}";
+    NSPredicate *bitcoinPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",bitcoinRegex];
+    if (![bitcoinPredicate evaluateWithObject:btcAddress]) {
+        return NO;
+    }
+    return YES;
+}
++ (BOOL)isValidatePhone:(NSString *)phone{
+    NSString *phoneRegex = @"^(1)[3456789]\\d{9}";
+    NSPredicate *phonePredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",phoneRegex];
+    if (![phonePredicate evaluateWithObject:phone]) {
+        
+        return NO;
+    }
+    return YES;
+}
++ (BOOL)isValidateEmail:(NSString *)originalEmail{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *email = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [email evaluateWithObject:originalEmail];
+}
+/** 正则表达式验证密码是否合法 YES 合法，NO 不合法 */
++ (BOOL)isValidatePwd:(NSString *)originalPwd{
+    NSString *pwdRegex = @"^[a-zA-Z0-9]{6,16}";
+    NSPredicate *pwd = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pwdRegex];
+    return [pwd evaluateWithObject:originalPwd];
+}
 
 @end
