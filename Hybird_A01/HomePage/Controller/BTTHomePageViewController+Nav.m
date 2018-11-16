@@ -15,6 +15,9 @@
 #import "BTTTabbarController+VoiceCall.h"
 #import "BTTVoiceCallViewController.h"
 #import "BTTLoginOrRegisterViewController.h"
+#import "BTTMakeCallNoLoginView.h"
+#import "BTTHomePageViewController+LoadData.h"
+#import "BTTMakeCallLoginView.h"
 
 
 static const char *BTTHeaderViewKey = "headerView";
@@ -117,29 +120,11 @@ static const char *BTTHeaderViewKey = "headerView";
     }];
     
     BTTPopoverAction *action3 = [BTTPopoverAction actionWithImage:ImageNamed(@"callBack") title:@"VIP经理回拨" handler:^(BTTPopoverAction *action) {
-        
-        NSString *url = nil;
-        NSMutableDictionary *params = @{}.mutableCopy;
         if ([IVNetwork userInfo]) {
-            url = @"public/phones/memberCall";
-            [params setValue:@"15234234234" forKey:@"phone"];
-            [params setValue:@"memberphone" forKey:@"phone_type"];
+            [self showCallBackViewLogin];
         } else {
-            url = @"phones/customCall";
-            [params setValue:@"15234234234" forKey:@"phone_number"];
+            [self showCallBackViewNoLogin:BTTAnimationPopStyleScale];
         }
-        weakSelf(weakSelf)
-        [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-        [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
-            __strong typeof(weakSelf)strongSelf = weakSelf;
-            [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
-            if (result.status) {
-                [MBProgressHUD showSuccess:@"申请成功，请等待回电" toView:nil];
-            } else {
-                NSString *errInfo = [NSString stringWithFormat:@"申请失败,%@",result.message];
-                [MBProgressHUD showError:errInfo toView:nil];
-            }
-        }];
     }];
     
     BTTPopoverAction *action4 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineVoice") title:@"语音聊天" handler:^(BTTPopoverAction *action) {
@@ -158,6 +143,50 @@ static const char *BTTHeaderViewKey = "headerView";
     popView.arrowStyle = BTTPopoverViewArrowStyleTriangle;
     [popView showToPoint:CGPointMake(SCREEN_WIDTH - 27, KIsiPhoneX ? 88 : 64) withActions:@[action1,action2,action3,action4,action5]];
     
+}
+
+- (void)showCallBackViewNoLogin:(BTTAnimationPopStyle)animationPopStyle {
+    BTTMakeCallNoLoginView *customView = [BTTMakeCallNoLoginView viewFromXib];
+    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:animationPopStyle dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    weakSelf(weakSelf);
+    customView.callBackBlock = ^(NSString *phone) {
+        strongSelf(strongSelf);
+        [popView dismiss];
+        [strongSelf makeCallWithPhoneNum:phone];
+    } ;
+}
+
+- (void)showCallBackViewLogin {
+    BTTMakeCallLoginView *customView = [BTTMakeCallLoginView viewFromXib];
+    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    weakSelf(weakSelf);
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    customView.btnBlock = ^(UIButton *btn) {
+        strongSelf(strongSelf);
+        if (btn.tag == 50010) {
+            if (![IVNetwork userInfo].phone.length) {
+                [MBProgressHUD showMessagNoActivity:@"您未绑定手机, 请选择其他电话" toView:nil];
+                return;
+            }
+            [popView dismiss];
+            [strongSelf makeCallWithPhoneNum:[IVNetwork userInfo].phone];
+        } else {
+            [popView dismiss];
+            [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
+        }
+        
+    };
 }
 
 #pragma mark - JXRegisterManagerDelegate

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLoginOrRegisterViewController (UI)
 
-- (void)showPopView;
+- (void)showPopViewWithAccount:(NSString *)account;
 
 @end
 

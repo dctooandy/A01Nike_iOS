@@ -36,6 +36,7 @@
         self.title = @"登录";
     } else {
         self.title = @"立即开户";
+        [self loadVerifyCode];
     }
     [self setupCollectionView];
     [self setupElements];

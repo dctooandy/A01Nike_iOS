@@ -13,6 +13,7 @@
 #import "BTTHomePageHeaderModel.h"
 #import "BTTActivityModel.h"
 #import "BTTAmountModel.h"
+#import "BTTMakeCallSuccessView.h"
 
 static const char *noticeStrKey = "noticeStr";
 
@@ -258,6 +259,43 @@ static const char *BTTNextGroupKey = "nextGroup";
     [self setupElements];
 }
 
+- (void)makeCallWithPhoneNum:(NSString *)phone {
+    NSString *url = nil;
+    NSMutableDictionary *params = @{}.mutableCopy;
+    if ([IVNetwork userInfo]) {
+        url = BTTCallBackMemberAPI;
+        [params setValue:phone forKey:@"phone"];
+        [params setValue:@"memberphone" forKey:@"phone_type"];
+    } else {
+        url = BTTCallBackCustomAPI;
+        [params setValue:phone forKey:@"phone_number"];
+    }
+    [self showLoading];
+    [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+        [self hideLoading];
+        if (result.status) {
+            [self showCallBackSuccessView];
+        } else {
+            NSString *errInfo = [NSString stringWithFormat:@"申请失败,%@",result.message];
+            [MBProgressHUD showError:errInfo toView:nil];
+        }
+    }];
+}
+
+- (void)showCallBackSuccessView {
+    BTTMakeCallSuccessView *customView = [BTTMakeCallSuccessView viewFromXib];
+    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    customView.btnBlock = ^(UIButton *btn) {
+        [popView dismiss];
+    };
+    
+}
 
 #pragma mark - 动态添加属性
 
