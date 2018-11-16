@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTBindingMobileBtnCell : BTTBaseCollectionViewCell
 
-
+@property (weak, nonatomic) IBOutlet UIButton *btn;
 @property (nonatomic, assign) BTTButtonType buttonType;
 
 

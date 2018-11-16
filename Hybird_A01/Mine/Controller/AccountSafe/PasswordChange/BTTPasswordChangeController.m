@@ -50,10 +50,14 @@
         return cell;
     } else if (indexPath.row == 4) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        weakSelf(weakSelf)
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf submitChange];
+        };
         return cell;
     } else {
         BTTPasswordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPasswordCell" forIndexPath:indexPath];
-        NSLog(@"%@",@(indexPath.row));
+        [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row - 2];
         cell.model = model;
         return cell;
@@ -62,7 +66,6 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
     NSLog(@"%zd", indexPath.item);
 }
 
@@ -115,11 +118,71 @@
         [self.collectionView reloadData];
     });
 }
-
+- (void)textChanged:(UITextField *)textField
+{
+    BOOL enabel = ([PublicMethod isValidatePwd:[self getLoginPwd]] && [PublicMethod isValidatePwd:[self getNewPwd]]);
+    [self getSubmitBtn].enabled = enabel;
+    
+}
+- (NSString *)getLoginPwd
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    BTTPasswordCell *loginPwdCell = (BTTPasswordCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    NSString *loginPwd = loginPwdCell.textField.text;
+    return loginPwd;
+}
+- (NSString *)getNewPwd
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+    BTTPasswordCell *newCell = (BTTPasswordCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    NSString *new = newCell.textField.text;
+    return new;
+}
+- (UIButton *)getSubmitBtn
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:0];
+    BTTBindingMobileBtnCell *btnsCell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return btnsCell.btn;
+}
+- (void)submitChange
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    BTTPasswordChangeBtnsCell *btnsCell = (BTTPasswordChangeBtnsCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    BOOL isPT = btnsCell.PTPwdBtn.selected;
+    NSString *loginPwd = [self getLoginPwd];
+    NSString *new = [self getNewPwd];
+    if (![PublicMethod isValidatePwd:loginPwd]) {
+        [MBProgressHUD showError:@"输入的登录密码格式有误！"toView:self.view];
+        return;
+    }
+    if (![PublicMethod isValidatePwd:new]) {
+        [MBProgressHUD showError:@"输入的新密码格式有误！"toView:self.view];
+        return;
+    }
+    NSString *url = isPT ? @"users/updatePTPwd" : @"public/users/updatePassword";
+    NSMutableDictionary *params = @{}.mutableCopy;
+    if (isPT) {
+        params[@"pt_key"] = new;
+        params[@"pwd"] = loginPwd;
+    } else {
+        params[@"oldpwd"] = loginPwd;
+        params[@"pwd"] = new;
+    }
+    weakSelf(weakSelf)
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        if (result.status) {
+            [MBProgressHUD showSuccess:@"密码修改成功!" toView:nil];
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        } else {
+            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }
+    }];
+}
 - (NSMutableArray *)sheetDatas {
     if (!_sheetDatas) {
         _sheetDatas = [NSMutableArray array];
-        
         NSArray *titles = @[@"登录密码",@"新密码"];
         NSArray  *placeholders = @[@"请输入当前账号密码",@"8-10位字码和数字组合"];
         for (NSString *title in titles) {

@@ -37,8 +37,7 @@
     _model = model;
     self.nameLabel.text = model.name;
     self.textField.placeholder = model.iconName;
-    self.textField.text = model.val;
-    [self.textField setEnabled:model.canEdit];
+    self.textField.text = model.desc;
     if ([model.name isEqualToString:@"性别"] ||
         [model.name isEqualToString:@"出生日期"] ||
         [model.name isEqualToString:@"开户行"] ||
@@ -56,7 +55,11 @@
         self.mineArrowsType = BTTMineArrowsTypeNoHidden;
         self.textField.userInteractionEnabled = NO;
     } else {
-        if ([model.name isEqualToString:@"持卡人姓名"]) {
+        if ([model.name isEqualToString:@"持卡人姓名"] ||
+            (([model.name isEqualToString:@"预留信息"] ||
+              [model.name isEqualToString:@"真实姓名"] ||
+              [model.name isEqualToString:@"邮箱地址"]) &&
+             model.desc.length != 0)) {
             self.textField.userInteractionEnabled = NO;
         } else {
             self.textField.userInteractionEnabled = YES;

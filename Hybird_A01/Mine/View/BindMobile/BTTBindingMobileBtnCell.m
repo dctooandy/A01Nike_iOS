@@ -10,8 +10,6 @@
 
 @interface BTTBindingMobileBtnCell ()
 
-@property (weak, nonatomic) IBOutlet UIButton *btn;
-
 @property (weak, nonatomic) IBOutlet UILabel *warningLabel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *Yconstants;

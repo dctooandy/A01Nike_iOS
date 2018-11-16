@@ -12,8 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *loginPwdBtn;
 
-@property (weak, nonatomic) IBOutlet UIButton *PTPwdBtn;
-
 @property (weak, nonatomic) IBOutlet UIImageView *loginArrowIcon;
 
 @property (weak, nonatomic) IBOutlet UIImageView *PTArrowIcon;

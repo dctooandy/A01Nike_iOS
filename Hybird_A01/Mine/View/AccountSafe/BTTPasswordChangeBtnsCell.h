@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTPasswordChangeBtnsCell : BTTBaseCollectionViewCell
-
+@property (weak, nonatomic) IBOutlet UIButton *PTPwdBtn;
 @end
 
 NS_ASSUME_NONNULL_END
