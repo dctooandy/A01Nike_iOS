@@ -143,6 +143,7 @@
 		3A9E4C3A219E509100E7D8C0 /* BTTBaseAnimationPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C38219E509100E7D8C0 /* BTTBaseAnimationPopView.m */; };
 		3A9E4C3D219E55CF00E7D8C0 /* BTTMakeCallSuccessView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C3C219E55CF00E7D8C0 /* BTTMakeCallSuccessView.m */; };
 		3A9E4C3F219E55E200E7D8C0 /* BTTMakeCallSuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E4C3E219E55E200E7D8C0 /* BTTMakeCallSuccessView.xib */; };
+		3A9E4C45219E9CAD00E7D8C0 /* BTTBindStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C44219E9CAD00E7D8C0 /* BTTBindStatusModel.m */; };
 		3AAE81FA219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAE81F8219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m */; };
 		3AAE8214219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAE81FC219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m */; };
 		3AAE8215219A738B003EC8B0 /* BTTRegisterQuickAutoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAE81FE219A738B003EC8B0 /* BTTRegisterQuickAutoCell.m */; };
@@ -741,6 +742,8 @@
 		3A9E4C3B219E55CF00E7D8C0 /* BTTMakeCallSuccessView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTMakeCallSuccessView.h; sourceTree = "<group>"; };
 		3A9E4C3C219E55CF00E7D8C0 /* BTTMakeCallSuccessView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMakeCallSuccessView.m; sourceTree = "<group>"; };
 		3A9E4C3E219E55E200E7D8C0 /* BTTMakeCallSuccessView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTMakeCallSuccessView.xib; sourceTree = "<group>"; };
+		3A9E4C43219E9CAD00E7D8C0 /* BTTBindStatusModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTBindStatusModel.h; sourceTree = "<group>"; };
+		3A9E4C44219E9CAD00E7D8C0 /* BTTBindStatusModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTBindStatusModel.m; sourceTree = "<group>"; };
 		3AAE81F8219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLoginOrRegisterViewController.m; sourceTree = "<group>"; };
 		3AAE81F9219A737E003EC8B0 /* BTTLoginOrRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLoginOrRegisterViewController.h; sourceTree = "<group>"; };
 		3AAE81FC219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLoginOrRegisterHeaderCell.m; sourceTree = "<group>"; };
@@ -2216,6 +2219,8 @@
 			children = (
 				3ADD2387217819D500FA959A /* BTTMeMainModel.h */,
 				3ADD2388217819D500FA959A /* BTTMeMainModel.m */,
+				3A9E4C43219E9CAD00E7D8C0 /* BTTBindStatusModel.h */,
+				3A9E4C44219E9CAD00E7D8C0 /* BTTBindStatusModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3078,7 +3083,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
 				"${PODS_ROOT}/BRPickerView/BRPickerView/AddressPickerView/BRPickerView.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
@@ -3089,7 +3094,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3250,6 +3255,7 @@
 				3AAE8215219A738B003EC8B0 /* BTTRegisterQuickAutoCell.m in Sources */,
 				3AD9CF38216C7D9400685B43 /* HAConstant.m in Sources */,
 				3AD9CF7B216F400A00685B43 /* BTTAppIconModel.m in Sources */,
+				3A9E4C45219E9CAD00E7D8C0 /* BTTBindStatusModel.m in Sources */,
 				3AD9CF32216C7AC100685B43 /* HDSocketManager.m in Sources */,
 				3AAE821B219A738B003EC8B0 /* BTTLoginOrRegisterTypeSelectCell.m in Sources */,
 				3AE1EB1C21805B460073A32D /* BTTAddCardController+LoadData.m in Sources */,

@@ -132,6 +132,10 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTCreditsTotalAvailable     @"/public/credits/totalAvailable"
 
+// 查询账号绑定状态
+
+#define BTTIsBindStatusAPI           @"/public/verify/isNewBind"
+
 
 /********************************************常用宏*********************************************************/
 

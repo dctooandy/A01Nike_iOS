@@ -7,12 +7,15 @@
 //
 
 #import "BTTCollectionViewController.h"
+#import "BTTBindStatusModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTMineViewController : BTTCollectionViewController
 
 @property (nonatomic, assign) BOOL isShowHidden;
+
+@property (nonatomic, strong) BTTBindStatusModel *statusModel;
 
 - (void)setupElements;
 

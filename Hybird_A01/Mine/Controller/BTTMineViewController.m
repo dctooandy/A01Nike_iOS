@@ -36,6 +36,7 @@
 #import "BTTSettingsController.h"
 #import "BTTXimaController.h"
 #import "BTTLoginOrRegisterViewController.h"
+#import "BTTBindStatusModel.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -78,6 +79,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    if ([IVNetwork userInfo]) {
+        [self loadBindStatus];
+    }
 }
 
 - (void)setupCollectionView {

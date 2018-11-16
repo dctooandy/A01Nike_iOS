@@ -28,6 +28,9 @@
 }
 
 - (IBAction)blanceBtnClick:(UIButton *)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
 }
 
 @end
