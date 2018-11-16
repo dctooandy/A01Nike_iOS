@@ -35,6 +35,8 @@
 #import "BTTBaseWebViewController.h"
 #import "BTTSettingsController.h"
 #import "BTTXimaController.h"
+#import "BTTLoginOrRegisterViewController.h"
+#import "BTTBindStatusModel.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -77,6 +79,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    if ([IVNetwork userInfo]) {
+        [self loadBindStatus];
+    }
 }
 
 - (void)setupCollectionView {
@@ -194,6 +199,11 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     NSLog(@"%@",@(indexPath.row));
+    if (![IVNetwork userInfo]) {
+        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
     if (indexPath.row == 2) {
         if (self.isChangeMobile) {
             BTTChangeMobileController *changeMobile = [[BTTChangeMobileController alloc] init];

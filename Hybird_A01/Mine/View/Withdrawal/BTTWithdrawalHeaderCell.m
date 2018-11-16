@@ -8,11 +8,29 @@
 
 #import "BTTWithdrawalHeaderCell.h"
 
+@interface BTTWithdrawalHeaderCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *totalAvailableLabel;
+
+
+@end
+
 @implementation BTTWithdrawalHeaderCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
+}
+
+- (void)setTotalAvailable:(NSString *)totalAvailable {
+    _totalAvailable = totalAvailable;
+    self.totalAvailableLabel.text = _totalAvailable;
+}
+
+- (IBAction)blanceBtnClick:(UIButton *)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
 }
 
 @end

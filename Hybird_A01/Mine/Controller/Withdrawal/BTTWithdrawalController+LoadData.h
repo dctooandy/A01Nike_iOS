@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
 
+- (void)loadCreditsTotalAvailable;
+
 @end
 
 NS_ASSUME_NONNULL_END

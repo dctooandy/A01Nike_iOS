@@ -106,6 +106,22 @@
     [self.collectionView reloadData];
 }
 
+- (void)loadBindStatus {
+    NSString *typeList = @"phone;email;bank;btc";
+    NSDictionary *pramas = @{@"typeList":typeList};
+    [IVNetwork sendRequestWithSubURL:BTTIsBindStatusAPI paramters:pramas completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+        if (result.code_http == 200) {
+            if (result.data) {
+                BTTBindStatusModel *model = [[BTTBindStatusModel alloc] initWithDictionary:result.data error:nil];
+                self.statusModel = model;
+                [self.collectionView reloadData];
+            }
+        }
+        
+    }];
+}
+
 #pragma mark - 动态添加属性
 
 - (NSMutableArray *)personalInfos {

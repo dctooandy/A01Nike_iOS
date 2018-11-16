@@ -16,8 +16,11 @@
 #import "BTTWithdrawalCardSelectCell.h"
 #import <BRPickerView/BRPickerView.h>
 #import "BTTWithdrawalSuccessController.h"
+#import "BTTAccountBalanceController.h"
 
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate>
+
+
 
 @end
 
@@ -26,8 +29,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"取款";
+    self.totalAvailable = @"-";
     [self setupCollectionView];
     [self loadMainData];
+    [self loadCreditsTotalAvailable];
 }
 
 - (void)setupCollectionView {
@@ -47,6 +52,13 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         BTTWithdrawalHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalHeaderCell" forIndexPath:indexPath];
+        cell.totalAvailable = self.totalAvailable;
+        weakSelf(weakSelf);
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            strongSelf(strongSelf);
+            BTTAccountBalanceController *accountBalance = [[BTTAccountBalanceController alloc] init];
+            [strongSelf.navigationController pushViewController:accountBalance animated:YES];
+        };
         return cell;
     } else if (indexPath.row == 1) {
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
