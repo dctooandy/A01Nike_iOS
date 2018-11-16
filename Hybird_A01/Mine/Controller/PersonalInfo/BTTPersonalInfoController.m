@@ -41,6 +41,11 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.sheetDatas.count) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        cell.btn.enabled = YES;
+        weakSelf(weakSelf)
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf submitChange];
+        };
         return cell;
     } else {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
@@ -69,8 +74,6 @@
         } cancelBlock:^{
             NSLog(@"点击了背景或取消按钮");
         }];
-    } else if (indexPath.item == 7) {//点击提交
-        [self submitChange];
     }
 }
 
@@ -151,15 +154,23 @@
             params[@"real_name"] = realNameTF.text;
         }
     }
-    BOOL isOldEmail = ([IVNetwork userInfo].email.length !=0 && [emailTF.text isEqualToString:[IVNetwork userInfo].email]);
-    if (!isOldEmail) {
-        if ((emailTF.text.length !=0 && ![PublicMethod isValidateEmail:emailTF.text])) {
+    if ([IVNetwork userInfo].email.length == 0) {
+        if (![PublicMethod isValidateEmail:emailTF.text]) {
             [MBProgressHUD showError:@"输入的邮箱地址格式有误！" toView:self.view];
             return;
         } else {
             params[@"email"] = emailTF.text;
         }
     }
+//    BOOL isOldEmail = ([IVNetwork userInfo].email.length !=0 && [emailTF.text isEqualToString:[IVNetwork userInfo].email]);
+//    if (!isOldEmail) {
+//        if ((emailTF.text.length !=0 && ![PublicMethod isValidateEmail:emailTF.text])) {
+//            [MBProgressHUD showError:@"输入的邮箱地址格式有误！" toView:self.view];
+//            return;
+//        } else {
+//            params[@"email"] = emailTF.text;
+//        }
+//    }
     if (sexTF.text.length != 0 ) {
         params[@"sex"] = [sexTF.text isEqualToString:@"男"] ? @"M" : @"F";
     }
@@ -167,8 +178,8 @@
         params[@"birth_date"] = [birthdayTF.text stringByAppendingString:@" 00:00:00"];
     }
     
-    params[@"address"] = addressTF.text;
-    params[@"remarks"] = remarkTF.text;
+    params[@"address"] = addressTF.text ? addressTF.text : @"";
+    params[@"remarks"] = remarkTF.text ? remarkTF.text : @"";
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     [IVNetwork sendRequestWithSubURL:@"public/users/completeInfo" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {

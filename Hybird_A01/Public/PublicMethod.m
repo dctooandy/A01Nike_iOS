@@ -775,7 +775,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
 }
 /** 正则表达式验证密码是否合法 YES 合法，NO 不合法 */
 + (BOOL)isValidatePwd:(NSString *)originalPwd{
-    NSString *pwdRegex = @"^[a-zA-Z0-9]{6,16}";
+    NSString *pwdRegex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[a-zA-Z0-9]{8,10}";
     NSPredicate *pwd = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pwdRegex];
     return [pwd evaluateWithObject:originalPwd];
 }
