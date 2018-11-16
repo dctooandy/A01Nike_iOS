@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 
+@property (weak, nonatomic) IBOutlet UIButton *sendBtn;
+
 @end
 
 NS_ASSUME_NONNULL_END

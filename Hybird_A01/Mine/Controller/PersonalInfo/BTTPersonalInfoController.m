@@ -139,7 +139,7 @@
     
     NSMutableDictionary *params = @{}.mutableCopy;
     if ([IVNetwork userInfo].verify_code.length == 0) {
-        if (![PublicMethod leaveMessageDisable:retentionTF.text]) {
+        if (![PublicMethod isValidateLeaveMessage:retentionTF.text]) {
             [MBProgressHUD showError:@"输入的预留信息格式有误！" toView:self.view];
             return;
         } else {

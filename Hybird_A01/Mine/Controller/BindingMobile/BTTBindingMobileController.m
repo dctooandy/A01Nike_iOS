@@ -47,18 +47,27 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    weakSelf(weakSelf)
     if (indexPath.row == 0) {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
+        [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
         return cell;
     } else if (indexPath.row == 1) {
         BTTBindingMobileTwoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileTwoCell" forIndexPath:indexPath];
+        [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf sendCode];
+        };
         return cell;
     } else {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf submitBind];
+        };
         return cell;
     }
    
@@ -133,6 +142,70 @@
         [self.collectionView reloadData];
     });
 }
-
+- (void)textChanged:(UITextField *)textField
+{
+    if (textField == [self getPhoneTF]) {
+        [self getSendBtn].enabled = [PublicMethod isValidatePhone:[self getPhoneTF].text];
+    }
+    [self getSubmitBtn].enabled = ([PublicMethod isValidatePhone:[self getPhoneTF].text] && ([self getCodeTF].text.length != 0));
+}
+- (UITextField *)getPhoneTF
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.textField;
+}
+- (UITextField *)getCodeTF
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    BTTBindingMobileTwoCell *cell = (BTTBindingMobileTwoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.textField;
+}
+- (UIButton *)getSubmitBtn
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.btn;
+}
+- (UIButton *)getSendBtn
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    BTTBindingMobileTwoCell *cell = (BTTBindingMobileTwoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.sendBtn;
+}
+- (void)sendCode
+{
+    if (![PublicMethod isValidatePhone:[self getPhoneTF].text]) {
+        [MBProgressHUD showError:@"请输入正确的手机号" toView:self.view];
+        return;
+    }
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"type"] = @"1";
+    params[@"v_type"] = @"1";
+    params[@"send_to"] = [self getPhoneTF].text;
+    [IVNetwork sendRequestWithSubURL:@"verify/send" paramters:params.copy completionBlock:nil];
+}
+- (void)submitBind
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"type"] = @"1";
+    params[@"v_type"] = @"1";
+    params[@"send_to"] = [self getPhoneTF].text;
+    params[@"code"] = [self getCodeTF].text;
+    weakSelf(weakSelf)
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [IVNetwork sendRequestWithSubURL:@"A01/verify/newBind" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        if (result.status && result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
+            [MBProgressHUD showSuccess:@"绑定成功!" toView:nil];
+            NSString *phone = result.data[@"val"];
+            IVUserInfoModel *userInfo = [[IVUserInfoModel alloc] initWithDictionary:@{@"phone" : phone} error:nil];
+            [IVNetwork updateUserInfo:userInfo];
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        } else {
+            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }
+    }];
+}
 
 @end
