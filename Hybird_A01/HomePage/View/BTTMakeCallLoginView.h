@@ -1,8 +1,8 @@
 //
-//  BTTUnlockPopView.h
+//  BTTMakeCallLoginView.h
 //  Hybird_A01
 //
-//  Created by Domino on 13/11/2018.
+//  Created by Domino on 15/11/2018.
 //  Copyright © 2018 BTT. All rights reserved.
 //
 
@@ -10,10 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BTTUnlockPopView : BTTBaseAnimationPopView
-
-
-@property (nonatomic, copy) NSString *account;
+@interface BTTMakeCallLoginView : BTTBaseAnimationPopView
 
 
 @end

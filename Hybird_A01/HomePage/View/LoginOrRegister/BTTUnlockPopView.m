@@ -72,8 +72,8 @@
             
             if (result.data) {
                 [MBProgressHUD showMessagNoActivity:@"已解锁，请重新登录！" toView:nil];
-                if (_dismissBlock) {
-                    _dismissBlock();
+                if (self.dismissBlock) {
+                    self.dismissBlock();
                 }
             } else {
                 [MBProgressHUD showMessagNoActivity:@"验证失败，请重试！" toView:nil];

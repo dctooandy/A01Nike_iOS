@@ -124,6 +124,9 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTStepThreeUpdatePassword @"/public/forgot/stepThreeUpdatePassword"
 #define BTTUnlockAccount       @"/A01/users/unlockAccount"
 
+#define BTTCallBackMemberAPI         @"/public/phones/memberCall"
+#define BTTCallBackCustomAPI         @"/phones/customCall"
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)  ([UIFont systemFontOfSize:X])

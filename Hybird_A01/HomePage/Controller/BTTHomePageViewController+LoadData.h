@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark 加载所有数据
 - (void)loadDataOfHomePage;
 
+- (void)makeCallWithPhoneNum:(NSString *)phone;
+
 @end
 
 NS_ASSUME_NONNULL_END
