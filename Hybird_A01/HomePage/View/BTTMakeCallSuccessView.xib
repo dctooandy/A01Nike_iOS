@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BTTMakeCallSuccessView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="658"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homepage_bg" translatesAutoresizingMaskIntoConstraints="NO" id="Soj-xs-KMD">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="658"/>
+                </imageView>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i0l-2u-cza">
+                    <rect key="frame" x="30" y="218.5" width="315" height="221"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="申请成功, 1分钟内给您回电, 如客服满线, 3分钟未联系您, 请重提回拨申请" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1jA-EK-EbD">
+                            <rect key="frame" x="40" y="40" width="235" height="57.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVI-lC-jNv">
+                            <rect key="frame" x="40" y="127.5" width="235" height="51"/>
+                            <state key="normal" backgroundImage="homepage_btn_normal"/>
+                            <connections>
+                                <action selector="confirmClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="5ZL-kA-zaM"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="确定" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQE-ex-MzJ">
+                            <rect key="frame" x="141" y="137.5" width="33" height="19.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="hVI-lC-jNv" firstAttribute="top" secondItem="nQE-ex-MzJ" secondAttribute="top" constant="-10" id="4z7-pX-zNq"/>
+                        <constraint firstAttribute="trailing" secondItem="1jA-EK-EbD" secondAttribute="trailing" constant="40" id="5UG-Wk-rnv"/>
+                        <constraint firstItem="1jA-EK-EbD" firstAttribute="top" secondItem="i0l-2u-cza" secondAttribute="top" constant="40" id="CnV-gr-QI3"/>
+                        <constraint firstItem="nQE-ex-MzJ" firstAttribute="centerX" secondItem="hVI-lC-jNv" secondAttribute="centerX" id="Sv8-VA-hqB"/>
+                        <constraint firstItem="1jA-EK-EbD" firstAttribute="leading" secondItem="i0l-2u-cza" secondAttribute="leading" constant="40" id="b0l-ks-0uw"/>
+                        <constraint firstAttribute="height" constant="221" id="mFb-1L-05y"/>
+                        <constraint firstItem="hVI-lC-jNv" firstAttribute="leading" secondItem="i0l-2u-cza" secondAttribute="leading" constant="40" id="q3g-O1-3Aj"/>
+                        <constraint firstItem="hVI-lC-jNv" firstAttribute="top" secondItem="1jA-EK-EbD" secondAttribute="bottom" constant="30" id="vhw-tp-gBe"/>
+                        <constraint firstAttribute="trailing" secondItem="hVI-lC-jNv" secondAttribute="trailing" constant="40" id="x65-4t-yb8"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Soj-xs-KMD" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="8Xy-Vc-l7J"/>
+                <constraint firstItem="Soj-xs-KMD" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="JHz-Pa-n5A"/>
+                <constraint firstItem="Soj-xs-KMD" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="MTv-mh-s9H"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="i0l-2u-cza" secondAttribute="trailing" constant="30" id="WVc-MC-oWd"/>
+                <constraint firstItem="i0l-2u-cza" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="jKW-LB-Tu1"/>
+                <constraint firstItem="Soj-xs-KMD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="obQ-AG-Iem"/>
+                <constraint firstItem="i0l-2u-cza" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="vSm-k1-sDH"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="bgImageView" destination="Soj-xs-KMD" id="aVa-d6-qmv"/>
+                <outlet property="bgView" destination="i0l-2u-cza" id="1D1-kd-IdV"/>
+            </connections>
+            <point key="canvasLocation" x="-217" y="168"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="homepage_bg" width="375" height="667"/>
+        <image name="homepage_btn_normal" width="229" height="51"/>
+    </resources>
+</document>

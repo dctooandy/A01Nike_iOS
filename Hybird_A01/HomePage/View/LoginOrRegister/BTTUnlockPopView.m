@@ -36,9 +36,9 @@
 
 - (IBAction)confrimClick:(UIButton *)sender {
     if (self.nameTextField.text.length || self.phoneTextField.text.length || self.infoTextField.text.length) {
-        
+        [self unluckAccountWithName:self.nameTextField.text phone:self.phoneTextField.text info:self.infoTextField.text loginName:self.account];
     } else {
-        
+        [MBProgressHUD showMessagNoActivity:@"请输入任一信息解锁" toView:nil];
     }
 }
 
@@ -48,6 +48,39 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField endEditing:YES];
     return YES;
+}
+
+- (void)unluckAccountWithName:(NSString *)name
+                        phone:(NSString *)phone
+                         info:(NSString *)info
+                    loginName:(NSString *)loginName {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (name.length) {
+        [params setObject:name forKey:@"realname"];
+    }
+    if (phone.length) {
+        [params setObject:phone forKey:@"bingphone"];
+    }
+    if (info.length) {
+        [params setObject:info forKey:@"reserved"];
+    }
+    [params setObject:loginName forKey:@"loginname"];
+    
+    [IVNetwork sendRequestWithSubURL:BTTUnlockAccount paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+        if (result.code_http == 200) {
+            
+            if (result.data) {
+                [MBProgressHUD showMessagNoActivity:@"已解锁，请重新登录！" toView:nil];
+                if (self.dismissBlock) {
+                    self.dismissBlock();
+                }
+            } else {
+                [MBProgressHUD showMessagNoActivity:@"验证失败，请重试！" toView:nil];
+            }
+        }
+        
+    }];
 }
 
 
