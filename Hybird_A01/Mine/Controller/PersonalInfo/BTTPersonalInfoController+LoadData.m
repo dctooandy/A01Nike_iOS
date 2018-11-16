@@ -27,9 +27,7 @@
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;
         model.iconName = placeholders[index];
-        model.val = values[index];
-        BOOL canEdit = !(([name isEqualToString:@"预留信息"] || [name isEqualToString:@"真实姓名"]) && model.val.length != 0);
-        model.canEdit = canEdit;
+        model.desc = values[index];
         [self.sheetDatas addObject:model];
     }
     [self setupElements];
