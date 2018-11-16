@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTAccountBalanceController : BTTCollectionViewController
 
-- (void)setupElements;
 
 @end
 

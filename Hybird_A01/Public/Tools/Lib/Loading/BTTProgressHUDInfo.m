@@ -64,11 +64,11 @@
     }
     CGFloat contentX = (SCREEN_WIDTH - contentW) / 2;
     CGFloat contentY = 0.0f;
-    if (frame.size.height != SCREEN_HEIGHT) {
-        contentY = (frame.size.height - contentH) / 2 - (KIsiPhoneX ? 88 : 64);
-    } else {
-        contentY = (frame.size.height - contentH) / 2;
-    }
+//    if (frame.size.height == SCREEN_HEIGHT) {
+        contentY = (frame.size.height - contentH - (KIsiPhoneX ? 88 : 64)) / 2 ;
+//    } else {
+//        contentY = (frame.size.height - contentH) / 2;
+//    }
     
     
     self.contentViewFrame = CGRectMake(contentX, contentY, contentW, contentH);

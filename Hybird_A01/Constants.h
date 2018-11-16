@@ -124,8 +124,18 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTStepThreeUpdatePassword @"/public/forgot/stepThreeUpdatePassword"
 #define BTTUnlockAccount       @"/A01/users/unlockAccount"
 
+// 电话回拨API
 #define BTTCallBackMemberAPI         @"/public/phones/memberCall"
 #define BTTCallBackCustomAPI         @"/phones/customCall"
+
+// 取款额度查询接口
+
+#define BTTCreditsTotalAvailable     @"/public/credits/totalAvailable"
+
+// 查询账号绑定状态
+
+#define BTTIsBindStatusAPI           @"/public/verify/isNewBind"
+
 
 /********************************************常用宏*********************************************************/
 

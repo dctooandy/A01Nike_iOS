@@ -26,7 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-- (void) loadMeAllData;
+- (void)loadMeAllData;
+
+- (void)loadBindStatus;
 
 @end
 
