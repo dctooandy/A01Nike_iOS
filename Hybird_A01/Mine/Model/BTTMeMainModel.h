@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *url;
 
+@property (nonatomic, copy) NSString *val; //textFeild的值
+
+@property (nonatomic, assign) BOOL canEdit; //textFeild是否运行编辑
 @end
 
 NS_ASSUME_NONNULL_END

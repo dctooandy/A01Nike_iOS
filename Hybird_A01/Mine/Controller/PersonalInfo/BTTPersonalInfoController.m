@@ -69,6 +69,8 @@
         } cancelBlock:^{
             NSLog(@"点击了背景或取消按钮");
         }];
+    } else if (indexPath.item == 7) {//点击提交
+        [self submitChange];
     }
 }
 
@@ -121,5 +123,70 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
+}
+- (void)submitChange
+{
+    UITextField *retentionTF = [self getCellTextFieldWithIndex:0];
+    UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
+    UITextField *sexTF = [self getCellTextFieldWithIndex:2];
+    UITextField *birthdayTF = [self getCellTextFieldWithIndex:3];
+    UITextField *emailTF = [self getCellTextFieldWithIndex:4];
+    UITextField *addressTF = [self getCellTextFieldWithIndex:5];
+    UITextField *remarkTF = [self getCellTextFieldWithIndex:6];
+    
+    NSMutableDictionary *params = @{}.mutableCopy;
+    if ([IVNetwork userInfo].verify_code.length == 0) {
+        if (![PublicMethod leaveMessageDisable:retentionTF.text]) {
+            [MBProgressHUD showError:@"输入的预留信息格式有误！" toView:self.view];
+            return;
+        } else {
+            params[@"verify_code"] = retentionTF.text;
+        }
+    }
+    if ([IVNetwork userInfo].real_name.length == 0) {
+        if (![PublicMethod checkRealName:realNameTF.text]) {
+            [MBProgressHUD showError:@"输入的真实姓名格式有误！" toView:self.view];
+            return;
+        } else {
+            params[@"real_name"] = realNameTF.text;
+        }
+    }
+    BOOL isOldEmail = ([IVNetwork userInfo].email.length !=0 && [emailTF.text isEqualToString:[IVNetwork userInfo].email]);
+    if (!isOldEmail) {
+        if ((emailTF.text.length !=0 && ![PublicMethod isValidateEmail:emailTF.text])) {
+            [MBProgressHUD showError:@"输入的邮箱地址格式有误！" toView:self.view];
+            return;
+        } else {
+            params[@"email"] = emailTF.text;
+        }
+    }
+    if (sexTF.text.length != 0 ) {
+        params[@"sex"] = [sexTF.text isEqualToString:@"男"] ? @"M" : @"F";
+    }
+    if (birthdayTF.text.length != 0) {
+        params[@"birth_date"] = [birthdayTF.text stringByAppendingString:@" 00:00:00"];
+    }
+    
+    params[@"address"] = addressTF.text;
+    params[@"remarks"] = remarkTF.text;
+    weakSelf(weakSelf)
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [IVNetwork sendRequestWithSubURL:@"public/users/completeInfo" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        if (result.status) {
+            [MBProgressHUD showSuccess:@"完善资料成功!" toView:nil];
+            IVUserInfoModel *userInfo = [[IVUserInfoModel alloc] initWithDictionary:result.data error:nil];
+            [IVNetwork updateUserInfo:userInfo];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }
+    }];
+}
+- (UITextField *)getCellTextFieldWithIndex:(NSInteger)index
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.textField;
 }
 @end
