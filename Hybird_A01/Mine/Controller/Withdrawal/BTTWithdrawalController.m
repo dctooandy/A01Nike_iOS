@@ -19,6 +19,8 @@
 
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate>
 
+
+
 @end
 
 @implementation BTTWithdrawalController
@@ -26,8 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"取款";
+    self.totalAvailable = @"-";
     [self setupCollectionView];
     [self loadMainData];
+    [self loadCreditsTotalAvailable];
 }
 
 - (void)setupCollectionView {
@@ -47,6 +51,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         BTTWithdrawalHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalHeaderCell" forIndexPath:indexPath];
+        cell.totalAvailable = self.totalAvailable;
         return cell;
     } else if (indexPath.row == 1) {
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];

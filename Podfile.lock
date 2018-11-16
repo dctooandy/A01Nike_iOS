@@ -27,19 +27,15 @@ PODS:
   - IVGameLibrary (0.0.16):
     - IVGameLibrary/GameController (= 0.0.16)
   - IVGameLibrary/GameController (0.0.16)
-
   - IVNetworkLibrary (0.0.16):
     - AFNetworking (~> 3.2.1)
     - FCUUID (~> 1.3.1)
     - IVNetworkLibrary/IVNetwork (= 0.0.16)
-
     - JSONModel (~> 1.7.0)
     - UICKeyChainStore (~> 2.1.2)
     - YTKNetwork (~> 2.0.4)
     - ZipArchive (~> 1.4.0)
-
   - IVNetworkLibrary/IVNetwork (0.0.16):
-
     - AFNetworking (~> 3.2.1)
     - FCUUID (~> 1.3.1)
     - JSONModel (~> 1.7.0)
@@ -130,9 +126,7 @@ CHECKOUT OPTIONS:
     :commit: 7420530e2c7360aa4a3052d166c3736a85615216
     :git: http://10.66.72.115/mobile-iOS/IVGameLibrary.git
   IVNetworkLibrary:
-
     :commit: 26ae2ce363445e66f4c18d35776b2152e1391f87
-
     :git: http://10.66.72.115/mobile-iOS/IVNetworkLibrary.git
   IVWebViewLibrary:
     :commit: 6260f770718d5fd59b3155f17ef93ef042f63c23
@@ -146,9 +140,7 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GJRedDot: de661162a700f3395f0cd70f3629e4d3abe8e181
   IVGameLibrary: b1d9c989f45dbe064fc7d8de336e29b04ef1b463
-
   IVNetworkLibrary: 9e4d72a19775f4e13a4773860f0bf6a5f0836f95
-
   IVWebViewLibrary: c4eeba7887eac06f8839976f01cb2c2111dbcdc2
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201

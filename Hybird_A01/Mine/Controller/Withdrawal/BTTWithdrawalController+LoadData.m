@@ -25,6 +25,24 @@
 }
 
 
+- (void)loadCreditsTotalAvailable {
+    [self showLoading];
+    [IVNetwork sendRequestWithSubURL:BTTCreditsTotalAvailable paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        [self hideLoading];
+        NSLog(@"%@",response);
+        if (result.message.length) {
+            [MBProgressHUD showMessagNoActivity:result.message toView:nil];
+        }
+        if (result.code_http == 200) {
+            if (result.data) {
+                self.totalAvailable = result.data[@"val"];
+            }
+        }
+        [self.collectionView reloadData];
+    }];
+}
+
+
 - (NSMutableArray *)sheetDatas {
     NSMutableArray *sheetDatas = objc_getAssociatedObject(self, _cmd);
     if (!sheetDatas) {
