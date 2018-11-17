@@ -58,7 +58,9 @@
         if ([model.name isEqualToString:@"持卡人姓名"] ||
             (([model.name isEqualToString:@"预留信息"] ||
               [model.name isEqualToString:@"真实姓名"] ||
-              [model.name isEqualToString:@"邮箱地址"]) &&
+              [model.name isEqualToString:@"邮箱地址"] ||
+              [model.name isEqualToString:@"已绑定手机"] ||
+              [model.name isEqualToString:@"已绑定邮箱地址"]) &&
              model.desc.length != 0)) {
             self.textField.userInteractionEnabled = NO;
         } else {

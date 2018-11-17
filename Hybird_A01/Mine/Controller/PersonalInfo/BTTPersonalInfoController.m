@@ -155,22 +155,12 @@
         }
     }
     if ([IVNetwork userInfo].email.length == 0) {
-        if (![PublicMethod isValidateEmail:emailTF.text]) {
+        if (emailTF.text.length !=0 && ![PublicMethod isValidateEmail:emailTF.text]) {
             [MBProgressHUD showError:@"输入的邮箱地址格式有误！" toView:self.view];
             return;
-        } else {
-            params[@"email"] = emailTF.text;
         }
+        params[@"email"] = emailTF.text;
     }
-//    BOOL isOldEmail = ([IVNetwork userInfo].email.length !=0 && [emailTF.text isEqualToString:[IVNetwork userInfo].email]);
-//    if (!isOldEmail) {
-//        if ((emailTF.text.length !=0 && ![PublicMethod isValidateEmail:emailTF.text])) {
-//            [MBProgressHUD showError:@"输入的邮箱地址格式有误！" toView:self.view];
-//            return;
-//        } else {
-//            params[@"email"] = emailTF.text;
-//        }
-//    }
     if (sexTF.text.length != 0 ) {
         params[@"sex"] = [sexTF.text isEqualToString:@"男"] ? @"M" : @"F";
     }
@@ -186,8 +176,7 @@
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         if (result.status) {
             [MBProgressHUD showSuccess:@"完善资料成功!" toView:nil];
-            IVUserInfoModel *userInfo = [[IVUserInfoModel alloc] initWithDictionary:result.data error:nil];
-            [IVNetwork updateUserInfo:userInfo];
+            [IVNetwork updateUserInfo:result.data];
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }else{
             [MBProgressHUD showError:result.message toView:weakSelf.view];

@@ -31,12 +31,18 @@
 #import "BTTAnimationPopView.h"
 
 typedef enum {
-    BTTMobileCodeTypeBindMobile,           // 绑定
-    BTTMobileCodeTypeVerifyMobileAddBankCard,      // 添加银行卡
-    BTTMobileCodeTypeVerifyMobileAddBTC,     // 添加比特币
-    BTTMobileCodeTypeVerifyMobileUpdate    // 更新
+    BTTMobileCodeTypeBindMobile,           // 绑定手机
+    BTTMobileCodeTypeVerifyMobile,         // 验证手机
+    BTTMobileCodeTypeChangeMobile,         // 更换手机
+    BTTMobileCodeTypeAddBankCard,      // 添加银行卡
+    BTTMobileCodeTypeUpdateBankCard,    // 更新银行卡
+    BTTMobileCodeTypeAddBTC,     // 添加比特币
 }BTTMobileCodeType; // 手机验证码类型
-
+typedef enum {
+    BTTEmmailCodeTypeBind,           // 绑定邮箱
+    BTTEmmailCodeTypeVerify,      // 验证邮箱
+    BTTEmmailCodeTypeChange,         // 更换邮箱
+}BTTEmmailCodeType; // 邮箱验证码类型
 typedef enum {
     BTTRegisterOrLoginTypeLogin,
     BTTRegisterOrLoginTypeRegisterNormal, // 普通开户

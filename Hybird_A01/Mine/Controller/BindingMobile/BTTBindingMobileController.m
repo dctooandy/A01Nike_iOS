@@ -24,10 +24,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (self.mobileCodeType == BTTMobileCodeTypeBindMobile) {
-        self.title = @"绑定手机";
-    } else {
-        self.title = @"安全验证";
+    switch (self.mobileCodeType) {
+        case BTTMobileCodeTypeBindMobile:
+            self.title = @"绑定手机";
+            break;
+        case BTTMobileCodeTypeVerifyMobile:
+        case BTTMobileCodeTypeChangeMobile:
+            self.title = @"更换手机";
+            break;
+        default:
+            self.title = @"安全验证";
+            break;
     }
     [self setupCollectionView];
     [self loadMianData];
@@ -59,6 +66,7 @@
         [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
+        cell.sendBtn.enabled = [IVNetwork userInfo].isPhoneBinded;
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf sendCode];
         };
@@ -78,15 +86,15 @@
     [self.collectionView endEditing:YES];
     NSLog(@"%zd", indexPath.item);
     if (indexPath.item == 2) {
-        if (self.mobileCodeType == BTTMobileCodeTypeVerifyMobileUpdate) {
+        if (self.mobileCodeType == BTTMobileCodeTypeUpdateBankCard) {
             BTTCardModifyVerifyController *vc = [[BTTCardModifyVerifyController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            if (self.mobileCodeType == BTTMobileCodeTypeVerifyMobileAddBankCard) {
+            if (self.mobileCodeType == BTTMobileCodeTypeAddBankCard) {
                 BTTAddCardController *vc = [[BTTAddCardController alloc] init];
                 vc.addCardType = BTTAddCardTypeNew;
                 [self.navigationController pushViewController:vc animated:YES];
-            } else if (self.mobileCodeType == BTTMobileCodeTypeVerifyMobileAddBTC) {
+            } else if (self.mobileCodeType == BTTMobileCodeTypeAddBTC) {
                 BTTAddBTCController *vc = [[BTTAddBTCController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
             }
@@ -147,7 +155,15 @@
     if (textField == [self getPhoneTF]) {
         [self getSendBtn].enabled = [PublicMethod isValidatePhone:[self getPhoneTF].text];
     }
-    [self getSubmitBtn].enabled = ([PublicMethod isValidatePhone:[self getPhoneTF].text] && ([self getCodeTF].text.length != 0));
+    if ([self getCodeTF].text.length == 0) {
+        [self getSubmitBtn].enabled = NO;
+    } else {
+        if ([IVNetwork userInfo].isPhoneBinded) {
+            [self getSubmitBtn].enabled = YES;
+        } else {
+            [self getSubmitBtn].enabled = [PublicMethod isValidatePhone:[self getPhoneTF].text];
+        }
+    }
 }
 - (UITextField *)getPhoneTF
 {
@@ -175,37 +191,82 @@
 }
 - (void)sendCode
 {
-    if (![PublicMethod isValidatePhone:[self getPhoneTF].text]) {
+    if (![IVNetwork userInfo].isPhoneBinded && ![PublicMethod isValidatePhone:[self getPhoneTF].text]) {
         [MBProgressHUD showError:@"请输入正确的手机号" toView:self.view];
         return;
     }
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"type"] = @"1";
-    params[@"v_type"] = @"1";
     params[@"send_to"] = [self getPhoneTF].text;
+    switch (self.mobileCodeType) {
+        case BTTMobileCodeTypeBindMobile:
+            params[@"v_type"] = @"1";
+            break;
+        case BTTMobileCodeTypeVerifyMobile:
+        case BTTMobileCodeTypeChangeMobile:
+            params[@"v_type"] = @"3";
+            break;
+        default:
+            params[@"v_type"] = @"1";
+            break;
+    }
     [IVNetwork sendRequestWithSubURL:@"verify/send" paramters:params.copy completionBlock:nil];
 }
 - (void)submitBind
 {
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"type"] = @"1";
-    params[@"v_type"] = @"1";
     params[@"send_to"] = [self getPhoneTF].text;
     params[@"code"] = [self getCodeTF].text;
+    NSString *successStr = nil;
+    switch (self.mobileCodeType) {
+        case BTTMobileCodeTypeBindMobile:
+            params[@"v_type"] = @"1";
+            successStr = @"绑定成功!";
+            break;
+        case BTTMobileCodeTypeVerifyMobile:
+            params[@"v_type"] = @"3";
+            break;
+        case BTTMobileCodeTypeChangeMobile:
+            params[@"v_type"] = @"3";
+            successStr = @"修改成功!";
+            break;
+        default:
+            params[@"v_type"] = @"1";
+            successStr = @"绑定成功!";
+            break;
+    }
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     [IVNetwork sendRequestWithSubURL:@"A01/verify/newBind" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         if (result.status && result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
-            [MBProgressHUD showSuccess:@"绑定成功!" toView:nil];
+            if (successStr) {
+                [MBProgressHUD showSuccess:successStr toView:nil];
+            }
             NSString *phone = result.data[@"val"];
-            IVUserInfoModel *userInfo = [[IVUserInfoModel alloc] initWithDictionary:@{@"phone" : phone} error:nil];
-            [IVNetwork updateUserInfo:userInfo];
-            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            [IVNetwork updateUserInfo:@{@"phone" : phone}];
+            switch (self.mobileCodeType) {
+                case BTTMobileCodeTypeBindMobile:
+                case BTTMobileCodeTypeChangeMobile:
+                    [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                    break;
+                case BTTMobileCodeTypeVerifyMobile:{
+                    BTTBindingMobileController *vc = [BTTBindingMobileController new];
+                    vc.mobileCodeType = BTTMobileCodeTypeChangeMobile;
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                default:
+                    break;
+            }
         } else {
             [MBProgressHUD showError:result.message toView:weakSelf.view];
         }
     }];
 }
-
+- (void)goToBack
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 @end

@@ -37,6 +37,8 @@
 #import "BTTXimaController.h"
 #import "BTTLoginOrRegisterViewController.h"
 #import "BTTBindStatusModel.h"
+#import "BTTVerifyTypeSelectController.h"
+
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -205,13 +207,17 @@
         return;
     }
     if (indexPath.row == 2) {
-        if (self.isChangeMobile) {
-            BTTChangeMobileController *changeMobile = [[BTTChangeMobileController alloc] init];
-            [self.navigationController pushViewController:changeMobile animated:YES];
+        UIViewController *vc = nil;
+        if ([IVNetwork userInfo].isPhoneBinded) {
+            BTTVerifyTypeSelectController *selectVC = [BTTVerifyTypeSelectController new];
+            selectVC.codeType = BTTMobileCodeTypeVerifyMobile;
+            vc = selectVC;
         } else {
-            BTTBindingMobileController *bindMobile = [[BTTBindingMobileController alloc] init];
-            [self.navigationController pushViewController:bindMobile animated:YES];
+            BTTBindingMobileController *bindingMobileVC = [[BTTBindingMobileController alloc] init];
+            bindingMobileVC.mobileCodeType = BTTMobileCodeTypeBindMobile;
+            vc = bindingMobileVC;
         }
+        [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 7 + self.personalInfos.count + self.paymentDatas.count) {
         self.isShowHidden = !self.isShowHidden;
         [self loadMeAllData];
@@ -228,6 +234,9 @@
         }
     } else if (indexPath.row == 3) {
         BTTBindEmailController *vc = [[BTTBindEmailController alloc] init];
+        if ([IVNetwork userInfo].isPhoneBinded) {
+            vc.codeType = BTTEmmailCodeTypeVerify;
+        }
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 4 + self.personalInfos.count + self.paymentDatas.count) {
         BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
