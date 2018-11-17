@@ -108,6 +108,15 @@
         } else if (indexPath.row == 2) {
             BTTHomePageNoticeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageNoticeCell" forIndexPath:indexPath];
             cell.noticeStr = self.noticeStr;
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^{
+                strongSelf(strongSelf);
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = @"common/ancement.htm";
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"inside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
+            };
             return cell;
         } else if (indexPath.row == 3) {
             BTTHomePageGamesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageGamesCell" forIndexPath:indexPath];
@@ -169,6 +178,15 @@
         } else if (indexPath.row == 1) {
             BTTHomePageNoticeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageNoticeCell" forIndexPath:indexPath];
             cell.noticeStr = self.noticeStr;
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^{
+                strongSelf(strongSelf);
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = @"common/ancement.htm";
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"inside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
+            };
             return cell;
         } else if (indexPath.row == 2) {
             BTTHomePageGamesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageGamesCell" forIndexPath:indexPath];
@@ -240,6 +258,12 @@
             vc.webConfigModel.url = model.href;
             vc.webConfigModel.newView = YES;
             [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 2) {
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            vc.webConfigModel.url = @"common/ancement.htm";
+            vc.webConfigModel.newView = YES;
+            vc.webConfigModel.theme = @"inside";
+            [self.navigationController pushViewController:vc animated:YES];
         }
     } else {
         if (indexPath.row == 9) {
@@ -251,6 +275,12 @@
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
             vc.webConfigModel.url = model.href;
             vc.webConfigModel.newView = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 1) {
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            vc.webConfigModel.url = @"common/ancement.htm";
+            vc.webConfigModel.newView = YES;
+            vc.webConfigModel.theme = @"inside";
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

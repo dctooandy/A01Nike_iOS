@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^BTTButtonClickBlock)(UIButton *button);
 
+typedef void (^BTTClickEventBlock)(void);
+
 
 @interface BTTBaseCollectionViewCell : UICollectionViewCell
 
@@ -37,6 +39,8 @@ typedef void (^BTTButtonClickBlock)(UIButton *button);
 @property (nonatomic, assign) BTTMineArrowsDirectionType mineArrowsDirectionType;
 
 @property (nonatomic, copy) BTTButtonClickBlock buttonClickBlock;
+
+@property (nonatomic, copy) BTTClickEventBlock clickEventBlock;
 
 @end
 

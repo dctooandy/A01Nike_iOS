@@ -34,7 +34,9 @@
 
 - (void)setModel:(BTTPosterModel *)model {
     _model = model;
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:model.logo.path] placeholderImage:ImageNamed(@"")];
+    if (model) {
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:model.logo.path] placeholderImage:ImageNamed(@"")];
+    }
 }
 
 @end
