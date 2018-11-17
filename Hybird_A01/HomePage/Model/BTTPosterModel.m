@@ -18,6 +18,11 @@
 
 @implementation BTTPosterLogoModel
 
-
+- (NSString *)path {
+    if (![_path hasPrefix:@"http"]) {
+        return [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain], _path];
+    }
+    return _path;
+}
 
 @end

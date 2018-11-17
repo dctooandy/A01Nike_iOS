@@ -148,6 +148,7 @@
 		3A9E4C4C219FB1DF00E7D8C0 /* BTTPromotionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C4B219FB1DF00E7D8C0 /* BTTPromotionModel.m */; };
 		3A9E4C5F219FD8F900E7D8C0 /* BTTDownloadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C5E219FD8F900E7D8C0 /* BTTDownloadModel.m */; };
 		3A9E4C62219FDA7300E7D8C0 /* BTTGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C61219FDA7300E7D8C0 /* BTTGameModel.m */; };
+		3A9E4C6621A005C600E7D8C0 /* BTTPromotionDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C6521A005C600E7D8C0 /* BTTPromotionDetailController.m */; };
 		3AAE81FA219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAE81F8219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m */; };
 		3AAE8214219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAE81FC219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m */; };
 		3AAE8215219A738B003EC8B0 /* BTTRegisterQuickAutoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAE81FE219A738B003EC8B0 /* BTTRegisterQuickAutoCell.m */; };
@@ -756,6 +757,8 @@
 		3A9E4C5E219FD8F900E7D8C0 /* BTTDownloadModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTDownloadModel.m; sourceTree = "<group>"; };
 		3A9E4C60219FDA7300E7D8C0 /* BTTGameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTGameModel.h; sourceTree = "<group>"; };
 		3A9E4C61219FDA7300E7D8C0 /* BTTGameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTGameModel.m; sourceTree = "<group>"; };
+		3A9E4C6421A005C600E7D8C0 /* BTTPromotionDetailController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPromotionDetailController.h; sourceTree = "<group>"; };
+		3A9E4C6521A005C600E7D8C0 /* BTTPromotionDetailController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPromotionDetailController.m; sourceTree = "<group>"; };
 		3AAE81F8219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLoginOrRegisterViewController.m; sourceTree = "<group>"; };
 		3AAE81F9219A737E003EC8B0 /* BTTLoginOrRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLoginOrRegisterViewController.h; sourceTree = "<group>"; };
 		3AAE81FC219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLoginOrRegisterHeaderCell.m; sourceTree = "<group>"; };
@@ -1925,6 +1928,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		3A9E4C6321A0059300E7D8C0 /* PromotionDetail */ = {
+			isa = PBXGroup;
+			children = (
+				3A9E4C6421A005C600E7D8C0 /* BTTPromotionDetailController.h */,
+				3A9E4C6521A005C600E7D8C0 /* BTTPromotionDetailController.m */,
+			);
+			path = PromotionDetail;
+			sourceTree = "<group>";
+		};
 		3AAE81FB219A738B003EC8B0 /* LoginOrRegister */ = {
 			isa = PBXGroup;
 			children = (
@@ -2154,6 +2166,7 @@
 				3AD9CF56216EFD3000685B43 /* BTTHomePageViewController+LoadData.m */,
 				3ADD235D2176D7F000FA959A /* BTTHomePageViewController+Nav.h */,
 				3ADD235C2176D7EF00FA959A /* BTTHomePageViewController+Nav.m */,
+				3A9E4C6321A0059300E7D8C0 /* PromotionDetail */,
 				3ADD23982179A9E900FA959A /* Live800 */,
 				3ADD235F2176FF6100FA959A /* LoginAndRegister */,
 			);
@@ -3216,6 +3229,7 @@
 				3A9E4C21219D418800E7D8C0 /* BTTForgetPasswordStepTwoController+LoadData.m in Sources */,
 				3A8F513E215F74D00069D1B3 /* main.m in Sources */,
 				3A8F5187215F77AC0069D1B3 /* BTTIntroductoryPagesHelper.m in Sources */,
+				3A9E4C6621A005C600E7D8C0 /* BTTPromotionDetailController.m in Sources */,
 				3A37E1192164A20100FB13A1 /* BTTTabbarController+VoiceCall.m in Sources */,
 				3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */,
 				3AAE8218219A738B003EC8B0 /* BTTForgetPasswordCell.m in Sources */,

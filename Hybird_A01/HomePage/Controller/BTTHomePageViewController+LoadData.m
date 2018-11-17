@@ -78,7 +78,6 @@ static const char *BTTNextGroupKey = "nextGroup";
         [self setupElements];
         [self hideLoading];
         [self endRefreshing];
-        
     });
 }
 
@@ -125,9 +124,6 @@ static const char *BTTNextGroupKey = "nextGroup";
         model.detailBtnStr = btns[index];
         [self.headers addObject:model];
     }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.collectionView reloadData];
-    });
 }
 
 
@@ -199,10 +195,6 @@ static const char *BTTNextGroupKey = "nextGroup";
                 }
             }
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-        });
-       
     }];
 }
 
@@ -230,9 +222,6 @@ static const char *BTTNextGroupKey = "nextGroup";
                 }
             }
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-        });
     }];
 }
 
@@ -248,9 +237,6 @@ static const char *BTTNextGroupKey = "nextGroup";
                 }
             }
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-        });
     }];
 }
 
