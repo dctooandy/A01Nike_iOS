@@ -8,9 +8,13 @@
 
 #import "BTTBaseCollectionViewCell.h"
 
+@class BTTPromotionModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTHomePageDiscountCell : BTTBaseCollectionViewCell
+
+@property (nonatomic, strong) BTTPromotionModel *model;
 
 @end
 

@@ -90,9 +90,9 @@
 
 - (void)setActivityModel:(BTTActivityModel *)activityModel {
     _activityModel = activityModel;
-//    self.activitiesView.imageURLStringsGroup = activityModel.imageUrls;
+    self.activitiesView.imageURLStringsGroup = activityModel.imageUrls;
     self.titleLabel.text = activityModel.title;
-    self.activitiesView.titlesGroup = activityModel.imgs;
+    self.activitiesView.titlesGroup = activityModel.imgTitles;
     self.descLabel.text = activityModel.desc;
 }
 

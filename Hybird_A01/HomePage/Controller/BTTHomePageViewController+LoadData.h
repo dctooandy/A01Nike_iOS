@@ -40,9 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)makeCallWithPhoneNum:(NSString *)phone;
 
-- (void)loadMainData;
-
-- (void)loadOtherData;
+- (void)refreshDatasOfHomePage;
 
 @end
 

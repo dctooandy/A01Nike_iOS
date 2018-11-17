@@ -45,6 +45,35 @@ static const char *BTTNextGroupKey = "nextGroup";
         [self loadOtherData];
     });
     
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self loadHightlightsBrand];
+    });
+    
+    dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [self hideLoading];
+        [self endRefreshing];
+        
+    });
+}
+
+- (void)refreshDatasOfHomePage {
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self showLoading];
+        });
+        [self loadMainData];
+    });
+    
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self loadScrollText];
+    });
+    
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self loadOtherData];
+    });
+    
     dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [self hideLoading];
@@ -151,10 +180,6 @@ static const char *BTTNextGroupKey = "nextGroup";
         NSLog(@"%@",response);
         if (result.code_http == 200) {
             if (result.data) {
-                for (NSDictionary *imageDict in result.data[@"highlights"]) {
-                    BTTActivityModel *model = [BTTActivityModel yy_modelWithDictionary:imageDict];
-                    [self.Activities addObject:model];
-                }
                 
                 for (NSDictionary *dict in result.data[@"maxRecords"]) {
                     BTTAmountModel *model = [BTTAmountModel yy_modelWithDictionary:dict];
@@ -175,9 +200,6 @@ static const char *BTTNextGroupKey = "nextGroup";
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.collectionView reloadData];
         });
-        if (result.message.length) {
-            [MBProgressHUD showMessagNoActivity:result.message toView:nil];
-        }
     }];
 }
 
@@ -206,10 +228,19 @@ static const char *BTTNextGroupKey = "nextGroup";
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.collectionView reloadData];
         });
-        
-        if (result.message.length) {
-            [MBProgressHUD showMessagNoActivity:result.message toView:nil];
+    }];
+}
+
+- (void)loadHightlightsBrand {
+    [IVNetwork sendRequestWithSubURL:BTTBrandHighlights paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+        for (NSDictionary *imageDict in result.data) {
+            BTTActivityModel *model = [BTTActivityModel yy_modelWithDictionary:imageDict];
+            [self.Activities addObject:model];
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
     }];
 }
 

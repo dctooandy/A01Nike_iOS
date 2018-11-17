@@ -22,6 +22,8 @@
 
 @property (nonatomic, assign) CGFloat cellHeight;
 
+@property (nonatomic, strong) NSArray *imgTitles;
+
 @end
 
 @interface BTTActivityImageModel : BTTBaseModel

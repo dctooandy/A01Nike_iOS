@@ -28,10 +28,33 @@
     return _cellHeight;
 }
 
+- (NSArray *)imageUrls {
+    NSMutableArray *imageUrls = [NSMutableArray array];
+    for (BTTActivityImageModel *model in _imgs) {
+        [imageUrls addObject:model.img];
+    }
+    _imageUrls = imageUrls;
+    return _imageUrls;
+}
+
+- (NSArray *)imgTitles {
+    NSMutableArray *titles = [NSMutableArray array];
+    for (BTTActivityImageModel *model in _imgs) {
+        [titles addObject:model.imgDesc];
+    }
+    _imgTitles = titles;
+    return _imgTitles;
+}
+
 @end
 
 @implementation BTTActivityImageModel
 
-
+- (NSString *)img {
+    if (![_img hasPrefix:@"http"]) {
+        return [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],_img];
+    }
+    return _img;
+}
 
 @end

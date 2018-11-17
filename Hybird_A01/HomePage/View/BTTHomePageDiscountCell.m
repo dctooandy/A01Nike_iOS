@@ -7,6 +7,9 @@
 //
 
 #import "BTTHomePageDiscountCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "BTTPromotionModel.h"
+
 
 @interface BTTHomePageDiscountCell ()
 
@@ -34,6 +37,13 @@
 }
 
 - (IBAction)detailBtnClick:(UIButton *)sender {
+}
+
+- (void)setModel:(BTTPromotionModel *)model {
+    _model = model;
+    [self.discountIcon sd_setImageWithURL:[NSURL URLWithString:model.imgurl] placeholderImage:ImageNamed(@"")];
+    self.titleLabel.text = model.name;
+    self.detailLabel.text = model.desc;
 }
 
 - (void)setMineSparaterType:(BTTMineSparaterType)mineSparaterType {

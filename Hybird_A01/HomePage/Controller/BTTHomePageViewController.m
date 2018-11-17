@@ -20,7 +20,7 @@
 #import "BTTHomePageActivitiesCell.h"
 #import "BTTHomePageAmountsCell.h"
 #import "BTTHomePageViewController+Nav.h"
-
+#import "BTTPromotionModel.h"
 
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
@@ -40,7 +40,7 @@
     [NSThread sleepForTimeInterval:BTTLaunchScreenTime];
     
     self.title = @"首页";
-    self.adCellShow = NO;
+    self.adCellShow = YES;
     if ([IVNetwork userInfo]) {
         self.isLogin = YES;
     } else {
@@ -71,8 +71,6 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
 }
-
-
 
 - (void)setupCollectionView {
     [super setupCollectionView];
@@ -119,10 +117,10 @@
         } else if (indexPath.row == 4) {
             BTTHomePageAppsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAppsCell" forIndexPath:indexPath];
             return cell;
-        } else if (indexPath.row == 5 || indexPath.row == 9 || indexPath.row == 12) {
+        } else if (indexPath.row == 5 || indexPath.row == 10 || indexPath.row == 13) {
             BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
             return cell;
-        } else if (indexPath.row == 6 || indexPath.row == 10 || indexPath.row == 13) {
+        } else if (indexPath.row == 6 || indexPath.row == 11 || indexPath.row == 14) {
             BTTHomePageDiscountHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountHeaderCell" forIndexPath:indexPath];
             if (indexPath.row == 6) {
                 cell.headerModel = self.headers[0];
@@ -132,15 +130,17 @@
                 cell.headerModel = self.headers[2];
             }
             return cell;
-        } else if (indexPath.row == 7 || indexPath.row == 8) {
+        } else if (indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9) {
             BTTHomePageDiscountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountCell" forIndexPath:indexPath];
+            BTTPromotionModel *model = self.promotions[indexPath.row - 7];
             if (indexPath.row == 7) {
                 cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
             } else {
                 cell.mineSparaterType = BTTMineSparaterTypeNone;
             }
+            cell.model = model;
             return cell;
-        } else if (indexPath.row == 11) {
+        } else if (indexPath.row == 12) {
             BTTHomePageActivitiesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageActivitiesCell" forIndexPath:indexPath];
             BTTActivityModel *model = self.Activities[self.nextGroup];
             cell.activityModel = model;
@@ -156,7 +156,7 @@
                 });
             };
             return cell;
-        } else if (indexPath.row == 14) {
+        } else if (indexPath.row == 15) {
             BTTHomePageAmountsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAmountsCell" forIndexPath:indexPath];
             cell.amounts = self.amounts;
             return cell;
@@ -176,10 +176,10 @@
         } else if (indexPath.row == 3) {
             BTTHomePageAppsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAppsCell" forIndexPath:indexPath];
             return cell;
-        } else if (indexPath.row == 4 || indexPath.row == 8 || indexPath.row == 11) {
+        } else if (indexPath.row == 4 || indexPath.row == 9 || indexPath.row == 12) {
             BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
             return cell;
-        } else if (indexPath.row == 5 || indexPath.row == 9 || indexPath.row == 12) {
+        } else if (indexPath.row == 5 || indexPath.row == 10 || indexPath.row == 13) {
             BTTHomePageDiscountHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountHeaderCell" forIndexPath:indexPath];
             BTTHomePageHeaderModel *model = nil;
             if (indexPath.row == 5) {
@@ -191,15 +191,17 @@
             }
             cell.headerModel = model;
             return cell;
-        } else if (indexPath.row == 7 || indexPath.row == 6) {
+        } else if (indexPath.row == 7 || indexPath.row == 6 || indexPath.row == 8) {
+            BTTPromotionModel *model = self.promotions[indexPath.row - 6];
             BTTHomePageDiscountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountCell" forIndexPath:indexPath];
             if (indexPath.row == 6) {
                 cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
             } else {
                 cell.mineSparaterType = BTTMineSparaterTypeNone;
             }
+            cell.model = model;
             return cell;
-        } else if (indexPath.row == 10) {
+        } else if (indexPath.row == 11) {
             BTTHomePageActivitiesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageActivitiesCell" forIndexPath:indexPath];
             BTTActivityModel *model = self.Activities[self.nextGroup];
             cell.activityModel = model;
@@ -215,7 +217,7 @@
                 });
             };
             return cell;
-        } else if (indexPath.row == 13) {
+        } else if (indexPath.row == 14) {
             BTTHomePageAmountsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAmountsCell" forIndexPath:indexPath];
             cell.amounts = self.amounts;
             return cell;
@@ -297,9 +299,9 @@
     [self.elementsHight removeAllObjects];
     NSInteger total = 0;
     if (self.adCellShow) {
-        total = 15;
+        total = 16;
     } else {
-        total = 14;
+        total = 15;
     }
     for (int i = 0; i < total; i++) {
         if (self.adCellShow) {
@@ -311,20 +313,20 @@
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 174)]];
             } else if (i == 4) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 166)]];
-            } else if (i == 5 || i == 9 || i == 12) {
+            } else if (i == 5 || i == 10 || i == 13) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
-            } else if (i == 6 || i == 10 || i == 13) {
+            } else if (i == 6 || i == 11 || i == 14) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 45)]];
-            } else if (i == 7 || i == 8) {
+            } else if (i == 7 || i == 8 || i == 9) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 130)]];
-            } else if (i == 11) {
+            } else if (i == 12) {
                 if (self.Activities.count) {
                     BTTActivityModel *model = self.Activities[self.nextGroup];
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, model.cellHeight)]];
                 } else {
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 228)]];
                 }
-            } else if (i == 14) {
+            } else if (i == 15) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 295)]];
             }
             else {
@@ -339,20 +341,20 @@
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 174)]];
             } else if (i == 3) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 166)]];
-            } else if (i == 4 || i == 8 || i == 11) {
+            } else if (i == 4 || i == 9 || i == 12) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
-            } else if (i == 5 || i == 9 || i == 12) {
+            } else if (i == 5 || i == 10 || i == 13) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 45)]];
-            } else if (i == 7 || i == 6) {
+            } else if (i == 7 || i == 6 || i == 8) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 130)]];
-            } else if (i == 10) {
+            } else if (i == 11) {
                 if (self.Activities.count) {
                     BTTActivityModel *model = self.Activities[self.nextGroup];
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, model.cellHeight)]];
                 } else {
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 228)]];
                 }
-            } else if (i == 13) {
+            } else if (i == 14) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 295)]];
             }
             else {

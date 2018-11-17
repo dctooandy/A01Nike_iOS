@@ -140,6 +140,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTHomePageNewAPI            @"/A01/promotion/indexCombo"
 #define BTTIndexBannerDownloads      @"/A01/promotion/indexBannerDownloads"
+#define BTTBrandHighlights           @"/A01/promotion/getBrandHighlights"
 
 
 /********************************************常用宏*********************************************************/
