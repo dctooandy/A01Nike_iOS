@@ -146,6 +146,8 @@
 		3A9E4C45219E9CAD00E7D8C0 /* BTTBindStatusModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C44219E9CAD00E7D8C0 /* BTTBindStatusModel.m */; };
 		3A9E4C48219ECC6C00E7D8C0 /* BTTPosterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C47219ECC6C00E7D8C0 /* BTTPosterModel.m */; };
 		3A9E4C4C219FB1DF00E7D8C0 /* BTTPromotionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C4B219FB1DF00E7D8C0 /* BTTPromotionModel.m */; };
+		3A9E4C5F219FD8F900E7D8C0 /* BTTDownloadModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C5E219FD8F900E7D8C0 /* BTTDownloadModel.m */; };
+		3A9E4C62219FDA7300E7D8C0 /* BTTGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C61219FDA7300E7D8C0 /* BTTGameModel.m */; };
 		3AAE81FA219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAE81F8219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m */; };
 		3AAE8214219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAE81FC219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m */; };
 		3AAE8215219A738B003EC8B0 /* BTTRegisterQuickAutoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAE81FE219A738B003EC8B0 /* BTTRegisterQuickAutoCell.m */; };
@@ -750,6 +752,10 @@
 		3A9E4C47219ECC6C00E7D8C0 /* BTTPosterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPosterModel.m; sourceTree = "<group>"; };
 		3A9E4C4A219FB1DF00E7D8C0 /* BTTPromotionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPromotionModel.h; sourceTree = "<group>"; };
 		3A9E4C4B219FB1DF00E7D8C0 /* BTTPromotionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPromotionModel.m; sourceTree = "<group>"; };
+		3A9E4C5D219FD8F900E7D8C0 /* BTTDownloadModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTDownloadModel.h; sourceTree = "<group>"; };
+		3A9E4C5E219FD8F900E7D8C0 /* BTTDownloadModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTDownloadModel.m; sourceTree = "<group>"; };
+		3A9E4C60219FDA7300E7D8C0 /* BTTGameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTGameModel.h; sourceTree = "<group>"; };
+		3A9E4C61219FDA7300E7D8C0 /* BTTGameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTGameModel.m; sourceTree = "<group>"; };
 		3AAE81F8219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLoginOrRegisterViewController.m; sourceTree = "<group>"; };
 		3AAE81F9219A737E003EC8B0 /* BTTLoginOrRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLoginOrRegisterViewController.h; sourceTree = "<group>"; };
 		3AAE81FC219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLoginOrRegisterHeaderCell.m; sourceTree = "<group>"; };
@@ -2165,6 +2171,10 @@
 				3AD9CF7A216F400A00685B43 /* BTTAppIconModel.m */,
 				3AD9CF53216EFD0700685B43 /* BTTBannerModel.h */,
 				3AD9CF52216EFD0600685B43 /* BTTBannerModel.m */,
+				3A9E4C5D219FD8F900E7D8C0 /* BTTDownloadModel.h */,
+				3A9E4C5E219FD8F900E7D8C0 /* BTTDownloadModel.m */,
+				3A9E4C60219FDA7300E7D8C0 /* BTTGameModel.h */,
+				3A9E4C61219FDA7300E7D8C0 /* BTTGameModel.m */,
 				3AD9CF3E216EDC9800685B43 /* BTTVoiceCallModel.h */,
 				3AD9CF3F216EDC9800685B43 /* BTTVoiceCallModel.m */,
 				3AD9CF62216F208C00685B43 /* BTTNoticeModel.h */,
@@ -3168,6 +3178,7 @@
 				3A929428219C3D6200764E7E /* BTTRegisterSuccessBtnsCell.m in Sources */,
 				3AE1EB192180585B0073A32D /* BTTAddCardController.m in Sources */,
 				3AD9CF60216F1EAB00685B43 /* BTTHomePageNoticeCell.m in Sources */,
+				3A9E4C62219FDA7300E7D8C0 /* BTTGameModel.m in Sources */,
 				3AD9CF78216F3F6300685B43 /* BTTAppCollectionViewCell.m in Sources */,
 				3A11ADDE21818A1A00B1AFF4 /* BTTAddBTCController.m in Sources */,
 				3AD9CD552165B2C900685B43 /* BTTPopoverViewCell.m in Sources */,
@@ -3220,6 +3231,7 @@
 				3A8F51F2215F7C9D0069D1B3 /* BTTProgressHUD.m in Sources */,
 				3ADD23622176FFB700FA959A /* BTTLoginAndRegisterViewController.m in Sources */,
 				3A9E4C3A219E509100E7D8C0 /* BTTBaseAnimationPopView.m in Sources */,
+				3A9E4C5F219FD8F900E7D8C0 /* BTTDownloadModel.m in Sources */,
 				3AD9CEF0216B3DD900685B43 /* WebViewUserAgaent.m in Sources */,
 				3A37E12C2164A23200FB13A1 /* BTTMineViewController.m in Sources */,
 				3A8F5190215F77AC0069D1B3 /* BTTTabBarButton.m in Sources */,

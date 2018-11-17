@@ -14,6 +14,10 @@
 #import "BTTActivityModel.h"
 #import "BTTAmountModel.h"
 #import "BTTMakeCallSuccessView.h"
+#import "BTTPosterModel.h"
+#import "BTTPromotionModel.h"
+#import "BTTDownloadModel.h"
+#import "BTTGameModel.h"
 
 static const char *noticeStrKey = "noticeStr";
 
@@ -25,27 +29,29 @@ static const char *BTTNextGroupKey = "nextGroup";
     
     [self loadHeadersData];
     
-    
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [self showLoading];
         });
-     
+        [self loadMainData];
     });
     
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self loadScrollText];
     });
     
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self loadOtherData];
+    });
+    
     dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self hideLoading];
-            [self endRefreshing];
-        });
+        
+        [self hideLoading];
+        [self endRefreshing];
+        
     });
 }
-
 
 - (void)loadScrollText {
     [IVNetwork sendRequestWithSubURL:@"app/getAnnouments" paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
@@ -143,6 +149,67 @@ static const char *BTTNextGroupKey = "nextGroup";
     [params setObject:@"100" forKey:@"page_size"];
     [IVNetwork sendRequestWithSubURL:BTTHomePageNewAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
+        if (result.code_http == 200) {
+            if (result.data) {
+                for (NSDictionary *imageDict in result.data[@"highlights"]) {
+                    BTTActivityModel *model = [BTTActivityModel yy_modelWithDictionary:imageDict];
+                    [self.Activities addObject:model];
+                }
+                
+                for (NSDictionary *dict in result.data[@"maxRecords"]) {
+                    BTTAmountModel *model = [BTTAmountModel yy_modelWithDictionary:dict];
+                    [self.amounts addObject:model];
+                }
+                
+                for (NSDictionary *dict in result.data[@"poster"]) {
+                    BTTPosterModel *model = [BTTPosterModel yy_modelWithDictionary:dict];
+                    [self.posters addObject:model];
+                }
+                
+                for (NSDictionary *dict in result.data[@"promotions"]) {
+                    BTTPromotionModel *model = [BTTPromotionModel yy_modelWithDictionary:dict];
+                    [self.promotions addObject:model];
+                }
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
+        if (result.message.length) {
+            [MBProgressHUD showMessagNoActivity:result.message toView:nil];
+        }
+    }];
+}
+
+- (void)loadOtherData {
+    [IVNetwork sendRequestWithSubURL:BTTIndexBannerDownloads paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+        if (result.code_http == 200) {
+            if (result.data) {
+                for (NSDictionary *dict in result.data[@"banners"]) {
+                    BTTBannerModel *model = [BTTBannerModel yy_modelWithDictionary:dict];
+                    [self.imageUrls addObject:model.imgurl];
+                    [self.banners addObject:model];
+                }
+                
+                for (NSDictionary *dict in result.data[@"downloads"]) {
+                    BTTDownloadModel *model = [BTTDownloadModel yy_modelWithDictionary:dict];
+                    [self.downloads addObject:model];
+                }
+                
+                for (NSDictionary *dict in result.data[@"games"]) {
+                    BTTGameModel *model = [BTTGameModel yy_modelWithDictionary:dict];
+                    [self.games addObject:model];
+                }
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
+        
+        if (result.message.length) {
+            [MBProgressHUD showMessagNoActivity:result.message toView:nil];
+        }
     }];
 }
 
@@ -215,6 +282,71 @@ static const char *BTTNextGroupKey = "nextGroup";
 
 - (void)setAmounts:(NSMutableArray *)amounts {
     objc_setAssociatedObject(self, @selector(amounts), amounts, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSMutableArray *)posters {
+    NSMutableArray *posters = objc_getAssociatedObject(self, _cmd);
+    if (!posters) {
+        posters = [NSMutableArray array];
+        [self setPosters:posters];
+    }
+    return posters;
+}
+
+- (void)setPosters:(NSMutableArray *)posters {
+    objc_setAssociatedObject(self, @selector(posters), posters, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSMutableArray *)promotions {
+    NSMutableArray *promotions = objc_getAssociatedObject(self, _cmd);
+    if (!promotions) {
+        promotions = [NSMutableArray array];
+        [self setPromotions:promotions];
+    }
+    return promotions;
+}
+
+- (void)setPromotions:(NSMutableArray *)promotions {
+    objc_setAssociatedObject(self, @selector(promotions), promotions, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSMutableArray *)banners {
+    NSMutableArray *banners = objc_getAssociatedObject(self, _cmd);
+    if (!banners) {
+        banners = [NSMutableArray array];
+        [self setBanners:banners];
+    }
+    return banners;
+}
+
+- (void)setBanners:(NSMutableArray *)banners {
+    objc_setAssociatedObject(self, @selector(banners), banners, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSMutableArray *)downloads {
+    NSMutableArray *downloads = objc_getAssociatedObject(self, _cmd);
+    if (!downloads) {
+        downloads = [NSMutableArray array];
+        [self setDownloads:downloads];
+    }
+    return downloads;
+}
+
+- (void)setDownloads:(NSMutableArray *)downloads {
+    objc_setAssociatedObject(self, @selector(downloads), downloads, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSMutableArray *)games {
+    NSMutableArray *games = objc_getAssociatedObject(self, _cmd);
+    if (!games) {
+        games = [NSMutableArray array];
+        [self setGames:games];
+    }
+    return games;
+}
+
+- (void)setGames:(NSMutableArray *)games {
+    objc_setAssociatedObject(self, @selector(games), games, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

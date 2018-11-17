@@ -53,12 +53,13 @@
     
     weakSelf(weakSelf);
     [self pulldownRefreshWithRefreshBlock:^{
+        strongSelf(strongSelf);
         NSLog(@"下拉刷新");
-        [weakSelf loadDataOfHomePage];
+        [strongSelf loadDataOfHomePage];
     }];
     [self loadDataOfHomePage];
     [self registerNotification];
-    [self loadMainData];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {

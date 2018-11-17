@@ -24,6 +24,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger nextGroup;
 
+@property (nonatomic, strong) NSMutableArray *posters;
+
+@property (nonatomic, strong) NSMutableArray *promotions;
+
+@property (nonatomic, strong) NSMutableArray *banners;
+
+@property (nonatomic, strong) NSMutableArray *downloads;
+
+@property (nonatomic, strong) NSMutableArray *games;
+
 
 #pragma mark 加载所有数据
 - (void)loadDataOfHomePage;
@@ -31,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)makeCallWithPhoneNum:(NSString *)phone;
 
 - (void)loadMainData;
+
+- (void)loadOtherData;
 
 @end
 
