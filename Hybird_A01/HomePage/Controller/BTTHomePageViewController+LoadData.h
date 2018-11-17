@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTHomePageViewController (LoadData)
 
-@property (nonatomic, strong) NSMutableArray *imageUrls;
+
 
 @property (nonatomic, copy) NSString *noticeStr;
 
@@ -21,8 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *Activities;
 
 @property (nonatomic, strong) NSMutableArray *amounts;
-
-@property (nonatomic, assign) NSInteger nextGroup;
 
 @property (nonatomic, strong) NSMutableArray *posters;
 
@@ -33,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *downloads;
 
 @property (nonatomic, strong) NSMutableArray *games;
+
+@property (nonatomic, strong) NSMutableArray *imageUrls;
+
+@property (nonatomic, assign) NSInteger nextGroup;
 
 
 #pragma mark 加载所有数据

@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTHomePageAppsCell : BTTBaseCollectionViewCell
 
+@property (nonatomic, strong) NSArray *downloads;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,7 +7,8 @@
 //
 
 #import "BTTAppCollectionViewCell.h"
-#import "BTTAppIconModel.h"
+#import "BTTDownloadModel.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface BTTAppCollectionViewCell ()
 
@@ -25,10 +26,10 @@
     // Initialization code
 }
 
-- (void)setAppIconModel:(BTTAppIconModel *)appIconModel {
-    _appIconModel = appIconModel;
-    self.iconImageView.image = ImageNamed(_appIconModel.icon);
-    self.appName.text = _appIconModel.name;
+- (void)setModel:(BTTDownloadModel *)model {
+    _model = model;
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.icon.path] placeholderImage:ImageNamed(@"")];
+    self.appName.text = model.name;
 }
 
 @end

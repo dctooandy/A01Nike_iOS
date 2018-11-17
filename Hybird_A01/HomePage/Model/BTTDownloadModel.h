@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) BTTIconModel *icon;
 
+@property (nonatomic, copy) NSString *name;
+
 @end
 
 @interface BTTIconModel : BTTBaseModel

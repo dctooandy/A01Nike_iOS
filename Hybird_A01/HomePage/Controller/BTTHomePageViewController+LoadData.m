@@ -28,7 +28,6 @@ static const char *BTTNextGroupKey = "nextGroup";
 - (void)loadDataOfHomePage {
     
     [self loadHeadersData];
-    
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -50,7 +49,7 @@ static const char *BTTNextGroupKey = "nextGroup";
     });
     
     dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
+        [self setupElements];
         [self hideLoading];
         [self endRefreshing];
         
@@ -58,6 +57,7 @@ static const char *BTTNextGroupKey = "nextGroup";
 }
 
 - (void)refreshDatasOfHomePage {
+    
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -75,7 +75,7 @@ static const char *BTTNextGroupKey = "nextGroup";
     });
     
     dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
+        [self setupElements];
         [self hideLoading];
         [self endRefreshing];
         
@@ -89,6 +89,7 @@ static const char *BTTNextGroupKey = "nextGroup";
         if (![data isKindOfClass:[NSArray class]]) {
             return;
         }
+        self.noticeStr = @"";
         for (NSDictionary *dict in data) {
             NSError *error = nil;
             BTTNoticeModel *noticeModel = [BTTNoticeModel yy_modelWithDictionary:dict];
@@ -116,6 +117,7 @@ static const char *BTTNextGroupKey = "nextGroup";
     }
     NSArray *titles = @[@"热门优惠",@"客户参与品牌活动集锦",titleStr];
     NSArray *btns = @[@"搜索更多",@"查看下一组",@""];
+    [self.headers removeAllObjects];
     for (NSString *title in titles) {
         NSInteger index = [titles indexOfObject:title];
         BTTHomePageHeaderModel *model = [BTTHomePageHeaderModel new];
@@ -180,17 +182,17 @@ static const char *BTTNextGroupKey = "nextGroup";
         NSLog(@"%@",response);
         if (result.code_http == 200) {
             if (result.data) {
-                
+                [self.amounts removeAllObjects];
                 for (NSDictionary *dict in result.data[@"maxRecords"]) {
                     BTTAmountModel *model = [BTTAmountModel yy_modelWithDictionary:dict];
                     [self.amounts addObject:model];
                 }
-                
+                [self.posters removeAllObjects];
                 for (NSDictionary *dict in result.data[@"poster"]) {
                     BTTPosterModel *model = [BTTPosterModel yy_modelWithDictionary:dict];
                     [self.posters addObject:model];
                 }
-                
+                [self.promotions removeAllObjects];
                 for (NSDictionary *dict in result.data[@"promotions"]) {
                     BTTPromotionModel *model = [BTTPromotionModel yy_modelWithDictionary:dict];
                     [self.promotions addObject:model];
@@ -200,6 +202,7 @@ static const char *BTTNextGroupKey = "nextGroup";
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.collectionView reloadData];
         });
+       
     }];
 }
 
@@ -208,17 +211,19 @@ static const char *BTTNextGroupKey = "nextGroup";
         NSLog(@"%@",response);
         if (result.code_http == 200) {
             if (result.data) {
+                [self.banners removeAllObjects];
+                [self.imageUrls removeAllObjects];
                 for (NSDictionary *dict in result.data[@"banners"]) {
                     BTTBannerModel *model = [BTTBannerModel yy_modelWithDictionary:dict];
                     [self.imageUrls addObject:model.imgurl];
                     [self.banners addObject:model];
                 }
-                
+                [self.downloads removeAllObjects];
                 for (NSDictionary *dict in result.data[@"downloads"]) {
                     BTTDownloadModel *model = [BTTDownloadModel yy_modelWithDictionary:dict];
                     [self.downloads addObject:model];
                 }
-                
+                [self.games removeAllObjects];
                 for (NSDictionary *dict in result.data[@"games"]) {
                     BTTGameModel *model = [BTTGameModel yy_modelWithDictionary:dict];
                     [self.games addObject:model];
@@ -234,9 +239,14 @@ static const char *BTTNextGroupKey = "nextGroup";
 - (void)loadHightlightsBrand {
     [IVNetwork sendRequestWithSubURL:BTTBrandHighlights paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        for (NSDictionary *imageDict in result.data) {
-            BTTActivityModel *model = [BTTActivityModel yy_modelWithDictionary:imageDict];
-            [self.Activities addObject:model];
+        if (result.code_http == 200) {
+            if (result.data) {
+                [self.Activities removeAllObjects];
+                for (NSDictionary *imageDict in result.data) {
+                    BTTActivityModel *model = [BTTActivityModel yy_modelWithDictionary:imageDict];
+                    [self.Activities addObject:model];
+                }
+            }
         }
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.collectionView reloadData];
