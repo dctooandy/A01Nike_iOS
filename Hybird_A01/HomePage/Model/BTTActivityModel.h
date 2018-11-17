@@ -6,20 +6,28 @@
 //  Copyright © 2018年 Key. All rights reserved.
 //
 
-#import <JSONModel/JSONModel.h>
+#import "BTTBaseModel.h"
 
-@interface BTTActivityModel : JSONModel
+@class BTTActivityImageModel;
+
+@interface BTTActivityModel : BTTBaseModel
 
 @property (nonatomic, copy) NSString *title;
 
 @property (nonatomic, copy) NSString *desc;
 
-@property (nonatomic, strong) NSArray *list;
+@property (nonatomic, strong) NSArray<BTTActivityImageModel *> *imgs;
 
 @property (nonatomic, strong) NSArray *imageUrls;
 
-@property (nonatomic, assign) CGFloat descHeight;
-
 @property (nonatomic, assign) CGFloat cellHeight;
+
+@end
+
+@interface BTTActivityImageModel : BTTBaseModel
+
+@property (nonatomic, copy) NSString *img;
+
+@property (nonatomic, copy) NSString *imgDesc;
 
 @end

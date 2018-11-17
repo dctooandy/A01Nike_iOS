@@ -6,11 +6,12 @@
 //  Copyright © 2018年 BTT. All rights reserved.
 //
 
-#import <JSONModel/JSONModel.h>
+#import <Foundation/Foundation.h>
+#import <YYModel/YYModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BTTBaseModel : JSONModel
+@interface BTTBaseModel : NSObject
 
 @end
 

@@ -10,16 +10,8 @@
 
 @implementation BTTActivityModel
 
-- (CGFloat)descHeight {
-    if (!_descHeight) {
-        UIFont *font = [UIFont systemFontOfSize:12];
-        CGRect suggestedRect = [self.desc boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, MAXFLOAT)
-                                                  options:NSStringDrawingUsesLineFragmentOrigin
-                                               attributes:@{NSFontAttributeName:font}
-                                                  context:nil];
-        _descHeight += suggestedRect.size.height;
-    }
-    return _descHeight;
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"imgs":[BTTActivityImageModel class]};
 }
 
 - (CGFloat)cellHeight {
@@ -31,9 +23,15 @@
         imageHeight = 200;
     } else if (SCREEN_WIDTH == 414 || KIsiPhoneX) {
         imageHeight = 220;
-    } 
+    }
     _cellHeight += (imageHeight + 52);
     return _cellHeight;
 }
+
+@end
+
+@implementation BTTActivityImageModel
+
+
 
 @end

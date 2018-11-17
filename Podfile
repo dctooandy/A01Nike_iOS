@@ -9,7 +9,7 @@ target ‘Hybird_A01’ do
   pod 'MJRefresh'
   pod 'GJRedDot'
   pod 'BRPickerView'
-  pod 'JSONModel', '~> 1.7.0'
+  pod 'YYModel'
   pod 'Masonry','~> 1.1.0'
   pod 'MBProgressHUD','~> 1.1.0'
   pod 'MJExtension', '~> 3.0.15.1'
