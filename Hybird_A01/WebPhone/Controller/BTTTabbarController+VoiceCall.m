@@ -16,7 +16,7 @@
     NSLog(@"%@",[IVNetwork h5Domain]);
     [IVNetwork sendRequestWithSubURL:url paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSDictionary *data = result.data;
-        BTTVoiceCallModel *model = [[BTTVoiceCallModel alloc] initWithDictionary:data error:nil];
+        BTTVoiceCallModel *model = [BTTVoiceCallModel yy_modelWithDictionary:data];
         [[NSUserDefaults standardUserDefaults] setObject:model.uid forKey:BTTUIDKey];
         [[NSUserDefaults standardUserDefaults] setObject:model.phone_number forKey:BTTVoiceCallNumKey];
         [[NSUserDefaults standardUserDefaults] synchronize];

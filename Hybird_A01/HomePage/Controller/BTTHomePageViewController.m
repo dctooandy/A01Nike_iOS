@@ -58,6 +58,7 @@
     }];
     [self loadDataOfHomePage];
     [self registerNotification];
+    [self loadMainData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

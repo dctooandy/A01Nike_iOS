@@ -113,7 +113,7 @@
         NSLog(@"%@",response);
         if (result.code_http == 200) {
             if (result.data) {
-                BTTBindStatusModel *model = [[BTTBindStatusModel alloc] initWithDictionary:result.data error:nil];
+                BTTBindStatusModel *model = [BTTBindStatusModel yy_modelWithDictionary:result.data];
                 self.statusModel = model;
                 [self.collectionView reloadData];
             }
