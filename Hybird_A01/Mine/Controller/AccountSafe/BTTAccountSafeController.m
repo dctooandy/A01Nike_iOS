@@ -12,7 +12,7 @@
 #import "BTTPasswordChangeController.h"
 #import "BTTBindingMobileController.h"
 #import "BTTBindEmailController.h"
-
+#import "BTTVerifyTypeSelectController+LoadData.h"
 @interface BTTAccountSafeController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
@@ -58,11 +58,22 @@
         BTTPasswordChangeController *vc = [[BTTPasswordChangeController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 1) {
-        BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-        vc.mobileCodeType = BTTMobileCodeTypeBindMobile;
+        UIViewController *vc = nil;
+        if ([IVNetwork userInfo].isPhoneBinded) {
+            BTTVerifyTypeSelectController *selectVC = [BTTVerifyTypeSelectController new];
+            selectVC.codeType = BTTMobileCodeTypeVerifyMobile;
+            vc = selectVC;
+        } else {
+            BTTBindingMobileController *bindingMobileVC = [[BTTBindingMobileController alloc] init];
+            bindingMobileVC.mobileCodeType = BTTMobileCodeTypeBindMobile;
+            vc = bindingMobileVC;
+        }
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         BTTBindEmailController *vc = [[BTTBindEmailController alloc] init];
+        if ([IVNetwork userInfo].isPhoneBinded) {
+            vc.codeType = BTTEmmailCodeTypeVerify;
+        }
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

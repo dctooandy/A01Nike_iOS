@@ -116,6 +116,13 @@
                 BTTBindStatusModel *model = [BTTBindStatusModel yy_modelWithDictionary:result.data];
                 self.statusModel = model;
                 [self.collectionView reloadData];
+                
+                NSMutableDictionary *userInfo = @{}.mutableCopy;
+                userInfo[@"isPhoneBinded"] =  @(model.phone);
+                userInfo[@"isEmailBinded"] =  @(model.email);
+                userInfo[@"isBankBinded"] =  @(model.bank);
+                userInfo[@"isBtcBinded"] =  @(model.btc);
+                [IVNetwork updateUserInfo:userInfo];
             }
         }
         
