@@ -14,7 +14,7 @@
 
 @end
 
-@interface BTTBannerImageModel : NSObject
+@interface BTTBannerImageModel : BTTBaseModel
 
 @property (nonatomic, copy) NSString *imgurl;
 

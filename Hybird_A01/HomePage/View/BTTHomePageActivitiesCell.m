@@ -54,7 +54,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGFloat bottom = self.activityModel.cellHeight - self.imageHeight - 37;
+    CGFloat bottom = 0; //self.activityModel.cellHeight - self.imageHeight - 37;
     [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(15);
         make.right.offset(-15);
@@ -81,7 +81,7 @@
 }
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didScrollToIndex:(NSInteger)index {
-    if (index + 1 == _activityModel.list.count) {
+    if (index + 1 == _activityModel.imgs.count) {
         if (_reloadBlock) {
             _reloadBlock();
         }
@@ -90,9 +90,9 @@
 
 - (void)setActivityModel:(BTTActivityModel *)activityModel {
     _activityModel = activityModel;
-    self.activitiesView.imageURLStringsGroup = activityModel.imageUrls;
+//    self.activitiesView.imageURLStringsGroup = activityModel.imageUrls;
     self.titleLabel.text = activityModel.title;
-    self.activitiesView.titlesGroup = activityModel.list;
+    self.activitiesView.titlesGroup = activityModel.imgs;
     self.descLabel.text = activityModel.desc;
 }
 

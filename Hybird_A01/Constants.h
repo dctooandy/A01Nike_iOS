@@ -136,6 +136,10 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTIsBindStatusAPI           @"/public/verify/isNewBind"
 
+// 首页逻辑接口
+
+#define BTTHomePageNewAPI            @"/A01/promotion/indexCombo"
+
 
 /********************************************常用宏*********************************************************/
 

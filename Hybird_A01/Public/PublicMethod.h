@@ -150,6 +150,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isValidateEmail:(NSString *)originalEmail;
 //正则表达式验证密码是否合法
 + (BOOL)isValidatePwd:(NSString *)originalPwd;
+
+
++ (NSString*)getCurrentTimesWithFormat:(NSString *)formatStr;
 @end
 
 NS_ASSUME_NONNULL_END
