@@ -145,7 +145,7 @@
                 if ([IVNetwork userInfo]) {
                     [self loadVoiceCallNumWithIsLogin:YES makeCall:^(NSString *uid) {
                         if (uid == nil || uid.length == 0) {
-                            [BTTProgressHUD showOnlyText:@"拨号失败请重试" toView:[UIApplication sharedApplication].delegate.window];
+                            [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
                         } else {
                             strongSelf(strongSelf);
                             [strongSelf registerUID:uid];
@@ -155,7 +155,7 @@
                 } else {
                     [self loadVoiceCallNumWithIsLogin:NO makeCall:^(NSString *uid) {
                         if (uid == nil || uid.length == 0) {
-                            [BTTProgressHUD showOnlyText:@"拨号失败请重试" toView:[UIApplication sharedApplication].delegate.window];
+                            [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
                         } else {
                             strongSelf(strongSelf);
                             [strongSelf registerUID:uid];
@@ -193,7 +193,7 @@
         [self.selectVC.navigationController pushViewController:vc animated:NO];
     } else {
         NSLog(@"VOIP注册失败");
-        [BTTProgressHUD showOnlyText:@"拨号失败请重试" toView:[UIApplication sharedApplication].delegate.window];
+        [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
     }
 }
 

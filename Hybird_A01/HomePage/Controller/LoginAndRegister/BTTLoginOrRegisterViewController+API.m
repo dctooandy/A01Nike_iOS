@@ -277,6 +277,9 @@
     [params setObject:[PublicMethod timeIntervalSince1970] forKey:BTTTimestamp];
     [IVNetwork sendRequestWithSubURL:BTTNoLoginMobileCodeAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
+        if (result.code_http == 200) {
+            [MBProgressHUD showSuccess:@"发送成功" toView:nil];
+        }
     }];
 }
 

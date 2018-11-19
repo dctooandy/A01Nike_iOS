@@ -38,11 +38,11 @@
     if (self.hud) {
         [self hideLoading];
     }
-    self.hud = [BTTProgressHUD showOnlyHUDOrCustom:BTTProgressHUDCustom images:@[@"dropdown_loading_01",@"dropdown_loading_02",@"dropdown_loading_03"] toView:self.view];
+    self.hud = [MBProgressHUD showCustomView:nil toView:nil];
 }
 
 - (void)hideLoading {
-    [self.hud dismiss];
+    [self.hud hideAnimated:NO];
 }
 
 @end

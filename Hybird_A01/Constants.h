@@ -15,7 +15,6 @@
 #import "NSDate+Extension.h"
 #import "UIColor+Util.h"
 #import "UIView+Frame.h"
-#import "BTTProgressHUD.h"
 #import <IVNetworkLibrary/IVNetwork.h>
 #import <IVGameLibrary/IVGame.h>
 #import "PublicMethod.h"
@@ -124,7 +123,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTVerifyCaptcha       @"/otherVerify/captcha"
 #define BTTUserFastRegister    @"/A01/users/fastRegister"
 #define BTTNoLoginMobileCodeAPI @"/otherVerify/send"
-#define BTTStepOneSendCode     @"/public/forgot/stepOneSendCode"
+#define BTTStepOneSendCode     @"/A01/forgot/stepOneSendCode"
 #define BTTValidateCaptcha     @"/otherVerify/validateCaptcha"
 #define BTTStepTwoCheckCode    @"/public/forgot/stepTwoCheckCode"
 #define BTTStepThreeUpdatePassword @"/public/forgot/stepThreeUpdatePassword"
