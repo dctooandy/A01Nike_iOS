@@ -42,7 +42,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BTTAppCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAppCollectionViewCell" forIndexPath:indexPath];
-    BTTDownloadModel *model = self.downloads[indexPath.row];
+    BTTDownloadModel *model =  self.downloads.count ? self.downloads[indexPath.row] : nil;
     cell.model = model;
     return cell;
 }

@@ -62,9 +62,16 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BTTGameCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTGameCollectionViewCell" forIndexPath:indexPath];
-    BTTGameModel *model = self.games[indexPath.row];
+    BTTGameModel *model = self.games.count ? self.games[indexPath.row] : nil;
     cell.gameIcon = model.icon.path;
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    BTTGameModel *model = self.games[indexPath.row];
+    if (self.clickEventBlock) {
+        self.clickEventBlock(model);
+    }
 }
 
 - (void)setGames:(NSArray *)games {
