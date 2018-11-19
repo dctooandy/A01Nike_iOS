@@ -111,7 +111,7 @@ static const char *BTTHeaderViewKey = "headerView";
         weakSelf(weakSelf);
         [tabbar loadVoiceCallNumWithIsLogin:isLogin makeCall:^(NSString *uid) {
             if (uid == nil || uid.length == 0) {
-                [BTTProgressHUD showOnlyText:@"拨号失败请重试" toView:[UIApplication sharedApplication].delegate.window];
+                [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
             } else {
                 strongSelf(strongSelf);
                 [strongSelf registerUID:uid];
@@ -204,7 +204,7 @@ static const char *BTTHeaderViewKey = "headerView";
         [self.navigationController pushViewController:vc animated:NO];
     } else {
         NSLog(@"VOIP注册失败");
-        [BTTProgressHUD showOnlyText:@"拨号失败请重试" toView:[UIApplication sharedApplication].delegate.window];
+        [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
     }
 }
 

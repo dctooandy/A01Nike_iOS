@@ -38,7 +38,7 @@
     if (self.nameTextField.text.length || self.phoneTextField.text.length || self.infoTextField.text.length) {
         [self unluckAccountWithName:self.nameTextField.text phone:self.phoneTextField.text info:self.infoTextField.text loginName:self.account];
     } else {
-        [MBProgressHUD showMessagNoActivity:@"请输入任一信息解锁" toView:nil];
+        [MBProgressHUD showError:@"请输入任一信息解锁" toView:nil];
     }
 }
 
@@ -71,12 +71,12 @@
         if (result.code_http == 200) {
             
             if (result.data) {
-                [MBProgressHUD showMessagNoActivity:@"已解锁，请重新登录！" toView:nil];
+                [MBProgressHUD showError:@"已解锁，请重新登录！" toView:nil];
                 if (self.dismissBlock) {
                     self.dismissBlock();
                 }
             } else {
-                [MBProgressHUD showMessagNoActivity:@"验证失败，请重试！" toView:nil];
+                [MBProgressHUD showError:@"验证失败，请重试！" toView:nil];
             }
         }
         

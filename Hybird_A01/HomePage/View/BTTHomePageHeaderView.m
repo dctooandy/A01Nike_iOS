@@ -159,7 +159,7 @@
     UIButton *registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [self addSubview:registerBtn];
     registerBtn.frame = CGRectMake(BTTLeftConstants + btnWidth + 10, KIsiPhoneX ? 89 : 69, btnWidth, btnHeight);
-    [registerBtn setTitle:@"极速开户" forState:UIControlStateNormal];
+    [registerBtn setTitle:@"立即开户" forState:UIControlStateNormal];
     registerBtn.layer.borderColor = [UIColor whiteColor].CGColor;
     registerBtn.layer.borderWidth = BTTBorderWidth;
     registerBtn.layer.cornerRadius = BTTCornerRadius;

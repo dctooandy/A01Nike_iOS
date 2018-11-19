@@ -46,7 +46,8 @@ static const NSInteger loadingTag = 10101;
     }else{
        hud.label.text = text;
     }
-    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:icon]];
+    UIImageView *iconImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:icon]];
+    hud.customView = iconImage;
     hud.mode = MBProgressHUDModeCustomView;
     hud.removeFromSuperViewOnHide = YES;
     [hud hideAnimated:YES afterDelay:1.0];
@@ -54,12 +55,12 @@ static const NSInteger loadingTag = 10101;
 
 #pragma mark 显示错误信息
 + (void)showError:(NSString *)error toView:(UIView *)view{
-    [self show:error icon:@"icon_notice.png" view:view];
+    [self show:error icon:@"app_sad" view:view];
 }
 
 + (void)showSuccess:(NSString *)success toView:(UIView *)view
 {
-    [self show:success icon:@"Checkmark.png" view:view];
+    [self show:success icon:@"app_smile" view:view];
 }
 
 #pragma mark 显示一些信息
@@ -100,4 +101,30 @@ static const NSInteger loadingTag = 10101;
     
     return hud;
 }
+
++ (MBProgressHUD *)showCustomView:(NSString *)message toView:(UIView *)view {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo : (view == nil ? [UIApplication sharedApplication].keyWindow : view) animated:YES];
+    hud.mode = MBProgressHUDModeCustomView;
+    hud.minSize = CGSizeMake(80,80);//定义弹窗的大小
+    hud.bezelView.blurEffectStyle = UIBlurEffectStyleDark;
+    hud.bezelView.color = [UIColor blackColor];
+    
+    UIImage *image = [[UIImage imageNamed:@"dropdown_loading_01"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
+    UIImageView* mainImageView= [[UIImageView alloc] initWithImage:image];
+    mainImageView.animationImages = [NSArray arrayWithObjects:
+                                     [UIImage imageNamed:@"dropdown_loading_01"],
+                                     [UIImage imageNamed:@"dropdown_loading_02"],
+                                     [UIImage imageNamed:@"dropdown_loading_03"],nil];
+    [mainImageView setAnimationDuration:0.4f];
+    [mainImageView setAnimationRepeatCount:0];
+    [mainImageView startAnimating];
+    hud.customView = mainImageView;
+    hud.animationType = MBProgressHUDAnimationFade;
+    hud.label.text = message;
+    hud.removeFromSuperViewOnHide = YES;
+    [view bringSubviewToFront:hud];
+    return hud;
+}
+
 @end

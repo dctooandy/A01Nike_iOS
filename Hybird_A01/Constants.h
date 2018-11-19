@@ -15,7 +15,6 @@
 #import "NSDate+Extension.h"
 #import "UIColor+Util.h"
 #import "UIView+Frame.h"
-#import "BTTProgressHUD.h"
 #import <IVNetworkLibrary/IVNetwork.h>
 #import <IVGameLibrary/IVGame.h>
 #import "PublicMethod.h"

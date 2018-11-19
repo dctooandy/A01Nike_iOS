@@ -45,15 +45,14 @@
 #pragma mark --------------------加载框-----------------------------------------
 - (void)showLoading {
     dispatch_main_async_safe((^{
-        //       self.hud = [BTTProgressHUD showLoadingCircletoView:self.view];
-        self.hud = [BTTProgressHUD showOnlyHUDOrCustom:BTTProgressHUDCustom images:@[@"dropdown_loading_01",@"dropdown_loading_02",@"dropdown_loading_03"] toView:self.view];
+        self.hud = [MBProgressHUD showCustomView:nil toView:self.view];
     }));
     
 }
 
 - (void)hideLoading {
     dispatch_main_async_safe(^{
-        [self.hud dismiss];
+        [self.hud hideAnimated:YES];
     });
     
 }

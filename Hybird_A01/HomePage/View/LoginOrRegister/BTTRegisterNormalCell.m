@@ -55,17 +55,17 @@
 - (void)textFieldChange:(UITextField *)textField {
     if (textField.tag == 1010) {
         if (textField.text.length > 9) {
-            [MBProgressHUD showMessagNoActivity:@"账号长度不能超过9位" toView:nil];
+            [MBProgressHUD showError:@"账号长度不能超过9位" toView:nil];
             textField.text = [textField.text substringToIndex:9];
         }
     } else if (textField.tag == 1012) {
         if (textField.text.length > 11) {
-            [MBProgressHUD showMessagNoActivity:@"手机号码长度不能超过11位" toView:nil];
+            [MBProgressHUD showError:@"手机号码长度不能超过11位" toView:nil];
             textField.text = [textField.text substringToIndex:11];
         }
     } else if (textField.tag == 1011) {
         if (textField.text.length > 10) {
-            [MBProgressHUD showMessagNoActivity:@"手机号码长度不能超过10位" toView:nil];
+            [MBProgressHUD showError:@"手机号码长度不能超过10位" toView:nil];
             textField.text = [textField.text substringToIndex:10];
         }
     }

@@ -17,4 +17,5 @@
 
 + (MBProgressHUD *)showMessag:(NSString *)message toView:(UIView *)view;
 + (MBProgressHUD *)showMessagNoActivity:(NSString *)message toView:(UIView *)view;
++ (MBProgressHUD *)showCustomView:(NSString *)message toView:(UIView *)view;
 @end

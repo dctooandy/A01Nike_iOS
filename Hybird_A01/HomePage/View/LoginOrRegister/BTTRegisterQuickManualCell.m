@@ -64,14 +64,14 @@
 
 - (IBAction)codeBtnClick:(id)sender {
     if (!self.phoneTextField.text.length) {
-        [MBProgressHUD showMessagNoActivity:@"请填写手机号码" toView:nil];
+        [MBProgressHUD showError:@"请填写手机号码" toView:nil];
         return;
     }
     NSString *phoneregex = @"^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
     NSPredicate *phonepredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneregex];
     BOOL isphone = [phonepredicate evaluateWithObject:self.phoneTextField.text];
     if (!isphone) {
-        [MBProgressHUD showMessagNoActivity:@"请填写正确的手机号码" toView:nil];
+        [MBProgressHUD showError:@"请填写正确的手机号码" toView:nil];
         return;
     }
     
@@ -84,12 +84,12 @@
 - (void)textFieldChange:(UITextField *)textField {
     if (textField.tag == 3011) {
         if (textField.text.length > 9) {
-            [MBProgressHUD showMessagNoActivity:@"账号长度不能超过9位" toView:nil];
+            [MBProgressHUD showError:@"账号长度不能超过9位" toView:nil];
             textField.text = [textField.text substringToIndex:9];
         }
     } else if (textField.tag == 3010) {
         if (textField.text.length > 11) {
-            [MBProgressHUD showMessagNoActivity:@"手机号码长度不能超过11位" toView:nil];
+            [MBProgressHUD showError:@"手机号码长度不能超过11位" toView:nil];
             textField.text = [textField.text substringToIndex:11];
         }
     }
