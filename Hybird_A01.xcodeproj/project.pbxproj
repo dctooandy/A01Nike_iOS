@@ -117,7 +117,6 @@
 		3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8F520B2161EB2D0069D1B3 /* VideoToolbox.framework */; };
 		3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8F520D2161EB370069D1B3 /* GLKit.framework */; };
 		3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8F520F2161EB510069D1B3 /* libc++.tbd */; };
-		3A8F52352161EE9E0069D1B3 /* DeviceModelsForIOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A8F52342161EE9E0069D1B3 /* DeviceModelsForIOS.plist */; };
 		3A92940C219BBCCD00764E7E /* BTTLoginOrRegisterViewController+API.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A92940B219BBCCD00764E7E /* BTTLoginOrRegisterViewController+API.m */; };
 		3A929412219BBD4F00764E7E /* BTTLoginAPIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A929410219BBD4F00764E7E /* BTTLoginAPIModel.m */; };
 		3A929415219BFEE100764E7E /* BTTCreateAPIModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A929414219BFEE100764E7E /* BTTCreateAPIModel.m */; };
@@ -305,6 +304,13 @@
 		3AE1EB2021805E980073A32D /* BTTAddCardBtnsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1EB1E21805E980073A32D /* BTTAddCardBtnsCell.m */; };
 		3AE1EB2121805E980073A32D /* BTTAddCardBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE1EB1F21805E980073A32D /* BTTAddCardBtnsCell.xib */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_A01.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */; };
+		EA5F140B21A26042004305A7 /* BTTRequestPrecache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F140A21A26042004305A7 /* BTTRequestPrecache.m */; };
+		EA5F140E21A261BA004305A7 /* BTTHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F140D21A261BA004305A7 /* BTTHttpManager.m */; };
+		EA5F141121A265B0004305A7 /* BTTBankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141021A265B0004305A7 /* BTTBankModel.m */; };
+		EA5F141A21A28515004305A7 /* IVGameUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141421A28514004305A7 /* IVGameUtility.m */; };
+		EA5F141B21A28515004305A7 /* DeviceModelsForIOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA5F141521A28514004305A7 /* DeviceModelsForIOS.plist */; };
+		EA5F141C21A28515004305A7 /* NeedDeviceURL.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA5F141621A28514004305A7 /* NeedDeviceURL.plist */; };
+		EA5F141D21A28515004305A7 /* IVNetworkStatusDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141921A28514004305A7 /* IVNetworkStatusDetailViewController.m */; };
 		EACCD202218FE1680090B5E6 /* IVWebViewUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */; };
 		EAE89DCB218C3A7400C29393 /* SDWebImage+Compat3_8_1.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE89DC9218C3A7300C29393 /* SDWebImage+Compat3_8_1.m */; };
 		EAE89E86218C3ABD00C29393 /* angry.gif in Resources */ = {isa = PBXBuildFile; fileRef = EAE89DCE218C3ABC00C29393 /* angry.gif */; };
@@ -715,7 +721,6 @@
 		3A8F520B2161EB2D0069D1B3 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		3A8F520D2161EB370069D1B3 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		3A8F520F2161EB510069D1B3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		3A8F52342161EE9E0069D1B3 /* DeviceModelsForIOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DeviceModelsForIOS.plist; sourceTree = "<group>"; };
 		3A92940A219BBCCD00764E7E /* BTTLoginOrRegisterViewController+API.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTTLoginOrRegisterViewController+API.h"; sourceTree = "<group>"; };
 		3A92940B219BBCCD00764E7E /* BTTLoginOrRegisterViewController+API.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTTLoginOrRegisterViewController+API.m"; sourceTree = "<group>"; };
 		3A929410219BBD4F00764E7E /* BTTLoginAPIModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLoginAPIModel.m; sourceTree = "<group>"; };
@@ -1031,6 +1036,18 @@
 		3AE1EB1E21805E980073A32D /* BTTAddCardBtnsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTAddCardBtnsCell.m; sourceTree = "<group>"; };
 		3AE1EB1F21805E980073A32D /* BTTAddCardBtnsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTAddCardBtnsCell.xib; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_A01.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA5F140921A26042004305A7 /* BTTRequestPrecache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTRequestPrecache.h; sourceTree = "<group>"; };
+		EA5F140A21A26042004305A7 /* BTTRequestPrecache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTRequestPrecache.m; sourceTree = "<group>"; };
+		EA5F140C21A261BA004305A7 /* BTTHttpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTHttpManager.h; sourceTree = "<group>"; };
+		EA5F140D21A261BA004305A7 /* BTTHttpManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTHttpManager.m; sourceTree = "<group>"; };
+		EA5F140F21A265B0004305A7 /* BTTBankModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBankModel.h; sourceTree = "<group>"; };
+		EA5F141021A265B0004305A7 /* BTTBankModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBankModel.m; sourceTree = "<group>"; };
+		EA5F141321A28514004305A7 /* IVGameUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVGameUtility.h; sourceTree = "<group>"; };
+		EA5F141421A28514004305A7 /* IVGameUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVGameUtility.m; sourceTree = "<group>"; };
+		EA5F141521A28514004305A7 /* DeviceModelsForIOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DeviceModelsForIOS.plist; sourceTree = "<group>"; };
+		EA5F141621A28514004305A7 /* NeedDeviceURL.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NeedDeviceURL.plist; sourceTree = "<group>"; };
+		EA5F141821A28514004305A7 /* IVNetworkStatusDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVNetworkStatusDetailViewController.h; sourceTree = "<group>"; };
+		EA5F141921A28514004305A7 /* IVNetworkStatusDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVNetworkStatusDetailViewController.m; sourceTree = "<group>"; };
 		EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVWebViewUtility.m; sourceTree = "<group>"; };
 		EACCD201218FE1680090B5E6 /* IVWebViewUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVWebViewUtility.h; sourceTree = "<group>"; };
 		EAE89DC9218C3A7300C29393 /* SDWebImage+Compat3_8_1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImage+Compat3_8_1.m"; sourceTree = "<group>"; };
@@ -1609,6 +1626,7 @@
 		3A8D6E9321633D3E000530DF /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				EA5F140821A25EB5004305A7 /* NetworkCache */,
 				3A8D6E812163077C000530DF /* DataBaseManager */,
 				3A8D6E9421633D3E000530DF /* CLive800Manager.h */,
 				3A8D6E9521633D3E000530DF /* CLive800Manager.m */,
@@ -1618,6 +1636,8 @@
 				3AD9CD5A21661BE800685B43 /* BTTRedDotManager.m */,
 				3AD9CF31216C7AC100685B43 /* HDSocketManager.h */,
 				3AD9CF30216C7AC100685B43 /* HDSocketManager.m */,
+				EA5F140C21A261BA004305A7 /* BTTHttpManager.h */,
+				EA5F140D21A261BA004305A7 /* BTTHttpManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1687,7 +1707,6 @@
 				3AD4C9C221635AEC00FC0A63 /* app.json */,
 				3A8F5139215F74D00069D1B3 /* LaunchScreen.storyboard */,
 				3AD9CD472164B10000685B43 /* Info.plist */,
-				3A8F52342161EE9E0069D1B3 /* DeviceModelsForIOS.plist */,
 				3A8F513D215F74D00069D1B3 /* main.m */,
 				3A8F516C215F763E0069D1B3 /* Hybird_A01.pch */,
 			);
@@ -1760,6 +1779,7 @@
 		3A8F5167215F758A0069D1B3 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				EA5F141221A28514004305A7 /* IVFoundation */,
 				3AD9CD5D21670FB100685B43 /* ThirdParty */,
 				3AD9CD5C21670F6E00685B43 /* Lib */,
 				3A8D6E9321633D3E000530DF /* Manager */,
@@ -2184,8 +2204,6 @@
 				3AD9CF34216C7AEF00685B43 /* HAInitConfig.m */,
 				3A8D6E9E21634306000530DF /* BridgeProtocolExternal.h */,
 				3A8D6E9F21634306000530DF /* BridgeProtocolExternal.m */,
-				EACCD201218FE1680090B5E6 /* IVWebViewUtility.h */,
-				EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */,
 			);
 			path = Hybird;
 			sourceTree = "<group>";
@@ -2336,6 +2354,8 @@
 				3ADD2388217819D500FA959A /* BTTMeMainModel.m */,
 				3A9E4C43219E9CAD00E7D8C0 /* BTTBindStatusModel.h */,
 				3A9E4C44219E9CAD00E7D8C0 /* BTTBindStatusModel.m */,
+				EA5F140F21A265B0004305A7 /* BTTBankModel.h */,
+				EA5F141021A265B0004305A7 /* BTTBankModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2588,6 +2608,38 @@
 				6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA5F140821A25EB5004305A7 /* NetworkCache */ = {
+			isa = PBXGroup;
+			children = (
+				EA5F140921A26042004305A7 /* BTTRequestPrecache.h */,
+				EA5F140A21A26042004305A7 /* BTTRequestPrecache.m */,
+			);
+			path = NetworkCache;
+			sourceTree = "<group>";
+		};
+		EA5F141221A28514004305A7 /* IVFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				EACCD201218FE1680090B5E6 /* IVWebViewUtility.h */,
+				EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */,
+				EA5F141321A28514004305A7 /* IVGameUtility.h */,
+				EA5F141421A28514004305A7 /* IVGameUtility.m */,
+				EA5F141521A28514004305A7 /* DeviceModelsForIOS.plist */,
+				EA5F141621A28514004305A7 /* NeedDeviceURL.plist */,
+				EA5F141721A28514004305A7 /* NetworkStatuts */,
+			);
+			path = IVFoundation;
+			sourceTree = "<group>";
+		};
+		EA5F141721A28514004305A7 /* NetworkStatuts */ = {
+			isa = PBXGroup;
+			children = (
+				EA5F141821A28514004305A7 /* IVNetworkStatusDetailViewController.h */,
+				EA5F141921A28514004305A7 /* IVNetworkStatusDetailViewController.m */,
+			);
+			path = NetworkStatuts;
 			sourceTree = "<group>";
 		};
 		EAE89DCC218C3ABC00C29393 /* LIVResources */ = {
@@ -2934,6 +2986,7 @@
 				3AD9CF51216EFB3700685B43 /* BTTHomePageBannerCell.xib in Resources */,
 				EAE89ED4218C3ABD00C29393 /* LIVSentMessageBackground@3x.png in Resources */,
 				EAE89EFE218C3ABD00C29393 /* photo_original_def@2x.png in Resources */,
+				EA5F141C21A28515004305A7 /* NeedDeviceURL.plist in Resources */,
 				EAE89F25218C3ABD00C29393 /* LIVRadioButton.nib in Resources */,
 				EAE89EC6218C3ABD00C29393 /* LIVRadioButton_selected@3x.png in Resources */,
 				EAE89F20218C3ABD00C29393 /* LIVFileMessageContentView.nib in Resources */,
@@ -3032,7 +3085,6 @@
 				EAE89EBA218C3ABD00C29393 /* LIVFileMessage_TypeZip@3x.png in Resources */,
 				EAE89EA6218C3ABD00C29393 /* LIVCameraItem@3x.png in Resources */,
 				3AD9CF6E216F33F300685B43 /* BTTGameCollectionViewCell.xib in Resources */,
-				3A8F52352161EE9E0069D1B3 /* DeviceModelsForIOS.plist in Resources */,
 				EAE89F06218C3ABD00C29393 /* receivedVoicePlaying2@2x.png in Resources */,
 				EAE89E88218C3ABD00C29393 /* cry.gif in Resources */,
 				EAE89EB9218C3ABD00C29393 /* LIVFileMessage_TypeZip@2x.png in Resources */,
@@ -3096,6 +3148,7 @@
 				3A9E4C2F219D924800E7D8C0 /* BTTMakeCallNoLoginView.xib in Resources */,
 				3AE0582521704DCB00C7E70D /* BTTHomePageAmountsCell.xib in Resources */,
 				EAE89EF0218C3ABD00C29393 /* LIVVoiceItem_highlight@2x.png in Resources */,
+				EA5F141B21A28515004305A7 /* DeviceModelsForIOS.plist in Resources */,
 				3AD9CF8A216F4E5400685B43 /* BTTHomePageDiscountCell.xib in Resources */,
 				EAE89F1C218C3ABD00C29393 /* LIVEmotionBoardCell.nib in Resources */,
 				3AC3FFA6219ABED9008AECCB /* BTTUnlockPopView.xib in Resources */,
@@ -3269,6 +3322,7 @@
 				3A929423219C3B7500764E7E /* BTTRegisterSuccessOneCell.m in Sources */,
 				3A8D6E9921633D3E000530DF /* PushManager.m in Sources */,
 				3A8F51A1215F77EC0069D1B3 /* UIColor+Util.m in Sources */,
+				EA5F140B21A26042004305A7 /* BTTRequestPrecache.m in Sources */,
 				3A37E1202164A21900FB13A1 /* BTTLuckyWheelViewController.m in Sources */,
 				3A9E4C7F21A25B0A00E7D8C0 /* BTTChangeMobileNextController+LoadData.m in Sources */,
 				3AE1EAEC218006820073A32D /* BTTCardBindMobileController.m in Sources */,
@@ -3290,6 +3344,7 @@
 				3A49DF9B2179D90D00FEFBDA /* BTTBindingMobileOneCell.m in Sources */,
 				3ADD236C21772A1E00FA959A /* BTTMeInfoCell.m in Sources */,
 				3A929428219C3D6200764E7E /* BTTRegisterSuccessBtnsCell.m in Sources */,
+				EA5F141121A265B0004305A7 /* BTTBankModel.m in Sources */,
 				3AE1EB192180585B0073A32D /* BTTAddCardController.m in Sources */,
 				3AD9CF60216F1EAB00685B43 /* BTTHomePageNoticeCell.m in Sources */,
 				3A9E4C62219FDA7300E7D8C0 /* BTTGameModel.m in Sources */,
@@ -3336,6 +3391,7 @@
 				3A9E4C7821A2577600E7D8C0 /* BTTChangeMobileManualController+LoadData.m in Sources */,
 				3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */,
 				3AAE8218219A738B003EC8B0 /* BTTForgetPasswordCell.m in Sources */,
+				EA5F141D21A28515004305A7 /* IVNetworkStatusDetailViewController.m in Sources */,
 				3AD9CF54216EFD0700685B43 /* BTTBannerModel.m in Sources */,
 				3A11AE022181C16800B1AFF4 /* BTTWithdrawalSuccessController.m in Sources */,
 				3AD9CF64216F208C00685B43 /* BTTNoticeModel.m in Sources */,
@@ -3385,6 +3441,7 @@
 				3A49DF972179D89000FEFBDA /* BTTBindingMobileController.m in Sources */,
 				3AE1EB002180228B0073A32D /* BTTVerifySelectCell.m in Sources */,
 				3AE0581A2170314900C7E70D /* BTTActivityModel.m in Sources */,
+				EA5F141A21A28515004305A7 /* IVGameUtility.m in Sources */,
 				3A514E432186F3CB00B83881 /* BTTLastWeekCell.m in Sources */,
 				3AD9CF89216F4E5400685B43 /* BTTHomePageDiscountCell.m in Sources */,
 				3A8F5173215F77A50069D1B3 /* BTTAdvertiseView.m in Sources */,
@@ -3415,6 +3472,7 @@
 				3AC3FFA4219ABEBF008AECCB /* BTTUnlockPopView.m in Sources */,
 				3A11AE4B21869B2200B1AFF4 /* BTTSettingsController.m in Sources */,
 				3AAE821E219A738B003EC8B0 /* BTTRegisterQuickManualCell.m in Sources */,
+				EA5F140E21A261BA004305A7 /* BTTHttpManager.m in Sources */,
 				3AC3FFA9219ACD48008AECCB /* BTTLoginOrRegisterViewController+UI.m in Sources */,
 				3A11AE4F2186A09700B1AFF4 /* BTTModifyLimitViewController.m in Sources */,
 				3A11ADF12181A1E200B1AFF4 /* BTTWithdrawalController.m in Sources */,
@@ -3638,7 +3696,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6UDM79GA72;
 				ENABLE_BITCODE = NO;
@@ -3664,7 +3722,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
-				PROVISIONING_PROFILE_SPECIFIER = a01iphone_dev;
+				PROVISIONING_PROFILE_SPECIFIER = a01iphone_Dist;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

@@ -735,6 +735,24 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     return _dataPath;
 }
 
++ (NSMutableDictionary *)commonH5ArgumentWithUserParameters:(NSDictionary *)parameters{
+    NSMutableDictionary *argument = nil;
+    if (parameters) {
+        argument = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    }else{
+        argument = @{}.mutableCopy;
+    }
+    NSString *appToken = [IVNetwork appToken];
+    argument[@"appToken"] =  appToken ? appToken : @"";
+    NSString *udid = @"";
+    argument[@"deviceid"] = [NSString isBlankString:udid] ? [IVNetwork getDeviceId] : udid;
+    if ([IVNetwork userInfo]) {
+        argument[@"userToken"] = [IVNetwork userInfo].userToken;
+        argument[@"accountName"] = [IVNetwork userInfo].loginName;
+    }
+    return argument;
+}
+
 + (BOOL)isValidateLeaveMessage:(NSString *)leaveMessage{
     //预留信息只支持数字,英文小写或中文字符.务必牢记,保护您的交易安全
     NSString *regular = @"^[a-zA-Z0-9\u4e00-\u9fa5]{1,16}";

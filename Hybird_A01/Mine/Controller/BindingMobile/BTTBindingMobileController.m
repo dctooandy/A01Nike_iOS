@@ -245,7 +245,7 @@
                 [MBProgressHUD showSuccess:successStr toView:nil];
             }
             NSString *phone = result.data[@"val"];
-            [IVNetwork updateUserInfo:@{@"phone" : phone}];
+            [IVNetwork updateUserInfo:@{@"phone" : phone,@"isPhoneBinded" : @(YES)}];
             switch (self.mobileCodeType) {
                 case BTTMobileCodeTypeBindMobile:
                 case BTTMobileCodeTypeChangeMobile:

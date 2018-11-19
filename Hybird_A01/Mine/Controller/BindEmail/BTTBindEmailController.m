@@ -228,7 +228,7 @@
                 [MBProgressHUD showSuccess:successStr toView:nil];
             }
             NSString *email = result.data[@"val"];
-            [IVNetwork updateUserInfo:@{@"email" : email}];
+            [IVNetwork updateUserInfo:@{@"email" : email,@"isEmailBinded" : @(YES)}];
             switch (self.codeType) {
                 case BTTEmmailCodeTypeBind:
                 case BTTEmmailCodeTypeChange:

@@ -10,5 +10,5 @@
 #define Hybird_A01_pch
 
 #import "Constants.h"
-
+#import "BTTHttpManager.h"
 #endif

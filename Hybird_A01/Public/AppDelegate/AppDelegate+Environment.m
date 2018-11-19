@@ -13,6 +13,7 @@
 #import "WebViewUserAgaent.h"
 #import "HAInitConfig.h"
 #import "IVWebViewUtility.h"
+#import "BTTRequestPrecache.h"
 @implementation AppDelegate (Environment)
 
 /**
@@ -43,7 +44,7 @@
     [IVNetwork setDefaultH5Domian:[HAInitConfig defaultH5Domain]];
     [IVNetwork setDefaultCDN:[HAInitConfig defaultCDN]];
     [IVNetwork startLaunchProcessWithFinished:^{
-        
+        [BTTRequestPrecache startUpdateCache];
     }];
     [self setupRedDot];
 }
