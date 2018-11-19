@@ -149,6 +149,11 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTBrandHighlights           @"/A01/promotion/getBrandHighlights"
 
 
+// 优惠列表
+
+#define BTTPromotionList             @"/A01/promotion/newList"
+
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)  ([UIFont systemFontOfSize:X])

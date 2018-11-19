@@ -178,20 +178,28 @@ static const char *BTTNextGroupKey = "nextGroup";
         NSLog(@"%@",response);
         if (result.code_http == 200) {
             if (result.data) {
-                [self.amounts removeAllObjects];
-                for (NSDictionary *dict in result.data[@"maxRecords"]) {
-                    BTTAmountModel *model = [BTTAmountModel yy_modelWithDictionary:dict];
-                    [self.amounts addObject:model];
+                if (![result.data[@"maxRecords"] isKindOfClass:[NSNull class]]) {
+                    [self.amounts removeAllObjects];
+                    for (NSDictionary *dict in result.data[@"maxRecords"]) {
+                        BTTAmountModel *model = [BTTAmountModel yy_modelWithDictionary:dict];
+                        [self.amounts addObject:model];
+                    }
                 }
-                [self.posters removeAllObjects];
-                for (NSDictionary *dict in result.data[@"poster"]) {
-                    BTTPosterModel *model = [BTTPosterModel yy_modelWithDictionary:dict];
-                    [self.posters addObject:model];
+                
+                if (![result.data[@"poster"] isKindOfClass:[NSNull class]]) {
+                    [self.posters removeAllObjects];
+                    for (NSDictionary *dict in result.data[@"poster"]) {
+                        BTTPosterModel *model = [BTTPosterModel yy_modelWithDictionary:dict];
+                        [self.posters addObject:model];
+                    }
                 }
-                [self.promotions removeAllObjects];
-                for (NSDictionary *dict in result.data[@"promotions"]) {
-                    BTTPromotionModel *model = [BTTPromotionModel yy_modelWithDictionary:dict];
-                    [self.promotions addObject:model];
+                
+                if (![result.data[@"promotions"] isKindOfClass:[NSNull class]]) {
+                    [self.promotions removeAllObjects];
+                    for (NSDictionary *dict in result.data[@"promotions"]) {
+                        BTTPromotionModel *model = [BTTPromotionModel yy_modelWithDictionary:dict];
+                        [self.promotions addObject:model];
+                    }
                 }
             }
         }
@@ -203,22 +211,31 @@ static const char *BTTNextGroupKey = "nextGroup";
         NSLog(@"%@",response);
         if (result.code_http == 200) {
             if (result.data) {
-                [self.banners removeAllObjects];
-                [self.imageUrls removeAllObjects];
-                for (NSDictionary *dict in result.data[@"banners"]) {
-                    BTTBannerModel *model = [BTTBannerModel yy_modelWithDictionary:dict];
-                    [self.imageUrls addObject:model.imgurl];
-                    [self.banners addObject:model];
+                if (![result.data[@"banners"] isKindOfClass:[NSNull class]]) {
+                    [self.banners removeAllObjects];
+                    [self.imageUrls removeAllObjects];
+                    for (NSDictionary *dict in result.data[@"banners"]) {
+                        BTTBannerModel *model = [BTTBannerModel yy_modelWithDictionary:dict];
+                        [self.imageUrls addObject:model.imgurl];
+                        [self.banners addObject:model];
+                    }
                 }
-                [self.downloads removeAllObjects];
-                for (NSDictionary *dict in result.data[@"downloads"]) {
-                    BTTDownloadModel *model = [BTTDownloadModel yy_modelWithDictionary:dict];
-                    [self.downloads addObject:model];
+                
+                NSLog(@"%@",NSStringFromClass([result.data[@"downloads"] class]));
+                if (![result.data[@"downloads"] isKindOfClass:[NSNull class]]) {
+                    [self.downloads removeAllObjects];
+                    for (NSDictionary *dict in result.data[@"downloads"]) {
+                        BTTDownloadModel *model = [BTTDownloadModel yy_modelWithDictionary:dict];
+                        [self.downloads addObject:model];
+                    }
                 }
-                [self.games removeAllObjects];
-                for (NSDictionary *dict in result.data[@"games"]) {
-                    BTTGameModel *model = [BTTGameModel yy_modelWithDictionary:dict];
-                    [self.games addObject:model];
+                
+                if (![result.data[@"games"] isKindOfClass:[NSNull class]]) {
+                    [self.games removeAllObjects];
+                    for (NSDictionary *dict in result.data[@"games"]) {
+                        BTTGameModel *model = [BTTGameModel yy_modelWithDictionary:dict];
+                        [self.games addObject:model];
+                    }
                 }
             }
         }
