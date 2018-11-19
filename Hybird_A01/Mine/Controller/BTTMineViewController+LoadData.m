@@ -107,26 +107,7 @@
 }
 
 - (void)loadBindStatus {
-    NSString *typeList = @"phone;email;bank;btc";
-    NSDictionary *pramas = @{@"typeList":typeList};
-    [IVNetwork sendRequestWithSubURL:BTTIsBindStatusAPI paramters:pramas completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        if (result.code_http == 200) {
-            if (result.data) {
-                BTTBindStatusModel *model = [BTTBindStatusModel yy_modelWithDictionary:result.data];
-                self.statusModel = model;
-                [self.collectionView reloadData];
-                
-                NSMutableDictionary *userInfo = @{}.mutableCopy;
-                userInfo[@"isPhoneBinded"] =  @(model.phone);
-                userInfo[@"isEmailBinded"] =  @(model.email);
-                userInfo[@"isBankBinded"] =  @(model.bank);
-                userInfo[@"isBtcBinded"] =  @(model.btc);
-                [IVNetwork updateUserInfo:userInfo];
-            }
-        }
-        
-    }];
+    [BTTHttpManager fetchBindStatusWithCompletion:nil];
 }
 
 #pragma mark - 动态添加属性
