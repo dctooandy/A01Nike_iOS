@@ -177,6 +177,7 @@
 		3AB0682421A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB0682221A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.xib */; };
 		3AB0682921A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0682721A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.m */; };
 		3AB0682A21A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB0682821A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.xib */; };
+		3AB0683121A2964000072FB7 /* BTTDiscountsViewController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0683021A2964000072FB7 /* BTTDiscountsViewController+LoadData.m */; };
 		3AC3FFA1219AB8CC008AECCB /* BTTAnimationPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA0219AB8CC008AECCB /* BTTAnimationPopView.m */; };
 		3AC3FFA4219ABEBF008AECCB /* BTTUnlockPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA3219ABEBF008AECCB /* BTTUnlockPopView.m */; };
 		3AC3FFA6219ABED9008AECCB /* BTTUnlockPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA5219ABED8008AECCB /* BTTUnlockPopView.xib */; };
@@ -824,6 +825,8 @@
 		3AB0682621A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTChangeMobileSuccessBtnCell.h; sourceTree = "<group>"; };
 		3AB0682721A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTChangeMobileSuccessBtnCell.m; sourceTree = "<group>"; };
 		3AB0682821A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTChangeMobileSuccessBtnCell.xib; sourceTree = "<group>"; };
+		3AB0682F21A2964000072FB7 /* BTTDiscountsViewController+LoadData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTTDiscountsViewController+LoadData.h"; sourceTree = "<group>"; };
+		3AB0683021A2964000072FB7 /* BTTDiscountsViewController+LoadData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTTDiscountsViewController+LoadData.m"; sourceTree = "<group>"; };
 		3AC3FF9F219AB8CC008AECCB /* BTTAnimationPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTAnimationPopView.h; sourceTree = "<group>"; };
 		3AC3FFA0219AB8CC008AECCB /* BTTAnimationPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTAnimationPopView.m; sourceTree = "<group>"; };
 		3AC3FFA2219ABEBF008AECCB /* BTTUnlockPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUnlockPopView.h; sourceTree = "<group>"; };
@@ -1565,6 +1568,8 @@
 			children = (
 				3A37E1232164A22700FB13A1 /* BTTDiscountsViewController.h */,
 				3A37E1242164A22700FB13A1 /* BTTDiscountsViewController.m */,
+				3AB0682F21A2964000072FB7 /* BTTDiscountsViewController+LoadData.h */,
+				3AB0683021A2964000072FB7 /* BTTDiscountsViewController+LoadData.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3349,6 +3354,7 @@
 				3AD9CF60216F1EAB00685B43 /* BTTHomePageNoticeCell.m in Sources */,
 				3A9E4C62219FDA7300E7D8C0 /* BTTGameModel.m in Sources */,
 				3AD9CF78216F3F6300685B43 /* BTTAppCollectionViewCell.m in Sources */,
+				3AB0683121A2964000072FB7 /* BTTDiscountsViewController+LoadData.m in Sources */,
 				3A11ADDE21818A1A00B1AFF4 /* BTTAddBTCController.m in Sources */,
 				3AD9CD552165B2C900685B43 /* BTTPopoverViewCell.m in Sources */,
 				3A11AE672186D94B00B1AFF4 /* BTTThisWeekCell.m in Sources */,

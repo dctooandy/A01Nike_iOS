@@ -9,6 +9,9 @@
 #import "BTTDiscountsViewController.h"
 #import "BTTHomePageDiscountCell.h"
 #import "BTTHomePageHeaderView.h"
+#import "BTTDiscountsViewController+LoadData.h"
+#import "BTTPromotionModel.h"
+#import "BTTPromotionDetailController.h"
 
 @interface BTTDiscountsViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -21,15 +24,13 @@
     self.title = @"优惠";
     [self setupNav];
     [self setupCollectionView];
-    [self setupElements];
     weakSelf(weakSelf);
     [self pulldownRefreshWithRefreshBlock:^{
         NSLog(@"下拉刷新");
-        // 测试代码
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [weakSelf endRefreshing];
-        });
+        strongSelf(strongSelf);
+        [strongSelf loadMainData];
     }];
+    [self loadMainData];
     
 }
 
@@ -63,13 +64,20 @@
     } else {
         cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
     }
+    BTTPromotionModel *model = self.sheetDatas.count ? self.sheetDatas[indexPath.row] : nil;
+    cell.model = model;
+    
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
-    NSLog(@"%zd", indexPath.item);
+    BTTPromotionModel *model = self.sheetDatas[indexPath.row];
+    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+    vc.webConfigModel.url = model.href;
+    vc.webConfigModel.newView = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource
@@ -105,10 +113,17 @@
 }
 
 - (void)setupElements {
-    for (int i = 0; i < 19; i++) {
+    if (self.elementsHight.count) {
+        [self.elementsHight removeAllObjects];
+    }
+    
+    NSInteger total = self.sheetDatas.count;
+    for (int i = 0; i < total; i++) {
         [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 130)]];
     }
-    [self.collectionView reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+    });
 }
 
 
