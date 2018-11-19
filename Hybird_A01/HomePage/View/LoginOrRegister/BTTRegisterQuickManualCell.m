@@ -32,6 +32,8 @@
     [super awakeFromNib];
     self.tagLabel.layer.cornerRadius = 2;
     self.bgView.layer.cornerRadius = 4;
+    [self.accountField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.phoneTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 
@@ -79,6 +81,20 @@
     }
 }
 
+- (void)textFieldChange:(UITextField *)textField {
+    if (textField.tag == 3011) {
+        if (textField.text.length > 9) {
+            [MBProgressHUD showMessagNoActivity:@"账号长度不能超过9位" toView:nil];
+            textField.text = [textField.text substringToIndex:9];
+        }
+    } else if (textField.tag == 3010) {
+        if (textField.text.length > 11) {
+            [MBProgressHUD showMessagNoActivity:@"手机号码长度不能超过11位" toView:nil];
+            textField.text = [textField.text substringToIndex:11];
+        }
+    }
+    
+}
 - (void)countDown {
     __block int timeout = 60; // 倒计时时间
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);

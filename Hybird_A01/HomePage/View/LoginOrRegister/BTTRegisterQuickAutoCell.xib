@@ -64,7 +64,7 @@
                                     <constraint firstAttribute="width" constant="20" id="moY-Yk-Dqe"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aNt-YK-C4f">
+                            <textField opaque="NO" tag="2010" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aNt-YK-C4f">
                                 <rect key="frame" x="43" y="51" width="257" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Xpb-dn-FUI"/>
@@ -73,7 +73,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6V-Of-DwC">
+                            <textField opaque="NO" tag="2011" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6V-Of-DwC">
                                 <rect key="frame" x="43" y="153" width="142" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="OrQ-J9-FsS"/>

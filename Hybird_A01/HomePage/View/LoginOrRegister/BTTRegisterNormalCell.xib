@@ -85,7 +85,7 @@
                                     <constraint firstAttribute="height" constant="20" id="lgU-WZ-i7o"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="账号(4-9位数字或字母)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aNt-YK-C4f">
+                            <textField opaque="NO" tag="1010" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="账号(4-9位数字或字母)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aNt-YK-C4f">
                                 <rect key="frame" x="71" y="51" width="229" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Xpb-dn-FUI"/>
@@ -94,7 +94,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码(8-10位数字和字母" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5h9-h1-eEb">
+                            <textField opaque="NO" tag="1011" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码(8-10位数字和字母)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5h9-h1-eEb">
                                 <rect key="frame" x="43" y="102" width="229" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7DL-Ik-Wyc"/>
@@ -103,7 +103,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6V-Of-DwC">
+                            <textField opaque="NO" tag="1012" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6V-Of-DwC">
                                 <rect key="frame" x="43" y="153" width="257" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="OrQ-J9-FsS"/>
@@ -112,7 +112,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EJl-wh-ZDD">
+                            <textField opaque="NO" tag="1013" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EJl-wh-ZDD">
                                 <rect key="frame" x="43" y="204" width="194" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="HP0-3M-5tb"/>

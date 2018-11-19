@@ -25,12 +25,20 @@
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.bgView.layer.cornerRadius = 5;
     self.codeLabel.layer.cornerRadius = 2;
+    [self.accountTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
 
 }
 
 - (IBAction)showPwdClick:(UIButton *)sender {
     sender.selected = !sender.selected;
     self.pwdTextField.secureTextEntry = !sender.selected;
+}
+
+- (void)textFieldChange:(UITextField *)textField {
+    if (textField.text.length > 9) {
+        [MBProgressHUD showMessagNoActivity:@"账号长度不能超过9位" toView:nil];
+        textField.text = [textField.text substringToIndex:9];
+    }
 }
 
 
