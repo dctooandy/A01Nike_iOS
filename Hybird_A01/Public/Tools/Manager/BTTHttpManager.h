@@ -9,6 +9,20 @@
 #import <Foundation/Foundation.h>
 
 @interface BTTHttpManager : NSObject
+/**
+ 新的登录游戏接口
+ 
+ @param params 参数
+ @param isTry yes为试玩，no为真钱
+ */
++ (void)publicGameLoginWithParams:(NSDictionary *)params isTry:(BOOL)isTry completeBlock:(IVRequestCallBack)completeBlock;
+
+/**
+ 新的转账到游戏接口
+ 
+ @param provider 游戏商
+ */
++ (void)publicGameTransferWithProvider:(NSString *)provider completeBlock:(IVRequestCallBack)completeBlock;
 //获取银行卡列表
 + (void)fetchBankListWithCompletion:(IVRequestCallBack)completion;
 //获取手机、邮箱、银行卡、比特币钱包绑定状态

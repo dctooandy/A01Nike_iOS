@@ -138,6 +138,16 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSURL *)createFolderWithName:(NSString *)folderName inDirectory:(NSString *)directory;
 
 + (NSString*)dataPath;
+
+/**
+ *  H5业务组合公共参数
+ *
+ *  @param parameters 业务自定义参数
+ *
+ *  @return 包含公共参数的请求参数
+ */
++ (NSMutableDictionary *)commonH5ArgumentWithUserParameters:(NSDictionary *)parameters;
+
 //检测预留信息是否合法
 + (BOOL)isValidateLeaveMessage:(NSString *)leaveMessage;
 //检查真实姓名是否合法

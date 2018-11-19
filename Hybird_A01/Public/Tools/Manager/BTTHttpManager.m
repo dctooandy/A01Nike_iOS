@@ -18,6 +18,25 @@
 {
     [IVNetwork sendUseCacheRequestWithSubURL:url paramters:paramters completionBlock:completionBlock];
 }
++ (void)publicGameLoginWithParams:(NSDictionary *)params isTry:(BOOL)isTry completeBlock:(IVRequestCallBack)completeBlock{
+    NSString *subUrl = isTry ? @"public/game/tryPlay" : @"public/game/login";
+    [self sendRequestWithUrl:subUrl paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+        NSString *url = nil;
+        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
+            url = [result.data valueForKey:@"url"];
+        }
+        if (completeBlock) {
+            completeBlock(result,url);
+        }
+    }];
+}
+
++ (void)publicGameTransferWithProvider:(NSString *)provider completeBlock:(IVRequestCallBack)completeBlock
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    [params setValue:provider forKey:@"game_name"];
+    [self sendRequestWithUrl: @"public/game/transfer" paramters:params.copy completionBlock:completeBlock];
+}
 + (void)fetchBankListWithCompletion:(IVRequestCallBack)completion
 {
     NSDictionary *params = @{
