@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTHomePageViewController (LoadData)
 
-@property (nonatomic, strong) NSMutableArray *imageUrls;
+
 
 @property (nonatomic, copy) NSString *noticeStr;
 
@@ -22,6 +22,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *amounts;
 
+@property (nonatomic, strong) NSMutableArray *posters;
+
+@property (nonatomic, strong) NSMutableArray *promotions;
+
+@property (nonatomic, strong) NSMutableArray *banners;
+
+@property (nonatomic, strong) NSMutableArray *downloads;
+
+@property (nonatomic, strong) NSMutableArray *games;
+
+@property (nonatomic, strong) NSMutableArray *imageUrls;
+
 @property (nonatomic, assign) NSInteger nextGroup;
 
 
@@ -30,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)makeCallWithPhoneNum:(NSString *)phone;
 
-- (void)loadMainData;
+- (void)refreshDatasOfHomePage;
 
 @end
 

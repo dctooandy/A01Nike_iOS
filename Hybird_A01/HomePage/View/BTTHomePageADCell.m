@@ -7,6 +7,8 @@
 //
 
 #import "BTTHomePageADCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "BTTPosterModel.h"
 
 @interface BTTHomePageADCell ()
 
@@ -21,11 +23,19 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
+    self.backgroundColor = [UIColor colorWithHexString:@"212229"];
 }
 
 - (IBAction)closeBtnClick:(id)sender {
     if (self.buttonClickBlock) {
         self.buttonClickBlock(sender);
+    }
+}
+
+- (void)setModel:(BTTPosterModel *)model {
+    _model = model;
+    if (model) {
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:model.logo.path] placeholderImage:ImageNamed(@"")];
     }
 }
 

@@ -37,4 +37,10 @@
     _bannerView.imageURLStringsGroup = [imageUrls copy];
 }
 
+- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
+    if (self.clickEventBlock) {
+        self.clickEventBlock(@(index));
+    }
+}
+
 @end

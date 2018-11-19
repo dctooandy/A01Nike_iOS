@@ -10,17 +10,22 @@
 
 @implementation BTTBannerModel
 
-
-@end
-
-@implementation BTTBannerImageModel
-
 - (NSString *)imgurl {
     if (![_imgurl hasPrefix:@"http"]) {
         _imgurl = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],_imgurl];
     }
     return _imgurl;
 }
+
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"action":[BTTBannerActionModel class]};
+}
+
+@end
+
+@implementation BTTBannerActionModel
+
+
 
 - (NSString *)detail {
     if (_detail.length && ![_detail hasPrefix:@"http"]) {

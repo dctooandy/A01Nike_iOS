@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTChangeMobileSuccessOneCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="213"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="213"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="withdrawal_successicon" translatesAutoresizingMaskIntoConstraints="NO" id="sVp-GN-ftn">
+                        <rect key="frame" x="146.5" y="40" width="82" height="82"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="82" id="6fC-hf-hPn"/>
+                            <constraint firstAttribute="width" constant="82" id="Za2-AK-vPp"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="申请已提交" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebf-Re-lgC">
+                        <rect key="frame" x="144" y="147" width="87" height="20"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="相关人员将在24小时内审核并添加, 请耐心等待." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIp-Rj-hNf">
+                        <rect key="frame" x="48" y="182" width="279" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="ebf-Re-lgC" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="3SO-KL-RWp"/>
+                <constraint firstItem="rIp-Rj-hNf" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="5OK-O1-78n"/>
+                <constraint firstItem="sVp-GN-ftn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="40" id="9yx-zg-3wG"/>
+                <constraint firstItem="ebf-Re-lgC" firstAttribute="top" secondItem="sVp-GN-ftn" secondAttribute="bottom" constant="25" id="fl2-mK-jj5"/>
+                <constraint firstItem="rIp-Rj-hNf" firstAttribute="top" secondItem="ebf-Re-lgC" secondAttribute="bottom" constant="15" id="tNM-kv-s2L"/>
+                <constraint firstItem="sVp-GN-ftn" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="zL1-92-zZ3"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="375" height="211"/>
+            <point key="canvasLocation" x="136.80000000000001" y="158.77061469265368"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="withdrawal_successicon" width="82" height="82"/>
+    </resources>
+</document>

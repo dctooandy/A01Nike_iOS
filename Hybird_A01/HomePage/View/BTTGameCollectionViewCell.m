@@ -7,6 +7,7 @@
 //
 
 #import "BTTGameCollectionViewCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface BTTGameCollectionViewCell ()
 
@@ -28,7 +29,7 @@
 
 - (void)setGameIcon:(NSString *)gameIcon {
     _gameIcon = gameIcon;
-    self.gameIconImageView.image = ImageNamed(_gameIcon);
+    [self.gameIconImageView sd_setImageWithURL:[NSURL URLWithString:gameIcon] placeholderImage:ImageNamed(@"")];
     if ([IVNetwork userInfo]) {
         self.tryPlayIcon.hidden = YES;
     } else {

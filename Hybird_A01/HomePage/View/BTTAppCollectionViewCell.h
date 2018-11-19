@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class BTTAppIconModel;
+@class BTTDownloadModel;
 @interface BTTAppCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, strong) BTTAppIconModel *appIconModel;
+@property (nonatomic, strong) BTTDownloadModel *model;
 
 @end
