@@ -1,34 +1,36 @@
 //
-//  BTTChangeMobileController.m
+//  BTTChangeMobileManualController.m
 //  Hybird_A01
 //
-//  Created by Domino on 22/10/2018.
+//  Created by Domino on 19/11/2018.
 //  Copyright © 2018 BTT. All rights reserved.
 //
 
-#import "BTTChangeMobileController.h"
+#import "BTTChangeMobileManualController.h"
+#import "BTTChangeMobileManualController+LoadData.h"
+#import "BTTCardModifyTitleCell.h"
+#import "BTTCardModifyCell.h"
 #import "BTTBindingMobileBtnCell.h"
-#import "BTTBindingMobileOneCell.h"
-#import "BTTChangeMobileController+LoadData.h"
+#import "BTTMeMainModel.h"
 
-@interface BTTChangeMobileController ()<BTTElementsFlowLayoutDelegate>
+@interface BTTChangeMobileManualController ()
 
 @end
 
-@implementation BTTChangeMobileController
+@implementation BTTChangeMobileManualController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"更改手机号";
     [self setupCollectionView];
-    [self setupElements];
+    [self loadMainData];
 }
 
 - (void)setupCollectionView {
     [super setupCollectionView];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTCardModifyTitleCell" bundle:nil] forCellWithReuseIdentifier:@"BTTCardModifyTitleCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTCardModifyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTCardModifyCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -36,14 +38,27 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == self.sheetDatas.count) {
-        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+    
+    if (indexPath.row == 0 || indexPath.row == 2) {
+        BTTMeMainModel *model = self.sheetDatas[indexPath.row];
+        BTTCardModifyTitleCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardModifyTitleCell" forIndexPath:indexPath];
+        cell.titleLabel.text = model.name;
+        return cell;
+    } else if (indexPath.row == 1 || indexPath.row == 3) {
+        BTTMeMainModel *model = self.sheetDatas[indexPath.row];
+        BTTCardModifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardModifyCell" forIndexPath:indexPath];
+        if (indexPath.row == 1) {
+            cell.textField.text = model.name;
+            cell.textField.userInteractionEnabled = NO;
+        } else {
+            cell.textField.text = @"";
+            cell.textField.placeholder = model.name;
+            cell.textField.userInteractionEnabled = YES;
+        }
         return cell;
     } else {
-        BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
-        BTTMeMainModel *model = self.sheetDatas[indexPath.row];
-        cell.model = model;
-        cell.textField.text = self.mobile;
+        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        cell.buttonType = BTTButtonTypeNext;
         return cell;
     }
 }
@@ -69,7 +84,7 @@
 }
 
 - (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
-    return UIEdgeInsetsMake(15, 0, 40, 0);
+    return UIEdgeInsetsMake(0, 0, 40, 0);
 }
 
 /**
@@ -85,7 +100,6 @@
 - (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView linesMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
     return 0;
 }
-
 
 - (void)setupElements {
     if (self.elementsHight.count) {

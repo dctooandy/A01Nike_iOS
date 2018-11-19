@@ -1,27 +1,27 @@
 //
-//  BTTChangeMobileController.m
+//  BTTChangeMobileNextController.m
 //  Hybird_A01
 //
-//  Created by Domino on 22/10/2018.
+//  Created by Domino on 19/11/2018.
 //  Copyright © 2018 BTT. All rights reserved.
 //
 
-#import "BTTChangeMobileController.h"
+#import "BTTChangeMobileNextController.h"
 #import "BTTBindingMobileBtnCell.h"
 #import "BTTBindingMobileOneCell.h"
-#import "BTTChangeMobileController+LoadData.h"
+#import "BTTChangeMobileNextController+LoadData.h"
 
-@interface BTTChangeMobileController ()<BTTElementsFlowLayoutDelegate>
+
+@interface BTTChangeMobileNextController ()<BTTElementsFlowLayoutDelegate>
 
 @end
 
-@implementation BTTChangeMobileController
+@implementation BTTChangeMobileNextController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"更改手机号";
     [self setupCollectionView];
-    [self setupElements];
+    [self loadMainData];
 }
 
 - (void)setupCollectionView {
@@ -40,10 +40,10 @@
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
         return cell;
     } else {
+        
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
-        cell.textField.text = self.mobile;
         return cell;
     }
 }
@@ -103,6 +103,5 @@
         [self.collectionView reloadData];
     });
 }
-
 
 @end

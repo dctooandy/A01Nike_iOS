@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^BTTButtonClickBlock)(UIButton *button);
 
-typedef void (^BTTClickEventBlock)(void);
+typedef void (^BTTClickEventBlock)(id value);
 
 
 @interface BTTBaseCollectionViewCell : UICollectionViewCell

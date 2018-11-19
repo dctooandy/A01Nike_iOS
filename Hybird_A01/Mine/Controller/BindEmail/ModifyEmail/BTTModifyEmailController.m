@@ -1,27 +1,25 @@
 //
-//  BTTChangeMobileController.m
+//  BTTModifyEmailController.m
 //  Hybird_A01
 //
-//  Created by Domino on 22/10/2018.
+//  Created by Domino on 19/11/2018.
 //  Copyright © 2018 BTT. All rights reserved.
 //
 
-#import "BTTChangeMobileController.h"
+#import "BTTModifyEmailController.h"
 #import "BTTBindingMobileBtnCell.h"
 #import "BTTBindingMobileOneCell.h"
-#import "BTTChangeMobileController+LoadData.h"
+#import "BTTModifyEmailController+LoadData.h"
 
-@interface BTTChangeMobileController ()<BTTElementsFlowLayoutDelegate>
+@interface BTTModifyEmailController ()<BTTElementsFlowLayoutDelegate>
 
 @end
 
-@implementation BTTChangeMobileController
+@implementation BTTModifyEmailController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"更改手机号";
-    [self setupCollectionView];
-    [self setupElements];
+    
 }
 
 - (void)setupCollectionView {
@@ -43,7 +41,7 @@
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
-        cell.textField.text = self.mobile;
+        cell.textField.text = self.bindEmail;
         return cell;
     }
 }

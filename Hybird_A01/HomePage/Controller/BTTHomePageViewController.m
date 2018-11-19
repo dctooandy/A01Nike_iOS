@@ -23,6 +23,8 @@
 #import "BTTPromotionModel.h"
 #import "BTTPosterModel.h"
 #import "BTTPromotionDetailController.h"
+#import "BTTBannerModel.h"
+#import "BTTDownloadModel.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -103,13 +105,23 @@
             return cell;
         } else if (indexPath.row == 1) {
             BTTHomePageBannerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageBannerCell" forIndexPath:indexPath];
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                strongSelf(strongSelf);
+                BTTBannerModel *model = strongSelf.banners[[value integerValue]];
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = model.action.detail;
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"outside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
+            };
             cell.imageUrls = self.imageUrls;
             return cell;
         } else if (indexPath.row == 2) {
             BTTHomePageNoticeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageNoticeCell" forIndexPath:indexPath];
             cell.noticeStr = self.noticeStr;
             weakSelf(weakSelf);
-            cell.clickEventBlock = ^{
+            cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
                 vc.webConfigModel.url = @"common/ancement.htm";
@@ -125,6 +137,16 @@
         } else if (indexPath.row == 4) {
             BTTHomePageAppsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAppsCell" forIndexPath:indexPath];
             cell.downloads = self.downloads;
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                BTTDownloadModel *model = value;
+                strongSelf(strongSelf);
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = model.iosLink;
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"outside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
+            };
             return cell;
         } else if (indexPath.row == 5 || indexPath.row == 10 || indexPath.row == 13) {
             BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
@@ -174,12 +196,22 @@
         if (indexPath.row == 0) {
             BTTHomePageBannerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageBannerCell" forIndexPath:indexPath];
             cell.imageUrls = self.imageUrls;
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                strongSelf(strongSelf);
+                BTTBannerModel *model = strongSelf.banners[[value integerValue]];
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = model.action.detail;
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"outside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
+            };
             return cell;
         } else if (indexPath.row == 1) {
             BTTHomePageNoticeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageNoticeCell" forIndexPath:indexPath];
             cell.noticeStr = self.noticeStr;
             weakSelf(weakSelf);
-            cell.clickEventBlock = ^{
+            cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
                 vc.webConfigModel.url = @"common/ancement.htm";
@@ -195,6 +227,16 @@
         } else if (indexPath.row == 3) {
             BTTHomePageAppsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAppsCell" forIndexPath:indexPath];
             cell.downloads = self.downloads;
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                BTTDownloadModel *model = value;
+                strongSelf(strongSelf);
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = model.iosLink;
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"outside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
+            };
             return cell;
         } else if (indexPath.row == 4 || indexPath.row == 9 || indexPath.row == 12) {
             BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
@@ -263,6 +305,14 @@
             vc.webConfigModel.url = @"common/ancement.htm";
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"inside";
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 0) {
+            BTTPosterModel *model = self.posters.count ? self.posters[0] : nil;
+            
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            vc.webConfigModel.url = @"https://www.baidu.com";
+            vc.webConfigModel.newView = YES;
+            vc.webConfigModel.theme = @"outside";
             [self.navigationController pushViewController:vc animated:YES];
         }
     } else {
