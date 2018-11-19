@@ -307,7 +307,7 @@
             vc.webConfigModel.theme = @"inside";
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 0) {
-            BTTPosterModel *model = self.posters.count ? self.posters[0] : nil;
+//            BTTPosterModel *model = self.posters.count ? self.posters[0] : nil;
             
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
             vc.webConfigModel.url = @"https://www.baidu.com";

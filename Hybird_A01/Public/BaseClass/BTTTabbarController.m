@@ -36,6 +36,7 @@
 
 @property (nonatomic, assign) NSInteger preSelectIndex;
 
+
 @end
 
 @implementation BTTTabbarController
@@ -241,7 +242,16 @@
 
 - (BTTHomePageViewController *)homePageVC {
     if (!_homePageVC) {
-        _homePageVC = [[BTTHomePageViewController alloc] init];;
+        _homePageVC = [[BTTHomePageViewController alloc] init];
+        
+        AGQJController *AGQJvc = [IVGameManager sharedManager].agqjVC;
+        [self.homePageVC.view addSubview:AGQJvc.view];
+        AGQJvc.view.top = -SCREEN_HEIGHT;
+        
+        AGINController *aginVC = [IVGameManager sharedManager].aginVC;
+        //AG国际预加载
+        [self.homePageVC.view addSubview:aginVC.view];
+        aginVC.view.top = -SCREEN_HEIGHT;
     }
     return _homePageVC;
 }
