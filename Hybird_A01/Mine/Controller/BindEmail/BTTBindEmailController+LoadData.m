@@ -13,13 +13,28 @@
 
 
 - (void)loadMainData {
-    NSArray *names = @[@"新邮箱",@"验证码"];
+    NSString *emailTitle = @"邮箱地址";
+    NSString *email = @"";
+    switch (self.codeType) {
+        case BTTEmmailCodeTypeBind:
+            emailTitle = @"邮箱地址";
+            break;
+        case BTTEmmailCodeTypeVerify:
+        case BTTEmmailCodeTypeChange:
+            emailTitle = @"已绑定邮箱地址";
+            email = [IVNetwork userInfo].email;
+        default:
+            break;
+    }
+    NSArray *names = @[emailTitle,@"验证码"];
     NSArray *placeholders = @[@"请输入邮箱地址",@"请输入验证码"];
+    NSArray *vals = @[email,@""];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;
         model.iconName = placeholders[index];
+        model.desc = vals[index];
         [self.sheetDatas addObject:model];
     }
     [self setupElements];

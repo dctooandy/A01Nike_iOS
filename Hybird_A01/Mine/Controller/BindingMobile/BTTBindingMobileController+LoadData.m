@@ -12,13 +12,26 @@
 @implementation BTTBindingMobileController (LoadData)
 
 - (void)loadMianData {
-    NSArray *names = @[@"手机号码",@"验证码"];
+    NSString *phoneTitle = nil;
+    NSString *phone = @"";
+    switch (self.mobileCodeType) {
+        case BTTMobileCodeTypeVerifyMobile:
+            phoneTitle = @"已绑定手机";
+            phone = [IVNetwork userInfo].phone;
+            break;
+        default:
+            phoneTitle = @"手机号码";
+            break;
+    }
+    NSArray *names = @[phoneTitle,@"验证码"];
     NSArray *placeholders =@[@"请输入待绑定手机号码",@"请输入验证码"];
+    NSArray *vals = @[phone,@""];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;
         model.iconName = placeholders[index];
+        model.desc = vals[index];
         [self.sheetDatas addObject:model];
     }
     [self setupElements];

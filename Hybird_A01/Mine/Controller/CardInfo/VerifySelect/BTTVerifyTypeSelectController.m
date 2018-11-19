@@ -42,7 +42,8 @@
     headerLabel.frame = CGRectMake(40, 0, SCREEN_WIDTH - 55, 44);
     headerLabel.font = kFontSystem(12);
     headerLabel.textColor = [UIColor colorWithHexString:@"818791"];
-    headerLabel.text = @"经过安全监测，您可以通过以下方式修改银行卡";
+    NSString *str = (self.codeType == BTTMobileCodeTypeVerifyMobile) ? @"手机号" : @"银行卡";
+    headerLabel.text = [NSString stringWithFormat:@"经过安全监测，您可以通过以下方式修改%@",str];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -58,10 +59,14 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
-    NSLog(@"%zd", indexPath.item);
-    BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-    vc.mobileCodeType = self.codeType;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.row == 0) {
+        BTTBindingMobileController *bindMobile = [[BTTBindingMobileController alloc] init];
+        if ([IVNetwork userInfo].isPhoneBinded) {
+            bindMobile.mobileCodeType = BTTMobileCodeTypeVerifyMobile;
+        }
+        [self.navigationController pushViewController:bindMobile animated:YES];
+    }
+    
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource

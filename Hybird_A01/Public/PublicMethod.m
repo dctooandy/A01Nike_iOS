@@ -735,7 +735,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     return _dataPath;
 }
 
-+ (BOOL)leaveMessageDisable:(NSString *)leaveMessage{
++ (BOOL)isValidateLeaveMessage:(NSString *)leaveMessage{
     //预留信息只支持数字,英文小写或中文字符.务必牢记,保护您的交易安全
     NSString *regular = @"^[a-zA-Z0-9\u4e00-\u9fa5]{1,16}";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self MATCHES %@",regular];

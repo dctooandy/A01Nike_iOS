@@ -11,8 +11,6 @@
 
 @interface BTTBindingMobileTwoCell ()<UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UIButton *sendBtn;
-
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @end
 
@@ -23,7 +21,6 @@
     [_textField setValue:[UIColor colorWithHexString:@"818791"] forKeyPath:@"_placeholderLabel.textColor"];
     _textField.textColor = [UIColor whiteColor];
     _textField.delegate = self;
-    [_textField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
     if (SCREEN_WIDTH == 320) {
         self.textField.font = kFontSystem(13);
         self.nameLabel.font = kFontSystem(14);
@@ -89,20 +86,7 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
-    
     return YES;
 }
-
-- (void)textFieldChange:(UITextField *)textField {
-    NSLog(@"%@",textField.text);
-    if (textField.text.length >= 6) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeEnableNotification object:@"verifycode"];
-        textField.text = [textField.text substringToIndex:6];
-    } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeDisableNotification object:@"verifycode"];
-    }
-}
-
 
 @end

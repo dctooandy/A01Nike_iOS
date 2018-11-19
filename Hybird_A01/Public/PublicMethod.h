@@ -139,7 +139,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString*)dataPath;
 //检测预留信息是否合法
-+ (BOOL)leaveMessageDisable:(NSString *)leaveMessage;
++ (BOOL)isValidateLeaveMessage:(NSString *)leaveMessage;
 //检查真实姓名是否合法
 + (BOOL)checkRealName:(NSString *)realName;
 //检查比特币地址是否合法
