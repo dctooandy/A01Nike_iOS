@@ -112,8 +112,6 @@
 		3A8F51E9215F78F50069D1B3 /* BTTTabbarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F51E0215F78F50069D1B3 /* BTTTabbarController.m */; };
 		3A8F51EA215F78F50069D1B3 /* BTTBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F51E2215F78F50069D1B3 /* BTTBaseCell.m */; };
 		3A8F51EB215F78F50069D1B3 /* BTTBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F51E4215F78F50069D1B3 /* BTTBaseViewController.m */; };
-		3A8F51F2215F7C9D0069D1B3 /* BTTProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F51EE215F7C9D0069D1B3 /* BTTProgressHUD.m */; };
-		3A8F51F3215F7C9D0069D1B3 /* BTTProgressHUDInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8F51F1215F7C9D0069D1B3 /* BTTProgressHUDInfo.m */; };
 		3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8F520B2161EB2D0069D1B3 /* VideoToolbox.framework */; };
 		3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8F520D2161EB370069D1B3 /* GLKit.framework */; };
 		3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A8F520F2161EB510069D1B3 /* libc++.tbd */; };
@@ -714,11 +712,6 @@
 		3A8F51E2215F78F50069D1B3 /* BTTBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTBaseCell.m; sourceTree = "<group>"; };
 		3A8F51E3215F78F50069D1B3 /* BTTBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTBaseNavigationController.h; sourceTree = "<group>"; };
 		3A8F51E4215F78F50069D1B3 /* BTTBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTBaseViewController.m; sourceTree = "<group>"; };
-		3A8F51ED215F7C9D0069D1B3 /* BTTProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTProgressHUD.h; sourceTree = "<group>"; };
-		3A8F51EE215F7C9D0069D1B3 /* BTTProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTProgressHUD.m; sourceTree = "<group>"; };
-		3A8F51EF215F7C9D0069D1B3 /* BTTProgressHUDConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTProgressHUDConfig.h; sourceTree = "<group>"; };
-		3A8F51F0215F7C9D0069D1B3 /* BTTProgressHUDInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTProgressHUDInfo.h; sourceTree = "<group>"; };
-		3A8F51F1215F7C9D0069D1B3 /* BTTProgressHUDInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTProgressHUDInfo.m; sourceTree = "<group>"; };
 		3A8F520B2161EB2D0069D1B3 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		3A8F520D2161EB370069D1B3 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		3A8F520F2161EB510069D1B3 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
@@ -1922,18 +1915,6 @@
 			path = BTTCollectionViewFlowlayout;
 			sourceTree = "<group>";
 		};
-		3A8F51EC215F7C9D0069D1B3 /* Loading */ = {
-			isa = PBXGroup;
-			children = (
-				3A8F51ED215F7C9D0069D1B3 /* BTTProgressHUD.h */,
-				3A8F51EE215F7C9D0069D1B3 /* BTTProgressHUD.m */,
-				3A8F51EF215F7C9D0069D1B3 /* BTTProgressHUDConfig.h */,
-				3A8F51F0215F7C9D0069D1B3 /* BTTProgressHUDInfo.h */,
-				3A8F51F1215F7C9D0069D1B3 /* BTTProgressHUDInfo.m */,
-			);
-			path = Loading;
-			sourceTree = "<group>";
-		};
 		3A92941F219C3B1300764E7E /* RegisterSuccess */ = {
 			isa = PBXGroup;
 			children = (
@@ -2124,7 +2105,6 @@
 				3A8F517E215F77AC0069D1B3 /* BTTTabBar */,
 				3A8F51C3215F78230069D1B3 /* NoticePopview */,
 				3A8F51BD215F78170069D1B3 /* BTTActionSheet */,
-				3A8F51EC215F7C9D0069D1B3 /* Loading */,
 				3AD9CD4C2165B2C900685B43 /* PopoverView */,
 				3A37E1362164A29600FB13A1 /* RefreshTool */,
 			);
@@ -3289,7 +3269,6 @@
 				3AAE8220219A738B003EC8B0 /* BTTLoginOrRegisterBtnCell.m in Sources */,
 				3AD9CF6D216F33F300685B43 /* BTTGameCollectionViewCell.m in Sources */,
 				3A929415219BFEE100764E7E /* BTTCreateAPIModel.m in Sources */,
-				3A8F51F3215F7C9D0069D1B3 /* BTTProgressHUDInfo.m in Sources */,
 				3A514E3E2186E24000B83881 /* BTTThisWeekTotalCell.m in Sources */,
 				3A8F519F215F77EC0069D1B3 /* UIView+Frame.m in Sources */,
 				3ADD23852178184A00FA959A /* BTTMineViewController+LoadData.m in Sources */,
@@ -3407,7 +3386,6 @@
 				3A9E4C2A219D5C4E00E7D8C0 /* BTTForgetPasswordStepThreeController+LoadData.m in Sources */,
 				3ADD238F217836B300FA959A /* BTTMineViewController+Nav.m in Sources */,
 				3ADD23672177230300FA959A /* BTTMeHeaderNotLoginCell.m in Sources */,
-				3A8F51F2215F7C9D0069D1B3 /* BTTProgressHUD.m in Sources */,
 				3ADD23622176FFB700FA959A /* BTTLoginAndRegisterViewController.m in Sources */,
 				3A9E4C3A219E509100E7D8C0 /* BTTBaseAnimationPopView.m in Sources */,
 				3A9E4C5F219FD8F900E7D8C0 /* BTTDownloadModel.m in Sources */,

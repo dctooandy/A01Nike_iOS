@@ -7,12 +7,13 @@
 //
 
 #import "HAWebViewController.h"
+#import "MBProgressHUD+Add.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTBaseWebViewController : HAWebViewController
 
-@property(nonatomic, strong) BTTProgressHUD *hud;
+@property(nonatomic, strong) MBProgressHUD *hud;
 
 @end
 
