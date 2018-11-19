@@ -30,6 +30,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.bgView.layer.cornerRadius = 4;
+    [self.phoneTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 
@@ -76,6 +77,16 @@
     if (self.verifyCodeBlock) {
         _verifyCodeBlock(self.phoneTextField.text);
     }
+}
+
+- (void)textFieldChange:(UITextField *)textField {
+    if (textField.tag == 2010) {
+        if (textField.text.length > 11) {
+            [MBProgressHUD showMessagNoActivity:@"手机号码长度不能超过11位" toView:nil];
+            textField.text = [textField.text substringToIndex:11];
+        }
+    }
+    
 }
 
 - (void)countDown {

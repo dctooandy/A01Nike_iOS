@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupNav];
+
     [self setupCollectionView];
     [self setupElements];
 }
@@ -33,13 +33,8 @@
     adImageview.image = ImageNamed(@"login_ad");
 }
 
-- (void)setupNav {
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:@selector(leftClick)];
-    self.navigationItem.leftBarButtonItem = leftItem;
-}
-
-- (void)leftClick {
-    
+- (void)goToBack {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
