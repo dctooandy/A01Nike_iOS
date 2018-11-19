@@ -14,7 +14,7 @@
 #import "BTTRegisterQuickAutoCell.h"
 #import "BTTRegisterQuickManualCell.h"
 #import "BTTRegisterSuccessController.h"
-
+#import "BTTUserStatusManager.h"
 
 @implementation BTTLoginOrRegisterViewController (API)
 
@@ -75,8 +75,7 @@
             if (isback) {
                 [self.navigationController popViewControllerAnimated:YES];
             }
-            [[IVCacheManager sharedInstance] nativeWriteValue:result.data[@"WSCustomers"] forKey:KCacheUserInfo];
-            [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccessNotification object:nil];
+            [BTTUserStatusManager loginSuccessWithUserInfo:result.data[@"WSCustomers"]];
         } else {
             if (result.code_system == 202020) {
                 [self showAlertWithModle:model];

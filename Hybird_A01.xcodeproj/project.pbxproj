@@ -205,7 +205,6 @@
 		3AD9CF04216C425200685B43 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD9CF03216C425200685B43 /* CoreTelephony.framework */; };
 		3AD9CF08216C71F500685B43 /* NSString+Expand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF06216C71F500685B43 /* NSString+Expand.m */; };
 		3AD9CF2F216C763800685B43 /* UIView+FrameCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF2D216C763800685B43 /* UIView+FrameCategory.m */; };
-		3AD9CF32216C7AC100685B43 /* HDSocketManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF30216C7AC100685B43 /* HDSocketManager.m */; };
 		3AD9CF35216C7AEF00685B43 /* HAInitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF34216C7AEF00685B43 /* HAInitConfig.m */; };
 		3AD9CF38216C7D9400685B43 /* HAConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF37216C7D9400685B43 /* HAConstant.m */; };
 		3AD9CF40216EDC9800685B43 /* BTTHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF3C216EDC9800685B43 /* BTTHomePageViewController.m */; };
@@ -310,6 +309,7 @@
 		EA5F141B21A28515004305A7 /* DeviceModelsForIOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA5F141521A28514004305A7 /* DeviceModelsForIOS.plist */; };
 		EA5F141C21A28515004305A7 /* NeedDeviceURL.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA5F141621A28514004305A7 /* NeedDeviceURL.plist */; };
 		EA5F141D21A28515004305A7 /* IVNetworkStatusDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141921A28514004305A7 /* IVNetworkStatusDetailViewController.m */; };
+		EA5F142021A2AEC1004305A7 /* BTTUserStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141F21A2AEC1004305A7 /* BTTUserStatusManager.m */; };
 		EACCD202218FE1680090B5E6 /* IVWebViewUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */; };
 		EAE89DCB218C3A7400C29393 /* SDWebImage+Compat3_8_1.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE89DC9218C3A7300C29393 /* SDWebImage+Compat3_8_1.m */; };
 		EAE89E86218C3ABD00C29393 /* angry.gif in Resources */ = {isa = PBXBuildFile; fileRef = EAE89DCE218C3ABC00C29393 /* angry.gif */; };
@@ -864,8 +864,6 @@
 		3AD9CF07216C71F500685B43 /* NSString+Expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Expand.h"; sourceTree = "<group>"; };
 		3AD9CF2D216C763800685B43 /* UIView+FrameCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FrameCategory.m"; sourceTree = "<group>"; };
 		3AD9CF2E216C763800685B43 /* UIView+FrameCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FrameCategory.h"; sourceTree = "<group>"; };
-		3AD9CF30216C7AC100685B43 /* HDSocketManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDSocketManager.m; sourceTree = "<group>"; };
-		3AD9CF31216C7AC100685B43 /* HDSocketManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HDSocketManager.h; sourceTree = "<group>"; };
 		3AD9CF33216C7AEE00685B43 /* HAInitConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAInitConfig.h; sourceTree = "<group>"; };
 		3AD9CF34216C7AEF00685B43 /* HAInitConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HAInitConfig.m; sourceTree = "<group>"; };
 		3AD9CF36216C7D9400685B43 /* HAConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HAConstant.h; sourceTree = "<group>"; };
@@ -1044,6 +1042,8 @@
 		EA5F141621A28514004305A7 /* NeedDeviceURL.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NeedDeviceURL.plist; sourceTree = "<group>"; };
 		EA5F141821A28514004305A7 /* IVNetworkStatusDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVNetworkStatusDetailViewController.h; sourceTree = "<group>"; };
 		EA5F141921A28514004305A7 /* IVNetworkStatusDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVNetworkStatusDetailViewController.m; sourceTree = "<group>"; };
+		EA5F141E21A2AEC1004305A7 /* BTTUserStatusManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUserStatusManager.h; sourceTree = "<group>"; };
+		EA5F141F21A2AEC1004305A7 /* BTTUserStatusManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUserStatusManager.m; sourceTree = "<group>"; };
 		EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVWebViewUtility.m; sourceTree = "<group>"; };
 		EACCD201218FE1680090B5E6 /* IVWebViewUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVWebViewUtility.h; sourceTree = "<group>"; };
 		EAE89DC9218C3A7300C29393 /* SDWebImage+Compat3_8_1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImage+Compat3_8_1.m"; sourceTree = "<group>"; };
@@ -1632,10 +1632,10 @@
 				3A8D6E9721633D3E000530DF /* PushManager.m */,
 				3AD9CD5921661BE700685B43 /* BTTRedDotManager.h */,
 				3AD9CD5A21661BE800685B43 /* BTTRedDotManager.m */,
-				3AD9CF31216C7AC100685B43 /* HDSocketManager.h */,
-				3AD9CF30216C7AC100685B43 /* HDSocketManager.m */,
 				EA5F140C21A261BA004305A7 /* BTTHttpManager.h */,
 				EA5F140D21A261BA004305A7 /* BTTHttpManager.m */,
+				EA5F141E21A2AEC1004305A7 /* BTTUserStatusManager.h */,
+				EA5F141F21A2AEC1004305A7 /* BTTUserStatusManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -3244,7 +3244,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
 				"${PODS_ROOT}/BRPickerView/BRPickerView/AddressPickerView/BRPickerView.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
@@ -3255,7 +3255,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3315,6 +3315,7 @@
 				3AD9CF2F216C763800685B43 /* UIView+FrameCategory.m in Sources */,
 				3A11AE172183F57C00B1AFF4 /* BTTAccountSafeController.m in Sources */,
 				3A11ADFA2181A56000B1AFF4 /* BTTWithdrawalController+LoadData.m in Sources */,
+				EA5F142021A2AEC1004305A7 /* BTTUserStatusManager.m in Sources */,
 				3A9E4C4C219FB1DF00E7D8C0 /* BTTPromotionModel.m in Sources */,
 				3AD9CF57216EFD3000685B43 /* BTTHomePageViewController+LoadData.m in Sources */,
 				3AB0682921A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.m in Sources */,
@@ -3435,7 +3436,6 @@
 				3A9E4C48219ECC6C00E7D8C0 /* BTTPosterModel.m in Sources */,
 				3AD9CF7B216F400A00685B43 /* BTTAppIconModel.m in Sources */,
 				3A9E4C45219E9CAD00E7D8C0 /* BTTBindStatusModel.m in Sources */,
-				3AD9CF32216C7AC100685B43 /* HDSocketManager.m in Sources */,
 				3AAE821B219A738B003EC8B0 /* BTTLoginOrRegisterTypeSelectCell.m in Sources */,
 				3AE1EB1C21805B460073A32D /* BTTAddCardController+LoadData.m in Sources */,
 				3A11ADD421816E5800B1AFF4 /* SVProgressAnimatedView.m in Sources */,

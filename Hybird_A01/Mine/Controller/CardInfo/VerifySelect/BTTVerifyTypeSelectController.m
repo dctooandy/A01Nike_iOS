@@ -10,7 +10,7 @@
 #import "BTTVerifyTypeSelectController+LoadData.h"
 #import "BTTMeMainModel.h"
 #import "BTTVerifySelectCell.h"
-#import "BTTBindingMobileController.h"
+#import "BTTChangeMobileController.h"
 
 @interface BTTVerifyTypeSelectController ()<BTTElementsFlowLayoutDelegate>
 
@@ -60,11 +60,8 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
     if (indexPath.row == 0) {
-        BTTBindingMobileController *bindMobile = [[BTTBindingMobileController alloc] init];
-        if ([IVNetwork userInfo].isPhoneBinded) {
-            bindMobile.mobileCodeType = BTTMobileCodeTypeVerifyMobile;
-        }
-        [self.navigationController pushViewController:bindMobile animated:YES];
+        BTTChangeMobileController *vc = [BTTChangeMobileController new];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
 }

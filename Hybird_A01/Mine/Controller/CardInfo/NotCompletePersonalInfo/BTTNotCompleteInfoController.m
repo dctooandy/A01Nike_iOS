@@ -50,9 +50,10 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 2) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        cell.btn.enabled = YES;
         weakSelf(weakSelf)
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-          strongSelf(strongSelf)
+            [weakSelf submitChange];
         };
         return cell;
     } else {
@@ -120,5 +121,39 @@
 }
 
 
-
+- (void)submitChange
+{
+    UITextField *retentionTF = [self getCellTextFieldWithIndex:1];
+    UITextField *realNameTF = [self getCellTextFieldWithIndex:0];
+    
+    NSMutableDictionary *params = @{}.mutableCopy;
+    if (![PublicMethod isValidateLeaveMessage:retentionTF.text]) {
+        [MBProgressHUD showError:@"输入的预留信息格式有误！" toView:self.view];
+        return;
+    }
+    if (![PublicMethod checkRealName:realNameTF.text]) {
+        [MBProgressHUD showError:@"输入的真实姓名格式有误！" toView:self.view];
+        return;
+    }
+    params[@"verify_code"] = retentionTF.text;
+    params[@"real_name"] = realNameTF.text;
+    weakSelf(weakSelf)
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [IVNetwork sendRequestWithSubURL:@"public/users/completeInfo" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        if (result.status) {
+            [MBProgressHUD showSuccess:@"完善成功!" toView:nil];
+            [IVNetwork updateUserInfo:result.data];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }
+    }];
+}
+- (UITextField *)getCellTextFieldWithIndex:(NSInteger)index
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.textField;
+}
 @end
