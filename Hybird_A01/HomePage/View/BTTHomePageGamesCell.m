@@ -8,14 +8,11 @@
 
 #import "BTTHomePageGamesCell.h"
 #import "BTTGameCollectionViewCell.h"
+#import "BTTGameModel.h"
 
 @interface BTTHomePageGamesCell ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
-@property (nonatomic, strong) NSMutableArray *gameIcons;
-
-@property (nonatomic, strong) NSMutableArray *gameNames;
 
 @end
 
@@ -60,33 +57,20 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.gameIcons.count;
+    return self.games.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BTTGameCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTGameCollectionViewCell" forIndexPath:indexPath];
-    cell.gameIcon = self.gameIcons[indexPath.row];
-    cell.gameName = self.gameNames[indexPath.row];
+    BTTGameModel *model = self.games[indexPath.row];
+    cell.gameIcon = model.icon.path;
     return cell;
 }
 
-
-#pragma mark - getter
-
-- (NSMutableArray *)gameIcons {
-    if (!_gameIcons) {
-        NSArray *games = @[@"AGQJ",@"AS",@"Chess",@"Fishing_king",@"game",@"shaba"];
-        _gameIcons = [NSMutableArray arrayWithArray:games];
-    }
-    return _gameIcons;
+- (void)setGames:(NSArray *)games {
+    _games = games;
+    [self.collectionView reloadData];
 }
 
-- (NSMutableArray *)gameNames {
-    if (!_gameNames) {
-        NSArray *gameNames = @[@"AG旗舰厅",@"AS",@"棋牌",@"捕鱼王",@"电子游戏",@"沙巴体育"];
-        _gameNames = [NSMutableArray arrayWithArray:gameNames];
-    }
-    return _gameNames;
-}
 
 @end

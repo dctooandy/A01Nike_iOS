@@ -20,8 +20,11 @@
 #import "BTTHomePageActivitiesCell.h"
 #import "BTTHomePageAmountsCell.h"
 #import "BTTHomePageViewController+Nav.h"
-
-
+#import "BTTPromotionModel.h"
+#import "BTTPosterModel.h"
+#import "BTTPromotionDetailController.h"
+#import "BTTBannerModel.h"
+#import "BTTDownloadModel.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -38,9 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [NSThread sleepForTimeInterval:BTTLaunchScreenTime];
-    
     self.title = @"首页";
-    self.adCellShow = NO;
     if ([IVNetwork userInfo]) {
         self.isLogin = YES;
     } else {
@@ -50,15 +51,15 @@
     [self setupNav];
     [self setupCollectionView];
     [self setupElements];
-    
     weakSelf(weakSelf);
     [self pulldownRefreshWithRefreshBlock:^{
+        strongSelf(strongSelf);
         NSLog(@"下拉刷新");
-        [weakSelf loadDataOfHomePage];
+        [strongSelf loadDataOfHomePage];
     }];
     [self loadDataOfHomePage];
     [self registerNotification];
-    [self loadMainData];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -71,11 +72,8 @@
     
 }
 
-
-
 - (void)setupCollectionView {
     [super setupCollectionView];
-   
     self.collectionView.frame = CGRectMake(0,  self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin, SCREEN_WIDTH, SCREEN_HEIGHT - (self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin));
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageBannerCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageBannerCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageADCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageADCell"];
@@ -97,31 +95,63 @@
     if (self.adCellShow) {
         if (indexPath.row == 0) {
             BTTHomePageADCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageADCell" forIndexPath:indexPath];
+            cell.model = self.posters.count ? self.posters[0] : nil;
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
-                strongSelf.adCellShow = NO;
+                [strongSelf.posters removeAllObjects];
                 [strongSelf setupElements];
             };
             return cell;
         } else if (indexPath.row == 1) {
             BTTHomePageBannerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageBannerCell" forIndexPath:indexPath];
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                strongSelf(strongSelf);
+                BTTBannerModel *model = strongSelf.banners[[value integerValue]];
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = model.action.detail;
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"outside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
+            };
             cell.imageUrls = self.imageUrls;
             return cell;
         } else if (indexPath.row == 2) {
             BTTHomePageNoticeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageNoticeCell" forIndexPath:indexPath];
             cell.noticeStr = self.noticeStr;
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                strongSelf(strongSelf);
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = @"common/ancement.htm";
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"inside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
+            };
             return cell;
         } else if (indexPath.row == 3) {
             BTTHomePageGamesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageGamesCell" forIndexPath:indexPath];
+            cell.games = self.games;
             return cell;
         } else if (indexPath.row == 4) {
             BTTHomePageAppsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAppsCell" forIndexPath:indexPath];
+            cell.downloads = self.downloads;
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                BTTDownloadModel *model = value;
+                strongSelf(strongSelf);
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = model.iosLink;
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"outside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
+            };
             return cell;
-        } else if (indexPath.row == 5 || indexPath.row == 9 || indexPath.row == 12) {
+        } else if (indexPath.row == 5 || indexPath.row == 10 || indexPath.row == 13) {
             BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
             return cell;
-        } else if (indexPath.row == 6 || indexPath.row == 10 || indexPath.row == 13) {
+        } else if (indexPath.row == 6 || indexPath.row == 11 || indexPath.row == 14) {
             BTTHomePageDiscountHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountHeaderCell" forIndexPath:indexPath];
             if (indexPath.row == 6) {
                 cell.headerModel = self.headers[0];
@@ -131,17 +161,19 @@
                 cell.headerModel = self.headers[2];
             }
             return cell;
-        } else if (indexPath.row == 7 || indexPath.row == 8) {
+        } else if (indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9) {
             BTTHomePageDiscountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountCell" forIndexPath:indexPath];
+            BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 7] : nil;
             if (indexPath.row == 7) {
                 cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
             } else {
                 cell.mineSparaterType = BTTMineSparaterTypeNone;
             }
+            cell.model = model;
             return cell;
-        } else if (indexPath.row == 11) {
+        } else if (indexPath.row == 12) {
             BTTHomePageActivitiesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageActivitiesCell" forIndexPath:indexPath];
-            BTTActivityModel *model = self.Activities[self.nextGroup];
+            BTTActivityModel *model = self.Activities.count ? self.Activities[self.nextGroup] : nil;
             cell.activityModel = model;
             weakSelf(weakSelf);
             cell.reloadBlock = ^{
@@ -155,7 +187,7 @@
                 });
             };
             return cell;
-        } else if (indexPath.row == 14) {
+        } else  {
             BTTHomePageAmountsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAmountsCell" forIndexPath:indexPath];
             cell.amounts = self.amounts;
             return cell;
@@ -164,21 +196,52 @@
         if (indexPath.row == 0) {
             BTTHomePageBannerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageBannerCell" forIndexPath:indexPath];
             cell.imageUrls = self.imageUrls;
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                strongSelf(strongSelf);
+                BTTBannerModel *model = strongSelf.banners[[value integerValue]];
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = model.action.detail;
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"outside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
+            };
             return cell;
         } else if (indexPath.row == 1) {
             BTTHomePageNoticeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageNoticeCell" forIndexPath:indexPath];
             cell.noticeStr = self.noticeStr;
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                strongSelf(strongSelf);
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = @"common/ancement.htm";
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"inside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
+            };
             return cell;
         } else if (indexPath.row == 2) {
             BTTHomePageGamesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageGamesCell" forIndexPath:indexPath];
+            cell.games = self.games;
             return cell;
         } else if (indexPath.row == 3) {
             BTTHomePageAppsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAppsCell" forIndexPath:indexPath];
+            cell.downloads = self.downloads;
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                BTTDownloadModel *model = value;
+                strongSelf(strongSelf);
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = model.iosLink;
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"outside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
+            };
             return cell;
-        } else if (indexPath.row == 4 || indexPath.row == 8 || indexPath.row == 11) {
+        } else if (indexPath.row == 4 || indexPath.row == 9 || indexPath.row == 12) {
             BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
             return cell;
-        } else if (indexPath.row == 5 || indexPath.row == 9 || indexPath.row == 12) {
+        } else if (indexPath.row == 5 || indexPath.row == 10 || indexPath.row == 13) {
             BTTHomePageDiscountHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountHeaderCell" forIndexPath:indexPath];
             BTTHomePageHeaderModel *model = nil;
             if (indexPath.row == 5) {
@@ -190,17 +253,19 @@
             }
             cell.headerModel = model;
             return cell;
-        } else if (indexPath.row == 7 || indexPath.row == 6) {
+        } else if (indexPath.row == 7 || indexPath.row == 6 || indexPath.row == 8) {
+            BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 6] : nil;
             BTTHomePageDiscountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountCell" forIndexPath:indexPath];
             if (indexPath.row == 6) {
                 cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
             } else {
                 cell.mineSparaterType = BTTMineSparaterTypeNone;
             }
+            cell.model = model;
             return cell;
-        } else if (indexPath.row == 10) {
+        } else if (indexPath.row == 11) {
             BTTHomePageActivitiesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageActivitiesCell" forIndexPath:indexPath];
-            BTTActivityModel *model = self.Activities[self.nextGroup];
+            BTTActivityModel *model = self.Activities.count ? self.Activities[self.nextGroup] : nil;
             cell.activityModel = model;
             weakSelf(weakSelf);
             cell.reloadBlock = ^{
@@ -214,25 +279,12 @@
                 });
             };
             return cell;
-        } else if (indexPath.row == 13) {
+        } else {
             BTTHomePageAmountsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAmountsCell" forIndexPath:indexPath];
             cell.amounts = self.amounts;
             return cell;
         }
     }
-    
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class]) forIndexPath:indexPath];
-    cell.contentView.backgroundColor = [UIColor yellowColor];
-    if (![cell.contentView viewWithTag:100]) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-        label.tag = 100;
-        label.textColor = [UIColor redColor];
-        label.font = [UIFont boldSystemFontOfSize:17];
-        [cell.contentView addSubview:label];
-    }
-    UILabel *label = [cell.contentView viewWithTag:100];
-    label.text = [NSString stringWithFormat:@"%zd", indexPath.item];
-    return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -242,12 +294,44 @@
             if (indexPath.row == 10) {
                 [self refreshDataOfActivities];
             }
+        } else if (indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9) {
+            BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 7] : nil;
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            vc.webConfigModel.url = model.href;
+            vc.webConfigModel.newView = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 2) {
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            vc.webConfigModel.url = @"common/ancement.htm";
+            vc.webConfigModel.newView = YES;
+            vc.webConfigModel.theme = @"inside";
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 0) {
+            BTTPosterModel *model = self.posters.count ? self.posters[0] : nil;
+            
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            vc.webConfigModel.url = @"https://www.baidu.com";
+            vc.webConfigModel.newView = YES;
+            vc.webConfigModel.theme = @"outside";
+            [self.navigationController pushViewController:vc animated:YES];
         }
     } else {
         if (indexPath.row == 9) {
             if (indexPath.row == 9) {
                 [self refreshDataOfActivities];
             }
+        } else if (indexPath.row == 7 || indexPath.row == 6 || indexPath.row == 8) {
+            BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 6] : nil;
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            vc.webConfigModel.url = model.href;
+            vc.webConfigModel.newView = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 1) {
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            vc.webConfigModel.url = @"common/ancement.htm";
+            vc.webConfigModel.newView = YES;
+            vc.webConfigModel.theme = @"inside";
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }
@@ -295,10 +379,15 @@
 - (void)setupElements {
     [self.elementsHight removeAllObjects];
     NSInteger total = 0;
-    if (self.adCellShow) {
-        total = 15;
+    if (self.posters.count) {
+        self.adCellShow = YES;
     } else {
-        total = 14;
+        self.adCellShow = NO;
+    }
+    if (self.adCellShow) {
+        total = 16;
+    } else {
+        total = 15;
     }
     for (int i = 0; i < total; i++) {
         if (self.adCellShow) {
@@ -310,20 +399,20 @@
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 174)]];
             } else if (i == 4) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 166)]];
-            } else if (i == 5 || i == 9 || i == 12) {
+            } else if (i == 5 || i == 10 || i == 13) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
-            } else if (i == 6 || i == 10 || i == 13) {
+            } else if (i == 6 || i == 11 || i == 14) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 45)]];
-            } else if (i == 7 || i == 8) {
+            } else if (i == 7 || i == 8 || i == 9) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 130)]];
-            } else if (i == 11) {
+            } else if (i == 12) {
                 if (self.Activities.count) {
                     BTTActivityModel *model = self.Activities[self.nextGroup];
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, model.cellHeight)]];
                 } else {
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 228)]];
                 }
-            } else if (i == 14) {
+            } else if (i == 15) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 295)]];
             }
             else {
@@ -338,20 +427,20 @@
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 174)]];
             } else if (i == 3) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 166)]];
-            } else if (i == 4 || i == 8 || i == 11) {
+            } else if (i == 4 || i == 9 || i == 12) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
-            } else if (i == 5 || i == 9 || i == 12) {
+            } else if (i == 5 || i == 10 || i == 13) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 45)]];
-            } else if (i == 7 || i == 6) {
+            } else if (i == 7 || i == 6 || i == 8) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 130)]];
-            } else if (i == 10) {
+            } else if (i == 11) {
                 if (self.Activities.count) {
                     BTTActivityModel *model = self.Activities[self.nextGroup];
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, model.cellHeight)]];
                 } else {
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 228)]];
                 }
-            } else if (i == 13) {
+            } else if (i == 14) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 295)]];
             }
             else {

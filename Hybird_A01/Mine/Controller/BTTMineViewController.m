@@ -60,7 +60,7 @@
     [super viewDidLoad];
     self.title = @"个人中心";
     [self setupNav];
-    self.isCompletePersonalInfo = YES;
+    self.isCompletePersonalInfo = NO;
     self.isChangeMobile = NO;
     [self setupCollectionView];
     [self loadMeAllData];

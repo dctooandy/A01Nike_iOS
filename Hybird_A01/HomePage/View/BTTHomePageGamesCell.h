@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTHomePageGamesCell : BTTBaseCollectionViewCell
 
+@property (nonatomic, strong) NSArray *games;
+
 @end
 
 NS_ASSUME_NONNULL_END

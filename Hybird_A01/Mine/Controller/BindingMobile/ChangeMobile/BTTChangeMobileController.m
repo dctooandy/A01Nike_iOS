@@ -7,6 +7,9 @@
 //
 
 #import "BTTChangeMobileController.h"
+#import "BTTBindingMobileBtnCell.h"
+#import "BTTBindingMobileOneCell.h"
+#import "BTTChangeMobileController+LoadData.h"
 
 @interface BTTChangeMobileController ()<BTTElementsFlowLayoutDelegate>
 
@@ -23,6 +26,9 @@
 
 - (void)setupCollectionView {
     [super setupCollectionView];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -30,18 +36,16 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class]) forIndexPath:indexPath];
-    cell.contentView.backgroundColor = [UIColor yellowColor];
-    if (![cell.contentView viewWithTag:100]) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-        label.tag = 100;
-        label.textColor = [UIColor redColor];
-        label.font = [UIFont boldSystemFontOfSize:17];
-        [cell.contentView addSubview:label];
+    if (indexPath.row == self.sheetDatas.count) {
+        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        return cell;
+    } else {
+        BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
+        BTTMeMainModel *model = self.sheetDatas[indexPath.row];
+        cell.model = model;
+        cell.textField.text = self.mobile;
+        return cell;
     }
-    UILabel *label = [cell.contentView viewWithTag:100];
-    label.text = [NSString stringWithFormat:@"%zd", indexPath.item];
-    return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -65,7 +69,7 @@
 }
 
 - (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
-    return UIEdgeInsetsMake(0, 0, 40, 0);
+    return UIEdgeInsetsMake(15, 0, 40, 0);
 }
 
 /**
@@ -82,13 +86,23 @@
     return 0;
 }
 
+
 - (void)setupElements {
-    for (int i = 0; i < 20; i++) {
-        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+    if (self.elementsHight.count) {
+        [self.elementsHight removeAllObjects];
+    }
+    NSInteger total = self.sheetDatas.count + 1;
+    for (int i = 0; i < total; i++) {
+        if (i == self.sheetDatas.count) {
+            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+        } else {
+            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+        }
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
 }
+
 
 @end
