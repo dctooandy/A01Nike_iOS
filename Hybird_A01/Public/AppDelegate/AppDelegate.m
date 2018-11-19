@@ -13,7 +13,7 @@
 #import <tingyunApp/NBSAppAgent.h>
 #import "HDSocketManager.h"
 #import "PushManager.h"
-
+#import "AppInitializeConfig.h"
 @interface AppDelegate ()
 
 @property (nonatomic, strong) dispatch_semaphore_t semaphore;
