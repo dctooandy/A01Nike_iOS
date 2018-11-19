@@ -67,6 +67,13 @@
     return cell;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    BTTGameModel *model = self.games[indexPath.row];
+    if (self.clickEventBlock) {
+        self.clickEventBlock(model);
+    }
+}
+
 - (void)setGames:(NSArray *)games {
     _games = games;
     [self.collectionView reloadData];

@@ -133,6 +133,12 @@
         } else if (indexPath.row == 3) {
             BTTHomePageGamesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageGamesCell" forIndexPath:indexPath];
             cell.games = self.games;
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                strongSelf(strongSelf);
+                AGQJController *AGQJvc = [IVGameManager sharedManager].agqjVC;
+                [strongSelf.navigationController pushViewController:AGQJvc animated:YES];
+            };
             return cell;
         } else if (indexPath.row == 4) {
             BTTHomePageAppsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAppsCell" forIndexPath:indexPath];
@@ -223,6 +229,12 @@
         } else if (indexPath.row == 2) {
             BTTHomePageGamesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageGamesCell" forIndexPath:indexPath];
             cell.games = self.games;
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                strongSelf(strongSelf);
+                AGQJController *AGQJvc = [IVGameManager sharedManager].agqjVC;
+                [strongSelf.navigationController pushViewController:AGQJvc animated:YES];
+            };
             return cell;
         } else if (indexPath.row == 3) {
             BTTHomePageAppsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAppsCell" forIndexPath:indexPath];
