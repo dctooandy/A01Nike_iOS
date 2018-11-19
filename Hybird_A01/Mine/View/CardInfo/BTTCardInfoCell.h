@@ -7,13 +7,13 @@
 //
 
 #import "BTTBaseCollectionViewCell.h"
-
+#import "BTTBankModel.h"
 
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTCardInfoCell : BTTBaseCollectionViewCell
-
+@property(nonatomic, strong)BTTBankModel *model;
 
 @end
 

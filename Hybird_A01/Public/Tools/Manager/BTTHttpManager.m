@@ -72,5 +72,8 @@
         }
     }];
 }
-
++ (void)addBankCardWithParams:(NSDictionary *)params completion:(IVRequestCallBack)completion
+{
+    [self sendRequestWithUrl:@"public/bankcard/add" paramters:params completionBlock:completion];
+}
 @end

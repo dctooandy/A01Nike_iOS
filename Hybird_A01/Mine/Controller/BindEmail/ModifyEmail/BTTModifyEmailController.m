@@ -10,7 +10,7 @@
 #import "BTTBindingMobileBtnCell.h"
 #import "BTTBindingMobileOneCell.h"
 #import "BTTModifyEmailController+LoadData.h"
-
+#import "BTTBindEmailController.h"
 @interface BTTModifyEmailController ()<BTTElementsFlowLayoutDelegate>
 
 @end
@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self loadMainData];
 }
 
 - (void)setupCollectionView {
@@ -34,14 +34,19 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    weakSelf(weakSelf)
     if (indexPath.row == self.sheetDatas.count) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        cell.buttonType = BTTButtonTypeChangeEmail;
+        cell.btn.enabled = YES;
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf forwardToVerifyEmail];
+        };
         return cell;
     } else {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
-        cell.textField.text = self.bindEmail;
         return cell;
     }
 }
@@ -101,6 +106,10 @@
         [self.collectionView reloadData];
     });
 }
-
-
+- (void)forwardToVerifyEmail
+{
+    BTTBindEmailController *vc = [BTTBindEmailController new];
+    vc.codeType = BTTEmmailCodeTypeVerify;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 @end

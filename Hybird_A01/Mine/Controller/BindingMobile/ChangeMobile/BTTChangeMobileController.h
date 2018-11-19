@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTChangeMobileController : BTTCollectionViewController
 
-@property (nonatomic, copy) NSString *mobile;
 
 @end
 

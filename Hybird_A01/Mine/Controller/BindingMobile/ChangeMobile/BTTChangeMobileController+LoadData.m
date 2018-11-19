@@ -14,11 +14,13 @@
 - (void)loadMainData {
     NSArray *names = @[@"手机号"];
     NSArray *placeholders = @[@"请输入手机号码"];
+    NSArray *vals = @[[IVNetwork userInfo].phone];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;
         model.iconName = placeholders[index];
+        model.desc = vals[index];
         [self.sheetDatas addObject:model];
     }
     [self setupElements];

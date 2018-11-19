@@ -45,8 +45,12 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    weakSelf(weakSelf)
     if (indexPath.row == self.sheetDatas.count) {
         BTTAddCardBtnsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAddCardBtnsCell" forIndexPath:indexPath];
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf saveBtnClickded:button];
+        };
         return cell;
     } else {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
@@ -143,5 +147,73 @@
         [self.collectionView reloadData];
     });
 }
-
+- (UITextField *)getCellTextFieldWithIndex:(NSInteger)index
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.textField;
+}
+- (void)saveBtnClickded:(UIButton *)sender
+{
+    BOOL setDefaultCard = ![sender.titleLabel.text isEqualToString:@"保存"];
+    UITextField *realNameTF = [self getCellTextFieldWithIndex:0];
+    UITextField *bankNameTF = [self getCellTextFieldWithIndex:1];
+    UITextField *cardTypeTF = [self getCellTextFieldWithIndex:2];
+    UITextField *cardNumberTF = [self getCellTextFieldWithIndex:3];
+    UITextField *provinceTF = [self getCellTextFieldWithIndex:4];
+    UITextField *cityTF = [self getCellTextFieldWithIndex:5];
+    UITextField *locationTF = [self getCellTextFieldWithIndex:6];
+    if (bankNameTF.text.length == 0) {
+        [MBProgressHUD showError:@"请选择开户行" toView:self.view];
+        return;
+    }
+    if (cardTypeTF.text.length == 0) {
+        [MBProgressHUD showError:@"请选择卡片类型" toView:self.view];
+        return;
+    }
+    if (cardNumberTF.text.length == 0) {
+        [MBProgressHUD showError:@"请输入正确的卡号" toView:self.view];
+        return;
+    }
+    if (provinceTF.text.length == 0) {
+        [MBProgressHUD showError:@"请选择开户省份" toView:self.view];
+        return;
+    }
+    if (cityTF.text.length == 0) {
+        [MBProgressHUD showError:@"请选择开户城市" toView:self.view];
+        return;
+    }
+    if (locationTF.text.length == 0) {
+        [MBProgressHUD showError:@"请填写正确的开户地点" toView:self.view];
+        return;
+    }
+    NSMutableDictionary *params = @{}.mutableCopy;
+    
+    params[@"bank_account_name"] = realNameTF.text;
+    params[@"bank_name"] = bankNameTF.text;
+    params[@"bank_account_type"] = cardTypeTF.text;
+    params[@"bank_account_no"] = cardNumberTF.text;
+    params[@"bank_country"] = provinceTF.text;
+    params[@"bank_city"] = cityTF.text;
+    params[@"branch_name"] = locationTF.text;
+    if (setDefaultCard) {
+        params[@"save_default"] = @(self.cardCount + 1);
+    }
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [BTTHttpManager addBankCardWithParams:params.copy completion:^(IVRequestResultModel *result, id response) {
+        [MBProgressHUD hideHUDForView:self.view animated:NO];
+        weakSelf(weakSelf)
+        if (result.status) {
+            [MBProgressHUD showSuccess:@"添加成功!" toView:nil];
+            for (UIViewController *vc in self.navigationController.viewControllers) {
+                if ([vc isKindOfClass:[NSClassFromString(@"BTTCardInfosController") class]]) {
+                    [self.navigationController popToViewController:vc animated:YES];
+                    break;
+                }
+            }
+        } else {
+            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }
+    }];
+}
 @end

@@ -27,4 +27,6 @@
 + (void)fetchBankListWithCompletion:(IVRequestCallBack)completion;
 //获取手机、邮箱、银行卡、比特币钱包绑定状态
 + (void)fetchBindStatusWithCompletion:(IVRequestCallBack)completion;
+//添加银行卡
++ (void)addBankCardWithParams:(NSDictionary *)params completion:(IVRequestCallBack)completion;
 @end
