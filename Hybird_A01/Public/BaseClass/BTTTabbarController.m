@@ -44,8 +44,15 @@
     [super viewDidLoad];
     [self setupViewControllers];
     [self customTabbar];
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userTokenExpired) name:IVUserTokenExpiredNotification object:nil];
 }
-
+//登录状态失效
+- (void)userTokenExpired
+{
+    //清空用户信息
+    [IVNetwork cleanUserInfo];
+    [MBProgressHUD showError:@"登录超时，请重新登录" toView:nil];
+}
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccessGotoHomePageNotification) name:BTTRegisterSuccessGotoHomePageNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccessGotoMineNotification) name:BTTRegisterSuccessGotoMineNotification object:nil];

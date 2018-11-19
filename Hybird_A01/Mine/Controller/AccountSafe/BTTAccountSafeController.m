@@ -71,7 +71,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         BTTBindEmailController *vc = [[BTTBindEmailController alloc] init];
-        if ([IVNetwork userInfo].isPhoneBinded) {
+        if ([IVNetwork userInfo].isEmailBinded) {
             vc.codeType = BTTEmmailCodeTypeVerify;
         }
         [self.navigationController pushViewController:vc animated:YES];
