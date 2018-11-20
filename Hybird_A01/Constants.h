@@ -160,6 +160,14 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTGamePlatforms             @"/A01/game/platforms"
 
+// 用户单个厅余额查询
+
+#define BTTCreditsGame               @"/public/credits/game"
+
+// 金额转账本地接口
+
+#define BTTTransferAllMoneyToLocal   @"/credits/transferAllMoneyToLocal"
+
 
 /********************************************常用宏*********************************************************/
 

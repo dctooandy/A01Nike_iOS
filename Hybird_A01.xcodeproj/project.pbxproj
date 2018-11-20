@@ -182,6 +182,7 @@
 		3AB0683E21A395EF00072FB7 /* BTTUnBindingHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB0683C21A395EF00072FB7 /* BTTUnBindingHeaderCell.xib */; };
 		3AB0684221A3998200072FB7 /* BTTUnBindingBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0684021A3998200072FB7 /* BTTUnBindingBtnCell.m */; };
 		3AB0684321A3998200072FB7 /* BTTUnBindingBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB0684121A3998200072FB7 /* BTTUnBindingBtnCell.xib */; };
+		3AB0684C21A3EA8500072FB7 /* BTTGamesHallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0684B21A3EA8500072FB7 /* BTTGamesHallModel.m */; };
 		3AC3FFA1219AB8CC008AECCB /* BTTAnimationPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA0219AB8CC008AECCB /* BTTAnimationPopView.m */; };
 		3AC3FFA4219ABEBF008AECCB /* BTTUnlockPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA3219ABEBF008AECCB /* BTTUnlockPopView.m */; };
 		3AC3FFA6219ABED9008AECCB /* BTTUnlockPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA5219ABED8008AECCB /* BTTUnlockPopView.xib */; };
@@ -836,6 +837,8 @@
 		3AB0683F21A3998200072FB7 /* BTTUnBindingBtnCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUnBindingBtnCell.h; sourceTree = "<group>"; };
 		3AB0684021A3998200072FB7 /* BTTUnBindingBtnCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUnBindingBtnCell.m; sourceTree = "<group>"; };
 		3AB0684121A3998200072FB7 /* BTTUnBindingBtnCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTUnBindingBtnCell.xib; sourceTree = "<group>"; };
+		3AB0684A21A3EA8500072FB7 /* BTTGamesHallModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTGamesHallModel.h; sourceTree = "<group>"; };
+		3AB0684B21A3EA8500072FB7 /* BTTGamesHallModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTGamesHallModel.m; sourceTree = "<group>"; };
 		3AC3FF9F219AB8CC008AECCB /* BTTAnimationPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTAnimationPopView.h; sourceTree = "<group>"; };
 		3AC3FFA0219AB8CC008AECCB /* BTTAnimationPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTAnimationPopView.m; sourceTree = "<group>"; };
 		3AC3FFA2219ABEBF008AECCB /* BTTUnlockPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUnlockPopView.h; sourceTree = "<group>"; };
@@ -2379,6 +2382,8 @@
 				3A9E4C44219E9CAD00E7D8C0 /* BTTBindStatusModel.m */,
 				EA5F140F21A265B0004305A7 /* BTTBankModel.h */,
 				EA5F141021A265B0004305A7 /* BTTBankModel.m */,
+				3AB0684A21A3EA8500072FB7 /* BTTGamesHallModel.h */,
+				3AB0684B21A3EA8500072FB7 /* BTTGamesHallModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3500,6 +3505,7 @@
 				3A11AE072181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.m in Sources */,
 				3AD9CF84216F482B00685B43 /* BTTHomePageDiscountHeaderCell.m in Sources */,
 				3AE1EABE217DB7040073A32D /* BTTPersonalInfoController.m in Sources */,
+				3AB0684C21A3EA8500072FB7 /* BTTGamesHallModel.m in Sources */,
 				3AC3FFA4219ABEBF008AECCB /* BTTUnlockPopView.m in Sources */,
 				3AB0683821A3959100072FB7 /* BTTUnBindingMobileNoticeController.m in Sources */,
 				3A11AE4B21869B2200B1AFF4 /* BTTSettingsController.m in Sources */,
