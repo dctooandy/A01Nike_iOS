@@ -42,15 +42,15 @@
         
     }
     if (model.login_name.length == 1) {
-        [MBProgressHUD showMessagNoActivity:@"请输入账号" toView:self.view];
+        [MBProgressHUD showError:@"请输入账号" toView:self.view];
         return;
     }
     if (!model.password.length) {
-        [MBProgressHUD showMessagNoActivity:@"请输入密码" toView:self.view];
+        [MBProgressHUD showError:@"请输入密码" toView:self.view];
         return;
     }
     if (!model.code.length && self.loginCellType == BTTLoginCellTypeCode) {
-        [MBProgressHUD showMessagNoActivity:@"请输入验证码" toView:self.view];
+        [MBProgressHUD showError:@"请输入验证码" toView:self.view];
         return;
     }
     [self loginWithLoginAPIModel:model isBack:YES];
@@ -80,7 +80,7 @@
             if (result.code_system == 202020) {
                 [self showAlertWithModle:model];
             } else if(result.code_system == 202006 || result.code_system == 202018) {
-                [MBProgressHUD showMessagNoActivity:@"账号或密码错误,请重新输入" toView:self.view];
+                [MBProgressHUD showError:@"账号或密码错误,请重新输入" toView:self.view];
                 self.wrongPwdNum++;
                 if (self.wrongPwdNum >= 2) {
                     self.loginCellType = BTTLoginCellTypeCode;
@@ -126,23 +126,23 @@
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
         BOOL isAccount = [predicate evaluateWithObject:model.login_name];
         if (!isAccount) {
-            [MBProgressHUD showMessagNoActivity:@"用户名为4-9位的数字或字母" toView:self.view];
+            [MBProgressHUD showError:@"用户名为4-9位的数字或字母" toView:self.view];
             return;
         }
         
         if (!model.login_name.length) {
-            [MBProgressHUD showMessagNoActivity:@"请输入账号" toView:self.view];
+            [MBProgressHUD showError:@"请输入账号" toView:self.view];
             return;
         }
         NSString *pwdregex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9a-zA-Z]{8,10}$";
         NSPredicate *pwdpredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pwdregex];
         BOOL ispwd = [pwdpredicate evaluateWithObject:model.password];
         if (!ispwd) {
-            [MBProgressHUD showMessagNoActivity:@"密码为8~10位的数字和字母" toView:self.view];
+            [MBProgressHUD showError:@"密码为8~10位的数字和字母" toView:self.view];
             return;
         }
         if (!model.password.length) {
-            [MBProgressHUD showMessagNoActivity:@"请输入密码" toView:self.view];
+            [MBProgressHUD showError:@"请输入密码" toView:self.view];
             return;
         }
         if (model.phone.length) {
@@ -150,12 +150,12 @@
             NSPredicate *phonepredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneregex];
             BOOL isphone = [phonepredicate evaluateWithObject:model.phone];
             if (!isphone) {
-                [MBProgressHUD showMessagNoActivity:@"请填写正确的手机号" toView:self.view];
+                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
                 return;
             }
         }
         if (!model.catpcha.length) {
-            [MBProgressHUD showMessagNoActivity:@"请输入验证码" toView:self.view];
+            [MBProgressHUD showError:@"请输入验证码" toView:self.view];
             return;
         }
         [self createAccountNormalWithAPIModel:model];
@@ -176,12 +176,12 @@
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
             BOOL isAccount = [predicate evaluateWithObject:model.login_name];
             if (!isAccount) {
-                [MBProgressHUD showMessagNoActivity:@"用户名为4-9位的数字或字母" toView:self.view];
+                [MBProgressHUD showError:@"用户名为4-9位的数字或字母" toView:self.view];
                 return;
             }
             
             if (!model.login_name.length) {
-                [MBProgressHUD showMessagNoActivity:@"请输入账号" toView:self.view];
+                [MBProgressHUD showError:@"请输入账号" toView:self.view];
                 return;
             }
             [self fastRegisterAPIModel:model];
