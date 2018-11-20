@@ -93,7 +93,7 @@
                 
             }];
         } else {
-            [MBProgressHUD showMessagNoActivity:@"请先选择省份" toView:self.view];
+            [MBProgressHUD showError:@"请先选择省份" toView:self.view];
         }
         
     }

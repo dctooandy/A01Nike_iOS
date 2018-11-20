@@ -32,6 +32,16 @@
     [self.accountTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
     [self.phoneTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
     [self.pwdTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.verifyTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    UITapGestureRecognizer *refreshCode = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(refreshCode:)];
+    [self.codeImageView addGestureRecognizer:refreshCode];
+}
+
+- (void)refreshCode:(UITapGestureRecognizer *)tap {
+    if (self.clickEventBlock) {
+        self.clickEventBlock(tap);
+    }
 }
 
 - (IBAction)normalBtnClick:(UIButton *)sender {
@@ -67,6 +77,11 @@
         if (textField.text.length > 10) {
             [MBProgressHUD showError:@"手机号码长度不能超过10位" toView:nil];
             textField.text = [textField.text substringToIndex:10];
+        }
+    } else {
+        if (textField.text.length > 4) {
+            [MBProgressHUD showError:@"验证码长度不能超过4位" toView:nil];
+            textField.text = [textField.text substringToIndex:4];
         }
     }
     

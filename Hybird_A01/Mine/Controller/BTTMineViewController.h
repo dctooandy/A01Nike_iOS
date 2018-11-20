@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) BTTBindStatusModel *statusModel;
 
+@property (nonatomic, copy) NSString *totalAmount;
+
 - (void)setupElements;
 
 @end

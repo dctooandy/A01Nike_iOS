@@ -31,6 +31,7 @@
     [super awakeFromNib];
     self.bgView.layer.cornerRadius = 4;
     [self.phoneTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.verifyCodeBlock addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
 }
 
 
@@ -84,6 +85,11 @@
         if (textField.text.length > 11) {
             [MBProgressHUD showError:@"手机号码长度不能超过11位" toView:nil];
             textField.text = [textField.text substringToIndex:11];
+        }
+    } else {
+        if (textField.text.length > 6) {
+            [MBProgressHUD showError:@"手机验证码长度不能超过6位" toView:nil];
+            textField.text = [textField.text substringToIndex:6];
         }
     }
     

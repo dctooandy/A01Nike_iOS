@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BTTAccountBalanceController : BTTCollectionViewController
 
 
+@property (nonatomic, copy) NSString *amount;
+
 @end
 
 NS_ASSUME_NONNULL_END

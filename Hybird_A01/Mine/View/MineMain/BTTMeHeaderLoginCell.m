@@ -31,6 +31,15 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.vipLevelLabel.layer.cornerRadius = 2;
+    self.nameLabel.text = [IVNetwork userInfo].loginName;
+    if ([IVNetwork userInfo].customerLevel) {
+        self.vipLevelLabel.hidden = NO;
+        self.vipLevelLabel.text = [NSString stringWithFormat:@"VIP%@",@([IVNetwork userInfo].customerLevel)];
+    } else {
+        self.vipLevelLabel.hidden = YES;
+    }
+    
+    
 }
 
 - (void)setNoticeStr:(NSString *)noticeStr {
@@ -48,6 +57,11 @@
         [self.topBgView addSubview:_scrollLabelView];
         [_scrollLabelView beginScrolling];
     }
+}
+
+- (void)setTotalAmount:(NSString *)totalAmount {
+    _totalAmount = totalAmount;
+    self.amountLabel.text = _totalAmount;
 }
 
 - (void)scrollLabelView:(TXScrollLabelView *)scrollLabelView didClickWithText:(NSString *)text atIndex:(NSInteger)index {

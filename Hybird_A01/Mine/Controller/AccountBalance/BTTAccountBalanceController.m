@@ -10,6 +10,7 @@
 #import "BTTAccountBlanceHeaderCell.h"
 #import "BTTAccountBlanceCell.h"
 #import "BTTAccountBlanceHiddenCell.h"
+#import "BTTAccountBalanceController+LoadData.h"
 
 @interface BTTAccountBalanceController ()<BTTElementsFlowLayoutDelegate>
 
@@ -22,8 +23,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"账户余额";
+    self.amount = @"-";
     [self setupCollectionView];
     [self setupElements];
+    [self loadLocalAmount];
+    [self loadGamesListAndGameAmount];
 }
 
 - (void)setupCollectionView {
@@ -40,6 +44,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         BTTAccountBlanceHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAccountBlanceHeaderCell" forIndexPath:indexPath];
+        cell.totalLabel.text = self.amount;
         return cell;
     } else if (indexPath.row == 1 || indexPath.row == 2) {
         BTTAccountBlanceCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAccountBlanceCell" forIndexPath:indexPath];

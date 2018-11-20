@@ -95,7 +95,7 @@
                     cell.detailLabel.text = selectValue;
                 }];
             } else {
-                [MBProgressHUD showMessagNoActivity:@"请填写取款金额" toView:self.view];
+                [MBProgressHUD showError:@"请填写取款金额" toView:self.view];
             }
         }
     } else {

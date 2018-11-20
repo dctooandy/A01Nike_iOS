@@ -23,12 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *mainDataThree;
 
 
-
-
-
 - (void)loadMeAllData;
 
 - (void)loadBindStatus;
+
+- (void)loadTotalAvailableData;
 
 @end
 
