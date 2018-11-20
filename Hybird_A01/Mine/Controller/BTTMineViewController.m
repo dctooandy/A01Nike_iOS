@@ -39,6 +39,8 @@
 #import "BTTLoginOrRegisterViewController.h"
 #import "BTTBindStatusModel.h"
 #import "BTTVerifyTypeSelectController.h"
+#import "BTTHomePageViewController+LoadData.h"
+
 #import "BTTUserStatusManager.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
@@ -84,6 +86,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork userInfo]) {
         [self loadBindStatus];
+        [self loadTotalAvailableData];
     }
 }
 
@@ -106,9 +109,12 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
+        BTTBaseNavigationController *navVC = self.tabBarController.viewControllers[0];
+        BTTHomePageViewController *homeVC = navVC.viewControllers[0];
         if ([IVNetwork userInfo]) {
             BTTMeHeaderLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeHeaderLoginCell" forIndexPath:indexPath];
-            cell.noticeStr = @"测试测试测试, 测试一下, 测试测试测试, 测试一下, 测试测试测试, 测试一下";
+            cell.noticeStr = homeVC.noticeStr.length ? homeVC.noticeStr : @"";
+            cell.totalAmount = self.totalAmount;
             weakSelf(weakSelf);
             cell.accountBlanceBlock = ^{
                 strongSelf(strongSelf);
@@ -118,20 +124,18 @@
             return cell;
         } else {
             BTTMeHeaderNotLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeHeaderNotLoginCell" forIndexPath:indexPath];
-            cell.noticeStr = @"测试测试测试, 测试一下, 测试测试测试, 测试一下, 测试测试测试, 测试一下";
+            cell.noticeStr = homeVC.noticeStr.length ? homeVC.noticeStr : @"";
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
                 if (button.tag == 6003) {
-                    BTTLoginAndRegisterViewController *loginVC = [[BTTLoginAndRegisterViewController alloc] init];
-                    loginVC.webConfigModel.url = @"common/login.htm";
-                    loginVC.webConfigModel.newView = YES;
-                    [strongSelf.navigationController pushViewController:loginVC animated:YES];
+                    BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
+                    loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
+                    [strongSelf.navigationController pushViewController:loginAndRegister animated:YES];
                 } else {
-                    BTTLoginAndRegisterViewController *registerVC = [[BTTLoginAndRegisterViewController alloc] init];
-                    registerVC.webConfigModel.url = @"common/register.htm";
-                    registerVC.webConfigModel.newView = YES;
-                    [strongSelf.navigationController pushViewController:registerVC animated:YES];
+                    BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
+                    loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
+                    [strongSelf.navigationController pushViewController:loginAndRegister animated:YES];
                 }
             };
             return cell;

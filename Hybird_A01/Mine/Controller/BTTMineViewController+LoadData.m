@@ -110,6 +110,20 @@
     [BTTHttpManager fetchBindStatusWithCompletion:nil];
 }
 
+- (void)loadTotalAvailableData {
+    [IVNetwork sendRequestWithSubURL:BTTCreditsTotalAvailable paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+        if (result.code_http == 200) {
+            if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
+                self.totalAmount = result.data[@"val"];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.collectionView reloadData];
+                });
+            }
+        }
+    }];
+}
+
 #pragma mark - 动态添加属性
 
 - (NSMutableArray *)personalInfos {

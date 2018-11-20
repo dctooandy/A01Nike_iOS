@@ -176,6 +176,12 @@
 		3AB0682921A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0682721A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.m */; };
 		3AB0682A21A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB0682821A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.xib */; };
 		3AB0683121A2964000072FB7 /* BTTDiscountsViewController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0683021A2964000072FB7 /* BTTDiscountsViewController+LoadData.m */; };
+		3AB0683421A2E34C00072FB7 /* BTTAccountBalanceController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0683321A2E34C00072FB7 /* BTTAccountBalanceController+LoadData.m */; };
+		3AB0683821A3959100072FB7 /* BTTUnBindingMobileNoticeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0683721A3959100072FB7 /* BTTUnBindingMobileNoticeController.m */; };
+		3AB0683D21A395EF00072FB7 /* BTTUnBindingHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0683B21A395EF00072FB7 /* BTTUnBindingHeaderCell.m */; };
+		3AB0683E21A395EF00072FB7 /* BTTUnBindingHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB0683C21A395EF00072FB7 /* BTTUnBindingHeaderCell.xib */; };
+		3AB0684221A3998200072FB7 /* BTTUnBindingBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0684021A3998200072FB7 /* BTTUnBindingBtnCell.m */; };
+		3AB0684321A3998200072FB7 /* BTTUnBindingBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB0684121A3998200072FB7 /* BTTUnBindingBtnCell.xib */; };
 		3AC3FFA1219AB8CC008AECCB /* BTTAnimationPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA0219AB8CC008AECCB /* BTTAnimationPopView.m */; };
 		3AC3FFA4219ABEBF008AECCB /* BTTUnlockPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA3219ABEBF008AECCB /* BTTUnlockPopView.m */; };
 		3AC3FFA6219ABED9008AECCB /* BTTUnlockPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA5219ABED8008AECCB /* BTTUnlockPopView.xib */; };
@@ -820,6 +826,16 @@
 		3AB0682821A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTChangeMobileSuccessBtnCell.xib; sourceTree = "<group>"; };
 		3AB0682F21A2964000072FB7 /* BTTDiscountsViewController+LoadData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTTDiscountsViewController+LoadData.h"; sourceTree = "<group>"; };
 		3AB0683021A2964000072FB7 /* BTTDiscountsViewController+LoadData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTTDiscountsViewController+LoadData.m"; sourceTree = "<group>"; };
+		3AB0683221A2E34C00072FB7 /* BTTAccountBalanceController+LoadData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTTAccountBalanceController+LoadData.h"; sourceTree = "<group>"; };
+		3AB0683321A2E34C00072FB7 /* BTTAccountBalanceController+LoadData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTTAccountBalanceController+LoadData.m"; sourceTree = "<group>"; };
+		3AB0683621A3959100072FB7 /* BTTUnBindingMobileNoticeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUnBindingMobileNoticeController.h; sourceTree = "<group>"; };
+		3AB0683721A3959100072FB7 /* BTTUnBindingMobileNoticeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUnBindingMobileNoticeController.m; sourceTree = "<group>"; };
+		3AB0683A21A395EF00072FB7 /* BTTUnBindingHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUnBindingHeaderCell.h; sourceTree = "<group>"; };
+		3AB0683B21A395EF00072FB7 /* BTTUnBindingHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUnBindingHeaderCell.m; sourceTree = "<group>"; };
+		3AB0683C21A395EF00072FB7 /* BTTUnBindingHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTUnBindingHeaderCell.xib; sourceTree = "<group>"; };
+		3AB0683F21A3998200072FB7 /* BTTUnBindingBtnCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUnBindingBtnCell.h; sourceTree = "<group>"; };
+		3AB0684021A3998200072FB7 /* BTTUnBindingBtnCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUnBindingBtnCell.m; sourceTree = "<group>"; };
+		3AB0684121A3998200072FB7 /* BTTUnBindingBtnCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTUnBindingBtnCell.xib; sourceTree = "<group>"; };
 		3AC3FF9F219AB8CC008AECCB /* BTTAnimationPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTAnimationPopView.h; sourceTree = "<group>"; };
 		3AC3FFA0219AB8CC008AECCB /* BTTAnimationPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTAnimationPopView.m; sourceTree = "<group>"; };
 		3AC3FFA2219ABEBF008AECCB /* BTTUnlockPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUnlockPopView.h; sourceTree = "<group>"; };
@@ -2070,6 +2086,28 @@
 			path = " ChangeMobileSuccess";
 			sourceTree = "<group>";
 		};
+		3AB0683521A3955400072FB7 /* UnBindingMobile */ = {
+			isa = PBXGroup;
+			children = (
+				3AB0683621A3959100072FB7 /* BTTUnBindingMobileNoticeController.h */,
+				3AB0683721A3959100072FB7 /* BTTUnBindingMobileNoticeController.m */,
+			);
+			path = UnBindingMobile;
+			sourceTree = "<group>";
+		};
+		3AB0683921A395B600072FB7 /* UnBindingMobile */ = {
+			isa = PBXGroup;
+			children = (
+				3AB0683A21A395EF00072FB7 /* BTTUnBindingHeaderCell.h */,
+				3AB0683B21A395EF00072FB7 /* BTTUnBindingHeaderCell.m */,
+				3AB0683C21A395EF00072FB7 /* BTTUnBindingHeaderCell.xib */,
+				3AB0683F21A3998200072FB7 /* BTTUnBindingBtnCell.h */,
+				3AB0684021A3998200072FB7 /* BTTUnBindingBtnCell.m */,
+				3AB0684121A3998200072FB7 /* BTTUnBindingBtnCell.xib */,
+			);
+			path = UnBindingMobile;
+			sourceTree = "<group>";
+		};
 		3AC3FF9E219AB88B008AECCB /* BTTAnimationPopView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2388,6 +2426,8 @@
 			children = (
 				3ADD23F42179C6A800FA959A /* BTTAccountBalanceController.h */,
 				3ADD23F52179C6A800FA959A /* BTTAccountBalanceController.m */,
+				3AB0683221A2E34C00072FB7 /* BTTAccountBalanceController+LoadData.h */,
+				3AB0683321A2E34C00072FB7 /* BTTAccountBalanceController+LoadData.m */,
 			);
 			path = AccountBalance;
 			sourceTree = "<group>";
@@ -2448,6 +2488,7 @@
 		3AE1EAB9217DB59B0073A32D /* BindMobile */ = {
 			isa = PBXGroup;
 			children = (
+				3AB0683921A395B600072FB7 /* UnBindingMobile */,
 				3AB0681F21A25E9400072FB7 /*  ChangeMobileSuccess */,
 				3A49DF982179D90D00FEFBDA /* BTTBindingMobileOneCell.h */,
 				3A49DF992179D90D00FEFBDA /* BTTBindingMobileOneCell.m */,
@@ -2483,6 +2524,7 @@
 		3AE1EACC217DCCFE0073A32D /* ChangeMobile */ = {
 			isa = PBXGroup;
 			children = (
+				3AB0683521A3955400072FB7 /* UnBindingMobile */,
 				3AB0681B21A25DED00072FB7 /* ChangeMobileSuccess */,
 				3A9E4C7921A25AAE00E7D8C0 /* ChangeMobileNext */,
 				3A9E4C7221A256F800E7D8C0 /* Manual */,
@@ -3059,6 +3101,7 @@
 				EAE89F24218C3ABD00C29393 /* LIVMoreBoardCell.nib in Resources */,
 				EAE89E95218C3ABD00C29393 /* supprise.gif in Resources */,
 				EAE89E9D218C3ABD00C29393 /* liv_radio_selected@2x.png in Resources */,
+				3AB0684321A3998200072FB7 /* BTTUnBindingBtnCell.xib in Resources */,
 				EAE89F10218C3ABD00C29393 /* TableViewArrow@2x.png in Resources */,
 				EAE89EE2218C3ABD00C29393 /* LIVVideoCamera_play@3x.png in Resources */,
 				EAE89EB6218C3ABD00C29393 /* LIVFileMessage_TypeUnknown@3x.png in Resources */,
@@ -3159,6 +3202,7 @@
 				EAE89E8A218C3ABD00C29393 /* daxiao.gif in Resources */,
 				EAE89E8F218C3ABD00C29393 /* inebriation.gif in Resources */,
 				EAE89EFC218C3ABD00C29393 /* photo_def_previewVc@2x.png in Resources */,
+				3AB0683E21A395EF00072FB7 /* BTTUnBindingHeaderCell.xib in Resources */,
 				EAE89EA2218C3ABD00C29393 /* liv_satisfactionr_circular_selected@3x.png in Resources */,
 				EAE89F1B218C3ABD00C29393 /* LIVCollectionBoard.nib in Resources */,
 				EAE89ECA218C3ABD00C29393 /* LIVReceivedMessageBackground@3x.png in Resources */,
@@ -3286,6 +3330,7 @@
 				3A8F5188215F77AC0069D1B3 /* BTTIntroductoryPagesView.m in Sources */,
 				3AD9CF7F216F462600685B43 /* BTTHomePageSeparateCell.m in Sources */,
 				3AD9CF41216EDC9800685B43 /* BTTVoiceCallModel.m in Sources */,
+				3AB0684221A3998200072FB7 /* BTTUnBindingBtnCell.m in Sources */,
 				3A11ADD321816E5800B1AFF4 /* SVRadialGradientLayer.m in Sources */,
 				EACCD202218FE1680090B5E6 /* IVWebViewUtility.m in Sources */,
 				3ADD237B2177366B00FA959A /* BTTMeMainCell.m in Sources */,
@@ -3297,6 +3342,7 @@
 				3A49DF922179D62900FEFBDA /* BTTAccountBlanceCell.m in Sources */,
 				3AE1EB0E218047050073A32D /* BTTCardModifyCell.m in Sources */,
 				3A9E4C6E21A2542500E7D8C0 /* BTTModifyEmailController+LoadData.m in Sources */,
+				3AB0683D21A395EF00072FB7 /* BTTUnBindingHeaderCell.m in Sources */,
 				3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */,
 				3AAE81FA219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m in Sources */,
 				3A37E1392164A29600FB13A1 /* BTTRefreshGIFHeader.m in Sources */,
@@ -3448,12 +3494,14 @@
 				3A929431219D1B4700764E7E /* BTTForgetPwdOneCell.m in Sources */,
 				3A8F51E5215F78F50069D1B3 /* BTTCollectionViewFlowlayout.m in Sources */,
 				3A11AE582186A71100B1AFF4 /* BTTBookMessageCell.m in Sources */,
+				3AB0683421A2E34C00072FB7 /* BTTAccountBalanceController+LoadData.m in Sources */,
 				3A11AE5D2186B71600B1AFF4 /* BTTXimaController.m in Sources */,
 				3AD9CD5B21661BE800685B43 /* BTTRedDotManager.m in Sources */,
 				3A11AE072181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.m in Sources */,
 				3AD9CF84216F482B00685B43 /* BTTHomePageDiscountHeaderCell.m in Sources */,
 				3AE1EABE217DB7040073A32D /* BTTPersonalInfoController.m in Sources */,
 				3AC3FFA4219ABEBF008AECCB /* BTTUnlockPopView.m in Sources */,
+				3AB0683821A3959100072FB7 /* BTTUnBindingMobileNoticeController.m in Sources */,
 				3A11AE4B21869B2200B1AFF4 /* BTTSettingsController.m in Sources */,
 				3AAE821E219A738B003EC8B0 /* BTTRegisterQuickManualCell.m in Sources */,
 				EA5F140E21A261BA004305A7 /* BTTHttpManager.m in Sources */,
