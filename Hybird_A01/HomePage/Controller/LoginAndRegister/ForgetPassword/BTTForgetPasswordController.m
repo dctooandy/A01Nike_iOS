@@ -74,7 +74,7 @@
                     vc.account = strongSelf.account;
                     [strongSelf.navigationController pushViewController:vc animated:YES];
                 } else {
-                    [MBProgressHUD showMessagNoActivity:result.message toView:strongSelf.view];
+                    [MBProgressHUD showError:result.message toView:strongSelf.view];
                 }
             }];
             

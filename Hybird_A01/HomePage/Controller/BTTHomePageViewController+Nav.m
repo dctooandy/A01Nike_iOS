@@ -176,7 +176,7 @@ static const char *BTTHeaderViewKey = "headerView";
         strongSelf(strongSelf);
         if (btn.tag == 50010) {
             if (![IVNetwork userInfo].phone.length) {
-                [MBProgressHUD showMessagNoActivity:@"您未绑定手机, 请选择其他电话" toView:nil];
+                [MBProgressHUD showError:@"您未绑定手机, 请选择其他电话" toView:nil];
                 return;
             }
             [popView dismiss];

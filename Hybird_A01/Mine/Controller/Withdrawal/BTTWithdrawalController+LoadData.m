@@ -31,7 +31,7 @@
         [self hideLoading];
         NSLog(@"%@",response);
         if (result.message.length) {
-            [MBProgressHUD showMessagNoActivity:result.message toView:nil];
+            [MBProgressHUD showError:result.message toView:nil];
         }
         if (result.code_http == 200) {
             if (result.data) {
