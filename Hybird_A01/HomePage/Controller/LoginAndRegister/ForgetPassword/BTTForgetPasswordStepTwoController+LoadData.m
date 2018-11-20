@@ -14,7 +14,7 @@
 - (void)sendVerifyCodeWithAccount:(NSString *)account {
     NSDictionary *params = @{BTTLoginName:account};
     [IVNetwork sendRequestWithSubURL:BTTStepOneSendCode paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        [MBProgressHUD showMessagNoActivity:result.message toView:self.view];
+        [MBProgressHUD showSuccess:result.message toView:self.view];
     }];
 }
 

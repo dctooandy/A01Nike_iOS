@@ -47,7 +47,7 @@
 - (IBAction)callBackBtnClick:(UIButton *)sender {
     [self endEditing:YES];
     if (!self.phoneTextField.text.length) {
-        [MBProgressHUD showMessagNoActivity:@"请输入您的联系电话" toView:nil];
+        [MBProgressHUD showError:@"请输入您的联系电话" toView:nil];
         return;
     }
     if (self.callBackBlock) {
