@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -54,9 +54,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIP12  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4d-Co-HZP">
-                        <rect key="frame" x="121.5" y="65" width="33" height="13"/>
+                        <rect key="frame" x="121.5" y="65" width="30" height="13"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.38039215686274508" blue="0.11372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="30" id="b8Q-UQ-9On"/>
                             <constraint firstAttribute="height" constant="13" id="cDX-3m-xqf"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Arial-BoldItalicMT" family="Arial" pointSize="10"/>
@@ -115,7 +116,7 @@
                 <outlet property="topBgView" destination="SNo-89-Eka" id="ZVB-4w-Ce5"/>
                 <outlet property="vipLevelLabel" destination="v4d-Co-HZP" id="eua-EE-ugQ"/>
             </connections>
-            <point key="canvasLocation" x="-522" y="69"/>
+            <point key="canvasLocation" x="94" y="42"/>
         </collectionViewCell>
     </objects>
     <resources>

@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) AccountBlanceBlock accountBlanceBlock;
 
+@property (nonatomic, copy) NSString *totalAmount;
+
 @end
 
 NS_ASSUME_NONNULL_END
