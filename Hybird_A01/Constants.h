@@ -152,6 +152,10 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTPromotionList             @"/A01/promotion/newList"
 
+// 获取用户所有厅余额总和
+
+#define BTTCreditsLocal              @"/public/credits/local"
+
 
 /********************************************常用宏*********************************************************/
 

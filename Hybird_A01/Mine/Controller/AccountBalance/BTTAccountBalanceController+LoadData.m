@@ -10,4 +10,46 @@
 
 @implementation BTTAccountBalanceController (LoadData)
 
+- (void)loadLocalAmount {
+    [self showLoading];
+    [IVNetwork sendRequestWithSubURL:BTTCreditsLocal paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        [self hideLoading];
+        NSLog(@"%@",response);
+        if (result.code_http == 200) {
+            if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
+                self.amount = result.data[@"val"];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.collectionView reloadData];
+                });
+            }
+        }
+    }];
+}
+
+- (void)loadGamesListAndGameAmount {
+    dispatch_queue_t queue = dispatch_queue_create("gamesListAndGameAmount.queue", DISPATCH_QUEUE_SERIAL);
+    
+    dispatch_async(queue, ^{
+        // 追加任务1
+        for (int i = 0; i < 2; ++i) {
+            [NSThread sleepForTimeInterval:2];              // 模拟耗时操作
+            NSLog(@"1---%@",[NSThread currentThread]);      // 打印当前线程
+        }
+    });
+    dispatch_async(queue, ^{
+        // 追加任务2
+        for (int i = 0; i < 2; ++i) {
+            [NSThread sleepForTimeInterval:2];              // 模拟耗时操作
+            NSLog(@"2---%@",[NSThread currentThread]);      // 打印当前线程
+        }
+    });
+    dispatch_async(queue, ^{
+        // 追加任务3
+        for (int i = 0; i < 2; ++i) {
+            [NSThread sleepForTimeInterval:2];              // 模拟耗时操作
+            NSLog(@"3---%@",[NSThread currentThread]);      // 打印当前线程
+        }
+    });
+}
+
 @end
