@@ -145,7 +145,7 @@
                                     <action selector="showBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="028-ag-q4U"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kMn-e2-GbC">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kMn-e2-GbC">
                                 <rect key="frame" x="245" y="204" width="55" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3WQ-7C-mTj"/>
@@ -250,7 +250,7 @@
                 <outlet property="tagLabel" destination="qzd-e8-Uld" id="mv3-Iq-BAg"/>
                 <outlet property="verifyTextField" destination="EJl-wh-ZDD" id="X2p-dS-jSB"/>
             </connections>
-            <point key="canvasLocation" x="-692" y="161"/>
+            <point key="canvasLocation" x="-1039" y="163"/>
         </collectionViewCell>
     </objects>
     <resources>

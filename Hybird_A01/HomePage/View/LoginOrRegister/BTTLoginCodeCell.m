@@ -26,6 +26,14 @@
     self.bgView.layer.cornerRadius = 4;
     self.tagLabel.layer.cornerRadius = 2;
     [self.accountTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
+    UITapGestureRecognizer *refreshCode = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(refreshCode:)];
+    [self.codeImageView addGestureRecognizer:refreshCode];
+}
+
+- (void)refreshCode:(UITapGestureRecognizer *)tap {
+    if (self.clickEventBlock) {
+        self.clickEventBlock(tap);
+    }
 }
 
 - (IBAction)showBtnClick:(UIButton *)sender {

@@ -263,7 +263,9 @@
             // 将NSData转为UIImage
             UIImage *decodedImage = [UIImage imageWithData: decodeData];
             self.codeImage = decodedImage;
-            [self.collectionView reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.collectionView reloadData];
+            });
         }
     }];
 }

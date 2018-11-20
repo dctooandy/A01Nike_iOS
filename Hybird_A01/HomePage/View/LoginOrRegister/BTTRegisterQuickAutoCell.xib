@@ -108,7 +108,7 @@
                                     <action selector="quickBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="XnJ-dT-T7P"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="10017" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fzu-7V-xjS">
+                            <button opaque="NO" tag="10017" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fzu-7V-xjS">
                                 <rect key="frame" x="15" y="92" width="142.5" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="bNJ-A9-0i5"/>
@@ -121,7 +121,7 @@
                                     <action selector="autoBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="nbO-dS-cep"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="10018" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7pQ-S5-NJI">
+                            <button opaque="NO" tag="10018" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7pQ-S5-NJI">
                                 <rect key="frame" x="157.5" y="92" width="142.5" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="18r-it-0cB"/>
