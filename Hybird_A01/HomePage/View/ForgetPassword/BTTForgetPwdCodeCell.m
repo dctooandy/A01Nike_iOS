@@ -21,6 +21,14 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     _detailTextField.textColor = [UIColor whiteColor];
+    UITapGestureRecognizer *refreshCode = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(refreshCode:)];
+    [self.codeImage addGestureRecognizer:refreshCode];
+}
+
+- (void)refreshCode:(UITapGestureRecognizer *)tap {
+    if (self.clickEventBlock) {
+        self.clickEventBlock(tap);
+    }
 }
 
 - (void)setModel:(BTTMeMainModel *)model {

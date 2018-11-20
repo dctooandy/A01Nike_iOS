@@ -25,10 +25,10 @@
 
 - (void)setupCollectionView {
     [super setupCollectionView];
-    self.collectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 126);
+    self.collectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 126 - (KIsiPhoneX ? 88 : 64));
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessOneCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessBtnsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessBtnsCell"];
-    UIImageView *adImageview = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - 126, SCREEN_WIDTH, 126)];
+    UIImageView *adImageview = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 310) / 2, SCREEN_HEIGHT - 126 - (KIsiPhoneX ? 88 : 64), 310, 126)];
     [self.view addSubview:adImageview];
     adImageview.image = ImageNamed(@"login_ad");
 }

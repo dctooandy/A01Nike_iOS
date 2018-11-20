@@ -154,7 +154,9 @@
                                 <state key="normal" title="获取验证码" backgroundImage="binding_btn_enable_normal">
                                     <color key="titleColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <state key="disabled" backgroundImage="binding_btn_disable"/>
+                                <state key="disabled" backgroundImage="binding_btn_disable">
+                                    <color key="titleColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="codeBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="pra-UA-ZTP"/>
                                 </connections>

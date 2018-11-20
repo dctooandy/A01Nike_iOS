@@ -17,7 +17,9 @@
         NSLog(@"%@",result.message);
         if (result.code_http == 200) {
             [self.navigationController popToRootViewControllerAnimated:YES];
-            [MBProgressHUD showSuccess:result.message toView:self.view];
+        }
+        if (result.message.length) {
+            [MBProgressHUD showSuccess:result.message toView:nil];
         }
     }];
 }
