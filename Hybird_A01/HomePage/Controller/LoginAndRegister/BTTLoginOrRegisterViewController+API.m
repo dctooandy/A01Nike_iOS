@@ -145,6 +145,12 @@
             [MBProgressHUD showError:@"请输入密码" toView:self.view];
             return;
         }
+        
+        if (!model.phone.length) {
+            [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+            return;
+        }
+        
         if (model.phone.length) {
             NSString *phoneregex = @"^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
             NSPredicate *phonepredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneregex];
@@ -170,7 +176,7 @@
             BTTRegisterQuickManualCell *cell = (BTTRegisterQuickManualCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
             model.phone = cell.phoneTextField.text;
             model.verify_code = cell.codeField.text;
-            model.login_name = cell.accountField.text;
+            model.login_name = [NSString stringWithFormat:@"g%@",cell.accountField.text];
             model.parent_id = [IVNetwork parentId];
             NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
@@ -218,6 +224,10 @@
                     [self loginWithLoginAPIModel:loginModel isBack:NO];
                 }
             }
+            
+        }
+        if (result.message) {
+            [MBProgressHUD showError:result.message toView:nil];
         }
     }];
 }
@@ -239,7 +249,7 @@
     }
     [IVNetwork sendRequestWithSubURL:BTTUserFastRegister paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         if (result.code_http == 200) {
-            if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
+            if (result.data && ![result.data isKindOfClass:[NSNull class]] && [result.data isKindOfClass:[NSDictionary class]]) {
                 if (![result.data[@"login_name"] isKindOfClass:[NSNull class]] && result.data[@"login_name"]) {
                     BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
                     vc.account = result.data[@"login_name"];
@@ -250,10 +260,11 @@
                     loginModel.password = result.data[@"password"];
                     loginModel.timestamp = [PublicMethod timeIntervalSince1970];
                     [self loginWithLoginAPIModel:loginModel isBack:NO];
-                } else {
-                    [MBProgressHUD showError:result.message toView:nil];
                 }
             }
+        }
+        if (result.message) {
+            [MBProgressHUD showError:result.message toView:nil];
         }
     }];
 }
@@ -279,7 +290,9 @@
                     });
                 }
             }
-            
+        }
+        if (result.message.length) {
+            [MBProgressHUD showError:result.message toView:nil];
         }
     }];
 }
@@ -289,8 +302,6 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (phone.length) {
         [params setObject:phone forKey:@"send_to"];
-        [MBProgressHUD showError:@"请输入手机号码" toView:nil];
-        return;
     }
     [params setObject:@(1) forKey:@"type"];
     [params setObject:@(6) forKey:@"v_type"];
@@ -299,6 +310,8 @@
         NSLog(@"%@",response);
         if (result.code_http == 200) {
             [MBProgressHUD showSuccess:@"发送成功" toView:nil];
+        } else {
+            [MBProgressHUD showError:result.message toView:nil];
         }
     }];
 }

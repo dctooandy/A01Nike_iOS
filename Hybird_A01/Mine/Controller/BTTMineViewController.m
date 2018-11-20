@@ -62,6 +62,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"个人中心";
+    self.totalAmount = @"-";
     [self setupNav];
     self.isCompletePersonalInfo = NO;
     self.isChangeMobile = NO;

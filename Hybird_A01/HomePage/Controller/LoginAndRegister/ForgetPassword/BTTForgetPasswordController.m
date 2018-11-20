@@ -60,6 +60,11 @@
         cell.mineSparaterType = BTTMineSparaterTypeNone;
         cell.detailTextField.delegate = self;
         cell.model = model;
+        weakSelf(weakSelf);
+        cell.clickEventBlock = ^(id  _Nonnull value) {
+            strongSelf(strongSelf);
+            [strongSelf loadVerifyCode];
+        };
         return cell;
     } else {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];

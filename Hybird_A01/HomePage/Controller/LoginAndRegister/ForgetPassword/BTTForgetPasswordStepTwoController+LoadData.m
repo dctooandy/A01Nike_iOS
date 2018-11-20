@@ -12,6 +12,9 @@
 @implementation BTTForgetPasswordStepTwoController (LoadData)
 
 - (void)sendVerifyCodeWithAccount:(NSString *)account {
+    if (!account.length) {
+        return;
+    }
     NSDictionary *params = @{BTTLoginName:account};
     [IVNetwork sendRequestWithSubURL:BTTStepOneSendCode paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         [MBProgressHUD showSuccess:result.message toView:self.view];
@@ -19,6 +22,9 @@
 }
 
 - (void)verifyCode:(NSString *)code account:(NSString *)account completeBlock:(CompleteBlock)completeBlock {
+    if (!code.length || !account.length) {
+        return;
+    }
     NSDictionary *params = @{BTTLoginName: account, @"code":code};
     [IVNetwork sendRequestWithSubURL:BTTStepTwoCheckCode paramters:params completionBlock:completeBlock];
 }
