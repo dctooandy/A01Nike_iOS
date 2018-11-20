@@ -112,6 +112,11 @@
                 cell.pwdTextField.delegate = self;
                 cell.codeTextField.delegate = self;
                 cell.codeImageView.image = self.codeImage;
+                weakSelf(weakSelf);
+                cell.clickEventBlock = ^(id  _Nonnull value) {
+                    strongSelf(strongSelf);
+                    [strongSelf loadVerifyCode];
+                };
                 return cell;
             }
         } else {
@@ -132,6 +137,11 @@
                         strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
                     }
                     [strongSelf setupElements];
+                };
+                
+                cell.clickEventBlock = ^(id  _Nonnull value) {
+                    strongSelf(strongSelf);
+                    [strongSelf loadVerifyCode];
                 };
                 return cell;
             } else {

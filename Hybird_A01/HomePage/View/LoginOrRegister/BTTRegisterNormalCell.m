@@ -33,6 +33,15 @@
     [self.phoneTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
     [self.pwdTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
     [self.verifyTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    UITapGestureRecognizer *refreshCode = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(refreshCode:)];
+    [self.codeImageView addGestureRecognizer:refreshCode];
+}
+
+- (void)refreshCode:(UITapGestureRecognizer *)tap {
+    if (self.clickEventBlock) {
+        self.clickEventBlock(tap);
+    }
 }
 
 - (IBAction)normalBtnClick:(UIButton *)sender {

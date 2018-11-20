@@ -205,18 +205,19 @@
         NSLog(@"%@",response);
         [self hideLoading];
         if (result.code_http == 200) {
-            if (result.data) {
-                BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
-                vc.account = result.data[@"login_name"];
-                [self.navigationController pushViewController:vc animated:YES];
-                
-                BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
-                loginModel.login_name = model.login_name;
-                loginModel.password = model.password;
-                loginModel.timestamp = [PublicMethod timeIntervalSince1970];
-                [self loginWithLoginAPIModel:loginModel isBack:NO];
+            if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
+                if (![result.data[@"login_name"] isKindOfClass:[NSNull class]] && result.data[@"login_name"]) {
+                    BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
+                    vc.account = result.data[@"login_name"];
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                    BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
+                    loginModel.login_name = model.login_name;
+                    loginModel.password = model.password;
+                    loginModel.timestamp = [PublicMethod timeIntervalSince1970];
+                    [self loginWithLoginAPIModel:loginModel isBack:NO];
+                }
             }
-           
         }
     }];
 }
@@ -224,8 +225,12 @@
 // 极速开户
 - (void)fastRegisterAPIModel:(BTTCreateAPIModel *)model {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:model.phone forKey:BTTPhone];
-    [params setObject:model.verify_code forKey:@"verify_code"];
+    if (model.phone.length) {
+        [params setObject:model.phone forKey:BTTPhone];
+    }
+    if (model.verify_code.length) {
+        [params setObject:model.verify_code forKey:@"verify_code"];
+    }
     if (model.parent_id.length) {
         [params setObject:model.parent_id forKey:BTTParentID];
     }
@@ -234,16 +239,20 @@
     }
     [IVNetwork sendRequestWithSubURL:BTTUserFastRegister paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         if (result.code_http == 200) {
-            if (result.data) {
-                BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
-                vc.account = result.data[@"login_name"];
-                [self.navigationController pushViewController:vc animated:YES];
-                
-                BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
-                loginModel.login_name = result.data[@"login_name"];
-                loginModel.password = result.data[@"password"];
-                loginModel.timestamp = [PublicMethod timeIntervalSince1970];
-                [self loginWithLoginAPIModel:loginModel isBack:NO];
+            if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
+                if (![result.data[@"login_name"] isKindOfClass:[NSNull class]] && result.data[@"login_name"]) {
+                    BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
+                    vc.account = result.data[@"login_name"];
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                    BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
+                    loginModel.login_name = result.data[@"login_name"];
+                    loginModel.password = result.data[@"password"];
+                    loginModel.timestamp = [PublicMethod timeIntervalSince1970];
+                    [self loginWithLoginAPIModel:loginModel isBack:NO];
+                } else {
+                    [MBProgressHUD showError:result.message toView:nil];
+                }
             }
         }
     }];
@@ -257,13 +266,20 @@
         NSLog(@"%@",response);
         [self hideLoading];
         if (result.code_http == 200) {
-            NSString *base64Str = result.data[@"src"];
-            // 将base64字符串转为NSData
-            NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
-            // 将NSData转为UIImage
-            UIImage *decodedImage = [UIImage imageWithData: decodeData];
-            self.codeImage = decodedImage;
-            [self.collectionView reloadData];
+            if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
+                if (result.data[@"src"] && ![result.data[@"src"] isKindOfClass:[NSNull class]]) {
+                    NSString *base64Str = result.data[@"src"];
+                    // 将base64字符串转为NSData
+                    NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+                    // 将NSData转为UIImage
+                    UIImage *decodedImage = [UIImage imageWithData: decodeData];
+                    self.codeImage = decodedImage;
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.collectionView reloadData];
+                    });
+                }
+            }
+            
         }
     }];
 }
@@ -271,7 +287,11 @@
 // 手机验证码
 - (void)loadMobileVerifyCodeWithPhone:(NSString *)phone {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:phone forKey:@"send_to"];
+    if (phone.length) {
+        [params setObject:phone forKey:@"send_to"];
+        [MBProgressHUD showError:@"请输入手机号码" toView:nil];
+        return;
+    }
     [params setObject:@(1) forKey:@"type"];
     [params setObject:@(6) forKey:@"v_type"];
     [params setObject:[PublicMethod timeIntervalSince1970] forKey:BTTTimestamp];
