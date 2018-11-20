@@ -11,12 +11,12 @@
 #import "BTTCardInfoAddCell.h"
 #import "BTTCardBindMobileController.h"
 #import "BTTVerifyTypeSelectController.h"
-#import "BTTVerifyTypeSelectController.h"
-
+#import "BTTAddCardController.h"
+#import "BTTBankModel.h"
 @interface BTTCardInfosController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, assign) BOOL isBindMobile;
-
+@property (nonatomic, copy) NSArray<BTTBankModel *> *bankList;
 @end
 
 @implementation BTTCardInfosController
@@ -28,7 +28,11 @@
     [self setupCollectionView];
     [self setupElements];
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self getBankList];
+}
 - (void)setupCollectionView {
     [super setupCollectionView];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTCardInfoCell" bundle:nil] forCellWithReuseIdentifier:@"BTTCardInfoCell"];
@@ -40,8 +44,9 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0 || indexPath.row == 1) {
+    if (indexPath.row != self.bankList.count) {
         BTTCardInfoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardInfoCell" forIndexPath:indexPath];
+        cell.model = self.bankList[indexPath.row];
         weakSelf(weakSelf)
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf)
@@ -68,7 +73,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 2) {
+    weakSelf(weakSelf)
+    if (indexPath.row == self.bankList.count) {
         UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:@"请选择以下方式" preferredStyle:UIAlertControllerStyleAlert];
         NSMutableAttributedString *alertControllerMessageStr = [[NSMutableAttributedString alloc] initWithString:@"请选择以下方式"];
         [alertControllerMessageStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"747474"] range:NSMakeRange(0, 7)];
@@ -77,9 +83,7 @@
         
         
         UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"银行卡" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
-            vc.codeType = BTTMobileCodeTypeAddBankCard;
-            [self.navigationController pushViewController:vc animated:YES];
+            [weakSelf addBankCard];
         }];
         [action1 setValue:[UIColor colorWithHexString:@"0066ff"] forKey:@"titleTextColor"];
         [alertVC addAction:action1];
@@ -93,7 +97,6 @@
         [self presentViewController:alertVC animated:YES completion:nil];
         
     }
-    NSLog(@"%zd", indexPath.item);
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource
@@ -129,8 +132,9 @@
 }
 
 - (void)setupElements {
-    for (int i = 0; i < 3; i++) {
-        if (i == 0 || i == 1) {
+    [self.elementsHight removeAllObjects];
+    for (int i = 0; i <= self.bankList.count; i++) {
+        if (i != self.bankList.count) {
             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 240)]];
         } else {
             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 174)]];
@@ -140,6 +144,29 @@
         [self.collectionView reloadData];
     });
 }
-
-
+- (void)getBankList
+{
+    weakSelf(weakSelf)
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [BTTHttpManager fetchBankListWithCompletion:^(IVRequestResultModel *result, id response) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        NSArray<BTTBankModel *> *bankList = response;
+        weakSelf.bankList = bankList;
+        [weakSelf setupElements];
+    }];
+}
+- (void)addBankCard
+{
+    if (self.bankList.count > 0) {
+        BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
+        vc.codeType = BTTMobileCodeTypeAddBankCard;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        BTTAddCardController *vc = [BTTAddCardController new];
+        vc.addCardType = BTTAddCardTypeNew;
+        vc.cardCount = self.bankList.count;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+}
 @end

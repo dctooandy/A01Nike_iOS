@@ -3,5 +3,6 @@
 <plist version="1.0">
 <array>
 	<string>public/users/login</string>
+	<string>users/login</string>
 </array>
 </plist>

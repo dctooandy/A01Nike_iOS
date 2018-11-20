@@ -60,7 +60,8 @@
               [model.name isEqualToString:@"真实姓名"] ||
               [model.name isEqualToString:@"邮箱地址"] ||
               [model.name isEqualToString:@"已绑定手机"] ||
-              [model.name isEqualToString:@"已绑定邮箱地址"]) &&
+              [model.name isEqualToString:@"已绑定邮箱地址"] ||
+              [model.name isEqualToString:@"手机号"]) &&
              model.desc.length != 0)) {
             self.textField.userInteractionEnabled = NO;
         } else {

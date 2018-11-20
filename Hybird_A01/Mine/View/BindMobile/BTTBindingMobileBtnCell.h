@@ -12,6 +12,8 @@ typedef enum {
     BTTButtonTypeDone, // 完成
     BTTButtonTypeConfirm, // 确定
     BTTButtonTypeNext,     // 下一步
+    BTTButtonTypeChange,    // 修改
+    BTTButtonTypeChangeEmail,//修改邮箱
     BTTButtonTypeSearch,    // 查询
     BTTButtonTypeback,       // 返回
     BTTButtonTypeSave        // 保存

@@ -70,6 +70,16 @@
             [self.btn setTitle:@"下一步" forState:UIControlStateNormal];
         }
             break;
+        case BTTButtonTypeChange:
+        {
+            [self.btn setTitle:@"修改" forState:UIControlStateNormal];
+        }
+            break;
+        case BTTButtonTypeChangeEmail:
+        {
+            [self.btn setTitle:@"更改邮箱地址" forState:UIControlStateNormal];
+        }
+            break;
         case BTTButtonTypeSearch:
         {
             [self.btn setTitle:@"查询" forState:UIControlStateNormal];

@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTModifyEmailController : BTTCollectionViewController
 
-@property (nonatomic, copy) NSString *bindEmail;
-
 @end
 
 NS_ASSUME_NONNULL_END

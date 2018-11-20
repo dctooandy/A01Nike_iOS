@@ -15,5 +15,10 @@
     self.backgroundColor = [UIColor colorWithHexString:@"212229"];
     self.mineSparaterType = BTTMineSparaterTypeNone;
 }
+- (IBAction)save:(id)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
+}
 
 @end

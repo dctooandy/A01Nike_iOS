@@ -10,7 +10,7 @@
 #import "BTTBindingMobileBtnCell.h"
 #import "BTTBindingMobileOneCell.h"
 #import "BTTChangeMobileController+LoadData.h"
-
+#import "BTTBindingMobileController.h"
 @interface BTTChangeMobileController ()<BTTElementsFlowLayoutDelegate>
 
 @end
@@ -21,7 +21,7 @@
     [super viewDidLoad];
     self.title = @"更改手机号";
     [self setupCollectionView];
-    [self setupElements];
+    [self loadMainData];
 }
 
 - (void)setupCollectionView {
@@ -36,14 +36,19 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    weakSelf(weakSelf)
     if (indexPath.row == self.sheetDatas.count) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        cell.buttonType = BTTButtonTypeChange;
+        cell.btn.enabled = YES;
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf forwardToVerifyMobil];
+        };
         return cell;
     } else {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
-        cell.textField.text = self.mobile;
         return cell;
     }
 }
@@ -103,6 +108,11 @@
         [self.collectionView reloadData];
     });
 }
-
+- (void)forwardToVerifyMobil
+{
+    BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
+    vc.mobileCodeType = BTTMobileCodeTypeVerifyMobile;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end

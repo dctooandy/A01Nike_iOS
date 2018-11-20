@@ -27,6 +27,7 @@
 #import "BTTNotCompleteInfoController.h"
 #import "BTTCardInfosController.h"
 #import "BTTBindEmailController.h"
+#import "BTTModifyEmailController.h"
 #import "BTTWithdrawalController.h"
 #import "BTTPTTransferController.h"
 #import "BTTAccountSafeController.h"
@@ -40,6 +41,7 @@
 #import "BTTVerifyTypeSelectController.h"
 #import "BTTHomePageViewController+LoadData.h"
 
+#import "BTTUserStatusManager.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -236,9 +238,13 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
     } else if (indexPath.row == 3) {
-        BTTBindEmailController *vc = [[BTTBindEmailController alloc] init];
+        UIViewController *vc = nil;
         if ([IVNetwork userInfo].isEmailBinded) {
-            vc.codeType = BTTEmmailCodeTypeVerify;
+            BTTModifyEmailController *modifyVC = [BTTModifyEmailController new];
+            vc = modifyVC;
+        } else {
+            BTTBindEmailController *bindVC = [[BTTBindEmailController alloc] init];
+            vc = bindVC;
         }
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 4 + self.personalInfos.count + self.paymentDatas.count) {
@@ -254,9 +260,7 @@
         BTTSheetsViewController *vc = [[BTTSheetsViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + self.mainDataThree.count  + 5) {
-        [[IVCacheManager sharedInstance] nativeWriteValue:nil forKey:KCacheUserInfo];
-        [WebViewUserAgaent clearCookie];
-        [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
+        [BTTUserStatusManager logoutSuccess];
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 7) {
         BTTSettingsController *vc = [[BTTSettingsController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
@@ -347,5 +351,8 @@
     });
 }
 
-
+- (BOOL)isCompletePersonalInfo
+{
+    return [IVNetwork userInfo].real_name && [IVNetwork userInfo].verify_code;
+}
 @end

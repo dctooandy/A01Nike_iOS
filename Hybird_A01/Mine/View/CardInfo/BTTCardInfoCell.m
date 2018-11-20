@@ -7,7 +7,7 @@
 //
 
 #import "BTTCardInfoCell.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 @interface BTTCardInfoCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *bankIcon;
@@ -44,6 +44,15 @@
     }
 }
 
-
+- (void)setModel:(BTTBankModel *)model
+{
+    _model = model;
+    NSURL *iconUrl = [NSURL URLWithString:model.banklogo];
+    [self.bankIcon sd_setImageWithURL:iconUrl placeholderImage:nil];
+    self.bankNameLabel.text = model.bankName;
+    self.classLabel.text = [NSString stringWithFormat:@"%@|%@",model.bankType,model.branchName];
+    self.adressLabel.text = model.branchName;
+    self.cardNumLabel.text = model.bankSecurityAccount;
+}
 
 @end

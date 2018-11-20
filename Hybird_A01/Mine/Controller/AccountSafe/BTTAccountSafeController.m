@@ -13,6 +13,7 @@
 #import "BTTBindingMobileController.h"
 #import "BTTBindEmailController.h"
 #import "BTTVerifyTypeSelectController+LoadData.h"
+#import "BTTModifyEmailController.h"
 @interface BTTAccountSafeController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
@@ -70,9 +71,13 @@
         }
         [self.navigationController pushViewController:vc animated:YES];
     } else {
-        BTTBindEmailController *vc = [[BTTBindEmailController alloc] init];
+        UIViewController *vc = nil;
         if ([IVNetwork userInfo].isEmailBinded) {
-            vc.codeType = BTTEmmailCodeTypeVerify;
+            BTTModifyEmailController *modifyVC = [BTTModifyEmailController new];
+            vc = modifyVC;
+        } else {
+            BTTBindEmailController *bindVC = [[BTTBindEmailController alloc] init];
+            vc = bindVC;
         }
         [self.navigationController pushViewController:vc animated:YES];
     }
