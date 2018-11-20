@@ -21,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"人工服务";
     [self setupCollectionView];
     [self loadMainData];
 }
@@ -48,8 +49,8 @@
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         BTTCardModifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardModifyCell" forIndexPath:indexPath];
         if (indexPath.row == 1) {
-            cell.textField.text = model.name;
-            cell.textField.userInteractionEnabled = NO;
+            cell.textField.placeholder = model.name;
+            cell.textField.userInteractionEnabled = YES;
         } else {
             cell.textField.text = @"";
             cell.textField.placeholder = model.name;

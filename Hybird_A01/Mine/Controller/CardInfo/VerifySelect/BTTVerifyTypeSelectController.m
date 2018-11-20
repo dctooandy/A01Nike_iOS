@@ -11,7 +11,8 @@
 #import "BTTMeMainModel.h"
 #import "BTTVerifySelectCell.h"
 #import "BTTChangeMobileController.h"
-
+#import "BTTBindingMobileController.h"
+#import "BTTChangeMobileManualController.h"
 @interface BTTVerifyTypeSelectController ()<BTTElementsFlowLayoutDelegate>
 
 @end
@@ -20,7 +21,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"选择验证方式";
+    switch (self.verifyType) {
+        case BTTSafeVerifyTypeChangeMobile:
+            self.title = @"选择验证方式";
+            break;
+        default:
+            self.title = @"安全验证";
+            break;
+    }
     [self setupCollectionView];
     [self loadMainData];
 }
@@ -42,7 +50,7 @@
     headerLabel.frame = CGRectMake(40, 0, SCREEN_WIDTH - 55, 44);
     headerLabel.font = kFontSystem(12);
     headerLabel.textColor = [UIColor colorWithHexString:@"818791"];
-    NSString *str = (self.codeType == BTTMobileCodeTypeVerifyMobile) ? @"手机号" : @"银行卡";
+    NSString *str = (self.verifyType == BTTSafeVerifyTypeChangeMobile) ? @"手机号" : @"银行卡";
     headerLabel.text = [NSString stringWithFormat:@"经过安全监测，您可以通过以下方式修改%@",str];
 }
 
@@ -59,11 +67,34 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
-    if (indexPath.row == 0) {
-        BTTChangeMobileController *vc = [BTTChangeMobileController new];
-        [self.navigationController pushViewController:vc animated:YES];
+    switch (self.verifyType) {
+        case BTTSafeVerifyTypeMobileAddBankCard:
+        {
+            BTTBindingMobileController *vc = [BTTBindingMobileController new];
+            vc.mobileCodeType = BTTMobileCodeTypeAddBankCardVerify;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case BTTSafeVerifyTypeHumanAddBankCard:
+        {
+            BTTChangeMobileController *vc = [BTTChangeMobileController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case BTTSafeVerifyTypeChangeMobile:{
+            if (indexPath.row == 0) {
+                BTTChangeMobileController *vc = [BTTChangeMobileController new];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                BTTChangeMobileManualController *vc = [BTTChangeMobileManualController new];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            
+        }
+            break;
+        default:
+            break;
     }
-    
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource

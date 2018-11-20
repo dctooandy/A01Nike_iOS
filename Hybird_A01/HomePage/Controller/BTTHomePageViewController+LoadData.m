@@ -176,7 +176,7 @@ static const char *BTTNextGroupKey = "nextGroup";
     [params setObject:@"100" forKey:@"page_size"];
     [IVNetwork sendRequestWithSubURL:BTTHomePageNewAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        if (result.code_http == 200) {
+        if (result.status) {
             if (result.data) {
                 if (![result.data[@"maxRecords"] isKindOfClass:[NSNull class]]) {
                     [self.amounts removeAllObjects];

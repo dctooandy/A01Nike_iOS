@@ -64,6 +64,17 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+    cell.btn.enabled = YES;
+    cell.buttonType = BTTButtonTypeAddBankCard;
+    weakSelf(weakSelf)
+    cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+        BTTBindingMobileController *vc = [BTTBindingMobileController new];
+        vc.mobileCodeType = BTTMobileCodeTypeAddBankCard;
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+        NSMutableArray *mArray = [weakSelf.navigationController.viewControllers mutableCopy];
+        [mArray removeObject:weakSelf];
+        weakSelf.navigationController.viewControllers = mArray.copy;
+    };
     return cell;
 }
 

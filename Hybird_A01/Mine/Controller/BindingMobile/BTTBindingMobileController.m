@@ -15,7 +15,8 @@
 #import "BTTCardModifyVerifyController.h"
 #import "BTTAddCardController.h"
 #import "BTTAddBTCController.h"
-
+#import "BTTCardInfosController.h"
+#import "BTTVerifyTypeSelectController.h"
 @interface BTTBindingMobileController ()<BTTElementsFlowLayoutDelegate>
 
 @end
@@ -26,6 +27,7 @@
     [super viewDidLoad];
     switch (self.mobileCodeType) {
         case BTTMobileCodeTypeBindMobile:
+        case BTTMobileCodeTypeAddBankCard:
             self.title = @"绑定手机";
             break;
         case BTTMobileCodeTypeVerifyMobile:
@@ -199,12 +201,12 @@
     params[@"type"] = @"1";
     params[@"send_to"] = [self getPhoneTF].text;
     switch (self.mobileCodeType) {
-        case BTTMobileCodeTypeBindMobile:
-            params[@"v_type"] = @"1";
-            break;
         case BTTMobileCodeTypeVerifyMobile:
         case BTTMobileCodeTypeChangeMobile:
             params[@"v_type"] = @"3";
+            break;
+        case BTTMobileCodeTypeAddBankCardVerify:
+            params[@"v_type"] = @"8";
             break;
         default:
             params[@"v_type"] = @"1";
@@ -214,22 +216,24 @@
 }
 - (void)submitBind
 {
+    NSString *url = @"A01/verify/newBind";
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"type"] = @"1";
     params[@"send_to"] = [self getPhoneTF].text;
     params[@"code"] = [self getCodeTF].text;
     NSString *successStr = nil;
     switch (self.mobileCodeType) {
-        case BTTMobileCodeTypeBindMobile:
-            params[@"v_type"] = @"1";
-            successStr = @"绑定成功!";
-            break;
         case BTTMobileCodeTypeVerifyMobile:
             params[@"v_type"] = @"3";
             break;
         case BTTMobileCodeTypeChangeMobile:
             params[@"v_type"] = @"3";
             successStr = @"修改成功!";
+            break;
+        case BTTMobileCodeTypeAddBankCardVerify:
+            params[@"v_type"] = @"8";
+            url = @"verify/check";
+            successStr = @"验证成功!";
             break;
         default:
             params[@"v_type"] = @"1";
@@ -238,14 +242,17 @@
     }
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [IVNetwork sendRequestWithSubURL:@"A01/verify/newBind" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+        result.code_system = 300022;
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-        if (result.status && result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
+        if (result.status) {
             if (successStr) {
                 [MBProgressHUD showSuccess:successStr toView:nil];
             }
-            NSString *phone = result.data[@"val"];
-            [IVNetwork updateUserInfo:@{@"phone" : phone,@"isPhoneBinded" : @(YES)}];
+            if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
+                NSString *phone = result.data[@"val"];
+                [IVNetwork updateUserInfo:@{@"phone" : phone,@"isPhoneBinded" : @(YES)}];
+            }
             switch (self.mobileCodeType) {
                 case BTTMobileCodeTypeBindMobile:
                 case BTTMobileCodeTypeChangeMobile:
@@ -257,16 +264,62 @@
                     [weakSelf.navigationController pushViewController:vc animated:YES];
                 }
                     break;
+                case BTTMobileCodeTypeAddBankCard:
+                    [weakSelf goToBack];
+                    break;
+                case BTTMobileCodeTypeAddBankCardVerify:{
+                    BTTAddCardController *vc = [BTTAddCardController new];
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
                 default:
                     break;
             }
         } else {
-            [MBProgressHUD showError:result.message toView:weakSelf.view];
+            [MBProgressHUD showError:result.message toView:nil];
+            if (result.code_system == 300022) {//验证码输入错误超过次数
+                switch (self.mobileCodeType) {
+                    case BTTMobileCodeTypeAddBankCardVerify:{
+                        BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
+                        vc.verifyType = BTTSafeVerifyTypeHumanAddBankCard;
+                        [self.navigationController pushViewController:vc animated:YES];
+                        NSMutableArray *mArray = [self.navigationController.viewControllers mutableCopy];
+                        for (UIViewController *child in self.navigationController.viewControllers) {
+                            if (child != vc && ![child isKindOfClass:[BTTCardInfosController class]] &&
+                                [self.navigationController.viewControllers firstObject] != child) {
+                                [mArray removeObject:child];
+                            }
+                        }
+                        self.navigationController.viewControllers = mArray.copy;
+                    }
+                        break;
+                        
+                    default:
+                        break;
+                }
+            }
         }
     }];
 }
 - (void)goToBack
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    switch (self.mobileCodeType) {
+        case BTTMobileCodeTypeAddBankCard:
+            [self.navigationController popViewControllerAnimated:YES];
+            break;
+        case BTTMobileCodeTypeAddBankCardVerify:{
+            for (UIViewController *vc in self.navigationController.viewControllers) {
+                if ([vc isKindOfClass:[BTTCardInfosController class]]) {
+                    [self.navigationController popToViewController:vc animated:YES];
+                    break;
+                }
+            }
+        }
+            break;
+        default:
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            break;
+    }
+    
 }
 @end

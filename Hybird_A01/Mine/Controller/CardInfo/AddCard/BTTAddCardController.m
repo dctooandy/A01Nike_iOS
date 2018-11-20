@@ -12,7 +12,7 @@
 #import "BTTMeMainModel.h"
 #import "BTTAddCardBtnsCell.h"
 #import <BRPickerView/BRPickerView.h>
-
+#import "BTTCardInfosController.h"
 
 @interface BTTAddCardController ()<BTTElementsFlowLayoutDelegate>
 
@@ -215,5 +215,14 @@
             [MBProgressHUD showError:result.message toView:weakSelf.view];
         }
     }];
+}
+- (void)goToBack
+{
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[BTTCardInfosController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 @end

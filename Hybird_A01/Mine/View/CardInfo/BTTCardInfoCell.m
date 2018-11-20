@@ -50,8 +50,8 @@
     NSURL *iconUrl = [NSURL URLWithString:model.banklogo];
     [self.bankIcon sd_setImageWithURL:iconUrl placeholderImage:nil];
     self.bankNameLabel.text = model.bankName;
-    self.classLabel.text = [NSString stringWithFormat:@"%@|%@",model.bankType,model.branchName];
-    self.adressLabel.text = model.branchName;
+    self.classLabel.text = [NSString stringWithFormat:@"%@|%@%@",model.bankType,model.province,model.city];
+    self.adressLabel.text = [NSString stringWithFormat:@"%@%@%@",model.province,model.city,model.branchName];
     self.cardNumLabel.text = model.bankSecurityAccount;
 }
 

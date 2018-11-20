@@ -13,9 +13,9 @@
 #import "BTTVerifyTypeSelectController.h"
 #import "BTTAddCardController.h"
 #import "BTTBankModel.h"
+#import "BTTAddBTCController.h"
 @interface BTTCardInfosController ()<BTTElementsFlowLayoutDelegate>
 
-@property (nonatomic, assign) BOOL isBindMobile;
 @property (nonatomic, copy) NSArray<BTTBankModel *> *bankList;
 @end
 
@@ -24,7 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"银行卡资料";
-    self.isBindMobile = YES;
     [self setupCollectionView];
     [self setupElements];
 }
@@ -51,13 +50,13 @@
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf)
             if (button.tag == 6005) {
-                if (strongSelf.isBindMobile) {
+                if ([IVNetwork userInfo].isPhoneBinded) {
                     BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
-                    vc.codeType = BTTMobileCodeTypeUpdateBankCard;
-                    [self.navigationController pushViewController:vc animated:YES];
+                    vc.verifyType = BTTSafeVerifyTypeMobileChangeBankCard;
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
                 } else {
                     BTTCardBindMobileController *vc = [[BTTCardBindMobileController alloc] init];
-                    [self.navigationController pushViewController:vc animated:YES];
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
                 }
             } else {
                 
@@ -88,9 +87,7 @@
         [action1 setValue:[UIColor colorWithHexString:@"0066ff"] forKey:@"titleTextColor"];
         [alertVC addAction:action1];
         UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"比特币钱包" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
-            vc.codeType = BTTMobileCodeTypeAddBTC;
-            [self.navigationController pushViewController:vc animated:YES];
+            [weakSelf addBTC];
         }];
         [action2 setValue:[UIColor colorWithHexString:@"0066ff"] forKey:@"titleTextColor"];
         [alertVC addAction:action2];
@@ -158,9 +155,14 @@
 - (void)addBankCard
 {
     if (self.bankList.count > 0) {
-        BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
-        vc.codeType = BTTMobileCodeTypeAddBankCard;
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([IVNetwork userInfo].isPhoneBinded) {
+            BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
+            vc.verifyType = BTTSafeVerifyTypeMobileAddBankCard;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            BTTCardBindMobileController *vc = [[BTTCardBindMobileController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     } else {
         BTTAddCardController *vc = [BTTAddCardController new];
         vc.addCardType = BTTAddCardTypeNew;
@@ -168,5 +170,21 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     
+}
+- (void)addBTC
+{
+    if (self.bankList.count > 0) {
+        if ([IVNetwork userInfo].isPhoneBinded) {
+            BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
+            vc.verifyType = BTTSafeVerifyTypeMobileAddBTCard;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            BTTCardBindMobileController *vc = [[BTTCardBindMobileController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    } else {
+        BTTAddBTCController *vc = [BTTAddBTCController new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 @end

@@ -80,6 +80,11 @@
             [self.btn setTitle:@"更改邮箱地址" forState:UIControlStateNormal];
         }
             break;
+        case BTTButtonTypeAddBankCard:
+        {
+            [self.btn setTitle:@"立即绑定" forState:UIControlStateNormal];
+        }
+            break;
         case BTTButtonTypeSearch:
         {
             [self.btn setTitle:@"查询" forState:UIControlStateNormal];

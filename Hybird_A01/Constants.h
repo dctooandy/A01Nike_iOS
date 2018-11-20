@@ -33,7 +33,8 @@ typedef enum {
     BTTMobileCodeTypeBindMobile,           // 绑定手机
     BTTMobileCodeTypeVerifyMobile,         // 验证手机
     BTTMobileCodeTypeChangeMobile,         // 更换手机
-    BTTMobileCodeTypeAddBankCard,      // 添加银行卡
+    BTTMobileCodeTypeAddBankCard,       // 添加银行卡时未绑定手机绑定
+    BTTMobileCodeTypeAddBankCardVerify,  //添加银行卡校验手机
     BTTMobileCodeTypeUpdateBankCard,    // 更新银行卡
     BTTMobileCodeTypeAddBTC,     // 添加比特币
 }BTTMobileCodeType; // 手机验证码类型
@@ -42,6 +43,20 @@ typedef enum {
     BTTEmmailCodeTypeVerify,      // 验证邮箱
     BTTEmmailCodeTypeChange,         // 更换邮箱
 }BTTEmmailCodeType; // 邮箱验证码类型
+
+typedef enum {
+    BTTSafeVerifyTypeMobileAddBankCard,  // 添加银行卡短信验证
+    BTTSafeVerifyTypeMobileChangeBankCard,  // 修改银行卡短信验证
+    BTTSafeVerifyTypeMobileDelBankCard,  // 删除银行卡短信验证
+    BTTSafeVerifyTypeHumanAddBankCard,  // 添加银行卡人工服务
+    BTTSafeVerifyTypeHumanChangeBankCard,  // 修改银行卡人工服务
+    BTTSafeVerifyTypeHumanDelBankCard,  // 删除银行卡人工服务
+    BTTSafeVerifyTypeMobileAddBTCard,  // 添加比特币钱包短信验证
+    BTTSafeVerifyTypeMobileDelBTCard,  // 删除比特币钱包短信验证
+    BTTSafeVerifyTypeHumanAddBTCard,  // 添加比特币钱包人工服务
+    BTTSafeVerifyTypeHumanDelBTCard,  // 删除比特币钱包人工服务
+    BTTSafeVerifyTypeChangeMobile,    // 更改手机号
+}BTTSafeVerifyType; // 安全验证种类
 typedef enum {
     BTTRegisterOrLoginTypeLogin,
     BTTRegisterOrLoginTypeRegisterNormal, // 普通开户

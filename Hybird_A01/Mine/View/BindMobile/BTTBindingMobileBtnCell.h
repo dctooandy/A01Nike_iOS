@@ -14,6 +14,7 @@ typedef enum {
     BTTButtonTypeNext,     // 下一步
     BTTButtonTypeChange,    // 修改
     BTTButtonTypeChangeEmail,//修改邮箱
+    BTTButtonTypeAddBankCard,//添加银行卡
     BTTButtonTypeSearch,    // 查询
     BTTButtonTypeback,       // 返回
     BTTButtonTypeSave        // 保存

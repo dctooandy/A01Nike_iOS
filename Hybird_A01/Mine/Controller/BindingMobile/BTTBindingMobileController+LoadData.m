@@ -16,8 +16,12 @@
     NSString *phone = @"";
     switch (self.mobileCodeType) {
         case BTTMobileCodeTypeVerifyMobile:
+        case BTTMobileCodeTypeAddBankCardVerify:
             phoneTitle = @"已绑定手机";
             phone = [IVNetwork userInfo].phone;
+            break;
+        case BTTMobileCodeTypeAddBankCard:
+            phoneTitle = @"待绑定手机号码";
             break;
         default:
             phoneTitle = @"手机号码";

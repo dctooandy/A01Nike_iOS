@@ -13,10 +13,34 @@
 
 
 - (void)loadMainData {
-    NSArray *names = @[@"通过短信验证",@"通过人工服务"];
-    NSArray *icons = @[@"card_sms",@"card_customer"];
-    NSString *verifyDetail = [NSString stringWithFormat:@"选择此方式, 我们将向您号码为%@的手机发送验证码",[IVNetwork userInfo].phone];
-    NSArray *details =  @[verifyDetail,@"原绑定手机无法接受验证码? 提交申请, 等待人工客服协助修改"];
+    NSArray *names = nil;
+    NSArray *icons = nil;
+    NSString *mobileDetail = [NSString stringWithFormat:@"选择此方式, 我们将向您号码为%@的手机发送验证码",[IVNetwork userInfo].phone];
+    NSString *humanDetail = @"原绑定手机无法接受验证码? 提交申请, 等待人工客服协助修改";
+    NSArray *details =  nil;
+    switch (self.verifyType) {
+        case BTTSafeVerifyTypeMobileAddBankCard:
+        case BTTSafeVerifyTypeMobileChangeBankCard:
+        case BTTSafeVerifyTypeMobileDelBankCard:
+            names = @[@"通过短信验证"];
+            icons = @[@"card_sms"];
+            details = @[mobileDetail];
+            break;
+        case BTTSafeVerifyTypeHumanAddBankCard:
+        case BTTSafeVerifyTypeHumanChangeBankCard:
+        case BTTSafeVerifyTypeHumanDelBankCard:
+            names = @[@"通过人工服务"];
+            icons = @[@"card_customer"];
+            details = @[humanDetail];
+            break;
+        case BTTSafeVerifyTypeChangeMobile:
+            names = @[@"通过短信验证",@"通过人工服务"];
+            icons = @[@"card_sms",@"card_customer"];
+            details = @[mobileDetail,humanDetail];
+            break;
+        default:
+            break;
+    }
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
