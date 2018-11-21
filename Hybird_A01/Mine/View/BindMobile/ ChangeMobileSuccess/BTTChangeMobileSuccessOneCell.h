@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTChangeMobileSuccessOneCell : BTTBaseCollectionViewCell
-
+@property (nonatomic, assign) BTTSafeVerifyType mobileCodeType;
 @end
 
 NS_ASSUME_NONNULL_END

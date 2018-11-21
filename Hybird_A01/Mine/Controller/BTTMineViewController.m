@@ -219,7 +219,7 @@
             vc = selectVC;
         } else {
             BTTBindingMobileController *bindingMobileVC = [[BTTBindingMobileController alloc] init];
-            bindingMobileVC.mobileCodeType = BTTMobileCodeTypeBindMobile;
+            bindingMobileVC.mobileCodeType = BTTSafeVerifyTypeBindMobile;
             vc = bindingMobileVC;
         }
         [self.navigationController pushViewController:vc animated:YES];

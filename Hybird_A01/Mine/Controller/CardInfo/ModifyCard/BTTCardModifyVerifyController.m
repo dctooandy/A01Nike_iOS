@@ -25,6 +25,7 @@
     self.title = @"银行卡验证";
     [self setupCollectionView];
     [self loadMainData];
+    [self fetchHumanBankAndPhone];
 }
 
 - (void)setupCollectionView {
@@ -40,7 +41,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    weakSelf(weakSelf)
     if (indexPath.row == 0 || indexPath.row == 2) {
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         BTTCardModifyTitleCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardModifyTitleCell" forIndexPath:indexPath];
@@ -50,30 +51,28 @@
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         BTTCardModifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardModifyCell" forIndexPath:indexPath];
         if (indexPath.row == 1) {
-            cell.textField.text = model.name;
+            cell.textField.text = self.bankNumber ? self.bankNumber : model.name;
             cell.textField.userInteractionEnabled = NO;
         } else {
+            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
             cell.textField.text = @"";
             cell.textField.placeholder = model.name;
             cell.textField.userInteractionEnabled = YES;
+            [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         }
         return cell;
     } else {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
         cell.buttonType = BTTButtonTypeNext;
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf submitVerify];
+        };
         return cell;
     }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
-    NSLog(@"%zd", indexPath.item);
-    if (indexPath.row == self.sheetDatas.count) {
-        BTTAddCardController *vc = [[BTTAddCardController alloc] init];
-        vc.addCardType = BTTAddCardTypeUpdate;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource
@@ -124,6 +123,56 @@
         [self.collectionView reloadData];
     });
 }
-
-
+- (void)textChanged:(UITextField *)textField
+{
+    if (textField == [self getVerifyBankNumTF]) {
+        [self getSubmitBtn].enabled = [PublicMethod isValidateBankNumber:[self getVerifyBankNumTF].text];
+    }
+}
+- (UITextField *)getVerifyBankNumTF
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+    BTTCardModifyCell *cell = (BTTCardModifyCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.textField;
+}
+- (UIButton *)getSubmitBtn
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:0];
+    BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.btn;
+}
+- (void)fetchHumanBankAndPhone
+{
+    weakSelf(weakSelf)
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [BTTHttpManager fetchHumanBankAndPhoneWithCompletion:^(IVRequestResultModel *result, id response) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
+            weakSelf.bankNumber = [result.data valueForKey:@"bank_account_no"];
+        } else {
+            weakSelf.bankNumber = @"获取失败，请重新打开该页面!";
+            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }
+        [weakSelf.collectionView reloadData];
+    }];
+}
+- (void)submitVerify
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"login_name"] = [IVNetwork userInfo].loginName;
+    params[@"bank_account_no"] = [self getVerifyBankNumTF].text;
+    weakSelf(weakSelf)
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [BTTHttpManager verifyHumanBankAndPhoneWithParams:params.copy completion:^(IVRequestResultModel *result, id response) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        if (result.status) {
+            [MBProgressHUD showSuccess:@"验证成功!" toView:nil];
+            BTTAddCardController *vc = [[BTTAddCardController alloc] init];
+            vc.addCardType = BTTSafeVerifyTypeHumanChangeBankCard;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        } else {
+            [MBProgressHUD showError:result.message toView:nil];
+        }
+    }];
+}
 @end

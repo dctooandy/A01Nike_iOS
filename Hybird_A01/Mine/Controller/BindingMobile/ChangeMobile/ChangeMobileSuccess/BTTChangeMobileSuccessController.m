@@ -17,6 +17,7 @@
 @implementation BTTChangeMobileSuccessController
 
 - (void)viewDidLoad {
+    self.hideBackItem = YES;
     [super viewDidLoad];
     [self setupCollectionView];
     [self setupElements];
@@ -36,6 +37,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         BTTChangeMobileSuccessOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTChangeMobileSuccessOneCell" forIndexPath:indexPath];
+        cell.mobileCodeType = self.mobileCodeType;
         return cell;
     } else {
         BTTChangeMobileSuccessBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTChangeMobileSuccessBtnCell" forIndexPath:indexPath];

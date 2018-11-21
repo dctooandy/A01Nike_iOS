@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTCardModifyVerifyController : BTTCollectionViewController
-
+@property(nonatomic, copy)NSString *bankNumber;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -13,8 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTBindingMobileController : BTTCollectionViewController
 
-@property (nonatomic, assign) BTTMobileCodeType mobileCodeType;
-
+@property (nonatomic, assign) BTTSafeVerifyType mobileCodeType;
 - (void)setupElements;
 
 @end

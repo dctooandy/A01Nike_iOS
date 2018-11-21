@@ -13,8 +13,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTCardInfoCell : BTTBaseCollectionViewCell
+@property(nonatomic, strong) NSIndexPath *indexPath;
 @property(nonatomic, strong)BTTBankModel *model;
-
+@property (nonatomic, assign) BOOL isChecking; //正在审核
 @end
 
 NS_ASSUME_NONNULL_END

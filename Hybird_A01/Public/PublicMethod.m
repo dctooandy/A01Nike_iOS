@@ -797,7 +797,11 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     NSPredicate *pwd = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pwdRegex];
     return [pwd evaluateWithObject:originalPwd];
 }
-
++ (BOOL)isValidateBankNumber:(NSString *)number{
+    NSString *numberRegex = @"^[0-9]{16,21}";
+    NSPredicate *num = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numberRegex];
+    return [num evaluateWithObject:number];
+}
 + (NSString*)getCurrentTimesWithFormat:(NSString *)formatStr {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制

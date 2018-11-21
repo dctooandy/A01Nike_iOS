@@ -48,6 +48,8 @@
         NSArray *bankList = result.data;
         if (isArrayWithCountMoreThan0(bankList)) {
             bankList = [BTTBankModel arrayOfModelsFromDictionaries:result.data error:nil];
+        } else {
+            bankList = @[];
         }
         if (completion) {
             completion(result,bankList);
@@ -72,8 +74,37 @@
         }
     }];
 }
-+ (void)addBankCardWithParams:(NSDictionary *)params completion:(IVRequestCallBack)completion
++ (void)updateBankCardWithUrl:(NSString *)url params:(NSDictionary *)params completion:(IVRequestCallBack)completion
 {
-    [self sendRequestWithUrl:@"public/bankcard/add" paramters:params completionBlock:completion];
+    [self sendRequestWithUrl:url paramters:params completionBlock:completion];
+}
++ (void)fetchHumanBankAndPhoneWithCompletion:(IVRequestCallBack)completion
+{
+    NSDictionary *params = @{@"login_name":[IVNetwork userInfo].loginName};
+    [self sendRequestWithUrl:@"public/forgot/getBanknoAndPhone" paramters:params completionBlock:completion];
+}
++ (void)verifyHumanBankAndPhoneWithParams:(NSDictionary *)params completion:(IVRequestCallBack)completion
+{
+    [self sendRequestWithUrl:@"public/forgot/verfiyByBankAndPhone" paramters:params completionBlock:completion];
+}
++ (void)addBTCCardWithUrl:(NSString *)url params:(NSDictionary *)params completion:(IVRequestCallBack)completion
+{
+    [self sendRequestWithUrl:url paramters:params completionBlock:completion];
+}
++ (void)deleteBankOrBTC:(BOOL)isBTC isAuto:(BOOL)isAuto completion:(IVRequestCallBack)completion
+{
+    NSString *url = nil;
+    if (isBTC) {
+        url = isAuto ? @"public/bankcard/delBtcAuto" : @"public/bankcard/delBtc";
+    } else {
+        url = isAuto ? @"public/bankcard/delAuto" : @"public/bankcard/del";
+    }
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"customer_bank_id"] = [[NSUserDefaults standardUserDefaults] valueForKey:BTTSelectedBankId];
+    [self sendRequestWithUrl:url paramters:params.copy completionBlock:completion];
+}
++ (void)updatePhoneHumanWithParams:(NSDictionary *)params completion:(IVRequestCallBack)completion
+{
+    [self sendRequestWithUrl:@"users/updatePhone" paramters:params completionBlock:completion];
 }
 @end

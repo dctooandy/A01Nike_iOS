@@ -111,7 +111,7 @@
 - (void)forwardToVerifyMobil
 {
     BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-    vc.mobileCodeType = BTTMobileCodeTypeVerifyMobile;
+    vc.mobileCodeType = BTTSafeVerifyTypeVerifyMobile;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

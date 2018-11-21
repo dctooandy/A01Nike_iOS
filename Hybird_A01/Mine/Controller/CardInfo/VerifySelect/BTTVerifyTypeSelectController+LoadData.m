@@ -22,6 +22,7 @@
         case BTTSafeVerifyTypeMobileAddBankCard:
         case BTTSafeVerifyTypeMobileChangeBankCard:
         case BTTSafeVerifyTypeMobileDelBankCard:
+        case BTTSafeVerifyTypeMobileAddBTCard:
             names = @[@"通过短信验证"];
             icons = @[@"card_sms"];
             details = @[mobileDetail];
@@ -29,6 +30,8 @@
         case BTTSafeVerifyTypeHumanAddBankCard:
         case BTTSafeVerifyTypeHumanChangeBankCard:
         case BTTSafeVerifyTypeHumanDelBankCard:
+        case BTTSafeVerifyTypeHumanAddBTCard:
+        case BTTSafeVerifyTypeHumanDelBTCard:
             names = @[@"通过人工服务"];
             icons = @[@"card_customer"];
             details = @[humanDetail];
