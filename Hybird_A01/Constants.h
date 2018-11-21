@@ -82,6 +82,10 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTVerifyCodeDisableNotification @"BTTVerifyCodeDisableNotification"
 #define BTTVerifyCodeSendNotification    @"BTTVerifyCodeSendNotification"
 
+// PublicBtnCell按钮通知
+#define BTTPublicBtnEnableNotification  @"BTTPublicBtnEnableNotification"
+#define BTTPublicBtnDisableNotification  @"BTTPublicBtnDisableNotification"
+
 // 注册成功页面通知: 1. 首页. 2. 个人中心
 
 #define BTTRegisterSuccessGotoHomePageNotification  @"BTTRegisterSuccessGotoHomePageNotification"
@@ -167,6 +171,10 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 // 金额转账本地接口
 
 #define BTTTransferAllMoneyToLocal   @"/credits/transferAllMoneyToLocal"
+
+// 转账, 游戏厅转本地
+
+#define BTTCreditsTransfer           @"/public/credits/transfer"
 
 
 /********************************************常用宏*********************************************************/
