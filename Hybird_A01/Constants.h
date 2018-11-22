@@ -35,11 +35,11 @@ typedef enum {
     BTTCanAddCardTypeBank,          //  只能添加银行卡
     BTTCanAddCardTypeBTC,           // 只能添加比特币钱包
 }BTTCanAddCardType; // 能添加卡的类型
-typedef enum {
-    BTTEmmailCodeTypeBind,           // 绑定邮箱
-    BTTEmmailCodeTypeVerify,      // 验证邮箱
-    BTTEmmailCodeTypeChange,         // 更换邮箱
-}BTTEmmailCodeType; // 邮箱验证码类型
+//typedef enum {
+//    BTTEmmailCodeTypeBind,           // 绑定邮箱
+//    BTTEmmailCodeTypeVerify,      // 验证邮箱
+//    BTTEmmailCodeTypeChange,         // 更换邮箱
+//}BTTEmmailCodeType; // 邮箱验证码类型
 
 typedef enum {
     BTTSafeVerifyTypeNormalAddBankCard,          // 添加第一张银行卡
@@ -63,6 +63,9 @@ typedef enum {
     BTTSafeVerifyTypeBindMobile,                 // 绑定手机号
     BTTSafeVerifyTypeVerifyMobile,               // 验证手机号
     BTTSafeVerifyTypeHumanChangeMoblie,          // 更改手机号人工服务
+    BTTSafeVerifyTypeBindEmail,                  // 绑定邮箱
+    BTTSafeVerifyTypeVerifyEmail,                // 验证邮箱
+    BTTSafeVerifyTypeChangeEmail,                // 更改邮箱
 }BTTSafeVerifyType; // 安全验证种类
 typedef enum {
     BTTRegisterOrLoginTypeLogin,
@@ -179,6 +182,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTCreditsLocal              @"/public/credits/local"
 
 #define BTTSelectedBankId            @"BTTSelectedBankId"
+#define BTTCacheBankListKey          @"BTTCacheBankListKey"
 // 获取游戏大厅列表
 
 #define BTTGamePlatforms             @"/A01/game/platforms"

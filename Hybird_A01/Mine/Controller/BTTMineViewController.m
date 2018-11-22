@@ -87,6 +87,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork userInfo]) {
         [self loadBindStatus];
+        [self loadBankList];
         [self loadTotalAvailableData];
     }
 }
@@ -245,6 +246,7 @@
             vc = modifyVC;
         } else {
             BTTBindEmailController *bindVC = [[BTTBindEmailController alloc] init];
+            bindVC.codeType = BTTSafeVerifyTypeBindEmail;
             vc = bindVC;
         }
         [self.navigationController pushViewController:vc animated:YES];

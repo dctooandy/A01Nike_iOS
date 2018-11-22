@@ -107,9 +107,12 @@
 }
 
 - (void)loadBindStatus {
-    [BTTHttpManager fetchBindStatusWithCompletion:nil];
+    [BTTHttpManager fetchBindStatusWithUseCache:YES];
 }
-
+- (void)loadBankList
+{
+    [BTTHttpManager fetchBankListWithUseCache:YES completion:nil];
+}
 - (void)loadTotalAvailableData {
     [IVNetwork sendRequestWithSubURL:BTTCreditsTotalAvailable paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);

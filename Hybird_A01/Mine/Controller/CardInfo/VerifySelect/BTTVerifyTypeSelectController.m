@@ -193,6 +193,7 @@
     [BTTHttpManager deleteBankOrBTC:isBTC isAuto:isAuto completion:^(IVRequestResultModel *result, id response) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         if (result.status) {
+            [BTTHttpManager fetchBankListWithUseCache:YES completion:nil];
             BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
             vc.mobileCodeType = self.verifyType;
             [weakSelf.navigationController pushViewController:vc animated:YES];

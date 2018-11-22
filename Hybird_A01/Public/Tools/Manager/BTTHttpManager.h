@@ -24,9 +24,9 @@
  */
 + (void)publicGameTransferWithProvider:(NSString *)provider completeBlock:(IVRequestCallBack)completeBlock;
 //获取银行卡列表
-+ (void)fetchBankListWithCompletion:(IVRequestCallBack)completion;
++ (void)fetchBankListWithUseCache:(BOOL)useCache completion:(IVRequestCallBack)completion;
 //获取手机、邮箱、银行卡、比特币钱包绑定状态
-+ (void)fetchBindStatusWithCompletion:(IVRequestCallBack)completion;
++ (void)fetchBindStatusWithUseCache:(BOOL)useCache;
 /**
  添加、修改银行卡
  */

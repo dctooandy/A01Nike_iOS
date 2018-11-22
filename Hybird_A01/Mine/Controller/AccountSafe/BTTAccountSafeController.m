@@ -77,6 +77,7 @@
             vc = modifyVC;
         } else {
             BTTBindEmailController *bindVC = [[BTTBindEmailController alloc] init];
+            bindVC.codeType = BTTSafeVerifyTypeBindEmail;
             vc = bindVC;
         }
         [self.navigationController pushViewController:vc animated:YES];

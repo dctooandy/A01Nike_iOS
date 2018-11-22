@@ -14,5 +14,10 @@
     [super awakeFromNib];
     // Initialization code
 }
+- (IBAction)backMemberCenter:(id)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
+}
 
 @end

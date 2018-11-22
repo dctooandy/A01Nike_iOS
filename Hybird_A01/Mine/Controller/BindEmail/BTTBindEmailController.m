@@ -12,7 +12,7 @@
 #import "BTTBindingMobileBtnCell.h"
 #import "BTTBindingMobileOneCell.h"
 #import "BTTBindingMobileTwoCell.h"
-
+#import "BTTChangeMobileSuccessController.h"
 @interface BTTBindEmailController ()<BTTElementsFlowLayoutDelegate>
 
 @end
@@ -22,11 +22,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     switch (self.codeType) {
-        case BTTEmmailCodeTypeBind:
+        case BTTSafeVerifyTypeBindEmail:
             self.title = @"绑定邮箱";
             break;
-        case BTTEmmailCodeTypeVerify:
-        case BTTEmmailCodeTypeChange:
+        case BTTSafeVerifyTypeVerifyEmail:
+        case BTTSafeVerifyTypeChangeEmail:
             self.title = @"修改邮箱地址";
             break;
         default:
@@ -141,7 +141,7 @@
     if ([self getCodeTF].text.length == 0) {
         [self getSubmitBtn].enabled = NO;
     } else {
-        if ([IVNetwork userInfo].isPhoneBinded) {
+        if ([IVNetwork userInfo].isEmailBinded) {
             [self getSubmitBtn].enabled = YES;
         } else {
             [self getSubmitBtn].enabled = [PublicMethod isValidateEmail:[self getMailTF].text];
@@ -174,7 +174,7 @@
 }
 - (void)sendCode
 {
-    if (![IVNetwork userInfo].isPhoneBinded && ![PublicMethod isValidateEmail:[self getMailTF].text]) {
+    if (![IVNetwork userInfo].isEmailBinded && ![PublicMethod isValidateEmail:[self getMailTF].text]) {
         [MBProgressHUD showError:@"请输入正确的邮箱地址" toView:self.view];
         return;
     }
@@ -182,11 +182,11 @@
     params[@"type"] = @"2";
     params[@"send_to"] = [self getMailTF].text;
     switch (self.codeType) {
-        case BTTEmmailCodeTypeBind:
+        case BTTSafeVerifyTypeBindEmail:
             params[@"v_type"] = @"2";
             break;
-        case BTTEmmailCodeTypeVerify:
-        case BTTEmmailCodeTypeChange:
+        case BTTSafeVerifyTypeVerifyEmail:
+        case BTTSafeVerifyTypeChangeEmail:
             params[@"v_type"] = @"4";
             break;
         default:
@@ -203,14 +203,13 @@
     params[@"code"] = [self getCodeTF].text;
     NSString *successStr = nil;
     switch (self.codeType) {
-        case BTTEmmailCodeTypeBind:
+        case BTTSafeVerifyTypeBindEmail:
             params[@"v_type"] = @"2";
-            successStr = @"绑定成功!";
             break;
-        case BTTEmmailCodeTypeVerify:
+        case BTTSafeVerifyTypeVerifyEmail:
             params[@"v_type"] = @"4";
             break;
-        case BTTEmmailCodeTypeChange:
+        case BTTSafeVerifyTypeChangeEmail:
             params[@"v_type"] = @"4";
             successStr = @"修改成功!";
             break;
@@ -228,15 +227,20 @@
                 [MBProgressHUD showSuccess:successStr toView:nil];
             }
             NSString *email = result.data[@"val"];
-            [IVNetwork updateUserInfo:@{@"email" : email,@"isEmailBinded" : @(YES)}];
+            [IVNetwork updateUserInfo:@{@"email" : email}];
+            [BTTHttpManager fetchBindStatusWithUseCache:YES];
             switch (self.codeType) {
-                case BTTEmmailCodeTypeBind:
-                case BTTEmmailCodeTypeChange:
-                    [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                case BTTSafeVerifyTypeBindEmail:{
+                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+                    vc.mobileCodeType = BTTSafeVerifyTypeBindEmail;
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                }
                     break;
-                case BTTEmmailCodeTypeVerify:{
+                case BTTSafeVerifyTypeChangeEmail:
+                    break;
+                case BTTSafeVerifyTypeVerifyEmail:{
                     BTTBindEmailController *vc = [BTTBindEmailController new];
-                    vc.codeType = BTTEmmailCodeTypeChange;
+                    vc.codeType = BTTSafeVerifyTypeChangeEmail;
                     [weakSelf.navigationController pushViewController:vc animated:YES];
                 }
                     break;

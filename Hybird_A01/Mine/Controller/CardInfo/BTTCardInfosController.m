@@ -33,7 +33,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getBankList];
+    [self refreshBankList];
 }
 - (void)setupCollectionView {
     [super setupCollectionView];
@@ -175,22 +175,22 @@
         [self.collectionView reloadData];
     });
 }
-- (void)getBankList
+- (void)refreshBankList
 {
-    weakSelf(weakSelf)
-    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [BTTHttpManager fetchBankListWithCompletion:^(IVRequestResultModel *result, id response) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        NSArray<BTTBankModel *> *bankList = response;
-        weakSelf.bankList = bankList;
-        for (BTTBankModel *model in bankList) {
+    NSArray *array = [[IVCacheManager sharedInstance] nativeReadDictionaryForKey:BTTCacheBankListKey];
+    if (isArrayWithCountMoreThan0(array)) {
+        NSArray<BTTBankModel *> *bankList  = [BTTBankModel arrayOfModelsFromDictionaries:array error:nil];
+        if (isArrayWithCountMoreThan0(bankList)) {
+            self.bankList = isArrayWithCountMoreThan0(bankList) ? bankList : @[];
+        }
+        for (BTTBankModel *model in self.bankList) {
             if (model.flag == 9) {
-                weakSelf.isChecking = YES;
+                self.isChecking = YES;
                 break;
             }
         }
-        [weakSelf setupElements];
-    }];
+        [self setupElements];
+    }
 }
 - (void)addBankCard
 {
@@ -244,6 +244,10 @@
 }
 - (void)deleteBtnClicked
 {
+    if (self.bankList.count == 1) {
+        [MBProgressHUD showMessagNoActivity:@"仅有一张银行卡可用时，无法删除\n请在添加其他银行卡后删除该卡" toView:self.view];
+        return;
+    }
     BTTBankModel *selectModel = nil;
     NSString *bankId = [[NSUserDefaults standardUserDefaults] valueForKey:BTTSelectedBankId];
     for (BTTBankModel *model in self.bankList) {
@@ -283,11 +287,14 @@
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     [BTTHttpManager updateBankCardWithUrl:@"public/bankcard/updateAuto" params:params.copy completion:^(IVRequestResultModel *result, id response) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         if (result.status) {
-            [MBProgressHUD showSuccess:@"设置成功!" toView:weakSelf.view];
-            [weakSelf getBankList];
+            [BTTHttpManager fetchBankListWithUseCache:NO completion:^(IVRequestResultModel *result, id response) {
+                [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+                [MBProgressHUD showSuccess:@"设置成功!" toView:weakSelf.view];
+                [weakSelf refreshBankList];
+            }];
         } else {
+            [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
             [MBProgressHUD showError:result.message toView:weakSelf.view];
         }
     }];

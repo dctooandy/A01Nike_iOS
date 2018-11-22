@@ -109,7 +109,7 @@
 - (void)forwardToVerifyEmail
 {
     BTTBindEmailController *vc = [BTTBindEmailController new];
-    vc.codeType = BTTEmmailCodeTypeVerify;
+    vc.codeType = BTTSafeVerifyTypeVerifyEmail;
     [self.navigationController pushViewController:vc animated:YES];
 }
 @end
