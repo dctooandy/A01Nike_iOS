@@ -8,13 +8,21 @@
 
 #import "BTTBaseCollectionViewCell.h"
 
-@class BTTMeMainModel;
+@class BTTMeMainModel,BTTSMSEmailModifyModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTBookMessageCell : BTTBaseCollectionViewCell
 
 @property (nonatomic, strong) BTTMeMainModel *model;
+
+@property (weak, nonatomic) IBOutlet UISwitch *msmSwith;
+
+@property (weak, nonatomic) IBOutlet UISwitch *emailSwith;
+
+@property (nonatomic, strong) BTTSMSEmailModifyModel *smsModifyModel;
+
+@property (nonatomic, strong) BTTSMSEmailModifyModel *emailModifyModel;
 
 @end
 

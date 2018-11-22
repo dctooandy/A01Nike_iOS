@@ -8,9 +8,15 @@
 
 #import "BTTCollectionViewController.h"
 
+@class BTTSMSEmailModifyModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTBookMessageController : BTTCollectionViewController
+
+@property (nonatomic, strong) BTTSMSEmailModifyModel *smsStatus;
+
+@property (nonatomic, strong) BTTSMSEmailModifyModel *emailStatus;
 
 @end
 

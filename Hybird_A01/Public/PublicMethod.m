@@ -602,6 +602,16 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     return newdate;
 }
 
++ (NSDate *)returnTheDayBeforeOneWeekWithDate:(NSDate *)date {
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *adcomps = [[NSDateComponents alloc] init];
+    [adcomps setYear:0];
+    [adcomps setMonth:0];
+    [adcomps setDay:-7];
+    NSDate *newdate = [calendar dateByAddingComponents:adcomps toDate:date options:0];
+    return newdate;
+}
+
 #pragma mark - 私有方法
 + (NSInteger)ordinality:(NSDate *)date_ ordinalitySign:(NSCalendarUnit)ordinalitySign_
 {
@@ -822,6 +832,13 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     NSString *currentTimeString = [formatter stringFromDate:datenow];
     NSLog(@"currentTimeString =  %@",currentTimeString);
     return currentTimeString;
+}
+
++ (NSString *)transferNumToThousandFormat:(CGFloat)num {
+    NSNumberFormatter *moneyFormatter = [[NSNumberFormatter alloc] init];
+    moneyFormatter.positiveFormat = @"###,##0.00";
+    NSString *formatString = [moneyFormatter stringFromNumber:@(num)];
+    return formatString;
 }
 
 @end

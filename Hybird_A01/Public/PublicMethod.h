@@ -128,6 +128,9 @@ NS_ASSUME_NONNULL_BEGIN
 //当前时间三个月后的时间
 + (NSDate *)returnTheDayAfterThreeMouthWithDate:(NSDate *)date;
 
+// 某个时间一个星期之前的时间
++ (NSDate *)returnTheDayBeforeOneWeekWithDate:(NSDate *)date;
+
 
 + (UIViewController *)mostFrontViewController;
 
@@ -166,6 +169,15 @@ NS_ASSUME_NONNULL_BEGIN
 /** 转换货币字符串 */
 + (NSString *)getMoneyString:(double)money;
 + (NSString*)getCurrentTimesWithFormat:(NSString *)formatStr;
+
+
+/**
+ 把数字转换为千分位模式
+
+ @param num 要转换的数值
+ @return 转换成功的数值
+ */
++ (NSString *)transferNumToThousandFormat:(CGFloat)num;
 @end
 
 NS_ASSUME_NONNULL_END

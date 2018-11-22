@@ -105,6 +105,8 @@
                 BTTLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginCell" forIndexPath:indexPath];
                 cell.accountTextField.delegate = self;
                 cell.pwdTextField.delegate = self;
+                NSString *historyAccount = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCacheAccountName];
+                cell.accountTextField.text = historyAccount.length ? [historyAccount substringFromIndex:1] : @"";
                 return cell;
             } else{
                 BTTLoginCodeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginCodeCell" forIndexPath:indexPath];

@@ -8,9 +8,15 @@
 
 #import "BTTCollectionViewController.h"
 
+@class BTTXimaTotalModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTXimaController : BTTCollectionViewController
+
+@property (nonatomic, strong) BTTXimaTotalModel *otherModel;
+
+@property (nonatomic, strong) BTTXimaTotalModel *validModel;
 
 @end
 

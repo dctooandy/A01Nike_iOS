@@ -71,6 +71,8 @@
         [self hideLoading];
         NSLog(@"%@",response);
         if (result.code_http == 200) {
+            [[NSUserDefaults standardUserDefaults] setObject:model.login_name forKey:BTTCacheAccountName];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             self.wrongPwdNum = 0;
             if (isback) {
                 [self.navigationController popViewControllerAnimated:YES];
@@ -125,7 +127,7 @@
         NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
         BOOL isAccount = [predicate evaluateWithObject:model.login_name];
-        if (!isAccount) {
+        if (!isAccount || cell.accountTextField.text.length < 4) {
             [MBProgressHUD showError:@"用户名为4-9位的数字或字母" toView:self.view];
             return;
         }
@@ -226,7 +228,7 @@
             }
             
         }
-        if (result.message) {
+        if (result.message.length) {
             [MBProgressHUD showError:result.message toView:nil];
         }
     }];
@@ -263,7 +265,7 @@
                 }
             }
         }
-        if (result.message) {
+        if (result.message.length) {
             [MBProgressHUD showError:result.message toView:nil];
         }
     }];
@@ -309,9 +311,11 @@
     [IVNetwork sendRequestWithSubURL:BTTNoLoginMobileCodeAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.code_http == 200) {
-            [MBProgressHUD showSuccess:@"发送成功" toView:nil];
+            [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
         } else {
-            [MBProgressHUD showError:result.message toView:nil];
+            if (result.message.length) {
+                [MBProgressHUD showError:result.message toView:nil];
+            }
         }
     }];
 }

@@ -117,7 +117,7 @@
         if ([IVNetwork userInfo]) {
             BTTMeHeaderLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeHeaderLoginCell" forIndexPath:indexPath];
             cell.noticeStr = homeVC.noticeStr.length ? homeVC.noticeStr : @"";
-            cell.totalAmount = self.totalAmount;
+            cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
             cell.nameLabel.text = [IVNetwork userInfo].loginName;
             cell.vipLevelLabel.text = [NSString stringWithFormat:@"VIP%@",@([IVNetwork userInfo].customerLevel)];
             weakSelf(weakSelf);
