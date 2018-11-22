@@ -17,7 +17,8 @@ typedef enum {
     BTTButtonTypeAddBankCard,//添加银行卡
     BTTButtonTypeSearch,    // 查询
     BTTButtonTypeback,       // 返回
-    BTTButtonTypeSave        // 保存
+    BTTButtonTypeSave,        // 保存
+    BTTButtonTypeMemberCenter, // 返回会员中心
 }BTTButtonType;
 
 

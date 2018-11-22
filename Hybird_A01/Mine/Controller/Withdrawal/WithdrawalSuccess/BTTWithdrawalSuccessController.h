@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTWithdrawalSuccessController : BTTCollectionViewController
-
+@property(nonatomic, copy)NSString *amount;
 @end
 
 NS_ASSUME_NONNULL_END

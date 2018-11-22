@@ -12,8 +12,15 @@
 @implementation BTTWithdrawalController (LoadData)
 
 - (void)loadMainData {
-    NSArray *names = @[@"",@"",@"金额(元)",@"比特币",@"取款至",@"登录密码"];
-    NSArray *placeholders = @[@"",@"",@"最少10元",@"¥45276.32=1BTC(实时汇率)",@"工商银行-尾号***123",@"请输入游戏账号的登录密码"];
+    [self.sheetDatas removeAllObjects];
+    NSMutableArray *names = @[@"",@"",@"金额(元)",@"比特币",@"取款至",@"登录密码"].mutableCopy;
+    NSString *btcrate = [[NSUserDefaults standardUserDefaults] valueForKey:BTTCacheBTCRateKey];
+    NSString *rateStr = [NSString stringWithFormat:@"¥%.2lf=1BTC(实时汇率)",[btcrate doubleValue]];
+    NSMutableArray *placeholders = @[@"",@"",@"取款限额:10-100万RMB",rateStr,@"***银行-尾号*****",@"请输入游戏账号的登录密码"].mutableCopy;
+    if (!self.bankList[self.selectIndex].isBTC) {
+        [names removeObjectAtIndex:3];
+        [placeholders removeObjectAtIndex:3];
+    }
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];

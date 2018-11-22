@@ -100,6 +100,9 @@
             [self.btn setTitle:@"保存" forState:UIControlStateNormal];
         }
             break;
+        case BTTButtonTypeMemberCenter:
+            [self.btn setTitle:@"返回会员中心" forState:UIControlStateNormal];
+            break;
         default:
             break;
     }

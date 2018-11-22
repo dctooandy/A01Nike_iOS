@@ -16,13 +16,14 @@
 }
 + (void)updateCacheNormal
 {
-    
+    [BTTHttpManager fetchBTCRateWithUseCache:NO];
 }
 + (void)updateCacheNeedLoginRequest
 {
     if (![IVNetwork userInfo]) {
         return;
     }
-    [BTTHttpManager fetchBindStatusWithCompletion:nil];
+    [BTTHttpManager fetchBindStatusWithUseCache:NO];
+    [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
 }
 @end

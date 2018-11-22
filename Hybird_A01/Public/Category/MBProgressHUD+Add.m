@@ -92,6 +92,7 @@ static const NSInteger loadingTag = 10101;
     hud.contentColor = [UIColor whiteColor];
     
     [view bringSubviewToFront:hud];
+    hud.label.numberOfLines = 0;
     hud.label.text = message;
     // 隐藏时候从父控件中移除
     hud.removeFromSuperViewOnHide = YES;

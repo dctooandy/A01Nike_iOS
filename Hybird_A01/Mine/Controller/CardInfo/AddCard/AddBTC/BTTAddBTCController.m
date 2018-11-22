@@ -47,7 +47,7 @@
         return cell;
     } else {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
-        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+        cell.textField.keyboardType = UIKeyboardTypeASCIICapable;
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
         if (indexPath.row == self.sheetDatas.count - 1) {
@@ -160,6 +160,8 @@
     [BTTHttpManager addBTCCardWithUrl:url params:params.copy completion:^(IVRequestResultModel *result, id response) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         if (result.status) {
+            [BTTHttpManager fetchBindStatusWithUseCache:YES];
+            [BTTHttpManager fetchBankListWithUseCache:YES completion:nil];
             BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
             vc.mobileCodeType = self.addCardType;
             [weakSelf.navigationController pushViewController:vc animated:YES];

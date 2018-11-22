@@ -7,14 +7,15 @@
 //
 
 #import "BTTCollectionViewController.h"
-
+#import "BTTBankModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTWithdrawalController : BTTCollectionViewController
 
 
 @property (nonatomic, copy) NSString *totalAvailable;
-
+@property (nonatomic, copy) NSArray<BTTBankModel *> *bankList;
+@property (nonatomic, assign) NSInteger selectIndex;
 
 @end
 

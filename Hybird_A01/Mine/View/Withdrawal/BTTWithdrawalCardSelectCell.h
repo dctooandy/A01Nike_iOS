@@ -7,7 +7,7 @@
 //
 
 #import "BTTBaseCollectionViewCell.h"
-
+#import "BTTBankModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTWithdrawalCardSelectCell : BTTBaseCollectionViewCell
@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UIImageView *bankIcon;
 
+@property(nonatomic, strong)BTTBankModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

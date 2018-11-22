@@ -166,6 +166,8 @@ NS_ASSUME_NONNULL_BEGIN
 //正则表达式验证银行卡是否合法
 + (BOOL)isValidateBankNumber:(NSString *)number;
 
+/** 转换货币字符串 */
++ (NSString *)getMoneyString:(double)money;
 + (NSString*)getCurrentTimesWithFormat:(NSString *)formatStr;
 
 
