@@ -44,6 +44,9 @@
                         <rect key="frame" x="112.5" y="137" width="150" height="35"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <state key="normal" title=" 全部转回本地" image="blance_refresh" backgroundImage="blance_btn"/>
+                        <connections>
+                            <action selector="totalBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="pda-dO-jsI"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>

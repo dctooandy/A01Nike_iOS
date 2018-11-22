@@ -14,9 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *games;
 
-- (void)loadLocalAmount;
+@property (nonatomic, strong) NSMutableArray *sheetDatas;
+
 
 - (void)loadGamesListAndGameAmount;
+
+- (void)loadMainData;
+
+- (void)loadTransferAllMoneyToLocal;
 
 @end
 

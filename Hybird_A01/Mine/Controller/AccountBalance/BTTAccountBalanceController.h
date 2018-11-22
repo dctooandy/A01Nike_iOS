@@ -15,6 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *amount;
 
+@property (nonatomic, copy) NSString *localAmount;
+
+@property (nonatomic, copy) NSString *hallAmount;
+
 @end
 
 NS_ASSUME_NONNULL_END

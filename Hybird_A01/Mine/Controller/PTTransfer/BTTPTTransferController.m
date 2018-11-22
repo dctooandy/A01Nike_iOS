@@ -7,15 +7,18 @@
 //
 
 #import "BTTPTTransferController.h"
-#import "BTTPTTransferCell.h"
+#import "BTTPTTransferNewCell.h"
 #import "BTTHomePageSeparateCell.h"
-#import "BTTBindingMobileOneCell.h"
-#import "BTTBindingMobileBtnCell.h"
+#import "BTTPublicBtnCell.h"
 #import "BTTMeMainModel.h"
+#import "BTTPTTransferController+LoadData.h"
+#import "BTTPTTransferInputCell.h"
 
 @interface BTTPTTransferController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
+
+
 
 @end
 
@@ -24,17 +27,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"PT转账";
+    self.totalAmount = @"-";
+    self.ptAmount = @"-";
+    self.transferAmount = @"";
     [self setupCollectionView];
     [self setupElements];
+    [self loadMainData];
 }
 
 - (void)setupCollectionView {
     [super setupCollectionView];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPTTransferCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPTTransferCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPTTransferNewCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPTTransferNewCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageSeparateCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageSeparateCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPTTransferInputCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPTTransferInputCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPublicBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPublicBtnCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -43,25 +50,68 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        BTTPTTransferCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPTTransferCell" forIndexPath:indexPath];
+        BTTPTTransferNewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPTTransferNewCell" forIndexPath:indexPath];
+        cell.userableLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%.2f元",self.totalAmount.floatValue]];
+        cell.PTLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%.2f元",self.ptAmount.floatValue]];
+        weakSelf(weakSelf);
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            strongSelf(strongSelf);
+            BTTPTTransferInputCell *amountCell = (BTTPTTransferInputCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+            if (button.tag == 1020) {
+                amountCell.amountTextField.text = strongSelf.ptAmount.floatValue ? strongSelf.ptAmount : @"";
+                if (strongSelf.ptAmount.floatValue && strongSelf.ptAmount.floatValue >= 1) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"PTTransfer"];
+                } else {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnDisableNotification object:@"PTTransfer"];
+                }
+            } else if (button.tag == 1021) {
+                amountCell.amountTextField.text = strongSelf.totalAmount.floatValue ? strongSelf.totalAmount : @"";
+                if (strongSelf.totalAmount.floatValue && strongSelf.totalAmount.floatValue >= 1) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"PTTransfer"];
+                } else {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnDisableNotification object:@"PTTransfer"];
+                }
+            }
+        };
         return cell;
     } else if (indexPath.row == 1) {
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
     } else if (indexPath.row == 2) {
-        BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];\
+        BTTPTTransferInputCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPTTransferInputCell" forIndexPath:indexPath];
+        cell.amountTextField.text = self.totalAmount;
         cell.model = self.sheetDatas[0];
+        [cell.amountTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
+       
         return cell;
     } else {
-        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
+        cell.btnType = BTTPublicBtnTypeConfirm;
+        weakSelf(weakSelf);
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            strongSelf(strongSelf);
+            [collectionView endEditing:YES];
+            BTTPTTransferNewCell *headerCell = (BTTPTTransferNewCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            BTTPTTransferInputCell *amountCell = (BTTPTTransferInputCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+            
+            [strongSelf loadCreditsTransfer:headerCell.useableBtn.selected amount:amountCell.amountTextField.text.floatValue];
+        };
         return cell;
     }
     
 }
 
+- (NSMutableAttributedString *)labelAttributeWithString:(NSString *)str {
+    NSRange range = [str rangeOfString:@"元"];
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
+    [attStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"818791"],NSFontAttributeName:kFontSystem(12)} range:range];
+    return attStr;
+}
+
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
+    [collectionView endEditing:YES];
     NSLog(@"%zd", indexPath.item);
 }
 
@@ -95,6 +145,18 @@
  */
 - (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView linesMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
     return 0;
+}
+
+
+- (void)textFieldChange:(UITextField *)textField {
+    self.transferAmount = textField.text;
+    if (textField.text.length) {
+        if (textField.text.floatValue >= 1) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"PTTransfer"];
+        }
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnDisableNotification object:@"PTTransfer"];
+    }
 }
 
 - (void)setupElements {

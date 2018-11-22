@@ -15,10 +15,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *topBgView;
 
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-
-@property (weak, nonatomic) IBOutlet UILabel *vipLevelLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 
 
@@ -31,13 +27,7 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.vipLevelLabel.layer.cornerRadius = 2;
-    self.nameLabel.text = [IVNetwork userInfo].loginName;
-    if ([IVNetwork userInfo].customerLevel) {
-        self.vipLevelLabel.hidden = NO;
-        self.vipLevelLabel.text = [NSString stringWithFormat:@"VIP%@",@([IVNetwork userInfo].customerLevel)];
-    } else {
-        self.vipLevelLabel.hidden = YES;
-    }
+    
     
     
 }
