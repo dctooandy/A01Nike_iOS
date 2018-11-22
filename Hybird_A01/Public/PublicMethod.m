@@ -824,4 +824,11 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     return currentTimeString;
 }
 
++ (NSString *)transferNumToThousandFormat:(CGFloat)num {
+    NSNumberFormatter *moneyFormatter = [[NSNumberFormatter alloc] init];
+    moneyFormatter.positiveFormat = @"###,##0.00";
+    NSString *formatString = [moneyFormatter stringFromNumber:@(num)];
+    return formatString;
+}
+
 @end

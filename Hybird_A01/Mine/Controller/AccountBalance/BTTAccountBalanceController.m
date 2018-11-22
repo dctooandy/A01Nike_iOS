@@ -47,7 +47,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         BTTAccountBlanceHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAccountBlanceHeaderCell" forIndexPath:indexPath];
-        cell.totalLabel.text = self.amount;
+        cell.totalLabel.text = [NSString stringWithFormat:@"¥ %@",[PublicMethod transferNumToThousandFormat:self.amount.floatValue]];
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
@@ -60,10 +60,10 @@
         cell.model = model;
         if (indexPath.row == 1) {
             cell.mineArrowsType = BTTMineArrowsTypeHidden;
-            cell.amountLabel.text = [NSString stringWithFormat:@"¥ %@",self.localAmount];
+            cell.amountLabel.text = [NSString stringWithFormat:@"¥ %@",[PublicMethod transferNumToThousandFormat:self.localAmount.floatValue]];
         } else {
             cell.mineArrowsType = BTTMineArrowsTypeNoHidden;
-            cell.amountLabel.text = [NSString stringWithFormat:@"¥ %@",self.hallAmount];
+            cell.amountLabel.text = [NSString stringWithFormat:@"¥ %@",[PublicMethod transferNumToThousandFormat:self.hallAmount.floatValue]];
         }
         if (self.isShowHidden) {
             cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeUp;

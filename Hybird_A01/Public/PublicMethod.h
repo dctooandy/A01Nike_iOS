@@ -167,6 +167,15 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isValidateBankNumber:(NSString *)number;
 
 + (NSString*)getCurrentTimesWithFormat:(NSString *)formatStr;
+
+
+/**
+ 把数字转换为千分位模式
+
+ @param num 要转换的数值
+ @return 转换成功的数值
+ */
++ (NSString *)transferNumToThousandFormat:(CGFloat)num;
 @end
 
 NS_ASSUME_NONNULL_END
