@@ -10,7 +10,9 @@
 #import "BTTBookMessageCell.h"
 #import "BTTMeMainModel.h"
 #import "BTTCardModifyTitleCell.h"
-#import "BTTBindingMobileBtnCell.h"
+#import "BTTPublicBtnCell.h"
+#import "BTTBookMessageController+LoadData.h"
+#import "BTTSMSEmailModifyModel.h"
 
 @interface BTTBookMessageController ()<BTTElementsFlowLayoutDelegate>
 
@@ -25,6 +27,7 @@
     self.title = @"短信订阅";
     [self setupCollectionView];
     [self setupElements];
+    [self loadMainData];
 }
 
 - (void)setupCollectionView {
@@ -32,7 +35,7 @@
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBookMessageCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBookMessageCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTCardModifyTitleCell" bundle:nil] forCellWithReuseIdentifier:@"BTTCardModifyTitleCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPublicBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPublicBtnCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -46,8 +49,8 @@
         cell.titleLabel.text = model.name;
         return cell;
     } else if (indexPath.row == self.sheetDatas.count) {
-        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
-        cell.buttonType = BTTButtonTypeSave;
+        BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
+        cell.btnType = BTTPublicBtnTypeSave;
         return cell;
     } else {
         BTTBookMessageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBookMessageCell" forIndexPath:indexPath];
@@ -58,6 +61,8 @@
         } else {
             cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
         }
+        cell.smsModifyModel = self.smsStatus;
+        cell.emailModifyModel = self.emailStatus;
         return cell;
     }
 }

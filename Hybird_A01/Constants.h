@@ -199,6 +199,32 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTCreditsTransfer           @"/public/credits/transfer"
 
+// 获取当前可以洗码的k列表
+
+#define BTTXmCurrentList             @"/A01/xm/currentList"
+
+// 获取洗码历史列表
+
+#define BTTXmHistoryList             @"/A01/xm/historyList"
+
+// 获取限红额度
+
+#define BTTBetLimits                 @"/A01/apply/getBetLimits"
+
+// 申请修改限红
+#define BTTApplyBetLimit             @"/apply/betLimit"
+
+// 短信状态查询
+
+#define BTTSmsList                   @"/subscription/smsList"
+
+// 邮件状态查询
+
+#define BTTEmailList                 @"/subscription/emailList"
+
+// 短信状态修改
+
+#define BTTEmailOrder                @"/subscription/emailOrder"
 
 /********************************************常用宏*********************************************************/
 

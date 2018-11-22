@@ -226,7 +226,7 @@
             }
             
         }
-        if (result.message) {
+        if (result.message.length) {
             [MBProgressHUD showError:result.message toView:nil];
         }
     }];
@@ -263,7 +263,7 @@
                 }
             }
         }
-        if (result.message) {
+        if (result.message.length) {
             [MBProgressHUD showError:result.message toView:nil];
         }
     }];
@@ -311,7 +311,9 @@
         if (result.code_http == 200) {
             [MBProgressHUD showSuccess:@"发送成功" toView:nil];
         } else {
-            [MBProgressHUD showError:result.message toView:nil];
+            if (result.message.length) {
+                [MBProgressHUD showError:result.message toView:nil];
+            }
         }
     }];
 }

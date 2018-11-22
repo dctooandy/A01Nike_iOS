@@ -38,7 +38,7 @@
                         <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qw1-We-zDP">
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qw1-We-zDP">
                         <rect key="frame" x="205" y="6.5" width="51" height="31"/>
                         <color key="onTintColor" red="0.14117647058823529" green="0.52941176470588236" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <connections>
@@ -68,7 +68,9 @@
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
                 <outlet property="emailLabel" destination="AS7-Mk-GAZ" id="tnh-st-aha"/>
+                <outlet property="emailSwith" destination="DGd-lW-Eg8" id="Mt1-cM-2V0"/>
                 <outlet property="messageLabel" destination="FOt-Ig-9xd" id="1fs-cf-JaI"/>
+                <outlet property="msmSwith" destination="qw1-We-zDP" id="U2s-AW-wkj"/>
                 <outlet property="titleLabel" destination="75p-NK-6or" id="5Oo-5F-VCh"/>
             </connections>
             <point key="canvasLocation" x="-402" y="21"/>

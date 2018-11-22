@@ -9,12 +9,17 @@
 #import "BTTModifyLimitViewController.h"
 #import "BTTBindingMobileOneCell.h"
 #import "BTTMeMainModel.h"
-#import "BTTBindingMobileBtnCell.h"
 #import <BRPickerView/BRPickerView.h>
+#import "BTTModifyLimitViewController+LoadData.h"
+#import "BTTPublicBtnCell.h"
 
 @interface BTTModifyLimitViewController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
+
+@property (nonatomic, copy) NSString *aginStr;
+
+@property (nonatomic, copy) NSString *bbinStr;
 
 @end
 
@@ -25,13 +30,14 @@
     self.title = @"修改限红";
     [self setupCollectionView];
     [self setupElements];
+    [self loadMainData];
 }
 
 - (void)setupCollectionView {
     [super setupCollectionView];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPublicBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPublicBtnCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -40,7 +46,15 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.sheetDatas.count) {
-        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
+        cell.btnType = BTTPublicBtnTypeConfirm;
+        weakSelf(weakSelf);
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            strongSelf(strongSelf);
+            NSString *agin = [strongSelf.aginStr stringByReplacingOccurrencesOfString:@"~" withString:@"-"];
+            NSString *bbin = [strongSelf.bbinStr stringByReplacingOccurrencesOfString:@"~" withString:@"-"];
+            [strongSelf loadSetBetLimitWithAgin:agin bbin:bbin];
+        };
         return cell;
     } else {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
@@ -56,13 +70,21 @@
     NSLog(@"%zd", indexPath.item);
     if (indexPath.row == 0) {
         BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        [BRStringPickerView showStringPickerWithTitle:@"请选择金额" dataSource:@[@"20-50000", @"1000-100000",@"2000-200000",@"10000-500000",@"20000-1000000"] defaultSelValue:cell.textField.text resultBlock:^(id selectValue) {
+        [BRStringPickerView showStringPickerWithTitle:@"请选择金额" dataSource:self.agin defaultSelValue:cell.textField.text resultBlock:^(id selectValue) {
             cell.textField.text = selectValue;
+            self.aginStr = selectValue;
+            if (self.aginStr.length && self.bbinStr.length) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"BetLimit"];
+            }
         }];
     } else if (indexPath.row == 1) {
         BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        [BRStringPickerView showStringPickerWithTitle:@"请选择金额" dataSource:@[@"20-10000", @"200-20000",@"300-30000",@"400-40000",@"500-50000",@"1000-100000",@"2000-200000",@"3000-300000"] defaultSelValue:cell.textField.text resultBlock:^(id selectValue) {
+        [BRStringPickerView showStringPickerWithTitle:@"请选择金额" dataSource:self.bbin defaultSelValue:cell.textField.text resultBlock:^(id selectValue) {
             cell.textField.text = selectValue;
+            self.bbinStr = selectValue;
+            if (self.aginStr.length && self.bbinStr.length) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"BetLimit"];
+            }
         }];
     }
 }

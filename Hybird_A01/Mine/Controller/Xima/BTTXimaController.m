@@ -14,6 +14,8 @@
 #import "BTTLastWeekCell.h"
 #import "BTTXimaFooterCell.h"
 #import "BTTXimaFooterCell.h"
+#import "BTTXimaController+LoadData.h"
+#import "BTTXimaItemModel.h"
 
 typedef enum {
     BTTXimaDateTypeThisWeek, //本周
@@ -33,6 +35,7 @@ typedef enum {
     [super viewDidLoad];
     [self setupCollectionView];
     [self setupElements];
+    [self loadMainData];
 }
 
 - (void)setupCollectionView {
@@ -124,6 +127,11 @@ typedef enum {
 - (void)setupElements {
     if (self.elementsHight.count) {
         [self.elementsHight removeAllObjects];
+    }
+    NSInteger total = 0;
+    if (self.ximaDateType == BTTXimaDateTypeThisWeek) {
+        total  = self.validModel.list.count + 4;
+    } else {
     }
     for (int i = 0; i < 7; i ++) {
         if (i == 0) {
