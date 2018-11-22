@@ -29,7 +29,15 @@
 
 - (void)setModel:(BTTMeMainModel *)model {
     _model = model;
-    self.iconImg.image = ImageNamed(model.iconName);
+    if ([model.name isEqualToString:@"个人资料"]) {
+        self.iconImg.image = [IVNetwork userInfo].real_name.length ? ImageNamed(model.desc) : ImageNamed(model.iconName);
+    } else if ([model.name isEqualToString:@"更换手机"]) {
+        self.iconImg.image = [IVNetwork userInfo].isPhoneBinded ? ImageNamed(model.desc) : ImageNamed(model.iconName);
+    } else if ([model.name isEqualToString:@"绑定邮箱"]) {
+        self.iconImg.image = [IVNetwork userInfo].isEmailBinded ? ImageNamed(model.desc) : ImageNamed(model.iconName);
+    } else if ([model.name isEqualToString:@"银行卡资料"]) {
+        self.iconImg.image = [IVNetwork userInfo].isBankBinded ? ImageNamed(model.desc) : ImageNamed(model.iconName);
+    }
     self.nameLabel.text = model.name;
 }
 

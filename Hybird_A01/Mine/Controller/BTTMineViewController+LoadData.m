@@ -27,11 +27,13 @@
     }
     NSArray *icons = @[@"me_personalInfo_unband",@"me_mobile_unband",@"me_email_unband",@"me_card_unband"];
     NSArray *names = @[@"个人资料",@"更换手机",@"绑定邮箱",@"银行卡资料"];
+    NSArray *highlights = @[@"me_personalInfo_band",@"me_mobile_band",@"me_email_band",@"me_card_band"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;
         model.iconName = icons[index];
+        model.desc = highlights[index];
         [self.personalInfos addObject:model];
     }
     [self.collectionView reloadData];
@@ -107,7 +109,8 @@
 }
 
 - (void)loadBindStatus {
-    [BTTHttpManager fetchBindStatusWithUseCache:YES];
+    [BTTHttpManager fetchBTCRateWithUseCache:YES];
+    
 }
 - (void)loadBankList
 {
@@ -116,6 +119,7 @@
 - (void)loadBtcRate
 {
     [BTTHttpManager fetchBTCRateWithUseCache:YES];
+
 }
 - (void)loadTotalAvailableData {
     [IVNetwork sendRequestWithSubURL:BTTCreditsTotalAvailable paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
