@@ -239,6 +239,8 @@
         [MBProgressHUD hideHUDForView:self.view animated:NO];
         weakSelf(weakSelf)
         if (result.status) {
+            [BTTHttpManager fetchBindStatusWithUseCache:YES];
+            [BTTHttpManager fetchBankListWithUseCache:YES completion:nil];
             BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
             vc.mobileCodeType = self.addCardType;
             [weakSelf.navigationController pushViewController:vc animated:YES];

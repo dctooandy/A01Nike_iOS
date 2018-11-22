@@ -67,5 +67,6 @@
 @property (copy, nonatomic) NSString *btcamount;
 /** 获取比特币汇率返回过来的 */
 @property (copy, nonatomic) NSString *uuid;
-
+/** 取款时选取控件显示的文字*/
+@property(copy, nonatomic) NSString *withdrawText;
 @end

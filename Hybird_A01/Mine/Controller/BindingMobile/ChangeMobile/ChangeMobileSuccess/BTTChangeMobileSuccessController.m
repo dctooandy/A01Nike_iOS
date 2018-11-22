@@ -17,7 +17,6 @@
 @implementation BTTChangeMobileSuccessController
 
 - (void)viewDidLoad {
-    self.hideBackItem = YES;
     [super viewDidLoad];
     [self setupCollectionView];
     [self setupElements];
@@ -41,6 +40,10 @@
         return cell;
     } else {
         BTTChangeMobileSuccessBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTChangeMobileSuccessBtnCell" forIndexPath:indexPath];
+        weakSelf(weakSelf)
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        };
         return cell;
     }
     
@@ -99,6 +102,9 @@
     });
 }
 
-
+- (void)goToBack
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 @end

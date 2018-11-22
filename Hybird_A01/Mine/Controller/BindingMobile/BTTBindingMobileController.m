@@ -240,7 +240,6 @@
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
-        result.code_system = 300022;
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         if (result.status) {
             if (successStr) {
@@ -248,7 +247,8 @@
             }
             if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
                 NSString *phone = result.data[@"val"];
-                [IVNetwork updateUserInfo:@{@"phone" : phone,@"isPhoneBinded" : @(YES)}];
+                [IVNetwork updateUserInfo:@{@"phone" : phone}];
+                [BTTHttpManager fetchBindStatusWithUseCache:YES];
             }
             switch (self.mobileCodeType) {
                 case BTTSafeVerifyTypeBindMobile:
@@ -389,6 +389,7 @@
     [BTTHttpManager deleteBankOrBTC:isBTC isAuto:isAuto completion:^(IVRequestResultModel *result, id response) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         if (result.status) {
+            [BTTHttpManager fetchBankListWithUseCache:YES completion:nil];
             BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
             vc.mobileCodeType = self.mobileCodeType;
             [weakSelf.navigationController pushViewController:vc animated:YES];

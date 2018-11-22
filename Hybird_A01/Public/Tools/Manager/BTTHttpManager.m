@@ -37,43 +37,63 @@
     [params setValue:provider forKey:@"game_name"];
     [self sendRequestWithUrl: @"public/game/transfer" paramters:params.copy completionBlock:completeBlock];
 }
-+ (void)fetchBankListWithCompletion:(IVRequestCallBack)completion
++ (void)fetchBankListWithUseCache:(BOOL)useCache completion:(IVRequestCallBack)completion
 {
     NSDictionary *params = @{
-                           @"flag" : @"9;1",
-                           @"order":@"PRIORITY_ORDER",
-                           @"delete_flag":@"0"
-                           };
-    [self sendRequestWithUrl:@"public/bankcard/getList" paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        NSArray *bankList = result.data;
-        if (isArrayWithCountMoreThan0(bankList)) {
-            bankList = [BTTBankModel arrayOfModelsFromDictionaries:result.data error:nil];
-        } else {
-            bankList = @[];
-        }
-        if (completion) {
-            completion(result,bankList);
-        }
-    }];
+                             @"flag" : @"9;1",
+                             @"order":@"PRIORITY_ORDER",
+                             @"delete_flag":@"0"
+                             };
+    NSString *url = @"public/bankcard/getList";
+    weakSelf(weakSelf)
+    if (useCache) {
+        [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+            [weakSelf fetchBankListResult:result completion:completion];
+        }];
+    } else {
+        [self sendRequestWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+            [weakSelf fetchBankListResult:result completion:completion];
+        }];
+    }
 }
-+ (void)fetchBindStatusWithCompletion:(IVRequestCallBack)completion
+//处理银行卡列表获取结果
++ (void)fetchBankListResult:(IVRequestResultModel *)result completion:(IVRequestCallBack)completion
+{
+    if (result.data) {
+        [[IVCacheManager sharedInstance] nativeWriteValue:result.data forKey:BTTCacheBankListKey];
+    }
+    if (completion) {
+        completion(result,nil);
+    }
+}
+//处理绑定状态获取结果
++ (void)fetchBindStatusWithUseCache:(BOOL)useCache
 {
     NSString *typeList = @"phone;email;bank;btc";
-    NSDictionary *pramas = @{@"typeList":typeList};
-    [self sendRequestWithUrl:BTTIsBindStatusAPI paramters:pramas completionBlock:^(IVRequestResultModel *result, id response) {
-        if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-            NSMutableDictionary *userInfo = @{}.mutableCopy;
-            userInfo[@"isPhoneBinded"] = [result.data valueForKey:@"phone"];
-            userInfo[@"isEmailBinded"] = [result.data valueForKey:@"email"];
-            userInfo[@"isBankBinded"] = [result.data valueForKey:@"bank"];
-            userInfo[@"isBtcBinded"] = [result.data valueForKey:@"btc"];
-            [IVNetwork updateUserInfo:userInfo];
-        }
-        if (completion) {
-            completion(result,response);
-        }
-    }];
+    NSDictionary *params = @{@"typeList":typeList};
+    NSString *url = BTTIsBindStatusAPI;
+    weakSelf(weakSelf)
+    if (useCache) {
+        [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+            [weakSelf fetchBindStatusResult:result];
+        }];
+    } else {
+        [self sendRequestWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+            [weakSelf fetchBindStatusResult:result];
+        }];
+    }
 }
++ (void)fetchBindStatusResult:(IVRequestResultModel *)result {
+    if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
+        NSMutableDictionary *userInfo = @{}.mutableCopy;
+        userInfo[@"isPhoneBinded"] = [result.data valueForKey:@"phone"];
+        userInfo[@"isEmailBinded"] = [result.data valueForKey:@"email"];
+        userInfo[@"isBankBinded"] = [result.data valueForKey:@"bank"];
+        userInfo[@"isBtcBinded"] = [result.data valueForKey:@"btc"];
+        [IVNetwork updateUserInfo:userInfo];
+    }
+}
+
 + (void)updateBankCardWithUrl:(NSString *)url params:(NSDictionary *)params completion:(IVRequestCallBack)completion
 {
     [self sendRequestWithUrl:url paramters:params completionBlock:completion];
@@ -106,5 +126,30 @@
 + (void)updatePhoneHumanWithParams:(NSDictionary *)params completion:(IVRequestCallBack)completion
 {
     [self sendRequestWithUrl:@"users/updatePhone" paramters:params completionBlock:completion];
+}
++ (void)fetchBTCRateWithUseCache:(BOOL)useCache
+{
+    NSDictionary *params = @{@"amount":@"1",@"querytype" : @"01"};
+    NSString *url = @"public/payment/btcRate";
+    weakSelf(weakSelf)
+    if (useCache) {
+        [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+            [weakSelf fetchBTCRateResult:result];
+        }];
+    } else {
+        [self sendRequestWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+            [weakSelf fetchBTCRateResult:result];
+        }];
+    }
+}
++ (void)fetchBTCRateResult:(IVRequestResultModel *)result {
+    if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"btcrate"]) {
+        NSString *rate = [result.data valueForKey:@"btcrate"];
+        [[NSUserDefaults standardUserDefaults] setValue:rate forKey:BTTCacheBTCRateKey];
+    }
+}
++ (void)submitWithdrawWithUrl:(NSString *)url params:(NSDictionary *)params completion:(IVRequestCallBack)completion
+{
+    [self sendRequestWithUrl:url paramters:params completionBlock:completion];
 }
 @end

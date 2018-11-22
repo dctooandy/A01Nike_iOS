@@ -24,9 +24,9 @@
  */
 + (void)publicGameTransferWithProvider:(NSString *)provider completeBlock:(IVRequestCallBack)completeBlock;
 //获取银行卡列表
-+ (void)fetchBankListWithCompletion:(IVRequestCallBack)completion;
++ (void)fetchBankListWithUseCache:(BOOL)useCache completion:(IVRequestCallBack)completion;
 //获取手机、邮箱、银行卡、比特币钱包绑定状态
-+ (void)fetchBindStatusWithCompletion:(IVRequestCallBack)completion;
++ (void)fetchBindStatusWithUseCache:(BOOL)useCache;
 /**
  添加、修改银行卡
  */
@@ -45,4 +45,8 @@
 + (void)deleteBankOrBTC:(BOOL)isBTC isAuto:(BOOL)isAuto completion:(IVRequestCallBack)completion;
 //人工服务更换手机号
 + (void)updatePhoneHumanWithParams:(NSDictionary *)params completion:(IVRequestCallBack)completion;
+//获取比特币汇率
++ (void)fetchBTCRateWithUseCache:(BOOL)useCache;
+//取款
++ (void)submitWithdrawWithUrl:(NSString *)url params:(NSDictionary *)params completion:(IVRequestCallBack)completion;
 @end

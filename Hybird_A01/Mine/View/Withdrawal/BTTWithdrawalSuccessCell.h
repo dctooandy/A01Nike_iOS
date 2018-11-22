@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTWithdrawalSuccessCell : BTTBaseCollectionViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 @end
 
 NS_ASSUME_NONNULL_END

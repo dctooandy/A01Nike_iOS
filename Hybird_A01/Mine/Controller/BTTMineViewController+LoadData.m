@@ -109,11 +109,18 @@
 }
 
 - (void)loadBindStatus {
-    [BTTHttpManager fetchBindStatusWithCompletion:^(IVRequestResultModel *result, id response) {
-        [self.collectionView reloadData];
-    }];
+    [BTTHttpManager fetchBTCRateWithUseCache:YES];
+    
 }
+- (void)loadBankList
+{
+    [BTTHttpManager fetchBankListWithUseCache:YES completion:nil];
+}
+- (void)loadBtcRate
+{
+    [BTTHttpManager fetchBTCRateWithUseCache:YES];
 
+}
 - (void)loadTotalAvailableData {
     [IVNetwork sendRequestWithSubURL:BTTCreditsTotalAvailable paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);

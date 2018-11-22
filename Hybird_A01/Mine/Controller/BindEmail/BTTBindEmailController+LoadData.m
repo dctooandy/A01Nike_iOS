@@ -16,11 +16,11 @@
     NSString *emailTitle = @"邮箱地址";
     NSString *email = @"";
     switch (self.codeType) {
-        case BTTEmmailCodeTypeBind:
+        case BTTSafeVerifyTypeBindEmail:
             emailTitle = @"邮箱地址";
             break;
-        case BTTEmmailCodeTypeVerify:
-        case BTTEmmailCodeTypeChange:
+        case BTTSafeVerifyTypeVerifyEmail:
+        case BTTSafeVerifyTypeChangeEmail:
             emailTitle = @"已绑定邮箱地址";
             email = [IVNetwork userInfo].email;
         default:

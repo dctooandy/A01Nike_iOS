@@ -27,6 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadBindStatus;
 
+- (void)loadBankList;
+
+- (void)loadBtcRate;
+
 - (void)loadTotalAvailableData;
 
 @end
