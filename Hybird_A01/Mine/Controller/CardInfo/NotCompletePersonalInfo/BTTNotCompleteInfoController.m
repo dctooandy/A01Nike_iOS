@@ -50,7 +50,6 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 2) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
-        cell.btn.enabled = YES;
         weakSelf(weakSelf)
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf submitChange];
@@ -60,6 +59,7 @@
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
+        [cell.textField addTarget:self action:@selector(textChanged) forControlEvents:UIControlEventEditingChanged];
         return cell;
     }
 }
@@ -120,21 +120,20 @@
     });
 }
 
-
+- (void)textChanged
+{
+    UITextField *retentionTF = [self getCellTextFieldWithIndex:1];
+    UITextField *realNameTF = [self getCellTextFieldWithIndex:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    cell.btn.enabled = [PublicMethod isValidateLeaveMessage:retentionTF.text] && [PublicMethod checkRealName:realNameTF.text];
+    
+}
 - (void)submitChange
 {
     UITextField *retentionTF = [self getCellTextFieldWithIndex:1];
     UITextField *realNameTF = [self getCellTextFieldWithIndex:0];
-    
     NSMutableDictionary *params = @{}.mutableCopy;
-    if (![PublicMethod isValidateLeaveMessage:retentionTF.text]) {
-        [MBProgressHUD showError:@"输入的预留信息格式有误！" toView:self.view];
-        return;
-    }
-    if (![PublicMethod checkRealName:realNameTF.text]) {
-        [MBProgressHUD showError:@"输入的真实姓名格式有误！" toView:self.view];
-        return;
-    }
     params[@"verify_code"] = retentionTF.text;
     params[@"real_name"] = realNameTF.text;
     weakSelf(weakSelf)

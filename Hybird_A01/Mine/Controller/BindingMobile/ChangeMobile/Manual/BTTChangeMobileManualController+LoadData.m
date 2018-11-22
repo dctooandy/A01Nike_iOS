@@ -14,7 +14,7 @@
 - (void)loadMainData {
 
     NSMutableArray *names = [NSMutableArray array];
-    NSString *firstStr = [NSString stringWithFormat:@"请输入%@*******的完整号码",[[IVNetwork userInfo].phone substringToIndex:3]];
+    NSString *firstStr = [NSString stringWithFormat:@"请输入%@的完整号码",[IVNetwork userInfo].phone];
     [names addObject:firstStr];
     [names addObject:@"原手机号码"];
     

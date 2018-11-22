@@ -10,7 +10,7 @@
 #import "BTTBindingMobileBtnCell.h"
 #import "BTTBindingMobileOneCell.h"
 #import "BTTChangeMobileNextController+LoadData.h"
-
+#import "BTTChangeMobileSuccessController.h"
 
 @interface BTTChangeMobileNextController ()<BTTElementsFlowLayoutDelegate>
 
@@ -37,21 +37,24 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.sheetDatas.count) {
+        weakSelf(weakSelf)
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf submitBtnClicked];
+        };
         return cell;
     } else {
         
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
+        [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         return cell;
     }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
-    NSLog(@"%zd", indexPath.item);
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource
@@ -103,5 +106,47 @@
         [self.collectionView reloadData];
     });
 }
-
+- (void)textChanged:(UITextField *)textField
+{
+    BOOL enable = [PublicMethod isValidatePhone:[self getPhoneTF].text];
+    [self getSubmitBtn].enabled = enable;
+}
+- (UITextField *)getPhoneTF
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.textField;
+}
+- (UITextField *)getRemarkTF
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.textField;
+}
+- (UIButton *)getSubmitBtn
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.btn;
+}
+- (void)submitBtnClicked
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"phone"] = [self getPhoneTF].text;
+    if (![NSString isBlankString:[self getRemarkTF].text]) {
+        params[@"remark"] = [self getRemarkTF].text;
+    }
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    weakSelf(weakSelf)
+    [BTTHttpManager updatePhoneHumanWithParams:params.copy completion:^(IVRequestResultModel *result, id response) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+        if (result.status) {
+            BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+            vc.mobileCodeType = BTTSafeVerifyTypeHumanChangeMoblie;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        } else {
+            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }
+    }];
+}
 @end

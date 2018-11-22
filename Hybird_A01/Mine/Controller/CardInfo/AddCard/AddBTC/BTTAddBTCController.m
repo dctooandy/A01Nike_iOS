@@ -11,7 +11,8 @@
 #import "BTTMeMainModel.h"
 #import "BTTBindingMobileOneCell.h"
 #import "BTTBindingMobileBtnCell.h"
-
+#import "BTTCardInfosController.h"
+#import "BTTChangeMobileSuccessController.h"
 @interface BTTAddBTCController ()<BTTElementsFlowLayoutDelegate>
 
 @end
@@ -37,11 +38,16 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    weakSelf(weakSelf)
     if (indexPath.row == self.sheetDatas.count) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf saveBtnClickded:button];
+        };
         return cell;
     } else {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
+        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
         if (indexPath.row == self.sheetDatas.count - 1) {
@@ -49,14 +55,14 @@
         } else {
             cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
         }
+        [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         return cell;
     }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
-    NSLog(@"%zd", indexPath.item);
+
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource
@@ -108,5 +114,58 @@
         [self.collectionView reloadData];
     });
 }
-
+- (void)textChanged:(UITextField *)textField
+{
+    BOOL enable = [PublicMethod checkBitcoinAddress:[self getAddressTF].text] && [PublicMethod checkBitcoinAddress:[self getSureAddressTF].text]
+    && [[self getAddressTF].text isEqualToString:[self getSureAddressTF].text];
+    [self getSubmitBtn].enabled = enable;
+}
+- (UITextField *)getAddressTF
+{
+    return [self getCellTextFieldWithIndex:0];
+}
+- (UITextField *)getSureAddressTF
+{
+    return [self getCellTextFieldWithIndex:1];
+}
+- (UITextField *)getCellTextFieldWithIndex:(NSInteger)index
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.textField;
+}
+- (UIButton *)getSubmitBtn
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.btn;
+}
+- (void)saveBtnClickded:(UIButton *)sender
+{
+    NSString *url = nil;
+    NSMutableDictionary *params = @{}.mutableCopy;
+    switch (self.addCardType) {
+        case BTTSafeVerifyTypeNormalAddBTCard:
+        case BTTSafeVerifyTypeMobileAddBTCard:
+        case BTTSafeVerifyTypeMobileBindAddBTCard:
+            url = @"public/bankcard/addBtcAuto";
+            break;
+        default:
+            url = @"public/bankcard/addBtc";
+            break;
+    }
+    params[@"btcAddress"] = [self getSureAddressTF].text;
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    weakSelf(weakSelf)
+    [BTTHttpManager addBTCCardWithUrl:url params:params.copy completion:^(IVRequestResultModel *result, id response) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+        if (result.status) {
+            BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+            vc.mobileCodeType = self.addCardType;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        } else {
+            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }
+    }];
+}
 @end

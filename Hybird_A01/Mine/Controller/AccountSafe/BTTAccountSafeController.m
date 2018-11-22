@@ -62,11 +62,11 @@
         UIViewController *vc = nil;
         if ([IVNetwork userInfo].isPhoneBinded) {
             BTTVerifyTypeSelectController *selectVC = [BTTVerifyTypeSelectController new];
-            selectVC.codeType = BTTMobileCodeTypeVerifyMobile;
+            selectVC.verifyType = BTTSafeVerifyTypeChangeMobile;
             vc = selectVC;
         } else {
             BTTBindingMobileController *bindingMobileVC = [[BTTBindingMobileController alloc] init];
-            bindingMobileVC.mobileCodeType = BTTMobileCodeTypeBindMobile;
+            bindingMobileVC.mobileCodeType = BTTSafeVerifyTypeBindMobile;
             vc = bindingMobileVC;
         }
         [self.navigationController pushViewController:vc animated:YES];

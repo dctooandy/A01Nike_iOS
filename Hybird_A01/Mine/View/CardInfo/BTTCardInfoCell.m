@@ -9,6 +9,9 @@
 #import "BTTCardInfoCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 @interface BTTCardInfoCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *cardBgImageView;
+@property (weak, nonatomic) IBOutlet UIButton *modifyBtn;
+@property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 
 @property (weak, nonatomic) IBOutlet UIImageView *bankIcon;
 
@@ -21,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *adressLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *cardNoLabel;
+@property (weak, nonatomic) IBOutlet UIButton *setDefaultBtn;
 
 @end
 
@@ -43,16 +47,40 @@
         self.buttonClickBlock(sender);
     }
 }
-
+- (IBAction)setDefaultBtnClicked:(id)sender {// tag 6007
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
+}
 - (void)setModel:(BTTBankModel *)model
 {
     _model = model;
-    NSURL *iconUrl = [NSURL URLWithString:model.banklogo];
-    [self.bankIcon sd_setImageWithURL:iconUrl placeholderImage:nil];
+    NSString *bgImageName = model.isBTC ? @"BTC-bg" : @"card_bg";
+    self.cardBgImageView.image = [UIImage imageNamed:bgImageName];
+    self.modifyBtn.hidden = self.isChecking || model.isBTC;
+    self.deleteBtn.hidden = self.isChecking;
+    self.setDefaultBtn.hidden = model.isBTC;
+    self.setDefaultBtn.userInteractionEnabled = !model.isDefault;
+    if (model.flag == 9) {
+        self.deleteBtn.hidden = NO;
+        self.deleteBtn.enabled = NO;
+        [self.deleteBtn setImage:nil forState:UIControlStateNormal];
+        [self.deleteBtn setTitle:@"正在审核" forState:UIControlStateNormal];
+    }
+    if (model.isBTC) {
+        self.bankIcon.image = [UIImage imageNamed:@"BTC"];
+    } else {
+        NSURL *iconUrl = [NSURL URLWithString:model.banklogo];
+        [self.bankIcon sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"defaultCardIcon"]];
+    }
+    NSString *setDefaultImageName = model.isDefault ? @"defaultCard" : @"unDefaultCard";
+    [self.setDefaultBtn setImage:[UIImage imageNamed:setDefaultImageName] forState:UIControlStateNormal];
     self.bankNameLabel.text = model.bankName;
-    self.classLabel.text = [NSString stringWithFormat:@"%@|%@",model.bankType,model.branchName];
-    self.adressLabel.text = model.branchName;
+    self.classLabel.text = model.isBTC ? @"" : [NSString stringWithFormat:@"%@|%@%@",model.bankType,model.province,model.city];
+    self.adressLabel.text = model.isBTC ? @"" : [NSString stringWithFormat:@"%@%@%@",model.province,model.city,model.branchName];
     self.cardNumLabel.text = model.bankSecurityAccount;
+    self.cardNoLabel.text = [NSString stringWithFormat:@"银行卡(%ld)",self.indexPath.row + 1];
 }
+
 
 @end

@@ -30,18 +30,40 @@
 #import "BTTAnimationPopView.h"
 
 typedef enum {
-    BTTMobileCodeTypeBindMobile,           // 绑定手机
-    BTTMobileCodeTypeVerifyMobile,         // 验证手机
-    BTTMobileCodeTypeChangeMobile,         // 更换手机
-    BTTMobileCodeTypeAddBankCard,      // 添加银行卡
-    BTTMobileCodeTypeUpdateBankCard,    // 更新银行卡
-    BTTMobileCodeTypeAddBTC,     // 添加比特币
-}BTTMobileCodeType; // 手机验证码类型
+    BTTCanAddCardTypeNone,          // 不能添加任何卡
+    BTTCanAddCardTypeAll,           // 银行卡和比特币钱包
+    BTTCanAddCardTypeBank,          //  只能添加银行卡
+    BTTCanAddCardTypeBTC,           // 只能添加比特币钱包
+}BTTCanAddCardType; // 能添加卡的类型
 typedef enum {
     BTTEmmailCodeTypeBind,           // 绑定邮箱
     BTTEmmailCodeTypeVerify,      // 验证邮箱
     BTTEmmailCodeTypeChange,         // 更换邮箱
 }BTTEmmailCodeType; // 邮箱验证码类型
+
+typedef enum {
+    BTTSafeVerifyTypeNormalAddBankCard,          // 添加第一张银行卡
+    BTTSafeVerifyTypeNormalAddBTCard,            // 添加第一张比特比钱包
+    BTTSafeVerifyTypeMobileAddBankCard,          // 添加银行卡短信验证
+    BTTSafeVerifyTypeMobileBindAddBankCard,      // 添加银行卡时未绑定手机绑定
+    BTTSafeVerifyTypeMobileChangeBankCard,       // 修改银行卡短信验证
+    BTTSafeVerifyTypeMobileBindChangeBankCard,   // 修改银行卡时未绑定手机绑定
+    BTTSafeVerifyTypeMobileDelBankCard,          // 删除银行卡短信验证
+    BTTSafeVerifyTypeMobileBindDelBankCard,      // 删除银行卡时未绑定手机绑定
+    BTTSafeVerifyTypeHumanAddBankCard,           // 添加银行卡人工服务
+    BTTSafeVerifyTypeHumanChangeBankCard,        // 修改银行卡人工服务
+    BTTSafeVerifyTypeHumanDelBankCard,           // 删除银行卡人工服务
+    BTTSafeVerifyTypeMobileAddBTCard,            // 添加比特币钱包短信验证
+    BTTSafeVerifyTypeMobileBindAddBTCard,        // 添加比特币钱包时未绑定手机绑定
+    BTTSafeVerifyTypeMobileDelBTCard,            // 删除比特币钱包短信验证
+    BTTSafeVerifyTypeMobileBindDelBTCard,        // 删除比特币钱包时未绑定手机绑定
+    BTTSafeVerifyTypeHumanAddBTCard,             // 添加比特币钱包人工服务
+    BTTSafeVerifyTypeHumanDelBTCard,             // 删除比特币钱包人工服务
+    BTTSafeVerifyTypeChangeMobile,               // 更改手机号
+    BTTSafeVerifyTypeBindMobile,                 // 绑定手机号
+    BTTSafeVerifyTypeVerifyMobile,               // 验证手机号
+    BTTSafeVerifyTypeHumanChangeMoblie,          // 更改手机号人工服务
+}BTTSafeVerifyType; // 安全验证种类
 typedef enum {
     BTTRegisterOrLoginTypeLogin,
     BTTRegisterOrLoginTypeRegisterNormal, // 普通开户
@@ -160,6 +182,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTCreditsLocal              @"/public/credits/local"
 
+#define BTTSelectedBankId            @"BTTSelectedBankId"
 // 获取游戏大厅列表
 
 #define BTTGamePlatforms             @"/A01/game/platforms"

@@ -160,7 +160,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isValidateEmail:(NSString *)originalEmail;
 //正则表达式验证密码是否合法
 + (BOOL)isValidatePwd:(NSString *)originalPwd;
-
+//正则表达式验证银行卡是否合法
++ (BOOL)isValidateBankNumber:(NSString *)number;
 
 + (NSString*)getCurrentTimesWithFormat:(NSString *)formatStr;
 @end
