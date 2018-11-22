@@ -129,6 +129,10 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTMineCenterMessage  @"MineCenterMessage"
 #define BTTMineCenterVersion  @"MineCenterVersion"
 
+// 账号缓存key
+
+#define BTTCacheAccountName   @"BTTCacheAccountName"
+
 
 /*********************************************API********************************************************/
 

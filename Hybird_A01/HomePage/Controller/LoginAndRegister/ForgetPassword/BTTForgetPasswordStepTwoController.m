@@ -27,6 +27,10 @@
     [self loadMainData];
 }
 
+- (void)goToBack {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (void)setupCollectionView {
     [super setupCollectionView];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
