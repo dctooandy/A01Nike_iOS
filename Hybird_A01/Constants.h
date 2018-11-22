@@ -224,6 +224,10 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 // 短信状态修改
 
+#define BTTSmsOrder                  @"/subscription/smsOrder"
+
+// 邮件状态修改
+
 #define BTTEmailOrder                @"/subscription/emailOrder"
 
 /********************************************常用宏*********************************************************/

@@ -28,6 +28,7 @@
     [self setupCollectionView];
     [self setupElements];
     [self loadMainData];
+    
 }
 
 - (void)setupCollectionView {
@@ -51,6 +52,11 @@
     } else if (indexPath.row == self.sheetDatas.count) {
         BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
         cell.btnType = BTTPublicBtnTypeSave;
+        weakSelf(weakSelf);
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            strongSelf(strongSelf);
+            [strongSelf updateBookStatus];
+        };
         return cell;
     } else {
         BTTBookMessageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBookMessageCell" forIndexPath:indexPath];
@@ -63,6 +69,17 @@
         }
         cell.smsModifyModel = self.smsStatus;
         cell.emailModifyModel = self.emailStatus;
+        weakSelf(weakSelf);
+        cell.clickEventBlock = ^(id  _Nonnull value) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"BookMessage"];
+            strongSelf(strongSelf);
+            UISwitch *swich = (UISwitch *)value;
+            if (swich.tag == 1030) {
+                [strongSelf updateSmsStatusModelWithStats:swich.isOn indexPath:indexPath];
+            } else {
+                [strongSelf updateEmailStatusModelWithStats:swich.isOn indexPath:indexPath];
+            }
+        };
         return cell;
     }
 }

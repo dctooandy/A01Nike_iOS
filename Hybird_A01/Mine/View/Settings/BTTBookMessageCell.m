@@ -35,7 +35,7 @@
 - (IBAction)emailBook:(UISwitch *)sender {
     
     if (self.clickEventBlock) {
-        self.clickEventBlock(self.titleLabel.text);
+        self.clickEventBlock(sender);
     }
     
 }
@@ -43,7 +43,7 @@
 
 - (IBAction)messageBook:(UISwitch *)sender {
     if (self.clickEventBlock) {
-        self.clickEventBlock(self.titleLabel.text);
+        self.clickEventBlock(sender);
     }
 }
 
@@ -139,12 +139,12 @@
                 _smsModifyModel.specific_msg &&
                 _smsModifyModel.regards &&
                 _smsModifyModel.notify_promotions) {
-                [self.emailSwith setOn:YES];
+                [self.msmSwith setOn:YES];
             } else {
-                [self.emailSwith setOn:NO];
+                [self.msmSwith setOn:NO];
             }
         } else {
-            [self.emailSwith setOn:NO];
+            [self.msmSwith setOn:NO];
         }
     }
 }
