@@ -179,6 +179,11 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTCreditsLocal              @"/public/credits/local"
 
 #define BTTSelectedBankId            @"BTTSelectedBankId"
+// 获取游戏大厅列表
+
+#define BTTGamePlatforms             @"/A01/game/platforms"
+
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)  ([UIFont systemFontOfSize:X])

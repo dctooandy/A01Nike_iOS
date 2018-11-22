@@ -50,7 +50,11 @@
         [model.name isEqualToString:@"记录类型"] ||
         [model.name isEqualToString:@"时间"] ||
         [model.name isEqualToString:@"AG国际厅"] ||
-        [model.name isEqualToString:@"波音厅"]) {
+        [model.name isEqualToString:@"波音厅"] ||
+        [model.name isEqualToString:@"个人资料"] ||
+        [model.name isEqualToString:@"银行卡资料"] ||
+        [model.name isEqualToString:@"修改限红"] ||
+        [model.name isEqualToString:@"短信订阅"]) {
         self.rightConstants.constant = 46;
         self.mineArrowsType = BTTMineArrowsTypeNoHidden;
         self.textField.userInteractionEnabled = NO;

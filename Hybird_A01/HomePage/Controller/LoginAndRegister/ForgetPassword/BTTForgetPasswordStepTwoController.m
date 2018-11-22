@@ -58,7 +58,7 @@
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
             [strongSelf verifyCode:strongSelf.code account:strongSelf.account completeBlock:^(IVRequestResultModel *result, id response) {
-                if (result.code_http == 200) {
+                if (result.code_http == 200 && result.data[@"val"] && ![result.data[@"val"] isKindOfClass:[NSNull class]] ) {
                     BTTForgetPasswordStepThreeController *vc = [[BTTForgetPasswordStepThreeController alloc] init];
                     vc.accessID = result.data[@"val"];
                     vc.account = strongSelf.account;

@@ -31,10 +31,7 @@
     
     dispatch_async(queue, ^{
         // 追加任务1
-        for (int i = 0; i < 2; ++i) {
-            [NSThread sleepForTimeInterval:2];              // 模拟耗时操作
-            NSLog(@"1---%@",[NSThread currentThread]);      // 打印当前线程
-        }
+        [self loadGameshallList];
     });
     dispatch_async(queue, ^{
         // 追加任务2
@@ -50,6 +47,12 @@
             NSLog(@"3---%@",[NSThread currentThread]);      // 打印当前线程
         }
     });
+}
+
+- (void)loadGameshallList {
+    [IVNetwork sendRequestWithSubURL:BTTGamePlatforms paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+    }];
 }
 
 @end

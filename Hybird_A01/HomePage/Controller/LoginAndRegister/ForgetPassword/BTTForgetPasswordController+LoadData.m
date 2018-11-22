@@ -18,14 +18,18 @@
     [IVNetwork sendRequestWithSubURL:BTTVerifyCaptcha paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         [self hideLoading];
-        if (result.code_http == 200) {
-            NSString *base64Str = result.data[@"src"];
-            // 将base64字符串转为NSData
-            NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
-            // 将NSData转为UIImage
-            UIImage *decodedImage = [UIImage imageWithData: decodeData];
-            self.codeImage = decodedImage;
-            [self.collectionView reloadData];
+        if (result.code_http == 200 && result.data && ![result.data isKindOfClass:[NSNull class]]) {
+            if (result.data[@"src"] && ![result.data[@"src"] isKindOfClass:[NSNull class]]) {
+                NSString *base64Str = result.data[@"src"];
+                // 将base64字符串转为NSData
+                NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+                // 将NSData转为UIImage
+                UIImage *decodedImage = [UIImage imageWithData: decodeData];
+                self.codeImage = decodedImage;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.collectionView reloadData];
+                });
+            }
         }
     }];
 }
