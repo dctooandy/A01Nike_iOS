@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -79,6 +79,17 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" tag="6007" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YcX-jv-LND">
+                        <rect key="frame" x="270" y="77.5" width="80" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="cVD-A2-hZJ"/>
+                            <constraint firstAttribute="width" constant="80" id="qLB-Qg-71y"/>
+                        </constraints>
+                        <state key="normal" image="defaultCard"/>
+                        <connections>
+                            <action selector="setDefaultBtnClicked:" destination="gTV-IL-0wX" eventType="touchUpInside" id="fQf-9T-spO"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
@@ -90,6 +101,7 @@
                 <constraint firstItem="ckL-Ws-Y19" firstAttribute="leading" secondItem="JP5-YE-eQZ" secondAttribute="trailing" constant="5" id="E2C-Fk-kVv"/>
                 <constraint firstAttribute="trailing" secondItem="DqY-Xg-Csz" secondAttribute="trailing" constant="15" id="EDG-Vp-lxn"/>
                 <constraint firstItem="kEm-o8-uMt" firstAttribute="centerY" secondItem="OH1-Ca-XIR" secondAttribute="centerY" id="LKh-1N-idf"/>
+                <constraint firstItem="YcX-jv-LND" firstAttribute="centerY" secondItem="ckL-Ws-Y19" secondAttribute="centerY" id="Mdk-B4-SSC"/>
                 <constraint firstItem="gxe-PU-59k" firstAttribute="leading" secondItem="JP5-YE-eQZ" secondAttribute="trailing" constant="8" id="QbX-ei-sro"/>
                 <constraint firstItem="cuK-g8-afn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="THJ-Ra-xtc"/>
                 <constraint firstItem="i9h-gI-u3b" firstAttribute="top" secondItem="gxe-PU-59k" secondAttribute="bottom" constant="15" id="Wh3-e5-uVr"/>
@@ -100,6 +112,7 @@
                 <constraint firstItem="Th4-ub-dmv" firstAttribute="top" secondItem="i9h-gI-u3b" secondAttribute="bottom" constant="18" id="lGS-da-ncM"/>
                 <constraint firstItem="ckL-Ws-Y19" firstAttribute="centerY" secondItem="JP5-YE-eQZ" secondAttribute="centerY" id="mFX-Ot-8uq"/>
                 <constraint firstItem="OH1-Ca-XIR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="pNF-iQ-WKM"/>
+                <constraint firstItem="YcX-jv-LND" firstAttribute="trailing" secondItem="DqY-Xg-Csz" secondAttribute="trailing" constant="-10" id="r72-Q7-LOn"/>
                 <constraint firstItem="gxe-PU-59k" firstAttribute="top" secondItem="ckL-Ws-Y19" secondAttribute="bottom" constant="10" id="urZ-hM-HSP"/>
                 <constraint firstItem="Th4-ub-dmv" firstAttribute="leading" secondItem="JP5-YE-eQZ" secondAttribute="trailing" constant="5" id="w93-j9-zvx"/>
             </constraints>
@@ -109,17 +122,22 @@
                 <outlet property="adressLabel" destination="Th4-ub-dmv" id="tnS-bD-JGl"/>
                 <outlet property="bankIcon" destination="JP5-YE-eQZ" id="yAm-Ps-5SW"/>
                 <outlet property="bankNameLabel" destination="ckL-Ws-Y19" id="eQj-OD-mpl"/>
+                <outlet property="cardBgImageView" destination="DqY-Xg-Csz" id="zXw-xi-0AL"/>
                 <outlet property="cardNoLabel" destination="cuK-g8-afn" id="cy0-6n-K05"/>
                 <outlet property="cardNumLabel" destination="i9h-gI-u3b" id="tFC-rj-lR9"/>
                 <outlet property="classLabel" destination="gxe-PU-59k" id="9JI-l8-63e"/>
+                <outlet property="deleteBtn" destination="OH1-Ca-XIR" id="dtM-vu-usv"/>
+                <outlet property="modifyBtn" destination="kEm-o8-uMt" id="DTj-95-M84"/>
+                <outlet property="setDefaultBtn" destination="YcX-jv-LND" id="NXj-SK-fhQ"/>
             </connections>
-            <point key="canvasLocation" x="128.80000000000001" y="122.78860569715144"/>
+            <point key="canvasLocation" x="128.5" y="122"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="card_bg" width="345" height="169"/>
-        <image name="card_ccb" width="19.5" height="20"/>
+        <image name="card_ccb" width="19" height="20"/>
         <image name="card_delete" width="20" height="20"/>
         <image name="card_edit" width="20" height="20"/>
+        <image name="defaultCard" width="92" height="20"/>
     </resources>
 </document>

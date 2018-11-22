@@ -14,7 +14,7 @@
 
 
 - (void)loadMainData {
-    NSArray *names = @[@"原绑定银行卡",@"6**********8233",@"核对原来绑定银行卡",@"输入绑定的银行卡号"];
+    NSArray *names = @[@"原绑定银行卡",@"获取中...",@"核对原来绑定银行卡",@"输入绑定的银行卡号"];
     for (NSString *name in names) {
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;

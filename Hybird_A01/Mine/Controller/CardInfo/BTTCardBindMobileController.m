@@ -31,14 +31,13 @@
     headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 220);
     
     UIImageView *iconView = [UIImageView new];
+    iconView.image = [UIImage imageNamed:@"phone"];
     [headerView addSubview:iconView];
     [iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.height.offset(57);
         make.centerY.equalTo(headerView.mas_centerY).offset(-20);
         make.centerX.equalTo(headerView.mas_centerX);
     }];
-    iconView.backgroundColor = [UIColor redColor];
-    
     UILabel *nameLabel = [UILabel new];
     [headerView addSubview:nameLabel];
     [nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -64,17 +63,19 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+    cell.btn.enabled = YES;
+    cell.buttonType = BTTButtonTypeAddBankCard;
+    weakSelf(weakSelf)
+    cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+        BTTBindingMobileController *vc = [BTTBindingMobileController new];
+        vc.mobileCodeType = weakSelf.mobileCodeType;
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    };
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
-    NSLog(@"%zd", indexPath.item);
-    if (indexPath.item == 0) {
-        BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource

@@ -9,7 +9,7 @@
 #import "BTTUnBindingMobileNoticeController.h"
 #import "BTTUnBindingHeaderCell.h"
 #import "BTTUnBindingBtnCell.h"
-
+#import "BTTBindingMobileController.h"
 @interface BTTUnBindingMobileNoticeController ()<BTTElementsFlowLayoutDelegate>
 
 @end
@@ -26,7 +26,7 @@
     [super setupCollectionView];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTUnBindingHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTUnBindingHeaderCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTChangeMobileSuccessBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTChangeMobileSuccessBtnCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTUnBindingBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTUnBindingBtnCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -41,11 +41,15 @@
         BTTUnBindingBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTUnBindingBtnCell" forIndexPath:indexPath];
         return cell;
     }
-    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 1) {
+        BTTBindingMobileController *vc = [BTTBindingMobileController new];
+        vc.mobileCodeType = self.mobileCodeType;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource

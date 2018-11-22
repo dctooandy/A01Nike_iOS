@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTVerifyTypeSelectController : BTTCollectionViewController
 
-@property (nonatomic, assign) BTTMobileCodeType codeType;
+@property (nonatomic, assign) BTTSafeVerifyType verifyType;
 
 @end
 

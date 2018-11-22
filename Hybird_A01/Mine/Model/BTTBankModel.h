@@ -49,6 +49,8 @@
 @property (assign, nonatomic) BOOL isDefault;
 /** 0 银行，1 比特币 */
 @property (assign, nonatomic) BOOL isBTC;
+/** 9 正在审核 */
+@property (assign, nonatomic) NSInteger flag;
 /** 省份 */
 @property (copy, nonatomic) NSString *province;
 /** 城市 */
@@ -59,12 +61,11 @@
 @property (copy, nonatomic) NSString *banklogo;
 /** 背景图 */
 @property (copy, nonatomic) NSString *bankimage;
-
-
 /** 比特币汇率 */
 @property (copy, nonatomic) NSString *btcrate;
 /** 比特币金额 */
 @property (copy, nonatomic) NSString *btcamount;
 /** 获取比特币汇率返回过来的 */
 @property (copy, nonatomic) NSString *uuid;
+
 @end

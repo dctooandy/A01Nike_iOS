@@ -12,8 +12,8 @@
 #import "BTTMeMainModel.h"
 #import "BTTAddCardBtnsCell.h"
 #import <BRPickerView/BRPickerView.h>
-
-
+#import "BTTCardInfosController.h"
+#import "BTTChangeMobileSuccessController.h"
 @interface BTTAddCardController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, strong) BRProvinceModel *provinceModel;
@@ -24,10 +24,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (self.addCardType == BTTAddCardTypeUpdate) {
-        self.title = @"修改银行卡";
-    } else {
-        self.title = @"添加银行卡";
+    switch (self.addCardType) {
+        case BTTSafeVerifyTypeMobileChangeBankCard:
+        case BTTSafeVerifyTypeHumanChangeBankCard:
+            self.title = @"修改银行卡";
+            break;
+        default:
+            self.title = @"添加银行卡";
+            break;
     }
     [self setupCollectionView];
     [self loadMainData];
@@ -171,8 +175,8 @@
         [MBProgressHUD showError:@"请选择卡片类型" toView:self.view];
         return;
     }
-    if (cardNumberTF.text.length == 0) {
-        [MBProgressHUD showError:@"请输入正确的卡号" toView:self.view];
+    if (![PublicMethod isValidateBankNumber:cardNumberTF.text]) {
+        [MBProgressHUD showError:@"银行卡号必须为16-21位数字" toView:self.view];
         return;
     }
     if (provinceTF.text.length == 0) {
@@ -199,21 +203,57 @@
     if (setDefaultCard) {
         params[@"save_default"] = @(self.cardCount + 1);
     }
+    NSString *url = nil;
+    NSString *message = nil;
+    BOOL isUpdate = NO;
+    switch (self.addCardType) {
+        case BTTSafeVerifyTypeNormalAddBankCard:
+        case BTTSafeVerifyTypeMobileAddBankCard:
+        case BTTSafeVerifyTypeMobileBindAddBankCard:
+            url = @"public/bankcard/addAuto";
+            message = @"添加成功!";
+            break;
+        case BTTSafeVerifyTypeHumanAddBankCard:
+            url = @"public/bankcard/add";
+            message = @"添加成功!";
+            break;
+        case BTTSafeVerifyTypeMobileChangeBankCard:
+        case BTTSafeVerifyTypeMobileBindChangeBankCard:
+            isUpdate = YES;
+            url = @"public/bankcard/updateAuto";
+            message = @"修改成功!";
+            break;
+        case BTTSafeVerifyTypeHumanChangeBankCard:
+            isUpdate = YES;
+            url = @"public/bankcard/update";
+            message = @"修改成功!";
+            break;
+        default:
+            break;
+    }
+    if (isUpdate) {
+        params[@"customer_bank_id"] = [[NSUserDefaults standardUserDefaults] valueForKey:BTTSelectedBankId];
+    }
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [BTTHttpManager addBankCardWithParams:params.copy completion:^(IVRequestResultModel *result, id response) {
+    [BTTHttpManager updateBankCardWithUrl:url params:params.copy completion:^(IVRequestResultModel *result, id response) {
         [MBProgressHUD hideHUDForView:self.view animated:NO];
         weakSelf(weakSelf)
         if (result.status) {
-            [MBProgressHUD showSuccess:@"添加成功!" toView:nil];
-            for (UIViewController *vc in self.navigationController.viewControllers) {
-                if ([vc isKindOfClass:[NSClassFromString(@"BTTCardInfosController") class]]) {
-                    [self.navigationController popToViewController:vc animated:YES];
-                    break;
-                }
-            }
+            BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+            vc.mobileCodeType = self.addCardType;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         } else {
             [MBProgressHUD showError:result.message toView:weakSelf.view];
         }
     }];
+}
+- (void)goToBack
+{
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[BTTCardInfosController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 @end

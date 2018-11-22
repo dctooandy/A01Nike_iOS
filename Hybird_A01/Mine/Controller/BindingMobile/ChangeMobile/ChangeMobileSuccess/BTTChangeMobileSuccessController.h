@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTChangeMobileSuccessController : BTTCollectionViewController
-
+@property (nonatomic, assign) BTTSafeVerifyType mobileCodeType;
 @end
 
 NS_ASSUME_NONNULL_END

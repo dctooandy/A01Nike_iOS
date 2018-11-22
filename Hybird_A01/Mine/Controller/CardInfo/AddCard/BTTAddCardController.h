@@ -8,16 +8,10 @@
 
 #import "BTTCollectionViewController.h"
 
-typedef enum {
-    BTTAddCardTypeNew,
-    BTTAddCardTypeUpdate
-}BTTAddCardType;
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTAddCardController : BTTCollectionViewController
-
-@property (nonatomic, assign) BTTAddCardType addCardType;
+@property (nonatomic, assign) BTTSafeVerifyType addCardType;
 @property (nonatomic, assign) NSInteger cardCount;
 @end
 
