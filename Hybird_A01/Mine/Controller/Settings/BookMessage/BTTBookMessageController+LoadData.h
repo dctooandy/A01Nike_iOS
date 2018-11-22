@@ -15,6 +15,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadMainData;
 
+- (void)updateBookStatus;
+
+- (void)updateSmsStatusModelWithStats:(BOOL)isON indexPath:(NSIndexPath *)indexPath;
+
+- (void)updateEmailStatusModelWithStats:(BOOL)isON indexPath:(NSIndexPath *)indexPath;
+
 @end
 
 NS_ASSUME_NONNULL_END

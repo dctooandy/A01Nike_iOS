@@ -36,7 +36,9 @@
 - (void)publicBtnEnableNotification:(NSNotification *)notifi {
     if ([notifi.object isEqualToString:@"PTTransfer"]) {
         self.btn.enabled = YES;
-    }  else {
+    } else if ([notifi.object isEqualToString:@"BookMessage"]) {
+        self.btn.enabled = YES;
+    } else {
         self.btn.enabled = YES;
     }
     
@@ -45,7 +47,9 @@
 - (void)publicBtnDisableNotification:(NSNotification *)notifi {
     if ([notifi.object isEqualToString:@"PTTransfer"]) {
         self.btn.enabled = NO;
-    } else {
+    } else if ([notifi.object isEqualToString:@"BookMessage"]) {
+        self.btn.enabled = NO;
+    }  else {
         self.btn.enabled = NO;
     }
     
