@@ -65,6 +65,8 @@
         [self.btn setTitle:@"完成" forState:UIControlStateNormal];
     } else if (btnType == BTTPublicBtnTypeNext) {
         [self.btn setTitle:@"下一步" forState:UIControlStateNormal];
+    } else if (btnType == BTTPublicBtnTypeSave) {
+        [self.btn setTitle:@"保存" forState:UIControlStateNormal];
     }
 }
 

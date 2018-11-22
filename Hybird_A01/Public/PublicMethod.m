@@ -602,6 +602,16 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     return newdate;
 }
 
++ (NSDate *)returnTheDayBeforeOneWeekWithDate:(NSDate *)date {
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *adcomps = [[NSDateComponents alloc] init];
+    [adcomps setYear:0];
+    [adcomps setMonth:0];
+    [adcomps setDay:-7];
+    NSDate *newdate = [calendar dateByAddingComponents:adcomps toDate:date options:0];
+    return newdate;
+}
+
 #pragma mark - 私有方法
 + (NSInteger)ordinality:(NSDate *)date_ ordinalitySign:(NSCalendarUnit)ordinalitySign_
 {

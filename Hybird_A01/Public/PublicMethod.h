@@ -128,6 +128,9 @@ NS_ASSUME_NONNULL_BEGIN
 //当前时间三个月后的时间
 + (NSDate *)returnTheDayAfterThreeMouthWithDate:(NSDate *)date;
 
+// 某个时间一个星期之前的时间
++ (NSDate *)returnTheDayBeforeOneWeekWithDate:(NSDate *)date;
+
 
 + (UIViewController *)mostFrontViewController;
 
