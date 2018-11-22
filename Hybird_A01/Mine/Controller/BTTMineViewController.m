@@ -86,6 +86,7 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork userInfo]) {
+        self.totalAmount = @"-";
         [self loadBindStatus];
         [self loadTotalAvailableData];
     }
@@ -116,6 +117,8 @@
             BTTMeHeaderLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeHeaderLoginCell" forIndexPath:indexPath];
             cell.noticeStr = homeVC.noticeStr.length ? homeVC.noticeStr : @"";
             cell.totalAmount = self.totalAmount;
+            cell.nameLabel.text = [IVNetwork userInfo].loginName;
+            cell.vipLevelLabel.text = [NSString stringWithFormat:@"VIP%@",@([IVNetwork userInfo].customerLevel)];
             weakSelf(weakSelf);
             cell.accountBlanceBlock = ^{
                 strongSelf(strongSelf);
@@ -262,6 +265,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + self.mainDataThree.count  + 5) {
         [BTTUserStatusManager logoutSuccess];
+        self.totalAmount = @"-";
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 7) {
         BTTSettingsController *vc = [[BTTSettingsController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];

@@ -11,6 +11,8 @@
 #import "BTTAccountBlanceCell.h"
 #import "BTTAccountBlanceHiddenCell.h"
 #import "BTTAccountBalanceController+LoadData.h"
+#import "BTTGamesHallModel.h"
+#import "BTTMeMainModel.h"
 
 @interface BTTAccountBalanceController ()<BTTElementsFlowLayoutDelegate>
 
@@ -24,9 +26,10 @@
     [super viewDidLoad];
     self.title = @"账户余额";
     self.amount = @"-";
+    self.localAmount = @"-";
+    self.hallAmount = @"-";
     [self setupCollectionView];
     [self setupElements];
-    [self loadLocalAmount];
     [self loadGamesListAndGameAmount];
 }
 
@@ -45,13 +48,22 @@
     if (indexPath.row == 0) {
         BTTAccountBlanceHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAccountBlanceHeaderCell" forIndexPath:indexPath];
         cell.totalLabel.text = self.amount;
+        weakSelf(weakSelf);
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            strongSelf(strongSelf);
+            [strongSelf loadTransferAllMoneyToLocal];
+        };
         return cell;
     } else if (indexPath.row == 1 || indexPath.row == 2) {
+        BTTMeMainModel *model = self.sheetDatas.count ? self.sheetDatas[indexPath.row - 1] : nil;
         BTTAccountBlanceCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAccountBlanceCell" forIndexPath:indexPath];
+        cell.model = model;
         if (indexPath.row == 1) {
             cell.mineArrowsType = BTTMineArrowsTypeHidden;
+            cell.amountLabel.text = [NSString stringWithFormat:@"¥ %@",self.localAmount];
         } else {
             cell.mineArrowsType = BTTMineArrowsTypeNoHidden;
+            cell.amountLabel.text = [NSString stringWithFormat:@"¥ %@",self.hallAmount];
         }
         if (self.isShowHidden) {
             cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeUp;
@@ -61,6 +73,8 @@
         return cell;
     } else {
         BTTAccountBlanceHiddenCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAccountBlanceHiddenCell" forIndexPath:indexPath];
+        BTTGamesHallModel *model = self.games[indexPath.row - 3];
+        cell.model = model;
         return cell;
     }
 }
@@ -113,7 +127,7 @@
     }
     NSInteger count = 0;
     if (self.isShowHidden) {
-        count = 14;
+        count = 3 + self.games.count;
     } else {
         count = 3;
     }

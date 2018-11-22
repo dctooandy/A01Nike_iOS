@@ -8,9 +8,13 @@
 
 #import "BTTBaseCollectionViewCell.h"
 
+@class BTTGamesHallModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTAccountBlanceHiddenCell : BTTBaseCollectionViewCell
+
+@property (nonatomic, strong) BTTGamesHallModel *model;
 
 @end
 
