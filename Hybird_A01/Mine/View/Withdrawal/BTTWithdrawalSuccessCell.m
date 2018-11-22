@@ -10,8 +10,6 @@
 
 @interface BTTWithdrawalSuccessCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *amountLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
 
 @end
@@ -21,9 +19,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.backgroundColor = [UIColor colorWithHexString:@"212229"];
-    NSString *noticeStr = @"尊敬的客户gtest1112, 您的取款已经提交成功!";
+    NSString *noticeStr = [NSString stringWithFormat:@"尊敬的客户%@, 您的取款已经提交成功!",[IVNetwork userInfo].loginName];
     NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:noticeStr];
-    NSRange range = [noticeStr rangeOfString:@"gtest1112"];
+    NSRange range = [noticeStr rangeOfString:[IVNetwork userInfo].loginName];
     [attstr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"51abfb"]} range:range];
     self.noticeLabel.attributedText = attstr;
 }

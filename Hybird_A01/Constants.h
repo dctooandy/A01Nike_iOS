@@ -187,6 +187,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTSelectedBankId            @"BTTSelectedBankId"
 #define BTTCacheBankListKey          @"BTTCacheBankListKey"
+#define BTTCacheBTCRateKey           @"BTTCacheBTCRateKey"
 // 获取游戏大厅列表
 
 #define BTTGamePlatforms             @"/A01/game/platforms"

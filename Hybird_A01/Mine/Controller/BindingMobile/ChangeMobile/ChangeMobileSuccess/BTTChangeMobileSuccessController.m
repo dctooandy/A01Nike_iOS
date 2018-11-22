@@ -17,7 +17,6 @@
 @implementation BTTChangeMobileSuccessController
 
 - (void)viewDidLoad {
-    self.hideBackItem = YES;
     [super viewDidLoad];
     [self setupCollectionView];
     [self setupElements];
@@ -103,6 +102,9 @@
     });
 }
 
-
+- (void)goToBack
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 
 @end

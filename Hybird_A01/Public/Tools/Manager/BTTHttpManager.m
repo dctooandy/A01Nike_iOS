@@ -127,4 +127,29 @@
 {
     [self sendRequestWithUrl:@"users/updatePhone" paramters:params completionBlock:completion];
 }
++ (void)fetchBTCRateWithUseCache:(BOOL)useCache
+{
+    NSDictionary *params = @{@"amount":@"1",@"querytype" : @"01"};
+    NSString *url = @"public/payment/btcRate";
+    weakSelf(weakSelf)
+    if (useCache) {
+        [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+            [weakSelf fetchBTCRateResult:result];
+        }];
+    } else {
+        [self sendRequestWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+            [weakSelf fetchBTCRateResult:result];
+        }];
+    }
+}
++ (void)fetchBTCRateResult:(IVRequestResultModel *)result {
+    if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"btcrate"]) {
+        NSString *rate = [result.data valueForKey:@"btcrate"];
+        [[NSUserDefaults standardUserDefaults] setValue:rate forKey:BTTCacheBTCRateKey];
+    }
+}
++ (void)submitWithdrawWithUrl:(NSString *)url params:(NSDictionary *)params completion:(IVRequestCallBack)completion
+{
+    [self sendRequestWithUrl:url paramters:params completionBlock:completion];
+}
 @end

@@ -16,7 +16,7 @@
 }
 + (void)updateCacheNormal
 {
-    
+    [BTTHttpManager fetchBTCRateWithUseCache:NO];
 }
 + (void)updateCacheNeedLoginRequest
 {

@@ -45,4 +45,8 @@
 + (void)deleteBankOrBTC:(BOOL)isBTC isAuto:(BOOL)isAuto completion:(IVRequestCallBack)completion;
 //人工服务更换手机号
 + (void)updatePhoneHumanWithParams:(NSDictionary *)params completion:(IVRequestCallBack)completion;
+//获取比特币汇率
++ (void)fetchBTCRateWithUseCache:(BOOL)useCache;
+//取款
++ (void)submitWithdrawWithUrl:(NSString *)url params:(NSDictionary *)params completion:(IVRequestCallBack)completion;
 @end

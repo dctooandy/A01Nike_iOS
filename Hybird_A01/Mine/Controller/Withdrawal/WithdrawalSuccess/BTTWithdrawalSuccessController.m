@@ -35,11 +35,18 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    weakSelf(weakSelf)
     if (indexPath.row == 0) {
         BTTWithdrawalSuccessCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalSuccessCell" forIndexPath:indexPath];
+        cell.amountLabel.text = [PublicMethod getMoneyString:[self.amount doubleValue]];
         return cell;
     } else {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        cell.buttonType = BTTButtonTypeMemberCenter;
+        cell.btn.enabled = YES;
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        };
         return cell;
     }
 }

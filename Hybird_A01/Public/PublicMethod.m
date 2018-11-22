@@ -802,6 +802,16 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     NSPredicate *num = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numberRegex];
     return [num evaluateWithObject:number];
 }
+/** 转换货币字符串 */
++ (NSString *)getMoneyString:(double)money {
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    numberFormatter.roundingMode = NSNumberFormatterRoundFloor;
+    numberFormatter.maximumFractionDigits = 2;
+    // 设置格式
+    [numberFormatter setPositiveFormat:@"###,##0.00;"];
+    NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:money]];
+    return formattedNumberString;
+}
 + (NSString*)getCurrentTimesWithFormat:(NSString *)formatStr {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制

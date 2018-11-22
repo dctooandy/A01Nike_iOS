@@ -47,7 +47,7 @@
         return cell;
     } else {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
-        cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+        cell.textField.keyboardType = UIKeyboardTypeASCIICapable;
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
         if (indexPath.row == self.sheetDatas.count - 1) {
