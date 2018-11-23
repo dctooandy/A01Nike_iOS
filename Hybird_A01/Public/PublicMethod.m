@@ -841,4 +841,53 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     return formatString;
 }
 
+
++ (NSString *)getLastWeekTime {
+    NSDate *nowDate = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *comp = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday  fromDate:nowDate];
+    // 获取今天是周几
+    NSInteger weekDay = [comp weekday];
+    // 获取几天是几号
+    NSInteger day = [comp day];
+    NSLog(@"%ld----%ld",(long)weekDay,(long)day);
+    
+    // 计算当前日期和本周的星期一和星期天相差天数
+    long firstDiff,lastDiff;
+    //    weekDay = 1; weekDay == 1 == 周日
+    if (weekDay == 1)
+    {
+        firstDiff = -6;
+        lastDiff = 0;
+    }
+    else
+    {
+        firstDiff = [calendar firstWeekday] - weekDay + 1;
+        lastDiff = 8 - weekDay;
+    }
+    NSLog(@"firstDiff: %ld   lastDiff: %ld",firstDiff,lastDiff);
+    
+    // 在当前日期(去掉时分秒)基础上加上差的天数
+    NSDateComponents *baseDayComp = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay  fromDate:nowDate];
+    
+    //获取周一日期
+    [baseDayComp setDay:day + firstDiff - 7];
+    NSDate *firstDayOfWeek = [calendar dateFromComponents:baseDayComp];
+    
+    //获取周末日期
+    [baseDayComp setDay:day + lastDiff - 7];
+    NSDate *lastDayOfWeek = [calendar dateFromComponents:baseDayComp];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY-MM-dd"];
+    NSString *firstDay = [NSString stringWithFormat:@"%@ 00:00:00",[formatter stringFromDate:firstDayOfWeek]];
+    NSString *lastDay = [NSString stringWithFormat:@"%@ 23:59:59",[formatter stringFromDate:lastDayOfWeek]];
+    NSLog(@"%@=======%@",firstDay,lastDay);
+    
+    NSString *dateStr = [NSString stringWithFormat:@"%@||%@",firstDay,lastDay];
+    
+    return dateStr;
+    
+}
+
 @end

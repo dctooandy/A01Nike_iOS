@@ -33,7 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *xm_type;
 
-@property (nonatomic, copy) NSString *game_name;
+@property (nonatomic, copy) NSString *name;
+
+@property (nonatomic, assign) BOOL isSelect;
 
 @end
 

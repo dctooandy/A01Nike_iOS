@@ -178,6 +178,8 @@ NS_ASSUME_NONNULL_BEGIN
  @return 转换成功的数值
  */
 + (NSString *)transferNumToThousandFormat:(CGFloat)num;
+
++ (NSString *)getLastWeekTime;
 @end
 
 NS_ASSUME_NONNULL_END
