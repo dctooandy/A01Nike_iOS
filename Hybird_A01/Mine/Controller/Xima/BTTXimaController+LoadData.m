@@ -30,6 +30,7 @@
             }
         }
         [self loadXimaCurrentList:ximaType group:group];
+        [self loadHistoryData:ximaType];
     });
 }
 
@@ -44,19 +45,26 @@
                     if (result.data[@"other"][@"list"] && [result.data[@"other"][@"list"] isKindOfClass:[NSArray class]]) {
                         BTTXimaTotalModel *model = [BTTXimaTotalModel yy_modelWithDictionary:result.data[@"other"]];
                         self.otherModel = model;
+                        self.historyListType = BTTXimaHistoryListTypeData;
+                    } else {
+                        self.historyListType = BTTXimaHistoryListTypeNoData;
                     }
                 }
                 if (result.data[@"valid"] && [result.data[@"valid"] isKindOfClass:[NSDictionary class]]) {
                     if (result.data[@"valid"][@"list"] && [result.data[@"valid"][@"list"] isKindOfClass:[NSArray class]]) {
                         BTTXimaTotalModel *model = [BTTXimaTotalModel yy_modelWithDictionary:result.data[@"valid"]];
+                        for (BTTXimaItemModel *itemModel in model.list) {
+                            itemModel.isSelect = YES;
+                        }
                         self.validModel = model;
+                        self.currentListType = BTTXimaCurrentListTypeData;
+                    } else {
+                        self.currentListType = BTTXimaCurrentListTypeNoData;
                     }
                 }
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.collectionView reloadData];
-            });
         }
+        [self setupElements];
     }];
 }
 
@@ -86,9 +94,59 @@
     [params setObject:ximaType forKey:@"xm_type"];
     [params setObject:@(0) forKey:@"delete_flag"];
     [params setObject:@(2) forKey:@"flag"];
-    NSString *endTime = [PublicMethod timeIntervalSince1970];
+    NSString *dateStr = [PublicMethod getLastWeekTime];
+    NSString *startStr = [dateStr componentsSeparatedByString:@"||"][0];
+    NSString *endStr = [dateStr componentsSeparatedByString:@"||"][1];
+    [params setObject:startStr forKey:@"end_date_begin"];
+    [params setObject:endStr forKey:@"end_date_end"];
+    [params setObject:startStr forKey:@"start_date_begin"];
+    [params setObject:endStr forKey:@"start_date_end"];
+    [params setObject:@(2000) forKey:@"pageSize"];
+    
     [IVNetwork sendRequestWithSubURL:BTTXmHistoryList paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        
+        NSLog(@"%@",response);
+        if (result.code_http == 200) {
+            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
+                BTTXimaTotalModel *model = [BTTXimaTotalModel yy_modelWithDictionary:result.data];
+                self.histroyModel = model;
+                
+            }
+        }
+    }];
+}
+
+
+- (void)loadXimaBillOut {
+    [self showLoading];
+    NSString *xm_list = @"";
+    for (BTTXimaItemModel *itemModel in self.validModel.list) {
+        if (xm_list.length) {
+            if (itemModel.isSelect) {
+                 xm_list = [NSString stringWithFormat:@"%@;%@",xm_list,itemModel.xm_type];
+            }
+        } else {
+            if (itemModel.isSelect) {
+                xm_list = itemModel.xm_type;
+            }
+        }
+    }
+    if (!xm_list.length) {
+        [MBProgressHUD showError:@"请先选择结算的游戏" toView:nil];
+        return;
+    }
+    NSDictionary *params = @{@"xm_list":xm_list};
+    [IVNetwork sendRequestWithSubURL:BTTXimaBillOut paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+        [self hideLoading];
+        if (result.code_http == 200) {
+            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
+                
+            }
+        } else {
+            if (result.message.length) {
+                [MBProgressHUD showError:result.message toView:nil];
+            }
+        }
     }];
 }
 
@@ -104,19 +162,6 @@
 
 - (void)setXms:(NSMutableArray *)xms {
     objc_setAssociatedObject(self, @selector(xms), xms, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NSMutableArray *)historys {
-    NSMutableArray *historys = objc_getAssociatedObject(self, _cmd);
-    if (!historys) {
-        historys = [NSMutableArray array];
-        [self setHistorys:historys];
-    }
-    return historys;
-}
-
-- (void)setHistorys:(NSMutableArray *)historys {
-    objc_setAssociatedObject(self, @selector(historys), historys, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 

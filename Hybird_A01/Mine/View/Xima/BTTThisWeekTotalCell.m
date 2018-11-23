@@ -7,6 +7,14 @@
 //
 
 #import "BTTThisWeekTotalCell.h"
+#import "BTTXimaItemModel.h"
+
+@interface BTTThisWeekTotalCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
+
+
+@end
 
 @implementation BTTThisWeekTotalCell
 
@@ -14,6 +22,11 @@
     [super awakeFromNib];
     self.backgroundColor = [UIColor colorWithHexString:@"212229"];
     self.mineSparaterType = BTTMineSparaterTypeNone;
+}
+
+- (void)setModel:(BTTXimaTotalModel *)model {
+    _model = model;
+    self.totalLabel.text = [NSString stringWithFormat:@"%@元",[PublicMethod transferNumToThousandFormat:model.totalAmount.floatValue]];
 }
 
 @end

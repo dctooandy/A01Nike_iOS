@@ -14,9 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *xms;
 
-@property (nonatomic, strong) NSMutableArray *historys;
 
 - (void)loadMainData;
+
+- (void)loadXimaBillOut;
+
 
 @end
 
