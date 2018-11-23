@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UIButton *sendBtn;
 
+- (void)countDown;
+- (void)cancelCountDown;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -200,7 +200,12 @@
             vc.verifyType = BTTSafeVerifyTypeMobileAddBankCard;
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
+            //2018-11-23 nike说按线上标准直接跳转绑定页面
+//            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
+//            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBankCard;
+//            [self.navigationController pushViewController:vc animated:YES];
+            [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+            BTTBindingMobileController *vc = [BTTBindingMobileController new];
             vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBankCard;
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -220,7 +225,13 @@
             vc.verifyType = BTTSafeVerifyTypeMobileAddBTCard;
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
+            //2018-11-23 nike说按线上标准直接跳转绑定页面
+//            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
+//            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
+//            [self.navigationController pushViewController:vc animated:YES];
+
+            [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+            BTTBindingMobileController *vc = [BTTBindingMobileController new];
             vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -237,7 +248,13 @@
         vc.mobileCodeType = BTTSafeVerifyTypeMobileChangeBankCard;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
-        BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
+        //2018-11-23 nike说按线上标准直接跳转绑定页面
+//        BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
+//        vc.mobileCodeType = BTTSafeVerifyTypeMobileBindChangeBankCard;
+//        [self.navigationController pushViewController:vc animated:YES];
+        
+        [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+        BTTBindingMobileController *vc = [BTTBindingMobileController new];
         vc.mobileCodeType = BTTSafeVerifyTypeMobileBindChangeBankCard;
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -264,9 +281,15 @@
             vc.mobileCodeType = selectModel.isBTC ? BTTSafeVerifyTypeMobileDelBTCard : BTTSafeVerifyTypeMobileDelBankCard;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         } else {
-            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
-            vc.mobileCodeType = selectModel.isBTC ? BTTSafeVerifyTypeMobileBindDelBTCard : BTTSafeVerifyTypeMobileBindDelBankCard;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
+            //2018-11-23 nike说按线上标准直接跳转绑定页面
+//            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
+//            vc.mobileCodeType = selectModel.isBTC ? BTTSafeVerifyTypeMobileBindDelBTCard : BTTSafeVerifyTypeMobileBindDelBankCard;
+//            [weakSelf.navigationController pushViewController:vc animated:YES];
+            
+            [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+            BTTBindingMobileController *vc = [BTTBindingMobileController new];
+            vc.mobileCodeType =  selectModel.isBTC ? BTTSafeVerifyTypeMobileBindDelBTCard : BTTSafeVerifyTypeMobileBindDelBankCard;;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     };
     NSString *title = @"要删除银行卡?";

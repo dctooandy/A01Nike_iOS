@@ -254,8 +254,21 @@
         }
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 4 + self.personalInfos.count + self.paymentDatas.count) {
-        BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        if (self.isCompletePersonalInfo) {
+            if ([IVNetwork userInfo].isBankBinded) {
+                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                [MBProgressHUD showMessagNoActivity:@"请先绑定银行卡" toView:nil];
+                BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        } else {
+            [MBProgressHUD showMessagNoActivity:@"请先完善个人信息" toView:nil];
+            BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
     } else if (indexPath.row == 6 + self.personalInfos.count + self.paymentDatas.count) {
         BTTPTTransferController *vc = [[BTTPTTransferController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
