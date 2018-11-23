@@ -65,6 +65,7 @@
     if (indexPath.row == 0) {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+        [cell.textField addTarget:self action:@selector(textBeginEditing:) forControlEvents:UIControlEventEditingDidBegin];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
         return cell;
@@ -73,7 +74,8 @@
         [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
-        cell.sendBtn.enabled = [IVNetwork userInfo].isPhoneBinded;
+        BOOL isUseRegPhone = (![IVNetwork userInfo].isPhoneBinded && [IVNetwork userInfo].phone.length != 0);
+        cell.sendBtn.enabled = isUseRegPhone || [IVNetwork userInfo].isPhoneBinded;
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf sendCode];
         };
@@ -141,6 +143,16 @@
         [self.collectionView reloadData];
     });
 }
+- (void)textBeginEditing:(UITextField *)textField
+{
+    if (textField == [self getPhoneTF]) {
+        if (![IVNetwork userInfo].isPhoneBinded && [IVNetwork userInfo].phone.length != 0) {
+            textField.text = @"";
+        }
+        [self getSendBtn].enabled = NO;
+        [[self getVerifyCell] cancelCountDown];
+    }
+}
 - (void)textChanged:(UITextField *)textField
 {
     if (textField == [self getPhoneTF]) {
@@ -176,16 +188,17 @@
 }
 - (UIButton *)getSendBtn
 {
+    return [self getVerifyCell].sendBtn;
+}
+- (BTTBindingMobileTwoCell *)getVerifyCell
+{
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
     BTTBindingMobileTwoCell *cell = (BTTBindingMobileTwoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    return cell.sendBtn;
+    return cell;
 }
 - (void)sendCode
 {
-    if (![IVNetwork userInfo].isPhoneBinded && ![PublicMethod isValidatePhone:[self getPhoneTF].text]) {
-        [MBProgressHUD showError:@"请输入正确的手机号" toView:self.view];
-        return;
-    }
+    [self.view endEditing:YES];
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"type"] = @"1";
     params[@"send_to"] = [self getPhoneTF].text;
@@ -205,7 +218,16 @@
             params[@"v_type"] = @"1";
             break;
     }
-    [IVNetwork sendRequestWithSubURL:@"verify/send" paramters:params.copy completionBlock:nil];
+    weakSelf(weakSelf)
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [IVNetwork sendRequestWithSubURL:@"verify/send" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        if (result.status) {
+            [[weakSelf getVerifyCell] countDown];
+        } else {
+            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }
+    }];
 }
 - (void)submitBind
 {
