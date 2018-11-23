@@ -35,14 +35,19 @@
 
 #pragma mark --------------------加载框-----------------------------------------
 - (void)showLoading {
-    if (self.hud) {
-        [self hideLoading];
-    }
-    self.hud = [MBProgressHUD showCustomView:nil toView:nil];
+    dispatch_main_async_safe((^{
+        if (self.hud) {
+            [self hideLoading];
+        }
+        self.hud = [MBProgressHUD showCustomView:nil toView:nil];
+    }));
+    
 }
 
 - (void)hideLoading {
-    [self.hud hideAnimated:NO];
+    dispatch_main_async_safe((^{
+        [self.hud hideAnimated:NO];
+    }));
 }
 
 @end

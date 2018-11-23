@@ -30,9 +30,6 @@ static const char *BTTNextGroupKey = "nextGroup";
     [self loadHeadersData];
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self showLoading];
-        });
         [self loadMainData];
     });
     
@@ -50,7 +47,6 @@ static const char *BTTNextGroupKey = "nextGroup";
     
     dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self setupElements];
-        [self hideLoading];
         [self endRefreshing];
         
     });
@@ -60,9 +56,6 @@ static const char *BTTNextGroupKey = "nextGroup";
     
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self showLoading];
-        });
         [self loadMainData];
     });
     
@@ -76,7 +69,6 @@ static const char *BTTNextGroupKey = "nextGroup";
     
     dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self setupElements];
-        [self hideLoading];
         [self endRefreshing];
     });
 }
@@ -139,9 +131,8 @@ static const char *BTTNextGroupKey = "nextGroup";
         url = BTTCallBackCustomAPI;
         [params setValue:phone forKey:@"phone_number"];
     }
-    [self showLoading];
     [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
-        [self hideLoading];
+    
         if (result.status) {
             [self showCallBackSuccessView];
         } else {
@@ -203,6 +194,9 @@ static const char *BTTNextGroupKey = "nextGroup";
                 }
             }
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
     }];
 }
 
@@ -239,6 +233,9 @@ static const char *BTTNextGroupKey = "nextGroup";
                 }
             }
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
     }];
 }
 
