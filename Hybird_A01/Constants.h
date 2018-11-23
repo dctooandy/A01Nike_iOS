@@ -239,6 +239,10 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTEmailOrder                @"/subscription/emailOrder"
 
+// 洗码接口
+
+#define BTTXimaBillOut               @"/public/xm/billout"
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)  ([UIFont systemFontOfSize:X])

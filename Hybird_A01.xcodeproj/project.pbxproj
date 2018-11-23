@@ -73,6 +73,10 @@
 		3A514E442186F3CB00B83881 /* BTTLastWeekCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A514E422186F3CB00B83881 /* BTTLastWeekCell.xib */; };
 		3A514E482186FCE800B83881 /* BTTXimaFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A514E462186FCE800B83881 /* BTTXimaFooterCell.m */; };
 		3A514E492186FCE800B83881 /* BTTXimaFooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A514E472186FCE800B83881 /* BTTXimaFooterCell.xib */; };
+		3A5F7A7A21A6C6BB00128E8B /* BTTXimaNoDataCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7A7821A6C6BB00128E8B /* BTTXimaNoDataCell.m */; };
+		3A5F7A7B21A6C6BB00128E8B /* BTTXimaNoDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7A7921A6C6BB00128E8B /* BTTXimaNoDataCell.xib */; };
+		3A5F7A7F21A6C86A00128E8B /* BTTXimaSingleBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7A7D21A6C86A00128E8B /* BTTXimaSingleBtnCell.m */; };
+		3A5F7A8021A6C86A00128E8B /* BTTXimaSingleBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7A7E21A6C86A00128E8B /* BTTXimaSingleBtnCell.xib */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -658,6 +662,12 @@
 		3A514E452186FCE800B83881 /* BTTXimaFooterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTXimaFooterCell.h; sourceTree = "<group>"; };
 		3A514E462186FCE800B83881 /* BTTXimaFooterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTXimaFooterCell.m; sourceTree = "<group>"; };
 		3A514E472186FCE800B83881 /* BTTXimaFooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTXimaFooterCell.xib; sourceTree = "<group>"; };
+		3A5F7A7721A6C6BB00128E8B /* BTTXimaNoDataCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTXimaNoDataCell.h; sourceTree = "<group>"; };
+		3A5F7A7821A6C6BB00128E8B /* BTTXimaNoDataCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTXimaNoDataCell.m; sourceTree = "<group>"; };
+		3A5F7A7921A6C6BB00128E8B /* BTTXimaNoDataCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTXimaNoDataCell.xib; sourceTree = "<group>"; };
+		3A5F7A7C21A6C86A00128E8B /* BTTXimaSingleBtnCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTXimaSingleBtnCell.h; sourceTree = "<group>"; };
+		3A5F7A7D21A6C86A00128E8B /* BTTXimaSingleBtnCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTXimaSingleBtnCell.m; sourceTree = "<group>"; };
+		3A5F7A7E21A6C86A00128E8B /* BTTXimaSingleBtnCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTXimaSingleBtnCell.xib; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -1555,6 +1565,12 @@
 				3A514E452186FCE800B83881 /* BTTXimaFooterCell.h */,
 				3A514E462186FCE800B83881 /* BTTXimaFooterCell.m */,
 				3A514E472186FCE800B83881 /* BTTXimaFooterCell.xib */,
+				3A5F7A7721A6C6BB00128E8B /* BTTXimaNoDataCell.h */,
+				3A5F7A7821A6C6BB00128E8B /* BTTXimaNoDataCell.m */,
+				3A5F7A7921A6C6BB00128E8B /* BTTXimaNoDataCell.xib */,
+				3A5F7A7C21A6C86A00128E8B /* BTTXimaSingleBtnCell.h */,
+				3A5F7A7D21A6C86A00128E8B /* BTTXimaSingleBtnCell.m */,
+				3A5F7A7E21A6C86A00128E8B /* BTTXimaSingleBtnCell.xib */,
 			);
 			path = Xima;
 			sourceTree = "<group>";
@@ -3116,6 +3132,7 @@
 				EAE89F19218C3ABD00C29393 /* LIVBackButton.nib in Resources */,
 				EAE89EFF218C3ABD00C29393 /* photo_original_sel@2x.png in Resources */,
 				EAE89ED5218C3ABD00C29393 /* LIVUserDefaultAvatar@2x.png in Resources */,
+				3A5F7A8021A6C86A00128E8B /* BTTXimaSingleBtnCell.xib in Resources */,
 				EAE89F0E218C3ABD00C29393 /* sentVoicePlaying3@2x.png in Resources */,
 				3AE1EAE92180034C0073A32D /* BTTCardInfoAddCell.xib in Resources */,
 				3A11ADFF2181B72700B1AFF4 /* BTTWithdrawalCardSelectCell.xib in Resources */,
@@ -3278,6 +3295,7 @@
 				EAE89F1B218C3ABD00C29393 /* LIVCollectionBoard.nib in Resources */,
 				EAE89ECA218C3ABD00C29393 /* LIVReceivedMessageBackground@3x.png in Resources */,
 				3AD9CF85216F482B00685B43 /* BTTHomePageDiscountHeaderCell.xib in Resources */,
+				3A5F7A7B21A6C6BB00128E8B /* BTTXimaNoDataCell.xib in Resources */,
 				EAE89F14218C3ABD00C29393 /* LIVChatFunctionBarColor.plist in Resources */,
 				EAE89F2A218C3ABD00C29393 /* LIVSatisfactionEvaluationItemCell.nib in Resources */,
 				EAE89EC9218C3ABD00C29393 /* LIVReceivedMessageBackground@2x.png in Resources */,
@@ -3416,6 +3434,7 @@
 				3AE1EB0E218047050073A32D /* BTTCardModifyCell.m in Sources */,
 				3A9E4C6E21A2542500E7D8C0 /* BTTModifyEmailController+LoadData.m in Sources */,
 				3AB0683D21A395EF00072FB7 /* BTTUnBindingHeaderCell.m in Sources */,
+				3A5F7A7A21A6C6BB00128E8B /* BTTXimaNoDataCell.m in Sources */,
 				3AB0686921A4F29B00072FB7 /* BTTPublicBtnCell.m in Sources */,
 				3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */,
 				3AAE81FA219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m in Sources */,
@@ -3587,6 +3606,7 @@
 				EA5F140E21A261BA004305A7 /* BTTHttpManager.m in Sources */,
 				3AC3FFA9219ACD48008AECCB /* BTTLoginOrRegisterViewController+UI.m in Sources */,
 				3A11AE4F2186A09700B1AFF4 /* BTTModifyLimitViewController.m in Sources */,
+				3A5F7A7F21A6C86A00128E8B /* BTTXimaSingleBtnCell.m in Sources */,
 				3A11ADF12181A1E200B1AFF4 /* BTTWithdrawalController.m in Sources */,
 				3AD9CF68216F314700685B43 /* BTTHomePageGamesCell.m in Sources */,
 				3A8F5172215F77A50069D1B3 /* BTTAdvertiseHelper.m in Sources */,

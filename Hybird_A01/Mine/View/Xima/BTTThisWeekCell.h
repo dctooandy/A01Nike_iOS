@@ -8,9 +8,21 @@
 
 #import "BTTBaseCollectionViewCell.h"
 
+@class BTTXimaItemModel;
+
+typedef enum {
+    BTTXimaThisWeekCellTypeUnSelect,     ///< 未选中
+    BTTXimaThisWeekCellTypeSelect,   ///< 选中
+    BTTXimaThisWeekCellTypeDisable     ///< 不可选
+}BTTXimaThisWeekCellType;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTThisWeekCell : BTTBaseCollectionViewCell
+
+@property (nonatomic, assign) BTTXimaThisWeekCellType thisWeekCellType;
+
+@property (nonatomic, strong) BTTXimaItemModel *model;
 
 @end
 
