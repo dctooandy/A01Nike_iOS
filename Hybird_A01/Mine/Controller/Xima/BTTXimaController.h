@@ -8,6 +8,8 @@
 
 #import "BTTCollectionViewController.h"
 
+typedef void(^CompleteBlock)(IVRequestResultModel *result, id response);
+
 @class BTTXimaTotalModel;
 
 typedef enum {
@@ -40,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BTTXimaHistoryListType historyListType;
 
 @property (nonatomic, assign) BTTXimaStatusType ximaStatusType;
+
+@property (nonatomic, copy) CompleteBlock completeBlock;
 
 @end
 

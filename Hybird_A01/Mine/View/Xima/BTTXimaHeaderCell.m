@@ -42,6 +42,10 @@
         self.btnOneType = BTTXimaHeaderBtnOneTypeLastWeekNormal;
         self.btnTwoType = BTTXimaHeaderBtnTwoTypeThisWeekSelect;
         [self thisWeekBtnClick:self.thisWeekBtn];
+    } else if ([sender.titleLabel.text isEqualToString:@"其它游戏厅"]) {
+        self.btnTwoType = BTTXimaHeaderBtnTwoTypeOtherSelect;
+        self.btnOneType = BTTXimaHeaderBtnOneTypeLastWeekNormal;
+        [self thisWeekBtnClick:self.thisWeekBtn];
     } else {
         self.thisWeekBtn.selected = NO;
         self.thisWeekArrow.hidden = !self.thisWeekBtn.selected;
@@ -75,6 +79,10 @@
         [self.lastWeekBtn setTitle:@"本周" forState:UIControlStateSelected];
     } else if (_btnOneType == BTTXimaHeaderBtnOneTypeLastWeekNormal) {
         [self.lastWeekBtn setTitle:@"上周" forState:UIControlStateNormal];
+    } else if (_btnOneType == BTTXimaHeaderBtnOneTypeOtherNormal) {
+        [self.lastWeekBtn setTitle:@"其它游戏厅" forState:UIControlStateNormal];
+    } else if (_btnOneType == BTTXimaHeaderBtnOneTypeOtherSelect) {
+        [self.lastWeekBtn setTitle:@"其它游戏厅" forState:UIControlStateSelected];
     }
 }
 
