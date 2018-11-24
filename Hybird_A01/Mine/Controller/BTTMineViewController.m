@@ -287,6 +287,14 @@
     } else if (indexPath.row == 5 + self.personalInfos.count + self.paymentDatas.count) {
         BTTXimaController *vc = [[BTTXimaController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 8) {
+        
+    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 9) {
+        [IVNetwork checkAppUpdate];
+    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 10) {
+        // 网络监测
+        [IVNetwork startCheckWithType:IVCheckNetworkTypeAll appWindow:[UIApplication sharedApplication].keyWindow detailBtnClickedBlock:^{
+        }];
     }
 }
 

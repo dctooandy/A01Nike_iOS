@@ -195,7 +195,12 @@ typedef enum {
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                     strongSelf(strongSelf);
                     if (button.tag == 1060) {
-                        
+                        BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                        [cell setBtnOneType:BTTXimaHeaderBtnOneTypeLastWeekNormal];
+                        [cell setBtnTwoType:BTTXimaHeaderBtnTwoTypeThisWeekSelect];
+                        strongSelf.ximaStatusType = BTTXimaStatusTypeNormal;
+                        strongSelf.thisWeekDataType = BTTXimaThisWeekTypeOther;
+                        [strongSelf setupElements];
                     } else if (button.tag == 1061) {
                         
                     }
