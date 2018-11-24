@@ -29,7 +29,12 @@
         case BTTSafeVerifyTypeMobileBindDelBankCard:
         case BTTSafeVerifyTypeMobileBindAddBTCard:
         case BTTSafeVerifyTypeMobileBindDelBTCard:
-            phoneTitle = @"待绑定手机号码";
+        case BTTSafeVerifyTypeBindMobile:{
+            phoneTitle = @"手机号码";
+            if (![IVNetwork userInfo].isPhoneBinded && [IVNetwork userInfo].phone.length != 0) {
+                phone = [IVNetwork userInfo].phone;
+            }
+        }
             break;
         default:
             phoneTitle = @"手机号码";
