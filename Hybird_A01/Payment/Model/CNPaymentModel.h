@@ -64,7 +64,7 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 @property (nonatomic, copy) NSString *postUrl;
 
 /// 推荐金额
-//- (NSArray<NSNumber *> *)prePayAmountArray;
+- (NSArray<NSNumber *> *)prePayAmountArray;
 /// 支付方式
-//- (NSArray<NSString *> *)payTypeArray;
+- (NSArray<NSString *> *)payTypeArray;
 @end
