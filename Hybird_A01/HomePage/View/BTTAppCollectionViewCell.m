@@ -29,7 +29,7 @@
 - (void)setModel:(BTTDownloadModel *)model {
     _model = model;
     if (model) {
-        [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.icon.path] placeholderImage:ImageNamed(@"")];
+        [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.icon.path] placeholderImage:ImageNamed(@"default_5")];
         self.appName.text = model.name;
     }
 }

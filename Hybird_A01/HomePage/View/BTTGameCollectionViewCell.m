@@ -29,7 +29,12 @@
 
 - (void)setGameIcon:(NSString *)gameIcon {
     _gameIcon = gameIcon;
-    self.gameIconImageView.image = ImageNamed(gameIcon);
+    if (_gameIcon.length) {
+        self.gameIconImageView.image = ImageNamed(gameIcon);
+    } else {
+        self.gameIconImageView.image = ImageNamed(@"default_1");
+    }
+    
 }
 
 - (void)setGameName:(NSString *)gameName {
