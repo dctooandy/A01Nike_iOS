@@ -165,9 +165,14 @@
         params[@"sex"] = [sexTF.text isEqualToString:@"男"] ? @"M" : @"F";
     }
     if (birthdayTF.text.length != 0) {
-        params[@"birth_date"] = [birthdayTF.text stringByAppendingString:@" 00:00:00"];
+        NSString *birthdayStr = [birthdayTF.text stringByAppendingString:@" 00:00:00"];
+        BOOL isAdult = [PublicMethod isAdultWithBirthday:birthdayStr];
+        if (!isAdult) {
+            [MBProgressHUD showError:@"您的年龄未满十八岁" toView:self.view];
+            return;
+        }
+        params[@"birth_date"] = birthdayStr;
     }
-    
     params[@"address"] = addressTF.text ? addressTF.text : @"";
     params[@"remarks"] = remarkTF.text ? remarkTF.text : @"";
     weakSelf(weakSelf)
