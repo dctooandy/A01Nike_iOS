@@ -90,7 +90,7 @@
 - (void)addBorderToView:(UIView *)view {
     view.layer.cornerRadius = 8;
     CAShapeLayer *border = [CAShapeLayer layer];
-    border.strokeColor = [Utility colorWithHex:0x979797].CGColor;
+    border.strokeColor = COLOR_HEX(0x979797).CGColor;
     border.fillColor = nil;
     border.path = [UIBezierPath bezierPathWithRoundedRect:view.bounds cornerRadius:8].CGPath;
     border.frame = view.bounds; 

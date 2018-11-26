@@ -35,7 +35,7 @@
 }
 
 - (NSString *)preSaveMsg {
-    return [UserManager sharedInstance].userInfoModel.verify_code;
+    return [IVNetwork userInfo].verify_code;
 }
 
 - (void)showError:(NSString *)error {
@@ -144,11 +144,11 @@
 
 - (void)pushUIWebViewWithURLString:(NSString *)url title:(NSString *)title {
     WebConfigModel *webConfig = [[WebConfigModel alloc] init];
-    webConfig.url = url;
-    webConfig.newView = YES;
-    CNUIWebVC *payWebVC = [[CNUIWebVC alloc] initWithWebConfigModel:webConfig];
-    payWebVC.title = title;
-    [self pushViewController:payWebVC];
+//    webConfig.url = url;
+//    webConfig.newView = YES;
+//    CNUIWebVC *payWebVC = [[CNUIWebVC alloc] initWithWebConfigModel:webConfig];
+//    payWebVC.title = title
+//    [self pushViewController:payWebVC];
 }
 
 /// 栈顶推出控制器

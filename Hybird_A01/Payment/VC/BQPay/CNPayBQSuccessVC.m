@@ -7,7 +7,7 @@
 //
 
 #import "CNPayBQSuccessVC.h"
-#import "WebController.h"
+#import "CNUIWebVC.h"
 
 @interface CNPayBQSuccessVC ()
 @property (weak, nonatomic) IBOutlet UILabel *nameLb;
@@ -30,11 +30,11 @@
 }
 
 - (IBAction)discount:(id)sender {
-    WebConfigModel *webConfig = [[WebConfigModel alloc] init];
-    webConfig.url = @"customer/preferential01.htm";
-    webConfig.newView = YES;
-    WebController *webVC = [[WebController alloc] initWithWebConfigModel:webConfig];
-    [self.navigationController pushViewController:webVC animated:YES];
+//    WebConfigModel *webConfig = [[WebConfigModel alloc] init];
+//    webConfig.url = @"customer/preferential01.htm";
+//    webConfig.newView = YES;
+//    WebController *webVC = [[WebController alloc] initWithWebConfigModel:webConfig];
+//    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 @end

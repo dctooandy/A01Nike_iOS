@@ -8,14 +8,14 @@
 
 #import "CNPayRequestManager.h"
 #import <objc/runtime.h>
-#import "DataManager.h"
+#import "BTTHttpManager.h"
 #import "CNPayOrderModel.h"
 #import "CNPayConstant.h"
 
 @implementation CNPayRequestManager
 
 + (void)requestWithUrl:(NSString *)url parameters:(NSDictionary *)params handler:(IVRequestCallBack)completeHandler {
-    [[DataManager sharedInstance] sendRequestWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+    [BTTHttpManager sendRequestWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         if (completeHandler) {
             completeHandler(result,result.data);
         }
@@ -23,7 +23,7 @@
 }
 
 + (void)cacheWithUrl:(NSString *)url parameters:(NSDictionary *)params handler:(IVRequestCallBack)completeHandler {
-    [[DataManager sharedInstance] sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+    [BTTHttpManager sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         if (completeHandler) {
             completeHandler(result,result.data);
         }
@@ -128,7 +128,7 @@ NSInteger const kPayTypeTotalCount = 17;
 
 + (NSString *)submitPayFormWithOrderModel:(CNPayOrderModel *)model {
     
-    NSString *loginName = [UserManager sharedInstance].userInfoModel.loginName;
+    NSString *loginName = [IVNetwork userInfo].loginName;
     id PayModel = [model class];
     
     NSMutableString *htmljs = [[NSMutableString alloc] init];

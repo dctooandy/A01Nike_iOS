@@ -135,7 +135,7 @@
 
 - (IBAction)selectAmountList:(id)sender {
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:self.paymentModel.amountList defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:self.paymentModel.amountList defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
         if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
             return;
         }

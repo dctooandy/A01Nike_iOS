@@ -13,7 +13,7 @@
 
 /// 需要登录
 + (void)prepareCacheDataNeedLogin {
-    if (![UserManager sharedInstance].userInfoModel) {
+    if (![IVNetwork userInfo]) {
         return;
     }
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -24,14 +24,13 @@
 
 /// 不需要登录
 + (void)prepareCacheDataNormal {
-    [[DataManager sharedInstance] fetchTigerListWithGameType:@"" line:@"" platform:@"" CompleteBlock:nil];
 
 }
 
 /// 预加载支付所有渠道数据
 + (void)cachePaymentData {
     [CNPayRequestManager queryAllChannelCompleteHandler:^(IVRequestResultModel *result, id response) {
-        if (result.status && [UserManager sharedInstance].userInfoModel) {
+        if (result.status && [IVNetwork userInfo]) {
             [[NSUserDefaults standardUserDefaults] setObject:response forKey:[CNCacheDataKey cacheAllPayChannelKey]];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }

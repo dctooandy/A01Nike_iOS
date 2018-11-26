@@ -165,7 +165,7 @@
     
     
     __weak typeof(self) weakSelf = self;
-    [BRStringPickerView showStringPickerWithTitle:@"选择存款人姓名" dataSource:names defaultSelValue:self.nameTF.text resultBlock:^(id selectValue, NSInteger index) {
+    [BRStringPickerView showStringPickerWithTitle:@"选择存款人姓名" dataSource:names defaultSelValue:self.nameTF.text resultBlock:^(id selectValue) {
         // 切换存款人姓名了，需要清空，重新获取
         weakSelf.bankList = nil;
         weakSelf.chooseBank = nil;
@@ -174,7 +174,7 @@
         weakSelf.nameTF.text = selectValue;
         BOOL show = [selectValue isEqualToString:otherName];
         [weakSelf configOtherView:show];
-        weakSelf.referenceId = show ? nil: [weakSelf.depositNames[index] objectForKey:@"reference_id"];
+//        weakSelf.referenceId = show ? nil: [weakSelf.depositNames[index] objectForKey:@"reference_id"];
     }];
 }
 
@@ -221,9 +221,9 @@
     }
     
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:@"选择存入的银行" dataSource:bankNames defaultSelValue:self.bankTF.text resultBlock:^(id selectValue, NSInteger index) {
+    [BRStringPickerView showStringPickerWithTitle:@"选择存入的银行" dataSource:bankNames defaultSelValue:self.bankTF.text resultBlock:^(id selectValue) {
         weakSelf.bankTF.text = selectValue;
-        weakSelf.chooseBank = weakSelf.bankList[index];
+//        weakSelf.chooseBank = weakSelf.bankList[index];
     }];
 }
 
@@ -232,9 +232,9 @@
     [self.view endEditing:YES];
     NSArray *payTypeArr = [self.paymentModel payTypeArray];
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:_payTypeTF.placeholder dataSource:payTypeArr defaultSelValue:nil resultBlock:^(id selectValue, NSInteger index) {
-        weakSelf.payTypeTF.text = payTypeArr[index];
-        weakSelf.payBQType = index;
+    [BRStringPickerView showStringPickerWithTitle:_payTypeTF.placeholder dataSource:payTypeArr defaultSelValue:nil resultBlock:^(id selectValue) {
+//        weakSelf.payTypeTF.text = payTypeArr[index];
+//        weakSelf.payBQType = index;
     }];
 }
 

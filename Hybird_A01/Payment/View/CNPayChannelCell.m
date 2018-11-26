@@ -7,6 +7,7 @@
 //
 
 #import "CNPayChannelCell.h"
+#import "CNPayConstant.h"
 
 @implementation CNPayChannelCell
 

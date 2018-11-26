@@ -7,6 +7,7 @@
 //
 
 #import "CNPayTipView.h"
+#import "CNPayConstant.h"
 
 @interface CNPayTipView ()
 @property (weak, nonatomic) IBOutlet CNPaySubmitButton *finishPayBtn;

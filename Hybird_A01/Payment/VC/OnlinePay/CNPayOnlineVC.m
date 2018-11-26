@@ -133,7 +133,7 @@
 
 - (IBAction)selectAmountList:(id)sender {
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:self.paymentModel.amountList defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:self.paymentModel.amountList defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
         if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
             return;
         }
@@ -144,12 +144,12 @@
 - (IBAction)selectedBank:(UIButton *)sender {
     [self.view endEditing:YES];
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:@"选择支付银行" dataSource:self.bankNames defaultSelValue:self.payBankTF.text resultBlock:^(id selectValue, NSInteger index) {
+    [BRStringPickerView showStringPickerWithTitle:@"选择支付银行" dataSource:self.bankNames defaultSelValue:self.payBankTF.text resultBlock:^(id selectValue) {
         if ([weakSelf.payBankTF.text isEqualToString:selectValue]) {
             return;
         }
         weakSelf.payBankTF.text = selectValue;
-        weakSelf.chooseBank = weakSelf.paymentModel.bankList[index];
+//        weakSelf.chooseBank = weakSelf.paymentModel.bankList[index]; 
     }];
 }
 

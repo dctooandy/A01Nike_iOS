@@ -9,6 +9,7 @@
 #import "CNPayDepositSuccessVC.h"
 #import "CNPaySubmitButton.h"
 #import "CNUIWebVC.h"
+#import "CNPayConstant.h"
 
 @interface CNPayDepositSuccessVC ()
 @property (weak, nonatomic) IBOutlet UILabel *amountLb;
@@ -36,8 +37,8 @@
     WebConfigModel *webConfig = [[WebConfigModel alloc] init];
     webConfig.url = @"customer/log.htm";
     webConfig.newView = YES;
-    WebController *webVC = [[WebController alloc] initWithWebConfigModel:webConfig];
-    [self.navigationController pushViewController:webVC animated:YES];
+//    WebController *webVC = [[WebController alloc] initWithWebConfigModel:webConfig];
+//    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 - (IBAction)gameHoll:(id)sender {

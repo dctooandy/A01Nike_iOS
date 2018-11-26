@@ -69,8 +69,8 @@
     [self.view endEditing:YES];
     NSArray *payTypeArr = [self.paymentModel payTypeArray];
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:_payTypeTF.placeholder dataSource:payTypeArr defaultSelValue:nil resultBlock:^(id selectValue, NSInteger index) {
-        weakSelf.payTypeTF.text = payTypeArr[index];
+    [BRStringPickerView showStringPickerWithTitle:_payTypeTF.placeholder dataSource:payTypeArr defaultSelValue:nil resultBlock:^(id selectValue) {
+//        weakSelf.payTypeTF.text = payTypeArr[index];
     }];
 }
 

@@ -10,6 +10,7 @@
 #import "CNPayNameTF.h"
 #import "CNPayRequestManager.h"
 #import "MBProgressHUD+Add.h"
+#import "CNPayConstant.h"
 
 @interface CNCompleteInfoView ()
 @property (weak, nonatomic) IBOutlet CNPayNameTF *nameTF;
@@ -33,20 +34,20 @@
 }
 
 - (void)writeInfowithData:(NSDictionary *)data {
-    NSMutableDictionary *userInfo = [[[IVCacheManager sharedInstance] nativeReadDictionaryForKey:cacheKeyUserInfo] mutableCopy];
-    NSString *real_name = data[@"real_name"];
-    NSString *verify_code = data[@"verify_code"];
-    // 先写内存，再写缓存
-    if (real_name.length >0) {
-        [UserManager sharedInstance].userInfoModel.real_name = real_name;
-        [userInfo setObject:real_name forKey:@"real_name"];
-    }
-    if (verify_code.length >0) {
-        [UserManager sharedInstance].userInfoModel.verify_code = verify_code;
-        [userInfo setObject:verify_code forKey:@"verify_code"];
-    }
+//    NSMutableDictionary *userInfo = [[[IVCacheManager sharedInstance] nativeReadDictionaryForKey:cacheKeyUserInfo] mutableCopy];
+//    NSString *real_name = data[@"real_name"];
+//    NSString *verify_code = data[@"verify_code"];
+//    // 先写内存，再写缓存
+//    if (real_name.length >0) {
+//        [IVNetwork userInfo].real_name = real_name;
+//        [userInfo setObject:real_name forKey:@"real_name"];
+//    }
+//    if (verify_code.length >0) {
+//        [IVNetwork userInfo].verify_code = verify_code;
+//        [userInfo setObject:verify_code forKey:@"verify_code"];
+//    }
     // 将用户信息写入缓存
-    [[IVCacheManager sharedInstance] nativeWriteValue:userInfo forKey:cacheKeyUserInfo];
+//    [[IVCacheManager sharedInstance] nativeWriteValue:userInfo forKey:cacheKeyUserInfo];
 }
 
 - (IBAction)submitAction:(UIButton *)sender {

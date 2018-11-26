@@ -7,6 +7,7 @@
 //
 
 #import "CNPayRecommendCell.h"
+#import "CNPayConstant.h"
 
 
 @interface CNPayRecommendCell()
@@ -19,7 +20,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.normalColor = [Utility colorWithHex:0xF36F20];
+    self.normalColor = COLOR_HEX(0xF36F20);
     self.selectColor = COLOR_RGBA(234,115,11,1);
     
     _button.userInteractionEnabled = NO;

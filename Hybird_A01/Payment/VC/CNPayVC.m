@@ -95,7 +95,7 @@
 /// 预加载支付所有渠道数据
 - (void)cachePaymentData {
     [CNPayRequestManager queryAllChannelCompleteHandler:^(IVRequestResultModel *result, id response) {
-        if (result.status && [UserManager sharedInstance].userInfoModel) {
+        if (result.status && [IVNetwork userInfo]) {
             [[NSUserDefaults standardUserDefaults] setObject:response forKey:[CNCacheDataKey cacheAllPayChannelKey]];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
@@ -242,7 +242,7 @@
     // 0星级: 支付宝支付>微信支付>QQ钱包>在线支付>银联支付>微信条码支付>扫码支付>比特币支付>点卡支付>BQ快速>BQ支付宝>BQ微信>人工汇款
     
     NSArray *array;
-    if ([UserManager sharedInstance].userInfoModel.customerLevel > 0) {
+    if ([IVNetwork userInfo].customerLevel > 0) {
         array = @[BQFast,ali,wechat,BQAli,BQWeChat,online,unionPay,barCode,QR,BTC,QQ,deposit,card];
     } else {
         array = @[ali,wechat,QQ,online,unionPay,barCode,QR,BTC,card,BQFast,BQAli,BQWeChat,deposit];

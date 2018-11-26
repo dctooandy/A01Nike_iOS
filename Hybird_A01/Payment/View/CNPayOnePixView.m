@@ -7,6 +7,7 @@
 //
 
 #import "CNPayOnePixView.h"
+#import "CNPayConstant.h"
 
 @implementation CNPayOnePixView
 

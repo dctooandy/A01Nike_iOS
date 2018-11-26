@@ -18,6 +18,7 @@
 #import "CNPayLabel.h"
 
 #import "AMSegmentViewController.h"
+#import "CNPayConstant.h"
 
 
 @interface CNPayBaseVC : UIViewController

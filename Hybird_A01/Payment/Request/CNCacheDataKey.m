@@ -11,8 +11,8 @@
 @implementation CNCacheDataKey
 
 + (NSString *)createMD5key:(NSString *)key {
-    NSString *userName = [UserManager sharedInstance].userInfoModel.loginName;
-    return [Utility md5StringFromString:[NSString stringWithFormat:@"%@%@", userName, key]] ;
+    NSString *userName = [IVNetwork userInfo].loginName;
+    return [IVUtility md5StringFromString:[NSString stringWithFormat:@"%@%@", userName, key]] ;
 }
 
 /// 缓存所有支付渠道的key

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HDViewController.h"
+#import "HABaseViewController.h"
 
-@interface CNWKWebVC : HDViewController
+@interface CNWKWebVC : HABaseViewController
 - (instancetype)initWithHtmlString:(NSString *)htmlString;
 - (instancetype)initWithURLString:(NSString *)URLString;
 @end

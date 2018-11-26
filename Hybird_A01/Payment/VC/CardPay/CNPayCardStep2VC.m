@@ -50,8 +50,8 @@
 - (IBAction)selectCardValue:(UIButton *)sender {
     [self.view endEditing:YES];
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:_cardValueTF.placeholder dataSource:_cardValues defaultSelValue:_cardValueTF.text resultBlock:^(id selectValue, NSInteger index) {
-        [weakSelf configCardValue:weakSelf.cardValues[index]];
+    [BRStringPickerView showStringPickerWithTitle:_cardValueTF.placeholder dataSource:_cardValues defaultSelValue:_cardValueTF.text resultBlock:^(id selectValue) {
+//        [weakSelf configCardValue:weakSelf.cardValues[index]];
     }];
 }
 

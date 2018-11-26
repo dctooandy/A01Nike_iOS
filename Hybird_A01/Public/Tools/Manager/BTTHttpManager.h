@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface BTTHttpManager : NSObject
+
++ (void)sendRequestWithUrl:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(IVRequestCallBack)completionBlock;
+
++ (void)sendRequestUseCacheWithUrl:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(IVRequestCallBack)completionBlock;
 /**
  新的登录游戏接口
  

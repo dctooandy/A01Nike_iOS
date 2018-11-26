@@ -52,12 +52,12 @@
         [cardTypeArr addObject:model.name];
     }
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:@"请选择点卡类型" dataSource:cardTypeArr defaultSelValue:_cardTypeTF.text resultBlock:^(id selectValue, NSInteger index) {
+    [BRStringPickerView showStringPickerWithTitle:@"请选择点卡类型" dataSource:cardTypeArr defaultSelValue:_cardTypeTF.text resultBlock:^(id selectValue) {
         weakSelf.cardTypeTF.hidden = YES;
-        CNPayCardModel *model = weakSelf.paymentModel.cardList[index];
-        [weakSelf.cardLogoIV sd_setImageWithURL:[NSURL URLWithString:model.logo.cn_appendCDN]];
-        weakSelf.cardTypeLb.text = model.name;
-        weakSelf.chooseCardModel = model;
+//        CNPayCardModel *model = weakSelf.paymentModel.cardList[index];
+//        [weakSelf.cardLogoIV sd_setImageWithURL:[NSURL URLWithString:model.logo.cn_appendCDN]];
+//        weakSelf.cardTypeLb.text = model.name;
+//        weakSelf.chooseCardModel = model;
     }];
 }
 
