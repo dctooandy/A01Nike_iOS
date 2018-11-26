@@ -25,6 +25,7 @@
 #import "BTTPromotionDetailController.h"
 #import "BTTBannerModel.h"
 #import "BTTDownloadModel.h"
+#import "BTTDiscountsViewController.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -162,13 +163,15 @@
             return cell;
         } else if (indexPath.row == 6 || indexPath.row == 11 || indexPath.row == 14) {
             BTTHomePageDiscountHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountHeaderCell" forIndexPath:indexPath];
+            BTTHomePageHeaderModel *headerModel = nil;
             if (indexPath.row == 6) {
-                cell.headerModel = self.headers[0];
-            } else if (indexPath.row == 10) {
-                cell.headerModel = self.headers[1];
+                headerModel = self.headers[0];
+            } else if (indexPath.row == 11) {
+                headerModel = self.headers[1];
             } else {
-                cell.headerModel = self.headers[2];
+                headerModel = self.headers[2];
             }
+            cell.headerModel = headerModel;
             return cell;
         } else if (indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9) {
             BTTHomePageDiscountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountCell" forIndexPath:indexPath];
@@ -261,7 +264,7 @@
             BTTHomePageHeaderModel *model = nil;
             if (indexPath.row == 5) {
                 model = self.headers[0];
-            } else if (indexPath.row == 9) {
+            } else if (indexPath.row == 10) {
                 model = self.headers[1];
             } else {
                 model = self.headers[2];
@@ -329,6 +332,12 @@
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"outside";
             [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 6 || indexPath.row == 11 || indexPath.row == 14) {
+            if (indexPath.row == 6) {
+                BTTDiscountsViewController *vc = [[BTTDiscountsViewController alloc] init];
+                vc.discountsVCType = BTTDiscountsVCTypeDetail;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
     } else {
         if (indexPath.row == 9) {
@@ -347,6 +356,12 @@
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"inside";
             [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 5 || indexPath.row == 10 || indexPath.row == 13) {
+            if (indexPath.row == 5) {
+                BTTDiscountsViewController *vc = [[BTTDiscountsViewController alloc] init];
+                vc.discountsVCType = BTTDiscountsVCTypeDetail;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
     }
 }

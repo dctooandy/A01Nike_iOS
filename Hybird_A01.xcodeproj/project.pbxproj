@@ -83,6 +83,7 @@
 		3A5F7A9F21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7A9D21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.m */; };
 		3A5F7AA021A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7A9E21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib */; };
 		3A5F7AA321A9524D00128E8B /* BTTProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA221A9524D00128E8B /* BTTProvinceModel.m */; };
+		3A5F7AA821ABCD3900128E8B /* BTTVideoGamesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -745,6 +746,8 @@
 		3A5F7A9E21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTXimaSuccessBtnsCell.xib; sourceTree = "<group>"; };
 		3A5F7AA121A9524D00128E8B /* BTTProvinceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTProvinceModel.h; sourceTree = "<group>"; };
 		3A5F7AA221A9524D00128E8B /* BTTProvinceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTProvinceModel.m; sourceTree = "<group>"; };
+		3A5F7AA621ABCD3900128E8B /* BTTVideoGamesListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGamesListController.h; sourceTree = "<group>"; };
+		3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGamesListController.m; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -1878,6 +1881,15 @@
 			path = BindingMobile;
 			sourceTree = "<group>";
 		};
+		3A5F7AA521ABCCE400128E8B /* VideoGames */ = {
+			isa = PBXGroup;
+			children = (
+				3A5F7AA621ABCD3900128E8B /* BTTVideoGamesListController.h */,
+				3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */,
+			);
+			path = VideoGames;
+			sourceTree = "<group>";
+		};
 		3A8D6E812163077C000530DF /* DataBaseManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1933,12 +1945,12 @@
 			children = (
 				3A8F516B215F75F20069D1B3 /* Constants.h */,
 				3AD9CF05216C71C800685B43 /* AppInitializeConfig.h */,
-				3A8F5161215F75240069D1B3 /* Mine */,
 				3A8F5166215F75780069D1B3 /* Public */,
 				3A8F5165215F75660069D1B3 /* HomePage */,
 				3A8F5164215F75550069D1B3 /* WebPhone */,
 				3A8F5163215F75450069D1B3 /* LuckyWheel */,
 				3A8F5162215F75390069D1B3 /* Discounts */,
+				3A8F5161215F75240069D1B3 /* Mine */,
 				D5DBEA8B21ABB774008AF629 /* Payment */,
 				3A8F5160215F75010069D1B3 /* Resource */,
 			);
@@ -2558,6 +2570,7 @@
 				3AD9CF56216EFD3000685B43 /* BTTHomePageViewController+LoadData.m */,
 				3ADD235D2176D7F000FA959A /* BTTHomePageViewController+Nav.h */,
 				3ADD235C2176D7EF00FA959A /* BTTHomePageViewController+Nav.m */,
+				3A5F7AA521ABCCE400128E8B /* VideoGames */,
 				3A9E4C6321A0059300E7D8C0 /* PromotionDetail */,
 				3ADD23982179A9E900FA959A /* Live800 */,
 				3ADD235F2176FF6100FA959A /* LoginAndRegister */,
@@ -3795,7 +3808,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
 				"${PODS_ROOT}/BRPickerView/BRPickerView/AddressPickerView/BRPickerView.bundle",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
@@ -3808,7 +3821,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3919,6 +3932,7 @@
 				3AE1EAAB217D65330073A32D /* BTTAccountBlanceHiddenCell.m in Sources */,
 				D5DBEB1921ABB774008AF629 /* CNUIWebVC.m in Sources */,
 				D5DBEB1D21ABB774008AF629 /* CNPayCardStep3VC.m in Sources */,
+				3A5F7AA821ABCD3900128E8B /* BTTVideoGamesListController.m in Sources */,
 				3AE1EAD5217F1AED0073A32D /* BTTNotCompleteInfoController.m in Sources */,
 				3AE1EAE3217F25750073A32D /* BTTCardInfoCell.m in Sources */,
 				3AE1EB2021805E980073A32D /* BTTAddCardBtnsCell.m in Sources */,
