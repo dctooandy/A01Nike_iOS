@@ -24,6 +24,8 @@
 
 @property (nonatomic, assign) CGRect activedTextFieldRect;
 
+@property (nonatomic, copy) NSString *mobile; ///< 输入过的手机号码
+
 @end
 
 @implementation BTTLoginOrRegisterViewController
@@ -164,6 +166,10 @@
                     BTTRegisterQuickAutoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterQuickAutoCell" forIndexPath:indexPath];
                     cell.phoneTextField.delegate = self;
                     cell.verifyTextField.delegate = self;
+                    [cell.phoneTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
+                    if (self.mobile.length) {
+                        cell.phoneTextField.text = self.mobile;
+                    }
                     
                     weakSelf(weakSelf);
                     cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
@@ -193,6 +199,10 @@
                     cell.phoneTextField.delegate = self;
                     cell.accountField.delegate = self;
                     cell.codeField.delegate = self;
+                    [cell.phoneTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
+                    if (self.mobile.length) {
+                        cell.phoneTextField.text = self.mobile;
+                    }
                     weakSelf(weakSelf);
                     cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                         strongSelf(strongSelf);
@@ -300,6 +310,14 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     self.activedTextFieldRect = [textField convertRect:textField.frame toView:self.collectionView];
+}
+
+- (void)textFieldChange:(UITextField *)textField {
+    if (textField.tag == 2010 || textField.tag == 3010) {
+        if ([PublicMethod isValidatePhone:textField.text]) {
+            self.mobile = textField.text;
+        }
+    }
 }
 
 
