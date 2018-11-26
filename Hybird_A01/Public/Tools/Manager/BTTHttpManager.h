@@ -49,4 +49,7 @@
 + (void)fetchBTCRateWithUseCache:(BOOL)useCache;
 //取款
 + (void)submitWithdrawWithUrl:(NSString *)url params:(NSDictionary *)params completion:(IVRequestCallBack)completion;
+
+
++ (void)getOpenAccountStatus;
 @end

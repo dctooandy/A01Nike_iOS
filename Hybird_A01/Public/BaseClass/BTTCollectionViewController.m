@@ -39,6 +39,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardFrameChange:)
+                                                 name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
@@ -46,6 +50,10 @@
 }
 
 - (void)keyboardWillHide:(NSNotification *)notify {
+    
+}
+
+- (void)keyboardFrameChange:(NSNotification *)notify {
     
 }
 

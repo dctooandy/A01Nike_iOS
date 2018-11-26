@@ -82,6 +82,7 @@
 		3A5F7A9B21A8E71100128E8B /* BTTXimaSuccessItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7A9921A8E71100128E8B /* BTTXimaSuccessItemCell.xib */; };
 		3A5F7A9F21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7A9D21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.m */; };
 		3A5F7AA021A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7A9E21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib */; };
+		3A5F7AA321A9524D00128E8B /* BTTProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA221A9524D00128E8B /* BTTProvinceModel.m */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -681,6 +682,8 @@
 		3A5F7A9C21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTXimaSuccessBtnsCell.h; sourceTree = "<group>"; };
 		3A5F7A9D21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTXimaSuccessBtnsCell.m; sourceTree = "<group>"; };
 		3A5F7A9E21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTXimaSuccessBtnsCell.xib; sourceTree = "<group>"; };
+		3A5F7AA121A9524D00128E8B /* BTTProvinceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTProvinceModel.h; sourceTree = "<group>"; };
+		3A5F7AA221A9524D00128E8B /* BTTProvinceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTProvinceModel.m; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -2485,6 +2488,8 @@
 				3AB0688D21A679DE00072FB7 /* BTTSMSEmailModifyModel.m */,
 				3A5F7A9521A8E4C600128E8B /* BTTXimaSuccessItemModel.h */,
 				3A5F7A9421A8E4C600128E8B /* BTTXimaSuccessItemModel.m */,
+				3A5F7AA121A9524D00128E8B /* BTTProvinceModel.h */,
+				3A5F7AA221A9524D00128E8B /* BTTProvinceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3400,7 +3405,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
 				"${PODS_ROOT}/BRPickerView/BRPickerView/AddressPickerView/BRPickerView.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
@@ -3411,7 +3416,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3587,6 +3592,7 @@
 				3ADD23F02179B97A00FA959A /* SDCollectionViewCell.m in Sources */,
 				3AC3FFA1219AB8CC008AECCB /* BTTAnimationPopView.m in Sources */,
 				3A11AE622186CDA100B1AFF4 /* BTTXimaHeaderCell.m in Sources */,
+				3A5F7AA321A9524D00128E8B /* BTTProvinceModel.m in Sources */,
 				3A11AE6C2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.m in Sources */,
 				3A37E1262164A22700FB13A1 /* BTTDiscountsViewController.m in Sources */,
 				3A9E4C7C21A25AE700E7D8C0 /* BTTChangeMobileNextController.m in Sources */,
