@@ -16,7 +16,11 @@
 @end
 
 @implementation IVNetworkStatusDetailViewController
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"网络诊断";
@@ -27,7 +31,7 @@
     CGFloat saveBtnH = 45;
     CGFloat saveBtnY = CGRectGetHeight(self.view.frame) - 30 - saveBtnH;
     saveBtn.frame = CGRectMake(saveBtnX, saveBtnY, saveBtnW, saveBtnH);
-    saveBtn.backgroundColor = [UIColor colorWithHexString:@"714984"];
+    saveBtn.backgroundColor = [UIColor colorWithRed:9/255.0 green:82/255.0 blue:146/255.0 alpha:1];
     [saveBtn setTitle:@"保存截图" forState:UIControlStateNormal];
     [saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [saveBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];

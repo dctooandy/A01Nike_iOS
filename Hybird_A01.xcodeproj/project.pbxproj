@@ -400,6 +400,8 @@
 		EA5F141C21A28515004305A7 /* NeedDeviceURL.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA5F141621A28514004305A7 /* NeedDeviceURL.plist */; };
 		EA5F141D21A28515004305A7 /* IVNetworkStatusDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141921A28514004305A7 /* IVNetworkStatusDetailViewController.m */; };
 		EA5F142021A2AEC1004305A7 /* BTTUserStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141F21A2AEC1004305A7 /* BTTUserStatusManager.m */; };
+		EAA4811B21ABD265000C0273 /* BTTAGQJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4811721ABD264000C0273 /* BTTAGQJViewController.m */; };
+		EAA4811C21ABD265000C0273 /* BTTAGGJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4811A21ABD265000C0273 /* BTTAGGJViewController.m */; };
 		EACCD202218FE1680090B5E6 /* IVWebViewUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */; };
 		EAE89DCB218C3A7400C29393 /* SDWebImage+Compat3_8_1.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE89DC9218C3A7300C29393 /* SDWebImage+Compat3_8_1.m */; };
 		EAE89E86218C3ABD00C29393 /* angry.gif in Resources */ = {isa = PBXBuildFile; fileRef = EAE89DCE218C3ABC00C29393 /* angry.gif */; };
@@ -1287,6 +1289,10 @@
 		EA5F141921A28514004305A7 /* IVNetworkStatusDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVNetworkStatusDetailViewController.m; sourceTree = "<group>"; };
 		EA5F141E21A2AEC1004305A7 /* BTTUserStatusManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUserStatusManager.h; sourceTree = "<group>"; };
 		EA5F141F21A2AEC1004305A7 /* BTTUserStatusManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUserStatusManager.m; sourceTree = "<group>"; };
+		EAA4811721ABD264000C0273 /* BTTAGQJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTAGQJViewController.m; sourceTree = "<group>"; };
+		EAA4811821ABD264000C0273 /* BTTAGQJViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTAGQJViewController.h; sourceTree = "<group>"; };
+		EAA4811921ABD264000C0273 /* BTTAGGJViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTAGGJViewController.h; sourceTree = "<group>"; };
+		EAA4811A21ABD265000C0273 /* BTTAGGJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTAGGJViewController.m; sourceTree = "<group>"; };
 		EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVWebViewUtility.m; sourceTree = "<group>"; };
 		EACCD201218FE1680090B5E6 /* IVWebViewUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVWebViewUtility.h; sourceTree = "<group>"; };
 		EAE89DC9218C3A7300C29393 /* SDWebImage+Compat3_8_1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImage+Compat3_8_1.m"; sourceTree = "<group>"; };
@@ -2558,6 +2564,10 @@
 				3AD9CF56216EFD3000685B43 /* BTTHomePageViewController+LoadData.m */,
 				3ADD235D2176D7F000FA959A /* BTTHomePageViewController+Nav.h */,
 				3ADD235C2176D7EF00FA959A /* BTTHomePageViewController+Nav.m */,
+				EAA4811921ABD264000C0273 /* BTTAGGJViewController.h */,
+				EAA4811A21ABD265000C0273 /* BTTAGGJViewController.m */,
+				EAA4811821ABD264000C0273 /* BTTAGQJViewController.h */,
+				EAA4811721ABD264000C0273 /* BTTAGQJViewController.m */,
 				3A9E4C6321A0059300E7D8C0 /* PromotionDetail */,
 				3ADD23982179A9E900FA959A /* Live800 */,
 				3ADD235F2176FF6100FA959A /* LoginAndRegister */,
@@ -3823,6 +3833,7 @@
 				3AD9CF6D216F33F300685B43 /* BTTGameCollectionViewCell.m in Sources */,
 				D5DBEB0C21ABB774008AF629 /* CNPayBQStep1VC.m in Sources */,
 				3A929415219BFEE100764E7E /* BTTCreateAPIModel.m in Sources */,
+				EAA4811C21ABD265000C0273 /* BTTAGGJViewController.m in Sources */,
 				D5DBEB2721ABB774008AF629 /* CNPayChannelModel.m in Sources */,
 				3A514E3E2186E24000B83881 /* BTTThisWeekTotalCell.m in Sources */,
 				3A8F519F215F77EC0069D1B3 /* UIView+Frame.m in Sources */,
@@ -3872,6 +3883,7 @@
 				3A37E1392164A29600FB13A1 /* BTTRefreshGIFHeader.m in Sources */,
 				3A11AE222183FF0000B1AFF4 /* BTTPasswordChangeBtnsCell.m in Sources */,
 				3AD9CF72216F3D6800685B43 /* BTTHomePageAppsCell.m in Sources */,
+				EAA4811B21ABD265000C0273 /* BTTAGQJViewController.m in Sources */,
 				3A8F51E7215F78F50069D1B3 /* BTTBaseNavigationController.m in Sources */,
 				3A929423219C3B7500764E7E /* BTTRegisterSuccessOneCell.m in Sources */,
 				3A8D6E9921633D3E000530DF /* PushManager.m in Sources */,

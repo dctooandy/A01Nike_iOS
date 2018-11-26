@@ -13,6 +13,7 @@
 #import "WebViewUserAgaent.h"
 #import "HAInitConfig.h"
 #import "IVWebViewUtility.h"
+#import "IVGameUtility.h"
 #import "BTTRequestPrecache.h"
 @implementation AppDelegate (Environment)
 
@@ -33,6 +34,8 @@
     }
     //设置初始数据
     [IVWebViewManager sharaManager].delegate = [IVWebViewUtility new];
+    [IVGameManager sharedManager].delegate = [IVGameUtility new];
+    [IVGameManager sharedManager].isPushAGQJ = YES;
     [self setupLive800];
 //    [IVNetwork setOldApi:YES];
     [WebViewUserAgaent writeIOSUserAgent];

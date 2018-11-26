@@ -25,11 +25,13 @@
 #import "BTTPromotionDetailController.h"
 #import "BTTBannerModel.h"
 #import "BTTDownloadModel.h"
+#import "BTTAGGJViewController.h"
+#import "BTTAGQJViewController.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, assign) BOOL adCellShow;
-
+@property (nonatomic, assign) BOOL   isloaded;
 @end
 
 @implementation BTTHomePageViewController
@@ -64,6 +66,15 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    //第一次出现预加载游戏
+    if (!self.isloaded) {
+        self.isloaded = YES;
+        //AG旗舰预加载
+        [BTTAGQJViewController addGameViewToWindow];
+        //AG国际预加载
+        [BTTAGGJViewController addGameViewToWindow];
+        [[IVGameManager sharedManager] reloadCacheGame];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -139,8 +150,7 @@
             weakSelf(weakSelf);
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
-                AGQJController *AGQJvc = [IVGameManager sharedManager].agqjVC;
-                [strongSelf.navigationController pushViewController:AGQJvc animated:YES];
+                [strongSelf forwardToGameView:value];
             };
             return cell;
         } else if (indexPath.row == 4) {
@@ -235,8 +245,7 @@
             weakSelf(weakSelf);
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
-                AGQJController *AGQJvc = [IVGameManager sharedManager].agqjVC;
-                [strongSelf.navigationController pushViewController:AGQJvc animated:YES];
+                [strongSelf forwardToGameView:value];
             };
             return cell;
         } else if (indexPath.row == 3) {
@@ -467,7 +476,51 @@
         [self.collectionView reloadData];
     });
 }
-
-
-
+- (void)forwardToGameView:(BTTGameModel *)gameModel
+{
+    UIViewController *vc = nil;
+    IVGameModel *model = nil;
+    switch (gameModel.index) {
+        case 0://AG旗舰
+            vc = [BTTAGQJViewController new];
+            break;
+        case 1://AG国际
+            vc = [BTTAGGJViewController new];
+            break;
+        case 2://捕鱼王
+            model = [[IVGameModel alloc] init];
+            model.cnName =  kFishCnName;
+            model.enName =  kFishEnName;
+            model.provider = kAGINProvider;
+            model.gameId = model.gameCode;
+            model.gameType = kFishType;
+            break;
+        case 3:
+            //跳电子游戏大厅
+            break;
+        case 4://沙巴体育
+            model = [[IVGameModel alloc] init];
+            model.cnName = @"沙巴体育";
+            model.enName =  kASBEnName;
+            model.provider =  kShaBaProvider;
+            break;
+        case 5://BTI体育
+            break;
+        case 6://AS电游
+            model = [[IVGameModel alloc] init];
+            model.cnName = @"AS电游";
+            model.enName =  kASSlotEnName;
+            model.provider = kASSlotProvider;
+            break;
+        default:
+            break;
+    }
+    if (vc) {
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (model) {
+        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+    }
+    
+}
 @end
