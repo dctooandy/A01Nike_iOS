@@ -61,6 +61,7 @@
         if (indexPath.row == 0) {
             BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
             [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+            [cell.textField addTarget:self action:@selector(textBeginEditing:) forControlEvents:UIControlEventEditingDidBegin];
             BTTMeMainModel *model = self.sheetDatas[indexPath.row];
             cell.model = model;
             return cell;
@@ -69,7 +70,8 @@
             [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
             BTTMeMainModel *model = self.sheetDatas[indexPath.row];
             cell.model = model;
-            cell.sendBtn.enabled = [IVNetwork userInfo].isEmailBinded;
+            BOOL isUseRegEmail = (![IVNetwork userInfo].isEmailBinded && [IVNetwork userInfo].email.length != 0);
+            cell.sendBtn.enabled = isUseRegEmail || [IVNetwork userInfo].isEmailBinded;
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 [weakSelf sendCode];
             };
@@ -133,6 +135,14 @@
         [self.collectionView reloadData];
     });
 }
+- (void)textBeginEditing:(UITextField *)textField
+{
+    if (textField == [self getMailTF]) {
+        if (![IVNetwork userInfo].isEmailBinded && [IVNetwork userInfo].email.length != 0) {
+            textField.text = @"";
+        }
+    }
+}
 - (void)textChanged:(UITextField *)textField
 {
     if (textField == [self getMailTF]) {
@@ -168,9 +178,13 @@
 }
 - (UIButton *)getSendBtn
 {
+    return [self getVerifyCell].sendBtn;
+}
+- (BTTBindingMobileTwoCell *)getVerifyCell
+{
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
     BTTBindingMobileTwoCell *cell = (BTTBindingMobileTwoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    return cell.sendBtn;
+    return cell;
 }
 - (void)sendCode
 {
@@ -193,7 +207,16 @@
             params[@"v_type"] = @"2";
             break;
     }
-    [IVNetwork sendRequestWithSubURL:@"verify/send" paramters:params.copy completionBlock:nil];
+    weakSelf(weakSelf)
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [IVNetwork sendRequestWithSubURL:@"verify/send" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        if (result.status) {
+            [[weakSelf getVerifyCell] countDown];
+        } else {
+            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }
+    }];
 }
 - (void)submitBind
 {

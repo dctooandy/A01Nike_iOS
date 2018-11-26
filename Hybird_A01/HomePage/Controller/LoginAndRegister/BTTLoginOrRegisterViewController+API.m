@@ -173,6 +173,18 @@
             model.phone = cell.phoneTextField.text;
             model.verify_code = cell.verifyTextField.text;
             model.parent_id = [IVNetwork parentId];
+            if (!model.phone.length) {
+                [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+                return;
+            }
+            if (![PublicMethod isValidatePhone:model.phone]) {
+                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
+                return;
+            }
+            if (!model.verify_code.length) {
+                [MBProgressHUD showError:@"请输入验证码" toView:self.view];
+                return;
+            }
             [self fastRegisterAPIModel:model];
         } else {
             BTTRegisterQuickManualCell *cell = (BTTRegisterQuickManualCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
@@ -180,6 +192,16 @@
             model.verify_code = cell.codeField.text;
             model.login_name = [NSString stringWithFormat:@"g%@",cell.accountField.text];
             model.parent_id = [IVNetwork parentId];
+            
+            if (!model.phone.length) {
+                [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+                return;
+            }
+            if (![PublicMethod isValidatePhone:model.phone]) {
+                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
+                return;
+            }
+            
             NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
             BOOL isAccount = [predicate evaluateWithObject:model.login_name];
@@ -190,6 +212,10 @@
             
             if (!model.login_name.length) {
                 [MBProgressHUD showError:@"请输入账号" toView:self.view];
+                return;
+            }
+            if (!model.verify_code.length) {
+                [MBProgressHUD showError:@"请输入验证码" toView:self.view];
                 return;
             }
             [self fastRegisterAPIModel:model];

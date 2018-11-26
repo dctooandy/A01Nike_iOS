@@ -25,11 +25,14 @@
 #import "BTTPromotionDetailController.h"
 #import "BTTBannerModel.h"
 #import "BTTDownloadModel.h"
+#import "BTTAGGJViewController.h"
+#import "BTTAGQJViewController.h"
+#import "BTTDiscountsViewController.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, assign) BOOL adCellShow;
-
+@property (nonatomic, assign) BOOL   isloaded;
 @end
 
 @implementation BTTHomePageViewController
@@ -64,6 +67,15 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    //第一次出现预加载游戏
+    if (!self.isloaded) {
+        self.isloaded = YES;
+        //AG旗舰预加载
+        [BTTAGQJViewController addGameViewToWindow];
+        //AG国际预加载
+        [BTTAGGJViewController addGameViewToWindow];
+        [[IVGameManager sharedManager] reloadCacheGame];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -139,8 +151,7 @@
             weakSelf(weakSelf);
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
-                AGQJController *AGQJvc = [IVGameManager sharedManager].agqjVC;
-                [strongSelf.navigationController pushViewController:AGQJvc animated:YES];
+                [strongSelf forwardToGameView:value];
             };
             return cell;
         } else if (indexPath.row == 4) {
@@ -162,13 +173,15 @@
             return cell;
         } else if (indexPath.row == 6 || indexPath.row == 11 || indexPath.row == 14) {
             BTTHomePageDiscountHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountHeaderCell" forIndexPath:indexPath];
+            BTTHomePageHeaderModel *headerModel = nil;
             if (indexPath.row == 6) {
-                cell.headerModel = self.headers[0];
-            } else if (indexPath.row == 10) {
-                cell.headerModel = self.headers[1];
+                headerModel = self.headers[0];
+            } else if (indexPath.row == 11) {
+                headerModel = self.headers[1];
             } else {
-                cell.headerModel = self.headers[2];
+                headerModel = self.headers[2];
             }
+            cell.headerModel = headerModel;
             return cell;
         } else if (indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9) {
             BTTHomePageDiscountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountCell" forIndexPath:indexPath];
@@ -235,8 +248,7 @@
             weakSelf(weakSelf);
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
-                AGQJController *AGQJvc = [IVGameManager sharedManager].agqjVC;
-                [strongSelf.navigationController pushViewController:AGQJvc animated:YES];
+                [strongSelf forwardToGameView:value];
             };
             return cell;
         } else if (indexPath.row == 3) {
@@ -261,7 +273,7 @@
             BTTHomePageHeaderModel *model = nil;
             if (indexPath.row == 5) {
                 model = self.headers[0];
-            } else if (indexPath.row == 9) {
+            } else if (indexPath.row == 10) {
                 model = self.headers[1];
             } else {
                 model = self.headers[2];
@@ -329,6 +341,12 @@
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"outside";
             [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 6 || indexPath.row == 11 || indexPath.row == 14) {
+            if (indexPath.row == 6) {
+                BTTDiscountsViewController *vc = [[BTTDiscountsViewController alloc] init];
+                vc.discountsVCType = BTTDiscountsVCTypeDetail;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
     } else {
         if (indexPath.row == 9) {
@@ -347,6 +365,12 @@
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"inside";
             [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 5 || indexPath.row == 10 || indexPath.row == 13) {
+            if (indexPath.row == 5) {
+                BTTDiscountsViewController *vc = [[BTTDiscountsViewController alloc] init];
+                vc.discountsVCType = BTTDiscountsVCTypeDetail;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
     }
 }
@@ -467,7 +491,51 @@
         [self.collectionView reloadData];
     });
 }
-
-
-
+- (void)forwardToGameView:(BTTGameModel *)gameModel
+{
+    UIViewController *vc = nil;
+    IVGameModel *model = nil;
+    switch (gameModel.index) {
+        case 0://AG旗舰
+            vc = [BTTAGQJViewController new];
+            break;
+        case 1://AG国际
+            vc = [BTTAGGJViewController new];
+            break;
+        case 2://捕鱼王
+            model = [[IVGameModel alloc] init];
+            model.cnName =  kFishCnName;
+            model.enName =  kFishEnName;
+            model.provider = kAGINProvider;
+            model.gameId = model.gameCode;
+            model.gameType = kFishType;
+            break;
+        case 3:
+            //跳电子游戏大厅
+            break;
+        case 4://沙巴体育
+            model = [[IVGameModel alloc] init];
+            model.cnName = @"沙巴体育";
+            model.enName =  kASBEnName;
+            model.provider =  kShaBaProvider;
+            break;
+        case 5://BTI体育
+            break;
+        case 6://AS电游
+            model = [[IVGameModel alloc] init];
+            model.cnName = @"AS电游";
+            model.enName =  kASSlotEnName;
+            model.provider = kASSlotProvider;
+            break;
+        default:
+            break;
+    }
+    if (vc) {
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (model) {
+        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+    }
+    
+}
 @end

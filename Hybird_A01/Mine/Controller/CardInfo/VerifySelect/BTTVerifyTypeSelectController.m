@@ -18,7 +18,7 @@
 #import "BTTAddBTCController.h"
 #import "BTTChangeMobileSuccessController.h"
 #import "BTTCardInfosController.h"
-#import "BTTNotCompleteInfoController.h"
+#import "BTTPersonalInfoController.h"
 @interface BTTVerifyTypeSelectController ()<BTTElementsFlowLayoutDelegate>
 
 @end
@@ -110,7 +110,7 @@
                     BTTChangeMobileManualController *vc = [BTTChangeMobileManualController new];
                     [self.navigationController pushViewController:vc animated:YES];
                 } else {
-                    BTTNotCompleteInfoController *vc = [BTTNotCompleteInfoController new];
+                    BTTPersonalInfoController *vc = [BTTPersonalInfoController new];
                     [self.navigationController pushViewController:vc animated:YES];
                 }
             }

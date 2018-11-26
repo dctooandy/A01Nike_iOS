@@ -20,6 +20,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *url;
 
+
+//
+
+@property (nonatomic, copy) NSString *paymentName;
+
+@property (nonatomic, assign) BOOL available;
+
 @end
 
 NS_ASSUME_NONNULL_END

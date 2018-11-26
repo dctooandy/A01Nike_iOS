@@ -27,7 +27,7 @@
 }
 
 - (void)setupBannerView {
-    _bannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, BTTBnnnerDefaultHeight * (SCREEN_WIDTH / BTTBannerDefaultWidth)) delegate:self placeholderImage:ImageNamed(@"placeholder")];
+    _bannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, BTTBnnnerDefaultHeight * (SCREEN_WIDTH / BTTBannerDefaultWidth)) delegate:self placeholderImage:ImageNamed(@"default_4")];
     _bannerView.autoScrollTimeInterval = 3.0f;
     [self.contentView addSubview:_bannerView];
 }

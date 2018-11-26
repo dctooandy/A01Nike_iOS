@@ -8,9 +8,16 @@
 
 #import "BTTCollectionViewController.h"
 
+typedef enum {
+    BTTDiscountsVCTypeFirst, ///< 首页
+    BTTDiscountsVCTypeDetail ///< 详情页
+}BTTDiscountsVCType;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTDiscountsViewController : BTTCollectionViewController
+
+@property (nonatomic, assign) BTTDiscountsVCType discountsVCType;
 
 @end
 

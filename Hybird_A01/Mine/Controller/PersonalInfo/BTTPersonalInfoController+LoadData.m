@@ -13,7 +13,7 @@
 
 - (void)loadMainData {
     NSArray *names = @[@"预留信息",@"真实姓名",@"性别",@"出生日期",@"邮箱地址",@"地址",@"备注"];
-    NSArray *placeholders = @[@"1-16位数字, 字母或者文字组合",@"需与取款银行卡持卡人姓名相同",@"请选择性别",@"请选择出生日期",@"请填写邮箱地址",@"请填写地址",@"请填写备注"];
+    NSArray *placeholders = @[@"1-16位数字, 字母或文字",@"需与持卡人姓名相同",@"请选择性别",@"请选择出生日期",@"请填写邮箱地址",@"请填写地址",@"请填写备注"];
     NSString *verifyCode = [IVNetwork userInfo].verify_code ? [IVNetwork userInfo].verify_code : @"";
     NSString *realName = [IVNetwork userInfo].real_name ? [IVNetwork userInfo].real_name : @"";
     NSString *sex = [[IVNetwork userInfo].sex isEqualToString:@"M"] ? @"男" : @"女";

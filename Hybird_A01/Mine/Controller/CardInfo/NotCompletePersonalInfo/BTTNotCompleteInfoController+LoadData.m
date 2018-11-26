@@ -14,7 +14,7 @@
 
 - (void)loadMainData {
     NSArray *names = @[@"真实姓名",@"预留信息"];
-    NSArray *placeholders = @[@"需与取款银行卡持卡人姓名相同",@"预留信息"];
+    NSArray *placeholders = @[@"需与持卡人姓名相同",@"预留信息"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];

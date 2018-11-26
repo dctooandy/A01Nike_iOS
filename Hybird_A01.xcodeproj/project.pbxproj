@@ -83,6 +83,7 @@
 		3A5F7A9F21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7A9D21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.m */; };
 		3A5F7AA021A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7A9E21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib */; };
 		3A5F7AA321A9524D00128E8B /* BTTProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA221A9524D00128E8B /* BTTProvinceModel.m */; };
+		3A5F7AA821ABCD3900128E8B /* BTTVideoGamesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -400,6 +401,8 @@
 		EA5F141C21A28515004305A7 /* NeedDeviceURL.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA5F141621A28514004305A7 /* NeedDeviceURL.plist */; };
 		EA5F141D21A28515004305A7 /* IVNetworkStatusDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141921A28514004305A7 /* IVNetworkStatusDetailViewController.m */; };
 		EA5F142021A2AEC1004305A7 /* BTTUserStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141F21A2AEC1004305A7 /* BTTUserStatusManager.m */; };
+		EAA4811B21ABD265000C0273 /* BTTAGQJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4811721ABD264000C0273 /* BTTAGQJViewController.m */; };
+		EAA4811C21ABD265000C0273 /* BTTAGGJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4811A21ABD265000C0273 /* BTTAGGJViewController.m */; };
 		EACCD202218FE1680090B5E6 /* IVWebViewUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */; };
 		EAE89DCB218C3A7400C29393 /* SDWebImage+Compat3_8_1.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE89DC9218C3A7300C29393 /* SDWebImage+Compat3_8_1.m */; };
 		EAE89E86218C3ABD00C29393 /* angry.gif in Resources */ = {isa = PBXBuildFile; fileRef = EAE89DCE218C3ABC00C29393 /* angry.gif */; };
@@ -745,6 +748,8 @@
 		3A5F7A9E21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTXimaSuccessBtnsCell.xib; sourceTree = "<group>"; };
 		3A5F7AA121A9524D00128E8B /* BTTProvinceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTProvinceModel.h; sourceTree = "<group>"; };
 		3A5F7AA221A9524D00128E8B /* BTTProvinceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTProvinceModel.m; sourceTree = "<group>"; };
+		3A5F7AA621ABCD3900128E8B /* BTTVideoGamesListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGamesListController.h; sourceTree = "<group>"; };
+		3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGamesListController.m; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -1287,6 +1292,10 @@
 		EA5F141921A28514004305A7 /* IVNetworkStatusDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVNetworkStatusDetailViewController.m; sourceTree = "<group>"; };
 		EA5F141E21A2AEC1004305A7 /* BTTUserStatusManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUserStatusManager.h; sourceTree = "<group>"; };
 		EA5F141F21A2AEC1004305A7 /* BTTUserStatusManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUserStatusManager.m; sourceTree = "<group>"; };
+		EAA4811721ABD264000C0273 /* BTTAGQJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTAGQJViewController.m; sourceTree = "<group>"; };
+		EAA4811821ABD264000C0273 /* BTTAGQJViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTAGQJViewController.h; sourceTree = "<group>"; };
+		EAA4811921ABD264000C0273 /* BTTAGGJViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTAGGJViewController.h; sourceTree = "<group>"; };
+		EAA4811A21ABD265000C0273 /* BTTAGGJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTAGGJViewController.m; sourceTree = "<group>"; };
 		EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVWebViewUtility.m; sourceTree = "<group>"; };
 		EACCD201218FE1680090B5E6 /* IVWebViewUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVWebViewUtility.h; sourceTree = "<group>"; };
 		EAE89DC9218C3A7300C29393 /* SDWebImage+Compat3_8_1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImage+Compat3_8_1.m"; sourceTree = "<group>"; };
@@ -1878,6 +1887,15 @@
 			path = BindingMobile;
 			sourceTree = "<group>";
 		};
+		3A5F7AA521ABCCE400128E8B /* VideoGames */ = {
+			isa = PBXGroup;
+			children = (
+				3A5F7AA621ABCD3900128E8B /* BTTVideoGamesListController.h */,
+				3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */,
+			);
+			path = VideoGames;
+			sourceTree = "<group>";
+		};
 		3A8D6E812163077C000530DF /* DataBaseManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1933,12 +1951,12 @@
 			children = (
 				3A8F516B215F75F20069D1B3 /* Constants.h */,
 				3AD9CF05216C71C800685B43 /* AppInitializeConfig.h */,
-				3A8F5161215F75240069D1B3 /* Mine */,
 				3A8F5166215F75780069D1B3 /* Public */,
 				3A8F5165215F75660069D1B3 /* HomePage */,
 				3A8F5164215F75550069D1B3 /* WebPhone */,
 				3A8F5163215F75450069D1B3 /* LuckyWheel */,
 				3A8F5162215F75390069D1B3 /* Discounts */,
+				3A8F5161215F75240069D1B3 /* Mine */,
 				D5DBEA8B21ABB774008AF629 /* Payment */,
 				3A8F5160215F75010069D1B3 /* Resource */,
 			);
@@ -2558,6 +2576,11 @@
 				3AD9CF56216EFD3000685B43 /* BTTHomePageViewController+LoadData.m */,
 				3ADD235D2176D7F000FA959A /* BTTHomePageViewController+Nav.h */,
 				3ADD235C2176D7EF00FA959A /* BTTHomePageViewController+Nav.m */,
+				EAA4811921ABD264000C0273 /* BTTAGGJViewController.h */,
+				EAA4811A21ABD265000C0273 /* BTTAGGJViewController.m */,
+				EAA4811821ABD264000C0273 /* BTTAGQJViewController.h */,
+				EAA4811721ABD264000C0273 /* BTTAGQJViewController.m */,
+				3A5F7AA521ABCCE400128E8B /* VideoGames */,
 				3A9E4C6321A0059300E7D8C0 /* PromotionDetail */,
 				3ADD23982179A9E900FA959A /* Live800 */,
 				3ADD235F2176FF6100FA959A /* LoginAndRegister */,
@@ -3823,6 +3846,7 @@
 				3AD9CF6D216F33F300685B43 /* BTTGameCollectionViewCell.m in Sources */,
 				D5DBEB0C21ABB774008AF629 /* CNPayBQStep1VC.m in Sources */,
 				3A929415219BFEE100764E7E /* BTTCreateAPIModel.m in Sources */,
+				EAA4811C21ABD265000C0273 /* BTTAGGJViewController.m in Sources */,
 				D5DBEB2721ABB774008AF629 /* CNPayChannelModel.m in Sources */,
 				3A514E3E2186E24000B83881 /* BTTThisWeekTotalCell.m in Sources */,
 				3A8F519F215F77EC0069D1B3 /* UIView+Frame.m in Sources */,
@@ -3872,6 +3896,7 @@
 				3A37E1392164A29600FB13A1 /* BTTRefreshGIFHeader.m in Sources */,
 				3A11AE222183FF0000B1AFF4 /* BTTPasswordChangeBtnsCell.m in Sources */,
 				3AD9CF72216F3D6800685B43 /* BTTHomePageAppsCell.m in Sources */,
+				EAA4811B21ABD265000C0273 /* BTTAGQJViewController.m in Sources */,
 				3A8F51E7215F78F50069D1B3 /* BTTBaseNavigationController.m in Sources */,
 				3A929423219C3B7500764E7E /* BTTRegisterSuccessOneCell.m in Sources */,
 				3A8D6E9921633D3E000530DF /* PushManager.m in Sources */,
@@ -3919,6 +3944,7 @@
 				3AE1EAAB217D65330073A32D /* BTTAccountBlanceHiddenCell.m in Sources */,
 				D5DBEB1921ABB774008AF629 /* CNUIWebVC.m in Sources */,
 				D5DBEB1D21ABB774008AF629 /* CNPayCardStep3VC.m in Sources */,
+				3A5F7AA821ABCD3900128E8B /* BTTVideoGamesListController.m in Sources */,
 				3AE1EAD5217F1AED0073A32D /* BTTNotCompleteInfoController.m in Sources */,
 				3AE1EAE3217F25750073A32D /* BTTCardInfoCell.m in Sources */,
 				3AE1EB2021805E980073A32D /* BTTAddCardBtnsCell.m in Sources */,
@@ -4260,6 +4286,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6UDM79GA72;
 				ENABLE_BITCODE = NO;
@@ -4296,9 +4323,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 6UDM79GA72;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4322,7 +4349,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
-				PROVISIONING_PROFILE_SPECIFIER = a01iphone_Dist;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

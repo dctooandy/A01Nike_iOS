@@ -23,7 +23,7 @@
 }
 - (UIImage *)IVGameGetNavigationBarBackgroundImage
 {
-    return [UIImage imageNamed:@"home_nav_bg"];
+    return [UIImage imageNamed:@"navbg"];
 }
 - (NSString *)IVGameGetH5Domain
 {

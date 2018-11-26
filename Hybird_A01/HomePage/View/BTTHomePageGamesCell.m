@@ -70,6 +70,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     BTTGameModel *model = self.games[indexPath.row];
+    model.index = indexPath.row;
     if (self.clickEventBlock) {
         self.clickEventBlock(model);
     }

@@ -73,7 +73,7 @@
 - (SDCycleScrollView *)activitiesView {
     if (!_activitiesView) {
         
-        _activitiesView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(15, 37, SCREEN_WIDTH - 30, _imageHeight) delegate:self placeholderImage:ImageNamed(@"placeholder")];
+        _activitiesView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(15, 37, SCREEN_WIDTH - 30, _imageHeight) delegate:self placeholderImage:ImageNamed(@"default_3")];
         _activitiesView.showPageControl = NO;
         _activitiesView.autoScrollTimeInterval = 5;
     }

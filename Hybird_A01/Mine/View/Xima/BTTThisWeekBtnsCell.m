@@ -16,4 +16,16 @@
     self.mineSparaterType = BTTMineSparaterTypeNone;
 }
 
+- (IBAction)ximaBtnClick:(UIButton *)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
+}
+
+- (IBAction)otherBtnClick:(UIButton *)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
+}
+
 @end

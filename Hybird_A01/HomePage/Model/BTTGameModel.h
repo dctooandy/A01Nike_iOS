@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTGameModel : BTTBaseModel
 
+@property (nonatomic, assign) NSInteger index;
+
 @property (nonatomic, copy) NSString *apiPath;
 
 @property (nonatomic, copy) NSString *name;
