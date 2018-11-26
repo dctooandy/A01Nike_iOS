@@ -17,7 +17,8 @@
 #import "BTTPosterModel.h"
 #import "BTTPromotionModel.h"
 #import "BTTDownloadModel.h"
-#import "BTTGameModel.h"
+#import "BTTAGGJViewController.h"
+#import "BTTAGQJViewController.h"
 
 static const char *noticeStrKey = "noticeStr";
 
@@ -276,7 +277,6 @@ static const char *BTTNextGroupKey = "nextGroup";
         }
     }];
 }
-
 
 #pragma mark - 动态添加属性
 
