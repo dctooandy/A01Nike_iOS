@@ -145,7 +145,7 @@ static const char *BTTNextGroupKey = "nextGroup";
 }
 
 - (void)loadGamesData {
-    NSArray *gamesIcons = @[@"AGQJ",@"Chess",@"Fishing_king",@"game",@"shaba",@"",@"AS"];
+    NSArray *gamesIcons = @[@"AGQJ",@"AGGJ",@"Fishing_king",@"game",@"shaba",@"BTI",@"AS"];
     NSArray *gameNames = @[@"AG旗舰厅",@"AG国际厅",@"捕鱼王",@"电子游戏",@"沙巴体育",@"BTI体育",@"AS"];
     for (NSString *icon in gamesIcons) {
         NSInteger index = [gamesIcons indexOfObject:icon];
