@@ -22,20 +22,22 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
     CNPaymentBTC,
     /// 微信条码
     CNPaymentWechatBarCode,
+    /// 币宝支付
+    CNPaymentCoin,
+    
     
     /// app
     CNPaymentWechatApp,
     CNPaymentAliApp,
     CNPaymentQQApp,
     CNPaymentUnionApp,
-//    CNPaymentJDApp,
+    CNPaymentJDApp,
     
     /// 扫码
     CNPaymentAliQR,
     CNPaymentWechatQR,
     CNPaymentQQQR,
     CNPaymentUnionQR,
-    CNPaymentJDQR,
     
     /// BQ存款 bypaytype-0,1,2
     CNPaymentBQFast,
@@ -62,7 +64,7 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 @property (nonatomic, copy) NSString *postUrl;
 
 /// 推荐金额
-- (NSArray<NSNumber *> *)prePayAmountArray;
+//- (NSArray<NSNumber *> *)prePayAmountArray;
 /// 支付方式
-- (NSArray<NSString *> *)payTypeArray;
+//- (NSArray<NSString *> *)payTypeArray;
 @end
