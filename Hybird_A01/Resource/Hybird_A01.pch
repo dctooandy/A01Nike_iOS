@@ -11,4 +11,7 @@
 
 #import "Constants.h"
 #import "BTTHttpManager.h"
+#import <UIImageView+WebCache.h>
+#import <BRPickerView.h>
+#import <Masonry.h>
 #endif
