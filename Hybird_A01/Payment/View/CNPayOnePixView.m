@@ -30,9 +30,10 @@
 - (void)commonInit {
     UIView *onePixView = [[UIView alloc] init];
     onePixView.backgroundColor = COLOR_HEX(0xDEDEDE);
+    self.backgroundColor = kBlackForgroundColor;
     [self addSubview:onePixView];
     [onePixView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self).offset(0);
+        make.left.mas_equalTo(self).offset(15);
         make.right.mas_equalTo(self).offset(0);
         make.height.mas_equalTo(0.8);
         make.centerY.mas_equalTo(self);

@@ -45,7 +45,7 @@
         case CNPaymentQQApp:
             return @"QQWAP";
         case CNPaymentUnionApp:
-            return @"银行卡快捷支付";
+            return @"银行快捷支付";
         case CNPaymentJDApp:
             return @"京东WAP";
         case CNPaymentWechatQR:
