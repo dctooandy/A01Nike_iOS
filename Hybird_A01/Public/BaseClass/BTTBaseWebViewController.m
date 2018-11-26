@@ -39,7 +39,9 @@
         if (self.hud) {
             [self hideLoading];
         }
-        self.hud = [MBProgressHUD showCustomView:nil toView:nil];
+        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];//[MBProgressHUD showCustomView:nil toView:self.view];
+        self.hud.bezelView.backgroundColor = [UIColor clearColor];
+        self.hud.bezelView.blurEffectStyle = UIBlurEffectStyleLight;
     }));
     
 }

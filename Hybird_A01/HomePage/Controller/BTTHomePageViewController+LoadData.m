@@ -28,6 +28,7 @@ static const char *BTTNextGroupKey = "nextGroup";
 - (void)loadDataOfHomePage {
     
     [self loadHeadersData];
+    [self loadGamesData];
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self loadMainData];
@@ -53,7 +54,7 @@ static const char *BTTNextGroupKey = "nextGroup";
 }
 
 - (void)refreshDatasOfHomePage {
-    
+    [self loadGamesData];
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self loadMainData];
@@ -142,6 +143,22 @@ static const char *BTTNextGroupKey = "nextGroup";
     }];
 }
 
+- (void)loadGamesData {
+    NSArray *gamesIcons = @[@"AGQJ",@"Chess",@"Fishing_king",@"game",@"shaba",@"",@"AS"];
+    NSArray *gameNames = @[@"AG旗舰厅",@"AG国际厅",@"捕鱼王",@"电子游戏",@"沙巴体育",@"BTI体育",@"AS"];
+    for (NSString *icon in gamesIcons) {
+        NSInteger index = [gamesIcons indexOfObject:icon];
+        NSString *name = [gameNames objectAtIndex:index];
+        BTTGameModel *model = [[BTTGameModel alloc] init];
+        model.gameIcon = icon;
+        model.name = name;
+        [self.games addObject:model];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+    });
+}
+
 - (void)showCallBackSuccessView {
     BTTMakeCallSuccessView *customView = [BTTMakeCallSuccessView viewFromXib];
     customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -224,13 +241,13 @@ static const char *BTTNextGroupKey = "nextGroup";
                     }
                 }
                 
-                if (![result.data[@"games"] isKindOfClass:[NSNull class]]) {
-                    [self.games removeAllObjects];
-                    for (NSDictionary *dict in result.data[@"games"]) {
-                        BTTGameModel *model = [BTTGameModel yy_modelWithDictionary:dict];
-                        [self.games addObject:model];
-                    }
-                }
+//                if (![result.data[@"games"] isKindOfClass:[NSNull class]]) {
+//                    [self.games removeAllObjects];
+//                    for (NSDictionary *dict in result.data[@"games"]) {
+//                        BTTGameModel *model = [BTTGameModel yy_modelWithDictionary:dict];
+//                        [self.games addObject:model];
+//                    }
+//                }
             }
         }
         dispatch_async(dispatch_get_main_queue(), ^{
