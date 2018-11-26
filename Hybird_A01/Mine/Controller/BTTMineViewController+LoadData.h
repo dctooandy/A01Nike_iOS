@@ -36,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadPaymentData;
 
+- (void)loadPersonalPaymentData;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,6 +8,7 @@
 
 #import "BTTMineViewController+LoadData.h"
 #import "BTTMeMainModel.h"
+#import "CNPayRequestManager.h"
 
 @implementation BTTMineViewController (LoadData)
 
@@ -45,7 +46,7 @@
     }
     NSArray *icons = @[@"me_netbank",@"me_wechat",@"me_alipay",@"me_hand",@"me_online",@"me_scan",@"me_quick",@"me_alipay",@"me_pointCard",@"me_btc",@"me_jd"];
     NSArray *names = @[@"迅捷网银",@"微信秒存",@"支付宝秒存",@"手工存款",@"在线支付",@"扫码支付",@"银行快捷支付",@"支付宝wap",@"点卡支付",@"比特币支付",@"京东wap支付"];
-    NSArray *paymentNames = @[@"xunjie",@"wxpaymet",@"alipay",@"manual",@"online",@"QRCode",@"faster",@"aliWap",@"point",@"btc",@"jdWap"];
+    NSArray *paymentNames = @[@"bqpaytype-0",@"bqpaytype-1",@"bqpaytype-2",@"deposit",@"online-1",@"online-6;online-8;online-5;online-7;online-11;online-15;online-16",@"faster",@"online-9",@"card",@"online-20",@"online-17"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
@@ -63,19 +64,10 @@
 }
 
 - (void)loadPersonalPaymentData {
-    [IVNetwork sendRequestWithSubURL:BTTPaymentStatus paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+    [self showLoading];
+    [CNPayRequestManager queryAllChannelCompleteHandler:^(IVRequestResultModel *result, id response) {
+        [self hideLoading];
         NSLog(@"%@",response);
-        for (BTTMeMainModel *model in self.paymentDatas) {
-            model.available = [result.data[model.paymentName] boolValue];
-        }
-        NSMutableArray *availableArr = [NSMutableArray array];
-        for (BTTMeMainModel *model in self.paymentDatas) {
-            if (model.available) {
-                [availableArr addObject:model];
-            }
-        }
-        self.paymentDatas = [availableArr mutableCopy];
-        [self setupElements];
     }];
 }
 

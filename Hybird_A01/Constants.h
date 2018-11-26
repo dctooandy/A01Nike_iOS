@@ -249,7 +249,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 // 获取支付状态
 
-#define BTTPaymentStatus             @"/A01/payment/status"
+#define BTTPaymentStatus             @"/public/payment/isShutdown"
 
 /********************************************常用宏*********************************************************/
 
