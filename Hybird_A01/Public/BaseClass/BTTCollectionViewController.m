@@ -66,7 +66,7 @@
     
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:refreshBlock];
     // 隐藏时间
-    header.lastUpdatedTimeLabel.hidden = YES;
+//    header.lastUpdatedTimeLabel.hidden = YES;
     // 隐藏状态
 //    header.stateLabel.hidden = YES;
     header.automaticallyChangeAlpha = YES;
