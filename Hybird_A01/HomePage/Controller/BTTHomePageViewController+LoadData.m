@@ -55,7 +55,6 @@ static const char *BTTNextGroupKey = "nextGroup";
 }
 
 - (void)refreshDatasOfHomePage {
-    [self loadGamesData];
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self loadMainData];
@@ -118,6 +117,9 @@ static const char *BTTNextGroupKey = "nextGroup";
         model.detailBtnStr = btns[index];
         [self.headers addObject:model];
     }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+    });
 }
 
 
@@ -146,7 +148,10 @@ static const char *BTTNextGroupKey = "nextGroup";
 }
 
 - (void)loadGamesData {
-    NSArray *gamesIcons = @[@"AGQJ",@"Chess",@"Fishing_king",@"game",@"shaba",@"",@"AS"];
+    if (self.games.count) {
+        [self.games removeAllObjects];
+    }
+    NSArray *gamesIcons = @[@"AGQJ",@"AGGJ",@"Fishing_king",@"game",@"shaba",@"BTI",@"AS"];
     NSArray *gameNames = @[@"AG旗舰厅",@"AG国际厅",@"捕鱼王",@"电子游戏",@"沙巴体育",@"BTI体育",@"AS"];
     for (NSString *icon in gamesIcons) {
         NSInteger index = [gamesIcons indexOfObject:icon];

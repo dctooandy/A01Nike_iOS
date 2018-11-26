@@ -22,14 +22,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"优惠";
-    [self setupNav];
     [self setupCollectionView];
-    weakSelf(weakSelf);
-    [self pulldownRefreshWithRefreshBlock:^{
-        NSLog(@"下拉刷新");
-        strongSelf(strongSelf);
-        [strongSelf loadMainData];
-    }];
+    if (self.discountsVCType == BTTDiscountsVCTypeFirst) {
+        [self setupNav];
+        weakSelf(weakSelf);
+        [self pulldownRefreshWithRefreshBlock:^{
+            NSLog(@"下拉刷新");
+            strongSelf(strongSelf);
+            [strongSelf loadMainData];
+        }];
+    }
     [self loadMainData];
     
 }
@@ -43,13 +45,17 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    if (self.discountsVCType == BTTDiscountsVCTypeFirst) {
+        [self.navigationController setNavigationBarHidden:YES animated:animated];
+    }
 }
 
 
 - (void)setupCollectionView {
     [super setupCollectionView];
-    self.collectionView.frame = CGRectMake(0, KIsiPhoneX ? 88 : 64, SCREEN_WIDTH, SCREEN_HEIGHT - (KIsiPhoneX ? 88 : 64));
+    if (self.discountsVCType == BTTDiscountsVCTypeFirst) {
+        self.collectionView.frame = CGRectMake(0, KIsiPhoneX ? 88 : 64, SCREEN_WIDTH, SCREEN_HEIGHT - (KIsiPhoneX ? 88 : 64));
+    }
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageDiscountCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageDiscountCell"];
 }
 
