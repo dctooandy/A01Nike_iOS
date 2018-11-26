@@ -15,7 +15,7 @@
 
 - (void)loadMeAllData {
     [self loadPersonalInfoData];
-    [self loadPaymentData];
+    [self loadPaymentDefaultData];
     [self loadMainDataOne];
     [self loadMainDataTwo];
     [self loadMainDataThree];
@@ -41,6 +41,22 @@
     [self.collectionView reloadData];
 }
 
+- (void)loadPaymentDefaultData {
+    NSArray *icons = @[@"me_netbank",@"me_wechat",@"me_alipay",@"me_hand",@"me_online",@"me_scan",@"me_quick",@"me_alipay",@"me_pointCard",@"me_btc",@"me_jd"];
+    NSArray *names = @[@"迅捷网银",@"微信秒存",@"支付宝秒存",@"手工存款",@"在线支付",@"扫码支付",@"银行快捷支付",@"支付宝WAP",@"点卡支付",@"比特币支付",@"京东WAP支付"];
+    NSArray *paymentNames = @[@"bqpaytype-0",@"bqpaytype-1",@"bqpaytype-2",@"deposit",@"online-1",@"online-6;online-8;online-5;online-7;online-11;online-15;online-16",@"faster",@"online-9",@"card",@"online-20",@"online-17"];
+    for (NSString *name in names) {
+        NSInteger index = [names indexOfObject:name];
+        BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
+        model.name = name;
+        model.iconName = icons[index];
+        model.paymentName = paymentNames[index];
+        model.available = YES;
+        [self.paymentDatas addObject:model];
+    }
+    [self.collectionView reloadData];
+}
+
 - (void)loadPaymentData {
     if (self.paymentDatas.count) {
         [self.paymentDatas removeAllObjects];
@@ -57,7 +73,6 @@
         model.available = YES;
         [self.paymentDatas addObject:model];
     }
-    [self.collectionView reloadData];
     if ([IVNetwork userInfo]) {
         [self loadPersonalPaymentData];
     }
@@ -78,7 +93,6 @@
                     [payments addObject:model];
                 }
             }
-          
             for (CNPaymentModel *paymentModel in payments) {
                 for (BTTMeMainModel *model in self.paymentDatas) {
                     if ([model.name isEqualToString:paymentModel.paymentTitle] && paymentModel.isAvailable) {
@@ -175,9 +189,9 @@
         if (result.code_http == 200) {
             if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
                 self.totalAmount = result.data[@"val"];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectionView reloadData];
-                });
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    [self.collectionView reloadData];
+//                });
             }
         }
     }];

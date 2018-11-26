@@ -297,6 +297,10 @@
         [IVNetwork startCheckWithType:IVCheckNetworkTypeAll appWindow:[UIApplication sharedApplication].keyWindow detailBtnClickedBlock:^{
             [self.navigationController pushViewController:[IVNetworkStatusDetailViewController new] animated:YES];
         }];
+    }  else if (indexPath.row >= 3 + self.personalInfos.count && indexPath.row <= 3 + self.personalInfos.count + self.paymentDatas.count - 1) {
+        //支付方式点击事件
+        BTTMeMainModel *model = self.paymentDatas[indexPath.row - (3 + self.personalInfos.count)];
+        NSLog(@"%@",model);
     }
 }
 
