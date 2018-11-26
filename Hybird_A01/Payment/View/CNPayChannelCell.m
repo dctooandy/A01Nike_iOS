@@ -9,6 +9,11 @@
 #import "CNPayChannelCell.h"
 #import "CNPayConstant.h"
 
+@interface CNPayChannelCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *selectedIV;
+@property (weak, nonatomic) IBOutlet UIImageView *normalIV;
+@end
+
 @implementation CNPayChannelCell
 
 - (void)awakeFromNib {
@@ -17,8 +22,8 @@
 
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
-    self.channelBtn.selected = selected;
-    self.titleLb.textColor = selected ? COLOR_HEX(0x3C3C3C): COLOR_HEX(0x8B8B8B);
+    self.selectedIV.hidden = !selected;
+    self.normalIV.hidden = selected;
 }
 
 @end

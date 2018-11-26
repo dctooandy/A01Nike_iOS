@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface CNPayChannelCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIButton *channelBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *channelIV;
 @property (weak, nonatomic) IBOutlet UILabel *titleLb;
 @end
