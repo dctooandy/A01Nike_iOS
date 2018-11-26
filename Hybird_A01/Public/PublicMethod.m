@@ -612,6 +612,34 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     return newdate;
 }
 
++ (BOOL)isAdultWithBirthday:(NSString *)birthday
+{
+    NSString *birthdayStr = birthday;
+    NSInteger birthYear = [[birthdayStr substringWithRange:NSMakeRange(0, 4)] integerValue];
+    NSInteger birthMonth = [[birthdayStr substringWithRange:NSMakeRange(5, 2)] integerValue];
+    NSInteger birthDay = [[birthdayStr substringWithRange:NSMakeRange(8, 2)] integerValue];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *currentDateString = [dateFormatter stringFromDate:[NSDate date]];
+    NSInteger currentYear = [[currentDateString substringWithRange:NSMakeRange(0, 4)] integerValue];
+    NSInteger currentMonth = [[currentDateString substringWithRange:NSMakeRange(5, 2)] integerValue];
+    NSInteger currentDay = [[currentDateString substringWithRange:NSMakeRange(8, 2)] integerValue];
+    
+    BOOL isAdult = NO;
+    if ((currentYear - birthYear) > 18 ) {
+        isAdult = YES;
+    } else if ((currentYear - birthYear) == 18) {
+        if (currentMonth > birthMonth) {
+            isAdult = YES;
+        } else if (currentMonth == birthMonth) {
+            if ((currentDay - birthDay) >= 0) {
+                isAdult = YES;
+            }
+        }
+    }
+    return  isAdult;
+}
+
 #pragma mark - 私有方法
 + (NSInteger)ordinality:(NSDate *)date_ ordinalitySign:(NSCalendarUnit)ordinalitySign_
 {
