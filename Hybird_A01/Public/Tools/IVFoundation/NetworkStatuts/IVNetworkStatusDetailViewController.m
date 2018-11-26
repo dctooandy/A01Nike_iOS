@@ -54,19 +54,19 @@
     
     [IVNetwork setDetailCheckCompletionBlock:^(NSString *log) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            textView.text = [textView.text stringByAppendingString:log];
-            if (textView.contentSize.height - CGRectGetHeight(textView.frame) > 0) {
-                [textView setContentOffset:CGPointMake(0, textView.contentSize.height - CGRectGetHeight(textView.frame)) animated:YES];
+            self->textView.text = [self->textView.text stringByAppendingString:log];
+            if (self->textView.contentSize.height - CGRectGetHeight(self->textView.frame) > 0) {
+                [self->textView setContentOffset:CGPointMake(0, self->textView.contentSize.height - CGRectGetHeight(self->textView.frame)) animated:YES];
             }
         });
     }];
     [IVNetwork setDetailCheckProgressBlock:^(double progress) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_progressView setProgress:progress animated:YES];
-            _progressView.text = [NSString stringWithFormat:@"%.1lf%%",progress * 100.0];
+            [self->_progressView setProgress:progress animated:YES];
+            self->_progressView.text = [NSString stringWithFormat:@"%.1lf%%",progress * 100.0];
             if (progress >= 1.0) {
                 saveBtn.hidden = NO;
-                _progressView.hidden = YES;
+                self->_progressView.hidden = YES;
             }
         });
     }];

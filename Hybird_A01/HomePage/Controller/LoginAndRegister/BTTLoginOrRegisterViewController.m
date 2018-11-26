@@ -62,6 +62,19 @@
     }];
 }
 
+- (void)keyboardFrameChange:(NSNotification *)notify {
+    NSLog(@"%@",notify.userInfo);
+    //取出键盘最终的frame
+    CGRect rect = [notify.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    //取出键盘弹出需要花费的时间
+    double duration = [notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    //获取最佳位置距离屏幕上方的距离
+    [UIView animateWithDuration:duration animations:^{
+        self.collectionView.contentOffset = CGPointMake(0, 64 + self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height - ([UIScreen mainScreen].bounds.size.height - rect.size.height));
+    }];
+    
+}
+
 - (void)setupCollectionView {
     [super setupCollectionView];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTLoginOrRegisterHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTLoginOrRegisterHeaderCell"];

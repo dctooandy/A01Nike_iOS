@@ -14,9 +14,13 @@
 #import <BRPickerView/BRPickerView.h>
 #import "BTTCardInfosController.h"
 #import "BTTChangeMobileSuccessController.h"
-@interface BTTAddCardController ()<BTTElementsFlowLayoutDelegate>
+#import "BTTProvinceModel.h"
+
+@interface BTTAddCardController ()<BTTElementsFlowLayoutDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong) BRProvinceModel *provinceModel;
+
+@property (nonatomic, assign) CGRect activedTextFieldRect;
 
 @end
 
@@ -44,6 +48,49 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTAddCardBtnsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTAddCardBtnsCell"];
 }
 
+- (void)keyboardWillShow:(NSNotification *)notification {
+    //取出键盘最终的frame
+    CGRect rect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    //取出键盘弹出需要花费的时间
+    double duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    //获取最佳位置距离屏幕上方的距离
+    if ((self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height) >  ([UIScreen mainScreen].bounds.size.height - rect.size.height)) {//键盘的高度 高于textView的高度 需要滚动
+        [UIView animateWithDuration:duration animations:^{
+            self.collectionView.contentOffset = CGPointMake(0, 64 + self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height - ([UIScreen mainScreen].bounds.size.height - rect.size.height));
+        }];
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notify {
+    [UIView animateWithDuration:.25 animations:^{
+        self.collectionView.contentOffset = CGPointMake(0, 0);
+    }];
+}
+
+- (void)keyboardFrameChange:(NSNotification *)notify {
+    NSLog(@"%@",notify.userInfo);
+    //取出键盘最终的frame
+    CGRect rect = [notify.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    //取出键盘弹出需要花费的时间
+    double duration = [notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    //获取最佳位置距离屏幕上方的距离
+    [UIView animateWithDuration:duration animations:^{
+        self.collectionView.contentOffset = CGPointMake(0, 64 + self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height - ([UIScreen mainScreen].bounds.size.height - rect.size.height));
+    }];
+    
+}
+
+#pragma mark - textfielddelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField endEditing:YES];
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.activedTextFieldRect = [textField convertRect:textField.frame toView:self.collectionView];
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.elementsHight.count;
 }
@@ -59,6 +106,7 @@
     } else {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
+        cell.textField.delegate = self;
         cell.model = model;
         if (indexPath.row == self.sheetDatas.count - 1) {
             cell.mineSparaterType = BTTMineSparaterTypeNone;
@@ -71,6 +119,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    [self.collectionView endEditing:YES];
     BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSLog(@"%zd", indexPath.item);
     if (indexPath.item == 1) {
@@ -86,13 +135,15 @@
         [BRAddressPickerView showAddressPickerWithShowType:BRAddressPickerModeProvince dataSource:nil defaultSelected:nil isAutoSelect:NO themeColor:nil resultBlock:^(BRProvinceModel *province, BRCityModel *city, BRAreaModel *area) {
             self.provinceModel = province;
             cell.textField.text = province.name;
+            BTTBindingMobileOneCell *fiveCell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
+            fiveCell.textField.text = @"";
         } cancelBlock:^{
             
         }];
     } else if (indexPath.item == 5) {
         if (self.provinceModel) {
-            [BRAddressPickerView showAddressPickerWithShowType:BRAddressPickerModeCity dataSource:nil defaultSelected:@[self.provinceModel.name] isAutoSelect:NO themeColor:nil resultBlock:^(BRProvinceModel *province, BRCityModel *city, BRAreaModel *area) {
-                cell.textField.text = city.name;
+            [BRAddressPickerView showAddressPickerWithShowType:BRAddressPickerModeArea dataSource:nil defaultSelected:@[self.provinceModel.name] isAutoSelect:NO themeColor:nil resultBlock:^(BRProvinceModel *province, BRCityModel *city, BRAreaModel *area) {
+                cell.textField.text = [NSString stringWithFormat:@"%@%@",city.name,area.name];
             } cancelBlock:^{
                 
             }];

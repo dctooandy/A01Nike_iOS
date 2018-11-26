@@ -254,6 +254,7 @@ static const char *BTTNextGroupKey = "nextGroup";
     }];
 }
 
+
 #pragma mark - 动态添加属性
 
 - (void)setNextGroup:(NSInteger)nextGroup {

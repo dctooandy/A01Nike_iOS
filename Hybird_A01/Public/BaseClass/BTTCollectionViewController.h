@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)keyboardWillShow:(NSNotification *)notification;
 - (void)keyboardWillHide:(NSNotification *)notify;
+- (void)keyboardFrameChange:(NSNotification *)notify;
 
 - (void)setupCollectionView;
 

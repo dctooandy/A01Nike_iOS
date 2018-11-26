@@ -90,6 +90,7 @@
         [self loadBindStatus];
         [self loadBankList];
         [self loadTotalAvailableData];
+        [BTTHttpManager getOpenAccountStatus];
     }
 }
 
