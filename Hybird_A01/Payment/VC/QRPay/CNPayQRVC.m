@@ -66,7 +66,7 @@
             tipText = @"手机银行";
             self.unionTipLb.hidden = NO;
             break;
-        case CNPaymentJDQR:
+        case CNPaymentJDApp:
             tipText = @"京东";
             break;
         default:

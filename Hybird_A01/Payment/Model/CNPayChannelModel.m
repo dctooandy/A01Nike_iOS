@@ -30,72 +30,46 @@
             
         case CNPayChannelOnline:
             self.channelName    = @"在线支付";
-            self.normalIcon     = @"pay_onlineN";
             self.selectedIcon   = @"pay_onlineHL";
             break;
         case CNPayChannelCard:
             self.channelName    = @"点卡支付";
-            self.normalIcon     = @"pay_cardN";
             self.selectedIcon   = @"pay_cardHL";
             break;
         case CNPayChannelDeposit:
             self.channelName    = @"手工存款";
-            self.normalIcon     = @"pay_depositN";
             self.selectedIcon   = @"pay_depositHL";
             break;
         case CNPayChannelBTC:
             self.channelName    = @"比特币支付";
-            self.normalIcon     = @"pay_btcN";
             self.selectedIcon   = @"pay_btcHL";
             break;
-        case CNPayChannelWechatBarCode:
-            self.channelName    = @"微信条码";
-            self.normalIcon     = @"pay_barCodeN";
-            self.selectedIcon   = @"pay_barCodeHL";
-            break;
-        case CNPayChannelWechatApp:
-            self.channelName    = @"微信支付";
-            self.normalIcon     = @"pay_wechatN";
-            self.selectedIcon   = @"pay_wechatHL";
-            break;
         case CNPayChannelAliApp:
-            self.channelName    = @"支付宝支付";
-            self.normalIcon     = @"pay_AliN";
+            self.channelName    = @"支付宝WAP";
             self.selectedIcon   = @"pay_AliHL";
             break;
-        case CNPayChannelQQApp:
-            self.channelName    = @"QQ支付";
-            self.normalIcon     = @"pay_QQN";
-            self.selectedIcon   = @"pay_QQHL";
-            break;
         case CNPayChannelUnionApp:
-            self.channelName    = @"银联支付";
-            self.normalIcon     = @"pay_unionN";
+            self.channelName    = @"银行卡快捷支付";
             self.selectedIcon   = @"pay_unionHL";
             break;
-//        case CNPayChannelJDApp:
-//            self.channelName    = @"京东支付";
-//            self.normalIcon     = @"pay_JDN";
-//            self.selectedIcon   = @"pay_JDHL";
-//            break;
+        case CNPayChannelJDApp:
+            self.channelName    = @"京东WAP";
+            self.selectedIcon   = @"pay_JDHL";
+            break;
         case CNPayChannelQR:
             self.channelName    = @"扫码支付";
-            self.normalIcon     = @"pay_QRUnionN";
-            self.selectedIcon   = @"pay_QRUnionHL";
+            self.selectedIcon   = @"pay_QRHL";
             break;
         case CNPayChannelBQFast:
-            self.channelName    = @"快速支付";
-            self.normalIcon     = @"pay_fastN";
+            self.channelName    = @"迅捷网银";
             self.selectedIcon   = @"pay_fastHL";
             break;
         case CNPayChannelBQWechat:
-            self.channelName    = @"微信转账";
-            self.normalIcon     = @"pay_BQWeChatN";
+            self.channelName    = @"微信秒存";
             self.selectedIcon   = @"pay_BQWeChatHL";
             break;
         case CNPayChannelBQAli:
-            self.channelName    = @"支付宝转账";
-            self.normalIcon     = @"pay_BQAliN";
+            self.channelName    = @"支付宝秒存";
             self.selectedIcon   = @"pay_BQAliHL";
             break;
     }

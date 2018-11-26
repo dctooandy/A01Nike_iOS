@@ -32,9 +32,21 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m4K-aK-8TW" customClass="CNPayAmountRecommendView">
                     <rect key="frame" x="0.0" y="30" width="375" height="120"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pYW-Nj-PQU" customClass="CNPayOnePixView">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="8A9-9d-Ybv"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.16078431372549018" green="0.1803921568627451" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="pYW-Nj-PQU" firstAttribute="leading" secondItem="m4K-aK-8TW" secondAttribute="leading" id="BwL-ZA-9XK"/>
+                        <constraint firstItem="pYW-Nj-PQU" firstAttribute="top" secondItem="m4K-aK-8TW" secondAttribute="top" id="CRZ-w6-OpA"/>
                         <constraint firstAttribute="height" constant="120" id="obm-ul-3uE"/>
+                        <constraint firstAttribute="trailing" secondItem="pYW-Nj-PQU" secondAttribute="trailing" id="uiG-dO-XK5"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUe-Hz-zx7">
