@@ -142,6 +142,10 @@ static const char *BTTNextGroupKey = "nextGroup";
     }];
 }
 
+- (void)loadGamesData {
+
+}
+
 - (void)showCallBackSuccessView {
     BTTMakeCallSuccessView *customView = [BTTMakeCallSuccessView viewFromXib];
     customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
