@@ -40,9 +40,8 @@
 #import "BTTBindStatusModel.h"
 #import "BTTVerifyTypeSelectController.h"
 #import "BTTHomePageViewController+LoadData.h"
-
 #import "BTTUserStatusManager.h"
-
+#import "IVNetworkStatusDetailViewController.h"
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, assign) BOOL isChangeMobile; // 是否改变手机号
@@ -295,6 +294,7 @@
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 10) {
         // 网络监测
         [IVNetwork startCheckWithType:IVCheckNetworkTypeAll appWindow:[UIApplication sharedApplication].keyWindow detailBtnClickedBlock:^{
+            [self.navigationController pushViewController:[IVNetworkStatusDetailViewController new] animated:YES];
         }];
     }
 }
