@@ -13,9 +13,7 @@
 
 
 - (void)loadMainData {
-    [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTPromotionList paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        [self hideLoading];
         if (result.code_http == 200) {
             if (![result.data isKindOfClass:[NSNull class]]) {
                 [self.sheetDatas removeAllObjects];

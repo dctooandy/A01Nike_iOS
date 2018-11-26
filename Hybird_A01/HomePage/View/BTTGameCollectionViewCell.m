@@ -29,12 +29,12 @@
 
 - (void)setGameIcon:(NSString *)gameIcon {
     _gameIcon = gameIcon;
-    [self.gameIconImageView sd_setImageWithURL:[NSURL URLWithString:gameIcon] placeholderImage:ImageNamed(@"")];
-    if ([IVNetwork userInfo]) {
-        self.tryPlayIcon.hidden = YES;
+    if (_gameIcon.length) {
+        self.gameIconImageView.image = ImageNamed(gameIcon);
     } else {
-        self.tryPlayIcon.hidden = NO;
+        self.gameIconImageView.image = ImageNamed(@"default_1");
     }
+    
 }
 
 - (void)setGameName:(NSString *)gameName {

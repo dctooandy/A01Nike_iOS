@@ -45,7 +45,12 @@
 #pragma mark --------------------加载框-----------------------------------------
 - (void)showLoading {
     dispatch_main_async_safe((^{
-        self.hud = [MBProgressHUD showCustomView:nil toView:self.view];
+        if (self.hud) {
+            [self hideLoading];
+        }
+        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];//[MBProgressHUD showCustomView:nil toView:self.view];
+        self.hud.bezelView.backgroundColor = [UIColor clearColor];
+        self.hud.bezelView.blurEffectStyle = UIBlurEffectStyleLight;
     }));
     
 }
