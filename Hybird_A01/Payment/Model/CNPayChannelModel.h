@@ -20,14 +20,14 @@ typedef NS_ENUM(NSUInteger, CNPayChannel) {
     /// 比特币支付
     CNPayChannelBTC,
     /// 微信条码
-    CNPayChannelWechatBarCode,
+//    CNPayChannelWechatBarCode,
     
     /// app
-    CNPayChannelWechatApp,
+//    CNPayChannelWechatApp,
     CNPayChannelAliApp,
-    CNPayChannelQQApp,
+//    CNPayChannelQQApp,
     CNPayChannelUnionApp,
-//    CNPayChannelJDApp,
+    CNPayChannelJDApp,
     
     /// 扫码
     CNPayChannelQR,
@@ -53,9 +53,6 @@ typedef NS_ENUM(NSUInteger, CNPayChannel) {
 
 /** 渠道选中图标名称  */
 @property (nonatomic, copy, readonly) NSString *selectedIcon;
-
-/** 渠道非选中状态图标名称 */
-@property (nonatomic, copy, readonly) NSString *normalIcon;
 
 /** Channel 是否可用 */
 @property (nonatomic, assign, readonly) BOOL isAvailable;
