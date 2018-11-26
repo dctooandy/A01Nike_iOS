@@ -24,6 +24,7 @@ PODS:
   - GJRedDot (1.1.1):
     - GJRedDot/GJDeallocBlockExecutor (= 1.1.1)
   - GJRedDot/GJDeallocBlockExecutor (1.1.1)
+  - IQKeyboardManager (5.0.8)
   - IVGameLibrary (0.0.16):
     - IVGameLibrary/GameController (= 0.0.16)
   - IVGameLibrary/GameController (0.0.16)
@@ -80,6 +81,7 @@ DEPENDENCIES:
   - CocoaAsyncSocket (~> 7.6.3)
   - FMDB
   - GJRedDot
+  - IQKeyboardManager (~> 5.0.6)
   - IVGameLibrary (from `http://10.66.72.115/mobile-iOS/IVGameLibrary.git`)
   - IVHeartPacketLibrary (from `http://10.66.72.115/mobile-iOS/IVHeartPacketLibrary.git`)
   - IVNetworkLibrary (from `http://10.66.72.115/mobile-iOS/IVNetworkLibrary.git`)
@@ -103,6 +105,7 @@ SPEC REPOS:
     - FCUUID
     - FMDB
     - GJRedDot
+    - IQKeyboardManager
     - JSONModel
     - Masonry
     - MBProgressHUD
@@ -150,6 +153,7 @@ SPEC CHECKSUMS:
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GJRedDot: de661162a700f3395f0cd70f3629e4d3abe8e181
+  IQKeyboardManager: 266cb7b1d11f94a3e71229d77f960f9a1b538e5b
   IVGameLibrary: b1d9c989f45dbe064fc7d8de336e29b04ef1b463
   IVHeartPacketLibrary: a93b7de9ba49911aa09d39250f9e3d96036a2ed0
   IVNetworkLibrary: 80108e517f7fe70fdfed19c89af1b43047ec6488
@@ -170,6 +174,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
-PODFILE CHECKSUM: 2a5984717d6703a59edc5509a2ebc184fd98bae7
+PODFILE CHECKSUM: 1197b9931a9000ad55a3bdd54269ad8fe40fdf05
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.2
