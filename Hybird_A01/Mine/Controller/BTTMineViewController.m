@@ -90,7 +90,7 @@
         [self loadBankList];
         [self loadTotalAvailableData];
         [BTTHttpManager getOpenAccountStatus];
-        [self loadPersonalPaymentData];
+        [self loadPaymentData];
     }
 }
 

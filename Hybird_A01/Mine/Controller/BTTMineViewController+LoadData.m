@@ -9,6 +9,7 @@
 #import "BTTMineViewController+LoadData.h"
 #import "BTTMeMainModel.h"
 #import "CNPayRequestManager.h"
+#import "CNPaymentModel.h"
 
 @implementation BTTMineViewController (LoadData)
 
@@ -45,7 +46,7 @@
         [self.paymentDatas removeAllObjects];
     }
     NSArray *icons = @[@"me_netbank",@"me_wechat",@"me_alipay",@"me_hand",@"me_online",@"me_scan",@"me_quick",@"me_alipay",@"me_pointCard",@"me_btc",@"me_jd"];
-    NSArray *names = @[@"迅捷网银",@"微信秒存",@"支付宝秒存",@"手工存款",@"在线支付",@"扫码支付",@"银行快捷支付",@"支付宝wap",@"点卡支付",@"比特币支付",@"京东wap支付"];
+    NSArray *names = @[@"迅捷网银",@"微信秒存",@"支付宝秒存",@"手工存款",@"在线支付",@"扫码支付",@"银行快捷支付",@"支付宝WAP",@"点卡支付",@"比特币支付",@"京东WAP支付"];
     NSArray *paymentNames = @[@"bqpaytype-0",@"bqpaytype-1",@"bqpaytype-2",@"deposit",@"online-1",@"online-6;online-8;online-5;online-7;online-11;online-15;online-16",@"faster",@"online-9",@"card",@"online-20",@"online-17"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
@@ -68,6 +69,37 @@
     [CNPayRequestManager queryAllChannelCompleteHandler:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
         NSLog(@"%@",response);
+        NSMutableArray *payments = [NSMutableArray array];
+        NSMutableArray *availablePayments = [NSMutableArray array];
+        if (result.data && [result.data isKindOfClass:[NSArray class]]) {
+            for (NSDictionary *dict in result.data) {
+                CNPaymentModel *model = [[CNPaymentModel alloc] initWithDictionary:dict error:nil];
+                if (model.isAvailable) {
+                    [payments addObject:model];
+                }
+            }
+          
+            for (CNPaymentModel *paymentModel in payments) {
+                for (BTTMeMainModel *model in self.paymentDatas) {
+                    if ([model.name isEqualToString:paymentModel.paymentTitle] && paymentModel.isAvailable) {
+                        if ([paymentModel.paymentTitle isEqualToString:@"微信扫码"] ||
+                            [paymentModel.paymentTitle isEqualToString:@"微信WAP"] ||
+                            [paymentModel.paymentTitle isEqualToString:@"支付宝扫码"] ||
+                            [paymentModel.paymentTitle isEqualToString:@"QQ钱包"] ||
+                            [paymentModel.paymentTitle isEqualToString:@"QQWAP"] ||
+                            [paymentModel.paymentTitle isEqualToString:@"银联扫码"] ||
+                            [paymentModel.paymentTitle isEqualToString:@"京东扫码"]) {
+                            continue;
+                        }
+                        
+                        [availablePayments addObject:model];
+                    }
+                }
+            }
+            
+            self.paymentDatas = [availablePayments mutableCopy];
+        }
+        [self setupElements];
     }];
 }
 
