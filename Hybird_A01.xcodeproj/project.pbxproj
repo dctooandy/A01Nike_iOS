@@ -1933,12 +1933,12 @@
 			children = (
 				3A8F516B215F75F20069D1B3 /* Constants.h */,
 				3AD9CF05216C71C800685B43 /* AppInitializeConfig.h */,
-				3A8F5161215F75240069D1B3 /* Mine */,
 				3A8F5166215F75780069D1B3 /* Public */,
 				3A8F5165215F75660069D1B3 /* HomePage */,
 				3A8F5164215F75550069D1B3 /* WebPhone */,
 				3A8F5163215F75450069D1B3 /* LuckyWheel */,
 				3A8F5162215F75390069D1B3 /* Discounts */,
+				3A8F5161215F75240069D1B3 /* Mine */,
 				D5DBEA8B21ABB774008AF629 /* Payment */,
 				3A8F5160215F75010069D1B3 /* Resource */,
 			);
@@ -3795,7 +3795,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
 				"${PODS_ROOT}/BRPickerView/BRPickerView/AddressPickerView/BRPickerView.bundle",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
@@ -3808,7 +3808,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

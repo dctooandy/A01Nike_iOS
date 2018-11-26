@@ -54,7 +54,6 @@ static const char *BTTNextGroupKey = "nextGroup";
 }
 
 - (void)refreshDatasOfHomePage {
-    [self loadGamesData];
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self loadMainData];
@@ -117,6 +116,9 @@ static const char *BTTNextGroupKey = "nextGroup";
         model.detailBtnStr = btns[index];
         [self.headers addObject:model];
     }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+    });
 }
 
 
