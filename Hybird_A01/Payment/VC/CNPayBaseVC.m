@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.view.backgroundColor = kBlackBackgroundColor;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
