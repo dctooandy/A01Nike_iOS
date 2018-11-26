@@ -240,7 +240,7 @@
             BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
+            BTTPersonalInfoController *vc = [[BTTPersonalInfoController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
     } else if (indexPath.row == 3) {
@@ -266,7 +266,7 @@
             }
         } else {
             [MBProgressHUD showMessagNoActivity:@"请先完善个人信息" toView:nil];
-            BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
+            BTTPersonalInfoController *vc = [[BTTPersonalInfoController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
         

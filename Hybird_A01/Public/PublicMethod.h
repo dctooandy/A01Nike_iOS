@@ -130,7 +130,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 某个时间一个星期之前的时间
 + (NSDate *)returnTheDayBeforeOneWeekWithDate:(NSDate *)date;
-
+//是否为成年人
++ (BOOL)isAdultWithBirthday:(NSString *)birthday;
 
 + (UIViewController *)mostFrontViewController;
 
@@ -168,6 +169,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** 转换货币字符串 */
 + (NSString *)getMoneyString:(double)money;
+
 + (NSString*)getCurrentTimesWithFormat:(NSString *)formatStr;
 
 

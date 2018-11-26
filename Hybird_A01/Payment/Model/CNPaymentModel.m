@@ -37,15 +37,17 @@
         case CNPaymentBTC:
             return @"比特币支付";
         case CNPaymentWechatBarCode:
-            return @"微信条码";
+            return @"微信条码支付";
         case CNPaymentWechatApp:
-            return @"微信支付";
+            return @"微信WAP";
         case CNPaymentAliApp:
-            return @"支付宝支付";
+            return @"支付宝WAP";
         case CNPaymentQQApp:
-            return @"QQ钱包";
+            return @"QQWAP";
         case CNPaymentUnionApp:
-            return @"银联支付";
+            return @"银行快捷支付";
+        case CNPaymentJDApp:
+            return @"京东WAP";
         case CNPaymentWechatQR:
             return @"微信扫码";
         case CNPaymentAliQR:
@@ -54,21 +56,21 @@
             return @"QQ扫码";
         case CNPaymentUnionQR:
             return @"银联扫码";
-        case CNPaymentJDQR:
-            return @"京东扫码";
         case CNPaymentBQFast:
-            return @"快速支付";
+            return @"迅捷支付";
         case CNPaymentBQWechat:
-            return @"微信转账";
+            return @"微信秒存";
         case CNPaymentBQAli:
-            return @"支付宝转账";
+            return @"支付宝秒存";
+        case CNPaymentCoin:
+            return @"币宝支付";
     }
 }
 
 - (NSArray<NSNumber *> *)prePayAmountArray {
-    
+
     switch (self.paymentType) {
-            
+
         case CNPaymentWechatApp:
         case CNPaymentWechatQR:
         case CNPaymentAliApp:
@@ -77,7 +79,7 @@
         case CNPaymentQQQR:
         case CNPaymentUnionApp:
         case CNPaymentUnionQR:
-        case CNPaymentJDQR:
+        case CNPaymentJDApp:
         case CNPaymentCard:
         case CNPaymentWechatBarCode:
             return @[@(100), @(1000), @(2000), @(3000), @(5000)];
@@ -93,6 +95,9 @@
         case CNPaymentDeposit:
         case CNPaymentBTC:
             return @[@(100), @(1000), @(10000), @(50000), @(150000)];
+            break;
+        case CNPaymentCoin:
+            return @[];
             break;
     }
 }

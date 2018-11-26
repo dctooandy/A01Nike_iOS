@@ -149,8 +149,6 @@
         if (![IVNetwork userInfo].isPhoneBinded && [IVNetwork userInfo].phone.length != 0) {
             textField.text = @"";
         }
-        [self getSendBtn].enabled = NO;
-        [[self getVerifyCell] cancelCountDown];
     }
 }
 - (void)textChanged:(UITextField *)textField

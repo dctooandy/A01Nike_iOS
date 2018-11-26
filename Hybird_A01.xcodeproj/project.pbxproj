@@ -3080,14 +3080,14 @@
 		D5DBEAD021ABB774008AF629 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D5DBEAD421ABB774008AF629 /* CNPayBankCardModel.h */,
-				D5DBEADB21ABB774008AF629 /* CNPayBankCardModel.m */,
-				D5DBEAD621ABB774008AF629 /* CNPayCardModel.h */,
-				D5DBEADC21ABB774008AF629 /* CNPayCardModel.m */,
 				D5DBEAD321ABB774008AF629 /* CNPayChannelModel.h */,
 				D5DBEAD921ABB774008AF629 /* CNPayChannelModel.m */,
 				D5DBEAD121ABB774008AF629 /* CNPaymentModel.h */,
 				D5DBEAD821ABB774008AF629 /* CNPaymentModel.m */,
+				D5DBEAD421ABB774008AF629 /* CNPayBankCardModel.h */,
+				D5DBEADB21ABB774008AF629 /* CNPayBankCardModel.m */,
+				D5DBEAD621ABB774008AF629 /* CNPayCardModel.h */,
+				D5DBEADC21ABB774008AF629 /* CNPayCardModel.m */,
 				D5DBEAD221ABB774008AF629 /* CNPayOrderModel.h */,
 				D5DBEAD721ABB774008AF629 /* CNPayOrderModel.m */,
 				D5DBEADA21ABB774008AF629 /* CNPayWriteModel.h */,
@@ -3818,7 +3818,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
 				"${PODS_ROOT}/BRPickerView/BRPickerView/AddressPickerView/BRPickerView.bundle",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
@@ -3831,7 +3831,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

@@ -84,12 +84,9 @@
             [viewControllers addObjectsFromArray:[self depositPay:payment]];
         }
             break;
-            
+        case CNPayChannelJDApp:
         case CNPayChannelBTC:
-        case CNPayChannelWechatBarCode:
-        case CNPayChannelWechatApp:
         case CNPayChannelAliApp:
-        case CNPayChannelQQApp:
         case CNPayChannelUnionApp:
         case CNPayChannelOnline: {
             [viewControllers addObjectsFromArray:[self onlinePay:payment]];

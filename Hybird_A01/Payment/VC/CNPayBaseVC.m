@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.view.backgroundColor = kBlackBackgroundColor;
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -203,12 +203,12 @@
         case CNPaymentUnionQR:
             paytypeString = @"15";
             break;
-//        case CNPaymentJDApp:
-//            paytypeString = @"17";
-//            break;
-        case CNPaymentJDQR:
-            paytypeString = @"16";
+        case CNPaymentJDApp:
+            paytypeString = @"17";
             break;
+//        case CNPaymentJDQR:
+//            paytypeString = @"16";
+//            break;
         case CNPaymentBTC:
             paytypeString = @"20";
             break;
