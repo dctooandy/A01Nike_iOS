@@ -42,7 +42,7 @@
 - (void)setModel:(BTTPromotionModel *)model {
     _model = model;
     if (_model) {
-        [self.discountIcon sd_setImageWithURL:[NSURL URLWithString:model.imgurl] placeholderImage:ImageNamed(@"")];
+        [self.discountIcon sd_setImageWithURL:[NSURL URLWithString:model.imgurl] placeholderImage:ImageNamed(@"default_2")];
         self.titleLabel.text = model.name;
         self.detailLabel.text = model.desc;
     }

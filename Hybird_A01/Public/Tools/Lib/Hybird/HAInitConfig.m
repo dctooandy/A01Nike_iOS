@@ -17,8 +17,7 @@
 + (NSArray *)gateways {
     switch (EnvirmentType) {
         case 0:
-//            return @[@"http://a01nike.gateway.com"];
-            return @[@"http://10.71.12.105:81"];
+            return @[@"http://a01nike.gateway.com/"];
         case 1:
             return @[@"http://a01gatewaynew.bawinx.com/",@"http://a01gatewayfresh.bawinx.com/"];
         default:

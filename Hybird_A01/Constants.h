@@ -243,6 +243,10 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTXimaBillOut               @"/public/xm/billout"
 
+// 开户礼金和存款礼金即可欧
+
+#define BTTOpenAccountStatus         @"/A01/openAccount/isOpen"
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)  ([UIFont systemFontOfSize:X])

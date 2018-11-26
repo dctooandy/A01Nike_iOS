@@ -18,6 +18,9 @@
 #import "BTTXimaItemModel.h"
 #import "BTTXimaNoDataCell.h"
 #import "BTTXimaSingleBtnCell.h"
+#import "BTTXimaSuccessItemCell.h"
+#import "BTTXimaSuccessBtnsCell.h"
+#import "BTTXimaSuccessItemModel.h"
 
 typedef enum {
     BTTXimaDateTypeThisWeek, //本周
@@ -62,6 +65,8 @@ typedef enum {
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTXimaFooterCell" bundle:nil] forCellWithReuseIdentifier:@"BTTXimaFooterCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTXimaNoDataCell" bundle:nil] forCellWithReuseIdentifier:@"BTTXimaNoDataCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTXimaSingleBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTXimaSingleBtnCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTXimaSuccessBtnsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTXimaSuccessBtnsCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTXimaSuccessItemCell" bundle:nil] forCellWithReuseIdentifier:@"BTTXimaSuccessItemCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -74,113 +79,141 @@ typedef enum {
         weakSelf(weakSelf)
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf)
-            self.thisWeekDataType = BTTXimaThisWeekTypeVaild;
             strongSelf.ximaDateType = (BTTXimaDateType)(button.tag - 80000);
+            if (button.tag == 80000) {
+                if ([button.titleLabel.text isEqualToString:@"其它游戏厅"]) {
+                    self.thisWeekDataType = BTTXimaThisWeekTypeOther;
+                } else {
+                    self.thisWeekDataType = BTTXimaThisWeekTypeVaild;
+                }
+            }
             [strongSelf setupElements];
         };
         return cell;
     } else {
         if (self.ximaStatusType == BTTXimaStatusTypeNormal) {
-            
-        } else {
-            
-        }
-        if (self.ximaDateType == BTTXimaDateTypeLastWeek) {
-            if (self.historyListType == BTTXimaHistoryListTypeNoData) {
-                if (indexPath.row == 1) {
-                    BTTXimaNoDataCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaNoDataCell" forIndexPath:indexPath];
-                    return cell;
-                } else {
-                    BTTXimaFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaFooterCell" forIndexPath:indexPath];
-                    return cell;
-                }
-            } else {
-                if (indexPath.row == 1 + self.histroyModel.list.count) {
-                    BTTThisWeekTotalCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekTotalCell" forIndexPath:indexPath];
-                    cell.model = self.histroyModel;
-                    return cell;
-                } else if (indexPath.row == self.histroyModel.list.count + 2) {
-                    BTTXimaFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaFooterCell" forIndexPath:indexPath];
-                    return cell;
-                } else {
-                    BTTLastWeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLastWeekCell" forIndexPath:indexPath];
-                    BTTXimaItemModel *model = self.histroyModel.list[indexPath.row - 1];
-                    cell.model = model;
-                    return cell;
-                }
-            }
-        } else {
-            if (self.thisWeekDataType == BTTXimaThisWeekTypeVaild) {
-                if (self.currentListType == BTTXimaCurrentListTypeNoData) {
+            if (self.ximaDateType == BTTXimaDateTypeLastWeek) {
+                if (self.historyListType == BTTXimaHistoryListTypeNoData) {
                     if (indexPath.row == 1) {
                         BTTXimaNoDataCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaNoDataCell" forIndexPath:indexPath];
-                        return cell;
-                    } else if (indexPath.row == 2) {
-                        BTTXimaSingleBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaSingleBtnCell" forIndexPath:indexPath];
-                        weakSelf(weakSelf);
-                        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-                            strongSelf(strongSelf);
-                            BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-                            [cell setBtnTwoType:BTTXimaHeaderBtnTwoTypeOtherSelect];
-                            [cell setBtnOneType:BTTXimaHeaderBtnOneTypeThisWeekNormal];
-                            strongSelf.thisWeekDataType = BTTXimaThisWeekTypeOther;
-                            [strongSelf setupElements];
-                        };
                         return cell;
                     } else {
                         BTTXimaFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaFooterCell" forIndexPath:indexPath];
                         return cell;
                     }
                 } else {
-                    if (indexPath.row == 1 + self.validModel.list.count) {
+                    if (indexPath.row == 1 + self.histroyModel.list.count) {
                         BTTThisWeekTotalCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekTotalCell" forIndexPath:indexPath];
-                        cell.model = self.validModel;
+                        cell.model = self.histroyModel;
                         return cell;
-                    } else if (indexPath.row == self.validModel.list.count + 2) {
-                        BTTThisWeekBtnsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekBtnsCell" forIndexPath:indexPath];
-                        weakSelf(weakSelf);
-                        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-                            strongSelf(strongSelf);
-                            if (button.tag == 1050) {
-                                [strongSelf loadXimaBillOut];
-                            } else if (button.tag == 1051) {
-                                BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-                                [cell setBtnTwoType:BTTXimaHeaderBtnTwoTypeOtherSelect];
-                                [cell setBtnOneType:BTTXimaHeaderBtnOneTypeThisWeekNormal];
-                                strongSelf.thisWeekDataType = BTTXimaThisWeekTypeOther;
-                                [strongSelf setupElements];
-                            }
-                        };
-                        return cell;
-                    } else if (indexPath.row == self.validModel.list.count + 3) {
+                    } else if (indexPath.row == self.histroyModel.list.count + 2) {
                         BTTXimaFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaFooterCell" forIndexPath:indexPath];
                         return cell;
                     } else {
-                        BTTThisWeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekCell" forIndexPath:indexPath];
-                        
-                        BTTXimaItemModel *model = self.validModel.list[indexPath.row - 1];
-                        cell.thisWeekCellType = model.isSelect;
+                        BTTLastWeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLastWeekCell" forIndexPath:indexPath];
+                        BTTXimaItemModel *model = self.histroyModel.list[indexPath.row - 1];
                         cell.model = model;
                         return cell;
                     }
                 }
             } else {
-                if (indexPath.row == 1 + self.otherModel.list.count) {
-                    BTTThisWeekTotalCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekTotalCell" forIndexPath:indexPath];
-                    cell.model = self.otherModel;
-                    return cell;
-                } else if (indexPath.row == self.otherModel.list.count + 2) {
-                    BTTXimaFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaFooterCell" forIndexPath:indexPath];
-                    return cell;
+                if (self.thisWeekDataType == BTTXimaThisWeekTypeVaild) {
+                    if (self.currentListType == BTTXimaCurrentListTypeNoData) {
+                        if (indexPath.row == 1) {
+                            BTTXimaNoDataCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaNoDataCell" forIndexPath:indexPath];
+                            return cell;
+                        } else if (indexPath.row == 2) {
+                            BTTXimaSingleBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaSingleBtnCell" forIndexPath:indexPath];
+                            weakSelf(weakSelf);
+                            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                                strongSelf(strongSelf);
+                                BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                                [cell setBtnTwoType:BTTXimaHeaderBtnTwoTypeOtherSelect];
+                                [cell setBtnOneType:BTTXimaHeaderBtnOneTypeThisWeekNormal];
+                                strongSelf.thisWeekDataType = BTTXimaThisWeekTypeOther;
+                                [strongSelf setupElements];
+                            };
+                            return cell;
+                        } else {
+                            BTTXimaFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaFooterCell" forIndexPath:indexPath];
+                            return cell;
+                        }
+                    } else {
+                        if (indexPath.row == 1 + self.validModel.list.count) {
+                            BTTThisWeekTotalCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekTotalCell" forIndexPath:indexPath];
+                            cell.model = self.validModel;
+                            return cell;
+                        } else if (indexPath.row == self.validModel.list.count + 2) {
+                            BTTThisWeekBtnsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekBtnsCell" forIndexPath:indexPath];
+                            weakSelf(weakSelf);
+                            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                                strongSelf(strongSelf);
+                                if (button.tag == 1050) {
+                                    [strongSelf loadXimaBillOut];
+                                } else if (button.tag == 1051) {
+                                    BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                                    [cell setBtnTwoType:BTTXimaHeaderBtnTwoTypeOtherSelect];
+                                    [cell setBtnOneType:BTTXimaHeaderBtnOneTypeThisWeekNormal];
+                                    strongSelf.thisWeekDataType = BTTXimaThisWeekTypeOther;
+                                    [strongSelf setupElements];
+                                }
+                            };
+                            return cell;
+                        } else if (indexPath.row == self.validModel.list.count + 3) {
+                            BTTXimaFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaFooterCell" forIndexPath:indexPath];
+                            return cell;
+                        } else {
+                            BTTThisWeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekCell" forIndexPath:indexPath];
+                            
+                            BTTXimaItemModel *model = self.validModel.list[indexPath.row - 1];
+                            cell.thisWeekCellType = model.isSelect;
+                            cell.model = model;
+                            return cell;
+                        }
+                    }
                 } else {
-                    BTTThisWeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekCell" forIndexPath:indexPath];
-                    cell.thisWeekCellType = BTTXimaThisWeekCellTypeDisable;
-                    BTTXimaItemModel *model = self.histroyModel.list[indexPath.row - 1];
-                    cell.model = model;
-                    return cell;
+                    if (indexPath.row == 1 + self.otherModel.list.count) {
+                        BTTThisWeekTotalCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekTotalCell" forIndexPath:indexPath];
+                        cell.model = self.otherModel;
+                        return cell;
+                    } else if (indexPath.row == self.otherModel.list.count + 2) {
+                        BTTXimaFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaFooterCell" forIndexPath:indexPath];
+                        return cell;
+                    } else {
+                        BTTThisWeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekCell" forIndexPath:indexPath];
+                        cell.thisWeekCellType = BTTXimaThisWeekCellTypeDisable;
+                        BTTXimaItemModel *model = self.histroyModel.list[indexPath.row - 1];
+                        cell.model = model;
+                        return cell;
+                    }
                 }
             }
+        } else {
+            if (indexPath.row == self.xmResults.count + 1) {
+                BTTXimaSuccessBtnsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaSuccessBtnsCell" forIndexPath:indexPath];
+                weakSelf(weakSelf);
+                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                    strongSelf(strongSelf);
+                    if (button.tag == 1060) {
+                        BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                        [cell setBtnOneType:BTTXimaHeaderBtnOneTypeLastWeekNormal];
+                        [cell setBtnTwoType:BTTXimaHeaderBtnTwoTypeThisWeekSelect];
+                        strongSelf.ximaStatusType = BTTXimaStatusTypeNormal;
+                        strongSelf.thisWeekDataType = BTTXimaThisWeekTypeOther;
+                        [strongSelf setupElements];
+                    } else if (button.tag == 1061) {
+                        
+                    }
+                };
+                return cell;
+            } else {
+                BTTXimaSuccessItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaSuccessItemCell" forIndexPath:indexPath];
+                BTTXimaSuccessItemModel *model = self.xmResults[indexPath.row - 1];
+                cell.model = model;
+                return cell;
+            }
         }
+        
     }
 }
 
@@ -234,23 +267,28 @@ typedef enum {
         [self.elementsHight removeAllObjects];
     }
     NSInteger total = 0;
-    if (self.ximaDateType == BTTXimaDateTypeThisWeek) {
-        if (self.thisWeekDataType == BTTXimaThisWeekTypeVaild) {
-            if (self.currentListType == BTTXimaCurrentListTypeNoData) {
-                total =  4;
+    if (self.ximaStatusType == BTTXimaStatusTypeNormal) {
+        if (self.ximaDateType == BTTXimaDateTypeThisWeek) {
+            if (self.thisWeekDataType == BTTXimaThisWeekTypeVaild) {
+                if (self.currentListType == BTTXimaCurrentListTypeNoData) {
+                    total =  4;
+                } else {
+                    total = 4 + self.validModel.list.count;
+                }
             } else {
-                total = 4 + self.validModel.list.count;
+                total = 3 + self.otherModel.list.count;
             }
         } else {
-            total = 3 + self.otherModel.list.count;
+            if (self.historyListType == BTTXimaHistoryListTypeNoData) {
+                total = 3;
+            } else {
+                total = 3 + self.histroyModel.list.count;
+            }
         }
     } else {
-        if (self.historyListType == BTTXimaHistoryListTypeNoData) {
-            total = 3;
-        } else {
-            total = 3 + self.histroyModel.list.count;
-        }
+        
     }
+    
     for (int i = 0; i < total; i ++) {
         if (i == 0) {
             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 48)]];

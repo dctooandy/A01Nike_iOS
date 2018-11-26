@@ -79,8 +79,8 @@
     if (self.mainDataTwo.count) {
         [self.mainDataTwo removeAllObjects];
     }
-    NSArray *names = @[@"财务报表",@"账号安全",@"设置",@"站内信",@"版本更新"];
-    NSArray *icons = @[@"me_sheet",@"me_amountsafe",@"me_setting",@"me_message",@"me_version"];
+    NSArray *names = @[@"财务报表",@"账号安全",@"设置",@"站内信",@"版本更新",@"网络检测"];
+    NSArray *icons = @[@"me_sheet",@"me_amountsafe",@"me_setting",@"me_message",@"me_version",@"me_speed"];
     
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];

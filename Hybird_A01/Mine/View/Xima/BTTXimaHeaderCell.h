@@ -12,7 +12,9 @@ typedef enum {
     BTTXimaHeaderBtnOneTypeLastWeekNormal,  ///< 上周
     BTTXimaHeaderBtnOneTypeLastWeekSelect,
     BTTXimaHeaderBtnOneTypeThisWeekNormal,   ///< 本周
-    BTTXimaHeaderBtnOneTypeThisWeekSelect
+    BTTXimaHeaderBtnOneTypeThisWeekSelect,
+    BTTXimaHeaderBtnOneTypeOtherNormal,      ///< 其他游戏
+    BTTXimaHeaderBtnOneTypeOtherSelect
 }BTTXimaHeaderBtnOneType;
 
 typedef enum {

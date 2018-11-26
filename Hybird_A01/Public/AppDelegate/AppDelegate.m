@@ -50,7 +50,7 @@
     [self setupAPPEnvironment];
     [self setupTabbarController];
     [self.window makeKeyAndVisible];
-    [self setupADandWelcome];
+//    [self setupADandWelcome];
     [self initRemoteNotificationWithOptions:launchOptions];
     return YES;
 }

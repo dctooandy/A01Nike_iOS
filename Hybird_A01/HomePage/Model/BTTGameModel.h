@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) BTTGameIconModel *icon;
 
+@property (nonatomic, copy) NSString *gameIcon;
+
 @end
 
 @interface BTTGameIconModel : BTTBaseModel

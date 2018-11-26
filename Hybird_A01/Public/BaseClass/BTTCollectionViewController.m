@@ -39,6 +39,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardFrameChange:)
+                                                 name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
@@ -49,6 +53,10 @@
     
 }
 
+- (void)keyboardFrameChange:(NSNotification *)notify {
+    
+}
+
 - (void)keyBoardWillShowWithNotification:(NSNotification *)notification {
     
 }
@@ -56,11 +64,12 @@
 - (void)pulldownRefreshWithRefreshBlock:(BTTRefreshBlock)refreshBlock {
     
     
-    BTTRefreshGIFHeader *header = [BTTRefreshGIFHeader headerWithRefreshingBlock:refreshBlock];
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:refreshBlock];
     // 隐藏时间
-    header.lastUpdatedTimeLabel.hidden = YES;
+//    header.lastUpdatedTimeLabel.hidden = YES;
     // 隐藏状态
-    header.stateLabel.hidden = YES;
+//    header.stateLabel.hidden = YES;
+    header.automaticallyChangeAlpha = YES;
     
     self.collectionView.mj_header = header;
 }

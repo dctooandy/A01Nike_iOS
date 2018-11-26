@@ -21,4 +21,5 @@ target ‘Hybird_A01’ do
   pod 'IVGameLibrary',:git =>'http://10.66.72.115/mobile-iOS/IVGameLibrary.git'
   pod 'IVWebViewLibrary',:git =>'http://10.66.72.115/mobile-iOS/IVWebViewLibrary.git'
   pod 'IVHeartPacketLibrary',:git =>'http://10.66.72.115/mobile-iOS/IVHeartPacketLibrary.git'
+  pod 'IQKeyboardManager','~> 5.0.6'
 end

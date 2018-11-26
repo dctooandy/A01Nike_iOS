@@ -9,6 +9,8 @@
 #import "BTTXimaController+LoadData.h"
 #import "BTTXimaModel.h"
 #import "BTTXimaItemModel.h"
+#import "BTTXimaSuccessItemModel.h"
+#import "BTTXimaHeaderCell.h"
 
 @implementation BTTXimaController (LoadData)
 
@@ -139,8 +141,17 @@
         NSLog(@"%@",response);
         [self hideLoading];
         if (result.code_http == 200) {
-            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-                
+            if (result.data && [result.data isKindOfClass:[NSArray class]]) {
+                for (NSDictionary *dict in result.data) {
+                    BTTXimaSuccessItemModel *model = [BTTXimaSuccessItemModel yy_modelWithDictionary:dict];
+                    [self.xmResults addObject:model];
+                }
+                self.ximaStatusType = BTTXimaStatusTypeSuccess;
+                BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                [cell setBtnOneType:BTTXimaHeaderBtnOneTypeOtherNormal];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.collectionView reloadData];
+                });
             }
         } else {
             if (result.message.length) {
@@ -163,6 +174,20 @@
 - (void)setXms:(NSMutableArray *)xms {
     objc_setAssociatedObject(self, @selector(xms), xms, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
+
+- (NSMutableArray *)xmResults {
+    NSMutableArray *xmResults = objc_getAssociatedObject(self, _cmd);
+    if (!xmResults) {
+        xmResults = [NSMutableArray array];
+        [self setXmResults:xmResults];
+    }
+    return xmResults;
+}
+
+- (void)setXmResults:(NSMutableArray *)xmResults {
+    objc_setAssociatedObject(self, @selector(xmResults), xmResults, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 
 
 @end
