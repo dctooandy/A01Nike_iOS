@@ -27,6 +27,9 @@
                         <state key="normal" title="一键洗码" backgroundImage="xima_btn1">
                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <connections>
+                            <action selector="ximaBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="xWf-Oc-emg"/>
+                        </connections>
                     </button>
                     <button opaque="NO" tag="1051" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bc3-zj-PXW">
                         <rect key="frame" x="15" y="76" width="345" height="41"/>
@@ -37,6 +40,9 @@
                         <state key="normal" title="查看其它游戏" backgroundImage="binding_confirm_disable">
                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <connections>
+                            <action selector="otherBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="hrK-aA-09p"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
@@ -52,7 +58,7 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="375" height="137"/>
-            <point key="canvasLocation" x="130.40000000000001" y="147.97601199400302"/>
+            <point key="canvasLocation" x="126" y="151"/>
         </collectionViewCell>
     </objects>
     <resources>

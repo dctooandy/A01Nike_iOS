@@ -25,7 +25,7 @@
     dispatch_group_notify(group, queue, ^{
         NSString *ximaType = @"";
         for (BTTXimaModel *model in self.xms) {
-            if (ximaType.length) {
+            if (!ximaType.length) {
                 ximaType = model.type;
             } else {
                 ximaType = [NSString stringWithFormat:@"%@;%@",ximaType,model.type];
@@ -140,6 +140,9 @@
     [IVNetwork sendRequestWithSubURL:BTTXimaBillOut paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         [self hideLoading];
+        if (self.xmResults.count) {
+            [self.xmResults removeAllObjects];
+        }
         if (result.code_http == 200) {
             if (result.data && [result.data isKindOfClass:[NSArray class]]) {
                 for (NSDictionary *dict in result.data) {
@@ -149,9 +152,7 @@
                 self.ximaStatusType = BTTXimaStatusTypeSuccess;
                 BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
                 [cell setBtnOneType:BTTXimaHeaderBtnOneTypeOtherNormal];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectionView reloadData];
-                });
+                [self setupElements];
             }
         } else {
             if (result.message.length) {

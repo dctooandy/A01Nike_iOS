@@ -199,8 +199,8 @@ typedef enum {
                         [cell setBtnOneType:BTTXimaHeaderBtnOneTypeLastWeekNormal];
                         [cell setBtnTwoType:BTTXimaHeaderBtnTwoTypeThisWeekSelect];
                         strongSelf.ximaStatusType = BTTXimaStatusTypeNormal;
-                        strongSelf.thisWeekDataType = BTTXimaThisWeekTypeOther;
-                        [strongSelf setupElements];
+                        strongSelf.thisWeekDataType = BTTXimaThisWeekTypeVaild;
+                        [strongSelf loadMainData];
                     } else if (button.tag == 1061) {
                         
                     }
@@ -286,48 +286,19 @@ typedef enum {
             }
         }
     } else {
-        
+        total = 2 + self.xmResults.count;
     }
     
     for (int i = 0; i < total; i ++) {
+        
         if (i == 0) {
             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 48)]];
         } else {
-            if (self.ximaDateType == BTTXimaDateTypeLastWeek) {
-                if (self.historyListType == BTTXimaHistoryListTypeNoData) {
-                    if (i == 1) {
-                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
-                    } else {
-                        if (SCREEN_WIDTH == 414) {
-                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 583)]];
-                        } else if (SCREEN_WIDTH == 320) {
-                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 680)]];
-                        } else {
-                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 613)]];
-                        }
-                    }
-                } else {
-                    if (i == 1 + self.histroyModel.list.count) {
-                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
-                    } else if (i == self.histroyModel.list.count + 2) {
-                        if (SCREEN_WIDTH == 414) {
-                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 583)]];
-                        } else if (SCREEN_WIDTH == 320) {
-                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 680)]];
-                        } else {
-                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 613)]];
-                        }
-                    } else {
-                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 107)]];
-                    }
-                }
-            } else {
-                if (self.thisWeekDataType == BTTXimaThisWeekTypeVaild) {
-                    if (self.currentListType == BTTXimaCurrentListTypeNoData) {
+            if (self.ximaStatusType == BTTXimaStatusTypeNormal) {
+                if (self.ximaDateType == BTTXimaDateTypeLastWeek) {
+                    if (self.historyListType == BTTXimaHistoryListTypeNoData) {
                         if (i == 1) {
                             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
-                        } else if (i == 2) {
-                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
                         } else {
                             if (SCREEN_WIDTH == 414) {
                                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 583)]];
@@ -338,11 +309,9 @@ typedef enum {
                             }
                         }
                     } else {
-                        if (i == 1 + self.validModel.list.count) {
+                        if (i == 1 + self.histroyModel.list.count) {
                             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
-                        } else if (i == self.validModel.list.count + 2) {
-                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 137)]];
-                        } else if (i == self.validModel.list.count + 3) {
+                        } else if (i == self.histroyModel.list.count + 2) {
                             if (SCREEN_WIDTH == 414) {
                                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 583)]];
                             } else if (SCREEN_WIDTH == 320) {
@@ -355,19 +324,59 @@ typedef enum {
                         }
                     }
                 } else {
-                    if (i == 1 + self.otherModel.list.count) {
-                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
-                    } else if (i == self.otherModel.list.count + 2) {
-                        if (SCREEN_WIDTH == 414) {
-                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 583)]];
-                        } else if (SCREEN_WIDTH == 320) {
-                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 680)]];
+                    if (self.thisWeekDataType == BTTXimaThisWeekTypeVaild) {
+                        if (self.currentListType == BTTXimaCurrentListTypeNoData) {
+                            if (i == 1) {
+                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
+                            } else if (i == 2) {
+                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+                            } else {
+                                if (SCREEN_WIDTH == 414) {
+                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 583)]];
+                                } else if (SCREEN_WIDTH == 320) {
+                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 680)]];
+                                } else {
+                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 613)]];
+                                }
+                            }
                         } else {
-                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 613)]];
+                            if (i == 1 + self.validModel.list.count) {
+                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+                            } else if (i == self.validModel.list.count + 2) {
+                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 137)]];
+                            } else if (i == self.validModel.list.count + 3) {
+                                if (SCREEN_WIDTH == 414) {
+                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 583)]];
+                                } else if (SCREEN_WIDTH == 320) {
+                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 680)]];
+                                } else {
+                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 613)]];
+                                }
+                            } else {
+                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 107)]];
+                            }
                         }
                     } else {
-                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 107)]];
+                        if (i == 1 + self.otherModel.list.count) {
+                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+                        } else if (i == self.otherModel.list.count + 2) {
+                            if (SCREEN_WIDTH == 414) {
+                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 583)]];
+                            } else if (SCREEN_WIDTH == 320) {
+                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 680)]];
+                            } else {
+                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 613)]];
+                            }
+                        } else {
+                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 107)]];
+                        }
                     }
+                }
+            } else {
+                if (i == total - 1) {
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+                } else {
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 85)]];
                 }
             }
         }

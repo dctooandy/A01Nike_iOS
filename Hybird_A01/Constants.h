@@ -247,6 +247,10 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTOpenAccountStatus         @"/A01/openAccount/isOpen"
 
+// 获取支付状态
+
+#define BTTPaymentStatus             @"/A01/payment/status"
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)  ([UIFont systemFontOfSize:X])
