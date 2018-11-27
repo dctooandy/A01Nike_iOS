@@ -138,7 +138,7 @@
         self.preSelectIndex = index;
     } else if (index == 1) {
         self.selectVC = self.voiceCall;
-        BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"欢迎使用APP语音通话" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"APP语音"] actionSheetBlock:^(NSInteger buttonIndex) {
+        BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"欢迎使用免费语音通话" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"APP语音"] actionSheetBlock:^(NSInteger buttonIndex) {
             NSLog(@"选择了%@",@(buttonIndex));
             weakSelf(weakSelf);
             if (buttonIndex == 0) {
