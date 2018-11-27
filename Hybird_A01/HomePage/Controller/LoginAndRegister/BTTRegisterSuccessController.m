@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.title = @"注册成功";
     [self setupCollectionView];
     [self setupElements];
 }

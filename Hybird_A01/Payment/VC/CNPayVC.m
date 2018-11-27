@@ -13,9 +13,10 @@
 #import "CNPayChannelCell.h"
 #import "CNPaymentModel.h"
 #import "CNPayRequestManager.h"
+#import "CNPayConstant.h"
 
 /// 顶部渠道单元尺寸
-#define kPayChannelItemSize CGSizeMake(70, 130)
+#define kPayChannelItemSize CGSizeMake(102, 132)
 #define kChannelCellIndentifier   @"CNPayChannelCell"
 
 @interface CNPayVC () <UICollectionViewDelegate, UICollectionViewDataSource>
@@ -45,6 +46,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = kBlackBackgroundColor;
     // 先加载缓存显示
     id cacheReponse = [[NSUserDefaults standardUserDefaults] objectForKey:[CNCacheDataKey cacheAllPayChannelKey]];
     if (cacheReponse) {
@@ -53,6 +55,11 @@
     } else {
         [self fetchPayChannels];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full {
@@ -64,7 +71,7 @@
         }
     } else {
         self.payCollectionView.hidden = NO;
-        self.payCollectionView.frame = CGRectMake(0, 25, self.view.bounds.size.width, kPayChannelItemSize.height);
+        self.payCollectionView.frame = CGRectMake(0, 0, self.view.bounds.size.width, kPayChannelItemSize.height);
     }
     
     // 调整scrollview内容
@@ -171,19 +178,6 @@
     BTC.payments = [[NSArray alloc] initWithObjects:
                     payments[CNPaymentBTC], nil];
     
-    /// 微信条码
-    CNPayChannelModel *barCode = [[CNPayChannelModel alloc] init];
-    barCode.payChannel = CNPayChannelWechatBarCode;
-    barCode.payments = [[NSArray alloc] initWithObjects:
-                       payments[CNPaymentWechatBarCode], nil];
-    
-    
-    /// 微信支付
-    CNPayChannelModel *wechat = [[CNPayChannelModel alloc] init];
-    wechat.payChannel = CNPayChannelWechatApp;
-    wechat.payments = [[NSArray alloc] initWithObjects:
-                       payments[CNPaymentWechatApp], nil];
-    
 
     /// 支付宝支付
     CNPayChannelModel *ali = [[CNPayChannelModel alloc] init];
@@ -191,11 +185,6 @@
     ali.payments = [[NSArray alloc] initWithObjects:
                     payments[CNPaymentAliApp], nil];
     
-    /// QQ支付
-    CNPayChannelModel *QQ = [[CNPayChannelModel alloc] init];
-    QQ.payChannel = CNPayChannelQQApp;
-    QQ.payments = [[NSArray alloc] initWithObjects:
-                   payments[CNPaymentQQApp], nil];
     
     /// 银联mobile
     CNPayChannelModel *unionPay = [[CNPayChannelModel alloc] init];
@@ -203,11 +192,13 @@
     unionPay.payments = [[NSArray alloc] initWithObjects:
                         payments[CNPaymentUnionApp], nil];
     
+    
     /// 京东支付
-//    CNPayChannelModel *JD = [[CNPayChannelModel alloc] init];
-//    JD.payChannel = CNPayChannelJDApp;
-//    JD.payments = [[NSArray alloc] initWithObjects:
-//                   payments[CNPaymentJDApp], nil];
+    CNPayChannelModel *JD = [[CNPayChannelModel alloc] init];
+    JD.payChannel = CNPayChannelJDApp;
+    JD.payments = [[NSArray alloc] initWithObjects:
+                   payments[CNPaymentJDApp], nil];
+    
     
     /// 扫码
     CNPayChannelModel *QR = [[CNPayChannelModel alloc] init];
@@ -217,7 +208,11 @@
                    payments[CNPaymentAliQR],
                    payments[CNPaymentQQQR],
                    payments[CNPaymentUnionQR],
-                   payments[CNPaymentJDQR], nil];
+                   payments[CNPaymentCoin],
+                   payments[CNPaymentWechatBarCode],
+                   payments[CNPaymentWechatApp],
+                   payments[CNPaymentQQApp],
+                   nil];
     
     /// BQ 快速
     CNPayChannelModel *BQFast = [[CNPayChannelModel alloc] init];
@@ -243,9 +238,9 @@
     
     NSArray *array;
     if ([IVNetwork userInfo].customerLevel > 0) {
-        array = @[BQFast,ali,wechat,BQAli,BQWeChat,online,unionPay,barCode,QR,BTC,QQ,deposit,card];
+        array = @[BQFast,ali,BQAli,BQWeChat,online,unionPay,QR,BTC,deposit,card];
     } else {
-        array = @[ali,wechat,QQ,online,unionPay,barCode,QR,BTC,card,BQFast,BQAli,BQWeChat,deposit];
+        array = @[ali,online,unionPay,QR,BTC,card,BQFast,BQAli,BQWeChat,deposit];
     }
     
     // 没开启的渠道不显示
@@ -355,8 +350,7 @@
     
     CNPayChannelModel *channel = [_payChannels objectAtIndex:indexPath.row];
     cell.titleLb.text = channel.channelName;
-    [cell.channelBtn setImage:[UIImage imageNamed:channel.normalIcon] forState:UIControlStateNormal];
-    [cell.channelBtn setImage:[UIImage imageNamed:channel.selectedIcon] forState:UIControlStateSelected];
+    cell.channelIV.image = [UIImage imageNamed:channel.selectedIcon];
     
     // 默认选中第一个可以支付的渠道
     if (indexPath.row == _currentSelectedIndex) {
@@ -392,7 +386,7 @@
     if (!_payScrollView) {
         _payScrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
         _payScrollView.contentSize = self.view.bounds.size;
-        _payScrollView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        _payScrollView.backgroundColor = kBlackBackgroundColor;
         [self.view addSubview:_payScrollView];
     }
     return _payScrollView;
@@ -401,7 +395,7 @@
 - (UIView *)contentView {
     if (!_contentView) {
         _contentView = [[UIView alloc] initWithFrame:self.payScrollView.bounds];
-        _contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        _contentView.backgroundColor = kBlackBackgroundColor;
         [self.payScrollView addSubview:_contentView];
     }
     return _contentView;
@@ -411,7 +405,7 @@
     if (!_layout) {
         UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
         [layout setMinimumInteritemSpacing:0.0f];
-        [layout setMinimumLineSpacing:10.0f];
+        [layout setMinimumLineSpacing:5.0f];
         [layout setScrollDirection: UICollectionViewScrollDirectionHorizontal];
         layout.itemSize = kPayChannelItemSize;
         _layout = layout;
@@ -421,14 +415,14 @@
 
 - (UICollectionView *)payCollectionView {
     if (!_payCollectionView) {
-        CGRect frame = CGRectMake(0, 25, self.view.bounds.size.width, kPayChannelItemSize.height);
+        CGRect frame = CGRectMake(0, 0, self.view.bounds.size.width, kPayChannelItemSize.height);
         _payCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:self.layout];
         _payCollectionView.delegate = self;
         _payCollectionView.dataSource = self;
-        _payCollectionView.backgroundColor = [UIColor whiteColor];
+        _payCollectionView.backgroundColor = kBlackForgroundColor;
         _payCollectionView.showsVerticalScrollIndicator = NO;
         _payCollectionView.showsHorizontalScrollIndicator = NO;
-        _payCollectionView.contentInset = UIEdgeInsetsMake(0, 15, 0, 15);
+        _payCollectionView.contentInset = UIEdgeInsetsMake(40, 10, 15, 10);
         [self.contentView addSubview:_payCollectionView];
         
          [_payCollectionView registerNib:[UINib nibWithNibName:kChannelCellIndentifier bundle:nil] forCellWithReuseIdentifier:kChannelCellIndentifier];
@@ -443,7 +437,7 @@
         alertLabel.textColor = [UIColor grayColor];
         alertLabel.textAlignment = NSTextAlignmentCenter;
         alertLabel.font = [UIFont systemFontOfSize:16.0f];
-        alertLabel.backgroundColor = [UIColor groupTableViewBackgroundColor];
+        alertLabel.backgroundColor = kBlackBackgroundColor;
         [self.view addSubview: alertLabel];
         _alertLabel = alertLabel;
     }
@@ -452,10 +446,9 @@
 
 - (UIActivityIndicatorView *)activityView {
     if (!_activityView) {
-        _activityView = [[UIActivityIndicatorView alloc] init];
+        _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         CGPoint center = self.view.center;
         _activityView.center = CGPointMake(center.x, center.y-64);
-        _activityView.color = COLOR_RGBA(234,115,11,1);
         [self.view addSubview:_activityView];
     }
     return _activityView;
@@ -463,14 +456,14 @@
 
 #pragma mark - OverWrite
 
-//- (void)goToBack {
-//    UIViewController *vc = self.segmentVC.childViewControllers.firstObject;
-//    if (vc && [vc isKindOfClass:[CNPayContainerVC class]]) {
-//        if ([((CNPayContainerVC *)vc) canPopViewController]) {
-//            [self.navigationController popViewControllerAnimated:YES];
-//        }
-//    } else {
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }
-//}
+- (void)goToBack {
+    UIViewController *vc = self.segmentVC.childViewControllers.firstObject;
+    if (vc && [vc isKindOfClass:[CNPayContainerVC class]]) {
+        if ([((CNPayContainerVC *)vc) canPopViewController]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 @end
