@@ -75,9 +75,9 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
             self.wrongPwdNum = 0;
             if (isback) {
+                [MBProgressHUD showSuccess:@"登录成功" toView:nil];
                 [self.navigationController popViewControllerAnimated:YES];
             }
-            [MBProgressHUD showSuccess:@"登录成功" toView:nil];
             [BTTUserStatusManager loginSuccessWithUserInfo:result.data[@"WSCustomers"]];
         } else {
             if (result.code_system == 202020) {

@@ -11,6 +11,9 @@
 #import "BTTHomePageBannerCell.h"
 #import "BTTBannerModel.h"
 #import "BTTPromotionDetailController.h"
+#import "BTTVideoGamesFilterCell.h"
+#import "BTTVideoGamesHeaderCell.h"
+#import "BTTVideoGameCell.h"
 
 @interface BTTVideoGamesListController ()<BTTElementsFlowLayoutDelegate>
 
@@ -23,11 +26,22 @@
     self.title = @"电子游戏";
     [self setupCollectionView];
     [self setupElements];
+    weakSelf(weakSelf);
+    [self loadmoreWithBlock:^{
+        strongSelf(strongSelf);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [strongSelf endRefreshing];
+        });
+    }];
 }
 
 - (void)setupCollectionView {
     [super setupCollectionView];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageBannerCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageBannerCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTVideoGamesFilterCell" bundle:nil] forCellWithReuseIdentifier:@"BTTVideoGamesFilterCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTVideoGamesHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTVideoGamesHeaderCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTVideoGameCell" bundle:nil] forCellWithReuseIdentifier:@"BTTVideoGameCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -49,19 +63,24 @@
         };
         cell.imageUrls = self.imageUrls;
         return cell;
+    } else if (indexPath.row == 1) {
+        BTTVideoGamesFilterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesFilterCell" forIndexPath:indexPath];
+        return cell;
+    } else if (indexPath.row == 2) {
+        BTTVideoGamesHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesHeaderCell" forIndexPath:indexPath];
+        return cell;
+    } else {
+        BTTVideoGameCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGameCell" forIndexPath:indexPath];
+        if (indexPath.row % 2) {
+            cell.leftConstants.constant = 15;
+            cell.rightConstants.constant = 7.5;
+        } else {
+            cell.leftConstants.constant = 7.5;
+            cell.rightConstants.constant = 15;;
+        }
+        return cell;
     }
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class]) forIndexPath:indexPath];
-    cell.contentView.backgroundColor = [UIColor yellowColor];
-    if (![cell.contentView viewWithTag:100]) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-        label.tag = 100;
-        label.textColor = [UIColor redColor];
-        label.font = [UIFont boldSystemFontOfSize:17];
-        [cell.contentView addSubview:label];
-    }
-    UILabel *label = [cell.contentView viewWithTag:100];
-    label.text = [NSString stringWithFormat:@"%zd", indexPath.item];
-    return cell;
+    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -85,7 +104,7 @@
 }
 
 - (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
-    return UIEdgeInsetsMake(0, 0, 40, 0);
+    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 /**
@@ -104,13 +123,17 @@
 
 - (void)setupElements {
     NSInteger total = 0;
-    total = 2;
+    total = 20;
     
     for (int i = 0; i < total; i++) {
         if (i == 0) {
             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, BTTBnnnerDefaultHeight * (SCREEN_WIDTH / BTTBannerDefaultWidth))]];
         } else if (i == 1) {
             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 45)]];
+        } else if (i == 2) {
+            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 45)]];
+        } else {
+            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 2, (SCREEN_WIDTH / 2 - 22.5) / 130 * 90 + 105)]];
         }
     }
     dispatch_async(dispatch_get_main_queue(), ^{
