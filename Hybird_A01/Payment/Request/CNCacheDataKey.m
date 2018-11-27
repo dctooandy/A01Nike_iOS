@@ -17,6 +17,6 @@
 
 /// 缓存所有支付渠道的key
 + (NSString *)cacheAllPayChannelKey {
-    return [self createMD5key:[NSString stringWithFormat:@"83jd763d7890jdyxgaj%s", __func__]];
+    return [self createMD5key:[NSString stringWithFormat:@"84sdd76dfxgaj%s", __func__]];
 }
 @end

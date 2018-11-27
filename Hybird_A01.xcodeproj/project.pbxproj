@@ -85,6 +85,7 @@
 		3A5F7AA321A9524D00128E8B /* BTTProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA221A9524D00128E8B /* BTTProvinceModel.m */; };
 		3A5F7AA821ABCD3900128E8B /* BTTVideoGamesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */; };
 		3A5F7AAA21ACF11A00128E8B /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA921ACF11900128E8B /* app.zip */; };
+		3A5F7AB021ACF5DB00128E8B /* BTTVideoGamesListController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AAE21ACF5DA00128E8B /* BTTVideoGamesListController+LoadData.m */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -393,6 +394,8 @@
 		D5DBEB3921ABB774008AF629 /* CNPreCacheMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAF821ABB774008AF629 /* CNPreCacheMananger.m */; };
 		D5DBEB3A21ABB774008AF629 /* CNPayConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAF921ABB774008AF629 /* CNPayConstant.m */; };
 		D5DBEB3B21ABB774008AF629 /* CNPayRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAFA21ABB774008AF629 /* CNPayRequestManager.m */; };
+		D5DBEB3F21AC1355008AF629 /* CNPayQRCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEB3D21AC1355008AF629 /* CNPayQRCell.m */; };
+		D5DBEB4021AC1355008AF629 /* CNPayQRCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEB3E21AC1355008AF629 /* CNPayQRCell.xib */; };
 		EA5F140B21A26042004305A7 /* BTTRequestPrecache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F140A21A26042004305A7 /* BTTRequestPrecache.m */; };
 		EA5F140E21A261BA004305A7 /* BTTHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F140D21A261BA004305A7 /* BTTHttpManager.m */; };
 		EA5F141121A265B0004305A7 /* BTTBankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141021A265B0004305A7 /* BTTBankModel.m */; };
@@ -751,6 +754,8 @@
 		3A5F7AA621ABCD3900128E8B /* BTTVideoGamesListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGamesListController.h; sourceTree = "<group>"; };
 		3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGamesListController.m; sourceTree = "<group>"; };
 		3A5F7AA921ACF11900128E8B /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
+		3A5F7AAE21ACF5DA00128E8B /* BTTVideoGamesListController+LoadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTVideoGamesListController+LoadData.m"; sourceTree = "<group>"; };
+		3A5F7AAF21ACF5DB00128E8B /* BTTVideoGamesListController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTVideoGamesListController+LoadData.h"; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -1278,6 +1283,9 @@
 		D5DBEAFC21ABB774008AF629 /* CNPreCacheMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPreCacheMananger.h; sourceTree = "<group>"; };
 		D5DBEAFD21ABB774008AF629 /* CNCacheDataKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNCacheDataKey.h; sourceTree = "<group>"; };
 		D5DBEAFE21ABB774008AF629 /* CNPayRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayRequestManager.h; sourceTree = "<group>"; };
+		D5DBEB3C21AC1355008AF629 /* CNPayQRCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayQRCell.h; sourceTree = "<group>"; };
+		D5DBEB3D21AC1355008AF629 /* CNPayQRCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayQRCell.m; sourceTree = "<group>"; };
+		D5DBEB3E21AC1355008AF629 /* CNPayQRCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNPayQRCell.xib; sourceTree = "<group>"; };
 		EA5F140921A26042004305A7 /* BTTRequestPrecache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTRequestPrecache.h; sourceTree = "<group>"; };
 		EA5F140A21A26042004305A7 /* BTTRequestPrecache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTRequestPrecache.m; sourceTree = "<group>"; };
 		EA5F140C21A261BA004305A7 /* BTTHttpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTHttpManager.h; sourceTree = "<group>"; };
@@ -1892,6 +1900,8 @@
 			children = (
 				3A5F7AA621ABCD3900128E8B /* BTTVideoGamesListController.h */,
 				3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */,
+				3A5F7AAF21ACF5DB00128E8B /* BTTVideoGamesListController+LoadData.h */,
+				3A5F7AAE21ACF5DA00128E8B /* BTTVideoGamesListController+LoadData.m */,
 			);
 			path = VideoGames;
 			sourceTree = "<group>";
@@ -3123,6 +3133,9 @@
 				D5DBEAE421ABB774008AF629 /* CNPayTipView.h */,
 				D5DBEAF421ABB774008AF629 /* CNPayTipView.m */,
 				D5DBEAE721ABB774008AF629 /* CNPayTipView.xib */,
+				D5DBEB3C21AC1355008AF629 /* CNPayQRCell.h */,
+				D5DBEB3D21AC1355008AF629 /* CNPayQRCell.m */,
+				D5DBEB3E21AC1355008AF629 /* CNPayQRCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3509,6 +3522,7 @@
 				3A11AE282184025900B1AFF4 /* BTTPasswordCell.xib in Resources */,
 				3AE05817217030CC00C7E70D /* BTTHomePageActivitiesCell.xib in Resources */,
 				3A11ADF72181A22F00B1AFF4 /* BTTWithdrawalHeaderCell.xib in Resources */,
+				D5DBEB4021AC1355008AF629 /* CNPayQRCell.xib in Resources */,
 				EAE89EF2218C3ABD00C29393 /* LIVWarningIcon@2x.png in Resources */,
 				EAE89F28218C3ABD00C29393 /* LIVRobotRelatedQuestionCell.nib in Resources */,
 				3AD9CF80216F462600685B43 /* BTTHomePageSeparateCell.xib in Resources */,
@@ -3845,6 +3859,7 @@
 				3AAE8220219A738B003EC8B0 /* BTTLoginOrRegisterBtnCell.m in Sources */,
 				3AD9CF6D216F33F300685B43 /* BTTGameCollectionViewCell.m in Sources */,
 				D5DBEB0C21ABB774008AF629 /* CNPayBQStep1VC.m in Sources */,
+				D5DBEB3F21AC1355008AF629 /* CNPayQRCell.m in Sources */,
 				3A929415219BFEE100764E7E /* BTTCreateAPIModel.m in Sources */,
 				EAA4811C21ABD265000C0273 /* BTTAGGJViewController.m in Sources */,
 				D5DBEB2721ABB774008AF629 /* CNPayChannelModel.m in Sources */,
@@ -4051,6 +4066,7 @@
 				3A9E4C1A219D1F8700E7D8C0 /* BTTForgetPasswordController+LoadData.m in Sources */,
 				3AD9CF40216EDC9800685B43 /* BTTHomePageViewController.m in Sources */,
 				3A49DF972179D89000FEFBDA /* BTTBindingMobileController.m in Sources */,
+				3A5F7AB021ACF5DB00128E8B /* BTTVideoGamesListController+LoadData.m in Sources */,
 				3AE1EB002180228B0073A32D /* BTTVerifySelectCell.m in Sources */,
 				3AE0581A2170314900C7E70D /* BTTActivityModel.m in Sources */,
 				EA5F141A21A28515004305A7 /* IVGameUtility.m in Sources */,
