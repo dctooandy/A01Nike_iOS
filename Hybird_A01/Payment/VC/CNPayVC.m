@@ -157,12 +157,6 @@
     BTC.payments = [[NSArray alloc] initWithObjects:
                     payments[CNPaymentBTC], nil];
     
-    /// 币宝支付
-    CNPayChannelModel *coin = [[CNPayChannelModel alloc] init];
-    BTC.payChannel = CNPayChannelCoin;
-    BTC.payments = [[NSArray alloc] initWithObjects:
-                    payments[CNPaymentCoin], nil];
-    
 
     /// 支付宝支付
     CNPayChannelModel *ali = [[CNPayChannelModel alloc] init];
@@ -218,9 +212,15 @@
     
     /// 微信条码
     CNPayChannelModel *barCode = [[CNPayChannelModel alloc] init];
-    BQAli.payChannel = CNPayChannelWechatBarCode;
-    BQAli.payments = [[NSArray alloc] initWithObjects:
+    barCode.payChannel = CNPayChannelWechatBarCode;
+    barCode.payments = [[NSArray alloc] initWithObjects:
                       payments[CNPaymentWechatBarCode], nil];
+    
+    /// 币宝支付
+    CNPayChannelModel *coin = [[CNPayChannelModel alloc] init];
+    coin.payChannel = CNPayChannelCoin;
+    coin.payments = [[NSArray alloc] initWithObjects:
+                    payments[CNPaymentCoin], nil];
     
     NSArray *array = @[BQFast,BQWeChat,BQAli,deposit,ali,online,QR,unionPay,card,BTC,JD,barCode,coin];
     
