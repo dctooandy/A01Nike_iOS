@@ -11,6 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CNPayQRCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *channelIconIV;
+@property (weak, nonatomic) IBOutlet UILabel *titleLb;
+@property (weak, nonatomic) IBOutlet UIImageView *bgIV;
 
 @end
 

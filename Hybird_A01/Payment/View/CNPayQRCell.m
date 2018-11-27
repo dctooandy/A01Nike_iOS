@@ -15,4 +15,9 @@
     // Initialization code
 }
 
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    self.bgIV.image = [UIImage imageNamed:selected ? @"pay_QRSelected": @"pay_QRNormal"];
+}
+
 @end

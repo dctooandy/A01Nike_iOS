@@ -31,18 +31,33 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pay_QRNormal" translatesAutoresizingMaskIntoConstraints="NO" id="ug3-E5-PtR">
+                        <rect key="frame" x="0.0" y="0.0" width="288" height="75"/>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="14C-KX-huv" secondAttribute="bottom" constant="9" id="Ilg-ST-Fae"/>
                 <constraint firstItem="14C-KX-huv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="9" id="Wwf-l5-c34"/>
                 <constraint firstItem="14C-KX-huv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="13" id="YtR-4X-j5q"/>
+                <constraint firstItem="ug3-E5-PtR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="cDx-DM-WLi"/>
                 <constraint firstItem="BGF-IA-oUd" firstAttribute="leading" secondItem="14C-KX-huv" secondAttribute="trailing" constant="10" id="f6o-ld-JWL"/>
+                <constraint firstAttribute="bottom" secondItem="ug3-E5-PtR" secondAttribute="bottom" id="gDB-sI-Pd1"/>
+                <constraint firstItem="ug3-E5-PtR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="l2Q-zf-zlE"/>
+                <constraint firstAttribute="trailing" secondItem="ug3-E5-PtR" secondAttribute="trailing" id="lcP-dC-xp2"/>
                 <constraint firstItem="BGF-IA-oUd" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="zZC-5K-sQO"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="288" height="75"/>
+            <connections>
+                <outlet property="bgIV" destination="ug3-E5-PtR" id="9Lm-0d-bdi"/>
+                <outlet property="channelIconIV" destination="14C-KX-huv" id="qS5-Z3-pX3"/>
+                <outlet property="titleLb" destination="BGF-IA-oUd" id="d0p-nY-XQa"/>
+            </connections>
             <point key="canvasLocation" x="243.19999999999999" y="59.820089955022496"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="pay_QRNormal" width="168" height="65"/>
+    </resources>
 </document>
