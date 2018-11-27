@@ -59,9 +59,9 @@
     // 根据数组个数与屏幕宽度来调节高度
     CGFloat itemWidth = ([UIScreen mainScreen].bounds.size.width -18-35-10)/2.0;
     CGFloat itemHeight = itemWidth * 56 / 160.0;
-    CGFloat totalHeight = ((count - 1)/2 + 1) * itemHeight;
-    self.collectionViewHeight.constant = totalHeight + 30;
-    self.cellSize = CGSizeMake(itemWidth, itemHeight+8);
+    CGFloat totalHeight = ((count - 1)/2 + 1) * (itemHeight + 15);
+    self.collectionViewHeight.constant = totalHeight;
+    self.cellSize = CGSizeMake(itemWidth, itemHeight + 10);
 }
 
 - (void)configPreSettingMessage {
@@ -119,7 +119,7 @@
     
     // 默认选中第一个可以支付的渠道
     if (indexPath.row == _currentSelectedIndex) {
-        cell.selected = YES;
+        [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     }
     return cell;
 }

@@ -79,7 +79,7 @@
             return @"pay_WeChatHL";
         case CNPaymentQQApp:
         case CNPaymentQQQR:
-            return @"QQWAP";
+            return @"pay_QQ";
         case CNPaymentAliQR:
             return @"pay_AliHL";
         case CNPaymentUnionQR:

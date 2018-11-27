@@ -49,7 +49,7 @@
             self.selectedIcon   = @"pay_AliHL";
             break;
         case CNPayChannelUnionApp:
-            self.channelName    = @"银行卡快捷支付";
+            self.channelName    = @"银行快捷支付";
             self.selectedIcon   = @"pay_unionHL";
             break;
         case CNPayChannelJDApp:
