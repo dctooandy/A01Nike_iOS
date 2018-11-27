@@ -35,6 +35,12 @@
         self.gameIconImageView.image = ImageNamed(@"default_1");
     }
     
+    if ([IVNetwork userInfo]) {
+        self.tryPlayIcon.hidden = YES;
+    } else {
+        self.tryPlayIcon.hidden = NO;
+    }
+    
 }
 
 - (void)setGameName:(NSString *)gameName {
