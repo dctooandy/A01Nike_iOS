@@ -185,9 +185,9 @@
         if (result.code_http == 200) {
             if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
                 self.totalAmount = result.data[@"val"];
-//                dispatch_async(dispatch_get_main_queue(), ^{
-//                    [self.collectionView reloadData];
-//                });
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.collectionView reloadData];
+                });
             }
         }
     }];
