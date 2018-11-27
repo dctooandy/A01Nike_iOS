@@ -44,6 +44,14 @@
             self.channelName    = @"比特币支付";
             self.selectedIcon   = @"pay_btcHL";
             break;
+        case CNPayChannelWechatBarCode:
+            self.channelName    = @"微信条码支付";
+            self.selectedIcon   = @"pay_wechatBarCode";
+            break;
+        case CNPayChannelCoin:
+            self.channelName    = @"币宝支付";
+            self.selectedIcon   = @"pay_Bibao";
+            break;
         case CNPayChannelAliApp:
             self.channelName    = @"支付宝WAP";
             self.selectedIcon   = @"pay_AliHL";

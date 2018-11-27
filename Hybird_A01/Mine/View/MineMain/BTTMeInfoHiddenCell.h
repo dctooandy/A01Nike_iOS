@@ -8,9 +8,13 @@
 
 #import "BTTBaseCollectionViewCell.h"
 
+@class BTTMeMainModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTMeInfoHiddenCell : BTTBaseCollectionViewCell
+
+@property (nonatomic, strong) BTTMeMainModel *model;
 
 @end
 
