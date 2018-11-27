@@ -118,9 +118,6 @@
     } else {
         /// 数据异常处理
         [self fetchChannelFailHandler];
-        /// 这种情况就不要了
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:[CNCacheDataKey cacheAllPayChannelKey]];
-        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
@@ -275,9 +272,7 @@
     /// 如果不存在已经打开的支付渠道则展示提示页面
     if (_payChannels.count == 0) {
         [self.view bringSubviewToFront:self.alertLabel];
-        /// 这种情况就不要了
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:[CNCacheDataKey cacheAllPayChannelKey]];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+
         return;
     }
     _alertLabel.hidden = YES;
