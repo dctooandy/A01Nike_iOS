@@ -67,7 +67,7 @@
     }
 }
 //处理绑定状态获取结果
-+ (void)fetchBindStatusWithUseCache:(BOOL)useCache
++ (void)fetchBindStatusWithUseCache:(BOOL)useCache completionBlock:(IVRequestCallBack)completionBlock
 {
     NSString *typeList = @"phone;email;bank;btc";
     NSDictionary *params = @{@"typeList":typeList};
@@ -75,15 +75,15 @@
     weakSelf(weakSelf)
     if (useCache) {
         [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-            [weakSelf fetchBindStatusResult:result];
+            [weakSelf fetchBindStatusResult:result completionBlock:completionBlock];
         }];
     } else {
         [self sendRequestWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-            [weakSelf fetchBindStatusResult:result];
+            [weakSelf fetchBindStatusResult:result completionBlock:completionBlock];
         }];
     }
 }
-+ (void)fetchBindStatusResult:(IVRequestResultModel *)result {
++ (void)fetchBindStatusResult:(IVRequestResultModel *)result completionBlock:(IVRequestCallBack)completionBlock {
     if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
         NSMutableDictionary *userInfo = @{}.mutableCopy;
         userInfo[@"isPhoneBinded"] = [result.data valueForKey:@"phone"];
@@ -91,6 +91,9 @@
         userInfo[@"isBankBinded"] = [result.data valueForKey:@"bank"];
         userInfo[@"isBtcBinded"] = [result.data valueForKey:@"btc"];
         [IVNetwork updateUserInfo:userInfo];
+    }
+    if (completionBlock) {
+        completionBlock(result,nil);
     }
 }
 

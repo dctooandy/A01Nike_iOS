@@ -75,7 +75,11 @@
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
         BOOL isUseRegPhone = (![IVNetwork userInfo].isPhoneBinded && [IVNetwork userInfo].phone.length != 0);
-        cell.sendBtn.enabled = isUseRegPhone || [IVNetwork userInfo].isPhoneBinded;
+        if (self.mobileCodeType == BTTSafeVerifyTypeChangeMobile) {
+            cell.sendBtn.enabled = NO;
+        } else {
+            cell.sendBtn.enabled = isUseRegPhone || [IVNetwork userInfo].isPhoneBinded;
+        }
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf sendCode];
         };
@@ -149,6 +153,7 @@
         if (![IVNetwork userInfo].isPhoneBinded && [IVNetwork userInfo].phone.length != 0) {
             textField.text = @"";
             [self getSendBtn].enabled = NO;
+            [self getSubmitBtn].enabled = NO;
         }
     }
 }
@@ -243,10 +248,10 @@
     switch (self.mobileCodeType) {
         case BTTSafeVerifyTypeVerifyMobile:
             params[@"v_type"] = @"3";
+            successStr = @"验证成功!";
             break;
         case BTTSafeVerifyTypeChangeMobile:
             params[@"v_type"] = @"3";
-            successStr = @"修改成功!";
             break;
         case BTTSafeVerifyTypeMobileAddBankCard:
         case BTTSafeVerifyTypeMobileChangeBankCard:
@@ -259,7 +264,6 @@
             break;
         default:
             params[@"v_type"] = @"1";
-            successStr = @"绑定成功!";
             break;
     }
     weakSelf(weakSelf)
@@ -273,7 +277,7 @@
             if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
                 NSString *phone = result.data[@"val"];
                 [IVNetwork updateUserInfo:@{@"phone" : phone}];
-                [BTTHttpManager fetchBindStatusWithUseCache:YES];
+                [BTTHttpManager fetchBindStatusWithUseCache:YES completionBlock:nil];
             }
             switch (self.mobileCodeType) {
                 case BTTSafeVerifyTypeBindMobile:
