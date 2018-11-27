@@ -780,6 +780,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     }else{
         argument = @{}.mutableCopy;
     }
+    argument[@"newApi"] = @"1";
     NSString *appToken = [IVNetwork appToken];
     argument[@"appToken"] =  appToken ? appToken : @"";
     NSString *udid = @"";
