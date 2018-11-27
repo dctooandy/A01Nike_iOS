@@ -18,6 +18,7 @@
 #import "CNPayBQStep2VC2.h"
 #import "CNPayBQStep2FastVC.h"
 #import "CNPayQRVC.h"
+#import "CNPayQRStep2VC.h"
 #import "CNPayCardStep1VC.h"
 #import "CNPayCardStep2VC.h"
 #import "CNPayCardStep3VC.h"
@@ -155,7 +156,7 @@
 /// QR支付
 - (NSArray<CNPayBaseVC *> *)QRPay:(CNPaymentModel *)payment {
     CNPayQRVC *step1VC = [[CNPayQRVC alloc] init];
-    CNPayOnlineStep2VC *step2VC = [[CNPayOnlineStep2VC alloc] init];
+    CNPayQRStep2VC *step2VC = [[CNPayQRStep2VC alloc] init];
     step1VC.paymentModel = payment;
     step2VC.paymentModel = payment;
     // 内部切换数据

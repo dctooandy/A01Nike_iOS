@@ -40,7 +40,7 @@
     // 刷新数据
     [self updateAllContentWithModel:self.paymentModel];
     [self configAmountList];
-//    [self setViewHeight:750 fullScreen:NO];
+    [self setViewHeight:750 fullScreen:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -156,10 +156,11 @@
     }];
 }
 
-- (IBAction)sumitAction:(UIButton *)sender {
+- (IBAction)nextStep:(UIButton *)sender {
     [self.view endEditing:YES];
+    [self goToStep:1];return;
+
     NSString *text = _amountTF.text;
-    
     /// 输入为不合法数字
     if (![NSString isPureInt:text] && ![NSString isPureFloat:text]) {
         _amountTF.text = nil;

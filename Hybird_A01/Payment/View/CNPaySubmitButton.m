@@ -44,7 +44,7 @@
     self.titleLabel.font = [UIFont systemFontOfSize:16];
     [self setTitleColor:kBlackForgroundColor forState:UIControlStateNormal];
     [self setBackgroundImage:[UIImage imageNamed:@"binding_confirm_enable_normal"] forState:UIControlStateNormal];
-    [self setBackgroundImage:[UIImage imageNamed:@"binding_confirm_enable_press"] forState:UIControlStateDisabled];
+    [self setBackgroundImage:[UIImage imageNamed:@"binding_confirm_enable_press"] forState:UIControlStateHighlighted];
 }
 
 @end
