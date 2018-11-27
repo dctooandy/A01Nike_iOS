@@ -38,13 +38,13 @@
 - (void)commonInit {
 //    self.backgroundColor = [Utility colorWithHex:0xF3F3F3];
     self.layer.cornerRadius = 2.0;
-    self.layer.shadowColor = COLOR_RGBA(0, 0, 0, 0.27).CGColor;
-    self.layer.shadowOffset = CGSizeMake(0, 2);
-    self.layer.shadowOpacity = 1;
-    self.titleLabel.font = [UIFont systemFontOfSize:18];
-    [self setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self setBackgroundImage:[UIImage imageNamed:@"pay_btn"] forState:UIControlStateNormal];
-    [self setBackgroundImage:[UIImage imageNamed:@"pay_btnGray"] forState:UIControlStateDisabled];
+//    self.layer.shadowColor = COLOR_RGBA(0, 0, 0, 0.27).CGColor;
+//    self.layer.shadowOffset = CGSizeMake(0, 2);
+//    self.layer.shadowOpacity = 1;
+    self.titleLabel.font = [UIFont systemFontOfSize:16];
+    [self setTitleColor:kBlackForgroundColor forState:UIControlStateNormal];
+    [self setBackgroundImage:[UIImage imageNamed:@"binding_confirm_enable_normal"] forState:UIControlStateNormal];
+    [self setBackgroundImage:[UIImage imageNamed:@"binding_confirm_enable_press"] forState:UIControlStateDisabled];
 }
 
 @end

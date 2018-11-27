@@ -98,7 +98,8 @@
         (self.paymentModel.paymentType == CNPaymentWechatQR ||
          self.paymentModel.paymentType == CNPaymentAliQR)) {
             self.amountBtn.hidden = NO;
-            self.amountTF.placeholder = @"请选择支付金额";
+            self.amountTF.placeholder = @"仅可选择以下金额";
+            self.arrawDownIV.hidden = NO;
         } else {
             self.amountBtn.hidden = YES;
             self.arrawDownIV.hidden = YES;
