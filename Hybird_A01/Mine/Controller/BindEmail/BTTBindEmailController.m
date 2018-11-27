@@ -256,7 +256,7 @@
             }
             NSString *email = result.data[@"val"];
             [IVNetwork updateUserInfo:@{@"email" : email}];
-            [BTTHttpManager fetchBindStatusWithUseCache:YES];
+            [BTTHttpManager fetchBindStatusWithUseCache:YES completionBlock:nil];
             switch (self.codeType) {
                 case BTTSafeVerifyTypeBindEmail:
                 case BTTSafeVerifyTypeChangeEmail:

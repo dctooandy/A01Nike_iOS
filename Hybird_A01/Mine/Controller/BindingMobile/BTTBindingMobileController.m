@@ -277,7 +277,7 @@
             if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
                 NSString *phone = result.data[@"val"];
                 [IVNetwork updateUserInfo:@{@"phone" : phone}];
-                [BTTHttpManager fetchBindStatusWithUseCache:YES];
+                [BTTHttpManager fetchBindStatusWithUseCache:YES completionBlock:nil];
             }
             switch (self.mobileCodeType) {
                 case BTTSafeVerifyTypeBindMobile:
