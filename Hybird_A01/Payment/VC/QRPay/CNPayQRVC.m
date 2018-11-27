@@ -45,10 +45,12 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-//    if (!_setSelect) {
-//        [self.recommendView selectIndex:0];
-//        _setSelect = YES;
-//    }
+    if (!_setSelect) {
+        // 默认选中第一个可以支付的渠道
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_currentSelectedIndex inSection:0];
+        [self.collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+        _setSelect = YES;
+    }
 }
 
 - (void)configCollectionView {
@@ -116,11 +118,6 @@
     CNPaymentModel *payment = [self.payments objectAtIndex:indexPath.row];
     cell.titleLb.text = payment.paymentTitle;
     cell.channelIconIV.image = [UIImage imageNamed:payment.paymentLogo];
-    
-    // 默认选中第一个可以支付的渠道
-    if (indexPath.row == _currentSelectedIndex) {
-        [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-    }
     return cell;
 }
 
