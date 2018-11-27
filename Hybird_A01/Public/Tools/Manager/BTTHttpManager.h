@@ -55,5 +55,5 @@
 + (void)submitWithdrawWithUrl:(NSString *)url params:(NSDictionary *)params completion:(IVRequestCallBack)completion;
 
 
-+ (void)getOpenAccountStatus;
++ (void)getOpenAccountStatusCompletion:(IVRequestCallBack)completion;
 @end
