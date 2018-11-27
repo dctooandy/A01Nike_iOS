@@ -7,10 +7,15 @@
 //
 
 #import "CNPayQRVC.h"
+#import "CNPayQRCell.h"
 
-@interface CNPayQRVC ()
-@property (weak, nonatomic) IBOutlet CNPayAmountRecommendView *recommendView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *reconmendViewHeight;
+#define kQRCellIndentifier   @"CNPayQRCell"
+
+@interface CNPayQRVC () <UICollectionViewDelegate, UICollectionViewDataSource>
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeight;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+
 
 @property (weak, nonatomic) IBOutlet UIView *preSettingView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *preSettingViewHeight;
@@ -20,21 +25,18 @@
 @property (weak, nonatomic) IBOutlet UIButton *amountBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *arrawDownIV;
 
-@property (weak, nonatomic) IBOutlet UILabel *bottomTipLb;
-@property (weak, nonatomic) IBOutlet UILabel *unionTipLb;
-
-@property (copy, nonatomic) NSString *tipText;
 @property (assign, nonatomic) BOOL setSelect;
+@property (assign, nonatomic) NSInteger currentSelectedIndex;
+@property (nonatomic) CGSize cellSize;
 @end
 
 @implementation CNPayQRVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tipText = self.bottomTipLb.text;
-    [self configDifferentUI];
+    [self configCollectionView];
     [self configPreSettingMessage];
-    [self configRecommendView];
+    [self configDifferentUI];
     // 刷新数据
     [self updateAllContentWithModel:self.paymentModel];
     [self configAmountList];
@@ -43,37 +45,23 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (!_setSelect) {
-        [self.recommendView selectIndex:0];
-        _setSelect = YES;
-    }
+//    if (!_setSelect) {
+//        [self.recommendView selectIndex:0];
+//        _setSelect = YES;
+//    }
 }
 
-- (void)configDifferentUI {
-    NSString *tipText;
-    self.unionTipLb.hidden = YES;
-    switch (self.paymentModel.paymentType) {
-        case CNPaymentAliQR:
-            tipText = @"支付宝";
-            break;
-        case CNPaymentWechatQR:
-            tipText = @"微信";
-            break;
-        case CNPaymentQQQR:
-            tipText = @"QQ";
-            break;
-        case CNPaymentUnionQR:
-            tipText = @"手机银行";
-            self.unionTipLb.hidden = NO;
-            break;
-        case CNPaymentJDApp:
-            tipText = @"京东";
-            break;
-        default:
-            tipText = @"";
-            break;
-    }
-    self.bottomTipLb.text = [NSString stringWithFormat:self.tipText, tipText];
+- (void)configCollectionView {
+    self.collectionView.contentInset = UIEdgeInsetsMake(0, 18, 15, 18);
+    [self.collectionView registerNib:[UINib nibWithNibName:kQRCellIndentifier bundle:nil] forCellWithReuseIdentifier:kQRCellIndentifier];
+    
+    NSInteger count = self.payments.count;
+    // 根据数组个数与屏幕宽度来调节高度
+    CGFloat itemWidth = ([UIScreen mainScreen].bounds.size.width -18-35-10)/2.0;
+    CGFloat itemHeight = itemWidth * 56 / 160.0;
+    CGFloat totalHeight = ((count - 1)/2 + 1) * itemHeight;
+    self.collectionViewHeight.constant = totalHeight + 30;
+    self.cellSize = CGSizeMake(itemWidth, itemHeight+8);
 }
 
 - (void)configPreSettingMessage {
@@ -87,25 +75,8 @@
     }
 }
 
-- (void)configRecommendView {
-    NSMutableArray *array = [NSMutableArray array];
-    for (CNPaymentModel *model in self.payments) {
-        [array addObject:model.paymentTitle];
-    }
-    _recommendView.dataSource = array;
-    // 根据数组个数与屏幕宽度来调节高度
-    CGFloat height = ((array.count - 1)/3 + 1) * 200 * 100 / ([UIScreen mainScreen].bounds.size.width * 1.0);
-    self.reconmendViewHeight.constant = height + 30;
+- (void)configDifferentUI {
     
-    __weak typeof(self) weakSelf = self;
-    _recommendView.clickHandler = ^(NSString *value, NSInteger index) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf.view endEditing:YES];
-        strongSelf.paymentModel = strongSelf.payments[index];
-        [strongSelf configDifferentUI];
-        [strongSelf updateAllContentWithModel:strongSelf.paymentModel];
-        [strongSelf configAmountList];
-    };
 }
 
 /// 刷新数据
@@ -132,6 +103,46 @@
         }
 }
 
+#pragma mark- UICollectionViewDelegate, UICollectionViewDataSource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.payments.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CNPayQRCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kQRCellIndentifier forIndexPath:indexPath];
+    
+    CNPaymentModel *payment = [self.payments objectAtIndex:indexPath.row];
+    cell.titleLb.text = payment.paymentTitle;
+    cell.channelIconIV.image = [UIImage imageNamed:payment.paymentLogo];
+    
+    // 默认选中第一个可以支付的渠道
+    if (indexPath.row == _currentSelectedIndex) {
+        cell.selected = YES;
+    }
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    if (indexPath.row == _currentSelectedIndex) {
+        return;
+    }
+    [self.view endEditing:YES];
+    
+    self.currentSelectedIndex = indexPath.row;
+    self.paymentModel = [self.payments objectAtIndex:indexPath.row];
+    
+    [self configDifferentUI];
+    [self updateAllContentWithModel:self.paymentModel];
+    [self configAmountList];
+   
+}
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return self.cellSize;
+}
 
 - (IBAction)selectAmountList:(id)sender {
     weakSelf(weakSelf);

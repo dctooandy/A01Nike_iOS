@@ -15,13 +15,11 @@
                 <outlet property="amountBtn" destination="ME8-RM-hBZ" id="qDr-yD-r2V"/>
                 <outlet property="amountTF" destination="fNu-zU-xvw" id="sVV-NC-wja"/>
                 <outlet property="arrawDownIV" destination="Mp7-Y5-Eri" id="MeO-dd-IL9"/>
-                <outlet property="bottomTipLb" destination="eI3-Gi-fBf" id="L36-IP-P6A"/>
+                <outlet property="collectionView" destination="yCb-r4-x7i" id="aJd-4h-smh"/>
+                <outlet property="collectionViewHeight" destination="8KR-Md-ws0" id="Vgm-TW-8Zg"/>
                 <outlet property="preSettingMessageLb" destination="hYD-U1-5Ou" id="mzt-d4-Hxr"/>
                 <outlet property="preSettingView" destination="FUe-Hz-zx7" id="qui-qg-p7g"/>
                 <outlet property="preSettingViewHeight" destination="y6S-Aj-8ES" id="Vpv-eR-s0Q"/>
-                <outlet property="recommendView" destination="m4K-aK-8TW" id="bAK-pv-Xmg"/>
-                <outlet property="reconmendViewHeight" destination="obm-ul-3uE" id="xni-UK-HBQ"/>
-                <outlet property="unionTipLb" destination="7Vh-gQ-wvm" id="ujk-fQ-lZm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,8 +28,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m4K-aK-8TW" customClass="CNPayAmountRecommendView">
-                    <rect key="frame" x="0.0" y="30" width="375" height="120"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m4K-aK-8TW">
+                    <rect key="frame" x="0.0" y="20" width="375" height="148"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pYW-Nj-PQU" customClass="CNPayOnePixView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
@@ -40,17 +38,45 @@
                                 <constraint firstAttribute="height" constant="1" id="8A9-9d-Ybv"/>
                             </constraints>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择支付方式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yvu-aP-jus">
+                            <rect key="frame" x="18" y="16" width="86" height="17"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="yCb-r4-x7i">
+                            <rect key="frame" x="0.0" y="48" width="375" height="100"/>
+                            <color key="backgroundColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="8KR-Md-ws0"/>
+                            </constraints>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="20" id="CvV-HA-eGl">
+                                <size key="itemSize" width="50" height="50"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="3hv-3w-42F"/>
+                                <outlet property="delegate" destination="-1" id="INg-fu-2AO"/>
+                            </connections>
+                        </collectionView>
                     </subviews>
                     <color key="backgroundColor" red="0.16078431372549018" green="0.1803921568627451" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="bottom" secondItem="yCb-r4-x7i" secondAttribute="bottom" id="32a-eo-OlW"/>
                         <constraint firstItem="pYW-Nj-PQU" firstAttribute="leading" secondItem="m4K-aK-8TW" secondAttribute="leading" id="BwL-ZA-9XK"/>
                         <constraint firstItem="pYW-Nj-PQU" firstAttribute="top" secondItem="m4K-aK-8TW" secondAttribute="top" id="CRZ-w6-OpA"/>
-                        <constraint firstAttribute="height" constant="120" id="obm-ul-3uE"/>
+                        <constraint firstItem="Yvu-aP-jus" firstAttribute="leading" secondItem="m4K-aK-8TW" secondAttribute="leading" constant="18" id="G98-pu-TLU"/>
+                        <constraint firstItem="Yvu-aP-jus" firstAttribute="top" secondItem="pYW-Nj-PQU" secondAttribute="bottom" constant="15" id="YqM-IA-PKv"/>
+                        <constraint firstItem="yCb-r4-x7i" firstAttribute="top" secondItem="Yvu-aP-jus" secondAttribute="bottom" constant="15" id="a6X-Cb-gda"/>
+                        <constraint firstItem="yCb-r4-x7i" firstAttribute="leading" secondItem="m4K-aK-8TW" secondAttribute="leading" id="c00-WF-y43"/>
+                        <constraint firstAttribute="trailing" secondItem="yCb-r4-x7i" secondAttribute="trailing" id="lR8-lA-oZN"/>
                         <constraint firstAttribute="trailing" secondItem="pYW-Nj-PQU" secondAttribute="trailing" id="uiG-dO-XK5"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUe-Hz-zx7">
-                    <rect key="frame" x="0.0" y="150" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="168" width="375" height="50"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QGX-FA-J3b" customClass="CNPayOnePixView">
                             <rect key="frame" x="0.0" y="49" width="375" height="1"/>
@@ -116,7 +142,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34q-oa-9ZV" userLabel="AmountView">
-                    <rect key="frame" x="0.0" y="200" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="218" width="375" height="50"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epj-lB-KJH" customClass="CNPayOnePixView">
                             <rect key="frame" x="0.0" y="49" width="375" height="1"/>
@@ -183,7 +209,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HBm-Az-Iwu" userLabel="SubmitView">
-                    <rect key="frame" x="0.0" y="290" width="375" height="70"/>
+                    <rect key="frame" x="0.0" y="308" width="375" height="70"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HKC-7j-FRF" customClass="CNPaySubmitButton">
                             <rect key="frame" x="15" y="12.5" width="345" height="45"/>
@@ -208,41 +234,17 @@
                         <constraint firstItem="HKC-7j-FRF" firstAttribute="leading" secondItem="HBm-Az-Iwu" secondAttribute="leading" constant="15" id="nfy-KS-Itl"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eI3-Gi-fBf">
-                    <rect key="frame" x="15" y="380" width="345" height="67"/>
-                    <string key="text">扫码教学：
-1. 将支付二维码保存带手机相册。
-2. 打开%@扫码功能，选择右上角相册功能。
-3. 从相册中选择二维码，识别后进入支付页面。</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Vh-gQ-wvm">
-                    <rect key="frame" x="15" y="467" width="345" height="33.5"/>
-                    <string key="text">注：银联扫码可以使用美团、美团外卖、手机京东、大
-众点评等软件扫码付款。</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" red="1" green="0.12549019607843137" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="eI3-Gi-fBf" firstAttribute="top" secondItem="HBm-Az-Iwu" secondAttribute="bottom" constant="20" id="2ys-Vb-VE5"/>
-                <constraint firstItem="m4K-aK-8TW" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="10" id="3iZ-0M-5J5"/>
-                <constraint firstItem="7Vh-gQ-wvm" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="15" id="533-wF-DFb"/>
+                <constraint firstItem="m4K-aK-8TW" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="3iZ-0M-5J5"/>
                 <constraint firstItem="m4K-aK-8TW" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="8vY-jj-3av"/>
-                <constraint firstItem="eI3-Gi-fBf" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="15" id="COc-Ad-ozL"/>
                 <constraint firstItem="FUe-Hz-zx7" firstAttribute="top" secondItem="m4K-aK-8TW" secondAttribute="bottom" id="Ghv-CF-mxO"/>
                 <constraint firstItem="FUe-Hz-zx7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JLI-2p-NgO"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="HBm-Az-Iwu" secondAttribute="trailing" id="Rbe-86-uS9"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="34q-oa-9ZV" secondAttribute="trailing" id="aRy-37-Dsa"/>
-                <constraint firstItem="7Vh-gQ-wvm" firstAttribute="top" secondItem="eI3-Gi-fBf" secondAttribute="bottom" constant="20" id="b5d-hY-J9E"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="FUe-Hz-zx7" secondAttribute="trailing" id="gjc-Xi-LnO"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="eI3-Gi-fBf" secondAttribute="trailing" constant="15" id="i62-KJ-qoT"/>
                 <constraint firstItem="34q-oa-9ZV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ikb-Xb-WP9"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="7Vh-gQ-wvm" secondAttribute="trailing" constant="15" id="lQG-l8-m3F"/>
                 <constraint firstItem="m4K-aK-8TW" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="tkJ-EJ-jcN"/>
                 <constraint firstItem="HBm-Az-Iwu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="u3h-QP-Nb8"/>
                 <constraint firstItem="34q-oa-9ZV" firstAttribute="top" secondItem="FUe-Hz-zx7" secondAttribute="bottom" id="yme-BJ-XBh"/>
