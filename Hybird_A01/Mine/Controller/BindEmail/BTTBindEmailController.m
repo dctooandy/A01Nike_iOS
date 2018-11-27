@@ -71,7 +71,11 @@
             BTTMeMainModel *model = self.sheetDatas[indexPath.row];
             cell.model = model;
             BOOL isUseRegEmail = (![IVNetwork userInfo].isEmailBinded && [IVNetwork userInfo].email.length != 0);
-            cell.sendBtn.enabled = isUseRegEmail || [IVNetwork userInfo].isEmailBinded;
+            if (self.codeType == BTTSafeVerifyTypeChangeEmail) {
+                cell.sendBtn.enabled = NO;
+            } else {
+                cell.sendBtn.enabled = isUseRegEmail || [IVNetwork userInfo].isEmailBinded;
+            }
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 [weakSelf sendCode];
             };
@@ -140,6 +144,8 @@
     if (textField == [self getMailTF]) {
         if (![IVNetwork userInfo].isEmailBinded && [IVNetwork userInfo].email.length != 0) {
             textField.text = @"";
+            [self getSendBtn].enabled = NO;
+            [self getSubmitBtn].enabled = NO;
         }
     }
 }
@@ -154,7 +160,11 @@
         if ([IVNetwork userInfo].isEmailBinded) {
             [self getSubmitBtn].enabled = YES;
         } else {
-            [self getSubmitBtn].enabled = [PublicMethod isValidateEmail:[self getMailTF].text];
+            if ([[self getMailTF].text isEqualToString:[IVNetwork userInfo].email]) {
+                [self getSubmitBtn].enabled = YES;
+            } else {
+                [self getSubmitBtn].enabled = [PublicMethod isValidateEmail:[self getMailTF].text];
+            }
         }
     }
 }
@@ -188,10 +198,6 @@
 }
 - (void)sendCode
 {
-    if (![IVNetwork userInfo].isEmailBinded && ![PublicMethod isValidateEmail:[self getMailTF].text]) {
-        [MBProgressHUD showError:@"请输入正确的邮箱地址" toView:self.view];
-        return;
-    }
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"type"] = @"2";
     params[@"send_to"] = [self getMailTF].text;
@@ -231,14 +237,13 @@
             break;
         case BTTSafeVerifyTypeVerifyEmail:
             params[@"v_type"] = @"4";
+            successStr = @"验证成功!";
             break;
         case BTTSafeVerifyTypeChangeEmail:
             params[@"v_type"] = @"4";
-            successStr = @"修改成功!";
             break;
         default:
             params[@"v_type"] = @"4";
-            successStr = @"绑定成功!";
             break;
     }
     weakSelf(weakSelf)
@@ -253,13 +258,13 @@
             [IVNetwork updateUserInfo:@{@"email" : email}];
             [BTTHttpManager fetchBindStatusWithUseCache:YES];
             switch (self.codeType) {
-                case BTTSafeVerifyTypeBindEmail:{
+                case BTTSafeVerifyTypeBindEmail:
+                case BTTSafeVerifyTypeChangeEmail:
+                {
                     BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-                    vc.mobileCodeType = BTTSafeVerifyTypeBindEmail;
+                    vc.mobileCodeType = self.codeType;
                     [weakSelf.navigationController pushViewController:vc animated:YES];
                 }
-                    break;
-                case BTTSafeVerifyTypeChangeEmail:
                     break;
                 case BTTSafeVerifyTypeVerifyEmail:{
                     BTTBindEmailController *vc = [BTTBindEmailController new];

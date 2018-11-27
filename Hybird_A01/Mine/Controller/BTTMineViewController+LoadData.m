@@ -167,8 +167,7 @@
 }
 
 - (void)loadBindStatus {
-    [BTTHttpManager fetchBTCRateWithUseCache:YES];
-    
+    [BTTHttpManager fetchBindStatusWithUseCache:YES];
 }
 - (void)loadBankList
 {
