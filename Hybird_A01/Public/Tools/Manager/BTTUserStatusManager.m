@@ -12,6 +12,8 @@
 #import <IVHeartPacketLibrary/IVHeartSocketManager.h>
 #import "CLive800Manager.h"
 #import "BTTRequestPrecache.h"
+#import "CNPreCacheMananger.h"
+
 @implementation BTTUserStatusManager
 + (void)loginSuccessWithUserInfo:(NSDictionary *)userInfo
 {
@@ -23,6 +25,7 @@
     [CLive800Manager switchLive800UserWithCustomerId:[NSString stringWithFormat:@"%ld",(long)[IVNetwork userInfo].customerId]];
     [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccessNotification object:nil];
     [BTTRequestPrecache updateCacheNeedLoginRequest];
+    [CNPreCacheMananger prepareCacheDataNeedLogin];
 }
 + (void)logoutSuccess
 {
