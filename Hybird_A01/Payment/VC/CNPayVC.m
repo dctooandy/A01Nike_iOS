@@ -316,7 +316,7 @@
         make.left.mas_equalTo(self.contentView);
         make.right.mas_equalTo(self.contentView);
         make.bottom.mas_equalTo(self.contentView);
-        make.top.equalTo(self.payCollectionView.mas_bottom).offset(8.0);
+        make.top.equalTo(self.payCollectionView.mas_bottom).offset(0);
     }];
 }
 
