@@ -56,9 +56,7 @@
 }
 
 - (void)loadPaymentData {
-    if (self.paymentDatas.count) {
-        [self.paymentDatas removeAllObjects];
-    }
+    NSMutableArray *arr = [NSMutableArray array];
     NSArray *icons = @[@"me_netbank",@"me_wechat",@"me_alipay",@"me_hand",@"me_online",@"me_scan",@"me_quick",@"me_alipay",@"me_pointCard",@"me_btc",@"me_jd"];
     NSArray *names = @[@"迅捷网银",@"微信秒存",@"支付宝秒存",@"手工存款",@"在线支付",@"扫码支付",@"银行快捷支付",@"支付宝WAP",@"点卡支付",@"比特币支付",@"京东WAP支付"];
     NSArray *paymentNames = @[@"bqpaytype-0",@"bqpaytype-1",@"bqpaytype-2",@"deposit",@"online-1",@"online-6;online-8;online-5;online-7;online-11;online-15;online-16",@"faster",@"online-9",@"card",@"online-20",@"online-17"];
@@ -69,18 +67,18 @@
         model.iconName = icons[index];
         model.paymentName = paymentNames[index];
         model.available = YES;
-        [self.paymentDatas addObject:model];
+        [arr addObject:model];
     }
     if ([IVNetwork userInfo]) {
-        [self loadPersonalPaymentData];
+        [self loadPersonalPaymentData:arr];
     }
     
 }
 
-- (void)loadPersonalPaymentData {
-    [self showLoading];
+- (void)loadPersonalPaymentData:(NSMutableArray *)defaultArr {
+//    [self showLoading];
     [CNPayRequestManager queryAllChannelCompleteHandler:^(IVRequestResultModel *result, id response) {
-        [self hideLoading];
+//        [self hideLoading];
         NSLog(@"%@",response);
         NSMutableArray *payments = [NSMutableArray array];
         NSMutableArray *availablePayments = [NSMutableArray array];
@@ -92,7 +90,7 @@
                 }
             }
             for (CNPaymentModel *paymentModel in payments) {
-                for (BTTMeMainModel *model in self.paymentDatas) {
+                for (BTTMeMainModel *model in defaultArr) {
                     if ([model.name isEqualToString:paymentModel.paymentTitle] && paymentModel.isAvailable) {
                         if ([paymentModel.paymentTitle isEqualToString:@"微信扫码"] ||
                             [paymentModel.paymentTitle isEqualToString:@"微信WAP"] ||
