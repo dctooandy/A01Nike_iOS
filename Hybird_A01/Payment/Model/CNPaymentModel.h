@@ -38,6 +38,7 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
     CNPaymentWechatQR,
     CNPaymentQQQR,
     CNPaymentUnionQR,
+    CNPaymentJDQR,
     
     /// BQ存款 bypaytype-0,1,2
     CNPaymentBQFast,
@@ -50,6 +51,8 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 @property (nonatomic, assign) CNPaymentType paymentType;
 /// 支付方式标题
 @property (nonatomic, copy, readonly) NSString<Ignore> *paymentTitle;
+/// 支付方式logo
+@property (nonatomic, copy, readonly) NSString<Ignore> *paymentLogo;
 
 /// 支付方式是否可用
 @property (nonatomic, assign) BOOL isAvailable;
