@@ -94,10 +94,8 @@
     }
 }
 
-+ (void)getOpenAccountStatus {
-    [IVNetwork sendRequestWithSubURL:BTTOpenAccountStatus paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-    }];
++ (void)getOpenAccountStatusCompletion:(IVRequestCallBack)completion {
+    [IVNetwork sendUseCacheRequestWithSubURL:BTTOpenAccountStatus paramters:nil completionBlock:completion];
 }
 
 + (void)updateBankCardWithUrl:(NSString *)url params:(NSDictionary *)params completion:(IVRequestCallBack)completion
