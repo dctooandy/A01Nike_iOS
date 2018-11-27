@@ -103,6 +103,26 @@ static const NSInteger loadingTag = 10101;
     return hud;
 }
 
++ (MBProgressHUD *)showMessageWithActivity:(NSString *)message toView:(UIView *)view {
+    if (view == nil) view = [UIApplication sharedApplication].keyWindow;
+    // 快速显示一个提示信息
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.bezelView.color = [[UIColor blackColor] colorWithAlphaComponent:.8f];
+    hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+    hud.contentColor = [UIColor whiteColor];
+    
+    [view bringSubviewToFront:hud];
+    hud.label.numberOfLines = 0;
+    hud.label.text = message;
+    // 隐藏时候从父控件中移除
+    hud.removeFromSuperViewOnHide = YES;
+    // YES代表需要蒙版效果
+    //hud.dimBackground = NO;
+    
+    return hud;
+}
+
 + (MBProgressHUD *)showCustomView:(NSString *)message toView:(UIView *)view {
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo : (view == nil ? [UIApplication sharedApplication].keyWindow : view) animated:YES];
     hud.mode = MBProgressHUDModeCustomView;

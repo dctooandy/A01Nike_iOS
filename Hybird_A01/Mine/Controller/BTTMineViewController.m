@@ -66,6 +66,7 @@
     self.isCompletePersonalInfo = NO;
     self.isChangeMobile = NO;
     [self setupCollectionView];
+    [self loadPaymentDefaultData];
     [self loadMeAllData];
     [self setupNavBtn];
     [self registerNotification];
@@ -213,6 +214,7 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     NSLog(@"%@",@(indexPath.row));
     if (![IVNetwork userInfo]) {
+        [MBProgressHUD showError:@"请先登录" toView:nil];
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
@@ -280,6 +282,7 @@
         BTTSheetsViewController *vc = [[BTTSheetsViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + self.mainDataThree.count  + 5) {
+        [MBProgressHUD showSuccess:@"退出成功" toView:nil];
         [BTTUserStatusManager logoutSuccess];
         self.totalAmount = @"-";
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 7) {

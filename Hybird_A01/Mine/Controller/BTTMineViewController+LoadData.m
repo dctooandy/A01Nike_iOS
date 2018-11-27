@@ -15,7 +15,6 @@
 
 - (void)loadMeAllData {
     [self loadPersonalInfoData];
-    [self loadPaymentDefaultData];
     [self loadMainDataOne];
     [self loadMainDataTwo];
     [self loadMainDataThree];
@@ -28,7 +27,7 @@
         [self.personalInfos removeAllObjects];
     }
     NSArray *icons = @[@"me_personalInfo_unband",@"me_mobile_unband",@"me_email_unband",@"me_card_unband"];
-    NSArray *names = @[@"个人资料",@"更换手机",@"绑定邮箱",@"银行卡资料"];
+    NSArray *names = @[@"个人资料",@"绑定手机",@"绑定邮箱",@"银行卡资料"];
     NSArray *highlights = @[@"me_personalInfo_band",@"me_mobile_band",@"me_email_band",@"me_card_band"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
@@ -38,7 +37,6 @@
         model.desc = highlights[index];
         [self.personalInfos addObject:model];
     }
-    [self.collectionView reloadData];
 }
 
 - (void)loadPaymentDefaultData {
@@ -158,7 +156,7 @@
     if (self.mainDataThree.count) {
         [self.mainDataThree removeAllObjects];
     }
-    NSArray *names = @[@"退出登录"];
+    NSArray *names = @[@"注销登录"];
     NSArray *icons = @[@"me_logout"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];

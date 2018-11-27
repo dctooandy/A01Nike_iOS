@@ -77,6 +77,7 @@
             if (isback) {
                 [self.navigationController popViewControllerAnimated:YES];
             }
+            [MBProgressHUD showSuccess:@"登录成功" toView:nil];
             [BTTUserStatusManager loginSuccessWithUserInfo:result.data[@"WSCustomers"]];
         } else {
             if (result.code_system == 202020) {

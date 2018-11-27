@@ -77,6 +77,15 @@
     
 }
 
+- (void)showLoading {
+    if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
+        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        self.hud.label.text = @"正在登录";
+    } else {
+        [super showLoading];
+    }
+}
+
 - (void)setupCollectionView {
     [super setupCollectionView];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTLoginOrRegisterHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTLoginOrRegisterHeaderCell"];
