@@ -84,6 +84,9 @@
             [viewControllers addObjectsFromArray:[self depositPay:payment]];
         }
             break;
+            
+        case CNPayChannelCoin:
+        case CNPayChannelWechatBarCode:
         case CNPayChannelJDApp:
         case CNPayChannelBTC:
         case CNPayChannelAliApp:
@@ -108,7 +111,6 @@
             [viewControllers addObjectsFromArray:[self BQWechatAliPay:payment]];
         }
             break;
-            
     }
     return viewControllers;
 }
