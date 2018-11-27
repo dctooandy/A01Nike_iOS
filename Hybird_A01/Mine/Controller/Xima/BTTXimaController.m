@@ -43,7 +43,7 @@ typedef enum {
 @implementation BTTXimaController
 
 - (void)viewDidLoad {
-    self.title = @"结算洗码";
+    self.title = @"自助洗码";
     [super viewDidLoad];
     self.ximaStatusType = BTTXimaStatusTypeNormal;
     self.ximaDateType = BTTXimaDateTypeThisWeek;

@@ -38,7 +38,7 @@
     self.nameLabel.text = model.name;
     self.validAmountLabel.text = [NSString stringWithFormat:@"%@元",[PublicMethod transferNumToThousandFormat:model.validAmount.floatValue]];
     self.totalAmountLabel.text = [NSString stringWithFormat:@"%@",[PublicMethod transferNumToThousandFormat:model.totalBet.floatValue]];
-    self.rateLabel.text = [NSString stringWithFormat:@"%@%@",model.rate,@"%"];
+    self.rateLabel.text = [NSString stringWithFormat:@"%.2f%@",[model.rate floatValue],@"%"];
     
 }
 

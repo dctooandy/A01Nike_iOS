@@ -8,8 +8,6 @@
 
 #import "BTTBaseCollectionViewCell.h"
 
-#define BTTBannerDefaultWidth  1280
-#define BTTBnnnerDefaultHeight 440
 
 NS_ASSUME_NONNULL_BEGIN
 
