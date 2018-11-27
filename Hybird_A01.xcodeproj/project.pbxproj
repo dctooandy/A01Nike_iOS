@@ -393,6 +393,8 @@
 		D5DBEB3921ABB774008AF629 /* CNPreCacheMananger.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAF821ABB774008AF629 /* CNPreCacheMananger.m */; };
 		D5DBEB3A21ABB774008AF629 /* CNPayConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAF921ABB774008AF629 /* CNPayConstant.m */; };
 		D5DBEB3B21ABB774008AF629 /* CNPayRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAFA21ABB774008AF629 /* CNPayRequestManager.m */; };
+		D5DBEB3F21AC1355008AF629 /* CNPayQRCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEB3D21AC1355008AF629 /* CNPayQRCell.m */; };
+		D5DBEB4021AC1355008AF629 /* CNPayQRCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEB3E21AC1355008AF629 /* CNPayQRCell.xib */; };
 		EA5F140B21A26042004305A7 /* BTTRequestPrecache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F140A21A26042004305A7 /* BTTRequestPrecache.m */; };
 		EA5F140E21A261BA004305A7 /* BTTHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F140D21A261BA004305A7 /* BTTHttpManager.m */; };
 		EA5F141121A265B0004305A7 /* BTTBankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141021A265B0004305A7 /* BTTBankModel.m */; };
@@ -1278,6 +1280,9 @@
 		D5DBEAFC21ABB774008AF629 /* CNPreCacheMananger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPreCacheMananger.h; sourceTree = "<group>"; };
 		D5DBEAFD21ABB774008AF629 /* CNCacheDataKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNCacheDataKey.h; sourceTree = "<group>"; };
 		D5DBEAFE21ABB774008AF629 /* CNPayRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayRequestManager.h; sourceTree = "<group>"; };
+		D5DBEB3C21AC1355008AF629 /* CNPayQRCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayQRCell.h; sourceTree = "<group>"; };
+		D5DBEB3D21AC1355008AF629 /* CNPayQRCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayQRCell.m; sourceTree = "<group>"; };
+		D5DBEB3E21AC1355008AF629 /* CNPayQRCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNPayQRCell.xib; sourceTree = "<group>"; };
 		EA5F140921A26042004305A7 /* BTTRequestPrecache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTRequestPrecache.h; sourceTree = "<group>"; };
 		EA5F140A21A26042004305A7 /* BTTRequestPrecache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTRequestPrecache.m; sourceTree = "<group>"; };
 		EA5F140C21A261BA004305A7 /* BTTHttpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTHttpManager.h; sourceTree = "<group>"; };
@@ -3123,6 +3128,9 @@
 				D5DBEAE421ABB774008AF629 /* CNPayTipView.h */,
 				D5DBEAF421ABB774008AF629 /* CNPayTipView.m */,
 				D5DBEAE721ABB774008AF629 /* CNPayTipView.xib */,
+				D5DBEB3C21AC1355008AF629 /* CNPayQRCell.h */,
+				D5DBEB3D21AC1355008AF629 /* CNPayQRCell.m */,
+				D5DBEB3E21AC1355008AF629 /* CNPayQRCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3509,6 +3517,7 @@
 				3A11AE282184025900B1AFF4 /* BTTPasswordCell.xib in Resources */,
 				3AE05817217030CC00C7E70D /* BTTHomePageActivitiesCell.xib in Resources */,
 				3A11ADF72181A22F00B1AFF4 /* BTTWithdrawalHeaderCell.xib in Resources */,
+				D5DBEB4021AC1355008AF629 /* CNPayQRCell.xib in Resources */,
 				EAE89EF2218C3ABD00C29393 /* LIVWarningIcon@2x.png in Resources */,
 				EAE89F28218C3ABD00C29393 /* LIVRobotRelatedQuestionCell.nib in Resources */,
 				3AD9CF80216F462600685B43 /* BTTHomePageSeparateCell.xib in Resources */,
@@ -3845,6 +3854,7 @@
 				3AAE8220219A738B003EC8B0 /* BTTLoginOrRegisterBtnCell.m in Sources */,
 				3AD9CF6D216F33F300685B43 /* BTTGameCollectionViewCell.m in Sources */,
 				D5DBEB0C21ABB774008AF629 /* CNPayBQStep1VC.m in Sources */,
+				D5DBEB3F21AC1355008AF629 /* CNPayQRCell.m in Sources */,
 				3A929415219BFEE100764E7E /* BTTCreateAPIModel.m in Sources */,
 				EAA4811C21ABD265000C0273 /* BTTAGGJViewController.m in Sources */,
 				D5DBEB2721ABB774008AF629 /* CNPayChannelModel.m in Sources */,
