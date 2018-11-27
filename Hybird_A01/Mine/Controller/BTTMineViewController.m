@@ -170,10 +170,34 @@
         return cell;
     } else if (indexPath.row >= 4 + self.personalInfos.count + self.paymentDatas.count && indexPath.row <= 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count) {
         BTTMeMainModel *model = self.mainDataOne[indexPath.row - ( 4 + self.personalInfos.count + self.paymentDatas.count)];
-        if (indexPath.row >= 8 + self.personalInfos.count + self.paymentDatas.count && indexPath.row <= 10 + self.personalInfos.count + self.paymentDatas.count && self.isShowHidden) {
-            BTTMeInfoHiddenCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeInfoHiddenCell" forIndexPath:indexPath];
-            cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeRight;
-            return cell;
+        if (self.isShowHidden) {
+            NSInteger maxRow = 8 + self.personalInfos.count + self.paymentDatas.count;
+            if (self.isFanLi) {
+                maxRow += 1;
+            }
+            if (self.isOpenAccount) {
+                maxRow += 1;
+            }
+            if (indexPath.row >= 8 + self.personalInfos.count + self.paymentDatas.count && indexPath.row <= maxRow) {
+                BTTMeInfoHiddenCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeInfoHiddenCell" forIndexPath:indexPath];
+                cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeRight;
+                cell.model = model;
+                return cell;
+            } else {
+                BTTMeMainCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMainCell" forIndexPath:indexPath];
+                if (indexPath.row == 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count) {
+                    cell.mineSparaterType = BTTMineSparaterTypeNone;
+                } else {
+                    cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
+                }
+                if (indexPath.row == 7 + self.personalInfos.count + self.paymentDatas.count && self.isShowHidden) {
+                    cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeUp;
+                } else {
+                    cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeRight;
+                }
+                cell.model = model;
+                return cell;
+            }
         } else {
             BTTMeMainCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMainCell" forIndexPath:indexPath];
             if (indexPath.row == 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count) {
@@ -312,6 +336,27 @@
         //支付方式点击事件
         BTTMeMainModel *model = self.paymentDatas[indexPath.row - (3 + self.personalInfos.count)];
         NSLog(@"%@",model);
+    } else if (indexPath.row >= 4 + self.personalInfos.count + self.paymentDatas.count && indexPath.row <= 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count) {
+        BTTMeMainModel *model = self.mainDataOne[indexPath.row - ( 4 + self.personalInfos.count + self.paymentDatas.count)];
+        if ([model.name isEqualToString:@"首存优惠"]) {
+            BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+            vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"mypromotion.htm"];
+            vc.webConfigModel.theme = @"outside";
+            vc.webConfigModel.newView = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if ([model.name isEqualToString:@"开户礼金"]) {
+            BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+            vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"promo_open_account.htm"];
+            vc.webConfigModel.theme = @"outside";
+            vc.webConfigModel.newView = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if ([model.name isEqualToString:@"1%存款返利"]) {
+            BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+            vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"deposit_rebate.htm"];
+            vc.webConfigModel.theme = @"outside";
+            vc.webConfigModel.newView = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 
@@ -354,6 +399,7 @@
     NSInteger total = 0;
     if ([IVNetwork userInfo]) {
         total = self.personalInfos.count + 7 + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + self.mainDataThree.count;
+        
     } else {
         total = self.personalInfos.count + 6 + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count;
     }
