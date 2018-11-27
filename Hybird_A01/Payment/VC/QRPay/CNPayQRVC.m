@@ -98,7 +98,8 @@
         (self.paymentModel.paymentType == CNPaymentWechatQR ||
          self.paymentModel.paymentType == CNPaymentAliQR)) {
             self.amountBtn.hidden = NO;
-            self.amountTF.placeholder = @"请选择支付金额";
+            self.amountTF.placeholder = @"仅可选择以下金额";
+            self.arrawDownIV.hidden = NO;
         } else {
             self.amountBtn.hidden = YES;
             self.arrawDownIV.hidden = YES;
@@ -143,7 +144,11 @@
 
 - (IBAction)selectAmountList:(id)sender {
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:self.paymentModel.amountList defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.paymentModel.amountList.count];
+    for (id obj in self.paymentModel.amountList) {
+        [array addObject:[NSString stringWithFormat:@"%@", obj]];
+    }
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
         if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
             return;
         }
@@ -151,10 +156,11 @@
     }];
 }
 
-- (IBAction)sumitAction:(UIButton *)sender {
+- (IBAction)nextStep:(UIButton *)sender {
     [self.view endEditing:YES];
+    [self goToStep:1];return;
+
     NSString *text = _amountTF.text;
-    
     /// 输入为不合法数字
     if (![NSString isPureInt:text] && ![NSString isPureFloat:text]) {
         _amountTF.text = nil;

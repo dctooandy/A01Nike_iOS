@@ -72,8 +72,6 @@
 - (NSString<Ignore> *)paymentLogo {
     switch (self.paymentType) {
             
-        case CNPaymentWechatBarCode:
-            return @"pay_wechatBarCode";
         case CNPaymentWechatApp:
         case CNPaymentWechatQR:
             return @"pay_WeChatHL";
@@ -84,8 +82,6 @@
             return @"pay_AliHL";
         case CNPaymentUnionQR:
             return @"pay_QRUnion";
-        case CNPaymentCoin:
-            return @"pay_Bibao";
         case CNPaymentJDQR:
             return @"pay_QRJD";
         default:

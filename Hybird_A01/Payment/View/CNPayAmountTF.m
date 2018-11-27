@@ -35,12 +35,13 @@
 }
 
 - (void)commonInit {
-//    self.placeholder = @"";
     self.font = [UIFont systemFontOfSize:16];
     self.delegate = self;
     self.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.keyboardType = UIKeyboardTypeDecimalPad;
     [self addTarget:self action:@selector(textFieldEditingChanged) forControlEvents:UIControlEventEditingChanged];
+    self.placeholder = @"请输入金额";
+    [self setValue:self.textColor forKeyPath:@"_placeholderLabel.textColor"];
 }
 
 - (void)textFieldEditingChanged {
