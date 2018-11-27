@@ -47,7 +47,7 @@ NSInteger const kPayTypeTotalCount = 18;
                             @"bqpaytype-0",@"bqpaytype-1",@"bqpaytype-2"];
     params[@"list"] = [channelArr componentsJoinedByString:@";"];
     
-    [self requestWithUrl:kPaymentValidate parameters:params handler:completeHandler];
+    [self cacheWithUrl:kPaymentValidate parameters:params handler:completeHandler];
 }
 
 + (void)paymentWithPayType:(NSString *)type payId:(NSInteger)payId amount:(NSString *)amout bankCode:(NSString *)bankCode completeHandler:(IVRequestCallBack)completeHandler {
