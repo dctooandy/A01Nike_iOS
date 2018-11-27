@@ -148,6 +148,7 @@
     if (textField == [self getPhoneTF]) {
         if (![IVNetwork userInfo].isPhoneBinded && [IVNetwork userInfo].phone.length != 0) {
             textField.text = @"";
+            [self getSendBtn].enabled = NO;
         }
     }
 }
@@ -162,7 +163,11 @@
         if ([IVNetwork userInfo].isPhoneBinded) {
             [self getSubmitBtn].enabled = YES;
         } else {
-            [self getSubmitBtn].enabled = [PublicMethod isValidatePhone:[self getPhoneTF].text];
+            if ([[self getPhoneTF].text isEqualToString:[IVNetwork userInfo].phone]) {
+                [self getSubmitBtn].enabled = YES;
+            } else {
+                [self getSubmitBtn].enabled = [PublicMethod isValidatePhone:[self getPhoneTF].text];
+            }
         }
     }
 }

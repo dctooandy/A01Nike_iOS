@@ -19,6 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *totalAmount;
 
+@property (nonatomic, assign) BOOL isFanLi;  ///< 返利
+
+@property (nonatomic, assign) BOOL isOpenAccount;  ///< 开户礼金
+
 - (void)setupElements;
 
 @end

@@ -78,7 +78,7 @@
     
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:loadMoreBlock];
     // 默认先隐藏footer
-    self.collectionView.mj_footer.hidden = YES;
+//    self.collectionView.mj_footer.hidden = YES;
 }
 
 - (void)endRefreshing {
