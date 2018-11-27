@@ -279,13 +279,20 @@
         BTTAccountSafeController *vc = [[BTTAccountSafeController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 5) {
-        BTTSheetsViewController *vc = [[BTTSheetsViewController alloc] init];
+//        BTTSheetsViewController *vc = [[BTTSheetsViewController alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
+        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+        vc.webConfigModel.newView = YES;
+        vc.webConfigModel.url = @"customer/log.htm";
+        vc.webConfigModel.theme = @"inside";
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + self.mainDataThree.count  + 5) {
+        // 退出登录
         [MBProgressHUD showSuccess:@"退出成功" toView:nil];
         [BTTUserStatusManager logoutSuccess];
         self.totalAmount = @"-";
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 7) {
+        // 设置
         BTTSettingsController *vc = [[BTTSettingsController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 5 + self.personalInfos.count + self.paymentDatas.count) {
