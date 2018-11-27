@@ -29,11 +29,6 @@
 
 /// 预加载支付所有渠道数据
 + (void)cachePaymentData {
-    [CNPayRequestManager queryAllChannelCompleteHandler:^(IVRequestResultModel *result, id response) {
-        if (result.status && [IVNetwork userInfo]) {
-            [[NSUserDefaults standardUserDefaults] setObject:response forKey:[CNCacheDataKey cacheAllPayChannelKey]];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
-    }];
+    [CNPayRequestManager queryAllChannelCompleteHandler:nil];
 }
 @end

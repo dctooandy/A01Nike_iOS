@@ -49,7 +49,7 @@
             self.selectedIcon   = @"pay_AliHL";
             break;
         case CNPayChannelUnionApp:
-            self.channelName    = @"银行卡快捷支付";
+            self.channelName    = @"银行快捷支付";
             self.selectedIcon   = @"pay_unionHL";
             break;
         case CNPayChannelJDApp:
@@ -66,11 +66,11 @@
             break;
         case CNPayChannelBQWechat:
             self.channelName    = @"微信秒存";
-            self.selectedIcon   = @"pay_BQWeChatHL";
+            self.selectedIcon   = @"pay_WeChatHL";
             break;
         case CNPayChannelBQAli:
             self.channelName    = @"支付宝秒存";
-            self.selectedIcon   = @"pay_BQAliHL";
+            self.selectedIcon   = @"pay_AliHL";
             break;
     }
 }

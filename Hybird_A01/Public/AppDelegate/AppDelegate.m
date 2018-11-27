@@ -15,6 +15,8 @@
 #import "AppInitializeConfig.h"
 #import <IVHeartPacketLibrary/IVHeartSocketManager.h>
 #import <UserNotifications/UserNotifications.h>
+#import "CNPreCacheMananger.h"
+
 @interface AppDelegate ()<UNUserNotificationCenterDelegate>
 
 @property (nonatomic, strong) dispatch_semaphore_t semaphore;
@@ -52,6 +54,8 @@
     [self.window makeKeyAndVisible];
 //    [self setupADandWelcome];
     [self initRemoteNotificationWithOptions:launchOptions];
+    [CNPreCacheMananger prepareCacheDataNormal];
+    [CNPreCacheMananger prepareCacheDataNeedLogin];
     return YES;
 }
 
