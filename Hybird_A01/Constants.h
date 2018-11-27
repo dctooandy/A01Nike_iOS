@@ -88,6 +88,9 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 //live800相关
 #define Live800SkillId  @"10"
 
+#define BTTBannerDefaultWidth  1280
+#define BTTBnnnerDefaultHeight 440
+
 //听云相关
 #define TingYunAppId  @"402c4df0e9124425ba0b2feb76d120b0"
 
@@ -249,7 +252,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 // 获取支付状态
 
-#define BTTPaymentStatus             @"/A01/payment/status"
+#define BTTPaymentStatus             @"/public/payment/isShutdown"
 
 /********************************************常用宏*********************************************************/
 

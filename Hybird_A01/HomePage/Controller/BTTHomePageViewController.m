@@ -28,6 +28,7 @@
 #import "BTTAGGJViewController.h"
 #import "BTTAGQJViewController.h"
 #import "BTTDiscountsViewController.h"
+#import "BTTVideoGamesListController.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -512,6 +513,12 @@
             break;
         case 3:
             //跳电子游戏大厅
+        {
+            BTTVideoGamesListController *videoGame = [[BTTVideoGamesListController alloc] init];
+            videoGame.banners = self.banners;
+            videoGame.imageUrls = self.imageUrls;
+            [self.navigationController pushViewController:videoGame animated:YES];
+        }
             break;
         case 4://沙巴体育
             model = [[IVGameModel alloc] init];

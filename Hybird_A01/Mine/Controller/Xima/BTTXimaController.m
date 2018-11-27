@@ -43,7 +43,7 @@ typedef enum {
 @implementation BTTXimaController
 
 - (void)viewDidLoad {
-    self.title = @"结算洗码";
+    self.title = @"自助洗码";
     [super viewDidLoad];
     self.ximaStatusType = BTTXimaStatusTypeNormal;
     self.ximaDateType = BTTXimaDateTypeThisWeek;
@@ -99,6 +99,11 @@ typedef enum {
                         return cell;
                     } else {
                         BTTXimaFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaFooterCell" forIndexPath:indexPath];
+                        weakSelf(weakSelf);
+                        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                            strongSelf(strongSelf);
+                            [strongSelf pushToWebView];
+                        };
                         return cell;
                     }
                 } else {
@@ -108,6 +113,11 @@ typedef enum {
                         return cell;
                     } else if (indexPath.row == self.histroyModel.list.count + 2) {
                         BTTXimaFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaFooterCell" forIndexPath:indexPath];
+                        weakSelf(weakSelf);
+                        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                            strongSelf(strongSelf);
+                            [strongSelf pushToWebView];
+                        };
                         return cell;
                     } else {
                         BTTLastWeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLastWeekCell" forIndexPath:indexPath];
@@ -136,6 +146,11 @@ typedef enum {
                             return cell;
                         } else {
                             BTTXimaFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaFooterCell" forIndexPath:indexPath];
+                            weakSelf(weakSelf);
+                            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                                strongSelf(strongSelf);
+                                [strongSelf pushToWebView];
+                            };
                             return cell;
                         }
                     } else {
@@ -161,6 +176,11 @@ typedef enum {
                             return cell;
                         } else if (indexPath.row == self.validModel.list.count + 3) {
                             BTTXimaFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaFooterCell" forIndexPath:indexPath];
+                            weakSelf(weakSelf);
+                            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                                strongSelf(strongSelf);
+                                [strongSelf pushToWebView];
+                            };
                             return cell;
                         } else {
                             BTTThisWeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekCell" forIndexPath:indexPath];
@@ -178,11 +198,16 @@ typedef enum {
                         return cell;
                     } else if (indexPath.row == self.otherModel.list.count + 2) {
                         BTTXimaFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaFooterCell" forIndexPath:indexPath];
+                        weakSelf(weakSelf);
+                        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                            strongSelf(strongSelf);
+                            [strongSelf pushToWebView];
+                        };
                         return cell;
                     } else {
                         BTTThisWeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekCell" forIndexPath:indexPath];
                         cell.thisWeekCellType = BTTXimaThisWeekCellTypeDisable;
-                        BTTXimaItemModel *model = self.histroyModel.list[indexPath.row - 1];
+                        BTTXimaItemModel *model = self.otherModel.list[indexPath.row - 1];
                         cell.model = model;
                         return cell;
                     }
@@ -215,6 +240,14 @@ typedef enum {
         }
         
     }
+}
+
+- (void)pushToWebView {
+    BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"promotion_activity.htm"];
+    vc.webConfigModel.theme = @"outside";
+    vc.webConfigModel.newView = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

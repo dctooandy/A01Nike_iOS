@@ -88,7 +88,7 @@
     [self addOneChildVC:self.voiceCall title:@"APP语音" imageName:@"customer_service_normal" selectedImageName:@"customer_service_pressed"];
     [self addOneChildVC:self.lucky title:@"抽奖" imageName:@"lottery_pressed" selectedImageName:@"lottery_pressed"];
     [self addOneChildVC:self.discountsVC title:@"优惠" imageName:@"preferential_normal" selectedImageName:@"preferential_pressed"];
-    [self addOneChildVC:self.mineVC title:@"个人中心" imageName:@"member_normal" selectedImageName:@"member_pressed"];
+    [self addOneChildVC:self.mineVC title:@"会员中心" imageName:@"member_normal" selectedImageName:@"member_pressed"];
 }
 
 - (void)viewDidLayoutSubviews

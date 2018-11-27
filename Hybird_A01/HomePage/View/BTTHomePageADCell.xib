@@ -19,8 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="59R-Pd-9QW">
-                        <rect key="frame" x="60" y="0.0" width="255" height="45"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="59R-Pd-9QW">
+                        <rect key="frame" x="0.0" y="0.0" width="315" height="45"/>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.87843137250000003" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQc-hM-hgh">
@@ -37,10 +37,13 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="59R-Pd-9QW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="L2Q-Tk-8rx"/>
                 <constraint firstAttribute="trailing" secondItem="bQc-hM-hgh" secondAttribute="trailing" constant="15" id="MYZ-kj-uGp"/>
                 <constraint firstItem="bQc-hM-hgh" firstAttribute="leading" secondItem="59R-Pd-9QW" secondAttribute="trailing" constant="15" id="QuI-AX-Bh5"/>
                 <constraint firstItem="59R-Pd-9QW" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="ZtS-Do-xRi"/>
                 <constraint firstItem="bQc-hM-hgh" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="ilQ-Tu-3HU"/>
+                <constraint firstAttribute="bottom" secondItem="59R-Pd-9QW" secondAttribute="bottom" id="qbq-2Q-PI2"/>
+                <constraint firstItem="59R-Pd-9QW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="t1u-4L-4wi"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>

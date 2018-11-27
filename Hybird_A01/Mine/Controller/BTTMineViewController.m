@@ -60,12 +60,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"个人中心";
+    self.title = @"会员中心";
     self.totalAmount = @"-";
     [self setupNav];
     self.isCompletePersonalInfo = NO;
     self.isChangeMobile = NO;
     [self setupCollectionView];
+    [self loadPaymentDefaultData];
     [self loadMeAllData];
     [self setupNavBtn];
     [self registerNotification];
@@ -90,6 +91,7 @@
         [self loadBankList];
         [self loadTotalAvailableData];
         [BTTHttpManager getOpenAccountStatus];
+        [self loadPaymentData];
     }
 }
 
@@ -212,6 +214,7 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     NSLog(@"%@",@(indexPath.row));
     if (![IVNetwork userInfo]) {
+        [MBProgressHUD showError:@"请先登录" toView:nil];
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
@@ -276,12 +279,20 @@
         BTTAccountSafeController *vc = [[BTTAccountSafeController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 5) {
-        BTTSheetsViewController *vc = [[BTTSheetsViewController alloc] init];
+//        BTTSheetsViewController *vc = [[BTTSheetsViewController alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
+        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+        vc.webConfigModel.newView = YES;
+        vc.webConfigModel.url = @"customer/log.htm";
+        vc.webConfigModel.theme = @"inside";
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + self.mainDataThree.count  + 5) {
+        // 退出登录
+        [MBProgressHUD showSuccess:@"退出成功" toView:nil];
         [BTTUserStatusManager logoutSuccess];
         self.totalAmount = @"-";
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 7) {
+        // 设置
         BTTSettingsController *vc = [[BTTSettingsController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 5 + self.personalInfos.count + self.paymentDatas.count) {
@@ -296,6 +307,10 @@
         [IVNetwork startCheckWithType:IVCheckNetworkTypeAll appWindow:[UIApplication sharedApplication].keyWindow detailBtnClickedBlock:^{
             [self.navigationController pushViewController:[IVNetworkStatusDetailViewController new] animated:YES];
         }];
+    }  else if (indexPath.row >= 3 + self.personalInfos.count && indexPath.row <= 3 + self.personalInfos.count + self.paymentDatas.count - 1) {
+        //支付方式点击事件
+        BTTMeMainModel *model = self.paymentDatas[indexPath.row - (3 + self.personalInfos.count)];
+        NSLog(@"%@",model);
     }
 }
 

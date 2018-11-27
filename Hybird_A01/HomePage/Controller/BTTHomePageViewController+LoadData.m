@@ -75,7 +75,7 @@ static const char *BTTNextGroupKey = "nextGroup";
 }
 
 - (void)loadScrollText {
-    [IVNetwork sendRequestWithSubURL:@"app/getAnnouments" paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork sendUseCacheRequestWithSubURL:@"app/getAnnouments" paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",result.data);
         NSArray *data = result.data;
         if (![data isKindOfClass:[NSArray class]]) {
@@ -189,7 +189,7 @@ static const char *BTTNextGroupKey = "nextGroup";
     [params setObject:date_end forKey:@"date_end"];
     [params setObject:@"50000" forKey:@"min_bet_amount"];
     [params setObject:@"100" forKey:@"page_size"];
-    [IVNetwork sendRequestWithSubURL:BTTHomePageNewAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork sendUseCacheRequestWithSubURL:BTTHomePageNewAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.status) {
             if (result.data) {
@@ -225,7 +225,7 @@ static const char *BTTNextGroupKey = "nextGroup";
 }
 
 - (void)loadOtherData {
-    [IVNetwork sendRequestWithSubURL:BTTIndexBannerDownloads paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork sendUseCacheRequestWithSubURL:BTTIndexBannerDownloads paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.code_http == 200) {
             if (result.data) {
@@ -264,7 +264,7 @@ static const char *BTTNextGroupKey = "nextGroup";
 }
 
 - (void)loadHightlightsBrand {
-    [IVNetwork sendRequestWithSubURL:BTTBrandHighlights paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork sendUseCacheRequestWithSubURL:BTTBrandHighlights paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.code_http == 200) {
             if (result.data) {
