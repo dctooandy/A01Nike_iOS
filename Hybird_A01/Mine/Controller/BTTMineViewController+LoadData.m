@@ -18,6 +18,7 @@
     [self loadMainDataOne];
     [self loadMainDataTwo];
     [self loadMainDataThree];
+    [self loadAccountStatus];
     [self setupElements];
 }
 
@@ -117,12 +118,21 @@
     if (self.mainDataOne.count) {
         [self.mainDataOne removeAllObjects];
     }
-    NSArray *names = @[@"取款",@"结算洗码",@"额度转账",@"我的优惠",@"推荐礼金"];
-    NSArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_transfer",@"me_preferential",@"me_gift"];
+    NSMutableArray *names = @[@"取款",@"结算洗码",@"额度转账",@"我的优惠",@"推荐礼金"].mutableCopy;
+    NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_transfer",@"me_preferential",@"me_gift"].mutableCopy;
     if (self.isShowHidden) {
-        names = @[@"取款",@"结算洗码",@"额度转账",@"我的优惠",@"开户礼金",@"开户礼金",@"开户礼金",@"推荐礼金"];
-        icons = @[@"me_withdrawal",@"me_washcode",@"me_transfer",@"me_preferential",@"",@"",@"",@"me_gift"];
+        names = [NSMutableArray arrayWithArray:@[@"取款",@"结算洗码",@"额度转账",@"我的优惠",@"首存优惠",@"推荐礼金"]];
+        icons = [NSMutableArray arrayWithArray:@[@"me_withdrawal",@"me_washcode",@"me_transfer",@"me_preferential",@"",@"me_gift"]];
+        if (self.isFanLi) {
+            NSInteger index = [names indexOfObject:@"首存优惠"];
+            [names insertObject:@"1%存款返利" atIndex:index + 1];
+        }
+        if (self.isOpenAccount) {
+            NSInteger index = [names indexOfObject:@"首存优惠"];
+            [names insertObject:@"开户礼金" atIndex:index + 1];
+        }
     }
+    
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
@@ -177,6 +187,27 @@
 {
     [BTTHttpManager fetchBTCRateWithUseCache:YES];
 
+}
+
+
+- (void)loadAccountStatus {
+    [BTTHttpManager getOpenAccountStatusCompletion:^(IVRequestResultModel *result, id response) {
+        if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
+            NSLog(@"%@",response);
+            if (result.data[@"depositBonus"] && [result.data[@"depositBonus"] isKindOfClass:[NSDictionary class]]) {
+                if ([result.data[@"depositBonus"][@"result_code"] integerValue] == 0) {
+                    self.isFanLi = YES;
+                }
+            }
+            
+            if (result.data[@"newMemberBonus"] && [result.data[@"newMemberBonus"] isKindOfClass:[NSDictionary class]]) {
+                if ([result.data[@"newMemberBonus"][@"result_code"] integerValue] == 203 ||
+                    [result.data[@"newMemberBonus"][@"result_code"] integerValue] == 0) {
+                    self.isOpenAccount = YES;
+                }
+            }
+        }
+    }];
 }
 - (void)loadTotalAvailableData {
     [IVNetwork sendRequestWithSubURL:BTTCreditsTotalAvailable paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {

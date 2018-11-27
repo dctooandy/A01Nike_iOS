@@ -55,7 +55,7 @@
     } else {
         self.mineArrowsType = BTTMineArrowsTypeHidden;
     }
-    if ([model.name isEqualToString:@"我的优惠"]) {
+    if ([model.name isEqualToString:@"推荐礼金"]) {
         self.hotLabel.hidden = NO;
     } else {
         self.hotLabel.hidden = YES;

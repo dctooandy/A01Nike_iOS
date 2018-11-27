@@ -86,6 +86,8 @@
 		3A5F7AA821ABCD3900128E8B /* BTTVideoGamesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */; };
 		3A5F7AAA21ACF11A00128E8B /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA921ACF11900128E8B /* app.zip */; };
 		3A5F7AB021ACF5DB00128E8B /* BTTVideoGamesListController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AAE21ACF5DA00128E8B /* BTTVideoGamesListController+LoadData.m */; };
+		3A5F7AB521AD0E6800128E8B /* BTTVideoGamesFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AB321AD0E6800128E8B /* BTTVideoGamesFilterCell.m */; };
+		3A5F7AB621AD0E6800128E8B /* BTTVideoGamesFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7AB421AD0E6800128E8B /* BTTVideoGamesFilterCell.xib */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -332,6 +334,10 @@
 		3AE1EB1C21805B460073A32D /* BTTAddCardController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1EB1B21805B460073A32D /* BTTAddCardController+LoadData.m */; };
 		3AE1EB2021805E980073A32D /* BTTAddCardBtnsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1EB1E21805E980073A32D /* BTTAddCardBtnsCell.m */; };
 		3AE1EB2121805E980073A32D /* BTTAddCardBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AE1EB1F21805E980073A32D /* BTTAddCardBtnsCell.xib */; };
+		3AFCD7CB21AD15D700B136C1 /* BTTVideoGamesHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFCD7C921AD15D700B136C1 /* BTTVideoGamesHeaderCell.m */; };
+		3AFCD7CC21AD15D700B136C1 /* BTTVideoGamesHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CA21AD15D700B136C1 /* BTTVideoGamesHeaderCell.xib */; };
+		3AFCD7D021AD179600B136C1 /* BTTVideoGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CE21AD179600B136C1 /* BTTVideoGameCell.m */; };
+		3AFCD7D121AD179600B136C1 /* BTTVideoGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_A01.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */; };
 		D5DBEAFF21ABB774008AF629 /* NSString+CNPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEA8D21ABB774008AF629 /* NSString+CNPayment.m */; };
 		D5DBEB0021ABB774008AF629 /* CNPayDepositStep3VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEA9221ABB774008AF629 /* CNPayDepositStep3VC.xib */; };
@@ -756,6 +762,9 @@
 		3A5F7AA921ACF11900128E8B /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		3A5F7AAE21ACF5DA00128E8B /* BTTVideoGamesListController+LoadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTVideoGamesListController+LoadData.m"; sourceTree = "<group>"; };
 		3A5F7AAF21ACF5DB00128E8B /* BTTVideoGamesListController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTVideoGamesListController+LoadData.h"; sourceTree = "<group>"; };
+		3A5F7AB221AD0E6800128E8B /* BTTVideoGamesFilterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGamesFilterCell.h; sourceTree = "<group>"; };
+		3A5F7AB321AD0E6800128E8B /* BTTVideoGamesFilterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGamesFilterCell.m; sourceTree = "<group>"; };
+		3A5F7AB421AD0E6800128E8B /* BTTVideoGamesFilterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGamesFilterCell.xib; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -1179,6 +1188,12 @@
 		3AE1EB1D21805E980073A32D /* BTTAddCardBtnsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTAddCardBtnsCell.h; sourceTree = "<group>"; };
 		3AE1EB1E21805E980073A32D /* BTTAddCardBtnsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTAddCardBtnsCell.m; sourceTree = "<group>"; };
 		3AE1EB1F21805E980073A32D /* BTTAddCardBtnsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTAddCardBtnsCell.xib; sourceTree = "<group>"; };
+		3AFCD7C821AD15D700B136C1 /* BTTVideoGamesHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGamesHeaderCell.h; sourceTree = "<group>"; };
+		3AFCD7C921AD15D700B136C1 /* BTTVideoGamesHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGamesHeaderCell.m; sourceTree = "<group>"; };
+		3AFCD7CA21AD15D700B136C1 /* BTTVideoGamesHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGamesHeaderCell.xib; sourceTree = "<group>"; };
+		3AFCD7CD21AD179600B136C1 /* BTTVideoGameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGameCell.h; sourceTree = "<group>"; };
+		3AFCD7CE21AD179600B136C1 /* BTTVideoGameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGameCell.m; sourceTree = "<group>"; };
+		3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGameCell.xib; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_A01.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DBEA8D21ABB774008AF629 /* NSString+CNPayment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CNPayment.m"; sourceTree = "<group>"; };
 		D5DBEA8E21ABB774008AF629 /* NSString+CNPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CNPayment.h"; sourceTree = "<group>"; };
@@ -1906,6 +1921,22 @@
 			path = VideoGames;
 			sourceTree = "<group>";
 		};
+		3A5F7AB121AD0D8D00128E8B /* VideoGames */ = {
+			isa = PBXGroup;
+			children = (
+				3A5F7AB221AD0E6800128E8B /* BTTVideoGamesFilterCell.h */,
+				3A5F7AB321AD0E6800128E8B /* BTTVideoGamesFilterCell.m */,
+				3A5F7AB421AD0E6800128E8B /* BTTVideoGamesFilterCell.xib */,
+				3AFCD7C821AD15D700B136C1 /* BTTVideoGamesHeaderCell.h */,
+				3AFCD7C921AD15D700B136C1 /* BTTVideoGamesHeaderCell.m */,
+				3AFCD7CA21AD15D700B136C1 /* BTTVideoGamesHeaderCell.xib */,
+				3AFCD7CD21AD179600B136C1 /* BTTVideoGameCell.h */,
+				3AFCD7CE21AD179600B136C1 /* BTTVideoGameCell.m */,
+				3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */,
+			);
+			path = VideoGames;
+			sourceTree = "<group>";
+		};
 		3A8D6E812163077C000530DF /* DataBaseManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -2523,6 +2554,7 @@
 		3AD9CF39216EDC6C00685B43 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3A5F7AB121AD0D8D00128E8B /* VideoGames */,
 				3A92942D219D19A300764E7E /* ForgetPassword */,
 				3A92941F219C3B1300764E7E /* RegisterSuccess */,
 				3AAE81FB219A738B003EC8B0 /* LoginOrRegister */,
@@ -3631,6 +3663,7 @@
 				EAE89E9D218C3ABD00C29393 /* liv_radio_selected@2x.png in Resources */,
 				3AB0684321A3998200072FB7 /* BTTUnBindingBtnCell.xib in Resources */,
 				D5DBEB2D21ABB774008AF629 /* CNPayTipView.xib in Resources */,
+				3AFCD7D121AD179600B136C1 /* BTTVideoGameCell.xib in Resources */,
 				EAE89F10218C3ABD00C29393 /* TableViewArrow@2x.png in Resources */,
 				EAE89EE2218C3ABD00C29393 /* LIVVideoCamera_play@3x.png in Resources */,
 				EAE89EB6218C3ABD00C29393 /* LIVFileMessage_TypeUnknown@3x.png in Resources */,
@@ -3640,6 +3673,7 @@
 				EAE89ECB218C3ABD00C29393 /* LIVResendButton@2x.png in Resources */,
 				EAE89EBD218C3ABD00C29393 /* LIVLocationItem@2x.png in Resources */,
 				D5DBEB0021ABB774008AF629 /* CNPayDepositStep3VC.xib in Resources */,
+				3A5F7AB621AD0E6800128E8B /* BTTVideoGamesFilterCell.xib in Resources */,
 				EAE89EBA218C3ABD00C29393 /* LIVFileMessage_TypeZip@3x.png in Resources */,
 				EAE89EA6218C3ABD00C29393 /* LIVCameraItem@3x.png in Resources */,
 				3AD9CF6E216F33F300685B43 /* BTTGameCollectionViewCell.xib in Resources */,
@@ -3732,6 +3766,7 @@
 				EAE89EE4218C3ABD00C29393 /* LIVVideoCamera_switchCamera@3x.png in Resources */,
 				EAE89EA3218C3ABD00C29393 /* liv_satisfactionr_circular_selected_un@2x.png in Resources */,
 				EAE89F0A218C3ABD00C29393 /* sentVoicePlaying1@2x.png in Resources */,
+				3AFCD7CC21AD15D700B136C1 /* BTTVideoGamesHeaderCell.xib in Resources */,
 				3A929424219C3B7500764E7E /* BTTRegisterSuccessOneCell.xib in Resources */,
 				EAE89EC5218C3ABD00C29393 /* LIVRadioButton_selected@2x.png in Resources */,
 				EAE89EEA218C3ABD00C29393 /* LIVVideoMessage_PlayButtonIcon@2x.png in Resources */,
@@ -3832,7 +3867,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
 				"${PODS_ROOT}/BRPickerView/BRPickerView/AddressPickerView/BRPickerView.bundle",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
@@ -3845,7 +3880,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3870,6 +3905,7 @@
 				3A11ADD521816E5800B1AFF4 /* SVProgressHUD.m in Sources */,
 				3AD9CF50216EFB3700685B43 /* BTTHomePageBannerCell.m in Sources */,
 				3AE0582021704D5C00C7E70D /* UUMarqueeView.m in Sources */,
+				3A5F7AB521AD0E6800128E8B /* BTTVideoGamesFilterCell.m in Sources */,
 				3A11AE0D21829F4B00B1AFF4 /* BTTPTTransferController.m in Sources */,
 				3A11AE532186A6A200B1AFF4 /* BTTBookMessageController.m in Sources */,
 				3ADD2393217837FF00FA959A /* BTTMeHeaderLoginCell.m in Sources */,
@@ -3931,6 +3967,7 @@
 				3A9E4C4C219FB1DF00E7D8C0 /* BTTPromotionModel.m in Sources */,
 				3AD9CF57216EFD3000685B43 /* BTTHomePageViewController+LoadData.m in Sources */,
 				3AB0682921A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.m in Sources */,
+				3AFCD7CB21AD15D700B136C1 /* BTTVideoGamesHeaderCell.m in Sources */,
 				3ADD23F62179C6A800FA959A /* BTTAccountBalanceController.m in Sources */,
 				3A11ADF62181A22F00B1AFF4 /* BTTWithdrawalHeaderCell.m in Sources */,
 				3A49DFA52179DDA100FEFBDA /* BTTBindingMobileBtnCell.m in Sources */,
@@ -3939,6 +3976,7 @@
 				3AE0580D21702C1F00C7E70D /* BTTHomePageHeaderModel.m in Sources */,
 				3AE1EACF217DCD1D0073A32D /* BTTChangeMobileController.m in Sources */,
 				3ADD23F22179B97A00FA959A /* UIView+SDExtension.m in Sources */,
+				3AFCD7D021AD179600B136C1 /* BTTVideoGameCell.m in Sources */,
 				3A49DF9B2179D90D00FEFBDA /* BTTBindingMobileOneCell.m in Sources */,
 				3ADD236C21772A1E00FA959A /* BTTMeInfoCell.m in Sources */,
 				3A929428219C3D6200764E7E /* BTTRegisterSuccessBtnsCell.m in Sources */,

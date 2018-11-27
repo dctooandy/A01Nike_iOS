@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTVideoGameCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ch2-Rf-g41">
+                        <rect key="frame" x="15" y="15" width="345" height="90"/>
+                        <color key="backgroundColor" red="0.81960784310000001" green="0.21960784310000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="90" id="aKG-NX-P4u"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击收藏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybR-r2-Ab1">
+                        <rect key="frame" x="298.5" y="155" width="61.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ht6-kr-CYd">
+                        <rect key="frame" x="340" y="120" width="20" height="20"/>
+                        <color key="backgroundColor" red="0.81960784310000001" green="0.21960784310000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="4ZQ-Pp-Ox7"/>
+                            <constraint firstAttribute="height" constant="20" id="WpK-kH-uhc"/>
+                        </constraints>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DH9-wj-bgb">
+                        <rect key="frame" x="15" y="120" width="37" height="20"/>
+                        <color key="backgroundColor" red="0.14117647059999999" green="0.52941176469999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="TVw-vo-J9b"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title=" 20线 ">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="piw-1j-EtB">
+                        <rect key="frame" x="60" y="120" width="37" height="20"/>
+                        <color key="backgroundColor" red="0.14117647059999999" green="0.52941176469999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="1WS-Aq-jrV"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title=" 20线 ">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axc-Aj-KL8">
+                        <rect key="frame" x="105" y="120" width="37" height="20"/>
+                        <color key="backgroundColor" red="0.14117647059999999" green="0.52941176469999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="awu-kl-42P"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title=" 20线 ">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="捕鱼王" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKT-hr-jCy">
+                        <rect key="frame" x="15" y="155" width="46" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="piw-1j-EtB" firstAttribute="leading" secondItem="DH9-wj-bgb" secondAttribute="trailing" constant="8" id="0Xe-00-gkp"/>
+                <constraint firstItem="Ch2-Rf-g41" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="7wL-SV-6gV"/>
+                <constraint firstItem="Ch2-Rf-g41" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="ArV-gz-Sha"/>
+                <constraint firstItem="ht6-kr-CYd" firstAttribute="top" secondItem="Ch2-Rf-g41" secondAttribute="bottom" constant="15" id="EdF-GV-cWe"/>
+                <constraint firstItem="aKT-hr-jCy" firstAttribute="leading" secondItem="DH9-wj-bgb" secondAttribute="leading" id="M2a-ss-zf5"/>
+                <constraint firstItem="DH9-wj-bgb" firstAttribute="top" secondItem="Ch2-Rf-g41" secondAttribute="bottom" constant="15" id="RZb-BL-8m0"/>
+                <constraint firstAttribute="trailing" secondItem="Ch2-Rf-g41" secondAttribute="trailing" constant="15" id="T21-sS-zNt"/>
+                <constraint firstItem="axc-Aj-KL8" firstAttribute="leading" secondItem="piw-1j-EtB" secondAttribute="trailing" constant="8" id="UFS-sb-lOR"/>
+                <constraint firstItem="piw-1j-EtB" firstAttribute="centerY" secondItem="DH9-wj-bgb" secondAttribute="centerY" id="dBV-62-7L4"/>
+                <constraint firstItem="Ch2-Rf-g41" firstAttribute="leading" secondItem="DH9-wj-bgb" secondAttribute="trailing" constant="-37" id="dDJ-6e-ZO6"/>
+                <constraint firstItem="ybR-r2-Ab1" firstAttribute="top" secondItem="ht6-kr-CYd" secondAttribute="bottom" constant="15" id="fVh-Is-pnZ"/>
+                <constraint firstItem="aKT-hr-jCy" firstAttribute="top" secondItem="DH9-wj-bgb" secondAttribute="bottom" constant="15" id="j39-kR-PAr"/>
+                <constraint firstItem="axc-Aj-KL8" firstAttribute="centerY" secondItem="piw-1j-EtB" secondAttribute="centerY" id="otr-1D-xBv"/>
+                <constraint firstItem="ht6-kr-CYd" firstAttribute="trailing" secondItem="ybR-r2-Ab1" secondAttribute="trailing" id="pFr-6w-e6l"/>
+                <constraint firstItem="ht6-kr-CYd" firstAttribute="trailing" secondItem="Ch2-Rf-g41" secondAttribute="trailing" id="s3x-6J-Ifg"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <connections>
+                <outlet property="gameIcon" destination="Ch2-Rf-g41" id="PHd-zq-ced"/>
+                <outlet property="gameIconHeightConstants" destination="aKG-NX-P4u" id="DZE-R8-ES3"/>
+                <outlet property="leftConstants" destination="7wL-SV-6gV" id="Scr-2z-mzy"/>
+                <outlet property="rightConstants" destination="T21-sS-zNt" id="yZL-KL-bae"/>
+            </connections>
+            <point key="canvasLocation" x="-334" y="122"/>
+        </collectionViewCell>
+    </objects>
+</document>
