@@ -86,6 +86,8 @@
 		3A5F7AA821ABCD3900128E8B /* BTTVideoGamesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */; };
 		3A5F7AAA21ACF11A00128E8B /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA921ACF11900128E8B /* app.zip */; };
 		3A5F7AB021ACF5DB00128E8B /* BTTVideoGamesListController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AAE21ACF5DA00128E8B /* BTTVideoGamesListController+LoadData.m */; };
+		3A5F7AB521AD0E6800128E8B /* BTTVideoGamesFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AB321AD0E6800128E8B /* BTTVideoGamesFilterCell.m */; };
+		3A5F7AB621AD0E6800128E8B /* BTTVideoGamesFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7AB421AD0E6800128E8B /* BTTVideoGamesFilterCell.xib */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -754,6 +756,9 @@
 		3A5F7AA921ACF11900128E8B /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		3A5F7AAE21ACF5DA00128E8B /* BTTVideoGamesListController+LoadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTVideoGamesListController+LoadData.m"; sourceTree = "<group>"; };
 		3A5F7AAF21ACF5DB00128E8B /* BTTVideoGamesListController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTVideoGamesListController+LoadData.h"; sourceTree = "<group>"; };
+		3A5F7AB221AD0E6800128E8B /* BTTVideoGamesFilterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGamesFilterCell.h; sourceTree = "<group>"; };
+		3A5F7AB321AD0E6800128E8B /* BTTVideoGamesFilterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGamesFilterCell.m; sourceTree = "<group>"; };
+		3A5F7AB421AD0E6800128E8B /* BTTVideoGamesFilterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGamesFilterCell.xib; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -1901,6 +1906,16 @@
 			path = VideoGames;
 			sourceTree = "<group>";
 		};
+		3A5F7AB121AD0D8D00128E8B /* VideoGames */ = {
+			isa = PBXGroup;
+			children = (
+				3A5F7AB221AD0E6800128E8B /* BTTVideoGamesFilterCell.h */,
+				3A5F7AB321AD0E6800128E8B /* BTTVideoGamesFilterCell.m */,
+				3A5F7AB421AD0E6800128E8B /* BTTVideoGamesFilterCell.xib */,
+			);
+			path = VideoGames;
+			sourceTree = "<group>";
+		};
 		3A8D6E812163077C000530DF /* DataBaseManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -2518,6 +2533,7 @@
 		3AD9CF39216EDC6C00685B43 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3A5F7AB121AD0D8D00128E8B /* VideoGames */,
 				3A92942D219D19A300764E7E /* ForgetPassword */,
 				3A92941F219C3B1300764E7E /* RegisterSuccess */,
 				3AAE81FB219A738B003EC8B0 /* LoginOrRegister */,
@@ -3631,6 +3647,7 @@
 				EAE89ECB218C3ABD00C29393 /* LIVResendButton@2x.png in Resources */,
 				EAE89EBD218C3ABD00C29393 /* LIVLocationItem@2x.png in Resources */,
 				D5DBEB0021ABB774008AF629 /* CNPayDepositStep3VC.xib in Resources */,
+				3A5F7AB621AD0E6800128E8B /* BTTVideoGamesFilterCell.xib in Resources */,
 				EAE89EBA218C3ABD00C29393 /* LIVFileMessage_TypeZip@3x.png in Resources */,
 				EAE89EA6218C3ABD00C29393 /* LIVCameraItem@3x.png in Resources */,
 				3AD9CF6E216F33F300685B43 /* BTTGameCollectionViewCell.xib in Resources */,
@@ -3860,6 +3877,7 @@
 				3A11ADD521816E5800B1AFF4 /* SVProgressHUD.m in Sources */,
 				3AD9CF50216EFB3700685B43 /* BTTHomePageBannerCell.m in Sources */,
 				3AE0582021704D5C00C7E70D /* UUMarqueeView.m in Sources */,
+				3A5F7AB521AD0E6800128E8B /* BTTVideoGamesFilterCell.m in Sources */,
 				3A11AE0D21829F4B00B1AFF4 /* BTTPTTransferController.m in Sources */,
 				3A11AE532186A6A200B1AFF4 /* BTTBookMessageController.m in Sources */,
 				3ADD2393217837FF00FA959A /* BTTMeHeaderLoginCell.m in Sources */,
