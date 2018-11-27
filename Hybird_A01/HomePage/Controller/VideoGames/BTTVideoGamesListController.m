@@ -16,7 +16,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setupCollectionView];
+    [self setupElements];
+}
 
+- (void)setupCollectionView {
+    [super setupCollectionView];
+    
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {

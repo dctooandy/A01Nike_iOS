@@ -84,6 +84,7 @@
 		3A5F7AA021A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7A9E21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib */; };
 		3A5F7AA321A9524D00128E8B /* BTTProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA221A9524D00128E8B /* BTTProvinceModel.m */; };
 		3A5F7AA821ABCD3900128E8B /* BTTVideoGamesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */; };
+		3A5F7AAA21ACF11A00128E8B /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA921ACF11900128E8B /* app.zip */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -194,7 +195,6 @@
 		3AB0684321A3998200072FB7 /* BTTUnBindingBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB0684121A3998200072FB7 /* BTTUnBindingBtnCell.xib */; };
 		3AB0684C21A3EA8500072FB7 /* BTTGamesHallModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0684B21A3EA8500072FB7 /* BTTGamesHallModel.m */; };
 		3AB0685821A422B000072FB7 /* BTTPTTransferController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0685621A422B000072FB7 /* BTTPTTransferController+LoadData.m */; };
-		3AB0685C21A4E6E000072FB7 /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3AB0685B21A4E6DF00072FB7 /* app.zip */; };
 		3AB0686921A4F29B00072FB7 /* BTTPublicBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0686721A4F29B00072FB7 /* BTTPublicBtnCell.m */; };
 		3AB0686A21A4F29B00072FB7 /* BTTPublicBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB0686821A4F29B00072FB7 /* BTTPublicBtnCell.xib */; };
 		3AB0686E21A5033700072FB7 /* BTTPTTransferInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0686C21A5033700072FB7 /* BTTPTTransferInputCell.m */; };
@@ -750,6 +750,7 @@
 		3A5F7AA221A9524D00128E8B /* BTTProvinceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTProvinceModel.m; sourceTree = "<group>"; };
 		3A5F7AA621ABCD3900128E8B /* BTTVideoGamesListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGamesListController.h; sourceTree = "<group>"; };
 		3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGamesListController.m; sourceTree = "<group>"; };
+		3A5F7AA921ACF11900128E8B /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -944,7 +945,6 @@
 		3AB0684B21A3EA8500072FB7 /* BTTGamesHallModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTGamesHallModel.m; sourceTree = "<group>"; };
 		3AB0685621A422B000072FB7 /* BTTPTTransferController+LoadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTPTTransferController+LoadData.m"; sourceTree = "<group>"; };
 		3AB0685721A422B000072FB7 /* BTTPTTransferController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTPTTransferController+LoadData.h"; sourceTree = "<group>"; };
-		3AB0685B21A4E6DF00072FB7 /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		3AB0686621A4F29B00072FB7 /* BTTPublicBtnCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPublicBtnCell.h; sourceTree = "<group>"; };
 		3AB0686721A4F29B00072FB7 /* BTTPublicBtnCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPublicBtnCell.m; sourceTree = "<group>"; };
 		3AB0686821A4F29B00072FB7 /* BTTPublicBtnCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTPublicBtnCell.xib; sourceTree = "<group>"; };
@@ -1986,7 +1986,7 @@
 			children = (
 				3A8F5134215F74CF0069D1B3 /* Main.storyboard */,
 				3A8F5137215F74D00069D1B3 /* Assets.xcassets */,
-				3AB0685B21A4E6DF00072FB7 /* app.zip */,
+				3A5F7AA921ACF11900128E8B /* app.zip */,
 				3AD4C9C221635AEC00FC0A63 /* app.json */,
 				3A8F5139215F74D00069D1B3 /* LaunchScreen.storyboard */,
 				3AD9CD472164B10000685B43 /* Info.plist */,
@@ -3604,7 +3604,6 @@
 				EAE89EEB218C3ABD00C29393 /* LIVVideoMessage_PlayButtonIcon@3x.png in Resources */,
 				EAE89F0F218C3ABD00C29393 /* sentVoicePlaying3@3x.png in Resources */,
 				EAE89F37218C3ABD00C29393 /* TZAlbumCell.nib in Resources */,
-				3AB0685C21A4E6E000072FB7 /* app.zip in Resources */,
 				EAE89F1A218C3ABD00C29393 /* LIVChatFunctionBar.nib in Resources */,
 				3AD9CF77216F3F6300685B43 /* BTTAppCollectionViewCell.xib in Resources */,
 				3A9E4C34219D9D6B00E7D8C0 /* BTTMakeCallLoginView.xib in Resources */,
@@ -3760,6 +3759,7 @@
 				EAE89E9E218C3ABD00C29393 /* liv_radio_selected@3x.png in Resources */,
 				EAE89F02218C3ABD00C29393 /* preview_number_icon@2x.png in Resources */,
 				3AD9CF5C216F1A4400685B43 /* BTTHomePageADCell.xib in Resources */,
+				3A5F7AAA21ACF11A00128E8B /* app.zip in Resources */,
 				3A11AE132182AAB300B1AFF4 /* BTTPTTransferNewCell.xib in Resources */,
 				EAE89EFD218C3ABD00C29393 /* photo_number_icon@2x.png in Resources */,
 				3A8F518B215F77AC0069D1B3 /* intro_2.jpg in Resources */,
