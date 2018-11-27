@@ -160,6 +160,12 @@
     BTC.payments = [[NSArray alloc] initWithObjects:
                     payments[CNPaymentBTC], nil];
     
+    /// 币宝支付
+    CNPayChannelModel *coin = [[CNPayChannelModel alloc] init];
+    BTC.payChannel = CNPayChannelCoin;
+    BTC.payments = [[NSArray alloc] initWithObjects:
+                    payments[CNPaymentCoin], nil];
+    
 
     /// 支付宝支付
     CNPayChannelModel *ali = [[CNPayChannelModel alloc] init];
@@ -190,8 +196,6 @@
                    payments[CNPaymentAliQR],
                    payments[CNPaymentQQQR],
                    payments[CNPaymentUnionQR],
-                   payments[CNPaymentCoin],
-                   payments[CNPaymentWechatBarCode],
                    payments[CNPaymentWechatApp],
                    payments[CNPaymentQQApp],
                    nil];
@@ -214,16 +218,14 @@
     BQAli.payments = [[NSArray alloc] initWithObjects:
                        payments[CNPaymentBQAli], nil];
     
-
-    // 1以上: BQ快速>支付宝支付>微信支付>BQ支付宝>BQ微信>在线支付>银联支付>微信条码支付>扫码支付>比特币支付>QQ钱包>人工汇款>点卡支付
-    // 0星级: 支付宝支付>微信支付>QQ钱包>在线支付>银联支付>微信条码支付>扫码支付>比特币支付>点卡支付>BQ快速>BQ支付宝>BQ微信>人工汇款
     
-    NSArray *array;
-    if ([IVNetwork userInfo].customerLevel > 0) {
-        array = @[BQFast,ali,BQAli,BQWeChat,online,unionPay,QR,BTC,deposit,card];
-    } else {
-        array = @[ali,online,unionPay,QR,BTC,card,BQFast,BQAli,BQWeChat,deposit];
-    }
+    /// 微信条码
+    CNPayChannelModel *barCode = [[CNPayChannelModel alloc] init];
+    BQAli.payChannel = CNPayChannelWechatBarCode;
+    BQAli.payments = [[NSArray alloc] initWithObjects:
+                      payments[CNPaymentWechatBarCode], nil];
+    
+    NSArray *array = @[BQFast,BQWeChat,BQAli,deposit,ali,online,QR,unionPay,card,BTC,JD,barCode,coin];
     
     // 没开启的渠道不显示
     for (CNPayChannelModel *channel in array) {
