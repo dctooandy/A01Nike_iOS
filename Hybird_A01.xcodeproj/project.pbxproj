@@ -362,8 +362,6 @@
 		D5DBEB1321ABB774008AF629 /* CNPayContainerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAAE21ABB774008AF629 /* CNPayContainerVC.m */; };
 		D5DBEB1421ABB774008AF629 /* CNPayOnlineVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEAB021ABB774008AF629 /* CNPayOnlineVC.xib */; };
 		D5DBEB1521ABB774008AF629 /* CNPayOnlineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAB121ABB774008AF629 /* CNPayOnlineVC.m */; };
-		D5DBEB1621ABB774008AF629 /* CNPayOnlineStep2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAB221ABB774008AF629 /* CNPayOnlineStep2VC.m */; };
-		D5DBEB1721ABB774008AF629 /* CNPayOnlineStep2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEAB521ABB774008AF629 /* CNPayOnlineStep2VC.xib */; };
 		D5DBEB1821ABB774008AF629 /* CNWKWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAB921ABB774008AF629 /* CNWKWebVC.m */; };
 		D5DBEB1921ABB774008AF629 /* CNUIWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEABA21ABB774008AF629 /* CNUIWebVC.m */; };
 		D5DBEB1A21ABB774008AF629 /* CNPayCardStep3VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEABD21ABB774008AF629 /* CNPayCardStep3VC.xib */; };
@@ -1231,10 +1229,7 @@
 		D5DBEAAE21ABB774008AF629 /* CNPayContainerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayContainerVC.m; sourceTree = "<group>"; };
 		D5DBEAB021ABB774008AF629 /* CNPayOnlineVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayOnlineVC.xib; sourceTree = "<group>"; };
 		D5DBEAB121ABB774008AF629 /* CNPayOnlineVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayOnlineVC.m; sourceTree = "<group>"; };
-		D5DBEAB221ABB774008AF629 /* CNPayOnlineStep2VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayOnlineStep2VC.m; sourceTree = "<group>"; };
-		D5DBEAB321ABB774008AF629 /* CNPayOnlineStep2VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayOnlineStep2VC.h; sourceTree = "<group>"; };
 		D5DBEAB421ABB774008AF629 /* CNPayOnlineVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayOnlineVC.h; sourceTree = "<group>"; };
-		D5DBEAB521ABB774008AF629 /* CNPayOnlineStep2VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayOnlineStep2VC.xib; sourceTree = "<group>"; };
 		D5DBEAB721ABB774008AF629 /* CNWKWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNWKWebVC.h; sourceTree = "<group>"; };
 		D5DBEAB821ABB774008AF629 /* CNUIWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNUIWebVC.h; sourceTree = "<group>"; };
 		D5DBEAB921ABB774008AF629 /* CNWKWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNWKWebVC.m; sourceTree = "<group>"; };
@@ -3071,9 +3066,6 @@
 		D5DBEAAF21ABB774008AF629 /* OnlinePay */ = {
 			isa = PBXGroup;
 			children = (
-				D5DBEAB321ABB774008AF629 /* CNPayOnlineStep2VC.h */,
-				D5DBEAB221ABB774008AF629 /* CNPayOnlineStep2VC.m */,
-				D5DBEAB521ABB774008AF629 /* CNPayOnlineStep2VC.xib */,
 				D5DBEAB421ABB774008AF629 /* CNPayOnlineVC.h */,
 				D5DBEAB121ABB774008AF629 /* CNPayOnlineVC.m */,
 				D5DBEAB021ABB774008AF629 /* CNPayOnlineVC.xib */,
@@ -3709,7 +3701,6 @@
 				3A11AE082181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.xib in Resources */,
 				EAE89EBF218C3ABD00C29393 /* LIVMediaFileSaveToLibraryButton@2x.png in Resources */,
 				3A5F7A9B21A8E71100128E8B /* BTTXimaSuccessItemCell.xib in Resources */,
-				D5DBEB1721ABB774008AF629 /* CNPayOnlineStep2VC.xib in Resources */,
 				3ADD23772177328B00FA959A /* BTTMeSaveMoneyCell.xib in Resources */,
 				3A11AE592186A71100B1AFF4 /* BTTBookMessageCell.xib in Resources */,
 				3AAE821A219A738B003EC8B0 /* BTTLoginOrRegisterBtnCell.xib in Resources */,
@@ -4045,7 +4036,6 @@
 				3AD9CF4C216EE11A00685B43 /* BTTHomePageHeaderView.m in Sources */,
 				D5DBEB0521ABB774008AF629 /* CNPayDepositStep3VC.m in Sources */,
 				3AE1EAF521801F3C0073A32D /* BTTVerifyTypeSelectController.m in Sources */,
-				D5DBEB1621ABB774008AF629 /* CNPayOnlineStep2VC.m in Sources */,
 				3AE1EAC4217DC0700073A32D /* BTTPersonalInfoController+LoadData.m in Sources */,
 				3A11AE2C2184311D00B1AFF4 /* BTTSheetsViewController.m in Sources */,
 				D5DBEB2A21ABB774008AF629 /* CNPaySubmitButton.m in Sources */,

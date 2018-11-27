@@ -9,7 +9,6 @@
 #import "CNPayContainerVC.h"
 #import "AMSegmentViewController.h"
 #import "CNPayOnlineVC.h"
-#import "CNPayOnlineStep2VC.h"
 #import "CNPayDepositStep1VC.h"
 #import "CNPayDepositStep2VC.h"
 #import "CNPayDepositStep3VC.h"
@@ -119,10 +118,8 @@
 /// 在线支付
 - (NSArray<CNPayBaseVC *> *)onlinePay:(CNPaymentModel *)payment {
     CNPayOnlineVC *step1VC = [[CNPayOnlineVC alloc] init];
-    CNPayOnlineStep2VC *step2VC = [[CNPayOnlineStep2VC alloc] init];
     step1VC.paymentModel = payment;
-    step2VC.paymentModel = payment;
-    return @[step1VC, step2VC];
+    return @[step1VC];
 }
 
 /// 手工支付
