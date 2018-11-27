@@ -7,6 +7,10 @@
 //
 
 #import "BTTVideoGamesListController.h"
+#import "BTTVideoGamesListController+LoadData.h"
+#import "BTTHomePageBannerCell.h"
+#import "BTTBannerModel.h"
+#import "BTTPromotionDetailController.h"
 
 @interface BTTVideoGamesListController ()<BTTElementsFlowLayoutDelegate>
 
@@ -16,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"电子游戏";
     [self setupCollectionView];
     [self setupElements];
 }
@@ -30,6 +35,21 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        BTTHomePageBannerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageBannerCell" forIndexPath:indexPath];
+        weakSelf(weakSelf);
+        cell.clickEventBlock = ^(id  _Nonnull value) {
+            strongSelf(strongSelf);
+            BTTBannerModel *model = strongSelf.banners[[value integerValue]];
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            vc.webConfigModel.url = model.action.detail;
+            vc.webConfigModel.newView = YES;
+            vc.webConfigModel.theme = @"outside";
+            [strongSelf.navigationController pushViewController:vc animated:YES];
+        };
+        cell.imageUrls = self.imageUrls;
+        return cell;
+    }
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([UICollectionViewCell class]) forIndexPath:indexPath];
     cell.contentView.backgroundColor = [UIColor yellowColor];
     if (![cell.contentView viewWithTag:100]) {
@@ -83,7 +103,19 @@
 }
 
 - (void)setupElements {
+    NSInteger total = 0;
+    total = 2;
     
+    for (int i = 0; i < total; i++) {
+        if (i == 0) {
+            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, BTTBnnnerDefaultHeight * (SCREEN_WIDTH / BTTBannerDefaultWidth))]];
+        } else if (i == 1) {
+            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 45)]];
+        }
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+    });
 }
 
 

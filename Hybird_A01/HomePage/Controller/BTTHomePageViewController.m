@@ -515,6 +515,8 @@
             //跳电子游戏大厅
         {
             BTTVideoGamesListController *videoGame = [[BTTVideoGamesListController alloc] init];
+            videoGame.banners = self.banners;
+            videoGame.imageUrls = self.imageUrls;
             [self.navigationController pushViewController:videoGame animated:YES];
         }
             break;
