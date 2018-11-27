@@ -47,14 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kBlackBackgroundColor;
-    // 先加载缓存显示
-    id cacheReponse = [[NSUserDefaults standardUserDefaults] objectForKey:[CNCacheDataKey cacheAllPayChannelKey]];
-    if (cacheReponse) {
-        [self fetchChannelSucessHandler:cacheReponse];
-        [self cachePaymentData];
-    } else {
-        [self fetchPayChannels];
-    }
+    [self fetchPayChannels];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -90,22 +83,11 @@
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.activityView stopAnimating];
         if (result.status) {
-            [[NSUserDefaults standardUserDefaults] setObject:response forKey:[CNCacheDataKey cacheAllPayChannelKey]];
             [strongSelf fetchChannelSucessHandler:response];
             return;
         }
         // 失败处理
         [strongSelf fetchChannelFailHandler];
-    }];
-}
-
-/// 预加载支付所有渠道数据
-- (void)cachePaymentData {
-    [CNPayRequestManager queryAllChannelCompleteHandler:^(IVRequestResultModel *result, id response) {
-        if (result.status && [IVNetwork userInfo]) {
-            [[NSUserDefaults standardUserDefaults] setObject:response forKey:[CNCacheDataKey cacheAllPayChannelKey]];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
     }];
 }
 
@@ -334,7 +316,7 @@
         make.left.mas_equalTo(self.contentView);
         make.right.mas_equalTo(self.contentView);
         make.bottom.mas_equalTo(self.contentView);
-        make.top.equalTo(self.payCollectionView.mas_bottom).offset(8.0);
+        make.top.equalTo(self.payCollectionView.mas_bottom).offset(0);
     }];
 }
 

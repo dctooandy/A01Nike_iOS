@@ -56,6 +56,8 @@
             return @"QQ扫码";
         case CNPaymentUnionQR:
             return @"银联扫码";
+        case CNPaymentJDQR:
+            return @"京东扫码";
         case CNPaymentBQFast:
             return @"迅捷支付";
         case CNPaymentBQWechat:
@@ -64,6 +66,30 @@
             return @"支付宝秒存";
         case CNPaymentCoin:
             return @"币宝支付";
+    }
+}
+
+- (NSString<Ignore> *)paymentLogo {
+    switch (self.paymentType) {
+            
+        case CNPaymentWechatBarCode:
+            return @"pay_wechatBarCode";
+        case CNPaymentWechatApp:
+        case CNPaymentWechatQR:
+            return @"pay_WeChatHL";
+        case CNPaymentQQApp:
+        case CNPaymentQQQR:
+            return @"pay_QQ";
+        case CNPaymentAliQR:
+            return @"pay_AliHL";
+        case CNPaymentUnionQR:
+            return @"pay_QRUnion";
+        case CNPaymentCoin:
+            return @"pay_Bibao";
+        case CNPaymentJDQR:
+            return @"pay_QRJD";
+        default:
+            return nil;
     }
 }
 
@@ -80,6 +106,7 @@
         case CNPaymentUnionApp:
         case CNPaymentUnionQR:
         case CNPaymentJDApp:
+        case CNPaymentJDQR:
         case CNPaymentCard:
         case CNPaymentWechatBarCode:
             return @[@(100), @(1000), @(2000), @(3000), @(5000)];
