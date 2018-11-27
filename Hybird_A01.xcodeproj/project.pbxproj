@@ -396,6 +396,9 @@
 		D5DBEB3B21ABB774008AF629 /* CNPayRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAFA21ABB774008AF629 /* CNPayRequestManager.m */; };
 		D5DBEB3F21AC1355008AF629 /* CNPayQRCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEB3D21AC1355008AF629 /* CNPayQRCell.m */; };
 		D5DBEB4021AC1355008AF629 /* CNPayQRCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEB3E21AC1355008AF629 /* CNPayQRCell.xib */; };
+		D5DBEB4421AD3721008AF629 /* CNPayQRStep2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEB4221AD3721008AF629 /* CNPayQRStep2VC.m */; };
+		D5DBEB4521AD3721008AF629 /* CNPayQRStep2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEB4321AD3721008AF629 /* CNPayQRStep2VC.xib */; };
+		D5DBEB4821AD470E008AF629 /* CNPayDashedLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEB4721AD470E008AF629 /* CNPayDashedLineView.m */; };
 		EA5F140B21A26042004305A7 /* BTTRequestPrecache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F140A21A26042004305A7 /* BTTRequestPrecache.m */; };
 		EA5F140E21A261BA004305A7 /* BTTHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F140D21A261BA004305A7 /* BTTHttpManager.m */; };
 		EA5F141121A265B0004305A7 /* BTTBankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141021A265B0004305A7 /* BTTBankModel.m */; };
@@ -1286,6 +1289,11 @@
 		D5DBEB3C21AC1355008AF629 /* CNPayQRCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayQRCell.h; sourceTree = "<group>"; };
 		D5DBEB3D21AC1355008AF629 /* CNPayQRCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayQRCell.m; sourceTree = "<group>"; };
 		D5DBEB3E21AC1355008AF629 /* CNPayQRCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNPayQRCell.xib; sourceTree = "<group>"; };
+		D5DBEB4121AD3721008AF629 /* CNPayQRStep2VC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayQRStep2VC.h; sourceTree = "<group>"; };
+		D5DBEB4221AD3721008AF629 /* CNPayQRStep2VC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayQRStep2VC.m; sourceTree = "<group>"; };
+		D5DBEB4321AD3721008AF629 /* CNPayQRStep2VC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNPayQRStep2VC.xib; sourceTree = "<group>"; };
+		D5DBEB4621AD470E008AF629 /* CNPayDashedLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayDashedLineView.h; sourceTree = "<group>"; };
+		D5DBEB4721AD470E008AF629 /* CNPayDashedLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayDashedLineView.m; sourceTree = "<group>"; };
 		EA5F140921A26042004305A7 /* BTTRequestPrecache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTRequestPrecache.h; sourceTree = "<group>"; };
 		EA5F140A21A26042004305A7 /* BTTRequestPrecache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTRequestPrecache.m; sourceTree = "<group>"; };
 		EA5F140C21A261BA004305A7 /* BTTHttpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTHttpManager.h; sourceTree = "<group>"; };
@@ -3074,6 +3082,9 @@
 				D5DBEAC821ABB774008AF629 /* CNPayQRVC.h */,
 				D5DBEAC921ABB774008AF629 /* CNPayQRVC.m */,
 				D5DBEAC721ABB774008AF629 /* CNPayQRVC.xib */,
+				D5DBEB4121AD3721008AF629 /* CNPayQRStep2VC.h */,
+				D5DBEB4221AD3721008AF629 /* CNPayQRStep2VC.m */,
+				D5DBEB4321AD3721008AF629 /* CNPayQRStep2VC.xib */,
 			);
 			path = QRPay;
 			sourceTree = "<group>";
@@ -3136,6 +3147,8 @@
 				D5DBEB3C21AC1355008AF629 /* CNPayQRCell.h */,
 				D5DBEB3D21AC1355008AF629 /* CNPayQRCell.m */,
 				D5DBEB3E21AC1355008AF629 /* CNPayQRCell.xib */,
+				D5DBEB4621AD470E008AF629 /* CNPayDashedLineView.h */,
+				D5DBEB4721AD470E008AF629 /* CNPayDashedLineView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3759,6 +3772,7 @@
 				EAE89EF9218C3ABD00C29393 /* nav_link_close@3x.png in Resources */,
 				EAE89F11218C3ABD00C29393 /* VideoSendIcon@2x.png in Resources */,
 				EAE89ED9218C3ABD00C29393 /* LIVVideoCamera_flashOff@2x.png in Resources */,
+				D5DBEB4521AD3721008AF629 /* CNPayQRStep2VC.xib in Resources */,
 				3ADD23FB2179CA8C00FA959A /* BTTAccountBlanceHeaderCell.xib in Resources */,
 				EAE89F13218C3ABD00C29393 /* voiceIcon_LIVVoiceBoard@3x.png in Resources */,
 				3AAE8223219A738B003EC8B0 /* BTTRegisterQuickAutoCell.xib in Resources */,
@@ -4047,6 +4061,7 @@
 				3AD9CD542165B2C900685B43 /* BTTPopoverView.m in Sources */,
 				D5DBEB0821ABB774008AF629 /* CNPayBQStep2VC2.m in Sources */,
 				3A8F51E6215F78F50069D1B3 /* BTTCollectionViewController.m in Sources */,
+				D5DBEB4421AD3721008AF629 /* CNPayQRStep2VC.m in Sources */,
 				3A8F51C2215F78180069D1B3 /* BTTActionSheet.m in Sources */,
 				3A49DFA02179DA0D00FEFBDA /* BTTBindingMobileTwoCell.m in Sources */,
 				3ADD235E2176D7F000FA959A /* BTTHomePageViewController+Nav.m in Sources */,
@@ -4086,6 +4101,7 @@
 				3AAE821B219A738B003EC8B0 /* BTTLoginOrRegisterTypeSelectCell.m in Sources */,
 				3AE1EB1C21805B460073A32D /* BTTAddCardController+LoadData.m in Sources */,
 				3A11ADD421816E5800B1AFF4 /* SVProgressAnimatedView.m in Sources */,
+				D5DBEB4821AD470E008AF629 /* CNPayDashedLineView.m in Sources */,
 				3ADD2389217819D500FA959A /* BTTMeMainModel.m in Sources */,
 				3AE1EADC217F1EBD0073A32D /* BTTNotCompleteInfoController+LoadData.m in Sources */,
 				3A37E11A2164A20100FB13A1 /* BTTVoiceCallViewController.m in Sources */,
