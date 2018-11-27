@@ -7,6 +7,7 @@
 //
 
 #import "BTTMeInfoHiddenCell.h"
+#import "BTTMeMainModel.h"
 
 @interface BTTMeInfoHiddenCell ()
 
@@ -25,6 +26,11 @@
     } else {
         self.nameLabel.font = kFontSystem(14);
     }
+}
+
+- (void)setModel:(BTTMeMainModel *)model {
+    _model = model;
+    self.nameLabel.text = model.name;
 }
 
 @end
