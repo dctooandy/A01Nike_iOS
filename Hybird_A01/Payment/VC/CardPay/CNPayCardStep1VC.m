@@ -59,6 +59,7 @@
         NSInteger index = [cardTypeArr indexOfObject:selectValue];
         CNPayCardModel *model = weakSelf.paymentModel.cardList[index];
         weakSelf.chooseCardModel = model;
+        weakSelf.cardValueTF.text = nil;
     }];
 }
 
@@ -69,8 +70,12 @@
         [self showError:_cardTypeTF.placeholder];
         return;
     }
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.chooseCardModel.cardValues.count];
+    for (id obj in self.chooseCardModel.cardValues) {
+        [array addObject:[NSString stringWithFormat:@"%@", obj]];
+    }
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:_cardValueTF.placeholder dataSource:self.chooseCardModel.cardValues defaultSelValue:_cardValueTF.text resultBlock:^(NSString * selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:_cardValueTF.placeholder dataSource:array defaultSelValue:_cardValueTF.text resultBlock:^(NSString * selectValue) {
         weakSelf.cardValueTF.text = selectValue;
     }];
 }

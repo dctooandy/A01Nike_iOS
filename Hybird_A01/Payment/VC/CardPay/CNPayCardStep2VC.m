@@ -9,6 +9,10 @@
 #import "CNPayCardStep2VC.h"
 
 @interface CNPayCardStep2VC ()
+@property (weak, nonatomic) IBOutlet UILabel *billNoLb;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cardTypeLb;
+@property (weak, nonatomic) IBOutlet UILabel *chargeLb;
+@property (weak, nonatomic) IBOutlet UILabel *valueLb;
 
 @end
 
@@ -21,14 +25,16 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setViewHeight:500 fullScreen:YES];
+    [self configCardValue];
 }
 
-- (void)configCardValue:(NSString *)value {
-    //    CGFloat amount = [value floatValue];
-    //    self.totalValueLb.text = [NSString stringWithFormat:@"%.2f 元", amount];
-    //    CGFloat charge = amount * self.writeModel.cardModel.value / 100.0;
-    //    self.chargeValueLb.text = [NSString stringWithFormat:@"-%.2f 元", charge];
-    //    self.actualValueLb.text = [NSString stringWithFormat:@"%.2f 元", (amount - charge)];
+- (void)configCardValue {
+    CNPayCardModel *cardModel = self.writeModel.cardModel;
+//    _billNoLb.text = cardModel.
+    CGFloat amount = [cardModel.amount floatValue];
+    CGFloat charge = amount * cardModel.value / 100.0;
+    _chargeLb.text = [NSString stringWithFormat:@"%.2f元", charge];
+    _valueLb.text = [NSString stringWithFormat:@"￥ %.2f元", (amount - charge)];
 }
 
 - (IBAction)submitAction:(UIButton *)sender {
