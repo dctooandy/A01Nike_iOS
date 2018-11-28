@@ -38,6 +38,9 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4eS-10-SWR" customClass="CNPayOnePixView">
                                     <rect key="frame" x="0.0" y="49" width="375" height="1"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" priority="750" constant="1" id="iJA-Vi-pd2"/>
+                                    </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Cp-2T-rJx">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -91,7 +94,6 @@
                                 <constraint firstAttribute="trailing" secondItem="4eS-10-SWR" secondAttribute="trailing" id="KGV-Fy-pAX"/>
                                 <constraint firstItem="5Cp-2T-rJx" firstAttribute="top" secondItem="5sK-cV-61I" secondAttribute="top" id="LVT-gy-DRx"/>
                                 <constraint firstAttribute="bottom" secondItem="4eS-10-SWR" secondAttribute="bottom" id="blB-xy-gYl"/>
-                                <constraint firstItem="4eS-10-SWR" firstAttribute="height" secondItem="5sK-cV-61I" secondAttribute="height" multiplier="1:50" id="kXO-cb-kj8"/>
                                 <constraint firstAttribute="height" constant="50" id="sf5-n1-jtu"/>
                                 <constraint firstAttribute="trailing" secondItem="5Cp-2T-rJx" secondAttribute="trailing" id="ssh-fU-Jry"/>
                                 <constraint firstItem="4eS-10-SWR" firstAttribute="top" secondItem="5Cp-2T-rJx" secondAttribute="bottom" id="v8F-Qe-coZ"/>
@@ -105,7 +107,7 @@
                                     <rect key="frame" x="0.0" y="49" width="375" height="1"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="1" id="uWf-nq-O2p"/>
+                                        <constraint firstAttribute="height" priority="750" constant="1" id="uWf-nq-O2p"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6N-iR-M4A">
@@ -172,7 +174,7 @@
                                     <rect key="frame" x="0.0" y="49" width="375" height="1"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="1" id="n22-AB-jAP"/>
+                                        <constraint firstAttribute="height" priority="750" constant="1" id="n22-AB-jAP"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6QI-cZ-hkT">
