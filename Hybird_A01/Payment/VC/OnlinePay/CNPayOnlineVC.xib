@@ -279,8 +279,8 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="em7-qO-w2n">
                             <rect key="frame" x="18" y="0.0" width="339" height="45"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <state key="normal" title="币宝充值教程" backgroundImage="btn-Top-uptutorial-normal"/>
-                            <state key="highlighted" backgroundImage="btn-Top-uptutorial-pressed"/>
+                            <state key="normal" title="币宝充值教程" backgroundImage="pay_blueBtn"/>
+                            <state key="highlighted" backgroundImage="pay_blueBtnHL"/>
                             <connections>
                                 <action selector="bibaoAction:" destination="-1" eventType="touchUpInside" id="Pd4-pk-8MT"/>
                                 <action selector="sumitAction:" destination="-1" eventType="touchUpInside" id="u36-ek-0B9"/>
@@ -314,8 +314,8 @@
         </view>
     </objects>
     <resources>
-        <image name="btn-Top-uptutorial-normal" width="345" height="44"/>
-        <image name="btn-Top-uptutorial-pressed" width="345" height="44"/>
         <image name="me_arrow" width="16" height="16"/>
+        <image name="pay_blueBtn" width="345" height="44"/>
+        <image name="pay_blueBtnHL" width="345" height="44"/>
     </resources>
 </document>

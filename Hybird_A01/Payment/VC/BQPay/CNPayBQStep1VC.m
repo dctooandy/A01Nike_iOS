@@ -46,12 +46,12 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     // 需要完善个人信息
-    if (self.preSaveMsg.length == 0) {
-        __weak typeof(self) weakSelf = self;
-        [CNCompleteInfoView completeInfoHandler:^{
-            [weakSelf configPreSettingMessage];
-        }];
-    }
+//    if (self.preSaveMsg.length == 0) {
+//        __weak typeof(self) weakSelf = self;
+//        [CNCompleteInfoView completeInfoHandler:^{
+//            [weakSelf configPreSettingMessage];
+//        }];
+//    }
     /// 只引导用户一次
     [self showAliTip];
 }
