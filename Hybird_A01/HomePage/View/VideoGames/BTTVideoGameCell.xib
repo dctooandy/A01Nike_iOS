@@ -34,11 +34,12 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ht6-kr-CYd">
                         <rect key="frame" x="340" y="120" width="20" height="20"/>
-                        <color key="backgroundColor" red="0.81960784310000001" green="0.21960784310000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="4ZQ-Pp-Ox7"/>
                             <constraint firstAttribute="height" constant="20" id="WpK-kH-uhc"/>
                         </constraints>
+                        <state key="normal" backgroundImage="videogames_collect_normal"/>
+                        <state key="selected" backgroundImage="videogames_collect_select"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DH9-wj-bgb">
                         <rect key="frame" x="15" y="120" width="37" height="20"/>
@@ -108,4 +109,8 @@
             <point key="canvasLocation" x="-334" y="122"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="videogames_collect_normal" width="20" height="20"/>
+        <image name="videogames_collect_select" width="20" height="20"/>
+    </resources>
 </document>
