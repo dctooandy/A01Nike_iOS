@@ -23,7 +23,7 @@
     if (![IVNetwork userInfo]) {
         return;
     }
-    [BTTHttpManager fetchBindStatusWithUseCache:NO];
+    [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
     [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
 }
 @end
