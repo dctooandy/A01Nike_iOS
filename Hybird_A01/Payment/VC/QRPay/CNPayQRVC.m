@@ -40,6 +40,10 @@
     // 刷新数据
     [self updateAllContentWithModel:self.paymentModel];
     [self configAmountList];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self setViewHeight:750 fullScreen:NO];
 }
 
