@@ -21,8 +21,6 @@
                 <outlet property="preSettingMessageLb" destination="REz-bo-RkT" id="lDe-D5-JOH"/>
                 <outlet property="preSettingView" destination="YZU-50-cfg" id="6nY-f7-hzx"/>
                 <outlet property="preSettingViewHeight" destination="kKL-nV-GZl" id="h3n-Oi-VEs"/>
-                <outlet property="selectBankView" destination="RA8-ti-4Bl" id="gEV-Bd-u10"/>
-                <outlet property="selectBankViewHeight" destination="bOq-XG-IjG" id="7Wc-Pr-kHp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

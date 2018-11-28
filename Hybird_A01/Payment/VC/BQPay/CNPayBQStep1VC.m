@@ -19,16 +19,10 @@
 @property (weak, nonatomic) IBOutlet CNPayAmountTF *amountTF;
 @property (weak, nonatomic) IBOutlet UILabel *nameLb;
 @property (weak, nonatomic) IBOutlet CNPayNameTF *nameTF;
-
-
-@property (weak, nonatomic) IBOutlet UIView *selectBankView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectBankViewHeight;
 @property (weak, nonatomic) IBOutlet CNPayNormalTF *bankTF;
-
 
 @property (weak, nonatomic) IBOutlet UIView *bottomTipView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTipViewHeight;
-
 
 @property (nonatomic, strong) CNPayBankCardModel *chooseBank;
 @property (nonatomic, copy) NSArray *bankNames;
@@ -40,7 +34,6 @@
     [super viewDidLoad];
     [self configPreSettingMessage];
     [self configDifferentUI];
-    [self configSelectBankView];
     // 初始化数据
     [self updateAllContentWithModel:self.paymentModel];
 }
@@ -85,22 +78,6 @@
     }
 }
 
-- (void)configSelectBankView {
-    if (self.paymentModel.bankList.count == 0) {
-        self.selectBankView.hidden = YES;
-        self.selectBankViewHeight.constant = 0;
-        return;
-    }
-    
-    // 银行列表
-    NSMutableArray *bankNames = [NSMutableArray array];
-    for (CNPayBankCardModel *bankModel in self.paymentModel.bankList) {
-        [bankNames addObject:bankModel.bankname];
-    }
-    self.bankNames = bankNames;
-    self.bankTF.text = bankNames.firstObject;
-}
-
 /// 刷新数据
 - (void)updateAllContentWithModel:(CNPaymentModel *)model {
     self.amountTF.text = @"";
@@ -114,6 +91,9 @@
 
 - (IBAction)selectedBank:(UIButton *)sender {
     [self.view endEditing:YES];
+    if (!self.bankNames) {
+        return;
+    }
     weakSelf(weakSelf);
     [BRStringPickerView showStringPickerWithTitle:_bankTF.placeholder dataSource:self.bankNames defaultSelValue:self.bankTF.text resultBlock:^(NSString * selectValue) {
         if ([weakSelf.bankTF.text isEqualToString:selectValue]) {
