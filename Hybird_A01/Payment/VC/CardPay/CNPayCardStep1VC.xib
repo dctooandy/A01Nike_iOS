@@ -12,6 +12,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CNPayCardStep1VC">
             <connections>
+                <outlet property="cardNoTF" destination="ZGX-LQ-RNn" id="EZN-6T-qd5"/>
+                <outlet property="cardPwdTF" destination="Xec-jB-m0I" id="Qdl-v4-vOa"/>
+                <outlet property="cardTypeTF" destination="Zzg-ix-nw6" id="yyX-OI-kZQ"/>
+                <outlet property="cardValueTF" destination="a6N-AT-q6u" id="jsc-7N-e5m"/>
+                <outlet property="preSettingMessageLb" destination="c8L-M0-cFQ" id="y7U-c6-LUn"/>
+                <outlet property="preSettingView" destination="oYH-jD-WOh" id="lHk-hb-hJx"/>
+                <outlet property="preSettingViewHeight" destination="ExD-js-NJf" id="NUo-RR-VjN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -121,6 +128,9 @@
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oid-AU-shd">
                                             <rect key="frame" x="115" y="0.0" width="260" height="49"/>
+                                            <connections>
+                                                <action selector="selectCard:" destination="-1" eventType="touchUpInside" id="5H8-qg-YAh"/>
+                                            </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="xxf-4g-ya6">
                                             <rect key="frame" x="344" y="16.5" width="16" height="16"/>
@@ -185,6 +195,9 @@
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jW6-GA-iOk">
                                             <rect key="frame" x="115" y="0.0" width="260" height="49"/>
+                                            <connections>
+                                                <action selector="selectCardValue:" destination="-1" eventType="touchUpInside" id="jG0-iH-YBL"/>
+                                            </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="cgP-kV-VdV">
                                             <rect key="frame" x="344" y="16.5" width="16" height="16"/>
@@ -353,6 +366,9 @@
                                 <constraint firstAttribute="height" constant="45" id="xT4-gN-puA"/>
                             </constraints>
                             <state key="normal" title="下一步"/>
+                            <connections>
+                                <action selector="submitAction:" destination="-1" eventType="touchUpInside" id="0Jc-e0-xYJ"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -15,8 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *preSettingMessageLb;
 
 @property (weak, nonatomic) IBOutlet UITextField *cardTypeTF;
-@property (weak, nonatomic) IBOutlet UIImageView *cardLogoIV;
-@property (weak, nonatomic) IBOutlet UILabel *cardTypeLb;
+@property (weak, nonatomic) IBOutlet UITextField *cardValueTF;
+@property (weak, nonatomic) IBOutlet UITextField *cardNoTF;
+@property (weak, nonatomic) IBOutlet UITextField *cardPwdTF;
 
 
 @property (nonatomic, strong) CNPayCardModel *chooseCardModel;
@@ -47,26 +48,94 @@
 
 // 选择点卡类型
 - (IBAction)selectCard:(UIButton *)sender {
+    [self.view endEditing:YES];
     NSMutableArray *cardTypeArr = [NSMutableArray array];
     for (CNPayCardModel *model in self.paymentModel.cardList) {
         [cardTypeArr addObject:model.name];
     }
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:@"请选择点卡类型" dataSource:cardTypeArr defaultSelValue:_cardTypeTF.text resultBlock:^(id selectValue) {
-        weakSelf.cardTypeTF.hidden = YES;
-//        CNPayCardModel *model = weakSelf.paymentModel.cardList[index];
-//        [weakSelf.cardLogoIV sd_setImageWithURL:[NSURL URLWithString:model.logo.cn_appendCDN]];
-//        weakSelf.cardTypeLb.text = model.name;
-//        weakSelf.chooseCardModel = model;
+    [BRStringPickerView showStringPickerWithTitle:_cardTypeTF.placeholder dataSource:cardTypeArr defaultSelValue:_cardTypeTF.text resultBlock:^(NSString *selectValue) {
+        weakSelf.cardTypeTF.text = selectValue;
+        NSInteger index = [cardTypeArr indexOfObject:selectValue];
+        CNPayCardModel *model = weakSelf.paymentModel.cardList[index];
+        weakSelf.chooseCardModel = model;
     }];
 }
 
-- (IBAction)submitAction:(UIButton *)sender {
-    if (!self.chooseCardModel) {
-        [self showError:self.cardTypeTF.placeholder];
+/// 选择点卡面额
+- (IBAction)selectCardValue:(UIButton *)sender {
+    [self.view endEditing:YES];
+    if (!_chooseCardModel) {
+        [self showError:_cardTypeTF.placeholder];
         return;
     }
-    self.writeModel.cardModel = self.chooseCardModel;
+    weakSelf(weakSelf);
+    [BRStringPickerView showStringPickerWithTitle:_cardValueTF.placeholder dataSource:self.chooseCardModel.cardValues defaultSelValue:_cardValueTF.text resultBlock:^(NSString * selectValue) {
+        [weakSelf configCardValue:selectValue];
+    }];
+}
+
+- (void)configCardValue:(NSString *)value {
+    self.cardValueTF.text = value;
+//    CGFloat amount = [value floatValue];
+//    self.totalValueLb.text = [NSString stringWithFormat:@"%.2f 元", amount];
+//    CGFloat charge = amount * self.writeModel.cardModel.value / 100.0;
+//    self.chargeValueLb.text = [NSString stringWithFormat:@"-%.2f 元", charge];
+//    self.actualValueLb.text = [NSString stringWithFormat:@"%.2f 元", (amount - charge)];
+}
+
+
+- (IBAction)submitAction:(UIButton *)sender {
+    [self.view endEditing:YES];
+    if (!_chooseCardModel) {
+        [self showError:_cardTypeTF.placeholder];
+        return;
+    }
+    
+    if (_cardValueTF.text.length == 0) {
+        [self showError:_cardValueTF.placeholder];
+        return;
+    }
+    
+    if (_cardNoTF.text.length == 0) {
+        [self showError:_cardNoTF.placeholder];
+        return;
+    }
+    
+    if (_cardPwdTF.text.length == 0) {
+        [self showError:_cardPwdTF.placeholder];
+        return;
+    }
+    
+    if (sender.selected) {
+        return;
+    }
+    sender.selected = YES;
+    
+    /// 提交
+//    __weak typeof(self) weakSelf =  self;
+//    [CNPayRequestManager paymentCardPay:[self getCardModel] completeHandler:^(IVRequestResultModel *result, id response) {
+//        sender.selected = NO;
+//        if (result.status) {
+//            CNPayOrderModel *model = [[CNPayOrderModel alloc] initWithDictionary:result.data error:nil];
+//            weakSelf.writeModel.orderModel = model;
+//        } else {
+//            [self showError:result.message];
+//        }
+//    }];
     [self goToStep:1];
 }
+
+//- (CNPayCardModel *)getCardModel {
+//    CNPayCardModel *card = self.writeModel.cardModel;
+////    card.totalValue = self.totalValueLb.text;
+////    card.chargeValue = self.chargeValueLb.text;
+////    card.actualValue = self.actualValueLb.text;
+//    card.cardNo = self.cardNumberTF.text;
+//    card.cardPwd = self.cardPwdTF.text;
+//    card.payId = self.paymentModel.payid;
+//    card.amount = [NSString stringWithFormat:@"%.2f", [self.actualValueLb.text floatValue]];
+//    card.postUrl = self.paymentModel.postUrl;
+//    return card;
+//}
 @end
