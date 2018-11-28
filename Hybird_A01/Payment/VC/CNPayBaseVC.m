@@ -275,21 +275,9 @@
 }
 
 - (void)showPayTipViewWithAmount:(NSString *)amount {
-    [self.payVC.view addSubview:self.tipView];
-    self.tipView.amount = amount;
+    [CNPayTipView showTipView];
 }
 
-- (CNPayTipView *)tipView {
-    if (!_tipView) {
-        _tipView = [CNPayTipView tipView];
-        _tipView.frame = self.payVC.view.bounds;
-        _tipView.icon = [UIImage imageNamed:self.payVC.selectedIcon];
-        __weak typeof(self) weakSelf = self;
-        _tipView.btnAcitonBlock = ^{
-            [weakSelf pushUIWebViewWithURLString:@"customer/reports.htm" title:nil];
-        };
-    }
-    return _tipView;
-}
+
 
 @end

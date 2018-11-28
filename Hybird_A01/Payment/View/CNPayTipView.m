@@ -10,10 +10,7 @@
 #import "CNPayConstant.h"
 
 @interface CNPayTipView ()
-@property (weak, nonatomic) IBOutlet CNPaySubmitButton *finishPayBtn;
-@property (weak, nonatomic) IBOutlet UIImageView *payTypeIV;
-@property (weak, nonatomic) IBOutlet UILabel *successTipLb;
-@property (weak, nonatomic) IBOutlet UIButton *closeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *repayBtn;
 @end
 
 @implementation CNPayTipView
@@ -22,22 +19,20 @@
     return [[NSBundle mainBundle] loadNibNamed:@"CNPayTipView" owner:nil options:nil].firstObject;
 }
 
-- (NSAttributedString *)addAmountString:(NSString *)amount {
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"恭喜您，您的存款申请已提交！存款金额：%@元", amount]];
-    NSRange range = NSMakeRange(attrStr.length-amount.length-1, amount.length);
-    [attrStr addAttribute:NSForegroundColorAttributeName value:COLOR_HEX(0xF37427) range:range];
-    return attrStr;
++ (void)showTipView {
+    CNPayTipView *tipView = [CNPayTipView tipView];
+    tipView.repayBtn.layer.borderColor = COLOR_HEX(0xD8D8D8).CGColor;
+    tipView.repayBtn.layer.borderWidth = 1;
+    [tipView show];
 }
 
-- (void)setAmount:(NSString *)amount {
-    _amount = amount;
-    _successTipLb.attributedText = [self addAmountString:amount];
+///显示
+- (void)show {
+    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+    self.frame = window.bounds;
+    [window addSubview:self];
 }
 
-- (void)setIcon:(UIImage *)icon {
-    _icon = icon;
-    _payTypeIV.image = icon;
-}
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self removeFromSuperview];

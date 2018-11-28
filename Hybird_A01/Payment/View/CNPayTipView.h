@@ -7,11 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CNPaySubmitButton.h"
 
 @interface CNPayTipView : UIView
-@property (nonatomic, copy) NSString *amount;
-@property (nonatomic, strong) UIImage *icon;
 @property (nonatomic, copy) dispatch_block_t btnAcitonBlock;
-+ (instancetype)tipView;
++ (void)showTipView;
 @end
