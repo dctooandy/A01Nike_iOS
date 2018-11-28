@@ -34,6 +34,7 @@
         case BTTSafeVerifyTypeMobileChangeBankCard:
         case BTTSafeVerifyTypeMobileBindChangeBankCard:
         case BTTSafeVerifyTypeChangeMobile:
+        case BTTSafeVerifyTypeChangeEmail:
             self.statusLabel.text = @"修改成功!";
             self.notifyLabel.hidden = YES;
             break;

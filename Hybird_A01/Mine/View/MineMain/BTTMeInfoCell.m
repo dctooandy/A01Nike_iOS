@@ -31,7 +31,7 @@
     _model = model;
     if ([model.name isEqualToString:@"个人资料"]) {
         self.iconImg.image = [IVNetwork userInfo].real_name.length ? ImageNamed(model.desc) : ImageNamed(model.iconName);
-    } else if ([model.name isEqualToString:@"更换手机"]) {
+    } else if ([model.name isEqualToString:@"更换手机"] || [model.name isEqualToString:@"绑定手机"]) {
         self.iconImg.image = [IVNetwork userInfo].isPhoneBinded ? ImageNamed(model.desc) : ImageNamed(model.iconName);
     } else if ([model.name isEqualToString:@"绑定邮箱"]) {
         self.iconImg.image = [IVNetwork userInfo].isEmailBinded ? ImageNamed(model.desc) : ImageNamed(model.iconName);

@@ -17,12 +17,15 @@
     NSString *email = @"";
     switch (self.codeType) {
         case BTTSafeVerifyTypeBindEmail:
-            emailTitle = @"邮箱地址";
+            emailTitle = @"邮箱地址 ";
+            email = [IVNetwork userInfo].email ? [IVNetwork userInfo].email : @"" ;
             break;
         case BTTSafeVerifyTypeVerifyEmail:
-        case BTTSafeVerifyTypeChangeEmail:
             emailTitle = @"已绑定邮箱地址";
             email = [IVNetwork userInfo].email;
+            break;
+        case BTTSafeVerifyTypeChangeEmail:
+            emailTitle = @"新邮箱地址 ";
         default:
             break;
     }

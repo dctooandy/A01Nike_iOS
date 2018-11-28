@@ -177,8 +177,10 @@
 }
 
 - (void)loadBindStatus {
-    [BTTHttpManager fetchBTCRateWithUseCache:YES];
-    
+    weakSelf(weakSelf)
+    [BTTHttpManager fetchBindStatusWithUseCache:YES completionBlock:^(IVRequestResultModel *result, id response) {
+        [weakSelf.collectionView reloadData];
+    }];
 }
 - (void)loadBankList
 {
