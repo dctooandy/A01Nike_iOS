@@ -8,32 +8,39 @@
 
 #import "CNPayBQStep1VC.h"
 #import "CNCompleteInfoView.h"
+#import "CNPayNormalTF.h"
 
 @interface CNPayBQStep1VC ()
-@property (weak, nonatomic) IBOutlet UIView *topTipView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topTipViewHeight;
-
-@property (weak, nonatomic) IBOutlet UILabel *topTipLb;
 
 @property (weak, nonatomic) IBOutlet UIView *preSettingView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *preSettingViewHeight;
 @property (weak, nonatomic) IBOutlet UILabel *preSettingMessageLb;
 
 @property (weak, nonatomic) IBOutlet CNPayAmountTF *amountTF;
-
+@property (weak, nonatomic) IBOutlet UILabel *nameLb;
 @property (weak, nonatomic) IBOutlet CNPayNameTF *nameTF;
+
+
+@property (weak, nonatomic) IBOutlet UIView *selectBankView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectBankViewHeight;
+@property (weak, nonatomic) IBOutlet CNPayNormalTF *bankTF;
+
 
 @property (weak, nonatomic) IBOutlet UIView *bottomTipView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTipViewHeight;
-@property (assign, nonatomic) CGFloat bottomViewHeight;
+
+
+@property (nonatomic, strong) CNPayBankCardModel *chooseBank;
+@property (nonatomic, copy) NSArray *bankNames;
 @end
 
 @implementation CNPayBQStep1VC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configDifferentUI];
     [self configPreSettingMessage];
+    [self configDifferentUI];
+    [self configSelectBankView];
     // 初始化数据
     [self updateAllContentWithModel:self.paymentModel];
 }
@@ -52,35 +59,6 @@
 //            [weakSelf configPreSettingMessage];
 //        }];
 //    }
-    /// 只引导用户一次
-    [self showAliTip];
-}
-
-- (void)configDifferentUI {
-    self.bottomTipView.hidden = YES;
-    self.bottomViewHeight = self.bottomTipViewHeight.constant;
-    self.bottomTipViewHeight.constant = 0;
-    NSString *tipText;
-    switch (self.paymentModel.paymentType) {
-        case CNPaymentBQWechat:
-            tipText = @"使用微信转账至银行卡进行充值。";
-            break;
-        case CNPaymentBQAli:
-            tipText = @"使用支付宝转账至银行卡进行充值。";
-            break;
-        case CNPaymentBQFast:
-            tipText = @"";
-            self.topTipView.hidden = YES;
-            self.topTipViewHeight.constant = 10;
-            break;
-        case CNPaymentDeposit:
-            tipText = @"使用手工存款至银行卡进行充值。";
-            break;
-        default:
-            tipText = @"";
-            break;
-    }
-    self.topTipLb.text = tipText;
 }
 
 - (void)configPreSettingMessage {
@@ -94,6 +72,35 @@
     }
 }
 
+- (void)configDifferentUI {
+    switch (self.paymentModel.paymentType) {
+        case CNPaymentBQWechat:
+        case CNPaymentBQAli:
+            _nameLb.text = @"真实姓名";
+            self.bottomTipView.hidden = YES;
+            self.bottomTipViewHeight.constant = 0;
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)configSelectBankView {
+    if (self.paymentModel.bankList.count == 0) {
+        self.selectBankView.hidden = YES;
+        self.selectBankViewHeight.constant = 0;
+        return;
+    }
+    
+    // 银行列表
+    NSMutableArray *bankNames = [NSMutableArray array];
+    for (CNPayBankCardModel *bankModel in self.paymentModel.bankList) {
+        [bankNames addObject:bankModel.bankname];
+    }
+    self.bankNames = bankNames;
+    self.bankTF.text = bankNames.firstObject;
+}
+
 /// 刷新数据
 - (void)updateAllContentWithModel:(CNPaymentModel *)model {
     self.amountTF.text = @"";
@@ -105,18 +112,17 @@
     }
 }
 
-- (void)showAliTip {
-    if (self.paymentModel.paymentType != CNPaymentBQFast) { return; }
-    NSString *key = @"aliTipHasAlreadyShow";
-    BOOL show = [[NSUserDefaults standardUserDefaults] boolForKey:key];
-    if (show) { return; }
-    NSString *message = @"使用支付宝付款的客户请使用上方的【支付宝转账】充值方式";
-    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:key];
+- (IBAction)selectedBank:(UIButton *)sender {
+    [self.view endEditing:YES];
+    weakSelf(weakSelf);
+    [BRStringPickerView showStringPickerWithTitle:_bankTF.placeholder dataSource:self.bankNames defaultSelValue:self.bankTF.text resultBlock:^(NSString * selectValue) {
+        if ([weakSelf.bankTF.text isEqualToString:selectValue]) {
+            return;
+        }
+        weakSelf.bankTF.text = selectValue;
+        NSInteger index = [weakSelf.bankNames indexOfObject:selectValue];
+        weakSelf.chooseBank = weakSelf.paymentModel.bankList[index];
     }];
-    [alertC addAction:action];
-    [self presentViewController:alertC animated:YES completion:nil];
 }
 
 - (IBAction)submitAction:(UIButton *)sender {
@@ -183,7 +189,6 @@
             NSError *error;
             NSArray *array = [CNPayBankCardModel arrayOfModelsFromDictionaries:result.data error:&error];
             if (array.count == 0) {
-                [weakSelf showNoBankError];
                 weakSender.enabled = NO;
                 return;
             }
@@ -191,7 +196,6 @@
             [self goToStep:1];
         } else {
             if (result.code_system == 99000013) {
-                [weakSelf showNoBankError];
                 weakSender.enabled = NO;
             } else {
                 [weakSelf showError:result.message];
@@ -213,7 +217,6 @@
         if (result.status) {
             CNPayBankCardModel *model = [[CNPayBankCardModel alloc] initWithDictionary:result.data error:nil];
             if (!model) {
-                [weakSelf showNoBankError];
                 weakSender.enabled = NO;
                 return;
             }
@@ -221,18 +224,12 @@
             [weakSelf goToStep:1];
         } else {
             if (result.code_system == 99000013) {
-                [weakSelf showNoBankError];
                 weakSender.enabled = NO;
             } else {
                 [weakSelf showError:result.message]; 
             }
         }
     }];
-}
-
-- (void)showNoBankError {
-    self.bottomTipView.hidden = NO;
-    self.bottomTipViewHeight.constant = self.bottomViewHeight;
 }
 
 - (CNPayBQType)getBQType {

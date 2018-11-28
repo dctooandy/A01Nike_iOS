@@ -12,6 +12,17 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CNPayBQStep1VC">
             <connections>
+                <outlet property="amountTF" destination="mfj-jI-sdZ" id="0HM-1H-BO1"/>
+                <outlet property="bankTF" destination="AXl-4d-cgk" id="dnY-KO-4Kh"/>
+                <outlet property="bottomTipView" destination="adG-CK-hLQ" id="Ssy-HE-38U"/>
+                <outlet property="bottomTipViewHeight" destination="WAz-dN-Hfj" id="C02-lV-Hdj"/>
+                <outlet property="nameLb" destination="EjB-jc-McO" id="psM-YO-FVo"/>
+                <outlet property="nameTF" destination="ezC-Tr-j1G" id="a3R-VC-na0"/>
+                <outlet property="preSettingMessageLb" destination="REz-bo-RkT" id="lDe-D5-JOH"/>
+                <outlet property="preSettingView" destination="YZU-50-cfg" id="6nY-f7-hzx"/>
+                <outlet property="preSettingViewHeight" destination="kKL-nV-GZl" id="h3n-Oi-VEs"/>
+                <outlet property="selectBankView" destination="RA8-ti-4Bl" id="gEV-Bd-u10"/>
+                <outlet property="selectBankViewHeight" destination="bOq-XG-IjG" id="7Wc-Pr-kHp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -114,29 +125,17 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mfj-jI-sdZ" customClass="CNPayAmountTF">
-                                            <rect key="frame" x="115" y="0.0" width="220" height="49"/>
+                                            <rect key="frame" x="115" y="0.0" width="240" height="49"/>
                                             <color key="textColor" red="0.50980392159999999" green="0.52549019610000003" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcH-tz-uXc">
-                                            <rect key="frame" x="115" y="0.0" width="260" height="49"/>
-                                        </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="38J-kE-Ajq">
-                                            <rect key="frame" x="344" y="16.5" width="16" height="16"/>
-                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstItem="GcH-tz-uXc" firstAttribute="bottom" secondItem="mfj-jI-sdZ" secondAttribute="bottom" id="799-qj-qW1"/>
                                         <constraint firstItem="GXU-Ac-mzX" firstAttribute="centerY" secondItem="SdU-Eu-u1M" secondAttribute="centerY" id="8Pb-cR-eqr"/>
-                                        <constraint firstItem="GcH-tz-uXc" firstAttribute="leading" secondItem="mfj-jI-sdZ" secondAttribute="leading" id="Hj5-YB-OIP"/>
-                                        <constraint firstItem="GcH-tz-uXc" firstAttribute="top" secondItem="mfj-jI-sdZ" secondAttribute="top" id="JSc-VZ-Cef"/>
                                         <constraint firstItem="mfj-jI-sdZ" firstAttribute="leading" secondItem="GXU-Ac-mzX" secondAttribute="trailing" id="VAX-IZ-dRJ"/>
-                                        <constraint firstAttribute="trailing" secondItem="GcH-tz-uXc" secondAttribute="trailing" id="cur-4D-VFp"/>
-                                        <constraint firstAttribute="trailing" secondItem="mfj-jI-sdZ" secondAttribute="trailing" constant="40" id="hCv-g5-DVG"/>
-                                        <constraint firstAttribute="trailing" secondItem="38J-kE-Ajq" secondAttribute="trailing" constant="15" id="la4-qP-Srm"/>
-                                        <constraint firstItem="38J-kE-Ajq" firstAttribute="centerY" secondItem="SdU-Eu-u1M" secondAttribute="centerY" id="lph-qv-jH0"/>
+                                        <constraint firstAttribute="trailing" secondItem="mfj-jI-sdZ" secondAttribute="trailing" constant="20" id="hCv-g5-DVG"/>
                                         <constraint firstItem="GXU-Ac-mzX" firstAttribute="leading" secondItem="SdU-Eu-u1M" secondAttribute="leading" constant="15" id="nFL-pO-FF7"/>
                                         <constraint firstAttribute="bottom" secondItem="mfj-jI-sdZ" secondAttribute="bottom" id="nbp-Kh-bzg"/>
                                         <constraint firstItem="mfj-jI-sdZ" firstAttribute="top" secondItem="SdU-Eu-u1M" secondAttribute="top" id="s8T-Hf-rdA"/>
@@ -237,6 +236,9 @@
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BZ9-6E-icg">
                                             <rect key="frame" x="115" y="0.0" width="260" height="49"/>
+                                            <connections>
+                                                <action selector="selectedBank:" destination="-1" eventType="touchUpInside" id="bbJ-Oc-HEj"/>
+                                            </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Mhy-wE-a1t">
                                             <rect key="frame" x="344" y="16.5" width="16" height="16"/>
