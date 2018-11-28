@@ -367,9 +367,7 @@
 		D5DBEB1521ABB774008AF629 /* CNPayOnlineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAB121ABB774008AF629 /* CNPayOnlineVC.m */; };
 		D5DBEB1821ABB774008AF629 /* CNWKWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAB921ABB774008AF629 /* CNWKWebVC.m */; };
 		D5DBEB1921ABB774008AF629 /* CNUIWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEABA21ABB774008AF629 /* CNUIWebVC.m */; };
-		D5DBEB1A21ABB774008AF629 /* CNPayCardStep3VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEABD21ABB774008AF629 /* CNPayCardStep3VC.xib */; };
 		D5DBEB1B21ABB774008AF629 /* CNPayCardStep1VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEABE21ABB774008AF629 /* CNPayCardStep1VC.m */; };
-		D5DBEB1D21ABB774008AF629 /* CNPayCardStep3VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAC021ABB774008AF629 /* CNPayCardStep3VC.m */; };
 		D5DBEB1E21ABB774008AF629 /* CNPayCardStep1VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEAC121ABB774008AF629 /* CNPayCardStep1VC.xib */; };
 		D5DBEB2021ABB774008AF629 /* CNPayQRVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEAC721ABB774008AF629 /* CNPayQRVC.xib */; };
 		D5DBEB2121ABB774008AF629 /* CNPayQRVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAC921ABB774008AF629 /* CNPayQRVC.m */; };
@@ -1241,11 +1239,8 @@
 		D5DBEAB921ABB774008AF629 /* CNWKWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNWKWebVC.m; sourceTree = "<group>"; };
 		D5DBEABA21ABB774008AF629 /* CNUIWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNUIWebVC.m; sourceTree = "<group>"; };
 		D5DBEABB21ABB774008AF629 /* CNPayBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayBaseVC.h; sourceTree = "<group>"; };
-		D5DBEABD21ABB774008AF629 /* CNPayCardStep3VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayCardStep3VC.xib; sourceTree = "<group>"; };
 		D5DBEABE21ABB774008AF629 /* CNPayCardStep1VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayCardStep1VC.m; sourceTree = "<group>"; };
-		D5DBEAC021ABB774008AF629 /* CNPayCardStep3VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayCardStep3VC.m; sourceTree = "<group>"; };
 		D5DBEAC121ABB774008AF629 /* CNPayCardStep1VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayCardStep1VC.xib; sourceTree = "<group>"; };
-		D5DBEAC321ABB774008AF629 /* CNPayCardStep3VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayCardStep3VC.h; sourceTree = "<group>"; };
 		D5DBEAC521ABB774008AF629 /* CNPayCardStep1VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayCardStep1VC.h; sourceTree = "<group>"; };
 		D5DBEAC721ABB774008AF629 /* CNPayQRVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayQRVC.xib; sourceTree = "<group>"; };
 		D5DBEAC821ABB774008AF629 /* CNPayQRVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayQRVC.h; sourceTree = "<group>"; };
@@ -3096,9 +3091,6 @@
 				D599251521AE6719001E885A /* CNPayCardStep2VC.h */,
 				D599251621AE6719001E885A /* CNPayCardStep2VC.m */,
 				D599251721AE6719001E885A /* CNPayCardStep2VC.xib */,
-				D5DBEAC321ABB774008AF629 /* CNPayCardStep3VC.h */,
-				D5DBEAC021ABB774008AF629 /* CNPayCardStep3VC.m */,
-				D5DBEABD21ABB774008AF629 /* CNPayCardStep3VC.xib */,
 			);
 			path = CardPay;
 			sourceTree = "<group>";
@@ -3593,7 +3585,6 @@
 				3A514E492186FCE800B83881 /* BTTXimaFooterCell.xib in Resources */,
 				EAE89F18218C3ABD00C29393 /* LIVBackAlertViewController.nib in Resources */,
 				EAE89EEC218C3ABD00C29393 /* LIVVideoRecorderItem@2x.png in Resources */,
-				D5DBEB1A21ABB774008AF629 /* CNPayCardStep3VC.xib in Resources */,
 				3A8F513B215F74D00069D1B3 /* LaunchScreen.storyboard in Resources */,
 				EAE89EC1218C3ABD00C29393 /* LIVMoreItem@2x.png in Resources */,
 				EAE89F27218C3ABD00C29393 /* LIVReceivedRobotMessageCell.nib in Resources */,
@@ -4008,7 +3999,6 @@
 				3A9E4C24219D56F600E7D8C0 /* BTTForgetPasswordStepThreeController.m in Sources */,
 				3AE1EAAB217D65330073A32D /* BTTAccountBlanceHiddenCell.m in Sources */,
 				D5DBEB1921ABB774008AF629 /* CNUIWebVC.m in Sources */,
-				D5DBEB1D21ABB774008AF629 /* CNPayCardStep3VC.m in Sources */,
 				3A5F7AA821ABCD3900128E8B /* BTTVideoGamesListController.m in Sources */,
 				3AE1EAD5217F1AED0073A32D /* BTTNotCompleteInfoController.m in Sources */,
 				3AE1EAE3217F25750073A32D /* BTTCardInfoCell.m in Sources */,

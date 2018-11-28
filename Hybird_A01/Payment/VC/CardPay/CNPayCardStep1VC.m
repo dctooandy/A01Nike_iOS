@@ -71,17 +71,8 @@
     }
     weakSelf(weakSelf);
     [BRStringPickerView showStringPickerWithTitle:_cardValueTF.placeholder dataSource:self.chooseCardModel.cardValues defaultSelValue:_cardValueTF.text resultBlock:^(NSString * selectValue) {
-        [weakSelf configCardValue:selectValue];
+        weakSelf.cardValueTF.text = selectValue;
     }];
-}
-
-- (void)configCardValue:(NSString *)value {
-    self.cardValueTF.text = value;
-//    CGFloat amount = [value floatValue];
-//    self.totalValueLb.text = [NSString stringWithFormat:@"%.2f 元", amount];
-//    CGFloat charge = amount * self.writeModel.cardModel.value / 100.0;
-//    self.chargeValueLb.text = [NSString stringWithFormat:@"-%.2f 元", charge];
-//    self.actualValueLb.text = [NSString stringWithFormat:@"%.2f 元", (amount - charge)];
 }
 
 

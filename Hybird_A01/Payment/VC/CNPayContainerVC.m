@@ -20,7 +20,6 @@
 #import "CNPayQRStep2VC.h"
 #import "CNPayCardStep1VC.h"
 #import "CNPayCardStep2VC.h"
-#import "CNPayCardStep3VC.h"
 
 
 
@@ -165,11 +164,9 @@
 - (NSArray<CNPayBaseVC *> *)cardPay:(CNPaymentModel *)payment {
     CNPayCardStep1VC *step1VC = [[CNPayCardStep1VC alloc] init];
     CNPayCardStep2VC *step2VC = [[CNPayCardStep2VC alloc] init];
-    CNPayCardStep3VC *step3VC = [[CNPayCardStep3VC alloc] init];
     step1VC.paymentModel = payment;
     step2VC.paymentModel = payment;
-    step3VC.paymentModel = payment;
-    return @[step1VC, step2VC, step3VC];
+    return @[step1VC, step2VC];
 }
 
 @end
