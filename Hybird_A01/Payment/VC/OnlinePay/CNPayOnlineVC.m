@@ -11,8 +11,6 @@
 
 
 @interface CNPayOnlineVC ()
-@property (weak, nonatomic) IBOutlet UILabel *topTipLb;
-
 @property (weak, nonatomic) IBOutlet UIView *preSettingView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *preSettingViewHeight;
 @property (weak, nonatomic) IBOutlet UILabel *preSettingMessageLb;
@@ -25,6 +23,9 @@
 @property (weak, nonatomic) IBOutlet UIView *selectBankView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectBankViewHeight;
 @property (weak, nonatomic) IBOutlet UITextField *payBankTF;
+
+@property (weak, nonatomic) IBOutlet UIView *bibaoView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bibaoViewHeight;
 
 
 @property (nonatomic, strong) CNPayBankCardModel *chooseBank;
@@ -49,34 +50,14 @@
 }
 
 - (void)configDifferentUI {
-    NSString *tipText;
-    switch (self.paymentModel.paymentType) {
-        case CNPaymentOnline:
-            tipText = @"支持多家银行，需要开通网银方可使用";
-            break;
-        case CNPaymentBTC:
-            tipText = @"使用您的比特币钱包进行扫码付款";
-            break;
-        case CNPaymentWechatBarCode:
-            tipText = @"手动输入微信条码数字进行支付";
-            break;
-        case CNPaymentWechatApp:
-            tipText = @"使用微信APP一键付款";
-            break;
-        case CNPaymentAliApp:
-            tipText = @"使用支付宝APP一键付款";
-            break;
-        case CNPaymentQQApp:
-            tipText = @"使用QQ APP一键付款";
-            break;
-        case CNPaymentUnionApp:
-            tipText = @"无需网银，使用银行卡即可进行快捷支付";
-            break;
-        default:
-            tipText = @"";
-            break;
-    }
-    self.topTipLb.text = tipText;
+    BOOL online = self.paymentModel.paymentType == CNPaymentOnline;
+    self.selectBankView.hidden = !online;
+    self.selectBankViewHeight.constant = online ? 50: 0;
+    self.payBankTF.placeholder = @"请选择支付银行";
+    
+    BOOL bibao = self.paymentModel.paymentType == CNPaymentCoin;
+    self.bibaoView.hidden = !bibao;
+    self.bibaoViewHeight.constant = bibao ? 45: 0;
 }
 
 /// 刷新数据
@@ -123,7 +104,8 @@
         (self.paymentModel.paymentType == CNPaymentWechatApp ||
          self.paymentModel.paymentType == CNPaymentAliApp)) {
         self.amountBtn.hidden = NO;
-            self.amountTF.placeholder = @"请选择支付金额";
+        self.arrawDownIV.hidden = NO;
+        self.amountTF.placeholder = @"仅可选择以下金额";
     } else {
         self.amountBtn.hidden = YES;
         self.arrawDownIV.hidden = YES;
@@ -133,7 +115,11 @@
 
 - (IBAction)selectAmountList:(id)sender {
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:self.paymentModel.amountList defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.paymentModel.amountList.count];
+    for (id obj in self.paymentModel.amountList) {
+        [array addObject:[NSString stringWithFormat:@"%@", obj]];
+    }
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
         if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
             return;
         }
@@ -144,12 +130,13 @@
 - (IBAction)selectedBank:(UIButton *)sender {
     [self.view endEditing:YES];
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:@"选择支付银行" dataSource:self.bankNames defaultSelValue:self.payBankTF.text resultBlock:^(id selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:@"选择支付银行" dataSource:self.bankNames defaultSelValue:self.payBankTF.text resultBlock:^(NSString * selectValue) {
         if ([weakSelf.payBankTF.text isEqualToString:selectValue]) {
             return;
         }
         weakSelf.payBankTF.text = selectValue;
-//        weakSelf.chooseBank = weakSelf.paymentModel.bankList[index]; 
+        NSInteger index = [weakSelf.bankNames indexOfObject:selectValue];
+        weakSelf.chooseBank = weakSelf.paymentModel.bankList[index]; 
     }];
 }
 
@@ -217,5 +204,10 @@
     self.writeModel.depositType = self.paymentModel.paymentTitle;
     [self goToStep:1];
 }
+
+- (IBAction)bibaoAction:(UIButton *)sender {
+    
+}
+
 
 @end
