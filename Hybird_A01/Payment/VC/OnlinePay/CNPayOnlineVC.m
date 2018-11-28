@@ -24,6 +24,9 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectBankViewHeight;
 @property (weak, nonatomic) IBOutlet UITextField *payBankTF;
 
+@property (weak, nonatomic) IBOutlet UIView *bibaoView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bibaoViewHeight;
+
 
 @property (nonatomic, strong) CNPayBankCardModel *chooseBank;
 @property (nonatomic, copy) NSArray *bankNames;
@@ -47,20 +50,14 @@
 }
 
 - (void)configDifferentUI {
-    switch (self.paymentModel.paymentType) {
-        case CNPaymentOnline:
-            self.selectBankView.hidden = NO;
-            self.selectBankViewHeight.constant = 50;
-            self.payBankTF.placeholder = @"请选择支付银行";
-            break;
-        case CNPaymentCoin:
-            
-            break;
-        default:
-            self.selectBankView.hidden = YES;
-            self.selectBankViewHeight.constant = 0;
-            break;
-    }
+    BOOL online = self.paymentModel.paymentType == CNPaymentOnline;
+    self.selectBankView.hidden = !online;
+    self.selectBankViewHeight.constant = online ? 50: 0;
+    self.payBankTF.placeholder = @"请选择支付银行";
+    
+    BOOL bibao = self.paymentModel.paymentType == CNPaymentCoin;
+    self.bibaoView.hidden = !bibao;
+    self.bibaoViewHeight.constant = bibao ? 45: 0;
 }
 
 /// 刷新数据
@@ -207,5 +204,10 @@
     self.writeModel.depositType = self.paymentModel.paymentTitle;
     [self goToStep:1];
 }
+
+- (IBAction)bibaoAction:(UIButton *)sender {
+    
+}
+
 
 @end

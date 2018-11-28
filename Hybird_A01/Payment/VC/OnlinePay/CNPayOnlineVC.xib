@@ -15,6 +15,8 @@
                 <outlet property="amountBtn" destination="GBx-wT-eSj" id="9WX-5e-HEP"/>
                 <outlet property="amountTF" destination="j61-Q4-AHV" id="ecr-Qk-Ued"/>
                 <outlet property="arrawDownIV" destination="PM8-e2-sSK" id="eEJ-U2-oKe"/>
+                <outlet property="bibaoView" destination="Ln1-J7-Oad" id="Wjo-wa-Zqv"/>
+                <outlet property="bibaoViewHeight" destination="rWu-OB-nFX" id="eLR-qI-4EF"/>
                 <outlet property="payBankTF" destination="Li4-78-OE2" id="Kvh-LK-gOu"/>
                 <outlet property="preSettingMessageLb" destination="AuO-8q-04w" id="HWj-NV-94e"/>
                 <outlet property="preSettingView" destination="5sK-cV-61I" id="Rur-Fg-hDL"/>
@@ -250,7 +252,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dpE-6y-a1q" userLabel="ButtonView">
-                    <rect key="frame" x="0.0" y="170" width="375" height="90"/>
+                    <rect key="frame" x="0.0" y="170" width="375" height="85"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGR-Ux-p2J" customClass="CNPaySubmitButton">
                             <rect key="frame" x="18" y="20" width="339" height="45"/>
@@ -266,16 +268,42 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="GGR-Ux-p2J" firstAttribute="leading" secondItem="dpE-6y-a1q" secondAttribute="leading" constant="18" id="Blc-uu-zHU"/>
-                        <constraint firstAttribute="bottom" secondItem="GGR-Ux-p2J" secondAttribute="bottom" constant="25" id="D6a-TJ-OF9"/>
+                        <constraint firstAttribute="bottom" secondItem="GGR-Ux-p2J" secondAttribute="bottom" constant="20" id="D6a-TJ-OF9"/>
                         <constraint firstItem="GGR-Ux-p2J" firstAttribute="top" secondItem="dpE-6y-a1q" secondAttribute="top" constant="20" id="lCr-KX-SYW"/>
                         <constraint firstAttribute="trailing" secondItem="GGR-Ux-p2J" secondAttribute="trailing" constant="18" id="yTD-qD-wPG"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ln1-J7-Oad" userLabel="ButtonView">
+                    <rect key="frame" x="0.0" y="255" width="375" height="45"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="em7-qO-w2n">
+                            <rect key="frame" x="18" y="0.0" width="339" height="45"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="币宝充值教程" backgroundImage="btn-Top-uptutorial-normal"/>
+                            <state key="highlighted" backgroundImage="btn-Top-uptutorial-pressed"/>
+                            <connections>
+                                <action selector="bibaoAction:" destination="-1" eventType="touchUpInside" id="Pd4-pk-8MT"/>
+                                <action selector="sumitAction:" destination="-1" eventType="touchUpInside" id="u36-ek-0B9"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="em7-qO-w2n" secondAttribute="bottom" id="T5X-tc-SSr"/>
+                        <constraint firstItem="em7-qO-w2n" firstAttribute="top" secondItem="Ln1-J7-Oad" secondAttribute="top" id="hL9-QM-7yV"/>
+                        <constraint firstAttribute="trailing" secondItem="em7-qO-w2n" secondAttribute="trailing" constant="18" id="lQT-zc-pkq"/>
+                        <constraint firstItem="em7-qO-w2n" firstAttribute="leading" secondItem="Ln1-J7-Oad" secondAttribute="leading" constant="18" id="lyT-Dv-F6i"/>
+                        <constraint firstAttribute="height" constant="45" id="rWu-OB-nFX"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="Ln1-J7-Oad" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="2l1-Uo-PDC"/>
                 <constraint firstItem="dpE-6y-a1q" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="OVF-v4-EVF"/>
                 <constraint firstItem="dpE-6y-a1q" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="WBb-aX-JJk"/>
+                <constraint firstItem="Ln1-J7-Oad" firstAttribute="top" secondItem="dpE-6y-a1q" secondAttribute="bottom" id="Y5J-SZ-Xtv"/>
+                <constraint firstItem="Ln1-J7-Oad" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="hQb-wz-ir0"/>
                 <constraint firstItem="iRe-2D-aWe" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="jSl-PJ-i6B"/>
                 <constraint firstItem="dpE-6y-a1q" firstAttribute="top" secondItem="iRe-2D-aWe" secondAttribute="bottom" id="sTT-4b-49k"/>
                 <constraint firstItem="iRe-2D-aWe" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="wL4-QF-GSm"/>
@@ -286,6 +314,8 @@
         </view>
     </objects>
     <resources>
+        <image name="btn-Top-uptutorial-normal" width="345" height="44"/>
+        <image name="btn-Top-uptutorial-pressed" width="345" height="44"/>
         <image name="me_arrow" width="16" height="16"/>
     </resources>
 </document>
