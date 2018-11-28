@@ -107,6 +107,8 @@
 
 - (IBAction)submitAction:(UIButton *)sender {
     [self.view endEditing:YES];
+    [self goToStep:1];return;
+    
     NSString *text = _amountTF.text;
     
     /// 输入为不合法数字

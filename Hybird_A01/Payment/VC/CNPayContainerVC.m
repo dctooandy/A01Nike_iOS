@@ -129,7 +129,7 @@
 /// BQ支付 也叫 quickBank
 - (NSArray<CNPayBaseVC *> *)BQPay:(CNPaymentModel *)payment {
     CNPayBQStep1VC *step1VC = [[CNPayBQStep1VC alloc] init];
-    CNPayBQStep2VC2 *step2VC = [[CNPayBQStep2VC2 alloc] init];
+    CNPayBQStep2VC *step2VC = [[CNPayBQStep2VC alloc] init];
     step1VC.paymentModel = payment;
     step2VC.paymentModel = payment;
     return @[step1VC, step2VC];
