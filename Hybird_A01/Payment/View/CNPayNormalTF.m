@@ -7,15 +7,32 @@
 //
 
 #import "CNPayNormalTF.h"
+#import "CNPayConstant.h"
 
 @implementation CNPayNormalTF
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (instancetype)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
 }
-*/
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void)commonInit {
+    self.font = [UIFont systemFontOfSize:14];
+    self.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.textAlignment = NSTextAlignmentRight;
+    self.textColor = COLOR_HEX(0x82868F);
+    [self setValue:self.textColor forKeyPath:@"_placeholderLabel.textColor"];
+}
 
 @end

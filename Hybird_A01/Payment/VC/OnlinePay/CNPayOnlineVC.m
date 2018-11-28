@@ -53,7 +53,6 @@
     BOOL online = self.paymentModel.paymentType == CNPaymentOnline;
     self.selectBankView.hidden = !online;
     self.selectBankViewHeight.constant = online ? 50: 0;
-    self.payBankTF.placeholder = @"请选择支付银行";
     
     BOOL bibao = self.paymentModel.paymentType == CNPaymentCoin;
     self.bibaoView.hidden = !bibao;
