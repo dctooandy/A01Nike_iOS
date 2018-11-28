@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CNPayTipView : UIView
-@property (nonatomic, copy) dispatch_block_t btnAcitonBlock;
-+ (void)showTipView;
++ (void)showTipViewFinish:(dispatch_block_t)btnAction;
 @end

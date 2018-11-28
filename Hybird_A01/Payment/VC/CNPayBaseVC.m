@@ -275,7 +275,10 @@
 }
 
 - (void)showPayTipViewWithAmount:(NSString *)amount {
-    [CNPayTipView showTipView];
+    weakSelf(weakSelf);
+    [CNPayTipView showTipViewFinish:^{
+        [weakSelf.payVC.navigationController popToRootViewControllerAnimated:YES];
+    }];
 }
 
 

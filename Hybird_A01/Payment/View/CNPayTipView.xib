@@ -71,6 +71,9 @@
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="closeAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="oLg-sj-JKX"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
