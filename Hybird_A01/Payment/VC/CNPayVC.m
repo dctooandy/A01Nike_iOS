@@ -21,19 +21,26 @@
 #define kChannelCellIndentifier   @"CNPayChannelCell"
 
 @interface CNPayVC () <UICollectionViewDelegate, UICollectionViewDataSource>
-@property (nonatomic, assign) CNPayChannel defaultChannel;
-@property (nonatomic, strong) UIScrollView *payScrollView;
-@property (nonatomic, strong) UICollectionView *payCollectionView;
-@property (nonatomic, strong) UICollectionViewFlowLayout *layout;
-@property (nonatomic, strong) UIView *contentView;
-@property (nonatomic, strong) UILabel *alertLabel;
-@property (nonatomic, strong) AMSegmentViewController *segmentVC;
-@property (nonatomic, strong) CNPayBankView *bankView;
+@property (weak, nonatomic) IBOutlet UIScrollView *payScrollView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentWidth;
 
-@property (nonatomic, strong) NSMutableArray<CNPayChannelModel *> *payChannels;
-@property (nonatomic, assign) NSInteger currentSelectedIndex;
+@property (weak, nonatomic) IBOutlet CNPayBankView *bankView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bankViewHeight;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *payCollectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *payCollectionViewHeight;
+
+@property (weak, nonatomic) IBOutlet UIView *stepView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *stepViewHeight;
+
+
+@property (nonatomic, assign) CNPayChannel defaultChannel;
 @property (nonatomic, assign) BOOL hasDefaultChannel;
+@property (nonatomic, assign) NSInteger currentSelectedIndex;
+@property (nonatomic, strong) AMSegmentViewController *segmentVC;
+@property (nonatomic, strong) UILabel *alertLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) NSMutableArray <CNPayChannelModel *> *payChannels;
 @end
 
 @implementation CNPayVC
@@ -48,7 +55,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = kBlackBackgroundColor;
+    self.payScrollView.backgroundColor = kBlackBackgroundColor;
+    self.payCollectionView.backgroundColor = kBlackForgroundColor;
+    self.contentWidth.constant = [UIScreen mainScreen].bounds.size.width;
+    [self.payCollectionView registerNib:[UINib nibWithNibName:kChannelCellIndentifier bundle:nil] forCellWithReuseIdentifier:kChannelCellIndentifier];
     [self fetchPayChannels];
 }
 
@@ -57,55 +67,21 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-}
-
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full {
-    if (full) {
-        self.payCollectionView.hidden = YES;
-        [self.payCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(@0);
-        }];
-        if (height < self.view.frame.size.height) {
-            height = self.view.frame.size.height;
-        }
-    } else {
-        self.payCollectionView.hidden = NO;
-        self.payCollectionView.frame = CGRectMake(0, 0, self.view.bounds.size.width, kPayChannelItemSize.height);
-    }
-    
-    // 调整scrollview内容
-    CGRect frame = self.contentView.frame;
-    frame.size.height = height;
-    self.contentView.frame = frame;
-    self.payScrollView.contentSize = frame.size;
+    self.payCollectionView.hidden = full;
+    self.payCollectionViewHeight.constant = full ? 0: 132;
+    self.stepViewHeight.constant = height;
     [self.payScrollView scrollsToTop];
 }
 
 - (void)addBankView {
-    if (_bankView) {
-        [self.bankView setHidden:NO];
-        [self.bankView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.equalTo(@180);
-        }];
-    } else {
-        [_payCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.bankView.mas_bottom).offset(0);
-            make.left.right.equalTo(@0);
-            make.height.equalTo(@(kPayChannelItemSize.height));
-        }];
-    }
+    self.bankView.hidden = NO;
+    self.bankViewHeight.constant = 180;
 }
 
 - (void)removeBankView {
-    if (!_bankView) {
-        return;
-    }
-    [self.bankView setHidden:YES];
-    [self.bankView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@0);
-    }];
+    self.bankView.hidden = YES;
+    self.bankViewHeight.constant = 0;
 }
 
 /// 请求支付渠道信息
@@ -332,21 +308,17 @@
     
     /// 存在已经打开的支付渠道
     if (_segmentVC) {
-        [_payCollectionView reloadData];
         [_segmentVC.view removeFromSuperview];
     }
-    
+    [_payCollectionView reloadData];
     [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     
     CNPayContainerVC *payChannelVC = [[CNPayContainerVC alloc] initWithPayChannel:payChannel];
     payChannelVC.payments = _payChannels[_currentSelectedIndex].payments;
     _segmentVC = [[AMSegmentViewController alloc] initWithViewController:payChannelVC];
-    [self.contentView addSubview:_segmentVC.view];
+    [self.stepView addSubview:_segmentVC.view];
     [_segmentVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.contentView);
-        make.right.mas_equalTo(self.contentView);
-        make.bottom.mas_equalTo(self.contentView);
-        make.top.equalTo(self.payCollectionView.mas_bottom).offset(0);
+        make.edges.mas_equalTo(0);
     }];
 }
 
@@ -394,54 +366,6 @@
 
 #pragma mark - Getter
 
-- (UIScrollView *)payScrollView {
-    if (!_payScrollView) {
-        _payScrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-        _payScrollView.contentSize = self.view.bounds.size;
-        _payScrollView.backgroundColor = kBlackBackgroundColor;
-        [self.view addSubview:_payScrollView];
-    }
-    return _payScrollView;
-}
-
-- (UIView *)contentView {
-    if (!_contentView) {
-        _contentView = [[UIView alloc] initWithFrame:self.payScrollView.bounds];
-        _contentView.backgroundColor = kBlackBackgroundColor;
-        [self.payScrollView addSubview:_contentView];
-    }
-    return _contentView;
-}
-
-- (UICollectionViewFlowLayout *)layout {
-    if (!_layout) {
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        [layout setMinimumInteritemSpacing:0.0f];
-        [layout setMinimumLineSpacing:5.0f];
-        [layout setScrollDirection: UICollectionViewScrollDirectionHorizontal];
-        layout.itemSize = kPayChannelItemSize;
-        _layout = layout;
-    }
-    return _layout;
-}
-
-- (UICollectionView *)payCollectionView {
-    if (!_payCollectionView) {
-        CGRect frame = CGRectMake(0, 0, self.view.bounds.size.width, kPayChannelItemSize.height);
-        _payCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:self.layout];
-        _payCollectionView.delegate = self;
-        _payCollectionView.dataSource = self;
-        _payCollectionView.backgroundColor = kBlackForgroundColor;
-        _payCollectionView.showsVerticalScrollIndicator = NO;
-        _payCollectionView.showsHorizontalScrollIndicator = NO;
-        _payCollectionView.contentInset = UIEdgeInsetsMake(40, 10, 15, 10);
-        [self.contentView addSubview:_payCollectionView];
-        
-        [_payCollectionView registerNib:[UINib nibWithNibName:kChannelCellIndentifier bundle:nil] forCellWithReuseIdentifier:kChannelCellIndentifier];
-    }
-    return _payCollectionView;
-}
-
 - (UILabel *)alertLabel {
     if (!_alertLabel) {
         UILabel *alertLabel = [[UILabel alloc] initWithFrame:self.view.bounds];
@@ -466,29 +390,17 @@
     return _activityView;
 }
 
-- (CNPayBankView *)bankView {
-    if (!_bankView) {
-        _bankView = [[CNPayBankView alloc] init];
-        [self.contentView addSubview:_bankView];
-        [_bankView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.right.left.equalTo(@0);
-            make.height.equalTo(@180);
-        }];
-    }
-    return _bankView;
-}
-
 #pragma mark - OverWrite
 
 - (void)goToBack {
-    //    [self removeBankView];
-    //    UIViewController *vc = self.segmentVC.childViewControllers.firstObject;
-    //    if (vc && [vc isKindOfClass:[CNPayContainerVC class]]) {
-    //        if ([((CNPayContainerVC *)vc) canPopViewController]) {
-    //            [self.navigationController popViewControllerAnimated:YES];
-    //        }
-    //    } else {
-    [self.navigationController popViewControllerAnimated:YES];
-    //    }
+    [self removeBankView];
+    UIViewController *vc = self.segmentVC.childViewControllers.firstObject;
+    if (vc && [vc isKindOfClass:[CNPayContainerVC class]]) {
+        if ([((CNPayContainerVC *)vc) canPopViewController]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 @end
