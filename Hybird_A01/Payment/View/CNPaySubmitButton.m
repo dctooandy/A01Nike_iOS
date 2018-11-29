@@ -11,13 +11,6 @@
 
 @implementation CNPaySubmitButton
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self commonInit];
-    }
-    return self;
-}
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
