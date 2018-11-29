@@ -97,31 +97,36 @@
     requestModel.order = _order;
     requestModel.page = _page;
     requestModel.limit = _limit;
+    weakSelf(weakSelf);
     [self loadVideoGamesWithRequestModel:requestModel complete:^(IVRequestResultModel *result, id response) {
+        strongSelf(strongSelf);
         NSLog(@"%@",response);
-        [self endRefreshing];
-        [self hideLoading];
+        [strongSelf endRefreshing];
+        [strongSelf hideLoading];
+        strongSelf.isShowSearchBar = NO;
         if (result.code_http == 200 && [result.data isKindOfClass:[NSArray class]]) {
-            if (self.page == 1) {
-                [self.games removeAllObjects];
+            if (strongSelf.page == 1 || self.keyword.length) {
+                [strongSelf.games removeAllObjects];
+                self.keyword = @"";
             }
             for (NSDictionary *dict in result.data) {
                 BTTVideoGameModel *model = [BTTVideoGameModel yy_modelWithDictionary:dict];
-                [self.games addObject:model];
+                [strongSelf.games addObject:model];
             }
             if ([result.data count] == self.limit) {
-                self.page ++;
+                strongSelf.page ++;
             } else {
-                [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+                [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
         }
-        [self setupElements];
+        [strongSelf setupElements];
     }];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog(@"点击了搜索");
     self.keyword = searchBar.text;
+    searchBar.text = @"";
     [searchBar setShowsCancelButton:NO];
     [searchBar endEditing:YES];
     if (self.keyword.length) {
@@ -132,6 +137,7 @@
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     self.isShowSearchBar = NO;
+    searchBar.text = @"";
     [searchBar setShowsCancelButton:NO];
     [searchBar endEditing:YES];
     [self setupElements];
@@ -297,23 +303,28 @@
                 };
                 return cell;
             } else {
-                BTTVideoGameModel *model = self.games.count ? self.games[indexPath.row - 4] : nil;
-                BTTVideoGameCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGameCell" forIndexPath:indexPath];
-                if (indexPath.row % 2 == 0) {
-                    cell.leftConstants.constant = 15;
-                    cell.rightConstants.constant = 7.5;
+                if (self.games.count) {
+                    BTTVideoGameModel *model = self.games.count ? self.games[indexPath.row - 4] : nil;
+                    BTTVideoGameCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGameCell" forIndexPath:indexPath];
+                    if (indexPath.row % 2 == 0) {
+                        cell.leftConstants.constant = 15;
+                        cell.rightConstants.constant = 7.5;
+                    } else {
+                        cell.leftConstants.constant = 7.5;
+                        cell.rightConstants.constant = 15;;
+                    }
+                    cell.model = model;
+                    weakSelf(weakSelf);
+                    cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                        strongSelf(strongSelf);
+                        NSLog(@"%@",button);
+                        [strongSelf loadAddOrCancelFavorite:button.selected gameModel:model];
+                    };
+                    return cell;
                 } else {
-                    cell.leftConstants.constant = 7.5;
-                    cell.rightConstants.constant = 15;;
+                    BTTVideoGamesNoDataCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesNoDataCell" forIndexPath:indexPath];
+                    return cell;
                 }
-                cell.model = model;
-                weakSelf(weakSelf);
-                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-                    strongSelf(strongSelf);
-                    NSLog(@"%@",button);
-                    [strongSelf loadAddOrCancelFavorite:button.selected gameModel:model];
-                };
-                return cell;
             }
         } else {
             if (indexPath.row == 0) {
@@ -371,23 +382,29 @@
                 };
                 return cell;
             } else {
-                BTTVideoGameModel *model = self.games.count ? self.games[indexPath.row - 3] : nil;
-                BTTVideoGameCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGameCell" forIndexPath:indexPath];
-                if (indexPath.row % 2) {
-                    cell.leftConstants.constant = 15;
-                    cell.rightConstants.constant = 7.5;
+                if (self.games.count) {
+                    BTTVideoGameModel *model = self.games.count ? self.games[indexPath.row - 3] : nil;
+                    BTTVideoGameCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGameCell" forIndexPath:indexPath];
+                    if (indexPath.row % 2) {
+                        cell.leftConstants.constant = 15;
+                        cell.rightConstants.constant = 7.5;
+                    } else {
+                        cell.leftConstants.constant = 7.5;
+                        cell.rightConstants.constant = 15;;
+                    }
+                    weakSelf(weakSelf);
+                    cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                        strongSelf(strongSelf);
+                        NSLog(@"%@",button);
+                        [strongSelf loadAddOrCancelFavorite:button.selected gameModel:model];
+                    };
+                    cell.model = model;
+                    return cell;
                 } else {
-                    cell.leftConstants.constant = 7.5;
-                    cell.rightConstants.constant = 15;;
+                    BTTVideoGamesNoDataCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesNoDataCell" forIndexPath:indexPath];
+                    return cell;
                 }
-                weakSelf(weakSelf);
-                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-                    strongSelf(strongSelf);
-                    NSLog(@"%@",button);
-                    [strongSelf loadAddOrCancelFavorite:button.selected gameModel:model];
-                };
-                cell.model = model;
-                return cell;
+                
             }
         }
     }
@@ -524,23 +541,23 @@
     NSInteger total = 0;
     if (self.isFavorite) {
         if (self.favorites.count) {
-            if (self.isShowSearchBar) {
-                total = 4 + self.favorites.count;
-            } else {
-                total = 3 + self.favorites.count;
-            }
+            total = 3 + self.favorites.count;
         } else {
-            if (self.isShowSearchBar) {
-                total = 5;
-            } else {
-                total = 4;
-            }
+            total = 4;
         }
     } else {
         if (self.isShowSearchBar) {
-            total = 4 + self.games.count;
+            if (self.games.count) {
+                total = 4 + self.games.count;
+            } else {
+                total = 5;
+            }
         } else {
-            total = 3 + self.games.count;
+            if (self.games.count) {
+                total = 3 + self.games.count;
+            } else {
+                total = 4;
+            }
         }
     }
     for (int i = 0; i < total; i++) {
@@ -570,30 +587,61 @@
             }
         } else {
             if (self.isShowSearchBar) {
-                if (i == 0) {
-                    if (@available(iOS 11, *)) {
-                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 56)]];
+                if (self.games.count) {
+                    if (i == 0) {
+                        if (@available(iOS 11, *)) {
+                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 56)]];
+                        } else {
+                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+                        }
+                    } else if (i == 1) {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, BTTBnnnerDefaultHeight * (SCREEN_WIDTH / BTTBannerDefaultWidth))]];
+                    } else if (i == 2) {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 40)]];
+                    } else if (i == 3) {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 30)]];
                     } else {
-                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 2, (SCREEN_WIDTH / 2 - 22.5) / 130 * 90 + 105)]];
                     }
-                } else if (i == 1) {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, BTTBnnnerDefaultHeight * (SCREEN_WIDTH / BTTBannerDefaultWidth))]];
-                } else if (i == 2) {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 40)]];
-                } else if (i == 3) {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 30)]];
                 } else {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 2, (SCREEN_WIDTH / 2 - 22.5) / 130 * 90 + 105)]];
+                    if (i == 0) {
+                        if (@available(iOS 11, *)) {
+                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 56)]];
+                        } else {
+                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+                        }
+                    } else if (i == 1) {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, BTTBnnnerDefaultHeight * (SCREEN_WIDTH / BTTBannerDefaultWidth))]];
+                    } else if (i == 2) {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 40)]];
+                    } else if (i == 3) {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 30)]];
+                    } else {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+                    }
                 }
+                
             } else {
-                if (i == 0) {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, BTTBnnnerDefaultHeight * (SCREEN_WIDTH / BTTBannerDefaultWidth))]];
-                } else if (i == 1) {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 40)]];
-                } else if (i == 2) {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 30)]];
+                if (self.games.count) {
+                    if (i == 0) {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, BTTBnnnerDefaultHeight * (SCREEN_WIDTH / BTTBannerDefaultWidth))]];
+                    } else if (i == 1) {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 40)]];
+                    } else if (i == 2) {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 30)]];
+                    } else {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 2, (SCREEN_WIDTH / 2 - 22.5) / 130 * 90 + 105)]];
+                    }
                 } else {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 2, (SCREEN_WIDTH / 2 - 22.5) / 130 * 90 + 105)]];
+                    if (i == 0) {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, BTTBnnnerDefaultHeight * (SCREEN_WIDTH / BTTBannerDefaultWidth))]];
+                    } else if (i == 1) {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 40)]];
+                    } else if (i == 2) {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 30)]];
+                    } else {
+                        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+                    }
                 }
             }
         }

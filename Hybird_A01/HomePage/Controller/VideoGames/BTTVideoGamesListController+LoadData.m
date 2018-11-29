@@ -71,7 +71,11 @@
         NSLog(@"%@",response);
         if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {
             if (result.data[@"val"]) {
-                [MBProgressHUD showSuccess:@"添加成功" toView:nil];
+                if (favorite) {
+                    [MBProgressHUD showSuccess:@"添加成功" toView:nil];
+                } else {
+                    [MBProgressHUD showSuccess:@"取消成功" toView:nil];
+                }
                 [self loadCollectionData];
             }
         } else {
