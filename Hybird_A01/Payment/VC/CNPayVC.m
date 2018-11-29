@@ -60,7 +60,9 @@
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full {
     if (full) {
         self.payCollectionView.hidden = YES;
-        self.payCollectionView.frame = CGRectZero;
+        [self.payCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@0);
+        }];
         if (height < self.view.frame.size.height) {
             height = self.view.frame.size.height;
         }
