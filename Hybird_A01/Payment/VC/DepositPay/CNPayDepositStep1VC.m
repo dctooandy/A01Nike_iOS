@@ -50,7 +50,10 @@
 //    } else {
 //        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f", self.paymentModel.minamount];
 //    }
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self setViewHeight:500 fullScreen:NO];
 }
 
