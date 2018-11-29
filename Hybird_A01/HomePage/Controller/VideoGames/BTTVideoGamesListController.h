@@ -8,6 +8,8 @@
 
 #import "BTTCollectionViewController.h"
 
+typedef void(^BTTSelectValueBlock)(NSString *value);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTVideoGamesListController : BTTCollectionViewController
@@ -15,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *banners;
 
 @property (nonatomic, strong) NSMutableArray *imageUrls;
+
+@property (nonatomic, strong) NSMutableArray *favorites;
+
+@property (nonatomic, copy) BTTSelectValueBlock selectValueBlock;
 
 @end
 

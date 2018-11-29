@@ -8,6 +8,8 @@
 
 #import "BTTBaseCollectionViewCell.h"
 
+@class BTTVideoGameModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTVideoGameCell : BTTBaseCollectionViewCell
@@ -15,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftConstants;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightConstants;
+
+@property (nonatomic, strong) BTTVideoGameModel *model;
 
 @end
 
