@@ -54,6 +54,10 @@
 {
     return [IVNetwork productId];
 }
+- (NSDictionary *)exteranlArguments
+{
+    return @{@"newApi" : @1};
+}
 - (Class)bridgeProtocolExternalClass
 {
     return [BridgeProtocolExternal class];
