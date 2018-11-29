@@ -231,6 +231,7 @@
     [IVNetwork sendRequestWithSubURL:@"verify/send" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         if (result.status) {
+            [MBProgressHUD showSuccess:@"验证码已发送，请注意查收" toView:nil];
             [[weakSelf getVerifyCell] countDown];
         } else {
             [MBProgressHUD showError:result.message toView:weakSelf.view];
@@ -247,6 +248,7 @@
     NSString *successStr = nil;
     switch (self.mobileCodeType) {
         case BTTSafeVerifyTypeVerifyMobile:
+            url = @"verify/check";
             params[@"v_type"] = @"3";
             successStr = @"验证成功!";
             break;
