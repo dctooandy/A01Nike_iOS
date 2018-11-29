@@ -22,6 +22,7 @@
     
     UITextField*searchField = [self.searchBar valueForKey:@"_searchField"]; // 先取出textfield
     [searchField setBackgroundColor:[UIColor colorWithHexString:@"292d36"]];
+    searchField.textColor = [UIColor whiteColor];
 }
 
 @end
