@@ -54,7 +54,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self setViewHeight:500 fullScreen:NO];
+    [self setViewHeight:350 fullScreen:NO];
 }
 
 // 获取历史存款人姓名

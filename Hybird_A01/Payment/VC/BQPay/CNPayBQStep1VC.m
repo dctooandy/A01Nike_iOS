@@ -42,7 +42,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self setViewHeight:500 fullScreen:NO];
+    [self setViewHeight:450 fullScreen:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
