@@ -1,9 +1,9 @@
 //
 //  CNPayVC.m
-//  A05_iPhone
+//  Hybird_A01
 //
-//  Created by cean.q on 2018/9/28.
-//  Copyright © 2018年 WRD. All rights reserved.
+//  Created by cean.q on 2018/11/29.
+//  Copyright © 2018 BTT. All rights reserved.
 //
 
 #import "CNPayVC.h"
@@ -55,6 +55,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
 }
 
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full {
@@ -186,7 +190,7 @@
     BTC.payments = [[NSArray alloc] initWithObjects:
                     payments[CNPaymentBTC], nil];
     
-
+    
     /// 支付宝支付
     CNPayChannelModel *ali = [[CNPayChannelModel alloc] init];
     ali.payChannel = CNPayChannelAliApp;
@@ -198,7 +202,7 @@
     CNPayChannelModel *unionPay = [[CNPayChannelModel alloc] init];
     unionPay.payChannel = CNPayChannelUnionApp;
     unionPay.payments = [[NSArray alloc] initWithObjects:
-                        payments[CNPaymentUnionApp], nil];
+                         payments[CNPaymentUnionApp], nil];
     
     
     /// 京东支付
@@ -230,26 +234,26 @@
     CNPayChannelModel *BQWeChat = [[CNPayChannelModel alloc] init];
     BQWeChat.payChannel = CNPayChannelBQWechat;
     BQWeChat.payments = [[NSArray alloc] initWithObjects:
-                       payments[CNPaymentBQWechat], nil];
+                         payments[CNPaymentBQWechat], nil];
     
     /// BQ Ali
     CNPayChannelModel *BQAli = [[CNPayChannelModel alloc] init];
     BQAli.payChannel = CNPayChannelBQAli;
     BQAli.payments = [[NSArray alloc] initWithObjects:
-                       payments[CNPaymentBQAli], nil];
+                      payments[CNPaymentBQAli], nil];
     
     
     /// 微信条码
     CNPayChannelModel *barCode = [[CNPayChannelModel alloc] init];
     barCode.payChannel = CNPayChannelWechatBarCode;
     barCode.payments = [[NSArray alloc] initWithObjects:
-                      payments[CNPaymentWechatBarCode], nil];
+                        payments[CNPaymentWechatBarCode], nil];
     
     /// 币宝支付
     CNPayChannelModel *coin = [[CNPayChannelModel alloc] init];
     coin.payChannel = CNPayChannelCoin;
     coin.payments = [[NSArray alloc] initWithObjects:
-                    payments[CNPaymentCoin], nil];
+                     payments[CNPaymentCoin], nil];
     
     NSArray *array = @[BQFast,BQWeChat,BQAli,deposit,ali,online,QR,unionPay,card,BTC,JD,barCode,coin];
     
@@ -301,7 +305,7 @@
     /// 如果不存在已经打开的支付渠道则展示提示页面
     if (_payChannels.count == 0) {
         [self.view bringSubviewToFront:self.alertLabel];
-
+        
         return;
     }
     _alertLabel.hidden = YES;
@@ -374,7 +378,7 @@
     [self removeBankView];
     self.currentSelectedIndex = indexPath.row;
     [self.payCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-
+    
     CNPayChannelModel *channel = [_payChannels objectAtIndex:indexPath.row];
     CNPayContainerVC *payChannelVC = [[CNPayContainerVC alloc] initWithPayChannel:channel.payChannel];
     payChannelVC.payments = channel.payments;
@@ -433,7 +437,7 @@
         _payCollectionView.contentInset = UIEdgeInsetsMake(40, 10, 15, 10);
         [self.contentView addSubview:_payCollectionView];
         
-         [_payCollectionView registerNib:[UINib nibWithNibName:kChannelCellIndentifier bundle:nil] forCellWithReuseIdentifier:kChannelCellIndentifier];
+        [_payCollectionView registerNib:[UINib nibWithNibName:kChannelCellIndentifier bundle:nil] forCellWithReuseIdentifier:kChannelCellIndentifier];
     }
     return _payCollectionView;
 }
@@ -477,14 +481,14 @@
 #pragma mark - OverWrite
 
 - (void)goToBack {
-//    [self removeBankView];
-//    UIViewController *vc = self.segmentVC.childViewControllers.firstObject;
-//    if (vc && [vc isKindOfClass:[CNPayContainerVC class]]) {
-//        if ([((CNPayContainerVC *)vc) canPopViewController]) {
-//            [self.navigationController popViewControllerAnimated:YES];
-//        }
-//    } else {
-        [self.navigationController popViewControllerAnimated:YES];
-//    }
+    //    [self removeBankView];
+    //    UIViewController *vc = self.segmentVC.childViewControllers.firstObject;
+    //    if (vc && [vc isKindOfClass:[CNPayContainerVC class]]) {
+    //        if ([((CNPayContainerVC *)vc) canPopViewController]) {
+    //            [self.navigationController popViewControllerAnimated:YES];
+    //        }
+    //    } else {
+    [self.navigationController popViewControllerAnimated:YES];
+    //    }
 }
 @end
