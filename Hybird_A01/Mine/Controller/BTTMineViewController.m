@@ -43,6 +43,8 @@
 #import "BTTUserStatusManager.h"
 #import "IVNetworkStatusDetailViewController.h"
 #import "CNPayVC.h"
+
+
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, assign) BOOL isChangeMobile; // 是否改变手机号
@@ -236,7 +238,6 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    [self.navigationController pushViewController:[[CNPayVC alloc] initWithChannel:CNPayChannelCard] animated:YES];
     NSLog(@"%@",@(indexPath.row));
     if (![IVNetwork userInfo]) {
         [MBProgressHUD showError:@"请先登录" toView:nil];
