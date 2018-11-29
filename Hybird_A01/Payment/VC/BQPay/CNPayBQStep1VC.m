@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLb;
 @property (weak, nonatomic) IBOutlet CNPayNameTF *nameTF;
 @property (weak, nonatomic) IBOutlet CNPayNormalTF *bankTF;
+@property (weak, nonatomic) IBOutlet UILabel *usuallyLb;
+
 
 @property (weak, nonatomic) IBOutlet UIView *bottomTipView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTipViewHeight;

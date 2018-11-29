@@ -21,6 +21,7 @@
                 <outlet property="preSettingMessageLb" destination="REz-bo-RkT" id="lDe-D5-JOH"/>
                 <outlet property="preSettingView" destination="YZU-50-cfg" id="6nY-f7-hzx"/>
                 <outlet property="preSettingViewHeight" destination="kKL-nV-GZl" id="h3n-Oi-VEs"/>
+                <outlet property="usuallyLb" destination="T3y-x7-EbH" id="ziW-ws-3sb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
