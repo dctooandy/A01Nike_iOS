@@ -11,13 +11,6 @@
 
 @implementation CNPaySubmitButton
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self commonInit];
-    }
-    return self;
-}
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
@@ -37,7 +30,7 @@
 
 - (void)commonInit {
 //    self.backgroundColor = [Utility colorWithHex:0xF3F3F3];
-    self.layer.cornerRadius = 2.0;
+//    self.layer.cornerRadius = 2.0;
 //    self.layer.shadowColor = COLOR_RGBA(0, 0, 0, 0.27).CGColor;
 //    self.layer.shadowOffset = CGSizeMake(0, 2);
 //    self.layer.shadowOpacity = 1;

@@ -7,16 +7,10 @@
 //
 
 #import "CNPayNameTF.h"
+#import "CNPayConstant.h"
 
 @implementation CNPayNameTF
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self commonInit];
-    }
-    return self;
-}
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
@@ -36,7 +30,10 @@
 
 - (void)commonInit {
     self.placeholder = @"所用银行卡持卡人姓名";
-    self.font = [UIFont systemFontOfSize:16];
+    self.font = [UIFont systemFontOfSize:13];
+    self.textColor = COLOR_HEX(0xCFB785);
+    self.textAlignment = NSTextAlignmentRight;
+    [self setValue:COLOR_HEX(0x82868F) forKeyPath:@"_placeholderLabel.textColor"];
     self.delegate = self;
     self.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.keyboardType = UIKeyboardTypeDefault;

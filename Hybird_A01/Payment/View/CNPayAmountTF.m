@@ -10,13 +10,6 @@
 
 @implementation CNPayAmountTF
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        [self commonInit];
-    }
-    return self;
-}
 
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
@@ -35,9 +28,10 @@
 }
 
 - (void)commonInit {
-    self.font = [UIFont systemFontOfSize:16];
+    self.font = [UIFont systemFontOfSize:14];
     self.delegate = self;
     self.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.textAlignment = NSTextAlignmentRight;
     self.keyboardType = UIKeyboardTypeDecimalPad;
     [self addTarget:self action:@selector(textFieldEditingChanged) forControlEvents:UIControlEventEditingChanged];
     self.placeholder = @"请输入金额";

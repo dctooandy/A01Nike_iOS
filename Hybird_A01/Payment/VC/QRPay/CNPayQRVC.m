@@ -40,6 +40,10 @@
     // 刷新数据
     [self updateAllContentWithModel:self.paymentModel];
     [self configAmountList];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self setViewHeight:750 fullScreen:NO];
 }
 
@@ -97,13 +101,13 @@
     if (self.paymentModel.amountList.count > 0 &&
         (self.paymentModel.paymentType == CNPaymentWechatQR ||
          self.paymentModel.paymentType == CNPaymentAliQR)) {
-            self.amountBtn.hidden = NO;
-            self.amountTF.placeholder = @"仅可选择以下金额";
-            self.arrawDownIV.hidden = NO;
-        } else {
-            self.amountBtn.hidden = YES;
-            self.arrawDownIV.hidden = YES;
-        }
+        self.amountBtn.hidden = NO;
+        self.amountTF.placeholder = @"仅可选择以下金额";
+        self.arrawDownIV.hidden = NO;
+    } else {
+        self.amountBtn.hidden = YES;
+        self.arrawDownIV.hidden = YES;
+    }
 }
 
 #pragma mark- UICollectionViewDelegate, UICollectionViewDataSource

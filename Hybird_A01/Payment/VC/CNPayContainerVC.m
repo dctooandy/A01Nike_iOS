@@ -9,7 +9,6 @@
 #import "CNPayContainerVC.h"
 #import "AMSegmentViewController.h"
 #import "CNPayOnlineVC.h"
-#import "CNPayOnlineStep2VC.h"
 #import "CNPayDepositStep1VC.h"
 #import "CNPayDepositStep2VC.h"
 #import "CNPayDepositStep3VC.h"
@@ -21,7 +20,6 @@
 #import "CNPayQRStep2VC.h"
 #import "CNPayCardStep1VC.h"
 #import "CNPayCardStep2VC.h"
-#import "CNPayCardStep3VC.h"
 
 
 
@@ -102,14 +100,10 @@
         }
             break;
             
-        case CNPayChannelBQFast: {
-            [viewControllers addObjectsFromArray:[self BQFastPay:payment]];
-        }
-            break;
-            
+        case CNPayChannelBQFast:
         case CNPayChannelBQWechat:
         case CNPayChannelBQAli: {
-            [viewControllers addObjectsFromArray:[self BQWechatAliPay:payment]];
+            [viewControllers addObjectsFromArray:[self BQPay:payment]];
         }
             break;
     }
@@ -119,10 +113,8 @@
 /// 在线支付
 - (NSArray<CNPayBaseVC *> *)onlinePay:(CNPaymentModel *)payment {
     CNPayOnlineVC *step1VC = [[CNPayOnlineVC alloc] init];
-    CNPayOnlineStep2VC *step2VC = [[CNPayOnlineStep2VC alloc] init];
     step1VC.paymentModel = payment;
-    step2VC.paymentModel = payment;
-    return @[step1VC, step2VC];
+    return @[step1VC];
 }
 
 /// 手工支付
@@ -135,19 +127,9 @@
 }
 
 /// BQ支付 也叫 quickBank
-- (NSArray<CNPayBaseVC *> *)BQWechatAliPay:(CNPaymentModel *)payment {
+- (NSArray<CNPayBaseVC *> *)BQPay:(CNPaymentModel *)payment {
     CNPayBQStep1VC *step1VC = [[CNPayBQStep1VC alloc] init];
-    CNPayBQStep2VC2 *step2VC = [[CNPayBQStep2VC2 alloc] init];
-    CNPayBQStep2FastVC *step3VC = [[CNPayBQStep2FastVC alloc] init];
-    step1VC.paymentModel = payment;
-    step2VC.paymentModel = payment;
-    step3VC.paymentModel = payment;
-    return @[step1VC, step2VC, step3VC];
-}
-
-- (NSArray<CNPayBaseVC *> *)BQFastPay:(CNPaymentModel *)payment {
-    CNPayBQStep1VC *step1VC = [[CNPayBQStep1VC alloc] init];
-    CNPayBQStep2FastVC *step2VC = [[CNPayBQStep2FastVC alloc] init];
+    CNPayBQStep2VC *step2VC = [[CNPayBQStep2VC alloc] init];
     step1VC.paymentModel = payment;
     step2VC.paymentModel = payment;
     return @[step1VC, step2VC];
@@ -168,11 +150,9 @@
 - (NSArray<CNPayBaseVC *> *)cardPay:(CNPaymentModel *)payment {
     CNPayCardStep1VC *step1VC = [[CNPayCardStep1VC alloc] init];
     CNPayCardStep2VC *step2VC = [[CNPayCardStep2VC alloc] init];
-    CNPayCardStep3VC *step3VC = [[CNPayCardStep3VC alloc] init];
     step1VC.paymentModel = payment;
     step2VC.paymentModel = payment;
-    step3VC.paymentModel = payment;
-    return @[step1VC, step2VC, step3VC];
+    return @[step1VC, step2VC];
 }
 
 @end
