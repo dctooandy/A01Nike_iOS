@@ -238,6 +238,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    [self.navigationController pushViewController:[[CNPayVC alloc] initWithChannel:CNPayChannelDeposit] animated:YES];
+    return;
     NSLog(@"%@",@(indexPath.row));
     if (![IVNetwork userInfo]) {
         [MBProgressHUD showError:@"请先登录" toView:nil];

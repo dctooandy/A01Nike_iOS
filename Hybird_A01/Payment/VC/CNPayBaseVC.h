@@ -104,4 +104,5 @@
  */
 - (void)saveToLibraryWithImage:(UIImage *)image;
 
+- (void)addBankView;
 @end

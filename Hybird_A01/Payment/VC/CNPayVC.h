@@ -22,4 +22,5 @@
  */
 - (instancetype)initWithChannel:(CNPayChannel)channel;
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full;
+- (void)addBankView;
 @end

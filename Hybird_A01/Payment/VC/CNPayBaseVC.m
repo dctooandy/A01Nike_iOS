@@ -263,6 +263,10 @@
     }];
 }
 
+- (void)addBankView {
+    [self.payVC addBankView];
+}
+
 #pragma mark - 支付后提示页面
 
 -(CNPayVC *)payVC {

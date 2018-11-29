@@ -14,6 +14,7 @@
 #import "CNPaymentModel.h"
 #import "CNPayRequestManager.h"
 #import "CNPayConstant.h"
+#import "CNPayBankView.h"
 
 /// 顶部渠道单元尺寸
 #define kPayChannelItemSize CGSizeMake(102, 132)
@@ -27,6 +28,7 @@
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UILabel *alertLabel;
 @property (nonatomic, strong) AMSegmentViewController *segmentVC;
+@property (nonatomic, strong) CNPayBankView *bankView;
 
 @property (nonatomic, strong) NSMutableArray<CNPayChannelModel *> *payChannels;
 @property (nonatomic, assign) NSInteger currentSelectedIndex;
@@ -73,6 +75,31 @@
     self.contentView.frame = frame;
     self.payScrollView.contentSize = frame.size;
     [self.payScrollView scrollsToTop];
+}
+
+- (void)addBankView {
+    if (_bankView) {
+        [self.bankView setHidden:NO];
+        [self.bankView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.equalTo(@180);
+        }];
+    } else {
+        [_payCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.bankView.mas_bottom).offset(0);
+            make.left.right.equalTo(@0);
+            make.height.equalTo(@(kPayChannelItemSize.height));
+        }];
+    }
+}
+
+- (void)removeBankView {
+    if (!_bankView) {
+        return;
+    }
+    [self.bankView setHidden:YES];
+    [self.bankView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.equalTo(@0);
+    }];
 }
 
 /// 请求支付渠道信息
@@ -342,7 +369,7 @@
     if (indexPath.row == _currentSelectedIndex) {
         return;
     }
-
+    [self removeBankView];
     self.currentSelectedIndex = indexPath.row;
     [self.payCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
 
@@ -433,16 +460,29 @@
     return _activityView;
 }
 
+- (CNPayBankView *)bankView {
+    if (!_bankView) {
+        _bankView = [[CNPayBankView alloc] init];
+        [self.contentView addSubview:_bankView];
+        [_bankView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.right.left.equalTo(@0);
+            make.height.equalTo(@180);
+        }];
+    }
+    return _bankView;
+}
+
 #pragma mark - OverWrite
 
 - (void)goToBack {
-    UIViewController *vc = self.segmentVC.childViewControllers.firstObject;
-    if (vc && [vc isKindOfClass:[CNPayContainerVC class]]) {
-        if ([((CNPayContainerVC *)vc) canPopViewController]) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    } else {
+//    [self removeBankView];
+//    UIViewController *vc = self.segmentVC.childViewControllers.firstObject;
+//    if (vc && [vc isKindOfClass:[CNPayContainerVC class]]) {
+//        if ([((CNPayContainerVC *)vc) canPopViewController]) {
+//            [self.navigationController popViewControllerAnimated:YES];
+//        }
+//    } else {
         [self.navigationController popViewControllerAnimated:YES];
-    }
+//    }
 }
 @end
