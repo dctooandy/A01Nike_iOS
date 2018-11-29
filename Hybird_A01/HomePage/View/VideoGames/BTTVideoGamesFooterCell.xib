@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTVideoGamesFooterCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOg-BS-pTq">
+                        <rect key="frame" x="160.5" y="15" width="54" height="28"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="新手指南">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npv-Hj-ijZ">
+                        <rect key="frame" x="91.5" y="15" width="54" height="28"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="牌照展示">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M4b-i5-msu">
+                        <rect key="frame" x="67.5" y="73" width="240" height="47"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="240" id="BcG-bT-qnd"/>
+                            <constraint firstAttribute="height" constant="47" id="JY6-dI-TkQ"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yYY-cN-hYi">
+                        <rect key="frame" x="229.5" y="15" width="54" height="28"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" title="关于我们">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="yYY-cN-hYi" firstAttribute="centerY" secondItem="mOg-BS-pTq" secondAttribute="centerY" id="4OU-ah-3wW"/>
+                <constraint firstItem="npv-Hj-ijZ" firstAttribute="centerY" secondItem="mOg-BS-pTq" secondAttribute="centerY" id="8dz-0Q-Ruk"/>
+                <constraint firstItem="M4b-i5-msu" firstAttribute="top" secondItem="mOg-BS-pTq" secondAttribute="bottom" constant="30" id="Azh-jG-bXM"/>
+                <constraint firstItem="M4b-i5-msu" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Bqk-bY-iQy"/>
+                <constraint firstItem="yYY-cN-hYi" firstAttribute="leading" secondItem="mOg-BS-pTq" secondAttribute="trailing" constant="15" id="DFJ-Vv-ZB7"/>
+                <constraint firstItem="mOg-BS-pTq" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Ekg-an-5vl"/>
+                <constraint firstItem="mOg-BS-pTq" firstAttribute="leading" secondItem="npv-Hj-ijZ" secondAttribute="trailing" constant="15" id="akW-EK-7PS"/>
+                <constraint firstItem="mOg-BS-pTq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="h92-DE-aQt"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <point key="canvasLocation" x="39.200000000000003" y="46.776611694152926"/>
+        </collectionViewCell>
+    </objects>
+</document>

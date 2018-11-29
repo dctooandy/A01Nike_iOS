@@ -254,6 +254,22 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTPaymentStatus             @"/public/payment/isShutdown"
 
+// 请求游戏列表
+
+#define BTTVideoGamesList            @"/public/game/slotGameSupportPage"
+
+// 获取收藏列表
+
+#define BTTFavotiteList              @"/A01/game/getFavoriteList"
+
+// 添加收藏
+
+#define BTTAddFavotites              @"/public/game/addFavorites"
+
+// 取消收藏
+
+#define BTTCancelFavorites           @"/public/game/cancelFavorites"
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)  ([UIFont systemFontOfSize:X])

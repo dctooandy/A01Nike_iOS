@@ -7,12 +7,18 @@
 //
 
 #import "BTTVideoGamesListController.h"
+#import "BTTVideoGamesRequestModel.h"
+#import "BTTVideoGameModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTVideoGamesListController (LoadData)
 
+- (void)loadVideoGamesWithRequestModel:(BTTVideoGamesRequestModel *)requestModel complete:(IVRequestCallBack)complete;
 
+- (void)loadCollectionData;
+
+- (void)loadAddOrCancelFavorite:(BOOL)favorite gameModel:(BTTVideoGameModel *)model;
 
 @end
 

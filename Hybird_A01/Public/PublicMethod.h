@@ -182,6 +182,14 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)transferNumToThousandFormat:(CGFloat)num;
 
 + (NSString *)getLastWeekTime;
+
+/**
+ 颜色转图片
+
+ @param color 颜色
+ @return 图片
+ */
++ (UIImage *)createImageWithColor:(UIColor*)color;
 @end
 
 NS_ASSUME_NONNULL_END
