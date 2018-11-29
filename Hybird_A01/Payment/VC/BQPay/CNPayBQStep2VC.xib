@@ -358,6 +358,9 @@
                                 <constraint firstAttribute="height" constant="45" id="6zF-AY-hiT"/>
                             </constraints>
                             <state key="normal" title="立即前往网银付款"/>
+                            <connections>
+                                <action selector="goToPay:" destination="-1" eventType="touchUpInside" id="12t-uN-NPq"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -382,6 +385,9 @@
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="如何只用微信支付" backgroundImage="pay_blueBtn"/>
                             <state key="highlighted" backgroundImage="pay_blueBtnHL"/>
+                            <connections>
+                                <action selector="seeWeChatPay:" destination="-1" eventType="touchUpInside" id="jgS-I7-PAz"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOZ-YP-bYU">
                             <rect key="frame" x="196.5" y="63.5" width="160.5" height="45"/>
@@ -395,6 +401,9 @@
                             <state key="highlighted" backgroundImage="binding_confirm_enable_press">
                                 <color key="titleColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="finishPay:" destination="-1" eventType="touchUpInside" id="Pbr-HW-XmD"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>

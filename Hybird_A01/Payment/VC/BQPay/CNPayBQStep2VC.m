@@ -119,48 +119,28 @@
                             bankModel.bankaddress];
 }
 
-- (void)addBorderToView:(UIView *)view {
-    view.layer.cornerRadius = 8;
-    CAShapeLayer *border = [CAShapeLayer layer];
-    border.strokeColor = COLOR_HEX(0x979797).CGColor;
-    border.fillColor = nil;
-    border.path = [UIBezierPath bezierPathWithRoundedRect:view.bounds cornerRadius:8].CGPath;
-    border.frame = view.bounds; 
-    border.lineWidth = 1;
-    border.lineCap = @"square";
-    border.lineDashPattern = @[@2, @4];
-    [view.layer addSublayer:border];
-}
-
 - (IBAction)copyAction:(UIButton *)sender {
     [UIPasteboard generalPasteboard].string = [NSString stringWithFormat:@"%@%@%@", _accountNameLb.text, _accountLb.text, _addressLb.text];
     [self showSuccess:@"已复制到剪切板"];
 }
 
 - (IBAction)goToPay:(UIButton *)sender {
-    switch (self.writeModel.BQType) {
-        case CNPayBQTypeWechat:
-        case CNPayBQTypeWap:
-        case CNPayBQTypeBankUnion: {
-//            CNWKWebVC *payWebVC = [[CNWKWebVC alloc] initWithURLString:self.model.chooseBank.bankurl];
-//            [self pushViewController:payWebVC];
-            [self pushUIWebViewWithURLString:self.writeModel.chooseBank.bankurl title:sender.currentTitle];
-        }
-            break;
-            
-        case CNPayBQTypeAli: {
-//            CNWKWebVC *payWebVC = [[CNWKWebVC alloc] initWithURLString:self.model.chooseBank.alipay];
-//            [self pushViewController:payWebVC];
-            [self pushUIWebViewWithURLString:self.writeModel.chooseBank.alipay title:sender.currentTitle];
-        }
-            break;
-            
-        case CNPayBQTypeOther: {
-            CNPayBQSuccessVC *payWebVC = [[CNPayBQSuccessVC alloc] initWithName:self.writeModel.depositBy];
-            [self pushViewController:payWebVC];
-        }
-            break;
+    if (self.paymentModel.paymentType == CNPaymentBQAli) {
+        [self popToRootViewController];
+        return;
     }
+    // BQFast
+//    CNWKWebVC *payWebVC = [[CNWKWebVC alloc] initWithURLString:self.model.chooseBank.bankurl];
+//    [self pushViewController:payWebVC];
+    [self pushUIWebViewWithURLString:self.writeModel.chooseBank.bankurl title:sender.currentTitle];
+}
+
+- (IBAction)finishPay:(id)sender {
+    [self popToRootViewController];
+}
+
+- (IBAction)seeWeChatPay:(id)sender {
+    
 }
 
 - (void)dealloc {
