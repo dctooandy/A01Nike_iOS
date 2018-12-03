@@ -12,7 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *searchBtn;
 
-@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 
 @end
 

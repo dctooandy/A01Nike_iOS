@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTVideoGamesHeaderCell : BTTBaseCollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

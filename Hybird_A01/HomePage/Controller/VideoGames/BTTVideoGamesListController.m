@@ -43,6 +43,8 @@
 
 @property (nonatomic, assign) NSInteger isFavorite;
 
+@property (nonatomic, copy) NSString *count;
+
 @end
 
 @implementation BTTVideoGamesListController
@@ -51,6 +53,7 @@
     [super viewDidLoad];
     _page = 1;
     _limit = 12;
+    _count = @"0";
     [self resetRequestModel];
     self.title = @"电子游戏";
     [self setupCollectionView];
@@ -104,16 +107,17 @@
         [strongSelf endRefreshing];
         [strongSelf hideLoading];
         strongSelf.isShowSearchBar = NO;
-        if (result.code_http == 200 && [result.data isKindOfClass:[NSArray class]]) {
+        if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {
             if (strongSelf.page == 1 || self.keyword.length) {
                 [strongSelf.games removeAllObjects];
                 self.keyword = @"";
             }
-            for (NSDictionary *dict in result.data) {
+            NSArray *games = result.data[@"list"];
+            for (NSDictionary *dict in games) {
                 BTTVideoGameModel *model = [BTTVideoGameModel yy_modelWithDictionary:dict];
                 [strongSelf.games addObject:model];
             }
-            if ([result.data count] == self.limit) {
+            if ([games count] == self.limit) {
                 strongSelf.page ++;
             } else {
                 [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
@@ -208,6 +212,7 @@
             return cell;
         } else if (indexPath.row == 2) {
             BTTVideoGamesHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesHeaderCell" forIndexPath:indexPath];
+            cell.totalLabel.text = [NSString stringWithFormat:@"共有 (%@) 款游戏",self.count];
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
@@ -291,6 +296,7 @@
                 return cell;
             } else if (indexPath.row == 3) {
                 BTTVideoGamesHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesHeaderCell" forIndexPath:indexPath];
+                cell.totalLabel.text = [NSString stringWithFormat:@"共有 (%@) 款游戏",self.count];
                 weakSelf(weakSelf);
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                     strongSelf(strongSelf);
@@ -369,6 +375,7 @@
                 return cell;
             } else if (indexPath.row == 2) {
                 BTTVideoGamesHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesHeaderCell" forIndexPath:indexPath];
+                cell.totalLabel.text = [NSString stringWithFormat:@"共有 (%@) 款游戏",self.count];
                 weakSelf(weakSelf);
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                     strongSelf(strongSelf);
