@@ -81,7 +81,7 @@
 - (void)setupNav {
     [self.navigationController setNavigationBarHidden:YES];
     BTTHomePageHeaderView *nav = [[BTTHomePageHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KIsiPhoneX ? 88 : 64) withNavType:BTTNavTypeMessageAndService];
-    nav.titleLabel.text = @"个人中心";
+    nav.titleLabel.text = @"会员中心";
     [self.view addSubview:nav];
 }
 

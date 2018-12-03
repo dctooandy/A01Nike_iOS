@@ -154,8 +154,8 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTParentID         @"parent_id"
 #define BTTPhone            @"phone"
 
-#define BTTUserLoginAPI        @"/users/login"
-#define BTTUserCreateAPI       @"/users/create"
+#define BTTUserLoginAPI        @"/public/users/login"
+#define BTTUserCreateAPI       @"/A01/users/create"
 #define BTTVerifyCaptcha       @"/otherVerify/captcha"
 #define BTTUserFastRegister    @"/A01/users/fastRegister"
 #define BTTNoLoginMobileCodeAPI @"/otherVerify/send"
