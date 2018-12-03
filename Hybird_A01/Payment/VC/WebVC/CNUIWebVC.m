@@ -52,7 +52,6 @@
 }
 
 - (void)goToBack {
-    self.tabBarController.selectedIndex = 3;
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 @end
