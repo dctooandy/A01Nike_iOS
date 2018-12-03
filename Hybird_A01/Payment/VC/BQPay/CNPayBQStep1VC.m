@@ -112,6 +112,9 @@
     __weak typeof(self) weakSelf = self;
     _nameView.clickHandler = ^(NSString *value, NSInteger index) {
         [weakSelf.view endEditing:YES];
+        if ([weakSelf.nameTF.text isEqualToString:value]) {
+            return;
+        }
         weakSelf.nameTF.text = value;
         weakSelf.bankTF.text = nil;
         weakSelf.bankNames = nil;
