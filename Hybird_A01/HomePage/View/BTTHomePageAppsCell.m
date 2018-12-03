@@ -48,8 +48,9 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    BTTDownloadModel *model = self.downloads[indexPath.row];
-    if (self.clickEventBlock) {
+    
+    BTTDownloadModel *model = self.downloads.count ? self.downloads[indexPath.row] : nil;
+    if (self.clickEventBlock && model) {
         self.clickEventBlock(model);
     }
 }

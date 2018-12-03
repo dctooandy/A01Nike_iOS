@@ -10,6 +10,7 @@
 #import "BTTMeMainModel.h"
 #import "CNPayRequestManager.h"
 #import "CNPaymentModel.h"
+#import "BTTMakeCallSuccessView.h"
 
 @implementation BTTMineViewController (LoadData)
 
@@ -188,8 +189,46 @@
 }
 - (void)loadBtcRate
 {
-    [BTTHttpManager fetchBTCRateWithUseCache:YES];
+    if ([IVNetwork userInfo]) {
+        [BTTHttpManager fetchBTCRateWithUseCache:YES];
+    }
+}
 
+- (void)makeCallWithPhoneNum:(NSString *)phone {
+    NSString *url = nil;
+    NSMutableDictionary *params = @{}.mutableCopy;
+    if ([IVNetwork userInfo]) {
+        url = BTTCallBackMemberAPI;
+        [params setValue:phone forKey:@"phone"];
+        [params setValue:@"memberphone" forKey:@"phone_type"];
+    } else {
+        url = BTTCallBackCustomAPI;
+        [params setValue:phone forKey:@"phone_number"];
+        
+    }
+    [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+        
+        if (result.status) {
+            [self showCallBackSuccessView];
+        } else {
+            NSString *errInfo = [NSString stringWithFormat:@"申请失败,%@",result.message];
+            [MBProgressHUD showError:errInfo toView:nil];
+        }
+    }];
+}
+
+- (void)showCallBackSuccessView {
+    BTTMakeCallSuccessView *customView = [BTTMakeCallSuccessView viewFromXib];
+    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    customView.btnBlock = ^(UIButton *btn) {
+        [popView dismiss];
+    };
 }
 
 

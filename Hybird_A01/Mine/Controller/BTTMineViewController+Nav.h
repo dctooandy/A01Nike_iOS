@@ -7,12 +7,16 @@
 //
 
 #import "BTTMineViewController.h"
+#import "BTTHomePageHeaderView.h"
+#import "JXRegisterManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BTTMineViewController (Nav)
+@interface BTTMineViewController (Nav)<JXRegisterManagerDelegate>
 
-- (void)setupNavBtn;
+@property (nonatomic, strong) BTTHomePageHeaderView *headerView;
+
+- (void)setupNav;
 
 - (void)registerNotification;
 

@@ -8,9 +8,6 @@
 
 #import "BTTCollectionViewController.h"
 
-#define BTTNavHeightNotLogin (KIsiPhoneX ? (88 + 49) : 113)
-#define BTTNavHeightLogin    (KIsiPhoneX ? 88 : 64)
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTHomePageViewController : BTTCollectionViewController
