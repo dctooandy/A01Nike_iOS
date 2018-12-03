@@ -7,7 +7,6 @@
 //
 
 #import "CNPayBQStep2VC.h"
-#import "CNPayBQSuccessVC.h"
 #import "CNPayWechatTipView.h"
 
 @interface CNPayBQStep2VC ()
