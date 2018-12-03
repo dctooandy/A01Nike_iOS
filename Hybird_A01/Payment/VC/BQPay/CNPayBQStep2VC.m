@@ -122,7 +122,7 @@
 }
 
 - (IBAction)copyAction:(UIButton *)sender {
-    [UIPasteboard generalPasteboard].string = [NSString stringWithFormat:@"%@%@%@", _accountNameLb.text, _accountLb.text, _addressLb.text];
+    [UIPasteboard generalPasteboard].string = _accountLb.text;
     [self showSuccess:@"已复制到剪切板"];
 }
 

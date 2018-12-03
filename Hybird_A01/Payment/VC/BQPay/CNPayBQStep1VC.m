@@ -173,6 +173,11 @@
         return;
     }
     
+    if (self.bankTF.text.length == 0) {
+        [self showError:self.bankTF.placeholder];
+        return;
+    }
+    
     self.writeModel.depositBy = self.nameTF.text;
     self.writeModel.amount = self.amountTF.text;
     self.writeModel.chooseBank = self.chooseBank;
