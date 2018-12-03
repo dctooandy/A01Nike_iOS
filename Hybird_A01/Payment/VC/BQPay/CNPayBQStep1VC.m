@@ -78,6 +78,11 @@
         default:
             break;
     }
+    weakSelf(weakSelf);
+    self.nameTF.endedHandler = ^{
+        weakSelf.bankTF.text = nil;
+        weakSelf.bankNames = nil;
+    };
 }
 
 /// 刷新数据
@@ -93,9 +98,44 @@
 
 - (IBAction)selectedBank:(UIButton *)sender {
     [self.view endEditing:YES];
-    if (!self.bankNames) {
+    if (self.nameTF.text.length == 0) {
+        [self showError:@"请输入姓名"];
         return;
     }
+    if (!self.bankNames) {
+        [self BQGetBank];
+        return;
+    }
+    [self selectBank];
+}
+
+- (void)BQGetBank {
+    [self showLoading];
+    __weak typeof(self) weakSelf = self;
+    // 获取银行卡列表
+    [CNPayRequestManager paymentGetBankListWithType:NO depositor:self.nameTF.text referenceId:nil completeHandler:^(IVRequestResultModel *result, id response) {
+        [weakSelf hideLoading];
+        if (result.status) {
+            /// 数据解析
+            NSArray *array = result.data[@"bankList"];
+            NSArray *bankList = [CNPayBankCardModel arrayOfModelsFromDictionaries:array error:nil];
+            if (bankList.count == 0) {
+                [self showError:result.message];
+                return;
+            }
+            NSMutableArray *bankNames = [NSMutableArray array];
+            for (CNPayBankCardModel *model in bankList) {
+                [bankNames addObject:model.bankname];
+            }
+            weakSelf.bankNames = [bankNames copy];
+            [weakSelf selectBank];
+            return;
+        }
+        [weakSelf showError:result.message];
+    }];
+}
+
+- (void)selectBank {
     weakSelf(weakSelf);
     [BRStringPickerView showStringPickerWithTitle:_bankTF.placeholder dataSource:self.bankNames defaultSelValue:self.bankTF.text resultBlock:^(NSString * selectValue) {
         if ([weakSelf.bankTF.text isEqualToString:selectValue]) {
@@ -109,7 +149,6 @@
 
 - (IBAction)submitAction:(UIButton *)sender {
     [self.view endEditing:YES];
-    [self goToStep:1];return;
     
     NSString *text = _amountTF.text;
     
@@ -138,12 +177,6 @@
     self.writeModel.amount = self.amountTF.text;
     
     
-    if (self.paymentModel.paymentType == CNPaymentDeposit) {
-        [self depositGetBank:sender];
-        return;
-    }
-    
-    
     // 下面是BQ
     self.writeModel.chooseBank = self.paymentModel.bankList.firstObject;
     self.writeModel.BQType = [self getBQType];
@@ -155,37 +188,6 @@
     }
     // 提交订单
     [self sumbitBill:sender];
-}
-
-- (void)depositGetBank:(UIButton *)sender {
-    if (sender.selected) {
-        return;
-    }
-    sender.selected = YES;
-    
-    __weak typeof(self) weakSelf = self;
-    __weak typeof(sender) weakSender = sender;
-    // 获取银行卡列表
-    [CNPayRequestManager paymentGetBankListWithType:YES depositor:self.nameTF.text referenceId:nil completeHandler:^(IVRequestResultModel *result, id response) {
-        sender.selected = NO;
-        if (result.status) {
-            /// 数据解析
-            NSError *error;
-            NSArray *array = [CNPayBankCardModel arrayOfModelsFromDictionaries:result.data error:&error];
-            if (array.count == 0) {
-                weakSender.enabled = NO;
-                return;
-            }
-            weakSelf.writeModel.chooseBank = array.firstObject;
-            [self goToStep:1];
-        } else {
-            if (result.code_system == 99000013) {
-                weakSender.enabled = NO;
-            } else {
-                [weakSelf showError:result.message];
-            }
-        }
-    }];
 }
 
 - (void)sumbitBill:(UIButton *)sender {
