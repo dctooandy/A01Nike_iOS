@@ -71,18 +71,10 @@
     [self setupCollectionView];
     [self loadPaymentDefaultData];
     [self loadMeAllData];
-    [self setupNavBtn];
     [self registerNotification];
     _webViewVC = [[BTTBaseWebViewController alloc] init];
     
     
-}
-
-- (void)setupNav {
-    [self.navigationController setNavigationBarHidden:YES];
-    BTTHomePageHeaderView *nav = [[BTTHomePageHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KIsiPhoneX ? 88 : 64) withNavType:BTTNavTypeMessageAndService];
-    nav.titleLabel.text = @"会员中心";
-    [self.view addSubview:nav];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

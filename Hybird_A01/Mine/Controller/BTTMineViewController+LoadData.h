@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadPaymentDefaultData;
 
+- (void)makeCallWithPhoneNum:(NSString *)phone;
+
 
 @end
 

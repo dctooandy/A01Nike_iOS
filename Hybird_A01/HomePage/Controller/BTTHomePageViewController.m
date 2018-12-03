@@ -160,7 +160,7 @@
                 BTTDownloadModel *model = value;
                 strongSelf(strongSelf);
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-                vc.webConfigModel.url = model.iosLink;
+                vc.webConfigModel.url = model.iosLink.length ? model.iosLink : model.androidLink;
                 vc.webConfigModel.newView = YES;
                 vc.webConfigModel.theme = @"outside";
                 [strongSelf.navigationController pushViewController:vc animated:YES];
@@ -257,7 +257,7 @@
                 BTTDownloadModel *model = value;
                 strongSelf(strongSelf);
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-                vc.webConfigModel.url = model.iosLink;
+                vc.webConfigModel.url = model.iosLink.length ? model.iosLink : model.androidLink;
                 vc.webConfigModel.newView = YES;
                 vc.webConfigModel.theme = @"outside";
                 [strongSelf.navigationController pushViewController:vc animated:YES];
