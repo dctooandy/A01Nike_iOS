@@ -8,12 +8,26 @@
 
 #import "BTTVideoGamesHeaderCell.h"
 
+@interface BTTVideoGamesHeaderCell ()
+
+@property (weak, nonatomic) IBOutlet UIButton *searchBtn;
+
+
+@end
+
 @implementation BTTVideoGamesHeaderCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.backgroundColor = [UIColor colorWithHexString:@"212229"];
     self.mineSparaterType = BTTMineSparaterTypeNone;
+}
+
+
+- (IBAction)searchBtnClick:(UIButton *)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
 }
 
 @end

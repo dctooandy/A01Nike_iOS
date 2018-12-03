@@ -19,9 +19,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ch2-Rf-g41">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_1" translatesAutoresizingMaskIntoConstraints="NO" id="Ch2-Rf-g41">
                         <rect key="frame" x="15" y="15" width="345" height="90"/>
-                        <color key="backgroundColor" red="0.81960784310000001" green="0.21960784310000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="90" id="aKG-NX-P4u"/>
                         </constraints>
@@ -38,39 +38,44 @@
                             <constraint firstAttribute="width" constant="20" id="4ZQ-Pp-Ox7"/>
                             <constraint firstAttribute="height" constant="20" id="WpK-kH-uhc"/>
                         </constraints>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <state key="normal" backgroundImage="videogames_collect_normal"/>
                         <state key="selected" backgroundImage="videogames_collect_select"/>
+                        <connections>
+                            <action selector="collectionBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="0MS-oP-Rb6"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DH9-wj-bgb">
                         <rect key="frame" x="15" y="120" width="37" height="20"/>
-                        <color key="backgroundColor" red="0.14117647059999999" green="0.52941176469999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="TVw-vo-J9b"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title=" 20线 ">
+                        <state key="normal" title=" 20线 " backgroundImage="videogames_label_1">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="piw-1j-EtB">
                         <rect key="frame" x="60" y="120" width="37" height="20"/>
-                        <color key="backgroundColor" red="0.14117647059999999" green="0.52941176469999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="1WS-Aq-jrV"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title=" 20线 ">
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" title=" 20线 " backgroundImage="videogames_label_1">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axc-Aj-KL8">
                         <rect key="frame" x="105" y="120" width="37" height="20"/>
-                        <color key="backgroundColor" red="0.14117647059999999" green="0.52941176469999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="awu-kl-42P"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title=" 20线 ">
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <state key="normal" title=" 20线 " backgroundImage="videogames_label_1">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                     </button>
@@ -101,16 +106,23 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
+                <outlet property="collectBtn" destination="ht6-kr-CYd" id="BEi-9m-kGK"/>
                 <outlet property="gameIcon" destination="Ch2-Rf-g41" id="PHd-zq-ced"/>
                 <outlet property="gameIconHeightConstants" destination="aKG-NX-P4u" id="DZE-R8-ES3"/>
+                <outlet property="label1" destination="DH9-wj-bgb" id="ZfA-96-LQj"/>
+                <outlet property="label2" destination="piw-1j-EtB" id="RHb-Lq-qbc"/>
+                <outlet property="label3" destination="axc-Aj-KL8" id="Vj0-WA-7oo"/>
                 <outlet property="leftConstants" destination="7wL-SV-6gV" id="Scr-2z-mzy"/>
                 <outlet property="rightConstants" destination="T21-sS-zNt" id="yZL-KL-bae"/>
+                <outlet property="titleLabel" destination="aKT-hr-jCy" id="Ip5-cb-wZV"/>
             </connections>
-            <point key="canvasLocation" x="-334" y="122"/>
+            <point key="canvasLocation" x="-887" y="-49"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="default_1" width="300" height="200"/>
         <image name="videogames_collect_normal" width="20" height="20"/>
         <image name="videogames_collect_select" width="20" height="20"/>
+        <image name="videogames_label_1" width="32" height="15"/>
     </resources>
 </document>

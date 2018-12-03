@@ -45,11 +45,11 @@ PODS:
     - UICKeyChainStore (~> 2.1.2)
     - YTKNetwork (~> 2.0.4)
     - ZipArchive (~> 1.4.0)
-  - IVWebViewLibrary (0.0.11):
-    - IVWebViewLibrary/IVWebViewLibrary (= 0.0.11)
+  - IVWebViewLibrary (0.0.12):
+    - IVWebViewLibrary/IVWebViewLibrary (= 0.0.12)
     - JSONModel (~> 1.7.0)
     - MJExtension (~> 3.0.15.1)
-  - IVWebViewLibrary/IVWebViewLibrary (0.0.11):
+  - IVWebViewLibrary/IVWebViewLibrary (0.0.12):
     - JSONModel (~> 1.7.0)
     - MJExtension (~> 3.0.15.1)
   - JSONModel (1.7.0)
@@ -143,7 +143,7 @@ CHECKOUT OPTIONS:
     :commit: f6d380d682c99c382995e7cdb98070e1911e7155
     :git: http://10.66.72.115/mobile-iOS/IVNetworkLibrary.git
   IVWebViewLibrary:
-    :commit: 4fa5f040f8d446504cdf8ab990860df7355cbf1c
+    :commit: a18c38d4dcbc2611039bf31b5df2d9e1e391eabf
     :git: http://10.66.72.115/mobile-iOS/IVWebViewLibrary.git
 
 SPEC CHECKSUMS:
@@ -157,7 +157,7 @@ SPEC CHECKSUMS:
   IVGameLibrary: 80c96b9f32be77496bad9e02722a5d649e575bd6
   IVHeartPacketLibrary: a93b7de9ba49911aa09d39250f9e3d96036a2ed0
   IVNetworkLibrary: d9d58fcf009bb89468620ab482774dcaae6f49aa
-  IVWebViewLibrary: a185c15927b88cada7a5c7cf66430d59e64aa1d3
+  IVWebViewLibrary: b5793d2e4423a940f0aefe0217e3c820d5ab2a74
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
@@ -176,4 +176,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 1197b9931a9000ad55a3bdd54269ad8fe40fdf05
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.6.0.beta.1
