@@ -101,7 +101,11 @@
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="321" height="174"/>
             <connections>
+                <outlet property="accountNameLb" destination="C1d-4B-MRe" id="Dud-pB-ESh"/>
+                <outlet property="addressLb" destination="2nB-i6-q8w" id="62j-RG-vsA"/>
+                <outlet property="descLb" destination="Ioo-Et-87r" id="sEt-RQ-Dnz"/>
                 <outlet property="deteletBtn" destination="W1g-rg-YhJ" id="VP1-1L-A9c"/>
+                <outlet property="nameLb" destination="62C-99-peG" id="rDe-LB-YIJ"/>
             </connections>
             <point key="canvasLocation" x="354.39999999999998" y="209.59520239880061"/>
         </collectionViewCell>

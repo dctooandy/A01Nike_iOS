@@ -15,6 +15,7 @@
 #import "CNPayRequestManager.h"
 #import "CNPayConstant.h"
 #import "CNPayBankView.h"
+#import "CNPayDepositNameModel.h"
 
 /// 顶部渠道单元尺寸
 #define kPayChannelItemSize CGSizeMake(102, 132)
@@ -75,8 +76,7 @@
 }
 
 - (void)addBankView {
-    self.bankView.hidden = NO;
-    self.bankViewHeight.constant = 180;
+    [self getManualDeposit];
 }
 
 - (void)removeBankView {
@@ -403,4 +403,26 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
+// 获取历史存款人姓名
+- (void)getManualDeposit {
+    __weak typeof(self) weakSelf = self;
+    [CNPayRequestManager paymentGetDepositNameWithType:YES CompleteHandler:^(IVRequestResultModel *result, id response) {
+        if (result.status) {
+            [weakSelf configNameView:result.data];
+        }
+    }];
+}
+
+- (void)configNameView:(NSArray *)array {
+    NSArray *modelArray = [CNPayDepositNameModel arrayOfModelsFromDictionaries:array error:nil];
+    if (modelArray.count == 0) {
+        [self removeBankView];
+        return;
+    }
+    self.bankView.hidden = NO;
+    self.bankViewHeight.constant = 180;
+    [self.bankView reloadData:modelArray];
+}
+
 @end

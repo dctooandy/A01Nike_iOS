@@ -8,6 +8,14 @@
 
 #import "CNPayDepostiBankCell.h"
 
+@interface CNPayDepostiBankCell ()
+@property (weak, nonatomic) IBOutlet UILabel *nameLb;
+@property (weak, nonatomic) IBOutlet UILabel *descLb;
+@property (weak, nonatomic) IBOutlet UILabel *accountNameLb;
+@property (weak, nonatomic) IBOutlet UILabel *addressLb;
+
+@end
+
 @implementation CNPayDepostiBankCell
 
 - (void)awakeFromNib {
@@ -17,6 +25,13 @@
 
 - (IBAction)delete:(id)sender {
     !_deleteHandler ?: _deleteHandler();
+}
+
+- (void)updateContent:(CNPayDepositNameModel *)model {
+    self.nameLb.text = model.bank_name;
+    self.descLb.text = model.deposit_type;
+    self.accountNameLb.text = model.deposit_name;
+    self.addressLb.text = model.deposit_location;
 }
 
 @end
