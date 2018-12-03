@@ -113,10 +113,7 @@
     self.bankNameLb.text = bankModel.bankname;
     self.accountNameLb.text = bankModel.accountname;
     self.accountLb.text  = bankModel.accountnumber;
-    self.addressLb.text  = [NSString stringWithFormat:@"%@ %@ %@",
-                            bankModel.bankprovince,
-                            bankModel.bankcity,
-                            bankModel.bankaddress];
+    self.addressLb.text  = [NSString stringWithFormat:@"%@ %@ %@", bankModel.bankprovince, bankModel.bankcity, bankModel.bankaddress];
 }
 
 - (IBAction)copyAction:(UIButton *)sender {
@@ -129,10 +126,7 @@
         [self popToRootViewController];
         return;
     }
-    // BQFast
-//    CNWKWebVC *payWebVC = [[CNWKWebVC alloc] initWithURLString:self.model.chooseBank.bankurl];
-//    [self pushViewController:payWebVC];
-    [self pushUIWebViewWithURLString:self.writeModel.chooseBank.bankurl title:sender.currentTitle];
+    [self pushUIWebViewWithURLString:self.writeModel.chooseBank.bankurl title:self.paymentModel.paymentTitle];
 }
 
 - (IBAction)finishPay:(id)sender {

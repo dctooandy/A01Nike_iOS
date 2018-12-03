@@ -143,12 +143,8 @@
 }
 
 - (void)pushUIWebViewWithURLString:(NSString *)url title:(NSString *)title {
-    WebConfigModel *webConfig = [[WebConfigModel alloc] init];
-//    webConfig.url = url;
-//    webConfig.newView = YES;
-//    CNUIWebVC *payWebVC = [[CNUIWebVC alloc] initWithWebConfigModel:webConfig];
-//    payWebVC.title = title
-//    [self pushViewController:payWebVC];
+    CNUIWebVC *payWebVC = [[CNUIWebVC alloc] initWithUrl:url title:title];
+    [self pushViewController:payWebVC];
 }
 
 /// 栈顶推出控制器

@@ -175,17 +175,8 @@
     
     self.writeModel.depositBy = self.nameTF.text;
     self.writeModel.amount = self.amountTF.text;
-    
-    
-    // 下面是BQ
-    self.writeModel.chooseBank = self.paymentModel.bankList.firstObject;
+    self.writeModel.chooseBank = self.chooseBank;
     self.writeModel.BQType = [self getBQType];
-    if (!self.writeModel.chooseBank) {
-        self.bottomTipView.hidden = NO;
-        self.bottomTipViewHeight.constant = 65;
-        sender.enabled = NO;
-        return;
-    }
     // 提交订单
     [self sumbitBill:sender];
 }
@@ -204,16 +195,13 @@
             CNPayBankCardModel *model = [[CNPayBankCardModel alloc] initWithDictionary:result.data error:nil];
             if (!model) {
                 weakSender.enabled = NO;
+                [weakSelf showError:@"系统错误，请联系客服"];
                 return;
             }
             weakSelf.writeModel.chooseBank = model;
             [weakSelf goToStep:1];
         } else {
-            if (result.code_system == 99000013) {
-                weakSender.enabled = NO;
-            } else {
-                [weakSelf showError:result.message]; 
-            }
+            [weakSelf showError:result.message];
         }
     }];
 }

@@ -15,9 +15,9 @@ NSString * const kPaymentValidate       = @"public/payment/isShutdown";
 /// 支付接口（app支付...）
 NSString * const kPaymentOnlinePay      = @"public/payment/onlinePay";
 /// 网银快速充值，线下存款，微信支付生成订单
-NSString * const kPaymentOfflinePayBill = @"B01/payment/quickBankPay";
+NSString * const kPaymentOfflinePayBill = @"public/payment/quickBankPay";
 /// 创建手工存款提案
-NSString * const kPaymentDepositPay     = @"B01/deposit/createManual";
+NSString * const kPaymentDepositPay     = @"public/deposit/createManual";
 /// 手工存款获取历史存款人姓名
 NSString * const kPaymentGetDepositName = @"A01/deposit/getDepositorNames";
 /// 删除手工存款历史存款人姓名

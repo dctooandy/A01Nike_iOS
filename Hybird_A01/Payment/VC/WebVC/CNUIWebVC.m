@@ -27,6 +27,17 @@
     return self;
 }
 
+- (instancetype)initWithUrl:(NSString *)url title:(NSString *)title {
+    if (self = [super init]) {
+        WebConfigModel *webConfig = [[WebConfigModel alloc] init];
+        webConfig.url = url;
+        webConfig.newView = YES;
+        self.webConfigModel = webConfig;
+        self.title = title;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
