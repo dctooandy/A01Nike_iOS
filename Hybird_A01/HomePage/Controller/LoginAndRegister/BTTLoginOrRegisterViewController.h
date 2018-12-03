@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger wrongPwdNum;  ///< 密码错误次数
 
+@property (nonatomic, copy) NSString *uuid; ///< 验证码返回的uuid
+
 @end
 
 NS_ASSUME_NONNULL_END
