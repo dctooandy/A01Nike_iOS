@@ -31,23 +31,28 @@ static const char *BTTNextGroupKey = "nextGroup";
     [self loadHeadersData];
     [self loadGamesData];
     dispatch_group_t group = dispatch_group_create();
-    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self loadMainData];
+    dispatch_queue_t queue = dispatch_queue_create("homepage.data", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_group_async(group, queue, ^{
+        dispatch_group_enter(group);
+        [self loadMainData:group];
     });
     
-    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self loadScrollText];
+    dispatch_group_async(group, queue, ^{
+        dispatch_group_enter(group);
+        [self loadScrollText:group];
     });
     
-    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self loadOtherData];
+    dispatch_group_async(group, queue, ^{
+        dispatch_group_enter(group);
+        [self loadOtherData:group];
     });
     
-    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self loadHightlightsBrand];
+    dispatch_group_async(group, queue, ^{
+        dispatch_group_enter(group);
+        [self loadHightlightsBrand:group];
     });
     
-    dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_group_notify(group,queue, ^{
         [self setupElements];
         [self endRefreshing];
         
@@ -56,25 +61,29 @@ static const char *BTTNextGroupKey = "nextGroup";
 
 - (void)refreshDatasOfHomePage {
     dispatch_group_t group = dispatch_group_create();
-    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self loadMainData];
+    dispatch_queue_t queue = dispatch_queue_create("homepage.data", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_group_async(group, queue, ^{
+        dispatch_group_enter(group);
+        [self loadMainData:group];
     });
     
-    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self loadScrollText];
+    dispatch_group_async(group, queue, ^{
+        dispatch_group_enter(group);
+        [self loadScrollText:group];
     });
     
-    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self loadOtherData];
+    dispatch_group_async(group, queue, ^{
+        dispatch_group_enter(group);
+        [self loadOtherData:group];
     });
     
-    dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_group_notify(group,queue, ^{
         [self setupElements];
         [self endRefreshing];
     });
 }
 
-- (void)loadScrollText {
+- (void)loadScrollText:(dispatch_group_t)group {
     [IVNetwork sendUseCacheRequestWithSubURL:@"app/getAnnouments" paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",result.data);
         NSArray *data = result.data;
@@ -95,6 +104,7 @@ static const char *BTTNextGroupKey = "nextGroup";
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.collectionView reloadData];
         });
+        dispatch_group_leave(group);
     }];
 }
 
@@ -180,7 +190,7 @@ static const char *BTTNextGroupKey = "nextGroup";
     };
 }
 
-- (void)loadMainData {
+- (void)loadMainData:(dispatch_group_t)group {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     NSString *date_start = [PublicMethod getCurrentTimesWithFormat:@"YYYY-MM-dd"];
     date_start = [NSString stringWithFormat:@"%@ 00:00:00",date_start];
@@ -221,10 +231,11 @@ static const char *BTTNextGroupKey = "nextGroup";
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.collectionView reloadData];
         });
+        dispatch_group_leave(group);
     }];
 }
 
-- (void)loadOtherData {
+- (void)loadOtherData:(dispatch_group_t)group {
     [IVNetwork sendUseCacheRequestWithSubURL:BTTIndexBannerDownloads paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.code_http == 200) {
@@ -260,10 +271,11 @@ static const char *BTTNextGroupKey = "nextGroup";
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.collectionView reloadData];
         });
+        dispatch_group_leave(group);
     }];
 }
 
-- (void)loadHightlightsBrand {
+- (void)loadHightlightsBrand:(dispatch_group_t)group {
     [IVNetwork sendUseCacheRequestWithSubURL:BTTBrandHighlights paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.code_http == 200) {
@@ -275,6 +287,7 @@ static const char *BTTNextGroupKey = "nextGroup";
                 }
             }
         }
+        dispatch_group_leave(group);
     }];
 }
 

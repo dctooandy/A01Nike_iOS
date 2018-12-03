@@ -48,7 +48,7 @@
 
 - (void)loadGamesListAndGameAmount {
     [self loadMainData];
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_queue_t queue = dispatch_queue_create("accountBlance.data", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_enter(group);
     dispatch_async(queue, ^{
