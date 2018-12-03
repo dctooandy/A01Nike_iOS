@@ -219,6 +219,7 @@
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         if (result.status) {
             [[weakSelf getVerifyCell] countDown];
+            [MBProgressHUD showSuccess:@"验证码已发送，请注意查收" toView:nil];
         } else {
             [MBProgressHUD showError:result.message toView:weakSelf.view];
         }
@@ -230,6 +231,7 @@
     params[@"type"] = @"2";
     params[@"send_to"] = [self getMailTF].text;
     params[@"code"] = [self getCodeTF].text;
+    NSString *url = @"A01/verify/newBind";
     NSString *successStr = nil;
     switch (self.codeType) {
         case BTTSafeVerifyTypeBindEmail:
@@ -237,6 +239,7 @@
             break;
         case BTTSafeVerifyTypeVerifyEmail:
             params[@"v_type"] = @"4";
+            url = @"verify/check";
             successStr = @"验证成功!";
             break;
         case BTTSafeVerifyTypeChangeEmail:
@@ -248,15 +251,17 @@
     }
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [IVNetwork sendRequestWithSubURL:@"A01/verify/newBind" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-        if (result.status && result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
+        if (result.status) {
             if (successStr) {
                 [MBProgressHUD showSuccess:successStr toView:nil];
             }
-            NSString *email = result.data[@"val"];
-            [IVNetwork updateUserInfo:@{@"email" : email}];
-            [BTTHttpManager fetchBindStatusWithUseCache:YES completionBlock:nil];
+            if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
+                NSString *email = result.data[@"val"];
+                [IVNetwork updateUserInfo:@{@"email" : email}];
+                [BTTHttpManager fetchBindStatusWithUseCache:YES completionBlock:nil];
+            }
             switch (self.codeType) {
                 case BTTSafeVerifyTypeBindEmail:
                 case BTTSafeVerifyTypeChangeEmail:
