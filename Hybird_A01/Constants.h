@@ -256,7 +256,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 // 请求游戏列表
 
-#define BTTVideoGamesList            @"/public/game/slotGameSupportPage"
+#define BTTVideoGamesList            @"/A01/game/slotGameSupportPage"
 
 // 获取收藏列表
 
