@@ -7,8 +7,11 @@
 //
 
 #import "CNPayBankView.h"
+#import "CNPayDepostiBankCell.h"
 
-@interface CNPayBankView ()
+#define kBankCellIndentifier  @"CNPayDepostiBankCell"
+
+@interface CNPayBankView () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *chargeBtn;
@@ -40,6 +43,27 @@
     contentView.frame = self.bounds;
     contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleHeight;
     [self addSubview:contentView];
+    [self.collectionView registerNib:[UINib nibWithNibName:kBankCellIndentifier bundle:nil] forCellWithReuseIdentifier:kBankCellIndentifier];
+}
+
+#pragma mark- UICollectionViewDelegate, UICollectionViewDataSource
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 10;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CNPayDepostiBankCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBankCellIndentifier forIndexPath:indexPath];
+    cell.deteletBtn.hidden = !self.chargeBtn.selected;
+    cell.deleteHandler = ^{
+        
+    };
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(315, 115);
 }
 
 - (IBAction)submit:(UIButton *)sender {
@@ -47,9 +71,4 @@
     [self.collectionView reloadData];
 }
 
-- (void)setHidden:(BOOL)hidden {
-    [super setHidden:hidden];
-    self.label.hidden = hidden;
-    self.chargeBtn.hidden = hidden;
-}
 @end
