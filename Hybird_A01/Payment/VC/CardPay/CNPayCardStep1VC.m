@@ -32,7 +32,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self setViewHeight:500 fullScreen:NO];
+    [self setViewHeight:350 fullScreen:NO];
 }
 
 - (void)configPreSettingMessage {

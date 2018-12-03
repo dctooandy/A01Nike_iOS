@@ -44,7 +44,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self configUI];
-    [self setViewHeight:880 fullScreen:YES];
+    [self addBankView];
+    [self setViewHeight:550 fullScreen:NO];
 }
 
 - (void)configUI {

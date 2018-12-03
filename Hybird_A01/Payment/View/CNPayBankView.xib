@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CNPayBankView">
+            <connections>
+                <outlet property="chargeBtn" destination="vgg-8a-LVI" id="74M-HS-PuA"/>
+                <outlet property="collectionView" destination="cWN-Sc-wZY" id="T9K-YM-YAv"/>
+                <outlet property="label" destination="MuB-tj-hfC" id="r7K-fL-EKz"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vhe-Rj-VKP">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="历史汇款方式信息：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MuB-tj-hfC">
+                            <rect key="frame" x="18" y="20" width="147" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.50980392159999999" green="0.52549019610000003" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgg-8a-LVI">
+                            <rect key="frame" x="305" y="0.0" width="70" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="Xmk-VA-FnQ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="管理">
+                                <color key="titleColor" red="0.21568627450980393" green="0.61960784313725492" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="submit:" destination="-1" eventType="touchUpInside" id="XaE-uH-Wx4"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="9zR-zE-zOJ"/>
+                        <constraint firstItem="vgg-8a-LVI" firstAttribute="top" secondItem="vhe-Rj-VKP" secondAttribute="top" id="ASC-hr-70i"/>
+                        <constraint firstAttribute="bottom" secondItem="vgg-8a-LVI" secondAttribute="bottom" id="DPD-Jg-l3n"/>
+                        <constraint firstItem="MuB-tj-hfC" firstAttribute="leading" secondItem="vhe-Rj-VKP" secondAttribute="leading" constant="18" id="IXG-PS-4AV"/>
+                        <constraint firstItem="MuB-tj-hfC" firstAttribute="centerY" secondItem="vhe-Rj-VKP" secondAttribute="centerY" id="MR8-4d-mLk"/>
+                        <constraint firstAttribute="trailing" secondItem="vgg-8a-LVI" secondAttribute="trailing" id="uBk-Zj-wRu"/>
+                    </constraints>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="cWN-Sc-wZY">
+                    <rect key="frame" x="0.0" y="60" width="375" height="607"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="Z0H-3h-Sjl">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="vuQ-9n-8eq"/>
+                        <outlet property="delegate" destination="-1" id="xbC-9H-uwy"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" red="0.12549019607843137" green="0.13333333333333333" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="vhe-Rj-VKP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BfX-My-fip"/>
+                <constraint firstItem="vhe-Rj-VKP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FJg-zz-0cW"/>
+                <constraint firstAttribute="bottom" secondItem="cWN-Sc-wZY" secondAttribute="bottom" id="MPu-Qw-fUG"/>
+                <constraint firstAttribute="trailing" secondItem="vhe-Rj-VKP" secondAttribute="trailing" id="qhl-8F-hgx"/>
+                <constraint firstItem="cWN-Sc-wZY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tnk-YW-4C7"/>
+                <constraint firstAttribute="trailing" secondItem="cWN-Sc-wZY" secondAttribute="trailing" id="x6x-VZ-76F"/>
+                <constraint firstItem="cWN-Sc-wZY" firstAttribute="top" secondItem="vhe-Rj-VKP" secondAttribute="bottom" id="ziH-JC-Zh6"/>
+            </constraints>
+            <point key="canvasLocation" x="122" y="-91"/>
+        </view>
+    </objects>
+</document>

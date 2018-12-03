@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLb;
 @property (weak, nonatomic) IBOutlet CNPayNameTF *nameTF;
 @property (weak, nonatomic) IBOutlet CNPayNormalTF *bankTF;
+@property (weak, nonatomic) IBOutlet UILabel *usuallyLb;
+
 
 @property (weak, nonatomic) IBOutlet UIView *bottomTipView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTipViewHeight;
@@ -40,7 +42,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self setViewHeight:500 fullScreen:NO];
+    [self setViewHeight:450 fullScreen:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

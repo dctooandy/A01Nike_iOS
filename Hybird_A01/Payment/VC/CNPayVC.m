@@ -1,9 +1,9 @@
 //
 //  CNPayVC.m
-//  A05_iPhone
+//  Hybird_A01
 //
-//  Created by cean.q on 2018/9/28.
-//  Copyright © 2018年 WRD. All rights reserved.
+//  Created by cean.q on 2018/11/29.
+//  Copyright © 2018 BTT. All rights reserved.
 //
 
 #import "CNPayVC.h"
@@ -14,24 +14,34 @@
 #import "CNPaymentModel.h"
 #import "CNPayRequestManager.h"
 #import "CNPayConstant.h"
+#import "CNPayBankView.h"
+#import "CNPayDepositNameModel.h"
 
 /// 顶部渠道单元尺寸
 #define kPayChannelItemSize CGSizeMake(102, 132)
 #define kChannelCellIndentifier   @"CNPayChannelCell"
 
 @interface CNPayVC () <UICollectionViewDelegate, UICollectionViewDataSource>
-@property (nonatomic, assign) CNPayChannel defaultChannel;
-@property (nonatomic, strong) UIScrollView *payScrollView;
-@property (nonatomic, strong) UICollectionView *payCollectionView;
-@property (nonatomic, strong) UICollectionViewFlowLayout *layout;
-@property (nonatomic, strong) UIView *contentView;
-@property (nonatomic, strong) UILabel *alertLabel;
-@property (nonatomic, strong) AMSegmentViewController *segmentVC;
+@property (weak, nonatomic) IBOutlet UIScrollView *payScrollView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentWidth;
 
-@property (nonatomic, strong) NSMutableArray<CNPayChannelModel *> *payChannels;
-@property (nonatomic, assign) NSInteger currentSelectedIndex;
+@property (weak, nonatomic) IBOutlet CNPayBankView *bankView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bankViewHeight;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *payCollectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *payCollectionViewHeight;
+
+@property (weak, nonatomic) IBOutlet UIView *stepView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *stepViewHeight;
+
+
+@property (nonatomic, assign) CNPayChannel defaultChannel;
 @property (nonatomic, assign) BOOL hasDefaultChannel;
+@property (nonatomic, assign) NSInteger currentSelectedIndex;
+@property (nonatomic, strong) AMSegmentViewController *segmentVC;
+@property (nonatomic, strong) UILabel *alertLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) NSMutableArray <CNPayChannelModel *> *payChannels;
 @end
 
 @implementation CNPayVC
@@ -46,7 +56,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = kBlackBackgroundColor;
+    self.payScrollView.backgroundColor = kBlackBackgroundColor;
+    self.payCollectionView.backgroundColor = kBlackForgroundColor;
+    self.contentWidth.constant = [UIScreen mainScreen].bounds.size.width;
+    [self.payCollectionView registerNib:[UINib nibWithNibName:kChannelCellIndentifier bundle:nil] forCellWithReuseIdentifier:kChannelCellIndentifier];
     [self fetchPayChannels];
 }
 
@@ -56,23 +69,19 @@
 }
 
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full {
-    if (full) {
-        self.payCollectionView.hidden = YES;
-        self.payCollectionView.frame = CGRectZero;
-        if (height < self.view.frame.size.height) {
-            height = self.view.frame.size.height;
-        }
-    } else {
-        self.payCollectionView.hidden = NO;
-        self.payCollectionView.frame = CGRectMake(0, 0, self.view.bounds.size.width, kPayChannelItemSize.height);
-    }
-    
-    // 调整scrollview内容
-    CGRect frame = self.contentView.frame;
-    frame.size.height = height;
-    self.contentView.frame = frame;
-    self.payScrollView.contentSize = frame.size;
+    self.payCollectionView.hidden = full;
+    self.payCollectionViewHeight.constant = full ? 0: 132;
+    self.stepViewHeight.constant = height;
     [self.payScrollView scrollsToTop];
+}
+
+- (void)addBankView {
+    [self getManualDeposit];
+}
+
+- (void)removeBankView {
+    self.bankView.hidden = YES;
+    self.bankViewHeight.constant = 0;
 }
 
 /// 请求支付渠道信息
@@ -157,7 +166,7 @@
     BTC.payments = [[NSArray alloc] initWithObjects:
                     payments[CNPaymentBTC], nil];
     
-
+    
     /// 支付宝支付
     CNPayChannelModel *ali = [[CNPayChannelModel alloc] init];
     ali.payChannel = CNPayChannelAliApp;
@@ -169,7 +178,7 @@
     CNPayChannelModel *unionPay = [[CNPayChannelModel alloc] init];
     unionPay.payChannel = CNPayChannelUnionApp;
     unionPay.payments = [[NSArray alloc] initWithObjects:
-                        payments[CNPaymentUnionApp], nil];
+                         payments[CNPaymentUnionApp], nil];
     
     
     /// 京东支付
@@ -201,26 +210,26 @@
     CNPayChannelModel *BQWeChat = [[CNPayChannelModel alloc] init];
     BQWeChat.payChannel = CNPayChannelBQWechat;
     BQWeChat.payments = [[NSArray alloc] initWithObjects:
-                       payments[CNPaymentBQWechat], nil];
+                         payments[CNPaymentBQWechat], nil];
     
     /// BQ Ali
     CNPayChannelModel *BQAli = [[CNPayChannelModel alloc] init];
     BQAli.payChannel = CNPayChannelBQAli;
     BQAli.payments = [[NSArray alloc] initWithObjects:
-                       payments[CNPaymentBQAli], nil];
+                      payments[CNPaymentBQAli], nil];
     
     
     /// 微信条码
     CNPayChannelModel *barCode = [[CNPayChannelModel alloc] init];
     barCode.payChannel = CNPayChannelWechatBarCode;
     barCode.payments = [[NSArray alloc] initWithObjects:
-                      payments[CNPaymentWechatBarCode], nil];
+                        payments[CNPaymentWechatBarCode], nil];
     
     /// 币宝支付
     CNPayChannelModel *coin = [[CNPayChannelModel alloc] init];
     coin.payChannel = CNPayChannelCoin;
     coin.payments = [[NSArray alloc] initWithObjects:
-                    payments[CNPaymentCoin], nil];
+                     payments[CNPaymentCoin], nil];
     
     NSArray *array = @[BQFast,BQWeChat,BQAli,deposit,ali,online,QR,unionPay,card,BTC,JD,barCode,coin];
     
@@ -272,7 +281,7 @@
     /// 如果不存在已经打开的支付渠道则展示提示页面
     if (_payChannels.count == 0) {
         [self.view bringSubviewToFront:self.alertLabel];
-
+        
         return;
     }
     _alertLabel.hidden = YES;
@@ -299,21 +308,17 @@
     
     /// 存在已经打开的支付渠道
     if (_segmentVC) {
-        [_payCollectionView reloadData];
         [_segmentVC.view removeFromSuperview];
     }
-    
-    [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionLeft];
+    [_payCollectionView reloadData];
+    [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     
     CNPayContainerVC *payChannelVC = [[CNPayContainerVC alloc] initWithPayChannel:payChannel];
     payChannelVC.payments = _payChannels[_currentSelectedIndex].payments;
     _segmentVC = [[AMSegmentViewController alloc] initWithViewController:payChannelVC];
-    [self.contentView addSubview:_segmentVC.view];
+    [self.stepView addSubview:_segmentVC.view];
     [_segmentVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.contentView);
-        make.right.mas_equalTo(self.contentView);
-        make.bottom.mas_equalTo(self.contentView);
-        make.top.equalTo(self.payCollectionView.mas_bottom).offset(0);
+        make.edges.mas_equalTo(0);
     }];
 }
 
@@ -342,10 +347,10 @@
     if (indexPath.row == _currentSelectedIndex) {
         return;
     }
-
+    [self removeBankView];
     self.currentSelectedIndex = indexPath.row;
     [self.payCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-
+    
     CNPayChannelModel *channel = [_payChannels objectAtIndex:indexPath.row];
     CNPayContainerVC *payChannelVC = [[CNPayContainerVC alloc] initWithPayChannel:channel.payChannel];
     payChannelVC.payments = channel.payments;
@@ -360,54 +365,6 @@
 }
 
 #pragma mark - Getter
-
-- (UIScrollView *)payScrollView {
-    if (!_payScrollView) {
-        _payScrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-        _payScrollView.contentSize = self.view.bounds.size;
-        _payScrollView.backgroundColor = kBlackBackgroundColor;
-        [self.view addSubview:_payScrollView];
-    }
-    return _payScrollView;
-}
-
-- (UIView *)contentView {
-    if (!_contentView) {
-        _contentView = [[UIView alloc] initWithFrame:self.payScrollView.bounds];
-        _contentView.backgroundColor = kBlackBackgroundColor;
-        [self.payScrollView addSubview:_contentView];
-    }
-    return _contentView;
-}
-
-- (UICollectionViewFlowLayout *)layout {
-    if (!_layout) {
-        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-        [layout setMinimumInteritemSpacing:0.0f];
-        [layout setMinimumLineSpacing:5.0f];
-        [layout setScrollDirection: UICollectionViewScrollDirectionHorizontal];
-        layout.itemSize = kPayChannelItemSize;
-        _layout = layout;
-    }
-    return _layout;
-}
-
-- (UICollectionView *)payCollectionView {
-    if (!_payCollectionView) {
-        CGRect frame = CGRectMake(0, 0, self.view.bounds.size.width, kPayChannelItemSize.height);
-        _payCollectionView = [[UICollectionView alloc] initWithFrame:frame collectionViewLayout:self.layout];
-        _payCollectionView.delegate = self;
-        _payCollectionView.dataSource = self;
-        _payCollectionView.backgroundColor = kBlackForgroundColor;
-        _payCollectionView.showsVerticalScrollIndicator = NO;
-        _payCollectionView.showsHorizontalScrollIndicator = NO;
-        _payCollectionView.contentInset = UIEdgeInsetsMake(40, 10, 15, 10);
-        [self.contentView addSubview:_payCollectionView];
-        
-         [_payCollectionView registerNib:[UINib nibWithNibName:kChannelCellIndentifier bundle:nil] forCellWithReuseIdentifier:kChannelCellIndentifier];
-    }
-    return _payCollectionView;
-}
 
 - (UILabel *)alertLabel {
     if (!_alertLabel) {
@@ -436,6 +393,7 @@
 #pragma mark - OverWrite
 
 - (void)goToBack {
+    [self removeBankView];
     UIViewController *vc = self.segmentVC.childViewControllers.firstObject;
     if (vc && [vc isKindOfClass:[CNPayContainerVC class]]) {
         if ([((CNPayContainerVC *)vc) canPopViewController]) {
@@ -445,4 +403,26 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
+// 获取历史存款人姓名
+- (void)getManualDeposit {
+    __weak typeof(self) weakSelf = self;
+    [CNPayRequestManager paymentGetDepositNameWithType:YES CompleteHandler:^(IVRequestResultModel *result, id response) {
+        if (result.status) {
+            [weakSelf configNameView:result.data];
+        }
+    }];
+}
+
+- (void)configNameView:(NSArray *)array {
+    NSArray *modelArray = [CNPayDepositNameModel arrayOfModelsFromDictionaries:array error:nil];
+    if (modelArray.count == 0) {
+        [self removeBankView];
+        return;
+    }
+    self.bankView.hidden = NO;
+    self.bankViewHeight.constant = 180;
+    [self.bankView reloadData:modelArray];
+}
+
 @end

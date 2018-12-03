@@ -119,11 +119,13 @@
 
 /// 手工支付
 - (NSArray<CNPayBaseVC *> *)depositPay:(CNPaymentModel *)payment {
-    CNPayBQStep1VC *step1VC = [[CNPayBQStep1VC alloc] init];
+    CNPayDepositStep1VC *step1VC = [[CNPayDepositStep1VC alloc] init];
+    CNPayDepositStep2VC *step2VC = [[CNPayDepositStep2VC alloc] init];
     CNPayDepositStep3VC *step3VC = [[CNPayDepositStep3VC alloc] init];
     step1VC.paymentModel = payment;
+    step2VC.paymentModel = payment;
     step3VC.paymentModel = payment;
-    return @[step1VC, step3VC];
+    return @[step1VC, step2VC, step3VC];
 }
 
 /// BQ支付 也叫 quickBank

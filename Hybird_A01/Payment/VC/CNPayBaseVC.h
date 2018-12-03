@@ -71,6 +71,7 @@
  @param vc  push 的VC
  */
 - (void)pushViewController:(UIViewController *)vc;
+- (void)popToRootViewController;
 
 /**
  设置当前内容高度
@@ -103,4 +104,5 @@
  */
 - (void)saveToLibraryWithImage:(UIImage *)image;
 
+- (void)addBankView;
 @end

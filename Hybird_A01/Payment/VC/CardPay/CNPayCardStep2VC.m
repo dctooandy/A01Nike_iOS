@@ -24,7 +24,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self setViewHeight:500 fullScreen:YES];
+    [self setViewHeight:350 fullScreen:YES];
     [self configCardValue];
 }
 

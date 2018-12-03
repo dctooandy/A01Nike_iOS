@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CNCacheDataKey.h"
 #import "CNPayWriteModel.h"
 
 
@@ -40,13 +39,20 @@ extern NSInteger const kPayTypeTotalCount;
 
 
 /**
- 手工存款第一步 和 BQ存款第一步 获取历史存款人姓名
+ 手工存款 获取历史存款人姓名
  
  @param isDeposit       手工存款或BQ存款
  @param completeHandler 接口回调
  */
 + (void)paymentGetDepositNameWithType:(BOOL)isDeposit CompleteHandler:(IVRequestCallBack)completeHandler;
 
+/**
+ 手工存款 删除历史存款人姓名
+ 
+ @param requestId       编号
+ @param completeHandler 接口回调
+ */
++ (void)paymentDeleteDepositNameWithId:(NSString *)requestId  CompleteHandler:(IVRequestCallBack)completeHandler;
 
 /**
  手工存款第一步 和 BQ存款第一步 获取银行卡列表

@@ -18,6 +18,8 @@ extern NSString * const kPaymentOfflinePayBill;
 extern NSString * const kPaymentDepositPay;
 /// 手工存款获取历史存款人姓名
 extern NSString * const kPaymentGetDepositName;
+/// 删除手工存款历史存款人姓名
+extern NSString * const kPaymentDeleteDepositName;
 /// BQ存款获取历史存款人姓名
 extern NSString * const kPaymentGetBQName;
 /// 查询银行信息
