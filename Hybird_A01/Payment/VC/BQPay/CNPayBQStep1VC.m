@@ -101,7 +101,14 @@
 
 /// 付款推荐金额
 - (void)configRecommendView {
-    _nameView.dataSource = @[@"哈哈", @"哈哈1", @"哈哈2", @"哈哈", @"哈哈1", @"哈哈2", @"哈哈", @"哈哈1", @"哈哈2"];
+    NSArray *array = [self.paymentModel.depositor componentsSeparatedByString:@";"];
+    if (array.count == 0) {
+        _nameAreaView.hidden = YES;
+        _nameAreaViewHeight.constant = 0;
+        return;
+    }
+    _nameTF.text = array.firstObject;
+    _nameView.dataSource = array;
     __weak typeof(self) weakSelf = self;
     _nameView.clickHandler = ^(NSString *value, NSInteger index) {
         [weakSelf.view endEditing:YES];

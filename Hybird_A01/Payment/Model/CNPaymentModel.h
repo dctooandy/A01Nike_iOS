@@ -61,7 +61,7 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 @property (nonatomic, assign) double minamount;
 @property (nonatomic, assign) NSInteger payid;
 @property (nonatomic, copy) NSArray <CNPayBankCardModel> *bankList;
-
+@property (nonatomic, copy) NSString *depositor;
 #pragma mark - 点卡
 @property (nonatomic, copy) NSArray <CNPayCardModel> *cardList;
 @property (nonatomic, copy) NSString *postUrl;
