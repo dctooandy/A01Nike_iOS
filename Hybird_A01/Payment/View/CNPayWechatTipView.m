@@ -15,22 +15,19 @@
 }
 
 + (void)showWechatTip {
-    [[CNPayWechatTipView tipView] show];
-}
-
-///显示
-- (void)show {
+    CNPayWechatTipView *tipView = [CNPayWechatTipView tipView];
     UIWindow *window = [UIApplication sharedApplication].delegate.window;
-    self.frame = window.bounds;
-    [window addSubview:self];
-}
-
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self removeFromSuperview];
+    tipView.frame = window.bounds;
+    [window addSubview:tipView];
 }
 
 - (IBAction)closeAction:(UIButton *)sender {
     [self removeFromSuperview];
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSInteger index = scrollView.contentOffset.x / scrollView.bounds.size.width;
+    self.pageC.currentPage = index;
+}
+
 @end

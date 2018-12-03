@@ -10,8 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CNPayWechatTipView : UIView
-
+@interface CNPayWechatTipView : UIView <UIScrollViewDelegate>
++ (void)showWechatTip;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageC;
 @end
 
 NS_ASSUME_NONNULL_END

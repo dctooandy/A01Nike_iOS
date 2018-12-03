@@ -8,6 +8,7 @@
 
 #import "CNPayBQStep2VC.h"
 #import "CNPayBQSuccessVC.h"
+#import "CNPayWechatTipView.h"
 
 @interface CNPayBQStep2VC ()
 
@@ -38,8 +39,6 @@
 @property (weak, nonatomic) IBOutlet UIView *twoBtnView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *twoBtnViewHeight;
 
-
-
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) NSInteger second;
 @end
@@ -63,6 +62,11 @@
     if(_second == 0) {
         [self.timer invalidate];
     }
+}
+
+- (void)dealloc {
+    [_timer invalidate];
+    _timer = nil;
 }
 
 - (void)configDifferentUI {
@@ -135,12 +139,7 @@
 }
 
 - (IBAction)seeWeChatPay:(id)sender {
-    
-}
-
-- (void)dealloc {
-    [_timer invalidate];
-    _timer = nil;
+    [CNPayWechatTipView showWechatTip];
 }
 
 @end
