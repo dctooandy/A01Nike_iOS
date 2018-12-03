@@ -44,7 +44,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [NSThread sleepForTimeInterval:BTTLaunchScreenTime];
     self.title = @"首页";
     if ([IVNetwork userInfo]) {
         self.isLogin = YES;
