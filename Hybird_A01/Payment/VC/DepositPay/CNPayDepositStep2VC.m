@@ -32,8 +32,8 @@
 
 - (void)configUI {
     CNPayBankCardModel *bankModel = self.writeModel.chooseBank;
-    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.banklogo.cn_appendH5Domain]];
-    [self.bankBGIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankimage.cn_appendH5Domain] placeholderImage:[UIImage imageNamed:@"pay_bankBGPlaceholder"]];
+    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.banklogo.cn_appendCDN]];
+    [self.bankBGIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankimage.cn_appendCDN] placeholderImage:[UIImage imageNamed:@"pay_bankBG"]];
     self.bankNameLb.text = bankModel.bankname;
     self.bankAccountLb.text = bankModel.bank_account_no;
     self.accountNameLb.text = bankModel.bank_show;

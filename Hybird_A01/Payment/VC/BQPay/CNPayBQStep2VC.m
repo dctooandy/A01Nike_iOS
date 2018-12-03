@@ -109,7 +109,8 @@
     self.depositLb.text = self.writeModel.depositBy;
     self.amountLb.text = bankModel.amount;
     
-    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.banklogo.cn_appendH5Domain]];
+    [self.bankBGIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankimage.cn_appendCDN] placeholderImage:[UIImage imageNamed:@"pay_bankBG"]];
+    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.banklogo.cn_appendCDN]];
     self.bankNameLb.text = bankModel.bankname;
     self.accountNameLb.text = bankModel.accountname;
     self.accountLb.text  = bankModel.accountnumber;
