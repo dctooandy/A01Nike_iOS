@@ -63,13 +63,16 @@
     [parameters setObject:model.login_name forKey:BTTLoginName];
     [parameters setObject:model.password forKey:BTTPassword];
     [parameters setObject:model.timestamp forKey:BTTTimestamp];
-    [parameters setObject:[IVNetwork getDeviceId] forKey:@"uuid"];
+    if (self.uuid.length) {
+        [parameters setObject:self.uuid forKey:@"uuid"];
+    }
     if (model.code.length) {
         [parameters setObject:model.code forKey:@"code"];
     }
     [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTUserLoginAPI paramters:parameters completionBlock:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
+        self.uuid = @"";
         NSLog(@"%@",response);
         if (result.code_http == 200) {
             [[NSUserDefaults standardUserDefaults] setObject:model.login_name forKey:BTTCacheAccountName];
@@ -236,6 +239,9 @@
     [params setObject:model.login_name forKey:BTTLoginName];
     [params setObject:model.password forKey:BTTPassword];
     [params setObject:model.catpcha forKey:@"catpcha"];
+    if (self.uuid.length) {
+        [params setObject:self.uuid forKey:@"uuid"];
+    }
     if (model.parent_id.length) {
         [params setObject:model.parent_id forKey:BTTParentID];
     }
@@ -246,6 +252,7 @@
     [IVNetwork sendRequestWithSubURL:BTTUserCreateAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         [self hideLoading];
+        self.uuid = @"";
         if (result.code_http == 200) {
             if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
                 if (![result.data[@"login_name"] isKindOfClass:[NSNull class]] && result.data[@"login_name"]) {
@@ -321,6 +328,7 @@
                     // 将NSData转为UIImage
                     UIImage *decodedImage = [UIImage imageWithData: decodeData];
                     self.codeImage = decodedImage;
+                    self.uuid = result.data[@"uuid"];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.collectionView reloadData];
                     });
