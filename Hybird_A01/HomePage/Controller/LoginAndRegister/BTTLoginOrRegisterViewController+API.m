@@ -76,7 +76,7 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
             self.wrongPwdNum = 0;
             if ([result.data isKindOfClass:[NSDictionary class]]) {
-                [BTTUserStatusManager loginSuccessWithUserInfo:result.data[@"WSCustomers"]];
+                [BTTUserStatusManager loginSuccessWithUserInfo:result.data];
                 if (isback) {
                     [MBProgressHUD showSuccess:@"登录成功" toView:nil];
                     [self.navigationController popViewControllerAnimated:YES];
