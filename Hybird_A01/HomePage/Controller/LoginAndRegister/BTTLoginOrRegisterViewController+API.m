@@ -63,6 +63,7 @@
     [parameters setObject:model.login_name forKey:BTTLoginName];
     [parameters setObject:model.password forKey:BTTPassword];
     [parameters setObject:model.timestamp forKey:BTTTimestamp];
+    [parameters setObject:[IVNetwork getDeviceId] forKey:@"uuid"];
     if (model.code.length) {
         [parameters setObject:model.code forKey:@"code"];
     }
@@ -74,11 +75,17 @@
             [[NSUserDefaults standardUserDefaults] setObject:model.login_name forKey:BTTCacheAccountName];
             [[NSUserDefaults standardUserDefaults] synchronize];
             self.wrongPwdNum = 0;
-            if (isback) {
-                [MBProgressHUD showSuccess:@"登录成功" toView:nil];
-                [self.navigationController popViewControllerAnimated:YES];
+            if ([result.data isKindOfClass:[NSDictionary class]]) {
+                [BTTUserStatusManager loginSuccessWithUserInfo:result.data[@"WSCustomers"]];
+                if (isback) {
+                    [MBProgressHUD showSuccess:@"登录成功" toView:nil];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            } else {
+                if (result.message.length) {
+                    [MBProgressHUD showError:result.message toView:nil];
+                }
             }
-            [BTTUserStatusManager loginSuccessWithUserInfo:result.data[@"WSCustomers"]];
         } else {
             if (result.code_system == 202020) {
                 [self showAlertWithModle:model];
