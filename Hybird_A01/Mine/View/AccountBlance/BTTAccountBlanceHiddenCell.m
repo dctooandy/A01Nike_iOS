@@ -34,11 +34,16 @@
 
 - (void)setModel:(BTTGamesHallModel *)model {
     _model = model;
-    if (model) {
-        self.nameLabel.text = model.zhName;
-        self.amountLabel.text = model.amount;
-        self.amountLabel.hidden = NO;
+    self.nameLabel.text = model.zhName;
+    self.amountLabel.text = model.amount;
+    if (model.isLoading) {
+        self.activityView.hidden = NO;
+        [self.activityView startAnimating];
+        self.amountLabel.hidden = YES;
+    } else {
         [self.activityView stopAnimating];
+        self.activityView.hidden = YES;
+        self.amountLabel.hidden = NO;
     }
     
 }

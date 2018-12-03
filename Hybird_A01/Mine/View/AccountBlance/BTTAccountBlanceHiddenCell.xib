@@ -31,13 +31,12 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="zHn-oW-9nb">
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="zHn-oW-9nb">
                         <rect key="frame" x="340" y="11" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="pqi-ci-CSx"/>
                             <constraint firstAttribute="width" constant="20" id="qoc-Wc-VBm"/>
                         </constraints>
-                        <color key="color" red="0.81960784310000001" green="0.21960784310000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </activityIndicatorView>
                 </subviews>
             </view>
