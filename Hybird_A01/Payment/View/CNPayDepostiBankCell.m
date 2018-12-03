@@ -15,4 +15,8 @@
     // Initialization code
 }
 
+- (IBAction)delete:(id)sender {
+    !_deleteHandler ?: _deleteHandler();
+}
+
 @end

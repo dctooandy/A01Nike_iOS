@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CNPayDepostiBankCell : UICollectionViewCell
-
+@property (weak, nonatomic) IBOutlet UIButton *deteletBtn;
+@property (copy, nonatomic) dispatch_block_t deleteHandler;
 @end
 
 NS_ASSUME_NONNULL_END

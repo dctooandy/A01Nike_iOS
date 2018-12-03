@@ -42,15 +42,19 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="pay_cardDelete" translatesAutoresizingMaskIntoConstraints="NO" id="a57-qe-v6c">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1g-rg-YhJ">
                                 <rect key="frame" x="284" y="41" width="22" height="22"/>
-                            </imageView>
+                                <state key="normal" image="pay_cardDelete"/>
+                                <connections>
+                                    <action selector="delete:" destination="gTV-IL-0wX" eventType="touchUpInside" id="XJO-gX-n8H"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ZIV-y6-0O7" firstAttribute="leading" secondItem="bQq-32-C9S" secondAttribute="leading" constant="18" id="4K8-Ze-Ps0"/>
-                            <constraint firstAttribute="trailing" secondItem="a57-qe-v6c" secondAttribute="trailing" constant="15" id="av4-vb-Rgg"/>
-                            <constraint firstItem="a57-qe-v6c" firstAttribute="centerY" secondItem="bQq-32-C9S" secondAttribute="centerY" id="bEv-gs-LGW"/>
+                            <constraint firstAttribute="trailing" secondItem="W1g-rg-YhJ" secondAttribute="trailing" constant="15" id="OKb-cf-0wF"/>
+                            <constraint firstItem="W1g-rg-YhJ" firstAttribute="centerY" secondItem="bQq-32-C9S" secondAttribute="centerY" id="XTO-kl-mZn"/>
                             <constraint firstItem="ZIV-y6-0O7" firstAttribute="centerY" secondItem="bQq-32-C9S" secondAttribute="centerY" id="bq6-XV-B4f"/>
                         </constraints>
                     </view>
@@ -96,6 +100,9 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="321" height="174"/>
+            <connections>
+                <outlet property="deteletBtn" destination="W1g-rg-YhJ" id="VP1-1L-A9c"/>
+            </connections>
             <point key="canvasLocation" x="354.39999999999998" y="209.59520239880061"/>
         </collectionViewCell>
     </objects>
