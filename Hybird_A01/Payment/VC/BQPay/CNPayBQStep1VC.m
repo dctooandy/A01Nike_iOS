@@ -113,6 +113,8 @@
     _nameView.clickHandler = ^(NSString *value, NSInteger index) {
         [weakSelf.view endEditing:YES];
         weakSelf.nameTF.text = value;
+        weakSelf.bankTF.text = nil;
+        weakSelf.bankNames = nil;
     };
 }
 
