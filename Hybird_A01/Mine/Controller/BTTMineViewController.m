@@ -238,8 +238,6 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    [self.navigationController pushViewController:[[CNPayVC alloc] initWithChannel:CNPayChannelDeposit] animated:YES];
-    return;
     NSLog(@"%@",@(indexPath.row));
     if (![IVNetwork userInfo]) {
         [MBProgressHUD showError:@"请先登录" toView:nil];
@@ -337,8 +335,8 @@
         }];
     }  else if (indexPath.row >= 3 + self.personalInfos.count && indexPath.row <= 3 + self.personalInfos.count + self.paymentDatas.count - 1) {
         //支付方式点击事件
-        BTTMeMainModel *model = self.paymentDatas[indexPath.row - (3 + self.personalInfos.count)];
-        NSLog(@"%@",model);
+//        BTTMeMainModel *model = self.paymentDatas[indexPath.row - (3 + self.personalInfos.count)];
+        [self.navigationController pushViewController:[[CNPayVC alloc] initWithChannel:CNPayChannelDeposit] animated:YES];
     } else if (indexPath.row >= 4 + self.personalInfos.count + self.paymentDatas.count && indexPath.row <= 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count) {
         BTTMeMainModel *model = self.mainDataOne[indexPath.row - ( 4 + self.personalInfos.count + self.paymentDatas.count)];
         if ([model.name isEqualToString:@"首存优惠"]) {
