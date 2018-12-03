@@ -20,7 +20,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLb;
 @property (weak, nonatomic) IBOutlet CNPayNameTF *nameTF;
 @property (weak, nonatomic) IBOutlet CNPayNormalTF *bankTF;
-@property (weak, nonatomic) IBOutlet UILabel *usuallyLb;
+@property (weak, nonatomic) IBOutlet CNPayAmountRecommendView *nameView;
+@property (weak, nonatomic) IBOutlet UIView *nameAreaView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameAreaViewHeight;
 
 
 @property (weak, nonatomic) IBOutlet UIView *bottomTipView;
@@ -38,6 +40,7 @@
     [self configDifferentUI];
     // 初始化数据
     [self updateAllContentWithModel:self.paymentModel];
+    [self configRecommendView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -94,6 +97,16 @@
     } else {
         self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f", model.minamount];
     }
+}
+
+/// 付款推荐金额
+- (void)configRecommendView {
+    _nameView.dataSource = @[@"哈哈", @"哈哈1", @"哈哈2", @"哈哈", @"哈哈1", @"哈哈2", @"哈哈", @"哈哈1", @"哈哈2"];
+    __weak typeof(self) weakSelf = self;
+    _nameView.clickHandler = ^(NSString *value, NSInteger index) {
+        [weakSelf.view endEditing:YES];
+        weakSelf.nameTF.text = value;
+    };
 }
 
 - (IBAction)selectedBank:(UIButton *)sender {
