@@ -173,15 +173,11 @@
     
     /// 提交
     __weak typeof(self) weakSelf =  self;
-    [CNPayRequestManager paymentWithPayType:[self getPaytypeString]
-                                      payId:self.paymentModel.payid
-                                     amount:text
-                                   bankCode:self.chooseBank.bankcode
-                            completeHandler:^(IVRequestResultModel *result, id response) {
-                                sender.selected = NO;
-                                __strong typeof(weakSelf) strongSelf = weakSelf;
-                                [strongSelf handlerResult:result];
-                            }];
+    [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:self.chooseBank.bankcode completeHandler:^(IVRequestResultModel *result, id response) {
+        sender.selected = NO;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf handlerResult:result];
+    }];
     
 }
 
@@ -201,7 +197,6 @@
     }
     self.writeModel.orderModel = orderModel;
     self.writeModel.depositType = self.paymentModel.paymentTitle;
-    [self goToStep:1];
 }
 
 - (IBAction)bibaoAction:(UIButton *)sender {
