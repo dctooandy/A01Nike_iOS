@@ -156,6 +156,10 @@
     [self.payVC.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)popToRootViewController {
+    [self.payVC.navigationController popToRootViewControllerAnimated:YES];
+}
+
 /// 查找顶部视图控制器
 - (UINavigationController *)topNavigationController:(UIViewController *)vc {
     if ([vc isKindOfClass:[UINavigationController class]]) {
@@ -257,6 +261,10 @@
             }
         });
     }];
+}
+
+- (void)addBankView {
+    [self.payVC addBankView];
 }
 
 #pragma mark - 支付后提示页面

@@ -19,7 +19,9 @@ NSString * const kPaymentOfflinePayBill = @"B01/payment/quickBankPay";
 /// 创建手工存款提案
 NSString * const kPaymentDepositPay     = @"B01/deposit/createManual";
 /// 手工存款获取历史存款人姓名
-NSString * const kPaymentGetDepositName = @"B01/deposit/getManualDeposit";
+NSString * const kPaymentGetDepositName = @"A01/deposit/getDepositorNames";
+/// 删除手工存款历史存款人姓名
+NSString * const kPaymentDeleteDepositName = @"A01/deposit/delDepositorName";
 /// BQ存款获取历史存款人姓名
 NSString * const kPaymentGetBQName      = @"B01/payment/getQuickBankDeposit";
 /// 查询银行信息
