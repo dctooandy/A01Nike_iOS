@@ -78,7 +78,6 @@
     if ([model.name isEqualToString:@"卡号"]) {
         self.textField.keyboardType = UIKeyboardTypeNumberPad;
     }
-    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
