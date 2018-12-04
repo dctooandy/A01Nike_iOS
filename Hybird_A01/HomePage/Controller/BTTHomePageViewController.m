@@ -29,6 +29,8 @@
 #import "BTTAGQJViewController.h"
 #import "BTTDiscountsViewController.h"
 #import "BTTVideoGamesListController.h"
+#import "BTTGamesTryAlertView.h"
+#import "BTTLoginOrRegisterViewController.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -533,12 +535,42 @@
         default:
             break;
     }
-    if (vc) {
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    if (model) {
-        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+    if ([IVNetwork userInfo]) {
+        if (vc) {
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        if (model) {
+            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+        }
+    } else {
+        if (gameModel.index == 4) {
+            [MBProgressHUD showError:@"请先登录" toView:nil];
+            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            weakSelf(weakSelf);
+            [self showTryAlertViewWithBlock:^(UIButton *btn) {
+                strongSelf(strongSelf);
+                NSLog(@"%@",@(btn.tag));
+                if (btn.tag == 1090) {
+                    if (vc) {
+                        [strongSelf.navigationController pushViewController:vc animated:YES];
+                    }
+                    if (model) {
+                        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:strongSelf];
+                    }
+                } else {
+                    [MBProgressHUD showError:@"请先登录" toView:nil];
+                    BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                }
+            }];
+        }
     }
     
 }
+
+
+
+
 @end

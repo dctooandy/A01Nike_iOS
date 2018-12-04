@@ -18,7 +18,7 @@
 #import "BTTPromotionModel.h"
 #import "BTTDownloadModel.h"
 #import "BTTAGGJViewController.h"
-#import "BTTAGQJViewController.h"
+#import "BTTGamesTryAlertView.h"
 
 static const char *noticeStrKey = "noticeStr";
 
@@ -189,6 +189,26 @@ static const char *BTTNextGroupKey = "nextGroup";
         [popView dismiss];
     };
 }
+
+- (void)showTryAlertViewWithBlock:(BTTBtnBlock)btnClickBlock {
+    BTTGamesTryAlertView *customView = [BTTGamesTryAlertView viewFromXib];
+    if (SCREEN_WIDTH == 414) {
+        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 120, 132);
+    } else {
+        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 60, 132);
+    }
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    customView.btnBlock = ^(UIButton *btn) {
+        [popView dismiss];
+        btnClickBlock(btn);
+    };
+}
+
 
 - (void)loadMainData:(dispatch_group_t)group {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
