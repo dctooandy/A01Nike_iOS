@@ -87,6 +87,7 @@
         [self loadBankList];
         [self loadTotalAvailableData];
         [self loadPaymentData];
+        [self loadAccountStatus];
     }
 }
 

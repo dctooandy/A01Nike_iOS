@@ -19,7 +19,7 @@
     [self loadMainDataOne];
     [self loadMainDataTwo];
     [self loadMainDataThree];
-    [self loadAccountStatus];
+    
     [self setupElements];
 }
 
