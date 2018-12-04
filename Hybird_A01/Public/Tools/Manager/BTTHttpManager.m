@@ -159,4 +159,15 @@
 {
     [self sendRequestWithUrl:url paramters:params completionBlock:completion];
 }
++ (void)fetchUserInfoCompleteBlock:(IVRequestCallBack)completeBlock{
+    if (![IVNetwork userInfo]) {
+        return;
+    }
+    NSMutableDictionary  *param = @{}.mutableCopy;
+    [self sendRequestWithUrl:@"public/users/userInfo" paramters:param completionBlock:^(IVRequestResultModel *result, id response) {
+        if (result.status && result.data && [result.data isKindOfClass:[NSDictionary class]]) {
+            [IVNetwork updateUserInfo:result.data];
+        }
+    }];
+}
 @end

@@ -54,6 +54,7 @@
 //取款
 + (void)submitWithdrawWithUrl:(NSString *)url params:(NSDictionary *)params completion:(IVRequestCallBack)completion;
 
-
 + (void)getOpenAccountStatusCompletion:(IVRequestCallBack)completion;
+//刷新用户信息
++ (void)fetchUserInfoCompleteBlock:(IVRequestCallBack)completeBlock;
 @end
