@@ -254,20 +254,16 @@
         [self hideLoading];
         self.uuid = @"";
         if (result.code_http == 200) {
-            if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
-                if (![result.data[@"login_name"] isKindOfClass:[NSNull class]] && result.data[@"login_name"]) {
-                    BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
-                    vc.account = result.data[@"login_name"];
-                    [self.navigationController pushViewController:vc animated:YES];
-                    
-                    BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
-                    loginModel.login_name = model.login_name;
-                    loginModel.password = model.password;
-                    loginModel.timestamp = [PublicMethod timeIntervalSince1970];
-                    [self loginWithLoginAPIModel:loginModel isBack:NO];
-                }
+            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
+                BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
+                vc.account = model.login_name;
+                [self.navigationController pushViewController:vc animated:YES];
+                BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
+                loginModel.login_name = model.login_name;
+                loginModel.password = model.password;
+                loginModel.timestamp = [PublicMethod timeIntervalSince1970];
+                [self loginWithLoginAPIModel:loginModel isBack:NO];
             }
-            
         }
         if (result.message.length) {
             [MBProgressHUD showError:result.message toView:nil];
