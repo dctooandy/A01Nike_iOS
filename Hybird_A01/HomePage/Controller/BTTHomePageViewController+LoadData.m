@@ -32,30 +32,21 @@ static const char *BTTNextGroupKey = "nextGroup";
     [self loadGamesData];
     dispatch_group_t group = dispatch_group_create();
     dispatch_queue_t queue = dispatch_queue_create("homepage.data", DISPATCH_QUEUE_CONCURRENT);
-    dispatch_group_async(group, queue, ^{
-        dispatch_group_enter(group);
-        [self loadMainData:group];
-    });
+    dispatch_group_enter(group);
+    [self loadMainData:group];
     
-    dispatch_group_async(group, queue, ^{
-        dispatch_group_enter(group);
-        [self loadScrollText:group];
-    });
+    dispatch_group_enter(group);
+    [self loadScrollText:group];
     
-    dispatch_group_async(group, queue, ^{
-        dispatch_group_enter(group);
-        [self loadOtherData:group];
-    });
+    dispatch_group_enter(group);
+    [self loadOtherData:group];
     
-    dispatch_group_async(group, queue, ^{
-        dispatch_group_enter(group);
-        [self loadHightlightsBrand:group];
-    });
+    dispatch_group_enter(group);
+    [self loadHightlightsBrand:group];
     
     dispatch_group_notify(group,queue, ^{
         [self setupElements];
         [self endRefreshing];
-        
     });
 }
 
