@@ -176,7 +176,10 @@
     }
     [self.collectionView reloadData];
 }
-
+- (void)loadUserInfo
+{
+    [BTTHttpManager fetchUserInfoCompleteBlock:nil];
+}
 - (void)loadBindStatus {
     weakSelf(weakSelf)
     [BTTHttpManager fetchBindStatusWithUseCache:YES completionBlock:^(IVRequestResultModel *result, id response) {
