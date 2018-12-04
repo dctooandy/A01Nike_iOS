@@ -53,9 +53,8 @@ static const char *BTTNextGroupKey = "nextGroup";
     });
     
     dispatch_group_notify(group,queue, ^{
-        [self setupElements];
         [self endRefreshing];
-        
+        [self setupElements];
     });
 }
 
@@ -78,8 +77,9 @@ static const char *BTTNextGroupKey = "nextGroup";
     });
     
     dispatch_group_notify(group,queue, ^{
-        [self setupElements];
         [self endRefreshing];
+        [self setupElements];
+     
     });
 }
 

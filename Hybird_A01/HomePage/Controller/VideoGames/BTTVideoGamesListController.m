@@ -479,7 +479,7 @@
         if (self.favorites.count) {
             BTTVideoGameModel *gameModel = self.favorites.count ? self.favorites[indexPath.row - 3] : nil;
             model.cnName = gameModel.cnName;
-            model.enName = [gameModel.engName stringByReplacingOccurrencesOfString:@" " withString:@""];
+            model.enName = gameModel.engName;
             model.provider = gameModel.provider;
             model.gameId = gameModel.gameid;
             model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
@@ -490,7 +490,7 @@
         if (self.isShowSearchBar) {
             BTTVideoGameModel *gameModel = self.games.count ? self.games[indexPath.row - 4] : nil;
             model.cnName = gameModel.cnName;
-            model.enName = [gameModel.engName stringByReplacingOccurrencesOfString:@" " withString:@""];
+            model.enName = gameModel.engName;
             model.provider = gameModel.provider;
             model.gameId = gameModel.gameid;
             model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
@@ -499,7 +499,7 @@
         } else {
             BTTVideoGameModel *gameModel = self.games.count ? self.games[indexPath.row - 3] : nil;
             model.cnName = gameModel.cnName;
-            model.enName = [gameModel.engName stringByReplacingOccurrencesOfString:@" " withString:@""];
+            model.enName = gameModel.engName;
             model.provider = gameModel.provider;
             model.gameId = gameModel.gameid;
             model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
