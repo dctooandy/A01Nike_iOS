@@ -82,8 +82,8 @@
             [weakSelf showError:result.message];
             return;
         }
-        NSArray *array = [result.data objectForKey:@"list"];
-        if (array.count > 0) {
+        NSArray *array = (NSArray *)[result.data objectForKey:@"list"];
+        if ([array isKindOfClass:[NSArray class]] && array.count > 0) {
             [weakSelf showError:@"您还有未处理的存款提案，请联系客服"];
             return;
         }

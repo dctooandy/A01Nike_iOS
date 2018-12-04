@@ -7,8 +7,7 @@
 //
 
 #import "CNPayDepositStep3VC.h"
-#import "AMSegmentViewController.h"
-#import <Photos/Photos.h>
+#import "CNPayDepositSuccessVC.h"
 
 @interface CNPayDepositStep3VC () <UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *preSettingMessageLb;
@@ -27,18 +26,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    /// 输入金额变化处理
-    //    __weak typeof(self) weakSelf = self;
-    //    self.amountTF.editingChanged = ^(NSString *text, BOOL isEmpty) {
-    //        [weakSelf.recommendView cleanSelectedState];
-    //    };
-    
-    // 金额提示语
-    //    if (self.paymentModel.maxamount > self.paymentModel.minamount) {
-    //        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f，最多%.0f", self.paymentModel.minamount, self.paymentModel.maxamount];
-    //    } else {
-    //        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f", self.paymentModel.minamount];
-    //    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -152,6 +139,7 @@
         [self showError:@"操作失败！请联系客户，或者稍后重试!"];
         return;
     }
-    
+    CNPayDepositSuccessVC *successVC = [[CNPayDepositSuccessVC alloc] initWithAmount:orderModel.amount];
+    [self pushViewController:successVC];
 }
 @end
