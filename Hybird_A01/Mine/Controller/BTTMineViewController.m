@@ -43,7 +43,7 @@
 #import "BTTUserStatusManager.h"
 #import "IVNetworkStatusDetailViewController.h"
 #import "CNPayVC.h"
-
+#import "BTTPromotionDetailController.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -124,6 +124,14 @@
                 BTTAccountBalanceController *accountBalance = [[BTTAccountBalanceController alloc] init];
                 [strongSelf.navigationController pushViewController:accountBalance animated:YES];
             };
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                strongSelf(strongSelf);
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = @"common/ancement.htm";
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"inside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
+            };
             return cell;
         } else {
             BTTMeHeaderNotLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeHeaderNotLoginCell" forIndexPath:indexPath];
@@ -140,6 +148,14 @@
                     loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
                     [strongSelf.navigationController pushViewController:loginAndRegister animated:YES];
                 }
+            };
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                strongSelf(strongSelf);
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = @"common/ancement.htm";
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"inside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
             };
             return cell;
         }
