@@ -40,6 +40,8 @@ typedef NS_ENUM(NSUInteger, CNPayBQType) {
 @property (nonatomic, copy) NSString *city;
 /// 汇款时间
 @property (nonatomic, copy) NSString *date;
+/// 汇款收费
+@property (nonatomic, copy) NSString *charge;
 /// 备注
 @property (nonatomic, copy) NSString *remarks;
 /// 订单ID
