@@ -68,7 +68,17 @@ static const char *BTTHeaderViewKey = "headerView";
                 
             case 2002:
             {
-                
+                if (![IVNetwork userInfo]) {
+                    [MBProgressHUD showError:@"请先登录" toView:nil];
+                    BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                    return;
+                }
+                BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.url = @"customer/letter.htm";
+                vc.webConfigModel.theme = @"inside";
+                [strongSelf.navigationController pushViewController:vc animated:YES];
             }
                 break;
                 
