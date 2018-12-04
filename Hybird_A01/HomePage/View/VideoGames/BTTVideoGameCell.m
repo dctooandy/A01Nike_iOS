@@ -73,7 +73,7 @@
             if (model.payline.integerValue) {
                 [self.label2 setTitle:[NSString stringWithFormat:@" %@线 ",model.payline] forState:UIControlStateNormal];
             } else {
-                [self.label3 setTitle:@" 彩金 " forState:UIControlStateNormal];
+                [self.label2 setTitle:@" 彩金 " forState:UIControlStateNormal];
             }
         } else {
             self.label3.hidden = YES;

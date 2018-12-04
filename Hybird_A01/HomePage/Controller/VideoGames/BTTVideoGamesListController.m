@@ -454,7 +454,7 @@
         } else if ([selectValue isEqualToString:@"热门游戏"]) {
             self.type = @"hot";
         } else if ([selectValue isEqualToString:@"彩金池游戏"]) {
-            self.type = @"momenypool";
+            self.type = @"moneypool";
         } else if ([selectValue isEqualToString:@"最新游戏"]) {
             self.type = @"new";
         } else if ([selectValue isEqualToString:@"全平台"]) {
