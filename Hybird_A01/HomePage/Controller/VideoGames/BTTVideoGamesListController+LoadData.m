@@ -11,6 +11,7 @@
 @implementation BTTVideoGamesListController (LoadData)
 
 - (void)loadVideoGamesWithRequestModel:(BTTVideoGamesRequestModel *)requestModel complete:(nonnull IVRequestCallBack)complete{
+    self.isShowFooter = NO;
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (requestModel.type.length) {
         [params setValue:requestModel.type forKey:@"type"];
@@ -44,7 +45,6 @@
 }
 
 - (void)loadCollectionData {
-    [self.collectionView.mj_footer endRefreshingWithNoMoreData];
     NSDictionary *params = @{@"login_name":[IVNetwork userInfo].loginName};
     [IVNetwork sendUseCacheRequestWithSubURL:BTTFavotiteList paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
@@ -57,6 +57,7 @@
                 model.isFavority = YES;
                 [self.favorites addObject:model];
             }
+            [self.favorites addObject:[BTTVideoGameModel new]];
         }
     }];
 }
