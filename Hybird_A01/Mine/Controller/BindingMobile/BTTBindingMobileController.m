@@ -280,7 +280,7 @@
             if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
                 NSString *phone = result.data[@"val"];
                 [IVNetwork updateUserInfo:@{@"phone" : phone}];
-                [BTTHttpManager fetchBindStatusWithUseCache:YES completionBlock:nil];
+                [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
             }
             switch (self.mobileCodeType) {
                 case BTTSafeVerifyTypeBindMobile:
@@ -427,7 +427,7 @@
     [BTTHttpManager deleteBankOrBTC:isBTC isAuto:isAuto completion:^(IVRequestResultModel *result, id response) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         if (result.status) {
-            [BTTHttpManager fetchBankListWithUseCache:YES completion:nil];
+            [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
             BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
             vc.mobileCodeType = self.mobileCodeType;
             [weakSelf.navigationController pushViewController:vc animated:YES];
