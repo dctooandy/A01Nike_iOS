@@ -93,6 +93,7 @@
             return;
         }
         weakSelf.writeModel.depositBy = weakSelf.nameTF.text;
+        weakSelf.writeModel.bankList = bankList;
         weakSelf.writeModel.chooseBank = bankList.firstObject;
         [weakSelf goToStep:1];
     }];
