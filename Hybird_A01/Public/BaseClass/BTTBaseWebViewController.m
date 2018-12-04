@@ -22,7 +22,6 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeBottom;
 }
-
 - (void)webViewDidStartLoad:(UIWebView *)webView {
     [self showLoading];
     [super webViewDidStartLoad:webView];
