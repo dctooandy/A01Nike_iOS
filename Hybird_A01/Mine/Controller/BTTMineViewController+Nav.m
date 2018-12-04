@@ -100,8 +100,9 @@ static const char *BTTHeaderViewKey = "headerView";
             }
         }];
     }];
-    
-    BTTPopoverAction *action3 = [BTTPopoverAction actionWithImage:ImageNamed(@"callBack") title:@"VIP经理回拨" handler:^(BTTPopoverAction *action) {
+    BOOL isNormalUser = (![IVNetwork userInfo] || [IVNetwork userInfo].customerLevel < 5);
+    NSString *callTitle = isNormalUser ? @"电话回拨" : @"VIP经理回拨";
+    BTTPopoverAction *action3 = [BTTPopoverAction actionWithImage:ImageNamed(@"callBack") title:callTitle handler:^(BTTPopoverAction *action) {
         if ([IVNetwork userInfo]) {
             [self showCallBackViewLogin];
         } else {
@@ -113,7 +114,6 @@ static const char *BTTHeaderViewKey = "headerView";
         [[CLive800Manager sharedInstance] startLive800Chat:self];
     }];
     
-    BOOL isNormalUser = (![IVNetwork userInfo] || [IVNetwork userInfo].customerLevel < 5);
     NSString *telUrl = isNormalUser ? @"tel://4001203618" : @"tel://4001203616";
     NSString *title = isNormalUser ? @"400-120-3618" : @"400-120-3616";
     title = [NSString stringWithFormat:@"     客服热线\n%@",title];
