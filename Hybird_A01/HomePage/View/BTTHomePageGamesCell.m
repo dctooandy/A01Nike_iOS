@@ -62,9 +62,10 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BTTGameCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTGameCollectionViewCell" forIndexPath:indexPath];
+    
     BTTGameModel *model = self.games.count ? self.games[indexPath.row] : nil;
-    cell.gameIcon = model.gameIcon;
     cell.gameName = model.name;
+    cell.gameIcon = model.gameIcon;
     return cell;
 }
 
