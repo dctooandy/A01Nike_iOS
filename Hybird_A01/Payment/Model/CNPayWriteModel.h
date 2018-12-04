@@ -48,6 +48,8 @@ typedef NS_ENUM(NSUInteger, CNPayBQType) {
 @property (nonatomic, copy) NSString *referenceId;
 /// 要存入银行卡信息
 @property (nonatomic, strong) CNPayBankCardModel *chooseBank;
+/// 银行卡数组
+@property (nonatomic, strong) NSArray <CNPayBankCardModel *> *bankList;
 
 /// BQ支付方式
 @property (nonatomic, assign) CNPayBQType BQType;
