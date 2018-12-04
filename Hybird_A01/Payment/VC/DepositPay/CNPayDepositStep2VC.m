@@ -69,7 +69,25 @@
 }
 
 - (IBAction)sumbitAction:(UIButton *)sender {
-    [self goToStep:2];
+    if (sender.selected) {
+        return;
+    }
+    sender.selected = YES;
+    __weak typeof(self) weakSelf = self;
+    __weak typeof(sender) weakSender = sender;
+    [CNPayRequestManager paymentQueryBillCompleteHandler:^(IVRequestResultModel *result, id response) {
+        weakSender.selected = NO;
+        if (!result.status) {
+            [weakSelf showError:result.message];
+            return;
+        }
+        NSArray *array = [result.data objectForKey:@"list"];
+        if (array.count > 0) {
+            [weakSelf showError:@"您还有未处理的存款提案，请联系客服"];
+            return;
+        }
+        [weakSelf goToStep:2];
+    }];
 }
 
 @end

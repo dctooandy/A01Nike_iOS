@@ -28,6 +28,8 @@ NSString * const kPaymentGetBQName      = @"public/payment/getQuickBankDeposit";
 NSString * const kPaymentQueryBankInfo  = @"public/payment/quickBankList";
 /// 获取手工存款银行卡
 NSString * const kPaymentGetBankList    = @"public/deposit/getEnableBank";
+/// 查询提案
+NSString * const kPaymentQueryDeposit   = @"public/deposit/getManualListPage";
 /// 完善用户信息
 NSString * const kPaymentCompleteInfo   = @"public/users/completeInfo";
 /// 点卡提交订单
