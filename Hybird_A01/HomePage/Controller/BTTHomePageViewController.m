@@ -29,6 +29,9 @@
 #import "BTTAGQJViewController.h"
 #import "BTTDiscountsViewController.h"
 #import "BTTVideoGamesListController.h"
+#import "BTTGamesTryAlertView.h"
+#import "BTTLoginOrRegisterViewController.h"
+#import "BTTVideoGamesFooterCell.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -97,6 +100,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageDiscountCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageDiscountCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageActivitiesCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageActivitiesCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageAmountsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageAmountsCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTVideoGamesFooterCell" bundle:nil] forCellWithReuseIdentifier:@"BTTVideoGamesFooterCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -533,12 +537,44 @@
         default:
             break;
     }
-    if (vc) {
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    if (model) {
-        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+    if ([IVNetwork userInfo]) {
+        if (vc) {
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        if (model) {
+            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+        }
+    } else {
+        if (gameModel.index == 4) {
+            [MBProgressHUD showError:@"请先登录" toView:nil];
+            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if (gameModel.index == 3) {
+            
+        } else {
+            weakSelf(weakSelf);
+            [self showTryAlertViewWithBlock:^(UIButton *btn) {
+                strongSelf(strongSelf);
+                NSLog(@"%@",@(btn.tag));
+                if (btn.tag == 1090) {
+                    if (vc) {
+                        [strongSelf.navigationController pushViewController:vc animated:YES];
+                    }
+                    if (model) {
+                        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:strongSelf];
+                    }
+                } else {
+                    [MBProgressHUD showError:@"请先登录" toView:nil];
+                    BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                }
+            }];
+        }
     }
     
 }
+
+
+
+
 @end

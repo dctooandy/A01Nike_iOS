@@ -14,6 +14,8 @@
 
 typedef void (^BTTRefreshBlock)(void);
 
+typedef void (^BTTBtnBlock)(UIButton *btn);
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class BTTCollectionViewController;

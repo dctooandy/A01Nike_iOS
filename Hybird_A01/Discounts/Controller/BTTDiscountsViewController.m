@@ -32,6 +32,7 @@
             [strongSelf loadMainData];
         }];
     }
+    [self showLoading];
     [self loadMainData];
     
 }

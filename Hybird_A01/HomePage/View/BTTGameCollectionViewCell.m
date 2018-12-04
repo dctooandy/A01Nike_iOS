@@ -38,9 +38,12 @@
     if ([IVNetwork userInfo]) {
         self.tryPlayIcon.hidden = YES;
     } else {
-        self.tryPlayIcon.hidden = NO;
+        if ([self.gameName isEqualToString:@"沙巴体育"]) {
+            self.tryPlayIcon.hidden = YES;
+        } else {
+            self.tryPlayIcon.hidden = NO;
+        }
     }
-    
 }
 
 - (void)setGameName:(NSString *)gameName {
