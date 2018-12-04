@@ -62,6 +62,24 @@
     self.titleLabel.text = model.cnName;
     [self.label1 setTitle:[NSString stringWithFormat:@" %@ ",model.provider] forState:UIControlStateNormal];
     self.collectBtn.selected = model.isFavority;
+    if (model.payline.integerValue && model.isPoolGame) {
+        self.label2.hidden = NO;
+        self.label3.hidden = NO;
+        [self.label2 setTitle:[NSString stringWithFormat:@" %@线 ",model.payline] forState:UIControlStateNormal];
+        [self.label3 setTitle:@" 彩金 " forState:UIControlStateNormal];
+    } else {
+        if (model.payline.integerValue || model.isPoolGame) {
+            self.label2.hidden = NO;
+            if (model.payline.integerValue) {
+                [self.label2 setTitle:[NSString stringWithFormat:@" %@线 ",model.payline] forState:UIControlStateNormal];
+            } else {
+                [self.label3 setTitle:@" 彩金 " forState:UIControlStateNormal];
+            }
+        } else {
+            self.label3.hidden = YES;
+            self.label2.hidden = YES;
+        }
+    }
 }
 
 
