@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadMeAllData;
 
+- (void)loadUserInfo;
+
 - (void)loadBindStatus;
 
 - (void)loadBankList;

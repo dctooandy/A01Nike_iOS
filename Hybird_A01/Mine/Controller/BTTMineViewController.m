@@ -82,6 +82,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork userInfo]) {
         self.totalAmount = @"-";
+        [self loadUserInfo];
         [self loadBindStatus];
         [self loadBankList];
         [self loadTotalAvailableData];

@@ -239,7 +239,7 @@
             break;
         case BTTSafeVerifyTypeVerifyEmail:
             params[@"v_type"] = @"4";
-            url = @"verify/check";
+            url = @"public/verify/check";
             successStr = @"验证成功!";
             break;
         case BTTSafeVerifyTypeChangeEmail:
