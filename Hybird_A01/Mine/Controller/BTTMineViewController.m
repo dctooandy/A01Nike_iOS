@@ -293,12 +293,10 @@
     } else if (indexPath.row == 6 + self.personalInfos.count + self.paymentDatas.count) {
         BTTPTTransferController *vc = [[BTTPTTransferController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 6) {
+    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count) {
         BTTAccountSafeController *vc = [[BTTAccountSafeController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 5) {
-//        BTTSheetsViewController *vc = [[BTTSheetsViewController alloc] init];
-//        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count - 1) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.url = @"customer/log.htm";
@@ -309,18 +307,22 @@
         [MBProgressHUD showSuccess:@"退出成功" toView:nil];
         [BTTUserStatusManager logoutSuccess];
         self.totalAmount = @"-";
-    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 7) {
+    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + 1) {
         // 设置
         BTTSettingsController *vc = [[BTTSettingsController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 5 + self.personalInfos.count + self.paymentDatas.count) {
         BTTXimaController *vc = [[BTTXimaController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 8) {
-        
-    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 9) {
+    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + 2) {
+        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+        vc.webConfigModel.newView = YES;
+        vc.webConfigModel.url = @"customer/letter.htm";
+        vc.webConfigModel.theme = @"inside";
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + 3) {
         [IVNetwork checkAppUpdate];
-    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + 10) {
+    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + 4) {
         // 网络监测
         [IVNetwork startCheckWithType:IVCheckNetworkTypeAll appWindow:[UIApplication sharedApplication].keyWindow detailBtnClickedBlock:^{
             [self.navigationController pushViewController:[IVNetworkStatusDetailViewController new] animated:YES];
