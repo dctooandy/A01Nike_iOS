@@ -46,7 +46,24 @@
     [self setupViewControllers];
     [self customTabbar];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userTokenExpired) name:IVUserTokenExpiredNotification object:nil];
+    [self registerLoginOrOutNotification];
 }
+
+
+- (void)registerLoginOrOutNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:LoginSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccess:) name:LogoutSuccessNotification object:nil];
+}
+
+- (void)loginSuccess:(NSNotification *)notifi {
+   
+}
+
+- (void)logoutSuccess:(NSNotification *)notifi {
+    [self.myTabbar setSeletedIndex:0];
+}
+
+
 //登录状态失效
 - (void)userTokenExpired
 {

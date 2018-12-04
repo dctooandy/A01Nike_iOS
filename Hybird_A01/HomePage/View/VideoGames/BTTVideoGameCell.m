@@ -45,8 +45,10 @@
 }
 
 - (IBAction)collectionBtnClick:(UIButton *)sender {
-    sender.selected = !sender.selected;
-    self.model.isFavority = sender.selected;
+    if ([IVNetwork userInfo]) {
+        sender.selected = !sender.selected;
+        self.model.isFavority = sender.selected;
+    } 
     if (self.buttonClickBlock) {
         self.buttonClickBlock(sender);
     }
