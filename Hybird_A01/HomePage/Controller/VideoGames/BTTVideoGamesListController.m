@@ -112,6 +112,7 @@
                 [strongSelf.games removeAllObjects];
                 self.keyword = @"";
             }
+            self.count = result.data[@"count"];
             NSArray *games = result.data[@"list"];
             for (NSDictionary *dict in games) {
                 BTTVideoGameModel *model = [BTTVideoGameModel yy_modelWithDictionary:dict];
@@ -477,34 +478,40 @@
     IVGameModel *model = [[IVGameModel alloc] init];
     if (self.isFavorite) {
         if (self.favorites.count) {
-            BTTVideoGameModel *gameModel = self.favorites.count ? self.favorites[indexPath.row - 3] : nil;
-            model.cnName = gameModel.cnName;
-            model.enName = gameModel.engName;
-            model.provider = gameModel.provider;
-            model.gameId = gameModel.gameid;
-            model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
-            model.gameStyle = gameModel.gameStyle;
-            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+            if (indexPath.row >= 3) {
+                BTTVideoGameModel *gameModel = self.favorites.count ? self.favorites[indexPath.row - 3] : nil;
+                model.cnName = gameModel.cnName;
+                model.enName = gameModel.engName;
+                model.provider = gameModel.provider;
+                model.gameId = gameModel.gameid;
+                model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
+                model.gameStyle = gameModel.gameStyle;
+                [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+            }
         }
     } else {
         if (self.isShowSearchBar) {
-            BTTVideoGameModel *gameModel = self.games.count ? self.games[indexPath.row - 4] : nil;
-            model.cnName = gameModel.cnName;
-            model.enName = gameModel.engName;
-            model.provider = gameModel.provider;
-            model.gameId = gameModel.gameid;
-            model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
-            model.gameStyle = gameModel.gameStyle;
-            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+            if (indexPath.row >= 4) {
+                BTTVideoGameModel *gameModel = self.games.count ? self.games[indexPath.row - 4] : nil;
+                model.cnName = gameModel.cnName;
+                model.enName = gameModel.engName;
+                model.provider = gameModel.provider;
+                model.gameId = gameModel.gameid;
+                model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
+                model.gameStyle = gameModel.gameStyle;
+                [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+            }
         } else {
-            BTTVideoGameModel *gameModel = self.games.count ? self.games[indexPath.row - 3] : nil;
-            model.cnName = gameModel.cnName;
-            model.enName = gameModel.engName;
-            model.provider = gameModel.provider;
-            model.gameId = gameModel.gameid;
-            model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
-            model.gameStyle = gameModel.gameStyle;
-            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+            if (indexPath.row >= 3) {
+                BTTVideoGameModel *gameModel = self.games.count ? self.games[indexPath.row - 3] : nil;
+                model.cnName = gameModel.cnName;
+                model.enName = gameModel.engName;
+                model.provider = gameModel.provider;
+                model.gameId = gameModel.gameid;
+                model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
+                model.gameStyle = gameModel.gameStyle;
+                [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+            }
         }
     }
 }
