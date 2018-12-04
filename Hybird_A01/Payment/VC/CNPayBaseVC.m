@@ -9,7 +9,6 @@
 #import "CNPayBaseVC.h"
 #import "CNPayVC.h"
 #import "CNWKWebVC.h"
-#import "CNPayDepositSuccessVC.h"
 #import "CNUIWebVC.h"
 #import <Photos/Photos.h>
 

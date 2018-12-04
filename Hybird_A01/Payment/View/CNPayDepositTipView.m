@@ -1,27 +1,27 @@
 //
-//  CNPayTipView.m
-//  A05_iPhone
+//  CNPayDepositTipView.m
+//  Hybird_A01
 //
-//  Created by cean.q on 2018/10/3.
-//  Copyright © 2018年 WRD. All rights reserved.
+//  Created by cean.q on 2018/12/4.
+//  Copyright © 2018 BTT. All rights reserved.
 //
 
-#import "CNPayTipView.h"
+#import "CNPayDepositTipView.h"
 #import "CNPayConstant.h"
 
-@interface CNPayTipView ()
+@interface CNPayDepositTipView ()
 @property (nonatomic, copy) dispatch_block_t finishBlock;
 @property (weak, nonatomic) IBOutlet UIButton *repayBtn;
 @end
 
-@implementation CNPayTipView
+@implementation CNPayDepositTipView
 
 + (instancetype)tipView {
-    return [[NSBundle mainBundle] loadNibNamed:@"CNPayTipView" owner:nil options:nil].firstObject;
+    return [[NSBundle mainBundle] loadNibNamed:@"CNPayDepositTipView" owner:nil options:nil].firstObject;
 }
 
 + (void)showTipViewFinish:(dispatch_block_t)btnAction {
-    CNPayTipView *tipView = [CNPayTipView tipView];
+    CNPayDepositTipView *tipView = [CNPayDepositTipView tipView];
     tipView.repayBtn.layer.borderColor = COLOR_HEX(0xD8D8D8).CGColor;
     tipView.repayBtn.layer.borderWidth = 1;
     tipView.finishBlock = btnAction;
@@ -43,4 +43,5 @@
 - (IBAction)closeAction:(UIButton *)sender {
     [self removeFromSuperview];
 }
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "CNPayDepositStep2VC.h"
+#import "CNPayDepositTipView.h"
 
 @interface CNPayDepositStep2VC ()
 @property (weak, nonatomic) IBOutlet UITextField *bankNameTF;
@@ -86,7 +87,9 @@
             [weakSelf showError:@"您还有未处理的存款提案，请联系客服"];
             return;
         }
-        [weakSelf goToStep:2];
+        [CNPayDepositTipView showTipViewFinish:^{
+            [weakSelf goToStep:2];
+        }];
     }];
 }
 
