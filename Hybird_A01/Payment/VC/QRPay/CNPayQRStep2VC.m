@@ -34,6 +34,7 @@
 }
 
 - (IBAction)submit:(UIButton *)sender {
+    [self showPayTipView];
     CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:self.writeModel.orderModel title:self.writeModel.depositType];
     [self pushViewController:webVC];
 }

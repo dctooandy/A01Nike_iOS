@@ -125,20 +125,9 @@
         [self showError:@"操作失败！请联系客户，或者稍后重试!"];
         return;
     }
-    
-    /// 前往支付
-    switch (self.paymentModel.paymentType) {
-        case CNPaymentDeposit: {
-            /// 弹窗申请支付成功页面
-            [self showPayTipViewWithAmount:orderModel.amount];
-        }
-        default: {
-//            CNWKWebVC *payWebVC = [[CNWKWebVC alloc] initWithHtmlString:[CNPayRequestManager submitPayFormWithOrderModel:orderModel]];
-//            [self pushViewController:payWebVC];
-//            [self pushUIWebViewWithURLString:[CNPayRequestManager submitPayFormWithOrderModel:orderModel] title:self.paymentModel.paymentTitle];
-        }
-            break;
-    }
+    [self showPayTipView];
+    CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:self.writeModel.orderModel title:self.paymentModel.paymentTitle];
+    [self pushViewController:webVC];
 }
 
 - (void)pushUIWebViewWithURLString:(NSString *)url title:(NSString *)title {
@@ -205,9 +194,9 @@
         case CNPaymentJDApp:
             paytypeString = @"17";
             break;
-//        case CNPaymentJDQR:
-//            paytypeString = @"16";
-//            break;
+        case CNPaymentJDQR:
+            paytypeString = @"16";
+            break;
         case CNPaymentBTC:
             paytypeString = @"20";
             break;
@@ -217,7 +206,13 @@
         case CNPaymentWechatBarCode:
             paytypeString = @"23";
             break;
-        default:
+        case CNPaymentCoin:
+            paytypeString = @"41";
+            break;
+        case CNPaymentDeposit:
+        case CNPaymentBQFast:
+        case CNPaymentBQWechat:
+        case CNPaymentBQAli:
             paytypeString = @"";
             break;
     }
@@ -277,11 +272,14 @@
     return _payVC;
 }
 
-- (void)showPayTipViewWithAmount:(NSString *)amount {
+- (void)showPayTipView {
     weakSelf(weakSelf);
-    [CNPayTipView showTipViewFinish:^{
+    CNPayTipView *tipView = [CNPayTipView tipView];
+    tipView.frame = self.payVC.view.bounds;
+    [self.payVC.view addSubview:tipView];
+    tipView.btnAction = ^{
         [weakSelf.payVC.navigationController popToRootViewControllerAnimated:YES];
-    }];
+    };
 }
 
 

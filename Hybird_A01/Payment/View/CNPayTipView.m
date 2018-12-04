@@ -10,7 +10,6 @@
 #import "CNPayConstant.h"
 
 @interface CNPayTipView ()
-@property (nonatomic, copy) dispatch_block_t finishBlock;
 @property (weak, nonatomic) IBOutlet UIButton *repayBtn;
 @end
 
@@ -22,9 +21,7 @@
 
 + (void)showTipViewFinish:(dispatch_block_t)btnAction {
     CNPayTipView *tipView = [CNPayTipView tipView];
-    tipView.repayBtn.layer.borderColor = COLOR_HEX(0xD8D8D8).CGColor;
-    tipView.repayBtn.layer.borderWidth = 1;
-    tipView.finishBlock = btnAction;
+    tipView.btnAction = btnAction;
     [tipView show];
 }
 
@@ -35,9 +32,14 @@
     [window addSubview:self];
 }
 
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    self.repayBtn.layer.borderColor = COLOR_HEX(0xD8D8D8).CGColor;
+    self.repayBtn.layer.borderWidth = 1;
+}
+
 - (IBAction)submitAction:(UIButton *)sender {
-    [self removeFromSuperview];
-    !_finishBlock ?: _finishBlock();
+    !_btnAction ?: _btnAction();
 }
 
 - (IBAction)closeAction:(UIButton *)sender {

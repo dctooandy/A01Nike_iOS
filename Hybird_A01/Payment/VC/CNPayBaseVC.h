@@ -105,4 +105,5 @@
 - (void)saveToLibraryWithImage:(UIImage *)image;
 
 - (void)addBankView;
+- (void)showPayTipView;
 @end
