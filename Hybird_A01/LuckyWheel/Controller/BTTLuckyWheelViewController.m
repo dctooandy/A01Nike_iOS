@@ -27,15 +27,16 @@
 }
 
 - (void)viewDidLayoutSubviews {
-    [super viewWillLayoutSubviews];
+    [super viewDidLayoutSubviews];
     self.webView.frame = CGRectMake(0, KIsiPhoneX ? 88 : 64, SCREEN_WIDTH, SCREEN_HEIGHT - (KIsiPhoneX ? 88 : 64) - (KIsiPhoneX ? 83 : 49));
+    self.statusView.frame = CGRectMake(0, 0, CGRectGetWidth(self.webView.frame), CGRectGetHeight(self.webView.frame));
 }
     
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    [self loadWebView];
+//    [self loadWebView];
 }
 
 //- (void)webViewDidFinishLoad:(UIWebView *)webView
