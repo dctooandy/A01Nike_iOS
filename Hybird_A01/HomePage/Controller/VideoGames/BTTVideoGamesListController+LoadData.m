@@ -48,13 +48,15 @@
     NSDictionary *params = @{@"login_name":[IVNetwork userInfo].loginName};
     [IVNetwork sendUseCacheRequestWithSubURL:BTTFavotiteList paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
+        if (self.favorites.count) {
+            [self.favorites removeAllObjects];
+        }
         if (result.code_http == 200 && [result.data isKindOfClass:[NSArray class]]) {
             for (NSDictionary *dict in result.data) {
                 BTTVideoGameModel *model = [BTTVideoGameModel yy_modelWithDictionary:dict[@"remarks"]];
                 model.isFavority = YES;
                 [self.favorites addObject:model];
             }
-            
         }
     }];
 }

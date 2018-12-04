@@ -45,6 +45,8 @@
 
 @property (nonatomic, copy) NSString *count;
 
+@property (nonatomic, assign) NSInteger searchPage;
+
 @end
 
 @implementation BTTVideoGamesListController
@@ -53,6 +55,7 @@
     [super viewDidLoad];
     _page = 1;
     _limit = 12;
+    _searchPage = 1;
     _count = @"0";
     [self resetRequestModel];
     self.title = @"电子游戏";
@@ -95,10 +98,14 @@
     requestModel.type = _type;
     requestModel.line = _line;
     requestModel.platform = _platform;
-    requestModel.keyword = _keyword;
+    requestModel.keyword = [_keyword stringByReplacingOccurrencesOfString:@" " withString:@""];
     requestModel.sort = _sort;
     requestModel.order = _order;
-    requestModel.page = _page;
+    if (_keyword.length) {
+        requestModel.page = _searchPage;
+    } else {
+        requestModel.page = _page;
+    }
     requestModel.limit = _limit;
     weakSelf(weakSelf);
     [self loadVideoGamesWithRequestModel:requestModel complete:^(IVRequestResultModel *result, id response) {
@@ -119,7 +126,11 @@
                 [strongSelf.games addObject:model];
             }
             if ([games count] == self.limit) {
-                strongSelf.page ++;
+                if (requestModel.keyword.length) {
+                    strongSelf.searchPage ++;
+                } else {
+                    strongSelf.page ++;
+                }
             } else {
                 [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
@@ -222,6 +233,7 @@
                 collectBtn.selected = NO;
                 strongSelf.isFavorite = NO;
                 strongSelf.isShowSearchBar = YES;
+                strongSelf.searchPage = 1;
                 [strongSelf setupElements];
             };
             return cell;
@@ -305,6 +317,7 @@
                     UIButton *collectBtn = (UIButton *)[filterCell viewWithTag:1073];
                     collectBtn.selected = NO;
                     strongSelf.isFavorite = NO;
+                    strongSelf.searchPage = 1;
                     strongSelf.isShowSearchBar = YES;
                     [strongSelf setupElements];
                 };
@@ -383,7 +396,7 @@
                     BTTVideoGamesFilterCell *filterCell = (BTTVideoGamesFilterCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:strongSelf.isShowSearchBar ? 2 : 1 inSection:0]];
                     UIButton *collectBtn = (UIButton *)[filterCell viewWithTag:1073];
                     collectBtn.selected = NO;
-                    
+                    strongSelf.searchPage = 1;
                     strongSelf.isFavorite = NO;
                     strongSelf.isShowSearchBar = YES;
                     [strongSelf setupElements];

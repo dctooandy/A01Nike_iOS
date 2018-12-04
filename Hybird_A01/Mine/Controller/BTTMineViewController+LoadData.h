@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)makeCallWithPhoneNum:(NSString *)phone;
 
+- (void)loadAccountStatus;
+
 
 @end
 

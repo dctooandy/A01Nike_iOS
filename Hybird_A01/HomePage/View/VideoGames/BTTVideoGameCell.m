@@ -25,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *collectBtn;
+
+@property (weak, nonatomic) IBOutlet UILabel *btnTitleLabel;
 @end
 
 @implementation BTTVideoGameCell
@@ -36,7 +38,10 @@
     self.gameIconHeightConstants.constant = (SCREEN_WIDTH / 2 - 22.5) / 130 * 90;
     self.label2.hidden = YES;
     self.label3.hidden = YES;
+    self.btnTitleLabel.userInteractionEnabled = YES;
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+    [self.btnTitleLabel addGestureRecognizer:tap];
 }
 
 - (IBAction)collectionBtnClick:(UIButton *)sender {
@@ -47,6 +52,9 @@
     }
 }
 
+- (void)tap:(UITapGestureRecognizer *)gesture {
+    [self collectionBtnClick:self.collectBtn];
+}
 
 - (void)setModel:(BTTVideoGameModel *)model {
     _model = model;
