@@ -50,13 +50,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    // 需要完善个人信息
-//    if (self.preSaveMsg.length == 0) {
-//        __weak typeof(self) weakSelf = self;
-//        [CNCompleteInfoView completeInfoHandler:^{
-//            [weakSelf configPreSettingMessage];
-//        }];
-//    }
 }
 
 - (void)configPreSettingMessage {
@@ -99,7 +92,7 @@
     }
 }
 
-/// 付款推荐金额
+/// 推荐姓名
 - (void)configRecommendView {
     NSArray *array = [self.paymentModel.depositor componentsSeparatedByString:@";"];
     if (array.count == 0) {
