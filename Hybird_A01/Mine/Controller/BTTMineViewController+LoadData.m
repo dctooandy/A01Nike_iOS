@@ -61,7 +61,7 @@
     NSMutableArray *arr = [NSMutableArray array];
     NSArray *icons = @[@"me_netbank",@"me_wechat",@"me_alipay",@"me_hand",@"me_online",@"me_scan",@"me_quick",@"me_alipay",@"me_pointCard",@"me_btc",@"me_jd"];
     NSArray *names = @[@"迅捷网银",@"微信秒存",@"支付宝秒存",@"手工存款",@"在线支付",@"扫码支付",@"银行快捷支付",@"支付宝WAP",@"点卡支付",@"比特币支付",@"京东WAP支付"];
-    NSArray *paymentNames = @[@"bqpaytype-0",@"bqpaytype-1",@"bqpaytype-2",@"deposit",@"online-1",@"online-6;online-8;online-5;online-7;online-11;online-15;online-16",@"faster",@"online-9",@"card",@"online-20",@"online-17"];
+    NSArray *paymentNames = @[@"bqpaytype-0",@"bqpaytype-1",@"bqpaytype-2",@"deposit",@"online-1",@"online-6;online-8;online-5;online-7;online-11;online-15;online-16",@"online-19",@"online-9",@"card",@"online-20",@"online-17"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
@@ -72,12 +72,12 @@
         [arr addObject:model];
     }
     if ([IVNetwork userInfo]) {
-        [self loadPersonalPaymentData:arr];
+        [self loadPersonalPaymentData:arr list:[paymentNames componentsJoinedByString:@";"]];
     }
     
 }
 
-- (void)loadPersonalPaymentData:(NSMutableArray *)defaultArr {
+- (void)loadPersonalPaymentData:(NSMutableArray *)defaultArr list:(NSString *)listStr {
 //    [self showLoading];
     [CNPayRequestManager queryAllChannelCompleteHandler:^(IVRequestResultModel *result, id response) {
 //        [self hideLoading];
@@ -85,30 +85,114 @@
         NSMutableArray *payments = [NSMutableArray array];
         NSMutableArray *availablePayments = [NSMutableArray array];
         if (result.data && [result.data isKindOfClass:[NSArray class]]) {
-            for (NSDictionary *dict in result.data) {
+            for (int i = 0; i < [result.data count]; i ++) {
+                NSDictionary *dict = result.data[i];
                 CNPaymentModel *model = [[CNPaymentModel alloc] initWithDictionary:dict error:nil];
-                if (model.isAvailable) {
-                    [payments addObject:model];
-                }
+                model.paymentType = i;
+                [payments addObject:model];
             }
-            for (CNPaymentModel *paymentModel in payments) {
-                for (BTTMeMainModel *model in defaultArr) {
-                    if ([model.name isEqualToString:paymentModel.paymentTitle] && paymentModel.isAvailable) {
-                        if ([paymentModel.paymentTitle isEqualToString:@"微信扫码"] ||
-                            [paymentModel.paymentTitle isEqualToString:@"微信WAP"] ||
-                            [paymentModel.paymentTitle isEqualToString:@"支付宝扫码"] ||
-                            [paymentModel.paymentTitle isEqualToString:@"QQ钱包"] ||
-                            [paymentModel.paymentTitle isEqualToString:@"QQWAP"] ||
-                            [paymentModel.paymentTitle isEqualToString:@"银联扫码"] ||
-                            [paymentModel.paymentTitle isEqualToString:@"京东扫码"]) {
-                            continue;
-                        }
-                        
-                        [availablePayments addObject:model];
-                    }
-                }
+            CNPaymentModel *BQFast = payments[CNPaymentBQFast];
+            if (BQFast.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"迅捷网银";
+                mainModel.iconName = @"me_netbank";
+                [availablePayments addObject:mainModel];
             }
             
+            CNPaymentModel *WXFast = payments[CNPaymentBQWechat];
+            if (WXFast.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"微信秒存";
+                mainModel.iconName = @"me_wechat";
+                [availablePayments addObject:mainModel];
+            }
+            
+            CNPaymentModel *aliFast = payments[CNPaymentBQAli];
+            if (aliFast.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"支付宝秒存";
+                mainModel.iconName = @"me_alipay";
+                [availablePayments addObject:mainModel];
+            }
+            
+            CNPaymentModel *hand = payments[CNPaymentDeposit];
+            if (hand.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"手工存款";
+                mainModel.iconName = @"me_hand";
+                [availablePayments addObject:mainModel];
+            }
+            
+            CNPaymentModel *online = payments[CNPaymentOnline];
+            if (online.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"在线支付";
+                mainModel.iconName = @"me_online";
+                [availablePayments addObject:mainModel];
+            }
+            
+            CNPaymentModel *scan1 = payments[CNPaymentWechatQR];
+            CNPaymentModel *scan2 = payments[CNPaymentWechatApp];
+            CNPaymentModel *scan3 = payments[CNPaymentAliQR];
+            CNPaymentModel *scan4 = payments[CNPaymentQQApp];
+            CNPaymentModel *scan5 = payments[CNPaymentUnionQR];
+            CNPaymentModel *scan6 = payments[CNPaymentQQQR];
+            CNPaymentModel *scan7 = payments[CNPaymentJDQR];
+            BOOL isHave = NO;
+            if ((scan1.isAvailable ||
+                scan2.isAvailable ||
+                scan3.isAvailable ||
+                scan4.isAvailable ||
+                scan5.isAvailable ||
+                scan6.isAvailable ||
+                scan7.isAvailable) && !isHave) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"扫码支付";
+                mainModel.iconName = @"me_online";
+                [availablePayments addObject:mainModel];
+                isHave = YES;
+            }
+            
+            CNPaymentModel *quick = payments[CNPaymentUnionApp];
+            if (quick.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"银行快捷支付";
+                mainModel.iconName = @"me_quick";
+                [availablePayments addObject:mainModel];
+            }
+            
+            CNPaymentModel *alipay = payments[CNPaymentAliApp];
+            if (alipay.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"支付宝WAP";
+                mainModel.iconName = @"me_alipay";
+                [availablePayments addObject:mainModel];
+            }
+            
+            CNPaymentModel *pointCard = payments[CNPaymentCard];
+            if (pointCard.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"点卡支付";
+                mainModel.iconName = @"me_pointCard";
+                [availablePayments addObject:mainModel];
+            }
+            
+            CNPaymentModel *btc = payments[CNPaymentBTC];
+            if (btc.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"比特币支付";
+                mainModel.iconName = @"me_btc";
+                [availablePayments addObject:mainModel];
+            }
+            
+            CNPaymentModel *jd = payments[CNPaymentJDApp];
+            if (jd.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"京东WAP支付";
+                mainModel.iconName = @"me_jd";
+                [availablePayments addObject:mainModel];
+            }
+
             self.paymentDatas = [availablePayments mutableCopy];
         }
         [self setupElements];
@@ -200,7 +284,7 @@
 - (void)makeCallWithPhoneNum:(NSString *)phone {
     NSString *url = nil;
     NSMutableDictionary *params = @{}.mutableCopy;
-    if ([IVNetwork userInfo].customerLevel >= 5) {
+    if ([IVNetwork userInfo].customerLevel >= 4) {
         url = BTTCallBackMemberAPI;
         [params setValue:phone forKey:@"phone"];
         [params setValue:@"memberphone" forKey:@"phone_type"];
