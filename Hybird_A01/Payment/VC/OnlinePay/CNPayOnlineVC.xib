@@ -130,6 +130,12 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mXq-zw-kB5">
+                                            <rect key="frame" x="335" y="0.0" width="40" height="49"/>
+                                            <connections>
+                                                <action selector="selectAmountList:" destination="-1" eventType="touchUpInside" id="m8o-Lk-AXe"/>
+                                            </connections>
+                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GBx-wT-eSj">
                                             <rect key="frame" x="115" y="0.0" width="260" height="49"/>
                                             <connections>
@@ -142,6 +148,7 @@
                                     </subviews>
                                     <color key="backgroundColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
+                                        <constraint firstItem="mXq-zw-kB5" firstAttribute="top" secondItem="u6N-iR-M4A" secondAttribute="top" id="19P-fp-J6c"/>
                                         <constraint firstItem="j61-Q4-AHV" firstAttribute="leading" secondItem="ekf-WD-flB" secondAttribute="trailing" id="DKY-QX-Y8G"/>
                                         <constraint firstAttribute="bottom" secondItem="j61-Q4-AHV" secondAttribute="bottom" id="GTz-rQ-oT9"/>
                                         <constraint firstItem="j61-Q4-AHV" firstAttribute="top" secondItem="u6N-iR-M4A" secondAttribute="top" id="IA1-9U-o9b"/>
@@ -150,7 +157,10 @@
                                         <constraint firstItem="ekf-WD-flB" firstAttribute="leading" secondItem="u6N-iR-M4A" secondAttribute="leading" constant="15" id="Ml2-qY-FYu"/>
                                         <constraint firstItem="GBx-wT-eSj" firstAttribute="bottom" secondItem="j61-Q4-AHV" secondAttribute="bottom" id="MqK-iF-pa0"/>
                                         <constraint firstAttribute="trailing" secondItem="GBx-wT-eSj" secondAttribute="trailing" id="OfQ-Cl-jpe"/>
+                                        <constraint firstAttribute="bottom" secondItem="mXq-zw-kB5" secondAttribute="bottom" id="RrE-Xa-Syl"/>
                                         <constraint firstItem="GBx-wT-eSj" firstAttribute="top" secondItem="j61-Q4-AHV" secondAttribute="top" id="Uhb-wk-uDG"/>
+                                        <constraint firstAttribute="trailing" secondItem="mXq-zw-kB5" secondAttribute="trailing" id="VIt-Pt-0WT"/>
+                                        <constraint firstItem="mXq-zw-kB5" firstAttribute="leading" secondItem="j61-Q4-AHV" secondAttribute="trailing" id="ZDA-x3-Fwg"/>
                                         <constraint firstAttribute="trailing" secondItem="PM8-e2-sSK" secondAttribute="trailing" constant="15" id="nyF-mz-S3r"/>
                                         <constraint firstItem="ekf-WD-flB" firstAttribute="centerY" secondItem="u6N-iR-M4A" secondAttribute="centerY" id="vpT-Al-bhA"/>
                                         <constraint firstItem="GBx-wT-eSj" firstAttribute="leading" secondItem="j61-Q4-AHV" secondAttribute="leading" id="zHd-qC-mNr"/>

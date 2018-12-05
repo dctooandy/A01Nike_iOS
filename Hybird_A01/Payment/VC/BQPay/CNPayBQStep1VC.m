@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *preSettingMessageLb;
 
 @property (weak, nonatomic) IBOutlet CNPayAmountTF *amountTF;
+@property (weak, nonatomic) IBOutlet UIButton *amountBtn;
 @property (weak, nonatomic) IBOutlet UILabel *nameLb;
 @property (weak, nonatomic) IBOutlet CNPayNameTF *nameTF;
 @property (weak, nonatomic) IBOutlet CNPayNormalTF *bankTF;
@@ -41,6 +42,7 @@
     // 初始化数据
     [self updateAllContentWithModel:self.paymentModel];
     [self configRecommendView];
+    [self configAmountList];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -112,6 +114,32 @@
         weakSelf.bankTF.text = nil;
         weakSelf.bankNames = nil;
     };
+}
+
+- (void)configAmountList {
+    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
+    if (!self.paymentModel.amountCanEdit) {
+        self.amountTF.placeholder = @"仅可选择以下金额";
+    }
+}
+
+
+- (IBAction)selectAmountList:(id)sender {
+    weakSelf(weakSelf);
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.paymentModel.amountList.count];
+    for (id obj in self.paymentModel.amountList) {
+        [array addObject:[NSString stringWithFormat:@"%@", obj]];
+    }
+    if (array.count == 0) {
+        [self showError:@"无可选金额，请直接输入"];
+        return;
+    }
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
+        if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
+            return;
+        }
+        weakSelf.amountTF.text = selectValue;
+    }];
 }
 
 - (IBAction)selectedBank:(UIButton *)sender {

@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *cityTF;
 @property (weak, nonatomic) IBOutlet UILabel *depositByLb;
 @property (weak, nonatomic) IBOutlet UITextField *dateTF;
+@property (weak, nonatomic) IBOutlet UIButton *amountBtn;
 @property (weak, nonatomic) IBOutlet UITextField *amountTF;
 @property (weak, nonatomic) IBOutlet UITextField *chargeTF;
 @property (weak, nonatomic) IBOutlet UITextField *remarkTF;
@@ -33,12 +34,22 @@
     [self configUI];
     [self addBankView];
     [self setViewHeight:550 fullScreen:NO];
+    [self configAmountList];
 }
 
 - (void)configUI {
     self.preSettingMessageLb.text = self.preSaveMsg;
     self.depositByLb.text = self.writeModel.depositBy;
 }
+
+
+- (void)configAmountList {
+    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
+    if (!self.paymentModel.amountCanEdit) {
+        self.amountTF.placeholder = @"仅可选择以下金额";
+    }
+}
+
 
 
 - (IBAction)selectPayType:(id)sender {
@@ -76,6 +87,24 @@
         weakSelf.dateTF.text = selectValue;
     } cancelBlock:^{
         
+    }];
+}
+
+- (IBAction)selectAmountList:(id)sender {
+    weakSelf(weakSelf);
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.paymentModel.amountList.count];
+    for (id obj in self.paymentModel.amountList) {
+        [array addObject:[NSString stringWithFormat:@"%@", obj]];
+    }
+    if (array.count == 0) {
+        [self showError:@"无可选金额，请直接输入"];
+        return;
+    }
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
+        if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
+            return;
+        }
+        weakSelf.amountTF.text = selectValue;
     }];
 }
 

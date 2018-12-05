@@ -92,16 +92,9 @@
 }
 
 - (void)configAmountList {
-    // 微信app,扫码和支付app,宝扫码，只展示amountList
-    if (self.paymentModel.amountList.count > 0 &&
-        (self.paymentModel.paymentType == CNPaymentWechatQR ||
-         self.paymentModel.paymentType == CNPaymentAliQR)) {
-        self.amountBtn.hidden = NO;
+    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
+    if (!self.paymentModel.amountCanEdit) {
         self.amountTF.placeholder = @"仅可选择以下金额";
-        self.arrawDownIV.hidden = NO;
-    } else {
-        self.amountBtn.hidden = YES;
-        self.arrawDownIV.hidden = YES;
     }
 }
 
@@ -144,6 +137,10 @@
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.paymentModel.amountList.count];
     for (id obj in self.paymentModel.amountList) {
         [array addObject:[NSString stringWithFormat:@"%@", obj]];
+    }
+    if (array.count == 0) {
+        [self showError:@"无可选金额，请直接输入"];
+        return;
     }
     [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
         if ([weakSelf.amountTF.text isEqualToString:selectValue]) {

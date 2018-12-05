@@ -57,6 +57,7 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 /// 支付方式是否可用
 @property (nonatomic, assign) BOOL isAvailable;
 @property (nonatomic, copy)  NSArray <NSString *> *amountList;
+@property (nonatomic, assign) BOOL amountCanEdit;
 @property (nonatomic, assign) double maxamount;
 @property (nonatomic, assign) double minamount;
 @property (nonatomic, assign) NSInteger payid;
