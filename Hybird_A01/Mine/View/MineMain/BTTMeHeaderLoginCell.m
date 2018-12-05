@@ -55,7 +55,9 @@
 }
 
 - (void)scrollLabelView:(TXScrollLabelView *)scrollLabelView didClickWithText:(NSString *)text atIndex:(NSInteger)index {
-    
+    if (self.clickEventBlock) {
+        self.clickEventBlock(text);
+    }
 }
 
 - (IBAction)btnClick:(UIButton *)sender {

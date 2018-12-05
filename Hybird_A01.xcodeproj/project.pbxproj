@@ -50,6 +50,8 @@
 		3A11AE682186D94B00B1AFF4 /* BTTThisWeekCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11AE662186D94B00B1AFF4 /* BTTThisWeekCell.xib */; };
 		3A11AE6C2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11AE6A2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.m */; };
 		3A11AE6D2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11AE6B2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib */; };
+		3A34F79321B6630D007BC4D4 /* BTTGamesTryAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34F79221B6630D007BC4D4 /* BTTGamesTryAlertView.m */; };
+		3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A34F79421B6631B007BC4D4 /* BTTGamesTryAlertView.xib */; };
 		3A37E0FA2164685600FB13A1 /* AppDelegate+Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37E0F92164685600FB13A1 /* AppDelegate+Environment.m */; };
 		3A37E0FD2164691300FB13A1 /* AppDelegate+AD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37E0FC2164691300FB13A1 /* AppDelegate+AD.m */; };
 		3A37E1192164A20100FB13A1 /* BTTTabbarController+VoiceCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37E1162164A20100FB13A1 /* BTTTabbarController+VoiceCall.m */; };
@@ -713,6 +715,9 @@
 		3A11AE692186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTThisWeekBtnsCell.h; sourceTree = "<group>"; };
 		3A11AE6A2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTThisWeekBtnsCell.m; sourceTree = "<group>"; };
 		3A11AE6B2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTThisWeekBtnsCell.xib; sourceTree = "<group>"; };
+		3A34F79121B6630D007BC4D4 /* BTTGamesTryAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTGamesTryAlertView.h; sourceTree = "<group>"; };
+		3A34F79221B6630D007BC4D4 /* BTTGamesTryAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTGamesTryAlertView.m; sourceTree = "<group>"; };
+		3A34F79421B6631B007BC4D4 /* BTTGamesTryAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTGamesTryAlertView.xib; sourceTree = "<group>"; };
 		3A37E0F82164685600FB13A1 /* AppDelegate+Environment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Environment.h"; sourceTree = "<group>"; };
 		3A37E0F92164685600FB13A1 /* AppDelegate+Environment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Environment.m"; sourceTree = "<group>"; };
 		3A37E0FB2164691300FB13A1 /* AppDelegate+AD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+AD.h"; sourceTree = "<group>"; };
@@ -2643,6 +2648,9 @@
 				3A9E4C3B219E55CF00E7D8C0 /* BTTMakeCallSuccessView.h */,
 				3A9E4C3C219E55CF00E7D8C0 /* BTTMakeCallSuccessView.m */,
 				3A9E4C3E219E55E200E7D8C0 /* BTTMakeCallSuccessView.xib */,
+				3A34F79121B6630D007BC4D4 /* BTTGamesTryAlertView.h */,
+				3A34F79221B6630D007BC4D4 /* BTTGamesTryAlertView.m */,
+				3A34F79421B6631B007BC4D4 /* BTTGamesTryAlertView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3671,6 +3679,7 @@
 				EAE89F34218C3ABD00C29393 /* LIVVideoMessageContentView.nib in Resources */,
 				3AAE821C219A738B003EC8B0 /* BTTLoginOrRegisterTypeSelectCell.xib in Resources */,
 				3AAE8219219A738B003EC8B0 /* BTTRegisterQuickManualCell.xib in Resources */,
+				3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */,
 				3A11AE232183FF0000B1AFF4 /* BTTPasswordChangeBtnsCell.xib in Resources */,
 				3AE1EB0A218046D80073A32D /* BTTCardModifyTitleCell.xib in Resources */,
 				EAE89EB5218C3ABD00C29393 /* LIVFileMessage_TypeUnknown@2x.png in Resources */,
@@ -4152,6 +4161,7 @@
 				3A49DFA02179DA0D00FEFBDA /* BTTBindingMobileTwoCell.m in Sources */,
 				3ADD235E2176D7F000FA959A /* BTTHomePageViewController+Nav.m in Sources */,
 				D5DBEB0621ABB774008AF629 /* CNPayDepositStep2VC.m in Sources */,
+				3A34F79321B6630D007BC4D4 /* BTTGamesTryAlertView.m in Sources */,
 				3A8D6E9C21633D83000530DF /* BTTBaseWebViewController.m in Sources */,
 				3A11ADDA218187B600B1AFF4 /* MBProgressHUD+Add.m in Sources */,
 				D5DBEB3321ABB774008AF629 /* CNCompleteInfoView.m in Sources */,

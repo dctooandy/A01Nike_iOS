@@ -44,6 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)refreshDatasOfHomePage;
 
+- (void)showTryAlertViewWithBlock:(BTTBtnBlock)btnClickBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

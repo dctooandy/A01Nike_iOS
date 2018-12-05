@@ -106,6 +106,7 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
+                <outlet property="btnTitleLabel" destination="ybR-r2-Ab1" id="QPa-EU-LWX"/>
                 <outlet property="collectBtn" destination="ht6-kr-CYd" id="BEi-9m-kGK"/>
                 <outlet property="gameIcon" destination="Ch2-Rf-g41" id="PHd-zq-ced"/>
                 <outlet property="gameIconHeightConstants" destination="aKG-NX-P4u" id="DZE-R8-ES3"/>

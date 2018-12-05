@@ -91,6 +91,9 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTBannerDefaultWidth  1280
 #define BTTBnnnerDefaultHeight 440
 
+#define BTTNavHeightNotLogin (KIsiPhoneX ? (88 + 49) : 113)
+#define BTTNavHeightLogin    (KIsiPhoneX ? 88 : 64)
+
 //听云相关
 #define TingYunAppId  @"402c4df0e9124425ba0b2feb76d120b0"
 
@@ -154,8 +157,8 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTParentID         @"parent_id"
 #define BTTPhone            @"phone"
 
-#define BTTUserLoginAPI        @"/users/login"
-#define BTTUserCreateAPI       @"/users/create"
+#define BTTUserLoginAPI        @"/public/users/login"
+#define BTTUserCreateAPI       @"/A01/users/create"
 #define BTTVerifyCaptcha       @"/otherVerify/captcha"
 #define BTTUserFastRegister    @"/A01/users/fastRegister"
 #define BTTNoLoginMobileCodeAPI @"/otherVerify/send"

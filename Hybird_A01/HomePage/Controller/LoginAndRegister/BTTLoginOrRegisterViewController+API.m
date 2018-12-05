@@ -63,22 +63,32 @@
     [parameters setObject:model.login_name forKey:BTTLoginName];
     [parameters setObject:model.password forKey:BTTPassword];
     [parameters setObject:model.timestamp forKey:BTTTimestamp];
+    if (self.uuid.length) {
+        [parameters setObject:self.uuid forKey:@"uuid"];
+    }
     if (model.code.length) {
         [parameters setObject:model.code forKey:@"code"];
     }
     [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTUserLoginAPI paramters:parameters completionBlock:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
+        self.uuid = @"";
         NSLog(@"%@",response);
         if (result.code_http == 200) {
             [[NSUserDefaults standardUserDefaults] setObject:model.login_name forKey:BTTCacheAccountName];
             [[NSUserDefaults standardUserDefaults] synchronize];
             self.wrongPwdNum = 0;
-            if (isback) {
-                [MBProgressHUD showSuccess:@"登录成功" toView:nil];
-                [self.navigationController popViewControllerAnimated:YES];
+            if ([result.data isKindOfClass:[NSDictionary class]]) {
+                [BTTUserStatusManager loginSuccessWithUserInfo:result.data];
+                if (isback) {
+                    [MBProgressHUD showSuccess:@"登录成功" toView:nil];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            } else {
+                if (result.message.length) {
+                    [MBProgressHUD showError:result.message toView:nil];
+                }
             }
-            [BTTUserStatusManager loginSuccessWithUserInfo:result.data[@"WSCustomers"]];
         } else {
             if (result.code_system == 202020) {
                 [self showAlertWithModle:model];
@@ -229,6 +239,9 @@
     [params setObject:model.login_name forKey:BTTLoginName];
     [params setObject:model.password forKey:BTTPassword];
     [params setObject:model.catpcha forKey:@"catpcha"];
+    if (self.uuid.length) {
+        [params setObject:self.uuid forKey:@"uuid"];
+    }
     if (model.parent_id.length) {
         [params setObject:model.parent_id forKey:BTTParentID];
     }
@@ -239,21 +252,18 @@
     [IVNetwork sendRequestWithSubURL:BTTUserCreateAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         [self hideLoading];
+        self.uuid = @"";
         if (result.code_http == 200) {
-            if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
-                if (![result.data[@"login_name"] isKindOfClass:[NSNull class]] && result.data[@"login_name"]) {
-                    BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
-                    vc.account = result.data[@"login_name"];
-                    [self.navigationController pushViewController:vc animated:YES];
-                    
-                    BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
-                    loginModel.login_name = model.login_name;
-                    loginModel.password = model.password;
-                    loginModel.timestamp = [PublicMethod timeIntervalSince1970];
-                    [self loginWithLoginAPIModel:loginModel isBack:NO];
-                }
+            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
+                BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
+                vc.account = model.login_name;
+                [self.navigationController pushViewController:vc animated:YES];
+                BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
+                loginModel.login_name = model.login_name;
+                loginModel.password = model.password;
+                loginModel.timestamp = [PublicMethod timeIntervalSince1970];
+                [self loginWithLoginAPIModel:loginModel isBack:NO];
             }
-            
         }
         if (result.message.length) {
             [MBProgressHUD showError:result.message toView:nil];
@@ -314,6 +324,7 @@
                     // 将NSData转为UIImage
                     UIImage *decodedImage = [UIImage imageWithData: decodeData];
                     self.codeImage = decodedImage;
+                    self.uuid = result.data[@"uuid"];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.collectionView reloadData];
                     });

@@ -22,6 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) BTTSelectValueBlock selectValueBlock;
 
+@property (nonatomic, assign) NSInteger limit;
+
+@property (nonatomic, assign) BOOL isShowFooter; ///< 是不是显示页脚
+
 @end
 
 NS_ASSUME_NONNULL_END

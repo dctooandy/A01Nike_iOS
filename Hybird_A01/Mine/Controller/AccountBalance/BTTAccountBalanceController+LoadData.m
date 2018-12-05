@@ -48,7 +48,7 @@
 
 - (void)loadGamesListAndGameAmount {
     [self loadMainData];
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_queue_t queue = dispatch_queue_create("accountBlance.data", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_enter(group);
     dispatch_async(queue, ^{
@@ -60,9 +60,25 @@
     });
     dispatch_group_notify(group, queue, ^{
         [self hideLoading];
-        for (BTTGamesHallModel *model in self.games) {
-            [self loadGameAmountWithModel:model];
-        }
+        [self loadEachGameHall];
+    });
+}
+
+- (void)loadEachGameHall {
+    dispatch_queue_t queue = dispatch_queue_create("accountBlance.eachhall", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_group_t group = dispatch_group_create();
+    for (BTTGamesHallModel *model in self.games) {
+        NSInteger index = [self.games indexOfObject:model];
+        dispatch_group_enter(group);
+        dispatch_async(queue, ^{
+            [self loadGameAmountWithModel:model index:index group:group];
+        });
+    }
+    
+    dispatch_group_notify(group, queue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
     });
 }
 
@@ -74,14 +90,14 @@
                 if (result.data[@"platforms"] && [result.data[@"platforms"] isKindOfClass:[NSArray class]] && ![result.data[@"platforms"] isKindOfClass:[NSNull class]]) {
                     for (NSDictionary *dict in result.data[@"platforms"]) {
                         BTTGamesHallModel *model = [BTTGamesHallModel yy_modelWithDictionary:dict];
+                        model.isLoading = YES;
                         [self.games addObject:model];
                     }
                 }
-                dispatch_group_leave(group);
-                [self setupElements];
             }
         }
-        
+        [self setupElements];
+        dispatch_group_leave(group);
         if (result.message.length) {
             [MBProgressHUD showError:result.message toView:nil];
         }
@@ -99,18 +115,17 @@
     }];
 }
 
-- (void)loadGameAmountWithModel:(BTTGamesHallModel *)model {
+- (void)loadGameAmountWithModel:(BTTGamesHallModel *)model index:(NSInteger)index group:(dispatch_group_t)group{
     NSDictionary *params = @{@"game_name":model.gameName};
     [IVNetwork sendRequestWithSubURL:BTTCreditsGame paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.code_http == 200 && result.data && ![result.data isKindOfClass:[NSNull class]] && [result.data isKindOfClass:[NSDictionary class]]) {
             model.amount = [NSString stringWithFormat:@"%.2f",[result.data[@"val"] floatValue]];
+            model.isLoading = NO;
             self.amount = [NSString stringWithFormat:@"%.2f",self.amount.floatValue + model.amount.floatValue];
             self.hallAmount = [NSString stringWithFormat:@"%.2f",self.hallAmount.floatValue + model.amount.floatValue];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.collectionView reloadData];
-            });
         }
+        dispatch_group_leave(group);
         if (result.message.length) {
             [MBProgressHUD showError:result.message toView:nil];
         }

@@ -11,6 +11,7 @@
 @implementation BTTVideoGamesListController (LoadData)
 
 - (void)loadVideoGamesWithRequestModel:(BTTVideoGamesRequestModel *)requestModel complete:(nonnull IVRequestCallBack)complete{
+    self.isShowFooter = NO;
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (requestModel.type.length) {
         [params setValue:requestModel.type forKey:@"type"];
@@ -44,17 +45,19 @@
 }
 
 - (void)loadCollectionData {
-    [self.collectionView.mj_footer endRefreshingWithNoMoreData];
     NSDictionary *params = @{@"login_name":[IVNetwork userInfo].loginName};
     [IVNetwork sendUseCacheRequestWithSubURL:BTTFavotiteList paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
+        if (self.favorites.count) {
+            [self.favorites removeAllObjects];
+        }
         if (result.code_http == 200 && [result.data isKindOfClass:[NSArray class]]) {
             for (NSDictionary *dict in result.data) {
                 BTTVideoGameModel *model = [BTTVideoGameModel yy_modelWithDictionary:dict[@"remarks"]];
                 model.isFavority = YES;
                 [self.favorites addObject:model];
             }
-            
+            [self.favorites addObject:[BTTVideoGameModel new]];
         }
     }];
 }
@@ -71,11 +74,6 @@
         NSLog(@"%@",response);
         if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {
             if (result.data[@"val"]) {
-                if (favorite) {
-                    [MBProgressHUD showSuccess:@"添加成功" toView:nil];
-                } else {
-                    [MBProgressHUD showSuccess:@"取消成功" toView:nil];
-                }
                 [self loadCollectionData];
             }
         } else {

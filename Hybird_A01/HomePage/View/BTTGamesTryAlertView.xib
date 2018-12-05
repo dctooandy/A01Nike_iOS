@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BTTGamesTryAlertView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="立即进入试玩" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkp-bU-LmZ">
+                    <rect key="frame" x="135.5" y="30" width="104" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.84705882352941175" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8U0-vU-APr">
+                    <rect key="frame" x="0.0" y="81" width="375" height="0.5"/>
+                    <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.29803921568627451" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="3d8-Gv-k6P"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jgc-UQ-KwL">
+                    <rect key="frame" x="187.5" y="81.5" width="0.5" height="50.5"/>
+                    <color key="backgroundColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.29803921568627451" alpha="0.5" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="0.5" id="CaN-cX-U9o"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" tag="1090" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sy2-XP-8D6">
+                    <rect key="frame" x="0.0" y="81.5" width="187.5" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="nWT-Rp-ryl"/>
+                    </constraints>
+                    <state key="normal" title="确认"/>
+                    <connections>
+                        <action selector="confirmClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ji1-Bk-FZ8"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="1091" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMO-DV-Lr5">
+                    <rect key="frame" x="188" y="81.5" width="187" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="3lm-SR-5hr"/>
+                    </constraints>
+                    <state key="normal" title="真钱登录"/>
+                    <connections>
+                        <action selector="loginClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="yvw-5Z-vwf"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8U0-vU-APr" secondAttribute="trailing" id="1d9-9A-6sd"/>
+                <constraint firstItem="pMO-DV-Lr5" firstAttribute="leading" secondItem="jgc-UQ-KwL" secondAttribute="trailing" id="2WQ-Ka-pXf"/>
+                <constraint firstItem="hkp-bU-LmZ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="5ET-Cc-KiL"/>
+                <constraint firstItem="8U0-vU-APr" firstAttribute="top" secondItem="hkp-bU-LmZ" secondAttribute="bottom" constant="30" id="82f-A9-ska"/>
+                <constraint firstItem="sy2-XP-8D6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="AUL-Xp-Vul"/>
+                <constraint firstItem="pMO-DV-Lr5" firstAttribute="top" secondItem="8U0-vU-APr" secondAttribute="bottom" id="Da5-uf-nhf"/>
+                <constraint firstItem="hkp-bU-LmZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Jy6-S7-oLy"/>
+                <constraint firstItem="sy2-XP-8D6" firstAttribute="top" secondItem="8U0-vU-APr" secondAttribute="bottom" id="Szk-cg-hNn"/>
+                <constraint firstItem="pMO-DV-Lr5" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="UlH-g4-b72"/>
+                <constraint firstItem="jgc-UQ-KwL" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="UvH-gc-hl6"/>
+                <constraint firstItem="jgc-UQ-KwL" firstAttribute="leading" secondItem="sy2-XP-8D6" secondAttribute="trailing" id="YhF-9S-pNT"/>
+                <constraint firstItem="jgc-UQ-KwL" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aad-At-tuF"/>
+                <constraint firstItem="jgc-UQ-KwL" firstAttribute="top" secondItem="8U0-vU-APr" secondAttribute="bottom" id="hXF-1v-8E1"/>
+                <constraint firstItem="8U0-vU-APr" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="vcr-ym-2n2"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="305" y="40"/>
+        </view>
+    </objects>
+</document>

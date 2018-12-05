@@ -138,6 +138,9 @@
                 cell.pwdTextField.delegate = self;
                 cell.codeTextField.delegate = self;
                 cell.codeImageView.image = self.codeImage;
+                [cell.codeTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
+                NSString *historyAccount = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCacheAccountName];
+                cell.accountTextField.text = historyAccount.length ? [historyAccount substringFromIndex:1] : @"";
                 weakSelf(weakSelf);
                 cell.clickEventBlock = ^(id  _Nonnull value) {
                     strongSelf(strongSelf);
@@ -325,6 +328,10 @@
     if (textField.tag == 2010 || textField.tag == 3010) {
         if ([PublicMethod isValidatePhone:textField.text]) {
             self.mobile = textField.text;
+        }
+    } else if (textField.tag == 1082) {
+        if (textField.text.length > 4) {
+            textField.text = [textField.text substringToIndex:4];
         }
     }
 }

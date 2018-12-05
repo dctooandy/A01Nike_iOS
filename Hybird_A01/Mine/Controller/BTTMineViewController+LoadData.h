@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadMeAllData;
 
+- (void)loadUserInfo;
+
 - (void)loadBindStatus;
 
 - (void)loadBankList;
@@ -37,6 +39,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)loadPaymentData;
 
 - (void)loadPaymentDefaultData;
+
+- (void)makeCallWithPhoneNum:(NSString *)phone;
+
+- (void)loadAccountStatus;
 
 
 @end

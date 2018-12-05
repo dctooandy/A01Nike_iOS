@@ -18,6 +18,7 @@
 #import "BTTVerifyTypeSelectController.h"
 #import "BTTAddBTCController.h"
 #import "BTTChangeMobileSuccessController.h"
+#import "BTTChangeMobileManualController.h"
 @interface BTTBindingMobileController ()<BTTElementsFlowLayoutDelegate>
 
 @end
@@ -248,7 +249,7 @@
     NSString *successStr = nil;
     switch (self.mobileCodeType) {
         case BTTSafeVerifyTypeVerifyMobile:
-            url = @"verify/check";
+            url = @"public/verify/check";
             params[@"v_type"] = @"3";
             successStr = @"验证成功!";
             break;
@@ -261,7 +262,7 @@
         case BTTSafeVerifyTypeMobileAddBTCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
             params[@"v_type"] = @"8";
-            url = @"verify/check";
+            url = @"public/verify/check";
             successStr = @"验证成功!";
             break;
         default:
@@ -279,7 +280,7 @@
             if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
                 NSString *phone = result.data[@"val"];
                 [IVNetwork updateUserInfo:@{@"phone" : phone}];
-                [BTTHttpManager fetchBindStatusWithUseCache:YES completionBlock:nil];
+                [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
             }
             switch (self.mobileCodeType) {
                 case BTTSafeVerifyTypeBindMobile:
@@ -336,6 +337,12 @@
             [MBProgressHUD showError:result.message toView:nil];
             if (result.code_system == 300022) {//验证码输入错误超过次数
                 switch (self.mobileCodeType) {
+                    case BTTSafeVerifyTypeVerifyMobile:
+                    {
+                        BTTChangeMobileManualController *vc = [BTTChangeMobileManualController new];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
                     case BTTSafeVerifyTypeMobileAddBankCard:
                     {
                         BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
@@ -420,7 +427,7 @@
     [BTTHttpManager deleteBankOrBTC:isBTC isAuto:isAuto completion:^(IVRequestResultModel *result, id response) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         if (result.status) {
-            [BTTHttpManager fetchBankListWithUseCache:YES completion:nil];
+            [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
             BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
             vc.mobileCodeType = self.mobileCodeType;
             [weakSelf.navigationController pushViewController:vc animated:YES];
