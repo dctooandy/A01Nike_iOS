@@ -165,7 +165,7 @@
     double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;
     if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) {
         _amountTF.text = nil;
-        [self showError:_amountTF.placeholder];
+        [self showError:[NSString stringWithFormat:@"存款金额必须是%.f~%.f之间，最大允许2位小数", self.paymentModel.minamount, maxAmount]];
         return;
     }
     
