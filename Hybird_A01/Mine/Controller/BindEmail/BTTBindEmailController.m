@@ -70,6 +70,7 @@
             [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
             BTTMeMainModel *model = self.sheetDatas[indexPath.row];
             cell.model = model;
+            cell.mineSparaterType = BTTMineSparaterTypeNone;
             BOOL isUseRegEmail = (![IVNetwork userInfo].isEmailBinded && [IVNetwork userInfo].email.length != 0);
             if (self.codeType == BTTSafeVerifyTypeChangeEmail) {
                 cell.sendBtn.enabled = NO;

@@ -37,6 +37,9 @@
     _model = model;
     self.nameLabel.text = model.name;
     self.textField.placeholder = model.iconName;
+    if ([model.name isEqualToString:@"新密码"]) {
+        self.mineSparaterType = BTTMineSparaterTypeNone;
+    }
 }
 
 @end

@@ -31,9 +31,9 @@
     backgroundView.backgroundColor =  COLOR_RGBA(36, 40, 49, 1);
     [self setSelectedBackgroundView:backgroundView];
     self.hotLabel.layer.cornerRadius = 2;
-    self.iconImg.badgeOffset = CGPointMake(-3, 3);
+    self.iconImg.badgeOffset = CGPointMake(-4, 4);
     self.iconImg.badgeColor = [UIColor colorWithHexString:@"d13847"];
-    self.iconImg.redDotOffset = CGPointMake(-3, 0);
+    self.iconImg.redDotOffset = CGPointMake(-4, 4);
     [GJRedDot registNodeWithKey:BTTMineCenterItemsKey
                       parentKey:BTTMineCenterMessage
                     defaultShow:YES];
@@ -57,9 +57,15 @@
     }
     if ([model.name isEqualToString:@"推荐礼金"]) {
         self.hotLabel.hidden = NO;
+        
     } else {
         self.hotLabel.hidden = YES;
     }
+    if ([model.name isEqualToString:@"推荐礼金"] ||
+        [model.name isEqualToString:@"网络检测"]) {
+        self.mineSparaterType = BTTMineSparaterTypeNone;
+    } 
+    
     if ([model.name isEqualToString:@"站内信"] || [model.name isEqualToString:@"版本更新"]) {
         weakSelf(weakSelf);
         if ([model.name isEqualToString:@"站内信"]) {
