@@ -26,14 +26,14 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addChildViewController:[IVGameManager sharedManager].aginVC];
-    [self.view addSubview:[IVGameManager sharedManager].aginVC.view];
-    [IVGameManager sharedManager].aginVC.view.frame = self.view.frame;
-    [IVGameManager sharedManager].aginVC.view.hidden = NO;
+    [self addGameViewToSelf];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    if ([IVGameManager sharedManager].agqjVC.parentViewController != self) {
+        [self addGameViewToSelf];
+    }
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
@@ -42,6 +42,13 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+- (void)addGameViewToSelf
+{
+    [self addChildViewController:[IVGameManager sharedManager].aginVC];
+    [self.view addSubview:[IVGameManager sharedManager].aginVC.view];
+    [IVGameManager sharedManager].aginVC.view.frame = self.view.frame;
+    [IVGameManager sharedManager].aginVC.view.hidden = NO;
 }
 + (void)addGameViewToWindow
 {

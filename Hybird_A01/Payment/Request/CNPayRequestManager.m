@@ -81,6 +81,13 @@ NSInteger const kPayTypeTotalCount = 19;
     [self requestWithUrl:path parameters:params handler:completeHandler];
 }
 
++ (void)paymentQueryBillCompleteHandler:(IVRequestCallBack)completeHandler {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"flag"] = @"0";
+    [self requestWithUrl:kPaymentQueryDeposit parameters:params handler:completeHandler];
+}
+
+
 + (void)paymentCreateManualWithWriteInfo:(CNPayWriteModel *)infoModel completeHandler:(IVRequestCallBack)completeHandler {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     CNPayBankCardModel *bankModel = infoModel.chooseBank;

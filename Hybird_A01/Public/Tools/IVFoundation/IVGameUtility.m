@@ -10,6 +10,13 @@
 #import "NSString+Expand.h"
 #import "BTTHttpManager.h"
 #import "AppDelegate.h"
+#import "BTTWithdrawalController.h"
+#import "CNPayVC.h"
+#import "BTTTabbarController.h"
+#import "BTTLoginOrRegisterViewController.h"
+#import "CLive800Manager.h"
+#import "BTTCardInfosController.h"
+#import "BTTPersonalInfoController.h"
 @implementation IVGameUtility
 - (UIColor *)IVGameGetNavigationTitleColor {
     return [UIColor whiteColor];
@@ -76,20 +83,35 @@
 - (void)IVGameForwardToPageWithType:(IVGameForwardPageType)type gameController:(IVWKGameViewController *)gameController {
     //转为竖屏
     [[UIDevice currentDevice] setValue:@(UIDeviceOrientationPortrait) forKey:@"orientation"];
-    /*
-    ViewConfigModel *configModel = [[ViewConfigModel alloc] init];
+
+    WebConfigModel *configModel = [[WebConfigModel alloc] init];
     configModel.newView = YES;
     UIViewController *controller = nil;
+    AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    BTTTabbarController *tabVC = (BTTTabbarController *)app.window.rootViewController;
     switch (type) {
-        case IVGameForwardPageTypeWithdrawal:
-            controller = [[AMWithdrawalVC alloc] init];
+        case IVGameForwardPageTypeWithdrawal:{
+            UIViewController *vc = nil;
+            if ([IVNetwork userInfo].real_name && [IVNetwork userInfo].verify_code) {
+                if ([IVNetwork userInfo].isBankBinded) {
+                    vc = [[BTTWithdrawalController alloc] init];
+                } else {
+                    [MBProgressHUD showMessagNoActivity:@"请先绑定银行卡" toView:nil];
+                    vc = [[BTTCardInfosController alloc] init];
+                }
+            } else {
+                [MBProgressHUD showMessagNoActivity:@"请先完善个人信息" toView:nil];
+                vc = [[BTTPersonalInfoController alloc] init];
+            }
+            controller = vc;
+        }
             break;
         case IVGameForwardPageTypeDeposit:
-            controller = [[AMPayViewController alloc] init];
+            controller = [[CNPayVC alloc] init];
             break;
         case IVGameForwardPageTypeCustomerService:
-            controller = [[AMKFViewController alloc] init];
-            break;
+            [[CLive800Manager sharedInstance] startLive800Chat:gameController];
+            return;
         case IVGameForwardPageTypeBJLDetails:
             configModel.url = @"gameRule/table_baccarat.htm";
             configModel.title = @"包桌百家乐";
@@ -99,43 +121,41 @@
         }
             break;
         case IVGameForwardPageTypeForum:
-            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:@"http://www.am8show.com/"]];
             return;
             break;
         case IVGameForwardPageTypePromotions:{
-            AppDelegate *app = (AppDelegate *)APPDELEGATE;
-            [app.tabbarController resetEnvironmentNavigationTabBarSelectedIndex:3 completion:nil];
+            [gameController.navigationController popToRootViewControllerAnimated:YES];
+            tabVC.selectedIndex = 3;
             return;
         }
             break;
         case IVGameForwardPageTypeRegister:{
-            AMRegisterViewController *regVC = [[AMRegisterViewController alloc] init];
-            regVC.needShowLogin = YES;
-            controller = regVC;
+            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+            vc.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
+            controller = vc;
         }
             break;
         case IVGameForwardPageTypeGoHome: {
-            AppDelegate *app = (AppDelegate *)APPDELEGATE;
-            [app.tabbarController resetEnvironmentNavigationTabBarSelectedIndex:0 completion:nil];
+            [gameController.navigationController popToRootViewControllerAnimated:YES];
+            tabVC.selectedIndex = 0;
             return;
         }
         case IVGameForwardPageTypeGameHall: {
-            AppDelegate *app = (AppDelegate *)APPDELEGATE;
-            [app.tabbarController resetEnvironmentNavigationTabBarSelectedIndex:2 completion:nil];
+            [gameController.navigationController popToRootViewControllerAnimated:YES];
+            tabVC.selectedIndex = 0;
             return;
         }
         default:
             break;
     }
     if (!controller) {
-        controller = [[HDWebController alloc] initWithViewConfigModel:configModel];
+        HAWebViewController *vc = [[HAWebViewController alloc] init];
+        vc.webConfigModel = configModel;
+        controller = vc;
     }
     
     [gameController.navigationController pushViewController:controller animated:YES];
-     */
+    
 }
-
-
-
 
 @end

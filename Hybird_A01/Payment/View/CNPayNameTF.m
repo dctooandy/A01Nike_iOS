@@ -98,4 +98,8 @@
     return nil;
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    !_endedHandler ?: _endedHandler();
+}
+
 @end

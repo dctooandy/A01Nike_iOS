@@ -38,6 +38,7 @@
     [self setTitleColor:kBlackForgroundColor forState:UIControlStateNormal];
     [self setBackgroundImage:[UIImage imageNamed:@"binding_confirm_enable_normal"] forState:UIControlStateNormal];
     [self setBackgroundImage:[UIImage imageNamed:@"binding_confirm_enable_press"] forState:UIControlStateHighlighted];
+    [self setTitle:@"提交中..." forState:UIControlStateSelected];
 }
 
 @end

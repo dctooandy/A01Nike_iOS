@@ -260,7 +260,7 @@
             if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
                 NSString *email = result.data[@"val"];
                 [IVNetwork updateUserInfo:@{@"email" : email}];
-                [BTTHttpManager fetchBindStatusWithUseCache:YES completionBlock:nil];
+                [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
             }
             switch (self.codeType) {
                 case BTTSafeVerifyTypeBindEmail:

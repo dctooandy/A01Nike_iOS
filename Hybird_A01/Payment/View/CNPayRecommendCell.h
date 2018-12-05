@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CNPayRecommendCell : UICollectionViewCell
-
-- (void)settingCellStatusIsSelected:(BOOL)isSelected;
 - (void)settingAmount:(NSString *)amount;
 @end

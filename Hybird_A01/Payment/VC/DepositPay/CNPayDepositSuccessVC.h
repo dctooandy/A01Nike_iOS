@@ -6,8 +6,8 @@
 //  Copyright © 2018年 WRD. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "HABaseViewController.h"
 
-@interface CNPayDepositSuccessVC : UIViewController
+@interface CNPayDepositSuccessVC : HABaseViewController
 - (instancetype)initWithAmount:(NSString *)amount;
 @end

@@ -13,6 +13,14 @@
 @end
 
 @implementation BTTAGQJViewController
+- (BOOL)shouldAutorotate
+{
+    return [[IVGameManager sharedManager].agqjVC shouldAutorotate];
+}
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return [[IVGameManager sharedManager].agqjVC supportedInterfaceOrientations];
+}
 - (UIStatusBarStyle)preferredStatusBarStyle{
     return StatusBarStyle;
 }
@@ -26,14 +34,14 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self addChildViewController:[IVGameManager sharedManager].agqjVC];
-    [self.view addSubview:[IVGameManager sharedManager].agqjVC.view];
-    [IVGameManager sharedManager].agqjVC.view.frame = self.view.frame;
-    [IVGameManager sharedManager].agqjVC.view.hidden = NO;
+    [self addGameViewToSelf];
 }
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    if ([IVGameManager sharedManager].agqjVC.parentViewController != self) {
+        [self addGameViewToSelf];
+    }
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
@@ -42,6 +50,13 @@
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+- (void)addGameViewToSelf
+{
+    [self addChildViewController:[IVGameManager sharedManager].agqjVC];
+    [self.view addSubview:[IVGameManager sharedManager].agqjVC.view];
+    [IVGameManager sharedManager].agqjVC.view.frame = self.view.frame;
+    [IVGameManager sharedManager].agqjVC.view.hidden = NO;
 }
 + (void)addGameViewToWindow
 {

@@ -160,8 +160,8 @@
     [BTTHttpManager addBTCCardWithUrl:url params:params.copy completion:^(IVRequestResultModel *result, id response) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         if (result.status) {
-            [BTTHttpManager fetchBindStatusWithUseCache:YES completionBlock:nil];
-            [BTTHttpManager fetchBankListWithUseCache:YES completion:nil];
+            [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
+            [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
             BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
             vc.mobileCodeType = self.addCardType;
             [weakSelf.navigationController pushViewController:vc animated:YES];

@@ -36,7 +36,6 @@
     [super viewDidLoad];
     [self configCollectionView];
     [self configPreSettingMessage];
-    [self configDifferentUI];
     // 刷新数据
     [self updateAllContentWithModel:self.paymentModel];
     [self configAmountList];
@@ -79,10 +78,6 @@
         self.preSettingViewHeight.constant = 0;
         self.preSettingView.hidden = YES;
     }
-}
-
-- (void)configDifferentUI {
-    
 }
 
 /// 刷新数据
@@ -134,8 +129,6 @@
     
     self.currentSelectedIndex = indexPath.row;
     self.paymentModel = [self.payments objectAtIndex:indexPath.row];
-    
-    [self configDifferentUI];
     [self updateAllContentWithModel:self.paymentModel];
     [self configAmountList];
    
@@ -162,8 +155,6 @@
 
 - (IBAction)nextStep:(UIButton *)sender {
     [self.view endEditing:YES];
-    [self goToStep:1];return;
-
     NSString *text = _amountTF.text;
     /// 输入为不合法数字
     if (![NSString isPureInt:text] && ![NSString isPureFloat:text]) {
@@ -188,16 +179,11 @@
     
     /// 提交
     __weak typeof(self) weakSelf =  self;
-    [CNPayRequestManager paymentWithPayType:[self getPaytypeString]
-                                      payId:self.paymentModel.payid
-                                     amount:text
-                                   bankCode:nil
-                            completeHandler:^(IVRequestResultModel *result, id response) {
-                                sender.selected = NO;
-                                __strong typeof(weakSelf) strongSelf = weakSelf;
-                                [strongSelf handlerResult:result];
-                            }];
-    
+    [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVRequestResultModel *result, id response) {
+        sender.selected = NO;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf handlerResult:result];
+    }];
 }
 
 - (void)handlerResult:(IVRequestResultModel *)model {
