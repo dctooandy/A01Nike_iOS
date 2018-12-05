@@ -62,7 +62,7 @@
             [self addSubview:messageBtn];
             messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
             [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
-            messageBtn.redDotOffset = CGPointMake(2, -1);
+            messageBtn.redDotOffset = CGPointMake(1, 3);
             messageBtn.tag = 2002;
             [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             

@@ -161,7 +161,10 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="375" height="600"/>
-            <point key="canvasLocation" x="-6" y="230"/>
+            <connections>
+                <outlet property="otherBtn" destination="dkl-Yp-tm9" id="FUv-he-F76"/>
+            </connections>
+            <point key="canvasLocation" x="-410" y="209"/>
         </collectionViewCell>
     </objects>
 </document>

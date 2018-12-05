@@ -77,7 +77,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="frt-Nf-haE">
-                        <rect key="frame" x="265" y="106.5" width="95" height="35"/>
+                        <rect key="frame" x="265" y="76.5" width="95" height="35"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <state key="normal" title="查看各厅" backgroundImage="me_viewBtn">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -95,7 +95,6 @@
                 <constraint firstItem="6c6-Hq-4Ip" firstAttribute="top" secondItem="gPM-h9-QdU" secondAttribute="bottom" constant="4" id="8by-kK-3HO"/>
                 <constraint firstItem="heZ-Qw-qv2" firstAttribute="top" secondItem="jxH-0f-v10" secondAttribute="top" id="CWw-u1-ED7"/>
                 <constraint firstAttribute="trailing" secondItem="SNo-89-Eka" secondAttribute="trailing" id="FeV-gO-4zQ"/>
-                <constraint firstItem="frt-Nf-haE" firstAttribute="centerY" secondItem="6c6-Hq-4Ip" secondAttribute="centerY" id="GR4-fu-8Rr"/>
                 <constraint firstItem="gPM-h9-QdU" firstAttribute="leading" secondItem="jxH-0f-v10" secondAttribute="trailing" constant="12.5" id="M0E-f7-48A"/>
                 <constraint firstItem="SNo-89-Eka" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="NLm-pW-w5d"/>
                 <constraint firstItem="BxU-fA-s9V" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="QfH-GP-cWi"/>
@@ -104,6 +103,7 @@
                 <constraint firstItem="v4d-Co-HZP" firstAttribute="centerY" secondItem="heZ-Qw-qv2" secondAttribute="centerY" id="XRm-Ve-cg5"/>
                 <constraint firstAttribute="bottom" secondItem="BxU-fA-s9V" secondAttribute="bottom" id="aSn-e7-n4e"/>
                 <constraint firstItem="heZ-Qw-qv2" firstAttribute="leading" secondItem="jxH-0f-v10" secondAttribute="trailing" constant="12.5" id="ahs-9U-8Vl"/>
+                <constraint firstItem="frt-Nf-haE" firstAttribute="centerY" secondItem="BxU-fA-s9V" secondAttribute="centerY" constant="15" id="eUJ-Hp-C95"/>
                 <constraint firstItem="BxU-fA-s9V" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ndq-ta-Akd"/>
                 <constraint firstItem="jxH-0f-v10" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="nmO-gW-VBN"/>
                 <constraint firstAttribute="trailing" secondItem="BxU-fA-s9V" secondAttribute="trailing" id="rm0-Uo-uKJ"/>
