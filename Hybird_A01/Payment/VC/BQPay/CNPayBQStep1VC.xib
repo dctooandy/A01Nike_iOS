@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CNPayBQStep1VC">
             <connections>
+                <outlet property="amountBtn" destination="0Zo-Z3-2DT" id="L6v-Nh-ztt"/>
                 <outlet property="amountTF" destination="mfj-jI-sdZ" id="0HM-1H-BO1"/>
                 <outlet property="bankTF" destination="AXl-4d-cgk" id="dnY-KO-4Kh"/>
                 <outlet property="bottomTipView" destination="adG-CK-hLQ" id="Ssy-HE-38U"/>
@@ -126,19 +127,44 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mfj-jI-sdZ" customClass="CNPayAmountTF">
-                                            <rect key="frame" x="115" y="0.0" width="240" height="49"/>
+                                            <rect key="frame" x="115" y="0.0" width="220" height="49"/>
                                             <color key="textColor" red="0.50980392159999999" green="0.52549019610000003" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="dJb-ct-W14">
+                                            <rect key="frame" x="344" y="16.5" width="16" height="16"/>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0R-C0-0Mn">
+                                            <rect key="frame" x="335" y="0.0" width="40" height="49"/>
+                                            <connections>
+                                                <action selector="selectAmountList:" destination="-1" eventType="touchUpInside" id="P9A-lf-DQq"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Zo-Z3-2DT">
+                                            <rect key="frame" x="115" y="0.0" width="260" height="49"/>
+                                            <connections>
+                                                <action selector="selectAmountList:" destination="-1" eventType="touchUpInside" id="nn6-oe-ph1"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="dJb-ct-W14" secondAttribute="trailing" constant="15" id="2zD-iq-t4U"/>
+                                        <constraint firstAttribute="bottom" secondItem="b0R-C0-0Mn" secondAttribute="bottom" id="5Yc-as-YZx"/>
+                                        <constraint firstItem="b0R-C0-0Mn" firstAttribute="leading" secondItem="mfj-jI-sdZ" secondAttribute="trailing" id="6y7-Mn-hoE"/>
                                         <constraint firstItem="GXU-Ac-mzX" firstAttribute="centerY" secondItem="SdU-Eu-u1M" secondAttribute="centerY" id="8Pb-cR-eqr"/>
+                                        <constraint firstItem="0Zo-Z3-2DT" firstAttribute="top" secondItem="SdU-Eu-u1M" secondAttribute="top" id="8ep-0C-4PD"/>
+                                        <constraint firstAttribute="bottom" secondItem="0Zo-Z3-2DT" secondAttribute="bottom" id="F99-nG-N3J"/>
+                                        <constraint firstAttribute="trailing" secondItem="b0R-C0-0Mn" secondAttribute="trailing" id="HGi-9n-hfk"/>
+                                        <constraint firstItem="dJb-ct-W14" firstAttribute="centerY" secondItem="SdU-Eu-u1M" secondAttribute="centerY" id="Rw4-wW-net"/>
                                         <constraint firstItem="mfj-jI-sdZ" firstAttribute="leading" secondItem="GXU-Ac-mzX" secondAttribute="trailing" id="VAX-IZ-dRJ"/>
-                                        <constraint firstAttribute="trailing" secondItem="mfj-jI-sdZ" secondAttribute="trailing" constant="20" id="hCv-g5-DVG"/>
+                                        <constraint firstItem="b0R-C0-0Mn" firstAttribute="top" secondItem="SdU-Eu-u1M" secondAttribute="top" id="abo-Ei-RVx"/>
+                                        <constraint firstAttribute="trailing" secondItem="mfj-jI-sdZ" secondAttribute="trailing" constant="40" id="hCv-g5-DVG"/>
+                                        <constraint firstItem="0Zo-Z3-2DT" firstAttribute="leading" secondItem="mfj-jI-sdZ" secondAttribute="leading" id="hHS-3b-vhs"/>
                                         <constraint firstItem="GXU-Ac-mzX" firstAttribute="leading" secondItem="SdU-Eu-u1M" secondAttribute="leading" constant="15" id="nFL-pO-FF7"/>
                                         <constraint firstAttribute="bottom" secondItem="mfj-jI-sdZ" secondAttribute="bottom" id="nbp-Kh-bzg"/>
+                                        <constraint firstAttribute="trailing" secondItem="0Zo-Z3-2DT" secondAttribute="trailing" id="pCd-6P-GBX"/>
                                         <constraint firstItem="mfj-jI-sdZ" firstAttribute="top" secondItem="SdU-Eu-u1M" secondAttribute="top" id="s8T-Hf-rdA"/>
                                     </constraints>
                                 </view>

@@ -53,12 +53,11 @@
     for (CNPayBankCardModel *model in self.writeModel.bankList) {
         [bankNames addObject:model.bank_name];
     }
-    [BRStringPickerView showStringPickerWithTitle:_bankNameTF.placeholder dataSource:bankNames defaultSelValue:_bankNameTF.text resultBlock:^(NSString * selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:_bankNameTF.placeholder dataSource:bankNames defaultSelValue:_bankNameTF.text resultBlock:^(id selectValue, NSInteger index) {
         if ([weakSelf.bankNameTF.text isEqualToString:selectValue]) {
             return;
         }
         weakSelf.bankNameTF.text = selectValue;
-        NSInteger index = [bankNames indexOfObject:selectValue];
         weakSelf.writeModel.chooseBank = weakSelf.writeModel.bankList[index];
         [weakSelf configUI];
     }];

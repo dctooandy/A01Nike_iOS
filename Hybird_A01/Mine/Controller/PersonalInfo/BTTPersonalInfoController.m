@@ -10,7 +10,7 @@
 #import "BTTPersonalInfoController+LoadData.h"
 #import "BTTBindingMobileOneCell.h"
 #import "BTTBindingMobileBtnCell.h"
-#import <BRPickerView/BRPickerView.h>
+#import "BRPickerView.h"
 
 
 @interface BTTPersonalInfoController ()<BTTElementsFlowLayoutDelegate>
@@ -62,7 +62,7 @@
     
     if (indexPath.item == 2) {
         BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        [BRStringPickerView showStringPickerWithTitle:@"请选择性别" dataSource:@[@"男", @"女"] defaultSelValue:cell.textField.text resultBlock:^(id selectValue) {
+        [BRStringPickerView showStringPickerWithTitle:@"请选择性别" dataSource:@[@"男", @"女"] defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
             cell.textField.text = selectValue;
         }];
     } else if (indexPath.item == 3) {

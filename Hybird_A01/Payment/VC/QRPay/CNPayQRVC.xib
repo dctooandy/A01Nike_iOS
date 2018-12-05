@@ -171,6 +171,12 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5q-F6-eoE">
+                                    <rect key="frame" x="335" y="0.0" width="40" height="49"/>
+                                    <connections>
+                                        <action selector="selectAmountList:" destination="-1" eventType="touchUpInside" id="daL-68-zpD"/>
+                                    </connections>
+                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ME8-RM-hBZ">
                                     <rect key="frame" x="115" y="0.0" width="260" height="49"/>
                                     <connections>
@@ -184,6 +190,7 @@
                             <color key="backgroundColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="XZy-jY-BSj" firstAttribute="centerY" secondItem="3Ap-qk-kPn" secondAttribute="centerY" id="2Ke-Kl-Q06"/>
+                                <constraint firstAttribute="trailing" secondItem="d5q-F6-eoE" secondAttribute="trailing" id="HJv-HK-Ibu"/>
                                 <constraint firstAttribute="trailing" secondItem="Mp7-Y5-Eri" secondAttribute="trailing" constant="15" id="Hh7-mj-cfB"/>
                                 <constraint firstAttribute="bottom" secondItem="fNu-zU-xvw" secondAttribute="bottom" id="Hvi-bZ-hR6"/>
                                 <constraint firstItem="ME8-RM-hBZ" firstAttribute="leading" secondItem="fNu-zU-xvw" secondAttribute="leading" id="JBg-J7-t9X"/>
@@ -195,6 +202,9 @@
                                 <constraint firstItem="Mp7-Y5-Eri" firstAttribute="centerY" secondItem="3Ap-qk-kPn" secondAttribute="centerY" id="ibW-p8-4H2"/>
                                 <constraint firstAttribute="trailing" secondItem="ME8-RM-hBZ" secondAttribute="trailing" id="jOg-ot-wlN"/>
                                 <constraint firstItem="fNu-zU-xvw" firstAttribute="leading" secondItem="XZy-jY-BSj" secondAttribute="trailing" id="oYL-Cl-5k5"/>
+                                <constraint firstItem="d5q-F6-eoE" firstAttribute="leading" secondItem="fNu-zU-xvw" secondAttribute="trailing" id="rQM-Ne-c6H"/>
+                                <constraint firstAttribute="bottom" secondItem="d5q-F6-eoE" secondAttribute="bottom" id="yQc-a1-tqb"/>
+                                <constraint firstItem="d5q-F6-eoE" firstAttribute="top" secondItem="3Ap-qk-kPn" secondAttribute="top" id="zvS-s9-dTq"/>
                             </constraints>
                         </view>
                     </subviews>

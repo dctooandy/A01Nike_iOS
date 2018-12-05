@@ -92,16 +92,9 @@
 }
 
 - (void)configAmountList {
-    // 微信app,扫码和支付app,宝扫码，只展示amountList
-    if (self.paymentModel.amountList.count > 0 &&
-        (self.paymentModel.paymentType == CNPaymentWechatQR ||
-         self.paymentModel.paymentType == CNPaymentAliQR)) {
-        self.amountBtn.hidden = NO;
+    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
+    if (!self.paymentModel.amountCanEdit) {
         self.amountTF.placeholder = @"仅可选择以下金额";
-        self.arrawDownIV.hidden = NO;
-    } else {
-        self.amountBtn.hidden = YES;
-        self.arrawDownIV.hidden = YES;
     }
 }
 
@@ -145,7 +138,11 @@
     for (id obj in self.paymentModel.amountList) {
         [array addObject:[NSString stringWithFormat:@"%@", obj]];
     }
-    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
+    if (array.count == 0) {
+        [self showError:@"无可选金额，请直接输入"];
+        return;
+    }
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
         if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
             return;
         }
@@ -168,7 +165,7 @@
     double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;
     if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) {
         _amountTF.text = nil;
-        [self showError:_amountTF.placeholder];
+        [self showError:[NSString stringWithFormat:@"存款金额必须是%.f~%.f之间，最大允许2位小数", self.paymentModel.minamount, maxAmount]];
         return;
     }
     
