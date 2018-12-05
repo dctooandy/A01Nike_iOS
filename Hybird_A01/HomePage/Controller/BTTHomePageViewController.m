@@ -527,6 +527,10 @@
             model.provider =  kShaBaProvider;
             break;
         case 5://BTI体育
+            model = [[IVGameModel alloc] init];
+            model.cnName = @"BTI体育";
+            model.enName =  @"SBT_BTI";
+            model.provider =  @"SBT";
             break;
         case 6://AS电游
             model = [[IVGameModel alloc] init];
