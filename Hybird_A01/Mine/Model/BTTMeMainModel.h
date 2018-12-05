@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL available;
 
+@property (nonatomic, assign) NSInteger paymentType;
+
 @end
 
 NS_ASSUME_NONNULL_END
