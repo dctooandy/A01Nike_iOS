@@ -163,10 +163,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YUj-j1-b7k">
-                    <rect key="frame" x="0.0" y="100" width="375" height="70"/>
+                    <rect key="frame" x="0.0" y="100" width="375" height="50"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0P1-Ml-dfl">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="常见存款姓名：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQ2-NA-FQ3">
                                     <rect key="frame" x="15" y="15" width="93" height="16"/>
@@ -175,7 +175,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wnE-K6-4sY" customClass="CNPayAmountRecommendView">
-                                    <rect key="frame" x="108" y="12" width="257" height="52"/>
+                                    <rect key="frame" x="108" y="12" width="257" height="38"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                             </subviews>
@@ -186,8 +186,8 @@
                                 <constraint firstItem="wnE-K6-4sY" firstAttribute="leading" secondItem="vQ2-NA-FQ3" secondAttribute="trailing" id="GIy-oe-YRa"/>
                                 <constraint firstItem="wnE-K6-4sY" firstAttribute="top" secondItem="0P1-Ml-dfl" secondAttribute="top" priority="750" constant="12" id="LPh-ze-Fqg"/>
                                 <constraint firstItem="vQ2-NA-FQ3" firstAttribute="top" secondItem="0P1-Ml-dfl" secondAttribute="top" constant="15" id="eau-JX-YMo"/>
-                                <constraint firstAttribute="height" constant="70" id="xNx-n1-tSm"/>
-                                <constraint firstAttribute="bottom" secondItem="wnE-K6-4sY" secondAttribute="bottom" priority="750" constant="6" id="ycy-Sg-t3t"/>
+                                <constraint firstAttribute="height" constant="50" id="xNx-n1-tSm"/>
+                                <constraint firstAttribute="bottom" secondItem="wnE-K6-4sY" secondAttribute="bottom" priority="750" id="ycy-Sg-t3t"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -200,7 +200,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2S-qt-RMP" userLabel="ButtonView">
-                    <rect key="frame" x="0.0" y="170" width="375" height="85"/>
+                    <rect key="frame" x="0.0" y="150" width="375" height="85"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UG0-Qs-8ag" customClass="CNPaySubmitButton">
                             <rect key="frame" x="18" y="20" width="339" height="45"/>
