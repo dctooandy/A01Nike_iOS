@@ -14,7 +14,7 @@
 #import "BTTBindingMobileOneCell.h"
 #import "BTTBindingMobileBtnCell.h"
 #import "BTTWithdrawalCardSelectCell.h"
-#import <BRPickerView/BRPickerView.h>
+#import "BRPickerView.h"
 #import "BTTWithdrawalSuccessController.h"
 #import "BTTAccountBalanceController.h"
 #import "BTTBankModel.h"
@@ -193,7 +193,7 @@
     for (BTTBankModel *model in self.bankList) {
         [textArray addObject:model.withdrawText];
     }
-    [BRStringPickerView showStringPickerWithTitle:@"请选择银行卡" dataSource:textArray.copy defaultSelValue:cell.detailLabel.text resultBlock:^(id selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:@"请选择银行卡" dataSource:textArray.copy defaultSelValue:cell.detailLabel.text resultBlock:^(id selectValue, NSInteger index) {
         cell.detailLabel.text = selectValue;
         for (int i = 0; i < self.bankList.count; i++) {
             if ([self.bankList[i].withdrawText isEqualToString:selectValue]) {

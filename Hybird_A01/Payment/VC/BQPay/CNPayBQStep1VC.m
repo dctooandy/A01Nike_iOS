@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *preSettingMessageLb;
 
 @property (weak, nonatomic) IBOutlet CNPayAmountTF *amountTF;
+@property (weak, nonatomic) IBOutlet UIButton *amountBtn;
 @property (weak, nonatomic) IBOutlet UILabel *nameLb;
 @property (weak, nonatomic) IBOutlet CNPayNameTF *nameTF;
 @property (weak, nonatomic) IBOutlet CNPayNormalTF *bankTF;
@@ -41,6 +42,7 @@
     // 初始化数据
     [self updateAllContentWithModel:self.paymentModel];
     [self configRecommendView];
+    [self configAmountList];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -114,6 +116,32 @@
     };
 }
 
+- (void)configAmountList {
+    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
+    if (!self.paymentModel.amountCanEdit) {
+        self.amountTF.placeholder = @"仅可选择以下金额";
+    }
+}
+
+
+- (IBAction)selectAmountList:(id)sender {
+    weakSelf(weakSelf);
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.paymentModel.amountList.count];
+    for (id obj in self.paymentModel.amountList) {
+        [array addObject:[NSString stringWithFormat:@"%@", obj]];
+    }
+    if (array.count == 0) {
+        [self showError:@"无可选金额，请直接输入"];
+        return;
+    }
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
+        if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
+            return;
+        }
+        weakSelf.amountTF.text = selectValue;
+    }];
+}
+
 - (IBAction)selectedBank:(UIButton *)sender {
     [self.view endEditing:YES];
     if (self.nameTF.text.length == 0) {
@@ -155,12 +183,11 @@
 
 - (void)selectBank {
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:_bankTF.placeholder dataSource:self.bankNames defaultSelValue:self.bankTF.text resultBlock:^(NSString * selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:_bankTF.placeholder dataSource:self.bankNames defaultSelValue:self.bankTF.text resultBlock:^(id selectValue, NSInteger index) {
         if ([weakSelf.bankTF.text isEqualToString:selectValue]) {
             return;
         }
         weakSelf.bankTF.text = selectValue;
-        NSInteger index = [weakSelf.bankNames indexOfObject:selectValue];
         weakSelf.chooseBank = weakSelf.paymentModel.bankList[index];
     }];
 }
@@ -182,7 +209,7 @@
     double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;
     if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) {
         _amountTF.text = nil;
-        [self showError:_amountTF.placeholder];
+        [self showError:[NSString stringWithFormat:@"存款金额必须是%.f~%.f之间，最大允许2位小数", self.paymentModel.minamount, maxAmount]];
         return;
     }
     

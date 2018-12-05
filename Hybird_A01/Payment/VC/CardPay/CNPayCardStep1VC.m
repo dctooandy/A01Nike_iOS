@@ -54,9 +54,8 @@
         [cardTypeArr addObject:model.name];
     }
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:_cardTypeTF.placeholder dataSource:cardTypeArr defaultSelValue:_cardTypeTF.text resultBlock:^(NSString *selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:_cardTypeTF.placeholder dataSource:cardTypeArr defaultSelValue:_cardTypeTF.text resultBlock:^(NSString *selectValue, NSInteger index) {
         weakSelf.cardTypeTF.text = selectValue;
-        NSInteger index = [cardTypeArr indexOfObject:selectValue];
         CNPayCardModel *model = weakSelf.paymentModel.cardList[index];
         weakSelf.chooseCardModel = model;
         weakSelf.cardValueTF.text = nil;
@@ -75,7 +74,7 @@
         [array addObject:[NSString stringWithFormat:@"%@", obj]];
     }
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:_cardValueTF.placeholder dataSource:array defaultSelValue:_cardValueTF.text resultBlock:^(NSString * selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:_cardValueTF.placeholder dataSource:array defaultSelValue:_cardValueTF.text resultBlock:^(NSString * selectValue, NSInteger index) {
         weakSelf.cardValueTF.text = selectValue;
     }];
 }

@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *cityTF;
 @property (weak, nonatomic) IBOutlet UILabel *depositByLb;
 @property (weak, nonatomic) IBOutlet UITextField *dateTF;
+@property (weak, nonatomic) IBOutlet UIButton *amountBtn;
 @property (weak, nonatomic) IBOutlet UITextField *amountTF;
 @property (weak, nonatomic) IBOutlet UITextField *chargeTF;
 @property (weak, nonatomic) IBOutlet UITextField *remarkTF;
@@ -33,6 +34,7 @@
     [self configUI];
     [self addBankView];
     [self setViewHeight:550 fullScreen:NO];
+    [self configAmountList];
 }
 
 - (void)configUI {
@@ -41,11 +43,20 @@
 }
 
 
+- (void)configAmountList {
+    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
+    if (!self.paymentModel.amountCanEdit) {
+        self.amountTF.placeholder = @"仅可选择以下金额";
+    }
+}
+
+
+
 - (IBAction)selectPayType:(id)sender {
     [self.view endEditing:YES];
     NSArray *payTypeArr = [self.paymentModel payTypeArray];
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:_payTypeTF.placeholder dataSource:payTypeArr defaultSelValue:_payTypeTF.text resultBlock:^(id selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:_payTypeTF.placeholder dataSource:payTypeArr defaultSelValue:_payTypeTF.text resultBlock:^(id selectValue, NSInteger index) {
         weakSelf.payTypeTF.text = selectValue;
     }];
 }
@@ -76,6 +87,24 @@
         weakSelf.dateTF.text = selectValue;
     } cancelBlock:^{
         
+    }];
+}
+
+- (IBAction)selectAmountList:(id)sender {
+    weakSelf(weakSelf);
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.paymentModel.amountList.count];
+    for (id obj in self.paymentModel.amountList) {
+        [array addObject:[NSString stringWithFormat:@"%@", obj]];
+    }
+    if (array.count == 0) {
+        [self showError:@"无可选金额，请直接输入"];
+        return;
+    }
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
+        if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
+            return;
+        }
+        weakSelf.amountTF.text = selectValue;
     }];
 }
 
