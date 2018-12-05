@@ -145,7 +145,7 @@ NSInteger const kPayTypeTotalCount = 19;
     id PayModel = [model class];
     
     NSMutableString *htmljs = [[NSMutableString alloc] init];
-    [htmljs appendFormat:@"%@", [NSString stringWithFormat:@"<form id=\"codePayForm\" name=\"query\" action=\"%@\" method=\"post\" class=\"form\">\n", model.des_url]];
+    [htmljs appendFormat:@"%@", [NSString stringWithFormat:@"<form id=\"codePayForm\" name=\"query\" action=\"%@\" method=\"get\" class=\"form\">\n", model.des_url]];
     [htmljs appendFormat:@"%@", [NSString stringWithFormat:@"<input type=\"hidden\" name=\"%@\" value=\"%@\">\n", @"loginname", loginName]];
     
     unsigned int outCount, i;
