@@ -69,7 +69,7 @@
     } else {
         API = BTTCancelFavorites;
     }
-    NSDictionary *params = @{@"game_id":model.gameid};
+    NSDictionary *params = @{@"game_id":[NSString stringWithFormat:@"%@%@",model.provider,model.gameid]};
     [IVNetwork sendRequestWithSubURL:API paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {

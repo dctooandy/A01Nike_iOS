@@ -152,6 +152,7 @@ static const char *BTTHeaderViewKey = "headerView";
     BTTPopoverView *popView = [BTTPopoverView PopoverView];
     popView.style = BTTPopoverViewStyleDark;
     popView.arrowStyle = BTTPopoverViewArrowStyleTriangle;
+    popView.showShade = YES;
     [popView showToPoint:CGPointMake(SCREEN_WIDTH - 27, KIsiPhoneX ? 88 : 64) withActions:@[action1,action2,action3,action4,action5]];
     
 }

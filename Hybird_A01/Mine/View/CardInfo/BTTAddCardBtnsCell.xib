@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,13 +20,12 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1BY-8K-GMH">
-                        <rect key="frame" x="177.5" y="28" width="150" height="44"/>
+                        <rect key="frame" x="202.5" y="28" width="157.5" height="44"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="150" id="6AU-5e-O3X"/>
                             <constraint firstAttribute="height" constant="44" id="wSl-BH-ykk"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title="保存并设置为取款卡" backgroundImage="binding_confirm_enable_normal">
+                        <state key="normal" title="保存并设置为取款卡" backgroundImage="xima_btn1">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <connections>
@@ -34,13 +33,12 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmp-rx-C2d">
-                        <rect key="frame" x="47.5" y="28" width="100" height="44"/>
+                        <rect key="frame" x="15" y="28" width="157.5" height="44"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="Rxz-Ze-u2x"/>
                             <constraint firstAttribute="height" constant="44" id="VXG-n9-xhR"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <state key="normal" title="保存" backgroundImage="homepage_btnbg_normal">
+                        <state key="normal" title="保存" backgroundImage="xima_btn2">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <connections>
@@ -50,8 +48,10 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="1BY-8K-GMH" secondAttribute="trailing" constant="15" id="0Kf-GQ-csF"/>
                 <constraint firstItem="1BY-8K-GMH" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="21v-84-Y5z"/>
-                <constraint firstItem="1BY-8K-GMH" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" constant="65" id="ZXn-pq-Ltt"/>
+                <constraint firstItem="qmp-rx-C2d" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="dyF-Vc-60Q"/>
+                <constraint firstItem="1BY-8K-GMH" firstAttribute="width" secondItem="qmp-rx-C2d" secondAttribute="width" id="fJf-vH-a92"/>
                 <constraint firstItem="qmp-rx-C2d" firstAttribute="centerY" secondItem="1BY-8K-GMH" secondAttribute="centerY" id="iDk-Fl-R33"/>
                 <constraint firstItem="1BY-8K-GMH" firstAttribute="leading" secondItem="qmp-rx-C2d" secondAttribute="trailing" constant="30" id="jQj-yl-zta"/>
             </constraints>
@@ -59,7 +59,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="binding_confirm_enable_normal" width="345" height="44"/>
-        <image name="homepage_btnbg_normal" width="86" height="23"/>
+        <image name="xima_btn1" width="155" height="41"/>
+        <image name="xima_btn2" width="165" height="41"/>
     </resources>
 </document>
