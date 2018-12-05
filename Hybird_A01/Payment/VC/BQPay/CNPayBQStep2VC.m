@@ -7,7 +7,7 @@
 //
 
 #import "CNPayBQStep2VC.h"
-#import "CNPayBQSuccessVC.h"
+#import "CNPayWechatTipView.h"
 
 @interface CNPayBQStep2VC ()
 
@@ -38,8 +38,6 @@
 @property (weak, nonatomic) IBOutlet UIView *twoBtnView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *twoBtnViewHeight;
 
-
-
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) NSInteger second;
 @end
@@ -63,6 +61,11 @@
     if(_second == 0) {
         [self.timer invalidate];
     }
+}
+
+- (void)dealloc {
+    [_timer invalidate];
+    _timer = nil;
 }
 
 - (void)configDifferentUI {
@@ -109,18 +112,16 @@
     self.depositLb.text = self.writeModel.depositBy;
     self.amountLb.text = bankModel.amount;
     
-    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.banklogo.cn_appendH5Domain]];
+    [self.bankBGIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankimage.cn_appendCDN] placeholderImage:[UIImage imageNamed:@"pay_bankBG"]];
+    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.banklogo.cn_appendCDN]];
     self.bankNameLb.text = bankModel.bankname;
     self.accountNameLb.text = bankModel.accountname;
     self.accountLb.text  = bankModel.accountnumber;
-    self.addressLb.text  = [NSString stringWithFormat:@"%@ %@ %@",
-                            bankModel.bankprovince,
-                            bankModel.bankcity,
-                            bankModel.bankaddress];
+    self.addressLb.text  = [NSString stringWithFormat:@"%@ %@ %@", bankModel.bankprovince, bankModel.bankcity, bankModel.bankaddress];
 }
 
 - (IBAction)copyAction:(UIButton *)sender {
-    [UIPasteboard generalPasteboard].string = [NSString stringWithFormat:@"%@%@%@", _accountNameLb.text, _accountLb.text, _addressLb.text];
+    [UIPasteboard generalPasteboard].string = _accountLb.text;
     [self showSuccess:@"已复制到剪切板"];
 }
 
@@ -129,10 +130,7 @@
         [self popToRootViewController];
         return;
     }
-    // BQFast
-//    CNWKWebVC *payWebVC = [[CNWKWebVC alloc] initWithURLString:self.model.chooseBank.bankurl];
-//    [self pushViewController:payWebVC];
-    [self pushUIWebViewWithURLString:self.writeModel.chooseBank.bankurl title:sender.currentTitle];
+    [self pushUIWebViewWithURLString:self.writeModel.chooseBank.bankurl title:self.paymentModel.paymentTitle];
 }
 
 - (IBAction)finishPay:(id)sender {
@@ -140,12 +138,7 @@
 }
 
 - (IBAction)seeWeChatPay:(id)sender {
-    
-}
-
-- (void)dealloc {
-    [_timer invalidate];
-    _timer = nil;
+    [CNPayWechatTipView showWechatTip];
 }
 
 @end

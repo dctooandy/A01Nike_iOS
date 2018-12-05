@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CNPayNameTF : UITextField <UITextFieldDelegate>
-
+@property (nonatomic, copy) dispatch_block_t endedHandler;
 @end

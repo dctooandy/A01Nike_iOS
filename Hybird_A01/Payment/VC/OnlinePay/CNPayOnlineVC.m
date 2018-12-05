@@ -173,35 +173,11 @@
     
     /// 提交
     __weak typeof(self) weakSelf =  self;
-    [CNPayRequestManager paymentWithPayType:[self getPaytypeString]
-                                      payId:self.paymentModel.payid
-                                     amount:text
-                                   bankCode:self.chooseBank.bankcode
-                            completeHandler:^(IVRequestResultModel *result, id response) {
-                                sender.selected = NO;
-                                __strong typeof(weakSelf) strongSelf = weakSelf;
-                                [strongSelf handlerResult:result];
-                            }];
-    
-}
-
-- (void)handlerResult:(IVRequestResultModel *)model {
-    // 数据容灾
-    if (![model.data isKindOfClass:[NSDictionary class]]) {
-        // 后台返回类型不一，全部转成字符串
-        [self showError:[NSString stringWithFormat:@"%@", model.message]];
-        return;
-    }
-    
-    NSError *error;
-    CNPayOrderModel *orderModel = [[CNPayOrderModel alloc] initWithDictionary:model.data error:&error];
-    if (error && !orderModel) {
-        [self showError:@"操作失败！请联系客户，或者稍后重试!"];
-        return;
-    }
-    self.writeModel.orderModel = orderModel;
-    self.writeModel.depositType = self.paymentModel.paymentTitle;
-    [self goToStep:1];
+    [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:self.chooseBank.bankcode completeHandler:^(IVRequestResultModel *result, id response) {
+        sender.selected = NO;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf paySucessHandler:result repay:nil];
+    }];
 }
 
 - (IBAction)bibaoAction:(UIButton *)sender {

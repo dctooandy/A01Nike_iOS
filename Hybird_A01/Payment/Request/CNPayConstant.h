@@ -26,6 +26,8 @@ extern NSString * const kPaymentGetBQName;
 extern NSString * const kPaymentQueryBankInfo;
 /// 获取手工存款银行卡
 extern NSString * const kPaymentGetBankList;
+/// 查询提案
+extern NSString * const kPaymentQueryDeposit;
 /// 完善用户信息
 extern NSString * const kPaymentCompleteInfo;
 /// 点卡提交订单

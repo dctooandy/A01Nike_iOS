@@ -12,6 +12,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CNPayDepositStep3VC">
             <connections>
+                <outlet property="amountTF" destination="bW7-lJ-RRz" id="Qix-Au-I3f"/>
+                <outlet property="chargeTF" destination="otZ-bL-z51" id="L9m-bQ-IaQ"/>
+                <outlet property="cityTF" destination="UiC-o2-Loc" id="eNq-Ec-yiX"/>
+                <outlet property="dateTF" destination="OuB-fD-csR" id="eRv-bx-QZ2"/>
+                <outlet property="depositByLb" destination="HaM-e9-ZWY" id="lhx-aI-hJw"/>
+                <outlet property="payTypeTF" destination="pnp-qS-MDo" id="x5H-7g-AKD"/>
+                <outlet property="preSettingMessageLb" destination="aED-kT-Dxt" id="U1e-MA-H0h"/>
+                <outlet property="provinceTF" destination="pT6-l3-ijI" id="jCo-z2-gaf"/>
+                <outlet property="remarkTF" destination="7ii-30-dIe" id="DR2-PF-qYk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -121,6 +130,9 @@
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="max-ZI-Nhl">
                                             <rect key="frame" x="115" y="0.0" width="260" height="49"/>
+                                            <connections>
+                                                <action selector="selectPayType:" destination="-1" eventType="touchUpInside" id="p4y-sw-7nY"/>
+                                            </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="vNZ-1l-6JL">
                                             <rect key="frame" x="344" y="16.5" width="16" height="16"/>
@@ -185,6 +197,9 @@
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OWg-UZ-YTu">
                                             <rect key="frame" x="115" y="0.0" width="260" height="49"/>
+                                            <connections>
+                                                <action selector="selectProvince:" destination="-1" eventType="touchUpInside" id="olq-Hk-8Qa"/>
+                                            </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="MLz-7J-q8O">
                                             <rect key="frame" x="344" y="16.5" width="16" height="16"/>
@@ -249,6 +264,9 @@
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adj-ci-3FV">
                                             <rect key="frame" x="115" y="0.0" width="260" height="49"/>
+                                            <connections>
+                                                <action selector="selectProvince:" destination="-1" eventType="touchUpInside" id="pi8-1x-whF"/>
+                                            </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="bhR-yY-XKA">
                                             <rect key="frame" x="344" y="16.5" width="16" height="16"/>
@@ -381,6 +399,9 @@
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgT-Ki-Ybd">
                                             <rect key="frame" x="115" y="0.0" width="260" height="49"/>
+                                            <connections>
+                                                <action selector="selectDate:" destination="-1" eventType="touchUpInside" id="vDf-fr-DXq"/>
+                                            </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="6OZ-FW-i28">
                                             <rect key="frame" x="344" y="16.5" width="16" height="16"/>
@@ -438,32 +459,20 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bW7-lJ-RRz" customClass="CNPayAmountTF">
-                                            <rect key="frame" x="115" y="0.0" width="220" height="49"/>
+                                            <rect key="frame" x="115" y="0.0" width="240" height="49"/>
                                             <color key="textColor" red="0.50980392159999999" green="0.52549019610000003" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkp-ah-A8h">
-                                            <rect key="frame" x="115" y="0.0" width="260" height="49"/>
-                                        </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="9Gc-Nl-AyS">
-                                            <rect key="frame" x="344" y="16.5" width="16" height="16"/>
-                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstItem="fkp-ah-A8h" firstAttribute="leading" secondItem="bW7-lJ-RRz" secondAttribute="leading" id="1KD-iq-ztX"/>
                                         <constraint firstItem="bW7-lJ-RRz" firstAttribute="leading" secondItem="5Dd-nX-lXz" secondAttribute="trailing" id="4tK-T3-0SI"/>
                                         <constraint firstItem="bW7-lJ-RRz" firstAttribute="top" secondItem="Sqs-x1-htg" secondAttribute="top" id="5lS-F9-0WF"/>
-                                        <constraint firstItem="fkp-ah-A8h" firstAttribute="bottom" secondItem="bW7-lJ-RRz" secondAttribute="bottom" id="A3J-Q3-xvT"/>
                                         <constraint firstItem="5Dd-nX-lXz" firstAttribute="leading" secondItem="Sqs-x1-htg" secondAttribute="leading" constant="15" id="B3z-rO-WsW"/>
-                                        <constraint firstItem="fkp-ah-A8h" firstAttribute="top" secondItem="bW7-lJ-RRz" secondAttribute="top" id="EN7-n2-Hbh"/>
-                                        <constraint firstAttribute="trailing" secondItem="9Gc-Nl-AyS" secondAttribute="trailing" constant="15" id="YF4-JG-Gaj"/>
                                         <constraint firstItem="5Dd-nX-lXz" firstAttribute="centerY" secondItem="Sqs-x1-htg" secondAttribute="centerY" id="e1w-Zo-UWJ"/>
-                                        <constraint firstAttribute="trailing" secondItem="fkp-ah-A8h" secondAttribute="trailing" id="gtl-FH-OYh"/>
-                                        <constraint firstAttribute="trailing" secondItem="bW7-lJ-RRz" secondAttribute="trailing" constant="40" id="h97-9H-xFu"/>
+                                        <constraint firstAttribute="trailing" secondItem="bW7-lJ-RRz" secondAttribute="trailing" constant="20" id="h97-9H-xFu"/>
                                         <constraint firstAttribute="bottom" secondItem="bW7-lJ-RRz" secondAttribute="bottom" id="k8L-LG-3dM"/>
-                                        <constraint firstItem="9Gc-Nl-AyS" firstAttribute="centerY" secondItem="Sqs-x1-htg" secondAttribute="centerY" id="kfW-fp-bUJ"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -501,7 +510,7 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手续费" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="otZ-bL-z51" customClass="CNPayNormalTF">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手续费" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="otZ-bL-z51" customClass="CNPayAmountTF">
                                             <rect key="frame" x="115" y="0.0" width="240" height="49"/>
                                             <color key="textColor" red="0.50980392159999999" green="0.52549019610000003" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -625,6 +634,9 @@
                                 <constraint firstAttribute="height" constant="45" id="XnY-X6-ZKN"/>
                             </constraints>
                             <state key="normal" title="提交"/>
+                            <connections>
+                                <action selector="submitAction:" destination="-1" eventType="touchUpInside" id="aKj-co-Glp"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

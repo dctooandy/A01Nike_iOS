@@ -13,7 +13,6 @@
 
 @interface CNPayDepositSuccessVC ()
 @property (weak, nonatomic) IBOutlet UILabel *amountLb;
-@property (weak, nonatomic) IBOutlet CNPaySubmitButton *gameHollBtn;
 @property (nonatomic, copy) NSString *amount;
 @end
 
@@ -29,26 +28,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"手工存款";
-    self.amountLb.attributedText = [self addFollowString:self.amount];
-    [self.gameHollBtn setBackgroundColor:COLOR_HEX(0xE84747)];
+    self.view.backgroundColor = COLOR_HEX(0x333542);
+    self.amountLb.text = [NSString stringWithFormat:@"存款金额：%@元", self.amount];
 }
 
 - (IBAction)payList:(id)sender {
     WebConfigModel *webConfig = [[WebConfigModel alloc] init];
     webConfig.url = @"customer/log.htm";
     webConfig.newView = YES;
-//    WebController *webVC = [[WebController alloc] initWithWebConfigModel:webConfig];
-//    [self.navigationController pushViewController:webVC animated:YES];
+    HAWebViewController *webVC = [[HAWebViewController alloc] init];
+    webVC.webConfigModel = webConfig;
+    [self.navigationController pushViewController:webVC animated:YES];
 }
 
 - (IBAction)gameHoll:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (NSAttributedString *)addFollowString:(NSString *)string {
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"存款金额：%@ 元！", string]];
-    NSRange range = NSMakeRange(5, string.length);
-    [attrStr addAttribute:NSForegroundColorAttributeName value:COLOR_RGBA(234,115,11,1) range:range];
-    return attrStr;
+- (void)goToBack {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
 @end

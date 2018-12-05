@@ -20,7 +20,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLb;
 @property (weak, nonatomic) IBOutlet CNPayNameTF *nameTF;
 @property (weak, nonatomic) IBOutlet CNPayNormalTF *bankTF;
-@property (weak, nonatomic) IBOutlet UILabel *usuallyLb;
+@property (weak, nonatomic) IBOutlet CNPayAmountRecommendView *nameView;
+@property (weak, nonatomic) IBOutlet UIView *nameAreaView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameAreaViewHeight;
 
 
 @property (weak, nonatomic) IBOutlet UIView *bottomTipView;
@@ -38,6 +40,7 @@
     [self configDifferentUI];
     // 初始化数据
     [self updateAllContentWithModel:self.paymentModel];
+    [self configRecommendView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -47,13 +50,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    // 需要完善个人信息
-//    if (self.preSaveMsg.length == 0) {
-//        __weak typeof(self) weakSelf = self;
-//        [CNCompleteInfoView completeInfoHandler:^{
-//            [weakSelf configPreSettingMessage];
-//        }];
-//    }
 }
 
 - (void)configPreSettingMessage {
@@ -78,6 +74,11 @@
         default:
             break;
     }
+    weakSelf(weakSelf);
+    self.nameTF.endedHandler = ^{
+        weakSelf.bankTF.text = nil;
+        weakSelf.bankNames = nil;
+    };
 }
 
 /// 刷新数据
@@ -91,11 +92,68 @@
     }
 }
 
-- (IBAction)selectedBank:(UIButton *)sender {
-    [self.view endEditing:YES];
-    if (!self.bankNames) {
+/// 推荐姓名
+- (void)configRecommendView {
+    NSArray *array = [self.paymentModel.depositor componentsSeparatedByString:@";"];
+    if (array.count == 0) {
+        _nameAreaView.hidden = YES;
+        _nameAreaViewHeight.constant = 0;
         return;
     }
+    _nameTF.text = array.firstObject;
+    _nameView.dataSource = array;
+    __weak typeof(self) weakSelf = self;
+    _nameView.clickHandler = ^(NSString *value, NSInteger index) {
+        [weakSelf.view endEditing:YES];
+        if ([weakSelf.nameTF.text isEqualToString:value]) {
+            return;
+        }
+        weakSelf.nameTF.text = value;
+        weakSelf.bankTF.text = nil;
+        weakSelf.bankNames = nil;
+    };
+}
+
+- (IBAction)selectedBank:(UIButton *)sender {
+    [self.view endEditing:YES];
+    if (self.nameTF.text.length == 0) {
+        [self showError:@"请输入姓名"];
+        return;
+    }
+    if (!self.bankNames) {
+        [self BQGetBank];
+        return;
+    }
+    [self selectBank];
+}
+
+- (void)BQGetBank {
+    [self showLoading];
+    __weak typeof(self) weakSelf = self;
+    // 获取银行卡列表
+    [CNPayRequestManager paymentGetBankListWithType:NO depositor:self.nameTF.text referenceId:nil completeHandler:^(IVRequestResultModel *result, id response) {
+        [weakSelf hideLoading];
+        if (result.status) {
+            /// 数据解析
+            NSArray *array = result.data[@"bankList"];
+            NSArray *bankList = [CNPayBankCardModel arrayOfModelsFromDictionaries:array error:nil];
+            if (bankList.count == 0) {
+                [self showError:result.message];
+                return;
+            }
+            NSMutableArray *bankNames = [NSMutableArray array];
+            for (CNPayBankCardModel *model in bankList) {
+                [bankNames addObject:model.bankname];
+            }
+            weakSelf.bankNames = [bankNames copy];
+            [weakSelf selectBank];
+            return;
+        }
+        [weakSelf showError:result.message];
+    }];
+}
+
+- (void)selectBank {
     weakSelf(weakSelf);
     [BRStringPickerView showStringPickerWithTitle:_bankTF.placeholder dataSource:self.bankNames defaultSelValue:self.bankTF.text resultBlock:^(NSString * selectValue) {
         if ([weakSelf.bankTF.text isEqualToString:selectValue]) {
@@ -109,7 +167,6 @@
 
 - (IBAction)submitAction:(UIButton *)sender {
     [self.view endEditing:YES];
-    [self goToStep:1];return;
     
     NSString *text = _amountTF.text;
     
@@ -134,58 +191,17 @@
         return;
     }
     
+    if (self.bankTF.text.length == 0) {
+        [self showError:self.bankTF.placeholder];
+        return;
+    }
+    
     self.writeModel.depositBy = self.nameTF.text;
     self.writeModel.amount = self.amountTF.text;
-    
-    
-    if (self.paymentModel.paymentType == CNPaymentDeposit) {
-        [self depositGetBank:sender];
-        return;
-    }
-    
-    
-    // 下面是BQ
-    self.writeModel.chooseBank = self.paymentModel.bankList.firstObject;
+    self.writeModel.chooseBank = self.chooseBank;
     self.writeModel.BQType = [self getBQType];
-    if (!self.writeModel.chooseBank) {
-        self.bottomTipView.hidden = NO;
-        self.bottomTipViewHeight.constant = 65;
-        sender.enabled = NO;
-        return;
-    }
     // 提交订单
     [self sumbitBill:sender];
-}
-
-- (void)depositGetBank:(UIButton *)sender {
-    if (sender.selected) {
-        return;
-    }
-    sender.selected = YES;
-    
-    __weak typeof(self) weakSelf = self;
-    __weak typeof(sender) weakSender = sender;
-    // 获取银行卡列表
-    [CNPayRequestManager paymentGetBankListWithType:YES depositor:self.nameTF.text referenceId:nil completeHandler:^(IVRequestResultModel *result, id response) {
-        sender.selected = NO;
-        if (result.status) {
-            /// 数据解析
-            NSError *error;
-            NSArray *array = [CNPayBankCardModel arrayOfModelsFromDictionaries:result.data error:&error];
-            if (array.count == 0) {
-                weakSender.enabled = NO;
-                return;
-            }
-            weakSelf.writeModel.chooseBank = array.firstObject;
-            [self goToStep:1];
-        } else {
-            if (result.code_system == 99000013) {
-                weakSender.enabled = NO;
-            } else {
-                [weakSelf showError:result.message];
-            }
-        }
-    }];
 }
 
 - (void)sumbitBill:(UIButton *)sender {
@@ -202,16 +218,13 @@
             CNPayBankCardModel *model = [[CNPayBankCardModel alloc] initWithDictionary:result.data error:nil];
             if (!model) {
                 weakSender.enabled = NO;
+                [weakSelf showError:@"系统错误，请联系客服"];
                 return;
             }
             weakSelf.writeModel.chooseBank = model;
             [weakSelf goToStep:1];
         } else {
-            if (result.code_system == 99000013) {
-                weakSender.enabled = NO;
-            } else {
-                [weakSelf showError:result.message]; 
-            }
+            [weakSelf showError:result.message];
         }
     }];
 }

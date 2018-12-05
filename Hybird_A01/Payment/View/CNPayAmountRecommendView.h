@@ -38,17 +38,4 @@ typedef void (^CNPayAmountRecommendViewBlock)(NSString *value, NSInteger index);
  点击回调handler
  */
 @property(nonatomic, copy) CNPayAmountRecommendViewBlock clickHandler;
-
-
-/**
- 选择指定的cell
-
- @param index 需要选中的cell位置
- */
-- (void)selectIndex:(NSInteger)index;
-
-/**
- 清除视图选中状态
- */
-- (void)cleanSelectedState;
 @end
