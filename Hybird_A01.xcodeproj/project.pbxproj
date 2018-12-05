@@ -52,6 +52,8 @@
 		3A11AE6D2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11AE6B2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib */; };
 		3A34F79321B6630D007BC4D4 /* BTTGamesTryAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34F79221B6630D007BC4D4 /* BTTGamesTryAlertView.m */; };
 		3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A34F79421B6631B007BC4D4 /* BTTGamesTryAlertView.xib */; };
+		3A34F79E21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34F79C21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m */; };
+		3A34F79F21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A34F79D21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib */; };
 		3A37E0FA2164685600FB13A1 /* AppDelegate+Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37E0F92164685600FB13A1 /* AppDelegate+Environment.m */; };
 		3A37E0FD2164691300FB13A1 /* AppDelegate+AD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37E0FC2164691300FB13A1 /* AppDelegate+AD.m */; };
 		3A37E1192164A20100FB13A1 /* BTTTabbarController+VoiceCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37E1162164A20100FB13A1 /* BTTTabbarController+VoiceCall.m */; };
@@ -718,6 +720,9 @@
 		3A34F79121B6630D007BC4D4 /* BTTGamesTryAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTGamesTryAlertView.h; sourceTree = "<group>"; };
 		3A34F79221B6630D007BC4D4 /* BTTGamesTryAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTGamesTryAlertView.m; sourceTree = "<group>"; };
 		3A34F79421B6631B007BC4D4 /* BTTGamesTryAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTGamesTryAlertView.xib; sourceTree = "<group>"; };
+		3A34F79B21B7A9DA007BC4D4 /* BTTHomePageFooterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTHomePageFooterCell.h; sourceTree = "<group>"; };
+		3A34F79C21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTHomePageFooterCell.m; sourceTree = "<group>"; };
+		3A34F79D21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTHomePageFooterCell.xib; sourceTree = "<group>"; };
 		3A37E0F82164685600FB13A1 /* AppDelegate+Environment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Environment.h"; sourceTree = "<group>"; };
 		3A37E0F92164685600FB13A1 /* AppDelegate+Environment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Environment.m"; sourceTree = "<group>"; };
 		3A37E0FB2164691300FB13A1 /* AppDelegate+AD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+AD.h"; sourceTree = "<group>"; };
@@ -2651,6 +2656,9 @@
 				3A34F79121B6630D007BC4D4 /* BTTGamesTryAlertView.h */,
 				3A34F79221B6630D007BC4D4 /* BTTGamesTryAlertView.m */,
 				3A34F79421B6631B007BC4D4 /* BTTGamesTryAlertView.xib */,
+				3A34F79B21B7A9DA007BC4D4 /* BTTHomePageFooterCell.h */,
+				3A34F79C21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m */,
+				3A34F79D21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3759,6 +3767,7 @@
 				3AF1B81A21AF994A00BF8C3A /* BTTVideoGamesFooterCell.xib in Resources */,
 				EAE89ECF218C3ABD00C29393 /* LIVRobotDisagreeIcon@2x.png in Resources */,
 				EAE89E99218C3ABD00C29393 /* back-arrow@2x.png in Resources */,
+				3A34F79F21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib in Resources */,
 				EAE89F0B218C3ABD00C29393 /* sentVoicePlaying1@3x.png in Resources */,
 				3A11AE082181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.xib in Resources */,
 				EAE89EBF218C3ABD00C29393 /* LIVMediaFileSaveToLibraryButton@2x.png in Resources */,
@@ -3935,7 +3944,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
 				"${PODS_ROOT}/BRPickerView/BRPickerView/AddressPickerView/BRPickerView.bundle",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
@@ -3948,7 +3957,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -4023,6 +4032,7 @@
 				3A929423219C3B7500764E7E /* BTTRegisterSuccessOneCell.m in Sources */,
 				3A8D6E9921633D3E000530DF /* PushManager.m in Sources */,
 				3A8F51A1215F77EC0069D1B3 /* UIColor+Util.m in Sources */,
+				3A34F79E21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m in Sources */,
 				3A5F7A9621A8E4C600128E8B /* BTTXimaSuccessItemModel.m in Sources */,
 				EA5F140B21A26042004305A7 /* BTTRequestPrecache.m in Sources */,
 				3A37E1202164A21900FB13A1 /* BTTLuckyWheelViewController.m in Sources */,

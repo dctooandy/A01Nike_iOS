@@ -129,7 +129,7 @@ static const char *BTTNextGroupKey = "nextGroup";
 - (void)makeCallWithPhoneNum:(NSString *)phone {
     NSString *url = nil;
     NSMutableDictionary *params = @{}.mutableCopy;
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork userInfo].customerLevel >= 4) {
         url = BTTCallBackMemberAPI;
         [params setValue:phone forKey:@"phone"];
         [params setValue:@"memberphone" forKey:@"phone_type"];
