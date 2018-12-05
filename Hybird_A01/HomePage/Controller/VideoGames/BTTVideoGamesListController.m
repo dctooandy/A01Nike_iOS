@@ -15,7 +15,7 @@
 #import "BTTVideoGamesHeaderCell.h"
 #import "BTTVideoGameCell.h"
 #import "BTTVideoGamesSearchCell.h"
-#import <BRPickerView/BRPickerView.h>
+#import "BRPickerView.h"
 #import "BTTVideoGamesNoDataCell.h"
 #import "BTTVideoGamesFooterCell.h"
 #import "BTTLoginOrRegisterViewController.h"
@@ -644,7 +644,7 @@
         contents = @[@"全赔付",@"1-4线",@"5-9线",@"15-25线",@"30-50线",@"51-243线"];
         title = @"请选择线路";
     }
-    [BRStringPickerView showStringPickerWithTitle:title dataSource:contents defaultSelValue:button.titleLabel.text isAutoSelect:NO themeColor:nil resultBlock:^(id selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:title dataSource:contents defaultSelValue:button.titleLabel.text isAutoSelect:NO themeColor:nil resultBlock:^(id selectValue, NSInteger index) {
         selectValueBlock(selectValue);
         self.page = 1;
         if ([selectValue isEqualToString:@"所有类别"]) {

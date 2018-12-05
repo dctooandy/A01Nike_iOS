@@ -9,7 +9,7 @@
 #import "BTTModifyLimitViewController.h"
 #import "BTTBindingMobileOneCell.h"
 #import "BTTMeMainModel.h"
-#import <BRPickerView/BRPickerView.h>
+#import "BRPickerView.h"
 #import "BTTModifyLimitViewController+LoadData.h"
 #import "BTTPublicBtnCell.h"
 
@@ -70,7 +70,7 @@
     NSLog(@"%zd", indexPath.item);
     if (indexPath.row == 0) {
         BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        [BRStringPickerView showStringPickerWithTitle:@"请选择金额" dataSource:self.agin defaultSelValue:cell.textField.text resultBlock:^(id selectValue) {
+        [BRStringPickerView showStringPickerWithTitle:@"请选择金额" dataSource:self.agin defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
             cell.textField.text = selectValue;
             self.aginStr = selectValue;
             if (self.aginStr.length && self.bbinStr.length) {
@@ -79,7 +79,7 @@
         }];
     } else if (indexPath.row == 1) {
         BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        [BRStringPickerView showStringPickerWithTitle:@"请选择金额" dataSource:self.bbin defaultSelValue:cell.textField.text resultBlock:^(id selectValue) {
+        [BRStringPickerView showStringPickerWithTitle:@"请选择金额" dataSource:self.bbin defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
             cell.textField.text = selectValue;
             self.bbinStr = selectValue;
             if (self.aginStr.length && self.bbinStr.length) {

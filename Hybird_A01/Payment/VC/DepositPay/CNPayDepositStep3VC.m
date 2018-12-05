@@ -56,7 +56,7 @@
     [self.view endEditing:YES];
     NSArray *payTypeArr = [self.paymentModel payTypeArray];
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:_payTypeTF.placeholder dataSource:payTypeArr defaultSelValue:_payTypeTF.text resultBlock:^(id selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:_payTypeTF.placeholder dataSource:payTypeArr defaultSelValue:_payTypeTF.text resultBlock:^(id selectValue, NSInteger index) {
         weakSelf.payTypeTF.text = selectValue;
     }];
 }
@@ -100,7 +100,7 @@
         [self showError:@"无可选金额，请直接输入"];
         return;
     }
-    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
         if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
             return;
         }

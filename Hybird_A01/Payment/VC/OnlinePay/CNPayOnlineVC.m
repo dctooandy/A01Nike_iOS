@@ -115,7 +115,7 @@
         [self showError:@"无可选金额，请直接输入"];
         return;
     }
-    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
         if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
             return;
         }
@@ -126,12 +126,11 @@
 - (IBAction)selectedBank:(UIButton *)sender {
     [self.view endEditing:YES];
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:@"选择支付银行" dataSource:self.bankNames defaultSelValue:self.payBankTF.text resultBlock:^(NSString * selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:@"选择支付银行" dataSource:self.bankNames defaultSelValue:self.payBankTF.text resultBlock:^(id selectValue, NSInteger index) {
         if ([weakSelf.payBankTF.text isEqualToString:selectValue]) {
             return;
         }
         weakSelf.payBankTF.text = selectValue;
-        NSInteger index = [weakSelf.bankNames indexOfObject:selectValue];
         weakSelf.chooseBank = weakSelf.paymentModel.bankList[index]; 
     }];
 }

@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="amountLb" destination="AS9-bQ-YBm" id="vd2-zx-ZEx"/>
                 <outlet property="billNoLb" destination="Qag-ZV-lNF" id="y4l-tS-uyM"/>
+                <outlet property="titleLb" destination="oK8-1P-qQA" id="gLp-dg-wQS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

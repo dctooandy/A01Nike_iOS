@@ -10,7 +10,7 @@
 #import "BTTBindingMobileOneCell.h"
 #import "BTTBindingMobileBtnCell.h"
 #import "BTTMeMainModel.h"
-#import <BRPickerView/BRPickerView.h>
+#import "BRPickerView.h"
 
 @interface BTTSheetsViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -57,12 +57,12 @@
     NSLog(@"%zd", indexPath.item);
     if (indexPath.row == 0) {
         BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        [BRStringPickerView showStringPickerWithTitle:@"请选择记录类型" dataSource:@[@"存款", @"取款",@"优惠",@"转账",@"洗码",@"银行卡更改"] defaultSelValue:cell.textField.text resultBlock:^(id selectValue) {
+        [BRStringPickerView showStringPickerWithTitle:@"请选择记录类型" dataSource:@[@"存款", @"取款",@"优惠",@"转账",@"洗码",@"银行卡更改"] defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
             cell.textField.text = selectValue;
         }];
     } else if (indexPath.row == 1) {
         BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        [BRStringPickerView showStringPickerWithTitle:@"请选择时间范围" dataSource:@[@"近一天", @"近三天",@"近七天",@"近十五天"] defaultSelValue:cell.textField.text resultBlock:^(id selectValue) {
+        [BRStringPickerView showStringPickerWithTitle:@"请选择时间范围" dataSource:@[@"近一天", @"近三天",@"近七天",@"近十五天"] defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
             cell.textField.text = selectValue;
         }];
     }

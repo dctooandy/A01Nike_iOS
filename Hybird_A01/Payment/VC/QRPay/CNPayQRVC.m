@@ -142,7 +142,7 @@
         [self showError:@"无可选金额，请直接输入"];
         return;
     }
-    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
         if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
             return;
         }
