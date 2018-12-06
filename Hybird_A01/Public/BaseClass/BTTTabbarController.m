@@ -177,6 +177,12 @@
     [self addChildViewController:nav];
 }
 
+- (void)setSelectedIndex:(NSUInteger)selectedIndex {
+    [super setSelectedIndex:selectedIndex];
+    [self.myTabbar setSeletedIndex:selectedIndex];
+}
+
+
 #pragma mark - BTTTabBarDelegate
 
 - (void)tabBar:(BTTTabBar *)tabBar didClickBtn:(NSInteger)index {
