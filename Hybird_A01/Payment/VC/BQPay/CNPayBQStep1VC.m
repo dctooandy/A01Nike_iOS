@@ -96,6 +96,11 @@
 
 /// 推荐姓名
 - (void)configRecommendView {
+    if (self.paymentModel.depositor.length == 0) {
+        _nameAreaView.hidden = YES;
+        _nameAreaViewHeight.constant = 0;
+        return;
+    }
     NSArray *array = [self.paymentModel.depositor componentsSeparatedByString:@";"];
     if (array.count == 0) {
         _nameAreaView.hidden = YES;
