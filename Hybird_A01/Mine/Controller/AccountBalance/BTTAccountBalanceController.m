@@ -26,8 +26,8 @@
     [super viewDidLoad];
     self.title = @"账户余额";
     self.amount = @"-";
-    self.localAmount = @"-";
-    self.hallAmount = @"-";
+    self.localAmount = @"加载中";
+    self.hallAmount = @"加载中";
     [self setupCollectionView];
     [self setupElements];
     [self loadGamesListAndGameAmount];
@@ -60,10 +60,10 @@
         cell.model = model;
         if (indexPath.row == 1) {
             cell.mineArrowsType = BTTMineArrowsTypeHidden;
-            cell.amountLabel.text = [NSString stringWithFormat:@"¥ %@",[PublicMethod transferNumToThousandFormat:self.localAmount.floatValue]];
+            cell.amountLabel.text = [self.localAmount isEqualToString:@"加载中"] ? self.localAmount : [NSString stringWithFormat:@"¥ %@",[PublicMethod transferNumToThousandFormat:self.localAmount.floatValue]];
         } else {
             cell.mineArrowsType = BTTMineArrowsTypeNoHidden;
-            cell.amountLabel.text = [NSString stringWithFormat:@"¥ %@",[PublicMethod transferNumToThousandFormat:self.hallAmount.floatValue]];
+            cell.amountLabel.text = [self.hallAmount isEqualToString:@"加载中"] ? self.hallAmount : [NSString stringWithFormat:@"¥ %@",[PublicMethod transferNumToThousandFormat:self.hallAmount.floatValue]];
         }
         if (self.isShowHidden) {
             cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeUp;

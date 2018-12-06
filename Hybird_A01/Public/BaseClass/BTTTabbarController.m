@@ -225,7 +225,6 @@
         if ([IVNetwork userInfo]) {
             self.preSelectIndex = index;
         } else {
-            [MBProgressHUD showError:@"请先登录" toView:nil];
             BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
             [self.selectVC.navigationController pushViewController:vc animated:YES];
         }
