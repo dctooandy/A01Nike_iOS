@@ -71,15 +71,20 @@
         if ([model.name isEqualToString:@"站内信"]) {
             [self setRedDotKey:BTTMineCenterMessage refreshBlock:^(BOOL show) {
                 strongSelf(strongSelf);
+                NSString *num = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey]];
+                if (num.integerValue) {
+                    strongSelf.iconImg.badgeValue = num;
+                }
                 strongSelf.iconImg.showRedDot = show;
             } handler:self];
-            self.iconImg.badgeValue = @"2";
+            
         } else {
             [self setRedDotKey:BTTMineCenterVersion refreshBlock:^(BOOL show) {
                 strongSelf(strongSelf);
+                strongSelf.iconImg.badgeValue = 0;
                 strongSelf.iconImg.showRedDot = show;
             } handler:self];
-            self.iconImg.badgeValue = 0;
+    
         }
     } else {
         self.iconImg.badgeValue = 0;

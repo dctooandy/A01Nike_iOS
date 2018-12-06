@@ -10,6 +10,8 @@
 
 @interface BTTHttpManager : NSObject
 
+@property (nonatomic, assign) NSInteger unreadNum;
+
 + (void)sendRequestWithUrl:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(IVRequestCallBack)completionBlock;
 
 + (void)sendRequestUseCacheWithUrl:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(IVRequestCallBack)completionBlock;
@@ -57,4 +59,7 @@
 + (void)getOpenAccountStatusCompletion:(IVRequestCallBack)completion;
 //刷新用户信息
 + (void)fetchUserInfoCompleteBlock:(IVRequestCallBack)completeBlock;
+
+// 请求未读消息的数量
++ (void)requestUnReadMessageNum:(IVRequestCallBack)completeBlock;
 @end

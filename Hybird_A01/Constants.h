@@ -107,6 +107,8 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTWelcomePage     @"BTTWelcomePage"
 #define BTTLaunchScreenTime 3
 
+#define BTTUnreadMessageNumKey      @"BTTUnreadMessageNumKey"
+
 // 验证码发送按钮控制通知
 
 #define BTTVerifyCodeEnableNotification @"BTTVerifyCodeEnableNotification"
@@ -274,10 +276,13 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTCancelFavorites           @"/public/game/cancelFavorites"
 
 // 钻石币数量查询
-#define BTTQueryIntegralAPI @"/event/luckyWheel/queryIntegral"
+#define BTTQueryIntegralAPI          @"/event/luckyWheel/queryIntegral"
 
 // 钻石币兑换
-#define BTTCoinDepositAPI   @"/event/luckyWheel/deposit"
+#define BTTCoinDepositAPI            @"/event/luckyWheel/deposit"
+
+// 请求未读消息的数量
+#define BTTIsUnviewedAPI             @"/public/letter/isUnviewed"
 
 /********************************************常用宏*********************************************************/
 
