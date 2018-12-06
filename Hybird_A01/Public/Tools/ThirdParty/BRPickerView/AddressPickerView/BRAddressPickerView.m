@@ -47,6 +47,7 @@
 // 取消选择的回调
 @property (nonatomic, copy) BRAddressCancelBlock cancelBlock;
 
+
 @end
 
 @implementation BRAddressPickerView
@@ -207,12 +208,12 @@
         @strongify(self)
         BRProvinceModel *model = obj;
         if ([model.name isEqualToString:selectProvinceName]) {
-            _provinceIndex = idx;
+            self->_provinceIndex = idx;
             self.selectProvinceModel = model;
             *stop = YES;
         } else {
             if (idx == self.provinceModelArr.count - 1) {
-                _provinceIndex = 0;
+                self->_provinceIndex = 0;
                 self.selectProvinceModel = [self.provinceModelArr firstObject];
             }
         }
@@ -224,12 +225,12 @@
             @strongify(self)
             BRCityModel *model = obj;
             if ([model.name isEqualToString:selectCityName]) {
-                _cityIndex = idx;
+                self->_cityIndex = idx;
                 self.selectCityModel = model;
                 *stop = YES;
             } else {
                 if (idx == self.cityModelArr.count - 1) {
-                    _cityIndex = 0;
+                    self->_cityIndex = 0;
                     self.selectCityModel = [self.cityModelArr firstObject];
                 }
             }
@@ -242,12 +243,12 @@
             @strongify(self)
             BRAreaModel *model = obj;
             if ([model.name isEqualToString:selectAreaName]) {
-                _areaIndex = idx;
+                self->_areaIndex = idx;
                 self.selectAreaModel = model;
                 *stop = YES;
             } else {
                 if (idx == self.cityModelArr.count - 1) {
-                    _areaIndex = 0;
+                    self->_areaIndex = 0;
                     self.selectAreaModel = [self.areaModelArr firstObject];
                 }
             }
