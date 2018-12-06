@@ -65,10 +65,10 @@
     }];
 }
 
-- (void)loadCreditsTransfer:(BOOL)isReverse amount:(CGFloat)amount {
+- (void)loadCreditsTransfer:(BOOL)isReverse amount:(NSString *)amount {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@"PT" forKey:@"game_name"];
-    [params setObject:@(amount) forKey:@"amount"];
+    [params setObject:amount forKey:@"amount"];
     [params setObject:@(isReverse) forKey:@"type"];
     [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTCreditsTransfer paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
