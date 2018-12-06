@@ -38,6 +38,9 @@
     self.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.keyboardType = UIKeyboardTypeDefault;
     [self addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+    [self setValue:self.textColor forKeyPath:@"_placeholderLabel.textColor"];
+    UIButton *clearButton = [self valueForKey:@"_clearButton"];
+    [clearButton setImage:[UIImage imageNamed:@"pay_TFDelete"] forState:UIControlStateNormal];
 }
 
 - (void)textFieldEditingChanged:(UITextField *)textField {

@@ -33,6 +33,9 @@
     self.textAlignment = NSTextAlignmentRight;
     self.textColor = COLOR_HEX(0x82868F);
     [self setValue:self.textColor forKeyPath:@"_placeholderLabel.textColor"];
+    [self setValue:self.textColor forKeyPath:@"_placeholderLabel.textColor"];
+    UIButton *clearButton = [self valueForKey:@"_clearButton"];
+    [clearButton setImage:[UIImage imageNamed:@"pay_TFDelete"] forState:UIControlStateNormal];
 }
 
 @end
