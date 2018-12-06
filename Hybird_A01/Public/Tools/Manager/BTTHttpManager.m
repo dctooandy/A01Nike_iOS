@@ -170,4 +170,25 @@
         }
     }];
 }
+
+
++ (void)requestUnReadMessageNum:(IVRequestCallBack)completeBlock {
+    [IVNetwork sendRequestWithSubURL:BTTIsUnviewedAPI paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+        if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {
+            if ([result.data[@"val"] integerValue]) {
+                [self resetRedDotState:YES forKey:BTTHomePageMessage]; // BTTMineCenterMessage
+                [[NSUserDefaults standardUserDefaults] setObject:result.data[@"val"] forKey:BTTUnreadMessageNumKey];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [self resetRedDotState:YES forKey:BTTMineCenterMessage];
+            } else {
+                 [self resetRedDotState:NO forKey:BTTHomePageMessage];
+                [[NSUserDefaults standardUserDefaults] setObject:result.data[@"val"] forKey:BTTUnreadMessageNumKey];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [self resetRedDotState:NO forKey:BTTMineCenterMessage];
+            }
+        }
+    }];
+}
+
 @end

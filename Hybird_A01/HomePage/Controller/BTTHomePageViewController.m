@@ -85,7 +85,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    
+    if ([IVNetwork userInfo]) {
+        [BTTHttpManager requestUnReadMessageNum:nil];
+    }
 }
 
 - (void)setupCollectionView {

@@ -72,7 +72,6 @@
             [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
                 messageBtn.showRedDot = show;
             } handler:self];
-            [self resetRedDotState:YES forKey:BTTHomePageMessage];
             
             [self setupLoginAndRegisterBtn];
         }
@@ -119,7 +118,6 @@
             [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
                 messageBtn.showRedDot = show;
             } handler:self];
-            [self resetRedDotState:YES forKey:BTTHomePageMessage];
         }
             break;
         default:
