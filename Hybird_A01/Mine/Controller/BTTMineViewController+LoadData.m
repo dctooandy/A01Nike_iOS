@@ -11,6 +11,7 @@
 #import "CNPayRequestManager.h"
 #import "CNPaymentModel.h"
 #import "BTTMakeCallSuccessView.h"
+#import "CNPayChannelModel.h"
 
 @implementation BTTMineViewController (LoadData)
 
@@ -96,6 +97,7 @@
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
                 mainModel.name = @"迅捷网银";
                 mainModel.iconName = @"me_netbank";
+                mainModel.paymentType = CNPayChannelBQFast;
                 [availablePayments addObject:mainModel];
             }
             
@@ -104,6 +106,7 @@
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
                 mainModel.name = @"微信秒存";
                 mainModel.iconName = @"me_wechat";
+                mainModel.paymentType = CNPayChannelBQWechat;
                 [availablePayments addObject:mainModel];
             }
             
@@ -112,6 +115,7 @@
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
                 mainModel.name = @"支付宝秒存";
                 mainModel.iconName = @"me_alipay";
+                mainModel.paymentType = CNPayChannelBQAli;
                 [availablePayments addObject:mainModel];
             }
             
@@ -120,6 +124,7 @@
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
                 mainModel.name = @"手工存款";
                 mainModel.iconName = @"me_hand";
+                mainModel.paymentType = CNPayChannelDeposit;
                 [availablePayments addObject:mainModel];
             }
             
@@ -128,6 +133,7 @@
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
                 mainModel.name = @"在线支付";
                 mainModel.iconName = @"me_online";
+                mainModel.paymentType = CNPayChannelOnline;
                 [availablePayments addObject:mainModel];
             }
             
@@ -149,6 +155,7 @@
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
                 mainModel.name = @"扫码支付";
                 mainModel.iconName = @"me_online";
+                mainModel.paymentType = CNPayChannelOnline;
                 [availablePayments addObject:mainModel];
                 isHave = YES;
             }
@@ -158,6 +165,7 @@
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
                 mainModel.name = @"银行快捷支付";
                 mainModel.iconName = @"me_quick";
+                mainModel.paymentType = CNPayChannelUnionApp;
                 [availablePayments addObject:mainModel];
             }
             
@@ -166,6 +174,7 @@
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
                 mainModel.name = @"支付宝WAP";
                 mainModel.iconName = @"me_alipay";
+                mainModel.paymentType = CNPayChannelAliApp;
                 [availablePayments addObject:mainModel];
             }
             
@@ -174,6 +183,7 @@
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
                 mainModel.name = @"点卡支付";
                 mainModel.iconName = @"me_pointCard";
+                mainModel.paymentType = CNPayChannelCard;
                 [availablePayments addObject:mainModel];
             }
             
@@ -182,6 +192,7 @@
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
                 mainModel.name = @"比特币支付";
                 mainModel.iconName = @"me_btc";
+                mainModel.paymentType = CNPayChannelBTC;
                 [availablePayments addObject:mainModel];
             }
             
@@ -190,6 +201,7 @@
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
                 mainModel.name = @"京东WAP支付";
                 mainModel.iconName = @"me_jd";
+                mainModel.paymentType = CNPayChannelJDApp;
                 [availablePayments addObject:mainModel];
             }
 

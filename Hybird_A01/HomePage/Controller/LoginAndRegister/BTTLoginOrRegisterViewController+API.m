@@ -72,13 +72,13 @@
     [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTUserLoginAPI paramters:parameters completionBlock:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
-        self.uuid = @"";
         NSLog(@"%@",response);
         if (result.code_http == 200) {
             [[NSUserDefaults standardUserDefaults] setObject:model.login_name forKey:BTTCacheAccountName];
             [[NSUserDefaults standardUserDefaults] synchronize];
             self.wrongPwdNum = 0;
             if ([result.data isKindOfClass:[NSDictionary class]]) {
+                self.uuid = @"";
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.data];
                 if (isback) {
                     [MBProgressHUD showSuccess:@"登录成功" toView:nil];

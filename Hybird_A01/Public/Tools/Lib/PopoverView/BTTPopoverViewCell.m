@@ -48,7 +48,7 @@ float const BTTPopoverViewCellTitleLeftEdge = 8.f; ///< 标题左边边距
 #pragma mark - Setter
 - (void)setStyle:(BTTPopoverViewStyle)style {
     _style = style;
-    _bottomLine.backgroundColor = [self.class bottomLineColorForStyle:style];
+//    _bottomLine.backgroundColor = [self.class bottomLineColorForStyle:style];
     if (_style == BTTPopoverViewStyleDefault) {
         [_button setTitleColor:UIColor.blackColor forState:UIControlStateNormal];
     } else {
@@ -74,7 +74,7 @@ float const BTTPopoverViewCellTitleLeftEdge = 8.f; ///< 标题左边边距
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-margin-[_button]-margin-|" options:kNilOptions metrics:@{@"margin" : @(BTTPopoverViewCellVerticalMargin)} views:NSDictionaryOfVariableBindings(_button)]];
     // 底部线条
     UIView *bottomLine = [[UIView alloc] init];
-    bottomLine.backgroundColor = [UIColor colorWithHexString:@"3a3a3a"];//[UIColor colorWithRed:0.75 green:0.75 blue:0.75 alpha:1.00];
+    bottomLine.backgroundColor = [UIColor colorWithHexString:@"3a3a3a"];
     bottomLine.translatesAutoresizingMaskIntoConstraints = NO;
     [self.contentView addSubview:bottomLine];
     _bottomLine = bottomLine;
