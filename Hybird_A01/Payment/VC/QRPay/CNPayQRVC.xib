@@ -29,24 +29,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m4K-aK-8TW">
-                    <rect key="frame" x="0.0" y="20" width="375" height="148"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="147"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pYW-Nj-PQU" customClass="CNPayOnePixView">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="height" priority="750" constant="1" id="8A9-9d-Ybv"/>
-                            </constraints>
-                        </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择支付方式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yvu-aP-jus">
-                            <rect key="frame" x="18" y="16" width="86" height="17"/>
+                            <rect key="frame" x="18" y="15" width="86" height="17"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="yCb-r4-x7i">
-                            <rect key="frame" x="0.0" y="48" width="375" height="100"/>
-                            <color key="backgroundColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <rect key="frame" x="0.0" y="47" width="375" height="100"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="100" id="8KR-Md-ws0"/>
                             </constraints>
@@ -62,25 +55,22 @@
                             </connections>
                         </collectionView>
                     </subviews>
-                    <color key="backgroundColor" red="0.16078431372549018" green="0.1803921568627451" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.12156862745098039" green="0.13333333333333333" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="yCb-r4-x7i" secondAttribute="bottom" id="32a-eo-OlW"/>
-                        <constraint firstItem="pYW-Nj-PQU" firstAttribute="leading" secondItem="m4K-aK-8TW" secondAttribute="leading" id="BwL-ZA-9XK"/>
-                        <constraint firstItem="pYW-Nj-PQU" firstAttribute="top" secondItem="m4K-aK-8TW" secondAttribute="top" id="CRZ-w6-OpA"/>
                         <constraint firstItem="Yvu-aP-jus" firstAttribute="leading" secondItem="m4K-aK-8TW" secondAttribute="leading" constant="18" id="G98-pu-TLU"/>
-                        <constraint firstItem="Yvu-aP-jus" firstAttribute="top" secondItem="pYW-Nj-PQU" secondAttribute="bottom" constant="15" id="YqM-IA-PKv"/>
+                        <constraint firstItem="Yvu-aP-jus" firstAttribute="top" secondItem="m4K-aK-8TW" secondAttribute="top" constant="15" id="XaE-oc-EdP"/>
                         <constraint firstItem="yCb-r4-x7i" firstAttribute="top" secondItem="Yvu-aP-jus" secondAttribute="bottom" constant="15" id="a6X-Cb-gda"/>
                         <constraint firstItem="yCb-r4-x7i" firstAttribute="leading" secondItem="m4K-aK-8TW" secondAttribute="leading" id="c00-WF-y43"/>
                         <constraint firstAttribute="trailing" secondItem="yCb-r4-x7i" secondAttribute="trailing" id="lR8-lA-oZN"/>
-                        <constraint firstAttribute="trailing" secondItem="pYW-Nj-PQU" secondAttribute="trailing" id="uiG-dO-XK5"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUe-Hz-zx7">
-                    <rect key="frame" x="0.0" y="183" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="182" width="375" height="50"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QGX-FA-J3b" customClass="CNPayOnePixView">
                             <rect key="frame" x="0.0" y="49" width="375" height="1"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" priority="750" constant="1" id="fao-Qg-6By"/>
                             </constraints>
@@ -122,7 +112,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="NAV-jS-dbV" secondAttribute="trailing" constant="15" id="7Xy-hr-OWx"/>
                                 <constraint firstItem="NAV-jS-dbV" firstAttribute="centerY" secondItem="moK-6h-oRU" secondAttribute="centerY" id="KsW-E3-uGZ"/>
@@ -131,7 +121,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.12156862745098039" green="0.13333333333333333" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="moK-6h-oRU" firstAttribute="top" secondItem="FUe-Hz-zx7" secondAttribute="top" id="LFK-3E-gRg"/>
                         <constraint firstAttribute="trailing" secondItem="moK-6h-oRU" secondAttribute="trailing" id="Ngx-sr-fCP"/>
@@ -144,7 +134,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34q-oa-9ZV" userLabel="AmountView">
-                    <rect key="frame" x="0.0" y="233" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="232" width="375" height="50"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="epj-lB-KJH" customClass="CNPayOnePixView">
                             <rect key="frame" x="0.0" y="49" width="375" height="1"/>
@@ -187,7 +177,7 @@
                                     <rect key="frame" x="344" y="16.5" width="16" height="16"/>
                                 </imageView>
                             </subviews>
-                            <color key="backgroundColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="XZy-jY-BSj" firstAttribute="centerY" secondItem="3Ap-qk-kPn" secondAttribute="centerY" id="2Ke-Kl-Q06"/>
                                 <constraint firstAttribute="trailing" secondItem="d5q-F6-eoE" secondAttribute="trailing" id="HJv-HK-Ibu"/>
@@ -208,7 +198,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.12156862745098039" green="0.13333333333333333" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="1XM-aB-wGz"/>
                         <constraint firstAttribute="trailing" secondItem="epj-lB-KJH" secondAttribute="trailing" id="FfN-4P-DAq"/>
@@ -221,7 +211,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NGs-Ne-YNl" userLabel="ButtonView">
-                    <rect key="frame" x="0.0" y="283" width="375" height="85"/>
+                    <rect key="frame" x="0.0" y="282" width="375" height="85"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npC-pl-I70" customClass="CNPaySubmitButton">
                             <rect key="frame" x="18" y="20" width="339" height="45"/>

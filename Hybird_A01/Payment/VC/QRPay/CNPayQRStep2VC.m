@@ -38,7 +38,6 @@
 - (IBAction)submit:(UIButton *)sender {
     [self showPayTipView];
     CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:self.writeModel.orderModel title:self.writeModel.depositType];
-//    CNWKWebVC *webVC = [[CNWKWebVC alloc] initWithHtmlString:[CNPayRequestManager submitPayFormWithOrderModel:self.writeModel.orderModel]];
     [self pushViewController:webVC];
 }
 @end

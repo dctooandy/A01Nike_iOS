@@ -127,7 +127,6 @@
     }
     [self showPayTipView];
     CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:orderModel title:self.paymentModel.paymentTitle];
-//    CNWKWebVC *webVC = [[CNWKWebVC alloc] initWithHtmlString:[CNPayRequestManager submitPayFormWithOrderModel:orderModel]];
     [self pushViewController:webVC];
 }
 
