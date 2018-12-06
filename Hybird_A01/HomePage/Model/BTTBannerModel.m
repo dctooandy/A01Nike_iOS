@@ -29,7 +29,7 @@
 
 - (NSString *)detail {
     if (_detail.length && ![_detail hasPrefix:@"http"]) {
-        _detail = [NSString stringWithFormat:@"%@/%@",[IVNetwork h5Domain],_detail];
+        _detail = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],_detail];
     }
     return _detail;
 }
