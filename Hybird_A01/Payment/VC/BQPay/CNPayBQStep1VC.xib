@@ -236,18 +236,11 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RA8-ti-4Bl" userLabel="bankView">
                             <rect key="frame" x="0.0" y="150" width="375" height="50"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bj7-Z6-XfG" customClass="CNPayOnePixView">
-                                    <rect key="frame" x="0.0" y="49" width="375" height="1"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" priority="750" constant="1" id="Cxl-Oi-Crs"/>
-                                    </constraints>
-                                </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dtz-B0-88a">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收款银行" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yxN-ir-cZH" customClass="CNPayLabel">
-                                            <rect key="frame" x="15" y="14.5" width="100" height="20"/>
+                                            <rect key="frame" x="15" y="15" width="100" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="100" id="OsD-mw-Mrz"/>
                                             </constraints>
@@ -256,19 +249,19 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择收款银行" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AXl-4d-cgk" customClass="CNPayNormalTF">
-                                            <rect key="frame" x="115" y="0.0" width="220" height="49"/>
+                                            <rect key="frame" x="115" y="0.0" width="220" height="50"/>
                                             <color key="textColor" red="0.50980392159999999" green="0.52549019610000003" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BZ9-6E-icg">
-                                            <rect key="frame" x="115" y="0.0" width="260" height="49"/>
+                                            <rect key="frame" x="115" y="0.0" width="260" height="50"/>
                                             <connections>
                                                 <action selector="selectedBank:" destination="-1" eventType="touchUpInside" id="bbJ-Oc-HEj"/>
                                             </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Mhy-wE-a1t">
-                                            <rect key="frame" x="344" y="16.5" width="16" height="16"/>
+                                            <rect key="frame" x="344" y="17" width="16" height="16"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -291,13 +284,10 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="Dtz-B0-88a" firstAttribute="top" secondItem="RA8-ti-4Bl" secondAttribute="top" id="1DT-s4-qf2"/>
-                                <constraint firstItem="bj7-Z6-XfG" firstAttribute="top" secondItem="Dtz-B0-88a" secondAttribute="bottom" id="KE4-W4-aUc"/>
+                                <constraint firstAttribute="bottom" secondItem="Dtz-B0-88a" secondAttribute="bottom" id="7Fj-BC-3dC"/>
                                 <constraint firstAttribute="trailing" secondItem="Dtz-B0-88a" secondAttribute="trailing" id="Ks7-B0-Dd3"/>
-                                <constraint firstAttribute="bottom" secondItem="bj7-Z6-XfG" secondAttribute="bottom" id="Niu-K0-F4W"/>
                                 <constraint firstItem="Dtz-B0-88a" firstAttribute="leading" secondItem="RA8-ti-4Bl" secondAttribute="leading" id="UjH-i4-Ffk"/>
                                 <constraint firstAttribute="height" constant="50" id="bOq-XG-IjG"/>
-                                <constraint firstItem="bj7-Z6-XfG" firstAttribute="leading" secondItem="RA8-ti-4Bl" secondAttribute="leading" id="k98-Vl-JAm"/>
-                                <constraint firstAttribute="trailing" secondItem="bj7-Z6-XfG" secondAttribute="trailing" id="xKN-k3-DuM"/>
                             </constraints>
                         </view>
                     </subviews>
