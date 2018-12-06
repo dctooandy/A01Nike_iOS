@@ -207,7 +207,7 @@
                 strongSelf(strongSelf);
                 if (button.tag != 1073) {
                     strongSelf.isFavorite = NO;
-                    if (self.games.count < self.limit) {
+                    if (strongSelf.games.count % strongSelf.limit) {
                         strongSelf.isShowFooter = YES;
                     } else {
                         strongSelf.isShowFooter = NO;
@@ -228,7 +228,15 @@
                     }
                     strongSelf.isShowSearchBar = NO;
                     button.selected = !button.selected;
-                    strongSelf.isShowFooter = button.selected;
+                    if (button.selected) {
+                        strongSelf.isShowFooter = button.selected;
+                    } else {
+                        if (strongSelf.games.count % strongSelf.limit) {
+                            strongSelf.isShowFooter = YES;
+                        } else {
+                            strongSelf.isShowFooter = NO;
+                        }
+                    }
                     if (button.selected) {
                         [self.collectionView.mj_footer endRefreshingWithNoMoreData];
                     } else {
@@ -347,7 +355,7 @@
                         UIButton *collectBtn = (UIButton *)[cell viewWithTag:1073];
                         collectBtn.selected = NO;
                         strongSelf.isFavorite = NO;
-                        if (self.games.count < self.limit) {
+                        if (strongSelf.games.count % strongSelf.limit) {
                             strongSelf.isShowFooter = YES;
                         } else {
                             strongSelf.isShowFooter = NO;
@@ -366,7 +374,15 @@
                         }
                         strongSelf.isShowSearchBar = NO;
                         button.selected = !button.selected;
-                        strongSelf.isShowFooter = button.selected;
+                        if (button.selected) {
+                            strongSelf.isShowFooter = button.selected;
+                        } else {
+                            if (strongSelf.games.count % strongSelf.limit) {
+                                strongSelf.isShowFooter = YES;
+                            } else {
+                                strongSelf.isShowFooter = NO;
+                            }
+                        }
                         if (button.selected) {
                             [self.collectionView.mj_footer endRefreshingWithNoMoreData];
                         } else {
@@ -506,7 +522,7 @@
                         UIButton *collectBtn = (UIButton *)[cell viewWithTag:1073];
                         collectBtn.selected = NO;
                         strongSelf.isFavorite = NO;
-                        if (self.games.count < self.limit) {
+                        if (strongSelf.games.count % strongSelf.limit) {
                             strongSelf.isShowFooter = YES;
                         } else {
                             strongSelf.isShowFooter = NO;
@@ -525,7 +541,16 @@
                         }
                         strongSelf.isShowSearchBar = NO;
                         button.selected = !button.selected;
-                        strongSelf.isShowFooter = button.selected;
+                        if (button.selected) {
+                            strongSelf.isShowFooter = button.selected;
+                        } else {
+                            if (strongSelf.games.count % strongSelf.limit) {
+                                strongSelf.isShowFooter = YES;
+                            } else {
+                                strongSelf.isShowFooter = NO;
+                            }
+                        }
+                        
                         if (button.selected) {
                             [self.collectionView.mj_footer endRefreshingWithNoMoreData];
                         } else {
