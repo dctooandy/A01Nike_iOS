@@ -36,7 +36,7 @@
                             <subviews>
                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYj-Ou-aGS" customClass="CNPayBankView">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
-                                    <color key="backgroundColor" red="0.12549019610000001" green="0.1333333333" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.12156862745098039" green="0.13333333333333333" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" id="HNr-2z-gfr"/>
                                     </constraints>
@@ -46,7 +46,7 @@
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qfK-kR-idg">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="142"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" red="0.12156862745098039" green="0.13333333333333333" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="142" id="Wdm-Jh-3Ki"/>
                                             </constraints>
@@ -69,7 +69,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.16078431369999999" green="0.1764705882" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.12156862745098039" green="0.13333333333333333" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="qfK-kR-idg" secondAttribute="trailing" id="B0b-Yv-0YM"/>
                                         <constraint firstAttribute="bottom" secondItem="44D-tr-qrj" secondAttribute="bottom" id="OX1-59-oVg"/>
@@ -88,7 +88,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" red="0.12549019610000001" green="0.1333333333" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.12156862745098039" green="0.13333333333333333" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="tkf-1e-xpL" secondAttribute="bottom" id="0bL-ZS-stU"/>
                                 <constraint firstItem="Vxf-cU-lyv" firstAttribute="top" secondItem="bJH-b5-xaB" secondAttribute="top" id="829-6L-dok"/>
