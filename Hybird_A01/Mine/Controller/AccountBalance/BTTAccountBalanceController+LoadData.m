@@ -70,9 +70,7 @@
     for (BTTGamesHallModel *model in self.games) {
         NSInteger index = [self.games indexOfObject:model];
         dispatch_group_enter(group);
-        dispatch_async(queue, ^{
-            [self loadGameAmountWithModel:model index:index group:group];
-        });
+        [self loadGameAmountWithModel:model index:index group:group];
     }
     
     dispatch_group_notify(group, queue, ^{
@@ -126,6 +124,9 @@
             self.hallAmount = [NSString stringWithFormat:@"%.2f",self.hallAmount.floatValue + model.amount.floatValue];
         }
         dispatch_group_leave(group);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
         if (result.message.length) {
             [MBProgressHUD showError:result.message toView:nil];
         }
