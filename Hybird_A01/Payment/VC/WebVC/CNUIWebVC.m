@@ -40,11 +40,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
 }
 
 - (void)loadWebView {
     if ([self.webConfigModel.url hasPrefix:@"<form"]) {
+        [self updateUI];
         [self.webView loadHTMLString:self.webConfigModel.url baseURL:nil];
         return;
     }
