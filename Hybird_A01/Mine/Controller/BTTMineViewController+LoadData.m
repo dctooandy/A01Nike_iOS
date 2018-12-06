@@ -43,6 +43,9 @@
 }
 
 - (void)loadPaymentDefaultData {
+    if (self.paymentDatas.count) {
+        [self.paymentDatas removeAllObjects];
+    }
     NSArray *icons = @[@"me_netbank",@"me_wechat",@"me_alipay",@"me_hand",@"me_online",@"me_scan",@"me_quick",@"me_alipay",@"me_pointCard",@"me_btc",@"me_jd",@"me_bibao"];
     NSArray *names = @[@"迅捷网银",@"微信秒存",@"支付宝秒存",@"手工存款",@"在线支付",@"扫码支付",@"银行快捷支付",@"支付宝WAP",@"点卡支付",@"比特币支付",@"京东WAP支付",@"币宝支付"];
     for (NSString *name in names) {
