@@ -106,8 +106,10 @@
             [collectionView endEditing:YES];
             BTTPTTransferNewCell *headerCell = (BTTPTTransferNewCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             BTTPTTransferInputCell *amountCell = (BTTPTTransferInputCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-            
-            [strongSelf loadCreditsTransfer:headerCell.useableBtn.selected amount:amountCell.amountTextField.text.floatValue];
+            if (!amountCell.amountTextField.text.floatValue) {
+                return;
+            }
+            [strongSelf loadCreditsTransfer:headerCell.useableBtn.selected amount:amountCell.amountTextField.text];
         };
         return cell;
     }
