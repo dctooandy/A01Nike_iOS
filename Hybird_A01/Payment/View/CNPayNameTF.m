@@ -31,7 +31,7 @@
 - (void)commonInit {
     self.placeholder = @"请填写实际存款的银行卡姓名";
     self.font = [UIFont systemFontOfSize:13];
-    self.textColor = COLOR_HEX(0xCFB785);
+    self.textColor = COLOR_HEX(0xDBBD85);
     self.textAlignment = NSTextAlignmentRight;
     [self setValue:COLOR_HEX(0x82868F) forKeyPath:@"_placeholderLabel.textColor"];
     self.delegate = self;

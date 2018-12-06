@@ -93,11 +93,11 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sdfaf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYD-U1-5Ou">
                                             <rect key="frame" x="15" y="6" width="33" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.81176470588235294" green="0.71764705882352942" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.792156862745098" green="0.63921568627450975" blue="0.38431372549019605" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.13333333333333333" green="0.15294117647058825" blue="0.18431372549019609" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.094117647058823528" green="0.11372549019607843" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="hYD-U1-5Ou" secondAttribute="bottom" constant="6" id="gWt-B4-fjS"/>
                                         <constraint firstItem="hYD-U1-5Ou" firstAttribute="top" secondItem="NAV-jS-dbV" secondAttribute="top" constant="6" id="hgq-tY-qMb"/>
