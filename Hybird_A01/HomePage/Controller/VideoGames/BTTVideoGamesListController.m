@@ -93,6 +93,7 @@
 }
 
 - (void)loadGamesData {
+    [self.collectionView.mj_footer resetNoMoreData];
     BTTVideoGamesRequestModel *requestModel = [BTTVideoGamesRequestModel new];
     requestModel.type = _type;
     requestModel.line = _line;
@@ -124,18 +125,21 @@
                 BTTVideoGameModel *model = [BTTVideoGameModel yy_modelWithDictionary:dict];
                 [strongSelf.games addObject:model];
             }
-            if ([games count] == self.limit) {
+            if (games.count) {
                 if (requestModel.keyword.length) {
                     strongSelf.searchPage ++;
                 } else {
                     strongSelf.page ++;
                 }
-            } else {
-                [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
-            if (games.count < strongSelf.limit) {
+            if (games.count < strongSelf.limit && games.count) {
+                [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
                 strongSelf.isShowFooter = YES;
                 [strongSelf.games addObject:[BTTVideoGameModel new]];
+            }
+            if (!games.count) {
+                strongSelf.isShowFooter = YES;
+                [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
         }
         [strongSelf setupElements];
@@ -238,9 +242,9 @@
                         }
                     }
                     if (button.selected) {
-                        [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+                        [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
                     } else {
-                        [self.collectionView.mj_footer resetNoMoreData];
+                        [strongSelf.collectionView.mj_footer resetNoMoreData];
                     }
                     strongSelf.isFavorite = button.selected;
                     [strongSelf setupElements];
@@ -384,9 +388,9 @@
                             }
                         }
                         if (button.selected) {
-                            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+                            [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
                         } else {
-                            [self.collectionView.mj_footer resetNoMoreData];
+                            [strongSelf.collectionView.mj_footer resetNoMoreData];
                         }
                         strongSelf.isFavorite = button.selected;
                         [strongSelf setupElements];
@@ -552,9 +556,9 @@
                         }
                         
                         if (button.selected) {
-                            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+                            [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
                         } else {
-                            [self.collectionView.mj_footer resetNoMoreData];
+                            [strongSelf.collectionView.mj_footer resetNoMoreData];
                         }
                         strongSelf.isFavorite = button.selected;
                         [strongSelf setupElements];

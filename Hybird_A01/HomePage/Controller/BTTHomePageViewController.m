@@ -127,11 +127,33 @@
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTBannerModel *model = strongSelf.banners[[value integerValue]];
-                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-                vc.webConfigModel.url = model.action.detail;
-                vc.webConfigModel.newView = YES;
-                vc.webConfigModel.theme = @"outside";
-                [strongSelf.navigationController pushViewController:vc animated:YES];
+                if ([model.action.detail hasSuffix:@".htm"] ) {
+                    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                    vc.webConfigModel.url = model.action.detail;
+                    vc.webConfigModel.newView = YES;
+                    vc.webConfigModel.theme = @"outside";
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                } else {
+                    NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
+                    NSString *gameid = arr[2];
+                    NSLog(@"%@",gameid);
+                    UIViewController *vc = nil;
+                    if ([gameid isEqualToString:@"A01003"]) {
+                        vc = [BTTAGQJViewController new];
+                        [strongSelf.navigationController pushViewController:vc animated:YES];
+                    } else if ([gameid isEqualToString:@"A01026"]) {
+                        vc = [BTTAGGJViewController new];
+                        [strongSelf.navigationController pushViewController:vc animated:YES];
+                    } else {
+                        IVGameModel *model = [[IVGameModel alloc] init];
+                        model.cnName =  kFishCnName;
+                        model.enName =  kFishEnName;
+                        model.provider = kAGINProvider;
+                        model.gameId = model.gameCode;
+                        model.gameType = kFishType;
+                        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:strongSelf];
+                    }
+                }
             };
             cell.imageUrls = self.imageUrls;
             return cell;
@@ -229,11 +251,33 @@
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTBannerModel *model = strongSelf.banners[[value integerValue]];
-                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-                vc.webConfigModel.url = model.action.detail;
-                vc.webConfigModel.newView = YES;
-                vc.webConfigModel.theme = @"outside";
-                [strongSelf.navigationController pushViewController:vc animated:YES];
+                if ([model.action.detail hasSuffix:@".htm"] ) {
+                    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                    vc.webConfigModel.url = model.action.detail;
+                    vc.webConfigModel.newView = YES;
+                    vc.webConfigModel.theme = @"outside";
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                } else {
+                    NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
+                    NSString *gameid = arr[2];
+                    NSLog(@"%@",gameid);
+                    UIViewController *vc = nil;
+                    if ([gameid isEqualToString:@"A01003"]) {
+                        vc = [BTTAGQJViewController new];
+                        [strongSelf.navigationController pushViewController:vc animated:YES];
+                    } else if ([gameid isEqualToString:@"A01026"]) {
+                        vc = [BTTAGGJViewController new];
+                        [strongSelf.navigationController pushViewController:vc animated:YES];
+                    } else {
+                        IVGameModel *model = [[IVGameModel alloc] init];
+                        model.cnName =  kFishCnName;
+                        model.enName =  kFishEnName;
+                        model.provider = kAGINProvider;
+                        model.gameId = model.gameCode;
+                        model.gameType = kFishType;
+                        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:strongSelf];
+                    }
+                }
             };
             return cell;
         } else if (indexPath.row == 1) {
@@ -415,7 +459,7 @@
 }
 
 - (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
-    return UIEdgeInsetsMake(0, 0, KIsiPhoneX ? 83 : 49, 0);
+    return UIEdgeInsetsMake(0, 0, KIsiPhoneX ? 83 : 79, 0);
 }
 
 /**
