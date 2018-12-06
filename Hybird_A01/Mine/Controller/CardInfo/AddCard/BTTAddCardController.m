@@ -18,8 +18,6 @@
 
 @interface BTTAddCardController ()<BTTElementsFlowLayoutDelegate, UITextFieldDelegate>
 
-@property (nonatomic, strong) BRProvinceModel *provinceModel;
-
 @property (nonatomic, assign) CGRect activedTextFieldRect;
 
 @end
@@ -131,26 +129,15 @@
         [BRStringPickerView showStringPickerWithTitle:@"卡片类别" dataSource:@[@"借记卡", @"信用卡", @"存折"] defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
             cell.textField.text = selectValue;
         }];
-    } else if (indexPath.item == 4) {
-        [BRAddressPickerView showAddressPickerWithShowType:BRAddressPickerModeProvince dataSource:nil defaultSelected:nil isAutoSelect:NO themeColor:nil resultBlock:^(BRProvinceModel *province, BRCityModel *city, BRAreaModel *area) {
-            self.provinceModel = province;
-            cell.textField.text = province.name;
+    } else if (indexPath.item == 4 || indexPath.item == 5) {
+        [BRAddressPickerView showAddressPickerWithShowType:BRAddressPickerModeCity dataSource:nil defaultSelected:nil isAutoSelect:NO themeColor:nil resultBlock:^(BRProvinceModel *province, BRCityModel *city, BRAreaModel *area) {
+            BTTBindingMobileOneCell *fourCell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+            fourCell.textField.text = province.name;
             BTTBindingMobileOneCell *fiveCell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:5 inSection:0]];
-            fiveCell.textField.text = @"";
+            fiveCell.textField.text = city.name;
         } cancelBlock:^{
             
         }];
-    } else if (indexPath.item == 5) {
-        if (self.provinceModel) {
-            [BRAddressPickerView showAddressPickerWithShowType:BRAddressPickerModeArea dataSource:nil defaultSelected:@[self.provinceModel.name] isAutoSelect:NO themeColor:nil resultBlock:^(BRProvinceModel *province, BRCityModel *city, BRAreaModel *area) {
-                cell.textField.text = [NSString stringWithFormat:@"%@%@",city.name,area.name];
-            } cancelBlock:^{
-                
-            }];
-        } else {
-            [MBProgressHUD showError:@"请先选择省份" toView:self.view];
-        }
-        
     }
 }
 
