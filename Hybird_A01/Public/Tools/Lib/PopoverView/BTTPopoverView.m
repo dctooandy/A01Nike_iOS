@@ -77,7 +77,7 @@ float BTTPopoverViewDegreesToRadians(float angle)
     if (_style == BTTPopoverViewStyleDefault) {
         self.backgroundColor = [UIColor whiteColor];
     } else {
-        self.backgroundColor = [UIColor colorWithHexString:@"222222"];
+        self.backgroundColor = COLOR_RGBA(41, 45, 54, 1);
     }
 }
 
