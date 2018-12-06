@@ -150,7 +150,7 @@
                 scan7.isAvailable) && !isHave) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
                 mainModel.name = @"扫码支付";
-                mainModel.iconName = @"me_online";
+                mainModel.iconName = @"me_scan";
                 mainModel.paymentType = CNPayChannelOnline;
                 [availablePayments addObject:mainModel];
                 isHave = YES;
