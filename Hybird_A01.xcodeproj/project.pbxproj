@@ -52,6 +52,9 @@
 		3A11AE6D2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11AE6B2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib */; };
 		3A34F79321B6630D007BC4D4 /* BTTGamesTryAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34F79221B6630D007BC4D4 /* BTTGamesTryAlertView.m */; };
 		3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A34F79421B6631B007BC4D4 /* BTTGamesTryAlertView.xib */; };
+		3A34F79E21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34F79C21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m */; };
+		3A34F79F21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A34F79D21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib */; };
+		3A34F7A121B7B59B007BC4D4 /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A34F7A021B7B59B007BC4D4 /* app.zip */; };
 		3A37E0FA2164685600FB13A1 /* AppDelegate+Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37E0F92164685600FB13A1 /* AppDelegate+Environment.m */; };
 		3A37E0FD2164691300FB13A1 /* AppDelegate+AD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37E0FC2164691300FB13A1 /* AppDelegate+AD.m */; };
 		3A37E1192164A20100FB13A1 /* BTTTabbarController+VoiceCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37E1162164A20100FB13A1 /* BTTTabbarController+VoiceCall.m */; };
@@ -86,7 +89,6 @@
 		3A5F7AA021A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7A9E21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib */; };
 		3A5F7AA321A9524D00128E8B /* BTTProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA221A9524D00128E8B /* BTTProvinceModel.m */; };
 		3A5F7AA821ABCD3900128E8B /* BTTVideoGamesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */; };
-		3A5F7AAA21ACF11A00128E8B /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7AA921ACF11900128E8B /* app.zip */; };
 		3A5F7AB021ACF5DB00128E8B /* BTTVideoGamesListController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AAE21ACF5DA00128E8B /* BTTVideoGamesListController+LoadData.m */; };
 		3A5F7AB521AD0E6800128E8B /* BTTVideoGamesFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AB321AD0E6800128E8B /* BTTVideoGamesFilterCell.m */; };
 		3A5F7AB621AD0E6800128E8B /* BTTVideoGamesFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7AB421AD0E6800128E8B /* BTTVideoGamesFilterCell.xib */; };
@@ -359,25 +361,30 @@
 		D599252A21AFF23B001E885A /* CNPayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D599252821AFF23B001E885A /* CNPayVC.m */; };
 		D599252B21AFF23B001E885A /* CNPayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D599252921AFF23B001E885A /* CNPayVC.xib */; };
 		D5C5018B21B4BFD000C6DA02 /* CNPayDepositNameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5018A21B4BFD000C6DA02 /* CNPayDepositNameModel.m */; };
+		D5C5018E21B4FC8C00C6DA02 /* CNPayWechatTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5018D21B4FC8C00C6DA02 /* CNPayWechatTipView.m */; };
+		D5C5019021B4FC9700C6DA02 /* CNPayWechatTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5C5018F21B4FC9700C6DA02 /* CNPayWechatTipView.xib */; };
+		D5C5019321B6681200C6DA02 /* CNPayDepositTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5019221B6681200C6DA02 /* CNPayDepositTipView.m */; };
+		D5C5019521B6681F00C6DA02 /* CNPayDepositTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5C5019421B6681F00C6DA02 /* CNPayDepositTipView.xib */; };
+		D5C5019921B67C0800C6DA02 /* CNPayDepositSuccessVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5C5019621B67C0800C6DA02 /* CNPayDepositSuccessVC.xib */; };
+		D5C5019A21B67C0800C6DA02 /* CNPayDepositSuccessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5019721B67C0800C6DA02 /* CNPayDepositSuccessVC.m */; };
+		D5C501CF21B7CEDC00C6DA02 /* BRStringPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C501BE21B7CEDC00C6DA02 /* BRStringPickerView.m */; };
+		D5C501D021B7CEDC00C6DA02 /* NSDate+BRPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C501C321B7CEDC00C6DA02 /* NSDate+BRPickerView.m */; };
+		D5C501D121B7CEDC00C6DA02 /* BRDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C501C421B7CEDC00C6DA02 /* BRDatePickerView.m */; };
+		D5C501D221B7CEDC00C6DA02 /* BRBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C501C721B7CEDC00C6DA02 /* BRBaseView.m */; };
+		D5C501D321B7CEDC00C6DA02 /* BRAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C501CA21B7CEDC00C6DA02 /* BRAddressModel.m */; };
+		D5C501D421B7CEDC00C6DA02 /* BRPickerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D5C501CC21B7CEDC00C6DA02 /* BRPickerView.bundle */; };
+		D5C501D521B7CEDC00C6DA02 /* BRAddressPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C501CE21B7CEDC00C6DA02 /* BRAddressPickerView.m */; };
 		D5DBEAFF21ABB774008AF629 /* NSString+CNPayment.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEA8D21ABB774008AF629 /* NSString+CNPayment.m */; };
 		D5DBEB0021ABB774008AF629 /* CNPayDepositStep3VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEA9221ABB774008AF629 /* CNPayDepositStep3VC.xib */; };
-		D5DBEB0121ABB774008AF629 /* CNPayDepositSuccessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEA9321ABB774008AF629 /* CNPayDepositSuccessVC.m */; };
 		D5DBEB0221ABB774008AF629 /* CNPayDepositStep1VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEA9521ABB774008AF629 /* CNPayDepositStep1VC.xib */; };
 		D5DBEB0321ABB774008AF629 /* CNPayDepositStep2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEA9721ABB774008AF629 /* CNPayDepositStep2VC.xib */; };
-		D5DBEB0421ABB774008AF629 /* CNPayDepositSuccessVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEA9821ABB774008AF629 /* CNPayDepositSuccessVC.xib */; };
 		D5DBEB0521ABB774008AF629 /* CNPayDepositStep3VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEA9921ABB774008AF629 /* CNPayDepositStep3VC.m */; };
 		D5DBEB0621ABB774008AF629 /* CNPayDepositStep2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEA9A21ABB774008AF629 /* CNPayDepositStep2VC.m */; };
 		D5DBEB0721ABB774008AF629 /* CNPayDepositStep1VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEA9C21ABB774008AF629 /* CNPayDepositStep1VC.m */; };
-		D5DBEB0821ABB774008AF629 /* CNPayBQStep2VC2.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEA9E21ABB774008AF629 /* CNPayBQStep2VC2.m */; };
 		D5DBEB0921ABB774008AF629 /* CNPayBQStep2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEA9F21ABB774008AF629 /* CNPayBQStep2VC.xib */; };
 		D5DBEB0A21ABB774008AF629 /* CNPayBQStep2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAA021ABB774008AF629 /* CNPayBQStep2VC.m */; };
-		D5DBEB0B21ABB774008AF629 /* CNPayBQStep2VC2.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEAA121ABB774008AF629 /* CNPayBQStep2VC2.xib */; };
 		D5DBEB0C21ABB774008AF629 /* CNPayBQStep1VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAA221ABB774008AF629 /* CNPayBQStep1VC.m */; };
-		D5DBEB0D21ABB774008AF629 /* CNPayBQSuccessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAA321ABB774008AF629 /* CNPayBQSuccessVC.m */; };
 		D5DBEB0E21ABB774008AF629 /* CNPayBQStep1VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEAA421ABB774008AF629 /* CNPayBQStep1VC.xib */; };
-		D5DBEB0F21ABB774008AF629 /* CNPayBQSuccessVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEAA521ABB774008AF629 /* CNPayBQSuccessVC.xib */; };
-		D5DBEB1021ABB774008AF629 /* CNPayBQStep2FastVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEAAA21ABB774008AF629 /* CNPayBQStep2FastVC.xib */; };
-		D5DBEB1121ABB774008AF629 /* CNPayBQStep2FastVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAAC21ABB774008AF629 /* CNPayBQStep2FastVC.m */; };
 		D5DBEB1321ABB774008AF629 /* CNPayContainerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAAE21ABB774008AF629 /* CNPayContainerVC.m */; };
 		D5DBEB1421ABB774008AF629 /* CNPayOnlineVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEAB021ABB774008AF629 /* CNPayOnlineVC.xib */; };
 		D5DBEB1521ABB774008AF629 /* CNPayOnlineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAB121ABB774008AF629 /* CNPayOnlineVC.m */; };
@@ -720,6 +727,10 @@
 		3A34F79121B6630D007BC4D4 /* BTTGamesTryAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTGamesTryAlertView.h; sourceTree = "<group>"; };
 		3A34F79221B6630D007BC4D4 /* BTTGamesTryAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTGamesTryAlertView.m; sourceTree = "<group>"; };
 		3A34F79421B6631B007BC4D4 /* BTTGamesTryAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTGamesTryAlertView.xib; sourceTree = "<group>"; };
+		3A34F79B21B7A9DA007BC4D4 /* BTTHomePageFooterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTHomePageFooterCell.h; sourceTree = "<group>"; };
+		3A34F79C21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTHomePageFooterCell.m; sourceTree = "<group>"; };
+		3A34F79D21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTHomePageFooterCell.xib; sourceTree = "<group>"; };
+		3A34F7A021B7B59B007BC4D4 /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		3A37E0F82164685600FB13A1 /* AppDelegate+Environment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Environment.h"; sourceTree = "<group>"; };
 		3A37E0F92164685600FB13A1 /* AppDelegate+Environment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Environment.m"; sourceTree = "<group>"; };
 		3A37E0FB2164691300FB13A1 /* AppDelegate+AD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+AD.h"; sourceTree = "<group>"; };
@@ -777,7 +788,6 @@
 		3A5F7AA221A9524D00128E8B /* BTTProvinceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTProvinceModel.m; sourceTree = "<group>"; };
 		3A5F7AA621ABCD3900128E8B /* BTTVideoGamesListController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGamesListController.h; sourceTree = "<group>"; };
 		3A5F7AA721ABCD3900128E8B /* BTTVideoGamesListController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGamesListController.m; sourceTree = "<group>"; };
-		3A5F7AA921ACF11900128E8B /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		3A5F7AAE21ACF5DA00128E8B /* BTTVideoGamesListController+LoadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTVideoGamesListController+LoadData.m"; sourceTree = "<group>"; };
 		3A5F7AAF21ACF5DB00128E8B /* BTTVideoGamesListController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTVideoGamesListController+LoadData.h"; sourceTree = "<group>"; };
 		3A5F7AB221AD0E6800128E8B /* BTTVideoGamesFilterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGamesFilterCell.h; sourceTree = "<group>"; };
@@ -1242,35 +1252,47 @@
 		D599252921AFF23B001E885A /* CNPayVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNPayVC.xib; sourceTree = "<group>"; };
 		D5C5018921B4BFD000C6DA02 /* CNPayDepositNameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayDepositNameModel.h; sourceTree = "<group>"; };
 		D5C5018A21B4BFD000C6DA02 /* CNPayDepositNameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayDepositNameModel.m; sourceTree = "<group>"; };
+		D5C5018C21B4FC8C00C6DA02 /* CNPayWechatTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayWechatTipView.h; sourceTree = "<group>"; };
+		D5C5018D21B4FC8C00C6DA02 /* CNPayWechatTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayWechatTipView.m; sourceTree = "<group>"; };
+		D5C5018F21B4FC9700C6DA02 /* CNPayWechatTipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNPayWechatTipView.xib; sourceTree = "<group>"; };
+		D5C5019121B6681200C6DA02 /* CNPayDepositTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayDepositTipView.h; sourceTree = "<group>"; };
+		D5C5019221B6681200C6DA02 /* CNPayDepositTipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayDepositTipView.m; sourceTree = "<group>"; };
+		D5C5019421B6681F00C6DA02 /* CNPayDepositTipView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNPayDepositTipView.xib; sourceTree = "<group>"; };
+		D5C5019621B67C0800C6DA02 /* CNPayDepositSuccessVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayDepositSuccessVC.xib; sourceTree = "<group>"; };
+		D5C5019721B67C0800C6DA02 /* CNPayDepositSuccessVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayDepositSuccessVC.m; sourceTree = "<group>"; };
+		D5C5019821B67C0800C6DA02 /* CNPayDepositSuccessVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayDepositSuccessVC.h; sourceTree = "<group>"; };
+		D5C501BD21B7CEDC00C6DA02 /* BRStringPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRStringPickerView.h; sourceTree = "<group>"; };
+		D5C501BE21B7CEDC00C6DA02 /* BRStringPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRStringPickerView.m; sourceTree = "<group>"; };
+		D5C501BF21B7CEDC00C6DA02 /* BRPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPickerView.h; sourceTree = "<group>"; };
+		D5C501C021B7CEDC00C6DA02 /* BRPickerViewMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRPickerViewMacro.h; sourceTree = "<group>"; };
+		D5C501C221B7CEDC00C6DA02 /* BRDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRDatePickerView.h; sourceTree = "<group>"; };
+		D5C501C321B7CEDC00C6DA02 /* NSDate+BRPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+BRPickerView.m"; sourceTree = "<group>"; };
+		D5C501C421B7CEDC00C6DA02 /* BRDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRDatePickerView.m; sourceTree = "<group>"; };
+		D5C501C521B7CEDC00C6DA02 /* NSDate+BRPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+BRPickerView.h"; sourceTree = "<group>"; };
+		D5C501C721B7CEDC00C6DA02 /* BRBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRBaseView.m; sourceTree = "<group>"; };
+		D5C501C821B7CEDC00C6DA02 /* BRBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRBaseView.h; sourceTree = "<group>"; };
+		D5C501CA21B7CEDC00C6DA02 /* BRAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAddressModel.m; sourceTree = "<group>"; };
+		D5C501CB21B7CEDC00C6DA02 /* BRAddressPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAddressPickerView.h; sourceTree = "<group>"; };
+		D5C501CC21B7CEDC00C6DA02 /* BRPickerView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = BRPickerView.bundle; sourceTree = "<group>"; };
+		D5C501CD21B7CEDC00C6DA02 /* BRAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRAddressModel.h; sourceTree = "<group>"; };
+		D5C501CE21B7CEDC00C6DA02 /* BRAddressPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRAddressPickerView.m; sourceTree = "<group>"; };
 		D5DBEA8D21ABB774008AF629 /* NSString+CNPayment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+CNPayment.m"; sourceTree = "<group>"; };
 		D5DBEA8E21ABB774008AF629 /* NSString+CNPayment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+CNPayment.h"; sourceTree = "<group>"; };
 		D5DBEA9121ABB774008AF629 /* CNPayDepositStep1VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayDepositStep1VC.h; sourceTree = "<group>"; };
 		D5DBEA9221ABB774008AF629 /* CNPayDepositStep3VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayDepositStep3VC.xib; sourceTree = "<group>"; };
-		D5DBEA9321ABB774008AF629 /* CNPayDepositSuccessVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayDepositSuccessVC.m; sourceTree = "<group>"; };
 		D5DBEA9421ABB774008AF629 /* CNPayDepositStep2VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayDepositStep2VC.h; sourceTree = "<group>"; };
 		D5DBEA9521ABB774008AF629 /* CNPayDepositStep1VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayDepositStep1VC.xib; sourceTree = "<group>"; };
 		D5DBEA9621ABB774008AF629 /* CNPayDepositStep3VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayDepositStep3VC.h; sourceTree = "<group>"; };
 		D5DBEA9721ABB774008AF629 /* CNPayDepositStep2VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayDepositStep2VC.xib; sourceTree = "<group>"; };
-		D5DBEA9821ABB774008AF629 /* CNPayDepositSuccessVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayDepositSuccessVC.xib; sourceTree = "<group>"; };
 		D5DBEA9921ABB774008AF629 /* CNPayDepositStep3VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayDepositStep3VC.m; sourceTree = "<group>"; };
 		D5DBEA9A21ABB774008AF629 /* CNPayDepositStep2VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayDepositStep2VC.m; sourceTree = "<group>"; };
-		D5DBEA9B21ABB774008AF629 /* CNPayDepositSuccessVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayDepositSuccessVC.h; sourceTree = "<group>"; };
 		D5DBEA9C21ABB774008AF629 /* CNPayDepositStep1VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayDepositStep1VC.m; sourceTree = "<group>"; };
-		D5DBEA9E21ABB774008AF629 /* CNPayBQStep2VC2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayBQStep2VC2.m; sourceTree = "<group>"; };
 		D5DBEA9F21ABB774008AF629 /* CNPayBQStep2VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayBQStep2VC.xib; sourceTree = "<group>"; };
 		D5DBEAA021ABB774008AF629 /* CNPayBQStep2VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayBQStep2VC.m; sourceTree = "<group>"; };
-		D5DBEAA121ABB774008AF629 /* CNPayBQStep2VC2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayBQStep2VC2.xib; sourceTree = "<group>"; };
 		D5DBEAA221ABB774008AF629 /* CNPayBQStep1VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayBQStep1VC.m; sourceTree = "<group>"; };
-		D5DBEAA321ABB774008AF629 /* CNPayBQSuccessVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayBQSuccessVC.m; sourceTree = "<group>"; };
 		D5DBEAA421ABB774008AF629 /* CNPayBQStep1VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayBQStep1VC.xib; sourceTree = "<group>"; };
-		D5DBEAA521ABB774008AF629 /* CNPayBQSuccessVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayBQSuccessVC.xib; sourceTree = "<group>"; };
-		D5DBEAA621ABB774008AF629 /* CNPayBQStep2FastVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayBQStep2FastVC.h; sourceTree = "<group>"; };
-		D5DBEAA721ABB774008AF629 /* CNPayBQStep2VC2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayBQStep2VC2.h; sourceTree = "<group>"; };
 		D5DBEAA821ABB774008AF629 /* CNPayBQStep1VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayBQStep1VC.h; sourceTree = "<group>"; };
 		D5DBEAA921ABB774008AF629 /* CNPayBQStep2VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayBQStep2VC.h; sourceTree = "<group>"; };
-		D5DBEAAA21ABB774008AF629 /* CNPayBQStep2FastVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayBQStep2FastVC.xib; sourceTree = "<group>"; };
-		D5DBEAAB21ABB774008AF629 /* CNPayBQSuccessVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayBQSuccessVC.h; sourceTree = "<group>"; };
-		D5DBEAAC21ABB774008AF629 /* CNPayBQStep2FastVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayBQStep2FastVC.m; sourceTree = "<group>"; };
 		D5DBEAAE21ABB774008AF629 /* CNPayContainerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayContainerVC.m; sourceTree = "<group>"; };
 		D5DBEAB021ABB774008AF629 /* CNPayOnlineVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayOnlineVC.xib; sourceTree = "<group>"; };
 		D5DBEAB121ABB774008AF629 /* CNPayOnlineVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayOnlineVC.m; sourceTree = "<group>"; };
@@ -2075,7 +2097,7 @@
 			children = (
 				3A8F5134215F74CF0069D1B3 /* Main.storyboard */,
 				3A8F5137215F74D00069D1B3 /* Assets.xcassets */,
-				3A5F7AA921ACF11900128E8B /* app.zip */,
+				3A34F7A021B7B59B007BC4D4 /* app.zip */,
 				3AD4C9C221635AEC00FC0A63 /* app.json */,
 				3A8F5139215F74D00069D1B3 /* LaunchScreen.storyboard */,
 				3AD9CD472164B10000685B43 /* Info.plist */,
@@ -2520,6 +2542,7 @@
 		3AD9CD5D21670FB100685B43 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				D5C501BB21B7CEDC00C6DA02 /* BRPickerView */,
 				3AE0581D21704D5B00C7E70D /* UUMarqueeView */,
 				3AD9CD6E2167107B00685B43 /* Live800 */,
 				3AD9CD5E2167107A00685B43 /* VOIP */,
@@ -2656,6 +2679,9 @@
 				3A34F79121B6630D007BC4D4 /* BTTGamesTryAlertView.h */,
 				3A34F79221B6630D007BC4D4 /* BTTGamesTryAlertView.m */,
 				3A34F79421B6631B007BC4D4 /* BTTGamesTryAlertView.xib */,
+				3A34F79B21B7A9DA007BC4D4 /* BTTHomePageFooterCell.h */,
+				3A34F79C21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m */,
+				3A34F79D21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3041,6 +3067,60 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D5C501BB21B7CEDC00C6DA02 /* BRPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				D5C501BC21B7CEDC00C6DA02 /* StringPickerView */,
+				D5C501BF21B7CEDC00C6DA02 /* BRPickerView.h */,
+				D5C501C021B7CEDC00C6DA02 /* BRPickerViewMacro.h */,
+				D5C501C121B7CEDC00C6DA02 /* DatePickerView */,
+				D5C501C621B7CEDC00C6DA02 /* Base */,
+				D5C501C921B7CEDC00C6DA02 /* AddressPickerView */,
+			);
+			path = BRPickerView;
+			sourceTree = "<group>";
+		};
+		D5C501BC21B7CEDC00C6DA02 /* StringPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				D5C501BD21B7CEDC00C6DA02 /* BRStringPickerView.h */,
+				D5C501BE21B7CEDC00C6DA02 /* BRStringPickerView.m */,
+			);
+			path = StringPickerView;
+			sourceTree = "<group>";
+		};
+		D5C501C121B7CEDC00C6DA02 /* DatePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				D5C501C221B7CEDC00C6DA02 /* BRDatePickerView.h */,
+				D5C501C321B7CEDC00C6DA02 /* NSDate+BRPickerView.m */,
+				D5C501C421B7CEDC00C6DA02 /* BRDatePickerView.m */,
+				D5C501C521B7CEDC00C6DA02 /* NSDate+BRPickerView.h */,
+			);
+			path = DatePickerView;
+			sourceTree = "<group>";
+		};
+		D5C501C621B7CEDC00C6DA02 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				D5C501C721B7CEDC00C6DA02 /* BRBaseView.m */,
+				D5C501C821B7CEDC00C6DA02 /* BRBaseView.h */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		D5C501C921B7CEDC00C6DA02 /* AddressPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				D5C501CA21B7CEDC00C6DA02 /* BRAddressModel.m */,
+				D5C501CB21B7CEDC00C6DA02 /* BRAddressPickerView.h */,
+				D5C501CC21B7CEDC00C6DA02 /* BRPickerView.bundle */,
+				D5C501CD21B7CEDC00C6DA02 /* BRAddressModel.h */,
+				D5C501CE21B7CEDC00C6DA02 /* BRAddressPickerView.m */,
+			);
+			path = AddressPickerView;
+			sourceTree = "<group>";
+		};
 		D5DBEA8B21ABB774008AF629 /* Payment */ = {
 			isa = PBXGroup;
 			children = (
@@ -3095,9 +3175,9 @@
 				D5DBEA9621ABB774008AF629 /* CNPayDepositStep3VC.h */,
 				D5DBEA9921ABB774008AF629 /* CNPayDepositStep3VC.m */,
 				D5DBEA9221ABB774008AF629 /* CNPayDepositStep3VC.xib */,
-				D5DBEA9B21ABB774008AF629 /* CNPayDepositSuccessVC.h */,
-				D5DBEA9321ABB774008AF629 /* CNPayDepositSuccessVC.m */,
-				D5DBEA9821ABB774008AF629 /* CNPayDepositSuccessVC.xib */,
+				D5C5019821B67C0800C6DA02 /* CNPayDepositSuccessVC.h */,
+				D5C5019721B67C0800C6DA02 /* CNPayDepositSuccessVC.m */,
+				D5C5019621B67C0800C6DA02 /* CNPayDepositSuccessVC.xib */,
 			);
 			path = DepositPay;
 			sourceTree = "<group>";
@@ -3108,18 +3188,9 @@
 				D5DBEAA821ABB774008AF629 /* CNPayBQStep1VC.h */,
 				D5DBEAA221ABB774008AF629 /* CNPayBQStep1VC.m */,
 				D5DBEAA421ABB774008AF629 /* CNPayBQStep1VC.xib */,
-				D5DBEAA621ABB774008AF629 /* CNPayBQStep2FastVC.h */,
-				D5DBEAAC21ABB774008AF629 /* CNPayBQStep2FastVC.m */,
-				D5DBEAAA21ABB774008AF629 /* CNPayBQStep2FastVC.xib */,
 				D5DBEAA921ABB774008AF629 /* CNPayBQStep2VC.h */,
 				D5DBEAA021ABB774008AF629 /* CNPayBQStep2VC.m */,
 				D5DBEA9F21ABB774008AF629 /* CNPayBQStep2VC.xib */,
-				D5DBEAA721ABB774008AF629 /* CNPayBQStep2VC2.h */,
-				D5DBEA9E21ABB774008AF629 /* CNPayBQStep2VC2.m */,
-				D5DBEAA121ABB774008AF629 /* CNPayBQStep2VC2.xib */,
-				D5DBEAAB21ABB774008AF629 /* CNPayBQSuccessVC.h */,
-				D5DBEAA321ABB774008AF629 /* CNPayBQSuccessVC.m */,
-				D5DBEAA521ABB774008AF629 /* CNPayBQSuccessVC.xib */,
 			);
 			path = BQPay;
 			sourceTree = "<group>";
@@ -3230,6 +3301,12 @@
 				D5DBEAE421ABB774008AF629 /* CNPayTipView.h */,
 				D5DBEAF421ABB774008AF629 /* CNPayTipView.m */,
 				D5DBEAE721ABB774008AF629 /* CNPayTipView.xib */,
+				D5C5019121B6681200C6DA02 /* CNPayDepositTipView.h */,
+				D5C5019221B6681200C6DA02 /* CNPayDepositTipView.m */,
+				D5C5019421B6681F00C6DA02 /* CNPayDepositTipView.xib */,
+				D5C5018C21B4FC8C00C6DA02 /* CNPayWechatTipView.h */,
+				D5C5018D21B4FC8C00C6DA02 /* CNPayWechatTipView.m */,
+				D5C5018F21B4FC9700C6DA02 /* CNPayWechatTipView.xib */,
 				D5DBEB3C21AC1355008AF629 /* CNPayQRCell.h */,
 				D5DBEB3D21AC1355008AF629 /* CNPayQRCell.m */,
 				D5DBEB3E21AC1355008AF629 /* CNPayQRCell.xib */,
@@ -3634,7 +3711,6 @@
 				D599251E21AFC8CA001E885A /* CNPayDepostiBankCell.xib in Resources */,
 				3AB0686F21A5033700072FB7 /* BTTPTTransferInputCell.xib in Resources */,
 				EAE89EC4218C3ABD00C29393 /* LIVNavigationBackArrow@3x.png in Resources */,
-				D5DBEB0B21ABB774008AF629 /* CNPayBQStep2VC2.xib in Resources */,
 				EAE89EE5218C3ABD00C29393 /* LIVVideoCamera_trash@2x.png in Resources */,
 				3ADD237221772FB900FA959A /* BTTMeMoneyHeaderCell.xib in Resources */,
 				3AD9CF51216EFB3700685B43 /* BTTHomePageBannerCell.xib in Resources */,
@@ -3754,6 +3830,7 @@
 				3AD9CF6E216F33F300685B43 /* BTTGameCollectionViewCell.xib in Resources */,
 				EAE89F06218C3ABD00C29393 /* receivedVoicePlaying2@2x.png in Resources */,
 				EAE89E88218C3ABD00C29393 /* cry.gif in Resources */,
+				3A34F7A121B7B59B007BC4D4 /* app.zip in Resources */,
 				EAE89EB9218C3ABD00C29393 /* LIVFileMessage_TypeZip@2x.png in Resources */,
 				EAE89F1E218C3ABD00C29393 /* LIVEvaluateCell.nib in Resources */,
 				EAE89F22218C3ABD00C29393 /* LIVLocationMessageContentView.nib in Resources */,
@@ -3768,6 +3845,7 @@
 				3AF1B81A21AF994A00BF8C3A /* BTTVideoGamesFooterCell.xib in Resources */,
 				EAE89ECF218C3ABD00C29393 /* LIVRobotDisagreeIcon@2x.png in Resources */,
 				EAE89E99218C3ABD00C29393 /* back-arrow@2x.png in Resources */,
+				3A34F79F21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib in Resources */,
 				EAE89F0B218C3ABD00C29393 /* sentVoicePlaying1@3x.png in Resources */,
 				3A11AE082181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.xib in Resources */,
 				EAE89EBF218C3ABD00C29393 /* LIVMediaFileSaveToLibraryButton@2x.png in Resources */,
@@ -3775,7 +3853,6 @@
 				3ADD23772177328B00FA959A /* BTTMeSaveMoneyCell.xib in Resources */,
 				3A11AE592186A71100B1AFF4 /* BTTBookMessageCell.xib in Resources */,
 				3AAE821A219A738B003EC8B0 /* BTTLoginOrRegisterBtnCell.xib in Resources */,
-				D5DBEB1021ABB774008AF629 /* CNPayBQStep2FastVC.xib in Resources */,
 				EAE89E89218C3ABD00C29393 /* cute.gif in Resources */,
 				EAE89F32218C3ABD00C29393 /* LIVTimestampInCell.nib in Resources */,
 				3A5F7AA021A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib in Resources */,
@@ -3813,7 +3890,6 @@
 				EAE89F33218C3ABD00C29393 /* LIVVideoCameraViewController.nib in Resources */,
 				EAE89F1D218C3ABD00C29393 /* LIVEmotionBoardSendCell.nib in Resources */,
 				EAE89E87218C3ABD00C29393 /* cool_eye.gif in Resources */,
-				D5DBEB0421ABB774008AF629 /* CNPayDepositSuccessVC.xib in Resources */,
 				3AD9CF61216F1EAB00685B43 /* BTTHomePageNoticeCell.xib in Resources */,
 				EAE89F2D218C3ABD00C29393 /* LIVSingleImagePreviewController.nib in Resources */,
 				3AE1EB012180228B0073A32D /* BTTVerifySelectCell.xib in Resources */,
@@ -3821,6 +3897,7 @@
 				3A9E4C2F219D924800E7D8C0 /* BTTMakeCallNoLoginView.xib in Resources */,
 				3AE0582521704DCB00C7E70D /* BTTHomePageAmountsCell.xib in Resources */,
 				EAE89EF0218C3ABD00C29393 /* LIVVoiceItem_highlight@2x.png in Resources */,
+				D5C5019921B67C0800C6DA02 /* CNPayDepositSuccessVC.xib in Resources */,
 				D5DBEB1E21ABB774008AF629 /* CNPayCardStep1VC.xib in Resources */,
 				EA5F141B21A28515004305A7 /* DeviceModelsForIOS.plist in Resources */,
 				3AD9CF8A216F4E5400685B43 /* BTTHomePageDiscountCell.xib in Resources */,
@@ -3857,12 +3934,14 @@
 				3AD9CF85216F482B00685B43 /* BTTHomePageDiscountHeaderCell.xib in Resources */,
 				3A5F7A7B21A6C6BB00128E8B /* BTTXimaNoDataCell.xib in Resources */,
 				EAE89F14218C3ABD00C29393 /* LIVChatFunctionBarColor.plist in Resources */,
+				D5C5019021B4FC9700C6DA02 /* CNPayWechatTipView.xib in Resources */,
 				EAE89F2A218C3ABD00C29393 /* LIVSatisfactionEvaluationItemCell.nib in Resources */,
 				EAE89EC9218C3ABD00C29393 /* LIVReceivedMessageBackground@2x.png in Resources */,
 				EAE89EE3218C3ABD00C29393 /* LIVVideoCamera_switchCamera@2x.png in Resources */,
 				EAE89F07218C3ABD00C29393 /* receivedVoicePlaying2@3x.png in Resources */,
 				D5DBEB0321ABB774008AF629 /* CNPayDepositStep2VC.xib in Resources */,
 				EAE89F04218C3ABD00C29393 /* receivedVoicePlaying1@2x.png in Resources */,
+				D5C501D421B7CEDC00C6DA02 /* BRPickerView.bundle in Resources */,
 				3AE1EAB6217D986A0073A32D /* BTTMeInfoHiddenCell.xib in Resources */,
 				EAE89EF3218C3ABD00C29393 /* LIVWarningIcon@3x.png in Resources */,
 				EAE89F09218C3ABD00C29393 /* receivedVoicePlaying3@3x.png in Resources */,
@@ -3878,6 +3957,7 @@
 				3AE1EB0F218047050073A32D /* BTTCardModifyCell.xib in Resources */,
 				EAE89EAA218C3ABD00C29393 /* LIVDefaultImageThumbnail@3x.png in Resources */,
 				3AD9CF73216F3D6800685B43 /* BTTHomePageAppsCell.xib in Resources */,
+				D5C5019521B6681F00C6DA02 /* CNPayDepositTipView.xib in Resources */,
 				EAE89EFA218C3ABD00C29393 /* navi_back@2x.png in Resources */,
 				EAE89F1F218C3ABD00C29393 /* LIVEvaluateLevel2Cell.nib in Resources */,
 				3A9E4C17219D1D2A00E7D8C0 /* BTTForgetPwdCodeCell.xib in Resources */,
@@ -3885,7 +3965,6 @@
 				EAE89F02218C3ABD00C29393 /* preview_number_icon@2x.png in Resources */,
 				3AD9CF5C216F1A4400685B43 /* BTTHomePageADCell.xib in Resources */,
 				D599252B21AFF23B001E885A /* CNPayVC.xib in Resources */,
-				3A5F7AAA21ACF11A00128E8B /* app.zip in Resources */,
 				3A11AE132182AAB300B1AFF4 /* BTTPTTransferNewCell.xib in Resources */,
 				EAE89EFD218C3ABD00C29393 /* photo_number_icon@2x.png in Resources */,
 				3A8F518B215F77AC0069D1B3 /* intro_2.jpg in Resources */,
@@ -3897,7 +3976,6 @@
 				3A49DFA12179DA0D00FEFBDA /* BTTBindingMobileTwoCell.xib in Resources */,
 				EAE89E94218C3ABD00C29393 /* sad.gif in Resources */,
 				EAE89ED3218C3ABD00C29393 /* LIVSentMessageBackground@2x.png in Resources */,
-				D5DBEB0F21ABB774008AF629 /* CNPayBQSuccessVC.xib in Resources */,
 				D5DBEB0221ABB774008AF629 /* CNPayDepositStep1VC.xib in Resources */,
 				3AE1EAAC217D65330073A32D /* BTTAccountBlanceHiddenCell.xib in Resources */,
 			);
@@ -3944,20 +4022,18 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
-				"${PODS_ROOT}/BRPickerView/BRPickerView/AddressPickerView/BRPickerView.bundle",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BRPickerView.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3970,6 +4046,7 @@
 				3A11AE122182AAB300B1AFF4 /* BTTPTTransferNewCell.m in Sources */,
 				3AAE8220219A738B003EC8B0 /* BTTLoginOrRegisterBtnCell.m in Sources */,
 				3AD9CF6D216F33F300685B43 /* BTTGameCollectionViewCell.m in Sources */,
+				D5C501D521B7CEDC00C6DA02 /* BRAddressPickerView.m in Sources */,
 				D5DBEB0C21ABB774008AF629 /* CNPayBQStep1VC.m in Sources */,
 				D5DBEB3F21AC1355008AF629 /* CNPayQRCell.m in Sources */,
 				3A929415219BFEE100764E7E /* BTTCreateAPIModel.m in Sources */,
@@ -3985,6 +4062,7 @@
 				3A5F7AB521AD0E6800128E8B /* BTTVideoGamesFilterCell.m in Sources */,
 				3A11AE0D21829F4B00B1AFF4 /* BTTPTTransferController.m in Sources */,
 				3A11AE532186A6A200B1AFF4 /* BTTBookMessageController.m in Sources */,
+				D5C5018E21B4FC8C00C6DA02 /* CNPayWechatTipView.m in Sources */,
 				3ADD2393217837FF00FA959A /* BTTMeHeaderLoginCell.m in Sources */,
 				3AE1EAFC218021080073A32D /* BTTVerifyTypeSelectController+LoadData.m in Sources */,
 				D5DBEAFF21ABB774008AF629 /* NSString+CNPayment.m in Sources */,
@@ -4019,10 +4097,10 @@
 				3A9E4C6E21A2542500E7D8C0 /* BTTModifyEmailController+LoadData.m in Sources */,
 				3AB0683D21A395EF00072FB7 /* BTTUnBindingHeaderCell.m in Sources */,
 				3A5F7A7A21A6C6BB00128E8B /* BTTXimaNoDataCell.m in Sources */,
-				D5DBEB0D21ABB774008AF629 /* CNPayBQSuccessVC.m in Sources */,
 				3AB0686921A4F29B00072FB7 /* BTTPublicBtnCell.m in Sources */,
 				3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */,
 				3AAE81FA219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m in Sources */,
+				D5C501D221B7CEDC00C6DA02 /* BRBaseView.m in Sources */,
 				3A37E1392164A29600FB13A1 /* BTTRefreshGIFHeader.m in Sources */,
 				3A11AE222183FF0000B1AFF4 /* BTTPasswordChangeBtnsCell.m in Sources */,
 				D599251421AE5AF6001E885A /* CNPayNormalTF.m in Sources */,
@@ -4032,6 +4110,7 @@
 				3A929423219C3B7500764E7E /* BTTRegisterSuccessOneCell.m in Sources */,
 				3A8D6E9921633D3E000530DF /* PushManager.m in Sources */,
 				3A8F51A1215F77EC0069D1B3 /* UIColor+Util.m in Sources */,
+				3A34F79E21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m in Sources */,
 				3A5F7A9621A8E4C600128E8B /* BTTXimaSuccessItemModel.m in Sources */,
 				EA5F140B21A26042004305A7 /* BTTRequestPrecache.m in Sources */,
 				3A37E1202164A21900FB13A1 /* BTTLuckyWheelViewController.m in Sources */,
@@ -4088,6 +4167,7 @@
 				3AE1EADF217F22710073A32D /* BTTCardInfosController.m in Sources */,
 				D5DBEB3021ABB774008AF629 /* CNPayNameTF.m in Sources */,
 				3A11ADED21819BDE00B1AFF4 /* BTTBindEmailController+LoadData.m in Sources */,
+				D5C501D121B7CEDC00C6DA02 /* BRDatePickerView.m in Sources */,
 				3AAE821D219A738B003EC8B0 /* BTTRegisterNormalCell.m in Sources */,
 				EAE89DCB218C3A7400C29393 /* SDWebImage+Compat3_8_1.m in Sources */,
 				3AC3FFAD219BB19E008AECCB /* BTTLoginCodeCell.m in Sources */,
@@ -4101,17 +4181,20 @@
 				3AB0687621A5621500072FB7 /* BTTXimaController+LoadData.m in Sources */,
 				3AD9CF35216C7AEF00685B43 /* HAInitConfig.m in Sources */,
 				D5DBEB2521ABB774008AF629 /* CNPayOrderModel.m in Sources */,
+				D5C501D021B7CEDC00C6DA02 /* NSDate+BRPickerView.m in Sources */,
 				D5DBEB3721ABB774008AF629 /* CNPayOnePixView.m in Sources */,
 				D5DBEB2321ABB774008AF629 /* AMSegmentViewController.m in Sources */,
 				D5DBEB3B21ABB774008AF629 /* CNPayRequestManager.m in Sources */,
 				3A514E482186FCE800B83881 /* BTTXimaFooterCell.m in Sources */,
 				3AB0688B21A677F700072FB7 /* BTTBookMessageController+LoadData.m in Sources */,
+				D5C5019321B6681200C6DA02 /* CNPayDepositTipView.m in Sources */,
 				D5DBEB2B21ABB774008AF629 /* CNPayRecommendCell.m in Sources */,
 				3A11ADD621816E5800B1AFF4 /* SVIndefiniteAnimatedView.m in Sources */,
 				3A11ADE121818C8800B1AFF4 /* BTTAddBTCController+LoadData.m in Sources */,
 				3AD9CF4C216EE11A00685B43 /* BTTHomePageHeaderView.m in Sources */,
 				D5DBEB0521ABB774008AF629 /* CNPayDepositStep3VC.m in Sources */,
 				3AE1EAF521801F3C0073A32D /* BTTVerifyTypeSelectController.m in Sources */,
+				D5C501CF21B7CEDC00C6DA02 /* BRStringPickerView.m in Sources */,
 				3AE1EAC4217DC0700073A32D /* BTTPersonalInfoController+LoadData.m in Sources */,
 				3A11AE2C2184311D00B1AFF4 /* BTTSheetsViewController.m in Sources */,
 				D5DBEB2A21ABB774008AF629 /* CNPaySubmitButton.m in Sources */,
@@ -4162,9 +4245,7 @@
 				3A9E4C7521A2571600E7D8C0 /* BTTChangeMobileManualController.m in Sources */,
 				3ADD23762177328B00FA959A /* BTTMeSaveMoneyCell.m in Sources */,
 				3AAE8217219A738B003EC8B0 /* BTTLoginCell.m in Sources */,
-				D5DBEB0121ABB774008AF629 /* CNPayDepositSuccessVC.m in Sources */,
 				3AD9CD542165B2C900685B43 /* BTTPopoverView.m in Sources */,
-				D5DBEB0821ABB774008AF629 /* CNPayBQStep2VC2.m in Sources */,
 				3A8F51E6215F78F50069D1B3 /* BTTCollectionViewController.m in Sources */,
 				D5DBEB4421AD3721008AF629 /* CNPayQRStep2VC.m in Sources */,
 				3A8F51C2215F78180069D1B3 /* BTTActionSheet.m in Sources */,
@@ -4189,6 +4270,7 @@
 				3AD9CF40216EDC9800685B43 /* BTTHomePageViewController.m in Sources */,
 				3A49DF972179D89000FEFBDA /* BTTBindingMobileController.m in Sources */,
 				3A5F7AB021ACF5DB00128E8B /* BTTVideoGamesListController+LoadData.m in Sources */,
+				D5C501D321B7CEDC00C6DA02 /* BRAddressModel.m in Sources */,
 				3AE1EB002180228B0073A32D /* BTTVerifySelectCell.m in Sources */,
 				3AE0581A2170314900C7E70D /* BTTActivityModel.m in Sources */,
 				EA5F141A21A28515004305A7 /* IVGameUtility.m in Sources */,
@@ -4234,6 +4316,7 @@
 				EA5F140E21A261BA004305A7 /* BTTHttpManager.m in Sources */,
 				3AC3FFA9219ACD48008AECCB /* BTTLoginOrRegisterViewController+UI.m in Sources */,
 				3A11AE4F2186A09700B1AFF4 /* BTTModifyLimitViewController.m in Sources */,
+				D5C5019A21B67C0800C6DA02 /* CNPayDepositSuccessVC.m in Sources */,
 				D5DBEB2221ABB774008AF629 /* CNPayBaseVC.m in Sources */,
 				3A5F7A7F21A6C86A00128E8B /* BTTXimaSingleBtnCell.m in Sources */,
 				D5DBEB1821ABB774008AF629 /* CNWKWebVC.m in Sources */,
@@ -4246,7 +4329,6 @@
 				3AE05816217030CC00C7E70D /* BTTHomePageActivitiesCell.m in Sources */,
 				3AAE8214219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m in Sources */,
 				3AB0685821A422B000072FB7 /* BTTPTTransferController+LoadData.m in Sources */,
-				D5DBEB1121ABB774008AF629 /* CNPayBQStep2FastVC.m in Sources */,
 				3AB0688021A63D6C00072FB7 /* BTTModifyLimitViewController+LoadData.m in Sources */,
 				3A11ADE521818FD400B1AFF4 /* BTTBTCInfoCell.m in Sources */,
 				3A8F518E215F77AC0069D1B3 /* BTTTabBar.m in Sources */,

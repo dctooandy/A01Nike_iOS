@@ -98,16 +98,9 @@
 }
 
 - (void)configAmountList {
-    // 微信app,扫码和支付app,宝扫码，只展示amountList
-    if (self.paymentModel.amountList.count > 0 &&
-        (self.paymentModel.paymentType == CNPaymentWechatApp ||
-         self.paymentModel.paymentType == CNPaymentAliApp)) {
-        self.amountBtn.hidden = NO;
-        self.arrawDownIV.hidden = NO;
+    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
+    if (!self.paymentModel.amountCanEdit) {
         self.amountTF.placeholder = @"仅可选择以下金额";
-    } else {
-        self.amountBtn.hidden = YES;
-        self.arrawDownIV.hidden = YES;
     }
 }
 
@@ -118,7 +111,11 @@
     for (id obj in self.paymentModel.amountList) {
         [array addObject:[NSString stringWithFormat:@"%@", obj]];
     }
-    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
+    if (array.count == 0) {
+        [self showError:@"无可选金额，请直接输入"];
+        return;
+    }
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
         if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
             return;
         }
@@ -129,12 +126,11 @@
 - (IBAction)selectedBank:(UIButton *)sender {
     [self.view endEditing:YES];
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:@"选择支付银行" dataSource:self.bankNames defaultSelValue:self.payBankTF.text resultBlock:^(NSString * selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:@"选择支付银行" dataSource:self.bankNames defaultSelValue:self.payBankTF.text resultBlock:^(id selectValue, NSInteger index) {
         if ([weakSelf.payBankTF.text isEqualToString:selectValue]) {
             return;
         }
         weakSelf.payBankTF.text = selectValue;
-        NSInteger index = [weakSelf.bankNames indexOfObject:selectValue];
         weakSelf.chooseBank = weakSelf.paymentModel.bankList[index]; 
     }];
 }
@@ -156,7 +152,7 @@
     double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;
     if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) {
         _amountTF.text = nil;
-        [self showError:_amountTF.placeholder];
+        [self showError:[NSString stringWithFormat:@"存款金额必须是%.f~%.f之间，最大允许2位小数", self.paymentModel.minamount, maxAmount]];
         return;
     }
 
@@ -173,35 +169,11 @@
     
     /// 提交
     __weak typeof(self) weakSelf =  self;
-    [CNPayRequestManager paymentWithPayType:[self getPaytypeString]
-                                      payId:self.paymentModel.payid
-                                     amount:text
-                                   bankCode:self.chooseBank.bankcode
-                            completeHandler:^(IVRequestResultModel *result, id response) {
-                                sender.selected = NO;
-                                __strong typeof(weakSelf) strongSelf = weakSelf;
-                                [strongSelf handlerResult:result];
-                            }];
-    
-}
-
-- (void)handlerResult:(IVRequestResultModel *)model {
-    // 数据容灾
-    if (![model.data isKindOfClass:[NSDictionary class]]) {
-        // 后台返回类型不一，全部转成字符串
-        [self showError:[NSString stringWithFormat:@"%@", model.message]];
-        return;
-    }
-    
-    NSError *error;
-    CNPayOrderModel *orderModel = [[CNPayOrderModel alloc] initWithDictionary:model.data error:&error];
-    if (error && !orderModel) {
-        [self showError:@"操作失败！请联系客户，或者稍后重试!"];
-        return;
-    }
-    self.writeModel.orderModel = orderModel;
-    self.writeModel.depositType = self.paymentModel.paymentTitle;
-    [self goToStep:1];
+    [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:self.chooseBank.bankcode completeHandler:^(IVRequestResultModel *result, id response) {
+        sender.selected = NO;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf paySucessHandler:result repay:nil];
+    }];
 }
 
 - (IBAction)bibaoAction:(UIButton *)sender {

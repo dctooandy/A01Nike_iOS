@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CNPayCardStep2VC">
             <connections>
                 <outlet property="billNoLb" destination="ndx-IH-p8E" id="jK0-it-BcJ"/>
-                <outlet property="cardTypeLb" destination="aRN-oY-z7a" id="TJN-SV-KFx"/>
+                <outlet property="cardTypeLb" destination="xlG-dT-i3m" id="Jiz-eJ-lsh"/>
                 <outlet property="chargeLb" destination="x1I-Yt-GC9" id="EwE-XU-oAJ"/>
                 <outlet property="valueLb" destination="aTL-Oe-5Rw" id="d7i-eU-p05"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

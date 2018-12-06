@@ -70,7 +70,7 @@
 
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full {
     self.payCollectionView.hidden = full;
-    self.payCollectionViewHeight.constant = full ? 0: 132;
+    self.payCollectionViewHeight.constant = full ? 0: 142;
     self.stepViewHeight.constant = height;
     [self.payScrollView scrollsToTop];
 }
@@ -198,6 +198,7 @@
                    payments[CNPaymentUnionQR],
                    payments[CNPaymentWechatApp],
                    payments[CNPaymentQQApp],
+                   payments[CNPaymentJDQR],
                    nil];
     
     /// BQ 快速

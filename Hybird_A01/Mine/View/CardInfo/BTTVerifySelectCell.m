@@ -35,8 +35,10 @@
     self.detailLabel.text = model.desc;
     if ([model.name isEqualToString:@"通过短信验证"]) {
         self.label.hidden = NO;
+        self.mineSparaterType = BTTMineSparaterTypeSingleLine;
     } else {
         self.label.hidden = YES;
+        self.mineSparaterType = BTTMineSparaterTypeNone;
     }
 }
 

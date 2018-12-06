@@ -8,7 +8,6 @@ target ‘Hybird_A01’ do
   pod 'FMDB'
   pod 'MJRefresh'
   pod 'GJRedDot'
-  pod 'BRPickerView'
   pod 'YYModel'
   pod 'JSONModel'
   pod 'Masonry','~> 1.1.0'

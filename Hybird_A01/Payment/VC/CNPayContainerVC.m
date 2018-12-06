@@ -14,8 +14,6 @@
 #import "CNPayDepositStep3VC.h"
 #import "CNPayBQStep1VC.h"
 #import "CNPayBQStep2VC.h"
-#import "CNPayBQStep2VC2.h"
-#import "CNPayBQStep2FastVC.h"
 #import "CNPayQRVC.h"
 #import "CNPayQRStep2VC.h"
 #import "CNPayCardStep1VC.h"

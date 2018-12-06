@@ -21,7 +21,7 @@
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6DO-2m-Ted">
                         <rect key="frame" x="15" y="28" width="345" height="44"/>
-                        <state key="normal" title="查看其它游戏" backgroundImage="binding_confirm_disable">
+                        <state key="normal" title="查看其它游戏厅" backgroundImage="binding_confirm_disable">
                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>

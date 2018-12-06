@@ -71,8 +71,12 @@
         } else {
             self.textField.userInteractionEnabled = YES;
         }
-        self.rightConstants.constant = 15;
+        self.rightConstants.constant = 20;
         self.mineArrowsType = BTTMineArrowsTypeHidden;
+    }
+    if ([model.name isEqualToString:@"备注"] ||
+        [model.name isEqualToString:@"波音厅"]) {
+        self.mineSparaterType = BTTMineSparaterTypeNone;
     }
     
     if ([model.name isEqualToString:@"卡号"]) {

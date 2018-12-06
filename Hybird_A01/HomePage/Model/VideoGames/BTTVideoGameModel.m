@@ -15,7 +15,7 @@
     if ([_gameImage hasPrefix:@"http"]) {
         return _gameImage;
     } 
-    gameImage = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],_gameImage];
+    gameImage = [NSString stringWithFormat:@"%@%@%@",[IVNetwork h5Domain],@"static/A01M/_default/__static/_wms/_l/electronicgames/",_gameImage];
     return gameImage;
 }
 

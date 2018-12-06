@@ -7,9 +7,13 @@
 //
 
 #import "CNPayQRStep2VC.h"
+#import "CNUIWebVC.h"
+#import "CNWKWebVC.h"
 
 @interface CNPayQRStep2VC ()
-
+@property (weak, nonatomic) IBOutlet UILabel *billNoLb;
+@property (weak, nonatomic) IBOutlet UILabel *amountLb;
+@property (weak, nonatomic) IBOutlet UILabel *titleLb;
 @end
 
 @implementation CNPayQRStep2VC
@@ -21,6 +25,20 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setViewHeight:350 fullScreen:YES];
+    [self configUI];
 }
 
+- (void)configUI {
+    CNPayOrderModel *order = self.writeModel.orderModel;
+    _amountLb.text = [NSString stringWithFormat:@"￥%@", order.amount];
+    _billNoLb.text = order.billno;
+    _titleLb.text = [NSString stringWithFormat:@"%@确认支付订单", self.writeModel.depositType];
+}
+
+- (IBAction)submit:(UIButton *)sender {
+    [self showPayTipView];
+    CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:self.writeModel.orderModel title:self.writeModel.depositType];
+//    CNWKWebVC *webVC = [[CNWKWebVC alloc] initWithHtmlString:[CNPayRequestManager submitPayFormWithOrderModel:self.writeModel.orderModel]];
+    [self pushViewController:webVC];
+}
 @end

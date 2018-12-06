@@ -81,6 +81,13 @@ NSInteger const kPayTypeTotalCount = 19;
     [self requestWithUrl:path parameters:params handler:completeHandler];
 }
 
++ (void)paymentQueryBillCompleteHandler:(IVRequestCallBack)completeHandler {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"flag"] = @"0";
+    [self requestWithUrl:kPaymentQueryDeposit parameters:params handler:completeHandler];
+}
+
+
 + (void)paymentCreateManualWithWriteInfo:(CNPayWriteModel *)infoModel completeHandler:(IVRequestCallBack)completeHandler {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     CNPayBankCardModel *bankModel = infoModel.chooseBank;
@@ -138,7 +145,7 @@ NSInteger const kPayTypeTotalCount = 19;
     id PayModel = [model class];
     
     NSMutableString *htmljs = [[NSMutableString alloc] init];
-    [htmljs appendFormat:@"%@", [NSString stringWithFormat:@"<form id=\"codePayForm\" name=\"query\" action=\"%@\" method=\"post\" class=\"form\">\n", model.des_url]];
+    [htmljs appendFormat:@"%@", [NSString stringWithFormat:@"<form id=\"codePayForm\" name=\"query\" action=\"%@\" method=\"get\" class=\"form\">\n", model.des_url]];
     [htmljs appendFormat:@"%@", [NSString stringWithFormat:@"<input type=\"hidden\" name=\"%@\" value=\"%@\">\n", @"loginname", loginName]];
     
     unsigned int outCount, i;

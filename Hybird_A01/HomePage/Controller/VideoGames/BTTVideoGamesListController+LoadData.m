@@ -46,7 +46,7 @@
 
 - (void)loadCollectionData {
     NSDictionary *params = @{@"login_name":[IVNetwork userInfo].loginName};
-    [IVNetwork sendUseCacheRequestWithSubURL:BTTFavotiteList paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork sendRequestWithSubURL:BTTFavotiteList paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (self.favorites.count) {
             [self.favorites removeAllObjects];
@@ -59,6 +59,7 @@
             }
             [self.favorites addObject:[BTTVideoGameModel new]];
         }
+        [self setupElements];
     }];
 }
 
@@ -69,7 +70,7 @@
     } else {
         API = BTTCancelFavorites;
     }
-    NSDictionary *params = @{@"game_id":model.gameid};
+    NSDictionary *params = @{@"game_id":[NSString stringWithFormat:@"%@%@",model.provider,model.gameid]};
     [IVNetwork sendRequestWithSubURL:API paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {

@@ -48,6 +48,7 @@
     } else {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
+        cell.mineSparaterType = BTTMineSparaterTypeNone;
         cell.model = model;
         return cell;
     }

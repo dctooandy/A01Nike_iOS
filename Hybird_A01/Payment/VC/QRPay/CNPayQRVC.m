@@ -36,7 +36,6 @@
     [super viewDidLoad];
     [self configCollectionView];
     [self configPreSettingMessage];
-    [self configDifferentUI];
     // 刷新数据
     [self updateAllContentWithModel:self.paymentModel];
     [self configAmountList];
@@ -81,10 +80,6 @@
     }
 }
 
-- (void)configDifferentUI {
-    
-}
-
 /// 刷新数据
 - (void)updateAllContentWithModel:(CNPaymentModel *)model {
     self.amountTF.text = @"";
@@ -97,16 +92,9 @@
 }
 
 - (void)configAmountList {
-    // 微信app,扫码和支付app,宝扫码，只展示amountList
-    if (self.paymentModel.amountList.count > 0 &&
-        (self.paymentModel.paymentType == CNPaymentWechatQR ||
-         self.paymentModel.paymentType == CNPaymentAliQR)) {
-        self.amountBtn.hidden = NO;
+    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
+    if (!self.paymentModel.amountCanEdit) {
         self.amountTF.placeholder = @"仅可选择以下金额";
-        self.arrawDownIV.hidden = NO;
-    } else {
-        self.amountBtn.hidden = YES;
-        self.arrawDownIV.hidden = YES;
     }
 }
 
@@ -134,8 +122,6 @@
     
     self.currentSelectedIndex = indexPath.row;
     self.paymentModel = [self.payments objectAtIndex:indexPath.row];
-    
-    [self configDifferentUI];
     [self updateAllContentWithModel:self.paymentModel];
     [self configAmountList];
    
@@ -152,7 +138,11 @@
     for (id obj in self.paymentModel.amountList) {
         [array addObject:[NSString stringWithFormat:@"%@", obj]];
     }
-    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue) {
+    if (array.count == 0) {
+        [self showError:@"无可选金额，请直接输入"];
+        return;
+    }
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
         if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
             return;
         }
@@ -162,8 +152,6 @@
 
 - (IBAction)nextStep:(UIButton *)sender {
     [self.view endEditing:YES];
-    [self goToStep:1];return;
-
     NSString *text = _amountTF.text;
     /// 输入为不合法数字
     if (![NSString isPureInt:text] && ![NSString isPureFloat:text]) {
@@ -177,7 +165,7 @@
     double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;
     if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) {
         _amountTF.text = nil;
-        [self showError:_amountTF.placeholder];
+        [self showError:[NSString stringWithFormat:@"存款金额必须是%.f~%.f之间，最大允许2位小数", self.paymentModel.minamount, maxAmount]];
         return;
     }
     
@@ -188,16 +176,11 @@
     
     /// 提交
     __weak typeof(self) weakSelf =  self;
-    [CNPayRequestManager paymentWithPayType:[self getPaytypeString]
-                                      payId:self.paymentModel.payid
-                                     amount:text
-                                   bankCode:nil
-                            completeHandler:^(IVRequestResultModel *result, id response) {
-                                sender.selected = NO;
-                                __strong typeof(weakSelf) strongSelf = weakSelf;
-                                [strongSelf handlerResult:result];
-                            }];
-    
+    [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVRequestResultModel *result, id response) {
+        sender.selected = NO;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf handlerResult:result];
+    }];
 }
 
 - (void)handlerResult:(IVRequestResultModel *)model {

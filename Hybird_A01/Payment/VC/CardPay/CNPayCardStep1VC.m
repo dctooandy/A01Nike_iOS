@@ -54,9 +54,8 @@
         [cardTypeArr addObject:model.name];
     }
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:_cardTypeTF.placeholder dataSource:cardTypeArr defaultSelValue:_cardTypeTF.text resultBlock:^(NSString *selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:_cardTypeTF.placeholder dataSource:cardTypeArr defaultSelValue:_cardTypeTF.text resultBlock:^(NSString *selectValue, NSInteger index) {
         weakSelf.cardTypeTF.text = selectValue;
-        NSInteger index = [cardTypeArr indexOfObject:selectValue];
         CNPayCardModel *model = weakSelf.paymentModel.cardList[index];
         weakSelf.chooseCardModel = model;
         weakSelf.cardValueTF.text = nil;
@@ -75,7 +74,7 @@
         [array addObject:[NSString stringWithFormat:@"%@", obj]];
     }
     weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:_cardValueTF.placeholder dataSource:array defaultSelValue:_cardValueTF.text resultBlock:^(NSString * selectValue) {
+    [BRStringPickerView showStringPickerWithTitle:_cardValueTF.placeholder dataSource:array defaultSelValue:_cardValueTF.text resultBlock:^(NSString * selectValue, NSInteger index) {
         weakSelf.cardValueTF.text = selectValue;
     }];
 }
@@ -109,29 +108,27 @@
     sender.selected = YES;
     
     /// 提交
-//    __weak typeof(self) weakSelf =  self;
-//    [CNPayRequestManager paymentCardPay:[self getCardModel] completeHandler:^(IVRequestResultModel *result, id response) {
-//        sender.selected = NO;
-//        if (result.status) {
-//            CNPayOrderModel *model = [[CNPayOrderModel alloc] initWithDictionary:result.data error:nil];
-//            weakSelf.writeModel.orderModel = model;
-//        } else {
-//            [self showError:result.message];
-//        }
-//    }];
-    [self goToStep:1];
+    __weak typeof(self) weakSelf =  self;
+    [CNPayRequestManager paymentCardPay:[self getCardModel] completeHandler:^(IVRequestResultModel *result, id response) {
+        sender.selected = NO;
+        if (result.status) {
+            CNPayOrderModel *model = [[CNPayOrderModel alloc] initWithDictionary:result.data error:nil];
+            weakSelf.writeModel.orderModel = model;
+            [weakSelf goToStep:1];
+        } else {
+            [self showError:result.message];
+        }
+    }];
 }
 
-//- (CNPayCardModel *)getCardModel {
-//    CNPayCardModel *card = self.writeModel.cardModel;
-////    card.totalValue = self.totalValueLb.text;
-////    card.chargeValue = self.chargeValueLb.text;
-////    card.actualValue = self.actualValueLb.text;
-//    card.cardNo = self.cardNumberTF.text;
-//    card.cardPwd = self.cardPwdTF.text;
-//    card.payId = self.paymentModel.payid;
-//    card.amount = [NSString stringWithFormat:@"%.2f", [self.actualValueLb.text floatValue]];
-//    card.postUrl = self.paymentModel.postUrl;
-//    return card;
-//}
+- (CNPayCardModel *)getCardModel {
+    CNPayCardModel *card = self.chooseCardModel;
+    card.cardNo = self.cardNoTF.text;
+    card.cardPwd = self.cardPwdTF.text;
+    card.payId = self.paymentModel.payid;
+    card.amount = self.cardValueTF.text;
+    card.postUrl = self.paymentModel.postUrl;
+    self.writeModel.cardModel = card;
+    return card;
+}
 @end

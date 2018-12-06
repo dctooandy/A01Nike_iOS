@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_header_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ML1-Xf-1ZP">
-                        <rect key="frame" x="151.5" y="56" width="72" height="100"/>
+                        <rect key="frame" x="151.5" y="81" width="72" height="100"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="lgs-kf-ntZ"/>
                             <constraint firstAttribute="width" constant="72" id="uUN-I8-evs"/>
@@ -30,7 +30,7 @@
             </view>
             <constraints>
                 <constraint firstItem="ML1-Xf-1ZP" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="8lU-OT-lGf"/>
-                <constraint firstItem="ML1-Xf-1ZP" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="15" id="r3M-wP-TRN"/>
+                <constraint firstItem="ML1-Xf-1ZP" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="40" id="r3M-wP-TRN"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
         </collectionViewCell>

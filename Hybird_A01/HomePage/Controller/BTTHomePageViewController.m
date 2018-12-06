@@ -31,7 +31,8 @@
 #import "BTTVideoGamesListController.h"
 #import "BTTGamesTryAlertView.h"
 #import "BTTLoginOrRegisterViewController.h"
-#import "BTTVideoGamesFooterCell.h"
+#import "BTTHomePageFooterCell.h"
+
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -89,6 +90,7 @@
 
 - (void)setupCollectionView {
     [super setupCollectionView];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     self.collectionView.frame = CGRectMake(0,  self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin, SCREEN_WIDTH, SCREEN_HEIGHT - (self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin));
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageBannerCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageBannerCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageADCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageADCell"];
@@ -100,7 +102,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageDiscountCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageDiscountCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageActivitiesCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageActivitiesCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageAmountsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageAmountsCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTVideoGamesFooterCell" bundle:nil] forCellWithReuseIdentifier:@"BTTVideoGamesFooterCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageFooterCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageFooterCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -210,7 +212,11 @@
                 });
             };
             return cell;
-        } else  {
+        } else if (indexPath.row == 16) {
+            BTTHomePageFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageFooterCell" forIndexPath:indexPath];
+            return cell;
+        }
+        else  {
             BTTHomePageAmountsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAmountsCell" forIndexPath:indexPath];
             cell.amounts = self.amounts;
             return cell;
@@ -307,7 +313,11 @@
                 });
             };
             return cell;
-        } else {
+        } else if (indexPath.row == 15) {
+            BTTHomePageFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageFooterCell" forIndexPath:indexPath];
+            return cell;
+        }
+        else {
             BTTHomePageAmountsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAmountsCell" forIndexPath:indexPath];
             cell.amounts = self.amounts;
             return cell;
@@ -334,7 +344,7 @@
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"inside";
             [self.navigationController pushViewController:vc animated:YES];
-        } else if (indexPath.row == 0) {
+        } else if (indexPath.row == 0 || indexPath.row == 16) {
 //            BTTPosterModel *model = self.posters.count ? self.posters[0] : nil;
             
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
@@ -372,6 +382,12 @@
                 vc.discountsVCType = BTTDiscountsVCTypeDetail;
                 [self.navigationController pushViewController:vc animated:YES];
             }
+        } else if (indexPath.row == 15) {
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            vc.webConfigModel.url = @"https://www.baidu.com";
+            vc.webConfigModel.newView = YES;
+            vc.webConfigModel.theme = @"outside";
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }
@@ -395,7 +411,7 @@
 #pragma mark - LMJElementsFlowLayoutDelegate
 
 - (CGSize)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return self.elementsHight[indexPath.item].CGSizeValue;
+    return  self.elementsHight.count ? self.elementsHight[indexPath.item].CGSizeValue : CGSizeZero;
 }
 
 - (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
@@ -425,9 +441,9 @@
         self.adCellShow = NO;
     }
     if (self.adCellShow) {
-        total = 16;
+        total = 17;
     } else {
-        total = 15;
+        total = 16;
     }
     for (int i = 0; i < total; i++) {
         if (self.adCellShow) {
@@ -454,6 +470,8 @@
                 }
             } else if (i == 15) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 295)]];
+            } else if (i == 16) {
+                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
             }
             else {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
@@ -482,6 +500,8 @@
                 }
             } else if (i == 14) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 295)]];
+            } else if (i == 15) {
+                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
             }
             else {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];

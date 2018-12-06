@@ -64,6 +64,12 @@ extern NSInteger const kPayTypeTotalCount;
  */
 + (void)paymentGetBankListWithType:(BOOL)isDeposit depositor:(NSString *)depositor referenceId:(NSString *)referenceId completeHandler:(IVRequestCallBack)completeHandler;
 
+/**
+ 手工存款查询未处理提案
+ 
+ @param completeHandler 接口回调
+ */
++ (void)paymentQueryBillCompleteHandler:(IVRequestCallBack)completeHandler;
 
 /**
  手工存款第三步 创建手工存款提案

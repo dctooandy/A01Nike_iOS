@@ -29,7 +29,7 @@
 }
 
 - (void)commonInit {
-    self.placeholder = @"所用银行卡持卡人姓名";
+    self.placeholder = @"请填写实际存款的银行卡姓名";
     self.font = [UIFont systemFontOfSize:13];
     self.textColor = COLOR_HEX(0xCFB785);
     self.textAlignment = NSTextAlignmentRight;
@@ -96,6 +96,10 @@
         return content;
     }
     return nil;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    !_endedHandler ?: _endedHandler();
 }
 
 @end

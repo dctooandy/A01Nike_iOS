@@ -62,10 +62,9 @@ float BTTPopoverViewDegreesToRadians(float angle)
 - (void)setShowShade:(BOOL)showShade {
     _showShade = showShade;
     
-    _shadeView.backgroundColor = _showShade ? [UIColor colorWithWhite:0.f alpha:0.18f] : [UIColor clearColor];
+    _shadeView.backgroundColor = _showShade ? [[UIColor blackColor] colorWithAlphaComponent:0.4] : [UIColor clearColor];
     
     if (_borderLayer) {
-        
         _borderLayer.strokeColor = _showShade ? [UIColor clearColor].CGColor : _tableView.separatorColor.CGColor;
     }
 }
@@ -78,7 +77,7 @@ float BTTPopoverViewDegreesToRadians(float angle)
     if (_style == BTTPopoverViewStyleDefault) {
         self.backgroundColor = [UIColor whiteColor];
     } else {
-        self.backgroundColor = [UIColor colorWithRed:0.29 green:0.29 blue:0.29 alpha:1.00];
+        self.backgroundColor = COLOR_RGBA(41, 45, 54, 1);
     }
 }
 
@@ -277,7 +276,7 @@ float BTTPopoverViewDegreesToRadians(float angle)
         [self.layer addSublayer:borderLayer];
         _borderLayer = borderLayer;
     }
-    
+
     [_keyWindow addSubview:self];
     
     // 弹出动画

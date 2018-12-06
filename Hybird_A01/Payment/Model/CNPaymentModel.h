@@ -57,11 +57,12 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 /// 支付方式是否可用
 @property (nonatomic, assign) BOOL isAvailable;
 @property (nonatomic, copy)  NSArray <NSString *> *amountList;
+@property (nonatomic, assign) BOOL amountCanEdit;
 @property (nonatomic, assign) double maxamount;
 @property (nonatomic, assign) double minamount;
 @property (nonatomic, assign) NSInteger payid;
 @property (nonatomic, copy) NSArray <CNPayBankCardModel> *bankList;
-
+@property (nonatomic, copy) NSString *depositor;
 #pragma mark - 点卡
 @property (nonatomic, copy) NSArray <CNPayCardModel> *cardList;
 @property (nonatomic, copy) NSString *postUrl;

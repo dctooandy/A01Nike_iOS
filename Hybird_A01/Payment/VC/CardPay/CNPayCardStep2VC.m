@@ -10,7 +10,7 @@
 
 @interface CNPayCardStep2VC ()
 @property (weak, nonatomic) IBOutlet UILabel *billNoLb;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cardTypeLb;
+@property (weak, nonatomic) IBOutlet UILabel *cardTypeLb;
 @property (weak, nonatomic) IBOutlet UILabel *chargeLb;
 @property (weak, nonatomic) IBOutlet UILabel *valueLb;
 
@@ -29,15 +29,17 @@
 }
 
 - (void)configCardValue {
-    CNPayCardModel *cardModel = self.writeModel.cardModel;
-//    _billNoLb.text = cardModel.
-    CGFloat amount = [cardModel.amount floatValue];
-    CGFloat charge = amount * cardModel.value / 100.0;
+    CNPayOrderModel *order = self.writeModel.orderModel;
+    _billNoLb.text = order.billno;
+    _cardTypeLb.text = self.writeModel.cardModel.name;
+    CGFloat amount = [order.amount floatValue];
+    CGFloat charge = amount * self.writeModel.cardModel.value / 100.0;
     _chargeLb.text = [NSString stringWithFormat:@"%.2f元", charge];
-    _valueLb.text = [NSString stringWithFormat:@"￥ %.2f元", (amount - charge)];
+    _valueLb.text = [NSString stringWithFormat:@"￥ %@元", order.amount];
 }
 
 - (IBAction)submitAction:(UIButton *)sender {
+    [self showPayTipView];
     [self pushUIWebViewWithURLString:[CNPayRequestManager submitPayFormWithOrderModel:self.writeModel.orderModel] title:self.paymentModel.paymentTitle];
 }
 @end

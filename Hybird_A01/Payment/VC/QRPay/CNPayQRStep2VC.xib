@@ -12,6 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CNPayQRStep2VC">
             <connections>
+                <outlet property="amountLb" destination="AS9-bQ-YBm" id="vd2-zx-ZEx"/>
+                <outlet property="billNoLb" destination="Qag-ZV-lNF" id="y4l-tS-uyM"/>
+                <outlet property="titleLb" destination="oK8-1P-qQA" id="gLp-dg-wQS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -122,6 +125,9 @@
                                 <constraint firstAttribute="height" constant="45" id="S4Q-9g-K4x"/>
                             </constraints>
                             <state key="normal" title="确认支付"/>
+                            <connections>
+                                <action selector="submit:" destination="-1" eventType="touchUpInside" id="cH8-VG-msN"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

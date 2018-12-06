@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CNPayTipView : UIView
++ (instancetype)tipView;
+@property (nonatomic, copy) dispatch_block_t btnAction;
 + (void)showTipViewFinish:(dispatch_block_t)btnAction;
 @end
