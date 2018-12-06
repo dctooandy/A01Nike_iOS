@@ -33,14 +33,13 @@ extern NSString * const kPaymentCompleteInfo;
 /// 点卡提交订单
 extern NSString * const kPaymentCardPay;
 
-// RGB颜色(16进制)
-#define COLOR_HEX(rgbValue) \
-[UIColor colorWithRed:((CGFloat)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
-green:((CGFloat)((rgbValue & 0xFF00) >> 8)) / 255.0 \
-blue:((CGFloat)(rgbValue & 0xFF)) / 255.0 alpha:(1.0)]
+#define COLOR_HEX(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8))/255.0    \
+blue:((float)(rgbValue & 0xFF))/255.0             \
+alpha:1.0]
 
 #define kBlackBackgroundColor  COLOR_RGBA(33, 35, 41, 1)
-#define kBlackForgroundColor  COLOR_HEX(0x292E36)
+#define kBlackForgroundColor  COLOR_HEX(0x292D36) //COLOR_RGBA(41, 45, 54, 1)
 
 @interface CNPayConstant : NSObject
 @end
