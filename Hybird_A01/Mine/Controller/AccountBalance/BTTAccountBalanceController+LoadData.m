@@ -74,8 +74,8 @@
     }
     
     dispatch_group_notify(group, queue, ^{
-        button.enabled = YES;
         dispatch_async(dispatch_get_main_queue(), ^{
+            button.enabled = YES;
             [self.collectionView reloadData];
         });
     });
@@ -84,6 +84,9 @@
 - (void)loadGameshallList:(dispatch_group_t)group{
     [IVNetwork sendRequestWithSubURL:BTTGamePlatforms paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
+        if (self.games.count) {
+            [self.games removeAllObjects];
+        }
         if (result.code_http == 200) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]] && ![result.data isKindOfClass:[NSNull class]]) {
                 if (result.data[@"platforms"] && [result.data[@"platforms"] isKindOfClass:[NSArray class]] && ![result.data[@"platforms"] isKindOfClass:[NSNull class]]) {
