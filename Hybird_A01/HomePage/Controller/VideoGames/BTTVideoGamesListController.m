@@ -705,7 +705,7 @@
         if (self.favorites.count > 1) {
             if (indexPath.row >= 3) {
                 BTTVideoGameModel *gameModel = self.favorites.count ? self.favorites[indexPath.row - 3] : nil;
-                if (!gameModel.gameid.integerValue) {
+                if (!gameModel.gameid.length) {
                     return;
                 }
                 model.cnName = gameModel.cnName;
@@ -721,7 +721,7 @@
         if (self.isShowSearchBar) {
             if (indexPath.row >= 4 && self.games.count > 1) {
                 BTTVideoGameModel *gameModel = self.games.count ? self.games[indexPath.row - 4] : nil;
-                if (!gameModel.gameid.integerValue) {
+                if (!gameModel.gameid.length) {
                     return;
                 }
                 model.cnName = gameModel.cnName;
@@ -735,7 +735,7 @@
         } else {
             if (indexPath.row >= 3 && self.games.count > 1) {
                 BTTVideoGameModel *gameModel = self.games.count ? self.games[indexPath.row - 3] : nil;
-                if (!gameModel.gameid.integerValue) {
+                if (!gameModel.gameid.length) {
                     return;
                 }
                 model.cnName = gameModel.cnName;
