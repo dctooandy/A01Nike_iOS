@@ -29,8 +29,8 @@
 
 - (void)commonInit {
     UIView *onePixView = [[UIView alloc] init];
-    onePixView.backgroundColor = COLOR_HEX(0x36364c);
-    self.backgroundColor = kBlackForgroundColor;
+    onePixView.backgroundColor = COLOR_HEX(0x36364C);
+    self.backgroundColor = [UIColor clearColor];
     [self addSubview:onePixView];
     [onePixView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(15);

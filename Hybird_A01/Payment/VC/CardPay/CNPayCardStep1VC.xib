@@ -86,7 +86,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="ExD-js-NJf"/>
                                 <constraint firstItem="uuu-9E-xYY" firstAttribute="leading" secondItem="oYH-jD-WOh" secondAttribute="leading" id="J8d-ZQ-5Uc"/>
