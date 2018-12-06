@@ -36,6 +36,8 @@
     [self addTarget:self action:@selector(textFieldEditingChanged) forControlEvents:UIControlEventEditingChanged];
     self.placeholder = @"请输入金额";
     [self setValue:self.textColor forKeyPath:@"_placeholderLabel.textColor"];
+    UIButton *clearButton = [self valueForKey:@"_clearButton"];
+    [clearButton setImage:[UIImage imageNamed:@"pay_TFDelete"] forState:UIControlStateNormal];
 }
 
 - (void)textFieldEditingChanged {

@@ -42,6 +42,7 @@
 }
 
 - (IBAction)gameHoll:(id)sender {
+    self.tabBarController.selectedIndex = 0;
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

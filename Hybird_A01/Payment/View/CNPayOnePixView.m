@@ -8,6 +8,7 @@
 
 #import "CNPayOnePixView.h"
 #import "CNPayConstant.h"
+#import "Constants.h"
 
 @implementation CNPayOnePixView
 
@@ -29,13 +30,13 @@
 
 - (void)commonInit {
     UIView *onePixView = [[UIView alloc] init];
-    onePixView.backgroundColor = COLOR_RGBA(47, 52, 66, 1);
-    self.backgroundColor = kBlackForgroundColor;
+    onePixView.backgroundColor = COLOR_HEX(0x36364C);
+    self.backgroundColor = [UIColor clearColor];
     [self addSubview:onePixView];
     [onePixView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(15);
         make.right.mas_equalTo(self).offset(0);
-        make.height.mas_equalTo(0.8);
+        make.height.mas_equalTo(0.5);
         make.centerY.mas_equalTo(self);
     }];
 }
