@@ -83,7 +83,7 @@
 }
 
 - (void)resetRequestModel {
-    _type = @"";
+    _type = @"hot";
     _line = @"";
     _platform = @"";
     _keyword = @"";
