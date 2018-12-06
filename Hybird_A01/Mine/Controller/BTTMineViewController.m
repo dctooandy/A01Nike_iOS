@@ -324,6 +324,8 @@
         // 退出登录
         [MBProgressHUD showSuccess:@"退出成功" toView:nil];
         [BTTUserStatusManager logoutSuccess];
+        [self loadPaymentDefaultData];
+        [self setupElements];
         self.totalAmount = @"-";
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + 1) {
         // 设置
