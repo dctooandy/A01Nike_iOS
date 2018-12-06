@@ -27,9 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"PT转账";
-    self.totalAmount = @"-";
-    self.ptAmount = @"-";
-    self.transferAmount = @"";
+    self.totalAmount = @"加载中";
+    self.ptAmount = @"加载中";
+    self.transferAmount = @"加载中";
     [self setupCollectionView];
     [self setupElements];
     [self loadMainData];
@@ -51,8 +51,16 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         BTTPTTransferNewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPTTransferNewCell" forIndexPath:indexPath];
-        cell.userableLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%.2f元",self.totalAmount.floatValue]];
-        cell.PTLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%.2f元",self.ptAmount.floatValue]];
+        if ([self.totalAmount isEqualToString:@"加载中"]) {
+            cell.userableLabel.text = self.totalAmount;
+        } else {
+            cell.userableLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%.2f元",self.totalAmount.floatValue]];
+        }
+        if ([self.ptAmount isEqualToString:@"加载中"]) {
+            cell.PTLabel.text = self.ptAmount;
+        } else {
+            cell.PTLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%.2f元",self.ptAmount.floatValue]];
+        }
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
@@ -79,6 +87,11 @@
         return cell;
     } else if (indexPath.row == 2) {
         BTTPTTransferInputCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPTTransferInputCell" forIndexPath:indexPath];
+        if ([self.totalAmount isEqualToString:@"加载中"]) {
+            cell.unitLabel.hidden = YES;
+        } else {
+            cell.unitLabel.hidden = NO;
+        }
         cell.amountTextField.text = self.totalAmount;
         cell.model = self.sheetDatas[0];
         [cell.amountTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
