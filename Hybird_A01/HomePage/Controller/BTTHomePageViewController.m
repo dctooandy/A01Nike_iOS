@@ -459,7 +459,7 @@
 }
 
 - (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
-    return UIEdgeInsetsMake(0, 0, KIsiPhoneX ? 83 : 49, 0);
+    return UIEdgeInsetsMake(0, 0, KIsiPhoneX ? 83 : 79, 0);
 }
 
 /**
