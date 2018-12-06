@@ -46,7 +46,7 @@
 
 - (void)loadCollectionData {
     NSDictionary *params = @{@"login_name":[IVNetwork userInfo].loginName};
-    [IVNetwork sendUseCacheRequestWithSubURL:BTTFavotiteList paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork sendRequestWithSubURL:BTTFavotiteList paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (self.favorites.count) {
             [self.favorites removeAllObjects];
@@ -59,6 +59,7 @@
             }
             [self.favorites addObject:[BTTVideoGameModel new]];
         }
+        [self setupElements];
     }];
 }
 
