@@ -55,8 +55,17 @@
 - (void)setModel:(BTTBankModel *)model
 {
     _model = model;
-    NSString *bgImageName = model.isBTC ? @"BTC-bg" : @"card_bg";
-    self.cardBgImageView.image = [UIImage imageNamed:bgImageName];
+    NSString *bgImageDefault = model.isBTC ? @"BTC-bg" : @"card_bg";
+    NSString *bgURLStr = model.bankimage;
+    if ([NSString isBlankString:bgURLStr]) {
+        bgURLStr = @"";
+    } else {
+        if (![bgURLStr hasPrefix:@"http"]) {
+            bgURLStr = [NSString stringWithFormat:@"%@%@",[IVNetwork cdn],bgURLStr];
+        }
+    }
+    NSURL *bgUrl = [NSURL URLWithString:bgURLStr];
+    [self.cardBgImageView sd_setImageWithURL:bgUrl placeholderImage:[UIImage imageNamed:bgImageDefault]];
     self.modifyBtn.hidden = self.isChecking || model.isBTC;
     self.deleteBtn.hidden = self.isChecking;
     self.setDefaultBtn.hidden = model.isBTC;
@@ -70,7 +79,15 @@
     if (model.isBTC) {
         self.bankIcon.image = [UIImage imageNamed:@"BTC"];
     } else {
-        NSURL *iconUrl = [NSURL URLWithString:model.banklogo];
+        NSString *iconURLStr = model.banklogo;
+        if ([NSString isBlankString:iconURLStr]) {
+            iconURLStr = @"";
+        } else {
+            if (![iconURLStr hasPrefix:@"http"]) {
+                iconURLStr = [NSString stringWithFormat:@"%@%@",[IVNetwork cdn],iconURLStr];
+            }
+        }
+        NSURL *iconUrl = [NSURL URLWithString:iconURLStr];
         [self.bankIcon sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"defaultCardIcon"]];
     }
     NSString *setDefaultImageName = model.isDefault ? @"defaultCard" : @"unDefaultCard";
