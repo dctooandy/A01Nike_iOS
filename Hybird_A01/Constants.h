@@ -273,6 +273,12 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTCancelFavorites           @"/public/game/cancelFavorites"
 
+// 钻石币数量查询
+#define BTTQueryIntegralAPI @"/event/luckyWheel/queryIntegral"
+
+// 钻石币兑换
+#define BTTCoinDepositAPI   @"/event/luckyWheel/deposit"
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)  ([UIFont systemFontOfSize:X])
