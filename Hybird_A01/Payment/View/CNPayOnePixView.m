@@ -8,6 +8,7 @@
 
 #import "CNPayOnePixView.h"
 #import "CNPayConstant.h"
+#import "Constants.h"
 
 @implementation CNPayOnePixView
 
@@ -35,7 +36,7 @@
     [onePixView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(15);
         make.right.mas_equalTo(self).offset(0);
-        make.height.mas_equalTo(0.8);
+        make.height.mas_equalTo(0.5);
         make.centerY.mas_equalTo(self);
     }];
 }

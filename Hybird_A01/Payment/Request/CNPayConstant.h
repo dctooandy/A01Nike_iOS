@@ -38,8 +38,8 @@ green:((float)((rgbValue & 0xFF00) >> 8))/255.0    \
 blue:((float)(rgbValue & 0xFF))/255.0             \
 alpha:1.0]
 
-#define kBlackBackgroundColor  COLOR_RGBA(33, 35, 41, 1)
-#define kBlackForgroundColor  COLOR_HEX(0x292D36) //COLOR_RGBA(41, 45, 54, 1)
+#define kBlackBackgroundColor COLOR_HEX(0x212229)
+#define kBlackForgroundColor  COLOR_RGBA(41, 45, 54, 1)
 
 @interface CNPayConstant : NSObject
 @end
