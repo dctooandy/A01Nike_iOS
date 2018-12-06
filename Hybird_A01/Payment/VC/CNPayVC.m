@@ -198,6 +198,7 @@
                    payments[CNPaymentUnionQR],
                    payments[CNPaymentWechatApp],
                    payments[CNPaymentQQApp],
+                   payments[CNPaymentJDQR],
                    nil];
     
     /// BQ 快速
