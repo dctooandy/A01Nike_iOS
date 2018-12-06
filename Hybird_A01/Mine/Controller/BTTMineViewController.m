@@ -352,27 +352,18 @@
     } else if (indexPath.row >= 4 + self.personalInfos.count + self.paymentDatas.count && indexPath.row <= 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count) {
         BTTMeMainModel *model = self.mainDataOne[indexPath.row - ( 4 + self.personalInfos.count + self.paymentDatas.count)];
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+        vc.webConfigModel.theme = @"outside";
+        vc.webConfigModel.newView = YES;
         if ([model.name isEqualToString:@"首存优惠"]) {
             vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"mypromotion.htm"];
-            vc.webConfigModel.theme = @"outside";
-            vc.webConfigModel.newView = YES;
-            [self.navigationController pushViewController:vc animated:YES];
         } else if ([model.name isEqualToString:@"开户礼金"]) {
             vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"promo_open_account.htm"];
-            vc.webConfigModel.theme = @"outside";
-            vc.webConfigModel.newView = YES;
-            [self.navigationController pushViewController:vc animated:YES];
         } else if ([model.name isEqualToString:@"1%存款返利"]) {
             vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"deposit_rebate.htm"];
-            vc.webConfigModel.theme = @"outside";
-            vc.webConfigModel.newView = YES;
-            [self.navigationController pushViewController:vc animated:YES];
         } else {
             vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"lucky_pot.htm"];
-            vc.webConfigModel.theme = @"outside";
-            vc.webConfigModel.newView = YES;
-            [self.navigationController pushViewController:vc animated:YES];
         }
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
