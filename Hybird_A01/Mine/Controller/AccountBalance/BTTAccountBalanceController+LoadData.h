@@ -17,11 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
 
 
-- (void)loadGamesListAndGameAmount;
+- (void)loadGamesListAndGameAmount:(UIButton *)button;
 
 - (void)loadMainData;
 
-- (void)loadTransferAllMoneyToLocal;
+- (void)loadTransferAllMoneyToLocal:(UIButton *)button;
 
 @end
 

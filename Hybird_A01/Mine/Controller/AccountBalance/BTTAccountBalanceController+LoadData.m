@@ -46,7 +46,7 @@
     }];
 }
 
-- (void)loadGamesListAndGameAmount {
+- (void)loadGamesListAndGameAmount:(UIButton *)button {
     [self loadMainData];
     dispatch_queue_t queue = dispatch_queue_create("accountBlance.data", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_t group = dispatch_group_create();
@@ -60,11 +60,11 @@
     });
     dispatch_group_notify(group, queue, ^{
         [self hideLoading];
-        [self loadEachGameHall];
+        [self loadEachGameHall:button];
     });
 }
 
-- (void)loadEachGameHall {
+- (void)loadEachGameHall:(UIButton *)button {
     dispatch_queue_t queue = dispatch_queue_create("accountBlance.eachhall", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_t group = dispatch_group_create();
     for (BTTGamesHallModel *model in self.games) {
@@ -74,6 +74,7 @@
     }
     
     dispatch_group_notify(group, queue, ^{
+        button.enabled = YES;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.collectionView reloadData];
         });
@@ -102,13 +103,13 @@
     }];
 }
 
-- (void)loadTransferAllMoneyToLocal {
+- (void)loadTransferAllMoneyToLocal:(UIButton *)button {
     [IVNetwork sendRequestWithSubURL:BTTTransferAllMoneyToLocal paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         if (result.code_http == 200) {
             self.amount = @"-";
             self.localAmount = @"-";
             self.hallAmount = @"-";
-            [self loadGamesListAndGameAmount];
+            [self loadGamesListAndGameAmount:button];
         }
     }];
 }

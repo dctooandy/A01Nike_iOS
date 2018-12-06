@@ -55,8 +55,9 @@
             <connections>
                 <outlet property="amountTextField" destination="oC8-gK-7H8" id="ca5-u4-hI0"/>
                 <outlet property="nameLabel" destination="Z0l-FG-DxU" id="7mn-AB-zQB"/>
+                <outlet property="unitLabel" destination="7fo-ng-o77" id="BOS-XD-kDC"/>
             </connections>
-            <point key="canvasLocation" x="-175" y="160"/>
+            <point key="canvasLocation" x="-396" y="130"/>
         </collectionViewCell>
     </objects>
 </document>

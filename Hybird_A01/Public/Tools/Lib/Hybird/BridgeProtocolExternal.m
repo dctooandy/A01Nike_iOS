@@ -37,8 +37,6 @@
 
 }
 
-
-
 - (id)driver_live800:(BridgeModel *)bridgeModel {
     [[CLive800Manager sharedInstance] startLive800Chat:self.controller];
     return nil;

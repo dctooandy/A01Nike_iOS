@@ -30,7 +30,7 @@
     self.hallAmount = @"加载中";
     [self setupCollectionView];
     [self setupElements];
-    [self loadGamesListAndGameAmount];
+    [self loadGamesListAndGameAmount:[UIButton new]];
 }
 
 - (void)setupCollectionView {
@@ -51,7 +51,8 @@
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
-            [strongSelf loadTransferAllMoneyToLocal];
+            button.enabled = NO;
+            [strongSelf loadTransferAllMoneyToLocal:button];
         };
         return cell;
     } else if (indexPath.row == 1 || indexPath.row == 2) {

@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) BTTMeMainModel *model;
 
+@property (weak, nonatomic) IBOutlet UILabel *unitLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

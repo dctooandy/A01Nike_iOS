@@ -43,15 +43,13 @@
 }
 
 - (void)loadPaymentDefaultData {
-    NSArray *icons = @[@"me_netbank",@"me_wechat",@"me_alipay",@"me_hand",@"me_online",@"me_scan",@"me_quick",@"me_alipay",@"me_pointCard",@"me_btc",@"me_jd"];
-    NSArray *names = @[@"迅捷网银",@"微信秒存",@"支付宝秒存",@"手工存款",@"在线支付",@"扫码支付",@"银行快捷支付",@"支付宝WAP",@"点卡支付",@"比特币支付",@"京东WAP支付"];
-    NSArray *paymentNames = @[@"bqpaytype-0",@"bqpaytype-1",@"bqpaytype-2",@"deposit",@"online-1",@"online-6;online-8;online-5;online-7;online-11;online-15;online-16",@"faster",@"online-9",@"card",@"online-20",@"online-17"];
+    NSArray *icons = @[@"me_netbank",@"me_wechat",@"me_alipay",@"me_hand",@"me_online",@"me_scan",@"me_quick",@"me_alipay",@"me_pointCard",@"me_btc",@"me_jd",@"me_bibao"];
+    NSArray *names = @[@"迅捷网银",@"微信秒存",@"支付宝秒存",@"手工存款",@"在线支付",@"扫码支付",@"银行快捷支付",@"支付宝WAP",@"点卡支付",@"比特币支付",@"京东WAP支付",@"币宝支付"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;
         model.iconName = icons[index];
-        model.paymentName = paymentNames[index];
         model.available = YES;
         [self.paymentDatas addObject:model];
     }
@@ -60,25 +58,23 @@
 
 - (void)loadPaymentData {
     NSMutableArray *arr = [NSMutableArray array];
-    NSArray *icons = @[@"me_netbank",@"me_wechat",@"me_alipay",@"me_hand",@"me_online",@"me_scan",@"me_quick",@"me_alipay",@"me_pointCard",@"me_btc",@"me_jd"];
-    NSArray *names = @[@"迅捷网银",@"微信秒存",@"支付宝秒存",@"手工存款",@"在线支付",@"扫码支付",@"银行快捷支付",@"支付宝WAP",@"点卡支付",@"比特币支付",@"京东WAP支付"];
-    NSArray *paymentNames = @[@"bqpaytype-0",@"bqpaytype-1",@"bqpaytype-2",@"deposit",@"online-1",@"online-6;online-8;online-5;online-7;online-11;online-15;online-16",@"online-19",@"online-9",@"card",@"online-20",@"online-17"];
+    NSArray *icons = @[@"me_netbank",@"me_wechat",@"me_alipay",@"me_hand",@"me_online",@"me_scan",@"me_quick",@"me_alipay",@"me_pointCard",@"me_btc",@"me_jd",@"me_bibao"];
+    NSArray *names = @[@"迅捷网银",@"微信秒存",@"支付宝秒存",@"手工存款",@"在线支付",@"扫码支付",@"银行快捷支付",@"支付宝WAP",@"点卡支付",@"比特币支付",@"京东WAP支付",@"币宝支付"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;
         model.iconName = icons[index];
-        model.paymentName = paymentNames[index];
         model.available = YES;
         [arr addObject:model];
     }
     if ([IVNetwork userInfo]) {
-        [self loadPersonalPaymentData:arr list:[paymentNames componentsJoinedByString:@";"]];
+        [self loadPersonalPaymentData:arr];
     }
     
 }
 
-- (void)loadPersonalPaymentData:(NSMutableArray *)defaultArr list:(NSString *)listStr {
+- (void)loadPersonalPaymentData:(NSMutableArray *)defaultArr {
 //    [self showLoading];
     [CNPayRequestManager queryAllChannelCompleteHandler:^(IVRequestResultModel *result, id response) {
 //        [self hideLoading];
@@ -202,6 +198,15 @@
                 mainModel.name = @"京东WAP支付";
                 mainModel.iconName = @"me_jd";
                 mainModel.paymentType = CNPayChannelJDApp;
+                [availablePayments addObject:mainModel];
+            }
+            
+            CNPaymentModel *bibao = payments[CNPaymentCoin];
+            if (bibao.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"币宝支付";
+                mainModel.iconName = @"me_bibao";
+                mainModel.paymentType = CNPayChannelCoin;
                 [availablePayments addObject:mainModel];
             }
 

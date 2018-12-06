@@ -83,7 +83,7 @@
 }
 
 - (void)resetRequestModel {
-    _type = @"";
+    _type = @"hot";
     _line = @"";
     _platform = @"";
     _keyword = @"";
@@ -93,6 +93,7 @@
 }
 
 - (void)loadGamesData {
+    [self.collectionView.mj_footer resetNoMoreData];
     BTTVideoGamesRequestModel *requestModel = [BTTVideoGamesRequestModel new];
     requestModel.type = _type;
     requestModel.line = _line;
@@ -124,19 +125,21 @@
                 BTTVideoGameModel *model = [BTTVideoGameModel yy_modelWithDictionary:dict];
                 [strongSelf.games addObject:model];
             }
-            if ([games count] == self.limit) {
+            if (games.count) {
                 if (requestModel.keyword.length) {
                     strongSelf.searchPage ++;
                 } else {
                     strongSelf.page ++;
                 }
-            } else {
-                [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
-            if (games.count < strongSelf.limit) {
-                strongSelf.collectionView.mj_footer.hidden = YES;
+            if (games.count < strongSelf.limit && games.count) {
+                [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
                 strongSelf.isShowFooter = YES;
                 [strongSelf.games addObject:[BTTVideoGameModel new]];
+            }
+            if (!games.count) {
+                strongSelf.isShowFooter = YES;
+                [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
         }
         [strongSelf setupElements];
@@ -208,7 +211,12 @@
                 strongSelf(strongSelf);
                 if (button.tag != 1073) {
                     strongSelf.isFavorite = NO;
-                    strongSelf.isShowFooter = NO;
+                    if (strongSelf.games.count % strongSelf.limit) {
+                        strongSelf.isShowFooter = YES;
+                    } else {
+                        strongSelf.isShowFooter = NO;
+                    }
+                    strongSelf.isShowSearchBar = NO;
                     UIButton *collectBtn = (UIButton *)[cell viewWithTag:1073];
                     collectBtn.selected = NO;
                     [strongSelf setupElements];
@@ -224,11 +232,19 @@
                     }
                     strongSelf.isShowSearchBar = NO;
                     button.selected = !button.selected;
-                    strongSelf.isShowFooter = button.selected;
                     if (button.selected) {
-                        [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+                        strongSelf.isShowFooter = button.selected;
                     } else {
-                        [self.collectionView.mj_footer resetNoMoreData];
+                        if (strongSelf.games.count % strongSelf.limit) {
+                            strongSelf.isShowFooter = YES;
+                        } else {
+                            strongSelf.isShowFooter = NO;
+                        }
+                    }
+                    if (button.selected) {
+                        [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+                    } else {
+                        [strongSelf.collectionView.mj_footer resetNoMoreData];
                     }
                     strongSelf.isFavorite = button.selected;
                     [strongSelf setupElements];
@@ -343,7 +359,12 @@
                         UIButton *collectBtn = (UIButton *)[cell viewWithTag:1073];
                         collectBtn.selected = NO;
                         strongSelf.isFavorite = NO;
-                        strongSelf.isShowFooter = NO;
+                        if (strongSelf.games.count % strongSelf.limit) {
+                            strongSelf.isShowFooter = YES;
+                        } else {
+                            strongSelf.isShowFooter = NO;
+                        }
+                        strongSelf.isShowSearchBar = NO;
                         [strongSelf setupElements];
                         [strongSelf selectControlWithButton:button selectValueBlock:^(NSString *value) {
                             [button setTitle:value forState:UIControlStateNormal];
@@ -357,11 +378,19 @@
                         }
                         strongSelf.isShowSearchBar = NO;
                         button.selected = !button.selected;
-                        strongSelf.isShowFooter = button.selected;
                         if (button.selected) {
-                            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+                            strongSelf.isShowFooter = button.selected;
                         } else {
-                            [self.collectionView.mj_footer resetNoMoreData];
+                            if (strongSelf.games.count % strongSelf.limit) {
+                                strongSelf.isShowFooter = YES;
+                            } else {
+                                strongSelf.isShowFooter = NO;
+                            }
+                        }
+                        if (button.selected) {
+                            [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+                        } else {
+                            [strongSelf.collectionView.mj_footer resetNoMoreData];
                         }
                         strongSelf.isFavorite = button.selected;
                         [strongSelf setupElements];
@@ -497,7 +526,12 @@
                         UIButton *collectBtn = (UIButton *)[cell viewWithTag:1073];
                         collectBtn.selected = NO;
                         strongSelf.isFavorite = NO;
-                        strongSelf.isShowFooter = NO;
+                        if (strongSelf.games.count % strongSelf.limit) {
+                            strongSelf.isShowFooter = YES;
+                        } else {
+                            strongSelf.isShowFooter = NO;
+                        }
+                        strongSelf.isShowSearchBar = NO;
                         [strongSelf setupElements];
                         [strongSelf selectControlWithButton:button selectValueBlock:^(NSString *value) {
                             [button setTitle:value forState:UIControlStateNormal];
@@ -511,11 +545,20 @@
                         }
                         strongSelf.isShowSearchBar = NO;
                         button.selected = !button.selected;
-                        strongSelf.isShowFooter = button.selected;
                         if (button.selected) {
-                            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+                            strongSelf.isShowFooter = button.selected;
                         } else {
-                            [self.collectionView.mj_footer resetNoMoreData];
+                            if (strongSelf.games.count % strongSelf.limit) {
+                                strongSelf.isShowFooter = YES;
+                            } else {
+                                strongSelf.isShowFooter = NO;
+                            }
+                        }
+                        
+                        if (button.selected) {
+                            [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+                        } else {
+                            [strongSelf.collectionView.mj_footer resetNoMoreData];
                         }
                         strongSelf.isFavorite = button.selected;
                         [strongSelf setupElements];
@@ -691,6 +734,9 @@
         if (self.favorites.count > 1) {
             if (indexPath.row >= 3) {
                 BTTVideoGameModel *gameModel = self.favorites.count ? self.favorites[indexPath.row - 3] : nil;
+                if (!gameModel.gameid.length) {
+                    return;
+                }
                 model.cnName = gameModel.cnName;
                 model.enName = gameModel.engName;
                 model.provider = gameModel.provider;
@@ -704,6 +750,9 @@
         if (self.isShowSearchBar) {
             if (indexPath.row >= 4 && self.games.count > 1) {
                 BTTVideoGameModel *gameModel = self.games.count ? self.games[indexPath.row - 4] : nil;
+                if (!gameModel.gameid.length) {
+                    return;
+                }
                 model.cnName = gameModel.cnName;
                 model.enName = gameModel.engName;
                 model.provider = gameModel.provider;
@@ -715,6 +764,9 @@
         } else {
             if (indexPath.row >= 3 && self.games.count > 1) {
                 BTTVideoGameModel *gameModel = self.games.count ? self.games[indexPath.row - 3] : nil;
+                if (!gameModel.gameid.length) {
+                    return;
+                }
                 model.cnName = gameModel.cnName;
                 model.enName = gameModel.engName;
                 model.provider = gameModel.provider;

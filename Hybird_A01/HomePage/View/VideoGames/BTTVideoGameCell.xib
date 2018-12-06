@@ -28,12 +28,15 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击收藏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybR-r2-Ab1">
                         <rect key="frame" x="298.5" y="155" width="61.5" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="61.5" id="T8h-dq-ecG"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ht6-kr-CYd">
-                        <rect key="frame" x="340" y="120" width="20" height="20"/>
+                        <rect key="frame" x="319.5" y="120" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="4ZQ-Pp-Ox7"/>
                             <constraint firstAttribute="height" constant="20" id="WpK-kH-uhc"/>
@@ -80,7 +83,7 @@
                         </state>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="捕鱼王" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKT-hr-jCy">
-                        <rect key="frame" x="15" y="155" width="46" height="18"/>
+                        <rect key="frame" x="15" y="155" width="275.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -93,16 +96,17 @@
                 <constraint firstItem="Ch2-Rf-g41" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="ArV-gz-Sha"/>
                 <constraint firstItem="ht6-kr-CYd" firstAttribute="top" secondItem="Ch2-Rf-g41" secondAttribute="bottom" constant="15" id="EdF-GV-cWe"/>
                 <constraint firstItem="aKT-hr-jCy" firstAttribute="leading" secondItem="DH9-wj-bgb" secondAttribute="leading" id="M2a-ss-zf5"/>
+                <constraint firstItem="ht6-kr-CYd" firstAttribute="centerX" secondItem="ybR-r2-Ab1" secondAttribute="centerX" id="Mnv-tH-eMw"/>
                 <constraint firstItem="DH9-wj-bgb" firstAttribute="top" secondItem="Ch2-Rf-g41" secondAttribute="bottom" constant="15" id="RZb-BL-8m0"/>
                 <constraint firstAttribute="trailing" secondItem="Ch2-Rf-g41" secondAttribute="trailing" constant="15" id="T21-sS-zNt"/>
                 <constraint firstItem="axc-Aj-KL8" firstAttribute="leading" secondItem="piw-1j-EtB" secondAttribute="trailing" constant="8" id="UFS-sb-lOR"/>
+                <constraint firstItem="ybR-r2-Ab1" firstAttribute="trailing" secondItem="Ch2-Rf-g41" secondAttribute="trailing" id="WH1-Kj-QkR"/>
                 <constraint firstItem="piw-1j-EtB" firstAttribute="centerY" secondItem="DH9-wj-bgb" secondAttribute="centerY" id="dBV-62-7L4"/>
                 <constraint firstItem="Ch2-Rf-g41" firstAttribute="leading" secondItem="DH9-wj-bgb" secondAttribute="trailing" constant="-37" id="dDJ-6e-ZO6"/>
                 <constraint firstItem="ybR-r2-Ab1" firstAttribute="top" secondItem="ht6-kr-CYd" secondAttribute="bottom" constant="15" id="fVh-Is-pnZ"/>
+                <constraint firstItem="ybR-r2-Ab1" firstAttribute="leading" secondItem="aKT-hr-jCy" secondAttribute="trailing" constant="8" id="gJy-YO-FFw"/>
                 <constraint firstItem="aKT-hr-jCy" firstAttribute="top" secondItem="DH9-wj-bgb" secondAttribute="bottom" constant="15" id="j39-kR-PAr"/>
                 <constraint firstItem="axc-Aj-KL8" firstAttribute="centerY" secondItem="piw-1j-EtB" secondAttribute="centerY" id="otr-1D-xBv"/>
-                <constraint firstItem="ht6-kr-CYd" firstAttribute="trailing" secondItem="ybR-r2-Ab1" secondAttribute="trailing" id="pFr-6w-e6l"/>
-                <constraint firstItem="ht6-kr-CYd" firstAttribute="trailing" secondItem="Ch2-Rf-g41" secondAttribute="trailing" id="s3x-6J-Ifg"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
@@ -117,7 +121,7 @@
                 <outlet property="rightConstants" destination="T21-sS-zNt" id="yZL-KL-bae"/>
                 <outlet property="titleLabel" destination="aKT-hr-jCy" id="Ip5-cb-wZV"/>
             </connections>
-            <point key="canvasLocation" x="-887" y="-49"/>
+            <point key="canvasLocation" x="-887.20000000000005" y="-49.475262368815599"/>
         </collectionViewCell>
     </objects>
     <resources>
