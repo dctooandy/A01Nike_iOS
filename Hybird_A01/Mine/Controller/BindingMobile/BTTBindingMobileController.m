@@ -277,14 +277,14 @@
             if (successStr) {
                 [MBProgressHUD showSuccess:successStr toView:nil];
             }
-            if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
-                NSString *phone = result.data[@"val"];
-                [IVNetwork updateUserInfo:@{@"phone" : phone}];
-                [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
-            }
             switch (self.mobileCodeType) {
                 case BTTSafeVerifyTypeBindMobile:
                 case BTTSafeVerifyTypeChangeMobile:{
+                    if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
+                        NSString *phone = result.data[@"val"];
+                        [IVNetwork updateUserInfo:@{@"phone" : phone}];
+                        [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
+                    }
                     BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
                     vc.mobileCodeType = self.mobileCodeType;
                     [weakSelf.navigationController pushViewController:vc animated:YES];
