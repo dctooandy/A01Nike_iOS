@@ -20,8 +20,12 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="59R-Pd-9QW">
-                        <rect key="frame" x="0.0" y="0.0" width="315" height="45"/>
+                        <rect key="frame" x="0.0" y="0.0" width="313" height="45"/>
                         <color key="backgroundColor" red="0.078431372550000003" green="0.87843137250000003" blue="0.46274509800000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="B96-Bn-p8k"/>
+                            <constraint firstAttribute="width" constant="313" id="jPO-dO-ESw"/>
+                        </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQc-hM-hgh">
                         <rect key="frame" x="330" y="7.5" width="30" height="30"/>
@@ -37,20 +41,19 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="59R-Pd-9QW" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="L2Q-Tk-8rx"/>
                 <constraint firstAttribute="trailing" secondItem="bQc-hM-hgh" secondAttribute="trailing" constant="15" id="MYZ-kj-uGp"/>
-                <constraint firstItem="bQc-hM-hgh" firstAttribute="leading" secondItem="59R-Pd-9QW" secondAttribute="trailing" constant="15" id="QuI-AX-Bh5"/>
                 <constraint firstItem="59R-Pd-9QW" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="ZtS-Do-xRi"/>
                 <constraint firstItem="bQc-hM-hgh" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="ilQ-Tu-3HU"/>
-                <constraint firstAttribute="bottom" secondItem="59R-Pd-9QW" secondAttribute="bottom" id="qbq-2Q-PI2"/>
                 <constraint firstItem="59R-Pd-9QW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="t1u-4L-4wi"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
                 <outlet property="closeBtn" destination="bQc-hM-hgh" id="E0J-iT-68D"/>
+                <outlet property="imageHeight" destination="B96-Bn-p8k" id="tdM-Z4-m0v"/>
                 <outlet property="imageView" destination="59R-Pd-9QW" id="fV0-ga-seb"/>
+                <outlet property="imageWidth" destination="jPO-dO-ESw" id="m1Z-zz-vTj"/>
             </connections>
-            <point key="canvasLocation" x="345" y="152"/>
+            <point key="canvasLocation" x="39.200000000000003" y="-52.623688155922046"/>
         </collectionViewCell>
     </objects>
     <resources>
