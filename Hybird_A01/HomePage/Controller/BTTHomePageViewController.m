@@ -121,6 +121,7 @@
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
                 [strongSelf.posters removeAllObjects];
+                [strongSelf.elementsHight removeAllObjects];
                 [strongSelf setupElements];
             };
             return cell;
@@ -385,8 +386,8 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     if (self.adCellShow) {
-        if (indexPath.row == 10) {
-            if (indexPath.row == 10) {
+        if (indexPath.row == 11) {
+            if (indexPath.row == 11) {
                 [self refreshDataOfActivities];
             }
         } else if (indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9) {
@@ -419,8 +420,8 @@
             }
         }
     } else {
-        if (indexPath.row == 9) {
-            if (indexPath.row == 9) {
+        if (indexPath.row == 10) {
+            if (indexPath.row == 10) {
                 [self refreshDataOfActivities];
             }
         } else if (indexPath.row == 7 || indexPath.row == 6 || indexPath.row == 8) {
