@@ -490,7 +490,6 @@
 }
 
 - (void)setupElements {
-    [self.elementsHight removeAllObjects];
     NSInteger total = 0;
     if (self.posters.count) {
         self.adCellShow = YES;

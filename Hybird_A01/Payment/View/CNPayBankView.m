@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIButton *chargeBtn;
 @property (weak, nonatomic) IBOutlet UILabel *label;
-@property (copy, nonatomic) NSMutableArray <CNPayDepositNameModel *> *modelArray;
+@property (strong, nonatomic) NSMutableArray <CNPayDepositNameModel *> *modelArray;
 @end
 
 @implementation CNPayBankView
@@ -78,8 +78,12 @@
 }
 
 - (void)reloadData:(NSArray *)array {
-    _modelArray = [array mutableCopy];
-    [self.collectionView reloadData];
+    self.modelArray = [array mutableCopy];
+    self.chargeBtn.selected = NO;
+    weakSelf(weakSelf);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [weakSelf.collectionView reloadData];
+    });
 }
 
 - (void)removeItem:(NSInteger)index {
@@ -89,6 +93,9 @@
         if (result.data) {
             [weakSelf.modelArray removeObject:model];
             [weakSelf.collectionView reloadData];
+            if (weakSelf.modelArray.count == 0) {
+                !weakSelf.deleteHandler ?: weakSelf.deleteHandler();
+            }
         }
     }];
 }

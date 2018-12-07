@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CNPayBankView : UIView
 - (void)reloadData:(NSArray *)array;
+@property (nonatomic, copy) dispatch_block_t deleteHandler;
 @end
 
 NS_ASSUME_NONNULL_END
