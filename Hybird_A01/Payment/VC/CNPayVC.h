@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithChannel:(CNPayChannel)channel;
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full;
 - (void)addBankView;
+- (void)removeBankView;
 @end
 
 NS_ASSUME_NONNULL_END

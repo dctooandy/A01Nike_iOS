@@ -423,6 +423,10 @@
     self.bankView.hidden = NO;
     self.bankViewHeight.constant = 180;
     [self.bankView reloadData:modelArray];
+    weakSelf(weakSelf);
+    self.bankView.deleteHandler = ^{
+        [weakSelf removeBankView];
+    };
 }
 
 @end
