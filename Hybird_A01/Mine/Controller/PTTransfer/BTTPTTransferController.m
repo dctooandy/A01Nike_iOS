@@ -14,9 +14,16 @@
 #import "BTTPTTransferController+LoadData.h"
 #import "BTTPTTransferInputCell.h"
 
+typedef enum {
+    BTTPTTransferTypeLocal,
+    BTTPTTransferTypePT
+}BTTPTTransferType;
+
 @interface BTTPTTransferController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
+
+@property (nonatomic, assign) BTTPTTransferType transferType;
 
 
 
@@ -51,35 +58,38 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         BTTPTTransferNewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPTTransferNewCell" forIndexPath:indexPath];
+        NSInteger total = floor(self.totalAmount.floatValue);
+        NSInteger pt = floor(self.ptAmount.floatValue);
+        
         if ([self.totalAmount isEqualToString:@"加载中"]) {
             cell.userableLabel.text = self.totalAmount;
         } else {
-            cell.userableLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%.2f元",self.totalAmount.floatValue]];
+            cell.userableLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%@元",[NSString stringWithFormat:@"%ld",total - pt]]];
         }
         if ([self.ptAmount isEqualToString:@"加载中"]) {
             cell.PTLabel.text = self.ptAmount;
         } else {
-            cell.PTLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%.2f元",self.ptAmount.floatValue]];
+            cell.PTLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%ld元",pt]];
         }
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
-            BTTPTTransferInputCell *amountCell = (BTTPTTransferInputCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
             if (button.tag == 1020) {
-                amountCell.amountTextField.text = strongSelf.ptAmount.floatValue ? strongSelf.ptAmount : @"";
+                strongSelf.transferType = BTTPTTransferTypePT;
                 if (strongSelf.ptAmount.floatValue && strongSelf.ptAmount.floatValue >= 1) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"PTTransfer"];
                 } else {
                     [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnDisableNotification object:@"PTTransfer"];
                 }
             } else if (button.tag == 1021) {
-                amountCell.amountTextField.text = strongSelf.totalAmount.floatValue ? strongSelf.totalAmount : @"";
+                strongSelf.transferType = BTTPTTransferTypeLocal;
                 if (strongSelf.totalAmount.floatValue && strongSelf.totalAmount.floatValue >= 1) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"PTTransfer"];
                 } else {
                     [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnDisableNotification object:@"PTTransfer"];
                 }
             }
+            [strongSelf.collectionView reloadData];
         };
         return cell;
     } else if (indexPath.row == 1) {
@@ -91,8 +101,17 @@
             cell.unitLabel.hidden = YES;
         } else {
             cell.unitLabel.hidden = NO;
+            NSInteger pt = floor(self.ptAmount.floatValue);
+            NSInteger total = floor(self.totalAmount.floatValue);
+            if (self.transferType == BTTPTTransferTypeLocal) {
+                self.transferAmount = [NSString stringWithFormat:@"%ld",total - pt];
+            } else {
+                self.ptAmount = [NSString stringWithFormat:@"%ld",pt];
+                self.transferAmount = self.ptAmount;
+            }
         }
-        cell.amountTextField.text = self.totalAmount;
+        
+        cell.amountTextField.text = self.transferAmount;
         cell.model = self.sheetDatas[0];
         [cell.amountTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
        
