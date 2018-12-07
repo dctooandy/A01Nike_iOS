@@ -391,6 +391,9 @@
             }
         } else if (indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9) {
             BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 7] : nil;
+            if (!model) {
+                return;
+            }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
             vc.webConfigModel.url = model.href;
             vc.webConfigModel.newView = YES;
@@ -402,7 +405,6 @@
             vc.webConfigModel.theme = @"inside";
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 0 || indexPath.row == 16) {
-//            BTTPosterModel *model = self.posters.count ? self.posters[0] : nil;
             
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
             vc.webConfigModel.url = @"https://www.baidu.com";
@@ -423,6 +425,9 @@
             }
         } else if (indexPath.row == 7 || indexPath.row == 6 || indexPath.row == 8) {
             BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 6] : nil;
+            if (!model) {
+                return;
+            }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
             vc.webConfigModel.url = model.href;
             vc.webConfigModel.newView = YES;
