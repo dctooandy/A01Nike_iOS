@@ -64,7 +64,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"会员中心";
-    self.totalAmount = @"-";
+    self.totalAmount = @"加载中";
     [self setupNav];
     self.isCompletePersonalInfo = NO;
     self.isChangeMobile = NO;
@@ -81,7 +81,7 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork userInfo]) {
-        self.totalAmount = @"-";
+        self.totalAmount = @"加载中";
         [self loadUserInfo];
         [self loadBindStatus];
         [self loadBankList];
@@ -115,7 +115,11 @@
         if ([IVNetwork userInfo]) {
             BTTMeHeaderLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeHeaderLoginCell" forIndexPath:indexPath];
             cell.noticeStr = homeVC.noticeStr.length ? homeVC.noticeStr : @"";
-            cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
+            if ([self.totalAmount isEqualToString:@"加载中"]) {
+                cell.totalAmount = self.totalAmount;
+            } else {
+                cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
+            }
             cell.nameLabel.text = [IVNetwork userInfo].loginName;
             cell.vipLevelLabel.text = [NSString stringWithFormat:@"VIP%@",@([IVNetwork userInfo].customerLevel)];
             weakSelf(weakSelf);
@@ -324,6 +328,8 @@
         // 退出登录
         [MBProgressHUD showSuccess:@"退出成功" toView:nil];
         [BTTUserStatusManager logoutSuccess];
+        [self loadPaymentDefaultData];
+        [self setupElements];
         self.totalAmount = @"-";
     } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + 1) {
         // 设置

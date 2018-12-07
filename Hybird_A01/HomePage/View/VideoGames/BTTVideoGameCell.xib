@@ -35,15 +35,15 @@
                         <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ht6-kr-CYd">
-                        <rect key="frame" x="319.5" y="120" width="20" height="20"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ht6-kr-CYd">
+                        <rect key="frame" x="299.5" y="120" width="60" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="4ZQ-Pp-Ox7"/>
+                            <constraint firstAttribute="width" constant="60" id="4ZQ-Pp-Ox7"/>
                             <constraint firstAttribute="height" constant="20" id="WpK-kH-uhc"/>
                         </constraints>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <state key="normal" backgroundImage="videogames_collect_normal"/>
-                        <state key="selected" backgroundImage="videogames_collect_select"/>
+                        <state key="normal" image="videogames_collect_normal"/>
+                        <state key="selected" image="videogames_collect_select"/>
                         <connections>
                             <action selector="collectionBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="0MS-oP-Rb6"/>
                         </connections>
@@ -95,7 +95,6 @@
                 <constraint firstItem="Ch2-Rf-g41" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="7wL-SV-6gV"/>
                 <constraint firstItem="Ch2-Rf-g41" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="ArV-gz-Sha"/>
                 <constraint firstItem="ht6-kr-CYd" firstAttribute="top" secondItem="Ch2-Rf-g41" secondAttribute="bottom" constant="15" id="EdF-GV-cWe"/>
-                <constraint firstItem="aKT-hr-jCy" firstAttribute="leading" secondItem="DH9-wj-bgb" secondAttribute="leading" id="M2a-ss-zf5"/>
                 <constraint firstItem="ht6-kr-CYd" firstAttribute="centerX" secondItem="ybR-r2-Ab1" secondAttribute="centerX" id="Mnv-tH-eMw"/>
                 <constraint firstItem="DH9-wj-bgb" firstAttribute="top" secondItem="Ch2-Rf-g41" secondAttribute="bottom" constant="15" id="RZb-BL-8m0"/>
                 <constraint firstAttribute="trailing" secondItem="Ch2-Rf-g41" secondAttribute="trailing" constant="15" id="T21-sS-zNt"/>
@@ -103,6 +102,7 @@
                 <constraint firstItem="ybR-r2-Ab1" firstAttribute="trailing" secondItem="Ch2-Rf-g41" secondAttribute="trailing" id="WH1-Kj-QkR"/>
                 <constraint firstItem="piw-1j-EtB" firstAttribute="centerY" secondItem="DH9-wj-bgb" secondAttribute="centerY" id="dBV-62-7L4"/>
                 <constraint firstItem="Ch2-Rf-g41" firstAttribute="leading" secondItem="DH9-wj-bgb" secondAttribute="trailing" constant="-37" id="dDJ-6e-ZO6"/>
+                <constraint firstItem="aKT-hr-jCy" firstAttribute="leading" secondItem="Ch2-Rf-g41" secondAttribute="leading" id="ekV-g2-GTZ"/>
                 <constraint firstItem="ybR-r2-Ab1" firstAttribute="top" secondItem="ht6-kr-CYd" secondAttribute="bottom" constant="15" id="fVh-Is-pnZ"/>
                 <constraint firstItem="ybR-r2-Ab1" firstAttribute="leading" secondItem="aKT-hr-jCy" secondAttribute="trailing" constant="8" id="gJy-YO-FFw"/>
                 <constraint firstItem="aKT-hr-jCy" firstAttribute="top" secondItem="DH9-wj-bgb" secondAttribute="bottom" constant="15" id="j39-kR-PAr"/>

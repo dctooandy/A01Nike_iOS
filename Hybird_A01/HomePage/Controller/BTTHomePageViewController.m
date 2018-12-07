@@ -32,6 +32,7 @@
 #import "BTTGamesTryAlertView.h"
 #import "BTTLoginOrRegisterViewController.h"
 #import "BTTHomePageFooterCell.h"
+#import "BTTHomePageHeaderModel.h"
 
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
@@ -205,6 +206,11 @@
                 headerModel = self.headers[0];
             } else if (indexPath.row == 11) {
                 headerModel = self.headers[1];
+                if (self.Activities.count > 1) {
+                    headerModel.detailBtnStr = @"查看下一组";
+                } else {
+                    headerModel.detailBtnStr = @"";
+                }
             } else {
                 headerModel = self.headers[2];
             }
@@ -328,6 +334,11 @@
                 model = self.headers[0];
             } else if (indexPath.row == 10) {
                 model = self.headers[1];
+                if (self.Activities.count > 1) {
+                    model.detailBtnStr = @"查看下一组";
+                } else {
+                    model.detailBtnStr = @"";
+                }
             } else {
                 model = self.headers[2];
             }

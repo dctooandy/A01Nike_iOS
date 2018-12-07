@@ -25,6 +25,7 @@
     dispatch_group_notify(group, queue, ^{
         dispatch_async(dispatch_get_main_queue(), ^{
             [self hideLoading];
+            [self.collectionView reloadData];
         });
     });
 }
@@ -41,9 +42,6 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnDisableNotification object:@"PTTransfer"];
                 }
                 dispatch_group_leave(group);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectionView reloadData];
-                });
             }
         }
     }];
@@ -57,9 +55,6 @@
             if (result.data && ![result.data isKindOfClass:[NSNull class]] && [result.data isKindOfClass:[NSDictionary class]]) {
                 self.ptAmount = result.data[@"val"];
                 dispatch_group_leave(group);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectionView reloadData];
-                });
             }
         }
     }];
@@ -78,7 +73,7 @@
             [MBProgressHUD showError:result.message toView:nil];
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnDisableNotification object:@"PTTransfer"];
-        self.transferAmount = @"";
+        self.transferAmount = @"加载中";
         [self loadMainData];
     }];
     
