@@ -406,9 +406,12 @@
             vc.webConfigModel.theme = @"inside";
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 0 || indexPath.row == 16) {
-            
+            BTTPosterModel * model = self.posters.count ? self.posters[0] : nil;
+            if (!model) {
+                return;
+            }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            vc.webConfigModel.url = @"https://www.baidu.com";
+            vc.webConfigModel.url = model.link;
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"outside";
             [self.navigationController pushViewController:vc animated:YES];
@@ -446,8 +449,12 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
         } else if (indexPath.row == 15) {
+            BTTPosterModel * model = self.posters.count ? self.posters[0] : nil;
+            if (!model) {
+                return;
+            }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            vc.webConfigModel.url = @"https://www.baidu.com";
+            vc.webConfigModel.url = model.link;
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"outside";
             [self.navigationController pushViewController:vc animated:YES];
@@ -596,9 +603,11 @@
         case 3:
             //跳电子游戏大厅
         {
+            BTTPosterModel * model = self.posters.count ? self.posters[0] : nil;
             BTTVideoGamesListController *videoGame = [[BTTVideoGamesListController alloc] init];
             videoGame.banners = self.banners;
             videoGame.imageUrls = self.imageUrls;
+            videoGame.poster = model;
             [self.navigationController pushViewController:videoGame animated:YES];
         }
             break;
