@@ -311,10 +311,13 @@
                     };
                     cell.clickEventBlock = ^(id  _Nonnull value) {
                         strongSelf(strongSelf);
+                        if (!strongSelf.poster) {
+                            return;
+                        }
                         BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
                         vc.webConfigModel.newView = YES;
                         vc.webConfigModel.theme = @"outside";
-                        vc.webConfigModel.url = @"common/about.htm";
+                        vc.webConfigModel.url = self.poster.link;
                         [strongSelf.navigationController pushViewController:vc animated:YES];
                     };
                     return cell;
@@ -364,10 +367,13 @@
                     };
                     cell.clickEventBlock = ^(id  _Nonnull value) {
                         strongSelf(strongSelf);
+                        if (!strongSelf.poster) {
+                            return;
+                        }
                         BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
                         vc.webConfigModel.newView = YES;
                         vc.webConfigModel.theme = @"outside";
-                        vc.webConfigModel.url = @"common/about.htm";
+                        vc.webConfigModel.url = self.poster.link;
                         [strongSelf.navigationController pushViewController:vc animated:YES];
                     };
                     return cell;
@@ -464,6 +470,32 @@
                     if (self.isShowFooter) {
                         if (indexPath.row == self.games.count + 3) {
                             BTTVideoGamesFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesFooterCell" forIndexPath:indexPath];
+                            weakSelf(weakSelf);
+                            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                                strongSelf(strongSelf);
+                                BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
+                                vc.webConfigModel.newView = YES;
+                                vc.webConfigModel.theme = @"inside";
+                                if (button.tag == 1110) {
+                                    vc.webConfigModel.url = @"common/license.htm";
+                                } else if (button.tag == 1111) {
+                                    vc.webConfigModel.url = @"common/newbie_guide.htm";
+                                } else {
+                                    vc.webConfigModel.url = @"common/about.htm";
+                                }
+                                [strongSelf.navigationController pushViewController:vc animated:YES];
+                            };
+                            cell.clickEventBlock = ^(id  _Nonnull value) {
+                                strongSelf(strongSelf);
+                                if (!strongSelf.poster) {
+                                    return;
+                                }
+                                BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
+                                vc.webConfigModel.newView = YES;
+                                vc.webConfigModel.theme = @"outside";
+                                vc.webConfigModel.url = self.poster.link;
+                                [strongSelf.navigationController pushViewController:vc animated:YES];
+                            };
                             return cell;
                         } else {
                             BTTVideoGameModel *model = self.games.count ? self.games[indexPath.row - 4] : nil;
@@ -534,10 +566,13 @@
                         };
                         cell.clickEventBlock = ^(id  _Nonnull value) {
                             strongSelf(strongSelf);
+                            if (!strongSelf.poster) {
+                                return;
+                            }
                             BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
                             vc.webConfigModel.newView = YES;
                             vc.webConfigModel.theme = @"outside";
-                            vc.webConfigModel.url = @"common/about.htm";
+                            vc.webConfigModel.url = self.poster.link;
                             [strongSelf.navigationController pushViewController:vc animated:YES];
                         };
                         return cell;
@@ -632,6 +667,32 @@
                     if (self.isShowFooter) {
                         if (indexPath.row == self.games.count + 2) {
                             BTTVideoGamesFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesFooterCell" forIndexPath:indexPath];
+                            weakSelf(weakSelf);
+                            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                                strongSelf(strongSelf);
+                                BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
+                                vc.webConfigModel.newView = YES;
+                                vc.webConfigModel.theme = @"inside";
+                                if (button.tag == 1110) {
+                                    vc.webConfigModel.url = @"common/license.htm";
+                                } else if (button.tag == 1111) {
+                                    vc.webConfigModel.url = @"common/newbie_guide.htm";
+                                } else {
+                                    vc.webConfigModel.url = @"common/about.htm";
+                                }
+                                [strongSelf.navigationController pushViewController:vc animated:YES];
+                            };
+                            cell.clickEventBlock = ^(id  _Nonnull value) {
+                                strongSelf(strongSelf);
+                                if (!strongSelf.poster) {
+                                    return;
+                                }
+                                BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
+                                vc.webConfigModel.newView = YES;
+                                vc.webConfigModel.theme = @"outside";
+                                vc.webConfigModel.url = self.poster.link;
+                                [strongSelf.navigationController pushViewController:vc animated:YES];
+                            };
                             return cell;
                         } else {
                             BTTVideoGameModel *model = self.games.count ? self.games[indexPath.row - 3] : nil;
@@ -701,10 +762,13 @@
                         };
                         cell.clickEventBlock = ^(id  _Nonnull value) {
                             strongSelf(strongSelf);
+                            if (!strongSelf.poster) {
+                                return;
+                            }
                             BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
                             vc.webConfigModel.newView = YES;
                             vc.webConfigModel.theme = @"outside";
-                            vc.webConfigModel.url = @"common/about.htm";
+                            vc.webConfigModel.url = self.poster.link;
                             [strongSelf.navigationController pushViewController:vc animated:YES];
                         };
                         return cell;

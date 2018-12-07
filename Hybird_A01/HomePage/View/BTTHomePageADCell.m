@@ -10,11 +10,18 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "BTTPosterModel.h"
 
+#define BTTImageDefaultWidth  390
+#define BTTImageDefaultHeight 45
+
 @interface BTTHomePageADCell ()
 
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeight;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageWidth;
 
 @end
 
@@ -24,6 +31,9 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.backgroundColor = [UIColor colorWithHexString:@"212229"];
+    self.imageWidth.constant = SCREEN_WIDTH - 45;
+    self.imageHeight.constant =   (SCREEN_WIDTH - 45) / BTTImageDefaultWidth * BTTImageDefaultHeight;
+  
 }
 
 - (IBAction)closeBtnClick:(id)sender {
