@@ -14,6 +14,13 @@
     return @{@"logo":[BTTPosterLogoModel class]};
 }
 
+- (NSString *)link {
+    if (![_link hasPrefix:@"http"]) {
+        return [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain], _link];
+    }
+    return _link;
+}
+
 @end
 
 @implementation BTTPosterLogoModel
