@@ -258,15 +258,15 @@
             if (successStr) {
                 [MBProgressHUD showSuccess:successStr toView:nil];
             }
-            if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
-                NSString *email = result.data[@"val"];
-                [IVNetwork updateUserInfo:@{@"email" : email}];
-                [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
-            }
             switch (self.codeType) {
                 case BTTSafeVerifyTypeBindEmail:
                 case BTTSafeVerifyTypeChangeEmail:
                 {
+                    if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
+                        NSString *email = result.data[@"val"];
+                        [IVNetwork updateUserInfo:@{@"email" : email}];
+                        [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
+                    }
                     BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
                     vc.mobileCodeType = self.codeType;
                     [weakSelf.navigationController pushViewController:vc animated:YES];
