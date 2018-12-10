@@ -169,9 +169,13 @@
             weakSelf(weakSelf);
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 BTTDownloadModel *model = value;
+                if (!model.iosLink.length) {
+                    [MBProgressHUD showError:@"抱歉, 该游戏不支持苹果手机, 请使用安卓系统手机下载就可以了" toView:nil];
+                    return;
+                }
                 strongSelf(strongSelf);
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-                vc.webConfigModel.url = model.iosLink.length ? model.iosLink : model.androidLink;
+                vc.webConfigModel.url = model.iosLink;
                 vc.webConfigModel.newView = YES;
                 vc.webConfigModel.theme = @"outside";
                 [strongSelf.navigationController pushViewController:vc animated:YES];
@@ -271,6 +275,10 @@
             weakSelf(weakSelf);
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 BTTDownloadModel *model = value;
+                if (!model.iosLink.length) {
+                    [MBProgressHUD showError:@"抱歉, 该游戏不支持苹果手机, 请使用安卓系统手机下载就可以了" toView:nil];
+                    return;
+                }
                 strongSelf(strongSelf);
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
                 vc.webConfigModel.url = model.iosLink.length ? model.iosLink : model.androidLink;
