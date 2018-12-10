@@ -21,6 +21,7 @@
 #import "BTTLoginOrRegisterViewController.h"
 #import "BTTAGQJViewController.h"
 #import "BTTAGGJViewController.h"
+#import "BTTGamesTryAlertView.h"
 
 @interface BTTVideoGamesListController ()<BTTElementsFlowLayoutDelegate,UISearchBarDelegate>
 
@@ -840,7 +841,6 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     NSLog(@"%zd", indexPath.item);
-    IVGameModel *model = [[IVGameModel alloc] init];
     if (self.isFavorite) {
         if (self.favorites.count > 1) {
             if (indexPath.row >= 3) {
@@ -848,13 +848,7 @@
                 if (!gameModel.gameid.length) {
                     return;
                 }
-                model.cnName = gameModel.cnName;
-                model.enName = gameModel.engName;
-                model.provider = gameModel.provider;
-                model.gameId = gameModel.gameid;
-                model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
-                model.gameStyle = gameModel.gameStyle;
-                [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+                [self showTryAlertViewWithGameModel:gameModel];
             }
         }
     } else {
@@ -864,13 +858,7 @@
                 if (!gameModel.gameid.length) {
                     return;
                 }
-                model.cnName = gameModel.cnName;
-                model.enName = gameModel.engName;
-                model.provider = gameModel.provider;
-                model.gameId = gameModel.gameid;
-                model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
-                model.gameStyle = gameModel.gameStyle;
-                [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+                [self showTryAlertViewWithGameModel:gameModel];
             }
         } else {
             if (indexPath.row >= 3 && self.games.count > 1) {
@@ -878,16 +866,43 @@
                 if (!gameModel.gameid.length) {
                     return;
                 }
-                model.cnName = gameModel.cnName;
-                model.enName = gameModel.engName;
-                model.provider = gameModel.provider;
-                model.gameId = gameModel.gameid;
-                model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
-                model.gameStyle = gameModel.gameStyle;
-                [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+                [self showTryAlertViewWithGameModel:gameModel];
             }
         }
     }
+}
+
+- (void)showTryAlertViewWithGameModel:(BTTVideoGameModel *)gameModel {
+    BTTGamesTryAlertView *customView = [BTTGamesTryAlertView viewFromXib];
+    if (SCREEN_WIDTH == 414) {
+        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 120, 132);
+    } else {
+        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 60, 132);
+    }
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    weakSelf(weakSelf);
+    customView.btnBlock = ^(UIButton *btn) {
+        [popView dismiss];
+        strongSelf(strongSelf);
+        if (btn.tag == 1090) {
+            IVGameModel *model = [[IVGameModel alloc] init];
+            model.cnName = gameModel.cnName;
+            model.enName = gameModel.engName;
+            model.provider = gameModel.provider;
+            model.gameId = gameModel.gameid;
+            model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
+            model.gameStyle = gameModel.gameStyle;
+            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:strongSelf];
+        } else {
+            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+            [strongSelf.navigationController pushViewController:vc animated:YES];
+        }
+    };
 }
 
 
