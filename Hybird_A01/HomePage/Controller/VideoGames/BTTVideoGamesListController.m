@@ -848,7 +848,11 @@
                 if (!gameModel.gameid.length) {
                     return;
                 }
-                [self showTryAlertViewWithGameModel:gameModel];
+                if ([IVNetwork userInfo]) {
+                    [self enterVideoGameWithGameModel:gameModel];
+                } else {
+                    [self showTryAlertViewWithGameModel:gameModel];
+                }
             }
         }
     } else {
@@ -858,7 +862,11 @@
                 if (!gameModel.gameid.length) {
                     return;
                 }
-                [self showTryAlertViewWithGameModel:gameModel];
+                if ([IVNetwork userInfo]) {
+                    [self enterVideoGameWithGameModel:gameModel];
+                } else {
+                    [self showTryAlertViewWithGameModel:gameModel];
+                }
             }
         } else {
             if (indexPath.row >= 3 && self.games.count > 1) {
@@ -866,10 +874,25 @@
                 if (!gameModel.gameid.length) {
                     return;
                 }
-                [self showTryAlertViewWithGameModel:gameModel];
+                if ([IVNetwork userInfo]) {
+                    [self enterVideoGameWithGameModel:gameModel];
+                } else {
+                    [self showTryAlertViewWithGameModel:gameModel];
+                }
             }
         }
     }
+}
+
+- (void)enterVideoGameWithGameModel:(BTTVideoGameModel *)gameModel {
+    IVGameModel *model = [[IVGameModel alloc] init];
+    model.cnName = gameModel.cnName;
+    model.enName = gameModel.engName;
+    model.provider = gameModel.provider;
+    model.gameId = gameModel.gameid;
+    model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
+    model.gameStyle = gameModel.gameStyle;
+    [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
 }
 
 - (void)showTryAlertViewWithGameModel:(BTTVideoGameModel *)gameModel {
