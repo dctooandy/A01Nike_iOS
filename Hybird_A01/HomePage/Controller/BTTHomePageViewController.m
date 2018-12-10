@@ -204,10 +204,10 @@
         } else if (indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9) {
             BTTHomePageDiscountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountCell" forIndexPath:indexPath];
             BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 7] : nil;
-            if (indexPath.row == 7) {
-                cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
-            } else {
+            if (indexPath.row == 9) {
                 cell.mineSparaterType = BTTMineSparaterTypeNone;
+            } else {
+                cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
             }
             cell.model = model;
             return cell;
@@ -310,10 +310,10 @@
         } else if (indexPath.row == 7 || indexPath.row == 6 || indexPath.row == 8) {
             BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 6] : nil;
             BTTHomePageDiscountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountCell" forIndexPath:indexPath];
-            if (indexPath.row == 6) {
-                cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
-            } else {
+            if (indexPath.row == 8) {
                 cell.mineSparaterType = BTTMineSparaterTypeNone;
+            } else {
+                cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
             }
             cell.model = model;
             return cell;
