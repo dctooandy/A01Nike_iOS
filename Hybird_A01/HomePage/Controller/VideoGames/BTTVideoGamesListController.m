@@ -199,33 +199,7 @@
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTBannerModel *model = strongSelf.banners[[value integerValue]];
-                if ([model.action.detail hasSuffix:@".htm"] ) {
-                    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-                    vc.webConfigModel.url = model.action.detail;
-                    vc.webConfigModel.newView = YES;
-                    vc.webConfigModel.theme = @"outside";
-                    [strongSelf.navigationController pushViewController:vc animated:YES];
-                } else {
-                    NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
-                    NSString *gameid = arr[2];
-                    NSLog(@"%@",gameid);
-                    UIViewController *vc = nil;
-                    if ([gameid isEqualToString:@"A01003"]) {
-                        vc = [BTTAGQJViewController new];
-                        [strongSelf.navigationController pushViewController:vc animated:YES];
-                    } else if ([gameid isEqualToString:@"A01026"]) {
-                        vc = [BTTAGGJViewController new];
-                        [strongSelf.navigationController pushViewController:vc animated:YES];
-                    } else {
-                        IVGameModel *model = [[IVGameModel alloc] init];
-                        model.cnName =  kFishCnName;
-                        model.enName =  kFishEnName;
-                        model.provider = kAGINProvider;
-                        model.gameId = model.gameCode;
-                        model.gameType = kFishType;
-                        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:strongSelf];
-                    }
-                }
+                [strongSelf bannerToGame:model];
             };
             cell.imageUrls = self.imageUrls;
             return cell;
@@ -234,46 +208,7 @@
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
-                if (button.tag != 1073) {
-                    strongSelf.isFavorite = NO;
-                    if (strongSelf.games.count % strongSelf.limit) {
-                        strongSelf.isShowFooter = YES;
-                    } else {
-                        strongSelf.isShowFooter = NO;
-                    }
-                    strongSelf.isShowSearchBar = NO;
-                    UIButton *collectBtn = (UIButton *)[cell viewWithTag:1073];
-                    collectBtn.selected = NO;
-                    [strongSelf setupElements];
-                    [strongSelf selectControlWithButton:button selectValueBlock:^(NSString *value) {
-                        [button setTitle:value forState:UIControlStateNormal];
-                    }];
-                } else {
-                    if (![IVNetwork userInfo]) {
-                        [MBProgressHUD showError:@"请先登录" toView:nil];
-                        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
-                        [strongSelf.navigationController pushViewController:vc animated:YES];
-                        return;
-                    }
-                    strongSelf.isShowSearchBar = NO;
-                    button.selected = !button.selected;
-                    if (button.selected) {
-                        strongSelf.isShowFooter = button.selected;
-                    } else {
-                        if (strongSelf.games.count % strongSelf.limit) {
-                            strongSelf.isShowFooter = YES;
-                        } else {
-                            strongSelf.isShowFooter = NO;
-                        }
-                    }
-                    if (button.selected) {
-                        [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-                    } else {
-                        [strongSelf.collectionView.mj_footer resetNoMoreData];
-                    }
-                    strongSelf.isFavorite = button.selected;
-                    [strongSelf setupElements];
-                }
+                [strongSelf flterCellBtn:button cell:cell];
             };
             return cell;
         } else if (indexPath.row == 2) {
@@ -298,17 +233,7 @@
                     weakSelf(weakSelf);
                     cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                         strongSelf(strongSelf);
-                        BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
-                        vc.webConfigModel.newView = YES;
-                        vc.webConfigModel.theme = @"inside";
-                        if (button.tag == 1110) {
-                            vc.webConfigModel.url = @"common/license.htm";
-                        } else if (button.tag == 1111) {
-                            vc.webConfigModel.url = @"common/newbie_guide.htm";
-                        } else {
-                            vc.webConfigModel.url = @"common/about.htm";
-                        }
-                        [strongSelf.navigationController pushViewController:vc animated:YES];
+                        [strongSelf footerCellBtn:button];
                     };
                     cell.clickEventBlock = ^(id  _Nonnull value) {
                         strongSelf(strongSelf);
@@ -354,17 +279,7 @@
                     weakSelf(weakSelf);
                     cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                         strongSelf(strongSelf);
-                        BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
-                        vc.webConfigModel.newView = YES;
-                        vc.webConfigModel.theme = @"inside";
-                        if (button.tag == 1110) {
-                            vc.webConfigModel.url = @"common/license.htm";
-                        } else if (button.tag == 1111) {
-                            vc.webConfigModel.url = @"common/newbie_guide.htm";
-                        } else {
-                            vc.webConfigModel.url = @"common/about.htm";
-                        }
-                        [strongSelf.navigationController pushViewController:vc animated:YES];
+                        [strongSelf footerCellBtn:button];
                     };
                     cell.clickEventBlock = ^(id  _Nonnull value) {
                         strongSelf(strongSelf);
@@ -396,11 +311,7 @@
                 cell.clickEventBlock = ^(id  _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTBannerModel *model = strongSelf.banners[[value integerValue]];
-                    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-                    vc.webConfigModel.url = model.action.detail;
-                    vc.webConfigModel.newView = YES;
-                    vc.webConfigModel.theme = @"outside";
-                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                   [strongSelf bannerToGame:model];
                 };
                 cell.imageUrls = self.imageUrls;
                 return cell;
@@ -409,46 +320,7 @@
                 weakSelf(weakSelf);
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                     strongSelf(strongSelf);
-                    if (button.tag != 1073) {
-                        UIButton *collectBtn = (UIButton *)[cell viewWithTag:1073];
-                        collectBtn.selected = NO;
-                        strongSelf.isFavorite = NO;
-                        if (strongSelf.games.count % strongSelf.limit) {
-                            strongSelf.isShowFooter = YES;
-                        } else {
-                            strongSelf.isShowFooter = NO;
-                        }
-                        strongSelf.isShowSearchBar = NO;
-                        [strongSelf setupElements];
-                        [strongSelf selectControlWithButton:button selectValueBlock:^(NSString *value) {
-                            [button setTitle:value forState:UIControlStateNormal];
-                        }];
-                    } else {
-                        if (![IVNetwork userInfo]) {
-                            [MBProgressHUD showError:@"请先登录" toView:nil];
-                            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
-                            [strongSelf.navigationController pushViewController:vc animated:YES];
-                            return;
-                        }
-                        strongSelf.isShowSearchBar = NO;
-                        button.selected = !button.selected;
-                        if (button.selected) {
-                            strongSelf.isShowFooter = button.selected;
-                        } else {
-                            if (strongSelf.games.count % strongSelf.limit) {
-                                strongSelf.isShowFooter = YES;
-                            } else {
-                                strongSelf.isShowFooter = NO;
-                            }
-                        }
-                        if (button.selected) {
-                            [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-                        } else {
-                            [strongSelf.collectionView.mj_footer resetNoMoreData];
-                        }
-                        strongSelf.isFavorite = button.selected;
-                        [strongSelf setupElements];
-                    }
+                    [strongSelf flterCellBtn:button cell:cell];
                 };
                 return cell;
             } else if (indexPath.row == 3) {
@@ -474,17 +346,7 @@
                             weakSelf(weakSelf);
                             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                                 strongSelf(strongSelf);
-                                BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
-                                vc.webConfigModel.newView = YES;
-                                vc.webConfigModel.theme = @"inside";
-                                if (button.tag == 1110) {
-                                    vc.webConfigModel.url = @"common/license.htm";
-                                } else if (button.tag == 1111) {
-                                    vc.webConfigModel.url = @"common/newbie_guide.htm";
-                                } else {
-                                    vc.webConfigModel.url = @"common/about.htm";
-                                }
-                                [strongSelf.navigationController pushViewController:vc animated:YES];
+                                [strongSelf footerCellBtn:button];
                             };
                             cell.clickEventBlock = ^(id  _Nonnull value) {
                                 strongSelf(strongSelf);
@@ -553,17 +415,7 @@
                         weakSelf(weakSelf);
                         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                             strongSelf(strongSelf);
-                            BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
-                            vc.webConfigModel.newView = YES;
-                            vc.webConfigModel.theme = @"inside";
-                            if (button.tag == 1110) {
-                                vc.webConfigModel.url = @"common/license.htm";
-                            } else if (button.tag == 1111) {
-                                vc.webConfigModel.url = @"common/newbie_guide.htm";
-                            } else {
-                                vc.webConfigModel.url = @"common/about.htm";
-                            }
-                            [strongSelf.navigationController pushViewController:vc animated:YES];
+                            [strongSelf footerCellBtn:button];
                         };
                         cell.clickEventBlock = ^(id  _Nonnull value) {
                             strongSelf(strongSelf);
@@ -591,11 +443,7 @@
                 cell.clickEventBlock = ^(id  _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTBannerModel *model = strongSelf.banners[[value integerValue]];
-                    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-                    vc.webConfigModel.url = model.action.detail;
-                    vc.webConfigModel.newView = YES;
-                    vc.webConfigModel.theme = @"outside";
-                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                    [strongSelf bannerToGame:model];
                 };
                 cell.imageUrls = self.imageUrls;
                 return cell;
@@ -604,48 +452,7 @@
                 weakSelf(weakSelf);
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                     strongSelf(strongSelf);
-                    
-                    if (button.tag != 1073) {
-                        UIButton *collectBtn = (UIButton *)[cell viewWithTag:1073];
-                        collectBtn.selected = NO;
-                        strongSelf.isFavorite = NO;
-                        if (strongSelf.games.count % strongSelf.limit) {
-                            strongSelf.isShowFooter = YES;
-                        } else {
-                            strongSelf.isShowFooter = NO;
-                        }
-                        strongSelf.isShowSearchBar = NO;
-                        [strongSelf setupElements];
-                        [strongSelf selectControlWithButton:button selectValueBlock:^(NSString *value) {
-                            [button setTitle:value forState:UIControlStateNormal];
-                        }];
-                    } else {
-                        if (![IVNetwork userInfo]) {
-                            [MBProgressHUD showError:@"请先登录" toView:nil];
-                            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
-                            [strongSelf.navigationController pushViewController:vc animated:YES];
-                            return;
-                        }
-                        strongSelf.isShowSearchBar = NO;
-                        button.selected = !button.selected;
-                        if (button.selected) {
-                            strongSelf.isShowFooter = button.selected;
-                        } else {
-                            if (strongSelf.games.count % strongSelf.limit) {
-                                strongSelf.isShowFooter = YES;
-                            } else {
-                                strongSelf.isShowFooter = NO;
-                            }
-                        }
-                        
-                        if (button.selected) {
-                            [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-                        } else {
-                            [strongSelf.collectionView.mj_footer resetNoMoreData];
-                        }
-                        strongSelf.isFavorite = button.selected;
-                        [strongSelf setupElements];
-                    }
+                    [strongSelf flterCellBtn:button cell:cell];
                 };
                 return cell;
             } else if (indexPath.row == 2) {
@@ -671,17 +478,7 @@
                             weakSelf(weakSelf);
                             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                                 strongSelf(strongSelf);
-                                BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
-                                vc.webConfigModel.newView = YES;
-                                vc.webConfigModel.theme = @"inside";
-                                if (button.tag == 1110) {
-                                    vc.webConfigModel.url = @"common/license.htm";
-                                } else if (button.tag == 1111) {
-                                    vc.webConfigModel.url = @"common/newbie_guide.htm";
-                                } else {
-                                    vc.webConfigModel.url = @"common/about.htm";
-                                }
-                                [strongSelf.navigationController pushViewController:vc animated:YES];
+                                [strongSelf footerCellBtn:button];
                             };
                             cell.clickEventBlock = ^(id  _Nonnull value) {
                                 strongSelf(strongSelf);
@@ -749,17 +546,7 @@
                         weakSelf(weakSelf);
                         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                             strongSelf(strongSelf);
-                            BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
-                            vc.webConfigModel.newView = YES;
-                            vc.webConfigModel.theme = @"inside";
-                            if (button.tag == 1110) {
-                                vc.webConfigModel.url = @"common/license.htm";
-                            } else if (button.tag == 1111) {
-                                vc.webConfigModel.url = @"common/newbie_guide.htm";
-                            } else {
-                                vc.webConfigModel.url = @"common/about.htm";
-                            }
-                            [strongSelf.navigationController pushViewController:vc animated:YES];
+                            [strongSelf footerCellBtn:button];
                         };
                         cell.clickEventBlock = ^(id  _Nonnull value) {
                             strongSelf(strongSelf);
@@ -884,6 +671,95 @@
     }
 }
 
+- (void)bannerToGame:(BTTBannerModel *)model {
+    if ([model.action.detail hasSuffix:@".htm"] ) {
+        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+        vc.webConfigModel.url = model.action.detail;
+        vc.webConfigModel.newView = YES;
+        vc.webConfigModel.theme = @"outside";
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
+        NSString *gameid = arr[2];
+        NSLog(@"%@",gameid);
+        UIViewController *vc = nil;
+        if ([gameid isEqualToString:@"A01003"]) {
+            vc = [BTTAGQJViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if ([gameid isEqualToString:@"A01026"]) {
+            vc = [BTTAGGJViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            IVGameModel *model = [[IVGameModel alloc] init];
+            model.cnName =  kFishCnName;
+            model.enName =  kFishEnName;
+            model.provider = kAGINProvider;
+            model.gameId = model.gameCode;
+            model.gameType = kFishType;
+            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+        }
+    }
+}
+
+- (void)footerCellBtn:(UIButton *)button {
+    BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
+    vc.webConfigModel.newView = YES;
+    vc.webConfigModel.theme = @"inside";
+    if (button.tag == 1110) {
+        vc.webConfigModel.url = @"common/license.htm";
+    } else if (button.tag == 1111) {
+        vc.webConfigModel.url = @"common/newbie_guide.htm";
+    } else {
+        vc.webConfigModel.url = @"common/about.htm";
+    }
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)flterCellBtn:(UIButton *)button cell:(BTTVideoGamesFilterCell *)cell {
+    if (button.tag != 1073) {
+        UIButton *collectBtn = (UIButton *)[cell viewWithTag:1073];
+        collectBtn.selected = NO;
+        self.isFavorite = NO;
+        if (self.games.count % self.limit) {
+            self.isShowFooter = YES;
+        } else {
+            self.isShowFooter = NO;
+        }
+        self.isShowSearchBar = NO;
+        [self setupElements];
+        [self selectControlWithButton:button selectValueBlock:^(NSString *value) {
+            [button setTitle:value forState:UIControlStateNormal];
+        }];
+    } else {
+        if (![IVNetwork userInfo]) {
+            [MBProgressHUD showError:@"请先登录" toView:nil];
+            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            return;
+        }
+        self.isShowSearchBar = NO;
+        button.selected = !button.selected;
+        if (button.selected) {
+            self.isShowFooter = button.selected;
+        } else {
+            if (self.games.count % self.limit) {
+                self.isShowFooter = YES;
+            } else {
+                self.isShowFooter = NO;
+            }
+        }
+        
+        if (button.selected) {
+            [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+        } else {
+            [self.collectionView.mj_footer resetNoMoreData];
+        }
+        self.isFavorite = button.selected;
+        [self setupElements];
+    }
+}
+
+// 直接进入游戏
 - (void)enterVideoGameWithGameModel:(BTTVideoGameModel *)gameModel {
     IVGameModel *model = [[IVGameModel alloc] init];
     model.cnName = gameModel.cnName;
@@ -894,7 +770,7 @@
     model.gameStyle = gameModel.gameStyle;
     [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
 }
-
+// 试玩进入游戏
 - (void)showTryAlertViewWithGameModel:(BTTVideoGameModel *)gameModel {
     BTTGamesTryAlertView *customView = [BTTGamesTryAlertView viewFromXib];
     if (SCREEN_WIDTH == 414) {
