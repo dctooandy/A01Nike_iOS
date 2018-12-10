@@ -33,6 +33,7 @@
 #import "BTTLoginOrRegisterViewController.h"
 #import "BTTHomePageFooterCell.h"
 #import "BTTHomePageHeaderModel.h"
+#import "BTTLuckyWheelCoinView.h"
 
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
@@ -55,7 +56,6 @@
     } else {
         self.isLogin = NO;
     }
-    
     [self setupNav];
     [self setupCollectionView];
     [self setupElements];
@@ -67,7 +67,6 @@
     }];
     [self loadDataOfHomePage];
     [self registerNotification];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -88,6 +87,13 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork userInfo]) {
         [BTTHttpManager requestUnReadMessageNum:nil];
+        NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
+        if (![NSDate isToday:timestamp]) {
+            [self loadLuckyWheelCoinStatus];
+            NSString *timestamp = [NSString stringWithFormat:@"%@",@([[NSDate date] timeIntervalSince1970] * 1000)];
+            [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
     }
 }
 
@@ -485,7 +491,7 @@
 }
 
 - (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
-    return UIEdgeInsetsMake(0, 0, KIsiPhoneX ? 83 : 79, 0);
+    return UIEdgeInsetsMake(0, 0, KIsiPhoneX ? 63 : 59, 0);
 }
 
 /**
@@ -540,7 +546,7 @@
             } else if (i == 15) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 295)]];
             } else if (i == 16) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
+                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 60)]];
             }
             else {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
@@ -570,7 +576,7 @@
             } else if (i == 14) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 295)]];
             } else if (i == 15) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
+                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 60)]];
             }
             else {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];

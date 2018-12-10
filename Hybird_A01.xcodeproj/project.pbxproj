@@ -92,6 +92,8 @@
 		3A5F7AB021ACF5DB00128E8B /* BTTVideoGamesListController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AAE21ACF5DA00128E8B /* BTTVideoGamesListController+LoadData.m */; };
 		3A5F7AB521AD0E6800128E8B /* BTTVideoGamesFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AB321AD0E6800128E8B /* BTTVideoGamesFilterCell.m */; };
 		3A5F7AB621AD0E6800128E8B /* BTTVideoGamesFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7AB421AD0E6800128E8B /* BTTVideoGamesFilterCell.xib */; };
+		3A7A1A6621BDF21100572B50 /* BTTLuckyWheelCoinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6521BDF21100572B50 /* BTTLuckyWheelCoinView.m */; };
+		3A7A1A6821BDF21F00572B50 /* BTTLuckyWheelCoinView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6721BDF21F00572B50 /* BTTLuckyWheelCoinView.xib */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -794,6 +796,9 @@
 		3A5F7AB221AD0E6800128E8B /* BTTVideoGamesFilterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGamesFilterCell.h; sourceTree = "<group>"; };
 		3A5F7AB321AD0E6800128E8B /* BTTVideoGamesFilterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGamesFilterCell.m; sourceTree = "<group>"; };
 		3A5F7AB421AD0E6800128E8B /* BTTVideoGamesFilterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGamesFilterCell.xib; sourceTree = "<group>"; };
+		3A7A1A6421BDF21100572B50 /* BTTLuckyWheelCoinView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLuckyWheelCoinView.h; sourceTree = "<group>"; };
+		3A7A1A6521BDF21100572B50 /* BTTLuckyWheelCoinView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLuckyWheelCoinView.m; sourceTree = "<group>"; };
+		3A7A1A6721BDF21F00572B50 /* BTTLuckyWheelCoinView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTLuckyWheelCoinView.xib; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -1895,20 +1900,6 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		3A37E11B2164A21900FB13A1 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		3A37E11C2164A21900FB13A1 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		3A37E11D2164A21900FB13A1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -2008,6 +1999,16 @@
 				3AF1B81821AF994A00BF8C3A /* BTTVideoGamesFooterCell.xib */,
 			);
 			path = VideoGames;
+			sourceTree = "<group>";
+		};
+		3A7A1A6321BDF1D800572B50 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3A7A1A6421BDF21100572B50 /* BTTLuckyWheelCoinView.h */,
+				3A7A1A6521BDF21100572B50 /* BTTLuckyWheelCoinView.m */,
+				3A7A1A6721BDF21F00572B50 /* BTTLuckyWheelCoinView.xib */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		3A8D6E812163077C000530DF /* DataBaseManager */ = {
@@ -2133,8 +2134,7 @@
 			isa = PBXGroup;
 			children = (
 				3A37E11D2164A21900FB13A1 /* Controller */,
-				3A37E11B2164A21900FB13A1 /* Model */,
-				3A37E11C2164A21900FB13A1 /* View */,
+				3A7A1A6321BDF1D800572B50 /* View */,
 			);
 			path = LuckyWheel;
 			sourceTree = "<group>";
@@ -3805,6 +3805,7 @@
 				EAE89EF8218C3ABD00C29393 /* nav_link_close@2x.png in Resources */,
 				EAE89EEB218C3ABD00C29393 /* LIVVideoMessage_PlayButtonIcon@3x.png in Resources */,
 				EAE89F0F218C3ABD00C29393 /* sentVoicePlaying3@3x.png in Resources */,
+				3A7A1A6821BDF21F00572B50 /* BTTLuckyWheelCoinView.xib in Resources */,
 				EAE89F37218C3ABD00C29393 /* TZAlbumCell.nib in Resources */,
 				EAE89F1A218C3ABD00C29393 /* LIVChatFunctionBar.nib in Resources */,
 				3AD9CF77216F3F6300685B43 /* BTTAppCollectionViewCell.xib in Resources */,
@@ -4027,7 +4028,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
@@ -4038,7 +4039,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -4182,6 +4183,7 @@
 				3A9E4C7121A2559800E7D8C0 /* BTTChangeMobileController+LoadData.m in Sources */,
 				3A929412219BBD4F00764E7E /* BTTLoginAPIModel.m in Sources */,
 				3A92940C219BBCCD00764E7E /* BTTLoginOrRegisterViewController+API.m in Sources */,
+				3A7A1A6621BDF21100572B50 /* BTTLuckyWheelCoinView.m in Sources */,
 				3AD9CF44216EDCE300685B43 /* BTTBaseCollectionViewCell.m in Sources */,
 				D5DBEB2621ABB774008AF629 /* CNPaymentModel.m in Sources */,
 				3AB0687621A5621500072FB7 /* BTTXimaController+LoadData.m in Sources */,

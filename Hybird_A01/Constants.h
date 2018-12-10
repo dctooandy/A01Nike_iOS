@@ -144,6 +144,8 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTCacheAccountName   @"BTTCacheAccountName"
 
+#define BTTCoinTimestamp       @"BTTCoinTimestamp"
+
 
 /*********************************************API********************************************************/
 
@@ -275,11 +277,11 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTCancelFavorites           @"/public/game/cancelFavorites"
 
-// 钻石币数量查询
-#define BTTQueryIntegralAPI          @"/event/luckyWheel/queryIntegral"
+// 搏币数量查询
+#define BTTQueryIntegralAPI          @"/A01/luckyWheel/queryIntegral"
 
-// 钻石币兑换
-#define BTTCoinDepositAPI            @"/event/luckyWheel/deposit"
+// 搏币兑换
+#define BTTCoinDepositAPI            @"/A01/luckyWheel/deposit"
 
 // 请求未读消息的数量
 #define BTTIsUnviewedAPI             @"/public/letter/isUnviewed"

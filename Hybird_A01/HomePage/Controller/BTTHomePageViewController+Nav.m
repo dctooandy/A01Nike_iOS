@@ -18,6 +18,7 @@
 #import "BTTMakeCallNoLoginView.h"
 #import "BTTHomePageViewController+LoadData.h"
 #import "BTTMakeCallLoginView.h"
+#import "BTTLuckyWheelCoinView.h"
 
 
 static const char *BTTHeaderViewKey = "headerView";
@@ -218,6 +219,21 @@ static const char *BTTHeaderViewKey = "headerView";
         NSLog(@"VOIP注册失败");
         [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
     }
+}
+
+- (void)showPopView {
+    BTTLuckyWheelCoinView *customView = [BTTLuckyWheelCoinView viewFromXib];
+    customView.frame = CGRectMake(0, 0, 313, 255);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    weakSelf(weakSelf);
+    customView.btnBlock = ^(UIButton *btn) {
+        strongSelf(strongSelf);
+    };
 }
 
 

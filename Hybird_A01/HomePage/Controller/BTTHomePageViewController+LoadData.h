@@ -13,7 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BTTHomePageViewController (LoadData)
 
 
-
 @property (nonatomic, copy) NSString *noticeStr;
 
 @property (nonatomic, strong) NSMutableArray *headers;
@@ -45,6 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)refreshDatasOfHomePage;
 
 - (void)showTryAlertViewWithBlock:(BTTBtnBlock)btnClickBlock;
+
+// 查新博币数量
+- (void)loadLuckyWheelCoinStatus;
 
 @end
 

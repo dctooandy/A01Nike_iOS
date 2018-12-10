@@ -19,6 +19,7 @@
 #import "BTTDownloadModel.h"
 #import "BTTAGGJViewController.h"
 #import "BTTGamesTryAlertView.h"
+#import "BTTHomePageViewController+Nav.h"
 
 static const char *noticeStrKey = "noticeStr";
 
@@ -76,6 +77,27 @@ static const char *BTTNextGroupKey = "nextGroup";
      
     });
 }
+
+// 博币数量查询
+- (void)loadLuckyWheelCoinStatus {
+    [IVNetwork sendRequestWithSubURL:BTTQueryIntegralAPI paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+        if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {
+            if ([result.data[@"amount"] integerValue]) {
+                [self showPopView];
+            }
+        }
+    }];
+}
+
+// 博币兑现
+
+- (void)loadLuckyWheelCoinChange {
+    [IVNetwork sendRequestWithSubURL:BTTCoinDepositAPI paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+    }];
+}
+
 
 - (void)loadScrollText:(dispatch_group_t)group {
     [IVNetwork sendUseCacheRequestWithSubURL:@"app/getAnnouments" paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
