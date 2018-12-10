@@ -68,7 +68,7 @@
             
             [GJRedDot registNodeWithKey:BTTHomePageMessage
                               parentKey:BTTHomePageItemsKey
-                            defaultShow:YES];
+                            defaultShow:NO];
             [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
                 messageBtn.showRedDot = show;
             } handler:self];
@@ -114,7 +114,7 @@
             
             [GJRedDot registNodeWithKey:BTTHomePageMessage
                               parentKey:BTTHomePageItemsKey
-                            defaultShow:YES];
+                            defaultShow:NO];
             [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
                 messageBtn.showRedDot = show;
             } handler:self];
