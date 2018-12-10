@@ -19,6 +19,10 @@
 #import "BTTHomePageViewController+LoadData.h"
 #import "BTTMakeCallLoginView.h"
 #import "BTTLuckyWheelCoinView.h"
+#import "BTTBannerModel.h"
+#import "BTTPromotionDetailController.h"
+#import "BTTAGQJViewController.h"
+#import "BTTAGGJViewController.h"
 
 
 static const char *BTTHeaderViewKey = "headerView";
@@ -233,7 +237,38 @@ static const char *BTTHeaderViewKey = "headerView";
     weakSelf(weakSelf);
     customView.btnBlock = ^(UIButton *btn) {
         strongSelf(strongSelf);
+        [strongSelf loadLuckyWheelCoinChange];
     };
+}
+
+- (void)bannerToGame:(BTTBannerModel *)model {
+    if ([model.action.detail hasSuffix:@".htm"] ) {
+        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+        vc.webConfigModel.url = model.action.detail;
+        vc.webConfigModel.newView = YES;
+        vc.webConfigModel.theme = @"outside";
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
+        NSString *gameid = arr[2];
+        NSLog(@"%@",gameid);
+        UIViewController *vc = nil;
+        if ([gameid isEqualToString:@"A01003"]) {
+            vc = [BTTAGQJViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else if ([gameid isEqualToString:@"A01026"]) {
+            vc = [BTTAGGJViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            IVGameModel *model = [[IVGameModel alloc] init];
+            model.cnName =  kFishCnName;
+            model.enName =  kFishEnName;
+            model.provider = kAGINProvider;
+            model.gameId = model.gameCode;
+            model.gameType = kFishType;
+            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+        }
+    }
 }
 
 
