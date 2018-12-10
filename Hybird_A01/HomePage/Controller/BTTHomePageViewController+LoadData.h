@@ -48,6 +48,9 @@ NS_ASSUME_NONNULL_BEGIN
 // 查新博币数量
 - (void)loadLuckyWheelCoinStatus;
 
+// 博币兑换
+- (void)loadLuckyWheelCoinChange;
+
 @end
 
 NS_ASSUME_NONNULL_END
