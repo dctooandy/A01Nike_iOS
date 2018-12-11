@@ -23,7 +23,7 @@
 #import "BTTPromotionDetailController.h"
 #import "BTTAGQJViewController.h"
 #import "BTTAGGJViewController.h"
-
+#import "BTTVideoGamesListController.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
@@ -249,24 +249,80 @@ static const char *BTTHeaderViewKey = "headerView";
         vc.webConfigModel.theme = @"outside";
         [self.navigationController pushViewController:vc animated:YES];
     } else {
-        NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
-        NSString *gameid = arr[2];
-        NSLog(@"%@",gameid);
         UIViewController *vc = nil;
-        if ([gameid isEqualToString:@"A01003"]) {
-            vc = [BTTAGQJViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        } else if ([gameid isEqualToString:@"A01026"]) {
-            vc = [BTTAGGJViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-        } else {
+        NSRange gameIdRange = [model.action.detail rangeOfString:@"gameId"];
+        if (gameIdRange.location != NSNotFound) {
+            NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
+            NSString *gameid = arr[2];
+            UIViewController *vc = nil;
+            if ([gameid isEqualToString:@"A01003"]) {
+                vc = [BTTAGQJViewController new];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else if ([gameid isEqualToString:@"A01026"]) {
+                vc = [BTTAGGJViewController new];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }
+        NSRange andRange = [model.action.detail rangeOfString:@"&"];
+        if (andRange.location != NSNotFound) {
+            NSArray *andArr = [model.action.detail componentsSeparatedByString:@"&"];
+            NSArray *providerArr = [andArr[0] componentsSeparatedByString:@":"];
+            NSString *provider = providerArr[2];
+            NSArray *gameKindArr = [andArr[1] componentsSeparatedByString:@":"];
+            NSString *gameKind = gameKindArr[1];
             IVGameModel *model = [[IVGameModel alloc] init];
-            model.cnName =  kFishCnName;
-            model.enName =  kFishEnName;
-            model.provider = kAGINProvider;
-            model.gameId = model.gameCode;
-            model.gameType = kFishType;
-            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+            if ([provider isEqualToString:@"AGIN"] && [gameKind isEqualToString:@"8"]) { // 捕鱼王
+                model = [[IVGameModel alloc] init];
+                model.cnName =  kFishCnName;
+                model.enName =  kFishEnName;
+                model.provider = kAGINProvider;
+                model.gameId = model.gameCode;
+                model.gameType = kFishType;
+                [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+            } else if ([provider isEqualToString:@"SHAB"] && [gameKind isEqualToString:@"1"]) { // 沙巴体育
+                model = [[IVGameModel alloc] init];
+                model.cnName = @"沙巴体育";
+                model.enName =  kASBEnName;
+                model.provider =  kShaBaProvider;
+            } else if ([provider isEqualToString:@"BTI"] && [gameKind isEqualToString:@"1"]) {  // BTIi体育
+                model = [[IVGameModel alloc] init];
+                model.cnName = @"BTI体育";
+                model.enName =  @"SBT_BTI";
+                model.provider =  @"SBT";
+            } else if ([provider isEqualToString:@"MG"] ||
+                       [provider isEqualToString:@"AGIN"] ||
+                       [provider isEqualToString:@"PT"] ||
+                       [provider isEqualToString:@"TTG"] ||
+                       [provider isEqualToString:@"PP"]) {
+                BTTVideoGamesListController *videoGamesVC = [BTTVideoGamesListController new];
+                NSString *subProvider = nil;
+                if ([provider isEqualToString:@"AGIN"]) {
+                    subProvider = @"AG";
+                } else {
+                    subProvider = provider;
+                }
+                videoGamesVC.provider = subProvider;
+                [self.navigationController pushViewController:videoGamesVC animated:YES];
+            }
+        } else {
+            NSRange providerRange = [model.action.detail rangeOfString:@"provider"];
+            if (providerRange.location != NSNotFound) {
+                NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
+                NSString *provider = arr[2];
+                UIViewController *vc = nil;
+                if ([provider isEqualToString:@"AGQJ"]) {
+                    vc = [BTTAGQJViewController new];
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else if ([provider isEqualToString:@"AGIN"]) {
+                    vc = [BTTAGGJViewController new];
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else if ([provider isEqualToString:@"AS"]) {
+                    IVGameModel *model = [[IVGameModel alloc] init];
+                    model.cnName = @"AS电游";
+                    model.enName =  kASSlotEnName;
+                    model.provider = kASSlotProvider;
+                }
+            }
         }
     }
 }
