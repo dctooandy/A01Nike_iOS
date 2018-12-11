@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTPublicBtnCell : BTTBaseCollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIButton *btn;
+
 @property (nonatomic, assign) BTTPublicBtnType btnType;
 
 

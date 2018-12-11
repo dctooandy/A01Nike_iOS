@@ -256,6 +256,7 @@
         if (result.code_http == 200) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
+                vc.registerOrLoginType = self.registerOrLoginType;
                 vc.account = model.login_name;
                 [self.navigationController pushViewController:vc animated:YES];
                 BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
@@ -291,7 +292,9 @@
             if (result.data && ![result.data isKindOfClass:[NSNull class]] && [result.data isKindOfClass:[NSDictionary class]]) {
                 if (![result.data[@"login_name"] isKindOfClass:[NSNull class]] && result.data[@"login_name"]) {
                     BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
+                    vc.registerOrLoginType = self.registerOrLoginType;
                     vc.account = result.data[@"login_name"];
+                    vc.pwd = result.data[@"password"];
                     [self.navigationController pushViewController:vc animated:YES];
                     
                     BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
