@@ -397,7 +397,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGQ-Qp-KqB">
                             <rect key="frame" x="18" y="63.5" width="160.5" height="45"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                            <state key="normal" title="如何只用微信支付" backgroundImage="pay_blueBtn"/>
+                            <state key="normal" title="如何使用微信支付" backgroundImage="pay_blueBtn"/>
                             <state key="highlighted" backgroundImage="pay_blueBtnHL"/>
                             <connections>
                                 <action selector="seeWeChatPay:" destination="-1" eventType="touchUpInside" id="jgS-I7-PAz"/>
