@@ -13,10 +13,7 @@ typedef enum {
     BTTLoginCellTypeCode       // 有码
 }BTTLoginCellType;
 
-typedef enum {
-    BTTQuickRegisterTypeAuto,   // 自动
-    BTTQuickRegisterTypeManual  // 手动
-}BTTQuickRegisterType;
+
 
 NS_ASSUME_NONNULL_BEGIN
 

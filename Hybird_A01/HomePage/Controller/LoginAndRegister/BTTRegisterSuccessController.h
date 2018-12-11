@@ -14,6 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *account;
 
+@property (nonatomic, copy) NSString *pwd;
+
+@property (nonatomic, assign) BTTRegisterOrLoginType registerOrLoginType;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -36,7 +36,7 @@
     self.iconImg.redDotOffset = CGPointMake(-4, 4);
     [GJRedDot registNodeWithKey:BTTMineCenterItemsKey
                       parentKey:BTTMineCenterMessage
-                    defaultShow:YES];
+                    defaultShow:NO];
     [GJRedDot registNodeWithKey:BTTMineCenterItemsKey
                       parentKey:BTTMineCenterVersion
                     defaultShow:YES];

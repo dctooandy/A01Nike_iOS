@@ -82,8 +82,8 @@
 
 - (void)textFieldChange:(UITextField *)textField {
     if (textField.tag == 2010) {
-        if (textField.text.length > 11) {
-            textField.text = [textField.text substringToIndex:11];
+        if (textField.text.length > 10) {
+            textField.text = [textField.text substringToIndex:10];
         }
     } else {
         if (textField.text.length > 6) {

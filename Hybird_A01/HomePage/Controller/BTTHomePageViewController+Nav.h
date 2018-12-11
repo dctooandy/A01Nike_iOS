@@ -10,6 +10,8 @@
 #import "BTTHomePageHeaderView.h"
 #import "JXRegisterManager.h"
 
+@class BTTBannerModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTHomePageViewController (Nav)<JXRegisterManagerDelegate>
@@ -22,7 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)registerNotification;
 
+- (void)showPopView;
 
+- (void)bannerToGame:(BTTBannerModel *)model;
 
 @end
 

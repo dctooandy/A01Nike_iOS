@@ -74,6 +74,11 @@ typedef enum {
     
 }BTTRegisterOrLoginType;
 
+typedef enum {
+    BTTQuickRegisterTypeAuto,   // 自动
+    BTTQuickRegisterTypeManual  // 手动
+}BTTQuickRegisterType;
+
 typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 /***********************************************存储关键字******************************************************/
@@ -143,6 +148,8 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 // 账号缓存key
 
 #define BTTCacheAccountName   @"BTTCacheAccountName"
+
+#define BTTCoinTimestamp       @"BTTCoinTimestamp"
 
 
 /*********************************************API********************************************************/
@@ -275,11 +282,11 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTCancelFavorites           @"/public/game/cancelFavorites"
 
-// 钻石币数量查询
-#define BTTQueryIntegralAPI          @"/event/luckyWheel/queryIntegral"
+// 搏币数量查询
+#define BTTQueryIntegralAPI          @"/A01/luckyWheel/queryIntegral"
 
-// 钻石币兑换
-#define BTTCoinDepositAPI            @"/event/luckyWheel/deposit"
+// 搏币兑换
+#define BTTCoinDepositAPI            @"/A01/luckyWheel/deposit"
 
 // 请求未读消息的数量
 #define BTTIsUnviewedAPI             @"/public/letter/isUnviewed"

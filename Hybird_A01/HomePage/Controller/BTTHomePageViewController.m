@@ -33,6 +33,7 @@
 #import "BTTLoginOrRegisterViewController.h"
 #import "BTTHomePageFooterCell.h"
 #import "BTTHomePageHeaderModel.h"
+#import "BTTLuckyWheelCoinView.h"
 
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
@@ -55,7 +56,6 @@
     } else {
         self.isLogin = NO;
     }
-    
     [self setupNav];
     [self setupCollectionView];
     [self setupElements];
@@ -67,7 +67,6 @@
     }];
     [self loadDataOfHomePage];
     [self registerNotification];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -88,6 +87,13 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork userInfo]) {
         [BTTHttpManager requestUnReadMessageNum:nil];
+        NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
+        if (![NSDate isToday:timestamp]) {
+            [self loadLuckyWheelCoinStatus];
+            NSString *timestamp = [NSString stringWithFormat:@"%@",@([[NSDate date] timeIntervalSince1970] * 1000)];
+            [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
     }
 }
 
@@ -121,6 +127,7 @@
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
                 [strongSelf.posters removeAllObjects];
+                [strongSelf.elementsHight removeAllObjects];
                 [strongSelf setupElements];
             };
             return cell;
@@ -130,33 +137,7 @@
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTBannerModel *model = strongSelf.banners[[value integerValue]];
-                if ([model.action.detail hasSuffix:@".htm"] ) {
-                    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-                    vc.webConfigModel.url = model.action.detail;
-                    vc.webConfigModel.newView = YES;
-                    vc.webConfigModel.theme = @"outside";
-                    [strongSelf.navigationController pushViewController:vc animated:YES];
-                } else {
-                    NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
-                    NSString *gameid = arr[2];
-                    NSLog(@"%@",gameid);
-                    UIViewController *vc = nil;
-                    if ([gameid isEqualToString:@"A01003"]) {
-                        vc = [BTTAGQJViewController new];
-                        [strongSelf.navigationController pushViewController:vc animated:YES];
-                    } else if ([gameid isEqualToString:@"A01026"]) {
-                        vc = [BTTAGGJViewController new];
-                        [strongSelf.navigationController pushViewController:vc animated:YES];
-                    } else {
-                        IVGameModel *model = [[IVGameModel alloc] init];
-                        model.cnName =  kFishCnName;
-                        model.enName =  kFishEnName;
-                        model.provider = kAGINProvider;
-                        model.gameId = model.gameCode;
-                        model.gameType = kFishType;
-                        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:strongSelf];
-                    }
-                }
+                [strongSelf bannerToGame:model];
             };
             cell.imageUrls = self.imageUrls;
             return cell;
@@ -188,9 +169,13 @@
             weakSelf(weakSelf);
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 BTTDownloadModel *model = value;
+                if (!model.iosLink.length) {
+                    [MBProgressHUD showError:@"抱歉, 该游戏不支持苹果手机, 请使用安卓系统手机下载就可以了" toView:nil];
+                    return;
+                }
                 strongSelf(strongSelf);
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-                vc.webConfigModel.url = model.iosLink.length ? model.iosLink : model.androidLink;
+                vc.webConfigModel.url = model.iosLink;
                 vc.webConfigModel.newView = YES;
                 vc.webConfigModel.theme = @"outside";
                 [strongSelf.navigationController pushViewController:vc animated:YES];
@@ -219,10 +204,10 @@
         } else if (indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9) {
             BTTHomePageDiscountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountCell" forIndexPath:indexPath];
             BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 7] : nil;
-            if (indexPath.row == 7) {
-                cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
-            } else {
+            if (indexPath.row == 9) {
                 cell.mineSparaterType = BTTMineSparaterTypeNone;
+            } else {
+                cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
             }
             cell.model = model;
             return cell;
@@ -259,33 +244,7 @@
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTBannerModel *model = strongSelf.banners[[value integerValue]];
-                if ([model.action.detail hasSuffix:@".htm"] ) {
-                    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-                    vc.webConfigModel.url = model.action.detail;
-                    vc.webConfigModel.newView = YES;
-                    vc.webConfigModel.theme = @"outside";
-                    [strongSelf.navigationController pushViewController:vc animated:YES];
-                } else {
-                    NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
-                    NSString *gameid = arr[2];
-                    NSLog(@"%@",gameid);
-                    UIViewController *vc = nil;
-                    if ([gameid isEqualToString:@"A01003"]) {
-                        vc = [BTTAGQJViewController new];
-                        [strongSelf.navigationController pushViewController:vc animated:YES];
-                    } else if ([gameid isEqualToString:@"A01026"]) {
-                        vc = [BTTAGGJViewController new];
-                        [strongSelf.navigationController pushViewController:vc animated:YES];
-                    } else {
-                        IVGameModel *model = [[IVGameModel alloc] init];
-                        model.cnName =  kFishCnName;
-                        model.enName =  kFishEnName;
-                        model.provider = kAGINProvider;
-                        model.gameId = model.gameCode;
-                        model.gameType = kFishType;
-                        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:strongSelf];
-                    }
-                }
+                [strongSelf bannerToGame:model];
             };
             return cell;
         } else if (indexPath.row == 1) {
@@ -316,6 +275,10 @@
             weakSelf(weakSelf);
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 BTTDownloadModel *model = value;
+                if (!model.iosLink.length) {
+                    [MBProgressHUD showError:@"抱歉, 该游戏不支持苹果手机, 请使用安卓系统手机下载就可以了" toView:nil];
+                    return;
+                }
                 strongSelf(strongSelf);
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
                 vc.webConfigModel.url = model.iosLink.length ? model.iosLink : model.androidLink;
@@ -347,10 +310,10 @@
         } else if (indexPath.row == 7 || indexPath.row == 6 || indexPath.row == 8) {
             BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 6] : nil;
             BTTHomePageDiscountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountCell" forIndexPath:indexPath];
-            if (indexPath.row == 6) {
-                cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
-            } else {
+            if (indexPath.row == 8) {
                 cell.mineSparaterType = BTTMineSparaterTypeNone;
+            } else {
+                cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
             }
             cell.model = model;
             return cell;
@@ -385,12 +348,15 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     if (self.adCellShow) {
-        if (indexPath.row == 10) {
-            if (indexPath.row == 10) {
+        if (indexPath.row == 11) {
+            if (indexPath.row == 11) {
                 [self refreshDataOfActivities];
             }
         } else if (indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9) {
             BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 7] : nil;
+            if (!model) {
+                return;
+            }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
             vc.webConfigModel.url = model.href;
             vc.webConfigModel.newView = YES;
@@ -402,10 +368,12 @@
             vc.webConfigModel.theme = @"inside";
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 0 || indexPath.row == 16) {
-//            BTTPosterModel *model = self.posters.count ? self.posters[0] : nil;
-            
+            BTTPosterModel * model = self.posters.count ? self.posters[0] : nil;
+            if (!model) {
+                return;
+            }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            vc.webConfigModel.url = @"https://www.baidu.com";
+            vc.webConfigModel.url = model.link;
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"outside";
             [self.navigationController pushViewController:vc animated:YES];
@@ -417,12 +385,15 @@
             }
         }
     } else {
-        if (indexPath.row == 9) {
-            if (indexPath.row == 9) {
+        if (indexPath.row == 10) {
+            if (indexPath.row == 10) {
                 [self refreshDataOfActivities];
             }
         } else if (indexPath.row == 7 || indexPath.row == 6 || indexPath.row == 8) {
             BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 6] : nil;
+            if (!model) {
+                return;
+            }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
             vc.webConfigModel.url = model.href;
             vc.webConfigModel.newView = YES;
@@ -440,8 +411,12 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
         } else if (indexPath.row == 15) {
+            BTTPosterModel * model = self.posters.count ? self.posters[0] : nil;
+            if (!model) {
+                return;
+            }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            vc.webConfigModel.url = @"https://www.baidu.com";
+            vc.webConfigModel.url = model.link;
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"outside";
             [self.navigationController pushViewController:vc animated:YES];
@@ -472,7 +447,7 @@
 }
 
 - (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
-    return UIEdgeInsetsMake(0, 0, KIsiPhoneX ? 83 : 79, 0);
+    return UIEdgeInsetsMake(0, 0, KIsiPhoneX ? 63 : 59, 0);
 }
 
 /**
@@ -527,7 +502,7 @@
             } else if (i == 15) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 295)]];
             } else if (i == 16) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
+                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 60)]];
             }
             else {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
@@ -557,7 +532,7 @@
             } else if (i == 14) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 295)]];
             } else if (i == 15) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
+                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 60)]];
             }
             else {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
@@ -590,9 +565,11 @@
         case 3:
             //跳电子游戏大厅
         {
+            BTTPosterModel * model = self.posters.count ? self.posters[0] : nil;
             BTTVideoGamesListController *videoGame = [[BTTVideoGamesListController alloc] init];
             videoGame.banners = self.banners;
             videoGame.imageUrls = self.imageUrls;
+            videoGame.poster = model;
             [self.navigationController pushViewController:videoGame animated:YES];
         }
             break;

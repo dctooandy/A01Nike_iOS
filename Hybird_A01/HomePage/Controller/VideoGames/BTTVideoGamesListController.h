@@ -7,6 +7,7 @@
 //
 
 #import "BTTCollectionViewController.h"
+#import "BTTPosterModel.h"
 
 typedef void(^BTTSelectValueBlock)(NSString *value);
 
@@ -25,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger limit;
 
 @property (nonatomic, assign) BOOL isShowFooter; ///< 是不是显示页脚
+
+@property (nonatomic, strong) BTTPosterModel *poster; // 广告
 
 @end
 
