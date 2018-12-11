@@ -383,9 +383,11 @@
 - (UIActivityIndicatorView *)activityView {
     if (!_activityView) {
         _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-        CGPoint center = self.view.center;
-        _activityView.center = CGPointMake(center.x, center.y-64);
         [self.view addSubview:_activityView];
+        [_activityView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(@0);
+            make.centerY.equalTo(@(-64));
+        }];
     }
     return _activityView;
 }
