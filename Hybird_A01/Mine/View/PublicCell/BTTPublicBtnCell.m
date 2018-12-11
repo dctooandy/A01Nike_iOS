@@ -10,7 +10,7 @@
 
 @interface BTTPublicBtnCell ()
 
-@property (weak, nonatomic) IBOutlet UIButton *btn;
+
 
 @end
 
@@ -38,6 +38,8 @@
         self.btn.enabled = YES;
     } else if ([notifi.object isEqualToString:@"BookMessage"]) {
         self.btn.enabled = YES;
+    } else if ([notifi.object isEqualToString:@"changePwd"]) {
+        self.btn.enabled = YES;
     } else {
         self.btn.enabled = YES;
     }
@@ -49,7 +51,9 @@
         self.btn.enabled = NO;
     } else if ([notifi.object isEqualToString:@"BookMessage"]) {
         self.btn.enabled = NO;
-    }  else {
+    } else if ([notifi.object isEqualToString:@"changePwd"]) {
+        self.btn.enabled = NO;
+    } else {
         self.btn.enabled = NO;
     }
     

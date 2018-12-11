@@ -121,7 +121,7 @@
                 cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
             }
             cell.nameLabel.text = [IVNetwork userInfo].loginName;
-            cell.vipLevelLabel.text = [NSString stringWithFormat:@"VIP%@",@([IVNetwork userInfo].customerLevel)];
+            cell.vipLevelLabel.text = ([IVNetwork userInfo].customerLevel == 7) ? @"准VIP5" : [NSString stringWithFormat:@"VIP%@",@([IVNetwork userInfo].customerLevel)];
             weakSelf(weakSelf);
             cell.accountBlanceBlock = ^{
                 strongSelf(strongSelf);

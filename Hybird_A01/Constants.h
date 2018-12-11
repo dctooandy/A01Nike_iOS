@@ -74,6 +74,11 @@ typedef enum {
     
 }BTTRegisterOrLoginType;
 
+typedef enum {
+    BTTQuickRegisterTypeAuto,   // 自动
+    BTTQuickRegisterTypeManual  // 手动
+}BTTQuickRegisterType;
+
 typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 /***********************************************存储关键字******************************************************/
