@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) BTTPosterModel *poster; // 广告
 
+@property (nonatomic, copy)  NSString *provider;  ///< 平台
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -63,7 +63,12 @@
     }
 }
 
-
+- (void)setProvider:(NSString *)provider {
+    _provider = provider;
+    if (_provider.length) {
+        [self.btn2 setTitle:_provider forState:UIControlStateNormal];
+    }
+}
 
 
 @end
