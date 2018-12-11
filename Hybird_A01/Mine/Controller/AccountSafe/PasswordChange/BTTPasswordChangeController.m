@@ -184,7 +184,7 @@
     if (!_sheetDatas) {
         _sheetDatas = [NSMutableArray array];
         NSArray *titles = @[@"登录密码",@"新密码"];
-        NSArray  *placeholders = @[@"请输入当前账号密码",@"8-10位字码和数字组合"];
+        NSArray  *placeholders = @[@"请输入当前账号密码",@"8-10位字母和数字组合"];
         for (NSString *title in titles) {
             BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
             NSInteger index = [titles indexOfObject:title];
