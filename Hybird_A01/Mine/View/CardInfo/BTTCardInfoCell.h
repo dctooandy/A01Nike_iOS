@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSIndexPath *indexPath;
 @property(nonatomic, strong)BTTBankModel *model;
 @property (nonatomic, assign) BOOL isChecking; //正在审核
+@property (nonatomic, assign) BOOL isOnlyOneCard; //是否只有一张卡
 @end
 
 NS_ASSUME_NONNULL_END

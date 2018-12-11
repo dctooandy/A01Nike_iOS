@@ -18,8 +18,8 @@
 #import "BTTCardInfosController.h"
 #import "BTTWithdrawalController.h"
 #import "BTTLoginOrRegisterViewController.h"
-#import "BTTAGGJViewController.h"
 #import "BTTAGQJViewController.h"
+#import "BTTAGGJViewController.h"
 @interface BridgeProtocolExternal ()<JXRegisterManagerDelegate>
 
 @end
@@ -57,7 +57,16 @@
     return @(YES);
 }
 - (id)driver_game:(BridgeModel *)bridgeModel {
-   
+    WebConfigModel *webConfigModel = [[WebConfigModel alloc] initWithDictionary:bridgeModel.data error:nil];
+    webConfigModel.newView = YES;
+    UIViewController *vc = nil;
+    if (webConfigModel.isAGQJ) {
+        vc = [BTTAGQJViewController new];
+        [self.controller.navigationController pushViewController:vc animated:YES];
+    } else if ([webConfigModel.gameCode isEqualToString:@"A01026"]) {
+        vc = [BTTAGGJViewController new];
+        [self.controller.navigationController pushViewController:vc animated:YES];
+    } 
     return @(YES);
 }
 
