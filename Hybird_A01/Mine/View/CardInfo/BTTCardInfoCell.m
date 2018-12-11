@@ -67,7 +67,7 @@
     NSURL *bgUrl = [NSURL URLWithString:bgURLStr];
     [self.cardBgImageView sd_setImageWithURL:bgUrl placeholderImage:[UIImage imageNamed:bgImageDefault]];
     self.modifyBtn.hidden = self.isChecking || model.isBTC;
-    self.deleteBtn.hidden = self.isChecking;
+    self.deleteBtn.hidden = self.isChecking || self.isOnlyOneCard;
     self.setDefaultBtn.hidden = model.isBTC;
     self.setDefaultBtn.userInteractionEnabled = !model.isDefault;
     if (model.flag == 9) {

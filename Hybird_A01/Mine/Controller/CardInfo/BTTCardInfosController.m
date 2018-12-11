@@ -50,6 +50,7 @@
         BTTCardInfoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardInfoCell" forIndexPath:indexPath];
         cell.indexPath = indexPath;
         cell.isChecking = self.isChecking;
+        cell.isOnlyOneCard = self.bankList.count == 1;
         BTTBankModel *model = self.bankList[indexPath.row];
         cell.model = model;
         weakSelf(weakSelf)
