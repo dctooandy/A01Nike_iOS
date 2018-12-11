@@ -45,9 +45,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tef-NX-VPy">
-                        <rect key="frame" x="195" y="230" width="100" height="30"/>
+                        <rect key="frame" x="195" y="230" width="120" height="30"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="NMm-vt-rb7"/>
+                            <constraint firstAttribute="width" constant="120" id="NMm-vt-rb7"/>
                         </constraints>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>

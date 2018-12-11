@@ -45,7 +45,7 @@ typedef enum {
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessTwoCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessTwoCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessChangePwdCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessChangePwdCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPublicBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPublicBtnCell"];
-    UIImageView *adImageview = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_WIDTH / 310 * 126 - (KIsiPhoneX ? 88 : 64), SCREEN_WIDTH, SCREEN_WIDTH / 310 * 126)];
+    UIImageView *adImageview = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SCREEN_WIDTH / 310 * 126 - (KIsiPhoneX ? 88 : 64), SCREEN_WIDTH, SCREEN_WIDTH / 310 * 126)];
     [self.view addSubview:adImageview];
     adImageview.image = ImageNamed(@"login_ad");
 }
@@ -138,8 +138,8 @@ typedef enum {
 }
 
 - (void)textChange:(UITextField *)textField {
-    if (textField.text.length > 11) {
-        textField.text = [textField.text substringToIndex:11];
+    if (textField.text.length > 10) {
+        textField.text = [textField.text substringToIndex:10];
     }
     _newPwd = textField.text;
 }
@@ -179,6 +179,10 @@ typedef enum {
 - (void)changePwd {
     if (!_newPwd.length) {
         [MBProgressHUD showError:@"请输入新密码" toView:nil];
+        return;
+    }
+    if (_pwd.length < 8) {
+        [MBProgressHUD showError:@"请输入8-10位数组和字母" toView:nil];
         return;
     }
     NSString *url = @"public/users/updatePassword";
