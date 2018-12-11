@@ -18,6 +18,8 @@
 #import "BTTCardInfosController.h"
 #import "BTTWithdrawalController.h"
 #import "BTTLoginOrRegisterViewController.h"
+#import "BTTAGGJViewController.h"
+#import "BTTAGQJViewController.h"
 @interface BridgeProtocolExternal ()<JXRegisterManagerDelegate>
 
 @end
@@ -143,5 +145,74 @@
 - (id)outside_updateUI:(BridgeModel *)bridgeModel {
     [super outside_updateUI:bridgeModel];
     return nil;
+}
+- (id)game_toGame:(BridgeModel *)bridgeModel {
+    NSDictionary *data = bridgeModel.data;
+    if (data && [data isKindOfClass:[NSDictionary class]] ) {
+        NSString *provider = [data valueForKey:@"provider"];
+        if ([self shouldForwardToNotSlotGameWithProvider:provider]) {
+            return @(YES);
+        };
+        if ([data valueForKey:@"gameInfo"] && [[data valueForKey:@"gameInfo"] isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *gameInfo = [data valueForKey:@"gameInfo"];
+            IVGameModel *model = [[IVGameModel alloc] initWithDictionary:gameInfo];
+            if ([gameInfo valueForKey:@"game_provider"]) {
+                model.provider = [gameInfo valueForKey:@"game_provider"];
+            } else {
+                model.provider = provider;
+            }
+            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self.controller];
+        }
+    }
+    return @(YES);
+}
+//非电子游戏
+- (BOOL)shouldForwardToNotSlotGameWithProvider:(NSString *)provider
+{
+    BOOL isSlot = NO;
+    IVGameModel *model = [[IVGameModel alloc] init];;
+    NSString *otherProvider = nil;
+    if ([provider isEqualToString:kAGQJProvider]) {
+        [self.controller.navigationController pushViewController:[BTTAGQJViewController new] animated:YES];
+    } else if ([provider isEqualToString:kAGINProvider]) {
+        [self.controller.navigationController pushViewController:[BTTAGGJViewController new] animated:YES];
+    } else if ([provider isEqualToString:kASSlotProvider]) {
+        model.cnName = @"AS电游";
+        model.enName =  kASSlotEnName;
+        model.provider = kASSlotProvider;
+    } else if ([provider isEqualToString:@"BTI"]) {
+        model.cnName = @"BTI体育";
+        model.enName =  @"SBT_BTI";
+        model.provider =  @"SBT";
+    } else if ([provider isEqualToString:@"fish"]) {
+        model.cnName =  kFishCnName;
+        model.enName =  kFishEnName;
+        model.provider = kAGINProvider;
+        model.gameId = model.gameCode;
+        model.gameType = kFishType;
+    } else if ([provider isEqualToString:@"SB"]) {
+        model.cnName = @"沙巴体育";
+        model.enName =  kASBEnName;
+        model.provider =  kShaBaProvider;
+    } else if ([provider isEqualToString:kMGProvider]) {
+        otherProvider = kMGProvider;
+    } else if ([provider isEqualToString:@"AG"]) {
+        otherProvider = @"AG";
+    } else if ([provider isEqualToString:kPTProvider]) {
+        otherProvider = kPTProvider;
+    } else if ([provider isEqualToString:kTTGProvider]) {
+        otherProvider = kTTGProvider;
+    } else if ([provider isEqualToString:@"PP"]) {
+        otherProvider = @"PP";
+    } else  {
+        isSlot = YES;
+    }
+    if (model.provider) {
+         [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self.controller];
+    }
+    if (otherProvider) {//电游大厅
+    
+    }
+    return isSlot;
 }
 @end
