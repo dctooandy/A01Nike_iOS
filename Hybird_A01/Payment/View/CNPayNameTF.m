@@ -29,7 +29,7 @@
 }
 
 - (void)commonInit {
-    self.placeholder = @"请填写实际存款的银行卡姓名";
+    self.placeholder = @"请输入真实姓名";
     self.font = [UIFont systemFontOfSize:13];
     self.textColor = COLOR_HEX(0xDBBD85);
     self.textAlignment = NSTextAlignmentRight;
