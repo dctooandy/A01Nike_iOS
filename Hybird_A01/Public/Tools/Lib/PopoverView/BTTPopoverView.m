@@ -296,7 +296,7 @@ float BTTPopoverViewDegreesToRadians(float angle)
     CGRect oldFrame = self.frame;
     self.layer.anchorPoint = CGPointMake(arrowPoint.x/currentW, _isUpward ? 0.f : 1.f);
     self.frame = oldFrame;
-    _closeBtn.frame = CGRectMake(SCREEN_WIDTH - 28, oldFrame.origin.y, 24, 24);
+    _closeBtn.frame = CGRectMake(SCREEN_WIDTH - 34, oldFrame.origin.y + 15, 24, 24);
     self.transform = CGAffineTransformMakeScale(0.01f, 0.01f);
     self.closeBtn.transform = CGAffineTransformMakeScale(0.01f, 0.01f);
     [UIView animateWithDuration:0.25f animations:^{
@@ -445,11 +445,13 @@ float BTTPopoverViewDegreesToRadians(float angle)
     [UIView animateWithDuration:0.25f animations:^{
         self.alpha = 0.f;
         self->_shadeView.alpha = 0.f;
+        self.closeBtn.alpha = 0.f;
     } completion:^(BOOL finished) {
         BTTPopoverAction *action = self->_actions[indexPath.row];
         action.handler ? action.handler(action) : NULL;
         self->_actions = nil;
         [self->_shadeView removeFromSuperview];
+        [self.closeBtn removeFromSuperview];
         [self removeFromSuperview];
     }];
 }
