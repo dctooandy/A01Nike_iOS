@@ -98,6 +98,7 @@
 		3A7A1A6D21BF68AA00572B50 /* BTTRegisterSuccessTwoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6B21BF68AA00572B50 /* BTTRegisterSuccessTwoCell.xib */; };
 		3A7A1A7121BF859000572B50 /* BTTRegisterSuccessChangePwdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6F21BF859000572B50 /* BTTRegisterSuccessChangePwdCell.m */; };
 		3A7A1A7221BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7A1A7021BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib */; };
+		3A7A1A7521C0A7D800572B50 /* BTTXimaLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A7421C0A7D800572B50 /* BTTXimaLogController.m */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -809,6 +810,8 @@
 		3A7A1A6E21BF859000572B50 /* BTTRegisterSuccessChangePwdCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTRegisterSuccessChangePwdCell.h; sourceTree = "<group>"; };
 		3A7A1A6F21BF859000572B50 /* BTTRegisterSuccessChangePwdCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTRegisterSuccessChangePwdCell.m; sourceTree = "<group>"; };
 		3A7A1A7021BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTRegisterSuccessChangePwdCell.xib; sourceTree = "<group>"; };
+		3A7A1A7321C0A7D800572B50 /* BTTXimaLogController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTXimaLogController.h; sourceTree = "<group>"; };
+		3A7A1A7421C0A7D800572B50 /* BTTXimaLogController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTXimaLogController.m; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -1831,6 +1834,8 @@
 				3A11AE5C2186B71600B1AFF4 /* BTTXimaController.m */,
 				3AB0687421A5621500072FB7 /* BTTXimaController+LoadData.h */,
 				3AB0687521A5621500072FB7 /* BTTXimaController+LoadData.m */,
+				3A7A1A7321C0A7D800572B50 /* BTTXimaLogController.h */,
+				3A7A1A7421C0A7D800572B50 /* BTTXimaLogController.m */,
 			);
 			path = Xima;
 			sourceTree = "<group>";
@@ -4357,6 +4362,7 @@
 				3AE05816217030CC00C7E70D /* BTTHomePageActivitiesCell.m in Sources */,
 				3AAE8214219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m in Sources */,
 				3AB0685821A422B000072FB7 /* BTTPTTransferController+LoadData.m in Sources */,
+				3A7A1A7521C0A7D800572B50 /* BTTXimaLogController.m in Sources */,
 				3AB0688021A63D6C00072FB7 /* BTTModifyLimitViewController+LoadData.m in Sources */,
 				3A11ADE521818FD400B1AFF4 /* BTTBTCInfoCell.m in Sources */,
 				3A8F518E215F77AC0069D1B3 /* BTTTabBar.m in Sources */,

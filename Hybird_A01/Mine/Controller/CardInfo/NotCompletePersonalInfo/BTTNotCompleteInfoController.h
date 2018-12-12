@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTNotCompleteInfoController : BTTCollectionViewController
 
-- (void)setupElements;
-
 @end
 
 NS_ASSUME_NONNULL_END

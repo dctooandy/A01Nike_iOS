@@ -34,15 +34,17 @@
 
 - (void)loadCreditsTotalAvailable {
     [self showLoading];
-    [IVNetwork sendRequestWithSubURL:BTTCreditsTotalAvailable paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork sendRequestWithSubURL:BTTCreditsLocal paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
         NSLog(@"%@",response);
-        if (result.message.length) {
-            [MBProgressHUD showError:result.message toView:nil];
-        }
-        if (result.code_http == 200) {
+        
+        if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {
             if (result.data) {
                 self.totalAvailable = result.data[@"val"];
+            }
+        } else {
+            if (result.message.length) {
+                [MBProgressHUD showError:result.message toView:nil];
             }
         }
         [self.collectionView reloadData];

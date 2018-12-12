@@ -27,6 +27,12 @@ typedef NS_ENUM(NSUInteger, BTTPopoverViewArrowStyle) {
  */
 @property (nonatomic, assign) BOOL showShade;
 
+
+/**
+ 是否显示关闭按钮
+ */
+@property (nonatomic, assign) BOOL showClose;
+
 /**
  弹出窗风格, 默认为 BTTPopoverViewStyleDefault(白色).
  */

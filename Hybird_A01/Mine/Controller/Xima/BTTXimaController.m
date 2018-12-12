@@ -21,6 +21,7 @@
 #import "BTTXimaSuccessItemCell.h"
 #import "BTTXimaSuccessBtnsCell.h"
 #import "BTTXimaSuccessItemModel.h"
+#import "BTTXimaLogController.h"
 
 typedef enum {
     BTTXimaDateTypeThisWeek, //本周
@@ -227,7 +228,11 @@ typedef enum {
                         strongSelf.thisWeekDataType = BTTXimaThisWeekTypeVaild;
                         [strongSelf loadMainData];
                     } else if (button.tag == 1061) {
-                        
+                        BTTXimaLogController *vc = [BTTXimaLogController new];
+                        vc.webConfigModel.url = @"customer/log_xm.htm?days=15";
+                        vc.webConfigModel.newView = YES;
+                        vc.webConfigModel.theme = @"inside";
+                        [strongSelf.navigationController pushViewController:vc animated:YES];
                     }
                 };
                 return cell;

@@ -78,13 +78,13 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="hQ1-B6-mQL" firstAttribute="leading" secondItem="haP-WT-u9b" secondAttribute="trailing" constant="4" id="0Js-nC-fji"/>
                 <constraint firstItem="hQ1-B6-mQL" firstAttribute="top" secondItem="R2o-sl-blD" secondAttribute="top" constant="-22" id="672-bI-rbw"/>
                 <constraint firstItem="WLU-Ym-Rev" firstAttribute="centerX" secondItem="hQ1-B6-mQL" secondAttribute="centerX" id="68U-4T-YEt"/>
                 <constraint firstItem="hQ1-B6-mQL" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="7Ck-Ed-Yn3"/>
                 <constraint firstItem="WdY-Pe-0Pu" firstAttribute="centerX" secondItem="8uF-W2-XrJ" secondAttribute="centerX" id="9wB-dp-HQ0"/>
                 <constraint firstItem="Kin-Ce-Sr3" firstAttribute="bottom" secondItem="8uF-W2-XrJ" secondAttribute="bottom" constant="-22" id="KGK-TQ-Lgm"/>
                 <constraint firstItem="WLU-Ym-Rev" firstAttribute="bottom" secondItem="hQ1-B6-mQL" secondAttribute="bottom" constant="-22" id="OmM-G0-vEB"/>
+                <constraint firstItem="haP-WT-u9b" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Orf-JM-whh"/>
                 <constraint firstItem="Kin-Ce-Sr3" firstAttribute="centerX" secondItem="8uF-W2-XrJ" secondAttribute="centerX" id="aTZ-Xe-TsM"/>
                 <constraint firstItem="8uF-W2-XrJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="gQ7-dU-sPU"/>
                 <constraint firstItem="R2o-sl-blD" firstAttribute="centerX" secondItem="hQ1-B6-mQL" secondAttribute="centerX" id="kD0-Ah-VcM"/>
