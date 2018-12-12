@@ -65,6 +65,7 @@
     [super viewDidLoad];
     self.title = @"会员中心";
     self.totalAmount = @"加载中";
+    self.collectionView.bounces = NO;
     [self setupNav];
     self.isCompletePersonalInfo = NO;
     self.isChangeMobile = NO;
