@@ -210,31 +210,31 @@ float BTTPopoverViewDegreesToRadians(float angle)
                       endAngle:BTTPopoverViewDegreesToRadians(270)
                      clockwise:YES];
     // 箭头向上时的箭头位置
-    if (_isUpward) {
-        
-        [maskPath addLineToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, kBTTPopoverViewArrowHeight)];
-        // 菱角箭头
-        if (_arrowStyle == BTTPopoverViewArrowStyleTriangle) {
-            
-            [maskPath addLineToPoint:arrowPoint];
-            [maskPath addLineToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, kBTTPopoverViewArrowHeight)];
-        } else {
-            
-            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowCornerRadius, arrowCornerRadius)
-                             controlPoint:CGPointMake(arrowPoint.x - arrowWidth/2 + arrowBottomCornerRadius, kBTTPopoverViewArrowHeight)];
-            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowCornerRadius, arrowCornerRadius)
-                             controlPoint:arrowPoint];
-            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, kBTTPopoverViewArrowHeight)
-                             controlPoint:CGPointMake(arrowPoint.x + arrowWidth/2 - arrowBottomCornerRadius, kBTTPopoverViewArrowHeight)];
-        }
-    }
-//    // 右上圆角
-//    [maskPath addLineToPoint:CGPointMake(currentW - cornerRadius, maskTop)];
-//    [maskPath addArcWithCenter:CGPointMake(currentW - cornerRadius, maskTop + cornerRadius)
-//                        radius:cornerRadius
-//                    startAngle:BTTPopoverViewDegreesToRadians(270)
-//                      endAngle:BTTPopoverViewDegreesToRadians(0)
-//                     clockwise:YES];
+//    if (_isUpward) {
+//
+//        [maskPath addLineToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, kBTTPopoverViewArrowHeight)];
+//        // 菱角箭头
+//        if (_arrowStyle == BTTPopoverViewArrowStyleTriangle) {
+//
+//            [maskPath addLineToPoint:arrowPoint];
+//            [maskPath addLineToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, kBTTPopoverViewArrowHeight)];
+//        } else {
+//
+//            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowCornerRadius, arrowCornerRadius)
+//                             controlPoint:CGPointMake(arrowPoint.x - arrowWidth/2 + arrowBottomCornerRadius, kBTTPopoverViewArrowHeight)];
+//            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowCornerRadius, arrowCornerRadius)
+//                             controlPoint:arrowPoint];
+//            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, kBTTPopoverViewArrowHeight)
+//                             controlPoint:CGPointMake(arrowPoint.x + arrowWidth/2 - arrowBottomCornerRadius, kBTTPopoverViewArrowHeight)];
+//        }
+//    }
+    // 右上圆角
+    [maskPath addLineToPoint:CGPointMake(currentW - cornerRadius, maskTop)];
+    [maskPath addArcWithCenter:CGPointMake(currentW - cornerRadius, maskTop + cornerRadius)
+                        radius:cornerRadius
+                    startAngle:BTTPopoverViewDegreesToRadians(270)
+                      endAngle:BTTPopoverViewDegreesToRadians(0)
+                     clockwise:YES];
     // 右下圆角
     [maskPath addLineToPoint:CGPointMake(currentW, maskBottom - cornerRadius)];
     [maskPath addArcWithCenter:CGPointMake(currentW - cornerRadius, maskBottom - cornerRadius)
@@ -243,24 +243,24 @@ float BTTPopoverViewDegreesToRadians(float angle)
                       endAngle:BTTPopoverViewDegreesToRadians(90)
                      clockwise:YES];
     // 箭头向下时的箭头位置
-    if (!_isUpward) {
-        
-        [maskPath addLineToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, currentH - kBTTPopoverViewArrowHeight)];
-        // 菱角箭头
-        if (_arrowStyle == BTTPopoverViewArrowStyleTriangle) {
-            
-            [maskPath addLineToPoint:arrowPoint];
-            [maskPath addLineToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, currentH - kBTTPopoverViewArrowHeight)];
-        } else {
-            
-            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowCornerRadius, currentH - arrowCornerRadius)
-                             controlPoint:CGPointMake(arrowPoint.x + arrowWidth/2 - arrowBottomCornerRadius, currentH - kBTTPopoverViewArrowHeight)];
-            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowCornerRadius, currentH - arrowCornerRadius)
-                             controlPoint:arrowPoint];
-            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, currentH - kBTTPopoverViewArrowHeight)
-                             controlPoint:CGPointMake(arrowPoint.x - arrowWidth/2 + arrowBottomCornerRadius, currentH - kBTTPopoverViewArrowHeight)];
-        }
-    }
+//    if (!_isUpward) {
+//
+//        [maskPath addLineToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, currentH - kBTTPopoverViewArrowHeight)];
+//        // 菱角箭头
+//        if (_arrowStyle == BTTPopoverViewArrowStyleTriangle) {
+//
+//            [maskPath addLineToPoint:arrowPoint];
+//            [maskPath addLineToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, currentH - kBTTPopoverViewArrowHeight)];
+//        } else {
+//
+//            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowCornerRadius, currentH - arrowCornerRadius)
+//                             controlPoint:CGPointMake(arrowPoint.x + arrowWidth/2 - arrowBottomCornerRadius, currentH - kBTTPopoverViewArrowHeight)];
+//            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowCornerRadius, currentH - arrowCornerRadius)
+//                             controlPoint:arrowPoint];
+//            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, currentH - kBTTPopoverViewArrowHeight)
+//                             controlPoint:CGPointMake(arrowPoint.x - arrowWidth/2 + arrowBottomCornerRadius, currentH - kBTTPopoverViewArrowHeight)];
+//        }
+//    }
     // 左下圆角
     [maskPath addLineToPoint:CGPointMake(cornerRadius, maskBottom)];
     [maskPath addArcWithCenter:CGPointMake(cornerRadius, maskBottom - cornerRadius)
