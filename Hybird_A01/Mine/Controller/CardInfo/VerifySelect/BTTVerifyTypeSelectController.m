@@ -28,9 +28,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     switch (self.verifyType) {
-        case BTTSafeVerifyTypeChangeMobile:
-            self.title = @"选择验证方式";
-            break;
         default:
             self.title = @"安全验证";
             break;
@@ -103,7 +100,10 @@
             break;
         case BTTSafeVerifyTypeChangeMobile:{
             if (indexPath.row == 0) {
-                BTTChangeMobileController *vc = [BTTChangeMobileController new];
+//                BTTChangeMobileController *vc = [BTTChangeMobileController new];
+//                [self.navigationController pushViewController:vc animated:YES];
+                BTTBindingMobileController *vc = [BTTBindingMobileController new];
+                vc.mobileCodeType = BTTSafeVerifyTypeVerifyMobile;
                 [self.navigationController pushViewController:vc animated:YES];
             } else {
                 if ([IVNetwork userInfo].real_name.length != 0 && [IVNetwork userInfo].verify_code.length != 0) {

@@ -19,6 +19,7 @@
     NSString *humanDetail = @"原绑定手机无法接受验证码? 提交申请, 等待人工客服协助修改";
     NSArray *details =  nil;
     switch (self.verifyType) {
+        case BTTSafeVerifyTypeChangeMobile:
         case BTTSafeVerifyTypeMobileAddBankCard:
         case BTTSafeVerifyTypeMobileChangeBankCard:
         case BTTSafeVerifyTypeMobileDelBankCard:
@@ -36,10 +37,10 @@
             icons = @[@"card_customer"];
             details = @[humanDetail];
             break;
-        case BTTSafeVerifyTypeChangeMobile:
-            names = @[@"通过短信验证",@"通过人工服务"];
-            icons = @[@"card_sms",@"card_customer"];
-            details = @[mobileDetail,humanDetail];
+//        case BTTSafeVerifyTypeChangeMobile:
+//            names = @[@"通过短信验证",@"通过人工服务"];
+//            icons = @[@"card_sms",@"card_customer"];
+//            details = @[mobileDetail,humanDetail];
             break;
         default:
             break;
