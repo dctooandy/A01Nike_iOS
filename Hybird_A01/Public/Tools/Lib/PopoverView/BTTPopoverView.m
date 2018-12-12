@@ -35,6 +35,8 @@ float BTTPopoverViewDegreesToRadians(float angle)
 @property (nonatomic, assign) CGFloat windowHeight;  ///< 窗口高度
 @property (nonatomic, assign) BOOL isUpward;         ///< 箭头指向, YES为向上, 反之为向下, 默认为YES.
 
+@property (nonatomic, strong) UIButton *closeBtn;
+
 @end
 
 @implementation BTTPopoverView
@@ -105,6 +107,10 @@ float BTTPopoverViewDegreesToRadians(float angle)
     [_shadeView addGestureRecognizer:tapGesture];
     _tapGesture = tapGesture;
     
+    _closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_closeBtn setBackgroundImage:ImageNamed(@"homepage_close") forState:UIControlStateNormal];
+    [_closeBtn addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
+    
     // tableView
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     _tableView.delegate = self;
@@ -117,6 +123,9 @@ float BTTPopoverViewDegreesToRadians(float angle)
     _tableView.showsVerticalScrollIndicator = NO;
     [_tableView registerClass:[BTTPopoverViewCell class] forCellReuseIdentifier:kBTTPopoverCellReuseId];
     [self addSubview:_tableView];
+    
+    
+    
 }
 
 /**
@@ -201,24 +210,24 @@ float BTTPopoverViewDegreesToRadians(float angle)
                       endAngle:BTTPopoverViewDegreesToRadians(270)
                      clockwise:YES];
     // 箭头向上时的箭头位置
-    if (_isUpward) {
-        
-        [maskPath addLineToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, kBTTPopoverViewArrowHeight)];
-        // 菱角箭头
-        if (_arrowStyle == BTTPopoverViewArrowStyleTriangle) {
-            
-            [maskPath addLineToPoint:arrowPoint];
-            [maskPath addLineToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, kBTTPopoverViewArrowHeight)];
-        } else {
-            
-            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowCornerRadius, arrowCornerRadius)
-                             controlPoint:CGPointMake(arrowPoint.x - arrowWidth/2 + arrowBottomCornerRadius, kBTTPopoverViewArrowHeight)];
-            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowCornerRadius, arrowCornerRadius)
-                             controlPoint:arrowPoint];
-            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, kBTTPopoverViewArrowHeight)
-                             controlPoint:CGPointMake(arrowPoint.x + arrowWidth/2 - arrowBottomCornerRadius, kBTTPopoverViewArrowHeight)];
-        }
-    }
+//    if (_isUpward) {
+//
+//        [maskPath addLineToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, kBTTPopoverViewArrowHeight)];
+//        // 菱角箭头
+//        if (_arrowStyle == BTTPopoverViewArrowStyleTriangle) {
+//
+//            [maskPath addLineToPoint:arrowPoint];
+//            [maskPath addLineToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, kBTTPopoverViewArrowHeight)];
+//        } else {
+//
+//            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowCornerRadius, arrowCornerRadius)
+//                             controlPoint:CGPointMake(arrowPoint.x - arrowWidth/2 + arrowBottomCornerRadius, kBTTPopoverViewArrowHeight)];
+//            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowCornerRadius, arrowCornerRadius)
+//                             controlPoint:arrowPoint];
+//            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, kBTTPopoverViewArrowHeight)
+//                             controlPoint:CGPointMake(arrowPoint.x + arrowWidth/2 - arrowBottomCornerRadius, kBTTPopoverViewArrowHeight)];
+//        }
+//    }
     // 右上圆角
     [maskPath addLineToPoint:CGPointMake(currentW - cornerRadius, maskTop)];
     [maskPath addArcWithCenter:CGPointMake(currentW - cornerRadius, maskTop + cornerRadius)
@@ -234,24 +243,24 @@ float BTTPopoverViewDegreesToRadians(float angle)
                       endAngle:BTTPopoverViewDegreesToRadians(90)
                      clockwise:YES];
     // 箭头向下时的箭头位置
-    if (!_isUpward) {
-        
-        [maskPath addLineToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, currentH - kBTTPopoverViewArrowHeight)];
-        // 菱角箭头
-        if (_arrowStyle == BTTPopoverViewArrowStyleTriangle) {
-            
-            [maskPath addLineToPoint:arrowPoint];
-            [maskPath addLineToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, currentH - kBTTPopoverViewArrowHeight)];
-        } else {
-            
-            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowCornerRadius, currentH - arrowCornerRadius)
-                             controlPoint:CGPointMake(arrowPoint.x + arrowWidth/2 - arrowBottomCornerRadius, currentH - kBTTPopoverViewArrowHeight)];
-            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowCornerRadius, currentH - arrowCornerRadius)
-                             controlPoint:arrowPoint];
-            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, currentH - kBTTPopoverViewArrowHeight)
-                             controlPoint:CGPointMake(arrowPoint.x - arrowWidth/2 + arrowBottomCornerRadius, currentH - kBTTPopoverViewArrowHeight)];
-        }
-    }
+//    if (!_isUpward) {
+//
+//        [maskPath addLineToPoint:CGPointMake(arrowPoint.x + arrowWidth/2, currentH - kBTTPopoverViewArrowHeight)];
+//        // 菱角箭头
+//        if (_arrowStyle == BTTPopoverViewArrowStyleTriangle) {
+//
+//            [maskPath addLineToPoint:arrowPoint];
+//            [maskPath addLineToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, currentH - kBTTPopoverViewArrowHeight)];
+//        } else {
+//
+//            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x + arrowCornerRadius, currentH - arrowCornerRadius)
+//                             controlPoint:CGPointMake(arrowPoint.x + arrowWidth/2 - arrowBottomCornerRadius, currentH - kBTTPopoverViewArrowHeight)];
+//            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowCornerRadius, currentH - arrowCornerRadius)
+//                             controlPoint:arrowPoint];
+//            [maskPath addQuadCurveToPoint:CGPointMake(arrowPoint.x - arrowWidth/2, currentH - kBTTPopoverViewArrowHeight)
+//                             controlPoint:CGPointMake(arrowPoint.x - arrowWidth/2 + arrowBottomCornerRadius, currentH - kBTTPopoverViewArrowHeight)];
+//        }
+//    }
     // 左下圆角
     [maskPath addLineToPoint:CGPointMake(cornerRadius, maskBottom)];
     [maskPath addArcWithCenter:CGPointMake(cornerRadius, maskBottom - cornerRadius)
@@ -279,13 +288,20 @@ float BTTPopoverViewDegreesToRadians(float angle)
 
     [_keyWindow addSubview:self];
     
+    [_keyWindow addSubview:_closeBtn];
+    
+    
+    
     // 弹出动画
     CGRect oldFrame = self.frame;
     self.layer.anchorPoint = CGPointMake(arrowPoint.x/currentW, _isUpward ? 0.f : 1.f);
     self.frame = oldFrame;
+    _closeBtn.frame = CGRectMake(SCREEN_WIDTH - 28, oldFrame.origin.y, 24, 24);
     self.transform = CGAffineTransformMakeScale(0.01f, 0.01f);
+    self.closeBtn.transform = CGAffineTransformMakeScale(0.01f, 0.01f);
     [UIView animateWithDuration:0.25f animations:^{
         self.transform = CGAffineTransformIdentity;
+        self.closeBtn.transform = CGAffineTransformIdentity;
         self->_shadeView.alpha = 1.f;
     }];
 }
@@ -347,9 +363,11 @@ float BTTPopoverViewDegreesToRadians(float angle)
         self.alpha = 0.f;
         self->_shadeView.alpha = 0.f;
         self.transform = CGAffineTransformMakeScale(0.01f, 0.01f);
+        self.closeBtn.transform = CGAffineTransformMakeScale(0.01f, 0.01f);
     } completion:^(BOOL finished) {
         [self->_shadeView removeFromSuperview];
         [self removeFromSuperview];
+        [self.closeBtn removeFromSuperview];
     }];
 }
 

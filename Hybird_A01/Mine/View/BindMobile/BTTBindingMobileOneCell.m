@@ -82,6 +82,15 @@
     if ([model.name isEqualToString:@"卡号"]) {
         self.textField.keyboardType = UIKeyboardTypeNumberPad;
     }
+    if ([model.name isEqualToString:@"出生日期"]) {
+        if (([IVNetwork userInfo].customerLevel == 5 || [IVNetwork userInfo].customerLevel == 6) && [IVNetwork userInfo].birthday.length) {
+            self.textField.textColor = [UIColor colorWithHexString:@"818791"];
+        } else {
+            self.textField.textColor = [UIColor whiteColor];
+        }
+    } else {
+        self.textField.textColor = [UIColor whiteColor];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

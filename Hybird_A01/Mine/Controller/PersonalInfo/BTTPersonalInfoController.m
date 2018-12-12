@@ -66,6 +66,9 @@
             cell.textField.text = selectValue;
         }];
     } else if (indexPath.item == 3) {
+        if (([IVNetwork userInfo].customerLevel == 5 || [IVNetwork userInfo].customerLevel == 6) && [IVNetwork userInfo].birthday.length) {
+            return;
+        }
         BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
         NSDate *minDate = [NSDate br_setYear:1900 month:1 day:1];
         NSDate *maxDate = [NSDate date];

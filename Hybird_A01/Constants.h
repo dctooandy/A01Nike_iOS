@@ -181,7 +181,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTCallBackMemberAPI         @"/public/phones/memberCall"
 #define BTTCallBackCustomAPI         @"/phones/customCall"
 
-// 取款额度查询接口
+// 本地额度 + 最后一厅额度
 
 #define BTTCreditsTotalAvailable     @"/public/credits/totalAvailable"
 
@@ -200,7 +200,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTPromotionList             @"/A01/promotion/newList"
 
-// 获取用户所有厅余额总和
+// 获取用户本地额度
 
 #define BTTCreditsLocal              @"/public/credits/local"
 

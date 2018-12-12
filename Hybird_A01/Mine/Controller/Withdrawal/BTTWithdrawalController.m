@@ -34,8 +34,12 @@
     self.totalAvailable = @"-";
     [self setupCollectionView];
     [self loadMainData];
-    [self loadCreditsTotalAvailable];
     [self refreshBankList];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadCreditsTotalAvailable];
 }
 
 - (void)setupCollectionView {
@@ -225,6 +229,10 @@
 }
 - (void)submitWithDraw
 {
+    if (self.amount.floatValue < 10) {
+        [MBProgressHUD showError:@"最少10元" toView:nil];
+        return;
+    }
     BTTBankModel *model = self.bankList[self.selectIndex];
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"customer_bank_id"] = model.customer_bank_id;
