@@ -181,15 +181,15 @@
                 [strongSelf.navigationController pushViewController:vc animated:YES];
             };
             return cell;
-        } else if (indexPath.row == 5 || indexPath.row == 10 || indexPath.row == 13) {
+        } else if (indexPath.row == 5 || indexPath.row == 7 + (self.promotions.count ? self.promotions.count : 3) || indexPath.row == 10 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
             return cell;
-        } else if (indexPath.row == 6 || indexPath.row == 11 || indexPath.row == 14) {
+        } else if (indexPath.row == 6 || indexPath.row == 8 + (self.promotions.count ? self.promotions.count : 3) || indexPath.row == 11 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTHomePageDiscountHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountHeaderCell" forIndexPath:indexPath];
             BTTHomePageHeaderModel *headerModel = nil;
             if (indexPath.row == 6) {
                 headerModel = self.headers[0];
-            } else if (indexPath.row == 11) {
+            } else if (indexPath.row == 8 + (self.promotions.count ? self.promotions.count : 3)) {
                 headerModel = self.headers[1];
                 if (self.Activities.count > 1) {
                     headerModel.detailBtnStr = @"查看下一组";
@@ -201,17 +201,17 @@
             }
             cell.headerModel = headerModel;
             return cell;
-        } else if (indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9) {
+        } else if (indexPath.row >= 7 && indexPath.row < 7 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTHomePageDiscountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountCell" forIndexPath:indexPath];
             BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 7] : nil;
-            if (indexPath.row == 9) {
+            if (indexPath.row == 6 + (self.promotions.count ? self.promotions.count : 3)) {
                 cell.mineSparaterType = BTTMineSparaterTypeNone;
             } else {
                 cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
             }
             cell.model = model;
             return cell;
-        } else if (indexPath.row == 12) {
+        } else if (indexPath.row == 9 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTHomePageActivitiesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageActivitiesCell" forIndexPath:indexPath];
             BTTActivityModel *model = self.Activities.count ? self.Activities[self.nextGroup] : nil;
             cell.activityModel = model;
@@ -227,11 +227,10 @@
                 });
             };
             return cell;
-        } else if (indexPath.row == 16) {
+        } else if (indexPath.row == 13 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTHomePageFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageFooterCell" forIndexPath:indexPath];
             return cell;
-        }
-        else  {
+        } else  {
             BTTHomePageAmountsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAmountsCell" forIndexPath:indexPath];
             cell.amounts = self.amounts;
             return cell;
@@ -287,15 +286,15 @@
                 [strongSelf.navigationController pushViewController:vc animated:YES];
             };
             return cell;
-        } else if (indexPath.row == 4 || indexPath.row == 9 || indexPath.row == 12) {
+        } else if (indexPath.row == 4 || indexPath.row == 6 + (self.promotions.count ? self.promotions.count : 3) || indexPath.row == 9 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
             return cell;
-        } else if (indexPath.row == 5 || indexPath.row == 10 || indexPath.row == 13) {
+        } else if (indexPath.row == 5 || indexPath.row == 7 + (self.promotions.count ? self.promotions.count : 3) || indexPath.row == 10 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTHomePageDiscountHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountHeaderCell" forIndexPath:indexPath];
             BTTHomePageHeaderModel *model = nil;
             if (indexPath.row == 5) {
                 model = self.headers[0];
-            } else if (indexPath.row == 10) {
+            } else if (indexPath.row == 7 + (self.promotions.count ? self.promotions.count : 3)) {
                 model = self.headers[1];
                 if (self.Activities.count > 1) {
                     model.detailBtnStr = @"查看下一组";
@@ -307,17 +306,17 @@
             }
             cell.headerModel = model;
             return cell;
-        } else if (indexPath.row == 7 || indexPath.row == 6 || indexPath.row == 8) {
+        } else if (indexPath.row >= 6 && indexPath.row < 6 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 6] : nil;
             BTTHomePageDiscountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageDiscountCell" forIndexPath:indexPath];
-            if (indexPath.row == 8) {
+            if (indexPath.row == 5 + (self.promotions.count ? self.promotions.count : 3)) {
                 cell.mineSparaterType = BTTMineSparaterTypeNone;
             } else {
                 cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
             }
             cell.model = model;
             return cell;
-        } else if (indexPath.row == 11) {
+        } else if (indexPath.row == 8 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTHomePageActivitiesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageActivitiesCell" forIndexPath:indexPath];
             BTTActivityModel *model = self.Activities.count ? self.Activities[self.nextGroup] : nil;
             cell.activityModel = model;
@@ -333,7 +332,7 @@
                 });
             };
             return cell;
-        } else if (indexPath.row == 15) {
+        } else if (indexPath.row == 12 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTHomePageFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageFooterCell" forIndexPath:indexPath];
             return cell;
         }
@@ -348,11 +347,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     if (self.adCellShow) {
-        if (indexPath.row == 11) {
-            if (indexPath.row == 11) {
-                [self refreshDataOfActivities];
-            }
-        } else if (indexPath.row == 7 || indexPath.row == 8 || indexPath.row == 9) {
+        if (indexPath.row == 12 + (self.promotions.count ? self.promotions.count : 3)) {
+            [self refreshDataOfActivities];
+        } else if (indexPath.row >= 7 && indexPath.row < 7 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 7] : nil;
             if (!model) {
                 return;
@@ -367,7 +364,7 @@
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"inside";
             [self.navigationController pushViewController:vc animated:YES];
-        } else if (indexPath.row == 0 || indexPath.row == 16) {
+        } else if (indexPath.row == 0 || indexPath.row == 13 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTPosterModel * model = self.posters.count ? self.posters[0] : nil;
             if (!model) {
                 return;
@@ -377,7 +374,7 @@
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"outside";
             [self.navigationController pushViewController:vc animated:YES];
-        } else if (indexPath.row == 6 || indexPath.row == 11 || indexPath.row == 14) {
+        } else if (indexPath.row == 6 || indexPath.row == 8 + (self.promotions.count ? self.promotions.count : 3) || indexPath.row == 11 + (self.promotions.count ? self.promotions.count : 3)) {
             if (indexPath.row == 6) {
                 BTTDiscountsViewController *vc = [[BTTDiscountsViewController alloc] init];
                 vc.discountsVCType = BTTDiscountsVCTypeDetail;
@@ -385,11 +382,9 @@
             }
         }
     } else {
-        if (indexPath.row == 10) {
-            if (indexPath.row == 10) {
-                [self refreshDataOfActivities];
-            }
-        } else if (indexPath.row == 7 || indexPath.row == 6 || indexPath.row == 8) {
+        if (indexPath.row == 7 + (self.promotions.count ? self.promotions.count : 3)) {
+            [self refreshDataOfActivities];
+        } else if (indexPath.row >= 6 && indexPath.row < 6 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 6] : nil;
             if (!model) {
                 return;
@@ -404,13 +399,13 @@
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"inside";
             [self.navigationController pushViewController:vc animated:YES];
-        } else if (indexPath.row == 5 || indexPath.row == 10 || indexPath.row == 13) {
+        } else if (indexPath.row == 5 || indexPath.row == 7 + (self.promotions.count ? self.promotions.count : 3) || indexPath.row == 10 + (self.promotions.count ? self.promotions.count : 3)) {
             if (indexPath.row == 5) {
                 BTTDiscountsViewController *vc = [[BTTDiscountsViewController alloc] init];
                 vc.discountsVCType = BTTDiscountsVCTypeDetail;
                 [self.navigationController pushViewController:vc animated:YES];
             }
-        } else if (indexPath.row == 15) {
+        } else if (indexPath.row == 12 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTPosterModel * model = self.posters.count ? self.posters[0] : nil;
             if (!model) {
                 return;
@@ -471,10 +466,11 @@
     } else {
         self.adCellShow = NO;
     }
+    NSInteger promotionCount = self.promotions.count ? self.promotions.count : 3;
     if (self.adCellShow) {
-        total = 17;
+        total = 14 + promotionCount;
     } else {
-        total = 16;
+        total = 13 + promotionCount;
     }
     for (int i = 0; i < total; i++) {
         if (self.adCellShow) {
@@ -486,22 +482,22 @@
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 174)]];
             } else if (i == 4) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 166)]];
-            } else if (i == 5 || i == 10 || i == 13) {
+            } else if (i == 5 || i == 7 + promotionCount || i == 10 + promotionCount) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
-            } else if (i == 6 || i == 11 || i == 14) {
+            } else if (i == 6 || i == 8 + promotionCount || i == 11 + promotionCount) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 45)]];
-            } else if (i == 7 || i == 8 || i == 9) {
+            } else if (i >= 7 && i < 7 + promotionCount) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 130)]];
-            } else if (i == 12) {
+            } else if (i == 9 + promotionCount) {
                 if (self.Activities.count) {
                     BTTActivityModel *model = self.Activities[self.nextGroup];
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, model.cellHeight)]];
                 } else {
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 228)]];
                 }
-            } else if (i == 15) {
+            } else if (i == 12 + promotionCount) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 295)]];
-            } else if (i == 16) {
+            } else if (i == 13 + promotionCount) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 60)]];
             }
             else {
@@ -516,22 +512,22 @@
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 174)]];
             } else if (i == 3) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 166)]];
-            } else if (i == 4 || i == 9 || i == 12) {
+            } else if (i == 4 || i == 6 + promotionCount || i == 9 + promotionCount) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
-            } else if (i == 5 || i == 10 || i == 13) {
+            } else if (i == 5 || i == 7 + promotionCount || i == 10 + promotionCount) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 45)]];
-            } else if (i == 7 || i == 6 || i == 8) {
+            } else if (i >= 6 && i < 6 + promotionCount) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 130)]];
-            } else if (i == 11) {
+            } else if (i == 8 + promotionCount) {
                 if (self.Activities.count) {
                     BTTActivityModel *model = self.Activities[self.nextGroup];
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, model.cellHeight)]];
                 } else {
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 228)]];
                 }
-            } else if (i == 14) {
+            } else if (i == 11 + promotionCount) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 295)]];
-            } else if (i == 15) {
+            } else if (i == 12 + promotionCount) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 60)]];
             }
             else {
