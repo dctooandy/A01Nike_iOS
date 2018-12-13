@@ -204,6 +204,9 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTCreditsLocal              @"/public/credits/local"
 
+//取款是否需要流水
+#define BTTBetInfo                   @"/A01/bet/betInfo"
+
 #define BTTSelectedBankId            @"BTTSelectedBankId"
 #define BTTCacheBankListKey          @"BTTCacheBankListKey"
 #define BTTCacheBTCRateKey           @"BTTCacheBTCRateKey"

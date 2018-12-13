@@ -18,6 +18,7 @@
 #import "BTTWithdrawalSuccessController.h"
 #import "BTTAccountBalanceController.h"
 #import "BTTBankModel.h"
+#import "BTTWithdrawalNotifyCell.h"
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate>
 @property(nonatomic, copy)NSString *amount;
 @property(nonatomic, copy)NSString *password;
@@ -40,6 +41,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self loadCreditsTotalAvailable];
+    [self loadBetInfo];
 }
 
 - (void)setupCollectionView {
@@ -50,14 +52,16 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTWithdrawalCardSelectCell" bundle:nil] forCellWithReuseIdentifier:@"BTTWithdrawalCardSelectCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTWithdrawalNotifyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTWithdrawalNotifyCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.elementsHight.count;
+    return self.sheetDatas.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     weakSelf(weakSelf);
+    BTTMeMainModel *cellModel = self.sheetDatas[indexPath.row];
     if (indexPath.row == 0) {
         BTTWithdrawalHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalHeaderCell" forIndexPath:indexPath];
         cell.totalAvailable = self.totalAvailable;
@@ -67,42 +71,60 @@
             [strongSelf.navigationController pushViewController:accountBalance animated:YES];
         };
         return cell;
-    } else if (indexPath.row == 1) {
+    }
+    if (indexPath.row == 1) {
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
-    } else if (indexPath.row == self.sheetDatas.count) {
+    }
+    if (indexPath.row == self.sheetDatas.count - 1) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf submitWithDraw];
         };
         return cell;
-    }  else {
-        BTTMeMainModel *model = self.sheetDatas[indexPath.row];
-        if ([model.name isEqualToString:@"取款至"]) {
-            BTTWithdrawalCardSelectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalCardSelectCell" forIndexPath:indexPath];
-            cell.model = self.bankList[self.selectIndex];
-            return cell;
-        } else {
-            BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
-            cell.model = model;
-            if ([model.name isEqualToString:@"登录密码"]) {
-                cell.textField.secureTextEntry = YES;
-                cell.textField.keyboardType = UIKeyboardTypeDefault;
-                cell.textField.text = self.password;
-                cell.textField.tag = 8001;
-            } else if ([model.name isEqualToString:@"金额(元)"]) {
-                cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
-                cell.textField.secureTextEntry = NO;
-                cell.textField.text = self.amount;
-                cell.textField.tag = 8002;
-            } else if ([model.name isEqualToString:@"比特币"]) {
-                cell.textField.userInteractionEnabled = NO;
-            }
-            [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+    }
+    if (self.betInfoModel.status) {
+        if (indexPath.row == 5) {
+            BTTWithdrawalNotifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalNotifyCell" forIndexPath:indexPath];
+            cell.model = cellModel;
+            cell.betInfoModel = self.betInfoModel;
             return cell;
         }
-        
+        if (indexPath.row == 6) {
+            BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
+            return cell;
+        }
     }
+    NSString *cellName = cellModel.name;
+    if ([cellName isEqualToString:@"取款至"]) {
+        BTTWithdrawalCardSelectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalCardSelectCell" forIndexPath:indexPath];
+        cell.model = self.bankList[self.selectIndex];
+        return cell;
+    }
+    
+    BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
+    cell.model = cellModel;
+    cell.textField.userInteractionEnabled = cellModel.available;
+    cell.textField.text = cellModel.desc;
+    cell.textField.secureTextEntry = NO;
+    if ([cellName isEqualToString:@"本次存款金额"]) {
+        cell.textField.textColor = [UIColor colorWithHexString:@"2497FF"];
+    } else if ([cellName isEqualToString:@"需要达到的投注额"]) {
+        cell.textField.textColor = [UIColor colorWithHexString:@"2497FF"];
+    } else if ([cellName isEqualToString:@"已经达成的投注额"]) {
+        cell.textField.textColor = [UIColor colorWithHexString:@"2497FF"];
+    } else if ([cellName isEqualToString:@"登录密码"]) {
+        cell.textField.secureTextEntry = YES;
+        cell.textField.keyboardType = UIKeyboardTypeDefault;
+        cell.textField.text = self.password;
+        cell.textField.tag = 8001;
+    } else if ([cellName isEqualToString:@"金额(元)"]) {
+        cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
+        cell.textField.text = self.amount;
+        cell.textField.tag = 8002;
+    }
+    [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+    return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -151,19 +173,10 @@
     if (self.elementsHight.count) {
         [self.elementsHight removeAllObjects];
     }
-    NSInteger total = self.sheetDatas.count + 1;
+    NSInteger total = self.sheetDatas.count;
     for (int i = 0; i < total; i++) {
-        if (i == self.sheetDatas.count) {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
-        } else {
-            if (i == 0) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 205)]];
-            } else if (i == 1) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
-            } else {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
-            }
-        }
+        BTTMeMainModel *cellModel = self.sheetDatas[i];
+        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, cellModel.cellHeight)]];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
@@ -185,7 +198,7 @@
 }
 - (UIButton *)getSubmitBtn
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.sheetDatas.count inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.sheetDatas.count - 1 inSection:0];
     BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     return cell.btn;
 }

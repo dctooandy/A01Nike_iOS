@@ -432,6 +432,9 @@
 		D5DBEB4421AD3721008AF629 /* CNPayQRStep2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEB4221AD3721008AF629 /* CNPayQRStep2VC.m */; };
 		D5DBEB4521AD3721008AF629 /* CNPayQRStep2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEB4321AD3721008AF629 /* CNPayQRStep2VC.xib */; };
 		D5DBEB4821AD470E008AF629 /* CNPayDashedLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEB4721AD470E008AF629 /* CNPayDashedLineView.m */; };
+		EA55F37B21C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA55F37921C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.m */; };
+		EA55F37C21C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA55F37A21C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.xib */; };
+		EA55F37F21C220CA008FB0E1 /* BTTBetInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA55F37E21C220CA008FB0E1 /* BTTBetInfoModel.m */; };
 		EA5F140B21A26042004305A7 /* BTTRequestPrecache.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F140A21A26042004305A7 /* BTTRequestPrecache.m */; };
 		EA5F140E21A261BA004305A7 /* BTTHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F140D21A261BA004305A7 /* BTTHttpManager.m */; };
 		EA5F141121A265B0004305A7 /* BTTBankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141021A265B0004305A7 /* BTTBankModel.m */; };
@@ -1383,6 +1386,11 @@
 		D5DBEB4321AD3721008AF629 /* CNPayQRStep2VC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNPayQRStep2VC.xib; sourceTree = "<group>"; };
 		D5DBEB4621AD470E008AF629 /* CNPayDashedLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayDashedLineView.h; sourceTree = "<group>"; };
 		D5DBEB4721AD470E008AF629 /* CNPayDashedLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayDashedLineView.m; sourceTree = "<group>"; };
+		EA55F37821C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWithdrawalNotifyCell.h; sourceTree = "<group>"; };
+		EA55F37921C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTWithdrawalNotifyCell.m; sourceTree = "<group>"; };
+		EA55F37A21C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTWithdrawalNotifyCell.xib; sourceTree = "<group>"; };
+		EA55F37D21C220CA008FB0E1 /* BTTBetInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBetInfoModel.h; sourceTree = "<group>"; };
+		EA55F37E21C220CA008FB0E1 /* BTTBetInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBetInfoModel.m; sourceTree = "<group>"; };
 		EA5F140921A26042004305A7 /* BTTRequestPrecache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTRequestPrecache.h; sourceTree = "<group>"; };
 		EA5F140A21A26042004305A7 /* BTTRequestPrecache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTRequestPrecache.m; sourceTree = "<group>"; };
 		EA5F140C21A261BA004305A7 /* BTTHttpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTHttpManager.h; sourceTree = "<group>"; };
@@ -1706,6 +1714,9 @@
 				3A11AE042181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.h */,
 				3A11AE052181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.m */,
 				3A11AE062181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.xib */,
+				EA55F37821C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.h */,
+				EA55F37921C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.m */,
+				EA55F37A21C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.xib */,
 			);
 			path = Withdrawal;
 			sourceTree = "<group>";
@@ -2822,6 +2833,8 @@
 				3A5F7A9421A8E4C600128E8B /* BTTXimaSuccessItemModel.m */,
 				3A5F7AA121A9524D00128E8B /* BTTProvinceModel.h */,
 				3A5F7AA221A9524D00128E8B /* BTTProvinceModel.m */,
+				EA55F37D21C220CA008FB0E1 /* BTTBetInfoModel.h */,
+				EA55F37E21C220CA008FB0E1 /* BTTBetInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3892,6 +3905,7 @@
 				EAE89EED218C3ABD00C29393 /* LIVVideoRecorderItem@3x.png in Resources */,
 				EAE89E93218C3ABD00C29393 /* puzzledom.gif in Resources */,
 				3AAE8216219A738B003EC8B0 /* BTTRegisterNormalCell.xib in Resources */,
+				EA55F37C21C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.xib in Resources */,
 				3AD9CE362167107B00685B43 /* LIVConfig.plist in Resources */,
 				EAE89EBE218C3ABD00C29393 /* LIVLocationItem@3x.png in Resources */,
 				EAE89EB4218C3ABD00C29393 /* LIVFileMessage_TypeTxt@3x.png in Resources */,
@@ -4051,7 +4065,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
@@ -4062,7 +4076,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -4150,6 +4164,7 @@
 				3A9E4C3D219E55CF00E7D8C0 /* BTTMakeCallSuccessView.m in Sources */,
 				3AD9CF2F216C763800685B43 /* UIView+FrameCategory.m in Sources */,
 				3A11AE172183F57C00B1AFF4 /* BTTAccountSafeController.m in Sources */,
+				EA55F37F21C220CA008FB0E1 /* BTTBetInfoModel.m in Sources */,
 				3A11ADFA2181A56000B1AFF4 /* BTTWithdrawalController+LoadData.m in Sources */,
 				EA5F142021A2AEC1004305A7 /* BTTUserStatusManager.m in Sources */,
 				D599252A21AFF23B001E885A /* CNPayVC.m in Sources */,
@@ -4293,6 +4308,7 @@
 				3ADD23F02179B97A00FA959A /* SDCollectionViewCell.m in Sources */,
 				3AC3FFA1219AB8CC008AECCB /* BTTAnimationPopView.m in Sources */,
 				3A11AE622186CDA100B1AFF4 /* BTTXimaHeaderCell.m in Sources */,
+				EA55F37B21C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.m in Sources */,
 				3AF1B81921AF994A00BF8C3A /* BTTVideoGamesFooterCell.m in Sources */,
 				3A5F7AA321A9524D00128E8B /* BTTProvinceModel.m in Sources */,
 				3A11AE6C2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.m in Sources */,

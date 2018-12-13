@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *url;
 
-
+@property (nonatomic, assign) CGFloat cellHeight;
 //
 
 @property (nonatomic, copy) NSString *paymentName;
