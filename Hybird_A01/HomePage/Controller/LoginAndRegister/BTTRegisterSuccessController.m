@@ -31,6 +31,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem new];
     self.title = @"注册成功";
     self.registerSuccessType = BTTRegisterSuccessTypeNormal;
     [self setupCollectionView];
