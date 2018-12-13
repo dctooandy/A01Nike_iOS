@@ -20,6 +20,8 @@
                 <outlet property="depositByLb" destination="HaM-e9-ZWY" id="lhx-aI-hJw"/>
                 <outlet property="payTypeTF" destination="pnp-qS-MDo" id="x5H-7g-AKD"/>
                 <outlet property="preSettingMessageLb" destination="aED-kT-Dxt" id="U1e-MA-H0h"/>
+                <outlet property="preSettingView" destination="2Sy-ig-pfU" id="ulf-EN-ijK"/>
+                <outlet property="preSettingViewHeight" destination="yfO-3M-Vv0" id="JCD-sQ-2oR"/>
                 <outlet property="provinceTF" destination="pT6-l3-ijI" id="jCo-z2-gaf"/>
                 <outlet property="remarkTF" destination="7ii-30-dIe" id="DR2-PF-qYk"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
