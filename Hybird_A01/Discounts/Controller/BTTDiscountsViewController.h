@@ -7,6 +7,7 @@
 //
 
 #import "BTTCollectionViewController.h"
+#import "JXRegisterManager.h"
 
 typedef enum {
     BTTDiscountsVCTypeFirst, ///< 首页
@@ -15,7 +16,7 @@ typedef enum {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BTTDiscountsViewController : BTTCollectionViewController
+@interface BTTDiscountsViewController : BTTCollectionViewController<JXRegisterManagerDelegate>
 
 @property (nonatomic, assign) BTTDiscountsVCType discountsVCType;
 

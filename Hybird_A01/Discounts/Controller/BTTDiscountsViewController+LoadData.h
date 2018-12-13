@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadMainData;
 
+- (void)makeCallWithPhoneNum:(NSString *)phone;
+
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
 
 
