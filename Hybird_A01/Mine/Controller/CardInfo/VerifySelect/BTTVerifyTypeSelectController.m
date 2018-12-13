@@ -64,6 +64,11 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BTTVerifySelectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVerifySelectCell" forIndexPath:indexPath];
     cell.model = self.sheetDatas[indexPath.row];
+    if (indexPath.row == self.sheetDatas.count - 1) {
+        cell.mineSparaterType = BTTMineSparaterTypeNone;
+    } else {
+        cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
+    }
     return cell;
 }
 

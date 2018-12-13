@@ -17,15 +17,12 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *label;
-
 @end
 
 @implementation BTTVerifySelectCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.label.layer.cornerRadius = 2;
 }
 
 - (void)setModel:(BTTMeMainModel *)model {
@@ -34,10 +31,8 @@
     self.nameLabel.text = model.name;
     self.detailLabel.text = model.desc;
     if ([model.name isEqualToString:@"通过短信验证"]) {
-        self.label.hidden = NO;
         self.mineSparaterType = BTTMineSparaterTypeSingleLine;
     } else {
-        self.label.hidden = YES;
         self.mineSparaterType = BTTMineSparaterTypeNone;
     }
 }

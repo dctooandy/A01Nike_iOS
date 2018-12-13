@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,35 +38,21 @@
                         <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="推荐" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0M-Ra-x4z">
-                        <rect key="frame" x="134.5" y="13" width="35" height="17"/>
-                        <color key="backgroundColor" red="0.81960784310000001" green="0.21960784310000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="17" id="6eJ-Wm-VSc"/>
-                            <constraint firstAttribute="width" constant="35" id="vHO-84-i4S"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="H0M-Ra-x4z" firstAttribute="centerY" secondItem="5aM-b4-SeG" secondAttribute="centerY" id="Gid-lf-W77"/>
                 <constraint firstItem="5aM-b4-SeG" firstAttribute="leading" secondItem="t7w-FL-mwK" secondAttribute="trailing" constant="8" id="NuT-5i-MRr"/>
                 <constraint firstItem="5D9-fY-F9f" firstAttribute="leading" secondItem="t7w-FL-mwK" secondAttribute="trailing" constant="8" id="Nwi-xv-wfP"/>
                 <constraint firstItem="5D9-fY-F9f" firstAttribute="top" secondItem="5aM-b4-SeG" secondAttribute="bottom" constant="8" id="TSR-hW-tpJ"/>
                 <constraint firstItem="t7w-FL-mwK" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="gJJ-mC-WU2"/>
                 <constraint firstItem="5aM-b4-SeG" firstAttribute="top" secondItem="t7w-FL-mwK" secondAttribute="top" id="hb0-Yf-A1e"/>
                 <constraint firstAttribute="trailing" secondItem="5D9-fY-F9f" secondAttribute="trailing" constant="15" id="ncp-6Z-Fbx"/>
-                <constraint firstItem="H0M-Ra-x4z" firstAttribute="leading" secondItem="5aM-b4-SeG" secondAttribute="trailing" constant="15" id="rCZ-CK-GsG"/>
                 <constraint firstItem="t7w-FL-mwK" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="vBC-WG-W0U"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
                 <outlet property="detailLabel" destination="5D9-fY-F9f" id="xNQ-6u-p0g"/>
                 <outlet property="iconImage" destination="t7w-FL-mwK" id="DBb-Y6-WAc"/>
-                <outlet property="label" destination="H0M-Ra-x4z" id="5Vz-3m-hpQ"/>
                 <outlet property="nameLabel" destination="5aM-b4-SeG" id="H4d-6N-niK"/>
             </connections>
         </collectionViewCell>
