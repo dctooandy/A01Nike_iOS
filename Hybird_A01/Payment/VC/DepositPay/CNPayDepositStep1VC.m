@@ -10,11 +10,6 @@
 
 
 @interface CNPayDepositStep1VC ()
-
-@property (weak, nonatomic) IBOutlet UIView *preSettingView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *preSettingViewHeight;
-@property (weak, nonatomic) IBOutlet UILabel *preSettingMessageLb;
-
 @property (weak, nonatomic) IBOutlet UITextField *nameTF;
 
 @property (weak, nonatomic) IBOutlet CNPayAmountRecommendView *nameView;
@@ -26,24 +21,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self configPreSettingMessage];
     [self configRecommendView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setViewHeight:350 fullScreen:NO];
-}
-
-- (void)configPreSettingMessage {
-    if (self.preSaveMsg.length > 0) {
-        self.preSettingMessageLb.text = self.preSaveMsg;
-        self.preSettingViewHeight.constant = 50;
-        self.preSettingView.hidden = NO;
-    } else {
-        self.preSettingViewHeight.constant = 0;
-        self.preSettingView.hidden = YES;
-    }
 }
 
 /// 推荐姓名
