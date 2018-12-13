@@ -21,8 +21,16 @@
     if (model.isBTC) {
         self.bankIcon.image = [UIImage imageNamed:@"BTC"];
     } else {
-        NSURL *url = [NSURL URLWithString:model.banklogo];
-        [self.bankIcon sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"defaultCardIcon"]];
+        NSString *iconURLStr = model.banklogo;
+        if ([NSString isBlankString:iconURLStr]) {
+            iconURLStr = @"";
+        } else {
+            if (![iconURLStr hasPrefix:@"http"]) {
+                iconURLStr = [NSString stringWithFormat:@"%@%@",[IVNetwork cdn],iconURLStr];
+            }
+        }
+        NSURL *iconUrl = [NSURL URLWithString:iconURLStr];
+        [self.bankIcon sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"defaultCardIcon"]];
     }
     
 }

@@ -35,7 +35,7 @@
     
     NSArray *placeholders1 = @[@"",@""];
     NSArray *placeholders2 = @[@"",@"",@"",@"",@""];
-    NSArray *placeholders3 = @[@"取款限额:10-1000万RMB,未享受优惠全额投注即可取款",rateStr,@"***银行-尾号*****",@"请输入游戏账号的登录密码",@""];
+    NSArray *placeholders3 = @[@"最少10元",rateStr,@"***银行-尾号*****",@"请输入游戏账号的登录密码",@""];
     NSArray *heights1 = @[@205.0,@15.0];
     NSArray *heights2 = @[@44.0,@44.0,@44.0,@(notifyHeight),@15.0];
     NSArray *heights3 = @[@44.0,@44.0,@44.0,@44.0,@100.0];
