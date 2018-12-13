@@ -54,13 +54,13 @@
             UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self addSubview:serviceBtn];
             serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
-//            [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
+            [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
             [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             
             __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self addSubview:messageBtn];
             messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
-//            [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
+            [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
             messageBtn.redDotOffset = CGPointMake(1, 3);
             messageBtn.tag = 2002;
             [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
