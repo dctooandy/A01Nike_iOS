@@ -169,7 +169,6 @@ static const char *BTTHeaderViewKey = "headerView";
             [popView dismiss];
             [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
         }
-        
     };
 }
 

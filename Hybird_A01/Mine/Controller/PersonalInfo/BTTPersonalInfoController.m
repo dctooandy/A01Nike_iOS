@@ -9,7 +9,7 @@
 #import "BTTPersonalInfoController.h"
 #import "BTTPersonalInfoController+LoadData.h"
 #import "BTTBindingMobileOneCell.h"
-#import "BTTBindingMobileBtnCell.h"
+#import "BTTPublicBtnCell.h"
 #import "BRPickerView.h"
 
 
@@ -31,7 +31,7 @@
     [super setupCollectionView];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPublicBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPublicBtnCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -40,7 +40,8 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.sheetDatas.count) {
-        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
+        cell.btnType = BTTPublicBtnTypeSave;
         cell.btn.enabled = YES;
         weakSelf(weakSelf)
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
