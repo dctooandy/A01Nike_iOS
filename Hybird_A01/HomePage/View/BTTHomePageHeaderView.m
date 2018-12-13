@@ -69,7 +69,7 @@
                               parentKey:BTTHomePageItemsKey
                             defaultShow:NO];
             [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
-                messageBtn.showRedDot = show;
+                messageBtn.showRedDot = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey] integerValue];
             } handler:self];
             
             [self setupLoginAndRegisterBtn];
