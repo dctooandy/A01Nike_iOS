@@ -132,7 +132,7 @@
 
 - (void)setupViewControllers {
     [self addOneChildVC:self.homePageVC title:@"首页" imageName:@"home_normal" selectedImageName:@"home_pressed"];
-    [self addOneChildVC:self.voiceCall title:@"APP语音" imageName:@"customer_service_normal" selectedImageName:@"customer_service_pressed"];
+    [self addOneChildVC:self.voiceCall title:@"APP语音" imageName:@"tab_voiceCall" selectedImageName:@"tab_voiceCall"];
     [self addOneChildVC:self.lucky title:@"抽奖" imageName:@"lottery_pressed" selectedImageName:@"lottery_pressed"];
     if ([IVNetwork userInfo]) {
         [self addOneChildVC:self.discountsVC title:@"优惠" imageName:@"preferential_normal" selectedImageName:@"preferential_pressed"];

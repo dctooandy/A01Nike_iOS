@@ -68,8 +68,8 @@
             textField.text = [textField.text substringToIndex:9];
         }
     } else if (textField.tag == 1012) {
-        if (textField.text.length > 10) {
-            textField.text = [textField.text substringToIndex:10];
+        if (textField.text.length > 11) {
+            textField.text = [textField.text substringToIndex:11];
         }
     } else if (textField.tag == 1011) {
         if (textField.text.length > 10) {
@@ -80,7 +80,6 @@
             textField.text = [textField.text substringToIndex:4];
         }
     }
-    
 }
 
 
