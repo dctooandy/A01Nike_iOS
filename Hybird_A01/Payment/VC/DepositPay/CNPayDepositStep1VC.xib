@@ -16,9 +16,6 @@
                 <outlet property="nameAreaViewHeight" destination="xNx-n1-tSm" id="Jvc-Kk-nEJ"/>
                 <outlet property="nameTF" destination="BhK-GH-wds" id="e6g-Am-JeX"/>
                 <outlet property="nameView" destination="wnE-K6-4sY" id="ffD-IJ-hFH"/>
-                <outlet property="preSettingMessageLb" destination="Gb8-MY-EnO" id="mIp-nK-bKf"/>
-                <outlet property="preSettingView" destination="1NN-CI-hoo" id="y5u-JM-Khw"/>
-                <outlet property="preSettingViewHeight" destination="vcq-Cl-ggh" id="E4i-pV-Mu5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,78 +25,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yWY-8J-HQH">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1NN-CI-hoo">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W1T-qv-ow3" customClass="CNPayOnePixView">
-                                    <rect key="frame" x="0.0" y="49" width="375" height="1"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" priority="750" constant="1" id="NDL-vG-TVF"/>
-                                    </constraints>
-                                </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2B3-l1-hEW">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预留信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wke-2j-gjU" customClass="CNPayLabel">
-                                            <rect key="frame" x="15" y="14.5" width="100" height="20"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="ADY-Sn-0m6"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHR-MZ-rCp">
-                                            <rect key="frame" x="297" y="10" width="63" height="29"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sdfaf" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gb8-MY-EnO">
-                                                    <rect key="frame" x="15" y="6" width="33" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.792156862745098" green="0.63921568627450975" blue="0.38431372549019605" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.094117647058823528" green="0.11372549019607843" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstItem="Gb8-MY-EnO" firstAttribute="leading" secondItem="dHR-MZ-rCp" secondAttribute="leading" constant="15" id="Hju-Im-5Jo"/>
-                                                <constraint firstAttribute="trailing" secondItem="Gb8-MY-EnO" secondAttribute="trailing" constant="15" id="Lud-tk-BO0"/>
-                                                <constraint firstAttribute="bottom" secondItem="Gb8-MY-EnO" secondAttribute="bottom" constant="6" id="VnB-CZ-BVH"/>
-                                                <constraint firstItem="Gb8-MY-EnO" firstAttribute="top" secondItem="dHR-MZ-rCp" secondAttribute="top" constant="6" id="dbL-XT-4xN"/>
-                                            </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                    <integer key="value" value="2"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                            </userDefinedRuntimeAttributes>
-                                        </view>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstItem="wke-2j-gjU" firstAttribute="leading" secondItem="2B3-l1-hEW" secondAttribute="leading" constant="15" id="8uR-Ak-X4Q"/>
-                                        <constraint firstItem="wke-2j-gjU" firstAttribute="centerY" secondItem="2B3-l1-hEW" secondAttribute="centerY" id="Qm3-n6-Ziu"/>
-                                        <constraint firstAttribute="trailing" secondItem="dHR-MZ-rCp" secondAttribute="trailing" constant="15" id="h8w-fv-aZb"/>
-                                        <constraint firstItem="dHR-MZ-rCp" firstAttribute="centerY" secondItem="2B3-l1-hEW" secondAttribute="centerY" id="pI5-HD-i24"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="W1T-qv-ow3" secondAttribute="trailing" id="NzK-jD-IoU"/>
-                                <constraint firstItem="2B3-l1-hEW" firstAttribute="leading" secondItem="1NN-CI-hoo" secondAttribute="leading" id="PdO-y6-3P1"/>
-                                <constraint firstItem="W1T-qv-ow3" firstAttribute="leading" secondItem="1NN-CI-hoo" secondAttribute="leading" id="dag-Pv-BsQ"/>
-                                <constraint firstAttribute="trailing" secondItem="2B3-l1-hEW" secondAttribute="trailing" id="gHw-o9-Bq1"/>
-                                <constraint firstItem="W1T-qv-ow3" firstAttribute="top" secondItem="2B3-l1-hEW" secondAttribute="bottom" id="jhD-AB-I3k"/>
-                                <constraint firstItem="2B3-l1-hEW" firstAttribute="top" secondItem="1NN-CI-hoo" secondAttribute="top" id="lRI-nB-qBW"/>
-                                <constraint firstAttribute="bottom" secondItem="W1T-qv-ow3" secondAttribute="bottom" id="sR5-e9-R1i"/>
-                                <constraint firstAttribute="height" constant="50" id="vcq-Cl-ggh"/>
-                            </constraints>
-                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IgS-KV-UaO" userLabel="NameView">
-                            <rect key="frame" x="0.0" y="50" width="375" height="50"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OzE-iy-mR4">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -144,16 +73,13 @@
                     <color key="backgroundColor" red="0.12156862745098039" green="0.13333333333333333" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="IgS-KV-UaO" secondAttribute="trailing" id="2gE-Jx-oWG"/>
-                        <constraint firstItem="1NN-CI-hoo" firstAttribute="top" secondItem="yWY-8J-HQH" secondAttribute="top" id="S6G-Gu-m8W"/>
-                        <constraint firstItem="1NN-CI-hoo" firstAttribute="leading" secondItem="yWY-8J-HQH" secondAttribute="leading" id="XCP-O4-w4a"/>
-                        <constraint firstAttribute="trailing" secondItem="1NN-CI-hoo" secondAttribute="trailing" id="bCf-eZ-BDU"/>
-                        <constraint firstItem="IgS-KV-UaO" firstAttribute="top" secondItem="1NN-CI-hoo" secondAttribute="bottom" id="tVS-pR-wyO"/>
+                        <constraint firstItem="IgS-KV-UaO" firstAttribute="top" secondItem="yWY-8J-HQH" secondAttribute="top" id="nvw-xb-Ng7"/>
                         <constraint firstAttribute="bottom" secondItem="IgS-KV-UaO" secondAttribute="bottom" id="uJw-Gj-8ou"/>
                         <constraint firstItem="IgS-KV-UaO" firstAttribute="leading" secondItem="yWY-8J-HQH" secondAttribute="leading" id="uVu-wU-JNG"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YUj-j1-b7k">
-                    <rect key="frame" x="0.0" y="100" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="50" width="375" height="50"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0P1-Ml-dfl">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -190,7 +116,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2S-qt-RMP" userLabel="ButtonView">
-                    <rect key="frame" x="0.0" y="150" width="375" height="85"/>
+                    <rect key="frame" x="0.0" y="100" width="375" height="85"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UG0-Qs-8ag" customClass="CNPaySubmitButton">
                             <rect key="frame" x="18" y="20" width="339" height="45"/>
