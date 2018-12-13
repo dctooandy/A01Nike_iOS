@@ -120,6 +120,42 @@
             } handler:self];
         }
             break;
+            
+            case BTTNavTypeMessageServiceIcon:
+        {
+            UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, KIsiPhoneX ? 49 : 27, 80, 30)];
+            [self addSubview:logoImageView];
+            logoImageView.image = ImageNamed(@"Navlogo");
+            self.titleLabel = [UILabel new];
+            [self addSubview:self.titleLabel];
+            self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop, 150, BTTBtnWidthAndHeight);
+            self.titleLabel.text = @"首页";
+            self.titleLabel.textAlignment = NSTextAlignmentCenter;
+            self.titleLabel.font = kFontSystem(17);
+            self.titleLabel.textColor = [UIColor whiteColor];
+            
+            UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [self addSubview:serviceBtn];
+            serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
+            serviceBtn.tag = 2001;
+            [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [self addSubview:messageBtn];
+            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
+            messageBtn.redDotOffset = CGPointMake(1, 3);
+            messageBtn.tag = 2002;
+            [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [GJRedDot registNodeWithKey:BTTHomePageMessage
+                              parentKey:BTTHomePageItemsKey
+                            defaultShow:NO];
+            [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
+                messageBtn.showRedDot = show;
+            } handler:self];
+        }
         default:
             break;
     }
