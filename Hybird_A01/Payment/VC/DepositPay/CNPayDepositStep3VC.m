@@ -130,10 +130,6 @@
         [self showError:_amountTF.placeholder];
         return;
     }
-    if (_chargeTF.text.length == 0) {
-        [self showError:_chargeTF.placeholder];
-        return;
-    }
     if (sender.selected) {
         return;
     }
