@@ -54,14 +54,13 @@
             UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self addSubview:serviceBtn];
             serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
-            [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
-            serviceBtn.tag = 2001;
+//            [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
             [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             
             __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self addSubview:messageBtn];
             messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
-            [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
+//            [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
             messageBtn.redDotOffset = CGPointMake(1, 3);
             messageBtn.tag = 2002;
             [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -187,6 +186,10 @@
     loginBtn.layer.cornerRadius = BTTCornerRadius;
     loginBtn.clipsToBounds = YES;
     loginBtn.tag = 2003;
+    loginBtn.layer.borderWidth = 0.5;
+    loginBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    loginBtn.layer.cornerRadius = 4;
+    loginBtn.clipsToBounds = YES;
     [loginBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     self.loginBtn = loginBtn;
     
@@ -199,6 +202,10 @@
     registerBtn.layer.cornerRadius = BTTCornerRadius;
     registerBtn.clipsToBounds = YES;
     registerBtn.tag = 2004;
+    registerBtn.layer.borderWidth = 0.5;
+    registerBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    registerBtn.layer.cornerRadius = 4;
+    registerBtn.clipsToBounds = YES;
     [registerBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     self.registerBtn = registerBtn;
 }
