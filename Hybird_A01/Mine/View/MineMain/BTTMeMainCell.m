@@ -75,7 +75,7 @@
                 if (num.integerValue) {
                     strongSelf.iconImg.badgeValue = num;
                 }
-                strongSelf.iconImg.showRedDot = num;
+                strongSelf.iconImg.showRedDot = num.integerValue;
             } handler:self];
             
         } else {
