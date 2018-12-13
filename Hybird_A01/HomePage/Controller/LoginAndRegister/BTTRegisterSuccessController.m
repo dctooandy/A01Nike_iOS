@@ -117,11 +117,9 @@ typedef enum {
             return cell;
         } else {
             BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
-            cell.btnType = BTTPublicBtnTypeConfirm;
+            cell.btnType = BTTPublicBtnTypeConfirmSave;
             cell.backgroundColor = COLOR_RGBA(41, 45, 54, 1);
             cell.btn.enabled = YES;
-            [cell.btn setBackgroundImage:ImageNamed(@"xima_btn2") forState:UIControlStateNormal];
-            [cell.btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
