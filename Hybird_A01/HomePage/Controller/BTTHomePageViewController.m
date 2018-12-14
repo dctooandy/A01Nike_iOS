@@ -218,9 +218,9 @@
             weakSelf(weakSelf);
             cell.reloadBlock = ^{
                 strongSelf(strongSelf);
-                --strongSelf.nextGroup;
-                if (strongSelf.nextGroup == -1) {
-                    strongSelf.nextGroup = strongSelf.Activities.count - 1;
+                strongSelf.nextGroup += 1;
+                if (strongSelf.nextGroup == self.Activities.count) {
+                    self.nextGroup = 0;
                 }
                 
                 [strongSelf.elementsHight removeAllObjects];
@@ -323,9 +323,9 @@
             weakSelf(weakSelf);
             cell.reloadBlock = ^{
                 strongSelf(strongSelf);
-                --strongSelf.nextGroup;
-                if (strongSelf.nextGroup == -1) {
-                    strongSelf.nextGroup = strongSelf.Activities.count - 1;
+                strongSelf.nextGroup += 1;
+                if (strongSelf.nextGroup == self.Activities.count) {
+                    self.nextGroup = 0;
                 }
                 [strongSelf.elementsHight removeAllObjects];
                 [strongSelf setupElements];
@@ -419,9 +419,9 @@
 }
 
 - (void)refreshDataOfActivities {
-    --self.nextGroup;
-    if (self.nextGroup == -1) {
-        self.nextGroup = self.Activities.count - 1;
+    self.nextGroup += 1;
+    if (self.nextGroup == self.Activities.count) {
+        self.nextGroup = 0;
     }
     [self.elementsHight removeAllObjects];
     [self setupElements];
