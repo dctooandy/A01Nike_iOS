@@ -218,13 +218,13 @@
             weakSelf(weakSelf);
             cell.reloadBlock = ^{
                 strongSelf(strongSelf);
-                --strongSelf.nextGroup;
-                if (strongSelf.nextGroup == -1) {
-                    strongSelf.nextGroup = strongSelf.Activities.count - 1;
+                strongSelf.nextGroup += 1;
+                if (strongSelf.nextGroup == self.Activities.count) {
+                    self.nextGroup = 0;
                 }
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [strongSelf.collectionView reloadData];
-                });
+                
+                [strongSelf.elementsHight removeAllObjects];
+                [strongSelf setupElements];
             };
             return cell;
         } else if (indexPath.row == 13 + (self.promotions.count ? self.promotions.count : 3)) {
@@ -323,13 +323,12 @@
             weakSelf(weakSelf);
             cell.reloadBlock = ^{
                 strongSelf(strongSelf);
-                --strongSelf.nextGroup;
-                if (strongSelf.nextGroup == -1) {
-                    strongSelf.nextGroup = strongSelf.Activities.count - 1;
+                strongSelf.nextGroup += 1;
+                if (strongSelf.nextGroup == self.Activities.count) {
+                    self.nextGroup = 0;
                 }
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [strongSelf.collectionView reloadData];
-                });
+                [strongSelf.elementsHight removeAllObjects];
+                [strongSelf setupElements];
             };
             return cell;
         } else if (indexPath.row == 12 + (self.promotions.count ? self.promotions.count : 3)) {
@@ -420,11 +419,12 @@
 }
 
 - (void)refreshDataOfActivities {
-    --self.nextGroup;
-    if (self.nextGroup == -1) {
-        self.nextGroup = self.Activities.count - 1;
+    self.nextGroup += 1;
+    if (self.nextGroup == self.Activities.count) {
+        self.nextGroup = 0;
     }
-    [self.collectionView reloadData];
+    [self.elementsHight removeAllObjects];
+    [self setupElements];
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource

@@ -9,6 +9,9 @@
 #import "BTTBetInfoModel.h"
 
 @implementation BTTBetInfoModel
++ (BOOL)propertyIsOptional:(NSString *)propertyName{
+    return YES;
+}
 - (void)setDifferenceBet:(NSString *)differenceBet
 {
     _differenceBet = differenceBet;

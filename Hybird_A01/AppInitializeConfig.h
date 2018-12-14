@@ -16,5 +16,3 @@
 #define EnvirmentType 0
 
 #endif /* AppInitializeValueConfig_h */
-
-
