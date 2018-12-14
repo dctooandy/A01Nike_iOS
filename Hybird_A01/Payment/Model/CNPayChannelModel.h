@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, CNPayChannel) {
     CNPayChannelBTC,
     /// 微信条码
     CNPayChannelWechatBarCode,
-    /// 币宝支付
+    /// 钻石币支付
     CNPayChannelCoin,
     
     /// app
