@@ -222,9 +222,9 @@
                 if (strongSelf.nextGroup == -1) {
                     strongSelf.nextGroup = strongSelf.Activities.count - 1;
                 }
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [strongSelf.collectionView reloadData];
-                });
+                
+                [strongSelf.elementsHight removeAllObjects];
+                [strongSelf setupElements];
             };
             return cell;
         } else if (indexPath.row == 13 + (self.promotions.count ? self.promotions.count : 3)) {
@@ -327,9 +327,8 @@
                 if (strongSelf.nextGroup == -1) {
                     strongSelf.nextGroup = strongSelf.Activities.count - 1;
                 }
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [strongSelf.collectionView reloadData];
-                });
+                [strongSelf.elementsHight removeAllObjects];
+                [strongSelf setupElements];
             };
             return cell;
         } else if (indexPath.row == 12 + (self.promotions.count ? self.promotions.count : 3)) {
