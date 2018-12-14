@@ -347,7 +347,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     if (self.adCellShow) {
-        if (indexPath.row == 12 + (self.promotions.count ? self.promotions.count : 3)) {
+        if (indexPath.row == 8 + (self.promotions.count ? self.promotions.count : 3)) {
             [self refreshDataOfActivities];
         } else if (indexPath.row >= 7 && indexPath.row < 7 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTPromotionModel *model = self.promotions.count ? self.promotions[indexPath.row - 7] : nil;

@@ -12,7 +12,8 @@
 typedef enum {
     BTTNavTypeHomePage = 1,
     BTTNavTypeOnlyTitle = 2,
-    BTTNavTypeMessageAndService
+    BTTNavTypeMessageAndService,
+    BTTNavTypeMessageServiceIcon
 }BTTNavType;
 
 typedef void (^BTTHomePageBtnClickBlock)(UIButton *button);

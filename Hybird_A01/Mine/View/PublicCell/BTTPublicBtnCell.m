@@ -75,6 +75,8 @@
         [self.btn setTitle:@"下一步" forState:UIControlStateNormal];
     } else if (btnType == BTTPublicBtnTypeSave) {
         [self.btn setTitle:@"保存" forState:UIControlStateNormal];
+    } else if (btnType == BTTPublicBtnTypeConfirmSave) {
+        [self.btn setTitle:@"确认修改" forState:UIControlStateNormal];
     }
 }
 

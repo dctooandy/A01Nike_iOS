@@ -10,6 +10,8 @@
 #import "CNPayDepositSuccessVC.h"
 
 @interface CNPayDepositStep3VC () <UITextViewDelegate>
+@property (weak, nonatomic) IBOutlet UIView *preSettingView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *preSettingViewHeight;
 @property (weak, nonatomic) IBOutlet UILabel *preSettingMessageLb;
 @property (weak, nonatomic) IBOutlet UITextField *payTypeTF;
 @property (weak, nonatomic) IBOutlet UITextField *provinceTF;
@@ -27,6 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self configPreSettingMessage];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -35,6 +38,17 @@
     [self addBankView];
     [self setViewHeight:550 fullScreen:NO];
     [self configAmountList];
+}
+
+- (void)configPreSettingMessage {
+    if (self.preSaveMsg.length > 0) {
+        self.preSettingMessageLb.text = self.preSaveMsg;
+        self.preSettingViewHeight.constant = 50;
+        self.preSettingView.hidden = NO;
+    } else {
+        self.preSettingViewHeight.constant = 0;
+        self.preSettingView.hidden = YES;
+    }
 }
 
 - (void)configUI {
@@ -128,10 +142,6 @@
     }
     if (_amountTF.text.length == 0) {
         [self showError:_amountTF.placeholder];
-        return;
-    }
-    if (_chargeTF.text.length == 0) {
-        [self showError:_chargeTF.placeholder];
         return;
     }
     if (sender.selected) {

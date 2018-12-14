@@ -20,6 +20,7 @@
 #import "BTTLoginOrRegisterViewController.h"
 #import "BTTAGQJViewController.h"
 #import "BTTAGGJViewController.h"
+#import "BTTVideoGamesListController.h"
 @interface BridgeProtocolExternal ()<JXRegisterManagerDelegate>
 
 @end
@@ -220,7 +221,9 @@
          [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self.controller];
     }
     if (otherProvider) {//电游大厅
-    
+        BTTVideoGamesListController *vc = [BTTVideoGamesListController new];
+        vc.provider = otherProvider;
+        [self.controller.navigationController pushViewController:vc animated:YES];
     }
     return isSlot;
 }

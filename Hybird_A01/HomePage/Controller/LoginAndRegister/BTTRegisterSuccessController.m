@@ -31,6 +31,7 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem new];
     self.title = @"注册成功";
     self.registerSuccessType = BTTRegisterSuccessTypeNormal;
     [self setupCollectionView];
@@ -39,13 +40,13 @@ typedef enum {
 
 - (void)setupCollectionView {
     [super setupCollectionView];
-    self.collectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_WIDTH / 310 * 126 - (KIsiPhoneX ? 88 : 64));
+    self.collectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_WIDTH / 375 * 126 - (KIsiPhoneX ? 88 : 64));
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessOneCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessBtnsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessBtnsCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessTwoCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessTwoCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessChangePwdCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessChangePwdCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPublicBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPublicBtnCell"];
-    UIImageView *adImageview = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SCREEN_WIDTH / 310 * 126 - (KIsiPhoneX ? 88 : 64), SCREEN_WIDTH, SCREEN_WIDTH / 310 * 126)];
+    UIImageView *adImageview = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SCREEN_WIDTH / 375 * 126 - (KIsiPhoneX ? 88 : 64), SCREEN_WIDTH, SCREEN_WIDTH / 375 * 126)];
     [self.view addSubview:adImageview];
     adImageview.image = ImageNamed(@"login_ad");
 }
@@ -116,11 +117,9 @@ typedef enum {
             return cell;
         } else {
             BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
-            cell.btnType = BTTPublicBtnTypeConfirm;
+            cell.btnType = BTTPublicBtnTypeConfirmSave;
             cell.backgroundColor = COLOR_RGBA(41, 45, 54, 1);
             cell.btn.enabled = YES;
-            [cell.btn setBackgroundImage:ImageNamed(@"xima_btn2") forState:UIControlStateNormal];
-            [cell.btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
