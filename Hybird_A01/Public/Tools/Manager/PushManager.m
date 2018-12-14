@@ -12,76 +12,105 @@
 #import "AppDelegate.h"
 #import "BTTTabbarController.h"
 #import "BTTBaseWebViewController.h"
-
+#import <IQKeyboardManager/IQUIWindow+Hierarchy.h>
 @implementation PushManager
 
 SingletonImplementation(PushManager);
 
 //跳转到站内信列表
-- (void)pushToMsgVCWithMsgId:(NSDictionary *)userInfo {
-    if (userInfo == nil) return;
-    [self setNotificationInfo: userInfo];
-    BTTTabbarController *tabbarVC = (BTTTabbarController *)[UIApplication sharedApplication].delegate.window.rootViewController;
-    if (tabbarVC == nil) return;
-    
-    BTTBaseWebViewController *topWebVC = (BTTBaseWebViewController *)tabbarVC.selectedViewController;
-    if (topWebVC == nil) return;
-    // 新页面reload
-    NSString *url = nil;
-    if (topWebVC.webConfigModel.newView) {
-        NSDictionary *dict = [userInfo objectForKey:@"data"];
-        url = (dict == nil ? nil : [dict objectForKey:@"url"]);
-        if (url != nil && url.length > 0) {
-            url = [NSString stringWithFormat:@"%@%@", [IVNetwork gameDomain], url];
-        } else {
-            NSString *messageId = [userInfo objectForKey:@"id"];
-            url = [NSString stringWithFormat:@"customer/letter_detail.htm?id=%@",messageId];
+- (void)pushToMsgVCWithData:(NSDictionary *)dataDict {
+    if (dataDict == nil) return;
+    [self setNotificationInfo: dataDict];
+    UIViewController *topVC = [self currentViewController];
+    if (topVC == nil) return;
+    NSString *url = [dataDict objectForKey:@"url"];
+    NSString *messageId = [dataDict objectForKey:@"id"];
+    if (url != nil && url.length > 0) {
+        if (![url hasPrefix:@"http"]) {
+            url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],url];
         }
-        topWebVC.webConfigModel.url = url;
-        [topWebVC loadWebView];
     } else {
-        NSDictionary *dict = [userInfo objectForKey:@"data"];
-        NSString *url = (dict == nil ? nil : [dict objectForKey:@"url"]);
-        if (url != nil && url.length > 0) {
-            url = [NSString stringWithFormat:@"%@%@", [IVNetwork gameDomain], url];;
-        } else {
-            NSString *messageId = [userInfo objectForKey:@"id"];
+        if (messageId != nil && messageId.length > 0) {
             url = [NSString stringWithFormat:@"customer/letter_detail.htm?id=%@",messageId];
+        } else {
+            return;
         }
-        BTTBaseWebViewController  *webController = [[BTTBaseWebViewController alloc] init];
-        webController.webConfigModel.url = url;
-        webController.webConfigModel.newView = YES;
-        [webController loadWebView];
-        [topWebVC.navigationController pushViewController:webController animated:YES];
     }
+
+    if ([topVC isKindOfClass:[BTTBaseWebViewController class]]) {
+        BTTBaseWebViewController *topWebVC = (BTTBaseWebViewController *)topVC;
+        if (topWebVC.webConfigModel.newView) {
+            topWebVC.webConfigModel.url = url;
+            [topWebVC loadWebView];
+            return;
+        }
+    }
+    BTTBaseWebViewController  *webController = [[BTTBaseWebViewController alloc] init];
+    webController.webConfigModel.url = url;
+    webController.webConfigModel.newView = YES;
+    [webController loadWebView];
+    [topVC.navigationController pushViewController:webController animated:YES];
 }
 
 - (void)performActionDidReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
     UIApplicationState applicationState = [UIApplication sharedApplication].applicationState;
-    // 前台
+    
     if (applicationState == UIApplicationStateActive) {
-         //震动
+        //震动
         AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
         AudioServicesPlaySystemSound(1007);
-        weakSelf(weakSelf);
-        IVActionHandler handler = ^(UIAlertAction *action){};
-        IVActionHandler handler1 = ^(UIAlertAction *action){
-            strongSelf(strongSelf)
-            if ([userInfo objectForKey:@"id"] != nil) {
-                [strongSelf pushToMsgVCWithMsgId:userInfo];
-            }
-        };
-        NSString *message = [[userInfo valueForKey:@"aps"] valueForKey:@"alert"];
-        [IVUtility showAlertWithActionTitles:@[@"取消",@"查看"] handlers:@[handler,handler1] title:@"提示" message:message];
-    } else {
-        if ([userInfo objectForKey:@"id"] != nil) {
-            [self pushToMsgVCWithMsgId:userInfo];
+    }
+    NSDictionary *apsDict = [userInfo valueForKey:@"aps"];
+    if (!apsDict) {
+        return;
+    }
+    NSDictionary *dict = [apsDict valueForKey:@"data"];
+    NSString *url = (dict == nil ? nil : [dict valueForKey:@"url"]);
+    NSString *messageId = (dict == nil ? nil :  [userInfo valueForKey:@"id"]);
+    
+    if ((url && url.length > 0) || (messageId && messageId.length > 0)) {
+        // 前台
+        if (applicationState == UIApplicationStateActive) {
+            weakSelf(weakSelf);
+            IVActionHandler handler = ^(UIAlertAction *action){};
+            IVActionHandler handler1 = ^(UIAlertAction *action){
+                strongSelf(strongSelf)
+                [strongSelf pushToMsgVCWithData:dict];
+            };
+            NSString *message = [apsDict valueForKey:@"alert"];
+            [IVUtility showAlertWithActionTitles:@[@"取消",@"查看"] handlers:@[handler,handler1] title:@"提示" message:message];
+        } else {
+            [self pushToMsgVCWithData:dict];
         }
     }
+    
 }
+
+- (UIViewController*)topMostWindowController
+{
+    UIWindow *win = [UIApplication sharedApplication].delegate.window;
+    UIViewController *topController = [win rootViewController];
+    if ([topController isKindOfClass:[UITabBarController class]]) {
+        topController = [(UITabBarController *)topController selectedViewController];
+    }
+    while ([topController presentedViewController])  topController = [topController presentedViewController];
+    return topController;
+}
+
+- (UIViewController*)currentViewController;
+{
+    UIViewController *currentViewController = [self topMostWindowController];
+    
+    while ([currentViewController isKindOfClass:[UINavigationController class]] && [(UINavigationController*)currentViewController topViewController])
+        currentViewController = [(UINavigationController*)currentViewController topViewController];
+    
+    return currentViewController;
+}
+
 - (void)didReceiveNotificationPushData {
     if (self.notificationInfo == nil) return;
-    [self pushToMsgVCWithMsgId:self.notificationInfo];
+    [self pushToMsgVCWithData:self.notificationInfo];
 }
 
 @end
