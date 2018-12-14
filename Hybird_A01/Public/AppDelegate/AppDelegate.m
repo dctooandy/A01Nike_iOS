@@ -95,7 +95,7 @@
     if (remoteCotificationDic) {
         NSDictionary *apsInfo = remoteCotificationDic[@"aps"];
         if (apsInfo) {
-            [[PushManager sharedInstance] performActionDidReceiveRemoteNotification:apsInfo];
+            [[PushManager sharedInstance] performActionDidReceiveRemoteNotification:remoteCotificationDic];
         }
     }
     if (@available(iOS 10.0, *)) {
