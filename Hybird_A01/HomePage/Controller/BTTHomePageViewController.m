@@ -424,7 +424,8 @@
     if (self.nextGroup == -1) {
         self.nextGroup = self.Activities.count - 1;
     }
-    [self.collectionView reloadData];
+    [self.elementsHight removeAllObjects];
+    [self setupElements];
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource

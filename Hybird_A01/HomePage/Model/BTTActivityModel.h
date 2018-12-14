@@ -22,6 +22,8 @@
 
 @property (nonatomic, assign) CGFloat cellHeight;
 
+@property (nonatomic, assign) CGFloat descHeight;
+
 @property (nonatomic, strong) NSArray *imgTitles;
 
 @end

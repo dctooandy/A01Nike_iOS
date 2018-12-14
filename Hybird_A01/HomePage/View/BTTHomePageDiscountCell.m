@@ -29,6 +29,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.detailBtn.userInteractionEnabled = NO;
     if (SCREEN_WIDTH == 320) {
         self.titleLabel.font = kFontSystem(16);
     } else {

@@ -933,5 +933,16 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     
 }
 
-
++ (CGSize)getFontsHeightWithString:(NSString *)str {
+    CGSize size = CGSizeZero;
+    if (str.length) {
+        NSDictionary *attribute = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
+        
+        size = [str boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 30, CGFLOAT_MAX)
+                                 options:NSStringDrawingUsesLineFragmentOrigin
+                                              attributes:attribute
+                                           context:nil].size;
+    }
+    return size;
+}
 @end

@@ -24,8 +24,12 @@
     } else if (SCREEN_WIDTH == 414 || KIsiPhoneX) {
         imageHeight = 220;
     }
-    _cellHeight += (imageHeight + 52);
+    _cellHeight += (imageHeight + 52 + self.descHeight);
     return _cellHeight;
+}
+
+- (CGFloat)descHeight {
+    return [PublicMethod getFontsHeightWithString:self.desc].height;
 }
 
 - (NSArray *)imageUrls {

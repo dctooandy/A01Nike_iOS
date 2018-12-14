@@ -19,8 +19,6 @@
 
 @property (nonatomic, strong) UILabel *descLabel;
 
-@property (nonatomic, strong) UIView *backView;
-
 @property (nonatomic, assign) CGFloat imageHeight;
 
 
@@ -40,33 +38,21 @@
         _imageHeight = 220;
     }
     [self.contentView addSubview:self.activitiesView];
-    self.backView = [UIView new];
-    [self.contentView addSubview:self.backView];
-    self.backView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     
     self.descLabel = [UILabel new];
     self.descLabel.font = kFontSystem(13);
-    self.descLabel.numberOfLines = 2;
+    self.descLabel.numberOfLines = 0;
     [self.descLabel setTextColor:[UIColor whiteColor]];
-    [self.backView addSubview:self.descLabel];
+    [self.contentView addSubview:self.descLabel];
     
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    CGFloat bottom = 0; //self.activityModel.cellHeight - self.imageHeight - 37;
-    [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.offset(15);
         make.right.offset(-15);
-        make.height.equalTo(@(60));
-        make.bottom.offset(-bottom);
-    }];
-    
-    [self.descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.offset(8);
-        make.right.offset(-8);
-        make.height.equalTo(@(40));
-        make.bottom.offset(-10);
+        make.top.equalTo(self.activitiesView.mas_bottom).offset(0);
     }];
 }
 
