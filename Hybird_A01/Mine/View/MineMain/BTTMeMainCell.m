@@ -82,7 +82,7 @@
             [self setRedDotKey:BTTMineCenterVersion refreshBlock:^(BOOL show) {
                 strongSelf(strongSelf);
                 strongSelf.iconImg.badgeValue = 0;
-                strongSelf.iconImg.showRedDot = show;
+                strongSelf.iconImg.showRedDot = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTVerisionUpdateKey] integerValue];
             } handler:self];
     
         }

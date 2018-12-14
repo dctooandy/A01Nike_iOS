@@ -26,6 +26,11 @@ static const char *BTTHeaderViewKey = "headerView";
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccess:) name:LogoutSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(versionUpdate:) name:IVCheckUpdateNotification object:nil];
+}
+
+- (void)versionUpdate:(NSNotification *)notifi {
+    NSLog(@"%@",notifi.userInfo);
 }
 
 - (void)loginSuccess:(NSNotification *)notifi {
