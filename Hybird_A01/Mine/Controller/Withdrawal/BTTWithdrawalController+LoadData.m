@@ -16,9 +16,9 @@
     
     NSString *btcrate = [[NSUserDefaults standardUserDefaults] valueForKey:BTTCacheBTCRateKey];
     NSString *rateStr = [NSString stringWithFormat:@"¥%.2lf=1BTC(实时汇率)",[btcrate doubleValue]];
-    NSString *depositTotal = self.betInfoModel ? self.betInfoModel.depositTotal : @"";
-    NSString *betTotal = self.betInfoModel ? self.betInfoModel.betTotal : @"";
-    NSString *currentBet = self.betInfoModel ? self.betInfoModel.currentBet : @"";
+    NSString *depositTotal = self.betInfoModel.depositTotal.length ? self.betInfoModel.depositTotal : @"";
+    NSString *betTotal = self.betInfoModel.betTotal.length ? self.betInfoModel.betTotal : @"";
+    NSString *currentBet = self.betInfoModel.betTotal.length ? self.betInfoModel.currentBet : @"";
     CGFloat differenceBet = [self.betInfoModel.differenceBet doubleValue];
     NSString *canWithdrawTitle = @"尚不可取款";
     CGFloat notifyHeight = 44.0;
