@@ -190,6 +190,9 @@ NS_ASSUME_NONNULL_BEGIN
  @return 图片
  */
 + (UIImage *)createImageWithColor:(UIColor*)color;
+
+
++ (CGSize)getFontsHeightWithString:(NSString *)str;
 @end
 
 NS_ASSUME_NONNULL_END
