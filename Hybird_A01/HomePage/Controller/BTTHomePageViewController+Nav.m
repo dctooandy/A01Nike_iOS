@@ -39,7 +39,7 @@ static const char *BTTHeaderViewKey = "headerView";
 
 - (void)versionUpdate:(NSNotification *)notifi {
     if ([notifi.userInfo isKindOfClass:[NSDictionary class]]) {
-        if ([notifi.userInfo[@"delta_link"] length]) {
+        if ([notifi.userInfo[@"is_remaind"] integerValue] && ![notifi.userInfo[@"is_update"] integerValue]) {
             [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:BTTVerisionUpdateKey];
         } else {
             [[NSUserDefaults standardUserDefaults] setObject:@(NO) forKey:BTTVerisionUpdateKey];

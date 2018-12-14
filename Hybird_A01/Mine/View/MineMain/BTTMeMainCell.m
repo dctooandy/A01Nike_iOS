@@ -39,7 +39,7 @@
                     defaultShow:NO];
     [GJRedDot registNodeWithKey:BTTMineCenterItemsKey
                       parentKey:BTTMineCenterVersion
-                    defaultShow:YES];
+                    defaultShow:NO];
 }
 
 - (void)setModel:(BTTMeMainModel *)model {
@@ -82,7 +82,8 @@
             [self setRedDotKey:BTTMineCenterVersion refreshBlock:^(BOOL show) {
                 strongSelf(strongSelf);
                 strongSelf.iconImg.badgeValue = 0;
-                strongSelf.iconImg.showRedDot = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTVerisionUpdateKey] integerValue];
+                NSInteger num = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTVerisionUpdateKey] integerValue];
+                strongSelf.iconImg.showRedDot = num;
             } handler:self];
     
         }
