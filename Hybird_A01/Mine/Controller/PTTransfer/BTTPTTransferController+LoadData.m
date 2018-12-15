@@ -71,10 +71,10 @@
         NSLog(@"%@",response);
         if (result.message.length) {
             [MBProgressHUD showError:result.message toView:nil];
+        } else {
+            [MBProgressHUD showSuccess:@"转账成功" toView:nil];
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnDisableNotification object:@"PTTransfer"];
-        self.transferAmount = @"加载中";
-        [self loadMainData];
     }];
     
     
