@@ -37,6 +37,7 @@ typedef enum {
     self.totalAmount = @"加载中";
     self.ptAmount = @"加载中";
     self.transferAmount = @"加载中";
+    self.submitBtnEnable = NO;
     [self setupCollectionView];
     [self setupElements];
     [self loadMainData];
@@ -119,6 +120,7 @@ typedef enum {
     } else {
         BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
         cell.btnType = BTTPublicBtnTypeConfirm;
+        cell.btn.enabled = self.submitBtnEnable;
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
