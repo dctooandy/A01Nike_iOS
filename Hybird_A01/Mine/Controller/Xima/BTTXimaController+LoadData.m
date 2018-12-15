@@ -79,7 +79,6 @@
                     }
                 }
             }
-            
         }
         dispatch_group_leave(group);
         if (result.message.length) {

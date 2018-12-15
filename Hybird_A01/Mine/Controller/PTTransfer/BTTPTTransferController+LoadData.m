@@ -34,8 +34,8 @@
 - (void)loadTotalAvailableData:(dispatch_group_t)group {
     [IVNetwork sendRequestWithSubURL:BTTCreditsTotalAvailable paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        if (result.code_http == 200) {
-            if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
+        if (result.code_http == 200 && result.status) {
+            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 self.totalAmount = result.data[@"val"];
                 if (self.totalAmount.floatValue) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"PTTransfer"];
@@ -52,8 +52,8 @@
     NSDictionary *pramas = @{@"game_name": @"PT"};
     [IVNetwork sendRequestWithSubURL:BTTCreditsGame paramters:pramas completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        if (result.code_http == 200) {
-            if (result.data && ![result.data isKindOfClass:[NSNull class]] && [result.data isKindOfClass:[NSDictionary class]]) {
+        if (result.code_http == 200 && result.status) {
+            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 self.ptAmount = result.data[@"val"];
                 dispatch_group_leave(group);
             }
@@ -73,9 +73,10 @@
         if (result.message.length) {
             [MBProgressHUD showError:result.message toView:nil];
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnDisableNotification object:@"PTTransfer"];
-        self.transferAmount = @"加载中";
-        [self loadMainData];
+        if (result.status) {
+            [MBProgressHUD showSuccess:@"转账成功" toView:nil];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
     }];
     
     
