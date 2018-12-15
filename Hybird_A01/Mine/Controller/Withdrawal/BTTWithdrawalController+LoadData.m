@@ -106,9 +106,9 @@
 
 
 - (void)loadCreditsTotalAvailable {
-    [self showLoading];
+//    [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTCreditsLocal paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        [self hideLoading];
+//        [self hideLoading];
         if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {
             if (result.data) {
                 self.totalAvailable = result.data[@"val"];
@@ -123,9 +123,9 @@
 }
 - (void)loadBetInfo
 {
-    [self showLoading];
+//    [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTBetInfo paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        [self hideLoading];
+//        [self hideLoading];
         if (result.code_http == 200 && result.data && [result.data isKindOfClass:[NSDictionary class]]) {
             self.betInfoModel = [[BTTBetInfoModel alloc] initWithDictionary:result.data error:nil];
             self.betInfoModel.status = result.status;
