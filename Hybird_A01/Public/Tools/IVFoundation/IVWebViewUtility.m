@@ -62,6 +62,10 @@
 {
     return [BridgeProtocolExternal class];
 }
+- (BOOL)hiddenDefaultActivity
+{
+    return YES;
+}
 - (void)showLoadingInView:(UIView *)view animated:(BOOL)animated
 {
     [MBProgressHUD showLoadingSingleInView:view animated:animated];
