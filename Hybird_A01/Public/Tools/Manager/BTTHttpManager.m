@@ -56,6 +56,10 @@
         }];
     }
 }
++ (void)fetchGamePlatformsWithCompletion:(IVRequestCallBack)completion
+{
+    [self sendRequestUseCacheWithUrl:BTTGamePlatforms paramters:nil completionBlock:completion];
+}
 //处理银行卡列表获取结果
 + (void)fetchBankListResult:(IVRequestResultModel *)result completion:(IVRequestCallBack)completion
 {

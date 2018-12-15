@@ -62,4 +62,6 @@
 
 // 请求未读消息的数量
 + (void)requestUnReadMessageNum:(IVRequestCallBack)completeBlock;
+// 获取游戏厅列表
++ (void)fetchGamePlatformsWithCompletion:(IVRequestCallBack)completion;
 @end

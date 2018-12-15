@@ -82,8 +82,7 @@
 }
 
 - (void)loadGameshallList:(dispatch_group_t)group{
-    [IVNetwork sendUseCacheRequestWithSubURL:BTTGamePlatforms paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
+    [BTTHttpManager fetchGamePlatformsWithCompletion:^(IVRequestResultModel *result, id response) {
         if (self.games.count) {
             [self.games removeAllObjects];
         }
