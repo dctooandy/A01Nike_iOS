@@ -11,7 +11,7 @@
 @implementation BTTRedDotManager
 
 + (NSArray *)registerProfiles {
-    return @[@{BTTHomePage:@{BTTHomePageItemsKey:@[BTTHomePageMessage]}},@{BTTMineCenter:@{BTTMineCenterItemsKey:@[BTTMineCenterMessage,BTTMineCenterVersion]}}];
+    return @[@{BTTHomePage:@{BTTHomePageItemsKey:@[BTTHomePageMessage]}},@{BTTMineCenter:@{BTTMineCenterItemsKey:@[BTTMineCenterMessage,BTTMineCenterVersion,BTTMineCenterNavMessage]}},@{BTTDiscount:@{BTTDiscountItemsKey:@[BTTDiscountMessage]}}];
 }
 
 @end
