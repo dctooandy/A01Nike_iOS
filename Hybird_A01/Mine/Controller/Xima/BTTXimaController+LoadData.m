@@ -71,8 +71,7 @@
 }
 
 - (void)loadGameshallList:(dispatch_group_t)group {
-    [IVNetwork sendUseCacheRequestWithSubURL:BTTGamePlatforms paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
+    [BTTHttpManager fetchGamePlatformsWithCompletion:^(IVRequestResultModel *result, id response) {
         if (result.code_http == 200) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]] && ![result.data isKindOfClass:[NSNull class]]) {
                 if (result.data[@"xm"] && [result.data[@"xm"] isKindOfClass:[NSArray class]] && ![result.data[@"xm"] isKindOfClass:[NSNull class]]) {

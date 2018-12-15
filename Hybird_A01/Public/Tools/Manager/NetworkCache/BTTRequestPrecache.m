@@ -16,7 +16,7 @@
 }
 + (void)updateCacheNormal
 {
-    
+    [BTTHttpManager fetchGamePlatformsWithCompletion:nil];
 }
 + (void)updateCacheNeedLoginRequest
 {
