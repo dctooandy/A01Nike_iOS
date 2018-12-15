@@ -11,7 +11,7 @@
 @implementation BTTPTTransferController (LoadData)
 
 - (void)loadMainData {
-    [self showLoading];
+//    [self showLoading];
     dispatch_queue_t queue = dispatch_queue_create("ptt.data", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_enter(group);
@@ -24,7 +24,8 @@
     });
     dispatch_group_notify(group, queue, ^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self hideLoading];
+//            [self hideLoading];
+            self.submitBtnEnable = YES;
             [self.collectionView reloadData];
         });
     });
@@ -65,7 +66,7 @@
     [params setObject:@"PT" forKey:@"game_name"];
     [params setObject:amount forKey:@"amount"];
     [params setObject:@(isReverse) forKey:@"type"];
-    [self showLoading];
+//    [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTCreditsTransfer paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
         NSLog(@"%@",response);

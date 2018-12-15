@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *transferAmount;
 
+@property (nonatomic, assign) BOOL submitBtnEnable;
 @end
 
 NS_ASSUME_NONNULL_END
