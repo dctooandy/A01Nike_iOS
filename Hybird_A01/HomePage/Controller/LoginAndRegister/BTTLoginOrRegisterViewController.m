@@ -44,26 +44,6 @@
     [self setupElements];
 }
 
-- (void)keyboardWillShow:(NSNotification *)notification {
-    //取出键盘最终的frame
-    CGRect rect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    //取出键盘弹出需要花费的时间
-    double duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    //获取最佳位置距离屏幕上方的距离
-    if ((self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height) >  ([UIScreen mainScreen].bounds.size.height - rect.size.height)) {//键盘的高度 高于textView的高度 需要滚动
-        [UIView animateWithDuration:duration animations:^{
-            self.collectionView.contentOffset = CGPointMake(0, 64 + self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height - ([UIScreen mainScreen].bounds.size.height - rect.size.height));
-        }];
-    }
-    
-}
-
-- (void)keyboardWillHide:(NSNotification *)notify {
-    [UIView animateWithDuration:.25 animations:^{
-        self.collectionView.contentOffset = CGPointMake(0, 0);
-    }];
-}
-
 - (void)keyboardFrameChange:(NSNotification *)notify {
     NSLog(@"%@",notify.userInfo);
     //取出键盘最终的frame
@@ -72,7 +52,9 @@
     double duration = [notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     //获取最佳位置距离屏幕上方的距离
     [UIView animateWithDuration:duration animations:^{
-        self.collectionView.contentOffset = CGPointMake(0, 64 + self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height - ([UIScreen mainScreen].bounds.size.height - rect.size.height));
+        if (self.activedTextFieldRect.origin.y > rect.origin.y) {
+            self.collectionView.contentOffset = CGPointMake(0, 64 + self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height - ([UIScreen mainScreen].bounds.size.height - rect.size.height));
+        }
     }];
     
 }
@@ -321,7 +303,7 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    self.activedTextFieldRect = [textField convertRect:textField.frame toView:self.collectionView];
+    self.activedTextFieldRect = [textField convertRect:textField.frame toView:self.view];
 }
 
 - (void)textFieldChange:(UITextField *)textField {
