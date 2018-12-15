@@ -137,15 +137,20 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 // 小红点常量宏
 
 // 主页
-#define BTTHomePage @"HomePage"
+#define BTTHomePage         @"HomePage"
 #define BTTHomePageItemsKey @"HomePageItemsKey"
 #define BTTHomePageMessage  @"HomePageMessage"
 
+#define BTTDiscount         @"Discount"
+#define BTTDiscountItemsKey @"DiscountItemsKey"
+#define BTTDiscountMessage  @"DiscountMessage"
+
 // 个人中心
-#define BTTMineCenter @"MineCenter"
-#define BTTMineCenterItemsKey @"MineCenterItemsKey"
-#define BTTMineCenterMessage  @"MineCenterMessage"
-#define BTTMineCenterVersion  @"MineCenterVersion"
+#define BTTMineCenter           @"MineCenter"
+#define BTTMineCenterItemsKey   @"MineCenterItemsKey"
+#define BTTMineCenterMessage    @"MineCenterMessage"
+#define BTTMineCenterVersion    @"MineCenterVersion"
+#define BTTMineCenterNavMessage @"MineCenterNavMessage"
 
 // 账号缓存key
 

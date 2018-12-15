@@ -43,7 +43,7 @@ static const char *BTTHeaderViewKey = "headerView";
 
 - (void)setupNav {
     [self.navigationController setNavigationBarHidden:YES];
-    self.headerView = [[BTTHomePageHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, BTTNavHeightLogin ) withNavType:BTTNavTypeMessageAndService];
+    self.headerView = [[BTTHomePageHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, BTTNavHeightLogin ) withNavType:BTTNavTypeMine];
     self.headerView.titleLabel.text = @"会员中心";
     [self.view addSubview:self.headerView];
     weakSelf(weakSelf);
