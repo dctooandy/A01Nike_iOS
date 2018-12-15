@@ -69,7 +69,8 @@
                               parentKey:BTTHomePageItemsKey
                             defaultShow:NO];
             [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
-                messageBtn.showRedDot = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey] integerValue];
+                NSInteger num = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey] integerValue];
+                messageBtn.showRedDot = num;
             } handler:self];
             
             [self setupLoginAndRegisterBtn];
@@ -86,41 +87,7 @@
             self.titleLabel.textColor = [UIColor whiteColor];
         }
             break;
-        case BTTNavTypeMessageAndService:
-        {
-            self.titleLabel = [UILabel new];
-            [self addSubview:self.titleLabel];
-            self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop, 150, BTTBtnWidthAndHeight);
-            self.titleLabel.text = @"首页";
-            self.titleLabel.textAlignment = NSTextAlignmentCenter;
-            self.titleLabel.font = kFontSystem(17);
-            self.titleLabel.textColor = [UIColor whiteColor];
-            
-            UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [self addSubview:serviceBtn];
-            serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
-            [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
-            serviceBtn.tag = 2001;
-            [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-            
-            __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [self addSubview:messageBtn];
-            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
-            [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
-            messageBtn.redDotOffset = CGPointMake(1, 3);
-            messageBtn.tag = 2002;
-            [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-            
-            [GJRedDot registNodeWithKey:BTTHomePageMessage
-                              parentKey:BTTHomePageItemsKey
-                            defaultShow:NO];
-            [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
-                messageBtn.showRedDot = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey] integerValue];
-            } handler:self];
-        }
-            break;
-            
-            case BTTNavTypeMessageServiceIcon:
+        case BTTNavTypeDiscount:
         {
             UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, KIsiPhoneX ? 49 : 27, 80, 30)];
             [self addSubview:logoImageView];
@@ -148,10 +115,47 @@
             messageBtn.tag = 2002;
             [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             
-            [GJRedDot registNodeWithKey:BTTHomePageMessage
-                              parentKey:BTTHomePageItemsKey
+            [GJRedDot registNodeWithKey:BTTDiscount
+                              parentKey:BTTDiscountItemsKey
                             defaultShow:NO];
-            [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
+            [self setRedDotKey:BTTDiscountMessage refreshBlock:^(BOOL show) {
+                messageBtn.showRedDot = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey] integerValue];
+            } handler:self];
+        }
+            break;
+            
+            case BTTNavTypeMine:
+        {
+            UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, KIsiPhoneX ? 49 : 27, 80, 30)];
+            [self addSubview:logoImageView];
+            logoImageView.image = ImageNamed(@"Navlogo");
+            self.titleLabel = [UILabel new];
+            [self addSubview:self.titleLabel];
+            self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop, 150, BTTBtnWidthAndHeight);
+            self.titleLabel.text = @"首页";
+            self.titleLabel.textAlignment = NSTextAlignmentCenter;
+            self.titleLabel.font = kFontSystem(17);
+            self.titleLabel.textColor = [UIColor whiteColor];
+            
+            UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [self addSubview:serviceBtn];
+            serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
+            serviceBtn.tag = 2001;
+            [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [self addSubview:messageBtn];
+            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
+            messageBtn.redDotOffset = CGPointMake(1, 3);
+            messageBtn.tag = 2002;
+            [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [GJRedDot registNodeWithKey:BTTMineCenter
+                              parentKey:BTTMineCenterItemsKey
+                            defaultShow:NO];
+            [self setRedDotKey:BTTMineCenterNavMessage refreshBlock:^(BOOL show) {
                 messageBtn.showRedDot = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey] integerValue];
             } handler:self];
         }

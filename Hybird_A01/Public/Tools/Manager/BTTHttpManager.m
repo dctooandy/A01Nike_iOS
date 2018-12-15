@@ -185,9 +185,13 @@
             if ([result.data[@"val"] integerValue]) {
                 [self resetRedDotState:YES forKey:BTTHomePageMessage]; // BTTMineCenterMessage
                 [self resetRedDotState:YES forKey:BTTMineCenterMessage];
+                [self resetRedDotState:YES forKey:BTTDiscountMessage];
+                [self resetRedDotState:YES forKey:BTTMineCenterNavMessage];
             } else {
                 [self resetRedDotState:NO forKey:BTTHomePageMessage];
                 [self resetRedDotState:NO forKey:BTTMineCenterMessage];
+                [self resetRedDotState:NO forKey:BTTDiscountMessage];
+                [self resetRedDotState:NO forKey:BTTMineCenterNavMessage];
             }
         }
     }];

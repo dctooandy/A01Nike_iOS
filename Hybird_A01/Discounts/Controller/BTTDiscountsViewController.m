@@ -49,7 +49,7 @@
 
 - (void)setupNav {
     [self.navigationController setNavigationBarHidden:YES];
-    BTTHomePageHeaderView *nav = [[BTTHomePageHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KIsiPhoneX ? 88 : 64) withNavType:BTTNavTypeMessageServiceIcon];
+    BTTHomePageHeaderView *nav = [[BTTHomePageHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KIsiPhoneX ? 88 : 64) withNavType:BTTNavTypeDiscount];
     nav.titleLabel.text = @"优惠";
     [self.view addSubview:nav];
     weakSelf(weakSelf);
