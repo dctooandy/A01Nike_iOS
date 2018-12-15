@@ -36,7 +36,6 @@
     [IVWebViewManager sharaManager].delegate = [IVWebViewUtility new];
     [IVGameManager sharedManager].delegate = [IVGameUtility new];
     [IVGameManager sharedManager].isPushAGQJ = YES;
-    [self setupLive800];
 //    [IVNetwork setOldApi:YES];
     [WebViewUserAgaent writeIOSUserAgent];
     [IVNetwork setBundleId:[HAInitConfig bundleId]];
@@ -50,6 +49,7 @@
         [BTTRequestPrecache startUpdateCache];
     }];
     [self setupRedDot];
+    [self setupLive800];
 }
 
 - (void)setupRedDot {
