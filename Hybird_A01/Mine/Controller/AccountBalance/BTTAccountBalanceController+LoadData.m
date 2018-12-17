@@ -29,7 +29,6 @@
 }
 
 - (void)loadLocalAmount:(dispatch_group_t)group {
-    [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTCreditsLocal paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
        
         NSLog(@"%@",response);
@@ -59,7 +58,6 @@
         [self loadGameshallList:group];
     });
     dispatch_group_notify(group, queue, ^{
-        [self hideLoading];
         [self loadEachGameHall:button];
     });
 }
