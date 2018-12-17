@@ -344,7 +344,6 @@ static const char *BTTHeaderViewKey = "headerView";
 }
 
 
-
 #pragma mark - 动态添加属性
 
 - (void)setHeaderView:(BTTHomePageHeaderView *)headerView {

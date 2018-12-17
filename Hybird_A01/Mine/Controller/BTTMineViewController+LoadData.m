@@ -12,6 +12,7 @@
 #import "CNPaymentModel.h"
 #import "BTTMakeCallSuccessView.h"
 #import "CNPayChannelModel.h"
+#import "BTTGamesHallModel.h"
 
 @implementation BTTMineViewController (LoadData)
 
@@ -347,7 +348,6 @@
     };
 }
 
-
 - (void)loadAccountStatus {
     [BTTHttpManager getOpenAccountStatusCompletion:^(IVRequestResultModel *result, id response) {
         if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
@@ -367,16 +367,97 @@
         }
     }];
 }
-- (void)loadTotalAvailableData {
-    [IVNetwork sendRequestWithSubURL:BTTCreditsTotalAvailable paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+
+- (void)loadGamesListAndGameAmount {
+    dispatch_queue_t queue = dispatch_queue_create("mineAmount.data", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_enter(group);
+    dispatch_async(queue, ^{
+        [self loadLocalAmount:group];
+    });
+    dispatch_group_enter(group);
+    dispatch_async(queue, ^{
+        [self loadGameshallList:group];
+    });
+    dispatch_group_notify(group, queue, ^{
+        [self hideLoading];
+        [self loadEachGameHall];
+    });
+}
+
+- (void)loadLocalAmount:(dispatch_group_t)group {
+    [self showLoading];
+    [IVNetwork sendRequestWithSubURL:BTTCreditsLocal paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        
         NSLog(@"%@",response);
-        if (result.code_http == 200) {
-            if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
+        if (result.code_http == 200 && result.status) {
+            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 self.totalAmount = result.data[@"val"];
+                dispatch_group_leave(group);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self.collectionView reloadData];
                 });
             }
+        }
+    }];
+}
+
+- (void)loadEachGameHall {
+    dispatch_queue_t queue = dispatch_queue_create("mineAmount.eachhall", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_group_t group = dispatch_group_create();
+    for (BTTGamesHallModel *model in self.games) {
+        NSInteger index = [self.games indexOfObject:model];
+        dispatch_group_enter(group);
+        [self loadGameAmountWithModel:model index:index group:group];
+    }
+    
+    dispatch_group_notify(group, queue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
+    });
+}
+
+- (void)loadGameAmountWithModel:(BTTGamesHallModel *)model index:(NSInteger)index group:(dispatch_group_t)group{
+    NSDictionary *params = @{@"game_name":model.gameName};
+    [IVNetwork sendRequestWithSubURL:BTTCreditsGame paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+        if (result.code_http == 200 && result.data && [result.data isKindOfClass:[NSDictionary class]]) {
+            model.amount = [NSString stringWithFormat:@"%.2f",[result.data[@"val"] floatValue]];
+            model.isLoading = NO;
+            self.totalAmount = [NSString stringWithFormat:@"%.2f",self.totalAmount.floatValue + model.amount.floatValue];
+        }
+        dispatch_group_leave(group);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
+        if (result.message.length) {
+            [MBProgressHUD showError:result.message toView:nil];
+        }
+        
+    }];
+}
+
+- (void)loadGameshallList:(dispatch_group_t)group{
+    [BTTHttpManager fetchGamePlatformsWithCompletion:^(IVRequestResultModel *result, id response) {
+        if (self.games.count) {
+            [self.games removeAllObjects];
+        }
+        if (result.code_http == 200 && result.status) {
+            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
+                if (result.data[@"platforms"] && [result.data[@"platforms"] isKindOfClass:[NSArray class]] && ![result.data[@"platforms"] isKindOfClass:[NSNull class]]) {
+                    for (NSDictionary *dict in result.data[@"platforms"]) {
+                        BTTGamesHallModel *model = [BTTGamesHallModel yy_modelWithDictionary:dict];
+                        model.isLoading = YES;
+                        [self.games addObject:model];
+                    }
+                }
+            }
+        }
+        [self setupElements];
+        dispatch_group_leave(group);
+        if (result.message.length) {
+            [MBProgressHUD showError:result.message toView:nil];
         }
     }];
 }
@@ -447,6 +528,19 @@
 
 - (void)setMainDataThree:(NSMutableArray *)mainDataThree {
     objc_setAssociatedObject(self, @selector(mainDataThree), mainDataThree, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSMutableArray *)games {
+    NSMutableArray *games = objc_getAssociatedObject(self, _cmd);
+    if (!games) {
+        games = [NSMutableArray array];
+        [self setGames:games];
+    }
+    return games;
+}
+
+- (void)setGames:(NSMutableArray *)games {
+    objc_setAssociatedObject(self, @selector(games), games, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end
