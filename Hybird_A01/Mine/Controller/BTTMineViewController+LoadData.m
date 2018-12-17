@@ -380,23 +380,17 @@
         [self loadGameshallList:group];
     });
     dispatch_group_notify(group, queue, ^{
-        [self hideLoading];
         [self loadEachGameHall];
     });
 }
 
 - (void)loadLocalAmount:(dispatch_group_t)group {
-    [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTCreditsLocal paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        
         NSLog(@"%@",response);
         if (result.code_http == 200 && result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 self.totalAmount = result.data[@"val"];
                 dispatch_group_leave(group);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectionView reloadData];
-                });
             }
         }
     }];
@@ -428,13 +422,9 @@
             self.totalAmount = [NSString stringWithFormat:@"%.2f",self.totalAmount.floatValue + model.amount.floatValue];
         }
         dispatch_group_leave(group);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-        });
         if (result.message.length) {
             [MBProgressHUD showError:result.message toView:nil];
         }
-        
     }];
 }
 
