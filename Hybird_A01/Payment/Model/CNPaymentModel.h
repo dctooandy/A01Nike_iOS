@@ -22,7 +22,7 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
     CNPaymentBTC,
     /// 微信条码
     CNPaymentWechatBarCode,
-    /// 币宝支付
+    /// 钻石币支付
     CNPaymentCoin,
     
     

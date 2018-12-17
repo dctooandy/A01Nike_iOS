@@ -82,11 +82,10 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork userInfo]) {
-//        self.totalAmount = @"加载中";
         [self loadUserInfo];
         [self loadBindStatus];
         [self loadBankList];
-        [self loadTotalAvailableData];
+        [self loadGamesListAndGameAmount];
         [self loadPaymentData];
         [self loadAccountStatus];
     }
