@@ -95,6 +95,13 @@ static const char *BTTNextGroupKey = "nextGroup";
 - (void)loadLuckyWheelCoinChange {
     [IVNetwork sendRequestWithSubURL:BTTCoinDepositAPI paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
+        if (result.status) {
+            [MBProgressHUD showSuccess:@"兑换成功" toView:nil];
+        } else {
+            if (result.message.length) {
+                [MBProgressHUD showError:result.message toView:nil];
+            }
+        }
     }];
 }
 
