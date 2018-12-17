@@ -37,7 +37,7 @@ NSInteger const kPayTypeTotalCount = 19;
 + (void)queryAllChannelCompleteHandler:(IVRequestCallBack)completeHandler {
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    // 杂项：在线，点卡，手工，比特币，微信条码, 币宝支付
+    // 杂项：在线，点卡，手工，比特币，微信条码, 钻石币支付
     // app：微信，支付宝，QQ，网银, 京东
     // 扫码：支付宝，微信，QQ，银联, 京东
     // BQ快速：快速，微信，支付宝

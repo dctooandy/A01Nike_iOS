@@ -49,7 +49,7 @@
             self.selectedIcon   = @"pay_wechatBarCode";
             break;
         case CNPayChannelCoin:
-            self.channelName    = @"币宝支付";
+            self.channelName    = @"钻石币支付";
             self.selectedIcon   = @"pay_Bibao";
             break;
         case CNPayChannelAliApp:

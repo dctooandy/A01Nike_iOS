@@ -65,7 +65,7 @@
         case CNPaymentBQAli:
             return @"支付宝秒存";
         case CNPaymentCoin:
-            return @"币宝支付";
+            return @"钻石币支付";
     }
 }
 
