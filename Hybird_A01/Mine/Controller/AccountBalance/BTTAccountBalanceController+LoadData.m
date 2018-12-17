@@ -33,8 +33,8 @@
     [IVNetwork sendRequestWithSubURL:BTTCreditsLocal paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
        
         NSLog(@"%@",response);
-        if (result.code_http == 200) {
-            if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
+        if (result.code_http == 200 && result.status) {
+            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 self.amount = result.data[@"val"];
                 self.localAmount = [NSString stringWithFormat:@"%.2f",[result.data[@"val"] floatValue]];
                 dispatch_group_leave(group);
@@ -82,13 +82,12 @@
 }
 
 - (void)loadGameshallList:(dispatch_group_t)group{
-    [IVNetwork sendRequestWithSubURL:BTTGamePlatforms paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
+    [BTTHttpManager fetchGamePlatformsWithCompletion:^(IVRequestResultModel *result, id response) {
         if (self.games.count) {
             [self.games removeAllObjects];
         }
-        if (result.code_http == 200) {
-            if (result.data && [result.data isKindOfClass:[NSDictionary class]] && ![result.data isKindOfClass:[NSNull class]]) {
+        if (result.code_http == 200 && result.status) {
+            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 if (result.data[@"platforms"] && [result.data[@"platforms"] isKindOfClass:[NSArray class]] && ![result.data[@"platforms"] isKindOfClass:[NSNull class]]) {
                     for (NSDictionary *dict in result.data[@"platforms"]) {
                         BTTGamesHallModel *model = [BTTGamesHallModel yy_modelWithDictionary:dict];
@@ -121,7 +120,7 @@
     NSDictionary *params = @{@"game_name":model.gameName};
     [IVNetwork sendRequestWithSubURL:BTTCreditsGame paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        if (result.code_http == 200 && result.data && ![result.data isKindOfClass:[NSNull class]] && [result.data isKindOfClass:[NSDictionary class]]) {
+        if (result.code_http == 200 && result.data && [result.data isKindOfClass:[NSDictionary class]]) {
             model.amount = [NSString stringWithFormat:@"%.2f",[result.data[@"val"] floatValue]];
             model.isLoading = NO;
             self.amount = [NSString stringWithFormat:@"%.2f",self.amount.floatValue + model.amount.floatValue];

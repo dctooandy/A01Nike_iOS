@@ -14,13 +14,21 @@ typedef void(^CompleteBlock)(IVRequestResultModel *result, id response);
 
 typedef enum {
     BTTXimaCurrentListTypeNoData, ///< 无数据状态
-    BTTXimaCurrentListTypeData    ///< 有数据状态
+    BTTXimaCurrentListTypeData,    ///< 有数据状态
+    BTTXimaCurrentListTypeLoading ///< 加载中
 }BTTXimaCurrentListType;
 
 typedef enum {
     BTTXimaHistoryListTypeNoData, ///< 无数据状态
-    BTTXimaHistoryListTypeData    ///< 有数据状态
+    BTTXimaHistoryListTypeData,    ///< 有数据状态
+    BTTXimaHistoryListTypeLoading ///< 加载中
 }BTTXimaHistoryListType;
+
+typedef enum {
+    BTTXimaOtherListTypeNoData, ///< 无数据状态
+    BTTXimaOtherListTypeData,    ///< 有数据状态
+    BTTXimaOtherListTypeLoading ///< 加载中
+}BTTXimaOtherListType;
 
 typedef enum {
     BTTXimaStatusTypeNormal,     ///< 洗码正常页面
@@ -40,6 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BTTXimaCurrentListType currentListType;
 
 @property (nonatomic, assign) BTTXimaHistoryListType historyListType;
+
+@property (nonatomic, assign) BTTXimaOtherListType otherListType;
 
 @property (nonatomic, assign) BTTXimaStatusType ximaStatusType;
 

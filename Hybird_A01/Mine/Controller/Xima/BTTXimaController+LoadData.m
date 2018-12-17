@@ -15,7 +15,7 @@
 @implementation BTTXimaController (LoadData)
 
 - (void)loadMainData {
-    [self showLoading];
+//    [self showLoading];
     dispatch_queue_t queue = dispatch_queue_create("xima.data", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_enter(group);
@@ -31,25 +31,25 @@
                 ximaType = [NSString stringWithFormat:@"%@;%@",ximaType,model.type];
             }
         }
-        [self loadXimaCurrentList:ximaType group:group];
+        [self loadXimaCurrentList:ximaType];
         [self loadHistoryData:ximaType];
     });
 }
 
-- (void)loadXimaCurrentList:(NSString *)ximaType group:(dispatch_group_t)group {
+- (void)loadXimaCurrentList:(NSString *)ximaType {
     NSDictionary *params = @{@"xm_type":ximaType};
     [IVNetwork sendRequestWithSubURL:BTTXmCurrentList paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         [self hideLoading];
+        self.otherListType = BTTXimaOtherListTypeNoData;
+        self.currentListType = BTTXimaCurrentListTypeNoData;
         if (result.code_http == 200) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 if (result.data[@"other"] && [result.data[@"other"] isKindOfClass:[NSDictionary class]]) {
                     if (result.data[@"other"][@"list"] && [result.data[@"other"][@"list"] isKindOfClass:[NSArray class]]) {
                         BTTXimaTotalModel *model = [BTTXimaTotalModel yy_modelWithDictionary:result.data[@"other"]];
                         self.otherModel = model;
-                        self.historyListType = BTTXimaHistoryListTypeData;
-                    } else {
-                        self.historyListType = BTTXimaHistoryListTypeNoData;
+                        self.otherListType = BTTXimaOtherListTypeData;
                     }
                 }
                 if (result.data[@"valid"] && [result.data[@"valid"] isKindOfClass:[NSDictionary class]]) {
@@ -60,8 +60,6 @@
                         }
                         self.validModel = model;
                         self.currentListType = BTTXimaCurrentListTypeData;
-                    } else {
-                        self.currentListType = BTTXimaCurrentListTypeNoData;
                     }
                 }
             }
@@ -71,8 +69,7 @@
 }
 
 - (void)loadGameshallList:(dispatch_group_t)group {
-    [IVNetwork sendRequestWithSubURL:BTTGamePlatforms paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
+    [BTTHttpManager fetchGamePlatformsWithCompletion:^(IVRequestResultModel *result, id response) {
         if (result.code_http == 200) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]] && ![result.data isKindOfClass:[NSNull class]]) {
                 if (result.data[@"xm"] && [result.data[@"xm"] isKindOfClass:[NSArray class]] && ![result.data[@"xm"] isKindOfClass:[NSNull class]]) {
@@ -82,7 +79,6 @@
                     }
                 }
             }
-            
         }
         dispatch_group_leave(group);
         if (result.message.length) {
@@ -107,11 +103,14 @@
     
     [IVNetwork sendRequestWithSubURL:BTTXmHistoryList paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
+        self.historyListType = BTTXimaHistoryListTypeNoData;
         if (result.code_http == 200) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 BTTXimaTotalModel *model = [BTTXimaTotalModel yy_modelWithDictionary:result.data];
                 self.histroyModel = model;
-                
+                if (model.list.count > 0) {
+                    self.historyListType = BTTXimaHistoryListTypeData;
+                }
             }
         }
     }];
@@ -119,7 +118,7 @@
 
 
 - (void)loadXimaBillOut {
-    [self showLoading];
+//    [self showLoading];
     NSString *xm_list = @"";
     for (BTTXimaItemModel *itemModel in self.validModel.list) {
         if (xm_list.length) {
