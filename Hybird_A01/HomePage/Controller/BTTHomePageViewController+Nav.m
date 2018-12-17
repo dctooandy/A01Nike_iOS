@@ -252,6 +252,7 @@ static const char *BTTHeaderViewKey = "headerView";
     weakSelf(weakSelf);
     customView.btnBlock = ^(UIButton *btn) {
         strongSelf(strongSelf);
+        [popView dismiss];
         [strongSelf loadLuckyWheelCoinChange];
     };
 }
