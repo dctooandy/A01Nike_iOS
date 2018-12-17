@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *mainDataThree;
 
+@property (nonatomic, strong) NSMutableArray *games;
+
 
 
 - (void)loadMeAllData;
@@ -34,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadBtcRate;
 
-- (void)loadTotalAvailableData;
+- (void)loadGamesListAndGameAmount;
 
 - (void)loadPaymentData;
 
