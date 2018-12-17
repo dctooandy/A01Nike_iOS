@@ -60,6 +60,8 @@
     self.timeLB.text = [NSString stringWithFormat:@"%@:%@", minute, second];
     if(_second == 0) {
         [self.timer invalidate];
+    } else if (_second == 120) {
+        
     }
 }
 
