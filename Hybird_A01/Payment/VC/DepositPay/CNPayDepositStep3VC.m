@@ -54,6 +54,13 @@
 - (void)configUI {
     self.preSettingMessageLb.text = self.preSaveMsg;
     self.depositByLb.text = self.writeModel.depositBy;
+    CNPaymentModel *model = self.paymentModel;
+    // 金额提示语
+    if (model.maxamount > model.minamount) {
+        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f，最多%.0f", model.minamount, model.maxamount];
+    } else {
+        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f", model.minamount];
+    }
 }
 
 
@@ -140,10 +147,25 @@
         [self showError:_dateTF.placeholder];
         return;
     }
-    if (_amountTF.text.length == 0) {
+    
+    NSString *text = _amountTF.text;
+    
+    /// 输入为不合法数字
+    if (![NSString isPureInt:text] && ![NSString isPureFloat:text]) {
+        _amountTF.text = nil;
+        [self showError:@"请输入充值金额"];
+        return;
+    }
+    
+    /// 超出额度范围
+    NSNumber *amount = [NSString convertNumber:text];
+    double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;
+    if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) {
+        _amountTF.text = nil;
         [self showError:_amountTF.placeholder];
         return;
     }
+    
     if (sender.selected) {
         return;
     }

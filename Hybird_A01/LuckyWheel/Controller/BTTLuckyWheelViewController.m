@@ -38,7 +38,12 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [self loadWebView];
 }
-
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    if (error.code != -999) {
+        [super webView:webView didFailLoadWithError:error];
+    }
+}
 //- (void)webViewDidFinishLoad:(UIWebView *)webView
 //{
 //    [super webViewDidFinishLoad:webView];

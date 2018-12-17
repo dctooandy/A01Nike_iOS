@@ -225,7 +225,7 @@
     barCode.payments = [[NSArray alloc] initWithObjects:
                         payments[CNPaymentWechatBarCode], nil];
     
-    /// 币宝支付
+    /// 钻石币支付
     CNPayChannelModel *coin = [[CNPayChannelModel alloc] init];
     coin.payChannel = CNPayChannelCoin;
     coin.payments = [[NSArray alloc] initWithObjects:
