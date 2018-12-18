@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"完善个人信息";
+    self.title = @"个人资料";
     [self setupCollectionView];
     [self loadMainData];
 }
@@ -39,7 +39,7 @@
     [self.collectionView addSubview:noticeLabel];
     noticeLabel.frame = CGRectMake(15, 0, SCREEN_WIDTH - 30, 44);
     noticeLabel.font = kFontSystem(12);
-    noticeLabel.textColor = [UIColor colorWithHexString:@"818791"];
+    noticeLabel.textColor = [UIColor colorWithHexString:@"FFCC99"];
     noticeLabel.text = @"为了您的取款的安全性及优惠的及时添加, 请先完善个人信息";
 }
 
@@ -51,6 +51,7 @@
     if (indexPath.row == 2) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
         weakSelf(weakSelf)
+        cell.buttonType = BTTButtonTypeSave;
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf submitChange];
         };
@@ -122,8 +123,8 @@
 
 - (void)textChanged
 {
-    UITextField *retentionTF = [self getCellTextFieldWithIndex:1];
-    UITextField *realNameTF = [self getCellTextFieldWithIndex:0];
+    UITextField *retentionTF = [self getCellTextFieldWithIndex:0];
+    UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     cell.btn.enabled = [PublicMethod isValidateLeaveMessage:retentionTF.text] && [PublicMethod checkRealName:realNameTF.text];
@@ -131,8 +132,8 @@
 }
 - (void)submitChange
 {
-    UITextField *retentionTF = [self getCellTextFieldWithIndex:1];
-    UITextField *realNameTF = [self getCellTextFieldWithIndex:0];
+    UITextField *retentionTF = [self getCellTextFieldWithIndex:0];
+    UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"verify_code"] = retentionTF.text;
     params[@"real_name"] = realNameTF.text;
