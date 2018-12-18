@@ -105,7 +105,10 @@ static const char *BTTHeaderViewKey = "headerView";
             }
         }];
     }];
-    BOOL isNormalUser = (![IVNetwork userInfo] || [IVNetwork userInfo].customerLevel < 5);
+    
+    int currentHour = [PublicMethod hour:[NSDate date]];
+    BOOL isNormalUser = (![IVNetwork userInfo] || [IVNetwork userInfo].customerLevel < 5 || currentHour < 12);
+    
     NSString *callTitle = isNormalUser ? @"电话回拨" : @"VIP经理回拨";
     BTTPopoverAction *action3 = [BTTPopoverAction actionWithImage:ImageNamed(@"callBack") title:callTitle handler:^(BTTPopoverAction *action) {
         if ([IVNetwork userInfo]) {
