@@ -19,6 +19,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.backgroundColor = [UIColor colorWithHexString:@"212229"];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     NSMutableAttributedString* tncString = [[NSMutableAttributedString alloc] initWithString:@"修改密码"];
     [tncString addAttribute:NSUnderlineStyleAttributeName
