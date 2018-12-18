@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
+    self.backgroundColor = [UIColor colorWithHexString:@"212229"];
 }
 
 @end
