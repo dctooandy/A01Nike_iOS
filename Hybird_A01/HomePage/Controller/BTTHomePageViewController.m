@@ -67,6 +67,7 @@
     }];
     [self loadDataOfHomePage];
     [self registerNotification];
+    [IVNetwork registException];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
