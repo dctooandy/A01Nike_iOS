@@ -29,15 +29,15 @@ PODS:
   - IVGameLibrary/GameController (0.0.18)
   - IVHeartPacketLibrary (0.0.3):
     - CocoaAsyncSocket (~> 7.6.2)
-  - IVNetworkLibrary (0.0.22):
+  - IVNetworkLibrary (0.0.23):
     - AFNetworking (~> 3.2.1)
     - FCUUID (~> 1.3.1)
-    - IVNetworkLibrary/IVNetwork (= 0.0.22)
+    - IVNetworkLibrary/IVNetwork (= 0.0.23)
     - JSONModel (~> 1.7.0)
     - UICKeyChainStore (~> 2.1.2)
     - YTKNetwork (~> 2.0.4)
     - ZipArchive (~> 1.4.0)
-  - IVNetworkLibrary/IVNetwork (0.0.22):
+  - IVNetworkLibrary/IVNetwork (0.0.23):
     - AFNetworking (~> 3.2.1)
     - FCUUID (~> 1.3.1)
     - JSONModel (~> 1.7.0)
@@ -137,7 +137,7 @@ CHECKOUT OPTIONS:
     :commit: 29d345d7d731e2b6cfa54740c2efd0b6d9455a28
     :git: http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git
   IVNetworkLibrary:
-    :commit: 55cb5b7a128e3074b9fae6ae48d381e2f719fbd1
+    :commit: 882973cac9f1db42fc692ca94f30b8ed00440b43
     :git: http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary.git
   IVWebViewLibrary:
     :commit: 61e42ce017967017542ea3cb43d0262fa9180a56
@@ -152,7 +152,7 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 266cb7b1d11f94a3e71229d77f960f9a1b538e5b
   IVGameLibrary: 80c96b9f32be77496bad9e02722a5d649e575bd6
   IVHeartPacketLibrary: a93b7de9ba49911aa09d39250f9e3d96036a2ed0
-  IVNetworkLibrary: 69f528ba225b7b6f69c68c4af4535f60be05dc0a
+  IVNetworkLibrary: 4bdb58c791d7d5ef1505f664e99f817e34294d4c
   IVWebViewLibrary: 08958e0eef8964d8c6507d1a98432062ef02ebd5
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
