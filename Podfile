@@ -16,9 +16,9 @@ target ‘Hybird_A01’ do
   pod 'CocoaAsyncSocket', '~>7.6.3'
 #  pod 'SDCycleScrollView','~> 1.75'
   pod 'TXScrollLabelView'
-  pod 'IVNetworkLibrary',:git =>'http://10.66.72.115/mobile-iOS/IVNetworkLibrary.git'
-  pod 'IVGameLibrary',:git =>'http://10.66.72.115/mobile-iOS/IVGameLibrary.git'
-  pod 'IVWebViewLibrary',:git =>'http://10.66.72.115/mobile-iOS/IVWebViewLibrary.git'
-  pod 'IVHeartPacketLibrary',:git =>'http://10.66.72.115/mobile-iOS/IVHeartPacketLibrary.git'
+  pod 'IVNetworkLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary.git'
+  pod 'IVGameLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git'
+  pod 'IVWebViewLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVWebViewLibrary.git'
+  pod 'IVHeartPacketLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git'
   pod 'IQKeyboardManager','~> 5.0.6'
 end
