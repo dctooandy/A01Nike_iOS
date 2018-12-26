@@ -71,39 +71,69 @@
     CNPaymentModel *payment = _payments.firstObject;
     
     switch (channel) {
+        case CNPayChannelQQ: {
+            
+        }
+            break;
+            
+        case CNPayChannelAli: {
+            
+        }
+            break;
+            
+        case CNPayChannelWechat: {
+            
+        }
+            break;
+            
+        case CNPayChannelJD: {
+            
+        }
+            break;
+            
+        case CNPayChannelBTC:
+        case CNPayChannelCoin: {
+            [viewControllers addObjectsFromArray:[self onlinePay:payment]];
+        }
+            break;
+            
+        case CNPayChannelBankCard: {
+            
+        }
+            break;
             
         case CNPayChannelCard: {
             [viewControllers addObjectsFromArray:[self cardPay:payment]];
         }
             break;
-            
-        case CNPayChannelDeposit: {
-            [viewControllers addObjectsFromArray:[self depositPay:payment]];
-        }
-            break;
-            
-        case CNPayChannelCoin:
-        case CNPayChannelWechatBarCode:
-        case CNPayChannelJDApp:
-        case CNPayChannelBTC:
-        case CNPayChannelAliApp:
-        case CNPayChannelUnionApp:
-        case CNPayChannelOnline: {
-            [viewControllers addObjectsFromArray:[self onlinePay:payment]];
-        }
-            break;
-            
-        case CNPayChannelQR: {
-            [viewControllers addObjectsFromArray:[self QRPay:payment]];
-        }
-            break;
-            
-        case CNPayChannelBQFast:
-        case CNPayChannelBQWechat:
-        case CNPayChannelBQAli: {
-            [viewControllers addObjectsFromArray:[self BQPay:payment]];
-        }
-            break;
+//
+//        case CNPayChannelDeposit: {
+//            [viewControllers addObjectsFromArray:[self depositPay:payment]];
+//        }
+//            break;
+//
+//        case CNPayChannelCoin:
+//        case CNPayChannelWechatBarCode:
+//        case CNPayChannelJDApp:
+//        case CNPayChannelBTC:
+//        case CNPayChannelAliApp:
+//        case CNPayChannelUnionApp:
+//        case CNPayChannelOnline: {
+//            [viewControllers addObjectsFromArray:[self onlinePay:payment]];
+//        }
+//            break;
+//
+//        case CNPayChannelQR: {
+//            [viewControllers addObjectsFromArray:[self QRPay:payment]];
+//        }
+//            break;
+//
+//        case CNPayChannelBQFast:
+//        case CNPayChannelBQWechat:
+//        case CNPayChannelBQAli: {
+//            [viewControllers addObjectsFromArray:[self BQPay:payment]];
+//        }
+//            break;
     }
     return viewControllers;
 }

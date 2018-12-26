@@ -85,7 +85,9 @@
         [self loadUserInfo];
         [self loadBindStatus];
         [self loadBankList];
-        [self loadGamesListAndGameAmount];
+        if (!self.isLoading) {
+            [self loadGamesListAndGameAmount];
+        }
         [self loadPaymentData];
         [self loadAccountStatus];
     }

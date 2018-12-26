@@ -23,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isOpenAccount;  ///< 开户礼金
 
+@property (nonatomic, copy) NSString *preAmount; ///< 计算余额
+
+@property (nonatomic, assign) BOOL isLoading;  ///< 余额计算中
+
 - (void)setupElements;
 
 @end

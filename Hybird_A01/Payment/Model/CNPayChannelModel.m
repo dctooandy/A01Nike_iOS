@@ -28,57 +28,37 @@
     
     switch (payChannel) {
             
-        case CNPayChannelOnline:
-            self.channelName    = @"在线支付";
-            self.selectedIcon   = @"pay_onlineHL";
+        case CNPayChannelAli:
+            self.channelName    = @"支付宝";
+            self.selectedIcon   = @"pay_AliHL";
             break;
         case CNPayChannelCard:
             self.channelName    = @"点卡支付";
             self.selectedIcon   = @"pay_cardHL";
             break;
-        case CNPayChannelDeposit:
-            self.channelName    = @"手工存款";
-            self.selectedIcon   = @"pay_depositHL";
+        case CNPayChannelWechat:
+            self.channelName    = @"微信";
+            self.selectedIcon   = @"pay_WeChatHL";
             break;
         case CNPayChannelBTC:
             self.channelName    = @"比特币支付";
             self.selectedIcon   = @"pay_btcHL";
             break;
-        case CNPayChannelWechatBarCode:
-            self.channelName    = @"微信条码支付";
-            self.selectedIcon   = @"pay_wechatBarCode";
+        case CNPayChannelJD:
+            self.channelName    = @"京东";
+            self.selectedIcon   = @"pay_JDHL";
             break;
         case CNPayChannelCoin:
             self.channelName    = @"钻石币支付";
             self.selectedIcon   = @"pay_Bibao";
             break;
-        case CNPayChannelAliApp:
-            self.channelName    = @"支付宝WAP";
+        case CNPayChannelQQ:
+            self.channelName    = @"QQ";
             self.selectedIcon   = @"pay_AliHL";
             break;
-        case CNPayChannelUnionApp:
-            self.channelName    = @"银行快捷支付";
-            self.selectedIcon   = @"pay_unionHL";
-            break;
-        case CNPayChannelJDApp:
-            self.channelName    = @"京东WAP";
-            self.selectedIcon   = @"pay_JDHL";
-            break;
-        case CNPayChannelQR:
-            self.channelName    = @"扫码支付";
-            self.selectedIcon   = @"pay_QRHL";
-            break;
-        case CNPayChannelBQFast:
-            self.channelName    = @"迅捷网银";
-            self.selectedIcon   = @"pay_fastHL";
-            break;
-        case CNPayChannelBQWechat:
-            self.channelName    = @"微信秒存";
-            self.selectedIcon   = @"pay_WeChatHL";
-            break;
-        case CNPayChannelBQAli:
-            self.channelName    = @"支付宝秒存";
-            self.selectedIcon   = @"pay_AliHL";
+        case CNPayChannelBankCard:
+            self.channelName    = @"银行卡";
+            self.selectedIcon   = @"me_netbank";
             break;
     }
 }

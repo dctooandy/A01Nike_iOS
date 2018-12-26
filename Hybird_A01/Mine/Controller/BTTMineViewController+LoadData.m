@@ -79,9 +79,7 @@
 }
 
 - (void)loadPersonalPaymentData:(NSMutableArray *)defaultArr {
-//    [self showLoading];
     [CNPayRequestManager queryAllChannelCompleteHandler:^(IVRequestResultModel *result, id response) {
-//        [self hideLoading];
         NSLog(@"%@",response);
         NSMutableArray *payments = [NSMutableArray array];
         NSMutableArray *availablePayments = [NSMutableArray array];
@@ -92,99 +90,75 @@
                 model.paymentType = i;
                 [payments addObject:model];
             }
-            CNPaymentModel *BQFast = payments[CNPaymentBQFast];
-            if (BQFast.isAvailable) {
+            
+            
+            CNPaymentModel *aliFast = payments[CNPaymentBQAli];
+            CNPaymentModel *scan3 = payments[CNPaymentAliQR];
+            CNPaymentModel *alipay = payments[CNPaymentAliApp];
+            BOOL isAli = NO;
+            if ((aliFast.isAvailable || scan3.isAvailable || alipay.isAvailable) && !isAli) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"迅捷网银";
-                mainModel.iconName = @"me_netbank";
-                mainModel.paymentType = CNPayChannelBQFast;
+                mainModel.name = @"支付宝";
+                mainModel.iconName = @"me_alipay";
+                mainModel.paymentType = CNPayChannelAli;
                 [availablePayments addObject:mainModel];
+                isAli = YES;
             }
             
             CNPaymentModel *WXFast = payments[CNPaymentBQWechat];
-            if (WXFast.isAvailable) {
-                BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"微信秒存";
-                mainModel.iconName = @"me_wechat";
-                mainModel.paymentType = CNPayChannelBQWechat;
-                [availablePayments addObject:mainModel];
-            }
-            
-            CNPaymentModel *aliFast = payments[CNPaymentBQAli];
-            if (aliFast.isAvailable) {
-                BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"支付宝秒存";
-                mainModel.iconName = @"me_alipay";
-                mainModel.paymentType = CNPayChannelBQAli;
-                [availablePayments addObject:mainModel];
-            }
-            
-            CNPaymentModel *hand = payments[CNPaymentDeposit];
-            if (hand.isAvailable) {
-                BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"手工存款";
-                mainModel.iconName = @"me_hand";
-                mainModel.paymentType = CNPayChannelDeposit;
-                [availablePayments addObject:mainModel];
-            }
-            
-            CNPaymentModel *online = payments[CNPaymentOnline];
-            if (online.isAvailable) {
-                BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"在线支付";
-                mainModel.iconName = @"me_online";
-                mainModel.paymentType = CNPayChannelOnline;
-                [availablePayments addObject:mainModel];
-            }
-            
             CNPaymentModel *scan1 = payments[CNPaymentWechatQR];
             CNPaymentModel *scan2 = payments[CNPaymentWechatApp];
-            CNPaymentModel *scan3 = payments[CNPaymentAliQR];
-            CNPaymentModel *scan4 = payments[CNPaymentQQApp];
+             CNPaymentModel *tiaoma = payments[CNPaymentWechatBarCode];
+            BOOL isWX = NO;
+            if ((WXFast.isAvailable || scan1.isAvailable || scan2.isAvailable || tiaoma.isAvailable) && !isWX) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"微信";
+                mainModel.iconName = @"me_wechat";
+                mainModel.paymentType = CNPayChannelWechat;
+                [availablePayments addObject:mainModel];
+                isWX = YES;
+            }
+            
+            
+            CNPaymentModel *BQFast = payments[CNPaymentBQFast];
+            CNPaymentModel *hand = payments[CNPaymentDeposit];
+            CNPaymentModel *online = payments[CNPaymentOnline];
             CNPaymentModel *scan5 = payments[CNPaymentUnionQR];
-            CNPaymentModel *scan6 = payments[CNPaymentQQQR];
-            CNPaymentModel *scan7 = payments[CNPaymentJDQR];
-            BOOL isHave = NO;
-            if ((scan1.isAvailable ||
-                scan2.isAvailable ||
-                scan3.isAvailable ||
-                scan4.isAvailable ||
-                scan5.isAvailable ||
-                scan6.isAvailable ||
-                scan7.isAvailable) && !isHave) {
-                BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"扫码支付";
-                mainModel.iconName = @"me_scan";
-                mainModel.paymentType = CNPayChannelQR;
-                [availablePayments addObject:mainModel];
-                isHave = YES;
-            }
-            
             CNPaymentModel *quick = payments[CNPaymentUnionApp];
-            if (quick.isAvailable) {
+            BOOL isBank = NO;
+            if ((BQFast.isAvailable || hand.isAvailable || online.isAvailable || scan5.isAvailable || quick.isAvailable) && !isBank) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"银行快捷支付";
-                mainModel.iconName = @"me_quick";
-                mainModel.paymentType = CNPayChannelUnionApp;
+                mainModel.name = @"银行卡";
+                mainModel.iconName = @"me_netbank";
+                mainModel.paymentType = CNPayChannelBankCard;
                 [availablePayments addObject:mainModel];
             }
             
-            CNPaymentModel *alipay = payments[CNPaymentAliApp];
-            if (alipay.isAvailable) {
+            
+            CNPaymentModel *scan4 = payments[CNPaymentQQApp];
+            CNPaymentModel *scan6 = payments[CNPaymentQQQR];
+            BOOL isQQ = NO;
+            if ((scan3.isAvailable ||
+                scan4.isAvailable ||
+                scan6.isAvailable ) && !isQQ) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"支付宝WAP";
-                mainModel.iconName = @"me_alipay";
-                mainModel.paymentType = CNPayChannelAliApp;
+                mainModel.name = @"QQ";
+                mainModel.iconName = @"me_scan";
+                mainModel.paymentType = CNPayChannelQQ;
                 [availablePayments addObject:mainModel];
+                isQQ = YES;
             }
             
-            CNPaymentModel *pointCard = payments[CNPaymentCard];
-            if (pointCard.isAvailable) {
+            CNPaymentModel *jd = payments[CNPaymentJDApp];
+            CNPaymentModel *scan7 = payments[CNPaymentJDQR];
+            BOOL isJD = NO;
+            if ((jd.isAvailable || scan7.isAvailable) && !isJD) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"点卡支付";
-                mainModel.iconName = @"me_pointCard";
-                mainModel.paymentType = CNPayChannelCard;
+                mainModel.name = @"京东";
+                mainModel.iconName = @"me_jd";
+                mainModel.paymentType = CNPayChannelJD;
                 [availablePayments addObject:mainModel];
+                isJD = YES;
             }
             
             CNPaymentModel *btc = payments[CNPaymentBTC];
@@ -193,24 +167,6 @@
                 mainModel.name = @"比特币支付";
                 mainModel.iconName = @"me_btc";
                 mainModel.paymentType = CNPayChannelBTC;
-                [availablePayments addObject:mainModel];
-            }
-            
-            CNPaymentModel *jd = payments[CNPaymentJDApp];
-            if (jd.isAvailable) {
-                BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"京东WAP支付";
-                mainModel.iconName = @"me_jd";
-                mainModel.paymentType = CNPayChannelJDApp;
-                [availablePayments addObject:mainModel];
-            }
-            
-            CNPaymentModel *tiaoma = payments[CNPaymentWechatBarCode];
-            if (tiaoma.isAvailable) {
-                BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"微信条码";
-                mainModel.iconName = @"me_tiaoma";
-                mainModel.paymentType = CNPayChannelWechatBarCode;
                 [availablePayments addObject:mainModel];
             }
             
@@ -223,6 +179,15 @@
                 [availablePayments addObject:mainModel];
             }
 
+            CNPaymentModel *pointCard = payments[CNPaymentCard];
+            if (pointCard.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"点卡支付";
+                mainModel.iconName = @"me_pointCard";
+                mainModel.paymentType = CNPayChannelCard;
+                [availablePayments addObject:mainModel];
+            }
+            
             self.paymentDatas = [availablePayments mutableCopy];
         }
         [self setupElements];
@@ -370,6 +335,8 @@
 }
 
 - (void)loadGamesListAndGameAmount {
+    self.preAmount = @"";
+    self.isLoading = YES;
     dispatch_queue_t queue = dispatch_queue_create("mineAmount.data", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_enter(group);
@@ -390,7 +357,7 @@
         NSLog(@"%@",response);
         if (result.code_http == 200 && result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-                self.totalAmount = result.data[@"val"];
+                self.preAmount = result.data[@"val"];
                 dispatch_group_leave(group);
             }
         }
@@ -408,6 +375,9 @@
     
     dispatch_group_notify(group, queue, ^{
         dispatch_async(dispatch_get_main_queue(), ^{
+            self.totalAmount = @"";
+            self.isLoading = NO;
+            self.totalAmount = [self.preAmount copy];
             [self.collectionView reloadData];
         });
     });
@@ -420,7 +390,7 @@
         if (result.code_http == 200 && result.data && [result.data isKindOfClass:[NSDictionary class]]) {
             model.amount = [NSString stringWithFormat:@"%.2f",[result.data[@"val"] floatValue]];
             model.isLoading = NO;
-            self.totalAmount = [NSString stringWithFormat:@"%.2f",self.totalAmount.floatValue + model.amount.floatValue];
+            self.preAmount = [NSString stringWithFormat:@"%.2f",self.preAmount.floatValue + model.amount.floatValue];
         }
         dispatch_group_leave(group);
         if (result.message.length) {

@@ -12,27 +12,27 @@
 /// 支付渠道
 typedef NS_ENUM(NSUInteger, CNPayChannel) {
     /// 在线支付
-    CNPayChannelOnline,
+//    CNPayChannelOnline,
     /// 点卡
     CNPayChannelCard,
     /// 手工存款
-    CNPayChannelDeposit,
+//    CNPayChannelDeposit,
     /// 比特币支付
     CNPayChannelBTC,
     /// 微信条码
-    CNPayChannelWechatBarCode,
+//    CNPayChannelWechatBarCode,
     /// 钻石币支付
     CNPayChannelCoin,
     
     /// app
 //    CNPayChannelWechatApp,
-    CNPayChannelAliApp,
+//    CNPayChannelAliApp,
 //    CNPayChannelQQApp,
-    CNPayChannelUnionApp,
-    CNPayChannelJDApp,
+//    CNPayChannelUnionApp,
+//    CNPayChannelJDApp,
     
     /// 扫码
-    CNPayChannelQR,
+//    CNPayChannelQR,
 //    CNPayChannelWechatQR,
 //    CNPayChannelAliQR,
 //    CNPayChannelQQQR,
@@ -40,9 +40,15 @@ typedef NS_ENUM(NSUInteger, CNPayChannel) {
 //    CNPayChannelJDQR,
     
     /// BQ存款
-    CNPayChannelBQFast,
-    CNPayChannelBQWechat,
-    CNPayChannelBQAli,
+//    CNPayChannelBQFast,
+//    CNPayChannelBQWechat,
+//    CNPayChannelBQAli,
+    CNPayChannelAli, ///< 支付宝
+    CNPayChannelWechat, ///< 微信
+    CNPayChannelBankCard, ///< 银行卡
+    CNPayChannelQQ,     ///< QQ
+    CNPayChannelJD      ///< 京东
+    
 };
 
 @interface CNPayChannelModel : NSObject

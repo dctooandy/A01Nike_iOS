@@ -139,11 +139,58 @@
     
     NSMutableArray <CNPayChannelModel *> *channels = [NSMutableArray array];
     
-    /// 在线支付
-    CNPayChannelModel *online = [[CNPayChannelModel alloc] init];
-    online.payChannel = CNPayChannelOnline;
-    online.payments = [[NSArray alloc] initWithObjects:
-                       payments[CNPaymentOnline], nil];
+    // 支付宝
+    CNPayChannelModel *ali = [[CNPayChannelModel alloc] init];
+    ali.payChannel = CNPayChannelAli;
+    ali.payments = [[NSArray alloc] initWithObjects:
+                    payments[CNPaymentBQAli],
+                    payments[CNPaymentAliQR],
+                    payments[CNPaymentAliApp], nil];
+    
+    // 微信
+    CNPayChannelModel *wechat = [[CNPayChannelModel alloc] init];
+    wechat.payChannel = CNPayChannelWechat;
+    wechat.payments = [[NSArray alloc] initWithObjects:
+                       payments[CNPaymentBQWechat],
+                       payments[CNPaymentWechatQR],
+                       payments[CNPaymentWechatApp],
+                       payments[CNPaymentWechatBarCode],nil];
+    
+    // 银行卡
+    CNPayChannelModel *bankCard = [[CNPayChannelModel alloc] init];
+    bankCard.payChannel = CNPayChannelBankCard;
+    bankCard.payments = [[NSArray alloc] initWithObjects:
+                       payments[CNPaymentBQFast],
+                       payments[CNPaymentDeposit],
+                       payments[CNPaymentOnline],
+                       payments[CNPaymentUnionQR],
+                       payments[CNPaymentUnionApp],nil];
+    
+    // QQ
+    CNPayChannelModel *qq = [[CNPayChannelModel alloc] init];
+    qq.payChannel = CNPayChannelQQ;
+    qq.payments = [[NSArray alloc] initWithObjects:
+                       payments[CNPaymentQQQR],
+                       payments[CNPaymentQQApp],nil];
+    
+    // JD
+    CNPayChannelModel *jd = [[CNPayChannelModel alloc] init];
+    jd.payChannel = CNPayChannelJD;
+    jd.payments = [[NSArray alloc] initWithObjects:
+                   payments[CNPaymentJDQR],
+                   payments[CNPaymentJDApp],nil];
+    
+    /// 比特币支付
+    CNPayChannelModel *BTC = [[CNPayChannelModel alloc] init];
+    BTC.payChannel = CNPayChannelBTC;
+    BTC.payments = [[NSArray alloc] initWithObjects:
+                    payments[CNPaymentBTC], nil];
+    
+    /// 钻石币支付
+    CNPayChannelModel *coin = [[CNPayChannelModel alloc] init];
+    coin.payChannel = CNPayChannelCoin;
+    coin.payments = [[NSArray alloc] initWithObjects:
+                     payments[CNPaymentCoin], nil];
     
     /// 点卡
     CNPayChannelModel *card = [[CNPayChannelModel alloc] init];
@@ -152,86 +199,7 @@
                      payments[CNPaymentCard], nil];
     
     
-    /// 手工存款
-    CNPayChannelModel *deposit = [[CNPayChannelModel alloc] init];
-    deposit.payChannel = CNPayChannelDeposit;
-    deposit.payments = [[NSArray alloc] initWithObjects:
-                        payments[CNPaymentDeposit], nil];
-    
-    
-    /// 比特币支付
-    CNPayChannelModel *BTC = [[CNPayChannelModel alloc] init];
-    BTC.payChannel = CNPayChannelBTC;
-    BTC.payments = [[NSArray alloc] initWithObjects:
-                    payments[CNPaymentBTC], nil];
-    
-    
-    /// 支付宝支付
-    CNPayChannelModel *ali = [[CNPayChannelModel alloc] init];
-    ali.payChannel = CNPayChannelAliApp;
-    ali.payments = [[NSArray alloc] initWithObjects:
-                    payments[CNPaymentAliApp], nil];
-    
-    
-    /// 银联mobile
-    CNPayChannelModel *unionPay = [[CNPayChannelModel alloc] init];
-    unionPay.payChannel = CNPayChannelUnionApp;
-    unionPay.payments = [[NSArray alloc] initWithObjects:
-                         payments[CNPaymentUnionApp], nil];
-    
-    
-    /// 京东支付
-    CNPayChannelModel *JD = [[CNPayChannelModel alloc] init];
-    JD.payChannel = CNPayChannelJDApp;
-    JD.payments = [[NSArray alloc] initWithObjects:
-                   payments[CNPaymentJDApp], nil];
-    
-    
-    /// 扫码
-    CNPayChannelModel *QR = [[CNPayChannelModel alloc] init];
-    QR.payChannel = CNPayChannelQR;
-    QR.payments = [[NSArray alloc] initWithObjects:
-                   payments[CNPaymentWechatQR],
-                   payments[CNPaymentAliQR],
-                   payments[CNPaymentQQQR],
-                   payments[CNPaymentUnionQR],
-                   payments[CNPaymentWechatApp],
-                   payments[CNPaymentQQApp],
-                   payments[CNPaymentJDQR],
-                   nil];
-    
-    /// BQ 快速
-    CNPayChannelModel *BQFast = [[CNPayChannelModel alloc] init];
-    BQFast.payChannel = CNPayChannelBQFast;
-    BQFast.payments = [[NSArray alloc] initWithObjects:
-                       payments[CNPaymentBQFast], nil];
-    
-    /// BQ WeChat
-    CNPayChannelModel *BQWeChat = [[CNPayChannelModel alloc] init];
-    BQWeChat.payChannel = CNPayChannelBQWechat;
-    BQWeChat.payments = [[NSArray alloc] initWithObjects:
-                         payments[CNPaymentBQWechat], nil];
-    
-    /// BQ Ali
-    CNPayChannelModel *BQAli = [[CNPayChannelModel alloc] init];
-    BQAli.payChannel = CNPayChannelBQAli;
-    BQAli.payments = [[NSArray alloc] initWithObjects:
-                      payments[CNPaymentBQAli], nil];
-    
-    
-    /// 微信条码
-    CNPayChannelModel *barCode = [[CNPayChannelModel alloc] init];
-    barCode.payChannel = CNPayChannelWechatBarCode;
-    barCode.payments = [[NSArray alloc] initWithObjects:
-                        payments[CNPaymentWechatBarCode], nil];
-    
-    /// 钻石币支付
-    CNPayChannelModel *coin = [[CNPayChannelModel alloc] init];
-    coin.payChannel = CNPayChannelCoin;
-    coin.payments = [[NSArray alloc] initWithObjects:
-                     payments[CNPaymentCoin], nil];
-    
-    NSArray *array = @[BQFast,BQWeChat,BQAli,deposit,ali,online,QR,unionPay,card,BTC,JD,barCode,coin];
+    NSArray *array = @[ali,wechat,bankCard,qq,jd,BTC,coin,card];
     
     // 没开启的渠道不显示
     for (CNPayChannelModel *channel in array) {
