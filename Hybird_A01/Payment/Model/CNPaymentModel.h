@@ -67,6 +67,8 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 @property (nonatomic, copy) NSArray <CNPayCardModel> *cardList;
 @property (nonatomic, copy) NSString *postUrl;
 
+@property (nonatomic, assign) BOOL isSelect;
+
 /// 推荐金额
 - (NSArray<NSNumber *> *)prePayAmountArray;
 /// 支付方式

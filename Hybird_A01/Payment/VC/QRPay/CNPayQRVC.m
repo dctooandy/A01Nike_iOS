@@ -8,14 +8,14 @@
 
 #import "CNPayQRVC.h"
 #import "CNPayQRCell.h"
+#import "CNPayOnePixView.h"
+#import "CNPayNormalTF.h"
 
 #define kQRCellIndentifier   @"CNPayQRCell"
 
 @interface CNPayQRVC () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeight;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
-
 
 @property (weak, nonatomic) IBOutlet UIView *preSettingView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *preSettingViewHeight;
@@ -28,6 +28,25 @@
 @property (assign, nonatomic) BOOL setSelect;
 @property (assign, nonatomic) NSInteger currentSelectedIndex;
 @property (nonatomic) CGSize cellSize;
+
+@property (weak, nonatomic) IBOutlet UIView *nameView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameViewHeight;
+
+@property (weak, nonatomic) IBOutlet UIView *bankView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bankViewHeight;
+
+@property (weak, nonatomic) IBOutlet UIView *amountView;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *amountViewHeight;
+@property (weak, nonatomic) IBOutlet CNPayOnePixView *amountLine;
+
+
+@property (weak, nonatomic) IBOutlet CNPayNameTF *nameTextField;
+
+@property (weak, nonatomic) IBOutlet CNPayNormalTF *bankTextField;
+
+@property (nonatomic, copy) NSArray *bankNames;
+
 @end
 
 @implementation CNPayQRVC
@@ -37,8 +56,10 @@
     [self configCollectionView];
     [self configPreSettingMessage];
     // 刷新数据
+    [self updateUIWithPaymentModel:self.payments[self.currentSelectedIndex]];
     [self updateAllContentWithModel:self.paymentModel];
     [self configAmountList];
+    [self configSelectBankView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -62,9 +83,9 @@
     
     NSInteger count = self.payments.count;
     // 根据数组个数与屏幕宽度来调节高度
-    CGFloat itemWidth = ([UIScreen mainScreen].bounds.size.width -18-35-10)/2.0;
+    CGFloat itemWidth = ([UIScreen mainScreen].bounds.size.width - 18 - 30 - 10) / 3.0;
     CGFloat itemHeight = itemWidth * 56 / 160.0;
-    CGFloat totalHeight = ((count - 1)/2 + 1) * (itemHeight + 15);
+    CGFloat totalHeight = ((count - 1) / 3 + 1) * (itemHeight + 15);
     self.collectionViewHeight.constant = totalHeight;
     self.cellSize = CGSizeMake(itemWidth, itemHeight + 10);
 }
@@ -77,6 +98,18 @@
     } else {
         self.preSettingViewHeight.constant = 0;
         self.preSettingView.hidden = YES;
+    }
+}
+
+- (void)configSelectBankView {
+    // 银行列表
+    NSMutableArray *bankNames = [NSMutableArray array];
+    for (CNPayBankCardModel *bankModel in self.paymentModel.bankList) {
+        [bankNames addObject:bankModel.bankname];
+    }
+    self.bankNames = bankNames;
+    if (self.bankNames.count == 1) {
+        self.bankTextField.text = self.bankNames[0];
     }
 }
 
@@ -122,9 +155,48 @@
     
     self.currentSelectedIndex = indexPath.row;
     self.paymentModel = [self.payments objectAtIndex:indexPath.row];
+    [self updateUIWithPaymentModel:self.paymentModel];
     [self updateAllContentWithModel:self.paymentModel];
     [self configAmountList];
    
+}
+
+- (void)updateUIWithPaymentModel:(CNPaymentModel *)model {
+    if (model.paymentType == CNPaymentUnionQR ||
+        model.paymentType == CNPaymentJDQR ||
+        model.paymentType == CNPaymentBTC ||
+        model.paymentType == CNPaymentCoin ||
+        model.paymentType == CNPaymentUnionApp ||
+        model.paymentType == CNPaymentJDApp ||
+        model.paymentType == CNPaymentWechatBarCode ||
+        model.paymentType == CNPaymentWechatQR ||
+        model.paymentType == CNPaymentWechatApp ||
+        model.paymentType == CNPaymentAliQR ||
+        model.paymentType == CNPaymentAliApp) {
+        self.nameView.hidden = YES;
+        self.nameViewHeight.constant = 0;
+        self.bankView.hidden = YES;
+        self.bankViewHeight.constant = 0;
+        self.amountView.hidden = NO;
+        self.amountViewHeight.constant = 50;
+        self.amountLine.hidden = YES;
+    } else if (model.paymentType == CNPaymentDeposit) {
+        self.amountView.hidden = YES;
+        self.amountViewHeight.constant = 0;
+        self.nameView.hidden = NO;
+        self.nameViewHeight.constant = 50;
+        self.bankView.hidden = NO;
+        self.bankViewHeight.constant = 50;
+        self.amountLine.hidden = YES;
+    } else {
+        self.nameView.hidden = NO;
+        self.nameViewHeight.constant = 50;
+        self.bankView.hidden = NO;
+        self.bankViewHeight.constant = 50;
+        self.amountView.hidden = NO;
+        self.amountViewHeight.constant = 50;
+        self.amountLine.hidden = NO;
+    }
 }
 
 
@@ -150,6 +222,19 @@
     }];
 }
 
+- (IBAction)selectBankClick:(UIButton *)sender {
+    if (!self.bankNames.count) {
+        return;
+    }
+    [BRStringPickerView showStringPickerWithTitle:@"选择支付银行" dataSource:self.bankNames defaultSelValue:self.bankTextField.text resultBlock:^(id selectValue, NSInteger index) {
+        if ([self.bankTextField.text isEqualToString:selectValue]) {
+            return;
+        }
+        self.bankTextField.text = selectValue;
+    }];
+}
+
+
 - (IBAction)nextStep:(UIButton *)sender {
     [self.view endEditing:YES];
     NSString *text = _amountTF.text;
@@ -158,6 +243,18 @@
         _amountTF.text = nil;
         [self showError:@"请输入充值金额"];
         return;
+    }
+    
+    if (!self.bankView.hidden) {
+        if (!self.bankTextField.text.length) {
+            [self showError:@"请选择支付银行"];
+        }
+    }
+    
+    if (!self.nameView.hidden) {
+        if (!self.nameTextField.text.length) {
+            [self showError:@"请输入真实姓名"];
+        }
     }
     
     /// 超出额度范围

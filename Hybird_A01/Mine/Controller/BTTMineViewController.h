@@ -9,6 +9,14 @@
 #import "BTTCollectionViewController.h"
 #import "BTTBindStatusModel.h"
 
+typedef enum : NSUInteger {
+    BTTMeSaveMoneyShowTypeAll = 0,
+    BTTMeSaveMoneyShowTypeBig = 1,
+    BTTMeSaveMoneyShowTypeMore = 2,
+    BTTMeSaveMoneyShowTypeNone
+} BTTMeSaveMoneyShowType;
+
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTMineViewController : BTTCollectionViewController
@@ -26,6 +34,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *preAmount; ///< 计算余额
 
 @property (nonatomic, assign) BOOL isLoading;  ///< 余额计算中
+
+@property (nonatomic, assign) BTTMeSaveMoneyShowType saveMoneyShowType;
+
+@property (nonatomic, assign) NSInteger saveMoneyCount;
 
 - (void)setupElements;
 

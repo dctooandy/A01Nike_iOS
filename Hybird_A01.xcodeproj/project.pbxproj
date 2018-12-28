@@ -195,6 +195,16 @@
 		3AAE8221219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AAE8211219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.xib */; };
 		3AAE8222219A738B003EC8B0 /* BTTForgetPasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AAE8212219A738B003EC8B0 /* BTTForgetPasswordCell.xib */; };
 		3AAE8223219A738B003EC8B0 /* BTTRegisterQuickAutoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AAE8213219A738B003EC8B0 /* BTTRegisterQuickAutoCell.xib */; };
+		3AAFF87721D3749F00F875B1 /* BTTMeBigSaveMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFF87521D3749F00F875B1 /* BTTMeBigSaveMoneyCell.m */; };
+		3AAFF87821D3749F00F875B1 /* BTTMeBigSaveMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AAFF87621D3749F00F875B1 /* BTTMeBigSaveMoneyCell.xib */; };
+		3AAFF87C21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFF87A21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.m */; };
+		3AAFF87D21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AAFF87B21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.xib */; };
+		3AAFF88121D378C600F875B1 /* BTTMeSaveMoneyAlipayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFF87F21D378C600F875B1 /* BTTMeSaveMoneyAlipayCell.m */; };
+		3AAFF88221D378C600F875B1 /* BTTMeSaveMoneyAlipayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AAFF88021D378C600F875B1 /* BTTMeSaveMoneyAlipayCell.xib */; };
+		3AAFF88621D378E800F875B1 /* BTTMeSaveMoneyWechatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFF88421D378E800F875B1 /* BTTMeSaveMoneyWechatCell.m */; };
+		3AAFF88721D378E800F875B1 /* BTTMeSaveMoneyWechatCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AAFF88521D378E800F875B1 /* BTTMeSaveMoneyWechatCell.xib */; };
+		3AAFF88B21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFF88921D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.m */; };
+		3AAFF88C21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AAFF88A21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.xib */; };
 		3AB0681E21A25E7B00072FB7 /* BTTChangeMobileSuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0681D21A25E7B00072FB7 /* BTTChangeMobileSuccessController.m */; };
 		3AB0682321A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0682121A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.m */; };
 		3AB0682421A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB0682221A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.xib */; };
@@ -985,6 +995,21 @@
 		3AAE8211219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLoginOrRegisterHeaderCell.xib; sourceTree = "<group>"; };
 		3AAE8212219A738B003EC8B0 /* BTTForgetPasswordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTForgetPasswordCell.xib; sourceTree = "<group>"; };
 		3AAE8213219A738B003EC8B0 /* BTTRegisterQuickAutoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTRegisterQuickAutoCell.xib; sourceTree = "<group>"; };
+		3AAFF87421D3749F00F875B1 /* BTTMeBigSaveMoneyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTMeBigSaveMoneyCell.h; sourceTree = "<group>"; };
+		3AAFF87521D3749F00F875B1 /* BTTMeBigSaveMoneyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMeBigSaveMoneyCell.m; sourceTree = "<group>"; };
+		3AAFF87621D3749F00F875B1 /* BTTMeBigSaveMoneyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTMeBigSaveMoneyCell.xib; sourceTree = "<group>"; };
+		3AAFF87921D3759700F875B1 /* BTTMeMoreSaveMoneyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTMeMoreSaveMoneyCell.h; sourceTree = "<group>"; };
+		3AAFF87A21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMeMoreSaveMoneyCell.m; sourceTree = "<group>"; };
+		3AAFF87B21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTMeMoreSaveMoneyCell.xib; sourceTree = "<group>"; };
+		3AAFF87E21D378C600F875B1 /* BTTMeSaveMoneyAlipayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTMeSaveMoneyAlipayCell.h; sourceTree = "<group>"; };
+		3AAFF87F21D378C600F875B1 /* BTTMeSaveMoneyAlipayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMeSaveMoneyAlipayCell.m; sourceTree = "<group>"; };
+		3AAFF88021D378C600F875B1 /* BTTMeSaveMoneyAlipayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTMeSaveMoneyAlipayCell.xib; sourceTree = "<group>"; };
+		3AAFF88321D378E800F875B1 /* BTTMeSaveMoneyWechatCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTMeSaveMoneyWechatCell.h; sourceTree = "<group>"; };
+		3AAFF88421D378E800F875B1 /* BTTMeSaveMoneyWechatCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMeSaveMoneyWechatCell.m; sourceTree = "<group>"; };
+		3AAFF88521D378E800F875B1 /* BTTMeSaveMoneyWechatCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTMeSaveMoneyWechatCell.xib; sourceTree = "<group>"; };
+		3AAFF88821D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTMeMoreSaveMoneyHeaderCell.h; sourceTree = "<group>"; };
+		3AAFF88921D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMeMoreSaveMoneyHeaderCell.m; sourceTree = "<group>"; };
+		3AAFF88A21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTMeMoreSaveMoneyHeaderCell.xib; sourceTree = "<group>"; };
 		3AB0681C21A25E7B00072FB7 /* BTTChangeMobileSuccessController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTChangeMobileSuccessController.h; sourceTree = "<group>"; };
 		3AB0681D21A25E7B00072FB7 /* BTTChangeMobileSuccessController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTChangeMobileSuccessController.m; sourceTree = "<group>"; };
 		3AB0682021A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTChangeMobileSuccessOneCell.h; sourceTree = "<group>"; };
@@ -2804,7 +2829,6 @@
 				3A11AE0E2182AA5400B1AFF4 /* PTTransfer */,
 				3A11ADF22181A1EF00B1AFF4 /* Withdrawal */,
 				3AE1EAD9217F1D450073A32D /* CardInfo */,
-				3AE1EABA217DB5B20073A32D /* PersonalInfo */,
 				3AE1EAB9217DB59B0073A32D /* BindMobile */,
 				3AE1EAB8217DB5800073A32D /* AccountBlance */,
 				3AE1EAB7217DB5570073A32D /* MineMain */,
@@ -2923,6 +2947,21 @@
 				3ADD23782177366B00FA959A /* BTTMeMainCell.h */,
 				3ADD23792177366B00FA959A /* BTTMeMainCell.m */,
 				3ADD237A2177366B00FA959A /* BTTMeMainCell.xib */,
+				3AAFF87421D3749F00F875B1 /* BTTMeBigSaveMoneyCell.h */,
+				3AAFF87521D3749F00F875B1 /* BTTMeBigSaveMoneyCell.m */,
+				3AAFF87621D3749F00F875B1 /* BTTMeBigSaveMoneyCell.xib */,
+				3AAFF87E21D378C600F875B1 /* BTTMeSaveMoneyAlipayCell.h */,
+				3AAFF87F21D378C600F875B1 /* BTTMeSaveMoneyAlipayCell.m */,
+				3AAFF88021D378C600F875B1 /* BTTMeSaveMoneyAlipayCell.xib */,
+				3AAFF88321D378E800F875B1 /* BTTMeSaveMoneyWechatCell.h */,
+				3AAFF88421D378E800F875B1 /* BTTMeSaveMoneyWechatCell.m */,
+				3AAFF88521D378E800F875B1 /* BTTMeSaveMoneyWechatCell.xib */,
+				3AAFF87921D3759700F875B1 /* BTTMeMoreSaveMoneyCell.h */,
+				3AAFF87A21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.m */,
+				3AAFF87B21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.xib */,
+				3AAFF88821D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.h */,
+				3AAFF88921D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.m */,
+				3AAFF88A21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.xib */,
 			);
 			path = MineMain;
 			sourceTree = "<group>";
@@ -2959,13 +2998,6 @@
 				3A49DFA42179DDA100FEFBDA /* BTTBindingMobileBtnCell.xib */,
 			);
 			path = BindMobile;
-			sourceTree = "<group>";
-		};
-		3AE1EABA217DB5B20073A32D /* PersonalInfo */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PersonalInfo;
 			sourceTree = "<group>";
 		};
 		3AE1EABB217DB6E30073A32D /* PersonalInfo */ = {
@@ -3857,6 +3889,7 @@
 				3A9E4C34219D9D6B00E7D8C0 /* BTTMakeCallLoginView.xib in Resources */,
 				EAE89ECC218C3ABD00C29393 /* LIVResendButton@3x.png in Resources */,
 				EAE89F31218C3ABD00C29393 /* LIVTextWithSmallIconToast.nib in Resources */,
+				3AAFF88721D378E800F875B1 /* BTTMeSaveMoneyWechatCell.xib in Resources */,
 				EAE89E98218C3ABD00C29393 /* Emotion.plist in Resources */,
 				D5DBEB0921ABB774008AF629 /* CNPayBQStep2VC.xib in Resources */,
 				3A929432219D1B4700764E7E /* BTTForgetPwdOneCell.xib in Resources */,
@@ -3875,6 +3908,7 @@
 				EAE89ECB218C3ABD00C29393 /* LIVResendButton@2x.png in Resources */,
 				EAE89EBD218C3ABD00C29393 /* LIVLocationItem@2x.png in Resources */,
 				D5DBEB0021ABB774008AF629 /* CNPayDepositStep3VC.xib in Resources */,
+				3AAFF88C21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.xib in Resources */,
 				3A5F7AB621AD0E6800128E8B /* BTTVideoGamesFilterCell.xib in Resources */,
 				EAE89EBA218C3ABD00C29393 /* LIVFileMessage_TypeZip@3x.png in Resources */,
 				EAE89EA6218C3ABD00C29393 /* LIVCameraItem@3x.png in Resources */,
@@ -3898,6 +3932,7 @@
 				EAE89E99218C3ABD00C29393 /* back-arrow@2x.png in Resources */,
 				3A34F79F21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib in Resources */,
 				EAE89F0B218C3ABD00C29393 /* sentVoicePlaying1@3x.png in Resources */,
+				3AAFF88221D378C600F875B1 /* BTTMeSaveMoneyAlipayCell.xib in Resources */,
 				3A11AE082181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.xib in Resources */,
 				EAE89EBF218C3ABD00C29393 /* LIVMediaFileSaveToLibraryButton@2x.png in Resources */,
 				3A5F7A9B21A8E71100128E8B /* BTTXimaSuccessItemCell.xib in Resources */,
@@ -3950,6 +3985,7 @@
 				3AE0582521704DCB00C7E70D /* BTTHomePageAmountsCell.xib in Resources */,
 				EAE89EF0218C3ABD00C29393 /* LIVVoiceItem_highlight@2x.png in Resources */,
 				D5C5019921B67C0800C6DA02 /* CNPayDepositSuccessVC.xib in Resources */,
+				3AAFF87D21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.xib in Resources */,
 				3A7A1A7221BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib in Resources */,
 				D5DBEB1E21ABB774008AF629 /* CNPayCardStep1VC.xib in Resources */,
 				EA5F141B21A28515004305A7 /* DeviceModelsForIOS.plist in Resources */,
@@ -3979,6 +4015,7 @@
 				3AD4C9C321635AEC00FC0A63 /* app.json in Resources */,
 				EAE89E8A218C3ABD00C29393 /* daxiao.gif in Resources */,
 				EAE89E8F218C3ABD00C29393 /* inebriation.gif in Resources */,
+				3AAFF87821D3749F00F875B1 /* BTTMeBigSaveMoneyCell.xib in Resources */,
 				EAE89EFC218C3ABD00C29393 /* photo_def_previewVc@2x.png in Resources */,
 				3AB0683E21A395EF00072FB7 /* BTTUnBindingHeaderCell.xib in Resources */,
 				EAE89EA2218C3ABD00C29393 /* liv_satisfactionr_circular_selected@3x.png in Resources */,
@@ -4097,6 +4134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A11AE122182AAB300B1AFF4 /* BTTPTTransferNewCell.m in Sources */,
+				3AAFF88B21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.m in Sources */,
 				3AAE8220219A738B003EC8B0 /* BTTLoginOrRegisterBtnCell.m in Sources */,
 				3AD9CF6D216F33F300685B43 /* BTTGameCollectionViewCell.m in Sources */,
 				D5C501D521B7CEDC00C6DA02 /* BRAddressPickerView.m in Sources */,
@@ -4215,6 +4253,7 @@
 				D5DBEB1921ABB774008AF629 /* CNUIWebVC.m in Sources */,
 				3A5F7AA821ABCD3900128E8B /* BTTVideoGamesListController.m in Sources */,
 				3AE1EAD5217F1AED0073A32D /* BTTNotCompleteInfoController.m in Sources */,
+				3AAFF87C21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.m in Sources */,
 				3AE1EAE3217F25750073A32D /* BTTCardInfoCell.m in Sources */,
 				3AE1EB2021805E980073A32D /* BTTAddCardBtnsCell.m in Sources */,
 				D599251D21AFC8CA001E885A /* CNPayDepostiBankCell.m in Sources */,
@@ -4271,6 +4310,7 @@
 				3A5F7A9A21A8E71100128E8B /* BTTXimaSuccessItemCell.m in Sources */,
 				3AD9CF54216EFD0700685B43 /* BTTBannerModel.m in Sources */,
 				3A11AE022181C16800B1AFF4 /* BTTWithdrawalSuccessController.m in Sources */,
+				3AAFF87721D3749F00F875B1 /* BTTMeBigSaveMoneyCell.m in Sources */,
 				3AD9CF64216F208C00685B43 /* BTTNoticeModel.m in Sources */,
 				3ADD23972179A9E200FA959A /* BTTLive800ViewController.m in Sources */,
 				3AE05828217066FE00C7E70D /* BTTAmountModel.m in Sources */,
@@ -4292,6 +4332,7 @@
 				3A9E4C16219D1D2A00E7D8C0 /* BTTForgetPwdCodeCell.m in Sources */,
 				3A37E0FD2164691300FB13A1 /* AppDelegate+AD.m in Sources */,
 				3ADD23ED2179B97A00FA959A /* TAAnimatedDotView.m in Sources */,
+				3AAFF88121D378C600F875B1 /* BTTMeSaveMoneyAlipayCell.m in Sources */,
 				3AE1EB09218046D80073A32D /* BTTCardModifyTitleCell.m in Sources */,
 				3A8F5130215F74CF0069D1B3 /* AppDelegate.m in Sources */,
 				3A8F51EA215F78F50069D1B3 /* BTTBaseCell.m in Sources */,
@@ -4369,6 +4410,7 @@
 				3AB0684C21A3EA8500072FB7 /* BTTGamesHallModel.m in Sources */,
 				3AC3FFA4219ABEBF008AECCB /* BTTUnlockPopView.m in Sources */,
 				3AB0683821A3959100072FB7 /* BTTUnBindingMobileNoticeController.m in Sources */,
+				3AAFF88621D378E800F875B1 /* BTTMeSaveMoneyWechatCell.m in Sources */,
 				3A11AE4B21869B2200B1AFF4 /* BTTSettingsController.m in Sources */,
 				3AAE821E219A738B003EC8B0 /* BTTRegisterQuickManualCell.m in Sources */,
 				3A7A1A6C21BF68AA00572B50 /* BTTRegisterSuccessTwoCell.m in Sources */,

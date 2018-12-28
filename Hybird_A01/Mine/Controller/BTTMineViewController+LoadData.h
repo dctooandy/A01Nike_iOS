@@ -14,8 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *personalInfos;
 
-@property (nonatomic, strong) NSMutableArray *paymentDatas;
-
 @property (nonatomic, strong) NSMutableArray *mainDataOne;
 
 @property (nonatomic, strong) NSMutableArray *mainDataTwo;
@@ -23,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *mainDataThree;
 
 @property (nonatomic, strong) NSMutableArray *games;
+
+@property (nonatomic, strong) NSMutableArray *bigDataSoure;
+
+@property (nonatomic, strong) NSMutableArray *normalDataSoure;
 
 
 

@@ -44,6 +44,9 @@
 #import "IVNetworkStatusDetailViewController.h"
 #import "CNPayVC.h"
 #import "BTTPromotionDetailController.h"
+#import "BTTMeMoreSaveMoneyHeaderCell.h"
+#import "BTTMeBigSaveMoneyCell.h"
+#import "BTTMeMoreSaveMoneyCell.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -52,6 +55,9 @@
 @property (nonatomic, assign) BOOL isCompletePersonalInfo; // 是否完善个人信息
 
 @property (nonatomic, strong) BTTBaseWebViewController *webViewVC;
+
+
+
 
 @end
 
@@ -63,6 +69,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.saveMoneyCount = 3;
+    self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
     self.title = @"会员中心";
     self.totalAmount = @"加载中";
     self.collectionView.bounces = NO;
@@ -104,6 +112,9 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeMainCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeMainCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeHeaderLoginCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeHeaderLoginCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeInfoHiddenCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeInfoHiddenCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeMoreSaveMoneyHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeBigSaveMoneyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeMoreSaveMoneyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -172,44 +183,85 @@
         cell.model = model;
         return cell;
     } else if (indexPath.row == 1 + self.personalInfos.count ||
-               indexPath.row == 3 + self.personalInfos.count + self.paymentDatas.count ||
-               indexPath.row == 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count ||
-               indexPath.row == 5 + self.mainDataTwo.count + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count ||
-               indexPath.row == 6 + self.mainDataTwo.count + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count + self.mainDataThree.count) {
+               indexPath.row == 3 + self.personalInfos.count + self.saveMoneyCount ||
+               indexPath.row == 4 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount ||
+               indexPath.row == 5 + self.mainDataTwo.count + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount ||
+               indexPath.row == 6 + self.mainDataTwo.count + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount + self.mainDataThree.count) {
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
     } else if (indexPath.row == 2 + self.personalInfos.count) {
         BTTMeMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoneyHeaderCell" forIndexPath:indexPath];
         return cell;
-    } else if (indexPath.row >= 3 + self.personalInfos.count && indexPath.row <= 3 + self.personalInfos.count + self.paymentDatas.count - 1) {
-        BTTMeSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeSaveMoneyCell" forIndexPath:indexPath];
-        
-        BTTMeMainModel *model = self.paymentDatas[indexPath.row - (3 + self.personalInfos.count)];
-        cell.model = model;
-        return cell;
-    } else if (indexPath.row >= 4 + self.personalInfos.count + self.paymentDatas.count && indexPath.row <= 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count) {
-        BTTMeMainModel *model = self.mainDataOne[indexPath.row - ( 4 + self.personalInfos.count + self.paymentDatas.count)];
+    } else if (indexPath.row >= 3 + self.personalInfos.count && indexPath.row <= 3 + self.personalInfos.count + self.saveMoneyCount - 1) {
+        if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
+            if (indexPath.row == 3 + self.personalInfos.count) {
+                BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
+                cell.dataSource = self.bigDataSoure;
+                weakSelf(weakSelf);
+                cell.clickEventBlock = ^(id  _Nonnull value) {
+                    strongSelf(strongSelf);
+                    BTTMeMainModel *model = value;
+                    [strongSelf goSaveMoneyWithModel:model];
+                };
+                return cell;
+            } else if (indexPath.row == 4 + self.personalInfos.count) {
+                BTTMeMoreSaveMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell" forIndexPath:indexPath];
+                return cell;
+            } else {
+                BTTMeMoreSaveMoneyCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
+                cell.dataSource = self.normalDataSoure;
+                weakSelf(weakSelf);
+                cell.clickEventBlock = ^(id  _Nonnull value) {
+                    strongSelf(strongSelf);
+                    BTTMeMainModel *model = value;
+                    [strongSelf goSaveMoneyWithModel:model];
+                };
+                return cell;
+            }
+        } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig) {
+            BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                strongSelf(strongSelf);
+                BTTMeMainModel *model = value;
+                [strongSelf goSaveMoneyWithModel:model];
+            };
+            return cell;
+        } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeMore) {
+            BTTMeMoreSaveMoneyCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                strongSelf(strongSelf);
+                BTTMeMainModel *model = value;
+                [strongSelf goSaveMoneyWithModel:model];
+            };
+            return cell;
+        } else {
+            return [UICollectionViewCell new];
+        }
+    } else if (indexPath.row >= 4 + self.personalInfos.count + self.saveMoneyCount && indexPath.row <= 4 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount) {
+        BTTMeMainModel *model = self.mainDataOne[indexPath.row - ( 4 + self.personalInfos.count + self.saveMoneyCount)];
         if (self.isShowHidden) {
-            NSInteger maxRow = 8 + self.personalInfos.count + self.paymentDatas.count;
+            NSInteger maxRow = 8 + self.personalInfos.count + self.saveMoneyCount;
             if (self.isFanLi) {
                 maxRow += 1;
             }
             if (self.isOpenAccount) {
                 maxRow += 1;
             }
-            if (indexPath.row >= 8 + self.personalInfos.count + self.paymentDatas.count && indexPath.row <= maxRow) {
+            if (indexPath.row >= 8 + self.personalInfos.count + self.saveMoneyCount && indexPath.row <= maxRow) {
                 BTTMeInfoHiddenCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeInfoHiddenCell" forIndexPath:indexPath];
                 cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeRight;
                 cell.model = model;
                 return cell;
             } else {
                 BTTMeMainCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMainCell" forIndexPath:indexPath];
-                if (indexPath.row == 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count) {
+                if (indexPath.row == 4 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount) {
                     cell.mineSparaterType = BTTMineSparaterTypeNone;
                 } else {
                     cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
                 }
-                if (indexPath.row == 7 + self.personalInfos.count + self.paymentDatas.count && self.isShowHidden) {
+                if (indexPath.row == 7 + self.personalInfos.count + self.saveMoneyCount && self.isShowHidden) {
                     cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeUp;
                 } else {
                     cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeRight;
@@ -219,12 +271,12 @@
             }
         } else {
             BTTMeMainCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMainCell" forIndexPath:indexPath];
-            if (indexPath.row == 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count) {
+            if (indexPath.row == 4 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount) {
                 cell.mineSparaterType = BTTMineSparaterTypeNone;
             } else {
                 cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
             }
-            if (indexPath.row == 7 + self.personalInfos.count + self.paymentDatas.count && self.isShowHidden) {
+            if (indexPath.row == 7 + self.personalInfos.count + self.saveMoneyCount && self.isShowHidden) {
                 cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeUp;
             } else {
                 cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeRight;
@@ -232,11 +284,11 @@
             cell.model = model;
             return cell;
         }
-    } else if (indexPath.row >= 5 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count && indexPath.row <= 5 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count + self.mainDataTwo.count) {
+    } else if (indexPath.row >= 5 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount && indexPath.row <= 5 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount + self.mainDataTwo.count) {
         BTTMeMainCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMainCell" forIndexPath:indexPath];
-        BTTMeMainModel *model = self.mainDataTwo[indexPath.row - (5 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count)];
+        BTTMeMainModel *model = self.mainDataTwo[indexPath.row - (5 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount)];
         cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeRight;
-        if (indexPath.row == 5 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count + self.mainDataTwo.count) {
+        if (indexPath.row == 5 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount + self.mainDataTwo.count) {
             cell.mineSparaterType = BTTMineSparaterTypeNone;
         } else {
             cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
@@ -244,13 +296,23 @@
         cell.model = model;
         return cell;
     } else  {
-        BTTMeMainModel *model = self.mainDataThree[indexPath.row - (6 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count + self.mainDataTwo.count)];
+        BTTMeMainModel *model = self.mainDataThree[indexPath.row - (6 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount + self.mainDataTwo.count)];
         BTTMeMainCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMainCell" forIndexPath:indexPath];
         cell.model = model;
         cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeRight;
         cell.mineSparaterType = BTTMineSparaterTypeNone;
         return cell;
     }
+}
+
+- (void)goSaveMoneyWithModel:(BTTMeMainModel *)model {
+    if (![IVNetwork userInfo]) {
+        [MBProgressHUD showError:@"请先登录" toView:nil];
+        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    [self.navigationController pushViewController:[[CNPayVC alloc] initWithChannel:model.paymentType] animated:YES];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -274,7 +336,7 @@
             vc = bindingMobileVC;
         }
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == 7 + self.personalInfos.count + self.paymentDatas.count) {
+    } else if (indexPath.row == 7 + self.personalInfos.count + self.saveMoneyCount) {
         self.isShowHidden = !self.isShowHidden;
         [self loadMeAllData];
     } else if (indexPath.row == 1) {
@@ -299,7 +361,7 @@
             vc = bindVC;
         }
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == 4 + self.personalInfos.count + self.paymentDatas.count) {
+    } else if (indexPath.row == 4 + self.personalInfos.count + self.saveMoneyCount) {
         if (self.isCompletePersonalInfo) {
             if ([IVNetwork userInfo].isBankBinded) {
                 BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
@@ -315,51 +377,51 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
         
-    } else if (indexPath.row == 6 + self.personalInfos.count + self.paymentDatas.count) {
+    } else if (indexPath.row == 6 + self.personalInfos.count + self.saveMoneyCount) {
         BTTPTTransferController *vc = [[BTTPTTransferController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count) {
+    } else if (indexPath.row == self.personalInfos.count + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count) {
         BTTAccountSafeController *vc = [[BTTAccountSafeController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count - 1) {
+    } else if (indexPath.row == self.personalInfos.count + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count - 1) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.url = @"customer/log.htm";
         vc.webConfigModel.theme = @"inside";
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + self.mainDataThree.count  + 5) {
+    } else if (indexPath.row == self.personalInfos.count + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count + self.mainDataThree.count  + 5) {
         // 退出登录
         [MBProgressHUD showSuccess:@"退出成功" toView:nil];
         [BTTUserStatusManager logoutSuccess];
         [self loadPaymentDefaultData];
         [self setupElements];
         self.totalAmount = @"-";
-    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + 1) {
+    } else if (indexPath.row == self.personalInfos.count + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count + 1) {
         // 设置
         BTTSettingsController *vc = [[BTTSettingsController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == 5 + self.personalInfos.count + self.paymentDatas.count) {
+    } else if (indexPath.row == 5 + self.personalInfos.count + self.saveMoneyCount) {
         BTTXimaController *vc = [[BTTXimaController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + 2) {
+    } else if (indexPath.row == self.personalInfos.count + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count + 2) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.url = @"customer/letter.htm";
         vc.webConfigModel.theme = @"inside";
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + 3) {
+    } else if (indexPath.row == self.personalInfos.count + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count + 3) {
         [IVNetwork checkAppUpdate];
-    } else if (indexPath.row == self.personalInfos.count + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + 4) {
+    } else if (indexPath.row == self.personalInfos.count + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count + 4) {
         // 网络监测
         [IVNetwork startCheckWithType:IVCheckNetworkTypeAll appWindow:[UIApplication sharedApplication].keyWindow detailBtnClickedBlock:^{
             [self.navigationController pushViewController:[IVNetworkStatusDetailViewController new] animated:YES];
         }];
-    }  else if (indexPath.row >= 3 + self.personalInfos.count && indexPath.row <= 3 + self.personalInfos.count + self.paymentDatas.count - 1) {
+    }  else if (indexPath.row >= 3 + self.personalInfos.count && indexPath.row <= 3 + self.personalInfos.count + self.saveMoneyCount - 1) {
         //支付方式点击事件
-        BTTMeMainModel *model = self.paymentDatas[indexPath.row - (3 + self.personalInfos.count)];
-        [self.navigationController pushViewController:[[CNPayVC alloc] initWithChannel:model.paymentType] animated:YES];
-    } else if (indexPath.row >= 4 + self.personalInfos.count + self.paymentDatas.count && indexPath.row <= 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count) {
-        BTTMeMainModel *model = self.mainDataOne[indexPath.row - ( 4 + self.personalInfos.count + self.paymentDatas.count)];
+//        BTTMeMainModel *model = self.paymentDatas[indexPath.row - (3 + self.personalInfos.count)];
+//        [self.navigationController pushViewController:[[CNPayVC alloc] initWithChannel:model.paymentType] animated:YES];
+    } else if (indexPath.row >= 4 + self.personalInfos.count + self.saveMoneyCount && indexPath.row <= 4 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount) {
+        BTTMeMainModel *model = self.mainDataOne[indexPath.row - ( 4 + self.personalInfos.count + self.saveMoneyCount)];
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.webConfigModel.theme = @"outside";
         vc.webConfigModel.newView = YES;
@@ -414,10 +476,10 @@
     }
     NSInteger total = 0;
     if ([IVNetwork userInfo]) {
-        total = self.personalInfos.count + 7 + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + self.mainDataThree.count;
+        total = self.personalInfos.count + 7 + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count + self.mainDataThree.count;
         
     } else {
-        total = self.personalInfos.count + 6 + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count;
+        total = self.personalInfos.count + 6 + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count;
     }
     
     for (int i = 0; i < total; i++) {
@@ -432,22 +494,29 @@
         } else if (i >= 1 && i <= 1 + self.personalInfos.count - 1) {
             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 4, 98)]];
         } else if (i == 1 + self.personalInfos.count ||
-                   i == 3 + self.personalInfos.count + self.paymentDatas.count ||
-                   i == 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count ||
-                   i == 5 + self.mainDataTwo.count + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count ||
-                   i == 6 + self.mainDataTwo.count + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count + self.mainDataThree.count) {
+                   i == 3 + self.personalInfos.count + self.saveMoneyCount ||
+                   i == 4 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount ||
+                   i == 5 + self.mainDataTwo.count + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount ||
+                   i == 6 + self.mainDataTwo.count + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount + self.mainDataThree.count) {
             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
         } else if (i == 2 + self.personalInfos.count) {
             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 63)]];
-        } else if (i >= 3 + self.personalInfos.count && i <= 3 + self.personalInfos.count + self.paymentDatas.count - 1) {
-            if (SCREEN_WIDTH == 320) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 4, 100)]];
-            } else {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 4, 110)]];
+        } else if (i >= 3 + self.personalInfos.count && i <= 3 + self.personalInfos.count + self.saveMoneyCount - 1) {
+            if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
+                if (i == 3 + self.personalInfos.count) {
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 120)]];
+                } else if (i == 4 + self.personalInfos.count) {
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+                } else {
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 110)]];
+                }
+            } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig) {
+                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 110)]];
+            } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeMore) {
+                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 110)]];
             }
-            
-        } else if ((i >= 4 + self.personalInfos.count + self.paymentDatas.count && i <= 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count) ||
-                   (i >= 5 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count && i <= 5 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count + self.mainDataTwo.count)) {
+        } else if ((i >= 4 + self.personalInfos.count + self.saveMoneyCount && i <= 4 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount) ||
+                   (i >= 5 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount && i <= 5 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount + self.mainDataTwo.count)) {
             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         } else {
             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];

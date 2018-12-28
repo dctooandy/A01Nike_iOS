@@ -33,7 +33,7 @@
             self.selectedIcon   = @"pay_AliHL";
             break;
         case CNPayChannelCard:
-            self.channelName    = @"点卡支付";
+            self.channelName    = @"点卡";
             self.selectedIcon   = @"pay_cardHL";
             break;
         case CNPayChannelWechat:
@@ -41,7 +41,7 @@
             self.selectedIcon   = @"pay_WeChatHL";
             break;
         case CNPayChannelBTC:
-            self.channelName    = @"比特币支付";
+            self.channelName    = @"比特币";
             self.selectedIcon   = @"pay_btcHL";
             break;
         case CNPayChannelJD:
@@ -49,7 +49,7 @@
             self.selectedIcon   = @"pay_JDHL";
             break;
         case CNPayChannelCoin:
-            self.channelName    = @"钻石币支付";
+            self.channelName    = @"钻石币";
             self.selectedIcon   = @"pay_Bibao";
             break;
         case CNPayChannelQQ:

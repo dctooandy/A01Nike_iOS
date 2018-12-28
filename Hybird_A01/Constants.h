@@ -116,6 +116,10 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTVerisionUpdateKey        @"BTTVerisionUpdateKey"
 
+// 存款超过十次的用户
+
+#define BTTSaveMoneyMoreThenTenKey     @"BTTSaveMoneyMoreThenTenKey"
+
 // 验证码发送按钮控制通知
 
 #define BTTVerifyCodeEnableNotification @"BTTVerifyCodeEnableNotification"
