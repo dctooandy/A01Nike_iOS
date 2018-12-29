@@ -168,7 +168,7 @@ static const char *BTTHeaderViewKey = "headerView";
     NSString *phoneValue = [IVNetwork getPublicConfigWithKey:@"APP_400_HOTLINE"];
     NSString *normalPhone = nil;
     NSString *vipPhone = nil;
-    if (!phoneValue.length) {
+    if (phoneValue.length) {
         NSArray *phonesArr = [phoneValue componentsSeparatedByString:@"|"];
         normalPhone = phonesArr[1];
         vipPhone = phonesArr[3];
