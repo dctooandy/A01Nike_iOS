@@ -122,8 +122,22 @@
         [[CLive800Manager sharedInstance] startLive800Chat:self];
     }];
     
-    NSString *telUrl = isNormalUser ? @"tel://4001203618" : @"tel://4001203616";
-    NSString *title = isNormalUser ? @"400-120-3618" : @"400-120-3616";
+    NSString *phoneValue = [IVNetwork getPublicConfigWithKey:@"APP_400_HOTLINE"];
+    NSString *normalPhone = nil;
+    NSString *vipPhone = nil;
+    if (phoneValue.length) {
+        NSArray *phonesArr = [phoneValue componentsSeparatedByString:@"|"];
+        normalPhone = phonesArr[1];
+        vipPhone = phonesArr[3];
+    }
+    if (!normalPhone.length) {
+        normalPhone = @"400-120-3618";
+    }
+    if (!vipPhone.length) {
+        vipPhone = @"400-120-3616";
+    }
+    NSString *telUrl = isNormalUser ? [NSString stringWithFormat:@"tel://%@",normalPhone]  : [NSString stringWithFormat:@"tel://%@",vipPhone];
+    NSString *title = isNormalUser ? normalPhone : vipPhone;
     title = [NSString stringWithFormat:@"     客服热线\n%@",title];
     BTTPopoverAction *action5 = [BTTPopoverAction actionWithTitle:title detailTitle:title handler:^(BTTPopoverAction *action) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telUrl]];
