@@ -1,13 +1,12 @@
 //
-//  CNPayContainerVC.m
-//  A05_iPhone
+//  BTTStepTwoContainerController.m
+//  Hybird_A01
 //
-//  Created by cean.q on 2018/9/28.
-//  Copyright © 2018年 WRD. All rights reserved.
+//  Created by Domino on 28/12/2018.
+//  Copyright © 2018 BTT. All rights reserved.
 //
 
-#import "CNPayContainerVC.h"
-
+#import "BTTStepTwoContainerController.h"
 #import "CNPayOnlineVC.h"
 #import "CNPayDepositStep1VC.h"
 #import "CNPayDepositStep2VC.h"
@@ -19,16 +18,7 @@
 #import "CNPayCardStep1VC.h"
 #import "CNPayCardStep2VC.h"
 
-
-
-
-@interface CNPayContainerVC ()
-
-
-
-@end
-
-@implementation CNPayContainerVC
+@implementation BTTStepTwoContainerController
 
 - (instancetype)initWithPaymentType:(CNPaymentType)paymentType {
     self = [super init];
@@ -38,13 +28,6 @@
     return self;
 }
 
-- (BOOL)canPopViewController {
-    if (self.segmentVC.currentDisplayItemIndex > 0) {
-        [self.segmentVC transitionItemsToIndex:(self.segmentVC.currentDisplayItemIndex-1) complteBlock:nil];
-        return NO;
-    }
-    return YES;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,7 +35,7 @@
 }
 
 - (void)setupView {
-    if (_payments && _payments.count > 0) {
+    if (self.payments && self.payments.count > 0) {
         /// 切换容器
         _segmentVC = [[AMSegmentViewController alloc] initWithItems:[self payItemsWithPaymentType:self.paymentType]];
         _segmentVC.view.frame = self.view.bounds;
@@ -75,7 +58,7 @@
             break;
         }
     }
-    
+    self.title = payment.paymentTitle;
     switch (paymentType) {
         case CNPaymentAliQR:
         case CNPaymentAliApp:
@@ -108,64 +91,27 @@
     return viewControllers;
 }
 
-/// 在线支付
-- (NSArray<CNPayBaseVC *> *)onlinePay:(CNPaymentModel *)payment {
-    CNPayOnlineVC *step1VC = [[CNPayOnlineVC alloc] init];
-    step1VC.paymentModel = payment;
-    return @[step1VC];
-}
-
-/// 手工支付
-- (NSArray<CNPayBaseVC *> *)depositPay:(CNPaymentModel *)payment {
-    CNPayDepositStep1VC *step1VC = [[CNPayDepositStep1VC alloc] init];
-    CNPayDepositStep2VC *step2VC = [[CNPayDepositStep2VC alloc] init];
-    CNPayDepositStep3VC *step3VC = [[CNPayDepositStep3VC alloc] init];
-    step1VC.paymentModel = payment;
-    step2VC.paymentModel = payment;
-    step3VC.paymentModel = payment;
-    return @[step1VC, step2VC, step3VC];
-}
-
-/// BQ支付 也叫 quickBank
-- (NSArray<CNPayBaseVC *> *)BQPay:(CNPaymentModel *)payment {
-    CNPayBQStep1VC *step1VC = [[CNPayBQStep1VC alloc] init];
-    CNPayBQStep2VC *step2VC = [[CNPayBQStep2VC alloc] init];
-    step1VC.paymentModel = payment;
-    step2VC.paymentModel = payment;
-    return @[step1VC, step2VC];
-}
-
-
-//else if (payment.paymentType == CNPayChannelCoin ||
-//         payment.paymentType == CNPaymentWechatBarCode ||
-//         payment.paymentType == CNPaymentJDApp ||
-//         payment.paymentType == CNPaymentBTC ||
-//         payment.paymentType == CNPaymentAliApp ||
-//         payment.paymentType == CNPaymentUnionApp ||
-//         payment.paymentType == CNPaymentOnline) {
-//
-//}
-
 /// QR支付
 - (NSArray<CNPayBaseVC *> *)QRPay:(CNPaymentModel *)payment {
     if (payment.paymentType == CNPaymentDeposit) {
-        CNPayQRVC *step1VC = [[CNPayQRVC alloc] init];
-        step1VC.paymentModel = payment;
-        step1VC.payments = _payments;
-        return @[step1VC];
+        CNPayDepositStep2VC *step2VC = [[CNPayDepositStep2VC alloc] init];
+        CNPayDepositStep3VC *step3VC = [[CNPayDepositStep3VC alloc] init];
+        step2VC.paymentModel = payment;
+        step3VC.paymentModel = payment;
+        step2VC.writeModel = self.writeModel;
+        return @[step2VC,step3VC];
     } else if (payment.paymentType == CNPaymentBQFast ||
                payment.paymentType == CNPaymentBQWechat ||
                payment.paymentType == CNPaymentBQAli) {
-        CNPayQRVC *step1VC = [[CNPayQRVC alloc] init];
-        step1VC.paymentModel = payment;
-        step1VC.payments = _payments;
-        return @[step1VC];
+
+        CNPayBQStep2VC *step2VC = [[CNPayBQStep2VC alloc] init];
+        step2VC.paymentModel = payment;
+        step2VC.writeModel = self.writeModel;
+        return @[step2VC];
     }
-    CNPayQRVC *step1VC = [[CNPayQRVC alloc] init];
-    step1VC.paymentModel = payment;
-    // 内部切换数据
-    step1VC.payments = _payments;
-    return @[step1VC];
+    CNPayQRStep2VC *step2VC = [[CNPayQRStep2VC alloc] init];
+    step2VC.writeModel = self.writeModel;
+    return @[step2VC];
 }
 
 /// 点卡支付

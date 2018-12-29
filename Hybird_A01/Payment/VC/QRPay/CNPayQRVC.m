@@ -10,6 +10,12 @@
 #import "CNPayQRCell.h"
 #import "CNPayOnePixView.h"
 #import "CNPayNormalTF.h"
+#import "CNPayContainerVC.h"
+#import "CNPayDepositStep2VC.h"
+#import "CNPayDepositStep3VC.h"
+#import "CNPayBQStep2VC.h"
+#import "CNPayQRStep2VC.h"
+#import "BTTStepTwoContainerController.h"
 
 #define kQRCellIndentifier   @"CNPayQRCell"
 
@@ -46,6 +52,8 @@
 @property (weak, nonatomic) IBOutlet CNPayNormalTF *bankTextField;
 
 @property (nonatomic, copy) NSArray *bankNames;
+
+@property (nonatomic, strong) CNPayBankCardModel *chooseBank;
 
 @end
 
@@ -110,6 +118,7 @@
     self.bankNames = bankNames;
     if (self.bankNames.count == 1) {
         self.bankTextField.text = self.bankNames[0];
+        self.chooseBank = self.paymentModel.bankList[0];
     }
 }
 
@@ -158,7 +167,6 @@
     [self updateUIWithPaymentModel:self.paymentModel];
     [self updateAllContentWithModel:self.paymentModel];
     [self configAmountList];
-   
 }
 
 - (void)updateUIWithPaymentModel:(CNPaymentModel *)model {
@@ -231,6 +239,7 @@
             return;
         }
         self.bankTextField.text = selectValue;
+        self.chooseBank = self.paymentModel.bankList[index];
     }];
 }
 
@@ -239,7 +248,7 @@
     [self.view endEditing:YES];
     NSString *text = _amountTF.text;
     /// 输入为不合法数字
-    if (![NSString isPureInt:text] && ![NSString isPureFloat:text]) {
+    if (![NSString isPureInt:text] && ![NSString isPureFloat:text] && !self.amountView.hidden) {
         _amountTF.text = nil;
         [self showError:@"请输入充值金额"];
         return;
@@ -260,9 +269,9 @@
     /// 超出额度范围
     NSNumber *amount = [NSString convertNumber:text];
     double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;
-    if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) {
+    if (([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) && !self.amountView.hidden) {
         _amountTF.text = nil;
-        [self showError:[NSString stringWithFormat:@"存款金额必须是%.f~%.f之间，最大允许2位小数", self.paymentModel.minamount, maxAmount]];
+        [self showError:[NSString stringWithFormat:@"存款金额必须是%.2f~%.2f之间，最大允许2位小数", self.paymentModel.minamount, maxAmount]];
         return;
     }
     
@@ -270,14 +279,70 @@
         return;
     }
     sender.selected = YES;
-    
-    /// 提交
-    __weak typeof(self) weakSelf =  self;
-    [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVRequestResultModel *result, id response) {
-        sender.selected = NO;
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf handlerResult:result];
-    }];
+    if (self.paymentModel.paymentType == CNPaymentBQAli ||
+        self.paymentModel.paymentType == CNPaymentBQWechat ||
+        self.paymentModel.paymentType == CNPaymentBQFast) {
+        self.writeModel.depositBy = self.nameTextField.text;
+        self.writeModel.amount = self.amountTF.text;
+        self.writeModel.chooseBank = self.chooseBank;
+        self.writeModel.BQType = [self getBQType];
+        [CNPayRequestManager paymentSubmitBill:self.writeModel completeHandler:^(IVRequestResultModel *result, id response) {
+            sender.selected = NO;
+            if (result.status) {
+                CNPayBankCardModel *model = [[CNPayBankCardModel alloc] initWithDictionary:result.data error:nil];
+                if (!model) {
+                    [self showError:@"系统错误，请联系客服"];
+                    return;
+                }
+                self.writeModel.chooseBank = model;
+                BTTStepTwoContainerController *containerVC = [[BTTStepTwoContainerController alloc] initWithPaymentType:self.paymentModel.paymentType];
+                containerVC.payments = self.payments;
+                containerVC.writeModel = self.writeModel;
+                AMSegmentViewController *segmentVC = [[AMSegmentViewController alloc] initWithViewController:containerVC];
+                [self addChildViewController:segmentVC];
+                [self.view addSubview:segmentVC.view];
+                
+            } else {
+                [self showError:result.message];
+            }
+        }];
+        
+    } else if (self.paymentModel.paymentType == CNPaymentDeposit) {
+        [CNPayRequestManager paymentGetBankListWithType:YES depositor:self.nameTextField.text referenceId:nil completeHandler:^(IVRequestResultModel *result, id response) {
+            sender.selected = NO;
+            if (!result.status) {
+                [self showError:result.message];
+                return;
+            }
+            /// 数据解析
+            NSArray *array = result.data;
+            NSArray *bankList = [CNPayBankCardModel arrayOfModelsFromDictionaries:array error:nil];
+            if (bankList.count == 0) {
+                [self showError:result.message];
+                return;
+            }
+            self.writeModel.depositBy = self.nameTextField.text;
+            self.writeModel.bankList = bankList;
+            self.writeModel.chooseBank = bankList.firstObject;
+            BTTStepTwoContainerController *containerVC = [[BTTStepTwoContainerController alloc] initWithPaymentType:self.paymentModel.paymentType];
+            containerVC.payments = self.payments;
+            containerVC.writeModel = self.writeModel;
+            AMSegmentViewController *segmentVC = [[AMSegmentViewController alloc] initWithViewController:containerVC];
+            [self addChildViewController:segmentVC];
+            [self.view addSubview:segmentVC.view];
+       
+        }];
+       
+        
+    } else {
+        /// 提交
+        __weak typeof(self) weakSelf =  self;
+        [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVRequestResultModel *result, id response) {
+            sender.selected = NO;
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf handlerResult:result];
+        }];
+    }
 }
 
 - (void)handlerResult:(IVRequestResultModel *)model {
@@ -296,7 +361,26 @@
     }
     self.writeModel.orderModel = orderModel;
     self.writeModel.depositType = self.paymentModel.paymentTitle;
-    [self goToStep:1];
+    BTTStepTwoContainerController *containerVC = [[BTTStepTwoContainerController alloc] initWithPaymentType:self.paymentModel.paymentType];
+    containerVC.payments = self.payments;
+    containerVC.writeModel = self.writeModel;
+    AMSegmentViewController *segmentVC = [[AMSegmentViewController alloc] initWithViewController:containerVC];
+    [self addChildViewController:segmentVC];
+    [self.view addSubview:segmentVC.view];
 }
+
+- (CNPayBQType)getBQType {
+    switch (self.paymentModel.paymentType) {
+        case CNPaymentBQAli:
+            return CNPayBQTypeAli;
+        case CNPaymentBQFast:
+            return CNPayBQTypeBankUnion;
+        case CNPaymentBQWechat:
+            return CNPayBQTypeWechat;
+        default:
+            return 0;
+    }
+}
+
 
 @end

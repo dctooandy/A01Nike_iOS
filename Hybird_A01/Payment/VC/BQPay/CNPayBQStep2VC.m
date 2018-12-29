@@ -50,6 +50,7 @@
     _second = 900;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDownAction) userInfo:nil repeats:YES];
     [self configDifferentUI];
+    [self configUI];
 }
 
 // 倒计时
@@ -102,7 +103,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setViewHeight:750 fullScreen:YES];
-    [self configUI];
+    
 }
 
 

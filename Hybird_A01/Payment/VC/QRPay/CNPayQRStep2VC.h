@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CNPayQRStep2VC : CNPayBaseVC
 
+
 @end
 
 NS_ASSUME_NONNULL_END

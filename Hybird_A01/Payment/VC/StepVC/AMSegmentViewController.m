@@ -31,7 +31,8 @@
     if (self) {
         _displayItemIndex = 0;
         _currentViewController = [items firstObject];
-        _displayControllers = items;
+        self.items = items;
+        
     }
     return self;
 }
@@ -97,6 +98,11 @@
         make.edges.mas_equalTo(UIEdgeInsetsZero);
     }];
     [serviceVC didMoveToParentViewController:self];
+}
+
+- (void)setItems:(NSArray<UIViewController *> *)items {
+    _items = items;
+    _displayControllers = items;
 }
 
 #pragma mark - 与视图切换相关

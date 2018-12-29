@@ -42,9 +42,16 @@
 @property (nonatomic, strong) UILabel *alertLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) NSMutableArray <CNPayChannelModel *> *payChannels;
+
+@property (nonatomic, strong) CNPayContainerVC *payChannelVC;
+
 @end
 
 @implementation CNPayVC
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (instancetype)initWithChannel:(CNPayChannel)channel {
     if (self = [super init]) {
@@ -60,6 +67,19 @@
     self.contentWidth.constant = [UIScreen mainScreen].bounds.size.width;
     [self.payCollectionView registerNib:[UINib nibWithNibName:kChannelCellIndentifier bundle:nil] forCellWithReuseIdentifier:kChannelCellIndentifier];
     [self fetchPayChannels];
+    [self registerNotification];
+}
+
+- (void)registerNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUIItems:) name:@"BTTUpdateSaveMoneyUINotification" object:nil];
+}
+
+- (void)updateUIItems:(NSNotification *)notifi  {
+    NSLog(@"%@",notifi.object);
+    _payChannelVC.segmentVC.items = notifi.object;
+    _segmentVC.items = notifi.object;
+    [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -270,7 +290,6 @@
         }
     }
     
-    CNPayChannel payChannel = channelModel.payChannel;
     self.title = channelModel.channelName;
     self.selectedIcon = channelModel.selectedIcon;
     
@@ -281,9 +300,9 @@
     [_payCollectionView reloadData];
     [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     
-    CNPayContainerVC *payChannelVC = [[CNPayContainerVC alloc] initWithPayChannel:payChannel];
-    payChannelVC.payments = _payChannels[_currentSelectedIndex].payments;
-    _segmentVC = [[AMSegmentViewController alloc] initWithViewController:payChannelVC];
+    _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.payments.firstObject.paymentType];
+    _payChannelVC.payments = _payChannels[_currentSelectedIndex].payments;
+    _segmentVC = [[AMSegmentViewController alloc] initWithViewController:_payChannelVC];
     [self.stepView addSubview:_segmentVC.view];
     [_segmentVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
@@ -320,11 +339,11 @@
     [self.payCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     
     CNPayChannelModel *channel = [_payChannels objectAtIndex:indexPath.row];
-    CNPayContainerVC *payChannelVC = [[CNPayContainerVC alloc] initWithPayChannel:channel.payChannel];
-    payChannelVC.payments = channel.payments;
+    _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payments.firstObject.paymentType];
+    _payChannelVC.payments = channel.payments;
     self.title = channel.channelName;
     self.selectedIcon = channel.selectedIcon;
-    [self.segmentVC addOrUpdateDisplayViewController:payChannelVC];
+    [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];
 }
 
 
