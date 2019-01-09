@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *titleLb;
 @property (weak, nonatomic) IBOutlet UIImageView *bgIV;
 
+@property (weak, nonatomic) IBOutlet UIImageView *tuijianIcon;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

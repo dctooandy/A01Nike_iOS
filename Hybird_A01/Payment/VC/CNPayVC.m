@@ -56,6 +56,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"212229"];
     self.payScrollView.backgroundColor = kBlackBackgroundColor;
     self.contentWidth.constant = [UIScreen mainScreen].bounds.size.width;
     [self.payCollectionView registerNib:[UINib nibWithNibName:kChannelCellIndentifier bundle:nil] forCellWithReuseIdentifier:kChannelCellIndentifier];
@@ -191,10 +192,10 @@
     CNPayChannelModel *QR = [[CNPayChannelModel alloc] init];
     QR.payChannel = CNPayChannelQR;
     QR.payments = [[NSArray alloc] initWithObjects:
+                   payments[CNPaymentUnionQR],
                    payments[CNPaymentWechatQR],
                    payments[CNPaymentAliQR],
                    payments[CNPaymentQQQR],
-                   payments[CNPaymentUnionQR],
                    payments[CNPaymentWechatApp],
                    payments[CNPaymentQQApp],
                    payments[CNPaymentJDQR],
