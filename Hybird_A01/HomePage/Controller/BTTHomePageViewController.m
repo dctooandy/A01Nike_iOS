@@ -346,6 +346,21 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    NSInteger total = 0;
+    if (self.posters.count) {
+        self.adCellShow = YES;
+    } else {
+        self.adCellShow = NO;
+    }
+    NSInteger promotionCount = self.promotions.count ? self.promotions.count : 3;
+    if (self.adCellShow) {
+        total = 14 + promotionCount;
+    } else {
+        total = 13 + promotionCount;
+    }
+    if (self.elementsHight.count != total) {
+        return;
+    }
     if (self.adCellShow) {
         if (indexPath.row == 8 + (self.promotions.count ? self.promotions.count : 3)) {
             [self refreshDataOfActivities];

@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"账户余额";
+    self.isLoadingData = NO;
     self.amount = @"-";
     self.localAmount = @"加载中";
     self.hallAmount = @"加载中";
@@ -84,7 +85,10 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
     NSLog(@"%zd", indexPath.item);
-    if (indexPath.item == 2) {
+    if (!self.isLoadingData) {
+        [MBProgressHUD showError:@"数据加载中, 请稍后" toView:nil];
+    }
+    if (indexPath.item == 2 && self.isLoadingData) {
         self.isShowHidden = !self.isShowHidden;
         [self setupElements];
     }
