@@ -62,11 +62,13 @@
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
             [strongSelf verifyCode:strongSelf.code account:strongSelf.account completeBlock:^(IVRequestResultModel *result, id response) {
-                if (result.code_http == 200 && result.data[@"val"] && ![result.data[@"val"] isKindOfClass:[NSNull class]] ) {
-                    BTTForgetPasswordStepThreeController *vc = [[BTTForgetPasswordStepThreeController alloc] init];
-                    vc.accessID = result.data[@"val"];
-                    vc.account = strongSelf.account;
-                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                if (result.status) {
+                    if (result.code_http == 200 && [result.data[@"val"] isKindOfClass:[NSDictionary class]] ) {
+                        BTTForgetPasswordStepThreeController *vc = [[BTTForgetPasswordStepThreeController alloc] init];
+                        vc.accessID = result.data[@"val"];
+                        vc.account = strongSelf.account;
+                        [strongSelf.navigationController pushViewController:vc animated:YES];
+                    }
                 } else {
                     [MBProgressHUD showError:result.message toView:strongSelf.view];
                 }

@@ -54,7 +54,6 @@
 		3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A34F79421B6631B007BC4D4 /* BTTGamesTryAlertView.xib */; };
 		3A34F79E21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34F79C21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m */; };
 		3A34F79F21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A34F79D21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib */; };
-		3A34F7A121B7B59B007BC4D4 /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A34F7A021B7B59B007BC4D4 /* app.zip */; };
 		3A37E0FA2164685600FB13A1 /* AppDelegate+Environment.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37E0F92164685600FB13A1 /* AppDelegate+Environment.m */; };
 		3A37E0FD2164691300FB13A1 /* AppDelegate+AD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37E0FC2164691300FB13A1 /* AppDelegate+AD.m */; };
 		3A37E1192164A20100FB13A1 /* BTTTabbarController+VoiceCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A37E1162164A20100FB13A1 /* BTTTabbarController+VoiceCall.m */; };
@@ -99,6 +98,7 @@
 		3A7A1A7121BF859000572B50 /* BTTRegisterSuccessChangePwdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6F21BF859000572B50 /* BTTRegisterSuccessChangePwdCell.m */; };
 		3A7A1A7221BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7A1A7021BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib */; };
 		3A7A1A7521C0A7D800572B50 /* BTTXimaLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A7421C0A7D800572B50 /* BTTXimaLogController.m */; };
+		3A7C0AFE21E5A27A002658CC /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0AFD21E5A27A002658CC /* app.zip */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -741,7 +741,6 @@
 		3A34F79B21B7A9DA007BC4D4 /* BTTHomePageFooterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTHomePageFooterCell.h; sourceTree = "<group>"; };
 		3A34F79C21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTHomePageFooterCell.m; sourceTree = "<group>"; };
 		3A34F79D21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTHomePageFooterCell.xib; sourceTree = "<group>"; };
-		3A34F7A021B7B59B007BC4D4 /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		3A37E0F82164685600FB13A1 /* AppDelegate+Environment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+Environment.h"; sourceTree = "<group>"; };
 		3A37E0F92164685600FB13A1 /* AppDelegate+Environment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+Environment.m"; sourceTree = "<group>"; };
 		3A37E0FB2164691300FB13A1 /* AppDelegate+AD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+AD.h"; sourceTree = "<group>"; };
@@ -815,6 +814,7 @@
 		3A7A1A7021BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTRegisterSuccessChangePwdCell.xib; sourceTree = "<group>"; };
 		3A7A1A7321C0A7D800572B50 /* BTTXimaLogController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTXimaLogController.h; sourceTree = "<group>"; };
 		3A7A1A7421C0A7D800572B50 /* BTTXimaLogController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTXimaLogController.m; sourceTree = "<group>"; };
+		3A7C0AFD21E5A27A002658CC /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -2128,8 +2128,8 @@
 			isa = PBXGroup;
 			children = (
 				3A8F5134215F74CF0069D1B3 /* Main.storyboard */,
+				3A7C0AFD21E5A27A002658CC /* app.zip */,
 				3A8F5137215F74D00069D1B3 /* Assets.xcassets */,
-				3A34F7A021B7B59B007BC4D4 /* app.zip */,
 				3AD4C9C221635AEC00FC0A63 /* app.json */,
 				3A8F5139215F74D00069D1B3 /* LaunchScreen.storyboard */,
 				3AD9CD472164B10000685B43 /* Info.plist */,
@@ -3881,7 +3881,6 @@
 				3AD9CF6E216F33F300685B43 /* BTTGameCollectionViewCell.xib in Resources */,
 				EAE89F06218C3ABD00C29393 /* receivedVoicePlaying2@2x.png in Resources */,
 				EAE89E88218C3ABD00C29393 /* cry.gif in Resources */,
-				3A34F7A121B7B59B007BC4D4 /* app.zip in Resources */,
 				EAE89EB9218C3ABD00C29393 /* LIVFileMessage_TypeZip@2x.png in Resources */,
 				EAE89F1E218C3ABD00C29393 /* LIVEvaluateCell.nib in Resources */,
 				EAE89F22218C3ABD00C29393 /* LIVLocationMessageContentView.nib in Resources */,
@@ -3950,6 +3949,7 @@
 				3AE0582521704DCB00C7E70D /* BTTHomePageAmountsCell.xib in Resources */,
 				EAE89EF0218C3ABD00C29393 /* LIVVoiceItem_highlight@2x.png in Resources */,
 				D5C5019921B67C0800C6DA02 /* CNPayDepositSuccessVC.xib in Resources */,
+				3A7C0AFE21E5A27A002658CC /* app.zip in Resources */,
 				3A7A1A7221BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib in Resources */,
 				D5DBEB1E21ABB774008AF629 /* CNPayCardStep1VC.xib in Resources */,
 				EA5F141B21A28515004305A7 /* DeviceModelsForIOS.plist in Resources */,
