@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"财务报表";
+    self.title = @"客户报表";
     [self setupCollectionView];
     [self setupElements];
 }

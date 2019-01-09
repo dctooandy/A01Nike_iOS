@@ -8,14 +8,19 @@
 
 #import "CNPayQRVC.h"
 #import "CNPayQRCell.h"
+#import "BTTBankUnionAppIconCell.h"
 
 #define kQRCellIndentifier   @"CNPayQRCell"
 
 @interface CNPayQRVC () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeight;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIView *appsView;
 
+@property (weak, nonatomic) IBOutlet UICollectionView *appCollectionView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *appsViewHeightConstants;
+@property (weak, nonatomic) IBOutlet UIView *noticesView;
 
 @property (weak, nonatomic) IBOutlet UIView *preSettingView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *preSettingViewHeight;
@@ -28,6 +33,8 @@
 @property (assign, nonatomic) BOOL setSelect;
 @property (assign, nonatomic) NSInteger currentSelectedIndex;
 @property (nonatomic) CGSize cellSize;
+@property (nonatomic, assign) CGSize appSize;
+@property (nonatomic, strong) NSArray *apps;
 @end
 
 @implementation CNPayQRVC
@@ -43,7 +50,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self setViewHeight:500 fullScreen:NO];
+    [self setViewHeight:800 fullScreen:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -59,6 +66,7 @@
 - (void)configCollectionView {
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 18, 15, 18);
     [self.collectionView registerNib:[UINib nibWithNibName:kQRCellIndentifier bundle:nil] forCellWithReuseIdentifier:kQRCellIndentifier];
+    [self.appCollectionView registerNib:[UINib nibWithNibName:@"BTTBankUnionAppIconCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBankUnionAppIconCell"];
     
     NSInteger count = self.payments.count;
     // 根据数组个数与屏幕宽度来调节高度
@@ -67,6 +75,17 @@
     CGFloat totalHeight = ((count - 1)/2 + 1) * (itemHeight + 15);
     self.collectionViewHeight.constant = totalHeight;
     self.cellSize = CGSizeMake(itemWidth, itemHeight + 10);
+    self.apps = @[@"ysfapp",@"mtapp",@"dzapp",@"wphapp",@"ttzgapp",@"mfbapp",@"wzfapp",@"jdapp"];
+    self.appCollectionView.delegate = self;
+    self.appCollectionView.dataSource = self;
+    CGFloat iconWidth = 60;
+    self.appSize = CGSizeMake(iconWidth, iconWidth);
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumInteritemSpacing = 0;
+    layout.minimumLineSpacing = 0;
+    layout.itemSize = self.appSize;
+    self.appCollectionView.collectionViewLayout = layout;
+    self.appsViewHeightConstants.constant = iconWidth * 2 + 36;
 }
 
 - (void)configPreSettingMessage {
@@ -82,6 +101,13 @@
 
 /// 刷新数据
 - (void)updateAllContentWithModel:(CNPaymentModel *)model {
+    if (model.paymentType == CNPaymentUnionQR) {
+        self.appsView.hidden = NO;
+        self.noticesView.hidden = NO;
+    } else {
+        self.appsView.hidden = YES;
+        self.noticesView.hidden = YES;
+    }
     self.amountTF.text = @"";
     // 金额提示语
     if (model.maxamount > model.minamount) {
@@ -101,21 +127,32 @@
 #pragma mark- UICollectionViewDelegate, UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.payments.count;
+    if (collectionView.tag == 11100) {
+        return 8;
+    } else {
+        return self.payments.count;
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (collectionView.tag == 11100) {
+        BTTBankUnionAppIconCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBankUnionAppIconCell" forIndexPath:indexPath];
+        cell.iconImageView.image = ImageNamed(self.apps[indexPath.row]);
+        return cell;
+    } else {
+        CNPayQRCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kQRCellIndentifier forIndexPath:indexPath];
+        
+        CNPaymentModel *payment = [self.payments objectAtIndex:indexPath.row];
+        cell.tuijianIcon.hidden = (payment.paymentType == CNPaymentUnionQR ? NO : YES);
+        cell.titleLb.text = payment.paymentTitle;
+        cell.channelIconIV.image = [UIImage imageNamed:payment.paymentLogo];
+        return cell;
+    }
     
-    CNPayQRCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kQRCellIndentifier forIndexPath:indexPath];
-    
-    CNPaymentModel *payment = [self.payments objectAtIndex:indexPath.row];
-    cell.titleLb.text = payment.paymentTitle;
-    cell.channelIconIV.image = [UIImage imageNamed:payment.paymentLogo];
-    return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    if (indexPath.row == _currentSelectedIndex) {
+    if (indexPath.row == _currentSelectedIndex || collectionView.tag == 11100) {
         return;
     }
     [self.view endEditing:YES];
@@ -129,7 +166,12 @@
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return self.cellSize;
+    if (collectionView.tag == 11100) {
+        return self.appSize;
+    } else {
+        return self.cellSize;
+    }
+    
 }
 
 - (IBAction)selectAmountList:(id)sender {

@@ -99,6 +99,8 @@
 		3A7A1A7221BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7A1A7021BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib */; };
 		3A7A1A7521C0A7D800572B50 /* BTTXimaLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A7421C0A7D800572B50 /* BTTXimaLogController.m */; };
 		3A7C0AFE21E5A27A002658CC /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0AFD21E5A27A002658CC /* app.zip */; };
+		3A7C0B0221E5CC43002658CC /* BTTBankUnionAppIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B0021E5CC43002658CC /* BTTBankUnionAppIconCell.m */; };
+		3A7C0B0321E5CC43002658CC /* BTTBankUnionAppIconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0B0121E5CC43002658CC /* BTTBankUnionAppIconCell.xib */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -815,6 +817,9 @@
 		3A7A1A7321C0A7D800572B50 /* BTTXimaLogController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTXimaLogController.h; sourceTree = "<group>"; };
 		3A7A1A7421C0A7D800572B50 /* BTTXimaLogController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTXimaLogController.m; sourceTree = "<group>"; };
 		3A7C0AFD21E5A27A002658CC /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
+		3A7C0AFF21E5CC43002658CC /* BTTBankUnionAppIconCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBankUnionAppIconCell.h; sourceTree = "<group>"; };
+		3A7C0B0021E5CC43002658CC /* BTTBankUnionAppIconCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBankUnionAppIconCell.m; sourceTree = "<group>"; };
+		3A7C0B0121E5CC43002658CC /* BTTBankUnionAppIconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTBankUnionAppIconCell.xib; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -3359,6 +3364,9 @@
 				D599252221AFCFDA001E885A /* CNPayBankView.h */,
 				D599252321AFCFDA001E885A /* CNPayBankView.m */,
 				D599252521AFCFEE001E885A /* CNPayBankView.xib */,
+				3A7C0AFF21E5CC43002658CC /* BTTBankUnionAppIconCell.h */,
+				3A7C0B0021E5CC43002658CC /* BTTBankUnionAppIconCell.m */,
+				3A7C0B0121E5CC43002658CC /* BTTBankUnionAppIconCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3977,6 +3985,7 @@
 				EAE89EEA218C3ABD00C29393 /* LIVVideoMessage_PlayButtonIcon@2x.png in Resources */,
 				EAE89EA4218C3ABD00C29393 /* liv_satisfactionr_circular_selected_un@3x.png in Resources */,
 				3AD4C9C321635AEC00FC0A63 /* app.json in Resources */,
+				3A7C0B0321E5CC43002658CC /* BTTBankUnionAppIconCell.xib in Resources */,
 				EAE89E8A218C3ABD00C29393 /* daxiao.gif in Resources */,
 				EAE89E8F218C3ABD00C29393 /* inebriation.gif in Resources */,
 				EAE89EFC218C3ABD00C29393 /* photo_def_previewVc@2x.png in Resources */,
@@ -4366,6 +4375,7 @@
 				3A11AE072181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.m in Sources */,
 				3AD9CF84216F482B00685B43 /* BTTHomePageDiscountHeaderCell.m in Sources */,
 				3AE1EABE217DB7040073A32D /* BTTPersonalInfoController.m in Sources */,
+				3A7C0B0221E5CC43002658CC /* BTTBankUnionAppIconCell.m in Sources */,
 				3AB0684C21A3EA8500072FB7 /* BTTGamesHallModel.m in Sources */,
 				3AC3FFA4219ABEBF008AECCB /* BTTUnlockPopView.m in Sources */,
 				3AB0683821A3959100072FB7 /* BTTUnBindingMobileNoticeController.m in Sources */,
