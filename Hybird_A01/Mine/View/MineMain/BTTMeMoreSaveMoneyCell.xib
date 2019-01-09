@@ -13,14 +13,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTMeMoreSaveMoneyCell">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="WyM-C1-Lxa">
-                        <rect key="frame" x="15" y="0.0" width="345" height="142"/>
+                        <rect key="frame" x="15" y="0.0" width="345" height="149"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7ve-rC-tR7">
                             <size key="itemSize" width="50" height="50"/>
@@ -29,19 +29,40 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                     </collectionView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="q6R-K8-1eo">
+                        <rect key="frame" x="344" y="159" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="6wv-0U-fC8"/>
+                            <constraint firstAttribute="width" constant="16" id="rvw-Xf-BUL"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="向左滑动更多" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FHh-5l-QFw">
+                        <rect key="frame" x="260" y="159" width="80" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="WyM-C1-Lxa" secondAttribute="bottom" constant="8" id="Cwv-uP-MGK"/>
+                <constraint firstAttribute="trailing" secondItem="q6R-K8-1eo" secondAttribute="trailing" constant="15" id="0ZQ-Mn-YzU"/>
+                <constraint firstAttribute="bottom" secondItem="q6R-K8-1eo" secondAttribute="bottom" constant="15" id="Cr4-lg-Gam"/>
+                <constraint firstItem="q6R-K8-1eo" firstAttribute="leading" secondItem="FHh-5l-QFw" secondAttribute="trailing" constant="4" id="DBN-bM-1Bf"/>
                 <constraint firstItem="WyM-C1-Lxa" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="Npv-tn-pJf"/>
                 <constraint firstAttribute="trailing" secondItem="WyM-C1-Lxa" secondAttribute="trailing" constant="15" id="njV-n1-kJb"/>
                 <constraint firstItem="WyM-C1-Lxa" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="onu-ST-4XZ"/>
+                <constraint firstItem="FHh-5l-QFw" firstAttribute="centerY" secondItem="q6R-K8-1eo" secondAttribute="centerY" id="riM-pn-cJd"/>
+                <constraint firstItem="FHh-5l-QFw" firstAttribute="top" secondItem="WyM-C1-Lxa" secondAttribute="bottom" constant="10" id="zSL-Kl-J2d"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="375" height="192"/>
             <connections>
                 <outlet property="collectionView" destination="WyM-C1-Lxa" id="OUz-tX-8uL"/>
             </connections>
-            <point key="canvasLocation" x="-194" y="148"/>
+            <point key="canvasLocation" x="-194.40000000000001" y="166.41679160419793"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="me_arrow" width="16" height="16"/>
+    </resources>
 </document>

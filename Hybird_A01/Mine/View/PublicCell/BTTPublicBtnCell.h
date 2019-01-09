@@ -13,7 +13,9 @@ typedef enum {
     BTTPublicBtnTypeNext,     ///< 下一步
     BTTPublicBtnTypeDone,     ///< 完成
     BTTPublicBtnTypeSave,      ///< 保存
-    BTTPublicBtnTypeConfirmSave  ///< 确认修改
+    BTTPublicBtnTypeConfirmSave,  ///< 确认修改
+    BTTPublicBtnTypeModify,    ///< 修改
+    BTTPublicBtnTypeEnterGame  ///< 进入游戏大厅
 }BTTPublicBtnType;
 
 NS_ASSUME_NONNULL_BEGIN

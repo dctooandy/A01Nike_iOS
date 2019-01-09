@@ -12,42 +12,42 @@
 /// 支付渠道
 typedef NS_ENUM(NSUInteger, CNPayChannel) {
     /// 在线支付
-//    CNPayChannelOnline,
+    CNPayChannelOnline,
     /// 点卡
     CNPayChannelCard,
     /// 手工存款
-//    CNPayChannelDeposit,
+    CNPayChannelDeposit,
     /// 比特币支付
     CNPayChannelBTC,
     /// 微信条码
-//    CNPayChannelWechatBarCode,
+    CNPayChannelWechatBarCode,
     /// 钻石币支付
     CNPayChannelCoin,
     
     /// app
-//    CNPayChannelWechatApp,
-//    CNPayChannelAliApp,
-//    CNPayChannelQQApp,
-//    CNPayChannelUnionApp,
-//    CNPayChannelJDApp,
+    CNPayChannelWechatApp,
+    CNPayChannelAliApp,
+    CNPayChannelQQApp,
+    CNPayChannelUnionApp,
+    CNPayChannelJDApp,
     
     /// 扫码
-//    CNPayChannelQR,
-//    CNPayChannelWechatQR,
-//    CNPayChannelAliQR,
-//    CNPayChannelQQQR,
-//    CNPayChannelUnionQR,
-//    CNPayChannelJDQR,
+    CNPayChannelQR,
+    CNPayChannelWechatQR,
+    CNPayChannelAliQR,
+    CNPayChannelQQQR,
+    CNPayChannelUnionQR,
+    CNPayChannelJDQR,
     
     /// BQ存款
-//    CNPayChannelBQFast,
-//    CNPayChannelBQWechat,
-//    CNPayChannelBQAli,
-    CNPayChannelAli, ///< 支付宝
-    CNPayChannelWechat, ///< 微信
-    CNPayChannelBankCard, ///< 银行卡
-    CNPayChannelQQ,     ///< QQ
-    CNPayChannelJD      ///< 京东
+    CNPayChannelBQFast,
+    CNPayChannelBQWechat,
+    CNPayChannelBQAli,
+//    CNPayChannelAli, ///< 支付宝
+//    CNPayChannelWechat, ///< 微信
+//    CNPayChannelBankCard, ///< 银行卡
+//    CNPayChannelQQ,     ///< QQ
+//    CNPayChannelJD      ///< 京东
     
 };
 

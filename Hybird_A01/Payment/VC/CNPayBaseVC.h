@@ -19,9 +19,10 @@
 
 #import "AMSegmentViewController.h"
 #import "CNPayConstant.h"
+#import "BTTBaseViewController.h"
 
 
-@interface CNPayBaseVC : UIViewController
+@interface CNPayBaseVC : BTTBaseViewController
 // 内部切换数据
 @property (nonatomic, copy) NSArray<CNPaymentModel *> *payments;
 

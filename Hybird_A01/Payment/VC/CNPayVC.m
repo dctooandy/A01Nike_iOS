@@ -49,6 +49,7 @@
 
 @implementation CNPayVC
 
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -63,6 +64,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = kBlackBackgroundColor;
     self.payScrollView.backgroundColor = kBlackBackgroundColor;
     self.contentWidth.constant = [UIScreen mainScreen].bounds.size.width;
     [self.payCollectionView registerNib:[UINib nibWithNibName:kChannelCellIndentifier bundle:nil] forCellWithReuseIdentifier:kChannelCellIndentifier];
@@ -79,7 +81,6 @@
     _payChannelVC.segmentVC.items = notifi.object;
     _segmentVC.items = notifi.object;
     [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

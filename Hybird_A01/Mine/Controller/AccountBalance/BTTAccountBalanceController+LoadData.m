@@ -92,6 +92,7 @@
                         model.isLoading = YES;
                         [self.games addObject:model];
                     }
+                    self.isLoadingData = YES;
                 }
             }
         }

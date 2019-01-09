@@ -93,12 +93,12 @@
     [self customTabbar];
 }
 
-
 //登录状态失效
 - (void)userTokenExpired
 {
     //清空用户信息
     [IVNetwork cleanUserInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
     [MBProgressHUD showError:@"登录超时，请重新登录" toView:nil];
 }
 - (void)registerNotification {

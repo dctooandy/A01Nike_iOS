@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *hallAmount;
 
+@property (nonatomic, assign) BOOL isLoadingData;
+
 @end
 
 NS_ASSUME_NONNULL_END

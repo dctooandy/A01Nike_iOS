@@ -150,8 +150,7 @@
             CNPaymentModel *scan4 = payments[CNPaymentQQApp];
             CNPaymentModel *scan6 = payments[CNPaymentQQQR];
             BOOL isQQ = NO;
-            if ((scan3.isAvailable ||
-                scan4.isAvailable ||
+            if ((scan4.isAvailable ||
                 scan6.isAvailable ) && !isQQ) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
                 mainModel.name = @"QQ";

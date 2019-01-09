@@ -206,6 +206,10 @@
 		3AAFF88B21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFF88921D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.m */; };
 		3AAFF88C21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AAFF88A21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.xib */; };
 		3AAFF8B421D60A3000F875B1 /* BTTStepTwoContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFF8B321D60A3000F875B1 /* BTTStepTwoContainerController.m */; };
+		3AAFF8B821DDF8D300F875B1 /* BTTSaveMoneyModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFF8B721DDF8D300F875B1 /* BTTSaveMoneyModifyViewController.m */; };
+		3AAFF8BB21DE03ED00F875B1 /* BTTSaveMoneySuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFF8BA21DE03ED00F875B1 /* BTTSaveMoneySuccessController.m */; };
+		3AAFF8C021DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAFF8BE21DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.m */; };
+		3AAFF8C121DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AAFF8BF21DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.xib */; };
 		3AB0681E21A25E7B00072FB7 /* BTTChangeMobileSuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0681D21A25E7B00072FB7 /* BTTChangeMobileSuccessController.m */; };
 		3AB0682321A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0682121A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.m */; };
 		3AB0682421A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AB0682221A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.xib */; };
@@ -1013,6 +1017,13 @@
 		3AAFF88A21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTMeMoreSaveMoneyHeaderCell.xib; sourceTree = "<group>"; };
 		3AAFF8B221D60A3000F875B1 /* BTTStepTwoContainerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTStepTwoContainerController.h; sourceTree = "<group>"; };
 		3AAFF8B321D60A3000F875B1 /* BTTStepTwoContainerController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTStepTwoContainerController.m; sourceTree = "<group>"; };
+		3AAFF8B621DDF8D300F875B1 /* BTTSaveMoneyModifyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneyModifyViewController.h; sourceTree = "<group>"; };
+		3AAFF8B721DDF8D300F875B1 /* BTTSaveMoneyModifyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneyModifyViewController.m; sourceTree = "<group>"; };
+		3AAFF8B921DE03ED00F875B1 /* BTTSaveMoneySuccessController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneySuccessController.h; sourceTree = "<group>"; };
+		3AAFF8BA21DE03ED00F875B1 /* BTTSaveMoneySuccessController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneySuccessController.m; sourceTree = "<group>"; };
+		3AAFF8BD21DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneySuccessHeaderCell.h; sourceTree = "<group>"; };
+		3AAFF8BE21DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneySuccessHeaderCell.m; sourceTree = "<group>"; };
+		3AAFF8BF21DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTSaveMoneySuccessHeaderCell.xib; sourceTree = "<group>"; };
 		3AB0681C21A25E7B00072FB7 /* BTTChangeMobileSuccessController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTChangeMobileSuccessController.h; sourceTree = "<group>"; };
 		3AB0681D21A25E7B00072FB7 /* BTTChangeMobileSuccessController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTChangeMobileSuccessController.m; sourceTree = "<group>"; };
 		3AB0682021A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTChangeMobileSuccessOneCell.h; sourceTree = "<group>"; };
@@ -1984,6 +1995,7 @@
 				3ADD23842178184A00FA959A /* BTTMineViewController+LoadData.m */,
 				3ADD238E217836B200FA959A /* BTTMineViewController+Nav.h */,
 				3ADD238D217836B200FA959A /* BTTMineViewController+Nav.m */,
+				3AAFF8B521DDF88300F875B1 /* SaveMoneySearch */,
 				3A11AE5A2186B69800B1AFF4 /* Xima */,
 				3A11AE4821869B0500B1AFF4 /* Settings */,
 				3A11AE29218430FD00B1AFF4 /* Sheets */,
@@ -2509,6 +2521,27 @@
 			path = LoginOrRegister;
 			sourceTree = "<group>";
 		};
+		3AAFF8B521DDF88300F875B1 /* SaveMoneySearch */ = {
+			isa = PBXGroup;
+			children = (
+				3AAFF8B621DDF8D300F875B1 /* BTTSaveMoneyModifyViewController.h */,
+				3AAFF8B721DDF8D300F875B1 /* BTTSaveMoneyModifyViewController.m */,
+				3AAFF8B921DE03ED00F875B1 /* BTTSaveMoneySuccessController.h */,
+				3AAFF8BA21DE03ED00F875B1 /* BTTSaveMoneySuccessController.m */,
+			);
+			path = SaveMoneySearch;
+			sourceTree = "<group>";
+		};
+		3AAFF8BC21DE044A00F875B1 /* SaveMoneySearch */ = {
+			isa = PBXGroup;
+			children = (
+				3AAFF8BD21DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.h */,
+				3AAFF8BE21DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.m */,
+				3AAFF8BF21DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.xib */,
+			);
+			path = SaveMoneySearch;
+			sourceTree = "<group>";
+		};
 		3AB0681B21A25DED00072FB7 /* ChangeMobileSuccess */ = {
 			isa = PBXGroup;
 			children = (
@@ -2825,6 +2858,7 @@
 		3ADD2363217722CB00FA959A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3AAFF8BC21DE044A00F875B1 /* SaveMoneySearch */,
 				3AB0686521A4F26100072FB7 /* PublicCell */,
 				3A11AE5E2186CD6600B1AFF4 /* Xima */,
 				3A11AE542186A6EB00B1AFF4 /* Settings */,
@@ -4001,6 +4035,7 @@
 				3A8F5136215F74CF0069D1B3 /* Main.storyboard in Resources */,
 				EAE89F0C218C3ABD00C29393 /* sentVoicePlaying2@2x.png in Resources */,
 				EAE89EAB218C3ABD00C29393 /* LIVEmotionItem@2x.png in Resources */,
+				3AAFF8C121DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.xib in Resources */,
 				3AB0682A21A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.xib in Resources */,
 				EAE89F05218C3ABD00C29393 /* receivedVoicePlaying1@3x.png in Resources */,
 				EAE89F03218C3ABD00C29393 /* preview_original_def@2x.png in Resources */,
@@ -4250,6 +4285,7 @@
 				3A11ADDE21818A1A00B1AFF4 /* BTTAddBTCController.m in Sources */,
 				3AD9CD552165B2C900685B43 /* BTTPopoverViewCell.m in Sources */,
 				3A11AE672186D94B00B1AFF4 /* BTTThisWeekCell.m in Sources */,
+				3AAFF8B821DDF8D300F875B1 /* BTTSaveMoneyModifyViewController.m in Sources */,
 				3A92942C219D199800764E7E /* BTTForgetPasswordController.m in Sources */,
 				3AE1EB052180457A0073A32D /* BTTCardModifyVerifyController.m in Sources */,
 				3A11AE272184025900B1AFF4 /* BTTPasswordCell.m in Sources */,
@@ -4361,6 +4397,7 @@
 				3A11ADDA218187B600B1AFF4 /* MBProgressHUD+Add.m in Sources */,
 				D5DBEB3321ABB774008AF629 /* CNCompleteInfoView.m in Sources */,
 				3A9E4C6B21A2530000E7D8C0 /* BTTModifyEmailController.m in Sources */,
+				3AAFF8BB21DE03ED00F875B1 /* BTTSaveMoneySuccessController.m in Sources */,
 				3AB0681E21A25E7B00072FB7 /* BTTChangeMobileSuccessController.m in Sources */,
 				3ADD23F02179B97A00FA959A /* SDCollectionViewCell.m in Sources */,
 				3AC3FFA1219AB8CC008AECCB /* BTTAnimationPopView.m in Sources */,
@@ -4409,6 +4446,7 @@
 				3AB0683421A2E34C00072FB7 /* BTTAccountBalanceController+LoadData.m in Sources */,
 				3A11AE5D2186B71600B1AFF4 /* BTTXimaController.m in Sources */,
 				D5DBEB3621ABB774008AF629 /* CNPayTipView.m in Sources */,
+				3AAFF8C021DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.m in Sources */,
 				3AD9CD5B21661BE800685B43 /* BTTRedDotManager.m in Sources */,
 				3A11AE072181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.m in Sources */,
 				3AD9CF84216F482B00685B43 /* BTTHomePageDiscountHeaderCell.m in Sources */,

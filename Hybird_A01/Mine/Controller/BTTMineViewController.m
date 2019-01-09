@@ -47,6 +47,8 @@
 #import "BTTMeMoreSaveMoneyHeaderCell.h"
 #import "BTTMeBigSaveMoneyCell.h"
 #import "BTTMeMoreSaveMoneyCell.h"
+#import "BTTSaveMoneyModifyViewController.h"
+#import "BTTSaveMoneySuccessController.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -319,9 +321,12 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     NSLog(@"%@",@(indexPath.row));
     if (![IVNetwork userInfo]) {
-        [MBProgressHUD showError:@"请先登录" toView:nil];
-        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+//        [MBProgressHUD showError:@"请先登录" toView:nil];
+//        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+//        BTTSaveMoneyModifyViewController *vc = [BTTSaveMoneyModifyViewController new];
+        BTTSaveMoneySuccessController *vc = [BTTSaveMoneySuccessController new];
         [self.navigationController pushViewController:vc animated:YES];
+        
         return;
     }
     if (indexPath.row == 2) {
@@ -504,11 +509,11 @@
         } else if (i >= 3 + self.personalInfos.count && i <= 3 + self.personalInfos.count + self.saveMoneyCount - 1) {
             if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
                 if (i == 3 + self.personalInfos.count) {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 120)]];
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 160)]];
                 } else if (i == 4 + self.personalInfos.count) {
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
                 } else {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 110)]];
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 150)]];
                 }
             } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 110)]];

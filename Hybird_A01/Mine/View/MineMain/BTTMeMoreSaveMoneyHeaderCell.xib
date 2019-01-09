@@ -25,10 +25,18 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="向左滑动更多" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6M-PY-la9">
+                        <rect key="frame" x="263" y="17" width="80" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="A6M-PY-la9" secondAttribute="trailing" constant="32" id="Cjm-oh-r4C"/>
                 <constraint firstItem="tUx-hH-79D" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="cP8-W3-V70"/>
+                <constraint firstItem="A6M-PY-la9" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="g55-qo-9q4"/>
                 <constraint firstItem="tUx-hH-79D" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="qJV-0H-wxE"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>

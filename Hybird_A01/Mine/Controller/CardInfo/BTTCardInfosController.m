@@ -86,6 +86,9 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (!indexPath) {
+        return;
+    }
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     weakSelf(weakSelf)
     if (indexPath.row == self.bankList.count) {

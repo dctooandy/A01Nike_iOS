@@ -55,6 +55,8 @@
 
 @property (nonatomic, strong) CNPayBankCardModel *chooseBank;
 
+@property (nonatomic, strong) AMSegmentViewController *segmentVC;
+
 @end
 
 @implementation CNPayQRVC
@@ -286,7 +288,9 @@
         self.writeModel.amount = self.amountTF.text;
         self.writeModel.chooseBank = self.chooseBank;
         self.writeModel.BQType = [self getBQType];
+        weakSelf(weakSelf);
         [CNPayRequestManager paymentSubmitBill:self.writeModel completeHandler:^(IVRequestResultModel *result, id response) {
+            strongSelf(strongSelf);
             sender.selected = NO;
             if (result.status) {
                 CNPayBankCardModel *model = [[CNPayBankCardModel alloc] initWithDictionary:result.data error:nil];
@@ -298,9 +302,9 @@
                 BTTStepTwoContainerController *containerVC = [[BTTStepTwoContainerController alloc] initWithPaymentType:self.paymentModel.paymentType];
                 containerVC.payments = self.payments;
                 containerVC.writeModel = self.writeModel;
-                AMSegmentViewController *segmentVC = [[AMSegmentViewController alloc] initWithViewController:containerVC];
-                [self addChildViewController:segmentVC];
-                [self.view addSubview:segmentVC.view];
+                weakSelf.segmentVC = [[AMSegmentViewController alloc] initWithViewController:containerVC];
+                [self addChildViewController:weakSelf.segmentVC];
+                [self.view addSubview:weakSelf.segmentVC.view];
                 
             } else {
                 [self showError:result.message];
