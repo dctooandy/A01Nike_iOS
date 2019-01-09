@@ -329,6 +329,17 @@
         
         return;
     }
+    NSInteger total = 0;
+    if ([IVNetwork userInfo]) {
+        total = self.personalInfos.count + 7 + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count + self.mainDataThree.count;
+        
+    } else {
+        total = self.personalInfos.count + 6 + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count;
+    }
+    if (indexPath.row >= total ) {
+        [self loadPaymentData];
+        return;
+    }
     if (indexPath.row == 2) {
         UIViewController *vc = nil;
         if ([IVNetwork userInfo].isPhoneBinded) {

@@ -26,6 +26,7 @@
     [super viewDidLoad];
     self.isLoadingData = NO;
     self.title = @"账户余额";
+    self.isLoadingData = NO;
     self.amount = @"-";
     self.localAmount = @"加载中";
     self.hallAmount = @"加载中";
