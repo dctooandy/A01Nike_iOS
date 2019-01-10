@@ -95,6 +95,7 @@
                 }
             }
         }
+        self.isLoadingData = YES;
         [self setupElements];
         dispatch_group_leave(group);
         if (result.message.length) {
@@ -105,7 +106,7 @@
 
 - (void)loadTransferAllMoneyToLocal:(UIButton *)button {
     [IVNetwork sendRequestWithSubURL:BTTTransferAllMoneyToLocal paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        if (result.code_http == 200) {
+        if (result.code_http == 200 && result.status) {
             self.amount = @"-";
             self.localAmount = @"-";
             self.hallAmount = @"-";
