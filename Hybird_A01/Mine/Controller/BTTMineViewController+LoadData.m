@@ -92,6 +92,11 @@
                 model.paymentType = i;
                 [payments addObject:model];
             }
+            if (!payments.count) {
+                self.paymentDatas = [NSMutableArray array];
+                [self setupElements];
+                return;
+            }
             CNPaymentModel *BQFast = payments[CNPaymentBQFast];
             if (BQFast.isAvailable) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
