@@ -50,8 +50,8 @@
     if (self.normalDataSoure.count) {
         [self.normalDataSoure removeAllObjects];
     }
-    NSArray *icons = @[@"me_alipay",@"me_wechat",@"me_netbank",@"me_hand",@"me_jd",@"me_btc",@"me_bibao",@"me_pointCard"];
-    NSArray *names = @[@"支付宝",@"微信",@"银行卡",@"QQ",@"京东",@"比特币",@"钻石币",@"点卡支付"];
+    NSArray *icons = @[@"me_netbank",@"me_wechat",@"me_alipay",@"me_hand",@"me_online",@"me_scan",@"me_quick",@"me_alipay",@"me_pointCard",@"me_btc",@"me_jd",@"me_tiaoma",@"me_bibao"];
+    NSArray *names = @[@"迅捷网银",@"微信秒存",@"支付宝秒存",@"手工存款",@"在线支付",@"扫码支付",@"银行快捷支付",@"支付宝WAP",@"点卡支付",@"比特币支付",@"京东WAP支付",@"微信条码",@"钻石币支付"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
@@ -104,80 +104,135 @@
             }
             
             
-            CNPaymentModel *aliFast = payments[CNPaymentBQAli];
-            CNPaymentModel *scan3 = payments[CNPaymentAliQR];
-            CNPaymentModel *alipay = payments[CNPaymentAliApp];
-            BOOL isAli = NO;
-            if ((aliFast.isAvailable || scan3.isAvailable || alipay.isAvailable) && !isAli) {
+            CNPaymentModel *scan5 = payments[CNPaymentUnionQR];
+            if (scan5.isAvailable) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"支付宝";
-                mainModel.iconName = @"me_alipay";
-                mainModel.paymentType = CNPayChannelAli;
+                mainModel.name = @"银联扫码";
+                mainModel.iconName = @"me_netbank";
+                mainModel.paymentType = CNPayChannelQR;
                 [self.bigDataSoure addObject:mainModel];
-                isAli = YES;
             }
             
-            CNPaymentModel *WXFast = payments[CNPaymentBQWechat];
-            CNPaymentModel *scan1 = payments[CNPaymentWechatQR];
-            CNPaymentModel *scan2 = payments[CNPaymentWechatApp];
-             CNPaymentModel *tiaoma = payments[CNPaymentWechatBarCode];
-            BOOL isWX = NO;
-            if ((WXFast.isAvailable || scan1.isAvailable || scan2.isAvailable || tiaoma.isAvailable) && !isWX) {
+            CNPaymentModel *scan7 = payments[CNPaymentJDQR];
+            if (scan7.isAvailable) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"微信";
-                mainModel.iconName = @"me_wechat";
-                mainModel.paymentType = CNPayChannelWechat;
+                mainModel.name = @"京东扫码";
+                mainModel.iconName = @"me_jd";
+                mainModel.paymentType = CNPayChannelQR;
                 [self.bigDataSoure addObject:mainModel];
-                isWX = YES;
+            }
+            
+            CNPaymentModel *alipay = payments[CNPaymentAliApp];
+            if (alipay.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"支付宝wap";
+                mainModel.iconName = @"me_alipay";
+                mainModel.paymentType = CNPayChannelAliApp;
+                [self.bigDataSoure addObject:mainModel];
             }
             
             CNPaymentModel *BQFast = payments[CNPaymentBQFast];
-            CNPaymentModel *hand = payments[CNPaymentDeposit];
-            CNPaymentModel *online = payments[CNPaymentOnline];
-            CNPaymentModel *scan5 = payments[CNPaymentUnionQR];
-            CNPaymentModel *quick = payments[CNPaymentUnionApp];
-            BOOL isBank = NO;
-            if ((BQFast.isAvailable || hand.isAvailable || online.isAvailable || scan5.isAvailable || quick.isAvailable) && !isBank) {
+            if (BQFast.isAvailable) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"银行卡";
+                mainModel.name = @"迅捷网银";
                 mainModel.iconName = @"me_netbank";
-                mainModel.paymentType = CNPayChannelBankCard;
+                mainModel.paymentType = CNPayChannelBQFast;
                 [self.normalDataSoure addObject:mainModel];
-                isBank = YES;
             }
             
+            CNPaymentModel *WXFast = payments[CNPaymentBQWechat];
+            if (WXFast.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"微信秒存";
+                mainModel.iconName = @"me_wechat";
+                mainModel.paymentType = CNPayChannelBQWechat;
+                [self.normalDataSoure addObject:mainModel];
+            }
             
-            CNPaymentModel *scan4 = payments[CNPaymentQQApp];
+            CNPaymentModel *aliFast = payments[CNPaymentBQAli];
+            if (aliFast.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"支付宝秒存";
+                mainModel.iconName = @"me_alipay";
+                mainModel.paymentType = CNPayChannelBQAli;
+                [self.normalDataSoure addObject:mainModel];
+            }
+            
+            CNPaymentModel *online = payments[CNPaymentOnline];
+            if (online.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"在线支付";
+                mainModel.iconName = @"pay_onlineHL";
+                mainModel.paymentType = CNPayChannelOnline;
+                [self.normalDataSoure addObject:mainModel];
+            }
+            
+            CNPaymentModel *aliQR = payments[CNPaymentAliQR];
+            if (aliQR.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"支付宝扫码";
+                mainModel.iconName = @"me_alipay";
+                mainModel.paymentType = CNPayChannelAliQR;
+                [self.normalDataSoure addObject:mainModel];
+            }
+            
+            CNPaymentModel *scan1 = payments[CNPaymentWechatQR];
+            if (scan1.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"微信扫码";
+                mainModel.iconName = @"me_wechat";
+                mainModel.paymentType = CNPayChannelWechatQR;
+                [self.normalDataSoure addObject:mainModel];
+            }
+            
             CNPaymentModel *scan6 = payments[CNPaymentQQQR];
-            BOOL isQQ = NO;
-            if ((scan4.isAvailable ||
-                scan6.isAvailable ) && !isQQ) {
+            if (scan6.isAvailable) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"QQ";
-                mainModel.iconName = @"me_scan";
-                mainModel.paymentType = CNPayChannelQQ;
+                mainModel.name = @"QQ扫码";
+                mainModel.iconName = @"me_wechat";
+                mainModel.paymentType = CNPayChannelQQQR;
                 [self.normalDataSoure addObject:mainModel];
-                isQQ = YES;
             }
             
-            CNPaymentModel *jd = payments[CNPaymentJDApp];
-            CNPaymentModel *scan7 = payments[CNPaymentJDQR];
-            BOOL isJD = NO;
-            if ((jd.isAvailable || scan7.isAvailable) && !isJD) {
+            CNPaymentModel *hand = payments[CNPaymentDeposit];
+            if (hand.isAvailable) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"京东";
-                mainModel.iconName = @"me_jd";
-                mainModel.paymentType = CNPayChannelJD;
+                mainModel.name = @"人工存款";
+                mainModel.iconName = @"pay_depositHL";
+                mainModel.paymentType = CNPayChannelDeposit;
                 [self.normalDataSoure addObject:mainModel];
-                isJD = YES;
             }
             
-            CNPaymentModel *btc = payments[CNPaymentBTC];
-            if (btc.isAvailable) {
+            
+            CNPaymentModel *scan2 = payments[CNPaymentWechatApp];
+            CNPaymentModel *scan4 = payments[CNPaymentQQApp];
+            CNPaymentModel *jdApp = payments[CNPaymentJDApp];
+            
+            BOOL isApp = NO;
+            if ((scan2.isAvailable || scan4.isAvailable || jdApp.isAvailable) && !isApp) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"比特币";
-                mainModel.iconName = @"me_btc";
-                mainModel.paymentType = CNPayChannelBTC;
+                mainModel.name = @"微信/QQ/京东WAP";
+                mainModel.iconName = @"pay_depositHL";
+                mainModel.paymentType = CNPayChannelWechatQQJDAPP;
+                [self.normalDataSoure addObject:mainModel];
+                isApp = YES;
+            }
+            
+            CNPaymentModel *unionApp = payments[CNPaymentUnionApp];
+            if (unionApp.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"银行快捷网银";
+                mainModel.iconName = @"pay_depositHL";
+                mainModel.paymentType = CNPayChannelWechatQQJDAPP;
+                [self.normalDataSoure addObject:mainModel];
+            }
+            
+            CNPaymentModel *pointCard = payments[CNPaymentCard];
+            if (pointCard.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"点卡";
+                mainModel.iconName = @"me_pointCard";
+                mainModel.paymentType = CNPayChannelCard;
                 [self.normalDataSoure addObject:mainModel];
             }
             
@@ -189,13 +244,25 @@
                 mainModel.paymentType = CNPayChannelCoin;
                 [self.normalDataSoure addObject:mainModel];
             }
-
-            CNPaymentModel *pointCard = payments[CNPaymentCard];
-            if (pointCard.isAvailable) {
+            
+            CNPaymentModel *btc = payments[CNPaymentBTC];
+            if (btc.isAvailable) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"点卡";
-                mainModel.iconName = @"me_pointCard";
-                mainModel.paymentType = CNPayChannelCard;
+                mainModel.name = @"比特币";
+                mainModel.iconName = @"me_btc";
+                mainModel.paymentType = CNPayChannelBTC;
+                [self.normalDataSoure addObject:mainModel];
+            }
+            
+            
+            
+             CNPaymentModel *tiaoma = payments[CNPaymentWechatBarCode];
+
+            if (tiaoma.isAvailable) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"微信条码支付";
+                mainModel.iconName = @"me_scan";
+                mainModel.paymentType = CNPayChannelWechatBarCode;
                 [self.normalDataSoure addObject:mainModel];
             }
             
@@ -254,7 +321,7 @@
     if (self.mainDataTwo.count) {
         [self.mainDataTwo removeAllObjects];
     }
-    NSArray *names = @[@"财务报表",@"账号安全",@"设置",@"站内信",@"版本更新",@"网络检测"];
+    NSArray *names = @[@"客户报表",@"账号安全",@"设置",@"站内信",@"版本更新",@"网络检测"];
     NSArray *icons = @[@"me_sheet",@"me_amountsafe",@"me_setting",@"me_message",@"me_version",@"me_speed"];
     
     for (NSString *name in names) {

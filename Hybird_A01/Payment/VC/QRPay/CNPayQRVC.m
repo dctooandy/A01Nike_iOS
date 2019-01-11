@@ -8,20 +8,19 @@
 
 #import "CNPayQRVC.h"
 #import "CNPayQRCell.h"
-#import "CNPayOnePixView.h"
-#import "CNPayNormalTF.h"
-#import "CNPayContainerVC.h"
-#import "CNPayDepositStep2VC.h"
-#import "CNPayDepositStep3VC.h"
-#import "CNPayBQStep2VC.h"
-#import "CNPayQRStep2VC.h"
-#import "BTTStepTwoContainerController.h"
+#import "BTTBankUnionAppIconCell.h"
 
 #define kQRCellIndentifier   @"CNPayQRCell"
 
 @interface CNPayQRVC () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeight;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UIView *appsView;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *appCollectionView;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *appsViewHeightConstants;
+@property (weak, nonatomic) IBOutlet UIView *noticesView;
 
 @property (weak, nonatomic) IBOutlet UIView *preSettingView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *preSettingViewHeight;
@@ -34,29 +33,8 @@
 @property (assign, nonatomic) BOOL setSelect;
 @property (assign, nonatomic) NSInteger currentSelectedIndex;
 @property (nonatomic) CGSize cellSize;
-
-@property (weak, nonatomic) IBOutlet UIView *nameView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameViewHeight;
-
-@property (weak, nonatomic) IBOutlet UIView *bankView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bankViewHeight;
-
-@property (weak, nonatomic) IBOutlet UIView *amountView;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *amountViewHeight;
-@property (weak, nonatomic) IBOutlet CNPayOnePixView *amountLine;
-
-
-@property (weak, nonatomic) IBOutlet CNPayNameTF *nameTextField;
-
-@property (weak, nonatomic) IBOutlet CNPayNormalTF *bankTextField;
-
-@property (nonatomic, copy) NSArray *bankNames;
-
-@property (nonatomic, strong) CNPayBankCardModel *chooseBank;
-
-@property (nonatomic, strong) AMSegmentViewController *segmentVC;
-
+@property (nonatomic, assign) CGSize appSize;
+@property (nonatomic, strong) NSArray *apps;
 @end
 
 @implementation CNPayQRVC
@@ -66,15 +44,13 @@
     [self configCollectionView];
     [self configPreSettingMessage];
     // 刷新数据
-    [self updateUIWithPaymentModel:self.payments[self.currentSelectedIndex]];
     [self updateAllContentWithModel:self.paymentModel];
     [self configAmountList];
-    [self configSelectBankView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self setViewHeight:500 fullScreen:NO];
+    [self setViewHeight:800 fullScreen:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -90,14 +66,26 @@
 - (void)configCollectionView {
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 18, 15, 18);
     [self.collectionView registerNib:[UINib nibWithNibName:kQRCellIndentifier bundle:nil] forCellWithReuseIdentifier:kQRCellIndentifier];
+    [self.appCollectionView registerNib:[UINib nibWithNibName:@"BTTBankUnionAppIconCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBankUnionAppIconCell"];
     
     NSInteger count = self.payments.count;
     // 根据数组个数与屏幕宽度来调节高度
-    CGFloat itemWidth = ([UIScreen mainScreen].bounds.size.width - 18 - 30 - 10) / 3.0;
+    CGFloat itemWidth = ([UIScreen mainScreen].bounds.size.width -18-35-10)/2.0;
     CGFloat itemHeight = itemWidth * 56 / 160.0;
-    CGFloat totalHeight = ((count - 1) / 3 + 1) * (itemHeight + 15);
+    CGFloat totalHeight = ((count - 1)/2 + 1) * (itemHeight + 15);
     self.collectionViewHeight.constant = totalHeight;
     self.cellSize = CGSizeMake(itemWidth, itemHeight + 10);
+    self.apps = @[@"ysfapp",@"mtapp",@"dzapp",@"wphapp",@"ttzgapp",@"mfbapp",@"wzfapp",@"jdapp"];
+    self.appCollectionView.delegate = self;
+    self.appCollectionView.dataSource = self;
+    CGFloat iconWidth = 60;
+    self.appSize = CGSizeMake(iconWidth, iconWidth);
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.minimumInteritemSpacing = 0;
+    layout.minimumLineSpacing = 0;
+    layout.itemSize = self.appSize;
+    self.appCollectionView.collectionViewLayout = layout;
+    self.appsViewHeightConstants.constant = iconWidth * 2 + 36;
 }
 
 - (void)configPreSettingMessage {
@@ -111,21 +99,15 @@
     }
 }
 
-- (void)configSelectBankView {
-    // 银行列表
-    NSMutableArray *bankNames = [NSMutableArray array];
-    for (CNPayBankCardModel *bankModel in self.paymentModel.bankList) {
-        [bankNames addObject:bankModel.bankname];
-    }
-    self.bankNames = bankNames;
-    if (self.bankNames.count == 1) {
-        self.bankTextField.text = self.bankNames[0];
-        self.chooseBank = self.paymentModel.bankList[0];
-    }
-}
-
 /// 刷新数据
 - (void)updateAllContentWithModel:(CNPaymentModel *)model {
+    if (model.paymentType == CNPaymentUnionQR) {
+        self.appsView.hidden = NO;
+        self.noticesView.hidden = NO;
+    } else {
+        self.appsView.hidden = YES;
+        self.noticesView.hidden = YES;
+    }
     self.amountTF.text = @"";
     // 金额提示语
     if (model.maxamount > model.minamount) {
@@ -145,73 +127,51 @@
 #pragma mark- UICollectionViewDelegate, UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.payments.count;
+    if (collectionView.tag == 11100) {
+        return 8;
+    } else {
+        return self.payments.count;
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (collectionView.tag == 11100) {
+        BTTBankUnionAppIconCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBankUnionAppIconCell" forIndexPath:indexPath];
+        cell.iconImageView.image = ImageNamed(self.apps[indexPath.row]);
+        return cell;
+    } else {
+        CNPayQRCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kQRCellIndentifier forIndexPath:indexPath];
+        
+        CNPaymentModel *payment = [self.payments objectAtIndex:indexPath.row];
+        cell.tuijianIcon.hidden = (payment.paymentType == CNPaymentUnionQR ? NO : YES);
+        cell.titleLb.text = payment.paymentTitle;
+        cell.channelIconIV.image = [UIImage imageNamed:payment.paymentLogo];
+        return cell;
+    }
     
-    CNPayQRCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kQRCellIndentifier forIndexPath:indexPath];
-    
-    CNPaymentModel *payment = [self.payments objectAtIndex:indexPath.row];
-    cell.titleLb.text = payment.paymentTitle;
-    cell.channelIconIV.image = [UIImage imageNamed:payment.paymentLogo];
-    return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    if (indexPath.row == _currentSelectedIndex) {
+    if (indexPath.row == _currentSelectedIndex || collectionView.tag == 11100) {
         return;
     }
     [self.view endEditing:YES];
     
     self.currentSelectedIndex = indexPath.row;
     self.paymentModel = [self.payments objectAtIndex:indexPath.row];
-    [self updateUIWithPaymentModel:self.paymentModel];
     [self updateAllContentWithModel:self.paymentModel];
     [self configAmountList];
-}
-
-- (void)updateUIWithPaymentModel:(CNPaymentModel *)model {
-    if (model.paymentType == CNPaymentUnionQR ||
-        model.paymentType == CNPaymentJDQR ||
-        model.paymentType == CNPaymentBTC ||
-        model.paymentType == CNPaymentCoin ||
-        model.paymentType == CNPaymentUnionApp ||
-        model.paymentType == CNPaymentJDApp ||
-        model.paymentType == CNPaymentWechatBarCode ||
-        model.paymentType == CNPaymentWechatQR ||
-        model.paymentType == CNPaymentWechatApp ||
-        model.paymentType == CNPaymentAliQR ||
-        model.paymentType == CNPaymentAliApp) {
-        self.nameView.hidden = YES;
-        self.nameViewHeight.constant = 0;
-        self.bankView.hidden = YES;
-        self.bankViewHeight.constant = 0;
-        self.amountView.hidden = NO;
-        self.amountViewHeight.constant = 50;
-        self.amountLine.hidden = YES;
-    } else if (model.paymentType == CNPaymentDeposit) {
-        self.amountView.hidden = YES;
-        self.amountViewHeight.constant = 0;
-        self.nameView.hidden = NO;
-        self.nameViewHeight.constant = 50;
-        self.bankView.hidden = NO;
-        self.bankViewHeight.constant = 50;
-        self.amountLine.hidden = YES;
-    } else {
-        self.nameView.hidden = NO;
-        self.nameViewHeight.constant = 50;
-        self.bankView.hidden = NO;
-        self.bankViewHeight.constant = 50;
-        self.amountView.hidden = NO;
-        self.amountViewHeight.constant = 50;
-        self.amountLine.hidden = NO;
-    }
+   
 }
 
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return self.cellSize;
+    if (collectionView.tag == 11100) {
+        return self.appSize;
+    } else {
+        return self.cellSize;
+    }
+    
 }
 
 - (IBAction)selectAmountList:(id)sender {
@@ -232,48 +192,22 @@
     }];
 }
 
-- (IBAction)selectBankClick:(UIButton *)sender {
-    if (!self.bankNames.count) {
-        return;
-    }
-    [BRStringPickerView showStringPickerWithTitle:@"选择支付银行" dataSource:self.bankNames defaultSelValue:self.bankTextField.text resultBlock:^(id selectValue, NSInteger index) {
-        if ([self.bankTextField.text isEqualToString:selectValue]) {
-            return;
-        }
-        self.bankTextField.text = selectValue;
-        self.chooseBank = self.paymentModel.bankList[index];
-    }];
-}
-
-
 - (IBAction)nextStep:(UIButton *)sender {
     [self.view endEditing:YES];
     NSString *text = _amountTF.text;
     /// 输入为不合法数字
-    if (![NSString isPureInt:text] && ![NSString isPureFloat:text] && !self.amountView.hidden) {
+    if (![NSString isPureInt:text] && ![NSString isPureFloat:text]) {
         _amountTF.text = nil;
         [self showError:@"请输入充值金额"];
         return;
     }
     
-    if (!self.bankView.hidden) {
-        if (!self.bankTextField.text.length) {
-            [self showError:@"请选择支付银行"];
-        }
-    }
-    
-    if (!self.nameView.hidden) {
-        if (!self.nameTextField.text.length) {
-            [self showError:@"请输入真实姓名"];
-        }
-    }
-    
     /// 超出额度范围
     NSNumber *amount = [NSString convertNumber:text];
     double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;
-    if (([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) && !self.amountView.hidden) {
+    if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) {
         _amountTF.text = nil;
-        [self showError:[NSString stringWithFormat:@"存款金额必须是%.2f~%.2f之间，最大允许2位小数", self.paymentModel.minamount, maxAmount]];
+        [self showError:[NSString stringWithFormat:@"存款金额必须是%.f~%.f之间，最大允许2位小数", self.paymentModel.minamount, maxAmount]];
         return;
     }
     
@@ -281,72 +215,14 @@
         return;
     }
     sender.selected = YES;
-    if (self.paymentModel.paymentType == CNPaymentBQAli ||
-        self.paymentModel.paymentType == CNPaymentBQWechat ||
-        self.paymentModel.paymentType == CNPaymentBQFast) {
-        self.writeModel.depositBy = self.nameTextField.text;
-        self.writeModel.amount = self.amountTF.text;
-        self.writeModel.chooseBank = self.chooseBank;
-        self.writeModel.BQType = [self getBQType];
-        weakSelf(weakSelf);
-        [CNPayRequestManager paymentSubmitBill:self.writeModel completeHandler:^(IVRequestResultModel *result, id response) {
-            strongSelf(strongSelf);
-            sender.selected = NO;
-            if (result.status) {
-                CNPayBankCardModel *model = [[CNPayBankCardModel alloc] initWithDictionary:result.data error:nil];
-                if (!model) {
-                    [self showError:@"系统错误，请联系客服"];
-                    return;
-                }
-                self.writeModel.chooseBank = model;
-                BTTStepTwoContainerController *containerVC = [[BTTStepTwoContainerController alloc] initWithPaymentType:self.paymentModel.paymentType];
-                containerVC.payments = self.payments;
-                containerVC.writeModel = self.writeModel;
-                weakSelf.segmentVC = [[AMSegmentViewController alloc] initWithViewController:containerVC];
-                [self addChildViewController:weakSelf.segmentVC];
-                [self.view addSubview:weakSelf.segmentVC.view];
-                
-            } else {
-                [self showError:result.message];
-            }
-        }];
-        
-    } else if (self.paymentModel.paymentType == CNPaymentDeposit) {
-        [CNPayRequestManager paymentGetBankListWithType:YES depositor:self.nameTextField.text referenceId:nil completeHandler:^(IVRequestResultModel *result, id response) {
-            sender.selected = NO;
-            if (!result.status) {
-                [self showError:result.message];
-                return;
-            }
-            /// 数据解析
-            NSArray *array = result.data;
-            NSArray *bankList = [CNPayBankCardModel arrayOfModelsFromDictionaries:array error:nil];
-            if (bankList.count == 0) {
-                [self showError:result.message];
-                return;
-            }
-            self.writeModel.depositBy = self.nameTextField.text;
-            self.writeModel.bankList = bankList;
-            self.writeModel.chooseBank = bankList.firstObject;
-            BTTStepTwoContainerController *containerVC = [[BTTStepTwoContainerController alloc] initWithPaymentType:self.paymentModel.paymentType];
-            containerVC.payments = self.payments;
-            containerVC.writeModel = self.writeModel;
-            AMSegmentViewController *segmentVC = [[AMSegmentViewController alloc] initWithViewController:containerVC];
-            [self addChildViewController:segmentVC];
-            [self.view addSubview:segmentVC.view];
-       
-        }];
-       
-        
-    } else {
-        /// 提交
-        __weak typeof(self) weakSelf =  self;
-        [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVRequestResultModel *result, id response) {
-            sender.selected = NO;
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf handlerResult:result];
-        }];
-    }
+    
+    /// 提交
+    __weak typeof(self) weakSelf =  self;
+    [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVRequestResultModel *result, id response) {
+        sender.selected = NO;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf handlerResult:result];
+    }];
 }
 
 - (void)handlerResult:(IVRequestResultModel *)model {
@@ -365,26 +241,7 @@
     }
     self.writeModel.orderModel = orderModel;
     self.writeModel.depositType = self.paymentModel.paymentTitle;
-    BTTStepTwoContainerController *containerVC = [[BTTStepTwoContainerController alloc] initWithPaymentType:self.paymentModel.paymentType];
-    containerVC.payments = self.payments;
-    containerVC.writeModel = self.writeModel;
-    AMSegmentViewController *segmentVC = [[AMSegmentViewController alloc] initWithViewController:containerVC];
-    [self addChildViewController:segmentVC];
-    [self.view addSubview:segmentVC.view];
+    [self goToStep:1];
 }
-
-- (CNPayBQType)getBQType {
-    switch (self.paymentModel.paymentType) {
-        case CNPaymentBQAli:
-            return CNPayBQTypeAli;
-        case CNPaymentBQFast:
-            return CNPayBQTypeBankUnion;
-        case CNPaymentBQWechat:
-            return CNPayBQTypeWechat;
-        default:
-            return 0;
-    }
-}
-
 
 @end

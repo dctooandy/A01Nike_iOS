@@ -99,6 +99,10 @@
 		3A7A1A7221BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7A1A7021BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib */; };
 		3A7A1A7521C0A7D800572B50 /* BTTXimaLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A7421C0A7D800572B50 /* BTTXimaLogController.m */; };
 		3A7C0AFE21E5A27A002658CC /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0AFD21E5A27A002658CC /* app.zip */; };
+		3A7C0B0221E5CC43002658CC /* BTTBankUnionAppIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B0021E5CC43002658CC /* BTTBankUnionAppIconCell.m */; };
+		3A7C0B0321E5CC43002658CC /* BTTBankUnionAppIconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0B0121E5CC43002658CC /* BTTBankUnionAppIconCell.xib */; };
+		3A7C0B0721E82D80002658CC /* CNPayQRVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0B0421E82D80002658CC /* CNPayQRVC.xib */; };
+		3A7C0B0821E82D80002658CC /* CNPayQRVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B0621E82D80002658CC /* CNPayQRVC.m */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -415,8 +419,6 @@
 		D5DBEB1921ABB774008AF629 /* CNUIWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEABA21ABB774008AF629 /* CNUIWebVC.m */; };
 		D5DBEB1B21ABB774008AF629 /* CNPayCardStep1VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEABE21ABB774008AF629 /* CNPayCardStep1VC.m */; };
 		D5DBEB1E21ABB774008AF629 /* CNPayCardStep1VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEAC121ABB774008AF629 /* CNPayCardStep1VC.xib */; };
-		D5DBEB2021ABB774008AF629 /* CNPayQRVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DBEAC721ABB774008AF629 /* CNPayQRVC.xib */; };
-		D5DBEB2121ABB774008AF629 /* CNPayQRVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAC921ABB774008AF629 /* CNPayQRVC.m */; };
 		D5DBEB2221ABB774008AF629 /* CNPayBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEACC21ABB774008AF629 /* CNPayBaseVC.m */; };
 		D5DBEB2321ABB774008AF629 /* AMSegmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEACF21ABB774008AF629 /* AMSegmentViewController.m */; };
 		D5DBEB2421ABB774008AF629 /* CNPayWriteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5DBEAD521ABB774008AF629 /* CNPayWriteModel.m */; };
@@ -830,6 +832,12 @@
 		3A7A1A7321C0A7D800572B50 /* BTTXimaLogController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTXimaLogController.h; sourceTree = "<group>"; };
 		3A7A1A7421C0A7D800572B50 /* BTTXimaLogController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTXimaLogController.m; sourceTree = "<group>"; };
 		3A7C0AFD21E5A27A002658CC /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
+		3A7C0AFF21E5CC43002658CC /* BTTBankUnionAppIconCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBankUnionAppIconCell.h; sourceTree = "<group>"; };
+		3A7C0B0021E5CC43002658CC /* BTTBankUnionAppIconCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBankUnionAppIconCell.m; sourceTree = "<group>"; };
+		3A7C0B0121E5CC43002658CC /* BTTBankUnionAppIconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTBankUnionAppIconCell.xib; sourceTree = "<group>"; };
+		3A7C0B0421E82D80002658CC /* CNPayQRVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayQRVC.xib; sourceTree = "<group>"; };
+		3A7C0B0521E82D80002658CC /* CNPayQRVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayQRVC.h; sourceTree = "<group>"; };
+		3A7C0B0621E82D80002658CC /* CNPayQRVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayQRVC.m; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -1368,9 +1376,6 @@
 		D5DBEABE21ABB774008AF629 /* CNPayCardStep1VC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayCardStep1VC.m; sourceTree = "<group>"; };
 		D5DBEAC121ABB774008AF629 /* CNPayCardStep1VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayCardStep1VC.xib; sourceTree = "<group>"; };
 		D5DBEAC521ABB774008AF629 /* CNPayCardStep1VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayCardStep1VC.h; sourceTree = "<group>"; };
-		D5DBEAC721ABB774008AF629 /* CNPayQRVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayQRVC.xib; sourceTree = "<group>"; };
-		D5DBEAC821ABB774008AF629 /* CNPayQRVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayQRVC.h; sourceTree = "<group>"; };
-		D5DBEAC921ABB774008AF629 /* CNPayQRVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayQRVC.m; sourceTree = "<group>"; };
 		D5DBEACA21ABB774008AF629 /* CNPayContainerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayContainerVC.h; sourceTree = "<group>"; };
 		D5DBEACC21ABB774008AF629 /* CNPayBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayBaseVC.m; sourceTree = "<group>"; };
 		D5DBEACE21ABB774008AF629 /* AMSegmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSegmentViewController.h; sourceTree = "<group>"; };
@@ -3342,9 +3347,9 @@
 		D5DBEAC621ABB774008AF629 /* QRPay */ = {
 			isa = PBXGroup;
 			children = (
-				D5DBEAC821ABB774008AF629 /* CNPayQRVC.h */,
-				D5DBEAC921ABB774008AF629 /* CNPayQRVC.m */,
-				D5DBEAC721ABB774008AF629 /* CNPayQRVC.xib */,
+				3A7C0B0521E82D80002658CC /* CNPayQRVC.h */,
+				3A7C0B0621E82D80002658CC /* CNPayQRVC.m */,
+				3A7C0B0421E82D80002658CC /* CNPayQRVC.xib */,
 				D5DBEB4121AD3721008AF629 /* CNPayQRStep2VC.h */,
 				D5DBEB4221AD3721008AF629 /* CNPayQRStep2VC.m */,
 				D5DBEB4321AD3721008AF629 /* CNPayQRStep2VC.xib */,
@@ -3430,6 +3435,9 @@
 				D599252221AFCFDA001E885A /* CNPayBankView.h */,
 				D599252321AFCFDA001E885A /* CNPayBankView.m */,
 				D599252521AFCFEE001E885A /* CNPayBankView.xib */,
+				3A7C0AFF21E5CC43002658CC /* BTTBankUnionAppIconCell.h */,
+				3A7C0B0021E5CC43002658CC /* BTTBankUnionAppIconCell.m */,
+				3A7C0B0121E5CC43002658CC /* BTTBankUnionAppIconCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3846,7 +3854,6 @@
 				3A8F518A215F77AC0069D1B3 /* intro_1.jpg in Resources */,
 				3AAE8221219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.xib in Resources */,
 				EAE89ED8218C3ABD00C29393 /* LIVVideoCamera_close@3x.png in Resources */,
-				D5DBEB2021ABB774008AF629 /* CNPayQRVC.xib in Resources */,
 				EAE89E92218C3ABD00C29393 /* nowords.gif in Resources */,
 				EAE89EB7218C3ABD00C29393 /* LIVFileMessage_TypeWord@2x.png in Resources */,
 				EAE89E8B218C3ABD00C29393 /* doubt.gif in Resources */,
@@ -4053,6 +4060,7 @@
 				EAE89EEA218C3ABD00C29393 /* LIVVideoMessage_PlayButtonIcon@2x.png in Resources */,
 				EAE89EA4218C3ABD00C29393 /* liv_satisfactionr_circular_selected_un@3x.png in Resources */,
 				3AD4C9C321635AEC00FC0A63 /* app.json in Resources */,
+				3A7C0B0321E5CC43002658CC /* BTTBankUnionAppIconCell.xib in Resources */,
 				EAE89E8A218C3ABD00C29393 /* daxiao.gif in Resources */,
 				EAE89E8F218C3ABD00C29393 /* inebriation.gif in Resources */,
 				3AAFF87821D3749F00F875B1 /* BTTMeBigSaveMoneyCell.xib in Resources */,
@@ -4098,6 +4106,7 @@
 				3A11AE132182AAB300B1AFF4 /* BTTPTTransferNewCell.xib in Resources */,
 				EAE89EFD218C3ABD00C29393 /* photo_number_icon@2x.png in Resources */,
 				3A8F518B215F77AC0069D1B3 /* intro_2.jpg in Resources */,
+				3A7C0B0721E82D80002658CC /* CNPayQRVC.xib in Resources */,
 				EAE89ED1218C3ABD00C29393 /* LIVRobotRelatedQuestionIcon@2x.png in Resources */,
 				EAE89EAF218C3ABD00C29393 /* LIVFileMessage_TypePdf@2x.png in Resources */,
 				3A8F51C1215F78180069D1B3 /* BTTActionSheet.bundle in Resources */,
@@ -4299,7 +4308,6 @@
 				3AE1EAE3217F25750073A32D /* BTTCardInfoCell.m in Sources */,
 				3AE1EB2021805E980073A32D /* BTTAddCardBtnsCell.m in Sources */,
 				D599251D21AFC8CA001E885A /* CNPayDepostiBankCell.m in Sources */,
-				D5DBEB2121ABB774008AF629 /* CNPayQRVC.m in Sources */,
 				3AB0686E21A5033700072FB7 /* BTTPTTransferInputCell.m in Sources */,
 				3AE1EADF217F22710073A32D /* BTTCardInfosController.m in Sources */,
 				D5DBEB3021ABB774008AF629 /* CNPayNameTF.m in Sources */,
@@ -4337,6 +4345,7 @@
 				3A11AE2C2184311D00B1AFF4 /* BTTSheetsViewController.m in Sources */,
 				D5DBEB2A21ABB774008AF629 /* CNPaySubmitButton.m in Sources */,
 				3A11AE1C2183FC0D00B1AFF4 /* BTTPasswordChangeController.m in Sources */,
+				3A7C0B0821E82D80002658CC /* CNPayQRVC.m in Sources */,
 				3A92941E219C3A0000764E7E /* BTTRegisterSuccessController.m in Sources */,
 				3AD9CD532165B2C900685B43 /* BTTPopoverAction.m in Sources */,
 				3A9E4C21219D418800E7D8C0 /* BTTForgetPasswordStepTwoController+LoadData.m in Sources */,
@@ -4451,6 +4460,7 @@
 				3A11AE072181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.m in Sources */,
 				3AD9CF84216F482B00685B43 /* BTTHomePageDiscountHeaderCell.m in Sources */,
 				3AE1EABE217DB7040073A32D /* BTTPersonalInfoController.m in Sources */,
+				3A7C0B0221E5CC43002658CC /* BTTBankUnionAppIconCell.m in Sources */,
 				3AB0684C21A3EA8500072FB7 /* BTTGamesHallModel.m in Sources */,
 				3AC3FFA4219ABEBF008AECCB /* BTTUnlockPopView.m in Sources */,
 				3AB0683821A3959100072FB7 /* BTTUnBindingMobileNoticeController.m in Sources */,

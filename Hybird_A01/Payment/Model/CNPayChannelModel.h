@@ -25,11 +25,13 @@ typedef NS_ENUM(NSUInteger, CNPayChannel) {
     CNPayChannelCoin,
     
     /// app
-    CNPayChannelWechatApp,
-    CNPayChannelAliApp,
-    CNPayChannelQQApp,
+//    CNPayChannelWechatApp,
+//    CNPayChannelQQApp,
     CNPayChannelUnionApp,
-    CNPayChannelJDApp,
+    CNPayChannelWechatQQJDAPP,  ///< WechatQQJD 三种支付合用
+    CNPayChannelAliApp,
+
+//    CNPayChannelJDApp,
     
     /// 扫码
     CNPayChannelQR,
