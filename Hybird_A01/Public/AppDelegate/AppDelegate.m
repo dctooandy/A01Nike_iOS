@@ -16,11 +16,15 @@
 #import <IVHeartPacketLibrary/IVHeartSocketManager.h>
 #import <UserNotifications/UserNotifications.h>
 #import "CNPreCacheMananger.h"
+#import "BTTTabBar.h"
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate>
 
 @property (nonatomic, strong) dispatch_semaphore_t semaphore;
 @property (nonatomic, strong) UIWindow *areaLimitWindow;
+
+@property (nonatomic, strong) BTTTabbarController *tabVC;
+
 @end
 
 @implementation AppDelegate
@@ -60,7 +64,8 @@
 }
 
 - (void)setupTabbarController {
-    self.window.rootViewController = [[BTTTabbarController alloc] init];
+    self.tabVC = [[BTTTabbarController alloc] init];
+    self.window.rootViewController = self.tabVC;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -211,6 +216,31 @@
         _areaLimitWindow.windowLevel = UIWindowLevelAlert + 1;
     }
     return _areaLimitWindow;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    NSLog(@"测试赛%@",url);
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if ([url.host isEqualToString:@"webMobile"] || [url.host isEqualToString:@"webmobile"]) {
+            if ([url.path isEqualToString:@"/lucky_wheel.htm"]) {
+                [self.tabVC.myTabbar setSeletedIndex:2];
+            }
+            
+        } else {
+            if ([url.path isEqualToString:@""]) {
+                
+            } else if ([url.path isEqualToString:@""]) {
+                
+            } else if ([url.path isEqualToString:@""]) {
+                
+            } else {
+                
+            }
+        }
+        
+    });
+    return YES;
 }
 
 @end
