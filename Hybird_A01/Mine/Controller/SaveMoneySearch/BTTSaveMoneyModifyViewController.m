@@ -216,7 +216,7 @@
         icons = @[@"请输入存款姓名",@"请输入存款金额",@"请选择存款方式",@"请选择存款时间",@"请选择存款地点",@"请输入存款银行",@"请输入存款卡号"];
     } else {
         nameArr = @[@"存款姓名",@"存款金额"];
-        detailArr= @[self.model.checker,self.model.amount];
+        detailArr= @[self.model.deposit_by,self.model.amount];
     }
     for (NSString *name in nameArr) {
         NSInteger index = [nameArr indexOfObject:name];
