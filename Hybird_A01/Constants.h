@@ -116,6 +116,10 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTVerisionUpdateKey        @"BTTVerisionUpdateKey"
 
+// 存款超过十次的用户
+
+#define BTTSaveMoneyMoreThenTenKey     @"BTTSaveMoneyMoreThenTenKey"
+
 // 验证码发送按钮控制通知
 
 #define BTTVerifyCodeEnableNotification @"BTTVerifyCodeEnableNotification"
@@ -300,6 +304,19 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 // 请求未读消息的数量
 #define BTTIsUnviewedAPI             @"/public/letter/isUnviewed"
+
+// 人工存款信息错误重新提交
+#define BTTDepositResubmmitAPI       @"/A01/payment/reSubmitDepositRequestEndpoint"
+
+// 迅捷存款信息错误重新提交
+#define BTTBQAddOrderAPI             @"/A01/payment/BQAddOrder"
+
+// 手工存款催单
+#define BTTCreditAppealAPI           @"/A01/payment/createCreditAppeal"
+
+// 迅捷, 在线催款催单接口
+#define BTTAreditAppealAPI           @"/A01/payment/createAreditAppeal"
+
 
 /********************************************常用宏*********************************************************/
 

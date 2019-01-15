@@ -24,6 +24,7 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.backgroundColor = [UIColor colorWithHexString:@"212229"];
+    
     self.btn.enabled = NO;
     [self registerNotification];
 }
@@ -77,6 +78,12 @@
         [self.btn setTitle:@"保存" forState:UIControlStateNormal];
     } else if (btnType == BTTPublicBtnTypeConfirmSave) {
         [self.btn setTitle:@"确认修改" forState:UIControlStateNormal];
+    } else if (btnType == BTTPublicBtnTypeModify) {
+        [self.btn setTitle:@"修改" forState:UIControlStateNormal];
+    } else if (btnType == BTTPublicBtnTypeEnterGame) {
+        [self.btn setTitle:@"进入游戏大厅" forState:UIControlStateNormal];
+    } else if (btnType == BTTPublicBtnTypeCustomerService) {
+        [self.btn setTitle:@"联系客服" forState:UIControlStateNormal];
     }
 }
 
