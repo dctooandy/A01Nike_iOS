@@ -14,9 +14,17 @@
 #import "NSArray+JSON.h"
 
 
+typedef enum : NSUInteger {
+    BTTSaveMoneyEditTypeError,
+    BTTSaveMoneyEditTypeEditing,
+} BTTSaveMoneyEditType;
+
+
 @interface BTTSaveMoneyModifyViewController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
+
+@property (nonatomic, assign) BTTSaveMoneyEditType editType;
 
 @end
 
@@ -24,10 +32,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.editType = BTTSaveMoneyEditTypeError;
     self.title = @"存款详情";
     [self setupCollectionView];
     [self setupTopView];
 //    [self loadMainDataWithType:0];
+    [self loadMainDataWithType:_model.trans_code];
 }
 
 - (void)setupTopView {
@@ -57,12 +67,21 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.dataSource.count) {
         BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
-        cell.btnType = BTTPublicBtnTypeModify;
+        if (self.editType == BTTSaveMoneyEditTypeError) {
+            cell.btnType = BTTPublicBtnTypeModify;
+        } else {
+            cell.btnType = BTTPublicBtnTypeSubmit;
+        }
         cell.btn.enabled = YES;
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
-            [strongSelf submitRequest];
+            if ([button.titleLabel.text isEqualToString:@"提交"]) {
+                [strongSelf submitRequest];
+            } else {
+                strongSelf.editType = BTTSaveMoneyEditTypeEditing;
+                [strongSelf loadMainDataWithType:strongSelf->_model.trans_code];
+            }
         };
         return cell;
     } else {
@@ -216,7 +235,7 @@
         icons = @[@"请输入存款姓名",@"请输入存款金额",@"请选择存款方式",@"请选择存款时间",@"请选择存款地点",@"请输入存款银行",@"请输入存款卡号"];
     } else {
         nameArr = @[@"存款姓名",@"存款金额"];
-        detailArr= @[self.model.checker,self.model.amount];
+        detailArr= @[self.model.deposit_by,self.model.amount];
     }
     for (NSString *name in nameArr) {
         NSInteger index = [nameArr indexOfObject:name];
@@ -231,48 +250,77 @@
         if (self.model.trans_code == 1) {
             if ([self.model.result_code containsString:@"900004"]) {
                 if ([name isEqualToString:@"存款姓名"]) {
-                    model.isError = YES;
+                    if (self.editType == BTTSaveMoneyEditTypeError) {
+                        model.isError = YES;
+                    } else {
+                        model.isError = NO;
+                    }
                     model.resultCode = @"900004";
                 }
             }
             if ([self.model.result_code containsString:@"900005"]) {
                 if ([name isEqualToString:@"存款金额"]) {
-                    model.isError = YES;
+                    if (self.editType == BTTSaveMoneyEditTypeError) {
+                        model.isError = YES;
+                    } else {
+                        model.isError = NO;
+                    }
                     model.resultCode = @"900005";
                 }
             }
             
             if ([self.model.result_code containsString:@"900006"]) {
                 if ([name isEqualToString:@"存款方式"]) {
-                    model.isError = YES;
+                    if (self.editType == BTTSaveMoneyEditTypeError) {
+                        model.isError = YES;
+                    } else {
+                        model.isError = NO;
+                    }
                     model.resultCode = @"900006";
                 }
             }
             
             if ([self.model.result_code containsString:@"900008"]) {
                 if ([name isEqualToString:@"存款时间"]) {
-                    model.isError = YES;
+                    if (self.editType == BTTSaveMoneyEditTypeError) {
+                        model.isError = YES;
+                    } else {
+                        model.isError = NO;
+                    }
                     model.resultCode = @"900008";
                 }
             }
             
             if ([self.model.result_code containsString:@"900007"]) {
                 if ([name isEqualToString:@"存款地点"]) {
-                    model.isError = YES;
+                    if (self.editType == BTTSaveMoneyEditTypeError) {
+                         model.isError = YES;
+                    } else {
+                         model.isError = NO;
+                    }
+                   
                     model.resultCode = @"900007";
                 }
             }
         } else {
             if ([self.model.result_code containsString:@"900004"]) {
                 if ([name isEqualToString:@"存款姓名"]) {
-                    model.isError = YES;
+                    if (self.editType == BTTSaveMoneyEditTypeError) {
+                        model.isError = YES;
+                    } else {
+                        model.isError = NO;
+                    }
                     model.resultCode = @"900004";
                 }
             }
             
             if ([self.model.result_code containsString:@"900005"]) {
                 if ([name isEqualToString:@"存款金额"]) {
-                    model.isError = YES;
+                    if (self.editType == BTTSaveMoneyEditTypeError) {
+                        model.isError = YES;
+                    } else {
+                        model.isError = NO;
+                    }
                     model.resultCode = @"900005";
                 }
             }
@@ -294,7 +342,7 @@
 
 - (void)setModel:(BTTSaveMoneyErrorModel *)model {
     _model = model;
-    [self loadMainDataWithType:model.trans_code];
+    
 }
 
 @end
