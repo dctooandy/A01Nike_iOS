@@ -29,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger paymentType;
 
+@property (nonatomic, assign) BOOL isError; ///< 是否是错误字段
+
+@property (nonatomic, copy) NSString *resultCode;
+
 @end
 
 NS_ASSUME_NONNULL_END

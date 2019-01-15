@@ -98,9 +98,18 @@
 		3A7A1A7121BF859000572B50 /* BTTRegisterSuccessChangePwdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6F21BF859000572B50 /* BTTRegisterSuccessChangePwdCell.m */; };
 		3A7A1A7221BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7A1A7021BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib */; };
 		3A7A1A7521C0A7D800572B50 /* BTTXimaLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A7421C0A7D800572B50 /* BTTXimaLogController.m */; };
-		3A7C0AFE21E5A27A002658CC /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0AFD21E5A27A002658CC /* app.zip */; };
 		3A7C0B0221E5CC43002658CC /* BTTBankUnionAppIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B0021E5CC43002658CC /* BTTBankUnionAppIconCell.m */; };
 		3A7C0B0321E5CC43002658CC /* BTTBankUnionAppIconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0B0121E5CC43002658CC /* BTTBankUnionAppIconCell.xib */; };
+		3A7C0B2621ED6CE1002658CC /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0B2521ED6CE1002658CC /* app.zip */; };
+		3A7C0B2C21ED6FA9002658CC /* BTTSaveMoneySuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B2821ED6FA9002658CC /* BTTSaveMoneySuccessController.m */; };
+		3A7C0B2D21ED6FA9002658CC /* BTTSaveMoneyModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B2921ED6FA9002658CC /* BTTSaveMoneyModifyViewController.m */; };
+		3A7C0B3221ED7021002658CC /* NSArray+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B2E21ED7020002658CC /* NSArray+JSON.m */; };
+		3A7C0B3321ED7021002658CC /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B3021ED7021002658CC /* NSString+MD5.m */; };
+		3A7C0B3621ED7070002658CC /* BTTSaveMoneyErrorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B3421ED706F002658CC /* BTTSaveMoneyErrorModel.m */; };
+		3A7C0B3E21ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0B3821ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.xib */; };
+		3A7C0B3F21ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B3921ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.m */; };
+		3A7C0B4021ED7093002658CC /* BTTSaveMoneyModifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0B3C21ED7093002658CC /* BTTSaveMoneyModifyCell.xib */; };
+		3A7C0B4121ED7093002658CC /* BTTSaveMoneyModifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B3D21ED7093002658CC /* BTTSaveMoneyModifyCell.m */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -816,10 +825,26 @@
 		3A7A1A7021BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTRegisterSuccessChangePwdCell.xib; sourceTree = "<group>"; };
 		3A7A1A7321C0A7D800572B50 /* BTTXimaLogController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTXimaLogController.h; sourceTree = "<group>"; };
 		3A7A1A7421C0A7D800572B50 /* BTTXimaLogController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTXimaLogController.m; sourceTree = "<group>"; };
-		3A7C0AFD21E5A27A002658CC /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		3A7C0AFF21E5CC43002658CC /* BTTBankUnionAppIconCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBankUnionAppIconCell.h; sourceTree = "<group>"; };
 		3A7C0B0021E5CC43002658CC /* BTTBankUnionAppIconCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBankUnionAppIconCell.m; sourceTree = "<group>"; };
 		3A7C0B0121E5CC43002658CC /* BTTBankUnionAppIconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTBankUnionAppIconCell.xib; sourceTree = "<group>"; };
+		3A7C0B2521ED6CE1002658CC /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
+		3A7C0B2821ED6FA9002658CC /* BTTSaveMoneySuccessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneySuccessController.m; sourceTree = "<group>"; };
+		3A7C0B2921ED6FA9002658CC /* BTTSaveMoneyModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneyModifyViewController.m; sourceTree = "<group>"; };
+		3A7C0B2A21ED6FA9002658CC /* BTTSaveMoneyModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneyModifyViewController.h; sourceTree = "<group>"; };
+		3A7C0B2B21ED6FA9002658CC /* BTTSaveMoneySuccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneySuccessController.h; sourceTree = "<group>"; };
+		3A7C0B2E21ED7020002658CC /* NSArray+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+JSON.m"; sourceTree = "<group>"; };
+		3A7C0B2F21ED7020002658CC /* NSArray+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+JSON.h"; sourceTree = "<group>"; };
+		3A7C0B3021ED7021002658CC /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		3A7C0B3121ED7021002658CC /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		3A7C0B3421ED706F002658CC /* BTTSaveMoneyErrorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneyErrorModel.m; sourceTree = "<group>"; };
+		3A7C0B3521ED7070002658CC /* BTTSaveMoneyErrorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneyErrorModel.h; sourceTree = "<group>"; };
+		3A7C0B3821ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTSaveMoneySuccessHeaderCell.xib; sourceTree = "<group>"; };
+		3A7C0B3921ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneySuccessHeaderCell.m; sourceTree = "<group>"; };
+		3A7C0B3A21ED7093002658CC /* BTTSaveMoneyModifyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneyModifyCell.h; sourceTree = "<group>"; };
+		3A7C0B3B21ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneySuccessHeaderCell.h; sourceTree = "<group>"; };
+		3A7C0B3C21ED7093002658CC /* BTTSaveMoneyModifyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTSaveMoneyModifyCell.xib; sourceTree = "<group>"; };
+		3A7C0B3D21ED7093002658CC /* BTTSaveMoneyModifyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneyModifyCell.m; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -1961,6 +1986,7 @@
 				3ADD23842178184A00FA959A /* BTTMineViewController+LoadData.m */,
 				3ADD238E217836B200FA959A /* BTTMineViewController+Nav.h */,
 				3ADD238D217836B200FA959A /* BTTMineViewController+Nav.m */,
+				3A7C0B2721ED6FA9002658CC /* SaveMoneySearch */,
 				3A11AE5A2186B69800B1AFF4 /* Xima */,
 				3A11AE4821869B0500B1AFF4 /* Settings */,
 				3A11AE29218430FD00B1AFF4 /* Sheets */,
@@ -2041,6 +2067,30 @@
 				3A7A1A6721BDF21F00572B50 /* BTTLuckyWheelCoinView.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		3A7C0B2721ED6FA9002658CC /* SaveMoneySearch */ = {
+			isa = PBXGroup;
+			children = (
+				3A7C0B2A21ED6FA9002658CC /* BTTSaveMoneyModifyViewController.h */,
+				3A7C0B2921ED6FA9002658CC /* BTTSaveMoneyModifyViewController.m */,
+				3A7C0B2B21ED6FA9002658CC /* BTTSaveMoneySuccessController.h */,
+				3A7C0B2821ED6FA9002658CC /* BTTSaveMoneySuccessController.m */,
+			);
+			path = SaveMoneySearch;
+			sourceTree = "<group>";
+		};
+		3A7C0B3721ED7093002658CC /* SaveMoneySearch */ = {
+			isa = PBXGroup;
+			children = (
+				3A7C0B3B21ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.h */,
+				3A7C0B3921ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.m */,
+				3A7C0B3821ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.xib */,
+				3A7C0B3A21ED7093002658CC /* BTTSaveMoneyModifyCell.h */,
+				3A7C0B3D21ED7093002658CC /* BTTSaveMoneyModifyCell.m */,
+				3A7C0B3C21ED7093002658CC /* BTTSaveMoneyModifyCell.xib */,
+			);
+			path = SaveMoneySearch;
 			sourceTree = "<group>";
 		};
 		3A8D6E812163077C000530DF /* DataBaseManager */ = {
@@ -2133,7 +2183,7 @@
 			isa = PBXGroup;
 			children = (
 				3A8F5134215F74CF0069D1B3 /* Main.storyboard */,
-				3A7C0AFD21E5A27A002658CC /* app.zip */,
+				3A7C0B2521ED6CE1002658CC /* app.zip */,
 				3A8F5137215F74D00069D1B3 /* Assets.xcassets */,
 				3AD4C9C221635AEC00FC0A63 /* app.json */,
 				3A8F5139215F74D00069D1B3 /* LaunchScreen.storyboard */,
@@ -2258,6 +2308,10 @@
 				3A8F5199215F77EC0069D1B3 /* UIView+Frame.m */,
 				3AD9CF2E216C763800685B43 /* UIView+FrameCategory.h */,
 				3AD9CF2D216C763800685B43 /* UIView+FrameCategory.m */,
+				3A7C0B2F21ED7020002658CC /* NSArray+JSON.h */,
+				3A7C0B2E21ED7020002658CC /* NSArray+JSON.m */,
+				3A7C0B3121ED7021002658CC /* NSString+MD5.h */,
+				3A7C0B3021ED7021002658CC /* NSString+MD5.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2802,6 +2856,7 @@
 		3ADD2363217722CB00FA959A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3A7C0B3721ED7093002658CC /* SaveMoneySearch */,
 				3AB0686521A4F26100072FB7 /* PublicCell */,
 				3A11AE5E2186CD6600B1AFF4 /* Xima */,
 				3A11AE542186A6EB00B1AFF4 /* Settings */,
@@ -2842,6 +2897,8 @@
 				3A5F7AA221A9524D00128E8B /* BTTProvinceModel.m */,
 				EA55F37D21C220CA008FB0E1 /* BTTBetInfoModel.h */,
 				EA55F37E21C220CA008FB0E1 /* BTTBetInfoModel.m */,
+				3A7C0B3521ED7070002658CC /* BTTSaveMoneyErrorModel.h */,
+				3A7C0B3421ED706F002658CC /* BTTSaveMoneyErrorModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3748,6 +3805,7 @@
 				EAE89EB1218C3ABD00C29393 /* LIVFileMessage_TypePPT@2x.png in Resources */,
 				3A8F518C215F77AC0069D1B3 /* intro_3.jpg in Resources */,
 				3A11ADD721816E5800B1AFF4 /* SVProgressHUD.bundle in Resources */,
+				3A7C0B4021ED7093002658CC /* BTTSaveMoneyModifyCell.xib in Resources */,
 				EAE89EA7218C3ABD00C29393 /* LIVCSDefaultAvatar@2x.png in Resources */,
 				EAE89EE8218C3ABD00C29393 /* LIVVideoMessage_DefaultThumbnail@3x.png in Resources */,
 				EAE89EEF218C3ABD00C29393 /* LIVVoiceItem@3x.png in Resources */,
@@ -3893,6 +3951,7 @@
 				EAE89F1E218C3ABD00C29393 /* LIVEvaluateCell.nib in Resources */,
 				EAE89F22218C3ABD00C29393 /* LIVLocationMessageContentView.nib in Resources */,
 				EAE89EBC218C3ABD00C29393 /* LIVLibraryItem@3x.png in Resources */,
+				3A7C0B2621ED6CE1002658CC /* app.zip in Resources */,
 				EAE89F36218C3ABD00C29393 /* LIVVoiceBoardViewController.nib in Resources */,
 				EAE89EDA218C3ABD00C29393 /* LIVVideoCamera_flashOff@3x.png in Resources */,
 				EAE89E8C218C3ABD00C29393 /* embarrassed.gif in Resources */,
@@ -3927,6 +3986,7 @@
 				EAE89EBE218C3ABD00C29393 /* LIVLocationItem@3x.png in Resources */,
 				EAE89EB4218C3ABD00C29393 /* LIVFileMessage_TypeTxt@3x.png in Resources */,
 				EAE89F29218C3ABD00C29393 /* LIVSatisfactionEvaluationCommentCell.nib in Resources */,
+				3A7C0B3E21ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.xib in Resources */,
 				EAE89F30218C3ABD00C29393 /* LIVTextWithIconToast.nib in Resources */,
 				EAE89EEE218C3ABD00C29393 /* LIVVoiceItem@2x.png in Resources */,
 				EAE89EAC218C3ABD00C29393 /* LIVEmotionItem@3x.png in Resources */,
@@ -3957,7 +4017,6 @@
 				3AE0582521704DCB00C7E70D /* BTTHomePageAmountsCell.xib in Resources */,
 				EAE89EF0218C3ABD00C29393 /* LIVVoiceItem_highlight@2x.png in Resources */,
 				D5C5019921B67C0800C6DA02 /* CNPayDepositSuccessVC.xib in Resources */,
-				3A7C0AFE21E5A27A002658CC /* app.zip in Resources */,
 				3A7A1A7221BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib in Resources */,
 				D5DBEB1E21ABB774008AF629 /* CNPayCardStep1VC.xib in Resources */,
 				EA5F141B21A28515004305A7 /* DeviceModelsForIOS.plist in Resources */,
@@ -4129,6 +4188,8 @@
 				3AE1EAFC218021080073A32D /* BTTVerifyTypeSelectController+LoadData.m in Sources */,
 				D5DBEAFF21ABB774008AF629 /* NSString+CNPayment.m in Sources */,
 				3ADD23EF2179B97A00FA959A /* TAPageControl.m in Sources */,
+				3A7C0B4121ED7093002658CC /* BTTSaveMoneyModifyCell.m in Sources */,
+				3A7C0B2D21ED6FA9002658CC /* BTTSaveMoneyModifyViewController.m in Sources */,
 				D5DBEB3A21ABB774008AF629 /* CNPayConstant.m in Sources */,
 				3A8F51C6215F78230069D1B3 /* BTTNoticeView.m in Sources */,
 				3AF1B80B21AE59C300BF8C3A /* BTTVideoGameModel.m in Sources */,
@@ -4147,6 +4208,7 @@
 				D5DBEB0A21ABB774008AF629 /* CNPayBQStep2VC.m in Sources */,
 				3AB0688E21A679DE00072FB7 /* BTTSMSEmailModifyModel.m in Sources */,
 				3ADD237B2177366B00FA959A /* BTTMeMainCell.m in Sources */,
+				3A7C0B3621ED7070002658CC /* BTTSaveMoneyErrorModel.m in Sources */,
 				3AE1EB15218048940073A32D /* BTTCardModifyVerifyController+LoadData.m in Sources */,
 				D5DBEB1521ABB774008AF629 /* CNPayOnlineVC.m in Sources */,
 				3A7A1A7121BF859000572B50 /* BTTRegisterSuccessChangePwdCell.m in Sources */,
@@ -4212,6 +4274,7 @@
 				3AD9CF78216F3F6300685B43 /* BTTAppCollectionViewCell.m in Sources */,
 				3AB0683121A2964000072FB7 /* BTTDiscountsViewController+LoadData.m in Sources */,
 				D599251821AE6719001E885A /* CNPayCardStep2VC.m in Sources */,
+				3A7C0B3F21ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.m in Sources */,
 				3A11ADDE21818A1A00B1AFF4 /* BTTAddBTCController.m in Sources */,
 				3AD9CD552165B2C900685B43 /* BTTPopoverViewCell.m in Sources */,
 				3A11AE672186D94B00B1AFF4 /* BTTThisWeekCell.m in Sources */,
@@ -4237,6 +4300,7 @@
 				EAE89DCB218C3A7400C29393 /* SDWebImage+Compat3_8_1.m in Sources */,
 				3AC3FFAD219BB19E008AECCB /* BTTLoginCodeCell.m in Sources */,
 				3AE1EAB5217D986A0073A32D /* BTTMeInfoHiddenCell.m in Sources */,
+				3A7C0B2C21ED6FA9002658CC /* BTTSaveMoneySuccessController.m in Sources */,
 				3A37E0FA2164685600FB13A1 /* AppDelegate+Environment.m in Sources */,
 				3A9E4C7121A2559800E7D8C0 /* BTTChangeMobileController+LoadData.m in Sources */,
 				3A929412219BBD4F00764E7E /* BTTLoginAPIModel.m in Sources */,
@@ -4277,6 +4341,7 @@
 				3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */,
 				3AAE8218219A738B003EC8B0 /* BTTForgetPasswordCell.m in Sources */,
 				EA5F141D21A28515004305A7 /* IVNetworkStatusDetailViewController.m in Sources */,
+				3A7C0B3221ED7021002658CC /* NSArray+JSON.m in Sources */,
 				3A5F7A9A21A8E71100128E8B /* BTTXimaSuccessItemCell.m in Sources */,
 				3AD9CF54216EFD0700685B43 /* BTTBannerModel.m in Sources */,
 				3A11AE022181C16800B1AFF4 /* BTTWithdrawalSuccessController.m in Sources */,
@@ -4369,6 +4434,7 @@
 				3A11AE582186A71100B1AFF4 /* BTTBookMessageCell.m in Sources */,
 				D599252421AFCFDA001E885A /* CNPayBankView.m in Sources */,
 				3AB0683421A2E34C00072FB7 /* BTTAccountBalanceController+LoadData.m in Sources */,
+				3A7C0B3321ED7021002658CC /* NSString+MD5.m in Sources */,
 				3A11AE5D2186B71600B1AFF4 /* BTTXimaController.m in Sources */,
 				D5DBEB3621ABB774008AF629 /* CNPayTipView.m in Sources */,
 				3AD9CD5B21661BE800685B43 /* BTTRedDotManager.m in Sources */,
