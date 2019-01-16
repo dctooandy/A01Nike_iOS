@@ -62,7 +62,7 @@
         if (self.saveMoneyStatus == BTTSaveMoneyStatusTypeFail) {
             cell.statusImageView.image = ImageNamed(@"failure");
             cell.titleLabel.text = @"存款未到账!";
-            cell.detailLabel.text = @"尊敬的贵宾, 后台暂未查到您的款项, 请联系客服提供并核对详细存款信息";
+            cell.detailLabel.text = @"尊敬的贵宾, 后台暂未查到您的款项, 请联系客服提供并核对详细存款信息.";
         } else if (self.saveMoneyStatus == BTTSaveMoneyStatusTypeOnGoing) {
             cell.statusImageView.image = ImageNamed(@"Processing");
             cell.titleLabel.text = @"存款正在处理!";
