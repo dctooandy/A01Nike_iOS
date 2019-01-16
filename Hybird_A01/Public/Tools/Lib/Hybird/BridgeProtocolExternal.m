@@ -159,13 +159,7 @@
     [self.controller showLoading];
     [IVNetwork sendRequestWithSubURL:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         [self.controller hideLoading];
-        if (result.status) {
-            [MBProgressHUD showSuccess:@"您的存款提案已安排优先处理, 请耐心等待." toView:nil];
-        } else {
-            if (result.message.length) {
-                [MBProgressHUD showError:result.message toView:nil];
-            }
-        }
+        [MBProgressHUD showSuccess:@"您的存款提案已安排优先处理, 请耐心等待。" toView:nil];
     }];
 }
 
