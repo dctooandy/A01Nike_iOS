@@ -149,7 +149,7 @@ typedef enum : NSUInteger {
     NSLog(@"%zd", indexPath.item);
     if (indexPath.row != self.dataSource.count) {
         BTTMeMainModel *model = self.dataSource[indexPath.row];
-        if (([model.name isEqualToString:@"存款方式"] || [model.name isEqualToString:@"存款时间"] || [model.name isEqualToString:@"存款地点"]) && model.isError) {
+        if (([model.name isEqualToString:@"存款方式"] || [model.name isEqualToString:@"存款时间"] || [model.name isEqualToString:@"存款地点"]) && model.resultCode.integerValue) {
             if ([model.name isEqualToString:@"存款时间"]) {
                 BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
                 NSString *timeStr = cell.textField.text.length == 19 ? [cell.textField.text substringWithRange:NSMakeRange(0, cell.textField.text.length - 3)] : cell.textField.text;

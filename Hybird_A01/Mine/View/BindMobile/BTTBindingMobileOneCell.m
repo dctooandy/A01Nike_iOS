@@ -111,10 +111,10 @@
         } else {
             self.rightConstants.constant = 20;
             self.mineArrowsType = BTTMineArrowsTypeHidden;
-            if (model.isError) {
-                self.textField.userInteractionEnabled = NO;
-            } else {
+            if (model.resultCode.integerValue) {
                 self.textField.userInteractionEnabled = YES;
+            } else {
+                self.textField.userInteractionEnabled = NO;
             }
         }
     }
