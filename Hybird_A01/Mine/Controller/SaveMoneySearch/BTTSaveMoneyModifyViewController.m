@@ -115,15 +115,17 @@ typedef enum : NSUInteger {
         url = BTTBQAddOrderAPI;
         [parma setObject:self.model.product_id forKey:@"product"];
         [parma setObject:self.model.reference_id forKey:@"billno"];
-        [parma setObject:self.model.deposit_by forKey:@"depositor"];
-        if ([self.model.result_code containsString:@"900004"]) {
-            BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [parma setObject:self.model.login_name forKey:@"loginname"];
+        if ([self.model.result_code containsString:@"900005"]) {
+            BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
             [parma setObject:cell.textField.text forKey:@"amount"];
         }
         
-        if ([self.model.result_code containsString:@"900005"]) {
+        if ([self.model.result_code containsString:@"900004"]) {
             BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-            [parma setObject:cell.textField.text forKey:@"loginname"];
+            [parma setObject:cell.textField.text forKey:@"depositor"];
+        } else {
+            [parma setObject:self.model.deposit_by forKey:@"depositor"];
         }
     }
     [self showLoading];
