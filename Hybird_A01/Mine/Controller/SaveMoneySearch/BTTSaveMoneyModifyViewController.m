@@ -50,7 +50,7 @@ typedef enum : NSUInteger {
     noticeLabel.frame = CGRectMake(35, 11, 200, 20);
     noticeLabel.textColor = [UIColor colorWithHexString:@"d13847"];
     noticeLabel.font = [UIFont systemFontOfSize:14];
-    noticeLabel.text = @"信息填写错误, 请重新填写!";
+    noticeLabel.text = @"信息填写错误, 请重新填写！";
 }
 
 - (void)setupCollectionView {
