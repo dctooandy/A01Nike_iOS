@@ -92,9 +92,12 @@
         if (model.isError) {
             self.textField.textColor = [UIColor colorWithHexString:@"d13847"];
         } else {
-            self.textField.textColor = [UIColor whiteColor];
+            if (model.resultCode.length) {
+                self.textField.textColor = [UIColor colorWithHexString:@"818791"];
+            } else {
+                self.textField.textColor =  [UIColor whiteColor];
+            }
         }
-        
     }
     
     if ([model.name isEqualToString:@"存款姓名"] ||
