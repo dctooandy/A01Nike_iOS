@@ -133,15 +133,11 @@ typedef enum : NSUInteger {
         NSLog(@"%@",response);
         [self hideLoading];
         if (result.status) {
-//            [MBProgressHUD showSuccess:@"修改成功" toView:nil];
-//            [self.navigationController popToRootViewControllerAnimated:YES];
             BTTSaveMoneySuccessController *vc = [BTTSaveMoneySuccessController new];
             vc.saveMoneyStatus = BTTSaveMoneyStatusTypeCuiSuccess;
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            if (result.message.length) {
-                [MBProgressHUD showError:result.message toView:nil];
-            }
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
     }];
 }
