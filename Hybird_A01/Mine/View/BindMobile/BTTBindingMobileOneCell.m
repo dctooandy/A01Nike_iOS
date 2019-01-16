@@ -92,7 +92,7 @@
         if (model.isError) {
             self.textField.textColor = [UIColor colorWithHexString:@"d13847"];
         } else {
-            self.textField.textColor = [UIColor whiteColor];
+            self.textField.textColor = [UIColor colorWithHexString:@"818791"];
         }
         
     }
