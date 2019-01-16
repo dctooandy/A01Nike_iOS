@@ -11,7 +11,8 @@
 typedef enum : NSUInteger {
     BTTSaveMoneyStatusTypeSuccess, ///< 成功
     BTTSaveMoneyStatusTypeFail,    ///< 失败
-    BTTSaveMoneyStatusTypeOnGoing  ///< 处理中
+    BTTSaveMoneyStatusTypeOnGoing,  ///< 处理中
+    BTTSaveMoneyStatusTypeCuiSuccess ///< 催单成功
 } BTTSaveMoneyStatusType;
 
 NS_ASSUME_NONNULL_BEGIN

@@ -12,7 +12,7 @@
 #import "BTTPublicBtnCell.h"
 #import "BTTSaveMoneyErrorModel.h"
 #import "NSArray+JSON.h"
-
+#import "BTTSaveMoneySuccessController.h"
 
 typedef enum : NSUInteger {
     BTTSaveMoneyEditTypeError,
@@ -95,13 +95,13 @@ typedef enum : NSUInteger {
 - (void)submitRequest {
     NSString *url = @"";
     NSMutableDictionary *parma = [NSMutableDictionary dictionary];
-    if (self.model.trans_code) {
+    if (self.model.trans_code == 1) {
         url = BTTDepositResubmmitAPI;
         NSMutableArray *requestData = [NSMutableArray array];
         for (BTTMeMainModel *model in self.dataSource) {
             NSInteger index = [self.dataSource indexOfObject:model];
             BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
-            if (model.isError) {
+            if (model.resultCode.integerValue) {
                 NSMutableDictionary *dict = [NSMutableDictionary dictionary];
                 [dict setObject:model.resultCode forKey:@"resultCode"];
                 [dict setObject:cell.textField.text forKey:@"newValue"];
@@ -121,7 +121,7 @@ typedef enum : NSUInteger {
             [parma setObject:cell.textField.text forKey:@"amount"];
         }
         
-        if ([self.model.result_code containsString:@"900004"]) {
+        if ([self.model.result_code containsString:@"900005"]) {
             BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             [parma setObject:cell.textField.text forKey:@"loginname"];
         }
@@ -131,8 +131,15 @@ typedef enum : NSUInteger {
         NSLog(@"%@",response);
         [self hideLoading];
         if (result.status) {
-            [MBProgressHUD showSuccess:@"修改成功" toView:nil];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+//            [MBProgressHUD showSuccess:@"修改成功" toView:nil];
+//            [self.navigationController popToRootViewControllerAnimated:YES];
+            BTTSaveMoneySuccessController *vc = [BTTSaveMoneySuccessController new];
+            vc.saveMoneyStatus = BTTSaveMoneyStatusTypeCuiSuccess;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            if (result.message.length) {
+                [MBProgressHUD showError:result.message toView:nil];
+            }
         }
     }];
 }

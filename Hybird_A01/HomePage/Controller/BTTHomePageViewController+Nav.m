@@ -35,6 +35,19 @@ static const char *BTTHeaderViewKey = "headerView";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccess:) name:LogoutSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(versionUpdate:) name:IVCheckUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccessGotoHomePageNotification:) name:BTTRegisterSuccessGotoHomePageNotification object:nil];
+}
+
+- (void)registerSuccessGotoHomePageNotification:(NSNotification *)notif {
+    if ([notif.object isEqualToString:@"gotoOnlineChat"]) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSString *url = @"https://www.why918.com/chat/chatClient/chatbox.jsp?companyID=8990&configID=21&k=1&codeType=custom";
+            BTTLive800ViewController *live800 = [[BTTLive800ViewController alloc] init];
+            live800.webConfigModel.url = url;
+            live800.webConfigModel.newView = YES;
+            [self.navigationController pushViewController:live800 animated:YES];
+        });
+    }
 }
 
 - (void)versionUpdate:(NSNotification *)notifi {
