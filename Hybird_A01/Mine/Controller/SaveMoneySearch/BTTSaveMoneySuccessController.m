@@ -50,9 +50,13 @@
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
             [strongSelf.navigationController popToRootViewControllerAnimated:YES];
-            if (![button.titleLabel.text isEqualToString:@"确定"]) {
+            if ([button.titleLabel.text isEqualToString:@"联系客服"]) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoHomePageNotification object:@"gotoOnlineChat"];
+                });
+            } else if ([button.titleLabel.text isEqualToString:@"进入游戏大厅"]) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoHomePageNotification object:nil];
                 });
             }
         };
