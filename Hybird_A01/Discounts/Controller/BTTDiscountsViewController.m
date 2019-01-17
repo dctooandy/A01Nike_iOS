@@ -253,7 +253,7 @@
     
     BTTPromotionModel *model = self.sheetDatas[indexPath.row];
     BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-    vc.webConfigModel.url = model.href;
+    vc.webConfigModel.url = [model.href stringByReplacingOccurrencesOfString:@" " withString:@""];
     vc.webConfigModel.newView = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
