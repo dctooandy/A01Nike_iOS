@@ -370,7 +370,7 @@
                 return;
             }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            vc.webConfigModel.url = model.href;
+            vc.webConfigModel.url = [model.href stringByReplacingOccurrencesOfString:@" " withString:@""];
             vc.webConfigModel.newView = YES;
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 2) {
@@ -385,7 +385,7 @@
                 return;
             }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            vc.webConfigModel.url = model.link;
+            vc.webConfigModel.url = [model.link stringByReplacingOccurrencesOfString:@" " withString:@""];
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"outside";
             [self.navigationController pushViewController:vc animated:YES];
@@ -405,7 +405,7 @@
                 return;
             }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            vc.webConfigModel.url = model.href;
+            vc.webConfigModel.url = [model.href stringByReplacingOccurrencesOfString:@" " withString:@""];
             vc.webConfigModel.newView = YES;
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 1) {
@@ -426,7 +426,7 @@
                 return;
             }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            vc.webConfigModel.url = model.link;
+            vc.webConfigModel.url = [model.link stringByReplacingOccurrencesOfString:@" " withString:@""];
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"outside";
             [self.navigationController pushViewController:vc animated:YES];

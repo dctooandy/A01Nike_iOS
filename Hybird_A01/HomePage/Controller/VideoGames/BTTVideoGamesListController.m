@@ -677,7 +677,7 @@
 - (void)bannerToGame:(BTTBannerModel *)model {
     if ([model.action.detail hasSuffix:@".htm"] ) {
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.webConfigModel.url = model.action.detail;
+        vc.webConfigModel.url = [model.action.detail stringByReplacingOccurrencesOfString:@" " withString:@""];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
         [self.navigationController pushViewController:vc animated:YES];
