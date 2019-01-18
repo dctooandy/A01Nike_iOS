@@ -82,9 +82,9 @@ static const char *BTTNextGroupKey = "nextGroup";
 - (void)loadLuckyWheelCoinStatus {
     [IVNetwork sendRequestWithSubURL:BTTQueryIntegralAPI paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {
+        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
             if ([result.data[@"amount"] integerValue]) {
-                [self showPopView];
+                [self showPopViewWithNum:result.data[@"amount"]];
             }
         }
     }];

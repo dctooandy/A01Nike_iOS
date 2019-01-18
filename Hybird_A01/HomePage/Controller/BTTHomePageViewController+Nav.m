@@ -269,8 +269,9 @@ static const char *BTTHeaderViewKey = "headerView";
     }
 }
 
-- (void)showPopView {
+- (void)showPopViewWithNum:(NSString *)num {
     BTTLuckyWheelCoinView *customView = [BTTLuckyWheelCoinView viewFromXib];
+    customView.coinLabel.text = [NSString stringWithFormat:@"您还拥有%@博币!",num];
     customView.frame = CGRectMake(0, 0, 313, 255);
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
     popView.isClickBGDismiss = YES;
@@ -294,11 +295,10 @@ static const char *BTTHeaderViewKey = "headerView";
         vc.webConfigModel.theme = @"outside";
         [self.navigationController pushViewController:vc animated:YES];
     } else {
-        UIViewController *vc = nil;
         NSRange gameIdRange = [model.action.detail rangeOfString:@"gameId"];
         if (gameIdRange.location != NSNotFound) {
             NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
-            NSString *gameid = arr[2];
+            NSString *gameid = arr[1];
             UIViewController *vc = nil;
             if ([gameid isEqualToString:@"A01003"]) {
                 vc = [BTTAGQJViewController new];
@@ -312,7 +312,7 @@ static const char *BTTHeaderViewKey = "headerView";
         if (andRange.location != NSNotFound) {
             NSArray *andArr = [model.action.detail componentsSeparatedByString:@"&"];
             NSArray *providerArr = [andArr[0] componentsSeparatedByString:@":"];
-            NSString *provider = providerArr[2];
+            NSString *provider = providerArr[1];
             NSArray *gameKindArr = [andArr[1] componentsSeparatedByString:@":"];
             NSString *gameKind = gameKindArr[1];
             IVGameModel *model = [[IVGameModel alloc] init];
@@ -353,7 +353,7 @@ static const char *BTTHeaderViewKey = "headerView";
             NSRange providerRange = [model.action.detail rangeOfString:@"provider"];
             if (providerRange.location != NSNotFound) {
                 NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
-                NSString *provider = arr[2];
+                NSString *provider = arr[1];
                 UIViewController *vc = nil;
                 if ([provider isEqualToString:@"AGQJ"]) {
                     vc = [BTTAGQJViewController new];
