@@ -294,7 +294,6 @@ static const char *BTTHeaderViewKey = "headerView";
         vc.webConfigModel.theme = @"outside";
         [self.navigationController pushViewController:vc animated:YES];
     } else {
-        UIViewController *vc = nil;
         NSRange gameIdRange = [model.action.detail rangeOfString:@"gameId"];
         if (gameIdRange.location != NSNotFound) {
             NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
