@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLuckyWheelCoinView : BTTBaseAnimationPopView
 
+@property (weak, nonatomic) IBOutlet UILabel *coinLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

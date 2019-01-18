@@ -264,7 +264,7 @@
         NSRange gameIdRange = [model.href rangeOfString:@"gameId"];
         if (gameIdRange.location != NSNotFound) {
             NSArray *arr = [model.href componentsSeparatedByString:@":"];
-            NSString *gameid = arr[2];
+            NSString *gameid = arr[1];
             UIViewController *vc = nil;
             if ([gameid isEqualToString:@"A01003"]) {
                 vc = [BTTAGQJViewController new];
@@ -278,7 +278,7 @@
         if (andRange.location != NSNotFound) {
             NSArray *andArr = [model.href componentsSeparatedByString:@"&"];
             NSArray *providerArr = [andArr[0] componentsSeparatedByString:@":"];
-            NSString *provider = providerArr[2];
+            NSString *provider = providerArr[1];
             NSArray *gameKindArr = [andArr[1] componentsSeparatedByString:@":"];
             NSString *gameKind = gameKindArr[1];
             IVGameModel *model = [[IVGameModel alloc] init];
@@ -314,6 +314,25 @@
                 }
                 videoGamesVC.provider = subProvider;
                 [self.navigationController pushViewController:videoGamesVC animated:YES];
+            }
+        } else {
+            NSRange providerRange = [model.href rangeOfString:@"provider"];
+            if (providerRange.location != NSNotFound) {
+                NSArray *arr = [model.href componentsSeparatedByString:@":"];
+                NSString *provider = arr[1];
+                UIViewController *vc = nil;
+                if ([provider isEqualToString:@"AGQJ"]) {
+                    vc = [BTTAGQJViewController new];
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else if ([provider isEqualToString:@"AGIN"]) {
+                    vc = [BTTAGGJViewController new];
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else if ([provider isEqualToString:@"AS"]) {
+                    IVGameModel *model = [[IVGameModel alloc] init];
+                    model.cnName = @"AS电游";
+                    model.enName =  kASSlotEnName;
+                    model.provider = kASSlotProvider;
+                }
             }
         }
     }

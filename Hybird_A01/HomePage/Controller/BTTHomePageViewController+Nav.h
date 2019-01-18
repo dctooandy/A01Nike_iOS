@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)registerNotification;
 
-- (void)showPopView;
+- (void)showPopViewWithNum:(NSString *)num;
 
 - (void)bannerToGame:(BTTBannerModel *)model;
 
