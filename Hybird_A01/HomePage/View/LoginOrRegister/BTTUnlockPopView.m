@@ -68,7 +68,7 @@
     
     [IVNetwork sendRequestWithSubURL:BTTUnlockAccount paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        if (result.code_http == 200) {
+        if (result.status) {
             
             if (result.data) {
                 [MBProgressHUD showError:@"已解锁，请重新登录！" toView:nil];

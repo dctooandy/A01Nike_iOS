@@ -18,7 +18,7 @@
     [IVNetwork sendRequestWithSubURL:BTTVerifyCaptcha paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         [self hideLoading];
-        if (result.code_http == 200 && result.data && ![result.data isKindOfClass:[NSNull class]]) {
+        if (result.status && result.data && ![result.data isKindOfClass:[NSNull class]]) {
             if (result.data[@"src"] && ![result.data[@"src"] isKindOfClass:[NSNull class]]) {
                 NSString *base64Str = result.data[@"src"];
                 // 将base64字符串转为NSData

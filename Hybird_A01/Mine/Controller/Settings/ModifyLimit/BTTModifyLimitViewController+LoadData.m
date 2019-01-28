@@ -17,7 +17,7 @@
     [IVNetwork sendRequestWithSubURL:BTTBetLimits paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         [self hideLoading];
-        if (result.code_http == 200) {
+        if (result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 for (NSDictionary *dict in result.data[@"agin"]) {
                     BTTBetLimitModel *model = [BTTBetLimitModel yy_modelWithDictionary:dict];
@@ -43,7 +43,7 @@
     [IVNetwork sendRequestWithSubURL:BTTApplyBetLimit paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
         NSLog(@"%@",result);
-        if (result.code_http == 200) {
+        if (result.status) {
             if (!result.code_system) {
                 [MBProgressHUD showSuccess:@"修改限红成功" toView:nil];
             }

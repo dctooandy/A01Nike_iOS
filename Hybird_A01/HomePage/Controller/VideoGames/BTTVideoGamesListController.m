@@ -117,7 +117,7 @@
         [strongSelf endRefreshing];
         [strongSelf hideLoading];
         strongSelf.isShowSearchBar = NO;
-        if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {
+        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
             if (strongSelf.page == 1 || self.keyword.length) {
                 [strongSelf.games removeAllObjects];
                 self.keyword = @"";

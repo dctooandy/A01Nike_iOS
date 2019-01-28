@@ -15,7 +15,7 @@
     NSDictionary *params = @{@"pwd":pwd, BTTLoginName: account, @"access_id":accessID};
     [IVNetwork sendRequestWithSubURL:BTTStepThreeUpdatePassword paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",result.message);
-        if (result.code_http == 200) {
+        if (result.status) {
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
         if (result.message.length) {
