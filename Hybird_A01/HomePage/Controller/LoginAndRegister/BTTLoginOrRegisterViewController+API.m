@@ -73,7 +73,7 @@
     [IVNetwork sendRequestWithSubURL:BTTUserLoginAPI paramters:parameters completionBlock:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
         NSLog(@"%@",response);
-        if (result.code_http == 200) {
+        if (result.status) {
             [[NSUserDefaults standardUserDefaults] setObject:model.login_name forKey:BTTCacheAccountName];
             [[NSUserDefaults standardUserDefaults] synchronize];
             self.wrongPwdNum = 0;
@@ -253,7 +253,7 @@
         NSLog(@"%@",response);
         [self hideLoading];
         self.uuid = @"";
-        if (result.code_http == 200) {
+        if (result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
                 vc.registerOrLoginType = self.registerOrLoginType;
@@ -325,7 +325,7 @@
     [IVNetwork sendRequestWithSubURL:BTTVerifyCaptcha paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         [self hideLoading];
-        if (result.code_http == 200) {
+        if (result.status) {
             if (result.data && ![result.data isKindOfClass:[NSNull class]]) {
                 if (result.data[@"src"] && ![result.data[@"src"] isKindOfClass:[NSNull class]]) {
                     NSString *base64Str = result.data[@"src"];
@@ -358,7 +358,7 @@
     [params setObject:[PublicMethod timeIntervalSince1970] forKey:BTTTimestamp];
     [IVNetwork sendRequestWithSubURL:BTTNoLoginMobileCodeAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        if (result.code_http == 200) {
+        if (result.status) {
             [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
         } else {
             if (result.message.length) {

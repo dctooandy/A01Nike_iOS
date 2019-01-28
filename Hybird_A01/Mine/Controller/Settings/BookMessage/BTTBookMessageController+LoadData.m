@@ -27,7 +27,7 @@
 - (void)loadSmsListStatus:(dispatch_group_t)group {
     [IVNetwork sendRequestWithSubURL:BTTSmsList paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        if (result.code_http == 200) {
+        if (result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 BTTSMSEmailModifyModel *model = [BTTSMSEmailModifyModel yy_modelWithDictionary:result.data];
                 self.smsStatus = model;
@@ -45,7 +45,7 @@
     [IVNetwork sendRequestWithSubURL:BTTEmailList paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
         NSLog(@"%@",response);
-        if (result.code_http == 200) {
+        if (result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 BTTSMSEmailModifyModel *model = [BTTSMSEmailModifyModel yy_modelWithDictionary:result.data];
                 self.emailStatus = model;
@@ -89,7 +89,7 @@
     [parmas setObject:@(self.smsStatus.forex) forKey:@"forex"];
     [IVNetwork sendRequestWithSubURL:BTTSmsOrder paramters:parmas completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        if (result.code_http == 200 && !result.code_system) {
+        if (result.status && !result.code_system) {
             [MBProgressHUD showSuccess:@"订阅成功" toView:nil];
         } else {
             if (result.message.length) {
@@ -121,7 +121,7 @@
     [IVNetwork sendRequestWithSubURL:BTTEmailOrder paramters:parmas completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         [self hideLoading];
-        if (result.code_http == 200 && !result.code_system) {
+        if (result.status && !result.code_system) {
             [MBProgressHUD showSuccess:@"订阅成功" toView:nil];
         } else {
             if (result.message.length) {

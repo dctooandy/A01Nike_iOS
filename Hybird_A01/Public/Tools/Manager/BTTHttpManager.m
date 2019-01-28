@@ -179,7 +179,7 @@
 + (void)requestUnReadMessageNum:(IVRequestCallBack)completeBlock {
     [IVNetwork sendRequestWithSubURL:BTTIsUnviewedAPI paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {
+        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
             [[NSUserDefaults standardUserDefaults] setObject:result.data[@"val"] forKey:BTTUnreadMessageNumKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
             if ([result.data[@"val"] integerValue]) {

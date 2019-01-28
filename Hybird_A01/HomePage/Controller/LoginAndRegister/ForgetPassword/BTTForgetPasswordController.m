@@ -74,7 +74,7 @@
             strongSelf(strongSelf);
             [strongSelf verifyPhotoCode:self.code completeBlock:^(IVRequestResultModel * _Nonnull result, id  _Nonnull response) {
                 strongSelf(strongSelf);
-                if (result.code_http == 200) {
+                if (result.status) {
                     BTTForgetPasswordStepTwoController *vc = [[BTTForgetPasswordStepTwoController alloc] init];
                     vc.account = strongSelf.account;
                     [strongSelf.navigationController pushViewController:vc animated:YES];
