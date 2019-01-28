@@ -287,10 +287,15 @@
     if (model.login_name.length) {
         [params setObject:model.login_name forKey:BTTLoginName];
     }
+    [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTUserFastRegister paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        if (result.code_http == 200) {
+        [self hideLoading];
+        if (result.status) {
             if (result.data && ![result.data isKindOfClass:[NSNull class]] && [result.data isKindOfClass:[NSDictionary class]]) {
                 if (![result.data[@"login_name"] isKindOfClass:[NSNull class]] && result.data[@"login_name"]) {
+                    if (result.message.length) {
+                        [MBProgressHUD showSuccess:result.message toView:nil];
+                    }
                     BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
                     vc.registerOrLoginType = self.registerOrLoginType;
                     vc.account = result.data[@"login_name"];
@@ -304,10 +309,12 @@
                     [self loginWithLoginAPIModel:loginModel isBack:NO];
                 }
             }
+        } else {
+            if (result.message.length) {
+                [MBProgressHUD showError:result.message toView:nil];
+            }
         }
-        if (result.message.length) {
-            [MBProgressHUD showError:result.message toView:nil];
-        }
+        
     }];
 }
 
