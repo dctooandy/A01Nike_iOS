@@ -379,13 +379,22 @@
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_enter(group);
     dispatch_async(queue, ^{
+        if (![IVNetwork userInfo]) {
+            return;
+        }
         [self loadLocalAmount:group];
     });
     dispatch_group_enter(group);
     dispatch_async(queue, ^{
+        if (![IVNetwork userInfo]) {
+            return;
+        }
         [self loadGameshallList:group];
     });
     dispatch_group_notify(group, queue, ^{
+        if (![IVNetwork userInfo]) {
+            return;
+        }
         [self loadEachGameHall];
     });
 }
@@ -420,6 +429,9 @@
 
 - (void)loadGameAmountWithModel:(BTTGamesHallModel *)model index:(NSInteger)index group:(dispatch_group_t)group{
     NSDictionary *params = @{@"game_name":model.gameName};
+    if (![IVNetwork userInfo]) {
+        return;
+    }
     [IVNetwork sendRequestWithSubURL:BTTCreditsGame paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.code_http == 200 && result.data && [result.data isKindOfClass:[NSDictionary class]]) {

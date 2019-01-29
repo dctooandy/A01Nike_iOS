@@ -21,7 +21,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.webView reload];
+    [self loadWebView];
 }
 
 @end

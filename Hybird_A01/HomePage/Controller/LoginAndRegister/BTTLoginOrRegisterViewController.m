@@ -44,6 +44,10 @@
     [self setupElements];
 }
 
+- (void)goToBack {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 - (void)keyboardFrameChange:(NSNotification *)notify {
     NSLog(@"%@",notify.userInfo);
     //取出键盘最终的frame
