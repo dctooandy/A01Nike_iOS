@@ -12,6 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTSaveMoneySuccessHeaderCell : BTTBaseCollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *statusImageView;
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

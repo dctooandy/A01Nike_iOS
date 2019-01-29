@@ -82,6 +82,8 @@
         [self.btn setTitle:@"修改" forState:UIControlStateNormal];
     } else if (btnType == BTTPublicBtnTypeEnterGame) {
         [self.btn setTitle:@"进入游戏大厅" forState:UIControlStateNormal];
+    } else if (btnType == BTTPublicBtnTypeCustomerService) {
+        [self.btn setTitle:@"联系客服" forState:UIControlStateNormal];
     }
 }
 

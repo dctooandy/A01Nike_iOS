@@ -7,10 +7,14 @@
 //
 
 #import "BTTCollectionViewController.h"
+@class BTTSaveMoneyErrorModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTSaveMoneyModifyViewController : BTTCollectionViewController
+
+@property (nonatomic, strong) BTTSaveMoneyErrorModel *model;
+
 
 @end
 

@@ -21,6 +21,11 @@
 #import "BTTAGQJViewController.h"
 #import "BTTAGGJViewController.h"
 #import "BTTVideoGamesListController.h"
+#import "BTTSaveMoneySuccessController.h"
+#import "BTTSaveMoneyErrorModel.h"
+#import "BTTSaveMoneyModifyViewController.h"
+#import "NSString+MD5.h"
+
 @interface BridgeProtocolExternal ()<JXRegisterManagerDelegate>
 
 @end
@@ -73,6 +78,63 @@
 
 - (id)forward_inside:(BridgeModel *)bridgeModel
 {
+    if ([bridgeModel.data[@"type"] integerValue]) {
+        switch ([bridgeModel.data[@"type"] integerValue]) {
+           
+            case 1: ///< 成功
+            {
+                NSLog(@"成功");
+                BTTSaveMoneySuccessController *vc = [BTTSaveMoneySuccessController new];
+                vc.time = bridgeModel.data[@"time"];
+                vc.saveMoneyStatus = BTTSaveMoneyStatusTypeSuccess;
+                [self.controller.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            case 2: ///< 失败
+                
+            {
+                NSLog(@"失败");
+                BTTSaveMoneySuccessController *vc = [BTTSaveMoneySuccessController new];
+                vc.saveMoneyStatus = BTTSaveMoneyStatusTypeFail;
+                [self.controller.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+                
+            case 3: /// 处理中
+                
+            {
+                NSLog(@"处理中");
+                BTTSaveMoneySuccessController *vc = [BTTSaveMoneySuccessController new];
+                vc.saveMoneyStatus = BTTSaveMoneyStatusTypeOnGoing;
+                [self.controller.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+                
+            case 4:
+                
+            {
+                BTTSaveMoneyErrorModel *model = [BTTSaveMoneyErrorModel yy_modelWithDictionary:bridgeModel.data[@"item"]];
+                NSLog(@"失败");
+                BTTSaveMoneyModifyViewController *vc = [BTTSaveMoneyModifyViewController new];
+                vc.model = model;
+                [self.controller.navigationController pushViewController:vc animated:YES];
+            }
+                break;
+            
+            case 5:
+                
+            {
+                BTTSaveMoneyErrorModel *model = [BTTSaveMoneyErrorModel yy_modelWithDictionary:bridgeModel.data[@"item"]];
+                [self submitData:model];
+            }
+                break;
+                
+                
+            default:
+                break;
+        }
+        return @(YES);
+    }
     WebConfigModel *webConfigModel = [[WebConfigModel alloc] initWithDictionary:bridgeModel.data error:nil];
     dispatch_async(dispatch_get_main_queue(), ^{
         BOOL isForwardNativePage = [self shouldForwardNatviePage:webConfigModel.url];
@@ -82,6 +144,30 @@
     });
      return @(YES);
 }
+
+- (void)submitData:(BTTSaveMoneyErrorModel *)model {
+    NSString *url = nil;
+    NSDictionary *params = nil;
+    if (model.trans_code == 1) {
+        url = BTTCreditAppealAPI;
+        params = @{@"customerId":model.customer_id,@"type":@"1",@"depositMethod":@"1",@"endPoint":@"5",@"referenceId":model.reference_id,@"productId":model.product_id,@"loginName":model.login_name,@"amount":model.amount,@"status":@(model.status),@"createBy":model.created_by,@"requestType":@"1"};
+    } else {
+        url = BTTAreditAppealAPI;
+        NSString *totalStr = [NSString stringWithFormat:@"%@%@%@%@",model.product_id,model.login_name,model.reference_id,@""];
+        NSString *depositMethod = @"6";
+        
+        params = @{@"product":model.product_id,@"createdBy":model.created_by,@"billno":model.reference_id,@"loginname":model.login_name,@"endPoint":@"5",@"keycode":[NSString md5:totalStr],@"type":@"1",@"requestType":@"0",@"depositMethod":depositMethod};
+    }
+    [self.controller showLoading];
+    [IVNetwork sendRequestWithSubURL:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+        [self.controller hideLoading];
+        if (result.status) {
+            [MBProgressHUD showSuccess:@"您的存款天已安排优先处理, 请耐心等待" toView:nil];
+        }
+    }];
+}
+
+
 - (BOOL)shouldForwardNatviePage:(NSString *)url
 {
     BOOL should = YES;

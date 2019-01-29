@@ -524,7 +524,7 @@
                 } else if (i == 4 + self.personalInfos.count) {
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
                 } else {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 150)]];
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 125)]];
                 }
             } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig) {
                 [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 110)]];

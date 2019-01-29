@@ -10,6 +10,9 @@
 #import "BTTMeMainModel.h"
 #import "BTTBindingMobileOneCell.h"
 #import "BTTPublicBtnCell.h"
+#import "BTTSaveMoneyErrorModel.h"
+#import "NSArray+JSON.h"
+
 
 @interface BTTSaveMoneyModifyViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -24,7 +27,7 @@
     self.title = @"存款详情";
     [self setupCollectionView];
     [self setupTopView];
-    [self loadMainData];
+//    [self loadMainDataWithType:0];
 }
 
 - (void)setupTopView {
@@ -59,7 +62,7 @@
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
-            
+            [strongSelf submitRequest];
         };
         return cell;
     } else {
@@ -70,10 +73,81 @@
     }
 }
 
+- (void)submitRequest {
+    NSString *url = @"";
+    NSMutableDictionary *parma = [NSMutableDictionary dictionary];
+    if (self.model.trans_code) {
+        url = BTTDepositResubmmitAPI;
+        NSMutableArray *requestData = [NSMutableArray array];
+        for (BTTMeMainModel *model in self.dataSource) {
+            NSInteger index = [self.dataSource indexOfObject:model];
+            BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+            if (model.isError) {
+                NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+                [dict setObject:model.resultCode forKey:@"resultCode"];
+                [dict setObject:cell.textField.text forKey:@"newValue"];
+                [requestData addObject:dict];
+            }
+            
+        }
+        NSString *dataStr = [requestData toJSONString];
+        parma = @{@"login_name":self.model.login_name,@"requestId":self.model.reference_id,@"requestData":dataStr}.mutableCopy;
+    } else {
+        url = BTTBQAddOrderAPI;
+        [parma setObject:self.model.product_id forKey:@"product"];
+        [parma setObject:self.model.reference_id forKey:@"billno"];
+        [parma setObject:self.model.deposit_by forKey:@"depositor"];
+        if ([self.model.result_code containsString:@"900004"]) {
+            BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            [parma setObject:cell.textField.text forKey:@"amount"];
+        }
+        
+        if ([self.model.result_code containsString:@"900004"]) {
+            BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            [parma setObject:cell.textField.text forKey:@"loginname"];
+        }
+    }
+    [self showLoading];
+    [IVNetwork sendRequestWithSubURL:url paramters:parma completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+        [self hideLoading];
+        if (result.status) {
+            [MBProgressHUD showSuccess:@"修改成功" toView:nil];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }];
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
     NSLog(@"%zd", indexPath.item);
+    if (indexPath.row != self.dataSource.count) {
+        BTTMeMainModel *model = self.dataSource[indexPath.row];
+        if (([model.name isEqualToString:@"存款方式"] || [model.name isEqualToString:@"存款时间"] || [model.name isEqualToString:@"存款地点"]) && model.isError) {
+            if ([model.name isEqualToString:@"存款时间"]) {
+                BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
+                NSString *timeStr = cell.textField.text.length == 19 ? [cell.textField.text substringWithRange:NSMakeRange(0, cell.textField.text.length - 3)] : cell.textField.text;
+                [BRDatePickerView showDatePickerWithTitle:@"请选择日期" dateType:BRDatePickerModeYMDHM defaultSelValue:timeStr minDate:nil maxDate:nil isAutoSelect:NO themeColor:nil resultBlock:^(NSString *selectValue) {
+                    cell.textField.text = selectValue;
+                } cancelBlock:^{
+                    NSLog(@"点击了背景或取消按钮");
+                }];
+            } else if ([model.name isEqualToString:@"存款地点"]) {
+                [BRAddressPickerView showAddressPickerWithShowType:BRAddressPickerModeCity dataSource:nil defaultSelected:nil isAutoSelect:NO themeColor:nil resultBlock:^(BRProvinceModel *province, BRCityModel *city, BRAreaModel *area) {
+                    BTTBindingMobileOneCell *fourCell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+                    fourCell.textField.text = [NSString stringWithFormat:@"%@%@",province.name,city.name];
+                } cancelBlock:^{
+                    
+                }];
+            } else {
+                NSArray *arr = @[@"柜台转账",@"ATM现金转账",@"ATM跨行转账",@"网银转账",@"电话转账",@"跨行网银转账",@"手机转账",@"支付宝转账",@"微信转账",@"跨行手机转账",@"其他方式"];
+                BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
+                [BRStringPickerView showStringPickerWithTitle:@"请选择汇款方式" dataSource:arr defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
+                    cell.textField.text = selectValue;
+                }];
+            }
+        }
+    }
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource
@@ -110,6 +184,9 @@
 
 
 - (void)setupElements {
+    if (self.elementsHight.count) {
+        [self.elementsHight removeAllObjects];
+    }
     for (int i = 0; i < self.dataSource.count + 1; i++) {
         if (i == self.dataSource.count) {
             [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 110)]];
@@ -122,17 +199,90 @@
     });
 }
 
-- (void)loadMainData {
+
+
+- (void)loadMainDataWithType:(NSInteger)type {
     if (self.dataSource.count) {
         [self.dataSource removeAllObjects];
     }
-    NSArray *nameArr = @[@"存款姓名",@"存款金额",@"存款方式",@"存款时间",@"存款地点",@"存款银行",@"存款卡号"];
+    NSArray *nameArr = @[];
+    NSArray *detailArr = @[];
+    NSArray *icons = @[];
+    if (type == 1) {
+        nameArr = @[@"存款姓名",@"存款金额",@"存款方式",@"存款时间",@"存款地点",@"存款银行",@"存款卡号"];
+        detailArr = @[self.model.deposit_by,self.model.amount,self.model.deposit_type,self.model.deposit_date,self.model.deposit_location,self.model.bank_name,self.model.bank_account_no];
+    } else if (type == 0) {
+        nameArr = @[@"存款姓名",@"存款金额",@"存款方式",@"存款时间",@"存款地点",@"存款银行",@"存款卡号"];
+        icons = @[@"请输入存款姓名",@"请输入存款金额",@"请选择存款方式",@"请选择存款时间",@"请选择存款地点",@"请输入存款银行",@"请输入存款卡号"];
+    } else {
+        nameArr = @[@"存款姓名",@"存款金额"];
+        detailArr= @[self.model.checker,self.model.amount];
+    }
     for (NSString *name in nameArr) {
+        NSInteger index = [nameArr indexOfObject:name];
         BTTMeMainModel *model = [BTTMeMainModel new];
         model.name = name;
+        if (detailArr.count) {
+            model.desc = detailArr[index];
+        }
+        if (icons.count) {
+            model.iconName = icons[index];
+        }
+        if (self.model.trans_code == 1) {
+            if ([self.model.result_code containsString:@"900004"]) {
+                if ([name isEqualToString:@"存款姓名"]) {
+                    model.isError = YES;
+                    model.resultCode = @"900004";
+                }
+            }
+            if ([self.model.result_code containsString:@"900005"]) {
+                if ([name isEqualToString:@"存款金额"]) {
+                    model.isError = YES;
+                    model.resultCode = @"900005";
+                }
+            }
+            
+            if ([self.model.result_code containsString:@"900006"]) {
+                if ([name isEqualToString:@"存款方式"]) {
+                    model.isError = YES;
+                    model.resultCode = @"900006";
+                }
+            }
+            
+            if ([self.model.result_code containsString:@"900008"]) {
+                if ([name isEqualToString:@"存款时间"]) {
+                    model.isError = YES;
+                    model.resultCode = @"900008";
+                }
+            }
+            
+            if ([self.model.result_code containsString:@"900007"]) {
+                if ([name isEqualToString:@"存款地点"]) {
+                    model.isError = YES;
+                    model.resultCode = @"900007";
+                }
+            }
+        } else {
+            if ([self.model.result_code containsString:@"900004"]) {
+                if ([name isEqualToString:@"存款姓名"]) {
+                    model.isError = YES;
+                    model.resultCode = @"900004";
+                }
+            }
+            
+            if ([self.model.result_code containsString:@"900005"]) {
+                if ([name isEqualToString:@"存款金额"]) {
+                    model.isError = YES;
+                    model.resultCode = @"900005";
+                }
+            }
+        }
         [self.dataSource addObject:model];
     }
-    [self setupElements];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self setupElements];
+    });
+    
 }
 
 - (NSMutableArray *)dataSource {
@@ -140,6 +290,11 @@
         _dataSource = [NSMutableArray array];
     }
     return _dataSource;
+}
+
+- (void)setModel:(BTTSaveMoneyErrorModel *)model {
+    _model = model;
+    [self loadMainDataWithType:model.trans_code];
 }
 
 @end

@@ -305,6 +305,19 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 // 请求未读消息的数量
 #define BTTIsUnviewedAPI             @"/public/letter/isUnviewed"
 
+// 人工存款信息错误重新提交
+#define BTTDepositResubmmitAPI       @"/A01/payment/reSubmitDepositRequestEndpoint"
+
+// 迅捷存款信息错误重新提交
+#define BTTBQAddOrderAPI             @"/A01/payment/BQAddOrder"
+
+// 手工存款催单
+#define BTTCreditAppealAPI           @"/A01/payment/createCreditAppeal"
+
+// 迅捷, 在线催款催单接口
+#define BTTAreditAppealAPI           @"/A01/payment/createAreditAppeal"
+
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)  ([UIFont systemFontOfSize:X])
