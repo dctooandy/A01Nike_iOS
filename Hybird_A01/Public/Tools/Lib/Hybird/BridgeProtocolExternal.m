@@ -218,12 +218,17 @@
         return @(YES);
     } else {
         if (webConfigModel.newView) {
-            BTTBaseWebViewController *webVC = [[BTTBaseWebViewController alloc] init];
-            webVC.webConfigModel = webConfigModel;
-            [self.controller.navigationController pushViewController:webVC animated:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                BTTBaseWebViewController *webVC = [[BTTBaseWebViewController alloc] init];
+                webVC.webConfigModel = webConfigModel;
+                [self.controller.navigationController pushViewController:webVC animated:YES];
+            });
+            
         } else {
-            self.controller.webConfigModel = webConfigModel;
-            [self.controller loadWebView];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.controller.webConfigModel = webConfigModel;
+                [self.controller loadWebView];
+            });
         }
         return @(NO);
     }
