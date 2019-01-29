@@ -117,7 +117,7 @@
         [strongSelf endRefreshing];
         [strongSelf hideLoading];
         strongSelf.isShowSearchBar = NO;
-        if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {
+        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
             if (strongSelf.page == 1 || self.keyword.length) {
                 [strongSelf.games removeAllObjects];
                 self.keyword = @"";
@@ -677,7 +677,7 @@
 - (void)bannerToGame:(BTTBannerModel *)model {
     if ([model.action.detail hasSuffix:@".htm"] ) {
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.webConfigModel.url = model.action.detail;
+        vc.webConfigModel.url = [model.action.detail stringByReplacingOccurrencesOfString:@" " withString:@""];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
         [self.navigationController pushViewController:vc animated:YES];
@@ -686,7 +686,7 @@
         NSRange gameIdRange = [model.action.detail rangeOfString:@"gameId"];
         if (gameIdRange.location != NSNotFound) {
             NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
-            NSString *gameid = arr[2];
+            NSString *gameid = arr[1];
             UIViewController *vc = nil;
             if ([gameid isEqualToString:@"A01003"]) {
                 vc = [BTTAGQJViewController new];
@@ -700,7 +700,7 @@
         if (andRange.location != NSNotFound) {
             NSArray *andArr = [model.action.detail componentsSeparatedByString:@"&"];
             NSArray *providerArr = [andArr[0] componentsSeparatedByString:@":"];
-            NSString *provider = providerArr[2];
+            NSString *provider = providerArr[1];
             NSArray *gameKindArr = [andArr[1] componentsSeparatedByString:@":"];
             NSString *gameKind = gameKindArr[1];
             IVGameModel *model = [[IVGameModel alloc] init];
@@ -741,7 +741,7 @@
             NSRange providerRange = [model.action.detail rangeOfString:@"provider"];
             if (providerRange.location != NSNotFound) {
                 NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
-                NSString *provider = arr[2];
+                NSString *provider = arr[1];
                 UIViewController *vc = nil;
                 if ([provider isEqualToString:@"AGQJ"]) {
                     vc = [BTTAGQJViewController new];

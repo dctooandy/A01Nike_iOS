@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 
-@property (weak, nonatomic) IBOutlet UILabel *coinLabel;
+
 
 @property (weak, nonatomic) IBOutlet UIButton *changeBtn;
 

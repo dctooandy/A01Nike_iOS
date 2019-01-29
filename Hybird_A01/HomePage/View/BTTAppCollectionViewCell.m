@@ -8,7 +8,6 @@
 
 #import "BTTAppCollectionViewCell.h"
 #import "BTTDownloadModel.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface BTTAppCollectionViewCell ()
 

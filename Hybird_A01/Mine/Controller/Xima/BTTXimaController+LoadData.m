@@ -43,7 +43,7 @@
         [self hideLoading];
         self.otherListType = BTTXimaOtherListTypeNoData;
         self.currentListType = BTTXimaCurrentListTypeNoData;
-        if (result.code_http == 200) {
+        if (result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 if (result.data[@"other"] && [result.data[@"other"] isKindOfClass:[NSDictionary class]]) {
                     if (result.data[@"other"][@"list"] && [result.data[@"other"][@"list"] isKindOfClass:[NSArray class]]) {
@@ -70,7 +70,7 @@
 
 - (void)loadGameshallList:(dispatch_group_t)group {
     [BTTHttpManager fetchGamePlatformsWithCompletion:^(IVRequestResultModel *result, id response) {
-        if (result.code_http == 200) {
+        if (result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]] && ![result.data isKindOfClass:[NSNull class]]) {
                 if (result.data[@"xm"] && [result.data[@"xm"] isKindOfClass:[NSArray class]] && ![result.data[@"xm"] isKindOfClass:[NSNull class]]) {
                     for (NSDictionary *dict in result.data[@"xm"]) {
@@ -104,7 +104,7 @@
     [IVNetwork sendRequestWithSubURL:BTTXmHistoryList paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         self.historyListType = BTTXimaHistoryListTypeNoData;
-        if (result.code_http == 200) {
+        if (result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 BTTXimaTotalModel *model = [BTTXimaTotalModel yy_modelWithDictionary:result.data];
                 self.histroyModel = model;
@@ -142,7 +142,7 @@
         if (self.xmResults.count) {
             [self.xmResults removeAllObjects];
         }
-        if (result.code_http == 200) {
+        if (result.status) {
             if (result.data && [result.data isKindOfClass:[NSArray class]]) {
                 for (NSDictionary *dict in result.data) {
                     BTTXimaSuccessItemModel *model = [BTTXimaSuccessItemModel yy_modelWithDictionary:dict];

@@ -84,6 +84,8 @@
         [self.btn setTitle:@"进入游戏大厅" forState:UIControlStateNormal];
     } else if (btnType == BTTPublicBtnTypeCustomerService) {
         [self.btn setTitle:@"联系客服" forState:UIControlStateNormal];
+    } else if (btnType == BTTPublicBtnTypeSubmit) {
+        [self.btn setTitle:@"提交" forState:UIControlStateNormal];
     }
 }
 

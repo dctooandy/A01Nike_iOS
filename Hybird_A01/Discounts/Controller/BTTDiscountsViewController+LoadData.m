@@ -58,7 +58,7 @@
     }
     [IVNetwork sendUseCacheRequestWithSubURL:BTTPromotionList paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
-        if (result.code_http == 200) {
+        if (result.status) {
             if (![result.data isKindOfClass:[NSNull class]]) {
                 [self.sheetDatas removeAllObjects];
                 NSLog(@"%@",response);

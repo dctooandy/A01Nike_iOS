@@ -42,7 +42,7 @@
 
 #pragma mark- JXRegisterManagerDelegate
 - (void)didRegisterResponse:(NSDictionary *)response {
-
+    
 }
 
 - (id)driver_live800:(BridgeModel *)bridgeModel {
@@ -50,16 +50,16 @@
     return nil;
 }
 - (id)driver_live800ol:(BridgeModel *)bridgeModel {
-//    NSString *url = @"https://www.why918.com/chat/chatClient/chatbox.jsp?companyID=8990&configID=21&k=1&codeType=custom";
-//    HAWebViewController *temp = [[HAWebViewController alloc] init];
-//    temp.webConfigModel.newView = YES;
-//    temp.webConfigModel.url = url;
-//    weakSelf(weakSelf)
-//    dispatch_main_async_safe((^{
-//        strongSelf(strongSelf)
-//        temp.navigationItem.title = @"在线客服";
-//        [strongSelf.controller.navigationController pushViewController:temp animated:YES];
-//    }));
+    //    NSString *url = @"https://www.why918.com/chat/chatClient/chatbox.jsp?companyID=8990&configID=21&k=1&codeType=custom";
+    //    HAWebViewController *temp = [[HAWebViewController alloc] init];
+    //    temp.webConfigModel.newView = YES;
+    //    temp.webConfigModel.url = url;
+    //    weakSelf(weakSelf)
+    //    dispatch_main_async_safe((^{
+    //        strongSelf(strongSelf)
+    //        temp.navigationItem.title = @"在线客服";
+    //        [strongSelf.controller.navigationController pushViewController:temp animated:YES];
+    //    }));
     return @(YES);
 }
 - (id)driver_game:(BridgeModel *)bridgeModel {
@@ -72,7 +72,7 @@
     } else if ([webConfigModel.gameCode isEqualToString:@"A01026"]) {
         vc = [BTTAGGJViewController new];
         [self.controller.navigationController pushViewController:vc animated:YES];
-    } 
+    }
     return @(YES);
 }
 
@@ -80,7 +80,7 @@
 {
     if ([bridgeModel.data[@"type"] integerValue]) {
         switch ([bridgeModel.data[@"type"] integerValue]) {
-           
+                
             case 1: ///< 成功
             {
                 NSLog(@"成功");
@@ -120,7 +120,7 @@
                 [self.controller.navigationController pushViewController:vc animated:YES];
             }
                 break;
-            
+                
             case 5:
                 
             {
@@ -142,7 +142,7 @@
             [super forward_inside:bridgeModel];
         }
     });
-     return @(YES);
+    return @(YES);
 }
 
 - (void)submitData:(BTTSaveMoneyErrorModel *)model {
@@ -153,17 +153,13 @@
         params = @{@"customerId":model.customer_id,@"type":@"1",@"depositMethod":@"1",@"endPoint":@"5",@"referenceId":model.reference_id,@"productId":model.product_id,@"loginName":model.login_name,@"amount":model.amount,@"status":@(model.status),@"createBy":model.created_by,@"requestType":@"1"};
     } else {
         url = BTTAreditAppealAPI;
-        NSString *totalStr = [NSString stringWithFormat:@"%@%@%@%@",model.product_id,model.login_name,model.reference_id,@""];
         NSString *depositMethod = @"6";
-        
-        params = @{@"product":model.product_id,@"createdBy":model.created_by,@"billno":model.reference_id,@"loginname":model.login_name,@"endPoint":@"5",@"keycode":[NSString md5:totalStr],@"type":@"1",@"requestType":@"0",@"depositMethod":depositMethod};
+        params = @{@"billno":model.reference_id,@"loginname":model.login_name,@"endPoint":@"5",@"type":@"1",@"requestType":@"0",@"depositMethod":depositMethod};
     }
     [self.controller showLoading];
     [IVNetwork sendRequestWithSubURL:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         [self.controller hideLoading];
-        if (result.status) {
-            [MBProgressHUD showSuccess:@"您的存款天已安排优先处理, 请耐心等待" toView:nil];
-        }
+        [MBProgressHUD showSuccess:@"您的存款提案已安排优先处理, 请耐心等待。" toView:nil];
     }];
 }
 
@@ -304,7 +300,7 @@
         isSlot = YES;
     }
     if (model.provider) {
-         [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self.controller];
+        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self.controller];
     }
     if (otherProvider) {//电游大厅
         BTTVideoGamesListController *vc = [BTTVideoGamesListController new];

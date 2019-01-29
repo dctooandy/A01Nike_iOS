@@ -7,7 +7,6 @@
 //
 
 #import "BTTHomePageADCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 #import "BTTPosterModel.h"
 
 #define BTTImageDefaultWidth  390

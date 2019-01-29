@@ -24,31 +24,31 @@ PODS:
     - GJRedDot/GJDeallocBlockExecutor (= 1.1.1)
   - GJRedDot/GJDeallocBlockExecutor (1.1.1)
   - IQKeyboardManager (5.0.8)
-  - IVGameLibrary (0.0.18):
-    - IVGameLibrary/GameController (= 0.0.18)
-  - IVGameLibrary/GameController (0.0.18)
+  - IVGameLibrary (0.0.25):
+    - IVGameLibrary/GameController (= 0.0.25)
+  - IVGameLibrary/GameController (0.0.25)
   - IVHeartPacketLibrary (0.0.3):
     - CocoaAsyncSocket (~> 7.6.2)
-  - IVNetworkLibrary (0.0.23):
+  - IVNetworkLibrary (0.0.27):
     - AFNetworking (~> 3.2.1)
     - FCUUID (~> 1.3.1)
-    - IVNetworkLibrary/IVNetwork (= 0.0.23)
+    - IVNetworkLibrary/IVNetwork (= 0.0.27)
     - JSONModel (~> 1.7.0)
     - UICKeyChainStore (~> 2.1.2)
     - YTKNetwork (~> 2.0.4)
     - ZipArchive (~> 1.4.0)
-  - IVNetworkLibrary/IVNetwork (0.0.23):
+  - IVNetworkLibrary/IVNetwork (0.0.27):
     - AFNetworking (~> 3.2.1)
     - FCUUID (~> 1.3.1)
     - JSONModel (~> 1.7.0)
     - UICKeyChainStore (~> 2.1.2)
     - YTKNetwork (~> 2.0.4)
     - ZipArchive (~> 1.4.0)
-  - IVWebViewLibrary (0.0.14):
-    - IVWebViewLibrary/IVWebViewLibrary (= 0.0.14)
+  - IVWebViewLibrary (0.0.23):
+    - IVWebViewLibrary/IVWebViewLibrary (= 0.0.23)
     - JSONModel (~> 1.7.0)
     - MJExtension (~> 3.0.15.1)
-  - IVWebViewLibrary/IVWebViewLibrary (0.0.14):
+  - IVWebViewLibrary/IVWebViewLibrary (0.0.23):
     - JSONModel (~> 1.7.0)
     - MJExtension (~> 3.0.15.1)
   - JSONModel (1.7.0)
@@ -56,9 +56,6 @@ PODS:
   - MBProgressHUD (1.1.0)
   - MJExtension (3.0.15.1)
   - MJRefresh (3.1.15.7)
-  - SDWebImage (4.4.3):
-    - SDWebImage/Core (= 4.4.3)
-  - SDWebImage/Core (4.4.3)
   - SQLiteRepairKit (1.2.1):
     - WCDBOptimizedSQLCipher (~> 1.2.0)
   - TXScrollLabelView (1.3.2)
@@ -89,7 +86,6 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.1.0)
   - MJExtension (~> 3.0.15.1)
   - MJRefresh
-  - SDWebImage
   - TXScrollLabelView
   - WCDB
   - YYImage
@@ -108,7 +104,6 @@ SPEC REPOS:
     - MBProgressHUD
     - MJExtension
     - MJRefresh
-    - SDWebImage
     - SQLiteRepairKit
     - TXScrollLabelView
     - UICKeyChainStore
@@ -131,16 +126,16 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   IVGameLibrary:
-    :commit: e61e5dfa9546272f889eb84507c5ad3d8d58345b
+    :commit: f8fcb174c0452a7b16052b6e8bd92ac3c1cc47ca
     :git: http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git
   IVHeartPacketLibrary:
     :commit: 29d345d7d731e2b6cfa54740c2efd0b6d9455a28
     :git: http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git
   IVNetworkLibrary:
-    :commit: 882973cac9f1db42fc692ca94f30b8ed00440b43
+    :commit: fbd045dfc9fc7260b3bcae6013862567c4637b3b
     :git: http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary.git
   IVWebViewLibrary:
-    :commit: 61e42ce017967017542ea3cb43d0262fa9180a56
+    :commit: 81a12b399a99069876f8485e7dc7fd2cf5953994
     :git: http://10.66.72.115/mobile-iOS-Library/IVWebViewLibrary.git
 
 SPEC CHECKSUMS:
@@ -150,16 +145,15 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GJRedDot: de661162a700f3395f0cd70f3629e4d3abe8e181
   IQKeyboardManager: 266cb7b1d11f94a3e71229d77f960f9a1b538e5b
-  IVGameLibrary: 80c96b9f32be77496bad9e02722a5d649e575bd6
+  IVGameLibrary: 403ac46c4894a99c36add5ba14312eece323683f
   IVHeartPacketLibrary: a93b7de9ba49911aa09d39250f9e3d96036a2ed0
-  IVNetworkLibrary: 4bdb58c791d7d5ef1505f664e99f817e34294d4c
-  IVWebViewLibrary: 08958e0eef8964d8c6507d1a98432062ef02ebd5
+  IVNetworkLibrary: 87270060c70aa70599434563ce46c203bce0e662
+  IVWebViewLibrary: 159d4e1de2650555ff922099684c4dd43f0a7b5c
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
-  SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
   SQLiteRepairKit: 4d21bab9eff6a273f63da6815a0d1659e53f5bde
   TXScrollLabelView: 0e1650caf61198bf5dc0938ea6493254aeb80f90
   UICKeyChainStore: 85db518bb1d294366d15ec9b92a416c4e670518f
@@ -170,6 +164,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
-PODFILE CHECKSUM: 014ae84de5bccee3dafeef4bc5f4f9c3b413bec1
+PODFILE CHECKSUM: 3cc589fc84ed2a1b54aafe2c75a35c9335db0652
 
 COCOAPODS: 1.5.3

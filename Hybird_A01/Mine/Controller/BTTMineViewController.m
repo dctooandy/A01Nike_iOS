@@ -324,7 +324,19 @@
 //        [MBProgressHUD showError:@"请先登录" toView:nil];
 //        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
 //        BTTSaveMoneyModifyViewController *vc = [BTTSaveMoneyModifyViewController new];
-        BTTSaveMoneySuccessController *vc = [BTTSaveMoneySuccessController new];
+//        BTTSaveMoneySuccessController *vc = [BTTSaveMoneySuccessController new];
+        if (indexPath.row == self.personalInfos.count + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count + 4) {
+            // 网络监测
+            [IVNetwork startCheckWithType:IVCheckNetworkTypeAll appWindow:[UIApplication sharedApplication].keyWindow detailBtnClickedBlock:^{
+                [self.navigationController pushViewController:[IVNetworkStatusDetailViewController new] animated:YES];
+            }];
+            return;
+        } else if (indexPath.row == self.personalInfos.count + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count + 3) {
+            [IVNetwork checkAppUpdate];
+            return;
+        }
+        [MBProgressHUD showError:@"请先登录" toView:nil];
+        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         
         return;

@@ -85,6 +85,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.collectionView reloadData];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork userInfo]) {
         [BTTHttpManager requestUnReadMessageNum:nil];
@@ -369,10 +370,87 @@
             if (!model) {
                 return;
             }
-            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            vc.webConfigModel.url = model.href;
-            vc.webConfigModel.newView = YES;
-            [self.navigationController pushViewController:vc animated:YES];
+            if ([model.href hasPrefix:@"http"]) {
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.webConfigModel.url = [model.href stringByReplacingOccurrencesOfString:@" " withString:@""];
+                vc.webConfigModel.newView = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                NSRange gameIdRange = [model.href rangeOfString:@"gameId"];
+                if (gameIdRange.location != NSNotFound) {
+                    NSArray *arr = [model.href componentsSeparatedByString:@":"];
+                    NSString *gameid = arr[1];
+                    UIViewController *vc = nil;
+                    if ([gameid isEqualToString:@"A01003"]) {
+                        vc = [BTTAGQJViewController new];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    } else if ([gameid isEqualToString:@"A01026"]) {
+                        vc = [BTTAGGJViewController new];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                }
+                NSRange andRange = [model.href rangeOfString:@"&"];
+                if (andRange.location != NSNotFound) {
+                    NSArray *andArr = [model.href componentsSeparatedByString:@"&"];
+                    NSArray *providerArr = [andArr[0] componentsSeparatedByString:@":"];
+                    NSString *provider = providerArr[1];
+                    NSArray *gameKindArr = [andArr[1] componentsSeparatedByString:@":"];
+                    NSString *gameKind = gameKindArr[1];
+                    IVGameModel *model = [[IVGameModel alloc] init];
+                    if ([provider isEqualToString:@"AGIN"] && [gameKind isEqualToString:@"8"]) { // 捕鱼王
+                        model = [[IVGameModel alloc] init];
+                        model.cnName =  kFishCnName;
+                        model.enName =  kFishEnName;
+                        model.provider = kAGINProvider;
+                        model.gameId = model.gameCode;
+                        model.gameType = kFishType;
+                        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+                    } else if ([provider isEqualToString:@"SHAB"] && [gameKind isEqualToString:@"1"]) { // 沙巴体育
+                        model = [[IVGameModel alloc] init];
+                        model.cnName = @"沙巴体育";
+                        model.enName =  kASBEnName;
+                        model.provider =  kShaBaProvider;
+                    } else if ([provider isEqualToString:@"BTI"] && [gameKind isEqualToString:@"1"]) {  // BTIi体育
+                        model = [[IVGameModel alloc] init];
+                        model.cnName = @"BTI体育";
+                        model.enName =  @"SBT_BTI";
+                        model.provider =  @"SBT";
+                    } else if ([provider isEqualToString:@"MG"] ||
+                               [provider isEqualToString:@"AGIN"] ||
+                               [provider isEqualToString:@"PT"] ||
+                               [provider isEqualToString:@"TTG"] ||
+                               [provider isEqualToString:@"PP"]) {
+                        BTTVideoGamesListController *videoGamesVC = [BTTVideoGamesListController new];
+                        NSString *subProvider = nil;
+                        if ([provider isEqualToString:@"AGIN"]) {
+                            subProvider = @"AG";
+                        } else {
+                            subProvider = provider;
+                        }
+                        videoGamesVC.provider = subProvider;
+                        [self.navigationController pushViewController:videoGamesVC animated:YES];
+                    }
+                } else {
+                    NSRange providerRange = [model.href rangeOfString:@"provider"];
+                    if (providerRange.location != NSNotFound) {
+                        NSArray *arr = [model.href componentsSeparatedByString:@":"];
+                        NSString *provider = arr[1];
+                        UIViewController *vc = nil;
+                        if ([provider isEqualToString:@"AGQJ"]) {
+                            vc = [BTTAGQJViewController new];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        } else if ([provider isEqualToString:@"AGIN"]) {
+                            vc = [BTTAGGJViewController new];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        } else if ([provider isEqualToString:@"AS"]) {
+                            IVGameModel *model = [[IVGameModel alloc] init];
+                            model.cnName = @"AS电游";
+                            model.enName =  kASSlotEnName;
+                            model.provider = kASSlotProvider;
+                        }
+                    }
+                }
+            }
         } else if (indexPath.row == 2) {
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
             vc.webConfigModel.url = @"common/ancement.htm";
@@ -385,7 +463,7 @@
                 return;
             }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            vc.webConfigModel.url = model.link;
+            vc.webConfigModel.url = [model.link stringByReplacingOccurrencesOfString:@" " withString:@""];
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"outside";
             [self.navigationController pushViewController:vc animated:YES];
@@ -405,7 +483,7 @@
                 return;
             }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            vc.webConfigModel.url = model.href;
+            vc.webConfigModel.url = [model.href stringByReplacingOccurrencesOfString:@" " withString:@""];
             vc.webConfigModel.newView = YES;
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 1) {
@@ -426,7 +504,7 @@
                 return;
             }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            vc.webConfigModel.url = model.link;
+            vc.webConfigModel.url = [model.link stringByReplacingOccurrencesOfString:@" " withString:@""];
             vc.webConfigModel.newView = YES;
             vc.webConfigModel.theme = @"outside";
             [self.navigationController pushViewController:vc animated:YES];

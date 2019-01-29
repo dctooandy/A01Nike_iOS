@@ -103,7 +103,6 @@
                 [payments addObject:model];
             }
             
-            
             CNPaymentModel *scan5 = payments[CNPaymentUnionQR];
             if (scan5.isAvailable) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
@@ -131,6 +130,12 @@
                 [self.bigDataSoure addObject:mainModel];
             }
             
+//            if (!payments.count) {
+//                self.paymentDatas = [NSMutableArray array];
+//                [self setupElements];
+//                return;
+//            }
+
             CNPaymentModel *BQFast = payments[CNPaymentBQFast];
             if (BQFast.isAvailable) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];

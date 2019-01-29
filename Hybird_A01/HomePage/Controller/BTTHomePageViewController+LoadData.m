@@ -82,9 +82,9 @@ static const char *BTTNextGroupKey = "nextGroup";
 - (void)loadLuckyWheelCoinStatus {
     [IVNetwork sendRequestWithSubURL:BTTQueryIntegralAPI paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {
+        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
             if ([result.data[@"amount"] integerValue]) {
-                [self showPopView];
+                [self showPopViewWithNum:result.data[@"amount"]];
             }
         }
     }];
@@ -282,7 +282,7 @@ static const char *BTTNextGroupKey = "nextGroup";
 - (void)loadOtherData:(dispatch_group_t)group {
     [IVNetwork sendUseCacheRequestWithSubURL:BTTIndexBannerDownloads paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        if (result.code_http == 200) {
+        if (result.status) {
             if (result.data) {
                 if (![result.data[@"banners"] isKindOfClass:[NSNull class]]) {
                     [self.banners removeAllObjects];
@@ -322,7 +322,7 @@ static const char *BTTNextGroupKey = "nextGroup";
 - (void)loadHightlightsBrand:(dispatch_group_t)group {
     [IVNetwork sendUseCacheRequestWithSubURL:BTTBrandHighlights paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        if (result.code_http == 200) {
+        if (result.status) {
             if (result.data) {
                 [self.Activities removeAllObjects];
                 for (NSDictionary *imageDict in result.data) {

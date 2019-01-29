@@ -46,7 +46,7 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [BTTAGQJViewController addGameViewToWindow];
+//    [BTTAGQJViewController addGameViewToWindow];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

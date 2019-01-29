@@ -7,7 +7,7 @@
 //
 
 #import "BTTCardInfoCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+
 @interface BTTCardInfoCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *cardBgImageView;
 @property (weak, nonatomic) IBOutlet UIButton *modifyBtn;

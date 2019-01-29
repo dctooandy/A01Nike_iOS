@@ -67,10 +67,10 @@
               [model.name isEqualToString:@"已绑定邮箱地址"] ||
               [model.name isEqualToString:@"手机号"]) &&
              model.desc.length != 0)) {
-            self.textField.userInteractionEnabled = NO;
-        } else {
-            self.textField.userInteractionEnabled = YES;
-        }
+                self.textField.userInteractionEnabled = NO;
+            } else {
+                self.textField.userInteractionEnabled = YES;
+            }
         self.rightConstants.constant = 20;
         self.mineArrowsType = BTTMineArrowsTypeHidden;
     }
@@ -92,9 +92,12 @@
         if (model.isError) {
             self.textField.textColor = [UIColor colorWithHexString:@"d13847"];
         } else {
-            self.textField.textColor = [UIColor whiteColor];
+            if (model.resultCode.length) {
+                self.textField.textColor = [UIColor colorWithHexString:@"818791"];
+            } else {
+                self.textField.textColor =  [UIColor whiteColor];
+            }
         }
-        
     }
     
     if ([model.name isEqualToString:@"存款姓名"] ||
@@ -104,17 +107,29 @@
         [model.name isEqualToString:@"存款地点"] ||
         [model.name isEqualToString:@"存款银行"] ||
         [model.name isEqualToString:@"存款卡号"]) {
-        if ([model.name isEqualToString:@"存款方式"] || [model.name isEqualToString:@"存款时间"] || [model.name isEqualToString:@"存款地点"]) {
-            self.textField.userInteractionEnabled = NO;
-            self.mineArrowsType = BTTMineArrowsTypeNoHidden;
-            self.rightConstants.constant = 46;
-        } else {
-            self.rightConstants.constant = 20;
-            self.mineArrowsType = BTTMineArrowsTypeHidden;
-            if (model.isError) {
-                self.textField.userInteractionEnabled = YES;
+        if (model.isError) {
+            if ([model.name isEqualToString:@"存款方式"] || [model.name isEqualToString:@"存款时间"] || [model.name isEqualToString:@"存款地点"]) {
+                self.mineArrowsType = BTTMineArrowsTypeNoHidden;
+                self.rightConstants.constant = 46;
             } else {
+                self.rightConstants.constant = 20;
+                self.mineArrowsType = BTTMineArrowsTypeHidden;
+            }
+            self.textField.userInteractionEnabled = NO;
+        } else {
+            self.textField.userInteractionEnabled = NO;
+            if ([model.name isEqualToString:@"存款方式"] || [model.name isEqualToString:@"存款时间"] || [model.name isEqualToString:@"存款地点"]) {
                 self.textField.userInteractionEnabled = NO;
+                self.mineArrowsType = BTTMineArrowsTypeNoHidden;
+                self.rightConstants.constant = 46;
+            } else {
+                self.rightConstants.constant = 20;
+                self.mineArrowsType = BTTMineArrowsTypeHidden;
+                if (model.resultCode.integerValue) {
+                    self.textField.userInteractionEnabled = YES;
+                } else {
+                    self.textField.userInteractionEnabled = NO;
+                }
             }
         }
     }

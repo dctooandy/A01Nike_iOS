@@ -7,7 +7,6 @@
 //
 
 #import "BTTGameCollectionViewCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface BTTGameCollectionViewCell ()
 

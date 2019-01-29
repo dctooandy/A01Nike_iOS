@@ -51,7 +51,7 @@
         if (self.favorites.count) {
             [self.favorites removeAllObjects];
         }
-        if (result.code_http == 200 && [result.data isKindOfClass:[NSArray class]]) {
+        if (result.status && [result.data isKindOfClass:[NSArray class]]) {
             for (NSDictionary *dict in result.data) {
                 BTTVideoGameModel *model = [BTTVideoGameModel yy_modelWithDictionary:dict[@"remarks"]];
                 model.isFavority = YES;
@@ -73,7 +73,7 @@
     NSDictionary *params = @{@"game_id":[NSString stringWithFormat:@"%@%@",model.provider,model.gameid]};
     [IVNetwork sendRequestWithSubURL:API paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
-        if (result.code_http == 200 && [result.data isKindOfClass:[NSDictionary class]]) {
+        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
             if (result.data[@"val"]) {
                 [self loadCollectionData];
             }

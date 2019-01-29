@@ -7,7 +7,6 @@
 //
 
 #import "BTTWithdrawalCardSelectCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 @implementation BTTWithdrawalCardSelectCell
 
 - (void)awakeFromNib {

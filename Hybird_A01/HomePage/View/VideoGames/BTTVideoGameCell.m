@@ -7,7 +7,6 @@
 //
 
 #import "BTTVideoGameCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 #import "BTTVideoGameModel.h"
 
 @interface BTTVideoGameCell ()

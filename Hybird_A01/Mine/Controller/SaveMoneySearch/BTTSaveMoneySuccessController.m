@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"存款成功";
+    self.title = @"存款详情";
     [self setupCollectionView];
     [self setupElements];
 }
@@ -50,7 +50,11 @@
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
             [strongSelf.navigationController popToRootViewControllerAnimated:YES];
-            if (![button.titleLabel.text isEqualToString:@"确定"]) {
+            if ([button.titleLabel.text isEqualToString:@"联系客服"]) {
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoHomePageNotification object:@"gotoOnlineChat"];
+                });
+            } else if ([button.titleLabel.text isEqualToString:@"进入游戏大厅"]) {
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoHomePageNotification object:nil];
                 });
@@ -60,17 +64,26 @@
     } else {
         BTTSaveMoneySuccessHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTSaveMoneySuccessHeaderCell" forIndexPath:indexPath];
         if (self.saveMoneyStatus == BTTSaveMoneyStatusTypeFail) {
-            cell.statusImageView.image = ImageNamed(@"faulure");
-            cell.titleLabel.text = @"存款未到账!";
-            cell.detailLabel.text = @"尊敬的贵宾, 后台暂未查到您的款项, 请联系客服提供并核对详细存款信息";
+            cell.statusImageView.image = ImageNamed(@"failure");
+            cell.titleLabel.text = @"存款未到账！";
+            cell.detailLabel.text = @"尊敬的贵宾, 后台暂未查到您的款项, 请联系客服提供并核对详细存款信息。";
         } else if (self.saveMoneyStatus == BTTSaveMoneyStatusTypeOnGoing) {
-            cell.statusImageView.image = ImageNamed(@"faulure");
-            cell.titleLabel.text = @"存款正在处理!";
-            cell.detailLabel.text = @"尊敬的贵宾, 您的存款提交成功, 客服正在紧急处理, 预计2-3分钟完成处理, 请耐心等待.";
-        } else {
+            cell.statusImageView.image = ImageNamed(@"Processing");
+            cell.titleLabel.text = @"存款正在处理！";
+            cell.detailLabel.text = @"尊敬的贵宾, 您的存款提交成功, 客服正在紧急处理, 预计2-3分钟完成处理, 请耐心等待。";
+        } else if (self.saveMoneyStatus == BTTSaveMoneyStatusTypeCuiSuccess) {
             cell.statusImageView.image = ImageNamed(@"withdrawal_successicon");
-            cell.titleLabel.text = @"存款成功了!";
-            NSString *detailStr = [NSString stringWithFormat:@"尊敬的贵宾, 您的存款已于%@到账, 感谢您的信任与支持, 并祝您游戏愉快.",self.time];
+            cell.titleLabel.text = @"提交成功！";
+            NSString *detailStr = @"尊敬的贵宾, 您的修改提交成功, 客服正在紧急处理, 预计2-3分钟完成处理, 请耐心等待。";
+            NSRange timeRange = [detailStr rangeOfString:@"2-3"];
+            NSMutableAttributedString *timeStr = [[NSMutableAttributedString alloc] initWithString:detailStr];
+            [timeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:timeRange];
+            cell.detailLabel.attributedText = timeStr;
+        }
+        else {
+            cell.statusImageView.image = ImageNamed(@"withdrawal_successicon");
+            cell.titleLabel.text = @"存款成功了！";
+            NSString *detailStr = [NSString stringWithFormat:@"尊敬的贵宾, 您的存款已于%@到账, 感谢您的信任与支持, 并祝您游戏愉快。",self.time];
             NSRange timeRange = [detailStr rangeOfString:self.time];
             NSMutableAttributedString *timeStr = [[NSMutableAttributedString alloc] initWithString:detailStr];
             [timeStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:timeRange];

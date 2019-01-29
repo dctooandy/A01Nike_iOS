@@ -63,7 +63,7 @@
             strongSelf(strongSelf);
             [strongSelf verifyCode:strongSelf.code account:strongSelf.account completeBlock:^(IVRequestResultModel *result, id response) {
                 if (result.status) {
-                    if (result.code_http == 200 && [result.data[@"val"] isKindOfClass:[NSDictionary class]] ) {
+                    if (result.status && [result.data[@"val"] isKindOfClass:[NSDictionary class]] ) {
                         BTTForgetPasswordStepThreeController *vc = [[BTTForgetPasswordStepThreeController alloc] init];
                         vc.accessID = result.data[@"val"];
                         vc.account = strongSelf.account;

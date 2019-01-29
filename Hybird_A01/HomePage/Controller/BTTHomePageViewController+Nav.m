@@ -35,6 +35,19 @@ static const char *BTTHeaderViewKey = "headerView";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccess:) name:LogoutSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(versionUpdate:) name:IVCheckUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccessGotoHomePageNotification:) name:BTTRegisterSuccessGotoHomePageNotification object:nil];
+}
+
+- (void)registerSuccessGotoHomePageNotification:(NSNotification *)notif {
+    if ([notif.object isEqualToString:@"gotoOnlineChat"]) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSString *url = @"https://www.why918.com/chat/chatClient/chatbox.jsp?companyID=8990&configID=21&k=1&codeType=custom";
+            BTTLive800ViewController *live800 = [[BTTLive800ViewController alloc] init];
+            live800.webConfigModel.url = url;
+            live800.webConfigModel.newView = YES;
+            [self.navigationController pushViewController:live800 animated:YES];
+        });
+    }
 }
 
 - (void)versionUpdate:(NSNotification *)notifi {
@@ -256,8 +269,9 @@ static const char *BTTHeaderViewKey = "headerView";
     }
 }
 
-- (void)showPopView {
+- (void)showPopViewWithNum:(NSString *)num {
     BTTLuckyWheelCoinView *customView = [BTTLuckyWheelCoinView viewFromXib];
+    customView.coinLabel.text = [NSString stringWithFormat:@"您还拥有%@博币!",num];
     customView.frame = CGRectMake(0, 0, 313, 255);
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
     popView.isClickBGDismiss = YES;
@@ -276,16 +290,15 @@ static const char *BTTHeaderViewKey = "headerView";
 - (void)bannerToGame:(BTTBannerModel *)model {
     if ([model.action.detail hasSuffix:@".htm"] ) {
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.webConfigModel.url = model.action.detail;
+        vc.webConfigModel.url = [model.action.detail stringByReplacingOccurrencesOfString:@" " withString:@""];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
         [self.navigationController pushViewController:vc animated:YES];
     } else {
-        UIViewController *vc = nil;
         NSRange gameIdRange = [model.action.detail rangeOfString:@"gameId"];
         if (gameIdRange.location != NSNotFound) {
             NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
-            NSString *gameid = arr[2];
+            NSString *gameid = arr[1];
             UIViewController *vc = nil;
             if ([gameid isEqualToString:@"A01003"]) {
                 vc = [BTTAGQJViewController new];
@@ -299,7 +312,7 @@ static const char *BTTHeaderViewKey = "headerView";
         if (andRange.location != NSNotFound) {
             NSArray *andArr = [model.action.detail componentsSeparatedByString:@"&"];
             NSArray *providerArr = [andArr[0] componentsSeparatedByString:@":"];
-            NSString *provider = providerArr[2];
+            NSString *provider = providerArr[1];
             NSArray *gameKindArr = [andArr[1] componentsSeparatedByString:@":"];
             NSString *gameKind = gameKindArr[1];
             IVGameModel *model = [[IVGameModel alloc] init];
@@ -340,7 +353,7 @@ static const char *BTTHeaderViewKey = "headerView";
             NSRange providerRange = [model.action.detail rangeOfString:@"provider"];
             if (providerRange.location != NSNotFound) {
                 NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
-                NSString *provider = arr[2];
+                NSString *provider = arr[1];
                 UIViewController *vc = nil;
                 if ([provider isEqualToString:@"AGQJ"]) {
                     vc = [BTTAGQJViewController new];
