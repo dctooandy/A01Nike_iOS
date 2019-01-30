@@ -194,7 +194,7 @@
         tabVC.selectedIndex = 0;
         [self.controller.navigationController popToRootViewControllerAnimated:YES];
     }
-    else if ([url containsString:@"common/login.htm"]){//登录
+    else if ([url containsString:@"common/login.htm"] && ![IVNetwork userInfo]){//登录
         BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
         loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
         [self.controller.navigationController pushViewController:loginAndRegister animated:YES];
@@ -218,12 +218,17 @@
         return @(YES);
     } else {
         if (webConfigModel.newView) {
-            BTTBaseWebViewController *webVC = [[BTTBaseWebViewController alloc] init];
-            webVC.webConfigModel = webConfigModel;
-            [self.controller.navigationController pushViewController:webVC animated:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                BTTBaseWebViewController *webVC = [[BTTBaseWebViewController alloc] init];
+                webVC.webConfigModel = webConfigModel;
+                [self.controller.navigationController pushViewController:webVC animated:YES];
+            });
+            
         } else {
-            self.controller.webConfigModel = webConfigModel;
-            [self.controller loadWebView];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.controller.webConfigModel = webConfigModel;
+                [self.controller loadWebView];
+            });
         }
         return @(NO);
     }
