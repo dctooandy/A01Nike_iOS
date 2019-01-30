@@ -68,6 +68,7 @@ static const char *BTTHeaderViewKey = "headerView";
     self.isLogin = YES;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self updateUI];
+        [[IVGameManager sharedManager] reloadCacheGame];
     });
 }
 
@@ -75,6 +76,7 @@ static const char *BTTHeaderViewKey = "headerView";
     self.isLogin = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self updateUI];
+        [[IVGameManager sharedManager] reloadCacheGame];
     });
 }
 
