@@ -194,6 +194,7 @@
         self.lucky.webConfigModel.theme = @"inside";
         self.lucky.webConfigModel.url = [NSString stringWithFormat:@"%@%@",domain,@"lucky_wheel.htm"];
         self.preSelectIndex = index;
+        [self.selectVC.navigationController popToRootViewControllerAnimated:NO];
     } else if (index == 1) {
         self.selectVC = self.voiceCall;
         BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"欢迎使用免费语音通话" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"APP语音"] actionSheetBlock:^(NSInteger buttonIndex) {

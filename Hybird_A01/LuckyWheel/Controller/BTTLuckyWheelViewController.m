@@ -8,6 +8,7 @@
 
 #import "BTTLuckyWheelViewController.h"
 #import "BTTHomePageHeaderView.h"
+#import "WebViewUserAgaent.h"
 
 @interface BTTLuckyWheelViewController ()
 
@@ -40,6 +41,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    if (![IVNetwork userInfo]) {
+        [WebViewUserAgaent clearCookie];
+    }
     [self loadWebView];
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
