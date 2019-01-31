@@ -100,7 +100,6 @@
 		3A7A1A7521C0A7D800572B50 /* BTTXimaLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A7421C0A7D800572B50 /* BTTXimaLogController.m */; };
 		3A7C0B0221E5CC43002658CC /* BTTBankUnionAppIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B0021E5CC43002658CC /* BTTBankUnionAppIconCell.m */; };
 		3A7C0B0321E5CC43002658CC /* BTTBankUnionAppIconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0B0121E5CC43002658CC /* BTTBankUnionAppIconCell.xib */; };
-		3A7C0B2621ED6CE1002658CC /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0B2521ED6CE1002658CC /* app.zip */; };
 		3A7C0B2C21ED6FA9002658CC /* BTTSaveMoneySuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B2821ED6FA9002658CC /* BTTSaveMoneySuccessController.m */; };
 		3A7C0B2D21ED6FA9002658CC /* BTTSaveMoneyModifyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B2921ED6FA9002658CC /* BTTSaveMoneyModifyViewController.m */; };
 		3A7C0B3221ED7021002658CC /* NSArray+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B2E21ED7020002658CC /* NSArray+JSON.m */; };
@@ -110,6 +109,7 @@
 		3A7C0B3F21ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B3921ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.m */; };
 		3A7C0B4021ED7093002658CC /* BTTSaveMoneyModifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0B3C21ED7093002658CC /* BTTSaveMoneyModifyCell.xib */; };
 		3A7C0B4121ED7093002658CC /* BTTSaveMoneyModifyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B3D21ED7093002658CC /* BTTSaveMoneyModifyCell.m */; };
+		3A7C0B4521F072BE002658CC /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0B4421F072BE002658CC /* app.zip */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8821630D43000530DF /* BTTWCDBManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8721630D43000530DF /* BTTWCDBManager.mm */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
@@ -828,7 +828,6 @@
 		3A7C0AFF21E5CC43002658CC /* BTTBankUnionAppIconCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBankUnionAppIconCell.h; sourceTree = "<group>"; };
 		3A7C0B0021E5CC43002658CC /* BTTBankUnionAppIconCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBankUnionAppIconCell.m; sourceTree = "<group>"; };
 		3A7C0B0121E5CC43002658CC /* BTTBankUnionAppIconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTBankUnionAppIconCell.xib; sourceTree = "<group>"; };
-		3A7C0B2521ED6CE1002658CC /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		3A7C0B2821ED6FA9002658CC /* BTTSaveMoneySuccessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneySuccessController.m; sourceTree = "<group>"; };
 		3A7C0B2921ED6FA9002658CC /* BTTSaveMoneyModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneyModifyViewController.m; sourceTree = "<group>"; };
 		3A7C0B2A21ED6FA9002658CC /* BTTSaveMoneyModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneyModifyViewController.h; sourceTree = "<group>"; };
@@ -845,6 +844,7 @@
 		3A7C0B3B21ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneySuccessHeaderCell.h; sourceTree = "<group>"; };
 		3A7C0B3C21ED7093002658CC /* BTTSaveMoneyModifyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTSaveMoneyModifyCell.xib; sourceTree = "<group>"; };
 		3A7C0B3D21ED7093002658CC /* BTTSaveMoneyModifyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneyModifyCell.m; sourceTree = "<group>"; };
+		3A7C0B4421F072BE002658CC /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8621630D43000530DF /* BTTWCDBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWCDBManager.h; sourceTree = "<group>"; };
@@ -2183,7 +2183,7 @@
 			isa = PBXGroup;
 			children = (
 				3A8F5134215F74CF0069D1B3 /* Main.storyboard */,
-				3A7C0B2521ED6CE1002658CC /* app.zip */,
+				3A7C0B4421F072BE002658CC /* app.zip */,
 				3A8F5137215F74D00069D1B3 /* Assets.xcassets */,
 				3AD4C9C221635AEC00FC0A63 /* app.json */,
 				3A8F5139215F74D00069D1B3 /* LaunchScreen.storyboard */,
@@ -3951,10 +3951,10 @@
 				EAE89F1E218C3ABD00C29393 /* LIVEvaluateCell.nib in Resources */,
 				EAE89F22218C3ABD00C29393 /* LIVLocationMessageContentView.nib in Resources */,
 				EAE89EBC218C3ABD00C29393 /* LIVLibraryItem@3x.png in Resources */,
-				3A7C0B2621ED6CE1002658CC /* app.zip in Resources */,
 				EAE89F36218C3ABD00C29393 /* LIVVoiceBoardViewController.nib in Resources */,
 				EAE89EDA218C3ABD00C29393 /* LIVVideoCamera_flashOff@3x.png in Resources */,
 				EAE89E8C218C3ABD00C29393 /* embarrassed.gif in Resources */,
+				3A7C0B4521F072BE002658CC /* app.zip in Resources */,
 				3ADD237C2177366B00FA959A /* BTTMeMainCell.xib in Resources */,
 				EAE89E97218C3ABD00C29393 /* tired.gif in Resources */,
 				EAE89EDD218C3ABD00C29393 /* LIVVideoCamera_OK@2x.png in Resources */,
@@ -4658,6 +4658,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Hybird_A01/Resource/Hybird_A01.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Hybird_A01/Resource/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4696,6 +4697,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Hybird_A01/Resource/Hybird_A01.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Hybird_A01/Resource/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
