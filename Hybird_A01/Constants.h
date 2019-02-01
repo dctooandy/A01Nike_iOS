@@ -120,6 +120,11 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTSaveMoneyMoreThenTenKey     @"BTTSaveMoneyMoreThenTenKey"
 
+
+// 客户存款次数key
+
+#define BTTSaveMoneyTimesKey          @"BTTSaveMoneyTimesKey"
+
 // 验证码发送按钮控制通知
 
 #define BTTVerifyCodeEnableNotification @"BTTVerifyCodeEnableNotification"
@@ -155,6 +160,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTMineCenterMessage    @"MineCenterMessage"
 #define BTTMineCenterVersion    @"MineCenterVersion"
 #define BTTMineCenterNavMessage @"MineCenterNavMessage"
+
 
 // 账号缓存key
 
@@ -317,6 +323,9 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 // 迅捷, 在线催款催单接口
 #define BTTAreditAppealAPI           @"/A01/payment/createAreditAppeal"
 
+// 客户存款次数的接口
+
+#define BTTSaveMoneyTimesAPI         @"/deposit/getIsDepositAmount"
 
 /********************************************常用宏*********************************************************/
 

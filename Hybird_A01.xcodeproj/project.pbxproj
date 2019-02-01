@@ -878,6 +878,23 @@
 		3A7C0B1E21EC9F2E002658CC /* NSString+MD5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		3A7C0B1F21EC9F2E002658CC /* NSString+MD5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		3A7C0B2321ECA389002658CC /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
+		3A7C0B2821ED6FA9002658CC /* BTTSaveMoneySuccessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneySuccessController.m; sourceTree = "<group>"; };
+		3A7C0B2921ED6FA9002658CC /* BTTSaveMoneyModifyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneyModifyViewController.m; sourceTree = "<group>"; };
+		3A7C0B2A21ED6FA9002658CC /* BTTSaveMoneyModifyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneyModifyViewController.h; sourceTree = "<group>"; };
+		3A7C0B2B21ED6FA9002658CC /* BTTSaveMoneySuccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneySuccessController.h; sourceTree = "<group>"; };
+		3A7C0B2E21ED7020002658CC /* NSArray+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+JSON.m"; sourceTree = "<group>"; };
+		3A7C0B2F21ED7020002658CC /* NSArray+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+JSON.h"; sourceTree = "<group>"; };
+		3A7C0B3021ED7021002658CC /* NSString+MD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
+		3A7C0B3121ED7021002658CC /* NSString+MD5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
+		3A7C0B3421ED706F002658CC /* BTTSaveMoneyErrorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneyErrorModel.m; sourceTree = "<group>"; };
+		3A7C0B3521ED7070002658CC /* BTTSaveMoneyErrorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneyErrorModel.h; sourceTree = "<group>"; };
+		3A7C0B3821ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTSaveMoneySuccessHeaderCell.xib; sourceTree = "<group>"; };
+		3A7C0B3921ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneySuccessHeaderCell.m; sourceTree = "<group>"; };
+		3A7C0B3A21ED7093002658CC /* BTTSaveMoneyModifyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneyModifyCell.h; sourceTree = "<group>"; };
+		3A7C0B3B21ED7093002658CC /* BTTSaveMoneySuccessHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTSaveMoneySuccessHeaderCell.h; sourceTree = "<group>"; };
+		3A7C0B3C21ED7093002658CC /* BTTSaveMoneyModifyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTSaveMoneyModifyCell.xib; sourceTree = "<group>"; };
+		3A7C0B3D21ED7093002658CC /* BTTSaveMoneyModifyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSaveMoneyModifyCell.m; sourceTree = "<group>"; };
+		3A7C0B4421F072BE002658CC /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8921630EE5000530DF /* PublicMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicMethod.h; sourceTree = "<group>"; };
@@ -4133,6 +4150,7 @@
 				EAE89F36218C3ABD00C29393 /* LIVVoiceBoardViewController.nib in Resources */,
 				EAE89EDA218C3ABD00C29393 /* LIVVideoCamera_flashOff@3x.png in Resources */,
 				EAE89E8C218C3ABD00C29393 /* embarrassed.gif in Resources */,
+				3A7C0B4521F072BE002658CC /* app.zip in Resources */,
 				3ADD237C2177366B00FA959A /* BTTMeMainCell.xib in Resources */,
 				EAE89E97218C3ABD00C29393 /* tired.gif in Resources */,
 				EAE89EDD218C3ABD00C29393 /* LIVVideoCamera_OK@2x.png in Resources */,

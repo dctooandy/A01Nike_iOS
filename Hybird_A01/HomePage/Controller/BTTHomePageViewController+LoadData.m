@@ -335,6 +335,12 @@ static const char *BTTNextGroupKey = "nextGroup";
     }];
 }
 
+- (void)loadSaveMoneyTimes {
+    [IVNetwork sendRequestWithSubURL:BTTSaveMoneyTimesAPI paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+    }];
+}
+
 #pragma mark - 动态添加属性
 
 - (void)setNextGroup:(NSInteger)nextGroup {
