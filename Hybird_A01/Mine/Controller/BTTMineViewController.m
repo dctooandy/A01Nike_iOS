@@ -53,6 +53,8 @@
 
 @property (nonatomic, strong) BTTBaseWebViewController *webViewVC;
 
+
+
 @end
 
 @implementation BTTMineViewController
@@ -277,7 +279,7 @@
     } else {
         total = self.personalInfos.count + 6 + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count;
     }
-    if (indexPath.row >= total ) {
+    if (indexPath.row >= total) {
         [self loadPaymentData];
         return;
     }
@@ -438,40 +440,41 @@
     } else {
         total = self.personalInfos.count + 6 + self.paymentDatas.count + self.mainDataOne.count + self.mainDataTwo.count;
     }
-    
+    NSMutableArray *elementsHight = [NSMutableArray array];
     for (int i = 0; i < total; i++) {
         if (i == 0) {
             if (SCREEN_WIDTH == 414) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 172)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 172)]];
             } else if (SCREEN_WIDTH == 320) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 158)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 158)]];
             } else {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 158)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 158)]];
             }
         } else if (i >= 1 && i <= 1 + self.personalInfos.count - 1) {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 4, 98)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 4, 98)]];
         } else if (i == 1 + self.personalInfos.count ||
                    i == 3 + self.personalInfos.count + self.paymentDatas.count ||
                    i == 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count ||
                    i == 5 + self.mainDataTwo.count + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count ||
                    i == 6 + self.mainDataTwo.count + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count + self.mainDataThree.count) {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
         } else if (i == 2 + self.personalInfos.count) {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 63)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 63)]];
         } else if (i >= 3 + self.personalInfos.count && i <= 3 + self.personalInfos.count + self.paymentDatas.count - 1) {
             if (SCREEN_WIDTH == 320) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 4, 100)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 4, 100)]];
             } else {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 4, 110)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 4, 110)]];
             }
             
         } else if ((i >= 4 + self.personalInfos.count + self.paymentDatas.count && i <= 4 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count) ||
                    (i >= 5 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count && i <= 5 + self.mainDataOne.count + self.personalInfos.count + self.paymentDatas.count + self.mainDataTwo.count)) {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         } else {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         }
     }
+    self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });

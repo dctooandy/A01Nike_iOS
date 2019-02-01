@@ -69,14 +69,16 @@
 }
 
 - (void)loadGameshallList:(dispatch_group_t)group {
+    NSMutableArray *xms = [NSMutableArray array];
     [BTTHttpManager fetchGamePlatformsWithCompletion:^(IVRequestResultModel *result, id response) {
         if (result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]] && ![result.data isKindOfClass:[NSNull class]]) {
                 if (result.data[@"xm"] && [result.data[@"xm"] isKindOfClass:[NSArray class]] && ![result.data[@"xm"] isKindOfClass:[NSNull class]]) {
                     for (NSDictionary *dict in result.data[@"xm"]) {
                         BTTXimaModel *model = [BTTXimaModel yy_modelWithDictionary:dict];
-                        [self.xms addObject:model];
+                        [xms addObject:model];
                     }
+                    self.xms = xms.mutableCopy;
                 }
             }
         }
@@ -136,6 +138,7 @@
         return;
     }
     NSDictionary *params = @{@"xm_list":xm_list};
+    NSMutableArray *xmResults = [NSMutableArray array];
     [IVNetwork sendRequestWithSubURL:BTTXimaBillOut paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         [self hideLoading];
@@ -146,8 +149,9 @@
             if (result.data && [result.data isKindOfClass:[NSArray class]]) {
                 for (NSDictionary *dict in result.data) {
                     BTTXimaSuccessItemModel *model = [BTTXimaSuccessItemModel yy_modelWithDictionary:dict];
-                    [self.xmResults addObject:model];
+                    [xmResults addObject:model];
                 }
+                self.xmResults = xmResults.mutableCopy;
                 self.ximaStatusType = BTTXimaStatusTypeSuccess;
                 BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
                 [cell setBtnOneType:BTTXimaHeaderBtnOneTypeOtherNormal];

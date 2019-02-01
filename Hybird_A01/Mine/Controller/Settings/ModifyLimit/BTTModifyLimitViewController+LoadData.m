@@ -14,6 +14,8 @@
 
 - (void)loadMainData {
     [self showLoading];
+    NSMutableArray *agin = [NSMutableArray array];
+    NSMutableArray *bbin = [NSMutableArray array];
     [IVNetwork sendRequestWithSubURL:BTTBetLimits paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         [self hideLoading];
@@ -22,14 +24,15 @@
                 for (NSDictionary *dict in result.data[@"agin"]) {
                     BTTBetLimitModel *model = [BTTBetLimitModel yy_modelWithDictionary:dict];
                     NSString *aginLimit = [NSString stringWithFormat:@"%@~%@",model.min,model.max];
-                    [self.agin addObject:aginLimit];
+                    [agin addObject:aginLimit];
                 }
-                
+                self.agin = agin.mutableCopy;
                 for (NSDictionary *dict in result.data[@"bbin"]) {
                     BTTBetLimitModel *model = [BTTBetLimitModel yy_modelWithDictionary:dict];
                     NSString *bbinLimit = [NSString stringWithFormat:@"%@~%@",model.min,model.max];
-                    [self.bbin addObject:bbinLimit];
+                    [bbin addObject:bbinLimit];
                 }
+                self.bbin = bbin.mutableCopy;
             }
         }
     }];

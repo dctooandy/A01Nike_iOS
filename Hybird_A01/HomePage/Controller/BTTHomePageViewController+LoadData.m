@@ -142,14 +142,16 @@ static const char *BTTNextGroupKey = "nextGroup";
     }
     NSArray *titles = @[@"热门优惠",@"客户参与品牌活动集锦",titleStr];
     NSArray *btns = @[@"搜索更多",@"查看下一组",@""];
+    NSMutableArray *headers = [NSMutableArray array];
     [self.headers removeAllObjects];
     for (NSString *title in titles) {
         NSInteger index = [titles indexOfObject:title];
         BTTHomePageHeaderModel *model = [BTTHomePageHeaderModel new];
         model.titleStr = title;
         model.detailBtnStr = btns[index];
-        [self.headers addObject:model];
+        [headers addObject:model];
     }
+    self.headers = [headers mutableCopy];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
@@ -187,14 +189,16 @@ static const char *BTTNextGroupKey = "nextGroup";
     }
     NSArray *gamesIcons = @[@"AGQJ",@"AGGJ",@"Fishing_king",@"game",@"shaba",@"BTI",@"AS"];
     NSArray *gameNames = @[@"AG旗舰厅",@"AG国际厅",@"捕鱼王",@"电子游戏",@"沙巴体育",@"BTI体育",@"AS"];
+    NSMutableArray *games = [NSMutableArray array];
     for (NSString *icon in gamesIcons) {
         NSInteger index = [gamesIcons indexOfObject:icon];
         NSString *name = [gameNames objectAtIndex:index];
         BTTGameModel *model = [[BTTGameModel alloc] init];
         model.gameIcon = icon;
         model.name = name;
-        [self.games addObject:model];
+        [games addObject:model];
     }
+    self.games = games.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
@@ -243,6 +247,9 @@ static const char *BTTNextGroupKey = "nextGroup";
     [params setObject:date_end forKey:@"date_end"];
     [params setObject:@"50000" forKey:@"min_bet_amount"];
     [params setObject:@"100" forKey:@"page_size"];
+    NSMutableArray *amounts = [NSMutableArray array];
+    NSMutableArray *posters = [NSMutableArray array];
+    NSMutableArray *promotions = [NSMutableArray array];
     [IVNetwork sendUseCacheRequestWithSubURL:BTTHomePageNewAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.status) {
@@ -251,24 +258,27 @@ static const char *BTTNextGroupKey = "nextGroup";
                     [self.amounts removeAllObjects];
                     for (NSDictionary *dict in result.data[@"maxRecords"]) {
                         BTTAmountModel *model = [BTTAmountModel yy_modelWithDictionary:dict];
-                        [self.amounts addObject:model];
+                        [amounts addObject:model];
                     }
+                    self.amounts = amounts.mutableCopy;
                 }
                 
                 if (![result.data[@"poster"] isKindOfClass:[NSNull class]]) {
                     [self.posters removeAllObjects];
                     for (NSDictionary *dict in result.data[@"poster"]) {
                         BTTPosterModel *model = [BTTPosterModel yy_modelWithDictionary:dict];
-                        [self.posters addObject:model];
+                        [posters addObject:model];
                     }
+                    self.posters = posters.mutableCopy;
                 }
                 
                 if (![result.data[@"promotions"] isKindOfClass:[NSNull class]]) {
                     [self.promotions removeAllObjects];
                     for (NSDictionary *dict in result.data[@"promotions"]) {
                         BTTPromotionModel *model = [BTTPromotionModel yy_modelWithDictionary:dict];
-                        [self.promotions addObject:model];
+                        [promotions addObject:model];
                     }
+                    self.promotions = promotions.mutableCopy;
                 }
             }
         }
@@ -280,6 +290,9 @@ static const char *BTTNextGroupKey = "nextGroup";
 }
 
 - (void)loadOtherData:(dispatch_group_t)group {
+    NSMutableArray *banners = [NSMutableArray array];
+    NSMutableArray *imageUrls = [NSMutableArray array];
+    NSMutableArray *downloads = [NSMutableArray array];
     [IVNetwork sendUseCacheRequestWithSubURL:BTTIndexBannerDownloads paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.status) {
@@ -289,9 +302,11 @@ static const char *BTTNextGroupKey = "nextGroup";
                     [self.imageUrls removeAllObjects];
                     for (NSDictionary *dict in result.data[@"banners"]) {
                         BTTBannerModel *model = [BTTBannerModel yy_modelWithDictionary:dict];
-                        [self.imageUrls addObject:model.imgurl];
-                        [self.banners addObject:model];
+                        [imageUrls addObject:model.imgurl];
+                        [banners addObject:model];
                     }
+                    self.banners = banners.mutableCopy;
+                    self.imageUrls = imageUrls.mutableCopy;
                 }
                 
                 NSLog(@"%@",NSStringFromClass([result.data[@"downloads"] class]));
@@ -299,8 +314,9 @@ static const char *BTTNextGroupKey = "nextGroup";
                     [self.downloads removeAllObjects];
                     for (NSDictionary *dict in result.data[@"downloads"]) {
                         BTTDownloadModel *model = [BTTDownloadModel yy_modelWithDictionary:dict];
-                        [self.downloads addObject:model];
+                        [downloads addObject:model];
                     }
+                    self.downloads = downloads.mutableCopy;
                 }
                 
 //                if (![result.data[@"games"] isKindOfClass:[NSNull class]]) {
@@ -320,6 +336,7 @@ static const char *BTTNextGroupKey = "nextGroup";
 }
 
 - (void)loadHightlightsBrand:(dispatch_group_t)group {
+    NSMutableArray *Activities = [NSMutableArray array];
     [IVNetwork sendUseCacheRequestWithSubURL:BTTBrandHighlights paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.status) {
@@ -327,8 +344,9 @@ static const char *BTTNextGroupKey = "nextGroup";
                 [self.Activities removeAllObjects];
                 for (NSDictionary *imageDict in result.data) {
                     BTTActivityModel *model = [BTTActivityModel yy_modelWithDictionary:imageDict];
-                    [self.Activities addObject:model];
+                    [Activities addObject:model];
                 }
+                self.Activities = Activities.mutableCopy;
             }
         }
         dispatch_group_leave(group);
