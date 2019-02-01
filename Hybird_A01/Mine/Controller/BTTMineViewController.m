@@ -71,7 +71,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.saveMoneyCount = 3;
+    self.saveMoneyCount = 4;
     self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
     self.title = @"会员中心";
     self.totalAmount = @"加载中";
@@ -211,7 +211,11 @@
                 return cell;
             } else {
                 BTTMeMoreSaveMoneyCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
-                cell.dataSource = self.normalDataSoure;
+                if (indexPath.row == 5 + self.personalInfos.count) {
+                    cell.dataSource = self.normalDataSoure;
+                } else {
+                    cell.dataSource = self.normalDataTwo;
+                }
                 weakSelf(weakSelf);
                 cell.clickEventBlock = ^(id  _Nonnull value) {
                     strongSelf(strongSelf);
@@ -532,16 +536,32 @@
         } else if (i >= 3 + self.personalInfos.count && i <= 3 + self.personalInfos.count + self.saveMoneyCount - 1) {
             if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
                 if (i == 3 + self.personalInfos.count) {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 160)]];
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 180)]];
                 } else if (i == 4 + self.personalInfos.count) {
                     [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
-                } else {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 125)]];
+                } else if (i == 5 + self.personalInfos.count) {
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 90)]];
                 }
-            } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 110)]];
+                else {
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
+                }
+            } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBigOneMore) {
+                if (i == 3 + self.personalInfos.count) {
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 180)]];
+                } else {
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
+                }
+            }
+            else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig) {
+                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 180)]];
             } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeMore) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 110)]];
+                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
+            } else {
+                if (i == 3 + self.personalInfos.count) {
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 90)]];
+                } else {
+                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
+                }
             }
         } else if ((i >= 4 + self.personalInfos.count + self.saveMoneyCount && i <= 4 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount) ||
                    (i >= 5 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount && i <= 5 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount + self.mainDataTwo.count)) {

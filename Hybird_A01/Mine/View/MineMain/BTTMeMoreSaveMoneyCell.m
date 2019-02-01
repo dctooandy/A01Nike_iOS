@@ -26,9 +26,9 @@
     self.collectionView.dataSource = self;
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
-    self.collectionView.backgroundColor = COLOR_RGBA(41, 45, 54, 1);
+//    self.collectionView.backgroundColor = COLOR_RGBA(41, 45, 54, 1);
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    layout.itemSize = CGSizeMake((SCREEN_WIDTH - 70) / 4, 110);
+    layout.itemSize = CGSizeMake((SCREEN_WIDTH - 70) / 4, 90);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumLineSpacing = 0;
     self.collectionView.collectionViewLayout = layout;
@@ -41,6 +41,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BTTMeMainModel *model = self.dataSource.count ? self.dataSource[indexPath.row] : nil;;
     BTTMeSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeSaveMoneyCell" forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor clearColor];
     cell.model = model;
     return cell;
 }

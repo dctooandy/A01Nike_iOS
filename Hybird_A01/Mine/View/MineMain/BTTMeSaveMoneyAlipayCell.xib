@@ -13,23 +13,23 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTMeSaveMoneyAlipayCell">
-            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="100" height="134"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="100" height="134"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_alipay" translatesAutoresizingMaskIntoConstraints="NO" id="eJB-7Y-fsg">
-                        <rect key="frame" x="15" y="5" width="70" height="70"/>
+                        <rect key="frame" x="5" y="12" width="90" height="90"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="70" id="SNV-T1-0KO"/>
-                            <constraint firstAttribute="width" constant="70" id="q19-0c-ow4"/>
+                            <constraint firstAttribute="height" constant="90" id="SNV-T1-0KO"/>
+                            <constraint firstAttribute="width" constant="90" id="q19-0c-ow4"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ii1-Xt-0Wd">
-                        <rect key="frame" x="33.5" y="84" width="33" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <rect key="frame" x="36" y="112.5" width="28.5" height="13.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -37,15 +37,16 @@
             <constraints>
                 <constraint firstItem="eJB-7Y-fsg" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="B7z-1T-t7s"/>
                 <constraint firstItem="Ii1-Xt-0Wd" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="DCB-vR-W8s"/>
-                <constraint firstAttribute="bottom" secondItem="Ii1-Xt-0Wd" secondAttribute="bottom" id="axE-Ja-3ga"/>
+                <constraint firstAttribute="bottom" secondItem="Ii1-Xt-0Wd" secondAttribute="bottom" constant="8" id="axE-Ja-3ga"/>
                 <constraint firstItem="eJB-7Y-fsg" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="-10" id="dAQ-i1-LWp"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="100" height="134"/>
             <connections>
                 <outlet property="iconImageView" destination="eJB-7Y-fsg" id="bfV-LC-TQb"/>
                 <outlet property="nameLabel" destination="Ii1-Xt-0Wd" id="q7o-SL-8jw"/>
             </connections>
-            <point key="canvasLocation" x="-149" y="130"/>
+            <point key="canvasLocation" x="-150.40000000000001" y="144.82758620689657"/>
         </collectionViewCell>
     </objects>
     <resources>

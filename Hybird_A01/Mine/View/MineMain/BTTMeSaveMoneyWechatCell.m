@@ -23,6 +23,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)setModel:(BTTMeMainModel *)model {

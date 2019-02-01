@@ -22,6 +22,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.backgroundColor = [UIColor clearColor];
     self.mineSparaterType = BTTMineSparaterTypeNone;
 }
 

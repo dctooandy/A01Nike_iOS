@@ -13,7 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
-    self.mineArrowsType = BTTMineArrowsTypeNoHidden;
+//    self.mineArrowsType = BTTMineArrowsTypeNoHidden;
 }
 
 @end

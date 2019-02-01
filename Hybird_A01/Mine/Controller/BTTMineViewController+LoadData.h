@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *normalDataSoure;
 
+@property (nonatomic, strong) NSMutableArray *normalDataTwo;
+
 
 
 - (void)loadMeAllData;

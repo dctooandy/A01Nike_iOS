@@ -276,7 +276,7 @@
     qqQR.payChannel = CNPayChannelQQQR;
     qqQR.payments = [[NSArray alloc] initWithObjects:
                      payments[CNPaymentQQApp], nil];
-    // 微信/QQ/银联WAP
+    // 微信/QQ/京东WAP
     CNPayChannelModel *wap = [[CNPayChannelModel alloc] init];
     wap.payChannel = CNPayChannelWechatQQJDAPP;
     wap.payments = [[NSArray alloc] initWithObjects:
@@ -284,7 +284,7 @@
                      payments[CNPaymentQQApp],
                     payments[CNPaymentJDApp],nil];
     
-    NSArray *array = @[unionQR,jdQR,ali,BQFast,BQWeChat,BQAli,online,aliQR,wxQR,qqQR,deposit,wap,unionPay,card,coin,BTC,barCode];//@[BQFast,BQWeChat,BQAli,deposit,ali,online,QR,unionPay,card,BTC,JD,barCode,coin];
+    NSArray *array = @[unionQR,jdQR,ali,BQFast,BQWeChat,BQAli,aliQR,wxQR,qqQR,online,deposit,wap,unionPay,coin,card,BTC,barCode];
     
     // 没开启的渠道不显示
     for (CNPayChannelModel *channel in array) {

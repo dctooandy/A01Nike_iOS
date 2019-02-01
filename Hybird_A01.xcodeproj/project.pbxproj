@@ -4872,6 +4872,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Hybird_A01/Resource/Hybird_A01.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Hybird_A01/Resource/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4910,6 +4911,7 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Hybird_A01/Resource/Hybird_A01.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Hybird_A01/Resource/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

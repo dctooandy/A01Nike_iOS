@@ -34,9 +34,9 @@ typedef enum {
     self.collectionView.dataSource = self;
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
-    self.collectionView.backgroundColor = COLOR_RGBA(41, 45, 54, 1);
+//    self.collectionView.backgroundColor = COLOR_RGBA(41, 45, 54, 1);
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    layout.itemSize = CGSizeMake(80, 110);
+    layout.itemSize = CGSizeMake(100, 130);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumLineSpacing = 15;
     self.collectionView.collectionViewLayout = layout;
@@ -48,7 +48,7 @@ typedef enum {
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BTTMeMainModel *model = self.dataSource.count ? self.dataSource[indexPath.row] : nil;
-    if (indexPath.row == 0) {
+    if ([model.name isEqualToString:@"银联扫码"]) {
         BTTMeSaveMoneyAlipayCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeSaveMoneyAlipayCell" forIndexPath:indexPath];
         cell.model = model;
         return cell;
