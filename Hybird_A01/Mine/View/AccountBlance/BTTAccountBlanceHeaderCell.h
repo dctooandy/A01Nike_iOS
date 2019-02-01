@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *trasferToLocal;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

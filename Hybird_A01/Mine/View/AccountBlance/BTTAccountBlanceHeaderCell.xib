@@ -40,7 +40,7 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vq4-X7-Dax">
+                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vq4-X7-Dax">
                         <rect key="frame" x="112.5" y="137" width="150" height="35"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <state key="normal" title=" 全部转回本地" image="blance_refresh" backgroundImage="blance_btn"/>
@@ -68,8 +68,9 @@
             <size key="customSize" width="375" height="190"/>
             <connections>
                 <outlet property="totalLabel" destination="ngI-LR-0Uo" id="qvm-Es-TCc"/>
+                <outlet property="trasferToLocal" destination="Vq4-X7-Dax" id="fwL-f9-pba"/>
             </connections>
-            <point key="canvasLocation" x="-172" y="126"/>
+            <point key="canvasLocation" x="76" y="56"/>
         </collectionViewCell>
     </objects>
     <resources>

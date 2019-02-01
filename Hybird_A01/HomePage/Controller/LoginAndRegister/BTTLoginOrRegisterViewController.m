@@ -324,40 +324,42 @@
     } else {
         total = 4;
     }
+    NSMutableArray *elementsHight = [NSMutableArray array];
     for (int i = 0; i < total; i++) {
         if (i == 0) {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 182)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 182)]];
         } else if (i == 1) {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         } else if (i == 2) {
             if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 244)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 244)]];
             } else if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
                 if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 193)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 193)]];
                 } else {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 244)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 244)]];
                 }
             } else {
                 if (self.loginCellType == BTTLoginCellTypeNormal) {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
                 } else {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 150)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 150)]];
                 }
             }
         } else {
             if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
                 if (i == 3) {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
                 } else {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
                 }
             } else {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
             }
         }
         
     }
+    self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });

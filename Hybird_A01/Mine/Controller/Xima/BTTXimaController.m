@@ -361,113 +361,114 @@ typedef enum {
     } else {
         total = 2 + self.xmResults.count;
     }
-    
+    NSMutableArray *elementsHight = [NSMutableArray array];
     for (int i = 0; i < total; i ++) {
         
         if (i == 0) {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 48)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 48)]];
         } else {
             if (self.ximaStatusType == BTTXimaStatusTypeNormal) {
                 if (self.ximaDateType == BTTXimaDateTypeLastWeek) {
                     if (self.historyListType == BTTXimaHistoryListTypeNoData || self.historyListType == BTTXimaHistoryListTypeLoading) {
                         if (i == 1) {
-                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
+                            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
                         } else {
                             if (SCREEN_WIDTH == 414) {
-                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 432)]];
+                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 432)]];
                             } else if (SCREEN_WIDTH == 320) {
-                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 532)]];
+                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 532)]];
                             } else {
-                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 462)]];
+                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 462)]];
                             }
                         }
                     } else {
                         if (i == 1 + self.histroyModel.list.count) {
-                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+                            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
                         } else if (i == self.histroyModel.list.count + 2) {
                             if (SCREEN_WIDTH == 414) {
-                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 432)]];
+                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 432)]];
                             } else if (SCREEN_WIDTH == 320) {
-                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 532)]];
+                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 532)]];
                             } else {
-                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 462)]];
+                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 462)]];
                             }
                         } else {
-                            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 107)]];
+                            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 107)]];
                         }
                     }
                 } else {
                     if (self.thisWeekDataType == BTTXimaThisWeekTypeVaild) {
                         if (self.currentListType == BTTXimaCurrentListTypeNoData || self.currentListType == BTTXimaCurrentListTypeLoading) {
                             if (i == 1) {
-                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
+                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
                             } else if (i == 2) {
-                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
                             } else {
                                 if (SCREEN_WIDTH == 414) {
-                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 432)]];
+                                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 432)]];
                                 } else if (SCREEN_WIDTH == 320) {
-                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 532)]];
+                                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 532)]];
                                 } else {
-                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 462)]];
+                                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 462)]];
                                 }
                             }
                         } else {
                             if (i == 1 + self.validModel.list.count) {
-                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
                             } else if (i == self.validModel.list.count + 2) {
-                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 137)]];
+                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 137)]];
                             } else if (i == self.validModel.list.count + 3) {
                                 if (SCREEN_WIDTH == 414) {
-                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 432)]];
+                                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 432)]];
                                 } else if (SCREEN_WIDTH == 320) {
-                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 532)]];
+                                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 532)]];
                                 } else {
-                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 462)]];
+                                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 462)]];
                                 }
                             } else {
-                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 107)]];
+                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 107)]];
                             }
                         }
                     } else {
                         if (self.otherListType == BTTXimaOtherListTypeNoData || self.otherListType == BTTXimaOtherListTypeLoading) {
                             if (i == 1) {
-                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
+                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
                             } else {
                                 if (SCREEN_WIDTH == 414) {
-                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 432)]];
+                                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 432)]];
                                 } else if (SCREEN_WIDTH == 320) {
-                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 532)]];
+                                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 532)]];
                                 } else {
-                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 462)]];
+                                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 462)]];
                                 }
                             }
                         } else {
                             if (i == 1 + self.otherModel.list.count) {
-                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
                             } else if (i == self.otherModel.list.count + 2) {
                                 if (SCREEN_WIDTH == 414) {
-                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 432)]];
+                                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 432)]];
                                 } else if (SCREEN_WIDTH == 320) {
-                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 532)]];
+                                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 532)]];
                                 } else {
-                                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 462)]];
+                                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 462)]];
                                 }
                             } else {
-                                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 107)]];
+                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 107)]];
                             }
                         }
                     }
                 }
             } else {
                 if (i == total - 1) {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
                 } else {
-                    [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 85)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 85)]];
                 }
             }
         }
     }
+    self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });

@@ -10,9 +10,17 @@
 
 @implementation BTTAccountBlanceHeaderCell
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableTransferBtnNotification) name:@"EnableTransferBtnNotification" object:nil];
+}
+
+- (void)enableTransferBtnNotification {
+    self.trasferToLocal.enabled = YES;
 }
 
 - (IBAction)totalBtnClick:(UIButton *)sender {

@@ -177,14 +177,16 @@
     if (self.elementsHight.count) {
         [self.elementsHight removeAllObjects];
     }
+    NSMutableArray *elementsHight = [NSMutableArray array];
     NSInteger total = self.sheetDatas.count + 1;
     for (int i = 0; i < total; i++) {
         if (i == self.sheetDatas.count) {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
         } else {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         }
     }
+    self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
