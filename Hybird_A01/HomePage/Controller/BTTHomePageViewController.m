@@ -89,6 +89,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork userInfo]) {
         [BTTHttpManager requestUnReadMessageNum:nil];
+        [self loadSaveMoneyTimes];
         NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
         if (![NSDate isToday:timestamp]) {
             [self loadLuckyWheelCoinStatus];
