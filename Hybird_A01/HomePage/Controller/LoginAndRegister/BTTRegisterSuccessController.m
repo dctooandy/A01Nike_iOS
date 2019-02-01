@@ -208,17 +208,19 @@ typedef enum {
 }
 
 - (void)setupElements {
+    NSMutableArray *elementsHight = [NSMutableArray array];
     for (int i = 0; i < 2; i++) {
         if (i == 0) {
             if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal || self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 234)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 234)]];
             } else {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 274)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 274)]];
             }
         } else if (i == 1) {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 71)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 71)]];
         }
     }
+    self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });

@@ -212,13 +212,15 @@ typedef enum : NSUInteger {
     if (self.elementsHight.count) {
         [self.elementsHight removeAllObjects];
     }
+    NSMutableArray *elementsHight = [NSMutableArray array];
     for (int i = 0; i < self.dataSource.count + 1; i++) {
         if (i == self.dataSource.count) {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 110)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 110)]];
         } else {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         }
     }
+    self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });

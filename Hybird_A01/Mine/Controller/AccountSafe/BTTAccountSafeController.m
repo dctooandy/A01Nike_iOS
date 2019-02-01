@@ -117,9 +117,11 @@
 }
 
 - (void)setupElements {
+    NSMutableArray *elementsHight = [NSMutableArray array];
     for (int i = 0; i < 3; i++) {
-        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+        [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
     }
+    self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });

@@ -352,7 +352,7 @@
     } else {
         total = self.personalInfos.count + 6 + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count;
     }
-    if (indexPath.row >= total ) {
+    if (indexPath.row >= total) {
         [self loadPaymentData];
         return;
     }
@@ -513,18 +513,18 @@
     } else {
         total = self.personalInfos.count + 6 + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count;
     }
-    
+    NSMutableArray *elementsHight = [NSMutableArray array];
     for (int i = 0; i < total; i++) {
         if (i == 0) {
             if (SCREEN_WIDTH == 414) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 172)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 172)]];
             } else if (SCREEN_WIDTH == 320) {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 158)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 158)]];
             } else {
-                [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 158)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 158)]];
             }
         } else if (i >= 1 && i <= 1 + self.personalInfos.count - 1) {
-            [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 4, 98)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 4, 98)]];
         } else if (i == 1 + self.personalInfos.count ||
                    i == 3 + self.personalInfos.count + self.saveMoneyCount ||
                    i == 4 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount ||

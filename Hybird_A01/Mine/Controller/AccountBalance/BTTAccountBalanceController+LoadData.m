@@ -15,14 +15,15 @@
 - (void)loadMainData {
     NSArray *names = @[@"本地额度(元)",@"各厅额度(元)"];
     NSArray *icons = @[@"blance_local",@"blance_hall"];
-    
+    NSMutableArray *sheetDatas = [NSMutableArray array];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;
         model.iconName = icons[index];
-        [self.sheetDatas addObject:model];
+        [sheetDatas addObject:model];
     }
+    self.sheetDatas = [sheetDatas mutableCopy];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
@@ -73,7 +74,12 @@
     
     dispatch_group_notify(group, queue, ^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            button.enabled = YES;
+            
+            if (button.titleLabel.text.length) {
+                button.enabled = YES;
+            } else {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"EnableTransferBtnNotification" object:nil];
+            }
             [self.collectionView reloadData];
         });
     });
@@ -84,15 +90,17 @@
         if (self.games.count) {
             [self.games removeAllObjects];
         }
+        NSMutableArray *games = [NSMutableArray array];
         if (result.code_http == 200 && result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 if (result.data[@"platforms"] && [result.data[@"platforms"] isKindOfClass:[NSArray class]] && ![result.data[@"platforms"] isKindOfClass:[NSNull class]]) {
                     for (NSDictionary *dict in result.data[@"platforms"]) {
                         BTTGamesHallModel *model = [BTTGamesHallModel yy_modelWithDictionary:dict];
                         model.isLoading = YES;
-                        [self.games addObject:model];
+                        [games addObject:model];
                     }
                     self.isLoadingData = YES;
+                    self.games = [games mutableCopy];
                 }
             }
         }

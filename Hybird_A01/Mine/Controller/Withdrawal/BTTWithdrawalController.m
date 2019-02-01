@@ -174,10 +174,12 @@
         [self.elementsHight removeAllObjects];
     }
     NSInteger total = self.sheetDatas.count;
+    NSMutableArray *elementsHight = [NSMutableArray array];
     for (int i = 0; i < total; i++) {
         BTTMeMainModel *cellModel = self.sheetDatas[i];
-        [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, cellModel.cellHeight)]];
+        [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, cellModel.cellHeight)]];
     }
+    self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
