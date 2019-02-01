@@ -115,7 +115,7 @@
         case IVGameForwardPageTypeBJLDetails:
             configModel.url = @"gameRule/table_baccarat.htm";
             configModel.title = @"包桌百家乐";
-            break;
+            return;
         case IVGameForwardPageTypeExit: {
             return;
         }
