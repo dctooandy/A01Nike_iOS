@@ -127,7 +127,7 @@
                     BTTMeMainModel *mainModel = [BTTMeMainModel new];
                     mainModel.name = @"银联扫码";
                     mainModel.iconName = @"me_bankscan";
-                    mainModel.paymentType = CNPayChannelQR;
+                    mainModel.paymentType = CNPayChannelUnionQR;
                     [self.bigDataSoure addObject:mainModel];
                 }
                 
@@ -285,7 +285,7 @@
                     BTTMeMainModel *mainModel = [BTTMeMainModel new];
                     mainModel.name = @"银联扫码";
                     mainModel.iconName = @"me_bankscan";
-                    mainModel.paymentType = CNPayChannelQR;
+                    mainModel.paymentType = CNPayChannelUnionQR;
                     [self.normalDataSoure addObject:mainModel];
                 }
                 

@@ -35,6 +35,8 @@
 @property (nonatomic) CGSize cellSize;
 @property (nonatomic, assign) CGSize appSize;
 @property (nonatomic, strong) NSArray *apps;
+@property (weak, nonatomic) IBOutlet UIView *collectionBgView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstants;
 @end
 
 @implementation CNPayQRVC
@@ -67,13 +69,20 @@
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 18, 15, 18);
     [self.collectionView registerNib:[UINib nibWithNibName:kQRCellIndentifier bundle:nil] forCellWithReuseIdentifier:kQRCellIndentifier];
     [self.appCollectionView registerNib:[UINib nibWithNibName:@"BTTBankUnionAppIconCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBankUnionAppIconCell"];
-    
-    NSInteger count = self.payments.count;
+    if (self.paymentModel.paymentType == CNPaymentWechatQR ||
+        self.paymentModel.paymentType == CNPaymentAliQR ||
+        self.paymentModel.paymentType == CNPaymentQQQR ||
+        self.paymentModel.paymentType == CNPaymentUnionQR) {
+        self.collectionBgView.hidden = YES;
+        self.collectionViewHeight.constant = 0;
+        self.topConstants.constant = -70;
+    }
+//    NSInteger count = self.payments.count;
     // 根据数组个数与屏幕宽度来调节高度
     CGFloat itemWidth = ([UIScreen mainScreen].bounds.size.width -18-35-10)/2.0;
     CGFloat itemHeight = itemWidth * 56 / 160.0;
-    CGFloat totalHeight = ((count - 1)/2 + 1) * (itemHeight + 15);
-    self.collectionViewHeight.constant = totalHeight;
+//    CGFloat totalHeight = ((count - 1)/2 + 1) * (itemHeight + 15);
+//    self.collectionViewHeight.constant = totalHeight;
     self.cellSize = CGSizeMake(itemWidth, itemHeight + 10);
     self.apps = @[@"ysfapp",@"mtapp",@"dzapp",@"wphapp",@"ttzgapp",@"mfbapp",@"wzfapp",@"jdapp"];
     self.appCollectionView.delegate = self;
@@ -86,6 +95,7 @@
     layout.itemSize = self.appSize;
     self.appCollectionView.collectionViewLayout = layout;
     self.appsViewHeightConstants.constant = iconWidth * 2 + 36;
+    
 }
 
 - (void)configPreSettingMessage {
@@ -218,11 +228,24 @@
     
     /// 提交
     __weak typeof(self) weakSelf =  self;
-    [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVRequestResultModel *result, id response) {
-        sender.selected = NO;
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf handlerResult:result];
-    }];
+    
+    if (self.paymentModel.paymentType == CNPaymentWechatApp ||
+        self.paymentModel.paymentType == CNPaymentJDApp ||
+        self.paymentModel.paymentType == CNPaymentQQApp ||
+        self.paymentModel.paymentType == CNPaymentAliApp) {
+        [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVRequestResultModel *result, id response) {
+            sender.selected = NO;
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf paySucessHandler:result repay:nil];
+        }];
+    } else {
+        [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVRequestResultModel *result, id response) {
+            sender.selected = NO;
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf handlerResult:result];
+        }];
+    }
+   
 }
 
 - (void)handlerResult:(IVRequestResultModel *)model {

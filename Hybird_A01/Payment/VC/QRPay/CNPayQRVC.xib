@@ -18,12 +18,14 @@
                 <outlet property="appsView" destination="7x2-bd-MKk" id="8Eh-sd-c1O"/>
                 <outlet property="appsViewHeightConstants" destination="dCd-iL-O65" id="0VH-z2-K3O"/>
                 <outlet property="arrawDownIV" destination="Mp7-Y5-Eri" id="MeO-dd-IL9"/>
+                <outlet property="collectionBgView" destination="m4K-aK-8TW" id="Uy0-Sa-teI"/>
                 <outlet property="collectionView" destination="yCb-r4-x7i" id="aJd-4h-smh"/>
                 <outlet property="collectionViewHeight" destination="8KR-Md-ws0" id="Vgm-TW-8Zg"/>
                 <outlet property="noticesView" destination="caR-8Q-vil" id="uXb-DO-k5T"/>
                 <outlet property="preSettingMessageLb" destination="hYD-U1-5Ou" id="mzt-d4-Hxr"/>
                 <outlet property="preSettingView" destination="FUe-Hz-zx7" id="qui-qg-p7g"/>
                 <outlet property="preSettingViewHeight" destination="y6S-Aj-8ES" id="Vpv-eR-s0Q"/>
+                <outlet property="topConstants" destination="3iZ-0M-5J5" id="cxU-1p-kHW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

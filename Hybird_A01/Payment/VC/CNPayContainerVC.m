@@ -114,7 +114,6 @@
         case CNPaymentCoin:
         case CNPaymentWechatBarCode:
         case CNPaymentBTC:
-        case CNPaymentAliApp:
         case CNPaymentUnionApp:
         case CNPaymentOnline: {
             [viewControllers addObjectsFromArray:[self onlinePay:payment]];
@@ -132,6 +131,16 @@
         }
             break;
             
+        case CNPaymentAliApp:
+        {
+            BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
+            if (timeMoreTen) {
+                [viewControllers addObjectsFromArray:[self QRPay:payment]];
+            } else {
+                [viewControllers addObjectsFromArray:[self onlinePay:payment]];
+            }
+        }
+            break;
         case CNPaymentBQFast:
         case CNPaymentBQWechat:
         case CNPaymentBQAli: {
@@ -171,9 +180,10 @@
 
 /// QR支付
 - (NSArray<CNPayBaseVC *> *)QRPay:(CNPaymentModel *)payment {
+    BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
     if (payment.paymentType == CNPaymentWechatApp ||
         payment.paymentType == CNPaymentJDApp ||
-        payment.paymentType == CNPaymentQQApp ) {
+        payment.paymentType == CNPaymentQQApp || (payment.paymentType == CNPaymentAliApp && timeMoreTen)) {
         CNPayQRVC *step1VC = [[CNPayQRVC alloc] init];
         step1VC.paymentModel = payment;
         step1VC.payments = _payments;
@@ -188,10 +198,12 @@
 //        return @[step1VC];
 //    }
     CNPayQRVC *step1VC = [[CNPayQRVC alloc] init];
+    CNPayQRStep2VC *step2VC = [[CNPayQRStep2VC alloc] init];
     step1VC.paymentModel = payment;
+    step2VC.paymentModel = payment;
     // 内部切换数据
     step1VC.payments = _payments;
-    return @[step1VC];
+    return @[step1VC, step2VC];
 }
 
 /// 点卡支付
