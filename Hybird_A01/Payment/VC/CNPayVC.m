@@ -371,8 +371,12 @@
             }
         }
     }
-    
-    self.title = channelModel.channelName;
+    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
+    if ([channelModel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {
+        self.title = @"支付宝/微信/QQ/京东WAP";
+    } else {
+        self.title = channelModel.channelName;
+    }
     self.selectedIcon = channelModel.selectedIcon;
     
     /// 存在已经打开的支付渠道
@@ -405,8 +409,10 @@
     BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
     if ([channel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {
         cell.titleLb.text = @"支付宝/微信/QQ/京东WAP";
+        cell.titleLb.font = [UIFont boldSystemFontOfSize:11];
     } else {
         cell.titleLb.text = channel.channelName;
+        cell.titleLb.font = [UIFont boldSystemFontOfSize:13];
     }
     
     cell.channelIV.image = [UIImage imageNamed:channel.selectedIcon];
@@ -429,7 +435,12 @@
     CNPayChannelModel *channel = [_payChannels objectAtIndex:indexPath.row];
     _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payments.firstObject.paymentType];
     _payChannelVC.payments = channel.payments;
-    self.title = channel.channelName;
+    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
+    if ([channel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {
+        self.title = @"支付宝/微信/QQ/京东WAP";
+    } else {
+        self.title = channel.channelName;
+    }
     self.selectedIcon = channel.selectedIcon;
     [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];
 }
