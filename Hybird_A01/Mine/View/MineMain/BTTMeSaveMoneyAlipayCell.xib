@@ -32,13 +32,22 @@
                         <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="daozhangkuai" translatesAutoresizingMaskIntoConstraints="NO" id="pa4-ts-UQp">
+                        <rect key="frame" x="59" y="20" width="41" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="7Mw-MK-x7C"/>
+                            <constraint firstAttribute="width" constant="41" id="PPU-vt-lEG"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="pa4-ts-UQp" secondAttribute="trailing" id="6zz-0H-nYT"/>
                 <constraint firstItem="eJB-7Y-fsg" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="B7z-1T-t7s"/>
                 <constraint firstItem="Ii1-Xt-0Wd" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="DCB-vR-W8s"/>
                 <constraint firstAttribute="bottom" secondItem="Ii1-Xt-0Wd" secondAttribute="bottom" constant="8" id="axE-Ja-3ga"/>
                 <constraint firstItem="eJB-7Y-fsg" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="-10" id="dAQ-i1-LWp"/>
+                <constraint firstItem="pa4-ts-UQp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="ihk-ku-O6Q"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="100" height="134"/>
@@ -50,6 +59,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="daozhangkuai" width="82" height="30"/>
         <image name="me_alipay" width="57" height="57"/>
     </resources>
 </document>

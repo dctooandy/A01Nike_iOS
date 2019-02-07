@@ -73,6 +73,7 @@
     [super viewDidLoad];
     self.saveMoneyCount = 4;
     self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
+    self.saveMoneyTimesType = BTTSaveMoneyTimesTypeLessTen;
     self.title = @"会员中心";
     self.totalAmount = @"加载中";
     self.collectionView.bounces = NO;
@@ -100,6 +101,7 @@
         }
         [self loadPaymentData];
         [self loadAccountStatus];
+        [self loadSaveMoneyTimes];
     }
 }
 
@@ -424,6 +426,9 @@
     } else if (indexPath.row == self.personalInfos.count + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count + self.mainDataThree.count  + 5) {
         // 退出登录
         [MBProgressHUD showSuccess:@"退出成功" toView:nil];
+        self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
+        self.saveMoneyTimesType = BTTSaveMoneyTimesTypeLessTen;
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
         [BTTUserStatusManager logoutSuccess];
         [self loadPaymentDefaultData];
         [self setupElements];

@@ -83,7 +83,7 @@
             break;
         case CNPayChannelWechatQQJDAPP:
             self.channelName    = @"微信/QQ/京东WAP";
-            self.selectedIcon   = @"pay_AliHL";
+            self.selectedIcon   = @"wap";
             break;
         case CNPayChannelWechatQR:
             self.channelName    = @"微信扫码";

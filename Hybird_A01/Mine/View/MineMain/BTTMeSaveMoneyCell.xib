@@ -26,8 +26,8 @@
                             <constraint firstAttribute="height" constant="50" id="DCG-FP-5GY"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="迅捷网银" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EpD-fz-zDX">
-                        <rect key="frame" x="27.5" y="86.5" width="45" height="13.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="迅捷网银" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EpD-fz-zDX">
+                        <rect key="frame" x="8" y="86.5" width="84" height="13.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -35,6 +35,8 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="EpD-fz-zDX" secondAttribute="trailing" constant="8" id="5dW-G8-4kv"/>
+                <constraint firstItem="EpD-fz-zDX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="NJH-eb-1WY"/>
                 <constraint firstItem="tDQ-Tj-5hT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="Smr-j5-1vT"/>
                 <constraint firstAttribute="bottom" secondItem="EpD-fz-zDX" secondAttribute="bottom" constant="10" id="dTf-ko-lfR"/>
                 <constraint firstItem="EpD-fz-zDX" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="e75-nf-1C4"/>

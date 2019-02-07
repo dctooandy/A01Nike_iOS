@@ -38,9 +38,9 @@
                             <constraint firstAttribute="width" constant="38" id="Ze3-b0-0Vq"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付渠道" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S83-At-Eb7">
-                        <rect key="frame" x="32" y="63" width="57.5" height="17"/>
-                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付渠道" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S83-At-Eb7">
+                        <rect key="frame" x="8" y="63" width="105" height="16"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -54,8 +54,10 @@
                 <constraint firstItem="zNE-8c-ghf" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="JrT-Sh-fPD"/>
                 <constraint firstItem="XJH-eE-cTb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Mnk-ps-k1O"/>
                 <constraint firstItem="XJH-eE-cTb" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Xkg-Mk-Tag"/>
+                <constraint firstItem="S83-At-Eb7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="cs0-qv-ilt"/>
                 <constraint firstItem="S83-At-Eb7" firstAttribute="top" secondItem="zNE-8c-ghf" secondAttribute="bottom" constant="10" id="dKT-3c-R47"/>
                 <constraint firstItem="S83-At-Eb7" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="jeX-km-xjh"/>
+                <constraint firstAttribute="trailing" secondItem="S83-At-Eb7" secondAttribute="trailing" constant="8" id="oRU-mS-OSS"/>
                 <constraint firstAttribute="trailing" secondItem="XJH-eE-cTb" secondAttribute="trailing" id="s7z-Ot-r0o"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>

@@ -277,14 +277,30 @@
     qqQR.payments = [[NSArray alloc] initWithObjects:
                      payments[CNPaymentQQApp], nil];
     // 微信/QQ/京东WAP
+    BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
+    
     CNPayChannelModel *wap = [[CNPayChannelModel alloc] init];
     wap.payChannel = CNPayChannelWechatQQJDAPP;
-    wap.payments = [[NSArray alloc] initWithObjects:
-                    payments[CNPaymentWechatApp],
-                     payments[CNPaymentQQApp],
-                    payments[CNPaymentJDApp],nil];
+    if (timeMoreTen) {
+        wap.payments = [[NSArray alloc] initWithObjects:
+                        payments[CNPaymentAliApp],
+                        payments[CNPaymentWechatApp],
+                        payments[CNPaymentQQApp],
+                        payments[CNPaymentJDApp],nil];
+    } else {
+        wap.payments = [[NSArray alloc] initWithObjects:
+                        payments[CNPaymentWechatApp],
+                        payments[CNPaymentQQApp],
+                        payments[CNPaymentJDApp],nil];
+    }
     
-    NSArray *array = @[unionQR,jdQR,ali,BQFast,BQWeChat,BQAli,aliQR,wxQR,qqQR,online,deposit,wap,unionPay,coin,card,BTC,barCode];
+    NSArray *array = nil;
+    if (timeMoreTen) {
+        array = @[BQFast,BQAli,BQWeChat,deposit,unionQR,aliQR,online,wxQR,jdQR,qqQR,wap,unionPay,coin,card,BTC,barCode];
+    } else {
+        array = @[unionQR,jdQR,ali,BQFast,BQWeChat,BQAli,aliQR,wxQR,qqQR,online,deposit,wap,unionPay,coin,card,BTC,barCode];
+    }
+    
     
     // 没开启的渠道不显示
     for (CNPayChannelModel *channel in array) {
@@ -386,7 +402,13 @@
     CNPayChannelCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kChannelCellIndentifier forIndexPath:indexPath];
     
     CNPayChannelModel *channel = [_payChannels objectAtIndex:indexPath.row];
-    cell.titleLb.text = channel.channelName;
+    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
+    if ([channel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {
+        cell.titleLb.text = @"支付宝/微信/QQ/京东WAP";
+    } else {
+        cell.titleLb.text = channel.channelName;
+    }
+    
     cell.channelIV.image = [UIImage imageNamed:channel.selectedIcon];
     
     // 默认选中第一个可以支付的渠道

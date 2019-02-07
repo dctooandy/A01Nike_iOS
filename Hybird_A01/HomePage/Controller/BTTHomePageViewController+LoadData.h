@@ -51,7 +51,6 @@ NS_ASSUME_NONNULL_BEGIN
 // 博币兑换
 - (void)loadLuckyWheelCoinChange;
 
-- (void)loadSaveMoneyTimes;
 
 @end
 

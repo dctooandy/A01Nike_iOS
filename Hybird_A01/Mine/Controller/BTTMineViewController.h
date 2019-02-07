@@ -46,6 +46,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger saveMoneyCount;
 
+@property (nonatomic, assign) BTTSaveMoneyTimesType saveMoneyTimesType;
+
 - (void)setupElements;
 
 @end

@@ -50,6 +50,12 @@
         self.heightConstants.constant = 40;
         self.widthConstants.constant = 40;
     }
+    
+    if ([model.name isEqualToString:@"支付宝/微信/QQ/京东WAP"] || [model.name isEqualToString:@"微信/QQ/京东WAP"]) {
+        self.nameLabel.font = [UIFont systemFontOfSize:8];
+    } else {
+        self.nameLabel.font = [UIFont systemFontOfSize:11];
+    }
 }
 
 @end
