@@ -19,6 +19,7 @@
 #import "BTTAddBTCController.h"
 #import "BTTChangeMobileSuccessController.h"
 #import "BTTChangeMobileManualController.h"
+#import "BTTCardModifyVerifyController.h"
 @interface BTTBindingMobileController ()<BTTElementsFlowLayoutDelegate>
 
 @end
@@ -308,8 +309,9 @@
                 }
                     break;
                 case BTTSafeVerifyTypeMobileChangeBankCard:{
-                    BTTAddCardController *vc = [BTTAddCardController new];
-                    vc.addCardType = BTTSafeVerifyTypeMobileChangeBankCard;
+//                    BTTAddCardController *vc = [BTTAddCardController new];
+//                    vc.addCardType = BTTSafeVerifyTypeMobileChangeBankCard;
+                    BTTCardModifyVerifyController *vc = [BTTCardModifyVerifyController new];
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;
