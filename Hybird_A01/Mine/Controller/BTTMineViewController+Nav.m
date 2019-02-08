@@ -17,6 +17,7 @@
 #import "BTTMakeCallNoLoginView.h"
 #import "BTTMakeCallLoginView.h"
 #import "BTTMineViewController+LoadData.h"
+#import "BTTCardInfosController.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
@@ -27,6 +28,7 @@ static const char *BTTHeaderViewKey = "headerView";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccess:) name:LogoutSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(versionUpdate:) name:IVCheckUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoCardInfo) name:@"gotoCardInfoNotification" object:nil];
 }
 
 - (void)versionUpdate:(NSNotification *)notifi {
@@ -39,6 +41,13 @@ static const char *BTTHeaderViewKey = "headerView";
 
 - (void)logoutSuccess:(NSNotification *)notifi {
     [self setupElements];
+}
+
+- (void)gotoCardInfo {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    });
 }
 
 - (void)setupNav {

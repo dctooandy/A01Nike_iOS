@@ -20,6 +20,45 @@
     [super viewDidLoad];
     [self setupCollectionView];
     [self setupElements];
+    switch (self.mobileCodeType) {
+        case BTTSafeVerifyTypeNormalAddBankCard:
+        case BTTSafeVerifyTypeNormalAddBTCard:
+        case BTTSafeVerifyTypeMobileAddBankCard:
+        case BTTSafeVerifyTypeMobileBindAddBankCard:
+        case BTTSafeVerifyTypeMobileAddBTCard:
+        case BTTSafeVerifyTypeMobileBindAddBTCard:
+            self.title = @"添加银行卡成功!";
+            break;
+        case BTTSafeVerifyTypeMobileChangeBankCard:
+        case BTTSafeVerifyTypeMobileBindChangeBankCard:
+        case BTTSafeVerifyTypeChangeMobile:
+        case BTTSafeVerifyTypeChangeEmail:
+            self.title = @"修改银行卡成功!";
+            break;
+        case BTTSafeVerifyTypeMobileDelBankCard:
+        case BTTSafeVerifyTypeMobileBindDelBankCard:
+        case BTTSafeVerifyTypeMobileDelBTCard:
+        case BTTSafeVerifyTypeMobileBindDelBTCard:
+            self.title = @"删除成功!";
+            break;
+        case BTTSafeVerifyTypeBindMobile:
+            self.title = @"绑定手机号成功";
+        case BTTSafeVerifyTypeBindEmail:
+            self.title = @"绑定邮箱成功";
+            break;
+        case BTTSafeVerifyTypeHumanAddBankCard:
+        case BTTSafeVerifyTypeHumanChangeBankCard:
+        case BTTSafeVerifyTypeHumanDelBankCard:
+        case BTTSafeVerifyTypeHumanAddBTCard:
+        case BTTSafeVerifyTypeHumanDelBTCard:
+        case BTTSafeVerifyTypeHumanChangeMoblie:
+            self.title = @"申请已提交";
+       
+            break;
+        default:
+            self.title = @"处理成功";
+            break;
+    }
 }
 
 - (void)setupCollectionView {
@@ -43,6 +82,9 @@
         weakSelf(weakSelf)
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            if (button.tag == 2301) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:nil];
+            }
         };
         return cell;
     }
