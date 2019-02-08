@@ -15,7 +15,7 @@
 
 - (void)loadMainData {
     NSArray *names = nil;
-    if (self.safeVerifyType == 0) {
+    if (self.safeVerifyType == BTTSafeVerifyTypeHumanChangeBankCard) {
         names = @[@"原绑定电话",@"获取中...",@"核对原来绑定电话",@"输入绑定的手机号",@"原绑定银行卡",@"获取中...",@"核对原来绑定银行卡",@"输入绑定的银行卡号"];
     } else {
         names = @[@"原绑定银行卡",@"获取中...",@"核对原来绑定银行卡",@"输入绑定的银行卡号"];
