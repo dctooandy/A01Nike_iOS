@@ -166,9 +166,18 @@
 }
 - (void)textChanged:(UITextField *)textField
 {
-    if (textField == [self getVerifyBankNumTF]) {
+    if (self.safeVerifyType == BTTSafeVerifyTypeHumanChangeBankCard) {
+        BOOL isPhone = [PublicMethod isValidatePhone:[self getVerifyPhoneTF].text];
+        BOOL isBank = [PublicMethod isValidateBankNumber:[self getVerifyBankNumTF].text];
+        if (isBank && isPhone) {
+            [self getSubmitBtn].enabled = YES;
+        } else {
+            [self getSubmitBtn].enabled = NO;
+        }
+    } else {
         [self getSubmitBtn].enabled = [PublicMethod isValidateBankNumber:[self getVerifyBankNumTF].text];
     }
+    
 }
 - (UITextField *)getVerifyBankNumTF
 {
@@ -197,6 +206,9 @@
 - (UIButton *)getSubmitBtn
 {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:0];
+    if (self.safeVerifyType == BTTSafeVerifyTypeHumanChangeBankCard) {
+        indexPath = [NSIndexPath indexPathForRow:8 inSection:0];
+    }
     BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     return cell.btn;
 }
