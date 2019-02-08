@@ -23,6 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"银行卡验证";
+    if (self.safeVerifyType == 0) {
+        self.safeVerifyType = BTTSafeVerifyTypeHumanChangeBankCard;
+    }
     [self setupCollectionView];
     [self loadMainData];
     [self fetchHumanBankAndPhone];
@@ -42,33 +45,69 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     weakSelf(weakSelf)
-    if (indexPath.row == 0 || indexPath.row == 2) {
-        BTTMeMainModel *model = self.sheetDatas[indexPath.row];
-        BTTCardModifyTitleCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardModifyTitleCell" forIndexPath:indexPath];
-        cell.titleLabel.text = model.name;
-        return cell;
-    } else if (indexPath.row == 1 || indexPath.row == 3) {
-        BTTMeMainModel *model = self.sheetDatas[indexPath.row];
-        BTTCardModifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardModifyCell" forIndexPath:indexPath];
-        if (indexPath.row == 1) {
-            cell.textField.text = self.bankNumber ? self.bankNumber : model.name;
-            cell.textField.userInteractionEnabled = NO;
+    if (self.safeVerifyType == BTTSafeVerifyTypeMobileChangeBankCard) {
+        if (indexPath.row == 0 || indexPath.row == 2) {
+            BTTMeMainModel *model = self.sheetDatas[indexPath.row];
+            BTTCardModifyTitleCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardModifyTitleCell" forIndexPath:indexPath];
+            cell.titleLabel.text = model.name;
+            return cell;
+        } else if (indexPath.row == 1 || indexPath.row == 3) {
+            BTTMeMainModel *model = self.sheetDatas[indexPath.row];
+            BTTCardModifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardModifyCell" forIndexPath:indexPath];
+            if (indexPath.row == 1) {
+                cell.textField.text = self.bankNumber ? self.bankNumber : model.name;
+                cell.textField.userInteractionEnabled = NO;
+            } else {
+                cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+                cell.textField.text = @"";
+                cell.textField.placeholder = model.name;
+                cell.textField.userInteractionEnabled = YES;
+                [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+            }
+            return cell;
         } else {
-            cell.textField.keyboardType = UIKeyboardTypeNumberPad;
-            cell.textField.text = @"";
-            cell.textField.placeholder = model.name;
-            cell.textField.userInteractionEnabled = YES;
-            [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+            BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+            cell.buttonType = BTTButtonTypeNext;
+            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                [weakSelf submitVerify];
+            };
+            return cell;
         }
-        return cell;
     } else {
-        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
-        cell.buttonType = BTTButtonTypeNext;
-        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-            [weakSelf submitVerify];
-        };
-        return cell;
+        if (indexPath.row == 0 || indexPath.row == 2 || indexPath.row == 4 || indexPath.row == 6) {
+            BTTMeMainModel *model = self.sheetDatas[indexPath.row];
+            BTTCardModifyTitleCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardModifyTitleCell" forIndexPath:indexPath];
+            cell.titleLabel.text = model.name;
+            return cell;
+        } else if (indexPath.row == 1 || indexPath.row == 3 || indexPath.row == 5 || indexPath.row == 7) {
+            BTTMeMainModel *model = self.sheetDatas[indexPath.row];
+            BTTCardModifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardModifyCell" forIndexPath:indexPath];
+            if (indexPath.row == 1 || indexPath.row == 5) {
+                if (indexPath.row == 1) {
+                    cell.textField.text = self.phone ? self.phone : model.name;
+                    cell.textField.userInteractionEnabled = NO;
+                } else {
+                    cell.textField.text = self.bankNumber ? self.bankNumber : model.name;
+                    cell.textField.userInteractionEnabled = NO;
+                }
+            } else {
+                cell.textField.keyboardType = UIKeyboardTypeNumberPad;
+                cell.textField.text = @"";
+                cell.textField.placeholder = model.name;
+                cell.textField.userInteractionEnabled = YES;
+                [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+            }
+            return cell;
+        } else {
+            BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+            cell.buttonType = BTTButtonTypeNext;
+            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                [weakSelf submitVerify];
+            };
+            return cell;
+        }
     }
+   
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -133,10 +172,28 @@
 }
 - (UITextField *)getVerifyBankNumTF
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+    NSIndexPath *indexPath = nil;
+    if (self.safeVerifyType == BTTSafeVerifyTypeHumanChangeBankCard) {
+        indexPath = [NSIndexPath indexPathForRow:7 inSection:0];
+    } else {
+        indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+    }
     BTTCardModifyCell *cell = (BTTCardModifyCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     return cell.textField;
 }
+
+- (UITextField *)getVerifyPhoneTF {
+    NSIndexPath *indexPath = nil;
+    if (self.safeVerifyType == BTTSafeVerifyTypeHumanChangeBankCard) {
+        indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+    } else {
+        return nil;
+    }
+    BTTCardModifyCell *cell = (BTTCardModifyCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.textField;
+}
+
+
 - (UIButton *)getSubmitBtn
 {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:0];
@@ -151,8 +208,10 @@
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
             weakSelf.bankNumber = [result.data valueForKey:@"bank_account_no"];
+            weakSelf.phone = [result.data valueForKey:@"phone"];
         } else {
             weakSelf.bankNumber = @"获取失败，请重新打开该页面!";
+            weakSelf.phone = @"获取失败，请重新打开该页面!";
             [MBProgressHUD showError:result.message toView:weakSelf.view];
         }
         [weakSelf.collectionView reloadData];
@@ -163,6 +222,9 @@
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"login_name"] = [IVNetwork userInfo].loginName;
     params[@"bank_account_no"] = [self getVerifyBankNumTF].text;
+    if ([self getVerifyPhoneTF]) {
+        params[@"phone"] = [self getVerifyPhoneTF].text;
+    }
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     [BTTHttpManager verifyHumanBankAndPhoneWithParams:params.copy completion:^(IVRequestResultModel *result, id response) {
@@ -170,7 +232,7 @@
         if (result.status) {
             [MBProgressHUD showSuccess:@"验证成功!" toView:nil];
             BTTAddCardController *vc = [[BTTAddCardController alloc] init];
-            vc.addCardType = BTTSafeVerifyTypeHumanChangeBankCard;
+            vc.addCardType = self.safeVerifyType;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         } else {
             [MBProgressHUD showError:result.message toView:nil];
