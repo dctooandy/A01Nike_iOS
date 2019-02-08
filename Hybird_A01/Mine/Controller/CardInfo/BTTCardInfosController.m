@@ -247,8 +247,10 @@
 - (void)modifyBtnClicked
 {
     if ([IVNetwork userInfo].isPhoneBinded) {
-        BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-        vc.mobileCodeType = BTTSafeVerifyTypeMobileChangeBankCard;
+//        BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
+//        vc.mobileCodeType = BTTSafeVerifyTypeMobileChangeBankCard;
+        BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
+        vc.verifyType = BTTSafeVerifyTypeMobileChangeBankCard;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         //2018-11-23 nike说按线上标准直接跳转绑定页面
