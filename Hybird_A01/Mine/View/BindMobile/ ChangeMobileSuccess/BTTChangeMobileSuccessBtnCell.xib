@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,27 +19,46 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frk-EX-2g8">
-                        <rect key="frame" x="15" y="28" width="345" height="44"/>
-                        <state key="normal" title="返回会员中心" backgroundImage="binding_confirm_enable_normal">
+                    <button opaque="NO" tag="2301" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Frk-EX-2g8">
+                        <rect key="frame" x="130" y="28" width="230" height="44"/>
+                        <state key="normal" title="银行卡资料" backgroundImage="binding_confirm_enable_normal">
                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
                             <action selector="backMemberCenter:" destination="gTV-IL-0wX" eventType="touchUpInside" id="MTm-cn-zgE"/>
                         </connections>
                     </button>
+                    <button opaque="NO" clipsSubviews="YES" tag="2300" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FiO-m3-mFx">
+                        <rect key="frame" x="15" y="28" width="100" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="VGE-xS-z0n"/>
+                            <constraint firstAttribute="width" constant="100" id="gSN-QI-8wQ"/>
+                        </constraints>
+                        <state key="normal" title="会员中心" backgroundImage="xima_btn2">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="backMemberCenter:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Vle-tp-q4b"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="Frk-EX-2g8" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="HWY-O0-ze4"/>
+                <constraint firstItem="Frk-EX-2g8" firstAttribute="leading" secondItem="FiO-m3-mFx" secondAttribute="trailing" constant="15" id="bwm-PJ-ZLa"/>
+                <constraint firstItem="FiO-m3-mFx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="lhK-gv-vFa"/>
                 <constraint firstAttribute="trailing" secondItem="Frk-EX-2g8" secondAttribute="trailing" constant="15" id="rGI-dw-q9G"/>
-                <constraint firstItem="Frk-EX-2g8" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="tri-do-1OX"/>
+                <constraint firstItem="FiO-m3-mFx" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="xuV-Li-xZy"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
-            <point key="canvasLocation" x="137.59999999999999" y="153.82308845577214"/>
+            <connections>
+                <outlet property="memberCenterBtn" destination="FiO-m3-mFx" id="1Ck-Be-XTZ"/>
+            </connections>
+            <point key="canvasLocation" x="-65" y="155"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="binding_confirm_enable_normal" width="345" height="44"/>
+        <image name="xima_btn2" width="165" height="41"/>
     </resources>
 </document>

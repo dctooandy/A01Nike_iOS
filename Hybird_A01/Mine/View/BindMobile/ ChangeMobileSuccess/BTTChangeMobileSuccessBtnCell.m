@@ -14,6 +14,7 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.backgroundColor = [UIColor colorWithHexString:@"212229"];
+    self.memberCenterBtn.layer.cornerRadius = 4;
 }
 - (IBAction)backMemberCenter:(id)sender {
     if (self.buttonClickBlock) {

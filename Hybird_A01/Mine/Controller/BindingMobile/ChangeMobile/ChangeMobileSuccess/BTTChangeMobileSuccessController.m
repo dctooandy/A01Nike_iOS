@@ -20,6 +20,11 @@
     [super viewDidLoad];
     [self setupCollectionView];
     [self setupElements];
+    if (self.mobileCodeType == BTTSafeVerifyTypeHumanChangeBankCard || self.mobileCodeType == BTTSafeVerifyTypeMobileChangeBankCard) {
+        self.title = @"修改银行卡";
+    } else if (self.mobileCodeType == BTTSafeVerifyTypeHumanAddBankCard || self.mobileCodeType == BTTSafeVerifyTypeMobileAddBankCard) {
+        self.title = @"添加银行卡";
+    }
 }
 
 - (void)setupCollectionView {
@@ -43,6 +48,9 @@
         weakSelf(weakSelf)
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            if (button.tag == 2301) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:nil];
+            }
         };
         return cell;
     }
