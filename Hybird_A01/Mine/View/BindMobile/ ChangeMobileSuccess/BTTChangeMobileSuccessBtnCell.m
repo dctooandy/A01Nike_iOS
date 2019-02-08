@@ -12,7 +12,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    self.mineSparaterType = BTTMineSparaterTypeNone;
+    self.backgroundColor = [UIColor colorWithHexString:@"212229"];
 }
 - (IBAction)backMemberCenter:(id)sender {
     if (self.buttonClickBlock) {
