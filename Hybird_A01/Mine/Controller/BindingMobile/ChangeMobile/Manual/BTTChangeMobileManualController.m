@@ -172,7 +172,7 @@
 {
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [BTTHttpManager fetchHumanBankAndPhoneWithCompletion:^(IVRequestResultModel *result, id response) {
+    [BTTHttpManager fetchHumanBankAndPhoneWithBankId:nil Completion:^(IVRequestResultModel *result, id response) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
             weakSelf.bankNumber = [result.data valueForKey:@"bank_account_no"];

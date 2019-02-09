@@ -8,6 +8,8 @@
 
 #import "BTTCollectionViewController.h"
 
+@class BTTBankModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTCardModifyVerifyController : BTTCollectionViewController
@@ -16,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *bankNumber;
 
 @property (nonatomic, copy) NSString *phone;
+
+@property (nonatomic, strong) BTTBankModel *bankModel;
 @end
 
 NS_ASSUME_NONNULL_END
