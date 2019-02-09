@@ -313,6 +313,7 @@
 //                    vc.addCardType = BTTSafeVerifyTypeMobileChangeBankCard;
                     BTTCardModifyVerifyController *vc = [BTTCardModifyVerifyController new];
                     vc.safeVerifyType = BTTSafeVerifyTypeMobileChangeBankCard;
+                    vc.bankModel = self.bankModel;
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;
@@ -358,6 +359,7 @@
                     {
                         BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
                         vc.verifyType = BTTSafeVerifyTypeHumanChangeBankCard;
+                        vc.bankModel = self.bankModel;
                         [self.navigationController pushViewController:vc animated:YES];
                     }
                         break;

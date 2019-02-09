@@ -38,7 +38,7 @@
  */
 + (void)updateBankCardWithUrl:(NSString *)url params:(NSDictionary *)params completion:(IVRequestCallBack)completion;
 //获取人工服务时需要验证的手机和银行卡
-+ (void)fetchHumanBankAndPhoneWithCompletion:(IVRequestCallBack)completion;
++ (void)fetchHumanBankAndPhoneWithBankId:(NSString *)bankId Completion:(IVRequestCallBack)completion;
 //验证人工服务的手机号和银行卡号
 + (void)verifyHumanBankAndPhoneWithParams:(NSDictionary *)params completion:(IVRequestCallBack)completion;
 //添加比特比钱包

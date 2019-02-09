@@ -109,9 +109,14 @@
 {
     [self sendRequestWithUrl:url paramters:params completionBlock:completion];
 }
-+ (void)fetchHumanBankAndPhoneWithCompletion:(IVRequestCallBack)completion
++ (void)fetchHumanBankAndPhoneWithBankId:(NSString *)bankId Completion:(IVRequestCallBack)completion
 {
-    NSDictionary *params = @{@"login_name":[IVNetwork userInfo].loginName};
+    NSDictionary *params = nil;
+    if (bankId.length) {
+        params = @{@"login_name":[IVNetwork userInfo].loginName,@"customer_bank_id":bankId};
+    } else {
+        params = @{@"login_name":[IVNetwork userInfo].loginName};
+    }
     [self sendRequestWithUrl:@"public/forgot/getBanknoAndPhone" paramters:params completionBlock:completion];
 }
 + (void)verifyHumanBankAndPhoneWithParams:(NSDictionary *)params completion:(IVRequestCallBack)completion
