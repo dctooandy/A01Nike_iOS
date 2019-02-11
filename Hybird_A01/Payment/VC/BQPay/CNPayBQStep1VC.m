@@ -174,6 +174,7 @@
                 [self showError:result.message];
                 return;
             }
+            weakSelf.paymentModel.bankList = bankList.copy;
             NSMutableArray *bankNames = [NSMutableArray array];
             for (CNPayBankCardModel *model in bankList) {
                 [bankNames addObject:model.bankname];
