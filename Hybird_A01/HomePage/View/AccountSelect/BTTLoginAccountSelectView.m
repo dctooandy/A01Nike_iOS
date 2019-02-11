@@ -11,20 +11,36 @@
 
 @interface BTTLoginAccountSelectView ()<UITableViewDelegate, UITableViewDataSource>
 
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightContstant;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstants;
 @end
 
 @implementation BTTLoginAccountSelectView
 
++ (instancetype)viewFromXib {
+    return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil][0];
+}
+
+
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    [self setupUI];
 }
 
 - (void)setupUI {
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.rowHeight = 40;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerNib:[UINib nibWithNibName:@"BTTLoginAccountSelectCell" bundle:nil] forCellReuseIdentifier:@"BTTLoginAccountSelectCell"];
+    self.widthConstants.constant = SCREEN_WIDTH - 80;
+    self.bgView.layer.cornerRadius = 5;
+    self.tableView.scrollEnabled = NO;
     
 }
 
@@ -35,7 +51,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    BTTLoginAccountSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BTTLoginAccountSelectCell"];
+    return cell;
 }
 
+- (IBAction)dismissClick:(UIButton *)sender {
+    if (self.dismissBlock) {
+        self.dismissBlock();
+    }
+}
 @end

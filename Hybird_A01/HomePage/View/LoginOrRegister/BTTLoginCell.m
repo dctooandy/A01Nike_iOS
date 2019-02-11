@@ -31,9 +31,9 @@
 }
 
 - (void)textFieldChange:(UITextField *)textField {
-    if (textField.text.length > 9 && [textField.text hasPrefix:@"g"]) {
+    if (textField.text.length > 10 && [textField.text hasPrefix:@"g"]) {
         [MBProgressHUD showError:@"账号长度不能超过9位" toView:nil];
-        textField.text = [textField.text substringToIndex:9];
+        textField.text = [textField.text substringToIndex:10];
     }
     
     if ([PublicMethod isValidatePhone:textField.text]) {

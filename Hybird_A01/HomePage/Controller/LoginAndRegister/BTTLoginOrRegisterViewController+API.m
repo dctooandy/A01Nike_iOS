@@ -15,6 +15,7 @@
 #import "BTTRegisterQuickManualCell.h"
 #import "BTTRegisterSuccessController.h"
 #import "BTTUserStatusManager.h"
+#import "BTTLoginAccountSelectView.h"
 
 @implementation BTTLoginOrRegisterViewController (API)
 
@@ -112,6 +113,8 @@
         }
     }];
 }
+
+
 
 - (void)showAlertWithModle:(BTTLoginAPIModel *)model {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"很抱歉!" message:@"多次密码输入错误, 已被锁住!" preferredStyle:UIAlertControllerStyleAlert];
