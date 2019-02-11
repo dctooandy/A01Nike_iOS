@@ -238,6 +238,9 @@
     if ([self getVerifyPhoneTF]) {
         params[@"phone"] = [self getVerifyPhoneTF].text;
     }
+    if (self.bankModel) {
+        params[@"customer_bank_id"] = self.bankModel.customer_bank_id;
+    }
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     [BTTHttpManager verifyHumanBankAndPhoneWithParams:params.copy completion:^(IVRequestResultModel *result, id response) {
