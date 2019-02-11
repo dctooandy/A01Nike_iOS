@@ -19,6 +19,7 @@
 #import "BTTLoginCodeCell.h"
 #import "BTTLoginOrRegisterViewController+API.h"
 #import "BTTForgetPasswordController.h"
+#import "BTTLoginNoRegisterCell.h"
 
 @interface BTTLoginOrRegisterViewController ()<BTTElementsFlowLayoutDelegate, UITextFieldDelegate>
 
@@ -74,6 +75,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterQuickAutoCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterQuickAutoCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterQuickManualCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterQuickManualCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTLoginCodeCell" bundle:nil] forCellWithReuseIdentifier:@"BTTLoginCodeCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTLoginNoRegisterCell" bundle:nil] forCellWithReuseIdentifier:@"BTTLoginNoRegisterCell"];
 }
 
 
@@ -107,7 +109,7 @@
                 cell.accountTextField.delegate = self;
                 cell.pwdTextField.delegate = self;
                 NSString *historyAccount = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCacheAccountName];
-                cell.accountTextField.text = historyAccount.length ? [historyAccount substringFromIndex:1] : @"";
+                cell.accountTextField.text = historyAccount.length ? historyAccount : @"";
                 return cell;
             } else{
                 BTTLoginCodeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginCodeCell" forIndexPath:indexPath];
@@ -226,7 +228,7 @@
                     [strongSelf.navigationController pushViewController:vc animated:YES];
                 };
                 return cell;
-            } else {
+            } else if (indexPath.row == 4) {
                 BTTLoginOrRegisterBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginOrRegisterBtnCell" forIndexPath:indexPath];
                 cell.cellBtnType = BTTBtnCellTypeLogin;
                 weakSelf(weakSelf);
@@ -234,6 +236,15 @@
                     strongSelf(strongSelf);
                     [collectionView endEditing:YES];
                     [strongSelf login];
+                };
+                return cell;
+            } else {
+                BTTLoginNoRegisterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginNoRegisterCell" forIndexPath:indexPath];
+                weakSelf(weakSelf);
+                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                    strongSelf(strongSelf);
+                    strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
+                    [strongSelf setupElements];
                 };
                 return cell;
             }
@@ -320,7 +331,7 @@
     }
     NSInteger total = 0;
     if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
-        total = 5;
+        total = 6;
     } else {
         total = 4;
     }
@@ -350,8 +361,11 @@
             if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
                 if (i == 3) {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
-                } else {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+                } else if (i == 4) {
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 70)]];
+                }
+                else {
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 50)]];
                 }
             } else {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];

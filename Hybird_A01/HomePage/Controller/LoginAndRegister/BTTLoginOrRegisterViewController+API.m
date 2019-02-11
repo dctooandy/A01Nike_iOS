@@ -30,12 +30,12 @@
     BOOL isValid = NO;
     if (self.loginCellType == BTTLoginCellTypeNormal) {
         BTTLoginCell *cell = (BTTLoginCell *)[self.collectionView cellForItemAtIndexPath:loginCellIndexPath];
-        model.login_name = [NSString stringWithFormat:@"g%@",cell.accountTextField.text];
+        model.login_name = [NSString stringWithFormat:@"%@",cell.accountTextField.text];
         model.password = cell.pwdTextField.text;
         isValid = [predicate evaluateWithObject:model.login_name];
     } else {
         BTTLoginCodeCell *cell = (BTTLoginCodeCell *)[self.collectionView cellForItemAtIndexPath:loginCellIndexPath];
-        model.login_name = [NSString stringWithFormat:@"g%@",cell.accountTextField.text];
+        model.login_name = [NSString stringWithFormat:@"%@",cell.accountTextField.text];
         model.password = cell.pwdTextField.text;
         model.code = cell.codeTextField.text;
         isValid = [predicate evaluateWithObject:model.login_name];
@@ -49,10 +49,16 @@
         [MBProgressHUD showError:@"请输入密码" toView:self.view];
         return;
     }
+    if (![model.login_name hasPrefix:@"g"]) {
+        [MBProgressHUD showError:@"请输入以g开头真钱账号" toView:self.view];
+        return;
+    }
+    
     if (!model.code.length && self.loginCellType == BTTLoginCellTypeCode) {
         [MBProgressHUD showError:@"请输入验证码" toView:self.view];
         return;
     }
+    
     [self loginWithLoginAPIModel:model isBack:YES];
 }
 

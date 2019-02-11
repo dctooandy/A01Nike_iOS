@@ -91,6 +91,8 @@
 		3A5F7AB021ACF5DB00128E8B /* BTTVideoGamesListController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AAE21ACF5DA00128E8B /* BTTVideoGamesListController+LoadData.m */; };
 		3A5F7AB521AD0E6800128E8B /* BTTVideoGamesFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AB321AD0E6800128E8B /* BTTVideoGamesFilterCell.m */; };
 		3A5F7AB621AD0E6800128E8B /* BTTVideoGamesFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7AB421AD0E6800128E8B /* BTTVideoGamesFilterCell.xib */; };
+		3A75A17622114DB100584A35 /* BTTLoginNoRegisterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A75A17422114DB100584A35 /* BTTLoginNoRegisterCell.m */; };
+		3A75A17722114DB100584A35 /* BTTLoginNoRegisterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A75A17522114DB100584A35 /* BTTLoginNoRegisterCell.xib */; };
 		3A7A1A6621BDF21100572B50 /* BTTLuckyWheelCoinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6521BDF21100572B50 /* BTTLuckyWheelCoinView.m */; };
 		3A7A1A6821BDF21F00572B50 /* BTTLuckyWheelCoinView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6721BDF21F00572B50 /* BTTLuckyWheelCoinView.xib */; };
 		3A7A1A6C21BF68AA00572B50 /* BTTRegisterSuccessTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6A21BF68AA00572B50 /* BTTRegisterSuccessTwoCell.m */; };
@@ -814,6 +816,9 @@
 		3A5F7AB221AD0E6800128E8B /* BTTVideoGamesFilterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGamesFilterCell.h; sourceTree = "<group>"; };
 		3A5F7AB321AD0E6800128E8B /* BTTVideoGamesFilterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGamesFilterCell.m; sourceTree = "<group>"; };
 		3A5F7AB421AD0E6800128E8B /* BTTVideoGamesFilterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGamesFilterCell.xib; sourceTree = "<group>"; };
+		3A75A17322114DB100584A35 /* BTTLoginNoRegisterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLoginNoRegisterCell.h; sourceTree = "<group>"; };
+		3A75A17422114DB100584A35 /* BTTLoginNoRegisterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLoginNoRegisterCell.m; sourceTree = "<group>"; };
+		3A75A17522114DB100584A35 /* BTTLoginNoRegisterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTLoginNoRegisterCell.xib; sourceTree = "<group>"; };
 		3A7A1A6421BDF21100572B50 /* BTTLuckyWheelCoinView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLuckyWheelCoinView.h; sourceTree = "<group>"; };
 		3A7A1A6521BDF21100572B50 /* BTTLuckyWheelCoinView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLuckyWheelCoinView.m; sourceTree = "<group>"; };
 		3A7A1A6721BDF21F00572B50 /* BTTLuckyWheelCoinView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTLuckyWheelCoinView.xib; sourceTree = "<group>"; };
@@ -2524,6 +2529,9 @@
 				3AAE8210219A738B003EC8B0 /* BTTLoginOrRegisterTypeSelectCell.h */,
 				3AAE8205219A738B003EC8B0 /* BTTLoginOrRegisterTypeSelectCell.m */,
 				3AAE8207219A738B003EC8B0 /* BTTLoginOrRegisterTypeSelectCell.xib */,
+				3A75A17322114DB100584A35 /* BTTLoginNoRegisterCell.h */,
+				3A75A17422114DB100584A35 /* BTTLoginNoRegisterCell.m */,
+				3A75A17522114DB100584A35 /* BTTLoginNoRegisterCell.xib */,
 				3AAE820C219A738B003EC8B0 /* BTTLoginCell.h */,
 				3AAE8200219A738B003EC8B0 /* BTTLoginCell.m */,
 				3AAE820E219A738B003EC8B0 /* BTTLoginCell.xib */,
@@ -4034,6 +4042,7 @@
 				3A11AE632186CDA100B1AFF4 /* BTTXimaHeaderCell.xib in Resources */,
 				EAE89EC8218C3ABD00C29393 /* LIVRadioButton_unselected@3x.png in Resources */,
 				EAE89EE7218C3ABD00C29393 /* LIVVideoMessage_DefaultThumbnail@2x.png in Resources */,
+				3A75A17722114DB100584A35 /* BTTLoginNoRegisterCell.xib in Resources */,
 				3A11ADE621818FD400B1AFF4 /* BTTBTCInfoCell.xib in Resources */,
 				EAE89EE4218C3ABD00C29393 /* LIVVideoCamera_switchCamera@3x.png in Resources */,
 				EAE89EA3218C3ABD00C29393 /* liv_satisfactionr_circular_selected_un@2x.png in Resources */,
@@ -4456,6 +4465,7 @@
 				3A5F7A7F21A6C86A00128E8B /* BTTXimaSingleBtnCell.m in Sources */,
 				D5DBEB1821ABB774008AF629 /* CNWKWebVC.m in Sources */,
 				3A11ADF12181A1E200B1AFF4 /* BTTWithdrawalController.m in Sources */,
+				3A75A17622114DB100584A35 /* BTTLoginNoRegisterCell.m in Sources */,
 				3AD9CF68216F314700685B43 /* BTTHomePageGamesCell.m in Sources */,
 				3A8F5172215F77A50069D1B3 /* BTTAdvertiseHelper.m in Sources */,
 				D5DBEB3121ABB774008AF629 /* CNPayLabel.m in Sources */,
