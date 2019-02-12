@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MoP-HQ-l9s">
-                        <rect key="frame" x="60" y="10" width="24" height="24"/>
+                        <rect key="frame" x="70" y="10" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="1T8-yU-W8c"/>
                             <constraint firstAttribute="width" constant="24" id="qQ3-YF-Tkl"/>
@@ -29,8 +29,8 @@
                         <state key="normal" backgroundImage="login_unselect"/>
                         <state key="selected" backgroundImage="login_selected"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="g123456789" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bng-lF-baf">
-                        <rect key="frame" x="92" y="13.5" width="84" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="g123456789(最近登录)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bng-lF-baf">
+                        <rect key="frame" x="102" y="13.5" width="151" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -40,7 +40,7 @@
                     <constraint firstItem="Bng-lF-baf" firstAttribute="leading" secondItem="MoP-HQ-l9s" secondAttribute="trailing" constant="8" id="2Ao-Po-xIg"/>
                     <constraint firstItem="Bng-lF-baf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4vG-Qg-b3J"/>
                     <constraint firstItem="MoP-HQ-l9s" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fug-vg-h2e"/>
-                    <constraint firstItem="MoP-HQ-l9s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="60" id="pdo-Yj-5Lg"/>
+                    <constraint firstItem="MoP-HQ-l9s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="70" id="pdo-Yj-5Lg"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>

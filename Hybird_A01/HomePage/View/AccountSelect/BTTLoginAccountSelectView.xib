@@ -47,6 +47,7 @@
                             <state key="normal" title="立即登录" backgroundImage="login_btn_normal">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <state key="highlighted" title="立即登录" backgroundImage="login_btn_press"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -96,6 +97,7 @@
     </objects>
     <resources>
         <image name="login_btn_normal" width="310" height="41"/>
+        <image name="login_btn_press" width="310" height="41"/>
         <image name="login_closed" width="50.5" height="50.5"/>
     </resources>
 </document>

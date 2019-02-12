@@ -55,6 +55,10 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
 - (IBAction)dismissClick:(UIButton *)sender {
     if (self.dismissBlock) {
         self.dismissBlock();
