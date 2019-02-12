@@ -59,7 +59,7 @@
             [[NSUserDefaults standardUserDefaults] setValue:model.customer_bank_id forKey:BTTSelectedBankId];
             [[NSUserDefaults standardUserDefaults] synchronize];
             if (button.tag == 6005) {//修改
-                [strongSelf modifyBtnClicked];
+                [strongSelf modifyBtnClickedBankModel:model];
             } else if(button.tag == 6006) {//删除
                 [strongSelf deleteBtnClicked];
             } else if(button.tag == 6007) {//设置默认卡
@@ -247,11 +247,14 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
-- (void)modifyBtnClicked
+- (void)modifyBtnClickedBankModel:(BTTBankModel *)bankModel
 {
     if ([IVNetwork userInfo].isPhoneBinded) {
-        BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-        vc.mobileCodeType = BTTSafeVerifyTypeMobileChangeBankCard;
+//        BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
+//        vc.mobileCodeType = BTTSafeVerifyTypeMobileChangeBankCard;
+        BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
+        vc.verifyType = BTTSafeVerifyTypeMobileChangeBankCard;
+        vc.bankModel = bankModel;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         //2018-11-23 nike说按线上标准直接跳转绑定页面

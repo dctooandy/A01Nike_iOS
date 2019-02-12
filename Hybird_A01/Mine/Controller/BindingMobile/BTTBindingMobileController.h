@@ -8,12 +8,16 @@
 
 #import "BTTCollectionViewController.h"
 
+@class BTTBankModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTBindingMobileController : BTTCollectionViewController
 
 @property (nonatomic, assign) BTTSafeVerifyType mobileCodeType;
+
+@property (nonatomic, strong) BTTBankModel *bankModel;
+
 - (void)setupElements;
 
 @end

@@ -87,6 +87,7 @@
         {
             BTTBindingMobileController *vc = [BTTBindingMobileController new];
             vc.mobileCodeType = BTTSafeVerifyTypeMobileChangeBankCard;
+            vc.bankModel = self.bankModel;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
@@ -100,6 +101,7 @@
         case BTTSafeVerifyTypeHumanChangeBankCard:
         {
             BTTCardModifyVerifyController *vc = [BTTCardModifyVerifyController new];
+            vc.bankModel = self.bankModel;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

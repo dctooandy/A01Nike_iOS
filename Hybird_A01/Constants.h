@@ -200,7 +200,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 // 电话回拨API
 #define BTTCallBackMemberAPI         @"/public/phones/memberCall"
-#define BTTCallBackCustomAPI         @"/phones/customCall"
+#define BTTCallBackCustomAPI         @"/public/phones/customCall"
 
 // 本地额度 + 最后一厅额度
 
