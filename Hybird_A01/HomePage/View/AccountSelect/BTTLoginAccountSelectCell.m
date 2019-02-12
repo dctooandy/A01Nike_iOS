@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.selectBtn.selected = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

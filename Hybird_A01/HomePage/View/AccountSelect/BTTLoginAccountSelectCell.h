@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLoginAccountSelectCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIButton *selectBtn;
+
+@property (weak, nonatomic) IBOutlet UILabel *accountLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END
