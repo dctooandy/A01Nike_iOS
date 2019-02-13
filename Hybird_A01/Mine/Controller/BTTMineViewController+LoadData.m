@@ -320,15 +320,27 @@
     NSString *url = nil;
     NSMutableDictionary *params = @{}.mutableCopy;
     int currentHour = [PublicMethod hour:[NSDate date]];
-    if ([IVNetwork userInfo].customerLevel >= 4 && currentHour >= 12) {
-        url = BTTCallBackMemberAPI;
-        [params setValue:phone forKey:@"phone"];
-        [params setValue:@"memberphone" forKey:@"phone_type"];
+    if ([IVNetwork userInfo]) {
+        if ([phone containsString:@"*"]) {
+            url = BTTCallBackMemberAPI;
+            [params setValue:phone forKey:@"phone"];
+            [params setValue:@"memberphone" forKey:@"phone_type"];
+        } else {
+            if ([IVNetwork userInfo].customerLevel >= 4 && currentHour >= 12) {
+                url = BTTCallBackMemberAPI;
+                [params setValue:phone forKey:@"phone"];
+                [params setValue:@"memberphone" forKey:@"phone_type"];
+            } else {
+                url = BTTCallBackCustomAPI;
+                [params setValue:phone forKey:@"phone_number"];
+                
+            }
+        }
     } else {
         url = BTTCallBackCustomAPI;
         [params setValue:phone forKey:@"phone_number"];
-        
     }
+    
     [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
         
         if (result.status) {
@@ -448,17 +460,16 @@
 
 - (void)loadGameshallList:(dispatch_group_t)group{
     [BTTHttpManager fetchGamePlatformsWithCompletion:^(IVRequestResultModel *result, id response) {
-        if (self.games.count) {
-            [self.games removeAllObjects];
-        }
+        NSMutableArray *games = [NSMutableArray array];
         if (result.code_http == 200 && result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 if (result.data[@"platforms"] && [result.data[@"platforms"] isKindOfClass:[NSArray class]] && ![result.data[@"platforms"] isKindOfClass:[NSNull class]]) {
                     for (NSDictionary *dict in result.data[@"platforms"]) {
                         BTTGamesHallModel *model = [BTTGamesHallModel yy_modelWithDictionary:dict];
                         model.isLoading = YES;
-                        [self.games addObject:model];
+                        [games addObject:model];
                     }
+                    self.games = games.mutableCopy;
                 }
             }
         }
