@@ -87,9 +87,6 @@
 
 - (void)loadGameshallList:(dispatch_group_t)group{
     [BTTHttpManager fetchGamePlatformsWithCompletion:^(IVRequestResultModel *result, id response) {
-        if (self.games.count) {
-            [self.games removeAllObjects];
-        }
         NSMutableArray *games = [NSMutableArray array];
         if (result.code_http == 200 && result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
