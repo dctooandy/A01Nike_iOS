@@ -46,7 +46,6 @@ static const char *BTTNextGroupKey = "nextGroup";
     [self loadHightlightsBrand:group];
     
     dispatch_group_notify(group,queue, ^{
-        [self.elementsHight removeAllObjects];
         [self endRefreshing];
         [self setupElements];
     });
@@ -71,7 +70,6 @@ static const char *BTTNextGroupKey = "nextGroup";
     });
     
     dispatch_group_notify(group,queue, ^{
-        [self.elementsHight removeAllObjects];
         [self endRefreshing];
         [self setupElements];
      
