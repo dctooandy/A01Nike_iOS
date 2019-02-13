@@ -130,7 +130,6 @@
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
                 [strongSelf.posters removeAllObjects];
-                [strongSelf.elementsHight removeAllObjects];
                 [strongSelf setupElements];
             };
             return cell;
@@ -225,8 +224,6 @@
                 if (strongSelf.nextGroup == self.Activities.count) {
                     self.nextGroup = 0;
                 }
-                
-                [strongSelf.elementsHight removeAllObjects];
                 [strongSelf setupElements];
             };
             return cell;
@@ -330,7 +327,6 @@
                 if (strongSelf.nextGroup == self.Activities.count) {
                     self.nextGroup = 0;
                 }
-                [strongSelf.elementsHight removeAllObjects];
                 [strongSelf setupElements];
             };
             return cell;
@@ -518,7 +514,6 @@
     if (self.nextGroup == self.Activities.count) {
         self.nextGroup = 0;
     }
-    [self.elementsHight removeAllObjects];
     [self setupElements];
 }
 
@@ -533,7 +528,7 @@
 #pragma mark - LMJElementsFlowLayoutDelegate
 
 - (CGSize)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return  self.elementsHight.count ? self.elementsHight[indexPath.item].CGSizeValue : CGSizeZero;
+    return  (self.elementsHight.count && indexPath.row <= self.elementsHight.count - 1) ? self.elementsHight[indexPath.item].CGSizeValue : CGSizeZero;
 }
 
 - (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {

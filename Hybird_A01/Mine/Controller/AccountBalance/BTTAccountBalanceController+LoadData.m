@@ -66,7 +66,7 @@
 - (void)loadEachGameHall:(UIButton *)button {
     dispatch_queue_t queue = dispatch_queue_create("accountBlance.eachhall", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_t group = dispatch_group_create();
-    for (BTTGamesHallModel *model in self.games) {
+    for (BTTGamesHallModel *model in self.games.mutableCopy) {
         NSInteger index = [self.games indexOfObject:model];
         dispatch_group_enter(group);
         [self loadGameAmountWithModel:model index:index group:group];

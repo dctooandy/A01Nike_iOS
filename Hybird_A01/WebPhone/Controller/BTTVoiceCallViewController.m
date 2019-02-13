@@ -286,6 +286,7 @@ typedef NS_ENUM(NSInteger, BTTNumberBtnType) {
         [self setupTimer];
     } else if (callInfo.callStatus == CallStatus_Disconnected) {
         // 关闭定时
+        dispatch_suspend(_timer);
         dispatch_source_cancel(_timer);
         statusString = @"通话结束";
         dispatch_async(dispatch_get_main_queue(), ^{
