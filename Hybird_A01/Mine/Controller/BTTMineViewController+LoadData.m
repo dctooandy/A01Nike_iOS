@@ -448,17 +448,16 @@
 
 - (void)loadGameshallList:(dispatch_group_t)group{
     [BTTHttpManager fetchGamePlatformsWithCompletion:^(IVRequestResultModel *result, id response) {
-        if (self.games.count) {
-            [self.games removeAllObjects];
-        }
+        NSMutableArray *games = [NSMutableArray array];
         if (result.code_http == 200 && result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 if (result.data[@"platforms"] && [result.data[@"platforms"] isKindOfClass:[NSArray class]] && ![result.data[@"platforms"] isKindOfClass:[NSNull class]]) {
                     for (NSDictionary *dict in result.data[@"platforms"]) {
                         BTTGamesHallModel *model = [BTTGamesHallModel yy_modelWithDictionary:dict];
                         model.isLoading = YES;
-                        [self.games addObject:model];
+                        [games addObject:model];
                     }
+                    self.games = games.mutableCopy;
                 }
             }
         }

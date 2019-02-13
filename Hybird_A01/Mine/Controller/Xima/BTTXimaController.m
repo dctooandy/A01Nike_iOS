@@ -129,7 +129,7 @@ typedef enum {
                         return cell;
                     } else {
                         BTTLastWeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLastWeekCell" forIndexPath:indexPath];
-                        BTTXimaItemModel *model = self.histroyModel.list[indexPath.row - 1];
+                        BTTXimaItemModel *model = self.histroyModel.list.count ? self.histroyModel.list[indexPath.row - 1] : nil;
                         cell.model = model;
                         return cell;
                     }
@@ -198,7 +198,7 @@ typedef enum {
                         } else {
                             BTTThisWeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekCell" forIndexPath:indexPath];
                             
-                            BTTXimaItemModel *model = self.validModel.list[indexPath.row - 1];
+                            BTTXimaItemModel *model = self.validModel.list.count ? self.validModel.list[indexPath.row - 1] : nil;
                             cell.thisWeekCellType = model.isSelect;
                             cell.model = model;
                             return cell;
@@ -238,7 +238,7 @@ typedef enum {
                             return cell;
                         } else {
                             BTTLastWeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLastWeekCell" forIndexPath:indexPath];
-                            BTTXimaItemModel *model = self.otherModel.list[indexPath.row - 1];
+                            BTTXimaItemModel *model = self.otherModel.list.count ? self.otherModel.list[indexPath.row - 1] : nil;
                             cell.model = model;
                             return cell;
                         }
@@ -269,7 +269,7 @@ typedef enum {
                 return cell;
             } else {
                 BTTXimaSuccessItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaSuccessItemCell" forIndexPath:indexPath];
-                BTTXimaSuccessItemModel *model = self.xmResults[indexPath.row - 1];
+                BTTXimaSuccessItemModel *model = self.xmResults.count ? self.xmResults[indexPath.row - 1] : nil;
                 cell.model = model;
                 return cell;
             }
