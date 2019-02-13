@@ -75,6 +75,10 @@ typedef NS_ENUM(NSInteger, BTTNumberBtnType) {
 
 @implementation BTTVoiceCallViewController
 
+- (void)dealloc {
+    NSLog(@"dealloc");
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [UIDevice currentDevice].proximityMonitoringEnabled = YES;
@@ -264,8 +268,6 @@ typedef NS_ENUM(NSInteger, BTTNumberBtnType) {
     
     // 开启定时器
     dispatch_resume(_timer);
-    //    // 挂起定时器（dispatch_suspend 之后的 Timer，是不能被释放的！会引起崩溃）
-    //    dispatch_suspend(_timer);
     
 }
 
