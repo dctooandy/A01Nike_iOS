@@ -150,19 +150,21 @@
     if (self.semaphore) {
         dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
     }
-    int uid = [@([IVNetwork userInfo].customerId) intValue];
-    //配置心跳ip
-    NSString *ip = [[IVCacheManager sharedInstance] nativeReadModelForKey:kCacheIpsAddress];
-    NSString *port = [[IVCacheManager sharedInstance] nativeReadModelForKey:kCacheIpsPort];
-    if (![NSString isBlankString:ip] && ![NSString isBlankString:port]) {//使用后台配置
-        [IVHeartSocketManager configHeartSocketWithIpAddress:ip port:[port intValue] porductId:[IVNetwork productId]];
-    } else {//使用默认
-        [IVHeartSocketManager configHeartSocketWithEnvironment:EnvirmentType productId:[IVNetwork productId]];
-    }
-    //发送心跳
-    [IVHeartSocketManager sendHeartPacketWithApnsToken:deviceToken userid:uid];
-    self.semaphore = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IVGetIPSSuccessNotification object:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        int uid = [@([IVNetwork userInfo].customerId) intValue];
+        //配置心跳ip
+        NSString *ip = [[IVCacheManager sharedInstance] nativeReadModelForKey:kCacheIpsAddress];
+        NSString *port = [[IVCacheManager sharedInstance] nativeReadModelForKey:kCacheIpsPort];
+        if (![NSString isBlankString:ip] && ![NSString isBlankString:port]) {//使用后台配置
+            [IVHeartSocketManager configHeartSocketWithIpAddress:ip port:[port intValue] porductId:[IVNetwork productId]];
+        } else {//使用默认
+            [IVHeartSocketManager configHeartSocketWithEnvironment:EnvirmentType productId:[IVNetwork productId]];
+        }
+        //发送心跳
+        [IVHeartSocketManager sendHeartPacketWithApnsToken:deviceToken userid:uid];
+        self.semaphore = nil;
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:IVGetIPSSuccessNotification object:nil];
+    });
 }
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error{
     NSLog(@"註冊遠端推送通知失敗：%@", error);
