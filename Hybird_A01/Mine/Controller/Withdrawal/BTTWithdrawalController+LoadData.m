@@ -108,7 +108,7 @@
 
 - (void)loadCreditsTotalAvailable {
 //    [self showLoading];
-    [IVNetwork sendRequestWithSubURL:BTTCreditsLocal paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork sendRequestWithSubURL:BTTCreditsTotalAvailable paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
 //        [self hideLoading];
         if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
             if (result.data) {
