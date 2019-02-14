@@ -18,6 +18,12 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightContstant;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstants;
+
+@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bgHeightConstants;
 @end
 
 @implementation BTTLoginAccountSelectView
@@ -35,12 +41,22 @@
 - (void)setupUI {
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 40;
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:@"BTTLoginAccountSelectCell" bundle:nil] forCellReuseIdentifier:@"BTTLoginAccountSelectCell"];
     self.widthConstants.constant = SCREEN_WIDTH - 80;
     self.bgView.layer.cornerRadius = 5;
     self.tableView.scrollEnabled = NO;
+    
+    if (SCREEN_WIDTH == 320) {
+        self.phoneLabel.font = [UIFont systemFontOfSize:13];
+        self.titleLabel.font = [UIFont systemFontOfSize:16];
+        self.tableView.rowHeight = 30;
+        self.heightContstant.constant = 150;
+        self.bgHeightConstants.constant = 335;
+    } else {
+        self.tableView.rowHeight = 40;
+    }
     
 }
 

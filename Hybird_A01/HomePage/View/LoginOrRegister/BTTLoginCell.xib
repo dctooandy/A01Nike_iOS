@@ -53,7 +53,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码/手机验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lVa-oq-bJ3">
-                                <rect key="frame" x="43" y="60" width="149" height="30"/>
+                                <rect key="frame" x="43" y="60" width="156" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="kFz-s1-ELO"/>
                                 </constraints>
@@ -62,7 +62,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d2G-Qw-peS">
-                                <rect key="frame" x="200" y="59.5" width="100" height="31"/>
+                                <rect key="frame" x="207" y="59.5" width="100" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="9Ba-fU-qAe"/>
                                     <constraint firstAttribute="height" constant="31" id="Igs-aJ-lCW"/>
@@ -92,7 +92,7 @@
                             <constraint firstAttribute="trailing" secondItem="N3w-DA-ub3" secondAttribute="trailing" constant="15" id="VHR-AU-RRs"/>
                             <constraint firstItem="d2G-Qw-peS" firstAttribute="leading" secondItem="lVa-oq-bJ3" secondAttribute="trailing" constant="8" id="Xro-sP-MbF"/>
                             <constraint firstItem="N3w-DA-ub3" firstAttribute="centerY" secondItem="G2R-fp-ypM" secondAttribute="centerY" id="iQD-6x-PS5"/>
-                            <constraint firstAttribute="trailing" secondItem="d2G-Qw-peS" secondAttribute="trailing" constant="15" id="oPq-Qa-0d7"/>
+                            <constraint firstAttribute="trailing" secondItem="d2G-Qw-peS" secondAttribute="trailing" constant="8" id="oPq-Qa-0d7"/>
                             <constraint firstItem="2Yh-EA-nkk" firstAttribute="leading" secondItem="HSA-HN-glg" secondAttribute="trailing" constant="8" id="olu-dz-Fbt"/>
                             <constraint firstAttribute="trailing" secondItem="2Yh-EA-nkk" secondAttribute="trailing" constant="15" id="olv-g3-AxN"/>
                             <constraint firstItem="d2G-Qw-peS" firstAttribute="centerY" secondItem="lVa-oq-bJ3" secondAttribute="centerY" id="qyy-om-jZE"/>

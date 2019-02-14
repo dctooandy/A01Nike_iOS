@@ -87,12 +87,15 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="bgHeightConstants" destination="d7s-t5-14Z" id="cVq-1I-aIq"/>
                 <outlet property="bgView" destination="5eZ-lB-5nw" id="FD7-T2-i50"/>
                 <outlet property="heightContstant" destination="hrq-5Q-8LV" id="Chx-Si-zfu"/>
+                <outlet property="phoneLabel" destination="KSa-XD-RIV" id="Un2-Qx-6kZ"/>
                 <outlet property="tableView" destination="hgq-Kg-meo" id="az9-Ki-jx0"/>
+                <outlet property="titleLabel" destination="aMI-cl-q49" id="Cdg-Du-5kx"/>
                 <outlet property="widthConstants" destination="d4e-OA-s6p" id="5W9-GE-vAT"/>
             </connections>
-            <point key="canvasLocation" x="-620" y="-80"/>
+            <point key="canvasLocation" x="-1137" y="-102"/>
         </view>
     </objects>
     <resources>

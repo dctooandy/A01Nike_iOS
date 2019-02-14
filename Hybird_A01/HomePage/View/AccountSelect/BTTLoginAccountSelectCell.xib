@@ -46,8 +46,10 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="accountLabel" destination="Bng-lF-baf" id="aHI-W3-2jX"/>
+                <outlet property="leftConstants" destination="pdo-Yj-5Lg" id="eb5-FC-9T5"/>
                 <outlet property="selectBtn" destination="MoP-HQ-l9s" id="p48-9B-YGp"/>
             </connections>
+            <point key="canvasLocation" x="266" y="40"/>
         </tableViewCell>
     </objects>
     <resources>

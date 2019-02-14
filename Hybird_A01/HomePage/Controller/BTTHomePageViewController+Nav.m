@@ -78,7 +78,11 @@ static const char *BTTHeaderViewKey = "headerView";
 
 - (void)showPopViewOfAccount {
     BTTLoginAccountSelectView *customView = [BTTLoginAccountSelectView viewFromXib];
-    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 50, 460);
+    if (SCREEN_WIDTH == 320) {
+        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 50, 410);
+    } else {
+        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 50, 460);
+    }
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
     popView.isClickBGDismiss = NO;
     [popView pop];
