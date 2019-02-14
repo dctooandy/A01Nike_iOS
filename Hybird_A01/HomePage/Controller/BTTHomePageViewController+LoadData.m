@@ -167,7 +167,7 @@ static const char *BTTNextGroupKey = "nextGroup";
             [params setValue:phone forKey:@"phone"];
             [params setValue:@"memberphone" forKey:@"phone_type"];
         } else {
-            if ([IVNetwork userInfo].customerLevel >= 4 && currentHour >= 12) {
+            if ([IVNetwork userInfo].customerLevel > 4 && currentHour >= 12) {
                 url = BTTCallBackMemberAPI;
                 [params setValue:phone forKey:@"phone"];
                 [params setValue:@"memberphone" forKey:@"phone_type"];
