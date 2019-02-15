@@ -119,7 +119,7 @@
                 cell.codeImageView.image = self.codeImage;
                 [cell.codeTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
                 NSString *historyAccount = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCacheAccountName];
-                cell.accountTextField.text = historyAccount.length ? [historyAccount substringFromIndex:1] : @"";
+                cell.accountTextField.text = historyAccount.length ? historyAccount : @"";
                 weakSelf(weakSelf);
                 cell.clickEventBlock = ^(id  _Nonnull value) {
                     strongSelf(strongSelf);

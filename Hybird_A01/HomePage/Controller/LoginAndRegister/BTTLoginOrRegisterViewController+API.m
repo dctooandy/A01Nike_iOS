@@ -109,6 +109,10 @@
                         [self setupElements];
                     });
                 }
+            } else {
+                if (result.message.length) {
+                    [MBProgressHUD showError:result.message toView:nil];
+                }
             }
         }
     }];
