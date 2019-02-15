@@ -237,7 +237,7 @@ typedef enum : NSUInteger {
     NSArray *icons = @[];
     if (type == 1) {
         nameArr = @[@"存款姓名",@"存款金额",@"存款方式",@"存款时间",@"存款地点",@"存款银行",@"存款卡号"];
-        detailArr = @[self.model.deposit_by,self.model.amount,self.model.deposit_type,self.model.deposit_date,self.model.deposit_location,self.model.bank_name,self.model.bank_account_no];
+        detailArr = @[self.model.deposit_by.length ? self.model.deposit_by : @"",self.model.amount.length ? self.model.amount : @"",self.model.deposit_type.length ? self.model.deposit_type : @"",self.model.deposit_date.length ? self.model.deposit_date : @"",self.model.deposit_location.length ? self.model.deposit_location : @"",self.model.bank_name,self.model.bank_account_no];
     } else if (type == 0) {
         nameArr = @[@"存款姓名",@"存款金额",@"存款方式",@"存款时间",@"存款地点",@"存款银行",@"存款卡号"];
         icons = @[@"请输入存款姓名",@"请输入存款金额",@"请选择存款方式",@"请选择存款时间",@"请选择存款地点",@"请输入存款银行",@"请输入存款卡号"];

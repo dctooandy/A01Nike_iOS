@@ -508,9 +508,6 @@
 }
 
 - (void)setupElements {
-    if (self.elementsHight.count) {
-        [self.elementsHight removeAllObjects];
-    }
     NSInteger total = 0;
     if ([IVNetwork userInfo]) {
         total = self.personalInfos.count + 7 + self.saveMoneyCount + self.mainDataOne.count + self.mainDataTwo.count + self.mainDataThree.count;

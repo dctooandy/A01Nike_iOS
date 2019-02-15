@@ -13,7 +13,7 @@
 
 - (void)loadMainData {
     [self.sheetDatas removeAllObjects];
-    
+    NSMutableArray *sheetDatas = [NSMutableArray array];
     NSString *btcrate = [[NSUserDefaults standardUserDefaults] valueForKey:BTTCacheBTCRateKey];
     NSString *rateStr = [NSString stringWithFormat:@"¥%.2lf=1BTC(实时汇率)",[btcrate doubleValue]];
     NSString *depositTotal = self.betInfoModel.depositTotal.length ? self.betInfoModel.depositTotal : @"";
@@ -99,15 +99,16 @@
         model.cellHeight = [heights[index] doubleValue];
         model.available = [canEdits[index] boolValue];
         model.desc = values[index];
-        [self.sheetDatas addObject:model];
+        [sheetDatas addObject:model];
     }
+    self.sheetDatas = sheetDatas.mutableCopy;
     [self setupElements];
 }
 
 
 - (void)loadCreditsTotalAvailable {
 //    [self showLoading];
-    [IVNetwork sendRequestWithSubURL:BTTCreditsLocal paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork sendRequestWithSubURL:BTTCreditsTotalAvailable paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
 //        [self hideLoading];
         if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
             if (result.data) {

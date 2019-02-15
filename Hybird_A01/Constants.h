@@ -189,11 +189,11 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTUserLoginAPI        @"/public/users/login"
 #define BTTUserCreateAPI       @"/A01/users/create"
-#define BTTVerifyCaptcha       @"/otherVerify/captcha"
+#define BTTVerifyCaptcha       @"/public/otherVerify/captcha"
 #define BTTUserFastRegister    @"/A01/users/fastRegister"
-#define BTTNoLoginMobileCodeAPI @"/otherVerify/send"
+#define BTTNoLoginMobileCodeAPI @"/public/otherVerify/send"
 #define BTTStepOneSendCode     @"/A01/forgot/stepOneSendCode"
-#define BTTValidateCaptcha     @"/otherVerify/validateCaptcha"
+#define BTTValidateCaptcha     @"/public/otherVerify/validateCaptcha"
 #define BTTStepTwoCheckCode    @"/public/forgot/stepTwoCheckCode"
 #define BTTStepThreeUpdatePassword @"/public/forgot/stepThreeUpdatePassword"
 #define BTTUnlockAccount       @"/A01/users/unlockAccount"
@@ -241,7 +241,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 // 金额转账本地接口
 
-#define BTTTransferAllMoneyToLocal   @"/credits/transferAllMoneyToLocal"
+#define BTTTransferAllMoneyToLocal   @"/public/credits/transferAllMoneyToLocal"
 
 // 转账, 游戏厅转本地
 
@@ -260,23 +260,23 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTBetLimits                 @"/A01/apply/getBetLimits"
 
 // 申请修改限红
-#define BTTApplyBetLimit             @"/apply/betLimit"
+#define BTTApplyBetLimit             @"/public/apply/betLimit"
 
 // 短信状态查询
 
-#define BTTSmsList                   @"/subscription/smsList"
+#define BTTSmsList                   @"/public/subscription/smsList"
 
 // 邮件状态查询
 
-#define BTTEmailList                 @"/subscription/emailList"
+#define BTTEmailList                 @"/public/subscription/emailList"
 
 // 短信状态修改
 
-#define BTTSmsOrder                  @"/subscription/smsOrder"
+#define BTTSmsOrder                  @"/public/subscription/smsOrder"
 
 // 邮件状态修改
 
-#define BTTEmailOrder                @"/subscription/emailOrder"
+#define BTTEmailOrder                @"/public/subscription/emailOrder"
 
 // 洗码接口
 
@@ -329,7 +329,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 // 客户存款次数的接口
 
-#define BTTSaveMoneyTimesAPI         @"/deposit/getIsDepositAmount"
+#define BTTSaveMoneyTimesAPI         @"/A01/deposit/getIsDepositAmount"
 
 /********************************************常用宏*********************************************************/
 

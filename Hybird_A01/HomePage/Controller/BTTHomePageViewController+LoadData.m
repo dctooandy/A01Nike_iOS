@@ -46,7 +46,6 @@ static const char *BTTNextGroupKey = "nextGroup";
     [self loadHightlightsBrand:group];
     
     dispatch_group_notify(group,queue, ^{
-        [self.elementsHight removeAllObjects];
         [self endRefreshing];
         [self setupElements];
     });
@@ -71,7 +70,6 @@ static const char *BTTNextGroupKey = "nextGroup";
     });
     
     dispatch_group_notify(group,queue, ^{
-        [self.elementsHight removeAllObjects];
         [self endRefreshing];
         [self setupElements];
      
@@ -163,15 +161,27 @@ static const char *BTTNextGroupKey = "nextGroup";
     NSString *url = nil;
     NSMutableDictionary *params = @{}.mutableCopy;
     int currentHour = [PublicMethod hour:[NSDate date]];
-    if ([IVNetwork userInfo].customerLevel >= 4 && currentHour >= 12) {
-        url = BTTCallBackMemberAPI;
-        [params setValue:phone forKey:@"phone"];
-        [params setValue:@"memberphone" forKey:@"phone_type"];
+    if ([IVNetwork userInfo]) {
+        if ([phone containsString:@"*"]) {
+            url = BTTCallBackMemberAPI;
+            [params setValue:phone forKey:@"phone"];
+            [params setValue:@"memberphone" forKey:@"phone_type"];
+        } else {
+            if ([IVNetwork userInfo].customerLevel > 4 && currentHour >= 12) {
+                url = BTTCallBackMemberAPI;
+                [params setValue:phone forKey:@"phone"];
+                [params setValue:@"memberphone" forKey:@"phone_type"];
+            } else {
+                url = BTTCallBackCustomAPI;
+                [params setValue:phone forKey:@"phone_number"];
+                
+            }
+        }
     } else {
         url = BTTCallBackCustomAPI;
         [params setValue:phone forKey:@"phone_number"];
-        
     }
+    
     [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
     
         if (result.status) {
