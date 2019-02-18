@@ -193,6 +193,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTStepTwoCheckCode    @"/public/forgot/stepTwoCheckCode"
 #define BTTStepThreeUpdatePassword @"/public/forgot/stepThreeUpdatePassword"
 #define BTTUnlockAccount       @"/A01/users/unlockAccount"
+#define BTTGetCustromerByPhone @"/public/users/getCustomersByPhone"
 
 // 电话回拨API
 #define BTTCallBackMemberAPI         @"/public/phones/memberCall"

@@ -24,6 +24,7 @@
 #import "BTTAGQJViewController.h"
 #import "BTTAGGJViewController.h"
 #import "BTTVideoGamesListController.h"
+#import "BTTLoginAccountSelectView.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
@@ -71,6 +72,8 @@ static const char *BTTHeaderViewKey = "headerView";
         [[IVGameManager sharedManager] reloadCacheGame];
     });
 }
+
+
 
 - (void)logoutSuccess:(NSNotification *)notifi {
     self.isLogin = NO;

@@ -29,6 +29,8 @@ typedef void (^BTTButtonClickBlock)(UIButton *button);
 
 typedef void (^BTTClickEventBlock)(id value);
 
+typedef void (^BTTRefreshEventBlock)(void);
+
 
 @interface BTTBaseCollectionViewCell : UICollectionViewCell
 
@@ -41,6 +43,8 @@ typedef void (^BTTClickEventBlock)(id value);
 @property (nonatomic, copy) BTTButtonClickBlock buttonClickBlock;
 
 @property (nonatomic, copy) BTTClickEventBlock clickEventBlock;
+
+@property (nonatomic, copy) BTTRefreshEventBlock refreshEventBlock;
 
 @end
 
