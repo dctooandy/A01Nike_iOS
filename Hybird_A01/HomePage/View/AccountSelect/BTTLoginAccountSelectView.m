@@ -108,9 +108,10 @@
 
 - (void)setAccounts:(NSArray *)accounts {
     _accounts = accounts;
+    NSString *phoneHidden = [NSString stringWithFormat:@"%@*******%@",[self.phone substringToIndex:2],[self.phone substringFromIndex:self.phone.length - 1]];
+    NSString *phoneStr = [NSString stringWithFormat:@"手机号%@, 可登录账号如下:", phoneHidden];
     
-    NSString *phoneStr = [NSString stringWithFormat:@"手机号%@, 可登录账号如下:", self.phone];
-    NSRange phoneRange = [phoneStr rangeOfString:self.phone];
+    NSRange phoneRange = [phoneStr rangeOfString:phoneHidden];
     NSMutableAttributedString *attPhone = [[NSMutableAttributedString alloc] initWithString:phoneStr];
     [attPhone addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"499bf7"]} range:phoneRange];
     self.phoneLabel.attributedText = attPhone;
