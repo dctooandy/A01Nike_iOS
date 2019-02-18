@@ -169,9 +169,10 @@
     BTTLoginCell *cell = (BTTLoginCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
     [params setObject:cell.accountTextField.text forKey:BTTLoginName];
     [params setObject:phoneToken forKey:@"phone_token"];
-    
+    [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTUserLoginAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
+        [self hideLoading];
         if (result.status) {
             self.wrongPwdNum = 0;
             if ([result.data isKindOfClass:[NSDictionary class]]) {
