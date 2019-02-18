@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *code;       ///< 验证码 (选填)
 
+@property (nonatomic, copy) NSString *sms_code;   ///< 手机验证码
 @end
 
 NS_ASSUME_NONNULL_END

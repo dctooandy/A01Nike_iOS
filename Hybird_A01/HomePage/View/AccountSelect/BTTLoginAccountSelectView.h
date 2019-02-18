@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLoginAccountSelectView : BTTBaseAnimationPopView
 
+@property (nonatomic, copy) NSString *phone;
+
+@property (nonatomic, strong) NSArray *accounts;
+
 @end
 
 NS_ASSUME_NONNULL_END

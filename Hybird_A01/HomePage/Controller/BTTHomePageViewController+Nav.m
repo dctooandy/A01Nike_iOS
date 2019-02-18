@@ -71,25 +71,9 @@ static const char *BTTHeaderViewKey = "headerView";
         [self updateUI];
         [[IVGameManager sharedManager] reloadCacheGame];
     });
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self showPopViewOfAccount];
-    });
 }
 
-- (void)showPopViewOfAccount {
-    BTTLoginAccountSelectView *customView = [BTTLoginAccountSelectView viewFromXib];
-    if (SCREEN_WIDTH == 320) {
-        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 50, 410);
-    } else {
-        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 50, 460);
-    }
-    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
-    popView.isClickBGDismiss = NO;
-    [popView pop];
-    customView.dismissBlock = ^{
-        [popView dismiss];
-    };
-}
+
 
 - (void)logoutSuccess:(NSNotification *)notifi {
     self.isLogin = NO;

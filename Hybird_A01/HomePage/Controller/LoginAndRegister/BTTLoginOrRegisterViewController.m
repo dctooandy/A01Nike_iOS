@@ -110,6 +110,19 @@
                 cell.pwdTextField.delegate = self;
                 NSString *historyAccount = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCacheAccountName];
                 cell.accountTextField.text = historyAccount.length ? historyAccount : @"";
+                if ([PublicMethod isValidatePhone:historyAccount]) {
+                    cell.codeBtn.enabled = YES;
+                    cell.pwdTextField.secureTextEntry = NO;
+                } else {
+                    cell.codeBtn.enabled = NO;
+                    cell.pwdTextField.secureTextEntry = YES;
+                }
+                cell.pwdTextField.text = @"";
+                weakSelf(weakSelf);
+                cell.clickEventBlock = ^(id  _Nonnull value) {
+                    strongSelf(strongSelf);
+                    [strongSelf sendCodeWithPhone:value];
+                };
                 return cell;
             } else{
                 BTTLoginCodeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginCodeCell" forIndexPath:indexPath];
@@ -120,11 +133,20 @@
                 [cell.codeTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
                 NSString *historyAccount = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCacheAccountName];
                 cell.accountTextField.text = historyAccount.length ? historyAccount : @"";
+                cell.pwdTextField.text = @"";
                 weakSelf(weakSelf);
+                cell.refreshEventBlock = ^{
+                    strongSelf(strongSelf);
+                    strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
+                    strongSelf.loginCellType = BTTLoginCellTypeNormal;
+                    [strongSelf setupElements];
+                };
                 cell.clickEventBlock = ^(id  _Nonnull value) {
                     strongSelf(strongSelf);
                     [strongSelf loadVerifyCode];
+                    
                 };
+                
                 return cell;
             }
         } else {
@@ -326,9 +348,6 @@
 
 
 - (void)setupElements {
-    if (self.elementsHight.count) {
-        [self.elementsHight removeAllObjects];
-    }
     NSInteger total = 0;
     if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
         total = 6;

@@ -14,7 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
-@property (weak, nonatomic) IBOutlet UIButton *codeBtn;
+
 
 @end
 
@@ -30,6 +30,9 @@
 
 - (IBAction)sendCode:(UIButton *)sender {
     [self countDown];
+    if (self.clickEventBlock) {
+        self.clickEventBlock(self.accountTextField.text);
+    }
 }
 
 - (void)textFieldChange:(UITextField *)textField {

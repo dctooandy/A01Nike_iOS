@@ -38,6 +38,9 @@
 
 - (IBAction)sendCode:(UIButton *)sender {
     [self countDown];
+    if (self.clickEventBlock) {
+        self.clickEventBlock(self.accountTextField.text);
+    }
 }
 
 
@@ -63,6 +66,11 @@
     if ([PublicMethod isValidatePhone:textField.text]) {
         self.codeBtn.enabled = YES;
         self.pwdTextField.secureTextEntry = NO;
+        [[NSUserDefaults standardUserDefaults] setObject:textField.text forKey:BTTCacheAccountName];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        if (self.refreshEventBlock) {
+            self.refreshEventBlock();
+        }
     } else {
         self.codeBtn.enabled = NO;
         self.pwdTextField.secureTextEntry = YES;

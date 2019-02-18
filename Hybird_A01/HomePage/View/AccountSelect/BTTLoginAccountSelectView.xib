@@ -48,6 +48,9 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <state key="highlighted" title="立即登录" backgroundImage="login_btn_press"/>
+                            <connections>
+                                <action selector="loginClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="ied-mZ-foc"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

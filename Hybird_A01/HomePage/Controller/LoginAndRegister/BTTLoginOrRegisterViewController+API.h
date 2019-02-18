@@ -22,6 +22,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadMobileVerifyCodeWithPhone:(NSString *)phone;
 
+- (void)sendCodeWithPhone:(NSString *)phone;
+
+- (void)getAccountsByPhone;
+
+
 @end
 
 NS_ASSUME_NONNULL_END
