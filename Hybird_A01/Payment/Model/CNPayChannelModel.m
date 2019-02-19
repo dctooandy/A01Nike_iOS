@@ -95,15 +95,15 @@
             break;
         case CNPayChannelQQQR:
             self.channelName    = @"QQ扫码";
-            self.selectedIcon   = @"pay_QRHL";
+            self.selectedIcon   = @"pay_QQ";
             break;
         case CNPayChannelUnionQR:
             self.channelName    = @"银联扫码";
-            self.selectedIcon   = @"pay_QRHL";
+            self.selectedIcon   = @"pay_QRUnion";
             break;
         case CNPayChannelJDQR:
             self.channelName    = @"京东扫码";
-            self.selectedIcon   = @"pay_QRHL";
+            self.selectedIcon   = @"pay_QRJD";
             break;
     }
 }
