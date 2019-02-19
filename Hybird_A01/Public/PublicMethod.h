@@ -193,6 +193,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 + (CGSize)getFontsHeightWithString:(NSString *)str;
+
+
+/**
+ 判断字符串是否是纯数字
+
+ @param checkedNumString 字符串
+ @return 结果
+ */
++ (BOOL)isNum:(NSString *)checkedNumString;
+
 @end
 
 NS_ASSUME_NONNULL_END
