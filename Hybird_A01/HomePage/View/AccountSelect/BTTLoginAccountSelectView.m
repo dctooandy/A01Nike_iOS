@@ -108,7 +108,7 @@
 
 - (void)setAccounts:(NSArray *)accounts {
     _accounts = accounts;
-    NSString *phoneHidden = [NSString stringWithFormat:@"%@*******%@",[self.phone substringToIndex:2],[self.phone substringFromIndex:self.phone.length - 1]];
+    NSString *phoneHidden = [NSString stringWithFormat:@"%@*******%@",[self.phone substringToIndex:3],[self.phone substringFromIndex:self.phone.length - 1]];
     NSString *phoneStr = [NSString stringWithFormat:@"手机号%@, 可登录账号如下:", phoneHidden];
     
     NSRange phoneRange = [phoneStr rangeOfString:phoneHidden];
