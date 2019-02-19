@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTForgetPasswordCell : BTTBaseCollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIButton *forgotLabel;
 @end
 
 NS_ASSUME_NONNULL_END

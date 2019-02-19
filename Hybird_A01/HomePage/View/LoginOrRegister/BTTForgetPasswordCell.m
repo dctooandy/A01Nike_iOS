@@ -13,6 +13,15 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
+    NSMutableAttributedString* tncString = [[NSMutableAttributedString alloc] initWithString:@"忘记账号、密码?"];
+    
+    [tncString addAttribute:NSUnderlineStyleAttributeName
+                      value:@(NSUnderlineStyleSingle)
+                      range:(NSRange){0,[tncString length]}];
+    
+    [tncString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"818791"]  range:NSMakeRange(0,[tncString length])];
+    [tncString addAttribute:NSUnderlineColorAttributeName value:[UIColor colorWithHexString:@"818791"] range:(NSRange){0,[tncString length]}];
+    [self.forgotLabel setAttributedTitle:tncString forState:UIControlStateNormal];
 }
 
 
