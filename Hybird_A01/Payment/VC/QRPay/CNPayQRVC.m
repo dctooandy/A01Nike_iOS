@@ -72,7 +72,8 @@
     if (self.paymentModel.paymentType == CNPaymentWechatQR ||
         self.paymentModel.paymentType == CNPaymentAliQR ||
         self.paymentModel.paymentType == CNPaymentQQQR ||
-        self.paymentModel.paymentType == CNPaymentUnionQR) {
+        self.paymentModel.paymentType == CNPaymentUnionQR ||
+        self.paymentModel.paymentType == CNPaymentJDQR) {
         self.collectionBgView.hidden = YES;
         self.collectionViewHeight.constant = 0;
         self.topConstants.constant = -70;
