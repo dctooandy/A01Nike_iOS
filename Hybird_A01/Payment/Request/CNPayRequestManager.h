@@ -62,7 +62,12 @@ extern NSInteger const kPayTypeTotalCount;
  @param referenceId     获取存款人姓名接口返回
  @param completeHandler 接口回调
  */
-+ (void)paymentGetBankListWithType:(BOOL)isDeposit depositor:(NSString *)depositor referenceId:(NSString *)referenceId completeHandler:(IVRequestCallBack)completeHandler;
+//+ (void)paymentGetBankListWithType:(BOOL)isDeposit depositor:(NSString *)depositor referenceId:(NSString *)referenceId completeHandler:(IVRequestCallBack)completeHandler;
++ (void)paymentGetBankListWithType:(BOOL)isDeposit
+                         depositor:(NSString *)depositor
+                       referenceId:(NSString *)referenceId
+                         BQPayType:(NSInteger)bqPayType
+                   completeHandler:(IVRequestCallBack)completeHandler;
 
 /**
  手工存款查询未处理提案
