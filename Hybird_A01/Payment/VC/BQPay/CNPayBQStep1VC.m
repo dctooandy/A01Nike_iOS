@@ -164,7 +164,13 @@
     [self showLoading];
     __weak typeof(self) weakSelf = self;
     // 获取银行卡列表
-    [CNPayRequestManager paymentGetBankListWithType:NO depositor:self.nameTF.text referenceId:nil completeHandler:^(IVRequestResultModel *result, id response) {
+    NSInteger bqPaymentType = 0;
+    if (self.paymentModel.paymentType == CNPaymentBQAli) {
+        bqPaymentType = 2;
+    } else if (self.paymentModel.paymentType == CNPaymentBQWechat) {
+        bqPaymentType = 1;
+    }
+    [CNPayRequestManager paymentGetBankListWithType:NO depositor:self.nameTF.text referenceId:nil BQPayType:bqPaymentType completeHandler:^(IVRequestResultModel *result, id response) {
         [weakSelf hideLoading];
         if (result.status) {
             /// 数据解析
