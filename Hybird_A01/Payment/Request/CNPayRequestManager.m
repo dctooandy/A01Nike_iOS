@@ -73,10 +73,17 @@ NSInteger const kPayTypeTotalCount = 19;
     [self requestWithUrl:kPaymentDeleteDepositName parameters:params handler:completeHandler];
 }
 
-+ (void)paymentGetBankListWithType:(BOOL)isDeposit depositor:(NSString *)depositor referenceId:(NSString *)referenceId completeHandler:(IVRequestCallBack)completeHandler {
++ (void)paymentGetBankListWithType:(BOOL)isDeposit
+                         depositor:(NSString *)depositor
+                       referenceId:(NSString *)referenceId
+                         BQPayType:(NSInteger)bqPayType
+                   completeHandler:(IVRequestCallBack)completeHandler {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"depositor"] = depositor;
     params[@"reference_id"] = referenceId;
+    if (!isDeposit) {
+        params[@"bqpaytype"] = @(bqPayType);
+    }
     NSString *path = isDeposit ? kPaymentGetBankList : kPaymentQueryBankInfo;
     [self requestWithUrl:path parameters:params handler:completeHandler];
 }
