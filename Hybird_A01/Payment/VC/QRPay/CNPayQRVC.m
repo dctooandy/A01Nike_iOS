@@ -76,7 +76,7 @@
         self.paymentModel.paymentType == CNPaymentJDQR) {
         self.collectionBgView.hidden = YES;
         self.collectionViewHeight.constant = 0;
-        self.topConstants.constant = -70;
+        self.topConstants.constant = -62;
     }
 //    NSInteger count = self.payments.count;
     // 根据数组个数与屏幕宽度来调节高度
