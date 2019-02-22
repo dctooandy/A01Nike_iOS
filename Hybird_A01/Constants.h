@@ -330,7 +330,7 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 // 客户存款次数的接口
 
-#define BTTSaveMoneyTimesAPI         @"/A01/deposit/getIsDepositAmount"
+#define BTTSaveMoneyTimesAPI         @"/deposit/getIsDepositAmount"
 
 /********************************************常用宏*********************************************************/
 
