@@ -390,7 +390,7 @@
             if (tiaoma.isAvailable) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
                 mainModel.name = @"微信条码支付";
-                mainModel.iconName = @"me_scan";
+                mainModel.iconName = @"me_tiaoma";
                 mainModel.paymentType = CNPayChannelWechatBarCode;
                 [self.normalDataTwo addObject:mainModel];
             }
@@ -407,20 +407,21 @@
                 if (!self.bigDataSoure.count && (self.normalDataSoure.count && self.normalDataTwo.count)) {
                     self.saveMoneyShowType = BTTMeSaveMoneyShowTypeTwoMore;
                     self.saveMoneyCount = 2;
+                } else {
+                    if ((self.normalDataSoure.count || self.normalDataTwo.count) && !self.bigDataSoure.count) {
+                        self.saveMoneyShowType = BTTMeSaveMoneyShowTypeMore;
+                        self.saveMoneyCount = 1;
+                    } else if (self.bigDataSoure.count && (!self.normalDataSoure.count && !self.normalDataTwo.count)) {
+                        self.saveMoneyShowType = BTTMeSaveMoneyShowTypeBig;
+                        self.saveMoneyCount = 1;
+                    }
                 }
                 
-                if (self.normalDataSoure.count || self.normalDataTwo.count) {
-                    self.saveMoneyShowType = BTTMeSaveMoneyShowTypeMore;
-                    self.saveMoneyCount = 1;
+                if (!self.bigDataSoure.count && !self.normalDataSoure.count && !self.normalDataTwo.count) {
+                    self.saveMoneyShowType = BTTMeSaveMoneyShowTypeNone;
+                    self.saveMoneyCount = 0;
                 }
                 
-                if (self.bigDataSoure.count && (!self.normalDataSoure.count && self.normalDataTwo.count)) {
-                    self.saveMoneyShowType = BTTMeSaveMoneyShowTypeBig;
-                    self.saveMoneyCount = 1;
-                }
-                
-                self.saveMoneyShowType = BTTMeSaveMoneyShowTypeNone;
-                self.saveMoneyCount = 0;
             }
         }
         [self setupElements];
