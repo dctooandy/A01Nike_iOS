@@ -69,6 +69,11 @@
     self.collectionView.contentInset = UIEdgeInsetsMake(0, 18, 15, 18);
     [self.collectionView registerNib:[UINib nibWithNibName:kQRCellIndentifier bundle:nil] forCellWithReuseIdentifier:kQRCellIndentifier];
     [self.appCollectionView registerNib:[UINib nibWithNibName:@"BTTBankUnionAppIconCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBankUnionAppIconCell"];
+    NSInteger count = self.payments.count;
+    // 根据数组个数与屏幕宽度来调节高度
+    CGFloat itemWidth = ([UIScreen mainScreen].bounds.size.width -18-35-10)/2.0;
+    CGFloat itemHeight = itemWidth * 56 / 160.0;
+    CGFloat totalHeight = ((count - 1)/2 + 1) * (itemHeight + 15);
     if (self.paymentModel.paymentType == CNPaymentWechatQR ||
         self.paymentModel.paymentType == CNPaymentAliQR ||
         self.paymentModel.paymentType == CNPaymentQQQR ||
@@ -77,13 +82,9 @@
         self.collectionBgView.hidden = YES;
         self.collectionViewHeight.constant = 0;
         self.topConstants.constant = -62;
+    } else {
+        self.collectionViewHeight.constant = totalHeight;
     }
-//    NSInteger count = self.payments.count;
-    // 根据数组个数与屏幕宽度来调节高度
-    CGFloat itemWidth = ([UIScreen mainScreen].bounds.size.width -18-35-10)/2.0;
-    CGFloat itemHeight = itemWidth * 56 / 160.0;
-//    CGFloat totalHeight = ((count - 1)/2 + 1) * (itemHeight + 15);
-//    self.collectionViewHeight.constant = totalHeight;
     self.cellSize = CGSizeMake(itemWidth, itemHeight + 10);
     self.apps = @[@"ysfapp",@"mtapp",@"dzapp",@"wphapp",@"ttzgapp",@"mfbapp",@"wzfapp",@"jdapp"];
     self.appCollectionView.delegate = self;
