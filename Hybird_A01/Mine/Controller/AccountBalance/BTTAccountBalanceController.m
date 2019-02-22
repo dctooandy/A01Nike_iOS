@@ -24,6 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isLoadingData = NO;
     self.title = @"账户余额";
     self.isLoadingData = NO;
     self.amount = @"-";

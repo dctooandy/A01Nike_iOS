@@ -6,12 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "Point-card@2x.png",
+      "filename" : "点卡128x128.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Point-card@3x.png",
+      "filename" : "点卡192x192.png",
       "scale" : "3x"
     }
   ],

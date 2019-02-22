@@ -7,7 +7,6 @@
 //
 
 #import "BTTHomePageDiscountCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
 #import "BTTPromotionModel.h"
 
 

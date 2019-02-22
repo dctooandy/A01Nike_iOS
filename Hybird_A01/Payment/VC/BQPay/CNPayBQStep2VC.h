@@ -10,4 +10,6 @@
 
 @interface CNPayBQStep2VC : CNPayBaseVC
 
+@property (nonatomic, strong) CNPayBankCardModel *chooseBank;
+
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "CNPayContainerVC.h"
-#import "AMSegmentViewController.h"
+
 #import "CNPayOnlineVC.h"
 #import "CNPayDepositStep1VC.h"
 #import "CNPayDepositStep2VC.h"
@@ -24,16 +24,16 @@
 
 @interface CNPayContainerVC ()
 
-@property (nonatomic, strong) AMSegmentViewController *segmentVC;
+
 
 @end
 
 @implementation CNPayContainerVC
 
-- (instancetype)initWithPayChannel:(CNPayChannel)payChannel {
+- (instancetype)initWithPaymentType:(CNPaymentType)paymentType {
     self = [super init];
     if (self) {
-        self.payChannel = payChannel;
+        self.paymentType = paymentType;
     }
     return self;
 }
@@ -54,7 +54,7 @@
 - (void)setupView {
     if (_payments && _payments.count > 0) {
         /// 切换容器
-        _segmentVC = [[AMSegmentViewController alloc] initWithItems:[self payItemsWithPayChannel:self.payChannel]];
+        _segmentVC = [[AMSegmentViewController alloc] initWithItems:[self payItemsWithPaymentType:self.paymentType]];
         _segmentVC.view.frame = self.view.bounds;
         [self.view addSubview:_segmentVC.view];
     }
@@ -62,45 +62,88 @@
 
 /**
  根据支付渠道构建具体的支付页面
- @param channel 渠道号
+ @param paymentType 渠道号
  */
-- (NSArray<UIViewController *> *)payItemsWithPayChannel:(CNPayChannel)channel {
+- (NSArray<UIViewController *> *)payItemsWithPaymentType:(CNPaymentType)paymentType {
     
     NSMutableArray<UIViewController *> *viewControllers = [NSMutableArray array];
     
-    CNPaymentModel *payment = _payments.firstObject;
+    CNPaymentModel *payment = nil;
+    for (CNPaymentModel *model  in self.payments) {
+        if (model.paymentType == paymentType) {
+            payment = model;
+            break;
+        }
+    }
     
-    switch (channel) {
+    switch (paymentType) {
+//        case CNPaymentAliQR:
+//        case CNPaymentAliApp:
+//        case CNPaymentBQAli:
+//        case CNPaymentWechatQR:
+//        case CNPaymentWechatApp:
+//        case CNPaymentWechatBarCode:
+//        case CNPaymentBQWechat:
+//        case CNPaymentUnionQR:
+//        case CNPaymentUnionApp:
+//        case CNPaymentDeposit:
+//        case CNPaymentJDQR:
+//        case CNPaymentJDApp:
+//        case CNPaymentQQQR:
+//        case CNPaymentBQFast:
+//        case CNPaymentQQApp:
+//        case CNPaymentBTC:
+//        case CNPaymentCoin:
+//        case CNPaymentOnline:
+//        {
+//            [viewControllers addObjectsFromArray:[self QRPay:payment]];
+//        }
+//            break;
             
-        case CNPayChannelCard: {
+            
+        case CNPaymentCard: {
             [viewControllers addObjectsFromArray:[self cardPay:payment]];
         }
             break;
             
-        case CNPayChannelDeposit: {
+        case CNPaymentDeposit: {
             [viewControllers addObjectsFromArray:[self depositPay:payment]];
         }
             break;
             
-        case CNPayChannelCoin:
-        case CNPayChannelWechatBarCode:
-        case CNPayChannelJDApp:
-        case CNPayChannelBTC:
-        case CNPayChannelAliApp:
-        case CNPayChannelUnionApp:
-        case CNPayChannelOnline: {
+        case CNPaymentCoin:
+        case CNPaymentWechatBarCode:
+        case CNPaymentBTC:
+        case CNPaymentUnionApp:
+        case CNPaymentOnline: {
             [viewControllers addObjectsFromArray:[self onlinePay:payment]];
         }
             break;
-            
-        case CNPayChannelQR: {
+        case CNPaymentJDQR:
+        case CNPaymentAliQR:
+        case CNPaymentWechatQR:
+        case CNPaymentUnionQR:
+        case CNPaymentQQApp:
+        case CNPaymentJDApp:
+        case CNPaymentWechatApp:
+        case CNPaymentQQQR: {
             [viewControllers addObjectsFromArray:[self QRPay:payment]];
         }
             break;
             
-        case CNPayChannelBQFast:
-        case CNPayChannelBQWechat:
-        case CNPayChannelBQAli: {
+        case CNPaymentAliApp:
+        {
+            BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
+            if (timeMoreTen) {
+                [viewControllers addObjectsFromArray:[self QRPay:payment]];
+            } else {
+                [viewControllers addObjectsFromArray:[self onlinePay:payment]];
+            }
+        }
+            break;
+        case CNPaymentBQFast:
+        case CNPaymentBQWechat:
+        case CNPaymentBQAli: {
             [viewControllers addObjectsFromArray:[self BQPay:payment]];
         }
             break;
@@ -137,6 +180,23 @@
 
 /// QR支付
 - (NSArray<CNPayBaseVC *> *)QRPay:(CNPaymentModel *)payment {
+    BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
+    if (payment.paymentType == CNPaymentWechatApp ||
+        payment.paymentType == CNPaymentJDApp ||
+        payment.paymentType == CNPaymentQQApp || (payment.paymentType == CNPaymentAliApp && timeMoreTen)) {
+        CNPayQRVC *step1VC = [[CNPayQRVC alloc] init];
+        step1VC.paymentModel = payment;
+        step1VC.payments = _payments;
+        return @[step1VC];
+    }
+//    else if (payment.paymentType == CNPaymentBQFast ||
+//               payment.paymentType == CNPaymentBQWechat ||
+//               payment.paymentType == CNPaymentBQAli) {
+//        CNPayQRVC *step1VC = [[CNPayQRVC alloc] init];
+//        step1VC.paymentModel = payment;
+//        step1VC.payments = _payments;
+//        return @[step1VC];
+//    }
     CNPayQRVC *step1VC = [[CNPayQRVC alloc] init];
     CNPayQRStep2VC *step2VC = [[CNPayQRStep2VC alloc] init];
     step1VC.paymentModel = payment;

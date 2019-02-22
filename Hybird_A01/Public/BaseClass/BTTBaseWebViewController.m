@@ -7,7 +7,7 @@
 //
 
 #import "BTTBaseWebViewController.h"
-#import <SDWebImage/UIImage+GIF.h>
+#import "UIImage+GIF.h"
 @interface BTTBaseWebViewController ()<UIWebViewDelegate>
 
 @end

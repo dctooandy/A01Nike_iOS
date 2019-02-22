@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,31 +20,34 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_netbank" translatesAutoresizingMaskIntoConstraints="NO" id="tDQ-Tj-5hT">
-                        <rect key="frame" x="21.5" y="15" width="57" height="57"/>
+                        <rect key="frame" x="25" y="15" width="50" height="50"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="57" id="Ahd-IT-4FO"/>
-                            <constraint firstAttribute="height" constant="57" id="DCG-FP-5GY"/>
+                            <constraint firstAttribute="width" constant="50" id="Ahd-IT-4FO"/>
+                            <constraint firstAttribute="height" constant="50" id="DCG-FP-5GY"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="迅捷网银" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EpD-fz-zDX">
-                        <rect key="frame" x="25.5" y="80" width="49.5" height="14.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="迅捷网银" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EpD-fz-zDX">
+                        <rect key="frame" x="8" y="86.5" width="84" height="13.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="EpD-fz-zDX" secondAttribute="trailing" constant="8" id="5dW-G8-4kv"/>
+                <constraint firstItem="EpD-fz-zDX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="NJH-eb-1WY"/>
                 <constraint firstItem="tDQ-Tj-5hT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="Smr-j5-1vT"/>
+                <constraint firstAttribute="bottom" secondItem="EpD-fz-zDX" secondAttribute="bottom" constant="10" id="dTf-ko-lfR"/>
                 <constraint firstItem="EpD-fz-zDX" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="e75-nf-1C4"/>
                 <constraint firstItem="tDQ-Tj-5hT" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="nhz-yI-ILt"/>
-                <constraint firstItem="EpD-fz-zDX" firstAttribute="top" secondItem="tDQ-Tj-5hT" secondAttribute="bottom" constant="8" id="qxN-YC-sCT"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
                 <outlet property="heightConstants" destination="DCG-FP-5GY" id="8wP-xY-ZlC"/>
                 <outlet property="iconImg" destination="tDQ-Tj-5hT" id="VBC-kC-XKh"/>
                 <outlet property="nameLabel" destination="EpD-fz-zDX" id="6aD-EC-q79"/>
+                <outlet property="topConstants" destination="Smr-j5-1vT" id="Rci-oR-A5r"/>
                 <outlet property="widthConstants" destination="Ahd-IT-4FO" id="L0S-6q-8eh"/>
             </connections>
             <point key="canvasLocation" x="40" y="46.776611694152926"/>

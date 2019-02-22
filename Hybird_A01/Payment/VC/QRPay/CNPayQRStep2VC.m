@@ -35,9 +35,12 @@
     _titleLb.text = [NSString stringWithFormat:@"%@确认支付订单", self.writeModel.depositType];
 }
 
-- (IBAction)submit:(UIButton *)sender {
+- (IBAction)clickBtn:(CNPaySubmitButton *)sender {
     [self showPayTipView];
     CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:self.writeModel.orderModel title:self.writeModel.depositType];
     [self pushViewController:webVC];
 }
+
+
+
 @end

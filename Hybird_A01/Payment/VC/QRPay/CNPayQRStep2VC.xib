@@ -115,7 +115,7 @@
                                     </constraints>
                                     <state key="normal" title="确认支付"/>
                                     <connections>
-                                        <action selector="submit:" destination="-1" eventType="touchUpInside" id="cH8-VG-msN"/>
+                                        <action selector="clickBtn:" destination="-1" eventType="touchUpInside" id="MZb-ML-CQU"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -149,7 +149,7 @@
                 <constraint firstItem="Y4c-dQ-NbG" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="MGc-mz-hSH"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
+            <point key="canvasLocation" x="-794" y="-136"/>
         </view>
     </objects>
 </document>

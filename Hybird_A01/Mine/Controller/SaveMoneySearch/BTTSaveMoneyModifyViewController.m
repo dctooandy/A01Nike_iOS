@@ -50,7 +50,7 @@ typedef enum : NSUInteger {
     noticeLabel.frame = CGRectMake(35, 11, 200, 20);
     noticeLabel.textColor = [UIColor colorWithHexString:@"d13847"];
     noticeLabel.font = [UIFont systemFontOfSize:14];
-    noticeLabel.text = @"信息填写错误, 请重新填写！";
+    noticeLabel.text = @"信息填写错误, 请重新填写!";
 }
 
 - (void)setupCollectionView {
@@ -76,6 +76,7 @@ typedef enum : NSUInteger {
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
+
             if ([button.titleLabel.text isEqualToString:@"提交"]) {
                 [strongSelf submitRequest];
             } else {
@@ -301,11 +302,11 @@ typedef enum : NSUInteger {
             if ([self.model.result_code containsString:@"900007"]) {
                 if ([name isEqualToString:@"存款地点"]) {
                     if (self.editType == BTTSaveMoneyEditTypeError) {
-                         model.isError = YES;
+                        model.isError = YES;
                     } else {
-                         model.isError = NO;
+                        model.isError = NO;
                     }
-                   
+                    
                     model.resultCode = @"900007";
                 }
             }
@@ -347,9 +348,5 @@ typedef enum : NSUInteger {
     return _dataSource;
 }
 
-- (void)setModel:(BTTSaveMoneyErrorModel *)model {
-    _model = model;
-    
-}
 
 @end

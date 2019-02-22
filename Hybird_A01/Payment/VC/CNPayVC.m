@@ -42,9 +42,17 @@
 @property (nonatomic, strong) UILabel *alertLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
 @property (nonatomic, strong) NSMutableArray <CNPayChannelModel *> *payChannels;
+
+@property (nonatomic, strong) CNPayContainerVC *payChannelVC;
+
 @end
 
 @implementation CNPayVC
+
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (instancetype)initWithChannel:(CNPayChannel)channel {
     if (self = [super init]) {
@@ -56,11 +64,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = kBlackBackgroundColor;
     self.view.backgroundColor = [UIColor colorWithHexString:@"212229"];
     self.payScrollView.backgroundColor = kBlackBackgroundColor;
     self.contentWidth.constant = [UIScreen mainScreen].bounds.size.width;
     [self.payCollectionView registerNib:[UINib nibWithNibName:kChannelCellIndentifier bundle:nil] forCellWithReuseIdentifier:kChannelCellIndentifier];
     [self fetchPayChannels];
+    [self registerNotification];
+}
+
+- (void)registerNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUIItems:) name:@"BTTUpdateSaveMoneyUINotification" object:nil];
+}
+
+- (void)updateUIItems:(NSNotification *)notifi  {
+    NSLog(@"%@",notifi.object);
+    _payChannelVC.segmentVC.items = notifi.object;
+    _segmentVC.items = notifi.object;
+    [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -182,24 +203,20 @@
     
     
     /// 京东支付
-    CNPayChannelModel *JD = [[CNPayChannelModel alloc] init];
-    JD.payChannel = CNPayChannelJDApp;
-    JD.payments = [[NSArray alloc] initWithObjects:
-                   payments[CNPaymentJDApp], nil];
+//    CNPayChannelModel *JD = [[CNPayChannelModel alloc] init];
+//    JD.payChannel = CNPayChannelJDApp;
+//    JD.payments = [[NSArray alloc] initWithObjects:
+//                   payments[CNPaymentJDApp], nil];
     
     
-    /// 扫码
-    CNPayChannelModel *QR = [[CNPayChannelModel alloc] init];
-    QR.payChannel = CNPayChannelQR;
-    QR.payments = [[NSArray alloc] initWithObjects:
-                   payments[CNPaymentUnionQR],
-                   payments[CNPaymentWechatQR],
-                   payments[CNPaymentAliQR],
-                   payments[CNPaymentQQQR],
-                   payments[CNPaymentWechatApp],
-                   payments[CNPaymentQQApp],
-                   payments[CNPaymentJDQR],
-                   nil];
+//    /// 扫码
+//    CNPayChannelModel *QR = [[CNPayChannelModel alloc] init];
+//    QR.payChannel = CNPayChannelWechatQQJDAPP;
+//    QR.payments = [[NSArray alloc] initWithObjects:
+//                   payments[CNPaymentWechatApp],
+//                   payments[CNPaymentQQApp],
+//                   payments[CNPaymentJDApp],
+//                   nil];
     
     /// BQ 快速
     CNPayChannelModel *BQFast = [[CNPayChannelModel alloc] init];
@@ -231,8 +248,59 @@
     coin.payChannel = CNPayChannelCoin;
     coin.payments = [[NSArray alloc] initWithObjects:
                      payments[CNPaymentCoin], nil];
+    // 银联扫码
+    CNPayChannelModel *unionQR = [[CNPayChannelModel alloc] init];
+    unionQR.payChannel = CNPayChannelUnionQR;
+    unionQR.payments = [[NSArray alloc] initWithObjects:
+                     payments[CNPaymentUnionQR], nil];
     
-    NSArray *array = @[BQFast,BQWeChat,BQAli,deposit,ali,online,QR,unionPay,card,BTC,JD,barCode,coin];
+    // 京东扫码
+    CNPayChannelModel *jdQR = [[CNPayChannelModel alloc] init];
+    jdQR.payChannel = CNPayChannelJDQR;
+    jdQR.payments = [[NSArray alloc] initWithObjects:
+                        payments[CNPaymentJDQR], nil];
+    
+    // 支付宝扫码
+    CNPayChannelModel *aliQR = [[CNPayChannelModel alloc] init];
+    aliQR.payChannel = CNPayChannelAliQR;
+    aliQR.payments = [[NSArray alloc] initWithObjects:
+                        payments[CNPaymentAliQR], nil];
+    // 微信扫码
+    CNPayChannelModel *wxQR = [[CNPayChannelModel alloc] init];
+    wxQR.payChannel = CNPayChannelWechatQR;
+    wxQR.payments = [[NSArray alloc] initWithObjects:
+                      payments[CNPaymentWechatQR], nil];
+    
+    // QQ扫码
+    CNPayChannelModel *qqQR = [[CNPayChannelModel alloc] init];
+    qqQR.payChannel = CNPayChannelQQQR;
+    qqQR.payments = [[NSArray alloc] initWithObjects:
+                     payments[CNPaymentQQApp], nil];
+    // 微信/QQ/京东WAP
+    BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
+    
+    CNPayChannelModel *wap = [[CNPayChannelModel alloc] init];
+    wap.payChannel = CNPayChannelWechatQQJDAPP;
+    if (timeMoreTen) {
+        wap.payments = [[NSArray alloc] initWithObjects:
+                        payments[CNPaymentAliApp],
+                        payments[CNPaymentWechatApp],
+                        payments[CNPaymentQQApp],
+                        payments[CNPaymentJDApp],nil];
+    } else {
+        wap.payments = [[NSArray alloc] initWithObjects:
+                        payments[CNPaymentWechatApp],
+                        payments[CNPaymentQQApp],
+                        payments[CNPaymentJDApp],nil];
+    }
+    
+    NSArray *array = nil;
+    if (timeMoreTen) {
+        array = @[BQFast,BQAli,BQWeChat,deposit,unionQR,aliQR,online,wxQR,jdQR,qqQR,wap,unionPay,coin,card,BTC,barCode];
+    } else {
+        array = @[unionQR,jdQR,ali,BQFast,BQWeChat,BQAli,aliQR,wxQR,qqQR,online,deposit,wap,unionPay,coin,card,BTC,barCode];
+    }
+    
     
     // 没开启的渠道不显示
     for (CNPayChannelModel *channel in array) {
@@ -252,6 +320,7 @@
             channel.payments = payments;
         }
     }
+    
     
     return channels;
 }
@@ -302,9 +371,12 @@
             }
         }
     }
-    
-    CNPayChannel payChannel = channelModel.payChannel;
-    self.title = channelModel.channelName;
+    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
+    if ([channelModel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {
+        self.title = @"支付宝/微信/QQ/京东WAP";
+    } else {
+        self.title = channelModel.channelName;
+    }
     self.selectedIcon = channelModel.selectedIcon;
     
     /// 存在已经打开的支付渠道
@@ -314,9 +386,9 @@
     [_payCollectionView reloadData];
     [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     
-    CNPayContainerVC *payChannelVC = [[CNPayContainerVC alloc] initWithPayChannel:payChannel];
-    payChannelVC.payments = _payChannels[_currentSelectedIndex].payments;
-    _segmentVC = [[AMSegmentViewController alloc] initWithViewController:payChannelVC];
+    _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.payments.firstObject.paymentType];
+    _payChannelVC.payments = _payChannels[_currentSelectedIndex].payments;
+    _segmentVC = [[AMSegmentViewController alloc] initWithViewController:_payChannelVC];
     [self.stepView addSubview:_segmentVC.view];
     [_segmentVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
@@ -334,7 +406,15 @@
     CNPayChannelCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kChannelCellIndentifier forIndexPath:indexPath];
     
     CNPayChannelModel *channel = [_payChannels objectAtIndex:indexPath.row];
-    cell.titleLb.text = channel.channelName;
+    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
+    if ([channel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {
+        cell.titleLb.text = @"支付宝/微信/QQ/京东WAP";
+        cell.titleLb.font = [UIFont boldSystemFontOfSize:11];
+    } else {
+        cell.titleLb.text = channel.channelName;
+        cell.titleLb.font = [UIFont boldSystemFontOfSize:13];
+    }
+    
     cell.channelIV.image = [UIImage imageNamed:channel.selectedIcon];
     
     // 默认选中第一个可以支付的渠道
@@ -353,11 +433,16 @@
     [self.payCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     
     CNPayChannelModel *channel = [_payChannels objectAtIndex:indexPath.row];
-    CNPayContainerVC *payChannelVC = [[CNPayContainerVC alloc] initWithPayChannel:channel.payChannel];
-    payChannelVC.payments = channel.payments;
-    self.title = channel.channelName;
+    _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payments.firstObject.paymentType];
+    _payChannelVC.payments = channel.payments;
+    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
+    if ([channel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {
+        self.title = @"支付宝/微信/QQ/京东WAP";
+    } else {
+        self.title = channel.channelName;
+    }
     self.selectedIcon = channel.selectedIcon;
-    [self.segmentVC addOrUpdateDisplayViewController:payChannelVC];
+    [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];
 }
 
 

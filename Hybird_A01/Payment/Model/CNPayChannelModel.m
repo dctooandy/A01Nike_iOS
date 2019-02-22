@@ -60,10 +60,11 @@
             self.channelName    = @"银行快捷支付";
             self.selectedIcon   = @"pay_unionHL";
             break;
-        case CNPayChannelJDApp:
-            self.channelName    = @"京东WAP";
-            self.selectedIcon   = @"pay_JDHL";
-            break;
+//        case CNPayChannelJDApp:
+//            self.channelName    = @"京东WAP";
+//            self.selectedIcon   = @"pay_JDHL";
+//            break;
+            
         case CNPayChannelQR:
             self.channelName    = @"扫码支付";
             self.selectedIcon   = @"pay_QRHL";
@@ -79,6 +80,30 @@
         case CNPayChannelBQAli:
             self.channelName    = @"支付宝秒存";
             self.selectedIcon   = @"pay_AliHL";
+            break;
+        case CNPayChannelWechatQQJDAPP:
+            self.channelName    = @"微信/QQ/京东WAP";
+            self.selectedIcon   = @"wap";
+            break;
+        case CNPayChannelWechatQR:
+            self.channelName    = @"微信扫码";
+            self.selectedIcon   = @"pay_WeChatHL";
+            break;
+        case CNPayChannelAliQR:
+            self.channelName    = @"支付宝扫码";
+            self.selectedIcon   = @"pay_AliHL";
+            break;
+        case CNPayChannelQQQR:
+            self.channelName    = @"QQ扫码";
+            self.selectedIcon   = @"pay_QQ";
+            break;
+        case CNPayChannelUnionQR:
+            self.channelName    = @"银联扫码";
+            self.selectedIcon   = @"pay_QRUnion";
+            break;
+        case CNPayChannelJDQR:
+            self.channelName    = @"京东扫码";
+            self.selectedIcon   = @"pay_QRJD";
             break;
     }
 }

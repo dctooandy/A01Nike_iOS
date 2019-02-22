@@ -19,15 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="288" height="75"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="14C-KX-huv">
-                        <rect key="frame" x="13" y="18.5" width="38" height="38"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="38" id="Eqf-0K-1PI"/>
-                            <constraint firstAttribute="height" constant="38" id="m6v-VU-4Dk"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择支付方式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGF-IA-oUd">
-                        <rect key="frame" x="61" y="29" width="86" height="17"/>
+                        <rect key="frame" x="101" y="29" width="86" height="17"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -44,11 +37,12 @@
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="BGF-IA-oUd" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="AjJ-Gj-bhx"/>
+                <constraint firstItem="BGF-IA-oUd" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="B6H-So-cah"/>
                 <constraint firstItem="JCq-BL-HJg" firstAttribute="trailing" secondItem="ug3-E5-PtR" secondAttribute="trailing" constant="-5.5" id="JNE-Nb-Ysw"/>
                 <constraint firstItem="14C-KX-huv" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Ufo-31-HiM"/>
                 <constraint firstItem="14C-KX-huv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="13" id="YtR-4X-j5q"/>
                 <constraint firstItem="ug3-E5-PtR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="cDx-DM-WLi"/>
-                <constraint firstItem="BGF-IA-oUd" firstAttribute="leading" secondItem="14C-KX-huv" secondAttribute="trailing" constant="10" id="f6o-ld-JWL"/>
                 <constraint firstAttribute="bottom" secondItem="ug3-E5-PtR" secondAttribute="bottom" id="gDB-sI-Pd1"/>
                 <constraint firstItem="ug3-E5-PtR" firstAttribute="bottom" secondItem="JCq-BL-HJg" secondAttribute="bottom" constant="9.5" id="gh4-VB-ZOh"/>
                 <constraint firstItem="ug3-E5-PtR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="l2Q-zf-zlE"/>

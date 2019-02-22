@@ -6,12 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "Bitcoin@2x.png",
+      "filename" : "比特币128x128.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Bitcoin@3x.png",
+      "filename" : "比特币192x192.png",
       "scale" : "3x"
     }
   ],

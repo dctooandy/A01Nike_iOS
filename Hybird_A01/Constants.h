@@ -125,6 +125,10 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTSaveMoneyTimesKey          @"BTTSaveMoneyTimesKey"
 
+// 客户存款次数通知
+
+#define BTTSaveMoneyTimesNotification    @"BTTSaveMoneyTimesNotification"
+
 // 验证码发送按钮控制通知
 
 #define BTTVerifyCodeEnableNotification @"BTTVerifyCodeEnableNotification"

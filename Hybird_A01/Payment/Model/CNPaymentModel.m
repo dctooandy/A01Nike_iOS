@@ -74,16 +74,27 @@
             
         case CNPaymentWechatApp:
         case CNPaymentWechatQR:
+        case CNPaymentBQWechat:
             return @"pay_WeChatHL";
         case CNPaymentQQApp:
         case CNPaymentQQQR:
             return @"pay_QQ";
         case CNPaymentAliQR:
+        case CNPaymentAliApp:
+        case CNPaymentBQAli:
             return @"pay_AliHL";
         case CNPaymentUnionQR:
             return @"pay_QRUnion";
         case CNPaymentJDQR:
             return @"pay_QRJD";
+        case CNPaymentBQFast:
+            return @"me_netbank";
+        case CNPaymentBTC:
+            return @"me_btc";
+        case CNPaymentCoin:
+            return @"me_bibao";
+        case CNPaymentDeposit:
+            return @"me_hand";
         default:
             return nil;
     }

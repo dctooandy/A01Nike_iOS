@@ -96,6 +96,7 @@
                         model.isLoading = YES;
                         [games addObject:model];
                     }
+                    self.isLoadingData = YES;
                     self.games = [games mutableCopy];
                 }
             }

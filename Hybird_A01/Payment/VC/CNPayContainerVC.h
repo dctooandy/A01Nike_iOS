@@ -9,12 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "CNPayChannelModel.h"
 #import "CNPaymentModel.h"
+#import "AMSegmentViewController.h"
 
 @interface CNPayContainerVC : UIViewController
 
-@property (nonatomic, assign) CNPayChannel payChannel;
+@property (nonatomic, assign) CNPaymentType paymentType;
 @property (nonatomic, strong) NSArray<CNPaymentModel *> *payments;
 
-- (instancetype)initWithPayChannel:(CNPayChannel)payChannel;
+@property (nonatomic, strong) AMSegmentViewController *segmentVC;
+
+- (instancetype)initWithPaymentType:(CNPaymentType)payChannel;
 - (BOOL)canPopViewController;
+- (void)setupView;
 @end
