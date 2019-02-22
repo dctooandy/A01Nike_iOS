@@ -48,8 +48,7 @@ typedef enum {
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BTTMeMainModel *model = self.dataSource.count ? self.dataSource[indexPath.row] : nil;
-    BOOL saveMoneyTime = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
-    if ((saveMoneyTime && [model.name isEqualToString:@"迅捷网银"]) || (!saveMoneyTime && [model.name isEqualToString:@"银联扫码"])) {
+    if (indexPath.row == 0) {
         BTTMeSaveMoneyAlipayCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeSaveMoneyAlipayCell" forIndexPath:indexPath];
         cell.model = model;
         return cell;

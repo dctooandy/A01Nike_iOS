@@ -228,6 +228,7 @@
             }
         } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig) {
             BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
+            cell.dataSource = self.bigDataSoure;
             weakSelf(weakSelf);
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
@@ -237,6 +238,7 @@
             return cell;
         } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeMore) {
             BTTMeMoreSaveMoneyCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
+            cell.dataSource = self.normalDataSoure.count ? self.normalDataSoure : self.normalDataTwo;
             weakSelf(weakSelf);
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
@@ -244,7 +246,49 @@
                 [strongSelf goSaveMoneyWithModel:model];
             };
             return cell;
-        } else {
+        } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeTwoMore) {
+            BTTMeMoreSaveMoneyCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
+            if (indexPath.row == 3 + self.personalInfos.count) {
+                cell.dataSource = self.normalDataSoure;
+            } else {
+                cell.dataSource = self.normalDataTwo;
+            }
+            weakSelf(weakSelf);
+            cell.clickEventBlock = ^(id  _Nonnull value) {
+                strongSelf(strongSelf);
+                BTTMeMainModel *model = value;
+                [strongSelf goSaveMoneyWithModel:model];
+            };
+            return cell;
+        } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBigOneMore) {
+            if (indexPath.row == 3 + self.personalInfos.count) {
+                BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
+                cell.dataSource = self.bigDataSoure;
+                weakSelf(weakSelf);
+                cell.clickEventBlock = ^(id  _Nonnull value) {
+                    strongSelf(strongSelf);
+                    BTTMeMainModel *model = value;
+                    [strongSelf goSaveMoneyWithModel:model];
+                };
+                return cell;
+            } else if (indexPath.row == 4 + self.personalInfos.count) {
+                BTTMeMoreSaveMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell" forIndexPath:indexPath];
+                return cell;
+            } else {
+                BTTMeMoreSaveMoneyCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
+                
+                cell.dataSource = self.normalDataSoure.count ? self.normalDataSoure : self.normalDataTwo;
+                
+                weakSelf(weakSelf);
+                cell.clickEventBlock = ^(id  _Nonnull value) {
+                    strongSelf(strongSelf);
+                    BTTMeMainModel *model = value;
+                    [strongSelf goSaveMoneyWithModel:model];
+                };
+                return cell;
+            }
+        }
+        else {
             return [UICollectionViewCell new];
         }
     } else if (indexPath.row >= 4 + self.personalInfos.count + self.saveMoneyCount && indexPath.row <= 4 + self.mainDataOne.count + self.personalInfos.count + self.saveMoneyCount) {
@@ -550,6 +594,8 @@
             } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBigOneMore) {
                 if (i == 3 + self.personalInfos.count) {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 180)]];
+                } else if (i == 4 + self.personalInfos.count) {
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
                 } else {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
                 }
