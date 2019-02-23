@@ -321,7 +321,7 @@
                     BTTMeMainModel *mainModel = [BTTMeMainModel new];
                     mainModel.name = @"京东扫码";
                     mainModel.iconName = @"me_jdscan";
-                    mainModel.paymentType = CNPayChannelQR;
+                    mainModel.paymentType = CNPayChannelJDQR;
                     [self.normalDataSoure addObject:mainModel];
                 }
                 
