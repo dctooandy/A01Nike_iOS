@@ -50,6 +50,10 @@
     if (self.normalDataSoure.count) {
         [self.normalDataSoure removeAllObjects];
     }
+    if (self.normalDataTwo.count) {
+        [self.normalDataTwo removeAllObjects];
+    }
+    
     NSArray *icons =  @[@"me_bankscan",@"me_jdscan",@"me_aliwap",@"me_bank",@"me_wechatsecond",@"me_alipaySecond",@"me_online",@"me_aliSacn",@"me_wechatscan",@"me_qqScan",@"me_hand",@"me_wap",@"me_quick",@"me_bibao",@"me_pointCard",@"me_btc",@"me_tiaoma"];
     NSArray *names = @[@"银联扫码",@"京东扫码",@"支付宝wap",@"迅捷网银",@"微信秒存",@"支付宝秒存",@"在线支付",@"支付宝扫码",@"微信扫码",@"QQ扫码",@"手工存款",@"支付宝/微信/QQ/京东wap",@"银行快捷网银",@"点卡",@"钻石币",@"比特币",@"微信条码支付"];
     for (NSString *name in names) {
@@ -72,7 +76,7 @@
             [self.normalDataTwo addObject:model];
         }
     }
-    [self.collectionView reloadData];
+    [self setupElements];
 }
 
 - (void)loadPaymentData {
