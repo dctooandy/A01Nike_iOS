@@ -28,7 +28,12 @@
     self.collectionView.showsHorizontalScrollIndicator = NO;
 //    self.collectionView.backgroundColor = COLOR_RGBA(41, 45, 54, 1);
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    layout.itemSize = CGSizeMake((SCREEN_WIDTH - 70) / 4, 90);
+    if (SCREEN_WIDTH > 414) {
+        layout.itemSize = CGSizeMake((SCREEN_WIDTH - 70) / 6, 90);
+    } else {
+        layout.itemSize = CGSizeMake((SCREEN_WIDTH - 70) / 4, 90);
+    }
+    
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumLineSpacing = 0;
     self.collectionView.collectionViewLayout = layout;
