@@ -275,7 +275,7 @@
     CNPayChannelModel *qqQR = [[CNPayChannelModel alloc] init];
     qqQR.payChannel = CNPayChannelQQQR;
     qqQR.payments = [[NSArray alloc] initWithObjects:
-                     payments[CNPaymentQQApp], nil];
+                     payments[CNPayChannelQQQR], nil];
     // 微信/QQ/京东WAP
     BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
     
