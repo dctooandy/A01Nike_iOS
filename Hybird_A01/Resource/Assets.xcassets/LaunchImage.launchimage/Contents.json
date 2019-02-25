@@ -63,6 +63,22 @@
     },
     {
       "orientation" : "portrait",
+      "idiom" : "ipad",
+      "filename" : "768x1024.jpg",
+      "extent" : "full-screen",
+      "minimum-system-version" : "7.0",
+      "scale" : "1x"
+    },
+    {
+      "orientation" : "portrait",
+      "idiom" : "ipad",
+      "filename" : "1536x2048.jpg",
+      "extent" : "full-screen",
+      "minimum-system-version" : "7.0",
+      "scale" : "2x"
+    },
+    {
+      "orientation" : "portrait",
       "idiom" : "iphone",
       "extent" : "full-screen",
       "scale" : "1x"
@@ -78,6 +94,20 @@
       "idiom" : "iphone",
       "extent" : "full-screen",
       "subtype" : "retina4",
+      "scale" : "2x"
+    },
+    {
+      "orientation" : "portrait",
+      "idiom" : "ipad",
+      "filename" : "768x1024-1.jpg",
+      "extent" : "full-screen",
+      "scale" : "1x"
+    },
+    {
+      "orientation" : "portrait",
+      "idiom" : "ipad",
+      "filename" : "1536x2048-1.jpg",
+      "extent" : "full-screen",
       "scale" : "2x"
     }
   ],
