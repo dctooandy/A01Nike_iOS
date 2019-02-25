@@ -287,10 +287,6 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTOpenAccountStatus         @"/A01/openAccount/isOpen"
 
-// 获取支付状态
-
-#define BTTPaymentStatus             @"/public/payment/isShutdown"
-
 // 请求游戏列表
 
 #define BTTVideoGamesList            @"/A01/game/slotGameSupportPage"

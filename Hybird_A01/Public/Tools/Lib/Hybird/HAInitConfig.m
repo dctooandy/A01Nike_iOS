@@ -23,6 +23,7 @@
             return @[@"http://a01gatewaynew.bawinx.com/",@"http://a01gatewayfresh.bawinx.com/"];
         default:
             return @[@"https://a01.gatewayphp.net:9443/",@"https://a01.gatewayphp.com:9443/",@"https://a01.gateway-api.net/"];
+//            return @[@"https://a01.gatewayphp.net:9443/",@"https://a01.gatewayphp.com:9443/",@"https://a01.gatewaynike.com"];
     }
 }
 

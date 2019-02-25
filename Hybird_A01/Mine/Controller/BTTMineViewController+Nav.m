@@ -45,7 +45,8 @@ static const char *BTTHeaderViewKey = "headerView";
 }
 
 - (void)logoutSuccess:(NSNotification *)notifi {
-    [self setupElements];
+    
+    
 }
 
 - (void)gotoCardInfo {

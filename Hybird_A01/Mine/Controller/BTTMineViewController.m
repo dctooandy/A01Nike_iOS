@@ -102,6 +102,11 @@
         [self loadPaymentData];
         [self loadAccountStatus];
         [self loadSaveMoneyTimes];
+    } else {
+        self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
+        self.saveMoneyTimesType = BTTSaveMoneyTimesTypeLessTen;
+        self.saveMoneyCount = 4;
+        [self loadPaymentDefaultData];
     }
 }
 
