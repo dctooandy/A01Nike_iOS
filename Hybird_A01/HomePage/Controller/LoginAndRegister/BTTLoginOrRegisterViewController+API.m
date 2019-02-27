@@ -130,8 +130,22 @@
                 }
             }
         } else {
-            if (result.message.length) {
-                [MBProgressHUD showError:result.message toView:nil];
+            if (result.code_system == 202020) {
+                [self showAlertWithModle:nil];
+            } else if(result.code_system == 202006 || result.code_system == 202018) {
+                [MBProgressHUD showError:@"账号或密码错误,请重新输入" toView:self.view];
+                self.wrongPwdNum++;
+                if (self.wrongPwdNum >= 2) {
+                    self.loginCellType = BTTLoginCellTypeCode;
+                    [self loadVerifyCode];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self setupElements];
+                    });
+                }
+            } else {
+                if (result.message.length) {
+                    [MBProgressHUD showError:result.message toView:nil];
+                }
             }
         }
     }];

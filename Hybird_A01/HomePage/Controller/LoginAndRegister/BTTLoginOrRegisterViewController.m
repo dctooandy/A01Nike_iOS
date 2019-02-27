@@ -113,9 +113,24 @@
                 if ([PublicMethod isValidatePhone:historyAccount]) {
                     cell.codeBtn.enabled = YES;
                     cell.pwdTextField.secureTextEntry = NO;
+                    cell.pwdTextField.placeholder = @"手机验证码";
+                    cell.eyeBtn.hidden = YES;
+                    cell.codeBtn.hidden = NO;
+                    cell.eyeBtnLeftConstants.priority = 250;
+                    cell.sendBtnLeftConstants.priority = 750;
                 } else {
+                    cell.eyeBtn.hidden = NO;
+                    cell.codeBtn.hidden = YES;
+                    cell.eyeBtnLeftConstants.priority = 750;
+                    cell.sendBtnLeftConstants.priority = 250;
                     cell.codeBtn.enabled = NO;
                     cell.pwdTextField.secureTextEntry = YES;
+                    cell.eyeBtn.selected = NO;
+                    if (historyAccount.length) {
+                        cell.pwdTextField.placeholder = @"密码";
+                    } else {
+                        cell.pwdTextField.placeholder = @"密码/手机验证码";
+                    }
                 }
                 cell.pwdTextField.text = @"";
                 weakSelf(weakSelf);
@@ -134,6 +149,28 @@
                 NSString *historyAccount = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCacheAccountName];
                 cell.accountTextField.text = historyAccount.length ? historyAccount : @"";
                 cell.pwdTextField.text = @"";
+                if ([PublicMethod isValidatePhone:historyAccount]) {
+                    cell.codeBtn.enabled = YES;
+                    cell.pwdTextField.secureTextEntry = NO;
+                    cell.pwdTextField.placeholder = @"手机验证码";
+                    cell.eyeBtn.hidden = YES;
+                    cell.codeBtn.hidden = NO;
+                    cell.eyeLeftConstants.priority = 250;
+                    cell.sendBtnLeftConstants.priority = 750;
+                } else {
+                    cell.eyeBtn.hidden = NO;
+                    cell.codeBtn.hidden = YES;
+                    cell.eyeLeftConstants.priority = 750;
+                    cell.sendBtnLeftConstants.priority = 250;
+                    cell.codeBtn.enabled = NO;
+                    cell.pwdTextField.secureTextEntry = YES;
+                    cell.eyeBtn.selected = NO;
+                    if (historyAccount.length) {
+                        cell.pwdTextField.placeholder = @"密码";
+                    } else {
+                        cell.pwdTextField.placeholder = @"密码/手机验证码";
+                    }
+                }
                 weakSelf(weakSelf);
                 cell.refreshEventBlock = ^{
                     strongSelf(strongSelf);
