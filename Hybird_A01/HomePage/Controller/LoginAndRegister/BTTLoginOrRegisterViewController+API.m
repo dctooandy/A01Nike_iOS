@@ -75,16 +75,18 @@
         isValid = [predicate evaluateWithObject:model.login_name];
         
     }
-    if (model.login_name.length == 1) {
+    if (!model.login_name.length) {
         [MBProgressHUD showError:@"请输入账号" toView:self.view];
         return;
     }
-    if (!model.password.length && ![PublicMethod isValidatePhone:model.login_name]) {
-        [MBProgressHUD showError:@"请输入密码" toView:self.view];
-        return;
-    }
+    
     if (![model.login_name hasPrefix:@"g"] && ![PublicMethod isValidatePhone:model.login_name]) {
         [MBProgressHUD showError:@"请输入以g开头真钱账号" toView:self.view];
+        return;
+    }
+    
+    if (!model.password.length && ![PublicMethod isValidatePhone:model.login_name]) {
+        [MBProgressHUD showError:@"请输入密码" toView:self.view];
         return;
     }
     
