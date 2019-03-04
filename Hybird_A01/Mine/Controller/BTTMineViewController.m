@@ -368,6 +368,10 @@
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
+    } else if ([IVNetwork userInfo].customerLevel == 0 && (![IVNetwork userInfo].verify_code.length || ![IVNetwork userInfo].real_name.length)) {
+        BTTPersonalInfoController *personInfo = [[BTTPersonalInfoController alloc] init];
+        [self.navigationController pushViewController:personInfo animated:YES];
+        return;
     }
     [self.navigationController pushViewController:[[CNPayVC alloc] initWithChannel:model.paymentType] animated:YES];
 }

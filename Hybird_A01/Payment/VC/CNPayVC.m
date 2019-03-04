@@ -275,7 +275,7 @@
     CNPayChannelModel *qqQR = [[CNPayChannelModel alloc] init];
     qqQR.payChannel = CNPayChannelQQQR;
     qqQR.payments = [[NSArray alloc] initWithObjects:
-                     payments[CNPayChannelQQQR], nil];
+                     payments[CNPaymentQQQR], nil];
     // 微信/QQ/京东WAP
     BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
     
@@ -304,6 +304,7 @@
     
     // 没开启的渠道不显示
     for (CNPayChannelModel *channel in array) {
+        NSLog(@"%@",channel.channelName);
         if (channel.isAvailable) {
             [channels addObject:channel];
             if (channel.payments.count == 1) {
