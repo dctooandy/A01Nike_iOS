@@ -42,13 +42,13 @@
         [model.name isEqualToString:@"钻石币"] ||
         [model.name isEqualToString:@"比特币"] ||
         [model.name isEqualToString:@"微信条码支付"]) {
-        self.topConstants.constant = 20;
-        self.heightConstants.constant = 30;
-        self.widthConstants.constant = 30;
-    } else  {
         self.topConstants.constant = 15;
         self.heightConstants.constant = 40;
         self.widthConstants.constant = 40;
+    } else  {
+        self.topConstants.constant = 5;
+        self.heightConstants.constant = 50;
+        self.widthConstants.constant = 50;
     }
     
     if ([model.name isEqualToString:@"支付宝/微信/QQ/京东WAP"] || [model.name isEqualToString:@"微信/QQ/京东WAP"]) {
