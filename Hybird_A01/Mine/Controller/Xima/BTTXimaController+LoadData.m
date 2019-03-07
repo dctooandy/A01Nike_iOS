@@ -103,7 +103,7 @@
     [params setObject:endStr forKey:@"start_date_end"];
     [params setObject:@(2000) forKey:@"pageSize"];
     
-    [IVNetwork sendRequestWithSubURL:BTTXmHistoryList paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork sendRequestWithSubURL:BTTXmHistoryList paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         self.historyListType = BTTXimaHistoryListTypeNoData;
         if (result.status) {

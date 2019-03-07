@@ -40,7 +40,14 @@
         if (textField.text.length > 10) {
             [MBProgressHUD showError:@"账号长度不能超过9位" toView:nil];
             textField.text = [textField.text substringToIndex:10];
+            
+            
         }
+        _pwdTextField.placeholder = @"密码";
+        self.eyeBtn.hidden = NO;
+        self.codeBtn.hidden = YES;
+        self.eyeBtnLeftConstants.priority = 750;
+        self.sendBtnLeftConstants.priority = 250;
     } else {
         if ([textField.text hasPrefix:@"1"] && [PublicMethod isNum:textField.text]) {
             if (textField.text.length > 11 ) {
@@ -56,7 +63,12 @@
     
     if ([PublicMethod isValidatePhone:textField.text]) {
         self.codeBtn.enabled = YES;
+        _pwdTextField.placeholder = @"手机验证码";
         self.pwdTextField.secureTextEntry = NO;
+        self.eyeBtn.hidden = YES;
+        self.codeBtn.hidden = NO;
+        self.eyeBtnLeftConstants.priority = 250;
+        self.sendBtnLeftConstants.priority = 750;
     } else {
         self.codeBtn.enabled = NO;
         self.pwdTextField.secureTextEntry = YES;
@@ -66,6 +78,14 @@
         self.codeBtn.titleLabel.text = @"发送验证码";
         [self.codeBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
         self.pwdTextField.text = @"";
+    }
+    if (!textField.text.length) {
+        _pwdTextField.placeholder = @"密码/手机验证码";
+        self.eyeBtn.selected = NO;
+        self.eyeBtn.hidden = NO;
+        self.codeBtn.hidden = YES;
+        self.eyeBtnLeftConstants.priority = 750;
+        self.sendBtnLeftConstants.priority = 250;
     }
 }
 
@@ -112,5 +132,10 @@
     
 }
 
+- (IBAction)eyeClick:(UIButton *)sender {
+    
+    sender.selected = !sender.selected;
+    _pwdTextField.secureTextEntry = !sender.selected;
+}
 
 @end

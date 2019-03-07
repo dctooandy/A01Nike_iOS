@@ -18,6 +18,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UIButton *codeBtn;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *eyeBtnLeftConstants;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *sendBtnLeftConstants;
+
+@property (weak, nonatomic) IBOutlet UIButton *eyeBtn;
+
 @end
 
 NS_ASSUME_NONNULL_END
