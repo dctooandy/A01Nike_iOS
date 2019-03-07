@@ -20,10 +20,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_wechat" translatesAutoresizingMaskIntoConstraints="NO" id="j4g-0X-TV5">
-                        <rect key="frame" x="15" y="15" width="70" height="70"/>
+                        <rect key="frame" x="17.5" y="17.5" width="65" height="65"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="70" id="6JE-nA-8wS"/>
-                            <constraint firstAttribute="width" constant="70" id="YTT-vn-vXd"/>
+                            <constraint firstAttribute="height" constant="65" id="6JE-nA-8wS"/>
+                            <constraint firstAttribute="width" constant="65" id="YTT-vn-vXd"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CI6-aG-h34">
