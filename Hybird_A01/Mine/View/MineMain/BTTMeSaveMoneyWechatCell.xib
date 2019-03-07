@@ -20,10 +20,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_wechat" translatesAutoresizingMaskIntoConstraints="NO" id="j4g-0X-TV5">
-                        <rect key="frame" x="17.5" y="17.5" width="65" height="65"/>
+                        <rect key="frame" x="18.5" y="28.5" width="63" height="63"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="65" id="6JE-nA-8wS"/>
-                            <constraint firstAttribute="width" constant="65" id="YTT-vn-vXd"/>
+                            <constraint firstAttribute="height" constant="63" id="6JE-nA-8wS"/>
+                            <constraint firstAttribute="width" constant="63" id="YTT-vn-vXd"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CI6-aG-h34">
@@ -35,7 +35,7 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="j4g-0X-TV5" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="-10" id="K5d-Ta-Lbc"/>
+                <constraint firstItem="j4g-0X-TV5" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="K5d-Ta-Lbc"/>
                 <constraint firstItem="j4g-0X-TV5" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="XnZ-qh-2of"/>
                 <constraint firstItem="CI6-aG-h34" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="hUL-Ah-3jJ"/>
                 <constraint firstAttribute="bottom" secondItem="CI6-aG-h34" secondAttribute="bottom" constant="8" id="yJh-du-Tj1"/>
