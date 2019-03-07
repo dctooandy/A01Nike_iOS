@@ -36,7 +36,7 @@ typedef enum {
     self.collectionView.showsHorizontalScrollIndicator = NO;
 //    self.collectionView.backgroundColor = COLOR_RGBA(41, 45, 54, 1);
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    layout.itemSize = CGSizeMake(100, 130);
+    layout.itemSize = CGSizeMake(90, 120);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumLineSpacing = 15;
     self.collectionView.collectionViewLayout = layout;
