@@ -45,6 +45,8 @@
 
 @property (nonatomic, strong) CNPayContainerVC *payChannelVC;
 
+@property (nonatomic, assign) BOOL isFirstLoad;
+
 @end
 
 @implementation CNPayVC
@@ -87,6 +89,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (!_isFirstLoad) {
+        [[CNTimeLog shareInstance] endRecordTime:CNEventPayLaunch];
+        _isFirstLoad = YES;
+    }
 }
 
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full {

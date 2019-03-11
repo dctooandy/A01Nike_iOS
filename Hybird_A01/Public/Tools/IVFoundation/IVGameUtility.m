@@ -45,6 +45,14 @@
     return [IVNetwork gateways];
 }
 
+- (void)reloadGameWithProvider:(NSString *)provider
+{
+    if ([provider isEqualToString:kAGQJProvider]) {
+        [IVGameManager sharedManager].agqjVC.loadStatus = IVGameLoadStatusLoading;
+        [[CNTimeLog shareInstance] AGQJReLoad];
+    }
+}
+
 - (NSString *)IVGameAppendingUserInfoWithUrl:(NSString *)url parameters:(NSDictionary *)parameters {
     NSString *resultUrl = [NSString getURL:url queryParameters:[PublicMethod commonH5ArgumentWithUserParameters:@{}]];
     return resultUrl;
@@ -78,6 +86,8 @@
     if (![IVNetwork userInfo]) {
         return;
     }
+    
+    
     [BTTHttpManager publicGameTransferWithProvider:provider completeBlock:nil];
 }
 - (void)IVGameForwardToPageWithType:(IVGameForwardPageType)type gameController:(IVWKGameViewController *)gameController {
