@@ -67,6 +67,7 @@ static const char *BTTHeaderViewKey = "headerView";
 
 - (void)loginSuccess:(NSNotification *)notifi {
     self.isLogin = YES;
+    [IN3SAnalytics setUserName:[IVNetwork userInfo].loginName];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self updateUI];
         [[IVGameManager sharedManager] reloadCacheGame];
@@ -77,6 +78,7 @@ static const char *BTTHeaderViewKey = "headerView";
 
 - (void)logoutSuccess:(NSNotification *)notifi {
     self.isLogin = NO;
+    [IN3SAnalytics setUserName:nil];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self updateUI];
         [[IVGameManager sharedManager] reloadCacheGame];
