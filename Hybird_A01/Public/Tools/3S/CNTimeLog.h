@@ -11,7 +11,6 @@
 typedef NS_ENUM(NSInteger, CNEvent) {
     CNEventAppLaunch = 0,
     CNEventPayLaunch,
-//    CNEventAGINLaunch,
     CNEventAGQJLaunch,
 };
 
@@ -21,8 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)shareInstance;
 
-/// 启动配置
-- (void)start;
+/// 启动配置, 配置项目id
+- (void)configProduct:(NSString *)productID;
 
 /// 事件开始打点
 - (void)startRecordTime:(CNEvent)event;

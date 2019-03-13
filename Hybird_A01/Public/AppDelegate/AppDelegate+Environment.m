@@ -51,9 +51,8 @@
         [BTTRequestPrecache startUpdateCache];
     }];
     [IN3SAnalytics debugEnable:YES];
+    [IN3SAnalytics configureSDKWithProduct:@"A01"];
     [IN3SAnalytics setUserName:[IVNetwork userInfo].loginName];
-    [[CNTimeLog shareInstance] start];
-    [[CNTimeLog shareInstance] startRecordTime:CNEventAppLaunch];
     [self setupRedDot];
     [self setupLive800];
 }

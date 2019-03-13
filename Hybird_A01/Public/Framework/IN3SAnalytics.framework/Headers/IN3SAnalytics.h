@@ -27,7 +27,7 @@
  设置登录用户名，在获取到用户名后调用
  注意：每次切换用户都需要调一下该方法，退出登录userName传nil
  */
-+ (void)setUserName: (NSString *)userName;
++ (void)setUserName:(NSString *)userName;
 
 /**
  设置调试模式
@@ -38,15 +38,13 @@
 
 /**
  启动App完成，可以在首页第一次显示时调用
- @param timestamp 时间戳，单位秒
  */
-+ (void)launchFinished:(NSString *)timestamp;
++ (void)launchFinished;
 
 /**
  App退出
- @param timestamp 时间戳，单位秒
  */
-+ (void)exitApp:(NSString *)timestamp;
++ (void)exitApp;
 
 /**
  进入页面
@@ -82,12 +80,11 @@
  进入AGQJ游戏加载时长
 
  @param resTime 响应时长，单位:ms
- @param isPreload 是否预加载完成，是:YES,否:NO
- @param isFinishedPreload 服务端搞错参数，停止使用
+ @param loadFinish 游戏当前状态是否加载完成，是:YES,否:NO
  @param msg 异常讯息
  @param timestamp 时间戳，单位秒
  */
-+ (void)loadAGQJWithResponseTime:(double)resTime isPreload:(BOOL)isPreload  isFinishedPreload:(BOOL)isFinishedPreload msg:(NSString *)msg timestamp:(NSString *)timestamp;
++ (void)loadAGQJWithResponseTime:(double)resTime loadFinish:(BOOL)loadFinish msg:(NSString *)msg timestamp:(NSString *)timestamp;
 /**
  触发事件
  @param parameter 参数模型 启动:IN3SInitModel,

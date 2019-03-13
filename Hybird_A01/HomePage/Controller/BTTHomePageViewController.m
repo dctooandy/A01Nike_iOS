@@ -81,7 +81,7 @@
         //AG国际预加载
         [BTTAGGJViewController addGameViewToWindow];
         [[IVGameManager sharedManager] reloadCacheGame];
-        [[CNTimeLog shareInstance] endRecordTime:CNEventAppLaunch];
+        [IN3SAnalytics launchFinished];
     }
     
 }
