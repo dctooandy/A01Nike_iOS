@@ -53,6 +53,7 @@
     [IN3SAnalytics debugEnable:YES];
     [IN3SAnalytics configureSDKWithProduct:@"A01"];
     [IN3SAnalytics setUserName:[IVNetwork userInfo].loginName];
+    [[CNTimeLog shareInstance] configProduct:@"A01"];
     [self setupRedDot];
     [self setupLive800];
 }
