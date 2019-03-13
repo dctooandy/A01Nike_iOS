@@ -13,6 +13,9 @@
 @end
 
 @implementation BTTAGQJViewController
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (BOOL)shouldAutorotate
 {
     return [[IVGameManager sharedManager].agqjVC shouldAutorotate];
@@ -35,6 +38,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addGameViewToSelf];
+    [self registerNotifiction];
+}
+
+- (void)registerNotifiction {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishLoginGame) name:@"FinishLoginGame" object:nil];
+}
+
+- (void)finishLoginGame {
+    if ([IVGameManager sharedManager].agqjVC.loadStatus == IVGameLoadStatusSuccess) {
+        [[CNTimeLog shareInstance] endRecordTime:CNEventAGQJLaunch];
+    }
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -42,6 +56,8 @@
     if ([IVGameManager sharedManager].agqjVC.parentViewController != self) {
         [self addGameViewToSelf];
     }
+    
+    
 }
 - (void)viewDidDisappear:(BOOL)animated
 {
@@ -60,6 +76,7 @@
 }
 + (void)addGameViewToWindow
 {
+    [[CNTimeLog shareInstance] AGQJFirstLoad];
     [[IVGameManager sharedManager].agqjVC removeFromParentViewController];
     UIWindow *keyWin = [UIApplication sharedApplication].keyWindow;
     [IVGameManager sharedManager].agqjVC.view.hidden = YES;

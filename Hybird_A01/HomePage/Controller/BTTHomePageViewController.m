@@ -77,10 +77,13 @@
         self.isloaded = YES;
         //AG旗舰预加载
         [BTTAGQJViewController addGameViewToWindow];
+        
         //AG国际预加载
         [BTTAGGJViewController addGameViewToWindow];
         [[IVGameManager sharedManager] reloadCacheGame];
+        [IN3SAnalytics launchFinished];
     }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

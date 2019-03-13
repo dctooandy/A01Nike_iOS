@@ -67,6 +67,7 @@ static const char *BTTHeaderViewKey = "headerView";
 
 - (void)loginSuccess:(NSNotification *)notifi {
     self.isLogin = YES;
+    [IN3SAnalytics setUserName:[IVNetwork userInfo].loginName];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self updateUI];
         [[IVGameManager sharedManager] reloadCacheGame];
@@ -77,6 +78,7 @@ static const char *BTTHeaderViewKey = "headerView";
 
 - (void)logoutSuccess:(NSNotification *)notifi {
     self.isLogin = NO;
+    [IN3SAnalytics setUserName:nil];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self updateUI];
         [[IVGameManager sharedManager] reloadCacheGame];
@@ -168,7 +170,7 @@ static const char *BTTHeaderViewKey = "headerView";
     }];
     
     int currentHour = [PublicMethod hour:[NSDate date]];
-    BOOL isNormalUser = (![IVNetwork userInfo] || [IVNetwork userInfo].customerLevel < 5 || currentHour < 12);
+    BOOL isNormalUser = (![IVNetwork userInfo] || [IVNetwork userInfo].customerLevel < 5 || ((currentHour >= 0 && currentHour < 12) || (currentHour > 21 && currentHour <= 23)));
     NSString *callTitle = isNormalUser ? @"电话回拨" : @"VIP经理回拨";
     BTTPopoverAction *action3 = [BTTPopoverAction actionWithImage:ImageNamed(@"callBack") title:callTitle handler:^(BTTPopoverAction *action) {
         if ([IVNetwork userInfo]) {

@@ -373,6 +373,7 @@
         [self.navigationController pushViewController:personInfo animated:YES];
         return;
     }
+    [[CNTimeLog shareInstance] startRecordTime:CNEventPayLaunch];
     [self.navigationController pushViewController:[[CNPayVC alloc] initWithChannel:model.paymentType] animated:YES];
 }
 

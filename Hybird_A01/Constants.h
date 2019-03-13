@@ -28,6 +28,8 @@
 #import "MBProgressHUD+Add.h"
 #import "BTTBaseWebViewController.h"
 #import "BTTAnimationPopView.h"
+#import <IN3SAnalytics/IN3SAnalytics.h>
+#import "CNTimeLog.h"
 
 typedef enum {
     BTTCanAddCardTypeNone,          // 不能添加任何卡
