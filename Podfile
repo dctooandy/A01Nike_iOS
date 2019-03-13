@@ -22,4 +22,5 @@ target ‘Hybird_A01’ do
   pod 'IVHeartPacketLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git'
   pod 'IQKeyboardManager','~> 5.0.6'
   pod 'BGDB_OC'
+  pod 'FCUUID'
 end
