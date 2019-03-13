@@ -651,7 +651,6 @@
         NSLog(@"%@",response);
         if (result.code_http == 200 && result.data && [result.data isKindOfClass:[NSDictionary class]]) {
             model.amount = [NSString stringWithFormat:@"%.2f",[result.data[@"val"] floatValue]];
-            model.isLoading = NO;
             self.preAmount = [NSString stringWithFormat:@"%.2f",self.preAmount.floatValue + model.amount.floatValue];
         }
         dispatch_group_leave(group);
