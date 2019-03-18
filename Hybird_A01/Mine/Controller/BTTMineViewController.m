@@ -49,6 +49,7 @@
 #import "BTTMeMoreSaveMoneyCell.h"
 #import "BTTSaveMoneyModifyViewController.h"
 #import "BTTSaveMoneySuccessController.h"
+#import "BTTCompleteMeterialController.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -369,9 +370,11 @@
         [self.navigationController pushViewController:vc animated:YES];
         return;
     } else if ([IVNetwork userInfo].customerLevel == 0 && (![IVNetwork userInfo].verify_code.length || ![IVNetwork userInfo].real_name.length)) {
-        BTTPersonalInfoController *personInfo = [[BTTPersonalInfoController alloc] init];
-        [self.navigationController pushViewController:personInfo animated:YES];
-        return;
+        if (model.paymentType == 15 || model.paymentType == 17 || model.paymentType == 16 || model.paymentType == 2) {
+            BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
+            [self.navigationController pushViewController:personInfo animated:YES];
+            return;
+        }
     }
     [[CNTimeLog shareInstance] startRecordTime:CNEventPayLaunch];
     [self.navigationController pushViewController:[[CNPayVC alloc] initWithChannel:model.paymentType] animated:YES];

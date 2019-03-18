@@ -192,6 +192,7 @@
 		3A9E4C7821A2577600E7D8C0 /* BTTChangeMobileManualController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C7721A2577600E7D8C0 /* BTTChangeMobileManualController+LoadData.m */; };
 		3A9E4C7C21A25AE700E7D8C0 /* BTTChangeMobileNextController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C7B21A25AE700E7D8C0 /* BTTChangeMobileNextController.m */; };
 		3A9E4C7F21A25B0A00E7D8C0 /* BTTChangeMobileNextController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C7E21A25B0A00E7D8C0 /* BTTChangeMobileNextController+LoadData.m */; };
+		3A9F31A2223F69C600B92693 /* BTTCompleteMeterialController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9F31A1223F69C600B92693 /* BTTCompleteMeterialController.m */; };
 		3AA7891E21FFF2580047A372 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA788EE21FFF2580047A372 /* SDWebImageManager.m */; };
 		3AA7891F21FFF2580047A372 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA788F021FFF2580047A372 /* UIImageView+HighlightedWebCache.m */; };
 		3AA7892021FFF2580047A372 /* SDWebImageFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA788F121FFF2580047A372 /* SDWebImageFrame.m */; };
@@ -1038,6 +1039,8 @@
 		3A9E4C7B21A25AE700E7D8C0 /* BTTChangeMobileNextController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTChangeMobileNextController.m; sourceTree = "<group>"; };
 		3A9E4C7D21A25B0A00E7D8C0 /* BTTChangeMobileNextController+LoadData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTTChangeMobileNextController+LoadData.h"; sourceTree = "<group>"; };
 		3A9E4C7E21A25B0A00E7D8C0 /* BTTChangeMobileNextController+LoadData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTTChangeMobileNextController+LoadData.m"; sourceTree = "<group>"; };
+		3A9F31A0223F69C500B92693 /* BTTCompleteMeterialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTCompleteMeterialController.h; sourceTree = "<group>"; };
+		3A9F31A1223F69C600B92693 /* BTTCompleteMeterialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTCompleteMeterialController.m; sourceTree = "<group>"; };
 		3AA788E721FFF2580047A372 /* SDAnimatedImageRep.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAnimatedImageRep.h; sourceTree = "<group>"; };
 		3AA788E821FFF2580047A372 /* NSButton+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSButton+WebCache.h"; sourceTree = "<group>"; };
 		3AA788E921FFF2580047A372 /* SDWebImageCoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageCoder.h; sourceTree = "<group>"; };
@@ -3264,6 +3267,8 @@
 				3AE1EABD217DB7040073A32D /* BTTPersonalInfoController.m */,
 				3AE1EAC2217DC0700073A32D /* BTTPersonalInfoController+LoadData.h */,
 				3AE1EAC3217DC0700073A32D /* BTTPersonalInfoController+LoadData.m */,
+				3A9F31A0223F69C500B92693 /* BTTCompleteMeterialController.h */,
+				3A9F31A1223F69C600B92693 /* BTTCompleteMeterialController.m */,
 			);
 			path = PersonalInfo;
 			sourceTree = "<group>";
@@ -4415,6 +4420,7 @@
 				EAA4811C21ABD265000C0273 /* BTTAGGJViewController.m in Sources */,
 				D5DBEB2721ABB774008AF629 /* CNPayChannelModel.m in Sources */,
 				3A514E3E2186E24000B83881 /* BTTThisWeekTotalCell.m in Sources */,
+				3A9F31A2223F69C600B92693 /* BTTCompleteMeterialController.m in Sources */,
 				3A8F519F215F77EC0069D1B3 /* UIView+Frame.m in Sources */,
 				3AA7892421FFF2580047A372 /* UIImage+GIF.m in Sources */,
 				3ADD23852178184A00FA959A /* BTTMineViewController+LoadData.m in Sources */,
