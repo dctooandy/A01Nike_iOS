@@ -35,6 +35,13 @@
                             <constraint firstAttribute="height" constant="18" id="Ssz-KI-AUW"/>
                         </constraints>
                     </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hot" translatesAutoresizingMaskIntoConstraints="NO" id="eaV-eM-VCg">
+                        <rect key="frame" x="8" y="20" width="21" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="21" id="DFx-7p-aTG"/>
+                            <constraint firstAttribute="height" constant="21" id="ms8-2N-C0c"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
@@ -45,12 +52,15 @@
                 <constraint firstItem="EPB-D8-Rie" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="J17-7f-b0R"/>
                 <constraint firstItem="EPB-D8-Rie" firstAttribute="top" secondItem="ZXt-lJ-MHq" secondAttribute="top" constant="-19" id="LIa-ts-6Bg"/>
                 <constraint firstItem="26Q-jM-QVD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="RsW-hg-Bzq"/>
+                <constraint firstItem="eaV-eM-VCg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="Xc8-JU-2rm"/>
                 <constraint firstItem="ZXt-lJ-MHq" firstAttribute="trailing" secondItem="EPB-D8-Rie" secondAttribute="trailing" constant="-5" id="hj1-vl-fVS"/>
+                <constraint firstItem="eaV-eM-VCg" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="nab-W4-Lwx"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
                 <outlet property="gameIconImageView" destination="EPB-D8-Rie" id="vyl-rG-e7O"/>
                 <outlet property="gameNameLabel" destination="26Q-jM-QVD" id="T9V-Ig-1AA"/>
+                <outlet property="hotIcon" destination="eaV-eM-VCg" id="eMM-ZS-mab"/>
                 <outlet property="tryPlayIcon" destination="ZXt-lJ-MHq" id="sU8-m1-K3z"/>
             </connections>
             <point key="canvasLocation" x="24" y="50.824587706146929"/>
@@ -58,6 +68,7 @@
     </objects>
     <resources>
         <image name="AGQJ" width="150" height="113"/>
+        <image name="hot" width="21" height="21"/>
         <image name="tryPlay" width="25" height="18"/>
     </resources>
 </document>

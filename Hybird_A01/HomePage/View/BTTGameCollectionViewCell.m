@@ -16,6 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *tryPlayIcon;
 
+@property (weak, nonatomic) IBOutlet UIImageView *hotIcon;
 
 @end
 
@@ -23,7 +24,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
 }
 
 - (void)setGameIcon:(NSString *)gameIcon {
@@ -42,6 +42,11 @@
         } else {
             self.tryPlayIcon.hidden = NO;
         }
+    }
+    if ([self.gameName isEqualToString:@"BTI体育"]) {
+        self.hotIcon.hidden = NO;
+    } else {
+        self.hotIcon.hidden = YES;
     }
 }
 
