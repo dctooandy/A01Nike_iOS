@@ -18,6 +18,9 @@
     if (_iosLink.length) {
         NSRange range = [_iosLink rangeOfString:@"download_app"];
         NSInteger location = range.location;
+        if (location == NSNotFound) {
+            return @"";
+        }
         NSString *link = [_iosLink substringFromIndex:location];
         _iosLink = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],link];
         NSLog(@"%@",_iosLink);
