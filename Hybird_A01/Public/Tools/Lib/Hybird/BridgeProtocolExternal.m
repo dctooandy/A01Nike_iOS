@@ -245,22 +245,24 @@
 }
 - (id)game_toGame:(BridgeModel *)bridgeModel {
     NSDictionary *data = bridgeModel.data;
-    if (data && [data isKindOfClass:[NSDictionary class]] ) {
-        NSString *provider = [data valueForKey:@"provider"];
-        if ([self shouldForwardToNotSlotGameWithProvider:provider]) {
-            return @(YES);
-        };
-        if ([data valueForKey:@"gameInfo"] && [[data valueForKey:@"gameInfo"] isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *gameInfo = [data valueForKey:@"gameInfo"];
-            IVGameModel *model = [[IVGameModel alloc] initWithDictionary:gameInfo];
-            if ([gameInfo valueForKey:@"game_provider"]) {
-                model.provider = [gameInfo valueForKey:@"game_provider"];
-            } else {
-                model.provider = provider;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (data && [data isKindOfClass:[NSDictionary class]] ) {
+            NSString *provider = [data valueForKey:@"provider"];
+            if ([self shouldForwardToNotSlotGameWithProvider:provider]) {
+                return;
+            };
+            if ([data valueForKey:@"gameInfo"] && [[data valueForKey:@"gameInfo"] isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *gameInfo = [data valueForKey:@"gameInfo"];
+                IVGameModel *model = [[IVGameModel alloc] initWithDictionary:gameInfo];
+                if ([gameInfo valueForKey:@"game_provider"]) {
+                    model.provider = [gameInfo valueForKey:@"game_provider"];
+                } else {
+                    model.provider = provider;
+                }
+                [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self.controller];
             }
-            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self.controller];
         }
-    }
+    });
     return @(YES);
 }
 //非电子游戏
