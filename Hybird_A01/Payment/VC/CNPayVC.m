@@ -16,6 +16,7 @@
 #import "CNPayConstant.h"
 #import "CNPayBankView.h"
 #import "CNPayDepositNameModel.h"
+#import "BTTCompleteMeterialController.h"
 
 /// 顶部渠道单元尺寸
 #define kPayChannelItemSize CGSizeMake(102, 132)
@@ -439,11 +440,19 @@
     if (indexPath.row == _currentSelectedIndex) {
         return;
     }
+    CNPayChannelModel *channel = [_payChannels objectAtIndex:indexPath.row];
+    if ([IVNetwork userInfo].customerLevel == 0 && (![IVNetwork userInfo].verify_code.length || ![IVNetwork userInfo].real_name.length)) {
+        if (channel.payChannel == CNPayChannelBQFast || channel.payChannel == CNPayChannelBQWechat || channel.payChannel == CNPayChannelBQAli || channel.payChannel == CNPayChannelDeposit) {
+            BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
+            [self.navigationController pushViewController:personInfo animated:YES];
+            [collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentSelectedIndex inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+            [collectionView reloadData];
+            return;
+        }
+    }
     [self removeBankView];
     self.currentSelectedIndex = indexPath.row;
     [self.payCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-    
-    CNPayChannelModel *channel = [_payChannels objectAtIndex:indexPath.row];
     _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payments.firstObject.paymentType];
     _payChannelVC.payments = channel.payments;
     BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
@@ -454,6 +463,7 @@
     }
     self.selectedIcon = channel.selectedIcon;
     [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];
+    
 }
 
 
