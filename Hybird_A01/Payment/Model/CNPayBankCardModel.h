@@ -87,6 +87,7 @@
 @property(nonatomic, copy) NSString *accountnumber;
 @property(nonatomic, copy) NSString *alipay;
 @property(nonatomic, copy) NSString *wechat;
+@property (nonatomic, copy) NSString *qrcode;
 @end
 
 

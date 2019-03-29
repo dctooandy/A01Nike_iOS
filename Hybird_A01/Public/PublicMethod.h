@@ -203,6 +203,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (BOOL)isNum:(NSString *)checkedNumString;
 
++ (UIImage *)QRCodeMethod:(NSString *)qrCodeString;
+
 @end
 
 NS_ASSUME_NONNULL_END

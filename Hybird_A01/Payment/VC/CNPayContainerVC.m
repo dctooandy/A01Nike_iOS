@@ -18,7 +18,7 @@
 #import "CNPayQRStep2VC.h"
 #import "CNPayCardStep1VC.h"
 #import "CNPayCardStep2VC.h"
-
+#import "BTTPayBQAliStep2VC.h"
 
 
 
@@ -172,10 +172,17 @@
 /// BQ支付 也叫 quickBank
 - (NSArray<CNPayBaseVC *> *)BQPay:(CNPaymentModel *)payment {
     CNPayBQStep1VC *step1VC = [[CNPayBQStep1VC alloc] init];
-    CNPayBQStep2VC *step2VC = [[CNPayBQStep2VC alloc] init];
-    step1VC.paymentModel = payment;
-    step2VC.paymentModel = payment;
-    return @[step1VC, step2VC];
+    if (payment.paymentType == CNPaymentBQAli) {
+        BTTPayBQAliStep2VC *step2VC = [[BTTPayBQAliStep2VC alloc] init];
+        step1VC.paymentModel = payment;
+        step2VC.paymentModel = payment;
+        return @[step1VC, step2VC];
+    } else {
+        CNPayBQStep2VC *step2VC = [[CNPayBQStep2VC alloc] init];
+        step1VC.paymentModel = payment;
+        step2VC.paymentModel = payment;
+        return @[step1VC, step2VC];
+    }
 }
 
 /// QR支付

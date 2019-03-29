@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BTTPayBQAliStep2VC">
+            <connections>
+                <outlet property="QRImageView" destination="9YR-4p-5LZ" id="vYi-6y-mNE"/>
+                <outlet property="amountLabel" destination="rIP-fh-FOz" id="oaI-ZC-J4p"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WkP-Mw-isK">
+                    <rect key="frame" x="0.0" y="44" width="414" height="518"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="确认支付订单：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlL-XW-fqQ">
+                            <rect key="frame" x="18" y="15" width="115" height="20"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.50980392159999999" green="0.52549019610000003" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="pay_Exclamation" translatesAutoresizingMaskIntoConstraints="NO" id="LrA-iC-zot">
+                            <rect key="frame" x="18" y="331.5" width="15" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="15" id="24O-Wt-EfS"/>
+                                <constraint firstAttribute="height" constant="15" id="cAe-b6-P5h"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="必须存入页面提示金额，否则无法到账。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9QN-YG-MKO">
+                            <rect key="frame" x="37" y="331.5" width="359" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.77647058820000003" green="0.0078431372550000003" blue="0.19215686269999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付金额: ¥12.3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rIP-fh-FOz">
+                            <rect key="frame" x="143" y="50" width="128" height="21.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9YR-4p-5LZ">
+                            <rect key="frame" x="107" y="101.5" width="200" height="200"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="h1h-Lg-CnC"/>
+                                <constraint firstAttribute="height" constant="200" id="zRn-a7-3ob"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. 您可以将二维码截图保存到相册后, 打开支付宝扫一扫进行扫码操作; 2. 请勿在转账时修改金额, 存款后请点击完成转账, 否则存款将无法正常添加." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7a-p5-FE8">
+                            <rect key="frame" x="20" y="354.5" width="374" height="62.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sug-Am-XxD">
+                            <rect key="frame" x="30" y="447" width="354" height="41"/>
+                            <state key="normal" title="我已成功付款" backgroundImage="xima_btn1"/>
+                            <connections>
+                                <action selector="btnClick:" destination="-1" eventType="touchUpInside" id="vSx-oT-U7R"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.1215686275" green="0.1333333333" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="rIP-fh-FOz" firstAttribute="top" secondItem="vlL-XW-fqQ" secondAttribute="bottom" constant="15" id="4hb-TW-lab"/>
+                        <constraint firstItem="K7a-p5-FE8" firstAttribute="leading" secondItem="WkP-Mw-isK" secondAttribute="leading" constant="20" id="6ra-zw-pnZ"/>
+                        <constraint firstItem="9YR-4p-5LZ" firstAttribute="centerX" secondItem="WkP-Mw-isK" secondAttribute="centerX" id="DbI-eb-Ojl"/>
+                        <constraint firstItem="K7a-p5-FE8" firstAttribute="top" secondItem="9QN-YG-MKO" secondAttribute="bottom" constant="8" id="MmW-EN-qpK"/>
+                        <constraint firstAttribute="trailing" secondItem="K7a-p5-FE8" secondAttribute="trailing" constant="20" id="Msv-mq-1co"/>
+                        <constraint firstItem="9YR-4p-5LZ" firstAttribute="top" secondItem="rIP-fh-FOz" secondAttribute="bottom" constant="30" id="PaQ-ZW-LPA"/>
+                        <constraint firstItem="vlL-XW-fqQ" firstAttribute="leading" secondItem="WkP-Mw-isK" secondAttribute="leading" constant="18" id="Set-d2-3Vu"/>
+                        <constraint firstItem="Sug-Am-XxD" firstAttribute="leading" secondItem="WkP-Mw-isK" secondAttribute="leading" constant="30" id="Smg-1L-E80"/>
+                        <constraint firstAttribute="trailing" secondItem="9QN-YG-MKO" secondAttribute="trailing" constant="18" id="b31-8X-RuU"/>
+                        <constraint firstItem="Sug-Am-XxD" firstAttribute="top" secondItem="K7a-p5-FE8" secondAttribute="bottom" constant="30" id="dcu-jm-L3q"/>
+                        <constraint firstItem="LrA-iC-zot" firstAttribute="leading" secondItem="WkP-Mw-isK" secondAttribute="leading" constant="18" id="fSf-GK-CnI"/>
+                        <constraint firstItem="vlL-XW-fqQ" firstAttribute="top" secondItem="WkP-Mw-isK" secondAttribute="top" constant="15" id="iGh-g8-6q1"/>
+                        <constraint firstItem="LrA-iC-zot" firstAttribute="centerY" secondItem="9QN-YG-MKO" secondAttribute="centerY" id="mIb-Nb-dYd"/>
+                        <constraint firstItem="rIP-fh-FOz" firstAttribute="centerX" secondItem="WkP-Mw-isK" secondAttribute="centerX" id="n2i-24-YUS"/>
+                        <constraint firstAttribute="bottom" secondItem="Sug-Am-XxD" secondAttribute="bottom" constant="30" id="oLr-rQ-VSs"/>
+                        <constraint firstItem="9QN-YG-MKO" firstAttribute="leading" secondItem="LrA-iC-zot" secondAttribute="trailing" constant="4" id="tin-AA-hk1"/>
+                        <constraint firstAttribute="trailing" secondItem="Sug-Am-XxD" secondAttribute="trailing" constant="30" id="u2x-hu-1Et"/>
+                        <constraint firstItem="LrA-iC-zot" firstAttribute="top" secondItem="9QN-YG-MKO" secondAttribute="top" id="wiB-iN-A3f"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="WkP-Mw-isK" secondAttribute="bottom" constant="300" id="1aR-nh-pyw"/>
+                <constraint firstItem="WkP-Mw-isK" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="90m-0h-uTE"/>
+                <constraint firstItem="WkP-Mw-isK" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="Bfk-ib-9PJ"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="WkP-Mw-isK" secondAttribute="trailing" id="DhJ-dZ-r46"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="33" y="30"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="pay_Exclamation" width="15" height="15"/>
+        <image name="xima_btn1" width="155" height="41"/>
+    </resources>
+</document>

@@ -97,6 +97,8 @@
 		3A75A17D22115CA700584A35 /* BTTLoginAccountSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A75A17C22115CA700584A35 /* BTTLoginAccountSelectView.xib */; };
 		3A75A181221164BC00584A35 /* BTTLoginAccountSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A75A17F221164BC00584A35 /* BTTLoginAccountSelectCell.m */; };
 		3A75A182221164BC00584A35 /* BTTLoginAccountSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A75A180221164BC00584A35 /* BTTLoginAccountSelectCell.xib */; };
+		3A7740A5224DE90800A65841 /* BTTPayBQAliStep2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7740A3224DE90800A65841 /* BTTPayBQAliStep2VC.m */; };
+		3A7740A6224DE90800A65841 /* BTTPayBQAliStep2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7740A4224DE90800A65841 /* BTTPayBQAliStep2VC.xib */; };
 		3A7A1A6621BDF21100572B50 /* BTTLuckyWheelCoinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6521BDF21100572B50 /* BTTLuckyWheelCoinView.m */; };
 		3A7A1A6821BDF21F00572B50 /* BTTLuckyWheelCoinView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6721BDF21F00572B50 /* BTTLuckyWheelCoinView.xib */; };
 		3A7A1A6C21BF68AA00572B50 /* BTTRegisterSuccessTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6A21BF68AA00572B50 /* BTTRegisterSuccessTwoCell.m */; };
@@ -870,6 +872,9 @@
 		3A75A17E221164BC00584A35 /* BTTLoginAccountSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLoginAccountSelectCell.h; sourceTree = "<group>"; };
 		3A75A17F221164BC00584A35 /* BTTLoginAccountSelectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLoginAccountSelectCell.m; sourceTree = "<group>"; };
 		3A75A180221164BC00584A35 /* BTTLoginAccountSelectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTLoginAccountSelectCell.xib; sourceTree = "<group>"; };
+		3A7740A2224DE90800A65841 /* BTTPayBQAliStep2VC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPayBQAliStep2VC.h; sourceTree = "<group>"; };
+		3A7740A3224DE90800A65841 /* BTTPayBQAliStep2VC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPayBQAliStep2VC.m; sourceTree = "<group>"; };
+		3A7740A4224DE90800A65841 /* BTTPayBQAliStep2VC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTPayBQAliStep2VC.xib; sourceTree = "<group>"; };
 		3A7A1A6421BDF21100572B50 /* BTTLuckyWheelCoinView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLuckyWheelCoinView.h; sourceTree = "<group>"; };
 		3A7A1A6521BDF21100572B50 /* BTTLuckyWheelCoinView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLuckyWheelCoinView.m; sourceTree = "<group>"; };
 		3A7A1A6721BDF21F00572B50 /* BTTLuckyWheelCoinView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTLuckyWheelCoinView.xib; sourceTree = "<group>"; };
@@ -3523,6 +3528,9 @@
 				D5DBEAA821ABB774008AF629 /* CNPayBQStep1VC.h */,
 				D5DBEAA221ABB774008AF629 /* CNPayBQStep1VC.m */,
 				D5DBEAA421ABB774008AF629 /* CNPayBQStep1VC.xib */,
+				3A7740A2224DE90800A65841 /* BTTPayBQAliStep2VC.h */,
+				3A7740A3224DE90800A65841 /* BTTPayBQAliStep2VC.m */,
+				3A7740A4224DE90800A65841 /* BTTPayBQAliStep2VC.xib */,
 				D5DBEAA921ABB774008AF629 /* CNPayBQStep2VC.h */,
 				D5DBEAA021ABB774008AF629 /* CNPayBQStep2VC.m */,
 				D5DBEA9F21ABB774008AF629 /* CNPayBQStep2VC.xib */,
@@ -4178,6 +4186,7 @@
 				EAE89ECB218C3ABD00C29393 /* LIVResendButton@2x.png in Resources */,
 				EAE89EBD218C3ABD00C29393 /* LIVLocationItem@2x.png in Resources */,
 				D5DBEB0021ABB774008AF629 /* CNPayDepositStep3VC.xib in Resources */,
+				3A7740A6224DE90800A65841 /* BTTPayBQAliStep2VC.xib in Resources */,
 				3AAFF88C21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.xib in Resources */,
 				3A5F7AB621AD0E6800128E8B /* BTTVideoGamesFilterCell.xib in Resources */,
 				EAE89EBA218C3ABD00C29393 /* LIVFileMessage_TypeZip@3x.png in Resources */,
@@ -4680,6 +4689,7 @@
 				3AE0581A2170314900C7E70D /* BTTActivityModel.m in Sources */,
 				3A75A181221164BC00584A35 /* BTTLoginAccountSelectCell.m in Sources */,
 				EA5F141A21A28515004305A7 /* IVGameUtility.m in Sources */,
+				3A7740A5224DE90800A65841 /* BTTPayBQAliStep2VC.m in Sources */,
 				3A514E432186F3CB00B83881 /* BTTLastWeekCell.m in Sources */,
 				3AD9CF89216F4E5400685B43 /* BTTHomePageDiscountCell.m in Sources */,
 				3A8F5173215F77A50069D1B3 /* BTTAdvertiseView.m in Sources */,

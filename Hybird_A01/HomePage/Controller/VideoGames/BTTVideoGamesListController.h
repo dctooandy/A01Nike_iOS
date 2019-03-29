@@ -9,7 +9,7 @@
 #import "BTTCollectionViewController.h"
 #import "BTTPosterModel.h"
 
-typedef void(^BTTSelectValueBlock)(NSString *value);
+typedef void(^BTTSelectValueBlock)( NSString * _Nullable value);
 
 NS_ASSUME_NONNULL_BEGIN
 
