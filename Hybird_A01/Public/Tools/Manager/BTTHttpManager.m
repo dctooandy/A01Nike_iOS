@@ -39,11 +39,12 @@
 }
 + (void)fetchBankListWithUseCache:(BOOL)useCache completion:(IVRequestCallBack)completion
 {
-    NSDictionary *params = @{
+    NSMutableDictionary *params = @{
                              @"flag" : @"9;1",
                              @"order":@"PRIORITY_ORDER",
                              @"delete_flag":@"0"
-                             };
+                             }.mutableCopy;
+//    [params setObject:@"1" forKey:@"cache_type"];
     NSString *url = @"public/bankcard/getList";
     weakSelf(weakSelf)
     if (useCache) {
@@ -173,7 +174,6 @@
         return;
     }
     NSMutableDictionary  *param = @{}.mutableCopy;
-//    [param setObject:@"1" forKey:@"cache_type"];
     [self sendRequestWithUrl:@"public/users/userInfo" paramters:param completionBlock:^(IVRequestResultModel *result, id response) {
         if (result.status && result.data && [result.data isKindOfClass:[NSDictionary class]]) {
             [IVNetwork updateUserInfo:result.data];

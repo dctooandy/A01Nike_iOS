@@ -32,6 +32,7 @@
             break;
         default:
             [IVNetwork setEnvironment:IVEnvironmentRelease];
+//            [IVNetwork setEnvironment:IVEnvironmentReleaseTest];
             break;
     }
     //设置初始数据

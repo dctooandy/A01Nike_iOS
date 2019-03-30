@@ -112,6 +112,7 @@
     if (self.uuid.length) {
         [parameters setObject:self.uuid forKey:@"uuid"];
     }
+//    [parameters setObject:@"1" forKey:@"cache_type"];
     [IVNetwork sendRequestWithSubURL:BTTUserLoginAPI paramters:parameters completionBlock:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
         NSLog(@"%@",response);
