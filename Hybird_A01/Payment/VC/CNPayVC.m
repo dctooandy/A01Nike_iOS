@@ -68,7 +68,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kBlackBackgroundColor;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"212229"];
     self.payScrollView.backgroundColor = kBlackBackgroundColor;
     self.contentWidth.constant = [UIScreen mainScreen].bounds.size.width;
     [self.payCollectionView registerNib:[UINib nibWithNibName:kChannelCellIndentifier bundle:nil] forCellWithReuseIdentifier:kChannelCellIndentifier];

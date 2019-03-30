@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *QRImageView;
 
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 
 @end
 
@@ -22,19 +23,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self setViewHeight:820 fullScreen:YES];
+    [self setViewHeight:860 fullScreen:YES];
     [self configUI];
 }
 
 - (void)configUI {
+    self.bgView.backgroundColor = kBlackBackgroundColor;
     CNPayBankCardModel *bankModel = self.writeModel.chooseBank;
     self.QRImageView.image = [PublicMethod QRCodeMethod:bankModel.qrcode];
-    self.amountLabel.text = [NSString stringWithFormat:@"支付金额: ¥%@",bankModel.amount];
+    NSString *amountStr = [NSString stringWithFormat:@"支付金额: ¥%@",bankModel.amount];
+    NSRange range = [amountStr rangeOfString:[NSString stringWithFormat:@"¥%@",bankModel.amount]];
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:amountStr];
+    [attStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"ffff33"],NSFontAttributeName:[UIFont systemFontOfSize:24]} range:range];
+    self.amountLabel.attributedText = attStr;
 }
 
 - (IBAction)btnClick:(UIButton *)sender {

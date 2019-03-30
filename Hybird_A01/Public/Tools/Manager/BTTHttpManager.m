@@ -173,6 +173,7 @@
         return;
     }
     NSMutableDictionary  *param = @{}.mutableCopy;
+//    [param setObject:@"1" forKey:@"cache_type"];
     [self sendRequestWithUrl:@"public/users/userInfo" paramters:param completionBlock:^(IVRequestResultModel *result, id response) {
         if (result.status && result.data && [result.data isKindOfClass:[NSDictionary class]]) {
             [IVNetwork updateUserInfo:result.data];
