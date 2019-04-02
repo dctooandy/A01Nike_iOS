@@ -27,7 +27,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self setViewHeight:860 fullScreen:YES];
+    [self setViewHeight:700 fullScreen:YES];
     [self configUI];
 }
 

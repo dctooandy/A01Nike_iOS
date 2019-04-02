@@ -640,6 +640,7 @@
     switch (gameModel.index) {
         case 0://AG旗舰
             vc = [BTTAGQJViewController new];
+            [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
             break;
         case 1://AG国际
             vc = [BTTAGGJViewController new];

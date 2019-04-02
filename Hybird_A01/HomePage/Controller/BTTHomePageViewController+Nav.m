@@ -309,6 +309,7 @@ static const char *BTTHeaderViewKey = "headerView";
             UIViewController *vc = nil;
             if ([gameid isEqualToString:@"A01003"]) {
                 vc = [BTTAGQJViewController new];
+                [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
                 [self.navigationController pushViewController:vc animated:YES];
             } else if ([gameid isEqualToString:@"A01026"]) {
                 vc = [BTTAGGJViewController new];
@@ -364,6 +365,7 @@ static const char *BTTHeaderViewKey = "headerView";
                 UIViewController *vc = nil;
                 if ([provider isEqualToString:@"AGQJ"]) {
                     vc = [BTTAGQJViewController new];
+                    [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
                     [self.navigationController pushViewController:vc animated:YES];
                 } else if ([provider isEqualToString:@"AGIN"]) {
                     vc = [BTTAGGJViewController new];

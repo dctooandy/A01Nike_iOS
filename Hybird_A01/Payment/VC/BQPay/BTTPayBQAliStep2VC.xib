@@ -33,7 +33,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="必须存入页面提示金额，否则无法到账。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9QN-YG-MKO">
-                            <rect key="frame" x="42" y="343.5" width="330.5" height="21.5"/>
+                            <rect key="frame" x="42" y="343" width="330.5" height="21.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <color key="textColor" red="1" green="1" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -52,13 +52,13 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. 您可以将二维码截图保存到相册后, 打开支付宝扫一扫进行扫码操作;  2. 请勿在转账时修改金额, 存款后请点击完成转账, 否则存款将无法正常添加." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K7a-p5-FE8">
-                            <rect key="frame" x="20" y="395" width="374" height="72"/>
+                            <rect key="frame" x="20" y="394.5" width="374" height="72"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sug-Am-XxD">
-                            <rect key="frame" x="30" y="497" width="354" height="41"/>
+                            <rect key="frame" x="30" y="496.5" width="354" height="41"/>
                             <state key="normal" title="我已成功付款" backgroundImage="xima_btn1">
                                 <color key="titleColor" red="0.12941176470588234" green="0.13333333333333333" blue="0.16078431372549018" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -78,10 +78,10 @@
                         <constraint firstItem="vlL-XW-fqQ" firstAttribute="leading" secondItem="WkP-Mw-isK" secondAttribute="leading" constant="18" id="Set-d2-3Vu"/>
                         <constraint firstItem="Sug-Am-XxD" firstAttribute="leading" secondItem="WkP-Mw-isK" secondAttribute="leading" constant="30" id="Smg-1L-E80"/>
                         <constraint firstItem="9QN-YG-MKO" firstAttribute="centerX" secondItem="WkP-Mw-isK" secondAttribute="centerX" id="ThP-5f-eID"/>
+                        <constraint firstItem="9QN-YG-MKO" firstAttribute="top" secondItem="9YR-4p-5LZ" secondAttribute="bottom" constant="30" id="cGU-en-7um"/>
                         <constraint firstItem="Sug-Am-XxD" firstAttribute="top" secondItem="K7a-p5-FE8" secondAttribute="bottom" constant="30" id="dcu-jm-L3q"/>
                         <constraint firstItem="vlL-XW-fqQ" firstAttribute="top" secondItem="WkP-Mw-isK" secondAttribute="top" constant="15" id="iGh-g8-6q1"/>
                         <constraint firstItem="rIP-fh-FOz" firstAttribute="centerX" secondItem="WkP-Mw-isK" secondAttribute="centerX" id="n2i-24-YUS"/>
-                        <constraint firstAttribute="bottom" secondItem="Sug-Am-XxD" secondAttribute="bottom" constant="30" id="oLr-rQ-VSs"/>
                         <constraint firstAttribute="trailing" secondItem="Sug-Am-XxD" secondAttribute="trailing" constant="30" id="u2x-hu-1Et"/>
                     </constraints>
                 </view>

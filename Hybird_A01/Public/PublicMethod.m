@@ -979,16 +979,16 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     CGImageRelease(bitmapImage);
     
     UIImage *img = [UIImage imageWithCGImage:scaledImage];
-    UIGraphicsBeginImageContext(img.size);
-    [img drawInRect:CGRectMake(0, 0, img.size.width, img.size.height)];
-    UIImage *centerImg=[UIImage imageNamed:@"pay_Ali_Logo"];
-    CGFloat centerW = 60;
-    CGFloat centerH = 60;
-    CGFloat centerX = (img.size.width - 60) * 0.5;
-    CGFloat centerY = (img.size.height - 60) * 0.5;
-    [centerImg drawInRect:CGRectMake(centerX, centerY, centerW, centerH)];
-    UIImage *finalImg = UIGraphicsGetImageFromCurrentImageContext();
-    return finalImg;
+//    UIGraphicsBeginImageContext(img.size);
+//    [img drawInRect:CGRectMake(0, 0, img.size.width, img.size.height)];
+//    UIImage *centerImg=[UIImage imageNamed:@"pay_Ali_Logo"];
+//    CGFloat centerW = 60;
+//    CGFloat centerH = 60;
+//    CGFloat centerX = (img.size.width - 60) * 0.5;
+//    CGFloat centerY = (img.size.height - 60) * 0.5;
+//    [centerImg drawInRect:CGRectMake(centerX, centerY, centerW, centerH)];
+//    UIImage *finalImg = UIGraphicsGetImageFromCurrentImageContext();
+    return img;
 }
 
 #pragma mark - QRCodeGenerator
