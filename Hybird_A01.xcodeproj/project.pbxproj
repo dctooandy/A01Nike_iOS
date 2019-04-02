@@ -99,6 +99,7 @@
 		3A75A182221164BC00584A35 /* BTTLoginAccountSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A75A180221164BC00584A35 /* BTTLoginAccountSelectCell.xib */; };
 		3A7740A5224DE90800A65841 /* BTTPayBQAliStep2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7740A3224DE90800A65841 /* BTTPayBQAliStep2VC.m */; };
 		3A7740A6224DE90800A65841 /* BTTPayBQAliStep2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7740A4224DE90800A65841 /* BTTPayBQAliStep2VC.xib */; };
+		3A7740A82252EDB800A65841 /* IN3SAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A7740A72252EDB800A65841 /* IN3SAnalytics.framework */; };
 		3A7A1A6621BDF21100572B50 /* BTTLuckyWheelCoinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6521BDF21100572B50 /* BTTLuckyWheelCoinView.m */; };
 		3A7A1A6821BDF21F00572B50 /* BTTLuckyWheelCoinView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6721BDF21F00572B50 /* BTTLuckyWheelCoinView.xib */; };
 		3A7A1A6C21BF68AA00572B50 /* BTTRegisterSuccessTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7A1A6A21BF68AA00572B50 /* BTTRegisterSuccessTwoCell.m */; };
@@ -286,7 +287,6 @@
 		3AC3FFAD219BB19E008AECCB /* BTTLoginCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFAB219BB19E008AECCB /* BTTLoginCodeCell.m */; };
 		3AC3FFB0219BB1D0008AECCB /* BTTLoginCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC3FFAF219BB1D0008AECCB /* BTTLoginCodeCell.xib */; };
 		3AD1A9382237B49000515628 /* IN3SResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3AD1A9362237B49000515628 /* IN3SResource.bundle */; };
-		3AD1A9392237B49000515628 /* IN3SAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD1A9372237B49000515628 /* IN3SAnalytics.framework */; };
 		3AD1A93C2237B4B200515628 /* CNTimeLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1A93A2237B4B200515628 /* CNTimeLog.m */; };
 		3AD4C9C321635AEC00FC0A63 /* app.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AD4C9C221635AEC00FC0A63 /* app.json */; };
 		3AD9CD532165B2C900685B43 /* BTTPopoverAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CD4E2165B2C900685B43 /* BTTPopoverAction.m */; };
@@ -875,6 +875,7 @@
 		3A7740A2224DE90800A65841 /* BTTPayBQAliStep2VC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPayBQAliStep2VC.h; sourceTree = "<group>"; };
 		3A7740A3224DE90800A65841 /* BTTPayBQAliStep2VC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPayBQAliStep2VC.m; sourceTree = "<group>"; };
 		3A7740A4224DE90800A65841 /* BTTPayBQAliStep2VC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTPayBQAliStep2VC.xib; sourceTree = "<group>"; };
+		3A7740A72252EDB800A65841 /* IN3SAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IN3SAnalytics.framework; sourceTree = "<group>"; };
 		3A7A1A6421BDF21100572B50 /* BTTLuckyWheelCoinView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLuckyWheelCoinView.h; sourceTree = "<group>"; };
 		3A7A1A6521BDF21100572B50 /* BTTLuckyWheelCoinView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLuckyWheelCoinView.m; sourceTree = "<group>"; };
 		3A7A1A6721BDF21F00572B50 /* BTTLuckyWheelCoinView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTLuckyWheelCoinView.xib; sourceTree = "<group>"; };
@@ -1206,7 +1207,6 @@
 		3AC3FFAB219BB19E008AECCB /* BTTLoginCodeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLoginCodeCell.m; sourceTree = "<group>"; };
 		3AC3FFAF219BB1D0008AECCB /* BTTLoginCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLoginCodeCell.xib; sourceTree = "<group>"; };
 		3AD1A9362237B49000515628 /* IN3SResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IN3SResource.bundle; sourceTree = "<group>"; };
-		3AD1A9372237B49000515628 /* IN3SAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IN3SAnalytics.framework; sourceTree = "<group>"; };
 		3AD1A93A2237B4B200515628 /* CNTimeLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNTimeLog.m; sourceTree = "<group>"; };
 		3AD1A93B2237B4B200515628 /* CNTimeLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNTimeLog.h; sourceTree = "<group>"; };
 		3AD4C9C221635AEC00FC0A63 /* app.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app.json; sourceTree = "<group>"; };
@@ -1787,7 +1787,7 @@
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
 				3AD9CE2F2167107B00685B43 /* libpjsip-simple-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE332167107B00685B43 /* libsrtp-arm-apple-darwin9.a in Frameworks */,
-				3AD1A9392237B49000515628 /* IN3SAnalytics.framework in Frameworks */,
+				3A7740A82252EDB800A65841 /* IN3SAnalytics.framework in Frameworks */,
 				3AD9CE302167107B00685B43 /* libpjsip-ua-arm-apple-darwin9.a in Frameworks */,
 				7729DAB2DEBC453514E22B44 /* libPods-Hybird_A01.a in Frameworks */,
 				3AD9CE2E2167107B00685B43 /* libpjsip-arm-apple-darwin9.a in Frameworks */,
@@ -2438,7 +2438,7 @@
 		3A8F516A215F75C70069D1B3 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				3AD1A9372237B49000515628 /* IN3SAnalytics.framework */,
+				3A7740A72252EDB800A65841 /* IN3SAnalytics.framework */,
 				3AD1A9362237B49000515628 /* IN3SResource.bundle */,
 				3AD9CF01216C423900685B43 /* tingyunApp.framework */,
 			);
