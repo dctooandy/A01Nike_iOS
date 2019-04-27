@@ -44,7 +44,7 @@
 
 
 - (void)setNickNameWithNickname:(NSString *)nickname {
-    if (nickname.length <= 3 && nickname.length <= 8) {
+    if (nickname.length < 3 || nickname.length > 8) {
         [MBProgressHUD showError:@"昵称为3-8个汉字" toView:self.view];
         return;
     }
@@ -63,6 +63,7 @@
         [self hideLoading];
         if (result.status) {
             NSLog(@"%@",response);
+            [MBProgressHUD showSuccess:@"恭喜, 设置成功! 您可以使用昵称登录APP" toView:nil];
             [[NSUserDefaults standardUserDefaults] setObject:nickname forKey:BTTNicknameCache];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self.navigationController popToRootViewControllerAnimated:YES];
