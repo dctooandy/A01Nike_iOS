@@ -80,9 +80,13 @@
         return;
     }
     
-    if (![model.login_name hasPrefix:@"g"] && ![PublicMethod isValidatePhone:model.login_name]) {
-        [MBProgressHUD showError:@"请输入以g开头真钱账号" toView:self.view];
-        return;
+    if ([PublicMethod isChinese:model.login_name]) {
+        
+    } else {
+        if (![model.login_name hasPrefix:@"g"] && ![PublicMethod isValidatePhone:model.login_name]) {
+            [MBProgressHUD showError:@"请输入以g开头真钱账号" toView:self.view];
+            return;
+        }
     }
     
     if (!model.password.length && ![PublicMethod isValidatePhone:model.login_name]) {
@@ -250,34 +254,9 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     if (self.self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
         BTTRegisterNormalCell *cell = (BTTRegisterNormalCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-        model.login_name = [NSString stringWithFormat:@"g%@",cell.accountTextField.text];
-        model.password = cell.pwdTextField.text;
         model.parent_id = [IVNetwork parentId];
         model.phone = cell.phoneTextField.text;
         model.catpcha = cell.verifyTextField.text;
-        NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-        BOOL isAccount = [predicate evaluateWithObject:model.login_name];
-        if (!isAccount || cell.accountTextField.text.length < 4) {
-            [MBProgressHUD showError:@"用户名为4-9位的数字或字母" toView:self.view];
-            return;
-        }
-        
-        if (!model.login_name.length) {
-            [MBProgressHUD showError:@"请输入账号" toView:self.view];
-            return;
-        }
-        NSString *pwdregex = @"^(?![0-9]+$)(?![a-zA-Z]+$)[0-9a-zA-Z]{8,10}$";
-        NSPredicate *pwdpredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pwdregex];
-        BOOL ispwd = [pwdpredicate evaluateWithObject:model.password];
-        if (!ispwd) {
-            [MBProgressHUD showError:@"密码为8~10位的数字和字母" toView:self.view];
-            return;
-        }
-        if (!model.password.length) {
-            [MBProgressHUD showError:@"请输入密码" toView:self.view];
-            return;
-        }
         
         if (!model.phone.length) {
             [MBProgressHUD showError:@"请输入手机号" toView:self.view];
@@ -356,8 +335,6 @@
 
 - (void)createAccountNormalWithAPIModel:(BTTCreateAPIModel *)model {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:model.login_name forKey:BTTLoginName];
-    [params setObject:model.password forKey:BTTPassword];
     [params setObject:model.catpcha forKey:@"catpcha"];
     if (self.uuid.length) {
         [params setObject:self.uuid forKey:@"uuid"];
@@ -369,19 +346,21 @@
         [params setObject:model.phone forKey:BTTPhone];
     }
     [self showLoading];
-    [IVNetwork sendRequestWithSubURL:BTTUserCreateAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork sendRequestWithSubURL:BTTSuperFastRegister paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         [self hideLoading];
         self.uuid = @"";
         if (result.status) {
             if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                 BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
-                vc.registerOrLoginType = self.registerOrLoginType;
-                vc.account = model.login_name;
+                vc.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
+                vc.account = result.data[@"login_name"];
+                vc.pwd = result.data[@"password"];
                 [self.navigationController pushViewController:vc animated:YES];
+                
                 BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
-                loginModel.login_name = model.login_name;
-                loginModel.password = model.password;
+                loginModel.login_name = result.data[@"login_name"];
+                loginModel.password = result.data[@"password"];
                 loginModel.timestamp = [PublicMethod timeIntervalSince1970];
                 [self loginWithLoginAPIModel:loginModel isBack:NO];
             }

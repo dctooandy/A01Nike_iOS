@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTChangePwdBtnsCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" clipsSubviews="YES" tag="20011" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aEV-dF-HcN">
+                        <rect key="frame" x="15" y="7.5" width="157.5" height="45"/>
+                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="beS-Br-W0s"/>
+                        </constraints>
+                        <state key="normal" title="取消">
+                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="cancelClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Sv4-BA-oze"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="20012" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOE-aP-naC">
+                        <rect key="frame" x="202.5" y="7.5" width="157.5" height="45"/>
+                        <state key="normal" title="确认提交" backgroundImage="xima_btn2">
+                            <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="confirmClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="K7l-nD-4H4"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="IOE-aP-naC" firstAttribute="width" secondItem="aEV-dF-HcN" secondAttribute="width" id="2DR-4f-b4s"/>
+                <constraint firstItem="IOE-aP-naC" firstAttribute="height" secondItem="aEV-dF-HcN" secondAttribute="height" id="6vX-gV-G1I"/>
+                <constraint firstAttribute="trailing" secondItem="IOE-aP-naC" secondAttribute="trailing" constant="15" id="Mna-T2-5oG"/>
+                <constraint firstItem="aEV-dF-HcN" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="MqB-1V-xiI"/>
+                <constraint firstItem="aEV-dF-HcN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="gjc-j8-1ch"/>
+                <constraint firstItem="IOE-aP-naC" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="kBP-uj-bdm"/>
+                <constraint firstItem="IOE-aP-naC" firstAttribute="leading" secondItem="aEV-dF-HcN" secondAttribute="trailing" constant="30" id="nLk-Aq-hn9"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <connections>
+                <outlet property="cancelBtn" destination="aEV-dF-HcN" id="0mm-87-RSn"/>
+            </connections>
+            <point key="canvasLocation" x="-662" y="52"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="xima_btn2" width="165" height="41"/>
+    </resources>
+</document>

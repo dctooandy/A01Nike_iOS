@@ -25,6 +25,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *vipLevelLabel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *vipLabelWidth;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstants;
+
+@property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *nickNameBtn;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

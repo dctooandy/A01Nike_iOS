@@ -174,6 +174,9 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTCoinTimestamp       @"BTTCoinTimestamp"
 
+// 昵称缓存字段
+#define BTTNicknameCache      @"BTTNicknameCache"
+
 
 /*********************************************API********************************************************/
 
@@ -200,6 +203,10 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTStepThreeUpdatePassword @"/public/forgot/stepThreeUpdatePassword"
 #define BTTUnlockAccount       @"/A01/users/unlockAccount"
 #define BTTGetCustromerByPhone @"/public/users/getCustomersByPhone"
+
+#define BTTSuperFastRegister   @"/A01/users/superFastRegister"
+#define BTTSetNickname         @"/A01/users/setNickName"
+#define BTTGetMyAlias          @"/A01/users/getMyAlias"
 
 // 电话回拨API
 #define BTTCallBackMemberAPI         @"/public/phones/memberCall"

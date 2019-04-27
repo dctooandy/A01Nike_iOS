@@ -10,7 +10,8 @@
 
 typedef enum {
     BTTBtnCellTypeLogin,
-    BTTBtnCellTypeRegister
+    BTTBtnCellTypeRegister,
+    BTTBtnCellTypeGetGameAccount
 }BTTBtnCellType;
 
 NS_ASSUME_NONNULL_BEGIN

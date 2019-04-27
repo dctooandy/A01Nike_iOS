@@ -20,6 +20,7 @@
 #import "BTTLoginOrRegisterViewController+API.h"
 #import "BTTForgetPasswordController.h"
 #import "BTTLoginNoRegisterCell.h"
+#import "BTTRegisterNinameNormalCell.h"
 
 @interface BTTLoginOrRegisterViewController ()<BTTElementsFlowLayoutDelegate, UITextFieldDelegate>
 
@@ -38,6 +39,7 @@
     if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
         self.title = @"登录";
     } else {
+        self.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
         self.title = @"立即开户";
         [self loadVerifyCode];
     }
@@ -76,6 +78,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterQuickManualCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterQuickManualCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTLoginCodeCell" bundle:nil] forCellWithReuseIdentifier:@"BTTLoginCodeCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTLoginNoRegisterCell" bundle:nil] forCellWithReuseIdentifier:@"BTTLoginNoRegisterCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterNinameNormalCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterNinameNormalCell"];
 }
 
 
@@ -95,9 +98,11 @@
             strongSelf(strongSelf);
             if (button.tag == 10011) {
                 strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
+                strongSelf.title = @"登录";
             } else if (button.tag == 10012) {
-                strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
+                strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
                 [strongSelf loadVerifyCode];
+                strongSelf.title = @"立即开户";
             }
             [strongSelf setupElements];
         };
@@ -188,20 +193,19 @@
             }
         } else {
             if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
-                BTTRegisterNormalCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterNormalCell" forIndexPath:indexPath];
+                BTTRegisterNinameNormalCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterNinameNormalCell" forIndexPath:indexPath];
                 cell.codeImageView.image = self.codeImage;
-                cell.accountTextField.delegate = self;
-                cell.pwdTextField.delegate = self;
                 cell.phoneTextField.delegate = self;
                 cell.verifyTextField.delegate = self;
                 weakSelf(weakSelf);
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                     strongSelf(strongSelf);
                     if (button.tag == 10013) {
-                        strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
-                    } else if (button.tag == 10014) {
                         strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
                         strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
+                        
+                    } else if (button.tag == 10014) {
+                        strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
                     }
                     [strongSelf setupElements];
                 };
@@ -226,10 +230,10 @@
                         strongSelf(strongSelf);
                         
                         if (button.tag == 10015) {
-                            strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
-                        } else if (button.tag == 10016) {
                             strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
                             strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
+                        } else if (button.tag == 10016) {
+                            strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
                         } else if (button.tag == 10017) {
                             strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
                         } else if (button.tag == 10018) {
@@ -257,10 +261,10 @@
                     cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                         strongSelf(strongSelf);
                         if (button.tag == 10019) {
-                            strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
-                        } else if (button.tag == 10020) {
                             strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
                             strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
+                        } else if (button.tag == 10020) {
+                            strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
                         } else if (button.tag == 10021) {
                             strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
                         } else if (button.tag == 10022) {
@@ -309,7 +313,11 @@
             }
         } else {
             BTTLoginOrRegisterBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginOrRegisterBtnCell" forIndexPath:indexPath];
-            cell.cellBtnType = BTTBtnCellTypeRegister;
+            if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
+                cell.cellBtnType = BTTBtnCellTypeGetGameAccount;
+            } else {
+                cell.cellBtnType = BTTBtnCellTypeRegister;
+            }
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
@@ -399,7 +407,7 @@
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         } else if (i == 2) {
             if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 244)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 142)]];
             } else if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
                 if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 193)]];

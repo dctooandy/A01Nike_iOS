@@ -27,9 +27,6 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.vipLevelLabel.layer.cornerRadius = 2;
-    
-    
-    
 }
 
 - (void)setNoticeStr:(NSString *)noticeStr {
@@ -65,4 +62,12 @@
         _accountBlanceBlock();
     }
 }
+
+- (IBAction)nicknameBtn:(UIButton *)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
+}
+
+
 @end

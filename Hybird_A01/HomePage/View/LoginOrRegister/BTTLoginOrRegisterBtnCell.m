@@ -25,7 +25,10 @@
     _cellBtnType = cellBtnType;
     if (_cellBtnType == BTTBtnCellTypeLogin) {
         [self.loginBtn setTitle:@"立即登录" forState:UIControlStateNormal];
-    } else {
+    } else if (_cellBtnType == BTTBtnCellTypeGetGameAccount) {
+        [self.loginBtn setTitle:@"点击获取游戏账号" forState:UIControlStateNormal];
+    }
+    else {
         [self.loginBtn setTitle:@"立即开户" forState:UIControlStateNormal];
     }
 }

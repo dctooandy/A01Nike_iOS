@@ -695,6 +695,18 @@
     }];
 }
 
+- (void)loadNickName {
+    [IVNetwork sendRequestWithSubURL:BTTGetMyAlias paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        if (result.status) {
+            if ([result.data[@"alias"] length]) {
+                [[NSUserDefaults standardUserDefaults] setObject:result.data[@"alias"] forKey:BTTNicknameCache];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [self.collectionView reloadData];
+            }
+        }
+    }];
+}
+
 #pragma mark - 动态添加属性
 
 - (NSMutableArray *)personalInfos {

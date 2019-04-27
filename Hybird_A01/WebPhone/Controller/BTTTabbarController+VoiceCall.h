@@ -8,9 +8,10 @@
 
 #import "BTTTabbarController.h"
 
-typedef void (^MakeCallBlock)(NSString *uid);
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef void (^MakeCallBlock)(NSString *uid);
 
 @interface BTTTabbarController (VoiceCall)
 

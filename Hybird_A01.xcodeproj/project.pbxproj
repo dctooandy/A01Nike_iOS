@@ -91,6 +91,12 @@
 		3A5F7AB021ACF5DB00128E8B /* BTTVideoGamesListController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AAE21ACF5DA00128E8B /* BTTVideoGamesListController+LoadData.m */; };
 		3A5F7AB521AD0E6800128E8B /* BTTVideoGamesFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5F7AB321AD0E6800128E8B /* BTTVideoGamesFilterCell.m */; };
 		3A5F7AB621AD0E6800128E8B /* BTTVideoGamesFilterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5F7AB421AD0E6800128E8B /* BTTVideoGamesFilterCell.xib */; };
+		3A685B8F226DAAB900A8F59D /* BTTRegisterNinameNormalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A685B8D226DAAB900A8F59D /* BTTRegisterNinameNormalCell.m */; };
+		3A685B90226DAAB900A8F59D /* BTTRegisterNinameNormalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A685B8E226DAAB900A8F59D /* BTTRegisterNinameNormalCell.xib */; };
+		3A685B9422706A2700A8F59D /* BTTChangePwdBtnsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A685B9222706A2700A8F59D /* BTTChangePwdBtnsCell.m */; };
+		3A685B9522706A2700A8F59D /* BTTChangePwdBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A685B9322706A2700A8F59D /* BTTChangePwdBtnsCell.xib */; };
+		3A685BA12271443400A8F59D /* BTTRegisterChangePwdSuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A685BA02271443400A8F59D /* BTTRegisterChangePwdSuccessController.m */; };
+		3A685BA8227161AF00A8F59D /* BTTNicknameSetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A685BA7227161AF00A8F59D /* BTTNicknameSetController.m */; };
 		3A75A17622114DB100584A35 /* BTTLoginNoRegisterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A75A17422114DB100584A35 /* BTTLoginNoRegisterCell.m */; };
 		3A75A17722114DB100584A35 /* BTTLoginNoRegisterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A75A17522114DB100584A35 /* BTTLoginNoRegisterCell.xib */; };
 		3A75A17B22115C9800584A35 /* BTTLoginAccountSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A75A17A22115C9800584A35 /* BTTLoginAccountSelectView.m */; };
@@ -863,6 +869,16 @@
 		3A5F7AB221AD0E6800128E8B /* BTTVideoGamesFilterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGamesFilterCell.h; sourceTree = "<group>"; };
 		3A5F7AB321AD0E6800128E8B /* BTTVideoGamesFilterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGamesFilterCell.m; sourceTree = "<group>"; };
 		3A5F7AB421AD0E6800128E8B /* BTTVideoGamesFilterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGamesFilterCell.xib; sourceTree = "<group>"; };
+		3A685B8C226DAAB900A8F59D /* BTTRegisterNinameNormalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTRegisterNinameNormalCell.h; sourceTree = "<group>"; };
+		3A685B8D226DAAB900A8F59D /* BTTRegisterNinameNormalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTRegisterNinameNormalCell.m; sourceTree = "<group>"; };
+		3A685B8E226DAAB900A8F59D /* BTTRegisterNinameNormalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTRegisterNinameNormalCell.xib; sourceTree = "<group>"; };
+		3A685B9122706A2700A8F59D /* BTTChangePwdBtnsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTChangePwdBtnsCell.h; sourceTree = "<group>"; };
+		3A685B9222706A2700A8F59D /* BTTChangePwdBtnsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTChangePwdBtnsCell.m; sourceTree = "<group>"; };
+		3A685B9322706A2700A8F59D /* BTTChangePwdBtnsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTChangePwdBtnsCell.xib; sourceTree = "<group>"; };
+		3A685B9F2271443400A8F59D /* BTTRegisterChangePwdSuccessController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTRegisterChangePwdSuccessController.h; sourceTree = "<group>"; };
+		3A685BA02271443400A8F59D /* BTTRegisterChangePwdSuccessController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTRegisterChangePwdSuccessController.m; sourceTree = "<group>"; };
+		3A685BA6227161AF00A8F59D /* BTTNicknameSetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTNicknameSetController.h; sourceTree = "<group>"; };
+		3A685BA7227161AF00A8F59D /* BTTNicknameSetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTNicknameSetController.m; sourceTree = "<group>"; };
 		3A75A17322114DB100584A35 /* BTTLoginNoRegisterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLoginNoRegisterCell.h; sourceTree = "<group>"; };
 		3A75A17422114DB100584A35 /* BTTLoginNoRegisterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLoginNoRegisterCell.m; sourceTree = "<group>"; };
 		3A75A17522114DB100584A35 /* BTTLoginNoRegisterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTLoginNoRegisterCell.xib; sourceTree = "<group>"; };
@@ -2124,6 +2140,7 @@
 				3ADD23842178184A00FA959A /* BTTMineViewController+LoadData.m */,
 				3ADD238E217836B200FA959A /* BTTMineViewController+Nav.h */,
 				3ADD238D217836B200FA959A /* BTTMineViewController+Nav.m */,
+				3A685BA222715F6600A8F59D /* Nickname */,
 				3AAFF8B521DDF88300F875B1 /* SaveMoneySearch */,
 				3A11AE5A2186B69800B1AFF4 /* Xima */,
 				3A11AE4821869B0500B1AFF4 /* Settings */,
@@ -2195,6 +2212,15 @@
 				3AF1B81821AF994A00BF8C3A /* BTTVideoGamesFooterCell.xib */,
 			);
 			path = VideoGames;
+			sourceTree = "<group>";
+		};
+		3A685BA222715F6600A8F59D /* Nickname */ = {
+			isa = PBXGroup;
+			children = (
+				3A685BA6227161AF00A8F59D /* BTTNicknameSetController.h */,
+				3A685BA7227161AF00A8F59D /* BTTNicknameSetController.m */,
+			);
+			path = Nickname;
 			sourceTree = "<group>";
 		};
 		3A75A17822115C2900584A35 /* AccountSelect */ = {
@@ -2702,6 +2728,9 @@
 				3AAE81FD219A738B003EC8B0 /* BTTRegisterNormalCell.h */,
 				3AAE8208219A738B003EC8B0 /* BTTRegisterNormalCell.m */,
 				3AAE81FF219A738B003EC8B0 /* BTTRegisterNormalCell.xib */,
+				3A685B8C226DAAB900A8F59D /* BTTRegisterNinameNormalCell.h */,
+				3A685B8D226DAAB900A8F59D /* BTTRegisterNinameNormalCell.m */,
+				3A685B8E226DAAB900A8F59D /* BTTRegisterNinameNormalCell.xib */,
 				3AAE820B219A738B003EC8B0 /* BTTForgetPasswordCell.h */,
 				3AAE8201219A738B003EC8B0 /* BTTForgetPasswordCell.m */,
 				3AAE8212219A738B003EC8B0 /* BTTForgetPasswordCell.xib */,
@@ -2729,6 +2758,9 @@
 				3AC3FFA2219ABEBF008AECCB /* BTTUnlockPopView.h */,
 				3AC3FFA3219ABEBF008AECCB /* BTTUnlockPopView.m */,
 				3AC3FFA5219ABED8008AECCB /* BTTUnlockPopView.xib */,
+				3A685B9122706A2700A8F59D /* BTTChangePwdBtnsCell.h */,
+				3A685B9222706A2700A8F59D /* BTTChangePwdBtnsCell.m */,
+				3A685B9322706A2700A8F59D /* BTTChangePwdBtnsCell.xib */,
 			);
 			path = LoginOrRegister;
 			sourceTree = "<group>";
@@ -3076,6 +3108,8 @@
 				3A92940B219BBCCD00764E7E /* BTTLoginOrRegisterViewController+API.m */,
 				3A92941C219C3A0000764E7E /* BTTRegisterSuccessController.h */,
 				3A92941D219C3A0000764E7E /* BTTRegisterSuccessController.m */,
+				3A685B9F2271443400A8F59D /* BTTRegisterChangePwdSuccessController.h */,
+				3A685BA02271443400A8F59D /* BTTRegisterChangePwdSuccessController.m */,
 				3A9E4C1B219D411F00E7D8C0 /* ForgetPassword */,
 			);
 			path = LoginAndRegister;
@@ -4080,6 +4114,7 @@
 				EAE89EC6218C3ABD00C29393 /* LIVRadioButton_selected@3x.png in Resources */,
 				EAE89F20218C3ABD00C29393 /* LIVFileMessageContentView.nib in Resources */,
 				3A8F518A215F77AC0069D1B3 /* intro_1.jpg in Resources */,
+				3A685B90226DAAB900A8F59D /* BTTRegisterNinameNormalCell.xib in Resources */,
 				3AAE8221219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.xib in Resources */,
 				EAE89ED8218C3ABD00C29393 /* LIVVideoCamera_close@3x.png in Resources */,
 				EAE89E92218C3ABD00C29393 /* nowords.gif in Resources */,
@@ -4241,6 +4276,7 @@
 				EAE89F08218C3ABD00C29393 /* receivedVoicePlaying3@2x.png in Resources */,
 				EAE89E8D218C3ABD00C29393 /* evilGrin.gif in Resources */,
 				EAE89EB2218C3ABD00C29393 /* LIVFileMessage_TypePPT@3x.png in Resources */,
+				3A685B9522706A2700A8F59D /* BTTChangePwdBtnsCell.xib in Resources */,
 				EAE89E9A218C3ABD00C29393 /* back-arrow@3x.png in Resources */,
 				EAE89F38218C3ABD00C29393 /* TZAssetCell.nib in Resources */,
 				EAE89ED7218C3ABD00C29393 /* LIVVideoCamera_close@2x.png in Resources */,
@@ -4472,6 +4508,7 @@
 				3AE1EAF2218019400073A32D /* BTTBindingMobileController+LoadData.m in Sources */,
 				D5DBEB0721ABB774008AF629 /* CNPayDepositStep1VC.m in Sources */,
 				3ADD23FA2179CA8C00FA959A /* BTTAccountBlanceHeaderCell.m in Sources */,
+				3A685B8F226DAAB900A8F59D /* BTTRegisterNinameNormalCell.m in Sources */,
 				3ADD23EE2179B97A00FA959A /* TADotView.m in Sources */,
 				3AA7892C21FFF2580047A372 /* SDImageCache.m in Sources */,
 				3A8F518D215F77AC0069D1B3 /* BTTBadgeView.m in Sources */,
@@ -4592,6 +4629,7 @@
 				3A11ADE121818C8800B1AFF4 /* BTTAddBTCController+LoadData.m in Sources */,
 				3AD9CF4C216EE11A00685B43 /* BTTHomePageHeaderView.m in Sources */,
 				D5DBEB0521ABB774008AF629 /* CNPayDepositStep3VC.m in Sources */,
+				3A685BA12271443400A8F59D /* BTTRegisterChangePwdSuccessController.m in Sources */,
 				3AE1EAF521801F3C0073A32D /* BTTVerifyTypeSelectController.m in Sources */,
 				D5C501CF21B7CEDC00C6DA02 /* BRStringPickerView.m in Sources */,
 				3AE1EAC4217DC0700073A32D /* BTTPersonalInfoController+LoadData.m in Sources */,
@@ -4602,6 +4640,7 @@
 				3A7C0B0821E82D80002658CC /* CNPayQRVC.m in Sources */,
 				3A92941E219C3A0000764E7E /* BTTRegisterSuccessController.m in Sources */,
 				3AD9CD532165B2C900685B43 /* BTTPopoverAction.m in Sources */,
+				3A685B9422706A2700A8F59D /* BTTChangePwdBtnsCell.m in Sources */,
 				3A9E4C21219D418800E7D8C0 /* BTTForgetPasswordStepTwoController+LoadData.m in Sources */,
 				D5DBEB2421ABB774008AF629 /* CNPayWriteModel.m in Sources */,
 				3A8F513E215F74D00069D1B3 /* main.m in Sources */,
@@ -4754,6 +4793,7 @@
 				3AE05816217030CC00C7E70D /* BTTHomePageActivitiesCell.m in Sources */,
 				3AAE8214219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m in Sources */,
 				3AA7892921FFF2580047A372 /* SDWebImageCoder.m in Sources */,
+				3A685BA8227161AF00A8F59D /* BTTNicknameSetController.m in Sources */,
 				3AB0685821A422B000072FB7 /* BTTPTTransferController+LoadData.m in Sources */,
 				3A7A1A7521C0A7D800572B50 /* BTTXimaLogController.m in Sources */,
 				3AB0688021A63D6C00072FB7 /* BTTModifyLimitViewController+LoadData.m in Sources */,

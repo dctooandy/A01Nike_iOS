@@ -12,6 +12,8 @@
 #import "BTTRegisterSuccessTwoCell.h"
 #import "BTTRegisterSuccessChangePwdCell.h"
 #import "BTTPublicBtnCell.h"
+#import "BTTChangePwdBtnsCell.h"
+#import "BTTRegisterChangePwdSuccessController.h"
 
 typedef enum {
     BTTRegisterSuccessTypeNormal,
@@ -47,6 +49,7 @@ typedef enum {
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessTwoCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessTwoCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessChangePwdCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessChangePwdCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPublicBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPublicBtnCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTChangePwdBtnsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTChangePwdBtnsCell"];
     UIImageView *adImageview = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SCREEN_WIDTH / 375 * 127 - (KIsiPhoneX ? 88 : 64), SCREEN_WIDTH, SCREEN_WIDTH / 375 * 127)];
     [self.view addSubview:adImageview];
     adImageview.image = ImageNamed(@"login_ad");
@@ -122,14 +125,19 @@ typedef enum {
             cell.accountLabel.attributedText = attstr;
             return cell;
         } else {
-            BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
-            cell.btnType = BTTPublicBtnTypeConfirmSave;
-            cell.backgroundColor = COLOR_RGBA(41, 45, 54, 1);
-            cell.btn.enabled = YES;
+            BTTChangePwdBtnsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTChangePwdBtnsCell" forIndexPath:indexPath];
+//            cell.btnType = BTTPublicBtnTypeConfirmSave;
+//            cell.backgroundColor = COLOR_RGBA(41, 45, 54, 1);
+//            cell.btn.enabled = YES;
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
-                [strongSelf changePwd];
+                if (button.tag == 20012) {
+                    [strongSelf changePwd];
+                } else {
+                    [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+                }
+                
             };
             return cell;
         }
@@ -187,7 +195,7 @@ typedef enum {
         return;
     }
     if (_pwd.length < 8) {
-        [MBProgressHUD showError:@"请输入8-10位数组和字母" toView:nil];
+        [MBProgressHUD showError:@"请输入8-10位数字和字母" toView:nil];
         return;
     }
     NSString *url = @"public/users/updatePassword";
@@ -200,7 +208,9 @@ typedef enum {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         if (result.status) {
             [MBProgressHUD showSuccess:@"密码修改成功!" toView:nil];
-            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            BTTRegisterChangePwdSuccessController *vc = (BTTRegisterChangePwdSuccessController *)[BTTRegisterChangePwdSuccessController getVCFromStoryboard];
+            vc.account = self.account;
+            [self.navigationController pushViewController:vc animated:YES];
         } else {
             [MBProgressHUD showError:result.message toView:nil];
         }

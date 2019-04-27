@@ -205,6 +205,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIImage *)QRCodeMethod:(NSString *)qrCodeString;
 
+
+/**
+ 判断字符是否是中文字符串
+
+ @param string 字符串
+ @return 结果
+ */
++ (BOOL)isChinese:(NSString *)string;
+
 @end
 
 NS_ASSUME_NONNULL_END

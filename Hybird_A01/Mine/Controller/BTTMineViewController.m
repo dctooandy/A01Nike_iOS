@@ -50,6 +50,7 @@
 #import "BTTSaveMoneyModifyViewController.h"
 #import "BTTSaveMoneySuccessController.h"
 #import "BTTCompleteMeterialController.h"
+#import "BTTNicknameSetController.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -103,6 +104,9 @@
         [self loadPaymentData];
         [self loadAccountStatus];
         [self loadSaveMoneyTimes];
+//        if (![[[NSUserDefaults standardUserDefaults] objectForKey:BTTNicknameCache] length]) {
+            [self loadNickName];
+//        }
     } else {
         self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
         self.saveMoneyTimesType = BTTSaveMoneyTimesTypeLessTen;
@@ -143,14 +147,33 @@
             } else {
                 cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
             }
+            
             cell.nameLabel.text = [IVNetwork userInfo].loginName;
             cell.vipLevelLabel.text = ([IVNetwork userInfo].customerLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork userInfo].customerLevel)];
+            
+            NSString *nickName = [[NSUserDefaults standardUserDefaults] objectForKey:BTTNicknameCache];
+            if (![nickName length]) {
+                cell.nicknameLabel.hidden = YES;
+                cell.topConstants.constant = 0;
+                cell.nickNameBtn.hidden = NO;
+                
+            } else {
+                cell.nicknameLabel.hidden = NO;
+                cell.nicknameLabel.text = nickName;
+                cell.topConstants.constant = 20;
+                cell.nickNameBtn.hidden = YES;
+            }
             
             weakSelf(weakSelf);
             cell.accountBlanceBlock = ^{
                 strongSelf(strongSelf);
                 BTTAccountBalanceController *accountBalance = [[BTTAccountBalanceController alloc] init];
                 [strongSelf.navigationController pushViewController:accountBalance animated:YES];
+            };
+            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                strongSelf(strongSelf);
+                BTTNicknameSetController *vc = (BTTNicknameSetController *)[BTTNicknameSetController getVCFromStoryboard];
+                [strongSelf.navigationController pushViewController:vc animated:YES];
             };
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
@@ -486,6 +509,7 @@
         self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
         self.saveMoneyTimesType = BTTSaveMoneyTimesTypeLessTen;
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
         [BTTUserStatusManager logoutSuccess];
         [self loadPaymentDefaultData];
         [self setupElements];
