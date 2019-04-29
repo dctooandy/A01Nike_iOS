@@ -16,9 +16,11 @@ typedef enum {
     BTTNavTypeMine
 }BTTNavType;
 
-typedef void (^BTTHomePageBtnClickBlock)(UIButton *button);
+
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef void (^BTTHomePageBtnClickBlock)(UIButton *button);
 
 @interface BTTHomePageHeaderView : UIImageView
 
