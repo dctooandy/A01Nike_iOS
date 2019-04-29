@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Constants.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -213,6 +214,8 @@ NS_ASSUME_NONNULL_BEGIN
  @return 结果
  */
 + (BOOL)isChinese:(NSString *)string;
+
++ (NSInteger)checkIsHaveNumAndLetter:(NSString *)str;
 
 @end
 

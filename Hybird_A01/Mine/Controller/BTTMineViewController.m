@@ -51,6 +51,7 @@
 #import "BTTSaveMoneySuccessController.h"
 #import "BTTCompleteMeterialController.h"
 #import "BTTNicknameSetController.h"
+#import "BTTMeHeadernNicknameLoginCell.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -129,6 +130,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeMoreSaveMoneyHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeBigSaveMoneyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeMoreSaveMoneyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeHeadernNicknameLoginCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeHeadernNicknameLoginCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -140,50 +142,71 @@
         BTTBaseNavigationController *navVC = self.tabBarController.viewControllers[0];
         BTTHomePageViewController *homeVC = navVC.viewControllers[0];
         if ([IVNetwork userInfo]) {
-            BTTMeHeaderLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeHeaderLoginCell" forIndexPath:indexPath];
-            cell.noticeStr = homeVC.noticeStr.length ? homeVC.noticeStr : @"";
-            if ([self.totalAmount isEqualToString:@"加载中"]) {
-                cell.totalAmount = self.totalAmount;
-            } else {
-                cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
-            }
-            
-            cell.nameLabel.text = [IVNetwork userInfo].loginName;
-            cell.vipLevelLabel.text = ([IVNetwork userInfo].customerLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork userInfo].customerLevel)];
-            
             NSString *nickName = [[NSUserDefaults standardUserDefaults] objectForKey:BTTNicknameCache];
-            if (![nickName length]) {
-                cell.nicknameLabel.hidden = YES;
-                cell.topConstants.constant = 0;
-                cell.nickNameBtn.hidden = NO;
+            if (!nickName.length) {
+                BTTMeHeaderLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeHeaderLoginCell" forIndexPath:indexPath];
+                cell.noticeStr = homeVC.noticeStr.length ? homeVC.noticeStr : @"";
+                if ([self.totalAmount isEqualToString:@"加载中"]) {
+                    cell.totalAmount = self.totalAmount;
+                } else {
+                    cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
+                }
                 
+                cell.nameLabel.text = [IVNetwork userInfo].loginName;
+                cell.vipLevelLabel.text = ([IVNetwork userInfo].customerLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork userInfo].customerLevel)];
+                weakSelf(weakSelf);
+                cell.accountBlanceBlock = ^{
+                    strongSelf(strongSelf);
+                    BTTAccountBalanceController *accountBalance = [[BTTAccountBalanceController alloc] init];
+                    [strongSelf.navigationController pushViewController:accountBalance animated:YES];
+                };
+                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                    strongSelf(strongSelf);
+                    BTTNicknameSetController *vc = (BTTNicknameSetController *)[BTTNicknameSetController getVCFromStoryboard];
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                };
+                cell.clickEventBlock = ^(id  _Nonnull value) {
+                    strongSelf(strongSelf);
+                    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                    vc.webConfigModel.url = @"common/ancement.htm";
+                    vc.webConfigModel.newView = YES;
+                    vc.webConfigModel.theme = @"inside";
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                };
+                return cell;
             } else {
-                cell.nicknameLabel.hidden = NO;
+                BTTMeHeadernNicknameLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeHeadernNicknameLoginCell" forIndexPath:indexPath];
+                cell.noticeStr = homeVC.noticeStr.length ? homeVC.noticeStr : @"";
+                if ([self.totalAmount isEqualToString:@"加载中"]) {
+                    cell.totalAmount = self.totalAmount;
+                } else {
+                    cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
+                }
                 cell.nicknameLabel.text = nickName;
-                cell.topConstants.constant = 20;
-                cell.nickNameBtn.hidden = YES;
+                cell.nameLabel.text = [IVNetwork userInfo].loginName;
+                cell.vipLevelLabel.text = ([IVNetwork userInfo].customerLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork userInfo].customerLevel)];
+                weakSelf(weakSelf);
+                cell.accountBlanceBlock = ^{
+                    strongSelf(strongSelf);
+                    BTTAccountBalanceController *accountBalance = [[BTTAccountBalanceController alloc] init];
+                    [strongSelf.navigationController pushViewController:accountBalance animated:YES];
+                };
+                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                    strongSelf(strongSelf);
+                    BTTNicknameSetController *vc = (BTTNicknameSetController *)[BTTNicknameSetController getVCFromStoryboard];
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                };
+                cell.clickEventBlock = ^(id  _Nonnull value) {
+                    strongSelf(strongSelf);
+                    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                    vc.webConfigModel.url = @"common/ancement.htm";
+                    vc.webConfigModel.newView = YES;
+                    vc.webConfigModel.theme = @"inside";
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                };
+                return cell;
             }
             
-            weakSelf(weakSelf);
-            cell.accountBlanceBlock = ^{
-                strongSelf(strongSelf);
-                BTTAccountBalanceController *accountBalance = [[BTTAccountBalanceController alloc] init];
-                [strongSelf.navigationController pushViewController:accountBalance animated:YES];
-            };
-            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-                strongSelf(strongSelf);
-                BTTNicknameSetController *vc = (BTTNicknameSetController *)[BTTNicknameSetController getVCFromStoryboard];
-                [strongSelf.navigationController pushViewController:vc animated:YES];
-            };
-            cell.clickEventBlock = ^(id  _Nonnull value) {
-                strongSelf(strongSelf);
-                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-                vc.webConfigModel.url = @"common/ancement.htm";
-                vc.webConfigModel.newView = YES;
-                vc.webConfigModel.theme = @"inside";
-                [strongSelf.navigationController pushViewController:vc animated:YES];
-            };
-            return cell;
         } else {
             BTTMeHeaderNotLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeHeaderNotLoginCell" forIndexPath:indexPath];
             cell.noticeStr = homeVC.noticeStr.length ? homeVC.noticeStr : @"";

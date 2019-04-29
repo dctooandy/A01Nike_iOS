@@ -194,8 +194,16 @@ typedef enum {
         [MBProgressHUD showError:@"请输入新密码" toView:nil];
         return;
     }
-    if (_pwd.length < 8) {
+    if (_newPwd.length < 8) {
         [MBProgressHUD showError:@"请输入8-10位数字和字母" toView:nil];
+        return;
+    }
+    if ([PublicMethod isNum:_newPwd]) {
+        [MBProgressHUD showError:@"8-10位数字和字母" toView:nil];
+        return;
+    }
+    if ([PublicMethod checkIsHaveNumAndLetter:_newPwd] == BTTStringFormatStyleChar) {
+        [MBProgressHUD showError:@"8-10位数字和字母" toView:nil];
         return;
     }
     NSString *url = @"public/users/updatePassword";

@@ -100,6 +100,7 @@
     [IVNetwork cleanUserInfo];
     [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
     [MBProgressHUD showError:@"登录超时，请重新登录" toView:nil];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
 }
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccessGotoHomePageNotification) name:BTTRegisterSuccessGotoHomePageNotification object:nil];
