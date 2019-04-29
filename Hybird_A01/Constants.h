@@ -81,6 +81,13 @@ typedef enum {
     BTTQuickRegisterTypeManual  // 手动
 }BTTQuickRegisterType;
 
+typedef enum {
+    BTTStringFormatStyleNum = 1, ///< 全数字字符串
+    BTTStringFormatStyleChar,    ///< 全字母
+    BTTStringFormatStyleCharAndNum, ///< 数字和字母混合
+    BTTStringFormatStyleOther    ///< 包含特殊符号
+}BTTStringFormatStyle;
+
 typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 /***********************************************存储关键字******************************************************/

@@ -202,7 +202,7 @@ typedef enum {
         [MBProgressHUD showError:@"8-10位数字和字母" toView:nil];
         return;
     }
-    if (!_newPwd.integerValue) {
+    if ([PublicMethod checkIsHaveNumAndLetter:_newPwd] == BTTStringFormatStyleChar) {
         [MBProgressHUD showError:@"8-10位数字和字母" toView:nil];
         return;
     }
