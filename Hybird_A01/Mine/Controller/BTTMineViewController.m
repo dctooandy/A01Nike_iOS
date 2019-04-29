@@ -182,7 +182,7 @@
                 } else {
                     cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
                 }
-                
+                cell.nicknameLabel.text = nickName;
                 cell.nameLabel.text = [IVNetwork userInfo].loginName;
                 cell.vipLevelLabel.text = ([IVNetwork userInfo].customerLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork userInfo].customerLevel)];
                 weakSelf(weakSelf);
