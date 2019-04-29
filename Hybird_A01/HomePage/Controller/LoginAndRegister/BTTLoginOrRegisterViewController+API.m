@@ -94,6 +94,8 @@
         return;
     }
     
+    
+    
     if (!model.code.length && self.loginCellType == BTTLoginCellTypeCode) {
         [MBProgressHUD showError:@"请输入验证码" toView:self.view];
         return;
