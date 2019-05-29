@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showPopViewWithAccount:(NSString *)account;
 
+- (void)showPopView;
+
 @end
 
 NS_ASSUME_NONNULL_END

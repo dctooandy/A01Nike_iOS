@@ -16,6 +16,16 @@
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
+@property (weak, nonatomic) IBOutlet UILabel *payBankNameLb;
+
+@property (weak, nonatomic) IBOutlet UIImageView *bankBGIV;
+@property (weak, nonatomic) IBOutlet UIImageView *bankLogoIV;
+
+@property (weak, nonatomic) IBOutlet UILabel *bankNameLb;
+@property (weak, nonatomic) IBOutlet UILabel *accountLb;
+
+@property (weak, nonatomic) IBOutlet UILabel *accountNameLb;
+@property (weak, nonatomic) IBOutlet UILabel *addressLb;
 @end
 
 @implementation BTTPayBQAliStep2VC
@@ -27,7 +37,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self setViewHeight:700 fullScreen:YES];
+    [self setViewHeight:1000 fullScreen:YES];
     [self configUI];
 }
 
@@ -40,10 +50,25 @@
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:amountStr];
     [attStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"ffff33"],NSFontAttributeName:[UIFont systemFontOfSize:24]} range:range];
     self.amountLabel.attributedText = attStr;
+    
+//    self.payBankNameLb.text = bankModel.bankname;
+//    self.depositLb.text = self.writeModel.depositBy;
+//    self.amountLb.text = bankModel.amount;
+    
+    [self.bankBGIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankimage.cn_appendCDN] placeholderImage:[UIImage imageNamed:@"pay_bankBG"]];
+    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.banklogo.cn_appendCDN]];
+    self.bankNameLb.text = bankModel.bankname;
+    self.accountNameLb.text = bankModel.accountname;
+    self.accountLb.text  = bankModel.accountnumber;
+    self.addressLb.text  = [NSString stringWithFormat:@"%@ %@ %@", bankModel.bankprovince, bankModel.bankcity, bankModel.bankaddress];
 }
 
 - (IBAction)btnClick:(UIButton *)sender {
     [self popToRootViewController];
 }
 
+- (IBAction)copyBtnClick:(UIButton *)sender {
+    [UIPasteboard generalPasteboard].string = _accountLb.text;
+    [self showSuccess:@"已复制到剪切板"];
+}
 @end

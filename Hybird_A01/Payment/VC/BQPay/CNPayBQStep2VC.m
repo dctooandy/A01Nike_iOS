@@ -105,10 +105,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self setViewHeight:750 fullScreen:YES];
+    [self setViewHeight:1000 fullScreen:YES];
     if (self.writeModel.chooseBank.qrcode.length && self.paymentModel.paymentType == CNPaymentBQAli) {
         _step2VC = [[BTTPayBQAliStep2VC alloc] init];
-        _step2VC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        _step2VC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, 1000);
         _step2VC.paymentModel = self.paymentModel;
         [self addChildViewController:_step2VC];
         [self.view addSubview:_step2VC.view];

@@ -99,6 +99,8 @@
 		3A685B9522706A2700A8F59D /* BTTChangePwdBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A685B9322706A2700A8F59D /* BTTChangePwdBtnsCell.xib */; };
 		3A685BA12271443400A8F59D /* BTTRegisterChangePwdSuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A685BA02271443400A8F59D /* BTTRegisterChangePwdSuccessController.m */; };
 		3A685BA8227161AF00A8F59D /* BTTNicknameSetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A685BA7227161AF00A8F59D /* BTTNicknameSetController.m */; };
+		3A6DD5F2228914FE000288B2 /* BTTAndroid88PopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DD5F1228914FE000288B2 /* BTTAndroid88PopView.m */; };
+		3A6DD5F62289161C000288B2 /* BTTAndroid88PopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DD5F52289161C000288B2 /* BTTAndroid88PopView.xib */; };
 		3A75A17622114DB100584A35 /* BTTLoginNoRegisterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A75A17422114DB100584A35 /* BTTLoginNoRegisterCell.m */; };
 		3A75A17722114DB100584A35 /* BTTLoginNoRegisterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A75A17522114DB100584A35 /* BTTLoginNoRegisterCell.xib */; };
 		3A75A17B22115C9800584A35 /* BTTLoginAccountSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A75A17A22115C9800584A35 /* BTTLoginAccountSelectView.m */; };
@@ -884,6 +886,9 @@
 		3A685BA02271443400A8F59D /* BTTRegisterChangePwdSuccessController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTRegisterChangePwdSuccessController.m; sourceTree = "<group>"; };
 		3A685BA6227161AF00A8F59D /* BTTNicknameSetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTNicknameSetController.h; sourceTree = "<group>"; };
 		3A685BA7227161AF00A8F59D /* BTTNicknameSetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTNicknameSetController.m; sourceTree = "<group>"; };
+		3A6DD5F0228914FE000288B2 /* BTTAndroid88PopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTAndroid88PopView.h; sourceTree = "<group>"; };
+		3A6DD5F1228914FE000288B2 /* BTTAndroid88PopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTAndroid88PopView.m; sourceTree = "<group>"; };
+		3A6DD5F52289161C000288B2 /* BTTAndroid88PopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTAndroid88PopView.xib; sourceTree = "<group>"; };
 		3A75A17322114DB100584A35 /* BTTLoginNoRegisterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLoginNoRegisterCell.h; sourceTree = "<group>"; };
 		3A75A17422114DB100584A35 /* BTTLoginNoRegisterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLoginNoRegisterCell.m; sourceTree = "<group>"; };
 		3A75A17522114DB100584A35 /* BTTLoginNoRegisterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTLoginNoRegisterCell.xib; sourceTree = "<group>"; };
@@ -2228,6 +2233,16 @@
 			path = Nickname;
 			sourceTree = "<group>";
 		};
+		3A6DD5EF228914AD000288B2 /* Andriod88 */ = {
+			isa = PBXGroup;
+			children = (
+				3A6DD5F0228914FE000288B2 /* BTTAndroid88PopView.h */,
+				3A6DD5F1228914FE000288B2 /* BTTAndroid88PopView.m */,
+				3A6DD5F52289161C000288B2 /* BTTAndroid88PopView.xib */,
+			);
+			path = Andriod88;
+			sourceTree = "<group>";
+		};
 		3A75A17822115C2900584A35 /* AccountSelect */ = {
 			isa = PBXGroup;
 			children = (
@@ -2985,6 +3000,7 @@
 		3AD9CF39216EDC6C00685B43 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3A6DD5EF228914AD000288B2 /* Andriod88 */,
 				3A75A17822115C2900584A35 /* AccountSelect */,
 				3A5F7AB121AD0D8D00128E8B /* VideoGames */,
 				3A92942D219D19A300764E7E /* ForgetPassword */,
@@ -4162,6 +4178,7 @@
 				EAE89EF1218C3ABD00C29393 /* LIVVoiceItem_highlight@3x.png in Resources */,
 				EAE89F34218C3ABD00C29393 /* LIVVideoMessageContentView.nib in Resources */,
 				3AAE821C219A738B003EC8B0 /* BTTLoginOrRegisterTypeSelectCell.xib in Resources */,
+				3A6DD5F62289161C000288B2 /* BTTAndroid88PopView.xib in Resources */,
 				3AAE8219219A738B003EC8B0 /* BTTRegisterQuickManualCell.xib in Resources */,
 				3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */,
 				3A75A182221164BC00584A35 /* BTTLoginAccountSelectCell.xib in Resources */,
@@ -4770,6 +4787,7 @@
 				D599252421AFCFDA001E885A /* CNPayBankView.m in Sources */,
 				3AB0683421A2E34C00072FB7 /* BTTAccountBalanceController+LoadData.m in Sources */,
 				3A11AE5D2186B71600B1AFF4 /* BTTXimaController.m in Sources */,
+				3A6DD5F2228914FE000288B2 /* BTTAndroid88PopView.m in Sources */,
 				D5DBEB3621ABB774008AF629 /* CNPayTipView.m in Sources */,
 				3AAFF8C021DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.m in Sources */,
 				3AA7892F21FFF2580047A372 /* NSData+ImageContentType.m in Sources */,
@@ -4986,8 +5004,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Hybird_A01/Hybird_A01.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 6UDM79GA72;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LZ372J472L;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5011,8 +5029,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fa0dee15-9f99-4918-8abe-a774f622a5b0";
-				PROVISIONING_PROFILE_SPECIFIER = a01iphone_dev;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -5024,9 +5042,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Hybird_A01/Hybird_A01.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 6UDM79GA72;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LZ372J472L;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5051,7 +5069,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
-				PROVISIONING_PROFILE_SPECIFIER = a01iphone_Dist;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

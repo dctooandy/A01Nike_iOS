@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -340,24 +340,24 @@
                             <rect key="frame" x="0.0" y="50" width="375" height="40"/>
                             <subviews>
                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="pay_Exclamation" translatesAutoresizingMaskIntoConstraints="NO" id="H7L-Aq-8eK">
-                                    <rect key="frame" x="15" y="4" width="15" height="15"/>
+                                    <rect key="frame" x="15" y="12.5" width="15" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="15" id="Prf-Sv-dsb"/>
                                         <constraint firstAttribute="height" constant="15" id="mcO-rP-QW5"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仅支持网银/手机银行/支付宝/微信用户请使用微信/支付宝秒存" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPd-bn-C9M">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* 迅捷网银: 不要使用支付宝和微信 无法到账 *" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPd-bn-C9M">
                                     <rect key="frame" x="34" y="0.0" width="326" height="40"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="0.77647058823529413" green="0.0078431372549019607" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstItem="H7L-Aq-8eK" firstAttribute="centerY" secondItem="UPd-bn-C9M" secondAttribute="centerY" id="0rv-lH-JuP"/>
                                 <constraint firstAttribute="trailing" secondItem="UPd-bn-C9M" secondAttribute="trailing" constant="15" id="1lK-ha-RUY"/>
                                 <constraint firstItem="H7L-Aq-8eK" firstAttribute="leading" secondItem="adG-CK-hLQ" secondAttribute="leading" constant="15" id="4be-Jc-3Sp"/>
-                                <constraint firstItem="H7L-Aq-8eK" firstAttribute="top" secondItem="adG-CK-hLQ" secondAttribute="top" constant="4" id="Dvr-PB-q2r"/>
                                 <constraint firstItem="UPd-bn-C9M" firstAttribute="leading" secondItem="H7L-Aq-8eK" secondAttribute="trailing" constant="4" id="Hek-NB-iu8"/>
                                 <constraint firstAttribute="height" constant="40" id="WAz-dN-Hfj"/>
                                 <constraint firstAttribute="bottom" secondItem="UPd-bn-C9M" secondAttribute="bottom" id="ZbN-90-Mki"/>

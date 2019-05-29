@@ -8,6 +8,7 @@
 
 #import "BTTLoginOrRegisterViewController+UI.h"
 #import "BTTUnlockPopView.h"
+#import "BTTAndroid88PopView.h"
 
 @implementation BTTLoginOrRegisterViewController (UI)
 
@@ -23,6 +24,20 @@
     [popView pop];
     customView.dismissBlock = ^{
         [popView dismiss];
+    };
+}
+
+- (void)showPopView {
+    BTTAndroid88PopView *customView = [BTTAndroid88PopView viewFromXib];
+    customView.frame = CGRectMake(0, 0, 320, 360);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    customView.btnBlock = ^(UIButton *btn) {
+        
     };
 }
 

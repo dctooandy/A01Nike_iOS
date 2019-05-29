@@ -28,8 +28,8 @@
     [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTGetCustromerByPhone paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
-        [[NSUserDefaults standardUserDefaults] setObject:cell.accountTextField.text forKey:BTTCacheAccountName];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+//        [[NSUserDefaults standardUserDefaults] setObject:cell.accountTextField.text forKey:BTTCacheAccountName];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
         if (result.status) {
             if ([result.data[@"list"] count] > 1) {
                 [self showPopViewWithAccounts:result.data[@"list"] withPhone:cell.accountTextField.text withPhoneToken:result.data[@"phone_token"]];
@@ -122,11 +122,12 @@
     [IVNetwork sendRequestWithSubURL:BTTUserLoginAPI paramters:parameters completionBlock:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
         NSLog(@"%@",response);
-        [[NSUserDefaults standardUserDefaults] setObject:model.login_name forKey:BTTCacheAccountName];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+//        [[NSUserDefaults standardUserDefaults] setObject:model.login_name forKey:BTTCacheAccountName];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
         if (result.status) {
             self.wrongPwdNum = 0;
             if ([result.data isKindOfClass:[NSDictionary class]]) {
+//                [self getPromotionStatus];
                 self.uuid = @"";
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.data];
                 if (isback) {
@@ -199,6 +200,7 @@
         if (result.status) {
             self.wrongPwdNum = 0;
             if ([result.data isKindOfClass:[NSDictionary class]]) {
+//                [self getPromotionStatus];
                 self.uuid = @"";
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.data];
                 
@@ -231,6 +233,14 @@
         }
     }];
     
+}
+
+
+- (void)getPromotionStatus {
+    [IVNetwork sendRequestWithSubURL:BTTPromotionStatus paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+        [self showPopView];
+    }];
 }
 
 - (void)showAlertWithModle:(BTTLoginAPIModel *)model {

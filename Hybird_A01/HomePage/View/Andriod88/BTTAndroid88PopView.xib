@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BTTAndroid88PopView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="360"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noticeView_88bg" translatesAutoresizingMaskIntoConstraints="NO" id="jyg-UH-DQg">
+                    <rect key="frame" x="10" y="0.0" width="300" height="288"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="288" id="O4T-Nl-x6C"/>
+                        <constraint firstAttribute="width" constant="300" id="uCK-0H-q8J"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9g9-dj-ZHp">
+                    <rect key="frame" x="140" y="303" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="fPv-t0-v16"/>
+                        <constraint firstAttribute="width" constant="40" id="gZZ-tl-xxE"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="login_closed"/>
+                    <connections>
+                        <action selector="closeBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Vxq-h1-Qpi"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kIi-NA-3xO">
+                    <rect key="frame" x="115" y="194" width="100" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="1y8-Si-Lej"/>
+                        <constraint firstAttribute="width" constant="100" id="agY-p0-zVR"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="noticeView_88btn"/>
+                    <connections>
+                        <action selector="detailBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="8gL-PP-Kgm"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="9g9-dj-ZHp" firstAttribute="top" secondItem="jyg-UH-DQg" secondAttribute="bottom" constant="15" id="Dqx-GP-gHW"/>
+                <constraint firstItem="jyg-UH-DQg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Iwj-j7-CGA"/>
+                <constraint firstItem="kIi-NA-3xO" firstAttribute="centerX" secondItem="jyg-UH-DQg" secondAttribute="centerX" constant="5" id="Szd-9g-NLB"/>
+                <constraint firstItem="jyg-UH-DQg" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="WpY-MT-7b2"/>
+                <constraint firstItem="9g9-dj-ZHp" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="f7y-Wf-1EM"/>
+                <constraint firstItem="kIi-NA-3xO" firstAttribute="centerY" secondItem="jyg-UH-DQg" secondAttribute="centerY" constant="65" id="muS-Ym-d9h"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="btnHeightConstants" destination="1y8-Si-Lej" id="ifb-F0-jwW"/>
+                <outlet property="btnWidthConstants" destination="agY-p0-zVR" id="IeC-oU-shc"/>
+                <outlet property="heightConstants" destination="O4T-Nl-x6C" id="lpV-AL-dPt"/>
+                <outlet property="topConstants" destination="muS-Ym-d9h" id="t94-kr-baj"/>
+            </connections>
+            <point key="canvasLocation" x="-624.63768115942037" y="154.48369565217394"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="login_closed" width="50.666667938232422" height="50.666667938232422"/>
+        <image name="noticeView_88bg" width="375" height="360"/>
+        <image name="noticeView_88btn" width="137" height="38"/>
+    </resources>
+</document>
