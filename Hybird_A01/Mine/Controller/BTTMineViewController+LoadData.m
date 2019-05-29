@@ -449,6 +449,7 @@
             NSInteger index = [names indexOfObject:@"首存优惠"];
             [names insertObject:@"开户礼金" atIndex:index + 1];
         }
+        
     }
     
     for (NSString *name in names) {

@@ -257,7 +257,7 @@
         url = @"public/withdraws/btc";
     } else {
         url = @"public/withdraws/newCreate";
-        params[@"password"] = self.password;
+//        params[@"password"] = self.password;
     }
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];

@@ -229,8 +229,8 @@
                                     <color key="textColor" red="0.50980392159999999" green="0.52549019610000003" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="仅支持网银/手机银行转账" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1r4-um-aLl">
-                                    <rect key="frame" x="0.0" y="26" width="162" height="17"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* 迅捷网银: 不要使用支付宝和微信 无法到账 *" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1r4-um-aLl">
+                                    <rect key="frame" x="0.0" y="26" width="289" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="17" id="YDK-na-Ufq"/>
                                     </constraints>

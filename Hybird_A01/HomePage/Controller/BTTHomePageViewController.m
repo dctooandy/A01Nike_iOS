@@ -34,6 +34,7 @@
 #import "BTTHomePageFooterCell.h"
 #import "BTTHomePageHeaderModel.h"
 #import "BTTLuckyWheelCoinView.h"
+#import "BTTAndroid88PopView.h"
 
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
@@ -69,6 +70,8 @@
     [self registerNotification];
     [IVNetwork registException];
 }
+
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

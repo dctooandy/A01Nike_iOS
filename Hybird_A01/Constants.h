@@ -214,6 +214,8 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 #define BTTSuperFastRegister   @"/A01/users/superFastRegister"
 #define BTTSetNickname         @"/A01/users/setNickName"
 #define BTTGetMyAlias          @"/A01/users/getMyAlias"
+#define BTTPromotionStatus     @"/A01/promotion/status"
+
 
 // 电话回拨API
 #define BTTCallBackMemberAPI         @"/public/phones/memberCall"
