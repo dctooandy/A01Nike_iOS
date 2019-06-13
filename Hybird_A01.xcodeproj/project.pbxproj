@@ -425,6 +425,8 @@
 		3AF1B81521AE8C5500BF8C3A /* BTTVideoGamesNoDataCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF1B81321AE8C5500BF8C3A /* BTTVideoGamesNoDataCell.xib */; };
 		3AF1B81921AF994A00BF8C3A /* BTTVideoGamesFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1B81721AF994A00BF8C3A /* BTTVideoGamesFooterCell.m */; };
 		3AF1B81A21AF994A00BF8C3A /* BTTVideoGamesFooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF1B81821AF994A00BF8C3A /* BTTVideoGamesFooterCell.xib */; };
+		3AF9EB5B22A4B61700A85D9F /* BTTMidAutumnPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF9EB5A22A4B61700A85D9F /* BTTMidAutumnPopView.m */; };
+		3AF9EB5D22A4B62300A85D9F /* BTTMidAutumnPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF9EB5C22A4B62300A85D9F /* BTTMidAutumnPopView.xib */; };
 		3AFCD7CB21AD15D700B136C1 /* BTTVideoGamesHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFCD7C921AD15D700B136C1 /* BTTVideoGamesHeaderCell.m */; };
 		3AFCD7CC21AD15D700B136C1 /* BTTVideoGamesHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CA21AD15D700B136C1 /* BTTVideoGamesHeaderCell.xib */; };
 		3AFCD7D021AD179600B136C1 /* BTTVideoGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CE21AD179600B136C1 /* BTTVideoGameCell.m */; };
@@ -1447,6 +1449,9 @@
 		3AF1B81621AF994A00BF8C3A /* BTTVideoGamesFooterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGamesFooterCell.h; sourceTree = "<group>"; };
 		3AF1B81721AF994A00BF8C3A /* BTTVideoGamesFooterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGamesFooterCell.m; sourceTree = "<group>"; };
 		3AF1B81821AF994A00BF8C3A /* BTTVideoGamesFooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGamesFooterCell.xib; sourceTree = "<group>"; };
+		3AF9EB5922A4B61700A85D9F /* BTTMidAutumnPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTMidAutumnPopView.h; sourceTree = "<group>"; };
+		3AF9EB5A22A4B61700A85D9F /* BTTMidAutumnPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMidAutumnPopView.m; sourceTree = "<group>"; };
+		3AF9EB5C22A4B62300A85D9F /* BTTMidAutumnPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTMidAutumnPopView.xib; sourceTree = "<group>"; };
 		3AFCD7C821AD15D700B136C1 /* BTTVideoGamesHeaderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGamesHeaderCell.h; sourceTree = "<group>"; };
 		3AFCD7C921AD15D700B136C1 /* BTTVideoGamesHeaderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGamesHeaderCell.m; sourceTree = "<group>"; };
 		3AFCD7CA21AD15D700B136C1 /* BTTVideoGamesHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGamesHeaderCell.xib; sourceTree = "<group>"; };
@@ -3000,6 +3005,7 @@
 		3AD9CF39216EDC6C00685B43 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3AF9EB5822A4B5B200A85D9F /* MidAutumn */,
 				3A6DD5EF228914AD000288B2 /* Andriod88 */,
 				3A75A17822115C2900584A35 /* AccountSelect */,
 				3A5F7AB121AD0D8D00128E8B /* VideoGames */,
@@ -3448,6 +3454,16 @@
 				3AF1B80A21AE59C300BF8C3A /* BTTVideoGameModel.m */,
 			);
 			path = VideoGames;
+			sourceTree = "<group>";
+		};
+		3AF9EB5822A4B5B200A85D9F /* MidAutumn */ = {
+			isa = PBXGroup;
+			children = (
+				3AF9EB5922A4B61700A85D9F /* BTTMidAutumnPopView.h */,
+				3AF9EB5A22A4B61700A85D9F /* BTTMidAutumnPopView.m */,
+				3AF9EB5C22A4B62300A85D9F /* BTTMidAutumnPopView.xib */,
+			);
+			path = MidAutumn;
 			sourceTree = "<group>";
 		};
 		8746ABB2D5D61EF30A4942D6 /* Frameworks */ = {
@@ -4296,6 +4312,7 @@
 				EAE89F29218C3ABD00C29393 /* LIVSatisfactionEvaluationCommentCell.nib in Resources */,
 				EAE89F30218C3ABD00C29393 /* LIVTextWithIconToast.nib in Resources */,
 				EAE89EEE218C3ABD00C29393 /* LIVVoiceItem@2x.png in Resources */,
+				3AF9EB5D22A4B62300A85D9F /* BTTMidAutumnPopView.xib in Resources */,
 				EAE89EAC218C3ABD00C29393 /* LIVEmotionItem@3x.png in Resources */,
 				3AE1EB2121805E980073A32D /* BTTAddCardBtnsCell.xib in Resources */,
 				3AAE821F219A738B003EC8B0 /* BTTLoginCell.xib in Resources */,
@@ -4478,6 +4495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AF9EB5B22A4B61700A85D9F /* BTTMidAutumnPopView.m in Sources */,
 				3A11AE122182AAB300B1AFF4 /* BTTPTTransferNewCell.m in Sources */,
 				3AAFF88B21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.m in Sources */,
 				3AAE8220219A738B003EC8B0 /* BTTLoginOrRegisterBtnCell.m in Sources */,

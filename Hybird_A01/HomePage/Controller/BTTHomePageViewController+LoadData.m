@@ -20,6 +20,7 @@
 #import "BTTAGGJViewController.h"
 #import "BTTGamesTryAlertView.h"
 #import "BTTHomePageViewController+Nav.h"
+#import "BTTMidAutumnPopView.h"
 
 static const char *noticeStrKey = "noticeStr";
 
@@ -213,6 +214,21 @@ static const char *BTTNextGroupKey = "nextGroup";
         [self.collectionView reloadData];
     });
 }
+
+- (void)showMidAutumnPopView {
+    BTTMidAutumnPopView *customView = [BTTMidAutumnPopView viewFromXib];
+    customView.frame = CGRectMake(0, 0, 350, 280);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    customView.btnBlock = ^(UIButton *btn) {
+        [popView dismiss];
+    };
+}
+
 
 - (void)showCallBackSuccessView {
     BTTMakeCallSuccessView *customView = [BTTMakeCallSuccessView viewFromXib];

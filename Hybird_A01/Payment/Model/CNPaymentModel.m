@@ -66,6 +66,9 @@
             return @"支付宝秒存";
         case CNPaymentCoin:
             return @"钻石币支付";
+        case CNPaymentYSFQR:
+            return @"云闪付扫码";
+            
     }
 }
 
@@ -115,6 +118,7 @@
         case CNPaymentJDApp:
         case CNPaymentJDQR:
         case CNPaymentCard:
+        case CNPaymentYSFQR:
         case CNPaymentWechatBarCode:
             return @[@(100), @(1000), @(2000), @(3000), @(5000)];
             break;

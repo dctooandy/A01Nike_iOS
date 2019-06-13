@@ -304,13 +304,17 @@
                         payments[CNPaymentJDApp],nil];
     }
     
+    CNPayChannelModel *YSF = [[CNPayChannelModel alloc] init];
+    YSF.payChannel = CNPayChannelYSFQR;
+    YSF.payments = [[NSArray alloc] initWithObjects:
+                    payments[CNPaymentYSFQR], nil];
+    
     NSArray *array = nil;
     if (timeMoreTen) {
-        array = @[BQFast,BQAli,BQWeChat,deposit,unionQR,aliQR,online,wxQR,jdQR,qqQR,wap,unionPay,coin,card,BTC,barCode];
+        array = @[BQFast,BQAli,BQWeChat,deposit,unionQR,aliQR,online,wxQR,jdQR,qqQR,wap,YSF,unionPay,coin,card,BTC,barCode];
     } else {
-        array = @[unionQR,jdQR,ali,BQFast,BQWeChat,BQAli,aliQR,wxQR,qqQR,online,deposit,wap,unionPay,coin,card,BTC,barCode];
+        array = @[unionQR,jdQR,ali,BQFast,BQWeChat,BQAli,aliQR,wxQR,qqQR,online,deposit,wap,YSF,unionPay,coin,card,BTC,barCode];
     }
-    
     
     // 没开启的渠道不显示
     for (CNPayChannelModel *channel in array) {

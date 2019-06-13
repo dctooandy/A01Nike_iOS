@@ -181,6 +181,8 @@ typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 #define BTTCoinTimestamp       @"BTTCoinTimestamp"
 
+// 
+
 // 昵称缓存字段
 #define BTTNicknameCache      @"BTTNicknameCache"
 

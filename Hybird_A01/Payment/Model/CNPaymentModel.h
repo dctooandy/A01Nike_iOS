@@ -39,6 +39,7 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
     CNPaymentQQQR,
     CNPaymentUnionQR,
     CNPaymentJDQR,
+    CNPaymentYSFQR,
     
     /// BQ存款 bypaytype-0,1,2
     CNPaymentBQFast,

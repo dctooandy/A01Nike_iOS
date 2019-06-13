@@ -206,6 +206,9 @@
         case CNPaymentWechatBarCode:
             paytypeString = @"23";
             break;
+        case CNPaymentYSFQR:
+            paytypeString = @"27";
+            break;
         case CNPaymentCoin:
             paytypeString = @"41";
             break;

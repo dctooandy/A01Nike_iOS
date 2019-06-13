@@ -123,6 +123,7 @@
         case CNPaymentAliQR:
         case CNPaymentWechatQR:
         case CNPaymentUnionQR:
+        case CNPaymentYSFQR:
         case CNPaymentQQApp:
         case CNPaymentJDApp:
         case CNPaymentWechatApp:

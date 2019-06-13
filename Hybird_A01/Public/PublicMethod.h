@@ -217,6 +217,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSInteger)checkIsHaveNumAndLetter:(NSString *)str;
 
+#pragma mark - 将某个时间转化成 时间戳
++ (NSInteger)timeSwitchTimestamp:(NSString *)formatTime andFormatter:(NSString *)format;
+
 @end
 
 NS_ASSUME_NONNULL_END

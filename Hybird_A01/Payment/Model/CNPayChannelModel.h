@@ -40,6 +40,7 @@ typedef NS_ENUM(NSUInteger, CNPayChannel) {
     CNPayChannelQQQR,
     CNPayChannelUnionQR,
     CNPayChannelJDQR,
+    CNPayChannelYSFQR,
     
     /// BQ存款
     CNPayChannelBQFast,
