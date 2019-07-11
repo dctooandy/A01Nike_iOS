@@ -9,6 +9,7 @@
 #import "CNPayBQStep1VC.h"
 #import "CNCompleteInfoView.h"
 #import "CNPayNormalTF.h"
+#import "BTTBishangStep1VC.h"
 
 @interface CNPayBQStep1VC ()
 
@@ -29,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomTipView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTipViewHeight;
 
+@property (nonatomic, strong) BTTBishangStep1VC *BSStep1VC;
+
 @property (nonatomic, strong) CNPayBankCardModel *chooseBank;
 @property (nonatomic, copy) NSArray *bankNames;
 @end
@@ -48,6 +51,17 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setViewHeight:450 fullScreen:NO];
+//    if (self.paymentModel.paymentType == CNPaymentBS) {
+        [self configBishangUI];
+//    }
+}
+
+- (void)configBishangUI {
+    _BSStep1VC = [[BTTBishangStep1VC alloc] init];
+//    _BSStep1VC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, 1000);
+    _BSStep1VC.paymentModel = self.paymentModel;
+    [self addChildViewController:_BSStep1VC];
+    [self.view addSubview:_BSStep1VC.view];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

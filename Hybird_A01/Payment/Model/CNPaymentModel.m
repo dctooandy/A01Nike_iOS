@@ -68,6 +68,8 @@
             return @"钻石币支付";
         case CNPaymentYSFQR:
             return @"云闪付扫码";
+        case CNPaymentBS:
+            return @"币商充值";
             
     }
 }
@@ -98,6 +100,10 @@
             return @"me_bibao";
         case CNPaymentDeposit:
             return @"me_hand";
+        case CNPaymentYSFQR:
+            return @"me_YSF";
+        case CNPaymentBS:
+            return @"me_bishang";
         default:
             return nil;
     }
@@ -135,6 +141,7 @@
             return @[@(100), @(1000), @(10000), @(50000), @(150000)];
             break;
         case CNPaymentCoin:
+        case CNPaymentBS:
             return @[];
             break;
     }

@@ -32,7 +32,7 @@
 
 #pragma mark - ========================* Payment *===========================================
 /// 预设支付方式总个数
-NSInteger const kPayTypeTotalCount = 19;
+NSInteger const kPayTypeTotalCount = 21;
 
 + (void)queryAllChannelCompleteHandler:(IVRequestCallBack)completeHandler {
     
@@ -40,11 +40,11 @@ NSInteger const kPayTypeTotalCount = 19;
     // 杂项：在线，点卡，手工，比特币，微信条码, 钻石币支付
     // app：微信，支付宝，QQ，网银, 京东
     // 扫码：支付宝，微信，QQ，银联, 京东
-    // BQ快速：快速，微信，支付宝
+    // BQ快速：快速，微信，支付宝, 币商
     NSArray *channelArr = @[@"online-1",@"card",@"deposit",@"online-20",@"online-23",@"online-41",
                             @"online-8",@"online-9",@"online-11",@"online-27",@"online-19",@"online-17",
                             @"online-5",@"online-6",@"online-7",@"online-15",@"online-16",
-                            @"bqpaytype-0",@"bqpaytype-1",@"bqpaytype-2"];
+                            @"bqpaytype-0",@"bqpaytype-1",@"bqpaytype-2",@"biMerchant"];
     params[@"list"] = [channelArr componentsJoinedByString:@";"];
     
     [self cacheWithUrl:kPaymentValidate parameters:params handler:completeHandler];

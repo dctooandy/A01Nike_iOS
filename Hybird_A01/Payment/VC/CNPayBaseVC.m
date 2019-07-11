@@ -216,6 +216,7 @@
         case CNPaymentBQFast:
         case CNPaymentBQWechat:
         case CNPaymentBQAli:
+        case CNPaymentBS:
             paytypeString = @"";
             break;
     }

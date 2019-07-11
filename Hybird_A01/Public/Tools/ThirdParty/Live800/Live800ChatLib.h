@@ -11,7 +11,26 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+UIKIT_EXTERN NSString * const LIVChatUIWillAppearNotification;
+
+UIKIT_EXTERN NSString * const LIVChatUIWillDisappearNotification;
+
 @interface Live800ChatLib : NSObject
+
+/**
+ 设置密钥,必须在进入对话前调用
+
+ @param interfaceKey 密钥值
+ */
++ (void)setInterfaceKey:(NSString *)interfaceKey;
+
+
+/**
+ 设置对话页面导航栏标题,必须在进入对话前调用
+
+ @param chatTitle 标题内容
+ */
++ (void)setChatTitle:(NSString *)chatTitle;
 
 /**
  SDK初始化，必须在startService之前调用，推荐在程序启动时调用。此方法不会进行网络连接。如果调用处在非主线程，回调函数会在主线程中调用。如果调用处已处于主线程队列，则直接返回。
@@ -19,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param successBlock 主线程中成功回调
  @param failedBlock 主线程中失败回调
  */
-+ (void)setupLive800ChatWithSuccessBlock:(void(^)())successBlock
++ (void)setupLive800ChatWithSuccessBlock:(void(^)(void))successBlock
                              failedBlock:(void(^)(NSError * error))failedBlock;
 
 
@@ -56,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param failedBlock 异步失败回调
  */
 + (void)removeMessagesForUserAccount:(NSString * _Nullable)userAccount
-                        successBlock:(void(^)())successBlock
+                        successBlock:(void(^)(void))successBlock
                          failedBlock:(void(^)(NSError * error))failedBlock;
 
 @end

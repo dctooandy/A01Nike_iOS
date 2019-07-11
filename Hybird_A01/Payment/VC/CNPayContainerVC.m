@@ -144,7 +144,8 @@
             break;
         case CNPaymentBQFast:
         case CNPaymentBQWechat:
-        case CNPaymentBQAli: {
+        case CNPaymentBQAli:
+        case CNPaymentBS: {
             
             [viewControllers addObjectsFromArray:[self BQPay:payment]];
         }

@@ -105,6 +105,14 @@
             self.channelName    = @"京东扫码";
             self.selectedIcon   = @"pay_QRJD";
             break;
+        case CNPayChannelYSFQR:
+            self.channelName    = @"云闪付扫码";
+            self.selectedIcon   = @"me_YSF";
+            break;
+        case CNPayChannelBS:
+            self.channelName    = @"币商支付";
+            self.selectedIcon   = @"me_bishang";
+            
     }
 }
 

@@ -30,6 +30,7 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
     CNPaymentWechatApp,
     CNPaymentAliApp,
     CNPaymentQQApp,
+    CNPaymentYSFQR,
     CNPaymentUnionApp,
     CNPaymentJDApp,
     
@@ -39,12 +40,13 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
     CNPaymentQQQR,
     CNPaymentUnionQR,
     CNPaymentJDQR,
-    CNPaymentYSFQR,
     
     /// BQ存款 bypaytype-0,1,2
     CNPaymentBQFast,
     CNPaymentBQWechat,
     CNPaymentBQAli,
+    
+    CNPaymentBS ///< 币商
 };
 
 @interface CNPaymentModel : JSONModel

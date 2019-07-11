@@ -43,11 +43,11 @@
             self.tryPlayIcon.hidden = NO;
         }
     }
-    if ([self.gameName isEqualToString:@"BTI体育"]) {
-        self.hotIcon.hidden = NO;
-    } else {
-        self.hotIcon.hidden = YES;
-    }
+//    if ([self.gameName isEqualToString:@"BTI体育"]) {
+//        self.hotIcon.hidden = NO;
+//    } else {
+//        self.hotIcon.hidden = YES;
+//    }
 }
 
 - (void)setGameName:(NSString *)gameName {
