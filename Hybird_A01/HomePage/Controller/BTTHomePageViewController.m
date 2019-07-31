@@ -70,13 +70,13 @@
     [self loadDataOfHomePage];
     [self registerNotification];
     [IVNetwork registException];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        if ([PublicMethod timeIntervalSince1970].integerValue >= [PublicMethod timeSwitchTimestamp:@"2019-06-07 00:00:00" andFormatter:@"YYYY-MM-dd hh:mm:ss"] && [PublicMethod timeIntervalSince1970].integerValue <= [PublicMethod timeSwitchTimestamp:@"2019-07-07 23:59:59" andFormatter:@"YYYY-MM-dd hh:mm:ss"]) {
-            
-        }
-        [self showMidAutumnPopView];
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        
+//        if ([PublicMethod timeIntervalSince1970].integerValue >= [PublicMethod timeSwitchTimestamp:@"2019-06-07 00:00:00" andFormatter:@"YYYY-MM-dd hh:mm:ss"] && [PublicMethod timeIntervalSince1970].integerValue <= [PublicMethod timeSwitchTimestamp:@"2019-07-07 23:59:59" andFormatter:@"YYYY-MM-dd hh:mm:ss"]) {
+//            
+//        }
+//        [self showMidAutumnPopView];
+//    });
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -699,6 +699,12 @@
             model.cnName = @"AS电游";
             model.enName =  kASSlotEnName;
             model.provider = kASSlotProvider;
+            break;
+        case 8://AG彩票
+            model = [[IVGameModel alloc] init];
+            model.cnName = @"AG彩票";
+            model.enName = @"K8";
+            model.provider = @"K8";
             break;
         default:
             break;

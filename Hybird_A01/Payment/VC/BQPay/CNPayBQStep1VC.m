@@ -51,9 +51,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setViewHeight:450 fullScreen:NO];
-//    if (self.paymentModel.paymentType == CNPaymentBS) {
+    if (self.paymentModel.paymentType == CNPaymentBS) {
         [self configBishangUI];
-//    }
+    }
 }
 
 - (void)configBishangUI {

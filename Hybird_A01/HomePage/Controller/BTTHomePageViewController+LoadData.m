@@ -198,8 +198,8 @@ static const char *BTTNextGroupKey = "nextGroup";
     if (self.games.count) {
         [self.games removeAllObjects];
     }
-    NSArray *gamesIcons = @[@"AGQJ",@"AGGJ",@"Fishing_king",@"game",@"shaba",@"guanjun",@"BTI",@"AS"];
-    NSArray *gameNames = @[@"AG旗舰厅",@"AG国际厅",@"捕鱼王",@"电子游戏",@"沙巴体育",@"体育VIP厅",@"BTI体育",@"AS"];
+    NSArray *gamesIcons = @[@"AGQJ",@"AGGJ",@"Fishing_king",@"game",@"shaba",@"guanjun",@"BTI",@"AS",@"AGCP"];
+    NSArray *gameNames = @[@"AG旗舰厅",@"AG国际厅",@"捕鱼王",@"电子游戏",@"沙巴体育",@"体育VIP厅",@"BTI体育",@"AS真人棋牌",@"AG彩票"];
     NSMutableArray *games = [NSMutableArray array];
     for (NSString *icon in gamesIcons) {
         NSInteger index = [gamesIcons indexOfObject:icon];
