@@ -8,7 +8,7 @@
 
 #import "BTTCollectionViewController.h"
 
-typedef void(^CompleteBlock)(IVRequestResultModel *result, id response);
+typedef void(^CompleteBlock)(IVRequestResultModel * _Nullable result, id response);
 
 @class BTTXimaTotalModel;
 
@@ -35,6 +35,16 @@ typedef enum {
     BTTXimaStatusTypeSuccess     ///< 洗码成功页面
 }BTTXimaStatusType;
 
+typedef enum {
+    BTTXimaDateTypeThisWeek, //本周
+    BTTXimaDateTypeLastWeek  //上周
+}BTTXimaDateType;
+
+typedef enum {
+    BTTXimaThisWeekTypeVaild, ///< 当前
+    BTTXimaThisWeekTypeOther  ///< other
+}BTTXimaThisWeekType;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTXimaController : BTTCollectionViewController
@@ -54,6 +64,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BTTXimaStatusType ximaStatusType;
 
 @property (nonatomic, copy) CompleteBlock completeBlock;
+
+@property (nonatomic, assign) BTTXimaDateType ximaDateType; ///< 洗码页面显示类型
+
+@property (nonatomic, assign) BTTXimaThisWeekType thisWeekDataType; ///< this week 数据类型
 
 @end
 

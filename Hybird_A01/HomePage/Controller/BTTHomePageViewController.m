@@ -680,27 +680,27 @@
             model.provider =  kShaBaProvider;
             
             break;
-        case 5:
-            model = [[IVGameModel alloc] init];
-            model.cnName = @"体育VIP厅";
-            model.enName =  @"CS";
-            model.provider =  @"CS";//@"SBT";
-            model.language = @"zh";
-            //            model.gameCode =  @"";//@"087";
-            break;
-        case 6://BTI体育
+//        case 5:
+//            model = [[IVGameModel alloc] init];
+//            model.cnName = @"体育VIP厅";
+//            model.enName =  @"CS";
+//            model.provider =  @"CS";//@"SBT";
+//            model.language = @"zh";
+//            //            model.gameCode =  @"";//@"087";
+//            break;
+        case 5://BTI体育
             model = [[IVGameModel alloc] init];
             model.cnName = @"BTI体育";
             model.enName =  @"SBT_BTI";
             model.provider =  @"SBT";
             break;
-        case 7://AS电游
+        case 6://AS电游
             model = [[IVGameModel alloc] init];
             model.cnName = @"AS电游";
             model.enName =  kASSlotEnName;
             model.provider = kASSlotProvider;
             break;
-        case 8://AG彩票
+        case 7://AG彩票
             model = [[IVGameModel alloc] init];
             model.cnName = @"AG彩票";
             model.enName = @"K8";
@@ -717,7 +717,7 @@
             [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
         }
     } else {
-        if (gameModel.index == 4) {
+        if (gameModel.index == 4 || gameModel.index == 7) {
             [MBProgressHUD showError:@"请先登录" toView:nil];
             BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];

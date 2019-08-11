@@ -23,21 +23,9 @@
 #import "BTTXimaSuccessItemModel.h"
 #import "BTTXimaLogController.h"
 
-typedef enum {
-    BTTXimaDateTypeThisWeek, //本周
-    BTTXimaDateTypeLastWeek  //上周
-}BTTXimaDateType;
 
-typedef enum {
-    BTTXimaThisWeekTypeVaild, ///< 当前
-    BTTXimaThisWeekTypeOther  ///< other
-}BTTXimaThisWeekType;
 
 @interface BTTXimaController ()<BTTElementsFlowLayoutDelegate>
-
-@property (nonatomic, assign) BTTXimaDateType ximaDateType; ///< 洗码页面显示类型
-
-@property (nonatomic, assign) BTTXimaThisWeekType thisWeekDataType; ///< this week 数据类型
 
 @end
 

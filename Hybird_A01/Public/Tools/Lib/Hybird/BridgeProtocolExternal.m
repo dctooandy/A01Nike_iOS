@@ -25,6 +25,7 @@
 #import "BTTSaveMoneyErrorModel.h"
 #import "BTTSaveMoneyModifyViewController.h"
 #import "NSString+MD5.h"
+#import "BTTXimaController.h"
 
 @interface BridgeProtocolExternal ()<JXRegisterManagerDelegate>
 
@@ -201,6 +202,9 @@
     }
     else if ([url containsString:@"customer/withdrawl.htm"]){//提现
         [self.controller.navigationController pushViewController:[BTTWithdrawalController new] animated:YES];
+    } else if([url containsString:@"common/ximaOther.htm"]) {
+        BTTXimaController *xima = [BTTXimaController new];
+        [self.controller.navigationController pushViewController:xima animated:YES];
     }
     else {
         should = NO;
