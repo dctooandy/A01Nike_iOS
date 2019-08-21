@@ -8,9 +8,13 @@
 
 #import "BTTBaseCollectionViewCell.h"
 
+@class BTTPosterModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTHomePageFooterCell : BTTBaseCollectionViewCell
+
+@property (nonatomic, strong) BTTPosterModel *model;
 
 @end
 

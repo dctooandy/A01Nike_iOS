@@ -240,6 +240,8 @@
             return cell;
         } else if (indexPath.row == 13 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTHomePageFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageFooterCell" forIndexPath:indexPath];
+            
+            cell.model = self.posters.count > 1 ? self.posters[1] : nil;
             return cell;
         } else  {
             BTTHomePageAmountsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAmountsCell" forIndexPath:indexPath];
@@ -343,6 +345,7 @@
             return cell;
         } else if (indexPath.row == 12 + (self.promotions.count ? self.promotions.count : 3)) {
             BTTHomePageFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageFooterCell" forIndexPath:indexPath];
+            cell.model = self.posters.count > 1 ? self.posters[1] : nil;
             return cell;
         }
         else {
@@ -466,8 +469,13 @@
             vc.webConfigModel.theme = @"inside";
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 0 || indexPath.row == 13 + (self.promotions.count ? self.promotions.count : 3)) {
-            BTTPosterModel * model = self.posters.count ? self.posters[0] : nil;
-            if (!model) {
+            BTTPosterModel * model = nil;
+            if (indexPath.row == 0) {
+                model = self.posters.count ? self.posters[0] : nil;
+            } else {
+                model = self.posters.count > 1 ? self.posters[1] : nil;
+            }
+            if (!model.link.length || !model) {
                 return;
             }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
@@ -507,8 +515,8 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
         } else if (indexPath.row == 12 + (self.promotions.count ? self.promotions.count : 3)) {
-            BTTPosterModel * model = self.posters.count ? self.posters[0] : nil;
-            if (!model) {
+            BTTPosterModel * model = self.posters.count > 1 ? self.posters[1] : nil;
+            if (!model.link.length || !model) {
                 return;
             }
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];

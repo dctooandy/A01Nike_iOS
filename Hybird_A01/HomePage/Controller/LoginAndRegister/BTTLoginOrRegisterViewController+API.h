@@ -26,6 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)getAccountsByPhone;
 
+- (void)createAccountNormalWithAPIModel:(BTTCreateAPIModel *)model;
+
+- (void)fastRegisterAPIModel:(BTTCreateAPIModel *)model;
+
 
 @end
 

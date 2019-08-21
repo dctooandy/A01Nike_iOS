@@ -16,6 +16,7 @@
 #import "BTTRegisterSuccessController.h"
 #import "BTTUserStatusManager.h"
 #import "BTTLoginAccountSelectView.h"
+#import "BTTRegisterCheckPopView.h"
 
 @implementation BTTLoginOrRegisterViewController (API)
 
@@ -288,6 +289,7 @@
             [MBProgressHUD showError:@"请输入验证码" toView:self.view];
             return;
         }
+        model.v = @"v1";
         [self createAccountNormalWithAPIModel:model];
     } else if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
         if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
@@ -307,6 +309,7 @@
                 [MBProgressHUD showError:@"请输入验证码" toView:self.view];
                 return;
             }
+            model.v = @"v1";
             [self fastRegisterAPIModel:model];
         } else {
             BTTRegisterQuickManualCell *cell = (BTTRegisterQuickManualCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
@@ -340,6 +343,7 @@
                 [MBProgressHUD showError:@"请输入验证码" toView:self.view];
                 return;
             }
+            model.v = @"v1";
             [self fastRegisterAPIModel:model];
         } 
     }
@@ -357,24 +361,30 @@
     if (model.phone.length) {
         [params setObject:model.phone forKey:BTTPhone];
     }
+    
+    [params setObject:model.v forKey:@"v"];
     [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTSuperFastRegister paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         [self hideLoading];
         self.uuid = @"";
         if (result.status) {
-            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-                BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
-                vc.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
-                vc.account = result.data[@"login_name"];
-                vc.pwd = result.data[@"password"];
-                [self.navigationController pushViewController:vc animated:YES];
-                
-                BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
-                loginModel.login_name = result.data[@"login_name"];
-                loginModel.password = result.data[@"password"];
-                loginModel.timestamp = [PublicMethod timeIntervalSince1970];
-                [self loginWithLoginAPIModel:loginModel isBack:NO];
+            if (result.code_system == 2001) {
+                [self showRegisterCheckViewWithModel:model];
+            } else {
+                if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
+                    BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
+                    vc.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
+                    vc.account = result.data[@"login_name"];
+                    vc.pwd = result.data[@"password"];
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                    BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
+                    loginModel.login_name = result.data[@"login_name"];
+                    loginModel.password = result.data[@"password"];
+                    loginModel.timestamp = [PublicMethod timeIntervalSince1970];
+                    [self loginWithLoginAPIModel:loginModel isBack:NO];
+                }
             }
         }
         if (result.message.length) {
@@ -398,26 +408,31 @@
     if (model.login_name.length) {
         [params setObject:model.login_name forKey:BTTLoginName];
     }
+    [params setObject:model.v forKey:@"v"];
     [self showLoading];
     [IVNetwork sendRequestWithSubURL:BTTUserFastRegister paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
         if (result.status) {
-            if (result.data && ![result.data isKindOfClass:[NSNull class]] && [result.data isKindOfClass:[NSDictionary class]]) {
-                if (![result.data[@"login_name"] isKindOfClass:[NSNull class]] && result.data[@"login_name"]) {
-                    if (result.message.length) {
-                        [MBProgressHUD showSuccess:result.message toView:nil];
+            if (result.code_system == 2001) {
+                [self showRegisterCheckViewWithModel:model];
+            } else {
+                if (result.data && ![result.data isKindOfClass:[NSNull class]] && [result.data isKindOfClass:[NSDictionary class]]) {
+                    if (![result.data[@"login_name"] isKindOfClass:[NSNull class]] && result.data[@"login_name"]) {
+                        if (result.message.length) {
+                            [MBProgressHUD showSuccess:result.message toView:nil];
+                        }
+                        BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
+                        vc.registerOrLoginType = self.registerOrLoginType;
+                        vc.account = result.data[@"login_name"];
+                        vc.pwd = result.data[@"password"];
+                        [self.navigationController pushViewController:vc animated:YES];
+                        
+                        BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
+                        loginModel.login_name = result.data[@"login_name"];
+                        loginModel.password = result.data[@"password"];
+                        loginModel.timestamp = [PublicMethod timeIntervalSince1970];
+                        [self loginWithLoginAPIModel:loginModel isBack:NO];
                     }
-                    BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
-                    vc.registerOrLoginType = self.registerOrLoginType;
-                    vc.account = result.data[@"login_name"];
-                    vc.pwd = result.data[@"password"];
-                    [self.navigationController pushViewController:vc animated:YES];
-                    
-                    BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
-                    loginModel.login_name = result.data[@"login_name"];
-                    loginModel.password = result.data[@"password"];
-                    loginModel.timestamp = [PublicMethod timeIntervalSince1970];
-                    [self loginWithLoginAPIModel:loginModel isBack:NO];
                 }
             }
         } else {

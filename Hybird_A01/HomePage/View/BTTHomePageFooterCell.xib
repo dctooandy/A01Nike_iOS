@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,9 +20,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="footer" translatesAutoresizingMaskIntoConstraints="NO" id="kme-Tv-f08">
-                        <rect key="frame" x="60" y="35" width="255" height="37"/>
+                        <rect key="frame" x="60" y="25.5" width="255" height="46.5"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="37" id="RfV-t6-ESl"/>
+                            <constraint firstAttribute="width" constant="255" id="7EJ-9b-Cft"/>
+                            <constraint firstAttribute="height" constant="46.5" id="RfV-t6-ESl"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -33,7 +34,10 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="375" height="80"/>
-            <point key="canvasLocation" x="128.80000000000001" y="162.81859070464768"/>
+            <connections>
+                <outlet property="imageView" destination="kme-Tv-f08" id="oLE-HE-KzR"/>
+            </connections>
+            <point key="canvasLocation" x="-247" y="162"/>
         </collectionViewCell>
     </objects>
     <resources>

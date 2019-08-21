@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="BTTRegisterCheckPopView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="310"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="温馨提示" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JkO-ei-aht">
+                    <rect key="frame" x="123.33333333333331" y="20" width="73.666666666666686" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" red="0.16078431369999999" green="0.1764705882" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="亲爱的会员, 系统检测到同手机号码下存在其他游戏账号, 建议您使用原有账号进行游戏." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSD-NO-Ma8">
+                    <rect key="frame" x="15" y="56" width="290" height="54"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fa2-kD-XYr">
+                    <rect key="frame" x="30" y="137" width="260" height="41"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="41" id="Kkc-Vn-7JR"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="取消注册" backgroundImage="login_btn_normal">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="cancelClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="nJq-2e-tkW"/>
+                    </connections>
+                </button>
+                <button opaque="NO" clipsSubviews="YES" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELr-Rc-bye">
+                    <rect key="frame" x="30" y="193" width="260" height="41"/>
+                    <color key="backgroundColor" red="0.47058823529411764" green="0.50588235294117645" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="41" id="cmx-Uk-5E5"/>
+                    </constraints>
+                    <state key="normal" title="注销原账号 (联系客服)">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="logoutClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="u3l-pc-8D2"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAN-s8-mVe">
+                    <rect key="frame" x="39" y="249" width="242" height="41"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="41" id="bf1-Ml-tLf"/>
+                    </constraints>
+                    <state key="normal" title="继续注册 (不推荐)"/>
+                    <connections>
+                        <action selector="registerClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="tMT-WL-ur4"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="DAN-s8-mVe" secondAttribute="bottom" constant="20" id="4vu-Ds-Mwl"/>
+                <constraint firstItem="ELr-Rc-bye" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="G9V-nU-1T2"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HSD-NO-Ma8" secondAttribute="trailing" constant="15" id="Mm1-DB-Mhm"/>
+                <constraint firstItem="DAN-s8-mVe" firstAttribute="top" secondItem="ELr-Rc-bye" secondAttribute="bottom" constant="15" id="PF6-6d-DaU"/>
+                <constraint firstItem="HSD-NO-Ma8" firstAttribute="top" secondItem="JkO-ei-aht" secondAttribute="bottom" constant="15" id="Pe0-CK-bRe"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ELr-Rc-bye" secondAttribute="trailing" constant="30" id="Q99-mJ-DPT"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="DAN-s8-mVe" secondAttribute="trailing" constant="39" id="gjc-6K-awV"/>
+                <constraint firstItem="JkO-ei-aht" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="nok-RP-Le5"/>
+                <constraint firstItem="DAN-s8-mVe" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="39" id="pO5-Vo-xnC"/>
+                <constraint firstItem="JkO-ei-aht" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="qDr-a9-6Ji"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="fa2-kD-XYr" secondAttribute="trailing" constant="30" id="qUf-cd-1HR"/>
+                <constraint firstItem="fa2-kD-XYr" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="uf4-y3-tqO"/>
+                <constraint firstItem="HSD-NO-Ma8" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="vmI-QJ-xcb"/>
+                <constraint firstItem="ELr-Rc-bye" firstAttribute="top" secondItem="fa2-kD-XYr" secondAttribute="bottom" constant="15" id="xth-ob-L8u"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="logoutBtn" destination="ELr-Rc-bye" id="sfy-NQ-liz"/>
+            </connections>
+            <point key="canvasLocation" x="-343" y="249"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="login_btn_normal" width="310" height="41"/>
+    </resources>
+</document>

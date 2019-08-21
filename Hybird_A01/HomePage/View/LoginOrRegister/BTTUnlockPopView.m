@@ -61,9 +61,9 @@
     if (phone.length) {
         [params setObject:phone forKey:@"bingphone"];
     }
-    if (info.length) {
-        [params setObject:info forKey:@"reserved"];
-    }
+//    if (info.length) {
+//        [params setObject:info forKey:@"reserved"];
+//    }
     [params setObject:loginName forKey:@"loginname"];
     
     [IVNetwork sendRequestWithSubURL:BTTUnlockAccount paramters:params completionBlock:^(IVRequestResultModel *result, id response) {

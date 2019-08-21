@@ -15,7 +15,7 @@
 }
 
 - (NSString *)link {
-    if (![_link hasPrefix:@"http"]) {
+    if (![_link hasPrefix:@"http"] && _link.length) {
         return [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain], _link];
     }
     return _link;
@@ -26,7 +26,7 @@
 @implementation BTTPosterLogoModel
 
 - (NSString *)path {
-    if (![_path hasPrefix:@"http"]) {
+    if (![_path hasPrefix:@"http"] && _path.length) {
         return [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain], _path];
     }
     return _path;

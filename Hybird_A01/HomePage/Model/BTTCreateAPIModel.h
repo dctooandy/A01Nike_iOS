@@ -24,7 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *verify_code;///< 手机验证码
 
+@property (nonatomic, copy) NSString *v;          ///< 分支v1
 
+@property (nonatomic, copy) NSString *version;    ///< 版本号;
 
 @end
 

@@ -296,6 +296,8 @@
 		3A685BA8227161AF00A8F59D /* BTTNicknameSetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A685BA7227161AF00A8F59D /* BTTNicknameSetController.m */; };
 		3A6DD5F2228914FE000288B2 /* BTTAndroid88PopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A6DD5F1228914FE000288B2 /* BTTAndroid88PopView.m */; };
 		3A6DD5F62289161C000288B2 /* BTTAndroid88PopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6DD5F52289161C000288B2 /* BTTAndroid88PopView.xib */; };
+		3A7391CC230CD12A00E2DFD5 /* BTTRegisterCheckPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7391CB230CD12A00E2DFD5 /* BTTRegisterCheckPopView.m */; };
+		3A7391CE230CD14600E2DFD5 /* BTTRegisterCheckPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7391CD230CD14600E2DFD5 /* BTTRegisterCheckPopView.xib */; };
 		3A75A17622114DB100584A35 /* BTTLoginNoRegisterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A75A17422114DB100584A35 /* BTTLoginNoRegisterCell.m */; };
 		3A75A17722114DB100584A35 /* BTTLoginNoRegisterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A75A17522114DB100584A35 /* BTTLoginNoRegisterCell.xib */; };
 		3A75A17B22115C9800584A35 /* BTTLoginAccountSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A75A17A22115C9800584A35 /* BTTLoginAccountSelectView.m */; };
@@ -1103,6 +1105,9 @@
 		3A6DD5F0228914FE000288B2 /* BTTAndroid88PopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTAndroid88PopView.h; sourceTree = "<group>"; };
 		3A6DD5F1228914FE000288B2 /* BTTAndroid88PopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTAndroid88PopView.m; sourceTree = "<group>"; };
 		3A6DD5F52289161C000288B2 /* BTTAndroid88PopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTAndroid88PopView.xib; sourceTree = "<group>"; };
+		3A7391CA230CD12A00E2DFD5 /* BTTRegisterCheckPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTRegisterCheckPopView.h; sourceTree = "<group>"; };
+		3A7391CB230CD12A00E2DFD5 /* BTTRegisterCheckPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTRegisterCheckPopView.m; sourceTree = "<group>"; };
+		3A7391CD230CD14600E2DFD5 /* BTTRegisterCheckPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTRegisterCheckPopView.xib; sourceTree = "<group>"; };
 		3A75A17322114DB100584A35 /* BTTLoginNoRegisterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLoginNoRegisterCell.h; sourceTree = "<group>"; };
 		3A75A17422114DB100584A35 /* BTTLoginNoRegisterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLoginNoRegisterCell.m; sourceTree = "<group>"; };
 		3A75A17522114DB100584A35 /* BTTLoginNoRegisterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTLoginNoRegisterCell.xib; sourceTree = "<group>"; };
@@ -2499,6 +2504,16 @@
 			path = Andriod88;
 			sourceTree = "<group>";
 		};
+		3A7391C9230CD0D400E2DFD5 /* RegisterCheckView */ = {
+			isa = PBXGroup;
+			children = (
+				3A7391CA230CD12A00E2DFD5 /* BTTRegisterCheckPopView.h */,
+				3A7391CB230CD12A00E2DFD5 /* BTTRegisterCheckPopView.m */,
+				3A7391CD230CD14600E2DFD5 /* BTTRegisterCheckPopView.xib */,
+			);
+			path = RegisterCheckView;
+			sourceTree = "<group>";
+		};
 		3A75A17822115C2900584A35 /* AccountSelect */ = {
 			isa = PBXGroup;
 			children = (
@@ -2998,6 +3013,7 @@
 		3AAE81FB219A738B003EC8B0 /* LoginOrRegister */ = {
 			isa = PBXGroup;
 			children = (
+				3A7391C9230CD0D400E2DFD5 /* RegisterCheckView */,
 				3AAE8209219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.h */,
 				3AAE81FC219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m */,
 				3AAE8211219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.xib */,
@@ -4195,6 +4211,7 @@
 				3A5AE6ED22D6E22A0013E8A3 /* LIVVideoCamera_trash@2x.png in Resources */,
 				D5DBEB4021AC1355008AF629 /* CNPayQRCell.xib in Resources */,
 				3A5AE71B22D6E22B0013E8A3 /* LIVImagePicker.bundle in Resources */,
+				3A7391CE230CD14600E2DFD5 /* BTTRegisterCheckPopView.xib in Resources */,
 				3A5AE6F922D6E22A0013E8A3 /* receivedVoicePlaying3@3x.png in Resources */,
 				3A5AE6B222D6E22A0013E8A3 /* receivedVoicePlaying2@3x.png in Resources */,
 				3A5AE6FB22D6E22A0013E8A3 /* LIVLibraryItem@3x.png in Resources */,
@@ -4627,6 +4644,7 @@
 				3A11AE222183FF0000B1AFF4 /* BTTPasswordChangeBtnsCell.m in Sources */,
 				D599251421AE5AF6001E885A /* CNPayNormalTF.m in Sources */,
 				3AD9CF72216F3D6800685B43 /* BTTHomePageAppsCell.m in Sources */,
+				3A7391CC230CD12A00E2DFD5 /* BTTRegisterCheckPopView.m in Sources */,
 				EAA4811B21ABD265000C0273 /* BTTAGQJViewController.m in Sources */,
 				3A8F51E7215F78F50069D1B3 /* BTTBaseNavigationController.m in Sources */,
 				3A929423219C3B7500764E7E /* BTTRegisterSuccessOneCell.m in Sources */,
@@ -5118,7 +5136,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Hybird_A01/Hybird_A01.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T52TF6XR23;
 				ENABLE_BITCODE = NO;
@@ -5145,7 +5163,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
-				PROVISIONING_PROFILE_SPECIFIER = iPhone0613_dev;
+				PROVISIONING_PROFILE_SPECIFIER = iPhone0613_AdHoc;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

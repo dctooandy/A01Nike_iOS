@@ -10,11 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class BTTCreateAPIModel;
+
 @interface BTTLoginOrRegisterViewController (UI)
 
 - (void)showPopViewWithAccount:(NSString *)account;
 
 - (void)showPopView;
+
+- (void)showRegisterCheckViewWithModel:(BTTCreateAPIModel *)mdoel;
+
+
 
 @end
 
