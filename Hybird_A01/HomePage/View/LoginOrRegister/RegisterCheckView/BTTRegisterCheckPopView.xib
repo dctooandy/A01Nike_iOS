@@ -86,8 +86,9 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="logoutBtn" destination="ELr-Rc-bye" id="sfy-NQ-liz"/>
+                <outlet property="registerBtn" destination="DAN-s8-mVe" id="6gI-M4-tP1"/>
             </connections>
-            <point key="canvasLocation" x="-343" y="249"/>
+            <point key="canvasLocation" x="-877" y="220"/>
         </view>
     </objects>
     <resources>

@@ -193,29 +193,6 @@
             }
         } else {
             if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
-                BTTRegisterNinameNormalCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterNinameNormalCell" forIndexPath:indexPath];
-                cell.codeImageView.image = self.codeImage;
-                cell.phoneTextField.delegate = self;
-                cell.verifyTextField.delegate = self;
-                weakSelf(weakSelf);
-                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-                    strongSelf(strongSelf);
-                    if (button.tag == 10013) {
-                        strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
-                        strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
-                        
-                    } else if (button.tag == 10014) {
-                        strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
-                    }
-                    [strongSelf setupElements];
-                };
-                
-                cell.clickEventBlock = ^(id  _Nonnull value) {
-                    strongSelf(strongSelf);
-                    [strongSelf loadVerifyCode];
-                };
-                return cell;
-            } else {
                 if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
                     BTTRegisterQuickAutoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterQuickAutoCell" forIndexPath:indexPath];
                     cell.phoneTextField.delegate = self;
@@ -278,6 +255,29 @@
                     };
                     return cell;
                 }
+            } else {
+                BTTRegisterNinameNormalCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterNinameNormalCell" forIndexPath:indexPath];
+                cell.codeImageView.image = self.codeImage;
+                cell.phoneTextField.delegate = self;
+                cell.verifyTextField.delegate = self;
+                weakSelf(weakSelf);
+                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                    strongSelf(strongSelf);
+                    if (button.tag == 10013) {
+                        strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
+                        strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
+                        
+                    } else if (button.tag == 10014) {
+                        strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
+                    }
+                    [strongSelf setupElements];
+                };
+                
+                cell.clickEventBlock = ^(id  _Nonnull value) {
+                    strongSelf(strongSelf);
+                    [strongSelf loadVerifyCode];
+                };
+                return cell;
             }
         }
     } else {
@@ -321,8 +321,13 @@
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
-                [collectionView endEditing:YES];
-                [strongSelf registerAction];
+                if (button.tag == 10000) {
+                    [collectionView endEditing:YES];
+                    [strongSelf registerAction];
+                } else {
+                    strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
+                    [strongSelf setupElements];
+                }
             };
             return cell;
         }
@@ -407,13 +412,13 @@
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         } else if (i == 2) {
             if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 142)]];
-            } else if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
                 if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 193)]];
                 } else {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 244)]];
                 }
+            } else if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 142)]];
             } else {
                 if (self.loginCellType == BTTLoginCellTypeNormal) {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
@@ -432,7 +437,7 @@
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 50)]];
                 }
             } else {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 125)]];
             }
         }
         

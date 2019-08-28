@@ -62,7 +62,7 @@
             [[CLive800Manager sharedInstance] startLive800Chat:strongSelf];
         } else if (btn.tag == 1002) {
             BTTCreateAPIModel *newModel = model;
-            newModel.v = @"";
+            newModel.v = @"submit";
             if (strongSelf.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
                 [strongSelf createAccountNormalWithAPIModel:model];
             } else if (strongSelf.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {

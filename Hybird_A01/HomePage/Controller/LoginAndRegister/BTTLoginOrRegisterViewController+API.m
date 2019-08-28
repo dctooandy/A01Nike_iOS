@@ -289,7 +289,7 @@
             [MBProgressHUD showError:@"请输入验证码" toView:self.view];
             return;
         }
-        model.v = @"v1";
+        model.v = @"check";
         [self createAccountNormalWithAPIModel:model];
     } else if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
         if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
@@ -309,7 +309,7 @@
                 [MBProgressHUD showError:@"请输入验证码" toView:self.view];
                 return;
             }
-            model.v = @"v1";
+            model.v = @"check";
             [self fastRegisterAPIModel:model];
         } else {
             BTTRegisterQuickManualCell *cell = (BTTRegisterQuickManualCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
@@ -343,7 +343,7 @@
                 [MBProgressHUD showError:@"请输入验证码" toView:self.view];
                 return;
             }
-            model.v = @"v1";
+            model.v = @"check";
             [self fastRegisterAPIModel:model];
         } 
     }
@@ -367,11 +367,11 @@
     [IVNetwork sendRequestWithSubURL:BTTSuperFastRegister paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         [self hideLoading];
-        self.uuid = @"";
         if (result.status) {
             if (result.code_system == 2001) {
                 [self showRegisterCheckViewWithModel:model];
             } else {
+                self.uuid = @"";
                 if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
                     BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
                     vc.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
@@ -386,9 +386,10 @@
                     [self loginWithLoginAPIModel:loginModel isBack:NO];
                 }
             }
-        }
-        if (result.message.length) {
-            [MBProgressHUD showError:result.message toView:nil];
+        } else {
+            if (result.message.length) {
+                [MBProgressHUD showError:result.message toView:nil];
+            }
         }
     }];
 }

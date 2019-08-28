@@ -24,14 +24,14 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9kP-ol-cBO">
                                 <rect key="frame" x="15" y="40" width="142.5" height="1"/>
-                                <color key="backgroundColor" red="0.14117647059999999" green="0.59215686270000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="QWs-m2-R64"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jkf-Su-7gc">
                                 <rect key="frame" x="157.5" y="40" width="142.5" height="1"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.14117647059999999" green="0.59215686270000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="7Jv-uJ-A93"/>
                                 </constraints>
@@ -96,7 +96,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="极速开户">
-                                    <color key="titleColor" red="0.14117647059999999" green="0.59215686270000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="normalBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="CY2-dl-ETA"/>
@@ -109,7 +109,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="普通开户">
-                                    <color key="titleColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.14117647059999999" green="0.59215686270000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="quickBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="dkV-Dt-Ny5"/>
