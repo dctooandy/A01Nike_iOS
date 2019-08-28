@@ -16,7 +16,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *quickBtn;
 
-
 @end
 
 @implementation BTTRegisterNinameNormalCell
@@ -27,11 +26,20 @@
     self.bgView.layer.cornerRadius = 5;
     [self.phoneTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
     [self.verifyTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(refreshCode)];
+    [self.codeImageView addGestureRecognizer:tap];
 }
 
 - (IBAction)btnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
         self.buttonClickBlock(sender);
+    }
+}
+
+- (void)refreshCode {
+    if (self.refreshEventBlock) {
+        self.refreshEventBlock();
     }
 }
 

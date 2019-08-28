@@ -152,13 +152,13 @@
             <size key="customSize" width="375" height="155"/>
             <connections>
                 <outlet property="bgView" destination="PCC-AM-KpK" id="7ij-ya-EhC"/>
-                <outlet property="codeImageView" destination="HnY-Z5-HBu" id="rQn-o5-lmM"/>
+                <outlet property="codeImageView" destination="HnY-Z5-HBu" id="yIb-Rn-0z4"/>
                 <outlet property="normalBtn" destination="uRv-FZ-Yqo" id="J4y-JM-UGn"/>
                 <outlet property="phoneTextField" destination="GlO-nh-gD7" id="qRd-oJ-lSw"/>
                 <outlet property="quickBtn" destination="sHm-nL-KCN" id="7r5-ew-lM1"/>
                 <outlet property="verifyTextField" destination="Vcz-hW-pCD" id="jSn-XB-S9g"/>
             </connections>
-            <point key="canvasLocation" x="-260" y="-17"/>
+            <point key="canvasLocation" x="-836" y="-14"/>
         </collectionViewCell>
     </objects>
     <resources>

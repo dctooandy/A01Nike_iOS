@@ -273,7 +273,7 @@
                     [strongSelf setupElements];
                 };
                 
-                cell.clickEventBlock = ^(id  _Nonnull value) {
+                cell.refreshEventBlock = ^{
                     strongSelf(strongSelf);
                     [strongSelf loadVerifyCode];
                 };
@@ -307,6 +307,7 @@
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                     strongSelf(strongSelf);
                     strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
+                    [strongSelf loadVerifyCode];
                     [strongSelf setupElements];
                 };
                 return cell;
