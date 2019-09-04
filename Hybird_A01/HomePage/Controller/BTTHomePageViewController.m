@@ -65,7 +65,7 @@
     [self pulldownRefreshWithRefreshBlock:^{
         strongSelf(strongSelf);
         NSLog(@"下拉刷新");
-        [strongSelf loadDataOfHomePage];
+        [strongSelf refreshDatasOfHomePage];
     }];
     [self loadDataOfHomePage];
     [self registerNotification];

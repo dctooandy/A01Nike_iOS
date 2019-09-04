@@ -50,7 +50,7 @@
             
             UIImageView *moonImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"moon"]];
             if (KIsiPhoneX) {
-                moonImage.frame = CGRectMake(20, 10, 50, 50);
+                moonImage.frame = CGRectMake(55, 15, 50, 50);
             } else {
                 moonImage.frame = CGRectMake(80, 0, 50, 50);
             }
