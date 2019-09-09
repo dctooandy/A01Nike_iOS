@@ -265,7 +265,7 @@
 - (void)registerAction {
     BTTCreateAPIModel *model = [[BTTCreateAPIModel alloc] init];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
-    if (self.self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
+    if (self.self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
         BTTRegisterNormalCell *cell = (BTTRegisterNormalCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
         model.parent_id = [IVNetwork parentId];
         model.phone = cell.phoneTextField.text;
@@ -291,7 +291,7 @@
         }
         model.v = @"check";
         [self createAccountNormalWithAPIModel:model];
-    } else if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
+    } else if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
         if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
             BTTRegisterQuickAutoCell *cell = (BTTRegisterQuickAutoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
             model.phone = cell.phoneTextField.text;
