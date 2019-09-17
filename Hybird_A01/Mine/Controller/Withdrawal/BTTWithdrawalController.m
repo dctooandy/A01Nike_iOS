@@ -192,7 +192,7 @@
         self.amount = textField.text;
     }
     CGFloat amount = [self.amount doubleValue];
-    BOOL enable = [PublicMethod isValidatePwd:self.password] && amount >= 10 && amount <= 1000000;
+    BOOL enable = amount >= 10 && amount <= 1000000;
     [self getSubmitBtn].enabled = enable;
     if (amount > 1000000) {
         [MBProgressHUD showMessagNoActivity:@"超过最大取款额度!" toView:self.view];
