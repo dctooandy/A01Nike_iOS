@@ -27,7 +27,11 @@
     _model = model;
     self.nameLabel.text = model.name;
     self.detailTextField.placeholder = model.iconName;
-    [_detailTextField setValue:[UIColor colorWithHexString:@"818791"] forKeyPath:@"_placeholderLabel.textColor"];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:_detailTextField.placeholder attributes:
+    @{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"818791"],
+                 NSFontAttributeName:_detailTextField.font
+         }];
+    _detailTextField.attributedPlaceholder = attrString;
 }
 
 

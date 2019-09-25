@@ -20,7 +20,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     _timeOut = 60;
-    [_textField setValue:[UIColor colorWithHexString:@"818791"] forKeyPath:@"_placeholderLabel.textColor"];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:_textField.placeholder attributes:
+    @{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"818791"],
+                 NSFontAttributeName:_textField.font
+         }];
+    _textField.attributedPlaceholder = attrString;
     _textField.textColor = [UIColor whiteColor];
     _textField.delegate = self;
     if (SCREEN_WIDTH == 320) {

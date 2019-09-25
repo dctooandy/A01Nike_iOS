@@ -22,7 +22,11 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [_textField setValue:[UIColor colorWithHexString:@"818791"] forKeyPath:@"_placeholderLabel.textColor"];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:_textField.placeholder attributes:
+    @{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"818791"],
+                 NSFontAttributeName:_textField.font
+         }];
+    _textField.attributedPlaceholder = attrString;
     _textField.delegate = self;
     UIView *backgroundView = [[UIView alloc] initWithFrame:self.bounds];
     backgroundView.backgroundColor =  COLOR_RGBA(36, 40, 49, 1);

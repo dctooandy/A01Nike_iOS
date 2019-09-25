@@ -20,7 +20,7 @@
     [super viewDidLoad];
     self.extendedLayoutIncludesOpaqueBars = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = _weakself;
-    [self setStatusBarBackgroundColor:[UIColor clearColor]];
+//    [self setStatusBarBackgroundColor:[UIColor clearColor]];
     self.view.backgroundColor = COLOR_RGBA(42, 45, 53, 1);
 }
 

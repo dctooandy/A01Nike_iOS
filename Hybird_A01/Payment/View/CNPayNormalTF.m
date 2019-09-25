@@ -32,8 +32,11 @@
     self.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.textAlignment = NSTextAlignmentRight;
     self.textColor = COLOR_HEX(0x82868F);
-    [self setValue:self.textColor forKeyPath:@"_placeholderLabel.textColor"];
-    [self setValue:self.textColor forKeyPath:@"_placeholderLabel.textColor"];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:self.placeholder attributes:
+    @{NSForegroundColorAttributeName:COLOR_HEX(0x82868F),
+                 NSFontAttributeName:self.font
+         }];
+    self.attributedPlaceholder = attrString;
     UIButton *clearButton = [self valueForKey:@"_clearButton"];
     [clearButton setImage:[UIImage imageNamed:@"pay_TFDelete"] forState:UIControlStateNormal];
 }

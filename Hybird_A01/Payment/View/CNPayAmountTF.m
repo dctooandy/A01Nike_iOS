@@ -35,7 +35,11 @@
     self.keyboardType = UIKeyboardTypeDecimalPad;
     [self addTarget:self action:@selector(textFieldEditingChanged) forControlEvents:UIControlEventEditingChanged];
     self.placeholder = @"请输入金额";
-    [self setValue:self.textColor forKeyPath:@"_placeholderLabel.textColor"];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"请输入金额" attributes:
+    @{NSForegroundColorAttributeName:self.textColor,
+                 NSFontAttributeName:self.font
+         }];
+    self.attributedPlaceholder = attrString;
     UIButton *clearButton = [self valueForKey:@"_clearButton"];
     [clearButton setImage:[UIImage imageNamed:@"pay_TFDelete"] forState:UIControlStateNormal];
 }

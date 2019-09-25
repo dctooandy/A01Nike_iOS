@@ -17,7 +17,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [_textField setValue:[UIColor colorWithHexString:@"818791"] forKeyPath:@"_placeholderLabel.textColor"];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:_textField.placeholder attributes:
+    @{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"818791"],
+                 NSFontAttributeName:_textField.font
+         }];
+    _textField.attributedPlaceholder = attrString;
     _textField.delegate = self;
     self.mineSparaterType = BTTMineSparaterTypeNone;
 }

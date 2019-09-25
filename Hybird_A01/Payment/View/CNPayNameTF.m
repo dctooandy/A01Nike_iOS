@@ -33,12 +33,21 @@
     self.font = [UIFont systemFontOfSize:13];
     self.textColor = COLOR_HEX(0xDBBD85);
     self.textAlignment = NSTextAlignmentRight;
-    [self setValue:COLOR_HEX(0x82868F) forKeyPath:@"_placeholderLabel.textColor"];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:self.placeholder attributes:
+    @{NSForegroundColorAttributeName:self.textColor,
+                 NSFontAttributeName:self.font
+         }];
+    self.attributedPlaceholder = attrString;
     self.delegate = self;
     self.clearButtonMode = UITextFieldViewModeWhileEditing;
     self.keyboardType = UIKeyboardTypeDefault;
     [self addTarget:self action:@selector(textFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
-    [self setValue:self.textColor forKeyPath:@"_placeholderLabel.textColor"];
+    
+    NSAttributedString *attrString1 = [[NSAttributedString alloc] initWithString:self.placeholder attributes:
+    @{NSForegroundColorAttributeName:self.textColor,
+                 NSFontAttributeName:self.font
+         }];
+    self.attributedPlaceholder = attrString1;
     UIButton *clearButton = [self valueForKey:@"_clearButton"];
     [clearButton setImage:[UIImage imageNamed:@"pay_TFDelete"] forState:UIControlStateNormal];
 }
