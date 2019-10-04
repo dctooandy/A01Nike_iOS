@@ -17,8 +17,9 @@
 #import <UserNotifications/UserNotifications.h>
 #import "CNPreCacheMananger.h"
 #import "BTTTabBar.h"
+#import "OpenInstallSDK.h"
 
-@interface AppDelegate ()<UNUserNotificationCenterDelegate>
+@interface AppDelegate ()<UNUserNotificationCenterDelegate,OpenInstallDelegate>
 
 @property (nonatomic, strong) dispatch_semaphore_t semaphore;
 @property (nonatomic, strong) UIWindow *areaLimitWindow;
@@ -60,7 +61,14 @@
     [self initRemoteNotificationWithOptions:launchOptions];
     [CNPreCacheMananger prepareCacheDataNormal];
     [CNPreCacheMananger prepareCacheDataNeedLogin];
+    [OpenInstallSDK initWithDelegate:self];
     return YES;
+}
+
+// open install delegate
+
+- (void)getInstallParamsFromOpenInstall:(nullable NSDictionary *)params withError:(nullable NSError *)error {
+    
 }
 
 - (void)setupTabbarController {

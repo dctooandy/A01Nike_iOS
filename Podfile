@@ -23,4 +23,5 @@ target ‘Hybird_A01’ do
   pod 'IQKeyboardManager','~> 5.0.6'
   pod 'BGDB_OC'
   pod 'FCUUID'
+  pod 'libOpenInstallSDK'
 end

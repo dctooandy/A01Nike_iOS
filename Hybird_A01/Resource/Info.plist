@@ -90,5 +90,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>com.openinstall.APP_KEY</key>
+	<string>oo1ago</string>
 </dict>
 </plist>
