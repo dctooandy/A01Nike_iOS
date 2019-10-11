@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isLogin;
 
+@property (nonatomic, assign) BOOL isVIP;
+
 - (void)setupElements;
 
 @end

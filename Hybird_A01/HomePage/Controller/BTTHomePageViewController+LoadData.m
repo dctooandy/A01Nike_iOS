@@ -319,7 +319,11 @@ static const char *BTTNextGroupKey = "nextGroup";
     NSMutableArray *banners = [NSMutableArray array];
     NSMutableArray *imageUrls = [NSMutableArray array];
     NSMutableArray *downloads = [NSMutableArray array];
-    [IVNetwork sendUseCacheRequestWithSubURL:BTTIndexBannerDownloads paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+    NSDictionary *params = nil;
+    if ([IVNetwork userInfo]) {
+        params = @{@"loginName":[IVNetwork userInfo].loginName};
+    }
+    [IVNetwork sendUseCacheRequestWithSubURL:BTTIndexBannerDownloads paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.status) {
             if (result.data) {

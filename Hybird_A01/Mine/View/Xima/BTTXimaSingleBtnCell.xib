@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,8 +17,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6DO-2m-Ted">
-                        <rect key="frame" x="15" y="28" width="345" height="44"/>
+                    <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6DO-2m-Ted">
+                        <rect key="frame" x="15" y="28" width="165" height="44"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <state key="normal" title="查看其它游戏厅" backgroundImage="binding_confirm_disable">
                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
@@ -28,18 +27,33 @@
                             <action selector="otherBtn:" destination="gTV-IL-0wX" eventType="touchUpInside" id="hUW-yn-p8u"/>
                         </connections>
                     </button>
+                    <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKd-4l-rEa">
+                        <rect key="frame" x="195" y="28" width="165" height="44"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="查看单日洗码投注额" backgroundImage="xima_btn1">
+                            <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="ximaRecordBtn:" destination="gTV-IL-0wX" eventType="touchUpInside" id="geG-nL-uEz"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="6DO-2m-Ted" secondAttribute="trailing" constant="15" id="kyh-ZM-pqZ"/>
+                <constraint firstItem="OKd-4l-rEa" firstAttribute="width" secondItem="6DO-2m-Ted" secondAttribute="width" id="Cqx-Lt-2f6"/>
+                <constraint firstItem="OKd-4l-rEa" firstAttribute="leading" secondItem="6DO-2m-Ted" secondAttribute="trailing" constant="15" id="QrR-xi-srK"/>
                 <constraint firstItem="6DO-2m-Ted" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="pDk-3m-b7d"/>
+                <constraint firstItem="OKd-4l-rEa" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="pkN-Vc-sgh"/>
+                <constraint firstItem="OKd-4l-rEa" firstAttribute="height" secondItem="6DO-2m-Ted" secondAttribute="height" id="uxV-aP-1KL"/>
+                <constraint firstAttribute="trailing" secondItem="OKd-4l-rEa" secondAttribute="trailing" constant="15" id="xJ5-9X-4XG"/>
                 <constraint firstItem="6DO-2m-Ted" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="z9N-eL-iwS"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
-            <point key="canvasLocation" x="-351" y="2"/>
+            <point key="canvasLocation" x="74" y="4"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="binding_confirm_disable" width="345" height="44"/>
+        <image name="xima_btn1" width="155" height="41"/>
     </resources>
 </document>

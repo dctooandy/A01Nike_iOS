@@ -58,6 +58,8 @@
     } else {
         self.isLogin = NO;
     }
+    
+    
     [self setupNav];
     [self setupCollectionView];
     [self setupElements];

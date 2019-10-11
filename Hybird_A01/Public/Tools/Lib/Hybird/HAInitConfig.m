@@ -33,7 +33,7 @@
             return @"http://m.a01.com";
             break;
         case 1:
-            return @"https://m.918rr.com";
+            return @"https://m1.918rr.com";
             break;
         case 2:
             return @"https://m.918bs.com";
@@ -49,7 +49,7 @@
             return @"http://m.a01.com";
             break;
         case 1:
-            return @"https://m.918rr.com";
+            return @"https://m1.918rr.com";
             break;
         case 2:
             return @"https://m.918bs.com";

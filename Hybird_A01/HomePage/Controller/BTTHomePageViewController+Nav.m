@@ -81,6 +81,7 @@ static const char *BTTHeaderViewKey = "headerView";
 
 - (void)logoutSuccess:(NSNotification *)notifi {
     self.isLogin = NO;
+    self.isVIP = NO;
     [IN3SAnalytics setUserName:nil];
     dispatch_async(dispatch_get_main_queue(), ^{
         [self updateUI];

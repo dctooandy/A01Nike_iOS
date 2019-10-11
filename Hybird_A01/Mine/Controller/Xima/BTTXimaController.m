@@ -22,7 +22,7 @@
 #import "BTTXimaSuccessBtnsCell.h"
 #import "BTTXimaSuccessItemModel.h"
 #import "BTTXimaLogController.h"
-
+#import "BTTXimaRecordController.h"
 
 
 @interface BTTXimaController ()<BTTElementsFlowLayoutDelegate>
@@ -138,11 +138,16 @@
                             weakSelf(weakSelf);
                             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                                 strongSelf(strongSelf);
-                                BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-                                [cell setBtnTwoType:BTTXimaHeaderBtnTwoTypeOtherSelect];
-                                [cell setBtnOneType:BTTXimaHeaderBtnOneTypeThisWeekNormal];
-                                strongSelf.thisWeekDataType = BTTXimaThisWeekTypeOther;
-                                [strongSelf setupElements];
+                                if (button.tag == 1000) {
+                                     BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                                     [cell setBtnTwoType:BTTXimaHeaderBtnTwoTypeOtherSelect];
+                                     [cell setBtnOneType:BTTXimaHeaderBtnOneTypeThisWeekNormal];
+                                     strongSelf.thisWeekDataType = BTTXimaThisWeekTypeOther;
+                                     [strongSelf setupElements];
+                                } else {
+                                    BTTXimaRecordController *vc = [BTTXimaRecordController new];
+                                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                                }
                             };
                             return cell;
                         } else {
