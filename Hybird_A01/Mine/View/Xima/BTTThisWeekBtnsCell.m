@@ -28,4 +28,9 @@
     }
 }
 
+- (IBAction)ximaRecordBtnClick:(UIButton *)sender {
+    if (self.buttonClickBlock) {
+           self.buttonClickBlock(sender);
+    }
+}
 @end

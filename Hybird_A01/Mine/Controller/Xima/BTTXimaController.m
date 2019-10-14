@@ -177,6 +177,9 @@
                                     [cell setBtnOneType:BTTXimaHeaderBtnOneTypeThisWeekNormal];
                                     strongSelf.thisWeekDataType = BTTXimaThisWeekTypeOther;
                                     [strongSelf setupElements];
+                                } else {
+                                    BTTXimaRecordController *vc = [BTTXimaRecordController new];
+                                    [strongSelf.navigationController pushViewController:vc animated:YES];
                                 }
                             };
                             return cell;

@@ -21,7 +21,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     _amountTextField.delegate = self;
-    [_amountTextField setValue:[UIColor colorWithHexString:@"818791"] forKeyPath:@"_placeholderLabel.textColor"];
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:_amountTextField.placeholder attributes:
+    @{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"818791"],
+                 NSFontAttributeName:_amountTextField.font
+         }];
+    _amountTextField.attributedPlaceholder = attrString;
 }
 
 - (void)setModel:(BTTMeMainModel *)model {
