@@ -90,6 +90,8 @@ typedef enum {
 
 typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
+typedef void (^BTTLive800ResponseBlock)(NSString *info);
+
 /***********************************************存储关键字******************************************************/
 
 

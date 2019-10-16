@@ -53,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showMidAutumnPopView;
 
+- (void)getLive800InfoDataWithResponse:(BTTLive800ResponseBlock)responseBlock;
+
 
 @end
 

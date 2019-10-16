@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)makeCallWithPhoneNum:(NSString *)phone;
 
+- (void)getLive800InfoDataWithResponse:(BTTLive800ResponseBlock)responseBlock;
+
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
 
 

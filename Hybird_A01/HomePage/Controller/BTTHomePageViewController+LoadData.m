@@ -383,6 +383,14 @@ static const char *BTTNextGroupKey = "nextGroup";
     }];
 }
 
+- (void)getLive800InfoDataWithResponse:(BTTLive800ResponseBlock)responseBlock {
+    [IVNetwork sendRequestWithSubURL:@"users/getLiveUrl" paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        if (result.status) {
+            responseBlock(result.data[@"info"]);
+        }
+    }];
+}
+
 #pragma mark - 动态添加属性
 
 - (void)setNextGroup:(NSInteger)nextGroup {

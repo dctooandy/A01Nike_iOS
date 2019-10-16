@@ -22,7 +22,15 @@
     [NBSAppAgent setUserIdentifier:userId];
     [[IVGameManager sharedManager] userStatusChanged:YES];
     [IVHeartSocketManager loginSendHeartPacketWihUserid:[userId intValue]];
-    [CLive800Manager switchLive800UserWithCustomerId:[NSString stringWithFormat:@"%ld",(long)[IVNetwork userInfo].customerId]];
+    LIVUserInfo *userModel = nil;
+       if ([IVNetwork userInfo]) {
+           userModel = [LIVUserInfo new];
+           userModel.userAccount = [NSString stringWithFormat:@"%@",@([IVNetwork userInfo].customerId)];
+           userModel.grade = [NSString stringWithFormat:@"%@",@([IVNetwork userInfo].customerLevel)];;
+           userModel.loginName = [IVNetwork userInfo].loginName;
+           userModel.name = [IVNetwork userInfo].loginName;;
+       }
+    [CLive800Manager switchLive800UserWithCustomerId:userModel];
     [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccessNotification object:nil];
     [BTTRequestPrecache updateCacheNeedLoginRequest];
     [CNPreCacheMananger prepareCacheDataNeedLogin];
@@ -33,7 +41,7 @@
     [WebViewUserAgaent clearCookie];
     [[IVGameManager sharedManager] userStatusChanged:NO];
     [IVHeartSocketManager exitLoginSendHearPacket];
-    [CLive800Manager switchLive800UserWithCustomerId:@""];
+    [CLive800Manager switchLive800UserWithCustomerId:nil];
     [NBSAppAgent setUserIdentifier:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
 }

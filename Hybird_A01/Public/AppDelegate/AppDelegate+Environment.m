@@ -66,12 +66,16 @@
 }
 
 - (void)setupLive800 {
-    [[CLive800Manager sharedInstance] setUpLive800];
-    if (![IVNetwork userInfo] || ![IVNetwork userInfo].customerId) {
-        [CLive800Manager switchLive800UserWithCustomerId:@""];
-    }else{
-        [CLive800Manager switchLive800UserWithCustomerId:[NSString stringWithFormat:@"%ld",(long)[IVNetwork userInfo].customerId]];
+    
+    LIVUserInfo *userInfo = nil;
+    if ([IVNetwork userInfo]) {
+        userInfo = [LIVUserInfo new];
+        userInfo.userAccount = [NSString stringWithFormat:@"%@",@([IVNetwork userInfo].customerId)];
+        userInfo.grade = [NSString stringWithFormat:@"%@",@([IVNetwork userInfo].customerLevel)];;
+        userInfo.loginName = [IVNetwork userInfo].loginName;
+        userInfo.name = [IVNetwork userInfo].loginName;
     }
+    [[CLive800Manager sharedInstance] setUpLive800WithUserInfo:userInfo];
 }
 
 @end

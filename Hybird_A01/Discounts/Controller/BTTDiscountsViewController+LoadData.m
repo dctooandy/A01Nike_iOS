@@ -85,6 +85,15 @@
     }];
 }
 
+- (void)getLive800InfoDataWithResponse:(BTTLive800ResponseBlock)responseBlock {
+    [IVNetwork sendRequestWithSubURL:@"users/getLiveUrl" paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+        if (result.status) {
+            responseBlock(result.data[@"info"]);
+        }
+    }];
+}
+
+
 - (NSMutableArray *)sheetDatas {
     NSMutableArray *sheetDatas = objc_getAssociatedObject(self, _cmd);
     if (!sheetDatas) {

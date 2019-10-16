@@ -8,14 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "LIVUserInfo.h"
 
 @interface CLive800Manager : NSObject
 
 SingletonInterface(CLive800Manager);
 
-- (void)setUpLive800;
+- (void)setUpLive800WithUserInfo:(LIVUserInfo *)userModel;
 
-+ (void)switchLive800UserWithCustomerId:(NSString *)customerid;
++ (void)switchLive800UserWithCustomerId:(LIVUserInfo *)userModel;
 
 - (void)startLive800Chat:(UIViewController *)superController;
 

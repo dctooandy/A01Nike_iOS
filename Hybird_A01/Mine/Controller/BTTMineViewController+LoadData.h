@@ -54,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadNickName;
 
+- (void)getLive800InfoDataWithResponse:(BTTLive800ResponseBlock)responseBlock;
+
 
 @end
 

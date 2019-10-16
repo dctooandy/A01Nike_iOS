@@ -8,28 +8,27 @@
 
 #import "CLive800Manager.h"
 #import "Live800ChatLib.h"
-#import "LIVUserInfo.h"
+
 
 @implementation CLive800Manager
 SingletonImplementation(CLive800Manager);
 
-- (void)setUpLive800 {
+- (void)setUpLive800WithUserInfo:(LIVUserInfo *)userModel {
     [Live800ChatLib setupLive800ChatWithSuccessBlock:^{
         NSLog(@"初始化Live800成功");
+        [CLive800Manager switchLive800UserWithCustomerId:userModel];
     } failedBlock:^(NSError * _Nonnull error) {
         NSLog(@"初始化Live800失败");
     }];
 }
 
-+ (void)switchLive800UserWithCustomerId:(NSString *)customerid {
++ (void)switchLive800UserWithCustomerId:(LIVUserInfo *)userModel {
     NSError *error = nil;
     
-    if ([NSString isBlankString:customerid]) {
+    if (!userModel) {
         [Live800ChatLib switchUser:nil error:&error];
     }else{
-        LIVUserInfo *userInfo = [[LIVUserInfo alloc] init];
-        userInfo.userAccount = customerid;
-        [Live800ChatLib switchUser:userInfo error:&error];
+        [Live800ChatLib switchUser:userModel error:&error];
     }
     if (error) {
         NSLog(@"切换用户出错:%@",error);
