@@ -50,6 +50,7 @@
 		3A11AE682186D94B00B1AFF4 /* BTTThisWeekCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11AE662186D94B00B1AFF4 /* BTTThisWeekCell.xib */; };
 		3A11AE6C2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11AE6A2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.m */; };
 		3A11AE6D2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11AE6B2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib */; };
+		3A14CC4923571C78009711CF /* IN3SAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A14CC4823571C78009711CF /* IN3SAnalytics.framework */; };
 		3A2DAAC322768D350093C122 /* BTTMeHeadernNicknameLoginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2DAAC122768D350093C122 /* BTTMeHeadernNicknameLoginCell.m */; };
 		3A2DAAC422768D350093C122 /* BTTMeHeadernNicknameLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A2DAAC222768D350093C122 /* BTTMeHeadernNicknameLoginCell.xib */; };
 		3A34F79321B6630D007BC4D4 /* BTTGamesTryAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34F79221B6630D007BC4D4 /* BTTGamesTryAlertView.m */; };
@@ -493,7 +494,6 @@
 		3AB0688321A6471C00072FB7 /* BTTBetLimitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0688221A6471C00072FB7 /* BTTBetLimitModel.m */; };
 		3AB0688B21A677F700072FB7 /* BTTBookMessageController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0688A21A677F700072FB7 /* BTTBookMessageController+LoadData.m */; };
 		3AB0688E21A679DE00072FB7 /* BTTSMSEmailModifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0688D21A679DE00072FB7 /* BTTSMSEmailModifyModel.m */; };
-		3ABCB2B42257398C001C084F /* IN3SAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABCB2B32257398C001C084F /* IN3SAnalytics.framework */; };
 		3AC3FFA1219AB8CC008AECCB /* BTTAnimationPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA0219AB8CC008AECCB /* BTTAnimationPopView.m */; };
 		3AC3FFA4219ABEBF008AECCB /* BTTUnlockPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA3219ABEBF008AECCB /* BTTUnlockPopView.m */; };
 		3AC3FFA6219ABED9008AECCB /* BTTUnlockPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA5219ABED8008AECCB /* BTTUnlockPopView.xib */; };
@@ -831,6 +831,7 @@
 		3A11AE692186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTThisWeekBtnsCell.h; sourceTree = "<group>"; };
 		3A11AE6A2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTThisWeekBtnsCell.m; sourceTree = "<group>"; };
 		3A11AE6B2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTThisWeekBtnsCell.xib; sourceTree = "<group>"; };
+		3A14CC4823571C78009711CF /* IN3SAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IN3SAnalytics.framework; sourceTree = "<group>"; };
 		3A2DAAC022768D350093C122 /* BTTMeHeadernNicknameLoginCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTMeHeadernNicknameLoginCell.h; sourceTree = "<group>"; };
 		3A2DAAC122768D350093C122 /* BTTMeHeadernNicknameLoginCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMeHeadernNicknameLoginCell.m; sourceTree = "<group>"; };
 		3A2DAAC222768D350093C122 /* BTTMeHeadernNicknameLoginCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTMeHeadernNicknameLoginCell.xib; sourceTree = "<group>"; };
@@ -1460,7 +1461,6 @@
 		3AB0688A21A677F700072FB7 /* BTTBookMessageController+LoadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTBookMessageController+LoadData.m"; sourceTree = "<group>"; };
 		3AB0688C21A679DE00072FB7 /* BTTSMSEmailModifyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTSMSEmailModifyModel.h; sourceTree = "<group>"; };
 		3AB0688D21A679DE00072FB7 /* BTTSMSEmailModifyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTSMSEmailModifyModel.m; sourceTree = "<group>"; };
-		3ABCB2B32257398C001C084F /* IN3SAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IN3SAnalytics.framework; sourceTree = "<group>"; };
 		3AC3FF9F219AB8CC008AECCB /* BTTAnimationPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTAnimationPopView.h; sourceTree = "<group>"; };
 		3AC3FFA0219AB8CC008AECCB /* BTTAnimationPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTAnimationPopView.m; sourceTree = "<group>"; };
 		3AC3FFA2219ABEBF008AECCB /* BTTUnlockPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUnlockPopView.h; sourceTree = "<group>"; };
@@ -1873,7 +1873,7 @@
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
 				3AD9CE2F2167107B00685B43 /* libpjsip-simple-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE332167107B00685B43 /* libsrtp-arm-apple-darwin9.a in Frameworks */,
-				3ABCB2B42257398C001C084F /* IN3SAnalytics.framework in Frameworks */,
+				3A14CC4923571C78009711CF /* IN3SAnalytics.framework in Frameworks */,
 				3AD9CE302167107B00685B43 /* libpjsip-ua-arm-apple-darwin9.a in Frameworks */,
 				7729DAB2DEBC453514E22B44 /* libPods-Hybird_A01.a in Frameworks */,
 				3AD9CE2E2167107B00685B43 /* libpjsip-arm-apple-darwin9.a in Frameworks */,
@@ -2787,7 +2787,7 @@
 		3A8F516A215F75C70069D1B3 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				3ABCB2B32257398C001C084F /* IN3SAnalytics.framework */,
+				3A14CC4823571C78009711CF /* IN3SAnalytics.framework */,
 				3AD1A9362237B49000515628 /* IN3SResource.bundle */,
 				3AD9CF01216C423900685B43 /* tingyunApp.framework */,
 			);
