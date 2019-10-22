@@ -781,13 +781,13 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         argument = @{}.mutableCopy;
     }
     argument[@"newApi"] = @"1";
-    NSString *appToken = [IVNetwork appToken];
+    NSString *appToken = @"";//[IVNetwork appToken];
     argument[@"appToken"] =  appToken ? appToken : @"";
     NSString *udid = @"";
-    argument[@"deviceid"] = [NSString isBlankString:udid] ? [IVNetwork getDeviceId] : udid;
-    if ([IVNetwork userInfo]) {
-        argument[@"userToken"] = [IVNetwork userInfo].userToken;
-        argument[@"accountName"] = [IVNetwork userInfo].loginName;
+    argument[@"deviceid"] = udid;//[NSString isBlankString:udid] ? [IVNetwork getDeviceId] : udid;
+    if ([IVHttpManager shareManager].loginName.length) {
+        argument[@"userToken"] = [IVHttpManager shareManager].userToken;
+        argument[@"accountName"] = [IVHttpManager shareManager].loginName;
     }
     return argument;
 }

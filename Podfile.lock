@@ -44,6 +44,9 @@ PODS:
   - IVCheckNetworkLibrary/Classes/UI (1.0.6):
     - IVCheckNetworkLibrary/Classes/Http
     - IVCheckNetworkLibrary/Classes/SDK/Ping
+  - IVGameLibrary (1.0.3):
+    - IVGameLibrary/GameController (= 1.0.3)
+  - IVGameLibrary/GameController (1.0.3)
   - IVHeartPacketLibrary (0.0.4):
     - CocoaAsyncSocket (~> 7.6.2)
   - IVNetworkLibrary2.0 (2.2.1):
@@ -119,6 +122,13 @@ PODS:
   - IVUpdateLibrary (1.0.1)
   - IVUZIPLibrary (1.0.3):
     - ZipArchive (~> 1.4.0)
+  - IVWebViewLibrary (1.0.3):
+    - IVWebViewLibrary/IVWebViewLibrary (= 1.0.3)
+    - JSONModel (~> 1.7.0)
+    - MJExtension (~> 3.0.15.1)
+  - IVWebViewLibrary/IVWebViewLibrary (1.0.3):
+    - JSONModel (~> 1.7.0)
+    - MJExtension (~> 3.0.15.1)
   - JSONModel (1.7.0)
   - libOpenInstallSDK (2.3.0)
   - Masonry (1.1.0)
@@ -140,11 +150,13 @@ DEPENDENCIES:
   - IQKeyboardManager (~> 5.0.6)
   - IVCacheLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVCacheLibrary.git`)
   - IVCheckNetworkLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVCheckNetworkLibrary.git`)
+  - IVGameLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git`, branch `v1.0`)
   - IVHeartPacketLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git`)
   - IVNetworkLibrary2.0 (from `http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary2.0.git`)
   - IVPublicAPILibrary (from `http://10.66.72.115/mobile-iOS-Library/IVPublicAPILibrary.git`)
   - IVUpdateLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVUpdateLibrary.git`)
   - IVUZIPLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVUZIPLibrary.git`)
+  - IVWebViewLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVWebViewLibrary.git`, branch `1.0`)
   - JSONModel
   - libOpenInstallSDK
   - Masonry (~> 1.1.0)
@@ -180,6 +192,9 @@ EXTERNAL SOURCES:
     :git: http://10.66.72.115/mobile-iOS-Library/IVCacheLibrary.git
   IVCheckNetworkLibrary:
     :git: http://10.66.72.115/mobile-iOS-Library/IVCheckNetworkLibrary.git
+  IVGameLibrary:
+    :branch: v1.0
+    :git: http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git
   IVHeartPacketLibrary:
     :git: http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git
   IVNetworkLibrary2.0:
@@ -190,6 +205,9 @@ EXTERNAL SOURCES:
     :git: http://10.66.72.115/mobile-iOS-Library/IVUpdateLibrary.git
   IVUZIPLibrary:
     :git: http://10.66.72.115/mobile-iOS-Library/IVUZIPLibrary.git
+  IVWebViewLibrary:
+    :branch: '1.0'
+    :git: http://10.66.72.115/mobile-iOS-Library/IVWebViewLibrary.git
 
 CHECKOUT OPTIONS:
   IVCacheLibrary:
@@ -198,6 +216,9 @@ CHECKOUT OPTIONS:
   IVCheckNetworkLibrary:
     :commit: 35462549e59abe543a22fb2c56d4fcd46f4a416e
     :git: http://10.66.72.115/mobile-iOS-Library/IVCheckNetworkLibrary.git
+  IVGameLibrary:
+    :commit: a3697b1654c9793c0ec39bec3739159dd6164ad7
+    :git: http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git
   IVHeartPacketLibrary:
     :commit: cb81f459cb55163fd8493d0a62ea5339089703fc
     :git: http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git
@@ -213,6 +234,9 @@ CHECKOUT OPTIONS:
   IVUZIPLibrary:
     :commit: 0c3f790cbb7dc9bb619446c9d13f95d7ff65dcbd
     :git: http://10.66.72.115/mobile-iOS-Library/IVUZIPLibrary.git
+  IVWebViewLibrary:
+    :commit: 064c8e9eb8a78ad0d4bfe6e6ec0558f0a549c0d8
+    :git: http://10.66.72.115/mobile-iOS-Library/IVWebViewLibrary.git
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -223,11 +247,13 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 266cb7b1d11f94a3e71229d77f960f9a1b538e5b
   IVCacheLibrary: df3d2654c929743d92df5fa77d22894fb36b3d29
   IVCheckNetworkLibrary: c6d663caf4b175be8407b3edc7dbd3acb7fd1ac6
+  IVGameLibrary: b56fc46116d7f6f1a55db6eb7ab662fa73b1aba3
   IVHeartPacketLibrary: 2a122b1d8cedf8346b4898ace4736147cf9a0405
   IVNetworkLibrary2.0: 94934fb4f0f52e2f4e2f8df564bba262ab875b1d
   IVPublicAPILibrary: 54a91867a765dac81969f5228ea113b7666ccd13
   IVUpdateLibrary: f5764f4cdfcf7919b37a1a2533aae0ff541d5c2d
   IVUZIPLibrary: 22247cd493445d4a7da04b3aeb47b332e48dbe82
+  IVWebViewLibrary: c36335ea2ff2ed4d28504e01deee976e3d1d7d55
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   libOpenInstallSDK: 591755d306aaab15aa3e04db258d12c372797cd6
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -240,6 +266,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
-PODFILE CHECKSUM: 32e63a8909af3680746ab218fe051c1ed6f97295
+PODFILE CHECKSUM: 2f820152f36b21ef3aefab6e02b0c41295f51dbe
 
 COCOAPODS: 1.5.3

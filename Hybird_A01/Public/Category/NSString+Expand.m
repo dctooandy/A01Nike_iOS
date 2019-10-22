@@ -7,6 +7,7 @@
 //
 
 #import "NSString+Expand.h"
+#import "BTTUserInfoModel.h"
 
 #define kWKWebViewPostJS @"function wkWebViewPostJS(path, params) {\
 var method = \"POST\";\
@@ -126,10 +127,10 @@ form.submit();\
 
 + (NSString *)wkWebViewPostjsWithURLString:(NSString *)url {
     NSString *parameterStr  = @"";
-    NSString *localDomain = [IVNetwork gateway];;
+    NSString *localDomain = [IVHttpManager shareManager].gateway;
     if ([url containsString:localDomain]) {
         
-        NSString *appToken = [[IVCacheManager sharedInstance] nativeReadDictionaryForKey:kCacheAppToken];
+        NSString *appToken =  [IVCacheWrapper readJSONStringForKey:kCacheAppToken requestId:nil];//[[IVCacheManager sharedInstance] nativeReadDictionaryForKey:kCacheAppToken];
         IVUserInfoModel *userModel = [IVNetwork userInfo];
         
         if (userModel != nil) {

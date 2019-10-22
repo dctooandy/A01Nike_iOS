@@ -20,19 +20,19 @@
 }
 - (NSArray *)gateways
 {
-    return [IVNetwork gateways];
+    return [IVHttpManager shareManager].gateways;
 }
 - (NSString *)h5Domain
 {
-    return [IVNetwork h5Domain];
+    return [IVHttpManager shareManager].domain;
 }
 - (NSString *)userName
 {
-    return [IVNetwork userInfo].loginName;
+    return [IVHttpManager shareManager].loginName;
 }
 - (NSString *)userToken
 {
-    return [IVNetwork userInfo].userToken;
+    return [IVHttpManager shareManager].userToken;
 }
 - (NSString *)appToken
 {
@@ -40,7 +40,7 @@
 }
 - (NSString *)deviceId
 {
-    return [IVNetwork getDeviceId];
+    return [IVHttpManager shareManager]
 }
 - (NSString *)sessionId
 {
@@ -48,11 +48,11 @@
 }
 - (NSString *)parentId
 {
-    return [IVNetwork parentId];
+    return [IVHttpManager shareManager].productId;
 }
 - (NSString *)productId
 {
-    return [IVNetwork productId];
+    return [IVHttpManager shareManager].productId;
 }
 - (NSDictionary *)exteranlArguments
 {
@@ -78,18 +78,18 @@
 {
     NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
     [paramters setValue:gameId forKey:@"game_id"];
-    [IVNetwork sendRequestWithSubURL:@"game/transfer" paramters:paramters.copy completionBlock:^(IVRequestResultModel *result, id response) {
-        if (result.status) {
-            NSLog(@"额度刷新成功");
-        } else {
-            NSLog(@"额度刷新失败");
-        }
+    [[IVHttpManager shareManager] sendRequestWithUrl:@"game/transfer" parameters:paramters.copy callBack:^(id  _Nullable response, NSError * _Nullable error) {
+//        if (result.status) {
+//            NSLog(@"额度刷新成功");
+//        } else {
+//            NSLog(@"额度刷新失败");
+//        }
     }];
 }
 - (void)sendRequestWithSubURL:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(void(^)(BOOL status, NSDictionary *response))completionBlock
 {
-    [IVNetwork sendRequestWithSubURL:url paramters:paramters completionBlock:^(IVRequestResultModel *result, id response) {
-        completionBlock(result.status,response);
+    [[IVHttpManager shareManager] sendRequestWithUrl:url parameters:paramters callBack:^(id  _Nullable response, NSError * _Nullable error) {
+//        completionBlock(result.status,response);
     }];
 }
 - (void)forwardToTabBarControllerWithDictionary:(NSDictionary *)dict
@@ -99,24 +99,21 @@
 
 - (BOOL)clearCache
 {
-    return [[IVCacheManager sharedInstance] clearCache];
+    return [IVCacheWrapper clearCache];
 }
 - (BOOL)writeJSONString:(NSString*)jsonString forKey:(NSString*)key isSaveFile:(BOOL)isSaveFile
 {
-    return [[IVCacheManager sharedInstance] writeJSONString:jsonString forKey:key isSaveFile:isSaveFile];
+    return [IVCacheWrapper writeJSONString:jsonString forKey:key isSaveFile:isSaveFile];
 }
 - (NSString*)readJSONStringForKey:(NSString*)key requestId:(NSString*)requestId
 {
-    return [[IVCacheManager sharedInstance] readJSONStringForKey:key requestId:requestId];
+    return [IVCacheWrapper readJSONStringForKey:key requestId:requestId];
 }
-- (id)nativeReadDictionaryForKey:(NSString*)key
-{
-    return [[IVCacheManager sharedInstance] nativeReadDictionaryForKey:key];
-}
-- (void)sendDeviceInfo
-{
-    [IVNetwork sendDeviceInfo];
-}
+
+//- (void)sendDeviceInfo
+//{
+//    [IVNetwork sendDeviceInfo];
+//}
 - (void)loginSuccess
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccessNotification object:nil userInfo:nil];

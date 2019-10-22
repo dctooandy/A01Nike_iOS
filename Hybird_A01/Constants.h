@@ -15,7 +15,7 @@
 #import "NSDate+Extension.h"
 #import "UIColor+Util.h"
 #import "UIView+Frame.h"
-#import <IVNetworkLibrary/IVNetwork.h>
+#import "KYHTTPManager.h"
 #import <IVGameLibrary/IVGame.h>
 #import "PublicMethod.h"
 #import <GJRedDot/GJRedDot.h>
@@ -88,15 +88,21 @@ typedef enum {
     BTTStringFormatStyleOther    ///< 包含特殊符号
 }BTTStringFormatStyle;
 
-typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
+//typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 typedef void (^BTTLive800ResponseBlock)(NSString *info);
+
+typedef void(^IVActionHandler)(UIAlertAction *);
 
 /***********************************************存储关键字******************************************************/
 
 
 
 /**********************************************通知常量*******************************************************/
+
+#define kCacheAppToken @"kCacheAppToken"
+
+#define kCacheUserModel @"kCacheUserModel"
 
 //Flurry
 #define FlurryKey  @"RY7GPP2V792PMZK3PYNX"

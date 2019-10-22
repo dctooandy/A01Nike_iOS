@@ -10,8 +10,10 @@
 #define Hybird_A01_pch
 
 #import "Constants.h"
-#import "BTTHttpManager.h"
+#import "IVCacheWrapper.h"
+#import "IVHttpManager+UserInfoModel.h"
 #import "UIImageView+WebCache.h"
 #import "BRPickerView.h"
 #import <Masonry.h>
+#import "IVUtility+otherMethod.h"
 #endif

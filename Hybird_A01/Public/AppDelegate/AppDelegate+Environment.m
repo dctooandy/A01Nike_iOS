@@ -25,14 +25,13 @@
 - (void)setupAPPEnvironment {
     switch (EnvirmentType) {
         case 0:
-            [IVNetwork setEnvironment:IVEnvironmentDebug];
+            [IVHttpManager shareManager].environment = IVNEnvironmentPublishTest; // 运行环境
             break;
         case 1:
-            [IVNetwork setEnvironment:IVEnvironmentReleaseTest];
+            [IVHttpManager shareManager].environment = IVNEnvironmentPublishTest; // 运行环境
             break;
         default:
-            [IVNetwork setEnvironment:IVEnvironmentRelease];
-//            [IVNetwork setEnvironment:IVEnvironmentReleaseTest];
+            [IVHttpManager shareManager].environment = IVNEnvironmentPublishTest; // 运行环境
             break;
     }
     //设置初始数据
@@ -41,18 +40,19 @@
     [IVGameManager sharedManager].isPushAGQJ = YES;
 //    [IVNetwork setOldApi:YES];
     [WebViewUserAgaent writeIOSUserAgent];
-    [IVNetwork setBundleId:[HAInitConfig bundleId]];
-    [IVNetwork setAppid:[HAInitConfig appId]];
-    [IVNetwork setAppKey:[HAInitConfig appKey]];
-    [IVNetwork setGateways:[HAInitConfig gateways]];
-    [IVNetwork setProductId:[HAInitConfig productId]];
-    [IVNetwork setDefaultH5Domian:[HAInitConfig defaultH5Domain]];
-    [IVNetwork setDefaultCDN:[HAInitConfig defaultCDN]];
-    [IVNetwork startLaunchProcessWithFinished:^{
-        [BTTRequestPrecache startUpdateCache];
-    }];
+    [IVHttpManager shareManager].productId = [HAInitConfig productId]; // 产品标识
+    [IVHttpManager shareManager].appId = [HAInitConfig appId];     // 应用ID
+    [IVHttpManager shareManager].parentId = @"1111";  // 渠道号
+    [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
+    [IVHttpManager shareManager].productCode = [HAInitConfig appKey]; // 产品码
+//    [IVHttpManager shareManager].domains = domains; // 所有手机站
+    [IVHttpManager shareManager].domain = [HAInitConfig defaultH5Domain]; // 默认手机站
+    [IVHttpManager shareManager].cdn = [HAInitConfig defaultCDN]; //默认cdn
+//    [IVNetwork startLaunchProcessWithFinished:^{
+//        [BTTRequestPrecache startUpdateCache];
+//    }];
     [IN3SAnalytics debugEnable:YES];
-    [IN3SAnalytics setUserName:[IVNetwork userInfo].loginName];
+    [IN3SAnalytics setUserName:[IVHttpManager shareManager].loginName];
     [[CNTimeLog shareInstance] configProduct:@"A01"];
     
     [self setupRedDot];
@@ -68,12 +68,12 @@
 - (void)setupLive800 {
     
     LIVUserInfo *userInfo = nil;
-    if ([IVNetwork userInfo]) {
+    if ([IVHttpManager shareManager].loginName.length) {
         userInfo = [LIVUserInfo new];
-        userInfo.userAccount = [NSString stringWithFormat:@"%@",@([IVNetwork userInfo].customerId)];
-        userInfo.grade = [NSString stringWithFormat:@"%@",@([IVNetwork userInfo].customerLevel)];;
-        userInfo.loginName = [IVNetwork userInfo].loginName;
-        userInfo.name = [IVNetwork userInfo].loginName;
+//        userInfo.userAccount = [NSString stringWithFormat:@"%@",@([IVHttpManager shareManager].customerId)];
+//        userInfo.grade = [NSString stringWithFormat:@"%@",@([IVNetwork userInfo].customerLevel)];;
+//        userInfo.loginName = [IVNetwork userInfo].loginName;
+//        userInfo.name = [IVNetwork userInfo].loginName;
     }
     [[CLive800Manager sharedInstance] setUpLive800WithUserInfo:userInfo];
 }

@@ -27,7 +27,7 @@ SingletonImplementation(PushManager);
     NSString *messageId = [dataDict objectForKey:@"id"];
     if (url != nil && url.length > 0) {
         if (![url hasPrefix:@"http"]) {
-            url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],url];
+            url = [NSString stringWithFormat:@"%@%@",[IVHttpManager shareManager].domain,url];
         }
     } else {
         if (messageId != nil && messageId.length > 0) {
@@ -79,7 +79,7 @@ SingletonImplementation(PushManager);
                 [strongSelf pushToMsgVCWithData:dict];
             };
             NSString *message = [apsDict valueForKey:@"alert"];
-            [IVUtility showAlertWithActionTitles:@[@"取消",@"查看"] handlers:@[handler,handler1] title:@"提示" message:message];
+            [IVNUtility showAlertWithActionTitles:@[@"取消",@"查看"] handlers:@[handler,handler1] title:@"提示" message:message];
         } else {
             [self pushToMsgVCWithData:dict];
         }

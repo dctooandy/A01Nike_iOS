@@ -31,7 +31,7 @@
     if ([self hasPrefix:@"/"]) {
         [string deleteCharactersInRange:NSMakeRange(0, 1)];
     }
-    return [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], string];
+    return [NSString stringWithFormat:@"%@%@", [IVHttpManager shareManager].domain, string];
 }
 
 - (NSString *)cn_appendCDN {
@@ -42,7 +42,7 @@
     if ([self hasPrefix:@"/"]) {
         [string deleteCharactersInRange:NSMakeRange(0, 1)];
     }
-    NSString *cnd = [IVNetwork cdn];
+    NSString *cnd = [IVHttpManager shareManager].cdn;
     if ([cnd hasSuffix:@"/"]) {
         return [NSString stringWithFormat:@"%@%@", cnd, string];
     }

@@ -8,22 +8,29 @@
 
 #import "CNPayRequestManager.h"
 #import <objc/runtime.h>
-#import "BTTHttpManager.h"
 #import "CNPayOrderModel.h"
 #import "CNPayConstant.h"
 
 @implementation CNPayRequestManager
 
-+ (void)requestWithUrl:(NSString *)url parameters:(NSDictionary *)params handler:(IVRequestCallBack)completeHandler {
-    [BTTHttpManager sendRequestWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
++ (void)requestWithUrl:(NSString *)url parameters:(NSDictionary *)params handler:(KYHTTPCallBack)completeHandler {
+    
+    [[IVHttpManager shareManager] sendRequestWithUrl:url parameters:params callBack:^(id  _Nullable response, NSError * _Nullable error) {
         if (completeHandler) {
             completeHandler(result,result.data);
         }
     }];
+    [BTTHttpManager sendRequestWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+        
+    }];
 }
 
-+ (void)cacheWithUrl:(NSString *)url parameters:(NSDictionary *)params handler:(IVRequestCallBack)completeHandler {
-    [BTTHttpManager sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
++ (void)cacheWithUrl:(NSString *)url parameters:(NSDictionary *)params handler:(KYHTTPCallBack)completeHandler {
+    [[IVHttpManager shareManager] sendRequestWithMethod:KYHTTPMethodPOST url:url parameters:params cache:YES cacheTimeout:3600 * 24 callBack:^(BOOL isCache, id  _Nullable response, NSError * _Nullable error) {
+        if (completeHandler) {
+            completeHandler(result,result.data);
+        }
+    } originCallBack:^(id  _Nullable response, NSError * _Nullable error) {
         if (completeHandler) {
             completeHandler(result,result.data);
         }
@@ -34,7 +41,7 @@
 /// 预设支付方式总个数
 NSInteger const kPayTypeTotalCount = 21;
 
-+ (void)queryAllChannelCompleteHandler:(IVRequestCallBack)completeHandler {
++ (void)queryAllChannelCompleteHandler:(KYHTTPCallBack)completeHandler {
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     // 杂项：在线，点卡，手工，比特币，微信条码, 钻石币支付
@@ -50,7 +57,7 @@ NSInteger const kPayTypeTotalCount = 21;
     [self cacheWithUrl:kPaymentValidate parameters:params handler:completeHandler];
 }
 
-+ (void)paymentWithPayType:(NSString *)type payId:(NSInteger)payId amount:(NSString *)amout bankCode:(NSString *)bankCode completeHandler:(IVRequestCallBack)completeHandler {
++ (void)paymentWithPayType:(NSString *)type payId:(NSInteger)payId amount:(NSString *)amout bankCode:(NSString *)bankCode completeHandler:(KYHTTPCallBack)completeHandler {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"type"] = type;
     params[@"payId"] = @(payId);
@@ -62,12 +69,12 @@ NSInteger const kPayTypeTotalCount = 21;
     [self requestWithUrl:kPaymentOnlinePay parameters:params handler:completeHandler];
 }
 
-+ (void)paymentGetDepositNameWithType:(BOOL)isDeposit CompleteHandler:(IVRequestCallBack)completeHandler {
++ (void)paymentGetDepositNameWithType:(BOOL)isDeposit CompleteHandler:(KYHTTPCallBack)completeHandler {
     NSString *path = isDeposit ? kPaymentGetDepositName : kPaymentGetBQName;
     [self requestWithUrl:path parameters:nil handler:completeHandler];
 }
 
-+ (void)paymentDeleteDepositNameWithId:(NSString *)requestId CompleteHandler:(IVRequestCallBack)completeHandler {
++ (void)paymentDeleteDepositNameWithId:(NSString *)requestId CompleteHandler:(KYHTTPCallBack)completeHandler {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"ids"] = requestId;
     [self requestWithUrl:kPaymentDeleteDepositName parameters:params handler:completeHandler];
@@ -77,7 +84,7 @@ NSInteger const kPayTypeTotalCount = 21;
                          depositor:(NSString *)depositor
                        referenceId:(NSString *)referenceId
                          BQPayType:(NSInteger)bqPayType
-                   completeHandler:(IVRequestCallBack)completeHandler {
+                   completeHandler:(KYHTTPCallBack)completeHandler {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"depositor"] = depositor;
     params[@"reference_id"] = referenceId;
@@ -88,14 +95,14 @@ NSInteger const kPayTypeTotalCount = 21;
     [self requestWithUrl:path parameters:params handler:completeHandler];
 }
 
-+ (void)paymentQueryBillCompleteHandler:(IVRequestCallBack)completeHandler {
++ (void)paymentQueryBillCompleteHandler:(KYHTTPCallBack)completeHandler {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"flag"] = @"0";
     [self requestWithUrl:kPaymentQueryDeposit parameters:params handler:completeHandler];
 }
 
 
-+ (void)paymentCreateManualWithWriteInfo:(CNPayWriteModel *)infoModel completeHandler:(IVRequestCallBack)completeHandler {
++ (void)paymentCreateManualWithWriteInfo:(CNPayWriteModel *)infoModel completeHandler:(KYHTTPCallBack)completeHandler {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     CNPayBankCardModel *bankModel = infoModel.chooseBank;
     params[@"bank_account_no"] = bankModel.bank_account_no;
@@ -115,7 +122,7 @@ NSInteger const kPayTypeTotalCount = 21;
     [self requestWithUrl:kPaymentDepositPay parameters:params handler:completeHandler];
 }
 
-+ (void)paymentSubmitBill:(CNPayWriteModel *)infoModel completeHandler:(IVRequestCallBack)completeHandler {
++ (void)paymentSubmitBill:(CNPayWriteModel *)infoModel completeHandler:(KYHTTPCallBack)completeHandler {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     CNPayBankCardModel *bankModel = infoModel.chooseBank;
     params[@"depositor"] = infoModel.depositBy;
@@ -131,7 +138,7 @@ NSInteger const kPayTypeTotalCount = 21;
     [self requestWithUrl:kPaymentOfflinePayBill parameters:params handler:completeHandler];
 }
 
-+ (void)paymentCardPay:(CNPayCardModel *)cardModel completeHandler:(IVRequestCallBack)completeHandler {
++ (void)paymentCardPay:(CNPayCardModel *)cardModel completeHandler:(KYHTTPCallBack)completeHandler {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"cardNo"] = cardModel.cardNo;
     params[@"cardPwd"] = cardModel.cardPwd;
@@ -171,7 +178,7 @@ NSInteger const kPayTypeTotalCount = 21;
 
 #pragma mark - ========================* 完善个人信息 *===========================================
 
-+ (void)paymentCompleteUserName:(NSString *)name preSet:(NSString *)message completeHandler:(IVRequestCallBack)completeHandler {
++ (void)paymentCompleteUserName:(NSString *)name preSet:(NSString *)message completeHandler:(KYHTTPCallBack)completeHandler {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"real_name"] = name;
     params[@"verify_code"] = message;

@@ -8,7 +8,7 @@
 
 #import "IVGameUtility.h"
 #import "NSString+Expand.h"
-#import "BTTHttpManager.h"
+//#import "BTTHttpManager.h"
 #import "AppDelegate.h"
 #import "BTTWithdrawalController.h"
 #import "CNPayVC.h"

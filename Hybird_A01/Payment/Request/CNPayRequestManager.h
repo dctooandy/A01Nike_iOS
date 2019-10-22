@@ -22,7 +22,7 @@ extern NSInteger const kPayTypeTotalCount;
  
  @param completeHandler 访问回调
  */
-+ (void)queryAllChannelCompleteHandler:(IVRequestCallBack)completeHandler;
++ (void)queryAllChannelCompleteHandler:(KYHTTPCallBack)completeHandler;
 
 
 /**
@@ -35,7 +35,7 @@ extern NSInteger const kPayTypeTotalCount;
  @param completeHandler 接口回调
  */
 
-+ (void)paymentWithPayType:(NSString *)type payId:(NSInteger)payId amount:(NSString *)amout bankCode:(NSString *)bankCode completeHandler:(IVRequestCallBack)completeHandler;
++ (void)paymentWithPayType:(NSString *)type payId:(NSInteger)payId amount:(NSString *)amout bankCode:(NSString *)bankCode completeHandler:(KYHTTPCallBack)completeHandler;
 
 
 /**
@@ -44,7 +44,7 @@ extern NSInteger const kPayTypeTotalCount;
  @param isDeposit       手工存款或BQ存款
  @param completeHandler 接口回调
  */
-+ (void)paymentGetDepositNameWithType:(BOOL)isDeposit CompleteHandler:(IVRequestCallBack)completeHandler;
++ (void)paymentGetDepositNameWithType:(BOOL)isDeposit CompleteHandler:(KYHTTPCallBack)completeHandler;
 
 /**
  手工存款 删除历史存款人姓名
@@ -52,7 +52,7 @@ extern NSInteger const kPayTypeTotalCount;
  @param requestId       编号
  @param completeHandler 接口回调
  */
-+ (void)paymentDeleteDepositNameWithId:(NSString *)requestId  CompleteHandler:(IVRequestCallBack)completeHandler;
++ (void)paymentDeleteDepositNameWithId:(NSString *)requestId  CompleteHandler:(KYHTTPCallBack)completeHandler;
 
 /**
  手工存款第一步 和 BQ存款第一步 获取银行卡列表
@@ -67,14 +67,14 @@ extern NSInteger const kPayTypeTotalCount;
                          depositor:(NSString *)depositor
                        referenceId:(NSString *)referenceId
                          BQPayType:(NSInteger)bqPayType
-                   completeHandler:(IVRequestCallBack)completeHandler;
+                   completeHandler:(KYHTTPCallBack)completeHandler;
 
 /**
  手工存款查询未处理提案
  
  @param completeHandler 接口回调
  */
-+ (void)paymentQueryBillCompleteHandler:(IVRequestCallBack)completeHandler;
++ (void)paymentQueryBillCompleteHandler:(KYHTTPCallBack)completeHandler;
 
 /**
  手工存款第三步 创建手工存款提案
@@ -82,7 +82,7 @@ extern NSInteger const kPayTypeTotalCount;
  @param infoModel   用户填写的信息
  @param completeHandler 接口回调
  */
-+ (void)paymentCreateManualWithWriteInfo:(CNPayWriteModel *)infoModel completeHandler:(IVRequestCallBack)completeHandler;
++ (void)paymentCreateManualWithWriteInfo:(CNPayWriteModel *)infoModel completeHandler:(KYHTTPCallBack)completeHandler;
 
 
 
@@ -92,7 +92,7 @@ extern NSInteger const kPayTypeTotalCount;
  @param infoModel    用户第一步填写的信息
  @param completeHandler 接口回调
  */
-+ (void)paymentSubmitBill:(CNPayWriteModel *)infoModel completeHandler:(IVRequestCallBack)completeHandler;
++ (void)paymentSubmitBill:(CNPayWriteModel *)infoModel completeHandler:(KYHTTPCallBack)completeHandler;
 
 
 /**
@@ -101,7 +101,7 @@ extern NSInteger const kPayTypeTotalCount;
  @param cardModel      点卡相关信息模型
  @param completeHandler 接口回调
  */
-+ (void)paymentCardPay:(CNPayCardModel *)cardModel completeHandler:(IVRequestCallBack)completeHandler;
++ (void)paymentCardPay:(CNPayCardModel *)cardModel completeHandler:(KYHTTPCallBack)completeHandler;
 
 
 /**
@@ -119,7 +119,7 @@ extern NSInteger const kPayTypeTotalCount;
  @param message  预留信息
  @param completeHandler 接口回调
  */
-+ (void)paymentCompleteUserName:(NSString *)name preSet:(NSString *)message completeHandler:(IVRequestCallBack)completeHandler;
++ (void)paymentCompleteUserName:(NSString *)name preSet:(NSString *)message completeHandler:(KYHTTPCallBack)completeHandler;
 
 @end
 
