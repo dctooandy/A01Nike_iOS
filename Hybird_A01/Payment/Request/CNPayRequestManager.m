@@ -16,24 +16,26 @@
 + (void)requestWithUrl:(NSString *)url parameters:(NSDictionary *)params handler:(KYHTTPCallBack)completeHandler {
     
     [[IVHttpManager shareManager] sendRequestWithUrl:url parameters:params callBack:^(id  _Nullable response, NSError * _Nullable error) {
-        if (completeHandler) {
-            completeHandler(result,result.data);
-        }
+#warning 调试接口
+//        if (completeHandler) {
+//            completeHandler(result,result.data);
+//        }
     }];
-    [BTTHttpManager sendRequestWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        
-    }];
+//    [BTTHttpManager sendRequestWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+//
+//    }];
 }
 
 + (void)cacheWithUrl:(NSString *)url parameters:(NSDictionary *)params handler:(KYHTTPCallBack)completeHandler {
     [[IVHttpManager shareManager] sendRequestWithMethod:KYHTTPMethodPOST url:url parameters:params cache:YES cacheTimeout:3600 * 24 callBack:^(BOOL isCache, id  _Nullable response, NSError * _Nullable error) {
-        if (completeHandler) {
-            completeHandler(result,result.data);
-        }
+#warning 调试接口
+//        if (completeHandler) {
+//            completeHandler(result,result.data);
+//        }
     } originCallBack:^(id  _Nullable response, NSError * _Nullable error) {
-        if (completeHandler) {
-            completeHandler(result,result.data);
-        }
+//        if (completeHandler) {
+//            completeHandler(result,result.data);
+//        }
     }];
 }
 
@@ -155,7 +157,7 @@ NSInteger const kPayTypeTotalCount = 21;
 
 + (NSString *)submitPayFormWithOrderModel:(CNPayOrderModel *)model {
     
-    NSString *loginName = [IVNetwork userInfo].loginName;
+    NSString *loginName = [IVHttpManager shareManager].loginName;
     id PayModel = [model class];
     
     NSMutableString *htmljs = [[NSMutableString alloc] init];

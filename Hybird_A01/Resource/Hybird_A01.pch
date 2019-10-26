@@ -16,4 +16,5 @@
 #import "BRPickerView.h"
 #import <Masonry.h>
 #import "IVUtility+otherMethod.h"
+#import "UIDevice+IVInfo.h"
 #endif

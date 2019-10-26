@@ -119,16 +119,18 @@
 - (void)fetchPayChannels {
     __weak typeof(self) weakSelf =  self;
     [self.activityView startAnimating];
-    [CNPayRequestManager queryAllChannelCompleteHandler:^(IVRequestResultModel *result, id response) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf.activityView stopAnimating];
-        if (result.status) {
-            [strongSelf fetchChannelSucessHandler:response];
-            return;
-        }
-        // 失败处理
-        [strongSelf fetchChannelFailHandler];
+    [CNPayRequestManager queryAllChannelCompleteHandler:^(id  _Nullable response, NSError * _Nullable error) {
+#warning 调试接口
+//        __strong typeof(weakSelf) strongSelf = weakSelf;
+//        [strongSelf.activityView stopAnimating];
+//        if (result.status) {
+//            [strongSelf fetchChannelSucessHandler:response];
+//            return;
+//        }
+//        // 失败处理
+//        [strongSelf fetchChannelFailHandler];
     }];
+ 
 }
 
 /// 请求数据处理
@@ -448,7 +450,7 @@
         return;
     }
     CNPayChannelModel *channel = [_payChannels objectAtIndex:indexPath.row];
-    if ([IVNetwork userInfo].customerLevel == 0 && (![IVNetwork userInfo].verify_code.length || ![IVNetwork userInfo].real_name.length)) {
+    if ([IVHttpManager shareManager].userInfoModel.starLevel == 0 && (![IVNetwork userInfo].verify_code.length || ![IVNetwork userInfo].real_name.length)) {
         if (channel.payChannel == CNPayChannelBQFast || channel.payChannel == CNPayChannelBQWechat || channel.payChannel == CNPayChannelBQAli || channel.payChannel == CNPayChannelDeposit) {
             BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
             [self.navigationController pushViewController:personInfo animated:YES];
@@ -523,11 +525,13 @@
 // 获取历史存款人姓名
 - (void)getManualDeposit {
     __weak typeof(self) weakSelf = self;
-    [CNPayRequestManager paymentGetDepositNameWithType:YES CompleteHandler:^(IVRequestResultModel *result, id response) {
-        if (result.status) {
-            [weakSelf configNameView:result.data];
-        }
+    [CNPayRequestManager paymentGetDepositNameWithType:YES CompleteHandler:^(id  _Nullable response, NSError * _Nullable error) {
+#warning 调试接口
+//        if (result.status) {
+//            [weakSelf configNameView:result.data];
+//        }
     }];
+
 }
 
 - (void)configNameView:(NSArray *)array {

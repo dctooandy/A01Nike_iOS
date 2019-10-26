@@ -13,7 +13,7 @@
 
 /// 需要登录
 + (void)prepareCacheDataNeedLogin {
-    if (![IVNetwork userInfo]) {
+    if (![IVHttpManager shareManager].userToken) {
         return;
     }
     dispatch_async(dispatch_get_global_queue(0, 0), ^{

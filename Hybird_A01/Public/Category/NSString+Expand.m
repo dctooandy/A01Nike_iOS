@@ -131,10 +131,10 @@ form.submit();\
     if ([url containsString:localDomain]) {
         
         NSString *appToken =  [IVCacheWrapper readJSONStringForKey:kCacheAppToken requestId:nil];//[[IVCacheManager sharedInstance] nativeReadDictionaryForKey:kCacheAppToken];
-        IVUserInfoModel *userModel = [IVNetwork userInfo];
+        BTTUserInfoModel *userModel = [IVHttpManager shareManager].userInfoModel;//[IVNetwork userInfo];
         
         if (userModel != nil) {
-            parameterStr = [NSString stringWithFormat:@"{\"accountName\":\"%@\",\"appToken\":\"%@\",\"userToken\":\"%@\"}",userModel.loginName, appToken, userModel.userToken];
+            parameterStr = [NSString stringWithFormat:@"{\"accountName\":\"%@\",\"appToken\":\"%@\",\"userToken\":\"%@\"}",userModel.loginName, appToken, [IVHttpManager shareManager].userToken];
         }
         else {
             parameterStr = [NSString stringWithFormat:@"{\"appToken\":\"%@\",}", appToken];

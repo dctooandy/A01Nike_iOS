@@ -34,7 +34,8 @@
 }
 
 - (NSString *)preSaveMsg {
-    return [IVNetwork userInfo].verify_code;
+#warning 预留信息
+    return @"";//[IVNetwork userInfo].verify_code;
 }
 
 - (void)showError:(NSString *)error {
@@ -110,24 +111,24 @@
 /**
  充值成功回调处理
  */
-- (void)paySucessHandler:(IVRequestResultModel *)model repay:(dispatch_block_t)repayBlock {
-    
+- (void)paySucessHandler:(NSDictionary *)model repay:(dispatch_block_t)repayBlock {
+#warning 接口调试
     // 数据容灾
-    if (![model.data isKindOfClass:[NSDictionary class]]) {
-        // 后台返回类型不一，全部转成字符串
-        [self showError:[NSString stringWithFormat:@"%@", model.message]];
-        return;
-    }
-
-    NSError *error;
-    CNPayOrderModel *orderModel = [[CNPayOrderModel alloc] initWithDictionary:model.data error:&error];
-    if (error && !orderModel) {
-        [self showError:@"操作失败！请联系客户，或者稍后重试!"];
-        return;
-    }
-    [self showPayTipView];
-    CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:orderModel title:self.paymentModel.paymentTitle];
-    [self pushViewController:webVC];
+//    if (![model.data isKindOfClass:[NSDictionary class]]) {
+//        // 后台返回类型不一，全部转成字符串
+//        [self showError:[NSString stringWithFormat:@"%@", model.message]];
+//        return;
+//    }
+//
+//    NSError *error;
+//    CNPayOrderModel *orderModel = [[CNPayOrderModel alloc] initWithDictionary:model.data error:&error];
+//    if (error && !orderModel) {
+//        [self showError:@"操作失败！请联系客户，或者稍后重试!"];
+//        return;
+//    }
+//    [self showPayTipView];
+//    CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:orderModel title:self.paymentModel.paymentTitle];
+//    [self pushViewController:webVC];
 }
 
 - (void)pushUIWebViewWithURLString:(NSString *)url title:(NSString *)title {

@@ -213,7 +213,6 @@
         [self showError:@"请输入充值金额"];
         return;
     }
-    
     /// 超出额度范围
     NSNumber *amount = [NSString convertNumber:text];
     double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;

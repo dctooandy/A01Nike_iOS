@@ -9,6 +9,8 @@
 #import "IVWebViewUtility.h"
 #import "BridgeProtocolExternal.h"
 #import "MBProgressHUD+Add.h"
+#import "FCUUID.h"
+#import "UIDevice+IVInfo.h"
 @implementation IVWebViewUtility
 - (NSDictionary *)appTheme
 {
@@ -36,11 +38,11 @@
 }
 - (NSString *)appToken
 {
-    return [IVNetwork appToken];
+    return [IVHttpManager shareManager].appToken;
 }
 - (NSString *)deviceId
 {
-    return [IVHttpManager shareManager]
+    return [FCUUID uuidForDevice];
 }
 - (NSString *)sessionId
 {
@@ -79,6 +81,7 @@
     NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
     [paramters setValue:gameId forKey:@"game_id"];
     [[IVHttpManager shareManager] sendRequestWithUrl:@"game/transfer" parameters:paramters.copy callBack:^(id  _Nullable response, NSError * _Nullable error) {
+#warning 调试接口
 //        if (result.status) {
 //            NSLog(@"额度刷新成功");
 //        } else {
@@ -89,6 +92,7 @@
 - (void)sendRequestWithSubURL:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(void(^)(BOOL status, NSDictionary *response))completionBlock
 {
     [[IVHttpManager shareManager] sendRequestWithUrl:url parameters:paramters callBack:^(id  _Nullable response, NSError * _Nullable error) {
+#warning 调试接口
 //        completionBlock(result.status,response);
     }];
 }

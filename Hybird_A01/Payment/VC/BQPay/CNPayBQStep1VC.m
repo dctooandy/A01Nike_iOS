@@ -184,26 +184,27 @@
     } else if (self.paymentModel.paymentType == CNPaymentBQWechat) {
         bqPaymentType = 1;
     }
-    [CNPayRequestManager paymentGetBankListWithType:NO depositor:self.nameTF.text referenceId:nil BQPayType:bqPaymentType completeHandler:^(IVRequestResultModel *result, id response) {
+    [CNPayRequestManager paymentGetBankListWithType:NO depositor:self.nameTF.text referenceId:nil BQPayType:bqPaymentType completeHandler:^(id  _Nullable response, NSError * _Nullable error) {
         [weakSelf hideLoading];
-        if (result.status) {
-            /// 数据解析
-            NSArray *array = result.data[@"bankList"];
-            NSArray *bankList = [CNPayBankCardModel arrayOfModelsFromDictionaries:array error:nil];
-            if (bankList.count == 0) {
-                [self showError:result.message];
-                return;
-            }
-            weakSelf.paymentModel.bankList = bankList.copy;
-            NSMutableArray *bankNames = [NSMutableArray array];
-            for (CNPayBankCardModel *model in bankList) {
-                [bankNames addObject:model.bankname];
-            }
-            weakSelf.bankNames = [bankNames copy];
-            [weakSelf selectBank];
-            return;
-        }
-        [weakSelf showError:result.message];
+#warning 调试接口
+//        if (result.status) {
+//            /// 数据解析
+//            NSArray *array = result.data[@"bankList"];
+//            NSArray *bankList = [CNPayBankCardModel arrayOfModelsFromDictionaries:array error:nil];
+//            if (bankList.count == 0) {
+//                [self showError:result.message];
+//                return;
+//            }
+//            weakSelf.paymentModel.bankList = bankList.copy;
+//            NSMutableArray *bankNames = [NSMutableArray array];
+//            for (CNPayBankCardModel *model in bankList) {
+//                [bankNames addObject:model.bankname];
+//            }
+//            weakSelf.bankNames = [bankNames copy];
+//            [weakSelf selectBank];
+//            return;
+//        }
+//        [weakSelf showError:result.message];
     }];
 }
 

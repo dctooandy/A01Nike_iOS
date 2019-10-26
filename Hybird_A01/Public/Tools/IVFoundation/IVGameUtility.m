@@ -26,7 +26,7 @@
 }
 - (NSString *)IVGameGetProductId
 {
-    return [IVNetwork productId];
+    return [IVHttpManager shareManager].productId;
 }
 - (UIImage *)IVGameGetNavigationBarBackgroundImage
 {
@@ -34,15 +34,15 @@
 }
 - (NSString *)IVGameGetH5Domain
 {
-    return [IVNetwork h5Domain];
+    return [IVHttpManager shareManager].domain;
 }
 - (NSString *)IVGameGetGameDomain
 {
-    return [IVNetwork gameDomain];
+    return [IVHttpManager shareManager].gameDomain;
 }
 - (NSArray *)IVGameGetGateways
 {
-    return [IVNetwork gateways];
+    return [IVHttpManager shareManager].gateways;
 }
 
 - (void)reloadGameWithProvider:(NSString *)provider
@@ -64,8 +64,9 @@
 }
 
 - (BOOL)IVGameShouldForwardToGame {
-    if ([IVNetwork getNetworkType] == kNetworkTypeNotReachable) {
-        [IVNetwork showToastWithMessage:@"似乎已断开与互联网的连接!"];
+
+    if ([[UIDevice networkType] isEqualToString:@"notReachable"]) {
+        [IVNUtility showToastWithMessage:@"似乎已断开与互联网的连接!"];
         return NO;
     }
     return YES;
@@ -73,7 +74,8 @@
 
 - (void)IVGameGetUrlWithParamters:(NSDictionary *)paramters gameController:(IVWKGameViewController *)gameController completion:(void (^)(BOOL,NSString *))completion
 {
-    BOOL isTry = ![IVNetwork userInfo];
+    BOOL isTry = ![IVHttpManager shareManager].userToken.length;
+
     [BTTHttpManager publicGameLoginWithParams:paramters isTry:isTry completeBlock:^(IVRequestResultModel *result, id response) {
         if (completion) {
             completion(result.status,response);

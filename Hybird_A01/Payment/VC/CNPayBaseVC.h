@@ -64,7 +64,7 @@
  @param model 申请成功支付模型
  @param repayBlock 重新支付的业务处理
  */
-- (void)paySucessHandler:(IVRequestResultModel *)model repay:(dispatch_block_t)repayBlock;
+- (void)paySucessHandler:(NSDictionary *)model repay:(dispatch_block_t)repayBlock;
 
 /**
  顶部导航push新的控制器

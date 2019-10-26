@@ -54,6 +54,7 @@
 		3A14CC4C235804A3009711CF /* BTTUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A14CC4B235804A3009711CF /* BTTUserInfoModel.m */; };
 		3A14CC4F23580EF5009711CF /* IVUtility+otherMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A14CC4E23580EF5009711CF /* IVUtility+otherMethod.m */; };
 		3A14CC52235818E7009711CF /* IVHttpManager+UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A14CC51235818E7009711CF /* IVHttpManager+UserInfoModel.m */; };
+		3A14CC55235EE5E4009711CF /* BTTHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A14CC54235EE5E4009711CF /* BTTHttpManager.m */; };
 		3A2DAAC322768D350093C122 /* BTTMeHeadernNicknameLoginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2DAAC122768D350093C122 /* BTTMeHeadernNicknameLoginCell.m */; };
 		3A2DAAC422768D350093C122 /* BTTMeHeadernNicknameLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A2DAAC222768D350093C122 /* BTTMeHeadernNicknameLoginCell.xib */; };
 		3A34F79321B6630D007BC4D4 /* BTTGamesTryAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34F79221B6630D007BC4D4 /* BTTGamesTryAlertView.m */; };
@@ -719,7 +720,6 @@
 		EA5F141A21A28515004305A7 /* IVGameUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141421A28514004305A7 /* IVGameUtility.m */; };
 		EA5F141B21A28515004305A7 /* DeviceModelsForIOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA5F141521A28514004305A7 /* DeviceModelsForIOS.plist */; };
 		EA5F141C21A28515004305A7 /* NeedDeviceURL.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA5F141621A28514004305A7 /* NeedDeviceURL.plist */; };
-		EA5F141D21A28515004305A7 /* IVNetworkStatusDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141921A28514004305A7 /* IVNetworkStatusDetailViewController.m */; };
 		EA5F142021A2AEC1004305A7 /* BTTUserStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EA5F141F21A2AEC1004305A7 /* BTTUserStatusManager.m */; };
 		EAA4811B21ABD265000C0273 /* BTTAGQJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4811721ABD264000C0273 /* BTTAGQJViewController.m */; };
 		EAA4811C21ABD265000C0273 /* BTTAGGJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4811A21ABD265000C0273 /* BTTAGGJViewController.m */; };
@@ -840,6 +840,8 @@
 		3A14CC4E23580EF5009711CF /* IVUtility+otherMethod.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "IVUtility+otherMethod.m"; sourceTree = "<group>"; };
 		3A14CC50235818E7009711CF /* IVHttpManager+UserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IVHttpManager+UserInfoModel.h"; sourceTree = "<group>"; };
 		3A14CC51235818E7009711CF /* IVHttpManager+UserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "IVHttpManager+UserInfoModel.m"; sourceTree = "<group>"; };
+		3A14CC53235EE5E4009711CF /* BTTHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTHttpManager.h; sourceTree = "<group>"; };
+		3A14CC54235EE5E4009711CF /* BTTHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTHttpManager.m; sourceTree = "<group>"; };
 		3A2DAAC022768D350093C122 /* BTTMeHeadernNicknameLoginCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTMeHeadernNicknameLoginCell.h; sourceTree = "<group>"; };
 		3A2DAAC122768D350093C122 /* BTTMeHeadernNicknameLoginCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMeHeadernNicknameLoginCell.m; sourceTree = "<group>"; };
 		3A2DAAC222768D350093C122 /* BTTMeHeadernNicknameLoginCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTMeHeadernNicknameLoginCell.xib; sourceTree = "<group>"; };
@@ -1843,8 +1845,6 @@
 		EA5F141421A28514004305A7 /* IVGameUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVGameUtility.m; sourceTree = "<group>"; };
 		EA5F141521A28514004305A7 /* DeviceModelsForIOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DeviceModelsForIOS.plist; sourceTree = "<group>"; };
 		EA5F141621A28514004305A7 /* NeedDeviceURL.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NeedDeviceURL.plist; sourceTree = "<group>"; };
-		EA5F141821A28514004305A7 /* IVNetworkStatusDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVNetworkStatusDetailViewController.h; sourceTree = "<group>"; };
-		EA5F141921A28514004305A7 /* IVNetworkStatusDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVNetworkStatusDetailViewController.m; sourceTree = "<group>"; };
 		EA5F141E21A2AEC1004305A7 /* BTTUserStatusManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUserStatusManager.h; sourceTree = "<group>"; };
 		EA5F141F21A2AEC1004305A7 /* BTTUserStatusManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUserStatusManager.m; sourceTree = "<group>"; };
 		EAA4811721ABD264000C0273 /* BTTAGQJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTAGQJViewController.m; sourceTree = "<group>"; };
@@ -2586,6 +2586,8 @@
 				3AD9CD5A21661BE800685B43 /* BTTRedDotManager.m */,
 				EA5F141E21A2AEC1004305A7 /* BTTUserStatusManager.h */,
 				EA5F141F21A2AEC1004305A7 /* BTTUserStatusManager.m */,
+				3A14CC53235EE5E4009711CF /* BTTHttpManager.h */,
+				3A14CC54235EE5E4009711CF /* BTTHttpManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -4089,18 +4091,8 @@
 				EA5F141421A28514004305A7 /* IVGameUtility.m */,
 				EA5F141521A28514004305A7 /* DeviceModelsForIOS.plist */,
 				EA5F141621A28514004305A7 /* NeedDeviceURL.plist */,
-				EA5F141721A28514004305A7 /* NetworkStatuts */,
 			);
 			path = IVFoundation;
-			sourceTree = "<group>";
-		};
-		EA5F141721A28514004305A7 /* NetworkStatuts */ = {
-			isa = PBXGroup;
-			children = (
-				EA5F141821A28514004305A7 /* IVNetworkStatusDetailViewController.h */,
-				EA5F141921A28514004305A7 /* IVNetworkStatusDetailViewController.m */,
-			);
-			path = NetworkStatuts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -4822,7 +4814,6 @@
 				3A9E4C7821A2577600E7D8C0 /* BTTChangeMobileManualController+LoadData.m in Sources */,
 				3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */,
 				3AAE8218219A738B003EC8B0 /* BTTForgetPasswordCell.m in Sources */,
-				EA5F141D21A28515004305A7 /* IVNetworkStatusDetailViewController.m in Sources */,
 				3AA7893621FFF2580047A372 /* UIView+WebCache.m in Sources */,
 				3A75A17B22115C9800584A35 /* BTTLoginAccountSelectView.m in Sources */,
 				3A5F7A9A21A8E71100128E8B /* BTTXimaSuccessItemCell.m in Sources */,
@@ -4847,6 +4838,7 @@
 				3AD9CEF0216B3DD900685B43 /* WebViewUserAgaent.m in Sources */,
 				3A37E12C2164A23200FB13A1 /* BTTMineViewController.m in Sources */,
 				3AA7893321FFF2580047A372 /* UIImage+MemoryCacheCost.m in Sources */,
+				3A14CC55235EE5E4009711CF /* BTTHttpManager.m in Sources */,
 				3A8F5190215F77AC0069D1B3 /* BTTTabBarButton.m in Sources */,
 				3A7C0B1921EC7E07002658CC /* BTTSaveMoneyModifyCell.m in Sources */,
 				3A8F518F215F77AC0069D1B3 /* BTTTabBarBigButton.m in Sources */,
