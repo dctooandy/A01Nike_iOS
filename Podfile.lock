@@ -25,20 +25,20 @@ PODS:
     - GJRedDot/GJDeallocBlockExecutor (= 1.1.1)
   - GJRedDot/GJDeallocBlockExecutor (1.1.1)
   - IQKeyboardManager (5.0.8)
-  - IVGameLibrary (0.1.4):
-    - IVGameLibrary/GameController (= 0.1.4)
-  - IVGameLibrary/GameController (0.1.4)
+  - IVGameLibrary (0.1.6):
+    - IVGameLibrary/GameController (= 0.1.6)
+  - IVGameLibrary/GameController (0.1.6)
   - IVHeartPacketLibrary (0.0.4):
     - CocoaAsyncSocket (~> 7.6.2)
-  - IVNetworkLibrary (0.0.30):
+  - IVNetworkLibrary (0.0.32):
     - AFNetworking (~> 3.2.1)
     - FCUUID (~> 1.3.1)
-    - IVNetworkLibrary/IVNetwork (= 0.0.30)
+    - IVNetworkLibrary/IVNetwork (= 0.0.32)
     - JSONModel (~> 1.7.0)
     - UICKeyChainStore (~> 2.1.2)
     - YTKNetwork (~> 2.0.4)
     - ZipArchive (~> 1.4.0)
-  - IVNetworkLibrary/IVNetwork (0.0.30):
+  - IVNetworkLibrary/IVNetwork (0.0.32):
     - AFNetworking (~> 3.2.1)
     - FCUUID (~> 1.3.1)
     - JSONModel (~> 1.7.0)
@@ -123,13 +123,13 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   IVGameLibrary:
-    :commit: f8d80d366425f05707e1fdd6caa6ee7dbca33320
+    :commit: d75f2a6326f5afe76bd468264f1c5f678b45f9a2
     :git: http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git
   IVHeartPacketLibrary:
     :commit: cb81f459cb55163fd8493d0a62ea5339089703fc
     :git: http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git
   IVNetworkLibrary:
-    :commit: 22c46ef04d2e5d85e363314e1b6130376eeb213b
+    :commit: 25b6d6583d8682d794ea231d251ac5a30e565176
     :git: http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary.git
   IVWebViewLibrary:
     :commit: 5a5932ca8e481b2182126cdc7c3f411e7db55c71
@@ -143,9 +143,9 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GJRedDot: de661162a700f3395f0cd70f3629e4d3abe8e181
   IQKeyboardManager: 266cb7b1d11f94a3e71229d77f960f9a1b538e5b
-  IVGameLibrary: 03d79b9cda7cb6609e525384bd22f3b24fb0a21d
+  IVGameLibrary: 63156a45dc31f5b52348101b28bf9d2b625a390d
   IVHeartPacketLibrary: 2a122b1d8cedf8346b4898ace4736147cf9a0405
-  IVNetworkLibrary: 46a7d5da07dee949973c9215ec3058418ce60927
+  IVNetworkLibrary: c696ecde18da82eb2ac4b07629baf0aa1007343a
   IVWebViewLibrary: 5a51f33119c10e7193b358b44703a2fe5b063b2c
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   libOpenInstallSDK: 591755d306aaab15aa3e04db258d12c372797cd6
