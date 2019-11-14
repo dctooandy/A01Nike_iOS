@@ -2,15 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "game_as.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "AS@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "AS@3x.png",
       "scale" : "3x"
     }
   ],

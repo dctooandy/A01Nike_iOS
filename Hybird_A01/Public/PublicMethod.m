@@ -354,6 +354,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     }
 }
 
+
 + (BOOL)isDateYesterday:(NSDate *)date_
 {
     NSDate *start;

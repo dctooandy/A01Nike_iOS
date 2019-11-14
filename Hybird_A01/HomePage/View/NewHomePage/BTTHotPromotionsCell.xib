@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTHotPromotionsCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="热门优惠" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHR-06-TKc">
+                        <rect key="frame" x="15" y="15" width="65.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="P7P-8G-53l">
+                        <rect key="frame" x="15" y="49.5" width="345" height="75"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="75" id="kcZ-Sr-E1u"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oNT-50-f98">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayA-Re-bKO">
+                        <rect key="frame" x="330" y="11.5" width="30" height="27"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="更多">
+                            <color key="titleColor" red="0.40000000000000002" green="0.70196078429999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="moreBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="uLl-KI-oO2"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="P7P-8G-53l" secondAttribute="trailing" constant="15" id="2UO-Et-vRE"/>
+                <constraint firstItem="ayA-Re-bKO" firstAttribute="centerY" secondItem="bHR-06-TKc" secondAttribute="centerY" id="4jL-sL-VfZ"/>
+                <constraint firstItem="bHR-06-TKc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="9d7-jM-7Hk"/>
+                <constraint firstAttribute="trailing" secondItem="ayA-Re-bKO" secondAttribute="trailing" constant="15" id="Vx7-0m-xWv"/>
+                <constraint firstItem="P7P-8G-53l" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="dR0-gr-aKD"/>
+                <constraint firstItem="bHR-06-TKc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="kw3-XU-pNt"/>
+                <constraint firstItem="P7P-8G-53l" firstAttribute="top" secondItem="bHR-06-TKc" secondAttribute="bottom" constant="15" id="xNA-vH-rT4"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="375" height="138"/>
+            <connections>
+                <outlet property="collectionView" destination="P7P-8G-53l" id="C25-Sw-srI"/>
+            </connections>
+            <point key="canvasLocation" x="68.840579710144937" y="66.964285714285708"/>
+        </collectionViewCell>
+    </objects>
+</document>

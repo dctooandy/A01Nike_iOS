@@ -25,10 +25,12 @@
 #import "BTTAGGJViewController.h"
 #import "BTTVideoGamesListController.h"
 #import "BTTLoginAccountSelectView.h"
-
+#import "BTTJayPopView.h"
 
 
 static const char *BTTHeaderViewKey = "headerView";
+
+static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 
 @implementation BTTHomePageViewController (Nav)
 
@@ -85,7 +87,8 @@ static const char *BTTHeaderViewKey = "headerView";
     self.isLogin = YES;
     [IN3SAnalytics setUserName:[IVNetwork userInfo].loginName];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateUI];
+//        [self updateUI];
+        self.loginAndRegisterBtnsView.hidden = YES;
         [[IVGameManager sharedManager] reloadCacheGame];
     });
 }
@@ -97,20 +100,41 @@ static const char *BTTHeaderViewKey = "headerView";
     self.isVIP = NO;
     [IN3SAnalytics setUserName:nil];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateUI];
+//        [self updateUI];
+        self.loginAndRegisterBtnsView.hidden = NO;
         [[IVGameManager sharedManager] reloadCacheGame];
     });
 }
 
-- (void)updateUI {
-    self.headerView.isLogin = self.isLogin;
-    self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin);
-    self.collectionView.frame = CGRectMake(0,  self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin, SCREEN_WIDTH, SCREEN_HEIGHT - (self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin));
+//- (void)updateUI {
+//    self.headerView.isLogin = self.isLogin;
+//    self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin);
+//    self.collectionView.frame = CGRectMake(0,  self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin, SCREEN_WIDTH, SCREEN_HEIGHT - (self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin));
+//}
+
+- (void)setupLoginAndRegisterBtnsView {
+    self.loginAndRegisterBtnsView = [BTTLoginOrRegisterBtsView viewFromXib];
+    self.loginAndRegisterBtnsView.hidden = [IVNetwork userInfo] ? YES : NO;
+    [self.view addSubview:self.loginAndRegisterBtnsView];
+    self.loginAndRegisterBtnsView.frame = CGRectMake(0, SCREEN_HEIGHT - (KIsiPhoneX ? 83 : 49) - 87, SCREEN_WIDTH, 87);
+    weakSelf(weakSelf);
+    self.loginAndRegisterBtnsView.btnClickBlock = ^(UIButton * _Nullable btn) {
+        strongSelf(strongSelf);
+        if (btn.tag == 1000) {
+            BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
+            loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
+            [strongSelf.navigationController pushViewController:loginAndRegister animated:YES];
+        } else {
+            BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
+            loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
+            [strongSelf.navigationController pushViewController:loginAndRegister animated:YES];
+        }
+    };
 }
 
 - (void)setupNav {
     [self.navigationController setNavigationBarHidden:YES];
-    self.headerView = [[BTTHomePageHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin) withNavType:BTTNavTypeHomePage];
+    self.headerView = [[BTTHomePageHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, BTTNavHeightLogin) withNavType:BTTNavTypeHomePage];
     self.headerView.isLogin = self.isLogin;
     [self.view addSubview:self.headerView];
     weakSelf(weakSelf);
@@ -286,6 +310,29 @@ static const char *BTTHeaderViewKey = "headerView";
     };
 }
 
+- (void)showJay {
+    
+    BTTJayPopView *customView = [BTTJayPopView viewFromXib];
+    customView.frame = CGRectMake(0, 0, 296, 528);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
+    [popView pop];
+    weakSelf(weakSelf);
+    customView.dismissBlock = ^{
+       [popView dismiss];
+    };
+   
+    customView.btnBlock = ^(UIButton *btn) {
+       strongSelf(strongSelf);
+        [popView dismiss];
+        NSString *url = [NSString stringWithFormat:@"%@jays_concert_2.htm",[IVNetwork h5Domain]];
+        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+        vc.webConfigModel.url = url;
+        vc.webConfigModel.newView = YES;
+        vc.webConfigModel.theme = @"outside";
+        [strongSelf.navigationController pushViewController:vc animated:YES];
+    };
+}
+
 #pragma mark - JXRegisterManagerDelegate
 
 - (void)registerUID:(NSString *)uid {
@@ -419,6 +466,15 @@ static const char *BTTHeaderViewKey = "headerView";
 
 - (BTTHomePageHeaderView *)headerView {
     return objc_getAssociatedObject(self, &BTTHeaderViewKey);
+}
+
+- (void)setLoginAndRegisterBtnsView:(BTTLoginOrRegisterBtsView *)loginAndRegisterBtnsView {
+    objc_setAssociatedObject(self, &BTTLoginAndRegisterKey, loginAndRegisterBtnsView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+
+- (BTTLoginOrRegisterBtsView *)loginAndRegisterBtnsView {
+    return objc_getAssociatedObject(self, &BTTLoginAndRegisterKey);
 }
 
 

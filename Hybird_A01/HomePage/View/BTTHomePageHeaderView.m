@@ -89,7 +89,7 @@
                 messageBtn.showRedDot = num;
             } handler:self];
             
-            [self setupLoginAndRegisterBtn];
+//            [self setupLoginAndRegisterBtn];
         }
             break;
         case BTTNavTypeOnlyTitle:
