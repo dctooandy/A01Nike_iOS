@@ -168,4 +168,24 @@
     
 }
 
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    UIViewController *vc =  (UIViewController *)webView.navigationDelegate;
+    if ([navigationAction.request.URL.absoluteString containsString:@"nbapp://"]) {
+        if ([[navigationAction.request.URL.absoluteString URLDecodedString] containsString:@"https://www.why918.com"]) {
+            [[CLive800Manager sharedInstance] startLive800Chat:(UIViewController *)webView.navigationDelegate];
+        } else if ([[navigationAction.request.URL.absoluteString URLDecodedString] containsString:@"/deposit_xunjie.htm"]) {
+            
+            [vc.navigationController pushViewController:[[CNPayVC alloc] init] animated:YES];
+        } else if ([[navigationAction.request.URL.absoluteString URLDecodedString] containsString:@"/login.htm"]) {
+            BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
+            loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
+            [vc.navigationController pushViewController:loginAndRegister animated:YES];
+        }
+    }
+}
+
+- (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
+    return nil;
+}
+
 @end

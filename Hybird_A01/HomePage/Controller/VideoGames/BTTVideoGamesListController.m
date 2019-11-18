@@ -86,7 +86,7 @@
 }
 
 - (void)resetRequestModel {
-    _type = @"hot";
+    _type = @"";
     _line = @"";
     _platform = self.provider;
     _keyword = @"";

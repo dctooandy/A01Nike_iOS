@@ -53,6 +53,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    _jingcaiTryIcon.hidden = YES;
+    self.mineSparaterType = BTTMineSparaterTypeNone;
     [self registerNotification];
 }
 
@@ -64,14 +66,12 @@
 - (void)loginSuccess:(NSNotification *)notifi {
     _btiTryIcon.hidden = YES;
     _vipTryIcon.hidden = YES;
-    _jingcaiTryIcon.hidden = YES;
     _asTryIcon.hidden = YES;
 }
 
 - (void)logoutSuccess:(NSNotification *)notifi {
     _btiTryIcon.hidden = NO;
     _vipTryIcon.hidden = NO;
-    _jingcaiTryIcon.hidden = NO;
     _asTryIcon.hidden = NO;
 }
 

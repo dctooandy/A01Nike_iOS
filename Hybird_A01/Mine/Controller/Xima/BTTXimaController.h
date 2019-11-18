@@ -8,6 +8,8 @@
 
 #import "BTTCollectionViewController.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef void(^CompleteBlock)(IVRequestResultModel * _Nullable result, id response);
 
 @class BTTXimaTotalModel;
@@ -45,7 +47,6 @@ typedef enum {
     BTTXimaThisWeekTypeOther  ///< other
 }BTTXimaThisWeekType;
 
-NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTXimaController : BTTCollectionViewController
 

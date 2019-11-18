@@ -8,9 +8,9 @@
 
 #import "BTTBaseCollectionViewCell.h"
 
-typedef void (^BTTMobileVerifyCodeNotLoginBlock)(NSString *phone);
 
 NS_ASSUME_NONNULL_BEGIN
+typedef void (^BTTMobileVerifyCodeNotLoginBlock)(NSString *phone);
 
 @interface BTTRegisterQuickAutoCell : BTTBaseCollectionViewCell
 

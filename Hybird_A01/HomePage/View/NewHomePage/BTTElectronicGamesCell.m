@@ -35,6 +35,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.mineSparaterType = BTTMineSparaterTypeNone;
     [self registerNotification];
 }
 

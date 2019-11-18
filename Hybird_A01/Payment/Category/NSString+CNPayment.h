@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSString (CNPayment)
 
 /// 金额千分位
@@ -35,3 +37,5 @@
 + (NSString *)insertSpaceToString:(NSString *)string;
 
 @end
+
+NS_ASSUME_NONNULL_END
