@@ -56,7 +56,7 @@
 
 - (NSString *)img {
     if (![_img hasPrefix:@"http"]) {
-        return [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],_img];
+        return [PublicMethod nowCDNWithUrl:_img];
     }
     return _img;
 }

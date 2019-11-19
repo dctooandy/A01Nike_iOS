@@ -27,7 +27,7 @@
 
 - (NSString *)path {
     if (![_path hasPrefix:@"http"] && _path.length) {
-        return [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain], _path];
+        return [PublicMethod nowCDNWithUrl:_path];
     }
     return _path;
 }

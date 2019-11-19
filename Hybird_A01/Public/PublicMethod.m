@@ -1107,4 +1107,23 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     return timeSp;
 }
 
++ (NSString *)nowCDNWithUrl:(NSString *)url {
+    BOOL cdn = [[IVNetwork cdn] hasSuffix:@"/"];
+    BOOL urlStr = [url hasPrefix:@"/"];
+    
+    NSString *str = nil;
+    if (cdn) {
+        str = [[IVNetwork cdn] substringToIndex:[IVNetwork cdn].length - 1];
+    } else {
+        str = [IVNetwork cdn];
+    }
+    
+    if (urlStr) {
+        str = [NSString stringWithFormat:@"%@/%@",str,[url substringFromIndex:1]];
+    } else {
+        str = [NSString stringWithFormat:@"%@/%@",str,url];
+    }
+    return str;
+}
+
 @end

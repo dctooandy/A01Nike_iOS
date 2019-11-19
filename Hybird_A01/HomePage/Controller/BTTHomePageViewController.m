@@ -569,7 +569,7 @@
         case 1002://沙巴体育
 
         {
-            BTTPosterModel * model = self.posters.count ? self.posters[0] : nil;
+            BTTPosterModel * model = self.posters.count ? self.posters[1] : nil;
             videoGamesVC = [BTTVideoGamesListController new];
             videoGamesVC.banners = self.banners;
             videoGamesVC.imageUrls = self.imageUrls;
@@ -589,7 +589,7 @@
             
             case 1004:
         {
-            BTTPosterModel * model = self.posters.count ? self.posters[0] : nil;
+            BTTPosterModel * model = self.posters.count ? self.posters[1] : nil;
             videoGamesVC = [BTTVideoGamesListController new];
             videoGamesVC.banners = self.banners;
             videoGamesVC.imageUrls = self.imageUrls;
@@ -600,7 +600,7 @@
         case 1005:
             //跳电子游戏大厅
         {
-            BTTPosterModel * model = self.posters.count ? self.posters[0] : nil;
+            BTTPosterModel * model = self.posters.count ? self.posters[1] : nil;
             videoGamesVC = [[BTTVideoGamesListController alloc] init];
             videoGamesVC.banners = self.banners;
             videoGamesVC.imageUrls = self.imageUrls;
@@ -640,7 +640,7 @@
             break;
         case 1010://AS电游
             model = [[IVGameModel alloc] init];
-            model.cnName = @"AS电游";
+            model.cnName = @"AS真人棋牌";
             model.enName =  kASSlotEnName;
             model.provider = kASSlotProvider;
             break;

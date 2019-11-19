@@ -220,6 +220,12 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - 将某个时间转化成 时间戳
 + (NSInteger)timeSwitchTimestamp:(NSString *)formatTime andFormatter:(NSString *)format;
 
+
+
+
+// 当前CDN
++ (NSString *)nowCDNWithUrl:(NSString *)url;
+
 @end
 
 NS_ASSUME_NONNULL_END

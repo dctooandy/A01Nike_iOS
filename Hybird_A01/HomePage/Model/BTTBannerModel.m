@@ -12,7 +12,7 @@
 
 - (NSString *)imgurl {
     if (![_imgurl hasPrefix:@"http"]) {
-        _imgurl = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],_imgurl];
+        _imgurl = [PublicMethod nowCDNWithUrl:_imgurl];
     }
     return _imgurl;
 }

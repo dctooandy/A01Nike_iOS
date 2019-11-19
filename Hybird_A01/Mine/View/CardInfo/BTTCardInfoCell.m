@@ -61,7 +61,7 @@
         bgURLStr = @"";
     } else {
         if (![bgURLStr hasPrefix:@"http"]) {
-            bgURLStr = [NSString stringWithFormat:@"%@%@",[IVNetwork cdn],bgURLStr];
+            bgURLStr = [PublicMethod nowCDNWithUrl:bgURLStr];
         }
     }
     NSURL *bgUrl = [NSURL URLWithString:bgURLStr];
@@ -84,7 +84,7 @@
             iconURLStr = @"";
         } else {
             if (![iconURLStr hasPrefix:@"http"]) {
-                iconURLStr = [NSString stringWithFormat:@"%@%@",[IVNetwork cdn],iconURLStr];
+                iconURLStr = [PublicMethod nowCDNWithUrl:iconURLStr];
             }
         }
         NSURL *iconUrl = [NSURL URLWithString:iconURLStr];

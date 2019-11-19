@@ -448,7 +448,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
                     [self.navigationController pushViewController:vc animated:YES];
                 } else if ([provider isEqualToString:@"AS"]) {
                     IVGameModel *model = [[IVGameModel alloc] init];
-                    model.cnName = @"AS电游";
+                    model.cnName = @"AS真人棋牌";
                     model.enName =  kASSlotEnName;
                     model.provider = kASSlotProvider;
                 }
