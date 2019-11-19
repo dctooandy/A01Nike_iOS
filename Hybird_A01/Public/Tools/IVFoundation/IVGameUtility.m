@@ -181,6 +181,8 @@
             loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
             [vc.navigationController pushViewController:loginAndRegister animated:YES];
         }
+    } else if ([navigationAction.request.URL.absoluteString isEqualToString:@"http://m.xjcbet.com/#/"]) {
+        [vc.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 

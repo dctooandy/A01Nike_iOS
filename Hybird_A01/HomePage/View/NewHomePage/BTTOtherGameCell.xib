@@ -124,7 +124,7 @@
                             <constraint firstAttribute="width" constant="25" id="bpu-qi-R2I"/>
                         </constraints>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tryPlay" translatesAutoresizingMaskIntoConstraints="NO" id="CE7-3R-gKf">
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tryPlay" translatesAutoresizingMaskIntoConstraints="NO" id="CE7-3R-gKf">
                         <rect key="frame" x="248" y="134.5" width="25" height="17.5"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tryPlay" translatesAutoresizingMaskIntoConstraints="NO" id="1Q3-wD-dYn">

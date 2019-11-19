@@ -97,12 +97,10 @@
     if ([IVNetwork userInfo]) {
         _btiTryIcon.hidden = YES;
         _vipTryIcon.hidden = YES;
-        _jingcaiTryIcon.hidden = YES;
         _asTryIcon.hidden = YES;
     } else {
         _btiTryIcon.hidden = NO;
         _vipTryIcon.hidden = NO;
-        _jingcaiTryIcon.hidden = NO;
         _asTryIcon.hidden = NO;
     }
 }

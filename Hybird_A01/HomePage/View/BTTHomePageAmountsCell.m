@@ -31,7 +31,7 @@
     topViewMaskLayer.path          = topViewMaskPath.CGPath;
     self.topView.layer.mask         = topViewMaskLayer;
     
-    self.scrollLabelView = [[UUMarqueeView alloc] initWithFrame:CGRectMake(15, 95, SCREEN_WIDTH - 30, 200)];
+    self.scrollLabelView = [[UUMarqueeView alloc] initWithFrame:CGRectMake(15, 90, SCREEN_WIDTH - 30, 200)];
     [self.contentView addSubview:self.scrollLabelView];
     self.scrollLabelView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     _scrollLabelView.delegate = self;

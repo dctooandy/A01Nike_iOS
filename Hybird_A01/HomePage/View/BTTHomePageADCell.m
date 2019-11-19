@@ -30,13 +30,13 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.backgroundColor = [UIColor colorWithHexString:@"212229"];
-    if (SCREEN_WIDTH > 414) {
-        self.imageWidth.constant = BTTImageDefaultWidth;
-        self.imageHeight.constant =  BTTImageDefaultHeight;
-    } else {
-        self.imageWidth.constant = SCREEN_WIDTH - 45;
-        self.imageHeight.constant =   (SCREEN_WIDTH - 45) / BTTImageDefaultWidth * BTTImageDefaultHeight;
-    }
+//    if (SCREEN_WIDTH > 414) {
+//        self.imageWidth.constant = BTTImageDefaultWidth;
+//        self.imageHeight.constant =  BTTImageDefaultHeight;
+//    } else {
+//        self.imageWidth.constant = SCREEN_WIDTH - 45;
+//        self.imageHeight.constant =   (SCREEN_WIDTH - 45) / BTTImageDefaultWidth * BTTImageDefaultHeight;
+//    }
     
   
 }
