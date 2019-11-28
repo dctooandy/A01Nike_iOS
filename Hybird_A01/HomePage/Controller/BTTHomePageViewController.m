@@ -94,6 +94,11 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    BOOL isShowAccountGride = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowAccountGride] boolValue];
+    if ([PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork userInfo].created_date]] && !isShowAccountGride) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowAccountGride];
+        [self showNewAccountGrideView];
+    }
     //第一次出现预加载游戏
     if (!self.isloaded) {
         self.isloaded = YES;

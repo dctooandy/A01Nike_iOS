@@ -33,7 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showJay;
 
-- (void)setupLoginAndRegisterBtnsView ;
+- (void)setupLoginAndRegisterBtnsView;
+
+- (void)showNewAccountGrideView;
 
 @end
 

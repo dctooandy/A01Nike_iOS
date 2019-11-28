@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0CCED2238B7FE000CFEE22 /* BTTNewAccountGuidePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0CCED1238B7FE000CFEE22 /* BTTNewAccountGuidePopView.m */; };
+		3A0CCED4238B7FF000CFEE22 /* BTTNewAccountGuidePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0CCED3238B7FF000CFEE22 /* BTTNewAccountGuidePopView.xib */; };
 		3A11ADD321816E5800B1AFF4 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11ADC921816E5800B1AFF4 /* SVRadialGradientLayer.m */; };
 		3A11ADD421816E5800B1AFF4 /* SVProgressAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11ADCC21816E5800B1AFF4 /* SVProgressAnimatedView.m */; };
 		3A11ADD521816E5800B1AFF4 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11ADCF21816E5800B1AFF4 /* SVProgressHUD.m */; };
@@ -771,6 +773,9 @@
 
 /* Begin PBXFileReference section */
 		147D64357C20B5867CCCA734 /* Pods-Hybird_A01.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hybird_A01.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01.debug.xcconfig"; sourceTree = "<group>"; };
+		3A0CCED0238B7FE000CFEE22 /* BTTNewAccountGuidePopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTNewAccountGuidePopView.h; sourceTree = "<group>"; };
+		3A0CCED1238B7FE000CFEE22 /* BTTNewAccountGuidePopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTNewAccountGuidePopView.m; sourceTree = "<group>"; };
+		3A0CCED3238B7FF000CFEE22 /* BTTNewAccountGuidePopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTNewAccountGuidePopView.xib; sourceTree = "<group>"; };
 		3A11ADC921816E5800B1AFF4 /* SVRadialGradientLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVRadialGradientLayer.m; sourceTree = "<group>"; };
 		3A11ADCA21816E5800B1AFF4 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
 		3A11ADCB21816E5800B1AFF4 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
@@ -1939,6 +1944,16 @@
 				F552EBE6A22A8836B6F9284B /* Pods-Hybird_A01.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		3A0CCECF238B7F1B00CFEE22 /* NewAccountGuide */ = {
+			isa = PBXGroup;
+			children = (
+				3A0CCED0238B7FE000CFEE22 /* BTTNewAccountGuidePopView.h */,
+				3A0CCED1238B7FE000CFEE22 /* BTTNewAccountGuidePopView.m */,
+				3A0CCED3238B7FF000CFEE22 /* BTTNewAccountGuidePopView.xib */,
+			);
+			path = NewAccountGuide;
 			sourceTree = "<group>";
 		};
 		3A11ADC821816E5800B1AFF4 /* SVProgressHUD */ = {
@@ -3364,6 +3379,7 @@
 		3AD9CF39216EDC6C00685B43 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3A0CCECF238B7F1B00CFEE22 /* NewAccountGuide */,
 				3A14CC5B237A4AFA009711CF /* NewHomePage */,
 				3AF9EB5822A4B5B200A85D9F /* MidAutumn */,
 				3A6DD5EF228914AD000288B2 /* Andriod88 */,
@@ -4276,6 +4292,7 @@
 				3A5AE6CF22D6E22A0013E8A3 /* LIVVoiceItem@2x.png in Resources */,
 				3A7A1A6D21BF68AA00572B50 /* BTTRegisterSuccessTwoCell.xib in Resources */,
 				3A5AE67722D6E22A0013E8A3 /* LIVSatisfactionEvaluationCommentCell.nib in Resources */,
+				3A0CCED4238B7FF000CFEE22 /* BTTNewAccountGuidePopView.xib in Resources */,
 				3A5AE6CE22D6E22A0013E8A3 /* LIVEmotionItem@2x.png in Resources */,
 				3A5AE6B422D6E22A0013E8A3 /* photo_original_sel@2x.png in Resources */,
 				3A5AE67F22D6E22A0013E8A3 /* Emotion.plist in Resources */,
@@ -4708,6 +4725,7 @@
 				3ADD2393217837FF00FA959A /* BTTMeHeaderLoginCell.m in Sources */,
 				3AE1EAFC218021080073A32D /* BTTVerifyTypeSelectController+LoadData.m in Sources */,
 				D5DBEAFF21ABB774008AF629 /* NSString+CNPayment.m in Sources */,
+				3A0CCED2238B7FE000CFEE22 /* BTTNewAccountGuidePopView.m in Sources */,
 				3AA7892E21FFF2580047A372 /* SDWebImageTransition.m in Sources */,
 				3ADD23EF2179B97A00FA959A /* TAPageControl.m in Sources */,
 				D5DBEB3A21ABB774008AF629 /* CNPayConstant.m in Sources */,

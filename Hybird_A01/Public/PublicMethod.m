@@ -1126,4 +1126,13 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     return str;
 }
 
+
++ (NSDate *)transferDateStringToDate:(NSString *)dateString {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
+    NSDate *date = [formatter dateFromString:dateString];
+    return date;
+}
+
 @end

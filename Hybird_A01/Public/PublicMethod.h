@@ -226,6 +226,9 @@ NS_ASSUME_NONNULL_BEGIN
 // 当前CDN
 + (NSString *)nowCDNWithUrl:(NSString *)url;
 
+
++ (NSDate *)transferDateStringToDate:(NSString *)dateString;
+
 @end
 
 NS_ASSUME_NONNULL_END

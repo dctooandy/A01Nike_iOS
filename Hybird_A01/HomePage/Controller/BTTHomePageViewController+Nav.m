@@ -26,6 +26,7 @@
 #import "BTTVideoGamesListController.h"
 #import "BTTLoginAccountSelectView.h"
 #import "BTTJayPopView.h"
+#import "BTTNewAccountGuidePopView.h"
 
 
 static const char *BTTHeaderViewKey = "headerView";
@@ -86,6 +87,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 - (void)loginSuccess:(NSNotification *)notifi {
     self.isLogin = YES;
     [IN3SAnalytics setUserName:[IVNetwork userInfo].loginName];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
 //        [self updateUI];
         self.loginAndRegisterBtnsView.hidden = YES;
@@ -93,6 +95,17 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     });
 }
 
+
+- (void)showNewAccountGrideView {
+    BTTNewAccountGuidePopView *customView = [BTTNewAccountGuidePopView viewFromXib];
+    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+}
 
 
 - (void)logoutSuccess:(NSNotification *)notifi {
