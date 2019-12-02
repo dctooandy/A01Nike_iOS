@@ -37,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showNewAccountGrideView;
 
+- (void)setupFloatWindow;
+
 @end
 
 NS_ASSUME_NONNULL_END

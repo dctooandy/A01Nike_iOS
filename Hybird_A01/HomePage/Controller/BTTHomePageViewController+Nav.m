@@ -27,6 +27,7 @@
 #import "BTTLoginAccountSelectView.h"
 #import "BTTJayPopView.h"
 #import "BTTNewAccountGuidePopView.h"
+#import "UIImage+GIF.h"
 
 
 static const char *BTTHeaderViewKey = "headerView";
@@ -36,7 +37,26 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 @implementation BTTHomePageViewController (Nav)
 
 
+- (void)setupFloatWindow {
+    UIImageView *floatWindow = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - 61, SCREEN_HEIGHT / 2 + 120, 68.8, 66)];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"qhb" ofType:@"gif"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    UIImage *image = [UIImage sd_animatedGIFWithData:data];
+    [floatWindow sd_setImageWithURL:nil placeholderImage:image];
+    [self.view addSubview:floatWindow];
+    floatWindow.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [floatWindow addGestureRecognizer:tap];
+}
 
+- (void)tapAction {
+//    monthly_activity.htm
+    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+    vc.webConfigModel.url = @"monthly_activity.htm";
+    vc.webConfigModel.newView = YES;
+    vc.webConfigModel.theme = @"outside";
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 - (void)registerNotification {

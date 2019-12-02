@@ -100,6 +100,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 #define BTTShowAccountGride @"BTTShowAccountGride"
 
+#define BTTShareNoticeTag @"BTTShareNoticeTag"
+
 //Flurry
 #define FlurryKey  @"RY7GPP2V792PMZK3PYNX"
 

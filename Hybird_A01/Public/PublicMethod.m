@@ -8,6 +8,7 @@
 
 #import "PublicMethod.h"
 #import "AppDelegate.h"
+#import <CoreImage/CoreImage.h>
 
 @implementation PublicMethod
 
@@ -1134,5 +1135,4 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     NSDate *date = [formatter dateFromString:dateString];
     return date;
 }
-
 @end

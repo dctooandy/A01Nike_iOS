@@ -30,9 +30,9 @@
     if (self.personalInfos.count) {
         [self.personalInfos removeAllObjects];
     }
-    NSArray *icons = @[@"me_personalInfo_unband",@"me_mobile_unband",@"me_email_unband",@"me_card_unband"];
-    NSArray *names = @[@"个人资料",@"绑定手机",@"绑定邮箱",@"银行卡资料"];
-    NSArray *highlights = @[@"me_personalInfo_band",@"me_mobile_band",@"me_email_band",@"me_card_band"];
+    NSArray *icons = @[@"me_personalInfo_unband",@"me_mobile_unband",@"me_card_unband",@"me_share"];
+    NSArray *names = @[@"个人资料",@"绑定手机",@"银行卡资料",@"分享"];
+    NSArray *highlights = @[@"me_personalInfo_band",@"me_mobile_band",@"me_card_band",@"me_share"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];

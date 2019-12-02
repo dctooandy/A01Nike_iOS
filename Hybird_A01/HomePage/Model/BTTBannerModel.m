@@ -28,7 +28,7 @@
 
 
 - (NSString *)detail {
-    if (_detail.length && ![_detail hasPrefix:@"http"]) {
+    if (_detail.length && ![_detail hasPrefix:@"http"] && [_detail hasSuffix:@".htm"]) {
         _detail = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],_detail];
     }
     return _detail;

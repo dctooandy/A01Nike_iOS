@@ -52,6 +52,7 @@
 #import "BTTCompleteMeterialController.h"
 #import "BTTNicknameSetController.h"
 #import "BTTMeHeadernNicknameLoginCell.h"
+#import "BTTActionSheet.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -59,7 +60,6 @@
 
 @property (nonatomic, assign) BOOL isCompletePersonalInfo; // 是否完善个人信息
 
-@property (nonatomic, strong) BTTBaseWebViewController *webViewVC;
 
 
 
@@ -87,9 +87,12 @@
     [self loadPaymentDefaultData];
     [self loadMeAllData];
     [self registerNotification];
-    _webViewVC = [[BTTBaseWebViewController alloc] init];
-    
-    
+    BOOL isShowShareNotice = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShareNoticeTag] boolValue];
+    if (!isShowShareNotice) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShareNoticeTag];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self showShareNoticeView];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -480,6 +483,8 @@
         BTTPersonalInfoController *personInfo = [[BTTPersonalInfoController alloc] init];
         [self.navigationController pushViewController:personInfo animated:YES];
     } else if (indexPath.row == 4) {
+        [self showShareActionSheet];
+    } else if (indexPath.row == 3) {
         if (self.isCompletePersonalInfo) {
             BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
@@ -487,17 +492,6 @@
             BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
-    } else if (indexPath.row == 3) {
-        UIViewController *vc = nil;
-        if ([IVNetwork userInfo].isEmailBinded) {
-            BTTModifyEmailController *modifyVC = [BTTModifyEmailController new];
-            vc = modifyVC;
-        } else {
-            BTTBindEmailController *bindVC = [[BTTBindEmailController alloc] init];
-            bindVC.codeType = BTTSafeVerifyTypeBindEmail;
-            vc = bindVC;
-        }
-        [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 4 + self.personalInfos.count + self.saveMoneyCount) {
         if (self.isCompletePersonalInfo) {
             if ([IVNetwork userInfo].isBankBinded) {

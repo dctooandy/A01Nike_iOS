@@ -18,11 +18,82 @@
 #import "BTTMakeCallLoginView.h"
 #import "BTTMineViewController+LoadData.h"
 #import "BTTCardInfosController.h"
+#import "BTTShareNoticeView.h"
+#import "BTTPromotionDetailController.h"
+#import "BTTActionSheet.h"
+#import "BTTShowErcodePopview.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
 
 @implementation BTTMineViewController (Nav)
+
+
+- (void)showShareNoticeView {
+    BTTShareNoticeView *customView = [BTTShareNoticeView viewFromXib];
+    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    weakSelf(weakSelf);
+    customView.btnBlock = ^(UIButton * _Nullable btn) {
+        [popView dismiss];
+        strongSelf(strongSelf);
+        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+        vc.webConfigModel.url = @"recommendFriends.htm";
+        vc.webConfigModel.newView = YES;
+        vc.webConfigModel.theme = @"outside";
+        [strongSelf.navigationController pushViewController:vc animated:YES];
+    };
+}
+
+- (void)showShareActionSheet {
+    NSArray *names = @[@"复制链接",@"保存到相册",@"查看二维码"];
+    NSArray *icons = @[@"me_shareCopy",@"me_shareDownload",@"me_shareCode"];
+    BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithShareHeadOprationWith:names andImageArry:icons andProTitle:@"" and:ShowTypeIsShareStyle];
+    weakSelf(weakSelf);
+    [actionSheet setBtnClick:^(NSInteger btnTag) {
+        strongSelf(strongSelf);
+        NSLog(@"\n点击第几个====%ld\n当前选中的按钮title====%@===%@====%@",btnTag,names[btnTag],@(btnTag), [IVNetwork userInfo].domain_name);
+        if (btnTag == 0) {
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            pasteboard.string = [IVNetwork userInfo].domain_name.length ? [IVNetwork userInfo].domain_name : [IVNetwork h5Domain];
+            [MBProgressHUD showSuccess:@"复制链接成功" toView:strongSelf.view];
+        } else if (btnTag == 1) {
+            UIImage *image = [PublicMethod QRCodeMethod:[IVNetwork userInfo].domain_name.length ? [IVNetwork userInfo].domain_name : [IVNetwork h5Domain]];
+            UIImageWriteToSavedPhotosAlbum(image, strongSelf, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        } else if (btnTag == 2) {
+            [strongSelf showErcodePopView];
+        }
+    }];
+    [[UIApplication sharedApplication].keyWindow addSubview:actionSheet];
+}
+
+- (void)showErcodePopView {
+    BTTShowErcodePopview *customView = [BTTShowErcodePopview viewFromXib];
+    customView.iconImageView.image = [PublicMethod QRCodeMethod:[IVNetwork userInfo].domain_name.length ? [IVNetwork userInfo].domain_name : [IVNetwork h5Domain]];
+    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    NSString *msg = nil ;
+    if(error){
+        msg = @"保存图片失败" ;
+    }else{
+        msg = @"保存图片成功" ;
+    }
+    [MBProgressHUD showSuccess:msg toView:self.view];
+}
+
 
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:LoginSuccessNotification object:nil];

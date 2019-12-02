@@ -20,6 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)registerNotification;
 
+- (void)showShareNoticeView;
+
+- (void)showShareActionSheet;
+
 @end
 
 NS_ASSUME_NONNULL_END
