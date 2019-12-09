@@ -17,30 +17,10 @@
 @implementation BTTMineViewController (LoadData)
 
 - (void)loadMeAllData {
-    [self loadPersonalInfoData];
     [self loadMainDataOne];
     [self loadMainDataTwo];
     [self loadMainDataThree];
-    
     [self setupElements];
-}
-
-
-- (void)loadPersonalInfoData {
-    if (self.personalInfos.count) {
-        [self.personalInfos removeAllObjects];
-    }
-    NSArray *icons = @[@"me_personalInfo_unband",@"me_mobile_unband",@"me_card_unband",@"me_share"];
-    NSArray *names = @[@"个人资料",@"绑定手机",@"银行卡资料",@"分享"];
-    NSArray *highlights = @[@"me_personalInfo_band",@"me_mobile_band",@"me_card_band",@"me_share"];
-    for (NSString *name in names) {
-        NSInteger index = [names indexOfObject:name];
-        BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
-        model.name = name;
-        model.iconName = icons[index];
-        model.desc = highlights[index];
-        [self.personalInfos addObject:model];
-    }
 }
 
 - (void)loadPaymentDefaultData {
@@ -464,21 +444,21 @@
     if (self.mainDataOne.count) {
         [self.mainDataOne removeAllObjects];
     }
-    NSMutableArray *names = @[@"取款",@"结算洗码",@"额度转账",@"我的优惠",@"推荐礼金"].mutableCopy;
-    NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_transfer",@"me_preferential",@"me_gift"].mutableCopy;
-    if (self.isShowHidden) {
-        names = [NSMutableArray arrayWithArray:@[@"取款",@"结算洗码",@"额度转账",@"我的优惠",@"首存优惠",@"推荐礼金"]];
-        icons = [NSMutableArray arrayWithArray:@[@"me_withdrawal",@"me_washcode",@"me_transfer",@"me_preferential",@"",@"me_gift"]];
-        if (self.isFanLi) {
-            NSInteger index = [names indexOfObject:@"首存优惠"];
-            [names insertObject:@"1%存款返利" atIndex:index + 1];
-        }
-        if (self.isOpenAccount) {
-            NSInteger index = [names indexOfObject:@"首存优惠"];
-            [names insertObject:@"开户礼金" atIndex:index + 1];
-        }
-        
-    }
+    NSMutableArray *names = @[@"取款",@"洗码",@"银行卡资料",@"绑定手机",@"个人资料",@""].mutableCopy;
+    NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
+//    if (self.isShowHidden) {
+//        names = [NSMutableArray arrayWithArray:@[@"取款",@"结算洗码",@"额度转账",@"我的优惠",@"首存优惠",@"推荐礼金"]];
+//        icons = [NSMutableArray arrayWithArray:@[@"me_withdrawal",@"me_washcode",@"me_transfer",@"me_preferential",@"",@"me_gift"]];
+//        if (self.isFanLi) {
+//            NSInteger index = [names indexOfObject:@"首存优惠"];
+//            [names insertObject:@"1%存款返利" atIndex:index + 1];
+//        }
+//        if (self.isOpenAccount) {
+//            NSInteger index = [names indexOfObject:@"首存优惠"];
+//            [names insertObject:@"开户礼金" atIndex:index + 1];
+//        }
+//
+//    }
     
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
@@ -494,8 +474,8 @@
     if (self.mainDataTwo.count) {
         [self.mainDataTwo removeAllObjects];
     }
-    NSArray *names = @[@"客户报表",@"账号安全",@"设置",@"站内信",@"版本更新",@"网络检测"];
-    NSArray *icons = @[@"me_sheet",@"me_amountsafe",@"me_setting",@"me_message",@"me_version",@"me_speed"];
+    NSArray *names = @[@"我的优惠",@"推荐礼金",@"客户报表",@"账号安全",@"额度转账",@"站内信",@"版本更新",@"网站检测",@"设置"];
+    NSArray *icons = @[@"me_preferential",@"me_gift",@"me_sheet",@"me_amountsafe",@"me_transfer",@"me_message",@"me_version",@"me_speed",@"me_setting"];
     
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];

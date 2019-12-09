@@ -65,9 +65,13 @@
     } else if (indexPath.row == 2) {
         BTTModifyLimitViewController *vc = [[BTTModifyLimitViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else {
+    } else if (indexPath.row == 3) {
         BTTBookMessageController *vc = [[BTTBookMessageController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == 4) {
+        if (self.refreshBlock) {
+            self.refreshBlock();
+        }
     }
 }
 
@@ -104,7 +108,7 @@
 }
 
 - (void)setupElements {
-    for (int i = 0; i < 4; i ++) {
+    for (int i = 0; i < 5; i ++) {
         [self.elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -115,8 +119,8 @@
 - (NSMutableArray *)sheetDatas {
     if (!_sheetDatas) {
         _sheetDatas = [NSMutableArray array];
-        NSArray *titles = @[@"个人资料",@"银行卡资料",@"修改限红",@"短信订阅"];
-        NSArray *placeholders = @[@"",@"",@"",@""];
+        NSArray *titles = @[@"个人资料",@"银行卡资料",@"修改限红",@"短信订阅",@"退出登录"];
+        NSArray *placeholders = @[@"",@"",@"",@"",@""];
         for (NSString *title in titles) {
             NSInteger index = [titles indexOfObject:title];
             BTTMeMainModel *model = [[BTTMeMainModel alloc] init];

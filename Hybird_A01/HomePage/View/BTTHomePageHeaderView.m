@@ -162,8 +162,8 @@
             
             __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self addSubview:messageBtn];
-            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
-            [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
+            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - 30, BTTIconTop + (64 - 30) / 2 + 5, 30, 30);
+            [messageBtn setImage:ImageNamed(@"me_share") forState:UIControlStateNormal];
             messageBtn.redDotOffset = CGPointMake(1, 3);
             messageBtn.tag = 2002;
             [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];

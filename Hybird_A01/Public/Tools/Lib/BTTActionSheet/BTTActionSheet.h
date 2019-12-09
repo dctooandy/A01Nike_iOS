@@ -23,7 +23,7 @@ typedef enum {
 @interface BTTActionSheet : UIView
 
 //点击按钮block回调
-@property (nonatomic,copy) void(^btnClick)(NSInteger);
+@property (nonatomic,copy) void(^btnClick)(NSInteger btnTag);
 
 //头部提示文字
 @property (nonatomic,copy) NSString *proStr;

@@ -57,11 +57,11 @@ static const char *BTTHeaderViewKey = "headerView";
     weakSelf(weakSelf);
     [actionSheet setBtnClick:^(NSInteger btnTag) {
         strongSelf(strongSelf);
-        NSLog(@"\n点击第几个====%ld\n当前选中的按钮title====%@===%@====%@",btnTag,names[btnTag],@(btnTag), [IVNetwork userInfo].domain_name);
+        NSLog(@"\n点击第几个====%ld\n当前选中的按钮title====%@===%@====%@",(long)btnTag,names[btnTag],@(btnTag), [IVNetwork userInfo].domain_name);
         if (btnTag == 0) {
             UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
             pasteboard.string = [IVNetwork userInfo].domain_name.length ? [IVNetwork userInfo].domain_name : [IVNetwork h5Domain];
-            [MBProgressHUD showSuccess:@"复制链接成功" toView:strongSelf.view];
+            [MBProgressHUD showSuccess:@"已复制" toView:strongSelf.view];
         } else if (btnTag == 1) {
             UIImage *image = [PublicMethod QRCodeMethod:[IVNetwork userInfo].domain_name.length ? [IVNetwork userInfo].domain_name : [IVNetwork h5Domain]];
             UIImageWriteToSavedPhotosAlbum(image, strongSelf, @selector(image:didFinishSavingWithError:contextInfo:), nil);
@@ -89,7 +89,7 @@ static const char *BTTHeaderViewKey = "headerView";
     if(error){
         msg = @"保存图片失败" ;
     }else{
-        msg = @"保存图片成功" ;
+        msg = @"已下载到本地相册" ;
     }
     [MBProgressHUD showSuccess:msg toView:self.view];
 }
@@ -150,11 +150,7 @@ static const char *BTTHeaderViewKey = "headerView";
                     [strongSelf.navigationController pushViewController:vc animated:YES];
                     return;
                 }
-                BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-                vc.webConfigModel.newView = YES;
-                vc.webConfigModel.url = @"customer/letter.htm";
-                vc.webConfigModel.theme = @"inside";
-                [strongSelf.navigationController pushViewController:vc animated:YES];
+                [strongSelf showShareActionSheet];
             }
                 break;
                 

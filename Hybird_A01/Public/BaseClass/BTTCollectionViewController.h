@@ -35,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTCollectionViewController : BTTBaseViewController
 
+@property (nonatomic, copy) BTTRefreshBlock refreshBlock;
+
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 @property (nonatomic, strong) NSMutableArray<NSValue *> *elementsHight;

@@ -15,10 +15,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pic-QA-Ufl">
-                    <rect key="frame" x="132" y="293" width="150" height="150"/>
+                    <rect key="frame" x="107" y="268" width="200" height="200"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="150" id="UgS-bb-K8G"/>
-                        <constraint firstAttribute="width" constant="150" id="rmE-Re-wag"/>
+                        <constraint firstAttribute="height" constant="200" id="UgS-bb-K8G"/>
+                        <constraint firstAttribute="width" constant="200" id="rmE-Re-wag"/>
                     </constraints>
                 </imageView>
             </subviews>
@@ -30,7 +30,7 @@
             <connections>
                 <outlet property="iconImageView" destination="pic-QA-Ufl" id="T3d-zm-sxS"/>
             </connections>
-            <point key="canvasLocation" x="132" y="133"/>
+            <point key="canvasLocation" x="106" y="39"/>
         </view>
     </objects>
 </document>
