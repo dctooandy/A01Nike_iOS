@@ -354,6 +354,10 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 #define BTTSaveMoneyTimesAPI         @"/deposit/getIsDepositAmount"
 
+// 查询可分享链接
+
+#define BTTGetWeiXinRediect          @"/public/users/getWeiXinRedirect"
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)  ([UIFont systemFontOfSize:X])

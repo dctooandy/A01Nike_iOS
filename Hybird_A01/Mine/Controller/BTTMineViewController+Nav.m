@@ -57,13 +57,13 @@ static const char *BTTHeaderViewKey = "headerView";
     weakSelf(weakSelf);
     [actionSheet setBtnClick:^(NSInteger btnTag) {
         strongSelf(strongSelf);
-        NSLog(@"\n点击第几个====%ld\n当前选中的按钮title====%@===%@====%@",(long)btnTag,names[btnTag],@(btnTag), [IVNetwork userInfo].domain_name);
         if (btnTag == 0) {
             UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-            pasteboard.string = [IVNetwork userInfo].domain_name.length ? [IVNetwork userInfo].domain_name : [IVNetwork h5Domain];
+            pasteboard.string = self.redirectModel.domainName.length ? [NSString stringWithFormat:@"%@%@",self.redirectModel.redirectUrl, self.redirectModel.domainName] : [NSString stringWithFormat:@"%@%@",self.redirectModel.redirectUrl, [IVNetwork h5Domain]];
             [MBProgressHUD showSuccess:@"已复制" toView:strongSelf.view];
         } else if (btnTag == 1) {
-            UIImage *image = [PublicMethod QRCodeMethod:[IVNetwork userInfo].domain_name.length ? [IVNetwork userInfo].domain_name : [IVNetwork h5Domain]];
+            NSString *urlStr = self.redirectModel.domainName.length ? [NSString stringWithFormat:@"%@%@",self.redirectModel.redirectUrl, self.redirectModel.domainName] : [NSString stringWithFormat:@"%@%@",self.redirectModel.redirectUrl, [IVNetwork h5Domain]];
+            UIImage *image = [PublicMethod QRCodeMethod:urlStr];
             UIImageWriteToSavedPhotosAlbum(image, strongSelf, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         } else if (btnTag == 2) {
             [strongSelf showErcodePopView];
@@ -74,7 +74,8 @@ static const char *BTTHeaderViewKey = "headerView";
 
 - (void)showErcodePopView {
     BTTShowErcodePopview *customView = [BTTShowErcodePopview viewFromXib];
-    customView.iconImageView.image = [PublicMethod QRCodeMethod:[IVNetwork userInfo].domain_name.length ? [IVNetwork userInfo].domain_name : [IVNetwork h5Domain]];
+    NSString *urlStr = self.redirectModel.domainName.length ? [NSString stringWithFormat:@"%@%@",self.redirectModel.redirectUrl, self.redirectModel.domainName] : [NSString stringWithFormat:@"%@%@",self.redirectModel.redirectUrl, [IVNetwork h5Domain]];
+    customView.iconImageView.image = [PublicMethod QRCodeMethod:urlStr];
     customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
     popView.isClickBGDismiss = YES;
@@ -144,12 +145,12 @@ static const char *BTTHeaderViewKey = "headerView";
                 
             case 2002:
             {
-                if (![IVNetwork userInfo]) {
-                    [MBProgressHUD showError:@"请先登录" toView:nil];
-                    BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
-                    [strongSelf.navigationController pushViewController:vc animated:YES];
-                    return;
-                }
+//                if (![IVNetwork userInfo]) {
+//                    [MBProgressHUD showError:@"请先登录" toView:nil];
+//                    BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+//                    [strongSelf.navigationController pushViewController:vc animated:YES];
+//                    return;
+//                }
                 [strongSelf showShareActionSheet];
             }
                 break;

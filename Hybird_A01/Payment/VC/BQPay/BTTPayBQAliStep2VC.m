@@ -26,6 +26,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *accountNameLb;
 @property (weak, nonatomic) IBOutlet UILabel *addressLb;
+
+
 @end
 
 @implementation BTTPayBQAliStep2VC
@@ -71,4 +73,28 @@
     [UIPasteboard generalPasteboard].string = _accountLb.text;
     [self showSuccess:@"已复制到剪切板"];
 }
+
+- (IBAction)saveErCodeClick:(UIButton *)sender {
+    
+    UIImageWriteToSavedPhotosAlbum([PublicMethod QRCodeMethod:self.writeModel.chooseBank.qrcode], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    NSString *msg = nil ;
+    if(error){
+        msg = @"保存图片失败" ;
+    }else{
+        msg = @"已下载到本地相册" ;
+    }
+    [MBProgressHUD showSuccess:msg toView:nil];
+}
+
+
+- (IBAction)goToAliBtn:(UIButton *)sender {
+//    alipayqr://platformapi/startapp?saId=10000007
+    NSString *str = @"alipayqr://platformapi/startapp?saId=10000007";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+}
+
+
 @end

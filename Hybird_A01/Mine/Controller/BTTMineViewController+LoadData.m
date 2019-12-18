@@ -59,6 +59,17 @@
     [self setupElements];
 }
 
+- (void)loadWeiXinRediect {
+    NSDictionary *params = @{@"login_name":[IVNetwork userInfo].loginName};
+    [IVNetwork sendRequestWithSubURL:BTTGetWeiXinRediect paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",response);
+        if (result.status) {
+            BTTShareRedirectModel *model = [BTTShareRedirectModel yy_modelWithDictionary:result.data];
+            self.redirectModel = model;
+        }
+    }];
+}
+
 - (void)loadPaymentData {
     NSMutableArray *arr = [NSMutableArray array];
     NSArray *icons = nil;
@@ -502,10 +513,13 @@
     }
     [self.collectionView reloadData];
 }
+
+
 - (void)loadUserInfo
 {
     [BTTHttpManager fetchUserInfoCompleteBlock:nil];
 }
+
 - (void)loadBindStatus {
     weakSelf(weakSelf)
     [BTTHttpManager fetchBindStatusWithUseCache:YES completionBlock:^(IVRequestResultModel *result, id response) {

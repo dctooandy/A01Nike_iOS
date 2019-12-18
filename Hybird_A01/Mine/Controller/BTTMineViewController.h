@@ -8,6 +8,7 @@
 
 #import "BTTCollectionViewController.h"
 #import "BTTBindStatusModel.h"
+#import "BTTShareRedirectModel.h"
 
 typedef enum : NSUInteger {
     BTTMeSaveMoneyShowTypeAll = 0,
@@ -29,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BTTMineViewController : BTTCollectionViewController
 
 @property (nonatomic, assign) BOOL isShowHidden;
+
+@property (nonatomic, strong) BTTShareRedirectModel *redirectModel;
 
 @property (nonatomic, strong) BTTBindStatusModel *statusModel;
 

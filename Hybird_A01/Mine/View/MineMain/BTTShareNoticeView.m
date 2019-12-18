@@ -24,10 +24,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.shareIconRightConstants.constant = SCREEN_WIDTH / 8 - 20;
-    if (SCREEN_WIDTH == 375) {
-        self.shareIconTopConstants.constant = 210;
-    }
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
     [self addGestureRecognizer:tap];
 }

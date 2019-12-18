@@ -87,6 +87,7 @@
     [self loadPaymentDefaultData];
     [self loadMeAllData];
     [self registerNotification];
+    [self loadWeiXinRediect];
     BOOL isShowShareNotice = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShareNoticeTag] boolValue];
     if (!isShowShareNotice) {
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShareNoticeTag];
@@ -445,8 +446,6 @@
             NSInteger index = [names indexOfObject:@"首存优惠"];
             [names insertObject:@"开户礼金" atIndex:index + 1];
         }
-        
-        
         BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"我的优惠" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:names actionSheetBlock:^(NSInteger buttonIndex) {
             NSLog(@"选择了%@",@(buttonIndex));
             if (buttonIndex == names.count) {

@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadVerifyCode;
 
-- (void)verifyPhotoCode:(NSString *)code completeBlock:(CompleteBlock)completeBlock;
+- (void)verifyPhotoCode:(NSString *)code WithUUid:(NSString *)uuid completeBlock:(CompleteBlock)completeBlock;
 
 @end
 

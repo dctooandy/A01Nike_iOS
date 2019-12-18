@@ -353,6 +353,9 @@
 		3A7C0B1D21EC92E5002658CC /* NSArray+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B1C21EC92E5002658CC /* NSArray+JSON.m */; };
 		3A7C0B2021EC9F2E002658CC /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B1F21EC9F2E002658CC /* NSString+MD5.m */; };
 		3A7C0B2421ECA38A002658CC /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0B2321ECA389002658CC /* app.zip */; };
+		3A80AB0723A381CD004BF8C0 /* BTTShareRedirectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A80AB0623A381CD004BF8C0 /* BTTShareRedirectModel.m */; };
+		3A80AB0A23AA075E004BF8C0 /* 828x176-min.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A80AB0823AA075D004BF8C0 /* 828x176-min.gif */; };
+		3A80AB0B23AA075E004BF8C0 /* 828x128-min.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A80AB0923AA075D004BF8C0 /* 828x128-min.gif */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
 		3A8D6E9821633D3E000530DF /* CLive800Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E9521633D3E000530DF /* CLive800Manager.m */; };
@@ -1225,6 +1228,10 @@
 		3A7C0B1E21EC9F2E002658CC /* NSString+MD5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		3A7C0B1F21EC9F2E002658CC /* NSString+MD5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
 		3A7C0B2321ECA389002658CC /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
+		3A80AB0523A381CD004BF8C0 /* BTTShareRedirectModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTShareRedirectModel.h; sourceTree = "<group>"; };
+		3A80AB0623A381CD004BF8C0 /* BTTShareRedirectModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTShareRedirectModel.m; sourceTree = "<group>"; };
+		3A80AB0823AA075D004BF8C0 /* 828x176-min.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "828x176-min.gif"; sourceTree = "<group>"; };
+		3A80AB0923AA075D004BF8C0 /* 828x128-min.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "828x128-min.gif"; sourceTree = "<group>"; };
 		3A8D6E7E21621268000530DF /* BTTBaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseModel.h; sourceTree = "<group>"; };
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8921630EE5000530DF /* PublicMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicMethod.h; sourceTree = "<group>"; };
@@ -2743,6 +2750,8 @@
 			children = (
 				3ACADCEB231773B100D5AE7F /* zqzs.gif */,
 				3A21AEAA2391103A009E73FD /* qhb.gif */,
+				3A80AB0923AA075D004BF8C0 /* 828x128-min.gif */,
+				3A80AB0823AA075D004BF8C0 /* 828x176-min.gif */,
 				3A8F5134215F74CF0069D1B3 /* Main.storyboard */,
 				3A7C0B2321ECA389002658CC /* app.zip */,
 				3A8F5137215F74D00069D1B3 /* Assets.xcassets */,
@@ -3591,6 +3600,8 @@
 				3A7C0B1421EC6B0F002658CC /* BTTSaveMoneyErrorModel.m */,
 				3A5B0281234F233500D8828B /* BTTXimaRecordModel.h */,
 				3A5B0282234F233500D8828B /* BTTXimaRecordModel.m */,
+				3A80AB0523A381CD004BF8C0 /* BTTShareRedirectModel.h */,
+				3A80AB0623A381CD004BF8C0 /* BTTShareRedirectModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4402,6 +4413,7 @@
 				3A5AE67522D6E22A0013E8A3 /* LIVChatFunctionBar.nib in Resources */,
 				3A5AE6CD22D6E22A0013E8A3 /* LIVRobotRelatedQuestionIcon@3x.png in Resources */,
 				3A8F5189215F77AC0069D1B3 /* intro_0.jpg in Resources */,
+				3A80AB0B23AA075E004BF8C0 /* 828x128-min.gif in Resources */,
 				3A5AE6D922D6E22A0013E8A3 /* LIVCameraItem@3x.png in Resources */,
 				3A5AE6EE22D6E22A0013E8A3 /* LIVFileMessage_TypePdf@2x.png in Resources */,
 				3A5AE70C22D6E22B0013E8A3 /* puzzledom.gif in Resources */,
@@ -4422,6 +4434,7 @@
 				3A5AE6DC22D6E22A0013E8A3 /* LIVVideoCamera_switchCamera@2x.png in Resources */,
 				3A5AE6A822D6E22A0013E8A3 /* LIVNavigationBackArrow@3x.png in Resources */,
 				3A5AE6B722D6E22A0013E8A3 /* LIVWarningSmallIcon@3x.png in Resources */,
+				3A80AB0A23AA075E004BF8C0 /* 828x176-min.gif in Resources */,
 				3A5AE6DD22D6E22A0013E8A3 /* LIVAutoScrollTextView7.png in Resources */,
 				3A14CC6A237AA034009711CF /* BTTOtherGameCell.xib in Resources */,
 				3A5AE6FF22D6E22A0013E8A3 /* LIVAutoScrollTextView2.png in Resources */,
@@ -5054,6 +5067,7 @@
 				D599252421AFCFDA001E885A /* CNPayBankView.m in Sources */,
 				3AB0683421A2E34C00072FB7 /* BTTAccountBalanceController+LoadData.m in Sources */,
 				3A11AE5D2186B71600B1AFF4 /* BTTXimaController.m in Sources */,
+				3A80AB0723A381CD004BF8C0 /* BTTShareRedirectModel.m in Sources */,
 				3A6DD5F2228914FE000288B2 /* BTTAndroid88PopView.m in Sources */,
 				D5DBEB3621ABB774008AF629 /* CNPayTipView.m in Sources */,
 				3AAFF8C021DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.m in Sources */,
@@ -5295,7 +5309,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.37;
+				MARKETING_VERSION = 3.0.38;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5335,7 +5349,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.37;
+				MARKETING_VERSION = 3.0.38;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

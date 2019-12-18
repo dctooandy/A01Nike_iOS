@@ -15,10 +15,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_shareNotice" translatesAutoresizingMaskIntoConstraints="NO" id="th6-mZ-JwP">
-                    <rect key="frame" x="-137" y="220" width="536" height="264"/>
+                    <rect key="frame" x="-46" y="4" width="400" height="273"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3D-zK-Npt">
-                    <rect key="frame" x="87" y="514" width="240" height="119"/>
+                    <rect key="frame" x="87" y="307" width="240" height="119"/>
                     <state key="normal" image="me_shareDetailBtn"/>
                     <connections>
                         <action selector="detailBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Mmn-dy-RyN"/>
@@ -27,8 +27,8 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="th6-mZ-JwP" secondAttribute="trailing" constant="15" id="0v9-ed-3pZ"/>
-                <constraint firstItem="th6-mZ-JwP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="220" id="UgZ-kH-X1z"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="th6-mZ-JwP" secondAttribute="trailing" constant="60" id="0v9-ed-3pZ"/>
+                <constraint firstItem="th6-mZ-JwP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="4" id="UgZ-kH-X1z"/>
                 <constraint firstItem="W3D-zK-Npt" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="bvd-6z-3zX"/>
                 <constraint firstItem="W3D-zK-Npt" firstAttribute="top" secondItem="th6-mZ-JwP" secondAttribute="bottom" constant="30" id="kMW-0J-3Wn"/>
             </constraints>
@@ -42,6 +42,6 @@
     </objects>
     <resources>
         <image name="me_shareDetailBtn" width="120" height="59.666667938232422"/>
-        <image name="me_shareNotice" width="268" height="132"/>
+        <image name="me_shareNotice" width="200" height="136.66667175292969"/>
     </resources>
 </document>
