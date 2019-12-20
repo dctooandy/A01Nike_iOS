@@ -72,7 +72,7 @@
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
-            [strongSelf verifyPhotoCode:self.code completeBlock:^(IVRequestResultModel * _Nonnull result, id  _Nonnull response) {
+            [strongSelf verifyPhotoCode:self.code WithUUid:strongSelf.uuid completeBlock:^(IVRequestResultModel *result, id response) {
                 strongSelf(strongSelf);
                 if (result.status) {
                     BTTForgetPasswordStepTwoController *vc = [[BTTForgetPasswordStepTwoController alloc] init];
@@ -82,7 +82,6 @@
                     [MBProgressHUD showError:result.message toView:strongSelf.view];
                 }
             }];
-            
         };
         return cell;
     }

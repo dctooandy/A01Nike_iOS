@@ -12,11 +12,13 @@
 #import "BTTRefreshGIFHeader.h"
 
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 typedef void (^BTTRefreshBlock)(void);
 
 typedef void (^BTTBtnBlock)(UIButton *btn);
 
-NS_ASSUME_NONNULL_BEGIN
 
 @class BTTCollectionViewController;
 @protocol BTTCollectionViewControllerDataSource <NSObject>
@@ -32,6 +34,8 @@ NS_ASSUME_NONNULL_END
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTCollectionViewController : BTTBaseViewController
+
+@property (nonatomic, copy) BTTRefreshBlock refreshBlock;
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 

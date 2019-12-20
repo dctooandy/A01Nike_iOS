@@ -25,7 +25,7 @@
             return @[@"https://a01.gatewayphp.net:9443/",@"https://a01.gatewayphp.com:9443/",@"https://a01.gatewaynike.com/"];
     }
 }
-
+//https://a01mobileimage.sm830.com/static/A01M/_default/__static/_wms/_l/_banner/banner-index-186bd16447a23dc145b57aef0989822cf.jpg?v=d5de123c20360742454ddff7a6a0d94b
 + (NSString *)defaultH5Domain {
     switch (EnvirmentType) {
         case 0:
@@ -51,7 +51,7 @@
             return @"https://m1.918rr.com";
             break;
         case 2:
-            return @"https://m.918bs.com";
+            return @"https://a01mobileimage.sm830.com";
             break;
         default:
             break;

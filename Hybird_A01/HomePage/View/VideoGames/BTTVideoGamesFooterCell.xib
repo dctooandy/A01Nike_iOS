@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <button opaque="NO" tag="1111" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOg-BS-pTq">
-                        <rect key="frame" x="160.5" y="33" width="54" height="28"/>
+                        <rect key="frame" x="160.5" y="25.5" width="54" height="28"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <state key="normal" title="新手指南">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -30,7 +28,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" tag="1110" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npv-Hj-ijZ">
-                        <rect key="frame" x="91.5" y="33" width="54" height="28"/>
+                        <rect key="frame" x="91.5" y="25.5" width="54" height="28"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <state key="normal" title="牌照展示">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -39,14 +37,14 @@
                             <action selector="paizhaoClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Q1s-jr-yGV"/>
                         </connections>
                     </button>
-                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="footer" translatesAutoresizingMaskIntoConstraints="NO" id="M4b-i5-msu">
-                        <rect key="frame" x="60" y="81" width="255" height="39"/>
+                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M4b-i5-msu">
+                        <rect key="frame" x="60" y="73.5" width="255" height="46.5"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="39" id="JY6-dI-TkQ"/>
+                            <constraint firstAttribute="height" constant="46.5" id="Qvs-L0-Vbx"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" tag="1112" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yYY-cN-hYi">
-                        <rect key="frame" x="229.5" y="33" width="54" height="28"/>
+                        <rect key="frame" x="229.5" y="25.5" width="54" height="28"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <state key="normal" title="关于我们">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -70,12 +68,10 @@
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="375" height="140"/>
             <connections>
+                <outlet property="adIcon" destination="M4b-i5-msu" id="0Ad-YS-HM2"/>
                 <outlet property="adImageView" destination="M4b-i5-msu" id="2tJ-rB-oSt"/>
             </connections>
-            <point key="canvasLocation" x="-375" y="41"/>
+            <point key="canvasLocation" x="71" y="56"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="footer" width="255" height="39"/>
-    </resources>
 </document>

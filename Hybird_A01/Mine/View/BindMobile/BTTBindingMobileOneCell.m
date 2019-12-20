@@ -82,7 +82,7 @@
         [model.name isEqualToString:@"波音厅"]) {
         self.mineSparaterType = BTTMineSparaterTypeNone;
     }
-    
+        
     if ([model.name isEqualToString:@"卡号"]) {
         self.textField.keyboardType = UIKeyboardTypeNumberPad;
     }
@@ -137,6 +137,10 @@
             }
         }
     }
+    if ([model.name isEqualToString:@"退出登录"]) {
+        self.textField.userInteractionEnabled = NO;
+    }
+
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

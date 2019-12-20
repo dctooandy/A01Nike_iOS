@@ -14,7 +14,7 @@
 #import "BTTMeMainModel.h"
 #import "BTTChangeMobileNextController.h"
 #import "BTTCardInfosController.h"
-@interface BTTChangeMobileManualController ()
+@interface BTTChangeMobileManualController ()<BTTElementsFlowLayoutDelegate>
 @property(nonatomic, copy)NSString *bankNumber;
 @property(nonatomic, copy)NSString *phone;
 @end

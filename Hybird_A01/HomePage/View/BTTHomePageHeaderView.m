@@ -9,7 +9,7 @@
 #import "BTTHomePageHeaderView.h"
 #import "UIImage+GIF.h"
 
-#define BTTIconTop (KIsiPhoneX ? 50 : 30) // 按钮距离顶端的高度
+#define BTTIconTop (KIsiPhoneX ? 24 : 0) // 按钮距离顶端的高度
 #define BTTLeftConstants 15 // 边距
 #define BTTBtnAndBtnConstants 30   // 
 #define BTTBtnWidthAndHeight 24
@@ -41,10 +41,15 @@
         case BTTNavTypeHomePage:
         {
             // 中秋装饰
-//            NSString *path = [[NSBundle mainBundle] pathForResource:@"zqzs" ofType:@"gif"];
-//            NSData *data = [NSData dataWithContentsOfFile:path];
-//            UIImage *image = [UIImage sd_animatedGIFWithData:data];
-//            [self sd_setImageWithURL:nil placeholderImage:image];
+            NSString *path = nil;
+            if (KIsiPhoneX) {
+                path = [[NSBundle mainBundle] pathForResource:@"828x176-min" ofType:@"gif"];;
+            } else {
+                path = [[NSBundle mainBundle] pathForResource:@"828x128-min" ofType:@"gif"];;
+            }
+            NSData *data = [NSData dataWithContentsOfFile:path];
+            UIImage *image = [UIImage sd_animatedGIFWithData:data];
+            [self sd_setImageWithURL:nil placeholderImage:image];
 //            UIImageView *moonImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"moon"]];
 //            if (KIsiPhoneX) {
 //                moonImage.frame = CGRectMake(55, 15, 50, 50);
@@ -54,28 +59,28 @@
 //            [self addSubview:moonImage];
             
             
-            UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, KIsiPhoneX ? 49 : 27, 80, 30)];
+            UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
             [self addSubview:logoImageView];
-            logoImageView.image = ImageNamed(@"Navlogo");
+//            logoImageView.image = ImageNamed(@"Navlogo");
             
             
             self.titleLabel = [UILabel new];
             [self addSubview:self.titleLabel];
-            self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop, 150, BTTBtnWidthAndHeight);
-            self.titleLabel.text = @"首页";
+            self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
+//            self.titleLabel.text = @"首页";
             self.titleLabel.textAlignment = NSTextAlignmentCenter;
             self.titleLabel.font = kFontSystem(17);
             self.titleLabel.textColor = [UIColor whiteColor];
             
             UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self addSubview:serviceBtn];
-            serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
             [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
             [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             serviceBtn.tag = 2001;
             __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self addSubview:messageBtn];
-            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
             [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
             messageBtn.redDotOffset = CGPointMake(1, 3);
             messageBtn.tag = 2002;
@@ -89,14 +94,14 @@
                 messageBtn.showRedDot = num;
             } handler:self];
             
-            [self setupLoginAndRegisterBtn];
+//            [self setupLoginAndRegisterBtn];
         }
             break;
         case BTTNavTypeOnlyTitle:
         {
             self.titleLabel = [UILabel new];
             [self addSubview:self.titleLabel];
-            self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop, 150, BTTBtnWidthAndHeight);
+            self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
             self.titleLabel.text = @"首页";
             self.titleLabel.textAlignment = NSTextAlignmentCenter;
             self.titleLabel.font = kFontSystem(17);
@@ -105,12 +110,12 @@
             break;
         case BTTNavTypeDiscount:
         {
-            UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, KIsiPhoneX ? 49 : 27, 80, 30)];
+            UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
             [self addSubview:logoImageView];
             logoImageView.image = ImageNamed(@"Navlogo");
             self.titleLabel = [UILabel new];
             [self addSubview:self.titleLabel];
-            self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop, 150, BTTBtnWidthAndHeight);
+            self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
             self.titleLabel.text = @"首页";
             self.titleLabel.textAlignment = NSTextAlignmentCenter;
             self.titleLabel.font = kFontSystem(17);
@@ -118,14 +123,14 @@
             
             UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self addSubview:serviceBtn];
-            serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
             [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
             serviceBtn.tag = 2001;
             [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             
             __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self addSubview:messageBtn];
-            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
             [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
             messageBtn.redDotOffset = CGPointMake(1, 3);
             messageBtn.tag = 2002;
@@ -142,12 +147,12 @@
             
             case BTTNavTypeMine:
         {
-            UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, KIsiPhoneX ? 49 : 27, 80, 30)];
+            UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
             [self addSubview:logoImageView];
             logoImageView.image = ImageNamed(@"Navlogo");
             self.titleLabel = [UILabel new];
             [self addSubview:self.titleLabel];
-            self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop, 150, BTTBtnWidthAndHeight);
+            self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
             self.titleLabel.text = @"首页";
             self.titleLabel.textAlignment = NSTextAlignmentCenter;
             self.titleLabel.font = kFontSystem(17);
@@ -155,15 +160,15 @@
             
             UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self addSubview:serviceBtn];
-            serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
             [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
             serviceBtn.tag = 2001;
             [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             
             __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self addSubview:messageBtn];
-            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
-            [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
+            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - 30, BTTIconTop + (64 - 30) / 2 + 5, 30, 30);
+            [messageBtn setImage:ImageNamed(@"me_share") forState:UIControlStateNormal];
             messageBtn.redDotOffset = CGPointMake(1, 3);
             messageBtn.tag = 2002;
             [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];

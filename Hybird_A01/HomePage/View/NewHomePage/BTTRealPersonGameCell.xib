@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTRealPersonGameCell">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <button opaque="NO" tag="1000" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5A-0o-dwr">
+                        <rect key="frame" x="15" y="44.5" width="168" height="133"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="168" id="ULP-Gx-g9q"/>
+                            <constraint firstAttribute="height" constant="133" id="dQ9-vD-sJv"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="AGGJ"/>
+                        <connections>
+                            <action selector="agqjBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="IAN-hs-KQz"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="1001" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7l-CV-Uyn">
+                        <rect key="frame" x="231" y="44.5" width="168" height="133"/>
+                        <state key="normal" backgroundImage="AGQJ"/>
+                        <connections>
+                            <action selector="aginBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="e9D-p8-1gc"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="真人娱乐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UX3-wb-X6Q">
+                        <rect key="frame" x="15" y="15" width="65.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AG旗舰厅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VdD-p3-rVo">
+                        <rect key="frame" x="23" y="152.5" width="62" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AG国际厅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rG5-fp-cUL">
+                        <rect key="frame" x="239" y="152.5" width="62" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tryPlay" translatesAutoresizingMaskIntoConstraints="NO" id="IGB-dQ-7Ea">
+                        <rect key="frame" x="150" y="59.5" width="25" height="17.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17.5" id="VJ2-kq-XcA"/>
+                            <constraint firstAttribute="width" constant="25" id="j68-fR-pKI"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tryPlay" translatesAutoresizingMaskIntoConstraints="NO" id="Syz-yB-5OK">
+                        <rect key="frame" x="366" y="59.5" width="25" height="17.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="338-gK-cMf"/>
+                            <constraint firstAttribute="height" constant="17.5" id="UAf-Xc-tMo"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="t7l-CV-Uyn" firstAttribute="height" secondItem="G5A-0o-dwr" secondAttribute="height" id="3Ma-iV-msX"/>
+                <constraint firstItem="G5A-0o-dwr" firstAttribute="top" secondItem="IGB-dQ-7Ea" secondAttribute="top" constant="-15" id="7Zq-AZ-8rf"/>
+                <constraint firstItem="t7l-CV-Uyn" firstAttribute="top" secondItem="Syz-yB-5OK" secondAttribute="top" constant="-15" id="Fva-il-jqX"/>
+                <constraint firstAttribute="trailing" secondItem="t7l-CV-Uyn" secondAttribute="trailing" constant="15" id="KCw-7q-5bX"/>
+                <constraint firstItem="G5A-0o-dwr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="Lyd-si-Ukr"/>
+                <constraint firstItem="G5A-0o-dwr" firstAttribute="leading" secondItem="VdD-p3-rVo" secondAttribute="leading" constant="-8" id="QnR-CV-FG7"/>
+                <constraint firstItem="UX3-wb-X6Q" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="X0L-KQ-8iD"/>
+                <constraint firstItem="t7l-CV-Uyn" firstAttribute="leading" secondItem="rG5-fp-cUL" secondAttribute="leading" constant="-8" id="YCe-vY-Fhk"/>
+                <constraint firstItem="rG5-fp-cUL" firstAttribute="bottom" secondItem="t7l-CV-Uyn" secondAttribute="bottom" constant="-8" id="gEg-f6-BXA"/>
+                <constraint firstItem="UX3-wb-X6Q" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="hg7-MK-GKW"/>
+                <constraint firstItem="G5A-0o-dwr" firstAttribute="top" secondItem="UX3-wb-X6Q" secondAttribute="bottom" constant="10" id="hvK-od-c7t"/>
+                <constraint firstItem="VdD-p3-rVo" firstAttribute="bottom" secondItem="G5A-0o-dwr" secondAttribute="bottom" constant="-8" id="p73-cK-l1A"/>
+                <constraint firstItem="Syz-yB-5OK" firstAttribute="trailing" secondItem="t7l-CV-Uyn" secondAttribute="trailing" constant="-8" id="qEc-t9-DIz"/>
+                <constraint firstItem="t7l-CV-Uyn" firstAttribute="width" secondItem="G5A-0o-dwr" secondAttribute="width" id="reI-uE-MHW"/>
+                <constraint firstItem="IGB-dQ-7Ea" firstAttribute="trailing" secondItem="G5A-0o-dwr" secondAttribute="trailing" constant="-8" id="tPE-DX-Q4c"/>
+                <constraint firstItem="t7l-CV-Uyn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="44.5" id="ugN-gW-yXa"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <size key="customSize" width="414" height="173"/>
+            <connections>
+                <outlet property="aginBtn" destination="t7l-CV-Uyn" id="oPb-ET-ru3"/>
+                <outlet property="aginTryIcon" destination="Syz-yB-5OK" id="YAN-kN-Kgk"/>
+                <outlet property="agqjBtn" destination="G5A-0o-dwr" id="vvT-Vs-7ha"/>
+                <outlet property="agqjTryIcon" destination="IGB-dQ-7Ea" id="F6z-0l-J1z"/>
+                <outlet property="btnHeight" destination="dQ9-vD-sJv" id="nCA-ek-gtg"/>
+                <outlet property="btnWidth" destination="ULP-Gx-g9q" id="jEz-wX-fQT"/>
+            </connections>
+            <point key="canvasLocation" x="64" y="30"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="AGGJ" width="167.5" height="132.5"/>
+        <image name="AGQJ" width="167.5" height="132.5"/>
+        <image name="tryPlay" width="25" height="17.5"/>
+    </resources>
+</document>

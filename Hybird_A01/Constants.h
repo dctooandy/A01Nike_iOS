@@ -15,7 +15,7 @@
 #import "NSDate+Extension.h"
 #import "UIColor+Util.h"
 #import "UIView+Frame.h"
-#import "KYHTTPManager.h"
+#import <IVNetworkLibrary/IVNetwork.h>
 #import <IVGameLibrary/IVGame.h>
 #import "PublicMethod.h"
 #import <GJRedDot/GJRedDot.h>
@@ -88,11 +88,9 @@ typedef enum {
     BTTStringFormatStyleOther    ///< 包含特殊符号
 }BTTStringFormatStyle;
 
-//typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
+typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
 
 typedef void (^BTTLive800ResponseBlock)(NSString *info);
-
-typedef void(^IVActionHandler)(UIAlertAction *);
 
 /***********************************************存储关键字******************************************************/
 
@@ -100,9 +98,9 @@ typedef void(^IVActionHandler)(UIAlertAction *);
 
 /**********************************************通知常量*******************************************************/
 
-#define kCacheAppToken @"kCacheAppToken"
+#define BTTShowAccountGride @"BTTShowAccountGride"
 
-#define kCacheUserModel @"kCacheUserModel"
+#define BTTShareNoticeTag @"BTTShareNoticeTag"
 
 //Flurry
 #define FlurryKey  @"RY7GPP2V792PMZK3PYNX"
@@ -355,6 +353,10 @@ typedef void(^IVActionHandler)(UIAlertAction *);
 // 客户存款次数的接口
 
 #define BTTSaveMoneyTimesAPI         @"/deposit/getIsDepositAmount"
+
+// 查询可分享链接
+
+#define BTTGetWeiXinRediect          @"/public/users/getWeiXinRedirect"
 
 /********************************************常用宏*********************************************************/
 

@@ -24,7 +24,7 @@
     } else if (SCREEN_WIDTH == 414 || KIsiPhoneX) {
         imageHeight = 220;
     }
-    _cellHeight += (imageHeight + 52 + self.descHeight);
+    _cellHeight += (imageHeight + 102 + self.descHeight);
     return _cellHeight;
 }
 
@@ -56,7 +56,7 @@
 
 - (NSString *)img {
     if (![_img hasPrefix:@"http"]) {
-        return [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],_img];
+        return [PublicMethod nowCDNWithUrl:_img];
     }
     return _img;
 }

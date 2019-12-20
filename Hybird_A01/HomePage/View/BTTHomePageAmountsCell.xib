@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,14 +11,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTHomePageAmountsCell">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hBl-fd-Aow">
-                        <rect key="frame" x="15" y="5" width="345" height="40"/>
+                        <rect key="frame" x="15" y="49.5" width="345" height="40"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="游戏账号" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oxF-e3-H9f">
                                 <rect key="frame" x="0.0" y="9.5" width="80.5" height="21"/>
@@ -77,19 +75,27 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="以上数据每30分钟实时更新" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sua-cn-aWu">
-                        <rect key="frame" x="94" y="217" width="187" height="18"/>
+                        <rect key="frame" x="94" y="267" width="187" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.43137254901960786" green="0.46274509803921571" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019年11月12日高额及高倍盈利" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21R-HL-HyB">
+                        <rect key="frame" x="15" y="15" width="232.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="hBl-fd-Aow" secondAttribute="trailing" constant="15" id="DbO-PQ-F6R"/>
+                <constraint firstItem="21R-HL-HyB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="DhV-sA-EEL"/>
+                <constraint firstItem="21R-HL-HyB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="ZbZ-2o-o2a"/>
                 <constraint firstItem="sua-cn-aWu" firstAttribute="centerX" secondItem="SEy-5g-ep8" secondAttribute="centerX" id="ZmX-RO-ig5"/>
-                <constraint firstItem="hBl-fd-Aow" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="cFm-FH-geJ"/>
                 <constraint firstItem="hBl-fd-Aow" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="okk-Hh-6ic"/>
                 <constraint firstAttribute="bottom" secondItem="sua-cn-aWu" secondAttribute="bottom" constant="15" id="ujz-vC-LqI"/>
+                <constraint firstItem="hBl-fd-Aow" firstAttribute="top" secondItem="21R-HL-HyB" secondAttribute="bottom" constant="15" id="yDv-Za-qcu"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>

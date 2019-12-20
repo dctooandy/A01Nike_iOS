@@ -15,6 +15,8 @@
 
 @property (nonatomic, strong) UIImageView *arrowIcon;
 
+@property (nonatomic, strong) UIView *seperaterLine2;
+
 @end
 
 @implementation BTTBaseCollectionViewCell
@@ -31,6 +33,16 @@
         make.height.equalTo(@0.5);
     }];
     self.seperaterLine.backgroundColor = [UIColor colorWithHexString:@"36364c"];
+    
+    self.seperaterLine2 = [UIView new];
+    [self.contentView addSubview:self.seperaterLine2];
+    [self.seperaterLine2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.offset(0);
+        make.top.offset(0);
+        make.bottom.offset(0);
+        make.width.equalTo(@1);
+    }];
+    self.seperaterLine2.backgroundColor = [UIColor colorWithHexString:@"36364c"];
     
     self.arrowIcon = [UIImageView new];
     self.arrowIcon.image = ImageNamed(@"me_arrow");
@@ -50,14 +62,34 @@
         case BTTMineSparaterTypeNone:
         {
             self.seperaterLine.hidden = YES;
+            self.seperaterLine2.hidden = YES;
         }
             break;
         case BTTMineSparaterTypeSingleLine:
         {
             self.seperaterLine.hidden = NO;
+            self.seperaterLine2.hidden = YES;
+        }
+            break;
+        case BTTMineSparaterTypeDoubleLineTwo:
+        {
+            self.seperaterLine.hidden = NO;
+            self.seperaterLine2.hidden = NO;
+            [self.seperaterLine mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.left.offset(0);
+                make.bottom.offset(0);
+                make.right.offset(0);
+                make.height.equalTo(@1);
+            }];
         }
             break;
             
+        case BTTMineSparaterTypeDoubleLineOne:
+        {
+            self.seperaterLine.hidden = YES;
+            self.seperaterLine2.hidden = NO;
+        }
+            break;
         default:
             break;
     }

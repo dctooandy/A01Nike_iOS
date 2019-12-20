@@ -9,6 +9,7 @@
 #import "BTTHomePageViewController.h"
 #import "BTTHomePageHeaderView.h"
 #import "JXRegisterManager.h"
+#import "BTTLoginOrRegisterBtsView.h"
 
 @class BTTBannerModel;
 
@@ -20,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) BTTHomePageHeaderView *headerView;
 
+@property (nonatomic, strong) BTTLoginOrRegisterBtsView *loginAndRegisterBtnsView;
+
 - (void)setupNav;
 
 - (void)registerNotification;
@@ -27,6 +30,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)showPopViewWithNum:(NSString *)num;
 
 - (void)bannerToGame:(BTTBannerModel *)model;
+
+- (void)showJay;
+
+- (void)setupLoginAndRegisterBtnsView;
+
+- (void)showNewAccountGrideView;
+
+- (void)setupFloatWindow;
 
 @end
 

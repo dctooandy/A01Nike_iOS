@@ -10,7 +10,9 @@
 
 typedef enum {
     BTTMineSparaterTypeSingleLine,
-    BTTMineSparaterTypeNone
+    BTTMineSparaterTypeNone,
+    BTTMineSparaterTypeDoubleLineOne,
+    BTTMineSparaterTypeDoubleLineTwo
 }BTTMineSparaterType;
 
 typedef enum {

@@ -289,7 +289,7 @@
     qqQR.payments = [[NSArray alloc] initWithObjects:
                      payments[CNPaymentQQQR], nil];
     // 微信/QQ/京东WAP
-    BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
+    BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue] >= 10 ? YES : NO;
     
     CNPayChannelModel *wap = [[CNPayChannelModel alloc] init];
     wap.payChannel = CNPayChannelWechatQQJDAPP;
@@ -317,9 +317,9 @@
     
     NSArray *array = nil;
     if (timeMoreTen) {
-        array = @[BS,BQFast,BQAli,BQWeChat,deposit,unionQR,aliQR,online,wxQR,jdQR,qqQR,wap,YSF,unionPay,coin,card,BTC,barCode];
+        array = @[BQFast,BQAli,BQWeChat,deposit,unionQR,aliQR,online,wxQR,jdQR,qqQR,wap,YSF,unionPay,coin,card,BTC,barCode,BS];
     } else {
-        array = @[BS,unionQR,jdQR,ali,BQFast,BQWeChat,BQAli,aliQR,wxQR,qqQR,online,deposit,wap,YSF,unionPay,coin,card,BTC,barCode];
+        array = @[unionQR,jdQR,ali,BQFast,BQWeChat,BQAli,aliQR,wxQR,qqQR,online,deposit,wap,YSF,unionPay,coin,card,BTC,barCode,BS];
     }
     
     // 没开启的渠道不显示

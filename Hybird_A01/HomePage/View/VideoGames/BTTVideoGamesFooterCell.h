@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTVideoGamesFooterCell : BTTBaseCollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *adIcon;
+
 @end
 
 NS_ASSUME_NONNULL_END

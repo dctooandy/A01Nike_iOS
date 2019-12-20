@@ -86,7 +86,7 @@
 }
 
 - (void)resetRequestModel {
-    _type = @"hot";
+    _type = @"";
     _line = @"";
     _platform = self.provider;
     _keyword = @"";
@@ -277,6 +277,7 @@
             } else {
                 if (indexPath.row == 4) {
                     BTTVideoGamesFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesFooterCell" forIndexPath:indexPath];
+                    [cell.adIcon sd_setImageWithURL:[NSURL URLWithString:self.poster.logo.path] placeholderImage:ImageNamed(@"default_4")];
                     weakSelf(weakSelf);
                     cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                         strongSelf(strongSelf);
@@ -345,6 +346,7 @@
                     if (self.isShowFooter) {
                         if (indexPath.row == self.games.count + 3) {
                             BTTVideoGamesFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesFooterCell" forIndexPath:indexPath];
+                            [cell.adIcon sd_setImageWithURL:[NSURL URLWithString:self.poster.logo.path] placeholderImage:ImageNamed(@"default_4")];
                             weakSelf(weakSelf);
                             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                                 strongSelf(strongSelf);
@@ -414,6 +416,7 @@
                 } else {
                     if (indexPath.row == 5) {
                         BTTVideoGamesFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesFooterCell" forIndexPath:indexPath];
+                        [cell.adIcon sd_setImageWithURL:[NSURL URLWithString:self.poster.logo.path] placeholderImage:ImageNamed(@"default_4")];
                         weakSelf(weakSelf);
                         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                             strongSelf(strongSelf);
@@ -478,6 +481,7 @@
                     if (self.isShowFooter) {
                         if (indexPath.row == self.games.count + 2) {
                             BTTVideoGamesFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesFooterCell" forIndexPath:indexPath];
+                            [cell.adIcon sd_setImageWithURL:[NSURL URLWithString:self.poster.logo.path] placeholderImage:ImageNamed(@"default_4")];
                             weakSelf(weakSelf);
                             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                                 strongSelf(strongSelf);
@@ -546,6 +550,7 @@
                 } else {
                     if (indexPath.row == 4) {
                         BTTVideoGamesFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesFooterCell" forIndexPath:indexPath];
+                        [cell.adIcon sd_setImageWithURL:[NSURL URLWithString:self.poster.logo.path] placeholderImage:ImageNamed(@"default_4")];
                         weakSelf(weakSelf);
                         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                             strongSelf(strongSelf);
@@ -753,7 +758,7 @@
                     [self.navigationController pushViewController:vc animated:YES];
                 } else if ([provider isEqualToString:@"AS"]) {
                     IVGameModel *model = [[IVGameModel alloc] init];
-                    model.cnName = @"AS电游";
+                    model.cnName = @"AS真人棋牌";
                     model.enName =  kASSlotEnName;
                     model.provider = kASSlotProvider;
                 }

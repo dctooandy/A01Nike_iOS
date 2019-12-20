@@ -21,6 +21,7 @@
         if (result.status && result.data && ![result.data isKindOfClass:[NSNull class]]) {
             if (result.data[@"src"] && ![result.data[@"src"] isKindOfClass:[NSNull class]]) {
                 NSString *base64Str = result.data[@"src"];
+                self.uuid = result.data[@"uuid"];
                 // 将base64字符串转为NSData
                 NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
                 // 将NSData转为UIImage
@@ -34,8 +35,8 @@
     }];
 }
 
-- (void)verifyPhotoCode:(NSString *)code completeBlock:(CompleteBlock)completeBlock {
-    NSDictionary *params = @{@"code":code};
+- (void)verifyPhotoCode:(NSString *)code WithUUid:(NSString *)uuid completeBlock:(CompleteBlock)completeBlock {
+    NSDictionary *params = @{@"code":code,@"uuid":uuid};
     [IVNetwork sendRequestWithSubURL:BTTValidateCaptcha paramters:params completionBlock:completeBlock];
 }
 

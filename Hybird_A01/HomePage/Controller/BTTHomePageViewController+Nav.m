@@ -25,15 +25,38 @@
 #import "BTTAGGJViewController.h"
 #import "BTTVideoGamesListController.h"
 #import "BTTLoginAccountSelectView.h"
-
+#import "BTTJayPopView.h"
+#import "BTTNewAccountGuidePopView.h"
+#import "UIImage+GIF.h"
 
 
 static const char *BTTHeaderViewKey = "headerView";
 
+static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
+
 @implementation BTTHomePageViewController (Nav)
 
 
+- (void)setupFloatWindow {
+    UIImageView *floatWindow = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - 61, SCREEN_HEIGHT / 2 + 120, 68.8, 66)];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"qhb" ofType:@"gif"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    UIImage *image = [UIImage sd_animatedGIFWithData:data];
+    [floatWindow sd_setImageWithURL:nil placeholderImage:image];
+    [self.view addSubview:floatWindow];
+    floatWindow.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    [floatWindow addGestureRecognizer:tap];
+}
 
+- (void)tapAction {
+//    monthly_activity.htm
+    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+    vc.webConfigModel.url = @"monthly_activity.htm";
+    vc.webConfigModel.newView = YES;
+    vc.webConfigModel.theme = @"outside";
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 - (void)registerNotification {
@@ -84,12 +107,25 @@ static const char *BTTHeaderViewKey = "headerView";
 - (void)loginSuccess:(NSNotification *)notifi {
     self.isLogin = YES;
     [IN3SAnalytics setUserName:[IVNetwork userInfo].loginName];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateUI];
+//        [self updateUI];
+        self.loginAndRegisterBtnsView.hidden = YES;
         [[IVGameManager sharedManager] reloadCacheGame];
     });
 }
 
+
+- (void)showNewAccountGrideView {
+    BTTNewAccountGuidePopView *customView = [BTTNewAccountGuidePopView viewFromXib];
+    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+}
 
 
 - (void)logoutSuccess:(NSNotification *)notifi {
@@ -97,20 +133,41 @@ static const char *BTTHeaderViewKey = "headerView";
     self.isVIP = NO;
     [IN3SAnalytics setUserName:nil];
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateUI];
+//        [self updateUI];
+        self.loginAndRegisterBtnsView.hidden = NO;
         [[IVGameManager sharedManager] reloadCacheGame];
     });
 }
 
-- (void)updateUI {
-    self.headerView.isLogin = self.isLogin;
-    self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin);
-    self.collectionView.frame = CGRectMake(0,  self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin, SCREEN_WIDTH, SCREEN_HEIGHT - (self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin));
+//- (void)updateUI {
+//    self.headerView.isLogin = self.isLogin;
+//    self.headerView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin);
+//    self.collectionView.frame = CGRectMake(0,  self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin, SCREEN_WIDTH, SCREEN_HEIGHT - (self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin));
+//}
+
+- (void)setupLoginAndRegisterBtnsView {
+    self.loginAndRegisterBtnsView = [BTTLoginOrRegisterBtsView viewFromXib];
+    self.loginAndRegisterBtnsView.hidden = [IVNetwork userInfo] ? YES : NO;
+    [self.view addSubview:self.loginAndRegisterBtnsView];
+    self.loginAndRegisterBtnsView.frame = CGRectMake(0, SCREEN_HEIGHT - (KIsiPhoneX ? 83 : 49) - 87, SCREEN_WIDTH, 87);
+    weakSelf(weakSelf);
+    self.loginAndRegisterBtnsView.btnClickBlock = ^(UIButton * _Nullable btn) {
+        strongSelf(strongSelf);
+        if (btn.tag == 1000) {
+            BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
+            loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
+            [strongSelf.navigationController pushViewController:loginAndRegister animated:YES];
+        } else {
+            BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
+            loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
+            [strongSelf.navigationController pushViewController:loginAndRegister animated:YES];
+        }
+    };
 }
 
 - (void)setupNav {
     [self.navigationController setNavigationBarHidden:YES];
-    self.headerView = [[BTTHomePageHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.isLogin ? BTTNavHeightLogin : BTTNavHeightNotLogin) withNavType:BTTNavTypeHomePage];
+    self.headerView = [[BTTHomePageHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, BTTNavHeightLogin) withNavType:BTTNavTypeHomePage];
     self.headerView.isLogin = self.isLogin;
     [self.view addSubview:self.headerView];
     weakSelf(weakSelf);
@@ -165,23 +222,24 @@ static const char *BTTHeaderViewKey = "headerView";
 - (void)rightClick:(UIButton *)btn {
     
     BTTPopoverAction *action1 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineService") title:@"在线客服" handler:^(BTTPopoverAction *action) {
-        if ([IVNetwork userInfo]) {
-            weakSelf(weakSelf);
-            [self getLive800InfoDataWithResponse:^(NSString * _Nonnull info) {
-                strongSelf(strongSelf);
-                NSString *url = [NSString stringWithFormat:@"%@&info=%@",@"https://www.why918.com/chat/chatClient/chatbox.jsp?companyID=8990&configID=21&k=1&codeType=custom",info];
-                BTTLive800ViewController *live800 = [[BTTLive800ViewController alloc] init];
-                live800.webConfigModel.url = url;
-                live800.webConfigModel.newView = YES;
-                [strongSelf.navigationController pushViewController:live800 animated:YES];
-            }];
-        } else {
-            NSString *url = @"https://www.why918.com/chat/chatClient/chatbox.jsp?companyID=8990&configID=21&k=1&codeType=custom";
-            BTTLive800ViewController *live800 = [[BTTLive800ViewController alloc] init];
-            live800.webConfigModel.url = url;
-            live800.webConfigModel.newView = YES;
-            [self.navigationController pushViewController:live800 animated:YES];
-        }
+//        if ([IVNetwork userInfo]) {
+//            weakSelf(weakSelf);
+//            [self getLive800InfoDataWithResponse:^(NSString * _Nonnull info) {
+//                strongSelf(strongSelf);
+//                NSString *url = [NSString stringWithFormat:@"%@&info=%@",@"https://www.why918.com/chat/chatClient/chatbox.jsp?companyID=8990&configID=21&k=1&codeType=custom",info];
+//                BTTLive800ViewController *live800 = [[BTTLive800ViewController alloc] init];
+//                live800.webConfigModel.url = url;
+//                live800.webConfigModel.newView = YES;
+//                [strongSelf.navigationController pushViewController:live800 animated:YES];
+//            }];
+//        } else {
+//            NSString *url = @"https://www.why918.com/chat/chatClient/chatbox.jsp?companyID=8990&configID=21&k=1&codeType=custom";
+//            BTTLive800ViewController *live800 = [[BTTLive800ViewController alloc] init];
+//            live800.webConfigModel.url = url;
+//            live800.webConfigModel.newView = YES;
+//            [self.navigationController pushViewController:live800 animated:YES];
+//        }
+        [[CLive800Manager sharedInstance] startLive800Chat:self];
     }];
     
     BTTPopoverAction *action2 = [BTTPopoverAction actionWithImage:ImageNamed(@"voiceCall") title:@"APP语音通信" handler:^(BTTPopoverAction *action) {
@@ -209,9 +267,9 @@ static const char *BTTHeaderViewKey = "headerView";
         }
     }];
     
-    BTTPopoverAction *action4 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineVoice") title:@"语音聊天" handler:^(BTTPopoverAction *action) {
-        [[CLive800Manager sharedInstance] startLive800Chat:self];
-    }];
+//    BTTPopoverAction *action4 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineVoice") title:@"语音聊天" handler:^(BTTPopoverAction *action) {
+//        [[CLive800Manager sharedInstance] startLive800Chat:self];
+//    }];
     
     
     NSString *phoneValue = [IVNetwork getPublicConfigWithKey:@"APP_400_HOTLINE"];
@@ -238,7 +296,7 @@ static const char *BTTHeaderViewKey = "headerView";
     popView.style = BTTPopoverViewStyleDark;
     popView.arrowStyle = BTTPopoverViewArrowStyleTriangle;
     popView.showShade = YES;
-    [popView showToPoint:CGPointMake(SCREEN_WIDTH - 27, KIsiPhoneX ? 88 : 64) withActions:@[action1,action2,action3,action4,action5]];
+    [popView showToPoint:CGPointMake(SCREEN_WIDTH - 27, KIsiPhoneX ? 88 : 64) withActions:@[action1,action2,action3,action5]];
     
 }
 
@@ -283,6 +341,29 @@ static const char *BTTHeaderViewKey = "headerView";
             [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
         }
         
+    };
+}
+
+- (void)showJay {
+    
+    BTTJayPopView *customView = [BTTJayPopView viewFromXib];
+    customView.frame = CGRectMake(0, 0, 296, 528);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
+    [popView pop];
+    weakSelf(weakSelf);
+    customView.dismissBlock = ^{
+       [popView dismiss];
+    };
+   
+    customView.btnBlock = ^(UIButton *btn) {
+       strongSelf(strongSelf);
+        [popView dismiss];
+        NSString *url = [NSString stringWithFormat:@"%@jays_concert_2.htm",[IVNetwork h5Domain]];
+        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+        vc.webConfigModel.url = url;
+        vc.webConfigModel.newView = YES;
+        vc.webConfigModel.theme = @"outside";
+        [strongSelf.navigationController pushViewController:vc animated:YES];
     };
 }
 
@@ -401,7 +482,7 @@ static const char *BTTHeaderViewKey = "headerView";
                     [self.navigationController pushViewController:vc animated:YES];
                 } else if ([provider isEqualToString:@"AS"]) {
                     IVGameModel *model = [[IVGameModel alloc] init];
-                    model.cnName = @"AS电游";
+                    model.cnName = @"AS真人棋牌";
                     model.enName =  kASSlotEnName;
                     model.provider = kASSlotProvider;
                 }
@@ -419,6 +500,15 @@ static const char *BTTHeaderViewKey = "headerView";
 
 - (BTTHomePageHeaderView *)headerView {
     return objc_getAssociatedObject(self, &BTTHeaderViewKey);
+}
+
+- (void)setLoginAndRegisterBtnsView:(BTTLoginOrRegisterBtsView *)loginAndRegisterBtnsView {
+    objc_setAssociatedObject(self, &BTTLoginAndRegisterKey, loginAndRegisterBtnsView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+
+- (BTTLoginOrRegisterBtsView *)loginAndRegisterBtnsView {
+    return objc_getAssociatedObject(self, &BTTLoginAndRegisterKey);
 }
 
 

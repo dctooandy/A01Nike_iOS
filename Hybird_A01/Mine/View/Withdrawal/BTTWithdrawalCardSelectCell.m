@@ -25,7 +25,7 @@
             iconURLStr = @"";
         } else {
             if (![iconURLStr hasPrefix:@"http"]) {
-                iconURLStr = [NSString stringWithFormat:@"%@%@",[IVNetwork cdn],iconURLStr];
+                iconURLStr = [PublicMethod nowCDNWithUrl:iconURLStr];
             }
         }
         NSURL *iconUrl = [NSURL URLWithString:iconURLStr];

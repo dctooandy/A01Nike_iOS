@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTElectronicGamesCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电子游戏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vsw-ya-PzN">
+                        <rect key="frame" x="15" y="15" width="65.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dt5-nH-J6Q">
+                        <rect key="frame" x="15" y="44.5" width="183" height="144"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="144" id="KAd-0V-4VS"/>
+                            <constraint firstAttribute="width" constant="183" id="ttx-4C-6uI"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="TTG"/>
+                        <connections>
+                            <action selector="ttgBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="nxb-D6-S7m"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SUP-Ol-Uux">
+                        <rect key="frame" x="207" y="44.5" width="153" height="69"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="69" id="97U-9V-7Xf"/>
+                            <constraint firstAttribute="width" constant="153" id="fbc-ym-7Hf"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="Fishing_king"/>
+                        <connections>
+                            <action selector="fishBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Ods-j7-8em"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="1004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9UA-IZ-Nq7">
+                        <rect key="frame" x="207" y="119.5" width="153" height="69"/>
+                        <state key="normal" backgroundImage="MG"/>
+                        <connections>
+                            <action selector="mgBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="nNQ-Dd-S1V"/>
+                        </connections>
+                    </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tryPlay" translatesAutoresizingMaskIntoConstraints="NO" id="Nda-t4-vTt">
+                        <rect key="frame" x="327" y="59.5" width="25" height="17.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17.5" id="GVZ-zr-59f"/>
+                            <constraint firstAttribute="width" constant="25" id="GeL-oS-dwG"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tryPlay" translatesAutoresizingMaskIntoConstraints="NO" id="mLl-aJ-JIA">
+                        <rect key="frame" x="327" y="134.5" width="25" height="17.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17.5" id="N9m-DJ-I4g"/>
+                            <constraint firstAttribute="width" constant="25" id="xVD-gg-tVe"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tryPlay" translatesAutoresizingMaskIntoConstraints="NO" id="mTH-py-doh">
+                        <rect key="frame" x="165" y="59.5" width="25" height="17.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="NkI-a4-ljF"/>
+                            <constraint firstAttribute="height" constant="17.5" id="WNe-G0-8eB"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TTG" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwh-2j-n9O">
+                        <rect key="frame" x="23" y="163.5" width="27.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="捕鱼王" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pa4-2U-vTi">
+                        <rect key="frame" x="215" y="88.5" width="43" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MG" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHt-wG-Gv9">
+                        <rect key="frame" x="215" y="163.5" width="22.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" tag="1005" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Gt-t9-6lg">
+                        <rect key="frame" x="286" y="11.5" width="74" height="27"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="进入游戏大厅">
+                            <color key="titleColor" red="0.40000000000000002" green="0.70196078431372544" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="allBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="6EC-LQ-fVd"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Dt5-nH-J6Q" firstAttribute="top" secondItem="Vsw-ya-PzN" secondAttribute="bottom" constant="10" id="5FG-gM-kti"/>
+                <constraint firstItem="Dt5-nH-J6Q" firstAttribute="top" secondItem="mTH-py-doh" secondAttribute="top" constant="-15" id="9A3-Mv-XMp"/>
+                <constraint firstItem="Vsw-ya-PzN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="9db-or-McS"/>
+                <constraint firstAttribute="trailing" secondItem="9UA-IZ-Nq7" secondAttribute="trailing" constant="15" id="GFl-BT-KZx"/>
+                <constraint firstItem="9UA-IZ-Nq7" firstAttribute="width" secondItem="SUP-Ol-Uux" secondAttribute="width" id="Gr8-Dv-H3t"/>
+                <constraint firstItem="Dt5-nH-J6Q" firstAttribute="top" secondItem="SUP-Ol-Uux" secondAttribute="top" id="Jlw-yV-zj7"/>
+                <constraint firstItem="9UA-IZ-Nq7" firstAttribute="leading" secondItem="QHt-wG-Gv9" secondAttribute="leading" constant="-8" id="Qn8-1T-ltG"/>
+                <constraint firstItem="QHt-wG-Gv9" firstAttribute="bottom" secondItem="9UA-IZ-Nq7" secondAttribute="bottom" constant="-8" id="SsH-Rr-tPl"/>
+                <constraint firstItem="pa4-2U-vTi" firstAttribute="bottom" secondItem="SUP-Ol-Uux" secondAttribute="bottom" constant="-8" id="VfH-m0-gEw"/>
+                <constraint firstItem="9UA-IZ-Nq7" firstAttribute="top" secondItem="mLl-aJ-JIA" secondAttribute="top" constant="-15" id="YqO-5u-Xrw"/>
+                <constraint firstItem="Nda-t4-vTt" firstAttribute="trailing" secondItem="SUP-Ol-Uux" secondAttribute="trailing" constant="-8" id="cVc-lt-XyV"/>
+                <constraint firstItem="Vsw-ya-PzN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="djH-NV-hEV"/>
+                <constraint firstItem="Dt5-nH-J6Q" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="f1c-pr-9ZE"/>
+                <constraint firstItem="1Gt-t9-6lg" firstAttribute="centerY" secondItem="Vsw-ya-PzN" secondAttribute="centerY" id="f83-66-L8H"/>
+                <constraint firstItem="9UA-IZ-Nq7" firstAttribute="height" secondItem="SUP-Ol-Uux" secondAttribute="height" id="h9v-eY-1dW"/>
+                <constraint firstItem="mTH-py-doh" firstAttribute="trailing" secondItem="Dt5-nH-J6Q" secondAttribute="trailing" constant="-8" id="ivW-MW-Ydy"/>
+                <constraint firstItem="mLl-aJ-JIA" firstAttribute="trailing" secondItem="9UA-IZ-Nq7" secondAttribute="trailing" constant="-8" id="lRO-f2-3PD"/>
+                <constraint firstItem="SUP-Ol-Uux" firstAttribute="leading" secondItem="pa4-2U-vTi" secondAttribute="leading" constant="-8" id="m9M-d6-8W6"/>
+                <constraint firstAttribute="trailing" secondItem="SUP-Ol-Uux" secondAttribute="trailing" constant="15" id="pf2-Pt-cIs"/>
+                <constraint firstAttribute="trailing" secondItem="1Gt-t9-6lg" secondAttribute="trailing" constant="15" id="r25-Cg-mDw"/>
+                <constraint firstItem="Nda-t4-vTt" firstAttribute="top" secondItem="SUP-Ol-Uux" secondAttribute="top" constant="15" id="rpo-G0-ArL"/>
+                <constraint firstItem="9UA-IZ-Nq7" firstAttribute="bottom" secondItem="Dt5-nH-J6Q" secondAttribute="bottom" id="u7Z-Kb-Ycd"/>
+                <constraint firstItem="kwh-2j-n9O" firstAttribute="bottom" secondItem="Dt5-nH-J6Q" secondAttribute="bottom" constant="-8" id="xQw-Xk-EvD"/>
+                <constraint firstItem="Dt5-nH-J6Q" firstAttribute="leading" secondItem="kwh-2j-n9O" secondAttribute="leading" constant="-8" id="xm8-Bv-UC1"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <connections>
+                <outlet property="fishBtn" destination="SUP-Ol-Uux" id="ZAV-xm-aaB"/>
+                <outlet property="fishBtnHeight" destination="97U-9V-7Xf" id="DW3-av-q6y"/>
+                <outlet property="fishBtnWidth" destination="fbc-ym-7Hf" id="CUg-fd-KOX"/>
+                <outlet property="fishTryIcon" destination="Nda-t4-vTt" id="3AK-Ic-ola"/>
+                <outlet property="mgBtn" destination="9UA-IZ-Nq7" id="6mX-Qv-GHR"/>
+                <outlet property="mgTryIcon" destination="mLl-aJ-JIA" id="SqR-XG-Nkh"/>
+                <outlet property="ttgBtn" destination="Dt5-nH-J6Q" id="KQ1-u9-Xr2"/>
+                <outlet property="ttgBtnHeight" destination="KAd-0V-4VS" id="SwW-dE-tdb"/>
+                <outlet property="ttgBtnWidth" destination="ttx-4C-6uI" id="cmZ-rt-U60"/>
+                <outlet property="ttgTryIcon" destination="mTH-py-doh" id="34E-6V-BxZ"/>
+            </connections>
+            <point key="canvasLocation" x="131.15942028985509" y="152.67857142857142"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="Fishing_king" width="152.5" height="69"/>
+        <image name="MG" width="152.5" height="69"/>
+        <image name="TTG" width="182.5" height="143.5"/>
+        <image name="tryPlay" width="25" height="17.5"/>
+    </resources>
+</document>

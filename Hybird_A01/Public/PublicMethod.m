@@ -8,6 +8,7 @@
 
 #import "PublicMethod.h"
 #import "AppDelegate.h"
+#import <CoreImage/CoreImage.h>
 
 @implementation PublicMethod
 
@@ -353,6 +354,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         return NO;
     }
 }
+
 
 + (BOOL)isDateYesterday:(NSDate *)date_
 {
@@ -1106,4 +1108,31 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     return timeSp;
 }
 
++ (NSString *)nowCDNWithUrl:(NSString *)url {
+    BOOL cdn = [[IVNetwork cdn] hasSuffix:@"/"];
+    BOOL urlStr = [url hasPrefix:@"/"];
+    
+    NSString *str = nil;
+    if (cdn) {
+        str = [[IVNetwork cdn] substringToIndex:[IVNetwork cdn].length - 1];
+    } else {
+        str = [IVNetwork cdn];
+    }
+    
+    if (urlStr) {
+        str = [NSString stringWithFormat:@"%@/%@",str,[url substringFromIndex:1]];
+    } else {
+        str = [NSString stringWithFormat:@"%@/%@",str,url];
+    }
+    return str;
+}
+
+
++ (NSDate *)transferDateStringToDate:(NSString *)dateString {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
+    NSDate *date = [formatter dateFromString:dateString];
+    return date;
+}
 @end

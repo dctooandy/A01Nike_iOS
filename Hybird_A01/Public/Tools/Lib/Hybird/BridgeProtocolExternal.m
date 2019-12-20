@@ -280,7 +280,7 @@
     } else if ([provider isEqualToString:kAGINProvider]) {
         [self.controller.navigationController pushViewController:[BTTAGGJViewController new] animated:YES];
     } else if ([provider isEqualToString:kASSlotProvider]) {
-        model.cnName = @"AS电游";
+        model.cnName = @"AS真人棋牌";
         model.enName =  kASSlotEnName;
         model.provider = kASSlotProvider;
     } else if ([provider isEqualToString:@"BTI"]) {

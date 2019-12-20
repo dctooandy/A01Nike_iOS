@@ -135,8 +135,8 @@ float BTTPopoverViewDegreesToRadians(float angle)
     // 截取弹窗时相关数据
     CGFloat arrowWidth = 28;
     CGFloat cornerRadius = 6.f;
-    CGFloat arrowCornerRadius = 2.5f;
-    CGFloat arrowBottomCornerRadius = 4.f;
+//    CGFloat arrowCornerRadius = 2.5f;
+//    CGFloat arrowBottomCornerRadius = 4.f;
     
     // 如果是菱角箭头的话, 箭头宽度需要小点.
     if (_arrowStyle == BTTPopoverViewArrowStyleTriangle) {
