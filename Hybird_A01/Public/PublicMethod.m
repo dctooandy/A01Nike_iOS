@@ -1109,14 +1109,14 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
 }
 
 + (NSString *)nowCDNWithUrl:(NSString *)url {
-    BOOL cdn = [[IVNetwork cdn] hasSuffix:@"/"];
+    BOOL cdn = [[IVHttpManager shareManager].cdn hasSuffix:@"/"];
     BOOL urlStr = [url hasPrefix:@"/"];
     
     NSString *str = nil;
     if (cdn) {
-        str = [[IVNetwork cdn] substringToIndex:[IVNetwork cdn].length - 1];
+        str = [[IVHttpManager shareManager].cdn substringToIndex:[IVHttpManager shareManager].cdn.length - 1];
     } else {
-        str = [IVNetwork cdn];
+        str = [IVHttpManager shareManager].cdn;
     }
     
     if (urlStr) {

@@ -15,6 +15,7 @@
 #import "IVWebViewUtility.h"
 #import "IVGameUtility.h"
 #import "BTTRequestPrecache.h"
+#import "IVCheckNetworkWrapper.h"
 
 
 @implementation AppDelegate (Environment)
@@ -38,25 +39,36 @@
     [IVWebViewManager sharaManager].delegate = [IVWebViewUtility new];
     [IVGameManager sharedManager].delegate = [IVGameUtility new];
     [IVGameManager sharedManager].isPushAGQJ = YES;
-//    [IVNetwork setOldApi:YES];
     [WebViewUserAgaent writeIOSUserAgent];
     [IVHttpManager shareManager].productId = [HAInitConfig productId]; // 产品标识
     [IVHttpManager shareManager].appId = [HAInitConfig appId];     // 应用ID
     [IVHttpManager shareManager].parentId = @"1111";  // 渠道号
     [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
     [IVHttpManager shareManager].productCode = [HAInitConfig appKey]; // 产品码
-//    [IVHttpManager shareManager].domains = domains; // 所有手机站
     [IVHttpManager shareManager].domain = [HAInitConfig defaultH5Domain]; // 默认手机站
     [IVHttpManager shareManager].cdn = [HAInitConfig defaultCDN]; //默认cdn
-//    [IVNetwork startLaunchProcessWithFinished:^{
-//        [BTTRequestPrecache startUpdateCache];
-//    }];
+
     [IN3SAnalytics debugEnable:YES];
     [IN3SAnalytics setUserName:[IVHttpManager shareManager].loginName];
     [[CNTimeLog shareInstance] configProduct:@"A01"];
     
     [self setupRedDot];
     [self setupLive800];
+    
+    //获取最优的网关
+    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways
+                                            isAuto:YES
+                                              type:IVKCheckNetworkTypeGateway
+                                          progress:nil
+                                        completion:nil
+     ];
+    //获取最优的手机站
+    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].domains
+                                            isAuto:YES
+                                              type:IVKCheckNetworkTypeDomain
+                                          progress:nil
+                                        completion:nil
+     ];
 }
 
 - (void)setupRedDot {

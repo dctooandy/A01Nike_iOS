@@ -73,24 +73,25 @@
     } else if (self.paymentModel.paymentType == CNPaymentBQWechat) {
         bqPaymentType = 1;
     }
-    [CNPayRequestManager paymentGetBankListWithType:YES depositor:self.nameTF.text referenceId:nil BQPayType:bqPaymentType completeHandler:^(IVRequestResultModel *result, id response) {
-        weakSender.selected = NO;
-        if (!result.status) {
-            [weakSelf showError:result.message];
-            return;
-        }
-        /// 数据解析
-        NSArray *array = result.data;
-        NSArray *bankList = [CNPayBankCardModel arrayOfModelsFromDictionaries:array error:nil];
-        if (bankList.count == 0) {
-            [self showError:result.message];
-            return;
-        }
-        weakSelf.writeModel.depositBy = weakSelf.nameTF.text;
-        weakSelf.writeModel.bankList = bankList;
-        weakSelf.writeModel.chooseBank = bankList.firstObject;
-        [weakSelf goToStep:1];
-    }];
+    //TODO:
+//    [CNPayRequestManager paymentGetBankListWithType:YES depositor:self.nameTF.text referenceId:nil BQPayType:bqPaymentType completeHandler:^(IVRequestResultModel *result, id response) {
+//        weakSender.selected = NO;
+//        if (!result.status) {
+//            [weakSelf showError:result.message];
+//            return;
+//        }
+//        /// 数据解析
+//        NSArray *array = result.data;
+//        NSArray *bankList = [CNPayBankCardModel arrayOfModelsFromDictionaries:array error:nil];
+//        if (bankList.count == 0) {
+//            [self showError:result.message];
+//            return;
+//        }
+//        weakSelf.writeModel.depositBy = weakSelf.nameTF.text;
+//        weakSelf.writeModel.bankList = bankList;
+//        weakSelf.writeModel.chooseBank = bankList.firstObject;
+//        [weakSelf goToStep:1];
+//    }];
 }
 
 @end

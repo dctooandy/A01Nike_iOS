@@ -109,14 +109,14 @@
     
     /// 提交
     __weak typeof(self) weakSelf =  self;
-    [CNPayRequestManager paymentCardPay:[self getCardModel] completeHandler:^(IVRequestResultModel *result, id response) {
+    [CNPayRequestManager paymentCardPay:[self getCardModel] completeHandler:^(IVJResponseObject *result, id response) {
         sender.selected = NO;
-        if (result.status) {
-            CNPayOrderModel *model = [[CNPayOrderModel alloc] initWithDictionary:result.data error:nil];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            CNPayOrderModel *model = [[CNPayOrderModel alloc] initWithDictionary:result.body error:nil];
             weakSelf.writeModel.orderModel = model;
             [weakSelf goToStep:1];
         } else {
-            [self showError:result.message];
+            [self showError:result.head.errMsg];
         }
     }];
 }

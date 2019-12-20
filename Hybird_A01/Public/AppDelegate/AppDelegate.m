@@ -18,13 +18,16 @@
 #import "CNPreCacheMananger.h"
 #import "BTTTabBar.h"
 #import "OpenInstallSDK.h"
+#import "IVPublicAPIManager.h"
+#import "IVCheckNetworkWrapper.h"
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate,OpenInstallDelegate>
 
 @property (nonatomic, strong) dispatch_semaphore_t semaphore;
 @property (nonatomic, strong) UIWindow *areaLimitWindow;
-
 @property (nonatomic, strong) BTTTabbarController *tabVC;
+@property (nonatomic, copy) NSString *ipsAdd;
+@property (nonatomic, assign) NSInteger ipsPort;
 
 @end
 
@@ -35,10 +38,8 @@
 {
     self = [super init];
     if (self) {
-        //监听地区限制
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkAreaLimitNotification:) name:IVCheckAreaLimitNotification object:nil];
-        //监听ips获取
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getIPSSuccessNotification:) name:IVGetIPSSuccessNotification object:nil];
+        [self checkArearLimit];
+        [self getWMSForm];
         self.semaphore = dispatch_semaphore_create(0);
 #if DEBUG
 #else
@@ -49,6 +50,53 @@
 #endif
     }
     return self;
+}
+
+#pragma mark ---------------------检测地区限制--------------------------------------------
+- (void)checkArearLimit
+{
+    [IVPublicAPIManager checkAreaLimitWithCallBack:^(IVPCheckAreaLimitModel * _Nonnull result, IVJResponseObject * _Nonnull response) {
+        if (result && !result.allowAccess) {
+#warning 在这里处理地区限制逻辑，如打开webview
+            NSLog(@"拒绝访问");
+            [self areaLimitWindow];
+        } else {
+            NSLog(@"允许访问");
+        }
+    }];
+}
+
+#pragma mark ---------------------获取WMS自定义表单配置--------------------------------------------
+- (void)getWMSForm
+{
+    [IVPublicAPIManager getAPPConfigFormWithCallBack:^(IVPAppDynamicFormModel * _Nonnull result, IVJResponseObject * _Nonnull response) {
+        if (result) {
+            //手机站逻辑
+            if (result.domains) {
+                [IVHttpManager shareManager].domains = result.domains;
+                //获取最优的手机站域名
+                [IVCheckNetworkWrapper getOptimizeUrlWithArray:result.domains isAuto:YES type:IVKCheckNetworkTypeDomain progress:nil completion:nil];
+            }
+            //cdn逻辑
+            if (result.cdn) {
+                [IVHttpManager shareManager].cdn = result.cdn;
+            }
+            //ips逻辑
+            if (result.ipsIp) {
+                self.ipsAdd = result.ipsIp;
+                self.ipsPort = result.ipsPort;
+                if (self.semaphore) {
+                    dispatch_semaphore_signal(self.semaphore);
+                }
+            }
+            //游戏站逻辑
+            if (result.gcHosts) {
+                //获取最优的游戏站域名
+                [IVCheckNetworkWrapper getOptimizeUrlWithArray:result.gcHosts isAuto:YES type:IVKCheckNetworkTypeGameDomian progress:nil completion:nil];
+            }
+        }
+    }];
+
 }
 
 
@@ -82,12 +130,12 @@
 
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [IVNetwork applicationDidEnterBackground:application];
+//    [IVNetwork applicationDidEnterBackground:application];
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    [IVNetwork applicationWillEnterForeground:application];
+//    [IVNetwork applicationWillEnterForeground:application];
 }
 
 
@@ -155,24 +203,33 @@
 }
 - (void)startHeartPacket:(NSData *)deviceToken
 {
+    
     if (self.semaphore) {
-        dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
-    }
-    dispatch_async(dispatch_get_main_queue(), ^{
-        int uid = [@([IVNetwork userInfo].customerId) intValue];
-        //配置心跳ip
-        NSString *ip = [[IVCacheManager sharedInstance] nativeReadModelForKey:kCacheIpsAddress];
-        NSString *port = [[IVCacheManager sharedInstance] nativeReadModelForKey:kCacheIpsPort];
-        if (![NSString isBlankString:ip] && ![NSString isBlankString:port]) {//使用后台配置
-            [IVHeartSocketManager configHeartSocketWithIpAddress:ip port:[port intValue] porductId:[IVNetwork productId]];
-        } else {//使用默认
-            [IVHeartSocketManager configHeartSocketWithEnvironment:EnvirmentType productId:[IVNetwork productId]];
+            dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
         }
-        //发送心跳
-        [IVHeartSocketManager sendHeartPacketWithApnsToken:deviceToken userid:uid];
-        self.semaphore = nil;
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:IVGetIPSSuccessNotification object:nil];
-    });
+            dispatch_sync(dispatch_get_main_queue(), ^{
+    #warning uid:需要填写真实的用户id
+                int uid = 1111111111; //需要填写真实的用户id
+                if (self.ipsAdd && self.ipsAdd.length > 0) {//使用后台配置
+                    [IVHeartSocketManager configHeartSocketWithIpAddress:self.ipsAdd port:self.ipsPort porductId:[IVHttpManager shareManager].productId];
+                } else {//使用默认
+                    IVHeartPacketEnvironment env = IVHeartPacketLocalEnvironment;
+                    switch ([IVHttpManager shareManager].environment) {
+                        case IVNEnvironmentPublishTest:
+                            env = IVHeartPacketGrayEnvironment;
+                            break;
+                        case IVNEnvironmentPublish:
+                            env = IVHeartPacketPublishEnvironment;
+                            break;
+                        default:
+                            break;
+                    }
+                    [IVHeartSocketManager configHeartSocketWithEnvironment:env productId:[IVHttpManager shareManager].productId];
+                }
+                //发送心跳
+                [IVHeartSocketManager sendHeartPacketWithApnsToken:deviceToken userid:uid];
+                self.semaphore = nil;
+            });
 }
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error{
     NSLog(@"註冊遠端推送通知失敗：%@", error);
@@ -213,7 +270,8 @@
 {
     NSString *url = [notification.userInfo valueForKey:@"val"];
     WebConfigModel *model = [[WebConfigModel alloc] init];
-    model.url = [[IVNetwork h5Domain] stringByAppendingString:url];
+    //需要获取到h5Domain
+    model.url = [[IVHttpManager shareManager].domain stringByAppendingString:url];
     HAWebViewController *webVC = [[HAWebViewController alloc] init];
     webVC.webConfigModel = model;
     self.areaLimitWindow.rootViewController = webVC;

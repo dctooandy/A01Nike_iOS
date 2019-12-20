@@ -18,15 +18,16 @@
         params = @{@"flag":@"last"};
     }
     [self showLoading];
-    [IVNetwork sendRequestWithSubURL:@"/A01/xm/getWeekDayList" paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        [self hideLoading];
-        NSLog(@"%@",response);
-        if (result.status) {
-            BTTXimaRecordModel *model = [BTTXimaRecordModel yy_modelWithDictionary:result.data];
-            self.model = model;
-            [self setupElements];
-        }
-    }];
+//    TODO:这个地方需要重新处理，暂时先全部注释掉
+//    [IVNetwork sendRequestWithSubURL:@"/A01/xm/getWeekDayList" paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+//        [self hideLoading];
+//        NSLog(@"%@",response);
+//        if (result.status) {
+//            BTTXimaRecordModel *model = [BTTXimaRecordModel yy_modelWithDictionary:result.data];
+//            self.model = model;
+//            [self setupElements];
+//        }
+//    }];
 }
 
 @end

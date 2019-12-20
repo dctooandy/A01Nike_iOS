@@ -65,10 +65,11 @@
 
 - (BOOL)IVGameShouldForwardToGame {
 
-    if ([[UIDevice networkType] isEqualToString:@"notReachable"]) {
-        [IVNUtility showToastWithMessage:@"似乎已断开与互联网的连接!"];
-        return NO;
-    }
+    //TODO:
+//    if ([[UIDevice networkType] isEqualToString:@"notReachable"]) {
+//        [IVNUtility showToastWithMessage:@"似乎已断开与互联网的连接!"];
+//        return NO;
+//    }
     return YES;
 }
 
@@ -76,21 +77,21 @@
 {
     BOOL isTry = ![IVHttpManager shareManager].userToken.length;
 
-    [BTTHttpManager publicGameLoginWithParams:paramters isTry:isTry completeBlock:^(IVRequestResultModel *result, id response) {
-        if (completion) {
-            completion(result.status,response);
-        }
-    }];
+//    [BTTHttpManager publicGameLoginWithParams:paramters isTry:isTry completeBlock:^(IVRequestResultModel *result, id response) {
+//        if (completion) {
+//            completion(result.status,response);
+//        }
+//    }];
 }
 - (void)IVGameTransferWithProvider:(NSString *)provider
 {
 
-    if (![IVNetwork userInfo]) {
-        return;
-    }
-    
-    
-    [BTTHttpManager publicGameTransferWithProvider:provider completeBlock:nil];
+//    if (![IVNetwork userInfo]) {
+//        return;
+//    }
+//
+//
+//    [BTTHttpManager publicGameTransferWithProvider:provider completeBlock:nil];
 }
 - (void)IVGameForwardToPageWithType:(IVGameForwardPageType)type gameController:(IVWKGameViewController *)gameController {
     //转为竖屏
@@ -104,17 +105,17 @@
     switch (type) {
         case IVGameForwardPageTypeWithdrawal:{
             UIViewController *vc = nil;
-            if ([IVNetwork userInfo].real_name && [IVNetwork userInfo].verify_code) {
-                if ([IVNetwork userInfo].isBankBinded) {
-                    vc = [[BTTWithdrawalController alloc] init];
-                } else {
-                    [MBProgressHUD showMessagNoActivity:@"请先绑定银行卡" toView:nil];
-                    vc = [[BTTCardInfosController alloc] init];
-                }
-            } else {
-                [MBProgressHUD showMessagNoActivity:@"请先完善个人信息" toView:nil];
-                vc = [[BTTPersonalInfoController alloc] init];
-            }
+//            if ([IVNetwork userInfo].real_name && [IVNetwork userInfo].verify_code) {
+//                if ([IVNetwork userInfo].isBankBinded) {
+//                    vc = [[BTTWithdrawalController alloc] init];
+//                } else {
+//                    [MBProgressHUD showMessagNoActivity:@"请先绑定银行卡" toView:nil];
+//                    vc = [[BTTCardInfosController alloc] init];
+//                }
+//            } else {
+//                [MBProgressHUD showMessagNoActivity:@"请先完善个人信息" toView:nil];
+//                vc = [[BTTPersonalInfoController alloc] init];
+//            }
             controller = vc;
         }
             break;

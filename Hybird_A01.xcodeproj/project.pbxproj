@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -662,6 +662,9 @@
 		3AFCD7D021AD179600B136C1 /* BTTVideoGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CE21AD179600B136C1 /* BTTVideoGameCell.m */; };
 		3AFCD7D121AD179600B136C1 /* BTTVideoGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_A01.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */; };
+		D326400823ACCC6E00E16AFD /* BTTUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D326400723ACCC6E00E16AFD /* BTTUserInfoModel.m */; };
+		D326400B23ACD28C00E16AFD /* IVNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = D326400A23ACD28C00E16AFD /* IVNetwork.m */; };
+		D326400E23ACE10D00E16AFD /* IVUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D326400D23ACE10D00E16AFD /* IVUserInfoModel.m */; };
 		D51AD19F21B8FEE5008C633A /* CNPayBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */; };
 		D599251421AE5AF6001E885A /* CNPayNormalTF.m in Sources */ = {isa = PBXBuildFile; fileRef = D599251321AE5AF6001E885A /* CNPayNormalTF.m */; };
 		D599251821AE6719001E885A /* CNPayCardStep2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D599251621AE6719001E885A /* CNPayCardStep2VC.m */; };
@@ -1761,6 +1764,12 @@
 		3AFCD7CE21AD179600B136C1 /* BTTVideoGameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGameCell.m; sourceTree = "<group>"; };
 		3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGameCell.xib; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_A01.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D326400623ACCC6E00E16AFD /* BTTUserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUserInfoModel.h; sourceTree = "<group>"; };
+		D326400723ACCC6E00E16AFD /* BTTUserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUserInfoModel.m; sourceTree = "<group>"; };
+		D326400923ACD28C00E16AFD /* IVNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVNetwork.h; sourceTree = "<group>"; };
+		D326400A23ACD28C00E16AFD /* IVNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IVNetwork.m; sourceTree = "<group>"; };
+		D326400C23ACE10D00E16AFD /* IVUserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVUserInfoModel.h; sourceTree = "<group>"; };
+		D326400D23ACE10D00E16AFD /* IVUserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IVUserInfoModel.m; sourceTree = "<group>"; };
 		D51AD19D21B8FEE5008C633A /* CNPayBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayBaseView.h; sourceTree = "<group>"; };
 		D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayBaseView.m; sourceTree = "<group>"; };
 		D599251221AE5AF6001E885A /* CNPayNormalTF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayNormalTF.h; sourceTree = "<group>"; };
@@ -2682,6 +2691,8 @@
 				EA5F140D21A261BA004305A7 /* BTTHttpManager.m */,
 				EA5F141E21A2AEC1004305A7 /* BTTUserStatusManager.h */,
 				EA5F141F21A2AEC1004305A7 /* BTTUserStatusManager.m */,
+				D326400923ACD28C00E16AFD /* IVNetwork.h */,
+				D326400A23ACD28C00E16AFD /* IVNetwork.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -3529,6 +3540,8 @@
 				3A929410219BBD4F00764E7E /* BTTLoginAPIModel.m */,
 				3A929413219BFEE100764E7E /* BTTCreateAPIModel.h */,
 				3A929414219BFEE100764E7E /* BTTCreateAPIModel.m */,
+				D326400C23ACE10D00E16AFD /* IVUserInfoModel.h */,
+				D326400D23ACE10D00E16AFD /* IVUserInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3602,6 +3615,8 @@
 				3A5B0282234F233500D8828B /* BTTXimaRecordModel.m */,
 				3A80AB0523A381CD004BF8C0 /* BTTShareRedirectModel.h */,
 				3A80AB0623A381CD004BF8C0 /* BTTShareRedirectModel.m */,
+				D326400623ACCC6E00E16AFD /* BTTUserInfoModel.h */,
+				D326400723ACCC6E00E16AFD /* BTTUserInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4717,19 +4732,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh",
-				"${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Hybird_A01/Pods-Hybird_A01-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -5034,6 +5046,7 @@
 				3A7740A5224DE90800A65841 /* BTTPayBQAliStep2VC.m in Sources */,
 				3A514E432186F3CB00B83881 /* BTTLastWeekCell.m in Sources */,
 				3AD9CF89216F4E5400685B43 /* BTTHomePageDiscountCell.m in Sources */,
+				D326400823ACCC6E00E16AFD /* BTTUserInfoModel.m in Sources */,
 				3A8F5173215F77A50069D1B3 /* BTTAdvertiseView.m in Sources */,
 				3AAE8215219A738B003EC8B0 /* BTTRegisterQuickAutoCell.m in Sources */,
 				3AB0682321A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.m in Sources */,
@@ -5081,11 +5094,13 @@
 				3AC3FFA4219ABEBF008AECCB /* BTTUnlockPopView.m in Sources */,
 				3AB0683821A3959100072FB7 /* BTTUnBindingMobileNoticeController.m in Sources */,
 				3AAFF88621D378E800F875B1 /* BTTMeSaveMoneyWechatCell.m in Sources */,
+				D326400E23ACE10D00E16AFD /* IVUserInfoModel.m in Sources */,
 				3A11AE4B21869B2200B1AFF4 /* BTTSettingsController.m in Sources */,
 				3AAE821E219A738B003EC8B0 /* BTTRegisterQuickManualCell.m in Sources */,
 				3A7A1A6C21BF68AA00572B50 /* BTTRegisterSuccessTwoCell.m in Sources */,
 				EA5F140E21A261BA004305A7 /* BTTHttpManager.m in Sources */,
 				3AC3FFA9219ACD48008AECCB /* BTTLoginOrRegisterViewController+UI.m in Sources */,
+				D326400B23ACD28C00E16AFD /* IVNetwork.m in Sources */,
 				3A11AE4F2186A09700B1AFF4 /* BTTModifyLimitViewController.m in Sources */,
 				D5C5019A21B67C0800C6DA02 /* CNPayDepositSuccessVC.m in Sources */,
 				D5DBEB2221ABB774008AF629 /* CNPayBaseVC.m in Sources */,
@@ -5363,7 +5378,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6UDM79GA72;
+				DEVELOPMENT_TEAM = T52TF6XR23;
 				INFOPLIST_FILE = Hybird_A01Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5382,7 +5397,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6UDM79GA72;
+				DEVELOPMENT_TEAM = T52TF6XR23;
 				INFOPLIST_FILE = Hybird_A01Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5400,7 +5415,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6UDM79GA72;
+				DEVELOPMENT_TEAM = T52TF6XR23;
 				INFOPLIST_FILE = Hybird_A01UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5418,7 +5433,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6UDM79GA72;
+				DEVELOPMENT_TEAM = T52TF6XR23;
 				INFOPLIST_FILE = Hybird_A01UITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

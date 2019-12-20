@@ -169,10 +169,10 @@
     
     /// 提交
     __weak typeof(self) weakSelf =  self;
-    [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:self.chooseBank.bankcode completeHandler:^(IVRequestResultModel *result, id response) {
+    [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:self.chooseBank.bankcode completeHandler:^(IVJResponseObject *result, id response) {
         sender.selected = NO;
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf paySucessHandler:result repay:nil];
+        [strongSelf paySucessHandler:result.body repay:nil];
     }];
 }
 

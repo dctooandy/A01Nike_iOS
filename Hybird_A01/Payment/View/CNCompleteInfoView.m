@@ -61,14 +61,14 @@
     }
     [MBProgressHUD showLoadingSingleInView:self animated:YES];
     __weak typeof(self) weakSelf = self;
-    [CNPayRequestManager paymentCompleteUserName:self.nameTF.text preSet:self.preSetTF.text completeHandler:^(IVRequestResultModel *result, id response) {
+    [CNPayRequestManager paymentCompleteUserName:self.nameTF.text preSet:self.preSetTF.text completeHandler:^(IVJResponseObject *result, id response) {
         [MBProgressHUD hideHUDForView:weakSelf animated:YES];
-        if (result.status) {
-            [weakSelf writeInfowithData:result.data];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [weakSelf writeInfowithData:result.body];
             weakSelf.hander();
             [weakSelf giveUp:sender];
         } else {
-            [MBProgressHUD showError:result.message toView:self];
+            [MBProgressHUD showError:result.head.errMsg toView:self];
         }
     }];
 }

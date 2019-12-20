@@ -15,7 +15,7 @@
 #import "NSDate+Extension.h"
 #import "UIColor+Util.h"
 #import "UIView+Frame.h"
-#import <IVNetworkLibrary/IVNetwork.h>
+#import "IVHttpManager.h"
 #import <IVGameLibrary/IVGame.h>
 #import "PublicMethod.h"
 #import <GJRedDot/GJRedDot.h>
@@ -30,6 +30,7 @@
 #import "BTTAnimationPopView.h"
 #import <IN3SAnalytics/IN3SAnalytics.h>
 #import "CNTimeLog.h"
+#import "IVNetwork.h"
 
 typedef enum {
     BTTCanAddCardTypeNone,          // 不能添加任何卡
@@ -88,7 +89,7 @@ typedef enum {
     BTTStringFormatStyleOther    ///< 包含特殊符号
 }BTTStringFormatStyle;
 
-typedef void (^CompleteBlock)(IVRequestResultModel *result, id response);
+typedef void (^CompleteBlock)(IVJResponseObject *response);
 
 typedef void (^BTTLive800ResponseBlock)(NSString *info);
 

@@ -11,10 +11,8 @@
 
 #import "Constants.h"
 #import "IVCacheWrapper.h"
-#import "IVHttpManager+UserInfoModel.h"
 #import "UIImageView+WebCache.h"
 #import "BRPickerView.h"
 #import <Masonry.h>
-#import "IVUtility+otherMethod.h"
 #import "UIDevice+IVInfo.h"
 #endif

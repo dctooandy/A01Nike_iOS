@@ -181,13 +181,13 @@
     self.writeModel.payId = self.paymentModel.payid;
     /// 提交请求
     __weak typeof(self) weakSelf = self;
-    [CNPayRequestManager paymentCreateManualWithWriteInfo:self.writeModel completeHandler:^(IVRequestResultModel *result, id response) {
+    [CNPayRequestManager paymentCreateManualWithWriteInfo:self.writeModel completeHandler:^(IVJResponseObject *result, id response) {
         sender.selected = NO;
-        if (result.status) {
-            [weakSelf paySucessHandler:result.data];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [weakSelf paySucessHandler:result.body];
         } else {
             // 后台返回类型不一，全部转成字符串
-            [weakSelf showError:[NSString stringWithFormat:@"%@", result.message]];
+            [weakSelf showError:[NSString stringWithFormat:@"%@", result.head.errMsg]];
         }
     }];
 }

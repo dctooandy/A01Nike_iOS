@@ -73,13 +73,14 @@ SingletonImplementation(PushManager);
         // 前台
         if (applicationState == UIApplicationStateActive) {
             weakSelf(weakSelf);
-            IVActionHandler handler = ^(UIAlertAction *action){};
-            IVActionHandler handler1 = ^(UIAlertAction *action){
-                strongSelf(strongSelf)
-                [strongSelf pushToMsgVCWithData:dict];
-            };
-            NSString *message = [apsDict valueForKey:@"alert"];
-            [IVNUtility showAlertWithActionTitles:@[@"取消",@"查看"] handlers:@[handler,handler1] title:@"提示" message:message];
+            //TODO:
+//            IVActionHandler handler = ^(UIAlertAction *action){};
+//            IVActionHandler handler1 = ^(UIAlertAction *action){
+//                strongSelf(strongSelf)
+//                [strongSelf pushToMsgVCWithData:dict];
+//            };
+//            NSString *message = [apsDict valueForKey:@"alert"];
+//            [IVNUtility showAlertWithActionTitles:@[@"取消",@"查看"] handlers:@[handler,handler1] title:@"提示" message:message];
         } else {
             [self pushToMsgVCWithData:dict];
         }

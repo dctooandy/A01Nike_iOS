@@ -75,13 +75,13 @@
     sender.selected = YES;
     __weak typeof(self) weakSelf = self;
     __weak typeof(sender) weakSender = sender;
-    [CNPayRequestManager paymentQueryBillCompleteHandler:^(IVRequestResultModel *result, id response) {
+    [CNPayRequestManager paymentQueryBillCompleteHandler:^(IVJResponseObject *result, id response) {
         weakSender.selected = NO;
-        if (!result.status) {
-            [weakSelf showError:result.message];
+        if (![result.head.errCode isEqualToString:@"0000"]) {
+            [weakSelf showError:result.head.errMsg];
             return;
         }
-        NSArray *array = (NSArray *)[result.data objectForKey:@"list"];
+        NSArray *array = (NSArray *)[result.body objectForKey:@"list"];
         if ([array isKindOfClass:[NSArray class]] && array.count > 0) {
             [weakSelf showError:@"您还有未处理的存款提案，请联系客服"];
             return;

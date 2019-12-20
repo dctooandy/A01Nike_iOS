@@ -266,10 +266,11 @@
     
     __weak typeof(self) weakSelf = self;
     __weak typeof(sender) weakSender = sender;
-    [CNPayRequestManager paymentSubmitBill:self.writeModel completeHandler:^(IVRequestResultModel *result, id response) {
+    //TODO:这个地方的判断条件需要改一下
+    [CNPayRequestManager paymentSubmitBill:self.writeModel completeHandler:^(IVJResponseObject *result, id response) {
         sender.selected = NO;
-        if (result.status) {
-            CNPayBankCardModel *model = [[CNPayBankCardModel alloc] initWithDictionary:result.data error:nil];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            CNPayBankCardModel *model = [[CNPayBankCardModel alloc] initWithDictionary:result.body error:nil];
             if (!model) {
                 weakSender.enabled = NO;
                 [weakSelf showError:@"系统错误，请联系客服"];
@@ -278,7 +279,7 @@
             weakSelf.writeModel.chooseBank = model;
             [weakSelf goToStep:1];
         } else {
-            [weakSelf showError:result.message];
+            [weakSelf showError:result.head.errMsg];
         }
     }];
 }

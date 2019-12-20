@@ -446,11 +446,14 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    //TODO:
     if (indexPath.row == _currentSelectedIndex) {
         return;
     }
     CNPayChannelModel *channel = [_payChannels objectAtIndex:indexPath.row];
-    if ([IVHttpManager shareManager].userInfoModel.starLevel == 0 && (![IVNetwork userInfo].verify_code.length || ![IVNetwork userInfo].real_name.length)) {
+    //TODO:
+//    if ([IVHttpManager shareManager].userInfoModel.starLevel == 0 && (![IVNetwork userInfo].verify_code.length || ![IVNetwork userInfo].real_name.length)) {
+    if ((![IVNetwork userInfo].verify_code.length || ![IVNetwork userInfo].real_name.length)) {
         if (channel.payChannel == CNPayChannelBQFast || channel.payChannel == CNPayChannelBQWechat || channel.payChannel == CNPayChannelBQAli || channel.payChannel == CNPayChannelDeposit) {
             BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
             [self.navigationController pushViewController:personInfo animated:YES];

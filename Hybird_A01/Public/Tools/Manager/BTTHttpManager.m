@@ -17,7 +17,11 @@
 + (void)sendRequestUseCacheWithUrl:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(KYHTTPCallBack)completionBlock
 {
     [[IVHttpManager shareManager] sendRequestWithMethod:KYHTTPMethodPOST url:url parameters:paramters cache:YES cacheTimeout:3600 * 24 callBack:^(BOOL isCache, id  _Nullable response, NSError * _Nullable error) {
-        KYHTTPCallBack *complete = 
+        if (isCache) {
+            completionBlock(response,error);
+        }else{
+            completionBlock(response,error);
+        }
     } originCallBack:completionBlock];
    
 }
@@ -54,11 +58,11 @@
     weakSelf(weakSelf)
     if (useCache) {
         [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            [weakSelf fetchBankListResult:result completion:completion];
+            [weakSelf fetchBankListResult:response completion:completion];
         }];
     } else {
         [self sendRequestWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            [weakSelf fetchBankListResult:result completion:completion];
+            [weakSelf fetchBankListResult:response completion:completion];
         }];
     }
 }
@@ -85,12 +89,12 @@
     NSString *url = BTTIsBindStatusAPI;
     weakSelf(weakSelf)
     if (useCache) {
-        [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-            [weakSelf fetchBindStatusResult:result completionBlock:completionBlock];
+        [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            [weakSelf fetchBindStatusResult:response completionBlock:completionBlock];
         }];
     } else {
-        [self sendRequestWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-            [weakSelf fetchBindStatusResult:result completionBlock:completionBlock];
+        [self sendRequestWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            [weakSelf fetchBindStatusResult:response completionBlock:completionBlock];
         }];
     }
 }
@@ -110,7 +114,10 @@
 }
 
 + (void)getOpenAccountStatusCompletion:(KYHTTPCallBack)completion {
-    [IVNetwork sendUseCacheRequestWithSubURL:BTTOpenAccountStatus paramters:nil completionBlock:completion];
+    weakSelf(weakSelf)
+    [self sendRequestWithUrl:BTTOpenAccountStatus paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [weakSelf fetchBindStatusResult:response completionBlock:completion];
+    }];
 }
 
 + (void)updateBankCardWithUrl:(NSString *)url params:(NSDictionary *)params completion:(KYHTTPCallBack)completion
@@ -120,11 +127,11 @@
 + (void)fetchHumanBankAndPhoneWithBankId:(NSString *)bankId Completion:(KYHTTPCallBack)completion
 {
     NSDictionary *params = nil;
-    if (bankId.length) {
-        params = @{@"login_name":[IVNetwork userInfo].loginName,@"customer_bank_id":bankId};
-    } else {
-        params = @{@"login_name":[IVNetwork userInfo].loginName};
-    }
+//    if (bankId.length) {
+//        params = @{@"login_name":[IVNetwork userInfo].loginName,@"customer_bank_id":bankId};
+//    } else {
+//        params = @{@"login_name":[IVNetwork userInfo].loginName};
+//    }
     [self sendRequestWithUrl:@"public/forgot/getBanknoAndPhone" paramters:params completionBlock:completion];
 }
 + (void)verifyHumanBankAndPhoneWithParams:(NSDictionary *)params completion:(KYHTTPCallBack)completion
@@ -157,18 +164,18 @@
     NSString *url = @"public/payment/btcRate";
     weakSelf(weakSelf)
     if (useCache) {
-        [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-            [weakSelf fetchBTCRateResult:result];
+        [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            [weakSelf fetchBTCRateResult:response];
         }];
     } else {
-        [self sendRequestWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-            [weakSelf fetchBTCRateResult:result];
+        [self sendRequestWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            [weakSelf fetchBTCRateResult:response];
         }];
     }
 }
-+ (void)fetchBTCRateResult:(IVRequestResultModel *)result {
-    if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"btcrate"]) {
-        NSString *rate = [result.data valueForKey:@"btcrate"];
++ (void)fetchBTCRateResult:(IVJResponseObject *)result {
+    if (result.body && [result.body isKindOfClass:[NSDictionary class]] && [result.body valueForKey:@"btcrate"]) {
+        NSString *rate = [result.body valueForKey:@"btcrate"];
         [[NSUserDefaults standardUserDefaults] setValue:rate forKey:BTTCacheBTCRateKey];
     }
 }
@@ -177,36 +184,39 @@
     [self sendRequestWithUrl:url paramters:params completionBlock:completion];
 }
 + (void)fetchUserInfoCompleteBlock:(KYHTTPCallBack)completeBlock{
-    if (![IVNetwork userInfo]) {
-        return;
-    }
+    //TODO:
+//    if (![IVNetwork userInfo]) {
+//        return;
+//    }
     NSMutableDictionary  *param = @{}.mutableCopy;
-    [self sendRequestWithUrl:@"public/users/userInfo" paramters:param completionBlock:^(IVRequestResultModel *result, id response) {
-        if (result.status && result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-            [IVNetwork updateUserInfo:result.data];
+    [self sendRequestWithUrl:@"public/users/userInfo" paramters:param completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        if (response && response && [response isKindOfClass:[NSDictionary class]]) {
+            //TODO:
+//            [IVNetwork updateUserInfo:result.data];
         }
     }];
 }
 
 
 + (void)requestUnReadMessageNum:(KYHTTPCallBack)completeBlock {
-    [IVNetwork sendRequestWithSubURL:BTTIsUnviewedAPI paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+    [self sendRequestWithUrl:BTTIsUnviewedAPI paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         NSLog(@"%@",response);
-        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
-            [[NSUserDefaults standardUserDefaults] setObject:result.data[@"val"] forKey:BTTUnreadMessageNumKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            if ([result.data[@"val"] integerValue]) {
-                [self resetRedDotState:YES forKey:BTTHomePageMessage]; // BTTMineCenterMessage
-                [self resetRedDotState:YES forKey:BTTMineCenterMessage];
-                [self resetRedDotState:YES forKey:BTTDiscountMessage];
-                [self resetRedDotState:YES forKey:BTTMineCenterNavMessage];
-            } else {
-                [self resetRedDotState:NO forKey:BTTHomePageMessage];
-                [self resetRedDotState:NO forKey:BTTMineCenterMessage];
-                [self resetRedDotState:NO forKey:BTTDiscountMessage];
-                [self resetRedDotState:NO forKey:BTTMineCenterNavMessage];
-            }
-        }
+        //TODO:
+//        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
+//            [[NSUserDefaults standardUserDefaults] setObject:result.data[@"val"] forKey:BTTUnreadMessageNumKey];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            if ([result.data[@"val"] integerValue]) {
+//                [self resetRedDotState:YES forKey:BTTHomePageMessage]; // BTTMineCenterMessage
+//                [self resetRedDotState:YES forKey:BTTMineCenterMessage];
+//                [self resetRedDotState:YES forKey:BTTDiscountMessage];
+//                [self resetRedDotState:YES forKey:BTTMineCenterNavMessage];
+//            } else {
+//                [self resetRedDotState:NO forKey:BTTHomePageMessage];
+//                [self resetRedDotState:NO forKey:BTTMineCenterMessage];
+//                [self resetRedDotState:NO forKey:BTTDiscountMessage];
+//                [self resetRedDotState:NO forKey:BTTMineCenterNavMessage];
+//            }
+//        }
     }];
 }
 

@@ -128,18 +128,19 @@ form.submit();\
 + (NSString *)wkWebViewPostjsWithURLString:(NSString *)url {
     NSString *parameterStr  = @"";
     NSString *localDomain = [IVHttpManager shareManager].gateway;
-    if ([url containsString:localDomain]) {
-        
-        NSString *appToken =  [IVCacheWrapper readJSONStringForKey:kCacheAppToken requestId:nil];//[[IVCacheManager sharedInstance] nativeReadDictionaryForKey:kCacheAppToken];
-        BTTUserInfoModel *userModel = [IVHttpManager shareManager].userInfoModel;//[IVNetwork userInfo];
-        
-        if (userModel != nil) {
-            parameterStr = [NSString stringWithFormat:@"{\"accountName\":\"%@\",\"appToken\":\"%@\",\"userToken\":\"%@\"}",userModel.loginName, appToken, [IVHttpManager shareManager].userToken];
-        }
-        else {
-            parameterStr = [NSString stringWithFormat:@"{\"appToken\":\"%@\",}", appToken];
-        }
-    }
+    //TODO:
+//    if ([url containsString:localDomain]) {
+//
+//        NSString *appToken =  [IVCacheWrapper readJSONStringForKey:kCacheAppToken requestId:nil];//[[IVCacheManager sharedInstance] nativeReadDictionaryForKey:kCacheAppToken];
+//        BTTUserInfoModel *userModel = [IVHttpManager shareManager].userInfoModel;//[IVNetwork userInfo];
+//
+//        if (userModel != nil) {
+//            parameterStr = [NSString stringWithFormat:@"{\"accountName\":\"%@\",\"appToken\":\"%@\",\"userToken\":\"%@\"}",userModel.loginName, appToken, [IVHttpManager shareManager].userToken];
+//        }
+//        else {
+//            parameterStr = [NSString stringWithFormat:@"{\"appToken\":\"%@\",}", appToken];
+//        }
+//    }
     NSString * postjs = [NSString stringWithFormat:@"%@wkWebViewPostJS(\"%@\", %@)",kWKWebViewPostJS, url,parameterStr];
     return postjs;
 }

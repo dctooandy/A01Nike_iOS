@@ -9,13 +9,10 @@
 #import "IVWebViewUtility.h"
 #import "BridgeProtocolExternal.h"
 #import "MBProgressHUD+Add.h"
-<<<<<<< HEAD
 #import "FCUUID.h"
 #import "UIDevice+IVInfo.h"
-=======
 
 
->>>>>>> master
 @implementation IVWebViewUtility
 - (NSDictionary *)appTheme
 {
@@ -41,10 +38,10 @@
 {
     return [IVHttpManager shareManager].userToken;
 }
-- (NSString *)appToken
-{
-    return [IVHttpManager shareManager].appToken;
-}
+//- (NSString *)appToken
+//{
+//    return [IVHttpManager shareManager];
+//}
 - (NSString *)deviceId
 {
     return [FCUUID uuidForDevice];
