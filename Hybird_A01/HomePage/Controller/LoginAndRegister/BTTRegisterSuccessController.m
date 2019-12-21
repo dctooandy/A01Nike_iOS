@@ -212,17 +212,18 @@ typedef enum {
     params[@"pwd"] = _newPwd;
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        if (result.status) {
-            [MBProgressHUD showSuccess:@"密码修改成功!" toView:nil];
-            BTTRegisterChangePwdSuccessController *vc = (BTTRegisterChangePwdSuccessController *)[BTTRegisterChangePwdSuccessController getVCFromStoryboard];
-            vc.account = self.account;
-            [self.navigationController pushViewController:vc animated:YES];
-        } else {
-            [MBProgressHUD showError:result.message toView:nil];
-        }
-    }];
+    //TODO:
+//    [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+//        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+//        if (result.status) {
+//            [MBProgressHUD showSuccess:@"密码修改成功!" toView:nil];
+//            BTTRegisterChangePwdSuccessController *vc = (BTTRegisterChangePwdSuccessController *)[BTTRegisterChangePwdSuccessController getVCFromStoryboard];
+//            vc.account = self.account;
+//            [self.navigationController pushViewController:vc animated:YES];
+//        } else {
+//            [MBProgressHUD showError:result.message toView:nil];
+//        }
+//    }];
 }
 
 - (void)setupElements {

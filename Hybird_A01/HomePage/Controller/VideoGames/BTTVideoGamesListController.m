@@ -111,42 +111,43 @@
     }
     requestModel.limit = _limit;
     weakSelf(weakSelf);
-    [self loadVideoGamesWithRequestModel:requestModel complete:^(IVRequestResultModel *result, id response) {
-        strongSelf(strongSelf);
-        NSLog(@"%@",response);
-        [strongSelf endRefreshing];
-        [strongSelf hideLoading];
-        strongSelf.isShowSearchBar = NO;
-        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
-            if (strongSelf.page == 1 || self.keyword.length) {
-                [strongSelf.games removeAllObjects];
-                self.keyword = @"";
-            }
-            self.count = result.data[@"count"];
-            NSArray *games = result.data[@"list"];
-            for (NSDictionary *dict in games) {
-                BTTVideoGameModel *model = [BTTVideoGameModel yy_modelWithDictionary:dict];
-                [strongSelf.games addObject:model];
-            }
-            if (games.count) {
-                if (requestModel.keyword.length) {
-                    strongSelf.searchPage ++;
-                } else {
-                    strongSelf.page ++;
-                }
-            }
-            if (games.count < strongSelf.limit && games.count) {
-                [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-                strongSelf.isShowFooter = YES;
-                [strongSelf.games addObject:[BTTVideoGameModel new]];
-            }
-            if (!games.count) {
-                strongSelf.isShowFooter = YES;
-                [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-            }
-        }
-        [strongSelf setupElements];
-    }];
+    //TODO:
+//    [self loadVideoGamesWithRequestModel:requestModel complete:^(IVRequestResultModel *result, id response) {
+//        strongSelf(strongSelf);
+//        NSLog(@"%@",response);
+//        [strongSelf endRefreshing];
+//        [strongSelf hideLoading];
+//        strongSelf.isShowSearchBar = NO;
+//        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
+//            if (strongSelf.page == 1 || self.keyword.length) {
+//                [strongSelf.games removeAllObjects];
+//                self.keyword = @"";
+//            }
+//            self.count = result.data[@"count"];
+//            NSArray *games = result.data[@"list"];
+//            for (NSDictionary *dict in games) {
+//                BTTVideoGameModel *model = [BTTVideoGameModel yy_modelWithDictionary:dict];
+//                [strongSelf.games addObject:model];
+//            }
+//            if (games.count) {
+//                if (requestModel.keyword.length) {
+//                    strongSelf.searchPage ++;
+//                } else {
+//                    strongSelf.page ++;
+//                }
+//            }
+//            if (games.count < strongSelf.limit && games.count) {
+//                [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+//                strongSelf.isShowFooter = YES;
+//                [strongSelf.games addObject:[BTTVideoGameModel new]];
+//            }
+//            if (!games.count) {
+//                strongSelf.isShowFooter = YES;
+//                [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+//            }
+//        }
+//        [strongSelf setupElements];
+//    }];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {

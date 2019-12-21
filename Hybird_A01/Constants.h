@@ -31,6 +31,8 @@
 #import <IN3SAnalytics/IN3SAnalytics.h>
 #import "CNTimeLog.h"
 #import "IVNetwork.h"
+#import "IVRequestResultModel.h"
+#import "BTTHttpManager.h"
 
 typedef enum {
     BTTCanAddCardTypeNone,          // 不能添加任何卡
@@ -240,7 +242,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 // 首页逻辑接口
 
-#define BTTHomePageNewAPI            @"/A01/promotion/indexCombo"
+#define BTTHomePageNewAPI            @"A01/promotion/indexCombo"
 #define BTTIndexBannerDownloads      @"/A01/promotion/indexBannerDownloads"
 #define BTTBrandHighlights           @"/A01/promotion/getBrandHighlights"
 

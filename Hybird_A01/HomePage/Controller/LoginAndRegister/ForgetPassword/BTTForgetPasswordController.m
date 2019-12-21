@@ -72,16 +72,17 @@
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
-            [strongSelf verifyPhotoCode:self.code WithUUid:strongSelf.uuid completeBlock:^(IVRequestResultModel *result, id response) {
-                strongSelf(strongSelf);
-                if (result.status) {
-                    BTTForgetPasswordStepTwoController *vc = [[BTTForgetPasswordStepTwoController alloc] init];
-                    vc.account = strongSelf.account;
-                    [strongSelf.navigationController pushViewController:vc animated:YES];
-                } else {
-                    [MBProgressHUD showError:result.message toView:strongSelf.view];
-                }
-            }];
+            //TODO:
+//            [strongSelf verifyPhotoCode:self.code WithUUid:strongSelf.uuid completeBlock:^(IVRequestResultModel *result, id response) {
+//                strongSelf(strongSelf);
+//                if (result.status) {
+//                    BTTForgetPasswordStepTwoController *vc = [[BTTForgetPasswordStepTwoController alloc] init];
+//                    vc.account = strongSelf.account;
+//                    [strongSelf.navigationController pushViewController:vc animated:YES];
+//                } else {
+//                    [MBProgressHUD showError:result.message toView:strongSelf.view];
+//                }
+//            }];
         };
         return cell;
     }

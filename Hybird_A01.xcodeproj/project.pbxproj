@@ -665,6 +665,7 @@
 		D326400823ACCC6E00E16AFD /* BTTUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D326400723ACCC6E00E16AFD /* BTTUserInfoModel.m */; };
 		D326400B23ACD28C00E16AFD /* IVNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = D326400A23ACD28C00E16AFD /* IVNetwork.m */; };
 		D326400E23ACE10D00E16AFD /* IVUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D326400D23ACE10D00E16AFD /* IVUserInfoModel.m */; };
+		D362B59E23ADAEBB00FF5373 /* IVRequestResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D362B59D23ADAEBB00FF5373 /* IVRequestResultModel.m */; };
 		D51AD19F21B8FEE5008C633A /* CNPayBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */; };
 		D599251421AE5AF6001E885A /* CNPayNormalTF.m in Sources */ = {isa = PBXBuildFile; fileRef = D599251321AE5AF6001E885A /* CNPayNormalTF.m */; };
 		D599251821AE6719001E885A /* CNPayCardStep2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D599251621AE6719001E885A /* CNPayCardStep2VC.m */; };
@@ -1770,6 +1771,8 @@
 		D326400A23ACD28C00E16AFD /* IVNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IVNetwork.m; sourceTree = "<group>"; };
 		D326400C23ACE10D00E16AFD /* IVUserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVUserInfoModel.h; sourceTree = "<group>"; };
 		D326400D23ACE10D00E16AFD /* IVUserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IVUserInfoModel.m; sourceTree = "<group>"; };
+		D362B59C23ADAEBB00FF5373 /* IVRequestResultModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVRequestResultModel.h; sourceTree = "<group>"; };
+		D362B59D23ADAEBB00FF5373 /* IVRequestResultModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IVRequestResultModel.m; sourceTree = "<group>"; };
 		D51AD19D21B8FEE5008C633A /* CNPayBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayBaseView.h; sourceTree = "<group>"; };
 		D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayBaseView.m; sourceTree = "<group>"; };
 		D599251221AE5AF6001E885A /* CNPayNormalTF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayNormalTF.h; sourceTree = "<group>"; };
@@ -3542,6 +3545,8 @@
 				3A929414219BFEE100764E7E /* BTTCreateAPIModel.m */,
 				D326400C23ACE10D00E16AFD /* IVUserInfoModel.h */,
 				D326400D23ACE10D00E16AFD /* IVUserInfoModel.m */,
+				D362B59C23ADAEBB00FF5373 /* IVRequestResultModel.h */,
+				D362B59D23ADAEBB00FF5373 /* IVRequestResultModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4986,6 +4991,7 @@
 				3A9E4C3A219E509100E7D8C0 /* BTTBaseAnimationPopView.m in Sources */,
 				3AA7893521FFF2580047A372 /* UIView+WebCacheOperation.m in Sources */,
 				3A9E4C5F219FD8F900E7D8C0 /* BTTDownloadModel.m in Sources */,
+				D362B59E23ADAEBB00FF5373 /* IVRequestResultModel.m in Sources */,
 				3AA7892521FFF2580047A372 /* UIImage+MultiFormat.m in Sources */,
 				3AD9CEF0216B3DD900685B43 /* WebViewUserAgaent.m in Sources */,
 				3A37E12C2164A23200FB13A1 /* BTTMineViewController.m in Sources */,

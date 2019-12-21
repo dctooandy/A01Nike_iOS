@@ -37,7 +37,8 @@
 
 - (void)verifyPhotoCode:(NSString *)code WithUUid:(NSString *)uuid completeBlock:(CompleteBlock)completeBlock {
     NSDictionary *params = @{@"code":code,@"uuid":uuid};
-    [IVNetwork sendRequestWithSubURL:BTTValidateCaptcha paramters:params completionBlock:completeBlock];
+    //TODO:
+//    [IVNetwork sendRequestWithSubURL:BTTValidateCaptcha paramters:params completionBlock:completeBlock];
 }
 
 - (void)loadMainData {

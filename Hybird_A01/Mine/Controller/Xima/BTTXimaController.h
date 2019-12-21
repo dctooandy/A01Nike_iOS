@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^CompleteBlock)(IVRequestResultModel * _Nullable result, id response);
+typedef void(^CompleteBlock)(IVJResponseObject * _Nullable result);
 
 @class BTTXimaTotalModel;
 

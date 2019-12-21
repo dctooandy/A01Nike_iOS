@@ -198,22 +198,23 @@
 {
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     weakSelf(weakSelf)
-    [BTTHttpManager deleteBankOrBTC:isBTC isAuto:isAuto completion:^(IVRequestResultModel *result, id response) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-        if (result.status) {
-            [BTTHttpManager fetchBankListWithUseCache:YES completion:nil];
-            BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-            vc.mobileCodeType = self.verifyType;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        } else {
-            NSString *message = [NSString isBlankString:result.message] ? @"删除失败，请重试!" : result.message;
-            [MBProgressHUD showError:message toView:nil];
-            for (UIViewController *vc in weakSelf.navigationController.viewControllers) {
-                if ([vc isKindOfClass:[BTTCardInfosController class]]) {
-                    [weakSelf.navigationController popToViewController:vc animated:YES];
-                }
-            }
-        }
-    }];
+    //TODO:
+//    [BTTHttpManager deleteBankOrBTC:isBTC isAuto:isAuto completion:^(IVRequestResultModel *result, id response) {
+//        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+//        if (result.status) {
+//            [BTTHttpManager fetchBankListWithUseCache:YES completion:nil];
+//            BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+//            vc.mobileCodeType = self.verifyType;
+//            [weakSelf.navigationController pushViewController:vc animated:YES];
+//        } else {
+//            NSString *message = [NSString isBlankString:result.message] ? @"删除失败，请重试!" : result.message;
+//            [MBProgressHUD showError:message toView:nil];
+//            for (UIViewController *vc in weakSelf.navigationController.viewControllers) {
+//                if ([vc isKindOfClass:[BTTCardInfosController class]]) {
+//                    [weakSelf.navigationController popToViewController:vc animated:YES];
+//                }
+//            }
+//        }
+//    }];
 }
 @end

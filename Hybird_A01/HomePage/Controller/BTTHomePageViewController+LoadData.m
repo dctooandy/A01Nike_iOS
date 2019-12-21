@@ -36,16 +36,16 @@ static const char *BTTNextGroupKey = "nextGroup";
     dispatch_queue_t queue = dispatch_queue_create("homepage.data", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_enter(group);
     [self loadMainData:group];
-    
-    dispatch_group_enter(group);
-    [self loadScrollText:group];
-    
-    dispatch_group_enter(group);
-    [self loadOtherData:group];
-    
-    dispatch_group_enter(group);
-    [self loadHightlightsBrand:group];
-    
+
+//    dispatch_group_enter(group);
+//    [self loadScrollText:group];
+//
+//    dispatch_group_enter(group);
+//    [self loadOtherData:group];
+//
+//    dispatch_group_enter(group);
+//    [self loadHightlightsBrand:group];
+
     dispatch_group_notify(group,queue, ^{
         [self endRefreshing];
         [self setupElements];
@@ -276,43 +276,46 @@ static const char *BTTNextGroupKey = "nextGroup";
     NSMutableArray *amounts = [NSMutableArray array];
     NSMutableArray *posters = [NSMutableArray array];
     NSMutableArray *promotions = [NSMutableArray array];
-    [IVNetwork sendUseCacheRequestWithSubURL:BTTHomePageNewAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork  requestWithUseCache:YES url: BTTHomePageNewAPI paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         NSLog(@"%@",response);
-        if (result.status) {
-            if (result.data) {
-                if (![result.data[@"maxRecords"] isKindOfClass:[NSNull class]]) {
-                    [self.amounts removeAllObjects];
-                    for (NSDictionary *dict in result.data[@"maxRecords"]) {
-                        BTTAmountModel *model = [BTTAmountModel yy_modelWithDictionary:dict];
-                        [amounts addObject:model];
-                    }
-                    self.amounts = amounts.mutableCopy;
-                }
-                
-                if (![result.data[@"poster"] isKindOfClass:[NSNull class]]) {
-                    [self.posters removeAllObjects];
-                    for (NSDictionary *dict in result.data[@"poster"]) {
-                        BTTPosterModel *model = [BTTPosterModel yy_modelWithDictionary:dict];
-                        [posters addObject:model];
-                    }
-                    self.posters = posters.mutableCopy;
-                }
-                
-                if (![result.data[@"promotions"] isKindOfClass:[NSNull class]]) {
-                    [self.promotions removeAllObjects];
-                    for (NSDictionary *dict in result.data[@"promotions"]) {
-                        BTTPromotionModel *model = [BTTPromotionModel yy_modelWithDictionary:dict];
-                        [promotions addObject:model];
-                    }
-                    self.promotions = promotions.mutableCopy;
-                }
-            }
-        }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-        });
-        dispatch_group_leave(group);
     }];
+//    [IVNetwork sendUseCacheRequestWithSubURL:BTTHomePageNewAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+//        NSLog(@"%@",response);
+//        if (result.status) {
+//            if (result.data) {
+//                if (![result.data[@"maxRecords"] isKindOfClass:[NSNull class]]) {
+//                    [self.amounts removeAllObjects];
+//                    for (NSDictionary *dict in result.data[@"maxRecords"]) {
+//                        BTTAmountModel *model = [BTTAmountModel yy_modelWithDictionary:dict];
+//                        [amounts addObject:model];
+//                    }
+//                    self.amounts = amounts.mutableCopy;
+//                }
+//
+//                if (![result.data[@"poster"] isKindOfClass:[NSNull class]]) {
+//                    [self.posters removeAllObjects];
+//                    for (NSDictionary *dict in result.data[@"poster"]) {
+//                        BTTPosterModel *model = [BTTPosterModel yy_modelWithDictionary:dict];
+//                        [posters addObject:model];
+//                    }
+//                    self.posters = posters.mutableCopy;
+//                }
+//
+//                if (![result.data[@"promotions"] isKindOfClass:[NSNull class]]) {
+//                    [self.promotions removeAllObjects];
+//                    for (NSDictionary *dict in result.data[@"promotions"]) {
+//                        BTTPromotionModel *model = [BTTPromotionModel yy_modelWithDictionary:dict];
+//                        [promotions addObject:model];
+//                    }
+//                    self.promotions = promotions.mutableCopy;
+//                }
+//            }
+//        }
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self.collectionView reloadData];
+//        });
+//        dispatch_group_leave(group);
+//    }];
 }
 
 - (void)loadOtherData:(dispatch_group_t)group {

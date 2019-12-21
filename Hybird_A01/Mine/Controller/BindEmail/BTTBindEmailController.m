@@ -267,7 +267,8 @@
                     if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
                         NSString *email = result.data[@"val"];
                         [IVNetwork updateUserInfo:@{@"email" : email}];
-                        [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
+                        //TODO:
+//                        [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
                     }
                     BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
                     vc.mobileCodeType = self.codeType;

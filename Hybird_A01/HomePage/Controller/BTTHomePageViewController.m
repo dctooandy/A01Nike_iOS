@@ -57,11 +57,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"首页";
-    if ([IVNetwork userInfo]) {
-        self.isLogin = YES;
-    } else {
+//    if ([IVNetwork userInfo]) {
+//        self.isLogin = YES;
+//    } else {
         self.isLogin = NO;
-    }
+//    }
     
     
     [self setupNav];
@@ -76,19 +76,19 @@
     }];
     [self loadDataOfHomePage];
     [self registerNotification];
-    [IVNetwork registException];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-//        NSTimeInterval interval = [[userDefault objectForKey:@"jayTimeStamp"] doubleValue] / 1000.0;
-//        NSInteger today = [PublicMethod timeIntervalSince1970].integerValue;
-//        NSInteger endTime = [PublicMethod timeSwitchTimestamp:@"2019-11-17 23:59:59" andFormatter:@"YYYY-MM-dd HH:mm:ss"];
-//        if (today <= endTime) {
-//            if (![PublicMethod isDateToday:[NSDate dateWithTimeIntervalSince1970:interval]]) {
-//                [userDefault setObject:[PublicMethod timeIntervalSince1970] forKey:@"jayTimeStamp"];
-//                [self showJay];
-//            }
-//        }
-//    });
+//    [IVNetwork registException];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+        NSTimeInterval interval = [[userDefault objectForKey:@"jayTimeStamp"] doubleValue] / 1000.0;
+        NSInteger today = [PublicMethod timeIntervalSince1970].integerValue;
+        NSInteger endTime = [PublicMethod timeSwitchTimestamp:@"2019-11-17 23:59:59" andFormatter:@"YYYY-MM-dd HH:mm:ss"];
+        if (today <= endTime) {
+            if (![PublicMethod isDateToday:[NSDate dateWithTimeIntervalSince1970:interval]]) {
+                [userDefault setObject:[PublicMethod timeIntervalSince1970] forKey:@"jayTimeStamp"];
+                [self showJay];
+            }
+        }
+    });
     [self setupFloatWindow];
 }
 
@@ -118,14 +118,15 @@
     [self.collectionView reloadData];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork userInfo]) {
-        [BTTHttpManager requestUnReadMessageNum:nil];
-        NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
-        if (![NSDate isToday:timestamp]) {
-            [self loadLuckyWheelCoinStatus];
-            NSString *timestamp = [NSString stringWithFormat:@"%@",@([[NSDate date] timeIntervalSince1970] * 1000)];
-            [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
+        //TODO:
+//        [BTTHttpManager requestUnReadMessageNum:nil];
+//        NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
+//        if (![NSDate isToday:timestamp]) {
+//            [self loadLuckyWheelCoinStatus];
+//            NSString *timestamp = [NSString stringWithFormat:@"%@",@([[NSDate date] timeIntervalSince1970] * 1000)];
+//            [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//        }
     }
 }
 

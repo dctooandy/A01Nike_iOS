@@ -26,7 +26,8 @@
         return;
     }
     NSDictionary *params = @{BTTLoginName: account, @"code":code};
-    [IVNetwork sendRequestWithSubURL:BTTStepTwoCheckCode paramters:params completionBlock:completeBlock];
+    //TODO:
+//    [IVNetwork sendRequestWithSubURL:BTTStepTwoCheckCode paramters:params completionBlock:completeBlock];
 }
 
 - (void)loadMainData {

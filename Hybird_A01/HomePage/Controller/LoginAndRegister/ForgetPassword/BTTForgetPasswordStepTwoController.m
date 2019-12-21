@@ -61,18 +61,19 @@
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
-            [strongSelf verifyCode:strongSelf.code account:strongSelf.account completeBlock:^(IVRequestResultModel *result, id response) {
-                if (result.status) {
-                    if (result.status && [result.data[@"val"] isKindOfClass:[NSDictionary class]] ) {
-                        BTTForgetPasswordStepThreeController *vc = [[BTTForgetPasswordStepThreeController alloc] init];
-                        vc.accessID = result.data[@"val"];
-                        vc.account = strongSelf.account;
-                        [strongSelf.navigationController pushViewController:vc animated:YES];
-                    }
-                } else {
-                    [MBProgressHUD showError:result.message toView:strongSelf.view];
-                }
-            }];
+            //TODO:
+//            [strongSelf verifyCode:strongSelf.code account:strongSelf.account completeBlock:^(IVRequestResultModel *result, id response) {
+//                if (result.status) {
+//                    if (result.status && [result.data[@"val"] isKindOfClass:[NSDictionary class]] ) {
+//                        BTTForgetPasswordStepThreeController *vc = [[BTTForgetPasswordStepThreeController alloc] init];
+//                        vc.accessID = result.data[@"val"];
+//                        vc.account = strongSelf.account;
+//                        [strongSelf.navigationController pushViewController:vc animated:YES];
+//                    }
+//                } else {
+//                    [MBProgressHUD showError:result.message toView:strongSelf.view];
+//                }
+//            }];
         };
         return cell;
     }

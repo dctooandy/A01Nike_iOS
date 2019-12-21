@@ -108,32 +108,34 @@
 
 - (void)loadCreditsTotalAvailable {
 //    [self showLoading];
-    [IVNetwork sendRequestWithSubURL:BTTCreditsTotalAvailable paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-//        [self hideLoading];
-        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
-            if (result.data) {
-                self.totalAvailable = result.data[@"val"];
-            }
-        } else {
-            if (result.message.length) {
-                [MBProgressHUD showError:result.message toView:nil];
-            }
-        }
-        [self.collectionView reloadData];
-    }];
+    //TODO:
+//    [IVNetwork sendRequestWithSubURL:BTTCreditsTotalAvailable paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+////        [self hideLoading];
+//        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
+//            if (result.data) {
+//                self.totalAvailable = result.data[@"val"];
+//            }
+//        } else {
+//            if (result.message.length) {
+//                [MBProgressHUD showError:result.message toView:nil];
+//            }
+//        }
+//        [self.collectionView reloadData];
+//    }];
 }
 - (void)loadBetInfo
 {
 //    [self showLoading];
-    [IVNetwork sendRequestWithSubURL:BTTBetInfo paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-//        [self hideLoading];
-        if (result.status && result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-            self.betInfoModel = [[BTTBetInfoModel alloc] initWithDictionary:result.data error:nil];
-            self.betInfoModel.status = result.status;
-        }
-        [self loadMainData];
-        [self.collectionView reloadData];
-    }];
+    //TODO:
+//    [IVNetwork sendRequestWithSubURL:BTTBetInfo paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+////        [self hideLoading];
+//        if (result.status && result.data && [result.data isKindOfClass:[NSDictionary class]]) {
+//            self.betInfoModel = [[BTTBetInfoModel alloc] initWithDictionary:result.data error:nil];
+//            self.betInfoModel.status = result.status;
+//        }
+//        [self loadMainData];
+//        [self.collectionView reloadData];
+//    }];
 }
 
 - (NSMutableArray *)sheetDatas {

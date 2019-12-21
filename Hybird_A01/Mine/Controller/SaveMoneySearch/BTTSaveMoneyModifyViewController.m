@@ -130,17 +130,18 @@ typedef enum : NSUInteger {
         }
     }
     [self showLoading];
-    [IVNetwork sendRequestWithSubURL:url paramters:parma completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        [self hideLoading];
-        if (result.status) {
-            BTTSaveMoneySuccessController *vc = [BTTSaveMoneySuccessController new];
-            vc.saveMoneyStatus = BTTSaveMoneyStatusTypeCuiSuccess;
-            [self.navigationController pushViewController:vc animated:YES];
-        } else {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-    }];
+    //TODO:
+//    [IVNetwork sendRequestWithSubURL:url paramters:parma completionBlock:^(IVRequestResultModel *result, id response) {
+//        NSLog(@"%@",response);
+//        [self hideLoading];
+//        if (result.status) {
+//            BTTSaveMoneySuccessController *vc = [BTTSaveMoneySuccessController new];
+//            vc.saveMoneyStatus = BTTSaveMoneyStatusTypeCuiSuccess;
+//            [self.navigationController pushViewController:vc animated:YES];
+//        } else {
+//            [self.navigationController popToRootViewControllerAnimated:YES];
+//        }
+//    }];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

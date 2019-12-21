@@ -13,11 +13,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface IVNetwork : NSObject
 
+/**
+ 获取获取渠道ID
+ */
++ (NSString *)parentId;
+
+
 + (NSString *)appToken;
 /**
  获取缓存的手机站域名
  */
 + (NSString *)h5Domain;
+
+/**
+ 注册异常处理
+ */
++ (void)registException;
+
 /**
  设置默认手机站域名
  */
@@ -99,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
  * requestAuthorizationHeaderFieldArray为nil
  * requestHeaderFieldValueDictionary为nil
  */
-//+ (id)sendRequestWithSubURL:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(IVRequestCallBack)completionBlock;
++ (id)sendRequestWithSubURL:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(KYHTTPCallBack)completionBlock;
 /**
  网络请求，常用, 使用缓存
  * post，baseurl为网关，自动拼接apptoken和usertoken
@@ -108,7 +120,10 @@ NS_ASSUME_NONNULL_BEGIN
  * requestAuthorizationHeaderFieldArray为nil
  * requestHeaderFieldValueDictionary为nil
  */
-//+ (id)sendUseCacheRequestWithSubURL:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(IVRequestCallBack)completionBlock;
++ (id)sendUseCacheRequestWithSubURL:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(KYHTTPCallBack)completionBlock;
+
++ (void)requestWithUseCache:(BOOL)useCache url:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(KYHTTPCallBack)completionBlock;
+
 /**
  网络请求，通用
  @param configure 配置
@@ -122,7 +137,7 @@ NS_ASSUME_NONNULL_BEGIN
  headerFieldValueDictionary 默认nil
  @param completionBlock 回调
  */
-//+ (id)sendRequestWithConfigure:(IVRequestConfigure *)configure url:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(IVRequestCallBack)completionBlock;
+//+ (id)sendRequestWithConfigure:(IVRequestConfigure *)configure url:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(KYHTTPCallBack)completionBlock;
 /**
  网络请求，通用, 使用缓存
  @param configure 配置
@@ -136,7 +151,7 @@ NS_ASSUME_NONNULL_BEGIN
  headerFieldValueDictionary 默认nil
  @param completionBlock 回调
  */
-//+ (id)sendRequestUseCacheWithConfigure:(IVRequestConfigure *)configure url:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(IVRequestCallBack)completionBlock ;
+//+ (id)sendRequestUseCacheWithConfigure:(IVRequestConfigure *)configure url:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(KYHTTPCallBack)completionBlock ;
 
 /**
  取消某个网络请求

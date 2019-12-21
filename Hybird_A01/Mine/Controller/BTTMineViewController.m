@@ -384,9 +384,10 @@
         return;
     } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 11) {
         // 网络监测
-        [IVNetwork startCheckWithType:IVCheckNetworkTypeAll appWindow:[UIApplication sharedApplication].keyWindow detailBtnClickedBlock:^{
-            [self.navigationController pushViewController:[IVNetworkStatusDetailViewController new] animated:YES];
-        }];
+        //TODO:
+//        [IVNetwork startCheckWithType:IVCheckNetworkTypeAll appWindow:[UIApplication sharedApplication].keyWindow detailBtnClickedBlock:^{
+//            [self.navigationController pushViewController:[IVNetworkStatusDetailViewController new] animated:YES];
+//        }];
         return;
     }
     if (![IVNetwork userInfo]) {

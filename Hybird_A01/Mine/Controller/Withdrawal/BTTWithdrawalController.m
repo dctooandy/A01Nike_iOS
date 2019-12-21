@@ -224,23 +224,24 @@
 }
 - (void)refreshBankList
 {
-    NSArray *array = [[IVCacheManager sharedInstance] nativeReadDictionaryForKey:BTTCacheBankListKey];
-    if (isArrayWithCountMoreThan0(array)) {
-        NSArray<BTTBankModel *> *bankList  = [BTTBankModel arrayOfModelsFromDictionaries:array error:nil];
-        NSMutableArray *mBankList = @[].mutableCopy;
-        for (BTTBankModel *model in bankList) {
-            //取后3位
-            NSRange rang = NSMakeRange(model.bankSecurityAccount.length - 3, 3);
-            NSString *subBankNum = [model.bankSecurityAccount substringWithRange:rang];
-            NSString *pickStr = [NSString stringWithFormat:@"%@-尾号***%@",model.bankName,subBankNum];
-            model.withdrawText = pickStr;
-            if (model.flag == 1) {
-                [mBankList addObject:model];
-            }
-        }
-        self.bankList = mBankList.copy;
-        [self setupElements];
-    }
+    //TODO:
+//    NSArray *array = [[IVCacheManager sharedInstance] nativeReadDictionaryForKey:BTTCacheBankListKey];
+//    if (isArrayWithCountMoreThan0(array)) {
+//        NSArray<BTTBankModel *> *bankList  = [BTTBankModel arrayOfModelsFromDictionaries:array error:nil];
+//        NSMutableArray *mBankList = @[].mutableCopy;
+//        for (BTTBankModel *model in bankList) {
+//            //取后3位
+//            NSRange rang = NSMakeRange(model.bankSecurityAccount.length - 3, 3);
+//            NSString *subBankNum = [model.bankSecurityAccount substringWithRange:rang];
+//            NSString *pickStr = [NSString stringWithFormat:@"%@-尾号***%@",model.bankName,subBankNum];
+//            model.withdrawText = pickStr;
+//            if (model.flag == 1) {
+//                [mBankList addObject:model];
+//            }
+//        }
+//        self.bankList = mBankList.copy;
+//        [self setupElements];
+//    }
 }
 - (void)submitWithDraw
 {
@@ -260,17 +261,18 @@
 //        params[@"password"] = self.password;
     }
     weakSelf(weakSelf)
-    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [BTTHttpManager submitWithdrawWithUrl:url params:params.copy completion:^(IVRequestResultModel *result, id response) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-        if (result.status) {
-            BTTWithdrawalSuccessController *vc = [[BTTWithdrawalSuccessController alloc] init];
-            vc.amount = weakSelf.amount;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        } else {
-            [MBProgressHUD showError:result.message toView:weakSelf.view];
-        }
-    }];
+    //TODO:
+//    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+//    [BTTHttpManager submitWithdrawWithUrl:url params:params.copy completion:^(IVRequestResultModel *result, id response) {
+//        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+//        if (result.status) {
+//            BTTWithdrawalSuccessController *vc = [[BTTWithdrawalSuccessController alloc] init];
+//            vc.amount = weakSelf.amount;
+//            [weakSelf.navigationController pushViewController:vc animated:YES];
+//        } else {
+//            [MBProgressHUD showError:result.message toView:weakSelf.view];
+//        }
+//    }];
     
 }
 @end

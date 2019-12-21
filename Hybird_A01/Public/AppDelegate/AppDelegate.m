@@ -38,8 +38,7 @@
 {
     self = [super init];
     if (self) {
-        [self checkArearLimit];
-        [self getWMSForm];
+        
         self.semaphore = dispatch_semaphore_create(0);
 #if DEBUG
 #else
@@ -103,6 +102,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self setupAPPEnvironment];
+    [self checkArearLimit];
+    [self getWMSForm];
     [self setupTabbarController];
     [self.window makeKeyAndVisible];
 //    [self setupADandWelcome];

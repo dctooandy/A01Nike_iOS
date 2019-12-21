@@ -140,15 +140,16 @@
     }
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     weakSelf(weakSelf)
-    [BTTHttpManager updatePhoneHumanWithParams:params.copy completion:^(IVRequestResultModel *result, id response) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-        if (result.status) {
-            BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-            vc.mobileCodeType = BTTSafeVerifyTypeHumanChangeMoblie;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-        } else {
-            [MBProgressHUD showError:result.message toView:weakSelf.view];
-        }
-    }];
+    //TODO:
+//    [BTTHttpManager updatePhoneHumanWithParams:params.copy completion:^(IVRequestResultModel *result, id response) {
+//        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+//        if (result.status) {
+//            BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+//            vc.mobileCodeType = BTTSafeVerifyTypeHumanChangeMoblie;
+//            [weakSelf.navigationController pushViewController:vc animated:YES];
+//        } else {
+//            [MBProgressHUD showError:result.message toView:weakSelf.view];
+//        }
+//    }];
 }
 @end

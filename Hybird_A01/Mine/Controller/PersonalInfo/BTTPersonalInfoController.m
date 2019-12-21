@@ -182,16 +182,17 @@
     params[@"remarks"] = remarkTF.text ? remarkTF.text : @"";
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [IVNetwork sendRequestWithSubURL:@"public/users/completeInfo" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        if (result.status) {
-            [MBProgressHUD showSuccess:@"完善资料成功!" toView:nil];
-            [IVNetwork updateUserInfo:result.data];
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-        }else{
-            [MBProgressHUD showError:result.message toView:weakSelf.view];
-        }
-    }];
+    //TODO:
+//    [IVNetwork sendRequestWithSubURL:@"public/users/completeInfo" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+//        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+//        if (result.status) {
+//            [MBProgressHUD showSuccess:@"完善资料成功!" toView:nil];
+//            [IVNetwork updateUserInfo:result.data];
+//            [weakSelf.navigationController popViewControllerAnimated:YES];
+//        }else{
+//            [MBProgressHUD showError:result.message toView:weakSelf.view];
+//        }
+//    }];
 }
 - (UITextField *)getCellTextFieldWithIndex:(NSInteger)index
 {

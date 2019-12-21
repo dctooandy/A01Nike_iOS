@@ -46,7 +46,8 @@
     [super viewDidLoad];
     [self setupViewControllers];
     [self customTabbar];
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userTokenExpired) name:IVUserTokenExpiredNotification object:nil];
+//    //TODO:
+//     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userTokenExpired) name:IVUserTokenExpiredNotification object:nil];
     [self registerLoginOrOutNotification];
     [self registerNotification];
 }
@@ -69,7 +70,7 @@
 
 - (void)resetTabar {
     
-//    if ([IVNetwork userInfo]) {
+    if ([IVNetwork userInfo]) {
         for (UITabBarItem *item in self.items) {
             NSInteger index = [self.items indexOfObject:item];
             if (index == 3) {
@@ -79,17 +80,17 @@
                 break;
             }
         }
-//    } else {
-//        for (UITabBarItem *item in self.items) {
-//            NSInteger index = [self.items indexOfObject:item];
-//            if (index == 3) {
-//                item.title = @"登录/开户";
-//                item.image = ImageNamed(@"login_normal");
-//                item.selectedImage = ImageNamed(@"login_pressed");
-//                break;
-//            }
-//        }
-//    }
+    } else {
+        for (UITabBarItem *item in self.items) {
+            NSInteger index = [self.items indexOfObject:item];
+            if (index == 3) {
+                item.title = @"登录/开户";
+                item.image = ImageNamed(@"login_normal");
+                item.selectedImage = ImageNamed(@"login_pressed");
+                break;
+            }
+        }
+    }
     [self customTabbar];
 }
 
@@ -133,14 +134,14 @@
 
 - (void)setupViewControllers {
     [self addOneChildVC:self.homePageVC title:@"首页" imageName:@"home_normal" selectedImageName:@"home_pressed"];
-    [self addOneChildVC:self.voiceCall title:@"APP语音" imageName:@"tab_voiceCall" selectedImageName:@"tab_voiceCall"];
-    [self addOneChildVC:self.lucky title:@"抽奖" imageName:@"lottery_pressed" selectedImageName:@"lottery_pressed"];
+//    [self addOneChildVC:self.voiceCall title:@"APP语音" imageName:@"tab_voiceCall" selectedImageName:@"tab_voiceCall"];
+//    [self addOneChildVC:self.lucky title:@"抽奖" imageName:@"lottery_pressed" selectedImageName:@"lottery_pressed"];
 //    if ([IVNetwork userInfo]) {
-        [self addOneChildVC:self.discountsVC title:@"优惠" imageName:@"preferential_normal" selectedImageName:@"preferential_pressed"];
+//        [self addOneChildVC:self.discountsVC title:@"优惠" imageName:@"preferential_normal" selectedImageName:@"preferential_pressed"];
 //    } else {
 //        [self addOneChildVC:self.discountsVC title:@"登录/开户" imageName:@"login_normal" selectedImageName:@"login_pressed"];
 //    }
-    [self addOneChildVC:self.mineVC title:@"会员中心" imageName:@"member_normal" selectedImageName:@"member_pressed"];
+//    [self addOneChildVC:self.mineVC title:@"会员中心" imageName:@"member_normal" selectedImageName:@"member_pressed"];
 }
 
 - (void)viewDidLayoutSubviews
@@ -230,12 +231,12 @@
         self.preSelectIndex = index;
     } else if (index == 3) {
         self.selectVC = self.discountsVC;
-//        if ([IVNetwork userInfo]) {
+        if ([IVNetwork userInfo]) {
             self.preSelectIndex = index;
-//        } else {
-//            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
-//            [self.selectVC.navigationController pushViewController:vc animated:YES];
-//        }
+        } else {
+            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+            [self.selectVC.navigationController pushViewController:vc animated:YES];
+        }
         
     } else {
         self.selectVC = self.mineVC;
@@ -316,14 +317,14 @@
     if (!_homePageVC) {
         _homePageVC = [[BTTHomePageViewController alloc] init];
         
-        AGQJController *AGQJvc = [IVGameManager sharedManager].agqjVC;
-        [self.homePageVC.view addSubview:AGQJvc.view];
-        AGQJvc.view.top = -SCREEN_HEIGHT;
-        
-        AGINController *aginVC = [IVGameManager sharedManager].aginVC;
-        //AG国际预加载
-        [self.homePageVC.view addSubview:aginVC.view];
-        aginVC.view.top = -SCREEN_HEIGHT;
+//        AGQJController *AGQJvc = [IVGameManager sharedManager].agqjVC;
+//        [self.homePageVC.view addSubview:AGQJvc.view];
+//        AGQJvc.view.top = -SCREEN_HEIGHT;
+//
+//        AGINController *aginVC = [IVGameManager sharedManager].aginVC;
+//        //AG国际预加载
+//        [self.homePageVC.view addSubview:aginVC.view];
+//        aginVC.view.top = -SCREEN_HEIGHT;
     }
     return _homePageVC;
 }

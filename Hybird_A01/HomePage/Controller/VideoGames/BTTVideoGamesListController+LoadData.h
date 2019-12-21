@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTVideoGamesListController (LoadData)
 
-- (void)loadVideoGamesWithRequestModel:(BTTVideoGamesRequestModel *)requestModel complete:(IVRequestCallBack)complete;
+//TODO:
+//- (void)loadVideoGamesWithRequestModel:(BTTVideoGamesRequestModel *)requestModel complete:(IVRequestCallBack)complete;
 
 - (void)loadCollectionData;
 

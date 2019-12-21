@@ -66,21 +66,22 @@
 //    }
     [params setObject:loginName forKey:@"loginname"];
     
-    [IVNetwork sendRequestWithSubURL:BTTUnlockAccount paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        if (result.status) {
-            
-            if (result.data) {
-                [MBProgressHUD showError:@"已解锁，请重新登录！" toView:nil];
-                if (self.dismissBlock) {
-                    self.dismissBlock();
-                }
-            } else {
-                [MBProgressHUD showError:@"验证失败，请重试！" toView:nil];
-            }
-        }
-        
-    }];
+    //TODO:
+//    [IVNetwork sendRequestWithSubURL:BTTUnlockAccount paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+//        NSLog(@"%@",response);
+//        if (result.status) {
+//
+//            if (result.data) {
+//                [MBProgressHUD showError:@"已解锁，请重新登录！" toView:nil];
+//                if (self.dismissBlock) {
+//                    self.dismissBlock();
+//                }
+//            } else {
+//                [MBProgressHUD showError:@"验证失败，请重试！" toView:nil];
+//            }
+//        }
+//
+//    }];
 }
 
 
