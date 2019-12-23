@@ -111,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
  * requestAuthorizationHeaderFieldArray为nil
  * requestHeaderFieldValueDictionary为nil
  */
-+ (id)sendRequestWithSubURL:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(KYHTTPCallBack)completionBlock;
++ (id)sendRequestWithSubURL:(NSString *)url paramters:(NSDictionary * __nullable)paramters completionBlock:(KYHTTPCallBack)completionBlock;
 /**
  网络请求，常用, 使用缓存
  * post，baseurl为网关，自动拼接apptoken和usertoken
@@ -120,9 +120,9 @@ NS_ASSUME_NONNULL_BEGIN
  * requestAuthorizationHeaderFieldArray为nil
  * requestHeaderFieldValueDictionary为nil
  */
-+ (id)sendUseCacheRequestWithSubURL:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(KYHTTPCallBack)completionBlock;
++ (id)sendUseCacheRequestWithSubURL:(NSString *)url paramters:(NSDictionary * __nullable)paramters completionBlock:(KYHTTPCallBack)completionBlock;
 
-+ (void)requestWithUseCache:(BOOL)useCache url:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(KYHTTPCallBack)completionBlock;
++ (void)requestWithUseCache:(BOOL)useCache url:(NSString *)url paramters:(NSDictionary *__nullable)paramters completionBlock:(KYHTTPCallBack)completionBlock;
 
 /**
  网络请求，通用
@@ -174,6 +174,8 @@ NS_ASSUME_NONNULL_BEGIN
  进入前台
  */
 + (void)applicationWillEnterForeground:(UIApplication *)application;
+
++ (void)requestPostWithUrl:(NSString *)url paramters:(NSDictionary * __nullable)paramters completionBlock:(KYHTTPCallBack)completionBlock;
 
 
 @end

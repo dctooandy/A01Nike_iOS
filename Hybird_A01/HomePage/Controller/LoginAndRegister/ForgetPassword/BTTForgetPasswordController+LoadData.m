@@ -9,6 +9,7 @@
 #import "BTTForgetPasswordController+LoadData.h"
 #import "BTTMeMainModel.h"
 
+
 @implementation BTTForgetPasswordController (LoadData)
 
 
@@ -35,8 +36,12 @@
     }];
 }
 
-- (void)verifyPhotoCode:(NSString *)code WithUUid:(NSString *)uuid completeBlock:(CompleteBlock)completeBlock {
-    NSDictionary *params = @{@"code":code,@"uuid":uuid};
+- (void)verifyPhotoCode:(NSString *)code WithCaptchaId:(NSString *)captchaId completeBlock:(CompleteBlock)completeBlock {
+//    NSDictionary *params = @{@"code":code,@"uuid":uuid};
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    [params setValue:code forKey:@"captcha"];
+    [params setValue:captchaId forKey:@"captchaId"];
+    [params setValue:@"A01APP02" forKey:@"productId"];
     //TODO:
 //    [IVNetwork sendRequestWithSubURL:BTTValidateCaptcha paramters:params completionBlock:completeBlock];
 }
@@ -68,6 +73,5 @@
 }
 
 
-
-
 @end
+

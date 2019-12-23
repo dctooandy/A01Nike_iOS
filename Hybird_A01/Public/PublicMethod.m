@@ -1135,4 +1135,18 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     NSDate *date = [formatter dateFromString:dateString];
     return date;
 }
+
+
++ (NSString *)getRandomTimeString{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyyMMddHHmmssS"];
+    NSDate *date = [NSDate date];
+    NSString *timeString = [formatter stringFromDate:date];
+    
+    int num = (arc4random() % 1000000);
+    NSString *randomNumber = [NSString stringWithFormat:@"%.6d", num];
+    
+    return [NSString stringWithFormat:@"%@%@",timeString,randomNumber];
+    
+}
 @end

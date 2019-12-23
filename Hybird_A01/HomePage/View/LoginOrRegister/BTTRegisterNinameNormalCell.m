@@ -50,8 +50,8 @@
             textField.text = [textField.text substringToIndex:11];
         }
     } else {
-        if (textField.text.length > 4) {
-            textField.text = [textField.text substringToIndex:4];
+        if (textField.text.length > 6) {
+            textField.text = [textField.text substringToIndex:6];
         }
     }
 }

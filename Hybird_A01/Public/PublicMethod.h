@@ -229,6 +229,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSDate *)transferDateStringToDate:(NSString *)dateString;
 
+//获取随机字符串，年月日时分秒+6位随机数
++ (NSString *)getRandomTimeString;
+
 @end
 
 NS_ASSUME_NONNULL_END

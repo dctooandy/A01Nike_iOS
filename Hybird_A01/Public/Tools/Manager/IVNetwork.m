@@ -15,31 +15,17 @@
     return NULL;
 }
 
-+ (id)sendUseCacheRequestWithSubURL:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(KYHTTPCallBack)completionBlock{
++ (id)sendUseCacheRequestWithSubURL:(NSString *)url paramters:(NSDictionary * __nullable)paramters completionBlock:(KYHTTPCallBack)completionBlock{
     [self requestWithUseCache:TRUE url:url paramters:paramters completionBlock:completionBlock];
     return @"";
 }
 
-+ (void)requestWithUseCache:(BOOL)useCache url:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(KYHTTPCallBack)completionBlock
++ (void)requestPostWithUrl:(NSString *)url paramters:(NSDictionary * __nullable)paramters completionBlock:(KYHTTPCallBack)completionBlock{
+    [[IVHttpManager shareManager]sendRequestWithUrl:url parameters:paramters callBack:completionBlock];
+}
+
++ (void)requestWithUseCache:(BOOL)useCache url:(NSString *)url paramters:(NSDictionary * __nullable)paramters completionBlock:(KYHTTPCallBack)completionBlock
 {
-//    IVBaseRequest *api = [self createRequestWithConfigure:configure url:url paramters:paramters useCache:useCache];
-//
-//    __weak typeof(self)weakSelf = self;
-//    [api startWithCompletionBlock:^(IVRequestResultModel *result, id response) {
-//        //apptoken过期
-//        if (result.code_http == IVHttpResponseCodeTokenExpired) {
-//            [weakSelf appTokenExpiredWithConfigure:configure useCache:useCache url:url paramters:paramters completionBlock:completionBlock];
-//        } else {
-//            if (completionBlock) {
-//                completionBlock(result,response);
-//            }
-//        }
-//        //如果获取的是缓存数据，继续请求远程服务器更新缓存
-//        if ([api isDataFromCache]) {
-//            [weakSelf requestWithConfigure:configure useCache:NO url:url paramters:paramters completionBlock:nil];
-//        }
-//    }];
-//    return api;
     [[IVHttpManager shareManager] sendRequestWithMethod:KYHTTPMethodPOST
                url:url
         parameters:paramters

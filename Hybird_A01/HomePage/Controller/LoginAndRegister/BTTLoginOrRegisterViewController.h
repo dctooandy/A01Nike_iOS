@@ -31,6 +31,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *uuid; ///< 验证码返回的uuid
 
+@property (nonatomic, copy) NSString *captchaId; ///< 验证码返回的captchaId
+
+@property (nonatomic, copy) NSString *messageId; ///< 验证码的ID
+
 @end
 
 NS_ASSUME_NONNULL_END

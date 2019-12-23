@@ -68,7 +68,7 @@
 }
 
 + (NSString *)appId {
-    return @"fby8beji7lesmooeh54m28l1u09ymmkb";
+    return @"A01APP02";
 }
 
 + (NSString *)socketIp {

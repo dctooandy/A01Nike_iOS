@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *version;    ///< 版本号;
 
+@property (nonatomic, copy) NSString *catpchaId;    ///< 验证码 (必选)
+
 @end
 
 NS_ASSUME_NONNULL_END
