@@ -126,6 +126,15 @@
         NSLog(@"%@",response);
         [MBProgressHUD showMessag:@"弹出提示" toView:self.view];
     }];
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTUserLoginAPI paramters:parameters completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        
+        IVJResponseObject *result = response;
+        NSLog(@"%@",result);
+        [[NSUserDefaults standardUserDefaults] setObject:model.login_name forKey:BTTCacheAccountName];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }];
 //    [IVNetwork sendRequestWithSubURL:BTTUserLoginAPI paramters:parameters completionBlock:^(IVRequestResultModel *result, id response) {
 //        [self hideLoading];
 //        NSLog(@"%@",response);
