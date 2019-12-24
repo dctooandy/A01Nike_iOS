@@ -40,6 +40,8 @@ alpha:1.0]
 
 #define kBlackBackgroundColor COLOR_HEX(0x212229)
 #define kBlackForgroundColor  COLOR_RGBA(31, 34, 41, 1)
+#define kBlackLightColor COLOR_RGBA(41, 45, 54, 1)
+#define kTextPlaceHolderColor COLOR_RGBA(129, 135, 145,1)
 
 @interface CNPayConstant : NSObject
 @end

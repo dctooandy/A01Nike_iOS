@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,21 +15,21 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G3L-Ln-CsZ">
-                    <rect key="frame" x="15" y="77.5" width="345" height="432"/>
+                    <rect key="frame" x="15" y="76" width="345" height="435"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wCV-YA-ybn">
-                            <rect key="frame" x="20" y="35" width="305" height="31"/>
+                            <rect key="frame" x="20" y="35" width="305" height="33.5"/>
                             <attributedString key="attributedText">
                                 <fragment content="点击微信">
                                     <attributes>
                                         <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        <font key="NSFont" metaFont="system" size="14"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="【钱包】">
                                     <attributes>
                                         <color key="NSColor" red="0.047058823529411764" green="0.36078431372549019" blue="0.69411764705882351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        <font key="NSFont" metaFont="system" size="14"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="-">
@@ -43,56 +41,56 @@
                                 <fragment content="【收付款】">
                                     <attributes>
                                         <color key="NSColor" red="0.047058823529411764" green="0.36078431372549019" blue="0.69411764705882351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        <font key="NSFont" metaFont="system" size="14"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="页面，使用">
                                     <attributes>
                                         <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        <font key="NSFont" metaFont="system" size="14"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="【转账到银行卡功能】">
                                     <attributes>
                                         <color key="NSColor" red="0.047058823529411764" green="0.36078431372549019" blue="0.69411764705882351" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        <font key="NSFont" metaFont="system" size="14"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="即可进行转账！">
                                     <attributes>
                                         <color key="NSColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <font key="NSFont" size="14" name=".PingFangSC-Regular"/>
+                                        <font key="NSFont" metaFont="system" size="14"/>
                                     </attributes>
                                 </fragment>
                             </attributedString>
                             <nil key="highlightedColor"/>
                         </label>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Po-nV-PVQ">
-                            <rect key="frame" x="20" y="86" width="305" height="254"/>
+                            <rect key="frame" x="20" y="88.5" width="305" height="254.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jt8-Vm-8Fg">
-                                    <rect key="frame" x="0.0" y="0.0" width="1830" height="254"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1830" height="254.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="EDd-Mz-XQH">
-                                            <rect key="frame" x="0.0" y="0.0" width="1830" height="254"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1830" height="254.5"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pay_wechat1" translatesAutoresizingMaskIntoConstraints="NO" id="tWa-d2-gwZ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="305" height="254"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="305" height="254.5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pay_wechat2" translatesAutoresizingMaskIntoConstraints="NO" id="3rH-49-GaY">
-                                                    <rect key="frame" x="305" y="0.0" width="305" height="254"/>
+                                                    <rect key="frame" x="305" y="0.0" width="305" height="254.5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pay_wechat3" translatesAutoresizingMaskIntoConstraints="NO" id="Tfg-Jv-8OR">
-                                                    <rect key="frame" x="610" y="0.0" width="305" height="254"/>
+                                                    <rect key="frame" x="610" y="0.0" width="305" height="254.5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pay_wechat4" translatesAutoresizingMaskIntoConstraints="NO" id="yT1-KJ-xp4">
-                                                    <rect key="frame" x="915" y="0.0" width="305" height="254"/>
+                                                    <rect key="frame" x="915" y="0.0" width="305" height="254.5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pay_wechat5" translatesAutoresizingMaskIntoConstraints="NO" id="wis-Ff-8bj">
-                                                    <rect key="frame" x="1220" y="0.0" width="305" height="254"/>
+                                                    <rect key="frame" x="1220" y="0.0" width="305" height="254.5"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pay_wechat6" translatesAutoresizingMaskIntoConstraints="NO" id="nOg-7E-TjL">
-                                                    <rect key="frame" x="1525" y="0.0" width="305" height="254"/>
+                                                    <rect key="frame" x="1525" y="0.0" width="305" height="254.5"/>
                                                 </imageView>
                                             </subviews>
                                         </stackView>
@@ -120,13 +118,13 @@
                             </connections>
                         </scrollView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用微信秒存，请先确认微信最新版本" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Kh-Vh-alD">
-                            <rect key="frame" x="51" y="360" width="243" height="17"/>
+                            <rect key="frame" x="51" y="363" width="243" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="6" translatesAutoresizingMaskIntoConstraints="NO" id="KCe-RO-egr">
-                            <rect key="frame" x="129" y="397" width="87" height="10"/>
+                            <rect key="frame" x="129" y="400" width="87" height="10"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="10" id="nh8-6q-wpn"/>
                             </constraints>
@@ -150,7 +148,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xgt-0f-Ao1">
-                    <rect key="frame" x="167.5" y="524.5" width="40" height="40"/>
+                    <rect key="frame" x="167.5" y="526" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="DQc-II-hq9"/>
                         <constraint firstAttribute="width" constant="40" id="DTL-pM-7gL"/>
@@ -178,12 +176,12 @@
         </view>
     </objects>
     <resources>
-        <image name="pay_wechat1" width="600" height="500"/>
-        <image name="pay_wechat2" width="600" height="500"/>
-        <image name="pay_wechat3" width="600" height="500"/>
-        <image name="pay_wechat4" width="600" height="500"/>
-        <image name="pay_wechat5" width="600" height="500"/>
-        <image name="pay_wechat6" width="600" height="500"/>
+        <image name="pay_wechat1" width="300" height="250"/>
+        <image name="pay_wechat2" width="300" height="250"/>
+        <image name="pay_wechat3" width="300" height="250"/>
+        <image name="pay_wechat4" width="300" height="250"/>
+        <image name="pay_wechat5" width="300" height="250"/>
+        <image name="pay_wechat6" width="300" height="250"/>
         <image name="pay_wechatX" width="30" height="30"/>
     </resources>
 </document>
