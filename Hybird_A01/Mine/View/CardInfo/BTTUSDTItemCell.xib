@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTUSDTItemCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="197"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="197"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="推荐钱包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emZ-vw-LFo">
+                        <rect key="frame" x="15" y="15" width="57.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="slY-hc-mWP" customClass="BTTUSDTButton">
+                        <rect key="frame" x="15" y="47" width="105" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="36" id="YOb-3Z-G1E"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="  Mobi" image="me_usdt_mobi" backgroundImage="me_usdt_item_unselect">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <state key="selected" backgroundImage="me_usdt_item_select"/>
+                        <connections>
+                            <action selector="BtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="lmB-dy-Qhw"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJD-mm-ftX" customClass="BTTUSDTButton">
+                        <rect key="frame" x="135" y="47" width="105" height="36"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="  Huobi" image="me_usdt_huobi" backgroundImage="me_usdt_item_unselect">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <state key="selected" backgroundImage="me_usdt_item_select"/>
+                        <connections>
+                            <action selector="BtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="CNk-bC-e4k"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mpb-u8-TkR" customClass="BTTUSDTButton">
+                        <rect key="frame" x="255" y="47" width="105" height="36"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="  Atoken" image="me_usdt_atoken" backgroundImage="me_usdt_item_unselect">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <state key="selected" backgroundImage="me_usdt_item_select"/>
+                        <connections>
+                            <action selector="BtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="ppg-qt-Tzt"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XzN-r1-bgM" customClass="BTTUSDTButton">
+                        <rect key="frame" x="15" y="98" width="105" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="36" id="mhi-G1-Sr0"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="  Bixin" image="me_usdt_bixin" backgroundImage="me_usdt_item_unselect">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <state key="selected" backgroundImage="me_usdt_item_select"/>
+                        <connections>
+                            <action selector="BtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="hfj-z3-RWc"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="1004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aA0-Zm-GDg" customClass="BTTUSDTButton">
+                        <rect key="frame" x="135" y="98" width="105" height="36"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="  Bitpie" image="me_usdt_bitpie" backgroundImage="me_usdt_item_unselect">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <state key="selected" backgroundImage="me_usdt_item_select"/>
+                        <connections>
+                            <action selector="BtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="66T-Rv-0Zg"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="1005" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ed-9m-zsL" customClass="BTTUSDTButton">
+                        <rect key="frame" x="255" y="98" width="105" height="36"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="  Hicoin" image="me_usdt_hicoin" backgroundImage="me_usdt_item_unselect">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <state key="selected" backgroundImage="me_usdt_item_select"/>
+                        <connections>
+                            <action selector="BtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="b1H-7H-0bB"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="1007" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fw2-U9-iut" customClass="BTTUSDTButton">
+                        <rect key="frame" x="135" y="149" width="105" height="36"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="  Coincola" image="me_usdt_coincola" backgroundImage="me_usdt_item_unselect">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <state key="selected" backgroundImage="me_usdt_item_select"/>
+                        <connections>
+                            <action selector="BtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Oyz-Yg-Udg"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="1008" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCt-Pb-eoH" customClass="BTTUSDTButton">
+                        <rect key="frame" x="255" y="149" width="105" height="36"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="  其他钱包" image="me_usdt_otherwallet" backgroundImage="me_usdt_item_unselect">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <state key="selected" backgroundImage="me_usdt_item_select"/>
+                        <connections>
+                            <action selector="BtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="RY1-xc-AQK"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="1006" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUD-bc-LiT" customClass="BTTUSDTButton">
+                        <rect key="frame" x="15" y="149" width="105" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="36" id="DUH-nG-R9q"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="  Coldlar" image="me_usdt_coldlar" backgroundImage="me_usdt_item_unselect">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <state key="selected" backgroundImage="me_usdt_item_select"/>
+                        <connections>
+                            <action selector="BtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="XXk-iV-dkM"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="emZ-vw-LFo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="0ym-zR-TUq"/>
+                <constraint firstItem="slY-hc-mWP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="1lY-jU-EtU"/>
+                <constraint firstItem="XzN-r1-bgM" firstAttribute="top" secondItem="slY-hc-mWP" secondAttribute="bottom" constant="15" id="8pd-wG-QQN"/>
+                <constraint firstItem="aA0-Zm-GDg" firstAttribute="height" secondItem="XzN-r1-bgM" secondAttribute="height" id="DJT-4o-IKI"/>
+                <constraint firstItem="Fw2-U9-iut" firstAttribute="top" secondItem="aA0-Zm-GDg" secondAttribute="bottom" constant="15" id="FpT-YA-ODa"/>
+                <constraint firstItem="slY-hc-mWP" firstAttribute="top" secondItem="emZ-vw-LFo" secondAttribute="bottom" constant="15" id="G81-DH-drs"/>
+                <constraint firstItem="emZ-vw-LFo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="HAv-HO-bJ0"/>
+                <constraint firstItem="dUD-bc-LiT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="I9M-WE-Alo"/>
+                <constraint firstAttribute="trailing" secondItem="9Ed-9m-zsL" secondAttribute="trailing" constant="15" id="KRd-Pp-dT3"/>
+                <constraint firstItem="dUD-bc-LiT" firstAttribute="top" secondItem="XzN-r1-bgM" secondAttribute="bottom" constant="15" id="Kke-iy-waL"/>
+                <constraint firstAttribute="trailing" secondItem="Mpb-u8-TkR" secondAttribute="trailing" constant="15" id="MJX-zk-vLr"/>
+                <constraint firstItem="RCt-Pb-eoH" firstAttribute="top" secondItem="9Ed-9m-zsL" secondAttribute="bottom" constant="15" id="MPe-eV-P2c"/>
+                <constraint firstItem="Fw2-U9-iut" firstAttribute="width" secondItem="dUD-bc-LiT" secondAttribute="width" id="T7P-Qj-Dxi"/>
+                <constraint firstItem="aA0-Zm-GDg" firstAttribute="width" secondItem="XzN-r1-bgM" secondAttribute="width" id="UWZ-wy-UcF"/>
+                <constraint firstItem="aA0-Zm-GDg" firstAttribute="leading" secondItem="XzN-r1-bgM" secondAttribute="trailing" constant="15" id="Ub8-7Y-mD1"/>
+                <constraint firstItem="9Ed-9m-zsL" firstAttribute="height" secondItem="XzN-r1-bgM" secondAttribute="height" id="X5z-c0-fR2"/>
+                <constraint firstItem="zJD-mm-ftX" firstAttribute="width" secondItem="slY-hc-mWP" secondAttribute="width" id="YAR-Rg-kJX"/>
+                <constraint firstItem="XzN-r1-bgM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="dPV-vm-GxG"/>
+                <constraint firstItem="Mpb-u8-TkR" firstAttribute="width" secondItem="slY-hc-mWP" secondAttribute="width" id="gnT-0i-uVM"/>
+                <constraint firstItem="Fw2-U9-iut" firstAttribute="height" secondItem="dUD-bc-LiT" secondAttribute="height" id="hJe-rK-kpZ"/>
+                <constraint firstItem="Mpb-u8-TkR" firstAttribute="height" secondItem="slY-hc-mWP" secondAttribute="height" id="kN6-rp-433"/>
+                <constraint firstItem="RCt-Pb-eoH" firstAttribute="leading" secondItem="Fw2-U9-iut" secondAttribute="trailing" constant="15" id="mh4-Nx-A12"/>
+                <constraint firstItem="Mpb-u8-TkR" firstAttribute="top" secondItem="emZ-vw-LFo" secondAttribute="bottom" constant="15" id="mx7-ZY-hhD"/>
+                <constraint firstItem="RCt-Pb-eoH" firstAttribute="height" secondItem="dUD-bc-LiT" secondAttribute="height" id="plV-Ct-lRe"/>
+                <constraint firstItem="Fw2-U9-iut" firstAttribute="leading" secondItem="dUD-bc-LiT" secondAttribute="trailing" constant="15" id="qAB-qf-Wqq"/>
+                <constraint firstItem="aA0-Zm-GDg" firstAttribute="top" secondItem="zJD-mm-ftX" secondAttribute="bottom" constant="15" id="r7w-o0-UVu"/>
+                <constraint firstItem="RCt-Pb-eoH" firstAttribute="width" secondItem="dUD-bc-LiT" secondAttribute="width" id="t6T-dJ-9J0"/>
+                <constraint firstItem="9Ed-9m-zsL" firstAttribute="top" secondItem="Mpb-u8-TkR" secondAttribute="bottom" constant="15" id="tXk-FL-QSP"/>
+                <constraint firstAttribute="trailing" secondItem="RCt-Pb-eoH" secondAttribute="trailing" constant="15" id="tqS-qC-xNh"/>
+                <constraint firstItem="9Ed-9m-zsL" firstAttribute="width" secondItem="XzN-r1-bgM" secondAttribute="width" id="vGT-gz-Z5Q"/>
+                <constraint firstItem="zJD-mm-ftX" firstAttribute="height" secondItem="slY-hc-mWP" secondAttribute="height" id="vkF-UF-Ax6"/>
+                <constraint firstItem="Mpb-u8-TkR" firstAttribute="leading" secondItem="zJD-mm-ftX" secondAttribute="trailing" constant="15" id="wuM-Y8-6WV"/>
+                <constraint firstItem="zJD-mm-ftX" firstAttribute="top" secondItem="emZ-vw-LFo" secondAttribute="bottom" constant="15" id="zJ1-gG-Xvd"/>
+                <constraint firstItem="9Ed-9m-zsL" firstAttribute="leading" secondItem="aA0-Zm-GDg" secondAttribute="trailing" constant="15" id="zTT-kq-Vpp"/>
+                <constraint firstItem="zJD-mm-ftX" firstAttribute="leading" secondItem="slY-hc-mWP" secondAttribute="trailing" constant="15" id="zwL-7X-z8k"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <point key="canvasLocation" x="72" y="131"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="me_usdt_atoken" width="16" height="16"/>
+        <image name="me_usdt_bitpie" width="16" height="16"/>
+        <image name="me_usdt_bixin" width="16" height="16"/>
+        <image name="me_usdt_coincola" width="16" height="16"/>
+        <image name="me_usdt_coldlar" width="16" height="16"/>
+        <image name="me_usdt_hicoin" width="16" height="16"/>
+        <image name="me_usdt_huobi" width="16" height="16"/>
+        <image name="me_usdt_item_select" width="113" height="45"/>
+        <image name="me_usdt_item_unselect" width="113" height="45"/>
+        <image name="me_usdt_mobi" width="16" height="16"/>
+        <image name="me_usdt_otherwallet" width="16" height="16"/>
+    </resources>
+</document>
