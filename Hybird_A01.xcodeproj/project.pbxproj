@@ -674,8 +674,6 @@
 		D39B9B6323B1E5E4004EE588 /* CNPayUSDTStep1VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D39B9B6123B1E5E4004EE588 /* CNPayUSDTStep1VC.m */; };
 		D39B9B6423B1E5E4004EE588 /* CNPayUSDTStep1VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39B9B6223B1E5E4004EE588 /* CNPayUSDTStep1VC.xib */; };
 		D3EADBB923B20AAF0079B8F3 /* USDTWalletCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EADBB723B20AAF0079B8F3 /* USDTWalletCollectionCell.m */; };
-		D3EADBBE23B21BB80079B8F3 /* CNPayUSDTQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EADBBC23B21BB80079B8F3 /* CNPayUSDTQRViewController.m */; };
-		D3EADBBF23B21BB80079B8F3 /* CNPayUSDTQRViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3EADBBD23B21BB80079B8F3 /* CNPayUSDTQRViewController.xib */; };
 		D51AD19F21B8FEE5008C633A /* CNPayBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */; };
 		D599251421AE5AF6001E885A /* CNPayNormalTF.m in Sources */ = {isa = PBXBuildFile; fileRef = D599251321AE5AF6001E885A /* CNPayNormalTF.m */; };
 		D599251821AE6719001E885A /* CNPayCardStep2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D599251621AE6719001E885A /* CNPayCardStep2VC.m */; };
@@ -1796,9 +1794,6 @@
 		D39B9B6223B1E5E4004EE588 /* CNPayUSDTStep1VC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNPayUSDTStep1VC.xib; sourceTree = "<group>"; };
 		D3EADBB623B20AAF0079B8F3 /* USDTWalletCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USDTWalletCollectionCell.h; sourceTree = "<group>"; };
 		D3EADBB723B20AAF0079B8F3 /* USDTWalletCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = USDTWalletCollectionCell.m; sourceTree = "<group>"; };
-		D3EADBBB23B21BB80079B8F3 /* CNPayUSDTQRViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayUSDTQRViewController.h; sourceTree = "<group>"; };
-		D3EADBBC23B21BB80079B8F3 /* CNPayUSDTQRViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayUSDTQRViewController.m; sourceTree = "<group>"; };
-		D3EADBBD23B21BB80079B8F3 /* CNPayUSDTQRViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNPayUSDTQRViewController.xib; sourceTree = "<group>"; };
 		D51AD19D21B8FEE5008C633A /* CNPayBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayBaseView.h; sourceTree = "<group>"; };
 		D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayBaseView.m; sourceTree = "<group>"; };
 		D599251221AE5AF6001E885A /* CNPayNormalTF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayNormalTF.h; sourceTree = "<group>"; };
@@ -3967,9 +3962,6 @@
 				D39B9B6223B1E5E4004EE588 /* CNPayUSDTStep1VC.xib */,
 				D3EADBB623B20AAF0079B8F3 /* USDTWalletCollectionCell.h */,
 				D3EADBB723B20AAF0079B8F3 /* USDTWalletCollectionCell.m */,
-				D3EADBBB23B21BB80079B8F3 /* CNPayUSDTQRViewController.h */,
-				D3EADBBC23B21BB80079B8F3 /* CNPayUSDTQRViewController.m */,
-				D3EADBBD23B21BB80079B8F3 /* CNPayUSDTQRViewController.xib */,
 				D37F092423B241AE00D51425 /* CNPayUSDTQRSecondVC.h */,
 				D37F092523B241AE00D51425 /* CNPayUSDTQRSecondVC.m */,
 				D37F092623B241AE00D51425 /* CNPayUSDTQRSecondVC.xib */,
@@ -4556,7 +4548,6 @@
 				3A5AE69422D6E22A0013E8A3 /* LIVVideoCamera_OK@3x.png in Resources */,
 				3A7C0B2421ECA38A002658CC /* app.zip in Resources */,
 				3A75A17D22115CA700584A35 /* BTTLoginAccountSelectView.xib in Resources */,
-				D3EADBBF23B21BB80079B8F3 /* CNPayUSDTQRViewController.xib in Resources */,
 				3A5AE70922D6E22A0013E8A3 /* ill.gif in Resources */,
 				3AD9CF77216F3F6300685B43 /* BTTAppCollectionViewCell.xib in Resources */,
 				3A5AE66F22D6E22A0013E8A3 /* LIVCollectionBoard.nib in Resources */,
@@ -4861,7 +4852,6 @@
 				3A8F5188215F77AC0069D1B3 /* BTTIntroductoryPagesView.m in Sources */,
 				3AD9CF7F216F462600685B43 /* BTTHomePageSeparateCell.m in Sources */,
 				3AD9CF41216EDC9800685B43 /* BTTVoiceCallModel.m in Sources */,
-				D3EADBBE23B21BB80079B8F3 /* CNPayUSDTQRViewController.m in Sources */,
 				3AB0687921A571F700072FB7 /* BTTXimaModel.m in Sources */,
 				D5DBEB2C21ABB774008AF629 /* CNPayAmountTF.m in Sources */,
 				3AB0684221A3998200072FB7 /* BTTUnBindingBtnCell.m in Sources */,

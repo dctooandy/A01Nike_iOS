@@ -17,6 +17,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *exchangeRateLabel;
 @property (weak, nonatomic) IBOutlet UITextField *usdtInputField;
 @property (weak, nonatomic) IBOutlet UILabel *rmbLabel;
+@property (weak, nonatomic) IBOutlet UIView *normalWalletView;
+@property (weak, nonatomic) IBOutlet UIView *elseWalletView;
+@property (weak, nonatomic) IBOutlet UILabel *leftTimeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *finishButton;
+@property (weak, nonatomic) IBOutlet UILabel *elseRateLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *addressCopyImg;
+@property (weak, nonatomic) IBOutlet UILabel *walletAddressLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *qrCodeImg;
 @property (nonatomic, strong) UICollectionView *walletCollectionView;
 @property (nonatomic, strong) NSArray *itemsArray;
 @property (nonatomic, strong) NSArray *itemImageArray;
@@ -54,17 +62,20 @@
     [super viewWillAppear:animated];
     _itemsArray = @[@[@"Mobi",@"Huobi",@"Atoken",@"Bixin",@"Bitpie",@"Hicoin",@"Coldlar",@"Coincola"],@[@"其他钱包"]];
     _itemImageArray = @[@[@"me_usdt_mobi",@"me_usdt_huobi",@"me_usdt_atoken",@"me_usdt_bixin",@"me_usdt_bitpie",@"me_usdt_hicoin",@"me_usdt_coldlar",@"me_usdt_coincola"],@[@"me_usdt_otherwallet"]];
-    [self setViewHeight:542 fullScreen:NO];
+    [self setViewHeight:628 fullScreen:NO];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupView];
+    [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
 }
 
 - (void)setupView{
     self.view.backgroundColor = kBlackBackgroundColor;
     self.walletView.layer.backgroundColor = [[UIColor colorWithRed:41.0f/255.0f green:45.0f/255.0f blue:54.0f/255.0f alpha:1.0f] CGColor];
+    _normalWalletView.layer.backgroundColor = kBlackBackgroundColor.CGColor;
+    _elseWalletView.layer.backgroundColor = kBlackBackgroundColor.CGColor;
     self.walletCollectionView.frame = CGRectMake(15, 0, SCREEN_WIDTH-30, 276);
     [self.walletView addSubview:self.walletCollectionView];
     
@@ -85,6 +96,18 @@
     [gradientLayer0 setStartPoint:CGPointMake(1, 1)];
     [gradientLayer0 setEndPoint:CGPointMake(0, 0)];
     [_confirmBtn.layer addSublayer:gradientLayer0];
+    
+    CAGradientLayer *gradientLayer1 = [[CAGradientLayer alloc] init];
+    gradientLayer1.cornerRadius = 5;
+    gradientLayer1.frame = _finishButton.bounds;
+    gradientLayer1.colors = @[
+        (id)[UIColor colorWithRed:247.0f/255.0f green:249.0f/255.0f blue:82.0f/255.0f alpha:1.0f].CGColor,
+        (id)[UIColor colorWithRed:242.0f/255.0f green:218.0f/255.0f blue:15.0f/255.0f alpha:1.0f].CGColor];
+    gradientLayer1.locations = @[@0, @1];
+    [gradientLayer1 setStartPoint:CGPointMake(1, 1)];
+    [gradientLayer1 setEndPoint:CGPointMake(0, 0)];
+    
+    [_finishButton.layer addSublayer:gradientLayer1];
     
     UIView *sepratorView = [[UIView alloc] initWithFrame:CGRectMake(15, 44, SCREEN_WIDTH-15, 1)];
     sepratorView.layer.backgroundColor = [[UIColor colorWithRed:74.0f/255.0f green:77.0f/255.0f blue:85.0f/255.0f alpha:1.0f] CGColor];
@@ -111,7 +134,30 @@
          }];
     _usdtInputField.attributedPlaceholder = attrString;
     _usdtInputField.delegate = self;
+    
+    NSString *elseStr = @"请复制博天堂USDT钱包地址，或扫描博天堂钱包二维码进行充值\n当前参考汇率：1 USDT=7.0018人民币，实际请以到账时为准";
+    NSMutableAttributedString *elseAttrStr = [[NSMutableAttributedString alloc] initWithString:elseStr];
+
+    [elseAttrStr addAttribute:NSForegroundColorAttributeName
+    value:[UIColor whiteColor]
+    range:NSMakeRange(40, 13)];
+    _elseRateLabel.attributedText = elseAttrStr;
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addressCopyBtn_click:)];
+    [_addressCopyImg addGestureRecognizer:tap];
+    
 }
+
+- (void)addressCopyBtn_click:(id)sender{
+    [UIPasteboard generalPasteboard].string = _walletAddressLabel.text;
+    [self showSuccess:@"已复制到剪切板"];
+}
+- (IBAction)nextBtn_click:(id)sender {
+}
+- (IBAction)finishedBtn_click:(id)sender {
+    [self goToStep:1];
+}
+
 - (IBAction)ustdFieldDidChange:(id)sender {
     if (_usdtInputField.text.length>0) {
         long rmbCash = [_usdtInputField.text integerValue] * 7;
@@ -134,7 +180,18 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
+    if (indexPath.section==0) {
+        if (indexPath.row==1) {
+            _elseWalletView.hidden = NO;
+            _normalWalletView.hidden = YES;
+        }else{
+            _elseWalletView.hidden = YES;
+            _normalWalletView.hidden = NO;
+        }
+    }else{
+        _elseWalletView.hidden = NO;
+        _normalWalletView.hidden = YES;
+    }
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
