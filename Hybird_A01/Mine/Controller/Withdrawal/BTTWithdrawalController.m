@@ -19,6 +19,7 @@
 #import "BTTAccountBalanceController.h"
 #import "BTTBankModel.h"
 #import "BTTWithdrawalNotifyCell.h"
+#import "BTTWithDrawUSDTConfirmCell.h"
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate>
 @property(nonatomic, copy)NSString *amount;
 @property(nonatomic, copy)NSString *password;
@@ -53,6 +54,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTWithdrawalCardSelectCell" bundle:nil] forCellWithReuseIdentifier:@"BTTWithdrawalCardSelectCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTWithdrawalNotifyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTWithdrawalNotifyCell"];
+    [self.collectionView registerClass:[BTTWithDrawUSDTConfirmCell class] forCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -81,6 +83,7 @@
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf submitWithDraw];
         };
+//        BTTWithDrawUSDTConfirmCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell" forIndexPath:indexPath];
         return cell;
     }
     if (self.betInfoModel.status) {

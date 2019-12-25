@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *usdtInputField;
 @property (weak, nonatomic) IBOutlet UILabel *rmbLabel;
 @property (nonatomic, strong) UICollectionView *walletCollectionView;
+@property (nonatomic, strong) NSArray *itemsArray;
+@property (nonatomic, strong) NSArray *itemImageArray;
 
 @end
 
@@ -43,13 +45,15 @@
         _walletCollectionView.bounces = NO;   //设置弹跳
         _walletCollectionView.alwaysBounceVertical = NO;  //只允许垂直方向滑动
         //注册 cell  为了cell的重用机制  使用NIB  也可以使用代码 registerClass xxxx
-        [_walletCollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([USDTWalletCollectionCell class]) bundle:nil] forCellWithReuseIdentifier:@"USDTWalletCollectionCell"];
+        [_walletCollectionView registerClass:[USDTWalletCollectionCell class] forCellWithReuseIdentifier:@"USDTWalletCollectionCell"];
     }
     return _walletCollectionView;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    _itemsArray = @[@[@"Mobi",@"Huobi",@"Atoken",@"Bixin",@"Bitpie",@"Hicoin",@"Coldlar",@"Coincola"],@[@"其他钱包"]];
+    _itemImageArray = @[@[@"me_usdt_mobi",@"me_usdt_huobi",@"me_usdt_atoken",@"me_usdt_bixin",@"me_usdt_bitpie",@"me_usdt_hicoin",@"me_usdt_coldlar",@"me_usdt_coincola"],@[@"me_usdt_otherwallet"]];
     [self setViewHeight:542 fullScreen:NO];
 }
 
@@ -135,7 +139,7 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
     USDTWalletCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"USDTWalletCollectionCell" forIndexPath:indexPath];
-    
+    [cell setCellWithName:_itemsArray[indexPath.section][indexPath.row] imageName:_itemImageArray[indexPath.section][indexPath.row]];
     return cell;
 }
 

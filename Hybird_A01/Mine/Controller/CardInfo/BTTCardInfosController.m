@@ -120,8 +120,7 @@
                 [alertVC addAction:action2];
                 
                 UIAlertAction *action4 = [UIAlertAction actionWithTitle:@"USDT钱包" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                    BTTAddUSDTController *vc = [BTTAddUSDTController new];
-                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                    [self addUSDT];
                 }];
                 [action4 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
                 [alertVC addAction:action4];
@@ -145,8 +144,7 @@
             }
                 break;
             case BTTCanAddCardTypeUSDT:{
-                //TODO:
-                    [self addBTC];
+                [self addUSDT];
                 }
                     break;
             default:
@@ -274,6 +272,35 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
+- (void)addUSDT
+{
+    if (self.bankList.count > 0) {
+        if ([IVNetwork userInfo].isPhoneBinded) {
+            BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
+            vc.verifyType = BTTSafeVerifyTypeMobileAddBTCard;
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+            //2018-11-23 nike说按线上标准直接跳转绑定页面
+//            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
+//            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
+//            [self.navigationController pushViewController:vc animated:YES];
+
+            [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+            BTTBindingMobileController *vc = [BTTBindingMobileController new];
+            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    } else {
+        BTTAddUSDTController *vc = [BTTAddUSDTController new];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+//        BTTAddBTCController *vc = [BTTAddBTCController new];
+//        vc.addCardType = BTTSafeVerifyTypeNormalAddBTCard;
+//        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
 - (void)modifyBtnClickedBankModel:(BTTBankModel *)bankModel
 {
     if ([IVNetwork userInfo].isPhoneBinded) {

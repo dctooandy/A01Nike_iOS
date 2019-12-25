@@ -667,13 +667,13 @@
 		3AFCD7D021AD179600B136C1 /* BTTVideoGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CE21AD179600B136C1 /* BTTVideoGameCell.m */; };
 		3AFCD7D121AD179600B136C1 /* BTTVideoGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_A01.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */; };
+		D3618DB923B329DB00B05019 /* BTTWithDrawUSDTConfirmCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3618DB823B329DB00B05019 /* BTTWithDrawUSDTConfirmCell.m */; };
 		D37F092323B231F100D51425 /* UILabel+LineSapce.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F092223B231F100D51425 /* UILabel+LineSapce.m */; };
 		D37F092723B241AE00D51425 /* CNPayUSDTQRSecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F092523B241AE00D51425 /* CNPayUSDTQRSecondVC.m */; };
 		D37F092823B241AE00D51425 /* CNPayUSDTQRSecondVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D37F092623B241AE00D51425 /* CNPayUSDTQRSecondVC.xib */; };
 		D39B9B6323B1E5E4004EE588 /* CNPayUSDTStep1VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D39B9B6123B1E5E4004EE588 /* CNPayUSDTStep1VC.m */; };
 		D39B9B6423B1E5E4004EE588 /* CNPayUSDTStep1VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39B9B6223B1E5E4004EE588 /* CNPayUSDTStep1VC.xib */; };
 		D3EADBB923B20AAF0079B8F3 /* USDTWalletCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EADBB723B20AAF0079B8F3 /* USDTWalletCollectionCell.m */; };
-		D3EADBBA23B20AAF0079B8F3 /* USDTWalletCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3EADBB823B20AAF0079B8F3 /* USDTWalletCollectionCell.xib */; };
 		D3EADBBE23B21BB80079B8F3 /* CNPayUSDTQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3EADBBC23B21BB80079B8F3 /* CNPayUSDTQRViewController.m */; };
 		D3EADBBF23B21BB80079B8F3 /* CNPayUSDTQRViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3EADBBD23B21BB80079B8F3 /* CNPayUSDTQRViewController.xib */; };
 		D51AD19F21B8FEE5008C633A /* CNPayBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */; };
@@ -1784,6 +1784,8 @@
 		3AFCD7CE21AD179600B136C1 /* BTTVideoGameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGameCell.m; sourceTree = "<group>"; };
 		3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGameCell.xib; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_A01.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3618DB723B329DB00B05019 /* BTTWithDrawUSDTConfirmCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWithDrawUSDTConfirmCell.h; sourceTree = "<group>"; };
+		D3618DB823B329DB00B05019 /* BTTWithDrawUSDTConfirmCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTWithDrawUSDTConfirmCell.m; sourceTree = "<group>"; };
 		D37F092123B231F100D51425 /* UILabel+LineSapce.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+LineSapce.h"; sourceTree = "<group>"; };
 		D37F092223B231F100D51425 /* UILabel+LineSapce.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LineSapce.m"; sourceTree = "<group>"; };
 		D37F092423B241AE00D51425 /* CNPayUSDTQRSecondVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayUSDTQRSecondVC.h; sourceTree = "<group>"; };
@@ -1794,7 +1796,6 @@
 		D39B9B6223B1E5E4004EE588 /* CNPayUSDTStep1VC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNPayUSDTStep1VC.xib; sourceTree = "<group>"; };
 		D3EADBB623B20AAF0079B8F3 /* USDTWalletCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USDTWalletCollectionCell.h; sourceTree = "<group>"; };
 		D3EADBB723B20AAF0079B8F3 /* USDTWalletCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = USDTWalletCollectionCell.m; sourceTree = "<group>"; };
-		D3EADBB823B20AAF0079B8F3 /* USDTWalletCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = USDTWalletCollectionCell.xib; sourceTree = "<group>"; };
 		D3EADBBB23B21BB80079B8F3 /* CNPayUSDTQRViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayUSDTQRViewController.h; sourceTree = "<group>"; };
 		D3EADBBC23B21BB80079B8F3 /* CNPayUSDTQRViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayUSDTQRViewController.m; sourceTree = "<group>"; };
 		D3EADBBD23B21BB80079B8F3 /* CNPayUSDTQRViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNPayUSDTQRViewController.xib; sourceTree = "<group>"; };
@@ -2084,6 +2085,8 @@
 				EA55F37821C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.h */,
 				EA55F37921C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.m */,
 				EA55F37A21C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.xib */,
+				D3618DB723B329DB00B05019 /* BTTWithDrawUSDTConfirmCell.h */,
+				D3618DB823B329DB00B05019 /* BTTWithDrawUSDTConfirmCell.m */,
 			);
 			path = Withdrawal;
 			sourceTree = "<group>";
@@ -3964,7 +3967,6 @@
 				D39B9B6223B1E5E4004EE588 /* CNPayUSDTStep1VC.xib */,
 				D3EADBB623B20AAF0079B8F3 /* USDTWalletCollectionCell.h */,
 				D3EADBB723B20AAF0079B8F3 /* USDTWalletCollectionCell.m */,
-				D3EADBB823B20AAF0079B8F3 /* USDTWalletCollectionCell.xib */,
 				D3EADBBB23B21BB80079B8F3 /* CNPayUSDTQRViewController.h */,
 				D3EADBBC23B21BB80079B8F3 /* CNPayUSDTQRViewController.m */,
 				D3EADBBD23B21BB80079B8F3 /* CNPayUSDTQRViewController.xib */,
@@ -4752,7 +4754,6 @@
 				3A5AE6C622D6E22A0013E8A3 /* nav_link_close@3x.png in Resources */,
 				3A3DF1E7237BA445006129F6 /* BTTHotPromotionCell.xib in Resources */,
 				3AE1EAAC217D65330073A32D /* BTTAccountBlanceHiddenCell.xib in Resources */,
-				D3EADBBA23B20AAF0079B8F3 /* USDTWalletCollectionCell.xib in Resources */,
 				3A5AE69722D6E22A0013E8A3 /* LIVAutoScrollTextView9.png in Resources */,
 				3A5AE71122D6E22B0013E8A3 /* cool_eye.gif in Resources */,
 			);
@@ -5058,6 +5059,7 @@
 				3ADD23622176FFB700FA959A /* BTTLoginAndRegisterViewController.m in Sources */,
 				3A9E4C3A219E509100E7D8C0 /* BTTBaseAnimationPopView.m in Sources */,
 				3AA7893521FFF2580047A372 /* UIView+WebCacheOperation.m in Sources */,
+				D3618DB923B329DB00B05019 /* BTTWithDrawUSDTConfirmCell.m in Sources */,
 				3A9E4C5F219FD8F900E7D8C0 /* BTTDownloadModel.m in Sources */,
 				3AA7892521FFF2580047A372 /* UIImage+MultiFormat.m in Sources */,
 				3AD9CEF0216B3DD900685B43 /* WebViewUserAgaent.m in Sources */,

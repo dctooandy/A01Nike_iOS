@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface USDTWalletCollectionCell : UICollectionViewCell
 
+- (void)setCellWithName:(NSString *)name imageName:(NSString *)imageName;
+
 @end
 
 NS_ASSUME_NONNULL_END
