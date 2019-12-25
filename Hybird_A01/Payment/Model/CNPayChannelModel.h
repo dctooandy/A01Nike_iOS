@@ -51,7 +51,10 @@ typedef NS_ENUM(NSUInteger, CNPayChannel) {
 //    CNPayChannelBankCard, ///< 银行卡
 //    CNPayChannelQQ,     ///< QQ
 //    CNPayChannelJD      ///< 京东
-    CNPayChannelBS   ///< 币商
+    CNPayChannelBS,   ///< 币商
+    
+    ///USDT
+    CNPayChannelUSDT,
     
 };
 

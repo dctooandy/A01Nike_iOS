@@ -76,8 +76,11 @@
             case BTTCanAddCardTypeBank:
                 cell.titleLabel.text = @"添加银行卡";
                 break;
+            case BTTCanAddCardTypeUSDT:
+                cell.titleLabel.text = @"添加USDT钱包";
+                break;
             default:
-                cell.titleLabel.text = @"添加银行卡/比特币钱包";
+                cell.titleLabel.text = @"添加银行卡/比特币钱包/USDT钱包";
                 break;
         }
         return cell;
@@ -94,23 +97,22 @@
     if (indexPath.row == self.bankList.count) {
         switch (self.canAddType) {
             case BTTCanAddCardTypeAll:{
-                UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:@"请选择以下方式" preferredStyle:UIAlertControllerStyleAlert];
-                NSMutableAttributedString *alertControllerMessageStr = [[NSMutableAttributedString alloc] initWithString:@"请选择以下方式"];
-                [alertControllerMessageStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"333333"] range:NSMakeRange(0, 7)];
-                [alertControllerMessageStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 7)];
-                [alertVC setValue:alertControllerMessageStr forKey:@"attributedMessage"];
+                UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:@"请选择以下方式" preferredStyle:UIAlertControllerStyleActionSheet];
                 
-                
-                UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"银行卡" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"银行卡" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     [weakSelf addBankCard];
                 }];
-                [action1 setValue:[UIColor colorWithHexString:@"0066ff"] forKey:@"titleTextColor"];
                 [alertVC addAction:action1];
-                UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"比特币钱包" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"比特币钱包" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     [weakSelf addBTC];
                 }];
-                [action2 setValue:[UIColor colorWithHexString:@"0066ff"] forKey:@"titleTextColor"];
                 [alertVC addAction:action2];
+                
+                UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"USDT钱包" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [weakSelf addBTC];
+                }];
+                [alertVC addAction:action3];
+                
                 [self presentViewController:alertVC animated:YES completion:nil];
             }
                 break;
@@ -122,6 +124,11 @@
                 [self addBTC];
             }
                 break;
+            case BTTCanAddCardTypeUSDT:{
+                //TODO:
+                    [self addBTC];
+                }
+                    break;
             default:
                 break;
         }
