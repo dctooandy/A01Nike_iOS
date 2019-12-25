@@ -15,6 +15,8 @@
 #import "BTTAddBTCController.h"
 #import "BTTBindingMobileController.h"
 #import "BTTUnBindingMobileNoticeController.h"
+#import "BTTAddUSDTController.h"
+
 @interface BTTCardInfosController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, copy) NSArray<BTTBankModel *> *bankList;
@@ -59,7 +61,9 @@
             [[NSUserDefaults standardUserDefaults] setValue:model.customer_bank_id forKey:BTTSelectedBankId];
             [[NSUserDefaults standardUserDefaults] synchronize];
             if (button.tag == 6005) {//修改
-                [strongSelf modifyBtnClickedBankModel:model];
+                BTTAddUSDTController *vc = [BTTAddUSDTController new];
+                [self.navigationController pushViewController:vc animated:YES];
+//                [strongSelf modifyBtnClickedBankModel:model];
             } else if(button.tag == 6006) {//删除
                 [strongSelf deleteBtnClicked];
             } else if(button.tag == 6007) {//设置默认卡
@@ -120,6 +124,7 @@
                 break;
             case BTTCanAddCardTypeBTC:{
                 [self addBTC];
+                
             }
                 break;
             default:
