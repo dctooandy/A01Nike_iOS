@@ -21,6 +21,7 @@
 #import "BTTPayBQAliStep2VC.h"
 #import "CNPayUSDTStep1VC.h"
 #import "CNPayUSDTQRViewController.h"
+#import "CNPayUSDTQRSecondVC.h"
 
 @interface CNPayContainerVC ()
 
@@ -129,7 +130,8 @@
         case CNPaymentWechatApp:
         case CNPaymentQQQR: {
 //            [viewControllers addObjectsFromArray:[self QRPay:payment]];
-            CNPayUSDTStep1VC *vc1 = [[CNPayUSDTStep1VC alloc]init];
+//            CNPayUSDTStep1VC *vc1 = [[CNPayUSDTStep1VC alloc]init];
+            CNPayUSDTQRSecondVC *vc1 = [[CNPayUSDTQRSecondVC alloc]init];
             [viewControllers addObject:vc1];
         }
             break;

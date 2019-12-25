@@ -70,6 +70,8 @@
             return @"云闪付扫码";
         case CNPaymentBS:
             return @"币商充值";
+        case CNPaymentUSDT:
+            return @"泰达币-USDT";
             
     }
 }
@@ -104,6 +106,8 @@
             return @"me_YSF";
         case CNPaymentBS:
             return @"me_bishang";
+        case CNPaymentUSDT:
+            return @"me_usdt";
         default:
             return nil;
     }
@@ -125,6 +129,7 @@
         case CNPaymentJDQR:
         case CNPaymentCard:
         case CNPaymentYSFQR:
+        case CNPaymentUSDT:
         case CNPaymentWechatBarCode:
             return @[@(100), @(1000), @(2000), @(3000), @(5000)];
             break;

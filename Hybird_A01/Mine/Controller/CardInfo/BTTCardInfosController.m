@@ -78,8 +78,11 @@
             case BTTCanAddCardTypeBank:
                 cell.titleLabel.text = @"添加银行卡";
                 break;
+            case BTTCanAddCardTypeUSDT:
+                cell.titleLabel.text = @"添加USDT钱包";
+                break;
             default:
-                cell.titleLabel.text = @"添加银行卡/比特币钱包";
+                cell.titleLabel.text = @"添加银行卡/比特币钱包/USDT钱包";
                 break;
         }
         return cell;
@@ -97,6 +100,7 @@
         switch (self.canAddType) {
             case BTTCanAddCardTypeAll:{
                 UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:@"请选择以下方式" preferredStyle:UIAlertControllerStyleActionSheet];
+
                 NSMutableAttributedString *alertControllerMessageStr = [[NSMutableAttributedString alloc] initWithString:@"请选择以下方式"];
                 [alertControllerMessageStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"333333"] range:NSMakeRange(0, 7)];
                 [alertControllerMessageStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 7)];
@@ -106,10 +110,12 @@
                     [weakSelf addBankCard];
                 }];
                 [action1 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
+            
                 [alertVC addAction:action1];
-                UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"比特币钱包" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"比特币钱包" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     [weakSelf addBTC];
                 }];
+
                 [action2 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
                 [alertVC addAction:action2];
                 
@@ -124,6 +130,8 @@
                 }];
                 [action3 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
                 [alertVC addAction:action3];
+                
+
                 [self presentViewController:alertVC animated:YES completion:nil];
             }
                 break;
@@ -136,6 +144,11 @@
                 
             }
                 break;
+            case BTTCanAddCardTypeUSDT:{
+                //TODO:
+                    [self addBTC];
+                }
+                    break;
             default:
                 break;
         }

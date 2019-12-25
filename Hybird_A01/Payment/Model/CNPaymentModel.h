@@ -46,7 +46,9 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
     CNPaymentBQWechat,
     CNPaymentBQAli,
     
-    CNPaymentBS ///< 币商
+    CNPaymentBS, ///< 币商
+    
+    CNPaymentUSDT
 };
 
 @interface CNPaymentModel : JSONModel
