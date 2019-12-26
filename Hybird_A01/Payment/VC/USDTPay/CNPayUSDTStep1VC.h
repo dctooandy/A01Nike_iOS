@@ -11,5 +11,7 @@
 
 @interface CNPayUSDTStep1VC : CNPayBaseVC
 
+@property (nonatomic, strong) NSArray<CNPaymentModel *> *payments;
+
 @end
 

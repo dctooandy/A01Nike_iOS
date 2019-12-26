@@ -121,5 +121,28 @@ extern NSInteger const kPayTypeTotalCount;
  */
 + (void)paymentCompleteUserName:(NSString *)name preSet:(NSString *)message completeHandler:(IVRequestCallBack)completeHandler;
 
+/// 获取USDT汇率
+/// @param completeHandler 接口回调
++ (void)getUSDTRateWithAmount:(NSString *)amount tradeType:(NSString *)tradeType target:(NSString *)target completeHandler:(IVRequestCallBack)completeHandler;
+
+
+/// 获取USDT支付方式
+/// @param completeHandler 接口回调
++ (void)getUsdtPayTypeWithCompleteHandler:(IVRequestCallBack)completeHandler;
+
+
+/// usdt线上银行普通支付
+/// @param type 类型 31-MOBI 其他25
+/// @param amount 金额
+/// @param completeHandler 接口回调
++ (void)usdtPayOnlineHandleWithType:(NSString *)type amount:(NSString *)amount completeHandler:(IVRequestCallBack)completeHandler;
+
+/// usdt手工银行普通支付
+/// @param bankAccountNo 银行账号
+/// @param amount 金额
+/// @param remark 备注
+/// @param completeHandler 接口回调
++ (void)usdtManualPayHandleWithBankAccountNo:(NSString *)bankAccountNo amount:(NSString *)amount remark:(NSString *)remark completeHandler:(IVRequestCallBack)completeHandler;
+
 @end
 

@@ -22,20 +22,20 @@
         UILabel *rateLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 15, 220, 12)];
         rateLabel.font = [UIFont systemFontOfSize:12.0];
         rateLabel.textColor = COLOR_RGBA(129, 135, 145, 1);
-        rateLabel.text = @"（当前参考汇率：1RMB= 0.142USDT）";
+        rateLabel.text = @"（当前参考汇率：1CNY= 0.142USDT）";
         [self.contentView addSubview:rateLabel];
         _ratelabel = rateLabel;
         
-        UIButton *changeTypeBtn = [[UIButton alloc]init];
-        changeTypeBtn.frame = CGRectMake(SCREEN_WIDTH-100, 0, 85, 45);
-        changeTypeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        [changeTypeBtn setTitleColor:COLOR_RGBA(219, 189, 133, 1) forState:UIControlStateNormal];
-        [changeTypeBtn setImage:[UIImage imageNamed:@"withDraw_switch"] forState:0];
-        [changeTypeBtn setTitle:@" 按数量取款" forState:0];
-        [changeTypeBtn setTitleColor:[UIColor whiteColor] forState:0];
-        [changeTypeBtn addTarget:self action:@selector(changeTypeBtn_click:) forControlEvents:UIControlEventTouchUpInside];
-        [self.contentView addSubview:changeTypeBtn];
-        _changeTypeBtn = changeTypeBtn;
+//        UIButton *changeTypeBtn = [[UIButton alloc]init];
+//        changeTypeBtn.frame = CGRectMake(SCREEN_WIDTH-100, 0, 85, 45);
+//        changeTypeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+//        [changeTypeBtn setTitleColor:COLOR_RGBA(219, 189, 133, 1) forState:UIControlStateNormal];
+//        [changeTypeBtn setImage:[UIImage imageNamed:@"withDraw_switch"] forState:0];
+//        [changeTypeBtn setTitle:@" 按数量取款" forState:0];
+//        [changeTypeBtn setTitleColor:[UIColor whiteColor] forState:0];
+//        [changeTypeBtn addTarget:self action:@selector(changeTypeBtn_click:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.contentView addSubview:changeTypeBtn];
+//        _changeTypeBtn = changeTypeBtn;
         
         UIButton *confirmBtn = [[UIButton alloc]init];
         confirmBtn.frame = CGRectMake(15, 52, SCREEN_WIDTH-30, 44);

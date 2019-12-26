@@ -33,6 +33,14 @@ extern NSString * const kPaymentCompleteInfo;
 /// 点卡提交订单
 extern NSString * const kPaymentCardPay;
 
+extern NSString * const kUSDTRate;
+
+extern NSString * const kPaymentUSDTType;
+
+extern NSString * const kPaymentUSDTPay;
+
+extern NSString * const kPaymentUSDTManualPay;
+
 #define COLOR_HEX(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8))/255.0    \
 blue:((float)(rgbValue & 0xFF))/255.0             \

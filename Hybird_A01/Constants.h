@@ -36,7 +36,10 @@ typedef enum {
     BTTCanAddCardTypeAll,           // 银行卡和比特币钱包
     BTTCanAddCardTypeBank,          //  只能添加银行卡
     BTTCanAddCardTypeBTC,           // 只能添加比特币钱包
-    BTTCanAddCardTypeUSDT,
+    BTTCanAddCardTypeUSDT,          // 只能添加USDT
+    BTTCanAddCardTypeBankORBTC,     // 添加银行卡或者比特币
+    BTTCanAddCardTypeBankORUSDT,    // 添加银行卡或者USDT
+    BTTCanAddCardTypeBTCORUSDT,     // 添加USDT或者比特币
 }BTTCanAddCardType; // 能添加卡的类型
 //typedef enum {
 //    BTTEmmailCodeTypeBind,           // 绑定邮箱

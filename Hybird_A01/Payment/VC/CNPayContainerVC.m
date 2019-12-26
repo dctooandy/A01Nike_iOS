@@ -128,9 +128,7 @@
         case CNPaymentJDApp:
         case CNPaymentWechatApp:
         case CNPaymentQQQR: {
-            CNPayUSDTStep1VC *vc1 = [[CNPayUSDTStep1VC alloc]init];
-            CNPayUSDTQRSecondVC *vc2 = [[CNPayUSDTQRSecondVC alloc]init];
-            [viewControllers addObjectsFromArray:@[vc1,vc2]];
+            [viewControllers addObjectsFromArray:[self QRPay:payment]];
         }
             break;
 
@@ -150,6 +148,13 @@
         case CNPaymentBS: {
 
             [viewControllers addObjectsFromArray:[self BQPay:payment]];
+        }
+            break;
+        case CNPaymentUSDT:{
+            CNPayUSDTStep1VC *vc1 = [[CNPayUSDTStep1VC alloc]init];
+            vc1.payments = self.payments;
+            CNPayUSDTQRSecondVC *vc2 = [[CNPayUSDTQRSecondVC alloc]init];
+            [viewControllers addObjectsFromArray:@[vc1,vc2]];
         }
             break;
     }

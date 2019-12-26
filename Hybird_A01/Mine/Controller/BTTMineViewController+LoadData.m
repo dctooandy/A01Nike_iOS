@@ -145,14 +145,14 @@
                     [self.bigDataSoure addObject:mainModel];
                 }
                 
-//                CNPaymentModel *usdt = payments[CNPaymentUSDT];
-//                if (usdt.isAvailable) {
+                CNPaymentModel *usdt = payments[CNPaymentUSDT];
+                if (usdt.isAvailable) {
                     BTTMeMainModel *mainModel = [BTTMeMainModel new];
                     mainModel.name = @"泰达币-USDT";
                     mainModel.iconName = @"me_usdt";
                     mainModel.paymentType = CNPayChannelUSDT;
                     [self.bigDataSoure addObject:mainModel];
-//                }
+                }
                 
                 CNPaymentModel *BQFast = payments[CNPaymentBQFast];
                 if (BQFast.isAvailable) {
@@ -285,14 +285,14 @@
                     [self.bigDataSoure addObject:mainModel];
                 }
                 
-//                CNPaymentModel *usdt = payments[CNPaymentUSDT];
-//                if (usdt.isAvailable) {
-//                    BTTMeMainModel *mainModel = [BTTMeMainModel new];
-//                    mainModel.name = @"泰达币-USDT";
-//                    mainModel.iconName = @"me_usdt";
-//                    mainModel.paymentType = CNPayChannelUSDT;
-//                    [self.bigDataSoure addObject:mainModel];
-//                }
+                CNPaymentModel *usdt = payments[CNPaymentUSDT];
+                if (usdt.isAvailable) {
+                    BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                    mainModel.name = @"泰达币-USDT";
+                    mainModel.iconName = @"me_usdt";
+                    mainModel.paymentType = CNPayChannelUSDT;
+                    [self.bigDataSoure addObject:mainModel];
+                }
                 
                 CNPaymentModel *hand = payments[CNPaymentDeposit];
                 if (hand.isAvailable) {

@@ -137,6 +137,7 @@
         
         NSArray *objArray = (NSArray *)obj;
         NSMutableArray<CNPaymentModel *> *payments = [NSMutableArray array];
+        NSMutableArray *usdtArray = [[NSMutableArray alloc]init];
         
         for (int i = 0; i< kPayTypeTotalCount; i++) {
             /// 数据解析
@@ -146,8 +147,19 @@
                 model = [[CNPaymentModel alloc] init];
                 model.isAvailable = NO;
             }
-            model.paymentType = (CNPaymentType)i;
-            [payments addObject:model];
+            if (i<21) {
+                model.paymentType = (CNPaymentType)i;
+                [payments addObject:model];
+            }else{
+                [usdtArray addObject:objArray[i]];
+                if (i==kPayTypeTotalCount-1) {
+                    model = [[CNPaymentModel alloc]init];
+                    model.paymentType = CNPaymentUSDT;
+                    model.isAvailable = YES;
+                    model.usdtArray = usdtArray;
+                    [payments addObject:model];
+                }
+            }
         }
         
         /// 数据拼接处理
@@ -292,7 +304,7 @@
     // USDT
     CNPayChannelModel *USDT = [[CNPayChannelModel alloc]init];
     USDT.payChannel = CNPayChannelUSDT;
-    USDT.payments = [[NSArray alloc]initWithObjects:payments[CNPayChannelUSDT], nil];
+    USDT.payments = [[NSArray alloc]initWithObjects:payments.lastObject, nil];
     
     
     CNPayChannelModel *wap = [[CNPayChannelModel alloc] init];
@@ -329,7 +341,7 @@
     // 没开启的渠道不显示
     for (CNPayChannelModel *channel in array) {
         NSLog(@"%@",channel.channelName);
-        if (channel.isAvailable) {
+        if (channel.isAvailable || channel.payChannel==CNPayChannelUSDT) {
             [channels addObject:channel];
             if (channel.payments.count == 1) {
                 continue;
@@ -399,6 +411,8 @@
     BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
     if ([channelModel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {
         self.title = @"支付宝/微信/QQ/京东WAP";
+    }else if (channelModel.payChannel == CNPayChannelUSDT){
+        self.title = @"泰达币-USDT";
     } else {
         self.title = channelModel.channelName;
     }
@@ -435,12 +449,19 @@
     if ([channel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {
         cell.titleLb.text = @"支付宝/微信/QQ/京东WAP";
         cell.titleLb.font = [UIFont boldSystemFontOfSize:11];
+    } else if (channel.payChannel==CNPayChannelUSDT){
+        cell.titleLb.text = @"泰达币-USDT";
+        cell.titleLb.font = [UIFont boldSystemFontOfSize:13];
     } else {
         cell.titleLb.text = channel.channelName;
         cell.titleLb.font = [UIFont boldSystemFontOfSize:13];
     }
     
-    cell.channelIV.image = [UIImage imageNamed:channel.selectedIcon];
+    if (channel.payChannel==CNPayChannelUSDT){
+        cell.channelIV.image = [UIImage imageNamed:@"me_usdt"];
+    }else{
+        cell.channelIV.image = [UIImage imageNamed:channel.selectedIcon];
+    }
     
     // 默认选中第一个可以支付的渠道
     if (indexPath.row == _currentSelectedIndex) {

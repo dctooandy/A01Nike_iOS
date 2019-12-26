@@ -83,7 +83,7 @@
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf submitWithDraw];
         };
-//        BTTWithDrawUSDTConfirmCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell" forIndexPath:indexPath];
+//        BTTWithDrawUSDTConfirlmCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell" forIndexPath:indexPath];
         return cell;
     }
     if (self.betInfoModel.status) {

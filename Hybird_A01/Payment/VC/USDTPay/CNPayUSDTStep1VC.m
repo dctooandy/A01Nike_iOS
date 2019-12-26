@@ -9,6 +9,7 @@
 #import "CNPayUSDTStep1VC.h"
 #import "CNPayConstant.h"
 #import "USDTWalletCollectionCell.h"
+#import "CNPayUSDTRateModel.h"
 
 @interface CNPayUSDTStep1VC ()<UITextFieldDelegate,UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *walletView;
@@ -25,9 +26,14 @@
 @property (weak, nonatomic) IBOutlet UIImageView *addressCopyImg;
 @property (weak, nonatomic) IBOutlet UILabel *walletAddressLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *qrCodeImg;
+@property (weak, nonatomic) IBOutlet UILabel *noteLabel;
+@property (weak, nonatomic) IBOutlet UILabel *scanTypeLabel;
 @property (nonatomic, strong) UICollectionView *walletCollectionView;
 @property (nonatomic, strong) NSArray *itemsArray;
 @property (nonatomic, strong) NSArray *itemImageArray;
+@property (nonatomic, strong) NSArray *itemDataArray;
+@property (nonatomic, assign) CGFloat usdtRate;
+@property (nonatomic, assign) NSInteger selectedIndex;
 
 @end
 
@@ -60,16 +66,61 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    _selectedIndex = 0;
     _itemsArray = @[@[@"Mobi",@"Huobi",@"Atoken",@"Bixin",@"Bitpie",@"Hicoin",@"Coldlar",@"Coincola"],@[@"其他钱包"]];
+    _itemDataArray = [[NSArray alloc]initWithArray:self.payments.firstObject.usdtArray];
     _itemImageArray = @[@[@"me_usdt_mobi",@"me_usdt_huobi",@"me_usdt_atoken",@"me_usdt_bixin",@"me_usdt_bitpie",@"me_usdt_hicoin",@"me_usdt_coldlar",@"me_usdt_coincola"],@[@"me_usdt_otherwallet"]];
-    [self setViewHeight:628 fullScreen:NO];
+    [self setViewHeight:676 fullScreen:NO];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupView];
     [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+    [self requestUSDTRate];
 }
+
+- (void)requestUSDTRate{
+    [self showLoading];
+    [CNPayRequestManager getUSDTRateWithAmount:@"1" tradeType:@"01" target:@"cny" completeHandler:^(IVRequestResultModel *result, id response) {
+        [self hideLoading];
+        if (![result.data isKindOfClass:[NSDictionary class]]) {
+            // 后台返回类型不一，全部转成字符串
+            [self showError:[NSString stringWithFormat:@"%@", result.message]];
+            return;
+        }
+        
+        NSError *error;
+        CNPayUSDTRateModel *rateModel = [[CNPayUSDTRateModel alloc] initWithDictionary:result.data error:&error];
+        if (error && !rateModel) {
+            [self showError:@"操作失败！请联系客户，或者稍后重试!"];
+            return;
+        }
+        self.usdtRate = [rateModel.rate floatValue];
+        NSLog(@"%.4f",self.usdtRate);
+        [self handleRateLabelShowWithRate:rateModel.rate];
+    }];
+}
+
+- (void)handleRateLabelShowWithRate:(NSString *)rate{
+    NSString *str = [NSString stringWithFormat:@"当前参考汇率：1 USDT=%@ 人民币，实际请以到账时为准",rate];
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
+    
+    [attrStr addAttribute:NSForegroundColorAttributeName
+    value:[UIColor whiteColor]
+    range:NSMakeRange(7, 17)];
+    
+    _exchangeRateLabel.attributedText = attrStr;
+    
+    NSString *elseStr = [NSString stringWithFormat:@"请复制博天堂USDT钱包地址，或扫描博天堂钱包二维码进行充值\n当前参考汇率：1 USDT=%@ 人民币，实际请以到账时为准",rate];
+    NSMutableAttributedString *elseAttrStr = [[NSMutableAttributedString alloc] initWithString:elseStr];
+
+    [elseAttrStr addAttribute:NSForegroundColorAttributeName
+    value:[UIColor whiteColor]
+    range:NSMakeRange(38, 17)];
+    _elseRateLabel.attributedText = elseAttrStr;
+}
+
 
 - (void)setupView{
     self.view.backgroundColor = kBlackBackgroundColor;
@@ -119,14 +170,7 @@
     [sepratorView.layer addSublayer:solidLayer0];
     [_saveView addSubview:sepratorView];
     
-    NSString *str = @"当前参考汇率：1 USDT= 7.0018人民币，实际请以到账时为准";
-    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
-    
-    [attrStr addAttribute:NSForegroundColorAttributeName
-    value:[UIColor whiteColor]
-    range:NSMakeRange(7, 17)];
-    
-    _exchangeRateLabel.attributedText = attrStr;
+    [self handleRateLabelShowWithRate:@"7.0000"];
         
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"请输入充值金额" attributes:
     @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
@@ -134,14 +178,6 @@
          }];
     _usdtInputField.attributedPlaceholder = attrString;
     _usdtInputField.delegate = self;
-    
-    NSString *elseStr = @"请复制博天堂USDT钱包地址，或扫描博天堂钱包二维码进行充值\n当前参考汇率：1 USDT=7.0018人民币，实际请以到账时为准";
-    NSMutableAttributedString *elseAttrStr = [[NSMutableAttributedString alloc] initWithString:elseStr];
-
-    [elseAttrStr addAttribute:NSForegroundColorAttributeName
-    value:[UIColor whiteColor]
-    range:NSMakeRange(40, 13)];
-    _elseRateLabel.attributedText = elseAttrStr;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addressCopyBtn_click:)];
     [_addressCopyImg addGestureRecognizer:tap];
@@ -153,15 +189,41 @@
     [self showSuccess:@"已复制到剪切板"];
 }
 - (IBAction)nextBtn_click:(id)sender {
+    NSInteger type = 25;
+    if (self.selectedIndex==0) {
+        type = 31;
+    }
+    if ([_usdtInputField.text integerValue]==0||_usdtInputField.text.length==0) {
+        [self showError:@"请输入需要存款的金额"];
+    }else{
+        [self usdtOnlinePayHanlerWithType:type];
+    }
 }
+
+- (void)usdtOnlinePayHanlerWithType:(NSInteger)type{
+    [self showLoading];
+    weakSelf(weakSelf)
+    [CNPayRequestManager usdtPayOnlineHandleWithType:[NSString stringWithFormat:@"%ld",(long)type] amount:_usdtInputField.text completeHandler:^(IVRequestResultModel *result, id response) {
+        [self hideLoading];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (result.status) {
+            [strongSelf paySucessHandler:result repay:nil];
+        }else{
+            [self showError:result.message];
+        }
+    }];
+}
+
 - (IBAction)finishedBtn_click:(id)sender {
+    [[NSUserDefaults standardUserDefaults]setObject:_noteLabel.text forKey:@"manual_usdt_note"];
+    [[NSUserDefaults standardUserDefaults]setFloat:self.usdtRate forKey:@"manual_usdt_rate"];
     [self goToStep:1];
 }
 
 - (IBAction)ustdFieldDidChange:(id)sender {
     if (_usdtInputField.text.length>0) {
-        long rmbCash = [_usdtInputField.text integerValue] * 7;
-        _rmbLabel.text = [NSString stringWithFormat:@"%ld",rmbCash];
+        CGFloat rmbCash = [_usdtInputField.text integerValue] * self.usdtRate;
+        _rmbLabel.text = [NSString stringWithFormat:@"%.2f",rmbCash];
     }else{
         _rmbLabel.text = @"0";
     }
@@ -180,17 +242,36 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
     if (indexPath.section==0) {
-        if (indexPath.row==1) {
-            _elseWalletView.hidden = NO;
-            _normalWalletView.hidden = YES;
-        }else{
+        _selectedIndex = indexPath.row;
+        CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray[indexPath.row] error:nil];
+        if (model.manual==0) {
             _elseWalletView.hidden = YES;
             _normalWalletView.hidden = NO;
+        }else{
+            _walletAddressLabel.text = model.bank_account_no;
+            _noteLabel.text = [NSString stringWithFormat:@"备注：%@",model.remark];
+            _qrCodeImg.image = [PublicMethod QRCodeMethod:model.bank_account_no];
+            _scanTypeLabel.text = [NSString stringWithFormat:@"请使用%@扫码充值",_itemsArray[indexPath.section][indexPath.row]];
+            _elseWalletView.hidden = NO;
+            _normalWalletView.hidden = YES;
         }
+        
     }else{
-        _elseWalletView.hidden = NO;
-        _normalWalletView.hidden = YES;
+        _selectedIndex = 8;
+        CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray[8] error:nil];
+        if (model.manual==0) {
+            _elseWalletView.hidden = YES;
+            _normalWalletView.hidden = NO;
+        }else{
+            _walletAddressLabel.text = model.bank_account_no;
+            _noteLabel.text = [NSString stringWithFormat:@"备注：%@",model.remark];
+            _qrCodeImg.image = [PublicMethod QRCodeMethod:model.bank_account_no];
+            _scanTypeLabel.text = [NSString stringWithFormat:@"请使用%@扫码充值",_itemsArray[indexPath.section][indexPath.row]];
+            _elseWalletView.hidden = NO;
+            _normalWalletView.hidden = YES;
+        }
     }
 }
 
@@ -216,7 +297,7 @@
     noticeLabel.text = indexPath.section==0? @"同钱包转账5分钟即可到账" : @"跨行钱包转账即跨行操作，需以实际到账时间为准";
     [headView addSubview:noticeLabel];
         
-        return headView;
+    return headView;
 }
 
 

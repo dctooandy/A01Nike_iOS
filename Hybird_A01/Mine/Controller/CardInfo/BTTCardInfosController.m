@@ -81,6 +81,15 @@
             case BTTCanAddCardTypeUSDT:
                 cell.titleLabel.text = @"添加USDT钱包";
                 break;
+            case BTTCanAddCardTypeBTCORUSDT:
+                cell.titleLabel.text = @"添加比特币钱包/USDT钱包";
+                break;
+            case BTTCanAddCardTypeBankORUSDT:
+                cell.titleLabel.text = @"添加银行卡/USDT钱包";
+                break;
+            case BTTCanAddCardTypeBankORBTC:
+                cell.titleLabel.text = @"添加银行卡/比特币钱包";
+                break;
             default:
                 cell.titleLabel.text = @"添加银行卡/比特币钱包/USDT钱包";
                 break;
@@ -95,43 +104,10 @@
         return;
     }
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    weakSelf(weakSelf)
     if (indexPath.row == self.bankList.count) {
         switch (self.canAddType) {
             case BTTCanAddCardTypeAll:{
-                UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:@"请选择以下方式" preferredStyle:UIAlertControllerStyleActionSheet];
-
-                NSMutableAttributedString *alertControllerMessageStr = [[NSMutableAttributedString alloc] initWithString:@"请选择以下方式"];
-                [alertControllerMessageStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"333333"] range:NSMakeRange(0, 7)];
-                [alertControllerMessageStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 7)];
-                [alertVC setValue:alertControllerMessageStr forKey:@"attributedMessage"];
-                
-                UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"银行卡" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                    [weakSelf addBankCard];
-                }];
-                [action1 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
-            
-                [alertVC addAction:action1];
-                UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"比特币钱包" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                    [weakSelf addBTC];
-                }];
-
-                [action2 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
-                [alertVC addAction:action2];
-                
-                UIAlertAction *action4 = [UIAlertAction actionWithTitle:@"USDT钱包" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                    [self addUSDT];
-                }];
-                [action4 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
-                [alertVC addAction:action4];
-                
-                UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                }];
-                [action3 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
-                [alertVC addAction:action3];
-                
-
-                [self presentViewController:alertVC animated:YES completion:nil];
+                [self showCanAddSheetWithCard:YES btc:YES usdt:YES];
             }
                 break;
             case BTTCanAddCardTypeBank:{
@@ -145,14 +121,78 @@
                 break;
             case BTTCanAddCardTypeUSDT:{
                 [self addUSDT];
-                }
-                    break;
+            }
+                break;
+            case BTTCanAddCardTypeBankORBTC:{
+                [self showCanAddSheetWithCard:YES btc:YES usdt:NO];
+            }
+                break;
+            case BTTCanAddCardTypeBankORUSDT:{
+                [self showCanAddSheetWithCard:YES btc:NO usdt:YES];
+            }
+                break;
+            case BTTCanAddCardTypeBTCORUSDT:{
+                [self showCanAddSheetWithCard:NO btc:YES usdt:YES];
+            }
+                break;
             default:
                 break;
         }
         
         
     }
+}
+
+- (void)showCanAddSheetWithCard:(BOOL)card btc:(BOOL)btc usdt:(BOOL)usdt{
+    weakSelf(weakSelf)
+    
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:@"请选择以下方式" preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    NSMutableAttributedString *alertControllerMessageStr = [[NSMutableAttributedString alloc] initWithString:@"请选择以下方式"];
+    [alertControllerMessageStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"333333"] range:NSMakeRange(0, 7)];
+    [alertControllerMessageStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 7)];
+    [alertVC setValue:alertControllerMessageStr forKey:@"attributedMessage"];
+    
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"银行卡" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [weakSelf addBankCard];
+    }];
+    [action1 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
+    
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"比特币钱包" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [weakSelf addBTC];
+    }];
+    
+    [action2 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
+    
+    UIAlertAction *action4 = [UIAlertAction actionWithTitle:@"USDT钱包" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [weakSelf addUSDT];
+    }];
+    [action4 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
+    
+    UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [action3 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
+    
+    if (card&&btc&&usdt) {
+        [alertVC addAction:action1];
+        [alertVC addAction:action2];
+        [alertVC addAction:action4];
+        [alertVC addAction:action3];
+    }else if (!card&&btc&&usdt){
+        [alertVC addAction:action2];
+        [alertVC addAction:action4];
+        [alertVC addAction:action3];
+    }else if (card&&!btc&&usdt){
+        [alertVC addAction:action1];
+        [alertVC addAction:action4];
+        [alertVC addAction:action3];
+    }else if (card&&btc&&!usdt){
+        [alertVC addAction:action1];
+        [alertVC addAction:action2];
+        [alertVC addAction:action3];
+    }
+    
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource
@@ -232,9 +272,9 @@
             [self.navigationController pushViewController:vc animated:YES];
         } else {
             //2018-11-23 nike说按线上标准直接跳转绑定页面
-//            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
-//            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBankCard;
-//            [self.navigationController pushViewController:vc animated:YES];
+            //            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
+            //            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBankCard;
+            //            [self.navigationController pushViewController:vc animated:YES];
             [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
             BTTBindingMobileController *vc = [BTTBindingMobileController new];
             vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBankCard;
@@ -257,10 +297,10 @@
             [self.navigationController pushViewController:vc animated:YES];
         } else {
             //2018-11-23 nike说按线上标准直接跳转绑定页面
-//            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
-//            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
-//            [self.navigationController pushViewController:vc animated:YES];
-
+            //            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
+            //            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
+            //            [self.navigationController pushViewController:vc animated:YES];
+            
             [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
             BTTBindingMobileController *vc = [BTTBindingMobileController new];
             vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
@@ -282,10 +322,10 @@
             [self.navigationController pushViewController:vc animated:YES];
         } else {
             //2018-11-23 nike说按线上标准直接跳转绑定页面
-//            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
-//            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
-//            [self.navigationController pushViewController:vc animated:YES];
-
+            //            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
+            //            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
+            //            [self.navigationController pushViewController:vc animated:YES];
+            
             [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
             BTTBindingMobileController *vc = [BTTBindingMobileController new];
             vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
@@ -295,26 +335,26 @@
         BTTAddUSDTController *vc = [BTTAddUSDTController new];
         [self.navigationController pushViewController:vc animated:YES];
         
-//        BTTAddBTCController *vc = [BTTAddBTCController new];
-//        vc.addCardType = BTTSafeVerifyTypeNormalAddBTCard;
-//        [self.navigationController pushViewController:vc animated:YES];
+        //        BTTAddBTCController *vc = [BTTAddBTCController new];
+        //        vc.addCardType = BTTSafeVerifyTypeNormalAddBTCard;
+        //        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
 - (void)modifyBtnClickedBankModel:(BTTBankModel *)bankModel
 {
     if ([IVNetwork userInfo].isPhoneBinded) {
-//        BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-//        vc.mobileCodeType = BTTSafeVerifyTypeMobileChangeBankCard;
+        //        BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
+        //        vc.mobileCodeType = BTTSafeVerifyTypeMobileChangeBankCard;
         BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
         vc.verifyType = BTTSafeVerifyTypeMobileChangeBankCard;
         vc.bankModel = bankModel;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         //2018-11-23 nike说按线上标准直接跳转绑定页面
-//        BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
-//        vc.mobileCodeType = BTTSafeVerifyTypeMobileBindChangeBankCard;
-//        [self.navigationController pushViewController:vc animated:YES];
+        //        BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
+        //        vc.mobileCodeType = BTTSafeVerifyTypeMobileBindChangeBankCard;
+        //        [self.navigationController pushViewController:vc animated:YES];
         
         [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
         BTTBindingMobileController *vc = [BTTBindingMobileController new];
@@ -345,9 +385,9 @@
             [weakSelf.navigationController pushViewController:vc animated:YES];
         } else {
             //2018-11-23 nike说按线上标准直接跳转绑定页面
-//            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
-//            vc.mobileCodeType = selectModel.isBTC ? BTTSafeVerifyTypeMobileBindDelBTCard : BTTSafeVerifyTypeMobileBindDelBankCard;
-//            [weakSelf.navigationController pushViewController:vc animated:YES];
+            //            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
+            //            vc.mobileCodeType = selectModel.isBTC ? BTTSafeVerifyTypeMobileBindDelBTCard : BTTSafeVerifyTypeMobileBindDelBankCard;
+            //            [weakSelf.navigationController pushViewController:vc animated:YES];
             
             [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
             BTTBindingMobileController *vc = [BTTBindingMobileController new];
@@ -396,10 +436,15 @@
         model.isBTC ? btcCardCount++ : bankCardCount++;
     }
     if (btcCardCount == 1) {
-        return BTTCanAddCardTypeBank;
+        if (bankCardCount < 3) {
+            return BTTCanAddCardTypeBankORUSDT;
+        }else{
+            return BTTCanAddCardTypeUSDT;
+        }
+        
     }
     if (bankCardCount == 3) {
-        return BTTCanAddCardTypeBTC;
+        return BTTCanAddCardTypeBTCORUSDT;
     }
     return BTTCanAddCardTypeAll;
 }

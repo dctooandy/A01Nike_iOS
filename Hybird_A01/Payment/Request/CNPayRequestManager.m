@@ -32,7 +32,7 @@
 
 #pragma mark - ========================* Payment *===========================================
 /// 预设支付方式总个数
-NSInteger const kPayTypeTotalCount = 21;
+NSInteger const kPayTypeTotalCount = 30;
 
 + (void)queryAllChannelCompleteHandler:(IVRequestCallBack)completeHandler {
     
@@ -44,7 +44,8 @@ NSInteger const kPayTypeTotalCount = 21;
     NSArray *channelArr = @[@"online-1",@"card",@"deposit",@"online-20",@"online-23",@"online-41",
                             @"online-8",@"online-9",@"online-11",@"online-27",@"online-19",@"online-17",
                             @"online-5",@"online-6",@"online-7",@"online-15",@"online-16",
-                            @"bqpaytype-0",@"bqpaytype-1",@"bqpaytype-2",@"biMerchant"];
+                            @"bqpaytype-0",@"bqpaytype-1",@"bqpaytype-2",@"biMerchant",
+                            @"MobiPay",@"HuobiPay",@"AtokenPay",@"BixinPay",@"BitpiePay",@"HicoinPay",@"ColdlarPay",@"CoincolaPay",@"OtherWalletPay"];
     params[@"list"] = [channelArr componentsJoinedByString:@";"];
     
     [self cacheWithUrl:kPaymentValidate parameters:params handler:completeHandler];
@@ -177,4 +178,32 @@ NSInteger const kPayTypeTotalCount = 21;
     params[@"verify_code"] = message;
     [self requestWithUrl:kPaymentCompleteInfo parameters:params handler:completeHandler];
 }
+
++ (void)getUSDTRateWithAmount:(NSString *)amount tradeType:(NSString *)tradeType target:(NSString *)target completeHandler:(IVRequestCallBack)completeHandler{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"amount"] = amount;
+    params[@"trade_type"] = tradeType;
+    params[@"target"] = target;
+    [self requestWithUrl:kUSDTRate parameters:params handler:completeHandler];
+}
+
++ (void)getUsdtPayTypeWithCompleteHandler:(IVRequestCallBack)completeHandler{
+    [self requestWithUrl:kPaymentUSDTType parameters:nil handler:completeHandler];
+}
+
++ (void)usdtPayOnlineHandleWithType:(NSString *)type amount:(NSString *)amount completeHandler:(IVRequestCallBack)completeHandler{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"type"] = type;
+    params[@"amount"] = amount;
+    [self requestWithUrl:kPaymentUSDTPay parameters:params handler:completeHandler];
+}
+
++ (void)usdtManualPayHandleWithBankAccountNo:(NSString *)bankAccountNo amount:(NSString *)amount remark:(NSString *)remark completeHandler:(IVRequestCallBack)completeHandler{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"bank_account_no"] = bankAccountNo;
+    params[@"amount"] = amount;
+    params[@"remark"] = remark;
+    [self requestWithUrl:kPaymentUSDTManualPay parameters:params handler:completeHandler];
+}
+
 @end

@@ -34,6 +34,15 @@ NSString * const kPaymentQueryDeposit   = @"public/deposit/getManualListPage";
 NSString * const kPaymentCompleteInfo   = @"public/users/completeInfo";
 /// 点卡提交订单
 NSString * const kPaymentCardPay        = @"public/payment/cardPay";
+/// usdt汇率
+NSString * const kUSDTRate              = @"payment/getUsdtRate";
+/// usdt方式
+NSString * const kPaymentUSDTType       = @"payment/getUsdtType";
+/// usdt线上银行普通支付
+NSString * const kPaymentUSDTPay        = @"payment/usdtOnlinePay";
+/// usdt手工银行普通支付
+NSString * const kPaymentUSDTManualPay  = @"payment/usdtManualPay";
+
 @implementation CNPayConstant
 
 @end

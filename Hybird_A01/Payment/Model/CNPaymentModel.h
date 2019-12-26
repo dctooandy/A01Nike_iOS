@@ -74,6 +74,14 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 
 @property (nonatomic, assign) BOOL isSelect;
 
+@property (nonatomic, assign) NSInteger manual;
+
+@property (nonatomic, copy) NSArray *usdtArray;
+
+@property (nonatomic, copy) NSString *bank_account_no;
+
+@property (nonatomic, copy) NSString *remark;
+
 /// 推荐金额
 - (NSArray<NSNumber *> *)prePayAmountArray;
 /// 支付方式
