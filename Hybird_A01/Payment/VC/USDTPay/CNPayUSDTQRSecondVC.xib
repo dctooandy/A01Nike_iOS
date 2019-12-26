@@ -129,7 +129,7 @@
                                     </constraints>
                                 </imageView>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="交易ID，最少输入前5位" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GWo-NQ-s8Z">
-                                    <rect key="frame" x="103" y="1" width="296" height="42"/>
+                                    <rect key="frame" x="114" y="1" width="285" height="42"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -138,7 +138,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="3KE-nl-aJ2"/>
                                 <constraint firstItem="GWo-NQ-s8Z" firstAttribute="top" secondItem="Wnt-CS-65e" secondAttribute="top" constant="1" id="5KP-4d-CUb"/>
-                                <constraint firstItem="GWo-NQ-s8Z" firstAttribute="leading" secondItem="Dgb-S3-c3u" secondAttribute="trailing" constant="12" id="7Vp-e2-O4O"/>
+                                <constraint firstItem="GWo-NQ-s8Z" firstAttribute="leading" secondItem="Dgb-S3-c3u" secondAttribute="trailing" constant="23" id="7Vp-e2-O4O"/>
                                 <constraint firstItem="Yrr-AY-5sq" firstAttribute="top" secondItem="Wnt-CS-65e" secondAttribute="top" constant="15" id="UGb-6y-IRF"/>
                                 <constraint firstItem="Yrr-AY-5sq" firstAttribute="leading" secondItem="Wnt-CS-65e" secondAttribute="leading" constant="15" id="ay9-kv-YY6"/>
                                 <constraint firstItem="Dgb-S3-c3u" firstAttribute="centerY" secondItem="Wnt-CS-65e" secondAttribute="centerY" id="fgq-ts-SR6"/>
@@ -168,7 +168,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="您转账的钱包地址，最少输入前5位" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ujj-xY-F9q">
-                                    <rect key="frame" x="93" y="1" width="306" height="42"/>
+                                    <rect key="frame" x="116" y="1" width="283" height="42"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -180,7 +180,7 @@
                                 <constraint firstAttribute="bottom" secondItem="ujj-xY-F9q" secondAttribute="bottom" constant="1" id="G8q-72-gdz"/>
                                 <constraint firstItem="aZ4-Hy-Adh" firstAttribute="leading" secondItem="YLa-RQ-Qzu" secondAttribute="leading" constant="15" id="Kxc-Kk-aIE"/>
                                 <constraint firstAttribute="trailing" secondItem="ujj-xY-F9q" secondAttribute="trailing" constant="15" id="XEZ-hp-bUA"/>
-                                <constraint firstItem="ujj-xY-F9q" firstAttribute="leading" secondItem="aZ4-Hy-Adh" secondAttribute="trailing" constant="12" id="YrW-QC-NUI"/>
+                                <constraint firstItem="ujj-xY-F9q" firstAttribute="leading" secondItem="aZ4-Hy-Adh" secondAttribute="trailing" constant="35" id="YrW-QC-NUI"/>
                                 <constraint firstItem="aZ4-Hy-Adh" firstAttribute="top" secondItem="YLa-RQ-Qzu" secondAttribute="top" constant="15" id="ju7-dy-l9t"/>
                             </constraints>
                         </view>
