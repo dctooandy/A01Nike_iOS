@@ -60,7 +60,7 @@
 }
 
 - (void)loadWeiXinRediect {
-    NSDictionary *params = @{@"login_name":[IVNetwork userInfo].loginName};
+    NSDictionary *params = @{@"login_name":[IVNetwork userInfo].loginName.length ? [IVNetwork userInfo].loginName : @""};
     [IVNetwork sendRequestWithSubURL:BTTGetWeiXinRediect paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
         if (result.status) {
