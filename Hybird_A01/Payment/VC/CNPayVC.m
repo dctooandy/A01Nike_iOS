@@ -139,6 +139,8 @@
         NSMutableArray<CNPaymentModel *> *payments = [NSMutableArray array];
         NSMutableArray *usdtArray = [[NSMutableArray alloc]init];
         
+        BOOL haveUSDT = false;
+        
         for (int i = 0; i< kPayTypeTotalCount; i++) {
             /// 数据解析
             NSError *error;
@@ -151,13 +153,18 @@
                 model.paymentType = (CNPaymentType)i;
                 [payments addObject:model];
             }else{
+                if (!haveUSDT) {
+                    haveUSDT = model.isAvailable;
+                }
                 [usdtArray addObject:objArray[i]];
                 if (i==kPayTypeTotalCount-1) {
                     model = [[CNPaymentModel alloc]init];
                     model.paymentType = CNPaymentUSDT;
                     model.isAvailable = YES;
                     model.usdtArray = usdtArray;
-                    [payments addObject:model];
+                    if (haveUSDT) {
+                        [payments addObject:model];
+                    }
                 }
             }
         }
@@ -333,9 +340,9 @@
     
     NSArray *array = nil;
     if (timeMoreTen) {
-        array = @[BQFast,BQAli,BQWeChat,deposit,unionQR,aliQR,online,wxQR,jdQR,qqQR,wap,YSF,unionPay,coin,card,BTC,barCode,BS,USDT];
+        array = @[BQFast,BQAli,BQWeChat,deposit,unionQR,aliQR,online,wxQR,jdQR,qqQR,wap,YSF,unionPay,coin,card,BTC,barCode,BS];
     } else {
-        array = @[unionQR,jdQR,ali,BQFast,BQWeChat,BQAli,aliQR,wxQR,qqQR,online,deposit,wap,YSF,unionPay,coin,card,BTC,barCode,BS,USDT];
+        array = @[unionQR,jdQR,ali,USDT,BQFast,BQWeChat,BQAli,aliQR,wxQR,qqQR,online,deposit,wap,YSF,unionPay,coin,card,BTC,barCode,BS];
     }
     
     // 没开启的渠道不显示

@@ -7,12 +7,17 @@
 //
 
 #import "BTTAddUSDTController+LoadData.h"
-
+#import "CNPayRequestManager.h"
 
 @implementation BTTAddUSDTController (LoadData)
 
 - (void)loadUSDTData {
-    NSArray *usdts = @[@"Mobi",@"Huobi",@"Atoken",@"Bixin",@"Bitpie",@"Hicoin",@"Coldlar",@"Coincola",@"其他钱包"];
+    [CNPayRequestManager getUSDTTypeWithCompleteHandler:^(IVRequestResultModel *result, id response) {
+        NSLog(@"%@",result);
+        NSArray *array = result.data[@"usdtTypes"];
+        [self.usdtDatas addObjectsFromArray:array];
+        [self.collectionView reloadData];
+    }];
     
 }
 

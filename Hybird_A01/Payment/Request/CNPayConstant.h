@@ -41,6 +41,12 @@ extern NSString * const kPaymentUSDTPay;
 
 extern NSString * const kPaymentUSDTManualPay;
 
+extern NSString * const kPaymentCardUSDTType;
+
+extern NSString * const kPaymentAddCardUSDTAuto;
+
+extern NSString * const kPaymentAddCardUSDT;
+
 #define COLOR_HEX(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8))/255.0    \
 blue:((float)(rgbValue & 0xFF))/255.0             \

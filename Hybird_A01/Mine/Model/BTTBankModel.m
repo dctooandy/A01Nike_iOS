@@ -18,7 +18,7 @@
               @"bankAccountName"    : @"bank_account_name",
               @"branchName"         : @"branch_name",
               @"isDefault"          : @"is_default",
-              @"isBTC"              : @"catalog",
+              @"cardType"           : @"catalog",
               @"province"           : @"bank_country",
               @"city"               : @"bank_city"}];
 }

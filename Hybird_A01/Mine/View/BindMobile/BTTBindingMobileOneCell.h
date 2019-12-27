@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 
+@property (nonatomic, copy) void(^textFieldChanged)(NSString *text);
+
 
 @end
 

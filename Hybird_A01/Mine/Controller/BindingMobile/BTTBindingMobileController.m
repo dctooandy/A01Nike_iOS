@@ -20,6 +20,7 @@
 #import "BTTChangeMobileSuccessController.h"
 #import "BTTChangeMobileManualController.h"
 #import "BTTCardModifyVerifyController.h"
+#import "BTTAddUSDTController.h"
 @interface BTTBindingMobileController ()<BTTElementsFlowLayoutDelegate>
 
 @end
@@ -221,6 +222,8 @@
         case BTTSafeVerifyTypeMobileAddBankCard:
         case BTTSafeVerifyTypeMobileChangeBankCard:
         case BTTSafeVerifyTypeMobileDelBankCard:
+        case BTTSafeVerifyTypeMobileAddUSDTCard:
+        case BTTSafeVerifyTypeMobileDelUSDTCard:
         case BTTSafeVerifyTypeMobileAddBTCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
             params[@"v_type"] = @"8";
@@ -261,6 +264,8 @@
         case BTTSafeVerifyTypeMobileAddBankCard:
         case BTTSafeVerifyTypeMobileChangeBankCard:
         case BTTSafeVerifyTypeMobileDelBankCard:
+        case BTTSafeVerifyTypeMobileAddUSDTCard:
+        case BTTSafeVerifyTypeMobileDelUSDTCard:
         case BTTSafeVerifyTypeMobileAddBTCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
             params[@"v_type"] = @"8";
@@ -323,9 +328,21 @@
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;
+                case BTTSafeVerifyTypeMobileAddUSDTCard:{
+                    BTTAddUSDTController *vc = [BTTAddUSDTController new];
+                    vc.addCardType = BTTSafeVerifyTypeMobileAddUSDTCard;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
                 case BTTSafeVerifyTypeMobileBindAddBTCard:{
                     BTTAddBTCController *vc = [BTTAddBTCController new];
                     vc.addCardType = BTTSafeVerifyTypeMobileBindAddBTCard;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case BTTSafeVerifyTypeMobileBindAddUSDTCard:{
+                    BTTAddUSDTController *vc = [BTTAddUSDTController new];
+                    vc.addCardType = BTTSafeVerifyTypeMobileBindAddUSDTCard;
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                     break;
@@ -333,6 +350,9 @@
                     [self deleteBankOrBTC:NO isAuto:YES];
                     break;
                 case BTTSafeVerifyTypeMobileDelBTCard:
+                    [self deleteBankOrBTC:YES isAuto:YES];
+                    break;
+                case BTTSafeVerifyTypeMobileDelUSDTCard:
                     [self deleteBankOrBTC:YES isAuto:YES];
                     break;
                 default:
@@ -370,6 +390,13 @@
                         [self.navigationController pushViewController:vc animated:YES];
                     }
                         break;
+                    case BTTSafeVerifyTypeMobileAddUSDTCard:
+                    {
+                        BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
+                        vc.verifyType = BTTSafeVerifyTypeHumanAddUSDTCard;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
                     case BTTSafeVerifyTypeMobileDelBankCard:
                     {
                         BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
@@ -381,6 +408,13 @@
                     {
                         BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
                         vc.verifyType = BTTSafeVerifyTypeHumanDelBTCard;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    case BTTSafeVerifyTypeMobileDelUSDTCard:
+                    {
+                        BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
+                        vc.verifyType = BTTSafeVerifyTypeHumanDelUSDTCard;
                         [self.navigationController pushViewController:vc animated:YES];
                     }
                         break;
@@ -412,6 +446,12 @@
         case BTTSafeVerifyTypeMobileBindDelBTCard:
         case BTTSafeVerifyTypeHumanAddBTCard:
         case BTTSafeVerifyTypeHumanDelBTCard:
+        case BTTSafeVerifyTypeMobileAddUSDTCard:
+        case BTTSafeVerifyTypeMobileBindAddUSDTCard:
+        case BTTSafeVerifyTypeMobileDelUSDTCard:
+        case BTTSafeVerifyTypeMobileBindDelUSDTCard:
+        case BTTSafeVerifyTypeHumanAddUSDTCard:
+        case BTTSafeVerifyTypeHumanDelUSDTCard:
         {
             for (UIViewController *vc in self.navigationController.viewControllers) {
                 if ([vc isKindOfClass:[BTTCardInfosController class]]) {

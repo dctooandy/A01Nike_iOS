@@ -38,8 +38,10 @@
 }
 
 - (void)setCellWithName:(NSString *)name imageName:(NSString *)imageName{
+    NSString*resultStr=[name stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[name substringToIndex:1] capitalizedString]];
+
     [_itemButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    [_itemButton setTitle:name forState:UIControlStateNormal];
+    [_itemButton setTitle:resultStr forState:UIControlStateNormal];
 }
 
 

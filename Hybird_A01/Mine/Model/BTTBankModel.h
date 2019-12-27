@@ -47,8 +47,8 @@
 @property (copy, nonatomic) NSString *bankAccountName;
 /** 是否默认银行卡 YES 是 */
 @property (assign, nonatomic) BOOL isDefault;
-/** 0 银行，1 比特币 */
-@property (assign, nonatomic) BOOL isBTC;
+/** 0 银行，1 比特币,3 USDT钱包 */
+@property (assign, nonatomic) NSInteger cardType;
 /** 9 正在审核 */
 @property (assign, nonatomic) NSInteger flag;
 /** 省份 */

@@ -50,6 +50,7 @@ typedef enum {
 typedef enum {
     BTTSafeVerifyTypeNormalAddBankCard,          // 添加第一张银行卡
     BTTSafeVerifyTypeNormalAddBTCard,            // 添加第一张比特比钱包
+    BTTSafeVerifyTypeNormalAddUSDTCard,
     BTTSafeVerifyTypeMobileAddBankCard,          // 添加银行卡短信验证
     BTTSafeVerifyTypeMobileBindAddBankCard,      // 添加银行卡时未绑定手机绑定
     BTTSafeVerifyTypeMobileChangeBankCard,       // 修改银行卡短信验证
@@ -60,11 +61,17 @@ typedef enum {
     BTTSafeVerifyTypeHumanChangeBankCard,        // 修改银行卡人工服务
     BTTSafeVerifyTypeHumanDelBankCard,           // 删除银行卡人工服务
     BTTSafeVerifyTypeMobileAddBTCard,            // 添加比特币钱包短信验证
+    BTTSafeVerifyTypeMobileAddUSDTCard,          // 添加USDT钱包短信验证
     BTTSafeVerifyTypeMobileBindAddBTCard,        // 添加比特币钱包时未绑定手机绑定
+    BTTSafeVerifyTypeMobileBindAddUSDTCard,      // 添加USDT钱包时未绑定手机绑定
     BTTSafeVerifyTypeMobileDelBTCard,            // 删除比特币钱包短信验证
+    BTTSafeVerifyTypeMobileDelUSDTCard,
     BTTSafeVerifyTypeMobileBindDelBTCard,        // 删除比特币钱包时未绑定手机绑定
+    BTTSafeVerifyTypeMobileBindDelUSDTCard,
     BTTSafeVerifyTypeHumanAddBTCard,             // 添加比特币钱包人工服务
+    BTTSafeVerifyTypeHumanAddUSDTCard,
     BTTSafeVerifyTypeHumanDelBTCard,             // 删除比特币钱包人工服务
+    BTTSafeVerifyTypeHumanDelUSDTCard,
     BTTSafeVerifyTypeChangeMobile,               // 更改手机号
     BTTSafeVerifyTypeBindMobile,                 // 绑定手机号
     BTTSafeVerifyTypeVerifyMobile,               // 验证手机号

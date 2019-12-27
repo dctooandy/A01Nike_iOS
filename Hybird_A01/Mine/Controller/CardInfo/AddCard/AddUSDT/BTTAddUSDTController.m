@@ -12,9 +12,14 @@
 #import "BTTPublicBtnCell.h"
 #import "BTTBindingMobileOneCell.h"
 #import "BTTMeMainModel.h"
+#import "BTTAddUSDTController+LoadData.h"
+#import "CNPayRequestManager.h"
+#import "BTTChangeMobileSuccessController.h"
 
 @interface BTTAddUSDTController ()<BTTElementsFlowLayoutDelegate>
-
+@property (nonatomic, copy) NSString *walletString;
+@property (nonatomic, copy) NSString *confirmString;
+@property (nonatomic, assign) NSInteger selectedType;
 @end
 
 @implementation BTTAddUSDTController
@@ -22,7 +27,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"添加USDT钱包";
+    _walletString = @"";
+    _confirmString = @"";
+    _selectedType = 0;
     [self setupCollectionView];
+    [self loadUSDTData];
     [self setupElements];
 }
 
@@ -42,8 +51,14 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    weakSelf(weakSelf)
     if (indexPath.row == 0) {
         BTTUSDTItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTUSDTItemCell" forIndexPath:indexPath];
+        [cell setUsdtDatasWithArray:self.usdtDatas];
+        cell.selectPayType = ^(NSInteger tag) {
+            NSLog(@"%ld",(long)tag);
+            weakSelf.selectedType = tag;
+        };
         return cell;
     } else if (indexPath.row == 1) {
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
@@ -51,12 +66,19 @@
     } else if (indexPath.row == 2 || indexPath.row == 3) {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         BTTMeMainModel *model = [BTTMeMainModel new];
+        
         if (indexPath.row == 2) {
             model.name = @"钱包地址";
             model.iconName = @"请输入钱包地址";
+            cell.textFieldChanged = ^(NSString * _Nonnull text) {
+                weakSelf.walletString = text;
+            };
         } else {
             model.name = @"确认地址";
             model.iconName = @"请确认地址";
+            cell.textFieldChanged = ^(NSString * _Nonnull text) {
+                weakSelf.confirmString = text;
+            };
         }
         cell.model = model;
         cell.textField.textAlignment = NSTextAlignmentLeft;
@@ -65,12 +87,58 @@
         BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
         cell.btnType = BTTPublicBtnTypeSave;
         cell.btn.enabled = YES;
+        [cell.btn addTarget:self action:@selector(submitButton_Click:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
 }
 
+- (void)submitButton_Click:(id)sender{
+    weakSelf(weakSelf)
+    NSDictionary *dict = self.usdtDatas[_selectedType];
+    NSString *dictCode = [NSString stringWithFormat:@"%@",dict[@"dictCode"]];
+    if ([_walletString isEqualToString:@""]) {
+        [MBProgressHUD showError:@"钱包地址不得为空" toView:self.view];
+    }else if ([_confirmString isEqualToString:@""]){
+        [MBProgressHUD showError:@"确认地址不得为空" toView:self.view];
+    }else if (![_confirmString isEqualToString:_walletString]){
+        [MBProgressHUD showError:@"两次输入不一致" toView:self.view];
+    }else{
+        if (self.addCardType==BTTSafeVerifyTypeNormalAddUSDTCard||self.addCardType==BTTSafeVerifyTypeMobileAddUSDTCard||self.addCardType==BTTSafeVerifyTypeMobileBindAddUSDTCard) {
+            [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+            [CNPayRequestManager addUsdtAutoWithDictCode:dictCode usdtAddress:_walletString completeHandler:^(IVRequestResultModel *result, id response) {
+                NSLog(@"%@",result);
+                [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+                if (result.status) {
+                    [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
+                    [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
+                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+                    vc.mobileCodeType = self.addCardType;
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                } else {
+                    [MBProgressHUD showError:result.message toView:weakSelf.view];
+                }
+            }];
+        }else{
+            [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+            [CNPayRequestManager addUsdtWithDictCode:dictCode usdtAddress:_walletString completeHandler:^(IVRequestResultModel *result, id response) {
+                NSLog(@"%@",result);
+                [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+                if (result.status) {
+                    [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
+                    [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
+                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+                    vc.mobileCodeType = self.addCardType;
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                } else {
+                    [MBProgressHUD showError:result.message toView:weakSelf.view];
+                }
+            }];
+        }
+    }
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    _selectedType = indexPath.row;
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource
@@ -127,6 +195,7 @@
     self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
+        [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     });
 }
 

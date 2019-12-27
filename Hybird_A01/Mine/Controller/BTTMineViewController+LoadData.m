@@ -34,15 +34,15 @@
         [self.normalDataTwo removeAllObjects];
     }
     
-    NSArray *icons =  @[@"me_usdt",@"me_bankscan",@"me_jdscan",@"me_aliwap",@"me_bank",@"me_wechatsecond",@"me_alipaySecond",@"me_online",@"me_aliSacn",@"me_wechatscan",@"me_qqScan",@"me_hand",@"me_wap",@"me_YSF",@"me_quick",@"me_bibao",@"me_pointCard",@"me_btc",@"me_tiaoma",@"me_bishang"];
-    NSArray *names = @[@"泰达币-USDT",@"银联扫码",@"京东扫码",@"支付宝wap",@"迅捷网银",@"微信秒存",@"支付宝秒存",@"在线支付",@"支付宝扫码",@"微信扫码",@"QQ扫码",@"手工存款",@"微信/QQ/京东wap",@"云闪付扫码",@"银行快捷网银",@"点卡",@"钻石币",@"比特币",@"微信条码支付",@"币商充值"];
+    NSArray *icons =  @[@"me_bankscan",@"me_jdscan",@"me_aliwap",@"me_bank",@"me_wechatsecond",@"me_alipaySecond",@"me_online",@"me_aliSacn",@"me_wechatscan",@"me_qqScan",@"me_hand",@"me_wap",@"me_YSF",@"me_quick",@"me_bibao",@"me_pointCard",@"me_btc",@"me_tiaoma",@"me_bishang",@"me_usdt"];
+    NSArray *names = @[@"银联扫码",@"京东扫码",@"支付宝wap",@"迅捷网银",@"微信秒存",@"支付宝秒存",@"在线支付",@"支付宝扫码",@"微信扫码",@"QQ扫码",@"手工存款",@"微信/QQ/京东wap",@"云闪付扫码",@"银行快捷网银",@"点卡",@"钻石币",@"比特币",@"微信条码支付",@"币商充值",@"泰达币-USDT"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;
         model.iconName = icons[index];
         model.available = YES;
-        if ([model.name isEqualToString:@"泰达币-USTDT"] || [model.name isEqualToString:@"币商充值"] || [model.name isEqualToString:@"银联扫码"] || [model.name isEqualToString:@"京东扫码"] || [model.name isEqualToString:@"支付宝wap"]) {
+        if ([model.name isEqualToString:@"币商充值"] || [model.name isEqualToString:@"银联扫码"] || [model.name isEqualToString:@"京东扫码"] || [model.name isEqualToString:@"支付宝wap"]||[model.name isEqualToString:@"泰达币-USDT"]) {
             [self.bigDataSoure addObject:model];
         } else if ([model.name isEqualToString:@"迅捷网银"] ||
                    [model.name isEqualToString:@"微信秒存"] ||
@@ -98,7 +98,6 @@
 
 - (void)loadPersonalPaymentData:(NSMutableArray *)defaultArr {
     [CNPayRequestManager queryAllChannelCompleteHandler:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
         if (self.bigDataSoure.count) {
             [self.bigDataSoure removeAllObjects];
         }
@@ -108,6 +107,9 @@
         if (self.normalDataTwo.count) {
             [self.normalDataTwo removeAllObjects];
         }
+        
+        BOOL haveUSDT = false;
+        
         NSMutableArray *payments = [NSMutableArray array];
         if (result.data && [result.data isKindOfClass:[NSArray class]]) {
             for (int i = 0; i < [result.data count]; i ++) {
@@ -115,6 +117,9 @@
                 CNPaymentModel *model = [[CNPaymentModel alloc] initWithDictionary:dict error:nil];
                 model.paymentType = i;
                 [payments addObject:model];
+                if (i>20 && !haveUSDT) {
+                    haveUSDT = model.isAvailable;
+                }
             }
             
             if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
@@ -145,13 +150,15 @@
                     [self.bigDataSoure addObject:mainModel];
                 }
                 
-                CNPaymentModel *usdt = payments[CNPaymentUSDT];
-                if (usdt.isAvailable) {
-                    BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                    mainModel.name = @"泰达币-USDT";
-                    mainModel.iconName = @"me_usdt";
-                    mainModel.paymentType = CNPayChannelUSDT;
-                    [self.bigDataSoure addObject:mainModel];
+                if (haveUSDT) {
+                    CNPaymentModel *usdt = payments[CNPaymentUSDT];
+//                    if (usdt.isAvailable) {
+                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                        mainModel.name = @"泰达币-USDT";
+                        mainModel.iconName = @"me_usdt";
+                        mainModel.paymentType = CNPayChannelUSDT;
+                        [self.bigDataSoure addObject:mainModel];
+//                    }
                 }
                 
                 CNPaymentModel *BQFast = payments[CNPaymentBQFast];
@@ -285,13 +292,15 @@
                     [self.bigDataSoure addObject:mainModel];
                 }
                 
-                CNPaymentModel *usdt = payments[CNPaymentUSDT];
-                if (usdt.isAvailable) {
-                    BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                    mainModel.name = @"泰达币-USDT";
-                    mainModel.iconName = @"me_usdt";
-                    mainModel.paymentType = CNPayChannelUSDT;
-                    [self.bigDataSoure addObject:mainModel];
+                if (haveUSDT) {
+                    CNPaymentModel *usdt = payments[CNPaymentUSDT];
+//                    if (usdt.isAvailable) {
+                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                        mainModel.name = @"泰达币-USDT";
+                        mainModel.iconName = @"me_usdt";
+                        mainModel.paymentType = CNPayChannelUSDT;
+                        [self.bigDataSoure addObject:mainModel];
+//                    }
                 }
                 
                 CNPaymentModel *hand = payments[CNPaymentDeposit];
@@ -465,6 +474,8 @@
                 
             }
         }
+        NSLog(@"-----11");
+        NSLog(@"%@",self.bigDataSoure);
         [self setupElements];
     }];
 }

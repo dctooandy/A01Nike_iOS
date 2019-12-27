@@ -318,26 +318,19 @@
     if (self.bankList.count > 0) {
         if ([IVNetwork userInfo].isPhoneBinded) {
             BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
-            vc.verifyType = BTTSafeVerifyTypeMobileAddBTCard;
+            vc.verifyType = BTTSafeVerifyTypeMobileAddUSDTCard;
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            //2018-11-23 nike说按线上标准直接跳转绑定页面
-            //            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
-            //            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
-            //            [self.navigationController pushViewController:vc animated:YES];
             
             [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
             BTTBindingMobileController *vc = [BTTBindingMobileController new];
-            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
+            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddUSDTCard;
             [self.navigationController pushViewController:vc animated:YES];
         }
     } else {
         BTTAddUSDTController *vc = [BTTAddUSDTController new];
+        vc.addCardType = BTTSafeVerifyTypeNormalAddUSDTCard;
         [self.navigationController pushViewController:vc animated:YES];
-        
-        //        BTTAddBTCController *vc = [BTTAddBTCController new];
-        //        vc.addCardType = BTTSafeVerifyTypeNormalAddBTCard;
-        //        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -381,7 +374,13 @@
     IVActionHandler handler1 = ^(UIAlertAction *action){
         if ([IVNetwork userInfo].isPhoneBinded) {
             BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-            vc.mobileCodeType = selectModel.isBTC ? BTTSafeVerifyTypeMobileDelBTCard : BTTSafeVerifyTypeMobileDelBankCard;
+            if (selectModel.cardType==0) {
+                vc.mobileCodeType = BTTSafeVerifyTypeMobileDelBankCard;
+            }else if (selectModel.cardType==1){
+                vc.mobileCodeType = BTTSafeVerifyTypeMobileDelBTCard;
+            }else{
+                vc.mobileCodeType = BTTSafeVerifyTypeMobileDelUSDTCard;
+            }
             [weakSelf.navigationController pushViewController:vc animated:YES];
         } else {
             //2018-11-23 nike说按线上标准直接跳转绑定页面
@@ -391,14 +390,24 @@
             
             [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
             BTTBindingMobileController *vc = [BTTBindingMobileController new];
-            vc.mobileCodeType =  selectModel.isBTC ? BTTSafeVerifyTypeMobileBindDelBTCard : BTTSafeVerifyTypeMobileBindDelBankCard;;
+            if (selectModel.cardType==0) {
+                vc.mobileCodeType = BTTSafeVerifyTypeMobileBindDelBankCard;
+            }else if (selectModel.cardType==1){
+                vc.mobileCodeType = BTTSafeVerifyTypeMobileBindDelBTCard;
+            }else{
+                vc.mobileCodeType = BTTSafeVerifyTypeMobileBindDelUSDTCard;
+            }
             [self.navigationController pushViewController:vc animated:YES];
         }
     };
     NSString *title = @"要删除银行卡?";
     NSString *message = @"若以后继续使用该银行卡需要重新添加并审核";
-    if (selectModel.isBTC) {
+    if (selectModel.cardType==1) {
         title = @"要删除比特币钱包?";
+        message = @"若以后继续使用该钱包需要重新添加并审核";
+    }
+    if (selectModel.cardType==3) {
+        title = @"要删除USDT钱包?";
         message = @"若以后继续使用该钱包需要重新添加并审核";
     }
     [IVUtility showAlertWithActionTitles:@[@"取消",@"删除"] handlers:@[handler,handler1] title:title message:message];
@@ -427,13 +436,17 @@
 }
 - (BTTCanAddCardType)canAddType
 {
-    if (self.bankList.count == 4) {
+    if (self.bankList.count == 13) {
         return BTTCanAddCardTypeNone;
     }
     int bankCardCount = 0;
     int btcCardCount = 0;
     for (BTTBankModel *model in self.bankList) {
-        model.isBTC ? btcCardCount++ : bankCardCount++;
+        if (model.cardType==1) {
+            btcCardCount++;
+        }else if (model.cardType==0){
+            bankCardCount++;
+        }
     }
     if (btcCardCount == 1) {
         if (bankCardCount < 3) {

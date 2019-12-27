@@ -17,8 +17,14 @@
 {
     _model = model;
     self.detailLabel.text = model.withdrawText;
-    if (model.isBTC) {
+    if (model.cardType==1) {
         self.bankIcon.image = [UIImage imageNamed:@"BTC"];
+    }else if (model.cardType==3){
+        if ([model.bankType isEqualToString:@"others"]) {
+            self.bankIcon.image=[UIImage imageNamed:@"me_usdt_otherwallet"];
+        }else{
+            self.bankIcon.image=[UIImage imageNamed:[NSString stringWithFormat:@"me_usdt_%@",model.bankType]];
+        }
     } else {
         NSString *iconURLStr = model.banklogo;
         if ([NSString isBlankString:iconURLStr]) {

@@ -8,10 +8,31 @@
 
 #import "BTTWithdrawalController+LoadData.h"
 #import "BTTMeMainModel.h"
+#import "CNPayRequestManager.h"
+#import "CNPayUSDTRateModel.h"
 
 @implementation BTTWithdrawalController (LoadData)
 
+- (void)requestUSDTRate{
+    [CNPayRequestManager getUSDTRateWithAmount:@"1" tradeType:@"02" target:@"usdt" completeHandler:^(IVRequestResultModel *result, id response) {
+        [self hideLoading];
+        if (![result.data isKindOfClass:[NSDictionary class]]) {
+            // 后台返回类型不一，全部转成字符串
+            return;
+        }
+        
+        NSError *error;
+        CNPayUSDTRateModel *rateModel = [[CNPayUSDTRateModel alloc] initWithDictionary:result.data error:&error];
+        if (error && !rateModel) {
+            return;
+        }
+        self.usdtRate = [rateModel.rate floatValue];
+        [self.collectionView reloadData];
+    }];
+}
+
 - (void)loadMainData {
+    [self requestUSDTRate];
     [self.sheetDatas removeAllObjects];
     NSMutableArray *sheetDatas = [NSMutableArray array];
     NSString *btcrate = [[NSUserDefaults standardUserDefaults] valueForKey:BTTCacheBTCRateKey];
@@ -32,26 +53,26 @@
     NSArray *names1 = @[@"",@""];
     NSArray *names2 = @[@"本次存款金额",@"需要达到的投注额",@"已经达成的投注额",canWithdrawTitle,@""];
     NSArray *names3 = @[@"金额(元)",@"比特币",@"取款至",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
-    NSArray *names4 = @[@"金额(元)",@"预估到账",@"取款至",@""];
+    NSArray *names4 = @[@"金额(元)",@"预估到账",@"取款至",@"",@""];
     
     NSArray *placeholders1 = @[@"",@""];
     NSArray *placeholders2 = @[@"",@"",@"",@"",@""];
     NSArray *placeholders3 = @[@"最少10元",rateStr,@"***银行-尾号*****",@""];
-    NSArray *placeholders4 = @[@"最少10元",@"USDT",@"***银行-尾号*****",@""];
+    NSArray *placeholders4 = @[@"最少10元",@"USDT",@"***银行-尾号*****",@"",@""];
     NSArray *heights1 = @[@205.0,@15.0];
     NSArray *heights2 = @[@44.0,@44.0,@44.0,@(notifyHeight),@15.0];
     NSArray *heights3 = @[@44.0,@44.0,@44.0,@100.0];
-    NSArray *heights4 = @[@44.0,@44.0,@44,@100.0];
+    NSArray *heights4 = @[@44.0,@44.0,@44,@27,@100.0];
     
     NSArray *canEdits1 = @[@NO,@NO];
     NSArray *canEdits2 = @[@NO,@NO,@NO,@NO,@NO];
     NSArray *canEdits3 = @[@YES,@NO,@NO,@NO];
-    NSArray *canEdits4 = @[@YES,@NO,@NO,@NO];
+    NSArray *canEdits4 = @[@YES,@NO,@NO,@NO,@NO];
     
     NSArray *values1 = @[@"",@""];
     NSArray *values2 = @[depositTotal,betTotal,currentBet,@"",@""];
     NSArray *values3 = @[@"",@"",@"",@""];
-    NSArray *values4 = @[@"",@"",@"",@""];
+    NSArray *values4 = @[@"",@"",@"",@"",@""];
  
     NSMutableArray *names = @[].mutableCopy;
     NSMutableArray *placeholders = @[].mutableCopy;
@@ -61,47 +82,70 @@
     NSInteger btcRateIndex = 3;
     if (self.betInfoModel.status) {
         btcRateIndex = 8;
-        [names addObjectsFromArray:names1];
-        [names addObjectsFromArray:names2];
-        [names addObjectsFromArray:names3];
-        [placeholders addObjectsFromArray:placeholders1];
-        [placeholders addObjectsFromArray:placeholders2];
-        [placeholders addObjectsFromArray:placeholders3];
-        [heights addObjectsFromArray:heights1];
-        [heights addObjectsFromArray:heights2];
-        [heights addObjectsFromArray:heights3];
-        [canEdits addObjectsFromArray:canEdits1];
-        [canEdits addObjectsFromArray:canEdits2];
-        [canEdits addObjectsFromArray:canEdits3];
-        [values addObjectsFromArray:values1];
-        [values addObjectsFromArray:values2];
-        [values addObjectsFromArray:values3];
         
-//        [names addObjectsFromArray:names1];
-//        [names addObjectsFromArray:names4];
-//        [placeholders addObjectsFromArray:placeholders1];
-//        [placeholders addObjectsFromArray:placeholders4];
-//        [heights addObjectsFromArray:heights1];
-//        [heights addObjectsFromArray:heights4];
-//        [canEdits addObjectsFromArray:canEdits1];
-//        [canEdits addObjectsFromArray:canEdits4];
-//        [values addObjectsFromArray:values1];
-//        [values addObjectsFromArray:values4];
+        if (self.bankList[self.selectIndex].cardType==3) {
+            [names addObjectsFromArray:names1];
+            [names addObjectsFromArray:names2];
+            [names addObjectsFromArray:names4];
+            [placeholders addObjectsFromArray:placeholders1];
+            [placeholders addObjectsFromArray:placeholders2];
+            [placeholders addObjectsFromArray:placeholders4];
+            [heights addObjectsFromArray:heights1];
+            [heights addObjectsFromArray:heights2];
+            [heights addObjectsFromArray:heights4];
+            [canEdits addObjectsFromArray:canEdits1];
+            [canEdits addObjectsFromArray:canEdits2];
+            [canEdits addObjectsFromArray:canEdits4];
+            [values addObjectsFromArray:values1];
+            [values addObjectsFromArray:values2];
+            [values addObjectsFromArray:values4];
+        }else{
+            [names addObjectsFromArray:names1];
+            [names addObjectsFromArray:names2];
+            [names addObjectsFromArray:names3];
+            [placeholders addObjectsFromArray:placeholders1];
+            [placeholders addObjectsFromArray:placeholders2];
+            [placeholders addObjectsFromArray:placeholders3];
+            [heights addObjectsFromArray:heights1];
+            [heights addObjectsFromArray:heights2];
+            [heights addObjectsFromArray:heights3];
+            [canEdits addObjectsFromArray:canEdits1];
+            [canEdits addObjectsFromArray:canEdits2];
+            [canEdits addObjectsFromArray:canEdits3];
+            [values addObjectsFromArray:values1];
+            [values addObjectsFromArray:values2];
+            [values addObjectsFromArray:values3];
+        }
+        
     } else {
         btcRateIndex = 3;
-        [names addObjectsFromArray:names1];
-        [names addObjectsFromArray:names3];
-        [placeholders addObjectsFromArray:placeholders1];
-        [placeholders addObjectsFromArray:placeholders3];
-        [heights addObjectsFromArray:heights1];
-        [heights addObjectsFromArray:heights3];
-        [canEdits addObjectsFromArray:canEdits1];
-        [canEdits addObjectsFromArray:canEdits3];
-        [values addObjectsFromArray:values1];
-        [values addObjectsFromArray:values3];
+        if (self.bankList[self.selectIndex].cardType==3) {
+            [names addObjectsFromArray:names1];
+            [names addObjectsFromArray:names4];
+            [placeholders addObjectsFromArray:placeholders1];
+            [placeholders addObjectsFromArray:placeholders4];
+            [heights addObjectsFromArray:heights1];
+            [heights addObjectsFromArray:heights4];
+            [canEdits addObjectsFromArray:canEdits1];
+            [canEdits addObjectsFromArray:canEdits4];
+            [values addObjectsFromArray:values1];
+            [values addObjectsFromArray:values4];
+        }else{
+            [names addObjectsFromArray:names1];
+            [names addObjectsFromArray:names3];
+            [placeholders addObjectsFromArray:placeholders1];
+            [placeholders addObjectsFromArray:placeholders3];
+            [heights addObjectsFromArray:heights1];
+            [heights addObjectsFromArray:heights3];
+            [canEdits addObjectsFromArray:canEdits1];
+            [canEdits addObjectsFromArray:canEdits3];
+            [values addObjectsFromArray:values1];
+            [values addObjectsFromArray:values3];
+        }
+        
     }
 
-    if (!self.bankList[self.selectIndex].isBTC) {
+    if (self.bankList[self.selectIndex].cardType==0) {
         [names removeObjectAtIndex:btcRateIndex];
         [placeholders removeObjectAtIndex:btcRateIndex];
         [heights removeObjectAtIndex:btcRateIndex];

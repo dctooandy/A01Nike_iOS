@@ -21,6 +21,8 @@
         case BTTSafeVerifyTypeMobileDelBankCard:
         case BTTSafeVerifyTypeMobileAddBTCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
+        case BTTSafeVerifyTypeMobileAddUSDTCard:
+        case BTTSafeVerifyTypeMobileDelUSDTCard:
             phoneTitle = @"已绑定手机";
             phone = [IVNetwork userInfo].phone;
             break;
@@ -29,6 +31,8 @@
         case BTTSafeVerifyTypeMobileBindDelBankCard:
         case BTTSafeVerifyTypeMobileBindAddBTCard:
         case BTTSafeVerifyTypeMobileBindDelBTCard:
+        case BTTSafeVerifyTypeMobileBindAddUSDTCard:
+        case BTTSafeVerifyTypeMobileBindDelUSDTCard:
         case BTTSafeVerifyTypeBindMobile:{
             phoneTitle = @"手机号码";
             if (![IVNetwork userInfo].isPhoneBinded && [IVNetwork userInfo].phone.length != 0) {

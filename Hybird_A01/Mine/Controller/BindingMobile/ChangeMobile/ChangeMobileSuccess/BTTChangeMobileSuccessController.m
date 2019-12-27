@@ -27,6 +27,9 @@
         case BTTSafeVerifyTypeMobileBindAddBankCard:
         case BTTSafeVerifyTypeMobileAddBTCard:
         case BTTSafeVerifyTypeMobileBindAddBTCard:
+        case BTTSafeVerifyTypeNormalAddUSDTCard:
+        case BTTSafeVerifyTypeMobileAddUSDTCard:
+        case BTTSafeVerifyTypeMobileBindAddUSDTCard:
             self.title = @"添加银行卡成功!";
             break;
         case BTTSafeVerifyTypeMobileChangeBankCard:
@@ -38,7 +41,9 @@
         case BTTSafeVerifyTypeMobileDelBankCard:
         case BTTSafeVerifyTypeMobileBindDelBankCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
+        case BTTSafeVerifyTypeMobileDelUSDTCard:
         case BTTSafeVerifyTypeMobileBindDelBTCard:
+        case BTTSafeVerifyTypeMobileBindDelUSDTCard:
             self.title = @"删除成功!";
             break;
         case BTTSafeVerifyTypeBindMobile:
@@ -51,6 +56,8 @@
         case BTTSafeVerifyTypeHumanDelBankCard:
         case BTTSafeVerifyTypeHumanAddBTCard:
         case BTTSafeVerifyTypeHumanDelBTCard:
+        case BTTSafeVerifyTypeHumanAddUSDTCard:
+        case BTTSafeVerifyTypeHumanDelUSDTCard:
         case BTTSafeVerifyTypeHumanChangeMoblie:
             self.title = @"申请已提交";
        

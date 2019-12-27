@@ -23,6 +23,8 @@
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate>
 @property(nonatomic, copy)NSString *amount;
 @property(nonatomic, copy)NSString *password;
+@property(nonatomic, copy)NSString *usdtAmount;
+@property(nonatomic, strong) UITextField *usdtField;
 @end
 
 @implementation BTTWithdrawalController
@@ -32,6 +34,7 @@
     self.title = @"取款";
     self.selectIndex = 0;
     self.amount = @"";
+    self.usdtAmount = @"";
     self.password = @"";
     self.totalAvailable = @"-";
     [self setupCollectionView];
@@ -78,13 +81,20 @@
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
     }
+    if (self.bankList[self.selectIndex].cardType==3&&indexPath.row==self.sheetDatas.count-2) {
+        BTTWithDrawUSDTConfirmCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell" forIndexPath:indexPath];
+        [cell setCellRateWithRate:self.usdtRate];
+        return cell;
+    }
     if (indexPath.row == self.sheetDatas.count - 1) {
+        
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf submitWithDraw];
         };
-//        BTTWithDrawUSDTConfirlmCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell" forIndexPath:indexPath];
         return cell;
+        
+        
     }
     if (self.betInfoModel.status) {
         if (indexPath.row == 5) {
@@ -125,18 +135,31 @@
         cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
         cell.textField.text = self.amount;
         cell.textField.tag = 8002;
+    }else if ([cellName isEqualToString:@"预估到账"]) {
+        _usdtField = cell.textField;
+        _usdtField.text = self.usdtAmount;;
+        
     }
     [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
     return cell;
 }
 
+- (void)confirmBtn_click:(id)sender{
+    [self submitWithDraw];
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     if (indexPath.row != self.sheetDatas.count) {
-        BTTMeMainModel *model = self.sheetDatas[indexPath.row];
-        if ([model.name isEqualToString:@"取款至"]) {
-            [self bankCardPick:indexPath];
+        if (indexPath.row==self.sheetDatas.count-1) {
+            [self submitWithDraw];
+        }else{
+            BTTMeMainModel *model = self.sheetDatas[indexPath.row];
+            if ([model.name isEqualToString:@"取款至"]) {
+                [self bankCardPick:indexPath];
+            }
         }
+        
     }
 }
 
@@ -193,6 +216,8 @@
         self.password = textField.text;
     } else if (textField.tag == 8002) {
         self.amount = textField.text;
+        self.usdtAmount = [NSString stringWithFormat:@"%.2f USDT",([self.amount doubleValue] * self.usdtRate)];
+        _usdtField.text = self.usdtAmount;
     }
     CGFloat amount = [self.amount doubleValue];
     BOOL enable = amount >= 10 && amount <= 1000000;
@@ -256,7 +281,7 @@
     params[@"customer_bank_id"] = model.customer_bank_id;
     params[@"amount"] = self.amount;
     NSString *url = nil;
-    if (model.isBTC) {
+    if (model.cardType==1) {
         url = @"public/withdraws/btc";
     } else {
         url = @"public/withdraws/newCreate";

@@ -8,6 +8,7 @@
 
 #import "CNPayUSDTQRSecondVC.h"
 #import "CNPayDepositTipView.h"
+#import "CNPayDepositSuccessVC.h"
 
 @interface CNPayUSDTQRSecondVC ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
@@ -34,8 +35,8 @@
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)confirmBtn_click:(id)sender {
-    if (_walletAddressInputField.text.length<5) {
-        [self showError:@"钱包地址不得少于5位"];
+    if (_walletAddressInputField.text.length<6||_walletAddressInputField.text.length>40) {
+        [self showError:@"请输入长度为6-40位钱包地址"];
     }else if (_saveInputField.text.length==0||[_saveInputField.text doubleValue]==0){
         [self showError:@"请填写大于0的存款金额"];
     }else{
@@ -45,29 +46,22 @@
 
 - (void)submitManualPayOrder{
     NSString *text = [[NSUserDefaults standardUserDefaults]objectForKey:@"manual_usdt_note"];
+    NSString *account = [[NSUserDefaults standardUserDefaults]objectForKey:@"manual_usdt_account"];
     text = [text substringWithRange:NSMakeRange(3, text.length-3)];
+    
     [self showLoading];
     weakSelf(weakSelf);
-    [CNPayRequestManager usdtManualPayHandleWithBankAccountNo:_walletAddressInputField.text amount:_saveInputField.text remark:text completeHandler:^(IVRequestResultModel *result, id response) {
+    [CNPayRequestManager usdtManualPayHandleWithBankAccountNo:account userAccountNo:_walletAddressInputField.text amount:_saveInputField.text remark:text completeHandler:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",result);
         [self hideLoading];
-//        __strong typeof(weakSelf) strongSelf = weakSelf;
-//        if (result.status) {
-//            [strongSelf paySucessHandler:result repay:nil];
-//        }else{
-//            [self showError:result.message];
-//        }
         if (!result.status) {
             [weakSelf showError:result.message];
             return;
         }
-//        NSArray *array = (NSArray *)[result.data objectForKey:@"list"];
-//        if ([array isKindOfClass:[NSArray class]] && array.count > 0) {
-//            [weakSelf showError:@"您还有未处理的存款提案，请联系客服"];
-//            return;
-//        }
         [CNPayDepositTipView showTipViewFinish:^{
-            [weakSelf goToStep:2];
+//            [weakSelf goToStep:2];
+            CNPayDepositSuccessVC *successVC = [[CNPayDepositSuccessVC alloc] initWithAmount:weakSelf.recivedAmountLabel.text];
+            [weakSelf pushViewController:successVC];
         }];
     }];
 }
@@ -96,7 +90,7 @@
     [_confirmBtn.layer addSublayer:gradientLayer0];
     
     
-    NSAttributedString *addressString = [[NSAttributedString alloc] initWithString:@"您转账的钱包地址，最少输入前5位" attributes:
+    NSAttributedString *addressString = [[NSAttributedString alloc] initWithString:@"您转账的钱包地址，最少输入前6-40位" attributes:
     @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
                  NSFontAttributeName:_walletAddressInputField.font
          }];

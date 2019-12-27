@@ -113,6 +113,7 @@
                 BTTLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginCell" forIndexPath:indexPath];
                 cell.accountTextField.delegate = self;
                 cell.pwdTextField.delegate = self;
+                
                 NSString *historyAccount = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCacheAccountName];
                 cell.accountTextField.text = historyAccount.length ? historyAccount : @"";
                 if ([PublicMethod isValidatePhone:historyAccount]) {
@@ -138,6 +139,9 @@
                     }
                 }
                 cell.pwdTextField.text = @"";
+                
+//                cell.accountTextField.text = @"gqp632656";
+//                cell.pwdTextField.text = @"1234qwer";
                 weakSelf(weakSelf);
                 cell.clickEventBlock = ^(id  _Nonnull value) {
                     strongSelf(strongSelf);

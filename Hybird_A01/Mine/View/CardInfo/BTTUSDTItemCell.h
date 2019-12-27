@@ -12,7 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTUSDTItemCell : BTTBaseCollectionViewCell
 
-@property (nonatomic, strong) NSMutableArray *usdtDatas;
+@property (nonatomic, strong) NSArray *usdtDatas;
+
+@property (nonatomic, copy) void(^selectPayType)(NSInteger tag);
+
+- (void)setUsdtDatasWithArray:(NSArray *)usdtDatas;
 
 @end
 

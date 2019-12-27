@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BTTBaseCollectionViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BTTWithDrawUSDTConfirmCell : UICollectionViewCell
+@interface BTTWithDrawUSDTConfirmCell : BTTBaseCollectionViewCell
+
+- (void)setCellRateWithRate:(CGFloat)rate;
 
 @end
 

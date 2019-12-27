@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *scanTypeLabel;
 @property (nonatomic, strong) UICollectionView *walletCollectionView;
 @property (nonatomic, strong) NSArray *itemsArray;
+@property (nonatomic, strong) NSArray *bankCodeArray;
 @property (nonatomic, strong) NSArray *itemImageArray;
 @property (nonatomic, strong) NSArray *itemDataArray;
 @property (nonatomic, assign) CGFloat usdtRate;
@@ -67,7 +68,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     _selectedIndex = 0;
-    _itemsArray = @[@[@"Mobi",@"Huobi",@"Atoken",@"Bixin",@"Bitpie",@"Hicoin",@"Coldlar",@"Coincola"],@[@"其他钱包"]];
+    _itemsArray = @[@[@"Mobi",@"Huobi",@"Atoken",@"Bixin",@"Bitpie",@"Hicoin",@"Coldlar",@"Coincola"],@[@"其它钱包"]];
+    _bankCodeArray = @[@"mobi",@"huobi",@"atoken",@"bixin",@"bitpie",@"hicoin",@"coldlar",@"coincola",@"others"];
     _itemDataArray = [[NSArray alloc]initWithArray:self.payments.firstObject.usdtArray];
     _itemImageArray = @[@[@"me_usdt_mobi",@"me_usdt_huobi",@"me_usdt_atoken",@"me_usdt_bixin",@"me_usdt_bitpie",@"me_usdt_hicoin",@"me_usdt_coldlar",@"me_usdt_coincola"],@[@"me_usdt_otherwallet"]];
     [self setViewHeight:676 fullScreen:NO];
@@ -78,6 +80,15 @@
     [self setupView];
     [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     [self requestUSDTRate];
+    [self requestWalletType];
+}
+
+- (void)requestWalletType{
+//    [CNPayRequestManager getUSDTTypeWithCompleteHandler:^(IVRequestResultModel *result, id response) {
+//        NSLog(@"%@",result);
+//        NSArray *array = result.data[@"usdtTypes"];
+//        [self.walletCollectionView reloadData];
+//    }];
 }
 
 - (void)requestUSDTRate{
@@ -103,7 +114,7 @@
 }
 
 - (void)handleRateLabelShowWithRate:(NSString *)rate{
-    NSString *str = [NSString stringWithFormat:@"当前参考汇率：1 USDT=%@ 人民币，实际请以到账时为准",rate];
+    NSString *str = [NSString stringWithFormat:@"当前参考汇率：1 USDT=%@ CNY，实际请以到账时为准",rate];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
     
     [attrStr addAttribute:NSForegroundColorAttributeName
@@ -112,7 +123,7 @@
     
     _exchangeRateLabel.attributedText = attrStr;
     
-    NSString *elseStr = [NSString stringWithFormat:@"请复制博天堂USDT钱包地址，或扫描博天堂钱包二维码进行充值\n当前参考汇率：1 USDT=%@ 人民币，实际请以到账时为准",rate];
+    NSString *elseStr = [NSString stringWithFormat:@"请复制博天堂USDT钱包地址，或扫描博天堂钱包二维码进行充值\n当前参考汇率：1 USDT=%@ CNY，实际请以到账时为准",rate];
     NSMutableAttributedString *elseAttrStr = [[NSMutableAttributedString alloc] initWithString:elseStr];
 
     [elseAttrStr addAttribute:NSForegroundColorAttributeName
@@ -193,8 +204,11 @@
     if (self.selectedIndex==0) {
         type = 31;
     }
-    if ([_usdtInputField.text integerValue]==0||_usdtInputField.text.length==0) {
+    CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray[_selectedIndex] error:nil];
+    if ([_usdtInputField.text doubleValue]==0||_usdtInputField.text.length==0) {
         [self showError:@"请输入需要存款的金额"];
+    }else if ([_usdtInputField.text doubleValue]<model.minamount||[_usdtInputField.text doubleValue]>model.maxamount){
+        [self showError:[NSString stringWithFormat:@"请输入%.2f-%.2f的存款金额",model.minamount,model.maxamount]];
     }else{
         [self usdtOnlinePayHanlerWithType:type];
     }
@@ -203,7 +217,7 @@
 - (void)usdtOnlinePayHanlerWithType:(NSInteger)type{
     [self showLoading];
     weakSelf(weakSelf)
-    [CNPayRequestManager usdtPayOnlineHandleWithType:[NSString stringWithFormat:@"%ld",(long)type] amount:_usdtInputField.text completeHandler:^(IVRequestResultModel *result, id response) {
+    [CNPayRequestManager usdtPayOnlineHandleWithType:[NSString stringWithFormat:@"%ld",(long)type] amount:_usdtInputField.text bankCode:self.bankCodeArray[_selectedIndex] completeHandler:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (result.status) {
@@ -216,6 +230,7 @@
 
 - (IBAction)finishedBtn_click:(id)sender {
     [[NSUserDefaults standardUserDefaults]setObject:_noteLabel.text forKey:@"manual_usdt_note"];
+    [[NSUserDefaults standardUserDefaults]setObject:_walletAddressLabel.text forKey:@"manual_usdt_account"];
     [[NSUserDefaults standardUserDefaults]setFloat:self.usdtRate forKey:@"manual_usdt_rate"];
     [self goToStep:1];
 }
@@ -244,6 +259,9 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section==0) {
+        if (_selectedIndex!=indexPath.row) {
+            _usdtInputField.text = @"";
+        }
         _selectedIndex = indexPath.row;
         CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray[indexPath.row] error:nil];
         if (model.manual==0) {
@@ -259,6 +277,9 @@
         }
         
     }else{
+        if (_selectedIndex!=8) {
+            _usdtInputField.text = @"";
+        }
         _selectedIndex = 8;
         CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray[8] error:nil];
         if (model.manual==0) {
@@ -288,13 +309,13 @@
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 15, 60, 14)];
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.font = [UIFont systemFontOfSize:14];
-    titleLabel.text = indexPath.section==0? @"推荐钱包" : @"其他钱包";
+    titleLabel.text = indexPath.section==0? @"推荐钱包" : @"其它钱包";
     [headView addSubview:titleLabel];
     
     UILabel *noticeLabel = [[UILabel alloc]initWithFrame:CGRectMake(70, 15, SCREEN_WIDTH-90, 14)];
     noticeLabel.textColor = COLOR_RGBA(129, 135, 145, 1);
     noticeLabel.font = [UIFont systemFontOfSize:12];
-    noticeLabel.text = indexPath.section==0? @"同钱包转账5分钟即可到账" : @"跨行钱包转账即跨行操作，需以实际到账时间为准";
+    noticeLabel.text = indexPath.section==0? @"同钱包转账5分钟即可到账" : @"跨钱包转账即跨行操作，需以实际到账时间为准";
     [headView addSubview:noticeLabel];
         
     return headView;
