@@ -117,13 +117,14 @@
             [self.walletView mas_updateConstraints:^(MASConstraintMaker *make) {
                 make.height.mas_equalTo(height);
             }];
-            if (model.manual==0) {
+            CNPaymentModel *paymodel = [[CNPaymentModel alloc]initWithDictionary:paymentArray.firstObject error:nil];
+            if (paymodel.manual==0) {
                 _elseWalletView.hidden = YES;
                 _normalWalletView.hidden = NO;
             }else{
-                _walletAddressLabel.text = model.bank_account_no;
-                _noteLabel.text = [NSString stringWithFormat:@"备注：%@",model.remark];
-                _qrCodeImg.image = [PublicMethod QRCodeMethod:model.bank_account_no];
+                _walletAddressLabel.text = paymodel.bank_account_no;
+                _noteLabel.text = [NSString stringWithFormat:@"备注：%@",paymodel.remark];
+                _qrCodeImg.image = [PublicMethod QRCodeMethod:paymodel.bank_account_no];
                 _scanTypeLabel.text = [NSString stringWithFormat:@"请使用%@扫码充值",itemsArrayOne.firstObject];
                 _elseWalletView.hidden = NO;
                 _normalWalletView.hidden = YES;
