@@ -130,6 +130,29 @@
     [self pushViewController:webVC];
 }
 
+/**
+ 充值成功回调处理USDT
+ */
+- (void)paySucessUSDTHandler:(IVRequestResultModel *)model repay:(dispatch_block_t)repayBlock {
+    
+    // 数据容灾
+    if (![model.data isKindOfClass:[NSDictionary class]]) {
+        // 后台返回类型不一，全部转成字符串
+        [self showError:[NSString stringWithFormat:@"%@", model.message]];
+        return;
+    }
+
+    NSError *error;
+    CNPayOrderModel *orderModel = [[CNPayOrderModel alloc] initWithDictionary:model.data error:&error];
+    if (error && !orderModel) {
+        [self showError:@"操作失败！请联系客户，或者稍后重试!"];
+        return;
+    }
+    [self showPayTipView];
+    CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:orderModel title:@"泰达币-USDT"];
+    [self pushViewController:webVC];
+}
+
 - (void)pushUIWebViewWithURLString:(NSString *)url title:(NSString *)title {
     CNUIWebVC *payWebVC = [[CNUIWebVC alloc] initWithUrl:url title:title];
     [self pushViewController:payWebVC];

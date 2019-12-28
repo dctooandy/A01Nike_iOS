@@ -500,7 +500,11 @@
     if ([channel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {
         self.title = @"支付宝/微信/QQ/京东WAP";
     } else {
-        self.title = channel.channelName;
+        if (channel.payChannel==CNPayChannelUSDT) {
+            self.title = @"泰达币-USDT";
+        }else{
+            self.title = channel.channelName;
+        }
     }
     self.selectedIcon = channel.selectedIcon;
     [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];

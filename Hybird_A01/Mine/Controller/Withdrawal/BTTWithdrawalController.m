@@ -216,7 +216,8 @@
         self.password = textField.text;
     } else if (textField.tag == 8002) {
         self.amount = textField.text;
-        self.usdtAmount = [NSString stringWithFormat:@"%.2f USDT",([self.amount doubleValue] * self.usdtRate)];
+        NSString *fUsdtAmount = [NSString stringWithFormat:@"%.5f",([self.amount doubleValue] * self.usdtRate)];
+        self.usdtAmount = [NSString stringWithFormat:@"%@ USDT",[fUsdtAmount substringWithRange:NSMakeRange(0, fUsdtAmount.length-1)]];
         _usdtField.text = self.usdtAmount;
     }
     CGFloat amount = [self.amount doubleValue];

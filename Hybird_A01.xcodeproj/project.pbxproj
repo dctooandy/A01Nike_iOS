@@ -352,7 +352,6 @@
 		3A7C0B1A21EC7E07002658CC /* BTTSaveMoneyModifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0B1821EC7E07002658CC /* BTTSaveMoneyModifyCell.xib */; };
 		3A7C0B1D21EC92E5002658CC /* NSArray+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B1C21EC92E5002658CC /* NSArray+JSON.m */; };
 		3A7C0B2021EC9F2E002658CC /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A7C0B1F21EC9F2E002658CC /* NSString+MD5.m */; };
-		3A7C0B2421ECA38A002658CC /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = 3A7C0B2321ECA389002658CC /* app.zip */; };
 		3A80AB0723A381CD004BF8C0 /* BTTShareRedirectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A80AB0623A381CD004BF8C0 /* BTTShareRedirectModel.m */; };
 		3A80AB0A23AA075E004BF8C0 /* 828x176-min.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A80AB0823AA075D004BF8C0 /* 828x176-min.gif */; };
 		3A80AB0B23AA075E004BF8C0 /* 828x128-min.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A80AB0923AA075D004BF8C0 /* 828x128-min.gif */; };
@@ -674,6 +673,7 @@
 		D35BF24123B451340085D6A1 /* USDTWalletCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BF23B23B451330085D6A1 /* USDTWalletCollectionCell.m */; };
 		D35BF24223B451340085D6A1 /* CNPayUSDTStep1VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35BF23C23B451330085D6A1 /* CNPayUSDTStep1VC.xib */; };
 		D35BF24323B451340085D6A1 /* CNPayUSDTQRSecondVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35BF23E23B451330085D6A1 /* CNPayUSDTQRSecondVC.xib */; };
+		D3B47D5923B70A5500D37C7F /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = D3B47D5823B70A5400D37C7F /* app.zip */; };
 		D51AD19F21B8FEE5008C633A /* CNPayBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */; };
 		D599251421AE5AF6001E885A /* CNPayNormalTF.m in Sources */ = {isa = PBXBuildFile; fileRef = D599251321AE5AF6001E885A /* CNPayNormalTF.m */; };
 		D599251821AE6719001E885A /* CNPayCardStep2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D599251621AE6719001E885A /* CNPayCardStep2VC.m */; };
@@ -1239,7 +1239,6 @@
 		3A7C0B1C21EC92E5002658CC /* NSArray+JSON.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+JSON.m"; sourceTree = "<group>"; };
 		3A7C0B1E21EC9F2E002658CC /* NSString+MD5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5.h"; sourceTree = "<group>"; };
 		3A7C0B1F21EC9F2E002658CC /* NSString+MD5.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5.m"; sourceTree = "<group>"; };
-		3A7C0B2321ECA389002658CC /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		3A80AB0523A381CD004BF8C0 /* BTTShareRedirectModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTShareRedirectModel.h; sourceTree = "<group>"; };
 		3A80AB0623A381CD004BF8C0 /* BTTShareRedirectModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTShareRedirectModel.m; sourceTree = "<group>"; };
 		3A80AB0823AA075D004BF8C0 /* 828x176-min.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "828x176-min.gif"; sourceTree = "<group>"; };
@@ -1794,6 +1793,7 @@
 		D35BF23C23B451330085D6A1 /* CNPayUSDTStep1VC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayUSDTStep1VC.xib; sourceTree = "<group>"; };
 		D35BF23D23B451330085D6A1 /* CNPayUSDTQRSecondVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayUSDTQRSecondVC.h; sourceTree = "<group>"; };
 		D35BF23E23B451330085D6A1 /* CNPayUSDTQRSecondVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNPayUSDTQRSecondVC.xib; sourceTree = "<group>"; };
+		D3B47D5823B70A5400D37C7F /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		D51AD19D21B8FEE5008C633A /* CNPayBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayBaseView.h; sourceTree = "<group>"; };
 		D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayBaseView.m; sourceTree = "<group>"; };
 		D599251221AE5AF6001E885A /* CNPayNormalTF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayNormalTF.h; sourceTree = "<group>"; };
@@ -2783,12 +2783,12 @@
 		3A8F5160215F75010069D1B3 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				D3B47D5823B70A5400D37C7F /* app.zip */,
 				3ACADCEB231773B100D5AE7F /* zqzs.gif */,
 				3A21AEAA2391103A009E73FD /* qhb.gif */,
 				3A80AB0923AA075D004BF8C0 /* 828x128-min.gif */,
 				3A80AB0823AA075D004BF8C0 /* 828x176-min.gif */,
 				3A8F5134215F74CF0069D1B3 /* Main.storyboard */,
-				3A7C0B2321ECA389002658CC /* app.zip */,
 				3A8F5137215F74D00069D1B3 /* Assets.xcassets */,
 				3AD4C9C221635AEC00FC0A63 /* app.json */,
 				3A8F5139215F74D00069D1B3 /* LaunchScreen.storyboard */,
@@ -4546,7 +4546,6 @@
 				3A5AE68B22D6E22A0013E8A3 /* LIVFileMessage_TypeExcel@3x.png in Resources */,
 				3A5AE65E22D6E22A0013E8A3 /* LIVEmotionBoardSendCell.nib in Resources */,
 				3A5AE69422D6E22A0013E8A3 /* LIVVideoCamera_OK@3x.png in Resources */,
-				3A7C0B2421ECA38A002658CC /* app.zip in Resources */,
 				3A75A17D22115CA700584A35 /* BTTLoginAccountSelectView.xib in Resources */,
 				3A5AE70922D6E22A0013E8A3 /* ill.gif in Resources */,
 				3AD9CF77216F3F6300685B43 /* BTTAppCollectionViewCell.xib in Resources */,
@@ -4602,6 +4601,7 @@
 				3ADD23772177328B00FA959A /* BTTMeSaveMoneyCell.xib in Resources */,
 				3A5AE6C022D6E22A0013E8A3 /* LIVVideoRecorderItem@2x.png in Resources */,
 				3A5AE68422D6E22A0013E8A3 /* photo_sel_photoPickerVc@2x.png in Resources */,
+				D3B47D5923B70A5500D37C7F /* app.zip in Resources */,
 				3A5AE70E22D6E22B0013E8A3 /* tired.gif in Resources */,
 				3A5AE66022D6E22A0013E8A3 /* LIVMoreBoardCell.nib in Resources */,
 				3A5AE68D22D6E22A0013E8A3 /* LIVRobotDisagreeIcon@3x.png in Resources */,

@@ -82,6 +82,8 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 
 @property (nonatomic, copy) NSString *remark;
 
+@property (nonatomic, copy) NSString *bankcode;
+
 /// 推荐金额
 - (NSArray<NSNumber *> *)prePayAmountArray;
 /// 支付方式

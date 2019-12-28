@@ -68,10 +68,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     _selectedIndex = 0;
-    _itemsArray = @[@[@"Mobi",@"Huobi",@"Atoken",@"Bixin",@"Bitpie",@"Hicoin",@"Coldlar",@"Coincola"],@[@"其它钱包"]];
-    _bankCodeArray = @[@"mobi",@"huobi",@"atoken",@"bixin",@"bitpie",@"hicoin",@"coldlar",@"coincola",@"others"];
-    _itemDataArray = [[NSArray alloc]initWithArray:self.payments.firstObject.usdtArray];
-    _itemImageArray = @[@[@"me_usdt_mobi",@"me_usdt_huobi",@"me_usdt_atoken",@"me_usdt_bixin",@"me_usdt_bitpie",@"me_usdt_hicoin",@"me_usdt_coldlar",@"me_usdt_coincola"],@[@"me_usdt_otherwallet"]];
+    
     [self setViewHeight:676 fullScreen:NO];
 }
 
@@ -84,6 +81,40 @@
 }
 
 - (void)requestWalletType{
+    _itemsArray = @[@[@"Mobi",@"Huobi",@"Atoken",@"Bixin",@"Bitpie",@"Hicoin",@"Coldlar",@"Coincola"],@[@"其它钱包"]];
+    _bankCodeArray = @[@"mobi",@"huobi",@"atoken",@"bixin",@"bitpie",@"hicoin",@"coldlar",@"coincola",@"others"];
+    _itemDataArray = [[NSArray alloc]initWithArray:self.payments.firstObject.usdtArray];
+    _itemImageArray = @[@[@"me_usdt_mobi",@"me_usdt_huobi",@"me_usdt_atoken",@"me_usdt_bixin",@"me_usdt_bitpie",@"me_usdt_hicoin",@"me_usdt_coldlar",@"me_usdt_coincola"],@[@"me_usdt_otherwallet"]];
+    
+    NSMutableArray *codeArray = [[NSMutableArray alloc]init];
+    NSMutableArray *itemsArrayOne = [[NSMutableArray alloc]init];
+    NSMutableArray *itemsArrayTwo = [[NSMutableArray alloc]init];
+    NSMutableArray *itemImageArrayOne = [[NSMutableArray alloc]init];
+    NSMutableArray *itemImageArrayTwo = [[NSMutableArray alloc]init];
+    NSMutableArray *paymentArray = [[NSMutableArray alloc]init];
+    for (int i=0; i<_itemDataArray.count; i++) {
+        CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:_itemDataArray[i] error:nil];
+        if (model.isAvailable) {
+            [codeArray addObject:model.bankcode];
+            if ([model.bankcode isEqualToString:@"others"]) {
+                [itemsArrayTwo addObject:@"其他钱包"];
+                [itemImageArrayTwo addObject:@"me_usdt_otherwallet"];
+            }else{
+                NSInteger index = [_bankCodeArray indexOfObject:model.bankcode];
+                [itemsArrayOne addObject:_itemsArray[0][index]];
+                [itemImageArrayOne addObject:_itemImageArray[0][index]];
+            }
+            [paymentArray addObject:_itemDataArray[i]];
+        }
+        if (i==paymentArray.count-1) {
+            self.bankCodeArray = codeArray;
+            self.itemsArray = @[itemsArrayOne,itemsArrayTwo];
+            self.itemDataArray = paymentArray;
+            self.itemImageArray = @[itemImageArrayOne,itemImageArrayTwo];
+            [self.walletCollectionView reloadData];
+            [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+        }
+    }
 //    [CNPayRequestManager getUSDTTypeWithCompleteHandler:^(IVRequestResultModel *result, id response) {
 //        NSLog(@"%@",result);
 //        NSArray *array = result.data[@"usdtTypes"];
@@ -221,7 +252,7 @@
         [self hideLoading];
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (result.status) {
-            [strongSelf paySucessHandler:result repay:nil];
+            [strongSelf paySucessUSDTHandler:result repay:nil];
         }else{
             [self showError:result.message];
         }
@@ -238,7 +269,8 @@
 - (IBAction)ustdFieldDidChange:(id)sender {
     if (_usdtInputField.text.length>0) {
         CGFloat rmbCash = [_usdtInputField.text integerValue] * self.usdtRate;
-        _rmbLabel.text = [NSString stringWithFormat:@"%.2f",rmbCash];
+        NSString *cnyStr = [NSString stringWithFormat:@"%.3f",rmbCash];
+        _rmbLabel.text = [cnyStr substringWithRange:NSMakeRange(0, cnyStr.length-1)];
     }else{
         _rmbLabel.text = @"0";
     }
@@ -249,11 +281,8 @@
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    if (section==0) {
-        return 8;
-    }else{
-        return 1;
-    }
+    NSArray *array = _itemsArray[section];
+    return array.count;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
