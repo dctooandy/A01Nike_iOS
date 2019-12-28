@@ -106,12 +106,28 @@
             }
             [paymentArray addObject:_itemDataArray[i]];
         }
-        if (i==paymentArray.count-1) {
+        if (i==_itemDataArray.count-1) {
             self.bankCodeArray = codeArray;
             self.itemsArray = @[itemsArrayOne,itemsArrayTwo];
             self.itemDataArray = paymentArray;
             self.itemImageArray = @[itemImageArrayOne,itemImageArrayTwo];
             [self.walletCollectionView reloadData];
+            NSInteger sectionNumber = itemsArrayTwo.count==0 ? 1 : 2;
+            CGFloat height = ((itemsArrayOne.count-1)/3+1)*54.5+sectionNumber*29+(sectionNumber-1)*54.5;
+            [self.walletView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(height);
+            }];
+            if (model.manual==0) {
+                _elseWalletView.hidden = YES;
+                _normalWalletView.hidden = NO;
+            }else{
+                _walletAddressLabel.text = model.bank_account_no;
+                _noteLabel.text = [NSString stringWithFormat:@"备注：%@",model.remark];
+                _qrCodeImg.image = [PublicMethod QRCodeMethod:model.bank_account_no];
+                _scanTypeLabel.text = [NSString stringWithFormat:@"请使用%@扫码充值",itemsArrayOne.firstObject];
+                _elseWalletView.hidden = NO;
+                _normalWalletView.hidden = YES;
+            }
             [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
         }
     }
@@ -277,7 +293,12 @@
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    return 2;
+    NSArray *array = _itemsArray.lastObject;
+    if (array.count==0) {
+        return 1;
+    }else{
+       return 2;
+    }
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{

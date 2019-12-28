@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *rate;
 
+@property (nonatomic, copy) NSString *tamount;
+
 @end
 
 NS_ASSUME_NONNULL_END

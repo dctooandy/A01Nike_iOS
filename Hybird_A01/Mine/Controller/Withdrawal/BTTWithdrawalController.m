@@ -216,9 +216,11 @@
         self.password = textField.text;
     } else if (textField.tag == 8002) {
         self.amount = textField.text;
-        NSString *fUsdtAmount = [NSString stringWithFormat:@"%.5f",([self.amount doubleValue] * self.usdtRate)];
-        self.usdtAmount = [NSString stringWithFormat:@"%@ USDT",[fUsdtAmount substringWithRange:NSMakeRange(0, fUsdtAmount.length-1)]];
-        _usdtField.text = self.usdtAmount;
+        if (self.bankList[self.selectIndex].cardType==3) {
+            NSString *fUsdtAmount = [NSString stringWithFormat:@"%.5f",([self.amount doubleValue] * self.usdtRate)];
+            self.usdtAmount = [NSString stringWithFormat:@"%@ USDT",[fUsdtAmount substringWithRange:NSMakeRange(0, fUsdtAmount.length-1)]];
+            _usdtField.text = self.usdtAmount;
+        }
     }
     CGFloat amount = [self.amount doubleValue];
     BOOL enable = amount >= 10 && amount <= 1000000;
@@ -243,6 +245,7 @@
     }
     [BRStringPickerView showStringPickerWithTitle:@"请选择银行卡" dataSource:textArray.copy defaultSelValue:cell.detailLabel.text resultBlock:^(id selectValue, NSInteger index) {
         cell.detailLabel.text = selectValue;
+        self.amount = @"";
         for (int i = 0; i < self.bankList.count; i++) {
             if ([self.bankList[i].withdrawText isEqualToString:selectValue]) {
                 self.selectIndex = i;
@@ -251,6 +254,7 @@
         [self loadMainData];
     }];
 }
+
 - (void)refreshBankList
 {
     NSArray *array = [[IVCacheManager sharedInstance] nativeReadDictionaryForKey:BTTCacheBankListKey];

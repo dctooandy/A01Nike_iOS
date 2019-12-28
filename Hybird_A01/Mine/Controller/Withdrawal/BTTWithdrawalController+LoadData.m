@@ -14,7 +14,7 @@
 @implementation BTTWithdrawalController (LoadData)
 
 - (void)requestUSDTRate{
-    [CNPayRequestManager getUSDTRateWithAmount:@"1" tradeType:@"02" target:@"usdt" completeHandler:^(IVRequestResultModel *result, id response) {
+    [CNPayRequestManager getUSDTRateWithAmount:@"1" tradeType:@"02" target:@"cny" completeHandler:^(IVRequestResultModel *result, id response) {
         [self hideLoading];
         if (![result.data isKindOfClass:[NSDictionary class]]) {
             // 后台返回类型不一，全部转成字符串
@@ -26,7 +26,7 @@
         if (error && !rateModel) {
             return;
         }
-        self.usdtRate = [rateModel.rate floatValue];
+        self.usdtRate = [rateModel.tamount floatValue];
         [self.collectionView reloadData];
     }];
 }
