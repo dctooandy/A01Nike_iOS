@@ -171,7 +171,6 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTHomePage         @"HomePage"
 #define BTTHomePageItemsKey @"HomePageItemsKey"
 #define BTTHomePageMessage  @"HomePageMessage"
-
 #define BTTDiscount         @"Discount"
 #define BTTDiscountItemsKey @"DiscountItemsKey"
 #define BTTDiscountMessage  @"DiscountMessage"
@@ -203,7 +202,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 // 登录注册
 
-#define BTTLoginName        @"login_name"
+#define BTTLoginName        @"loginName"
 #define BTTPassword         @"password"
 #define BTTTimestamp        @"timestamp"
 
@@ -211,6 +210,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTPhone            @"phone"
 
 #define BTTUserLoginAPI        @"customer/login"
+#define BTTUserLoginEXAPI      @"customer/loginEx"
 #define BTTUserCreateAPI       @"/A01/users/create"
 #define BTTVerifyCaptcha       @"captcha/generate"
 #define BTTUserRegister        @"customer/createRealAccount"
@@ -245,10 +245,10 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 // 首页逻辑接口
 
-#define BTTHomePageNewAPI            @"A01/promotion/indexCombo"
-#define BTTIndexBannerDownloads      @"/A01/promotion/indexBannerDownloads"
-#define BTTBrandHighlights           @"/A01/promotion/getBrandHighlights"
-
+#define BTTHomePageNewAPI            @"_extra_/api/v1/app/indexCombo"
+#define BTTIndexBannerDownloads      @"_extra_/api/v1/app/banners"
+#define BTTBrandHighlights           @"_extra_/api/v1/wms/form"
+#define BTTHomeAnnouncementAPI       @"_extra_/api/v1/other/announcement/common"
 
 // 优惠列表
 
@@ -342,7 +342,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTCoinDepositAPI            @"/A01/luckyWheel/deposit"
 
 // 请求未读消息的数量
-#define BTTIsUnviewedAPI             @"/public/letter/isUnviewed"
+#define BTTIsUnviewedAPI             @"letter/countUnread"
 
 // 人工存款信息错误重新提交
 #define BTTDepositResubmmitAPI       @"/A01/payment/reSubmitDepositRequestEndpoint"

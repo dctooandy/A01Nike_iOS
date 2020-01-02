@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** userid */
 @property (nonatomic, assign) NSInteger customerId;
 /** vip等级 */
-@property (nonatomic, assign) NSInteger customerLevel;
+@property (nonatomic, assign) NSInteger starLevel;
 /** 绑定的手机号 */
 @property (nonatomic, strong) NSString  *phone;
 /** 绑定手机的地区号 */

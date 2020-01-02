@@ -21,31 +21,6 @@
 
 @implementation BTTLoginOrRegisterViewController (API)
 
-- (void)getAccountsByPhone {
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:[PublicMethod timeIntervalSince1970] forKey:BTTTimestamp];
-    BTTLoginCell *cell = (BTTLoginCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
-    [params setObject:cell.pwdTextField.text forKey:@"sms_code"];
-    [params setObject:cell.accountTextField.text forKey:@"phone"];
-    [self showLoading];
-    [IVNetwork sendRequestWithSubURL:BTTGetCustromerByPhone paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        [self hideLoading];
-//        [[NSUserDefaults standardUserDefaults] setObject:cell.accountTextField.text forKey:BTTCacheAccountName];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-        if (result.status) {
-            if ([result.data[@"list"] count] > 1) {
-                [self showPopViewWithAccounts:result.data[@"list"] withPhone:cell.accountTextField.text withPhoneToken:result.data[@"phone_token"]];
-            } else if ([result.data[@"list"] count] == 1) {
-                [self loginWithSelectLoginName:result.data[@"list"][0] phoneToken:result.data[@"phone_token"]];
-            }
-        } else {
-            if (result.message.length) {
-                [MBProgressHUD showError:result.message toView:nil];
-            }
-        }
-    }];
-}
-
 
 #pragma mark - 登录-----
 
@@ -60,14 +35,7 @@
     if (self.loginCellType == BTTLoginCellTypeNormal) {
         BTTLoginCell *cell = (BTTLoginCell *)[self.collectionView cellForItemAtIndexPath:loginCellIndexPath];
         model.login_name = [NSString stringWithFormat:@"%@",cell.accountTextField.text];
-        if ([PublicMethod isValidatePhone:model.login_name]) {
-            model.sms_code = cell.pwdTextField.text;
-            [self getAccountsByPhone];
-            return;
-        } else {
-            model.password = cell.pwdTextField.text;
-        }
-        
+        model.password = cell.pwdTextField.text;
         isValid = [predicate evaluateWithObject:model.login_name];
     } else {
         BTTLoginCodeCell *cell = (BTTLoginCodeCell *)[self.collectionView cellForItemAtIndexPath:loginCellIndexPath];
@@ -109,72 +77,67 @@
 
 // 登录逻辑处理
 - (void)loginWithLoginAPIModel:(BTTLoginAPIModel *)model isBack:(BOOL)isback {
+    NSInteger loginType = [PublicMethod isValidatePhone:model.login_name] ? 1 : 0;
+    NSString *loginUrl = loginType==0 ? BTTUserLoginAPI : BTTUserLoginEXAPI;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setObject:model.login_name forKey:BTTLoginName];
-    [parameters setObject:model.timestamp forKey:BTTTimestamp];
+    [parameters setValue:model.login_name forKey:BTTLoginName];
+    if (loginType==0) {
+        [parameters setValue:[IVRsaEncryptWrapper encryptorString:model.password] forKey:BTTPassword];
+        [parameters setValue:model.timestamp forKey:BTTTimestamp];
+        [parameters setValue:@(loginType) forKey:@"loginType"];
+        if (model.code.length) {
+            [parameters setValue:model.code forKey:@"captcha"];
+        }
+        if (self.captchaId.length) {
+            [parameters setValue:self.captchaId forKey:@"captchaId"];
+        }
+    }else{
+        [parameters setValue:model.password forKey:@"verifyStr"];
+        [parameters setValue:self.messageId forKey:@"messageId"];
+        [parameters setValue:@"" forKey:@"captcha"];
+        [parameters setValue:@"" forKey:@"captchaId"];
+    }
     
-    [parameters setObject:[IVRsaEncryptWrapper encryptorString:model.password] forKey:BTTPassword];
-    [parameters setValue:@0 forKey:@"loginType"];
-    if (model.code.length) {
-        [parameters setObject:model.code forKey:@"code"];
-    }
-    if (self.uuid.length) {
-        [parameters setObject:self.uuid forKey:@"uuid"];
-    }
-//    [parameters setObject:@"1" forKey:@"cache_type"];
-    [IVNetwork requestWithUseCache:NO url:BTTUserLoginAPI paramters:parameters completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        NSLog(@"%@",response);
-        [MBProgressHUD showMessag:@"弹出提示" toView:self.view];
-    }];
     [self showLoading];
-    [IVNetwork requestPostWithUrl:BTTUserLoginAPI paramters:parameters completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:loginUrl paramters:parameters completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
-        
-        IVJResponseObject *result = response;
-        NSLog(@"%@",result);
         [[NSUserDefaults standardUserDefaults] setObject:model.login_name forKey:BTTCacheAccountName];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        IVJResponseObject *result = response;
+        
+        if (result.body!=nil) {
+            self.uuid = @"";
+            [BTTUserStatusManager loginSuccessWithUserInfo:result.body];
+            self.wrongPwdNum = 0;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                [MBProgressHUD showSuccess:@"登录成功" toView:nil];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }else{
+            if (result.head.errMsg.length) {
+                [MBProgressHUD showError:result.head.errMsg toView:nil];
+            }else{
+                [self showAlertWithModle:nil];
+            }
+            if ([result.head.errCode isEqualToString:@"GW_800408"]) {
+                self.wrongPwdNum++;
+                if (self.wrongPwdNum >= 2) {
+                    self.loginCellType = BTTLoginCellTypeCode;
+                    [self loadVerifyCode];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [self setupElements];
+                    });
+                }
+            }else if ([result.head.errCode isEqualToString:@"GW_800101"]){
+                self.loginCellType = BTTLoginCellTypeCode;
+                [self loadVerifyCode];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self setupElements];
+                });
+            }
+        }
+        
     }];
-//    [IVNetwork sendRequestWithSubURL:BTTUserLoginAPI paramters:parameters completionBlock:^(IVRequestResultModel *result, id response) {
-//        [self hideLoading];
-//        NSLog(@"%@",response);
-////        [[NSUserDefaults standardUserDefaults] setObject:model.login_name forKey:BTTCacheAccountName];
-////        [[NSUserDefaults standardUserDefaults] synchronize];
-//        if (result.status) {
-//            self.wrongPwdNum = 0;
-//            if ([result.data isKindOfClass:[NSDictionary class]]) {
-////                [self getPromotionStatus];
-//                self.uuid = @"";
-//                [BTTUserStatusManager loginSuccessWithUserInfo:result.data];
-//                if (isback) {
-//                    [MBProgressHUD showSuccess:@"登录成功" toView:nil];
-//                    [self.navigationController popViewControllerAnimated:YES];
-//                }
-//            } else {
-//                if (result.message.length) {
-//                    [MBProgressHUD showError:result.message toView:nil];
-//                }
-//            }
-//        } else {
-//            if (result.code_system == 202020) {
-//                [self showAlertWithModle:nil];
-//            } else if(result.code_system == 202006 || result.code_system == 202018) {
-//                [MBProgressHUD showError:@"账号或密码错误,请重新输入" toView:self.view];
-//                self.wrongPwdNum++;
-//                if (self.wrongPwdNum >= 2) {
-//                    self.loginCellType = BTTLoginCellTypeCode;
-//                    [self loadVerifyCode];
-//                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                        [self setupElements];
-//                    });
-//                }
-//            } else {
-//                if (result.message.length) {
-//                    [MBProgressHUD showError:result.message toView:nil];
-//                }
-//            }
-//        }
-//    }];
 }
 
 - (void)showPopViewWithAccounts:(NSArray *)accounts withPhone:(NSString *)codePhone withPhoneToken:(NSString *)phoneToken{
@@ -595,22 +558,9 @@
 - (void)sendCodeWithPhone:(NSString *)phone {
     NSDictionary *params = @{@"use":@1,@"productId":@"A01APP02",@"mobileNo":[IVRsaEncryptWrapper encryptorString:phone]};
    [IVNetwork requestPostWithUrl:BTTSendMsgCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        NSLog(@"%@",response);
         IVJResponseObject *result = response;
         self.messageId = result.body[@"messageId"];
     }];
-//    [IVNetwork sendRequestWithSubURL:BTTNoLoginMobileCodeAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-//        NSLog(@"%@",response);
-//        if (result.status) {
-//            if (result.message.length) {
-//                [MBProgressHUD showSuccess:result.message toView:nil];
-//            }
-//        } else {
-//            if (result.message.length) {
-//                [MBProgressHUD showError:result.message toView:nil];
-//            }
-//        }
-//    }];
 }
 
 

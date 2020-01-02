@@ -138,6 +138,9 @@
                     }
                 }
                 cell.pwdTextField.text = @"";
+                
+                cell.accountTextField.text = @"g1469";
+                cell.pwdTextField.text = @"88888888";
                 weakSelf(weakSelf);
                 cell.clickEventBlock = ^(id  _Nonnull value) {
                     strongSelf(strongSelf);
@@ -185,7 +188,7 @@
                 };
                 cell.clickEventBlock = ^(id  _Nonnull value) {
                     strongSelf(strongSelf);
-                    [strongSelf loadVerifyCode];
+                    [strongSelf sendCodeWithPhone:value];
                     
                 };
                 
@@ -391,8 +394,8 @@
             self.mobile = textField.text;
         }
     } else if (textField.tag == 1082) {
-        if (textField.text.length > 4) {
-            textField.text = [textField.text substringToIndex:4];
+        if (textField.text.length > 6) {
+            textField.text = [textField.text substringToIndex:6];
         }
     }
 }

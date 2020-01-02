@@ -124,7 +124,7 @@
         }];
     }];
     int currentHour = [PublicMethod hour:[NSDate date]];
-    BOOL isNormalUser = (![IVNetwork userInfo] || [IVNetwork userInfo].customerLevel < 5 || ((currentHour >= 0 && currentHour < 12) || (currentHour > 21 && currentHour <= 23)));
+    BOOL isNormalUser = (![IVNetwork userInfo] || [IVNetwork userInfo].starLevel < 5 || ((currentHour >= 0 && currentHour < 12) || (currentHour > 21 && currentHour <= 23)));
     NSString *callTitle = isNormalUser ? @"电话回拨" : @"VIP经理回拨";
     BTTPopoverAction *action3 = [BTTPopoverAction actionWithImage:ImageNamed(@"callBack") title:callTitle handler:^(BTTPopoverAction *action) {
         if ([IVNetwork userInfo]) {

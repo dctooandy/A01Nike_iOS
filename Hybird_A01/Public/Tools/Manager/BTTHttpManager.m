@@ -199,25 +199,27 @@
 
 
 + (void)requestUnReadMessageNum:(KYHTTPCallBack)completeBlock {
-    [self sendRequestWithUrl:BTTIsUnviewedAPI paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        NSLog(@"%@",response);
-        //TODO:
-//        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
-//            [[NSUserDefaults standardUserDefaults] setObject:result.data[@"val"] forKey:BTTUnreadMessageNumKey];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
-//            if ([result.data[@"val"] integerValue]) {
-//                [self resetRedDotState:YES forKey:BTTHomePageMessage]; // BTTMineCenterMessage
-//                [self resetRedDotState:YES forKey:BTTMineCenterMessage];
-//                [self resetRedDotState:YES forKey:BTTDiscountMessage];
-//                [self resetRedDotState:YES forKey:BTTMineCenterNavMessage];
-//            } else {
-//                [self resetRedDotState:NO forKey:BTTHomePageMessage];
-//                [self resetRedDotState:NO forKey:BTTMineCenterMessage];
-//                [self resetRedDotState:NO forKey:BTTDiscountMessage];
-//                [self resetRedDotState:NO forKey:BTTMineCenterNavMessage];
-//            }
-//        }
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    [IVNetwork requestPostWithUrl:BTTIsUnviewedAPI paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"] && [result.body isKindOfClass:[NSDictionary class]]) {
+            [[NSUserDefaults standardUserDefaults] setObject:result.body[@"val"] forKey:BTTUnreadMessageNumKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            if ([result.body[@"val"] integerValue]) {
+                [self resetRedDotState:YES forKey:BTTHomePageMessage]; // BTTMineCenterMessage
+                [self resetRedDotState:YES forKey:BTTMineCenterMessage];
+                [self resetRedDotState:YES forKey:BTTDiscountMessage];
+                [self resetRedDotState:YES forKey:BTTMineCenterNavMessage];
+            } else {
+                [self resetRedDotState:NO forKey:BTTHomePageMessage];
+                [self resetRedDotState:NO forKey:BTTMineCenterMessage];
+                [self resetRedDotState:NO forKey:BTTDiscountMessage];
+                [self resetRedDotState:NO forKey:BTTMineCenterNavMessage];
+            }
+        }
     }];
+
 }
 
 @end

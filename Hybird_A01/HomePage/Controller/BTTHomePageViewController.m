@@ -57,11 +57,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"首页";
-//    if ([IVNetwork userInfo]) {
-//        self.isLogin = YES;
-//    } else {
+    if ([IVNetwork savedUserInfo]) {
+        self.isLogin = YES;
+    } else {
         self.isLogin = NO;
-//    }
+    }
     
     
     [self setupNav];
@@ -117,16 +117,15 @@
     [super viewWillAppear:animated];
     [self.collectionView reloadData];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    if ([IVNetwork userInfo]) {
-        //TODO:
-//        [BTTHttpManager requestUnReadMessageNum:nil];
-//        NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
-//        if (![NSDate isToday:timestamp]) {
-//            [self loadLuckyWheelCoinStatus];
-//            NSString *timestamp = [NSString stringWithFormat:@"%@",@([[NSDate date] timeIntervalSince1970] * 1000)];
-//            [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
-//        }
+    if ([IVNetwork savedUserInfo]) {
+        [BTTHttpManager requestUnReadMessageNum:nil];
+        NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
+        if (![NSDate isToday:timestamp]) {
+            [self loadLuckyWheelCoinStatus];
+            NSString *timestamp = [NSString stringWithFormat:@"%@",@([[NSDate date] timeIntervalSince1970] * 1000)];
+            [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
     }
 }
 

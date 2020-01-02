@@ -9,5 +9,9 @@
 #import "IVUserInfoModel.h"
 
 @implementation IVUserInfoModel
-
++ (JSONKeyMapper *)keyMapper {
+    return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:
+            @{@"userToken"           : @"token",
+              @"phone"           : @"mobileNo",}];
+}
 @end

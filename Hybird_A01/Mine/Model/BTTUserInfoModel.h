@@ -12,6 +12,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTUserInfoModel : NSObject
 
+@property (nonatomic, copy) NSString *realName;
+@property (nonatomic, copy) NSString *beforeLoginDate;
+@property (nonatomic, copy) NSString *loginName;
+@property (nonatomic, copy) NSString *mobileNo;
+@property (nonatomic, assign) NSInteger walletFlag;
+@property (nonatomic, assign) NSInteger startLevel;
+@property (nonatomic, copy) NSString *startLevelName;
+@property (nonatomic, copy) NSString *customerId;
+@property (nonatomic, copy) NSString *token;
+@property (nonatomic, assign) NSInteger noLoginDays;
+@property (nonatomic, assign) NSInteger customerType;
+@property (nonatomic, copy) NSString *currentcy;
 @end
 
 NS_ASSUME_NONNULL_END

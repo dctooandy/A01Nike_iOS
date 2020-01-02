@@ -158,7 +158,7 @@
                 }
                 
                 cell.nameLabel.text = [IVNetwork userInfo].loginName;
-                cell.vipLevelLabel.text = ([IVNetwork userInfo].customerLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork userInfo].customerLevel)];
+                cell.vipLevelLabel.text = ([IVNetwork userInfo].starLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork userInfo].starLevel)];
                 weakSelf(weakSelf);
                 cell.accountBlanceBlock = ^{
                     strongSelf(strongSelf);
@@ -189,7 +189,7 @@
                 }
                 cell.nicknameLabel.text = nickName;
                 cell.nameLabel.text = [IVNetwork userInfo].loginName;
-                cell.vipLevelLabel.text = ([IVNetwork userInfo].customerLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork userInfo].customerLevel)];
+                cell.vipLevelLabel.text = ([IVNetwork userInfo].starLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork userInfo].starLevel)];
                 weakSelf(weakSelf);
                 cell.accountBlanceBlock = ^{
                     strongSelf(strongSelf);
@@ -365,7 +365,7 @@
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
-    } else if ([IVNetwork userInfo].customerLevel == 0 && (![IVNetwork userInfo].verify_code.length || ![IVNetwork userInfo].real_name.length)) {
+    } else if ([IVNetwork userInfo].starLevel == 0 && (![IVNetwork userInfo].verify_code.length || ![IVNetwork userInfo].real_name.length)) {
         if (model.paymentType == 15 || model.paymentType == 17 || model.paymentType == 16 || model.paymentType == 2) {
             BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
             [self.navigationController pushViewController:personInfo animated:YES];

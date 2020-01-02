@@ -61,7 +61,7 @@
 + (NSString *)appKey {
     switch (EnvirmentType) {
         case 0:
-            return @"2ohcxmpyamvnid01au4vfvnf6tnubuar";
+            return @"A01FM";
         default:
             return @"dxobhchquwgoatvqn96l2mimq2nemjug";
     }

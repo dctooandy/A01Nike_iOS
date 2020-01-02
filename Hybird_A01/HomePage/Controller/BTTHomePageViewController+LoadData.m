@@ -37,14 +37,14 @@ static const char *BTTNextGroupKey = "nextGroup";
     dispatch_group_enter(group);
     [self loadMainData:group];
 
-//    dispatch_group_enter(group);
-//    [self loadScrollText:group];
-//
-//    dispatch_group_enter(group);
-//    [self loadOtherData:group];
-//
-//    dispatch_group_enter(group);
-//    [self loadHightlightsBrand:group];
+    dispatch_group_enter(group);
+    [self loadScrollText:group];
+
+    dispatch_group_enter(group);
+    [self loadOtherData:group];
+
+    dispatch_group_enter(group);
+    [self loadHightlightsBrand:group];
 
     dispatch_group_notify(group,queue, ^{
         [self endRefreshing];
@@ -79,14 +79,15 @@ static const char *BTTNextGroupKey = "nextGroup";
 
 // 博币数量查询
 - (void)loadLuckyWheelCoinStatus {
-    [IVNetwork sendRequestWithSubURL:BTTQueryIntegralAPI paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
-            if ([result.data[@"amount"] integerValue]) {
-                [self showPopViewWithNum:result.data[@"amount"]];
-            }
-        }
-    }];
+    
+//    [IVNetwork sendRequestWithSubURL:BTTQueryIntegralAPI paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+//        NSLog(@"%@",response);
+//        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
+//            if ([result.data[@"amount"] integerValue]) {
+//                [self showPopViewWithNum:result.data[@"amount"]];
+//            }
+//        }
+//    }];
 }
 
 // 博币兑现
@@ -106,27 +107,29 @@ static const char *BTTNextGroupKey = "nextGroup";
 
 
 - (void)loadScrollText:(dispatch_group_t)group {
-    [IVNetwork sendUseCacheRequestWithSubURL:@"app/getAnnouments" paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",result.data);
-        NSArray *data = result.data;
-        if (![data isKindOfClass:[NSArray class]]) {
-            return;
-        }
-        self.noticeStr = @"";
-        for (NSDictionary *dict in data) {
-            NSError *error = nil;
-            BTTNoticeModel *noticeModel = [BTTNoticeModel yy_modelWithDictionary:dict];
-            NSLog(@"%@",error.description);
-            if (self.noticeStr) {
-                self.noticeStr  = [NSString stringWithFormat:@"%@%@%@",self.noticeStr,@"                ",noticeModel.content];
-            } else {
-                self.noticeStr = noticeModel.content;
+    [IVNetwork requestPostWithUrl:BTTHomeAnnouncementAPI paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSArray *data = result.body[@"data"];
+            if (![data isKindOfClass:[NSArray class]]) {
+                return;
             }
+            self.noticeStr = @"";
+            for (NSDictionary *dict in data) {
+                NSError *error = nil;
+                BTTNoticeModel *noticeModel = [BTTNoticeModel yy_modelWithDictionary:dict];
+                NSLog(@"%@",error.description);
+                if (self.noticeStr) {
+                    self.noticeStr  = [NSString stringWithFormat:@"%@%@%@",self.noticeStr,@"                ",noticeModel.content];
+                } else {
+                    self.noticeStr = noticeModel.content;
+                }
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.collectionView reloadData];
+            });
+            dispatch_group_leave(group);
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-        });
-        dispatch_group_leave(group);
     }];
 }
 
@@ -168,7 +171,7 @@ static const char *BTTNextGroupKey = "nextGroup";
             [params setValue:phone forKey:@"phone"];
             [params setValue:@"memberphone" forKey:@"phone_type"];
         } else {
-            if ([IVNetwork userInfo].customerLevel > 4 && currentHour >= 12) {
+            if ([IVNetwork userInfo].starLevel > 4 && currentHour >= 12) {
                 url = BTTCallBackMemberAPI;
                 [params setValue:phone forKey:@"phone"];
                 [params setValue:@"memberphone" forKey:@"phone_type"];
@@ -276,46 +279,41 @@ static const char *BTTNextGroupKey = "nextGroup";
     NSMutableArray *amounts = [NSMutableArray array];
     NSMutableArray *posters = [NSMutableArray array];
     NSMutableArray *promotions = [NSMutableArray array];
-    [IVNetwork  requestWithUseCache:YES url: BTTHomePageNewAPI paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        NSLog(@"%@",response);
+    [IVNetwork requestPostWithUrl:BTTHomePageNewAPI paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (![result.body[@"maxRecords"] isKindOfClass:[NSNull class]]) {
+                [self.amounts removeAllObjects];
+                for (NSDictionary *dict in result.body[@"maxRecords"]) {
+                    BTTAmountModel *model = [BTTAmountModel yy_modelWithDictionary:dict];
+                    [amounts addObject:model];
+                }
+                self.amounts = amounts.mutableCopy;
+            }
+
+            if (![result.body[@"poster"] isKindOfClass:[NSNull class]]) {
+                [self.posters removeAllObjects];
+                for (NSDictionary *dict in result.body[@"poster"]) {
+                    BTTPosterModel *model = [BTTPosterModel yy_modelWithDictionary:dict];
+                    [posters addObject:model];
+                }
+                self.posters = posters.mutableCopy;
+            }
+
+            if (![result.body[@"promotions"] isKindOfClass:[NSNull class]]) {
+                [self.promotions removeAllObjects];
+                for (NSDictionary *dict in result.body[@"promotions"]) {
+                    BTTPromotionModel *model = [BTTPromotionModel yy_modelWithDictionary:dict];
+                    [promotions addObject:model];
+                }
+                self.promotions = promotions.mutableCopy;
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
+        dispatch_group_leave(group);
     }];
-//    [IVNetwork sendUseCacheRequestWithSubURL:BTTHomePageNewAPI paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-//        NSLog(@"%@",response);
-//        if (result.status) {
-//            if (result.data) {
-//                if (![result.data[@"maxRecords"] isKindOfClass:[NSNull class]]) {
-//                    [self.amounts removeAllObjects];
-//                    for (NSDictionary *dict in result.data[@"maxRecords"]) {
-//                        BTTAmountModel *model = [BTTAmountModel yy_modelWithDictionary:dict];
-//                        [amounts addObject:model];
-//                    }
-//                    self.amounts = amounts.mutableCopy;
-//                }
-//
-//                if (![result.data[@"poster"] isKindOfClass:[NSNull class]]) {
-//                    [self.posters removeAllObjects];
-//                    for (NSDictionary *dict in result.data[@"poster"]) {
-//                        BTTPosterModel *model = [BTTPosterModel yy_modelWithDictionary:dict];
-//                        [posters addObject:model];
-//                    }
-//                    self.posters = posters.mutableCopy;
-//                }
-//
-//                if (![result.data[@"promotions"] isKindOfClass:[NSNull class]]) {
-//                    [self.promotions removeAllObjects];
-//                    for (NSDictionary *dict in result.data[@"promotions"]) {
-//                        BTTPromotionModel *model = [BTTPromotionModel yy_modelWithDictionary:dict];
-//                        [promotions addObject:model];
-//                    }
-//                    self.promotions = promotions.mutableCopy;
-//                }
-//            }
-//        }
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [self.collectionView reloadData];
-//        });
-//        dispatch_group_leave(group);
-//    }];
 }
 
 - (void)loadOtherData:(dispatch_group_t)group {
@@ -323,42 +321,30 @@ static const char *BTTNextGroupKey = "nextGroup";
     NSMutableArray *imageUrls = [NSMutableArray array];
     NSMutableArray *downloads = [NSMutableArray array];
     NSDictionary *params = nil;
-    if ([IVNetwork userInfo]) {
-        params = @{@"loginName":[IVNetwork userInfo].loginName};
+    if ([IVNetwork savedUserInfo]) {
+        params = @{@"loginName":[IVNetwork savedUserInfo].loginName};
     }
-    [IVNetwork sendUseCacheRequestWithSubURL:BTTIndexBannerDownloads paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        if (result.status) {
-            if (result.data) {
-                if (![result.data[@"banners"] isKindOfClass:[NSNull class]]) {
-                    [self.banners removeAllObjects];
-                    [self.imageUrls removeAllObjects];
-                    for (NSDictionary *dict in result.data[@"banners"]) {
-                        BTTBannerModel *model = [BTTBannerModel yy_modelWithDictionary:dict];
-                        [imageUrls addObject:model.imgurl];
-                        [banners addObject:model];
-                    }
-                    self.banners = banners.mutableCopy;
-                    self.imageUrls = imageUrls.mutableCopy;
+    [IVNetwork requestPostWithUrl:BTTIndexBannerDownloads paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (![result.body[@"banners"] isKindOfClass:[NSNull class]]) {
+                [self.banners removeAllObjects];
+                [self.imageUrls removeAllObjects];
+                for (NSDictionary *dict in result.body[@"banners"]) {
+                    BTTBannerModel *model = [BTTBannerModel yy_modelWithDictionary:dict];
+                    [imageUrls addObject:model.imgurl];
+                    [banners addObject:model];
                 }
-                
-                NSLog(@"%@",NSStringFromClass([result.data[@"downloads"] class]));
-                if (![result.data[@"downloads"] isKindOfClass:[NSNull class]]) {
-                    [self.downloads removeAllObjects];
-                    for (NSDictionary *dict in result.data[@"downloads"]) {
-                        BTTDownloadModel *model = [BTTDownloadModel yy_modelWithDictionary:dict];
-                        [downloads addObject:model];
-                    }
-                    self.downloads = downloads.mutableCopy;
+                self.banners = banners.mutableCopy;
+                self.imageUrls = imageUrls.mutableCopy;
+            }
+            if (![result.body[@"downloads"] isKindOfClass:[NSNull class]]) {
+                [self.downloads removeAllObjects];
+                for (NSDictionary *dict in result.body[@"downloads"]) {
+                    BTTDownloadModel *model = [BTTDownloadModel yy_modelWithDictionary:dict];
+                    [downloads addObject:model];
                 }
-                
-//                if (![result.data[@"games"] isKindOfClass:[NSNull class]]) {
-//                    [self.games removeAllObjects];
-//                    for (NSDictionary *dict in result.data[@"games"]) {
-//                        BTTGameModel *model = [BTTGameModel yy_modelWithDictionary:dict];
-//                        [self.games addObject:model];
-//                    }
-//                }
+                self.downloads = downloads.mutableCopy;
             }
         }
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -370,12 +356,14 @@ static const char *BTTNextGroupKey = "nextGroup";
 
 - (void)loadHightlightsBrand:(dispatch_group_t)group {
     NSMutableArray *Activities = [NSMutableArray array];
-    [IVNetwork sendUseCacheRequestWithSubURL:BTTBrandHighlights paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        if (result.status) {
-            if (result.data) {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    params[@"formName"] = @"brandHighlights";
+    [IVNetwork requestPostWithUrl:BTTBrandHighlights paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body) {
                 [self.Activities removeAllObjects];
-                for (NSDictionary *imageDict in result.data) {
+                for (NSDictionary *imageDict in result.body) {
                     BTTActivityModel *model = [BTTActivityModel yy_modelWithDictionary:imageDict];
                     [Activities addObject:model];
                 }

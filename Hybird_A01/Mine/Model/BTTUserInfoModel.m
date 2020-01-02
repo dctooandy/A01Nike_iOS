@@ -9,5 +9,4 @@
 #import "BTTUserInfoModel.h"
 
 @implementation BTTUserInfoModel
-
 @end

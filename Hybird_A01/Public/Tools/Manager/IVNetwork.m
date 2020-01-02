@@ -7,12 +7,34 @@
 //
 
 #import "IVNetwork.h"
+#import "IVNetworkManager.h"
+#import <IVCacheLibrary/IVCacheWrapper.h>
+#import <YYModel.h>
+
 
 @implementation IVNetwork
 
 + (IVUserInfoModel *)userInfo
 {
-    return NULL;
+    return [IVNetworkManager sharedInstance].userInfoModel;;
+}
+
++ (BTTUserInfoModel *)savedUserInfo
+{
+    NSDictionary *json = [IVCacheWrapper objectForKey:@"customer"];
+    if (json==nil) {
+        return nil;
+    }
+    BTTUserInfoModel *model = [BTTUserInfoModel yy_modelWithJSON:json];
+    return model;
+}
+
++ (void)updateUserInfo:(NSDictionary *)userInfo
+{
+    if (!userInfo) {
+        return;
+    }
+    [IVCacheWrapper setObject:userInfo forKey:@"customer"];
 }
 
 + (id)sendUseCacheRequestWithSubURL:(NSString *)url paramters:(NSDictionary * __nullable)paramters completionBlock:(KYHTTPCallBack)completionBlock{
