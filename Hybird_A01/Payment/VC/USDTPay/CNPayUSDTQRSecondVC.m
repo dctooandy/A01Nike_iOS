@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIView *infoView;
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
 @property (nonatomic, assign) CGFloat usdtRate;
+@property (nonatomic, copy) NSString *minamount;
+@property (nonatomic, copy) NSString *maxamount;
 @end
 
 @implementation CNPayUSDTQRSecondVC
@@ -26,6 +28,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setViewHeight:360 fullScreen:NO];
+    
     _usdtRate = [[NSUserDefaults standardUserDefaults]floatForKey:@"manual_usdt_rate"];
 }
 
@@ -90,13 +93,15 @@
     [_confirmBtn.layer addSublayer:gradientLayer0];
     
     
-    NSAttributedString *addressString = [[NSAttributedString alloc] initWithString:@"您转账的钱包地址，最少输入前6-40位" attributes:
+    NSAttributedString *addressString = [[NSAttributedString alloc] initWithString:@"您转账的钱包地址6-40位" attributes:
     @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
                  NSFontAttributeName:_walletAddressInputField.font
          }];
     _walletAddressInputField.attributedPlaceholder = addressString;
     
-    NSAttributedString *amountString = [[NSAttributedString alloc] initWithString:@"请输入存款金额" attributes:
+    _minamount = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"usdt_minamount"]];
+    _maxamount = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"usdt_maxamount"]];
+    NSAttributedString *amountString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%@，最高%@",self.minamount,self.maxamount] attributes:
     @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
                  NSFontAttributeName:_saveInputField.font
          }];

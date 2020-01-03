@@ -106,6 +106,13 @@
             }
             [paymentArray addObject:_itemDataArray[i]];
         }
+        if (i==0) {
+            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%ld，最高%ld",(long)model.minamount,(long)model.maxamount] attributes:
+            @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+                         NSFontAttributeName:_usdtInputField.font
+                 }];
+            _usdtInputField.attributedPlaceholder = attrString;
+        }
         if (i==_itemDataArray.count-1) {
             self.bankCodeArray = codeArray;
             self.itemsArray = @[itemsArrayOne,itemsArrayTwo];
@@ -121,6 +128,7 @@
             if (paymodel.manual==0) {
                 _elseWalletView.hidden = YES;
                 _normalWalletView.hidden = NO;
+                
             }else{
                 _walletAddressLabel.text = paymodel.bank_account_no;
                 _noteLabel.text = [NSString stringWithFormat:@"备注：%@",paymodel.remark];
@@ -277,9 +285,12 @@
 }
 
 - (IBAction)finishedBtn_click:(id)sender {
+    CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray[_selectedIndex] error:nil];
     [[NSUserDefaults standardUserDefaults]setObject:_noteLabel.text forKey:@"manual_usdt_note"];
     [[NSUserDefaults standardUserDefaults]setObject:_walletAddressLabel.text forKey:@"manual_usdt_account"];
     [[NSUserDefaults standardUserDefaults]setFloat:self.usdtRate forKey:@"manual_usdt_rate"];
+    [[NSUserDefaults standardUserDefaults]setObject:@(model.minamount) forKey:@"usdt_minamount"];
+    [[NSUserDefaults standardUserDefaults]setObject:@(model.maxamount) forKey:@"usdt_maxamount"];
     [self goToStep:1];
 }
 
@@ -312,12 +323,18 @@
     if (indexPath.section==0) {
         if (_selectedIndex!=indexPath.row) {
             _usdtInputField.text = @"";
+            _rmbLabel.text = @"";
         }
         _selectedIndex = indexPath.row;
         CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray[indexPath.row] error:nil];
         if (model.manual==0) {
             _elseWalletView.hidden = YES;
             _normalWalletView.hidden = NO;
+            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%ld，最高%ld",(long)model.minamount,(long)model.maxamount] attributes:
+            @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+                         NSFontAttributeName:_usdtInputField.font
+                 }];
+            _usdtInputField.attributedPlaceholder = attrString;
         }else{
             _walletAddressLabel.text = model.bank_account_no;
             _noteLabel.text = [NSString stringWithFormat:@"备注：%@",model.remark];
@@ -328,14 +345,18 @@
         }
         
     }else{
-        if (_selectedIndex!=8) {
-            _usdtInputField.text = @"";
-        }
-        _selectedIndex = 8;
-        CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray[8] error:nil];
+        _usdtInputField.text = @"";
+        _rmbLabel.text = @"";
+        _selectedIndex = self.bankCodeArray.count-1;
+        CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray.lastObject error:nil];
         if (model.manual==0) {
             _elseWalletView.hidden = YES;
             _normalWalletView.hidden = NO;
+            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%ld，最高%ld",(long)model.minamount,(long)model.maxamount] attributes:
+            @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+                         NSFontAttributeName:_usdtInputField.font
+                 }];
+            _usdtInputField.attributedPlaceholder = attrString;
         }else{
             _walletAddressLabel.text = model.bank_account_no;
             _noteLabel.text = [NSString stringWithFormat:@"备注：%@",model.remark];
