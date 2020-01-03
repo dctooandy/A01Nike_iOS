@@ -101,21 +101,21 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zYM-vb-d3Z">
-                            <rect key="frame" x="15" y="89" width="399" height="1"/>
+                            <rect key="frame" x="15" y="89" width="399" height="0.5"/>
                             <color key="backgroundColor" red="0.29019607843137252" green="0.30196078431372547" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1" id="wt2-tb-VPJ"/>
+                                <constraint firstAttribute="height" constant="0.5" id="wt2-tb-VPJ"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2ZK-OT-Bg3">
-                            <rect key="frame" x="15" y="90" width="399" height="1"/>
+                            <rect key="frame" x="15" y="89.5" width="399" height="0.5"/>
                             <color key="backgroundColor" red="0.2901960784" green="0.30196078430000001" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1" id="vFs-ZC-YfW"/>
+                                <constraint firstAttribute="height" constant="0.5" id="vFs-ZC-YfW"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YLa-RQ-Qzu">
-                            <rect key="frame" x="0.0" y="91" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="90" width="414" height="44"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钱包地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aZ4-Hy-Adh">
                                     <rect key="frame" x="15" y="15" width="66" height="16"/>
@@ -145,14 +145,14 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UKP-UC-fTt">
-                            <rect key="frame" x="15" y="135" width="399" height="1"/>
+                            <rect key="frame" x="15" y="134" width="399" height="1"/>
                             <color key="backgroundColor" red="0.2901960784" green="0.30196078430000001" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="yg3-70-h3c"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K5B-jt-yaJ">
-                            <rect key="frame" x="0.0" y="136" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="135" width="414" height="44"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="存款金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6CK-Sg-hHi">
                                     <rect key="frame" x="15" y="15" width="66" height="16"/>
@@ -194,14 +194,14 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9FX-ul-w0m">
-                            <rect key="frame" x="15" y="180" width="399" height="1"/>
+                            <rect key="frame" x="15" y="179" width="399" height="1"/>
                             <color key="backgroundColor" red="0.2901960784" green="0.30196078430000001" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="mGM-57-4Wg"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="juI-L7-Sea">
-                            <rect key="frame" x="0.0" y="180" width="414" height="44"/>
+                            <rect key="frame" x="0.0" y="179" width="414" height="44"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到账金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N0O-UI-0Op">
                                     <rect key="frame" x="15" y="15" width="66" height="16"/>
