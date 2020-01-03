@@ -37,52 +37,53 @@
     if (requestModel.limit) {
         [params setValue:@(requestModel.limit) forKey:@"limit"];
     }
-    if ([IVNetwork userInfo]) {
-        [params setValue:[IVNetwork userInfo].loginName forKey:@"login_name"];
+    if ([IVNetwork savedUserInfo]) {
+        [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
     }
+    [IVNetwork requestPostWithUrl:BTTVideoGamesList paramters:params completionBlock:complete];
     
-//    [IVNetwork sendUseCacheRequestWithSubURL:BTTVideoGamesList paramters:params completionBlock:complete];
 }
 
 - (void)loadCollectionData {
-//    NSDictionary *params = @{@"login_name":[IVNetwork userInfo].loginName};
-//    [IVNetwork sendRequestWithSubURL:BTTFavotiteList paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-//        NSLog(@"%@",response);
-//        if (self.favorites.count) {
-//            [self.favorites removeAllObjects];
-//        }
-//        if (result.status && [result.data isKindOfClass:[NSArray class]]) {
-//            for (NSDictionary *dict in result.data) {
-//                BTTVideoGameModel *model = [BTTVideoGameModel yy_modelWithDictionary:dict[@"remarks"]];
-//                model.isFavority = YES;
-//                [self.favorites addObject:model];
-//            }
-//            [self.favorites addObject:[BTTVideoGameModel new]];
-//        }
-//        [self setupElements];
-//    }];
+    NSDictionary *params = @{@"loginName":[IVNetwork savedUserInfo].loginName,@"diffFlag":@1,@"pageNo":@1,@"pageSize":@999};
+    [IVNetwork requestPostWithUrl:BTTFavotiteList paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (self.favorites.count) {
+                [self.favorites removeAllObjects];
+            }
+            if (result.body[@"data"]!=nil&&[result.body[@"data"] isKindOfClass:[NSArray class]]) {
+                for (NSDictionary *dict in result.body[@"data"]) {
+                    BTTVideoGameModel *model = [BTTVideoGameModel yy_modelWithDictionary:dict];
+                    model.isFavority = YES;
+                    [self.favorites addObject:model];
+                }
+                [self.favorites addObject:[BTTVideoGameModel new]];
+            }
+            [self setupElements];
+        }
+    }];
 }
 
 - (void)loadAddOrCancelFavorite:(BOOL)favorite gameModel:(BTTVideoGameModel *)model{
-//    NSString *API = @"";
-//    if (favorite) {
-//        API = BTTAddFavotites;
-//    } else {
-//        API = BTTCancelFavorites;
-//    }
-//    NSDictionary *params = @{@"game_id":[NSString stringWithFormat:@"%@%@",model.provider,model.gameid]};
-//    [IVNetwork sendRequestWithSubURL:API paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-//        NSLog(@"%@",response);
-//        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
-//            if (result.data[@"val"]) {
-//                [self loadCollectionData];
-//            }
-//        } else {
-//            if (result.message.length) {
-//                [MBProgressHUD showError:result.message toView:nil];
-//            }
-//        }
-//    }];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    params[@"gameId"] = model.gameid;
+    params[@"gameProvider"] = model.provider;
+    params[@"actFlag"] = !favorite ? @1 : @0;
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    [IVNetwork requestPostWithUrl:BTTAddFavotites paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if ([result.body isKindOfClass:[NSDictionary class]]) {
+                if (result.body[@"val"]) {
+                    [self loadCollectionData];
+                }
+            }
+            
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
 }
 
 @end

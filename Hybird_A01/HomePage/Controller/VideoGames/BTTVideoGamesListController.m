@@ -75,7 +75,7 @@
             [strongSelf loadGamesData];
         }
     }];
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork savedUserInfo]) {
         [self loadCollectionData];
     }
 }
@@ -111,43 +111,45 @@
     }
     requestModel.limit = _limit;
     weakSelf(weakSelf);
-    //TODO:
-//    [self loadVideoGamesWithRequestModel:requestModel complete:^(IVRequestResultModel *result, id response) {
-//        strongSelf(strongSelf);
-//        NSLog(@"%@",response);
-//        [strongSelf endRefreshing];
-//        [strongSelf hideLoading];
-//        strongSelf.isShowSearchBar = NO;
-//        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
-//            if (strongSelf.page == 1 || self.keyword.length) {
-//                [strongSelf.games removeAllObjects];
-//                self.keyword = @"";
-//            }
-//            self.count = result.data[@"count"];
-//            NSArray *games = result.data[@"list"];
-//            for (NSDictionary *dict in games) {
-//                BTTVideoGameModel *model = [BTTVideoGameModel yy_modelWithDictionary:dict];
-//                [strongSelf.games addObject:model];
-//            }
-//            if (games.count) {
-//                if (requestModel.keyword.length) {
-//                    strongSelf.searchPage ++;
-//                } else {
-//                    strongSelf.page ++;
-//                }
-//            }
-//            if (games.count < strongSelf.limit && games.count) {
-//                [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-//                strongSelf.isShowFooter = YES;
-//                [strongSelf.games addObject:[BTTVideoGameModel new]];
-//            }
-//            if (!games.count) {
-//                strongSelf.isShowFooter = YES;
-//                [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-//            }
-//        }
-//        [strongSelf setupElements];
-//    }];
+    [self loadVideoGamesWithRequestModel:requestModel complete:^(id response,NSError * _Nullable error) {
+        strongSelf(strongSelf);
+        IVJResponseObject *result = response;
+        [strongSelf endRefreshing];
+        [strongSelf hideLoading];
+        strongSelf.isShowSearchBar = NO;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if ([result.body isKindOfClass:[NSDictionary class]]) {
+                if (strongSelf.page == 1 || self.keyword.length) {
+                    [strongSelf.games removeAllObjects];
+                    self.keyword = @"";
+                }
+                self.count = result.body[@"count"];
+                NSArray *games = result.body[@"list"];
+                for (NSDictionary *dict in games) {
+                    BTTVideoGameModel *model = [BTTVideoGameModel yy_modelWithDictionary:dict];
+                    [strongSelf.games addObject:model];
+                }
+                if (games.count) {
+                    if (requestModel.keyword.length) {
+                        strongSelf.searchPage ++;
+                    } else {
+                        strongSelf.page ++;
+                    }
+                }
+                if (games.count < strongSelf.limit && games.count) {
+                    [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+                    strongSelf.isShowFooter = YES;
+                    [strongSelf.games addObject:[BTTVideoGameModel new]];
+                }
+                if (!games.count) {
+                    strongSelf.isShowFooter = YES;
+                    [strongSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+                }
+            }
+        }
+        
+        [strongSelf setupElements];
+    }];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -263,7 +265,7 @@
                     cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                         strongSelf(strongSelf);
                         NSLog(@"%@",button);
-                        if (![IVNetwork userInfo]) {
+                        if (![IVNetwork savedUserInfo]) {
                             [MBProgressHUD showError:@"请先登录" toView:nil];
                             BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
                             [strongSelf.navigationController pushViewController:vc animated:YES];
@@ -379,7 +381,7 @@
                             weakSelf(weakSelf);
                             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                                 strongSelf(strongSelf);
-                                if (![IVNetwork userInfo]) {
+                                if (![IVNetwork savedUserInfo]) {
                                     [MBProgressHUD showError:@"请先登录" toView:nil];
                                     BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
                                     [strongSelf.navigationController pushViewController:vc animated:YES];
@@ -403,7 +405,7 @@
                         weakSelf(weakSelf);
                         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                             strongSelf(strongSelf);
-                            if (![IVNetwork userInfo]) {
+                            if (![IVNetwork savedUserInfo]) {
                                 [MBProgressHUD showError:@"请先登录" toView:nil];
                                 BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
                                 [strongSelf.navigationController pushViewController:vc animated:YES];
@@ -513,7 +515,7 @@
                             weakSelf(weakSelf);
                             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                                 strongSelf(strongSelf);
-                                if (![IVNetwork userInfo]) {
+                                if (![IVNetwork savedUserInfo]) {
                                     [MBProgressHUD showError:@"请先登录" toView:nil];
                                     BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
                                     [strongSelf.navigationController pushViewController:vc animated:YES];
@@ -537,7 +539,7 @@
                         weakSelf(weakSelf);
                         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                             strongSelf(strongSelf);
-                            if (![IVNetwork userInfo]) {
+                            if (![IVNetwork savedUserInfo]) {
                                 [MBProgressHUD showError:@"请先登录" toView:nil];
                                 BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
                                 [strongSelf.navigationController pushViewController:vc animated:YES];
@@ -644,7 +646,7 @@
                 if (!gameModel.gameid.length) {
                     return;
                 }
-                if ([IVNetwork userInfo]) {
+                if ([IVNetwork savedUserInfo]) {
                     [self enterVideoGameWithGameModel:gameModel];
                 } else {
                     [self showTryAlertViewWithGameModel:gameModel];
@@ -658,7 +660,7 @@
                 if (!gameModel.gameid.length) {
                     return;
                 }
-                if ([IVNetwork userInfo]) {
+                if ([IVNetwork savedUserInfo]) {
                     [self enterVideoGameWithGameModel:gameModel];
                 } else {
                     [self showTryAlertViewWithGameModel:gameModel];
@@ -670,7 +672,7 @@
                 if (!gameModel.gameid.length) {
                     return;
                 }
-                if ([IVNetwork userInfo]) {
+                if ([IVNetwork savedUserInfo]) {
                     [self enterVideoGameWithGameModel:gameModel];
                 } else {
                     [self showTryAlertViewWithGameModel:gameModel];
@@ -798,7 +800,7 @@
             [button setTitle:value forState:UIControlStateNormal];
         }];
     } else {
-        if (![IVNetwork userInfo]) {
+        if (![IVNetwork savedUserInfo]) {
             [MBProgressHUD showError:@"请先登录" toView:nil];
             BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];

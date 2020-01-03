@@ -321,15 +321,15 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 // 请求游戏列表
 
-#define BTTVideoGamesList            @"/A01/game/slotGameSupportPage"
+#define BTTVideoGamesList            @"_extra_/api/v1/wms/game"
 
 // 获取收藏列表
 
-#define BTTFavotiteList              @"/A01/game/getFavoriteList"
+#define BTTFavotiteList              @"_extra_/api/v1/wms/gameFavorList"
 
 // 添加收藏
 
-#define BTTAddFavotites              @"/public/game/addFavorites"
+#define BTTAddFavotites              @"_extra_/api/v1/wms/gameFavor"
 
 // 取消收藏
 

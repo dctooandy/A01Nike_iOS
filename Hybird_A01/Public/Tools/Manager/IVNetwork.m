@@ -10,13 +10,30 @@
 #import "IVNetworkManager.h"
 #import <IVCacheLibrary/IVCacheWrapper.h>
 #import <YYModel.h>
-
+#import "Constants.h"
 
 @implementation IVNetwork
 
 + (IVUserInfoModel *)userInfo
 {
     return [IVNetworkManager sharedInstance].userInfoModel;;
+}
+
++ (NSString *)getPublicConfigWithKey:(NSString *)key
+{
+    NSArray *array = [IVCacheWrapper objectForKey:@"kCachePublicConfigs"];
+    if (array && [array isKindOfClass:[NSArray class]] && array.count > 0) {
+        NSPredicate *pre = [NSPredicate predicateWithFormat:@"config MATCHES %@",key];
+        if (!pre) {
+            return @"";
+        }
+        NSArray *filterArray = [array filteredArrayUsingPredicate:pre];
+        if (filterArray && filterArray.count > 0 && [filterArray[0] isKindOfClass:[NSDictionary class]]
+            && [filterArray[0] valueForKey:@"value"]) {
+            return  [filterArray[0] valueForKey:@"value"];
+        }
+    }
+    return @"";
 }
 
 + (BTTUserInfoModel *)savedUserInfo

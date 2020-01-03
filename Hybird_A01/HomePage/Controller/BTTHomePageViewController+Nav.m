@@ -70,7 +70,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 - (void)registerSuccessGotoHomePageNotification:(NSNotification *)notif {
     if ([notif.object isEqualToString:@"gotoOnlineChat"]) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if ([IVNetwork userInfo]) {
+            if ([IVNetwork savedUserInfo]) {
                 weakSelf(weakSelf);
                 [self getLive800InfoDataWithResponse:^(NSString * _Nonnull info) {
                     strongSelf(strongSelf);
@@ -107,7 +107,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 
 - (void)loginSuccess:(NSNotification *)notifi {
     self.isLogin = YES;
-    [IN3SAnalytics setUserName:[IVNetwork userInfo].loginName];
+    [IN3SAnalytics setUserName:[IVNetwork savedUserInfo].loginName];
     
     dispatch_async(dispatch_get_main_queue(), ^{
 //        [self updateUI];
@@ -148,7 +148,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 
 - (void)setupLoginAndRegisterBtnsView {
     self.loginAndRegisterBtnsView = [BTTLoginOrRegisterBtsView viewFromXib];
-    self.loginAndRegisterBtnsView.hidden = [IVNetwork userInfo] ? YES : NO;
+    self.loginAndRegisterBtnsView.hidden = [IVNetwork savedUserInfo] ? YES : NO;
     [self.view addSubview:self.loginAndRegisterBtnsView];
     self.loginAndRegisterBtnsView.frame = CGRectMake(0, SCREEN_HEIGHT - (KIsiPhoneX ? 83 : 49) - 87, SCREEN_WIDTH, 87);
     weakSelf(weakSelf);
@@ -183,7 +183,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
                 
             case 2002:
             {
-                if (![IVNetwork userInfo]) {
+                if (![IVNetwork savedUserInfo]) {
                     [MBProgressHUD showError:@"请先登录" toView:nil];
                     BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
                     [strongSelf.navigationController pushViewController:vc animated:YES];
@@ -245,7 +245,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     
     BTTPopoverAction *action2 = [BTTPopoverAction actionWithImage:ImageNamed(@"voiceCall") title:@"APP语音通信" handler:^(BTTPopoverAction *action) {
         BTTTabbarController *tabbar = (BTTTabbarController *)self.tabBarController;
-        BOOL isLogin = [IVNetwork userInfo] ? YES : NO;
+        BOOL isLogin = [IVNetwork savedUserInfo] ? YES : NO;
         weakSelf(weakSelf);
         [tabbar loadVoiceCallNumWithIsLogin:isLogin makeCall:^(NSString *uid) {
             if (uid == nil || uid.length == 0) {
@@ -258,10 +258,10 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     }];
     
     int currentHour = [PublicMethod hour:[NSDate date]];
-    BOOL isNormalUser = (![IVNetwork userInfo] || [IVNetwork userInfo].starLevel < 5 || ((currentHour >= 0 && currentHour < 12) || (currentHour > 21 && currentHour <= 23)));
+    BOOL isNormalUser = (![IVNetwork savedUserInfo] || [IVNetwork savedUserInfo].starLevel < 5 || ((currentHour >= 0 && currentHour < 12) || (currentHour > 21 && currentHour <= 23)));
     NSString *callTitle = isNormalUser ? @"电话回拨" : @"VIP经理回拨";
     BTTPopoverAction *action3 = [BTTPopoverAction actionWithImage:ImageNamed(@"callBack") title:callTitle handler:^(BTTPopoverAction *action) {
-        if ([IVNetwork userInfo]) {
+        if ([IVNetwork savedUserInfo]) {
             [self showCallBackViewLogin];
         } else {
             [self showCallBackViewNoLogin:BTTAnimationPopStyleScale];
@@ -331,12 +331,12 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     customView.btnBlock = ^(UIButton *btn) {
         strongSelf(strongSelf);
         if (btn.tag == 50010) {
-            if (![IVNetwork userInfo].phone.length) {
+            if (![IVNetwork savedUserInfo].mobileNo.length) {
                 [MBProgressHUD showError:@"您未绑定手机, 请选择其他电话" toView:nil];
                 return;
             }
             [popView dismiss];
-            [strongSelf makeCallWithPhoneNum:[IVNetwork userInfo].phone];
+            [strongSelf makeCallWithPhoneNum:[IVNetwork savedUserInfo].mobileNo];
         } else {
             [popView dismiss];
             [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];

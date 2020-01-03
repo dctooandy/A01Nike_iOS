@@ -13,18 +13,20 @@
 
 - (void)loadVoiceCallNumWithIsLogin:(BOOL)isLogin makeCall:(MakeCallBlock)makeCall {
     NSString *url = isLogin ? BTTVoiceCallLogin : BTTVoiceCall;
-    NSLog(@"%@",[IVNetwork h5Domain]);
-    //TODO:
-//    [IVNetwork sendRequestWithSubURL:url paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-//        NSDictionary *data = result.data;
-//        BTTVoiceCallModel *model = [BTTVoiceCallModel yy_modelWithDictionary:data];
-//        [[NSUserDefaults standardUserDefaults] setObject:model.uid forKey:BTTUIDKey];
-//        [[NSUserDefaults standardUserDefaults] setObject:model.phone_number forKey:BTTVoiceCallNumKey];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//        if (makeCall) {
-//            makeCall(model.uid);
-//        }
-//    }];
+    [IVNetwork requestPostWithUrl:url paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSDictionary *data = result.body;
+            BTTVoiceCallModel *model = [BTTVoiceCallModel yy_modelWithDictionary:data];
+            [[NSUserDefaults standardUserDefaults] setObject:model.uid forKey:BTTUIDKey];
+            [[NSUserDefaults standardUserDefaults] setObject:model.phone_number forKey:BTTVoiceCallNumKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            if (makeCall) {
+                makeCall(model.uid);
+            }
+        }
+        
+    }];
 }
 
 @end

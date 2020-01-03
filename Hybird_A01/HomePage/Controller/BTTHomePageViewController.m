@@ -63,7 +63,6 @@
         self.isLogin = NO;
     }
     
-    
     [self setupNav];
     [self setupCollectionView];
     [self setupLoginAndRegisterBtnsView];
@@ -81,7 +80,7 @@
         NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
         NSTimeInterval interval = [[userDefault objectForKey:@"jayTimeStamp"] doubleValue] / 1000.0;
         NSInteger today = [PublicMethod timeIntervalSince1970].integerValue;
-        NSInteger endTime = [PublicMethod timeSwitchTimestamp:@"2019-11-17 23:59:59" andFormatter:@"YYYY-MM-dd HH:mm:ss"];
+        NSInteger endTime = [PublicMethod timeSwitchTimestamp:@"2019-11-17 23:59:59" andFormatter:@"yyyy-MM-dd HH:mm:ss"];
         if (today <= endTime) {
             if (![PublicMethod isDateToday:[NSDate dateWithTimeIntervalSince1970:interval]]) {
                 [userDefault setObject:[PublicMethod timeIntervalSince1970] forKey:@"jayTimeStamp"];
@@ -95,7 +94,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     BOOL isShowAccountGride = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowAccountGride] boolValue];
-    if ([PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork userInfo].created_date]] && !isShowAccountGride) {
+    if ([PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork savedUserInfo].beforeLoginDate]] && !isShowAccountGride) {
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowAccountGride];
         [self showNewAccountGrideView];
     }
@@ -643,7 +642,7 @@
         default:
             break;
     }
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork savedUserInfo]) {
         if (vc || videoGamesVC) {
             if (vc) {
                 [self.navigationController pushViewController:vc animated:YES];

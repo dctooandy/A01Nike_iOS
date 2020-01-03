@@ -165,13 +165,13 @@ static const char *BTTNextGroupKey = "nextGroup";
     NSString *url = nil;
     NSMutableDictionary *params = @{}.mutableCopy;
     int currentHour = [PublicMethod hour:[NSDate date]];
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork savedUserInfo]) {
         if ([phone containsString:@"*"]) {
             url = BTTCallBackMemberAPI;
             [params setValue:phone forKey:@"phone"];
             [params setValue:@"memberphone" forKey:@"phone_type"];
         } else {
-            if ([IVNetwork userInfo].starLevel > 4 && currentHour >= 12) {
+            if ([IVNetwork savedUserInfo].starLevel > 4 && currentHour >= 12) {
                 url = BTTCallBackMemberAPI;
                 [params setValue:phone forKey:@"phone"];
                 [params setValue:@"memberphone" forKey:@"phone_type"];
