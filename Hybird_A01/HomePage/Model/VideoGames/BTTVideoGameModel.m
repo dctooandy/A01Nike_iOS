@@ -7,6 +7,8 @@
 //
 
 #import "BTTVideoGameModel.h"
+#import <IVCacheLibrary/IVCacheWrapper.h>
+#import "HAInitConfig.h"
 
 @implementation BTTVideoGameModel
 
@@ -14,8 +16,9 @@
     NSString *gameImage = @"";
     if ([_gameImage hasPrefix:@"http"]) {
         return _gameImage;
-    } 
-    gameImage = [NSString stringWithFormat:@"%@%@%@",[IVNetwork h5Domain],@"static/A01M/_default/__static/_wms/_l/electronicgames/",_gameImage];
+    }
+    NSString *h5Domain = [IVCacheWrapper objectForKey:IVCacheH5DomainKey] ? : [HAInitConfig defaultH5Domain];
+    gameImage = [NSString stringWithFormat:@"%@%@%@",h5Domain,@"static/A01M/_default/__static/_wms/_l/electronicgames/",_gameImage];
     return gameImage;
 }
 
