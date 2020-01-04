@@ -146,7 +146,7 @@ static const char *BTTHeaderViewKey = "headerView";
                 
             case 2002:
             {
-//                if (![IVNetwork userInfo]) {
+//                if (![IVNetwork savedUserInfo]) {
 //                    [MBProgressHUD showError:@"请先登录" toView:nil];
 //                    BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
 //                    [strongSelf.navigationController pushViewController:vc animated:YES];
@@ -169,7 +169,7 @@ static const char *BTTHeaderViewKey = "headerView";
 - (void)rightClick:(UIButton *)btn {
     
     BTTPopoverAction *action1 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineService") title:@"在线客服" handler:^(BTTPopoverAction *action) {
-//        if ([IVNetwork userInfo]) {
+//        if ([IVNetwork savedUserInfo]) {
 //            weakSelf(weakSelf);
 //            [self getLive800InfoDataWithResponse:^(NSString * _Nonnull info) {
 //                strongSelf(strongSelf);
@@ -191,7 +191,7 @@ static const char *BTTHeaderViewKey = "headerView";
     
     BTTPopoverAction *action2 = [BTTPopoverAction actionWithImage:ImageNamed(@"voiceCall") title:@"APP语音通信" handler:^(BTTPopoverAction *action) {
         BTTTabbarController *tabbar = (BTTTabbarController *)self.tabBarController;
-        BOOL isLogin = [IVNetwork userInfo] ? YES : NO;
+        BOOL isLogin = [IVNetwork savedUserInfo] ? YES : NO;
         weakSelf(weakSelf);
         [tabbar loadVoiceCallNumWithIsLogin:isLogin makeCall:^(NSString *uid) {
             if (uid == nil || uid.length == 0) {
@@ -204,11 +204,11 @@ static const char *BTTHeaderViewKey = "headerView";
     }];
     
     int currentHour = [PublicMethod hour:[NSDate date]];
-    BOOL isNormalUser = (![IVNetwork userInfo] || [IVNetwork userInfo].starLevel < 5 || ((currentHour >= 0 && currentHour < 12) || (currentHour > 21 && currentHour <= 23)));
+    BOOL isNormalUser = (![IVNetwork savedUserInfo] || [IVNetwork savedUserInfo].starLevel < 5 || ((currentHour >= 0 && currentHour < 12) || (currentHour > 21 && currentHour <= 23)));
     
     NSString *callTitle = isNormalUser ? @"电话回拨" : @"VIP经理回拨";
     BTTPopoverAction *action3 = [BTTPopoverAction actionWithImage:ImageNamed(@"callBack") title:callTitle handler:^(BTTPopoverAction *action) {
-        if ([IVNetwork userInfo]) {
+        if ([IVNetwork savedUserInfo]) {
             [self showCallBackViewLogin];
         } else {
             [self showCallBackViewNoLogin:BTTAnimationPopStyleScale];
@@ -278,12 +278,12 @@ static const char *BTTHeaderViewKey = "headerView";
     customView.btnBlock = ^(UIButton *btn) {
         strongSelf(strongSelf);
         if (btn.tag == 50010) {
-            if (![IVNetwork userInfo].phone.length) {
+            if (![IVNetwork savedUserInfo].mobileNo.length) {
                 [MBProgressHUD showError:@"您未绑定手机, 请选择其他电话" toView:nil];
                 return;
             }
             [popView dismiss];
-            [strongSelf makeCallWithPhoneNum:[IVNetwork userInfo].phone];
+            [strongSelf makeCallWithPhoneNum:[IVNetwork savedUserInfo].mobileNo];
         } else {
             [popView dismiss];
             [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
