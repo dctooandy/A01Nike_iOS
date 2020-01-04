@@ -315,7 +315,6 @@
                                     <state key="normal" image="copy_wallet_address"/>
                                     <connections>
                                         <action selector="bottomCopyBtn_click:" destination="-1" eventType="touchUpInside" id="NU0-so-h6B"/>
-                                        <action selector="noteInfoBtn_click:" destination="-1" eventType="touchUpInside" id="yI6-uL-roY"/>
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ZF-7H-kpW">
