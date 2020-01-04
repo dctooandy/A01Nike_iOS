@@ -10,6 +10,7 @@
 #import "CNPayConstant.h"
 #import "USDTWalletCollectionCell.h"
 #import "CNPayUSDTRateModel.h"
+#import "BTTPayUsdtNoticeView.h"
 
 @interface CNPayUSDTStep1VC ()<UITextFieldDelegate,UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *walletView;
@@ -28,6 +29,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *qrCodeImg;
 @property (weak, nonatomic) IBOutlet UILabel *noteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scanTypeLabel;
+@property (weak, nonatomic) IBOutlet UIView *noteInfoView;
+@property (weak, nonatomic) IBOutlet UILabel *noteBottomLabel;
 @property (nonatomic, strong) UICollectionView *walletCollectionView;
 @property (nonatomic, strong) NSArray *itemsArray;
 @property (nonatomic, strong) NSArray *bankCodeArray;
@@ -35,7 +38,7 @@
 @property (nonatomic, strong) NSArray *itemDataArray;
 @property (nonatomic, assign) CGFloat usdtRate;
 @property (nonatomic, assign) NSInteger selectedIndex;
-
+@property (nonatomic, copy) NSString *handType;
 @end
 
 @implementation CNPayUSDTStep1VC
@@ -68,7 +71,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     _selectedIndex = 0;
-    
+    self.handType = @"";
     [self setViewHeight:676 fullScreen:NO];
 }
 
@@ -131,20 +134,33 @@
                 
             }else{
                 _walletAddressLabel.text = paymodel.bank_account_no;
-                _noteLabel.text = [NSString stringWithFormat:@"备注：%@",paymodel.remark];
+                _noteLabel.text = [NSString stringWithFormat:@"%@",paymodel.remark];
+                
+                NSString *payTypeName = [NSString stringWithFormat:@"%@",itemsArrayOne.firstObject];
+                NSString *noteBottomStr = [NSString stringWithFormat:@"(复制备注信息到%@可快速到账)",payTypeName];
+                NSMutableAttributedString *noteBottomAttrStr = [[NSMutableAttributedString alloc] initWithString:noteBottomStr];
+
+                [noteBottomAttrStr addAttribute:NSForegroundColorAttributeName
+                value:COLOR_RGBA(36, 151, 255, 1)
+                range:NSMakeRange(8, payTypeName.length)];
+                
+                _noteBottomLabel.attributedText = noteBottomAttrStr;
                 _qrCodeImg.image = [PublicMethod QRCodeMethod:paymodel.bank_account_no];
-                _scanTypeLabel.text = [NSString stringWithFormat:@"请使用%@扫码充值",itemsArrayOne.firstObject];
                 _elseWalletView.hidden = NO;
                 _normalWalletView.hidden = YES;
+                
+                NSString *scanStr = [NSString stringWithFormat:@"请使用%@扫码充值",payTypeName];
+                NSMutableAttributedString *scanAttrStr = [[NSMutableAttributedString alloc] initWithString:scanStr];
+                [scanAttrStr addAttribute:NSForegroundColorAttributeName
+                value:COLOR_RGBA(36, 151, 255, 1)
+                                    range:NSMakeRange(3, payTypeName.length)];
+                _scanTypeLabel.attributedText = scanAttrStr;
+                
+                self.handType = [payTypeName isEqualToString:@"Atoken"] ? @"atoken" : @"bitpie";
             }
             [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
         }
     }
-//    [CNPayRequestManager getUSDTTypeWithCompleteHandler:^(IVRequestResultModel *result, id response) {
-//        NSLog(@"%@",result);
-//        NSArray *array = result.data[@"usdtTypes"];
-//        [self.walletCollectionView reloadData];
-//    }];
 }
 
 - (void)requestUSDTRate{
@@ -249,6 +265,10 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addressCopyBtn_click:)];
     [_addressCopyImg addGestureRecognizer:tap];
     
+    self.noteInfoView.layer.cornerRadius = 5;
+    self.noteInfoView.layer.backgroundColor = [[UIColor colorWithRed:41.0f/255.0f green:45.0f/255.0f blue:54.0f/255.0f alpha:1.0f] CGColor];
+    self.noteInfoView.alpha = 1;
+    
 }
 
 - (void)addressCopyBtn_click:(id)sender{
@@ -268,6 +288,21 @@
     }else{
         [self usdtOnlinePayHanlerWithType:type];
     }
+}
+- (IBAction)noteInfoBtn_click:(id)sender {
+    BTTPayUsdtNoticeView *customView = [BTTPayUsdtNoticeView viewFromXib];
+    [customView setIamgeWithType:self.handType];
+    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+}
+- (IBAction)bottomCopyBtn_click:(id)sender {
+    [UIPasteboard generalPasteboard].string = _noteLabel.text;
+    [self showSuccess:@"已复制到剪切板"];
 }
 
 - (void)usdtOnlinePayHanlerWithType:(NSInteger)type{
@@ -337,11 +372,28 @@
             _usdtInputField.attributedPlaceholder = attrString;
         }else{
             _walletAddressLabel.text = model.bank_account_no;
-            _noteLabel.text = [NSString stringWithFormat:@"备注：%@",model.remark];
+            _noteLabel.text = [NSString stringWithFormat:@"%@",model.remark];
             _qrCodeImg.image = [PublicMethod QRCodeMethod:model.bank_account_no];
-            _scanTypeLabel.text = [NSString stringWithFormat:@"请使用%@扫码充值",_itemsArray[indexPath.section][indexPath.row]];
             _elseWalletView.hidden = NO;
             _normalWalletView.hidden = YES;
+            
+            NSString *payTypeName = [NSString stringWithFormat:@"%@",_itemsArray[indexPath.section][indexPath.row]];
+            NSString *noteBottomStr = [NSString stringWithFormat:@"(复制备注信息到%@可快速到账)",payTypeName];
+            NSMutableAttributedString *noteBottomAttrStr = [[NSMutableAttributedString alloc] initWithString:noteBottomStr];
+
+            [noteBottomAttrStr addAttribute:NSForegroundColorAttributeName
+            value:COLOR_RGBA(36, 151, 255, 1)
+            range:NSMakeRange(8, payTypeName.length)];
+            _noteBottomLabel.attributedText = noteBottomAttrStr;
+            
+            NSString *scanStr = [NSString stringWithFormat:@"请使用%@扫码充值",payTypeName];
+            NSMutableAttributedString *scanAttrStr = [[NSMutableAttributedString alloc] initWithString:scanStr];
+            [scanAttrStr addAttribute:NSForegroundColorAttributeName
+            value:COLOR_RGBA(36, 151, 255, 1)
+                                range:NSMakeRange(3, payTypeName.length)];
+            _scanTypeLabel.attributedText = scanAttrStr;
+            
+            self.handType = [payTypeName isEqualToString:@"Atoken"] ? @"atoken" : @"bitpie";
         }
         
     }else{
@@ -359,11 +411,28 @@
             _usdtInputField.attributedPlaceholder = attrString;
         }else{
             _walletAddressLabel.text = model.bank_account_no;
-            _noteLabel.text = [NSString stringWithFormat:@"备注：%@",model.remark];
+            _noteLabel.text = [NSString stringWithFormat:@"%@",model.remark];
             _qrCodeImg.image = [PublicMethod QRCodeMethod:model.bank_account_no];
-            _scanTypeLabel.text = [NSString stringWithFormat:@"请使用%@扫码充值",_itemsArray[indexPath.section][indexPath.row]];
+            
             _elseWalletView.hidden = NO;
             _normalWalletView.hidden = YES;
+            
+            NSString *payTypeName = [NSString stringWithFormat:@"%@",_itemsArray[indexPath.section][indexPath.row]];
+            NSString *noteBottomStr = [NSString stringWithFormat:@"(复制备注信息到%@可快速到账)",payTypeName];
+            NSMutableAttributedString *noteBottomAttrStr = [[NSMutableAttributedString alloc] initWithString:noteBottomStr];
+            [noteBottomAttrStr addAttribute:NSForegroundColorAttributeName
+            value:COLOR_RGBA(36, 151, 255, 1)
+            range:NSMakeRange(8, payTypeName.length)];
+            _noteBottomLabel.attributedText = noteBottomAttrStr;
+            
+            NSString *scanStr = [NSString stringWithFormat:@"请使用%@扫码充值",payTypeName];
+            NSMutableAttributedString *scanAttrStr = [[NSMutableAttributedString alloc] initWithString:scanStr];
+            [scanAttrStr addAttribute:NSForegroundColorAttributeName
+            value:COLOR_RGBA(36, 151, 255, 1)
+                                range:NSMakeRange(3, payTypeName.length)];
+            _scanTypeLabel.attributedText = scanAttrStr;
+            
+            self.handType = [payTypeName isEqualToString:@"Atoken"] ? @"atoken" : @"bitpie";
         }
     }
 }
