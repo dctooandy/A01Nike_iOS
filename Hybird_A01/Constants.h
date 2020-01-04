@@ -362,7 +362,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 // 查询可分享链接
 
-#define BTTGetWeiXinRediect          @"/public/users/getWeiXinRedirect"
+#define BTTGetWeiXinRediect          @"_extra_/api/v1/app/public/getWeiXinRedirect"
 
 /********************************************常用宏*********************************************************/
 

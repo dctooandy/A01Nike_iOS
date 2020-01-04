@@ -101,16 +101,16 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork savedUserInfo]) {
         [self loadUserInfo];
-        [self loadBindStatus];
-        [self loadBankList];
-        if (!self.isLoading) {
-            [self loadGamesListAndGameAmount];
-        }
-        [self loadPaymentData];
-        [self loadAccountStatus];
-        [self loadSaveMoneyTimes];
-//        if (![[[NSUserDefaults standardUserDefaults] objectForKey:BTTNicknameCache] length]) {
-            [self loadNickName];
+//        [self loadBindStatus];
+//        [self loadBankList];
+//        if (!self.isLoading) {
+//            [self loadGamesListAndGameAmount];
+//        }
+//        [self loadPaymentData];
+//        [self loadAccountStatus];
+//        [self loadSaveMoneyTimes];
+////        if (![[[NSUserDefaults standardUserDefaults] objectForKey:BTTNicknameCache] length]) {
+//            [self loadNickName];
 //        }
     } else {
         self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
