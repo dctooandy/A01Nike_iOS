@@ -70,7 +70,7 @@
 
 - (void)resetTabar {
     
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork savedUserInfo]) {
         for (UITabBarItem *item in self.items) {
             NSInteger index = [self.items indexOfObject:item];
             if (index == 3) {
@@ -134,14 +134,14 @@
 
 - (void)setupViewControllers {
     [self addOneChildVC:self.homePageVC title:@"首页" imageName:@"home_normal" selectedImageName:@"home_pressed"];
-//    [self addOneChildVC:self.voiceCall title:@"APP语音" imageName:@"tab_voiceCall" selectedImageName:@"tab_voiceCall"];
-//    [self addOneChildVC:self.lucky title:@"抽奖" imageName:@"lottery_pressed" selectedImageName:@"lottery_pressed"];
-//    if ([IVNetwork userInfo]) {
-//        [self addOneChildVC:self.discountsVC title:@"优惠" imageName:@"preferential_normal" selectedImageName:@"preferential_pressed"];
-//    } else {
-//        [self addOneChildVC:self.discountsVC title:@"登录/开户" imageName:@"login_normal" selectedImageName:@"login_pressed"];
-//    }
-//    [self addOneChildVC:self.mineVC title:@"会员中心" imageName:@"member_normal" selectedImageName:@"member_pressed"];
+    [self addOneChildVC:self.voiceCall title:@"APP语音" imageName:@"tab_voiceCall" selectedImageName:@"tab_voiceCall"];
+    [self addOneChildVC:self.lucky title:@"抽奖" imageName:@"lottery_pressed" selectedImageName:@"lottery_pressed"];
+    if ([IVNetwork savedUserInfo]) {
+        [self addOneChildVC:self.discountsVC title:@"优惠" imageName:@"preferential_normal" selectedImageName:@"preferential_pressed"];
+    } else {
+        [self addOneChildVC:self.discountsVC title:@"登录/开户" imageName:@"login_normal" selectedImageName:@"login_pressed"];
+    }
+    [self addOneChildVC:self.mineVC title:@"会员中心" imageName:@"member_normal" selectedImageName:@"member_pressed"];
 }
 
 - (void)viewDidLayoutSubviews
@@ -202,7 +202,7 @@
             NSLog(@"选择了%@",@(buttonIndex));
             weakSelf(weakSelf);
             if (buttonIndex == 0) {
-                if ([IVNetwork userInfo]) {
+                if ([IVNetwork savedUserInfo]) {
                     [self loadVoiceCallNumWithIsLogin:YES makeCall:^(NSString *uid) {
                         if (uid == nil || uid.length == 0) {
                             [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
@@ -231,7 +231,7 @@
         self.preSelectIndex = index;
     } else if (index == 3) {
         self.selectVC = self.discountsVC;
-        if ([IVNetwork userInfo]) {
+        if ([IVNetwork savedUserInfo]) {
             self.preSelectIndex = index;
         } else {
             BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
@@ -317,14 +317,14 @@
     if (!_homePageVC) {
         _homePageVC = [[BTTHomePageViewController alloc] init];
         
-//        AGQJController *AGQJvc = [IVGameManager sharedManager].agqjVC;
-//        [self.homePageVC.view addSubview:AGQJvc.view];
-//        AGQJvc.view.top = -SCREEN_HEIGHT;
-//
-//        AGINController *aginVC = [IVGameManager sharedManager].aginVC;
-//        //AG国际预加载
-//        [self.homePageVC.view addSubview:aginVC.view];
-//        aginVC.view.top = -SCREEN_HEIGHT;
+        AGQJController *AGQJvc = [IVGameManager sharedManager].agqjVC;
+        [self.homePageVC.view addSubview:AGQJvc.view];
+        AGQJvc.view.top = -SCREEN_HEIGHT;
+
+        AGINController *aginVC = [IVGameManager sharedManager].aginVC;
+        //AG国际预加载
+        [self.homePageVC.view addSubview:aginVC.view];
+        aginVC.view.top = -SCREEN_HEIGHT;
     }
     return _homePageVC;
 }

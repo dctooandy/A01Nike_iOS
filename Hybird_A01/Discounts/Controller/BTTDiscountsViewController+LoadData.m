@@ -17,13 +17,13 @@
     NSString *url = nil;
     NSMutableDictionary *params = @{}.mutableCopy;
     int currentHour = [PublicMethod hour:[NSDate date]];
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork savedUserInfo]) {
         if ([phone containsString:@"*"]) {
             url = BTTCallBackMemberAPI;
             [params setValue:phone forKey:@"phone"];
             [params setValue:@"memberphone" forKey:@"phone_type"];
         } else {
-            if ([IVNetwork userInfo].starLevel > 4 && currentHour >= 12) {
+            if ([IVNetwork savedUserInfo].starLevel > 4 && currentHour >= 12) {
                 url = BTTCallBackMemberAPI;
                 [params setValue:phone forKey:@"phone"];
                 [params setValue:@"memberphone" forKey:@"phone_type"];
@@ -68,14 +68,19 @@
     if (self.discountsVCType == BTTDiscountsVCTypeDetail) {
         [self showLoading];
     }
-    [IVNetwork sendUseCacheRequestWithSubURL:BTTPromotionList paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+    NSString *name = [IVNetwork savedUserInfo] ? [IVNetwork savedUserInfo].loginName : @"";
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    [params setValue:name forKey:@"loginName"];
+    [params setValue:@"promo" forKey:@"promoName"];
+    [IVNetwork requestPostWithUrl:BTTPromotionList paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
-        if (result.status) {
-            if (![result.data isKindOfClass:[NSNull class]]) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (![result.body isKindOfClass:[NSNull class]]) {
                 [self.sheetDatas removeAllObjects];
                 NSLog(@"%@",response);
                 [self endRefreshing];
-                for (NSDictionary *dict in result.data) {
+                for (NSDictionary *dict in result.body) {
                     BTTPromotionModel *model = [BTTPromotionModel yy_modelWithDictionary:dict];
                     [self.sheetDatas addObject:model];
                 }
@@ -83,6 +88,7 @@
             }
         }
     }];
+   
 }
 
 - (void)getLive800InfoDataWithResponse:(BTTLive800ResponseBlock)responseBlock {

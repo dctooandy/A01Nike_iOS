@@ -197,8 +197,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 /*********************************************API********************************************************/
 
-#define BTTVoiceCall        @"/A01/phones/appCall"
-#define BTTVoiceCallLogin        @"/A01/phones/appCallByLogin"
+#define BTTVoiceCall        @"api/v1/app/public/appCall"
+#define BTTVoiceCallLogin        @"api/v1/public/appCallByLogin"
 
 // 登录注册
 
@@ -252,7 +252,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 // 优惠列表
 
-#define BTTPromotionList             @"/A01/promotion/newList"
+#define BTTPromotionList             @"_extra_/api/v1/wms/promotions"
 
 // 获取用户本地额度
 

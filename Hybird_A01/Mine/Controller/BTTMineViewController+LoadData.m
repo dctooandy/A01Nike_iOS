@@ -60,7 +60,7 @@
 }
 
 - (void)loadWeiXinRediect {
-    NSDictionary *params = @{@"login_name":[IVNetwork userInfo].loginName};
+    NSDictionary *params = @{@"login_name":[IVNetwork savedUserInfo].loginName};
     //TODO:
 //    [IVNetwork sendRequestWithSubURL:BTTGetWeiXinRediect paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
 //        NSLog(@"%@",response);
@@ -91,7 +91,7 @@
         model.available = YES;
         [arr addObject:model];
     }
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork savedUserInfo]) {
         [self loadPersonalPaymentData:arr];
     }
     
@@ -537,7 +537,7 @@
 }
 - (void)loadBtcRate
 {
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork savedUserInfo]) {
         //TODO:
 //        [BTTHttpManager fetchBTCRateWithUseCache:YES];
     }
@@ -547,13 +547,13 @@
     NSString *url = nil;
     NSMutableDictionary *params = @{}.mutableCopy;
     int currentHour = [PublicMethod hour:[NSDate date]];
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork savedUserInfo]) {
         if ([phone containsString:@"*"]) {
             url = BTTCallBackMemberAPI;
             [params setValue:phone forKey:@"phone"];
             [params setValue:@"memberphone" forKey:@"phone_type"];
         } else {
-            if ([IVNetwork userInfo].starLevel > 4 && currentHour >= 12) {
+            if ([IVNetwork savedUserInfo].starLevel > 4 && currentHour >= 12) {
                 url = BTTCallBackMemberAPI;
                 [params setValue:phone forKey:@"phone"];
                 [params setValue:@"memberphone" forKey:@"phone_type"];
@@ -623,20 +623,20 @@
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_enter(group);
     dispatch_async(queue, ^{
-        if (![IVNetwork userInfo]) {
+        if (![IVNetwork savedUserInfo]) {
             return;
         }
         [self loadLocalAmount:group];
     });
     dispatch_group_enter(group);
     dispatch_async(queue, ^{
-        if (![IVNetwork userInfo]) {
+        if (![IVNetwork savedUserInfo]) {
             return;
         }
         [self loadGameshallList:group];
     });
     dispatch_group_notify(group, queue, ^{
-        if (![IVNetwork userInfo]) {
+        if (![IVNetwork savedUserInfo]) {
             return;
         }
         [self loadEachGameHall];
@@ -677,20 +677,20 @@
 
 - (void)loadGameAmountWithModel:(BTTGamesHallModel *)model index:(NSInteger)index group:(dispatch_group_t)group{
     NSDictionary *params = @{@"game_name":model.gameName};
-    if (![IVNetwork userInfo]) {
+    if (![IVNetwork savedUserInfo]) {
         return;
     }
-    [IVNetwork sendRequestWithSubURL:BTTCreditsGame paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        if (result.code_http == 200 && result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-            model.amount = [NSString stringWithFormat:@"%.2f",[result.data[@"val"] floatValue]];
-            self.preAmount = [NSString stringWithFormat:@"%.2f",self.preAmount.floatValue + model.amount.floatValue];
-        }
-        dispatch_group_leave(group);
-        if (result.message.length) {
-            [MBProgressHUD showError:result.message toView:nil];
-        }
-    }];
+//    [IVNetwork sendRequestWithSubURL:BTTCreditsGame paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
+//        NSLog(@"%@",response);
+//        if (result.code_http == 200 && result.data && [result.data isKindOfClass:[NSDictionary class]]) {
+//            model.amount = [NSString stringWithFormat:@"%.2f",[result.data[@"val"] floatValue]];
+//            self.preAmount = [NSString stringWithFormat:@"%.2f",self.preAmount.floatValue + model.amount.floatValue];
+//        }
+//        dispatch_group_leave(group);
+//        if (result.message.length) {
+//            [MBProgressHUD showError:result.message toView:nil];
+//        }
+//    }];
 }
 
 - (void)loadGameshallList:(dispatch_group_t)group{
@@ -730,23 +730,23 @@
 }
 
 - (void)loadNickName {
-    [IVNetwork sendRequestWithSubURL:BTTGetMyAlias paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        if (result.status) {
-            if ([result.data[@"alias"] length]) {
-                [[NSUserDefaults standardUserDefaults] setObject:result.data[@"alias"] forKey:BTTNicknameCache];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [self.collectionView reloadData];
-            }
-        }
-    }];
+//    [IVNetwork sendRequestWithSubURL:BTTGetMyAlias paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+//        if (result.status) {
+//            if ([result.data[@"alias"] length]) {
+//                [[NSUserDefaults standardUserDefaults] setObject:result.data[@"alias"] forKey:BTTNicknameCache];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+//                [self.collectionView reloadData];
+//            }
+//        }
+//    }];
 }
 
 - (void)getLive800InfoDataWithResponse:(BTTLive800ResponseBlock)responseBlock {
-    [IVNetwork sendRequestWithSubURL:@"users/getLiveUrl" paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        if (result.status) {
-            responseBlock(result.data[@"info"]);
-        }
-    }];
+//    [IVNetwork sendRequestWithSubURL:@"users/getLiveUrl" paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+//        if (result.status) {
+//            responseBlock(result.data[@"info"]);
+//        }
+//    }];
 }
 
 #pragma mark - 动态添加属性

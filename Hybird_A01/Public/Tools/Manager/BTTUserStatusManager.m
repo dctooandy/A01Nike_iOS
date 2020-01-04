@@ -38,12 +38,12 @@
 }
 + (void)logoutSuccess
 {
-//    [IVNetwork cleanUserInfo];
-//    [WebViewUserAgaent clearCookie];
-//    [[IVGameManager sharedManager] userStatusChanged:NO];
-//    [IVHeartSocketManager exitLoginSendHearPacket];
-//    [CLive800Manager switchLive800UserWithCustomerId:nil];
-//    [NBSAppAgent setUserIdentifier:nil];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
+    [IVNetwork cleanUserInfo];
+    [WebViewUserAgaent clearCookie];
+    [[IVGameManager sharedManager] userStatusChanged:NO];
+    [IVHeartSocketManager exitLoginSendHearPacket];
+    [CLive800Manager switchLive800UserWithCustomerId:nil];
+    [NBSAppAgent setUserIdentifier:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
 }
 @end

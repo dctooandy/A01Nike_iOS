@@ -40,7 +40,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    if (![IVNetwork userInfo]) {
+    if (![IVNetwork savedUserInfo]) {
         [WebViewUserAgaent clearCookie];
     }
     [self loadWebView];
@@ -52,15 +52,15 @@
     }
 }
 
-//- (void)webViewDidFinishLoad:(UIWebView *)webView
-//{
-//    [super webViewDidFinishLoad:webView];
-//    [self loadFinishCallJS];
-//}
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [super webViewDidFinishLoad:webView];
+    [self loadFinishCallJS];
+}
 
-//- (BOOL)isPreloading
-//{
-//    return YES;
-//}
+- (BOOL)isPreloading
+{
+    return YES;
+}
 
 @end

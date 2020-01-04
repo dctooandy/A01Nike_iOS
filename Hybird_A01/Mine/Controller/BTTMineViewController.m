@@ -99,7 +99,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork savedUserInfo]) {
         [self loadUserInfo];
         [self loadBindStatus];
         [self loadBankList];
@@ -146,7 +146,7 @@
     if (indexPath.row == 0) {
         BTTBaseNavigationController *navVC = self.tabBarController.viewControllers[0];
         BTTHomePageViewController *homeVC = navVC.viewControllers[0];
-        if ([IVNetwork userInfo]) {
+        if ([IVNetwork savedUserInfo]) {
             NSString *nickName = [[NSUserDefaults standardUserDefaults] objectForKey:BTTNicknameCache];
             if (!nickName.length) {
                 BTTMeHeaderLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeHeaderLoginCell" forIndexPath:indexPath];
@@ -157,8 +157,8 @@
                     cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
                 }
                 
-                cell.nameLabel.text = [IVNetwork userInfo].loginName;
-                cell.vipLevelLabel.text = ([IVNetwork userInfo].starLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork userInfo].starLevel)];
+                cell.nameLabel.text = [IVNetwork savedUserInfo].loginName;
+                cell.vipLevelLabel.text = ([IVNetwork savedUserInfo].starLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork savedUserInfo].starLevel)];
                 weakSelf(weakSelf);
                 cell.accountBlanceBlock = ^{
                     strongSelf(strongSelf);
@@ -188,8 +188,8 @@
                     cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
                 }
                 cell.nicknameLabel.text = nickName;
-                cell.nameLabel.text = [IVNetwork userInfo].loginName;
-                cell.vipLevelLabel.text = ([IVNetwork userInfo].starLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork userInfo].starLevel)];
+                cell.nameLabel.text = [IVNetwork savedUserInfo].loginName;
+                cell.vipLevelLabel.text = ([IVNetwork savedUserInfo].starLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork savedUserInfo].starLevel)];
                 weakSelf(weakSelf);
                 cell.accountBlanceBlock = ^{
                     strongSelf(strongSelf);
@@ -360,12 +360,12 @@
 }
 
 - (void)goSaveMoneyWithModel:(BTTMeMainModel *)model {
-    if (![IVNetwork userInfo]) {
+    if (![IVNetwork savedUserInfo]) {
         [MBProgressHUD showError:@"请先登录" toView:nil];
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
-    } else if ([IVNetwork userInfo].starLevel == 0 && (![IVNetwork userInfo].verify_code.length || ![IVNetwork userInfo].real_name.length)) {
+    } else if ([IVNetwork savedUserInfo].starLevel == 0 && (![IVNetwork savedUserInfo].realName.length)) {
         if (model.paymentType == 15 || model.paymentType == 17 || model.paymentType == 16 || model.paymentType == 2) {
             BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
             [self.navigationController pushViewController:personInfo animated:YES];
@@ -390,7 +390,7 @@
 //        }];
         return;
     }
-    if (![IVNetwork userInfo]) {
+    if (![IVNetwork savedUserInfo]) {
         [MBProgressHUD showError:@"请先登录" toView:nil];
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
@@ -398,7 +398,8 @@
     }
     if (indexPath.row == self.saveMoneyCount + 3) {
         if (self.isCompletePersonalInfo) {
-            if ([IVNetwork userInfo].isBankBinded) {
+            //TODO:
+            if ([IVNetwork savedUserInfo].walletFlag==1) {
                 BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
             } else {
@@ -424,7 +425,7 @@
         }
     } else if (indexPath.row == self.saveMoneyCount + 6) {
         UIViewController *vc = nil;
-        if ([IVNetwork userInfo].isPhoneBinded) {
+        if ([IVNetwork savedUserInfo].mobileNo!=nil) {
             BTTVerifyTypeSelectController *selectVC = [BTTVerifyTypeSelectController new];
             selectVC.verifyType = BTTSafeVerifyTypeChangeMobile;
             vc = selectVC;
@@ -607,6 +608,6 @@
 
 - (BOOL)isCompletePersonalInfo
 {
-    return [IVNetwork userInfo].real_name && [IVNetwork userInfo].verify_code;
+    return [IVNetwork savedUserInfo].realName;
 }
 @end

@@ -11,12 +11,19 @@
 #import <IVCacheLibrary/IVCacheWrapper.h>
 #import <YYModel.h>
 #import "Constants.h"
+#import "HAInitConfig.h"
 
 @implementation IVNetwork
 
 + (IVUserInfoModel *)userInfo
 {
     return [IVNetworkManager sharedInstance].userInfoModel;;
+}
+
++ (NSString *)h5Domain
+{
+    NSString *h5Domain = [IVCacheWrapper objectForKey:IVCacheH5DomainKey] ? : [HAInitConfig defaultH5Domain];
+    return h5Domain;
 }
 
 + (NSString *)getPublicConfigWithKey:(NSString *)key
@@ -52,6 +59,10 @@
         return;
     }
     [IVCacheWrapper setObject:userInfo forKey:@"customer"];
+}
+
++ (void)cleanUserInfo{
+    [IVCacheWrapper setObject:nil forKey:@"customer"];
 }
 
 + (id)sendUseCacheRequestWithSubURL:(NSString *)url paramters:(NSDictionary * __nullable)paramters completionBlock:(KYHTTPCallBack)completionBlock{
