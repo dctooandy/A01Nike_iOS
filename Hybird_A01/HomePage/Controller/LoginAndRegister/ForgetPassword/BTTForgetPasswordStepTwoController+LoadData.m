@@ -15,19 +15,24 @@
     if (!account.length) {
         return;
     }
-    NSDictionary *params = @{BTTLoginName:account};
-    [IVNetwork sendRequestWithSubURL:BTTStepOneSendCode paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        [MBProgressHUD showSuccess:result.message toView:self.view];
+    NSDictionary *params = @{BTTLoginName:account,@"use":@4,@"validateId":self.validateId};
+    [IVNetwork requestPostWithUrl:BTTStepOneSendCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
+            self.messageId = result.body[@"messageId"];
+        }else{
+            [MBProgressHUD showSuccess:result.head.errMsg toView:self.view];
+        }
     }];
 }
 
-- (void)verifyCode:(NSString *)code account:(NSString *)account completeBlock:(CompleteBlock)completeBlock {
+- (void)verifyCode:(NSString *)code account:(NSString *)account completeBlock:(KYHTTPCallBack)completeBlock {
     if (!code.length || !account.length) {
         return;
     }
-    NSDictionary *params = @{BTTLoginName: account, @"code":code};
-    //TODO:
-//    [IVNetwork sendRequestWithSubURL:BTTStepTwoCheckCode paramters:params completionBlock:completeBlock];
+    NSDictionary *params = @{BTTLoginName: account, @"smsCode":code,@"messageId":self.messageId,@"use":@4};
+    [IVNetwork requestPostWithUrl:BTTVerifySmsCode paramters:params completionBlock:completeBlock];
 }
 
 - (void)loadMainData {

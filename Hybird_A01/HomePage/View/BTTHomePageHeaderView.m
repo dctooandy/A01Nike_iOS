@@ -41,15 +41,15 @@
         case BTTNavTypeHomePage:
         {
             // 中秋装饰
-            NSString *path = nil;
-            if (KIsiPhoneX) {
-                path = [[NSBundle mainBundle] pathForResource:@"828x176-min" ofType:@"gif"];;
-            } else {
-                path = [[NSBundle mainBundle] pathForResource:@"828x128-min" ofType:@"gif"];;
-            }
-            NSData *data = [NSData dataWithContentsOfFile:path];
-            UIImage *image = [UIImage sd_animatedGIFWithData:data];
-            [self sd_setImageWithURL:nil placeholderImage:image];
+//            NSString *path = nil;
+//            if (KIsiPhoneX) {
+//                path = [[NSBundle mainBundle] pathForResource:@"828x176-min" ofType:@"gif"];;
+//            } else {
+//                path = [[NSBundle mainBundle] pathForResource:@"828x128-min" ofType:@"gif"];;
+//            }
+//            NSData *data = [NSData dataWithContentsOfFile:path];
+//            UIImage *image = [UIImage sd_animatedGIFWithData:data];
+//            [self sd_setImageWithURL:nil placeholderImage:image];
 //            UIImageView *moonImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"moon"]];
 //            if (KIsiPhoneX) {
 //                moonImage.frame = CGRectMake(55, 15, 50, 50);
@@ -61,13 +61,13 @@
             
             UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
             [self addSubview:logoImageView];
-//            logoImageView.image = ImageNamed(@"Navlogo");
+            logoImageView.image = ImageNamed(@"Navlogo");
             
             
             self.titleLabel = [UILabel new];
             [self addSubview:self.titleLabel];
             self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
-//            self.titleLabel.text = @"首页";
+            self.titleLabel.text = @"首页";
             self.titleLabel.textAlignment = NSTextAlignmentCenter;
             self.titleLabel.font = kFontSystem(17);
             self.titleLabel.textColor = [UIColor whiteColor];

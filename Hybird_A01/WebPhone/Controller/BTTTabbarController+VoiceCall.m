@@ -13,7 +13,11 @@
 
 - (void)loadVoiceCallNumWithIsLogin:(BOOL)isLogin makeCall:(MakeCallBlock)makeCall {
     NSString *url = isLogin ? BTTVoiceCallLogin : BTTVoiceCall;
-    [IVNetwork requestPostWithUrl:url paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    if (isLogin) {
+        [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
+    }
+    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSDictionary *data = result.body;
@@ -25,7 +29,6 @@
                 makeCall(model.uid);
             }
         }
-        
     }];
 }
 

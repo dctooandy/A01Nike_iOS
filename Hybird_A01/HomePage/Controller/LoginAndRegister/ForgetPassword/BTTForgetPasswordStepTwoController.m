@@ -50,9 +50,11 @@
         cell.model = model;
         cell.mineSparaterType = BTTMineSparaterTypeNone;
         weakSelf(weakSelf);
+        __weak typeof(cell) weakCell = cell;
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
             [strongSelf sendVerifyCodeWithAccount:strongSelf.account];
+            [weakCell countDown];
         };
         return cell;
     } else {
@@ -61,19 +63,18 @@
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
-            //TODO:
-//            [strongSelf verifyCode:strongSelf.code account:strongSelf.account completeBlock:^(IVRequestResultModel *result, id response) {
-//                if (result.status) {
-//                    if (result.status && [result.data[@"val"] isKindOfClass:[NSDictionary class]] ) {
-//                        BTTForgetPasswordStepThreeController *vc = [[BTTForgetPasswordStepThreeController alloc] init];
-//                        vc.accessID = result.data[@"val"];
-//                        vc.account = strongSelf.account;
-//                        [strongSelf.navigationController pushViewController:vc animated:YES];
-//                    }
-//                } else {
-//                    [MBProgressHUD showError:result.message toView:strongSelf.view];
-//                }
-//            }];
+            [strongSelf verifyCode:strongSelf.code account:strongSelf.account completeBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                IVJResponseObject *result = response;
+                if ([result.head.errCode isEqualToString:@"0000"]) {
+                    BTTForgetPasswordStepThreeController *vc = [[BTTForgetPasswordStepThreeController alloc] init];
+                    vc.validateId = result.body[@"validateId"];
+                    vc.messageId = result.body[@"messageId"];
+                    vc.account = strongSelf.account;
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                }else{
+                    [MBProgressHUD showError:result.head.errMsg toView:strongSelf.view];
+                }
+            }];
         };
         return cell;
     }

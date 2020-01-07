@@ -101,7 +101,6 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork savedUserInfo]) {
         [self loadUserInfo];
-        [self loadBindStatus];
         [self loadBankList];
         if (!self.isLoading) {
             [self loadGamesListAndGameAmount];
@@ -109,9 +108,6 @@
         [self loadPaymentData];
         [self loadAccountStatus];
         [self loadSaveMoneyTimes];
-//        if (![[[NSUserDefaults standardUserDefaults] objectForKey:BTTNicknameCache] length]) {
-            [self loadNickName];
-//        }
     } else {
         self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
         self.saveMoneyTimesType = BTTSaveMoneyTimesTypeLessTen;
@@ -147,7 +143,7 @@
         BTTBaseNavigationController *navVC = self.tabBarController.viewControllers[0];
         BTTHomePageViewController *homeVC = navVC.viewControllers[0];
         if ([IVNetwork savedUserInfo]) {
-            NSString *nickName = [[NSUserDefaults standardUserDefaults] objectForKey:BTTNicknameCache];
+            NSString *nickName = [IVNetwork savedUserInfo].nickName;
             if (!nickName.length) {
                 BTTMeHeaderLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeHeaderLoginCell" forIndexPath:indexPath];
                 cell.noticeStr = homeVC.noticeStr.length ? homeVC.noticeStr : @"";
@@ -365,7 +361,7 @@
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
-    } else if ([IVNetwork savedUserInfo].starLevel == 0 && (![IVNetwork savedUserInfo].realName.length)) {
+    } else if ([IVNetwork savedUserInfo].starLevel == 0 && (![IVNetwork savedUserInfo].realName.length)&& (![IVNetwork savedUserInfo].verifyCode.length)) {
         if (model.paymentType == 15 || model.paymentType == 17 || model.paymentType == 16 || model.paymentType == 2) {
             BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
             [self.navigationController pushViewController:personInfo animated:YES];
@@ -399,7 +395,7 @@
     if (indexPath.row == self.saveMoneyCount + 3) {
         if (self.isCompletePersonalInfo) {
             //TODO:
-            if ([IVNetwork savedUserInfo].walletFlag==1) {
+            if ([IVNetwork savedUserInfo].bandCardNum!=0) {
                 BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
             } else {
@@ -425,7 +421,7 @@
         }
     } else if (indexPath.row == self.saveMoneyCount + 6) {
         UIViewController *vc = nil;
-        if ([IVNetwork savedUserInfo].mobileNo!=nil) {
+        if ([IVNetwork savedUserInfo].mobileNoBind==1) {
             BTTVerifyTypeSelectController *selectVC = [BTTVerifyTypeSelectController new];
             selectVC.verifyType = BTTSafeVerifyTypeChangeMobile;
             vc = selectVC;
@@ -608,6 +604,6 @@
 
 - (BOOL)isCompletePersonalInfo
 {
-    return [IVNetwork savedUserInfo].realName;
+    return [IVNetwork savedUserInfo].realName&&[IVNetwork savedUserInfo].verifyCode;
 }
 @end

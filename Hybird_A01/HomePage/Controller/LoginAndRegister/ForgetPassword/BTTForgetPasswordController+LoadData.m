@@ -16,34 +16,37 @@
 // 图形验证码
 - (void)loadVerifyCode {
     [self showLoading];
-    [IVNetwork sendRequestWithSubURL:BTTVerifyCaptcha paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
+    [IVNetwork requestPostWithUrl:BTTVerifyCaptcha paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
-        if (result.status && result.data && ![result.data isKindOfClass:[NSNull class]]) {
-            if (result.data[@"src"] && ![result.data[@"src"] isKindOfClass:[NSNull class]]) {
-                NSString *base64Str = result.data[@"src"];
-                self.uuid = result.data[@"uuid"];
-                // 将base64字符串转为NSData
-                NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
-                // 将NSData转为UIImage
-                UIImage *decodedImage = [UIImage imageWithData: decodeData];
-                self.codeImage = decodedImage;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectionView reloadData];
-                });
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body && ![result.body isKindOfClass:[NSNull class]]) {
+                if (result.body[@"image"] && ![result.body[@"image"] isKindOfClass:[NSNull class]]) {
+                    NSString *base64Str = result.body[@"image"];
+                    // 将base64字符串转为NSData
+                    NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+                    // 将NSData转为UIImage
+                    UIImage *decodedImage = [UIImage imageWithData: decodeData];
+                    self.codeImage = decodedImage;
+                    //获取到验证码ID
+                    self.uuid = result.body[@"captchaId"];
+                    self.codeImage = decodedImage;
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.collectionView reloadData];
+                    });
+                }
             }
         }
     }];
 }
 
-- (void)verifyPhotoCode:(NSString *)code WithCaptchaId:(NSString *)captchaId completeBlock:(CompleteBlock)completeBlock {
-//    NSDictionary *params = @{@"code":code,@"uuid":uuid};
+- (void)verifyPhotoCode:(NSString *)code loginName:(NSString *)loginName WithCaptchaId:(NSString *)captchaId completeBlock:(KYHTTPCallBack)completeBlock {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setValue:code forKey:@"captcha"];
     [params setValue:captchaId forKey:@"captchaId"];
-    [params setValue:@"A01APP02" forKey:@"productId"];
-    //TODO:
-//    [IVNetwork sendRequestWithSubURL:BTTValidateCaptcha paramters:params completionBlock:completeBlock];
+    [params setValue:@0 forKey:@"type"];
+    [params setValue:loginName forKey:@"loginName"];
+    [IVNetwork requestPostWithUrl:BTTValidateCaptcha paramters:params completionBlock:completeBlock];
 }
 
 - (void)loadMainData {

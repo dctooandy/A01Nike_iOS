@@ -43,13 +43,13 @@
     return @"";
 }
 
-+ (BTTUserInfoModel *)savedUserInfo
++ (BTTCustomerInfoModel *)savedUserInfo
 {
     NSDictionary *json = [IVCacheWrapper objectForKey:@"customer"];
     if (json==nil) {
         return nil;
     }
-    BTTUserInfoModel *model = [BTTUserInfoModel yy_modelWithJSON:json];
+    BTTCustomerInfoModel *model = [BTTCustomerInfoModel yy_modelWithJSON:json];
     return model;
 }
 

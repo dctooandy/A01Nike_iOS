@@ -8,6 +8,7 @@
 
 #import "BTTHttpManager.h"
 #import "BTTBankModel.h"
+#import <IVCacheLibrary/IVCacheWrapper.h>
 @implementation BTTHttpManager
 + (void)sendRequestWithUrl:(NSString *)url paramters:(NSDictionary *)paramters completionBlock:(KYHTTPCallBack)completionBlock
 {
@@ -49,20 +50,19 @@
 + (void)fetchBankListWithUseCache:(BOOL)useCache completion:(KYHTTPCallBack)completion
 {
     NSMutableDictionary *params = @{
-                             @"flag" : @"9;1",
-                             @"order":@"PRIORITY_ORDER",
-                             @"delete_flag":@"0"
+                             @"loginName" : [IVNetwork savedUserInfo].loginName,
                              }.mutableCopy;
 //    [params setObject:@"1" forKey:@"cache_type"];
-    NSString *url = @"public/bankcard/getList";
     weakSelf(weakSelf)
     if (useCache) {
-        [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            [weakSelf fetchBankListResult:response completion:completion];
+        [self sendRequestUseCacheWithUrl:BTTAccountQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            [weakSelf fetchBankListResult:result.body completion:completion];
         }];
     } else {
-        [self sendRequestWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            [weakSelf fetchBankListResult:response completion:completion];
+        [IVNetwork requestPostWithUrl:BTTAccountQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            [weakSelf fetchBankListResult:result.body completion:completion];
         }];
     }
 }
@@ -73,13 +73,12 @@
 //处理银行卡列表获取结果
 + (void)fetchBankListResult:(NSDictionary *)result completion:(KYHTTPCallBack)completion
 {
-#warning 调试接口
-//    if (result.data) {
-//        [[IVCacheManager sharedInstance] nativeWriteValue:result.data forKey:BTTCacheBankListKey];
-//    }
-//    if (completion) {
-//        completion(result,nil);
-//    }
+    if (result!=nil) {
+        [IVCacheWrapper setObject:result forKey:BTTCacheBankListKey];
+    }
+    if (completion) {
+        completion(result,nil);
+    }
 }
 //处理绑定状态获取结果
 + (void)fetchBindStatusWithUseCache:(BOOL)useCache completionBlock:(KYHTTPCallBack)completionBlock
@@ -99,18 +98,6 @@
     }
 }
 + (void)fetchBindStatusResult:(NSDictionary *)result completionBlock:(KYHTTPCallBack)completionBlock {
-#warning 调试接口
-//    if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-//        NSMutableDictionary *userInfo = @{}.mutableCopy;
-//        userInfo[@"isPhoneBinded"] = [result.data valueForKey:@"phone"];
-//        userInfo[@"isEmailBinded"] = [result.data valueForKey:@"email"];
-//        userInfo[@"isBankBinded"] = [result.data valueForKey:@"bank"];
-//        userInfo[@"isBtcBinded"] = [result.data valueForKey:@"btc"];
-//        [IVNetwork updateUserInfo:userInfo];
-//    }
-//    if (completionBlock) {
-//        completionBlock(result,nil);
-//    }
 }
 
 + (void)getOpenAccountStatusCompletion:(KYHTTPCallBack)completion {
@@ -184,16 +171,36 @@
     [self sendRequestWithUrl:url paramters:params completionBlock:completion];
 }
 + (void)fetchUserInfoCompleteBlock:(KYHTTPCallBack)completeBlock{
-    //TODO:
-//    if (![IVNetwork userInfo]) {
-//        return;
-//    }
-    NSMutableDictionary  *param = @{}.mutableCopy;
-    [self sendRequestWithUrl:@"public/users/userInfo" paramters:param completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        if (response && response && [response isKindOfClass:[NSDictionary class]]) {
-            //TODO:
-//            [IVNetwork updateUserInfo:result.data];
+    if (![IVNetwork savedUserInfo]) {
+        return;
+    }
+    
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    params[@"inclAddress"] = @1;
+    params[@"inclBankAccount"] = @1;
+    params[@"inclBtcAccount"] = @1;
+    params[@"inclCredit"] = @1;
+    params[@"inclEmail"] = @1;
+    params[@"inclEmailBind"] = @1;
+    params[@"inclMobileNo"] = @1;
+    params[@"inclMobileNoBind"] = @1;
+    params[@"inclPwdExpireDays"] = @1;
+    params[@"inclRealName"] = @1;
+    params[@"inclVerifyCode"] = @1;
+    params[@"inclXmFlag"] = @1;
+    params[@"verifyCode"] = @1;
+    params[@"inclNickNameFlag"] = @1;
+    [IVNetwork requestPostWithUrl:BTTGetLoginInfoByName paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body!=nil) {
+                [IVNetwork updateUserInfo:result.body];
+            }
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
+
     }];
 }
 

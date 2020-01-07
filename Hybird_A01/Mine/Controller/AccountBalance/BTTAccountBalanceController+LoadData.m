@@ -30,7 +30,7 @@
 }
 
 - (void)loadLocalAmount:(dispatch_group_t)group {
-    [IVNetwork sendRequestWithSubURL:BTTCreditsLocal paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork sendRequestWithSubURL:BTTCreditsALL paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
        
         NSLog(@"%@",response);
         if (result.code_http == 200 && result.status) {

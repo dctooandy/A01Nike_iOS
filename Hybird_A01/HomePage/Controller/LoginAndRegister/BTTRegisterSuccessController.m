@@ -14,6 +14,7 @@
 #import "BTTPublicBtnCell.h"
 #import "BTTChangePwdBtnsCell.h"
 #import "BTTRegisterChangePwdSuccessController.h"
+#import "IVRsaEncryptWrapper.h"
 
 typedef enum {
     BTTRegisterSuccessTypeNormal,
@@ -66,36 +67,26 @@ typedef enum {
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.registerSuccessType == BTTRegisterSuccessTypeNormal) {
         if (indexPath.row == 0) {
-            if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal || self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
-                BTTRegisterSuccessOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterSuccessOneCell" forIndexPath:indexPath];
-                NSString *accountStr = [NSString stringWithFormat:@"您的账号为: %@",self.account];
-                NSRange accountRange = [accountStr rangeOfString:self.account];
-                NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:accountStr];
-                [attstr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:accountRange];
-                cell.accountLabel.attributedText = attstr;
-                return cell;
-            } else {
-                BTTRegisterSuccessTwoCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterSuccessTwoCell" forIndexPath:indexPath];
-                NSString *accountStr = [NSString stringWithFormat:@"您的账号为: %@",self.account];
-                NSRange accountRange = [accountStr rangeOfString:self.account];
-                NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:accountStr];
-                [attstr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:accountRange];
-                cell.accountLabel.attributedText = attstr;
-                
-                NSString *pwdStr = [NSString stringWithFormat:@"原始密码: %@",self.pwd];
-                NSRange pwdRange = [accountStr rangeOfString:self.pwd];
-                NSMutableAttributedString *pwdattstr = [[NSMutableAttributedString alloc] initWithString:pwdStr];
-                [pwdattstr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:pwdRange];
-                cell.pwdLabel.attributedText = pwdattstr;
-                weakSelf(weakSelf);
-                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-                    strongSelf(strongSelf);
-                    strongSelf.registerSuccessType = BTTRegisterSuccessTypeChangePwd;
-                    [strongSelf.collectionView reloadData];
-                };
-                
-                return cell;
-            }
+            BTTRegisterSuccessTwoCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterSuccessTwoCell" forIndexPath:indexPath];
+            NSString *accountStr = [NSString stringWithFormat:@"您的账号为: %@",self.account];
+            NSRange accountRange = [accountStr rangeOfString:self.account];
+            NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:accountStr];
+            [attstr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:accountRange];
+            cell.accountLabel.attributedText = attstr;
+            
+            NSString *pwdStr = [NSString stringWithFormat:@"原始密码: %@",self.pwd];
+            NSRange pwdRange = [accountStr rangeOfString:self.pwd];
+            NSMutableAttributedString *pwdattstr = [[NSMutableAttributedString alloc] initWithString:pwdStr];
+            [pwdattstr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:pwdRange];
+            cell.pwdLabel.attributedText = pwdattstr;
+            weakSelf(weakSelf);
+            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                strongSelf(strongSelf);
+                strongSelf.registerSuccessType = BTTRegisterSuccessTypeChangePwd;
+                [strongSelf.collectionView reloadData];
+            };
+            
+            return cell;
             
         } else {
             BTTRegisterSuccessBtnsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterSuccessBtnsCell" forIndexPath:indexPath];
@@ -206,35 +197,33 @@ typedef enum {
         [MBProgressHUD showError:@"8-10位数字和字母" toView:nil];
         return;
     }
-    NSString *url = @"public/users/updatePassword";
+    NSString *url = @"customer/modifyPwd";
     NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"oldpwd"] = self.pwd;
-    params[@"pwd"] = _newPwd;
+    params[@"loginName"] = self.account;
+    params[@"oldPassword"] = [IVRsaEncryptWrapper encryptorString:self.pwd];
+    params[@"newPassword"] = [IVRsaEncryptWrapper encryptorString:_newPwd];
+    params[@"type"] = @1;
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    //TODO:
-//    [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
-//        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-//        if (result.status) {
-//            [MBProgressHUD showSuccess:@"密码修改成功!" toView:nil];
-//            BTTRegisterChangePwdSuccessController *vc = (BTTRegisterChangePwdSuccessController *)[BTTRegisterChangePwdSuccessController getVCFromStoryboard];
-//            vc.account = self.account;
-//            [self.navigationController pushViewController:vc animated:YES];
-//        } else {
-//            [MBProgressHUD showError:result.message toView:nil];
-//        }
-//    }];
+    [IVNetwork requestPostWithUrl:url paramters:params.copy completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [MBProgressHUD showSuccess:@"密码修改成功!" toView:nil];
+            BTTRegisterChangePwdSuccessController *vc = (BTTRegisterChangePwdSuccessController *)[BTTRegisterChangePwdSuccessController getVCFromStoryboard];
+            vc.account = self.account;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
 }
 
 - (void)setupElements {
     NSMutableArray *elementsHight = [NSMutableArray array];
     for (int i = 0; i < 2; i++) {
         if (i == 0) {
-            if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal || self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 234)]];
-            } else {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 274)]];
-            }
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 274)]];
         } else if (i == 1) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 71)]];
         }

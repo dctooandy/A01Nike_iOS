@@ -13,40 +13,31 @@
 @implementation BTTDiscountsViewController (LoadData)
 
 
-- (void)makeCallWithPhoneNum:(NSString *)phone {
-    NSString *url = nil;
+- (void)makeCallWithPhoneNum:(NSString *)phone captcha:(NSString *)captcha captchaId:(NSString *)captchaId; {
     NSMutableDictionary *params = @{}.mutableCopy;
-    int currentHour = [PublicMethod hour:[NSDate date]];
-    if ([IVNetwork savedUserInfo]) {
-        if ([phone containsString:@"*"]) {
-            url = BTTCallBackMemberAPI;
-            [params setValue:phone forKey:@"phone"];
-            [params setValue:@"memberphone" forKey:@"phone_type"];
-        } else {
-            if ([IVNetwork savedUserInfo].starLevel > 4 && currentHour >= 12) {
-                url = BTTCallBackMemberAPI;
-                [params setValue:phone forKey:@"phone"];
-                [params setValue:@"memberphone" forKey:@"phone_type"];
-            } else {
-                url = BTTCallBackCustomAPI;
-                [params setValue:phone forKey:@"phone_number"];
-                
-            }
-        }
+    [params setValue:captcha forKey:@"captcha"];
+    [params setValue:captchaId forKey:@"captchaId"];
+    if ([phone containsString:@"*"]) {
+        [params setValue:@1 forKey:@"type"];
     } else {
-        url = BTTCallBackCustomAPI;
-        [params setValue:phone forKey:@"phone_number"];
+        [params setValue:@0 forKey:@"type"];
     }
-    
-    [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
-        
-        if (result.status) {
-            [self showCallBackSuccessView];
+    if ([IVNetwork savedUserInfo]) {
+            [params setValue:[IVNetwork savedUserInfo].mobileNo forKey:@"mobileNo"];
+            [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
         } else {
-            NSString *errInfo = [NSString stringWithFormat:@"申请失败,%@",result.message];
-            [MBProgressHUD showError:errInfo toView:nil];
+            [params setValue:phone forKey:@"mobileNo"];
         }
-    }];
+    
+        [IVNetwork requestPostWithUrl:BTTCallBackAPI paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                [self showCallBackSuccessView];
+            }else{
+                NSString *errInfo = [NSString stringWithFormat:@"申请失败,%@",result.head.errMsg];
+                [MBProgressHUD showError:errInfo toView:nil];
+            }
+        }];
 }
 
 - (void)showCallBackSuccessView {

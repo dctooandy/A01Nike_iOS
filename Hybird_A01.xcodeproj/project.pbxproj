@@ -665,6 +665,8 @@
 		D326400823ACCC6E00E16AFD /* BTTUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D326400723ACCC6E00E16AFD /* BTTUserInfoModel.m */; };
 		D326400B23ACD28C00E16AFD /* IVNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = D326400A23ACD28C00E16AFD /* IVNetwork.m */; };
 		D326400E23ACE10D00E16AFD /* IVUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D326400D23ACE10D00E16AFD /* IVUserInfoModel.m */; };
+		D3621BF023C415FD00DB210B /* BTTCustomerInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3621BEF23C415FD00DB210B /* BTTCustomerInfoModel.m */; };
+		D3621BF323C484BB00DB210B /* BTTCustomerBalanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3621BF223C484BB00DB210B /* BTTCustomerBalanceModel.m */; };
 		D362B59E23ADAEBB00FF5373 /* IVRequestResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D362B59D23ADAEBB00FF5373 /* IVRequestResultModel.m */; };
 		D3E53FC923BDCA2A0065DA71 /* IVNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E53FC823BDCA2A0065DA71 /* IVNetworkManager.m */; };
 		D51AD19F21B8FEE5008C633A /* CNPayBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */; };
@@ -1772,6 +1774,10 @@
 		D326400A23ACD28C00E16AFD /* IVNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IVNetwork.m; sourceTree = "<group>"; };
 		D326400C23ACE10D00E16AFD /* IVUserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVUserInfoModel.h; sourceTree = "<group>"; };
 		D326400D23ACE10D00E16AFD /* IVUserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IVUserInfoModel.m; sourceTree = "<group>"; };
+		D3621BEE23C415FD00DB210B /* BTTCustomerInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTCustomerInfoModel.h; sourceTree = "<group>"; };
+		D3621BEF23C415FD00DB210B /* BTTCustomerInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTCustomerInfoModel.m; sourceTree = "<group>"; };
+		D3621BF123C484BB00DB210B /* BTTCustomerBalanceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTCustomerBalanceModel.h; sourceTree = "<group>"; };
+		D3621BF223C484BB00DB210B /* BTTCustomerBalanceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTCustomerBalanceModel.m; sourceTree = "<group>"; };
 		D362B59C23ADAEBB00FF5373 /* IVRequestResultModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVRequestResultModel.h; sourceTree = "<group>"; };
 		D362B59D23ADAEBB00FF5373 /* IVRequestResultModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IVRequestResultModel.m; sourceTree = "<group>"; };
 		D3E53FC723BDCA2A0065DA71 /* IVNetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVNetworkManager.h; sourceTree = "<group>"; };
@@ -3552,6 +3558,8 @@
 				D326400D23ACE10D00E16AFD /* IVUserInfoModel.m */,
 				D362B59C23ADAEBB00FF5373 /* IVRequestResultModel.h */,
 				D362B59D23ADAEBB00FF5373 /* IVRequestResultModel.m */,
+				D3621BEE23C415FD00DB210B /* BTTCustomerInfoModel.h */,
+				D3621BEF23C415FD00DB210B /* BTTCustomerInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3627,6 +3635,8 @@
 				3A80AB0623A381CD004BF8C0 /* BTTShareRedirectModel.m */,
 				D326400623ACCC6E00E16AFD /* BTTUserInfoModel.h */,
 				D326400723ACCC6E00E16AFD /* BTTUserInfoModel.m */,
+				D3621BF123C484BB00DB210B /* BTTCustomerBalanceModel.h */,
+				D3621BF223C484BB00DB210B /* BTTCustomerBalanceModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4789,6 +4799,7 @@
 				3A11AE0D21829F4B00B1AFF4 /* BTTPTTransferController.m in Sources */,
 				3A11AE532186A6A200B1AFF4 /* BTTBookMessageController.m in Sources */,
 				D5C5018E21B4FC8C00C6DA02 /* CNPayWechatTipView.m in Sources */,
+				D3621BF023C415FD00DB210B /* BTTCustomerInfoModel.m in Sources */,
 				3AA7893221FFF2580047A372 /* SDWebImageGIFCoder.m in Sources */,
 				3ADD2393217837FF00FA959A /* BTTMeHeaderLoginCell.m in Sources */,
 				3AE1EAFC218021080073A32D /* BTTVerifyTypeSelectController+LoadData.m in Sources */,
@@ -4831,6 +4842,7 @@
 				3AE1EB0E218047050073A32D /* BTTCardModifyCell.m in Sources */,
 				3A9E4C6E21A2542500E7D8C0 /* BTTModifyEmailController+LoadData.m in Sources */,
 				3AB0683D21A395EF00072FB7 /* BTTUnBindingHeaderCell.m in Sources */,
+				D3621BF323C484BB00DB210B /* BTTCustomerBalanceModel.m in Sources */,
 				3A5F7A7A21A6C6BB00128E8B /* BTTXimaNoDataCell.m in Sources */,
 				3A5B0283234F233500D8828B /* BTTXimaRecordModel.m in Sources */,
 				3AB0686921A4F29B00072FB7 /* BTTPublicBtnCell.m in Sources */,

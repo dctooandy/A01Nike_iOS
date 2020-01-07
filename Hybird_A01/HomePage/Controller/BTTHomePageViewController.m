@@ -94,7 +94,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     BOOL isShowAccountGride = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowAccountGride] boolValue];
-    if ([PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork savedUserInfo].beforeLoginDate]] && !isShowAccountGride) {
+    if ([PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork savedUserInfo].lastLoginDate]] && !isShowAccountGride) {
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowAccountGride];
         [self showNewAccountGrideView];
     }

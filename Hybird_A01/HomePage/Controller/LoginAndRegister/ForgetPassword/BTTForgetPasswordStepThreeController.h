@@ -12,7 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTForgetPasswordStepThreeController : BTTCollectionViewController
 
-@property (nonatomic, copy) NSString *accessID;
+@property (nonatomic, copy) NSString *validateId;
+
+@property (nonatomic, copy) NSString *messageId;
 
 @property (nonatomic, copy) NSString *account;
 

@@ -15,7 +15,7 @@
 - (void)loadMainData {
     NSArray *names = nil;
     NSArray *icons = nil;
-    NSString *mobileDetail = [NSString stringWithFormat:@"选择此方式, 我们将向您号码为%@的手机发送验证码",[IVNetwork userInfo].phone];
+    NSString *mobileDetail = [NSString stringWithFormat:@"选择此方式, 我们将向您号码为%@的手机发送验证码",[IVNetwork savedUserInfo].mobileNo];
     NSString *humanDetail = @"原绑定手机无法接受验证码? 提交申请, 等待人工客服协助修改";
     NSArray *details =  nil;
     switch (self.verifyType) {

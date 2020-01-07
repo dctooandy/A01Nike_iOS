@@ -56,21 +56,19 @@
         [MBProgressHUD showError:@"昵称只能为汉字" toView:self.view];
         return;
     }
-    
-    NSDictionary *params = @{@"nick_name":nickname};
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    [params setValue:nickname forKey:@"nickName"];
+    [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
     [self showLoading];
-    [IVNetwork sendRequestWithSubURL:BTTSetNickname paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        [self hideLoading];
-        if (result.status) {
-            NSLog(@"%@",response);
+    [IVNetwork requestPostWithUrl:BTTModifyCustomerInfo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
             [MBProgressHUD showSuccess:@"恭喜, 设置成功! 您可以使用昵称登录APP" toView:nil];
             [[NSUserDefaults standardUserDefaults] setObject:nickname forKey:BTTNicknameCache];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self.navigationController popToRootViewControllerAnimated:YES];
-        } else {
-            if (result.message.length) {
-                [MBProgressHUD showError:result.message toView:self.view];
-            }
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:self.view];
         }
     }];
 }

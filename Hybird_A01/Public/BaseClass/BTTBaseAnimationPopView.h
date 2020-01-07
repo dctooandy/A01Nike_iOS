@@ -10,7 +10,7 @@
 
 typedef void (^BTTDismissBlock)(void);
 
-typedef void (^BTTCallBackBlock)(NSString * _Nullable phone);
+typedef void (^BTTCallBackBlock)(NSString * _Nullable phone,NSString * _Nullable captcha,NSString * _Nullable captchaId);
 
 typedef void (^BTTCallBackBtnBlock)(UIButton * _Nullable btn);
 

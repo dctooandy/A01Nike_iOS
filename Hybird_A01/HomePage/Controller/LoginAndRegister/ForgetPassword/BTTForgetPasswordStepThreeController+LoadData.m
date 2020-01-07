@@ -8,18 +8,23 @@
 
 #import "BTTForgetPasswordStepThreeController+LoadData.h"
 #import "BTTMeMainModel.h"
+#import "IVRsaEncryptWrapper.h"
 
 @implementation BTTForgetPasswordStepThreeController (LoadData)
 
-- (void)modifyPasswordWithPwd:(NSString *)pwd account:(NSString *)account accessID:(NSString *)accessID {
-    NSDictionary *params = @{@"pwd":pwd, BTTLoginName: account, @"access_id":accessID};
-    [IVNetwork sendRequestWithSubURL:BTTStepThreeUpdatePassword paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",result.message);
-        if (result.status) {
+- (void)modifyPasswordWithPwd:(NSString *)pwd account:(NSString *)account validateId:(NSString *)validateId messageId:(NSString *)messageId{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    [params setValue:[IVRsaEncryptWrapper encryptorString:pwd] forKey:@"newPassword"];
+    [params setValue:account forKey:@"loginName"];
+    [params setValue:messageId forKey:@"messageId"];
+    [params setValue:validateId forKey:@"validateId"];
+    [params setValue:@2 forKey:@"type"];
+    [IVNetwork requestPostWithUrl:BTTStepThreeUpdatePassword paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
             [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-        if (result.message.length) {
-            [MBProgressHUD showSuccess:result.message toView:nil];
+        }else{
+            [MBProgressHUD showSuccess:result.head.errMsg toView:nil];
         }
     }];
 }

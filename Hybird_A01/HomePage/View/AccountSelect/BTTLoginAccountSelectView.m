@@ -102,7 +102,7 @@
 
 - (IBAction)loginClick:(UIButton *)sender {
     if (self.callBackBlock) {
-        self.callBackBlock(self.selectAccount);
+        self.callBackBlock(self.selectAccount,@"",@"");
     }
 }
 

@@ -36,8 +36,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadUserInfo;
 
-- (void)loadBindStatus;
-
 - (void)loadBankList;
 
 - (void)loadBtcRate;
@@ -48,13 +46,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadPaymentDefaultData;
 
-- (void)makeCallWithPhoneNum:(NSString *)phone;
+- (void)makeCallWithPhoneNum:(NSString *)phone captcha:(NSString *)captcha captchaId:(NSString *)captchaId;
 
 - (void)loadAccountStatus;
 
 - (void)loadSaveMoneyTimes;
-
-- (void)loadNickName;
 
 - (void)getLive800InfoDataWithResponse:(BTTLive800ResponseBlock)responseBlock;
 

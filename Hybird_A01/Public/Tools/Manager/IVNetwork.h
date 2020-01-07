@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "IVUserInfoModel.h"
-#import "BTTUserInfoModel.h"
+#import "BTTCustomerInfoModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -60,7 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (IVUserInfoModel *)userInfo;
 
-+ (BTTUserInfoModel *)savedUserInfo;
++ (BTTCustomerInfoModel *)savedUserInfo;
 /**
  更新用户信息
  */

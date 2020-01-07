@@ -193,15 +193,6 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 // 昵称缓存字段
 #define BTTNicknameCache      @"BTTNicknameCache"
-
-
-/*********************************************API********************************************************/
-
-#define BTTVoiceCall        @"api/v1/app/public/appCall"
-#define BTTVoiceCallLogin        @"api/v1/public/appCallByLogin"
-
-// 登录注册
-
 #define BTTLoginName        @"loginName"
 #define BTTPassword         @"password"
 #define BTTTimestamp        @"timestamp"
@@ -209,39 +200,50 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTParentID         @"parent_id"
 #define BTTPhone            @"phone"
 
+#define BTTSelectedBankId            @"BTTSelectedBankId"
+#define BTTCacheBankListKey          @"BTTCacheBankListKey"
+#define BTTCacheBTCRateKey           @"BTTCacheBTCRateKey"
+
+
+/*********************************************API********************************************************/
+//app语音未登录回拨
+#define BTTVoiceCall        @"_extra_/api/v1/app/public/appCall"
+//app语音登录回拨
+#define BTTVoiceCallLogin        @"_extra_/api/v1/app/public/appCallByLogin"
+// 登录注册
 #define BTTUserLoginAPI        @"customer/login"
+// 模糊登录
 #define BTTUserLoginEXAPI      @"customer/loginEx"
-#define BTTUserCreateAPI       @"/A01/users/create"
+// 生成图片验证
 #define BTTVerifyCaptcha       @"captcha/generate"
+// 创建账号
 #define BTTUserRegister        @"customer/createRealAccount"
+// 验证账号信息
 #define BTTCheckAccountInfo    @"_extra_/api/v1/ws/check-account-info"
+// 验证短信验证码
 #define BTTVerifySmsCode       @"phone/verifySmsCode"
-#define BTTNoLoginMobileCodeAPI @"/public/otherVerify/send"
-#define BTTSendMsgCode @"phone/sendCode"
-#define BTTStepOneSendCode     @"/A01/forgot/stepOneSendCode"
-#define BTTValidateCaptcha     @"/public/otherVerify/validateCaptcha"
-#define BTTStepTwoCheckCode    @"/public/forgot/stepTwoCheckCode"
-#define BTTStepThreeUpdatePassword @"/public/forgot/stepThreeUpdatePassword"
-#define BTTUnlockAccount       @"/A01/users/unlockAccount"
-#define BTTGetCustromerByPhone @"/public/users/getCustomersByPhone"
-
-#define BTTSuperFastRegister   @"/A01/users/superFastRegister"
-#define BTTSetNickname         @"/A01/users/setNickName"
-#define BTTGetMyAlias          @"/A01/users/getMyAlias"
-#define BTTPromotionStatus     @"/A01/promotion/status"
-
-
+// 发送短信验证码
+#define BTTSendMsgCode         @"phone/sendCode"
+// 根据用户名发送验证码
+#define BTTStepOneSendCode     @"phone/sendCodeByLoginName"
+// 绑定手机号
+#define BTTBindPhone           @"phone/bind"
+//忘记密码第一步验证
+#define BTTValidateCaptcha     @"customer/preForgetPwd"
+// 根据code修改密码
+#define BTTStepThreeUpdatePassword @"customer/modifyPwdByCode"
+// 根据登录名获取用户信息
+#define BTTGetLoginInfoByName  @"customer/getByLoginName"
+// 查询400热线
+#define BTT400Line             @"queryVIPLine"
+// 解锁账号
+#define BTTUnlockAccount       @"customer/unlockAccount"
+// 修改用户基本信息
+#define BTTModifyCustomerInfo         @"customer/modify"
+// 查询会员账户接口银行卡和虚拟币
+#define BTTAccountQuery        @"account/query"
 // 电话回拨API
-#define BTTCallBackMemberAPI         @"/public/phones/memberCall"
-#define BTTCallBackCustomAPI         @"/public/phones/customCall"
-
-// 本地额度 + 最后一厅额度
-
-#define BTTCreditsTotalAvailable     @"/public/credits/totalAvailable"
-
-// 查询账号绑定状态
-
-#define BTTIsBindStatusAPI           @"/public/verify/isNewBind"
+#define BTTCallBackAPI         @"callback"
 
 // 首页逻辑接口
 
@@ -249,28 +251,18 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTIndexBannerDownloads      @"_extra_/api/v1/app/banners"
 #define BTTBrandHighlights           @"_extra_/api/v1/wms/form"
 #define BTTHomeAnnouncementAPI       @"_extra_/api/v1/other/announcement/common"
-
 // 优惠列表
-
 #define BTTPromotionList             @"_extra_/api/v1/wms/promotions"
 
-// 获取用户本地额度
-
-#define BTTCreditsLocal              @"/public/credits/local"
+// 获取用户额度信息全厅
+#define BTTCreditsALL              @"customer/getBalance"
 
 //取款是否需要流水
 #define BTTBetInfo                   @"/A01/bet/betInfo"
 
-#define BTTSelectedBankId            @"BTTSelectedBankId"
-#define BTTCacheBankListKey          @"BTTCacheBankListKey"
-#define BTTCacheBTCRateKey           @"BTTCacheBTCRateKey"
 // 获取游戏大厅列表
 
 #define BTTGamePlatforms             @"/A01/game/platforms"
-
-// 用户单个厅余额查询
-
-#define BTTCreditsGame               @"/public/credits/game"
 
 // 金额转账本地接口
 
@@ -320,7 +312,6 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTOpenAccountStatus         @"/A01/openAccount/isOpen"
 
 // 请求游戏列表
-
 #define BTTVideoGamesList            @"_extra_/api/v1/wms/game"
 
 // 获取收藏列表
@@ -331,16 +322,10 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 #define BTTAddFavotites              @"_extra_/api/v1/wms/gameFavor"
 
-// 取消收藏
-
-#define BTTCancelFavorites           @"/public/game/cancelFavorites"
-
 // 搏币数量查询
-#define BTTQueryIntegralAPI          @"/A01/luckyWheel/queryIntegral"
-
+#define BTTQueryIntegralAPI          @"_extra_/api/v1/activity/luckyWheel/myLeftPrize"
 // 搏币兑换
-#define BTTCoinDepositAPI            @"/A01/luckyWheel/deposit"
-
+#define BTTCoinDepositAPI            @"_extra_/api/v1/activity/luckyWheel/depositPrize"
 // 请求未读消息的数量
 #define BTTIsUnviewedAPI             @"letter/countUnread"
 
@@ -361,7 +346,6 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTSaveMoneyTimesAPI         @"/deposit/getIsDepositAmount"
 
 // 查询可分享链接
-
 #define BTTGetWeiXinRediect          @"_extra_/api/v1/app/public/getWeiXinRedirect"
 
 /********************************************常用宏*********************************************************/

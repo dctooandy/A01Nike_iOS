@@ -53,7 +53,7 @@
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
-            [strongSelf modifyPasswordWithPwd:strongSelf.pwd account:strongSelf.account accessID:strongSelf.accessID];
+            [strongSelf modifyPasswordWithPwd:strongSelf.pwd account:strongSelf.account validateId:strongSelf.validateId messageId:self.messageId];
         };
         return cell;
     }

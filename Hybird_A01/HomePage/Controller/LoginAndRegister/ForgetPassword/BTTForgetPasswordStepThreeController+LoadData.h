@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadMainData;
 
-- (void)modifyPasswordWithPwd:(NSString *)pwd account:(NSString *)account accessID:(NSString *)accessID;
+- (void)modifyPasswordWithPwd:(NSString *)pwd account:(NSString *)account validateId:(NSString *)validateId messageId:(NSString *)messageId;
 
 @end
 

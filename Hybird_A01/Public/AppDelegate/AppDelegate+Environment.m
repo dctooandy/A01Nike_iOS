@@ -43,12 +43,9 @@
     
     [IVHttpManager shareManager].productId = [HAInitConfig productId]; // 产品标识
     [IVHttpManager shareManager].appId = [HAInitConfig appId];     // 应用ID
-    [IVHttpManager shareManager].parentId = @"1111";  // 渠道号
+    [IVHttpManager shareManager].parentId = [HAInitConfig appKey];  // 渠道号
     [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
     [IVHttpManager shareManager].productCode = [HAInitConfig appKey]; // 产品码
-    
-//    [IVHttpManager shareManager].domain = [HAInitConfig defaultH5Domain]; // 默认手机站
-//    [IVHttpManager shareManager].cdn = [HAInitConfig defaultCDN]; //默认cdn
 
     // 所有手机站,先从缓存取，缓存没有使用默认配置
     [IVHttpManager shareManager].domains = [IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey] ? : @[[HAInitConfig defaultH5Domain]];
@@ -89,12 +86,12 @@
 - (void)setupLive800 {
     
     LIVUserInfo *userInfo = nil;
-    if ([IVHttpManager shareManager].loginName.length) {
+    if ([IVNetwork savedUserInfo]) {
         userInfo = [LIVUserInfo new];
-//        userInfo.userAccount = [NSString stringWithFormat:@"%@",@([IVHttpManager shareManager].customerId)];
-//        userInfo.grade = [NSString stringWithFormat:@"%@",@([IVNetwork userInfo].customerLevel)];;
-//        userInfo.loginName = [IVNetwork userInfo].loginName;
-//        userInfo.name = [IVNetwork userInfo].loginName;
+        userInfo.userAccount = [NSString stringWithFormat:@"%@",[IVNetwork savedUserInfo].customerId];
+        userInfo.grade = [NSString stringWithFormat:@"%@",@([IVNetwork savedUserInfo].starLevel)];;
+        userInfo.loginName = [IVNetwork savedUserInfo].loginName;
+        userInfo.name = [IVNetwork savedUserInfo].loginName;
     }
     [[CLive800Manager sharedInstance] setUpLive800WithUserInfo:userInfo];
 }

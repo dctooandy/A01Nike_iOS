@@ -56,9 +56,8 @@
 {
     [IVPublicAPIManager checkAreaLimitWithCallBack:^(IVPCheckAreaLimitModel * _Nonnull result, IVJResponseObject * _Nonnull response) {
         if (result && !result.allowAccess) {
-#warning 在这里处理地区限制逻辑，如打开webview
             NSLog(@"拒绝访问");
-            [self areaLimitWindow];
+            [self showAreaLimitWithCountry:result.country goCode:result.goCode];
         } else {
             NSLog(@"允许访问");
         }
@@ -106,7 +105,6 @@
     [self getWMSForm];
     [self setupTabbarController];
     [self.window makeKeyAndVisible];
-//    [self setupADandWelcome];
     [self initRemoteNotificationWithOptions:launchOptions];
     [CNPreCacheMananger prepareCacheDataNormal];
     [CNPreCacheMananger prepareCacheDataNeedLogin];
@@ -209,8 +207,7 @@
             dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
         }
             dispatch_sync(dispatch_get_main_queue(), ^{
-    #warning uid:需要填写真实的用户id
-                int uid = 1111111111; //需要填写真实的用户id
+                int uid = [[IVNetwork savedUserInfo].customerId intValue]; //需要填写真实的用户id
                 if (self.ipsAdd && self.ipsAdd.length > 0) {//使用后台配置
                     [IVHeartSocketManager configHeartSocketWithIpAddress:self.ipsAdd port:self.ipsPort porductId:[IVHttpManager shareManager].productId];
                 } else {//使用默认
@@ -267,9 +264,9 @@
 {
     [NBSAppAgent trackEvent:@"网关切换" withEventTag:@"gateway_change" withEventProperties:notification.userInfo];
 }
-- (void)checkAreaLimitNotification:(NSNotification *)notification
+- (void)showAreaLimitWithCountry:(NSString *)country goCode:(NSString *)goCode
 {
-    NSString *url = [notification.userInfo valueForKey:@"val"];
+    NSString *url = goCode;
     WebConfigModel *model = [[WebConfigModel alloc] init];
     //需要获取到h5Domain
     model.url = [[IVHttpManager shareManager].domain stringByAppendingString:url];

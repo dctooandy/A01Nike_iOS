@@ -17,6 +17,7 @@
 #import "JXRegisterManager.h"
 #import "BTTVoiceCallViewController.h"
 #import "BTTLoginOrRegisterViewController.h"
+#import <IVCacheLibrary/IVCacheWrapper.h>
 
 
 @interface BTTTabbarController ()<BTTTabBarDelegate, UINavigationControllerDelegate,JXRegisterManagerDelegate>
@@ -50,6 +51,7 @@
 //     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userTokenExpired) name:IVUserTokenExpiredNotification object:nil];
     [self registerLoginOrOutNotification];
     [self registerNotification];
+    [self requestCustomerVipLine];
 }
 
 
@@ -114,6 +116,19 @@
 
 - (void)registerSuccessGotoMineNotification {
     [self.myTabbar setSeletedIndex:4];
+}
+
+- (void)requestCustomerVipLine{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    if ([IVNetwork savedUserInfo]) {
+        [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
+    }
+    [IVNetwork requestPostWithUrl:BTT400Line paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [IVCacheWrapper setObject:result.body[@"value"] forKey:@"APP_400_HOTLINE"];
+        }
+    }];
 }
 
 /**

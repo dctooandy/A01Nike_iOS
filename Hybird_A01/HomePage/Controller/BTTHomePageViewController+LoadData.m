@@ -80,29 +80,35 @@ static const char *BTTNextGroupKey = "nextGroup";
 // 博币数量查询
 - (void)loadLuckyWheelCoinStatus {
     
-//    [IVNetwork sendRequestWithSubURL:BTTQueryIntegralAPI paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-//        NSLog(@"%@",response);
-//        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
-//            if ([result.data[@"amount"] integerValue]) {
-//                [self showPopViewWithNum:result.data[@"amount"]];
-//            }
-//        }
-//    }];
+    NSDictionary *params = @{@"loginName":[IVNetwork savedUserInfo].loginName};
+    [IVNetwork requestPostWithUrl:BTTQueryIntegralAPI paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if ([result.body isKindOfClass:[NSDictionary class]]) {
+                if ([result.body[@"amount"] integerValue]) {
+                    [self showPopViewWithNum:result.body[@"amount"]];
+                }
+            }
+        }
+    }];
 }
 
 // 博币兑现
 
-- (void)loadLuckyWheelCoinChange {
-    [IVNetwork sendRequestWithSubURL:BTTCoinDepositAPI paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        if (result.status) {
+- (void)loadLuckyWheelCoinChangeWithAmount:(NSString *)amount {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
+    [params setValue:@"2" forKey:@"endPointType"];
+    [params setValue:amount forKey:@"depositAmount"];
+    [IVNetwork requestPostWithUrl:BTTCoinDepositAPI paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
             [MBProgressHUD showSuccess:@"兑换成功" toView:nil];
-        } else {
-            if (result.message.length) {
-                [MBProgressHUD showError:result.message toView:nil];
-            }
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];
+
 }
 
 
@@ -161,40 +167,31 @@ static const char *BTTNextGroupKey = "nextGroup";
 
 
 
-- (void)makeCallWithPhoneNum:(NSString *)phone {
-    NSString *url = nil;
+- (void)makeCallWithPhoneNum:(NSString *)phone captcha:(NSString *)captcha captchaId:(NSString *)captchaId {
     NSMutableDictionary *params = @{}.mutableCopy;
-    int currentHour = [PublicMethod hour:[NSDate date]];
-    if ([IVNetwork savedUserInfo]) {
-        if ([phone containsString:@"*"]) {
-            url = BTTCallBackMemberAPI;
-            [params setValue:phone forKey:@"phone"];
-            [params setValue:@"memberphone" forKey:@"phone_type"];
-        } else {
-            if ([IVNetwork savedUserInfo].starLevel > 4 && currentHour >= 12) {
-                url = BTTCallBackMemberAPI;
-                [params setValue:phone forKey:@"phone"];
-                [params setValue:@"memberphone" forKey:@"phone_type"];
-            } else {
-                url = BTTCallBackCustomAPI;
-                [params setValue:phone forKey:@"phone_number"];
-                
-            }
-        }
+    [params setValue:captcha forKey:@"captcha"];
+    [params setValue:captchaId forKey:@"captchaId"];
+    if ([phone containsString:@"*"]) {
+        [params setValue:@1 forKey:@"type"];
     } else {
-        url = BTTCallBackCustomAPI;
-        [params setValue:phone forKey:@"phone_number"];
+        [params setValue:@0 forKey:@"type"];
     }
-    
-    [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
-    
-        if (result.status) {
-            [self showCallBackSuccessView];
+    if ([IVNetwork savedUserInfo]) {
+            [params setValue:[IVNetwork savedUserInfo].mobileNo forKey:@"mobileNo"];
+            [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
         } else {
-            NSString *errInfo = [NSString stringWithFormat:@"申请失败,%@",result.message];
-            [MBProgressHUD showError:errInfo toView:nil];
+            [params setValue:phone forKey:@"mobileNo"];
         }
-    }];
+    
+        [IVNetwork requestPostWithUrl:BTTCallBackAPI paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                [self showCallBackSuccessView];
+            }else{
+                NSString *errInfo = [NSString stringWithFormat:@"申请失败,%@",result.head.errMsg];
+                [MBProgressHUD showError:errInfo toView:nil];
+            }
+        }];
 }
 
 - (void)loadGamesData {

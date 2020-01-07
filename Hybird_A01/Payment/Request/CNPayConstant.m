@@ -11,7 +11,7 @@
 #pragma mark - 支付
 
 /// 查询存款方式
-NSString * const kPaymentValidate       = @"A01/payment/isShutdown";
+NSString * const kPaymentValidate       = @"deposit/queryPayWaysV4";
 /// 支付接口（app支付...）
 NSString * const kPaymentOnlinePay      = @"public/payment/onlinePay";
 /// 网银快速充值，线下存款，微信支付生成订单

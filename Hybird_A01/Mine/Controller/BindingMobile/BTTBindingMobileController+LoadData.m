@@ -22,7 +22,7 @@
         case BTTSafeVerifyTypeMobileAddBTCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
             phoneTitle = @"已绑定手机";
-            phone = [IVNetwork userInfo].phone;
+            phone = [IVNetwork savedUserInfo].mobileNo;
             break;
         case BTTSafeVerifyTypeMobileBindAddBankCard:
         case BTTSafeVerifyTypeMobileBindChangeBankCard:
@@ -31,8 +31,8 @@
         case BTTSafeVerifyTypeMobileBindDelBTCard:
         case BTTSafeVerifyTypeBindMobile:{
             phoneTitle = @"手机号码";
-            if (![IVNetwork userInfo].isPhoneBinded && [IVNetwork userInfo].phone.length != 0) {
-                phone = [IVNetwork userInfo].phone;
+            if ([IVNetwork savedUserInfo].mobileNo.length != 0&&[IVNetwork savedUserInfo].mobileNoBind==0) {
+                phone = [IVNetwork savedUserInfo].mobileNo;
             }
         }
             break;

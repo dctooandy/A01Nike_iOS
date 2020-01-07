@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadMainData;
 
-- (void)makeCallWithPhoneNum:(NSString *)phone;
+- (void)makeCallWithPhoneNum:(NSString *)phone captcha:(NSString *)captcha captchaId:(NSString *)captchaId;
 
 - (void)getLive800InfoDataWithResponse:(BTTLive800ResponseBlock)responseBlock;
 

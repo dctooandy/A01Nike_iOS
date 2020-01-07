@@ -28,6 +28,7 @@
 #import "BTTJayPopView.h"
 #import "BTTNewAccountGuidePopView.h"
 #import "UIImage+GIF.h"
+#import <IVCacheLibrary/IVCacheWrapper.h>
 
 
 static const char *BTTHeaderViewKey = "headerView";
@@ -273,19 +274,19 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 //    }];
     
     
-    NSString *phoneValue = [IVNetwork getPublicConfigWithKey:@"APP_400_HOTLINE"];
+    NSString *phoneValue = [IVCacheWrapper objectForKey:@"APP_400_HOTLINE"];
     NSString *normalPhone = nil;
     NSString *vipPhone = nil;
     if (phoneValue.length) {
-        NSArray *phonesArr = [phoneValue componentsSeparatedByString:@"|"];
-        normalPhone = phonesArr[1];
-        vipPhone = phonesArr[3];
+        NSArray *phonesArr = [phoneValue componentsSeparatedByString:@";"];
+        normalPhone = phonesArr[0];
+        vipPhone = phonesArr[1];
     }
     if (!normalPhone.length) {
-        normalPhone = @"400-120-3618";
+        normalPhone = @"400-120-3611";
     }
     if (!vipPhone.length) {
-        vipPhone = @"400-120-3616";
+        vipPhone = @"400-120-3612";
     }
     NSString *telUrl = isNormalUser ? [NSString stringWithFormat:@"tel://%@",normalPhone]  : [NSString stringWithFormat:@"tel://%@",vipPhone];
     NSString *title = isNormalUser ? normalPhone : vipPhone;
@@ -311,10 +312,10 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         [popView dismiss];
     };
     weakSelf(weakSelf);
-    customView.callBackBlock = ^(NSString *phone) {
+    customView.callBackBlock = ^(NSString *phone,NSString *captcha,NSString *captchaId) {
         strongSelf(strongSelf);
         [popView dismiss];
-        [strongSelf makeCallWithPhoneNum:phone];
+        [strongSelf makeCallWithPhoneNum:phone captcha:captcha captchaId:captchaId];
     } ;
 }
 
@@ -328,20 +329,18 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     customView.dismissBlock = ^{
         [popView dismiss];
     };
-    customView.btnBlock = ^(UIButton *btn) {
+    customView.callBackBlock = ^(NSString * _Nullable phone, NSString * _Nullable captcha, NSString * _Nullable captchaId) {
         strongSelf(strongSelf);
-        if (btn.tag == 50010) {
-            if (![IVNetwork savedUserInfo].mobileNo.length) {
-                [MBProgressHUD showError:@"您未绑定手机, 请选择其他电话" toView:nil];
-                return;
-            }
-            [popView dismiss];
-            [strongSelf makeCallWithPhoneNum:[IVNetwork savedUserInfo].mobileNo];
-        } else {
-            [popView dismiss];
-            [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
+        if (![IVNetwork savedUserInfo].mobileNo.length) {
+            [MBProgressHUD showError:@"您未绑定手机, 请选择其他电话" toView:nil];
+            return;
         }
-        
+        [popView dismiss];
+        [strongSelf makeCallWithPhoneNum:[IVNetwork savedUserInfo].mobileNo captcha:captcha captchaId:captchaId];
+    };
+    customView.btnBlock = ^(UIButton *btn) {
+        [popView dismiss];
+        [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
     };
 }
 
@@ -401,7 +400,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     customView.btnBlock = ^(UIButton *btn) {
         strongSelf(strongSelf);
         [popView dismiss];
-        [strongSelf loadLuckyWheelCoinChange];
+        [strongSelf loadLuckyWheelCoinChangeWithAmount:num];
     };
 }
 

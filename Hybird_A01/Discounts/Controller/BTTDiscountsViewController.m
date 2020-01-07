@@ -176,10 +176,10 @@
         [popView dismiss];
     };
     weakSelf(weakSelf);
-    customView.callBackBlock = ^(NSString *phone) {
+    customView.callBackBlock = ^(NSString *phone,NSString *captcha,NSString *captchaId) {
         strongSelf(strongSelf);
         [popView dismiss];
-        [strongSelf makeCallWithPhoneNum:phone];
+        [strongSelf makeCallWithPhoneNum:phone captcha:captcha captchaId:captchaId];
     } ;
 }
 
@@ -193,19 +193,18 @@
     customView.dismissBlock = ^{
         [popView dismiss];
     };
-    customView.btnBlock = ^(UIButton *btn) {
+    customView.callBackBlock = ^(NSString * _Nullable phone, NSString * _Nullable captcha, NSString * _Nullable captchaId) {
         strongSelf(strongSelf);
-        if (btn.tag == 50010) {
-            if (![IVNetwork savedUserInfo].mobileNo.length) {
-                [MBProgressHUD showError:@"您未绑定手机, 请选择其他电话" toView:nil];
-                return;
-            }
-            [popView dismiss];
-            [strongSelf makeCallWithPhoneNum:[IVNetwork savedUserInfo].mobileNo];
-        } else {
-            [popView dismiss];
-            [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
+        if (![IVNetwork savedUserInfo].mobileNo.length) {
+            [MBProgressHUD showError:@"您未绑定手机, 请选择其他电话" toView:nil];
+            return;
         }
+        [popView dismiss];
+        [strongSelf makeCallWithPhoneNum:[IVNetwork savedUserInfo].mobileNo captcha:captcha captchaId:captchaId];
+    };
+    customView.btnBlock = ^(UIButton *btn) {
+        [popView dismiss];
+        [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
     };
 }
 

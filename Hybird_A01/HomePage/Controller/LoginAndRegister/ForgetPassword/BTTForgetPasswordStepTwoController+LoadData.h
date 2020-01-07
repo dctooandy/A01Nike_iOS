@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)sendVerifyCodeWithAccount:(NSString *)account;
 
-- (void)verifyCode:(NSString *)code account:(NSString *)account completeBlock:(CompleteBlock)completeBlock;
+- (void)verifyCode:(NSString *)code account:(NSString *)account completeBlock:(KYHTTPCallBack)completeBlock;
 
 @end
 
