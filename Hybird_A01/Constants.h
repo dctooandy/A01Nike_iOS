@@ -39,6 +39,10 @@ typedef enum {
     BTTCanAddCardTypeAll,           // 银行卡和比特币钱包
     BTTCanAddCardTypeBank,          //  只能添加银行卡
     BTTCanAddCardTypeBTC,           // 只能添加比特币钱包
+    BTTCanAddCardTypeUSDT,          // 只能添加USDT
+    BTTCanAddCardTypeBankORBTC,     // 添加银行卡或者比特币
+    BTTCanAddCardTypeBankORUSDT,    // 添加银行卡或者USDT
+    BTTCanAddCardTypeBTCORUSDT,     // 添加USDT或者比特币
 }BTTCanAddCardType; // 能添加卡的类型
 //typedef enum {
 //    BTTEmmailCodeTypeBind,           // 绑定邮箱
@@ -49,6 +53,7 @@ typedef enum {
 typedef enum {
     BTTSafeVerifyTypeNormalAddBankCard,          // 添加第一张银行卡
     BTTSafeVerifyTypeNormalAddBTCard,            // 添加第一张比特比钱包
+    BTTSafeVerifyTypeNormalAddUSDTCard,
     BTTSafeVerifyTypeMobileAddBankCard,          // 添加银行卡短信验证
     BTTSafeVerifyTypeMobileBindAddBankCard,      // 添加银行卡时未绑定手机绑定
     BTTSafeVerifyTypeMobileChangeBankCard,       // 修改银行卡短信验证
@@ -59,11 +64,17 @@ typedef enum {
     BTTSafeVerifyTypeHumanChangeBankCard,        // 修改银行卡人工服务
     BTTSafeVerifyTypeHumanDelBankCard,           // 删除银行卡人工服务
     BTTSafeVerifyTypeMobileAddBTCard,            // 添加比特币钱包短信验证
+    BTTSafeVerifyTypeMobileAddUSDTCard,          // 添加USDT钱包短信验证
     BTTSafeVerifyTypeMobileBindAddBTCard,        // 添加比特币钱包时未绑定手机绑定
+    BTTSafeVerifyTypeMobileBindAddUSDTCard,      // 添加USDT钱包时未绑定手机绑定
     BTTSafeVerifyTypeMobileDelBTCard,            // 删除比特币钱包短信验证
+    BTTSafeVerifyTypeMobileDelUSDTCard,
     BTTSafeVerifyTypeMobileBindDelBTCard,        // 删除比特币钱包时未绑定手机绑定
+    BTTSafeVerifyTypeMobileBindDelUSDTCard,
     BTTSafeVerifyTypeHumanAddBTCard,             // 添加比特币钱包人工服务
+    BTTSafeVerifyTypeHumanAddUSDTCard,
     BTTSafeVerifyTypeHumanDelBTCard,             // 删除比特币钱包人工服务
+    BTTSafeVerifyTypeHumanDelUSDTCard,
     BTTSafeVerifyTypeChangeMobile,               // 更改手机号
     BTTSafeVerifyTypeBindMobile,                 // 绑定手机号
     BTTSafeVerifyTypeVerifyMobile,               // 验证手机号

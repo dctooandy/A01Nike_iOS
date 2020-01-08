@@ -22,18 +22,28 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:_textField.placeholder attributes:
-    @{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"818791"],
-                 NSFontAttributeName:_textField.font
-         }];
-    _textField.attributedPlaceholder = attrString;
+    if (@available(iOS 13.0,*)) {
+            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:_textField.placeholder attributes:
+        @{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"818791"],
+                     NSFontAttributeName:_textField.font
+             }];
+        _textField.attributedPlaceholder = attrString;
+    }
+
     _textField.delegate = self;
+    [_textField addTarget:self action:@selector(textFieldDidchanged:) forControlEvents:UIControlEventEditingChanged];
     UIView *backgroundView = [[UIView alloc] initWithFrame:self.bounds];
     backgroundView.backgroundColor =  COLOR_RGBA(36, 40, 49, 1);
     [self setSelectedBackgroundView:backgroundView];
     if (SCREEN_WIDTH == 320) {
         self.nameLabel.font = kFontSystem(14);
         self.textField.font = kFontSystem(13);
+    }
+}
+
+- (void)textFieldDidchanged:(id)sender{
+    if (_textFieldChanged) {
+        _textFieldChanged(_textField.text);
     }
 }
 

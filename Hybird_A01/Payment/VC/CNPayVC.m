@@ -139,6 +139,9 @@
         
         NSArray *objArray = (NSArray *)obj;
         NSMutableArray<CNPaymentModel *> *payments = [NSMutableArray array];
+        NSMutableArray *usdtArray = [[NSMutableArray alloc]init];
+        
+        BOOL haveUSDT = false;
         
         for (int i = 0; i< kPayTypeTotalCount; i++) {
             /// 数据解析
@@ -148,8 +151,24 @@
                 model = [[CNPaymentModel alloc] init];
                 model.isAvailable = NO;
             }
-            model.paymentType = (CNPaymentType)i;
-            [payments addObject:model];
+            if (i<21) {
+                model.paymentType = (CNPaymentType)i;
+                [payments addObject:model];
+            }else{
+                if (!haveUSDT) {
+                    haveUSDT = model.isAvailable;
+                }
+                [usdtArray addObject:objArray[i]];
+                if (i==kPayTypeTotalCount-1) {
+                    model = [[CNPaymentModel alloc]init];
+                    model.paymentType = CNPaymentUSDT;
+                    model.isAvailable = YES;
+                    model.usdtArray = usdtArray;
+                    if (haveUSDT) {
+                        [payments addObject:model];
+                    }
+                }
+            }
         }
         
         /// 数据拼接处理
@@ -291,6 +310,12 @@
     // 微信/QQ/京东WAP
     BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue] >= 10 ? YES : NO;
     
+    // USDT
+    CNPayChannelModel *USDT = [[CNPayChannelModel alloc]init];
+    USDT.payChannel = CNPayChannelUSDT;
+    USDT.payments = [[NSArray alloc]initWithObjects:payments.lastObject, nil];
+    
+    
     CNPayChannelModel *wap = [[CNPayChannelModel alloc] init];
     wap.payChannel = CNPayChannelWechatQQJDAPP;
     if (timeMoreTen) {
@@ -319,13 +344,13 @@
     if (timeMoreTen) {
         array = @[BQFast,BQAli,BQWeChat,deposit,unionQR,aliQR,online,wxQR,jdQR,qqQR,wap,YSF,unionPay,coin,card,BTC,barCode,BS];
     } else {
-        array = @[unionQR,jdQR,ali,BQFast,BQWeChat,BQAli,aliQR,wxQR,qqQR,online,deposit,wap,YSF,unionPay,coin,card,BTC,barCode,BS];
+        array = @[unionQR,jdQR,ali,USDT,BQFast,BQWeChat,BQAli,aliQR,wxQR,qqQR,online,deposit,wap,YSF,unionPay,coin,card,BTC,barCode,BS];
     }
     
     // 没开启的渠道不显示
     for (CNPayChannelModel *channel in array) {
         NSLog(@"%@",channel.channelName);
-        if (channel.isAvailable) {
+        if (channel.isAvailable || channel.payChannel==CNPayChannelUSDT) {
             [channels addObject:channel];
             if (channel.payments.count == 1) {
                 continue;
@@ -395,6 +420,8 @@
     BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
     if ([channelModel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {
         self.title = @"支付宝/微信/QQ/京东WAP";
+    }else if (channelModel.payChannel == CNPayChannelUSDT){
+        self.title = @"泰达币-USDT";
     } else {
         self.title = channelModel.channelName;
     }
@@ -431,12 +458,19 @@
     if ([channel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {
         cell.titleLb.text = @"支付宝/微信/QQ/京东WAP";
         cell.titleLb.font = [UIFont boldSystemFontOfSize:11];
+    } else if (channel.payChannel==CNPayChannelUSDT){
+        cell.titleLb.text = @"泰达币-USDT";
+        cell.titleLb.font = [UIFont boldSystemFontOfSize:13];
     } else {
         cell.titleLb.text = channel.channelName;
         cell.titleLb.font = [UIFont boldSystemFontOfSize:13];
     }
     
-    cell.channelIV.image = [UIImage imageNamed:channel.selectedIcon];
+    if (channel.payChannel==CNPayChannelUSDT){
+        cell.channelIV.image = [UIImage imageNamed:@"me_usdt"];
+    }else{
+        cell.channelIV.image = [UIImage imageNamed:channel.selectedIcon];
+    }
     
     // 默认选中第一个可以支付的渠道
     if (indexPath.row == _currentSelectedIndex) {
@@ -471,7 +505,11 @@
     if ([channel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {
         self.title = @"支付宝/微信/QQ/京东WAP";
     } else {
-        self.title = channel.channelName;
+        if (channel.payChannel==CNPayChannelUSDT) {
+            self.title = @"泰达币-USDT";
+        }else{
+            self.title = channel.channelName;
+        }
     }
     self.selectedIcon = channel.selectedIcon;
     [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];

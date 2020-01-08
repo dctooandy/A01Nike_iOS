@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSArray<BTTBankModel *> *bankList;
 @property (nonatomic, assign) NSInteger selectIndex;
 @property (nonatomic, strong) BTTBetInfoModel *betInfoModel;
+@property (nonatomic, assign) CGFloat usdtRate;
 
 @end
 

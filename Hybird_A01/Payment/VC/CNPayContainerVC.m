@@ -19,8 +19,8 @@
 #import "CNPayCardStep1VC.h"
 #import "CNPayCardStep2VC.h"
 #import "BTTPayBQAliStep2VC.h"
-
-
+#import "CNPayUSDTStep1VC.h"
+#import "CNPayUSDTQRSecondVC.h"
 
 @interface CNPayContainerVC ()
 
@@ -99,18 +99,18 @@
 //            [viewControllers addObjectsFromArray:[self QRPay:payment]];
 //        }
 //            break;
-            
-            
+
+
         case CNPaymentCard: {
             [viewControllers addObjectsFromArray:[self cardPay:payment]];
         }
             break;
-            
+
         case CNPaymentDeposit: {
             [viewControllers addObjectsFromArray:[self depositPay:payment]];
         }
             break;
-            
+
         case CNPaymentCoin:
         case CNPaymentWechatBarCode:
         case CNPaymentBTC:
@@ -131,7 +131,7 @@
             [viewControllers addObjectsFromArray:[self QRPay:payment]];
         }
             break;
-            
+
         case CNPaymentAliApp:
         {
             BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
@@ -146,11 +146,20 @@
         case CNPaymentBQWechat:
         case CNPaymentBQAli:
         case CNPaymentBS: {
-            
+
             [viewControllers addObjectsFromArray:[self BQPay:payment]];
         }
             break;
+        case CNPaymentUSDT:{
+            CNPayUSDTStep1VC *vc1 = [[CNPayUSDTStep1VC alloc]init];
+            vc1.payments = self.payments;
+            CNPayUSDTQRSecondVC *vc2 = [[CNPayUSDTQRSecondVC alloc]init];
+            [viewControllers addObjectsFromArray:@[vc1,vc2]];
+        }
+            break;
     }
+    
+    
     return viewControllers;
 }
 

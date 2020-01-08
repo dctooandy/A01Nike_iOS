@@ -19,6 +19,7 @@
 #import "BTTChangeMobileSuccessController.h"
 #import "BTTCardInfosController.h"
 #import "BTTPersonalInfoController.h"
+#import "BTTAddUSDTController.h"
 @interface BTTVerifyTypeSelectController ()<BTTElementsFlowLayoutDelegate>
 
 @end
@@ -141,6 +142,23 @@
             [self deleteBankOrBTC:NO isAuto:NO];
             break;
         case BTTSafeVerifyTypeHumanDelBTCard:
+            [self deleteBankOrBTC:YES isAuto:NO];
+            break;
+        case BTTSafeVerifyTypeMobileAddUSDTCard:
+        {
+            BTTBindingMobileController *vc = [BTTBindingMobileController new];
+            vc.mobileCodeType = BTTSafeVerifyTypeMobileAddUSDTCard;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case BTTSafeVerifyTypeHumanAddUSDTCard:
+        {
+            BTTAddUSDTController *vc = [BTTAddUSDTController new];
+            vc.addCardType = BTTSafeVerifyTypeHumanAddUSDTCard;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case BTTSafeVerifyTypeHumanDelUSDTCard:
             [self deleteBankOrBTC:YES isAuto:NO];
             break;
         default:

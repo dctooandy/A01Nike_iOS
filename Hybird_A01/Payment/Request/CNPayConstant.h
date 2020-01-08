@@ -33,6 +33,20 @@ extern NSString * const kPaymentCompleteInfo;
 /// 点卡提交订单
 extern NSString * const kPaymentCardPay;
 
+extern NSString * const kUSDTRate;
+
+extern NSString * const kPaymentUSDTType;
+
+extern NSString * const kPaymentUSDTPay;
+
+extern NSString * const kPaymentUSDTManualPay;
+
+extern NSString * const kPaymentCardUSDTType;
+
+extern NSString * const kPaymentAddCardUSDTAuto;
+
+extern NSString * const kPaymentAddCardUSDT;
+
 #define COLOR_HEX(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8))/255.0    \
 blue:((float)(rgbValue & 0xFF))/255.0             \
@@ -40,6 +54,8 @@ alpha:1.0]
 
 #define kBlackBackgroundColor COLOR_HEX(0x212229)
 #define kBlackForgroundColor  COLOR_RGBA(31, 34, 41, 1)
+#define kBlackLightColor COLOR_RGBA(41, 45, 54, 1)
+#define kTextPlaceHolderColor COLOR_RGBA(129, 135, 145,1)
 
 @interface CNPayConstant : NSObject
 @end

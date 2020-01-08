@@ -66,6 +66,11 @@
  */
 - (void)paySucessHandler:(NSDictionary *)model repay:(dispatch_block_t)repayBlock;
 
+/// 申请支付成功后USDT
+/// @param model 模型
+/// @param repayBlock 重新支付的业务类型
+- (void)paySucessUSDTHandler:(IVRequestResultModel *)model repay:(dispatch_block_t)repayBlock;
+
 /**
  顶部导航push新的控制器
  
