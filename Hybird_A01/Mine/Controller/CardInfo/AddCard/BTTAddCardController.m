@@ -233,15 +233,19 @@
     }
     NSMutableDictionary *params = @{}.mutableCopy;
     
-    params[@"bank_account_name"] = realNameTF.text;
-    params[@"bank_name"] = bankNameTF.text;
-    params[@"bank_account_type"] = cardTypeTF.text;
-    params[@"bank_account_no"] = cardNumberTF.text;
-    params[@"bank_country"] = provinceTF.text;
-    params[@"bank_city"] = cityTF.text;
-    params[@"branch_name"] = locationTF.text;
-    if (setDefaultCard) {
-        params[@"save_default"] = @(self.cardCount + 1);
+    params[@"accountName"] = realNameTF.text;
+    params[@"bankName"] = bankNameTF.text;
+    params[@"accountType"] = cardTypeTF.text;
+    params[@"accountNo"] = cardNumberTF.text;
+    params[@"province"] = provinceTF.text;
+    params[@"city"] = cityTF.text;
+    params[@"bankBranchName"] = locationTF.text;
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    
+    params[@"smsCode"] = @"";
+    if (self.validateId.length) {
+        params[@"validateId"] = self.validateId;
+        params[@"messageId"] = self.messageId;
     }
     NSString *url = nil;
     NSString *message = nil;
@@ -250,42 +254,45 @@
         case BTTSafeVerifyTypeNormalAddBankCard:
         case BTTSafeVerifyTypeMobileAddBankCard:
         case BTTSafeVerifyTypeMobileBindAddBankCard:
-            url = @"public/bankcard/addAuto";
+            url = BTTAddBankCard;
             message = @"添加成功!";
+            [params setValue:@"0" forKey:@"manual"];
             break;
         case BTTSafeVerifyTypeHumanAddBankCard:
-            url = @"public/bankcard/add";
+            url = BTTAddBankCard;
+            [params setValue:@"1" forKey:@"manual"];
             message = @"添加成功!";
             break;
         case BTTSafeVerifyTypeMobileChangeBankCard:
         case BTTSafeVerifyTypeMobileBindChangeBankCard:
             isUpdate = YES;
-            url = @"public/bankcard/updateAuto";
+            url = BTTModifyBankCard;
+            params[@"accountId"] = self.accountId;
             message = @"修改成功!";
             break;
         case BTTSafeVerifyTypeHumanChangeBankCard:
             isUpdate = YES;
-            url = @"public/bankcard/update";
+            url = BTTModifyBankCard;
+            params[@"accountId"] = self.accountId;
             message = @"修改成功!";
             break;
         default:
             break;
     }
-    if (isUpdate) {
-        params[@"customer_bank_id"] = [[NSUserDefaults standardUserDefaults] valueForKey:BTTSelectedBankId];
-    }
+
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [BTTHttpManager updateBankCardWithUrl:url params:params.copy completion:^(IVRequestResultModel *result, id response) {
+    [BTTHttpManager updateBankCardWithUrl:url params:params.copy completion:^(id response,NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:NO];
+        IVJResponseObject *result = response;
         weakSelf(weakSelf)
-        if (result.status) {
+        if ([result.head.errCode isEqualToString:@"0000"]) {
             [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
             [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
             BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
             vc.mobileCodeType = self.addCardType;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         } else {
-            [MBProgressHUD showError:result.message toView:weakSelf.view];
+            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
     }];
 }

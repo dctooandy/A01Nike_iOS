@@ -52,19 +52,13 @@
     NSMutableDictionary *params = @{
                              @"loginName" : [IVNetwork savedUserInfo].loginName,
                              }.mutableCopy;
-//    [params setObject:@"1" forKey:@"cache_type"];
     weakSelf(weakSelf)
-    if (useCache) {
-        [self sendRequestUseCacheWithUrl:BTTAccountQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            IVJResponseObject *result = response;
+    [IVNetwork requestPostWithUrl:BTTAccountQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
             [weakSelf fetchBankListResult:result.body completion:completion];
-        }];
-    } else {
-        [IVNetwork requestPostWithUrl:BTTAccountQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            IVJResponseObject *result = response;
-            [weakSelf fetchBankListResult:result.body completion:completion];
-        }];
-    }
+        }
+    }];
 }
 + (void)fetchGamePlatformsWithCompletion:(KYHTTPCallBack)completion
 {
@@ -114,16 +108,16 @@
 + (void)fetchHumanBankAndPhoneWithBankId:(NSString *)bankId Completion:(KYHTTPCallBack)completion
 {
     NSDictionary *params = nil;
-//    if (bankId.length) {
-//        params = @{@"login_name":[IVNetwork userInfo].loginName,@"customer_bank_id":bankId};
-//    } else {
-//        params = @{@"login_name":[IVNetwork userInfo].loginName};
-//    }
+    if (bankId.length) {
+        params = @{@"login_name":[IVNetwork userInfo].loginName,@"customer_bank_id":bankId};
+    } else {
+        params = @{@"login_name":[IVNetwork userInfo].loginName};
+    }
     [self sendRequestWithUrl:@"public/forgot/getBanknoAndPhone" paramters:params completionBlock:completion];
 }
 + (void)verifyHumanBankAndPhoneWithParams:(NSDictionary *)params completion:(KYHTTPCallBack)completion
 {
-    [self sendRequestWithUrl:@"public/forgot/verfiyByBankAndPhone" paramters:params completionBlock:completion];
+    [self sendRequestWithUrl:BTTModifyBankRequests paramters:params completionBlock:completion];
 }
 + (void)addBTCCardWithUrl:(NSString *)url params:(NSDictionary *)params completion:(KYHTTPCallBack)completion
 {

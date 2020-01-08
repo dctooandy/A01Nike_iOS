@@ -32,17 +32,15 @@
 
 #import "JSONModel.h"
 
-@interface BTTBankModel : JSONModel
+@interface BTTBankModel : BTTBaseModel
 /** 银行名称 */
 @property (copy, nonatomic) NSString *bankName;
 /** 支行银行名称 */
-@property (copy, nonatomic) NSString *branchName;
+@property (copy, nonatomic) NSString *bankBranchName;
 /** 银行类型(借记卡/比特币) */
-@property (copy, nonatomic) NSString *bankType;
-/** 银行账户暗文 */
-@property (copy, nonatomic) NSString *bankSecurityAccount;
+@property (copy, nonatomic) NSString *accountType;
 /** 银行账户 */
-@property (copy, nonatomic) NSString *bankAccount;
+@property (copy, nonatomic) NSString *accountNo;
 /** 账户持卡人名字 */
 @property (copy, nonatomic) NSString *bankAccountName;
 /** 是否默认银行卡 YES 是 */
@@ -56,11 +54,11 @@
 /** 城市 */
 @property (copy, nonatomic) NSString *city;
 /** 银行卡的id */
-@property (copy, nonatomic) NSString *customer_bank_id;
+@property (copy, nonatomic) NSString *accountId;
 /** 银行卡logo */
-@property (copy, nonatomic) NSString *banklogo;
+@property (copy, nonatomic) NSString *bankIcon;
 /** 背景图 */
-@property (copy, nonatomic) NSString *bankimage;
+@property (copy, nonatomic) NSString *backgroundColor;
 /** 比特币汇率 */
 @property (copy, nonatomic) NSString *btcrate;
 /** 比特币金额 */

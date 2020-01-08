@@ -18,8 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy) NSString *bankNumber;
 
 @property (nonatomic, copy) NSString *phone;
+@property (nonatomic, copy) NSString *messageId;
+@property (nonatomic, copy) NSString *validateId;
 
 @property (nonatomic, strong) BTTBankModel *bankModel;
+
 @end
 
 NS_ASSUME_NONNULL_END

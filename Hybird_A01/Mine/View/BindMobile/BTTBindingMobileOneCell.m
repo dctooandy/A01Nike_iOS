@@ -97,7 +97,7 @@
         self.textField.keyboardType = UIKeyboardTypeNumberPad;
     }
     if ([model.name isEqualToString:@"出生日期"]) {
-        if (([IVNetwork userInfo].starLevel == 5 || [IVNetwork userInfo].starLevel == 6) && [IVNetwork userInfo].birthday.length) {
+        if (([IVNetwork savedUserInfo].starLevel == 5 || [IVNetwork savedUserInfo].starLevel == 6) && [IVNetwork savedUserInfo].birthday.length) {
             self.textField.textColor = [UIColor colorWithHexString:@"818791"];
         } else {
             self.textField.textColor = [UIColor whiteColor];

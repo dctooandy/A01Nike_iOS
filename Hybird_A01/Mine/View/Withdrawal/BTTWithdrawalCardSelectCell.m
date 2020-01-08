@@ -17,16 +17,16 @@
 {
     _model = model;
     self.detailLabel.text = model.withdrawText;
-    if (model.cardType==1) {
+    if ([model.accountType isEqualToString:@"BTC"]) {
         self.bankIcon.image = [UIImage imageNamed:@"BTC"];
-    }else if (model.cardType==3){
-        if ([model.bankType isEqualToString:@"others"]) {
-            self.bankIcon.image=[UIImage imageNamed:@"me_usdt_otherwallet"];
-        }else{
-            self.bankIcon.image=[UIImage imageNamed:[NSString stringWithFormat:@"me_usdt_%@",model.bankType]];
-        }
+    }else if ([model.accountType isEqualToString:@"USDT"]){
+//        if ([model.account isEqualToString:@"others"]) {
+//            self.bankIcon.image=[UIImage imageNamed:@"me_usdt_otherwallet"];
+//        }else{
+//            self.bankIcon.image=[UIImage imageNamed:[NSString stringWithFormat:@"me_usdt_%@",model.bankType]];
+//        }
     } else {
-        NSString *iconURLStr = model.banklogo;
+        NSString *iconURLStr = model.bankIcon;
         if ([NSString isBlankString:iconURLStr]) {
             iconURLStr = @"";
         } else {

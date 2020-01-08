@@ -23,6 +23,7 @@
 #import "IVRsaEncryptWrapper.h"
 @interface BTTBindingMobileController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, copy) NSString *messageId;
+@property (nonatomic, copy) NSString *validateId;
 @end
 
 @implementation BTTBindingMobileController
@@ -170,7 +171,7 @@
         [self getSubmitBtn].enabled = NO;
     } else {
         if ([IVNetwork savedUserInfo].mobileNoBind==1) {
-            [self getSubmitBtn].enabled = NO;
+            [self getSubmitBtn].enabled = YES;
         }else{
             if ([[self getPhoneTF].text isEqualToString:[IVNetwork savedUserInfo].mobileNo]) {
                 [self getSubmitBtn].enabled = YES;
@@ -213,7 +214,6 @@
     [self.view endEditing:YES];
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"use"] = @"3";
-    params[@"mobileNo"] = [IVRsaEncryptWrapper encryptorString:[self getPhoneTF].text];
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     switch (self.mobileCodeType) {
         case BTTSafeVerifyTypeVerifyMobile:
@@ -225,7 +225,7 @@
         case BTTSafeVerifyTypeMobileDelBankCard:
         case BTTSafeVerifyTypeMobileAddBTCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
-            params[@"use"] = @"7";
+            params[@"use"] = @"8";
             break;
         default:
             params[@"use"] = @"3";
@@ -233,7 +233,7 @@
     }
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [IVNetwork requestPostWithUrl:BTTSendMsgCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTStepOneSendCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
@@ -256,7 +256,7 @@
     NSString *successStr = nil;
     switch (self.mobileCodeType) {
         case BTTSafeVerifyTypeVerifyMobile:
-            url = @"public/verify/check";
+            url = BTTVerifySmsCode;
             successStr = @"验证成功!";
             break;
         case BTTSafeVerifyTypeChangeMobile:
@@ -266,7 +266,8 @@
         case BTTSafeVerifyTypeMobileDelBankCard:
         case BTTSafeVerifyTypeMobileAddBTCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
-            url = @"public/verify/check";
+            url = BTTVerifySmsCode;
+            params[@"use"] = @8;
             successStr = @"验证成功!";
             break;
         default:
@@ -277,6 +278,8 @@
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
+        NSString *messageId = result.body[@"messageId"];
+        NSString *validateId = result.body[@"validateId"];
         
         if ([result.head.errCode isEqualToString:@"0000"]) {
                     if (successStr) {
@@ -308,15 +311,17 @@
                         case BTTSafeVerifyTypeMobileAddBankCard:{
                             BTTAddCardController *vc = [BTTAddCardController new];
                             vc.addCardType = BTTSafeVerifyTypeMobileAddBankCard;
+                            vc.messageId = messageId;
+                            vc.validateId = validateId;
                             [weakSelf.navigationController pushViewController:vc animated:YES];
                         }
                             break;
                         case BTTSafeVerifyTypeMobileChangeBankCard:{
-        //                    BTTAddCardController *vc = [BTTAddCardController new];
-        //                    vc.addCardType = BTTSafeVerifyTypeMobileChangeBankCard;
                             BTTCardModifyVerifyController *vc = [BTTCardModifyVerifyController new];
                             vc.safeVerifyType = BTTSafeVerifyTypeMobileChangeBankCard;
                             vc.bankModel = self.bankModel;
+                            vc.messageId = messageId;
+                            vc.validateId = validateId;
                             [self.navigationController pushViewController:vc animated:YES];
                         }
                             break;

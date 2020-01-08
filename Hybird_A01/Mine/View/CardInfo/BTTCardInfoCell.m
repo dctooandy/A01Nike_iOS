@@ -61,7 +61,7 @@
     }else if(model.cardType==3){
         bgImageDefault = @"USDT-bg";
     }
-    NSString *bgURLStr = model.bankimage;
+    NSString *bgURLStr = model.bankIcon;
     if ([NSString isBlankString:bgURLStr]) {
         bgURLStr = @"";
     } else {
@@ -82,16 +82,16 @@
         [self.deleteBtn setImage:nil forState:UIControlStateNormal];
         [self.deleteBtn setTitle:@"正在审核" forState:UIControlStateNormal];
     }
-    if (model.cardType==1) {
+    if ([model.accountType isEqualToString:@"BTC"]) {
         self.bankIcon.image = [UIImage imageNamed:@"BTC"];
-    }else if (model.cardType==3){
-        if ([model.bankType isEqualToString:@"others"]) {
-            self.bankIcon.image=[UIImage imageNamed:@"me_usdt_otherwallet"];
-        }else{
-            self.bankIcon.image=[UIImage imageNamed:[NSString stringWithFormat:@"me_usdt_%@",model.bankType]];
-        }
+    }else if ([model.accountType isEqualToString:@"USDT"]){
+//        if ([model.bankType isEqualToString:@"others"]) {
+//            self.bankIcon.image=[UIImage imageNamed:@"me_usdt_otherwallet"];
+//        }else{
+//            self.bankIcon.image=[UIImage imageNamed:[NSString stringWithFormat:@"me_usdt_%@",model.bankType]];
+//        }
     } else {
-        NSString *iconURLStr = model.banklogo;
+        NSString *iconURLStr = model.bankIcon;
         if ([NSString isBlankString:iconURLStr]) {
             iconURLStr = @"";
         } else {
@@ -106,9 +106,9 @@
     NSString *setDefaultImageName = model.isDefault ? @"defaultCard" : @"unDefaultCard";
     [self.setDefaultBtn setImage:[UIImage imageNamed:setDefaultImageName] forState:UIControlStateNormal];
     self.bankNameLabel.text = model.bankName;
-    self.classLabel.text = model.cardType!=0 ? @"" : [NSString stringWithFormat:@"%@|%@%@",model.bankType,model.province,model.city];
-    self.adressLabel.text = model.cardType!=0 ? @"" : [NSString stringWithFormat:@"%@%@%@",model.province,model.city,model.branchName];
-    self.cardNumLabel.text = model.bankSecurityAccount;
+    self.classLabel.text = [model.accountType isEqualToString:@"BTC"]||[model.accountType isEqualToString:@"USDT"] ? @"" : [NSString stringWithFormat:@"%@|%@%@",model.accountType,model.province,model.city];
+    self.adressLabel.text = [model.accountType isEqualToString:@"BTC"]||[model.accountType isEqualToString:@"USDT"] ? @"" : [NSString stringWithFormat:@"%@%@%@",model.province,model.city,model.bankBranchName];
+    self.cardNumLabel.text = model.accountNo;
     self.cardNoLabel.text = [NSString stringWithFormat:@"银行卡(%ld)",(long)(self.indexPath.row + 1)];
 }
 

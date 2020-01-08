@@ -132,10 +132,17 @@
                         mainModel.iconName = @"me_bankscan";
                         mainModel.paymentType = CNPayChannelUnionQR;
                         if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                            [self.bigDataSoure addObject:mainModel];
-                        }else{
                             [self.normalDataSoure addObject:mainModel];
+                        }else{
+                            [self.bigDataSoure addObject:mainModel];
                         }
+                    }
+                    if ([model.payTypeName isEqualToString:@"USDT支付"]) {
+                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                        mainModel.name = @"泰达币-USDT";
+                        mainModel.iconName = @"me_usdt";
+                        mainModel.paymentType = CNPayChannelUSDT;
+                        [self.bigDataSoure addObject:mainModel];
                     }
                     if ([model.payTypeName isEqualToString:@"京东扫码"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
@@ -143,12 +150,12 @@
                         mainModel.iconName = @"me_jdscan";
                         mainModel.paymentType = CNPayChannelJDQR;
                         if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                            [self.bigDataSoure addObject:mainModel];
-                        }else{
                             [self.normalDataSoure addObject:mainModel];
+                        }else{
+                            [self.bigDataSoure addObject:mainModel];
                         }
                     }
-                    if ([model.payTypeName isEqualToString:@"支付宝wap"]) {
+                    if ([model.payTypeName isEqualToString:@"支付宝WAP"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"支付宝wap";
                         mainModel.iconName = @"me_aliwap";
@@ -168,26 +175,26 @@
                             [self.bigDataSoure addObject:mainModel];
                         }
                     }
-                    if ([model.payTypeName isEqualToString:@"微信秒存"]) {
+                    if ([model.payTypeName isEqualToString:@"微信转账银行卡"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"微信秒存";
                         mainModel.iconName = @"me_wechatsecond";
                         mainModel.paymentType = CNPayChannelBQWechat;
                         if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                            [self.normalDataSoure addObject:mainModel];
-                        }else{
                             [self.bigDataSoure addObject:mainModel];
+                        }else{
+                            [self.normalDataSoure addObject:mainModel];
                         }
                     }
-                    if ([model.payTypeName isEqualToString:@"支付宝秒存"]) {
+                    if ([model.payTypeName isEqualToString:@"支付宝转账银行卡"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"支付宝秒存";
                         mainModel.iconName = @"me_alipaySecond";
                         mainModel.paymentType = CNPayChannelBQAli;
                         if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                            [self.normalDataSoure addObject:mainModel];
-                        }else{
                             [self.bigDataSoure addObject:mainModel];
+                        }else{
+                            [self.normalDataSoure addObject:mainModel];
                         }
                     }
                     if ([model.payTypeName isEqualToString:@"支付宝扫码"]) {
@@ -225,7 +232,7 @@
                         mainModel.paymentType = CNPayChannelOnline;
                         [self.normalDataSoure addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"云闪付扫码"]) {
+                    if ([model.payTypeName isEqualToString:@"云闪付"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"云闪付扫码";
                         mainModel.iconName = @"me_YSF";
@@ -239,7 +246,7 @@
                         mainModel.paymentType = CNPayChannelUnionApp;
                         [self.normalDataSoure addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"币商充值"]) {
+                    if ([model.payTypeName isEqualToString:@"币商"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"币商充值";
                         mainModel.iconName = @"me_bishang";
@@ -267,7 +274,7 @@
                         mainModel.paymentType = CNPayChannelBTC;
                         [self.normalDataSoure addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"微信条码支付"]) {
+                    if ([model.payTypeName isEqualToString:@"微信条码"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"微信条码支付";
                         mainModel.iconName = @"me_tiaoma";
@@ -332,19 +339,6 @@
     }
     NSMutableArray *names = @[@"取款",@"洗码",@"银行卡资料",@"绑定手机",@"个人资料",@""].mutableCopy;
     NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
-//    if (self.isShowHidden) {
-//        names = [NSMutableArray arrayWithArray:@[@"取款",@"结算洗码",@"额度转账",@"我的优惠",@"首存优惠",@"推荐礼金"]];
-//        icons = [NSMutableArray arrayWithArray:@[@"me_withdrawal",@"me_washcode",@"me_transfer",@"me_preferential",@"",@"me_gift"]];
-//        if (self.isFanLi) {
-//            NSInteger index = [names indexOfObject:@"首存优惠"];
-//            [names insertObject:@"1%存款返利" atIndex:index + 1];
-//        }
-//        if (self.isOpenAccount) {
-//            NSInteger index = [names indexOfObject:@"首存优惠"];
-//            [names insertObject:@"开户礼金" atIndex:index + 1];
-//        }
-//
-//    }
     
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];

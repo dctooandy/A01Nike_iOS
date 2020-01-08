@@ -216,42 +216,53 @@
 - (void)fetchHumanBankAndPhone
 {
     weakSelf(weakSelf)
-    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [BTTHttpManager fetchHumanBankAndPhoneWithBankId:self.bankModel.customer_bank_id Completion:^(IVRequestResultModel *result, id response) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-            weakSelf.bankNumber = [result.data valueForKey:@"bank_account_no"];
-            weakSelf.phone = [result.data valueForKey:@"phone"];
-        } else {
-            weakSelf.bankNumber = @"获取失败，请重新打开该页面!";
-            weakSelf.phone = @"获取失败，请重新打开该页面!";
-            [MBProgressHUD showError:result.message toView:weakSelf.view];
-        }
-        [weakSelf.collectionView reloadData];
-    }];
+//    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+//    [BTTHttpManager fetchHumanBankAndPhoneWithBankId:self.bankModel.accountId Completion:^(id response,NSError *error) {
+//        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+//        IVJResponseObject *result = response;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            if ([result.body isKindOfClass:[NSDictionary class]]) {
+//                weakSelf.bankNumber = [result.body valueForKey:@"bank_account_no"];
+//                weakSelf.phone = [result.body valueForKey:@"phone"];
+//            }
+//        }else{
+//            weakSelf.bankNumber = @"获取失败，请重新打开该页面!";
+//            weakSelf.phone = @"获取失败，请重新打开该页面!";
+//            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
+//        }
+//
+    weakSelf.bankNumber = self.bankModel.accountNo;
+    [weakSelf.collectionView reloadData];
+//    }];
 }
 - (void)submitVerify
 {
     NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"login_name"] = [IVNetwork userInfo].loginName;
-    params[@"bank_account_no"] = [self getVerifyBankNumTF].text;
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    params[@"bankCard"] = [self getVerifyBankNumTF].text;
+    if (self.messageId.length) {
+        params[@"messageId"] = self.messageId;
+        params[@"validateId"] = self.validateId;
+    }
+    params[@"used"] = @2;
     if ([self getVerifyPhoneTF]) {
         params[@"phone"] = [self getVerifyPhoneTF].text;
     }
-    if (self.bankModel) {
-        params[@"customer_bank_id"] = self.bankModel.customer_bank_id;
-    }
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [BTTHttpManager verifyHumanBankAndPhoneWithParams:params.copy completion:^(IVRequestResultModel *result, id response) {
+    [BTTHttpManager verifyHumanBankAndPhoneWithParams:params.copy completion:^(id response,NSError *error) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        if (result.status) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
             [MBProgressHUD showSuccess:@"验证成功!" toView:nil];
             BTTAddCardController *vc = [[BTTAddCardController alloc] init];
             vc.addCardType = self.safeVerifyType;
+            vc.messageId = self.messageId;
+            vc.validateId = self.validateId;
+            vc.accountId = self.bankModel.accountId;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         } else {
-            [MBProgressHUD showError:result.message toView:nil];
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];
 }

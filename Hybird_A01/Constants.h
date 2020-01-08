@@ -255,6 +255,12 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTAccountQuery        @"account/query"
 // 电话回拨API
 #define BTTCallBackAPI         @"callback"
+// 添加银行卡账号
+#define BTTAddBankCard       @"account/create"
+// 修改银行卡账号
+#define BTTModifyBankCard       @"account/modifyBank"
+// 查询会员修改银行卡
+#define BTTModifyBankRequests       @"customer/checkPhoneAndBankCard"
 
 // 首页逻辑接口
 

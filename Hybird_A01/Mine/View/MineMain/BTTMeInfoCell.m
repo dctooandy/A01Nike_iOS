@@ -44,13 +44,13 @@
         self.topConstants.constant = 0;
         self.rightConstants.constant = 0;
         if ([model.name isEqualToString:@"个人资料"]) {
-            if ([IVNetwork userInfo].real_name.length) {
+            if ([IVNetwork savedUserInfo].realName.length) {
                 self.statusIcon.image = ImageNamed(@"me_bankcard_status_yes");
             } else {
                 self.statusIcon.image = ImageNamed(@"me_bankcard_status_no");
             }
         } else if ([model.name isEqualToString:@"绑定手机"]) {
-            if ([IVNetwork userInfo].isPhoneBinded) {
+            if ([IVNetwork savedUserInfo].mobileNoBind==1) {
                 self.statusIcon.image = ImageNamed(@"me_phone_status_yes");
             } else {
                 self.statusIcon.image = ImageNamed(@"me_phone_status_no");
@@ -61,7 +61,7 @@
             self.rightConstants.constant = 10;
         }
         else {
-            if ([IVNetwork userInfo].isBankBinded) {
+            if ([IVNetwork savedUserInfo].bandCardNum!=0) {
                self.statusIcon.image = ImageNamed(@"me_phone_status_yes");
            } else {
                self.statusIcon.image = ImageNamed(@"me_phone_status_no");

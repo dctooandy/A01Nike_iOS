@@ -284,7 +284,7 @@
     }
     BTTBankModel *model = self.bankList[self.selectIndex];
     NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"customer_bank_id"] = model.customer_bank_id;
+    params[@"customer_bank_id"] = model.accountId;
     params[@"amount"] = self.amount;
     NSString *url = nil;
     if (model.cardType==1) {
