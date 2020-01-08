@@ -108,6 +108,7 @@
             self.uuid = @"";
             self.wrongPwdNum = 0;
             [IVHttpManager shareManager].userToken = result.body[@"token"];
+            [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
             [self getCustomerInfoByLoginNameWithName:model.login_name isBack:isback];
         }else{
             [self hideLoading];

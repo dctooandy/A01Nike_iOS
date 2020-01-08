@@ -46,6 +46,11 @@
     [IVHttpManager shareManager].parentId = [HAInitConfig appKey];  // 渠道号
     [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
     [IVHttpManager shareManager].productCode = [HAInitConfig appKey]; // 产品码
+    
+    NSString *userToken = [[NSUserDefaults standardUserDefaults]objectForKey:@"userToken"];
+    if (userToken!=nil) {
+        [IVHttpManager shareManager].userToken = userToken;
+    }
 
     // 所有手机站,先从缓存取，缓存没有使用默认配置
     [IVHttpManager shareManager].domains = [IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey] ? : @[[HAInitConfig defaultH5Domain]];

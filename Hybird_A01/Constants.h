@@ -266,7 +266,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 // 金额转账本地接口
 
-#define BTTTransferAllMoneyToLocal   @"/public/credits/transferAllMoneyToLocal"
+#define BTTTransferAllMoneyToLocal   @"game/transferToLocal"
 
 // 转账, 游戏厅转本地
 
@@ -347,6 +347,10 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 // 查询可分享链接
 #define BTTGetWeiXinRediect          @"_extra_/api/v1/app/public/getWeiXinRedirect"
+
+#define BTTCreditsGame               @"/public/credits/game"
+#define BTTCreditsTotalAvailable     @"/public/credits/totalAvailable"
+#define BTTIsBindStatusAPI           @"/public/verify/isNewBind"
 
 /********************************************常用宏*********************************************************/
 

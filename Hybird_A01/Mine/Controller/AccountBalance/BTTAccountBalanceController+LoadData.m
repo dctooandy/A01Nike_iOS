@@ -9,6 +9,7 @@
 #import "BTTAccountBalanceController+LoadData.h"
 #import "BTTGamesHallModel.h"
 #import "BTTMeMainModel.h"
+#import "BTTCustomerBalanceModel.h"
 
 @implementation BTTAccountBalanceController (LoadData)
 
@@ -29,116 +30,41 @@
     });
 }
 
-- (void)loadLocalAmount:(dispatch_group_t)group {
-    [IVNetwork sendRequestWithSubURL:BTTCreditsALL paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-       
-        NSLog(@"%@",response);
-        if (result.code_http == 200 && result.status) {
-            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-                self.amount = result.data[@"val"];
-                self.localAmount = [NSString stringWithFormat:@"%.2f",[result.data[@"val"] floatValue]];
-                dispatch_group_leave(group);
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.collectionView reloadData];
-                });
-            }
+- (void)loadLocalAmount{
+    NSDictionary *params = @{@"loginName":[IVNetwork savedUserInfo].loginName,@"flag":@1};
+    [IVNetwork requestPostWithUrl:BTTCreditsALL paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTCustomerBalanceModel *model = [BTTCustomerBalanceModel yy_modelWithJSON:result.body];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.amount = [NSString stringWithFormat:@"%ld",model.balance];
+                self.localAmount = [NSString stringWithFormat:@"%ld",model.localBalance];
+                self.hallAmount = [NSString stringWithFormat:@"%ld",model.platformTotalBalance];
+                [self.games addObjectsFromArray:model.platformBalances];
+                self.isLoadingData = NO;
+                [self.collectionView reloadData];
+                [self setupElements];
+            });
         }
     }];
 }
 
 - (void)loadGamesListAndGameAmount:(UIButton *)button {
     [self loadMainData];
-    dispatch_queue_t queue = dispatch_queue_create("accountBlance.data", DISPATCH_QUEUE_CONCURRENT);
-    dispatch_group_t group = dispatch_group_create();
-    dispatch_group_enter(group);
-    dispatch_async(queue, ^{
-        [self loadLocalAmount:group];
-    });
-    dispatch_group_enter(group);
-    dispatch_async(queue, ^{
-        [self loadGameshallList:group];
-    });
-    dispatch_group_notify(group, queue, ^{
-        [self loadEachGameHall:button];
-    });
-}
-
-- (void)loadEachGameHall:(UIButton *)button {
-    dispatch_queue_t queue = dispatch_queue_create("accountBlance.eachhall", DISPATCH_QUEUE_CONCURRENT);
-    dispatch_group_t group = dispatch_group_create();
-    for (BTTGamesHallModel *model in self.games.mutableCopy) {
-        NSInteger index = [self.games indexOfObject:model];
-        dispatch_group_enter(group);
-        [self loadGameAmountWithModel:model index:index group:group];
-    }
-    
-    dispatch_group_notify(group, queue, ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            if (button.titleLabel.text.length) {
-                button.enabled = YES;
-            } else {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"EnableTransferBtnNotification" object:nil];
-            }
-            [self.collectionView reloadData];
-        });
-    });
-}
-
-- (void)loadGameshallList:(dispatch_group_t)group{
-    [BTTHttpManager fetchGamePlatformsWithCompletion:^(IVRequestResultModel *result, id response) {
-        NSMutableArray *games = [NSMutableArray array];
-        if (result.code_http == 200 && result.status) {
-            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-                if (result.data[@"platforms"] && [result.data[@"platforms"] isKindOfClass:[NSArray class]] && ![result.data[@"platforms"] isKindOfClass:[NSNull class]]) {
-                    for (NSDictionary *dict in result.data[@"platforms"]) {
-                        BTTGamesHallModel *model = [BTTGamesHallModel yy_modelWithDictionary:dict];
-                        model.isLoading = YES;
-                        [games addObject:model];
-                    }
-                    self.isLoadingData = YES;
-                    self.games = [games mutableCopy];
-                }
-            }
-        }
-        self.isLoadingData = YES;
-        [self setupElements];
-        dispatch_group_leave(group);
-        if (result.message.length) {
-            [MBProgressHUD showError:result.message toView:nil];
-        }
-    }];
+    [self loadLocalAmount];
 }
 
 - (void)loadTransferAllMoneyToLocal:(UIButton *)button {
-    [IVNetwork sendRequestWithSubURL:BTTTransferAllMoneyToLocal paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        if (result.code_http == 200 && result.status) {
+    NSDictionary *params = @{@"loginName":[IVNetwork savedUserInfo].loginName};
+    [IVNetwork requestPostWithUrl:BTTTransferAllMoneyToLocal paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
             self.amount = @"-";
             self.localAmount = @"-";
             self.hallAmount = @"-";
             [self loadGamesListAndGameAmount:button];
         }
-    }];
-}
-
-- (void)loadGameAmountWithModel:(BTTGamesHallModel *)model index:(NSInteger)index group:(dispatch_group_t)group{
-    NSDictionary *params = @{@"game_name":model.gameName};
-    [IVNetwork sendRequestWithSubURL:BTTCreditsGame paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        if (result.code_http == 200 && result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-            model.amount = [NSString stringWithFormat:@"%.2f",[result.data[@"val"] floatValue]];
-            model.isLoading = NO;
-            self.amount = [NSString stringWithFormat:@"%.2f",self.amount.floatValue + model.amount.floatValue];
-            self.hallAmount = [NSString stringWithFormat:@"%.2f",self.hallAmount.floatValue + model.amount.floatValue];
-        }
-        dispatch_group_leave(group);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-        });
-        if (result.message.length) {
-            [MBProgressHUD showError:result.message toView:nil];
-        }
-        
     }];
 }
 

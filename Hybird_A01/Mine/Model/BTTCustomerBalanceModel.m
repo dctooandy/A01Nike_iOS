@@ -11,3 +11,11 @@
 @implementation BTTCustomerBalanceModel
 
 @end
+
+@implementation platformBanlaceModel
+
+@end
+
+@implementation walletBanlaceModel
+
+@end

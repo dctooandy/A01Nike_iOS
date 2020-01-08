@@ -16,12 +16,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableTransferBtnNotification) name:@"EnableTransferBtnNotification" object:nil];
-}
-
-- (void)enableTransferBtnNotification {
     self.trasferToLocal.enabled = YES;
 }
+
 
 - (IBAction)totalBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {

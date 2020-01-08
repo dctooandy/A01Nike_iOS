@@ -60,10 +60,6 @@
 
 @property (nonatomic, assign) BOOL isCompletePersonalInfo; // 是否完善个人信息
 
-
-
-
-
 @end
 
 @implementation BTTMineViewController

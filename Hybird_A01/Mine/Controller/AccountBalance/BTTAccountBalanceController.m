@@ -26,7 +26,6 @@
     [super viewDidLoad];
     self.isLoadingData = NO;
     self.title = @"账户余额";
-    self.isLoadingData = NO;
     self.amount = @"-";
     self.localAmount = @"加载中";
     self.hallAmount = @"加载中";
@@ -53,7 +52,6 @@
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
-            button.enabled = NO;
             [strongSelf loadTransferAllMoneyToLocal:button];
         };
         return cell;
@@ -76,7 +74,7 @@
         return cell;
     } else {
         BTTAccountBlanceHiddenCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAccountBlanceHiddenCell" forIndexPath:indexPath];
-        BTTGamesHallModel *model = self.games[indexPath.row - 3];
+        platformBanlaceModel *model = [platformBanlaceModel yy_modelWithJSON:self.games[indexPath.row - 3]];
         cell.model = model;
         return cell;
     }
@@ -85,11 +83,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
-    NSLog(@"%zd", indexPath.item);
-    if (!self.isLoadingData) {
-        [MBProgressHUD showError:@"数据加载中, 请稍后" toView:nil];
-    }
-    if (indexPath.item == 2 && self.isLoadingData) {
+    if (indexPath.item == 2) {
         self.isShowHidden = !self.isShowHidden;
         [self setupElements];
     }

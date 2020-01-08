@@ -7,14 +7,13 @@
 //
 
 #import "BTTBaseCollectionViewCell.h"
-
-@class BTTGamesHallModel;
+#import "BTTCustomerBalanceModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTAccountBlanceHiddenCell : BTTBaseCollectionViewCell
 
-@property (nonatomic, strong) BTTGamesHallModel *model;
+@property (nonatomic, strong) platformBanlaceModel *model;
 
 @end
 

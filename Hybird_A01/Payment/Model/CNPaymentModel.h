@@ -49,31 +49,18 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
     CNPaymentBS ///< 币商
 };
 
-@interface CNPaymentModel : JSONModel
+@interface CNPaymentModel : BTTBaseModel
 /// 定义的具体支付方式
-@property (nonatomic, assign) CNPaymentType paymentType;
+@property (nonatomic, assign) NSInteger payType;
 /// 支付方式标题
-@property (nonatomic, copy, readonly) NSString<Ignore> *paymentTitle;
+@property (nonatomic, copy) NSString *payTypeName;
 /// 支付方式logo
-@property (nonatomic, copy, readonly) NSString<Ignore> *paymentLogo;
+@property (nonatomic, copy) NSString *payTypeIcon;
+/// 支付类型
+@property (nonatomic, strong) NSDictionary *payTypeTipJson;
 
-/// 支付方式是否可用
-@property (nonatomic, assign) BOOL isAvailable;
-@property (nonatomic, copy)  NSArray <NSString *> *amountList;
-@property (nonatomic, assign) BOOL amountCanEdit;
-@property (nonatomic, assign) double maxamount;
-@property (nonatomic, assign) double minamount;
-@property (nonatomic, assign) NSInteger payid;
-@property (nonatomic, copy) NSArray <CNPayBankCardModel> *bankList;
-@property (nonatomic, copy) NSString *depositor;
-#pragma mark - 点卡
-@property (nonatomic, copy) NSArray <CNPayCardModel> *cardList;
-@property (nonatomic, copy) NSString *postUrl;
+@property (nonatomic, strong) NSArray *extras;
 
-@property (nonatomic, assign) BOOL isSelect;
+@property (nonatomic, assign) NSInteger csr;
 
-/// 推荐金额
-- (NSArray<NSNumber *> *)prePayAmountArray;
-/// 支付方式
-- (NSArray<NSString *> *)payTypeArray;
 @end
