@@ -56,30 +56,32 @@
     self.depositByLb.text = self.writeModel.depositBy;
     CNPaymentModel *model = self.paymentModel;
     // 金额提示语
-    if (model.maxamount > model.minamount) {
-        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f，最多%.0f", model.minamount, model.maxamount];
-    } else {
-        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f", model.minamount];
-    }
+    //TODO:
+//    if (model.maxamount > model.minamount) {
+//        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f，最多%.0f", model.minamount, model.maxamount];
+//    } else {
+//        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f", model.minamount];
+//    }
 }
 
 
 - (void)configAmountList {
-    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
-    if (!self.paymentModel.amountCanEdit) {
-        self.amountTF.placeholder = @"仅可选择以下金额";
-    }
+//    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
+//    if (!self.paymentModel.amountCanEdit) {
+//        self.amountTF.placeholder = @"仅可选择以下金额";
+//    }
 }
 
 
 
 - (IBAction)selectPayType:(id)sender {
     [self.view endEditing:YES];
-    NSArray *payTypeArr = [self.paymentModel payTypeArray];
-    weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:_payTypeTF.placeholder dataSource:payTypeArr defaultSelValue:_payTypeTF.text resultBlock:^(id selectValue, NSInteger index) {
-        weakSelf.payTypeTF.text = selectValue;
-    }];
+    //TODO:
+//    NSArray *payTypeArr = [self.paymentModel payTypeArray];
+//    weakSelf(weakSelf);
+//    [BRStringPickerView showStringPickerWithTitle:_payTypeTF.placeholder dataSource:payTypeArr defaultSelValue:_payTypeTF.text resultBlock:^(id selectValue, NSInteger index) {
+//        weakSelf.payTypeTF.text = selectValue;
+//    }];
 }
 
 // 选择省市
@@ -112,21 +114,21 @@
 }
 
 - (IBAction)selectAmountList:(id)sender {
-    weakSelf(weakSelf);
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.paymentModel.amountList.count];
-    for (id obj in self.paymentModel.amountList) {
-        [array addObject:[NSString stringWithFormat:@"%@", obj]];
-    }
-    if (array.count == 0) {
-        [self showError:@"无可选金额，请直接输入"];
-        return;
-    }
-    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
-        if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
-            return;
-        }
-        weakSelf.amountTF.text = selectValue;
-    }];
+//    weakSelf(weakSelf);
+//    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.paymentModel.amountList.count];
+//    for (id obj in self.paymentModel.amountList) {
+//        [array addObject:[NSString stringWithFormat:@"%@", obj]];
+//    }
+//    if (array.count == 0) {
+//        [self showError:@"无可选金额，请直接输入"];
+//        return;
+//    }
+//    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
+//        if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
+//            return;
+//        }
+//        weakSelf.amountTF.text = selectValue;
+//    }];
 }
 
 - (IBAction)submitAction:(UIButton *)sender {
@@ -158,13 +160,14 @@
     }
     
     /// 超出额度范围
-    NSNumber *amount = [NSString convertNumber:text];
-    double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;
-    if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) {
-        _amountTF.text = nil;
-        [self showError:_amountTF.placeholder];
-        return;
-    }
+    //TODO:
+//    NSNumber *amount = [NSString convertNumber:text];
+//    double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;
+//    if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) {
+//        _amountTF.text = nil;
+//        [self showError:_amountTF.placeholder];
+//        return;
+//    }
     
     if (sender.selected) {
         return;
@@ -177,8 +180,9 @@
     self.writeModel.date = [NSString stringWithFormat:@"%@:00", _dateTF.text];
     self.writeModel.amount = self.amountTF.text;
     self.writeModel.charge = self.chargeTF.text;
-    self.writeModel.remarks = self.remarkTF.text;
-    self.writeModel.payId = self.paymentModel.payid;
+    //TODO:
+//    self.writeModel.remarks = self.remarkTF.text;
+//    self.writeModel.payId = self.paymentModel.payid;
     /// 提交请求
     __weak typeof(self) weakSelf = self;
     [CNPayRequestManager paymentCreateManualWithWriteInfo:self.writeModel completeHandler:^(IVJResponseObject *result, id response) {

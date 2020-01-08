@@ -80,31 +80,31 @@
     if (maxAmount < minAmount) {
         max = MAXFLOAT;
     }
-    NSArray *amountArr = [self.paymentModel prePayAmountArray];
-    double firstItem = [amountArr.firstObject doubleValue];
-    double lastItem = [amountArr.lastObject doubleValue];
-    
-    // 无交集, 取俩区间最大值中的最小值
-    if (lastItem < minAmount || firstItem > max) {
-        return @[[NSString stringWithFormat:@"%lf", MIN(lastItem, max)]];
-    }
-    
-    // 有交集, 取区间值
-    NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF > %@ AND SELF < %@", @(minAmount), @(max)];
-    NSMutableArray *filtArr = [[amountArr filteredArrayUsingPredicate:pre] mutableCopy];
-    
-    // 需要把限值考虑进去
-    if (minAmount >= firstItem) {
-        [filtArr insertObject:@(minAmount) atIndex:0];
-    }
-    if (max <= lastItem) {
-        [filtArr addObject:@(max)];
-    }
+//    NSArray *amountArr = [self.paymentModel prePayAmountArray];
+//    double firstItem = [amountArr.firstObject doubleValue];
+//    double lastItem = [amountArr.lastObject doubleValue];
+//
+//    // 无交集, 取俩区间最大值中的最小值
+//    if (lastItem < minAmount || firstItem > max) {
+//        return @[[NSString stringWithFormat:@"%lf", MIN(lastItem, max)]];
+//    }
+//
+//    // 有交集, 取区间值
+//    NSPredicate *pre = [NSPredicate predicateWithFormat:@"SELF > %@ AND SELF < %@", @(minAmount), @(max)];
+//    NSMutableArray *filtArr = [[amountArr filteredArrayUsingPredicate:pre] mutableCopy];
+//
+//    // 需要把限值考虑进去
+//    if (minAmount >= firstItem) {
+//        [filtArr insertObject:@(minAmount) atIndex:0];
+//    }
+//    if (max <= lastItem) {
+//        [filtArr addObject:@(max)];
+//    }
     
     NSMutableArray *array = [NSMutableArray array];
-    for (NSNumber *number in filtArr) {
-        [array addObject:number.stringValue];
-    }
+//    for (NSNumber *number in filtArr) {
+//        [array addObject:number.stringValue];
+//    }
     return array;
 }
 
@@ -186,64 +186,64 @@
 - (NSString *)getPaytypeString {
     
     NSString *paytypeString;
-    switch (self.paymentModel.paymentType) {
-            
-        case CNPaymentUnionApp:
-            paytypeString = @"19";
-            break;
-        case CNPaymentOnline:
-            paytypeString = @"1";
-            break;
-        case CNPaymentWechatApp:
-            paytypeString = @"8";
-            break;
-        case CNPaymentWechatQR:
-            paytypeString = @"6";
-            break;
-        case CNPaymentAliApp:
-            paytypeString = @"9";
-            break;
-        case CNPaymentAliQR:
-            paytypeString = @"5";
-            break;
-        case CNPaymentQQApp:
-            paytypeString = @"11";
-            break;
-        case CNPaymentQQQR:
-            paytypeString = @"7";
-            break;
-        case CNPaymentUnionQR:
-            paytypeString = @"15";
-            break;
-        case CNPaymentJDApp:
-            paytypeString = @"17";
-            break;
-        case CNPaymentJDQR:
-            paytypeString = @"16";
-            break;
-        case CNPaymentBTC:
-            paytypeString = @"20";
-            break;
-        case CNPaymentCard:
-            paytypeString = @"2";
-            break;
-        case CNPaymentWechatBarCode:
-            paytypeString = @"23";
-            break;
-        case CNPaymentYSFQR:
-            paytypeString = @"27";
-            break;
-        case CNPaymentCoin:
-            paytypeString = @"41";
-            break;
-        case CNPaymentDeposit:
-        case CNPaymentBQFast:
-        case CNPaymentBQWechat:
-        case CNPaymentBQAli:
-        case CNPaymentBS:
-            paytypeString = @"";
-            break;
-    }
+//    switch (self.paymentModel.paymentType) {
+//
+//        case CNPaymentUnionApp:
+//            paytypeString = @"19";
+//            break;
+//        case CNPaymentOnline:
+//            paytypeString = @"1";
+//            break;
+//        case CNPaymentWechatApp:
+//            paytypeString = @"8";
+//            break;
+//        case CNPaymentWechatQR:
+//            paytypeString = @"6";
+//            break;
+//        case CNPaymentAliApp:
+//            paytypeString = @"9";
+//            break;
+//        case CNPaymentAliQR:
+//            paytypeString = @"5";
+//            break;
+//        case CNPaymentQQApp:
+//            paytypeString = @"11";
+//            break;
+//        case CNPaymentQQQR:
+//            paytypeString = @"7";
+//            break;
+//        case CNPaymentUnionQR:
+//            paytypeString = @"15";
+//            break;
+//        case CNPaymentJDApp:
+//            paytypeString = @"17";
+//            break;
+//        case CNPaymentJDQR:
+//            paytypeString = @"16";
+//            break;
+//        case CNPaymentBTC:
+//            paytypeString = @"20";
+//            break;
+//        case CNPaymentCard:
+//            paytypeString = @"2";
+//            break;
+//        case CNPaymentWechatBarCode:
+//            paytypeString = @"23";
+//            break;
+//        case CNPaymentYSFQR:
+//            paytypeString = @"27";
+//            break;
+//        case CNPaymentCoin:
+//            paytypeString = @"41";
+//            break;
+//        case CNPaymentDeposit:
+//        case CNPaymentBQFast:
+//        case CNPaymentBQWechat:
+//        case CNPaymentBQAli:
+//        case CNPaymentBS:
+//            paytypeString = @"";
+//            break;
+//    }
     return paytypeString;
 }
 

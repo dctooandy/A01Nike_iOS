@@ -117,12 +117,13 @@
 }
 
 - (BOOL)isAvailable {
-    for (CNPaymentModel *model in self.payments) {
-        NSLog(@"%@",model.paymentTitle);
-        if (model.isAvailable) {
-            return YES;
-        }
-    }
+    //TODO:
+//    for (CNPaymentModel *model in self.payments) {
+//        NSLog(@"%@",model.paymentTitle);
+//        if (model.isAvailable) {
+//            return YES;
+//        }
+//    }
     return NO;
 }
 @end

@@ -75,46 +75,46 @@
 }
 
 - (void)configDifferentUI {
-    switch (self.paymentModel.paymentType) {
-        case CNPaymentBQFast:
-            self.alertIV.hidden = YES;
-            self.alertIVHeight.constant = 0;
-            self.alertLb.textColor = COLOR_HEX(0x82868F);
-            self.alertLb.text = @"为保障快速到账，实际存款金额和持卡人须与订单一致。";
-            self.twoBtnView.hidden = YES;
-            self.twoBtnViewHeight.constant = 0;
-            break;
-        case CNPaymentBQWechat:
-            self.fastTipLb.hidden = YES;
-            self.fastTipLbHeight.constant = 0;
-            self.oneBtnView.hidden = YES;
-            self.oneBtnViewHeight.constant = 0;
-            break;
-        case CNPaymentBQAli:
-            self.fastTipLb.hidden = YES;
-            self.fastTipLbHeight.constant = 0;
-            self.twoBtnView.hidden = YES;
-            self.twoBtnViewHeight.constant = 0;
-            [self.submitBtn setTitle:@"我已成功付款" forState:UIControlStateNormal];
-            break;
-            
-        default:
-            break;
-    }
+//    switch (self.paymentModel.paymentType) {
+//        case CNPaymentBQFast:
+//            self.alertIV.hidden = YES;
+//            self.alertIVHeight.constant = 0;
+//            self.alertLb.textColor = COLOR_HEX(0x82868F);
+//            self.alertLb.text = @"为保障快速到账，实际存款金额和持卡人须与订单一致。";
+//            self.twoBtnView.hidden = YES;
+//            self.twoBtnViewHeight.constant = 0;
+//            break;
+//        case CNPaymentBQWechat:
+//            self.fastTipLb.hidden = YES;
+//            self.fastTipLbHeight.constant = 0;
+//            self.oneBtnView.hidden = YES;
+//            self.oneBtnViewHeight.constant = 0;
+//            break;
+//        case CNPaymentBQAli:
+//            self.fastTipLb.hidden = YES;
+//            self.fastTipLbHeight.constant = 0;
+//            self.twoBtnView.hidden = YES;
+//            self.twoBtnViewHeight.constant = 0;
+//            [self.submitBtn setTitle:@"我已成功付款" forState:UIControlStateNormal];
+//            break;
+//
+//        default:
+//            break;
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setViewHeight:1000 fullScreen:YES];
-    if (self.writeModel.chooseBank.qrcode.length && self.paymentModel.paymentType == CNPaymentBQAli) {
-        _step2VC = [[BTTPayBQAliStep2VC alloc] init];
-        _step2VC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, 1000);
-        _step2VC.paymentModel = self.paymentModel;
-        [self addChildViewController:_step2VC];
-        [self.view addSubview:_step2VC.view];
-    } else {
-        [self configUI];
-    }
+//    if (self.writeModel.chooseBank.qrcode.length && self.paymentModel.paymentType == CNPaymentBQAli) {
+//        _step2VC = [[BTTPayBQAliStep2VC alloc] init];
+//        _step2VC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, 1000);
+//        _step2VC.paymentModel = self.paymentModel;
+//        [self addChildViewController:_step2VC];
+//        [self.view addSubview:_step2VC.view];
+//    } else {
+//        [self configUI];
+//    }
 }
 
 
@@ -140,11 +140,11 @@
 }
 
 - (IBAction)goToPay:(UIButton *)sender {
-    if (self.paymentModel.paymentType == CNPaymentBQAli) {
-        [self popToRootViewController];
-        return;
-    }
-    [self pushUIWebViewWithURLString:self.writeModel.chooseBank.bankurl title:self.paymentModel.paymentTitle];
+//    if (self.paymentModel.paymentType == CNPaymentBQAli) {
+//        [self popToRootViewController];
+//        return;
+//    }
+//    [self pushUIWebViewWithURLString:self.writeModel.chooseBank.bankurl title:self.paymentModel.paymentTitle];
 }
 
 - (IBAction)finishPay:(id)sender {

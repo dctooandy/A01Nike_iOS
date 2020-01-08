@@ -49,17 +49,17 @@
 // 选择点卡类型
 - (IBAction)selectCard:(UIButton *)sender {
     [self.view endEditing:YES];
-    NSMutableArray *cardTypeArr = [NSMutableArray array];
-    for (CNPayCardModel *model in self.paymentModel.cardList) {
-        [cardTypeArr addObject:model.name];
-    }
-    weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:_cardTypeTF.placeholder dataSource:cardTypeArr defaultSelValue:_cardTypeTF.text resultBlock:^(NSString *selectValue, NSInteger index) {
-        weakSelf.cardTypeTF.text = selectValue;
-        CNPayCardModel *model = weakSelf.paymentModel.cardList[index];
-        weakSelf.chooseCardModel = model;
-        weakSelf.cardValueTF.text = nil;
-    }];
+//    NSMutableArray *cardTypeArr = [NSMutableArray array];
+//    for (CNPayCardModel *model in self.paymentModel.cardList) {
+//        [cardTypeArr addObject:model.name];
+//    }
+//    weakSelf(weakSelf);
+//    [BRStringPickerView showStringPickerWithTitle:_cardTypeTF.placeholder dataSource:cardTypeArr defaultSelValue:_cardTypeTF.text resultBlock:^(NSString *selectValue, NSInteger index) {
+//        weakSelf.cardTypeTF.text = selectValue;
+//        CNPayCardModel *model = weakSelf.paymentModel.cardList[index];
+//        weakSelf.chooseCardModel = model;
+//        weakSelf.cardValueTF.text = nil;
+//    }];
 }
 
 /// 选择点卡面额
@@ -123,12 +123,12 @@
 
 - (CNPayCardModel *)getCardModel {
     CNPayCardModel *card = self.chooseCardModel;
-    card.cardNo = self.cardNoTF.text;
-    card.cardPwd = self.cardPwdTF.text;
-    card.payId = self.paymentModel.payid;
-    card.amount = self.cardValueTF.text;
-    card.postUrl = self.paymentModel.postUrl;
-    self.writeModel.cardModel = card;
+//    card.cardNo = self.cardNoTF.text;
+//    card.cardPwd = self.cardPwdTF.text;
+//    card.payId = self.paymentModel.payid;
+//    card.amount = self.cardValueTF.text;
+//    card.postUrl = self.paymentModel.postUrl;
+//    self.writeModel.cardModel = card;
     return card;
 }
 @end

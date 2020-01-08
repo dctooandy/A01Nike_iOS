@@ -135,51 +135,52 @@
 
 /// 请求数据处理
 - (void)fetchChannelSucessHandler:(id)obj {
-    if ([obj isKindOfClass:[NSArray class]] && [(NSArray *)obj count] == kPayTypeTotalCount) {
-        
-        NSArray *objArray = (NSArray *)obj;
-        NSMutableArray<CNPaymentModel *> *payments = [NSMutableArray array];
-        NSMutableArray *usdtArray = [[NSMutableArray alloc]init];
-        
-        BOOL haveUSDT = false;
-        
-        for (int i = 0; i< kPayTypeTotalCount; i++) {
-            /// 数据解析
-            NSError *error;
-            CNPaymentModel *model = [[CNPaymentModel alloc] initWithDictionary:(NSDictionary *)objArray[i] error:&error];
-            if (error && !model) {
-                model = [[CNPaymentModel alloc] init];
-                model.isAvailable = NO;
-            }
-            if (i<21) {
-                model.paymentType = (CNPaymentType)i;
-                [payments addObject:model];
-            }else{
-                if (!haveUSDT) {
-                    haveUSDT = model.isAvailable;
-                }
-                [usdtArray addObject:objArray[i]];
-                if (i==kPayTypeTotalCount-1) {
-                    model = [[CNPaymentModel alloc]init];
-                    model.paymentType = CNPaymentUSDT;
-                    model.isAvailable = YES;
-                    model.usdtArray = usdtArray;
-                    if (haveUSDT) {
-                        [payments addObject:model];
-                    }
-                }
-            }
-        }
-        
-        /// 数据拼接处理
-        _payChannels = [self jointPayChannels:payments];
-        /// 界面显示
-        [self setupChannelView];
-        
-    } else {
-        /// 数据异常处理
-        [self fetchChannelFailHandler];
-    }
+//    if ([obj isKindOfClass:[NSArray class]] && [(NSArray *)obj count] == kPayTypeTotalCount) {
+//        
+//        NSArray *objArray = (NSArray *)obj;
+//        NSMutableArray<CNPaymentModel *> *payments = [NSMutableArray array];
+//        NSMutableArray *usdtArray = [[NSMutableArray alloc]init];
+//        
+//        BOOL haveUSDT = false;
+//        
+//        for (int i = 0; i< kPayTypeTotalCount; i++) {
+//            /// 数据解析
+//            NSError *error;
+            //TODO:
+//            CNPaymentModel *model = [[CNPaymentModel alloc] initWithDictionary:(NSDictionary *)objArray[i] error:&error];
+//            if (error && !model) {
+//                model = [[CNPaymentModel alloc] init];
+//                model.isAvailable = NO;
+//            }
+//            if (i<21) {
+//                model.paymentType = (CNPaymentType)i;
+//                [payments addObject:model];
+//            }else{
+//                if (!haveUSDT) {
+//                    haveUSDT = model.isAvailable;
+//                }
+//                [usdtArray addObject:objArray[i]];
+//                if (i==kPayTypeTotalCount-1) {
+//                    model = [[CNPaymentModel alloc]init];
+//                    model.paymentType = CNPaymentUSDT;
+//                    model.isAvailable = YES;
+//                    model.usdtArray = usdtArray;
+//                    if (haveUSDT) {
+//                        [payments addObject:model];
+//                    }
+//                }
+//            }
+//        }
+//
+//        /// 数据拼接处理
+//        _payChannels = [self jointPayChannels:payments];
+//        /// 界面显示
+//        [self setupChannelView];
+//
+//    } else {
+//        /// 数据异常处理
+//        [self fetchChannelFailHandler];
+//    }
 }
 
 /**
@@ -359,9 +360,10 @@
             // 渠道下没有开启的支付方式不显示
             NSMutableArray *payments = [NSMutableArray array];
             for (CNPaymentModel *payment in channel.payments) {
-                if (payment.isAvailable) {
-                    [payments addObject:payment];
-                }
+                //TODO:
+//                if (payment.isAvailable) {
+//                    [payments addObject:payment];
+//                }
             }
             channel.payments = payments;
         }
@@ -434,7 +436,7 @@
     [_payCollectionView reloadData];
     [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     
-    _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.payments.firstObject.paymentType];
+    _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.payments.firstObject.payType];
     _payChannelVC.payments = _payChannels[_currentSelectedIndex].payments;
     _segmentVC = [[AMSegmentViewController alloc] initWithViewController:_payChannelVC];
     [self.stepView addSubview:_segmentVC.view];
@@ -499,7 +501,7 @@
     [self removeBankView];
     self.currentSelectedIndex = indexPath.row;
     [self.payCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-    _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payments.firstObject.paymentType];
+    _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payments.firstObject.payType];
     _payChannelVC.payments = channel.payments;
     BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
     if ([channel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {

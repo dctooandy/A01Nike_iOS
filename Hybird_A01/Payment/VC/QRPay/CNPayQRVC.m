@@ -74,17 +74,18 @@
     CGFloat itemWidth = ([UIScreen mainScreen].bounds.size.width -18-35-10)/2.0;
     CGFloat itemHeight = itemWidth * 56 / 160.0;
     CGFloat totalHeight = ((count - 1)/2 + 1) * (itemHeight + 15);
-    if (self.paymentModel.paymentType == CNPaymentWechatQR ||
-        self.paymentModel.paymentType == CNPaymentAliQR ||
-        self.paymentModel.paymentType == CNPaymentQQQR ||
-        self.paymentModel.paymentType == CNPaymentUnionQR ||
-        self.paymentModel.paymentType == CNPaymentJDQR) {
-        self.collectionBgView.hidden = YES;
-        self.collectionViewHeight.constant = 0;
-        self.topConstants.constant = -62;
-    } else {
-        self.collectionViewHeight.constant = totalHeight;
-    }
+    //TODO:
+//    if (self.paymentModel.paymentType == CNPaymentWechatQR ||
+//        self.paymentModel.paymentType == CNPaymentAliQR ||
+//        self.paymentModel.paymentType == CNPaymentQQQR ||
+//        self.paymentModel.paymentType == CNPaymentUnionQR ||
+//        self.paymentModel.paymentType == CNPaymentJDQR) {
+//        self.collectionBgView.hidden = YES;
+//        self.collectionViewHeight.constant = 0;
+//        self.topConstants.constant = -62;
+//    } else {
+//        self.collectionViewHeight.constant = totalHeight;
+//    }
     self.cellSize = CGSizeMake(itemWidth, itemHeight + 10);
     self.apps = @[@"ysfapp",@"mtapp",@"dzapp",@"wphapp",@"ttzgapp",@"mfbapp",@"wzfapp",@"jdapp"];
     self.appCollectionView.delegate = self;
@@ -113,27 +114,29 @@
 
 /// 刷新数据
 - (void)updateAllContentWithModel:(CNPaymentModel *)model {
-    if (model.paymentType == CNPaymentUnionQR) {
-        self.appsView.hidden = NO;
-        self.noticesView.hidden = NO;
-    } else {
-        self.appsView.hidden = YES;
-        self.noticesView.hidden = YES;
-    }
-    self.amountTF.text = @"";
-    // 金额提示语
-    if (model.maxamount > model.minamount) {
-        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f，最多%.0f", model.minamount, model.maxamount];
-    } else {
-        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f", model.minamount];
-    }
+    //TODO:
+//    if (model.paymentType == CNPaymentUnionQR) {
+//        self.appsView.hidden = NO;
+//        self.noticesView.hidden = NO;
+//    } else {
+//        self.appsView.hidden = YES;
+//        self.noticesView.hidden = YES;
+//    }
+//    self.amountTF.text = @"";
+//    // 金额提示语
+//    if (model.maxamount > model.minamount) {
+//        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f，最多%.0f", model.minamount, model.maxamount];
+//    } else {
+//        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f", model.minamount];
+//    }
 }
 
 - (void)configAmountList {
-    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
-    if (!self.paymentModel.amountCanEdit) {
-        self.amountTF.placeholder = @"仅可选择以下金额";
-    }
+    //TODO:
+//    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
+//    if (!self.paymentModel.amountCanEdit) {
+//        self.amountTF.placeholder = @"仅可选择以下金额";
+//    }
 }
 
 #pragma mark- UICollectionViewDelegate, UICollectionViewDataSource
@@ -155,9 +158,9 @@
         CNPayQRCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kQRCellIndentifier forIndexPath:indexPath];
         
         CNPaymentModel *payment = [self.payments objectAtIndex:indexPath.row];
-        cell.tuijianIcon.hidden = (payment.paymentType == CNPaymentUnionQR ? NO : YES);
-        cell.titleLb.text = payment.paymentTitle;
-        cell.channelIconIV.image = [UIImage imageNamed:payment.paymentLogo];
+        cell.tuijianIcon.hidden = (payment.payType == CNPaymentUnionQR ? NO : YES);
+        cell.titleLb.text = payment.payTypeName;
+        cell.channelIconIV.image = [UIImage imageNamed:payment.payTypeIcon];
         return cell;
     }
     
@@ -188,20 +191,21 @@
 
 - (IBAction)selectAmountList:(id)sender {
     weakSelf(weakSelf);
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.paymentModel.amountList.count];
-    for (id obj in self.paymentModel.amountList) {
-        [array addObject:[NSString stringWithFormat:@"%@", obj]];
-    }
-    if (array.count == 0) {
-        [self showError:@"无可选金额，请直接输入"];
-        return;
-    }
-    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
-        if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
-            return;
-        }
-        weakSelf.amountTF.text = selectValue;
-    }];
+    //TODO:
+//    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.paymentModel.amountList.count];
+//    for (id obj in self.paymentModel.amountList) {
+//        [array addObject:[NSString stringWithFormat:@"%@", obj]];
+//    }
+//    if (array.count == 0) {
+//        [self showError:@"无可选金额，请直接输入"];
+//        return;
+//    }
+//    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
+//        if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
+//            return;
+//        }
+//        weakSelf.amountTF.text = selectValue;
+//    }];
 }
 
 - (IBAction)nextStep:(UIButton *)sender {
@@ -214,13 +218,14 @@
         return;
     }
     /// 超出额度范围
-    NSNumber *amount = [NSString convertNumber:text];
-    double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;
-    if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) {
-        _amountTF.text = nil;
-        [self showError:[NSString stringWithFormat:@"存款金额必须是%.f~%.f之间，最大允许2位小数", self.paymentModel.minamount, maxAmount]];
-        return;
-    }
+    //TODO:
+//    NSNumber *amount = [NSString convertNumber:text];
+//    double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;
+//    if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) {
+//        _amountTF.text = nil;
+//        [self showError:[NSString stringWithFormat:@"存款金额必须是%.f~%.f之间，最大允许2位小数", self.paymentModel.minamount, maxAmount]];
+//        return;
+//    }
     
     if (sender.selected) {
         return;
@@ -229,23 +234,23 @@
     
     /// 提交
     __weak typeof(self) weakSelf =  self;
-    
-    if (self.paymentModel.paymentType == CNPaymentWechatApp ||
-        self.paymentModel.paymentType == CNPaymentJDApp ||
-        self.paymentModel.paymentType == CNPaymentQQApp ||
-        self.paymentModel.paymentType == CNPaymentAliApp) {
-        [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVJResponseObject *result, id response) {
-            sender.selected = NO;
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf paySucessHandler:result.body repay:nil];
-        }];
-    } else {
-        [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVJResponseObject *result, id response) {
-            sender.selected = NO;
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf handlerResult:result.body];
-        }];
-    }
+    //TODO:
+//    if (self.paymentModel.paymentType == CNPaymentWechatApp ||
+//        self.paymentModel.paymentType == CNPaymentJDApp ||
+//        self.paymentModel.paymentType == CNPaymentQQApp ||
+//        self.paymentModel.paymentType == CNPaymentAliApp) {
+//        [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVJResponseObject *result, id response) {
+//            sender.selected = NO;
+//            __strong typeof(weakSelf) strongSelf = weakSelf;
+//            [strongSelf paySucessHandler:result.body repay:nil];
+//        }];
+//    } else {
+//        [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVJResponseObject *result, id response) {
+//            sender.selected = NO;
+//            __strong typeof(weakSelf) strongSelf = weakSelf;
+//            [strongSelf handlerResult:result.body];
+//        }];
+//    }
    
 }
 
@@ -264,7 +269,8 @@
         return;
     }
     self.writeModel.orderModel = orderModel;
-    self.writeModel.depositType = self.paymentModel.paymentTitle;
+    //TODO:
+//    self.writeModel.depositType = self.paymentModel.paymentTitle;
     [self goToStep:1];
 }
 

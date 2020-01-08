@@ -84,83 +84,84 @@
 }
 
 - (void)requestWalletType{
-    _itemsArray = @[@[@"Mobi",@"Huobi",@"Atoken",@"Bixin",@"Bitpie",@"Hicoin",@"Coldlar",@"Coincola"],@[@"其它钱包"]];
-    _bankCodeArray = @[@"mobi",@"huobi",@"atoken",@"bixin",@"bitpie",@"hicoin",@"coldlar",@"coincola",@"others"];
-    _itemDataArray = [[NSArray alloc]initWithArray:self.payments.firstObject.usdtArray];
-    _itemImageArray = @[@[@"me_usdt_mobi",@"me_usdt_huobi",@"me_usdt_atoken",@"me_usdt_bixin",@"me_usdt_bitpie",@"me_usdt_hicoin",@"me_usdt_coldlar",@"me_usdt_coincola"],@[@"me_usdt_otherwallet"]];
-    
-    NSMutableArray *codeArray = [[NSMutableArray alloc]init];
-    NSMutableArray *itemsArrayOne = [[NSMutableArray alloc]init];
-    NSMutableArray *itemsArrayTwo = [[NSMutableArray alloc]init];
-    NSMutableArray *itemImageArrayOne = [[NSMutableArray alloc]init];
-    NSMutableArray *itemImageArrayTwo = [[NSMutableArray alloc]init];
-    NSMutableArray *paymentArray = [[NSMutableArray alloc]init];
-    for (int i=0; i<_itemDataArray.count; i++) {
-        CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:_itemDataArray[i] error:nil];
-        if (model.isAvailable) {
-            [codeArray addObject:model.bankcode];
-            if ([model.bankcode isEqualToString:@"others"]) {
-                [itemsArrayTwo addObject:@"其他钱包"];
-                [itemImageArrayTwo addObject:@"me_usdt_otherwallet"];
-            }else{
-                NSInteger index = [_bankCodeArray indexOfObject:model.bankcode];
-                [itemsArrayOne addObject:_itemsArray[0][index]];
-                [itemImageArrayOne addObject:_itemImageArray[0][index]];
-            }
-            [paymentArray addObject:_itemDataArray[i]];
-        }
-        if (i==0) {
-            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%ld，最高%ld",(long)model.minamount,(long)model.maxamount] attributes:
-            @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
-                         NSFontAttributeName:_usdtInputField.font
-                 }];
-            _usdtInputField.attributedPlaceholder = attrString;
-        }
-        if (i==_itemDataArray.count-1) {
-            self.bankCodeArray = codeArray;
-            self.itemsArray = @[itemsArrayOne,itemsArrayTwo];
-            self.itemDataArray = paymentArray;
-            self.itemImageArray = @[itemImageArrayOne,itemImageArrayTwo];
-            [self.walletCollectionView reloadData];
-            NSInteger sectionNumber = itemsArrayTwo.count==0 ? 1 : 2;
-            CGFloat height = ((itemsArrayOne.count-1)/3+1)*54.5+sectionNumber*29+(sectionNumber-1)*54.5;
-            [self.walletView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(height);
-            }];
-            CNPaymentModel *paymodel = [[CNPaymentModel alloc]initWithDictionary:paymentArray.firstObject error:nil];
-            if (paymodel.manual==0) {
-                _elseWalletView.hidden = YES;
-                _normalWalletView.hidden = NO;
-                
-            }else{
-                _walletAddressLabel.text = paymodel.bank_account_no;
-                _noteLabel.text = [NSString stringWithFormat:@"%@",paymodel.remark];
-                
-                NSString *payTypeName = [NSString stringWithFormat:@"%@",itemsArrayOne.firstObject];
-                NSString *noteBottomStr = [NSString stringWithFormat:@"(复制备注信息到%@可快速到账)",payTypeName];
-                NSMutableAttributedString *noteBottomAttrStr = [[NSMutableAttributedString alloc] initWithString:noteBottomStr];
-
-                [noteBottomAttrStr addAttribute:NSForegroundColorAttributeName
-                value:COLOR_RGBA(36, 151, 255, 1)
-                range:NSMakeRange(8, payTypeName.length)];
-                
-                _noteBottomLabel.attributedText = noteBottomAttrStr;
-                _qrCodeImg.image = [PublicMethod QRCodeMethod:paymodel.bank_account_no];
-                _elseWalletView.hidden = NO;
-                _normalWalletView.hidden = YES;
-                
-                NSString *scanStr = [NSString stringWithFormat:@"请使用%@扫码充值",payTypeName];
-                NSMutableAttributedString *scanAttrStr = [[NSMutableAttributedString alloc] initWithString:scanStr];
-                [scanAttrStr addAttribute:NSForegroundColorAttributeName
-                value:COLOR_RGBA(36, 151, 255, 1)
-                                    range:NSMakeRange(3, payTypeName.length)];
-                _scanTypeLabel.attributedText = scanAttrStr;
-                
-                self.handType = [payTypeName isEqualToString:@"Atoken"] ? @"atoken" : @"bitpie";
-            }
-            [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
-        }
-    }
+    //TODO:
+//    _itemsArray = @[@[@"Mobi",@"Huobi",@"Atoken",@"Bixin",@"Bitpie",@"Hicoin",@"Coldlar",@"Coincola"],@[@"其它钱包"]];
+//    _bankCodeArray = @[@"mobi",@"huobi",@"atoken",@"bixin",@"bitpie",@"hicoin",@"coldlar",@"coincola",@"others"];
+//    _itemDataArray = [[NSArray alloc]initWithArray:self.payments.firstObject.usdtArray];
+//    _itemImageArray = @[@[@"me_usdt_mobi",@"me_usdt_huobi",@"me_usdt_atoken",@"me_usdt_bixin",@"me_usdt_bitpie",@"me_usdt_hicoin",@"me_usdt_coldlar",@"me_usdt_coincola"],@[@"me_usdt_otherwallet"]];
+//
+//    NSMutableArray *codeArray = [[NSMutableArray alloc]init];
+//    NSMutableArray *itemsArrayOne = [[NSMutableArray alloc]init];
+//    NSMutableArray *itemsArrayTwo = [[NSMutableArray alloc]init];
+//    NSMutableArray *itemImageArrayOne = [[NSMutableArray alloc]init];
+//    NSMutableArray *itemImageArrayTwo = [[NSMutableArray alloc]init];
+//    NSMutableArray *paymentArray = [[NSMutableArray alloc]init];
+//    for (int i=0; i<_itemDataArray.count; i++) {
+//        CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:_itemDataArray[i] error:nil];
+//        if (model.isAvailable) {
+//            [codeArray addObject:model.bankcode];
+//            if ([model.bankcode isEqualToString:@"others"]) {
+//                [itemsArrayTwo addObject:@"其他钱包"];
+//                [itemImageArrayTwo addObject:@"me_usdt_otherwallet"];
+//            }else{
+//                NSInteger index = [_bankCodeArray indexOfObject:model.bankcode];
+//                [itemsArrayOne addObject:_itemsArray[0][index]];
+//                [itemImageArrayOne addObject:_itemImageArray[0][index]];
+//            }
+//            [paymentArray addObject:_itemDataArray[i]];
+//        }
+//        if (i==0) {
+//            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%ld，最高%ld",(long)model.minamount,(long)model.maxamount] attributes:
+//            @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+//                         NSFontAttributeName:_usdtInputField.font
+//                 }];
+//            _usdtInputField.attributedPlaceholder = attrString;
+//        }
+//        if (i==_itemDataArray.count-1) {
+//            self.bankCodeArray = codeArray;
+//            self.itemsArray = @[itemsArrayOne,itemsArrayTwo];
+//            self.itemDataArray = paymentArray;
+//            self.itemImageArray = @[itemImageArrayOne,itemImageArrayTwo];
+//            [self.walletCollectionView reloadData];
+//            NSInteger sectionNumber = itemsArrayTwo.count==0 ? 1 : 2;
+//            CGFloat height = ((itemsArrayOne.count-1)/3+1)*54.5+sectionNumber*29+(sectionNumber-1)*54.5;
+//            [self.walletView mas_updateConstraints:^(MASConstraintMaker *make) {
+//                make.height.mas_equalTo(height);
+//            }];
+//            CNPaymentModel *paymodel = [[CNPaymentModel alloc]initWithDictionary:paymentArray.firstObject error:nil];
+//            if (paymodel.manual==0) {
+//                _elseWalletView.hidden = YES;
+//                _normalWalletView.hidden = NO;
+//
+//            }else{
+//                _walletAddressLabel.text = paymodel.bank_account_no;
+//                _noteLabel.text = [NSString stringWithFormat:@"%@",paymodel.remark];
+//
+//                NSString *payTypeName = [NSString stringWithFormat:@"%@",itemsArrayOne.firstObject];
+//                NSString *noteBottomStr = [NSString stringWithFormat:@"(复制备注信息到%@可快速到账)",payTypeName];
+//                NSMutableAttributedString *noteBottomAttrStr = [[NSMutableAttributedString alloc] initWithString:noteBottomStr];
+//
+//                [noteBottomAttrStr addAttribute:NSForegroundColorAttributeName
+//                value:COLOR_RGBA(36, 151, 255, 1)
+//                range:NSMakeRange(8, payTypeName.length)];
+//
+//                _noteBottomLabel.attributedText = noteBottomAttrStr;
+//                _qrCodeImg.image = [PublicMethod QRCodeMethod:paymodel.bank_account_no];
+//                _elseWalletView.hidden = NO;
+//                _normalWalletView.hidden = YES;
+//
+//                NSString *scanStr = [NSString stringWithFormat:@"请使用%@扫码充值",payTypeName];
+//                NSMutableAttributedString *scanAttrStr = [[NSMutableAttributedString alloc] initWithString:scanStr];
+//                [scanAttrStr addAttribute:NSForegroundColorAttributeName
+//                value:COLOR_RGBA(36, 151, 255, 1)
+//                                    range:NSMakeRange(3, payTypeName.length)];
+//                _scanTypeLabel.attributedText = scanAttrStr;
+//
+//                self.handType = [payTypeName isEqualToString:@"Atoken"] ? @"atoken" : @"bitpie";
+//            }
+//            [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+//        }
+//    }
 }
 
 - (void)requestUSDTRate{
@@ -280,14 +281,14 @@
     if (self.selectedIndex==0) {
         type = 31;
     }
-    CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray[_selectedIndex] error:nil];
-    if ([_usdtInputField.text doubleValue]==0||_usdtInputField.text.length==0) {
-        [self showError:@"请输入需要存款的金额"];
-    }else if ([_usdtInputField.text doubleValue]<model.minamount||[_usdtInputField.text doubleValue]>model.maxamount){
-        [self showError:[NSString stringWithFormat:@"请输入%.2f-%.2f的存款金额",model.minamount,model.maxamount]];
-    }else{
-        [self usdtOnlinePayHanlerWithType:type];
-    }
+//    CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray[_selectedIndex] error:nil];
+//    if ([_usdtInputField.text doubleValue]==0||_usdtInputField.text.length==0) {
+//        [self showError:@"请输入需要存款的金额"];
+//    }else if ([_usdtInputField.text doubleValue]<model.minamount||[_usdtInputField.text doubleValue]>model.maxamount){
+//        [self showError:[NSString stringWithFormat:@"请输入%.2f-%.2f的存款金额",model.minamount,model.maxamount]];
+//    }else{
+//        [self usdtOnlinePayHanlerWithType:type];
+//    }
 }
 - (IBAction)noteInfoBtn_click:(id)sender {
     BTTPayUsdtNoticeView *customView = [BTTPayUsdtNoticeView viewFromXib];
@@ -320,12 +321,12 @@
 }
 
 - (IBAction)finishedBtn_click:(id)sender {
-    CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray[_selectedIndex] error:nil];
-    [[NSUserDefaults standardUserDefaults]setObject:_noteLabel.text forKey:@"manual_usdt_note"];
-    [[NSUserDefaults standardUserDefaults]setObject:_walletAddressLabel.text forKey:@"manual_usdt_account"];
-    [[NSUserDefaults standardUserDefaults]setFloat:self.usdtRate forKey:@"manual_usdt_rate"];
-    [[NSUserDefaults standardUserDefaults]setObject:@(model.minamount) forKey:@"usdt_minamount"];
-    [[NSUserDefaults standardUserDefaults]setObject:@(model.maxamount) forKey:@"usdt_maxamount"];
+//    CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray[_selectedIndex] error:nil];
+//    [[NSUserDefaults standardUserDefaults]setObject:_noteLabel.text forKey:@"manual_usdt_note"];
+//    [[NSUserDefaults standardUserDefaults]setObject:_walletAddressLabel.text forKey:@"manual_usdt_account"];
+//    [[NSUserDefaults standardUserDefaults]setFloat:self.usdtRate forKey:@"manual_usdt_rate"];
+//    [[NSUserDefaults standardUserDefaults]setObject:@(model.minamount) forKey:@"usdt_minamount"];
+//    [[NSUserDefaults standardUserDefaults]setObject:@(model.maxamount) forKey:@"usdt_maxamount"];
     [self goToStep:1];
 }
 
@@ -355,86 +356,86 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section==0) {
-        if (_selectedIndex!=indexPath.row) {
-            _usdtInputField.text = @"";
-            _rmbLabel.text = @"";
-        }
-        _selectedIndex = indexPath.row;
-        CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray[indexPath.row] error:nil];
-        if (model.manual==0) {
-            _elseWalletView.hidden = YES;
-            _normalWalletView.hidden = NO;
-            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%ld，最高%ld",(long)model.minamount,(long)model.maxamount] attributes:
-            @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
-                         NSFontAttributeName:_usdtInputField.font
-                 }];
-            _usdtInputField.attributedPlaceholder = attrString;
-        }else{
-            _walletAddressLabel.text = model.bank_account_no;
-            _noteLabel.text = [NSString stringWithFormat:@"%@",model.remark];
-            _qrCodeImg.image = [PublicMethod QRCodeMethod:model.bank_account_no];
-            _elseWalletView.hidden = NO;
-            _normalWalletView.hidden = YES;
-            
-            NSString *payTypeName = [NSString stringWithFormat:@"%@",_itemsArray[indexPath.section][indexPath.row]];
-            NSString *noteBottomStr = [NSString stringWithFormat:@"(复制备注信息到%@可快速到账)",payTypeName];
-            NSMutableAttributedString *noteBottomAttrStr = [[NSMutableAttributedString alloc] initWithString:noteBottomStr];
-
-            [noteBottomAttrStr addAttribute:NSForegroundColorAttributeName
-            value:COLOR_RGBA(36, 151, 255, 1)
-            range:NSMakeRange(8, payTypeName.length)];
-            _noteBottomLabel.attributedText = noteBottomAttrStr;
-            
-            NSString *scanStr = [NSString stringWithFormat:@"请使用%@扫码充值",payTypeName];
-            NSMutableAttributedString *scanAttrStr = [[NSMutableAttributedString alloc] initWithString:scanStr];
-            [scanAttrStr addAttribute:NSForegroundColorAttributeName
-            value:COLOR_RGBA(36, 151, 255, 1)
-                                range:NSMakeRange(3, payTypeName.length)];
-            _scanTypeLabel.attributedText = scanAttrStr;
-            
-            self.handType = [payTypeName isEqualToString:@"Atoken"] ? @"atoken" : @"bitpie";
-        }
-        
-    }else{
-        _usdtInputField.text = @"";
-        _rmbLabel.text = @"";
-        _selectedIndex = self.bankCodeArray.count-1;
-        CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray.lastObject error:nil];
-        if (model.manual==0) {
-            _elseWalletView.hidden = YES;
-            _normalWalletView.hidden = NO;
-            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%ld，最高%ld",(long)model.minamount,(long)model.maxamount] attributes:
-            @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
-                         NSFontAttributeName:_usdtInputField.font
-                 }];
-            _usdtInputField.attributedPlaceholder = attrString;
-        }else{
-            _walletAddressLabel.text = model.bank_account_no;
-            _noteLabel.text = [NSString stringWithFormat:@"%@",model.remark];
-            _qrCodeImg.image = [PublicMethod QRCodeMethod:model.bank_account_no];
-            
-            _elseWalletView.hidden = NO;
-            _normalWalletView.hidden = YES;
-            
-            NSString *payTypeName = [NSString stringWithFormat:@"%@",_itemsArray[indexPath.section][indexPath.row]];
-            NSString *noteBottomStr = [NSString stringWithFormat:@"(复制备注信息到%@可快速到账)",payTypeName];
-            NSMutableAttributedString *noteBottomAttrStr = [[NSMutableAttributedString alloc] initWithString:noteBottomStr];
-            [noteBottomAttrStr addAttribute:NSForegroundColorAttributeName
-            value:COLOR_RGBA(36, 151, 255, 1)
-            range:NSMakeRange(8, payTypeName.length)];
-            _noteBottomLabel.attributedText = noteBottomAttrStr;
-            
-            NSString *scanStr = [NSString stringWithFormat:@"请使用%@扫码充值",payTypeName];
-            NSMutableAttributedString *scanAttrStr = [[NSMutableAttributedString alloc] initWithString:scanStr];
-            [scanAttrStr addAttribute:NSForegroundColorAttributeName
-            value:COLOR_RGBA(36, 151, 255, 1)
-                                range:NSMakeRange(3, payTypeName.length)];
-            _scanTypeLabel.attributedText = scanAttrStr;
-            
-            self.handType = [payTypeName isEqualToString:@"Atoken"] ? @"atoken" : @"bitpie";
-        }
-    }
+//    if (indexPath.section==0) {
+//        if (_selectedIndex!=indexPath.row) {
+//            _usdtInputField.text = @"";
+//            _rmbLabel.text = @"";
+//        }
+//        _selectedIndex = indexPath.row;
+//        CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray[indexPath.row] error:nil];
+//        if (model.manual==0) {
+//            _elseWalletView.hidden = YES;
+//            _normalWalletView.hidden = NO;
+//            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%ld，最高%ld",(long)model.minamount,(long)model.maxamount] attributes:
+//            @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+//                         NSFontAttributeName:_usdtInputField.font
+//                 }];
+//            _usdtInputField.attributedPlaceholder = attrString;
+//        }else{
+//            _walletAddressLabel.text = model.bank_account_no;
+//            _noteLabel.text = [NSString stringWithFormat:@"%@",model.remark];
+//            _qrCodeImg.image = [PublicMethod QRCodeMethod:model.bank_account_no];
+//            _elseWalletView.hidden = NO;
+//            _normalWalletView.hidden = YES;
+//            
+//            NSString *payTypeName = [NSString stringWithFormat:@"%@",_itemsArray[indexPath.section][indexPath.row]];
+//            NSString *noteBottomStr = [NSString stringWithFormat:@"(复制备注信息到%@可快速到账)",payTypeName];
+//            NSMutableAttributedString *noteBottomAttrStr = [[NSMutableAttributedString alloc] initWithString:noteBottomStr];
+//
+//            [noteBottomAttrStr addAttribute:NSForegroundColorAttributeName
+//            value:COLOR_RGBA(36, 151, 255, 1)
+//            range:NSMakeRange(8, payTypeName.length)];
+//            _noteBottomLabel.attributedText = noteBottomAttrStr;
+//            
+//            NSString *scanStr = [NSString stringWithFormat:@"请使用%@扫码充值",payTypeName];
+//            NSMutableAttributedString *scanAttrStr = [[NSMutableAttributedString alloc] initWithString:scanStr];
+//            [scanAttrStr addAttribute:NSForegroundColorAttributeName
+//            value:COLOR_RGBA(36, 151, 255, 1)
+//                                range:NSMakeRange(3, payTypeName.length)];
+//            _scanTypeLabel.attributedText = scanAttrStr;
+//            
+//            self.handType = [payTypeName isEqualToString:@"Atoken"] ? @"atoken" : @"bitpie";
+//        }
+//        
+//    }else{
+//        _usdtInputField.text = @"";
+//        _rmbLabel.text = @"";
+//        _selectedIndex = self.bankCodeArray.count-1;
+//        CNPaymentModel *model = [[CNPaymentModel alloc]initWithDictionary:self.itemDataArray.lastObject error:nil];
+//        if (model.manual==0) {
+//            _elseWalletView.hidden = YES;
+//            _normalWalletView.hidden = NO;
+//            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%ld，最高%ld",(long)model.minamount,(long)model.maxamount] attributes:
+//            @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+//                         NSFontAttributeName:_usdtInputField.font
+//                 }];
+//            _usdtInputField.attributedPlaceholder = attrString;
+//        }else{
+//            _walletAddressLabel.text = model.bank_account_no;
+//            _noteLabel.text = [NSString stringWithFormat:@"%@",model.remark];
+//            _qrCodeImg.image = [PublicMethod QRCodeMethod:model.bank_account_no];
+//            
+//            _elseWalletView.hidden = NO;
+//            _normalWalletView.hidden = YES;
+//            
+//            NSString *payTypeName = [NSString stringWithFormat:@"%@",_itemsArray[indexPath.section][indexPath.row]];
+//            NSString *noteBottomStr = [NSString stringWithFormat:@"(复制备注信息到%@可快速到账)",payTypeName];
+//            NSMutableAttributedString *noteBottomAttrStr = [[NSMutableAttributedString alloc] initWithString:noteBottomStr];
+//            [noteBottomAttrStr addAttribute:NSForegroundColorAttributeName
+//            value:COLOR_RGBA(36, 151, 255, 1)
+//            range:NSMakeRange(8, payTypeName.length)];
+//            _noteBottomLabel.attributedText = noteBottomAttrStr;
+//            
+//            NSString *scanStr = [NSString stringWithFormat:@"请使用%@扫码充值",payTypeName];
+//            NSMutableAttributedString *scanAttrStr = [[NSMutableAttributedString alloc] initWithString:scanStr];
+//            [scanAttrStr addAttribute:NSForegroundColorAttributeName
+//            value:COLOR_RGBA(36, 151, 255, 1)
+//                                range:NSMakeRange(3, payTypeName.length)];
+//            _scanTypeLabel.attributedText = scanAttrStr;
+//            
+//            self.handType = [payTypeName isEqualToString:@"Atoken"] ? @"atoken" : @"bitpie";
+//        }
+//    }
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath{

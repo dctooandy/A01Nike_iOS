@@ -29,6 +29,6 @@
 
 /// 预加载支付所有渠道数据
 + (void)cachePaymentData {
-    [CNPayRequestManager queryAllChannelCompleteHandler:nil];
+//    [CNPayRequestManager queryAllChannelCompleteHandler:nil];
 }
 @end

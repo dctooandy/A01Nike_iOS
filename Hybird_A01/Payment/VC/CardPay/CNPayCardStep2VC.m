@@ -40,6 +40,6 @@
 
 - (IBAction)submitAction:(UIButton *)sender {
     [self showPayTipView];
-    [self pushUIWebViewWithURLString:[CNPayRequestManager submitPayFormWithOrderModel:self.writeModel.orderModel] title:self.paymentModel.paymentTitle];
+//    [self pushUIWebViewWithURLString:[CNPayRequestManager submitPayFormWithOrderModel:self.writeModel.orderModel] title:self.paymentModel.paymentTitle];
 }
 @end

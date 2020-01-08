@@ -31,24 +31,25 @@
 
 /// 推荐姓名
 - (void)configRecommendView {
-    if (self.paymentModel.depositor.length == 0) {
-        _nameAreaView.hidden = YES;
-        _nameAreaViewHeight.constant = 0;
-        return;
-    }
-    NSArray *array = [self.paymentModel.depositor componentsSeparatedByString:@";"];
-    if (array.count == 0) {
-        _nameAreaView.hidden = YES;
-        _nameAreaViewHeight.constant = 0;
-        return;
-    }
-    _nameTF.text = array.firstObject;
-    _nameView.dataSource = array;
-    __weak typeof(self) weakSelf = self;
-    _nameView.clickHandler = ^(NSString *value, NSInteger index) {
-        [weakSelf.view endEditing:YES];
-        weakSelf.nameTF.text = value;
-    };
+    //TODO:
+//    if (self.paymentModel.depositor.length == 0) {
+//        _nameAreaView.hidden = YES;
+//        _nameAreaViewHeight.constant = 0;
+//        return;
+//    }
+//    NSArray *array = [self.paymentModel.depositor componentsSeparatedByString:@";"];
+//    if (array.count == 0) {
+//        _nameAreaView.hidden = YES;
+//        _nameAreaViewHeight.constant = 0;
+//        return;
+//    }
+//    _nameTF.text = array.firstObject;
+//    _nameView.dataSource = array;
+//    __weak typeof(self) weakSelf = self;
+//    _nameView.clickHandler = ^(NSString *value, NSInteger index) {
+//        [weakSelf.view endEditing:YES];
+//        weakSelf.nameTF.text = value;
+//    };
 }
 
 - (IBAction)sumbitAction:(UIButton *)sender {
@@ -67,12 +68,13 @@
     __weak typeof(self) weakSelf = self;
     __weak typeof(sender) weakSender = sender;
     // 获取银行卡列表
-    NSInteger bqPaymentType = 0;
-    if (self.paymentModel.paymentType == CNPaymentBQAli) {
-        bqPaymentType = 2;
-    } else if (self.paymentModel.paymentType == CNPaymentBQWechat) {
-        bqPaymentType = 1;
-    }
+    //TODO:
+//    NSInteger bqPaymentType = 0;
+//    if (self.paymentModel.paymentType == CNPaymentBQAli) {
+//        bqPaymentType = 2;
+//    } else if (self.paymentModel.paymentType == CNPaymentBQWechat) {
+//        bqPaymentType = 1;
+//    }
     //TODO:
 //    [CNPayRequestManager paymentGetBankListWithType:YES depositor:self.nameTF.text referenceId:nil BQPayType:bqPaymentType completeHandler:^(IVRequestResultModel *result, id response) {
 //        weakSender.selected = NO;

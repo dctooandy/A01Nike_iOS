@@ -51,64 +51,64 @@
     
     NSMutableArray<UIViewController *> *viewControllers = [NSMutableArray array];
     
-    CNPaymentModel *payment = nil;
-    for (CNPaymentModel *model  in self.payments) {
-        if (model.paymentType == paymentType) {
-            payment = model;
-            break;
-        }
-    }
-    self.title = payment.paymentTitle;
-    switch (paymentType) {
-        case CNPaymentAliQR:
-        case CNPaymentAliApp:
-        case CNPaymentBQAli:
-        case CNPaymentWechatQR:
-        case CNPaymentWechatApp:
-        case CNPaymentWechatBarCode:
-        case CNPaymentBQWechat:
-        case CNPaymentUnionQR:
-        case CNPaymentUnionApp:
-        case CNPaymentDeposit:
-        case CNPaymentJDQR:
-        case CNPaymentJDApp:
-        case CNPaymentQQQR:
-        case CNPaymentBQFast:
-        case CNPaymentQQApp:
-        case CNPaymentBTC:
-        case CNPaymentCoin:
-        case CNPaymentOnline:
-        {
-            [viewControllers addObjectsFromArray:[self QRPay:payment]];
-        }
-            break;
-            
-        case CNPaymentCard: {
-            [viewControllers addObjectsFromArray:[self cardPay:payment]];
-        }
-            break;
-    }
+//    CNPaymentModel *payment = nil;
+//    for (CNPaymentModel *model  in self.payments) {
+//        if (model.paymentType == paymentType) {
+//            payment = model;
+//            break;
+//        }
+//    }
+//    self.title = payment.paymentTitle;
+//    switch (paymentType) {
+//        case CNPaymentAliQR:
+//        case CNPaymentAliApp:
+//        case CNPaymentBQAli:
+//        case CNPaymentWechatQR:
+//        case CNPaymentWechatApp:
+//        case CNPaymentWechatBarCode:
+//        case CNPaymentBQWechat:
+//        case CNPaymentUnionQR:
+//        case CNPaymentUnionApp:
+//        case CNPaymentDeposit:
+//        case CNPaymentJDQR:
+//        case CNPaymentJDApp:
+//        case CNPaymentQQQR:
+//        case CNPaymentBQFast:
+//        case CNPaymentQQApp:
+//        case CNPaymentBTC:
+//        case CNPaymentCoin:
+//        case CNPaymentOnline:
+//        {
+//            [viewControllers addObjectsFromArray:[self QRPay:payment]];
+//        }
+//            break;
+//
+//        case CNPaymentCard: {
+//            [viewControllers addObjectsFromArray:[self cardPay:payment]];
+//        }
+//            break;
+//    }
     return viewControllers;
 }
 
 /// QR支付
 - (NSArray<CNPayBaseVC *> *)QRPay:(CNPaymentModel *)payment {
-    if (payment.paymentType == CNPaymentDeposit) {
-        CNPayDepositStep2VC *step2VC = [[CNPayDepositStep2VC alloc] init];
-        CNPayDepositStep3VC *step3VC = [[CNPayDepositStep3VC alloc] init];
-        step2VC.paymentModel = payment;
-        step3VC.paymentModel = payment;
-        step2VC.writeModel = self.writeModel;
-        return @[step2VC,step3VC];
-    } else if (payment.paymentType == CNPaymentBQFast ||
-               payment.paymentType == CNPaymentBQWechat ||
-               payment.paymentType == CNPaymentBQAli) {
-
-        CNPayBQStep2VC *step2VC = [[CNPayBQStep2VC alloc] init];
-        step2VC.paymentModel = payment;
-        step2VC.writeModel = self.writeModel;
-        return @[step2VC];
-    }
+//    if (payment.paymentType == CNPaymentDeposit) {
+//        CNPayDepositStep2VC *step2VC = [[CNPayDepositStep2VC alloc] init];
+//        CNPayDepositStep3VC *step3VC = [[CNPayDepositStep3VC alloc] init];
+//        step2VC.paymentModel = payment;
+//        step3VC.paymentModel = payment;
+//        step2VC.writeModel = self.writeModel;
+//        return @[step2VC,step3VC];
+//    } else if (payment.paymentType == CNPaymentBQFast ||
+//               payment.paymentType == CNPaymentBQWechat ||
+//               payment.paymentType == CNPaymentBQAli) {
+//
+//        CNPayBQStep2VC *step2VC = [[CNPayBQStep2VC alloc] init];
+//        step2VC.paymentModel = payment;
+//        step2VC.writeModel = self.writeModel;
+//        return @[step2VC];
+//    }
     CNPayQRStep2VC *step2VC = [[CNPayQRStep2VC alloc] init];
     step2VC.writeModel = self.writeModel;
     return @[step2VC];

@@ -123,44 +123,44 @@ extern NSInteger const kPayTypeTotalCount;
 
 /// 获取USDT汇率
 /// @param completeHandler 接口回调
-+ (void)getUSDTRateWithAmount:(NSString *)amount tradeType:(NSString *)tradeType target:(NSString *)target completeHandler:(IVRequestCallBack)completeHandler;
++ (void)getUSDTRateWithAmount:(NSString *)amount tradeType:(NSString *)tradeType target:(NSString *)target completeHandler:(KYHTTPCallBack)completeHandler;
 
 
 /// 获取USDT支付方式
 /// @param completeHandler 接口回调
-+ (void)getUsdtPayTypeWithCompleteHandler:(IVRequestCallBack)completeHandler;
++ (void)getUsdtPayTypeWithCompleteHandler:(KYHTTPCallBack)completeHandler;
 
 
 /// usdt线上银行普通支付
 /// @param type 类型 31-MOBI 其他25
 /// @param amount 金额
 /// @param completeHandler 接口回调
-+ (void)usdtPayOnlineHandleWithType:(NSString *)type amount:(NSString *)amount bankCode:(NSString *)bankCode completeHandler:(IVRequestCallBack)completeHandler;
++ (void)usdtPayOnlineHandleWithType:(NSString *)type amount:(NSString *)amount bankCode:(NSString *)bankCode completeHandler:(KYHTTPCallBack)completeHandler;
 
 /// usdt手工银行普通支付
 /// @param bankAccountNo 银行账号
 /// @param amount 金额
 /// @param remark 备注
 /// @param completeHandler 接口回调
-+ (void)usdtManualPayHandleWithBankAccountNo:(NSString *)bankAccountNo userAccountNo:(NSString *)userAccountNo amount:(NSString *)amount remark:(NSString *)remark completeHandler:(IVRequestCallBack)completeHandler;
++ (void)usdtManualPayHandleWithBankAccountNo:(NSString *)bankAccountNo userAccountNo:(NSString *)userAccountNo amount:(NSString *)amount remark:(NSString *)remark completeHandler:(KYHTTPCallBack)completeHandler;
 
 
 /// 获取支付类型，添加银行卡地方使用
 /// @param completeHandler 接口回调
-+ (void)getUSDTTypeWithCompleteHandler:(IVRequestCallBack)completeHandler;
++ (void)getUSDTTypeWithCompleteHandler:(KYHTTPCallBack)completeHandler;
 
 
 /// 添加usdt银行卡，自动审核
 /// @param dictCode 钱包类型
 /// @param usdtAddress 钱包地址
 /// @param completeHandler 接口回调
-+ (void)addUsdtAutoWithDictCode:(NSString *)dictCode usdtAddress:(NSString *)usdtAddress completeHandler:(IVRequestCallBack)completeHandler;
++ (void)addUsdtAutoWithDictCode:(NSString *)dictCode usdtAddress:(NSString *)usdtAddress completeHandler:(KYHTTPCallBack)completeHandler;
 
-+ (void)addUsdtWithDictCode:(NSString *)dictCode usdtAddress:(NSString *)usdtAddress completeHandler:(IVRequestCallBack)completeHandler;
++ (void)addUsdtWithDictCode:(NSString *)dictCode usdtAddress:(NSString *)usdtAddress completeHandler:(KYHTTPCallBack)completeHandler;
 
 /// 请求USDTz钱包
 /// @param completeHandler 接口回调
-+ (void)queryUSDTChannelCompleteHandler:(IVRequestCallBack)completeHandler;
++ (void)queryUSDTChannelCompleteHandler:(KYHTTPCallBack)completeHandler;
 
 @end
 
