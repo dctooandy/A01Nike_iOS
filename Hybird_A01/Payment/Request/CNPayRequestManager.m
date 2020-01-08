@@ -15,41 +15,28 @@
 @implementation CNPayRequestManager
 
 + (void)requestWithUrl:(NSString *)url parameters:(NSDictionary *)params handler:(KYHTTPCallBack)completeHandler {
-    [BTTHttpManager sendRequestWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        if (completeHandler) {
-            completeHandler(result,result.data);
-        }
+    [[IVHttpManager shareManager] sendRequestWithUrl:url parameters:params callBack:^(id  _Nullable response, NSError * _Nullable error) {
     }];
 }
-//
-//+ (void)cacheWithUrl:(NSString *)url parameters:(NSDictionary *)params handler:(IVRequestCallBack)completeHandler {
-//    [BTTHttpManager sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-//        if (completeHandler) {
-//            completeHandler(result,result.data);
-//        }
-//    }];
-//}
-//
-//#pragma mark - ========================* Payment *===========================================
-///// 预设支付方式总个数
-//NSInteger const kPayTypeTotalCount = 30;
-//
-//+ (void)queryAllChannelCompleteHandler:(IVRequestCallBack)completeHandler {
-//    
-//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    // 杂项：在线，点卡，手工，比特币，微信条码, 钻石币支付
-//    // app：微信，支付宝，QQ，网银, 京东
-//    // 扫码：支付宝，微信，QQ，银联, 京东
-//    // BQ快速：快速，微信，支付宝, 币商
-//    NSArray *channelArr = @[@"online-1",@"card",@"deposit",@"online-20",@"online-23",@"online-41",
-//                            @"online-8",@"online-9",@"online-11",@"online-27",@"online-19",@"online-17",
-//                            @"online-5",@"online-6",@"online-7",@"online-15",@"online-16",
-//                            @"bqpaytype-0",@"bqpaytype-1",@"bqpaytype-2",@"biMerchant",
-//                            @"MobiPay",@"HuobiPay",@"AtokenPay",@"BixinPay",@"BitpiePay",@"HicoinPay",@"ColdlarPay",@"CoincolaPay",@"OtherWalletPay"];
-//    params[@"list"] = [channelArr componentsJoinedByString:@";"];
-//    
-//    [self cacheWithUrl:kPaymentValidate parameters:params handler:completeHandler];
-//}
++ (void)cacheWithUrl:(NSString *)url parameters:(NSDictionary *)params handler:(KYHTTPCallBack)completeHandler {
+    [[IVHttpManager shareManager] sendRequestWithMethod:KYHTTPMethodPOST url:url parameters:params cache:YES cacheTimeout:3600 * 24 callBack:^(BOOL isCache, id  _Nullable response, NSError * _Nullable error) {
+    } originCallBack:^(id  _Nullable response, NSError * _Nullable error) {
+    }];
+}
+
+#pragma mark - ========================* Payment *===========================================
+/// 预设支付方式总个数
+NSInteger const kPayTypeTotalCount = 30;
+
++ (void)queryAllChannelCompleteHandler:(KYHTTPCallBack)completeHandler {
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@([IVNetwork savedUserInfo].starLevel) forKey:@"customerLevel"];
+    [params setValue:[IVNetwork savedUserInfo].depositLevel forKey:@"depositLevel"];
+    [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
+    
+    [IVNetwork requestPostWithUrl:kPaymentValidate paramters:params completionBlock:completeHandler];
+}
 //
 //+ (void)queryUSDTChannelCompleteHandler:(IVRequestCallBack)completeHandler {
 //    
