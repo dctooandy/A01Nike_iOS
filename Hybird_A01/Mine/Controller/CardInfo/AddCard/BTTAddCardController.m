@@ -199,7 +199,7 @@
 }
 - (void)saveBtnClickded:(UIButton *)sender
 {
-    BOOL setDefaultCard = ![sender.titleLabel.text isEqualToString:@"保存"];
+    NSInteger setDefaultCard = [sender.titleLabel.text isEqualToString:@"保存"] ? 0 : 1;
     UITextField *realNameTF = [self getCellTextFieldWithIndex:0];
     UITextField *bankNameTF = [self getCellTextFieldWithIndex:1];
     UITextField *cardTypeTF = [self getCellTextFieldWithIndex:2];
@@ -241,6 +241,7 @@
     params[@"city"] = cityTF.text;
     params[@"bankBranchName"] = locationTF.text;
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    params[@"saveDefault"] = @(setDefaultCard);
     
     params[@"smsCode"] = @"";
     if (self.validateId.length) {

@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy  ) NSString  *address;
 @property (nonatomic, copy  ) NSString  *avatar;
-@property (nonatomic, assign) NSInteger bandCardNum;
+@property (nonatomic, assign) NSInteger bankCardNum;
 @property (nonatomic, copy  ) NSString  *birthday;
 @property (nonatomic, assign) NSInteger blackFlag;
 @property (nonatomic, assign) NSInteger btcNum;

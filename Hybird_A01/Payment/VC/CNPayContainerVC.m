@@ -21,6 +21,7 @@
 #import "BTTPayBQAliStep2VC.h"
 #import "CNPayUSDTStep1VC.h"
 #import "CNPayUSDTQRSecondVC.h"
+#import "BTTBishangStep1VC.h"
 
 @interface CNPayContainerVC ()
 
@@ -30,7 +31,7 @@
 
 @implementation CNPayContainerVC
 
-- (instancetype)initWithPaymentType:(CNPaymentType)paymentType {
+- (instancetype)initWithPaymentType:(NSInteger)paymentType {
     self = [super init];
     if (self) {
         self.paymentType = paymentType;
@@ -64,17 +65,17 @@
  根据支付渠道构建具体的支付页面
  @param paymentType 渠道号
  */
-- (NSArray<UIViewController *> *)payItemsWithPaymentType:(CNPaymentType)paymentType {
+- (NSArray<UIViewController *> *)payItemsWithPaymentType:(NSInteger)paymentType {
     
     NSMutableArray<UIViewController *> *viewControllers = [NSMutableArray array];
     
     CNPaymentModel *payment = nil;
-//    for (CNPaymentModel *model  in self.payments) {
-//        if (model.paymentType == paymentType) {
-//            payment = model;
-//            break;
-//        }
-//    }
+    for (CNPaymentModel *model  in self.payments) {
+        if (model.payType == paymentType) {
+            payment = model;
+            break;
+        }
+    }
     
     switch (paymentType) {
 //        case CNPaymentAliQR:
@@ -145,9 +146,8 @@
         case CNPaymentBQFast:
         case CNPaymentBQWechat:
         case CNPaymentBQAli:
-        case CNPaymentBS: {
-
-            [viewControllers addObjectsFromArray:[self BQPay:payment]];
+        case 100: {
+            [viewControllers addObjectsFromArray:[self BSPay:payment]];
         }
             break;
             //TODO:
@@ -167,6 +167,13 @@
 /// 在线支付
 - (NSArray<CNPayBaseVC *> *)onlinePay:(CNPaymentModel *)payment {
     CNPayOnlineVC *step1VC = [[CNPayOnlineVC alloc] init];
+    step1VC.paymentModel = payment;
+    return @[step1VC];
+}
+
+/// 币商支付
+- (NSArray<CNPayBaseVC *> *)BSPay:(CNPaymentModel *)payment {
+    BTTBishangStep1VC *step1VC = [[BTTBishangStep1VC alloc] init];
     step1VC.paymentModel = payment;
     return @[step1VC];
 }

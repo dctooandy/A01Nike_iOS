@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTAddUSDTController : BTTCollectionViewController
 @property (nonatomic, assign) BTTSafeVerifyType addCardType;
+@property (nonatomic, copy) NSString *messageId;
+@property (nonatomic, copy) NSString *validateId;
 @end
 
 NS_ASSUME_NONNULL_END

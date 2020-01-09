@@ -365,7 +365,11 @@
         }
     }
     [[CNTimeLog shareInstance] startRecordTime:CNEventPayLaunch];
-    [self.navigationController pushViewController:[[CNPayVC alloc] initWithChannel:model.paymentType] animated:YES];
+    NSMutableArray *channelArray = [NSMutableArray new];
+    [channelArray addObjectsFromArray:self.bigDataSoure];
+    [channelArray addObjectsFromArray:self.normalDataSoure];
+    [channelArray addObjectsFromArray:self.normalDataTwo];
+    [self.navigationController pushViewController:[[CNPayVC alloc] initWithChannel:model.paymentType channelArray:channelArray] animated:YES];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -390,8 +394,7 @@
     }
     if (indexPath.row == self.saveMoneyCount + 3) {
         if (self.isCompletePersonalInfo) {
-            //TODO:
-            if ([IVNetwork savedUserInfo].bandCardNum!=0) {
+            if ([IVNetwork savedUserInfo].bankCardNum!=0) {
                 BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
             } else {

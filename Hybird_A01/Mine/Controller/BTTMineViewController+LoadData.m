@@ -117,6 +117,7 @@
             [self.normalDataTwo removeAllObjects];
         }
         NSMutableArray *payments = [NSMutableArray array];
+        BOOL haveUSDT = NO;
         
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if ([result.body[@"payTypeList"] isKindOfClass:[NSArray class]]) {
@@ -124,13 +125,13 @@
                 for (int i = 0; i < payTypeArray.count; i ++) {
                     NSDictionary *dict = payTypeArray[i];
                     CNPaymentModel *model = [CNPaymentModel yy_modelWithJSON:dict];
-                    model.payType = i;
                     [payments addObject:model];
                     if ([model.payTypeName isEqualToString:@"银联扫码"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"银联扫码";
                         mainModel.iconName = @"me_bankscan";
-                        mainModel.paymentType = CNPayChannelUnionQR;
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
                         if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
                             [self.normalDataSoure addObject:mainModel];
                         }else{
@@ -138,48 +139,47 @@
                         }
                     }
                     if ([model.payTypeName isEqualToString:@"USDT支付"]) {
-                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                        mainModel.name = @"泰达币-USDT";
-                        mainModel.iconName = @"me_usdt";
-                        mainModel.paymentType = CNPayChannelUSDT;
-                        [self.bigDataSoure addObject:mainModel];
+                        haveUSDT = YES;
                     }
                     if ([model.payTypeName isEqualToString:@"京东扫码"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"京东扫码";
                         mainModel.iconName = @"me_jdscan";
-                        mainModel.paymentType = CNPayChannelJDQR;
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
                         if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
                             [self.normalDataSoure addObject:mainModel];
                         }else{
                             [self.bigDataSoure addObject:mainModel];
                         }
                     }
-                    if ([model.payTypeName isEqualToString:@"支付宝WAP"]) {
-                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                        mainModel.name = @"支付宝wap";
-                        mainModel.iconName = @"me_aliwap";
-                        mainModel.paymentType = CNPayChannelAliApp;
-                        if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                            [self.bigDataSoure addObject:mainModel];
-                        }
-                    }
-                    if ([model.payTypeName isEqualToString:@"迅捷网银"]) {
+//                    if ([model.payTypeName isEqualToString:@"支付宝WAP"]) {
+//                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
+//                        mainModel.name = @"支付宝wap";
+//                        mainModel.iconName = @"me_aliwap";
+//                        mainModel.paymentType = CNPayChannelAliApp;
+//                        if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
+//                            [self.bigDataSoure addObject:mainModel];
+//                        }
+//                    }
+                    if ([model.payTypeName isEqualToString:@"快速支付"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"迅捷网银";
                         mainModel.iconName = @"me_bank";
-                        mainModel.paymentType = CNPayChannelBQFast;
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
                         if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                            [self.normalDataSoure addObject:mainModel];
-                        }else{
                             [self.bigDataSoure addObject:mainModel];
+                        }else{
+                            [self.normalDataSoure addObject:mainModel];
                         }
                     }
                     if ([model.payTypeName isEqualToString:@"微信转账银行卡"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"微信秒存";
                         mainModel.iconName = @"me_wechatsecond";
-                        mainModel.paymentType = CNPayChannelBQWechat;
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
                         if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
                             [self.bigDataSoure addObject:mainModel];
                         }else{
@@ -190,7 +190,8 @@
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"支付宝秒存";
                         mainModel.iconName = @"me_alipaySecond";
-                        mainModel.paymentType = CNPayChannelBQAli;
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
                         if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
                             [self.bigDataSoure addObject:mainModel];
                         }else{
@@ -201,103 +202,121 @@
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"支付宝扫码";
                         mainModel.iconName = @"me_aliSacn";
-                        mainModel.paymentType = CNPayChannelAliQR;
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
                         [self.normalDataSoure addObject:mainModel];
                     }
                     if ([model.payTypeName isEqualToString:@"微信扫码"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"微信扫码";
                         mainModel.iconName = @"me_wechatscan";
-                        mainModel.paymentType = CNPayChannelWechatQR;
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
                         [self.normalDataSoure addObject:mainModel];
                     }
                     if ([model.payTypeName isEqualToString:@"QQ扫码"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"QQ扫码";
                         mainModel.iconName = @"me_qqScan";
-                        mainModel.paymentType = CNPayChannelQQQR;
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
                         [self.normalDataSoure addObject:mainModel];
                     }
                     if ([model.payTypeName isEqualToString:@"手工存款"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"手工存款";
                         mainModel.iconName = @"me_hand";
-                        mainModel.paymentType = CNPayChannelDeposit;
+                        mainModel.paymentType = model.payType;
                         [self.normalDataSoure addObject:mainModel];
                     }
                     if ([model.payTypeName isEqualToString:@"在线支付"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"在线支付";
                         mainModel.iconName = @"me_online";
-                        mainModel.paymentType = CNPayChannelOnline;
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
                         [self.normalDataSoure addObject:mainModel];
                     }
                     if ([model.payTypeName isEqualToString:@"云闪付"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"云闪付扫码";
                         mainModel.iconName = @"me_YSF";
-                        mainModel.paymentType = CNPayChannelYSFQR;
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
                         [self.normalDataSoure addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"银行快捷网银"]) {
+                    if ([model.payTypeName isEqualToString:@"网银快捷支付MOB"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"银行快捷网银";
                         mainModel.iconName = @"me_quick";
-                        mainModel.paymentType = CNPayChannelUnionApp;
-                        [self.normalDataSoure addObject:mainModel];
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
+                        [self.normalDataTwo addObject:mainModel];
                     }
                     if ([model.payTypeName isEqualToString:@"币商"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"币商充值";
                         mainModel.iconName = @"me_bishang";
-                        mainModel.paymentType = CNPayChannelBS;
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
                         [self.bigDataSoure addObject:mainModel];
                     }
                     if ([model.payTypeName isEqualToString:@"钻石币"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"钻石币";
                         mainModel.iconName = @"me_bibao";
-                        mainModel.paymentType = CNPayChannelCoin;
-                        [self.normalDataSoure addObject:mainModel];
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
+                        [self.normalDataTwo addObject:mainModel];
                     }
                     if ([model.payTypeName isEqualToString:@"点卡"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"点卡";
                         mainModel.iconName = @"me_pointCard";
-                        mainModel.paymentType = CNPayChannelCard;
-                        [self.normalDataSoure addObject:mainModel];
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
+                        [self.normalDataTwo addObject:mainModel];
                     }
                     if ([model.payTypeName isEqualToString:@"比特币"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"比特币";
                         mainModel.iconName = @"me_btc";
-                        mainModel.paymentType = CNPayChannelBTC;
-                        [self.normalDataSoure addObject:mainModel];
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
+                        [self.normalDataTwo addObject:mainModel];
                     }
                     if ([model.payTypeName isEqualToString:@"微信条码"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"微信条码支付";
                         mainModel.iconName = @"me_tiaoma";
-                        mainModel.paymentType = CNPayChannelWechatBarCode;
-                        [self.normalDataSoure addObject:mainModel];
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
+                        [self.normalDataTwo addObject:mainModel];
+                    }
+                    BOOL isApp = NO;
+                    if (([model.payTypeName isEqualToString:@"支付宝WAP"] || [model.payTypeName isEqualToString:@"微信WAP"] || [model.payTypeName isEqualToString:@"京东WAP"]) && !isApp) {
+                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                        mainModel.name            = @"支付宝/微信/QQ/京东";
+                        mainModel.iconName        = @"me_wap";
+                        mainModel.paymentType     = model.payType;
+                        mainModel.payModel = model;
+                        if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
+                            [self.normalDataSoure addObject:mainModel];
+                        }else{
+                            [self.normalDataTwo addObject:mainModel];
+                        }
+                        isApp = YES;
                     }
                 }
                 
-                //                    CNPaymentModel *scan2 = payments[CNPaymentWechatApp];
-                //                    CNPaymentModel *scan4 = payments[CNPaymentQQApp];
-                //                    CNPaymentModel *jdApp = payments[CNPaymentJDApp];
-                //
-                //                    BOOL isApp = NO;
-                //                    if ((scan2.isAvailable || scan4.isAvailable || jdApp.isAvailable) && !isApp) {
-                //                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                //                        mainModel.name = @"微信/QQ/京东WAP";
-                //                        mainModel.iconName = @"me_wap";
-                //                        mainModel.paymentType = CNPayChannelWechatQQJDAPP;
-                //                        [self.normalDataTwo addObject:mainModel];
-                //                        isApp = YES;
-                //                    }
-
-
+                if (haveUSDT) {
+                    BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                    mainModel.name = @"泰达币-USDT";
+                    mainModel.iconName = @"me_usdt";
+                    mainModel.paymentType = 99;
+                    [self.bigDataSoure addObject:mainModel];
+                }
+                
                 if (self.bigDataSoure.count && self.normalDataSoure.count && self.normalDataTwo.count) {
                     self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
                     self.saveMoneyCount = 4;

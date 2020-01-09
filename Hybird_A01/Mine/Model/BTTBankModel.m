@@ -9,28 +9,5 @@
 #import "BTTBankModel.h"
 
 @implementation BTTBankModel
-+ (JSONKeyMapper *)keyMapper {
-    return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:
-            @{@"bankName"           : @"bank_name",
-              @"bankType"           : @"bank_account_type",
-              @"bankAccount"        : @"bank_account_no_new",
-              @"bankSecurityAccount": @"bank_account_no",
-              @"bankAccountName"    : @"bank_account_name",
-              @"branchName"         : @"branch_name",
-              @"isDefault"          : @"is_default",
-              @"cardType"           : @"catalog",
-              @"province"           : @"bank_country",
-              @"city"               : @"bank_city"}];
-}
 
-+ (BOOL)propertyIsIgnored:(NSString *)propertyName {
-    if ([propertyName isEqualToString:@"bankImage"]) {
-        return YES;
-    }
-    return NO;
-}
-
-+ (BOOL)propertyIsOptional:(NSString *)propertyName {
-    return YES;
-}
 @end

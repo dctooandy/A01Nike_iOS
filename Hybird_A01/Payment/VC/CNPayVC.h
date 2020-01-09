@@ -8,6 +8,7 @@
 
 #import "HABaseViewController.h"
 #import "CNPayChannelModel.h"
+#import "CNPaymentModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param channel 传入默认渠道，默认第一个
  @return 支付控制器实例
  */
-- (instancetype)initWithChannel:(CNPayChannel)channel;
+- (instancetype)initWithChannel:(NSInteger)channel channelArray:(NSArray *)channelArray;
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full;
 - (void)addBankView;
 - (void)removeBankView;

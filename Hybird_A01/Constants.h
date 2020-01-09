@@ -217,6 +217,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 
 /*********************************************API********************************************************/
+
 //app语音未登录回拨
 #define BTTVoiceCall        @"_extra_/api/v1/app/public/appCall"
 //app语音登录回拨
@@ -261,113 +262,81 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTModifyBankCard       @"account/modifyBank"
 // 查询会员修改银行卡
 #define BTTModifyBankRequests       @"customer/checkPhoneAndBankCard"
-
-// 首页逻辑接口
-
+// 删除银行卡
+#define BTTDeleteBankAccount       @"account/delete"
+// 获取USDT钱包下钱包
+#define BTTUsdtWallets        @"deposit/queryDepositBankInfos"
+// 设置默认取款卡
+#define BTTSetDefaultCard        @"account/setDefaultBankCard"
+/// 查询存款方式
+#define kPaymentValidate       @"deposit/queryPayWaysV3"
+// 首页聚合
 #define BTTHomePageNewAPI            @"_extra_/api/v1/app/indexCombo"
+// 首页banner
 #define BTTIndexBannerDownloads      @"_extra_/api/v1/app/banners"
+// 首页form
 #define BTTBrandHighlights           @"_extra_/api/v1/wms/form"
+// 首页公告
 #define BTTHomeAnnouncementAPI       @"_extra_/api/v1/other/announcement/common"
 // 优惠列表
 #define BTTPromotionList             @"_extra_/api/v1/wms/promotions"
-
 // 获取用户额度信息全厅
 #define BTTCreditsALL              @"customer/getBalance"
-
-//取款是否需要流水
+//取款是否需要流水-------NO
 #define BTTBetInfo                   @"/A01/bet/betInfo"
-
-// 获取游戏大厅列表
-
-#define BTTGamePlatforms             @"/A01/game/platforms"
-
 // 金额转账本地接口
-
 #define BTTTransferAllMoneyToLocal   @"game/transferToLocal"
-
-// 转账, 游戏厅转本地
-
+// 转账, 游戏厅转本地 ----NO
 #define BTTCreditsTransfer           @"/public/credits/transfer"
-
-// 获取当前可以洗码的k列表
-
+// 获取当前可以洗码的k列表---NO
 #define BTTXmCurrentList             @"/A01/xm/currentList"
-
-// 获取洗码历史列表
-
+// 获取洗码历史列表 ---NO
 #define BTTXmHistoryList             @"/A01/xm/historyList"
-
-// 获取限红额度
-
+// 获取限红额度   ---NO
 #define BTTBetLimits                 @"/A01/apply/getBetLimits"
-
-// 申请修改限红
+// 申请修改限红   ---NO
 #define BTTApplyBetLimit             @"/public/apply/betLimit"
-
-// 短信状态查询
-
+// 短信状态查询  ---NO
 #define BTTSmsList                   @"/public/subscription/smsList"
-
-// 邮件状态查询
-
+// 邮件状态查询 ----NO
 #define BTTEmailList                 @"/public/subscription/emailList"
-
-// 短信状态修改
-
+// 短信状态修改 ----NO
 #define BTTSmsOrder                  @"/public/subscription/smsOrder"
-
-// 邮件状态修改
-
+// 邮件状态修改  ---NO
 #define BTTEmailOrder                @"/public/subscription/emailOrder"
-
-// 洗码接口
-
+// 洗码接口---NO
 #define BTTXimaBillOut               @"/public/xm/billout"
-
-// 开户礼金和存款礼金即可欧
-
+// 开户礼金和存款礼金即可欧 ---NO
 #define BTTOpenAccountStatus         @"/A01/openAccount/isOpen"
-
 // 请求游戏列表
 #define BTTVideoGamesList            @"_extra_/api/v1/wms/game"
-
 // 获取收藏列表
-
 #define BTTFavotiteList              @"_extra_/api/v1/wms/gameFavorList"
-
 // 添加收藏
-
 #define BTTAddFavotites              @"_extra_/api/v1/wms/gameFavor"
-
 // 搏币数量查询
 #define BTTQueryIntegralAPI          @"_extra_/api/v1/activity/luckyWheel/myLeftPrize"
 // 搏币兑换
 #define BTTCoinDepositAPI            @"_extra_/api/v1/activity/luckyWheel/depositPrize"
 // 请求未读消息的数量
 #define BTTIsUnviewedAPI             @"letter/countUnread"
-
-// 人工存款信息错误重新提交
+// 人工存款信息错误重新提交---NO
 #define BTTDepositResubmmitAPI       @"/A01/payment/reSubmitDepositRequestEndpoint"
-
-// 迅捷存款信息错误重新提交
+// 迅捷存款信息错误重新提交---NO
 #define BTTBQAddOrderAPI             @"/A01/payment/BQAddOrder"
-
-// 手工存款催单
+// 手工存款催单 ---NO
 #define BTTCreditAppealAPI           @"/A01/payment/createCreditAppeal"
-
-// 迅捷, 在线催款催单接口
+// 迅捷, 在线催款催单接口---NO
 #define BTTAreditAppealAPI           @"/A01/payment/createAreditAppeal"
-
-// 客户存款次数的接口
-
-#define BTTSaveMoneyTimesAPI         @"/deposit/getIsDepositAmount"
-
+// 客户存款次数的接口 ---NO
+#define BTTSaveMoneyTimesAPI         @"/deposit/getIsDepositAmount" 
 // 查询可分享链接
 #define BTTGetWeiXinRediect          @"_extra_/api/v1/app/public/getWeiXinRedirect"
 
 #define BTTCreditsGame               @"/public/credits/game"
 #define BTTCreditsTotalAvailable     @"/public/credits/totalAvailable"
 #define BTTIsBindStatusAPI           @"/public/verify/isNewBind"
+#define BTTGamePlatforms             @"/A01/game/platforms"
 
 /********************************************常用宏*********************************************************/
 

@@ -6,31 +6,7 @@
 //  Copyright © 2018年 BTT. All rights reserved.
 //
 
-/**
- {
- bank_account_no_new = 7886567;
- bank_country = 河北省;
- customer_bank_id = 1000230152;
- bank_name = 招商银行;
- catalog = 0;
- bank_account_no = ****567;
- created_by = rkeytt01;
- login_name = rkeytt01;
- bank_city = 石家庄市;
- bank_account_name = **8;
- created_date = 2018-08-27 18:13:07;
- flag = 1;
- last_update = 2018-08-27 18:13:07;
- branch_name = uuehjejsjsj;
- customer_id = 1000757957;
- bank_account_type = 借记卡;
- priority_order = 1;
- last_updated_by = system;
- is_default = 1;
- }
- */
-
-#import "JSONModel.h"
+#import <Foundation/Foundation.h>
 
 @interface BTTBankModel : BTTBaseModel
 /** 银行名称 */

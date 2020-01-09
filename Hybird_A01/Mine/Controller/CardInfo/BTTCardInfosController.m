@@ -17,6 +17,7 @@
 #import "BTTUnBindingMobileNoticeController.h"
 #import "BTTAddUSDTController.h"
 #import <IVCacheLibrary/IVCacheWrapper.h>
+#import "IVUtility.h"
 
 @interface BTTCardInfosController ()<BTTElementsFlowLayoutDelegate>
 
@@ -368,41 +369,38 @@
     IVActionHandler handler = ^(UIAlertAction *action){};
     weakSelf(weakSelf)
     IVActionHandler handler1 = ^(UIAlertAction *action){
-        if ([IVNetwork savedUserInfo].isPhoneBinded) {
+        if ([IVNetwork savedUserInfo].mobileNoBind==1) {
             BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-            if (selectModel.cardType==0) {
+            vc.bankModel = selectModel;
+            if ([selectModel.accountType isEqualToString:@"借记卡"]||[selectModel.accountType isEqualToString:@"信用卡"]||[selectModel.accountType isEqualToString:@"存折"]) {
                 vc.mobileCodeType = BTTSafeVerifyTypeMobileDelBankCard;
-            }else if (selectModel.cardType==1){
+            }else if ([selectModel.accountType isEqualToString:@"BTC"]){
                 vc.mobileCodeType = BTTSafeVerifyTypeMobileDelBTCard;
             }else{
                 vc.mobileCodeType = BTTSafeVerifyTypeMobileDelUSDTCard;
             }
             [weakSelf.navigationController pushViewController:vc animated:YES];
         } else {
-            //2018-11-23 nike说按线上标准直接跳转绑定页面
-            //            BTTUnBindingMobileNoticeController *vc = [[BTTUnBindingMobileNoticeController alloc] init];
-            //            vc.mobileCodeType = selectModel.isBTC ? BTTSafeVerifyTypeMobileBindDelBTCard : BTTSafeVerifyTypeMobileBindDelBankCard;
-            //            [weakSelf.navigationController pushViewController:vc animated:YES];
-            
+
             [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
             BTTBindingMobileController *vc = [BTTBindingMobileController new];
-            if (selectModel.cardType==0) {
-                vc.mobileCodeType = BTTSafeVerifyTypeMobileBindDelBankCard;
-            }else if (selectModel.cardType==1){
+            if ([selectModel.accountType isEqualToString:@"USDT"]) {
+                vc.mobileCodeType = BTTSafeVerifyTypeMobileBindDelUSDTCard;
+            }else if ([selectModel.accountType isEqualToString:@"BTC"]){
                 vc.mobileCodeType = BTTSafeVerifyTypeMobileBindDelBTCard;
             }else{
-                vc.mobileCodeType = BTTSafeVerifyTypeMobileBindDelUSDTCard;
+                vc.mobileCodeType = BTTSafeVerifyTypeMobileBindDelBankCard;
             }
             [self.navigationController pushViewController:vc animated:YES];
         }
     };
     NSString *title = @"要删除银行卡?";
     NSString *message = @"若以后继续使用该银行卡需要重新添加并审核";
-    if (selectModel.cardType==1) {
+    if ([selectModel.accountType isEqualToString:@"BTC"]) {
         title = @"要删除比特币钱包?";
         message = @"若以后继续使用该钱包需要重新添加并审核";
     }
-    if (selectModel.cardType==3) {
+    if ([selectModel.accountType isEqualToString:@"USDT"]) {
         title = @"要删除USDT钱包?";
         message = @"若以后继续使用该钱包需要重新添加并审核";
     }
@@ -413,20 +411,21 @@
 {
     NSString *bankId = [[NSUserDefaults standardUserDefaults] valueForKey:BTTSelectedBankId];
     NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"customer_bank_id"] = bankId;
-    params[@"save_default"] = @(1);
+    params[@"accountId"] = bankId;
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [BTTHttpManager updateBankCardWithUrl:@"public/bankcard/updateAuto" params:params.copy completion:^(IVRequestResultModel *result, id response) {
-        if (result.status) {
+    [IVNetwork requestPostWithUrl:BTTSetDefaultCard paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
             [BTTHttpManager fetchBankListWithUseCache:NO completion:^(IVRequestResultModel *result, id response) {
                 [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
                 [MBProgressHUD showSuccess:@"设置成功!" toView:weakSelf.view];
                 [weakSelf refreshBankList];
             }];
-        } else {
-            [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
     }];
 }
@@ -438,9 +437,9 @@
     int bankCardCount = 0;
     int btcCardCount = 0;
     for (BTTBankModel *model in self.bankList) {
-        if (model.cardType==1) {
+        if ([model.accountType isEqualToString:@"BTC"]) {
             btcCardCount++;
-        }else if (model.cardType==0){
+        }else if ([model.accountType isEqualToString:@"借记卡"]||[model.accountType isEqualToString:@"信用卡"]||[model.accountType isEqualToString:@"存折"]){
             bankCardCount++;
         }
     }

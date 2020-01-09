@@ -50,7 +50,7 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 };
 
 @interface CNPaymentModel : BTTBaseModel
-/// 定义的具体支付方式
+/// 定义的具体支付方式 0:手工存款 99:USDT存款 100:币商 9:支付宝wap 5:支付宝扫码 92:支付宝秒存 91:微信秒存 6：微信扫码 23:微信条码  90：迅捷网银 19:银行快捷网银 15:银联扫码 25:虚拟币支付 16:京东扫码 27：云闪付 
 @property (nonatomic, assign) NSInteger payType;
 /// 支付方式标题
 @property (nonatomic, copy) NSString *payTypeName;

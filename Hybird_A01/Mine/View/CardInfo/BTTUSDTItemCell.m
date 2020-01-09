@@ -10,6 +10,7 @@
 #import "BTTUSDTButton.h"
 #import "CNPayConstant.h"
 #import "USDTWalletCollectionCell.h"
+#import "BTTUsdtWalletModel.h"
 
 @interface BTTUSDTItemCell()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) NSMutableArray *imgArray;
@@ -73,13 +74,13 @@
     self.usdtDatas = usdtDatas;
     for (int i = 0; i<usdtDatas.count; i++) {
         NSDictionary *dict = usdtDatas[i];
-        NSString *dictCode = [NSString stringWithFormat:@"%@",dict[@"dictCode"]];
-        if ([dictCode containsString:@"other"]) {
+        BTTUsdtWalletModel *model = [BTTUsdtWalletModel yy_modelWithDictionary:dict];
+        if ([model.bankcode containsString:@"others"]) {
             [self.imgArray addObject:@"me_usdt_otherwallet"];
             [self.nameArray addObject:@"其它钱包"];
         }else{
-            [self.imgArray addObject:[NSString stringWithFormat:@"me_usdt_%@",dictCode]];
-            [self.nameArray addObject:dictCode];
+            [self.imgArray addObject:[NSString stringWithFormat:@"me_usdt_%@",model.bankcode]];
+            [self.nameArray addObject:model.bankcode];
         }
         if (i==usdtDatas.count-1) {
             [self.walletCollectionView reloadData];

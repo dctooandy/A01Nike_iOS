@@ -144,31 +144,27 @@
 }
 - (void)saveBtnClickded:(UIButton *)sender
 {
-    NSString *url = nil;
+    NSString *url = BTTAddBankCard;
     NSMutableDictionary *params = @{}.mutableCopy;
-    switch (self.addCardType) {
-        case BTTSafeVerifyTypeNormalAddBTCard:
-        case BTTSafeVerifyTypeMobileAddBTCard:
-        case BTTSafeVerifyTypeMobileBindAddBTCard:
-            url = @"public/bankcard/addBtcAuto";
-            break;
-        default:
-            url = @"public/bankcard/addBtc";
-            break;
-    }
-    params[@"btcAddress"] = [self getSureAddressTF].text;
+    params[@"accountNo"] = [self getSureAddressTF].text;
+    params[@"accountType"] = @"BTC";
+    params[@"expire"] = @0;
+    params[@"messageId"] = self.messageId;
+    params[@"validateId"] = self.validateId;
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     weakSelf(weakSelf)
-    [BTTHttpManager addBTCCardWithUrl:url params:params.copy completion:^(IVRequestResultModel *result, id response) {
+    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-        if (result.status) {
-            [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
             [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
             BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
             vc.mobileCodeType = self.addCardType;
             [weakSelf.navigationController pushViewController:vc animated:YES];
-        } else {
-            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
     }];
 }

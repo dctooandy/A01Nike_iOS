@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_bg" translatesAutoresizingMaskIntoConstraints="NO" id="DqY-Xg-Csz">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DqY-Xg-Csz">
                         <rect key="frame" x="15" y="57.5" width="345" height="173"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="173" id="C76-Zk-OSY"/>
@@ -135,7 +135,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="card_bg" width="345" height="169"/>
         <image name="card_ccb" width="19.5" height="20"/>
         <image name="card_delete" width="20" height="20"/>
         <image name="card_edit" width="20" height="20"/>

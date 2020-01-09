@@ -7,6 +7,7 @@
 //
 
 #import "BTTBaseModel.h"
+#import "CNPaymentModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -32,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isError; ///< 是否是错误字段
 
 @property (nonatomic, copy) NSString *resultCode;
+
+@property (nonatomic, strong) CNPaymentModel *payModel;
 
 @end
 

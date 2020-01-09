@@ -209,9 +209,9 @@ NSInteger const kPayTypeTotalCount = 30;
 //    [self requestWithUrl:kPaymentUSDTManualPay parameters:params handler:completeHandler];
 //}
 //
-//+ (void)getUSDTTypeWithCompleteHandler:(IVRequestCallBack)completeHandler{
-//    [self requestWithUrl:kPaymentCardUSDTType parameters:nil handler:completeHandler];
-//}
++ (void)getUSDTTypeWithCompleteHandler:(KYHTTPCallBack)completeHandler{
+    [self requestWithUrl:kPaymentCardUSDTType parameters:nil handler:completeHandler];
+}
 //
 //+ (void)addUsdtAutoWithDictCode:(NSString *)dictCode usdtAddress:(NSString *)usdtAddress completeHandler:(IVRequestCallBack)completeHandler{
 //    NSMutableDictionary *params = [NSMutableDictionary dictionary];

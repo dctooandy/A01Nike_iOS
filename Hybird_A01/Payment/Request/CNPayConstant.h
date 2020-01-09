@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-/// 查询存款方式
-extern NSString * const kPaymentValidate;
 /// 支付接口
 extern NSString * const kPaymentOnlinePay;
 /// 网银快速充值，线下存款，微信支付生成订单

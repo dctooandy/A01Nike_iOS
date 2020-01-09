@@ -12,11 +12,19 @@
 @implementation BTTAddUSDTController (LoadData)
 
 - (void)loadUSDTData {
-    [CNPayRequestManager getUSDTTypeWithCompleteHandler:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",result);
-        NSArray *array = result.data[@"usdtTypes"];
-        [self.usdtDatas addObjectsFromArray:array];
-        [self.collectionView reloadData];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
+    [params setValue:@"5" forKey:@"bqpaytype"];
+    [params setValue:@"1" forKey:@"flag"];
+    [IVNetwork requestPostWithUrl:BTTUsdtWallets paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if ([result.body isKindOfClass:[NSArray class]]) {
+                NSArray *array = result.body;
+                [self.usdtDatas addObjectsFromArray:array];
+                [self.collectionView reloadData];
+            }
+        }
     }];
     
 }

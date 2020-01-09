@@ -93,9 +93,11 @@
 }
 
 - (void)submitButton_Click:(id)sender{
-    weakSelf(weakSelf)
     NSDictionary *dict = self.usdtDatas[_selectedType];
-    NSString *dictCode = [NSString stringWithFormat:@"%@",dict[@"dictCode"]];
+    NSString *dictCode = [NSString stringWithFormat:@"%@",dict[@"bankcode"]];
+    NSString *url = BTTAddBankCard;
+    
+    weakSelf(weakSelf)
     if ([_walletString isEqualToString:@""]) {
         [MBProgressHUD showError:@"钱包地址不得为空" toView:self.view];
     }else if ([_confirmString isEqualToString:@""]){
@@ -103,37 +105,27 @@
     }else if (![_confirmString isEqualToString:_walletString]){
         [MBProgressHUD showError:@"两次输入不一致" toView:self.view];
     }else{
-        if (self.addCardType==BTTSafeVerifyTypeNormalAddUSDTCard||self.addCardType==BTTSafeVerifyTypeMobileAddUSDTCard||self.addCardType==BTTSafeVerifyTypeMobileBindAddUSDTCard) {
-            [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-            [CNPayRequestManager addUsdtAutoWithDictCode:dictCode usdtAddress:_walletString completeHandler:^(IVRequestResultModel *result, id response) {
-                NSLog(@"%@",result);
-                [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-                if (result.status) {
-                    [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
-                    [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
-                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-                    vc.mobileCodeType = self.addCardType;
-                    [weakSelf.navigationController pushViewController:vc animated:YES];
-                } else {
-                    [MBProgressHUD showError:result.message toView:weakSelf.view];
-                }
-            }];
-        }else{
-            [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-            [CNPayRequestManager addUsdtWithDictCode:dictCode usdtAddress:_walletString completeHandler:^(IVRequestResultModel *result, id response) {
-                NSLog(@"%@",result);
-                [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-                if (result.status) {
-                    [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
-                    [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
-                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-                    vc.mobileCodeType = self.addCardType;
-                    [weakSelf.navigationController pushViewController:vc animated:YES];
-                } else {
-                    [MBProgressHUD showError:result.message toView:weakSelf.view];
-                }
-            }];
-        }
+        NSMutableDictionary *params = @{}.mutableCopy;
+        params[@"accountNo"] = _walletString;
+        params[@"accountType"] = @"USDT";
+        params[@"bankName"] = dictCode;
+        params[@"expire"] = @0;
+        params[@"messageId"] = self.messageId;
+        params[@"validateId"] = self.validateId;
+        params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+        [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
+                [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
+                BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+                vc.mobileCodeType = self.addCardType;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }else{
+                [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
+            }
+        }];
     }
 }
 
