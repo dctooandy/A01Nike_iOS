@@ -26,7 +26,7 @@
 
 - (void)setModel:(BTTXimaTotalModel *)model {
     _model = model;
-    self.totalLabel.text = [NSString stringWithFormat:@"%@元",[PublicMethod transferNumToThousandFormat:model.totalAmount.floatValue]];
+    self.totalLabel.text = [NSString stringWithFormat:@"%@元",[PublicMethod transferNumToThousandFormat:[NSString stringWithFormat:@"%ld",(long)model.totalXmAmount].floatValue]];
 }
 
 @end

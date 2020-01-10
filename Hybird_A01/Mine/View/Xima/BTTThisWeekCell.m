@@ -35,10 +35,10 @@
 - (void)setModel:(BTTXimaItemModel *)model {
     _model = model;
     
-    self.nameLabel.text = model.name;
-    self.validAmountLabel.text = [NSString stringWithFormat:@"%@元",[PublicMethod transferNumToThousandFormat:model.validAmount.floatValue]];
-    self.totalAmountLabel.text = [NSString stringWithFormat:@"%@",[PublicMethod transferNumToThousandFormat:model.totalBet.floatValue]];
-    self.rateLabel.text = model.rate;
+    self.nameLabel.text = [NSString stringWithFormat:@"%@",model.xmName];
+    self.validAmountLabel.text = [NSString stringWithFormat:@"%@元",[PublicMethod transferNumToThousandFormat:model.xmAmount]];
+    self.totalAmountLabel.text = [NSString stringWithFormat:@"%@",[PublicMethod transferNumToThousandFormat:model.totalBetAmont]];
+    self.rateLabel.text = model.xmRate;
 }
 
 - (void)setThisWeekCellType:(BTTXimaThisWeekCellType)thisWeekCellType {

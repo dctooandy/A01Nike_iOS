@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTXimaRecordModel : BTTBaseModel
 
-@property (nonatomic, copy) NSString *amount;
+@property (nonatomic, copy) NSString *total;
 
 @property (nonatomic, strong) NSArray<BTTXimaRecordItemModel *> *list;
 

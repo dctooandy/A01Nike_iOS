@@ -34,8 +34,7 @@
 }
 
 - (NSString *)preSaveMsg {
-#warning 预留信息
-    return @"";//[IVNetwork userInfo].verify_code;
+    return [IVNetwork savedUserInfo].verifyCode;
 }
 
 - (void)showError:(NSString *)error {

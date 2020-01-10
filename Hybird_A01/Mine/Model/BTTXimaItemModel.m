@@ -12,7 +12,7 @@
 @implementation BTTXimaTotalModel
 
 + (NSDictionary *)modelContainerPropertyGenericClass {
-    return @{@"list":[BTTXimaItemModel class]};
+    return @{@"xmList":[BTTXimaItemModel class]};
 }
 
 
@@ -20,5 +20,11 @@
 @end
 
 @implementation BTTXimaItemModel
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"xmTypes":[BTTXimaItemModel class]};
+}
+@end
+
+@implementation BTTXimaItemTypesModel
 
 @end

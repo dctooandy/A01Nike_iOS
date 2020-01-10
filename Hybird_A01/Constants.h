@@ -329,9 +329,17 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 // 迅捷, 在线催款催单接口---NO
 #define BTTAreditAppealAPI           @"/A01/payment/createAreditAppeal"
 // 客户存款次数的接口 ---NO
-#define BTTSaveMoneyTimesAPI         @"/deposit/getIsDepositAmount" 
+#define BTTSaveMoneyTimesAPI         @"/deposit/getIsDepositAmount"
 // 查询可分享链接
 #define BTTGetWeiXinRediect          @"_extra_/api/v1/app/public/getWeiXinRedirect"
+// 查询存款金额列表
+#define BTTQueryAmountList           @"deposit/queryAmountList"
+// 查询洗码额度v2
+#define BTTXimaAmount                @"xm/calcAmountV2"
+// 查询洗码提案列表
+#define BTTXimaQueryRequest                @"xm/queryRequest"
+// 查询洗码历史记录
+#define BTTXiMaHistoryListUrl        @"_extra_/api/v1/getBetAmountByDay"
 
 #define BTTCreditsGame               @"/public/credits/game"
 #define BTTCreditsTotalAvailable     @"/public/credits/totalAvailable"

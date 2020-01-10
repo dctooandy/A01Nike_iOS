@@ -15,133 +15,77 @@
 @implementation BTTXimaController (LoadData)
 
 - (void)loadMainData {
-//    [self showLoading];
-    dispatch_queue_t queue = dispatch_queue_create("xima.data", DISPATCH_QUEUE_CONCURRENT);
-    dispatch_group_t group = dispatch_group_create();
-    dispatch_group_enter(group);
-    dispatch_async(queue, ^{
-        [self loadGameshallList:group];
-    });
-    dispatch_group_notify(group, queue, ^{
-        NSString *ximaType = @"";
-        for (BTTXimaModel *model in self.xms) {
-            if (!ximaType.length) {
-                ximaType = model.type;
-            } else {
-                ximaType = [NSString stringWithFormat:@"%@;%@",ximaType,model.type];
-            }
+    NSDictionary *params = @{
+        @"loginName":[IVNetwork savedUserInfo].loginName
+    };
+    [IVNetwork requestPostWithUrl:BTTXimaAmount paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        self.otherListType = BTTXimaOtherListTypeNoData;
+        self.currentListType = BTTXimaCurrentListTypeNoData;
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTXimaTotalModel *model = [BTTXimaTotalModel yy_modelWithJSON:result.body];
+            self.otherModel = model;
+            self.validModel = model;
+            self.currentListType = BTTXimaCurrentListTypeData;
+            self.otherListType = BTTXimaOtherListTypeData;
+            [self setupElements];
         }
-        [self loadXimaCurrentList:ximaType];
-        [self loadHistoryData:ximaType];
-    });
+    }];
+    [self loadHistoryData];
 }
 
-- (void)loadXimaCurrentList:(NSString *)ximaType {
-    NSDictionary *params = @{@"xm_type":ximaType};
-    //TODO:
-//    [IVNetwork sendRequestWithSubURL:BTTXmCurrentList paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-//        NSLog(@"%@",response);
-//        [self hideLoading];
-//        self.otherListType = BTTXimaOtherListTypeNoData;
-//        self.currentListType = BTTXimaCurrentListTypeNoData;
-//        if (result.status) {
-//            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-//                if (result.data[@"other"] && [result.data[@"other"] isKindOfClass:[NSDictionary class]]) {
-//                    if (result.data[@"other"][@"list"] && [result.data[@"other"][@"list"] isKindOfClass:[NSArray class]]) {
-//                        BTTXimaTotalModel *model = [BTTXimaTotalModel yy_modelWithDictionary:result.data[@"other"]];
-//                        self.otherModel = model;
-//                        self.otherListType = BTTXimaOtherListTypeData;
-//                    }
-//                }
-//                if (result.data[@"valid"] && [result.data[@"valid"] isKindOfClass:[NSDictionary class]]) {
-//                    if (result.data[@"valid"][@"list"] && [result.data[@"valid"][@"list"] isKindOfClass:[NSArray class]]) {
-//                        BTTXimaTotalModel *model = [BTTXimaTotalModel yy_modelWithDictionary:result.data[@"valid"]];
-//                        for (BTTXimaItemModel *itemModel in model.list) {
-//                            itemModel.isSelect = YES;
-//                        }
-//                        self.validModel = model;
-//                        self.currentListType = BTTXimaCurrentListTypeData;
-//                    }
-//                }
-//            }
-//        }
-//        [self setupElements];
-//    }];
-}
 
-- (void)loadGameshallList:(dispatch_group_t)group {
-    //TODO:
-//    NSMutableArray *xms = [NSMutableArray array];
-//    [BTTHttpManager fetchGamePlatformsWithCompletion:^(IVRequestResultModel *result, id response) {
-//        if (result.status) {
-//            if (result.data && [result.data isKindOfClass:[NSDictionary class]] && ![result.data isKindOfClass:[NSNull class]]) {
-//                if (result.data[@"xm"] && [result.data[@"xm"] isKindOfClass:[NSArray class]] && ![result.data[@"xm"] isKindOfClass:[NSNull class]]) {
-//                    for (NSDictionary *dict in result.data[@"xm"]) {
-//                        BTTXimaModel *model = [BTTXimaModel yy_modelWithDictionary:dict];
-//                        [xms addObject:model];
-//                    }
-//                    self.xms = xms.mutableCopy;
-//                }
-//            }
-//        }
-//        dispatch_group_leave(group);
-//        if (result.message.length) {
-//            [MBProgressHUD showError:result.message toView:nil];
-//        }
-//    }];
-}
 
-- (void)loadHistoryData:(NSString *)ximaType {
+- (void)loadHistoryData {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:ximaType forKey:@"xm_type"];
-    [params setObject:@(0) forKey:@"delete_flag"];
-    [params setObject:@(2) forKey:@"flag"];
+    [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
     NSString *dateStr = [PublicMethod getLastWeekTime];
     NSString *startStr = [dateStr componentsSeparatedByString:@"||"][0];
     NSString *endStr = [dateStr componentsSeparatedByString:@"||"][1];
-    [params setObject:startStr forKey:@"end_date_begin"];
-    [params setObject:endStr forKey:@"end_date_end"];
-    [params setObject:startStr forKey:@"start_date_begin"];
-    [params setObject:endStr forKey:@"start_date_end"];
-    [params setObject:@(2000) forKey:@"pageSize"];
+    [params setValue:startStr forKey:@"beginDate"];
+    [params setValue:endStr forKey:@"endDate"];
+    [params setValue:@[@0,@2] forKey:@"flags"];
+    [params setValue:@1 forKey:@"inclSumAmount"];
+    [params setValue:@1 forKey:@"pageNo"];
+    [params setValue:@100 forKey:@"pageSize"];
+    [params setValue:@1 forKey:@"inclDeleted"];
     
-    //TODO:
-//    [IVNetwork sendRequestWithSubURL:BTTXmHistoryList paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-//        NSLog(@"%@",response);
-//        self.historyListType = BTTXimaHistoryListTypeNoData;
-//        if (result.status) {
-//            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-//                BTTXimaTotalModel *model = [BTTXimaTotalModel yy_modelWithDictionary:result.data];
-//                self.histroyModel = model;
-//                if (model.list.count > 0) {
-//                    self.historyListType = BTTXimaHistoryListTypeData;
-//                }
-//            }
-//        }
-//    }];
+    [IVNetwork requestPostWithUrl:BTTXimaQueryRequest paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        self.historyListType = BTTXimaHistoryListTypeNoData;
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if ([result.body isKindOfClass:[NSDictionary class]]) {
+                self.historyArray = result.body[@"data"];
+                if (self.historyArray.count>0) {
+                    self.historyListType = BTTXimaHistoryListTypeData;
+                }
+            }
+        }
+    }];
 }
 
 
 - (void)loadXimaBillOut {
 //    [self showLoading];
-    NSString *xm_list = @"";
-    for (BTTXimaItemModel *itemModel in self.validModel.list) {
-        if (xm_list.length) {
-            if (itemModel.isSelect) {
-                 xm_list = [NSString stringWithFormat:@"%@;%@",xm_list,itemModel.xm_type];
-            }
-        } else {
-            if (itemModel.isSelect) {
-                xm_list = itemModel.xm_type;
-            }
-        }
-    }
-    if (!xm_list.length) {
-        [MBProgressHUD showError:@"请先选择结算的游戏" toView:nil];
-        return;
-    }
-    NSDictionary *params = @{@"xm_list":xm_list};
-    NSMutableArray *xmResults = [NSMutableArray array];
+//    NSString *xm_list = @"";
+//    for (BTTXimaItemModel *itemModel in self.validModel.xmList) {
+//        if (xm_list.length) {
+//            if (itemModel.isSelect) {
+//                 xm_list = [NSString stringWithFormat:@"%@;%@",xm_list,itemModel.xm_type];
+//            }
+//        } else {
+//            if (itemModel.isSelect) {
+//                xm_list = itemModel.xm_type;
+//            }
+//        }
+//    }
+//    if (!xm_list.length) {
+//        [MBProgressHUD showError:@"请先选择结算的游戏" toView:nil];
+//        return;
+//    }
+//    NSDictionary *params = @{@"xm_list":xm_list};
+//    NSMutableArray *xmResults = [NSMutableArray array];
     //TODO:
 //    [IVNetwork sendRequestWithSubURL:BTTXimaBillOut paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
 //        NSLog(@"%@",response);

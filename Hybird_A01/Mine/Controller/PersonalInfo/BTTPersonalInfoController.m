@@ -67,7 +67,7 @@
             cell.textField.text = selectValue;
         }];
     } else if (indexPath.item == 3) {
-        if (([IVNetwork userInfo].starLevel == 5 || [IVNetwork userInfo].starLevel == 6) && [IVNetwork userInfo].birthday.length) {
+        if (([IVNetwork savedUserInfo].starLevel == 5 || [IVNetwork savedUserInfo].starLevel == 6) && [IVNetwork savedUserInfo].birthday.length) {
             return;
         }
         BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
@@ -143,23 +143,9 @@
     UITextField *remarkTF = [self getCellTextFieldWithIndex:6];
     
     NSMutableDictionary *params = @{}.mutableCopy;
-    if ([IVNetwork userInfo].verify_code.length == 0) {
-        if (![PublicMethod isValidateLeaveMessage:retentionTF.text]) {
-            [MBProgressHUD showError:@"输入的预留信息格式有误！" toView:self.view];
-            return;
-        } else {
-            params[@"verify_code"] = retentionTF.text;
-        }
-    }
-    if ([IVNetwork userInfo].real_name.length == 0) {
-        if (![PublicMethod checkRealName:realNameTF.text]) {
-            [MBProgressHUD showError:@"输入的真实姓名格式有误！" toView:self.view];
-            return;
-        } else {
-            params[@"real_name"] = realNameTF.text;
-        }
-    }
-    if ([IVNetwork userInfo].email.length == 0) {
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    
+    if ([IVNetwork savedUserInfo].email.length == 0) {
         if (emailTF.text.length !=0 && ![PublicMethod isValidateEmail:emailTF.text]) {
             [MBProgressHUD showError:@"输入的邮箱地址格式有误！" toView:self.view];
             return;
@@ -167,32 +153,32 @@
         params[@"email"] = emailTF.text;
     }
     if (sexTF.text.length != 0 ) {
-        params[@"sex"] = [sexTF.text isEqualToString:@"男"] ? @"M" : @"F";
+        params[@"gender"] = [sexTF.text isEqualToString:@"男"] ? @"M" : @"F";
     }
     if (birthdayTF.text.length != 0) {
-        NSString *birthdayStr = [birthdayTF.text stringByAppendingString:@" 00:00:00"];
+        NSString *birthdayStr = birthdayTF.text;
         BOOL isAdult = [PublicMethod isAdultWithBirthday:birthdayStr];
         if (!isAdult) {
             [MBProgressHUD showError:@"您的年龄未满十八岁" toView:self.view];
             return;
         }
-        params[@"birth_date"] = birthdayStr;
+        params[@"birth"] = birthdayStr;
     }
     params[@"address"] = addressTF.text ? addressTF.text : @"";
-    params[@"remarks"] = remarkTF.text ? remarkTF.text : @"";
+    params[@"remark"] = remarkTF.text ? remarkTF.text : @"";
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    //TODO:
-//    [IVNetwork sendRequestWithSubURL:@"public/users/completeInfo" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
-//        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-//        if (result.status) {
-//            [MBProgressHUD showSuccess:@"完善资料成功!" toView:nil];
-//            [IVNetwork updateUserInfo:result.data];
-//            [weakSelf.navigationController popViewControllerAnimated:YES];
-//        }else{
-//            [MBProgressHUD showError:result.message toView:weakSelf.view];
-//        }
-//    }];
+    [IVNetwork requestPostWithUrl:BTTModifyCustomerInfo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [MBProgressHUD showSuccess:@"完善资料成功!" toView:nil];
+            [BTTHttpManager fetchUserInfoCompleteBlock:nil];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
+        }
+    }];
 }
 - (UITextField *)getCellTextFieldWithIndex:(NSInteger)index
 {

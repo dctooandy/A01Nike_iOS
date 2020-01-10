@@ -61,7 +61,7 @@
     } else {
         if (indexPath.row == self.elementsHight.count - 1) {
             cell.ximaRecordCellType = BTTXimaRecordCellTypeLast;
-            cell.amountLabel.text = self.model.amount;
+            cell.amountLabel.text = self.model.total;
         }  else {
             if (indexPath.row % 2 == 0) {
                 cell.ximaRecordCellType = BTTXimaRecordCellTypeFirst;

@@ -665,6 +665,7 @@
 		D326400823ACCC6E00E16AFD /* BTTUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D326400723ACCC6E00E16AFD /* BTTUserInfoModel.m */; };
 		D326400B23ACD28C00E16AFD /* IVNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = D326400A23ACD28C00E16AFD /* IVNetwork.m */; };
 		D326400E23ACE10D00E16AFD /* IVUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D326400D23ACE10D00E16AFD /* IVUserInfoModel.m */; };
+		D357573823C8518F009E8735 /* BTTXiMaQueryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D357573723C8518F009E8735 /* BTTXiMaQueryModel.m */; };
 		D361EAD623C6BA2C00BBA05C /* IVUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = D361EAD523C6BA2C00BBA05C /* IVUtility.m */; };
 		D361EAD923C6EF8800BBA05C /* BTTUsdtWalletModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D361EAD823C6EF8800BBA05C /* BTTUsdtWalletModel.m */; };
 		D3621BF023C415FD00DB210B /* BTTCustomerInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3621BEF23C415FD00DB210B /* BTTCustomerInfoModel.m */; };
@@ -1793,6 +1794,8 @@
 		D326400A23ACD28C00E16AFD /* IVNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IVNetwork.m; sourceTree = "<group>"; };
 		D326400C23ACE10D00E16AFD /* IVUserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVUserInfoModel.h; sourceTree = "<group>"; };
 		D326400D23ACE10D00E16AFD /* IVUserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IVUserInfoModel.m; sourceTree = "<group>"; };
+		D357573623C8518F009E8735 /* BTTXiMaQueryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTXiMaQueryModel.h; sourceTree = "<group>"; };
+		D357573723C8518F009E8735 /* BTTXiMaQueryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTXiMaQueryModel.m; sourceTree = "<group>"; };
 		D361EAD423C6BA2C00BBA05C /* IVUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVUtility.h; sourceTree = "<group>"; };
 		D361EAD523C6BA2C00BBA05C /* IVUtility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IVUtility.m; sourceTree = "<group>"; };
 		D361EAD723C6EF8800BBA05C /* BTTUsdtWalletModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUsdtWalletModel.h; sourceTree = "<group>"; };
@@ -3702,6 +3705,8 @@
 				D3621BF223C484BB00DB210B /* BTTCustomerBalanceModel.m */,
 				D361EAD723C6EF8800BBA05C /* BTTUsdtWalletModel.h */,
 				D361EAD823C6EF8800BBA05C /* BTTUsdtWalletModel.m */,
+				D357573623C8518F009E8735 /* BTTXiMaQueryModel.h */,
+				D357573723C8518F009E8735 /* BTTXiMaQueryModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -5216,6 +5221,7 @@
 				3AE1EADC217F1EBD0073A32D /* BTTNotCompleteInfoController+LoadData.m in Sources */,
 				3A37E11A2164A20100FB13A1 /* BTTVoiceCallViewController.m in Sources */,
 				3AD9CF5B216F1A4400685B43 /* BTTHomePageADCell.m in Sources */,
+				D357573823C8518F009E8735 /* BTTXiMaQueryModel.m in Sources */,
 				3A8D6EA021634306000530DF /* BridgeProtocolExternal.m in Sources */,
 				3A2DAAC322768D350093C122 /* BTTMeHeadernNicknameLoginCell.m in Sources */,
 				3A9E4C1E219D416700E7D8C0 /* BTTForgetPasswordStepTwoController.m in Sources */,

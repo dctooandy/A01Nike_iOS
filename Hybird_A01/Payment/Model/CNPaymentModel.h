@@ -63,4 +63,8 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 
 @property (nonatomic, assign) NSInteger csr;
 
+@property (nonatomic, assign) NSInteger minAmount;
+
+@property (nonatomic, assign) NSInteger maxAmount;
+
 @end

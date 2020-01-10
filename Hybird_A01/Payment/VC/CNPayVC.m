@@ -74,6 +74,7 @@
     self.contentWidth.constant = [UIScreen mainScreen].bounds.size.width;
     [self.payCollectionView registerNib:[UINib nibWithNibName:kChannelCellIndentifier bundle:nil] forCellWithReuseIdentifier:kChannelCellIndentifier];
     [self registerNotification];
+    [self setupChannelView];
 }
 
 - (void)registerNotification {
@@ -123,7 +124,7 @@
         
     [_payments addObjectsFromArray:channelArray];
     /// 界面显示
-    [self setupChannelView];
+//    [self setupChannelView];
 }
 
 
@@ -155,15 +156,7 @@
         }
     }
     self.title = channelModel.paymentName;
-//    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
-//    if ([channelModel.channelName isEqualToString:@"支付宝/微信/QQ/京东"] && savetimes) {
-//        self.title = @"支付宝/微信/QQ/京东WAP";
-//    }else if (channelModel.payChannel == CNPayChannelUSDT){
-//        self.title = @"泰达币-USDT";
-//    } else {
-//        self.title = channelModel.channelName;
-//    }
-//    self.selectedIcon = channelModel.selectedIcon;
+    self.selectedIcon = channelModel.iconName;
     
     /// 存在已经打开的支付渠道
     if (_segmentVC) {
@@ -200,12 +193,7 @@
         cell.titleLb.text = channel.name;
         cell.titleLb.font = [UIFont boldSystemFontOfSize:13];
     }
-    
-    if (channel.paymentType==99){
-        cell.channelIV.image = [UIImage imageNamed:@"me_usdt"];
-    }else{
-//        cell.channelIV.image = [UIImage imageNamed:channel.selectedIcon];
-    }
+    cell.channelIV.image = [UIImage imageNamed:channel.iconName];
     
     // 默认选中第一个可以支付的渠道
     if (indexPath.row == _currentSelectedIndex) {
@@ -215,39 +203,28 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    //TODO:
     if (indexPath.row == _currentSelectedIndex) {
         return;
     }
-//    CNPayChannelModel *channel = [_payChannels objectAtIndex:indexPath.row];
-//    //TODO:
-////    if ([IVHttpManager shareManager].userInfoModel.starLevel == 0 && (![IVNetwork userInfo].verify_code.length || ![IVNetwork userInfo].real_name.length)) {
-//    if ((![IVNetwork userInfo].verify_code.length || ![IVNetwork userInfo].real_name.length)) {
-//        if (channel.payChannel == CNPayChannelBQFast || channel.payChannel == CNPayChannelBQWechat || channel.payChannel == CNPayChannelBQAli || channel.payChannel == CNPayChannelDeposit) {
-//            BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
-//            [self.navigationController pushViewController:personInfo animated:YES];
-//            [collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentSelectedIndex inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-//            [collectionView reloadData];
-//            return;
-//        }
-//    }
-//    [self removeBankView];
-//    self.currentSelectedIndex = indexPath.row;
-//    [self.payCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-//    _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payments.firstObject.payType];
-//    _payChannelVC.payments = channel.payments;
+    BTTMeMainModel *channel = [_payments objectAtIndex:indexPath.row];
+    if ([IVNetwork savedUserInfo].starLevel == 0 && (![IVNetwork savedUserInfo].verifyCode.length || ![IVNetwork savedUserInfo].realName.length)) {
+        if (channel.paymentType == 90 || channel.paymentType == 91 || channel.paymentType == 92 || channel.paymentType == 0) {
+            BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
+            [self.navigationController pushViewController:personInfo animated:YES];
+            [collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentSelectedIndex inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+            [collectionView reloadData];
+            return;
+        }
+    }
+    [self removeBankView];
+    self.currentSelectedIndex = indexPath.row;
+    [self.payCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payModel.payType];
+    _payChannelVC.payments = @[channel.payModel];
 //    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
-//    if ([channel.channelName isEqualToString:@"微信/QQ/京东WAP"] && savetimes) {
-//        self.title = @"支付宝/微信/QQ/京东WAP";
-//    } else {
-//        if (channel.payChannel==CNPayChannelUSDT) {
-//            self.title = @"泰达币-USDT";
-//        }else{
-//            self.title = channel.channelName;
-//        }
-//    }
-//    self.selectedIcon = channel.selectedIcon;
-//    [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];
+    self.title = channel.paymentName;
+    self.selectedIcon = channel.iconName;
+    [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];
     
 }
 
