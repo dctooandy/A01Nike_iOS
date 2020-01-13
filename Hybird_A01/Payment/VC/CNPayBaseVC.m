@@ -133,17 +133,17 @@
 /**
  充值成功回调处理USDT
  */
-- (void)paySucessUSDTHandler:(IVRequestResultModel *)model repay:(dispatch_block_t)repayBlock {
+- (void)paySucessUSDTHandler:(IVJResponseObject *)model repay:(dispatch_block_t)repayBlock {
     
     // 数据容灾
-    if (![model.data isKindOfClass:[NSDictionary class]]) {
+    if (![model.body isKindOfClass:[NSDictionary class]]) {
         // 后台返回类型不一，全部转成字符串
-        [self showError:[NSString stringWithFormat:@"%@", model.message]];
+        [self showError:[NSString stringWithFormat:@"%@", model.head.errMsg]];
         return;
     }
 
     NSError *error;
-    CNPayOrderModel *orderModel = [[CNPayOrderModel alloc] initWithDictionary:model.data error:&error];
+    CNPayOrderModel *orderModel = [[CNPayOrderModel alloc] initWithDictionary:model.body error:&error];
     if (error && !orderModel) {
         [self showError:@"操作失败！请联系客户，或者稍后重试!"];
         return;

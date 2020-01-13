@@ -55,6 +55,21 @@
     [self setViewHeight:800 fullScreen:NO];
 }
 
+- (void)queryOnlineBanks{
+    [self showLoading];
+    NSDictionary *params = @{
+        @"payType":@(self.paymentModel.payType),
+        @"loginName":[IVNetwork savedUserInfo].loginName
+    };
+    [IVNetwork requestPostWithUrl:BTTQueryOnlineBanks paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            <#statements#>
+        }
+    }];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (!_setSelect) {
@@ -75,17 +90,17 @@
     CGFloat itemHeight = itemWidth * 56 / 160.0;
     CGFloat totalHeight = ((count - 1)/2 + 1) * (itemHeight + 15);
     //TODO:
-//    if (self.paymentModel.paymentType == CNPaymentWechatQR ||
-//        self.paymentModel.paymentType == CNPaymentAliQR ||
+    if (self.paymentModel.payType == 6 ||
+        self.paymentModel.payType == 5 ||
 //        self.paymentModel.paymentType == CNPaymentQQQR ||
-//        self.paymentModel.paymentType == CNPaymentUnionQR ||
-//        self.paymentModel.paymentType == CNPaymentJDQR) {
-//        self.collectionBgView.hidden = YES;
-//        self.collectionViewHeight.constant = 0;
-//        self.topConstants.constant = -62;
-//    } else {
-//        self.collectionViewHeight.constant = totalHeight;
-//    }
+        //        self.paymentModel.paymentType == CNPaymentJDQR||
+        self.paymentModel.payType == 15) {
+        self.collectionBgView.hidden = YES;
+        self.collectionViewHeight.constant = 0;
+        self.topConstants.constant = -62;
+    } else {
+        self.collectionViewHeight.constant = totalHeight;
+    }
     self.cellSize = CGSizeMake(itemWidth, itemHeight + 10);
     self.apps = @[@"ysfapp",@"mtapp",@"dzapp",@"wphapp",@"ttzgapp",@"mfbapp",@"wzfapp",@"jdapp"];
     self.appCollectionView.delegate = self;

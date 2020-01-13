@@ -22,7 +22,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *amountTF;
 @property (weak, nonatomic) IBOutlet UITextField *chargeTF;
 @property (weak, nonatomic) IBOutlet UITextField *remarkTF;
-
+@property (nonatomic, strong) NSArray *amountList;
+@property (nonatomic, assign) double maxAmount;
+@property (nonatomic, assign) double minAmount;
 @end
 
 @implementation CNPayDepositStep3VC
@@ -30,11 +32,33 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configPreSettingMessage];
+    [self queryAmountList];
+}
+
+- (void)queryAmountList{
+    [self showLoading];
+    weakSelf(weakSelf)
+    NSDictionary *params = @{@"payType":@(self.paymentModel.payType),@"loginName":[IVNetwork savedUserInfo].loginName};
+    [IVNetwork requestPostWithUrl:BTTQueryAmountList paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body[@"amounts"]!=nil) {
+                self.amountList = result.body[@"amounts"];
+                NSString *maxAmount = result.body[@"maxAmount"];
+                NSString *minAmount = result.body[@"minAmount"];
+                weakSelf.maxAmount = [maxAmount doubleValue];
+                weakSelf.minAmount = [minAmount doubleValue];
+                [self configAmountList];
+                [self configUI];
+            }
+        }
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self configUI];
+    
     [self addBankView];
     [self setViewHeight:550 fullScreen:NO];
     [self configAmountList];
@@ -54,34 +78,31 @@
 - (void)configUI {
     self.preSettingMessageLb.text = self.preSaveMsg;
     self.depositByLb.text = self.writeModel.depositBy;
-    CNPaymentModel *model = self.paymentModel;
     // 金额提示语
-    //TODO:
-//    if (model.maxamount > model.minamount) {
-//        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f，最多%.0f", model.minamount, model.maxamount];
-//    } else {
-//        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f", model.minamount];
-//    }
+    if (self.maxAmount > self.minAmount) {
+        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f，最多%.0f", self.minAmount, self.maxAmount];
+    } else {
+        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%.0f", self.minAmount];
+    }
 }
 
 
 - (void)configAmountList {
-//    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
-//    if (!self.paymentModel.amountCanEdit) {
-//        self.amountTF.placeholder = @"仅可选择以下金额";
-//    }
+    self.amountBtn.hidden = self.amountList.count>0;
+    if (self.amountList.count>0) {
+        self.amountTF.placeholder = @"仅可选择以下金额";
+    }
 }
 
 
 
 - (IBAction)selectPayType:(id)sender {
     [self.view endEditing:YES];
-    //TODO:
-//    NSArray *payTypeArr = [self.paymentModel payTypeArray];
-//    weakSelf(weakSelf);
-//    [BRStringPickerView showStringPickerWithTitle:_payTypeTF.placeholder dataSource:payTypeArr defaultSelValue:_payTypeTF.text resultBlock:^(id selectValue, NSInteger index) {
-//        weakSelf.payTypeTF.text = selectValue;
-//    }];
+    NSArray *payTypeArr = @[@"ATM现金存款",@"跨行ATM现金存款",@"柜台转账",@"微信转账",@"网银转账",@"跨行网银转账",@"电话转账",@"手机转账",@"跨行手机转账",@"支付宝转账",@"其他方式"];
+    weakSelf(weakSelf);
+    [BRStringPickerView showStringPickerWithTitle:_payTypeTF.placeholder dataSource:payTypeArr defaultSelValue:_payTypeTF.text resultBlock:^(id selectValue, NSInteger index) {
+        weakSelf.payTypeTF.text = selectValue;
+    }];
 }
 
 // 选择省市
@@ -114,21 +135,22 @@
 }
 
 - (IBAction)selectAmountList:(id)sender {
-//    weakSelf(weakSelf);
-//    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.paymentModel.amountList.count];
-//    for (id obj in self.paymentModel.amountList) {
-//        [array addObject:[NSString stringWithFormat:@"%@", obj]];
-//    }
-//    if (array.count == 0) {
-//        [self showError:@"无可选金额，请直接输入"];
-//        return;
-//    }
-//    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
-//        if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
-//            return;
-//        }
-//        weakSelf.amountTF.text = selectValue;
-//    }];
+    weakSelf(weakSelf);
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.amountList.count];
+    for (id obj in self.amountList) {
+        [array addObject:[NSString stringWithFormat:@"%@", obj]];
+    }
+    if (array.count == 0) {
+        [self showError:@"无可选金额，请直接输入"];
+        self.amountBtn.hidden = YES;
+        return;
+    }
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
+        if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
+            return;
+        }
+        weakSelf.amountTF.text = selectValue;
+    }];
 }
 
 - (IBAction)submitAction:(UIButton *)sender {
@@ -160,32 +182,45 @@
     }
     
     /// 超出额度范围
-    //TODO:
-//    NSNumber *amount = [NSString convertNumber:text];
-//    double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;
-//    if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) {
-//        _amountTF.text = nil;
-//        [self showError:_amountTF.placeholder];
-//        return;
-//    }
+    NSNumber *amount = [NSString convertNumber:text];
+    double maxAmount = self.maxAmount > self.minAmount ? self.maxAmount : CGFLOAT_MAX;
+    if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.minAmount) {
+        _amountTF.text = nil;
+        [self showError:_amountTF.placeholder];
+        return;
+    }
     
     if (sender.selected) {
         return;
     }
     sender.selected = YES;
     
-    self.writeModel.depositType = self.payTypeTF.text;
-    self.writeModel.provience = self.provinceTF.text;
-    self.writeModel.city = self.cityTF.text;
-    self.writeModel.date = [NSString stringWithFormat:@"%@:00", _dateTF.text];
-    self.writeModel.amount = self.amountTF.text;
-    self.writeModel.charge = self.chargeTF.text;
-    //TODO:
-//    self.writeModel.remarks = self.remarkTF.text;
-//    self.writeModel.payId = self.paymentModel.payid;
-    /// 提交请求
-    __weak typeof(self) weakSelf = self;
-    [CNPayRequestManager paymentCreateManualWithWriteInfo:self.writeModel completeHandler:^(IVJResponseObject *result, id response) {
+    [self showLoading];
+    NSString *remarkStr = @"";
+    if ([self.chargeTF.text isEqualToString:@""]) {
+        remarkStr = self.remarkTF.text;
+    }else{
+        if (self.remarkTF.text.length==0) {
+            remarkStr = [NSString stringWithFormat:@"手续费:%@",self.chargeTF.text];
+        }else{
+            remarkStr = [NSString stringWithFormat:@"手续费:%@|%@",self.chargeTF.text,self.remarkTF.text];
+        }
+    }
+    weakSelf(weakSelf)
+    NSDictionary *params = @{
+        @"accountId" : self.writeModel.chooseBank.accountId,
+        @"depositor" : self.writeModel.depositBy,
+        @"depositDate" : [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"],
+        @"depositType" : self.payTypeTF.text,
+        @"depositLocation" : [NSString stringWithFormat:@"%@,%@",self.provinceTF.text,self.cityTF.text],
+        @"amount" : self.amountTF.text,
+        @"remark" : remarkStr,
+        @"depositorType" : @(self.paymentModel.payType),
+        @"loginName" : [IVNetwork savedUserInfo].loginName
+    };
+    [IVNetwork requestPostWithUrl:BTTManualPay paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        IVJResponseObject *result = response;
         sender.selected = NO;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [weakSelf paySucessHandler:result.body];
@@ -204,7 +239,7 @@
         [self showError:@"操作失败！请联系客户，或者稍后重试!"];
         return;
     }
-    CNPayDepositSuccessVC *successVC = [[CNPayDepositSuccessVC alloc] initWithAmount:orderModel.amount];
+    CNPayDepositSuccessVC *successVC = [[CNPayDepositSuccessVC alloc] initWithAmount:self.amountTF.text];
     [self pushViewController:successVC];
 }
 @end

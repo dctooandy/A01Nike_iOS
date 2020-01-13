@@ -118,6 +118,7 @@
         }
         NSMutableArray *payments = [NSMutableArray array];
         BOOL haveUSDT = NO;
+        CNPaymentModel *usdtModel = [[CNPaymentModel alloc]init];
         
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if ([result.body[@"payTypeList"] isKindOfClass:[NSArray class]]) {
@@ -140,6 +141,7 @@
                     }
                     if ([model.payTypeName isEqualToString:@"USDT支付"]) {
                         haveUSDT = YES;
+                        usdtModel = model;
                     }
                     if ([model.payTypeName isEqualToString:@"京东扫码"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
@@ -227,6 +229,7 @@
                         mainModel.name = @"手工存款";
                         mainModel.iconName = @"me_hand";
                         mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
                         [self.normalDataSoure addObject:mainModel];
                     }
                     if ([model.payTypeName isEqualToString:@"在线支付"]) {
@@ -314,6 +317,9 @@
                     mainModel.name = @"泰达币-USDT";
                     mainModel.iconName = @"me_usdt";
                     mainModel.paymentType = 99;
+                    if (usdtModel!=nil) {
+                        mainModel.payModel = usdtModel;
+                    }
                     [self.bigDataSoure addObject:mainModel];
                 }
                 

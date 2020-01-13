@@ -340,6 +340,18 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTXimaQueryRequest                @"xm/queryRequest"
 // 查询洗码历史记录
 #define BTTXiMaHistoryListUrl        @"_extra_/api/v1/getBetAmountByDay"
+// 查询BQ存款银行
+#define BTTQueryBQBankList        @"deposit/queryBQBanks"
+// 查询USDT汇率
+#define BTTCurrencyExchanged         @"deposit/currencyExchange"
+// USDT手工支付存款
+#define BTTManualPay                 @"deposit/createManualDepositRequest"
+// 查询在线支付银行列表
+#define BTTQueryOnlineBanks          @"deposit/queryOnlineBanks"
+// 创建在线支付订单
+#define BTTCreateOnlineOrder          @"deposit/createOnlineOrder"
+// 查询人工存款账号
+#define BTTQueryManualAccount         @"deposit/queryManualDepositAccount"
 
 #define BTTCreditsGame               @"/public/credits/game"
 #define BTTCreditsTotalAvailable     @"/public/credits/totalAvailable"

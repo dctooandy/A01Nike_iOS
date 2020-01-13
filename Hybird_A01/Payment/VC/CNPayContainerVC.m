@@ -107,27 +107,28 @@
         }
             break;
 
-        case CNPaymentDeposit: {
+        case 0: {
             [viewControllers addObjectsFromArray:[self depositPay:payment]];
         }
             break;
 
-        case CNPaymentCoin:
+//        case CNPaymentCoin:
         case CNPaymentWechatBarCode:
         case CNPaymentBTC:
         case CNPaymentUnionApp:
-        case CNPaymentOnline: {
+//        case CNPaymentOnline:
+        {
             [viewControllers addObjectsFromArray:[self onlinePay:payment]];
         }
             break;
-        case CNPaymentJDQR:
-        case CNPaymentAliQR:
-        case CNPaymentWechatQR:
-        case CNPaymentUnionQR:
-        case CNPaymentYSFQR:
-        case CNPaymentQQApp:
-        case CNPaymentJDApp:
-        case CNPaymentWechatApp:
+//        case CNPaymentJDQR:
+        case 5:
+        case 6:
+        case 15:
+//        case CNPaymentYSFQR:
+//        case CNPaymentQQApp:
+//        case CNPaymentJDApp:
+//        case CNPaymentWechatApp:
         case CNPaymentQQQR: {
             [viewControllers addObjectsFromArray:[self QRPay:payment]];
         }
@@ -150,14 +151,13 @@
             [viewControllers addObjectsFromArray:[self BQPay:payment]];
         }
             break;
-            //TODO:
-//        case CNPaymentUSDT:{
-//            CNPayUSDTStep1VC *vc1 = [[CNPayUSDTStep1VC alloc]init];
-//            vc1.payments = self.payments;
-//            CNPayUSDTQRSecondVC *vc2 = [[CNPayUSDTQRSecondVC alloc]init];
-//            [viewControllers addObjectsFromArray:@[vc1,vc2]];
-//        }
-//            break;
+        case 99:{
+            CNPayUSDTStep1VC *vc1 = [[CNPayUSDTStep1VC alloc]init];
+            vc1.payments = self.payments;
+            CNPayUSDTQRSecondVC *vc2 = [[CNPayUSDTQRSecondVC alloc]init];
+            [viewControllers addObjectsFromArray:@[vc1,vc2]];
+        }
+            break;
     }
     
     
@@ -201,7 +201,7 @@
 
 /// QR支付
 - (NSArray<CNPayBaseVC *> *)QRPay:(CNPaymentModel *)payment {
-    BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
+//    BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
 //    if (payment.paymentType == CNPaymentWechatApp ||
 //        payment.paymentType == CNPaymentJDApp ||
 //        payment.paymentType == CNPaymentQQApp || (payment.paymentType == CNPaymentAliApp && timeMoreTen)) {

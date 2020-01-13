@@ -30,7 +30,7 @@
 
 - (void)configCardValue {
     CNPayOrderModel *order = self.writeModel.orderModel;
-    _billNoLb.text = order.billno;
+    _billNoLb.text = order.billNo;
     _cardTypeLb.text = self.writeModel.cardModel.name;
     CGFloat amount = [order.amount floatValue];
     CGFloat charge = amount * self.writeModel.cardModel.value / 100.0;

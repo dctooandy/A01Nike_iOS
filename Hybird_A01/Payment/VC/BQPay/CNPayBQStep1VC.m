@@ -29,24 +29,33 @@
 
 @property (weak, nonatomic) IBOutlet UIView *bottomTipView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTipViewHeight;
+@property (weak, nonatomic) IBOutlet UIView *bankView;
+@property (weak, nonatomic) IBOutlet UIView *topView;
 
 @property (nonatomic, strong) BTTBishangStep1VC *BSStep1VC;
 
 @property (nonatomic, strong) CNPayBankCardModel *chooseBank;
 @property (nonatomic, copy) NSArray *bankNames;
 @property (nonatomic, strong) NSArray *amountList;
+@property (nonatomic, strong) NSArray *bankList;
+@property (nonatomic, assign) BOOL haveBankData;
 @end
 
 @implementation CNPayBQStep1VC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _haveBankData = NO;
     [self configPreSettingMessage];
     [self configDifferentUI];
     [self queryAmountList];
     // 初始化数据
     [self updateAllContentWithModel:self.paymentModel];
     [self setViewHeight:450 fullScreen:NO];
+    self.bankView.hidden = YES;
+    [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(150);
+    }];
     if (self.paymentModel.payType == 100) {
         [self configBishangUI];
         [self setViewHeight:400 fullScreen:NO];
@@ -93,6 +102,9 @@
                 self.amountList = result.body[@"amounts"];
                 [self configAmountList];
             }
+        }else{
+            self.amountBtn.hidden = YES;
+            self.amountTF.text = @"";
         }
     }];
 }
@@ -136,28 +148,30 @@
 
 
 - (IBAction)selectAmountList:(id)sender {
-        weakSelf(weakSelf);
-        NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.amountList.count];
-        for (id obj in self.amountList) {
-            [array addObject:[NSString stringWithFormat:@"%@", obj]];
-        }
-        if (array.count == 0) {
-            [self showError:@"无可选金额，请直接输入"];
-            return;
-        }
-    [array addObject:@"其他金额请手动输入"];
-        [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
-            if (index==array.count-1) {
-                if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
-                    return;
-                }
-                weakSelf.amountTF.text = selectValue;
-            }else{
-                self.amountTF.hidden = YES;
-                self.amountTF.text = @"";
+    weakSelf(weakSelf);
+    [self.view endEditing:YES];
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:self.amountList.count];
+    for (id obj in self.amountList) {
+        [array addObject:[[NSString stringWithFormat:@"%@", obj] mutableCopy]];
+    }
+    if (array.count == 0) {
+        [self showError:@"无可选金额，请直接输入"];
+        return;
+    }
+    NSString *addTip = @"其他金额请手动输入";
+    [array addObject:[addTip mutableCopy]];
+    [BRStringPickerView showStringPickerWithTitle:@"选择充值金额" dataSource:array defaultSelValue:self.amountTF.text resultBlock:^(id selectValue, NSInteger index) {
+        if (index!=array.count-1) {
+            if ([weakSelf.amountTF.text isEqualToString:selectValue]) {
+                return;
             }
-            
-        }];
+            weakSelf.amountTF.text = selectValue;
+        }else{
+            self.amountBtn.hidden = YES;
+            self.amountTF.text = @"";
+        }
+        
+    }];
 
 }
 
@@ -177,78 +191,80 @@
 - (void)BQGetBank {
     [self showLoading];
     __weak typeof(self) weakSelf = self;
-    // 获取银行卡列表
-    NSInteger bqPaymentType = 0;
-//    if (self.paymentModel.paymentType == CNPaymentBQAli) {
-//        bqPaymentType = 2;
-//    } else if (self.paymentModel.paymentType == CNPaymentBQWechat) {
-//        bqPaymentType = 1;
-//    }
-    [CNPayRequestManager paymentGetBankListWithType:NO depositor:self.nameTF.text referenceId:nil BQPayType:bqPaymentType completeHandler:^(id  _Nullable response, NSError * _Nullable error) {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    params[@"depositor"] = self.nameTF.text;
+    params[@"payType"] = @(self.paymentModel.payType);
+    [IVNetwork requestPostWithUrl:BTTQueryBQBankList paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [weakSelf hideLoading];
-#warning 调试接口
-//        if (result.status) {
-//            /// 数据解析
-//            NSArray *array = result.data[@"bankList"];
-//            NSArray *bankList = [CNPayBankCardModel arrayOfModelsFromDictionaries:array error:nil];
-//            if (bankList.count == 0) {
-//                [self showError:result.message];
-//                return;
-//            }
-//            weakSelf.paymentModel.bankList = bankList.copy;
-//            NSMutableArray *bankNames = [NSMutableArray array];
-//            for (CNPayBankCardModel *model in bankList) {
-//                [bankNames addObject:model.bankname];
-//            }
-//            weakSelf.bankNames = [bankNames copy];
-//            [weakSelf selectBank];
-//            return;
-//        }
-//        [weakSelf showError:result.message];
+        IVJResponseObject *result =response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            self.bankView.hidden = NO;
+            NSArray *array = result.body[@"bankList"];
+            self.bankList = array;
+            if (array.count == 0) {
+                [self showError:@"暂无银行数据"];
+                return;
+            }
+            NSMutableArray *bankNames = [NSMutableArray array];
+            for (NSDictionary *json in array) {
+                CNPayBankCardModel *model = [CNPayBankCardModel yy_modelWithJSON:json];
+                [bankNames addObject:model.bankName];
+            }
+            weakSelf.bankNames = [bankNames copy];
+            [weakSelf selectBank];
+            return;
+        }else{
+            [weakSelf showError:result.head.errMsg];
+        }
     }];
 }
 
 - (void)selectBank {
     weakSelf(weakSelf);
-//    [BRStringPickerView showStringPickerWithTitle:_bankTF.placeholder dataSource:self.bankNames defaultSelValue:self.bankTF.text resultBlock:^(id selectValue, NSInteger index) {
-//        if ([weakSelf.bankTF.text isEqualToString:selectValue]) {
-//            return;
-//        }
-//        weakSelf.bankTF.text = selectValue;
-//        weakSelf.chooseBank = weakSelf.paymentModel.bankList[index];
-//    }];
+    [BRStringPickerView showStringPickerWithTitle:_bankTF.placeholder dataSource:self.bankNames defaultSelValue:self.bankTF.text resultBlock:^(id selectValue, NSInteger index) {
+        if ([weakSelf.bankTF.text isEqualToString:selectValue]) {
+            return;
+        }
+        weakSelf.bankTF.text = selectValue;
+        weakSelf.chooseBank = [CNPayBankCardModel yy_modelWithJSON:weakSelf.bankList[index]];
+    }];
 }
 
 - (IBAction)submitAction:(UIButton *)sender {
     [self.view endEditing:YES];
-    
     NSString *text = _amountTF.text;
-    
     /// 输入为不合法数字
     if (![NSString isPureInt:text] && ![NSString isPureFloat:text]) {
         _amountTF.text = nil;
         [self showError:@"请输入充值金额"];
         return;
     }
-    
     /// 超出额度范围
-//    NSNumber *amount = [NSString convertNumber:text];
-//    double maxAmount = self.paymentModel.maxamount > self.paymentModel.minamount ? self.paymentModel.maxamount : CGFLOAT_MAX;
-//    if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minamount) {
-//        _amountTF.text = nil;
-//        [self showError:[NSString stringWithFormat:@"存款金额必须是%.f~%.f之间，最大允许2位小数", self.paymentModel.minamount, maxAmount]];
-//        return;
-//    }
-//
-//    if (self.nameTF.text.length == 0) {
-//        [self showError:@"请输入存款人姓名"];
-//        return;
-//    }
-//
-//    if (self.bankTF.text.length == 0) {
-//        [self showError:self.bankTF.placeholder];
-//        return;
-//    }
+    NSNumber *amount = [NSString convertNumber:text];
+    double maxAmount = self.paymentModel.maxAmount > self.paymentModel.minAmount ? self.paymentModel.maxAmount : CGFLOAT_MAX;
+    if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minAmount) {
+        _amountTF.text = nil;
+        [self showError:[NSString stringWithFormat:@"存款金额必须是%ld~%.f之间，最大允许2位小数", (long)self.paymentModel.minAmount, maxAmount]];
+        return;
+    }
+
+    if (self.nameTF.text.length == 0) {
+        [self showError:@"请输入存款人姓名"];
+        return;
+    }
+    if (!_haveBankData) {
+        [self BQGetBank];
+    }else{
+        if (self.bankTF.text.length == 0) {
+            [self showError:self.bankTF.placeholder];
+            return;
+        }
+    }
+    
+    
+
+    
 //
 //    self.writeModel.depositBy = self.nameTF.text;
 //    self.writeModel.amount = self.amountTF.text;
@@ -267,34 +283,21 @@
     __weak typeof(self) weakSelf = self;
     __weak typeof(sender) weakSender = sender;
     //TODO:这个地方的判断条件需要改一下
-    [CNPayRequestManager paymentSubmitBill:self.writeModel completeHandler:^(IVJResponseObject *result, id response) {
-        sender.selected = NO;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            CNPayBankCardModel *model = [[CNPayBankCardModel alloc] initWithDictionary:result.body error:nil];
-            if (!model) {
-                weakSender.enabled = NO;
-                [weakSelf showError:@"系统错误，请联系客服"];
-                return;
-            }
-            weakSelf.writeModel.chooseBank = model;
-            [weakSelf goToStep:1];
-        } else {
-            [weakSelf showError:result.head.errMsg];
-        }
-    }];
-}
-
-- (CNPayBQType)getBQType {
-//    switch (self.paymentModel.paymentType) {
-//        case CNPaymentBQAli:
-//            return CNPayBQTypeAli;
-//        case CNPaymentBQFast:
-//            return CNPayBQTypeBankUnion;
-//        case CNPaymentBQWechat:
-//            return CNPayBQTypeWechat;
-//        default:
-            return 0;
-//    }
+//    [CNPayRequestManager paymentSubmitBill:self.writeModel completeHandler:^(IVJResponseObject *result, id response) {
+//        sender.selected = NO;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            CNPayBankCardModel *model = [[CNPayBankCardModel alloc] initWithDictionary:result.body error:nil];
+//            if (!model) {
+//                weakSender.enabled = NO;
+//                [weakSelf showError:@"系统错误，请联系客服"];
+//                return;
+//            }
+//            weakSelf.writeModel.chooseBank = model;
+//            [weakSelf goToStep:1];
+//        } else {
+//            [weakSelf showError:result.head.errMsg];
+//        }
+//    }];
 }
 
 @end

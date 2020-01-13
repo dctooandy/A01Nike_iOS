@@ -31,7 +31,7 @@
 - (void)configUI {
     CNPayOrderModel *order = self.writeModel.orderModel;
     _amountLb.text = [NSString stringWithFormat:@"￥%@", order.amount];
-    _billNoLb.text = order.billno;
+    _billNoLb.text = order.billNo;
     _titleLb.text = [NSString stringWithFormat:@"%@确认支付订单", self.writeModel.depositType];
 }
 

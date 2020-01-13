@@ -22,11 +22,11 @@
         }
         
         NSError *error;
-        CNPayUSDTRateModel *rateModel = [[CNPayUSDTRateModel alloc] initWithDictionary:result.data error:&error];
+        CNPayUSDTRateModel *rateModel = [CNPayUSDTRateModel yy_modelWithJSON:result.data];
         if (error && !rateModel) {
             return;
         }
-        self.usdtRate = [rateModel.tamount floatValue];
+        self.usdtRate = [rateModel.tgtAmount floatValue];
         [self.collectionView reloadData];
     }];
 }

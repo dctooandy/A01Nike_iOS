@@ -220,7 +220,7 @@
     self.currentSelectedIndex = indexPath.row;
     [self.payCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payModel.payType];
-    _payChannelVC.payments = @[channel.payModel];
+        _payChannelVC.payments = @[channel.payModel];
 //    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
     self.title = channel.paymentName;
     self.selectedIcon = channel.iconName;
@@ -277,13 +277,13 @@
 
 // 获取历史存款人姓名
 - (void)getManualDeposit {
-    __weak typeof(self) weakSelf = self;
-    [CNPayRequestManager paymentGetDepositNameWithType:YES CompleteHandler:^(id  _Nullable response, NSError * _Nullable error) {
+//    __weak typeof(self) weakSelf = self;
+//    [CNPayRequestManager paymentGetDepositNameWithType:YES CompleteHandler:^(id  _Nullable response, NSError * _Nullable error) {
 #warning 调试接口
 //        if (result.status) {
 //            [weakSelf configNameView:result.data];
 //        }
-    }];
+//    }];
 
 }
 

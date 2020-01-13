@@ -67,33 +67,25 @@
     sender.selected = YES;
     __weak typeof(self) weakSelf = self;
     __weak typeof(sender) weakSender = sender;
-    // 获取银行卡列表
-    //TODO:
-//    NSInteger bqPaymentType = 0;
-//    if (self.paymentModel.paymentType == CNPaymentBQAli) {
-//        bqPaymentType = 2;
-//    } else if (self.paymentModel.paymentType == CNPaymentBQWechat) {
-//        bqPaymentType = 1;
-//    }
-    //TODO:
-//    [CNPayRequestManager paymentGetBankListWithType:YES depositor:self.nameTF.text referenceId:nil BQPayType:bqPaymentType completeHandler:^(IVRequestResultModel *result, id response) {
-//        weakSender.selected = NO;
-//        if (!result.status) {
-//            [weakSelf showError:result.message];
-//            return;
-//        }
-//        /// 数据解析
-//        NSArray *array = result.data;
-//        NSArray *bankList = [CNPayBankCardModel arrayOfModelsFromDictionaries:array error:nil];
-//        if (bankList.count == 0) {
-//            [self showError:result.message];
-//            return;
-//        }
-//        weakSelf.writeModel.depositBy = weakSelf.nameTF.text;
-//        weakSelf.writeModel.bankList = bankList;
-//        weakSelf.writeModel.chooseBank = bankList.firstObject;
-//        [weakSelf goToStep:1];
-//    }];
+    NSDictionary *params = @{@"type":@1,@"loginname":[IVNetwork savedUserInfo].loginName};
+    [IVNetwork requestPostWithUrl:BTTQueryManualAccount paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        weakSender.selected = NO;
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSArray *array = result.body[@"bankAccounts"];
+            NSArray *bankList = [CNPayBankCardModel arrayOfModelsFromDictionaries:array error:nil];
+            if (bankList.count==0) {
+                [self showError:result.head.errMsg];
+                return;
+            }
+            weakSelf.writeModel.depositBy = weakSelf.nameTF.text;
+            weakSelf.writeModel.bankList = bankList;
+            weakSelf.writeModel.chooseBank = bankList.firstObject;
+            [weakSelf goToStep:1];
+        }else{
+            [weakSelf showError:result.head.errMsg];
+        }
+    }];
 }
 
 @end

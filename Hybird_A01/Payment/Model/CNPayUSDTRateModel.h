@@ -10,11 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CNPayUSDTRateModel : JSONModel
+@interface CNPayUSDTRateModel : BTTBaseModel
+
+@property (nonatomic, copy) NSString *amount;
 
 @property (nonatomic, copy) NSString *rate;
 
-@property (nonatomic, copy) NSString *tamount;
+@property (nonatomic, copy) NSString *srcCurrency;
+
+@property (nonatomic, copy) NSString *tgtAmount;
+
+@property (nonatomic, copy) NSString *tgtCurrency;
 
 @end
 

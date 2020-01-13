@@ -147,28 +147,28 @@ NSInteger const kPayTypeTotalCount = 30;
 //
 //#pragma mark - ========================* Form 表单 *===========================================
 //
-//+ (NSString *)submitPayFormWithOrderModel:(CNPayOrderModel *)model {
-//    
-//    NSString *loginName = [IVNetwork userInfo].loginName;
-//    id PayModel = [model class];
-//    
-//    NSMutableString *htmljs = [[NSMutableString alloc] init];
-//    [htmljs appendFormat:@"%@", [NSString stringWithFormat:@"<form id=\"codePayForm\" name=\"query\" action=\"%@\" method=\"get\" class=\"form\">\n", model.des_url]];
-//    [htmljs appendFormat:@"%@", [NSString stringWithFormat:@"<input type=\"hidden\" name=\"%@\" value=\"%@\">\n", @"loginname", loginName]];
-//    
-//    unsigned int outCount, i;
-//    objc_property_t *properties = class_copyPropertyList(PayModel, &outCount);
-//    for (i = 0; i < outCount; i++) {
-//        objc_property_t property = properties[i];
-//        NSString *propName = [NSString stringWithUTF8String:property_getName(property)];
-//        id value = [model valueForKey:propName];
-//        [htmljs appendFormat:@"%@", [NSString stringWithFormat:@"<input type=\"hidden\" name=\"%@\" value=\"%@\">\n",propName,value]];
-//    }
-//    [htmljs appendFormat:@"%@",[NSString stringWithFormat:@"</form>"]];
-//    [htmljs appendFormat:@"%@",[NSString stringWithFormat:@"<script>document.getElementById(\"codePayForm\").submit();</script>"]];
-//    NSLog(@"\n%@\n", htmljs);
-//    return htmljs;
-//}
++ (NSString *)submitPayFormWithOrderModel:(CNPayOrderModel *)model {
+    
+    NSString *loginName = [IVNetwork savedUserInfo].loginName;
+    id PayModel = [model class];
+    
+    NSMutableString *htmljs = [[NSMutableString alloc] init];
+    [htmljs appendFormat:@"%@", [NSString stringWithFormat:@"<form id=\"codePayForm\" name=\"query\" action=\"%@\" method=\"get\" class=\"form\">\n", model.payUrl]];
+    [htmljs appendFormat:@"%@", [NSString stringWithFormat:@"<input type=\"hidden\" name=\"%@\" value=\"%@\">\n", @"loginname", loginName]];
+    
+    unsigned int outCount, i;
+    objc_property_t *properties = class_copyPropertyList(PayModel, &outCount);
+    for (i = 0; i < outCount; i++) {
+        objc_property_t property = properties[i];
+        NSString *propName = [NSString stringWithUTF8String:property_getName(property)];
+        id value = [model valueForKey:propName];
+        [htmljs appendFormat:@"%@", [NSString stringWithFormat:@"<input type=\"hidden\" name=\"%@\" value=\"%@\">\n",propName,value]];
+    }
+    [htmljs appendFormat:@"%@",[NSString stringWithFormat:@"</form>"]];
+    [htmljs appendFormat:@"%@",[NSString stringWithFormat:@"<script>document.getElementById(\"codePayForm\").submit();</script>"]];
+    NSLog(@"\n%@\n", htmljs);
+    return htmljs;
+}
 //
 //#pragma mark - ========================* 完善个人信息 *===========================================
 //

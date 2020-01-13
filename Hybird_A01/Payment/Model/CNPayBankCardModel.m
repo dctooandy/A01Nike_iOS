@@ -13,8 +13,5 @@
     return YES;
 }
 
-+ (JSONKeyMapper *)keyMapper {
-    return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{@"bankId": @"id"}];
-}
 
 @end

@@ -35,13 +35,13 @@
 
 - (void)configUI {
     CNPayBankCardModel *bankModel = self.writeModel.chooseBank;
-    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.banklogo.cn_appendCDN]];
-    [self.bankBGIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankimage.cn_appendCDN] placeholderImage:[UIImage imageNamed:@"pay_bankBG"]];
-    self.bankNameLb.text = bankModel.bank_name;
-    self.bankAccountLb.text = bankModel.bank_account_no;
-    self.accountNameLb.text = bankModel.bank_show;
-    self.bankAddressLb.text = [NSString stringWithFormat:@"%@ %@ %@", bankModel.province, bankModel.bank_city, bankModel.branch_name];
-    self.bankNameTF.text = bankModel.bank_name;
+    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankIcon.cn_appendCDN]];
+    [self.bankBGIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankIcon.cn_appendCDN] placeholderImage:[UIImage imageNamed:@"pay_bankBG"]];
+    self.bankNameLb.text = bankModel.bankName;
+    self.bankAccountLb.text = bankModel.accountNo;
+    self.accountNameLb.text = bankModel.accountName;
+    self.bankAddressLb.text = [NSString stringWithFormat:@"%@ %@ %@", bankModel.province, bankModel.city, bankModel.bankBranchName];
+    self.bankNameTF.text = bankModel.bankName;
 }
 
 // 选择银行
@@ -51,7 +51,7 @@
     
     NSMutableArray *bankNames = [NSMutableArray arrayWithCapacity:self.writeModel.bankList.count];
     for (CNPayBankCardModel *model in self.writeModel.bankList) {
-        [bankNames addObject:model.bank_name];
+        [bankNames addObject:model.bankName];
     }
     [BRStringPickerView showStringPickerWithTitle:_bankNameTF.placeholder dataSource:bankNames defaultSelValue:_bankNameTF.text resultBlock:^(id selectValue, NSInteger index) {
         if ([weakSelf.bankNameTF.text isEqualToString:selectValue]) {
@@ -74,21 +74,8 @@
     }
     sender.selected = YES;
     __weak typeof(self) weakSelf = self;
-    __weak typeof(sender) weakSender = sender;
-    [CNPayRequestManager paymentQueryBillCompleteHandler:^(IVJResponseObject *result, id response) {
-        weakSender.selected = NO;
-        if (![result.head.errCode isEqualToString:@"0000"]) {
-            [weakSelf showError:result.head.errMsg];
-            return;
-        }
-        NSArray *array = (NSArray *)[result.body objectForKey:@"list"];
-        if ([array isKindOfClass:[NSArray class]] && array.count > 0) {
-            [weakSelf showError:@"您还有未处理的存款提案，请联系客服"];
-            return;
-        }
-        [CNPayDepositTipView showTipViewFinish:^{
-            [weakSelf goToStep:2];
-        }];
+    [CNPayDepositTipView showTipViewFinish:^{
+        [weakSelf goToStep:2];
     }];
 }
 

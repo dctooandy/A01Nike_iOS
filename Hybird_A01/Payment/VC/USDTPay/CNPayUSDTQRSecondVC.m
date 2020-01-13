@@ -50,22 +50,31 @@
 - (void)submitManualPayOrder{
     NSString *text = [[NSUserDefaults standardUserDefaults]objectForKey:@"manual_usdt_note"];
     NSString *account = [[NSUserDefaults standardUserDefaults]objectForKey:@"manual_usdt_account"];
-    text = [text substringWithRange:NSMakeRange(3, text.length-3)];
-    
+    NSString *bankCode = [[NSUserDefaults standardUserDefaults]objectForKey:@"manual_usdt_bankCode"];
     [self showLoading];
     weakSelf(weakSelf);
-    [CNPayRequestManager usdtManualPayHandleWithBankAccountNo:account userAccountNo:_walletAddressInputField.text amount:_saveInputField.text remark:text completeHandler:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",result);
+    NSDictionary *params = @{
+        @"virtualUrl" : _walletAddressInputField.text,
+        @"depositType" : bankCode,
+        @"depositDate" : [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"],
+        @"amount" : _saveInputField.text,
+        @"accountNo" : account,
+        @"retelling" : text,
+        @"loginName" : [IVNetwork savedUserInfo].loginName
+    };
+    [IVNetwork requestPostWithUrl:BTTManualPay paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
-        if (!result.status) {
-            [weakSelf showError:result.message];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [CNPayDepositTipView showTipViewFinish:^{
+            //            [weakSelf goToStep:2];
+                        CNPayDepositSuccessVC *successVC = [[CNPayDepositSuccessVC alloc] initWithAmount:weakSelf.recivedAmountLabel.text];
+                        [weakSelf pushViewController:successVC];
+                    }];
+        }else{
+            [weakSelf showError:result.head.errMsg];
             return;
         }
-        [CNPayDepositTipView showTipViewFinish:^{
-//            [weakSelf goToStep:2];
-            CNPayDepositSuccessVC *successVC = [[CNPayDepositSuccessVC alloc] initWithAmount:weakSelf.recivedAmountLabel.text];
-            [weakSelf pushViewController:successVC];
-        }];
     }];
 }
 
@@ -99,16 +108,16 @@
          }];
     _walletAddressInputField.attributedPlaceholder = addressString;
     
-    _minamount = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"usdt_minamount"]];
-    _maxamount = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults]objectForKey:@"usdt_maxamount"]];
+    _minamount = [[NSUserDefaults standardUserDefaults]objectForKey:@"usdt_minamount"];
+    _maxamount = [[NSUserDefaults standardUserDefaults]objectForKey:@"usdt_maxamount"];
     NSAttributedString *amountString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%@，最高%@",self.minamount,self.maxamount] attributes:
     @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
                  NSFontAttributeName:_saveInputField.font
          }];
     _saveInputField.attributedPlaceholder = amountString;
     
-    NSString *verifyCode = [IVNetwork userInfo].verify_code ? [IVNetwork userInfo].verify_code : @"";
-    NSString *realName = [IVNetwork userInfo].loginName ? [IVNetwork userInfo].loginName : @"";
+    NSString *verifyCode = [IVNetwork savedUserInfo].verifyCode ? [IVNetwork savedUserInfo].verifyCode : @"";
+    NSString *realName = [IVNetwork savedUserInfo].loginName ? [IVNetwork savedUserInfo].loginName : @"";
     
     _infoLabel.text = [NSString stringWithFormat:@"  %@  ",verifyCode];
     _accountNameLabel.text = realName;

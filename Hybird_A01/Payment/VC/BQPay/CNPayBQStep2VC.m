@@ -122,16 +122,16 @@
 - (void)configUI {
     CNPayBankCardModel *bankModel = self.writeModel.chooseBank;
     
-    self.payBankNameLb.text = bankModel.bankname;
-    self.depositLb.text = self.writeModel.depositBy;
-    self.amountLb.text = bankModel.amount;
-    
-    [self.bankBGIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankimage.cn_appendCDN] placeholderImage:[UIImage imageNamed:@"pay_bankBG"]];
-    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.banklogo.cn_appendCDN]];
-    self.bankNameLb.text = bankModel.bankname;
-    self.accountNameLb.text = bankModel.accountname;
-    self.accountLb.text  = bankModel.accountnumber;
-    self.addressLb.text  = [NSString stringWithFormat:@"%@ %@ %@", bankModel.bankprovince, bankModel.bankcity, bankModel.bankaddress];
+//    self.payBankNameLb.text = bankModel.bankName;
+//    self.depositLb.text = self.writeModel.depositBy;
+//    self.amountLb.text = bankModel.amount;
+//    
+//    [self.bankBGIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankimage.cn_appendCDN] placeholderImage:[UIImage imageNamed:@"pay_bankBG"]];
+//    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankIcon.cn_appendCDN]];
+//    self.bankNameLb.text = bankModel.bankName;
+//    self.accountNameLb.text = bankModel.accountname;
+//    self.accountLb.text  = bankModel.accountnumber;
+//    self.addressLb.text  = [NSString stringWithFormat:@"%@ %@ %@", bankModel.bankprovince, bankModel.bankcity, bankModel.bankaddress];
 }
 
 - (IBAction)copyAction:(UIButton *)sender {
