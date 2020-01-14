@@ -75,9 +75,16 @@
 {
     BOOL isTry = ![IVNetwork userInfo];
     [BTTHttpManager publicGameLoginWithParams:paramters isTry:isTry completeBlock:^(IVRequestResultModel *result, id response) {
-        if (completion) {
-            completion(result.status,response);
+        if (result.code_http==200&&[result.message isEqualToString:@"游戏维护中"]) {
+            if (completion) {
+                completion(YES,@"");
+            }
+        }else{
+            if (completion) {
+                completion(result.status,response);
+            }
         }
+        
     }];
 }
 - (void)IVGameTransferWithProvider:(NSString *)provider
