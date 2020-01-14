@@ -282,16 +282,10 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTPromotionList             @"_extra_/api/v1/wms/promotions"
 // 获取用户额度信息全厅
 #define BTTCreditsALL              @"customer/getBalance"
-//取款是否需要流水-------NO
-#define BTTBetInfo                   @"/A01/bet/betInfo"
 // 金额转账本地接口
 #define BTTTransferAllMoneyToLocal   @"game/transferToLocal"
 // 转账, 游戏厅转本地 ----NO
 #define BTTCreditsTransfer           @"/public/credits/transfer"
-// 获取当前可以洗码的k列表---NO
-#define BTTXmCurrentList             @"/A01/xm/currentList"
-// 获取洗码历史列表 ---NO
-#define BTTXmHistoryList             @"/A01/xm/historyList"
 // 获取限红额度   ---NO
 #define BTTBetLimits                 @"/A01/apply/getBetLimits"
 // 申请修改限红   ---NO
@@ -304,8 +298,6 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTSmsOrder                  @"/public/subscription/smsOrder"
 // 邮件状态修改  ---NO
 #define BTTEmailOrder                @"/public/subscription/emailOrder"
-// 洗码接口---NO
-#define BTTXimaBillOut               @"/public/xm/billout"
 // 开户礼金和存款礼金即可欧 ---NO
 #define BTTOpenAccountStatus         @"/A01/openAccount/isOpen"
 // 请求游戏列表
@@ -329,7 +321,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 // 迅捷, 在线催款催单接口---NO
 #define BTTAreditAppealAPI           @"/A01/payment/createAreditAppeal"
 // 客户存款次数的接口 ---NO
-#define BTTSaveMoneyTimesAPI         @"/deposit/getIsDepositAmount"
+#define BTTSaveMoneyTimesAPI         @"_extra_/api/v1/app/deposit/getIsDepositAmount"
 // 查询可分享链接
 #define BTTGetWeiXinRediect          @"_extra_/api/v1/app/public/getWeiXinRedirect"
 // 查询存款金额列表

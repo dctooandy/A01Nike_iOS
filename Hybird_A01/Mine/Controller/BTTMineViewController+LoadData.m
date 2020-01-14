@@ -511,13 +511,14 @@
 }
 
 - (void)loadSaveMoneyTimes {
-    [IVNetwork sendUseCacheRequestWithSubURL:BTTSaveMoneyTimesAPI paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        if (result.status) {
-            [[NSUserDefaults standardUserDefaults] setObject:result.data forKey:BTTSaveMoneyTimesKey];
+    NSDictionary *params = @{@"loginName":[IVNetwork savedUserInfo].loginName};
+    [IVNetwork requestPostWithUrl:BTTSaveMoneyTimesAPI paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:result.body[@"data"] forKey:BTTSaveMoneyTimesKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            [result.data integerValue] >= 10 ? (self.saveMoneyTimesType = BTTSaveMoneyTimesTypeMoreTen) : (self.saveMoneyTimesType = BTTSaveMoneyTimesTypeLessTen);
-            [[NSNotificationCenter defaultCenter] postNotificationName:BTTSaveMoneyTimesNotification object:result.data];
+            [result.body[@"data"] integerValue] >= 10 ? (self.saveMoneyTimesType = BTTSaveMoneyTimesTypeMoreTen) : (self.saveMoneyTimesType = BTTSaveMoneyTimesTypeLessTen);
+            [[NSNotificationCenter defaultCenter] postNotificationName:BTTSaveMoneyTimesNotification object:result.body];
         }
     }];
 }
