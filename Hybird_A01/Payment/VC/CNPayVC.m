@@ -166,7 +166,12 @@
     [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     
     _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.paymentType];
-    _payChannelVC.payments = @[channelModel.payModel];
+    if (channelModel.paymentType==6789) {
+        _payChannelVC.payments = channelModel.payModels;
+    }else{
+        _payChannelVC.payments = @[channelModel.payModel];
+    }
+    
     _segmentVC = [[AMSegmentViewController alloc] initWithViewController:_payChannelVC];
     [self.stepView addSubview:_segmentVC.view];
     [_segmentVC.view mas_makeConstraints:^(MASConstraintMaker *make) {

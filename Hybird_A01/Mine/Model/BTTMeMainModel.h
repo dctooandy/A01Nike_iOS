@@ -36,6 +36,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) CNPaymentModel *payModel;
 
+@property (nonatomic, strong) NSArray<CNPaymentModel *> *payModels;
+
 @end
 
 NS_ASSUME_NONNULL_END

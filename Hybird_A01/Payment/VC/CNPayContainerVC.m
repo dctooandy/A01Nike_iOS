@@ -105,11 +105,7 @@
         case 16:
         case 23:
         case 8:
-//        case CNPaymentYSFQR:
-//        case CNPaymentQQApp:
-//        case CNPaymentJDApp:
-//        case CNPaymentWechatApp:
-        case CNPaymentQQQR: {
+        case 6789:{
             [viewControllers addObjectsFromArray:[self QRPay:payment]];
         }
             break;

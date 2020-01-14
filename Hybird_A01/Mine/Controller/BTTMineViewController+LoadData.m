@@ -120,6 +120,9 @@
         BOOL haveUSDT = NO;
         CNPaymentModel *usdtModel = [[CNPaymentModel alloc]init];
         
+        NSMutableArray *wapPayments = [NSMutableArray array];
+        BOOL haveWap = NO;
+        
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if ([result.body[@"payTypeList"] isKindOfClass:[NSArray class]]) {
                 NSArray *payTypeArray = result.body[@"payTypeList"];
@@ -155,15 +158,7 @@
                             [self.bigDataSoure addObject:mainModel];
                         }
                     }
-//                    if ([model.payTypeName isEqualToString:@"支付宝WAP"]) {
-//                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
-//                        mainModel.name = @"支付宝wap";
-//                        mainModel.iconName = @"me_aliwap";
-//                        mainModel.paymentType = CNPayChannelAliApp;
-//                        if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-//                            [self.bigDataSoure addObject:mainModel];
-//                        }
-//                    }
+
                     if ([model.payTypeName isEqualToString:@"快速支付"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"迅捷网银";
@@ -296,19 +291,22 @@
                         mainModel.payModel = model;
                         [self.normalDataTwo addObject:mainModel];
                     }
-                    BOOL isApp = NO;
-                    if (([model.payTypeName isEqualToString:@"支付宝WAP"] || [model.payTypeName isEqualToString:@"微信WAP"] ||[model.payTypeName isEqualToString:@"QQWAP"]|| [model.payTypeName isEqualToString:@"京东WAP"]) && !isApp) {
-                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                        mainModel.name            = @"支付宝/微信/QQ/京东";
-                        mainModel.iconName        = @"me_wap";
-                        mainModel.paymentType     = model.payType;
-                        mainModel.payModel = model;
-                        if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                            [self.normalDataSoure addObject:mainModel];
-                        }else{
-                            [self.normalDataTwo addObject:mainModel];
-                        }
-                        isApp = YES;
+                    if ([model.payTypeName isEqualToString:@"支付宝WAP"] || [model.payTypeName isEqualToString:@"微信WAP"] ||[model.payTypeName isEqualToString:@"QQWAP"]|| [model.payTypeName isEqualToString:@"京东WAP"]) {
+                        [wapPayments addObject:model];
+                        haveWap = YES;
+                    }
+                }
+                if (haveWap) {
+                    BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                    mainModel.name            = @"支付宝/微信/QQ/京东";
+                    mainModel.iconName        = @"me_wap";
+                    mainModel.paymentType     = 6789;
+                    mainModel.payModels = wapPayments;
+                    mainModel.payModel = wapPayments.firstObject;
+                    if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
+                        [self.normalDataSoure addObject:mainModel];
+                    }else{
+                        [self.normalDataTwo addObject:mainModel];
                     }
                 }
                 
