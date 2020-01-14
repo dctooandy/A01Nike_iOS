@@ -321,7 +321,7 @@ static const char *BTTNextGroupKey = "nextGroup";
     NSMutableArray *downloads = [NSMutableArray array];
     NSDictionary *params = nil;
     if ([IVNetwork userInfo]) {
-        params = @{@"loginName":[IVNetwork userInfo].loginName};
+            params = @{@"loginName":[IVNetwork userInfo].loginName};
     }
     [IVNetwork sendUseCacheRequestWithSubURL:BTTIndexBannerDownloads paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
         NSLog(@"%@",response);
