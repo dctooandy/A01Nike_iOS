@@ -78,29 +78,6 @@
     }
     
     switch (paymentType) {
-//        case CNPaymentAliQR:
-//        case CNPaymentAliApp:
-//        case CNPaymentBQAli:
-//        case CNPaymentWechatQR:
-//        case CNPaymentWechatApp:
-//        case CNPaymentWechatBarCode:
-//        case CNPaymentBQWechat:
-//        case CNPaymentUnionQR:
-//        case CNPaymentUnionApp:
-//        case CNPaymentDeposit:
-//        case CNPaymentJDQR:
-//        case CNPaymentJDApp:
-//        case CNPaymentQQQR:
-//        case CNPaymentBQFast:
-//        case CNPaymentQQApp:
-//        case CNPaymentBTC:
-//        case CNPaymentCoin:
-//        case CNPaymentOnline:
-//        {
-//            [viewControllers addObjectsFromArray:[self QRPay:payment]];
-//        }
-//            break;
-
 
         case CNPaymentCard: {
             [viewControllers addObjectsFromArray:[self cardPay:payment]];
@@ -125,6 +102,9 @@
         case 5:
         case 6:
         case 15:
+        case 16:
+        case 23:
+        case 8:
 //        case CNPaymentYSFQR:
 //        case CNPaymentQQApp:
 //        case CNPaymentJDApp:

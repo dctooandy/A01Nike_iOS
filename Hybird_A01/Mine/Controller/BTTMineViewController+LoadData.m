@@ -297,7 +297,7 @@
                         [self.normalDataTwo addObject:mainModel];
                     }
                     BOOL isApp = NO;
-                    if (([model.payTypeName isEqualToString:@"支付宝WAP"] || [model.payTypeName isEqualToString:@"微信WAP"] || [model.payTypeName isEqualToString:@"京东WAP"]) && !isApp) {
+                    if (([model.payTypeName isEqualToString:@"支付宝WAP"] || [model.payTypeName isEqualToString:@"微信WAP"] ||[model.payTypeName isEqualToString:@"QQWAP"]|| [model.payTypeName isEqualToString:@"京东WAP"]) && !isApp) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name            = @"支付宝/微信/QQ/京东";
                         mainModel.iconName        = @"me_wap";

@@ -155,7 +155,7 @@
             }
         }
     }
-    self.title = channelModel.paymentName;
+    self.title = channelModel.name;
     self.selectedIcon = channelModel.iconName;
     
     /// 存在已经打开的支付渠道
@@ -222,7 +222,7 @@
     _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payModel.payType];
         _payChannelVC.payments = @[channel.payModel];
 //    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
-    self.title = channel.paymentName;
+    self.title = channel.name;
     self.selectedIcon = channel.iconName;
     [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];
     
