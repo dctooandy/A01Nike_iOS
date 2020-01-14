@@ -165,10 +165,11 @@
     [_payCollectionView reloadData];
     [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     
-    _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.paymentType];
     if (channelModel.paymentType==6789) {
+        _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.payModels.firstObject.payType];
         _payChannelVC.payments = channelModel.payModels;
     }else{
+        _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.paymentType];
         _payChannelVC.payments = @[channelModel.payModel];
     }
     

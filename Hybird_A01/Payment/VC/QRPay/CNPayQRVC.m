@@ -51,6 +51,9 @@
     [self configPreSettingMessage];
     // 刷新数据
     [self queryOnlineBanks];
+    if (self.payments.count>0) {
+        [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -103,7 +106,6 @@
         self.paymentModel.payType == 5 ||
         self.paymentModel.payType == 16 ||
         self.paymentModel.payType == 23 ||
-//        self.paymentModel.paymentType == CNPaymentQQQR ||
         self.paymentModel.payType == 15) {
         self.collectionBgView.hidden = YES;
         self.collectionViewHeight.constant = 0;
@@ -139,7 +141,6 @@
 
 /// 刷新数据
 - (void)updateAllContentWithModel:(CNPaymentModel *)model {
-    //TODO:
     if (model.payType == 15) {
         self.appsView.hidden = NO;
         self.noticesView.hidden = NO;
@@ -198,8 +199,7 @@
     
     self.currentSelectedIndex = indexPath.row;
     self.paymentModel = [self.payments objectAtIndex:indexPath.row];
-    [self updateAllContentWithModel:self.paymentModel];
-    [self configAmountList];
+    [self queryOnlineBanks];
    
 }
 
