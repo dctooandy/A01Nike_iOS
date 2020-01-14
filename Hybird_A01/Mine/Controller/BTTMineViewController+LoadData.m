@@ -500,9 +500,9 @@
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BTTCustomerBalanceModel *model = [BTTCustomerBalanceModel yy_modelWithJSON:result.body];
-            self.preAmount = [NSString stringWithFormat:@"%ld",model.balance];
+            self.preAmount = [NSString stringWithFormat:@"%ld",(long)model.balance];
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.totalAmount = [NSString stringWithFormat:@"%ld",model.balance];
+                self.totalAmount = [NSString stringWithFormat:@"%ld",(long)model.balance];
                 self.isLoading = NO;
                 [self.collectionView reloadData];
             });

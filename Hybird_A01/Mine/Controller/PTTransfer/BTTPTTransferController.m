@@ -65,12 +65,12 @@ typedef enum {
         if ([self.totalAmount isEqualToString:@"加载中"]) {
             cell.userableLabel.text = self.totalAmount;
         } else {
-            cell.userableLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%@元",[NSString stringWithFormat:@"%ld",total - pt]]];
+            cell.userableLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%@元",[NSString stringWithFormat:@"%ld",(long)(total - pt)]]];
         }
         if ([self.ptAmount isEqualToString:@"加载中"]) {
             cell.PTLabel.text = self.ptAmount;
         } else {
-            cell.PTLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%ld元",pt]];
+            cell.PTLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%ld元",(long)pt]];
         }
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {

@@ -320,7 +320,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTCreditAppealAPI           @"/A01/payment/createCreditAppeal"
 // 迅捷, 在线催款催单接口---NO
 #define BTTAreditAppealAPI           @"/A01/payment/createAreditAppeal"
-// 客户存款次数的接口 ---NO
+// 客户存款次数的接口
 #define BTTSaveMoneyTimesAPI         @"_extra_/api/v1/app/deposit/getIsDepositAmount"
 // 查询可分享链接
 #define BTTGetWeiXinRediect          @"_extra_/api/v1/app/public/getWeiXinRedirect"
@@ -329,11 +329,11 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 // 查询洗码额度v2
 #define BTTXimaAmount                @"xm/calcAmountV2"
 // 查询洗码提案列表
-#define BTTXimaQueryRequest                @"xm/queryRequest"
+#define BTTXimaQueryRequest          @"xm/queryRequest"
 // 查询洗码历史记录
 #define BTTXiMaHistoryListUrl        @"_extra_/api/v1/getBetAmountByDay"
 // 查询BQ存款银行
-#define BTTQueryBQBankList        @"deposit/queryBQBanks"
+#define BTTQueryBQBankList           @"deposit/queryBQBanks"
 // 查询USDT汇率
 #define BTTCurrencyExchanged         @"deposit/currencyExchange"
 // USDT手工支付存款
@@ -341,9 +341,9 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 // 查询在线支付银行列表
 #define BTTQueryOnlineBanks          @"deposit/queryOnlineBanks"
 // 创建在线支付订单
-#define BTTCreateOnlineOrder          @"deposit/createOnlineOrder"
+#define BTTCreateOnlineOrder         @"deposit/createOnlineOrder"
 // 查询人工存款账号
-#define BTTQueryManualAccount         @"deposit/queryManualDepositAccount"
+#define BTTQueryManualAccount        @"deposit/queryManualDepositAccount"
 
 #define BTTCreditsGame               @"/public/credits/game"
 #define BTTCreditsTotalAvailable     @"/public/credits/totalAvailable"
