@@ -8,6 +8,7 @@
 
 #import "BTTBookMessageController+LoadData.h"
 #import "BTTSMSEmailModifyModel.h"
+#import "BTTSubcribModel.h"
 
 @implementation BTTBookMessageController (LoadData)
 
@@ -25,32 +26,81 @@
 }
 
 - (void)loadSmsListStatus:(dispatch_group_t)group {
-    [IVNetwork sendRequestWithSubURL:BTTSmsList paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        if (result.status) {
-            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-                BTTSMSEmailModifyModel *model = [BTTSMSEmailModifyModel yy_modelWithDictionary:result.data];
-                self.smsStatus = model;
+    self.smsArray = [NSMutableArray new];
+    NSDictionary *params = @{
+        @"type":@1,
+        @"loginName":[IVNetwork savedUserInfo].loginName
+    };
+    [IVNetwork requestPostWithUrl:BTTSubscriptionQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSArray *array = result.body;
+            BOOL balanceStatus = NO;
+            BOOL infoStatus = NO;
+            NSMutableArray *elseArray = [[NSMutableArray alloc]initWithObjects:@NO,@NO,@NO,@NO, nil];
+            for (NSDictionary *json in array) {
+                BTTSubcribModel *model = [BTTSubcribModel yy_modelWithJSON:json];
+                if ([model.code isEqualToString:@"DEPOSIT"]) {
+                    balanceStatus = model.subscribed==1;
+                }else if ([model.code isEqualToString:@"MODIFY_PWD"]){
+                    infoStatus = model.subscribed==1;
+                }else if ([model.code isEqualToString:@"NEW_WEBSITE"]){
+                    [elseArray replaceObjectAtIndex:0 withObject:@(model.subscribed==1)];
+                }else if ([model.code isEqualToString:@"PAYMENT_ACCOUNT"]){
+                    [elseArray replaceObjectAtIndex:1 withObject:@(model.subscribed==1)];
+                }else if ([model.code isEqualToString:@"LOGIN"]){
+                    [elseArray replaceObjectAtIndex:2 withObject:@(model.subscribed==1)];
+                }else if ([model.code isEqualToString:@"PROMO_ACTIVITY"]){
+                    [elseArray replaceObjectAtIndex:3 withObject:@(model.subscribed==1)];
+                }
             }
+            dispatch_group_leave(group);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.smsArray addObject:@(balanceStatus)];
+                [self.smsArray addObject:@(infoStatus)];
+                [self.smsArray addObject:elseArray];
+//                [self.collectionView reloadData];
+            });
         }
-        dispatch_group_leave(group);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-        });
     }];
 }
 
 
 - (void)loadEmailListStatus{
-    [IVNetwork sendRequestWithSubURL:BTTEmailList paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
+    self.emailArray = [NSMutableArray new];
+    NSDictionary *params = @{
+        @"type":@2,
+        @"loginName":[IVNetwork savedUserInfo].loginName
+    };
+    
+    [IVNetwork requestPostWithUrl:BTTSubscriptionQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
         [self hideLoading];
-        NSLog(@"%@",response);
-        if (result.status) {
-            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-                BTTSMSEmailModifyModel *model = [BTTSMSEmailModifyModel yy_modelWithDictionary:result.data];
-                self.emailStatus = model;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSArray *array = result.body;
+            BOOL balanceStatus = NO;
+            BOOL infoStatus = NO;
+            NSMutableArray *elseArray = [[NSMutableArray alloc]initWithObjects:@NO,@NO,@NO,@NO, nil];
+            for (NSDictionary *json in array) {
+                BTTSubcribModel *model = [BTTSubcribModel yy_modelWithJSON:json];
+                if ([model.code isEqualToString:@"DEPOSIT"]) {
+                    balanceStatus = model.subscribed==1;
+                }else if ([model.code isEqualToString:@"MODIFY_PWD"]){
+                    infoStatus = model.subscribed==1;
+                }else if ([model.code isEqualToString:@"NEW_WEBSITE"]){
+                    [elseArray replaceObjectAtIndex:0 withObject:@(model.subscribed==1)];
+                }else if ([model.code isEqualToString:@"PAYMENT_ACCOUNT"]){
+                    [elseArray replaceObjectAtIndex:1 withObject:@(model.subscribed==1)];
+                }else if ([model.code isEqualToString:@"LOGIN"]){
+                    [elseArray replaceObjectAtIndex:2 withObject:@(model.subscribed==1)];
+                }else if ([model.code isEqualToString:@"PROMO_ACTIVITY"]){
+                    [elseArray replaceObjectAtIndex:3 withObject:@(model.subscribed==1)];
+                }
             }
             dispatch_async(dispatch_get_main_queue(), ^{
+                [self.emailArray addObject:@(balanceStatus)];
+                [self.emailArray addObject:@(infoStatus)];
+                [self.emailArray addObject:elseArray];
                 [self.collectionView reloadData];
             });
         }
@@ -72,61 +122,57 @@
 
 - (void)updateSmsStatus:(dispatch_group_t)group {
     NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
-    [parmas setObject:@(self.smsStatus.deposit) forKey:@"deposit"];
-    [parmas setObject:@(self.smsStatus.withdrawal) forKey:@"withdrawal"];
-    [parmas setObject:@(self.smsStatus.promotions) forKey:@"promotions"];
-    [parmas setObject:@(self.smsStatus.modify_password) forKey:@"modify_password"];
-    [parmas setObject:@(self.smsStatus.modify_banking_data) forKey:@"modify_banking_data"];
-    [parmas setObject:@(self.smsStatus.new_website) forKey:@"new_website"];
-    [parmas setObject:@(self.smsStatus.modify_account_name) forKey:@"modify_account_name"];
-    [parmas setObject:@(self.smsStatus.new_payment_account) forKey:@"new_payment_account"];
-    [parmas setObject:@(self.smsStatus.modify_phone) forKey:@"modify_phone"];
-    [parmas setObject:@(self.smsStatus.notify_promotions) forKey:@"notify_promotions"];
-    [parmas setObject:@(self.smsStatus.regards) forKey:@"regards"];
-    [parmas setObject:@(self.smsStatus.login) forKey:@"login"];
-    [parmas setObject:@(self.smsStatus.specific_msg) forKey:@"specific_msg"];
-    [parmas setObject:@(self.smsStatus.noble_metal) forKey:@"noble_metal"];
-    [parmas setObject:@(self.smsStatus.forex) forKey:@"forex"];
-    [IVNetwork sendRequestWithSubURL:BTTSmsOrder paramters:parmas completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        if (result.status && !result.code_system) {
+    parmas[@"type"] = @1;
+    parmas[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    NSDictionary *json1 = @{@"code":@"DEPOSIT",@"subscribed":@([self.smsArray.firstObject boolValue])};
+    NSDictionary *json2 = @{@"code":@"WITHDRAW",@"subscribed":@([self.smsArray.firstObject boolValue])};
+    NSDictionary *json3 = @{@"code":@"PROMOTION",@"subscribed":@([self.smsArray.firstObject boolValue])};
+    NSDictionary *json4 = @{@"code":@"MODIFY_PWD",@"subscribed":@([self.smsArray[1] boolValue])};
+    NSDictionary *json5 = @{@"code":@"MODIFY_BANKCARD",@"subscribed":@([self.smsArray[1] boolValue])};
+    NSDictionary *json6 = @{@"code":@"MODIFY_ACCOUNT_NAME",@"subscribed":@([self.smsArray[1] boolValue])};
+    NSDictionary *json7 = @{@"code":@"MODIFY_PHONE",@"subscribed":@([self.smsArray[1] boolValue])};
+    NSArray *array = self.smsArray.lastObject;
+    NSDictionary *json8 = @{@"code":@"NEW_WEBSITE",@"subscribed":@([array[0] boolValue])};
+    NSDictionary *json9 = @{@"code":@"PAYMENT_ACCOUNT",@"subscribed":@([array[1] boolValue])};
+    NSDictionary *json10 = @{@"code":@"LOGIN",@"subscribed":@([array[2] boolValue])};
+    NSDictionary *json11 = @{@"code":@"PROMO_ACTIVITY",@"subscribed":@([array[3] boolValue])};
+    NSArray *paramsArray = @[json1,json2,json3,json4,json5,json6,json7,json8,json9,json10,json11];
+    parmas[@"subscribes"] = paramsArray;
+    [IVNetwork requestPostWithUrl:BTTSubscriptionModify paramters:parmas completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
             [MBProgressHUD showSuccess:@"订阅成功" toView:nil];
-        } else {
-            if (result.message.length) {
-                [MBProgressHUD showSuccess:result.message toView:nil];
-            }
+        }else{
+            [MBProgressHUD showSuccess:result.head.errMsg toView:nil];
         }
         dispatch_group_leave(group);
-        
     }];
 }
 
 - (void)updateEmailStatus {
     NSMutableDictionary *parmas = [NSMutableDictionary dictionary];
-    [parmas setObject:@(self.emailStatus.deposit) forKey:@"deposit"];
-    [parmas setObject:@(self.emailStatus.withdrawal) forKey:@"withdrawal"];
-    [parmas setObject:@(self.emailStatus.promotions) forKey:@"promotions"];
-    [parmas setObject:@(self.emailStatus.modify_password) forKey:@"modify_password"];
-    [parmas setObject:@(self.emailStatus.modify_banking_data) forKey:@"modify_banking_data"];
-    [parmas setObject:@(self.emailStatus.new_website) forKey:@"new_website"];
-    [parmas setObject:@(self.emailStatus.modify_account_name) forKey:@"modify_account_name"];
-    [parmas setObject:@(self.emailStatus.new_payment_account) forKey:@"new_payment_account"];
-    [parmas setObject:@(self.emailStatus.modify_phone) forKey:@"modify_phone"];
-    [parmas setObject:@(self.emailStatus.notify_promotions) forKey:@"notify_promotions"];
-    [parmas setObject:@(self.emailStatus.regards) forKey:@"regards"];
-    [parmas setObject:@(self.emailStatus.login) forKey:@"login"];
-    [parmas setObject:@(self.emailStatus.specific_msg) forKey:@"specific_msg"];
-    [parmas setObject:@(self.emailStatus.noble_metal) forKey:@"noble_metal"];
-    [parmas setObject:@(self.emailStatus.forex) forKey:@"forex"];
-    [IVNetwork sendRequestWithSubURL:BTTEmailOrder paramters:parmas completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        [self hideLoading];
-        if (result.status && !result.code_system) {
+    parmas[@"type"] = @2;
+    parmas[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    NSDictionary *json1 = @{@"code":@"DEPOSIT",@"subscribed":@([self.emailArray.firstObject boolValue])};
+    NSDictionary *json2 = @{@"code":@"WITHDRAW",@"subscribed":@([self.emailArray.firstObject boolValue])};
+    NSDictionary *json3 = @{@"code":@"PROMOTION",@"subscribed":@([self.emailArray.firstObject boolValue])};
+    NSDictionary *json4 = @{@"code":@"MODIFY_PWD",@"subscribed":@([self.emailArray[1] boolValue])};
+    NSDictionary *json5 = @{@"code":@"MODIFY_BANKCARD",@"subscribed":@([self.emailArray[1] boolValue])};
+    NSDictionary *json6 = @{@"code":@"MODIFY_ACCOUNT_NAME",@"subscribed":@([self.emailArray[1] boolValue])};
+    NSDictionary *json7 = @{@"code":@"MODIFY_PHONE",@"subscribed":@([self.emailArray[1] boolValue])};
+    NSArray *array = self.emailArray.lastObject;
+    NSDictionary *json8 = @{@"code":@"NEW_WEBSITE",@"subscribed":@([array[0] boolValue])};
+    NSDictionary *json9 = @{@"code":@"PAYMENT_ACCOUNT",@"subscribed":@([array[1] boolValue])};
+    NSDictionary *json10 = @{@"code":@"LOGIN",@"subscribed":@([array[2] boolValue])};
+    NSDictionary *json11 = @{@"code":@"PROMO_ACTIVITY",@"subscribed":@([array[3] boolValue])};
+    NSArray *paramsArray = @[json1,json2,json3,json4,json5,json6,json7,json8,json9,json10,json11];
+    parmas[@"subscribes"] = paramsArray;
+    [IVNetwork requestPostWithUrl:BTTSubscriptionModify paramters:parmas completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
             [MBProgressHUD showSuccess:@"订阅成功" toView:nil];
-        } else {
-            if (result.message.length) {
-                [MBProgressHUD showSuccess:result.message toView:nil];
-            }
+        }else{
+            [MBProgressHUD showSuccess:result.head.errMsg toView:nil];
         }
         [self.navigationController popViewControllerAnimated:YES];
     }];
@@ -134,38 +180,31 @@
 
 - (void)updateSmsStatusModelWithStats:(BOOL)isON indexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        self.smsStatus.deposit = isON;
-        self.smsStatus.withdrawal = isON;
-        self.smsStatus.promotions = isON;
+        [self.smsArray replaceObjectAtIndex:0 withObject:@(isON)];
     } else if (indexPath.row == 2) {
-        self.smsStatus.modify_password = isON;
-        self.smsStatus.modify_phone = isON;
-        self.smsStatus.modify_banking_data = isON;
-        self.smsStatus.modify_account_name = isON;
+        [self.smsArray replaceObjectAtIndex:1 withObject:@(isON)];
     } else if (indexPath.row == 4) {
-        self.smsStatus.new_website = isON;
+        NSMutableArray *array = [[NSMutableArray alloc]initWithArray:self.smsArray.lastObject];
+        [array replaceObjectAtIndex:0 withObject:@(isON)];
+        [self.smsArray replaceObjectAtIndex:2 withObject:array];
     } else if (indexPath.row == 5) {
-        self.smsStatus.new_payment_account = isON;
+        NSMutableArray *array = [[NSMutableArray alloc]initWithArray:self.smsArray.lastObject];
+        [array replaceObjectAtIndex:1 withObject:@(isON)];
+        [self.smsArray replaceObjectAtIndex:2 withObject:array];
     } else if (indexPath.row == 6) {
-        self.smsStatus.login = isON;
-        self.smsStatus.specific_msg = isON;
-        self.smsStatus.regards = isON;
+        NSMutableArray *array = [[NSMutableArray alloc]initWithArray:self.smsArray.lastObject];
+        [array replaceObjectAtIndex:2 withObject:@(isON)];
+        [self.smsArray replaceObjectAtIndex:2 withObject:array];
     } else if (indexPath.row == 7) {
-        self.smsStatus.notify_promotions = isON;
+        NSMutableArray *array = [[NSMutableArray alloc]initWithArray:self.smsArray.lastObject];
+        [array replaceObjectAtIndex:3 withObject:@(isON)];
+        [self.smsArray replaceObjectAtIndex:2 withObject:array];
     } else if (indexPath.row == 8) {
-        self.smsStatus.notify_promotions = isON;
-        self.smsStatus.login = isON;
-        self.smsStatus.specific_msg = isON;
-        self.smsStatus.regards = isON;
-        self.smsStatus.new_payment_account = isON;
-        self.smsStatus.new_website = isON;
-        self.smsStatus.modify_password = isON;
-        self.smsStatus.modify_phone = isON;
-        self.smsStatus.modify_banking_data = isON;
-        self.smsStatus.modify_account_name = isON;
-        self.smsStatus.deposit = isON;
-        self.smsStatus.withdrawal = isON;
-        self.smsStatus.promotions = isON;
+        self.smsArray = [[NSMutableArray alloc]init];
+        [self.smsArray addObject:@(isON)];
+        [self.smsArray addObject:@(isON)];
+        NSArray *array = @[@(isON),@(isON),@(isON),@(isON)];
+        [self.smsArray addObject:array];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.collectionView reloadData];
         });
@@ -175,38 +214,31 @@
 
 - (void)updateEmailStatusModelWithStats:(BOOL)isON indexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        self.emailStatus.deposit = isON;
-        self.emailStatus.withdrawal = isON;
-        self.emailStatus.promotions = isON;
+        [self.emailArray replaceObjectAtIndex:0 withObject:@(isON)];
     } else if (indexPath.row == 2) {
-        self.emailStatus.modify_password = isON;
-        self.emailStatus.modify_phone = isON;
-        self.emailStatus.modify_banking_data = isON;
-        self.emailStatus.modify_account_name = isON;
+        [self.emailArray replaceObjectAtIndex:1 withObject:@(isON)];
     } else if (indexPath.row == 4) {
-        self.emailStatus.new_website = isON;
+        NSMutableArray *array = [[NSMutableArray alloc]initWithArray:self.emailArray.lastObject];
+        [array replaceObjectAtIndex:0 withObject:@(isON)];
+        [self.emailArray replaceObjectAtIndex:2 withObject:array];
     } else if (indexPath.row == 5) {
-        self.emailStatus.new_payment_account = isON;
+        NSMutableArray *array = [[NSMutableArray alloc]initWithArray:self.emailArray.lastObject];
+        [array replaceObjectAtIndex:1 withObject:@(isON)];
+        [self.emailArray replaceObjectAtIndex:2 withObject:array];
     } else if (indexPath.row == 6) {
-        self.emailStatus.login = isON;
-        self.emailStatus.specific_msg = isON;
-        self.emailStatus.regards = isON;
+        NSMutableArray *array = [[NSMutableArray alloc]initWithArray:self.emailArray.lastObject];
+        [array replaceObjectAtIndex:2 withObject:@(isON)];
+        [self.emailArray replaceObjectAtIndex:2 withObject:array];
     } else if (indexPath.row == 7) {
-        self.emailStatus.notify_promotions = isON;
+        NSMutableArray *array = [[NSMutableArray alloc]initWithArray:self.emailArray.lastObject];
+        [array replaceObjectAtIndex:3 withObject:@(isON)];
+        [self.emailArray replaceObjectAtIndex:2 withObject:array];
     } else if (indexPath.row == 8) {
-        self.emailStatus.notify_promotions = isON;
-        self.emailStatus.login = isON;
-        self.emailStatus.specific_msg = isON;
-        self.emailStatus.regards = isON;
-        self.emailStatus.new_payment_account = isON;
-        self.emailStatus.new_website = isON;
-        self.emailStatus.modify_password = isON;
-        self.emailStatus.modify_phone = isON;
-        self.emailStatus.modify_banking_data = isON;
-        self.emailStatus.modify_account_name = isON;
-        self.emailStatus.deposit = isON;
-        self.emailStatus.withdrawal = isON;
-        self.emailStatus.promotions = isON;
+        self.emailArray = [[NSMutableArray alloc]init];
+        [self.emailArray addObject:@(isON)];
+        [self.emailArray addObject:@(isON)];
+        NSArray *array = @[@(isON),@(isON),@(isON),@(isON)];
+        [self.emailArray addObject:array];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.collectionView reloadData];
         });

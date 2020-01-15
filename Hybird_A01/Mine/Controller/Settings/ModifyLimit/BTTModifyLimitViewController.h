@@ -11,7 +11,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTModifyLimitViewController : BTTCollectionViewController
+@property (nonatomic, copy) NSString *aginStr;
 
+@property (nonatomic, copy) NSString *bbinStr;
+
+@property (nonatomic, strong) NSArray *agin;
+
+@property (nonatomic, strong) NSArray *bbin;
 @end
 
 NS_ASSUME_NONNULL_END

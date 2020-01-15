@@ -281,23 +281,19 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 // 优惠列表
 #define BTTPromotionList             @"_extra_/api/v1/wms/promotions"
 // 获取用户额度信息全厅
-#define BTTCreditsALL              @"customer/getBalance"
+#define BTTCreditsALL                @"customer/getBalance"
 // 金额转账本地接口
 #define BTTTransferAllMoneyToLocal   @"game/transferToLocal"
-// 转账, 游戏厅转本地 ----NO
-#define BTTCreditsTransfer           @"/public/credits/transfer"
-// 获取限红额度   ---NO
-#define BTTBetLimits                 @"/A01/apply/getBetLimits"
-// 申请修改限红   ---NO
-#define BTTApplyBetLimit             @"/public/apply/betLimit"
-// 短信状态查询  ---NO
-#define BTTSmsList                   @"/public/subscription/smsList"
-// 邮件状态查询 ----NO
-#define BTTEmailList                 @"/public/subscription/emailList"
-// 短信状态修改 ----NO
-#define BTTSmsOrder                  @"/public/subscription/smsOrder"
-// 邮件状态修改  ---NO
-#define BTTEmailOrder                @"/public/subscription/emailOrder"
+// 转账, 到PT
+#define BTTTransferToGame            @"game/transferToGame"
+// 获取限红额度   
+#define BTTBetLimits                 @"limitRed/query"
+// 申请修改限红
+#define BTTLimitRedModify            @"limitRed/modify"
+// 查询订阅状态查询
+#define BTTSubscriptionQuery         @"subscribe/query"
+// 修改订阅状态查询
+#define BTTSubscriptionModify         @"subscribe/modify"
 // 开户礼金和存款礼金即可欧 ---NO
 #define BTTOpenAccountStatus         @"/A01/openAccount/isOpen"
 // 请求游戏列表

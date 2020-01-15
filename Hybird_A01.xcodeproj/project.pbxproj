@@ -689,6 +689,7 @@
 		D36EF9C323C5A39900D8912B /* NSDictionary+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D36EF9BE23C5A39900D8912B /* NSDictionary+Log.m */; };
 		D36EF9C423C5A39900D8912B /* UILabel+LineSapce.m in Sources */ = {isa = PBXBuildFile; fileRef = D36EF9C023C5A39900D8912B /* UILabel+LineSapce.m */; };
 		D36EF9C523C5A39900D8912B /* NSArray+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D36EF9C123C5A39900D8912B /* NSArray+Log.m */; };
+		D39D7C0023CEBC6700898546 /* BTTSubcribModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D39D7BFF23CEBC6700898546 /* BTTSubcribModel.m */; };
 		D3E53FC923BDCA2A0065DA71 /* IVNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D3E53FC823BDCA2A0065DA71 /* IVNetworkManager.m */; };
 		D51AD19F21B8FEE5008C633A /* CNPayBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */; };
 		D599251421AE5AF6001E885A /* CNPayNormalTF.m in Sources */ = {isa = PBXBuildFile; fileRef = D599251321AE5AF6001E885A /* CNPayNormalTF.m */; };
@@ -1839,6 +1840,8 @@
 		D36EF9C023C5A39900D8912B /* UILabel+LineSapce.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LineSapce.m"; sourceTree = "<group>"; };
 		D36EF9C123C5A39900D8912B /* NSArray+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Log.m"; sourceTree = "<group>"; };
 		D36EF9C223C5A39900D8912B /* NSDictionary+Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Log.h"; sourceTree = "<group>"; };
+		D39D7BFE23CEBC6700898546 /* BTTSubcribModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTSubcribModel.h; sourceTree = "<group>"; };
+		D39D7BFF23CEBC6700898546 /* BTTSubcribModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTSubcribModel.m; sourceTree = "<group>"; };
 		D3E53FC723BDCA2A0065DA71 /* IVNetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IVNetworkManager.h; sourceTree = "<group>"; };
 		D3E53FC823BDCA2A0065DA71 /* IVNetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IVNetworkManager.m; sourceTree = "<group>"; };
 		D51AD19D21B8FEE5008C633A /* CNPayBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayBaseView.h; sourceTree = "<group>"; };
@@ -3710,6 +3713,8 @@
 				D361EAD823C6EF8800BBA05C /* BTTUsdtWalletModel.m */,
 				D357573623C8518F009E8735 /* BTTXiMaQueryModel.h */,
 				D357573723C8518F009E8735 /* BTTXiMaQueryModel.m */,
+				D39D7BFE23CEBC6700898546 /* BTTSubcribModel.h */,
+				D39D7BFF23CEBC6700898546 /* BTTSubcribModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4939,6 +4944,7 @@
 				3A11ADD321816E5800B1AFF4 /* SVRadialGradientLayer.m in Sources */,
 				3AF1B80F21AE680A00BF8C3A /* BTTVideoGamesSearchCell.m in Sources */,
 				D36EF9B423C5872400D8912B /* BTTAddUSDTController+LoadData.m in Sources */,
+				D39D7C0023CEBC6700898546 /* BTTSubcribModel.m in Sources */,
 				3AA7893121FFF2580047A372 /* NSImage+WebCache.m in Sources */,
 				3AF1B80521AE379F00BF8C3A /* BTTVideoGamesRequestModel.m in Sources */,
 				EACCD202218FE1680090B5E6 /* IVWebViewUtility.m in Sources */,

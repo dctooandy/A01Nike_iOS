@@ -11,7 +11,7 @@
 @implementation BTTPTTransferController (LoadData)
 
 - (void)loadMainData {
-//    [self showLoading];
+    [self showLoading];
     dispatch_queue_t queue = dispatch_queue_create("ptt.data", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_enter(group);
@@ -24,7 +24,7 @@
     });
     dispatch_group_notify(group, queue, ^{
         dispatch_async(dispatch_get_main_queue(), ^{
-//            [self hideLoading];
+            [self hideLoading];
             self.submitBtnEnable = YES;
             [self.collectionView reloadData];
         });
@@ -32,54 +32,49 @@
 }
 
 - (void)loadTotalAvailableData:(dispatch_group_t)group {
-    [IVNetwork sendRequestWithSubURL:BTTCreditsTotalAvailable paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        if (result.code_http == 200 && result.status) {
-            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-                self.totalAmount = result.data[@"val"];
-                if (self.totalAmount.floatValue) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"PTTransfer"];
-                } else {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnDisableNotification object:@"PTTransfer"];
-                }
-                dispatch_group_leave(group);
-            }
-        }
-    }];
+    self.totalAmount = self.balanceModel.balance;
+    if (self.totalAmount.floatValue) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"PTTransfer"];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnDisableNotification object:@"PTTransfer"];
+    }
+    dispatch_group_leave(group);
 }
 
 - (void)loadPTGameAmount:(dispatch_group_t)group {
-    NSDictionary *pramas = @{@"game_name": @"PT"};
-    [IVNetwork sendRequestWithSubURL:BTTCreditsGame paramters:pramas completionBlock:^(IVRequestResultModel *result, id response) {
-        NSLog(@"%@",response);
-        if (result.code_http == 200 && result.status) {
-            if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-                self.ptAmount = result.data[@"val"];
-                dispatch_group_leave(group);
-            }
+    NSArray *array = self.balanceModel.platformBalances;
+    for (NSDictionary *json in array) {
+        platformBanlaceModel *model = [platformBanlaceModel yy_modelWithJSON:json];
+        if ([model.platformCode isEqualToString:@"039"]) {
+            self.ptAmount = model.balance;
+            self.gameKind = model.gameKind;
+            dispatch_group_leave(group);
+            break;
         }
-    }];
+    }
 }
 
 - (void)loadCreditsTransfer:(BOOL)isReverse amount:(NSString *)amount {
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:@"PT" forKey:@"game_name"];
-    [params setObject:amount forKey:@"amount"];
-    [params setObject:@(isReverse) forKey:@"type"];
-//    [self showLoading];
-    [IVNetwork sendRequestWithSubURL:BTTCreditsTransfer paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-        [self hideLoading];
-        NSLog(@"%@",response);
-        if (result.message.length) {
-            [MBProgressHUD showError:result.message toView:nil];
-        }
-        if (result.status) {
-            [MBProgressHUD showSuccess:@"转账成功" toView:nil];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-    }];
-    
-    
+    if ([amount doubleValue]<[self.balanceModel.minWithdrawAmount doubleValue]) {
+        [MBProgressHUD showError:[NSString stringWithFormat:@"转账最小金额为%@",self.balanceModel.minWithdrawAmount] toView:nil];
+    }else{
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        [params setValue:@"A01039" forKey:@"gameCode"];
+        [params setValue:self.gameKind forKey:@"gameKind"];
+        [params setValue:@1 forKey:@"isQueryBalanceBeforeTransfer"];
+        [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
+        [self showLoading];
+        [IVNetwork requestPostWithUrl:BTTTransferToGame paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            [self hideLoading];
+            IVJResponseObject *result = response;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                [MBProgressHUD showSuccess:@"转账成功" toView:nil];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }else{
+                [MBProgressHUD showError:result.head.errMsg toView:nil];
+            }
+        }];
+    }
 }
 
 @end

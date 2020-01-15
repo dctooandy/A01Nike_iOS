@@ -12,9 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTModifyLimitViewController (LoadData)
 
-@property (nonatomic, strong) NSMutableArray *agin;
 
-@property (nonatomic, strong) NSMutableArray *bbin;
 
 
 - (void)loadMainData;

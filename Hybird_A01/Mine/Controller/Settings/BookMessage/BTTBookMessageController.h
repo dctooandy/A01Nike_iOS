@@ -18,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) BTTSMSEmailModifyModel *emailStatus;
 
+@property (nonatomic, strong) NSMutableArray *smsArray;
+
+@property (nonatomic, strong) NSMutableArray *emailArray;
+
 @end
 
 NS_ASSUME_NONNULL_END

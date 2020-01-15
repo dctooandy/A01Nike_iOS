@@ -9,6 +9,7 @@
 #import "BTTCollectionViewController.h"
 #import "BTTBindStatusModel.h"
 #import "BTTShareRedirectModel.h"
+#import "BTTCustomerBalanceModel.h"
 
 typedef enum : NSUInteger {
     BTTMeSaveMoneyShowTypeAll = 0,
@@ -52,6 +53,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BTTSaveMoneyTimesType saveMoneyTimesType;
 
 - (void)setupElements;
+
+@property (nonatomic, strong) BTTCustomerBalanceModel *balanceModel;
 
 @end
 

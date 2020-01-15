@@ -38,9 +38,9 @@
             BTTCustomerBalanceModel *model = [BTTCustomerBalanceModel yy_modelWithJSON:result.body];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.amount = [NSString stringWithFormat:@"%ld",model.balance];
-                self.localAmount = [NSString stringWithFormat:@"%ld",model.localBalance];
-                self.hallAmount = [NSString stringWithFormat:@"%ld",model.platformTotalBalance];
+                self.amount = model.balance;
+                self.localAmount = model.localBalance;
+                self.hallAmount = model.platformTotalBalance;
                 [self.games addObjectsFromArray:model.platformBalances];
                 self.isLoadingData = NO;
                 [self.collectionView reloadData];

@@ -22,6 +22,12 @@
 
 @implementation BTTBookMessageController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.smsArray = [NSMutableArray new];
+    self.emailArray = [NSMutableArray new];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"短信订阅";
@@ -67,8 +73,59 @@
         } else {
             cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
         }
-        cell.smsModifyModel = self.smsStatus;
-        cell.emailModifyModel = self.emailStatus;
+        if (self.smsArray.count>2&&self.emailArray.count>2) {
+            if (indexPath.row==0) {
+                [cell.msmSwith setOn:[self.smsArray.firstObject boolValue]];
+                [cell.emailSwith setOn:[self.emailArray.firstObject boolValue]];
+            }else if (indexPath.row==2){
+                [cell.msmSwith setOn:[self.smsArray[1] boolValue]];
+                [cell.emailSwith setOn:[self.emailArray[1] boolValue]];
+            }else if (indexPath.row==self.sheetDatas.count-1){
+            //            [cell.msmSwith setOn:self.smsArray[1]];
+                BOOL isOn = YES;
+                for (int i=0;i<self.smsArray.count; i++) {
+                    if (i<2) {
+                        if (isOn) {
+                            isOn = [self.smsArray[i] boolValue];
+                        }
+                    }else{
+                        NSArray *array = self.smsArray[2];
+                        for (int j=0; j<array.count; j++) {
+                            if (isOn) {
+                                isOn = [array[j] boolValue];
+                            }
+                            if (j==array.count-1) {
+                                [cell.msmSwith  setOn:isOn];
+                            }
+                        }
+                    }
+                }
+                BOOL mailIsOn = YES;
+                for (int i=0;i<self.emailArray.count; i++) {
+                    if (i<2) {
+                        if (mailIsOn) {
+                            mailIsOn = [self.emailArray[i] boolValue];
+                        }
+                    }else{
+                        NSArray *array = self.emailArray[2];
+                        for (int j=0; j<array.count; j++) {
+                            if (mailIsOn) {
+                                mailIsOn = [array[j] boolValue];
+                            }
+                            if (j==array.count-1) {
+                                [cell.emailSwith  setOn:mailIsOn];
+                            }
+                        }
+                    }
+                }
+            }else if(indexPath.row>=4&&indexPath.row<=7){
+                NSArray *array = self.smsArray.lastObject;
+                NSArray *arrayEmail = self.emailArray.lastObject;
+                [cell.msmSwith setOn:[array[indexPath.row-4] boolValue]];
+                [cell.emailSwith setOn:[arrayEmail[indexPath.row-4] boolValue]];
+            }
+        }
+        
         weakSelf(weakSelf);
         cell.clickEventBlock = ^(id  _Nonnull value) {
             [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"BookMessage"];

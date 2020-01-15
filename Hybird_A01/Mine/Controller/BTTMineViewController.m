@@ -481,6 +481,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 8) {
         BTTPTTransferController *vc = [[BTTPTTransferController alloc] init];
+        vc.balanceModel = self.balanceModel;
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 9) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];

@@ -17,9 +17,7 @@
 
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
 
-@property (nonatomic, copy) NSString *aginStr;
 
-@property (nonatomic, copy) NSString *bbinStr;
 
 @end
 
@@ -51,15 +49,19 @@
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
-            NSString *agin = [strongSelf.aginStr stringByReplacingOccurrencesOfString:@"~" withString:@"-"];
-            NSString *bbin = [strongSelf.bbinStr stringByReplacingOccurrencesOfString:@"~" withString:@"-"];
-            [strongSelf loadSetBetLimitWithAgin:agin bbin:bbin];
+            [strongSelf loadSetBetLimitWithAgin:self.aginStr bbin:self.bbinStr];
         };
         return cell;
     } else {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
+        if (indexPath.row==0) {
+            cell.textField.text = self.aginStr;
+        }else{
+            cell.textField.text = self.bbinStr;
+        }
+        
         return cell;
     }
 }
