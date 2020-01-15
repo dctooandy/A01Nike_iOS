@@ -53,6 +53,7 @@
 #import "BTTNicknameSetController.h"
 #import "BTTMeHeadernNicknameLoginCell.h"
 #import "BTTActionSheet.h"
+#import "BTTUsdtTodayNoticeView.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -398,8 +399,33 @@
     if (indexPath.row == self.saveMoneyCount + 3) {
         if (self.isCompletePersonalInfo) {
             if ([IVNetwork userInfo].isBankBinded) {
-                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
+                NSString *timeStamp = [[NSUserDefaults standardUserDefaults]objectForKey:BTTWithDrawToday];
+                if (timeStamp!=nil) {
+                    NSString *timeStamp = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
+                    [[NSUserDefaults standardUserDefaults]setObject:timeStamp forKey:BTTWithDrawToday];
+                    BOOL isSameDay = [PublicMethod isDateToday:[PublicMethod transferDateStringToDate:timeStamp]];
+                    if (isSameDay) {
+                        BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }else{
+                        BTTUsdtTodayNoticeView *alertView = [[BTTUsdtTodayNoticeView alloc]initWithFrame:CGRectZero];
+                        BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+                        popView.isClickBGDismiss = YES;
+                        [popView pop];
+                        alertView.dismissBlock = ^{
+                            [popView dismiss];
+                        };
+                    }
+                }else{
+                    BTTUsdtTodayNoticeView *alertView = [[BTTUsdtTodayNoticeView alloc]initWithFrame:CGRectZero];
+                    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+                    popView.isClickBGDismiss = YES;
+                    [popView pop];
+                    alertView.dismissBlock = ^{
+                        [popView dismiss];
+                    };
+                }
+                
             } else {
                 [MBProgressHUD showMessagNoActivity:@"请先绑定银行卡" toView:nil];
                 BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
