@@ -20,6 +20,7 @@
 #import "BTTBankModel.h"
 #import "BTTWithdrawalNotifyCell.h"
 #import "BTTWithDrawUSDTConfirmCell.h"
+#import "CLive800Manager.h"
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate>
 @property(nonatomic, copy)NSString *amount;
 @property(nonatomic, copy)NSString *password;
@@ -111,7 +112,11 @@
     NSString *cellName = cellModel.name;
     if ([cellName isEqualToString:@"取款至"]) {
         BTTWithdrawalCardSelectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalCardSelectCell" forIndexPath:indexPath];
+        cell.mineSparaterType = BTTMineSparaterTypeNone;
         cell.model = self.bankList[self.selectIndex];
+        cell.contactBtnTap = ^{
+            [[CLive800Manager sharedInstance] startLive800Chat:self];
+        };
         return cell;
     }
     
@@ -258,6 +263,7 @@
 - (void)refreshBankList
 {
     NSArray *array = [[IVCacheManager sharedInstance] nativeReadDictionaryForKey:BTTCacheBankListKey];
+    BOOL haveUSDT = NO;
     if (isArrayWithCountMoreThan0(array)) {
         NSArray<BTTBankModel *> *bankList  = [BTTBankModel arrayOfModelsFromDictionaries:array error:nil];
         NSMutableArray *mBankList = @[].mutableCopy;
@@ -268,7 +274,12 @@
             NSString *pickStr = [NSString stringWithFormat:@"%@-尾号***%@",model.bankName,subBankNum];
             model.withdrawText = pickStr;
             if (model.flag == 1) {
-                [mBankList addObject:model];
+                if (!haveUSDT&&self.isUSDT&&model.cardType==3) {
+                    [mBankList insertObject:model atIndex:0];
+                    haveUSDT = YES;
+                }else{
+                    [mBankList addObject:model];
+                }
             }
         }
         self.bankList = mBankList.copy;

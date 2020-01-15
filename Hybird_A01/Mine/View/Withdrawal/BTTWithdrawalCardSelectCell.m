@@ -7,11 +7,21 @@
 //
 
 #import "BTTWithdrawalCardSelectCell.h"
+#import "CNPayConstant.h"
+
+@interface BTTWithdrawalCardSelectCell()
+@property (weak, nonatomic) IBOutlet UIButton *contactButton;
+@property (weak, nonatomic) IBOutlet UIView *uView;
+
+@end
+
 @implementation BTTWithdrawalCardSelectCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.uView.backgroundColor = kBlackBackgroundColor;
     self.mineArrowsType = BTTMineArrowsTypeNoHidden;
+    [self SetUnderLine:self.contactButton setTitle:@"咨询客服"];
 }
 - (void)setModel:(BTTBankModel *)model
 {
@@ -38,5 +48,19 @@
         [self.bankIcon sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"defaultCardIcon"]];
     }
     
+}
+
+- (void)SetUnderLine:(UIButton*)btn setTitle:(NSString*)title
+{
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc]initWithString:title];
+    NSRange strRange = {0,[str length]};
+    [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle]range:strRange];
+    [btn setAttributedTitle:str forState:UIControlStateNormal];
+}
+
+- (IBAction)contactBtnClick:(id)sender {
+    if (self.contactBtnTap) {
+        self.contactBtnTap();
+    }
 }
 @end

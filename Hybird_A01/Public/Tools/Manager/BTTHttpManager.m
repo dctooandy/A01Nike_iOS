@@ -74,7 +74,7 @@
 //处理绑定状态获取结果
 + (void)fetchBindStatusWithUseCache:(BOOL)useCache completionBlock:(IVRequestCallBack)completionBlock
 {
-    NSString *typeList = @"phone;email;bank;btc";
+    NSString *typeList = @"phone;email;bank;btc;usdt";
     NSDictionary *params = @{@"typeList":typeList};
     NSString *url = BTTIsBindStatusAPI;
     weakSelf(weakSelf)
@@ -95,6 +95,7 @@
         userInfo[@"isEmailBinded"] = [result.data valueForKey:@"email"];
         userInfo[@"isBankBinded"] = [result.data valueForKey:@"bank"];
         userInfo[@"isBtcBinded"] = [result.data valueForKey:@"btc"];
+        [[NSUserDefaults standardUserDefaults]setObject:[result.data valueForKey:@"usdt"] forKey:BTTBindUsdtCount];
         [IVNetwork updateUserInfo:userInfo];
     }
     if (completionBlock) {

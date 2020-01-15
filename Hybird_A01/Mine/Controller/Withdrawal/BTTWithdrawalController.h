@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger selectIndex;
 @property (nonatomic, strong) BTTBetInfoModel *betInfoModel;
 @property (nonatomic, assign) CGFloat usdtRate;
+@property (nonatomic, assign) BOOL isUSDT;
 
 @end
 

@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *bankIcon;
 
 @property(nonatomic, strong)BTTBankModel *model;
+
+@property (nonatomic, copy) void(^contactBtnTap)(void);
 @end
 
 NS_ASSUME_NONNULL_END

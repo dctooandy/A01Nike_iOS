@@ -9,6 +9,7 @@
 #import "BTTCollectionViewController.h"
 #import "BTTBindStatusModel.h"
 #import "BTTShareRedirectModel.h"
+#import "CLive800Manager.h"
 
 typedef enum : NSUInteger {
     BTTMeSaveMoneyShowTypeAll = 0,

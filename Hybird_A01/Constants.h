@@ -205,6 +205,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 // 昵称缓存字段
 #define BTTNicknameCache      @"BTTNicknameCache"
 
+#define BTTBindUsdtCount @"BTTBindUsdtCount"
+
 
 /*********************************************API********************************************************/
 
