@@ -213,13 +213,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 /*********************************************API********************************************************/
 
-#define BTTVoiceCall        @"/A01/phones/appCall"
-#define BTTVoiceCallLogin        @"/A01/phones/appCallByLogin"
-
 // 登录注册
 
-#define BTTLoginName        @"login_name"
->>>>>>> Nike_Dev
 #define BTTPassword         @"password"
 #define BTTTimestamp        @"timestamp"
 
