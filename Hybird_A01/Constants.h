@@ -350,6 +350,16 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTCreateOnlineOrder         @"deposit/createOnlineOrder"
 // 查询人工存款账号
 #define BTTQueryManualAccount        @"deposit/queryManualDepositAccount"
+// 邮箱发送验证码
+#define BTTEmailSendCode             @"email/sendCode"
+// 邮箱发送验证码LoginName
+#define BTTEmailSendCodeLoginName    @"email/sendCodeByLoginName"
+// 邮箱验证码验证
+#define BTTEmailCodeVerify           @"email/verifySmsCode"
+// 邮箱绑定
+#define BTTEmailBind                 @"email/bind"
+// 邮箱绑定update
+#define BTTEmailBindUpdate           @"email/updateBind"
 
 #define BTTCreditsGame               @"/public/credits/game"
 #define BTTCreditsTotalAvailable     @"/public/credits/totalAvailable"

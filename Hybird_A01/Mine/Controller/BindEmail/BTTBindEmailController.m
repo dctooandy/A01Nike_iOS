@@ -13,8 +13,10 @@
 #import "BTTBindingMobileOneCell.h"
 #import "BTTBindingMobileTwoCell.h"
 #import "BTTChangeMobileSuccessController.h"
+#import "IVRsaEncryptWrapper.h"
 @interface BTTBindEmailController ()<BTTElementsFlowLayoutDelegate>
-
+@property (nonatomic, copy) NSString *messageId;
+@property (nonatomic, copy) NSString *validateId;
 @end
 
 @implementation BTTBindEmailController
@@ -71,11 +73,11 @@
             BTTMeMainModel *model = self.sheetDatas[indexPath.row];
             cell.model = model;
             cell.mineSparaterType = BTTMineSparaterTypeNone;
-            BOOL isUseRegEmail = (![IVNetwork userInfo].isEmailBinded && [IVNetwork userInfo].email.length != 0);
+            BOOL isUseRegEmail = ([IVNetwork savedUserInfo].emailBind==0 && [IVNetwork savedUserInfo].email.length != 0);
             if (self.codeType == BTTSafeVerifyTypeChangeEmail) {
                 cell.sendBtn.enabled = NO;
             } else {
-                cell.sendBtn.enabled = isUseRegEmail || [IVNetwork userInfo].isEmailBinded;
+                cell.sendBtn.enabled = isUseRegEmail || [IVNetwork savedUserInfo].emailBind==1;
             }
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 [weakSelf sendCode];
@@ -145,7 +147,7 @@
 - (void)textBeginEditing:(UITextField *)textField
 {
     if (textField == [self getMailTF]) {
-        if (![IVNetwork userInfo].isEmailBinded && [IVNetwork userInfo].email.length != 0) {
+        if ([IVNetwork savedUserInfo].emailBind==0 && [IVNetwork savedUserInfo].email.length != 0) {
             textField.text = @"";
             [self getSendBtn].enabled = NO;
             [self getSubmitBtn].enabled = NO;
@@ -160,10 +162,10 @@
     if ([self getCodeTF].text.length == 0) {
         [self getSubmitBtn].enabled = NO;
     } else {
-        if ([IVNetwork userInfo].isEmailBinded) {
+        if ([IVNetwork savedUserInfo].emailBind==1) {
             [self getSubmitBtn].enabled = YES;
         } else {
-            if ([[self getMailTF].text isEqualToString:[IVNetwork userInfo].email]) {
+            if ([[self getMailTF].text isEqualToString:[IVNetwork savedUserInfo].email]) {
                 [self getSubmitBtn].enabled = YES;
             } else {
                 [self getSubmitBtn].enabled = [PublicMethod isValidateEmail:[self getMailTF].text];
@@ -201,91 +203,164 @@
 }
 - (void)sendCode
 {
+    NSString *url = @"";
     NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"type"] = @"2";
-    params[@"send_to"] = [self getMailTF].text;
+    params[@"use"] = @"12";
+    
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     switch (self.codeType) {
         case BTTSafeVerifyTypeBindEmail:
-            params[@"v_type"] = @"2";
+            params[@"use"] = @"12";
+            params[@"email"] = [IVRsaEncryptWrapper encryptorString:[self getMailTF].text];
+            url = BTTEmailSendCode;
             break;
         case BTTSafeVerifyTypeVerifyEmail:
         case BTTSafeVerifyTypeChangeEmail:
-            params[@"v_type"] = @"4";
+            params[@"use"] = @"13";
+            url = BTTEmailSendCodeLoginName;
             break;
         default:
-            params[@"v_type"] = @"2";
+            params[@"use"] = @"12";
             break;
     }
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [IVNetwork sendRequestWithSubURL:@"verify/send" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        if (result.status) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
             [[weakSelf getVerifyCell] countDown];
+            weakSelf.messageId = result.body[@"messageId"];
             [MBProgressHUD showSuccess:@"验证码已发送，请注意查收" toView:nil];
-        } else {
-            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
     }];
 }
 - (void)submitBind
 {
+    NSString *url = @"";
     NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"type"] = @"2";
-    params[@"send_to"] = [self getMailTF].text;
-    params[@"code"] = [self getCodeTF].text;
-    NSString *url = @"A01/verify/newBind";
-    NSString *successStr = nil;
+    params[@"use"] = @"12";
+    params[@"email"] = [self getMailTF].text;
+    params[@"emailCode"] = [self getCodeTF].text;
+    params[@"messageId"] = self.messageId;
+    params[@"validateId"] = @"";
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     switch (self.codeType) {
         case BTTSafeVerifyTypeBindEmail:
-            params[@"v_type"] = @"2";
+            params[@"use"] = @"12";
+            url = BTTEmailBind;
             break;
         case BTTSafeVerifyTypeVerifyEmail:
-            params[@"v_type"] = @"4";
-            url = @"public/verify/check";
-            successStr = @"验证成功!";
-            break;
         case BTTSafeVerifyTypeChangeEmail:
-            params[@"v_type"] = @"4";
+            params[@"use"] = @"13";
+            url = BTTEmailBindUpdate;
             break;
         default:
-            params[@"v_type"] = @"4";
+            params[@"use"] = @"9";
             break;
     }
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-        if (result.status) {
-            if (successStr) {
-                [MBProgressHUD showSuccess:successStr toView:nil];
-            }
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            self.validateId = result.body[@"validateId"];
             switch (self.codeType) {
                 case BTTSafeVerifyTypeBindEmail:
-                case BTTSafeVerifyTypeChangeEmail:
-                {
-                    if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
-                        NSString *email = result.data[@"val"];
-                        [IVNetwork updateUserInfo:@{@"email" : email}];
-                        //TODO:
-//                        [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
-                    }
-                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-                    vc.mobileCodeType = self.codeType;
-                    [weakSelf.navigationController pushViewController:vc animated:YES];
-                }
+                    [self bindEmailWithValidateId:self.validateId type:12];
                     break;
-                case BTTSafeVerifyTypeVerifyEmail:{
-                    BTTBindEmailController *vc = [BTTBindEmailController new];
-                    vc.codeType = BTTSafeVerifyTypeChangeEmail;
-                    [weakSelf.navigationController pushViewController:vc animated:YES];
-                }
+                case BTTSafeVerifyTypeVerifyEmail:
+                    break;
+                case BTTSafeVerifyTypeChangeEmail:
+                    [self bindEmailWithValidateId:self.validateId type:13];
                     break;
                 default:
                     break;
             }
-        } else {
-            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }else{
+            
+        }
+    }];
+//    NSString *url = @"A01/verify/newBind";
+//    NSString *successStr = nil;
+//    switch (self.codeType) {
+//        case BTTSafeVerifyTypeBindEmail:
+//            params[@"v_type"] = @"2";
+//            break;
+//        case BTTSafeVerifyTypeVerifyEmail:
+//            params[@"v_type"] = @"4";
+//            url = @"public/verify/check";
+//            successStr = @"验证成功!";
+//            break;
+//        case BTTSafeVerifyTypeChangeEmail:
+//            params[@"v_type"] = @"4";
+//            break;
+//        default:
+//            params[@"v_type"] = @"4";
+//            break;
+//    }
+//    weakSelf(weakSelf)
+//    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+//    [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+//        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+//        if (result.status) {
+//            if (successStr) {
+//                [MBProgressHUD showSuccess:successStr toView:nil];
+//            }
+//            switch (self.codeType) {
+//                case BTTSafeVerifyTypeBindEmail:
+//                case BTTSafeVerifyTypeChangeEmail:
+//                {
+//                    if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
+//                        NSString *email = result.data[@"val"];
+//                        [IVNetwork updateUserInfo:@{@"email" : email}];
+//                        //TODO:
+////                        [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
+//                    }
+//                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+//                    vc.mobileCodeType = self.codeType;
+//                    [weakSelf.navigationController pushViewController:vc animated:YES];
+//                }
+//                    break;
+//                case BTTSafeVerifyTypeVerifyEmail:{
+//                    BTTBindEmailController *vc = [BTTBindEmailController new];
+//                    vc.codeType = BTTSafeVerifyTypeChangeEmail;
+//                    [weakSelf.navigationController pushViewController:vc animated:YES];
+//                }
+//                    break;
+//                default:
+//                    break;
+//            }
+//        } else {
+//            [MBProgressHUD showError:result.message toView:weakSelf.view];
+//        }
+//    }];
+}
+
+- (void)bindEmailWithValidateId:(NSString *)validateId type:(NSInteger)type{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    NSString *url = type==12?BTTEmailBind:BTTEmailBindUpdate;
+    params[@"use"] = type==12? @"12" : @"13";
+    params[@"email"] = [self getMailTF].text;
+    params[@"emailCode"] = [self getCodeTF].text;
+    params[@"messageId"] = self.messageId;
+    params[@"validateId"] = validateId;
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    weakSelf(weakSelf)
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [MBProgressHUD showSuccess:@"绑定成功" toView:nil];
+            BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+            vc.mobileCodeType = self.codeType;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
     }];
 }

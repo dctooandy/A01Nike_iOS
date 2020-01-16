@@ -60,7 +60,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 1) {
         UIViewController *vc = nil;
-        if ([IVNetwork userInfo].isPhoneBinded) {
+        if ([IVNetwork savedUserInfo].mobileNoBind==1) {
             BTTVerifyTypeSelectController *selectVC = [BTTVerifyTypeSelectController new];
             selectVC.verifyType = BTTSafeVerifyTypeChangeMobile;
             vc = selectVC;
@@ -72,7 +72,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         UIViewController *vc = nil;
-        if ([IVNetwork userInfo].isEmailBinded) {
+        if ([IVNetwork savedUserInfo].emailBind==1) {
             BTTModifyEmailController *modifyVC = [BTTModifyEmailController new];
             vc = modifyVC;
         } else {

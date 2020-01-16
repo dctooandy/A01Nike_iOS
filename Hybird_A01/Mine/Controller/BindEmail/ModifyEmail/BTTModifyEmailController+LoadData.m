@@ -14,7 +14,7 @@
 - (void)loadMainData {
     NSArray *names = @[@"已绑定邮箱地址"];
     NSArray *placeholders = @[@"请输入邮箱地址"];
-    NSArray *vals = @[[IVNetwork userInfo].email];
+    NSArray *vals = @[[IVNetwork savedUserInfo].email];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
