@@ -680,6 +680,8 @@
 		D345F2AB23D0091600E658A6 /* BTTCustomerBalanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F2A223D0091600E658A6 /* BTTCustomerBalanceModel.m */; };
 		D345F2AC23D0091600E658A6 /* BTTUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F2A623D0091600E658A6 /* BTTUserInfoModel.m */; };
 		D345F2AF23D0093900E658A6 /* BTTQueryOnlineBankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F2AE23D0093900E658A6 /* BTTQueryOnlineBankModel.m */; };
+		D345F2B423D0561100E658A6 /* NSArray+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F2B023D0561000E658A6 /* NSArray+Log.m */; };
+		D345F2B523D0561100E658A6 /* NSDictionary+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F2B323D0561100E658A6 /* NSDictionary+Log.m */; };
 		D35BF23F23B451340085D6A1 /* CNPayUSDTQRSecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BF23923B451330085D6A1 /* CNPayUSDTQRSecondVC.m */; };
 		D35BF24023B451340085D6A1 /* CNPayUSDTStep1VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BF23A23B451330085D6A1 /* CNPayUSDTStep1VC.m */; };
 		D35BF24123B451340085D6A1 /* USDTWalletCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BF23B23B451330085D6A1 /* USDTWalletCollectionCell.m */; };
@@ -1825,6 +1827,10 @@
 		D345F2A723D0091600E658A6 /* BTTXiMaQueryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTXiMaQueryModel.h; sourceTree = "<group>"; };
 		D345F2AD23D0093900E658A6 /* BTTQueryOnlineBankModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTQueryOnlineBankModel.h; sourceTree = "<group>"; };
 		D345F2AE23D0093900E658A6 /* BTTQueryOnlineBankModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTQueryOnlineBankModel.m; sourceTree = "<group>"; };
+		D345F2B023D0561000E658A6 /* NSArray+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Log.m"; sourceTree = "<group>"; };
+		D345F2B123D0561000E658A6 /* NSDictionary+Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Log.h"; sourceTree = "<group>"; };
+		D345F2B223D0561100E658A6 /* NSArray+Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Log.h"; sourceTree = "<group>"; };
+		D345F2B323D0561100E658A6 /* NSDictionary+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Log.m"; sourceTree = "<group>"; };
 		D35BF23723B451330085D6A1 /* USDTWalletCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USDTWalletCollectionCell.h; sourceTree = "<group>"; };
 		D35BF23823B451330085D6A1 /* CNPayUSDTStep1VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayUSDTStep1VC.h; sourceTree = "<group>"; };
 		D35BF23923B451330085D6A1 /* CNPayUSDTQRSecondVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayUSDTQRSecondVC.m; sourceTree = "<group>"; };
@@ -2957,6 +2963,10 @@
 		3A8F5169215F75BB0069D1B3 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				D345F2B223D0561100E658A6 /* NSArray+Log.h */,
+				D345F2B023D0561000E658A6 /* NSArray+Log.m */,
+				D345F2B123D0561000E658A6 /* NSDictionary+Log.h */,
+				D345F2B323D0561100E658A6 /* NSDictionary+Log.m */,
 				3A11ADD8218187B600B1AFF4 /* MBProgressHUD+Add.h */,
 				3A11ADD9218187B600B1AFF4 /* MBProgressHUD+Add.m */,
 				3A8F519B215F77EC0069D1B3 /* NSDate+Extension.h */,
@@ -4911,6 +4921,7 @@
 				3ADD23852178184A00FA959A /* BTTMineViewController+LoadData.m in Sources */,
 				3A11ADEA21819B0500B1AFF4 /* BTTBindEmailController.m in Sources */,
 				D31B0EEC23B451B0003666BA /* BTTAddUSDTController+LoadData.m in Sources */,
+				D345F2B423D0561100E658A6 /* NSArray+Log.m in Sources */,
 				3A11ADD521816E5800B1AFF4 /* SVProgressHUD.m in Sources */,
 				3AD9CF50216EFB3700685B43 /* BTTHomePageBannerCell.m in Sources */,
 				3AE0582021704D5C00C7E70D /* UUMarqueeView.m in Sources */,
@@ -5020,6 +5031,7 @@
 				3A929428219C3D6200764E7E /* BTTRegisterSuccessBtnsCell.m in Sources */,
 				D35BF24023B451340085D6A1 /* CNPayUSDTStep1VC.m in Sources */,
 				D345F29123CFFC2300E658A6 /* IVUtility.m in Sources */,
+				D345F2B523D0561100E658A6 /* NSDictionary+Log.m in Sources */,
 				EA5F141121A265B0004305A7 /* BTTBankModel.m in Sources */,
 				3A2894FE237BE701008EB579 /* BTTLoginOrRegisterBtsView.m in Sources */,
 				3AE1EB192180585B0073A32D /* BTTAddCardController.m in Sources */,

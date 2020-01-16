@@ -290,63 +290,10 @@
                     break;
             }
         }else{
-            
+            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
     }];
-//    NSString *url = @"A01/verify/newBind";
-//    NSString *successStr = nil;
-//    switch (self.codeType) {
-//        case BTTSafeVerifyTypeBindEmail:
-//            params[@"v_type"] = @"2";
-//            break;
-//        case BTTSafeVerifyTypeVerifyEmail:
-//            params[@"v_type"] = @"4";
-//            url = @"public/verify/check";
-//            successStr = @"验证成功!";
-//            break;
-//        case BTTSafeVerifyTypeChangeEmail:
-//            params[@"v_type"] = @"4";
-//            break;
-//        default:
-//            params[@"v_type"] = @"4";
-//            break;
-//    }
-//    weakSelf(weakSelf)
-//    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-//    [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
-//        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-//        if (result.status) {
-//            if (successStr) {
-//                [MBProgressHUD showSuccess:successStr toView:nil];
-//            }
-//            switch (self.codeType) {
-//                case BTTSafeVerifyTypeBindEmail:
-//                case BTTSafeVerifyTypeChangeEmail:
-//                {
-//                    if (result.data && [result.data isKindOfClass:[NSDictionary class]] && [result.data valueForKey:@"val"]) {
-//                        NSString *email = result.data[@"val"];
-//                        [IVNetwork updateUserInfo:@{@"email" : email}];
-//                        //TODO:
-////                        [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
-//                    }
-//                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-//                    vc.mobileCodeType = self.codeType;
-//                    [weakSelf.navigationController pushViewController:vc animated:YES];
-//                }
-//                    break;
-//                case BTTSafeVerifyTypeVerifyEmail:{
-//                    BTTBindEmailController *vc = [BTTBindEmailController new];
-//                    vc.codeType = BTTSafeVerifyTypeChangeEmail;
-//                    [weakSelf.navigationController pushViewController:vc animated:YES];
-//                }
-//                    break;
-//                default:
-//                    break;
-//            }
-//        } else {
-//            [MBProgressHUD showError:result.message toView:weakSelf.view];
-//        }
-//    }];
+
 }
 
 - (void)bindEmailWithValidateId:(NSString *)validateId type:(NSInteger)type{

@@ -12,6 +12,7 @@
 #import "BTTHomePageSeparateCell.h"
 #import "BTTBindingMobileBtnCell.h"
 #import "BTTMeMainModel.h"
+#import "IVRsaEncryptWrapper.h"
 
 @interface BTTPasswordChangeController ()<BTTElementsFlowLayoutDelegate>
 
@@ -160,24 +161,21 @@
         [MBProgressHUD showError:@"输入的新密码格式有误！"toView:self.view];
         return;
     }
-    NSString *url = isPT ? @"users/updatePTPwd" : @"public/users/updatePassword";
     NSMutableDictionary *params = @{}.mutableCopy;
-    if (isPT) {
-        params[@"pt_key"] = new;
-        params[@"pwd"] = loginPwd;
-    } else {
-        params[@"oldpwd"] = loginPwd;
-        params[@"pwd"] = new;
-    }
+    params[@"newPassword"] = [IVRsaEncryptWrapper encryptorString:new];
+    params[@"oldPassword"] = [IVRsaEncryptWrapper encryptorString:loginPwd];
+    params[@"type"]= isPT ? @2 : @1;
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [IVNetwork sendRequestWithSubURL:url paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
+    [IVNetwork requestPostWithUrl:BTTModifyLoginPwd paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        if (result.status) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
             [MBProgressHUD showSuccess:@"密码修改成功!" toView:nil];
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-        } else {
-            [MBProgressHUD showError:result.message toView:weakSelf.view];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
     }];
 }
