@@ -215,9 +215,13 @@
             url = BTTEmailSendCode;
             break;
         case BTTSafeVerifyTypeVerifyEmail:
-        case BTTSafeVerifyTypeChangeEmail:
             params[@"use"] = @"13";
             url = BTTEmailSendCodeLoginName;
+            break;
+        case BTTSafeVerifyTypeChangeEmail:
+            params[@"use"] = @"13";
+            url = BTTEmailSendCode;
+            params[@"email"] = [IVRsaEncryptWrapper encryptorString:[self getMailTF].text];
             break;
         default:
             params[@"use"] = @"12";
@@ -250,12 +254,12 @@
     switch (self.codeType) {
         case BTTSafeVerifyTypeBindEmail:
             params[@"use"] = @"12";
-            url = BTTEmailBind;
+            url = BTTEmailCodeVerify;
             break;
         case BTTSafeVerifyTypeVerifyEmail:
         case BTTSafeVerifyTypeChangeEmail:
             params[@"use"] = @"13";
-            url = BTTEmailBindUpdate;
+            url = BTTEmailCodeVerify;
             break;
         default:
             params[@"use"] = @"9";
@@ -272,7 +276,12 @@
                 case BTTSafeVerifyTypeBindEmail:
                     [self bindEmailWithValidateId:self.validateId type:12];
                     break;
-                case BTTSafeVerifyTypeVerifyEmail:
+                case BTTSafeVerifyTypeVerifyEmail:{
+                    BTTBindEmailController *vc = [BTTBindEmailController new];
+                    vc.codeType = BTTSafeVerifyTypeChangeEmail;
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                    
+                }
                     break;
                 case BTTSafeVerifyTypeChangeEmail:
                     [self bindEmailWithValidateId:self.validateId type:13];
