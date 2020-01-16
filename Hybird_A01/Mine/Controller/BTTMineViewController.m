@@ -402,14 +402,13 @@
                 NSString *timeStamp = [[NSUserDefaults standardUserDefaults]objectForKey:BTTWithDrawToday];
                 NSInteger usdtCount = [[[NSUserDefaults standardUserDefaults]objectForKey:BTTBindUsdtCount] integerValue];
                 if (timeStamp!=nil) {
-                    NSString *timeStamp = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
-                    [[NSUserDefaults standardUserDefaults]setObject:timeStamp forKey:BTTWithDrawToday];
                     BOOL isSameDay = [PublicMethod isDateToday:[PublicMethod transferDateStringToDate:timeStamp]];
                     if (isSameDay) {
                         BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
                         [self.navigationController pushViewController:vc animated:YES];
                     }else{
-                        [[NSUserDefaults standardUserDefaults]setObject:timeStamp forKey:BTTWithDrawToday];
+                        NSString *timeStamp1 = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
+                        [[NSUserDefaults standardUserDefaults]setObject:timeStamp1 forKey:BTTWithDrawToday];
                         BTTUsdtTodayNoticeView *alertView = [[BTTUsdtTodayNoticeView alloc]initWithFrame:CGRectZero];
                         [alertView setTapCancel:^{
                             BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];

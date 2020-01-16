@@ -22,6 +22,7 @@
     self.uView.backgroundColor = kBlackBackgroundColor;
     self.mineArrowsType = BTTMineArrowsTypeNoHidden;
     [self SetUnderLine:self.contactButton setTitle:@"咨询客服"];
+    self.mineArrowsType = BTTMineArrowsTypeHidden;
 }
 - (void)setModel:(BTTBankModel *)model
 {

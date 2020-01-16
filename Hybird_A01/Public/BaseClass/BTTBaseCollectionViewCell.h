@@ -36,6 +36,8 @@ typedef void (^BTTRefreshEventBlock)(void);
 
 @interface BTTBaseCollectionViewCell : UICollectionViewCell
 
+@property (nonatomic, strong) UIImageView *arrowIcon;
+
 @property (nonatomic, assign) BTTMineSparaterType mineSparaterType;
 
 @property (nonatomic, assign) BTTMineArrowsType mineArrowsType;
