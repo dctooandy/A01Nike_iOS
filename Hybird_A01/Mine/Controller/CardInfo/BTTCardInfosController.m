@@ -431,7 +431,7 @@
 }
 - (BTTCanAddCardType)canAddType
 {
-    if (self.bankList.count == 13) {
+    if (self.bankList.count == 9) {
         return BTTCanAddCardTypeNone;
     }
     int bankCardCount = 0;

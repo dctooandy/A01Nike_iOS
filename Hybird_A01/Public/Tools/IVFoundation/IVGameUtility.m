@@ -75,12 +75,18 @@
 
 - (void)IVGameGetUrlWithParamters:(NSDictionary *)paramters gameController:(IVWKGameViewController *)gameController completion:(void (^)(BOOL,NSString *))completion
 {
-    BOOL isTry = ![IVHttpManager shareManager].userToken.length;
-
+//    BOOL isTry = ![IVHttpManager shareManager].userToken.length;
 //    [BTTHttpManager publicGameLoginWithParams:paramters isTry:isTry completeBlock:^(IVRequestResultModel *result, id response) {
-//        if (completion) {
-//            completion(result.status,response);
+//        if (result.code_http==200&&[result.message isEqualToString:@"游戏维护中"]) {
+//            if (completion) {
+//                completion(YES,@"");
+//            }
+//        }else{
+//            if (completion) {
+//                completion(result.status,response);
+//            }
 //        }
+//        
 //    }];
 }
 - (void)IVGameTransferWithProvider:(NSString *)provider

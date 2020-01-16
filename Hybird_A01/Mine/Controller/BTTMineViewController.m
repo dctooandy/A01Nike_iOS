@@ -53,6 +53,7 @@
 #import "BTTNicknameSetController.h"
 #import "BTTMeHeadernNicknameLoginCell.h"
 #import "BTTActionSheet.h"
+#import "BTTUsdtTodayNoticeView.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -394,9 +395,79 @@
     }
     if (indexPath.row == self.saveMoneyCount + 3) {
         if (self.isCompletePersonalInfo) {
-            if ([IVNetwork savedUserInfo].bankCardNum!=0) {
-                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
+            if ([IVNetwork userInfo].isBankBinded) {
+                NSString *timeStamp = [[NSUserDefaults standardUserDefaults]objectForKey:BTTWithDrawToday];
+                NSInteger usdtCount = [[[NSUserDefaults standardUserDefaults]objectForKey:BTTBindUsdtCount] integerValue];
+                if (timeStamp!=nil) {
+                    BOOL isSameDay = [PublicMethod isDateToday:[PublicMethod transferDateStringToDate:timeStamp]];
+                    if (isSameDay) {
+                        BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }else{
+                        NSString *timeStamp1 = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
+                        [[NSUserDefaults standardUserDefaults]setObject:timeStamp1 forKey:BTTWithDrawToday];
+                        BTTUsdtTodayNoticeView *alertView = [[BTTUsdtTodayNoticeView alloc]initWithFrame:CGRectZero];
+                        [alertView setTapCancel:^{
+                            BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }];
+                        BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+                        popView.isClickBGDismiss = YES;
+                        [popView pop];
+                        alertView.dismissBlock = ^{
+                            [popView dismiss];
+                        };
+                        alertView.tapConfirm = ^{
+                            [popView dismiss];
+                            if (usdtCount==0) {
+                                [MBProgressHUD showMessagNoActivity:@"请先绑定USDT钱包" toView:nil];
+                                BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+                                [self.navigationController pushViewController:vc animated:YES];
+                            }else{
+                                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                                vc.isUSDT = YES;
+                                [self.navigationController pushViewController:vc animated:YES];
+                            }
+                        };
+                        alertView.tapContact = ^{
+                            [popView dismiss];
+                            [[CLive800Manager sharedInstance] startLive800Chat:self];
+                        };
+                        
+                    }
+                }else{
+                    NSString *timeStamp = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
+                    [[NSUserDefaults standardUserDefaults]setObject:timeStamp forKey:BTTWithDrawToday];
+                    BTTUsdtTodayNoticeView *alertView = [BTTUsdtTodayNoticeView viewFromXib];
+                    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+                    popView.isClickBGDismiss = YES;
+                    [popView pop];
+                    alertView.dismissBlock = ^{
+                        [popView dismiss];
+                    };
+                    alertView.tapCancel = ^{
+                        [popView dismiss];
+                        BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    };
+                    alertView.tapConfirm = ^{
+                        [popView dismiss];
+                        if (usdtCount==0) {
+                            [MBProgressHUD showMessagNoActivity:@"请先绑定USDT钱包" toView:nil];
+                            BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }else{
+                            BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                            vc.isUSDT = YES;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }
+                    };
+                    alertView.tapContact = ^{
+                        [popView dismiss];
+                        [[CLive800Manager sharedInstance] startLive800Chat:self];
+                    };
+                }
+                
             } else {
                 [MBProgressHUD showMessagNoActivity:@"请先绑定银行卡" toView:nil];
                 BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];

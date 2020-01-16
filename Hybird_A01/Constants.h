@@ -145,6 +145,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 #define BTTVerisionUpdateKey        @"BTTVerisionUpdateKey"
 
+#define BTTWithDrawToday        @"BTTWithDrawToday"
+
 // 存款超过十次的用户
 
 #define BTTSaveMoneyMoreThenTenKey     @"BTTSaveMoneyMoreThenTenKey"
@@ -205,6 +207,19 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 // 昵称缓存字段
 #define BTTNicknameCache      @"BTTNicknameCache"
 #define BTTLoginName        @"loginName"
+
+#define BTTBindUsdtCount @"BTTBindUsdtCount"
+
+
+/*********************************************API********************************************************/
+
+#define BTTVoiceCall        @"/A01/phones/appCall"
+#define BTTVoiceCallLogin        @"/A01/phones/appCallByLogin"
+
+// 登录注册
+
+#define BTTLoginName        @"login_name"
+>>>>>>> Nike_Dev
 #define BTTPassword         @"password"
 #define BTTTimestamp        @"timestamp"
 

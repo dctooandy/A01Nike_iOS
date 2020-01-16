@@ -13,7 +13,7 @@
 
 @property (strong, nonatomic) UIView *seperaterLine;
 
-@property (nonatomic, strong) UIImageView *arrowIcon;
+
 
 @property (nonatomic, strong) UIView *seperaterLine2;
 
