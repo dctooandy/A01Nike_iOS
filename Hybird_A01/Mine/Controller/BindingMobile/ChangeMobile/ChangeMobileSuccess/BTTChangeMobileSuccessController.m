@@ -34,9 +34,13 @@
             break;
         case BTTSafeVerifyTypeMobileChangeBankCard:
         case BTTSafeVerifyTypeMobileBindChangeBankCard:
-        case BTTSafeVerifyTypeChangeMobile:
-        case BTTSafeVerifyTypeChangeEmail:
             self.title = @"修改银行卡成功!";
+            break;
+        case BTTSafeVerifyTypeChangeMobile:
+            self.title = @"修改手机号成功!";
+            break;
+        case BTTSafeVerifyTypeChangeEmail:
+            self.title = @"修改邮箱成功!";
             break;
         case BTTSafeVerifyTypeMobileDelBankCard:
         case BTTSafeVerifyTypeMobileBindDelBankCard:

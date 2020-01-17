@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy  ) NSString  *serviceCharge;
 @property (nonatomic, assign) NSInteger tlbinCredit;
 @property (nonatomic, strong) NSDictionary   *walletBalance;
-@property (nonatomic, assign) NSInteger withdrawBal;
+@property (nonatomic, copy) NSString *withdrawBal;
 @property (nonatomic, assign) NSInteger yebAmount;
 @property (nonatomic, assign) NSInteger yebInterest;
 

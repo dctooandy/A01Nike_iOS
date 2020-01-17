@@ -9,6 +9,7 @@
 #import "BTTCollectionViewController.h"
 #import "BTTBankModel.h"
 #import "BTTBetInfoModel.h"
+#import "BTTCustomerBalanceModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTWithdrawalController : BTTCollectionViewController
@@ -17,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *totalAvailable;
 @property (nonatomic, copy) NSArray<BTTBankModel *> *bankList;
 @property (nonatomic, assign) NSInteger selectIndex;
-@property (nonatomic, strong) BTTBetInfoModel *betInfoModel;
+@property (nonatomic, strong) BTTCustomerBalanceModel *balanceModel;
 @property (nonatomic, assign) CGFloat usdtRate;
 @property (nonatomic, assign) BOOL isUSDT;
 

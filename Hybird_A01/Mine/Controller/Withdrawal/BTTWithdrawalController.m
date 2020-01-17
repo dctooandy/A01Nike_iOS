@@ -45,7 +45,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self loadCreditsTotalAvailable];
-    [self loadBetInfo];
 }
 
 - (void)setupCollectionView {
@@ -95,18 +94,6 @@
         return cell;
         
         
-    }
-    if (self.betInfoModel.status) {
-        if (indexPath.row == 5) {
-            BTTWithdrawalNotifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalNotifyCell" forIndexPath:indexPath];
-            cell.model = cellModel;
-            cell.betInfoModel = self.betInfoModel;
-            return cell;
-        }
-        if (indexPath.row == 6) {
-            BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
-            return cell;
-        }
     }
     NSString *cellName = cellModel.name;
     if ([cellName isEqualToString:@"取款至"]) {
@@ -257,24 +244,23 @@
 
 - (void)refreshBankList
 {
-    //TODO:
-//    NSArray *array = [[IVCacheManager sharedInstance] nativeReadDictionaryForKey:BTTCacheBankListKey];
-//    if (isArrayWithCountMoreThan0(array)) {
-//        NSArray<BTTBankModel *> *bankList  = [BTTBankModel arrayOfModelsFromDictionaries:array error:nil];
-//        NSMutableArray *mBankList = @[].mutableCopy;
-//        for (BTTBankModel *model in bankList) {
-//            //取后3位
-//            NSRange rang = NSMakeRange(model.bankSecurityAccount.length - 3, 3);
-//            NSString *subBankNum = [model.bankSecurityAccount substringWithRange:rang];
-//            NSString *pickStr = [NSString stringWithFormat:@"%@-尾号***%@",model.bankName,subBankNum];
-//            model.withdrawText = pickStr;
-//            if (model.flag == 1) {
-//                [mBankList addObject:model];
-//            }
-//        }
-//        self.bankList = mBankList.copy;
-//        [self setupElements];
-//    }
+    NSDictionary *json = [IVCacheWrapper objectForKey:BTTCacheBankListKey];
+    if (json!=nil) {
+        NSArray *array = json[@"accounts"];
+        if (isArrayWithCountMoreThan0(array)) {
+            NSMutableArray *bankList = [[NSMutableArray alloc]init];
+            for (int i =0 ; i<array.count; i++) {
+                NSDictionary *json = array[i];
+                BTTBankModel *model = [BTTBankModel yy_modelWithDictionary:json];
+                [bankList addObject:model];
+                if (i==bankList.count-1) {
+                    self.bankList = bankList;
+                    [self setupElements];
+                }
+            }
+            
+        }
+    }
 }
 - (void)submitWithDraw
 {

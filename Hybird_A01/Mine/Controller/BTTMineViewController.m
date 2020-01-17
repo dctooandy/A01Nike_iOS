@@ -395,7 +395,7 @@
     }
     if (indexPath.row == self.saveMoneyCount + 3) {
         if (self.isCompletePersonalInfo) {
-            if ([IVNetwork userInfo].isBankBinded) {
+            if ([IVNetwork savedUserInfo].bankCardNum>0) {
                 NSString *timeStamp = [[NSUserDefaults standardUserDefaults]objectForKey:BTTWithDrawToday];
                 NSInteger usdtCount = [[[NSUserDefaults standardUserDefaults]objectForKey:BTTBindUsdtCount] integerValue];
                 if (timeStamp!=nil) {
