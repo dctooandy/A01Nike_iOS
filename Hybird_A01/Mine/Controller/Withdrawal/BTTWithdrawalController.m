@@ -228,15 +228,31 @@
     BTTWithdrawalCardSelectCell *cell = (BTTWithdrawalCardSelectCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     NSMutableArray *textArray = @[].mutableCopy;
     for (BTTBankModel *model in self.bankList) {
-        [textArray addObject:model.withdrawText];
+        if ([model.accountType isEqualToString:@"借记卡"]||[model.accountType isEqualToString:@"信用卡"]||[model.accountType isEqualToString:@"存折"]||[model.accountType isEqualToString:@"BTC"]) {
+            [textArray addObject:[NSString stringWithFormat:@"%@-%@",model.bankName,model.accountNo]];
+        }else{
+            NSString*resultStr=[model.accountType stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[model.accountType substringToIndex:1] capitalizedString]];
+            [textArray addObject:[NSString stringWithFormat:@"%@-%@",resultStr,model.accountNo]];
+        }
     }
     [BRStringPickerView showStringPickerWithTitle:@"请选择银行卡" dataSource:textArray.copy defaultSelValue:cell.detailLabel.text resultBlock:^(id selectValue, NSInteger index) {
         cell.detailLabel.text = selectValue;
         self.amount = @"";
         for (int i = 0; i < self.bankList.count; i++) {
-            if ([self.bankList[i].withdrawText isEqualToString:selectValue]) {
-                self.selectIndex = i;
+            NSString *withDrawText = @"";
+            if ([self.bankList[i].accountType isEqualToString:@"借记卡"]||[self.bankList[i].accountType isEqualToString:@"信用卡"]||[self.bankList[i].accountType isEqualToString:@"存折"]||[self.bankList[i].accountType isEqualToString:@"BTC"]) {
+                withDrawText = [NSString stringWithFormat:@"%@-%@",self.bankList[i].bankName,self.bankList[i].accountNo];
+                if ([withDrawText isEqualToString:selectValue]) {
+                    self.selectIndex = i;
+                }
+            }else{
+                NSString*resultStr=[self.bankList[i].accountType stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[self.bankList[i].accountType substringToIndex:1] capitalizedString]];
+                withDrawText = [NSString stringWithFormat:@"%@-%@",resultStr,self.bankList[i].accountNo];
+                if ([withDrawText isEqualToString:selectValue]) {
+                    self.selectIndex = i;
+                }
             }
+            
         }
         [self loadMainData];
     }];
@@ -253,7 +269,7 @@
                 NSDictionary *json = array[i];
                 BTTBankModel *model = [BTTBankModel yy_modelWithDictionary:json];
                 [bankList addObject:model];
-                if (i==bankList.count-1) {
+                if (i==array.count-1) {
                     self.bankList = bankList;
                     [self setupElements];
                 }
@@ -270,28 +286,23 @@
     }
     BTTBankModel *model = self.bankList[self.selectIndex];
     NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"customer_bank_id"] = model.accountId;
+    params[@"accountId"] = model.accountId;
     params[@"amount"] = self.amount;
-    NSString *url = nil;
-    if (model.cardType==1) {
-        url = @"public/withdraws/btc";
-    } else {
-        url = @"public/withdraws/newCreate";
-//        params[@"password"] = self.password;
-    }
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    
     weakSelf(weakSelf)
-    //TODO:
-//    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-//    [BTTHttpManager submitWithdrawWithUrl:url params:params.copy completion:^(IVRequestResultModel *result, id response) {
-//        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-//        if (result.status) {
-//            BTTWithdrawalSuccessController *vc = [[BTTWithdrawalSuccessController alloc] init];
-//            vc.amount = weakSelf.amount;
-//            [weakSelf.navigationController pushViewController:vc animated:YES];
-//        } else {
-//            [MBProgressHUD showError:result.message toView:weakSelf.view];
-//        }
-//    }];
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [IVNetwork requestPostWithUrl:BTTWithDrawCreate paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTWithdrawalSuccessController *vc = [[BTTWithdrawalSuccessController alloc] init];
+            vc.amount = weakSelf.amount;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
+        }
+    }];
     
 }
 @end

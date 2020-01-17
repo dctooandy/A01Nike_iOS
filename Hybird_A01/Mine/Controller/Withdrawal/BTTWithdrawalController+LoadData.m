@@ -70,18 +70,7 @@
     NSMutableArray *canEdits = @[].mutableCopy;
     NSMutableArray *values = @[].mutableCopy;
     NSInteger btcRateIndex = 3;
-    if (self.bankList[self.selectIndex].cardType==3) {
-        [names addObjectsFromArray:names1];
-        [names addObjectsFromArray:names4];
-        [placeholders addObjectsFromArray:placeholders1];
-        [placeholders addObjectsFromArray:placeholders4];
-        [heights addObjectsFromArray:heights1];
-        [heights addObjectsFromArray:heights4];
-        [canEdits addObjectsFromArray:canEdits1];
-        [canEdits addObjectsFromArray:canEdits4];
-        [values addObjectsFromArray:values1];
-        [values addObjectsFromArray:values4];
-    }else{
+    if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"BTC"]) {
         [names addObjectsFromArray:names1];
         [names addObjectsFromArray:names3];
         [placeholders addObjectsFromArray:placeholders1];
@@ -92,6 +81,17 @@
         [canEdits addObjectsFromArray:canEdits3];
         [values addObjectsFromArray:values1];
         [values addObjectsFromArray:values3];
+    }else{
+        [names addObjectsFromArray:names1];
+        [names addObjectsFromArray:names4];
+        [placeholders addObjectsFromArray:placeholders1];
+        [placeholders addObjectsFromArray:placeholders4];
+        [heights addObjectsFromArray:heights1];
+        [heights addObjectsFromArray:heights4];
+        [canEdits addObjectsFromArray:canEdits1];
+        [canEdits addObjectsFromArray:canEdits4];
+        [values addObjectsFromArray:values1];
+        [values addObjectsFromArray:values4];
     }
 
     if (self.bankList[self.selectIndex].cardType==0) {

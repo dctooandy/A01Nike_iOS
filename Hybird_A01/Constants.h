@@ -362,6 +362,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTEmailBindUpdate           @"email/updateBind"
 // 修改登录密码
 #define BTTModifyLoginPwd            @"customer/modifyPwd"
+// 发起取款
+#define BTTWithDrawCreate            @"withdraw/createRequest"
 
 #define BTTCreditsGame               @"/public/credits/game"
 #define BTTCreditsTotalAvailable     @"/public/credits/totalAvailable"

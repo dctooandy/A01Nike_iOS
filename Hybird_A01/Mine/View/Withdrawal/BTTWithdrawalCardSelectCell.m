@@ -27,15 +27,16 @@
 - (void)setModel:(BTTBankModel *)model
 {
     _model = model;
-    self.detailLabel.text = model.withdrawText;
+    self.detailLabel.text = [NSString stringWithFormat:@"%@-%@",model.bankName,model.accountNo];
     if ([model.accountType isEqualToString:@"BTC"]) {
         self.bankIcon.image = [UIImage imageNamed:@"BTC"];
-    }else if ([model.accountType isEqualToString:@"USDT"]){
-//        if ([model.account isEqualToString:@"others"]) {
-//            self.bankIcon.image=[UIImage imageNamed:@"me_usdt_otherwallet"];
-//        }else{
-//            self.bankIcon.image=[UIImage imageNamed:[NSString stringWithFormat:@"me_usdt_%@",model.bankType]];
-//        }
+    }else if ([model.bankName isEqualToString:@"USDT"]){
+        self.detailLabel.text = [NSString stringWithFormat:@"%@-%@",model.accountType,model.accountNo];
+        if ([model.accountType isEqualToString:@"others"]) {
+            self.bankIcon.image=[UIImage imageNamed:@"me_usdt_otherwallet"];
+        }else{
+            self.bankIcon.image=[UIImage imageNamed:[NSString stringWithFormat:@"me_usdt_%@",model.accountType]];
+        }
     } else {
         NSString *iconURLStr = model.bankIcon;
         if ([NSString isBlankString:iconURLStr]) {
