@@ -143,6 +143,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTVerisionUpdateKey        @"BTTVerisionUpdateKey"
 
 #define BTTWithDrawToday        @"BTTWithDrawToday"
+#define BTTConsetiveWinsToday        @"BTTConsetiveWinsToday"
 
 // 存款超过十次的用户
 

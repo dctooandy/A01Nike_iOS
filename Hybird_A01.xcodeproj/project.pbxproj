@@ -668,6 +668,8 @@
 		D31B0EF623B45251003666BA /* BTTUSDTButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B0EF223B45251003666BA /* BTTUSDTButton.m */; };
 		D31B0EF723B45251003666BA /* BTTUSDTItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B0EF423B45251003666BA /* BTTUSDTItemCell.m */; };
 		D31B0EFA23B46058003666BA /* CNPayUSDTRateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B0EF923B46058003666BA /* CNPayUSDTRateModel.m */; };
+		D32CF75E23D2EF6D00834A00 /* BTTConsetiveWinsPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D32CF75D23D2EF6D00834A00 /* BTTConsetiveWinsPopView.m */; };
+		D32CF76023D2F06300834A00 /* BTTConsetiveWinsPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D32CF75F23D2F06300834A00 /* BTTConsetiveWinsPopView.xib */; };
 		D35BF23F23B451340085D6A1 /* CNPayUSDTQRSecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BF23923B451330085D6A1 /* CNPayUSDTQRSecondVC.m */; };
 		D35BF24023B451340085D6A1 /* CNPayUSDTStep1VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BF23A23B451330085D6A1 /* CNPayUSDTStep1VC.m */; };
 		D35BF24123B451340085D6A1 /* USDTWalletCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BF23B23B451330085D6A1 /* USDTWalletCollectionCell.m */; };
@@ -1789,6 +1791,9 @@
 		D31B0EF423B45251003666BA /* BTTUSDTItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTUSDTItemCell.m; sourceTree = "<group>"; };
 		D31B0EF823B46058003666BA /* CNPayUSDTRateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayUSDTRateModel.h; sourceTree = "<group>"; };
 		D31B0EF923B46058003666BA /* CNPayUSDTRateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayUSDTRateModel.m; sourceTree = "<group>"; };
+		D32CF75C23D2EF6D00834A00 /* BTTConsetiveWinsPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTConsetiveWinsPopView.h; sourceTree = "<group>"; };
+		D32CF75D23D2EF6D00834A00 /* BTTConsetiveWinsPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTConsetiveWinsPopView.m; sourceTree = "<group>"; };
+		D32CF75F23D2F06300834A00 /* BTTConsetiveWinsPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTConsetiveWinsPopView.xib; sourceTree = "<group>"; };
 		D35BF23723B451330085D6A1 /* USDTWalletCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USDTWalletCollectionCell.h; sourceTree = "<group>"; };
 		D35BF23823B451330085D6A1 /* CNPayUSDTStep1VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayUSDTStep1VC.h; sourceTree = "<group>"; };
 		D35BF23923B451330085D6A1 /* CNPayUSDTQRSecondVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayUSDTQRSecondVC.m; sourceTree = "<group>"; };
@@ -3524,6 +3529,9 @@
 				3A14CC5623726A8C009711CF /* BTTJayPopView.h */,
 				3A14CC5723726A8C009711CF /* BTTJayPopView.m */,
 				3A14CC5923726A9E009711CF /* BTTJayPopView.xib */,
+				D32CF75C23D2EF6D00834A00 /* BTTConsetiveWinsPopView.h */,
+				D32CF75D23D2EF6D00834A00 /* BTTConsetiveWinsPopView.m */,
+				D32CF75F23D2F06300834A00 /* BTTConsetiveWinsPopView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4686,6 +4694,7 @@
 				3A5AE6F022D6E22A0013E8A3 /* LIVAutoScrollTextView5.png in Resources */,
 				3A5AE71322D6E22B0013E8A3 /* sad.gif in Resources */,
 				3A5AE66122D6E22A0013E8A3 /* LIVEmotionBoardCell.nib in Resources */,
+				D32CF76023D2F06300834A00 /* BTTConsetiveWinsPopView.xib in Resources */,
 				3A5AE6A022D6E22A0013E8A3 /* LIVVideoCamera_close@2x.png in Resources */,
 				3A11AE632186CDA100B1AFF4 /* BTTXimaHeaderCell.xib in Resources */,
 				3A5AE6B822D6E22A0013E8A3 /* LIVFileMessage_TypePPT@3x.png in Resources */,
@@ -4989,6 +4998,7 @@
 				D599251D21AFC8CA001E885A /* CNPayDepostiBankCell.m in Sources */,
 				3AB0686E21A5033700072FB7 /* BTTPTTransferInputCell.m in Sources */,
 				3AE1EADF217F22710073A32D /* BTTCardInfosController.m in Sources */,
+				D32CF75E23D2EF6D00834A00 /* BTTConsetiveWinsPopView.m in Sources */,
 				D5DBEB3021ABB774008AF629 /* CNPayNameTF.m in Sources */,
 				3A5B027F234F0D6700D8828B /* BTTXimaRecordCell.m in Sources */,
 				3A11ADED21819BDE00B1AFF4 /* BTTBindEmailController+LoadData.m in Sources */,
@@ -5409,7 +5419,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.47;
+				MARKETING_VERSION = 3.0.48;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5449,7 +5459,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.47;
+				MARKETING_VERSION = 3.0.48;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

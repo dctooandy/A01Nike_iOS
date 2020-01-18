@@ -1135,4 +1135,17 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     NSDate *date = [formatter dateFromString:dateString];
     return date;
 }
+
++ (BOOL)date:(NSDate*)date isBetweenDate:(NSDate*)beginDate andDate:(NSDate*)endDate
+{
+    if ([date compare:beginDate] ==NSOrderedAscending)
+        return NO;
+    
+    if ([date compare:endDate] ==NSOrderedDescending)
+        return NO;
+    
+    return YES;
+}
+
+
 @end

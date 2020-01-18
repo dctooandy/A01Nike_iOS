@@ -229,6 +229,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSDate *)transferDateStringToDate:(NSString *)dateString;
 
+//是否在两个时间段内
++ (BOOL)date:(NSDate*)date isBetweenDate:(NSDate*)beginDate andDate:(NSDate*)endDate;
+
 @end
 
 NS_ASSUME_NONNULL_END
