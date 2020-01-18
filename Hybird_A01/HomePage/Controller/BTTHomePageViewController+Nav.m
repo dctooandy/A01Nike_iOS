@@ -38,15 +38,15 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 
 
 - (void)setupFloatWindow {
-    UIImageView *floatWindow = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - 61, SCREEN_HEIGHT / 2 + 120, 68.8, 66)];
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"qhb" ofType:@"gif"];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    UIImage *image = [UIImage sd_animatedGIFWithData:data];
-    [floatWindow sd_setImageWithURL:nil placeholderImage:image];
-    [self.view addSubview:floatWindow];
-    floatWindow.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
-    [floatWindow addGestureRecognizer:tap];
+//    UIImageView *floatWindow = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - 61, SCREEN_HEIGHT / 2 + 120, 68.8, 66)];
+//    NSString *path = [[NSBundle mainBundle] pathForResource:@"qhb" ofType:@"gif"];
+//    NSData *data = [NSData dataWithContentsOfFile:path];
+//    UIImage *image = [UIImage sd_animatedGIFWithData:data];
+//    [floatWindow sd_setImageWithURL:nil placeholderImage:image];
+//    [self.view addSubview:floatWindow];
+//    floatWindow.userInteractionEnabled = YES;
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+//    [floatWindow addGestureRecognizer:tap];
 }
 
 - (void)tapAction {

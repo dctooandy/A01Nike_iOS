@@ -59,9 +59,13 @@
 //            [self addSubview:moonImage];
             
             
-            UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 90) / 2, BTTIconTop + (64 - 30) / 2 + 5, 90, 30)];
+            UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
             [self addSubview:logoImageView];
-            logoImageView.image = ImageNamed(@"Navlogo");
+//            logoImageView.image = ImageNamed(@"Navlogo");
+            
+            UIImageView *centerImageView = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 110) / 2, BTTIconTop + (64 - 40) / 2 + 5, 110, 40)];
+            [self addSubview:centerImageView];
+            centerImageView.image = ImageNamed(@"NavlogoNewYear");
             
             
             self.titleLabel = [UILabel new];
