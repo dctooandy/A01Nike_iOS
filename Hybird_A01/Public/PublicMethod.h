@@ -233,6 +233,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 //获取随机字符串，年月日时分秒+6位随机数
 + (NSString *)getRandomTimeString;
+//是否在两个时间段内
++ (BOOL)date:(NSDate*)date isBetweenDate:(NSDate*)beginDate andDate:(NSDate*)endDate;
 
 @end
 
