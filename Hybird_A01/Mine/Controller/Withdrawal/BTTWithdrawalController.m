@@ -20,6 +20,9 @@
 #import "BTTBankModel.h"
 #import "BTTWithdrawalNotifyCell.h"
 #import "BTTWithDrawUSDTConfirmCell.h"
+#import "BTTBTCRateModel.h"
+#import "CNPayUSDTRateModel.h"
+
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate>
 @property(nonatomic, copy)NSString *amount;
 @property(nonatomic, copy)NSString *password;
@@ -80,7 +83,7 @@
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
     }
-    if (self.bankList[self.selectIndex].cardType==3&&indexPath.row==self.sheetDatas.count-2) {
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]&&indexPath.row==self.sheetDatas.count-2) {
         BTTWithDrawUSDTConfirmCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell" forIndexPath:indexPath];
         [cell setCellRateWithRate:self.usdtRate];
         return cell;
@@ -143,6 +146,7 @@
         }else{
             BTTMeMainModel *model = self.sheetDatas[indexPath.row];
             if ([model.name isEqualToString:@"取款至"]) {
+                [self.view endEditing:YES];
                 [self bankCardPick:indexPath];
             }
         }
@@ -203,7 +207,7 @@
         self.password = textField.text;
     } else if (textField.tag == 8002) {
         self.amount = textField.text;
-        if (self.bankList[self.selectIndex].cardType==3) {
+        if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]) {
             NSString *fUsdtAmount = [NSString stringWithFormat:@"%.5f",([self.amount doubleValue] * self.usdtRate)];
             self.usdtAmount = [NSString stringWithFormat:@"%@ USDT",[fUsdtAmount substringWithRange:NSMakeRange(0, fUsdtAmount.length-1)]];
             _usdtField.text = self.usdtAmount;
@@ -254,6 +258,7 @@
             }
             
         }
+        [self.view endEditing:YES];
         [self loadMainData];
     }];
 }
@@ -271,6 +276,7 @@
                 [bankList addObject:model];
                 if (i==array.count-1) {
                     self.bankList = bankList;
+                    [self loadMainData];
                     [self setupElements];
                 }
             }
@@ -284,25 +290,82 @@
         [MBProgressHUD showError:@"最少10元" toView:nil];
         return;
     }
+    if (self.canWithdraw>0) {
+        [MBProgressHUD showError:[NSString stringWithFormat:@"您有%ld个未处理的取款提案",(long)self.canWithdraw] toView:nil];
+        return;
+    }
+    if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]) {
+        [self showLoading];
+        [self createRequestWithBtcModel:nil usdtModel:nil];
+    }else if ([self.bankList[self.selectIndex].accountType isEqualToString:@"BTC"]){
+        NSDictionary *params = @{
+            @"amount":self.amount,
+            @"loginName":[IVNetwork savedUserInfo].loginName
+        };
+        [self showLoading];
+        [IVNetwork requestPostWithUrl:BTTWithDrawBTCRate paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                BTTBTCRateModel *model = [BTTBTCRateModel yy_modelWithJSON:result.body];
+                [self createRequestWithBtcModel:model usdtModel:nil];
+            }else{
+                [self hideLoading];
+                [MBProgressHUD showError:@"获取比特币汇率失败，请稍后重试" toView:nil];
+            }
+        }];
+    }else{
+        NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+        params[@"amount"] = self.amount;
+        params[@"srcCurrency"] = @"CNY";
+        params[@"tgtCurrency"] = @"USDT";
+        params[@"used"] = @"2";
+        params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+        [self showLoading];
+        [IVNetwork requestPostWithUrl:BTTCurrencyExchanged paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            [self hideLoading];
+            IVJResponseObject *result = response;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                CNPayUSDTRateModel *rateModel = [CNPayUSDTRateModel yy_modelWithJSON:result.body];
+                [self createRequestWithBtcModel:nil usdtModel:rateModel];
+            }else{
+                [self hideLoading];
+                [MBProgressHUD showError:@"获取USDT汇率失败，请稍后重试" toView:nil];
+            }
+        }];
+    }
+}
+
+- (void)createRequestWithBtcModel:(BTTBTCRateModel *)btcModel usdtModel:(CNPayUSDTRateModel *)usdtModel{
+    NSString *amount = self.amount;
     BTTBankModel *model = self.bankList[self.selectIndex];
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"accountId"] = model.accountId;
     params[@"amount"] = self.amount;
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    if (btcModel!=nil) {
+        params[@"btcAmount"] = btcModel.btcAmount;
+        params[@"btcRate"] = btcModel.btcRate;
+        params[@"btcUuid"] = btcModel.btcUuid;
+    }
+    if (usdtModel!=nil) {
+        params[@"btcAmount"] = usdtModel.tgtAmount;
+        params[@"btcRate"] = usdtModel.rate;
+        params[@"btcUuid"] = usdtModel.uuid;
+    }
     
     weakSelf(weakSelf)
-    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     [IVNetwork requestPostWithUrl:BTTWithDrawCreate paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BTTWithdrawalSuccessController *vc = [[BTTWithdrawalSuccessController alloc] init];
-            vc.amount = weakSelf.amount;
+            vc.amount = amount;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
     }];
-    
 }
+
 @end

@@ -35,7 +35,7 @@
 - (void)setModel:(platformBanlaceModel *)model {
     _model = model;
     self.nameLabel.text = model.platformName;
-    self.amountLabel.text = [NSString stringWithFormat:@"%.2f",model.balance];
+    self.amountLabel.text = model.balance;
     [self.activityView stopAnimating];
     self.activityView.hidden = YES;
     self.amountLabel.hidden = NO;

@@ -8,6 +8,7 @@
 
 #import "NSString+Expand.h"
 #import "BTTUserInfoModel.h"
+#import "IVRsaEncryptWrapper.h"
 
 #define kWKWebViewPostJS @"function wkWebViewPostJS(path, params) {\
 var method = \"POST\";\
@@ -128,19 +129,20 @@ form.submit();\
 + (NSString *)wkWebViewPostjsWithURLString:(NSString *)url {
     NSString *parameterStr  = @"";
     NSString *localDomain = [IVHttpManager shareManager].gateway;
-    //TODO:
-//    if ([url containsString:localDomain]) {
-//
-//        NSString *appToken =  [IVCacheWrapper readJSONStringForKey:kCacheAppToken requestId:nil];//[[IVCacheManager sharedInstance] nativeReadDictionaryForKey:kCacheAppToken];
-//        BTTUserInfoModel *userModel = [IVHttpManager shareManager].userInfoModel;//[IVNetwork userInfo];
-//
-//        if (userModel != nil) {
-//            parameterStr = [NSString stringWithFormat:@"{\"accountName\":\"%@\",\"appToken\":\"%@\",\"userToken\":\"%@\"}",userModel.loginName, appToken, [IVHttpManager shareManager].userToken];
-//        }
-//        else {
-//            parameterStr = [NSString stringWithFormat:@"{\"appToken\":\"%@\",}", appToken];
-//        }
-//    }
+    if ([url containsString:localDomain]) {
+
+        NSString *appToken = @"";
+        if ([[NSUserDefaults standardUserDefaults]objectForKey:@"userToken"]!=nil) {
+            appToken = [[NSUserDefaults standardUserDefaults]objectForKey:@"userToken"];
+        }
+
+        if ([IVNetwork savedUserInfo] != nil) {
+            parameterStr = [NSString stringWithFormat:@"{\"accountName\":\"%@\",\"appToken\":\"%@\",\"userToken\":\"%@\"}",[IVNetwork savedUserInfo].loginName, appToken, [IVHttpManager shareManager].userToken];
+        }
+        else {
+            parameterStr = [NSString stringWithFormat:@"{\"appToken\":\"%@\",}", appToken];
+        }
+    }
     NSString * postjs = [NSString stringWithFormat:@"%@wkWebViewPostJS(\"%@\", %@)",kWKWebViewPostJS, url,parameterStr];
     return postjs;
 }

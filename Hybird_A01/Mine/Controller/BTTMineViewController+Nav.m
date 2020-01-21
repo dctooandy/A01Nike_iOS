@@ -169,23 +169,7 @@ static const char *BTTHeaderViewKey = "headerView";
 - (void)rightClick:(UIButton *)btn {
     
     BTTPopoverAction *action1 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineService") title:@"在线客服" handler:^(BTTPopoverAction *action) {
-//        if ([IVNetwork savedUserInfo]) {
-//            weakSelf(weakSelf);
-//            [self getLive800InfoDataWithResponse:^(NSString * _Nonnull info) {
-//                strongSelf(strongSelf);
-//                NSString *url = [NSString stringWithFormat:@"%@&info=%@",@"https://www.why918.com/chat/chatClient/chatbox.jsp?companyID=8990&configID=21&k=1&codeType=custom",info];
-//                BTTLive800ViewController *live800 = [[BTTLive800ViewController alloc] init];
-//                live800.webConfigModel.url = url;
-//                live800.webConfigModel.newView = YES;
-//                [strongSelf.navigationController pushViewController:live800 animated:YES];
-//            }];
-//        } else {
-//            NSString *url = @"https://www.why918.com/chat/chatClient/chatbox.jsp?companyID=8990&configID=21&k=1&codeType=custom";
-//            BTTLive800ViewController *live800 = [[BTTLive800ViewController alloc] init];
-//            live800.webConfigModel.url = url;
-//            live800.webConfigModel.newView = YES;
-//            [self.navigationController pushViewController:live800 animated:YES];
-//        }
+
         [[CLive800Manager sharedInstance] startLive800Chat:self];
     }];
     
@@ -219,19 +203,19 @@ static const char *BTTHeaderViewKey = "headerView";
 //        [[CLive800Manager sharedInstance] startLive800Chat:self];
 //    }];
     
-    NSString *phoneValue = [IVNetwork getPublicConfigWithKey:@"APP_400_HOTLINE"];
+    NSString *phoneValue = [IVCacheWrapper objectForKey:@"APP_400_HOTLINE"];
     NSString *normalPhone = nil;
     NSString *vipPhone = nil;
     if (phoneValue.length) {
-        NSArray *phonesArr = [phoneValue componentsSeparatedByString:@"|"];
-        normalPhone = phonesArr[1];
-        vipPhone = phonesArr[3];
+        NSArray *phonesArr = [phoneValue componentsSeparatedByString:@";"];
+        normalPhone = phonesArr[0];
+        vipPhone = phonesArr[1];
     }
     if (!normalPhone.length) {
-        normalPhone = @"400-120-3618";
+        normalPhone = @"400-120-3611";
     }
     if (!vipPhone.length) {
-        vipPhone = @"400-120-3616";
+        vipPhone = @"400-120-3612";
     }
     NSString *telUrl = isNormalUser ? [NSString stringWithFormat:@"tel://%@",normalPhone]  : [NSString stringWithFormat:@"tel://%@",vipPhone];
     NSString *title = isNormalUser ? normalPhone : vipPhone;

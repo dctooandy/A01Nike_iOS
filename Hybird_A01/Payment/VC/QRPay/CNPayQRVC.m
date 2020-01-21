@@ -101,7 +101,6 @@
     CGFloat itemWidth = ([UIScreen mainScreen].bounds.size.width -18-35-10)/2.0;
     CGFloat itemHeight = itemWidth * 56 / 160.0;
     CGFloat totalHeight = ((count - 1)/2 + 1) * (itemHeight + 15);
-    //TODO:
     if (self.paymentModel.payType == 6 ||
         self.paymentModel.payType == 5 ||
         self.paymentModel.payType == 16 ||
@@ -273,23 +272,6 @@
             [strongSelf handlerResult:result];
         }
     }];
-    //TODO:
-//    if (self.paymentModel.paymentType == CNPaymentWechatApp ||
-//        self.paymentModel.paymentType == CNPaymentJDApp ||
-//        self.paymentModel.paymentType == CNPaymentQQApp ||
-//        self.paymentModel.paymentType == CNPaymentAliApp) {
-//        [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVJResponseObject *result, id response) {
-//            sender.selected = NO;
-//            __strong typeof(weakSelf) strongSelf = weakSelf;
-//            [strongSelf paySucessHandler:result.body repay:nil];
-//        }];
-//    } else {
-//        [CNPayRequestManager paymentWithPayType:[self getPaytypeString] payId:self.paymentModel.payid amount:text bankCode:nil completeHandler:^(IVJResponseObject *result, id response) {
-//            sender.selected = NO;
-//            __strong typeof(weakSelf) strongSelf = weakSelf;
-//            [strongSelf handlerResult:result.body];
-//        }];
-//    }
    
 }
 

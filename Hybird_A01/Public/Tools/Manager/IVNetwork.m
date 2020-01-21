@@ -12,12 +12,33 @@
 #import <YYModel.h>
 #import "Constants.h"
 #import "HAInitConfig.h"
+#import "IVCNetworkStatusView.h"
+#import "IVCDetailViewController.h"
+#import "IVKUpdateViewController.h"
+#import "IVUzipWrapper.h"
+#import "IVPublicAPIManager.h"
 
 @implementation IVNetwork
+
++ (NSString *)cdn{
+    return [HAInitConfig defaultCDN];
+}
 
 + (IVUserInfoModel *)userInfo
 {
     return [IVNetworkManager sharedInstance].userInfoModel;;
+}
+
++ (void)checkAppUpdate{
+    NSInteger h5Version = [[IVUzipWrapper getLocalH5Version] integerValue];
+    [IVPublicAPIManager checkAppUpdateWithH5Version:h5Version callBack:^(IVPCheckUpdateModel * _Nonnull result, IVJResponseObject * _Nonnull response) {
+        //模拟普通更新
+        [IVKUpdateViewController showWithUrl:@"http://www.sdfsf.com" content:@"修复bug" originVersion:@"3.0.0" isForce:NO isManual:YES];
+    }];
+}
+
++ (void)checkNetworkStatus{
+    
 }
 
 + (NSString *)h5Domain

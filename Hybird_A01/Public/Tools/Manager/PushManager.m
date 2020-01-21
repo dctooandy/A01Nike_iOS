@@ -13,6 +13,7 @@
 #import "BTTTabbarController.h"
 #import "BTTBaseWebViewController.h"
 #import <IQKeyboardManager/IQUIWindow+Hierarchy.h>
+#import "IVUtility.h"
 @implementation PushManager
 
 SingletonImplementation(PushManager);
@@ -73,14 +74,13 @@ SingletonImplementation(PushManager);
         // 前台
         if (applicationState == UIApplicationStateActive) {
             weakSelf(weakSelf);
-            //TODO:
-//            IVActionHandler handler = ^(UIAlertAction *action){};
-//            IVActionHandler handler1 = ^(UIAlertAction *action){
-//                strongSelf(strongSelf)
-//                [strongSelf pushToMsgVCWithData:dict];
-//            };
-//            NSString *message = [apsDict valueForKey:@"alert"];
-//            [IVNUtility showAlertWithActionTitles:@[@"取消",@"查看"] handlers:@[handler,handler1] title:@"提示" message:message];
+            IVActionHandler handler = ^(UIAlertAction *action){};
+            IVActionHandler handler1 = ^(UIAlertAction *action){
+                strongSelf(strongSelf)
+                [strongSelf pushToMsgVCWithData:dict];
+            };
+            NSString *message = [apsDict valueForKey:@"alert"];
+            [IVUtility showAlertWithActionTitles:@[@"取消",@"查看"] handlers:@[handler,handler1] title:@"提示" message:message];
         } else {
             [self pushToMsgVCWithData:dict];
         }

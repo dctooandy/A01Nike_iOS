@@ -38,8 +38,25 @@
     }];
 }
 
+- (void)requestCustomerInfoEx{
+//    BTTGetLoginInfoByNameEx
+    [self showLoading];
+    NSDictionary *params = @{
+        @"inclPendingWithdraw":@1,
+        @"loginName":[IVNetwork savedUserInfo].loginName
+    };
+    [IVNetwork requestPostWithUrl:BTTGetLoginInfoByNameEx paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            self.canWithdraw = [result.body[@"pendingWithdraw"] integerValue];
+        }
+    }];
+}
+
 - (void)loadMainData {
     [self requestUSDTRate];
+    [self requestCustomerInfoEx];
     [self.sheetDatas removeAllObjects];
     NSMutableArray *sheetDatas = [NSMutableArray array];
     NSString *btcrate = [[NSUserDefaults standardUserDefaults] valueForKey:BTTCacheBTCRateKey];
@@ -94,7 +111,7 @@
         [values addObjectsFromArray:values4];
     }
 
-    if (self.bankList[self.selectIndex].cardType==0) {
+    if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"BTC"]) {
         [names removeObjectAtIndex:btcRateIndex];
         [placeholders removeObjectAtIndex:btcRateIndex];
         [heights removeObjectAtIndex:btcRateIndex];

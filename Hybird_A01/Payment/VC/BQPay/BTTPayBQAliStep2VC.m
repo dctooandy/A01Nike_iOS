@@ -44,25 +44,25 @@
 }
 
 - (void)configUI {
-//    self.bgView.backgroundColor = kBlackBackgroundColor;
-//    CNPayBankCardModel *bankModel = self.writeModel.chooseBank;
-//    self.QRImageView.image = [PublicMethod QRCodeMethod:bankModel.qrcode];
-//    NSString *amountStr = [NSString stringWithFormat:@"支付金额: ¥%@",bankModel.amount];
-//    NSRange range = [amountStr rangeOfString:[NSString stringWithFormat:@"¥%@",bankModel.amount]];
-//    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:amountStr];
-//    [attStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"ffff33"],NSFontAttributeName:[UIFont systemFontOfSize:24]} range:range];
-//    self.amountLabel.attributedText = attStr;
-//
-////    self.payBankNameLb.text = bankModel.bankname;
-////    self.depositLb.text = self.writeModel.depositBy;
-////    self.amountLb.text = bankModel.amount;
-//
-//    [self.bankBGIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankimage.cn_appendCDN] placeholderImage:[UIImage imageNamed:@"pay_bankBG"]];
-//    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankIcon.cn_appendCDN]];
-//    self.bankNameLb.text = bankModel.bankName;
-//    self.accountNameLb.text = bankModel.accountname;
-//    self.accountLb.text  = bankModel.accountnumber;
-//    self.addressLb.text  = [NSString stringWithFormat:@"%@ %@ %@", bankModel.bankprovince, bankModel.bankcity, bankModel.bankaddress];
+    self.bgView.backgroundColor = kBlackBackgroundColor;
+    CNPayBankCardModel *bankModel = self.writeModel.chooseBank;
+    self.QRImageView.image = [PublicMethod QRCodeMethod:bankModel.qrCode];
+    NSString *amountStr = [NSString stringWithFormat:@"支付金额: ¥%@",bankModel.amount];
+    NSRange range = [amountStr rangeOfString:[NSString stringWithFormat:@"¥%@",bankModel.amount]];
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:amountStr];
+    [attStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"ffff33"],NSFontAttributeName:[UIFont systemFontOfSize:24]} range:range];
+    self.amountLabel.attributedText = attStr;
+
+//    self.payBankNameLb.text = bankModel.bankname;
+//    self.depositLb.text = self.writeModel.depositBy;
+//    self.amountLb.text = bankModel.amount;
+
+    [self.bankBGIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankIcon.cn_appendCDN] placeholderImage:[UIImage imageNamed:@"pay_bankBG"]];
+    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankIcon.cn_appendCDN]];
+    self.bankNameLb.text = bankModel.bankName;
+    self.accountNameLb.text = bankModel.accountName;
+    self.accountLb.text  = bankModel.accountNo;
+    self.addressLb.text  = bankModel.bankBranchName;
 }
 
 - (IBAction)btnClick:(UIButton *)sender {
@@ -76,7 +76,7 @@
 
 - (IBAction)saveErCodeClick:(UIButton *)sender {
     
-//    UIImageWriteToSavedPhotosAlbum([PublicMethod QRCodeMethod:self.writeModel.chooseBank.qrcode], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    UIImageWriteToSavedPhotosAlbum([PublicMethod QRCodeMethod:self.writeModel.chooseBank.qrCode], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {

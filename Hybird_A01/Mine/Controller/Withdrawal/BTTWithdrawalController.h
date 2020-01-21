@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSArray<BTTBankModel *> *bankList;
 @property (nonatomic, assign) NSInteger selectIndex;
 @property (nonatomic, strong) BTTCustomerBalanceModel *balanceModel;
+@property (nonatomic, assign) NSInteger canWithdraw;
 @property (nonatomic, assign) CGFloat usdtRate;
 @property (nonatomic, assign) BOOL isUSDT;
 

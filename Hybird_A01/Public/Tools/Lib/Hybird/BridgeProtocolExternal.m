@@ -158,11 +158,13 @@
         params = @{@"billno":model.reference_id,@"loginname":model.login_name,@"endPoint":@"5",@"type":@"1",@"requestType":@"0",@"depositMethod":depositMethod};
     }
     [self.controller showLoading];
-    //TODO:
-//    [IVNetwork sendRequestWithSubURL:url paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-//        [self.controller hideLoading];
-//        [MBProgressHUD showSuccess:@"您的存款提案已安排优先处理, 请耐心等待。" toView:nil];
-//    }];
+    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [self.controller hideLoading];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [MBProgressHUD showSuccess:@"您的存款提案已安排优先处理, 请耐心等待。" toView:nil];
+        }
+    }];
 }
 
 

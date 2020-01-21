@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIView *nameAreaView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameAreaViewHeight;
 
+@property (weak, nonatomic) IBOutlet CNPaySubmitButton *commitBtn;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomTipView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTipViewHeight;
@@ -200,6 +201,10 @@
         IVJResponseObject *result =response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             self.bankView.hidden = NO;
+            [self.commitBtn setTitle:@"提交" forState:UIControlStateNormal];
+            [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(200);
+            }];
             NSArray *array = result.body[@"bankList"];
             self.bankList = array;
             if (array.count == 0) {
@@ -227,6 +232,7 @@
             return;
         }
         weakSelf.bankTF.text = selectValue;
+        self.haveBankData = YES;
         weakSelf.chooseBank = [CNPayBankCardModel yy_modelWithJSON:weakSelf.bankList[index]];
     }];
 }
@@ -259,22 +265,18 @@
         if (self.bankTF.text.length == 0) {
             [self showError:self.bankTF.placeholder];
             return;
+        }else{
+            self.writeModel.depositBy = self.nameTF.text;
+            self.writeModel.amount = self.amountTF.text;
+            self.writeModel.chooseBank = self.chooseBank;
+            [self sumbitBill:sender amount:self.amountTF.text bankCode:self.chooseBank.bankCode depositor:self.nameTF.text depositorType:@"" payType:[NSString stringWithFormat:@"%ld",(long)self.paymentModel.payType]];
         }
     }
     
     
-
-    
-//
-//    self.writeModel.depositBy = self.nameTF.text;
-//    self.writeModel.amount = self.amountTF.text;
-//    self.writeModel.chooseBank = self.chooseBank;
-//    self.writeModel.BQType = [self getBQType];
-//    // 提交订单
-//    [self sumbitBill:sender];
 }
 
-- (void)sumbitBill:(UIButton *)sender {
+- (void)sumbitBill:(UIButton *)sender amount:(NSString *)amount bankCode:(NSString *)bankCode depositor:(NSString *)depositor depositorType:(NSString *)depositorType payType:(NSString *)payType{
     if (sender.selected) {
         return;
     }
@@ -282,22 +284,29 @@
     
     __weak typeof(self) weakSelf = self;
     __weak typeof(sender) weakSender = sender;
-    //TODO:这个地方的判断条件需要改一下
-//    [CNPayRequestManager paymentSubmitBill:self.writeModel completeHandler:^(IVJResponseObject *result, id response) {
-//        sender.selected = NO;
-//        if ([result.head.errCode isEqualToString:@"0000"]) {
-//            CNPayBankCardModel *model = [[CNPayBankCardModel alloc] initWithDictionary:result.body error:nil];
-//            if (!model) {
-//                weakSender.enabled = NO;
-//                [weakSelf showError:@"系统错误，请联系客服"];
-//                return;
-//            }
-//            weakSelf.writeModel.chooseBank = model;
-//            [weakSelf goToStep:1];
-//        } else {
-//            [weakSelf showError:result.head.errMsg];
-//        }
-//    }];
+    NSDictionary *params = @{
+        @"amount":amount,
+        @"bankCode":bankCode,
+        @"depositor":depositor,
+        @"depositorType":depositorType,
+        @"payType":payType,
+        @"loginName":[IVNetwork savedUserInfo].loginName
+    };
+    [IVNetwork requestPostWithUrl:BTTBQPayment paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            CNPayBankCardModel *model = [[CNPayBankCardModel alloc] initWithDictionary:result.body error:nil];
+            if (!model) {
+                weakSender.enabled = NO;
+                [weakSelf showError:@"系统错误，请联系客服"];
+                return;
+            }
+            weakSelf.writeModel.chooseBank = model;
+            [weakSelf goToStep:1];
+        }else{
+            [weakSelf showError:result.head.errMsg];
+        }
+    }];
 }
 
 @end

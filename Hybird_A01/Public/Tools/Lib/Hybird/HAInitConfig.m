@@ -19,7 +19,7 @@
         case 0:
             return @[@"http://www.pt-gateway.com/_glaxy_a01_/"];
         case 1:
-            return @[@"http://a01gatewaynew.bawinx.com/",@"http://a01gatewayfresh.bawinx.com/"];
+            return @[@"http://fm.918rr.com/_glaxy_a01_/"];
         default:
 //            return @[@"https://a01.gatewayphp.net:9443/",@"https://a01.gatewayphp.com:9443/",@"https://a01.gateway-api.net/"];
             return @[@"https://a01.gatewayphp.net:9443/",@"https://a01.gatewayphp.com:9443/",@"https://a01.gatewaynike.com/"];
@@ -29,13 +29,13 @@
 + (NSString *)defaultH5Domain {
     switch (EnvirmentType) {
         case 0:
-            return @"http://m.a01.com";
+            return @"http://m.a01f.com/";
             break;
         case 1:
-            return @"https://m1.918rr.com";
+            return @"https://fm.918rr.com/";
             break;
         case 2:
-            return @"https://m.918bs.com";
+            return @"https://m.918bs.com/";
             break;
         default:
             break;
@@ -45,13 +45,13 @@
 + (NSString *)defaultCDN {
     switch (EnvirmentType) {
         case 0:
-            return @"http://m.a01.com";
+            return @"http://m.a01f.com/";
             break;
         case 1:
-            return @"https://m1.918rr.com";
+            return @"https://fm.918rr.com/";
             break;
         case 2:
-            return @"https://a01mobileimage.sm830.com";
+            return @"https://a01mobileimage.sm830.com/";
             break;
         default:
             break;
@@ -59,12 +59,7 @@
 }
 
 + (NSString *)appKey {
-    switch (EnvirmentType) {
-        case 0:
-            return @"A01FM";
-        default:
-            return @"dxobhchquwgoatvqn96l2mimq2nemjug";
-    }
+    return @"A01FM";
 }
 
 + (NSString *)appId {

@@ -355,6 +355,7 @@ static const char *BTTNextGroupKey = "nextGroup";
     NSMutableArray *Activities = [NSMutableArray array];
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     params[@"formName"] = @"brandHighlights";
+    params[@"dataType"] = @"1";
     [IVNetwork requestPostWithUrl:BTTBrandHighlights paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
@@ -371,13 +372,6 @@ static const char *BTTNextGroupKey = "nextGroup";
     }];
 }
 
-- (void)getLive800InfoDataWithResponse:(BTTLive800ResponseBlock)responseBlock {
-    [IVNetwork sendRequestWithSubURL:@"users/getLiveUrl" paramters:nil completionBlock:^(IVRequestResultModel *result, id response) {
-        if (result.status) {
-            responseBlock(result.data[@"info"]);
-        }
-    }];
-}
 
 #pragma mark - 动态添加属性
 

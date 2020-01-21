@@ -27,6 +27,7 @@
    
 }
 + (void)publicGameLoginWithParams:(NSDictionary *)params isTry:(BOOL)isTry completeBlock:(KYHTTPCallBack)completeBlock{
+    //TODO:
 #warning 调试接口
     NSString *subUrl = isTry ? @"public/game/tryPlay" : @"public/game/login";
     [self sendRequestWithUrl:subUrl paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
@@ -38,6 +39,7 @@
 //            completeBlock(result,url);
 //        }
     }];
+    
     
 }
 

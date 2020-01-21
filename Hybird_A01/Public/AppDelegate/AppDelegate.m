@@ -20,6 +20,7 @@
 #import "OpenInstallSDK.h"
 #import "IVPublicAPIManager.h"
 #import "IVCheckNetworkWrapper.h"
+#import "IVUzipWrapper.h"
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate,OpenInstallDelegate>
 
@@ -28,6 +29,7 @@
 @property (nonatomic, strong) BTTTabbarController *tabVC;
 @property (nonatomic, copy) NSString *ipsAdd;
 @property (nonatomic, assign) NSInteger ipsPort;
+@property (nonatomic, strong)dispatch_queue_t unzipQueue;
 
 @end
 
@@ -38,7 +40,7 @@
 {
     self = [super init];
     if (self) {
-        
+        _unzipQueue = dispatch_queue_create("com.IVLibraryDemo.unzipQueue", DISPATCH_QUEUE_SERIAL);
         self.semaphore = dispatch_semaphore_create(0);
 #if DEBUG
 #else
@@ -60,6 +62,18 @@
             [self showAreaLimitWithCountry:result.country goCode:result.goCode];
         } else {
             NSLog(@"允许访问");
+        }
+    }];
+}
+
+- (void)unzipLocationH5Package
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"app" ofType:@"zip"];
+    [IVUzipWrapper unzipLocationH5PackageWithQueue:self.unzipQueue path:path completion:^(NSInteger errorCode, NSString * _Nonnull errorMsg) {
+        if (errorCode == 0) {
+            NSLog(@"本地h5全量包解压成功！");
+        } else {
+            NSLog(@"本地h5全量包解压失败！错误码：%@,错误信息：%@",@(errorCode),errorMsg);
         }
     }];
 }
@@ -94,6 +108,10 @@
             }
         }
     }];
+    
+    [IVPublicAPIManager checkAppUpdateWithH5Version:1 callBack:^(IVPCheckUpdateModel * _Nonnull result, IVJResponseObject * _Nonnull response) {
+        NSLog(@"%@",result.appDownUrl);
+    }];
 
 }
 
@@ -102,6 +120,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self setupAPPEnvironment];
     [self checkArearLimit];
+    [self unzipLocationH5Package];
     [self getWMSForm];
     [self setupTabbarController];
     [self.window makeKeyAndVisible];

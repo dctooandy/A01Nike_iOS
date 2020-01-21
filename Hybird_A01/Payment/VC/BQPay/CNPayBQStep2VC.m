@@ -75,46 +75,46 @@
 }
 
 - (void)configDifferentUI {
-//    switch (self.paymentModel.paymentType) {
-//        case CNPaymentBQFast:
-//            self.alertIV.hidden = YES;
-//            self.alertIVHeight.constant = 0;
-//            self.alertLb.textColor = COLOR_HEX(0x82868F);
-//            self.alertLb.text = @"为保障快速到账，实际存款金额和持卡人须与订单一致。";
-//            self.twoBtnView.hidden = YES;
-//            self.twoBtnViewHeight.constant = 0;
-//            break;
-//        case CNPaymentBQWechat:
-//            self.fastTipLb.hidden = YES;
-//            self.fastTipLbHeight.constant = 0;
-//            self.oneBtnView.hidden = YES;
-//            self.oneBtnViewHeight.constant = 0;
-//            break;
-//        case CNPaymentBQAli:
-//            self.fastTipLb.hidden = YES;
-//            self.fastTipLbHeight.constant = 0;
-//            self.twoBtnView.hidden = YES;
-//            self.twoBtnViewHeight.constant = 0;
-//            [self.submitBtn setTitle:@"我已成功付款" forState:UIControlStateNormal];
-//            break;
-//
-//        default:
-//            break;
-//    }
+    switch (self.paymentModel.payType) {
+        case 90:
+            self.alertIV.hidden = YES;
+            self.alertIVHeight.constant = 0;
+            self.alertLb.textColor = COLOR_HEX(0x82868F);
+            self.alertLb.text = @"为保障快速到账，实际存款金额和持卡人须与订单一致。";
+            self.twoBtnView.hidden = YES;
+            self.twoBtnViewHeight.constant = 0;
+            break;
+        case 91:
+            self.fastTipLb.hidden = YES;
+            self.fastTipLbHeight.constant = 0;
+            self.oneBtnView.hidden = YES;
+            self.oneBtnViewHeight.constant = 0;
+            break;
+        case 92:
+            self.fastTipLb.hidden = YES;
+            self.fastTipLbHeight.constant = 0;
+            self.twoBtnView.hidden = YES;
+            self.twoBtnViewHeight.constant = 0;
+            [self.submitBtn setTitle:@"我已成功付款" forState:UIControlStateNormal];
+            break;
+
+        default:
+            break;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setViewHeight:1000 fullScreen:YES];
-//    if (self.writeModel.chooseBank.qrcode.length && self.paymentModel.paymentType == CNPaymentBQAli) {
-//        _step2VC = [[BTTPayBQAliStep2VC alloc] init];
-//        _step2VC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, 1000);
-//        _step2VC.paymentModel = self.paymentModel;
-//        [self addChildViewController:_step2VC];
-//        [self.view addSubview:_step2VC.view];
-//    } else {
-//        [self configUI];
-//    }
+    if (self.writeModel.chooseBank.qrCode.length && self.paymentModel.payType == 92) {
+        _step2VC = [[BTTPayBQAliStep2VC alloc] init];
+        _step2VC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, 1000);
+        _step2VC.paymentModel = self.paymentModel;
+        [self addChildViewController:_step2VC];
+        [self.view addSubview:_step2VC.view];
+    } else {
+        [self configUI];
+    }
 }
 
 
@@ -122,16 +122,16 @@
 - (void)configUI {
     CNPayBankCardModel *bankModel = self.writeModel.chooseBank;
     
-//    self.payBankNameLb.text = bankModel.bankName;
-//    self.depositLb.text = self.writeModel.depositBy;
-//    self.amountLb.text = bankModel.amount;
-//    
-//    [self.bankBGIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankimage.cn_appendCDN] placeholderImage:[UIImage imageNamed:@"pay_bankBG"]];
-//    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankIcon.cn_appendCDN]];
-//    self.bankNameLb.text = bankModel.bankName;
-//    self.accountNameLb.text = bankModel.accountname;
-//    self.accountLb.text  = bankModel.accountnumber;
-//    self.addressLb.text  = [NSString stringWithFormat:@"%@ %@ %@", bankModel.bankprovince, bankModel.bankcity, bankModel.bankaddress];
+    self.payBankNameLb.text = bankModel.bankName;
+    self.depositLb.text = self.writeModel.depositBy;
+    self.amountLb.text = bankModel.amount;
+    
+    [self.bankBGIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankIcon.cn_appendCDN] placeholderImage:[UIImage imageNamed:@"pay_bankBG"]];
+    [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankIcon.cn_appendCDN]];
+    self.bankNameLb.text = bankModel.bankName;
+    self.accountNameLb.text = bankModel.accountName;
+    self.accountLb.text  = bankModel.accountNo;
+    self.addressLb.text  = bankModel.bankBranchName;
 }
 
 - (IBAction)copyAction:(UIButton *)sender {
@@ -140,11 +140,11 @@
 }
 
 - (IBAction)goToPay:(UIButton *)sender {
-//    if (self.paymentModel.paymentType == CNPaymentBQAli) {
-//        [self popToRootViewController];
-//        return;
-//    }
-//    [self pushUIWebViewWithURLString:self.writeModel.chooseBank.bankurl title:self.paymentModel.paymentTitle];
+    if (self.paymentModel.payType == 92) {
+        [self popToRootViewController];
+        return;
+    }
+    [self pushUIWebViewWithURLString:self.writeModel.chooseBank.bankUrl title:self.paymentModel.payTypeName];
 }
 
 - (IBAction)finishPay:(id)sender {

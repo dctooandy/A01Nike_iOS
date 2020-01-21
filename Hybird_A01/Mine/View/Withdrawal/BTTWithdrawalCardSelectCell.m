@@ -20,7 +20,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.uView.backgroundColor = kBlackBackgroundColor;
-    self.mineArrowsType = BTTMineArrowsTypeNoHidden;
+    self.mineSparaterType = BTTMineSparaterTypeNone;
     [self SetUnderLine:self.contactButton setTitle:@"咨询客服"];
     self.mineArrowsType = BTTMineArrowsTypeHidden;
 }

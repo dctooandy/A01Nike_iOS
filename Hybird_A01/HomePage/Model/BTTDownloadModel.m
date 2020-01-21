@@ -22,7 +22,7 @@
             return _iosLink;
         }
         NSString *link = [_iosLink substringFromIndex:location];
-        _iosLink = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],link];
+        _iosLink = [NSString stringWithFormat:@"%@/%@",[IVNetwork h5Domain],link];
         NSLog(@"%@",_iosLink);
     }
     return _iosLink;

@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *token;
 @property (nonatomic, assign) NSInteger noLoginDays;
 @property (nonatomic, assign) NSInteger customerType;
-@property (nonatomic, copy) NSString *currentcy;
+@property (nonatomic, copy) NSString *currency;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -257,6 +257,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTStepThreeUpdatePassword @"customer/modifyPwdByCode"
 // 根据登录名获取用户信息
 #define BTTGetLoginInfoByName  @"customer/getByLoginName"
+// 根据登录名获取会员统计信息
+#define BTTGetLoginInfoByNameEx  @"customer/getByLoginNameEx"
 // 查询400热线
 #define BTT400Line             @"queryVIPLine"
 // 解锁账号
@@ -365,6 +367,10 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTModifyLoginPwd            @"customer/modifyPwd"
 // 发起取款
 #define BTTWithDrawCreate            @"withdraw/createRequest"
+// BTCRate
+#define BTTWithDrawBTCRate            @"withdraw/queryBtcRate"
+//
+#define BTTBQPayment                 @"deposit/BQPayment"
 
 #define BTTCreditsGame               @"/public/credits/game"
 #define BTTCreditsTotalAvailable     @"/public/credits/totalAvailable"

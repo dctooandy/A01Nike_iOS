@@ -12,14 +12,15 @@
 
 - (NSString *)href {
     if (![_href hasPrefix:@"http"] && [_href containsString:@"htm"]) {
-        return [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain], _href];
+        return [NSString stringWithFormat:@"%@/%@",[IVNetwork h5Domain], _href];
     }
     return _href;
 }
 
 - (NSString *)imgurl {
     if (![_imgurl hasPrefix:@"http"]) {
-        return [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain], _imgurl];
+        
+        return [PublicMethod nowCDNWithUrl:_imgurl];
     }
     return _imgurl;
 }

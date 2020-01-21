@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,6 +16,7 @@
                 <outlet property="bankView" destination="RA8-ti-4Bl" id="fFo-tO-srC"/>
                 <outlet property="bottomTipView" destination="adG-CK-hLQ" id="Ssy-HE-38U"/>
                 <outlet property="bottomTipViewHeight" destination="WAz-dN-Hfj" id="C02-lV-Hdj"/>
+                <outlet property="commitBtn" destination="1SB-cZ-5cD" id="pPY-s4-YDQ"/>
                 <outlet property="nameLb" destination="EjB-jc-McO" id="psM-YO-FVo"/>
                 <outlet property="nameTF" destination="ezC-Tr-j1G" id="a3R-VC-na0"/>
                 <outlet property="preSettingMessageLb" destination="REz-bo-RkT" id="lDe-D5-JOH"/>

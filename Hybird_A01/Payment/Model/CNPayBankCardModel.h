@@ -23,6 +23,14 @@
 @property(nonatomic, copy) NSString *accountNo;
 @property(nonatomic, copy) NSString *bankBranchName;
 @property(nonatomic, copy) NSString *simpleAccountName;
+@property(nonatomic, copy) NSString *amount;
+@property(nonatomic, copy) NSString *bankCity;
+@property(nonatomic, copy) NSString *bankUrl;
+@property(nonatomic, copy) NSString *billNo;
+@property(nonatomic, copy) NSString *depositor;
+@property(nonatomic, copy) NSString *flag;
+@property(nonatomic, copy) NSString *payLimitTime;
+@property(nonatomic, copy) NSString *qrCode;
 
 @end
 

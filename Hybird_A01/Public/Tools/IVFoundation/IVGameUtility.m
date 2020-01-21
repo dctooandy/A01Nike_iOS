@@ -65,29 +65,28 @@
 
 - (BOOL)IVGameShouldForwardToGame {
 
-    //TODO:
-//    if ([[UIDevice networkType] isEqualToString:@"notReachable"]) {
-//        [IVNUtility showToastWithMessage:@"似乎已断开与互联网的连接!"];
-//        return NO;
-//    }
+    if ([[UIDevice networkType] isEqualToString:@"notReachable"]) {
+        [MBProgressHUD showError:@"似乎已断开与互联网的连接!" toView:nil];
+        return NO;
+    }
     return YES;
 }
 
 - (void)IVGameGetUrlWithParamters:(NSDictionary *)paramters gameController:(IVWKGameViewController *)gameController completion:(void (^)(BOOL,NSString *))completion
 {
-//    BOOL isTry = ![IVHttpManager shareManager].userToken.length;
-//    [BTTHttpManager publicGameLoginWithParams:paramters isTry:isTry completeBlock:^(IVRequestResultModel *result, id response) {
-//        if (result.code_http==200&&[result.message isEqualToString:@"游戏维护中"]) {
-//            if (completion) {
-//                completion(YES,@"");
-//            }
-//        }else{
-//            if (completion) {
-//                completion(result.status,response);
-//            }
-//        }
-//        
-//    }];
+    BOOL isTry = ![IVHttpManager shareManager].userToken.length;
+    [BTTHttpManager publicGameLoginWithParams:paramters isTry:isTry completeBlock:^(IVRequestResultModel *result, id response) {
+        if (result.code_http==200&&[result.message isEqualToString:@"游戏维护中"]) {
+            if (completion) {
+                completion(YES,@"");
+            }
+        }else{
+            if (completion) {
+                completion(result.status,response);
+            }
+        }
+        
+    }];
 }
 - (void)IVGameTransferWithProvider:(NSString *)provider
 {

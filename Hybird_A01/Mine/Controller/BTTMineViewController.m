@@ -54,6 +54,8 @@
 #import "BTTMeHeadernNicknameLoginCell.h"
 #import "BTTActionSheet.h"
 #import "BTTUsdtTodayNoticeView.h"
+#import "IVCNetworkStatusView.h"
+#import "IVCDetailViewController.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -78,7 +80,7 @@
     self.totalAmount = @"加载中";
     self.collectionView.bounces = NO;
     [self setupNav];
-    self.isCompletePersonalInfo = NO;
+    self.isCompletePersonalInfo = [self isCompletePersonalInfo];
     self.isChangeMobile = NO;
     [self setupCollectionView];
     [self loadPaymentDefaultData];
@@ -381,6 +383,27 @@
         return;
     } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 11) {
         // 网络监测
+        IVCNetworkStatusView *statusView = [[IVCNetworkStatusView alloc] initWithFrame:self.view.frame];
+        
+        IVCheckNetworkModel *gatewayModel = [[IVCheckNetworkModel alloc] init];
+        gatewayModel.title = @"当前业务线路";
+        gatewayModel.urls = [IVHttpManager shareManager].gateways;
+        gatewayModel.type = IVKCheckNetworkTypeGateway;
+        IVCheckNetworkModel *domainModel = [[IVCheckNetworkModel alloc] init];
+        domainModel.title = @"当前手机站";
+        domainModel.urls = [IVHttpManager shareManager].domains;
+        domainModel.type = IVKCheckNetworkTypeDomain;
+        
+        statusView.datas = @[gatewayModel,domainModel];
+        
+        statusView.detailBtnClickedBlock = ^{
+            IVCDetailViewController *vc = [[IVCDetailViewController alloc] initWithThemeColor:[UIColor blueColor]];
+            [self presentViewController:vc animated:YES completion:nil];
+        };
+        
+        [self.view addSubview:statusView];
+        [statusView startCheck];
+
         //TODO:
 //        [IVNetwork startCheckWithType:IVCheckNetworkTypeAll appWindow:[UIApplication sharedApplication].keyWindow detailBtnClickedBlock:^{
 //            [self.navigationController pushViewController:[IVNetworkStatusDetailViewController new] animated:YES];
@@ -395,7 +418,7 @@
     }
     if (indexPath.row == self.saveMoneyCount + 3) {
         if (self.isCompletePersonalInfo) {
-            if ([IVNetwork savedUserInfo].bankCardNum>0) {
+            if ([IVNetwork savedUserInfo].bankCardNum>0||[IVNetwork savedUserInfo].usdtNum>0) {
                 NSString *timeStamp = [[NSUserDefaults standardUserDefaults]objectForKey:BTTWithDrawToday];
                 NSInteger usdtCount = [[[NSUserDefaults standardUserDefaults]objectForKey:BTTBindUsdtCount] integerValue];
                 if (timeStamp!=nil) {
@@ -675,6 +698,7 @@
 
 - (BOOL)isCompletePersonalInfo
 {
-    return [IVNetwork savedUserInfo].realName&&[IVNetwork savedUserInfo].verifyCode;
+    BOOL isComplete = (![[IVNetwork savedUserInfo].realName isEqualToString:@""])&&(![[IVNetwork savedUserInfo].verifyCode isEqualToString:@""]);
+    return isComplete;
 }
 @end
