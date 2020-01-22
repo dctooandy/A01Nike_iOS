@@ -30,7 +30,6 @@
            userModel.loginName = [IVNetwork userInfo].loginName;
            userModel.name = [IVNetwork userInfo].loginName;;
        }
-    ///TODO:  Live800
     [CLive800Manager switchLive800UserWithCustomerId:userModel];
     [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccessNotification object:nil];
     [BTTRequestPrecache updateCacheNeedLoginRequest];

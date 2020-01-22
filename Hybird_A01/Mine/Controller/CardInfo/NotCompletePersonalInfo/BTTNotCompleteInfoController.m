@@ -68,11 +68,11 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
-    NSLog(@"%zd", indexPath.item);
-    if (indexPath.row == 2) {
-        BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+//    NSLog(@"%zd", indexPath.item);
+//    if (indexPath.row == 2) {
+//        BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource
@@ -136,22 +136,25 @@
 {
     UITextField *retentionTF = [self getCellTextFieldWithIndex:0];
     UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
-    NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"verify_code"] = retentionTF.text;
-    params[@"real_name"] = realNameTF.text;
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    //TODO:
-//    [IVNetwork sendRequestWithSubURL:@"public/users/completeInfo" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
-//        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-//        if (result.status) {
-//            [MBProgressHUD showSuccess:@"完善成功!" toView:nil];
-//            [IVNetwork updateUserInfo:result.data];
-//            [weakSelf.navigationController popViewControllerAnimated:YES];
-//        }else{
-//            [MBProgressHUD showError:result.message toView:weakSelf.view];
-//        }
-//    }];
+    
+    
+    NSDictionary *params = @{
+        @"reservedInfo" : retentionTF.text,
+        @"realName" : realNameTF.text,
+        @"loginName" : [IVNetwork savedUserInfo].loginName
+    };
+    [IVNetwork requestPostWithUrl:BTTModifyCustomerInfo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [MBProgressHUD showSuccess:@"完善成功!" toView:nil];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:self.view];
+        }
+    }];
 }
 - (UITextField *)getCellTextFieldWithIndex:(NSInteger)index
 {

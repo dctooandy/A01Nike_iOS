@@ -35,11 +35,11 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
     CNPaymentJDApp,
     
     /// 扫码
-    CNPaymentAliQR,
-    CNPaymentWechatQR,
-    CNPaymentQQQR,
-    CNPaymentUnionQR,
-    CNPaymentJDQR,
+    CNPaymentAliQR=5,
+    CNPaymentWechatQR=6,
+    CNPaymentQQQR=7,
+    CNPaymentUnionQR=15,
+    CNPaymentJDQR=16,
     
     /// BQ存款 bypaytype-0,1,2
     CNPaymentBQFast,

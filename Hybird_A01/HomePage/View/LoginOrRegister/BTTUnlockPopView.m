@@ -7,6 +7,7 @@
 //
 
 #import "BTTUnlockPopView.h"
+#import "IVRsaEncryptWrapper.h"
 
 @interface BTTUnlockPopView ()<UITextFieldDelegate>
 
@@ -56,35 +57,26 @@
                     loginName:(NSString *)loginName {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     if (name.length) {
-        [params setObject:name forKey:@"realname"];
+        [params setObject:[IVRsaEncryptWrapper encryptorString:name] forKey:@"realName"];
     }
     if (phone.length) {
-        [params setObject:phone forKey:@"bingphone"];
+        [params setObject:[IVRsaEncryptWrapper encryptorString:phone] forKey:@"phone"];
     }
-//    if (info.length) {
-//        [params setObject:info forKey:@"reserved"];
-//    }
-    [params setObject:loginName forKey:@"loginname"];
-    
-    //TODO:
+    [params setValue:@"1" forKey:@"type"];
+    [params setObject:loginName forKey:@"loginName"];
+    [MBProgressHUD showLoadingSingleInView:self animated:YES];
     [IVNetwork requestPostWithUrl:BTTUnlockAccount paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        
+        IVJResponseObject *result = response;
+        [MBProgressHUD hideHUDForView:self animated:YES];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [MBProgressHUD showError:@"已解锁，请重新登录！" toView:nil];
+            if (self.dismissBlock) {
+                self.dismissBlock();
+            }
+        }else{
+            [MBProgressHUD showError:@"验证失败，请重试！" toView:nil];
+        }
     }];
-//    [IVNetwork sendRequestWithSubURL:BTTUnlockAccount paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-//        NSLog(@"%@",response);
-//        if (result.status) {
-//
-//            if (result.data) {
-//                [MBProgressHUD showError:@"已解锁，请重新登录！" toView:nil];
-//                if (self.dismissBlock) {
-//                    self.dismissBlock();
-//                }
-//            } else {
-//                [MBProgressHUD showError:@"验证失败，请重试！" toView:nil];
-//            }
-//        }
-//
-//    }];
 }
 
 

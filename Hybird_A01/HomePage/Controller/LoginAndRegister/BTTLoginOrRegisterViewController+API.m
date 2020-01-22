@@ -112,11 +112,12 @@
             [self getCustomerInfoByLoginNameWithName:model.login_name isBack:isback];
         }else{
             [self hideLoading];
-            if (result.head.errMsg.length) {
-                [MBProgressHUD showError:result.head.errMsg toView:nil];
-            }else{
-                [self showAlertWithModle:nil];
+            if ([result.head.errCode isEqualToString:@"WS_202020"]) {
+                [self showAlertWithLoginName:model.login_name];
+                return;
             }
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+            
             if ([result.head.errCode isEqualToString:@"GW_800408"]) {
                 self.wrongPwdNum++;
                 if (self.wrongPwdNum >= 2) {
@@ -139,7 +140,7 @@
 }
 
 
-- (void)showAlertWithModle:(BTTLoginAPIModel *)model {
+- (void)showAlertWithLoginName:(NSString *)loginName {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"很抱歉!" message:@"多次密码输入错误, 已被锁住!" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"五分钟再试" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -147,7 +148,7 @@
     [alertVC addAction:cancel];
     UIAlertAction *unlock = [UIAlertAction actionWithTitle:@"立即解锁" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self showPopViewWithAccount:model.login_name];
+            [self showPopViewWithAccount:loginName];
         });
     }];
     [alertVC addAction:unlock];

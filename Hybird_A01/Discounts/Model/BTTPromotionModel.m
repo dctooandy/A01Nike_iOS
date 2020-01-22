@@ -12,7 +12,7 @@
 
 - (NSString *)href {
     if (![_href hasPrefix:@"http"] && [_href containsString:@"htm"]) {
-        return [NSString stringWithFormat:@"%@/%@",[IVNetwork h5Domain], _href];
+        return [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain], _href];
     }
     return _href;
 }

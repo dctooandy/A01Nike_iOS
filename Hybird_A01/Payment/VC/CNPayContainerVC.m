@@ -99,10 +99,10 @@
         }
             break;
 //        case CNPaymentJDQR:
-        case 5:
-        case 6:
-        case 15:
-        case 16:
+        case CNPaymentAliQR:
+        case CNPaymentWechatQR:
+        case CNPaymentUnionQR:
+        case CNPaymentJDQR:
         case 23:
         case 8:
         case 11:{

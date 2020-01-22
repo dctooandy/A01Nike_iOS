@@ -139,8 +139,8 @@
                 }
                 cell.pwdTextField.text = @"";
                 
-                cell.accountTextField.text = @"g6666";
-                cell.pwdTextField.text = @"z666666";
+                cell.accountTextField.text = @"gmo063464";
+                cell.pwdTextField.text = @"z12345678";
                 weakSelf(weakSelf);
                 cell.clickEventBlock = ^(id  _Nonnull value) {
                     strongSelf(strongSelf);

@@ -221,7 +221,7 @@
         } else if (indexPath.row == 2) {
             BTTHomePageNoticeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageNoticeCell" forIndexPath:indexPath];
             cell.noticeStr = self.noticeStr;
-            weakSelf(weakSelf);
+            weakSelf(weakSelf); 
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];

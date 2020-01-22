@@ -113,7 +113,7 @@
             [MBProgressHUD showError:@"输入的真实姓名格式有误！" toView:self.view];
             return;
         } else {
-            params[@"real_name"] = realNameTF.text;
+            params[@"realName"] = realNameTF.text;
         }
     }
     if ([IVNetwork userInfo].verify_code.length == 0) {
@@ -121,21 +121,22 @@
             [MBProgressHUD showError:@"输入的预留信息格式有误！" toView:self.view];
             return;
         } else {
-            params[@"verify_code"] = retentionTF.text;
+            params[@"reservedInfo"] = retentionTF.text;
         }
     }
     
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-//    [IVNetwork sendRequestWithSubURL:@"public/users/completeInfo" paramters:params.copy completionBlock:^(IVRequestResultModel *result, id response) {
-//        [MBProgressHUD hideHUDForView:self.view animated:YES];
-//        if (result.status) {
-//            [MBProgressHUD showSuccess:@"完善资料成功!" toView:nil];
-//            [IVNetwork updateUserInfo:result.data];
-//            [self.navigationController popViewControllerAnimated:YES];
-//        }else{
-//            [MBProgressHUD showError:result.message toView:self.view];
-//        }
-//    }];
+    
+    [IVNetwork requestPostWithUrl:BTTModifyCustomerInfo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [MBProgressHUD showSuccess:@"完善资料成功!" toView:nil];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:self.view];
+        }
+    }];
     
 }
 
