@@ -17,7 +17,6 @@
 #import "BTTMineViewController+LoadData.h"
 #import "BTTMineViewController+Nav.h"
 #import "BTTMeHeaderLoginCell.h"
-#import "BTTLoginAndRegisterViewController.h"
 #import "BTTAccountBalanceController.h"
 #import "BTTBindingMobileController.h"
 #import "BTTMeInfoHiddenCell.h"

@@ -525,7 +525,6 @@
 		3AC3FFA9219ACD48008AECCB /* BTTLoginOrRegisterViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA8219ACD48008AECCB /* BTTLoginOrRegisterViewController+UI.m */; };
 		3AC3FFAD219BB19E008AECCB /* BTTLoginCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFAB219BB19E008AECCB /* BTTLoginCodeCell.m */; };
 		3AC3FFB0219BB1D0008AECCB /* BTTLoginCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC3FFAF219BB1D0008AECCB /* BTTLoginCodeCell.xib */; };
-		3ACADCEC231773B100D5AE7F /* zqzs.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3ACADCEB231773B100D5AE7F /* zqzs.gif */; };
 		3AD1A9382237B49000515628 /* IN3SResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3AD1A9362237B49000515628 /* IN3SResource.bundle */; };
 		3AD1A93C2237B4B200515628 /* CNTimeLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1A93A2237B4B200515628 /* CNTimeLog.m */; };
 		3AD4C9C321635AEC00FC0A63 /* app.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AD4C9C221635AEC00FC0A63 /* app.json */; };
@@ -581,7 +580,6 @@
 		3AD9CF89216F4E5400685B43 /* BTTHomePageDiscountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CF87216F4E5400685B43 /* BTTHomePageDiscountCell.m */; };
 		3AD9CF8A216F4E5400685B43 /* BTTHomePageDiscountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AD9CF88216F4E5400685B43 /* BTTHomePageDiscountCell.xib */; };
 		3ADD235E2176D7F000FA959A /* BTTHomePageViewController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD235C2176D7EF00FA959A /* BTTHomePageViewController+Nav.m */; };
-		3ADD23622176FFB700FA959A /* BTTLoginAndRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD23612176FFB700FA959A /* BTTLoginAndRegisterViewController.m */; };
 		3ADD23672177230300FA959A /* BTTMeHeaderNotLoginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD23652177230300FA959A /* BTTMeHeaderNotLoginCell.m */; };
 		3ADD23682177230300FA959A /* BTTMeHeaderNotLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ADD23662177230300FA959A /* BTTMeHeaderNotLoginCell.xib */; };
 		3ADD236C21772A1E00FA959A /* BTTMeInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD236A21772A1E00FA959A /* BTTMeInfoCell.m */; };
@@ -1568,7 +1566,6 @@
 		3AC3FFAA219BB19E008AECCB /* BTTLoginCodeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLoginCodeCell.h; sourceTree = "<group>"; };
 		3AC3FFAB219BB19E008AECCB /* BTTLoginCodeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLoginCodeCell.m; sourceTree = "<group>"; };
 		3AC3FFAF219BB1D0008AECCB /* BTTLoginCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLoginCodeCell.xib; sourceTree = "<group>"; };
-		3ACADCEB231773B100D5AE7F /* zqzs.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = zqzs.gif; sourceTree = "<group>"; };
 		3AD1A9362237B49000515628 /* IN3SResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IN3SResource.bundle; sourceTree = "<group>"; };
 		3AD1A93A2237B4B200515628 /* CNTimeLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNTimeLog.m; sourceTree = "<group>"; };
 		3AD1A93B2237B4B200515628 /* CNTimeLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNTimeLog.h; sourceTree = "<group>"; };
@@ -1657,8 +1654,6 @@
 		3AD9CF88216F4E5400685B43 /* BTTHomePageDiscountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTHomePageDiscountCell.xib; sourceTree = "<group>"; };
 		3ADD235C2176D7EF00FA959A /* BTTHomePageViewController+Nav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTHomePageViewController+Nav.m"; sourceTree = "<group>"; };
 		3ADD235D2176D7F000FA959A /* BTTHomePageViewController+Nav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTHomePageViewController+Nav.h"; sourceTree = "<group>"; };
-		3ADD23602176FFB700FA959A /* BTTLoginAndRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLoginAndRegisterViewController.h; sourceTree = "<group>"; };
-		3ADD23612176FFB700FA959A /* BTTLoginAndRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLoginAndRegisterViewController.m; sourceTree = "<group>"; };
 		3ADD23642177230300FA959A /* BTTMeHeaderNotLoginCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTMeHeaderNotLoginCell.h; sourceTree = "<group>"; };
 		3ADD23652177230300FA959A /* BTTMeHeaderNotLoginCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMeHeaderNotLoginCell.m; sourceTree = "<group>"; };
 		3ADD23662177230300FA959A /* BTTMeHeaderNotLoginCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTMeHeaderNotLoginCell.xib; sourceTree = "<group>"; };
@@ -2853,7 +2848,6 @@
 			isa = PBXGroup;
 			children = (
 				D3B47D5823B70A5400D37C7F /* app.zip */,
-				3ACADCEB231773B100D5AE7F /* zqzs.gif */,
 				3A21AEAA2391103A009E73FD /* qhb.gif */,
 				3A80AB0923AA075D004BF8C0 /* 828x128-min.gif */,
 				3A80AB0823AA075D004BF8C0 /* 828x176-min.gif */,
@@ -3653,8 +3647,6 @@
 		3ADD235F2176FF6100FA959A /* LoginAndRegister */ = {
 			isa = PBXGroup;
 			children = (
-				3ADD23602176FFB700FA959A /* BTTLoginAndRegisterViewController.h */,
-				3ADD23612176FFB700FA959A /* BTTLoginAndRegisterViewController.m */,
 				3AAE81F9219A737E003EC8B0 /* BTTLoginOrRegisterViewController.h */,
 				3AAE81F8219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m */,
 				3AC3FFA7219ACD48008AECCB /* BTTLoginOrRegisterViewController+UI.h */,
@@ -4801,7 +4793,6 @@
 				3A5AE6D822D6E22A0013E8A3 /* photo_original_def@2x.png in Resources */,
 				D5C5019021B4FC9700C6DA02 /* CNPayWechatTipView.xib in Resources */,
 				D5DBEB0321ABB774008AF629 /* CNPayDepositStep2VC.xib in Resources */,
-				3ACADCEC231773B100D5AE7F /* zqzs.gif in Resources */,
 				D5C501D421B7CEDC00C6DA02 /* BRPickerView.bundle in Resources */,
 				3A5AE6A922D6E22A0013E8A3 /* liv_radio_unselected@2x.png in Resources */,
 				3A5AE67A22D6E22A0013E8A3 /* LIVSatisfactionEvaluationItemCell.nib in Resources */,
@@ -5160,7 +5151,6 @@
 				D5DBEB3921ABB774008AF629 /* CNPreCacheMananger.m in Sources */,
 				3A14CC5F237A4B56009711CF /* BTTRealPersonGameCell.m in Sources */,
 				3ADD23672177230300FA959A /* BTTMeHeaderNotLoginCell.m in Sources */,
-				3ADD23622176FFB700FA959A /* BTTLoginAndRegisterViewController.m in Sources */,
 				3A9E4C3A219E509100E7D8C0 /* BTTBaseAnimationPopView.m in Sources */,
 				3AA7893521FFF2580047A372 /* UIView+WebCacheOperation.m in Sources */,
 				3A9E4C5F219FD8F900E7D8C0 /* BTTDownloadModel.m in Sources */,

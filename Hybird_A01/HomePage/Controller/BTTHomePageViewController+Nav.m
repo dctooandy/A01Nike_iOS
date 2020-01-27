@@ -9,7 +9,6 @@
 #import "BTTHomePageViewController+Nav.h"
 #import <objc/runtime.h>
 #import "BTTPopoverView.h"
-#import "BTTLoginAndRegisterViewController.h"
 #import "BTTLive800ViewController.h"
 #import "CLive800Manager.h"
 #import "BTTTabbarController+VoiceCall.h"
