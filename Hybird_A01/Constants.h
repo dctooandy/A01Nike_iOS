@@ -37,7 +37,7 @@
 typedef enum {
     BTTCanAddCardTypeNone,          // 不能添加任何卡
     BTTCanAddCardTypeAll,           // 银行卡和比特币钱包
-    BTTCanAddCardTypeBank,          //  只能添加银行卡
+    BTTCanAddCardTypeBank,          // 只能添加银行卡
     BTTCanAddCardTypeBTC,           // 只能添加比特币钱包
     BTTCanAddCardTypeUSDT,          // 只能添加USDT
     BTTCanAddCardTypeBankORBTC,     // 添加银行卡或者比特币
@@ -372,8 +372,6 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 //
 #define BTTBQPayment                 @"deposit/BQPayment"
 
-#define BTTCreditsGame               @"/public/credits/game"
-#define BTTCreditsTotalAvailable     @"/public/credits/totalAvailable"
 #define BTTIsBindStatusAPI           @"/public/verify/isNewBind"
 #define BTTGamePlatforms             @"/A01/game/platforms"
 
