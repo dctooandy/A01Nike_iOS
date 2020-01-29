@@ -16,7 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *nextBtn;
 
-@property (strong, nonatomic) UIImageView *arrowIcon;
+@property (strong, nonatomic) UIImageView *ArrowIcon;
 
 @end
 
@@ -25,11 +25,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
-    self.arrowIcon.hidden = YES;
-    self.arrowIcon = [UIImageView new];
-    self.arrowIcon.image = ImageNamed(@"homepage_arrow");
+    self.ArrowIcon.hidden = YES;
+    self.ArrowIcon = [UIImageView new];
+    self.ArrowIcon.image = ImageNamed(@"homepage_arrow");
     [self.contentView addSubview:self.arrowIcon];
-    [self.arrowIcon mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.ArrowIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.offset(-15);
         make.height.width.equalTo(@16);
         make.centerY.equalTo(self.contentView.mas_centerY);
@@ -50,9 +50,9 @@
     self.titleLabel.text = headerModel.titleStr;
     [self.nextBtn setTitle:headerModel.detailBtnStr forState:UIControlStateNormal];
     if (headerModel.detailBtnStr.length) {
-        self.arrowIcon.hidden = NO;
+        self.ArrowIcon.hidden = NO;
     } else {
-        self.arrowIcon.hidden = YES;
+        self.ArrowIcon.hidden = YES;
     }
 }
 

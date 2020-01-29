@@ -139,7 +139,7 @@
         params[@"remark"] = [self getRemarkTF].text;
     }
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    weakSelf(weakSelf)
+//    weakSelf(weakSelf)
     //TODO:
 //    [BTTHttpManager updatePhoneHumanWithParams:params.copy completion:^(IVRequestResultModel *result, id response) {
 //        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];

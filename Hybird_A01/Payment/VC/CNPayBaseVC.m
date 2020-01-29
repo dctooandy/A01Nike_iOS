@@ -111,7 +111,6 @@
  充值成功回调处理
  */
 - (void)paySucessHandler:(NSDictionary *)model repay:(dispatch_block_t)repayBlock {
-#warning 接口调试
     // 数据容灾
 //    if (![model.data isKindOfClass:[NSDictionary class]]) {
 //        // 后台返回类型不一，全部转成字符串

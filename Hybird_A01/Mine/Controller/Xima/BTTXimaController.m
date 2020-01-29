@@ -284,7 +284,7 @@
     NSLog(@"%zd", indexPath.item);
     if (self.ximaStatusType == BTTXimaStatusTypeNormal && self.ximaDateType == BTTXimaDateTypeThisWeek && self.thisWeekDataType == BTTXimaThisWeekTypeVaild) {
         if (indexPath.row >= 1 && indexPath.row < 1 + self.validModel.xmList.count) {
-            BTTXimaItemModel *model = self.validModel.xmList[indexPath.row - 1];
+//            BTTXimaItemModel *model = self.validModel.xmList[indexPath.row - 1];
 //            model.isSelect = !model.isSelect;
             [self.collectionView reloadData];
         }

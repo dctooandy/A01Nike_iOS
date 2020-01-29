@@ -149,8 +149,9 @@
         [_backGroundView addSubview:button];
     }
     
+    weakSelf(weakSelf)
     [UIView animateWithDuration:ANIMATE_DURATION animations:^{
-        _backGroundView.frame = CGRectMake(0, ActionSheetH-(_shareBtnTitleArray.count*50+50)-7-(_protext.length==0?0:45), ActionSheetW, _shareBtnTitleArray.count*50+50+7+(_protext.length==0?0:45));
+        weakSelf.backGroundView.frame = CGRectMake(0, ActionSheetH-(weakSelf.shareBtnTitleArray.count*50+50)-7-(weakSelf.protext.length==0?0:45), ActionSheetW, weakSelf.shareBtnTitleArray.count*50+50+7+(weakSelf.protext.length==0?0:45));
     }];
     
 }

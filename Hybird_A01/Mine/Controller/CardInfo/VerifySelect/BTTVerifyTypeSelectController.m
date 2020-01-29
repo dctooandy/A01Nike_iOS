@@ -215,7 +215,6 @@
 - (void)deleteBankOrBTC:(BOOL)isBTC isAuto:(BOOL)isAuto
 {
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    weakSelf(weakSelf)
     //TODO:
 //    [BTTHttpManager deleteBankOrBTC:isBTC isAuto:isAuto completion:^(IVRequestResultModel *result, id response) {
 //        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];

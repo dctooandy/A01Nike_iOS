@@ -65,7 +65,7 @@
     
     
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:refreshBlock];
-    header.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+    header.loadingView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
     // 隐藏时间
 //    header.lastUpdatedTimeLabel.hidden = YES;
     // 隐藏状态

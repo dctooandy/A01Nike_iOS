@@ -52,7 +52,7 @@
 }
 
 - (void)keyboardFrameChange:(NSNotification *)notify {
-    NSLog(@"%@",notify.userInfo);
+    NSLog(@"%@", notify.userInfo);
     //取出键盘最终的frame
     CGRect rect = [notify.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     //取出键盘弹出需要花费的时间
@@ -63,7 +63,6 @@
             self.collectionView.contentOffset = CGPointMake(0, 64 + self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height - ([UIScreen mainScreen].bounds.size.height - rect.size.height));
         }
     }];
-    
 }
 
 - (void)setupCollectionView {
@@ -81,7 +80,6 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterNinameNormalCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterNinameNormalCell"];
 }
 
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.elementsHight.count;
 }
@@ -94,7 +92,7 @@
         BTTLoginOrRegisterTypeSelectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginOrRegisterTypeSelectCell" forIndexPath:indexPath];
         cell.registerOrLoginType = self.registerOrLoginType;
         weakSelf(weakSelf);
-        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+        cell.buttonClickBlock = ^(UIButton *_Nonnull button) {
             strongSelf(strongSelf);
             if (button.tag == 10011) {
                 strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
@@ -138,16 +136,16 @@
                     }
                 }
                 cell.pwdTextField.text = @"";
-                
+
                 cell.accountTextField.text = @"gmo063464";
                 cell.pwdTextField.text = @"z12345678";
                 weakSelf(weakSelf);
-                cell.clickEventBlock = ^(id  _Nonnull value) {
+                cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     [strongSelf sendCodeWithPhone:value];
                 };
                 return cell;
-            } else{
+            } else {
                 BTTLoginCodeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginCodeCell" forIndexPath:indexPath];
                 cell.accountTextField.delegate = self;
                 cell.pwdTextField.delegate = self;
@@ -186,12 +184,11 @@
                     strongSelf.loginCellType = BTTLoginCellTypeNormal;
                     [strongSelf setupElements];
                 };
-                cell.clickEventBlock = ^(id  _Nonnull value) {
+                cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     [strongSelf sendCodeWithPhone:value];
-                    
                 };
-                
+
                 return cell;
             }
         } else {
@@ -204,11 +201,11 @@
                     if (self.mobile.length) {
                         cell.phoneTextField.text = self.mobile;
                     }
-                    
+
                     weakSelf(weakSelf);
-                    cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                    cell.buttonClickBlock = ^(UIButton *_Nonnull button) {
                         strongSelf(strongSelf);
-                        
+
                         if (button.tag == 10015) {
                             strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
                             strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
@@ -220,9 +217,8 @@
                             strongSelf.qucikRegisterType = BTTQuickRegisterTypeManual;
                         }
                         [strongSelf setupElements];
-                        
                     };
-                    
+
                     cell.verifyCodeBlock = ^(NSString *phone) {
                         strongSelf(strongSelf);
                         [strongSelf loadMobileVerifyCodeWithPhone:phone];
@@ -238,7 +234,7 @@
                         cell.phoneTextField.text = self.mobile;
                     }
                     weakSelf(weakSelf);
-                    cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                    cell.buttonClickBlock = ^(UIButton *_Nonnull button) {
                         strongSelf(strongSelf);
                         if (button.tag == 10019) {
                             strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
@@ -264,18 +260,17 @@
                 cell.phoneTextField.delegate = self;
                 cell.verifyTextField.delegate = self;
                 weakSelf(weakSelf);
-                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                cell.buttonClickBlock = ^(UIButton *_Nonnull button) {
                     strongSelf(strongSelf);
                     if (button.tag == 10013) {
                         strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
                         strongSelf.qucikRegisterType = BTTQuickRegisterTypeAuto;
-                        
                     } else if (button.tag == 10014) {
                         strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterNormal;
                     }
                     [strongSelf setupElements];
                 };
-                
+
                 cell.refreshEventBlock = ^{
                     strongSelf(strongSelf);
                     [strongSelf loadVerifyCode];
@@ -288,7 +283,7 @@
             if (indexPath.row == 3) {
                 BTTForgetPasswordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTForgetPasswordCell" forIndexPath:indexPath];
                 weakSelf(weakSelf);
-                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                cell.buttonClickBlock = ^(UIButton *_Nonnull button) {
                     strongSelf(strongSelf);
                     BTTForgetPasswordController *vc = [[BTTForgetPasswordController alloc] init];
                     [strongSelf.navigationController pushViewController:vc animated:YES];
@@ -298,7 +293,7 @@
                 BTTLoginOrRegisterBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginOrRegisterBtnCell" forIndexPath:indexPath];
                 cell.cellBtnType = BTTBtnCellTypeLogin;
                 weakSelf(weakSelf);
-                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                cell.buttonClickBlock = ^(UIButton *_Nonnull button) {
                     strongSelf(strongSelf);
                     [collectionView endEditing:YES];
                     [strongSelf login];
@@ -307,7 +302,7 @@
             } else {
                 BTTLoginNoRegisterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLoginNoRegisterCell" forIndexPath:indexPath];
                 weakSelf(weakSelf);
-                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                cell.buttonClickBlock = ^(UIButton *_Nonnull button) {
                     strongSelf(strongSelf);
                     strongSelf.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
                     [strongSelf loadVerifyCode];
@@ -323,7 +318,7 @@
                 cell.cellBtnType = BTTBtnCellTypeRegister;
             }
             weakSelf(weakSelf);
-            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            cell.buttonClickBlock = ^(UIButton *_Nonnull button) {
                 strongSelf(strongSelf);
                 if (button.tag == 10000) {
                     [collectionView endEditing:YES];
@@ -348,7 +343,7 @@
 
 - (UICollectionViewLayout *)collectionViewController:(BTTCollectionViewController *)collectionViewController layoutForCollectionView:(UICollectionView *)collectionView {
     BTTCollectionViewFlowlayout *elementsFlowLayout = [[BTTCollectionViewFlowlayout alloc] initWithDelegate:self];
-    
+
     return elementsFlowLayout;
 }
 
@@ -376,7 +371,6 @@
     return 0;
 }
 
-
 #pragma mark - textfielddelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -399,7 +393,6 @@
         }
     }
 }
-
 
 - (void)setupElements {
     NSInteger total = 0;
@@ -436,15 +429,13 @@
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
                 } else if (i == 4) {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 70)]];
-                }
-                else {
+                } else {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 50)]];
                 }
             } else {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 125)]];
             }
         }
-        
     }
     self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{

@@ -134,8 +134,8 @@
 }
 - (void)submitChange
 {
-    UITextField *retentionTF = [self getCellTextFieldWithIndex:0];
-    UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
+//    UITextField *retentionTF = [self getCellTextFieldWithIndex:0];
+//    UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
     UITextField *sexTF = [self getCellTextFieldWithIndex:2];
     UITextField *birthdayTF = [self getCellTextFieldWithIndex:3];
     UITextField *emailTF = [self getCellTextFieldWithIndex:4];

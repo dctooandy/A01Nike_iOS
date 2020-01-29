@@ -285,7 +285,6 @@
 - (void)getManualDeposit {
 //    __weak typeof(self) weakSelf = self;
 //    [CNPayRequestManager paymentGetDepositNameWithType:YES CompleteHandler:^(id  _Nullable response, NSError * _Nullable error) {
-#warning 调试接口
 //        if (result.status) {
 //            [weakSelf configNameView:result.data];
 //        }

@@ -27,20 +27,20 @@
    
 }
 + (void)publicGameLoginWithParams:(NSDictionary *)params isTry:(BOOL)isTry completeBlock:(KYHTTPCallBack)completeBlock{
-    //TODO:
-#warning 调试接口
+    
     NSString *subUrl = isTry ? @"public/game/tryPlay" : @"public/game/login";
-    [self sendRequestWithUrl:subUrl paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-//        NSString *url = nil;
-//        if (result.status && [result.data isKindOfClass:[NSDictionary class]]) {
-//            url = [result.data valueForKey:@"url"];
-//        }
-//        if (completeBlock) {
-//            completeBlock(result,url);
-//        }
+    [IVNetwork requestPostWithUrl:subUrl paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        NSString *url = @"";
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if ([result.body isKindOfClass:[NSDictionary class]]) {
+                url = [result.body valueForKey:@"url"];
+            }
+        }
+        if (completeBlock) {
+            completeBlock(result,error);
+        }
     }];
-    
-    
 }
 
 + (void)publicGameTransferWithProvider:(NSString *)provider completeBlock:(KYHTTPCallBack)completeBlock

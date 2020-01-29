@@ -22,7 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) AMSegmentViewController *segmentVC;
 
 - (instancetype)initWithPaymentType:(CNPaymentType)paymentType;
-- (BOOL)canPopViewController;
 - (void)setupView;
 
 @end
