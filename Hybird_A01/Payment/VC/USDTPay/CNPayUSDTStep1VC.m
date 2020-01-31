@@ -123,11 +123,19 @@
                         }
                     }
                     if (i==0&&[model.flag isEqualToString:@"1"]) {
-                        NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%@，最高%@",model.depositamount,model.limitamount] attributes:
-                        @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
-                                     NSFontAttributeName:weakSelf.usdtInputField.font
-                             }];
-                        weakSelf.usdtInputField.attributedPlaceholder = attrString;
+                        if (model.maxAmount==nil||model.minAmount==nil) {
+                            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"请输入存款金额" attributes:
+                            @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+                                         NSFontAttributeName:weakSelf.usdtInputField.font
+                                 }];
+                            weakSelf.usdtInputField.attributedPlaceholder = attrString;
+                        }else{
+                            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%@，最高%@",model.minAmount,model.maxAmount] attributes:
+                            @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+                                         NSFontAttributeName:weakSelf.usdtInputField.font
+                                 }];
+                            weakSelf.usdtInputField.attributedPlaceholder = attrString;
+                        }
                     }
                     if (i==array.count-1) {
                         self.bankCodeArray = codeArray;
@@ -307,8 +315,10 @@
     }
     if ([_usdtInputField.text doubleValue]==0||_usdtInputField.text.length==0) {
         [self showError:@"请输入需要存款的金额"];
-    }else if ([_usdtInputField.text doubleValue]<[model.depositamount doubleValue]||[_usdtInputField.text doubleValue]>[model.limitamount doubleValue]){
-        [self showError:[NSString stringWithFormat:@"请输入%@-%@的存款金额",model.depositamount,model.limitamount]];
+    }else if (model.minAmount!=nil&&model.maxAmount!=nil){
+        if ([_usdtInputField.text doubleValue]<[model.minAmount doubleValue]||[_usdtInputField.text doubleValue]>[model.maxAmount doubleValue]){
+            [self showError:[NSString stringWithFormat:@"请输入%@-%@的存款金额",model.minAmount,model.maxAmount]];
+        }
     }else{
         [self usdtOnlinePayHanlerWithType:[model.payType integerValue]];
     }
@@ -376,8 +386,8 @@
     [[NSUserDefaults standardUserDefaults]setObject:model.bankcode forKey:@"manual_usdt_bankCode"];
     [[NSUserDefaults standardUserDefaults]setObject:_walletAddressLabel.text forKey:@"manual_usdt_account"];
     [[NSUserDefaults standardUserDefaults]setFloat:self.usdtRate forKey:@"manual_usdt_rate"];
-    [[NSUserDefaults standardUserDefaults]setObject:model.depositamount forKey:@"usdt_minamount"];
-    [[NSUserDefaults standardUserDefaults]setObject:model.limitamount forKey:@"usdt_maxamount"];
+    [[NSUserDefaults standardUserDefaults]setObject:model.minAmount forKey:@"usdt_minamount"];
+    [[NSUserDefaults standardUserDefaults]setObject:model.maxAmount forKey:@"usdt_maxamount"];
     [self goToStep:1];
 }
 
@@ -414,14 +424,22 @@
         }
         _selectedIndex = indexPath.row;
         BTTUsdtWalletModel *model = [BTTUsdtWalletModel yy_modelWithJSON:self.itemDataArray[indexPath.row]];
-        if (![model.payCategory isEqualToString:@"2"]) {
+        if (model.payType!=nil) {
             _elseWalletView.hidden = YES;
             _normalWalletView.hidden = NO;
-            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%@，最高%@",model.depositamount,model.limitamount] attributes:
-            @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
-                         NSFontAttributeName:_usdtInputField.font
-                 }];
-            _usdtInputField.attributedPlaceholder = attrString;
+            if (model.maxAmount==nil||model.minAmount==nil) {
+                NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"请输入存款金额" attributes:
+                @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+                             NSFontAttributeName:_usdtInputField.font
+                     }];
+                _usdtInputField.attributedPlaceholder = attrString;
+            }else{
+                NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%@，最高%@",model.minAmount,model.maxAmount] attributes:
+                @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+                             NSFontAttributeName:_usdtInputField.font
+                     }];
+                _usdtInputField.attributedPlaceholder = attrString;
+            }
         }else{
             _walletAddressLabel.text = model.bankaccountno;
             _noteLabel.text = [NSString stringWithFormat:@"%@",model.retelling];
@@ -456,11 +474,19 @@
         if (![model.payCategory isEqualToString:@"2"]) {
             _elseWalletView.hidden = YES;
             _normalWalletView.hidden = NO;
-            NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%@，最高%@",model.depositamount,model.limitamount] attributes:
-            @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
-                         NSFontAttributeName:_usdtInputField.font
-                 }];
-            _usdtInputField.attributedPlaceholder = attrString;
+            if (model.maxAmount==nil||model.minAmount==nil) {
+                NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"请输入存款金额" attributes:
+                @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+                             NSFontAttributeName:_usdtInputField.font
+                     }];
+                _usdtInputField.attributedPlaceholder = attrString;
+            }else{
+                NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%@，最高%@",model.minAmount,model.maxAmount] attributes:
+                @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+                             NSFontAttributeName:_usdtInputField.font
+                     }];
+                _usdtInputField.attributedPlaceholder = attrString;
+            }
         }else{
             _walletAddressLabel.text = model.bankaccountno;
             _noteLabel.text = [NSString stringWithFormat:@"%@",model.retelling];

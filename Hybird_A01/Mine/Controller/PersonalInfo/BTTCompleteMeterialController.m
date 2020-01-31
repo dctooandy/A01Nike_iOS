@@ -105,6 +105,7 @@
 }
 
 - (void)submitInfo {
+    [self.view endEditing:YES];
     UITextField *retentionTF = [self getCellTextFieldWithIndex:0];
     UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
     NSMutableDictionary *params = @{}.mutableCopy;
@@ -124,6 +125,7 @@
             params[@"reservedInfo"] = retentionTF.text;
         }
     }
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     

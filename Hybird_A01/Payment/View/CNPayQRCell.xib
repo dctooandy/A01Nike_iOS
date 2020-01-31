@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,47 +23,41 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JCq-BL-HJg">
+                        <rect key="frame" x="51" y="18.5" width="38" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="38" id="BY1-7n-RuG"/>
+                            <constraint firstAttribute="height" constant="38" id="qEV-TR-hmR"/>
+                        </constraints>
+                    </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pay_QRNormal" translatesAutoresizingMaskIntoConstraints="NO" id="ug3-E5-PtR">
                         <rect key="frame" x="0.0" y="8" width="288" height="67"/>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tuijian" translatesAutoresizingMaskIntoConstraints="NO" id="JCq-BL-HJg">
-                        <rect key="frame" x="250.5" y="9.5" width="32" height="56"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="32" id="zln-Ln-nLd"/>
-                        </constraints>
                     </imageView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="BGF-IA-oUd" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="AjJ-Gj-bhx"/>
                 <constraint firstItem="BGF-IA-oUd" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="B6H-So-cah"/>
-                <constraint firstItem="JCq-BL-HJg" firstAttribute="trailing" secondItem="ug3-E5-PtR" secondAttribute="trailing" constant="-5.5" id="JNE-Nb-Ysw"/>
+                <constraint firstItem="BGF-IA-oUd" firstAttribute="leading" secondItem="JCq-BL-HJg" secondAttribute="trailing" constant="12" id="Rzb-Wu-6Z2"/>
                 <constraint firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Ufo-31-HiM"/>
                 <constraint firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="13" id="YtR-4X-j5q"/>
                 <constraint firstItem="ug3-E5-PtR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="cDx-DM-WLi"/>
                 <constraint firstAttribute="bottom" secondItem="ug3-E5-PtR" secondAttribute="bottom" id="gDB-sI-Pd1"/>
-                <constraint firstItem="ug3-E5-PtR" firstAttribute="bottom" secondItem="JCq-BL-HJg" secondAttribute="bottom" constant="9.5" id="gh4-VB-ZOh"/>
                 <constraint firstItem="ug3-E5-PtR" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="l2Q-zf-zlE"/>
                 <constraint firstAttribute="trailing" secondItem="ug3-E5-PtR" secondAttribute="trailing" id="lcP-dC-xp2"/>
-                <constraint firstItem="ug3-E5-PtR" firstAttribute="top" secondItem="JCq-BL-HJg" secondAttribute="top" constant="-1.5" id="td2-6C-IYV"/>
-                <constraint firstItem="BGF-IA-oUd" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="zZC-5K-sQO"/>
+                <constraint firstItem="JCq-BL-HJg" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="re5-W5-cuR"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="288" height="75"/>
             <connections>
                 <outlet property="bgIV" destination="ug3-E5-PtR" id="9Lm-0d-bdi"/>
-                <outlet property="bottom" destination="gh4-VB-ZOh" id="tCA-lA-MqK"/>
-                <outlet property="right" destination="JNE-Nb-Ysw" id="eSu-m9-vfc"/>
                 <outlet property="titleLb" destination="BGF-IA-oUd" id="d0p-nY-XQa"/>
-                <outlet property="top" destination="td2-6C-IYV" id="AYT-oU-5tf"/>
                 <outlet property="tuijianIcon" destination="JCq-BL-HJg" id="p1A-y8-8Gk"/>
-                <outlet property="tuijianWidth" destination="zln-Ln-nLd" id="Tk4-js-NoR"/>
             </connections>
             <point key="canvasLocation" x="243.19999999999999" y="59.820089955022496"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="pay_QRNormal" width="168" height="65"/>
-        <image name="tuijian" width="64" height="112"/>
     </resources>
 </document>

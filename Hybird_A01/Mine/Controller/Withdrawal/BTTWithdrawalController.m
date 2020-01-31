@@ -22,6 +22,7 @@
 #import "BTTWithDrawUSDTConfirmCell.h"
 #import "BTTBTCRateModel.h"
 #import "CNPayUSDTRateModel.h"
+#import "CLive800Manager.h"
 
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate>
 @property(nonatomic, copy)NSString *amount;
@@ -102,6 +103,10 @@
     if ([cellName isEqualToString:@"取款至"]) {
         BTTWithdrawalCardSelectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalCardSelectCell" forIndexPath:indexPath];
         cell.model = self.bankList[self.selectIndex];
+        cell.contactBtnTap = ^{
+            [[CLive800Manager sharedInstance] startLive800Chat:self];
+        };
+
         return cell;
     }
     
@@ -265,6 +270,7 @@
 
 - (void)refreshBankList
 {
+    BOOL haveUSDT = NO;
     NSDictionary *json = [IVCacheWrapper objectForKey:BTTCacheBankListKey];
     if (json!=nil) {
         NSArray *array = json[@"accounts"];
@@ -273,7 +279,13 @@
             for (int i =0 ; i<array.count; i++) {
                 NSDictionary *json = array[i];
                 BTTBankModel *model = [BTTBankModel yy_modelWithDictionary:json];
-                [bankList addObject:model];
+                if (self.isUSDT&&!haveUSDT&&[model.bankName isEqualToString:@"USDT"]) {
+                    [bankList insertObject:model atIndex:0];
+                    haveUSDT = YES;
+                    
+                }else{
+                   [bankList addObject:model];
+                }
                 if (i==array.count-1) {
                     self.bankList = bankList;
                     [self loadMainData];

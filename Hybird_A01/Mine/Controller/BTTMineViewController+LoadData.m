@@ -137,9 +137,9 @@
                         mainModel.paymentType = model.payType;
                         mainModel.payModel = model;
                         if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                            [self.normalDataSoure addObject:mainModel];
-                        }else{
                             [self.bigDataSoure addObject:mainModel];
+                        }else{
+                            [self.normalDataSoure addObject:mainModel];
                         }
                     }
                     if ([model.payTypeName isEqualToString:@"USDT支付"]) {
@@ -153,9 +153,9 @@
                         mainModel.paymentType = model.payType;
                         mainModel.payModel = model;
                         if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                            [self.normalDataSoure addObject:mainModel];
-                        }else{
                             [self.bigDataSoure addObject:mainModel];
+                        }else{
+                            [self.normalDataSoure addObject:mainModel];
                         }
                     }
 
@@ -166,9 +166,9 @@
                         mainModel.paymentType = model.payType;
                         mainModel.payModel = model;
                         if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                            [self.bigDataSoure addObject:mainModel];
-                        }else{
                             [self.normalDataSoure addObject:mainModel];
+                        }else{
+                            [self.bigDataSoure addObject:mainModel];
                         }
                     }
                     if ([model.payTypeName isEqualToString:@"微信转账银行卡"]) {
@@ -178,9 +178,9 @@
                         mainModel.paymentType = model.payType;
                         mainModel.payModel = model;
                         if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                            [self.bigDataSoure addObject:mainModel];
-                        }else{
                             [self.normalDataSoure addObject:mainModel];
+                        }else{
+                            [self.bigDataSoure addObject:mainModel];
                         }
                     }
                     if ([model.payTypeName isEqualToString:@"支付宝转账银行卡"]) {
@@ -190,9 +190,9 @@
                         mainModel.paymentType = model.payType;
                         mainModel.payModel = model;
                         if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                            [self.bigDataSoure addObject:mainModel];
-                        }else{
                             [self.normalDataSoure addObject:mainModel];
+                        }else{
+                            [self.bigDataSoure addObject:mainModel];
                         }
                     }
                     if ([model.payTypeName isEqualToString:@"支付宝扫码"]) {
@@ -225,7 +225,7 @@
                         mainModel.iconName = @"me_hand";
                         mainModel.paymentType = model.payType;
                         mainModel.payModel = model;
-                        [self.normalDataSoure addObject:mainModel];
+                        [self.normalDataTwo addObject:mainModel];
                     }
                     if ([model.payTypeName isEqualToString:@"在线支付"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
@@ -233,7 +233,7 @@
                         mainModel.iconName = @"me_online";
                         mainModel.paymentType = model.payType;
                         mainModel.payModel = model;
-                        [self.normalDataSoure addObject:mainModel];
+                        [self.normalDataTwo addObject:mainModel];
                     }
                     if ([model.payTypeName isEqualToString:@"云闪付"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
@@ -303,11 +303,7 @@
                     mainModel.paymentType     = 6789;
                     mainModel.payModels = wapPayments;
                     mainModel.payModel = wapPayments.firstObject;
-                    if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                        [self.normalDataSoure addObject:mainModel];
-                    }else{
-                        [self.normalDataTwo addObject:mainModel];
-                    }
+                    [self.normalDataTwo addObject:mainModel];
                 }
                 
                 if (haveUSDT) {
@@ -498,9 +494,9 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BTTCustomerBalanceModel *model = [BTTCustomerBalanceModel yy_modelWithJSON:result.body];
             self.balanceModel = model;
-            self.preAmount = model.balance;
+            self.preAmount = [PublicMethod stringWithDecimalNumber:model.balance];
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.totalAmount = model.balance;
+                self.totalAmount = [PublicMethod stringWithDecimalNumber:model.balance];
                 self.isLoading = NO;
                 [self.collectionView reloadData];
             });

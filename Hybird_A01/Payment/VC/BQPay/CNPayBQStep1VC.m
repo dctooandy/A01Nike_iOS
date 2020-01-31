@@ -101,6 +101,7 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (result.body[@"amounts"]!=nil) {
                 self.amountList = result.body[@"amounts"];
+                self.amountBtn.hidden = YES;
                 [self configAmountList];
             }
         }else{

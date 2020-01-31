@@ -76,6 +76,11 @@
     [self registerNotification];
     [self setupChannelView];
 }
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    [_payCollectionView reloadData];
+    [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+}
 
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUIItems:) name:@"BTTUpdateSaveMoneyUINotification" object:nil];
@@ -162,8 +167,7 @@
     if (_segmentVC) {
         [_segmentVC.view removeFromSuperview];
     }
-    [_payCollectionView reloadData];
-    [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    
     
     if (channelModel.paymentType==6789) {
         _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.payModels.firstObject.payType];
@@ -178,6 +182,9 @@
     [_segmentVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];
+    
+    [_payCollectionView reloadData];
+    [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
 }
 
 #pragma mark- UICollectionViewDelegate, UICollectionViewDataSource

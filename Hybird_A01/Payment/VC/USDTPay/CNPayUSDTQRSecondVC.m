@@ -110,11 +110,20 @@
     
     _minamount = [[NSUserDefaults standardUserDefaults]objectForKey:@"usdt_minamount"];
     _maxamount = [[NSUserDefaults standardUserDefaults]objectForKey:@"usdt_maxamount"];
-    NSAttributedString *amountString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%@，最高%@",self.minamount,self.maxamount] attributes:
-    @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
-                 NSFontAttributeName:_saveInputField.font
-         }];
-    _saveInputField.attributedPlaceholder = amountString;
+    if (_minamount!=nil&&_maxamount!=nil) {
+        NSAttributedString *amountString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%@，最高%@",self.minamount,self.maxamount] attributes:
+        @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+                     NSFontAttributeName:_saveInputField.font
+             }];
+        _saveInputField.attributedPlaceholder = amountString;
+    }else{
+        NSAttributedString *amountString = [[NSAttributedString alloc] initWithString:@"请输入存款金额" attributes:
+        @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+                     NSFontAttributeName:_saveInputField.font
+             }];
+        _saveInputField.attributedPlaceholder = amountString;
+    }
+    
     
     NSString *verifyCode = [IVNetwork savedUserInfo].verifyCode ? [IVNetwork savedUserInfo].verifyCode : @"";
     NSString *realName = [IVNetwork savedUserInfo].loginName ? [IVNetwork savedUserInfo].loginName : @"";

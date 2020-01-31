@@ -102,7 +102,7 @@
         case CNPaymentAliQR:
         case CNPaymentWechatQR:
         case CNPaymentUnionQR:
-        case CNPaymentJDQR:
+        case 16:
         case 23:
         case 8:
         case 11:{

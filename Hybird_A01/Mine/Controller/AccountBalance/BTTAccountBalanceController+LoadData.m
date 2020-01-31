@@ -38,8 +38,8 @@
             BTTCustomerBalanceModel *model = [BTTCustomerBalanceModel yy_modelWithJSON:result.body];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.amount = model.balance;
-                self.localAmount = model.localBalance;
+                self.amount = [PublicMethod stringWithDecimalNumber:model.balance];
+                self.localAmount = [PublicMethod stringWithDecimalNumber:model.localBalance];
                 self.hallAmount = model.platformTotalBalance;
                 [self.games addObjectsFromArray:model.platformBalances];
                 self.isLoadingData = NO;

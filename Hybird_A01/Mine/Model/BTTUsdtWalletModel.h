@@ -67,6 +67,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *bqpaytype;
 @property (nonatomic, assign) NSInteger pxh;
 @property (nonatomic, copy) NSString *bankaddress;
+@property (nonatomic, copy) NSString *minAmount;
+@property (nonatomic, copy) NSString *maxAmount;
 @end
 
 NS_ASSUME_NONNULL_END

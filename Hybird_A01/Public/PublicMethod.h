@@ -236,6 +236,8 @@ NS_ASSUME_NONNULL_BEGIN
 //是否在两个时间段内
 + (BOOL)date:(NSDate*)date isBetweenDate:(NSDate*)beginDate andDate:(NSDate*)endDate;
 
++ (NSString *)stringWithDecimalNumber:(double)num;
+
 @end
 
 NS_ASSUME_NONNULL_END

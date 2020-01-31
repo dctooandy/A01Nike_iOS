@@ -150,21 +150,21 @@
                 } else {
                     cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
                 }
-                
+
                 cell.nameLabel.text = [IVNetwork savedUserInfo].loginName;
-                cell.vipLevelLabel.text = ([IVNetwork savedUserInfo].starLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork savedUserInfo].starLevel)];
+                cell.vipLevelLabel.text = ([IVNetwork savedUserInfo].starLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ", @([IVNetwork savedUserInfo].starLevel)];
                 weakSelf(weakSelf);
                 cell.accountBlanceBlock = ^{
                     strongSelf(strongSelf);
                     BTTAccountBalanceController *accountBalance = [[BTTAccountBalanceController alloc] init];
                     [strongSelf.navigationController pushViewController:accountBalance animated:YES];
                 };
-                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                cell.buttonClickBlock = ^(UIButton *_Nonnull button) {
                     strongSelf(strongSelf);
                     BTTNicknameSetController *vc = (BTTNicknameSetController *)[BTTNicknameSetController getVCFromStoryboard];
                     [strongSelf.navigationController pushViewController:vc animated:YES];
                 };
-                cell.clickEventBlock = ^(id  _Nonnull value) {
+                cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
                     vc.webConfigModel.url = @"common/ancement.htm";
@@ -183,19 +183,19 @@
                 }
                 cell.nicknameLabel.text = nickName;
                 cell.nameLabel.text = [IVNetwork savedUserInfo].loginName;
-                cell.vipLevelLabel.text = ([IVNetwork savedUserInfo].starLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ",@([IVNetwork savedUserInfo].starLevel)];
+                cell.vipLevelLabel.text = ([IVNetwork savedUserInfo].starLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ", @([IVNetwork savedUserInfo].starLevel)];
                 weakSelf(weakSelf);
                 cell.accountBlanceBlock = ^{
                     strongSelf(strongSelf);
                     BTTAccountBalanceController *accountBalance = [[BTTAccountBalanceController alloc] init];
                     [strongSelf.navigationController pushViewController:accountBalance animated:YES];
                 };
-                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                cell.buttonClickBlock = ^(UIButton *_Nonnull button) {
                     strongSelf(strongSelf);
                     BTTNicknameSetController *vc = (BTTNicknameSetController *)[BTTNicknameSetController getVCFromStoryboard];
                     [strongSelf.navigationController pushViewController:vc animated:YES];
                 };
-                cell.clickEventBlock = ^(id  _Nonnull value) {
+                cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
                     vc.webConfigModel.url = @"common/ancement.htm";
@@ -205,12 +205,11 @@
                 };
                 return cell;
             }
-            
         } else {
             BTTMeHeaderNotLoginCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeHeaderNotLoginCell" forIndexPath:indexPath];
             cell.noticeStr = homeVC.noticeStr.length ? homeVC.noticeStr : @"";
             weakSelf(weakSelf);
-            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            cell.buttonClickBlock = ^(UIButton *_Nonnull button) {
                 strongSelf(strongSelf);
                 if (button.tag == 6003) {
                     BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
@@ -222,7 +221,7 @@
                     [strongSelf.navigationController pushViewController:loginAndRegister animated:YES];
                 }
             };
-            cell.clickEventBlock = ^(id  _Nonnull value) {
+            cell.clickEventBlock = ^(id _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
                 vc.webConfigModel.url = @"common/ancement.htm";
@@ -241,7 +240,7 @@
                 BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
                 cell.dataSource = self.bigDataSoure;
                 weakSelf(weakSelf);
-                cell.clickEventBlock = ^(id  _Nonnull value) {
+                cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTMeMainModel *model = value;
                     [strongSelf goSaveMoneyWithModel:model];
@@ -251,14 +250,14 @@
                 BTTMeMoreSaveMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell" forIndexPath:indexPath];
                 return cell;
             } else {
-                BTTMeMoreSaveMoneyCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
+                BTTMeMoreSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
                 if (indexPath.row == 4) {
                     cell.dataSource = self.normalDataSoure;
                 } else {
                     cell.dataSource = self.normalDataTwo;
                 }
                 weakSelf(weakSelf);
-                cell.clickEventBlock = ^(id  _Nonnull value) {
+                cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTMeMainModel *model = value;
                     [strongSelf goSaveMoneyWithModel:model];
@@ -269,31 +268,31 @@
             BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
             cell.dataSource = self.bigDataSoure;
             weakSelf(weakSelf);
-            cell.clickEventBlock = ^(id  _Nonnull value) {
+            cell.clickEventBlock = ^(id _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTMeMainModel *model = value;
                 [strongSelf goSaveMoneyWithModel:model];
             };
             return cell;
         } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeMore) {
-            BTTMeMoreSaveMoneyCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
+            BTTMeMoreSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
             cell.dataSource = self.normalDataSoure.count ? self.normalDataSoure : self.normalDataTwo;
             weakSelf(weakSelf);
-            cell.clickEventBlock = ^(id  _Nonnull value) {
+            cell.clickEventBlock = ^(id _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTMeMainModel *model = value;
                 [strongSelf goSaveMoneyWithModel:model];
             };
             return cell;
         } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeTwoMore) {
-            BTTMeMoreSaveMoneyCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
+            BTTMeMoreSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
             if (indexPath.row == 2) {
                 cell.dataSource = self.normalDataSoure;
             } else {
                 cell.dataSource = self.normalDataTwo;
             }
             weakSelf(weakSelf);
-            cell.clickEventBlock = ^(id  _Nonnull value) {
+            cell.clickEventBlock = ^(id _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTMeMainModel *model = value;
                 [strongSelf goSaveMoneyWithModel:model];
@@ -304,7 +303,7 @@
                 BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
                 cell.dataSource = self.bigDataSoure;
                 weakSelf(weakSelf);
-                cell.clickEventBlock = ^(id  _Nonnull value) {
+                cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTMeMainModel *model = value;
                     [strongSelf goSaveMoneyWithModel:model];
@@ -314,24 +313,23 @@
                 BTTMeMoreSaveMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell" forIndexPath:indexPath];
                 return cell;
             } else {
-                BTTMeMoreSaveMoneyCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
-                
+                BTTMeMoreSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
+
                 cell.dataSource = self.normalDataSoure.count ? self.normalDataSoure : self.normalDataTwo;
-                
+
                 weakSelf(weakSelf);
-                cell.clickEventBlock = ^(id  _Nonnull value) {
+                cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTMeMainModel *model = value;
                     [strongSelf goSaveMoneyWithModel:model];
                 };
                 return cell;
             }
-        }
-        else {
+        } else {
             return [UICollectionViewCell new];
         }
-    }  else if (indexPath.row == 2 + self.saveMoneyCount ||
-                indexPath.row == self.saveMoneyCount + 9) {
+    } else if (indexPath.row == 2 + self.saveMoneyCount ||
+               indexPath.row == self.saveMoneyCount + 9) {
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
     } else {
@@ -359,12 +357,10 @@
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
-    } else if ([IVNetwork savedUserInfo].starLevel == 0 && (![IVNetwork savedUserInfo].realName.length)&& (![IVNetwork savedUserInfo].verifyCode.length)) {
-        if (model.paymentType == 15 || model.paymentType == 17 || model.paymentType == 16 || model.paymentType == 2) {
-            BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
-            [self.navigationController pushViewController:personInfo animated:YES];
-            return;
-        }
+    } else if ([IVNetwork savedUserInfo].starLevel == 0 && (![IVNetwork savedUserInfo].realName.length) && (![IVNetwork savedUserInfo].verifyCode.length)) {
+        BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
+        [self.navigationController pushViewController:personInfo animated:YES];
+        return;
     }
     [[CNTimeLog shareInstance] startRecordTime:CNEventPayLaunch];
     NSMutableArray *channelArray = [NSMutableArray new];
@@ -376,14 +372,14 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    NSLog(@"%@",@(indexPath.row));
+    NSLog(@"%@", @(indexPath.row));
     if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 10) {
-         [IVNetwork checkAppUpdate];
+        [IVNetwork checkAppUpdate];
         return;
     } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 11) {
         // 网络监测
         IVCNetworkStatusView *statusView = [[IVCNetworkStatusView alloc] initWithFrame:self.view.frame];
-        
+
         IVCheckNetworkModel *gatewayModel = [[IVCheckNetworkModel alloc] init];
         gatewayModel.title = @"当前业务线路";
         gatewayModel.urls = [IVHttpManager shareManager].gateways;
@@ -392,14 +388,14 @@
         domainModel.title = @"当前手机站";
         domainModel.urls = [IVHttpManager shareManager].domains;
         domainModel.type = IVKCheckNetworkTypeDomain;
-        
-        statusView.datas = @[gatewayModel,domainModel];
-        
+
+        statusView.datas = @[gatewayModel, domainModel];
+
         statusView.detailBtnClickedBlock = ^{
             IVCDetailViewController *vc = [[IVCDetailViewController alloc] initWithThemeColor:[UIColor blueColor]];
             [self presentViewController:vc animated:YES completion:nil];
         };
-        
+
         [self.view addSubview:statusView];
         [statusView startCheck];
 
@@ -417,35 +413,37 @@
     }
     if (indexPath.row == self.saveMoneyCount + 3) {
         if (self.isCompletePersonalInfo) {
-            if ([IVNetwork savedUserInfo].bankCardNum>0||[IVNetwork savedUserInfo].usdtNum>0) {
+            if ([IVNetwork savedUserInfo].bankCardNum > 0 || [IVNetwork savedUserInfo].usdtNum > 0) {
                 NSString *timeStamp = [[NSUserDefaults standardUserDefaults]objectForKey:BTTWithDrawToday];
-                NSInteger usdtCount = [[[NSUserDefaults standardUserDefaults]objectForKey:BTTBindUsdtCount] integerValue];
-                if (timeStamp!=nil) {
+                NSInteger usdtCount = [IVNetwork savedUserInfo].usdtNum;
+                if (timeStamp != nil) {
                     BOOL isSameDay = [PublicMethod isDateToday:[PublicMethod transferDateStringToDate:timeStamp]];
                     if (isSameDay) {
                         BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
                         [self.navigationController pushViewController:vc animated:YES];
-                    }else{
+                    } else {
                         NSString *timeStamp1 = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
                         [[NSUserDefaults standardUserDefaults]setObject:timeStamp1 forKey:BTTWithDrawToday];
-                        BTTUsdtTodayNoticeView *alertView = [[BTTUsdtTodayNoticeView alloc]initWithFrame:CGRectZero];
-                        [alertView setTapCancel:^{
-                            BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                            [self.navigationController pushViewController:vc animated:YES];
-                        }];
+                        BTTUsdtTodayNoticeView *alertView = [BTTUsdtTodayNoticeView viewFromXib];
+
                         BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
                         popView.isClickBGDismiss = YES;
                         [popView pop];
                         alertView.dismissBlock = ^{
                             [popView dismiss];
                         };
+                        [alertView setTapCancel:^{
+                            [popView dismiss];
+                            BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }];
                         alertView.tapConfirm = ^{
                             [popView dismiss];
-                            if (usdtCount==0) {
+                            if (usdtCount == 0) {
                                 [MBProgressHUD showMessagNoActivity:@"请先绑定USDT钱包" toView:nil];
                                 BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
                                 [self.navigationController pushViewController:vc animated:YES];
-                            }else{
+                            } else {
                                 BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
                                 vc.isUSDT = YES;
                                 [self.navigationController pushViewController:vc animated:YES];
@@ -455,9 +453,8 @@
                             [popView dismiss];
                             [[CLive800Manager sharedInstance] startLive800Chat:self];
                         };
-                        
                     }
-                }else{
+                } else {
                     NSString *timeStamp = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
                     [[NSUserDefaults standardUserDefaults]setObject:timeStamp forKey:BTTWithDrawToday];
                     BTTUsdtTodayNoticeView *alertView = [BTTUsdtTodayNoticeView viewFromXib];
@@ -474,11 +471,11 @@
                     };
                     alertView.tapConfirm = ^{
                         [popView dismiss];
-                        if (usdtCount==0) {
+                        if (usdtCount == 0) {
                             [MBProgressHUD showMessagNoActivity:@"请先绑定USDT钱包" toView:nil];
                             BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
                             [self.navigationController pushViewController:vc animated:YES];
-                        }else{
+                        } else {
                             BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
                             vc.isUSDT = YES;
                             [self.navigationController pushViewController:vc animated:YES];
@@ -489,7 +486,6 @@
                         [[CLive800Manager sharedInstance] startLive800Chat:self];
                     };
                 }
-                
             } else {
                 [MBProgressHUD showMessagNoActivity:@"请先绑定银行卡" toView:nil];
                 BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
@@ -513,7 +509,7 @@
         }
     } else if (indexPath.row == self.saveMoneyCount + 6) {
         UIViewController *vc = nil;
-        if ([IVNetwork savedUserInfo].mobileNoBind==1) {
+        if ([IVNetwork savedUserInfo].mobileNoBind == 1) {
             BTTVerifyTypeSelectController *selectVC = [BTTVerifyTypeSelectController new];
             selectVC.verifyType = BTTSafeVerifyTypeChangeMobile;
             vc = selectVC;
@@ -537,21 +533,20 @@
             [names insertObject:@"开户礼金" atIndex:index + 1];
         }
         BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"我的优惠" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:names actionSheetBlock:^(NSInteger buttonIndex) {
-            NSLog(@"选择了%@",@(buttonIndex));
+            NSLog(@"选择了%@", @(buttonIndex));
             if (buttonIndex == names.count) {
-                
             } else {
                 BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
                 vc.webConfigModel.theme = @"outside";
                 vc.webConfigModel.newView = YES;
-    //            vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"lucky_pot.htm"];
+                //            vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"lucky_pot.htm"];
                 NSString *title = names[buttonIndex];
                 if ([title isEqualToString:@"1%存款返利"]) {
-                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"deposit_rebate.htm"];
+                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"deposit_rebate.htm"];
                 } else if ([title isEqualToString:@"开户礼金"]) {
-                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"promo_open_account.htm"];
+                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"promo_open_account.htm"];
                 } else if ([title isEqualToString:@"首存优惠"]) {
-                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"mypromotion.htm"];
+                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"mypromotion.htm"];
                 }
                 [self.navigationController pushViewController:vc animated:YES];
             }
@@ -561,7 +556,7 @@
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.webConfigModel.theme = @"outside";
         vc.webConfigModel.newView = YES;
-        vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"lucky_pot.htm"];
+        vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"lucky_pot.htm"];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
@@ -607,7 +602,7 @@
 
 - (UICollectionViewLayout *)collectionViewController:(BTTCollectionViewController *)collectionViewController layoutForCollectionView:(UICollectionView *)collectionView {
     BTTCollectionViewFlowlayout *elementsFlowLayout = [[BTTCollectionViewFlowlayout alloc] initWithDelegate:self];
-    
+
     return elementsFlowLayout;
 }
 
@@ -658,8 +653,7 @@
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
                 } else if (i == 4) {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 90)]];
-                }
-                else {
+                } else {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
                 }
             } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBigOneMore) {
@@ -670,8 +664,7 @@
                 } else {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
                 }
-            }
-            else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig) {
+            } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig) {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 180)]];
             } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeMore) {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
@@ -697,7 +690,8 @@
 
 - (BOOL)isCompletePersonalInfo
 {
-    BOOL isComplete = (![[IVNetwork savedUserInfo].realName isEqualToString:@""])&&(![[IVNetwork savedUserInfo].verifyCode isEqualToString:@""]);
+    BOOL isComplete = (![[IVNetwork savedUserInfo].realName isEqualToString:@""]) && (![[IVNetwork savedUserInfo].verifyCode isEqualToString:@""]);
     return isComplete;
 }
+
 @end

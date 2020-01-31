@@ -1208,5 +1208,14 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     return YES;
 }
 
++ (NSString *)stringWithDecimalNumber:(double)num {
+    return [[self decimalNumber:num] stringValue];
+}
+
++ (NSDecimalNumber *)decimalNumber:(double)num {
+    NSString *numString = [NSString stringWithFormat:@"%lf", num];
+    return [NSDecimalNumber decimalNumberWithString:numString];
+}
+
 
 @end

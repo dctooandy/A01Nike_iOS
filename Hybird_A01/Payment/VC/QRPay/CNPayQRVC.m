@@ -75,9 +75,10 @@
             self.typeModel = model;
             if (model.amountType.amounts!=nil&&model.amountType.amounts.count>0) {
                 self.amountList = model.amountType.amounts;
-                [self updateAllContentWithModel:self.paymentModel];
-                [self configAmountList];
+                
             }
+            [self updateAllContentWithModel:self.paymentModel];
+            [self configAmountList];
         }
     }];
 }
@@ -182,8 +183,25 @@
         CNPayQRCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kQRCellIndentifier forIndexPath:indexPath];
         
         CNPaymentModel *payment = [self.payments objectAtIndex:indexPath.row];
-        cell.tuijianIcon.hidden = (payment.payType == CNPaymentUnionQR ? NO : YES);
+//        cell.tuijianIcon.hidden = (payment.payType == CNPaymentUnionQR ? NO : YES);
         cell.titleLb.text = payment.payTypeName;
+        switch (payment.payType) {
+            case 8:
+                cell.tuijianIcon.image = [UIImage imageNamed:@"me_wechatsecond"];
+                break;
+            case 9:
+            cell.tuijianIcon.image = [UIImage imageNamed:@"me_aliwap"];
+            break;
+            case 11:
+            cell.tuijianIcon.image = [UIImage imageNamed:@"me_qqScan"];
+            break;
+            case 17:
+            cell.tuijianIcon.image = [UIImage imageNamed:@"me_jdscan"];
+            break;
+                
+            default:
+                break;
+        }
         cell.channelIconIV.image = [UIImage imageNamed:payment.payTypeIcon];
         return cell;
     }

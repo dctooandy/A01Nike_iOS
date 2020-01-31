@@ -141,7 +141,7 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BTTCustomerBalanceModel *model = [BTTCustomerBalanceModel yy_modelWithJSON:result.body];
             self.balanceModel = model;
-            self.totalAvailable = model.withdrawBal;
+            self.totalAvailable = [PublicMethod stringWithDecimalNumber:model.withdrawBal];
             dispatch_async(dispatch_get_main_queue(), ^{;
                 [self.collectionView reloadData];
             });
