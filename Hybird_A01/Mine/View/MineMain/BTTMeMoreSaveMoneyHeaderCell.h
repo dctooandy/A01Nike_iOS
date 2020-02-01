@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTMeMoreSaveMoneyHeaderCell : BTTBaseCollectionViewCell
 
+@property (nonatomic, assign) BTTMeSaveMoneyShowType saveMoneyShowType;
+
 @end
 
 NS_ASSUME_NONNULL_END

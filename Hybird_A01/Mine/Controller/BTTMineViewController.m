@@ -238,6 +238,7 @@
         if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
             if (indexPath.row == 2) {
                 BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
+                cell.saveMoneyShowType = self.saveMoneyShowType;
                 cell.dataSource = self.bigDataSoure;
                 weakSelf(weakSelf);
                 cell.clickEventBlock = ^(id _Nonnull value) {
@@ -248,6 +249,7 @@
                 return cell;
             } else if (indexPath.row == 3) {
                 BTTMeMoreSaveMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell" forIndexPath:indexPath];
+                cell.saveMoneyShowType = self.saveMoneyShowType;
                 return cell;
             } else {
                 BTTMeMoreSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
@@ -267,6 +269,7 @@
         } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig) {
             BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
             cell.dataSource = self.bigDataSoure;
+            cell.saveMoneyShowType = self.saveMoneyShowType;
             weakSelf(weakSelf);
             cell.clickEventBlock = ^(id _Nonnull value) {
                 strongSelf(strongSelf);
@@ -302,6 +305,7 @@
             if (indexPath.row == 2) {
                 BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
                 cell.dataSource = self.bigDataSoure;
+                cell.saveMoneyShowType = self.saveMoneyShowType;
                 weakSelf(weakSelf);
                 cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
@@ -311,6 +315,7 @@
                 return cell;
             } else if (indexPath.row == 3) {
                 BTTMeMoreSaveMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell" forIndexPath:indexPath];
+                cell.saveMoneyShowType = self.saveMoneyShowType;
                 return cell;
             } else {
                 BTTMeMoreSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
