@@ -83,6 +83,22 @@ typedef enum {
     BTTSafeVerifyTypeVerifyEmail,                // 验证邮箱
     BTTSafeVerifyTypeChangeEmail,                // 更改邮箱
 }BTTSafeVerifyType; // 安全验证种类
+
+
+typedef enum : NSUInteger {
+    BTTMeSaveMoneyShowTypeAll = 0,
+    BTTMeSaveMoneyShowTypeBig = 1,
+    BTTMeSaveMoneyShowTypeMore = 2,
+    BTTMeSaveMoneyShowTypeBigOneMore,  // 只有一行大, 一行more
+    BTTMeSaveMoneyShowTypeTwoMore,     // 两行more
+    BTTMeSaveMoneyShowTypeNone
+} BTTMeSaveMoneyShowType;
+
+typedef enum : NSUInteger {
+    BTTSaveMoneyTimesTypeLessTen, ///< 小于十次
+    BTTSaveMoneyTimesTypeMoreTen  ///< 多余十次
+} BTTSaveMoneyTimesType;
+
 typedef enum {
     BTTRegisterOrLoginTypeLogin,
     BTTRegisterOrLoginTypeRegisterNormal, // 普通开户

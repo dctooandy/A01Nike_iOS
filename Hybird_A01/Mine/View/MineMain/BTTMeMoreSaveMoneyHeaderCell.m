@@ -8,12 +8,27 @@
 
 #import "BTTMeMoreSaveMoneyHeaderCell.h"
 
+@interface BTTMeMoreSaveMoneyHeaderCell ()
+
+@property (weak, nonatomic) IBOutlet UIButton *xiaoZhuShowBtn;
+
+@end
+
 @implementation BTTMeMoreSaveMoneyHeaderCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
 //    self.mineArrowsType = BTTMineArrowsTypeNoHidden;
+//    BTTMeSaveMoneyShowTypeAll = 0,
+//    BTTMeSaveMoneyShowTypeBig = 1,
+    if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll ||
+        self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig ||
+        self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBigOneMore) {
+        self.xiaoZhuShowBtn.hidden = YES;
+    } else {
+        self.xiaoZhuShowBtn.hidden = NO;
+    }
 }
 
 @end

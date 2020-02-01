@@ -22,6 +22,9 @@ typedef enum {
 
 @property (nonatomic, assign) BTTMeBigSaveMoneyType saveMoneyType;
 
+@property (weak, nonatomic) IBOutlet UIButton *xiaozhushouBtn;
+
+
 @end
 
 @implementation BTTMeBigSaveMoneyCell
@@ -40,6 +43,16 @@ typedef enum {
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumLineSpacing = 15;
     self.collectionView.collectionViewLayout = layout;
+//    BTTMeSaveMoneyShowTypeAll = 0,
+//    BTTMeSaveMoneyShowTypeBig = 1,
+//    BTTMeSaveMoneyShowTypeBigOneMore,
+    if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll ||
+        self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig ||
+        self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBigOneMore) {
+        self.xiaozhushouBtn.hidden = NO;
+    } else {
+        self.xiaozhushouBtn.hidden = YES;
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
