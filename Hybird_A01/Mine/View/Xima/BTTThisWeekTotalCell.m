@@ -26,7 +26,14 @@
 
 - (void)setModel:(BTTXimaTotalModel *)model {
     _model = model;
-    self.totalLabel.text = [NSString stringWithFormat:@"%@元",[PublicMethod transferNumToThousandFormat:[NSString stringWithFormat:@"%ld",(long)model.totalXmAmount].floatValue]];
+    double amount = 0;
+    for (int i =0; i<model.xmList.count; i++) {
+        amount = amount+model.xmList[i].xmAmount;
+        if (i==model.xmList.count-1) {
+            self.totalLabel.text = [NSString stringWithFormat:@"%@元",[PublicMethod transferNumToThousandFormat:amount]];
+        }
+    }
+    
 }
 
 @end

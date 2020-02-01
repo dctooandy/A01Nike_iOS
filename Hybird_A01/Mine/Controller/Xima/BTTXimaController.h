@@ -58,6 +58,8 @@ typedef enum {
 
 @property (nonatomic, strong) NSArray *historyArray;
 
+@property (nonatomic, strong) NSMutableArray *selectedArray;
+
 @property (nonatomic, assign) BTTXimaCurrentListType currentListType;
 
 @property (nonatomic, assign) BTTXimaHistoryListType historyListType;

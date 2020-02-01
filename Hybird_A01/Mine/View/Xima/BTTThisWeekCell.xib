@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,13 +17,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="107"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xima_select" translatesAutoresizingMaskIntoConstraints="NO" id="EKN-mZ-pwo">
-                        <rect key="frame" x="15" y="15" width="19" height="19"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="19" id="sWm-lI-Arm"/>
-                            <constraint firstAttribute="width" constant="19" id="uud-1a-lnq"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AG旗舰厅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbM-nJ-Xjd">
                         <rect key="frame" x="42" y="15" width="71" height="19.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -62,37 +53,50 @@
                         <color key="textColor" red="0.85490196080000003" green="0.74117647060000003" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sBu-yY-O87">
+                        <rect key="frame" x="15" y="15" width="19" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="19" id="GWE-hQ-wjV"/>
+                            <constraint firstAttribute="height" constant="19" id="hXs-N1-FG4"/>
+                        </constraints>
+                        <state key="normal" image="xima_unselect"/>
+                        <state key="selected" image="xima_select"/>
+                        <connections>
+                            <action selector="selecteBtn_click:" destination="gTV-IL-0wX" eventType="touchUpInside" id="LqC-3P-xaJ"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="pbM-nJ-Xjd" firstAttribute="leading" secondItem="sBu-yY-O87" secondAttribute="trailing" constant="8" id="0fR-sT-xjo"/>
                 <constraint firstAttribute="trailing" secondItem="GA4-wp-TFK" secondAttribute="trailing" constant="15" id="2oE-7U-C63"/>
                 <constraint firstItem="O5G-DS-dvy" firstAttribute="top" secondItem="Gyt-mm-cX6" secondAttribute="bottom" constant="10" id="6vE-Le-2hs"/>
                 <constraint firstItem="GA4-wp-TFK" firstAttribute="centerY" secondItem="pbM-nJ-Xjd" secondAttribute="centerY" id="FEA-w7-mN8"/>
-                <constraint firstItem="pbM-nJ-Xjd" firstAttribute="leading" secondItem="EKN-mZ-pwo" secondAttribute="trailing" constant="8" id="Pub-DA-NvI"/>
+                <constraint firstItem="sBu-yY-O87" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="SRV-Yq-iJy"/>
                 <constraint firstItem="Gyt-mm-cX6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="42" id="UNt-HZ-GjF"/>
+                <constraint firstItem="pbM-nJ-Xjd" firstAttribute="centerY" secondItem="sBu-yY-O87" secondAttribute="centerY" id="Wvu-bl-8h8"/>
                 <constraint firstItem="UPU-yY-vBU" firstAttribute="leading" secondItem="O5G-DS-dvy" secondAttribute="trailing" constant="8" id="es4-Yz-H6n"/>
+                <constraint firstItem="sBu-yY-O87" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="jf7-P3-dOd"/>
                 <constraint firstItem="2Rs-ym-TCS" firstAttribute="centerY" secondItem="Gyt-mm-cX6" secondAttribute="centerY" id="jhY-sI-aja"/>
                 <constraint firstItem="O5G-DS-dvy" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="42" id="ksh-G6-yh6"/>
                 <constraint firstItem="Gyt-mm-cX6" firstAttribute="top" secondItem="pbM-nJ-Xjd" secondAttribute="bottom" constant="15" id="nMA-67-Uur"/>
                 <constraint firstItem="2Rs-ym-TCS" firstAttribute="leading" secondItem="Gyt-mm-cX6" secondAttribute="trailing" constant="8" id="oUh-gB-pwo"/>
                 <constraint firstItem="UPU-yY-vBU" firstAttribute="centerY" secondItem="O5G-DS-dvy" secondAttribute="centerY" id="pYp-Is-vuC"/>
-                <constraint firstItem="pbM-nJ-Xjd" firstAttribute="centerY" secondItem="EKN-mZ-pwo" secondAttribute="centerY" id="rAM-yn-X1F"/>
-                <constraint firstItem="EKN-mZ-pwo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="tgC-BD-9sk"/>
-                <constraint firstItem="EKN-mZ-pwo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="x3k-zx-ubc"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="375" height="105"/>
             <connections>
                 <outlet property="nameLabel" destination="pbM-nJ-Xjd" id="EtI-bq-JEd"/>
                 <outlet property="rateLabel" destination="UPU-yY-vBU" id="sgo-yY-Alg"/>
-                <outlet property="selectIcon" destination="EKN-mZ-pwo" id="edI-0O-vYN"/>
+                <outlet property="selectButton" destination="sBu-yY-O87" id="tIs-GC-QQX"/>
                 <outlet property="totalAmountLabel" destination="2Rs-ym-TCS" id="OID-Jh-5q2"/>
                 <outlet property="validAmountLabel" destination="GA4-wp-TFK" id="VvC-WX-ZTv"/>
             </connections>
-            <point key="canvasLocation" x="-215" y="37"/>
+            <point key="canvasLocation" x="-215.19999999999999" y="36.431784107946029"/>
         </collectionViewCell>
     </objects>
     <resources>
         <image name="xima_select" width="19" height="19"/>
+        <image name="xima_unselect" width="19" height="19"/>
     </resources>
 </document>

@@ -366,6 +366,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTWithDrawBTCRate                         @"withdraw/queryBtcRate"
 //
 #define BTTBQPayment                               @"deposit/BQPayment"
+//
+#define BTTXiMaRequest                             @"xm/createRequest"
 
 #define BTTIsBindStatusAPI                         @"/public/verify/isNewBind"
 #define BTTGamePlatforms                           @"/A01/game/platforms"

@@ -54,7 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger totalBetAmont;
 
-@property (nonatomic, assign) NSInteger xmAmount;
+@property (nonatomic, assign) double xmAmount;
 
 @property (nonatomic, copy) NSString *xmRate;
 

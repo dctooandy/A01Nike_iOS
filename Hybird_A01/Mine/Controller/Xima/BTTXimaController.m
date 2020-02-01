@@ -34,6 +34,7 @@
 - (void)viewDidLoad {
     self.title = @"自助洗码";
     [super viewDidLoad];
+    self.selectedArray = [NSMutableArray new];
     self.ximaStatusType = BTTXimaStatusTypeNormal;
     self.ximaDateType = BTTXimaDateTypeThisWeek;
     self.thisWeekDataType = BTTXimaThisWeekTypeVaild;
@@ -161,24 +162,48 @@
                             cell.model = self.validModel;
                             return cell;
                         } else if (indexPath.row == self.validModel.xmList.count + 2) {
-                            BTTThisWeekBtnsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekBtnsCell" forIndexPath:indexPath];
-                            weakSelf(weakSelf);
-                            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-                                strongSelf(strongSelf);
-                                if (button.tag == 1050) {
-                                    [strongSelf loadXimaBillOut];
-                                } else if (button.tag == 1051) {
-                                    BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-                                    [cell setBtnTwoType:BTTXimaHeaderBtnTwoTypeOtherSelect];
-                                    [cell setBtnOneType:BTTXimaHeaderBtnOneTypeThisWeekNormal];
-                                    strongSelf.thisWeekDataType = BTTXimaThisWeekTypeOther;
-                                    [strongSelf setupElements];
-                                } else {
-                                    BTTXimaRecordController *vc = [BTTXimaRecordController new];
-                                    [strongSelf.navigationController pushViewController:vc animated:YES];
-                                }
-                            };
-                            return cell;
+                            if (self.selectedArray.count==0) {
+                                BTTXimaSingleBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaSingleBtnCell" forIndexPath:indexPath];
+                                weakSelf(weakSelf);
+                                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                                    strongSelf(strongSelf);
+                                    if (button.tag == 1000) {
+                                         BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                                         [cell setBtnTwoType:BTTXimaHeaderBtnTwoTypeOtherSelect];
+                                         [cell setBtnOneType:BTTXimaHeaderBtnOneTypeThisWeekNormal];
+                                         strongSelf.thisWeekDataType = BTTXimaThisWeekTypeOther;
+                                         [strongSelf setupElements];
+                                    } else {
+                                        BTTXimaRecordController *vc = [BTTXimaRecordController new];
+                                        [strongSelf.navigationController pushViewController:vc animated:YES];
+                                    }
+                                };
+                                return cell;
+                            }else{
+                                BTTThisWeekBtnsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekBtnsCell" forIndexPath:indexPath];
+                                weakSelf(weakSelf);
+                                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                                    strongSelf(strongSelf);
+                                    if (button.tag == 1050) {
+                                        if (self.selectedArray.count==0) {
+                                            [MBProgressHUD showError:@"请选择要洗码的厅" toView:self.view];
+                                        }else{
+                                            [strongSelf loadXimaBillOut];
+                                        }
+                                    } else if (button.tag == 1051) {
+                                        BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+                                        [cell setBtnTwoType:BTTXimaHeaderBtnTwoTypeOtherSelect];
+                                        [cell setBtnOneType:BTTXimaHeaderBtnOneTypeThisWeekNormal];
+                                        strongSelf.thisWeekDataType = BTTXimaThisWeekTypeOther;
+                                        [strongSelf setupElements];
+                                    } else {
+                                        BTTXimaRecordController *vc = [BTTXimaRecordController new];
+                                        [strongSelf.navigationController pushViewController:vc animated:YES];
+                                    }
+                                };
+                                return cell;
+                            }
+                            
                         } else if (indexPath.row == self.validModel.xmList.count + 3) {
                             BTTXimaFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaFooterCell" forIndexPath:indexPath];
                             weakSelf(weakSelf);
@@ -191,7 +216,17 @@
                             BTTThisWeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekCell" forIndexPath:indexPath];
                             
                             BTTXimaItemModel *model = self.validModel.xmList.count ? self.validModel.xmList[indexPath.row - 1] : nil;
-//                            cell.thisWeekCellType = model.isSelect;
+                            [cell setItemSelectedWithState:[self.selectedArray containsObject:self.validModel.xmList[indexPath.row-1]]];
+                            cell.tapSelecteButton = ^(BOOL isSelected) {
+                                if (isSelected) {
+                                    [self.selectedArray addObject:self.validModel.xmList[indexPath.row-1]];
+                                }else{
+                                    if ([self.selectedArray containsObject:self.validModel.xmList[indexPath.row-1]]) {
+                                        [self.selectedArray removeObject:self.validModel.xmList[indexPath.row-1]];
+                                    }
+                                }
+                                [self.collectionView reloadData];
+                            };
                             cell.model = model;
                             return cell;
                         }

@@ -15,6 +15,7 @@
 @implementation BTTXimaController (LoadData)
 
 - (void)loadMainData {
+    self.selectedArray = [NSMutableArray new];
     NSDictionary *params = @{
         @"loginName":[IVNetwork savedUserInfo].loginName
     };
@@ -25,11 +26,28 @@
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BTTXimaTotalModel *model = [BTTXimaTotalModel yy_modelWithJSON:result.body];
-            self.otherModel = model;
-            self.validModel = model;
-            self.currentListType = BTTXimaCurrentListTypeData;
-            self.otherListType = BTTXimaOtherListTypeData;
-            [self setupElements];
+            BTTXimaTotalModel *otherModel = [BTTXimaTotalModel yy_modelWithJSON:result.body];
+            NSMutableArray *list = [[NSMutableArray alloc]init];
+            NSMutableArray *otherList = [[NSMutableArray alloc]init];
+            for (int i=0; i<model.xmList.count; i++) {
+                if (model.xmList[i].betAmount!=0) {
+                    [self.selectedArray addObject:model.xmList[i]];
+                    [list addObject:model.xmList[i]];
+                }else{
+                    [otherList addObject:model.xmList[i]];
+                }
+                if (i==model.xmList.count-1) {
+                    model.xmList = list;
+                    otherModel.xmList = otherList;
+                    self.otherModel = otherModel;
+                    self.validModel = model;
+                    if (list.count>0) {
+                        self.currentListType = BTTXimaCurrentListTypeData;
+                        self.otherListType = BTTXimaOtherListTypeData;
+                    }
+                    [self setupElements];
+                }
+            }
         }
     }];
     [self loadHistoryData];
@@ -67,26 +85,29 @@
 
 
 - (void)loadXimaBillOut {
-//    [self showLoading];
-//    NSString *xm_list = @"";
-//    for (BTTXimaItemModel *itemModel in self.validModel.xmList) {
-//        if (xm_list.length) {
-//            if (itemModel.isSelect) {
-//                 xm_list = [NSString stringWithFormat:@"%@;%@",xm_list,itemModel.xm_type];
-//            }
-//        } else {
-//            if (itemModel.isSelect) {
-//                xm_list = itemModel.xm_type;
-//            }
-//        }
-//    }
-//    if (!xm_list.length) {
-//        [MBProgressHUD showError:@"请先选择结算的游戏" toView:nil];
-//        return;
-//    }
-//    NSDictionary *params = @{@"xm_list":xm_list};
-//    NSMutableArray *xmResults = [NSMutableArray array];
-    //TODO:
+    [self showLoading];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    params[@"isXm"] = @0;
+    params[@"xmBeginDate"] = @"2020-01-27 00:00:00";
+    params[@"xmEndDate"] = @"2020-01-02 23:59:59";
+    
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    NSMutableArray *array = [NSMutableArray new];
+    for (BTTXimaItemModel *itemModel in self.selectedArray) {
+        NSDictionary *json = [itemModel yy_modelToJSONObject];
+        [array addObject:json];
+    }
+    params[@"xmRequest"] = array;
+    [IVNetwork requestPostWithUrl:BTTXiMaRequest paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+
 //    [IVNetwork sendRequestWithSubURL:BTTXimaBillOut paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
 //        NSLog(@"%@",response);
 //        [self hideLoading];

@@ -11,7 +11,7 @@
 
 @interface BTTThisWeekCell ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *selectIcon;
+@property (weak, nonatomic) IBOutlet UIButton *selectButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
@@ -30,6 +30,7 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.backgroundColor = [UIColor colorWithHexString:@"212229"];
+    self.selectButton.selected = YES;
 }
 
 - (void)setModel:(BTTXimaItemModel *)model {
@@ -43,13 +44,16 @@
 
 - (void)setThisWeekCellType:(BTTXimaThisWeekCellType)thisWeekCellType {
     _thisWeekCellType = thisWeekCellType;
-    if (_thisWeekCellType == BTTXimaThisWeekCellTypeSelect) {
-        self.selectIcon.image = ImageNamed(@"xima_select");
-    } else if (_thisWeekCellType == BTTXimaThisWeekCellTypeSelect) {
-        self.selectIcon.image = ImageNamed(@"xima_unselect");
-    } else {
-        self.selectIcon.image = ImageNamed(@"xima_select_disable");
+}
+- (IBAction)selecteBtn_click:(id)sender {
+    self.selectButton.selected = !self.selectButton.selected;
+    if (self.tapSelecteButton) {
+        self.tapSelecteButton(self.selectButton.selected);
     }
+}
+
+-(void)setItemSelectedWithState:(BOOL)state{
+    self.selectButton.selected = state;
 }
 
 @end

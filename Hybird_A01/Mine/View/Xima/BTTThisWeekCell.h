@@ -24,6 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) BTTXimaItemModel *model;
 
+@property (nonatomic, copy) void (^tapSelecteButton)(BOOL isSelected);
+
+- (void)setItemSelectedWithState:(BOOL)state;
+
 @end
 
 NS_ASSUME_NONNULL_END
