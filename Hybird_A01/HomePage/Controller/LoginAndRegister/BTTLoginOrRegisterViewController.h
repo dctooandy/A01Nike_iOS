@@ -35,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *messageId; ///< 验证码的ID
 
+@property (nonatomic, copy) NSString *validateId;
+
 @end
 
 NS_ASSUME_NONNULL_END

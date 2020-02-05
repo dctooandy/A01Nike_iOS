@@ -39,6 +39,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)cleanUserInfo;
 
++ (void)updateMobileNoWithMobileNo:(NSString *)mobileNo;
+
 
 /**
  检查更新

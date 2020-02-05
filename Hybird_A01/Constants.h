@@ -262,6 +262,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTStepOneSendCode                         @"phone/sendCodeByLoginName"
 // 绑定手机号
 #define BTTBindPhone                               @"phone/bind"
+// update绑定手机号
+#define BTTBindPhoneUpdate                         @"phone/updateBind"
 //忘记密码第一步验证
 #define BTTValidateCaptcha                         @"customer/preForgetPwd"
 // 根据code修改密码

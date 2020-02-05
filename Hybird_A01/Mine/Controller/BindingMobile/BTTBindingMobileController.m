@@ -86,7 +86,12 @@
             cell.sendBtn.enabled = isUseRegPhone || [IVNetwork savedUserInfo].mobileNoBind==1;
         }
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-            [weakSelf sendCode];
+            if ([[weakSelf getPhoneTF].text containsString:@"*"]) {
+                [weakSelf sendCode];
+            }else{
+                [weakSelf sendCodeByPhone];
+            }
+            
         };
         return cell;
     } else {
@@ -210,6 +215,46 @@
     BTTBindingMobileTwoCell *cell = (BTTBindingMobileTwoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     return cell;
 }
+
+- (void)sendCodeByPhone{
+    [self.view endEditing:YES];
+    NSMutableDictionary *params = @{}.mutableCopy;
+    switch (self.mobileCodeType) {
+        case BTTSafeVerifyTypeVerifyMobile:
+        case BTTSafeVerifyTypeChangeMobile:
+            params[@"use"] = @"5";
+            break;
+        case BTTSafeVerifyTypeMobileAddBankCard:
+        case BTTSafeVerifyTypeMobileChangeBankCard:
+        case BTTSafeVerifyTypeMobileDelBankCard:
+        case BTTSafeVerifyTypeMobileAddUSDTCard:
+        case BTTSafeVerifyTypeMobileDelUSDTCard:
+        case BTTSafeVerifyTypeMobileAddBTCard:
+        case BTTSafeVerifyTypeMobileDelBTCard:
+            params[@"use"] = @"8";
+            break;
+        default:
+            params[@"use"] = @"3";
+            break;
+    }
+    NSString *phone = [self getPhoneTF].text;
+    params[@"mobileNo"] = [IVRsaEncryptWrapper encryptorString:phone];
+    weakSelf(weakSelf)
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [IVNetwork requestPostWithUrl:BTTSendMsgCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
+            self.messageId = result.body[@"messageId"];
+            [[weakSelf getVerifyCell] countDown];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
+        }
+        
+    }];
+}
+
 - (void)sendCode
 {
     [self.view endEditing:YES];
@@ -254,14 +299,16 @@
     NSString *url = BTTBindPhone;
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"messageId"] = self.messageId;
-    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     params[@"smsCode"] = [self getCodeTF].text;
     NSString *successStr = nil;
     switch (self.mobileCodeType) {
         case BTTSafeVerifyTypeVerifyMobile:
-        case BTTSafeVerifyTypeChangeMobile:
             url = BTTVerifySmsCode;
             params[@"use"] = @5;
+            successStr = @"验证成功!";
+            break;
+        case BTTSafeVerifyTypeChangeMobile:
+            url = BTTBindPhoneUpdate;
             successStr = @"验证成功!";
             break;
         case BTTSafeVerifyTypeMobileAddBankCard:
@@ -276,8 +323,6 @@
             successStr = @"验证成功!";
             break;
         default:
-            url = BTTVerifySmsCode;
-            params[@"use"] = @3;
             successStr = @"绑定成功";
             break;
     }
@@ -295,13 +340,11 @@
                     switch (self.mobileCodeType) {
                         case BTTSafeVerifyTypeBindMobile:
                         case BTTSafeVerifyTypeChangeMobile:{
-                            if ([result.body isKindOfClass:[NSDictionary class]] && [result.body valueForKey:@"val"]) {
-                                NSString *phone = [self getPhoneTF].text;
-                                [IVNetwork updateUserInfo:@{@"phone" : phone}];
-                                [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
-                            }
+                            NSString *phone = [self getPhoneTF].text;
+                            
                             BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
                             vc.mobileCodeType = self.mobileCodeType;
+                            vc.phoneNumber = phone;
                             [weakSelf.navigationController pushViewController:vc animated:YES];
                         }
                             break;

@@ -88,6 +88,8 @@
     if (indexPath.row == 0) {
         BTTChangeMobileSuccessOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTChangeMobileSuccessOneCell" forIndexPath:indexPath];
         cell.mobileCodeType = self.mobileCodeType;
+        cell.mobileNo = self.phoneNumber;
+        cell.email = self.email;
         return cell;
     } else {
         BTTChangeMobileSuccessBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTChangeMobileSuccessBtnCell" forIndexPath:indexPath];

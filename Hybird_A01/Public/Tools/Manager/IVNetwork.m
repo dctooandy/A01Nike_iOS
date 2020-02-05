@@ -64,6 +64,17 @@
     return @"";
 }
 
++(void)updateMobileNoWithMobileNo:(NSString *)mobileNo{
+    NSMutableDictionary *json = [[NSMutableDictionary alloc]initWithDictionary:[IVCacheWrapper objectForKey:@"customer"]];
+    if (json==nil) {
+        return;
+    }
+    json[@"mobileNo"] = mobileNo;
+    json[@"mobileNoBind"] = @1;
+    NSDictionary *info = json;
+    [IVCacheWrapper setValue:info forKey:@"customer"];
+}
+
 + (BTTCustomerInfoModel *)savedUserInfo
 {
     NSDictionary *json = [IVCacheWrapper objectForKey:@"customer"];

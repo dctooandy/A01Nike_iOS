@@ -314,6 +314,7 @@
             [MBProgressHUD showSuccess:@"绑定成功" toView:nil];
             BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
             vc.mobileCodeType = self.codeType;
+            vc.email = [self getMailTF].text;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];

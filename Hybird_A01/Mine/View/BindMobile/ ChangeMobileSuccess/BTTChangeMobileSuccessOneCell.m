@@ -46,11 +46,11 @@
             self.notifyLabel.hidden = YES;
             break;
         case BTTSafeVerifyTypeBindMobile:
-            self.statusLabel.text = [NSString stringWithFormat:@"已绑定手机号码:%@",[IVNetwork savedUserInfo].mobileNo];
+            self.statusLabel.text = [NSString stringWithFormat:@"已绑定手机号码:%@",self.mobileNo];
             self.notifyLabel.hidden = YES;
             break;
         case BTTSafeVerifyTypeBindEmail:
-             self.statusLabel.text = [NSString stringWithFormat:@"已绑定邮箱地址:%@",[IVNetwork savedUserInfo].email];
+             self.statusLabel.text = [NSString stringWithFormat:@"已绑定邮箱地址:%@",self.email];
             self.notifyLabel.hidden = YES;
             break;
         case BTTSafeVerifyTypeHumanAddBankCard:

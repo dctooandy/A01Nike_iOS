@@ -205,7 +205,7 @@
                 return;
             }
             model.v = @"check";
-            [self fastRegisterAPIModel:model];
+            [self verifySmsCodeWithModel:model];
         } else {
             BTTRegisterQuickManualCell *cell = (BTTRegisterQuickManualCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
             model.phone = cell.phoneTextField.text;
@@ -239,7 +239,8 @@
                 return;
             }
             model.v = @"check";
-            [self fastRegisterAPIModel:model];
+            [self verifySmsCodeWithModel:model];
+            
         } 
     }
 }
@@ -255,19 +256,17 @@
     [IVNetwork requestPostWithUrl:BTTVerifySmsCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;
-        NSString *validateId = result.body[@"validateId"];
-        [self checkAccountInfoWithCreateModel:model validateId:validateId];
+        self.validateId = result.body[@"validateId"];
+        [self checkAccountInfoWithCreateModel:model];
     }];
 }
 
-- (void)checkAccountInfoWithCreateModel:(BTTCreateAPIModel *)model validateId:(NSString *)validateId{
+- (void)checkAccountInfoWithCreateModel:(BTTCreateAPIModel *)model{
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setValue:model.phone forKey:@"checkValue"];
     [params setValue:@2 forKey:@"checkType"];
-    [params setValue:validateId forKey:@"validateId"];
+    [params setValue:self.validateId forKey:@"validateId"];
     [params setValue:self.messageId forKey:@"messageId"];
-    [params setValue:@"A01" forKey:@"productId"];
-    [params setValue:@"" forKey:@"loginName"];
     [self showLoading];
     [IVNetwork requestPostWithUrl:BTTCheckAccountInfo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
@@ -275,6 +274,8 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (result.body&&[result.body isKindOfClass:[NSString class]]&&[result.body isEqualToString:@"1000"]) {
                 [self showRegisterCheckViewWithModel:model];
+            }else{
+                [self fastRegisterAPIModel:model];
             }
         }
     }];
@@ -363,6 +364,10 @@
     [params setValue:self.messageId forKey:@"messageId"];
     NSString *pwd = [self getRandomPassword];
     [params setValue:[IVRsaEncryptWrapper encryptorString:pwd] forKey:@"password"];
+    
+    if (self.validateId!=nil) {
+        [params setValue:self.validateId forKey:@"validateId"];
+    }
     
     if (model.catpcha.length) {
         [params setObject:model.catpcha forKey:@"catpcha"];
