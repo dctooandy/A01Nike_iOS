@@ -14,7 +14,7 @@
 - (void)loadMainData {
     NSArray *names = @[@"手机号"];
     NSArray *placeholders = @[@"请输入手机号码"];
-    NSArray *vals = @[[IVNetwork userInfo].phone];
+    NSArray *vals = @[[IVNetwork savedUserInfo].mobileNo];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];

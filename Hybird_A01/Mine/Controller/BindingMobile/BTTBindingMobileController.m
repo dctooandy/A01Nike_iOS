@@ -219,7 +219,7 @@
     switch (self.mobileCodeType) {
         case BTTSafeVerifyTypeVerifyMobile:
         case BTTSafeVerifyTypeChangeMobile:
-            params[@"use"] = @"3";
+            params[@"use"] = @"5";
             break;
         case BTTSafeVerifyTypeMobileAddBankCard:
         case BTTSafeVerifyTypeMobileChangeBankCard:
@@ -259,10 +259,10 @@
     NSString *successStr = nil;
     switch (self.mobileCodeType) {
         case BTTSafeVerifyTypeVerifyMobile:
-            url = BTTVerifySmsCode;
-            successStr = @"验证成功!";
-            break;
         case BTTSafeVerifyTypeChangeMobile:
+            url = BTTVerifySmsCode;
+            params[@"use"] = @5;
+            successStr = @"验证成功!";
             break;
         case BTTSafeVerifyTypeMobileAddBankCard:
         case BTTSafeVerifyTypeMobileChangeBankCard:
@@ -276,6 +276,8 @@
             successStr = @"验证成功!";
             break;
         default:
+            url = BTTVerifySmsCode;
+            params[@"use"] = @3;
             successStr = @"绑定成功";
             break;
     }

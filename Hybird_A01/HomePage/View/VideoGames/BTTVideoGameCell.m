@@ -44,7 +44,7 @@
 }
 
 - (IBAction)collectionBtnClick:(UIButton *)sender {
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork savedUserInfo]) {
         sender.selected = !sender.selected;
         self.model.isFavority = sender.selected;
     } 

@@ -109,7 +109,7 @@
     UITextField *retentionTF = [self getCellTextFieldWithIndex:0];
     UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
     NSMutableDictionary *params = @{}.mutableCopy;
-    if ([IVNetwork userInfo].real_name.length == 0) {
+    if ([IVNetwork savedUserInfo].realName.length == 0) {
         if (![PublicMethod checkRealName:realNameTF.text]) {
             [MBProgressHUD showError:@"输入的真实姓名格式有误！" toView:self.view];
             return;
@@ -117,7 +117,7 @@
             params[@"realName"] = realNameTF.text;
         }
     }
-    if ([IVNetwork userInfo].verify_code.length == 0) {
+    if ([IVNetwork savedUserInfo].verifyCode.length == 0) {
         if (![PublicMethod isValidateLeaveMessage:retentionTF.text]) {
             [MBProgressHUD showError:@"输入的预留信息格式有误！" toView:self.view];
             return;

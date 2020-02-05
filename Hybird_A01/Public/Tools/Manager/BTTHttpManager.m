@@ -111,9 +111,9 @@
 {
     NSDictionary *params = nil;
     if (bankId.length) {
-        params = @{@"login_name":[IVNetwork userInfo].loginName,@"customer_bank_id":bankId};
+        params = @{@"login_name":[IVNetwork savedUserInfo].loginName,@"customer_bank_id":bankId};
     } else {
-        params = @{@"login_name":[IVNetwork userInfo].loginName};
+        params = @{@"login_name":[IVNetwork savedUserInfo].loginName};
     }
     [self sendRequestWithUrl:@"public/forgot/getBanknoAndPhone" paramters:params completionBlock:completion];
 }

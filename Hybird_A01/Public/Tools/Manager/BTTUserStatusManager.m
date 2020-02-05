@@ -18,17 +18,17 @@
 + (void)loginSuccessWithUserInfo:(NSDictionary *)userInfo
 {
     [IVNetwork updateUserInfo:userInfo];
-    NSString *userId = [@([IVNetwork userInfo].customerId) stringValue];
+    NSString *userId = [IVNetwork savedUserInfo].customerId;
     [NBSAppAgent setUserIdentifier:userId];
     [[IVGameManager sharedManager] userStatusChanged:YES];
     [IVHeartSocketManager loginSendHeartPacketWihUserid:[userId intValue]];
     LIVUserInfo *userModel = nil;
-       if ([IVNetwork userInfo]) {
+       if ([IVNetwork savedUserInfo]) {
            userModel = [LIVUserInfo new];
-           userModel.userAccount = [NSString stringWithFormat:@"%@",@([IVNetwork userInfo].customerId)];
-           userModel.grade = [NSString stringWithFormat:@"%@",@([IVNetwork userInfo].starLevel)];;
-           userModel.loginName = [IVNetwork userInfo].loginName;
-           userModel.name = [IVNetwork userInfo].loginName;;
+           userModel.userAccount = [IVNetwork savedUserInfo].customerId;
+           userModel.grade = [NSString stringWithFormat:@"%@",@([IVNetwork savedUserInfo].starLevel)];;
+           userModel.loginName = [IVNetwork savedUserInfo].loginName;
+           userModel.name = [IVNetwork savedUserInfo].loginName;;
        }
     [CLive800Manager switchLive800UserWithCustomerId:userModel];
     [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccessNotification object:nil];

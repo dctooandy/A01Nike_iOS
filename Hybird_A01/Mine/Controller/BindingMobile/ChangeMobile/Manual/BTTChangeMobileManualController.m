@@ -186,7 +186,7 @@
 - (void)submitVerify
 {
     NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"login_name"] = [IVNetwork userInfo].loginName;
+    params[@"login_name"] = [IVNetwork savedUserInfo].loginName;
     params[@"bank_account_no"] = [self getVerifyBankNumTF].text;
     params[@"phone"] = [self getVerifyPhoneTF].text;
     weakSelf(weakSelf)

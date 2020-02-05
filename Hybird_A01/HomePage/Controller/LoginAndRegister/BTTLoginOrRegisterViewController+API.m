@@ -107,6 +107,7 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             self.uuid = @"";
             self.wrongPwdNum = 0;
+            [IVHttpManager shareManager].loginName = model.login_name;
             [IVHttpManager shareManager].userToken = result.body[@"token"];
             [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
             [self getCustomerInfoByLoginNameWithName:model.login_name isBack:isback];
@@ -353,7 +354,12 @@
 - (void)fastRegisterAPIModel:(BTTCreateAPIModel *)model {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:[IVRsaEncryptWrapper encryptorString:model.phone] forKey:@"mobileNo"];
-    [params setValue:[self getRandomNameWithPhone:model.phone] forKey:@"loginName"];
+    if (model.login_name==nil) {
+        [params setValue:[self getRandomNameWithPhone:model.phone] forKey:@"loginName"];
+    }else{
+        [params setValue:model.login_name forKey:@"loginName"];
+    }
+    
     [params setValue:self.messageId forKey:@"messageId"];
     NSString *pwd = [self getRandomPassword];
     [params setValue:[IVRsaEncryptWrapper encryptorString:pwd] forKey:@"password"];

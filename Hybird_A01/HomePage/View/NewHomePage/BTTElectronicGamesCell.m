@@ -69,7 +69,7 @@
     self.fishBtnWidth.constant = (SCREEN_WIDTH - 40) / 335.0 * 152.5;
     self.fishBtnHeight.constant = self.fishBtnWidth.constant / 152.5 * 69;
     
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork savedUserInfo]) {
         _ttgTryIcon.hidden = YES;
         _fishTryIcon.hidden = YES;
         _mgTryIcon.hidden = YES;

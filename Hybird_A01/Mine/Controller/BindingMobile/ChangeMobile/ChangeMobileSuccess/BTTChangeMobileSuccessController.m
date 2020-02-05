@@ -52,6 +52,7 @@
             break;
         case BTTSafeVerifyTypeBindMobile:
             self.title = @"绑定手机号成功";
+            break;
         case BTTSafeVerifyTypeBindEmail:
             self.title = @"绑定邮箱成功";
             break;

@@ -46,6 +46,9 @@
     [IVHttpManager shareManager].parentId = [HAInitConfig appKey];  // 渠道号
     [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
     [IVHttpManager shareManager].productCode = [HAInitConfig appKey]; // 产品码
+    if ([IVNetwork savedUserInfo]) {
+        [IVHttpManager shareManager].loginName = [IVNetwork savedUserInfo].loginName;
+    }
     
     NSString *userToken = [[NSUserDefaults standardUserDefaults]objectForKey:@"userToken"];
     if (userToken!=nil) {

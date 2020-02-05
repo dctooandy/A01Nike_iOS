@@ -198,7 +198,7 @@
         tabVC.selectedIndex = 0;
         [self.controller.navigationController popToRootViewControllerAnimated:YES];
     }
-    else if ([url containsString:@"common/login.htm"] && ![IVNetwork userInfo]){//登录
+    else if ([url containsString:@"common/login.htm"] && ![IVNetwork savedUserInfo]){//登录
         BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
         loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
         [self.controller.navigationController pushViewController:loginAndRegister animated:YES];

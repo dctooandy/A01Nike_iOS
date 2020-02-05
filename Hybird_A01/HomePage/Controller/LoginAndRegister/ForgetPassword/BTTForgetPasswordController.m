@@ -81,6 +81,7 @@
                     [strongSelf.navigationController pushViewController:vc animated:YES];
                 }else{
                     [MBProgressHUD showError:result.head.errMsg toView:strongSelf.view];
+                    [self loadVerifyCode];
                 }
             }];
         };

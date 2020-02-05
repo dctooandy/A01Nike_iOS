@@ -91,11 +91,11 @@
     if (_btnTwoType == BTTXimaHeaderBtnTwoTypeThisWeekSelect) {
         [self.thisWeekBtn setTitle:@"本周" forState:UIControlStateSelected];
     } else if (_btnTwoType == BTTXimaHeaderBtnTwoTypeOtherSelect) {
-        [self.thisWeekBtn setTitle:@"其他游戏厅" forState:UIControlStateSelected];
+        [self.thisWeekBtn setTitle:@"其它游戏厅" forState:UIControlStateSelected];
     } else if (_btnTwoType == BTTXimaHeaderBtnTwoTypeThisWeekNormal) {
         [self.thisWeekBtn setTitle:@"本周" forState:UIControlStateNormal];
     } else if (_btnTwoType == BTTXimaHeaderBtnTwoTypeOtherNormal) {
-        [self.thisWeekBtn setTitle:@"其他游戏厅" forState:UIControlStateNormal];
+        [self.thisWeekBtn setTitle:@"其它游戏厅" forState:UIControlStateNormal];
     }
 }
 

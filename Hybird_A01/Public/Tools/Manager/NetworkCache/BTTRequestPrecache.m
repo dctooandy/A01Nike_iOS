@@ -20,7 +20,7 @@
 }
 + (void)updateCacheNeedLoginRequest
 {
-    if (![IVNetwork userInfo]) {
+    if (![IVNetwork savedUserInfo]) {
         return;
     }
     [BTTHttpManager fetchUserInfoCompleteBlock:nil];

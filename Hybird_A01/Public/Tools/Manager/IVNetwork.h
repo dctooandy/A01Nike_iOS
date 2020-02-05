@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  获取当前用户信息
  */
-+ (IVUserInfoModel *)userInfo;
+//+ (IVUserInfoModel *)userInfo;
 
 + (BTTCustomerInfoModel *)savedUserInfo;
 /**

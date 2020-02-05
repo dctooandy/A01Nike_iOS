@@ -94,7 +94,7 @@
     self.asBtnWidth.constant = (SCREEN_WIDTH - 40) / 335.0 * 167.5;
     self.asBtnHeight.constant = self.asBtnWidth.constant / 167.5 * 83;
     
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork savedUserInfo]) {
         _btiTryIcon.hidden = YES;
         _vipTryIcon.hidden = YES;
         _asTryIcon.hidden = YES;

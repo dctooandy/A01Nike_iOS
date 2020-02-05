@@ -43,6 +43,8 @@
                     self.validModel = model;
                     if (list.count>0) {
                         self.currentListType = BTTXimaCurrentListTypeData;
+                    }
+                    if (otherList.count>0) {
                         self.otherListType = BTTXimaOtherListTypeData;
                     }
                     [self setupElements];

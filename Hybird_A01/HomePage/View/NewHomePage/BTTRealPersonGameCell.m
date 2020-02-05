@@ -55,7 +55,7 @@
 - (void)setupUI {
     _btnWidth.constant = (SCREEN_WIDTH - 30) / 2 - 5;
     _btnHeight.constant = _btnWidth.constant / 168  * 133;
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork savedUserInfo]) {
         self.aginTryIcon.hidden = YES;
         self.agqjTryIcon.hidden = YES;
     } else {

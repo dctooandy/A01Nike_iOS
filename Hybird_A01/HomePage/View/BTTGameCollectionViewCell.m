@@ -34,7 +34,7 @@
         self.gameIconImageView.image = ImageNamed(@"default_1");
     }
     
-    if ([IVNetwork userInfo]) {
+    if ([IVNetwork savedUserInfo]) {
         self.tryPlayIcon.hidden = YES;
     } else {
         if ([self.gameName isEqualToString:@"沙巴体育"] || [self.gameName isEqualToString:@"AG彩票"]) {
