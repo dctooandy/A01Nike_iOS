@@ -357,6 +357,10 @@
                     }
 
                 }
+                
+            }else{
+                self.saveMoneyShowType = BTTMeSaveMoneyShowTypeNone;
+                self.saveMoneyCount = 0;
             }
         }
         
