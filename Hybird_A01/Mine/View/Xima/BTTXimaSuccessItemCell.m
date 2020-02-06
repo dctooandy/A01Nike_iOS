@@ -27,7 +27,7 @@
 
 - (void)setModel:(BTTXimaSuccessItemModel *)model {
     _model = model;
-    self.nameLabel.text = model.name;
+    self.nameLabel.text = model.xmTypeName;
 }
 
 @end

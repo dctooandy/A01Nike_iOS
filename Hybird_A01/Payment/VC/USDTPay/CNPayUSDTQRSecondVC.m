@@ -41,7 +41,7 @@
     if (_walletAddressInputField.text.length<6||_walletAddressInputField.text.length>40) {
         [self showError:@"请输入长度为6-40位钱包地址"];
     }else if (_saveInputField.text.length==0||[_saveInputField.text doubleValue]==0){
-        [self showError:@"请填写大于0的存款金额"];
+        [self showError:@"存款金额不得小于1"];
     }else{
         [self submitManualPayOrder];
     }
@@ -66,11 +66,8 @@
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            [CNPayDepositTipView showTipViewFinish:^{
-            //            [weakSelf goToStep:2];
-                        CNPayDepositSuccessVC *successVC = [[CNPayDepositSuccessVC alloc] initWithAmount:weakSelf.recivedAmountLabel.text];
-                        [weakSelf pushViewController:successVC];
-                    }];
+            CNPayDepositSuccessVC *successVC = [[CNPayDepositSuccessVC alloc] initWithAmount:weakSelf.recivedAmountLabel.text];
+            [weakSelf pushViewController:successVC];
         }else{
             [weakSelf showError:result.head.errMsg];
             return;
@@ -108,21 +105,11 @@
          }];
     _walletAddressInputField.attributedPlaceholder = addressString;
     
-    _minamount = [[NSUserDefaults standardUserDefaults]objectForKey:@"usdt_minamount"];
-    _maxamount = [[NSUserDefaults standardUserDefaults]objectForKey:@"usdt_maxamount"];
-    if (_minamount!=nil&&_maxamount!=nil) {
-        NSAttributedString *amountString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"最低%@，最高%@",self.minamount,self.maxamount] attributes:
-        @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
-                     NSFontAttributeName:_saveInputField.font
-             }];
-        _saveInputField.attributedPlaceholder = amountString;
-    }else{
-        NSAttributedString *amountString = [[NSAttributedString alloc] initWithString:@"请输入存款金额" attributes:
-        @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
-                     NSFontAttributeName:_saveInputField.font
-             }];
-        _saveInputField.attributedPlaceholder = amountString;
-    }
+    NSAttributedString *amountString = [[NSAttributedString alloc] initWithString:@"最低1，最高999999999" attributes:
+    @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
+                 NSFontAttributeName:_saveInputField.font
+         }];
+    _saveInputField.attributedPlaceholder = amountString;
     
     
     NSString *verifyCode = [IVNetwork savedUserInfo].verifyCode ? [IVNetwork savedUserInfo].verifyCode : @"";

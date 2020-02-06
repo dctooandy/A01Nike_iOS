@@ -36,4 +36,15 @@
     
 }
 
+-(void)setHistory:(NSArray *)history{
+    double amount = 0;
+    for (int i=0; i<history.count; i++) {
+        BTTXimaLastWeekItemModel *model = [BTTXimaLastWeekItemModel yy_modelWithJSON:history[i]];
+        amount = amount+[model.amount doubleValue];
+        if (i==history.count-1) {
+            self.totalLabel.text = [NSString stringWithFormat:@"%@元",[PublicMethod transferNumToThousandFormat:amount]];
+        }
+    }
+}
+
 @end

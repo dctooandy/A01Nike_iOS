@@ -165,6 +165,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 #define BTTSaveMoneyMoreThenTenKey                 @"BTTSaveMoneyMoreThenTenKey"
 
+#define BTTBMerchantStatus                         @"BTTBMerchantStatus"
+
 #define IVCheckUpdateNotification                  @"IVCheckUpdateNotification"
 
 // 客户存款次数key
@@ -386,6 +388,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTBQPayment                               @"deposit/BQPayment"
 //
 #define BTTXiMaRequest                             @"xm/createRequest"
+//查询是否开启币商充值
+#define BTTQueryBiShangOpen                        @"_extra_/api/v1/agent/getBMerchantStatus"
 
 #define BTTIsBindStatusAPI                         @"/public/verify/isNewBind"
 #define BTTGamePlatforms                           @"/A01/game/platforms"

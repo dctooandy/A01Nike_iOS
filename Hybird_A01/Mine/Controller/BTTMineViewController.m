@@ -82,6 +82,7 @@
     self.isCompletePersonalInfo = [self isCompletePersonalInfo];
     self.isChangeMobile = NO;
     [self setupCollectionView];
+    [self queryBiShangStatus];
     [self loadPaymentDefaultData];
     [self loadMeAllData];
     [self registerNotification];

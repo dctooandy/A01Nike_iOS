@@ -1213,8 +1213,9 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
 }
 
 + (NSDecimalNumber *)decimalNumber:(double)num {
-    NSString *numString = [NSString stringWithFormat:@"%lf", num];
-    return [NSDecimalNumber decimalNumberWithString:numString];
+    NSString *numString = [NSString stringWithFormat:@"%.3f", num];
+    NSString *subNumber = [numString substringToIndex:numString.length-1];
+    return [NSDecimalNumber decimalNumberWithString:subNumber];
 }
 
 

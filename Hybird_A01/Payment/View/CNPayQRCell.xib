@@ -18,13 +18,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择支付方式" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGF-IA-oUd">
-                        <rect key="frame" x="101" y="29" width="86" height="17"/>
+                        <rect key="frame" x="121" y="29" width="86" height="17"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JCq-BL-HJg">
-                        <rect key="frame" x="51" y="18.5" width="38" height="38"/>
+                        <rect key="frame" x="71" y="18.5" width="38" height="38"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="38" id="BY1-7n-RuG"/>
                             <constraint firstAttribute="height" constant="38" id="qEV-TR-hmR"/>
@@ -36,7 +36,7 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="BGF-IA-oUd" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="AjJ-Gj-bhx"/>
+                <constraint firstItem="BGF-IA-oUd" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" constant="20" id="AjJ-Gj-bhx"/>
                 <constraint firstItem="BGF-IA-oUd" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="B6H-So-cah"/>
                 <constraint firstItem="BGF-IA-oUd" firstAttribute="leading" secondItem="JCq-BL-HJg" secondAttribute="trailing" constant="12" id="Rzb-Wu-6Z2"/>
                 <constraint firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Ufo-31-HiM"/>

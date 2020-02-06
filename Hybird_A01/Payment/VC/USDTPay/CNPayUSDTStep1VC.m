@@ -318,6 +318,8 @@
     }else if (model.minAmount!=nil&&model.maxAmount!=nil){
         if ([_usdtInputField.text doubleValue]<[model.minAmount doubleValue]||[_usdtInputField.text doubleValue]>[model.maxAmount doubleValue]){
             [self showError:[NSString stringWithFormat:@"请输入%@-%@的存款金额",model.minAmount,model.maxAmount]];
+        }else{
+          [self usdtOnlinePayHanlerWithType:[model.payType integerValue]];
         }
     }else{
         [self usdtOnlinePayHanlerWithType:[model.payType integerValue]];
@@ -371,6 +373,8 @@
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [self paySucessUSDTHandler:result repay:nil];
+        }else{
+            [self showError:result.head.errMsg];
         }
     }];
 }
@@ -424,7 +428,7 @@
         }
         _selectedIndex = indexPath.row;
         BTTUsdtWalletModel *model = [BTTUsdtWalletModel yy_modelWithJSON:self.itemDataArray[indexPath.row]];
-        if (model.payType!=nil) {
+        if (model.payType!=nil&&![model.payType isEqualToString:@""]) {
             _elseWalletView.hidden = YES;
             _normalWalletView.hidden = NO;
             if (model.maxAmount==nil||model.minAmount==nil) {

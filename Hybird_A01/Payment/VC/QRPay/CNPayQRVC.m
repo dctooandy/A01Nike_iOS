@@ -106,6 +106,7 @@
         self.paymentModel.payType == 5 ||
         self.paymentModel.payType == 16 ||
         self.paymentModel.payType == 23 ||
+        self.paymentModel.payType == 19 ||
         self.paymentModel.payType == 15) {
         self.collectionBgView.hidden = YES;
         self.collectionViewHeight.constant = 0;

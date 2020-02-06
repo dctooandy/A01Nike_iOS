@@ -28,3 +28,7 @@
 @implementation BTTXimaItemTypesModel
 
 @end
+
+@implementation BTTXimaLastWeekItemModel
+
+@end

@@ -29,27 +29,34 @@
             BTTXimaTotalModel *otherModel = [BTTXimaTotalModel yy_modelWithJSON:result.body];
             NSMutableArray *list = [[NSMutableArray alloc]init];
             NSMutableArray *otherList = [[NSMutableArray alloc]init];
-            for (int i=0; i<model.xmList.count; i++) {
-                if (model.xmList[i].betAmount!=0) {
-                    [self.selectedArray addObject:model.xmList[i]];
-                    [list addObject:model.xmList[i]];
-                }else{
-                    [otherList addObject:model.xmList[i]];
-                }
-                if (i==model.xmList.count-1) {
-                    model.xmList = list;
-                    otherModel.xmList = otherList;
-                    self.otherModel = otherModel;
-                    self.validModel = model;
-                    if (list.count>0) {
-                        self.currentListType = BTTXimaCurrentListTypeData;
+            if (model.xmList.count>0) {
+                for (int i=0; i<model.xmList.count; i++) {
+                    if (model.xmList[i].betAmount!=0) {
+                        [self.selectedArray addObject:model.xmList[i]];
+                        [list addObject:model.xmList[i]];
+                    }else{
+                        [otherList addObject:model.xmList[i]];
                     }
-                    if (otherList.count>0) {
-                        self.otherListType = BTTXimaOtherListTypeData;
+                    if (i==model.xmList.count-1) {
+                        model.xmList = list;
+                        otherModel.xmList = otherList;
+                        self.otherModel = otherModel;
+                        self.validModel = model;
+                        if (list.count>0) {
+                            self.currentListType = BTTXimaCurrentListTypeData;
+                        }
+                        if (otherList.count>0) {
+                            self.otherListType = BTTXimaOtherListTypeData;
+                        }
+                        [self setupElements];
                     }
-                    [self setupElements];
                 }
+            }else{
+                self.currentListType = BTTXimaCurrentListTypeNoData;
+                self.otherListType = BTTXimaOtherListTypeNoData;
+                [self setupElements];
             }
+            
         }
     }];
     [self loadHistoryData];
@@ -79,6 +86,8 @@
                 self.historyArray = result.body[@"data"];
                 if (self.historyArray.count>0) {
                     self.historyListType = BTTXimaHistoryListTypeData;
+                }else{
+                    self.historyListType = BTTXimaHistoryListTypeNoData;
                 }
             }
         }
@@ -88,23 +97,73 @@
 
 - (void)loadXimaBillOut {
     [self showLoading];
+    
+    NSDate *nowDate = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *comp = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday  fromDate:nowDate];
+    // 获取今天是周几
+    NSInteger weekDay = [comp weekday];
+    // 获取几天是几号
+    NSInteger day = [comp day];
+    // 计算当前日期和本周的星期一和星期天相差天数
+    long firstDiff,lastDiff;
+    //    weekDay = 1; weekDay == 1 == 周日
+    if (weekDay == 1)
+    {
+        firstDiff = -6;
+        lastDiff = 0;
+    }
+    else
+    {
+        firstDiff = [calendar firstWeekday] - weekDay + 1;
+        lastDiff = 8 - weekDay;
+    }
+    // 在当前日期(去掉时分秒)基础上加上差的天数
+    NSDateComponents *baseDayComp = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay  fromDate:nowDate];
+    
+    int weekday = 0;
+    
+    NSString *dateStr = @"";
+    
+    [baseDayComp setDay:day + firstDiff - weekday];
+    NSDate *dayOfWeek = [calendar dateFromComponents:baseDayComp];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"YYYY-MM-dd"];
+    dateStr = [dateStr stringByAppendingString:[formatter stringFromDate:dayOfWeek]];
+    [baseDayComp setDay:day - weekday + lastDiff];
+    NSDate *endDate = [calendar dateFromComponents:baseDayComp];
+    NSString *endStr = @"";
+    endStr=[endStr stringByAppendingString:[formatter stringFromDate:endDate]];
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     params[@"isXm"] = @0;
-    params[@"xmBeginDate"] = @"2020-01-27 00:00:00";
-    params[@"xmEndDate"] = @"2020-01-02 23:59:59";
-    
+    params[@"xmBeginDate"] = [NSString stringWithFormat:@"%@ 00:00:00",dateStr];
+    params[@"xmEndDate"] = [NSString stringWithFormat:@"%@ 23:59:59",endStr];
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     NSMutableArray *array = [NSMutableArray new];
     for (BTTXimaItemModel *itemModel in self.selectedArray) {
-        NSDictionary *json = [itemModel yy_modelToJSONObject];
+        NSDictionary *json = @{
+            @"betAmount":[NSString stringWithFormat:@"%ld",(long)itemModel.betAmount],
+            @"periodXmAmount":[NSString stringWithFormat:@"%lf",itemModel.xmAmount],
+            @"reduceBetAmount":@"0",
+            @"totalBetAmount":[NSString stringWithFormat:@"%ld",(long)itemModel.totalBetAmont],
+            @"xmAmount":[NSString stringWithFormat:@"%lf",itemModel.xmAmount],
+            @"xmRate":itemModel.xmRate,
+            @"xmType":itemModel.xmTypes.firstObject.xmType
+        };
         [array addObject:json];
     }
-    params[@"xmRequest"] = array;
+    params[@"xmRequests"] = array;
     [IVNetwork requestPostWithUrl:BTTXiMaRequest paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            
+            NSArray *xmResult = result.body[@"xmResult"];
+            [self.xmResults addObjectsFromArray:xmResult];
+            self.ximaStatusType = BTTXimaStatusTypeSuccess;
+            BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            [cell setBtnOneType:BTTXimaHeaderBtnOneTypeOtherNormal];
+            [self setupElements];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }

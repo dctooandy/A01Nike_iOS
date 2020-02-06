@@ -14,6 +14,7 @@
 @interface BTTHomePageAmountsCell ()<UUMarqueeViewDelegate>
 
 @property (nonatomic, strong) UUMarqueeView *scrollLabelView;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @end
@@ -47,6 +48,8 @@
     maskLayer.frame         = self.scrollLabelView.bounds;
     maskLayer.path          = maskPath.CGPath;
     self.scrollLabelView.layer.mask         = maskLayer;
+    
+    self.timeLabel.text = [NSString stringWithFormat:@"%@高额及高倍盈利",[PublicMethod getCurrentTimesWithFormat:@"yyyy年MM月dd日"]];
 }
 
 - (void)setAmounts:(NSMutableArray *)amounts {

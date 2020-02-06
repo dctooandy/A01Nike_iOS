@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BTTThisWeekTotalCell : BTTBaseCollectionViewCell
 
 @property (nonatomic, strong) BTTXimaTotalModel *model;
+@property (nonatomic, strong) NSArray *history;
 
 @end
 

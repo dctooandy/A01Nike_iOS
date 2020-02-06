@@ -10,6 +10,7 @@
 
 @class BTTXimaItemModel;
 @class BTTXimaItemTypesModel;
+@class BTTXimaLastWeekItemModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -66,13 +67,26 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *xmType;
 
-@property (nonatomic, assign) NSInteger betAmount;
+@property (nonatomic, copy) NSString *betAmount;
 
-@property (nonatomic, assign) NSInteger totalBetAmont;
+@property (nonatomic, copy) NSString *totalBetAmont;
 
-@property (nonatomic, assign) NSInteger xmAmount;
+@property (nonatomic, copy) NSString *xmAmount;
 
-@property (nonatomic, assign) NSInteger xmRate;
+@property (nonatomic, copy) NSString *xmRate;
+
+@end
+
+@interface BTTXimaLastWeekItemModel : BTTBaseModel
+
+@property (nonatomic, copy) NSString *amount;
+@property (nonatomic, copy) NSString *auditDate;
+@property (nonatomic, copy) NSString *bettingAmount;
+@property (nonatomic, copy) NSString *createDate;
+@property (nonatomic, copy) NSString *flagDesc;
+@property (nonatomic, copy) NSString *gameKindName;
+@property (nonatomic, copy) NSString *platformName;
+@property (nonatomic, copy) NSString *rate;
 
 @end
 

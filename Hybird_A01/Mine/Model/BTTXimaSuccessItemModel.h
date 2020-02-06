@@ -17,14 +17,21 @@ NS_ASSUME_NONNULL_BEGIN
 //name = "AG\U65d7\U8230\U5385";
 //status = 1;
 
-@property (nonatomic, copy) NSString *amount;
+@property (nonatomic, copy) NSString *xmAmount;
 
-@property (nonatomic, copy) NSString *err;
+@property (nonatomic, copy) NSString *errMsg;
 
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *xmRate;
 
-@property (nonatomic, assign) NSInteger status;
+@property (nonatomic, copy) NSString *errCode;
 
+@property (nonatomic, copy) NSString *xmType;
+
+@property (nonatomic, copy) NSString *betAmount;
+
+@property (nonatomic, copy) NSString *flag;
+
+@property (nonatomic, copy) NSString *xmTypeName;
 @end
 
 NS_ASSUME_NONNULL_END

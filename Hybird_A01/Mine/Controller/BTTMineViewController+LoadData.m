@@ -14,6 +14,7 @@
 #import "CNPayChannelModel.h"
 #import "BTTGamesHallModel.h"
 #import "BTTCustomerBalanceModel.h"
+#import "HAInitConfig.h"
 
 @implementation BTTMineViewController (LoadData)
 
@@ -77,6 +78,15 @@
     
 }
 
+- (void)queryBiShangStatus{
+    [IVNetwork requestPostWithUrl:BTTQueryBiShangOpen paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [[NSUserDefaults standardUserDefaults]setObject:result.body forKey:BTTBMerchantStatus];
+        }
+    }];
+}
+
 - (void)loadPaymentData {
     NSMutableArray *arr = [NSMutableArray array];
     NSArray *icons = nil;
@@ -122,6 +132,8 @@
         
         NSMutableArray *wapPayments = [NSMutableArray array];
         BOOL haveWap = NO;
+        
+        NSString *bsStatus = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:BTTBMerchantStatus]];
         
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if ([result.body[@"payTypeList"] isKindOfClass:[NSArray class]]) {
@@ -251,7 +263,7 @@
                         mainModel.payModel = model;
                         [self.normalDataTwo addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"币商"]) {
+                    if ([model.payTypeName isEqualToString:@"币商"]&&[bsStatus isEqualToString:@"1"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"币商充值";
                         mainModel.iconName = @"me_bishang";

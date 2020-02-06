@@ -55,6 +55,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 获取微信分享链接
 - (void)loadWeiXinRediect;
 
+- (void)queryBiShangStatus;
+
 
 @end
 

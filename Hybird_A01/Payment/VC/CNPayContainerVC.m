@@ -105,6 +105,8 @@
         case 16:
         case 23:
         case 8:
+        case 9:
+        case 19:
         case 11:{
             [viewControllers addObjectsFromArray:[self QRPay:payment]];
         }

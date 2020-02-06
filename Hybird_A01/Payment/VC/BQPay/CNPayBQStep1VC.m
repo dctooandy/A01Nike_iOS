@@ -47,6 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _haveBankData = NO;
+    self.amountBtn.hidden = YES;
     [self configPreSettingMessage];
     [self configDifferentUI];
     [self queryAmountList];
@@ -101,11 +102,9 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (result.body[@"amounts"]!=nil) {
                 self.amountList = result.body[@"amounts"];
-                self.amountBtn.hidden = YES;
                 [self configAmountList];
             }
         }else{
-            self.amountBtn.hidden = YES;
             self.amountTF.text = @"";
         }
     }];

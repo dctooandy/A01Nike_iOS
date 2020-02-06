@@ -214,7 +214,16 @@
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTBannerModel *model = strongSelf.banners[[value integerValue]];
-                [strongSelf bannerToGame:model];
+                if ([model.action.type isEqualToString:@"1"]) {
+                    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                    vc.webConfigModel.url = [model.action.detail stringByReplacingOccurrencesOfString:@" " withString:@""];
+                    vc.webConfigModel.newView = YES;
+                    vc.webConfigModel.browser = NO;
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                }else{
+                    [strongSelf bannerToGame:model];
+                }
+                
             };
             cell.imageUrls = self.imageUrls;
             return cell;
@@ -324,7 +333,14 @@
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTBannerModel *model = strongSelf.banners[[value integerValue]];
-                [strongSelf bannerToGame:model];
+                if ([model.action.type isEqualToString:@"1"]) {
+                    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                    vc.webConfigModel.url = [model.action.detail stringByReplacingOccurrencesOfString:@" " withString:@""];
+                    vc.webConfigModel.newView = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else{
+                    [strongSelf bannerToGame:model];
+                }
             };
             return cell;
         } else if (indexPath.row == 1) {

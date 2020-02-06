@@ -41,7 +41,9 @@
     if ([sender.titleLabel.text isEqualToString:@"本周"]) {
         self.btnOneType = BTTXimaHeaderBtnOneTypeLastWeekNormal;
         self.btnTwoType = BTTXimaHeaderBtnTwoTypeThisWeekSelect;
-        [self thisWeekBtnClick:self.thisWeekBtn];
+        if (self.buttonClickBlock) {
+            self.buttonClickBlock(sender);
+        }
     } else if ([sender.titleLabel.text isEqualToString:@"其它游戏厅"]) {
         self.btnTwoType = BTTXimaHeaderBtnTwoTypeOtherSelect;
         self.btnOneType = BTTXimaHeaderBtnOneTypeLastWeekNormal;

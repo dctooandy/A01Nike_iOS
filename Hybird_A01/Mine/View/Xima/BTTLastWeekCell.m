@@ -29,12 +29,20 @@
     self.backgroundColor = [UIColor colorWithHexString:@"212229"];
 }
 
-- (void)setModel:(BTTXimaItemModel *)model {
+- (void)setItemModel:(BTTXimaItemModel *)itemModel{
+    self.nameLabel.text = [NSString stringWithFormat:@"%@",itemModel.xmName];
+    self.ximaAmountLabel.text = [NSString stringWithFormat:@"%@元",[PublicMethod transferNumToThousandFormat:itemModel.xmAmount]];
+    self.totalAmountLabel.text = [NSString stringWithFormat:@"%@",[PublicMethod transferNumToThousandFormat:itemModel.totalBetAmont]];
+    self.rateLabel.text = itemModel.xmRate;
+    
+}
+
+- (void)setModel:(BTTXimaLastWeekItemModel *)model {
     _model = model;
-    self.nameLabel.text = [NSString stringWithFormat:@"%@",model.xmName];
-    self.ximaAmountLabel.text = [NSString stringWithFormat:@"%@元",[PublicMethod transferNumToThousandFormat:model.xmAmount]];
-    self.totalAmountLabel.text = [NSString stringWithFormat:@"%@",[PublicMethod transferNumToThousandFormat:model.totalBetAmont]];
-    self.rateLabel.text = model.xmRate;
+    self.nameLabel.text = model.platformName;
+    self.ximaAmountLabel.text = [NSString stringWithFormat:@"%@元",model.amount];
+    self.totalAmountLabel.text = [NSString stringWithFormat:@"%@",model.bettingAmount];
+    self.rateLabel.text = model.rate;
     
 }
 

@@ -8,13 +8,15 @@
 
 #import "BTTBaseCollectionViewCell.h"
 
+@class BTTXimaLastWeekItemModel;
 @class BTTXimaItemModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLastWeekCell : BTTBaseCollectionViewCell
 
-@property (nonatomic, strong) BTTXimaItemModel *model;
+@property (nonatomic, strong) BTTXimaLastWeekItemModel *model;
+@property (nonatomic, strong) BTTXimaItemModel *itemModel;
 
 @end
 
