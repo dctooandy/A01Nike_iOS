@@ -371,7 +371,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 }
 
 - (void)bannerToGame:(BTTBannerModel *)model {
-    if ([model.action.detail hasSuffix:@".htm"] ) {
+    if ([model.action.type isEqualToString:@"1"] ) {
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
         vc.webConfigModel.url = [model.action.detail stringByReplacingOccurrencesOfString:@" " withString:@""];
         vc.webConfigModel.newView = YES;
