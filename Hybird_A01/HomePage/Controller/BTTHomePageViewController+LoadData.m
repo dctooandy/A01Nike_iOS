@@ -271,7 +271,7 @@ static const char *BTTNextGroupKey = "nextGroup";
     [params setObject:date_start forKey:@"date_start"];
     NSString *date_end = [PublicMethod getCurrentTimesWithFormat:@"YYYY-MM-dd HH:mm:ss"];
     [params setObject:date_end forKey:@"date_end"];
-    [params setObject:@"1000" forKey:@"min_bet_amount"];
+    [params setObject:@"50000" forKey:@"min_bet_amount"];
     [params setObject:@"100" forKey:@"page_size"];
     NSMutableArray *amounts = [NSMutableArray array];
     NSMutableArray *posters = [NSMutableArray array];
