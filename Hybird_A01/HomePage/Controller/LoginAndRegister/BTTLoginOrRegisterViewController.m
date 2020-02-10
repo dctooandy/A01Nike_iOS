@@ -142,7 +142,7 @@
                 weakSelf(weakSelf);
                 cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
-                    [strongSelf sendCodeWithPhone:value];
+                    [strongSelf loadMobileVerifyCodeWithPhone:value use:2];
                 };
                 return cell;
             } else {
@@ -186,7 +186,7 @@
                 };
                 cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
-                    [strongSelf sendCodeWithPhone:value];
+                    [strongSelf loadMobileVerifyCodeWithPhone:value use:2];
                 };
 
                 return cell;
@@ -221,7 +221,7 @@
 
                     cell.verifyCodeBlock = ^(NSString *phone) {
                         strongSelf(strongSelf);
-                        [strongSelf loadMobileVerifyCodeWithPhone:phone];
+                        [strongSelf loadMobileVerifyCodeWithPhone:phone use:1];
                     };
                     return cell;
                 } else {
@@ -250,7 +250,7 @@
                     };
                     cell.verifyCodeBlock = ^(NSString *phone) {
                         strongSelf(strongSelf);
-                        [strongSelf loadMobileVerifyCodeWithPhone:phone];
+                        [strongSelf loadMobileVerifyCodeWithPhone:phone use:1];
                     };
                     return cell;
                 }

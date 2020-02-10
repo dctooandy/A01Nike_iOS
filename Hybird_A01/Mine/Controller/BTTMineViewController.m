@@ -590,6 +590,8 @@
         weakSelf(weakSelf);
         vc.refreshBlock = ^{
             strongSelf(strongSelf);
+            [IVNetwork cleanUserInfo];
+            [IVHttpManager shareManager].loginName = @"";
             [strongSelf.navigationController popToRootViewControllerAnimated:NO];
             [MBProgressHUD showSuccess:@"退出成功" toView:nil];
             strongSelf.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;

@@ -110,7 +110,7 @@
             [IVHttpManager shareManager].loginName = model.login_name;
             [IVHttpManager shareManager].userToken = result.body[@"token"];
             [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
-            [self getCustomerInfoByLoginNameWithName:model.login_name isBack:isback];
+            [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"] isBack:isback];
         }else{
             [self hideLoading];
             if ([result.head.errCode isEqualToString:@"WS_202020"]) {
@@ -192,6 +192,7 @@
             BTTRegisterQuickAutoCell *cell = (BTTRegisterQuickAutoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
             model.phone = cell.phoneTextField.text;
             model.verify_code = cell.verifyTextField.text;
+            model.login_name = [self getRandomNameWithPhone:model.phone];
             if (!model.phone.length) {
                 [MBProgressHUD showError:@"请输入手机号" toView:self.view];
                 return;
@@ -256,8 +257,13 @@
     [IVNetwork requestPostWithUrl:BTTVerifySmsCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;
-        self.validateId = result.body[@"validateId"];
-        [self checkAccountInfoWithCreateModel:model];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            self.validateId = result.body[@"validateId"];
+            [self checkAccountInfoWithCreateModel:model];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:self.view];
+        }
+        
     }];
 }
 
@@ -277,6 +283,8 @@
             }else{
                 [self fastRegisterAPIModel:model];
             }
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:self.view];
         }
     }];
 }
@@ -355,11 +363,7 @@
 - (void)fastRegisterAPIModel:(BTTCreateAPIModel *)model {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:[IVRsaEncryptWrapper encryptorString:model.phone] forKey:@"mobileNo"];
-    if (model.login_name==nil) {
-        [params setValue:[self getRandomNameWithPhone:model.phone] forKey:@"loginName"];
-    }else{
-        [params setValue:model.login_name forKey:@"loginName"];
-    }
+    [params setValue:model.login_name forKey:@"loginName"];
     
     [params setValue:self.messageId forKey:@"messageId"];
     NSString *pwd = [self getRandomPassword];
@@ -472,8 +476,8 @@
 }
 
 // 手机验证码
-- (void)loadMobileVerifyCodeWithPhone:(NSString *)phone {
-    NSDictionary *params = @{@"use":@1,@"productId":@"A01APP02",@"mobileNo":[IVRsaEncryptWrapper encryptorString:phone]};
+- (void)loadMobileVerifyCodeWithPhone:(NSString *)phone use:(NSInteger)use{
+    NSDictionary *params = @{@"use":@(use),@"productId":@"A01APP02",@"mobileNo":[IVRsaEncryptWrapper encryptorString:phone]};
     [IVNetwork requestPostWithUrl:BTTSendMsgCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         NSLog(@"%@",response);
         IVJResponseObject *result = response;
@@ -487,8 +491,8 @@
     }];
 }
 
-- (void)sendCodeWithPhone:(NSString *)phone {
-    NSDictionary *params = @{@"use":@1,@"productId":@"A01APP02",@"mobileNo":[IVRsaEncryptWrapper encryptorString:phone]};
+- (void)sendCodeWithPhone:(NSString *)phone use:(NSInteger)use{
+    NSDictionary *params = @{@"use":@(use),@"productId":@"A01APP02",@"mobileNo":[IVRsaEncryptWrapper encryptorString:phone]};
    [IVNetwork requestPostWithUrl:BTTSendMsgCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         self.messageId = result.body[@"messageId"];

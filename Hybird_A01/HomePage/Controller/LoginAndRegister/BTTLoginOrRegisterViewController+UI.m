@@ -64,9 +64,9 @@
             BTTCreateAPIModel *newModel = model;
             newModel.v = @"submit";
             if (strongSelf.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
-                [strongSelf createAccountNormalWithAPIModel:model];
-            } else if (strongSelf.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
                 [strongSelf fastRegisterAPIModel:model];
+            } else if (strongSelf.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
+                [strongSelf createAccountNormalWithAPIModel:model];
             }
         }
     };

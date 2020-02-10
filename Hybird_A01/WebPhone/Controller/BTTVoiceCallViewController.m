@@ -81,6 +81,7 @@ typedef NS_ENUM(NSInteger, BTTNumberBtnType) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [UIDevice currentDevice].proximityMonitoringEnabled = YES;
     [self.navigationController setNavigationBarHidden:YES];
     [self updateUI];

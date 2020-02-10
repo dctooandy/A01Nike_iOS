@@ -445,6 +445,7 @@
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
             vc.webConfigModel.url = [model.link stringByReplacingOccurrencesOfString:@" " withString:@""];
             vc.webConfigModel.newView = YES;
+            vc.webConfigModel.theme = @"outside";
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == 14) {
             model = self.posters.count ? self.posters[1] : nil;
