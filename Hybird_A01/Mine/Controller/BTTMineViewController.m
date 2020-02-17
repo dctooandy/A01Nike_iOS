@@ -557,6 +557,7 @@
         [actionSheet show];
     } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 5) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+        vc.title = @"推荐礼金";
         vc.webConfigModel.theme = @"outside";
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/gift/lucky_pot"];
