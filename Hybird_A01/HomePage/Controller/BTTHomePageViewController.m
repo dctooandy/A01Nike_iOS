@@ -265,6 +265,7 @@
                 strongSelf(strongSelf);
                 BTTPromotionModel *model = value;
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                vc.title = model.name;
                 vc.webConfigModel.url = [model.href stringByReplacingOccurrencesOfString:@" " withString:@""];
                 vc.webConfigModel.newView = YES;
                 [strongSelf.navigationController pushViewController:vc animated:YES];

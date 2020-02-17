@@ -140,11 +140,11 @@ PODS:
   - IVUpdateLibrary (1.0.1)
   - IVUZIPLibrary (1.0.4):
     - ZipArchive (~> 1.4.0)
-  - IVWebViewLibrary (1.0.7):
-    - IVWebViewLibrary/IVWebViewLibrary (= 1.0.7)
+  - IVWebViewLibrary (1.0.9):
+    - IVWebViewLibrary/IVWebViewLibrary (= 1.0.9)
     - JSONModel (~> 1.7.0)
     - MJExtension (~> 3.0.15.1)
-  - IVWebViewLibrary/IVWebViewLibrary (1.0.7):
+  - IVWebViewLibrary/IVWebViewLibrary (1.0.9):
     - JSONModel (~> 1.7.0)
     - MJExtension (~> 3.0.15.1)
   - JSONModel (1.7.0)
@@ -253,7 +253,7 @@ CHECKOUT OPTIONS:
     :commit: a755b5bb45ad4fe4e9037551da243c2f9e0b6e52
     :git: http://10.66.72.115/mobile-iOS-Library/IVUZIPLibrary.git
   IVWebViewLibrary:
-    :commit: d387c1007b255c170859168d66ee03964ce94b9b
+    :commit: f293db48688301578e809670ff660b91e712ca97
     :git: http://10.66.72.115/mobile-iOS-Library/IVWebViewLibrary.git
 
 SPEC CHECKSUMS:
@@ -271,7 +271,7 @@ SPEC CHECKSUMS:
   IVPublicAPILibrary: 27791aecccd8d8605d2026d0b89c7ab2257da9bd
   IVUpdateLibrary: f5764f4cdfcf7919b37a1a2533aae0ff541d5c2d
   IVUZIPLibrary: ee9655054a4c3f85825fae5f95114fa3772f6e58
-  IVWebViewLibrary: 4683d9adcb42706510a8aab1b30512e8cc18a657
+  IVWebViewLibrary: 479f066e01edf3afa0267b778eb2a664a664895c
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   libOpenInstallSDK: 591755d306aaab15aa3e04db258d12c372797cd6
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201

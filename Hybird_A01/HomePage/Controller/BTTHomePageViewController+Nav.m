@@ -375,6 +375,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 - (void)bannerToGame:(BTTBannerModel *)model {
     if ([model.action.type isEqualToString:@"1"] ) {
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+        vc.title = model.title;
         vc.webConfigModel.url = [model.action.detail stringByReplacingOccurrencesOfString:@" " withString:@""];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";

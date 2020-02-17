@@ -543,6 +543,7 @@
                 vc.webConfigModel.newView = YES;
                 //            vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"lucky_pot.htm"];
                 NSString *title = names[buttonIndex];
+                vc.title = title;
                 if ([title isEqualToString:@"1%存款返利"]) {
                     vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/activity_pages/deposit_rebate"];
                 } else if ([title isEqualToString:@"开户礼金"]) {
