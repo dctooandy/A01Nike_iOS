@@ -264,7 +264,6 @@
                     weakSelf(weakSelf);
                     cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                         strongSelf(strongSelf);
-                        NSLog(@"%@",button);
                         if (![IVNetwork savedUserInfo]) {
                             [MBProgressHUD showError:@"请先登录" toView:nil];
                             BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
@@ -643,9 +642,10 @@
         if (self.favorites.count > 1) {
             if (indexPath.row >= 3) {
                 BTTVideoGameModel *gameModel = self.favorites.count ? self.favorites[indexPath.row - 3] : nil;
-                if (!gameModel.gameid.length) {
+                if (!gameModel.platformCode.length) {
                     return;
                 }
+                gameModel.gameCode = [NSString stringWithFormat:@"A01%@",gameModel.platformCode];
                 if ([IVNetwork savedUserInfo]) {
                     [self enterVideoGameWithGameModel:gameModel];
                 } else {
@@ -837,6 +837,10 @@
     model.gameId = gameModel.gameid;
     model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
     model.gameStyle = gameModel.gameStyle;
+    if (gameModel.gameCode!=nil) {
+        model.gameCode = gameModel.gameCode;
+    }
+    
     [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
 }
 // 试玩进入游戏
@@ -865,6 +869,9 @@
             model.gameId = gameModel.gameid;
             model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
             model.gameStyle = gameModel.gameStyle;
+            if (gameModel.gameCode!=nil) {
+                model.gameCode = gameModel.gameCode;
+            }
             [[IVGameManager sharedManager] forwardToGameWithModel:model controller:strongSelf];
         } else {
             BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];

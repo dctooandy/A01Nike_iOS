@@ -274,6 +274,7 @@
     NSDictionary *json = [IVCacheWrapper objectForKey:BTTCacheBankListKey];
     if (json!=nil) {
         NSArray *array = json[@"accounts"];
+        BOOL isBlackNineteen = [[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"];
         if (isArrayWithCountMoreThan0(array)) {
             NSMutableArray *bankList = [[NSMutableArray alloc]init];
             for (int i =0 ; i<array.count; i++) {
@@ -284,7 +285,14 @@
                     haveUSDT = YES;
                     
                 }else{
-                   [bankList addObject:model];
+                    if (isBlackNineteen) {
+                        if (![model.accountType isEqualToString:@"存折"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"信用卡"]) {
+                            [bankList addObject:model];
+                        }
+                    }else{
+                        [bankList addObject:model];
+                    }
+            
                 }
                 if (i==array.count-1) {
                     self.bankList = bankList;

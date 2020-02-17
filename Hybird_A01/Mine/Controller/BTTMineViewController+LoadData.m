@@ -142,7 +142,7 @@
                     NSDictionary *dict = payTypeArray[i];
                     CNPaymentModel *model = [CNPaymentModel yy_modelWithJSON:dict];
                     [payments addObject:model];
-                    if ([model.payTypeName isEqualToString:@"银联扫码"]) {
+                    if ([model.payTypeName isEqualToString:@"银联扫码"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"银联扫码";
                         mainModel.iconName = @"me_bankscan";
@@ -158,7 +158,7 @@
                         haveUSDT = YES;
                         usdtModel = model;
                     }
-                    if ([model.payTypeName isEqualToString:@"京东扫码"]) {
+                    if ([model.payTypeName isEqualToString:@"京东扫码"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"京东扫码";
                         mainModel.iconName = @"me_jdscan";
@@ -171,7 +171,7 @@
                         }
                     }
 
-                    if ([model.payTypeName isEqualToString:@"快速支付"]) {
+                    if ([model.payTypeName isEqualToString:@"快速支付"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"迅捷网银";
                         mainModel.iconName = @"me_bank";
@@ -183,7 +183,7 @@
                             [self.bigDataSoure addObject:mainModel];
                         }
                     }
-                    if ([model.payTypeName isEqualToString:@"微信转账银行卡"]) {
+                    if ([model.payTypeName isEqualToString:@"微信转账银行卡"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"微信秒存";
                         mainModel.iconName = @"me_wechatsecond";
@@ -195,7 +195,7 @@
                             [self.bigDataSoure addObject:mainModel];
                         }
                     }
-                    if ([model.payTypeName isEqualToString:@"支付宝转账银行卡"]) {
+                    if ([model.payTypeName isEqualToString:@"支付宝转账银行卡"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"支付宝秒存";
                         mainModel.iconName = @"me_alipaySecond";
@@ -207,7 +207,7 @@
                             [self.bigDataSoure addObject:mainModel];
                         }
                     }
-                    if ([model.payTypeName isEqualToString:@"支付宝扫码"]) {
+                    if ([model.payTypeName isEqualToString:@"支付宝扫码"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"支付宝扫码";
                         mainModel.iconName = @"me_aliSacn";
@@ -215,7 +215,7 @@
                         mainModel.payModel = model;
                         [self.normalDataSoure addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"微信扫码"]) {
+                    if ([model.payTypeName isEqualToString:@"微信扫码"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"微信扫码";
                         mainModel.iconName = @"me_wechatscan";
@@ -223,7 +223,7 @@
                         mainModel.payModel = model;
                         [self.normalDataSoure addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"QQ扫码"]) {
+                    if ([model.payTypeName isEqualToString:@"QQ扫码"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"QQ扫码";
                         mainModel.iconName = @"me_qqScan";
@@ -231,7 +231,7 @@
                         mainModel.payModel = model;
                         [self.normalDataSoure addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"手工存款"]) {
+                    if ([model.payTypeName isEqualToString:@"手工存款"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"手工存款";
                         mainModel.iconName = @"me_hand";
@@ -239,7 +239,7 @@
                         mainModel.payModel = model;
                         [self.normalDataTwo addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"在线支付"]) {
+                    if ([model.payTypeName isEqualToString:@"在线支付"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"在线支付";
                         mainModel.iconName = @"me_online";
@@ -247,7 +247,7 @@
                         mainModel.payModel = model;
                         [self.normalDataTwo addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"云闪付"]) {
+                    if ([model.payTypeName isEqualToString:@"云闪付"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"云闪付扫码";
                         mainModel.iconName = @"me_YSF";
@@ -255,7 +255,7 @@
                         mainModel.payModel = model;
                         [self.normalDataSoure addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"网银快捷支付MOB"]) {
+                    if ([model.payTypeName isEqualToString:@"网银快捷支付MOB"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"银行快捷网银";
                         mainModel.iconName = @"me_quick";
@@ -263,7 +263,7 @@
                         mainModel.payModel = model;
                         [self.normalDataTwo addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"币商"]&&[bsStatus isEqualToString:@"1"]) {
+                    if ([model.payTypeName isEqualToString:@"币商"]&&[bsStatus isEqualToString:@"1"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"币商充值";
                         mainModel.iconName = @"me_bishang";
@@ -271,7 +271,7 @@
                         mainModel.payModel = model;
                         [self.bigDataSoure addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"钻石币"]) {
+                    if ([model.payTypeName isEqualToString:@"钻石币支付"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"钻石币";
                         mainModel.iconName = @"me_bibao";
@@ -279,7 +279,7 @@
                         mainModel.payModel = model;
                         [self.normalDataTwo addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"点卡"]) {
+                    if ([model.payTypeName isEqualToString:@"点卡"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"点卡";
                         mainModel.iconName = @"me_pointCard";
@@ -295,7 +295,7 @@
                         mainModel.payModel = model;
                         [self.normalDataTwo addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"微信条码"]) {
+                    if ([model.payTypeName isEqualToString:@"微信条码"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"微信条码支付";
                         mainModel.iconName = @"me_tiaoma";
@@ -308,7 +308,7 @@
                         haveWap = YES;
                     }
                 }
-                if (haveWap) {
+                if (haveWap&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                     BTTMeMainModel *mainModel = [BTTMeMainModel new];
                     mainModel.name            = @"支付宝/微信/QQ/京东";
                     mainModel.iconName        = @"me_wap";
@@ -474,25 +474,14 @@
     };
 }
 
-- (void)loadAccountStatus {
-    //TODO:
-//    [BTTHttpManager getOpenAccountStatusCompletion:^(IVRequestResultModel *result, id response) {
-//        if (result.data && [result.data isKindOfClass:[NSDictionary class]]) {
-//            NSLog(@"%@",response);
-//            if (result.data[@"depositBonus"] && [result.data[@"depositBonus"] isKindOfClass:[NSDictionary class]]) {
-//                if ([result.data[@"depositBonus"][@"result_code"] integerValue] == 0) {
-//                    self.isFanLi = YES;
-//                }
-//            }
-//
-//            if (result.data[@"newMemberBonus"] && [result.data[@"newMemberBonus"] isKindOfClass:[NSDictionary class]]) {
-//                if ([result.data[@"newMemberBonus"][@"result_code"] integerValue] == 203 ||
-//                    [result.data[@"newMemberBonus"][@"result_code"] integerValue] == 0) {
-//                    self.isOpenAccount = YES;
-//                }
-//            }
-//        }
-//    }];
+- (void)loadRebateStatus {
+    [IVNetwork requestWithUseCache:YES url:BTTGiftRebateStatus paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString *code = [NSString stringWithFormat:@"%@",result.body[@"newMemberBonus"][@"result_code"]];
+            self.isOpenAccount = [code isEqualToString:@"203"]||[code isEqualToString:@"0"];
+        }
+    }];
 }
 
 - (void)loadGamesListAndGameAmount {

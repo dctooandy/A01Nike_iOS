@@ -79,6 +79,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *winTimes;
 
+@property (nonatomic, copy) NSString *gameCode;
+
+@property (nonatomic, copy) NSString *platformCode;
 
 @end
 

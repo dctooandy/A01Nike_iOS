@@ -112,21 +112,21 @@
  */
 - (void)paySucessHandler:(NSDictionary *)model repay:(dispatch_block_t)repayBlock {
     // 数据容灾
-//    if (![model.data isKindOfClass:[NSDictionary class]]) {
-//        // 后台返回类型不一，全部转成字符串
-//        [self showError:[NSString stringWithFormat:@"%@", model.message]];
-//        return;
-//    }
-//
-//    NSError *error;
-//    CNPayOrderModel *orderModel = [[CNPayOrderModel alloc] initWithDictionary:model.data error:&error];
-//    if (error && !orderModel) {
-//        [self showError:@"操作失败！请联系客户，或者稍后重试!"];
-//        return;
-//    }
-//    [self showPayTipView];
-//    CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:orderModel title:self.paymentModel.paymentTitle];
-//    [self pushViewController:webVC];
+    if (![model isKindOfClass:[NSDictionary class]]) {
+        // 后台返回类型不一，全部转成字符串
+        [self showError:@"数据类型错误"];
+        return;
+    }
+
+    NSError *error;
+    CNPayOrderModel *orderModel = [[CNPayOrderModel alloc] initWithDictionary:model error:&error];
+    if (error && !orderModel) {
+        [self showError:@"操作失败！请联系客户，或者稍后重试!"];
+        return;
+    }
+    [self showPayTipView];
+    CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:orderModel title:self.paymentModel.payTypeName];
+    [self pushViewController:webVC];
 }
 
 /**

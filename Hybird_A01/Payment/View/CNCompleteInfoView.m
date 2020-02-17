@@ -51,26 +51,26 @@
 }
 
 - (IBAction)submitAction:(UIButton *)sender {
-    if (self.nameTF.text.length == 0) {
-        [MBProgressHUD showError:@"请填写真实姓名" toView:self];
-        return;
-    }
-    if (self.preSetTF.text.length == 0) {
-        [MBProgressHUD showError:@"请填写预留信息" toView:self];
-        return;
-    }
-    [MBProgressHUD showLoadingSingleInView:self animated:YES];
-    __weak typeof(self) weakSelf = self;
-    [CNPayRequestManager paymentCompleteUserName:self.nameTF.text preSet:self.preSetTF.text completeHandler:^(IVJResponseObject *result, id response) {
-        [MBProgressHUD hideHUDForView:weakSelf animated:YES];
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            [weakSelf writeInfowithData:result.body];
-            weakSelf.hander();
-            [weakSelf giveUp:sender];
-        } else {
-            [MBProgressHUD showError:result.head.errMsg toView:self];
-        }
-    }];
+//    if (self.nameTF.text.length == 0) {
+//        [MBProgressHUD showError:@"请填写真实姓名" toView:self];
+//        return;
+//    }
+//    if (self.preSetTF.text.length == 0) {
+//        [MBProgressHUD showError:@"请填写预留信息" toView:self];
+//        return;
+//    }
+//    [MBProgressHUD showLoadingSingleInView:self animated:YES];
+//    __weak typeof(self) weakSelf = self;
+//    [CNPayRequestManager paymentCompleteUserName:self.nameTF.text preSet:self.preSetTF.text completeHandler:^(IVJResponseObject *result, id response) {
+//        [MBProgressHUD hideHUDForView:weakSelf animated:YES];
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            [weakSelf writeInfowithData:result.body];
+//            weakSelf.hander();
+//            [weakSelf giveUp:sender];
+//        } else {
+//            [MBProgressHUD showError:result.head.errMsg toView:self];
+//        }
+//    }];
 }
 
 - (IBAction)giveUp:(id)sender {

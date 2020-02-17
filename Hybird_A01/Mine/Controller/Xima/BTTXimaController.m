@@ -318,7 +318,7 @@
 
 - (void)pushToWebView {
     BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"promotion_activity.htm"];
+    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"#/activity_pages/promotion_gift"];
     vc.webConfigModel.theme = @"outside";
     vc.webConfigModel.newView = YES;
     [self.navigationController pushViewController:vc animated:YES];

@@ -52,7 +52,6 @@
 }
 
 - (void)keyboardFrameChange:(NSNotification *)notify {
-    NSLog(@"%@", notify.userInfo);
     //取出键盘最终的frame
     CGRect rect = [notify.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     //取出键盘弹出需要花费的时间

@@ -435,6 +435,7 @@
         return BTTCanAddCardTypeNone;
     }
     int bankCardCount = 0;
+    
     int btcCardCount = 0;
     for (BTTBankModel *model in self.bankList) {
         if ([model.accountType isEqualToString:@"BTC"]) {
@@ -442,6 +443,9 @@
         }else if ([model.accountType isEqualToString:@"借记卡"]||[model.accountType isEqualToString:@"信用卡"]||[model.accountType isEqualToString:@"存折"]){
             bankCardCount++;
         }
+    }
+    if ([[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
+        bankCardCount=3;
     }
     if (btcCardCount == 1) {
         if (bankCardCount < 3) {

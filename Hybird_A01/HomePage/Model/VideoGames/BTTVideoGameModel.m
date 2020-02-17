@@ -18,7 +18,7 @@
         return _gameImage;
     }
     NSString *h5Domain = [IVCacheWrapper objectForKey:IVCacheH5DomainKey] ? : [HAInitConfig defaultH5Domain];
-    gameImage = [NSString stringWithFormat:@"%@%@%@",h5Domain,@"static/A01M/_default/__static/_wms/_l/electronicgames/",_gameImage];
+    gameImage = [NSString stringWithFormat:@"%@%@",h5Domain,_gameImage];
     return gameImage;
 }
 

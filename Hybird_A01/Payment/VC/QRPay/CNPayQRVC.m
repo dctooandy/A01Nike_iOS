@@ -11,7 +11,7 @@
 #import "BTTBankUnionAppIconCell.h"
 #import "BTTQueryOnlineBankModel.h"
 
-#define kQRCellIndentifier   @"CNPayQRCell"
+#define kQRCellIndentifier @"CNPayQRCell"
 
 @interface CNPayQRVC () <UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeight;
@@ -46,12 +46,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.appsView.hidden = YES;
     [self configCollectionView];
     [self configPreSettingMessage];
     // 刷新数据
     [self queryOnlineBanks];
-    if (self.payments.count>0) {
+    if (self.payments.count > 0) {
         [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     }
 }
@@ -61,21 +61,20 @@
     [self setViewHeight:800 fullScreen:NO];
 }
 
-- (void)queryOnlineBanks{
+- (void)queryOnlineBanks {
     [self showLoading];
     NSDictionary *params = @{
-        @"payType":@(self.paymentModel.payType),
-        @"loginName":[IVNetwork savedUserInfo].loginName
+            @"payType": @(self.paymentModel.payType),
+            @"loginName": [IVNetwork savedUserInfo].loginName
     };
-    [IVNetwork requestPostWithUrl:BTTQueryOnlineBanks paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTQueryOnlineBanks paramters:params completionBlock:^(id _Nullable response, NSError *_Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BTTQueryOnlineBankModel *model = [BTTQueryOnlineBankModel yy_modelWithJSON:result.body];
             self.typeModel = model;
-            if (model.amountType.amounts!=nil&&model.amountType.amounts.count>0) {
+            if (model.amountType.amounts != nil && model.amountType.amounts.count > 0) {
                 self.amountList = model.amountType.amounts;
-                
             }
             [self updateAllContentWithModel:self.paymentModel];
             [self configAmountList];
@@ -99,15 +98,16 @@
     [self.appCollectionView registerNib:[UINib nibWithNibName:@"BTTBankUnionAppIconCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBankUnionAppIconCell"];
     NSInteger count = self.payments.count;
     // 根据数组个数与屏幕宽度来调节高度
-    CGFloat itemWidth = ([UIScreen mainScreen].bounds.size.width -18-35-10)/2.0;
+    CGFloat itemWidth = ([UIScreen mainScreen].bounds.size.width - 18 - 35 - 10) / 2.0;
     CGFloat itemHeight = itemWidth * 56 / 160.0;
-    CGFloat totalHeight = ((count - 1)/2 + 1) * (itemHeight + 15);
-    if (self.paymentModel.payType == 6 ||
-        self.paymentModel.payType == 5 ||
-        self.paymentModel.payType == 16 ||
-        self.paymentModel.payType == 23 ||
+    CGFloat totalHeight = ((count - 1) / 2 + 1) * (itemHeight + 15);
+    if (self.paymentModel.payType == CNPaymentWechatQR ||
+        self.paymentModel.payType == CNPaymentAliQR ||
+        self.paymentModel.payType == CNPaymentQQQR ||
+        self.paymentModel.payType == CNPaymentYSFQR  ||
+        self.paymentModel.payType == CNPaymentJDQR ||
         self.paymentModel.payType == 19 ||
-        self.paymentModel.payType == 15) {
+        self.paymentModel.payType == CNPaymentUnionQR) {
         self.collectionBgView.hidden = YES;
         self.collectionViewHeight.constant = 0;
         self.topConstants.constant = -62;
@@ -115,7 +115,7 @@
         self.collectionViewHeight.constant = totalHeight;
     }
     self.cellSize = CGSizeMake(itemWidth, itemHeight + 10);
-    self.apps = @[@"ysfapp",@"mtapp",@"dzapp",@"wphapp",@"ttzgapp",@"mfbapp",@"wzfapp",@"jdapp"];
+    self.apps = @[@"ysfapp", @"mtapp", @"dzapp", @"wphapp", @"ttzgapp", @"mfbapp", @"wzfapp", @"jdapp"];
     self.appCollectionView.delegate = self;
     self.appCollectionView.dataSource = self;
     CGFloat iconWidth = 60;
@@ -126,7 +126,6 @@
     layout.itemSize = self.appSize;
     self.appCollectionView.collectionViewLayout = layout;
     self.appsViewHeightConstants.constant = iconWidth * 2 + 36;
-    
 }
 
 - (void)configPreSettingMessage {
@@ -159,8 +158,8 @@
 }
 
 - (void)configAmountList {
-    self.amountBtn.hidden = self.typeModel.amountType.fix==0;
-    if (self.typeModel.amountType.fix==1) {
+    self.amountBtn.hidden = self.typeModel.amountType.fix == 0;
+    if (self.typeModel.amountType.fix == 1) {
         self.amountTF.placeholder = @"仅可选择以下金额";
     }
 }
@@ -182,7 +181,7 @@
         return cell;
     } else {
         CNPayQRCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kQRCellIndentifier forIndexPath:indexPath];
-        
+
         CNPaymentModel *payment = [self.payments objectAtIndex:indexPath.row];
 //        cell.tuijianIcon.hidden = (payment.payType == CNPaymentUnionQR ? NO : YES);
         cell.titleLb.text = payment.payTypeName;
@@ -191,22 +190,24 @@
                 cell.tuijianIcon.image = [UIImage imageNamed:@"me_wechatsecond"];
                 break;
             case 9:
-            cell.tuijianIcon.image = [UIImage imageNamed:@"me_aliwap"];
-            break;
+                cell.tuijianIcon.image = [UIImage imageNamed:@"me_aliwap"];
+                break;
             case 11:
-            cell.tuijianIcon.image = [UIImage imageNamed:@"me_qqScan"];
-            break;
+                cell.tuijianIcon.image = [UIImage imageNamed:@"me_qqScan"];
+                break;
             case 17:
-            cell.tuijianIcon.image = [UIImage imageNamed:@"me_jdscan"];
-            break;
-                
+                cell.tuijianIcon.image = [UIImage imageNamed:@"me_jdscan"];
+                break;
+            case 27:
+                cell.tuijianIcon.image = [UIImage imageNamed:@"me_YSF"];
+                break;
+
             default:
                 break;
         }
         cell.channelIconIV.image = [UIImage imageNamed:payment.payTypeIcon];
         return cell;
     }
-    
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -214,13 +215,11 @@
         return;
     }
     [self.view endEditing:YES];
-    
+
     self.currentSelectedIndex = indexPath.row;
     self.paymentModel = [self.payments objectAtIndex:indexPath.row];
     [self queryOnlineBanks];
-   
 }
-
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView.tag == 11100) {
@@ -228,7 +227,6 @@
     } else {
         return self.cellSize;
     }
-    
 }
 
 - (IBAction)selectAmountList:(id)sender {
@@ -266,23 +264,23 @@
         [self showError:[NSString stringWithFormat:@"存款金额必须是%.f~%.f之间，最大允许2位小数", [self.typeModel.minAmount doubleValue], maxAmount]];
         return;
     }
-    
+
     if (sender.selected) {
         return;
     }
     sender.selected = YES;
-    
+
     /// 提交
     __weak typeof(self) weakSelf =  self;
     NSDictionary *params = @{
-        @"amount":text,
-        @"payType":@(self.paymentModel.payType),
-        @"payid":self.typeModel.payid,
-        @"loginName":[IVNetwork savedUserInfo].loginName,
-        @"bankNo":@""
+            @"amount": text,
+            @"payType": @(self.paymentModel.payType),
+            @"payid": self.typeModel.payid,
+            @"loginName": [IVNetwork savedUserInfo].loginName,
+            @"bankNo": @""
     };
     [self showLoading];
-    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrder paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrder paramters:params completionBlock:^(id _Nullable response, NSError *_Nullable error) {
         [weakSelf hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
@@ -291,7 +289,6 @@
             [strongSelf handlerResult:result];
         }
     }];
-   
 }
 
 - (void)handlerResult:(IVJResponseObject *)model {
@@ -301,7 +298,7 @@
         [self showError:[NSString stringWithFormat:@"%@", model.head.errMsg]];
         return;
     }
-    
+
     NSError *error;
     CNPayOrderModel *orderModel = [[CNPayOrderModel alloc] initWithDictionary:model.body error:&error];
     if (error && !orderModel) {

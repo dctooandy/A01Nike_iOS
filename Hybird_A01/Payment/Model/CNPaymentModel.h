@@ -13,40 +13,38 @@
 /// 支付方式
 typedef NS_ENUM(NSUInteger, CNPaymentType) {
     /// 在线支付
-    CNPaymentOnline,
+    CNPaymentOnline=1,
     /// 点卡
-    CNPaymentCard,
+    CNPaymentCard=2,
     /// 手工存款
-    CNPaymentDeposit,
+    CNPaymentDeposit=0,
     /// 比特币支付
-    CNPaymentBTC,
+    CNPaymentBTC=20,
     /// 微信条码
-    CNPaymentWechatBarCode,
+    CNPaymentWechatBarCode=23,
     /// 钻石币支付
-    CNPaymentCoin,
+    CNPaymentCoin=41,
     
     
     /// app
-    CNPaymentWechatApp,
-    CNPaymentAliApp,
-    CNPaymentQQApp,
-    CNPaymentYSFQR,
-    CNPaymentUnionApp,
-    CNPaymentJDApp,
+    CNPaymentWechatApp=8,//微信wap
+    CNPaymentAliApp=9,//支付宝wap
+    CNPaymentQQApp=11,//qqwap
+    CNPaymentYSFQR=27,//云闪付扫码,
+    CNPaymentUnionApp,//银联wap
+    CNPaymentJDApp=17,//京东wap
     
     /// 扫码
-    CNPaymentAliQR=5,
-    CNPaymentWechatQR=6,
-    CNPaymentQQQR=7,
-    CNPaymentUnionQR=15,
-    CNPaymentJDQR=16,
-    
-    /// BQ存款 bypaytype-0,1,2
-    CNPaymentBQFast,
-    CNPaymentBQWechat,
-    CNPaymentBQAli,
-    
-    CNPaymentBS ///< 币商
+    CNPaymentAliQR=5,//支付宝扫码
+    CNPaymentWechatQR=6,//微信扫码
+    CNPaymentQQQR=7,//qq扫码
+    CNPaymentUnionQR=15,//银联扫码
+    CNPaymentJDQR=16,//京东扫码
+    CNPaymentBQFast=90,//迅捷网银
+    CNPaymentBQWechat=91,//微信秒存
+    CNPaymentBQAli=92,//支付宝秒存
+    CNPaymentBS=25, ///< 币商
+    CNPaymentUSDT=99//USDT
 };
 
 @interface CNPaymentModel : BTTBaseModel

@@ -250,6 +250,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTUserLoginAPI                            @"customer/login"
 // 模糊登录
 #define BTTUserLoginEXAPI                          @"customer/loginEx"
+// 根据手机验证码登录
+#define BTTUserLoginByMobileNo                     @"customer/loginByMobileNo"
 // 生成图片验证
 #define BTTVerifyCaptcha                           @"captcha/generate"
 // 创建账号
@@ -362,6 +364,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTCurrencyExchanged                       @"deposit/currencyExchange"
 // USDT手工支付存款
 #define BTTManualPay                               @"deposit/createManualDepositRequest"
+// 在线支付
+#define BTTCreateOnlineOrder                        @"deposit/createOnlineOrder"
 // 查询在线支付银行列表
 #define BTTQueryOnlineBanks                        @"deposit/queryOnlineBanks"
 // 创建在线支付订单
@@ -390,6 +394,12 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTXiMaRequest                             @"xm/createRequest"
 //查询是否开启币商充值
 #define BTTQueryBiShangOpen                        @"_extra_/api/v1/agent/getBMerchantStatus"
+//查询是否开启迅捷存款和开户礼金
+#define BTTGiftRebateStatus                        @"_extra_/api/v1/app/promo/giftRebateStatus"
+//点卡存款
+#define BTTPointCardPayment                        @"deposit/pointCardPayment"
+//查询点卡
+#define BTTQueryPointCardList                      @"deposit/queryPointCardList"
 
 #define BTTIsBindStatusAPI                         @"/public/verify/isNewBind"
 #define BTTGamePlatforms                           @"/A01/game/platforms"

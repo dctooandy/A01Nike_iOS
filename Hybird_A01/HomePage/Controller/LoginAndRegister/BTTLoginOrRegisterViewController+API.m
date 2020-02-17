@@ -74,6 +74,53 @@
     [self loginWithLoginAPIModel:model isBack:YES];
 }
 
+- (void)showPopViewWithAccounts:(NSArray *)accounts withPhone:(NSString *)codePhone withValidateId:(NSString *)validateId messageId:(NSString *)messageId smsCode:(NSString *)smsCode isBack:(BOOL)isback{
+    BTTLoginAccountSelectView *customView = [BTTLoginAccountSelectView viewFromXib];
+    if (SCREEN_WIDTH == 320) {
+        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 50, 260 + accounts.count * 30);
+    } else {
+        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 50, 260 + accounts.count * 40);
+    }
+    customView.phone = codePhone;
+    customView.accounts = accounts;
+    weakSelf(weakSelf);
+   
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = NO;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    customView.callBackBlock = ^(NSString *phone,NSString *captcha,NSString *captchaId) {
+        [popView dismiss];
+        strongSelf(strongSelf);
+        [strongSelf loginByMobileNo:phone withValidateId:validateId messageId:messageId smsCode:smsCode isBack:isback];
+
+    };
+}
+
+- (void)loginByMobileNo:(NSString*)loginName withValidateId:(NSString *)validateId messageId:(NSString *)messageId smsCode:(NSString *)smsCode isBack:(BOOL)isback{
+    [self showLoading];
+    NSDictionary *params = @{
+        @"messageId":messageId,
+        @"smsCode":smsCode,
+        @"validateId":validateId,
+        @"loginName":loginName
+    };
+    [IVNetwork requestPostWithUrl:BTTUserLoginByMobileNo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [IVHttpManager shareManager].loginName = loginName;
+            [IVHttpManager shareManager].userToken = result.body[@"token"];
+            [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
+            [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:self.view];
+        }
+    }];
+}
+
 
 // 登录逻辑处理
 - (void)loginWithLoginAPIModel:(BTTLoginAPIModel *)model isBack:(BOOL)isback {
@@ -107,14 +154,31 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             self.uuid = @"";
             self.wrongPwdNum = 0;
-            [IVHttpManager shareManager].loginName = model.login_name;
-            [IVHttpManager shareManager].userToken = result.body[@"token"];
-            [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
-            [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"] isBack:isback];
+            if (result.body[@"samePhoneLoginNames"]!=nil) {
+                NSArray *loginArray = result.body[@"samePhoneLoginNames"];
+                NSString *messageId = result.body[@"messageId"];
+                NSString *validateId = result.body[@"validateId"];
+                [self showPopViewWithAccounts:loginArray withPhone:model.login_name withValidateId:validateId messageId:messageId smsCode:model.password isBack:isback];
+            }else{
+                [IVHttpManager shareManager].loginName = model.login_name;
+                [IVHttpManager shareManager].userToken = result.body[@"token"];
+                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
+                [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"] isBack:isback];
+            }
+            
         }else{
             [self hideLoading];
             if ([result.head.errCode isEqualToString:@"WS_202020"]) {
                 [self showAlertWithLoginName:model.login_name];
+                return;
+            }
+            if ([result.head.errCode isEqualToString:@"GW_800510"]) {
+                NSArray *loginArray = result.body[@"samePhoneLoginNames"];
+                if (loginArray!=nil) {
+                    NSString *messageId = result.body[@"messageId"];
+                    NSString *validateId = result.body[@"validateId"];
+                    [self showPopViewWithAccounts:loginArray withPhone:model.login_name withValidateId:validateId messageId:messageId smsCode:model.password isBack:isback];
+                }
                 return;
             }
             [MBProgressHUD showError:result.head.errMsg toView:nil];

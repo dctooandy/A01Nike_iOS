@@ -214,8 +214,9 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         BTTTabbarController *tabbar = (BTTTabbarController *)self.tabBarController;
         BOOL isLogin = [IVNetwork savedUserInfo] ? YES : NO;
         weakSelf(weakSelf);
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [MBProgressHUD showLoadingSingleInView:tabbar.view animated:YES];
         [tabbar loadVoiceCallNumWithIsLogin:isLogin makeCall:^(NSString *uid) {
+            [MBProgressHUD hideHUDForView:tabbar.view animated:YES];
             if (uid == nil || uid.length == 0) {
                 [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
             } else {

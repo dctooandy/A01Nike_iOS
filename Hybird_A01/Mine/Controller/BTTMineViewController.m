@@ -105,7 +105,7 @@
             [self loadGamesListAndGameAmount];
         }
         [self loadPaymentData];
-        [self loadAccountStatus];
+        [self loadRebateStatus];
         [self loadSaveMoneyTimes];
     } else {
         self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
@@ -405,10 +405,6 @@
         [self.view addSubview:statusView];
         [statusView startCheck];
 
-        //TODO:
-//        [IVNetwork startCheckWithType:IVCheckNetworkTypeAll appWindow:[UIApplication sharedApplication].keyWindow detailBtnClickedBlock:^{
-//            [self.navigationController pushViewController:[IVNetworkStatusDetailViewController new] animated:YES];
-//        }];
         return;
     }
     if (![IVNetwork savedUserInfo]) {
@@ -548,11 +544,11 @@
                 //            vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"lucky_pot.htm"];
                 NSString *title = names[buttonIndex];
                 if ([title isEqualToString:@"1%存款返利"]) {
-                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"deposit_rebate.htm"];
+                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/activity_pages/deposit_rebate"];
                 } else if ([title isEqualToString:@"开户礼金"]) {
-                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"promo_open_account.htm"];
+                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/activity_pages/promo_open_account"];
                 } else if ([title isEqualToString:@"首存优惠"]) {
-                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"mypromotion.htm"];
+                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/first_deposit"];
                 }
                 [self.navigationController pushViewController:vc animated:YES];
             }
@@ -562,7 +558,7 @@
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.webConfigModel.theme = @"outside";
         vc.webConfigModel.newView = YES;
-        vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"lucky_pot.htm"];
+        vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/gift/lucky_pot"];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];

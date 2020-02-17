@@ -47,8 +47,7 @@
     [super viewDidLoad];
     [self setupViewControllers];
     [self customTabbar];
-//    //TODO:
-//     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userTokenExpired) name:IVUserTokenExpiredNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userTokenExpired) name:IVNUserTokenExpiredNotification object:nil];
     [self registerLoginOrOutNotification];
     [self registerNotification];
     [self requestCustomerVipLine];
@@ -218,7 +217,9 @@
             weakSelf(weakSelf);
             if (buttonIndex == 0) {
                 if ([IVNetwork savedUserInfo]) {
+                    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
                     [self loadVoiceCallNumWithIsLogin:YES makeCall:^(NSString *uid) {
+                        [MBProgressHUD hideHUDForView:self.view animated:YES];
                         if (uid == nil || uid.length == 0) {
                             [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
                         } else {
@@ -228,7 +229,9 @@
                         
                     }];
                 } else {
+                    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
                     [self loadVoiceCallNumWithIsLogin:NO makeCall:^(NSString *uid) {
+                        [MBProgressHUD hideHUDForView:self.view animated:YES];
                         if (uid == nil || uid.length == 0) {
                             [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
                         } else {

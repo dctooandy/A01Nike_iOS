@@ -122,7 +122,7 @@
     alertView.tapActivity = ^{
         [popView dismiss];
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.webConfigModel.url = [@"win_champions.htm" stringByReplacingOccurrencesOfString:@" " withString:@""];
+        vc.webConfigModel.url = [NSString stringWithFormat:@"%@#/activity_pages/win_champions",[IVNetwork h5Domain]];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
         [self.navigationController pushViewController:vc animated:YES];
@@ -623,7 +623,7 @@
             model.cnName =  kFishCnName;
             model.enName =  kFishEnName;
             model.provider = kAGINProvider;
-            model.gameId = model.gameCode;
+            model.gameCode = @"A01026";
             model.gameType = kFishType;
             break;
             
@@ -652,6 +652,7 @@
             model = [[IVGameModel alloc] init];
             model.cnName = @"沙巴体育";
             model.enName =  kASBEnName;
+            model.gameCode = @"A01031";
             model.provider =  kShaBaProvider;
         }
             break;
@@ -659,11 +660,13 @@
             model = [[IVGameModel alloc] init];
             model.cnName = @"BTI体育";
             model.enName =  @"SBT_BTI";
+            model.gameCode = @"A01062";
             model.provider =  @"SBT";
             break;
         case 1008:{
             model = [[IVGameModel alloc] init];
             model.cnName = @"竞彩";
+            model.gameCode = @"A01069";
             model.enName = @"NB";
             model.provider = @"NB";
             model.isSports = YES;
@@ -674,6 +677,7 @@
             model = [[IVGameModel alloc] init];
             model.cnName = @"体育VIP厅";
             model.enName =  @"CS";
+            model.gameCode = @"A01087";
             model.provider =  @"CS";
             model.language = @"zh";
         }
@@ -687,6 +691,7 @@
         case 1011://AG彩票
             model = [[IVGameModel alloc] init];
             model.cnName = @"AG彩票";
+            model.gameCode = @"A01004";
             model.enName = @"K8";
             model.provider = @"K8";
             break;

@@ -87,16 +87,16 @@
 }
 
 - (void)removeItem:(NSInteger)index {
-    CNPayDepositNameModel *model = _modelArray[index];
-    __weak typeof(self) weakSelf = self;
-    [CNPayRequestManager paymentDeleteDepositNameWithId:model.request_id CompleteHandler:^(IVJResponseObject *result, id response) {
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            [weakSelf.modelArray removeObject:model];
-            [weakSelf.collectionView reloadData];
-            if (weakSelf.modelArray.count == 0) {
-                !weakSelf.deleteHandler ?: weakSelf.deleteHandler();
-            }
-        }
-    }];
+//    CNPayDepositNameModel *model = _modelArray[index];
+//    __weak typeof(self) weakSelf = self;
+//    [CNPayRequestManager paymentDeleteDepositNameWithId:model.request_id CompleteHandler:^(IVJResponseObject *result, id response) {
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            [weakSelf.modelArray removeObject:model];
+//            [weakSelf.collectionView reloadData];
+//            if (weakSelf.modelArray.count == 0) {
+//                !weakSelf.deleteHandler ?: weakSelf.deleteHandler();
+//            }
+//        }
+//    }];
 }
 @end

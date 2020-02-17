@@ -72,10 +72,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     BTTLoginAccountSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:@"BTTLoginAccountSelectCell"];
     if (indexPath.row == 0) {
-        cell.accountLabel.text = [NSString stringWithFormat:@"%@(最近登录)",self.accounts[indexPath.row]];
+        cell.accountLabel.text = [NSString stringWithFormat:@"%@(最近登录)",self.accounts[indexPath.row][@"loginName"]];
         cell.selectBtn.selected = YES;
     } else {
-        cell.accountLabel.text = self.accounts[indexPath.row];
+        cell.accountLabel.text = [NSString stringWithFormat:@"%@",self.accounts[indexPath.row][@"loginName"]];
         cell.selectBtn.selected = NO;
     }
     return cell;
@@ -87,7 +87,7 @@
         BTTLoginAccountSelectCell *preCell = (BTTLoginAccountSelectCell *)[tableView cellForRowAtIndexPath:self.preSelectIndexPath];
         preCell.selectBtn.selected = NO;
         
-        self.selectAccount = self.accounts[indexPath.row];
+        self.selectAccount = self.accounts[indexPath.row][@"loginName"];
         BTTLoginAccountSelectCell *cell = (BTTLoginAccountSelectCell *)[tableView cellForRowAtIndexPath:indexPath];
         cell.selectBtn.selected = YES;
         self.preSelectIndexPath = indexPath;
@@ -116,7 +116,7 @@
     [attPhone addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"499bf7"]} range:phoneRange];
     self.phoneLabel.attributedText = attPhone;
     
-    self.selectAccount = accounts[0];
+    self.selectAccount = accounts[0][@"loginName"];
     self.preSelectIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     if (SCREEN_WIDTH == 320) {
         self.heightContstant.constant = 30 * accounts.count;

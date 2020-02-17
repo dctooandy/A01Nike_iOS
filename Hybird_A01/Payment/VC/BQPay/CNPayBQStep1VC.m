@@ -7,7 +7,6 @@
 //
 
 #import "CNPayBQStep1VC.h"
-#import "CNCompleteInfoView.h"
 #import "CNPayNormalTF.h"
 #import "BTTBishangStep1VC.h"
 

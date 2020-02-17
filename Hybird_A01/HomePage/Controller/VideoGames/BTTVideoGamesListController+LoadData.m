@@ -69,17 +69,12 @@
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     params[@"gameId"] = model.gameid;
     params[@"gameProvider"] = model.provider;
-    params[@"actFlag"] = !favorite ? @1 : @0;
+    params[@"actFlag"] = favorite ? @1 : @0;
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     [IVNetwork requestPostWithUrl:BTTAddFavotites paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            if ([result.body isKindOfClass:[NSDictionary class]]) {
-                if (result.body[@"val"]) {
-                    [self loadCollectionData];
-                }
-            }
-            
+            [self loadCollectionData];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }

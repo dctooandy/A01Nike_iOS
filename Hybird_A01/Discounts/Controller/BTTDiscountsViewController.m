@@ -98,7 +98,9 @@
         BTTTabbarController *tabbar = (BTTTabbarController *)self.tabBarController;
         BOOL isLogin = [IVNetwork savedUserInfo] ? YES : NO;
         weakSelf(weakSelf);
+        [MBProgressHUD showLoadingSingleInView:tabbar.view animated:YES];
         [tabbar loadVoiceCallNumWithIsLogin:isLogin makeCall:^(NSString *uid) {
+            [MBProgressHUD hideHUDForView:tabbar.view animated:YES];
             if (uid == nil || uid.length == 0) {
                 [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
             } else {

@@ -89,7 +89,7 @@
         }
             break;
 
-//        case CNPaymentCoin:
+        case CNPaymentCoin:
         case CNPaymentWechatBarCode:
         case CNPaymentBTC:
         case CNPaymentUnionApp:
@@ -98,16 +98,15 @@
             [viewControllers addObjectsFromArray:[self onlinePay:payment]];
         }
             break;
-//        case CNPaymentJDQR:
         case CNPaymentAliQR:
         case CNPaymentWechatQR:
         case CNPaymentUnionQR:
-        case 16:
-        case 23:
-        case 8:
-        case 9:
+        case CNPaymentJDQR:
+        case CNPaymentQQQR:
+        case CNPaymentYSFQR:
+        case CNPaymentWechatApp:
         case 19:
-        case 11:{
+        case CNPaymentQQApp:{
             [viewControllers addObjectsFromArray:[self QRPay:payment]];
         }
             break;
@@ -122,14 +121,14 @@
             }
         }
             break;
-        case 90:
-        case 91:
-        case 92:
+        case CNPaymentBQFast:
+        case CNPaymentBQWechat:
+        case CNPaymentBQAli:
         case 100: {
             [viewControllers addObjectsFromArray:[self BQPay:payment]];
         }
             break;
-        case 99:{
+        case CNPaymentUSDT:{
             CNPayUSDTStep1VC *vc1 = [[CNPayUSDTStep1VC alloc]init];
             vc1.payments = self.payments;
             CNPayUSDTQRSecondVC *vc2 = [[CNPayUSDTQRSecondVC alloc]init];
@@ -179,23 +178,7 @@
 
 /// QR支付
 - (NSArray<CNPayBaseVC *> *)QRPay:(CNPaymentModel *)payment {
-//    BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
-//    if (payment.paymentType == CNPaymentWechatApp ||
-//        payment.paymentType == CNPaymentJDApp ||
-//        payment.paymentType == CNPaymentQQApp || (payment.paymentType == CNPaymentAliApp && timeMoreTen)) {
-//        CNPayQRVC *step1VC = [[CNPayQRVC alloc] init];
-//        step1VC.paymentModel = payment;
-//        step1VC.payments = _payments;
-//        return @[step1VC];
-//    }
-//    else if (payment.paymentType == CNPaymentBQFast ||
-//               payment.paymentType == CNPaymentBQWechat ||
-//               payment.paymentType == CNPaymentBQAli) {
-//        CNPayQRVC *step1VC = [[CNPayQRVC alloc] init];
-//        step1VC.paymentModel = payment;
-//        step1VC.payments = _payments;
-//        return @[step1VC];
-//    }
+
     CNPayQRVC *step1VC = [[CNPayQRVC alloc] init];
     CNPayQRStep2VC *step2VC = [[CNPayQRStep2VC alloc] init];
     step1VC.paymentModel = payment;
