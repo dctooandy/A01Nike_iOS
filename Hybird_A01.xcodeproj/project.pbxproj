@@ -690,6 +690,8 @@
 		D35BF24323B451340085D6A1 /* CNPayUSDTQRSecondVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35BF23E23B451330085D6A1 /* CNPayUSDTQRSecondVC.xib */; };
 		D365536623C05739007E50BE /* BTTPayUsdtNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D365536523C05739007E50BE /* BTTPayUsdtNoticeView.m */; };
 		D365536823C05755007E50BE /* BTTPayUsdtNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D365536723C05755007E50BE /* BTTPayUsdtNoticeView.xib */; };
+		D3708E1423FB902300602715 /* login_bg_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D3708E1323FB902300602715 /* login_bg_video.mp4 */; };
+		D3708E1723FB973000602715 /* BTTLoginInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3708E1623FB973000602715 /* BTTLoginInfoView.m */; };
 		D3896A5123F5380900D48271 /* BTTPointCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3896A5023F5380900D48271 /* BTTPointCardModel.m */; };
 		D39D7C0323CEFA5B00898546 /* BTTUsdtTodayNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D39D7C0223CEFA5B00898546 /* BTTUsdtTodayNoticeView.m */; };
 		D39D7C0823CF19C500898546 /* BTTUsdtTodayNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39D7C0723CF19C500898546 /* BTTUsdtTodayNoticeView.xib */; };
@@ -1846,6 +1848,9 @@
 		D365536423C05739007E50BE /* BTTPayUsdtNoticeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPayUsdtNoticeView.h; sourceTree = "<group>"; };
 		D365536523C05739007E50BE /* BTTPayUsdtNoticeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPayUsdtNoticeView.m; sourceTree = "<group>"; };
 		D365536723C05755007E50BE /* BTTPayUsdtNoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTPayUsdtNoticeView.xib; sourceTree = "<group>"; };
+		D3708E1323FB902300602715 /* login_bg_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = login_bg_video.mp4; sourceTree = "<group>"; };
+		D3708E1523FB973000602715 /* BTTLoginInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLoginInfoView.h; sourceTree = "<group>"; };
+		D3708E1623FB973000602715 /* BTTLoginInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLoginInfoView.m; sourceTree = "<group>"; };
 		D3896A4F23F5380900D48271 /* BTTPointCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPointCardModel.h; sourceTree = "<group>"; };
 		D3896A5023F5380900D48271 /* BTTPointCardModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPointCardModel.m; sourceTree = "<group>"; };
 		D39D7C0123CEFA5B00898546 /* BTTUsdtTodayNoticeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUsdtTodayNoticeView.h; sourceTree = "<group>"; };
@@ -2850,6 +2855,7 @@
 		3A8F5160215F75010069D1B3 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				D3708E1323FB902300602715 /* login_bg_video.mp4 */,
 				D3B47D5823B70A5400D37C7F /* app.zip */,
 				3A21AEAA2391103A009E73FD /* qhb.gif */,
 				3A80AB0923AA075D004BF8C0 /* 828x128-min.gif */,
@@ -3297,6 +3303,8 @@
 				3A685B9122706A2700A8F59D /* BTTChangePwdBtnsCell.h */,
 				3A685B9222706A2700A8F59D /* BTTChangePwdBtnsCell.m */,
 				3A685B9322706A2700A8F59D /* BTTChangePwdBtnsCell.xib */,
+				D3708E1523FB973000602715 /* BTTLoginInfoView.h */,
+				D3708E1623FB973000602715 /* BTTLoginInfoView.m */,
 			);
 			path = LoginOrRegister;
 			sourceTree = "<group>";
@@ -4517,6 +4525,7 @@
 				3ADD2394217837FF00FA959A /* BTTMeHeaderLoginCell.xib in Resources */,
 				3A5AE69222D6E22A0013E8A3 /* LIVFileMessage_TypeExcel@2x.png in Resources */,
 				3A5AE6D422D6E22A0013E8A3 /* LIVWarningIcon@2x.png in Resources */,
+				D3708E1423FB902300602715 /* login_bg_video.mp4 in Resources */,
 				D5DBEB3421ABB774008AF629 /* CNPayChannelCell.xib in Resources */,
 				3A9E4C3F219E55E200E7D8C0 /* BTTMakeCallSuccessView.xib in Resources */,
 				3A5AE67622D6E22A0013E8A3 /* LIVAutoScrollTextViewController.nib in Resources */,
@@ -4966,6 +4975,7 @@
 				EACCD202218FE1680090B5E6 /* IVWebViewUtility.m in Sources */,
 				D5DBEB0A21ABB774008AF629 /* CNPayBQStep2VC.m in Sources */,
 				3AB0688E21A679DE00072FB7 /* BTTSMSEmailModifyModel.m in Sources */,
+				D3708E1723FB973000602715 /* BTTLoginInfoView.m in Sources */,
 				3ADD237B2177366B00FA959A /* BTTMeMainCell.m in Sources */,
 				3AE1EB15218048940073A32D /* BTTCardModifyVerifyController+LoadData.m in Sources */,
 				D5DBEB1521ABB774008AF629 /* CNPayOnlineVC.m in Sources */,

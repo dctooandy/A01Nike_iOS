@@ -17,7 +17,7 @@ typedef enum {
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BTTLoginOrRegisterViewController : BTTCollectionViewController
+@interface BTTLoginOrRegisterViewController : BTTBaseViewController
 
 @property (nonatomic, assign) BTTRegisterOrLoginType registerOrLoginType;///< 登录注册页面类型
 
