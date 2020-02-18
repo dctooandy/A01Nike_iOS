@@ -21,7 +21,7 @@
         case 1:
             return @[@"http://fm.918rr.com/_glaxy_a01_/"];
         default:
-            return @[@"https://m.918nee.com/_glaxy_a01_/"];
+            return @[@"https://m.918nee.com/_glaxy_a01_/",@"https://m.918nff.com/_glaxy_a01_/"];
     }
 }
 //https://a01mobileimage.sm830.com/static/A01M/_default/__static/_wms/_l/_banner/banner-index-186bd16447a23dc145b57aef0989822cf.jpg?v=d5de123c20360742454ddff7a6a0d94b
@@ -34,7 +34,7 @@
             return @"https://fm.918rr.com/";
             break;
         case 2:
-            return @"https://m.918bs.com/";
+            return @"https://m.918nee.com/";
             break;
         default:
             break;
@@ -50,7 +50,7 @@
             return @"https://fm.918rr.com/";
             break;
         case 2:
-            return @"https://a01mobileimage.sm830.com/";
+            return @"https://m.918nee.com/";
             break;
         default:
             break;
