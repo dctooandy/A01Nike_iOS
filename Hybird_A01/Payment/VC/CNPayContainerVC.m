@@ -105,22 +105,24 @@
         case CNPaymentQQQR:
         case CNPaymentYSFQR:
         case CNPaymentWechatApp:
+        case CNPaymentJDApp:
+        case CNPaymentAliApp:
         case 19:
         case CNPaymentQQApp:{
             [viewControllers addObjectsFromArray:[self QRPay:payment]];
         }
             break;
 
-        case CNPaymentAliApp:
-        {
-            BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
-            if (timeMoreTen) {
-                [viewControllers addObjectsFromArray:[self QRPay:payment]];
-            } else {
-                [viewControllers addObjectsFromArray:[self onlinePay:payment]];
-            }
-        }
-            break;
+//        case CNPaymentAliApp:
+//        {
+//            BOOL timeMoreTen = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue]>10;
+//            if (timeMoreTen) {
+//                [viewControllers addObjectsFromArray:[self QRPay:payment]];
+//            } else {
+//                [viewControllers addObjectsFromArray:[self onlinePay:payment]];
+//            }
+//        }
+//            break;
         case CNPaymentBQFast:
         case CNPaymentBQWechat:
         case CNPaymentBQAli:

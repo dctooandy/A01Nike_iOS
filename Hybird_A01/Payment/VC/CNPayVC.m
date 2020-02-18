@@ -232,8 +232,15 @@
     [self removeBankView];
     self.currentSelectedIndex = indexPath.row;
     [self.payCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-    _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payModel.payType];
+    
+    if (channel.paymentType==6789) {
+        _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payModels.firstObject.payType];
+        _payChannelVC.payments = channel.payModels;
+    }else{
+        _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.paymentType];
         _payChannelVC.payments = @[channel.payModel];
+    }
+    
 //    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
     self.title = channel.name;
     self.selectedIcon = channel.iconName;

@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BTTMeSaveMoneyShowType saveMoneyShowType;
 
+@property (nonatomic, copy) void(^assistantTap)(void);
+
 @end
 
 NS_ASSUME_NONNULL_END

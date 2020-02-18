@@ -47,6 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.appsView.hidden = YES;
+    self.noticesView.hidden = YES;
     [self configCollectionView];
     [self configPreSettingMessage];
     // 刷新数据
@@ -63,6 +64,7 @@
 
 - (void)queryOnlineBanks {
     [self showLoading];
+    
     NSDictionary *params = @{
             @"payType": @(self.paymentModel.payType),
             @"loginName": [IVNetwork savedUserInfo].loginName
