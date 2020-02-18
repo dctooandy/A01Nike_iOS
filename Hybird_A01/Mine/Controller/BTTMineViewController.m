@@ -242,6 +242,9 @@
                 cell.saveMoneyShowType = self.saveMoneyShowType;
                 cell.dataSource = self.bigDataSoure;
                 weakSelf(weakSelf);
+                cell.assistantTap = ^{
+                    [weakSelf pushToRechargeAssistantViewController];
+                };
                 cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTMeMainModel *model = value;
@@ -272,6 +275,9 @@
             cell.dataSource = self.bigDataSoure;
             cell.saveMoneyShowType = self.saveMoneyShowType;
             weakSelf(weakSelf);
+            cell.assistantTap = ^{
+                [weakSelf pushToRechargeAssistantViewController];
+            };
             cell.clickEventBlock = ^(id _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTMeMainModel *model = value;
@@ -308,6 +314,9 @@
                 cell.dataSource = self.bigDataSoure;
                 cell.saveMoneyShowType = self.saveMoneyShowType;
                 weakSelf(weakSelf);
+                cell.assistantTap = ^{
+                    [weakSelf pushToRechargeAssistantViewController];
+                };
                 cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTMeMainModel *model = value;
@@ -355,6 +364,15 @@
         cell.model = model;
         return cell;
     }
+}
+
+- (void)pushToRechargeAssistantViewController{
+    BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+    vc.title = @"存款小助手";
+    vc.webConfigModel.theme = @"outside";
+    vc.webConfigModel.newView = YES;
+    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/rechargeAssistant"];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)goSaveMoneyWithModel:(BTTMeMainModel *)model {

@@ -89,5 +89,10 @@ typedef enum {
     }
     [self.collectionView reloadData];
 }
+- (IBAction)assistantBtn_click:(id)sender {
+    if (self.assistantTap) {
+        self.assistantTap();
+    }
+}
 
 @end

@@ -22,7 +22,7 @@
             return @[@"http://fm.918rr.com/_glaxy_a01_/"];
         default:
 //            return @[@"https://a01.gatewayphp.net:9443/",@"https://a01.gatewayphp.com:9443/",@"https://a01.gateway-api.net/"];
-            return @[@"https://a01.gatewayphp.net:9443/",@"https://a01.gatewayphp.com:9443/",@"https://a01.gatewaynike.com/"];
+            return @[@"https://m.918ej.com/_glaxy_a01_/"];
     }
 }
 //https://a01mobileimage.sm830.com/static/A01M/_default/__static/_wms/_l/_banner/banner-index-186bd16447a23dc145b57aef0989822cf.jpg?v=d5de123c20360742454ddff7a6a0d94b
@@ -35,7 +35,7 @@
             return @"https://fm.918rr.com/";
             break;
         case 2:
-            return @"https://m.918bs.com/";
+            return @"https://m.918ej.com/";
             break;
         default:
             break;
@@ -51,7 +51,7 @@
             return @"https://fm.918rr.com/";
             break;
         case 2:
-            return @"https://a01mobileimage.sm830.com/";
+            return @"https://a01front.sm830.com/";
             break;
         default:
             break;
