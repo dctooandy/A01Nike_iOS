@@ -25,11 +25,11 @@
     if (requestModel.keyword.length) {
         [params setValue:requestModel.keyword forKey:@"keyword"];
     }
-    if (requestModel.sort.length) {
-        [params setValue:requestModel.sort forKey:@"sort"];
+    if (requestModel.sequence.length) {
+        [params setValue:requestModel.sequence forKey:@"sequence"];
     }
-    if (requestModel.order.length) {
-        [params setValue:requestModel.order forKey:@"order"];
+    if (requestModel.subscribe.length) {
+        [params setValue:requestModel.subscribe forKey:@"subscribe"];
     }
     if (requestModel.page) {
         [params setValue:@(requestModel.page) forKey:@"page"];

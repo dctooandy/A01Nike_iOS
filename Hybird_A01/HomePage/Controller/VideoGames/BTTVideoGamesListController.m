@@ -102,8 +102,8 @@
     requestModel.line = _line;
     requestModel.platform = _platform;
     requestModel.keyword = [_keyword stringByReplacingOccurrencesOfString:@" " withString:@""];
-    requestModel.sort = _sort;
-    requestModel.order = _order;
+    requestModel.sequence = _sort;
+    requestModel.subscribe = _order;
     if (_keyword.length) {
         requestModel.page = _searchPage;
     } else {

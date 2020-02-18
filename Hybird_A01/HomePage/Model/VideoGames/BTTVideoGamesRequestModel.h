@@ -20,9 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *keyword;
 
-@property (nonatomic, copy) NSString *sort;
+@property (nonatomic, copy) NSString *sequence;
 
-@property (nonatomic, copy) NSString *order;
+@property (nonatomic, copy) NSString *subscribe;
 
 @property (nonatomic, assign) NSInteger page;
 
