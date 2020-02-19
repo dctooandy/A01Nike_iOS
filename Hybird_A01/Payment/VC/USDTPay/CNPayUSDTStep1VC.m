@@ -79,6 +79,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.walletView.hidden = YES;
+    self.normalWalletView.hidden = YES;
+    self.elseWalletView.hidden = YES;
     [self setupView];
     [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     [self requestUSDTRate];
@@ -148,11 +151,14 @@
                         [self.walletView mas_updateConstraints:^(MASConstraintMaker *make) {
                             make.height.mas_equalTo(height);
                         }];
+                        self.walletView.hidden = NO;
                         BTTUsdtWalletModel *paymodel = [BTTUsdtWalletModel yy_modelWithJSON:paymentArray.firstObject];
                         if (![paymodel.payCategory isEqualToString:@"2"]) {
                             weakSelf.elseWalletView.hidden = YES;
                             weakSelf.normalWalletView.hidden = NO;
                         }else{
+                            weakSelf.elseWalletView.hidden = NO;
+                            weakSelf.normalWalletView.hidden = YES;
                             weakSelf.walletAddressLabel.text = paymodel.bankaccountno;
                             weakSelf.noteLabel.text = paymodel.retelling;
 
