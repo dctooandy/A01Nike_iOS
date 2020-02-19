@@ -36,23 +36,22 @@
         [self.normalDataTwo removeAllObjects];
     }
     
-    NSArray *icons =  @[@"me_bankscan",@"me_jdscan",@"me_aliwap",@"me_bank",@"me_wechatsecond",@"me_alipaySecond",@"me_online",@"me_aliSacn",@"me_wechatscan",@"me_qqScan",@"me_hand",@"me_wap",@"me_YSF",@"me_quick",@"me_bibao",@"me_pointCard",@"me_btc",@"me_tiaoma",@"me_bishang"];
-    NSArray *names = @[@"银联扫码",@"京东扫码",@"支付宝wap",@"迅捷网银",@"微信秒存",@"支付宝秒存",@"在线支付",@"支付宝扫码",@"微信扫码",@"QQ扫码",@"手工存款",@"微信/QQ/京东wap",@"云闪付扫码",@"银行快捷网银",@"点卡",@"钻石币",@"比特币",@"微信条码支付",@"币商充值"];
+    NSArray *icons =  @[@"me_usdt",@"me_bankscan",@"me_jdscan",@"me_aliwap",@"me_online",@"me_aliSacn",@"me_wechatscan",@"me_qqScan",@"me_hand",@"me_wap",@"me_YSF",@"me_quick",@"me_bibao",@"me_pointCard",@"me_btc",@"me_tiaoma",@"me_bishang",@"me_bank",@"me_wechatsecond",@"me_alipaySecond"];
+    NSArray *names = @[@"泰达币-USDT",@"银联扫码",@"京东扫码",@"支付宝wap",@"在线支付",@"支付宝扫码",@"微信扫码",@"QQ扫码",@"手工存款",@"微信/QQ/京东wap",@"云闪付扫码",@"银行快捷网银",@"点卡",@"钻石币",@"比特币",@"微信条码支付",@"币商充值",@"迅捷网银",@"微信秒存",@"支付宝秒存"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;
         model.iconName = icons[index];
         model.available = YES;
-        if ([model.name isEqualToString:@"币商充值"] || [model.name isEqualToString:@"银联扫码"] || [model.name isEqualToString:@"京东扫码"] || [model.name isEqualToString:@"支付宝wap"]) {
+        if ([model.name isEqualToString:@"泰达币-USDT"] || [model.name isEqualToString:@"银联扫码"] || [model.name isEqualToString:@"微信扫码"] || [model.name isEqualToString:@"云闪付扫码"]||[model.name isEqualToString:@"币商充值"]) {
             [self.bigDataSoure addObject:model];
-        } else if ([model.name isEqualToString:@"迅捷网银"] ||
-                   [model.name isEqualToString:@"微信秒存"] ||
-                   [model.name isEqualToString:@"支付宝秒存"] ||
-                   [model.name isEqualToString:@"在线支付"] ||
+        } else if ([model.name isEqualToString:@"QQ扫码"] ||
+                   [model.name isEqualToString:@"京东扫码"] ||
+                   [model.name isEqualToString:@"支付宝wap"] ||
                    [model.name isEqualToString:@"支付宝扫码"] ||
-                   [model.name isEqualToString:@"微信扫码"] ||
-                   [model.name isEqualToString:@"QQ扫码"]) {
+                   [model.name isEqualToString:@"手工存款"] ||
+                   [model.name isEqualToString:@"币商充值"]) {
             [self.normalDataSoure addObject:model];
         } else {
             [self.normalDataTwo addObject:model];
@@ -127,8 +126,6 @@
             [self.normalDataTwo removeAllObjects];
         }
         NSMutableArray *payments = [NSMutableArray array];
-        BOOL haveUSDT = NO;
-        CNPaymentModel *usdtModel = [[CNPaymentModel alloc]init];
         
         NSMutableArray *wapPayments = [NSMutableArray array];
         BOOL haveWap = NO;
@@ -142,33 +139,44 @@
                     NSDictionary *dict = payTypeArray[i];
                     CNPaymentModel *model = [CNPaymentModel yy_modelWithJSON:dict];
                     [payments addObject:model];
+                    
+                    if ([model.payTypeName isEqualToString:@"USDT支付"]) {
+                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                        mainModel.name = @"泰达币-USDT";
+                        mainModel.iconName = @"me_usdt";
+                        mainModel.paymentType = 99;
+                        if (model!=nil) {
+                            mainModel.payModel = model;
+                        }
+                        [self.bigDataSoure addObject:mainModel];
+                    }
+                    
                     if ([model.payTypeName isEqualToString:@"银联扫码"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"银联扫码";
                         mainModel.iconName = @"me_bankscan";
                         mainModel.paymentType = model.payType;
                         mainModel.payModel = model;
-                        if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                            [self.bigDataSoure addObject:mainModel];
-                        }else{
-                            [self.normalDataSoure addObject:mainModel];
-                        }
+                        [self.bigDataSoure addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"USDT支付"]) {
-                        haveUSDT = YES;
-                        usdtModel = model;
+                    
+                    if ([model.payTypeName isEqualToString:@"QQ扫码"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
+                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                        mainModel.name = @"QQ扫码";
+                        mainModel.iconName = @"me_qqScan";
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
+                        [self.normalDataSoure addObject:mainModel];
                     }
+                    
+                   
                     if ([model.payTypeName isEqualToString:@"京东扫码"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"京东扫码";
                         mainModel.iconName = @"me_jdscan";
                         mainModel.paymentType = model.payType;
                         mainModel.payModel = model;
-                        if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-                            [self.bigDataSoure addObject:mainModel];
-                        }else{
-                            [self.normalDataSoure addObject:mainModel];
-                        }
+                        [self.normalDataSoure addObject:mainModel];
                     }
 
                     if ([model.payTypeName isEqualToString:@"快速支付"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
@@ -223,14 +231,7 @@
                         mainModel.payModel = model;
                         [self.normalDataSoure addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"QQ扫码"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
-                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                        mainModel.name = @"QQ扫码";
-                        mainModel.iconName = @"me_qqScan";
-                        mainModel.paymentType = model.payType;
-                        mainModel.payModel = model;
-                        [self.normalDataSoure addObject:mainModel];
-                    }
+                    
                     if ([model.payTypeName isEqualToString:@"手工存款"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"手工存款";
@@ -318,16 +319,7 @@
                     [self.normalDataTwo addObject:mainModel];
                 }
                 
-                if (haveUSDT) {
-                    BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                    mainModel.name = @"泰达币-USDT";
-                    mainModel.iconName = @"me_usdt";
-                    mainModel.paymentType = 99;
-                    if (usdtModel!=nil) {
-                        mainModel.payModel = usdtModel;
-                    }
-                    [self.bigDataSoure addObject:mainModel];
-                }
+                
                 
                 if (self.bigDataSoure.count && self.normalDataSoure.count && self.normalDataTwo.count) {
                     self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
