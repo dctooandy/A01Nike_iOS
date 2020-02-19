@@ -228,7 +228,7 @@
     
     [attrStr addAttribute:NSForegroundColorAttributeName
     value:[UIColor whiteColor]
-    range:NSMakeRange(7, 17)];
+    range:NSMakeRange(7, 11+rate.length)];
     
     _exchangeRateLabel.attributedText = attrStr;
     
