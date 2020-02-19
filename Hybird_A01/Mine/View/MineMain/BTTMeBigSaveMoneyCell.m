@@ -49,7 +49,7 @@ typedef enum {
     if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll ||
         self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig ||
         self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBigOneMore) {
-        self.xiaozhushouBtn.hidden = YES;
+        self.xiaozhushouBtn.hidden = NO;
     } else {
         self.xiaozhushouBtn.hidden = YES;
     }
