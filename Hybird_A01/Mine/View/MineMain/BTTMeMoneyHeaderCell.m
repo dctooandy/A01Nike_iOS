@@ -14,5 +14,10 @@
     [super awakeFromNib];
     // Initialization code
 }
+- (IBAction)rechargeAssistant_click:(id)sender {
+    if (self.rechargeAssistantTap) {
+        self.rechargeAssistantTap();
+    }
+}
 
 @end

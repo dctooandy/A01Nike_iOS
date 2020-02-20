@@ -14,11 +14,10 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="consecutive_wins" translatesAutoresizingMaskIntoConstraints="NO" id="wC2-z6-3Q6">
-                    <rect key="frame" x="57" y="298" width="300" height="300"/>
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="online_save_discount" translatesAutoresizingMaskIntoConstraints="NO" id="wC2-z6-3Q6">
+                    <rect key="frame" x="0.0" y="298" width="414" height="300"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="300" id="fHn-xU-dny"/>
-                        <constraint firstAttribute="width" constant="300" id="hMI-1m-jIc"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZ3-lX-9di">
@@ -27,18 +26,33 @@
                         <constraint firstAttribute="height" constant="51" id="x9j-tl-Lri"/>
                         <constraint firstAttribute="width" constant="32" id="ysX-zW-Lby"/>
                     </constraints>
-                    <state key="normal" image="consecutive_close"/>
+                    <state key="normal" image="online_discount_close"/>
                     <connections>
                         <action selector="closeBtn_click:" destination="iN0-l3-epB" eventType="touchUpInside" id="HBl-3j-K9n"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cpk-1Y-Lgk">
+                    <rect key="frame" x="133" y="538" width="148" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="C8f-GE-Bix"/>
+                        <constraint firstAttribute="width" constant="148" id="EDM-Wi-0V1"/>
+                    </constraints>
+                    <state key="normal" image="online_save_discount_btn"/>
+                    <connections>
+                        <action selector="joinBtn_click:" destination="iN0-l3-epB" eventType="touchUpInside" id="fsO-Uq-XaZ"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="wC2-z6-3Q6" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="55O-3V-pR8"/>
+                <constraint firstItem="wC2-z6-3Q6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="9bk-BR-6AX"/>
                 <constraint firstItem="wC2-z6-3Q6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="FYQ-Tf-Rgq"/>
                 <constraint firstItem="JZ3-lX-9di" firstAttribute="top" secondItem="wC2-z6-3Q6" secondAttribute="bottom" constant="-3" id="SmW-t8-fs5"/>
+                <constraint firstItem="cpk-1Y-Lgk" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="VOI-se-2VA"/>
                 <constraint firstItem="JZ3-lX-9di" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aCA-av-9td"/>
+                <constraint firstItem="JZ3-lX-9di" firstAttribute="top" secondItem="cpk-1Y-Lgk" secondAttribute="bottom" constant="21" id="c0d-rR-ZT5"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="wC2-z6-3Q6" secondAttribute="trailing" id="hVw-Y3-SxC"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
@@ -48,7 +62,8 @@
         </view>
     </objects>
     <resources>
-        <image name="consecutive_close" width="32" height="51"/>
-        <image name="consecutive_wins" width="327" height="320"/>
+        <image name="online_discount_close" width="35.5" height="56"/>
+        <image name="online_save_discount" width="358.5" height="284.5"/>
+        <image name="online_save_discount_btn" width="147.5" height="37.5"/>
     </resources>
 </document>

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,22 +34,39 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="存款前务必核对最新收款账户，入款至停用账户将无法添加额度!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afh-Wv-WXP">
-                        <rect key="frame" x="92.5" y="15" width="267.5" height="31.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="存款前务必核对最新收款账户，入款至停用账户将无法添加额度" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afh-Wv-WXP">
+                        <rect key="frame" x="15" y="40.5" width="344" height="16.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.90588235294117647" blue="0.40392156862745099" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pNI-9n-vjM">
+                        <rect key="frame" x="261" y="12" width="98" height="22.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="98" id="G99-hy-PXk"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="  存款小助手" image="recharge_assistant">
+                            <color key="titleColor" red="1" green="0.8862745098" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="rechargeAssistant_click:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Kdf-tb-Qut"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="Eb2-Ph-UNr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="1Z6-xK-yMb"/>
+                <constraint firstItem="afh-Wv-WXP" firstAttribute="leading" secondItem="Eb2-Ph-UNr" secondAttribute="leading" id="38N-Dn-Qeo"/>
+                <constraint firstItem="afh-Wv-WXP" firstAttribute="top" secondItem="pKd-ph-uLn" secondAttribute="bottom" constant="6" id="3oC-Jt-qnY"/>
                 <constraint firstItem="pKd-ph-uLn" firstAttribute="leading" secondItem="Eb2-Ph-UNr" secondAttribute="trailing" constant="15" id="4bS-gc-GHL"/>
-                <constraint firstAttribute="trailing" secondItem="afh-Wv-WXP" secondAttribute="trailing" constant="15" id="Ryh-kl-NzT"/>
-                <constraint firstItem="afh-Wv-WXP" firstAttribute="leading" secondItem="pKd-ph-uLn" secondAttribute="trailing" constant="8" id="Zn9-1p-k00"/>
+                <constraint firstItem="afh-Wv-WXP" firstAttribute="top" secondItem="pNI-9n-vjM" secondAttribute="bottom" constant="6" id="8vy-Xh-4Th"/>
+                <constraint firstAttribute="trailing" secondItem="afh-Wv-WXP" secondAttribute="trailing" constant="16" id="BBh-yj-O4m"/>
+                <constraint firstItem="pNI-9n-vjM" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="12" id="UTh-5Q-3id"/>
                 <constraint firstItem="Eb2-Ph-UNr" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="ZvI-KH-ul5"/>
                 <constraint firstItem="pKd-ph-uLn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="hQt-3Y-iXP"/>
-                <constraint firstItem="afh-Wv-WXP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="kqG-h5-qqV"/>
+                <constraint firstAttribute="bottom" secondItem="afh-Wv-WXP" secondAttribute="bottom" constant="6" id="rvg-52-Iha"/>
+                <constraint firstAttribute="trailing" secondItem="pNI-9n-vjM" secondAttribute="trailing" constant="16" id="v0u-W4-JfF"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="375" height="67"/>
@@ -60,5 +75,6 @@
     </objects>
     <resources>
         <image name="me_deposit" width="21.5" height="18"/>
+        <image name="recharge_assistant" width="18" height="18"/>
     </resources>
 </document>

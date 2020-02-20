@@ -27,7 +27,7 @@
         self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBigOneMore) {
         self.xiaoZhuShowBtn.hidden = YES;
     } else {
-        self.xiaoZhuShowBtn.hidden = NO;
+        self.xiaoZhuShowBtn.hidden = YES;
     }
 }
 

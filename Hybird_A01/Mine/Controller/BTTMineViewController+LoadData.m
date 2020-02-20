@@ -310,10 +310,6 @@
                     [self.normalDataTwo addObject:mainModel];
                 }
                 
-                
-                
-                
-                
                 if (self.bigDataSoure.count && self.normalDataSoure.count && self.normalDataTwo.count) {
                     self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
                     self.saveMoneyCount = 4;

@@ -21,8 +21,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
-    [self.activityImage addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+//    [self.activityImage addGestureRecognizer:tap];
 }
 
 - (void)tap {
@@ -33,6 +33,11 @@
 - (IBAction)closeBtn_click:(id)sender {
     if (self.dismissBlock) {
         self.dismissBlock();
+    }
+}
+- (IBAction)joinBtn_click:(id)sender {
+    if (self.tapActivity) {
+        self.tapActivity();
     }
 }
 

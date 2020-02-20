@@ -234,6 +234,10 @@
         }
     } else if (indexPath.row == 1) {
         BTTMeMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoneyHeaderCell" forIndexPath:indexPath];
+        weakSelf(weakSelf)
+        cell.rechargeAssistantTap = ^{
+            [weakSelf pushToRechargeAssistantViewController];
+        };
         return cell;
     } else if (indexPath.row >= 2 && indexPath.row <= 2 + self.saveMoneyCount - 1) {
         if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
@@ -242,9 +246,6 @@
                 cell.saveMoneyShowType = self.saveMoneyShowType;
                 cell.dataSource = self.bigDataSoure;
                 weakSelf(weakSelf);
-                cell.assistantTap = ^{
-                    [weakSelf pushToRechargeAssistantViewController];
-                };
                 cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTMeMainModel *model = value;
@@ -275,9 +276,6 @@
             cell.dataSource = self.bigDataSoure;
             cell.saveMoneyShowType = self.saveMoneyShowType;
             weakSelf(weakSelf);
-            cell.assistantTap = ^{
-                [weakSelf pushToRechargeAssistantViewController];
-            };
             cell.clickEventBlock = ^(id _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTMeMainModel *model = value;
@@ -314,9 +312,6 @@
                 cell.dataSource = self.bigDataSoure;
                 cell.saveMoneyShowType = self.saveMoneyShowType;
                 weakSelf(weakSelf);
-                cell.assistantTap = ^{
-                    [weakSelf pushToRechargeAssistantViewController];
-                };
                 cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTMeMainModel *model = value;
@@ -367,12 +362,19 @@
 }
 
 - (void)pushToRechargeAssistantViewController{
+    if (![IVNetwork savedUserInfo]) {
+        [MBProgressHUD showError:@"请先登录" toView:nil];
+        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
     BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
     vc.title = @"存款小助手";
     vc.webConfigModel.theme = @"outside";
     vc.webConfigModel.newView = YES;
     vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/rechargeAssistant"];
     [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)goSaveMoneyWithModel:(BTTMeMainModel *)model {
@@ -609,7 +611,6 @@
             [IVNetwork cleanUserInfo];
             [IVHttpManager shareManager].loginName = @"";
             [strongSelf.navigationController popToRootViewControllerAnimated:NO];
-            [MBProgressHUD showSuccess:@"退出成功" toView:nil];
             strongSelf.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
             strongSelf.saveMoneyTimesType = BTTSaveMoneyTimesTypeLessTen;
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
@@ -618,6 +619,7 @@
             [strongSelf loadPaymentDefaultData];
             [strongSelf setupElements];
             strongSelf.totalAmount = @"-";
+            [MBProgressHUD showSuccess:@"退出成功" toView:nil];
         };
     }
 }

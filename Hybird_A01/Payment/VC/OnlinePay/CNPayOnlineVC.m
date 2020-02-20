@@ -88,9 +88,9 @@
     self.amountTF.text = @"";
     // 金额提示语
     if (model.maxAmount > model.minAmount) {
-        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%ldf，最多%ldf", model.minAmount, model.maxAmount];
+        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%ld，最多%ld", model.minAmount, model.maxAmount];
     } else {
-        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%ldf", model.minAmount];
+        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%ld", model.minAmount];
     }
 }
 

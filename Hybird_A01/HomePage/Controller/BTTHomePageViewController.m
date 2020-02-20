@@ -40,6 +40,8 @@
 #import "BTTOtherGameCell.h"
 #import "BTTHotPromotionsCell.h"
 #import "BTTConsetiveWinsPopView.h"
+#import "BTTLive800ViewController.h"
+#import "CLive800Manager.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -100,15 +102,8 @@
         [[NSUserDefaults standardUserDefaults]setObject:timeStamp1 forKey:BTTConsetiveWinsToday];
     }else{
         BOOL isSameDay = [PublicMethod isDateToday:[PublicMethod transferDateStringToDate:timeStamp]];
-        
         if (!isSameDay) {
-            NSString *timeStamp1 = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
-            [[NSUserDefaults standardUserDefaults]setObject:timeStamp1 forKey:BTTConsetiveWinsToday];
-            NSDate *startDate = [PublicMethod transferDateStringToDate:@"2020-01-18 00:00:00"];
-            NSDate *endDate = [PublicMethod transferDateStringToDate:@"2020-02-09 23:59:59"];
-            if ([PublicMethod date:[NSDate date] isBetweenDate:startDate andDate:endDate]) {
-                [self showCWpopView];
-            }
+            [self showCWpopView];
         }
     }
 }
@@ -121,11 +116,7 @@
     [popView pop];
     alertView.tapActivity = ^{
         [popView dismiss];
-        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.webConfigModel.url = [NSString stringWithFormat:@"%@#/activity_pages/win_champions",[IVNetwork h5Domain]];
-        vc.webConfigModel.newView = YES;
-        vc.webConfigModel.theme = @"outside";
-        [self.navigationController pushViewController:vc animated:YES];
+        [[CLive800Manager sharedInstance] startLive800Chat:self];
     };
     alertView.dismissBlock = ^{
         [popView dismiss];

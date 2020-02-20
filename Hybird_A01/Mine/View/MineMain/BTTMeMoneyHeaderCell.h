@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTMeMoneyHeaderCell : BTTBaseCollectionViewCell
 
+@property (nonatomic, copy) void(^rechargeAssistantTap)(void);
+
 @end
 
 NS_ASSUME_NONNULL_END
