@@ -93,7 +93,7 @@
         case CNPaymentWechatBarCode:
         case CNPaymentBTC:
         case CNPaymentUnionApp:
-//        case CNPaymentOnline:
+        case CNPaymentOnline:
         {
             [viewControllers addObjectsFromArray:[self onlinePay:payment]];
         }

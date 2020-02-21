@@ -21,6 +21,7 @@
 #import "IVPublicAPIManager.h"
 #import "IVCheckNetworkWrapper.h"
 #import "IVUzipWrapper.h"
+#import "IVKUpdateViewController.h"
 
 @interface AppDelegate ()<UNUserNotificationCenterDelegate,OpenInstallDelegate>
 
@@ -46,7 +47,7 @@
 #else
         if (EnvirmentType == 2) {
             //监听网关切换
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gatewaySwitchNotification:) name:IVGatewaySwitchNotification object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gatewaySwitchNotification:) name:IVNGatewaySwitchNotification object:nil];
         }
 #endif
     }
@@ -108,10 +109,6 @@
             }
         }
     }];
-    
-    [IVPublicAPIManager checkAppUpdateWithH5Version:1 callBack:^(IVPCheckUpdateModel * _Nonnull result, IVJResponseObject * _Nonnull response) {
-        NSLog(@"%@",result.appDownUrl);
-    }];
 
 }
 
@@ -128,6 +125,7 @@
     [CNPreCacheMananger prepareCacheDataNormal];
     [CNPreCacheMananger prepareCacheDataNeedLogin];
     [OpenInstallSDK initWithDelegate:self];
+    
     return YES;
 }
 

@@ -23,6 +23,9 @@
 @property (nonatomic, copy) NSString *maxamount;
 @end
 
+#define NUM @"0123456789."//只输入数字
+#define ALPHANUM @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"//数字和字母
+
 @implementation CNPayUSDTQRSecondVC
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -118,6 +121,7 @@
     _infoLabel.text = [NSString stringWithFormat:@"  %@  ",verifyCode];
     _accountNameLabel.text = realName;
     
+    _walletAddressInputField.delegate = self;
     _saveInputField.delegate = self;
     [_saveInputField addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
 }
@@ -129,6 +133,35 @@
     }else{
         _recivedAmountLabel.text = @"0";
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField==_walletAddressInputField) {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:ALPHANUM] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return [string isEqualToString:filtered];
+    }else{
+        NSString *toString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+       
+        if (toString.length > 0) {
+
+        NSString *stringRegex = @"(\\+|\\-)?(([0]|(0[.]\\d{0,2}))|([1-9]\\d{0,9}(([.]\\d{0,2})?)))?";
+
+        NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", stringRegex];
+
+        BOOL flag = [phoneTest evaluateWithObject:toString];
+
+        if (!flag) {
+
+        return NO;
+
+        }
+
+        }
+        return YES;
+    }
+    
 }
 
 @end

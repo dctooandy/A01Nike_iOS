@@ -9,12 +9,11 @@
 #import "BTTBindingMobileOneCell.h"
 #import "BTTMeMainModel.h"
 
+#define ALPHANUM @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"//数字和字母
+
 @interface BTTBindingMobileOneCell ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-
-
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightConstants;
 @end
 
@@ -45,6 +44,19 @@
     if (_textFieldChanged) {
         _textFieldChanged(_textField.text);
     }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([self.model.name isEqualToString:@"钱包地址"]||[self.model.name isEqualToString:@"确认地址"]) {
+        NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:ALPHANUM] invertedSet];
+        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return [string isEqualToString:filtered];
+    }else{
+        return YES;
+    }
+    
+    
 }
 
 - (void)setModel:(BTTMeMainModel *)model {

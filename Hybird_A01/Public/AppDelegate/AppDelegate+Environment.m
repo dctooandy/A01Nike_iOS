@@ -16,7 +16,8 @@
 #import "IVGameUtility.h"
 #import "BTTRequestPrecache.h"
 #import "IVCheckNetworkWrapper.h"
-
+#import "IVKUpdateViewController.h"
+#import "IVPublicAPIManager.h"
 
 @implementation AppDelegate (Environment)
 
@@ -46,6 +47,9 @@
     [IVHttpManager shareManager].parentId = [HAInitConfig appKey];  // 渠道号
     [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
     [IVHttpManager shareManager].productCode = [HAInitConfig appKey]; // 产品码
+    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+    NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
+    [IVHttpManager shareManager].globalHeaders = @{@"v": appVersion};
     if ([IVNetwork savedUserInfo]) {
         [IVHttpManager shareManager].loginName = [IVNetwork savedUserInfo].loginName;
     }
@@ -61,7 +65,6 @@
     [IVHttpManager shareManager].domain = [IVCacheWrapper objectForKey:IVCacheH5DomainKey] ? : [HAInitConfig defaultH5Domain];
      //cdn,先从缓存取，缓存没有使用默认配置
     [IVHttpManager shareManager].cdn = [IVCacheWrapper objectForKey:IVCacheCDNKey] ? : [HAInitConfig defaultCDN];
-    [IVHttpManager shareManager].globalHeaders = @{@"v" : @"1.0.0"};
     [IN3SAnalytics debugEnable:YES];
     [IN3SAnalytics setUserName:[IVHttpManager shareManager].loginName];
     [[CNTimeLog shareInstance] configProduct:@"A01"];
@@ -83,6 +86,12 @@
                                           progress:nil
                                         completion:nil
      ];
+    
+    [IVPublicAPIManager checkAppUpdateWithH5Version:1 callBack:^(IVPCheckUpdateModel * _Nonnull result, IVJResponseObject * _Nonnull response) {
+        if (result.flag!=0) {
+            [IVKUpdateViewController showWithUrl:result.appDownUrl content:result.upgradeDesc originVersion:result.versionCode isForce:result.flag==2 isManual:NO];
+        }
+    }];
 }
 
 - (void)setupRedDot {

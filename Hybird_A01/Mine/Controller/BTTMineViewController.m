@@ -372,7 +372,7 @@
     vc.title = @"存款小助手";
     vc.webConfigModel.theme = @"outside";
     vc.webConfigModel.newView = YES;
-    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/rechargeAssistant"];
+    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/toAssistant"];
     [self.navigationController pushViewController:vc animated:YES];
     
 }

@@ -518,14 +518,12 @@
 		3AB0688321A6471C00072FB7 /* BTTBetLimitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0688221A6471C00072FB7 /* BTTBetLimitModel.m */; };
 		3AB0688B21A677F700072FB7 /* BTTBookMessageController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0688A21A677F700072FB7 /* BTTBookMessageController+LoadData.m */; };
 		3AB0688E21A679DE00072FB7 /* BTTSMSEmailModifyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB0688D21A679DE00072FB7 /* BTTSMSEmailModifyModel.m */; };
-		3ABCB2B42257398C001C084F /* IN3SAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ABCB2B32257398C001C084F /* IN3SAnalytics.framework */; };
 		3AC3FFA1219AB8CC008AECCB /* BTTAnimationPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA0219AB8CC008AECCB /* BTTAnimationPopView.m */; };
 		3AC3FFA4219ABEBF008AECCB /* BTTUnlockPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA3219ABEBF008AECCB /* BTTUnlockPopView.m */; };
 		3AC3FFA6219ABED9008AECCB /* BTTUnlockPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA5219ABED8008AECCB /* BTTUnlockPopView.xib */; };
 		3AC3FFA9219ACD48008AECCB /* BTTLoginOrRegisterViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA8219ACD48008AECCB /* BTTLoginOrRegisterViewController+UI.m */; };
 		3AC3FFAD219BB19E008AECCB /* BTTLoginCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFAB219BB19E008AECCB /* BTTLoginCodeCell.m */; };
 		3AC3FFB0219BB1D0008AECCB /* BTTLoginCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC3FFAF219BB1D0008AECCB /* BTTLoginCodeCell.xib */; };
-		3AD1A9382237B49000515628 /* IN3SResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3AD1A9362237B49000515628 /* IN3SResource.bundle */; };
 		3AD1A93C2237B4B200515628 /* CNTimeLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1A93A2237B4B200515628 /* CNTimeLog.m */; };
 		3AD4C9C321635AEC00FC0A63 /* app.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AD4C9C221635AEC00FC0A63 /* app.json */; };
 		3AD9CD532165B2C900685B43 /* BTTPopoverAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CD4E2165B2C900685B43 /* BTTPopoverAction.m */; };
@@ -690,6 +688,8 @@
 		D35BF24323B451340085D6A1 /* CNPayUSDTQRSecondVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35BF23E23B451330085D6A1 /* CNPayUSDTQRSecondVC.xib */; };
 		D365536623C05739007E50BE /* BTTPayUsdtNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D365536523C05739007E50BE /* BTTPayUsdtNoticeView.m */; };
 		D365536823C05755007E50BE /* BTTPayUsdtNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D365536723C05755007E50BE /* BTTPayUsdtNoticeView.xib */; };
+		D3708E1A23FE800400602715 /* IN3SAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3708E1823FE800400602715 /* IN3SAnalytics.framework */; };
+		D3708E1B23FE800400602715 /* IN3SResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3708E1923FE800400602715 /* IN3SResource.bundle */; };
 		D3896A5123F5380900D48271 /* BTTPointCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3896A5023F5380900D48271 /* BTTPointCardModel.m */; };
 		D39D7C0323CEFA5B00898546 /* BTTUsdtTodayNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D39D7C0223CEFA5B00898546 /* BTTUsdtTodayNoticeView.m */; };
 		D39D7C0823CF19C500898546 /* BTTUsdtTodayNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39D7C0723CF19C500898546 /* BTTUsdtTodayNoticeView.xib */; };
@@ -1556,7 +1556,6 @@
 		3AB0688A21A677F700072FB7 /* BTTBookMessageController+LoadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTBookMessageController+LoadData.m"; sourceTree = "<group>"; };
 		3AB0688C21A679DE00072FB7 /* BTTSMSEmailModifyModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTSMSEmailModifyModel.h; sourceTree = "<group>"; };
 		3AB0688D21A679DE00072FB7 /* BTTSMSEmailModifyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTSMSEmailModifyModel.m; sourceTree = "<group>"; };
-		3ABCB2B32257398C001C084F /* IN3SAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IN3SAnalytics.framework; sourceTree = "<group>"; };
 		3AC3FF9F219AB8CC008AECCB /* BTTAnimationPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTAnimationPopView.h; sourceTree = "<group>"; };
 		3AC3FFA0219AB8CC008AECCB /* BTTAnimationPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTAnimationPopView.m; sourceTree = "<group>"; };
 		3AC3FFA2219ABEBF008AECCB /* BTTUnlockPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUnlockPopView.h; sourceTree = "<group>"; };
@@ -1567,7 +1566,6 @@
 		3AC3FFAA219BB19E008AECCB /* BTTLoginCodeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLoginCodeCell.h; sourceTree = "<group>"; };
 		3AC3FFAB219BB19E008AECCB /* BTTLoginCodeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLoginCodeCell.m; sourceTree = "<group>"; };
 		3AC3FFAF219BB1D0008AECCB /* BTTLoginCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLoginCodeCell.xib; sourceTree = "<group>"; };
-		3AD1A9362237B49000515628 /* IN3SResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IN3SResource.bundle; sourceTree = "<group>"; };
 		3AD1A93A2237B4B200515628 /* CNTimeLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNTimeLog.m; sourceTree = "<group>"; };
 		3AD1A93B2237B4B200515628 /* CNTimeLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNTimeLog.h; sourceTree = "<group>"; };
 		3AD4C9C221635AEC00FC0A63 /* app.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app.json; sourceTree = "<group>"; };
@@ -1846,6 +1844,8 @@
 		D365536423C05739007E50BE /* BTTPayUsdtNoticeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPayUsdtNoticeView.h; sourceTree = "<group>"; };
 		D365536523C05739007E50BE /* BTTPayUsdtNoticeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPayUsdtNoticeView.m; sourceTree = "<group>"; };
 		D365536723C05755007E50BE /* BTTPayUsdtNoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTPayUsdtNoticeView.xib; sourceTree = "<group>"; };
+		D3708E1823FE800400602715 /* IN3SAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IN3SAnalytics.framework; sourceTree = "<group>"; };
+		D3708E1923FE800400602715 /* IN3SResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IN3SResource.bundle; sourceTree = "<group>"; };
 		D3896A4F23F5380900D48271 /* BTTPointCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPointCardModel.h; sourceTree = "<group>"; };
 		D3896A5023F5380900D48271 /* BTTPointCardModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPointCardModel.m; sourceTree = "<group>"; };
 		D39D7C0123CEFA5B00898546 /* BTTUsdtTodayNoticeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUsdtTodayNoticeView.h; sourceTree = "<group>"; };
@@ -2029,7 +2029,7 @@
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
 				3AD9CE2F2167107B00685B43 /* libpjsip-simple-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE332167107B00685B43 /* libsrtp-arm-apple-darwin9.a in Frameworks */,
-				3ABCB2B42257398C001C084F /* IN3SAnalytics.framework in Frameworks */,
+				D3708E1A23FE800400602715 /* IN3SAnalytics.framework in Frameworks */,
 				3AD9CE302167107B00685B43 /* libpjsip-ua-arm-apple-darwin9.a in Frameworks */,
 				7729DAB2DEBC453514E22B44 /* libPods-Hybird_A01.a in Frameworks */,
 				3AD9CE2E2167107B00685B43 /* libpjsip-arm-apple-darwin9.a in Frameworks */,
@@ -2995,8 +2995,8 @@
 		3A8F516A215F75C70069D1B3 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				3ABCB2B32257398C001C084F /* IN3SAnalytics.framework */,
-				3AD1A9362237B49000515628 /* IN3SResource.bundle */,
+				D3708E1823FE800400602715 /* IN3SAnalytics.framework */,
+				D3708E1923FE800400602715 /* IN3SResource.bundle */,
 				3AD9CF01216C423900685B43 /* tingyunApp.framework */,
 			);
 			path = Framework;
@@ -4750,6 +4750,7 @@
 				3AD9CF8A216F4E5400685B43 /* BTTHomePageDiscountCell.xib in Resources */,
 				3AC3FFA6219ABED9008AECCB /* BTTUnlockPopView.xib in Resources */,
 				3A5AE69F22D6E22A0013E8A3 /* MMVideoPreviewPlay@2x.png in Resources */,
+				D3708E1B23FE800400602715 /* IN3SResource.bundle in Resources */,
 				3A5AE6EC22D6E22A0013E8A3 /* LIVDefaultImageThumbnail@2x.png in Resources */,
 				3A5AE6E322D6E22A0013E8A3 /* LIVUserDefaultAvatar@2x.png in Resources */,
 				3A5AE69622D6E22A0013E8A3 /* LIVVideoCamera_flashOff@3x.png in Resources */,
@@ -4808,7 +4809,6 @@
 				D5DBEB4521AD3721008AF629 /* CNPayQRStep2VC.xib in Resources */,
 				3ADD23FB2179CA8C00FA959A /* BTTAccountBlanceHeaderCell.xib in Resources */,
 				3A5AE6C222D6E22A0013E8A3 /* liv_radio_selected@3x.png in Resources */,
-				3AD1A9382237B49000515628 /* IN3SResource.bundle in Resources */,
 				3AAE8223219A738B003EC8B0 /* BTTRegisterQuickAutoCell.xib in Resources */,
 				3AE1EB0F218047050073A32D /* BTTCardModifyCell.xib in Resources */,
 				3AD9CF73216F3D6800685B43 /* BTTHomePageAppsCell.xib in Resources */,
@@ -5505,7 +5505,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 3.0.53;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5545,7 +5545,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 3.0.53;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

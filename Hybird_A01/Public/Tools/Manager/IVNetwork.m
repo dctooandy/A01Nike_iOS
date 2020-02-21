@@ -32,8 +32,8 @@
 + (void)checkAppUpdate{
     NSInteger h5Version = [[IVUzipWrapper getLocalH5Version] integerValue];
     [IVPublicAPIManager checkAppUpdateWithH5Version:h5Version callBack:^(IVPCheckUpdateModel * _Nonnull result, IVJResponseObject * _Nonnull response) {
-        //模拟普通更新
-        [IVKUpdateViewController showWithUrl:@"http://www.sdfsf.com" content:@"修复bug" originVersion:@"3.0.0" isForce:NO isManual:YES];
+        
+        [IVKUpdateViewController showWithUrl:result.appDownUrl content:result.upgradeDesc originVersion:result.versionCode isForce:result.flag==2 isManual:YES];
     }];
 }
 
