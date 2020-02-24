@@ -26,52 +26,52 @@
 
 - (void)login {
     
-    BTTLoginAPIModel *model = [[BTTLoginAPIModel alloc] init];
-    model.timestamp = [PublicMethod timeIntervalSince1970];
-    NSIndexPath *loginCellIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
-    NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-    BOOL isValid = NO;
-    if (self.loginCellType == BTTLoginCellTypeNormal) {
-        BTTLoginCell *cell = (BTTLoginCell *)[self.collectionView cellForItemAtIndexPath:loginCellIndexPath];
-        model.login_name = [NSString stringWithFormat:@"%@",cell.accountTextField.text];
-        model.password = cell.pwdTextField.text;
-        isValid = [predicate evaluateWithObject:model.login_name];
-    } else {
-        BTTLoginCodeCell *cell = (BTTLoginCodeCell *)[self.collectionView cellForItemAtIndexPath:loginCellIndexPath];
-        model.login_name = [NSString stringWithFormat:@"%@",cell.accountTextField.text];
-        model.password = cell.pwdTextField.text;
-        model.code = cell.codeTextField.text;
-        isValid = [predicate evaluateWithObject:model.login_name];
-        
-    }
-    if (!model.login_name.length) {
-        [MBProgressHUD showError:@"请输入账号" toView:self.view];
-        return;
-    }
-    
-    if ([PublicMethod isChinese:model.login_name]) {
-        
-    } else {
-        if (![model.login_name hasPrefix:@"g"] && ![PublicMethod isValidatePhone:model.login_name]) {
-            [MBProgressHUD showError:@"请输入以g开头真钱账号" toView:self.view];
-            return;
-        }
-    }
-    
-    if (!model.password.length && ![PublicMethod isValidatePhone:model.login_name]) {
-        [MBProgressHUD showError:@"请输入密码" toView:self.view];
-        return;
-    }
-    
-    
-    
-    if (!model.code.length && self.loginCellType == BTTLoginCellTypeCode) {
-        [MBProgressHUD showError:@"请输入验证码" toView:self.view];
-        return;
-    }
-    [self showLoading];
-    [self loginWithLoginAPIModel:model isBack:YES];
+//    BTTLoginAPIModel *model = [[BTTLoginAPIModel alloc] init];
+//    model.timestamp = [PublicMethod timeIntervalSince1970];
+//    NSIndexPath *loginCellIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+//    NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+//    BOOL isValid = NO;
+//    if (self.loginCellType == BTTLoginCellTypeNormal) {
+//        BTTLoginCell *cell = (BTTLoginCell *)[self.collectionView cellForItemAtIndexPath:loginCellIndexPath];
+//        model.login_name = [NSString stringWithFormat:@"%@",cell.accountTextField.text];
+//        model.password = cell.pwdTextField.text;
+//        isValid = [predicate evaluateWithObject:model.login_name];
+//    } else {
+//        BTTLoginCodeCell *cell = (BTTLoginCodeCell *)[self.collectionView cellForItemAtIndexPath:loginCellIndexPath];
+//        model.login_name = [NSString stringWithFormat:@"%@",cell.accountTextField.text];
+//        model.password = cell.pwdTextField.text;
+//        model.code = cell.codeTextField.text;
+//        isValid = [predicate evaluateWithObject:model.login_name];
+//
+//    }
+//    if (!model.login_name.length) {
+//        [MBProgressHUD showError:@"请输入账号" toView:self.view];
+//        return;
+//    }
+//
+//    if ([PublicMethod isChinese:model.login_name]) {
+//
+//    } else {
+//        if (![model.login_name hasPrefix:@"g"] && ![PublicMethod isValidatePhone:model.login_name]) {
+//            [MBProgressHUD showError:@"请输入以g开头真钱账号" toView:self.view];
+//            return;
+//        }
+//    }
+//
+//    if (!model.password.length && ![PublicMethod isValidatePhone:model.login_name]) {
+//        [MBProgressHUD showError:@"请输入密码" toView:self.view];
+//        return;
+//    }
+//
+//
+//
+//    if (!model.code.length && self.loginCellType == BTTLoginCellTypeCode) {
+//        [MBProgressHUD showError:@"请输入验证码" toView:self.view];
+//        return;
+//    }
+//    [self showLoading];
+//    [self loginWithLoginAPIModel:model isBack:YES];
 }
 
 - (void)showPopViewWithAccounts:(NSArray *)accounts withPhone:(NSString *)codePhone withValidateId:(NSString *)validateId messageId:(NSString *)messageId smsCode:(NSString *)smsCode isBack:(BOOL)isback{
@@ -183,22 +183,22 @@
             }
             [MBProgressHUD showError:result.head.errMsg toView:nil];
             
-            if ([result.head.errCode isEqualToString:@"GW_800408"]) {
-                self.wrongPwdNum++;
-                if (self.wrongPwdNum >= 2) {
-                    self.loginCellType = BTTLoginCellTypeCode;
-                    [self loadVerifyCode];
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        [self setupElements];
-                    });
-                }
-            }else if ([result.head.errCode isEqualToString:@"GW_800101"]){
-                self.loginCellType = BTTLoginCellTypeCode;
-                [self loadVerifyCode];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self setupElements];
-                });
-            }
+//            if ([result.head.errCode isEqualToString:@"GW_800408"]) {
+//                self.wrongPwdNum++;
+//                if (self.wrongPwdNum >= 2) {
+//                    self.loginCellType = BTTLoginCellTypeCode;
+//                    [self loadVerifyCode];
+//                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                        [self setupElements];
+//                    });
+//                }
+//            }else if ([result.head.errCode isEqualToString:@"GW_800101"]){
+//                self.loginCellType = BTTLoginCellTypeCode;
+//                [self loadVerifyCode];
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    [self setupElements];
+//                });
+//            }
         }
         
     }];
@@ -224,90 +224,90 @@
 
 // 普通开户
 - (void)registerAction {
-    BTTCreateAPIModel *model = [[BTTCreateAPIModel alloc] init];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
-    if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
-        BTTRegisterNormalCell *cell = (BTTRegisterNormalCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-        model.phone = cell.phoneTextField.text;
-        model.catpcha = cell.verifyTextField.text;
-        
-        if (!model.phone.length) {
-            [MBProgressHUD showError:@"请输入手机号" toView:self.view];
-            return;
-        }
-        
-        if (model.phone.length) {
-            NSString *phoneregex = @"^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
-            NSPredicate *phonepredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneregex];
-            BOOL isphone = [phonepredicate evaluateWithObject:model.phone];
-            if (!isphone) {
-                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
-                return;
-            }
-        }
-        if (!model.catpcha.length) {
-            [MBProgressHUD showError:@"请输入验证码" toView:self.view];
-            return;
-        }
-        model.v = @"check";
-        [self createAccountNormalWithAPIModel:model];
-    } else if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
-        if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
-            BTTRegisterQuickAutoCell *cell = (BTTRegisterQuickAutoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-            model.phone = cell.phoneTextField.text;
-            model.verify_code = cell.verifyTextField.text;
-            model.login_name = [self getRandomNameWithPhone:model.phone];
-            if (!model.phone.length) {
-                [MBProgressHUD showError:@"请输入手机号" toView:self.view];
-                return;
-            }
-            if (![PublicMethod isValidatePhone:model.phone]) {
-                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
-                return;
-            }
-            if (!model.verify_code.length) {
-                [MBProgressHUD showError:@"请输入验证码" toView:self.view];
-                return;
-            }
-            model.v = @"check";
-            [self verifySmsCodeWithModel:model];
-        } else {
-            BTTRegisterQuickManualCell *cell = (BTTRegisterQuickManualCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-            model.phone = cell.phoneTextField.text;
-            model.verify_code = cell.codeField.text;
-            model.login_name = [NSString stringWithFormat:@"g%@",cell.accountField.text];
-//            model.parent_id = [IVNetwork parentId];
-            
-            if (!model.phone.length) {
-                [MBProgressHUD showError:@"请输入手机号" toView:self.view];
-                return;
-            }
-            if (![PublicMethod isValidatePhone:model.phone]) {
-                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
-                return;
-            }
-            
-            NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-            BOOL isAccount = [predicate evaluateWithObject:model.login_name];
-            if (!isAccount) {
-                [MBProgressHUD showError:@"用户名为4-9位的数字或字母" toView:self.view];
-                return;
-            }
-            
-            if (!model.login_name.length) {
-                [MBProgressHUD showError:@"请输入账号" toView:self.view];
-                return;
-            }
-            if (!model.verify_code.length) {
-                [MBProgressHUD showError:@"请输入验证码" toView:self.view];
-                return;
-            }
-            model.v = @"check";
-            [self verifySmsCodeWithModel:model];
-            
-        } 
-    }
+//    BTTCreateAPIModel *model = [[BTTCreateAPIModel alloc] init];
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+//    if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
+//        BTTRegisterNormalCell *cell = (BTTRegisterNormalCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+//        model.phone = cell.phoneTextField.text;
+//        model.catpcha = cell.verifyTextField.text;
+//
+//        if (!model.phone.length) {
+//            [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+//            return;
+//        }
+//
+//        if (model.phone.length) {
+//            NSString *phoneregex = @"^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
+//            NSPredicate *phonepredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneregex];
+//            BOOL isphone = [phonepredicate evaluateWithObject:model.phone];
+//            if (!isphone) {
+//                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
+//                return;
+//            }
+//        }
+//        if (!model.catpcha.length) {
+//            [MBProgressHUD showError:@"请输入验证码" toView:self.view];
+//            return;
+//        }
+//        model.v = @"check";
+//        [self createAccountNormalWithAPIModel:model];
+//    } else if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
+//        if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
+//            BTTRegisterQuickAutoCell *cell = (BTTRegisterQuickAutoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+//            model.phone = cell.phoneTextField.text;
+//            model.verify_code = cell.verifyTextField.text;
+//            model.login_name = [self getRandomNameWithPhone:model.phone];
+//            if (!model.phone.length) {
+//                [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+//                return;
+//            }
+//            if (![PublicMethod isValidatePhone:model.phone]) {
+//                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
+//                return;
+//            }
+//            if (!model.verify_code.length) {
+//                [MBProgressHUD showError:@"请输入验证码" toView:self.view];
+//                return;
+//            }
+//            model.v = @"check";
+//            [self verifySmsCodeWithModel:model];
+//        } else {
+//            BTTRegisterQuickManualCell *cell = (BTTRegisterQuickManualCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+//            model.phone = cell.phoneTextField.text;
+//            model.verify_code = cell.codeField.text;
+//            model.login_name = [NSString stringWithFormat:@"g%@",cell.accountField.text];
+////            model.parent_id = [IVNetwork parentId];
+//
+//            if (!model.phone.length) {
+//                [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+//                return;
+//            }
+//            if (![PublicMethod isValidatePhone:model.phone]) {
+//                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
+//                return;
+//            }
+//
+//            NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
+//            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+//            BOOL isAccount = [predicate evaluateWithObject:model.login_name];
+//            if (!isAccount) {
+//                [MBProgressHUD showError:@"用户名为4-9位的数字或字母" toView:self.view];
+//                return;
+//            }
+//
+//            if (!model.login_name.length) {
+//                [MBProgressHUD showError:@"请输入账号" toView:self.view];
+//                return;
+//            }
+//            if (!model.verify_code.length) {
+//                [MBProgressHUD showError:@"请输入验证码" toView:self.view];
+//                return;
+//            }
+//            model.v = @"check";
+//            [self verifySmsCodeWithModel:model];
+//
+//        }
+//    }
 }
 
 - (void)verifySmsCodeWithModel:(BTTCreateAPIModel *)model{
@@ -493,7 +493,7 @@
                     //获取到验证码ID
                     self.captchaId = result.body[@"captchaId"];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.collectionView reloadData];
+//                        [self.collectionView reloadData];
                     });
                 }
             }
