@@ -44,7 +44,7 @@
         model.name = name;
         model.iconName = icons[index];
         model.available = YES;
-        if ([model.name isEqualToString:@"泰达币-USDT"] || [model.name isEqualToString:@"银联扫码"] || [model.name isEqualToString:@"微信扫码"] || [model.name isEqualToString:@"云闪付扫码"]||[model.name isEqualToString:@"币商充值"]) {
+        if ([model.name isEqualToString:@"银联扫码"] || [model.name isEqualToString:@"微信扫码"] || [model.name isEqualToString:@"云闪付扫码"]||[model.name isEqualToString:@"币商充值"]||[model.name isEqualToString:@"泰达币-USDT"]) {
             [self.bigDataSoure addObject:model];
         } else if ([model.name isEqualToString:@"QQ扫码"] ||
                    [model.name isEqualToString:@"京东扫码"] ||
@@ -114,7 +114,6 @@
 
 - (void)loadPersonalPaymentData:(NSMutableArray *)defaultArr {
     [CNPayRequestManager queryAllChannelCompleteHandler:^(id response,NSError * _Nullable error) {
-        NSLog(@"%@",response);
         IVJResponseObject *result = response;
         if (self.bigDataSoure.count) {
             [self.bigDataSoure removeAllObjects];
@@ -139,7 +138,6 @@
                     NSDictionary *dict = payTypeArray[i];
                     CNPaymentModel *model = [CNPaymentModel yy_modelWithJSON:dict];
                     [payments addObject:model];
-                    
                     
                     
                     if ([model.payTypeName isEqualToString:@"银联扫码"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {

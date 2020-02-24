@@ -98,13 +98,13 @@
     NSString *timeStamp = [[NSUserDefaults standardUserDefaults]objectForKey:BTTConsetiveWinsToday];
     if (timeStamp==nil) {
         [self showCWpopView];
-        NSString *timeStamp1 = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
-        [[NSUserDefaults standardUserDefaults]setObject:timeStamp1 forKey:BTTConsetiveWinsToday];
+        NSString *timeStampNew = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
+        [[NSUserDefaults standardUserDefaults]setObject:timeStampNew forKey:BTTConsetiveWinsToday];
     }else{
         BOOL isSameDay = [PublicMethod isDateToday:[PublicMethod transferDateStringToDate:timeStamp]];
         if (!isSameDay) {
-            NSString *timeStamp1 = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
-            [[NSUserDefaults standardUserDefaults]setObject:timeStamp1 forKey:BTTConsetiveWinsToday];
+            NSString *timeStampNew = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
+            [[NSUserDefaults standardUserDefaults]setObject:timeStampNew forKey:BTTConsetiveWinsToday];
             [self showCWpopView];
         }
     }
