@@ -12,6 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLoginInfoView : UIView
 
+@property (nonatomic, copy) void (^sendSmdCode)(NSString *phone);
+@property (nonatomic, copy) void (^tapLogin)(NSString *account,NSString *password);
+@property (nonatomic, copy) void (^tapRegister)(void);
+@property (nonatomic, copy) void (^tapForgetAccountAndPwd)(void);
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -9,7 +9,11 @@
 #import "BTTLoginInfoView.h"
 
 @interface BTTLoginInfoView()
-
+@property (nonatomic, strong) UITextField *pwdTextField;
+@property (nonatomic, strong) UITextField *accountTextField;
+@property (nonatomic, strong) UIButton *showPwdBtn;
+@property (nonatomic, assign) BOOL isCode;
+@property (nonatomic, strong) UIView *pwdView;
 @end
 
 @implementation BTTLoginInfoView
@@ -17,6 +21,7 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        _isCode = NO;
         UIView *accountView = [[UIView alloc]initWithFrame:CGRectMake(36, 0, SCREEN_WIDTH-72, 60)];
 //        accountView.backgroundColor = [UIColor yellowColor];
         [self addSubview:accountView];
@@ -33,12 +38,14 @@
         UITextField *accountField = [[UITextField alloc]init];
         accountField.font = [UIFont systemFontOfSize:16];
         accountField.textColor = [UIColor whiteColor];
+        [accountField addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"用户名/手机号" attributes:
         @{NSForegroundColorAttributeName:[UIColor whiteColor],
                      NSFontAttributeName:accountField.font
              }];
         accountField.attributedPlaceholder = attrString;
         [accountView addSubview:accountField];
+        _accountTextField = accountField;
         [accountField mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(accountView.mas_right);
             make.top.mas_equalTo(accountView.mas_top).offset(30);
@@ -52,6 +59,7 @@
         
         UIView *pwdView = [[UIView alloc]initWithFrame:CGRectMake(36, 60, SCREEN_WIDTH-72, 60)];
         [self addSubview:pwdView];
+        _pwdView = pwdView;
         
         UIImageView *pwdLeftImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_pwd"]];
         [pwdView addSubview:pwdLeftImg];
@@ -62,13 +70,16 @@
             make.height.mas_equalTo(18);
         }];
         UIButton *showPwdBtn = [[UIButton alloc]init];
-        [showPwdBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        showPwdBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [showPwdBtn setImage:[UIImage imageNamed:@"accountSafe_close"] forState:UIControlStateNormal];
+        [showPwdBtn addTarget:self action:@selector(showPwdSecurity) forControlEvents:UIControlEventTouchUpInside];
         [pwdView addSubview:showPwdBtn];
+        _showPwdBtn = showPwdBtn;
         [showPwdBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(pwdView.mas_right);
-            make.top.mas_equalTo(pwdView.mas_top).offset(30);
-            make.width.mas_equalTo(17);
-            make.height.mas_equalTo(30);
+            make.top.mas_equalTo(pwdView.mas_top).offset(35);
+            make.width.mas_equalTo(20);
+            make.height.mas_equalTo(20);
         }];
         //密码输入框
         UITextField *pwdField = [[UITextField alloc]init];
@@ -79,9 +90,11 @@
                      NSFontAttributeName:pwdField.font
              }];
         pwdField.attributedPlaceholder = attrStringPwd;
+        pwdField.secureTextEntry = YES;
         [pwdView addSubview:pwdField];
+        _pwdTextField = pwdField;
         [pwdField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(pwdView.mas_right).offset(17);
+            make.right.mas_equalTo(showPwdBtn.mas_left);
             make.top.mas_equalTo(pwdView.mas_top).offset(30);
             make.left.mas_equalTo(pwdLeftImg.mas_right).offset(12);
             make.height.mas_equalTo(30);
@@ -95,6 +108,7 @@
         [forgetPwdBtn setTitle:@"忘记账号,密码？" forState:UIControlStateNormal];
         [forgetPwdBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         forgetPwdBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [forgetPwdBtn addTarget:self action:@selector(forgetAccountAndPwd) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:forgetPwdBtn];
         [forgetPwdBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(pwdView.mas_bottom).offset(17);
@@ -111,6 +125,7 @@
         loginBtn.layer.borderColor = [UIColor whiteColor].CGColor;
         loginBtn.layer.borderWidth = 0.5;
         loginBtn.clipsToBounds = YES;
+        [loginBtn addTarget:self action:@selector(loginBtn_click) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:loginBtn];
         [loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(forgetPwdBtn.mas_bottom).offset(31);
@@ -128,7 +143,7 @@
         registerBtn.layer.borderWidth = 0.5;
         registerBtn.clipsToBounds = YES;
         registerBtn.backgroundColor = COLOR_RGBA(0, 126, 250, 0.85);
-        
+        [registerBtn addTarget:self action:@selector(registerBtn_click) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:registerBtn];
         [registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(loginBtn.mas_bottom).offset(11);
@@ -139,6 +154,134 @@
         
     }
     return self;
+}
+
+- (void)showPwdSecurity{
+    if (!_isCode) {
+        _pwdTextField.secureTextEntry = !_pwdTextField.isSecureTextEntry;
+        NSString *imgStr = _pwdTextField.isSecureTextEntry ? @"accountSafe_close" : @"accountSafe_Open";
+        [_showPwdBtn setImage:[UIImage imageNamed:imgStr] forState:UIControlStateNormal];
+    }
+}
+
+- (void)forgetAccountAndPwd{
+    
+}
+
+- (void)loginBtn_click{
+//    if (self.tapLogin) {
+//        self.tapLogin(<#NSString * _Nonnull account#>, <#NSString * _Nonnull password#>)
+//    }
+}
+
+- (void)registerBtn_click{
+    if (self.tapRegister) {
+        self.tapRegister();
+    }
+}
+
+- (void)sendSmsCode{
+    if (_isCode) {
+        if ([PublicMethod isValidatePhone:_accountTextField.text]) {
+            if (self.sendSmdCode) {
+                [self countDown];
+                self.sendSmdCode(_accountTextField.text);
+            }
+        }else{
+            [MBProgressHUD showError:@"请填写正确的手机号" toView:nil];
+        }
+    }
+}
+
+- (void)countDown {
+    __block int timeout = 60; // 倒计时时间
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0 * NSEC_PER_SEC, 0); // 每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        if(timeout <= 0){ //倒计时结束，关闭
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                self.showPwdBtn.enabled = YES;
+                self.showPwdBtn.titleLabel.text = @"重新发送";
+                [self.showPwdBtn setTitle:@"重新发送" forState:UIControlStateNormal];
+                self.showPwdBtn.backgroundColor = COLOR_RGBA(0, 126, 250, 0.85);
+            });
+        } else {
+            int seconds = timeout;
+            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];;
+            if (seconds < 10) {
+                strTime = [NSString stringWithFormat:@"%.1d", seconds];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                self.showPwdBtn.titleLabel.text = [NSString stringWithFormat:@"重新发送(%@)",strTime];
+                [self.showPwdBtn setTitle:[NSString stringWithFormat:@"重新发送(%@)",strTime] forState:UIControlStateNormal];
+                self.showPwdBtn.enabled = NO;
+                self.showPwdBtn.backgroundColor = [UIColor lightGrayColor];
+            });
+            
+            timeout--;
+        }
+        
+    });
+    dispatch_resume(_timer);
+    
+}
+
+
+- (void)textFieldDidChanged:(id)sender{
+    NSString *name = _accountTextField.text;
+    if (name.length>11) {
+        _accountTextField.text = [name substringToIndex:11];
+        name = _accountTextField.text;
+    }
+    if ([PublicMethod isValidatePhone:name]) {
+        if (!_isCode) {
+            _isCode = YES;
+            _pwdTextField.text = @"";
+            _pwdTextField.secureTextEntry = NO;
+            NSAttributedString *attrStringPwd = [[NSAttributedString alloc] initWithString:@"验证码" attributes:
+            @{NSForegroundColorAttributeName:[UIColor whiteColor],
+                         NSFontAttributeName:_pwdTextField.font
+                 }];
+            _pwdTextField.attributedPlaceholder = attrStringPwd;
+            _showPwdBtn.layer.cornerRadius = 12.5;
+            _showPwdBtn.backgroundColor = COLOR_RGBA(0, 126, 250, 0.85);
+            _showPwdBtn.clipsToBounds = YES;
+            _showPwdBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+            [_showPwdBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
+            [_showPwdBtn setImage:nil forState:UIControlStateNormal];
+            [_showPwdBtn addTarget:self action:@selector(sendSmsCode) forControlEvents:UIControlEventTouchUpInside];
+            [_showPwdBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(_pwdView.mas_top).offset(30);
+                make.width.mas_equalTo(100);
+                make.height.mas_equalTo(25);
+            }];
+        }
+    }else{
+        if (_isCode) {
+            _isCode = NO;
+            _pwdTextField.text = @"";
+            NSAttributedString *attrStringPwd = [[NSAttributedString alloc] initWithString:@"密码" attributes:
+            @{NSForegroundColorAttributeName:[UIColor whiteColor],
+                         NSFontAttributeName:_pwdTextField.font
+                 }];
+            _pwdTextField.attributedPlaceholder = attrStringPwd;
+            _pwdTextField.secureTextEntry = YES;
+            _showPwdBtn.layer.cornerRadius = 0;
+            _showPwdBtn.backgroundColor = [UIColor clearColor];
+            [_showPwdBtn setImage:[UIImage imageNamed:@"accountSafe_close"] forState:UIControlStateNormal];
+            [_showPwdBtn addTarget:self action:@selector(showPwdSecurity) forControlEvents:UIControlEventTouchUpInside];
+            [_showPwdBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(_pwdTextField).offset(5);
+                make.width.mas_equalTo(20);
+                make.height.mas_equalTo(20);
+            }];
+        }
+    }
+    
 }
 
 @end

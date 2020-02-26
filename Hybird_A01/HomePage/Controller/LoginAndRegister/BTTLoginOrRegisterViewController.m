@@ -114,7 +114,8 @@
 }
 
 - (void)setUpView{
-    UIImageView *appIcon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"head_icon"]];
+    UIImageView *appIcon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_header_logo"]];
+    appIcon.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:appIcon];
     [appIcon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view.mas_top).offset(122);
@@ -122,7 +123,11 @@
         make.centerX.mas_equalTo(self.view.mas_centerX);
     }];
     
+    weakSelf(weakSelf);
     BTTLoginInfoView *loginInfoView = [[BTTLoginInfoView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 285)];
+    loginInfoView.sendSmdCode = ^(NSString * _Nonnull phone) {
+        [weakSelf loadMobileVerifyCodeWithPhone:phone use:2];
+    };
     [self.view addSubview:loginInfoView];
 }
 
