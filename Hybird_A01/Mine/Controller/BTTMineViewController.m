@@ -438,9 +438,15 @@
             if ([IVNetwork savedUserInfo].bankCardNum > 0 || [IVNetwork savedUserInfo].usdtNum > 0) {
                 NSString *timeStamp = [[NSUserDefaults standardUserDefaults]objectForKey:BTTWithDrawToday];
                 NSInteger usdtCount = [IVNetwork savedUserInfo].usdtNum;
+                BOOL isBlackNineteen = [[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"];
                 if (timeStamp != nil) {
                     BOOL isSameDay = [PublicMethod isDateToday:[PublicMethod transferDateStringToDate:timeStamp]];
+                    
                     if (isSameDay) {
+                        if (isBlackNineteen&&usdtCount==0&&[IVNetwork savedUserInfo].btcNum==0) {
+                            [MBProgressHUD showMessagNoActivity:@"请先绑定USDT或BTC钱包" toView:nil];
+                            return;
+                        }
                         BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
                         [self.navigationController pushViewController:vc animated:YES];
                     } else {
@@ -456,6 +462,10 @@
                         };
                         [alertView setTapCancel:^{
                             [popView dismiss];
+                            if (isBlackNineteen&&usdtCount==0&&[IVNetwork savedUserInfo].btcNum==0) {
+                                [MBProgressHUD showMessagNoActivity:@"请先绑定USDT或BTC钱包" toView:nil];
+                                return;
+                            }
                             BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
                             [self.navigationController pushViewController:vc animated:YES];
                         }];
@@ -488,6 +498,10 @@
                     };
                     alertView.tapCancel = ^{
                         [popView dismiss];
+                        if (isBlackNineteen&&usdtCount==0&&[IVNetwork savedUserInfo].btcNum==0) {
+                            [MBProgressHUD showMessagNoActivity:@"请先绑定USDT或BTC钱包" toView:nil];
+                            return;
+                        }
                         BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
                         [self.navigationController pushViewController:vc animated:YES];
                     };
