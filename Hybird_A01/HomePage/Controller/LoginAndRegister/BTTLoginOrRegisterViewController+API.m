@@ -24,54 +24,44 @@
 
 #pragma mark - 登录-----
 
-- (void)login {
+- (void)loginWithAccount:(NSString *)account pwd:(NSString *)pwd isSmsCode:(BOOL)isSmsCode {
     
-//    BTTLoginAPIModel *model = [[BTTLoginAPIModel alloc] init];
-//    model.timestamp = [PublicMethod timeIntervalSince1970];
-//    NSIndexPath *loginCellIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
-//    NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-//    BOOL isValid = NO;
-//    if (self.loginCellType == BTTLoginCellTypeNormal) {
-//        BTTLoginCell *cell = (BTTLoginCell *)[self.collectionView cellForItemAtIndexPath:loginCellIndexPath];
-//        model.login_name = [NSString stringWithFormat:@"%@",cell.accountTextField.text];
-//        model.password = cell.pwdTextField.text;
-//        isValid = [predicate evaluateWithObject:model.login_name];
-//    } else {
-//        BTTLoginCodeCell *cell = (BTTLoginCodeCell *)[self.collectionView cellForItemAtIndexPath:loginCellIndexPath];
-//        model.login_name = [NSString stringWithFormat:@"%@",cell.accountTextField.text];
-//        model.password = cell.pwdTextField.text;
-//        model.code = cell.codeTextField.text;
-//        isValid = [predicate evaluateWithObject:model.login_name];
-//
-//    }
-//    if (!model.login_name.length) {
-//        [MBProgressHUD showError:@"请输入账号" toView:self.view];
-//        return;
-//    }
-//
-//    if ([PublicMethod isChinese:model.login_name]) {
-//
-//    } else {
-//        if (![model.login_name hasPrefix:@"g"] && ![PublicMethod isValidatePhone:model.login_name]) {
-//            [MBProgressHUD showError:@"请输入以g开头真钱账号" toView:self.view];
-//            return;
-//        }
-//    }
-//
-//    if (!model.password.length && ![PublicMethod isValidatePhone:model.login_name]) {
-//        [MBProgressHUD showError:@"请输入密码" toView:self.view];
-//        return;
-//    }
-//
-//
-//
-//    if (!model.code.length && self.loginCellType == BTTLoginCellTypeCode) {
-//        [MBProgressHUD showError:@"请输入验证码" toView:self.view];
-//        return;
-//    }
-//    [self showLoading];
-//    [self loginWithLoginAPIModel:model isBack:YES];
+    BTTLoginAPIModel *model = [[BTTLoginAPIModel alloc] init];
+    model.timestamp = [PublicMethod timeIntervalSince1970];
+    NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    BOOL isValid = NO;
+    model.login_name = account;
+    model.password = pwd;
+//    model.code 图片验证码，需要赋值
+    isValid = [predicate evaluateWithObject:model.login_name];
+    if (!model.login_name.length) {
+        [MBProgressHUD showError:@"请输入账号" toView:self.view];
+        return;
+    }
+
+    if ([PublicMethod isChinese:model.login_name]) {
+
+    } else {
+        if (![model.login_name hasPrefix:@"g"] && ![PublicMethod isValidatePhone:model.login_name]) {
+            [MBProgressHUD showError:@"请输入以g开头真钱账号" toView:self.view];
+            return;
+        }
+    }
+
+    if (!model.password.length && ![PublicMethod isValidatePhone:model.login_name]) {
+        [MBProgressHUD showError:@"请输入密码" toView:self.view];
+        return;
+    }
+
+
+
+    if (!model.code.length && self.loginCellType == BTTLoginCellTypeCode) {
+        [MBProgressHUD showError:@"请输入验证码" toView:self.view];
+        return;
+    }
+    [self showLoading];
+    [self loginWithLoginAPIModel:model isBack:YES];
 }
 
 - (void)showPopViewWithAccounts:(NSArray *)accounts withPhone:(NSString *)codePhone withValidateId:(NSString *)validateId messageId:(NSString *)messageId smsCode:(NSString *)smsCode isBack:(BOOL)isback{

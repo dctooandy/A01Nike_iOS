@@ -128,6 +128,14 @@
     loginInfoView.sendSmdCode = ^(NSString * _Nonnull phone) {
         [weakSelf loadMobileVerifyCodeWithPhone:phone use:2];
     };
+    loginInfoView.tapLogin = ^(NSString * _Nonnull account, NSString * _Nonnull password, BOOL isSmsCode) {
+        [weakSelf loginWithAccount:account pwd:password isSmsCode:isSmsCode];
+    };
+    loginInfoView.tapForgetAccountAndPwd = ^{
+        strongSelf(strongSelf);
+        BTTForgetPasswordController *vc = [[BTTForgetPasswordController alloc] init];
+        [strongSelf.navigationController pushViewController:vc animated:YES];
+    };
     [self.view addSubview:loginInfoView];
 }
 

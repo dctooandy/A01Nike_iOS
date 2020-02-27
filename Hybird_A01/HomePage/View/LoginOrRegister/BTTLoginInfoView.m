@@ -165,13 +165,22 @@
 }
 
 - (void)forgetAccountAndPwd{
-    
+    if (self.tapForgetAccountAndPwd) {
+        self.tapForgetAccountAndPwd();
+    }
 }
 
 - (void)loginBtn_click{
-//    if (self.tapLogin) {
-//        self.tapLogin(<#NSString * _Nonnull account#>, <#NSString * _Nonnull password#>)
-//    }
+    if (_accountTextField.text.length==0) {
+        [MBProgressHUD showError:@"请输入用户名/手机号" toView:nil];
+    }else if (_pwdTextField.text.length==0) {
+        NSString *errorMsg = _isCode ? @"请输入验证码":@"请输入密码";
+        [MBProgressHUD showError:errorMsg toView:nil];
+    }else{
+        if (self.tapLogin) {
+            self.tapLogin(_accountTextField.text, _pwdTextField.text,_isCode);
+        }
+    }
 }
 
 - (void)registerBtn_click{

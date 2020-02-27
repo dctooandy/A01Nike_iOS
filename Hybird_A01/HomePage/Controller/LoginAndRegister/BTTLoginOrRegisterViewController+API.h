@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLoginOrRegisterViewController (API)
 
-- (void)login;
+- (void)loginWithAccount:(NSString *)account pwd:(NSString *)pwd isSmsCode:(BOOL)isSmsCode;
 
 - (void)registerAction;
 
