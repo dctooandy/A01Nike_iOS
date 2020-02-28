@@ -234,6 +234,11 @@
         }
     } else if (indexPath.row == 1) {
         BTTMeMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoneyHeaderCell" forIndexPath:indexPath];
+        if ([IVNetwork savedUserInfo].loginName) {
+            [cell setAssistantShow:[IVNetwork savedUserInfo].starLevel==0];
+        }else{
+            [cell setAssistantShow:NO];
+        }
         weakSelf(weakSelf)
         cell.rechargeAssistantTap = ^{
             [weakSelf pushToRechargeAssistantViewController];

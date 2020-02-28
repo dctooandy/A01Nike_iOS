@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) void(^rechargeAssistantTap)(void);
 
+- (void)setAssistantShow:(BOOL)show;
+
 @end
 
 NS_ASSUME_NONNULL_END

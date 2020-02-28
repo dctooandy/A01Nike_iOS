@@ -70,6 +70,9 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="375" height="67"/>
+            <connections>
+                <outlet property="assistantBtn" destination="pNI-9n-vjM" id="wT0-4v-lDF"/>
+            </connections>
             <point key="canvasLocation" x="128.80000000000001" y="138.98050974512745"/>
         </collectionViewCell>
     </objects>

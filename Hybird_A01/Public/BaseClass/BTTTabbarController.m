@@ -99,10 +99,16 @@
 - (void)userTokenExpired
 {
     //清空用户信息
-    [IVNetwork cleanUserInfo];
-    [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
-    [MBProgressHUD showError:@"登录超时，请重新登录" toView:nil];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
+    if ([IVNetwork savedUserInfo].loginName!=nil&&![[IVNetwork savedUserInfo].loginName isEqualToString:@""]) {
+        [MBProgressHUD showError:@"登录超时，请重新登录" toView:nil];
+        [IVNetwork cleanUserInfo];
+        [IVHttpManager shareManager].loginName = @"";
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
+        [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
+    }
+    
 }
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerSuccessGotoHomePageNotification) name:BTTRegisterSuccessGotoHomePageNotification object:nil];
