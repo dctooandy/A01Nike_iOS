@@ -64,7 +64,7 @@
     layer.videoGravity = AVLayerVideoGravityResizeAspectFill;
     layer.contentsScale = [UIScreen mainScreen].scale;
     layer.frame = self.view.bounds;
-    layer.backgroundColor=[UIColor greenColor].CGColor;
+    layer.backgroundColor=[UIColor blackColor].CGColor;
     //将视频的layer添加到视图的layer中
     [self.view.layer addSublayer:layer];
     //监听status属性，注意监听的是AVPlayerItem
@@ -84,6 +84,7 @@
     }
     [self setUpView];
 }
+
 
 - (void)runLoopTheMovie:(NSNotification *)n{
     //注册的通知  可以自动把 AVPlayerItem 对象传过来，只要接收一下就OK
