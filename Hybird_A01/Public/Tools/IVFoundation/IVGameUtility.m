@@ -62,7 +62,16 @@
     NSString *resultUrl = [NSString getURL:url queryParameters:parameters];
     return resultUrl;
 }
-
+- (NSString *)customizeAppendingUrlWithModel:(IVGameModel *)model originalUrl:(NSString *)url data:(id)data
+{
+    NSString *urlStr = url.copy;
+    if ([model.provider isEqualToString:kPTProvider]) {
+        NSDictionary *postMap = [data valueForKey:@"postMap"];
+        urlStr = [NSString stringWithFormat:@"%@game_pt.html?",[IVHttpManager shareManager].domain] ;
+        urlStr = [self appendingURLString:urlStr parameters:postMap];
+    }
+    return urlStr;
+}
 - (BOOL)IVGameShouldForwardToGame {
 
     if ([[UIDevice networkType] isEqualToString:@"notReachable"]) {
@@ -198,5 +207,34 @@
 - (WKWebView *)webView:(WKWebView *)webView createWebViewWithConfiguration:(WKWebViewConfiguration *)configuration forNavigationAction:(WKNavigationAction *)navigationAction windowFeatures:(WKWindowFeatures *)windowFeatures {
     return nil;
 }
+- (NSString *)appendingURLString:(NSString *)urlString parameters:(NSDictionary *)parameters
+{
+    //拼接其他参数
+    NSString *url = urlString.copy;
+    NSMutableDictionary *mQuery = @{}.mutableCopy;
+    if (parameters && [parameters isKindOfClass:[NSDictionary class]]) {
+        [mQuery setValuesForKeysWithDictionary:parameters];
+    }
+   
+    if (mQuery.count == 0) {
+        return url;
+    }
+    NSDictionary *query = mQuery.copy;
+    NSURLComponents *components = [NSURLComponents componentsWithString:url];
+    if (!components) {
+        return url;
+    }
+    NSMutableArray<NSURLQueryItem *> *queryItems = [[NSMutableArray<NSURLQueryItem *> alloc] init];
+    if (components.queryItems.count > 0) {
+        [queryItems addObjectsFromArray:components.queryItems];
+    }
+    for (NSString *key in query.allKeys) {
+        NSURLQueryItem *queryItem = [NSURLQueryItem queryItemWithName:key value:query[key]];
+        [queryItems addObject:queryItem];
+    }
+    [components setQueryItems:queryItems.copy];
+    return components.URL.absoluteString;
+}
 
 @end
+
