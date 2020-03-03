@@ -18,6 +18,7 @@
 #import "BTTLoginAccountSelectView.h"
 #import "BTTRegisterCheckPopView.h"
 #import "IVRsaEncryptWrapper.h"
+#import "BTTNormalRegisterSuccessController.h"
 
 @implementation BTTLoginOrRegisterViewController (API)
 
@@ -244,8 +245,7 @@
             if (![result.body isKindOfClass:[NSNull class]] && [result.body isKindOfClass:[NSDictionary class]]) {
                 if (![result.body[@"loginName"] isKindOfClass:[NSNull class]] && result.body[@"loginName"]) {
                     [MBProgressHUD showSuccess:@"开户成功" toView:nil];
-                    BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
-                    vc.registerOrLoginType = self.registerOrLoginType;
+                    BTTNormalRegisterSuccessController *vc = [[BTTNormalRegisterSuccessController alloc] init];
                     vc.account = result.body[@"loginName"];
                     vc.pwd = model.password;
                     [self.navigationController pushViewController:vc animated:YES];

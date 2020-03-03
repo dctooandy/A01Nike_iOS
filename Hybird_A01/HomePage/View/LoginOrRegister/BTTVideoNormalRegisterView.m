@@ -42,6 +42,7 @@
         accountField.leftView = nameFrontLabel;
         accountField.leftViewMode = UITextFieldViewModeAlways;
         accountField.textColor = [UIColor whiteColor];
+        accountField.keyboardType = UIKeyboardTypeDefault;
         [accountField addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"用户名(4-9位数字或字母)" attributes:
         @{NSForegroundColorAttributeName:[UIColor whiteColor],

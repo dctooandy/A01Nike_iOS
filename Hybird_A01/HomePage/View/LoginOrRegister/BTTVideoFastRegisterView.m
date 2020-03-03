@@ -41,6 +41,7 @@
                      NSFontAttributeName:accountField.font
              }];
         accountField.attributedPlaceholder = attrString;
+        accountField.keyboardType = UIKeyboardTypeDefault;
         [accountView addSubview:accountField];
         _accountField = accountField;
         [accountField mas_makeConstraints:^(MASConstraintMaker *make) {

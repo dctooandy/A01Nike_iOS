@@ -85,9 +85,26 @@
         self.title = @"立即开户";
         [self loadVerifyCode];
     }
+    
     [self setUpView];
+    [self handleShowOrHide];
 }
 
+- (void)handleShowOrHide{
+    if (self.registerOrLoginType==BTTRegisterOrLoginTypeRegisterNormal) {
+        self.loginView.hidden = YES;
+        self.fastRegisterView.hidden = YES;
+        self.noramlRegisterView.hidden = NO;
+    }else if (self.registerOrLoginType==BTTRegisterOrLoginTypeLogin){
+        self.loginView.hidden = NO;
+        self.fastRegisterView.hidden = YES;
+        self.noramlRegisterView.hidden = YES;
+    }else if (self.registerOrLoginType==BTTRegisterOrLoginTypeRegisterQuick){
+        self.loginView.hidden = YES;
+        self.fastRegisterView.hidden = NO;
+        self.noramlRegisterView.hidden = YES;
+    }
+}
 
 - (void)runLoopTheMovie:(NSNotification *)n{
     //注册的通知  可以自动把 AVPlayerItem 对象传过来，只要接收一下就OK
@@ -129,6 +146,7 @@
     
     weakSelf(weakSelf);
     BTTLoginInfoView *loginInfoView = [[BTTLoginInfoView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 285)];
+    loginInfoView.hidden = YES;
     loginInfoView.sendSmdCode = ^(NSString * _Nonnull phone) {
         [weakSelf loadMobileVerifyCodeWithPhone:phone use:2];
     };
@@ -148,6 +166,7 @@
         
     };
     [self.view addSubview:loginInfoView];
+    self.loginView = loginInfoView;
     
     BTTVideoFastRegisterView *fastRegisterView = [[BTTVideoFastRegisterView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 285)];
     fastRegisterView.hidden = YES;
