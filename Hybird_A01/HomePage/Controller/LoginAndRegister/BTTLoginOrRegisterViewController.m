@@ -24,6 +24,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVKit/AVKit.h>
 #import "BTTLoginInfoView.h"
+#import "BTTVideoNormalRegisterView.h"
 
 @interface BTTLoginOrRegisterViewController ()<UITextFieldDelegate>
 
@@ -38,6 +39,8 @@
 @property (strong,nonatomic) AVPlayerItem *item;
 
 @property (strong,nonatomic) AVPlayer *player;
+
+@property (nonatomic, strong) BTTVideoNormalRegisterView *noramlRegisterView;
 @end
 
 @implementation BTTLoginOrRegisterViewController
@@ -137,7 +140,42 @@
         BTTForgetPasswordController *vc = [[BTTForgetPasswordController alloc] init];
         [strongSelf.navigationController pushViewController:vc animated:YES];
     };
+    __weak typeof(loginInfoView) weaklginView = loginInfoView;
+    loginInfoView.tapRegister = ^{
+        strongSelf(strongSelf);
+        weaklginView.hidden = YES;
+        strongSelf.fastRegisterView.hidden = NO;
+        
+    };
     [self.view addSubview:loginInfoView];
+    
+    BTTVideoFastRegisterView *fastRegisterView = [[BTTVideoFastRegisterView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 285)];
+    fastRegisterView.hidden = YES;
+    fastRegisterView.tapRegister = ^(NSString * _Nonnull account, NSString * _Nonnull code) {
+        [weakSelf fastRegisterWithAccount:account code:code];
+    };
+    fastRegisterView.tapNormalRegister = ^{
+        weakSelf.noramlRegisterView.hidden = NO;
+        weakSelf.fastRegisterView.hidden = YES;
+    };
+    fastRegisterView.refreshCodeImage = ^{
+        [weakSelf loadVerifyCode];
+    };
+    [self.view addSubview:fastRegisterView];
+    _fastRegisterView = fastRegisterView;
+    BTTVideoNormalRegisterView *normalRegisterView = [[BTTVideoNormalRegisterView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 285)];
+    normalRegisterView.hidden = YES;
+    normalRegisterView.tapFast = ^{
+        weakSelf.noramlRegisterView.hidden = YES;
+        weakSelf.fastRegisterView.hidden = NO; 
+    };
+    normalRegisterView.tapRegister = ^(NSString * _Nonnull account, NSString * _Nonnull password) {
+        [weakSelf checkLoginNameWithAccount:account password:password];
+    };
+    [self.view addSubview:normalRegisterView];
+    _noramlRegisterView = normalRegisterView;
+    
+    [self loadVerifyCode];
 }
 
 

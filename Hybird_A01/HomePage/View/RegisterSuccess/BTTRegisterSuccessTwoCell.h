@@ -14,9 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UILabel *accountLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *pwdLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *modifyBtn;
 
 @end
 

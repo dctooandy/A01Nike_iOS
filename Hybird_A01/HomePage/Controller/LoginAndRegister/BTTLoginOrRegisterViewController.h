@@ -7,6 +7,7 @@
 //
 
 #import "BTTCollectionViewController.h"
+#import "BTTVideoFastRegisterView.h"
 
 typedef enum {
     BTTLoginCellTypeNormal,    // 无码
@@ -36,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *messageId; ///< 验证码的ID
 
 @property (nonatomic, copy) NSString *validateId;
+
+@property (nonatomic, strong) BTTVideoFastRegisterView *fastRegisterView;
 
 @end
 

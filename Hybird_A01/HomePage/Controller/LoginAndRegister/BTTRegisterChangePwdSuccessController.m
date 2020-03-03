@@ -32,7 +32,7 @@
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:accountStr];
     [attStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:range];
     self.accountLabel.attributedText = attStr;
-    
+    [self showCropAlert];
 }
 
 - (IBAction)toGame:(UIButton *)sender {
@@ -49,6 +49,37 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoMineNotification object:nil];
     });
     
+}
+
+- (void)showCropAlert{
+    weakSelf(weakSelf)
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"保存账号密码到相册" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [weakSelf cropThePasswordView];
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:confirmAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)cropThePasswordView{
+   // 开启图片上下文
+       UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, NO, 0);
+       // 获取当前上下文
+       CGContextRef ctx = UIGraphicsGetCurrentContext();
+       // 截图:实际是把layer上面的东西绘制到上下文中
+       [self.view.layer renderInContext:ctx];
+       //iOS7+ 推荐使用的方法，代替上述方法
+       // [self.view drawViewHierarchyInRect:self.view.frame afterScreenUpdates:YES];
+       // 获取截图
+       UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+       // 关闭图片上下文
+       UIGraphicsEndImageContext();
+       // 保存相册
+       UIImageWriteToSavedPhotosAlbum(image, NULL, NULL, NULL);
 }
 
 @end

@@ -250,6 +250,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTUserLoginAPI                            @"customer/login"
 // 模糊登录
 #define BTTUserLoginEXAPI                          @"customer/loginEx"
+// 验证登录名是否存在
+#define BTTCheckLoginname                         @"customer/checkLoginName"
 // 根据手机验证码登录
 #define BTTUserLoginByMobileNo                     @"customer/loginByMobileNo"
 // 生成图片验证

@@ -212,92 +212,148 @@
 
 #pragma mark - 注册
 
-// 普通开户
-- (void)registerAction {
-//    BTTCreateAPIModel *model = [[BTTCreateAPIModel alloc] init];
-//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
-//    if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
-//        BTTRegisterNormalCell *cell = (BTTRegisterNormalCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-//        model.phone = cell.phoneTextField.text;
-//        model.catpcha = cell.verifyTextField.text;
+- (void)checkLoginNameWithAccount:(NSString *)account password:(NSString *)password{
+    [self showLoading];
+    NSDictionary *params = @{@"loginName":account};
+    [IVNetwork requestPostWithUrl:BTTCheckLoginname paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTCreateAPIModel *model = [[BTTCreateAPIModel alloc]init];
+            model.login_name = account;
+            model.password = password;
+            [self createRealAccountWithModel:model];
+        }else{
+            [self hideLoading];
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
+
+- (void)createRealAccountWithModel:(BTTCreateAPIModel *)model{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:model.login_name forKey:@"loginName"];
+    
+    [params setValue:[IVRsaEncryptWrapper encryptorString:model.password] forKey:@"password"];
+    
+    [self showLoading];
+
+    [IVNetwork requestPostWithUrl:BTTUserRegister paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (![result.body isKindOfClass:[NSNull class]] && [result.body isKindOfClass:[NSDictionary class]]) {
+                if (![result.body[@"loginName"] isKindOfClass:[NSNull class]] && result.body[@"loginName"]) {
+                    [MBProgressHUD showSuccess:@"开户成功" toView:nil];
+                    BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
+                    vc.registerOrLoginType = self.registerOrLoginType;
+                    vc.account = result.body[@"loginName"];
+                    vc.pwd = model.password;
+                    [self.navigationController pushViewController:vc animated:YES];
+
+                    BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
+                    loginModel.login_name = result.body[@"loginName"];
+                    loginModel.password = model.password;
+                    loginModel.timestamp = [PublicMethod timeIntervalSince1970];
+                    [self loginWithLoginAPIModel:loginModel isBack:NO];
+                }
+            }
+        }else if ([result.head.errCode isEqualToString:@"WS_201722"]&&[result.head.errMsg isEqualToString:@"很抱歉,该电话已被注册,请联系客服,谢谢！"]){
+            [self showRegisterCheckViewWithModel:model];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
+
+
+- (void)fastRegisterWithAccount:(NSString *)account code:(NSString *)code{
+    [self registerWithAccount:account imgCode:code isFastRegister:YES];
+}
+
 //
-//        if (!model.phone.length) {
-//            [MBProgressHUD showError:@"请输入手机号" toView:self.view];
-//            return;
-//        }
-//
-//        if (model.phone.length) {
-//            NSString *phoneregex = @"^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
-//            NSPredicate *phonepredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneregex];
-//            BOOL isphone = [phonepredicate evaluateWithObject:model.phone];
-//            if (!isphone) {
-//                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
-//                return;
-//            }
-//        }
-//        if (!model.catpcha.length) {
-//            [MBProgressHUD showError:@"请输入验证码" toView:self.view];
-//            return;
-//        }
-//        model.v = @"check";
-//        [self createAccountNormalWithAPIModel:model];
-//    } else if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
-//        if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
+- (void)registerWithAccount:(NSString *)account imgCode:(NSString *)imgCode isFastRegister:(BOOL)isFastRegister {
+    BTTCreateAPIModel *model = [[BTTCreateAPIModel alloc] init];
+    if (isFastRegister) {
+        model.phone = account;
+        model.catpcha = imgCode;
+
+        if (!model.phone.length) {
+            [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+            return;
+        }
+
+        if (model.phone.length) {
+            NSString *phoneregex = @"^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\\d{8}$";
+            NSPredicate *phonepredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneregex];
+            BOOL isphone = [phonepredicate evaluateWithObject:model.phone];
+            if (!isphone) {
+                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
+                return;
+            }
+        }
+        if (!model.catpcha.length) {
+            [MBProgressHUD showError:@"请输入验证码" toView:self.view];
+            return;
+        }
+        model.v = @"check";
+        [self createAccountNormalWithAPIModel:model];
+    } else if (self.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
+        if (self.qucikRegisterType == BTTQuickRegisterTypeAuto) {
 //            BTTRegisterQuickAutoCell *cell = (BTTRegisterQuickAutoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
 //            model.phone = cell.phoneTextField.text;
 //            model.verify_code = cell.verifyTextField.text;
-//            model.login_name = [self getRandomNameWithPhone:model.phone];
-//            if (!model.phone.length) {
-//                [MBProgressHUD showError:@"请输入手机号" toView:self.view];
-//                return;
-//            }
-//            if (![PublicMethod isValidatePhone:model.phone]) {
-//                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
-//                return;
-//            }
-//            if (!model.verify_code.length) {
-//                [MBProgressHUD showError:@"请输入验证码" toView:self.view];
-//                return;
-//            }
-//            model.v = @"check";
-//            [self verifySmsCodeWithModel:model];
-//        } else {
+            model.login_name = [self getRandomNameWithPhone:model.phone];
+            if (!model.phone.length) {
+                [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+                return;
+            }
+            if (![PublicMethod isValidatePhone:model.phone]) {
+                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
+                return;
+            }
+            if (!model.verify_code.length) {
+                [MBProgressHUD showError:@"请输入验证码" toView:self.view];
+                return;
+            }
+            model.v = @"check";
+            [self verifySmsCodeWithModel:model];
+        } else {
 //            BTTRegisterQuickManualCell *cell = (BTTRegisterQuickManualCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
 //            model.phone = cell.phoneTextField.text;
 //            model.verify_code = cell.codeField.text;
 //            model.login_name = [NSString stringWithFormat:@"g%@",cell.accountField.text];
-////            model.parent_id = [IVNetwork parentId];
-//
-//            if (!model.phone.length) {
-//                [MBProgressHUD showError:@"请输入手机号" toView:self.view];
-//                return;
-//            }
-//            if (![PublicMethod isValidatePhone:model.phone]) {
-//                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
-//                return;
-//            }
-//
-//            NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
-//            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
-//            BOOL isAccount = [predicate evaluateWithObject:model.login_name];
-//            if (!isAccount) {
-//                [MBProgressHUD showError:@"用户名为4-9位的数字或字母" toView:self.view];
-//                return;
-//            }
-//
-//            if (!model.login_name.length) {
-//                [MBProgressHUD showError:@"请输入账号" toView:self.view];
-//                return;
-//            }
-//            if (!model.verify_code.length) {
-//                [MBProgressHUD showError:@"请输入验证码" toView:self.view];
-//                return;
-//            }
-//            model.v = @"check";
-//            [self verifySmsCodeWithModel:model];
-//
-//        }
-//    }
+//            model.parent_id = [IVNetwork parentId];
+
+            if (!model.phone.length) {
+                [MBProgressHUD showError:@"请输入手机号" toView:self.view];
+                return;
+            }
+            if (![PublicMethod isValidatePhone:model.phone]) {
+                [MBProgressHUD showError:@"请填写正确的手机号" toView:self.view];
+                return;
+            }
+
+            NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+            BOOL isAccount = [predicate evaluateWithObject:model.login_name];
+            if (!isAccount) {
+                [MBProgressHUD showError:@"用户名为4-9位的数字或字母" toView:self.view];
+                return;
+            }
+
+            if (!model.login_name.length) {
+                [MBProgressHUD showError:@"请输入账号" toView:self.view];
+                return;
+            }
+            if (!model.verify_code.length) {
+                [MBProgressHUD showError:@"请输入验证码" toView:self.view];
+                return;
+            }
+            model.v = @"check";
+            [self verifySmsCodeWithModel:model];
+
+        }
+    }
 }
 
 - (void)verifySmsCodeWithModel:(BTTCreateAPIModel *)model{
@@ -346,8 +402,14 @@
 - (void)createAccountNormalWithAPIModel:(BTTCreateAPIModel *)model {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:[self getRandomNameWithPhone:model.phone] forKey:@"loginName"];
-    NSString *psd = [self getRandomPassword];
-    [params setValue:[IVRsaEncryptWrapper encryptorString:psd] forKey:@"password"];
+    if (model.password) {
+        [params setValue:[IVRsaEncryptWrapper encryptorString:model.password] forKey:@"password"];
+    }else{
+        NSString *psd = [self getRandomPassword];
+        model.password = psd;
+        [params setValue:[IVRsaEncryptWrapper encryptorString:psd] forKey:@"password"];
+    }
+    
     if (model.catpcha) {
         [params setObject:model.catpcha forKey:@"catpcha"];
     }
@@ -370,12 +432,12 @@
                 BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
                 vc.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
                 vc.account = result.body[@"loginName"];
-                vc.pwd = psd;
+                vc.pwd = model.password;
                 [self.navigationController pushViewController:vc animated:YES];
 
                 BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
                 loginModel.login_name = result.body[@"loginName"];
-                loginModel.password = psd;
+                loginModel.password = model.password;
                 loginModel.timestamp = [PublicMethod timeIntervalSince1970];
                 [self loginWithLoginAPIModel:loginModel isBack:NO];
             }
@@ -483,7 +545,7 @@
                     //获取到验证码ID
                     self.captchaId = result.body[@"captchaId"];
                     dispatch_async(dispatch_get_main_queue(), ^{
-//                        [self.collectionView reloadData];
+                        [self.fastRegisterView.imgCodeBtn setImage:decodedImage forState:UIControlStateNormal];
                     });
                 }
             }

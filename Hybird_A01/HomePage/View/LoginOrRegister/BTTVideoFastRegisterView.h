@@ -11,8 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTVideoFastRegisterView : UIView
-
+@property (nonatomic, strong) UIButton *imgCodeBtn;
 - (void)setCodeImage:(UIImage *)codeImg;
+
+@property (nonatomic, copy) void(^refreshCodeImage)(void);
+@property (nonatomic, copy) void(^tapRegister)(NSString *account,NSString *code);
+@property (nonatomic, copy) void(^tapNormalRegister)(void);
 
 @end
 

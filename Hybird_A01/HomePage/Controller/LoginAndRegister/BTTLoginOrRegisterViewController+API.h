@@ -16,13 +16,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loginWithAccount:(NSString *)account pwd:(NSString *)pwd isSmsCode:(BOOL)isSmsCode;
 
-- (void)registerAction;
+- (void)fastRegisterWithAccount:(NSString *)account code:(NSString *)code;
 
 - (void)loadVerifyCode;
 
 - (void)loadMobileVerifyCodeWithPhone:(NSString *)phone use:(NSInteger)use;
 
 - (void)createAccountNormalWithAPIModel:(BTTCreateAPIModel *)model;
+
+- (void)checkLoginNameWithAccount:(NSString *)account password:(NSString *)password;
 
 - (void)fastRegisterAPIModel:(BTTCreateAPIModel *)model;
 

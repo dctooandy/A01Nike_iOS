@@ -27,13 +27,21 @@ typedef enum {
 
 
 @property (nonatomic, assign) BTTRegisterSuccessType registerSuccessType;
-
+@property (nonatomic, assign) BOOL isModifyPwd;
+@property (nonatomic, assign) BOOL isSavedPwd;
 @end
 
 @implementation BTTRegisterSuccessController
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setHidden:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isModifyPwd = NO;
+    self.isSavedPwd = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem new];
     self.title = @"注册成功";
     self.registerSuccessType = BTTRegisterSuccessTypeNormal;
@@ -51,9 +59,54 @@ typedef enum {
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessChangePwdCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessChangePwdCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPublicBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPublicBtnCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTChangePwdBtnsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTChangePwdBtnsCell"];
-    UIImageView *adImageview = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SCREEN_WIDTH / 375 * 127 - (KIsiPhoneX ? 88 : 64), SCREEN_WIDTH, SCREEN_WIDTH / 375 * 127)];
-    [self.view addSubview:adImageview];
-    adImageview.image = ImageNamed(@"login_ad");
+//    UIImageView *adImageview = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SCREEN_WIDTH / 375 * 127 - (KIsiPhoneX ? 88 : 64), SCREEN_WIDTH, SCREEN_WIDTH / 375 * 127)];
+//    [self.view addSubview:adImageview];
+//    adImageview.image = ImageNamed(@"login_ad");
+}
+
+- (void)showCropAlert{
+    weakSelf(weakSelf)
+    self.isSavedPwd = YES;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"保存账号密码到相册" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [weakSelf cropThePasswordView];
+    }];
+    [alert addAction:cancelAction];
+    [alert addAction:confirmAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)cropThePasswordView{
+   UICollectionView *shadowView = self.collectionView;
+    // 开启图片上下文
+    UIGraphicsBeginImageContextWithOptions(shadowView.contentSize, NO, 0.f);
+    // 保存现在视图的位置偏移信息
+    CGPoint saveContentOffset = shadowView.contentOffset;
+    // 保存现在视图的frame信息
+    CGRect saveFrame = shadowView.frame;
+    // 把要截图的视图偏移量设置为0
+    shadowView.contentOffset = CGPointZero;
+    // 设置要截图的视图的frame为内容尺寸大小
+    shadowView.frame = CGRectMake(0, 0, shadowView.contentSize.width, shadowView.contentSize.height);
+    // 获取当前上下文
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    // 截图:实际是把layer上面的东西绘制到上下文中
+    [shadowView.layer renderInContext:ctx];
+    //iOS7+ 推荐使用的方法，代替上述方法
+    // [shadowView drawViewHierarchyInRect:shadowView.frame afterScreenUpdates:YES];
+    // 获取截图
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    // 关闭图片上下文
+    UIGraphicsEndImageContext();
+    // 将视图的偏移量设置回原来的状态
+    shadowView.contentOffset = saveContentOffset;
+    // 将视图的frame信息设置回原来的状态
+    shadowView.frame = saveFrame;
+    // 保存相册
+    UIImageWriteToSavedPhotosAlbum(image, NULL, NULL, NULL);
 }
 
 - (void)goToBack {
@@ -68,17 +121,20 @@ typedef enum {
     if (self.registerSuccessType == BTTRegisterSuccessTypeNormal) {
         if (indexPath.row == 0) {
             BTTRegisterSuccessTwoCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterSuccessTwoCell" forIndexPath:indexPath];
+            NSString *tipStr = self.isModifyPwd ? @"密码修改成功" : @"恭喜您,开户成功";
+            cell.tipLabel.text = tipStr;
             NSString *accountStr = [NSString stringWithFormat:@"您的账号为: %@",self.account];
             NSRange accountRange = [accountStr rangeOfString:self.account];
             NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:accountStr];
             [attstr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:accountRange];
             cell.accountLabel.attributedText = attstr;
             
-            NSString *pwdStr = [NSString stringWithFormat:@"原始密码: %@",self.pwd];
+            NSString *pwdStr = [NSString stringWithFormat:@"初始密码: %@",self.pwd];
             NSRange pwdRange = [accountStr rangeOfString:self.pwd];
             NSMutableAttributedString *pwdattstr = [[NSMutableAttributedString alloc] initWithString:pwdStr];
             [pwdattstr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:pwdRange];
             cell.pwdLabel.attributedText = pwdattstr;
+            cell.modifyBtn.hidden = self.isModifyPwd;
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
@@ -93,14 +149,18 @@ typedef enum {
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
-                [strongSelf.navigationController popToRootViewControllerAnimated:YES];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    if (button.tag == 40010) {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoHomePageNotification object:nil];
-                    } else if (button.tag == 40011) {
-                        [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoMineNotification object:nil];
-                    }
-                });
+                if (strongSelf.isSavedPwd) {
+                    [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        if (button.tag == 40010) {
+                            [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoHomePageNotification object:nil];
+                        } else if (button.tag == 40011) {
+                            [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoMineNotification object:nil];
+                        }
+                    });
+                }else{
+                    [strongSelf showCropAlert];
+                }
                 
             };
             return cell;
@@ -126,7 +186,9 @@ typedef enum {
                 if (button.tag == 20012) {
                     [strongSelf changePwd];
                 } else {
-                    [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+                    strongSelf(strongSelf);
+                    strongSelf.registerSuccessType = BTTRegisterSuccessTypeNormal;
+                    [strongSelf.collectionView reloadData];
                 }
                 
             };
@@ -204,15 +266,22 @@ typedef enum {
     params[@"newPassword"] = [IVRsaEncryptWrapper encryptorString:_newPwd];
     params[@"type"] = @1;
     weakSelf(weakSelf)
+    NSString *npwd = _newPwd;
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     [IVNetwork requestPostWithUrl:url paramters:params.copy completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [MBProgressHUD showSuccess:@"密码修改成功!" toView:nil];
-            BTTRegisterChangePwdSuccessController *vc = (BTTRegisterChangePwdSuccessController *)[BTTRegisterChangePwdSuccessController getVCFromStoryboard];
-            vc.account = self.account;
-            [self.navigationController pushViewController:vc animated:YES];
+            strongSelf(strongSelf);
+            strongSelf.pwd = npwd;
+            strongSelf.isModifyPwd = YES;
+            strongSelf.registerSuccessType = BTTRegisterSuccessTypeNormal;
+            [strongSelf.collectionView reloadData];
+            [strongSelf showCropAlert];
+//            BTTRegisterChangePwdSuccessController *vc = (BTTRegisterChangePwdSuccessController *)[BTTRegisterChangePwdSuccessController getVCFromStoryboard];
+//            vc.account = self.account;
+//            [self.navigationController pushViewController:vc animated:YES];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
@@ -234,6 +303,9 @@ typedef enum {
     });
 }
 
-
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setHidden:NO];
+}
 
 @end

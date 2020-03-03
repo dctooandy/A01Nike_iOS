@@ -1,20 +1,19 @@
 //
-//  BTTVideoFastRegisterView.m
+//  BTTVideoNormalRegisterView.m
 //  Hybird_A01
 //
-//  Created by Levy on 2/26/20.
+//  Created by Levy on 2/28/20.
 //  Copyright © 2020 BTT. All rights reserved.
 //
 
-#import "BTTVideoFastRegisterView.h"
+#import "BTTVideoNormalRegisterView.h"
 
-@interface BTTVideoFastRegisterView ()
+@interface BTTVideoNormalRegisterView ()
 @property (nonatomic, strong) UITextField *accountField;
-@property (nonatomic, strong) UITextField *imgCodeField;
-
+@property (nonatomic, strong) UITextField *passwordField;
 @end
 
-@implementation BTTVideoFastRegisterView
+@implementation BTTVideoNormalRegisterView
 
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
@@ -32,11 +31,19 @@
             make.height.mas_equalTo(18);
         }];
         //用户名输入框
+        UILabel *nameFrontLabel = [[UILabel alloc]init];
+        nameFrontLabel.size = CGSizeMake(30, 30);
+        nameFrontLabel.text = @"g";
+        nameFrontLabel.font = [UIFont systemFontOfSize:16.0];
+        nameFrontLabel.textColor = [UIColor whiteColor];
+        
         UITextField *accountField = [[UITextField alloc]init];
         accountField.font = [UIFont systemFontOfSize:16];
+        accountField.leftView = nameFrontLabel;
+        accountField.leftViewMode = UITextFieldViewModeAlways;
         accountField.textColor = [UIColor whiteColor];
         [accountField addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
-        NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"请输入手机号码" attributes:
+        NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"用户名(4-9位数字或字母)" attributes:
         @{NSForegroundColorAttributeName:[UIColor whiteColor],
                      NSFontAttributeName:accountField.font
              }];
@@ -66,30 +73,20 @@
             make.height.mas_equalTo(18);
         }];
         
-        UIButton *imgCodeBtn = [[UIButton alloc]init];
-        [imgCodeBtn addTarget:self action:@selector(regetCodeImage) forControlEvents:UIControlEventTouchUpInside];
-//        imgCodeBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [pwdView addSubview:imgCodeBtn];
-        _imgCodeBtn = imgCodeBtn;
-        [imgCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(pwdView.mas_right);
-            make.top.mas_equalTo(pwdView.mas_top).offset(25);
-            make.width.mas_equalTo(80);
-            make.height.mas_equalTo(30);
-        }];
         //密码输入框
         UITextField *pwdField = [[UITextField alloc]init];
         pwdField.font = [UIFont systemFontOfSize:16];
         pwdField.textColor = [UIColor whiteColor];
-        NSAttributedString *attrStringPwd = [[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:
+        NSAttributedString *attrStringPwd = [[NSAttributedString alloc] initWithString:@"请输入密码" attributes:
         @{NSForegroundColorAttributeName:[UIColor whiteColor],
                      NSFontAttributeName:pwdField.font
              }];
         pwdField.attributedPlaceholder = attrStringPwd;
+        pwdField.secureTextEntry = YES;
         [pwdView addSubview:pwdField];
-        _imgCodeField = pwdField;
+        _passwordField = pwdField;
         [pwdField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(imgCodeBtn.mas_left);
+            make.right.mas_equalTo(pwdView.mas_right);
             make.top.mas_equalTo(pwdView.mas_top).offset(30);
             make.left.mas_equalTo(pwdLeftImg.mas_right).offset(12);
             make.height.mas_equalTo(30);
@@ -117,7 +114,7 @@
             make.centerX.mas_equalTo(pwdView.mas_centerX);
         }];
         
-        NSString *normalStr = @"点击账号密码开户";
+        NSString *normalStr = @"点击极速开户";
         NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",normalStr]];
         [str addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor]range:NSMakeRange(0,2)];
         [str addAttribute:NSForegroundColorAttributeName value:COLOR_RGBA(0, 126, 250, 0.9) range:NSMakeRange(2,normalStr.length-2)];
@@ -125,7 +122,7 @@
         UIButton *normalRegisterButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [normalRegisterButton setAttributedTitle:str forState:UIControlStateNormal];
         normalRegisterButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [normalRegisterButton addTarget:self action:@selector(normalRegisterBtn_click) forControlEvents:UIControlEventTouchUpInside];
+        [normalRegisterButton addTarget:self action:@selector(fastRegisterBtn_click) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:normalRegisterButton];
         [normalRegisterButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(registerBtn.mas_right);
@@ -145,32 +142,24 @@
     }
 }
 
-- (void)regetCodeImage{
-    if (self.refreshCodeImage) {
-        self.refreshCodeImage();
-    }
-}
 
-- (void)normalRegisterBtn_click{
-    if (self.tapNormalRegister) {
-        self.tapNormalRegister();
+- (void)fastRegisterBtn_click{
+    if (self.tapFast) {
+        self.tapFast();
     }
 }
 
 - (void)registerBtn_click{
-    if (![PublicMethod isValidatePhone:_accountField.text]) {
-        [MBProgressHUD showError:@"请输入正确的手机号码" toView:nil];
-    }else if (_imgCodeField.text.length<4||[_imgCodeField.text isEqualToString:@""]){
-        [MBProgressHUD showError:@"请输入正确的验证码" toView:nil];
+    if (_accountField.text.length<4||_accountField.text.length>9) {
+        [MBProgressHUD showError:@"请输入4-9位数字或字母" toView:nil];
+    }else if (_passwordField.text.length<6||[_passwordField.text isEqualToString:@""]){
+        [MBProgressHUD showError:@"密码长度不得小于6位" toView:nil];
     }else{
+        NSString *account = [NSString stringWithFormat:@"g%@",_accountField.text];
         if (self.tapRegister) {
-            self.tapRegister(_accountField.text, _imgCodeField.text);
+            self.tapRegister(account, _passwordField.text);
         }
     }
-}
-
-- (void)setCodeImage:(UIImage *)codeImg{
-    [self.imgCodeBtn setImage:codeImg forState:UIControlStateNormal];
 }
 
 @end
