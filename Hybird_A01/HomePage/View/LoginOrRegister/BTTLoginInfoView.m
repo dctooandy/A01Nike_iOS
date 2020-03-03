@@ -8,24 +8,28 @@
 
 #import "BTTLoginInfoView.h"
 
-@interface BTTLoginInfoView()
+@interface BTTLoginInfoView ()
 @property (nonatomic, strong) UITextField *pwdTextField;
 @property (nonatomic, strong) UITextField *accountTextField;
+@property (nonatomic, strong) UITextField *imgCodeField;
 @property (nonatomic, strong) UIButton *showPwdBtn;
 @property (nonatomic, assign) BOOL isCode;
 @property (nonatomic, strong) UIView *pwdView;
+@property (nonatomic, strong) UIButton *forgetPwdBtn;
+@property (nonatomic, strong) UIButton *registerBtn;
+@property (nonatomic, strong) UIButton *loginBtn;
 @end
 
 @implementation BTTLoginInfoView
 
--(instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         _isCode = NO;
-        UIView *accountView = [[UIView alloc]initWithFrame:CGRectMake(36, 0, SCREEN_WIDTH-72, 60)];
+        UIView *accountView = [[UIView alloc]initWithFrame:CGRectMake(36, 0, SCREEN_WIDTH - 72, 60)];
 //        accountView.backgroundColor = [UIColor yellowColor];
         [self addSubview:accountView];
-        
+
         UIImageView *actLeftImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_account"]];
         [accountView addSubview:actLeftImg];
         [actLeftImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -41,9 +45,8 @@
         accountField.keyboardType = UIKeyboardTypeDefault;
         [accountField addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"用户名/手机号" attributes:
-        @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                     NSFontAttributeName:accountField.font
-             }];
+                                          @{ NSForegroundColorAttributeName: [UIColor whiteColor],
+                                             NSFontAttributeName: accountField.font }];
         accountField.attributedPlaceholder = attrString;
         [accountView addSubview:accountField];
         _accountTextField = accountField;
@@ -55,13 +58,13 @@
         }];
         CALayer *accountLayer = [CALayer new];
         accountLayer.backgroundColor = [UIColor whiteColor].CGColor;
-        accountLayer.frame = CGRectMake(0, 59.5, SCREEN_WIDTH-72, 0.5);
+        accountLayer.frame = CGRectMake(0, 59.5, SCREEN_WIDTH - 72, 0.5);
         [accountView.layer addSublayer:accountLayer];
-        
-        UIView *pwdView = [[UIView alloc]initWithFrame:CGRectMake(36, 60, SCREEN_WIDTH-72, 60)];
+
+        UIView *pwdView = [[UIView alloc]initWithFrame:CGRectMake(36, 60, SCREEN_WIDTH - 72, 60)];
         [self addSubview:pwdView];
         _pwdView = pwdView;
-        
+
         UIImageView *pwdLeftImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_pwd"]];
         [pwdView addSubview:pwdLeftImg];
         [pwdLeftImg mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -87,9 +90,8 @@
         pwdField.font = [UIFont systemFontOfSize:16];
         pwdField.textColor = [UIColor whiteColor];
         NSAttributedString *attrStringPwd = [[NSAttributedString alloc] initWithString:@"密码" attributes:
-        @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                     NSFontAttributeName:pwdField.font
-             }];
+                                             @{ NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                NSFontAttributeName: pwdField.font }];
         pwdField.attributedPlaceholder = attrStringPwd;
         pwdField.secureTextEntry = YES;
         [pwdView addSubview:pwdField];
@@ -102,22 +104,69 @@
         }];
         CALayer *pwdLayer = [CALayer new];
         pwdLayer.backgroundColor = [UIColor whiteColor].CGColor;
-        pwdLayer.frame = CGRectMake(0, 59.5, SCREEN_WIDTH-72, 0.5);
+        pwdLayer.frame = CGRectMake(0, 59.5, SCREEN_WIDTH - 72, 0.5);
         [pwdView.layer addSublayer:pwdLayer];
-        
+
+        UIView *codeImgView = [[UIView alloc]initWithFrame:CGRectMake(36, 120, SCREEN_WIDTH - 72, 60)];
+        codeImgView.hidden = YES;
+        [self addSubview:codeImgView];
+        _codeImgView = codeImgView;
+
+        UIImageView *codeLeftImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_verify"]];
+        [codeImgView addSubview:codeLeftImg];
+        [codeLeftImg mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(codeImgView.mas_left);
+            make.top.mas_equalTo(codeImgView.mas_top).offset(37);
+            make.width.mas_equalTo(16);
+            make.height.mas_equalTo(18);
+        }];
+
+        UIButton *imgCodeBtn = [[UIButton alloc]init];
+        [imgCodeBtn addTarget:self action:@selector(regetCodeImage) forControlEvents:UIControlEventTouchUpInside];
+        //        imgCodeBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [codeImgView addSubview:imgCodeBtn];
+        _imgCodeBtn = imgCodeBtn;
+        [imgCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(codeImgView.mas_right);
+            make.top.mas_equalTo(codeImgView.mas_top).offset(25);
+            make.width.mas_equalTo(80);
+            make.height.mas_equalTo(30);
+        }];
+        //图形验证码
+        UITextField *codeImgField = [[UITextField alloc]init];
+        codeImgField.font = [UIFont systemFontOfSize:16];
+        codeImgField.textColor = [UIColor whiteColor];
+        NSAttributedString *attrStringCode = [[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:
+                                              @{ NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                 NSFontAttributeName: codeImgField.font }];
+        codeImgField.attributedPlaceholder = attrStringCode;
+        [codeImgView addSubview:codeImgField];
+        _imgCodeField = codeImgField;
+        [codeImgField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(imgCodeBtn.mas_left);
+            make.top.mas_equalTo(codeImgView.mas_top).offset(30);
+            make.left.mas_equalTo(codeLeftImg.mas_right).offset(12);
+            make.height.mas_equalTo(30);
+        }];
+        CALayer *codeLayer = [CALayer new];
+        codeLayer.backgroundColor = [UIColor whiteColor].CGColor;
+        codeLayer.frame = CGRectMake(0, 59.5, SCREEN_WIDTH - 72, 0.5);
+        [codeImgView.layer addSublayer:codeLayer];
+
         UIButton *forgetPwdBtn = [[UIButton alloc]init];
         [forgetPwdBtn setTitle:@"忘记账号,密码？" forState:UIControlStateNormal];
         [forgetPwdBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         forgetPwdBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [forgetPwdBtn addTarget:self action:@selector(forgetAccountAndPwd) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:forgetPwdBtn];
+        _forgetPwdBtn = forgetPwdBtn;
         [forgetPwdBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(pwdView.mas_bottom).offset(17);
             make.right.mas_equalTo(pwdView.mas_right);
             make.width.mas_greaterThanOrEqualTo(60);
             make.height.mas_equalTo(15);
         }];
-        
+
         UIButton *loginBtn = [[UIButton alloc]init];
         [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
         [loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -128,13 +177,14 @@
         loginBtn.clipsToBounds = YES;
         [loginBtn addTarget:self action:@selector(loginBtn_click) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:loginBtn];
+        self.loginBtn = loginBtn;
         [loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(forgetPwdBtn.mas_bottom).offset(31);
-            make.width.mas_equalTo(SCREEN_WIDTH-72);
+            make.width.mas_equalTo(SCREEN_WIDTH - 72);
             make.height.mas_equalTo(45);
             make.centerX.mas_equalTo(pwdView.mas_centerX);
         }];
-        
+
         UIButton *registerBtn = [[UIButton alloc]init];
         [registerBtn setTitle:@"急速开户" forState:UIControlStateNormal];
         [registerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -146,18 +196,30 @@
         registerBtn.backgroundColor = COLOR_RGBA(0, 126, 250, 0.85);
         [registerBtn addTarget:self action:@selector(registerBtn_click) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:registerBtn];
+        self.registerBtn = registerBtn;
         [registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(loginBtn.mas_bottom).offset(11);
-            make.width.mas_equalTo(SCREEN_WIDTH-72);
+            make.width.mas_equalTo(SCREEN_WIDTH - 72);
             make.height.mas_equalTo(45);
             make.centerX.mas_equalTo(pwdView.mas_centerX);
         }];
-        
     }
     return self;
 }
 
-- (void)showPwdSecurity{
+-(void)handleCodeImageView{
+    self.codeImgView.hidden = NO;
+    [self.codeImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.pwdView.mas_bottom);
+        make.left.right.mas_equalTo(self.pwdView);
+        make.height.mas_equalTo(60);
+    }];
+    [self.forgetPwdBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.pwdView.mas_bottom).offset(77);
+    }];
+}
+
+- (void)showPwdSecurity {
     if (!_isCode) {
         _pwdTextField.secureTextEntry = !_pwdTextField.isSecureTextEntry;
         NSString *imgStr = _pwdTextField.isSecureTextEntry ? @"accountSafe_close" : @"accountSafe_Open";
@@ -165,39 +227,49 @@
     }
 }
 
-- (void)forgetAccountAndPwd{
+- (void)regetCodeImage{
+    if (self.refreshCodeImage) {
+        self.refreshCodeImage();
+    }
+}
+
+- (void)setCodeImage:(UIImage *)codeImg{
+    [self.imgCodeBtn setImage:codeImg forState:UIControlStateNormal];
+}
+
+- (void)forgetAccountAndPwd {
     if (self.tapForgetAccountAndPwd) {
         self.tapForgetAccountAndPwd();
     }
 }
 
-- (void)loginBtn_click{
-    if (_accountTextField.text.length==0) {
+- (void)loginBtn_click {
+    if (_accountTextField.text.length == 0) {
         [MBProgressHUD showError:@"请输入用户名/手机号" toView:nil];
-    }else if (_pwdTextField.text.length==0) {
-        NSString *errorMsg = _isCode ? @"请输入验证码":@"请输入密码";
+    } else if (_pwdTextField.text.length == 0) {
+        NSString *errorMsg = _isCode ? @"请输入验证码" : @"请输入密码";
         [MBProgressHUD showError:errorMsg toView:nil];
-    }else{
+    } else {
         if (self.tapLogin) {
-            self.tapLogin(_accountTextField.text, _pwdTextField.text,_isCode);
+            self.tapLogin(_accountTextField.text, _pwdTextField.text, _isCode,_imgCodeField.text);
         }
     }
 }
 
-- (void)registerBtn_click{
+- (void)registerBtn_click {
     if (self.tapRegister) {
         self.tapRegister();
     }
 }
 
-- (void)sendSmsCode{
+- (void)sendSmsCode {
     if (_isCode) {
         if ([PublicMethod isValidatePhone:_accountTextField.text]) {
             if (self.sendSmdCode) {
                 [self countDown];
                 self.sendSmdCode(_accountTextField.text);
             }
-        }else{
+        } else {
             [MBProgressHUD showError:@"请填写正确的手机号" toView:nil];
         }
     }
@@ -206,10 +278,10 @@
 - (void)countDown {
     __block int timeout = 60; // 倒计时时间
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0 * NSEC_PER_SEC, 0); // 每秒执行
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 1.0 * NSEC_PER_SEC, 0); // 每秒执行
     dispatch_source_set_event_handler(_timer, ^{
-        if(timeout <= 0){ //倒计时结束，关闭
+        if (timeout <= 0) { //倒计时结束，关闭
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
@@ -220,30 +292,27 @@
             });
         } else {
             int seconds = timeout;
-            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];;
+            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
             if (seconds < 10) {
                 strTime = [NSString stringWithFormat:@"%.1d", seconds];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
-                self.showPwdBtn.titleLabel.text = [NSString stringWithFormat:@"重新发送(%@)",strTime];
-                [self.showPwdBtn setTitle:[NSString stringWithFormat:@"重新发送(%@)",strTime] forState:UIControlStateNormal];
+                self.showPwdBtn.titleLabel.text = [NSString stringWithFormat:@"重新发送(%@)", strTime];
+                [self.showPwdBtn setTitle:[NSString stringWithFormat:@"重新发送(%@)", strTime] forState:UIControlStateNormal];
                 self.showPwdBtn.enabled = NO;
                 self.showPwdBtn.backgroundColor = [UIColor lightGrayColor];
             });
-            
+
             timeout--;
         }
-        
     });
     dispatch_resume(_timer);
-    
 }
 
-
-- (void)textFieldDidChanged:(id)sender{
+- (void)textFieldDidChanged:(id)sender {
     NSString *name = _accountTextField.text;
-    if (name.length>11) {
+    if (name.length > 11) {
         _accountTextField.text = [name substringToIndex:11];
         name = _accountTextField.text;
     }
@@ -253,9 +322,8 @@
             _pwdTextField.text = @"";
             _pwdTextField.secureTextEntry = NO;
             NSAttributedString *attrStringPwd = [[NSAttributedString alloc] initWithString:@"验证码" attributes:
-            @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                         NSFontAttributeName:_pwdTextField.font
-                 }];
+                                                 @{ NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                    NSFontAttributeName: _pwdTextField.font }];
             _pwdTextField.attributedPlaceholder = attrStringPwd;
             _showPwdBtn.layer.cornerRadius = 12.5;
             _showPwdBtn.backgroundColor = COLOR_RGBA(0, 126, 250, 0.85);
@@ -270,14 +338,13 @@
                 make.height.mas_equalTo(25);
             }];
         }
-    }else{
+    } else {
         if (_isCode) {
             _isCode = NO;
             _pwdTextField.text = @"";
             NSAttributedString *attrStringPwd = [[NSAttributedString alloc] initWithString:@"密码" attributes:
-            @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                         NSFontAttributeName:_pwdTextField.font
-                 }];
+                                                 @{ NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                    NSFontAttributeName: _pwdTextField.font }];
             _pwdTextField.attributedPlaceholder = attrStringPwd;
             _pwdTextField.secureTextEntry = YES;
             _showPwdBtn.layer.cornerRadius = 0;
@@ -291,7 +358,6 @@
             }];
         }
     }
-    
 }
 
 @end

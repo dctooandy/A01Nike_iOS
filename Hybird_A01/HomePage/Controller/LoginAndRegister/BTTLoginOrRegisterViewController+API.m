@@ -25,7 +25,7 @@
 
 #pragma mark - 登录-----
 
-- (void)loginWithAccount:(NSString *)account pwd:(NSString *)pwd isSmsCode:(BOOL)isSmsCode {
+- (void)loginWithAccount:(NSString *)account pwd:(NSString *)pwd isSmsCode:(BOOL)isSmsCode codeStr:(NSString *)codeStr{
     
     BTTLoginAPIModel *model = [[BTTLoginAPIModel alloc] init];
     model.timestamp = [PublicMethod timeIntervalSince1970];
@@ -34,7 +34,9 @@
     BOOL isValid = NO;
     model.login_name = account;
     model.password = pwd;
-//    model.code 图片验证码，需要赋值
+    if (![codeStr isEqualToString:@""]) {
+        model.code = codeStr;
+    }
     isValid = [predicate evaluateWithObject:model.login_name];
     if (!model.login_name.length) {
         [MBProgressHUD showError:@"请输入账号" toView:self.view];
@@ -161,6 +163,11 @@
             [self hideLoading];
             if ([result.head.errCode isEqualToString:@"WS_202020"]) {
                 [self showAlertWithLoginName:model.login_name];
+                return;
+            }
+            if ([result.head.errCode isEqualToString:@"GW_800101"]) {
+                [self.loginView handleCodeImageView];
+                [self loadVerifyCode];
                 return;
             }
             if ([result.head.errCode isEqualToString:@"GW_800510"]) {
@@ -545,7 +552,12 @@
                     //获取到验证码ID
                     self.captchaId = result.body[@"captchaId"];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self.fastRegisterView.imgCodeBtn setImage:decodedImage forState:UIControlStateNormal];
+                        if (self.loginView.isHidden) {
+                            [self.fastRegisterView.imgCodeBtn setImage:decodedImage forState:UIControlStateNormal];
+                        }else{
+                          [self.loginView.imgCodeBtn setImage:decodedImage forState:UIControlStateNormal];
+                        }
+                        
                     });
                 }
             }

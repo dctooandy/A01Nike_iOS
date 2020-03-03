@@ -145,13 +145,13 @@
     }];
     
     weakSelf(weakSelf);
-    BTTLoginInfoView *loginInfoView = [[BTTLoginInfoView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 285)];
+    BTTLoginInfoView *loginInfoView = [[BTTLoginInfoView alloc]initWithFrame:CGRectMake(0, 294, SCREEN_WIDTH, 285)];
     loginInfoView.hidden = YES;
     loginInfoView.sendSmdCode = ^(NSString * _Nonnull phone) {
         [weakSelf loadMobileVerifyCodeWithPhone:phone use:2];
     };
-    loginInfoView.tapLogin = ^(NSString * _Nonnull account, NSString * _Nonnull password, BOOL isSmsCode) {
-        [weakSelf loginWithAccount:account pwd:password isSmsCode:isSmsCode];
+    loginInfoView.tapLogin = ^(NSString * _Nonnull account, NSString * _Nonnull password, BOOL isSmsCode, NSString *codeStr) {
+        [weakSelf loginWithAccount:account pwd:password isSmsCode:isSmsCode codeStr:codeStr];
     };
     loginInfoView.tapForgetAccountAndPwd = ^{
         strongSelf(strongSelf);
@@ -164,6 +164,9 @@
         weaklginView.hidden = YES;
         strongSelf.fastRegisterView.hidden = NO;
         
+    };
+    loginInfoView.refreshCodeImage = ^{
+        [weakSelf loadVerifyCode];
     };
     [self.view addSubview:loginInfoView];
     self.loginView = loginInfoView;
