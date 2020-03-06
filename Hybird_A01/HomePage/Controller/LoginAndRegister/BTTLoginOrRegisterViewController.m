@@ -162,6 +162,7 @@
     loginInfoView.tapRegister = ^{
         strongSelf(strongSelf);
         weaklginView.hidden = YES;
+        [strongSelf loadVerifyCode];
         strongSelf.fastRegisterView.hidden = NO;
         
     };

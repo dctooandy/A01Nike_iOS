@@ -65,7 +65,7 @@
         UIView *pwdView = [[UIView alloc]initWithFrame:CGRectMake(36, 60, SCREEN_WIDTH-72, 60)];
         [self addSubview:pwdView];
         
-        UIImageView *pwdLeftImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_verify"]];
+        UIImageView *pwdLeftImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_pwd"]];
         [pwdView addSubview:pwdLeftImg];
         [pwdLeftImg mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(pwdView.mas_left);
