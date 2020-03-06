@@ -15,4 +15,5 @@
 #import "BRPickerView.h"
 #import <Masonry.h>
 #import "UIDevice+IVInfo.h"
+#import <tingyunApp/NBSAppAgent.h>
 #endif

@@ -67,7 +67,7 @@ typedef enum {
 - (void)showCropAlert{
     weakSelf(weakSelf)
     self.isSavedPwd = YES;
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"保存账号密码到相册" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"保存账号密码截图到相册" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }];
@@ -123,13 +123,13 @@ typedef enum {
             BTTRegisterSuccessTwoCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterSuccessTwoCell" forIndexPath:indexPath];
             NSString *tipStr = self.isModifyPwd ? @"密码修改成功" : @"恭喜您,开户成功";
             cell.tipLabel.text = tipStr;
-            NSString *accountStr = [NSString stringWithFormat:@"您的账号为: %@",self.account];
+            NSString *accountStr = [NSString stringWithFormat:@"您的账号: %@",self.account];
             NSRange accountRange = [accountStr rangeOfString:self.account];
             NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:accountStr];
             [attstr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:accountRange];
             cell.accountLabel.attributedText = attstr;
             
-            NSString *pwdStr = [NSString stringWithFormat:@"初始密码: %@",self.pwd];
+            NSString *pwdStr = self.isModifyPwd ? [NSString stringWithFormat:@"您的密码: %@",self.pwd] : [NSString stringWithFormat:@"初始密码: %@",self.pwd];
             NSRange pwdRange = [accountStr rangeOfString:self.pwd];
             NSMutableAttributedString *pwdattstr = [[NSMutableAttributedString alloc] initWithString:pwdStr];
             [pwdattstr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:pwdRange];
@@ -169,7 +169,7 @@ typedef enum {
         if (indexPath.row == 0) {
             BTTRegisterSuccessChangePwdCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterSuccessChangePwdCell" forIndexPath:indexPath];
             [cell.pwdTextField addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
-            NSString *accountStr = [NSString stringWithFormat:@"您的账号为: %@",self.account];
+            NSString *accountStr = [NSString stringWithFormat:@"您的账号: %@",self.account];
             NSRange accountRange = [accountStr rangeOfString:self.account];
             NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:accountStr];
             [attstr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:accountRange];

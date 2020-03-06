@@ -43,37 +43,53 @@
     
     self.confirmBtn.layer.cornerRadius = 20.0;
     self.confirmBtn.clipsToBounds = YES;
+    [_phoneField addTarget:self action:@selector(textFieldDidChanged) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (IBAction)jumpBtn_click:(id)sender {
     [self showCropAlert];
     self.goToGameView.hidden = NO;
     self.bindView.hidden = YES;
+    self.jumpBtn.hidden = YES;
 }
 
 - (IBAction)confirmBtn_click:(id)sender {
-    NSString *url = BTTBindPhone;
-    NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"messageId"] = self.messageId;
-    params[@"smsCode"] = [self smsCodeField].text;
-    NSString *successStr = @"绑定成功";
-    weakSelf(weakSelf)
-    [MBProgressHUD showLoadingSingleInView: self.view animated: YES];
-    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id _Nullable response, NSError *_Nullable error) {
-        IVJResponseObject *result = response;
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            if (successStr) {
-                [MBProgressHUD showSuccess:successStr toView:nil];
-                self.goToGameView.hidden = NO;
-                self.bindView.hidden = YES;
-                self.jumpBtn.hidden = YES;
-                [self showCropAlert];
+    
+    if (![PublicMethod isValidatePhone:_phoneField.text]) {
+        [MBProgressHUD showError:@"请输入正确的手机号" toView:nil];
+    }else if (_smsCodeField.text.length==0){
+        [MBProgressHUD showError:@"请输入正确验证码" toView:nil];
+    }else{
+        NSString *url = BTTBindPhone;
+        NSMutableDictionary *params = @{}.mutableCopy;
+        params[@"messageId"] = self.messageId;
+        params[@"smsCode"] = [self smsCodeField].text;
+        NSString *successStr = @"绑定成功";
+        weakSelf(weakSelf)
+        [MBProgressHUD showLoadingSingleInView: self.view animated: YES];
+        [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id _Nullable response, NSError *_Nullable error) {
+            IVJResponseObject *result = response;
+            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                if (successStr) {
+                    [MBProgressHUD showSuccess:successStr toView:nil];
+                    self.goToGameView.hidden = NO;
+                    self.bindView.hidden = YES;
+                    self.jumpBtn.hidden = YES;
+                    [self showCropAlert];
+                }
+            } else {
+                [MBProgressHUD showError:result.head.errMsg toView:nil];
             }
-        } else {
-            [MBProgressHUD showError:result.head.errMsg toView:nil];
-        }
-    }];
+        }];
+    }
+    
+}
+
+- (void)textFieldDidChanged{
+    if (_phoneField.text.length>11) {
+        _phoneField.text = [_phoneField.text substringToIndex:11];
+    }
 }
 
 - (IBAction)sendSmsBtn_click:(id)sender {
@@ -103,7 +119,7 @@
 
 - (void)showCropAlert {
     weakSelf(weakSelf)
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"保存账号密码到相册" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"保存账号密码截图到相册" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *_Nonnull action) {
     }];
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action) {

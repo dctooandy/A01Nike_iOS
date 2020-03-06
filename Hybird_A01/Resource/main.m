@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
-#import <tingyunApp/NBSAppAgent.h>
 #import "AppInitializeConfig.h"
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        if (EnvirmentType == 2) {
+        if (EnvirmentType == 0) {
             [NBSAppAgent startWithAppID:TingYunAppId];
             [NBSAppAgent setRedirectURL:@"https://app.tingyunfenxi.com"];
             if ([IVNetwork savedUserInfo]) {

@@ -41,6 +41,7 @@
 @property (strong,nonatomic) AVPlayer *player;
 
 @property (nonatomic, strong) BTTVideoNormalRegisterView *noramlRegisterView;
+@property (nonatomic, strong) UIButton *backBtn;
 @end
 
 @implementation BTTLoginOrRegisterViewController
@@ -134,7 +135,37 @@
     }
 }
 
+- (void)backBtn_click:(id)sender{
+    if (self.registerOrLoginType==BTTRegisterOrLoginTypeRegisterNormal) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else if (self.registerOrLoginType==BTTRegisterOrLoginTypeLogin){
+        if (self.loginView.isHidden) {
+            self.noramlRegisterView.hidden = YES;
+            self.fastRegisterView.hidden = YES;
+            self.loginView.hidden = NO;
+        }else{
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }else if (self.registerOrLoginType==BTTRegisterOrLoginTypeRegisterQuick){
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+}
+
 - (void)setUpView{
+    
+    UIButton *backBtn = [[UIButton alloc]init];
+    [backBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(backBtn_click:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:backBtn];
+    _backBtn = backBtn;
+    [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view.mas_top).offset(36);
+        make.width.mas_equalTo(23);
+        make.height.mas_equalTo(41);
+        make.left.mas_equalTo(self.view.mas_left).offset(24);
+    }];
+    
     UIImageView *appIcon = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_header_logo"]];
     appIcon.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:appIcon];
@@ -145,7 +176,7 @@
     }];
     
     weakSelf(weakSelf);
-    BTTLoginInfoView *loginInfoView = [[BTTLoginInfoView alloc]initWithFrame:CGRectMake(0, 294, SCREEN_WIDTH, 285)];
+    BTTLoginInfoView *loginInfoView = [[BTTLoginInfoView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 345)];
     loginInfoView.hidden = YES;
     loginInfoView.sendSmdCode = ^(NSString * _Nonnull phone) {
         [weakSelf loadMobileVerifyCodeWithPhone:phone use:2];

@@ -53,7 +53,7 @@
 
 - (void)showCropAlert{
     weakSelf(weakSelf)
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"保存账号密码到相册" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"保存账号密码截图到相册" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
     }];

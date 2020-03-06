@@ -138,8 +138,8 @@
 
 - (void)textFieldDidChanged:(id)sender {
     NSString *name = _accountField.text;
-    if (name.length > 11) {
-        _accountField.text = [name substringToIndex:11];
+    if (name.length > 9) {
+        _accountField.text = [name substringToIndex:9];
     }
 }
 
