@@ -349,6 +349,7 @@
 
 - (void)usdtOnlinePayHanlerWithType:(NSInteger)type{
     [self showLoading];
+    type = type==0 ? 25 : type;
     NSDictionary *params = @{
         @"payType":@(type),
         @"currency":@"USDT",
@@ -434,7 +435,7 @@
         }
         _selectedIndex = indexPath.row;
         BTTUsdtWalletModel *model = [BTTUsdtWalletModel yy_modelWithJSON:self.itemDataArray[indexPath.row]];
-        if (model.payType!=nil&&![model.payType isEqualToString:@""]) {
+        if (![model.payCategory isEqualToString:@"2"]) {
             _elseWalletView.hidden = YES;
             _normalWalletView.hidden = NO;
             if (model.maxAmount==nil||model.minAmount==nil) {
