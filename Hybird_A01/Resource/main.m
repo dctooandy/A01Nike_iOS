@@ -12,7 +12,7 @@
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        if (EnvirmentType == 0) {
+        if (EnvirmentType == 2) {
             [NBSAppAgent startWithAppID:TingYunAppId];
             [NBSAppAgent setRedirectURL:@"https://app.tingyunfenxi.com"];
             if ([IVNetwork savedUserInfo]) {
