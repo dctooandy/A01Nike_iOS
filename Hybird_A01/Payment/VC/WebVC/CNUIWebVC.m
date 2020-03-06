@@ -19,7 +19,7 @@
     if (self = [super init]) {
         self.order = order;
         WebConfigModel *webConfig = [[WebConfigModel alloc] init];
-        webConfig.url = [CNPayRequestManager submitPayFormWithOrderModel:order];
+        webConfig.url = order.payUrl;
         webConfig.newView = YES;
         self.webConfigModel = webConfig;
         self.title = title;

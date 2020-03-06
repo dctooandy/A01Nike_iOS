@@ -128,6 +128,8 @@
         
         NSMutableArray *wapPayments = [NSMutableArray array];
         BOOL haveWap = NO;
+        BOOL haveUSDT = NO;
+        BTTMeMainModel *usdtModel = [BTTMeMainModel new];
         
         NSString *bsStatus = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:BTTBMerchantStatus]];
         
@@ -263,16 +265,7 @@
                         haveWap = YES;
                     }
                     
-                    if ([model.payTypeName isEqualToString:@"USDT支付"]) {
-                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                        mainModel.name = @"泰达币-USDT";
-                        mainModel.iconName = @"me_usdt";
-                        mainModel.paymentType = 99;
-                        if (model!=nil) {
-                            mainModel.payModel = model;
-                        }
-                        [self.bigDataSoure addObject:mainModel];
-                    }
+                    
                     if ([model.payTypeName isEqualToString:@"快速支付"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"迅捷网银";
@@ -297,6 +290,15 @@
                         mainModel.payModel = model;
                         [self.normalDataTwo addObject:mainModel];
                     }
+                    if ([model.payTypeName isEqualToString:@"USDT支付"]) {
+                        usdtModel.name = @"泰达币-USDT";
+                        usdtModel.iconName = @"me_usdt";
+                        usdtModel.paymentType = 99;
+                        if (model!=nil) {
+                            usdtModel.payModel = model;
+                        }
+                        haveUSDT = YES;
+                    }
                 }
                 if (haveWap&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                     BTTMeMainModel *mainModel = [BTTMeMainModel new];
@@ -306,6 +308,10 @@
                     mainModel.payModels = wapPayments;
                     mainModel.payModel = wapPayments.firstObject;
                     [self.normalDataTwo addObject:mainModel];
+                }
+                
+                if (haveUSDT) {
+                    [self.bigDataSoure addObject:usdtModel];
                 }
                 
                 if (self.bigDataSoure.count && self.normalDataSoure.count && self.normalDataTwo.count) {

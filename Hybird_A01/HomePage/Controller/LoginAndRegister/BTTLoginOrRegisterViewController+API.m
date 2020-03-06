@@ -327,7 +327,6 @@
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:self.view];
         }
-        
     }];
 }
 
