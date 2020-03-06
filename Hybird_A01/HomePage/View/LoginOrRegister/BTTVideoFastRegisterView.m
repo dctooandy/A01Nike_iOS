@@ -35,6 +35,8 @@
         UITextField *accountField = [[UITextField alloc]init];
         accountField.font = [UIFont systemFontOfSize:16];
         accountField.textColor = [UIColor whiteColor];
+        accountField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        accountField.autocorrectionType = UITextAutocorrectionTypeNo;
         [accountField addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"请输入手机号码" attributes:
         @{NSForegroundColorAttributeName:[UIColor whiteColor],

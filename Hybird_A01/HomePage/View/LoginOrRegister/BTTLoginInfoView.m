@@ -43,6 +43,8 @@
         accountField.font = [UIFont systemFontOfSize:16];
         accountField.textColor = [UIColor whiteColor];
         accountField.keyboardType = UIKeyboardTypeDefault;
+        accountField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        accountField.autocorrectionType = UITextAutocorrectionTypeNo;
         [accountField addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
         NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:@"用户名/手机号" attributes:
                                           @{ NSForegroundColorAttributeName: [UIColor whiteColor],
