@@ -10,6 +10,7 @@
 #import "BTTMeMainModel.h"
 #import "CNPayRequestManager.h"
 #import "CNPayUSDTRateModel.h"
+#import "BTTBTCRateModel.h"
 
 @implementation BTTWithdrawalController (LoadData)
 
@@ -38,6 +39,23 @@
     }];
 }
 
+- (void)queryBtcRate{
+    NSDictionary *params = @{
+        @"amount":@"1"
+    };
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTWithDrawBTCRate paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [self hideLoading];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTBTCRateModel *model = [BTTBTCRateModel yy_modelWithJSON:result.body];
+            self.btcRate = model.btcRate;
+        }else{
+            [MBProgressHUD showError:@"获取比特币汇率失败，请稍后重试" toView:nil];
+        }
+    }];
+}
+
 - (void)requestCustomerInfoEx{
 //    BTTGetLoginInfoByNameEx
     [self showLoading];
@@ -56,10 +74,11 @@
 
 - (void)loadMainData {
     [self requestUSDTRate];
+    [self queryBtcRate];
     [self requestCustomerInfoEx];
     [self.sheetDatas removeAllObjects];
     NSMutableArray *sheetDatas = [NSMutableArray array];
-    NSString *btcrate = [[NSUserDefaults standardUserDefaults] valueForKey:BTTCacheBTCRateKey];
+    NSString *btcrate = isNull(self.btcRate) ? @"0" : self.btcRate;
     NSString *rateStr = [NSString stringWithFormat:@"¥%.2lf=1BTC(实时汇率)",[btcrate doubleValue]];
     
     NSArray *names1 = @[@"",@""];
@@ -70,8 +89,8 @@
     NSArray *placeholders3 = @[@"最少10元",rateStr,@"***银行-尾号*****",@""];
     NSArray *placeholders4 = @[@"最少10元",@"USDT",@"***银行-尾号*****",@"",@""];
     NSArray *heights1 = @[@205.0,@15.0];
-    NSArray *heights3 = @[@44.0,@44.0,@80.0,@100.0];
-    NSArray *heights4 = @[@44.0,@44.0,@80,@27,@100.0];
+    NSArray *heights3 = @[@44.0,@44.0,@44.0,@100.0];
+    NSArray *heights4 = @[@44.0,@44.0,@44,@27,@100.0];
     
     NSArray *canEdits1 = @[@NO,@NO];
     NSArray *canEdits3 = @[@YES,@NO,@NO,@NO];
@@ -111,7 +130,7 @@
         [values addObjectsFromArray:values4];
     }
 
-    if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"BTC"]) {
+    if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]) {
         [names removeObjectAtIndex:btcRateIndex];
         [placeholders removeObjectAtIndex:btcRateIndex];
         [heights removeObjectAtIndex:btcRateIndex];

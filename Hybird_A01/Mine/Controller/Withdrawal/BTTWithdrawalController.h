@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger canWithdraw;
 @property (nonatomic, assign) CGFloat usdtRate;
 @property (nonatomic, assign) BOOL isUSDT;
+@property (nonatomic, copy) NSString *btcRate;
 
 @end
 
