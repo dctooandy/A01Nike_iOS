@@ -103,9 +103,6 @@
     if ([cellName isEqualToString:@"取款至"]) {
         BTTWithdrawalCardSelectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalCardSelectCell" forIndexPath:indexPath];
         cell.model = self.bankList[self.selectIndex];
-        cell.contactBtnTap = ^{
-            [[CLive800Manager sharedInstance] startLive800Chat:self];
-        };
 
         return cell;
     }

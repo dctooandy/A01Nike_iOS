@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong)BTTBankModel *model;
 
-@property (nonatomic, copy) void(^contactBtnTap)(void);
 @end
 
 NS_ASSUME_NONNULL_END
