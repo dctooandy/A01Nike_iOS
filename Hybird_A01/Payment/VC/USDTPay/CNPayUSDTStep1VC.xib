@@ -37,13 +37,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rka-1d-oEV">
-                    <rect key="frame" x="0.0" y="44" width="414" height="276"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="366"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="276" id="uwu-ri-WGF"/>
+                        <constraint firstAttribute="height" constant="366" id="uwu-ri-WGF"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOp-lw-dGc">
-                    <rect key="frame" x="0.0" y="320" width="414" height="200"/>
+                    <rect key="frame" x="0.0" y="410" width="414" height="200"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6B-pN-1cp">
                             <rect key="frame" x="0.0" y="42" width="414" height="89"/>
@@ -187,7 +187,7 @@
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c17-dV-E7e">
-                    <rect key="frame" x="0.0" y="320" width="414" height="410"/>
+                    <rect key="frame" x="0.0" y="410" width="414" height="410"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请在2小时内完成存款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZE-sE-C9G">
                             <rect key="frame" x="160" y="228" width="120" height="12"/>

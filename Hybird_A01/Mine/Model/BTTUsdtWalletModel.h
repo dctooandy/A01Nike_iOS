@@ -69,6 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *bankaddress;
 @property (nonatomic, copy) NSString *minAmount;
 @property (nonatomic, copy) NSString *maxAmount;
+@property (nonatomic, copy) NSString *usdtProtocol;
 @end
 
 NS_ASSUME_NONNULL_END

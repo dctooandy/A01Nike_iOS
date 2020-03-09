@@ -45,7 +45,7 @@
 }
 
 
--(void)setSelected:(BOOL)selected{
+- (void)setItemSelected:(BOOL)selected{
     if (selected) {
         [_itemButton setSelected:YES];
     }else{

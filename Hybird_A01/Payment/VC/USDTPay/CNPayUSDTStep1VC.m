@@ -41,6 +41,8 @@
 @property (nonatomic, assign) NSInteger selectedIndex;
 @property (nonatomic, copy) NSString *handType;
 @property (nonatomic, strong) NSDictionary *otherWalletJson;
+@property (nonatomic, copy) NSString *selectedProtocol;
+@property (nonatomic, strong) NSArray *protocolArray;
 @end
 
 @implementation CNPayUSDTStep1VC
@@ -74,7 +76,7 @@
     [super viewWillAppear:animated];
     _selectedIndex = 0;
     self.handType = @"";
-    [self setViewHeight:676 fullScreen:NO];
+    [self setViewHeight:800 fullScreen:NO];
 }
 
 - (void)viewDidLoad {
@@ -82,11 +84,12 @@
     self.walletView.hidden = YES;
     self.normalWalletView.hidden = YES;
     self.elseWalletView.hidden = YES;
+    self.selectedProtocol = @"OMNI";
     [self setupView];
     [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     [self requestUSDTRate];
     [self requestWalletType];
-    [self setViewHeight:676 fullScreen:NO];
+    [self setViewHeight:800 fullScreen:NO];
 }
 
 - (void)requestWalletType{
@@ -141,18 +144,23 @@
                         }
                     }
                     if (i==array.count-1) {
+                        
                         self.bankCodeArray = codeArray;
                         self.itemsArray = @[itemsArrayOne,itemsArrayTwo];
                         self.itemDataArray = paymentArray;
                         self.itemImageArray = @[itemImageArrayOne,itemImageArrayTwo];
                         [self.walletCollectionView reloadData];
                         NSInteger sectionNumber = itemsArrayTwo.count==0 ? 1 : 2;
-                        CGFloat height = ((itemsArrayOne.count-1)/3+1)*54.5+sectionNumber*29+(sectionNumber-1)*54.5;
+                        CGFloat height = ((itemsArrayOne.count-1)/3+1)*54.5+sectionNumber*29+(sectionNumber-1)*54.5+90;
                         [self.walletView mas_updateConstraints:^(MASConstraintMaker *make) {
                             make.height.mas_equalTo(height);
                         }];
                         self.walletView.hidden = NO;
                         BTTUsdtWalletModel *paymodel = [BTTUsdtWalletModel yy_modelWithJSON:paymentArray.firstObject];
+                        NSArray *protocolArray = [paymodel.usdtProtocol componentsSeparatedByString:@";"];
+                        self.protocolArray = protocolArray;
+                        NSArray *protocolDetailArray = [protocolArray.firstObject componentsSeparatedByString:@":"];
+                        self.selectedProtocol = protocolDetailArray.firstObject;
                         if (![paymodel.payCategory isEqualToString:@"2"]) {
                             weakSelf.elseWalletView.hidden = YES;
                             weakSelf.normalWalletView.hidden = NO;
@@ -247,7 +255,7 @@
     self.walletView.layer.backgroundColor = [[UIColor colorWithRed:41.0f/255.0f green:45.0f/255.0f blue:54.0f/255.0f alpha:1.0f] CGColor];
     _normalWalletView.layer.backgroundColor = kBlackBackgroundColor.CGColor;
     _elseWalletView.layer.backgroundColor = kBlackBackgroundColor.CGColor;
-    self.walletCollectionView.frame = CGRectMake(15, 0, SCREEN_WIDTH-30, 276);
+    self.walletCollectionView.frame = CGRectMake(15, 0, SCREEN_WIDTH-30, 376);
     [self.walletView addSubview:self.walletCollectionView];
     
     _saveView.backgroundColor = kBlackLightColor;
@@ -373,7 +381,8 @@
         @"payType":@(payType),
         @"payid":payId,
         @"currency":@"USDT",
-        @"loginName":[IVNetwork savedUserInfo].loginName
+        @"loginName":[IVNetwork savedUserInfo].loginName,
+        @"protocol" : self.selectedProtocol
     };
     [IVNetwork requestPostWithUrl:BTTCreateOnlineOrder paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
@@ -399,6 +408,7 @@
     [[NSUserDefaults standardUserDefaults]setFloat:self.usdtRate forKey:@"manual_usdt_rate"];
     [[NSUserDefaults standardUserDefaults]setObject:model.minAmount forKey:@"usdt_minamount"];
     [[NSUserDefaults standardUserDefaults]setObject:model.maxAmount forKey:@"usdt_maxamount"];
+    [[NSUserDefaults standardUserDefaults]setObject:self.selectedProtocol forKey:@"usdt_protocol"];
     [self goToStep:1];
 }
 
@@ -415,19 +425,27 @@
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     NSArray *array = _itemsArray.lastObject;
     if (array.count==0) {
-        return 1;
+        return 2;
     }else{
-       return 2;
+       return 3;
     }
 }
 
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    NSArray *array = _itemsArray[section];
-    return array.count;
+    NSArray *array = _itemsArray.lastObject;
+    if (section==0) {
+        NSArray *array = _itemsArray[section];
+        return array.count;
+    }else if (section==1&&array.count!=0){
+        return array.count;
+    }else{
+        return self.protocolArray.count;
+    }
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
+    NSArray *array = _itemsArray.lastObject;
     if (indexPath.section==0) {
         if (_selectedIndex!=indexPath.row) {
             _usdtInputField.text = @"";
@@ -435,6 +453,10 @@
         }
         _selectedIndex = indexPath.row;
         BTTUsdtWalletModel *model = [BTTUsdtWalletModel yy_modelWithJSON:self.itemDataArray[indexPath.row]];
+        NSArray *protocolArray = [model.usdtProtocol componentsSeparatedByString:@";"];
+        self.protocolArray = protocolArray;
+        NSArray *protocolDetailArray = [protocolArray.firstObject componentsSeparatedByString:@":"];
+        self.selectedProtocol = protocolDetailArray.firstObject;
         if (![model.payCategory isEqualToString:@"2"]) {
             _elseWalletView.hidden = YES;
             _normalWalletView.hidden = NO;
@@ -476,12 +498,18 @@
             
             self.handType = [payTypeName isEqualToString:@"Atoken"] ? @"atoken" : @"bitpie";
         }
-        
-    }else{
+        [UIView performWithoutAnimation:^{
+            [self.walletCollectionView reloadData];
+        }];
+    }else if(indexPath.section==1&&array.count!=0){
         _usdtInputField.text = @"";
         _rmbLabel.text = @"";
         _selectedIndex = 999;
         BTTUsdtWalletModel *model = [BTTUsdtWalletModel yy_modelWithJSON:self.otherWalletJson];
+        NSArray *protocolArray = [model.usdtProtocol componentsSeparatedByString:@";"];
+        self.protocolArray = protocolArray;
+        NSArray *protocolDetailArray = [protocolArray.firstObject componentsSeparatedByString:@":"];
+        self.selectedProtocol = protocolDetailArray.firstObject;
         if (![model.payCategory isEqualToString:@"2"]) {
             _elseWalletView.hidden = YES;
             _normalWalletView.hidden = NO;
@@ -523,30 +551,72 @@
             
             self.handType = [payTypeName isEqualToString:@"Atoken"] ? @"atoken" : @"bitpie";
         }
+        [UIView performWithoutAnimation:^{
+            [self.walletCollectionView reloadData];
+        }];
+    }else{
+        NSArray *protocolDetailArray = [self.protocolArray[indexPath.row] componentsSeparatedByString:@":"];
+        self.selectedProtocol = protocolDetailArray.firstObject;
+        _walletAddressLabel.text = protocolDetailArray.lastObject;
+        _qrCodeImg.image = [PublicMethod QRCodeMethod:protocolDetailArray.lastObject];
+        [UIView performWithoutAnimation:^{
+            [self.walletCollectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
+        }];
     }
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    USDTWalletCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"USDTWalletCollectionCell" forIndexPath:indexPath];
-    [cell setCellWithName:_itemsArray[indexPath.section][indexPath.row] imageName:_itemImageArray[indexPath.section][indexPath.row]];
-    return cell;
+    NSArray *array = _itemsArray.lastObject;
+    if (indexPath.section==0) {
+        USDTWalletCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"USDTWalletCollectionCell" forIndexPath:indexPath];
+        [cell setCellWithName:_itemsArray[indexPath.section][indexPath.row] imageName:_itemImageArray[indexPath.section][indexPath.row]];
+        [cell setItemSelected:_selectedIndex==indexPath.row];
+        
+        return cell;
+    }else if (indexPath.section==1&&array.count!=0){
+        USDTWalletCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"USDTWalletCollectionCell" forIndexPath:indexPath];
+        [cell setCellWithName:_itemsArray[indexPath.section][indexPath.row] imageName:_itemImageArray[indexPath.section][indexPath.row]];
+        [cell setItemSelected:_selectedIndex==999];
+        
+        return cell;
+    }else{
+        USDTWalletCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"USDTWalletCollectionCell" forIndexPath:indexPath];
+        NSArray *protocolDetailArray = [self.protocolArray[indexPath.row] componentsSeparatedByString:@":"];
+        NSString *title = protocolDetailArray.firstObject;
+        [cell setCellWithName:title imageName:@""];
+        [cell setItemSelected:[title isEqualToString:self.selectedProtocol]];
+        return cell;
+    }
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     UICollectionReusableView *headView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                                                                                 withReuseIdentifier:@"UICollectionViewHeader"
                                                                                        forIndexPath:indexPath];
+    NSArray *array = _itemsArray.lastObject;
+    for (UIView *view in headView.subviews) {
+        [view removeFromSuperview];
+    }
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 15, 60, 14)];
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.font = [UIFont systemFontOfSize:14];
-    titleLabel.text = indexPath.section==0? @"推荐钱包" : @"其它钱包";
+    
     [headView addSubview:titleLabel];
     
     UILabel *noticeLabel = [[UILabel alloc]initWithFrame:CGRectMake(70, 15, SCREEN_WIDTH-90, 14)];
     noticeLabel.textColor = COLOR_RGBA(129, 135, 145, 1);
     noticeLabel.font = [UIFont systemFontOfSize:12];
-    noticeLabel.text = indexPath.section==0? @"同钱包转账5分钟即可到账" : @"跨钱包转账即跨行操作，需以实际到账时间为准";
     [headView addSubview:noticeLabel];
+    if (indexPath.section==0) {
+        titleLabel.text = @"推荐钱包";
+        noticeLabel.text = @"同钱包转账5分钟即可到账";
+    }else if (indexPath.section==1&&array.count!=0){
+        titleLabel.text = @"其他钱包";
+        noticeLabel.text = @"跨钱包转账即跨行操作，需以实际到账时间为准";
+    }else{
+        titleLabel.text = @"协议";
+        noticeLabel.text = @" ";
+    }
         
     return headView;
 }
