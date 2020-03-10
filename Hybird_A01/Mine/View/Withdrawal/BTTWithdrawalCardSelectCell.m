@@ -31,7 +31,7 @@
         if ([model.accountType isEqualToString:@"others"]) {
             self.bankIcon.image=[UIImage imageNamed:@"me_usdt_otherwallet"];
         }else{
-            self.bankIcon.image=[UIImage imageNamed:[NSString stringWithFormat:@"me_usdt_%@",model.accountType]];
+            self.bankIcon.image=[UIImage imageNamed:[NSString stringWithFormat:@"me_usdt_%@",[model.accountType lowercaseString]]];
         }
     } else {
         NSString *iconURLStr = model.bankIcon;

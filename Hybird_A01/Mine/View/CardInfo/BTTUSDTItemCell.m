@@ -10,7 +10,7 @@
 #import "BTTUSDTButton.h"
 #import "CNPayConstant.h"
 #import "USDTWalletCollectionCell.h"
-#import "BTTUsdtWalletModel.h"
+#import "BTTUSDTWalletTypeModel.h"
 
 @interface BTTUSDTItemCell()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) NSMutableArray *imgArray;
@@ -74,13 +74,13 @@
     self.usdtDatas = usdtDatas;
     for (int i = 0; i<usdtDatas.count; i++) {
         NSDictionary *dict = usdtDatas[i];
-        BTTUsdtWalletModel *model = [BTTUsdtWalletModel yy_modelWithDictionary:dict];
-        if ([model.bankcode containsString:@"others"]) {
+        BTTUSDTWalletTypeModel *model = [BTTUSDTWalletTypeModel yy_modelWithDictionary:dict];
+        if ([model.code containsString:@"Others"]) {
             [self.imgArray addObject:@"me_usdt_otherwallet"];
             [self.nameArray addObject:@"其它钱包"];
         }else{
-            [self.imgArray addObject:[NSString stringWithFormat:@"me_usdt_%@",model.bankcode]];
-            [self.nameArray addObject:model.bankcode];
+            [self.imgArray addObject:[NSString stringWithFormat:@"me_usdt_%@",[model.code lowercaseString]]];
+            [self.nameArray addObject:model.code];
         }
         if (i==usdtDatas.count-1) {
             [self.walletCollectionView reloadData];
@@ -95,14 +95,17 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    self.selectedIndex = indexPath.row;
     if (self.selectPayType) {
         self.selectPayType(indexPath.row);
     }
+    [self.walletCollectionView reloadData];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
     USDTWalletCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"USDTWalletCollectionCell" forIndexPath:indexPath];
     [cell setCellWithName:_nameArray[indexPath.row] imageName:_imgArray[indexPath.row]];
+    [cell setItemSelected:indexPath.row==self.selectedIndex];
     return cell;
 }
 

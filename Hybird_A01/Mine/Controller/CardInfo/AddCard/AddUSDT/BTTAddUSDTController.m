@@ -15,11 +15,14 @@
 #import "BTTAddUSDTController+LoadData.h"
 #import "CNPayRequestManager.h"
 #import "BTTChangeMobileSuccessController.h"
+#import "BTTAddUsdtHeaderCell.h"
+#import "BTTUSDTWalletTypeModel.h"
 
 @interface BTTAddUSDTController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, copy) NSString *walletString;
 @property (nonatomic, copy) NSString *confirmString;
 @property (nonatomic, assign) NSInteger selectedType;
+@property (nonatomic, copy) NSString *selectedProtocol;
 @end
 
 @implementation BTTAddUSDTController
@@ -42,6 +45,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageSeparateCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageSeparateCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPublicBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPublicBtnCell"];
+    [self.collectionView registerClass:[BTTAddUsdtHeaderCell class] forCellWithReuseIdentifier:@"BTTAddUsdtHeaderCell"];
 }
 
 #pragma mark - collectionview delegate
@@ -58,16 +62,27 @@
         cell.selectPayType = ^(NSInteger tag) {
             NSLog(@"%ld",(long)tag);
             weakSelf.selectedType = tag;
+            [weakSelf.collectionView reloadData];
         };
         return cell;
     } else if (indexPath.row == 1) {
+        BTTAddUsdtHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAddUsdtHeaderCell" forIndexPath:indexPath];
+        if (self.usdtDatas.count>0) {
+            BTTUSDTWalletTypeModel *model = [BTTUSDTWalletTypeModel yy_modelWithJSON:self.usdtDatas[indexPath.row]];
+            [cell setTypeData:model.protocol];
+        }
+        cell.tapProtocol = ^(NSString * _Nonnull protocol) {
+            self.selectedProtocol = protocol;
+        };
+        return cell;
+    }else if (indexPath.row == 2) {
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
-    } else if (indexPath.row == 2 || indexPath.row == 3) {
+    } else if (indexPath.row == 3 || indexPath.row == 4) {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         BTTMeMainModel *model = [BTTMeMainModel new];
         
-        if (indexPath.row == 2) {
+        if (indexPath.row == 3) {
             model.name = @"钱包地址";
             model.iconName = @"请输入钱包地址";
             cell.textFieldChanged = ^(NSString * _Nonnull text) {
@@ -93,9 +108,11 @@
 }
 
 - (void)submitButton_Click:(id)sender{
-    NSDictionary *dict = self.usdtDatas[_selectedType];
-    NSString *dictCode = [NSString stringWithFormat:@"%@",dict[@"bankcode"]];
+    [self.view endEditing:YES];
+    
+    BTTUSDTWalletTypeModel *model = [BTTUSDTWalletTypeModel yy_modelWithJSON:self.usdtDatas[_selectedType]];
     NSString *url = BTTAddBankCard;
+    NSString *firstChar = [_walletString substringWithRange:NSMakeRange(0, 1)];
     
     weakSelf(weakSelf)
     if ([_walletString isEqualToString:@""]) {
@@ -104,17 +121,23 @@
         [MBProgressHUD showError:@"确认地址不得为空" toView:self.view];
     }else if (![_confirmString isEqualToString:_walletString]){
         [MBProgressHUD showError:@"两次输入不一致" toView:self.view];
+    }else if ([self.selectedProtocol isEqualToString:@"OMNI"]&&!([firstChar isEqualToString:@"1"]||[firstChar isEqualToString:@"3"])){
+        [MBProgressHUD showError:@"OMNI协议钱包，请以1或3开头" toView:self.view];
+    }else if ([self.selectedProtocol isEqualToString:@"ERC20"]&&!([firstChar isEqualToString:@"0"]&&[firstChar isEqualToString:@"x"])){
+        [MBProgressHUD showError:@"ERC20协议钱包，请以0或x开头" toView:self.view];
     }else{
+        [self showLoading];
         NSMutableDictionary *params = @{}.mutableCopy;
         params[@"accountNo"] = _walletString;
         params[@"accountType"] = @"USDT";
-        params[@"bankName"] = dictCode;
+        params[@"bankName"] = model.code;
         params[@"expire"] = @0;
         params[@"messageId"] = self.messageId;
         params[@"validateId"] = self.validateId;
-        params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+        params[@"protocol"] = self.selectedProtocol;
         [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
             IVJResponseObject *result = response;
+            [self hideLoading];
             [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
             if ([result.head.errCode isEqualToString:@"0000"]) {
                 [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
@@ -130,7 +153,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    _selectedType = indexPath.row;
+//    _selectedType = indexPath.row;
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource
@@ -170,15 +193,17 @@
         [self.elementsHight removeAllObjects];
     }
     NSMutableArray *elementsHight = [NSMutableArray array];
-    NSInteger total = 5;
+    NSInteger total = 6;
     for (int i = 0; i < total; i++) {
         if (i == 0) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 197)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 60)]];
         } else if (i == 1) {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 85)]];
+        }else if (i == 2) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
-        } else if (i == 2) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         } else if (i == 3) {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+        } else if (i == 4) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         } else {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];

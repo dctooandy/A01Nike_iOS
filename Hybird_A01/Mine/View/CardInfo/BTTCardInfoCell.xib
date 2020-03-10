@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,6 +23,17 @@
                             <constraint firstAttribute="height" constant="173" id="C76-Zk-OSY"/>
                         </constraints>
                     </imageView>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USDT-OMNI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cS3-0P-rYJ">
+                        <rect key="frame" x="221" y="56" width="140" height="48"/>
+                        <color key="backgroundColor" red="0.30196078430000001" green="0.89411764709999997" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="140" id="0Uc-93-eC6"/>
+                            <constraint firstAttribute="height" constant="48" id="SrH-4E-0cC"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="绑定银行卡 (1)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuK-g8-afn">
                         <rect key="frame" x="15" y="20" width="105" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -91,6 +102,17 @@
                             <action selector="setDefaultBtnClicked:" destination="gTV-IL-0wX" eventType="touchUpInside" id="fQf-9T-spO"/>
                         </connections>
                     </button>
+                    <button hidden="YES" opaque="NO" tag="6007" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9IA-2s-yIX">
+                        <rect key="frame" x="270" y="175.5" width="80" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="VDl-37-aAb"/>
+                            <constraint firstAttribute="width" constant="80" id="fWG-H2-tLh"/>
+                        </constraints>
+                        <state key="normal" image="defaultCard"/>
+                        <connections>
+                            <action selector="bottomDefault_Click:" destination="gTV-IL-0wX" eventType="touchUpInside" id="apn-sN-HV3"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
@@ -101,10 +123,14 @@
                 <constraint firstItem="cuK-g8-afn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="DZz-NC-bg2"/>
                 <constraint firstItem="ckL-Ws-Y19" firstAttribute="leading" secondItem="JP5-YE-eQZ" secondAttribute="trailing" constant="5" id="E2C-Fk-kVv"/>
                 <constraint firstAttribute="trailing" secondItem="DqY-Xg-Csz" secondAttribute="trailing" constant="15" id="EDG-Vp-lxn"/>
+                <constraint firstAttribute="trailing" secondItem="cS3-0P-rYJ" secondAttribute="trailing" constant="14" id="GhU-9U-Ty4"/>
+                <constraint firstItem="9IA-2s-yIX" firstAttribute="trailing" secondItem="YcX-jv-LND" secondAttribute="trailing" id="Hy6-9x-8xc"/>
                 <constraint firstItem="kEm-o8-uMt" firstAttribute="centerY" secondItem="OH1-Ca-XIR" secondAttribute="centerY" id="LKh-1N-idf"/>
                 <constraint firstItem="YcX-jv-LND" firstAttribute="centerY" secondItem="ckL-Ws-Y19" secondAttribute="centerY" id="Mdk-B4-SSC"/>
                 <constraint firstItem="gxe-PU-59k" firstAttribute="leading" secondItem="JP5-YE-eQZ" secondAttribute="trailing" constant="8" id="QbX-ei-sro"/>
+                <constraint firstItem="cS3-0P-rYJ" firstAttribute="top" secondItem="OH1-Ca-XIR" secondAttribute="bottom" constant="16" id="Qng-rO-k42"/>
                 <constraint firstItem="cuK-g8-afn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="THJ-Ra-xtc"/>
+                <constraint firstItem="9IA-2s-yIX" firstAttribute="bottom" secondItem="Th4-ub-dmv" secondAttribute="bottom" id="TsO-8z-0WT"/>
                 <constraint firstItem="i9h-gI-u3b" firstAttribute="top" secondItem="gxe-PU-59k" secondAttribute="bottom" constant="15" id="Wh3-e5-uVr"/>
                 <constraint firstItem="DqY-Xg-Csz" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="24" id="YXT-pz-uK4"/>
                 <constraint firstAttribute="trailing" secondItem="OH1-Ca-XIR" secondAttribute="trailing" constant="15" id="dFP-t4-NTw"/>
@@ -123,12 +149,14 @@
                 <outlet property="adressLabel" destination="Th4-ub-dmv" id="tnS-bD-JGl"/>
                 <outlet property="bankIcon" destination="JP5-YE-eQZ" id="yAm-Ps-5SW"/>
                 <outlet property="bankNameLabel" destination="ckL-Ws-Y19" id="eQj-OD-mpl"/>
+                <outlet property="bottomDefaultBtn" destination="9IA-2s-yIX" id="kfY-0b-gof"/>
                 <outlet property="cardBgImageView" destination="DqY-Xg-Csz" id="zXw-xi-0AL"/>
                 <outlet property="cardNoLabel" destination="cuK-g8-afn" id="cy0-6n-K05"/>
                 <outlet property="cardNumLabel" destination="i9h-gI-u3b" id="tFC-rj-lR9"/>
                 <outlet property="classLabel" destination="gxe-PU-59k" id="9JI-l8-63e"/>
                 <outlet property="deleteBtn" destination="OH1-Ca-XIR" id="dtM-vu-usv"/>
                 <outlet property="modifyBtn" destination="kEm-o8-uMt" id="DTj-95-M84"/>
+                <outlet property="protocolLabel" destination="cS3-0P-rYJ" id="SNq-s1-Tbu"/>
                 <outlet property="setDefaultBtn" destination="YcX-jv-LND" id="NXj-SK-fhQ"/>
             </connections>
             <point key="canvasLocation" x="128.5" y="122"/>

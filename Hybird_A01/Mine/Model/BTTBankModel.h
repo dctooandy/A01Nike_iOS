@@ -43,4 +43,6 @@
 @property (copy, nonatomic) NSString *uuid;
 /** 取款时选取控件显示的文字*/
 @property(copy, nonatomic) NSString *withdrawText;
+
+@property(copy, nonatomic) NSString *protocol;
 @end

@@ -13,14 +13,14 @@
 
 - (void)loadUSDTData {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-    [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
-    [params setValue:@"5" forKey:@"bqpaytype"];
-    [params setValue:@"1" forKey:@"flag"];
-    [IVNetwork requestPostWithUrl:BTTUsdtWallets paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [params setValue:@"1" forKey:@"walletType"];
+    [IVNetwork requestPostWithUrl:BTTQueryUSDTWallet paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if ([result.body isKindOfClass:[NSArray class]]) {
                 NSArray *array = result.body;
+                CGFloat height = 96+(array.count-1)/3*36;
+                [self.elementsHight replaceObjectAtIndex:0 withObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, height)]];
                 [self.usdtDatas addObjectsFromArray:array];
                 [self.collectionView reloadData];
             }

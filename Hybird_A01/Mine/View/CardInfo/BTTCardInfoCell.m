@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *adressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cardNoLabel;
 @property (weak, nonatomic) IBOutlet UIButton *setDefaultBtn;
+@property (weak, nonatomic) IBOutlet UILabel *protocolLabel;
+@property (weak, nonatomic) IBOutlet UIButton *bottomDefaultBtn;
 
 @end
 
@@ -60,7 +62,9 @@
     self.modifyBtn.hidden = self.isChecking || [model.accountType isEqualToString:@"BTC"] || [model.bankName isEqualToString:@"USDT"];
     self.deleteBtn.hidden = self.isChecking || self.isOnlyOneCard;
     self.setDefaultBtn.hidden = [model.accountType isEqualToString:@"BTC"];
+    self.bottomDefaultBtn.hidden = [model.accountType isEqualToString:@"BTC"];
     self.setDefaultBtn.userInteractionEnabled = !model.isDefault;
+    self.bottomDefaultBtn.userInteractionEnabled = !model.isDefault;
     if (model.flag == 9) {
         self.deleteBtn.hidden = NO;
         self.deleteBtn.enabled = NO;
@@ -73,7 +77,7 @@
         if ([model.accountType isEqualToString:@"others"]) {
             self.bankIcon.image=[UIImage imageNamed:@"me_usdt_otherwallet"];
         }else{
-            self.bankIcon.image=[UIImage imageNamed:[NSString stringWithFormat:@"me_usdt_%@",model.accountType]];
+            self.bankIcon.image=[UIImage imageNamed:[NSString stringWithFormat:@"me_usdt_%@",[model.accountType lowercaseString]]];
         }
     } else {
         NSString *iconURLStr = model.bankIcon;
@@ -91,6 +95,7 @@
     }
     NSString *setDefaultImageName = model.isDefault ? @"defaultCard" : @"unDefaultCard";
     [self.setDefaultBtn setImage:[UIImage imageNamed:setDefaultImageName] forState:UIControlStateNormal];
+    [self.bottomDefaultBtn setImage:[UIImage imageNamed:setDefaultImageName] forState:UIControlStateNormal];
     if ([model.bankName isEqualToString:@"USDT"]) {
         NSString *resultStr=[model.accountType stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[model.accountType substringToIndex:1] capitalizedString]];
         if ([model.accountType isEqualToString:@"others"]) {
@@ -112,7 +117,22 @@
     }
     
     self.cardNoLabel.text = [NSString stringWithFormat:@"%@(%ld)",typeString,(long)(self.indexPath.row + 1)];
+    
+    if (!isNull(model.protocol)&&![model.protocol isEqualToString:@""]&&[model.bankName isEqualToString:@"USDT"]) {
+        self.protocolLabel.text = [NSString stringWithFormat:@"USDT-%@",model.protocol];
+        self.protocolLabel.hidden = NO;
+        self.bottomDefaultBtn.hidden = [model.accountType isEqualToString:@"BTC"];
+        self.setDefaultBtn.hidden = YES;
+    }else{
+        self.protocolLabel.hidden = YES;
+        self.bottomDefaultBtn.hidden = YES;
+    }
 }
 
+- (IBAction)bottomDefault_Click:(id)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
+}
 
 @end

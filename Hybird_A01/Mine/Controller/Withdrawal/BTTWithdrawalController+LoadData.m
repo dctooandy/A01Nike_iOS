@@ -83,22 +83,22 @@
     
     NSArray *names1 = @[@"",@""];
     NSArray *names3 = @[@"金额(元)",@"比特币",@"取款至",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
-    NSArray *names4 = @[@"金额(元)",@"预估到账",@"取款至",@"",@""];
+    NSArray *names4 = @[@"金额(元)",@"预估到账",@"取款至",@"",@"",@""];
     
     NSArray *placeholders1 = @[@"",@""];
     NSArray *placeholders3 = @[@"最少10元",rateStr,@"***银行-尾号*****",@""];
-    NSArray *placeholders4 = @[@"最少10元",@"USDT",@"***银行-尾号*****",@"",@""];
+    NSArray *placeholders4 = @[@"最少10元",@"USDT",@"***银行-尾号*****",@"",@"",@""];
     NSArray *heights1 = @[@205.0,@15.0];
     NSArray *heights3 = @[@44.0,@44.0,@44.0,@100.0];
-    NSArray *heights4 = @[@44.0,@44.0,@44,@27,@100.0];
+    NSArray *heights4 = @[@44.0,@44.0,@44,@44,@27,@100.0];
     
     NSArray *canEdits1 = @[@NO,@NO];
     NSArray *canEdits3 = @[@YES,@NO,@NO,@NO];
-    NSArray *canEdits4 = @[@YES,@NO,@NO,@NO,@NO];
+    NSArray *canEdits4 = @[@YES,@NO,@NO,@NO,@NO,@NO];
     
     NSArray *values1 = @[@"",@""];
     NSArray *values3 = @[@"",@"",@"",@""];
-    NSArray *values4 = @[@"",@"",@"",@"",@""];
+    NSArray *values4 = @[@"",@"",@"",@"",@"",@""];
  
     NSMutableArray *names = @[].mutableCopy;
     NSMutableArray *placeholders = @[].mutableCopy;

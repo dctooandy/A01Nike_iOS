@@ -696,6 +696,9 @@
 		D3A9A7162408BD06007F672A /* BTTVideoNormalRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A9A7152408BD06007F672A /* BTTVideoNormalRegisterView.m */; };
 		D3A9A71A240E2B6A007F672A /* BTTNormalRegisterSuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A9A718240E2B6A007F672A /* BTTNormalRegisterSuccessController.m */; };
 		D3A9A71B240E2B6A007F672A /* BTTNormalRegisterSuccessController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3A9A719240E2B6A007F672A /* BTTNormalRegisterSuccessController.xib */; };
+		D3A9A71E24163E20007F672A /* BTTAddUsdtHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A9A71C24163E20007F672A /* BTTAddUsdtHeaderCell.m */; };
+		D3A9A72124172611007F672A /* BTTUSDTWalletTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A9A72024172611007F672A /* BTTUSDTWalletTypeModel.m */; };
+		D3A9A72424173409007F672A /* BTTWithDrawProtocolView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A9A72324173409007F672A /* BTTWithDrawProtocolView.m */; };
 		D3B47D5923B70A5500D37C7F /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = D3B47D5823B70A5400D37C7F /* app.zip */; };
 		D51AD19F21B8FEE5008C633A /* CNPayBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */; };
 		D599251421AE5AF6001E885A /* CNPayNormalTF.m in Sources */ = {isa = PBXBuildFile; fileRef = D599251321AE5AF6001E885A /* CNPayNormalTF.m */; };
@@ -1861,6 +1864,12 @@
 		D3A9A717240E2B6A007F672A /* BTTNormalRegisterSuccessController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTNormalRegisterSuccessController.h; sourceTree = "<group>"; };
 		D3A9A718240E2B6A007F672A /* BTTNormalRegisterSuccessController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTNormalRegisterSuccessController.m; sourceTree = "<group>"; };
 		D3A9A719240E2B6A007F672A /* BTTNormalRegisterSuccessController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTNormalRegisterSuccessController.xib; sourceTree = "<group>"; };
+		D3A9A71C24163E20007F672A /* BTTAddUsdtHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTAddUsdtHeaderCell.m; sourceTree = "<group>"; };
+		D3A9A71D24163E20007F672A /* BTTAddUsdtHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTAddUsdtHeaderCell.h; sourceTree = "<group>"; };
+		D3A9A71F24172611007F672A /* BTTUSDTWalletTypeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUSDTWalletTypeModel.h; sourceTree = "<group>"; };
+		D3A9A72024172611007F672A /* BTTUSDTWalletTypeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUSDTWalletTypeModel.m; sourceTree = "<group>"; };
+		D3A9A72224173409007F672A /* BTTWithDrawProtocolView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWithDrawProtocolView.h; sourceTree = "<group>"; };
+		D3A9A72324173409007F672A /* BTTWithDrawProtocolView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTWithDrawProtocolView.m; sourceTree = "<group>"; };
 		D3B47D5823B70A5400D37C7F /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
 		D51AD19D21B8FEE5008C633A /* CNPayBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayBaseView.h; sourceTree = "<group>"; };
 		D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayBaseView.m; sourceTree = "<group>"; };
@@ -2129,6 +2138,8 @@
 				3A11ADF82181A56000B1AFF4 /* BTTWithdrawalController+LoadData.h */,
 				3A11ADF92181A56000B1AFF4 /* BTTWithdrawalController+LoadData.m */,
 				3A11AE032181C17600B1AFF4 /* WithdrawalSuccess */,
+				D3A9A72224173409007F672A /* BTTWithDrawProtocolView.h */,
+				D3A9A72324173409007F672A /* BTTWithDrawProtocolView.m */,
 			);
 			path = Withdrawal;
 			sourceTree = "<group>";
@@ -4053,10 +4064,14 @@
 		D31B0EE623B451B0003666BA /* AddUSDT */ = {
 			isa = PBXGroup;
 			children = (
+				D3A9A71D24163E20007F672A /* BTTAddUsdtHeaderCell.h */,
+				D3A9A71C24163E20007F672A /* BTTAddUsdtHeaderCell.m */,
 				D31B0EE723B451B0003666BA /* BTTAddUSDTController.h */,
 				D31B0EE923B451B0003666BA /* BTTAddUSDTController.m */,
 				D31B0EE823B451B0003666BA /* BTTAddUSDTController+LoadData.h */,
 				D31B0EEA23B451B0003666BA /* BTTAddUSDTController+LoadData.m */,
+				D3A9A71F24172611007F672A /* BTTUSDTWalletTypeModel.h */,
+				D3A9A72024172611007F672A /* BTTUSDTWalletTypeModel.m */,
 			);
 			path = AddUSDT;
 			sourceTree = "<group>";
@@ -5218,6 +5233,7 @@
 				3AAFF8BB21DE03ED00F875B1 /* BTTSaveMoneySuccessController.m in Sources */,
 				3AB0681E21A25E7B00072FB7 /* BTTChangeMobileSuccessController.m in Sources */,
 				3ADD23F02179B97A00FA959A /* SDCollectionViewCell.m in Sources */,
+				D3A9A72424173409007F672A /* BTTWithDrawProtocolView.m in Sources */,
 				3AC3FFA1219AB8CC008AECCB /* BTTAnimationPopView.m in Sources */,
 				3A11AE622186CDA100B1AFF4 /* BTTXimaHeaderCell.m in Sources */,
 				EA55F37B21C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.m in Sources */,
@@ -5225,6 +5241,7 @@
 				3A5F7AA321A9524D00128E8B /* BTTProvinceModel.m in Sources */,
 				3A11AE6C2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.m in Sources */,
 				3A37E1262164A22700FB13A1 /* BTTDiscountsViewController.m in Sources */,
+				D3A9A71E24163E20007F672A /* BTTAddUsdtHeaderCell.m in Sources */,
 				D345F2AC23D0091600E658A6 /* BTTUserInfoModel.m in Sources */,
 				3A9E4C7C21A25AE700E7D8C0 /* BTTChangeMobileNextController.m in Sources */,
 				3A9E4C1A219D1F8700E7D8C0 /* BTTForgetPasswordController+LoadData.m in Sources */,
@@ -5252,6 +5269,7 @@
 				3AB0687C21A57A6900072FB7 /* BTTXimaItemModel.m in Sources */,
 				3A9E4C45219E9CAD00E7D8C0 /* BTTBindStatusModel.m in Sources */,
 				D31B0EFA23B46058003666BA /* CNPayUSDTRateModel.m in Sources */,
+				D3A9A72124172611007F672A /* BTTUSDTWalletTypeModel.m in Sources */,
 				3A3DF1E6237BA445006129F6 /* BTTHotPromotionCell.m in Sources */,
 				D5DBEB2921ABB774008AF629 /* CNPayCardModel.m in Sources */,
 				D5DBEB2821ABB774008AF629 /* CNPayBankCardModel.m in Sources */,

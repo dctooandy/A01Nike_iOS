@@ -23,12 +23,14 @@
 #import "BTTBTCRateModel.h"
 #import "CNPayUSDTRateModel.h"
 #import "CLive800Manager.h"
+#import "BTTWithDrawProtocolView.h"
 
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate>
 @property(nonatomic, copy)NSString *amount;
 @property(nonatomic, copy)NSString *password;
 @property(nonatomic, copy)NSString *usdtAmount;
 @property(nonatomic, strong) UITextField *usdtField;
+@property (nonatomic, copy) NSString *selectedProtocol;
 @end
 
 @implementation BTTWithdrawalController
@@ -61,6 +63,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTWithdrawalCardSelectCell" bundle:nil] forCellWithReuseIdentifier:@"BTTWithdrawalCardSelectCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTWithdrawalNotifyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTWithdrawalNotifyCell"];
     [self.collectionView registerClass:[BTTWithDrawUSDTConfirmCell class] forCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell"];
+    [self.collectionView registerClass:[BTTWithDrawProtocolView class] forCellWithReuseIdentifier:@"BTTWithDrawProtocolView"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -87,6 +90,18 @@
     if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]&&indexPath.row==self.sheetDatas.count-2) {
         BTTWithDrawUSDTConfirmCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell" forIndexPath:indexPath];
         [cell setCellRateWithRate:self.usdtRate];
+        return cell;
+    }
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]&&indexPath.row==self.sheetDatas.count-3) {
+        BTTWithDrawProtocolView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawProtocolView" forIndexPath:indexPath];
+        if ([self.bankList[self.selectIndex].protocol isEqualToString:@""]) {
+            [cell setTypeData:@[@"OMNI",@"ERC20"]];
+        }else{
+            [cell setTypeData:@[self.bankList[self.selectIndex].protocol]];
+        }
+        cell.tapProtocol = ^(NSString * _Nonnull protocol) {
+            self.selectedProtocol = protocol;
+        };
         return cell;
     }
     if (indexPath.row == self.sheetDatas.count - 1) {
@@ -368,6 +383,9 @@
         params[@"btcAmount"] = usdtModel.tgtAmount;
         params[@"btcRate"] = usdtModel.rate;
         params[@"btcUuid"] = usdtModel.uuid;
+    }
+    if (!(isNull(self.selectedProtocol)||[self.selectedProtocol isEqualToString:@""])) {
+        params[@"protocol"] = self.selectedProtocol;
     }
     
     weakSelf(weakSelf)
