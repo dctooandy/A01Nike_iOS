@@ -361,7 +361,8 @@
     NSDictionary *params = @{
         @"payType":@(type),
         @"currency":@"USDT",
-        @"loginName":[IVNetwork savedUserInfo].loginName
+        @"loginName":[IVNetwork savedUserInfo].loginName,
+        @"usdtProtocol":self.selectedProtocol
     };
     [IVNetwork requestPostWithUrl:BTTQueryOnlineBanks paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
@@ -382,7 +383,7 @@
         @"payid":payId,
         @"currency":@"USDT",
         @"loginName":[IVNetwork savedUserInfo].loginName,
-        @"protocol" : self.selectedProtocol
+        @"usdtProtocol" : self.selectedProtocol
     };
     [IVNetwork requestPostWithUrl:BTTCreateOnlineOrder paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
@@ -421,6 +422,48 @@
         _rmbLabel.text = @"0";
     }
 }
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+   
+    if (range.length >= 1) { // 删除数据, 都允许删除
+        return YES;
+    }
+        if (![self checkDecimal:[textField.text stringByAppendingString:string]]){
+          
+            if (textField.text.length > 0 && [string isEqualToString:@"."] && ![textField.text containsString:@"."]) {
+                return YES;
+            }
+            
+            return NO;
+            
+        }
+    return YES;
+}
+
+
+#pragma mark - 正则表达式
+
+/**
+ 判断是否是两位小数
+
+ @param str 字符串
+ @return yes/no
+ */
+- (BOOL)checkDecimal:(NSString *)str
+{
+    NSString *regex = [self.selectedProtocol isEqualToString:@"OMNI"] ? @"^[0-9]+(\\.[0-9]{1,8})?$" : @"^[0-9]+(\\.[0-9]{1,6})?$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    
+    if([pred evaluateWithObject: str])
+    {
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     NSArray *array = _itemsArray.lastObject;

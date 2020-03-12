@@ -112,7 +112,11 @@
     
     BTTUSDTWalletTypeModel *model = [BTTUSDTWalletTypeModel yy_modelWithJSON:self.usdtDatas[_selectedType]];
     NSString *url = BTTAddBankCard;
-    NSString *firstChar = [_walletString substringWithRange:NSMakeRange(0, 1)];
+    NSString *firstChar = @"";
+    if (![_walletString isEqualToString:@""]) {
+        firstChar = [_walletString substringWithRange:NSMakeRange(0, 1)];
+    }
+     
     
     weakSelf(weakSelf)
     if ([_walletString isEqualToString:@""]) {

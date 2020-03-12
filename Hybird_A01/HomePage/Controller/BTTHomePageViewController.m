@@ -95,19 +95,19 @@
 }
 
 - (void)showConsetivePopView{
-    NSString *timeStamp = [[NSUserDefaults standardUserDefaults]objectForKey:BTTConsetiveWinsToday];
-    if (timeStamp==nil) {
-        [self showCWpopView];
-        NSString *timeStampNew = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
-        [[NSUserDefaults standardUserDefaults]setObject:timeStampNew forKey:BTTConsetiveWinsToday];
-    }else{
-        BOOL isSameDay = [PublicMethod isDateToday:[PublicMethod transferDateStringToDate:timeStamp]];
-        if (!isSameDay) {
-            NSString *timeStampNew = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
-            [[NSUserDefaults standardUserDefaults]setObject:timeStampNew forKey:BTTConsetiveWinsToday];
-            [self showCWpopView];
-        }
-    }
+//    NSString *timeStamp = [[NSUserDefaults standardUserDefaults]objectForKey:BTTConsetiveWinsToday];
+//    if (timeStamp==nil) {
+//        [self showCWpopView];
+//        NSString *timeStampNew = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
+//        [[NSUserDefaults standardUserDefaults]setObject:timeStampNew forKey:BTTConsetiveWinsToday];
+//    }else{
+//        BOOL isSameDay = [PublicMethod isDateToday:[PublicMethod transferDateStringToDate:timeStamp]];
+//        if (!isSameDay) {
+//            NSString *timeStampNew = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
+//            [[NSUserDefaults standardUserDefaults]setObject:timeStampNew forKey:BTTConsetiveWinsToday];
+//            [self showCWpopView];
+//        }
+//    }
 }
 
 - (void)showCWpopView{

@@ -60,7 +60,7 @@
 //    BTTGetLoginInfoByNameEx
     [self showLoading];
     NSDictionary *params = @{
-        @"inclPendingWithdraw":@1,
+        @"inclPendingWithdraw":@"0",
         @"loginName":[IVNetwork savedUserInfo].loginName
     };
     [IVNetwork requestPostWithUrl:BTTGetLoginInfoByNameEx paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
