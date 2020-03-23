@@ -91,7 +91,28 @@
         }
     });
     [self setupFloatWindow];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LoginSuccessNotification object:nil];
     
+}
+
+- (void)checkHasShow{
+    [IVNetwork requestPostWithUrl:BTTQueryLoginedShow paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body!=nil) {
+                NSString *code = [NSString stringWithFormat:@"%@",result.body];
+                if ([code isEqualToString:@"1"]) {
+                    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"尊敬的博天堂客户:\n \n因网站持菲律宾正规博彩牌照,应菲政府肺炎疫情防控要求,采取局部远程办公等措施,服务效率略降.广受喜爱的AG平台亦响应菲政府决定暂停部分桌台.\n \n对此向各位致以诚挚歉意!我们定会竭力保证游戏顺畅做好服务!\n \n疫情期间,温馨提醒您戴口罩勤洗手,保持良好心态,让我们一起携手战胜病毒!\n \n博天堂全体员工敬上!\n2020年3月18号" preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction *unlock = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        
+                    }];
+                    [alertVC addAction:unlock];
+                    [self presentViewController:alertVC animated:YES completion:nil];
+                }
+            }
+        }
+    }];
 }
 
 - (void)showConsetivePopView{

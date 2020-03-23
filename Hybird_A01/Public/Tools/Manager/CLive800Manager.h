@@ -20,4 +20,6 @@ SingletonInterface(CLive800Manager);
 
 - (void)startLive800Chat:(UIViewController *)superController;
 
+- (void)startLive800ChatSaveMoney:(UIViewController *)superController;
+
 @end

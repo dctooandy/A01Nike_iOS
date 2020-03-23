@@ -334,6 +334,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTFavotiteList                            @"_extra_/api/v1/wms/gameFavorList"
 // 添加收藏
 #define BTTAddFavotites                            @"_extra_/api/v1/wms/gameFavor"
+// 查询每日存款次数
+#define BTTQueryTakeMoneyTimes                     @"_extra_/api/v1/getWithDrawByDay"
 // 搏币数量查询
 #define BTTQueryIntegralAPI                        @"_extra_/api/v1/activity/luckyWheel/myLeftPrize"
 // 搏币兑换
@@ -404,6 +406,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTQueryPointCardList                      @"deposit/queryPointCardList"
 //查询USDT钱包类型
 #define BTTQueryUSDTWallet                         @"account/queryWalletType"
+//
+#define BTTQueryLoginedShow                        @"_extra_/api/v1/activity/checkHasPop"
 
 #define BTTIsBindStatusAPI                         @"/public/verify/isNewBind"
 #define BTTGamePlatforms                           @"/A01/game/platforms"

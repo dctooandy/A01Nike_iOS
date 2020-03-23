@@ -38,4 +38,8 @@ SingletonImplementation(CLive800Manager);
 - (void)startLive800Chat:(UIViewController *)superController {
     [Live800ChatLib startService:nil superVC:superController operatorId:nil skillId:Live800SkillId subchannel:nil];
 }
+
+- (void)startLive800ChatSaveMoney:(UIViewController *)superController {
+    [Live800ChatLib startService:nil superVC:superController operatorId:nil skillId:@"58" subchannel:nil];
+}
 @end

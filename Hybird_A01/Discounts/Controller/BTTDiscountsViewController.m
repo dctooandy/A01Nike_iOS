@@ -25,6 +25,7 @@
 #import "BTTVideoGamesListController.h"
 #import "BTTAGQJViewController.h"
 #import "BTTAGGJViewController.h"
+#import "BTTActionSheet.h"
 
 @interface BTTDiscountsViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -91,7 +92,14 @@
     
     BTTPopoverAction *action1 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineService") title:@"在线客服" handler:^(BTTPopoverAction *action) {
 
-        [[CLive800Manager sharedInstance] startLive800Chat:self];
+        BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+            if (buttonIndex == 0) {
+                [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+            }else if (buttonIndex == 1){
+                [[CLive800Manager sharedInstance] startLive800Chat:self];
+            }
+        }];
+        [actionSheet show];
     }];
     
     BTTPopoverAction *action2 = [BTTPopoverAction actionWithImage:ImageNamed(@"voiceCall") title:@"APP语音通信" handler:^(BTTPopoverAction *action) {

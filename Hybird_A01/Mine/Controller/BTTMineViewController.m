@@ -448,8 +448,7 @@
                     [MBProgressHUD showMessagNoActivity:@"请先绑定USDT或BTC钱包" toView:nil];
                     return;
                 }
-                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
+                [self requestTakeMoneyTimes];
                 
             } else {
                 [MBProgressHUD showMessagNoActivity:@"请先绑定银行卡" toView:nil];
@@ -565,6 +564,41 @@
             [MBProgressHUD showSuccess:@"退出成功" toView:nil];
         };
     }
+}
+
+- (void)requestTakeMoneyTimes{
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTQueryTakeMoneyTimes paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString *times = [NSString stringWithFormat:@"%@",result.body];
+            NSString *message = @"";
+            if ([times isEqualToString:@"1"]||[times isEqualToString:@"2"]) {
+                message = [NSString stringWithFormat:@"为配合菲新冠疫情防治实施远程办公,日取款上限二次.您今天取款剩余次数为%@次,取款到账时间为2小时",times];
+            }else{
+                message = @"为配合菲新冠疫情防治实施远程办公,日取款上限二次.您今天取款次数已达2次,请明日再来取款";
+            }
+            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:message preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                if ([times isEqualToString:@"1"]||[times isEqualToString:@"2"]) {
+                    BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                
+                
+            }];
+            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                
+            }];
+            [alertVC addAction:cancel];
+            [alertVC addAction:confirm];
+            [self presentViewController:alertVC animated:YES completion:nil];
+        }else{
+            [MBProgressHUD showError:@"接口请求异常,请稍后重试" toView:nil];
+        }
+    }];
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource

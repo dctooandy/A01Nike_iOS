@@ -28,6 +28,7 @@ static const char *BTTNextGroupKey = "nextGroup";
 
 @implementation BTTHomePageViewController (LoadData)
 
+
 - (void)loadDataOfHomePage {
     
     [self loadHeadersData];
