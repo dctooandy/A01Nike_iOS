@@ -448,7 +448,13 @@
                     [MBProgressHUD showMessagNoActivity:@"请先绑定USDT或BTC钱包" toView:nil];
                     return;
                 }
-                [self requestTakeMoneyTimes];
+                if ([IVNetwork savedUserInfo].starLevel>=4) {
+                    BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else{
+                    [self requestTakeMoneyTimes];
+                }
+                
                 
             } else {
                 [MBProgressHUD showMessagNoActivity:@"请先绑定银行卡" toView:nil];
