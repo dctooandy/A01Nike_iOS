@@ -448,7 +448,7 @@
                     [MBProgressHUD showMessagNoActivity:@"请先绑定USDT或BTC钱包" toView:nil];
                     return;
                 }
-                if ([IVNetwork savedUserInfo].starLevel>=4) {
+                if ([IVNetwork savedUserInfo].starLevel>=3) {
                     BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
                     [self.navigationController pushViewController:vc animated:YES];
                 }else{
