@@ -36,15 +36,15 @@
         [self.normalDataTwo removeAllObjects];
     }
     
-    NSArray *icons =  @[@"me_bankscan",@"me_jdscan",@"me_aliwap",@"me_online",@"me_aliSacn",@"me_wechatscan",@"me_qqScan",@"me_hand",@"me_wap",@"me_YSF",@"me_quick",@"me_bibao",@"me_pointCard",@"me_btc",@"me_tiaoma",@"me_bishang",@"me_bank",@"me_wechatsecond",@"me_alipaySecond",@"me_usdt"];
-    NSArray *names = @[@"银联扫码",@"京东扫码",@"支付宝wap",@"在线支付",@"支付宝扫码",@"微信扫码",@"QQ扫码",@"手工存款",@"微信/QQ/京东wap",@"云闪付扫码",@"银行快捷网银",@"点卡",@"钻石币",@"比特币",@"微信条码支付",@"币商充值",@"迅捷网银",@"微信秒存",@"支付宝秒存",@"泰达币-USDT"];
+    NSArray *icons =  @[@"me_bankscan",@"me_jdscan",@"me_aliwap",@"me_online",@"me_aliSacn",@"me_wechatscan",@"me_qqScan",@"me_hand",@"me_wap",@"me_YSF",@"me_quick",@"me_bibao",@"me_pointCard",@"me_btc",@"me_tiaoma",@"me_bishang",@"me_bank",@"me_wechatsecond",@"me_alipaySecond",@"me_usdt",@"me_bfb"];
+    NSArray *names = @[@"银联扫码",@"京东扫码",@"支付宝wap",@"在线支付",@"支付宝扫码",@"微信扫码",@"QQ扫码",@"手工存款",@"微信/QQ/京东wap",@"云闪付扫码",@"银行快捷网银",@"点卡",@"钻石币",@"比特币",@"微信条码支付",@"币商充值",@"迅捷网银",@"微信秒存",@"支付宝秒存",@"泰达币-USDT",@"币付宝"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;
         model.iconName = icons[index];
         model.available = YES;
-        if ([model.name isEqualToString:@"银联扫码"] || [model.name isEqualToString:@"微信扫码"] || [model.name isEqualToString:@"云闪付扫码"]||[model.name isEqualToString:@"币商充值"]||[model.name isEqualToString:@"泰达币-USDT"]) {
+        if ([model.name isEqualToString:@"银联扫码"] || [model.name isEqualToString:@"微信扫码"] || [model.name isEqualToString:@"云闪付扫码"]||[model.name isEqualToString:@"币商充值"]||[model.name isEqualToString:@"泰达币-USDT"]||[model.name isEqualToString:@"币付宝"]) {
             [self.bigDataSoure addObject:model];
         } else if ([model.name isEqualToString:@"QQ扫码"] ||
                    [model.name isEqualToString:@"京东扫码"] ||
@@ -129,7 +129,9 @@
         NSMutableArray *wapPayments = [NSMutableArray array];
         BOOL haveWap = NO;
         BOOL haveUSDT = NO;
+        BOOL haveBFB = NO;
         BTTMeMainModel *usdtModel = [BTTMeMainModel new];
+        BTTMeMainModel *bfbModel = [BTTMeMainModel new];
         
         NSString *bsStatus = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:BTTBMerchantStatus]];
         
@@ -299,6 +301,15 @@
                         }
                         haveUSDT = YES;
                     }
+                    if ([model.payTypeName isEqualToString:@"币付宝"]) {
+                        bfbModel.name = @"币付宝";
+                        bfbModel.iconName = @"me_bfb";
+                        bfbModel.paymentType = model.payType;
+                        if (model!=nil) {
+                            bfbModel.payModel = model;
+                        }
+                        haveBFB = YES;
+                    }
                 }
                 if (haveWap&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                     BTTMeMainModel *mainModel = [BTTMeMainModel new];
@@ -313,6 +324,10 @@
                 if (haveUSDT) {
                     [self.bigDataSoure addObject:usdtModel];
                 }
+                if (haveBFB) {
+                    [self.bigDataSoure addObject:bfbModel];
+                }
+                
                 
                 if (self.bigDataSoure.count && self.normalDataSoure.count && self.normalDataTwo.count) {
                     self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;

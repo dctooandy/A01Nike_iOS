@@ -654,6 +654,8 @@
 		3AFCD7D021AD179600B136C1 /* BTTVideoGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CE21AD179600B136C1 /* BTTVideoGameCell.m */; };
 		3AFCD7D121AD179600B136C1 /* BTTVideoGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_A01.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */; };
+		D318AC1724333BC500183407 /* BTTKSAddBfbWalletController.m in Sources */ = {isa = PBXBuildFile; fileRef = D318AC1524333BC500183407 /* BTTKSAddBfbWalletController.m */; };
+		D318AC1824333BC500183407 /* BTTKSAddBfbWalletController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D318AC1624333BC500183407 /* BTTKSAddBfbWalletController.xib */; };
 		D31B0EEB23B451B0003666BA /* BTTAddUSDTController.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B0EE923B451B0003666BA /* BTTAddUSDTController.m */; };
 		D31B0EEC23B451B0003666BA /* BTTAddUSDTController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B0EEA23B451B0003666BA /* BTTAddUSDTController+LoadData.m */; };
 		D31B0EEF23B451F1003666BA /* BTTWithDrawUSDTConfirmCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B0EEE23B451F1003666BA /* BTTWithDrawUSDTConfirmCell.m */; };
@@ -664,6 +666,7 @@
 		D331B20B23D539B10080A27D /* BTTConsetiveWinsPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D331B20823D539B10080A27D /* BTTConsetiveWinsPopView.m */; };
 		D331B20C23D539B10080A27D /* BTTConsetiveWinsPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D331B20A23D539B10080A27D /* BTTConsetiveWinsPopView.xib */; };
 		D331B20F23D546600080A27D /* BTTBTCRateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D331B20E23D546600080A27D /* BTTBTCRateModel.m */; };
+		D339969524371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D339969424371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m */; };
 		D345F28F23CFFC2300E658A6 /* IVNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F28B23CFFC2200E658A6 /* IVNetworkManager.m */; };
 		D345F29023CFFC2300E658A6 /* IVNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F28C23CFFC2200E658A6 /* IVNetwork.m */; };
 		D345F29123CFFC2300E658A6 /* IVUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F28D23CFFC2200E658A6 /* IVUtility.m */; };
@@ -678,6 +681,8 @@
 		D345F2AF23D0093900E658A6 /* BTTQueryOnlineBankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F2AE23D0093900E658A6 /* BTTQueryOnlineBankModel.m */; };
 		D345F2B423D0561100E658A6 /* NSArray+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F2B023D0561000E658A6 /* NSArray+Log.m */; };
 		D345F2B523D0561100E658A6 /* NSDictionary+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F2B323D0561100E658A6 /* NSDictionary+Log.m */; };
+		D357F0E12431C8DE00FD530A /* BTTBiFuBaoController.m in Sources */ = {isa = PBXBuildFile; fileRef = D357F0DF2431C8DE00FD530A /* BTTBiFuBaoController.m */; };
+		D357F0E22431C8DE00FD530A /* BTTBiFuBaoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D357F0E02431C8DE00FD530A /* BTTBiFuBaoController.xib */; };
 		D35BF23F23B451340085D6A1 /* CNPayUSDTQRSecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BF23923B451330085D6A1 /* CNPayUSDTQRSecondVC.m */; };
 		D35BF24023B451340085D6A1 /* CNPayUSDTStep1VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BF23A23B451330085D6A1 /* CNPayUSDTStep1VC.m */; };
 		D35BF24123B451340085D6A1 /* USDTWalletCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D35BF23B23B451330085D6A1 /* USDTWalletCollectionCell.m */; };
@@ -1790,6 +1795,9 @@
 		3AFCD7CE21AD179600B136C1 /* BTTVideoGameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGameCell.m; sourceTree = "<group>"; };
 		3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGameCell.xib; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_A01.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D318AC1424333BC500183407 /* BTTKSAddBfbWalletController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTKSAddBfbWalletController.h; sourceTree = "<group>"; };
+		D318AC1524333BC500183407 /* BTTKSAddBfbWalletController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTKSAddBfbWalletController.m; sourceTree = "<group>"; };
+		D318AC1624333BC500183407 /* BTTKSAddBfbWalletController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTKSAddBfbWalletController.xib; sourceTree = "<group>"; };
 		D31B0EE723B451B0003666BA /* BTTAddUSDTController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTAddUSDTController.h; sourceTree = "<group>"; };
 		D31B0EE823B451B0003666BA /* BTTAddUSDTController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTAddUSDTController+LoadData.h"; sourceTree = "<group>"; };
 		D31B0EE923B451B0003666BA /* BTTAddUSDTController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTAddUSDTController.m; sourceTree = "<group>"; };
@@ -1808,6 +1816,8 @@
 		D331B20A23D539B10080A27D /* BTTConsetiveWinsPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTConsetiveWinsPopView.xib; sourceTree = "<group>"; };
 		D331B20D23D546600080A27D /* BTTBTCRateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBTCRateModel.h; sourceTree = "<group>"; };
 		D331B20E23D546600080A27D /* BTTBTCRateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBTCRateModel.m; sourceTree = "<group>"; };
+		D339969324371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTOneKeyRegisterBitollCell.h; sourceTree = "<group>"; };
+		D339969424371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTOneKeyRegisterBitollCell.m; sourceTree = "<group>"; };
 		D345F28923CFFC2200E658A6 /* IVNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVNetwork.h; sourceTree = "<group>"; };
 		D345F28A23CFFC2200E658A6 /* IVNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVNetworkManager.h; sourceTree = "<group>"; };
 		D345F28B23CFFC2200E658A6 /* IVNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVNetworkManager.m; sourceTree = "<group>"; };
@@ -1836,6 +1846,9 @@
 		D345F2B123D0561000E658A6 /* NSDictionary+Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Log.h"; sourceTree = "<group>"; };
 		D345F2B223D0561100E658A6 /* NSArray+Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Log.h"; sourceTree = "<group>"; };
 		D345F2B323D0561100E658A6 /* NSDictionary+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Log.m"; sourceTree = "<group>"; };
+		D357F0DE2431C8DE00FD530A /* BTTBiFuBaoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBiFuBaoController.h; sourceTree = "<group>"; };
+		D357F0DF2431C8DE00FD530A /* BTTBiFuBaoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBiFuBaoController.m; sourceTree = "<group>"; };
+		D357F0E02431C8DE00FD530A /* BTTBiFuBaoController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTBiFuBaoController.xib; sourceTree = "<group>"; };
 		D35BF23723B451330085D6A1 /* USDTWalletCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = USDTWalletCollectionCell.h; sourceTree = "<group>"; };
 		D35BF23823B451330085D6A1 /* CNPayUSDTStep1VC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNPayUSDTStep1VC.h; sourceTree = "<group>"; };
 		D35BF23923B451330085D6A1 /* CNPayUSDTQRSecondVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNPayUSDTQRSecondVC.m; sourceTree = "<group>"; };
@@ -4023,6 +4036,9 @@
 				3AE1EB1A21805B460073A32D /* BTTAddCardController+LoadData.h */,
 				3AE1EB1B21805B460073A32D /* BTTAddCardController+LoadData.m */,
 				3A11ADDB218189DE00B1AFF4 /* AddBTC */,
+				D318AC1424333BC500183407 /* BTTKSAddBfbWalletController.h */,
+				D318AC1524333BC500183407 /* BTTKSAddBfbWalletController.m */,
+				D318AC1624333BC500183407 /* BTTKSAddBfbWalletController.xib */,
 			);
 			path = AddCard;
 			sourceTree = "<group>";
@@ -4072,6 +4088,8 @@
 				D31B0EEA23B451B0003666BA /* BTTAddUSDTController+LoadData.m */,
 				D3A9A71F24172611007F672A /* BTTUSDTWalletTypeModel.h */,
 				D3A9A72024172611007F672A /* BTTUSDTWalletTypeModel.m */,
+				D339969324371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.h */,
+				D339969424371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m */,
 			);
 			path = AddUSDT;
 			sourceTree = "<group>";
@@ -4087,6 +4105,9 @@
 				D35BF23D23B451330085D6A1 /* CNPayUSDTQRSecondVC.h */,
 				D35BF23923B451330085D6A1 /* CNPayUSDTQRSecondVC.m */,
 				D35BF23E23B451330085D6A1 /* CNPayUSDTQRSecondVC.xib */,
+				D357F0DE2431C8DE00FD530A /* BTTBiFuBaoController.h */,
+				D357F0DF2431C8DE00FD530A /* BTTBiFuBaoController.m */,
+				D357F0E02431C8DE00FD530A /* BTTBiFuBaoController.xib */,
 			);
 			name = USDTPay;
 			path = VC/USDTPay;
@@ -4768,6 +4789,7 @@
 				D5C5019921B67C0800C6DA02 /* CNPayDepositSuccessVC.xib in Resources */,
 				3AAFF87D21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.xib in Resources */,
 				3A5AE6CB22D6E22A0013E8A3 /* preview_number_icon@2x.png in Resources */,
+				D318AC1824333BC500183407 /* BTTKSAddBfbWalletController.xib in Resources */,
 				3A5AE6E922D6E22A0013E8A3 /* LIVVideoCamera_flashOn@2x.png in Resources */,
 				3A5AE6EF22D6E22A0013E8A3 /* LIVVideoCamera_pause@2x.png in Resources */,
 				3A5AE68122D6E22A0013E8A3 /* LIVVideoCamera_close@3x.png in Resources */,
@@ -4861,6 +4883,7 @@
 				D35BF24223B451340085D6A1 /* CNPayUSDTStep1VC.xib in Resources */,
 				3A5AE6AD22D6E22A0013E8A3 /* voiceIcon_LIVVoiceBoard@2x.png in Resources */,
 				3A5AE66E22D6E22A0013E8A3 /* LIVSentMessageCell.nib in Resources */,
+				D357F0E22431C8DE00FD530A /* BTTBiFuBaoController.xib in Resources */,
 				3A5AE6AF22D6E22A0013E8A3 /* photo_def_previewVc@2x.png in Resources */,
 				D35BF24323B451340085D6A1 /* CNPayUSDTQRSecondVC.xib in Resources */,
 				3A5AE6F222D6E22A0013E8A3 /* receivedVoicePlaying1@2x.png in Resources */,
@@ -5226,6 +5249,7 @@
 				3ADD235E2176D7F000FA959A /* BTTHomePageViewController+Nav.m in Sources */,
 				D5DBEB0621ABB774008AF629 /* CNPayDepositStep2VC.m in Sources */,
 				3A34F79321B6630D007BC4D4 /* BTTGamesTryAlertView.m in Sources */,
+				D318AC1724333BC500183407 /* BTTKSAddBfbWalletController.m in Sources */,
 				3A8D6E9C21633D83000530DF /* BTTBaseWebViewController.m in Sources */,
 				3A11ADDA218187B600B1AFF4 /* MBProgressHUD+Add.m in Sources */,
 				D5DBEB3321ABB774008AF629 /* CNCompleteInfoView.m in Sources */,
@@ -5270,10 +5294,12 @@
 				3A9E4C45219E9CAD00E7D8C0 /* BTTBindStatusModel.m in Sources */,
 				D31B0EFA23B46058003666BA /* CNPayUSDTRateModel.m in Sources */,
 				D3A9A72124172611007F672A /* BTTUSDTWalletTypeModel.m in Sources */,
+				D339969524371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m in Sources */,
 				3A3DF1E6237BA445006129F6 /* BTTHotPromotionCell.m in Sources */,
 				D5DBEB2921ABB774008AF629 /* CNPayCardModel.m in Sources */,
 				D5DBEB2821ABB774008AF629 /* CNPayBankCardModel.m in Sources */,
 				3A5B027B234F080100D8828B /* BTTXimaRecordController.m in Sources */,
+				D357F0E12431C8DE00FD530A /* BTTBiFuBaoController.m in Sources */,
 				D39D7C0323CEFA5B00898546 /* BTTUsdtTodayNoticeView.m in Sources */,
 				3AAE821B219A738B003EC8B0 /* BTTLoginOrRegisterTypeSelectCell.m in Sources */,
 				3AE1EB1C21805B460073A32D /* BTTAddCardController+LoadData.m in Sources */,
@@ -5543,7 +5569,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.66;
+				MARKETING_VERSION = 3.0.67;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5583,7 +5609,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.66;
+				MARKETING_VERSION = 3.0.67;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

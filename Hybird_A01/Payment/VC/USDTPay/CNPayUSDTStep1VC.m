@@ -117,15 +117,17 @@
                     BTTUsdtWalletModel *model = [BTTUsdtWalletModel yy_modelWithDictionary:json];
                     [codeArray addObject:model.bankcode];
                     if ([model.flag isEqualToString:@"1"]) {
-                        if (![model.bankcode isEqualToString:@"others"]) {
+                        if (![model.bankcode isEqualToString:@"others"]&&![model.bankcode isEqualToString:@"bitoll"]) {
                             NSInteger index = [weakSelf.bankCodeArray indexOfObject:model.bankcode];
                             [itemsArrayOne addObject:weakSelf.itemsArray[0][index]];
                             [itemImageArrayOne addObject:weakSelf.itemImageArray[0][index]];
                             [paymentArray addObject:json];
                         }else{
-                            [itemsArrayTwo addObject:@"其他钱包"];
-                            [itemImageArrayTwo addObject:@"me_usdt_otherwallet"];
-                            weakSelf.otherWalletJson = json;
+                            if (![model.bankcode isEqualToString:@"bitoll"]) {
+                                [itemsArrayTwo addObject:@"其他钱包"];
+                                [itemImageArrayTwo addObject:@"me_usdt_otherwallet"];
+                                weakSelf.otherWalletJson = json;
+                            }
                         }
                     }
                     if (i==0&&[model.flag isEqualToString:@"1"]) {

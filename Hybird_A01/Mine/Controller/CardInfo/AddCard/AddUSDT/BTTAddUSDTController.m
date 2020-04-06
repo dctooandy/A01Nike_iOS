@@ -17,6 +17,8 @@
 #import "BTTChangeMobileSuccessController.h"
 #import "BTTAddUsdtHeaderCell.h"
 #import "BTTUSDTWalletTypeModel.h"
+#import "BTTOneKeyRegisterBitollCell.h"
+#import "BTTKSAddBfbWalletController.h"
 
 @interface BTTAddUSDTController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, copy) NSString *walletString;
@@ -46,6 +48,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPublicBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPublicBtnCell"];
     [self.collectionView registerClass:[BTTAddUsdtHeaderCell class] forCellWithReuseIdentifier:@"BTTAddUsdtHeaderCell"];
+    [self.collectionView registerClass:[BTTOneKeyRegisterBitollCell class] forCellWithReuseIdentifier:@"BTTOneKeyRegisterBitollCell"];
 }
 
 #pragma mark - collectionview delegate
@@ -68,7 +71,7 @@
     } else if (indexPath.row == 1) {
         BTTAddUsdtHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAddUsdtHeaderCell" forIndexPath:indexPath];
         if (self.usdtDatas.count>0) {
-            BTTUSDTWalletTypeModel *model = [BTTUSDTWalletTypeModel yy_modelWithJSON:self.usdtDatas[indexPath.row]];
+            BTTUSDTWalletTypeModel *model = [BTTUSDTWalletTypeModel yy_modelWithJSON:self.usdtDatas[_selectedType]];
             [cell setTypeData:model.protocol];
         }
         cell.tapProtocol = ^(NSString * _Nonnull protocol) {
@@ -97,13 +100,42 @@
         }
         cell.model = model;
         cell.textField.textAlignment = NSTextAlignmentLeft;
+        if (weakSelf.walletString.length>0) {
+            cell.textField.text = weakSelf.walletString;
+        }
         return cell;
-    } else {
+    } else if (indexPath.row == 4) {
         BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
         cell.btnType = BTTPublicBtnTypeSave;
         cell.btn.enabled = YES;
         [cell.btn addTarget:self action:@selector(submitButton_Click:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
+    }else if (indexPath.row==5){
+        BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
+        cell.btnType = BTTPublicBtnTypeSave;
+        cell.btn.enabled = YES;
+        [cell.btn addTarget:self action:@selector(submitButton_Click:) forControlEvents:UIControlEventTouchUpInside];
+        return cell;
+    } else {
+        BTTOneKeyRegisterBitollCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTOneKeyRegisterBitollCell" forIndexPath:indexPath];
+        if (self.usdtDatas.count>0) {
+            BTTUSDTWalletTypeModel *model = [BTTUSDTWalletTypeModel yy_modelWithJSON:self.usdtDatas[_selectedType]];
+            [cell setIsHidden:![model.code isEqualToString:@"bitoll"]];
+        }else{
+            [cell setIsHidden:YES];
+        }
+        
+        cell.onekeyRegister = ^{
+            BTTKSAddBfbWalletController *vc = [[BTTKSAddBfbWalletController alloc]init];
+            vc.success = ^(NSString * _Nonnull accountNo) {
+                weakSelf.walletString = accountNo;
+                weakSelf.confirmString = accountNo;
+                [self.collectionView reloadData];
+            };
+            [self.navigationController pushViewController:vc animated:YES];
+        };
+        return cell;
+        
     }
 }
 
@@ -127,13 +159,13 @@
         [MBProgressHUD showError:@"两次输入不一致" toView:self.view];
     }else if ([self.selectedProtocol isEqualToString:@"OMNI"]&&!([firstChar isEqualToString:@"1"]||[firstChar isEqualToString:@"3"])){
         [MBProgressHUD showError:@"OMNI协议钱包，请以1或3开头" toView:self.view];
-    }else if ([self.selectedProtocol isEqualToString:@"ERC20"]&&!([firstChar isEqualToString:@"0"]&&[firstChar isEqualToString:@"x"])){
+    }else if ([self.selectedProtocol isEqualToString:@"ERC20"]&&!([firstChar isEqualToString:@"0"]&&[firstChar isEqualToString:@"x"])&&![model.code isEqualToString:@"bitoll"]){
         [MBProgressHUD showError:@"ERC20协议钱包，请以0或x开头" toView:self.view];
     }else{
         [self showLoading];
         NSMutableDictionary *params = @{}.mutableCopy;
         params[@"accountNo"] = _walletString;
-        params[@"accountType"] = @"USDT";
+        params[@"accountType"] = [model.code isEqualToString:@"bitoll"]? @"BITOLL" : @"USDT";
         params[@"bankName"] = model.code;
         params[@"expire"] = @0;
         params[@"messageId"] = self.messageId;
@@ -197,7 +229,7 @@
         [self.elementsHight removeAllObjects];
     }
     NSMutableArray *elementsHight = [NSMutableArray array];
-    NSInteger total = 6;
+    NSInteger total = 7;
     for (int i = 0; i < total; i++) {
         if (i == 0) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 60)]];
@@ -209,8 +241,10 @@
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         } else if (i == 4) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
-        } else {
+        }else if (i==5){
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+        } else {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         }
     }
     self.elementsHight = elementsHight.mutableCopy;

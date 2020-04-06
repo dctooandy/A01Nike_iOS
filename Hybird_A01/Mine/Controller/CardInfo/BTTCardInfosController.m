@@ -18,12 +18,14 @@
 #import "BTTAddUSDTController.h"
 #import <IVCacheLibrary/IVCacheWrapper.h>
 #import "IVUtility.h"
+#import "BTTKSAddBfbWalletController.h"
 
 @interface BTTCardInfosController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, copy) NSArray<BTTBankModel *> *bankList;
 @property (nonatomic, assign) BOOL isChecking; //正在审核
 @property (nonatomic, assign) BTTCanAddCardType canAddType;
+@property (nonatomic, assign) BOOL haveBFB;
 @end
 
 @implementation BTTCardInfosController
@@ -31,6 +33,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"银行卡资料";
+    _haveBFB = NO;
     [self setupCollectionView];
     [self setupElements];
 }
@@ -50,7 +53,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row != self.bankList.count) {
+    if (indexPath.row < self.bankList.count) {
         BTTCardInfoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardInfoCell" forIndexPath:indexPath];
         cell.indexPath = indexPath;
         cell.isChecking = self.isChecking;
@@ -70,6 +73,10 @@
                 [strongSelf setDefaultBtnClicked];
             }
         };
+        return cell;
+    }else if (indexPath.row==self.bankList.count){
+        BTTCardInfoAddCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardInfoAddCell" forIndexPath:indexPath];
+        cell.titleLabel.text = @"快速添加币付宝钱包";
         return cell;
     } else {
         BTTCardInfoAddCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardInfoAddCell" forIndexPath:indexPath];
@@ -106,7 +113,7 @@
         return;
     }
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == self.bankList.count) {
+    if (indexPath.row == self.bankList.count+1) {
         switch (self.canAddType) {
             case BTTCanAddCardTypeAll:{
                 [self showCanAddSheetWithCard:YES btc:YES usdt:YES];
@@ -140,8 +147,8 @@
             default:
                 break;
         }
-        
-        
+    }else if (indexPath.row == self.bankList.count){
+        [self addUSDT];
     }
 }
 
@@ -232,15 +239,24 @@
 - (void)setupElements {
     [self.elementsHight removeAllObjects];
     NSMutableArray *elementsHight = [NSMutableArray array];
-    for (int i = 0; i <= self.bankList.count; i++) {
-        if (i != self.bankList.count) {
+    for (int i = 0; i <= self.bankList.count+1; i++) {
+        if (i < self.bankList.count) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 240)]];
         } else {
-            if (self.isChecking || self.canAddType == BTTCanAddCardTypeNone) {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
-            } else {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 174)]];
+            if (i==self.bankList.count) {
+                if (_haveBFB) {
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
+                }else {
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 174)]];
+                }
+            }else{
+                if (self.isChecking || self.canAddType == BTTCanAddCardTypeNone) {
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
+                } else {
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 174)]];
+                }
             }
+            
         }
     }
     self.elementsHight = elementsHight.mutableCopy;
@@ -324,7 +340,7 @@
             vc.verifyType = BTTSafeVerifyTypeMobileAddUSDTCard;
             [self.navigationController pushViewController:vc animated:YES];
         } else {
-            
+
             [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
             BTTBindingMobileController *vc = [BTTBindingMobileController new];
             vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddUSDTCard;

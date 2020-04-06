@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *bfbsendImg;
 
 
 @end
@@ -31,6 +32,7 @@
     _model = model;
     self.iconImageView.image = ImageNamed(model.iconName);
     self.nameLabel.text = model.name;
+//    self.bfbsendImg.hidden = ![model.name isEqualToString:@"币付宝"];
 }
 
 @end

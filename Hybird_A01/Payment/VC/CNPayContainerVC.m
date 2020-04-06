@@ -22,6 +22,7 @@
 #import "CNPayUSDTStep1VC.h"
 #import "CNPayUSDTQRSecondVC.h"
 #import "BTTBishangStep1VC.h"
+#import "BTTBiFuBaoController.h"
 
 @interface CNPayContainerVC ()
 
@@ -135,6 +136,11 @@
             vc1.payments = self.payments;
             CNPayUSDTQRSecondVC *vc2 = [[CNPayUSDTQRSecondVC alloc]init];
             [viewControllers addObjectsFromArray:@[vc1,vc2]];
+        }
+            break;
+        case CNPaymentBFB:{
+            BTTBiFuBaoController *vc1 = [[BTTBiFuBaoController alloc]init];
+            [viewControllers addObjectsFromArray:@[vc1]];
         }
             break;
     }

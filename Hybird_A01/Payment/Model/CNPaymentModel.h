@@ -44,7 +44,8 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
     CNPaymentBQWechat=91,//微信秒存
     CNPaymentBQAli=92,//支付宝秒存
     CNPaymentBS=25, ///< 币商
-    CNPaymentUSDT=99//USDT
+    CNPaymentUSDT=99,//USDT
+    CNPaymentBFB=42//币付宝
 };
 
 @interface CNPaymentModel : BTTBaseModel

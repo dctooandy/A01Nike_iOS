@@ -56,6 +56,8 @@
         bgImageDefault = @"BTC-bg";
     }else if([model.bankName isEqualToString:@"USDT"]){
         bgImageDefault = @"USDT-bg";
+    }else if ([model.bankName isEqualToString:@"BITOLL"]){
+        bgImageDefault = @"bfb_card_bg";
     }
     self.cardBgImageView.image = [UIImage imageNamed:bgImageDefault];
 //    [self.cardBgImageView sd_setImageWithURL:bgUrl placeholderImage:[UIImage imageNamed:bgImageDefault]];
@@ -106,8 +108,8 @@
     }else{
         self.bankNameLabel.text = model.bankName;
     }
-    self.classLabel.text = [model.accountType isEqualToString:@"BTC"]||[model.bankName isEqualToString:@"USDT"] ? @"" : [NSString stringWithFormat:@"%@|%@%@",model.accountType,model.province,model.city];
-    self.adressLabel.text = [model.accountType isEqualToString:@"BTC"]||[model.bankName isEqualToString:@"USDT"] ? @"" : [NSString stringWithFormat:@"%@%@%@",model.province,model.city,model.bankBranchName];
+    self.classLabel.text = [model.accountType isEqualToString:@"BTC"]||[model.bankName isEqualToString:@"USDT"]||[model.bankName isEqualToString:@"BITOLL"]  ? @"" : [NSString stringWithFormat:@"%@|%@%@",model.accountType,model.province,model.city];
+    self.adressLabel.text = [model.accountType isEqualToString:@"BTC"]||[model.bankName isEqualToString:@"USDT"]||[model.bankName isEqualToString:@"BITOLL"] ? @"" : [NSString stringWithFormat:@"%@%@%@",model.province,model.city,model.bankBranchName];
     self.cardNumLabel.text = model.accountNo;
     NSString *typeString = @"绑定银行卡";
     if ([model.accountType isEqualToString:@"BTC"]) {

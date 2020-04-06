@@ -33,6 +33,9 @@
         }else{
             self.bankIcon.image=[UIImage imageNamed:[NSString stringWithFormat:@"me_usdt_%@",[model.accountType lowercaseString]]];
         }
+    }else if ([model.bankName isEqualToString:@"BITOLL"]){
+        self.detailLabel.text = [NSString stringWithFormat:@"币付宝(USDT)-%@",model.accountNo];
+        self.bankIcon.image=[UIImage imageNamed:[NSString stringWithFormat:@"me_usdt_%@",[model.accountType lowercaseString]]];
     } else {
         NSString *iconURLStr = model.bankIcon;
         if ([NSString isBlankString:iconURLStr]) {

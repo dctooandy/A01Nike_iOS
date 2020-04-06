@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,10 +30,19 @@
                         <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bfb_send" translatesAutoresizingMaskIntoConstraints="NO" id="fUR-Ry-CLK">
+                        <rect key="frame" x="57" y="29" width="41" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="7z3-vz-0ol"/>
+                            <constraint firstAttribute="width" constant="41" id="pwN-Vk-Nii"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="fUR-Ry-CLK" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="29" id="Gf7-dV-Qr2"/>
                 <constraint firstItem="j4g-0X-TV5" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="K5d-Ta-Lbc"/>
+                <constraint firstAttribute="trailing" secondItem="fUR-Ry-CLK" secondAttribute="trailing" constant="2" id="Lm1-VX-KMM"/>
                 <constraint firstItem="j4g-0X-TV5" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="XnZ-qh-2of"/>
                 <constraint firstItem="CI6-aG-h34" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="hUL-Ah-3jJ"/>
                 <constraint firstAttribute="bottom" secondItem="CI6-aG-h34" secondAttribute="bottom" constant="8" id="yJh-du-Tj1"/>
@@ -43,6 +50,7 @@
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="100" height="128"/>
             <connections>
+                <outlet property="bfbsendImg" destination="fUR-Ry-CLK" id="EDq-oR-uOj"/>
                 <outlet property="iconImageView" destination="j4g-0X-TV5" id="k7D-Dk-CTZ"/>
                 <outlet property="nameLabel" destination="CI6-aG-h34" id="PK9-Iq-gih"/>
             </connections>
@@ -50,6 +58,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="bfb_send" width="50.5" height="14.5"/>
         <image name="me_wechat" width="57" height="57"/>
     </resources>
 </document>

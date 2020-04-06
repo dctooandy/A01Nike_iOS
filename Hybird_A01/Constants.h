@@ -404,6 +404,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTPointCardPayment                        @"deposit/pointCardPayment"
 //查询点卡
 #define BTTQueryPointCardList                      @"deposit/queryPointCardList"
+//查询点卡
+#define BTTCreateBfbAccount                      @"account/createBitollAccount"
 //查询USDT钱包类型
 #define BTTQueryUSDTWallet                         @"account/queryWalletType"
 //

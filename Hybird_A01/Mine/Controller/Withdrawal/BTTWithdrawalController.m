@@ -87,12 +87,12 @@
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
     }
-    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]&&indexPath.row==self.sheetDatas.count-2) {
+    if (([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"])&&indexPath.row==self.sheetDatas.count-2) {
         BTTWithDrawUSDTConfirmCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell" forIndexPath:indexPath];
         [cell setCellRateWithRate:self.usdtRate];
         return cell;
     }
-    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]&&indexPath.row==self.sheetDatas.count-3) {
+    if (([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"])&&indexPath.row==self.sheetDatas.count-3) {
         BTTWithDrawProtocolView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawProtocolView" forIndexPath:indexPath];
         if ([self.bankList[self.selectIndex].protocol isEqualToString:@""]) {
             [cell setTypeData:@[@"OMNI",@"ERC20"]];
@@ -251,6 +251,8 @@
     for (BTTBankModel *model in self.bankList) {
         if ([model.accountType isEqualToString:@"借记卡"]||[model.accountType isEqualToString:@"信用卡"]||[model.accountType isEqualToString:@"存折"]||[model.accountType isEqualToString:@"BTC"]) {
             [textArray addObject:[NSString stringWithFormat:@"%@-%@",model.bankName,model.accountNo]];
+        }else if ([model.accountType isEqualToString:@"BITOLL"]){
+            [textArray addObject:[NSString stringWithFormat:@"币付宝-%@",model.accountNo]];
         }else{
             NSString*resultStr=[model.accountType stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[model.accountType substringToIndex:1] capitalizedString]];
             [textArray addObject:[NSString stringWithFormat:@"%@-%@",resultStr,model.accountNo]];
@@ -266,7 +268,12 @@
                 if ([withDrawText isEqualToString:selectValue]) {
                     self.selectIndex = i;
                 }
-            }else{
+            }else if ([self.bankList[i].accountType isEqualToString:@"BITOLL"]){
+                withDrawText = [NSString stringWithFormat:@"币付宝-%@",self.bankList[i].accountNo];
+                if ([withDrawText isEqualToString:selectValue]) {
+                    self.selectIndex = i;
+                }
+            } else{
                 NSString*resultStr=[self.bankList[i].accountType stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[self.bankList[i].accountType substringToIndex:1] capitalizedString]];
                 withDrawText = [NSString stringWithFormat:@"%@-%@",resultStr,self.bankList[i].accountNo];
                 if ([withDrawText isEqualToString:selectValue]) {
@@ -373,7 +380,6 @@
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"accountId"] = model.accountId;
     params[@"amount"] = self.amount;
-    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     if (btcModel!=nil) {
         params[@"btcAmount"] = btcModel.btcAmount;
         params[@"btcRate"] = btcModel.btcRate;
