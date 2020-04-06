@@ -527,7 +527,6 @@
 		3AD9CD542165B2C900685B43 /* BTTPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CD502165B2C900685B43 /* BTTPopoverView.m */; };
 		3AD9CD552165B2C900685B43 /* BTTPopoverViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CD522165B2C900685B43 /* BTTPopoverViewCell.m */; };
 		3AD9CD5B21661BE800685B43 /* BTTRedDotManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CD5A21661BE800685B43 /* BTTRedDotManager.m */; };
-		3AD9CE2A2167107B00685B43 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD9CD632167107A00685B43 /* libboringssl_simulator.a */; };
 		3AD9CE2B2167107B00685B43 /* libilbccodec-arm-apple-darwin9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD9CD642167107A00685B43 /* libilbccodec-arm-apple-darwin9.a */; };
 		3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD9CD652167107A00685B43 /* libpj-arm-apple-darwin9.a */; };
 		3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD9CD662167107A00685B43 /* libpjlib-util-arm-apple-darwin9.a */; };
@@ -667,6 +666,7 @@
 		D331B20C23D539B10080A27D /* BTTConsetiveWinsPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D331B20A23D539B10080A27D /* BTTConsetiveWinsPopView.xib */; };
 		D331B20F23D546600080A27D /* BTTBTCRateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D331B20E23D546600080A27D /* BTTBTCRateModel.m */; };
 		D339969524371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D339969424371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m */; };
+		D3399697243B08F700B91A52 /* libboringssl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399696243B08E000B91A52 /* libboringssl.tbd */; };
 		D345F28F23CFFC2300E658A6 /* IVNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F28B23CFFC2200E658A6 /* IVNetworkManager.m */; };
 		D345F29023CFFC2300E658A6 /* IVNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F28C23CFFC2200E658A6 /* IVNetwork.m */; };
 		D345F29123CFFC2300E658A6 /* IVUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F28D23CFFC2200E658A6 /* IVUtility.m */; };
@@ -1818,6 +1818,7 @@
 		D331B20E23D546600080A27D /* BTTBTCRateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBTCRateModel.m; sourceTree = "<group>"; };
 		D339969324371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTOneKeyRegisterBitollCell.h; sourceTree = "<group>"; };
 		D339969424371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTOneKeyRegisterBitollCell.m; sourceTree = "<group>"; };
+		D3399696243B08E000B91A52 /* libboringssl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libboringssl.tbd; path = usr/lib/libboringssl.tbd; sourceTree = SDKROOT; };
 		D345F28923CFFC2200E658A6 /* IVNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVNetwork.h; sourceTree = "<group>"; };
 		D345F28A23CFFC2200E658A6 /* IVNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVNetworkManager.h; sourceTree = "<group>"; };
 		D345F28B23CFFC2200E658A6 /* IVNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVNetworkManager.m; sourceTree = "<group>"; };
@@ -2047,7 +2048,6 @@
 			files = (
 				3AD9CF04216C425200685B43 /* CoreTelephony.framework in Frameworks */,
 				3AD9CEE921675A9B00685B43 /* libresolv.tbd in Frameworks */,
-				3AD9CE2A2167107B00685B43 /* libboringssl_simulator.a in Frameworks */,
 				3AD9CE312167107B00685B43 /* libpjsua-arm-apple-darwin9.a in Frameworks */,
 				3A5AE71D22D6E22B0013E8A3 /* libLive800ChatLib.a in Frameworks */,
 				3AD9CF02216C423900685B43 /* tingyunApp.framework in Frameworks */,
@@ -2060,6 +2060,7 @@
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
 				3AD9CE2F2167107B00685B43 /* libpjsip-simple-arm-apple-darwin9.a in Frameworks */,
+				D3399697243B08F700B91A52 /* libboringssl.tbd in Frameworks */,
 				3AD9CE332167107B00685B43 /* libsrtp-arm-apple-darwin9.a in Frameworks */,
 				D3A9A70F24037638007F672A /* IN3SAnalytics.framework in Frameworks */,
 				3AD9CE302167107B00685B43 /* libpjsip-ua-arm-apple-darwin9.a in Frameworks */,
@@ -4067,6 +4068,7 @@
 		8746ABB2D5D61EF30A4942D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3399696243B08E000B91A52 /* libboringssl.tbd */,
 				3AD9CF03216C425200685B43 /* CoreTelephony.framework */,
 				3AD9CEE821675A9B00685B43 /* libresolv.tbd */,
 				3A8F520F2161EB510069D1B3 /* libc++.tbd */,

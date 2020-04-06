@@ -300,23 +300,11 @@
                                 <action selector="saveFinishBtn_clikc:" destination="-1" eventType="touchUpInside" id="fau-RT-p9b"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TS5-P2-7vF">
-                            <rect key="frame" x="16" y="440" width="382" height="24"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="24" id="2xH-sK-Zcb"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="点击跳转到币币宝完成支付"/>
-                            <connections>
-                                <action selector="jumpToBiFuBaoApp:" destination="-1" eventType="touchUpInside" id="FQP-i7-bRF"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="38a-d6-YOD" secondAttribute="trailing" constant="16" id="6HX-9C-YFb"/>
                         <constraint firstItem="hah-Wk-s6o" firstAttribute="top" secondItem="38a-d6-YOD" secondAttribute="bottom" constant="20" id="8fb-Hz-S9K"/>
-                        <constraint firstItem="TS5-P2-7vF" firstAttribute="top" secondItem="kSm-Rc-FQD" secondAttribute="bottom" constant="20" id="G4F-hL-ri3"/>
                         <constraint firstItem="6YR-5p-zxI" firstAttribute="top" secondItem="tse-O8-A2i" secondAttribute="top" id="IL1-VO-YyT"/>
                         <constraint firstAttribute="trailing" secondItem="3wT-fb-Ymg" secondAttribute="trailing" constant="16" id="Jin-fd-4UM"/>
                         <constraint firstItem="kSm-Rc-FQD" firstAttribute="top" secondItem="3wT-fb-Ymg" secondAttribute="bottom" constant="20" id="LQC-Yp-tRY"/>
@@ -326,10 +314,8 @@
                         <constraint firstItem="38a-d6-YOD" firstAttribute="leading" secondItem="tse-O8-A2i" secondAttribute="leading" constant="16" id="P8r-E0-TM3"/>
                         <constraint firstItem="6YR-5p-zxI" firstAttribute="leading" secondItem="tse-O8-A2i" secondAttribute="leading" id="PoG-we-hRr"/>
                         <constraint firstItem="3wT-fb-Ymg" firstAttribute="leading" secondItem="tse-O8-A2i" secondAttribute="leading" constant="16" id="QHj-Ov-H1k"/>
-                        <constraint firstAttribute="trailing" secondItem="TS5-P2-7vF" secondAttribute="trailing" constant="16" id="X3A-gL-vHQ"/>
                         <constraint firstItem="hah-Wk-s6o" firstAttribute="centerX" secondItem="tse-O8-A2i" secondAttribute="centerX" id="Yws-tG-4r5"/>
                         <constraint firstAttribute="trailing" secondItem="6YR-5p-zxI" secondAttribute="trailing" id="bfP-1Z-tGU"/>
-                        <constraint firstItem="TS5-P2-7vF" firstAttribute="leading" secondItem="tse-O8-A2i" secondAttribute="leading" constant="16" id="n3e-V5-3Xx"/>
                         <constraint firstAttribute="height" constant="600" id="pCz-Q2-gVc"/>
                         <constraint firstAttribute="trailing" secondItem="kSm-Rc-FQD" secondAttribute="trailing" constant="16" id="xjM-gH-khS"/>
                     </constraints>
