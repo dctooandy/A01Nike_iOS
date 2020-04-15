@@ -10,6 +10,7 @@
 #import "BTTVideoGameModel.h"
 
 @interface BTTVideoGameCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *gameIsCouponIcon;
 
 @property (weak, nonatomic) IBOutlet UIImageView *gameIcon;
 
@@ -81,6 +82,8 @@
             self.label2.hidden = YES;
         }
     }
+    
+    self.gameIsCouponIcon.hidden = !model.isCoupon;
 }
 
 

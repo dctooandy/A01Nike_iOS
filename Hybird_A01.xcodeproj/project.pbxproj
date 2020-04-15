@@ -667,6 +667,7 @@
 		D331B20F23D546600080A27D /* BTTBTCRateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D331B20E23D546600080A27D /* BTTBTCRateModel.m */; };
 		D339969524371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D339969424371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m */; };
 		D3399697243B08F700B91A52 /* libboringssl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399696243B08E000B91A52 /* libboringssl.tbd */; };
+		D339969A2445B8DF00B91A52 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		D345F28F23CFFC2300E658A6 /* IVNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F28B23CFFC2200E658A6 /* IVNetworkManager.m */; };
 		D345F29023CFFC2300E658A6 /* IVNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F28C23CFFC2200E658A6 /* IVNetwork.m */; };
 		D345F29123CFFC2300E658A6 /* IVUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F28D23CFFC2200E658A6 /* IVUtility.m */; };
@@ -1819,6 +1820,7 @@
 		D339969324371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTOneKeyRegisterBitollCell.h; sourceTree = "<group>"; };
 		D339969424371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTOneKeyRegisterBitollCell.m; sourceTree = "<group>"; };
 		D3399696243B08E000B91A52 /* libboringssl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libboringssl.tbd; path = usr/lib/libboringssl.tbd; sourceTree = SDKROOT; };
+		D3399698243C215D00B91A52 /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = ../Desktop/libboringssl_simulator.a; sourceTree = "<group>"; };
 		D345F28923CFFC2200E658A6 /* IVNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVNetwork.h; sourceTree = "<group>"; };
 		D345F28A23CFFC2200E658A6 /* IVNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVNetworkManager.h; sourceTree = "<group>"; };
 		D345F28B23CFFC2200E658A6 /* IVNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVNetworkManager.m; sourceTree = "<group>"; };
@@ -2056,6 +2058,7 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
+				D339969A2445B8DF00B91A52 /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -4068,6 +4071,7 @@
 		8746ABB2D5D61EF30A4942D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D3399698243C215D00B91A52 /* libboringssl_simulator.a */,
 				D3399696243B08E000B91A52 /* libboringssl.tbd */,
 				3AD9CF03216C425200685B43 /* CoreTelephony.framework */,
 				3AD9CEE821675A9B00685B43 /* libresolv.tbd */,
@@ -5571,7 +5575,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.67;
+				MARKETING_VERSION = 3.0.68;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5611,7 +5615,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.67;
+				MARKETING_VERSION = 3.0.68;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
