@@ -42,14 +42,11 @@
         [MBProgressHUD showError:@"请输入账号" toView:self.view];
         return;
     }
+    
 
-    if ([PublicMethod isChinese:model.login_name]) {
-
-    } else {
-        if (![model.login_name hasPrefix:@"g"] && ![PublicMethod isValidatePhone:model.login_name]) {
-            [MBProgressHUD showError:@"请输入以g开头真钱账号" toView:self.view];
-            return;
-        }
+    if (![model.login_name hasPrefix:@"g"] && ![PublicMethod isValidatePhone:model.login_name]) {
+        [MBProgressHUD showError:@"请输入正确帐号" toView:self.view];
+        return;
     }
 
     if (!model.password.length && ![PublicMethod isValidatePhone:model.login_name]) {
@@ -161,6 +158,10 @@
             
         }else{
             [self hideLoading];
+            if ([result.head.errMsg isEqualToString:@""]) {
+                [MBProgressHUD showError:@"请输入正确验证码" toView:nil];
+                return;
+            }
             if ([result.head.errCode isEqualToString:@"WS_202020"]) {
                 [self showAlertWithLoginName:model.login_name];
                 return;

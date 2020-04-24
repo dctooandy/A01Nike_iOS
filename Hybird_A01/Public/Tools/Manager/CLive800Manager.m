@@ -42,4 +42,19 @@ SingletonImplementation(CLive800Manager);
 - (void)startLive800ChatSaveMoney:(UIViewController *)superController {
     [Live800ChatLib startService:nil superVC:superController operatorId:nil skillId:@"58" subchannel:nil];
 }
+//- (void)startLive800Chat:(UIViewController *)superController {
+//    NSString *url = @"https://www.why918.com/chat/chatClient/chatbox.jsp?companyID=8990&configID=41&skillId=27";
+//    BTTLive800ViewController *live800 = [[BTTLive800ViewController alloc] init];
+//    live800.webConfigModel.url = url;
+//    live800.webConfigModel.newView = YES;
+//    [superController.navigationController pushViewController:live800 animated:YES];
+//}
+//
+//- (void)startLive800ChatSaveMoney:(UIViewController *)superController {
+//    NSString *url = @"https://www.why918.com/chat/chatClient/chatbox.jsp?companyID=8990&configID=41&skillId=58";
+//    BTTLive800ViewController *live800 = [[BTTLive800ViewController alloc] init];
+//    live800.webConfigModel.url = url;
+//    live800.webConfigModel.newView = YES;
+//    [superController.navigationController pushViewController:live800 animated:YES];
+//}
 @end

@@ -41,10 +41,21 @@
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)confirmBtn_click:(id)sender {
+    NSString *protocol = [[NSUserDefaults standardUserDefaults]objectForKey:@"usdt_protocol"];
+    NSString *firstChar = @"";
+    NSString *firstTwoChar = @"";
+    if (![_walletAddressInputField.text isEqualToString:@""]) {
+        firstChar = [_walletAddressInputField.text substringWithRange:NSMakeRange(0, 1)];
+        firstTwoChar = [_walletAddressInputField.text substringWithRange:NSMakeRange(0, 2)];
+    }
     if (_walletAddressInputField.text.length<6||_walletAddressInputField.text.length>40) {
         [self showError:@"请输入长度为6-40位钱包地址"];
     }else if (_saveInputField.text.length==0||[_saveInputField.text doubleValue]==0){
         [self showError:@"存款金额不得小于1"];
+    }else if ([protocol isEqualToString:@"OMNI"]&&!([firstChar isEqualToString:@"1"]||[firstChar isEqualToString:@"3"])){
+        [MBProgressHUD showError:@"OMNI协议钱包，请以1或3开头" toView:self.view];
+    }else if ([protocol isEqualToString:@"ERC20"]&&![firstChar isEqualToString:@"0x"]){
+        [MBProgressHUD showError:@"ERC20协议钱包，请以0x开头" toView:self.view];
     }else{
         [self submitManualPayOrder];
     }
@@ -54,6 +65,7 @@
     NSString *text = [[NSUserDefaults standardUserDefaults]objectForKey:@"manual_usdt_note"];
     NSString *account = [[NSUserDefaults standardUserDefaults]objectForKey:@"manual_usdt_account"];
     NSString *bankCode = [[NSUserDefaults standardUserDefaults]objectForKey:@"manual_usdt_bankCode"];
+    NSString *protocol = [[NSUserDefaults standardUserDefaults]objectForKey:@"usdt_protocol"];
     [self showLoading];
     weakSelf(weakSelf);
     NSDictionary *params = @{
@@ -63,7 +75,8 @@
         @"amount" : _saveInputField.text,
         @"accountNo" : account,
         @"retelling" : text,
-        @"loginName" : [IVNetwork savedUserInfo].loginName
+        @"loginName" : [IVNetwork savedUserInfo].loginName,
+        @"protocol" : protocol
     };
     [IVNetwork requestPostWithUrl:BTTManualPay paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];

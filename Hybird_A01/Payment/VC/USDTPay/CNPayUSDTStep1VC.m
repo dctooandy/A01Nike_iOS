@@ -117,13 +117,13 @@
                     BTTUsdtWalletModel *model = [BTTUsdtWalletModel yy_modelWithDictionary:json];
                     [codeArray addObject:model.bankcode];
                     if ([model.flag isEqualToString:@"1"]) {
-                        if (![model.bankcode isEqualToString:@"others"]&&![model.bankcode isEqualToString:@"bitoll"]) {
-                            NSInteger index = [weakSelf.bankCodeArray indexOfObject:model.bankcode];
+                        if (![model.bankcode.lowercaseString isEqualToString:@"others"]&&![model.bankcode.lowercaseString isEqualToString:@"bitoll"]) {
+                            NSInteger index = [weakSelf.bankCodeArray indexOfObject:model.bankcode.lowercaseString];
                             [itemsArrayOne addObject:weakSelf.itemsArray[0][index]];
                             [itemImageArrayOne addObject:weakSelf.itemImageArray[0][index]];
                             [paymentArray addObject:json];
                         }else{
-                            if (![model.bankcode isEqualToString:@"bitoll"]) {
+                            if (![model.bankcode.lowercaseString isEqualToString:@"bitoll"]) {
                                 [itemsArrayTwo addObject:@"其他钱包"];
                                 [itemImageArrayTwo addObject:@"me_usdt_otherwallet"];
                                 weakSelf.otherWalletJson = json;
@@ -163,7 +163,7 @@
                         self.protocolArray = protocolArray;
                         NSArray *protocolDetailArray = [protocolArray.firstObject componentsSeparatedByString:@":"];
                         self.selectedProtocol = protocolDetailArray.firstObject;
-                        if (![paymodel.payCategory isEqualToString:@"2"]) {
+                        if (![paymodel.payCategory isEqualToString:@"2"]&&![paymodel.payCategory isEqualToString:@"4"]) {
                             weakSelf.elseWalletView.hidden = YES;
                             weakSelf.normalWalletView.hidden = NO;
                         }else{
@@ -502,7 +502,7 @@
         self.protocolArray = protocolArray;
         NSArray *protocolDetailArray = [protocolArray.firstObject componentsSeparatedByString:@":"];
         self.selectedProtocol = protocolDetailArray.firstObject;
-        if (![model.payCategory isEqualToString:@"2"]) {
+        if (![model.payCategory isEqualToString:@"2"]&&![model.payCategory isEqualToString:@"4"]) {
             _elseWalletView.hidden = YES;
             _normalWalletView.hidden = NO;
             if (model.maxAmount==nil||model.minAmount==nil) {
@@ -555,7 +555,7 @@
         self.protocolArray = protocolArray;
         NSArray *protocolDetailArray = [protocolArray.firstObject componentsSeparatedByString:@":"];
         self.selectedProtocol = protocolDetailArray.firstObject;
-        if (![model.payCategory isEqualToString:@"2"]) {
+        if (![model.payCategory isEqualToString:@"2"]&&![model.payCategory isEqualToString:@"4"]) {
             _elseWalletView.hidden = YES;
             _normalWalletView.hidden = NO;
             if (model.maxAmount==nil||model.minAmount==nil) {

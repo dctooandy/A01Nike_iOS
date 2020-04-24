@@ -310,6 +310,8 @@
         otherProvider = kTTGProvider;
     } else if ([provider isEqualToString:@"PP"]) {
         otherProvider = @"PP";
+    } else if ([provider isEqualToString:@"PS"]) {
+        otherProvider = @"PS";
     } else  {
         isSlot = YES;
     }

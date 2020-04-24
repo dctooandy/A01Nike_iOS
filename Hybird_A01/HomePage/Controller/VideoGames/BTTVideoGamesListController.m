@@ -589,7 +589,7 @@
         contents = @[@"所有类别",@"热门游戏",@"彩金池游戏",@"最新游戏"];
         title = @"请选择游戏类别";
     } else if (button.tag == 1071) {
-        contents = @[@"全平台",@"MG",@"AG",@"PT",@"TTG",@"PP"];
+        contents = @[@"全平台",@"MG",@"AG",@"PT",@"TTG",@"PP",@"PS"];
         title = @"请选择游戏平台";
         
     } else if (button.tag == 1072) {
@@ -613,7 +613,8 @@
                    [selectValue isEqualToString:@"AG"] ||
                    [selectValue isEqualToString:@"PT"] ||
                    [selectValue isEqualToString:@"TTG"] ||
-                   [selectValue isEqualToString:@"PP"]) {
+                   [selectValue isEqualToString:@"PP"] ||
+                   [selectValue isEqualToString:@"PS"]) {
             self.platform = selectValue;
         } else if ([selectValue isEqualToString:@"全赔付"]) {
             self.line = @"";
@@ -735,7 +736,8 @@
                        [provider isEqualToString:@"AGIN"] ||
                        [provider isEqualToString:@"PT"] ||
                        [provider isEqualToString:@"TTG"] ||
-                       [provider isEqualToString:@"PP"]) {
+                       [provider isEqualToString:@"PP"] ||
+                       [provider isEqualToString:@"PS"]) {
                 BTTVideoGamesListController *videoGamesVC = [BTTVideoGamesListController new];
                 NSString *subProvider = nil;
                 if ([provider isEqualToString:@"AGIN"]) {
@@ -838,7 +840,12 @@
     model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
     model.gameStyle = gameModel.gameStyle;
     if (gameModel.gameCode!=nil) {
-        model.gameCode = gameModel.gameCode;
+        if ([gameModel.provider isEqualToString:@"PS"]) {
+            model.gameCode = @"A01094";
+        }else{
+            model.gameCode = gameModel.gameCode;
+        }
+        
     }
     
     [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];

@@ -32,8 +32,11 @@
 + (void)checkAppUpdate{
     NSInteger h5Version = [[IVUzipWrapper getLocalH5Version] integerValue];
     [IVPublicAPIManager checkAppUpdateWithH5Version:h5Version callBack:^(IVPCheckUpdateModel * _Nonnull result, IVJResponseObject * _Nonnull response) {
-        
-        [IVKUpdateViewController showWithUrl:result.appDownUrl content:result.upgradeDesc originVersion:result.versionCode isForce:result.flag==2 isManual:YES];
+        if (result.versionCode!=nil&&result.appDownUrl!=nil) {
+            [IVKUpdateViewController showWithUrl:result.appDownUrl content:result.upgradeDesc originVersion:result.versionCode isForce:result.flag==2 isManual:YES];
+        }else{
+            [MBProgressHUD showMessagNoActivity:@"已是最新版本" toView:nil];
+        }
     }];
 }
 

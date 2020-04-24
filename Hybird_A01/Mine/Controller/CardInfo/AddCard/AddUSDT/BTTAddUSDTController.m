@@ -145,8 +145,10 @@
     BTTUSDTWalletTypeModel *model = [BTTUSDTWalletTypeModel yy_modelWithJSON:self.usdtDatas[_selectedType]];
     NSString *url = BTTAddBankCard;
     NSString *firstChar = @"";
+    NSString *firstTwochar = @"";
     if (![_walletString isEqualToString:@""]) {
         firstChar = [_walletString substringWithRange:NSMakeRange(0, 1)];
+        firstTwochar = [_walletString substringWithRange:NSMakeRange(0, 2)];
     }
      
     
@@ -159,8 +161,8 @@
         [MBProgressHUD showError:@"两次输入不一致" toView:self.view];
     }else if ([self.selectedProtocol isEqualToString:@"OMNI"]&&!([firstChar isEqualToString:@"1"]||[firstChar isEqualToString:@"3"])){
         [MBProgressHUD showError:@"OMNI协议钱包，请以1或3开头" toView:self.view];
-    }else if ([self.selectedProtocol isEqualToString:@"ERC20"]&&!([firstChar isEqualToString:@"0"]&&[firstChar isEqualToString:@"x"])&&![model.code isEqualToString:@"bitoll"]){
-        [MBProgressHUD showError:@"ERC20协议钱包，请以0或x开头" toView:self.view];
+    }else if ([self.selectedProtocol isEqualToString:@"ERC20"]&&![firstTwochar isEqualToString:@"0x"]&&![model.code isEqualToString:@"bitoll"]){
+        [MBProgressHUD showError:@"ERC20协议钱包，请以0x开头" toView:self.view];
     }else{
         [self showLoading];
         NSMutableDictionary *params = @{}.mutableCopy;

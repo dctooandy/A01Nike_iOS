@@ -310,7 +310,8 @@
                        [provider isEqualToString:@"AGIN"] ||
                        [provider isEqualToString:@"PT"] ||
                        [provider isEqualToString:@"TTG"] ||
-                       [provider isEqualToString:@"PP"]) {
+                       [provider isEqualToString:@"PP"] ||
+                       [provider isEqualToString:@"PS"]) {
                 BTTVideoGamesListController *videoGamesVC = [BTTVideoGamesListController new];
                 NSString *subProvider = nil;
                 if ([provider isEqualToString:@"AGIN"]) {

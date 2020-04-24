@@ -53,10 +53,13 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    BTTMeMainModel *model = self.dataSource.count ? self.dataSource[indexPath.row] : nil;
-    if (model && self.clickEventBlock) {
-        self.clickEventBlock(model);
+    BTTMeMainModel *model = self.dataSource.count>0 ? self.dataSource[indexPath.row] : nil;
+    if (model!=nil) {
+        if (self.clickEventBlock) {
+            self.clickEventBlock(model);
+        }
     }
+    
 }
 
 - (void)setDataSource:(NSMutableArray *)dataSource {

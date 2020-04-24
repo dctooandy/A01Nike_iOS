@@ -74,9 +74,11 @@ typedef enum {
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
    
-    BTTMeMainModel *model = self.dataSource.count ? self.dataSource[indexPath.row] : nil;
-    if (model && self.clickEventBlock) {
-        self.clickEventBlock(model);
+    BTTMeMainModel *model = self.dataSource.count>0 ? self.dataSource[indexPath.row] : nil;
+    if (model!=nil) {
+        if (self.clickEventBlock) {
+            self.clickEventBlock(model);
+        }
     }
 }
 

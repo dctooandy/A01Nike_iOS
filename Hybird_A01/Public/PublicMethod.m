@@ -867,9 +867,9 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
 
 + (NSString *)transferNumToThousandFormat:(CGFloat)num {
     NSNumberFormatter *moneyFormatter = [[NSNumberFormatter alloc] init];
-    moneyFormatter.positiveFormat = @"###,##0.00";
+    moneyFormatter.positiveFormat = @"###,##0.000";
     NSString *formatString = [moneyFormatter stringFromNumber:@(num)];
-    return formatString;
+    return [formatString substringToIndex:formatString.length-1];
 }
 
 
