@@ -48,8 +48,8 @@
         firstChar = [_walletAddressInputField.text substringWithRange:NSMakeRange(0, 1)];
         firstTwoChar = [_walletAddressInputField.text substringWithRange:NSMakeRange(0, 2)];
     }
-    if (_walletAddressInputField.text.length<6||_walletAddressInputField.text.length>40) {
-        [self showError:@"请输入长度为6-40位钱包地址"];
+    if (_walletAddressInputField.text.length<6||_walletAddressInputField.text.length>100) {
+        [self showError:@"请输入长度为6-100位钱包地址"];
     }else if (_saveInputField.text.length==0||[_saveInputField.text doubleValue]==0){
         [self showError:@"存款金额不得小于1"];
     }else if ([protocol isEqualToString:@"OMNI"]&&!([firstChar isEqualToString:@"1"]||[firstChar isEqualToString:@"3"])){
