@@ -146,6 +146,12 @@
     NSString *url = BTTAddBankCard;
     NSString *firstChar = @"";
     NSString *firstTwochar = @"";
+    
+    if (_walletString.length<6||_walletString.length>100) {
+        [MBProgressHUD showError:@"请输入长度为6-100位钱包地址" toView:self.view];
+        return;
+    }
+    
     if (![_walletString isEqualToString:@""]) {
         firstChar = [_walletString substringWithRange:NSMakeRange(0, 1)];
         firstTwochar = [_walletString substringWithRange:NSMakeRange(0, 2)];
@@ -163,8 +169,6 @@
         [MBProgressHUD showError:@"OMNI协议钱包，请以1或3开头" toView:self.view];
     }else if ([self.selectedProtocol isEqualToString:@"ERC20"]&&![firstTwochar isEqualToString:@"0x"]&&![model.code isEqualToString:@"bitoll"]){
         [MBProgressHUD showError:@"ERC20协议钱包，请以0x开头" toView:self.view];
-    }else if (_walletString.length<6||_walletString.length>100) {
-        [MBProgressHUD showError:@"请输入长度为6-100位钱包地址" toView:self.view];
     }else{
         [self showLoading];
         NSMutableDictionary *params = @{}.mutableCopy;

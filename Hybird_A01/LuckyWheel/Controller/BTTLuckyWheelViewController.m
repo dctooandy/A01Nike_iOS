@@ -18,7 +18,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    if (![IVNetwork savedUserInfo]) {
+        [WebViewUserAgaent clearCookie];
+    }
+    [self loadWebView];
     
     [self setupNav];
 }
@@ -42,10 +45,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    if (![IVNetwork savedUserInfo]) {
-        [WebViewUserAgaent clearCookie];
-    }
-    [self loadWebView];
+    
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {

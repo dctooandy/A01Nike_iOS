@@ -248,6 +248,17 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController.navigationBar setHidden:NO];
+    self.player=nil;
+    
+    [self.item removeObserver:self forKeyPath:@"status"];
+    [self.item removeObserver:self forKeyPath:@"loadedTimeRanges"];
+    self.item = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

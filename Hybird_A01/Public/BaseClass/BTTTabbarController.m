@@ -213,7 +213,7 @@
         self.selectVC = (BTTBaseViewController *)self.lucky;
         NSString *domain = [IVNetwork h5Domain];
         self.lucky.webConfigModel.theme = @"inside";
-        self.lucky.webConfigModel.url = [NSString stringWithFormat:@"%@%@",domain,@"#/activity_pages/lucky_wheel"]; //@"customer/lucky_wheel.htm";
+        self.lucky.webConfigModel.url = [NSString stringWithFormat:@"%@%@",domain,@"#/activity_pages/lucky_wheel_2020"]; //@"customer/lucky_wheel.htm";
         self.preSelectIndex = index;
         [self.selectVC.navigationController popToRootViewControllerAnimated:NO];
     } else if (index == 1) {

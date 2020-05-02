@@ -41,6 +41,10 @@
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)confirmBtn_click:(id)sender {
+    if (_walletAddressInputField.text.length<6||_walletAddressInputField.text.length>100) {
+        [self showError:@"请输入长度为6-100位钱包地址"];
+        return;
+    }
     NSString *protocol = [[NSUserDefaults standardUserDefaults]objectForKey:@"usdt_protocol"];
     NSString *firstChar = @"";
     NSString *firstTwoChar = @"";
@@ -48,9 +52,7 @@
         firstChar = [_walletAddressInputField.text substringWithRange:NSMakeRange(0, 1)];
         firstTwoChar = [_walletAddressInputField.text substringWithRange:NSMakeRange(0, 2)];
     }
-    if (_walletAddressInputField.text.length<6||_walletAddressInputField.text.length>100) {
-        [self showError:@"请输入长度为6-100位钱包地址"];
-    }else if (_saveInputField.text.length==0||[_saveInputField.text doubleValue]==0){
+    if (_saveInputField.text.length==0||[_saveInputField.text doubleValue]==0){
         [self showError:@"存款金额不得小于1"];
     }else if ([protocol isEqualToString:@"OMNI"]&&!([firstChar isEqualToString:@"1"]||[firstChar isEqualToString:@"3"])){
         [MBProgressHUD showError:@"OMNI协议钱包，请以1或3开头" toView:self.view];
@@ -115,7 +117,7 @@
     [_confirmBtn.layer addSublayer:gradientLayer0];
     
     
-    NSAttributedString *addressString = [[NSAttributedString alloc] initWithString:@"您转账的钱包地址6-40位" attributes:
+    NSAttributedString *addressString = [[NSAttributedString alloc] initWithString:@"您转账的钱包地址6-100位" attributes:
     @{NSForegroundColorAttributeName:kTextPlaceHolderColor,
                  NSFontAttributeName:_walletAddressInputField.font
          }];
