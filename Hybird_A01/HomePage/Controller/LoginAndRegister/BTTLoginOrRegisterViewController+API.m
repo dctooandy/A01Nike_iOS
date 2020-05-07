@@ -97,6 +97,7 @@
         @"validateId":validateId,
         @"loginName":loginName
     };
+    [IVHttpManager shareManager].userToken = @"";
     [IVNetwork requestPostWithUrl:BTTUserLoginByMobileNo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;
@@ -134,6 +135,7 @@
         [parameters setValue:@"" forKey:@"captcha"];
         [parameters setValue:@"" forKey:@"captchaId"];
     }
+    [IVHttpManager shareManager].userToken = @"";
     
     [self showLoading];
     [IVNetwork requestPostWithUrl:loginUrl paramters:parameters completionBlock:^(id  _Nullable response, NSError * _Nullable error) {

@@ -306,7 +306,7 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         if ([url.host isEqualToString:@"webMobile"] || [url.host isEqualToString:@"webmobile"]) {
-            if ([url.path isEqualToString:@"/lucky_wheel.htm"]) {
+            if ([url.path isEqualToString:@"/lucky_wheel_2020.htm"]) {
                 [self.tabVC.myTabbar setSeletedIndex:2];
             }
             

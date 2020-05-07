@@ -137,6 +137,13 @@
         [canEdits removeObjectAtIndex:btcRateIndex];
         [values removeObjectAtIndex:btcRateIndex];
     }
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]) {
+        [names removeObjectAtIndex:5];
+        [placeholders removeObjectAtIndex:5];
+        [heights removeObjectAtIndex:5];
+        [canEdits removeObjectAtIndex:5];
+        [values removeObjectAtIndex:5];
+    }
     for (NSInteger index = 0; index < names.count; index++) {
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = names[index];

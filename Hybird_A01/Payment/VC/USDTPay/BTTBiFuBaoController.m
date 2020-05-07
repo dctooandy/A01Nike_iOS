@@ -207,33 +207,7 @@
 }
 
 - (void)dowloadBfbApp{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://bitoll.com"]];
-}
-- (IBAction)jumpToBiFuBaoApp:(id)sender {
-    NSURL *url = [NSURL URLWithString:@""];
-    BOOL open = [[UIApplication sharedApplication] canOpenURL:url];
-    if ([[UIApplication sharedApplication] canOpenURL:url]) {
-          if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_9_x_Max) {
-
-                    [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:^(BOOL success) {
-
-                        NSLog(@"success = %d",success);
-
-                    }];
-
-                }else{
-
-                    [[UIApplication sharedApplication] openURL:url];
-
-                }
-
-            }
-
-            else {
-
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://bitoll.com/"]];
-
-            }
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.bitoll.com/ios.html"]];
 }
 
 - (void)setupView{
@@ -369,10 +343,45 @@
             self.qrcodeView.image = qrcode;
             self.secondMoneyLabel.text = [NSString stringWithFormat:@"%@",result.body[@"amount"]];
             self.secondArriveLabel.text = [NSString stringWithFormat:@"%@",result.body[@"amount"]];
+            [self requestPayDetailUrl:result.body[@"payUrl"]];
         }else{
             [self showError:result.head.errMsg];
         }
     }];
+}
+
+- (void)requestPayDetailUrl:(NSString *)url{
+    //初始化一个AFHTTPSessionManager
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *json = responseObject;
+        NSString *imgQrcode = [json valueForKey:@"imgQrcode"];
+        NSString *payUrl = [imgQrcode stringByReplacingOccurrencesOfString:@"gz://" withString:@"bitoll://"];
+        UIImage *qrcode = [PublicMethod QRCodeMethod:payUrl];
+        self.qrcodeView.image = qrcode;
+        [self showConfirmAlertWithUrl:payUrl];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
+    
+}
+
+- (void)showConfirmAlertWithUrl:(NSString *)payUrl{
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"在币付宝中打开链接" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertVC addAction:cancel];
+    UIAlertAction *unlock = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if ([[UIApplication sharedApplication]
+          canOpenURL:[NSURL URLWithString:payUrl]]){
+          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:payUrl]];
+        }else{
+            NSLog(@"跳转不了");
+        }
+    }];
+    [alertVC addAction:unlock];
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 

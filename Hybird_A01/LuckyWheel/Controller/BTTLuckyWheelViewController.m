@@ -18,10 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (![IVNetwork savedUserInfo]) {
-        [WebViewUserAgaent clearCookie];
-    }
-    [self loadWebView];
+    
     
     [self setupNav];
 }
@@ -44,6 +41,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if (![IVNetwork savedUserInfo]) {
+        [WebViewUserAgaent clearCookie];
+    }
+    [self loadWebView];
+    [self.webView reload];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     
 }

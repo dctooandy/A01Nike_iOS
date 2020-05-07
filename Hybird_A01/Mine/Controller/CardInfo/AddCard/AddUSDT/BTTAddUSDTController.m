@@ -65,6 +65,15 @@
         cell.selectPayType = ^(NSInteger tag) {
             NSLog(@"%ld",(long)tag);
             weakSelf.selectedType = tag;
+            BTTUSDTWalletTypeModel *model = [BTTUSDTWalletTypeModel yy_modelWithDictionary:self.usdtDatas[tag]];
+            if ([model.code isEqualToString:@"bitoll"]) {
+                [self.elementsHight replaceObjectAtIndex:1 withObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
+                [self.elementsHight replaceObjectAtIndex:4 withObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
+            }else{
+                [self.elementsHight replaceObjectAtIndex:1 withObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 85)]];
+                [self.elementsHight replaceObjectAtIndex:4 withObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+            }
+            
             [weakSelf.collectionView reloadData];
         };
         return cell;
@@ -86,8 +95,16 @@
         BTTMeMainModel *model = [BTTMeMainModel new];
         
         if (indexPath.row == 3) {
-            model.name = @"钱包地址";
-            model.iconName = @"请输入钱包地址";
+            if (self.usdtDatas.count>0) {
+                BTTUSDTWalletTypeModel *typeModel = [BTTUSDTWalletTypeModel yy_modelWithDictionary:self.usdtDatas[_selectedType]];
+                model.name = [typeModel.code isEqualToString:@"bitoll"] ? @"币付宝ID" : @"钱包地址";
+                model.iconName = [typeModel.code isEqualToString:@"bitoll"] ? @"请输入币付宝ID" : @"请输入钱包地址";
+            }else{
+                model.name =  @"钱包地址";
+                model.iconName = @"请输入钱包地址";
+            }
+            
+            
             cell.textFieldChanged = ^(NSString * _Nonnull text) {
                 weakSelf.walletString = text;
             };
@@ -156,6 +173,9 @@
         firstChar = [_walletString substringWithRange:NSMakeRange(0, 1)];
         firstTwochar = [_walletString substringWithRange:NSMakeRange(0, 2)];
     }
+    
+    
+
      
     
     weakSelf(weakSelf)
@@ -163,7 +183,7 @@
         [MBProgressHUD showError:@"钱包地址不得为空" toView:self.view];
     }else if ([_confirmString isEqualToString:@""]){
         [MBProgressHUD showError:@"确认地址不得为空" toView:self.view];
-    }else if (![_confirmString isEqualToString:_walletString]){
+    }else if (![_confirmString isEqualToString:_walletString]&&![model.code isEqualToString:@"bitoll"]){
         [MBProgressHUD showError:@"两次输入不一致" toView:self.view];
     }else if ([self.selectedProtocol isEqualToString:@"OMNI"]&&!([firstChar isEqualToString:@"1"]||[firstChar isEqualToString:@"3"])){
         [MBProgressHUD showError:@"OMNI协议钱包，请以1或3开头" toView:self.view];
@@ -178,7 +198,10 @@
         params[@"expire"] = @0;
         params[@"messageId"] = self.messageId;
         params[@"validateId"] = self.validateId;
-        params[@"protocol"] = self.selectedProtocol;
+        if (![model.code isEqualToString:@"bitoll"]) {
+            params[@"protocol"] = self.selectedProtocol;
+        }
+        
         [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
             IVJResponseObject *result = response;
             [self hideLoading];

@@ -199,6 +199,7 @@
     }];
 }
 - (IBAction)downLoadBtn_click:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.bitoll.com/ios.html"]];
 }
 
 /*

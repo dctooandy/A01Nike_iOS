@@ -45,6 +45,7 @@
         [self showError:@"请输入长度为6-100位钱包地址"];
         return;
     }
+
     NSString *protocol = [[NSUserDefaults standardUserDefaults]objectForKey:@"usdt_protocol"];
     NSString *firstChar = @"";
     NSString *firstTwoChar = @"";

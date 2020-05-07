@@ -92,7 +92,7 @@
         [cell setCellRateWithRate:self.usdtRate];
         return cell;
     }
-    if (([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"])&&indexPath.row==self.sheetDatas.count-3) {
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]&&indexPath.row==self.sheetDatas.count-3) {
         BTTWithDrawProtocolView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawProtocolView" forIndexPath:indexPath];
         if ([self.bankList[self.selectIndex].protocol isEqualToString:@""]) {
             [cell setTypeData:@[@"OMNI",@"ERC20"]];
@@ -289,7 +289,6 @@
 
 - (void)refreshBankList
 {
-    BOOL haveUSDT = NO;
     NSDictionary *json = [IVCacheWrapper objectForKey:BTTCacheBankListKey];
     if (json!=nil) {
         NSArray *array = json[@"accounts"];
@@ -299,24 +298,18 @@
             for (int i =0 ; i<array.count; i++) {
                 NSDictionary *json = array[i];
                 BTTBankModel *model = [BTTBankModel yy_modelWithDictionary:json];
-                if (self.isUSDT&&!haveUSDT&&[model.bankName isEqualToString:@"USDT"]) {
-                    [bankList insertObject:model atIndex:0];
-                    haveUSDT = YES;
-                    
-                }else{
-                    if (isBlackNineteen) {
-                        if (![model.accountType isEqualToString:@"存折"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"信用卡"]) {
-                            [bankList addObject:model];
-                        }
-                    }else{
+                if (isBlackNineteen) {
+                    if (![model.accountType isEqualToString:@"存折"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"信用卡"]) {
                         [bankList addObject:model];
                     }
-            
+                }else{
+                    [bankList addObject:model];
                 }
                 if (i==array.count-1) {
                     self.bankList = bankList;
                     [self loadMainData];
                     [self setupElements];
+                    self.selectedProtocol = self.bankList.firstObject.protocol;
                 }
             }
             
@@ -333,6 +326,12 @@
         [MBProgressHUD showError:[NSString stringWithFormat:@"您有%ld个未处理的取款提案",(long)self.canWithdraw] toView:nil];
         return;
     }
+    
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]) {
+        [MBProgressHUD showError:@"USDT取款只能取款至币付宝钱包,请切换到币付宝钱包" toView:nil];
+        return;
+    }
+    
     if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]) {
         [self showLoading];
         [self createRequestWithBtcModel:nil usdtModel:nil];

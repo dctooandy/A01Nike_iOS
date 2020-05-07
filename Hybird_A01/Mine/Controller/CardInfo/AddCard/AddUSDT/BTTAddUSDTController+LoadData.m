@@ -8,6 +8,7 @@
 
 #import "BTTAddUSDTController+LoadData.h"
 #import "CNPayRequestManager.h"
+#import "BTTUSDTWalletTypeModel.h"
 
 @implementation BTTAddUSDTController (LoadData)
 
@@ -21,6 +22,16 @@
                 NSArray *array = result.body;
                 CGFloat height = 96+(array.count-1)/3*36;
                 [self.elementsHight replaceObjectAtIndex:0 withObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, height)]];
+                if (array.count>0) {
+                    BTTUSDTWalletTypeModel *typeModel = [BTTUSDTWalletTypeModel yy_modelWithJSON:array[0]];
+                    if ([typeModel.code isEqualToString:@"bitoll"]) {
+                        [self.elementsHight replaceObjectAtIndex:1 withObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
+                        [self.elementsHight replaceObjectAtIndex:4 withObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
+                    }
+                }
+                
+                
+                
                 [self.usdtDatas addObjectsFromArray:array];
                 [self.collectionView reloadData];
             }
