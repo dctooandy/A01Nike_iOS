@@ -269,7 +269,7 @@
     //Gradient 0 fill for 圆角矩形 11
     CAGradientLayer *gradientLayer0 = [[CAGradientLayer alloc] init];
     gradientLayer0.cornerRadius = 5;
-    gradientLayer0.frame = _confirmBtn.bounds;
+    gradientLayer0.frame = CGRectMake(0, 0, SCREEN_WIDTH-30, 44);
     gradientLayer0.colors = @[
         (id)[UIColor colorWithRed:247.0f/255.0f green:249.0f/255.0f blue:82.0f/255.0f alpha:1.0f].CGColor,
         (id)[UIColor colorWithRed:242.0f/255.0f green:218.0f/255.0f blue:15.0f/255.0f alpha:1.0f].CGColor];
@@ -280,7 +280,7 @@
     
     CAGradientLayer *gradientLayer1 = [[CAGradientLayer alloc] init];
     gradientLayer1.cornerRadius = 5;
-    gradientLayer1.frame = _finishButton.bounds;
+    gradientLayer1.frame = CGRectMake(0, 0, SCREEN_WIDTH-30, 44);
     gradientLayer1.colors = @[
         (id)[UIColor colorWithRed:247.0f/255.0f green:249.0f/255.0f blue:82.0f/255.0f alpha:1.0f].CGColor,
         (id)[UIColor colorWithRed:242.0f/255.0f green:218.0f/255.0f blue:15.0f/255.0f alpha:1.0f].CGColor];

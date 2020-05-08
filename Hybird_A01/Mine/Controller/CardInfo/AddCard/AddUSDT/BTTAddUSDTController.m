@@ -165,7 +165,12 @@
     NSString *firstTwochar = @"";
     
     if (_walletString.length<6||_walletString.length>100) {
-        [MBProgressHUD showError:@"请输入长度为6-100位钱包地址" toView:self.view];
+        if ([model.code isEqualToString:@"bitoll"]) {
+            [MBProgressHUD showError:@"币付宝ID只允许6-100位大小写英文字母+数字的组合" toView:self.view];
+        }else{
+            [MBProgressHUD showError:@"钱包地址只允许6-100位大小写英文字母+数字的组合" toView:self.view];
+        }
+        
         return;
     }
     
@@ -174,18 +179,12 @@
         firstTwochar = [_walletString substringWithRange:NSMakeRange(0, 2)];
     }
     
-    
-
-     
-    
     weakSelf(weakSelf)
-    if ([_walletString isEqualToString:@""]) {
-        [MBProgressHUD showError:@"钱包地址不得为空" toView:self.view];
-    }else if ([_confirmString isEqualToString:@""]){
+    if ([_confirmString isEqualToString:@""]&&![model.code isEqualToString:@"bitoll"]){
         [MBProgressHUD showError:@"确认地址不得为空" toView:self.view];
     }else if (![_confirmString isEqualToString:_walletString]&&![model.code isEqualToString:@"bitoll"]){
         [MBProgressHUD showError:@"两次输入不一致" toView:self.view];
-    }else if ([self.selectedProtocol isEqualToString:@"OMNI"]&&!([firstChar isEqualToString:@"1"]||[firstChar isEqualToString:@"3"])){
+    }else if ([self.selectedProtocol isEqualToString:@"OMNI"]&&!([firstChar isEqualToString:@"1"]||[firstChar isEqualToString:@"3"])&&![model.code isEqualToString:@"bitoll"]){
         [MBProgressHUD showError:@"OMNI协议钱包，请以1或3开头" toView:self.view];
     }else if ([self.selectedProtocol isEqualToString:@"ERC20"]&&![firstTwochar isEqualToString:@"0x"]&&![model.code isEqualToString:@"bitoll"]){
         [MBProgressHUD showError:@"ERC20协议钱包，请以0x开头" toView:self.view];

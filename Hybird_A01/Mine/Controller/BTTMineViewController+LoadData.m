@@ -325,7 +325,7 @@
                     [self.bigDataSoure addObject:usdtModel];
                 }
                 if (haveBFB) {
-                    [self.bigDataSoure addObject:bfbModel];
+                    [self.bigDataSoure insertObject:bfbModel atIndex:0];
                 }
                 
                 
