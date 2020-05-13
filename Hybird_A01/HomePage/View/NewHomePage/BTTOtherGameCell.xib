@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,21 +46,10 @@
                         </connections>
                     </button>
                     <button opaque="NO" tag="1008" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G92-lK-lQi">
-                        <rect key="frame" x="207" y="119.5" width="74" height="69"/>
-                        <state key="normal" backgroundImage="Xjingcai"/>
+                        <rect key="frame" x="207" y="119.5" width="153" height="69"/>
+                        <state key="normal" backgroundImage="xjc_big"/>
                         <connections>
                             <action selector="jingcaiBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="ooS-Le-WLU"/>
-                        </connections>
-                    </button>
-                    <button opaque="NO" tag="1009" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohj-1h-GEv">
-                        <rect key="frame" x="286" y="119.5" width="74" height="69"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="74" id="JkN-Fd-Unn"/>
-                            <constraint firstAttribute="height" constant="69" id="b48-0J-tb5"/>
-                        </constraints>
-                        <state key="normal" backgroundImage="guanjun"/>
-                        <connections>
-                            <action selector="vipBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="WS7-wY-Wpt"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1010" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5n-pS-z6m">
@@ -99,12 +88,6 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="体育VIP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5HL-ir-BfF">
-                        <rect key="frame" x="294" y="163.5" width="50.5" height="17"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AS真人棋牌" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXr-aL-C7N">
                         <rect key="frame" x="23" y="259" width="75.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -125,9 +108,6 @@
                         </constraints>
                     </imageView>
                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tryPlay" translatesAutoresizingMaskIntoConstraints="NO" id="CE7-3R-gKf">
-                        <rect key="frame" x="248" y="134.5" width="25" height="17.5"/>
-                    </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tryPlay" translatesAutoresizingMaskIntoConstraints="NO" id="1Q3-wD-dYn">
                         <rect key="frame" x="327" y="134.5" width="25" height="17.5"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tryPlay" translatesAutoresizingMaskIntoConstraints="NO" id="2b6-MA-mMZ">
@@ -139,40 +119,33 @@
                 <constraint firstItem="G92-lK-lQi" firstAttribute="leading" secondItem="Utd-7Q-sfN" secondAttribute="leading" id="04m-8l-hRv"/>
                 <constraint firstItem="edS-Xt-17u" firstAttribute="bottom" secondItem="G92-lK-lQi" secondAttribute="bottom" constant="-8" id="0NE-Zr-kib"/>
                 <constraint firstItem="N5n-pS-z6m" firstAttribute="top" secondItem="nxo-c5-HXv" secondAttribute="bottom" constant="12.5" id="0NF-CC-adx"/>
-                <constraint firstItem="G92-lK-lQi" firstAttribute="centerY" secondItem="ohj-1h-GEv" secondAttribute="centerY" id="1Uv-3a-G88"/>
                 <constraint firstItem="N5n-pS-z6m" firstAttribute="top" secondItem="2b6-MA-mMZ" secondAttribute="top" constant="-15" id="1yg-v1-IN4"/>
                 <constraint firstItem="ZdN-1u-wR6" firstAttribute="centerY" secondItem="N5n-pS-z6m" secondAttribute="centerY" id="2bV-PH-EhC"/>
                 <constraint firstItem="MxN-PN-rST" firstAttribute="bottom" secondItem="ZdN-1u-wR6" secondAttribute="bottom" constant="-8" id="3OS-cE-3dv"/>
                 <constraint firstItem="Utd-7Q-sfN" firstAttribute="leading" secondItem="LGI-fm-VZ5" secondAttribute="leading" constant="-8" id="3q3-D3-Uit"/>
                 <constraint firstItem="ZdN-1u-wR6" firstAttribute="width" secondItem="N5n-pS-z6m" secondAttribute="width" id="6WH-H6-yzL"/>
-                <constraint firstItem="ohj-1h-GEv" firstAttribute="width" secondItem="G92-lK-lQi" secondAttribute="width" id="8zs-c7-VaS"/>
                 <constraint firstItem="CE7-3R-gKf" firstAttribute="top" secondItem="G92-lK-lQi" secondAttribute="top" constant="15" id="94y-at-sqv"/>
                 <constraint firstItem="dmp-6G-yic" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="9bd-0q-yjg"/>
+                <constraint firstItem="G92-lK-lQi" firstAttribute="trailing" secondItem="Utd-7Q-sfN" secondAttribute="trailing" id="AmR-KL-t4k"/>
                 <constraint firstItem="fsl-kK-926" firstAttribute="trailing" secondItem="Utd-7Q-sfN" secondAttribute="trailing" constant="-8" id="DLM-Nn-tRt"/>
                 <constraint firstItem="Utd-7Q-sfN" firstAttribute="top" secondItem="fsl-kK-926" secondAttribute="top" constant="-15" id="DSl-g2-O5R"/>
                 <constraint firstItem="nxo-c5-HXv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="EyP-7f-E7T"/>
-                <constraint firstAttribute="trailing" secondItem="ohj-1h-GEv" secondAttribute="trailing" constant="15" id="G2Q-BM-Td0"/>
                 <constraint firstItem="hXr-aL-C7N" firstAttribute="bottom" secondItem="N5n-pS-z6m" secondAttribute="bottom" constant="-8" id="I0X-CT-ZMU"/>
-                <constraint firstItem="5HL-ir-BfF" firstAttribute="bottom" secondItem="ohj-1h-GEv" secondAttribute="bottom" constant="-8" id="IWz-dy-FDX"/>
                 <constraint firstItem="nxo-c5-HXv" firstAttribute="top" secondItem="dmp-6G-yic" secondAttribute="bottom" constant="10" id="OhC-5d-7VM"/>
                 <constraint firstItem="N5n-pS-z6m" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="SKi-xG-nWg"/>
                 <constraint firstItem="LGI-fm-VZ5" firstAttribute="bottom" secondItem="Utd-7Q-sfN" secondAttribute="bottom" constant="-8" id="T6V-Ro-Jkq"/>
                 <constraint firstAttribute="trailing" secondItem="Utd-7Q-sfN" secondAttribute="trailing" constant="15" id="UpI-Si-7ut"/>
                 <constraint firstItem="ZdN-1u-wR6" firstAttribute="height" secondItem="N5n-pS-z6m" secondAttribute="height" id="Uzr-ba-YSD"/>
-                <constraint firstItem="ohj-1h-GEv" firstAttribute="top" secondItem="1Q3-wD-dYn" secondAttribute="top" constant="-15" id="ZoF-l6-vKE"/>
-                <constraint firstItem="ohj-1h-GEv" firstAttribute="leading" secondItem="5HL-ir-BfF" secondAttribute="leading" constant="-8" id="bKX-mT-ChN"/>
                 <constraint firstItem="FhC-if-daJ" firstAttribute="bottom" secondItem="nxo-c5-HXv" secondAttribute="bottom" constant="-8" id="bam-du-YmX"/>
                 <constraint firstItem="nxo-c5-HXv" firstAttribute="top" secondItem="Utd-7Q-sfN" secondAttribute="top" id="bkC-P9-h4f"/>
                 <constraint firstItem="G92-lK-lQi" firstAttribute="trailing" secondItem="CE7-3R-gKf" secondAttribute="trailing" constant="8" id="clx-Cu-aD3"/>
-                <constraint firstItem="1Q3-wD-dYn" firstAttribute="trailing" secondItem="ohj-1h-GEv" secondAttribute="trailing" constant="-8" id="d2v-y1-VhK"/>
                 <constraint firstItem="dmp-6G-yic" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="db5-aL-4Av"/>
-                <constraint firstItem="ohj-1h-GEv" firstAttribute="height" secondItem="G92-lK-lQi" secondAttribute="height" id="djc-g2-OWY"/>
                 <constraint firstItem="nxo-c5-HXv" firstAttribute="leading" secondItem="FhC-if-daJ" secondAttribute="leading" constant="-8" id="h4c-sa-1NE"/>
-                <constraint firstItem="nxo-c5-HXv" firstAttribute="bottom" secondItem="ohj-1h-GEv" secondAttribute="bottom" id="if4-Wf-ynI"/>
                 <constraint firstItem="2b6-MA-mMZ" firstAttribute="trailing" secondItem="N5n-pS-z6m" secondAttribute="trailing" constant="-8" id="kLV-nl-X5h"/>
                 <constraint firstItem="G92-lK-lQi" firstAttribute="leading" secondItem="edS-Xt-17u" secondAttribute="leading" constant="-8" id="lQo-b4-Ifd"/>
                 <constraint firstAttribute="trailing" secondItem="ZdN-1u-wR6" secondAttribute="trailing" constant="15" id="qiA-tO-NDd"/>
                 <constraint firstItem="N5n-pS-z6m" firstAttribute="leading" secondItem="hXr-aL-C7N" secondAttribute="leading" constant="-8" id="vw8-TV-miD"/>
+                <constraint firstItem="edS-Xt-17u" firstAttribute="baseline" secondItem="FhC-if-daJ" secondAttribute="baseline" id="yHT-RJ-qhJ"/>
                 <constraint firstItem="ZdN-1u-wR6" firstAttribute="leading" secondItem="MxN-PN-rST" secondAttribute="leading" constant="-8" id="z8H-gM-1ic"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
@@ -191,10 +164,6 @@
                 <outlet property="shabaBtn" destination="nxo-c5-HXv" id="t3F-4x-haF"/>
                 <outlet property="shabaBtnHeight" destination="ecv-dy-SUP" id="7lz-rK-G7M"/>
                 <outlet property="shabaBtnWidth" destination="Kur-MV-v0a" id="vob-fZ-EPb"/>
-                <outlet property="vipBtn" destination="ohj-1h-GEv" id="cuN-q0-gzn"/>
-                <outlet property="vipBtnHeight" destination="b48-0J-tb5" id="Vf1-hV-MiX"/>
-                <outlet property="vipBtnWidth" destination="JkN-Fd-Unn" id="EJd-RU-lui"/>
-                <outlet property="vipTryIcon" destination="1Q3-wD-dYn" id="GZD-jK-gjg"/>
             </connections>
             <point key="canvasLocation" x="133" y="73"/>
         </collectionViewCell>
@@ -203,9 +172,8 @@
         <image name="AGCP" width="167.5" height="82.5"/>
         <image name="AS" width="167.5" height="82.5"/>
         <image name="BTI" width="152.5" height="69"/>
-        <image name="Xjingcai" width="74" height="69"/>
-        <image name="guanjun" width="74" height="69"/>
         <image name="shaba" width="182.5" height="143.5"/>
         <image name="tryPlay" width="25" height="17.5"/>
+        <image name="xjc_big" width="153" height="69"/>
     </resources>
 </document>
