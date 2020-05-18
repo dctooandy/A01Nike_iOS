@@ -24,6 +24,8 @@
 #import "CNPayUSDTRateModel.h"
 #import "CLive800Manager.h"
 #import "BTTWithDrawProtocolView.h"
+#import "BTTBitollWithDrawCell.h"
+#import "BTTCardInfosController.h"
 
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate>
 @property(nonatomic, copy)NSString *amount;
@@ -64,6 +66,8 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTWithdrawalNotifyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTWithdrawalNotifyCell"];
     [self.collectionView registerClass:[BTTWithDrawUSDTConfirmCell class] forCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell"];
     [self.collectionView registerClass:[BTTWithDrawProtocolView class] forCellWithReuseIdentifier:@"BTTWithDrawProtocolView"];
+    [self.collectionView registerClass:[BTTBitollWithDrawCell class] forCellWithReuseIdentifier:@"BTTBitollWithDrawCell"];
+    
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -106,11 +110,26 @@
     }
     if (indexPath.row == self.sheetDatas.count - 1) {
         
-        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
-        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-            [weakSelf submitWithDraw];
-        };
-        return cell;
+        if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]) {
+            BTTBitollWithDrawCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBitollWithDrawCell" forIndexPath:indexPath];
+            cell.confirmTap = ^{
+                [self submitWithDraw];
+            };
+            cell.bindTap = ^{
+                [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCard"];
+                BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            };
+            return cell;
+        }else{
+            BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                [weakSelf submitWithDraw];
+            };
+            return cell;
+        }
+        
+        
         
         
     }
@@ -158,7 +177,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     if (indexPath.row != self.sheetDatas.count) {
-        if (indexPath.row==self.sheetDatas.count-1) {
+        if (indexPath.row==self.sheetDatas.count-1&&![self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]) {
             [self submitWithDraw];
         }else{
             BTTMeMainModel *model = self.sheetDatas[indexPath.row];
@@ -224,7 +243,7 @@
         self.password = textField.text;
     } else if (textField.tag == 8002) {
         self.amount = textField.text;
-        if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]) {
+        if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]) {
             NSString *fUsdtAmount = [NSString stringWithFormat:@"%.5f",([self.amount doubleValue] * self.usdtRate)];
             self.usdtAmount = [NSString stringWithFormat:@"%@ USDT",[fUsdtAmount substringWithRange:NSMakeRange(0, fUsdtAmount.length-1)]];
             _usdtField.text = self.usdtAmount;
@@ -239,9 +258,16 @@
 }
 - (UIButton *)getSubmitBtn
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.sheetDatas.count - 1 inSection:0];
-    BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    return cell.btn;
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.sheetDatas.count - 1 inSection:0];
+        BTTBitollWithDrawCell *cell = (BTTBitollWithDrawCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+        return cell.confirmBtn;
+    }else{
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.sheetDatas.count - 1 inSection:0];
+        BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+        return cell.btn;
+    }
+    
 }
 //选中银行卡
 - (void)bankCardPick:(NSIndexPath *)indexPath
@@ -391,6 +417,9 @@
     }
     if (!(isNull(self.selectedProtocol)||[self.selectedProtocol isEqualToString:@""])) {
         params[@"protocol"] = self.selectedProtocol;
+    }
+    if ([model.bankName isEqualToString:@"BITOLL"]) {
+        params[@"protocol"] = @"ERC20";
     }
     
     weakSelf(weakSelf)

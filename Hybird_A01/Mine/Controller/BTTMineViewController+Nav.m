@@ -21,6 +21,7 @@
 #import "BTTPromotionDetailController.h"
 #import "BTTActionSheet.h"
 #import "BTTShowErcodePopview.h"
+#import "BTTWithdrawalController.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
@@ -101,6 +102,7 @@ static const char *BTTHeaderViewKey = "headerView";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(versionUpdate:) name:IVCheckUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveMoneyTimes:) name:BTTSaveMoneyTimesNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoCardInfo) name:@"gotoCardInfoNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoTakeMoney) name:@"gotoTakeMoneyNotification" object:nil];
 }
 
 - (void)saveMoneyTimes:(NSNotification *)notifi {
@@ -123,6 +125,13 @@ static const char *BTTHeaderViewKey = "headerView";
 - (void)gotoCardInfo {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    });
+}
+
+- (void)gotoTakeMoney {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     });
 }

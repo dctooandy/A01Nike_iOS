@@ -19,18 +19,21 @@
 #import "BTTUSDTWalletTypeModel.h"
 #import "BTTOneKeyRegisterBitollCell.h"
 #import "BTTKSAddBfbWalletController.h"
+#import "BTTWithdrawalController.h"
 
 @interface BTTAddUSDTController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, copy) NSString *walletString;
 @property (nonatomic, copy) NSString *confirmString;
 @property (nonatomic, assign) NSInteger selectedType;
 @property (nonatomic, copy) NSString *selectedProtocol;
+@property (nonatomic, assign) BOOL isWithDraw;
 @end
 
 @implementation BTTAddUSDTController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isWithDraw = [[NSUserDefaults standardUserDefaults]boolForKey:@"bitollAddCard"];
     self.title = @"添加USDT钱包";
     _walletString = @"";
     _confirmString = @"";
@@ -206,11 +209,23 @@
             [self hideLoading];
             [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
             if ([result.head.errCode isEqualToString:@"0000"]) {
-                [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
-                [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
-                BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-                vc.mobileCodeType = self.addCardType;
-                [weakSelf.navigationController pushViewController:vc animated:YES];
+                if (self.isWithDraw&&[model.code isEqualToString:@"bitoll"]) {
+                    [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"bitollAddCard"];
+                    [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+                    [BTTHttpManager fetchBankListWithUseCache:NO completion:^(IVRequestResultModel *result, id response) {
+                        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+                        [self.navigationController popToRootViewControllerAnimated:YES];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoTakeMoneyNotification" object:nil];
+                    }];
+                    
+                }else{
+                    [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
+                    [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
+                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+                    vc.mobileCodeType = self.addCardType;
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                }
+                
             }else{
                 [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
             }
