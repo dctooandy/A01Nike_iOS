@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BTTConsetiveWinsPopView : BTTBaseAnimationPopView
 
 @property (nonatomic, copy) void(^tapActivity)(void);
+@property (nonatomic, copy) void(^tapConfirm)(void);
+- (void)setContentMessage:(NSString *)message;
 
 @end
 

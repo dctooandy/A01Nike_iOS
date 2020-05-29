@@ -706,6 +706,7 @@
 		D3A9A72124172611007F672A /* BTTUSDTWalletTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A9A72024172611007F672A /* BTTUSDTWalletTypeModel.m */; };
 		D3A9A72424173409007F672A /* BTTWithDrawProtocolView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A9A72324173409007F672A /* BTTWithDrawProtocolView.m */; };
 		D3B47D5923B70A5500D37C7F /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = D3B47D5823B70A5400D37C7F /* app.zip */; };
+		D3C64B142477CFEE0063B0D7 /* OneKeyPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C64B132477CFEE0063B0D7 /* OneKeyPhoneController.m */; };
 		D51AD19F21B8FEE5008C633A /* CNPayBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */; };
 		D599251421AE5AF6001E885A /* CNPayNormalTF.m in Sources */ = {isa = PBXBuildFile; fileRef = D599251321AE5AF6001E885A /* CNPayNormalTF.m */; };
 		D599251821AE6719001E885A /* CNPayCardStep2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D599251621AE6719001E885A /* CNPayCardStep2VC.m */; };
@@ -1889,6 +1890,7 @@
 		D3A9A72224173409007F672A /* BTTWithDrawProtocolView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTWithDrawProtocolView.h; sourceTree = "<group>"; };
 		D3A9A72324173409007F672A /* BTTWithDrawProtocolView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTWithDrawProtocolView.m; sourceTree = "<group>"; };
 		D3B47D5823B70A5400D37C7F /* app.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = app.zip; sourceTree = "<group>"; };
+		D3C64B132477CFEE0063B0D7 /* OneKeyPhoneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneKeyPhoneController.m; sourceTree = "<group>"; };
 		D51AD19D21B8FEE5008C633A /* CNPayBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayBaseView.h; sourceTree = "<group>"; };
 		D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayBaseView.m; sourceTree = "<group>"; };
 		D599251221AE5AF6001E885A /* CNPayNormalTF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayNormalTF.h; sourceTree = "<group>"; };
@@ -3695,6 +3697,7 @@
 		3ADD235F2176FF6100FA959A /* LoginAndRegister */ = {
 			isa = PBXGroup;
 			children = (
+				D3C64B132477CFEE0063B0D7 /* OneKeyPhoneController.m */,
 				3AAE81F9219A737E003EC8B0 /* BTTLoginOrRegisterViewController.h */,
 				3AAE81F8219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m */,
 				3AC3FFA7219ACD48008AECCB /* BTTLoginOrRegisterViewController+UI.h */,
@@ -5062,6 +5065,7 @@
 				3A7391CC230CD12A00E2DFD5 /* BTTRegisterCheckPopView.m in Sources */,
 				EAA4811B21ABD265000C0273 /* BTTAGQJViewController.m in Sources */,
 				3A8F51E7215F78F50069D1B3 /* BTTBaseNavigationController.m in Sources */,
+				D3C64B142477CFEE0063B0D7 /* OneKeyPhoneController.m in Sources */,
 				3A929423219C3B7500764E7E /* BTTRegisterSuccessOneCell.m in Sources */,
 				3A8D6E9921633D3E000530DF /* PushManager.m in Sources */,
 				3A8F51A1215F77EC0069D1B3 /* UIColor+Util.m in Sources */,
@@ -5580,7 +5584,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.83;
+				MARKETING_VERSION = 3.0.85;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5621,7 +5625,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.83;
+				MARKETING_VERSION = 3.0.85;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

@@ -188,7 +188,7 @@
         }];
 
         UIButton *registerBtn = [[UIButton alloc]init];
-        [registerBtn setTitle:@"急速开户" forState:UIControlStateNormal];
+        [registerBtn setTitle:@"立即开户" forState:UIControlStateNormal];
         [registerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         registerBtn.titleLabel.font = [UIFont systemFontOfSize:15];
         registerBtn.layer.cornerRadius = 22.5;

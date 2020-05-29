@@ -15,6 +15,8 @@
 #import "BTTChangePwdBtnsCell.h"
 #import "BTTRegisterChangePwdSuccessController.h"
 #import "IVRsaEncryptWrapper.h"
+#import "BTTUserStatusManager.h"
+#import "CNPayConstant.h"
 
 typedef enum {
     BTTRegisterSuccessTypeNormal,
@@ -29,6 +31,7 @@ typedef enum {
 @property (nonatomic, assign) BTTRegisterSuccessType registerSuccessType;
 @property (nonatomic, assign) BOOL isModifyPwd;
 @property (nonatomic, assign) BOOL isSavedPwd;
+@property (nonatomic, assign)BOOL isHome;
 @end
 
 @implementation BTTRegisterSuccessController
@@ -42,6 +45,7 @@ typedef enum {
     [super viewDidLoad];
     self.isModifyPwd = NO;
     self.isSavedPwd = NO;
+    _isHome = NO;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem new];
     self.title = @"注册成功";
     self.registerSuccessType = BTTRegisterSuccessTypeNormal;
@@ -52,15 +56,16 @@ typedef enum {
 - (void)setupCollectionView {
     [super setupCollectionView];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
-    self.collectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_WIDTH / 375 * 127);
+    self.collectionView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessOneCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessBtnsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessBtnsCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessTwoCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessTwoCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRegisterSuccessChangePwdCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRegisterSuccessChangePwdCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPublicBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPublicBtnCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTChangePwdBtnsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTChangePwdBtnsCell"];
-//    UIImageView *adImageview = [[UIImageView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SCREEN_WIDTH / 375 * 127 - (KIsiPhoneX ? 88 : 64), SCREEN_WIDTH, SCREEN_WIDTH / 375 * 127)];
-//    [self.view addSubview:adImageview];
+    UIView *adImageview = [[UIView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT - SCREEN_WIDTH / 375 * 127 - (KIsiPhoneX ? 88 : 64), SCREEN_WIDTH, SCREEN_WIDTH / 375 * 127)];
+    adImageview.backgroundColor = [UIColor colorWithHexString:@"212229"];
+    [self.view addSubview:adImageview];
 //    adImageview.image = ImageNamed(@"login_ad");
 }
 
@@ -150,14 +155,12 @@ typedef enum {
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
                 if (strongSelf.isSavedPwd) {
-                    [strongSelf.navigationController popToRootViewControllerAnimated:YES];
-                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                        if (button.tag == 40010) {
-                            [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoHomePageNotification object:nil];
-                        } else if (button.tag == 40011) {
-                            [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoMineNotification object:nil];
-                        }
-                    });
+                    if (button.tag==40010) {
+                        strongSelf.isHome = YES;
+                    }else if (button.tag==40011){
+                        strongSelf.isHome = NO;
+                    }
+                    [strongSelf doLogin];
                 }else{
                     [strongSelf showCropAlert];
                 }
@@ -301,6 +304,73 @@ typedef enum {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
+}
+
+- (void)doLogin{
+        NSString *loginUrl = BTTUserLoginAPI;
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:self.account forKey:BTTLoginName];
+    [parameters setValue:[IVRsaEncryptWrapper encryptorString:self.pwd] forKey:BTTPassword];
+    [parameters setValue:[PublicMethod timeIntervalSince1970] forKey:BTTTimestamp];
+    [parameters setValue:@(0) forKey:@"loginType"];
+        
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:loginUrl paramters:parameters completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            
+        [[NSUserDefaults standardUserDefaults] setObject:self.account forKey:BTTCacheAccountName];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            IVJResponseObject *result = response;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                [IVHttpManager shareManager].loginName = self.account;
+                [IVHttpManager shareManager].userToken = result.body[@"token"];
+                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
+                [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"]];
+                
+            }else{
+                [self hideLoading];
+                
+            }
+            
+        }];
+}
+
+- (void)getCustomerInfoByLoginNameWithName:(NSString *)name{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    params[@"loginName"] = name;
+    params[@"inclAddress"] = @1;
+    params[@"inclBankAccount"] = @1;
+    params[@"inclBtcAccount"] = @1;
+    params[@"inclCredit"] = @1;
+    params[@"inclEmail"] = @1;
+    params[@"inclEmailBind"] = @1;
+    params[@"inclMobileNo"] = @1;
+    params[@"inclMobileNoBind"] = @1;
+    params[@"inclPwdExpireDays"] = @1;
+    params[@"inclRealName"] = @1;
+    params[@"inclVerifyCode"] = @1;
+    params[@"inclXmFlag"] = @1;
+    params[@"verifyCode"] = @1;
+    params[@"inclNickNameFlag"] = @1;
+    [IVNetwork requestPostWithUrl:BTTGetLoginInfoByName paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [self hideLoading];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body!=nil) {
+                [BTTUserStatusManager loginSuccessWithUserInfo:result.body];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    if (self.isHome) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoHomePageNotification object:nil];
+                    } else{
+                        [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoMineNotification object:nil];
+                    }
+                });
+            }
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

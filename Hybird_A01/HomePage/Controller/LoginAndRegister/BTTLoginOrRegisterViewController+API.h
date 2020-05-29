@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loginWithAccount:(NSString *)account pwd:(NSString *)pwd isSmsCode:(BOOL)isSmsCode codeStr:(NSString *)codeStr;
 
-- (void)fastRegisterWithAccount:(NSString *)account code:(NSString *)code;
+- (void)verifySmsCodeCorrectWithAccount:(NSString *)account code:(NSString *)code;
 
 - (void)loadVerifyCode;
 
@@ -26,9 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)checkLoginNameWithAccount:(NSString *)account password:(NSString *)password;
 
-- (void)fastRegisterAPIModel:(BTTCreateAPIModel *)model;
+- (void)MobileNoAndCodeRegisterAPIModel:(BTTCreateAPIModel *)model;
 
-
+- (void)onekeyRegisteAccount;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -61,13 +61,7 @@
         if (btn.tag == 1001) {
             [[CLive800Manager sharedInstance] startLive800Chat:strongSelf];
         } else if (btn.tag == 1002) {
-            BTTCreateAPIModel *newModel = model;
-            newModel.v = @"submit";
-            if (strongSelf.registerOrLoginType == BTTRegisterOrLoginTypeRegisterNormal) {
-                [strongSelf fastRegisterAPIModel:model];
-            } else if (strongSelf.registerOrLoginType == BTTRegisterOrLoginTypeRegisterQuick) {
-                [strongSelf createAccountNormalWithAPIModel:model];
-            }
+            [strongSelf MobileNoAndCodeRegisterAPIModel:model];
         }
     };
 }

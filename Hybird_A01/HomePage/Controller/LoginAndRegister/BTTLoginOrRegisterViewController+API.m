@@ -19,6 +19,7 @@
 #import "BTTRegisterCheckPopView.h"
 #import "IVRsaEncryptWrapper.h"
 #import "BTTNormalRegisterSuccessController.h"
+#import "OneKeyPhoneController.h"
 
 @implementation BTTLoginOrRegisterViewController (API)
 
@@ -275,10 +276,65 @@
     }];
 }
 
-
-- (void)fastRegisterWithAccount:(NSString *)account code:(NSString *)code{
-    [self registerWithAccount:account imgCode:code isFastRegister:YES];
+- (void)onekeyRegisteAccount{
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTOneKeyRegister paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [self hideLoading];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSDictionary *json = result.body;
+            NSString *account = json[@"loginName"];
+            NSString *pwd = json[@"pwd"];
+            
+            [MBProgressHUD showSuccess:@"开户成功" toView:nil];
+            BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
+            vc.registerOrLoginType = self.registerOrLoginType;
+            vc.account = account;
+            vc.pwd = pwd;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
+        }else{
+            if ([result.head.errCode isEqualToString:@"GWX_1005"]) {
+                OneKeyPhoneController *vc = [[OneKeyPhoneController alloc]init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }else{
+               [MBProgressHUD showError:result.head.errMsg toView:nil];
+            }
+            
+        }
+    }];
 }
+
+
+- (void)verifySmsCodeCorrectWithAccount:(NSString *)account code:(NSString *)code{
+    if (self.messageId==nil||[self.messageId isEqualToString:@""]) {
+        [MBProgressHUD showError:@"请输入正确的验证码" toView:nil];
+        return;
+    }
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    [params setValue:self.messageId forKey:@"messageId"];
+    [params setValue:code forKey:@"smsCode"];
+    [params setValue:@1 forKey:@"use"];
+    [params setValue:@"A01" forKey:@"productId"];
+    [params setValue:@"" forKey:@"loginName"];
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTVerifySmsCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            self.validateId = result.body[@"validateId"];
+            BTTCreateAPIModel *model = [[BTTCreateAPIModel alloc]init];
+            model.login_name = [self getRandomNameWithPhone:account];
+            model.password = [self getRandomPassword];
+            model.phone = account;
+            [self checkAccountInfoWithCreateModel:model];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:self.view];
+        }
+    }];
+}
+
 
 //
 - (void)registerWithAccount:(NSString *)account imgCode:(NSString *)imgCode isFastRegister:(BOOL)isFastRegister {
@@ -400,7 +456,7 @@
             if (result.body&&[result.body isKindOfClass:[NSString class]]&&[result.body isEqualToString:@"1000"]) {
                 [self showRegisterCheckViewWithModel:model];
             }else{
-                [self fastRegisterAPIModel:model];
+                [self MobileNoAndCodeRegisterAPIModel:model];
             }
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:self.view];
@@ -484,8 +540,8 @@
 }
 
 
-// 极速开户
-- (void)fastRegisterAPIModel:(BTTCreateAPIModel *)model {
+// 手机号验证码注册
+- (void)MobileNoAndCodeRegisterAPIModel:(BTTCreateAPIModel *)model {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:[IVRsaEncryptWrapper encryptorString:model.phone] forKey:@"mobileNo"];
     [params setValue:model.login_name forKey:@"loginName"];
@@ -496,13 +552,6 @@
     
     if (self.validateId!=nil) {
         [params setValue:self.validateId forKey:@"validateId"];
-    }
-    
-    if (model.catpcha.length) {
-        [params setObject:model.catpcha forKey:@"catpcha"];
-    }
-    if (self.captchaId.length) {
-        [params setObject:self.captchaId forKey:@"captchaId"];
     }
     [self showLoading];
 
@@ -519,11 +568,7 @@
                     vc.pwd = pwd;
                     [self.navigationController pushViewController:vc animated:YES];
 
-                    BTTLoginAPIModel *loginModel = [[BTTLoginAPIModel alloc] init];
-                    loginModel.login_name = result.body[@"loginName"];
-                    loginModel.password = pwd;
-                    loginModel.timestamp = [PublicMethod timeIntervalSince1970];
-                    [self loginWithLoginAPIModel:loginModel isBack:NO];
+                    
                 }
             }
         }else if ([result.head.errCode isEqualToString:@"WS_201722"]&&[result.head.errMsg isEqualToString:@"很抱歉,该电话已被注册,请联系客服,谢谢！"]){
@@ -555,7 +600,7 @@
                     self.captchaId = result.body[@"captchaId"];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (self.loginView.isHidden) {
-                            [self.fastRegisterView.imgCodeBtn setImage:decodedImage forState:UIControlStateNormal];
+                            
                         }else{
                           [self.loginView.imgCodeBtn setImage:decodedImage forState:UIControlStateNormal];
                         }

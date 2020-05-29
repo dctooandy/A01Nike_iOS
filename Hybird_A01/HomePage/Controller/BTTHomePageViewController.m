@@ -61,6 +61,7 @@
     self.title = @"首页";
     if ([IVNetwork savedUserInfo]) {
         self.isLogin = YES;
+        [self checkHasShow];
     } else {
         self.isLogin = NO;
     }
@@ -105,46 +106,68 @@
                     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"尊敬的博天堂客户:\n \n因网站持菲律宾正规博彩牌照,应菲政府肺炎疫情防控要求,采取局部远程办公等措施,服务效率略降.广受喜爱的AG平台亦响应菲政府决定暂停部分桌台.\n \n对此向各位致以诚挚歉意!我们定会竭力保证游戏顺畅做好服务!\n \n疫情期间,温馨提醒您戴口罩勤洗手,保持良好心态,让我们一起携手战胜病毒!\n \n博天堂全体员工敬上!\n2020年3月18号" preferredStyle:UIAlertControllerStyleAlert];
                     
                     UIAlertAction *unlock = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                        
+                        [self showInsideMessage];
                     }];
                     [alertVC addAction:unlock];
                     [self presentViewController:alertVC animated:YES completion:nil];
+                }else{
+                    [self showInsideMessage];
                 }
             }
         }
     }];
 }
 
-- (void)showConsetivePopView{
-//    NSString *timeStamp = [[NSUserDefaults standardUserDefaults]objectForKey:BTTConsetiveWinsToday];
-//    if (timeStamp==nil) {
-//        [self showCWpopView];
-//        NSString *timeStampNew = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
-//        [[NSUserDefaults standardUserDefaults]setObject:timeStampNew forKey:BTTConsetiveWinsToday];
-//    }else{
-//        BOOL isSameDay = [PublicMethod isDateToday:[PublicMethod transferDateStringToDate:timeStamp]];
-//        if (!isSameDay) {
-//            NSString *timeStampNew = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd hh:mm:ss"];
-//            [[NSUserDefaults standardUserDefaults]setObject:timeStampNew forKey:BTTConsetiveWinsToday];
-//            [self showCWpopView];
-//        }
-//    }
+- (void)showInsideMessage{
+    NSDictionary *params = @{
+        @"flag":@"0",
+        @"pageSize":@"1",
+    };
+    
+    [IVNetwork requestPostWithUrl:BTTUnreadInsideMessage paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSArray *msgList = [[NSArray alloc]initWithArray:result.body[@"data"]];
+            if (msgList.count>0) {
+                NSDictionary *json = msgList.firstObject;
+                NSString *content = json[@"content"];
+                NSString *msgId = json[@"id"];
+                BTTConsetiveWinsPopView *alertView = [BTTConsetiveWinsPopView viewFromXib];
+                [alertView setContentMessage:content];
+                
+                BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+                
+                popView.isClickBGDismiss = YES;
+                [popView pop];
+                alertView.tapActivity = ^{
+                    [self batchNewsWithId:msgId];
+                    [popView dismiss];
+                    
+                };
+                alertView.tapConfirm = ^{
+                    [self batchNewsWithId:msgId];
+                    [popView dismiss];
+                };
+            }else{
+                NSLog(@"没有展示消息");
+            }
+        }
+        
+    }];
 }
 
-- (void)showCWpopView{
-    BTTConsetiveWinsPopView *alertView = [BTTConsetiveWinsPopView viewFromXib];
+- (void)batchNewsWithId:(NSString *)msgId{
+    NSArray *ids = [[NSArray alloc]initWithObjects:msgId, nil];
+    NSDictionary *params = @{
+        @"ids":ids,
+    };
     
-    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-    popView.isClickBGDismiss = NO;
-    [popView pop];
-    alertView.tapActivity = ^{
-        [popView dismiss];
-        [[CLive800Manager sharedInstance] startLive800Chat:self];
-    };
-    alertView.dismissBlock = ^{
-        [popView dismiss];
-    };
+    [IVNetwork requestPostWithUrl:BTTReadInsideMessage paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        NSLog(@"%@",response);
+        
+    }];
 }
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -164,7 +187,6 @@
         [[IVGameManager sharedManager] reloadCacheGame];
         [IN3SAnalytics launchFinished];
     }
-    [self showConsetivePopView];
     
 }
 

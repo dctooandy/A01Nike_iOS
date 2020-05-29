@@ -69,15 +69,20 @@
             make.height.mas_equalTo(18);
         }];
         
-        UIButton *imgCodeBtn = [[UIButton alloc]init];
-        [imgCodeBtn addTarget:self action:@selector(regetCodeImage) forControlEvents:UIControlEventTouchUpInside];
-//        imgCodeBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [pwdView addSubview:imgCodeBtn];
-        _imgCodeBtn = imgCodeBtn;
-        [imgCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        UIButton *msgCodeBtn = [[UIButton alloc]init];
+        msgCodeBtn.layer.cornerRadius = 15;
+        msgCodeBtn.backgroundColor = COLOR_RGBA(0, 126, 250, 0.85);
+        msgCodeBtn.clipsToBounds = YES;
+        msgCodeBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        [msgCodeBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
+        [msgCodeBtn setImage:nil forState:UIControlStateNormal];
+        [msgCodeBtn addTarget:self action:@selector(sendSmsCode) forControlEvents:UIControlEventTouchUpInside];
+        [pwdView addSubview:msgCodeBtn];
+        _msgCodeBtn = msgCodeBtn;
+        [_msgCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(pwdView.mas_right);
             make.top.mas_equalTo(pwdView.mas_top).offset(25);
-            make.width.mas_equalTo(80);
+            make.width.mas_equalTo(100);
             make.height.mas_equalTo(30);
         }];
         //密码输入框
@@ -92,7 +97,7 @@
         [pwdView addSubview:pwdField];
         _imgCodeField = pwdField;
         [pwdField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(imgCodeBtn.mas_left);
+            make.right.mas_equalTo(_msgCodeBtn.mas_left);
             make.top.mas_equalTo(pwdView.mas_top).offset(30);
             make.left.mas_equalTo(pwdLeftImg.mas_right).offset(12);
             make.height.mas_equalTo(30);
@@ -103,7 +108,7 @@
         [pwdView.layer addSublayer:pwdLayer];
         
         UIButton *registerBtn = [[UIButton alloc]init];
-        [registerBtn setTitle:@"点击获取游戏账号" forState:UIControlStateNormal];
+        [registerBtn setTitle:@"立即开户" forState:UIControlStateNormal];
         [registerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         registerBtn.titleLabel.font = [UIFont systemFontOfSize:15];
         registerBtn.layer.cornerRadius = 22.5;
@@ -120,21 +125,22 @@
             make.centerX.mas_equalTo(pwdView.mas_centerX);
         }];
         
-        NSString *normalStr = @"点击账号密码开户";
-        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@",normalStr]];
-        [str addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor]range:NSMakeRange(0,2)];
-        [str addAttribute:NSForegroundColorAttributeName value:COLOR_RGBA(0, 126, 250, 0.9) range:NSMakeRange(2,normalStr.length-2)];
-        
-        UIButton *normalRegisterButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [normalRegisterButton setAttributedTitle:str forState:UIControlStateNormal];
-        normalRegisterButton.titleLabel.font = [UIFont systemFontOfSize:14];
-        [normalRegisterButton addTarget:self action:@selector(normalRegisterBtn_click) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:normalRegisterButton];
-        [normalRegisterButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(registerBtn.mas_right);
-            make.height.mas_equalTo(15);
-            make.width.mas_greaterThanOrEqualTo(60);
+        UIButton *oneKeyBtn = [[UIButton alloc]init];
+        [oneKeyBtn setTitle:@"一键生成帐号密码" forState:UIControlStateNormal];
+        [oneKeyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        oneKeyBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        oneKeyBtn.layer.cornerRadius = 22.5;
+        oneKeyBtn.layer.borderColor = COLOR_RGBA(243, 130, 50, 0.85).CGColor;
+        oneKeyBtn.layer.borderWidth = 0.5;
+        oneKeyBtn.clipsToBounds = YES;
+        oneKeyBtn.backgroundColor = COLOR_RGBA(243, 130, 50, 0.85);
+        [oneKeyBtn addTarget:self action:@selector(onekeyRegisterBtn_click) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:oneKeyBtn];
+        [oneKeyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(registerBtn.mas_bottom).offset(12);
+            make.width.mas_equalTo(SCREEN_WIDTH-72);
+            make.height.mas_equalTo(45);
+            make.centerX.mas_equalTo(pwdView.mas_centerX);
         }];
         
     }
@@ -148,15 +154,9 @@
     }
 }
 
-- (void)regetCodeImage{
-    if (self.refreshCodeImage) {
-        self.refreshCodeImage();
-    }
-}
-
-- (void)normalRegisterBtn_click{
-    if (self.tapNormalRegister) {
-        self.tapNormalRegister();
+- (void)onekeyRegisterBtn_click{
+    if (self.tapOneKeyRegister) {
+        self.tapOneKeyRegister();
     }
 }
 
@@ -172,8 +172,51 @@
     }
 }
 
-- (void)setCodeImage:(UIImage *)codeImg{
-    [self.imgCodeBtn setImage:codeImg forState:UIControlStateNormal];
+- (void)sendSmsCode {
+    if ([PublicMethod isValidatePhone:_accountField.text]) {
+        if (self.sendSmdCode) {
+            [self countDown];
+            self.sendSmdCode(_accountField.text);
+        }
+    } else {
+        [MBProgressHUD showError:@"请填写正确的手机号" toView:nil];
+    }
 }
+
+- (void)countDown {
+    __block int timeout = 60; // 倒计时时间
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(_timer, dispatch_walltime(NULL, 0), 1.0 * NSEC_PER_SEC, 0); // 每秒执行
+    dispatch_source_set_event_handler(_timer, ^{
+        if (timeout <= 0) { //倒计时结束，关闭
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                self.msgCodeBtn.enabled = YES;
+                self.msgCodeBtn.titleLabel.text = @"重新发送";
+                [self.msgCodeBtn setTitle:@"重新发送" forState:UIControlStateNormal];
+                self.msgCodeBtn.backgroundColor = COLOR_RGBA(0, 126, 250, 0.85);
+            });
+        } else {
+            int seconds = timeout;
+            NSString *strTime = [NSString stringWithFormat:@"%.2d", seconds];
+            if (seconds < 10) {
+                strTime = [NSString stringWithFormat:@"%.1d", seconds];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //设置界面的按钮显示 根据自己需求设置
+                self.msgCodeBtn.titleLabel.text = [NSString stringWithFormat:@"重新发送(%@)", strTime];
+                [self.msgCodeBtn setTitle:[NSString stringWithFormat:@"重新发送(%@)", strTime] forState:UIControlStateNormal];
+                self.msgCodeBtn.enabled = NO;
+                self.msgCodeBtn.backgroundColor = [UIColor lightGrayColor];
+            });
+
+            timeout--;
+        }
+    });
+    dispatch_resume(_timer);
+}
+
 
 @end

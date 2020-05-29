@@ -410,6 +410,9 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTQueryUSDTWallet                         @"account/queryWalletType"
 //
 #define BTTQueryLoginedShow                        @"_extra_/api/v1/activity/checkHasPop"
+#define BTTUnreadInsideMessage                      @"letter/query"
+#define BTTReadInsideMessage                      @"letter/batchViewLetter"
+#define BTTOneKeyRegister                      @"_extra_/api/v1/ws/fast-create-account"
 
 #define BTTIsBindStatusAPI                         @"/public/verify/isNewBind"
 #define BTTGamePlatforms                           @"/A01/game/platforms"

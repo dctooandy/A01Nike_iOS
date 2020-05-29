@@ -206,28 +206,17 @@
     BTTVideoFastRegisterView *fastRegisterView = [[BTTVideoFastRegisterView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 285)];
     fastRegisterView.hidden = YES;
     fastRegisterView.tapRegister = ^(NSString * _Nonnull account, NSString * _Nonnull code) {
-        [weakSelf fastRegisterWithAccount:account code:code];
+        [weakSelf verifySmsCodeCorrectWithAccount:account code:code];
     };
-    fastRegisterView.tapNormalRegister = ^{
-        weakSelf.noramlRegisterView.hidden = NO;
-        weakSelf.fastRegisterView.hidden = YES;
+    fastRegisterView.tapOneKeyRegister = ^{
+        [weakSelf onekeyRegisteAccount];
     };
-    fastRegisterView.refreshCodeImage = ^{
-        [weakSelf loadVerifyCode];
+    fastRegisterView.sendSmdCode = ^(NSString * _Nonnull phone) {
+        [weakSelf loadMobileVerifyCodeWithPhone:phone use:1];
     };
+
     [self.view addSubview:fastRegisterView];
     _fastRegisterView = fastRegisterView;
-    BTTVideoNormalRegisterView *normalRegisterView = [[BTTVideoNormalRegisterView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 285)];
-    normalRegisterView.hidden = YES;
-    normalRegisterView.tapFast = ^{
-        weakSelf.noramlRegisterView.hidden = YES;
-        weakSelf.fastRegisterView.hidden = NO; 
-    };
-    normalRegisterView.tapRegister = ^(NSString * _Nonnull account, NSString * _Nonnull password) {
-        [weakSelf checkLoginNameWithAccount:account password:password];
-    };
-    [self.view addSubview:normalRegisterView];
-    _noramlRegisterView = normalRegisterView;
     
     [self loadVerifyCode];
 }
