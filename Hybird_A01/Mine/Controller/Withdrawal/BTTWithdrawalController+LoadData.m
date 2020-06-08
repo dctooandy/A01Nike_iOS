@@ -90,7 +90,7 @@
     NSArray *placeholders4 = @[@"最少10元",@"USDT",@"***银行-尾号*****",@"",@"",@""];
     NSArray *heights1 = @[@205.0,@15.0];
     NSArray *heights3 = @[@44.0,@44.0,@44.0,@100.0];
-    NSArray *heights4 = @[@44.0,@44.0,@44,@44,@27,@120.0];
+    NSArray *heights4 = @[@44.0,@44.0,@44,@44,@27,@240.0];
     
     NSArray *canEdits1 = @[@NO,@NO];
     NSArray *canEdits3 = @[@YES,@NO,@NO,@NO];

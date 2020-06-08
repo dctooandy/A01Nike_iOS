@@ -267,6 +267,7 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
 // 自定义 pickerView 的 label
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(nullable UIView *)view {
     
+    
     //设置分割线的颜色
     ((UIView *)[pickerView.subviews objectAtIndex:1]).backgroundColor = [UIColor colorWithRed:195/255.0 green:195/255.0 blue:195/255.0 alpha:1.0];
     ((UIView *)[pickerView.subviews objectAtIndex:2]).backgroundColor = [UIColor colorWithRed:195/255.0 green:195/255.0 blue:195/255.0 alpha:1.0];
@@ -281,12 +282,30 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
     // 自适应最小字体缩放比例
     label.minimumScaleFactor = 0.5f;
     if (self.type == BRStringPickerComponentSingle) {
+        
         label.frame = CGRectMake(0, 0, self.alertView.frame.size.width, 35.0f * kScaleFit);
         label.text = self.dataSourceArr[row];
+        
+        if ([self.dataSourceArr[row] isEqualToString:@"➕ 币付宝钱包"]) {
+            UIView *noteview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.alertView.frame.size.width, 35)];
+            [noteview addSubview:label];
+            UILabel *noteLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.alertView.frame.size.width-86, 10, 70, 15)];
+            noteLabel.backgroundColor = COLOR_RGBA(56, 161, 252, 1);
+            noteLabel.text = @"无痕·安全";
+            noteLabel.textColor = [UIColor whiteColor];
+            noteLabel.font = [UIFont systemFontOfSize:13.0];
+            noteLabel.layer.cornerRadius = 2.0;
+            noteLabel.textAlignment = NSTextAlignmentCenter;
+            noteLabel.clipsToBounds = YES;
+            [noteview addSubview:noteLabel];
+            return noteview;
+        }
     } else if (self.type == BRStringPickerComponentMore) {
         label.frame = CGRectMake(0, 0, self.alertView.frame.size.width / [self.dataSourceArr[component] count], 35.0f * kScaleFit);
         label.text = self.dataSourceArr[component][row];
+        
     }
+    
     
     return label;
 }

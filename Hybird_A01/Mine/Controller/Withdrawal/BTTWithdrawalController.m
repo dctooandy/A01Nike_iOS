@@ -111,7 +111,15 @@
     if (indexPath.row == self.sheetDatas.count - 1) {
         
         BTTBitollWithDrawCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBitollWithDrawCell" forIndexPath:indexPath];
+        BOOL imgHidden = ![self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"];
+        [cell setImageViewHidden:imgHidden onekeyHidden:!imgHidden];
         cell.confirmTap = ^{
+            if (self.bankList[self.selectIndex].accountId==nil) {
+                            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCard"];
+                BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+                return;
+            }
             [self submitWithDraw];
         };
         cell.bindTap = ^{
@@ -264,8 +272,11 @@
         if ([model.accountType isEqualToString:@"借记卡"]||[model.accountType isEqualToString:@"信用卡"]||[model.accountType isEqualToString:@"存折"]||[model.accountType isEqualToString:@"BTC"]) {
             [textArray addObject:[NSString stringWithFormat:@"%@-%@",model.bankName,model.accountNo]];
         }else if ([model.accountType isEqualToString:@"BITOLL"]){
-            [textArray replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"币付宝-%@",model.accountNo]];
-            haveBfb = YES;
+            if (model.accountId!=nil) {
+                [textArray replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"币付宝-%@",model.accountNo]];
+                haveBfb = YES;
+            }
+            
         }else{
             NSString*resultStr=[model.accountType stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[model.accountType substringToIndex:1] capitalizedString]];
             [textArray addObject:[NSString stringWithFormat:@"%@-%@",resultStr,model.accountNo]];
@@ -274,9 +285,9 @@
     [BRStringPickerView showStringPickerWithTitle:@"请选择银行卡" dataSource:textArray.copy defaultSelValue:[NSString stringWithFormat:@"➕ 币付宝钱包"] resultBlock:^(id selectValue, NSInteger index) {
         
         if (index==0&&!haveBfb) {
-            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCard"];
-            BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+            self.selectIndex = 0;
+            [self.view endEditing:YES];
+            [self loadMainData];
             return;
         }
         cell.detailLabel.text = selectValue;
@@ -288,7 +299,7 @@
                 if ([withDrawText isEqualToString:selectValue]) {
                     self.selectIndex = i;
                 }
-            }else if ([self.bankList[i].accountType isEqualToString:@"BITOLL"]){
+            }else if ([self.bankList[i].accountType isEqualToString:@"BITOLL"]&&self.bankList[i].accountId!=nil){
                 withDrawText = [NSString stringWithFormat:@"币付宝-%@",self.bankList[i].accountNo];
                 if ([withDrawText isEqualToString:selectValue]) {
                     self.selectIndex = i;

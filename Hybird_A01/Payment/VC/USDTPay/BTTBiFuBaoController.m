@@ -344,6 +344,7 @@
 }
 
 - (void)createOnlineOrdersWithPayType:(NSInteger)payType payId:(NSString *)payId{
+    [self showLoading];
     NSDictionary *params = @{
         @"amount":_moneyTextField.text,
         @"payType":@(payType),
@@ -356,11 +357,6 @@
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-
-            UIImage *qrcode = [PublicMethod QRCodeMethod:result.body[@"payUrl"]];
-            self.qrcodeView.image = qrcode;
-            self.secondMoneyLabel.text = [NSString stringWithFormat:@"%@",result.body[@"amount"]];
-            self.secondArriveLabel.text = [NSString stringWithFormat:@"%@",result.body[@"amount"]];
             [self requestPayDetailUrl:result.body[@"payUrl"]];
         }else{
             [self showError:result.head.errMsg];
@@ -370,25 +366,20 @@
 
 - (void)requestPayDetailUrl:(NSString *)url{
     //初始化一个AFHTTPSessionManager
+    [self showLoading];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [manager GET:url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self hideLoading];
         NSDictionary *json = responseObject;
         NSString *imgQrcode = [json valueForKey:@"imgQrcode"];
         NSString *payUrl = [imgQrcode stringByReplacingOccurrencesOfString:@"gz://" withString:@"bitoll://"];
-        UIImage *qrcode = [PublicMethod QRCodeMethod:payUrl];
-        self.qrcodeView.image = qrcode;
-        if ([IVNetwork savedUserInfo].bfbNum>0) {
-            if ([[UIApplication sharedApplication]
-              canOpenURL:[NSURL URLWithString:payUrl]]){
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:payUrl]];
-                [self popToRootViewController];
-              
-            }else{
-                [self dowloadBfbApp];
-            }
+        if ([[UIApplication sharedApplication]
+          canOpenURL:[NSURL URLWithString:payUrl]]){
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:payUrl]];
+            [self popToRootViewController];
+          
         }else{
-            self.infoView.hidden = YES;
-            self.secondView.hidden = NO;
+            [self dowloadBfbApp];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
