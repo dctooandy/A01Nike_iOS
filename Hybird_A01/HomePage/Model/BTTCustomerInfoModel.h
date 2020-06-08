@@ -57,6 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy  ) NSString  *verifyCode;
 @property (nonatomic, assign) NSInteger upgradeRequiredBetAmount;
 @property (nonatomic, assign) NSInteger usdtNum;
+@property (nonatomic, assign) NSInteger bfbNum;
 @property (nonatomic, assign) NSInteger voiceVerifyStatus;
 @property (nonatomic, assign) NSInteger weeklyBetAmount;
 @property (nonatomic, assign) NSInteger xmFlag;

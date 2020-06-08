@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,7 +27,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="工商银行-尾号***1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7y-6s-XHW">
-                        <rect key="frame" x="195.5" y="0.0" width="133.5" height="44"/>
+                        <rect key="frame" x="202.5" y="0.0" width="133.5" height="44"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="Itm-XX-edN"/>
                         </constraints>
@@ -36,7 +36,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="withdrawal_bankicon_btc" translatesAutoresizingMaskIntoConstraints="NO" id="2PC-9t-zDf">
-                        <rect key="frame" x="160.5" y="12" width="20" height="20"/>
+                        <rect key="frame" x="167.5" y="12" width="20" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="LI7-Ug-8LP"/>
                             <constraint firstAttribute="height" constant="20" id="Rd2-4N-Arn"/>
@@ -49,6 +49,13 @@
                             <constraint firstAttribute="width" constant="16" id="N7l-M7-qoJ"/>
                         </constraints>
                     </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bfb_youhui" translatesAutoresizingMaskIntoConstraints="NO" id="DTG-Lk-nTl">
+                        <rect key="frame" x="342" y="15.5" width="0.0" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="Jy9-mc-DL7"/>
+                            <constraint firstAttribute="width" id="k19-5b-fW4"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
@@ -58,19 +65,24 @@
                 <constraint firstAttribute="trailing" secondItem="hl4-Ud-06U" secondAttribute="trailing" constant="15" id="CIV-xj-xOA"/>
                 <constraint firstItem="Yvs-89-TXa" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Csp-mf-jwV"/>
                 <constraint firstItem="Yvs-89-TXa" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="MrH-2o-sse"/>
-                <constraint firstAttribute="trailing" secondItem="g7y-6s-XHW" secondAttribute="trailing" constant="46" id="k2Z-qD-wQy"/>
+                <constraint firstItem="DTG-Lk-nTl" firstAttribute="leading" secondItem="g7y-6s-XHW" secondAttribute="trailing" constant="6" id="RwV-qN-YKn"/>
+                <constraint firstItem="hl4-Ud-06U" firstAttribute="leading" secondItem="DTG-Lk-nTl" secondAttribute="trailing" constant="2" id="Sxg-nn-eQJ"/>
+                <constraint firstItem="DTG-Lk-nTl" firstAttribute="centerY" secondItem="g7y-6s-XHW" secondAttribute="centerY" id="vkJ-3b-D1E"/>
                 <constraint firstItem="2PC-9t-zDf" firstAttribute="centerY" secondItem="Yvs-89-TXa" secondAttribute="centerY" id="xBh-9T-62t"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
                 <outlet property="bankIcon" destination="2PC-9t-zDf" id="b0d-Gg-sci"/>
+                <outlet property="bfb_discount" destination="DTG-Lk-nTl" id="tFT-qE-kSr"/>
                 <outlet property="detailLabel" destination="g7y-6s-XHW" id="KCv-mx-ZXW"/>
                 <outlet property="nameLabel" destination="Yvs-89-TXa" id="2XS-tD-M2B"/>
+                <outlet property="rightArrow" destination="hl4-Ud-06U" id="bWp-Qg-5I3"/>
             </connections>
             <point key="canvasLocation" x="-346.39999999999998" y="40.479760119940032"/>
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="bfb_youhui" width="28" height="13"/>
         <image name="me_arrow" width="16" height="16"/>
         <image name="withdrawal_bankicon_btc" width="20" height="20"/>
     </resources>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -42,6 +42,13 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bfb_youhui" translatesAutoresizingMaskIntoConstraints="NO" id="dUH-CV-Vy2">
+                        <rect key="frame" x="81" y="8" width="28" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="28" id="833-oF-hf8"/>
+                            <constraint firstAttribute="height" constant="13" id="9Ye-m7-U8a"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
@@ -50,6 +57,8 @@
                 <constraint firstAttribute="trailing" secondItem="mow-JB-KpD" secondAttribute="trailing" id="HFS-bq-v2K"/>
                 <constraint firstItem="mow-JB-KpD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="JR8-Y6-JXq"/>
                 <constraint firstItem="zNE-8c-ghf" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="JrT-Sh-fPD"/>
+                <constraint firstItem="dUH-CV-Vy2" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="LmG-Md-5td"/>
+                <constraint firstAttribute="trailing" secondItem="dUH-CV-Vy2" secondAttribute="trailing" constant="12" id="Mbd-Nn-II1"/>
                 <constraint firstItem="XJH-eE-cTb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Mnk-ps-k1O"/>
                 <constraint firstItem="XJH-eE-cTb" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Xkg-Mk-Tag"/>
                 <constraint firstItem="S83-At-Eb7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="cs0-qv-ilt"/>
@@ -62,6 +71,7 @@
             <size key="customSize" width="121" height="133"/>
             <connections>
                 <outlet property="channelIV" destination="zNE-8c-ghf" id="2eY-C5-xgg"/>
+                <outlet property="discountImg" destination="dUH-CV-Vy2" id="ARy-Ld-tbh"/>
                 <outlet property="normalIV" destination="mow-JB-KpD" id="kVc-Oi-u60"/>
                 <outlet property="selectedIV" destination="XJH-eE-cTb" id="iI8-TN-4EQ"/>
                 <outlet property="titleLb" destination="S83-At-Eb7" id="cjA-m6-Ub5"/>
@@ -70,6 +80,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="bfb_youhui" width="28" height="13"/>
         <image name="pay_channelNormal" width="102" height="103"/>
         <image name="pay_channelSelected" width="102" height="112"/>
     </resources>

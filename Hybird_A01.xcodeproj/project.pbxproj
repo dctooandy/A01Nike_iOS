@@ -696,6 +696,9 @@
 		D38A44AA246E97ED00BC8764 /* BTTBitollWithDrawCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D38A44A9246E97ED00BC8764 /* BTTBitollWithDrawCell.m */; };
 		D39D7C0323CEFA5B00898546 /* BTTUsdtTodayNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D39D7C0223CEFA5B00898546 /* BTTUsdtTodayNoticeView.m */; };
 		D39D7C0823CF19C500898546 /* BTTUsdtTodayNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D39D7C0723CF19C500898546 /* BTTUsdtTodayNoticeView.xib */; };
+		D3A04119248A0FFD0022BEDC /* BTTBitollChoseMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A04118248A0FFD0022BEDC /* BTTBitollChoseMoneyCell.m */; };
+		D3A0411D248A10330022BEDC /* BTTAddBitollCardController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3A0411A248A10330022BEDC /* BTTAddBitollCardController.xib */; };
+		D3A0411E248A10330022BEDC /* BTTAddBitollCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A0411B248A10330022BEDC /* BTTAddBitollCardController.m */; };
 		D3A9A70F24037638007F672A /* IN3SAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A9A70D24037638007F672A /* IN3SAnalytics.framework */; };
 		D3A9A71024037638007F672A /* IN3SResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3A9A70E24037638007F672A /* IN3SResource.bundle */; };
 		D3A9A71324065576007F672A /* BTTVideoFastRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A9A71224065576007F672A /* BTTVideoFastRegisterView.m */; };
@@ -1874,6 +1877,11 @@
 		D39D7C0123CEFA5B00898546 /* BTTUsdtTodayNoticeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUsdtTodayNoticeView.h; sourceTree = "<group>"; };
 		D39D7C0223CEFA5B00898546 /* BTTUsdtTodayNoticeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUsdtTodayNoticeView.m; sourceTree = "<group>"; };
 		D39D7C0723CF19C500898546 /* BTTUsdtTodayNoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTUsdtTodayNoticeView.xib; sourceTree = "<group>"; };
+		D3A04117248A0FFD0022BEDC /* BTTBitollChoseMoneyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTBitollChoseMoneyCell.h; sourceTree = "<group>"; };
+		D3A04118248A0FFD0022BEDC /* BTTBitollChoseMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTBitollChoseMoneyCell.m; sourceTree = "<group>"; };
+		D3A0411A248A10330022BEDC /* BTTAddBitollCardController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTAddBitollCardController.xib; sourceTree = "<group>"; };
+		D3A0411B248A10330022BEDC /* BTTAddBitollCardController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTAddBitollCardController.m; sourceTree = "<group>"; };
+		D3A0411C248A10330022BEDC /* BTTAddBitollCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTAddBitollCardController.h; sourceTree = "<group>"; };
 		D3A9A70D24037638007F672A /* IN3SAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IN3SAnalytics.framework; sourceTree = "<group>"; };
 		D3A9A70E24037638007F672A /* IN3SResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IN3SResource.bundle; sourceTree = "<group>"; };
 		D3A9A71124065576007F672A /* BTTVideoFastRegisterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoFastRegisterView.h; sourceTree = "<group>"; };
@@ -4040,6 +4048,9 @@
 		3AE1EB16218058350073A32D /* AddCard */ = {
 			isa = PBXGroup;
 			children = (
+				D3A0411C248A10330022BEDC /* BTTAddBitollCardController.h */,
+				D3A0411B248A10330022BEDC /* BTTAddBitollCardController.m */,
+				D3A0411A248A10330022BEDC /* BTTAddBitollCardController.xib */,
 				D31B0EE623B451B0003666BA /* AddUSDT */,
 				3AE1EB172180585B0073A32D /* BTTAddCardController.h */,
 				3AE1EB182180585B0073A32D /* BTTAddCardController.m */,
@@ -4109,6 +4120,8 @@
 		D35BF23623B451330085D6A1 /* USDTPay */ = {
 			isa = PBXGroup;
 			children = (
+				D3A04117248A0FFD0022BEDC /* BTTBitollChoseMoneyCell.h */,
+				D3A04118248A0FFD0022BEDC /* BTTBitollChoseMoneyCell.m */,
 				D35BF23723B451330085D6A1 /* USDTWalletCollectionCell.h */,
 				D35BF23B23B451330085D6A1 /* USDTWalletCollectionCell.m */,
 				D35BF23823B451330085D6A1 /* CNPayUSDTStep1VC.h */,
@@ -4911,6 +4924,7 @@
 				3A3DF1E7237BA445006129F6 /* BTTHotPromotionCell.xib in Resources */,
 				3AE1EAAC217D65330073A32D /* BTTAccountBlanceHiddenCell.xib in Resources */,
 				3A5AE69722D6E22A0013E8A3 /* LIVAutoScrollTextView9.png in Resources */,
+				D3A0411D248A10330022BEDC /* BTTAddBitollCardController.xib in Resources */,
 				3A5AE71122D6E22B0013E8A3 /* cool_eye.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5246,6 +5260,7 @@
 				3AAFF88121D378C600F875B1 /* BTTMeSaveMoneyAlipayCell.m in Sources */,
 				3AE1EB09218046D80073A32D /* BTTCardModifyTitleCell.m in Sources */,
 				3A8F5130215F74CF0069D1B3 /* AppDelegate.m in Sources */,
+				D3A04119248A0FFD0022BEDC /* BTTBitollChoseMoneyCell.m in Sources */,
 				3A8F51EA215F78F50069D1B3 /* BTTBaseCell.m in Sources */,
 				3A8F51E9215F78F50069D1B3 /* BTTTabbarController.m in Sources */,
 				3AD9CF08216C71F500685B43 /* NSString+Expand.m in Sources */,
@@ -5309,6 +5324,7 @@
 				D31B0EFA23B46058003666BA /* CNPayUSDTRateModel.m in Sources */,
 				D3A9A72124172611007F672A /* BTTUSDTWalletTypeModel.m in Sources */,
 				D339969524371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m in Sources */,
+				D3A0411E248A10330022BEDC /* BTTAddBitollCardController.m in Sources */,
 				3A3DF1E6237BA445006129F6 /* BTTHotPromotionCell.m in Sources */,
 				D5DBEB2921ABB774008AF629 /* CNPayCardModel.m in Sources */,
 				D5DBEB2821ABB774008AF629 /* CNPayBankCardModel.m in Sources */,
@@ -5584,7 +5600,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.85;
+				MARKETING_VERSION = 3.0.87;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5625,7 +5641,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.85;
+				MARKETING_VERSION = 3.0.87;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

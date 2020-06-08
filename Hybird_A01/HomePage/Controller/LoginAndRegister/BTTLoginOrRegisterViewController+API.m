@@ -224,22 +224,6 @@
 
 #pragma mark - 注册
 
-- (void)checkLoginNameWithAccount:(NSString *)account password:(NSString *)password{
-    [self showLoading];
-    NSDictionary *params = @{@"loginName":account};
-    [IVNetwork requestPostWithUrl:BTTCheckLoginname paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            BTTCreateAPIModel *model = [[BTTCreateAPIModel alloc]init];
-            model.login_name = account;
-            model.password = password;
-            [self createRealAccountWithModel:model];
-        }else{
-            [self hideLoading];
-            [MBProgressHUD showError:result.head.errMsg toView:nil];
-        }
-    }];
-}
 
 - (void)createRealAccountWithModel:(BTTCreateAPIModel *)model{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];

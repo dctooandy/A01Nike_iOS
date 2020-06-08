@@ -110,28 +110,16 @@
     }
     if (indexPath.row == self.sheetDatas.count - 1) {
         
-        if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]) {
-            BTTBitollWithDrawCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBitollWithDrawCell" forIndexPath:indexPath];
-            cell.confirmTap = ^{
-                [self submitWithDraw];
-            };
-            cell.bindTap = ^{
-                [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCard"];
-                BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
-            };
-            return cell;
-        }else{
-            BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
-            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-                [weakSelf submitWithDraw];
-            };
-            return cell;
-        }
-        
-        
-        
-        
+        BTTBitollWithDrawCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBitollWithDrawCell" forIndexPath:indexPath];
+        cell.confirmTap = ^{
+            [self submitWithDraw];
+        };
+        cell.bindTap = ^{
+            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCard"];
+            BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        };
+        return cell;
     }
     NSString *cellName = cellModel.name;
     if ([cellName isEqualToString:@"取款至"]) {
@@ -171,6 +159,7 @@
 }
 
 - (void)confirmBtn_click:(id)sender{
+    
     [self submitWithDraw];
 }
 
@@ -258,15 +247,9 @@
 }
 - (UIButton *)getSubmitBtn
 {
-    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.sheetDatas.count - 1 inSection:0];
-        BTTBitollWithDrawCell *cell = (BTTBitollWithDrawCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-        return cell.confirmBtn;
-    }else{
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.sheetDatas.count - 1 inSection:0];
-        BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-        return cell.btn;
-    }
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.sheetDatas.count - 1 inSection:0];
+    BTTBitollWithDrawCell *cell = (BTTBitollWithDrawCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.confirmBtn;
     
 }
 //选中银行卡
@@ -274,17 +257,28 @@
 {
     BTTWithdrawalCardSelectCell *cell = (BTTWithdrawalCardSelectCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     NSMutableArray *textArray = @[].mutableCopy;
+    [textArray addObject:[NSString stringWithFormat:@"➕ 币付宝钱包"]];
+    BOOL haveBfb = NO;
+    
     for (BTTBankModel *model in self.bankList) {
         if ([model.accountType isEqualToString:@"借记卡"]||[model.accountType isEqualToString:@"信用卡"]||[model.accountType isEqualToString:@"存折"]||[model.accountType isEqualToString:@"BTC"]) {
             [textArray addObject:[NSString stringWithFormat:@"%@-%@",model.bankName,model.accountNo]];
         }else if ([model.accountType isEqualToString:@"BITOLL"]){
-            [textArray addObject:[NSString stringWithFormat:@"币付宝-%@",model.accountNo]];
+            [textArray replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"币付宝-%@",model.accountNo]];
+            haveBfb = YES;
         }else{
             NSString*resultStr=[model.accountType stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[model.accountType substringToIndex:1] capitalizedString]];
             [textArray addObject:[NSString stringWithFormat:@"%@-%@",resultStr,model.accountNo]];
         }
     }
-    [BRStringPickerView showStringPickerWithTitle:@"请选择银行卡" dataSource:textArray.copy defaultSelValue:cell.detailLabel.text resultBlock:^(id selectValue, NSInteger index) {
+    [BRStringPickerView showStringPickerWithTitle:@"请选择银行卡" dataSource:textArray.copy defaultSelValue:[NSString stringWithFormat:@"➕ 币付宝钱包"] resultBlock:^(id selectValue, NSInteger index) {
+        
+        if (index==0&&!haveBfb) {
+            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCard"];
+            BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            return;
+        }
         cell.detailLabel.text = selectValue;
         self.amount = @"";
         for (int i = 0; i < self.bankList.count; i++) {
@@ -306,7 +300,6 @@
                     self.selectIndex = i;
                 }
             }
-            
         }
         [self.view endEditing:YES];
         [self loadMainData];
@@ -319,6 +312,7 @@
     if (json!=nil) {
         NSArray *array = json[@"accounts"];
         BOOL isBlackNineteen = [[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"];
+        BOOL isHaveBitoll = NO;
         if (isArrayWithCountMoreThan0(array)) {
             NSMutableArray *bankList = [[NSMutableArray alloc]init];
             for (int i =0 ; i<array.count; i++) {
@@ -326,12 +320,28 @@
                 BTTBankModel *model = [BTTBankModel yy_modelWithDictionary:json];
                 if (isBlackNineteen) {
                     if (![model.accountType isEqualToString:@"存折"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"信用卡"]) {
-                        [bankList addObject:model];
+                        if ([model.accountType isEqualToString:@"BITOLL"]) {
+                            [bankList insertObject:model atIndex:0];
+                            isHaveBitoll = YES;
+                        }else{
+                            [bankList addObject:model];
+                        }
                     }
                 }else{
-                    [bankList addObject:model];
+                    if ([model.bankName isEqualToString:@"BITOLL"]) {
+                        [bankList insertObject:model atIndex:0];
+                        isHaveBitoll = YES;
+                    }else{
+                        [bankList addObject:model];
+                    }
                 }
                 if (i==array.count-1) {
+                    if (!isHaveBitoll) {
+                        BTTBankModel *bModel = [[BTTBankModel alloc]init];
+                        bModel.accountType = @"BITOLL";
+                        bModel.bankName = @"BITOLL";
+                        [bankList insertObject:bModel atIndex:0];
+                    }
                     self.bankList = bankList;
                     [self loadMainData];
                     [self setupElements];
@@ -344,6 +354,14 @@
 }
 - (void)submitWithDraw
 {
+    
+    if ([self.bankList[_selectIndex].bankName isEqualToString:@"BITOLL"]&&self.bankList[_selectIndex].accountId==nil) {
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCard"];
+        BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    
     if (self.amount.floatValue < 10) {
         [MBProgressHUD showError:@"最少10元" toView:nil];
         return;

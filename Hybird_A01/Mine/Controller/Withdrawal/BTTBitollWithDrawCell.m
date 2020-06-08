@@ -16,10 +16,10 @@
 @implementation BTTBitollWithDrawCell
 
 -(instancetype)initWithFrame:(CGRect)frame{
-    self = [super initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 240)];
+    self = [super initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 120)];
     if (self) {
         self.contentView.backgroundColor = kBlackBackgroundColor;
-        UIView *infoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
+        UIView *infoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 120)];
         infoView.backgroundColor = kBlackBackgroundColor;
         [self.contentView addSubview:infoView];
         
@@ -37,18 +37,23 @@
         [infoView addSubview:confirmBtn];
         _confirmBtn = confirmBtn;
         
-        UIButton *bindButton = [[UIButton alloc]initWithFrame:CGRectMake(16, 74, SCREEN_WIDTH-32, 44)];
-        [bindButton setTitle:@"一键添加币付宝钱包?" forState:UIControlStateNormal];
-        
-        bindButton.titleLabel.font = [UIFont systemFontOfSize:12];
-        [bindButton setTitleColor:COLOR_RGBA(42, 97, 209, 1) forState:UIControlStateNormal];
-        [bindButton addTarget:self action:@selector(bindBtn_click) forControlEvents:UIControlEventTouchUpInside];
-        [infoView addSubview:bindButton];
-        
-        UIButton *downloadBtn = [[UIButton alloc]initWithFrame:CGRectMake(16, 118, SCREEN_WIDTH-32, 120)];
-        [downloadBtn setImage:[UIImage imageNamed:@"bfb_banner"] forState:UIControlStateNormal];
-        [downloadBtn addTarget:self action:@selector(downloadBtn_click) forControlEvents:UIControlEventTouchUpInside];
-        [infoView addSubview:downloadBtn];
+        UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(16, 94, SCREEN_WIDTH-32, 18)];
+        imgView.image = [UIImage imageNamed:@"bfb_save_discount"];
+        imgView.contentMode = UIViewContentModeScaleAspectFit;
+        [infoView addSubview:imgView];
+//        
+//        UIButton *bindButton = [[UIButton alloc]initWithFrame:CGRectMake(16, 74, SCREEN_WIDTH-32, 44)];
+//        [bindButton setTitle:@"一键添加币付宝钱包?" forState:UIControlStateNormal];
+//        
+//        bindButton.titleLabel.font = [UIFont systemFontOfSize:12];
+//        [bindButton setTitleColor:COLOR_RGBA(42, 97, 209, 1) forState:UIControlStateNormal];
+//        [bindButton addTarget:self action:@selector(bindBtn_click) forControlEvents:UIControlEventTouchUpInside];
+//        [infoView addSubview:bindButton];
+//        
+//        UIButton *downloadBtn = [[UIButton alloc]initWithFrame:CGRectMake(16, 118, SCREEN_WIDTH-32, 120)];
+//        [downloadBtn setImage:[UIImage imageNamed:@"bfb_banner"] forState:UIControlStateNormal];
+//        [downloadBtn addTarget:self action:@selector(downloadBtn_click) forControlEvents:UIControlEventTouchUpInside];
+//        [infoView addSubview:downloadBtn];
         
         
     }

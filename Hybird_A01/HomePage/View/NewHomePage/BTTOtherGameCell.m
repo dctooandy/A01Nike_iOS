@@ -28,6 +28,9 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btiBtnWidth;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *vipBtnHeight;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *vipBtnWidth;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *asBtnHeight;
 
@@ -35,6 +38,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *btiTryIcon;
 
+@property (weak, nonatomic) IBOutlet UIImageView *vipTryIcon;
 
 @property (weak, nonatomic) IBOutlet UIImageView *jingcaiTryIcon;
 
@@ -59,11 +63,13 @@
 
 - (void)loginSuccess:(NSNotification *)notifi {
     _btiTryIcon.hidden = YES;
+    _vipTryIcon.hidden = YES;
     _asTryIcon.hidden = YES;
 }
 
 - (void)logoutSuccess:(NSNotification *)notifi {
     _btiTryIcon.hidden = NO;
+    _vipTryIcon.hidden = NO;
     _asTryIcon.hidden = NO;
 }
 
@@ -80,15 +86,19 @@
     self.btiBtnWidth.constant = (SCREEN_WIDTH - 40) / 335.0 * 152.5;
     self.btiBtnHeight.constant = self.btiBtnWidth.constant / 152.5 * 69;
     
+    self.vipBtnWidth.constant = (SCREEN_WIDTH - 40) / 335.0 * 74;
+    self.vipBtnHeight.constant = self.vipBtnWidth.constant / 74.0 * 69;
     
     self.asBtnWidth.constant = (SCREEN_WIDTH - 40) / 335.0 * 167.5;
     self.asBtnHeight.constant = self.asBtnWidth.constant / 167.5 * 83;
     
     if ([IVNetwork savedUserInfo]) {
         _btiTryIcon.hidden = YES;
+        _vipTryIcon.hidden = YES;
         _asTryIcon.hidden = YES;
     } else {
         _btiTryIcon.hidden = NO;
+        _vipTryIcon.hidden = NO;
         _asTryIcon.hidden = NO;
     }
 }

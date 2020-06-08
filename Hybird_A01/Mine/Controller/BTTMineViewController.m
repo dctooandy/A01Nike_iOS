@@ -440,7 +440,7 @@
     }
     if (indexPath.row == self.saveMoneyCount + 3) {
         if (self.isCompletePersonalInfo) {
-            if ([IVNetwork savedUserInfo].bankCardNum > 0 || [IVNetwork savedUserInfo].usdtNum > 0) {
+            if ([IVNetwork savedUserInfo].bankCardNum > 0 || [IVNetwork savedUserInfo].usdtNum > 0||[IVNetwork savedUserInfo].bfbNum>0) {
                 NSInteger usdtCount = [IVNetwork savedUserInfo].usdtNum;
                 BOOL isBlackNineteen = [[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"];
                 

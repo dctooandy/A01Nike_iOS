@@ -8,13 +8,14 @@
 
 #import "BTTBiFuBaoController.h"
 #import "CNPayConstant.h"
-#import "USDTWalletCollectionCell.h"
+#import "BTTBitollChoseMoneyCell.h"
 #import "CNPayUSDTRateModel.h"
 #import "BTTPayUsdtNoticeView.h"
 #import "BTTUsdtWalletModel.h"
+#import "BTTCardInfosController.h"
 
 @interface BTTBiFuBaoController ()<UITextFieldDelegate,UICollectionViewDelegate, UICollectionViewDataSource>
-@property (weak, nonatomic) IBOutlet UIView *protocolView;
+@property (weak, nonatomic) IBOutlet UIView *choseMoneyView;
 @property (weak, nonatomic) IBOutlet UIView *infoView;
 @property (weak, nonatomic) IBOutlet UITextField *moneyTextField;
 @property (weak, nonatomic) IBOutlet UILabel *usdtLabel;
@@ -24,7 +25,8 @@
 @property (weak, nonatomic) IBOutlet UIView *saveView;
 @property (nonatomic, copy) NSString *selectedProtocol;
 @property (nonatomic, assign) CGFloat usdtRate;
-@property (nonatomic, strong) NSArray *protocolArray;
+@property (nonatomic, strong) NSArray *moneyArray;
+@property (nonatomic, copy) NSString *selectedMoney;
 @property  BTTUsdtWalletModel *bfbModel;
 @property (weak, nonatomic) IBOutlet UIView *secondView;
 @property (weak, nonatomic) IBOutlet UIView *secondSaveView;
@@ -41,23 +43,21 @@
 {
     if (!_walletCollectionView) {
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.minimumLineSpacing = 15;  //行间距
-        flowLayout.minimumInteritemSpacing = 15; //列间距
+        flowLayout.minimumLineSpacing = 12;  //行间距
+        flowLayout.minimumInteritemSpacing = 12; //列间距
 //        flowLayout.estimatedItemSize = CGSizeMake((SCREEN_WIDTH-60)/3, 36);  //预定的itemsize
-        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH-60)/3, 36); //固定的itemsize
-        flowLayout.headerReferenceSize = CGSizeMake(0, 43);
+        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH-90)/4, 36); //固定的itemsize
+        flowLayout.headerReferenceSize = CGSizeMake(0, 12);
         //初始化 UICollectionView
         _walletCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         _walletCollectionView.delegate = self; //设置代理
         _walletCollectionView.dataSource = self;   //设置数据来源
         _walletCollectionView.backgroundColor = kBlackLightColor;
-        
-        [_walletCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionViewHeader"];
  
         _walletCollectionView.bounces = NO;   //设置弹跳
         _walletCollectionView.alwaysBounceVertical = NO;  //只允许垂直方向滑动
         //注册 cell  为了cell的重用机制  使用NIB  也可以使用代码 registerClass xxxx
-        [_walletCollectionView registerClass:[USDTWalletCollectionCell class] forCellWithReuseIdentifier:@"USDTWalletCollectionCell"];
+        [_walletCollectionView registerClass:[BTTBitollChoseMoneyCell class] forCellWithReuseIdentifier:@"BTTBitollChoseMoneyCell"];
     }
     return _walletCollectionView;
 }
@@ -69,8 +69,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.protocolView.hidden = YES;
     self.selectedProtocol = @"OMNI";
+    self.selectedMoney = @"100";
+    self.moneyArray = @[@"100",@"500",@"1000",@"5000",@"10000",@"50000",@"100000"];
     [self setupView];
     [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     [self requestUSDTRate];
@@ -112,14 +113,9 @@
                         }
                         
                         [self.walletCollectionView reloadData];
-                        CGFloat height = 90;
-                        [self.protocolView mas_updateConstraints:^(MASConstraintMaker *make) {
-                            make.height.mas_equalTo(height);
-                        }];
-                        self.protocolView.hidden = NO;
+                        
                         BTTUsdtWalletModel *paymodel = [BTTUsdtWalletModel yy_modelWithJSON:paymentArray.firstObject];
                         NSArray *protocolArray = [paymodel.usdtProtocol componentsSeparatedByString:@";"];
-                        self.protocolArray = protocolArray;
                         NSArray *protocolDetailArray = [protocolArray.firstObject componentsSeparatedByString:@":"];
                         self.selectedProtocol = protocolDetailArray.firstObject;
                         
@@ -157,8 +153,21 @@
                 [self showError:@"操作失败！请联系客户，或者稍后重试!"];
                 return;
             }
-            self.usdtRate = [rateModel.rate floatValue];
-            [self handleRateLabelShowWithRate:rateModel.rate];
+            
+            NSArray *rateArray = [rateModel.rate componentsSeparatedByString:@"."];
+            
+            NSString *rateDetail =rateArray.lastObject;
+            if (rateDetail.length>2) {
+                rateDetail = [rateDetail substringToIndex:2];
+            }
+            NSString *rate = [NSString stringWithFormat:@"%@.%@",rateArray.firstObject,rateDetail];
+            self.usdtRate = [[NSDecimalNumber decimalNumberWithString:rate] doubleValue];
+            self.moneyTextField.text = self.selectedMoney;
+            CGFloat rmbCash = [self.moneyTextField.text integerValue] * self.usdtRate;
+            NSString *cnyStr = [NSString stringWithFormat:@"%.3f",rmbCash];
+            self.usdtLabel.text = [cnyStr substringWithRange:NSMakeRange(0, cnyStr.length-1)];
+            
+            [self handleRateLabelShowWithRate:[NSString stringWithFormat:@"%@.%@",rateArray.firstObject,rateDetail]];
         }
     }];
 }
@@ -212,9 +221,9 @@
 
 - (void)setupView{
     self.view.backgroundColor = kBlackBackgroundColor;
-    self.protocolView.layer.backgroundColor = [[UIColor colorWithRed:41.0f/255.0f green:45.0f/255.0f blue:54.0f/255.0f alpha:1.0f] CGColor];
-    self.walletCollectionView.frame = CGRectMake(15, 0, SCREEN_WIDTH-30, 376);
-    [self.protocolView addSubview:self.walletCollectionView];
+    self.choseMoneyView.layer.backgroundColor = [[UIColor colorWithRed:41.0f/255.0f green:45.0f/255.0f blue:54.0f/255.0f alpha:1.0f] CGColor];
+    self.walletCollectionView.frame = CGRectMake(15, 0, SCREEN_WIDTH-30, 110);
+    [self.choseMoneyView addSubview:self.walletCollectionView];
     
     _secondView.layer.backgroundColor = kBlackBackgroundColor.CGColor;
     _secondSaveView.layer.backgroundColor = kBlackLightColor.CGColor;
@@ -240,7 +249,7 @@
     //Gradient 0 fill for 圆角矩形 11
     CAGradientLayer *gradientLayer0 = [[CAGradientLayer alloc] init];
     gradientLayer0.cornerRadius = 5;
-    gradientLayer0.frame = CGRectMake(0, 0, SCREEN_WIDTH-30, 44);
+    gradientLayer0.frame =CGRectMake(0, 0, SCREEN_WIDTH-30, 44);
     gradientLayer0.colors = @[
         (id)[UIColor colorWithRed:247.0f/255.0f green:249.0f/255.0f blue:82.0f/255.0f alpha:1.0f].CGColor,
         (id)[UIColor colorWithRed:242.0f/255.0f green:218.0f/255.0f blue:15.0f/255.0f alpha:1.0f].CGColor];
@@ -295,15 +304,25 @@
         if ([_moneyTextField.text doubleValue]<[_bfbModel.minAmount doubleValue]||[_moneyTextField.text doubleValue]>[_bfbModel.maxAmount doubleValue]){
             [self showError:[NSString stringWithFormat:@"请输入%@-%@的存款金额",_bfbModel.minAmount,_bfbModel.maxAmount]];
         }else{
-          [self usdtOnlinePayHanlerWithType:[_bfbModel.payType integerValue]];
+            
+          if ([IVNetwork savedUserInfo].bfbNum<1) {
+              [self showConfirmAlertWithUrl:@""];
+          }else{
+              [self usdtOnlinePayHanlerWithType:[_bfbModel.payType integerValue]];
+          }
         }
     }else{
-        [self usdtOnlinePayHanlerWithType:[_bfbModel.payType integerValue]];
+        if ([IVNetwork savedUserInfo].bfbNum<1) {
+            [self showConfirmAlertWithUrl:@""];
+        }else{
+            [self usdtOnlinePayHanlerWithType:[_bfbModel.payType integerValue]];
+        }
     }
 }
 
 
 - (void)usdtOnlinePayHanlerWithType:(NSInteger)type{
+    
     [self showLoading];
     NSDictionary *params = @{
         @"payType":_bfbModel.payType,
@@ -337,8 +356,7 @@
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            self.infoView.hidden = YES;
-            self.secondView.hidden = NO;
+
             UIImage *qrcode = [PublicMethod QRCodeMethod:result.body[@"payUrl"]];
             self.qrcodeView.image = qrcode;
             self.secondMoneyLabel.text = [NSString stringWithFormat:@"%@",result.body[@"amount"]];
@@ -359,7 +377,20 @@
         NSString *payUrl = [imgQrcode stringByReplacingOccurrencesOfString:@"gz://" withString:@"bitoll://"];
         UIImage *qrcode = [PublicMethod QRCodeMethod:payUrl];
         self.qrcodeView.image = qrcode;
-        [self showConfirmAlertWithUrl:payUrl];
+        if ([IVNetwork savedUserInfo].bfbNum>0) {
+            if ([[UIApplication sharedApplication]
+              canOpenURL:[NSURL URLWithString:payUrl]]){
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:payUrl]];
+                [self popToRootViewController];
+              
+            }else{
+                [self dowloadBfbApp];
+            }
+        }else{
+            self.infoView.hidden = YES;
+            self.secondView.hidden = NO;
+        }
+        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
     }];
@@ -367,18 +398,16 @@
 }
 
 - (void)showConfirmAlertWithUrl:(NSString *)payUrl{
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"在币付宝中打开链接" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"存款绑定币付宝,到账速度更快哦~" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"继续存款" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
+        [self usdtOnlinePayHanlerWithType:[self.bfbModel.payType integerValue]];
     }];
     [alertVC addAction:cancel];
-    UIAlertAction *unlock = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if ([[UIApplication sharedApplication]
-          canOpenURL:[NSURL URLWithString:payUrl]]){
-          [[UIApplication sharedApplication] openURL:[NSURL URLWithString:payUrl]];
-        }else{
-            NSLog(@"跳转不了");
-        }
+    UIAlertAction *unlock = [UIAlertAction actionWithTitle:@"去绑定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCardSave"];
+        BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+        [self pushViewController:vc];
     }];
     [alertVC addAction:unlock];
     [self presentViewController:alertVC animated:YES completion:nil];
@@ -393,6 +422,8 @@
     }else{
         _usdtLabel.text = @"0";
     }
+    self.selectedMoney = _moneyTextField.text;
+    [self.walletCollectionView reloadData];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
@@ -443,48 +474,49 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    return self.protocolArray.count;
+    return self.moneyArray.count;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray *protocolDetailArray = [self.protocolArray[indexPath.row] componentsSeparatedByString:@":"];
-    self.selectedProtocol = protocolDetailArray.firstObject;
+    self.selectedMoney = self.moneyArray[indexPath.row];
+    _moneyTextField.text = self.selectedMoney;
+    CGFloat rmbCash = [_moneyTextField.text integerValue] * self.usdtRate;
+    NSString *cnyStr = [NSString stringWithFormat:@"%.3f",rmbCash];
+    _usdtLabel.text = [cnyStr substringWithRange:NSMakeRange(0, cnyStr.length-1)];
     [UIView performWithoutAnimation:^{
-        [self.walletCollectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
+        [self.walletCollectionView reloadData];
     }];
             
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
-    USDTWalletCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"USDTWalletCollectionCell" forIndexPath:indexPath];
-    NSArray *protocolDetailArray = [self.protocolArray[indexPath.row] componentsSeparatedByString:@":"];
-    NSString *title = protocolDetailArray.firstObject;
-    [cell setCellWithName:title imageName:@""];
-    [cell setItemSelected:[title isEqualToString:self.selectedProtocol]];
+    BTTBitollChoseMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBitollChoseMoneyCell" forIndexPath:indexPath];
+    [cell setCellWithName:self.moneyArray[indexPath.row]];
+    [cell setItemSelected:[self.moneyArray[indexPath.row] isEqualToString:self.selectedMoney]];
     return cell;
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    UICollectionReusableView *headView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                                                withReuseIdentifier:@"UICollectionViewHeader"
-                                                                                       forIndexPath:indexPath];
-    for (UIView *view in headView.subviews) {
-        [view removeFromSuperview];
-    }
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 15, 60, 14)];
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.font = [UIFont systemFontOfSize:14];
-    
-    [headView addSubview:titleLabel];
-    
-    UILabel *noticeLabel = [[UILabel alloc]initWithFrame:CGRectMake(70, 15, SCREEN_WIDTH-90, 14)];
-    noticeLabel.textColor = COLOR_RGBA(129, 135, 145, 1);
-    noticeLabel.font = [UIFont systemFontOfSize:12];
-    [headView addSubview:noticeLabel];
-    titleLabel.text = @"协议";
-    noticeLabel.text = @" ";
-        
-    return headView;
-}
+//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+//    UICollectionReusableView *headView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+//                                                                                withReuseIdentifier:@"UICollectionViewHeader"
+//                                                                                       forIndexPath:indexPath];
+//    for (UIView *view in headView.subviews) {
+//        [view removeFromSuperview];
+//    }
+//    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 15, 60, 14)];
+//    titleLabel.textColor = [UIColor whiteColor];
+//    titleLabel.font = [UIFont systemFontOfSize:14];
+//
+//    [headView addSubview:titleLabel];
+//
+//    UILabel *noticeLabel = [[UILabel alloc]initWithFrame:CGRectMake(70, 15, SCREEN_WIDTH-90, 14)];
+//    noticeLabel.textColor = COLOR_RGBA(129, 135, 145, 1);
+//    noticeLabel.font = [UIFont systemFontOfSize:12];
+//    [headView addSubview:noticeLabel];
+//    titleLabel.text = @"协议";
+//    noticeLabel.text = @" ";
+//
+//    return headView;
+//}
 
 @end

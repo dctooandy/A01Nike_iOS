@@ -11,4 +11,5 @@
 @interface CNPayChannelCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *channelIV;
 @property (weak, nonatomic) IBOutlet UILabel *titleLb;
+@property (weak, nonatomic) IBOutlet UIImageView *discountImg;
 @end

@@ -90,7 +90,7 @@
     NSArray *placeholders4 = @[@"最少10元",@"USDT",@"***银行-尾号*****",@"",@"",@""];
     NSArray *heights1 = @[@205.0,@15.0];
     NSArray *heights3 = @[@44.0,@44.0,@44.0,@100.0];
-    NSArray *heights4 = @[@44.0,@44.0,@44,@44,@27,@240.0];
+    NSArray *heights4 = @[@44.0,@44.0,@44,@44,@27,@120.0];
     
     NSArray *canEdits1 = @[@NO,@NO];
     NSArray *canEdits3 = @[@YES,@NO,@NO,@NO];
@@ -143,7 +143,6 @@
         [heights removeObjectAtIndex:5];
         [canEdits removeObjectAtIndex:5];
         [values removeObjectAtIndex:5];
-        [heights replaceObjectAtIndex:6 withObject:@100];
     }
     for (NSInteger index = 0; index < names.count; index++) {
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];

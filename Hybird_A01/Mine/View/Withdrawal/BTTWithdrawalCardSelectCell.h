@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *bankIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *bfb_discount;
+@property (weak, nonatomic) IBOutlet UIImageView *rightArrow;
 
 @property(nonatomic, strong)BTTBankModel *model;
 

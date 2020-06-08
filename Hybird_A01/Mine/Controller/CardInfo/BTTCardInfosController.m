@@ -19,6 +19,7 @@
 #import <IVCacheLibrary/IVCacheWrapper.h>
 #import "IVUtility.h"
 #import "BTTKSAddBfbWalletController.h"
+#import "BTTAddBitollCardController.h"
 
 @interface BTTCardInfosController ()<BTTElementsFlowLayoutDelegate>
 
@@ -88,19 +89,19 @@
                 cell.titleLabel.text = @"添加银行卡";
                 break;
             case BTTCanAddCardTypeUSDT:
-                cell.titleLabel.text = @"添加USDT钱包";
+                cell.titleLabel.text = @"添加币付宝钱包";
                 break;
             case BTTCanAddCardTypeBTCORUSDT:
-                cell.titleLabel.text = @"添加比特币钱包/USDT钱包";
+                cell.titleLabel.text = @"添加比特币钱包/币付宝钱包";
                 break;
             case BTTCanAddCardTypeBankORUSDT:
-                cell.titleLabel.text = @"添加银行卡/USDT钱包";
+                cell.titleLabel.text = @"添加银行卡/币付宝钱包";
                 break;
             case BTTCanAddCardTypeBankORBTC:
                 cell.titleLabel.text = @"添加银行卡/比特币钱包";
                 break;
             default:
-                cell.titleLabel.text = @"添加银行卡/比特币钱包/USDT钱包";
+                cell.titleLabel.text = @"添加银行卡/比特币钱包/币付宝钱包";
                 break;
         }
         return cell;
@@ -148,7 +149,7 @@
                 break;
         }
     }else if (indexPath.row == self.bankList.count){
-        [self addUSDT];
+        
     }
 }
 
@@ -173,7 +174,7 @@
     
     [action2 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
     
-    UIAlertAction *action4 = [UIAlertAction actionWithTitle:@"USDT钱包" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action4 = [UIAlertAction actionWithTitle:@"币付宝钱包" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [weakSelf addUSDT];
     }];
     [action4 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
@@ -288,63 +289,45 @@
 }
 - (void)addBankCard
 {
-    if (self.bankList.count > 0) {
-        if ([IVNetwork savedUserInfo].mobileNoBind==1) {
-            BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
-            vc.verifyType = BTTSafeVerifyTypeMobileAddBankCard;
-            [self.navigationController pushViewController:vc animated:YES];
-        } else {
-            [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
-            BTTBindingMobileController *vc = [BTTBindingMobileController new];
-            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBankCard;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
+    if ([IVNetwork savedUserInfo].mobileNoBind==1) {
+        BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
+        vc.verifyType = BTTSafeVerifyTypeMobileAddBankCard;
+        [self.navigationController pushViewController:vc animated:YES];
     } else {
-        BTTAddCardController *vc = [BTTAddCardController new];
-        vc.addCardType = BTTSafeVerifyTypeNormalAddBankCard;
-        vc.cardCount = self.bankList.count;
+        [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+        BTTBindingMobileController *vc = [BTTBindingMobileController new];
+        vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBankCard;
         [self.navigationController pushViewController:vc animated:YES];
     }
     
 }
 - (void)addBTC
 {
-    if (self.bankList.count > 0) {
-        if ([IVNetwork savedUserInfo].mobileNoBind==1) {
-            BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
-            vc.verifyType = BTTSafeVerifyTypeMobileAddBTCard;
-            [self.navigationController pushViewController:vc animated:YES];
-        } else {
-            
-            [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
-            BTTBindingMobileController *vc = [BTTBindingMobileController new];
-            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
+    if ([IVNetwork savedUserInfo].mobileNoBind==1) {
+        BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
+        vc.verifyType = BTTSafeVerifyTypeMobileAddBTCard;
+        [self.navigationController pushViewController:vc animated:YES];
     } else {
-        BTTAddBTCController *vc = [BTTAddBTCController new];
-        vc.addCardType = BTTSafeVerifyTypeNormalAddBTCard;
+        
+        [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+        BTTBindingMobileController *vc = [BTTBindingMobileController new];
+        vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
 - (void)addUSDT
 {
-    if (self.bankList.count > 0) {
-        if ([IVNetwork savedUserInfo].mobileNoBind==1) {
-            BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
-            vc.verifyType = BTTSafeVerifyTypeMobileAddUSDTCard;
-            [self.navigationController pushViewController:vc animated:YES];
-        } else {
-
-            [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
-            BTTBindingMobileController *vc = [BTTBindingMobileController new];
-            vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddUSDTCard;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
+    if ([IVNetwork savedUserInfo].mobileNoBind==1) {
+        [[NSUserDefaults standardUserDefaults]setInteger:5 forKey:@"BITOLLBACK"];
+        BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
+        vc.verifyType = BTTSafeVerifyTypeMobileAddUSDTCard;
+        [self.navigationController pushViewController:vc animated:YES];
     } else {
-        BTTAddUSDTController *vc = [BTTAddUSDTController new];
-        vc.addCardType = BTTSafeVerifyTypeNormalAddUSDTCard;
+        [[NSUserDefaults standardUserDefaults]setInteger:4 forKey:@"BITOLLBACK"];
+        [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+        BTTBindingMobileController *vc = [BTTBindingMobileController new];
+        vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddUSDTCard;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -449,26 +432,59 @@
     int bankCardCount = 0;
     
     int btcCardCount = 0;
+    int bitollCount = 0;
     for (BTTBankModel *model in self.bankList) {
         if ([model.accountType isEqualToString:@"BTC"]) {
             btcCardCount++;
         }else if ([model.accountType isEqualToString:@"借记卡"]||[model.accountType isEqualToString:@"信用卡"]||[model.accountType isEqualToString:@"存折"]){
             bankCardCount++;
+        }else if ([model.accountType isEqualToString:@"BITOLL"]){
+            bitollCount++;
         }
     }
     if ([[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
         bankCardCount=3;
     }
+    
     if (btcCardCount == 1) {
         if (bankCardCount < 3) {
-            return BTTCanAddCardTypeBankORUSDT;
+            if (bitollCount<1) {
+                return BTTCanAddCardTypeBankORUSDT;
+            }else{
+                return BTTCanAddCardTypeBank;
+            }
+            
         }else{
-            return BTTCanAddCardTypeUSDT;
+            if (bitollCount<1) {
+                return BTTCanAddCardTypeUSDT;
+            }else{
+                return BTTCanAddCardTypeNone;
+            }
         }
-        
     }
     if (bankCardCount == 3) {
-        return BTTCanAddCardTypeBTCORUSDT;
+        if (bitollCount<1) {
+            return BTTCanAddCardTypeBTCORUSDT;
+        }else{
+            return BTTCanAddCardTypeBTC;
+        }
+    }
+    
+    if (bitollCount==1) {
+        if (bankCardCount < 3) {
+            if (btcCardCount<1) {
+                return BTTCanAddCardTypeBankORBTC;
+            }else{
+                return BTTCanAddCardTypeBank;
+            }
+            
+        }else{
+            if (btcCardCount<1) {
+                return BTTCanAddCardTypeBTC;
+            }else{
+                return BTTCanAddCardTypeNone;
+            }
+        }
     }
     return BTTCanAddCardTypeAll;
 }

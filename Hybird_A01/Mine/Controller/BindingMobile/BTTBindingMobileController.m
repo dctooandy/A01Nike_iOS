@@ -21,7 +21,7 @@
 #import "BTTChangeMobileManualController.h"
 #import "BTTCardModifyVerifyController.h"
 #import "IVRsaEncryptWrapper.h"
-#import "BTTAddUSDTController.h"
+#import "BTTAddBitollCardController.h"
 @interface BTTBindingMobileController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, copy) NSString *messageId;
 @property (nonatomic, copy) NSString *validateId;
@@ -384,8 +384,7 @@
                         }
                             break;
                         case BTTSafeVerifyTypeMobileAddUSDTCard:{
-                            BTTAddUSDTController *vc = [BTTAddUSDTController new];
-                            vc.addCardType = BTTSafeVerifyTypeMobileAddUSDTCard;
+                            BTTAddBitollCardController *vc = [BTTAddBitollCardController new];
                             vc.messageId = messageId;
                             vc.validateId = validateId;
                             [self.navigationController pushViewController:vc animated:YES];
@@ -400,8 +399,7 @@
                         }
                             break;
                         case BTTSafeVerifyTypeMobileBindAddUSDTCard:{
-                            BTTAddUSDTController *vc = [BTTAddUSDTController new];
-                            vc.addCardType = BTTSafeVerifyTypeMobileBindAddUSDTCard;
+                            BTTAddBitollCardController *vc = [BTTAddBitollCardController new];
                             vc.messageId = messageId;
                             vc.validateId = validateId;
                             [self.navigationController pushViewController:vc animated:YES];

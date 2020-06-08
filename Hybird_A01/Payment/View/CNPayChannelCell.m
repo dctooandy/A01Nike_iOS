@@ -12,6 +12,7 @@
 @interface CNPayChannelCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *selectedIV;
 @property (weak, nonatomic) IBOutlet UIImageView *normalIV;
+
 @end
 
 @implementation CNPayChannelCell
@@ -24,6 +25,7 @@
     [super setSelected:selected];
     self.selectedIV.hidden = !selected;
     self.normalIV.hidden = selected;
+    
 }
 
 @end

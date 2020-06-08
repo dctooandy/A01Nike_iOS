@@ -24,7 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)createAccountNormalWithAPIModel:(BTTCreateAPIModel *)model;
 
-- (void)checkLoginNameWithAccount:(NSString *)account password:(NSString *)password;
 
 - (void)MobileNoAndCodeRegisterAPIModel:(BTTCreateAPIModel *)model;
 
