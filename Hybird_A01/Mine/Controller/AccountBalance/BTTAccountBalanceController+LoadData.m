@@ -14,7 +14,8 @@
 @implementation BTTAccountBalanceController (LoadData)
 
 - (void)loadMainData {
-    NSArray *names = @[@"本地额度(元)",@"各厅额度(元)"];
+    NSString *unitString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"USDT" : @"元";
+    NSArray *names = @[[NSString stringWithFormat:@"本地额度(%@)",unitString],[NSString stringWithFormat:@"各厅额度(%@)",unitString]];
     NSArray *icons = @[@"blance_local",@"blance_hall"];
     NSMutableArray *sheetDatas = [NSMutableArray array];
     for (NSString *name in names) {

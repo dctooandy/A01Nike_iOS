@@ -31,6 +31,10 @@
 }
 
 -(void)setCellRateWithRate:(CGFloat)rate{
+    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+        _ratelabel.text = @"";
+        return;
+    }
     _ratelabel.text = [NSString stringWithFormat:@"（当前参考汇率：1CNY= %.4fUSDT）",rate];
 }
 

@@ -8,6 +8,11 @@
 
 #import "BTTAccountBlanceHeaderCell.h"
 
+@interface BTTAccountBlanceHeaderCell ()
+@property (weak, nonatomic) IBOutlet UILabel *topTipLabel;
+
+@end
+
 @implementation BTTAccountBlanceHeaderCell
 
 - (void)dealloc {
@@ -17,6 +22,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.trasferToLocal.enabled = YES;
+    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+        self.topTipLabel.text = @"总余额(USDT)";
+    }else{
+        self.topTipLabel.text = @"总余额(元)";
+    }
 }
 
 

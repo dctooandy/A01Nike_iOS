@@ -16,4 +16,5 @@
 #import <Masonry.h>
 #import "UIDevice+IVInfo.h"
 #import <tingyunApp/NBSAppAgent.h>
+#import <IVLoganAnalysis/IVLAManager.h>
 #endif

@@ -25,6 +25,7 @@ target ‘Hybird_A01’ do
   pod 'IVCacheLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVCacheLibrary.git'
   pod 'IVPublicAPILibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVPublicAPILibrary.git'
   pod 'IVHeartPacketLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git'
+  pod 'IVLoganAnalysis',:git =>'http://10.66.72.115/mobile-iOS-Library/IVLoganAnalysis.git'
   pod 'IQKeyboardManager','~> 5.0.6'
   pod 'FCUUID'
   pod 'libOpenInstallSDK'

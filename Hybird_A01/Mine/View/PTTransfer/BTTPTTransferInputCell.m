@@ -26,6 +26,7 @@
                  NSFontAttributeName:_amountTextField.font
          }];
     _amountTextField.attributedPlaceholder = attrString;
+    _unitLabel.text = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"USDT" :@"元";
 }
 
 - (void)setModel:(BTTMeMainModel *)model {

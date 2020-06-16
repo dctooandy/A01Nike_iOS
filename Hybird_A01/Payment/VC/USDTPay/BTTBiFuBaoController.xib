@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BTTBiFuBaoController">
             <connections>
+                <outlet property="arriveView" destination="hUL-bK-auz" id="IKv-dd-pHm"/>
                 <outlet property="bfbBanner" destination="wa7-sc-StS" id="qsj-zf-1Aa"/>
                 <outlet property="choseMoneyView" destination="r6b-EA-A49" id="oKW-Ug-nVE"/>
                 <outlet property="commitBtn" destination="4PY-uV-bvd" id="Ypx-7u-FbA"/>

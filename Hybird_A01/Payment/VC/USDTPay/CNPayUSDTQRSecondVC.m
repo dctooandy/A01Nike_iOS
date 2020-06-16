@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *recivedAmountLabel;
 @property (weak, nonatomic) IBOutlet UIView *infoView;
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
+@property (weak, nonatomic) IBOutlet UIView *arriveView;
 @property (nonatomic, assign) CGFloat usdtRate;
 @property (nonatomic, copy) NSString *minamount;
 @property (nonatomic, copy) NSString *maxamount;
@@ -132,7 +133,8 @@
     
     
     NSString *verifyCode = [IVNetwork savedUserInfo].verifyCode ? [IVNetwork savedUserInfo].verifyCode : @"";
-    NSString *realName = [IVNetwork savedUserInfo].loginName ? [IVNetwork savedUserInfo].loginName : @"";
+    NSString *lName = [[IVNetwork savedUserInfo].loginName containsString:@"usdt"] ? [[IVNetwork savedUserInfo].loginName stringByReplacingOccurrencesOfString:@"usdt" withString:@""] : [IVNetwork savedUserInfo].loginName;
+    NSString *realName = [IVNetwork savedUserInfo].loginName ? lName : @"";
     
     _infoLabel.text = [NSString stringWithFormat:@"  %@  ",verifyCode];
     _accountNameLabel.text = realName;
@@ -140,6 +142,10 @@
     _walletAddressInputField.delegate = self;
     _saveInputField.delegate = self;
     [_saveInputField addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
+    
+    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+        self.arriveView.hidden = YES;
+    }
 }
 
 - (void)textFieldDidChanged:(id)sender{

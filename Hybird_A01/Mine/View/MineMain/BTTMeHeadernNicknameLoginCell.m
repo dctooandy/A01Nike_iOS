@@ -12,6 +12,7 @@
 @interface BTTMeHeadernNicknameLoginCell ()<TXScrollLabelViewDelegate>
 
 @property (nonatomic, strong) TXScrollLabelView *scrollLabelView;
+@property (weak, nonatomic) IBOutlet UILabel *amountTipLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *topBgView;
 
@@ -53,6 +54,11 @@
 - (void)setTotalAmount:(NSString *)totalAmount {
     _totalAmount = totalAmount;
     self.amountLabel.text = _totalAmount;
+    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+        self.amountTipLabel.text = @"账户总余额(USDT)";
+    }else{
+        self.amountTipLabel.text = @"账户总余额(¥)";
+    }
 }
 
 - (void)scrollLabelView:(TXScrollLabelView *)scrollLabelView didClickWithText:(NSString *)text atIndex:(NSInteger)index {

@@ -35,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *qrcodeView;
 @property (weak, nonatomic) IBOutlet UIButton *saveFinishBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *bfbBanner;
+@property (weak, nonatomic) IBOutlet UIView *arriveView;
 @end
 
 @implementation BTTBiFuBaoController
@@ -287,6 +288,14 @@
          }];
     _moneyTextField.attributedPlaceholder = attrString;
     _moneyTextField.delegate = self;
+    
+    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+        self.arriveView.hidden = YES;
+        self.usdtTipLabel.hidden = YES;
+        [self.saveView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(44);
+        }];
+    }
     
     
 }

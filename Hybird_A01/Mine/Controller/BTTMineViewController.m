@@ -104,9 +104,11 @@
         if (!self.isLoading) {
             [self loadGamesListAndGameAmount];
         }
+        [self loadMeAllData];
         [self loadPaymentData];
         [self loadRebateStatus];
         [self loadSaveMoneyTimes];
+        
     } else {
         self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
         self.saveMoneyTimesType = BTTSaveMoneyTimesTypeLessTen;
@@ -152,7 +154,7 @@
                     cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
                 }
 
-                cell.nameLabel.text = [IVNetwork savedUserInfo].loginName;
+                cell.nameLabel.text = [[IVNetwork savedUserInfo].loginName containsString:@"usdt"] ? [[IVNetwork savedUserInfo].loginName stringByReplacingOccurrencesOfString:@"usdt" withString:@""] : [IVNetwork savedUserInfo].loginName;
                 cell.vipLevelLabel.text = ([IVNetwork savedUserInfo].starLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ", @([IVNetwork savedUserInfo].starLevel)];
                 weakSelf(weakSelf);
                 cell.accountBlanceBlock = ^{
@@ -404,10 +406,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     NSLog(@"%@", @(indexPath.row));
-    if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 10) {
+    if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 10&&[IVNetwork savedUserInfo].newAccountFlag!=1)||(indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 8&&[IVNetwork savedUserInfo].newAccountFlag==1)) {
         [IVNetwork checkAppUpdate];
         return;
-    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 11) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 11&&[IVNetwork savedUserInfo].newAccountFlag!=1)||(indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 9&&[IVNetwork savedUserInfo].newAccountFlag==1)) {
         // 网络监测
         IVCNetworkStatusView *statusView = [[IVCNetworkStatusView alloc] initWithFrame:self.view.frame];
 
@@ -488,7 +490,8 @@
     } else if (indexPath.row == self.saveMoneyCount + 7) {
         BTTPersonalInfoController *personInfo = [[BTTPersonalInfoController alloc] init];
         [self.navigationController pushViewController:personInfo animated:YES];
-    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 4) {
+    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 4&&[IVNetwork savedUserInfo].newAccountFlag!=1) {
+        
         NSMutableArray *names = @[@"首存优惠"].mutableCopy;
         if (self.isFanLi) {
             NSInteger index = [names indexOfObject:@"首存优惠"];
@@ -519,33 +522,33 @@
             }
         }];
         [actionSheet show];
-    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 5) {
+    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 5&&[IVNetwork savedUserInfo].newAccountFlag!=1) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.title = @"推荐礼金";
         vc.webConfigModel.theme = @"outside";
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/gift/lucky_pot"];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6&&[IVNetwork savedUserInfo].newAccountFlag!=1)||(indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 4&&[IVNetwork savedUserInfo].newAccountFlag==1)) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.url = @"customer/log.htm";
         vc.webConfigModel.theme = @"inside";
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 7) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 7&&[IVNetwork savedUserInfo].newAccountFlag!=1)||(indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 5&&[IVNetwork savedUserInfo].newAccountFlag==1)) {
         BTTAccountSafeController *vc = [[BTTAccountSafeController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 8) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 8&&[IVNetwork savedUserInfo].newAccountFlag!=1)||(indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6&&[IVNetwork savedUserInfo].newAccountFlag==1)) {
         BTTPTTransferController *vc = [[BTTPTTransferController alloc] init];
         vc.balanceModel = self.balanceModel;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 9) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 9&&[IVNetwork savedUserInfo].newAccountFlag!=1)||(indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 7&&[IVNetwork savedUserInfo].newAccountFlag==1)) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.url = @"customer/letter.htm";
         vc.webConfigModel.theme = @"inside";
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 12) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 12&&[IVNetwork savedUserInfo].newAccountFlag!=1)||(indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 10&&[IVNetwork savedUserInfo].newAccountFlag==1)) {
         // 设置
         BTTSettingsController *vc = [[BTTSettingsController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];

@@ -58,6 +58,7 @@ typedef enum {
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
+        NSString *unitString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"USDT" : @"元";
         BTTPTTransferNewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPTTransferNewCell" forIndexPath:indexPath];
         NSInteger total = floor(self.totalAmount.floatValue);
         NSInteger pt = floor(self.ptAmount.floatValue);
@@ -65,12 +66,12 @@ typedef enum {
         if ([self.totalAmount isEqualToString:@"加载中"]) {
             cell.userableLabel.text = self.totalAmount;
         } else {
-            cell.userableLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%@元",[NSString stringWithFormat:@"%ld",(long)(total - pt)]]];
+            cell.userableLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%@%@",[NSString stringWithFormat:@"%ld",(long)(total - pt)],unitString]];
         }
         if ([self.ptAmount isEqualToString:@"加载中"]) {
             cell.PTLabel.text = self.ptAmount;
         } else {
-            cell.PTLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%ld元",(long)pt]];
+            cell.PTLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%ld%@",(long)pt,unitString]];
         }
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {

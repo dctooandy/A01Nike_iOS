@@ -46,7 +46,7 @@
         NSDate *dayOfWeek = [calendar dateFromComponents:baseDayComp];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"YYYY-MM-dd"];
-        if (firstDiff==0||i==countNumber) {
+        if (i==countNumber) {
             dateStr = [dateStr stringByAppendingString:[formatter stringFromDate:dayOfWeek]];
             [self requestDataWithStr:dateStr isLastWeek:isLastWeek];
         }else{

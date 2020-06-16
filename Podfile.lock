@@ -56,6 +56,17 @@ PODS:
   - IVGameLibrary/GameController (1.1.7)
   - IVHeartPacketLibrary (0.0.4):
     - CocoaAsyncSocket (~> 7.6.2)
+  - IVLoganAnalysis (0.0.8):
+    - AFNetworking (~> 3.2.1)
+    - BGFMDB (~> 2.0.13)
+    - IVLoganAnalysis/PayegisDIDSDK (= 0.0.8)
+    - IVLoganAnalysis/Tool (= 0.0.8)
+  - IVLoganAnalysis/PayegisDIDSDK (0.0.8):
+    - AFNetworking (~> 3.2.1)
+    - BGFMDB (~> 2.0.13)
+  - IVLoganAnalysis/Tool (0.0.8):
+    - AFNetworking (~> 3.2.1)
+    - BGFMDB (~> 2.0.13)
   - IVNetworkLibrary2.0 (2.2.11):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
@@ -170,6 +181,7 @@ DEPENDENCIES:
   - IVCheckNetworkLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVCheckNetworkLibrary.git`)
   - IVGameLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git`, branch `v1.0`)
   - IVHeartPacketLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git`)
+  - IVLoganAnalysis (from `http://10.66.72.115/mobile-iOS-Library/IVLoganAnalysis.git`)
   - IVNetworkLibrary2.0 (from `http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary2.0.git`)
   - IVPublicAPILibrary (from `http://10.66.72.115/mobile-iOS-Library/IVPublicAPILibrary.git`)
   - IVUpdateLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVUpdateLibrary.git`)
@@ -215,6 +227,8 @@ EXTERNAL SOURCES:
     :git: http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git
   IVHeartPacketLibrary:
     :git: http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git
+  IVLoganAnalysis:
+    :git: http://10.66.72.115/mobile-iOS-Library/IVLoganAnalysis.git
   IVNetworkLibrary2.0:
     :git: http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary2.0.git
   IVPublicAPILibrary:
@@ -240,6 +254,9 @@ CHECKOUT OPTIONS:
   IVHeartPacketLibrary:
     :commit: cb81f459cb55163fd8493d0a62ea5339089703fc
     :git: http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git
+  IVLoganAnalysis:
+    :commit: 6cbfcb0780ffa59f0241d1741b5a03ec5ee88b3e
+    :git: http://10.66.72.115/mobile-iOS-Library/IVLoganAnalysis.git
   IVNetworkLibrary2.0:
     :commit: 7dba4a4d51ece945f96419813a65b04a2486e4c3
     :git: http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary2.0.git
@@ -267,6 +284,7 @@ SPEC CHECKSUMS:
   IVCheckNetworkLibrary: 70743fdc89e78a60a7ed7a2e8d44eb45e481ef7c
   IVGameLibrary: 6efd65f766d241ff766828daec5860234e6fded8
   IVHeartPacketLibrary: 2a122b1d8cedf8346b4898ace4736147cf9a0405
+  IVLoganAnalysis: 4bb58a66566ae1f5b816f1988d6da0bea07c9ae6
   IVNetworkLibrary2.0: f4e2fc1e4ff88cca4f1f6a3e0103592a0c79ced0
   IVPublicAPILibrary: 27791aecccd8d8605d2026d0b89c7ab2257da9bd
   IVUpdateLibrary: f5764f4cdfcf7919b37a1a2533aae0ff541d5c2d
@@ -284,6 +302,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
-PODFILE CHECKSUM: 78ae5068572f2cd3277c8e993bf794083402f8cb
+PODFILE CHECKSUM: 641c83e8a7a274e724f19e1d087a531a30f01432
 
 COCOAPODS: 1.8.4

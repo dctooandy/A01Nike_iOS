@@ -30,8 +30,9 @@
 }
 
 - (void)setItemModel:(BTTXimaItemModel *)itemModel{
+    NSString *unitString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"USDT" : @"元";
     self.nameLabel.text = [NSString stringWithFormat:@"%@",itemModel.xmName];
-    self.ximaAmountLabel.text = [NSString stringWithFormat:@"%@元",[PublicMethod transferNumToThousandFormat:itemModel.xmAmount]];
+    self.ximaAmountLabel.text = [NSString stringWithFormat:@"%@%@",[PublicMethod transferNumToThousandFormat:itemModel.xmAmount],unitString];
     self.totalAmountLabel.text = [NSString stringWithFormat:@"%@",[PublicMethod transferNumToThousandFormat:itemModel.totalBetAmont]];
     self.rateLabel.text = itemModel.xmRate;
     
@@ -39,8 +40,9 @@
 
 - (void)setModel:(BTTXimaLastWeekItemModel *)model {
     _model = model;
+    NSString *unitString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"USDT" : @"元";
     self.nameLabel.text = model.platformName;
-    self.ximaAmountLabel.text = [NSString stringWithFormat:@"%@元",model.amount];
+    self.ximaAmountLabel.text = [NSString stringWithFormat:@"%@%@",model.amount,unitString];
     self.totalAmountLabel.text = [NSString stringWithFormat:@"%@",model.bettingAmount];
     self.rateLabel.text = model.rate;
     

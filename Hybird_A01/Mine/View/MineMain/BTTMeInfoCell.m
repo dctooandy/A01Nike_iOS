@@ -39,6 +39,7 @@
     if ([model.name isEqualToString:@"银行卡资料"] ||
         [model.name isEqualToString:@"绑定手机"] ||
         [model.name isEqualToString:@"个人资料"] ||
+        [model.name isEqualToString:@"提现地址管理"] ||
         [model.name isEqualToString:@"推荐礼金"]) {
         self.statusIcon.hidden = NO;
         self.topConstants.constant = 0;

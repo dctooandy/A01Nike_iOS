@@ -48,7 +48,8 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         BTTAccountBlanceHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAccountBlanceHeaderCell" forIndexPath:indexPath];
-        cell.totalLabel.text = [NSString stringWithFormat:@"¥ %@",[PublicMethod transferNumToThousandFormat:self.amount.floatValue]];
+        NSString *unitString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"USDT" : @"¥";
+        cell.totalLabel.text = [NSString stringWithFormat:@"%@ %@",unitString,[PublicMethod transferNumToThousandFormat:self.amount.floatValue]];
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
@@ -56,15 +57,16 @@
         };
         return cell;
     } else if (indexPath.row == 1 || indexPath.row == 2) {
+        NSString *unitString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"USDT" : @"¥";
         BTTMeMainModel *model = self.sheetDatas.count ? self.sheetDatas[indexPath.row - 1] : nil;
         BTTAccountBlanceCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAccountBlanceCell" forIndexPath:indexPath];
         cell.model = model;
         if (indexPath.row == 1) {
             cell.mineArrowsType = BTTMineArrowsTypeHidden;
-            cell.amountLabel.text = [self.localAmount isEqualToString:@"加载中"] ? self.localAmount : [NSString stringWithFormat:@"¥ %@",[PublicMethod transferNumToThousandFormat:self.localAmount.floatValue]];
+            cell.amountLabel.text = [self.localAmount isEqualToString:@"加载中"] ? self.localAmount : [NSString stringWithFormat:@"%@ %@",unitString,[PublicMethod transferNumToThousandFormat:self.localAmount.floatValue]];
         } else {
             cell.mineArrowsType = BTTMineArrowsTypeNoHidden;
-            cell.amountLabel.text = [self.hallAmount isEqualToString:@"加载中"] ? self.hallAmount : [NSString stringWithFormat:@"¥ %@",[PublicMethod transferNumToThousandFormat:self.hallAmount.floatValue]];
+            cell.amountLabel.text = [self.hallAmount isEqualToString:@"加载中"] ? self.hallAmount : [NSString stringWithFormat:@"%@ %@",unitString,[PublicMethod transferNumToThousandFormat:self.hallAmount.floatValue]];
         }
         if (self.isShowHidden) {
             cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeUp;

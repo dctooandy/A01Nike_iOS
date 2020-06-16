@@ -324,7 +324,7 @@ typedef enum {
                 [IVHttpManager shareManager].loginName = self.account;
                 [IVHttpManager shareManager].userToken = result.body[@"token"];
                 [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
-                [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"]];
+                [self switchAccountWithName:result.body[@"loginName"]];
                 
             }else{
                 [self hideLoading];
@@ -332,6 +332,22 @@ typedef enum {
             }
             
         }];
+}
+
+- (void)switchAccountWithName:(NSString *)name{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"loginName"] = name;
+    params[@"accountType"] = @2;
+    [IVNetwork requestPostWithUrl:BTTSwitchAccount paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body!=nil) {
+                [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"]];
+            }
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
 }
 
 - (void)getCustomerInfoByLoginNameWithName:(NSString *)name{
@@ -356,6 +372,7 @@ typedef enum {
         [self hideLoading];
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (result.body!=nil) {
+                [IVHttpManager shareManager].loginName = result.body[@"loginName"];
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body];
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

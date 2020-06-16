@@ -35,9 +35,9 @@
 
 - (void)setModel:(BTTXimaItemModel *)model {
     _model = model;
-    
+    NSString *unitString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"USDT" : @"元";
     self.nameLabel.text = [NSString stringWithFormat:@"%@",model.xmName];
-    self.validAmountLabel.text = [NSString stringWithFormat:@"%@元",[PublicMethod transferNumToThousandFormat:model.xmAmount]];
+    self.validAmountLabel.text = [NSString stringWithFormat:@"%@%@",[PublicMethod transferNumToThousandFormat:model.xmAmount],unitString];
     self.totalAmountLabel.text = [NSString stringWithFormat:@"%@",[PublicMethod transferNumToThousandFormat:model.totalBetAmont]];
     self.rateLabel.text = model.xmRate;
 }

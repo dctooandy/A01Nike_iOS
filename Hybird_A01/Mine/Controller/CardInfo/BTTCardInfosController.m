@@ -33,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"银行卡资料";
+    self.title = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"提现地址管理" : @"银行卡资料";
     _haveBFB = NO;
     [self setupCollectionView];
     [self setupElements];
@@ -271,7 +271,14 @@
             for (int i =0 ; i<array.count; i++) {
                 NSDictionary *json = array[i];
                 BTTBankModel *model = [BTTBankModel yy_modelWithDictionary:json];
-                [bankList addObject:model];
+                if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+                    if (![model.accountType isEqualToString:@"信用卡"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"存折"]) {
+                        [bankList addObject:model];
+                    }
+                }else{
+                    [bankList addObject:model];
+                }
+                
                 if (i==bankList.count-1) {
                     self.bankList = bankList;
                 }
@@ -442,7 +449,7 @@
             bitollCount++;
         }
     }
-    if ([[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
+    if ([[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]||[IVNetwork savedUserInfo].newAccountFlag==1) {
         bankCardCount=3;
     }
     

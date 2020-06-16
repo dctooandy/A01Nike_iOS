@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger voiceVerifyStatus;
 @property (nonatomic, assign) NSInteger weeklyBetAmount;
 @property (nonatomic, assign) NSInteger xmFlag;
-
+@property (nonatomic, assign) NSInteger newAccountFlag;
 @end
 
 NS_ASSUME_NONNULL_END

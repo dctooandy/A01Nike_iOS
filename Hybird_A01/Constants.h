@@ -294,6 +294,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTModifyBankCard                          @"account/modifyBank"
 // 查询会员修改银行卡
 #define BTTModifyBankRequests                      @"customer/checkPhoneAndBankCard"
+// zi账户
+#define BTTSwitchAccount                      @"customer/switchAccount"
 // 删除银行卡
 #define BTTDeleteBankAccount                       @"account/delete"
 // 获取USDT钱包下钱包

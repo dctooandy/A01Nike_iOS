@@ -16,6 +16,7 @@
 @interface CNPayUSDTStep1VC ()<UITextFieldDelegate,UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *walletView;
 @property (weak, nonatomic) IBOutlet UIView *saveView;
+@property (weak, nonatomic) IBOutlet UIView *arriveView;
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
 @property (weak, nonatomic) IBOutlet UILabel *exchangeRateLabel;
 @property (weak, nonatomic) IBOutlet UITextField *usdtInputField;
@@ -316,6 +317,14 @@
     self.noteInfoView.layer.backgroundColor = [[UIColor colorWithRed:41.0f/255.0f green:45.0f/255.0f blue:54.0f/255.0f alpha:1.0f] CGColor];
     self.noteInfoView.alpha = 1;
     
+    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+        self.arriveView.hidden = YES;
+        self.exchangeRateLabel.hidden = YES;
+        self.elseRateLabel.hidden = YES;
+        [self.saveView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(45);
+        }];
+    }
 }
 
 - (void)addressCopyBtn_click:(id)sender{

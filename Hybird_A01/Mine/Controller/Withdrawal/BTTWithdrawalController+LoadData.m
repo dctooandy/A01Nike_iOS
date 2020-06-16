@@ -82,12 +82,14 @@
     NSString *rateStr = [NSString stringWithFormat:@"¥%.2lf=1BTC(实时汇率)",[btcrate doubleValue]];
     
     NSArray *names1 = @[@"",@""];
-    NSArray *names3 = @[@"金额(元)",@"比特币",@"取款至",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
-    NSArray *names4 = @[@"金额(元)",@"预估到账",@"取款至",@"",@"",@""];
+    NSArray *names3 = @[@"金额",@"比特币",@"取款至",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
+    NSArray *names4 = @[@"金额",@"预估到账",@"取款至",@"",@"",@""];
+    
+    NSString *pString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"最少1USDT" : @"最少10元";
     
     NSArray *placeholders1 = @[@"",@""];
-    NSArray *placeholders3 = @[@"最少10元",rateStr,@"***银行-尾号*****",@""];
-    NSArray *placeholders4 = @[@"最少10元",@"USDT",@"***银行-尾号*****",@"",@"",@""];
+    NSArray *placeholders3 = @[pString,rateStr,@"***银行-尾号*****",@""];
+    NSArray *placeholders4 = @[pString,@"USDT",@"***银行-尾号*****",@"",@"",@""];
     NSArray *heights1 = @[@205.0,@15.0];
     NSArray *heights3 = @[@44.0,@44.0,@44.0,@100.0];
     NSArray *heights4 = @[@44.0,@44.0,@44,@44,@27,@240.0];
@@ -136,6 +138,8 @@
         [heights removeObjectAtIndex:btcRateIndex];
         [canEdits removeObjectAtIndex:btcRateIndex];
         [values removeObjectAtIndex:btcRateIndex];
+    }else{
+        [heights replaceObjectAtIndex:3 withObject:@0];
     }
     if ([self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]) {
         [names removeObjectAtIndex:5];

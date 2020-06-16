@@ -106,7 +106,13 @@
             [IVHttpManager shareManager].loginName = loginName;
             [IVHttpManager shareManager].userToken = result.body[@"token"];
             [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
-            [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
+            NSInteger flag = [[NSString stringWithFormat:@"%@",result.body[@"newAccountFlag"]] integerValue];
+            if (flag==1) {
+                [self switchAccountWithName:loginName isBack:isback];
+            }else{
+                [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
+            }
+            
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:self.view];
         }
@@ -156,7 +162,13 @@
                 [IVHttpManager shareManager].loginName = model.login_name;
                 [IVHttpManager shareManager].userToken = result.body[@"token"];
                 [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
-                [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"] isBack:isback];
+                NSString *loginName = [NSString stringWithFormat:@"%@",result.body[@"loginName"]];
+                NSInteger flag = [[NSString stringWithFormat:@"%@",result.body[@"newAccountFlag"]] integerValue];
+                if (flag==1) {
+                    [self switchAccountWithName:loginName isBack:isback];
+                }else{
+                    [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
+                }
             }
             
         }else{
@@ -622,15 +634,35 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (result.body!=nil) {
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body];
+                
                 if (isBack) {
                     [MBProgressHUD showSuccess:@"登录成功" toView:nil];
                     [self.navigationController popViewControllerAnimated:YES];
                 }
+                
             }
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
 
+    }];
+}
+
+- (void)switchAccountWithName:(NSString *)name isBack:(BOOL)isBack{
+    [self showLoading];
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"loginName"] = name;
+    params[@"accountType"] = @2;
+    [IVNetwork requestPostWithUrl:BTTSwitchAccount paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [self hideLoading];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body!=nil) {
+                [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"] isBack:isBack];
+            }
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
     }];
 }
 
