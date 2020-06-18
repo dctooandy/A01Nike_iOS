@@ -122,6 +122,10 @@
         typeString = @"绑定USDT钱包";
     }
     
+    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+        typeString = @"提现地址";
+    }
+    
     self.cardNoLabel.text = [NSString stringWithFormat:@"%@(%ld)",typeString,(long)(self.indexPath.row + 1)];
     
     if (!isNull(model.protocol)&&![model.protocol isEqualToString:@""]&&[model.bankName isEqualToString:@"USDT"]) {

@@ -373,8 +373,12 @@
         return;
     }
     
-    if (self.amount.floatValue < 10) {
+    if (self.amount.floatValue < 10&&[IVNetwork savedUserInfo].newAccountFlag!=1) {
         [MBProgressHUD showError:@"最少10元" toView:nil];
+        return;
+    }
+    if (self.amount.floatValue < 1&&[IVNetwork savedUserInfo].newAccountFlag==1) {
+        [MBProgressHUD showError:@"最少1USDT" toView:nil];
         return;
     }
     if (self.canWithdraw>0) {

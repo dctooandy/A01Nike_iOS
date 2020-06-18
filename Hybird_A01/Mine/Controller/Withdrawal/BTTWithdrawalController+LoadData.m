@@ -51,7 +51,7 @@
             BTTBTCRateModel *model = [BTTBTCRateModel yy_modelWithJSON:result.body];
             self.btcRate = model.btcRate;
         }else{
-            [MBProgressHUD showError:@"获取比特币汇率失败，请稍后重试" toView:nil];
+            
         }
     }];
 }
@@ -74,7 +74,10 @@
 
 - (void)loadMainData {
     [self requestUSDTRate];
-    [self queryBtcRate];
+    if ([IVNetwork savedUserInfo].btcNum>0) {
+        [self queryBtcRate];
+    }
+    
     [self requestCustomerInfoEx];
     [self.sheetDatas removeAllObjects];
     NSMutableArray *sheetDatas = [NSMutableArray array];

@@ -62,7 +62,7 @@
             self.rightConstants.constant = 10;
         }
         else {
-            if ([IVNetwork savedUserInfo].bankCardNum!=0||[IVNetwork savedUserInfo].usdtNum>0) {
+            if ([IVNetwork savedUserInfo].bankCardNum!=0||[IVNetwork savedUserInfo].usdtNum>0||[IVNetwork savedUserInfo].bfbNum>0) {
                self.statusIcon.image = ImageNamed(@"me_phone_status_yes");
            } else {
                self.statusIcon.image = ImageNamed(@"me_phone_status_no");
