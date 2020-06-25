@@ -324,7 +324,13 @@ typedef enum {
                 [IVHttpManager shareManager].loginName = self.account;
                 [IVHttpManager shareManager].userToken = result.body[@"token"];
                 [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
-                [self switchAccountWithName:result.body[@"loginName"]];
+                NSInteger flag = [[NSString stringWithFormat:@"%@",result.body[@"newAccountFlag"]] integerValue];
+                if (flag==1) {
+                    [self switchAccountWithName:result.body[@"loginName"]];
+                }else{
+                    [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"]];
+                }
+                
                 
             }else{
                 [self hideLoading];
