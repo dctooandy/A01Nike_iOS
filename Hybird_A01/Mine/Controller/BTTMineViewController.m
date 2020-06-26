@@ -82,6 +82,7 @@
     self.isCompletePersonalInfo = [self isCompletePersonalInfo];
     self.isChangeMobile = NO;
     [self setupCollectionView];
+    [self requestBuyUsdtLink];
     [self queryBiShangStatus];
     [self loadPaymentDefaultData];
     [self loadMeAllData];
@@ -91,7 +92,7 @@
     if (!isShowShareNotice) {
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShareNoticeTag];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [self showShareNoticeView];
+//        [self showShareNoticeView];
     }
 }
 
@@ -153,10 +154,15 @@
                 } else {
                     cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
                 }
+                
 
                 cell.nameLabel.text = [[IVNetwork savedUserInfo].loginName containsString:@"usdt"] ? [[IVNetwork savedUserInfo].loginName stringByReplacingOccurrencesOfString:@"usdt" withString:@""] : [IVNetwork savedUserInfo].loginName;
                 cell.vipLevelLabel.text = ([IVNetwork savedUserInfo].starLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ", @([IVNetwork savedUserInfo].starLevel)];
                 weakSelf(weakSelf);
+                cell.changmodeTap = ^{
+//                    strongSelf(strongSelf);
+                    
+                };
                 cell.accountBlanceBlock = ^{
                     strongSelf(strongSelf);
                     BTTAccountBalanceController *accountBalance = [[BTTAccountBalanceController alloc] init];
@@ -253,6 +259,7 @@
                 cell.saveMoneyShowType = self.saveMoneyShowType;
                 cell.dataSource = self.bigDataSoure;
                 weakSelf(weakSelf);
+                
                 cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTMeMainModel *model = value;
@@ -283,6 +290,7 @@
             cell.dataSource = self.bigDataSoure;
             cell.saveMoneyShowType = self.saveMoneyShowType;
             weakSelf(weakSelf);
+            
             cell.clickEventBlock = ^(id _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTMeMainModel *model = value;
@@ -319,6 +327,7 @@
                 cell.dataSource = self.bigDataSoure;
                 cell.saveMoneyShowType = self.saveMoneyShowType;
                 weakSelf(weakSelf);
+                
                 cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTMeMainModel *model = value;
@@ -368,6 +377,23 @@
     }
 }
 
+- (void)jumpToBuyUsdt{
+    if (![IVNetwork savedUserInfo]) {
+        [MBProgressHUD showError:@"请先登录" toView:nil];
+        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    if (self.buyUsdtLink!=nil&&![self.buyUsdtLink isEqualToString:@""]) {
+        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+        vc.title = @"充值/购买USDT";
+        vc.webConfigModel.theme = @"outside";
+        vc.webConfigModel.newView = YES;
+        vc.webConfigModel.url = self.buyUsdtLink;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
 - (void)pushToRechargeAssistantViewController{
     if (![IVNetwork savedUserInfo]) {
         [MBProgressHUD showError:@"请先登录" toView:nil];
@@ -394,12 +420,24 @@
         BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
         [self.navigationController pushViewController:personInfo animated:YES];
         return;
+    }else if ([model.name isEqualToString:@"充值/购买USDT"]){
+        [self jumpToBuyUsdt];
+        return;
+    }
+    NSMutableArray *bigArray = [[NSMutableArray alloc]init];
+    bigArray = self.bigDataSoure;
+    if (self.bigDataSoure.count>0) {
+        BTTMeMainModel *otcmodel = self.bigDataSoure.firstObject;
+        if ([otcmodel.name isEqualToString:@"充值/购买USDT"]) {
+            [bigArray removeObjectAtIndex:0];
+        }
     }
     [[CNTimeLog shareInstance] startRecordTime:CNEventPayLaunch];
     NSMutableArray *channelArray = [NSMutableArray new];
-    [channelArray addObjectsFromArray:self.bigDataSoure];
+    [channelArray addObjectsFromArray:bigArray];
     [channelArray addObjectsFromArray:self.normalDataSoure];
     [channelArray addObjectsFromArray:self.normalDataTwo];
+    
     [self.navigationController pushViewController:[[CNPayVC alloc] initWithChannel:model.paymentType channelArray:channelArray] animated:YES];
 }
 

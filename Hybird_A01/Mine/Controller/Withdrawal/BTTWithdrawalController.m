@@ -463,6 +463,7 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSDictionary *json = @{@"status":@"success"};
             [IVLAManager singleEventId:@"A01_withdraw_create" errorCode:@"3846" errorMsg:@"网络错误信息" customsData:json];
+
             BTTWithdrawalSuccessController *vc = [[BTTWithdrawalSuccessController alloc] init];
             vc.amount = amount;
             [weakSelf.navigationController pushViewController:vc animated:YES];

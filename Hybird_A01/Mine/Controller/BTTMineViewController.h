@@ -33,6 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *preAmount; ///< 计算余额
 
+@property (nonatomic, copy) NSString *buyUsdtLink;
+
 @property (nonatomic, assign) BOOL isLoading;  ///< 余额计算中
 
 @property (nonatomic, assign) BTTMeSaveMoneyShowType saveMoneyShowType;

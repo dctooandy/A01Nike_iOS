@@ -17,6 +17,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *amountTipLabel;
+@property (weak, nonatomic) IBOutlet UIButton *changeModeBtn;
 
 
 
@@ -28,6 +29,7 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.vipLevelLabel.layer.cornerRadius = 2;
+    self.changeModeBtn.hidden = [IVNetwork savedUserInfo].newAccountFlag!=1;
 }
 
 - (void)setNoticeStr:(NSString *)noticeStr {
@@ -72,6 +74,11 @@
 - (IBAction)nicknameBtn:(UIButton *)sender {
     if (self.buttonClickBlock) {
         self.buttonClickBlock(sender);
+    }
+}
+- (IBAction)changeModeBtn_click:(id)sender {
+    if (self.changmodeTap) {
+        self.changmodeTap();
     }
 }
 

@@ -83,6 +83,7 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSDictionary *json = @{@"status":@"success"};
             [IVLAManager singleEventId:@"A01_bankcard_update" errorCode:@"3846" errorMsg:@"网络错误信息" customsData:json];
+
             [BTTHttpManager fetchUserInfoCompleteBlock:nil];
             if (self.isWithDraw) {
                 [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"bitollAddCard"];

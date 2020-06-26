@@ -93,6 +93,16 @@
                             <action selector="nicknameBtn:" destination="gTV-IL-0wX" eventType="touchUpInside" id="xEE-Hk-lUp"/>
                         </connections>
                     </button>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hqk-zs-URQ">
+                        <rect key="frame" x="248" y="114.5" width="112" height="28"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <state key="normal" backgroundImage="go_main_mode">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="changeModeBtn_click:" destination="gTV-IL-0wX" eventType="touchUpInside" id="y0O-A0-Kg6"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
@@ -109,6 +119,7 @@
                 <constraint firstAttribute="trailing" secondItem="frt-Nf-haE" secondAttribute="trailing" constant="15" id="UMz-Iz-luU"/>
                 <constraint firstItem="jxH-0f-v10" firstAttribute="centerY" secondItem="BxU-fA-s9V" secondAttribute="centerY" constant="-5" id="Wpc-Y6-skB"/>
                 <constraint firstItem="v4d-Co-HZP" firstAttribute="centerY" secondItem="heZ-Qw-qv2" secondAttribute="centerY" id="XRm-Ve-cg5"/>
+                <constraint firstItem="hqk-zs-URQ" firstAttribute="trailing" secondItem="frt-Nf-haE" secondAttribute="trailing" id="a97-tU-QcO"/>
                 <constraint firstAttribute="bottom" secondItem="BxU-fA-s9V" secondAttribute="bottom" id="aSn-e7-n4e"/>
                 <constraint firstItem="heZ-Qw-qv2" firstAttribute="leading" secondItem="jxH-0f-v10" secondAttribute="trailing" constant="12.5" id="ahs-9U-8Vl"/>
                 <constraint firstItem="frt-Nf-haE" firstAttribute="centerY" secondItem="BxU-fA-s9V" secondAttribute="centerY" constant="5" id="eUJ-Hp-C95"/>
@@ -117,11 +128,13 @@
                 <constraint firstItem="jxH-0f-v10" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="nmO-gW-VBN"/>
                 <constraint firstAttribute="trailing" secondItem="BxU-fA-s9V" secondAttribute="trailing" id="rm0-Uo-uKJ"/>
                 <constraint firstItem="v4d-Co-HZP" firstAttribute="leading" secondItem="heZ-Qw-qv2" secondAttribute="trailing" constant="5" id="sDp-Ag-8s5"/>
+                <constraint firstItem="hqk-zs-URQ" firstAttribute="top" secondItem="frt-Nf-haE" secondAttribute="bottom" constant="8" id="yvC-Ht-j1D"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
                 <outlet property="amountLabel" destination="6c6-Hq-4Ip" id="F0P-OA-eJA"/>
                 <outlet property="amountTipLabel" destination="gPM-h9-QdU" id="k43-IR-3rS"/>
+                <outlet property="changeModeBtn" destination="hqk-zs-URQ" id="xAU-GB-IZn"/>
                 <outlet property="nameLabel" destination="heZ-Qw-qv2" id="wsD-4R-Yho"/>
                 <outlet property="nickNameBtn" destination="uek-ZS-yDc" id="Zcu-39-Ten"/>
                 <outlet property="topBgView" destination="SNo-89-Eka" id="ZVB-4w-Ce5"/>
@@ -132,6 +145,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="go_main_mode" width="112" height="28"/>
         <image name="horn" width="16.5" height="12"/>
         <image name="me_edit" width="24" height="24"/>
         <image name="me_headerIcon" width="46" height="46"/>

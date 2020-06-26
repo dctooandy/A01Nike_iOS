@@ -207,7 +207,7 @@
         cell.titleLb.font = [UIFont boldSystemFontOfSize:13];
     }
     cell.channelIV.image = [UIImage imageNamed:channel.iconName];
-    cell.discountImg.hidden = ![channel.name isEqualToString:@"币付宝"];
+//    cell.discountImg.hidden = ![channel.name isEqualToString:@"币付宝"];
     
     // 默认选中第一个可以支付的渠道
     if (indexPath.row == _currentSelectedIndex) {

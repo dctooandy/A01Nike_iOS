@@ -410,6 +410,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTCreateBfbAccount                      @"account/createBitollAccount"
 //查询USDT钱包类型
 #define BTTQueryUSDTWallet                         @"account/queryWalletType"
+//充值购买USDT链接
+#define BTTBuyUSDTLINK                         @"deposit/queryDepositCounter"
 //
 #define BTTQueryLoginedShow                        @"_extra_/api/v1/activity/checkHasPop"
 #define BTTUnreadInsideMessage                      @"letter/query"

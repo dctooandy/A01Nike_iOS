@@ -46,6 +46,7 @@
 #if DEBUG
 #else
         if (EnvirmentType == 2) {
+            
             //监听网关切换
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gatewaySwitchNotification:) name:IVNGatewaySwitchNotification object:nil];
         }
@@ -60,6 +61,7 @@
         return [IVNetwork savedUserInfo].loginName==nil?@"":[IVNetwork savedUserInfo].loginName;
     }];
 }
+
 
 #pragma mark ---------------------检测地区限制--------------------------------------------
 - (void)checkArearLimit
@@ -128,6 +130,7 @@
     [self getWMSForm];
     [self setupTabbarController];
     [self.window makeKeyAndVisible];
+    [self initAnalysis];
     [self initRemoteNotificationWithOptions:launchOptions];
     [CNPreCacheMananger prepareCacheDataNormal];
     [CNPreCacheMananger prepareCacheDataNeedLogin];

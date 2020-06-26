@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,17 +14,26 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homepage_pic1" translatesAutoresizingMaskIntoConstraints="NO" id="uRX-8s-PFj">
-                    <rect key="frame" x="50" y="150" width="364" height="586"/>
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide_2" translatesAutoresizingMaskIntoConstraints="NO" id="uRX-8s-PFj">
+                    <rect key="frame" x="295.33333333333331" y="545.66666666666663" width="106.66666666666669" height="190.33333333333337"/>
                 </imageView>
                 <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homepage_button1" translatesAutoresizingMaskIntoConstraints="NO" id="wFz-5r-cq3">
-                    <rect key="frame" x="87" y="572" width="240" height="119"/>
+                    <rect key="frame" x="147" y="631.33333333333337" width="120" height="59.666666666666629"/>
+                </imageView>
+                <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guide_1" translatesAutoresizingMaskIntoConstraints="NO" id="dYu-ig-ydv">
+                    <rect key="frame" x="203" y="454" width="191" height="93"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="93" id="zU1-4O-wdZ"/>
+                        <constraint firstAttribute="width" constant="191" id="zqS-tl-j4Q"/>
+                    </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="wFz-5r-cq3" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="NOe-2D-qaa"/>
-                <constraint firstItem="uRX-8s-PFj" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="efR-gP-GK9"/>
+                <constraint firstItem="wFz-5r-cq3" firstAttribute="top" secondItem="dYu-ig-ydv" secondAttribute="bottom" constant="84.329999999999998" id="NaN-jH-o42"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="dYu-ig-ydv" secondAttribute="trailing" constant="20" id="XC0-gI-21C"/>
+                <constraint firstItem="uRX-8s-PFj" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" constant="-12" id="efR-gP-GK9"/>
                 <constraint firstItem="uRX-8s-PFj" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="vHa-fj-k1h"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="wFz-5r-cq3" secondAttribute="bottom" constant="45" id="zSz-g4-B6t"/>
             </constraints>
@@ -34,7 +43,8 @@
         </view>
     </objects>
     <resources>
+        <image name="guide_1" width="203.66667175292969" height="41.666667938232422"/>
+        <image name="guide_2" width="106.66666412353516" height="190.33332824707031"/>
         <image name="homepage_button1" width="120" height="59.666667938232422"/>
-        <image name="homepage_pic1" width="182" height="293"/>
     </resources>
 </document>

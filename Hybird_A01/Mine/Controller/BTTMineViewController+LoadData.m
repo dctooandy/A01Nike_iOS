@@ -36,15 +36,15 @@
         [self.normalDataTwo removeAllObjects];
     }
     
-    NSArray *icons =  @[@"me_bankscan",@"me_jdscan",@"me_aliwap",@"me_online",@"me_aliSacn",@"me_wechatscan",@"me_qqScan",@"me_hand",@"me_wap",@"me_YSF",@"me_quick",@"me_bibao",@"me_pointCard",@"me_btc",@"me_tiaoma",@"me_bishang",@"me_bank",@"me_wechatsecond",@"me_alipaySecond",@"me_usdt",@"me_bfb"];
-    NSArray *names = @[@"银联扫码",@"京东扫码",@"支付宝wap",@"在线支付",@"支付宝扫码",@"微信扫码",@"QQ扫码",@"手工存款",@"微信/QQ/京东wap",@"云闪付扫码",@"银行快捷网银",@"点卡",@"钻石币",@"比特币",@"微信条码支付",@"币商充值",@"迅捷网银",@"微信秒存",@"支付宝秒存",@"泰达币-USDT",@"币付宝"];
+    NSArray *icons =  @[@"me_bankscan",@"me_jdscan",@"me_aliwap",@"me_online",@"me_aliSacn",@"me_wechatscan",@"me_qqScan",@"me_hand",@"me_wap",@"me_YSF",@"me_quick",@"me_bibao",@"me_pointCard",@"me_btc",@"me_tiaoma",@"me_bishang",@"me_bank",@"me_wechatsecond",@"me_alipaySecond",@"me_usdt",@"me_bfb",@"recharge_otc_tab"];
+    NSArray *names = @[@"银联扫码",@"京东扫码",@"支付宝wap",@"在线支付",@"支付宝扫码",@"微信扫码",@"QQ扫码",@"手工存款",@"微信/QQ/京东wap",@"云闪付扫码",@"银行快捷网银",@"点卡",@"钻石币",@"比特币",@"微信条码支付",@"币商充值",@"迅捷网银",@"微信秒存",@"支付宝秒存",@"泰达币-USDT",@"币付宝",@"充值/购买USDT"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;
         model.iconName = icons[index];
         model.available = YES;
-        if ([model.name isEqualToString:@"银联扫码"] || [model.name isEqualToString:@"微信扫码"] || [model.name isEqualToString:@"云闪付扫码"]||[model.name isEqualToString:@"币商充值"]||[model.name isEqualToString:@"泰达币-USDT"]||[model.name isEqualToString:@"币付宝"]) {
+        if ([model.name isEqualToString:@"银联扫码"] || [model.name isEqualToString:@"微信扫码"] || [model.name isEqualToString:@"云闪付扫码"]||[model.name isEqualToString:@"币商充值"]||[model.name isEqualToString:@"泰达币-USDT"]||[model.name isEqualToString:@"币付宝"]||[model.name isEqualToString:@"充值/购买USDT"]) {
             [self.bigDataSoure addObject:model];
         } else if ([model.name isEqualToString:@"QQ扫码"] ||
                    [model.name isEqualToString:@"京东扫码"] ||
@@ -58,6 +58,16 @@
         }
     }
     [self setupElements];
+}
+
+- (void)requestBuyUsdtLink{
+    [IVNetwork requestPostWithUrl:BTTBuyUSDTLINK paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString *link = [NSString stringWithFormat:@"%@",result.body[@"payUrl"]];
+            self.buyUsdtLink = link;
+        }
+    }];
 }
 
 - (void)loadWeiXinRediect {
@@ -143,6 +153,14 @@
                     CNPaymentModel *model = [CNPaymentModel yy_modelWithJSON:dict];
                     [payments addObject:model];
                     
+                    if ([model.payTypeName isEqualToString:@"OTC"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
+                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                        mainModel.name = @"充值/购买USDT";
+                        mainModel.iconName = @"recharge_otc_tab";
+                        mainModel.paymentType = model.payType;
+                        mainModel.payModel = model;
+                        [self.bigDataSoure insertObject:mainModel atIndex:0];
+                    }
                     
                     if ([model.payTypeName isEqualToString:@"银联扫码"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
@@ -325,7 +343,7 @@
                     [self.bigDataSoure addObject:usdtModel];
                 }
                 if (haveBFB) {
-                    [self.bigDataSoure insertObject:bfbModel atIndex:0];
+                    [self.bigDataSoure addObject:bfbModel];
                 }
                 
                 

@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadUserInfo;
 
+- (void)requestBuyUsdtLink;
+
 - (void)loadBankList;
 
 - (void)loadBtcRate;
