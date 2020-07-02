@@ -23,7 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) CGFloat usdtRate;
 @property (nonatomic, assign) BOOL isUSDT;
 @property (nonatomic, copy) NSString *btcRate;
-
+@property (nonatomic, copy) NSString *sellUsdtLink;
+@property (nonatomic, assign) BOOL isSellUsdt;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -56,6 +56,40 @@
     }];
 }
 
+
+- (void)requestSellUsdtSwitch{
+    self.isSellUsdt = NO;
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTOneKeySellUSDT paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [self hideLoading];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString *isOpen = [NSString stringWithFormat:@"%@",result.body];
+            if ([isOpen isEqualToString:@"1"]) {
+                self.isSellUsdt = YES;
+                [self requestSellUsdtLink];
+                
+               
+            }
+            [self.collectionView reloadData];
+        }
+    }];
+}
+
+- (void)requestSellUsdtLink{
+    [self showLoading];
+    NSDictionary *params = @{@"transferType":@"1"};
+    [IVNetwork requestPostWithUrl:BTTBuyUSDTLINK paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [self hideLoading];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString *link = [NSString stringWithFormat:@"%@",result.body[@"payUrl"]];
+            self.sellUsdtLink = link;
+        }
+    }];
+}
+
+
 - (void)requestCustomerInfoEx{
 //    BTTGetLoginInfoByNameEx
     [self showLoading];

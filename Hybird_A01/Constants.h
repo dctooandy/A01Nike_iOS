@@ -402,6 +402,9 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTQueryBiShangOpen                        @"_extra_/api/v1/agent/getBMerchantStatus"
 //查询是否开启迅捷存款和开户礼金
 #define BTTGiftRebateStatus                        @"_extra_/api/v1/app/promo/giftRebateStatus"
+//查询是否开启迅捷存款和开户礼金
+#define BTTOneKeySellUSDT                        @"_extra_/api/v1/getOTCStatus"
+
 //点卡存款
 #define BTTPointCardPayment                        @"deposit/pointCardPayment"
 //查询点卡

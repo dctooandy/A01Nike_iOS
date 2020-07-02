@@ -73,6 +73,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.saveMoneyCount = 4;
+    self.isOpenSellUsdt = NO;
     self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
     self.saveMoneyTimesType = BTTSaveMoneyTimesTypeLessTen;
     self.title = @"会员中心";
@@ -502,10 +503,26 @@
             BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
-    } else if (indexPath.row == self.saveMoneyCount + 4) {
+    }else if ((indexPath.row == self.saveMoneyCount + 4&&self.isOpenSellUsdt)) {
+        
+        if (![IVNetwork savedUserInfo]) {
+            [MBProgressHUD showError:@"请先登录" toView:nil];
+            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            return;
+        }
+        if (self.sellUsdtLink!=nil&&![self.sellUsdtLink isEqualToString:@""]) {
+            BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+            vc.title = @"一键卖币";
+            vc.webConfigModel.theme = @"outside";
+            vc.webConfigModel.newView = YES;
+            vc.webConfigModel.url = self.sellUsdtLink;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    } else if ((indexPath.row == self.saveMoneyCount + 4&&!self.isOpenSellUsdt)||(indexPath.row == self.saveMoneyCount + 5&&self.isOpenSellUsdt)) {
         BTTXimaController *vc = [[BTTXimaController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.saveMoneyCount + 5) {
+    } else if ((indexPath.row == self.saveMoneyCount + 5&&!self.isOpenSellUsdt)||(indexPath.row == self.saveMoneyCount + 6&&self.isOpenSellUsdt)) {
         if (self.isCompletePersonalInfo) {
             BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
@@ -513,7 +530,7 @@
             BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         }
-    } else if (indexPath.row == self.saveMoneyCount + 6) {
+    } else if ((indexPath.row == self.saveMoneyCount + 6&&!self.isOpenSellUsdt)||(indexPath.row == self.saveMoneyCount + 7&&self.isOpenSellUsdt)) {
         UIViewController *vc = nil;
         if ([IVNetwork savedUserInfo].mobileNoBind == 1) {
             BTTVerifyTypeSelectController *selectVC = [BTTVerifyTypeSelectController new];
@@ -525,7 +542,7 @@
             vc = bindingMobileVC;
         }
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.saveMoneyCount + 7) {
+    } else if ((indexPath.row == self.saveMoneyCount + 7&&!self.isOpenSellUsdt)||(indexPath.row == self.saveMoneyCount + 8&&self.isOpenSellUsdt)) {
         BTTPersonalInfoController *personInfo = [[BTTPersonalInfoController alloc] init];
         [self.navigationController pushViewController:personInfo animated:YES];
     } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 4&&[IVNetwork savedUserInfo].newAccountFlag!=1) {

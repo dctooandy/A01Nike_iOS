@@ -41,6 +41,7 @@
     [super viewDidLoad];
     self.title = @"取款";
     self.selectIndex = 0;
+    self.isSellUsdt = NO;
     self.amount = @"";
     self.usdtAmount = @"";
     self.password = @"";
@@ -48,6 +49,7 @@
     [self setupCollectionView];
     [self loadMainData];
     [self refreshBankList];
+    [self requestSellUsdtSwitch];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -112,7 +114,7 @@
         
         BTTBitollWithDrawCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBitollWithDrawCell" forIndexPath:indexPath];
         BOOL imgHidden = ![self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"];
-        [cell setImageViewHidden:imgHidden onekeyHidden:!imgHidden];
+        [cell setImageViewHidden:imgHidden onekeyHidden:!imgHidden sellHidden:self.isSellUsdt];
         cell.confirmTap = ^{
             if (self.bankList[self.selectIndex].accountId==nil) {
                             [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCard"];
@@ -121,6 +123,16 @@
                 return;
             }
             [self submitWithDraw];
+        };
+        cell.oneKeySell = ^{
+            if (self.sellUsdtLink!=nil&&![self.sellUsdtLink isEqualToString:@""]) {
+                BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+                vc.title = @"一键卖币";
+                vc.webConfigModel.theme = @"outside";
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.url = self.sellUsdtLink;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         };
         cell.bindTap = ^{
             [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCard"];
@@ -461,11 +473,10 @@
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSDictionary *json = @{@"status":@"success"};
-            [IVLAManager singleEventId:@"A01_withdraw_create" errorCode:@"3846" errorMsg:@"网络错误信息" customsData:json];
-
             BTTWithdrawalSuccessController *vc = [[BTTWithdrawalSuccessController alloc] init];
             vc.amount = amount;
+            vc.isSell = self.isSellUsdt;
+            vc.sellLink = self.sellUsdtLink;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];

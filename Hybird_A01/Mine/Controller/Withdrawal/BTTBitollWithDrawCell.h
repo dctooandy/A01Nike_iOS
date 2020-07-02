@@ -14,8 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) void (^confirmTap)(void);
 @property (nonatomic, copy) void (^bindTap)(void);
+@property (nonatomic, copy) void (^oneKeySell)(void);
 @property UIButton *confirmBtn;
-- (void)setImageViewHidden:(BOOL)imgHidden onekeyHidden:(BOOL)onekeyHidden;
+- (void)setImageViewHidden:(BOOL)imgHidden onekeyHidden:(BOOL)onekeyHidden sellHidden:(BOOL)sellHidden;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -34,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *preAmount; ///< 计算余额
 
 @property (nonatomic, copy) NSString *buyUsdtLink;
+@property (nonatomic, copy) NSString *sellUsdtLink;
 
 @property (nonatomic, assign) BOOL isLoading;  ///< 余额计算中
 
@@ -46,6 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setupElements;
 
 @property (nonatomic, strong) BTTCustomerBalanceModel *balanceModel;
+
+@property (nonatomic, assign) BOOL isOpenSellUsdt;
 
 @end
 

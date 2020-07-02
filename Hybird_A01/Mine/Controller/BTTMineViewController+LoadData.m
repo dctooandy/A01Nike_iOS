@@ -390,10 +390,53 @@
     if (self.mainDataOne.count) {
         [self.mainDataOne removeAllObjects];
     }
+    
+    self.isOpenSellUsdt = NO;
     NSString *cardString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"提现地址管理" : @"银行卡资料";
     NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
     NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
-    
+    [self handleDataOneWithNames:names icons:icons];
+    [IVNetwork requestPostWithUrl:BTTOneKeySellUSDT paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if (self.mainDataOne.count) {
+            [self.mainDataOne removeAllObjects];
+        }
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString *isOpen = [NSString stringWithFormat:@"%@",result.body];
+            if ([isOpen isEqualToString:@"1"]) {
+                self.isOpenSellUsdt = YES;
+                [self requestSellUsdtLink];
+                NSString *cardString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"提现地址管理" : @"银行卡资料";
+                NSMutableArray *names = @[@"取款",@"一键卖币",@"洗码",cardString,@"绑定手机",@"个人资料"].mutableCopy;
+                NSMutableArray *icons = @[@"me_withdrawal",@"me_sell_usdt",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
+                [self handleDataOneWithNames:names icons:icons];
+            }else{
+                NSString *cardString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"提现地址管理" : @"银行卡资料";
+                NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
+                NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
+                [self handleDataOneWithNames:names icons:icons];
+            }
+        }else{
+            NSString *cardString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"提现地址管理" : @"银行卡资料";
+            NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
+            NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
+            [self handleDataOneWithNames:names icons:icons];
+        }
+    }];
+}
+
+- (void)requestSellUsdtLink{
+    NSDictionary *params = @{@"transferType":@"1"};
+    [IVNetwork requestPostWithUrl:BTTBuyUSDTLINK paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString *link = [NSString stringWithFormat:@"%@",result.body[@"payUrl"]];
+            self.sellUsdtLink = link;
+        }
+    }];
+}
+
+- (void)handleDataOneWithNames:(NSArray *)names icons:(NSArray *)icons{
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];

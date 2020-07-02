@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTWithdrawalSuccessController : BTTCollectionViewController
 @property(nonatomic, copy)NSString *amount;
+@property (nonatomic, assign) BOOL isSell;
+@property (nonatomic, copy) NSString *sellLink;
 @end
 
 NS_ASSUME_NONNULL_END

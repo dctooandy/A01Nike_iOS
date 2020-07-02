@@ -13,6 +13,7 @@
 @property (nonatomic, strong) UIImageView *imgView;
 @property (nonatomic, strong) UIButton *onekeyBtn;
 @property (nonatomic, strong) UIButton *downloadBtn;
+@property (nonatomic, strong) UIButton *onekeySellBtn;
 @end
 
 @implementation BTTBitollWithDrawCell
@@ -46,6 +47,16 @@
         [infoView addSubview:imgView];
         _imgView = imgView;
         
+        UIButton *oneKeySellBtn = [[UIButton alloc]initWithFrame:CGRectMake(16, 94, SCREEN_WIDTH-32, 44)];
+        [oneKeySellBtn setTitle:@"一键卖币" forState:UIControlStateNormal];
+        
+        oneKeySellBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        [oneKeySellBtn setTitleColor:COLOR_HEX(0x2497FF) forState:UIControlStateNormal];
+        [oneKeySellBtn addTarget:self action:@selector(oneKeySellUsdt_click) forControlEvents:UIControlEventTouchUpInside];
+        [infoView addSubview:oneKeySellBtn];
+        _onekeySellBtn = oneKeySellBtn;
+        
+        
         UIButton *bindButton = [[UIButton alloc]initWithFrame:CGRectMake(16, 74, SCREEN_WIDTH-32, 44)];
         [bindButton setTitle:@"一键添加币付宝钱包?" forState:UIControlStateNormal];
         
@@ -54,6 +65,8 @@
         [bindButton addTarget:self action:@selector(bindBtn_click) forControlEvents:UIControlEventTouchUpInside];
         [infoView addSubview:bindButton];
         _onekeyBtn = bindButton;
+        
+        
         
         UIButton *downloadBtn = [[UIButton alloc]initWithFrame:CGRectMake(16, 118, SCREEN_WIDTH-32, 120)];
         [downloadBtn setImage:[UIImage imageNamed:@"bfb_banner"] forState:UIControlStateNormal];
@@ -66,10 +79,17 @@
     return self;
 }
 
-- (void)setImageViewHidden:(BOOL)imgHidden onekeyHidden:(BOOL)onekeyHidden{
-    self.imgView.hidden = imgHidden;
+- (void)setImageViewHidden:(BOOL)imgHidden onekeyHidden:(BOOL)onekeyHidden sellHidden:(BOOL)sellHidden{
+    self.imgView.hidden = YES;
     self.onekeyBtn.hidden = onekeyHidden;
     self.downloadBtn.hidden = onekeyHidden;
+    self.onekeySellBtn.hidden = !sellHidden;
+}
+
+- (void)oneKeySellUsdt_click{
+    if (self.oneKeySell) {
+        self.oneKeySell();
+    }
 }
 
 - (void)confirmBtn_click{

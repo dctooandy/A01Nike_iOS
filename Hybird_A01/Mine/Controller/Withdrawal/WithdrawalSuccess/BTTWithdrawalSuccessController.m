@@ -9,6 +9,7 @@
 #import "BTTWithdrawalSuccessController.h"
 #import "BTTWithdrawalSuccessCell.h"
 #import "BTTBindingMobileBtnCell.h"
+#import "OnekeySellUsdtCell.h"
 
 @interface BTTWithdrawalSuccessController ()<BTTElementsFlowLayoutDelegate>
 
@@ -28,6 +29,7 @@
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTWithdrawalSuccessCell" bundle:nil] forCellWithReuseIdentifier:@"BTTWithdrawalSuccessCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
+    [self.collectionView registerClass:[OnekeySellUsdtCell class] forCellWithReuseIdentifier:@"OnekeySellUsdtCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -39,6 +41,20 @@
     if (indexPath.row == 0) {
         BTTWithdrawalSuccessCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalSuccessCell" forIndexPath:indexPath];
         cell.amountLabel.text = [PublicMethod getMoneyString:[self.amount doubleValue]];
+        return cell;
+    } else if (indexPath.row == 2){
+        OnekeySellUsdtCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OnekeySellUsdtCell" forIndexPath:indexPath];
+        [cell sellHidden:self.isSell];
+        cell.oneKeySell = ^{
+            if (self.sellLink!=nil&&![self.sellLink isEqualToString:@""]) {
+                BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+                vc.title = @"一键卖币";
+                vc.webConfigModel.theme = @"outside";
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.url = self.sellLink;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        };
         return cell;
     } else {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
@@ -94,9 +110,11 @@
         [self.elementsHight removeAllObjects];
     }
     NSMutableArray *elementsHight = [NSMutableArray array];
-    for (int i = 0; i < 2; i ++) {
+    for (int i = 0; i < 3; i ++) {
         if (i == 0) {
              [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 344)]];
+        }else if (i == 2) {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         } else {
              [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
         }
