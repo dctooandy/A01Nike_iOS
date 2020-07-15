@@ -36,6 +36,7 @@
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>dcbox</string>
 		<string>bitoll</string>
 		<string>mqqapi</string>
 		<string>mqqwpa</string>

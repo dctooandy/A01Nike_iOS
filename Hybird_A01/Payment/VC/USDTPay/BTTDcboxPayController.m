@@ -381,7 +381,6 @@
             if ([[UIApplication sharedApplication]
               canOpenURL:[NSURL URLWithString:address]]){
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:address]];
-                [self popToRootViewController];
               
             }else{
             }
