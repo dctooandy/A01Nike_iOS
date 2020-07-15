@@ -178,7 +178,7 @@
     }else{
         [heights replaceObjectAtIndex:3 withObject:@0];
     }
-    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]) {
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]) {
         [names removeObjectAtIndex:5];
         [placeholders removeObjectAtIndex:5];
         [heights removeObjectAtIndex:5];

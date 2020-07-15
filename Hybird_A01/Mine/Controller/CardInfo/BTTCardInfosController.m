@@ -25,8 +25,12 @@
 
 @property (nonatomic, copy) NSArray<BTTBankModel *> *bankList;
 @property (nonatomic, assign) BOOL isChecking; //正在审核
-@property (nonatomic, assign) BTTCanAddCardType canAddType;
 @property (nonatomic, assign) BOOL haveBFB;
+@property (nonatomic, assign) NSInteger bankNum;
+@property (nonatomic, assign) NSInteger bitNum;
+@property (nonatomic, assign) NSInteger dcboxNum;
+@property (nonatomic, assign) NSInteger usdtNum;
+@property (nonatomic, copy) NSString *titleString;
 @end
 
 @implementation BTTCardInfosController
@@ -35,6 +39,10 @@
     [super viewDidLoad];
     self.title = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"提现地址管理" : @"银行卡资料";
     _haveBFB = NO;
+    _bankNum = 0;
+    _bitNum = 0;
+    _dcboxNum = 0;
+    _usdtNum = 0;
     [self setupCollectionView];
     [self setupElements];
 }
@@ -77,33 +85,19 @@
         return cell;
     }else if (indexPath.row==self.bankList.count){
         BTTCardInfoAddCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardInfoAddCell" forIndexPath:indexPath];
-        cell.titleLabel.text = @"快速添加币付宝钱包";
+        cell.titleLabel.text = @"快速添加小金库钱包";
         return cell;
     } else {
         BTTCardInfoAddCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardInfoAddCell" forIndexPath:indexPath];
-        switch (self.canAddType) {
-            case BTTCanAddCardTypeBTC:
-                cell.titleLabel.text = @"添加比特币钱包";
-                break;
-            case BTTCanAddCardTypeBank:
-                cell.titleLabel.text = @"添加银行卡";
-                break;
-            case BTTCanAddCardTypeUSDT:
-                cell.titleLabel.text = @"添加币付宝钱包";
-                break;
-            case BTTCanAddCardTypeBTCORUSDT:
-                cell.titleLabel.text = @"添加比特币钱包/币付宝钱包";
-                break;
-            case BTTCanAddCardTypeBankORUSDT:
-                cell.titleLabel.text = @"添加银行卡/币付宝钱包";
-                break;
-            case BTTCanAddCardTypeBankORBTC:
-                cell.titleLabel.text = @"添加银行卡/比特币钱包";
-                break;
-            default:
-                cell.titleLabel.text = @"添加银行卡/比特币钱包/币付宝钱包";
-                break;
-        }
+        NSString *bankString = _bankNum<3 ? @"银行卡/" : @"";
+        NSString *bitString = _bitNum==1 ? @"" : @"比特币钱包/";
+        NSString *usdtString = _usdtNum<5 ? @"USDT钱包/" : @"";
+        NSString *dcboxString = _dcboxNum==1 ? @"" : @"小金库钱包/";
+        NSString *bindString = [NSString stringWithFormat:@"添加%@%@%@%@",bankString,bitString,usdtString,dcboxString];
+        NSString *textString = [bindString substringToIndex:bindString.length-1];
+        self.titleString = textString;
+        cell.titleLabel.text = textString;
+        
         return cell;
     }
     
@@ -115,46 +109,19 @@
     }
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     if (indexPath.row == self.bankList.count+1) {
-        switch (self.canAddType) {
-            case BTTCanAddCardTypeAll:{
-                [self showCanAddSheetWithCard:YES btc:YES usdt:YES];
-            }
-                break;
-            case BTTCanAddCardTypeBank:{
-                [self addBankCard];
-            }
-                break;
-            case BTTCanAddCardTypeBTC:{
-                [self addBTC];
+        NSString *titleString = [self.titleString stringByReplacingOccurrencesOfString:@"添加" withString:@""];
+        [self showCanAddSheetWithTitles:titleString];
+        
                 
-            }
-                break;
-            case BTTCanAddCardTypeUSDT:{
-                [self addUSDT];
-            }
-                break;
-            case BTTCanAddCardTypeBankORBTC:{
-                [self showCanAddSheetWithCard:YES btc:YES usdt:NO];
-            }
-                break;
-            case BTTCanAddCardTypeBankORUSDT:{
-                [self showCanAddSheetWithCard:YES btc:NO usdt:YES];
-            }
-                break;
-            case BTTCanAddCardTypeBTCORUSDT:{
-                [self showCanAddSheetWithCard:NO btc:YES usdt:YES];
-            }
-                break;
-            default:
-                break;
-        }
     }else if (indexPath.row == self.bankList.count){
         
     }
 }
 
-- (void)showCanAddSheetWithCard:(BOOL)card btc:(BOOL)btc usdt:(BOOL)usdt{
+- (void)showCanAddSheetWithTitles:(NSString *)titles{
     weakSelf(weakSelf)
+    
+    NSArray *titleArray = [titles componentsSeparatedByString:@"/"];
     
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:@"请选择以下方式" preferredStyle:UIAlertControllerStyleActionSheet];
     
@@ -163,44 +130,30 @@
     [alertControllerMessageStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 7)];
     [alertVC setValue:alertControllerMessageStr forKey:@"attributedMessage"];
     
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"银行卡" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [weakSelf addBankCard];
-    }];
-    [action1 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
-    
-    UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"比特币钱包" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [weakSelf addBTC];
-    }];
-    
-    [action2 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
-    
-    UIAlertAction *action4 = [UIAlertAction actionWithTitle:@"币付宝钱包" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [weakSelf addUSDT];
-    }];
-    [action4 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
-    
-    UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-    }];
-    [action3 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
-    
-    if (card&&btc&&usdt) {
-        [alertVC addAction:action1];
-        [alertVC addAction:action2];
-        [alertVC addAction:action4];
-        [alertVC addAction:action3];
-    }else if (!card&&btc&&usdt){
-        [alertVC addAction:action2];
-        [alertVC addAction:action4];
-        [alertVC addAction:action3];
-    }else if (card&&!btc&&usdt){
-        [alertVC addAction:action1];
-        [alertVC addAction:action4];
-        [alertVC addAction:action3];
-    }else if (card&&btc&&!usdt){
-        [alertVC addAction:action1];
-        [alertVC addAction:action2];
-        [alertVC addAction:action3];
+    for (int i = 0; i<titleArray.count; i++) {
+        NSString *title = titleArray[i];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            if ([title isEqualToString:@"银行卡"]) {
+                [weakSelf addBankCard];
+            }else if ([title isEqualToString:@"比特币钱包"]){
+                [weakSelf addBTC];
+            }else if ([title isEqualToString:@"USDT钱包"]){
+                [weakSelf addUSDT];
+            }else if ([title isEqualToString:@"小金库钱包"]){
+                [weakSelf addDCBOX];
+            }
+            
+        }];
+        [action setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
+        [alertVC addAction:action];
+        if (i==titleArray.count-1) {
+            UIAlertAction *action3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            }];
+            [action3 setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
+            [alertVC addAction:action3];
+        }
     }
+
     
     [self presentViewController:alertVC animated:YES completion:nil];
 }
@@ -247,7 +200,7 @@
             if (i==self.bankList.count) {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
             }else{
-                if (self.isChecking || self.canAddType == BTTCanAddCardTypeNone) {
+                if (self.isChecking || (_usdtNum==5&&_dcboxNum==1&&_bankNum==3&&_bitNum==1)) {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
                 } else {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 174)]];
@@ -289,7 +242,8 @@
                     break;
                 }
             }
-            [self setupElements];
+            [self handleCardNum];
+            
         }
     }
     
@@ -326,15 +280,29 @@
 - (void)addUSDT
 {
     if ([IVNetwork savedUserInfo].mobileNoBind==1) {
-        [[NSUserDefaults standardUserDefaults]setInteger:5 forKey:@"BITOLLBACK"];
         BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
         vc.verifyType = BTTSafeVerifyTypeMobileAddUSDTCard;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else {
+        [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+        BTTBindingMobileController *vc = [BTTBindingMobileController new];
+        vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddUSDTCard;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+- (void)addDCBOX
+{
+    if ([IVNetwork savedUserInfo].mobileNoBind==1) {
+        [[NSUserDefaults standardUserDefaults]setInteger:5 forKey:@"BITOLLBACK"];
+        BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
+        vc.verifyType = BTTSafeVerifyTypeMobileAddDCBOXCard;
         [self.navigationController pushViewController:vc animated:YES];
     } else {
         [[NSUserDefaults standardUserDefaults]setInteger:4 forKey:@"BITOLLBACK"];
         [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
         BTTBindingMobileController *vc = [BTTBindingMobileController new];
-        vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddUSDTCard;
+        vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddDCBOXCard;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -431,68 +399,29 @@
         }
     }];
 }
-- (BTTCanAddCardType)canAddType
+- (void)handleCardNum
 {
-    if (self.bankList.count == 9) {
-        return BTTCanAddCardTypeNone;
-    }
-    int bankCardCount = 0;
-    
-    int btcCardCount = 0;
-    int bitollCount = 0;
+    NSMutableArray *bList = [[NSMutableArray alloc]initWithArray:self.bankList];
     for (BTTBankModel *model in self.bankList) {
+        
         if ([model.accountType isEqualToString:@"BTC"]) {
-            btcCardCount++;
+            _bitNum=1;
         }else if ([model.accountType isEqualToString:@"借记卡"]||[model.accountType isEqualToString:@"信用卡"]||[model.accountType isEqualToString:@"存折"]){
-            bankCardCount++;
-        }else if ([model.accountType isEqualToString:@"BITOLL"]){
-            bitollCount++;
+            _bankNum++;
+        }else if ([model.accountType isEqualToString:@"DCBOX"]){
+            _dcboxNum++;
+        }else if ([model.accountType isEqualToString:@"USDT"]){
+            _usdtNum++;
+        }
+        if ([model.isOpen isEqualToString:@"0"]) {
+            [bList removeObject:model];
         }
     }
+    self.bankList = bList;
     if ([[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]||[IVNetwork savedUserInfo].newAccountFlag==1) {
-        bankCardCount=3;
+        _bankNum=3;
     }
+    [self setupElements];
     
-    if (btcCardCount == 1) {
-        if (bankCardCount < 3) {
-            if (bitollCount<1) {
-                return BTTCanAddCardTypeBankORUSDT;
-            }else{
-                return BTTCanAddCardTypeBank;
-            }
-            
-        }else{
-            if (bitollCount<1) {
-                return BTTCanAddCardTypeUSDT;
-            }else{
-                return BTTCanAddCardTypeNone;
-            }
-        }
-    }
-    if (bankCardCount == 3) {
-        if (bitollCount<1) {
-            return BTTCanAddCardTypeBTCORUSDT;
-        }else{
-            return BTTCanAddCardTypeBTC;
-        }
-    }
-    
-    if (bitollCount==1) {
-        if (bankCardCount < 3) {
-            if (btcCardCount<1) {
-                return BTTCanAddCardTypeBankORBTC;
-            }else{
-                return BTTCanAddCardTypeBank;
-            }
-            
-        }else{
-            if (btcCardCount<1) {
-                return BTTCanAddCardTypeBTC;
-            }else{
-                return BTTCanAddCardTypeNone;
-            }
-        }
-    }
-    return BTTCanAddCardTypeAll;
 }
 @end

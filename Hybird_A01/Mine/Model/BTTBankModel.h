@@ -45,4 +45,6 @@
 @property(copy, nonatomic) NSString *withdrawText;
 
 @property(copy, nonatomic) NSString *protocol;
+
+@property(copy, nonatomic) NSString *isOpen;
 @end

@@ -29,7 +29,7 @@
         NSArray *constrains = self.bfb_discount.constraints;
         for(NSLayoutConstraint *constraint in constrains){
             if(constraint.firstAttribute ==NSLayoutAttributeWidth){
-                constraint.constant = [self.model.bankName isEqualToString:@"BITOLL"] ? 28.0 : 0.0;
+                constraint.constant = [self.model.bankName isEqualToString:@"DCBOX"] ? 28.0 : 0.0;
                 
             }
         }
@@ -49,6 +49,9 @@
     }else if ([model.bankName isEqualToString:@"BITOLL"]){
         self.detailLabel.text = model.accountId==nil ? @"币付宝钱包" : [NSString stringWithFormat:@"币付宝帐号-%@",model.accountNo];
         self.bankIcon.image=[UIImage imageNamed:@"me_usdt_bitoll"];
+    }else if ([model.bankName isEqualToString:@"DCBOX"]){
+        self.detailLabel.text = model.accountId==nil ? @"小金库钱包" : [NSString stringWithFormat:@"小金库帐号-%@",model.accountNo];
+        self.bankIcon.image=[UIImage imageNamed:@"dcbox_nb"];
     } else {
         NSString *iconURLStr = model.bankIcon;
         if ([NSString isBlankString:iconURLStr]) {

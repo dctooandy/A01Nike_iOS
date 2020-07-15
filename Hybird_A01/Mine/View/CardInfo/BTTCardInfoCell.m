@@ -56,12 +56,12 @@
         bgImageDefault = @"BTC-bg";
     }else if([model.bankName isEqualToString:@"USDT"]){
         bgImageDefault = @"USDT-bg";
-    }else if ([model.bankName isEqualToString:@"BITOLL"]){
+    }else if ([model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"]){
         bgImageDefault = @"bfb_card_bg";
     }
     self.cardBgImageView.image = [UIImage imageNamed:bgImageDefault];
 //    [self.cardBgImageView sd_setImageWithURL:bgUrl placeholderImage:[UIImage imageNamed:bgImageDefault]];
-    self.modifyBtn.hidden = self.isChecking || [model.accountType isEqualToString:@"BTC"] || [model.bankName isEqualToString:@"USDT"] || [model.bankName isEqualToString:@"BITOLL"];
+    self.modifyBtn.hidden = self.isChecking || [model.accountType isEqualToString:@"BTC"] || [model.bankName isEqualToString:@"USDT"] || [model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"];
     self.deleteBtn.hidden = self.isChecking || self.isOnlyOneCard;
     self.setDefaultBtn.hidden = [model.accountType isEqualToString:@"BTC"];
     self.bottomDefaultBtn.hidden = [model.accountType isEqualToString:@"BTC"];
@@ -83,6 +83,8 @@
         }
     }else if ([model.bankName isEqualToString:@"BITOLL"]){
         self.bankIcon.image=[UIImage imageNamed:[NSString stringWithFormat:@"me_usdt_%@",[model.accountType lowercaseString]]];
+    }else if ([model.bankName isEqualToString:@"DCBOX"]){
+        self.bankIcon.image=[UIImage imageNamed:@"dcbox_nb"];
     } else {
         NSString *iconURLStr = model.bankIcon;
         if ([NSString isBlankString:iconURLStr]) {
@@ -109,11 +111,13 @@
         }
     }else if ([model.bankName isEqualToString:@"BITOLL"]){
         self.bankNameLabel.text = @"币付宝钱包";
+    }else if ([model.bankName isEqualToString:@"DCBOX"]){
+        self.bankNameLabel.text = @"小金库钱包";
     }else{
         self.bankNameLabel.text = model.bankName;
     }
-    self.classLabel.text = [model.accountType isEqualToString:@"BTC"]||[model.bankName isEqualToString:@"USDT"]||[model.bankName isEqualToString:@"BITOLL"]  ? @"" : [NSString stringWithFormat:@"%@|%@%@",model.accountType,model.province,model.city];
-    self.adressLabel.text = [model.accountType isEqualToString:@"BTC"]||[model.bankName isEqualToString:@"USDT"]||[model.bankName isEqualToString:@"BITOLL"] ? @"" : [NSString stringWithFormat:@"%@%@%@",model.province,model.city,model.bankBranchName];
+    self.classLabel.text = [model.accountType isEqualToString:@"BTC"]||[model.bankName isEqualToString:@"USDT"]||[model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"] ? @"" : [NSString stringWithFormat:@"%@|%@%@",model.accountType,model.province,model.city];
+    self.adressLabel.text = [model.accountType isEqualToString:@"BTC"]||[model.bankName isEqualToString:@"USDT"]||[model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"] ? @"" : [NSString stringWithFormat:@"%@%@%@",model.province,model.city,model.bankBranchName];
     self.cardNumLabel.text = model.accountNo;
     NSString *typeString = @"绑定银行卡";
     if ([model.accountType isEqualToString:@"BTC"]) {

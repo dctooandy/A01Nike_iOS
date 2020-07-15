@@ -93,7 +93,7 @@
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
     }
-    if (([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"])&&indexPath.row==self.sheetDatas.count-2) {
+    if (([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"])&&indexPath.row==self.sheetDatas.count-2) {
         BTTWithDrawUSDTConfirmCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell" forIndexPath:indexPath];
         [cell setCellRateWithRate:self.usdtRate];
         return cell;
@@ -113,7 +113,7 @@
     if (indexPath.row == self.sheetDatas.count - 1) {
         
         BTTBitollWithDrawCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBitollWithDrawCell" forIndexPath:indexPath];
-        BOOL imgHidden = ![self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"];
+        BOOL imgHidden = ![self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"];
         [cell setImageViewHidden:imgHidden onekeyHidden:!imgHidden sellHidden:self.isSellUsdt];
         cell.confirmTap = ^{
             if (self.bankList[self.selectIndex].accountId==nil) {
@@ -252,7 +252,7 @@
         self.password = textField.text;
     } else if (textField.tag == 8002) {
         self.amount = textField.text;
-        if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]) {
+        if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]) {
             NSString *fUsdtAmount = [NSString stringWithFormat:@"%.5f",([self.amount doubleValue] * self.usdtRate)];
             self.usdtAmount = [NSString stringWithFormat:@"%@ USDT",[fUsdtAmount substringWithRange:NSMakeRange(0, fUsdtAmount.length-1)]];
             _usdtField.text = self.usdtAmount;
@@ -277,7 +277,7 @@
 {
     BTTWithdrawalCardSelectCell *cell = (BTTWithdrawalCardSelectCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     NSMutableArray *textArray = @[].mutableCopy;
-    [textArray addObject:[NSString stringWithFormat:@"➕ 币付宝钱包"]];
+    [textArray addObject:[NSString stringWithFormat:@"➕ 小金库钱包"]];
     BOOL haveBfb = NO;
     
     for (BTTBankModel *model in self.bankList) {
@@ -285,7 +285,12 @@
             [textArray addObject:[NSString stringWithFormat:@"%@-%@",model.bankName,model.accountNo]];
         }else if ([model.accountType isEqualToString:@"BITOLL"]){
             if (model.accountId!=nil) {
-                [textArray replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"币付宝-%@",model.accountNo]];
+                [textArray addObject:[NSString stringWithFormat:@"币付宝-%@",model.accountNo]];
+            }
+            
+        }else if ([model.accountType isEqualToString:@"DCBOX"]){
+            if (model.accountId!=nil) {
+                [textArray replaceObjectAtIndex:0 withObject:[NSString stringWithFormat:@"小金库-%@",model.accountNo]];
                 haveBfb = YES;
             }
             
@@ -294,7 +299,7 @@
             [textArray addObject:[NSString stringWithFormat:@"%@-%@",resultStr,model.accountNo]];
         }
     }
-    [BRStringPickerView showStringPickerWithTitle:@"请选择银行卡" dataSource:textArray.copy defaultSelValue:[NSString stringWithFormat:@"➕ 币付宝钱包"] resultBlock:^(id selectValue, NSInteger index) {
+    [BRStringPickerView showStringPickerWithTitle:@"请选择银行卡" dataSource:textArray.copy defaultSelValue:[NSString stringWithFormat:@"➕ 小金库钱包"] resultBlock:^(id selectValue, NSInteger index) {
         
         if (index==0&&!haveBfb) {
             self.selectIndex = 0;
@@ -313,6 +318,11 @@
                 }
             }else if ([self.bankList[i].accountType isEqualToString:@"BITOLL"]&&self.bankList[i].accountId!=nil){
                 withDrawText = [NSString stringWithFormat:@"币付宝-%@",self.bankList[i].accountNo];
+                if ([withDrawText isEqualToString:selectValue]) {
+                    self.selectIndex = i;
+                }
+            }else if ([self.bankList[i].accountType isEqualToString:@"DCBOX"]&&self.bankList[i].accountId!=nil){
+                withDrawText = [NSString stringWithFormat:@"小金库-%@",self.bankList[i].accountNo];
                 if ([withDrawText isEqualToString:selectValue]) {
                     self.selectIndex = i;
                 }
@@ -343,7 +353,7 @@
                 BTTBankModel *model = [BTTBankModel yy_modelWithDictionary:json];
                 if (isBlackNineteen) {
                     if (![model.accountType isEqualToString:@"存折"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"信用卡"]) {
-                        if ([model.accountType isEqualToString:@"BITOLL"]) {
+                        if ([model.accountType isEqualToString:@"DCBOX"]) {
                             [bankList insertObject:model atIndex:0];
                             isHaveBitoll = YES;
                         }else{
@@ -351,18 +361,18 @@
                         }
                     }
                 }else{
-                    if ([model.bankName isEqualToString:@"BITOLL"]) {
+                    if ([model.bankName isEqualToString:@"DCBOX"]) {
                         [bankList insertObject:model atIndex:0];
                         isHaveBitoll = YES;
-                    }else{
+                    }else if(![model.bankName isEqualToString:@"BITOLL"]){
                         [bankList addObject:model];
                     }
                 }
                 if (i==array.count-1) {
                     if (!isHaveBitoll) {
                         BTTBankModel *bModel = [[BTTBankModel alloc]init];
-                        bModel.accountType = @"BITOLL";
-                        bModel.bankName = @"BITOLL";
+                        bModel.accountType = @"DCBOX";
+                        bModel.bankName = @"DCBOX";
                         [bankList insertObject:bModel atIndex:0];
                     }
                     self.bankList = bankList;
@@ -378,7 +388,7 @@
 - (void)submitWithDraw
 {
     
-    if ([self.bankList[_selectIndex].bankName isEqualToString:@"BITOLL"]&&self.bankList[_selectIndex].accountId==nil) {
+    if ([self.bankList[_selectIndex].bankName isEqualToString:@"DCBOX"]&&self.bankList[_selectIndex].accountId==nil) {
         [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCard"];
         BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
@@ -398,10 +408,6 @@
         return;
     }
     
-    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]) {
-        [MBProgressHUD showError:@"USDT取款只能取款至币付宝钱包,请切换到币付宝钱包" toView:nil];
-        return;
-    }
     
     if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]) {
         [self showLoading];
@@ -463,7 +469,7 @@
     if (!(isNull(self.selectedProtocol)||[self.selectedProtocol isEqualToString:@""])) {
         params[@"protocol"] = self.selectedProtocol;
     }
-    if ([model.bankName isEqualToString:@"BITOLL"]) {
+    if ([model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"]) {
         params[@"protocol"] = @"ERC20";
     }
     

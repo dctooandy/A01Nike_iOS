@@ -37,7 +37,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="币付宝" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgH-dz-BTt">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小金库" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgH-dz-BTt">
                                     <rect key="frame" x="348" y="0.0" width="50" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="50" id="mw4-Ff-gV2"/>
@@ -46,7 +46,7 @@
                                     <color key="textColor" red="0.43137254901960786" green="0.45098039215686275" blue="0.49019607843137253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_usdt_bitoll" translatesAutoresizingMaskIntoConstraints="NO" id="Vf9-Ce-Or2">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dcbox_nb" translatesAutoresizingMaskIntoConstraints="NO" id="Vf9-Ce-Or2">
                                     <rect key="frame" x="326" y="20" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="abb-4c-bdb"/>
@@ -79,7 +79,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入币付宝帐号" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dkK-7R-iSh">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入小金库帐号" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dkK-7R-iSh">
                                     <rect key="frame" x="116" y="0.0" width="282" height="60"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -129,7 +129,7 @@
                         <constraint firstAttribute="height" constant="30" id="0WI-j9-OAe"/>
                         <constraint firstAttribute="width" constant="160" id="LHA-fc-gqV"/>
                     </constraints>
-                    <state key="normal" title="一键注册币付宝钱包?"/>
+                    <state key="normal" title="一键注册小金库钱包?"/>
                     <connections>
                         <action selector="oneKeyBtn_click:" destination="-1" eventType="touchUpInside" id="Onm-Y0-Bqt"/>
                     </connections>
@@ -151,6 +151,6 @@
         </view>
     </objects>
     <resources>
-        <image name="me_usdt_bitoll" width="14" height="13.5"/>
+        <image name="dcbox_nb" width="38" height="38"/>
     </resources>
 </document>

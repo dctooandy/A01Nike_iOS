@@ -700,6 +700,8 @@
 		D3A0411D248A10330022BEDC /* BTTAddBitollCardController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3A0411A248A10330022BEDC /* BTTAddBitollCardController.xib */; };
 		D3A0411E248A10330022BEDC /* BTTAddBitollCardController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A0411B248A10330022BEDC /* BTTAddBitollCardController.m */; };
 		D3A0412B24ADAA320022BEDC /* OnekeySellUsdtCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A0412A24ADAA320022BEDC /* OnekeySellUsdtCell.m */; };
+		D3A0413724BEA9070022BEDC /* BTTDcboxPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A0413524BEA9070022BEDC /* BTTDcboxPayController.m */; };
+		D3A0413824BEA9070022BEDC /* BTTDcboxPayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3A0413624BEA9070022BEDC /* BTTDcboxPayController.xib */; };
 		D3A9A70F24037638007F672A /* IN3SAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A9A70D24037638007F672A /* IN3SAnalytics.framework */; };
 		D3A9A71024037638007F672A /* IN3SResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3A9A70E24037638007F672A /* IN3SResource.bundle */; };
 		D3A9A71324065576007F672A /* BTTVideoFastRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A9A71224065576007F672A /* BTTVideoFastRegisterView.m */; };
@@ -1885,6 +1887,9 @@
 		D3A0411C248A10330022BEDC /* BTTAddBitollCardController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTAddBitollCardController.h; sourceTree = "<group>"; };
 		D3A0412924ADAA320022BEDC /* OnekeySellUsdtCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnekeySellUsdtCell.h; sourceTree = "<group>"; };
 		D3A0412A24ADAA320022BEDC /* OnekeySellUsdtCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnekeySellUsdtCell.m; sourceTree = "<group>"; };
+		D3A0413424BEA9070022BEDC /* BTTDcboxPayController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTDcboxPayController.h; sourceTree = "<group>"; };
+		D3A0413524BEA9070022BEDC /* BTTDcboxPayController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTDcboxPayController.m; sourceTree = "<group>"; };
+		D3A0413624BEA9070022BEDC /* BTTDcboxPayController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTDcboxPayController.xib; sourceTree = "<group>"; };
 		D3A9A70D24037638007F672A /* IN3SAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IN3SAnalytics.framework; sourceTree = "<group>"; };
 		D3A9A70E24037638007F672A /* IN3SResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IN3SResource.bundle; sourceTree = "<group>"; };
 		D3A9A71124065576007F672A /* BTTVideoFastRegisterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoFastRegisterView.h; sourceTree = "<group>"; };
@@ -4138,6 +4143,9 @@
 				D357F0DE2431C8DE00FD530A /* BTTBiFuBaoController.h */,
 				D357F0DF2431C8DE00FD530A /* BTTBiFuBaoController.m */,
 				D357F0E02431C8DE00FD530A /* BTTBiFuBaoController.xib */,
+				D3A0413424BEA9070022BEDC /* BTTDcboxPayController.h */,
+				D3A0413524BEA9070022BEDC /* BTTDcboxPayController.m */,
+				D3A0413624BEA9070022BEDC /* BTTDcboxPayController.xib */,
 			);
 			name = USDTPay;
 			path = VC/USDTPay;
@@ -4805,6 +4813,7 @@
 				3A289500237BE70C008EB579 /* BTTLoginOrRegisterBtsView.xib in Resources */,
 				3A5AE6E122D6E22A0013E8A3 /* LIVCSDefaultAvatar@3x.png in Resources */,
 				3A685B9522706A2700A8F59D /* BTTChangePwdBtnsCell.xib in Resources */,
+				D3A0413824BEA9070022BEDC /* BTTDcboxPayController.xib in Resources */,
 				D5DBEB2E21ABB774008AF629 /* CNPayRecommendCell.xib in Resources */,
 				3A8F5138215F74D00069D1B3 /* Assets.xcassets in Resources */,
 				3AD9CF61216F1EAB00685B43 /* BTTHomePageNoticeCell.xib in Resources */,
@@ -5275,6 +5284,7 @@
 				3ADD23762177328B00FA959A /* BTTMeSaveMoneyCell.m in Sources */,
 				3AAE8217219A738B003EC8B0 /* BTTLoginCell.m in Sources */,
 				3AD9CD542165B2C900685B43 /* BTTPopoverView.m in Sources */,
+				D3A0413724BEA9070022BEDC /* BTTDcboxPayController.m in Sources */,
 				3A7C0B1521EC6B0F002658CC /* BTTSaveMoneyErrorModel.m in Sources */,
 				3A8F51E6215F78F50069D1B3 /* BTTCollectionViewController.m in Sources */,
 				D5DBEB4421AD3721008AF629 /* CNPayQRStep2VC.m in Sources */,
@@ -5606,7 +5616,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.93;
+				MARKETING_VERSION = 3.0.99;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5647,7 +5657,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.93;
+				MARKETING_VERSION = 3.0.99;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

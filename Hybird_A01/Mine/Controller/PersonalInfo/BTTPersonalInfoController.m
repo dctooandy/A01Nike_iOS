@@ -67,7 +67,7 @@
             cell.textField.text = selectValue;
         }];
     } else if (indexPath.item == 3) {
-        if (([IVNetwork savedUserInfo].starLevel == 5 || [IVNetwork savedUserInfo].starLevel == 6) && [IVNetwork savedUserInfo].birthday.length) {
+        if ([IVNetwork savedUserInfo].birthday.length>0) {
             return;
         }
         BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
@@ -155,14 +155,16 @@
     if (sexTF.text.length != 0 ) {
         params[@"gender"] = [sexTF.text isEqualToString:@"男"] ? @"M" : @"F";
     }
-    if (birthdayTF.text.length != 0) {
-        NSString *birthdayStr = birthdayTF.text;
-        BOOL isAdult = [PublicMethod isAdultWithBirthday:birthdayStr];
-        if (!isAdult) {
-            [MBProgressHUD showError:@"您的年龄未满十八岁" toView:self.view];
-            return;
+    if ([IVNetwork savedUserInfo].birthday.length>0) {
+        if (birthdayTF.text.length != 0) {
+            NSString *birthdayStr = birthdayTF.text;
+            BOOL isAdult = [PublicMethod isAdultWithBirthday:birthdayStr];
+            if (!isAdult) {
+                [MBProgressHUD showError:@"您的年龄未满十八岁" toView:self.view];
+                return;
+            }
+            params[@"birth"] = birthdayStr;
         }
-        params[@"birth"] = birthdayStr;
     }
     params[@"address"] = addressTF.text ? addressTF.text : @"";
     params[@"remark"] = remarkTF.text ? remarkTF.text : @"";

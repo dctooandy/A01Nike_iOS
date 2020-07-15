@@ -33,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"注册币付宝钱包";
+    self.title = @"注册小金库钱包";
     [self setupViews];
 }
 
@@ -199,7 +199,7 @@
     }];
 }
 - (IBAction)downLoadBtn_click:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.bitoll.com/ios.html"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.dcbox.io/ios.html"]];
 }
 
 /*

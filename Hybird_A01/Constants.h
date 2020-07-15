@@ -65,8 +65,10 @@ typedef enum {
     BTTSafeVerifyTypeHumanDelBankCard,           // 删除银行卡人工服务
     BTTSafeVerifyTypeMobileAddBTCard,            // 添加比特币钱包短信验证
     BTTSafeVerifyTypeMobileAddUSDTCard,          // 添加USDT钱包短信验证
+    BTTSafeVerifyTypeMobileAddDCBOXCard,
     BTTSafeVerifyTypeMobileBindAddBTCard,        // 添加比特币钱包时未绑定手机绑定
     BTTSafeVerifyTypeMobileBindAddUSDTCard,      // 添加USDT钱包时未绑定手机绑定
+    BTTSafeVerifyTypeMobileBindAddDCBOXCard,
     BTTSafeVerifyTypeMobileDelBTCard,            // 删除比特币钱包短信验证
     BTTSafeVerifyTypeMobileDelUSDTCard,
     BTTSafeVerifyTypeMobileBindDelBTCard,        // 删除比特币钱包时未绑定手机绑定
@@ -376,6 +378,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTQueryOnlineBanks                        @"deposit/queryOnlineBanks"
 // 创建在线支付订单
 #define BTTCreateOnlineOrder                       @"deposit/createOnlineOrder"
+// 创建在线支付订单
+#define BTTCreateOnlineOrderV2                      @"deposit/createOnlineOrderV2"
 // 查询人工存款账号
 #define BTTQueryManualAccount                      @"deposit/queryManualDepositAccount"
 // 邮箱发送验证码
@@ -410,7 +414,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 //查询点卡
 #define BTTQueryPointCardList                      @"deposit/queryPointCardList"
 //查询点卡
-#define BTTCreateBfbAccount                      @"account/createBitollAccount"
+#define BTTCreateBfbAccount                      @"account/createGoldAccount"
 //查询USDT钱包类型
 #define BTTQueryUSDTWallet                         @"account/queryWalletType"
 //充值购买USDT链接

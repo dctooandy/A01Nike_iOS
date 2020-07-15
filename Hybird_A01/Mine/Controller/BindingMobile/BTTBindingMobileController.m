@@ -22,6 +22,8 @@
 #import "BTTCardModifyVerifyController.h"
 #import "IVRsaEncryptWrapper.h"
 #import "BTTAddBitollCardController.h"
+#import "BTTAddUSDTController.h"
+
 @interface BTTBindingMobileController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, copy) NSString *messageId;
 @property (nonatomic, copy) NSString *validateId;
@@ -228,6 +230,7 @@
         case BTTSafeVerifyTypeMobileChangeBankCard:
         case BTTSafeVerifyTypeMobileDelBankCard:
         case BTTSafeVerifyTypeMobileAddUSDTCard:
+        case BTTSafeVerifyTypeMobileAddDCBOXCard:
         case BTTSafeVerifyTypeMobileDelUSDTCard:
         case BTTSafeVerifyTypeMobileAddBTCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
@@ -270,6 +273,7 @@
         case BTTSafeVerifyTypeMobileChangeBankCard:
         case BTTSafeVerifyTypeMobileDelBankCard:
         case BTTSafeVerifyTypeMobileAddUSDTCard:
+        case BTTSafeVerifyTypeMobileAddDCBOXCard:
         case BTTSafeVerifyTypeMobileDelUSDTCard:
         case BTTSafeVerifyTypeMobileAddBTCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
@@ -316,6 +320,7 @@
         case BTTSafeVerifyTypeMobileDelBankCard:
         case BTTSafeVerifyTypeMobileAddBTCard:
         case BTTSafeVerifyTypeMobileAddUSDTCard:
+        case BTTSafeVerifyTypeMobileAddDCBOXCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
         case BTTSafeVerifyTypeMobileDelUSDTCard:
             url = BTTVerifySmsCode;
@@ -384,12 +389,19 @@
                         }
                             break;
                         case BTTSafeVerifyTypeMobileAddUSDTCard:{
-                            BTTAddBitollCardController *vc = [BTTAddBitollCardController new];
+                            BTTAddUSDTController *vc = [BTTAddUSDTController new];
                             vc.messageId = messageId;
                             vc.validateId = validateId;
                             [self.navigationController pushViewController:vc animated:YES];
                         }
                             break;
+                        case BTTSafeVerifyTypeMobileAddDCBOXCard:{
+                            BTTAddBitollCardController *vc = [BTTAddBitollCardController new];
+                            vc.messageId = messageId;
+                            vc.validateId = validateId;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }
+                                break;
                         case BTTSafeVerifyTypeMobileBindAddBTCard:{
                             BTTAddBTCController *vc = [BTTAddBTCController new];
                             vc.addCardType = BTTSafeVerifyTypeMobileBindAddBTCard;
@@ -399,6 +411,13 @@
                         }
                             break;
                         case BTTSafeVerifyTypeMobileBindAddUSDTCard:{
+                            BTTAddBitollCardController *vc = [BTTAddBitollCardController new];
+                            vc.messageId = messageId;
+                            vc.validateId = validateId;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }
+                            break;
+                        case BTTSafeVerifyTypeMobileBindAddDCBOXCard:{
                             BTTAddBitollCardController *vc = [BTTAddBitollCardController new];
                             vc.messageId = messageId;
                             vc.validateId = validateId;
@@ -456,6 +475,13 @@
                                 [self.navigationController pushViewController:vc animated:YES];
                             }
                                 break;
+                            case BTTSafeVerifyTypeMobileAddDCBOXCard:
+                            {
+                                BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
+                                vc.verifyType = BTTSafeVerifyTypeHumanAddUSDTCard;
+                                [self.navigationController pushViewController:vc animated:YES];
+                            }
+                                break;
                             case BTTSafeVerifyTypeMobileDelBankCard:
                             {
                                 BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
@@ -503,7 +529,9 @@
         case BTTSafeVerifyTypeMobileBindAddBTCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
         case BTTSafeVerifyTypeMobileAddUSDTCard:
+        case BTTSafeVerifyTypeMobileAddDCBOXCard:
         case BTTSafeVerifyTypeMobileBindAddUSDTCard:
+        case BTTSafeVerifyTypeMobileBindAddDCBOXCard:
         case BTTSafeVerifyTypeMobileBindDelBTCard:
         case BTTSafeVerifyTypeHumanAddBTCard:
         case BTTSafeVerifyTypeHumanDelBTCard:

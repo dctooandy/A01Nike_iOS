@@ -151,6 +151,13 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
+        case BTTSafeVerifyTypeMobileAddDCBOXCard:
+        {
+            BTTBindingMobileController *vc = [BTTBindingMobileController new];
+            vc.mobileCodeType = BTTSafeVerifyTypeMobileAddDCBOXCard;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+                break;
         case BTTSafeVerifyTypeHumanAddUSDTCard:
         {
             BTTAddUSDTController *vc = [BTTAddUSDTController new];

@@ -45,7 +45,8 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
     CNPaymentBQAli=92,//支付宝秒存
     CNPaymentBS=25, ///< 币商
     CNPaymentUSDT=99,//USDT
-    CNPaymentBFB=42//币付宝
+    CNPaymentBFB=42,//币付宝
+    CNPaymentDCBOX=43,//小金库
 };
 
 @interface CNPaymentModel : BTTBaseModel

@@ -118,13 +118,13 @@
                     BTTUsdtWalletModel *model = [BTTUsdtWalletModel yy_modelWithDictionary:json];
                     [codeArray addObject:model.bankcode];
                     if ([model.flag isEqualToString:@"1"]) {
-                        if (![model.bankcode.lowercaseString isEqualToString:@"others"]&&![model.bankcode.lowercaseString isEqualToString:@"bitoll"]) {
+                        if (![model.bankcode.lowercaseString isEqualToString:@"others"]&&![model.bankcode.lowercaseString isEqualToString:@"bitoll"]&&![model.bankcode.lowercaseString isEqualToString:@"dcbox"]) {
                             NSInteger index = [weakSelf.bankCodeArray indexOfObject:model.bankcode.lowercaseString];
                             [itemsArrayOne addObject:weakSelf.itemsArray[0][index]];
                             [itemImageArrayOne addObject:weakSelf.itemImageArray[0][index]];
                             [paymentArray addObject:json];
                         }else{
-                            if (![model.bankcode.lowercaseString isEqualToString:@"bitoll"]) {
+                            if (![model.bankcode.lowercaseString isEqualToString:@"bitoll"]&&![model.bankcode.lowercaseString isEqualToString:@"dcbox"]) {
                                 [itemsArrayTwo addObject:@"其他钱包"];
                                 [itemImageArrayTwo addObject:@"me_usdt_otherwallet"];
                                 weakSelf.otherWalletJson = json;

@@ -217,7 +217,7 @@
 }
 
 - (void)dowloadBfbApp{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.bitoll.com/ios.html"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.dcbox.io/ios.html"]];
 }
 
 - (void)setupView{

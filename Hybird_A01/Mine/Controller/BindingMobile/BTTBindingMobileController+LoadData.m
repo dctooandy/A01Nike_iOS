@@ -22,6 +22,7 @@
         case BTTSafeVerifyTypeMobileAddBTCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
         case BTTSafeVerifyTypeMobileAddUSDTCard:
+        case BTTSafeVerifyTypeMobileAddDCBOXCard:
         case BTTSafeVerifyTypeMobileDelUSDTCard:
             phoneTitle = @"已绑定手机";
             phone = [IVNetwork savedUserInfo].mobileNo;
@@ -32,6 +33,7 @@
         case BTTSafeVerifyTypeMobileBindAddBTCard:
         case BTTSafeVerifyTypeMobileBindDelBTCard:
         case BTTSafeVerifyTypeMobileBindAddUSDTCard:
+            case BTTSafeVerifyTypeMobileBindAddDCBOXCard:
         case BTTSafeVerifyTypeMobileBindDelUSDTCard:
         case BTTSafeVerifyTypeBindMobile:{
             phoneTitle = @"手机号码";

@@ -40,12 +40,12 @@
         [infoView addSubview:confirmBtn];
         _confirmBtn = confirmBtn;
         
-        UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(16, 94, SCREEN_WIDTH-32, 18)];
-        imgView.image = [UIImage imageNamed:@"bfb_take_note"];
-        imgView.contentMode = UIViewContentModeScaleAspectFit;
-        imgView.hidden = YES;
-        [infoView addSubview:imgView];
-        _imgView = imgView;
+//        UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(16, 94, SCREEN_WIDTH-32, 18)];
+//        imgView.image = [UIImage imageNamed:@"bfb_take_note"];
+//        imgView.contentMode = UIViewContentModeScaleAspectFit;
+//        imgView.hidden = YES;
+//        [infoView addSubview:imgView];
+//        _imgView = imgView;
         
         UIButton *oneKeySellBtn = [[UIButton alloc]initWithFrame:CGRectMake(16, 94, SCREEN_WIDTH-32, 44)];
         [oneKeySellBtn setTitle:@"一键卖币" forState:UIControlStateNormal];
@@ -57,22 +57,22 @@
         _onekeySellBtn = oneKeySellBtn;
         
         
-        UIButton *bindButton = [[UIButton alloc]initWithFrame:CGRectMake(16, 74, SCREEN_WIDTH-32, 44)];
-        [bindButton setTitle:@"一键添加币付宝钱包?" forState:UIControlStateNormal];
+//        UIButton *bindButton = [[UIButton alloc]initWithFrame:CGRectMake(16, 74, SCREEN_WIDTH-32, 44)];
+//        [bindButton setTitle:@"一键添加币付宝钱包?" forState:UIControlStateNormal];
+//
+//        bindButton.titleLabel.font = [UIFont systemFontOfSize:12];
+//        [bindButton setTitleColor:COLOR_HEX(0x2497FF) forState:UIControlStateNormal];
+//        [bindButton addTarget:self action:@selector(bindBtn_click) forControlEvents:UIControlEventTouchUpInside];
+//        [infoView addSubview:bindButton];
+//        _onekeyBtn = bindButton;
         
-        bindButton.titleLabel.font = [UIFont systemFontOfSize:12];
-        [bindButton setTitleColor:COLOR_HEX(0x2497FF) forState:UIControlStateNormal];
-        [bindButton addTarget:self action:@selector(bindBtn_click) forControlEvents:UIControlEventTouchUpInside];
-        [infoView addSubview:bindButton];
-        _onekeyBtn = bindButton;
         
         
-        
-        UIButton *downloadBtn = [[UIButton alloc]initWithFrame:CGRectMake(16, 118, SCREEN_WIDTH-32, 120)];
-        [downloadBtn setImage:[UIImage imageNamed:@"bfb_banner"] forState:UIControlStateNormal];
-        [downloadBtn addTarget:self action:@selector(downloadBtn_click) forControlEvents:UIControlEventTouchUpInside];
-        [infoView addSubview:downloadBtn];
-        _downloadBtn = downloadBtn;
+//        UIButton *downloadBtn = [[UIButton alloc]initWithFrame:CGRectMake(16, 118, SCREEN_WIDTH-32, 120)];
+//        [downloadBtn setImage:[UIImage imageNamed:@"bfb_banner"] forState:UIControlStateNormal];
+//        [downloadBtn addTarget:self action:@selector(downloadBtn_click) forControlEvents:UIControlEventTouchUpInside];
+//        [infoView addSubview:downloadBtn];
+//        _downloadBtn = downloadBtn;
         
         
     }
@@ -81,8 +81,8 @@
 
 - (void)setImageViewHidden:(BOOL)imgHidden onekeyHidden:(BOOL)onekeyHidden sellHidden:(BOOL)sellHidden{
     self.imgView.hidden = YES;
-    self.onekeyBtn.hidden = onekeyHidden;
-    self.downloadBtn.hidden = onekeyHidden;
+    self.onekeyBtn.hidden = YES;
+    self.downloadBtn.hidden = YES;
     self.onekeySellBtn.hidden = !sellHidden;
 }
 

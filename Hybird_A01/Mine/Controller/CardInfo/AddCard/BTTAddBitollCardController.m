@@ -28,7 +28,7 @@
     [super viewDidLoad];
     self.isWithDraw = [[NSUserDefaults standardUserDefaults]boolForKey:@"bitollAddCard"];
     self.isSave = [[NSUserDefaults standardUserDefaults]boolForKey:@"bitollAddCardSave"];
-    self.title = @"添加币付宝钱包";
+    self.title = @"添加小金库钱包";
     [self setupViews];
 }
 
@@ -42,7 +42,7 @@
     self.confirmBtn.clipsToBounds = YES;
     self.confirmBtn.backgroundColor = COLOR_RGBA(243, 130, 50, 1);
     
-    NSAttributedString *attrStringAccount = [[NSAttributedString alloc] initWithString:@"请输入币付宝帐号" attributes:
+    NSAttributedString *attrStringAccount = [[NSAttributedString alloc] initWithString:@"请输入小金库帐号" attributes:
                                           @{ NSForegroundColorAttributeName: COLOR_RGBA(110, 115, 125, 1),
                                              NSFontAttributeName: self.accountField.font }];
     self.accountField.attributedPlaceholder = attrStringAccount;
@@ -57,7 +57,7 @@
     NSString *firstTwochar = @"";
     
     if (_accountField.text.length<6||_accountField.text.length>100) {
-        [MBProgressHUD showError:@"币付宝ID只允许6-100位大小写英文字母+数字的组合" toView:self.view];
+        [MBProgressHUD showError:@"小金库ID只允许6-100位大小写英文字母+数字的组合" toView:self.view];
         return;
     }
     
@@ -70,8 +70,8 @@
     [self showLoading];
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"accountNo"] = _accountField.text;
-    params[@"accountType"] = @"BITOLL";
-    params[@"bankName"] = @"BITOLL";
+    params[@"accountType"] = @"DCBOX";
+    params[@"bankName"] = @"DCBOX";
     params[@"expire"] = @0;
     params[@"messageId"] = self.messageId;
     params[@"validateId"] = self.validateId;
@@ -85,16 +85,17 @@
             [IVLAManager singleEventId:@"A01_bankcard_update" errorCode:@"3846" errorMsg:@"网络错误信息" customsData:json];
 
             [BTTHttpManager fetchUserInfoCompleteBlock:nil];
-            if (self.isWithDraw) {
-                [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"bitollAddCard"];
-                [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-                [BTTHttpManager fetchBankListWithUseCache:NO completion:^(IVRequestResultModel *result, id response) {
-                    [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoTakeMoneyNotification" object:nil];
-                }];
-                
-            }else if(self.isSave){
+//            if (self.isWithDraw) {
+//                [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"bitollAddCard"];
+//                [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+//                [BTTHttpManager fetchBankListWithUseCache:NO completion:^(IVRequestResultModel *result, id response) {
+//                    [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+//                    [self.navigationController popToRootViewControllerAnimated:YES];
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoTakeMoneyNotification" object:nil];
+//                }];
+//
+//            }else
+            if(self.isSave){
                 [IVNetwork savedUserInfo].bfbNum = 1;
                 [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"bitollAddCardSave"];
                 [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];

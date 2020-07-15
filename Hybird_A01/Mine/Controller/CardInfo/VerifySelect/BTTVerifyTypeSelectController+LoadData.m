@@ -24,6 +24,7 @@
         case BTTSafeVerifyTypeMobileChangeBankCard:
         case BTTSafeVerifyTypeMobileDelBankCard:
         case BTTSafeVerifyTypeMobileAddUSDTCard:
+        case BTTSafeVerifyTypeMobileAddDCBOXCard:
         case BTTSafeVerifyTypeMobileAddBTCard:
             names = @[@"通过短信验证"];
             icons = @[@"card_sms"];
