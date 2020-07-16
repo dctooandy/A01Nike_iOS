@@ -712,7 +712,26 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     return [UIApplication sharedApplication].delegate.window.rootViewController;
 }
 
++ (UIViewController*)topMostWindowController
+{
+    UIWindow *win = [UIApplication sharedApplication].delegate.window;
+    UIViewController *topController = [win rootViewController];
+    if ([topController isKindOfClass:[UITabBarController class]]) {
+        topController = [(UITabBarController *)topController selectedViewController];
+    }
+    while ([topController presentedViewController])  topController = [topController presentedViewController];
+    return topController;
+}
 
++ (UIViewController*)currentViewController
+{
+    UIViewController *currentViewController = [self topMostWindowController];
+    
+    while ([currentViewController isKindOfClass:[UINavigationController class]] && [(UINavigationController*)currentViewController topViewController])
+        currentViewController = [(UINavigationController*)currentViewController topViewController];
+    
+    return currentViewController;
+}
 #pragma mark 判断是否为空字符串
 + (BOOL)isBlankString:(NSString *)aStr{
     
