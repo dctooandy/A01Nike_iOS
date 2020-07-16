@@ -667,6 +667,10 @@
 		D331B20F23D546600080A27D /* BTTBTCRateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D331B20E23D546600080A27D /* BTTBTCRateModel.m */; };
 		D339969524371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D339969424371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m */; };
 		D3399697243B08F700B91A52 /* libboringssl.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399696243B08E000B91A52 /* libboringssl.tbd */; };
+		D339CE9724C03CAC009ACD1C /* OTCInsideController.m in Sources */ = {isa = PBXBuildFile; fileRef = D339CE9324C03CAB009ACD1C /* OTCInsideController.m */; };
+		D339CE9824C03CAC009ACD1C /* OTCInsideCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D339CE9424C03CAC009ACD1C /* OTCInsideCell.m */; };
+		D339CE9924C03CAC009ACD1C /* OTCInsideController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D339CE9624C03CAC009ACD1C /* OTCInsideController.xib */; };
+		D339CE9C24C03CB7009ACD1C /* OTCInsideModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D339CE9B24C03CB6009ACD1C /* OTCInsideModel.m */; };
 		D345F28F23CFFC2300E658A6 /* IVNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F28B23CFFC2200E658A6 /* IVNetworkManager.m */; };
 		D345F29023CFFC2300E658A6 /* IVNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F28C23CFFC2200E658A6 /* IVNetwork.m */; };
 		D345F29123CFFC2300E658A6 /* IVUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = D345F28D23CFFC2200E658A6 /* IVUtility.m */; };
@@ -1828,6 +1832,13 @@
 		D339969424371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTOneKeyRegisterBitollCell.m; sourceTree = "<group>"; };
 		D3399696243B08E000B91A52 /* libboringssl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libboringssl.tbd; path = usr/lib/libboringssl.tbd; sourceTree = SDKROOT; };
 		D3399698243C215D00B91A52 /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = ../Desktop/libboringssl_simulator.a; sourceTree = "<group>"; };
+		D339CE9224C03CAB009ACD1C /* OTCInsideCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCInsideCell.h; sourceTree = "<group>"; };
+		D339CE9324C03CAB009ACD1C /* OTCInsideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCInsideController.m; sourceTree = "<group>"; };
+		D339CE9424C03CAC009ACD1C /* OTCInsideCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCInsideCell.m; sourceTree = "<group>"; };
+		D339CE9524C03CAC009ACD1C /* OTCInsideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCInsideController.h; sourceTree = "<group>"; };
+		D339CE9624C03CAC009ACD1C /* OTCInsideController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OTCInsideController.xib; sourceTree = "<group>"; };
+		D339CE9A24C03CB6009ACD1C /* OTCInsideModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCInsideModel.h; sourceTree = "<group>"; };
+		D339CE9B24C03CB6009ACD1C /* OTCInsideModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCInsideModel.m; sourceTree = "<group>"; };
 		D345F28923CFFC2200E658A6 /* IVNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVNetwork.h; sourceTree = "<group>"; };
 		D345F28A23CFFC2200E658A6 /* IVNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVNetworkManager.h; sourceTree = "<group>"; };
 		D345F28B23CFFC2200E658A6 /* IVNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVNetworkManager.m; sourceTree = "<group>"; };
@@ -4130,6 +4141,11 @@
 		D35BF23623B451330085D6A1 /* USDTPay */ = {
 			isa = PBXGroup;
 			children = (
+				D339CE9224C03CAB009ACD1C /* OTCInsideCell.h */,
+				D339CE9424C03CAC009ACD1C /* OTCInsideCell.m */,
+				D339CE9524C03CAC009ACD1C /* OTCInsideController.h */,
+				D339CE9324C03CAB009ACD1C /* OTCInsideController.m */,
+				D339CE9624C03CAC009ACD1C /* OTCInsideController.xib */,
 				D3A04117248A0FFD0022BEDC /* BTTBitollChoseMoneyCell.h */,
 				D3A04118248A0FFD0022BEDC /* BTTBitollChoseMoneyCell.m */,
 				D35BF23723B451330085D6A1 /* USDTWalletCollectionCell.h */,
@@ -4347,6 +4363,8 @@
 		D5DBEAD021ABB774008AF629 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D339CE9A24C03CB6009ACD1C /* OTCInsideModel.h */,
+				D339CE9B24C03CB6009ACD1C /* OTCInsideModel.m */,
 				D345F2AD23D0093900E658A6 /* BTTQueryOnlineBankModel.h */,
 				D345F2AE23D0093900E658A6 /* BTTQueryOnlineBankModel.m */,
 				D5DBEAD321ABB774008AF629 /* CNPayChannelModel.h */,
@@ -4699,6 +4717,7 @@
 				3A5AE6FF22D6E22A0013E8A3 /* LIVAutoScrollTextView2.png in Resources */,
 				3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */,
 				3A75A182221164BC00584A35 /* BTTLoginAccountSelectCell.xib in Resources */,
+				D339CE9924C03CAC009ACD1C /* OTCInsideController.xib in Resources */,
 				D39D7C0823CF19C500898546 /* BTTUsdtTodayNoticeView.xib in Resources */,
 				3A11AE232183FF0000B1AFF4 /* BTTPasswordChangeBtnsCell.xib in Resources */,
 				3AE1EB0A218046D80073A32D /* BTTCardModifyTitleCell.xib in Resources */,
@@ -5062,6 +5081,7 @@
 				3AB0688E21A679DE00072FB7 /* BTTSMSEmailModifyModel.m in Sources */,
 				D3708E1723FB973000602715 /* BTTLoginInfoView.m in Sources */,
 				3ADD237B2177366B00FA959A /* BTTMeMainCell.m in Sources */,
+				D339CE9824C03CAC009ACD1C /* OTCInsideCell.m in Sources */,
 				3AE1EB15218048940073A32D /* BTTCardModifyVerifyController+LoadData.m in Sources */,
 				D5DBEB1521ABB774008AF629 /* CNPayOnlineVC.m in Sources */,
 				3A7A1A7121BF859000572B50 /* BTTRegisterSuccessChangePwdCell.m in Sources */,
@@ -5410,11 +5430,13 @@
 				3AA7892921FFF2580047A372 /* SDWebImageCoder.m in Sources */,
 				3A685BA8227161AF00A8F59D /* BTTNicknameSetController.m in Sources */,
 				3AB0685821A422B000072FB7 /* BTTPTTransferController+LoadData.m in Sources */,
+				D339CE9724C03CAC009ACD1C /* OTCInsideController.m in Sources */,
 				3A7A1A7521C0A7D800572B50 /* BTTXimaLogController.m in Sources */,
 				D331B20B23D539B10080A27D /* BTTConsetiveWinsPopView.m in Sources */,
 				3AB0688021A63D6C00072FB7 /* BTTModifyLimitViewController+LoadData.m in Sources */,
 				3A11ADE521818FD400B1AFF4 /* BTTBTCInfoCell.m in Sources */,
 				3A8F518E215F77AC0069D1B3 /* BTTTabBar.m in Sources */,
+				D339CE9C24C03CB7009ACD1C /* OTCInsideModel.m in Sources */,
 				3A8D6E9821633D3E000530DF /* CLive800Manager.m in Sources */,
 				3A11ADFE2181B72700B1AFF4 /* BTTWithdrawalCardSelectCell.m in Sources */,
 				3AE1EAE82180034C0073A32D /* BTTCardInfoAddCell.m in Sources */,
@@ -5616,7 +5638,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.97;
+				MARKETING_VERSION = 3.1.03;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5657,7 +5679,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 				);
-				MARKETING_VERSION = 3.0.97;
+				MARKETING_VERSION = 3.1.03;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

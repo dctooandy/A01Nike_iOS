@@ -55,6 +55,7 @@
 #import "BTTUsdtTodayNoticeView.h"
 #import "IVCNetworkStatusView.h"
 #import "IVCDetailViewController.h"
+#import "OTCInsideController.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -385,14 +386,16 @@
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }
-    if (self.buyUsdtLink!=nil&&![self.buyUsdtLink isEqualToString:@""]) {
-        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-        vc.title = @"充值/购买USDT";
-        vc.webConfigModel.theme = @"outside";
-        vc.webConfigModel.newView = YES;
-        vc.webConfigModel.url = self.buyUsdtLink;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+//    if (self.buyUsdtLink!=nil&&![self.buyUsdtLink isEqualToString:@""]) {
+//        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+//        vc.title = @"充值/购买USDT";
+//        vc.webConfigModel.theme = @"outside";
+//        vc.webConfigModel.newView = YES;
+//        vc.webConfigModel.url = self.buyUsdtLink;
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
+    OTCInsideController *vc = [[OTCInsideController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)pushToRechargeAssistantViewController{
