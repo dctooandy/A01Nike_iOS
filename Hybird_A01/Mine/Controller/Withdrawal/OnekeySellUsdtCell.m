@@ -23,8 +23,19 @@
         infoView.backgroundColor = kBlackBackgroundColor;
         [self.contentView addSubview:infoView];
         
+        NSString *str = @"取款USDT到帐后,可一键卖币提现至银行卡";
+        NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
+        
+        [attrStr addAttribute:NSForegroundColorAttributeName
+        value:[UIColor whiteColor]
+                        range:NSMakeRange(0, str.length)];
+        [attrStr addAttribute:NSForegroundColorAttributeName
+        value:[UIColor yellowColor]
+        range:NSMakeRange(11, 4)];
+        [attrStr addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(11, 4)];
+        
         UIButton *oneKeySellBtn = [[UIButton alloc]initWithFrame:CGRectMake(16, 112, SCREEN_WIDTH-32, 44)];
-        [oneKeySellBtn setTitle:@"一键卖币" forState:UIControlStateNormal];
+        [oneKeySellBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
         
         oneKeySellBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         [oneKeySellBtn setTitleColor:COLOR_HEX(0x2497FF) forState:UIControlStateNormal];
@@ -40,7 +51,7 @@
 }
 
 - (void)sellHidden:(BOOL)sellHidden{
-    self.onekeySellBtn.hidden = !sellHidden;
+    self.onekeySellBtn.hidden = YES;
 }
 
 - (void)oneKeySellUsdt{

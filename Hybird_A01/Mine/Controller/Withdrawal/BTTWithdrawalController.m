@@ -114,7 +114,8 @@
         
         BTTBitollWithDrawCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBitollWithDrawCell" forIndexPath:indexPath];
         BOOL imgHidden = ![self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"];
-        [cell setImageViewHidden:imgHidden onekeyHidden:!imgHidden sellHidden:self.isSellUsdt];
+        BOOL isSellUSDT = [self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"];
+        [cell setImageViewHidden:imgHidden onekeyHidden:!imgHidden sellHidden:isSellUSDT];
         cell.confirmTap = ^{
             if (self.bankList[self.selectIndex].accountId==nil) {
                             [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCard"];
@@ -472,7 +473,7 @@
     if ([model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"]) {
         params[@"protocol"] = @"ERC20";
     }
-    
+    BOOL isUSDTSell = [model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"]||[model.bankName isEqualToString:@"USDT"];
     weakSelf(weakSelf)
     [IVNetwork requestPostWithUrl:BTTWithDrawCreate paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
@@ -481,7 +482,7 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BTTWithdrawalSuccessController *vc = [[BTTWithdrawalSuccessController alloc] init];
             vc.amount = amount;
-            vc.isSell = self.isSellUsdt;
+            vc.isSell = self.isSellUsdt&&isUSDTSell;
             vc.sellLink = self.sellUsdtLink;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else{

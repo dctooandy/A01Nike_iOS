@@ -22,6 +22,9 @@
     [super viewDidLoad];
     [self setupCollectionView];
     [self setupElements];
+    if (self.isSell) {
+        [self showConfirmAlert];
+    }
 }
 
 - (void)setupCollectionView {
@@ -30,6 +33,26 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTWithdrawalSuccessCell" bundle:nil] forCellWithReuseIdentifier:@"BTTWithdrawalSuccessCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
     [self.collectionView registerClass:[OnekeySellUsdtCell class] forCellWithReuseIdentifier:@"OnekeySellUsdtCell"];
+}
+
+- (void)showConfirmAlert{
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"USDT一键卖币可快速提现至银行卡" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alertVC addAction:cancel];
+    UIAlertAction *unlock = [UIAlertAction actionWithTitle:@"去卖币" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (self.sellLink!=nil&&![self.sellLink isEqualToString:@""]) {
+            BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+            vc.title = @"一键卖币";
+            vc.webConfigModel.theme = @"outside";
+            vc.webConfigModel.newView = YES;
+            vc.webConfigModel.url = self.sellLink;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }];
+    [alertVC addAction:unlock];
+    [self presentViewController:alertVC animated:YES completion:nil];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
