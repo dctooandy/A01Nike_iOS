@@ -61,7 +61,7 @@
         UIButton *oneKeySellBtn = [[UIButton alloc]initWithFrame:CGRectMake(16, 74, SCREEN_WIDTH-32, 44)];
         [oneKeySellBtn setAttributedTitle:attrStr forState:UIControlStateNormal];
         
-        oneKeySellBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        oneKeySellBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [oneKeySellBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [oneKeySellBtn addTarget:self action:@selector(oneKeySellUsdt_click) forControlEvents:UIControlEventTouchUpInside];
         [infoView addSubview:oneKeySellBtn];
