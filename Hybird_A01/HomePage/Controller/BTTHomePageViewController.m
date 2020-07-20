@@ -345,11 +345,12 @@
             BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
             return cell;
         }
-        else if (indexPath.row == 13) {
-            BTTHomePageAmountsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAmountsCell" forIndexPath:indexPath];
-            cell.amounts = self.amounts;
-            return cell;
-        } else {
+//        else if (indexPath.row == 13) {
+//            BTTHomePageAmountsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAmountsCell" forIndexPath:indexPath];
+//            cell.amounts = self.amounts;
+//            return cell;
+//        }
+        else {
             BTTHomePageFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageFooterCell" forIndexPath:indexPath];
             cell.model = self.posters.count > 1 ? self.posters[1] : nil;
             return cell;
@@ -458,11 +459,12 @@
             BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
             return cell;
         }
-        else if (indexPath.row == 12) {
-            BTTHomePageAmountsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAmountsCell" forIndexPath:indexPath];
-            cell.amounts = self.amounts;
-            return cell;
-        } else {
+//        else if (indexPath.row == 12) {
+//            BTTHomePageAmountsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageAmountsCell" forIndexPath:indexPath];
+//            cell.amounts = self.amounts;
+//            return cell;
+//        }
+        else {
             BTTHomePageFooterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageFooterCell" forIndexPath:indexPath];
             cell.model = self.posters.count > 1 ? self.posters[1] : nil;
             return cell;
@@ -557,9 +559,9 @@
         self.adCellShow = NO;
     }
     if (self.adCellShow) {
-        total = 15;
-    } else {
         total = 14;
+    } else {
+        total = 13;
     }
     NSMutableArray *elementsHight = [NSMutableArray array];
     for (int i = 0; i < total; i++) {
@@ -588,9 +590,10 @@
             } else if (i == 6 || i == 8 || i == 10 || i == 12) {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
             }
-            else if (i == 13) {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 300)]];
-            } else {
+//            else if (i == 13) {
+//                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 300)]];
+//            }
+            else {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 60)]];
             }
         } else {
@@ -618,9 +621,10 @@
             } else if (i == 5 || i == 7 || i == 9 || i == 11) {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
             }
-            else if (i == 12) {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 300)]];
-            } else {
+//            else if (i == 12) {
+//                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 300)]];
+//            }
+            else {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 60)]];
             }
         }
