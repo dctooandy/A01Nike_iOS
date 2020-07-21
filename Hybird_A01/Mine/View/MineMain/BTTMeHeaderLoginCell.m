@@ -29,7 +29,7 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.vipLevelLabel.layer.cornerRadius = 2;
-    self.changeModeBtn.hidden = [IVNetwork savedUserInfo].newAccountFlag!=1;
+    self.changeModeBtn.hidden = YES;
 }
 
 - (void)setNoticeStr:(NSString *)noticeStr {
