@@ -148,9 +148,9 @@ PODS:
     - IVPublicAPILibrary/Models (= 1.0.8)
   - IVPublicAPILibrary/Models (1.0.8):
     - IVNetworkLibrary2.0
-  - IVPushLibrary (1.0.2):
-    - IVPushLibrary/Classes (= 1.0.2)
-  - IVPushLibrary/Classes (1.0.2)
+  - IVPushLibrary (1.0.5):
+    - IVPushLibrary/Classes (= 1.0.5)
+  - IVPushLibrary/Classes (1.0.5)
   - IVUpdateLibrary (1.0.1)
   - IVUZIPLibrary (1.0.4):
     - ZipArchive (~> 1.4.0)
@@ -270,7 +270,7 @@ CHECKOUT OPTIONS:
     :commit: 06ac5bba2fe94423c5d336c8c0d7dcd94f21589f
     :git: http://10.66.72.115/mobile-iOS-Library/IVPublicAPILibrary.git
   IVPushLibrary:
-    :commit: 742fd494a0c98216bf031453773a771380594eee
+    :commit: e23afa6a048a21e1dabd358c9bdf3f526375b0b9
     :git: http://10.66.72.115/mobile-iOS-Library/IVPushLibrary.git
   IVUpdateLibrary:
     :commit: df0862352f18086b765b31889d61fbf5b7b33190
@@ -296,7 +296,7 @@ SPEC CHECKSUMS:
   IVLoganAnalysis: 4bb58a66566ae1f5b816f1988d6da0bea07c9ae6
   IVNetworkLibrary2.0: 417f65074ac3d051ac6650d378eeba210bbc112c
   IVPublicAPILibrary: 27791aecccd8d8605d2026d0b89c7ab2257da9bd
-  IVPushLibrary: 87ebbd77b840da79186966329241cce629dbf905
+  IVPushLibrary: 1e048e2b5c898676bfce923c713098ebd43cc930
   IVUpdateLibrary: f5764f4cdfcf7919b37a1a2533aae0ff541d5c2d
   IVUZIPLibrary: ee9655054a4c3f85825fae5f95114fa3772f6e58
   IVWebViewLibrary: 479f066e01edf3afa0267b778eb2a664a664895c
