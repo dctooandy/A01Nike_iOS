@@ -135,6 +135,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isAdultWithBirthday:(NSString *)birthday;
 
 + (UIViewController *)mostFrontViewController;
++ (UIViewController*)currentViewController;
 
 /*******************判断是否为空字符串*******************/
 

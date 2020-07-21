@@ -22,14 +22,13 @@
 #import "IVCheckNetworkWrapper.h"
 #import "IVUzipWrapper.h"
 #import "IVKUpdateViewController.h"
+#import "IVPushManager.h"
+#import "HAInitConfig.h"
 
-@interface AppDelegate ()<UNUserNotificationCenterDelegate,OpenInstallDelegate>
+@interface AppDelegate ()<OpenInstallDelegate,IVPushDelegate>
 
-@property (nonatomic, strong) dispatch_semaphore_t semaphore;
 @property (nonatomic, strong) UIWindow *areaLimitWindow;
 @property (nonatomic, strong) BTTTabbarController *tabVC;
-@property (nonatomic, copy) NSString *ipsAdd;
-@property (nonatomic, assign) NSInteger ipsPort;
 @property (nonatomic, strong)dispatch_queue_t unzipQueue;
 
 @end
@@ -42,7 +41,6 @@
     self = [super init];
     if (self) {
         _unzipQueue = dispatch_queue_create("com.IVLibraryDemo.unzipQueue", DISPATCH_QUEUE_SERIAL);
-        self.semaphore = dispatch_semaphore_create(0);
 #if DEBUG
 #else
         if (EnvirmentType == 2) {
@@ -103,14 +101,6 @@
             if (result.cdn) {
                 [IVHttpManager shareManager].cdn = result.cdn;
             }
-            //ips逻辑
-            if (result.ipsIp) {
-                self.ipsAdd = result.ipsIp;
-                self.ipsPort = result.ipsPort;
-                if (self.semaphore) {
-                    dispatch_semaphore_signal(self.semaphore);
-                }
-            }
             //游戏站逻辑
             if (result.gcHosts) {
                 //获取最优的游戏站域名
@@ -131,7 +121,7 @@
     [self setupTabbarController];
     [self.window makeKeyAndVisible];
     [self initAnalysis];
-    [self initRemoteNotificationWithOptions:launchOptions];
+    [self initPushSDKWithApplication:application options:launchOptions];
     [CNPreCacheMananger prepareCacheDataNormal];
     [CNPreCacheMananger prepareCacheDataNeedLogin];
     [OpenInstallSDK initWithDelegate:self];
@@ -173,120 +163,65 @@
 }
 
 #pragma mark --------------------------推送相关-----------------------------------------------
-
-/** 初始化 启动遠端推送通知 */
-- (void)initRemoteNotificationWithOptions:(NSDictionary *)launchOptions
+- (void)initPushSDKWithApplication:(UIApplication *)application options:(NSDictionary *)options
 {
-    //远程通知启动
-    NSDictionary *remoteCotificationDic = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
-    if (remoteCotificationDic) {
-        NSDictionary *apsInfo = remoteCotificationDic[@"aps"];
-        if (apsInfo) {
-            [[PushManager sharedInstance] performActionDidReceiveRemoteNotification:remoteCotificationDic];
-        }
-    }
-    if (@available(iOS 10.0, *)) {
-        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-        center.delegate = self;
-        UNAuthorizationOptions options = (UNAuthorizationOptionBadge |
-                                          UNAuthorizationOptionSound |
-                                          UNAuthorizationOptionAlert);
-        [center requestAuthorizationWithOptions:options completionHandler:^(BOOL granted, NSError * _Nullable error) {
-            if (!error) {
-                NSLog(@"获取推送权限成功!");
-            }
-        }];
-    } else {
-        UIUserNotificationType types = (UIUserNotificationTypeSound |
-                                        UIUserNotificationTypeAlert |
-                                        UIUserNotificationTypeBadge);
-        UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
-    }
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    [IVPushManager sharedManager].appId = [HAInitConfig appId];
+    [IVPushManager sharedManager].customerId = [IVNetwork savedUserInfo].customerId;
+    [IVPushManager sharedManager].delegate = self;
+    [[IVPushManager sharedManager] application:application didFinishLaunchingWithOptions:options];
 }
-
-- (void)getIPSSuccessNotification:(NSNotification *)notify
-{
-    if (self.semaphore) {
-        dispatch_semaphore_signal(self.semaphore);
-    }
-}
-
-
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken{
-    if (deviceToken) {
-        NSString * deviceTokenString = [deviceToken description];
-        // 去掉<>字符
-        deviceTokenString = [deviceTokenString stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-        // 去掉空格
-        deviceTokenString = [deviceTokenString stringByReplacingOccurrencesOfString:@" " withString:@""];
-        NSLog(@"註冊遠端推送通知成功：deviceToken為\n %@\n %@", deviceToken, deviceTokenString);
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            [self startHeartPacket:deviceToken];
-        });
-    }
+    [[IVPushManager sharedManager] application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
-- (void)startHeartPacket:(NSData *)deviceToken
-{
-    
-    if (self.semaphore) {
-            dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
-        }
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                int uid = [[IVNetwork savedUserInfo].customerId intValue]; //需要填写真实的用户id
-                if (self.ipsAdd && self.ipsAdd.length > 0) {//使用后台配置
-                    [IVHeartSocketManager configHeartSocketWithIpAddress:self.ipsAdd port:self.ipsPort porductId:[IVHttpManager shareManager].productId];
-                } else {//使用默认
-                    IVHeartPacketEnvironment env = IVHeartPacketLocalEnvironment;
-                    switch ([IVHttpManager shareManager].environment) {
-                        case IVNEnvironmentPublishTest:
-                            env = IVHeartPacketGrayEnvironment;
-                            break;
-                        case IVNEnvironmentPublish:
-                            env = IVHeartPacketPublishEnvironment;
-                            break;
-                        default:
-                            break;
-                    }
-                    [IVHeartSocketManager configHeartSocketWithEnvironment:env productId:[IVHttpManager shareManager].productId];
-                }
-                //发送心跳
-                [IVHeartSocketManager sendHeartPacketWithApnsToken:deviceToken userid:uid];
-                self.semaphore = nil;
-            });
-}
+
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error{
-    NSLog(@"註冊遠端推送通知失敗：%@", error);
+    [[IVPushManager sharedManager] application:application didFailToRegisterForRemoteNotificationsWithError:error];
 }
 
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
-    [[PushManager sharedInstance] performActionDidReceiveRemoteNotification:userInfo];
+   [[IVPushManager sharedManager] application:application didReceiveRemoteNotification:userInfo];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-    NSLog(@"远端推送userInfo: %@", userInfo);
-    [[PushManager sharedInstance] performActionDidReceiveRemoteNotification:userInfo];
+    [[IVPushManager sharedManager] application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
 }
-#pragma mark - UNUserNotificationCenterDelegate
-
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler  API_AVAILABLE(ios(10.0)){
-    UNNotificationPresentationOptions options = (UNNotificationPresentationOptionBadge |
-                                                 UNNotificationPresentationOptionSound |
-                                                 UNNotificationPresentationOptionAlert);
-    completionHandler(options);
-    
-    NSDictionary *userInfo = notification.request.content.userInfo;
-    [[PushManager sharedInstance] performActionDidReceiveRemoteNotification:userInfo];
+- (void)IVPushRequestIpsSuperSignWithParameters:(NSDictionary *)paramesters
+{
+    [IVNetwork requestPostWithUrl:@"ips/ipsSuperSignSend" paramters:paramesters completionBlock:^(IVJResponseObject *  _Nullable response, NSError * _Nullable error) {
+        if ([response.head.errCode isEqualToString:@"0000"]) {
+            NSLog(@"send ipsSuperSign success");
+        }
+    }];
 }
 
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)(void))completionHandler  API_AVAILABLE(ios(10.0)){
-    completionHandler();
-    
-    NSDictionary *userInfo = response.notification.request.content.userInfo;
-    [[PushManager sharedInstance] performActionDidReceiveRemoteNotification:userInfo];
+- (void)IVPushForwardWithUrl:(NSString *)url messageId:(NSString *)messageId
+{
+    if (url != nil && url.length > 0) {
+        if (![url hasPrefix:@"http"]) {
+            url = [NSString stringWithFormat:@"%@%@",[IVHttpManager shareManager].domain,url];
+        }
+    } else {
+        if (messageId != nil && messageId.length > 0) {
+            url = [NSString stringWithFormat:@"customer/letter_detail.htm?id=%@",messageId];
+        } else {
+            return;
+        }
+    }
+    UIViewController *topVC = [PublicMethod currentViewController];
+    if ([topVC isKindOfClass:[BTTBaseWebViewController class]]) {
+        BTTBaseWebViewController *topWebVC = (BTTBaseWebViewController *)topVC;
+        if (topWebVC.webConfigModel.newView) {
+            topWebVC.webConfigModel.url = url;
+            [topWebVC loadWebView];
+            return;
+        }
+    }
+    BTTBaseWebViewController  *webController = [[BTTBaseWebViewController alloc] init];
+    webController.webConfigModel.url = url;
+    webController.webConfigModel.newView = YES;
+    [webController loadWebView];
+    [topVC.navigationController pushViewController:webController animated:YES];
 }
-
 - (void)gatewaySwitchNotification:(NSNotification *)notification
 {
     [NBSAppAgent trackEvent:@"网关切换" withEventTag:@"gateway_change" withEventProperties:notification.userInfo];

@@ -1806,6 +1806,7 @@
 		3AFCD7CD21AD179600B136C1 /* BTTVideoGameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVideoGameCell.h; sourceTree = "<group>"; };
 		3AFCD7CE21AD179600B136C1 /* BTTVideoGameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVideoGameCell.m; sourceTree = "<group>"; };
 		3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGameCell.xib; sourceTree = "<group>"; };
+		62DAB42824C569F6001F16B4 /* Hybird_A01.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hybird_A01.entitlements; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_A01.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D318AC1424333BC500183407 /* BTTKSAddBfbWalletController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTKSAddBfbWalletController.h; sourceTree = "<group>"; };
 		D318AC1524333BC500183407 /* BTTKSAddBfbWalletController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTKSAddBfbWalletController.m; sourceTree = "<group>"; };
@@ -2048,7 +2049,6 @@
 		EA55F37A21C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTWithdrawalNotifyCell.xib; sourceTree = "<group>"; };
 		EA55F37D21C220CA008FB0E1 /* BTTBetInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBetInfoModel.h; sourceTree = "<group>"; };
 		EA55F37E21C220CA008FB0E1 /* BTTBetInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBetInfoModel.m; sourceTree = "<group>"; };
-		EA55F38021C343D5008FB0E1 /* Hybird_A01.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hybird_A01.entitlements; sourceTree = "<group>"; };
 		EA5F140921A26042004305A7 /* BTTRequestPrecache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTRequestPrecache.h; sourceTree = "<group>"; };
 		EA5F140A21A26042004305A7 /* BTTRequestPrecache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTRequestPrecache.m; sourceTree = "<group>"; };
 		EA5F140C21A261BA004305A7 /* BTTHttpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTHttpManager.h; sourceTree = "<group>"; };
@@ -2886,7 +2886,7 @@
 		3A8F512D215F74CF0069D1B3 /* Hybird_A01 */ = {
 			isa = PBXGroup;
 			children = (
-				EA55F38021C343D5008FB0E1 /* Hybird_A01.entitlements */,
+				62DAB42824C569F6001F16B4 /* Hybird_A01.entitlements */,
 				3A8F516B215F75F20069D1B3 /* Constants.h */,
 				3AD9CF05216C71C800685B43 /* AppInitializeConfig.h */,
 				3A8F5166215F75780069D1B3 /* Public */,
@@ -4566,6 +4566,9 @@
 							com.apple.Push = {
 								enabled = 1;
 							};
+							com.apple.Siri = {
+								enabled = 0;
+							};
 						};
 					};
 					3A8F5142215F74D00069D1B3 = {
@@ -5526,7 +5529,8 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zak Edward (DC3SUY9934)";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -5585,7 +5589,8 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zak Edward (DC3SUY9934)";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -5612,11 +5617,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = Hybird_A01/Hybird_A01.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zak Edward (DC3SUY9934)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T52TF6XR23;
+				DEVELOPMENT_TEAM = DC3SUY9934;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5637,12 +5642,14 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP/lib/pjsip",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
+					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.04;
-				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
+
+				MARKETING_VERSION = 3.1.02;
+				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.bttvip2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = iPhone0613_dev;
+				PROVISIONING_PROFILE_SPECIFIER = vip_hoc;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -5653,11 +5660,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = Hybird_A01/Hybird_A01.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zak Edward (DC3SUY9934)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = T52TF6XR23;
+				DEVELOPMENT_TEAM = DC3SUY9934;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5678,12 +5685,14 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP/lib/pjsip",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
+					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.04;
-				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btt;
+
+				MARKETING_VERSION = 3.1.02;
+				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.bttvip2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
-				PROVISIONING_PROFILE_SPECIFIER = iPhone0613_dev;
+				PROVISIONING_PROFILE_SPECIFIER = vip_hoc;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -13,7 +13,7 @@
 #import "CLive800Manager.h"
 #import "BTTRequestPrecache.h"
 #import "CNPreCacheMananger.h"
-
+#import "IVPushManager.h"
 @implementation BTTUserStatusManager
 + (void)loginSuccessWithUserInfo:(NSDictionary *)userInfo
 {
@@ -21,7 +21,6 @@
     NSString *userId = [IVNetwork savedUserInfo].customerId;
     [NBSAppAgent setUserIdentifier:userId];
     [[IVGameManager sharedManager] userStatusChanged:YES];
-    [IVHeartSocketManager loginSendHeartPacketWihUserid:[userId intValue]];
     LIVUserInfo *userModel = nil;
        if ([IVNetwork savedUserInfo]) {
            userModel = [LIVUserInfo new];
@@ -30,6 +29,8 @@
            userModel.loginName = [IVNetwork savedUserInfo].loginName;
            userModel.name = [IVNetwork savedUserInfo].loginName;;
        }
+    [IVPushManager sharedManager].customerId = [IVNetwork savedUserInfo].customerId;
+    [[IVPushManager sharedManager] sendIpsSuperSign];
     [CLive800Manager switchLive800UserWithCustomerId:userModel];
     [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccessNotification object:nil];
     [BTTRequestPrecache updateCacheNeedLoginRequest];
