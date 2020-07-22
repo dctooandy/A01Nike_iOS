@@ -5644,12 +5644,11 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty",
 				);
-
-				MARKETING_VERSION = 3.1.02;
-				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.bttvip2;
+				MARKETING_VERSION = 1.0.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btta01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = vip_hoc;
+				PROVISIONING_PROFILE_SPECIFIER = btta01hoc;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -5687,12 +5686,11 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty",
 				);
-
-				MARKETING_VERSION = 3.1.02;
-				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.bttvip2;
+				MARKETING_VERSION = 1.0.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btta01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
-				PROVISIONING_PROFILE_SPECIFIER = vip_hoc;
+				PROVISIONING_PROFILE_SPECIFIER = btta01hoc;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

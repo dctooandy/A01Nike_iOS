@@ -411,7 +411,7 @@
                         }
                             break;
                         case BTTSafeVerifyTypeMobileBindAddUSDTCard:{
-                            BTTAddBitollCardController *vc = [BTTAddBitollCardController new];
+                            BTTAddUSDTController *vc = [BTTAddUSDTController new];
                             vc.messageId = messageId;
                             vc.validateId = validateId;
                             [self.navigationController pushViewController:vc animated:YES];

@@ -260,10 +260,22 @@
         }
     }
     CGFloat amount = [self.amount doubleValue];
-    BOOL enable = amount >= 10 && amount <= 1000000;
-    [self getSubmitBtn].enabled = enable;
-    if (amount > 1000000) {
-        [MBProgressHUD showMessagNoActivity:@"超过最大取款额度!" toView:self.view];
+    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+        BOOL enable = amount >= 1 && amount <= 1430000;
+        [self getSubmitBtn].enabled = enable;
+    }else{
+        BOOL enable = amount >= 10 && amount <= 10000000;
+        [self getSubmitBtn].enabled = enable;
+    }
+    
+    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+        if (amount > 1430000) {
+            [MBProgressHUD showMessagNoActivity:@"超过最大取款额度!" toView:self.view];
+        }
+    }else{
+        if (amount > 10000000) {
+            [MBProgressHUD showMessagNoActivity:@"超过最大取款额度!" toView:self.view];
+        }
     }
 }
 - (UIButton *)getSubmitBtn
