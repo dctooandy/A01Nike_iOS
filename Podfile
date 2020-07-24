@@ -14,7 +14,7 @@ target ‘Hybird_A01’ do
   pod 'TXScrollLabelView'
   
 #  pod 'IVNetworkLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary.git'
-  pod 'IVGameLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git',:branch=>'v1.0'
+  pod 'IVGameLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git'
   pod 'IVWebViewLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVWebViewLibrary.git',:branch=>'1.0'
 #  pod 'IVHeartPacketLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git'
   

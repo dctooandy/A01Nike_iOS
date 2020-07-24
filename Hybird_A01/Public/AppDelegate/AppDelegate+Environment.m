@@ -39,6 +39,7 @@
     //设置初始数据
     [IVWebViewManager sharaManager].delegate = [IVWebViewUtility new];
     [IVGameManager sharedManager].delegate = [IVGameUtility new];
+    [IVGameManager sharedManager].isNew = YES;
     [IVGameManager sharedManager].isPushAGQJ = YES;
     [WebViewUserAgaent writeIOSUserAgent];
     

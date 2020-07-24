@@ -53,25 +53,13 @@
     }
 }
 
-- (NSString *)IVGameAppendingUserInfoWithUrl:(NSString *)url parameters:(NSDictionary *)parameters {
-    NSString *resultUrl = [NSString getURL:url queryParameters:[PublicMethod commonH5ArgumentWithUserParameters:@{}]];
-    return resultUrl;
-}
+
 - (NSString *)IVGameAppendingParamtersWithUrl:(NSString *)url parameters:(NSDictionary *)parameters
 {
     NSString *resultUrl = [NSString getURL:url queryParameters:parameters];
     return resultUrl;
 }
-- (NSString *)customizeAppendingUrlWithModel:(IVGameModel *)model originalUrl:(NSString *)url data:(id)data
-{
-    NSString *urlStr = url.copy;
-    if ([model.provider isEqualToString:kPTProvider]) {
-        NSDictionary *postMap = [data valueForKey:@"postMap"];
-        urlStr = [NSString stringWithFormat:@"%@game_pt.html?",[IVHttpManager shareManager].domain] ;
-        urlStr = [self appendingURLString:urlStr parameters:postMap];
-    }
-    return urlStr;
-}
+
 - (BOOL)IVGameShouldForwardToGame {
 
     if ([[UIDevice networkType] isEqualToString:@"notReachable"]) {
@@ -80,23 +68,34 @@
     }
     return YES;
 }
-
-- (void)IVGameGetUrlWithParamters:(NSDictionary *)paramters gameController:(IVWKGameViewController *)gameController completion:(void (^)(BOOL,NSString *))completion
+- (void)IVGameGetUrlWithParamters:(NSDictionary *)paramters gameController:(IVWKGameViewController *)gameController completion:(void (^)(BOOL, NSString *))completion
 {
-    BOOL isTry = ![IVHttpManager shareManager].userToken.length;
-    [BTTHttpManager publicGameLoginWithParams:paramters isTry:isTry completeBlock:^(IVRequestResultModel *result, id response) {
-        if (result.code_http==200&&[result.message isEqualToString:@"游戏维护中"]) {
-            if (completion) {
-                completion(YES,@"");
-            }
-        }else{
-            if (completion) {
-                completion(result.status,response);
-            }
+    __weak typeof(self)weakSelf = self;
+    [[IVHttpManager shareManager] sendRequestWithUrl:@"game/inGame" parameters:paramters.copy callBack:^(IVJResponseObject * _Nullable response, NSError * _Nullable error) {
+        
+        if ([response.head.errCode isEqualToString:@"GW_801607"]) {
+            completion(YES,nil);
+            return;
         }
+        if (![response.head.errCode isEqualToString:@"0000"]) {
+            completion(NO,nil);
+            return;
+        }
+        
+        NSString *url = [response.body valueForKey:@"url"];
+        
+
+        if ([gameController.gameModel.provider isEqualToString:kPTProvider]) {
+            NSDictionary *postMap = [response.body valueForKey:@"postMap"];
+            url = [NSString stringWithFormat:@"%@game_pt.html?",[IVHttpManager shareManager].domain] ;
+            url = [weakSelf appendingURLString:url parameters:postMap];
+        }
+        
+        completion(YES,url);
         
     }];
 }
+
 - (void)IVGameTransferWithProvider:(NSString *)provider
 {
 
