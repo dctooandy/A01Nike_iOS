@@ -51,9 +51,9 @@ PODS:
     - IVCheckNetworkLibrary/Classes/Http
     - IVCheckNetworkLibrary/Classes/SDK/Ping
     - IVNetworkLibrary2.0
-  - IVGameLibrary (1.1.7):
-    - IVGameLibrary/GameController (= 1.1.7)
-  - IVGameLibrary/GameController (1.1.7)
+  - IVGameLibrary (2.0.1):
+    - IVGameLibrary/GameController (= 2.0.1)
+  - IVGameLibrary/GameController (2.0.1)
   - IVHeartPacketLibrary (0.0.4):
     - CocoaAsyncSocket (~> 7.6.2)
   - IVLoganAnalysis (0.0.8):
@@ -182,7 +182,7 @@ DEPENDENCIES:
   - IQKeyboardManager (~> 5.0.6)
   - IVCacheLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVCacheLibrary.git`)
   - IVCheckNetworkLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVCheckNetworkLibrary.git`)
-  - IVGameLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git`, branch `v1.0`)
+  - IVGameLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git`, branch `v2.0`)
   - IVHeartPacketLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git`)
   - IVLoganAnalysis (from `http://10.66.72.115/mobile-iOS-Library/IVLoganAnalysis.git`)
   - IVNetworkLibrary2.0 (from `http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary2.0.git`)
@@ -227,7 +227,7 @@ EXTERNAL SOURCES:
   IVCheckNetworkLibrary:
     :git: http://10.66.72.115/mobile-iOS-Library/IVCheckNetworkLibrary.git
   IVGameLibrary:
-    :branch: v1.0
+    :branch: v2.0
     :git: http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git
   IVHeartPacketLibrary:
     :git: http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git
@@ -255,7 +255,7 @@ CHECKOUT OPTIONS:
     :commit: 72d04408b456e4aa7a66cda7ea9a2cd5ff31fbc2
     :git: http://10.66.72.115/mobile-iOS-Library/IVCheckNetworkLibrary.git
   IVGameLibrary:
-    :commit: 821e331e315b7b5c2962406add9288a94a4ec83d
+    :commit: 6dcc9101900a2c40ef2ec5179ba6cd65668ad623
     :git: http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git
   IVHeartPacketLibrary:
     :commit: cb81f459cb55163fd8493d0a62ea5339089703fc
@@ -291,7 +291,7 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 266cb7b1d11f94a3e71229d77f960f9a1b538e5b
   IVCacheLibrary: df3d2654c929743d92df5fa77d22894fb36b3d29
   IVCheckNetworkLibrary: 70743fdc89e78a60a7ed7a2e8d44eb45e481ef7c
-  IVGameLibrary: 6efd65f766d241ff766828daec5860234e6fded8
+  IVGameLibrary: ef81429c546f09ed6a18f0a2a7121ec3dd15ed04
   IVHeartPacketLibrary: 2a122b1d8cedf8346b4898ace4736147cf9a0405
   IVLoganAnalysis: 4bb58a66566ae1f5b816f1988d6da0bea07c9ae6
   IVNetworkLibrary2.0: 417f65074ac3d051ac6650d378eeba210bbc112c
@@ -312,6 +312,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
-PODFILE CHECKSUM: 72c42fdd44f5140e3142edd776c26ee3e442fe35
+PODFILE CHECKSUM: dd93af95ac9cfb84101d350f2041d3f68726968b
 
 COCOAPODS: 1.8.4

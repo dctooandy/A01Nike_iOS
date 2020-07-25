@@ -37,6 +37,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self addGameViewToSelf];
     [self registerNotifiction];
 }
@@ -69,6 +70,10 @@
 }
 - (void)addGameViewToSelf
 {
+    IVGameManager *manager = [IVGameManager sharedManager];
+    IVGameModel *gameModel = manager.agqjVC.gameModel;
+    gameModel.platformCurrency = self.platformLine;
+    manager.agqjVC.gameModel = gameModel;
     [self addChildViewController:[IVGameManager sharedManager].agqjVC];
     [self.view addSubview:[IVGameManager sharedManager].agqjVC.view];
     [IVGameManager sharedManager].agqjVC.view.frame = self.view.frame;

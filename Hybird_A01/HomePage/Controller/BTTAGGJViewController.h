@@ -10,4 +10,5 @@
 
 @interface BTTAGGJViewController : UIViewController
 + (void)addGameViewToWindow;
+@property (nonatomic, copy) NSString *platformLine;
 @end

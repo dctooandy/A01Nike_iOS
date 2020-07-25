@@ -634,6 +634,92 @@
         [self.collectionView reloadData];
     });
 }
+
+- (void)choseGameLineWithTag:(NSInteger)tag{
+    NSDictionary *params = @{
+        @"currency": [IVNetwork savedUserInfo].newAccountFlag==1 ? @"USDT" : @"CNY"
+    };
+    NSString *jsonKey = @"";
+    switch (tag) {
+        case 1000:
+            jsonKey = @"A01003";
+            break;
+        case 1001:
+            jsonKey = @"A01026";
+            break;
+        case 1006:
+            jsonKey = @"A01031";
+            break;
+        case 1010:
+            jsonKey = @"A01064";
+            break;
+            
+        default:
+            break;
+    }
+    [IVNetwork requestPostWithUrl:QUERYGames paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        NSLog(@"%@",result.body);
+        NSArray *lineArray = result.body[jsonKey];
+        if (nil!=lineArray&&lineArray.count>=2) {
+            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择游戏币种" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+            for (int i=0; i<lineArray.count; i++) {
+                NSDictionary *json = lineArray[i];
+                NSString *name = json[@"platformCurrency"];
+                UIAlertAction *unlock = [UIAlertAction actionWithTitle:name style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    [self gotoGameWithTag:tag currency:name];
+                }];
+                [alertVC addAction:unlock];
+                if (i==lineArray.count-1) {
+                    [self presentViewController:alertVC animated:YES completion:nil];
+                }
+            }
+        }else{
+            if (nil==lineArray) {
+                [self gotoGameWithTag:tag currency:@"CNY"];
+            }else{
+                NSDictionary *json = lineArray[0];
+                NSString *name = json[@"platformCurrency"];
+                [self gotoGameWithTag:tag currency:name];
+            }
+        }
+            
+        
+        
+    }];
+}
+
+- (void)gotoGameWithTag:(NSInteger)tag currency:(NSString *)currency{
+    if (tag==1000) {
+        BTTAGQJViewController *vc = [BTTAGQJViewController new];
+        [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+        vc.platformLine = currency;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else if (tag==1001) {
+        BTTAGGJViewController *vc = [BTTAGGJViewController new];
+        vc.platformLine = currency;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (tag==1006){
+        IVGameModel *model = [[IVGameModel alloc] init];
+        model.cnName = @"沙巴体育";
+        model.enName =  kASBEnName;
+        model.gameCode = @"A01031";
+        model.provider =  kShaBaProvider;
+        model.platformCurrency = currency;
+        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+    }else if (tag==1010){
+        IVGameModel *model = [[IVGameModel alloc] init];
+        model = [[IVGameModel alloc] init];
+        model.cnName = @"AS真人棋牌";
+        model.enName =  kASSlotEnName;
+        model.provider = kASSlotProvider;
+        model.platformCurrency = currency;
+        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+    }
+}
+
 - (void)forwardToGameViewWithTag:(NSInteger)tag
 {
     UIViewController *vc = nil;
@@ -742,13 +828,23 @@
     if ([IVNetwork savedUserInfo]) {
         if (vc || videoGamesVC) {
             if (vc) {
-                [self.navigationController pushViewController:vc animated:YES];
+                if (tag==1000||tag==1001) {
+                    [self choseGameLineWithTag:tag];
+                }else{
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                
             } else if (videoGamesVC) {
                 [self.navigationController pushViewController:videoGamesVC animated:YES];
             }
         }
         if (model) {
-            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+            if (tag==1006||tag==1010) {
+                [self choseGameLineWithTag:tag];
+            }else{
+                [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+            }
+            
         }
     } else {
         if (tag == 1006 || tag == 1011 || tag == 1008) {
@@ -765,13 +861,21 @@
                 if (btn.tag == 1090) {
                     if (vc || videoGamesVC) {
                         if (vc) {
-                            [self.navigationController pushViewController:vc animated:YES];
+                            if (tag==1000||tag==1001) {
+                                [self choseGameLineWithTag:tag];
+                            }else{
+                                [self.navigationController pushViewController:vc animated:YES];
+                            }
                         } else if (videoGamesVC) {
                             [self.navigationController pushViewController:videoGamesVC animated:YES];
                         }
                     }
                     if (model) {
-                        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:strongSelf];
+                        if (tag==1006||tag==1010) {
+                            [self choseGameLineWithTag:tag];
+                        }else{
+                            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+                        }
                     }
                 } else {
                     [MBProgressHUD showError:@"请先登录" toView:nil];

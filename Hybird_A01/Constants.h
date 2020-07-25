@@ -362,6 +362,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTQueryAmountList                         @"deposit/queryAmountList"
 // 查询洗码额度v2
 #define BTTXimaAmount                              @"xm/calcAmountV2"
+#define QUERYGames                                 @"game/queryGames"
 // 查询洗码提案列表
 #define BTTXimaQueryRequest                        @"xm/queryRequest"
 // 查询洗码历史记录

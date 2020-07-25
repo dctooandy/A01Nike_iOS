@@ -45,6 +45,10 @@
 }
 - (void)addGameViewToSelf
 {
+    IVGameManager *manager = [IVGameManager sharedManager];
+    IVGameModel *gameModel = manager.agqjVC.gameModel;
+    gameModel.platformCurrency = self.platformLine;
+    manager.agqjVC.gameModel = gameModel;
     [self addChildViewController:[IVGameManager sharedManager].aginVC];
     [self.view addSubview:[IVGameManager sharedManager].aginVC.view];
     [IVGameManager sharedManager].aginVC.view.frame = self.view.frame;
