@@ -31,7 +31,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if ([IVGameManager sharedManager].agqjVC.parentViewController != self) {
+    if ([IVGameManager sharedManager].aginVC.parentViewController != self) {
         [self addGameViewToSelf];
     }
 }
