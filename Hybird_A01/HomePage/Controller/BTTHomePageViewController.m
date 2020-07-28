@@ -672,6 +672,11 @@
                 }];
                 [alertVC addAction:unlock];
                 if (i==lineArray.count-1) {
+                    UIAlertAction *closelock = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        
+                        [alertVC dismissViewControllerAnimated:YES completion:nil];
+                    }];
+                    [alertVC addAction:closelock];
                     [self presentViewController:alertVC animated:YES completion:nil];
                 }
             }
