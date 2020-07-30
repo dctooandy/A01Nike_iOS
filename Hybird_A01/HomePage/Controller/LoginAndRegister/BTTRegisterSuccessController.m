@@ -17,6 +17,7 @@
 #import "IVRsaEncryptWrapper.h"
 #import "BTTUserStatusManager.h"
 #import "CNPayConstant.h"
+#import "IVPushManager.h"
 
 typedef enum {
     BTTRegisterSuccessTypeNormal,
@@ -324,6 +325,8 @@ typedef enum {
                 [IVHttpManager shareManager].loginName = self.account;
                 [IVHttpManager shareManager].userToken = result.body[@"token"];
                 [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
+                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"customerId"] forKey:@"pushcustomerid"];
+                [IVPushManager sharedManager].customerId = result.body[@"customerId"];
                 NSInteger flag = [[NSString stringWithFormat:@"%@",result.body[@"newAccountFlag"]] integerValue];
                 if (flag==1) {
                     [self switchAccountWithName:result.body[@"loginName"]];

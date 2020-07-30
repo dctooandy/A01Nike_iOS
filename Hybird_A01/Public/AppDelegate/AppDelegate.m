@@ -165,8 +165,9 @@
 #pragma mark --------------------------推送相关-----------------------------------------------
 - (void)initPushSDKWithApplication:(UIApplication *)application options:(NSDictionary *)options
 {
+    NSString *customerId = [NSString stringWithFormat:@"%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"pushcustomerid"]];
     [IVPushManager sharedManager].appId = [HAInitConfig appId];
-    [IVPushManager sharedManager].customerId = [IVNetwork savedUserInfo].customerId;
+    [IVPushManager sharedManager].customerId = customerId;
     [IVPushManager sharedManager].delegate = self;
     [[IVPushManager sharedManager] application:application didFinishLaunchingWithOptions:options];
 }

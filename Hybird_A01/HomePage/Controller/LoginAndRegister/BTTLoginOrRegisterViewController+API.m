@@ -20,6 +20,7 @@
 #import "IVRsaEncryptWrapper.h"
 #import "BTTNormalRegisterSuccessController.h"
 #import "OneKeyPhoneController.h"
+#import "IVPushManager.h"
 
 @implementation BTTLoginOrRegisterViewController (API)
 
@@ -153,12 +154,15 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             self.uuid = @"";
             self.wrongPwdNum = 0;
+            
             if (result.body[@"samePhoneLoginNames"]!=nil) {
                 NSArray *loginArray = result.body[@"samePhoneLoginNames"];
                 NSString *messageId = result.body[@"messageId"];
                 NSString *validateId = result.body[@"validateId"];
                 [self showPopViewWithAccounts:loginArray withPhone:model.login_name withValidateId:validateId messageId:messageId smsCode:model.password isBack:isback];
             }else{
+                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"customerId"] forKey:@"pushcustomerid"];
+                [IVPushManager sharedManager].customerId = result.body[@"customerId"];
                 [IVHttpManager shareManager].loginName = model.login_name;
                 [IVHttpManager shareManager].userToken = result.body[@"token"];
                 [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
