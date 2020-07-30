@@ -30,6 +30,7 @@
 @property (nonatomic, strong) UIWindow *areaLimitWindow;
 @property (nonatomic, strong) BTTTabbarController *tabVC;
 @property (nonatomic, strong)dispatch_queue_t unzipQueue;
+@property (nonatomic, strong) NSDictionary *signPushDic;
 
 @end
 
@@ -186,8 +187,23 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     [[IVPushManager sharedManager] application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
 }
+
+-(void)reSendIVPushRequestIpsSuperSign:(NSString *)customerId {
+    if (self.signPushDic == NULL) {
+        return ;
+    }
+    NSMutableDictionary *tempDic = [NSMutableDictionary dictionaryWithCapacity:1];
+    [tempDic setDictionary:self.signPushDic];
+    [tempDic setObject:customerId forKey:@"customerId"];;
+    NSDictionary *dic = [NSDictionary dictionaryWithDictionary:tempDic];
+    [self IVPushRequestIpsSuperSignWithParameters:dic];
+    
+}
+
 - (void)IVPushRequestIpsSuperSignWithParameters:(NSDictionary *)paramesters
 {
+    self.signPushDic = paramesters;
+    
     [IVNetwork requestPostWithUrl:@"ips/ipsSuperSignSend" paramters:paramesters completionBlock:^(IVJResponseObject *  _Nullable response, NSError * _Nullable error) {
         if ([response.head.errCode isEqualToString:@"0000"]) {
             NSLog(@"send ipsSuperSign success");

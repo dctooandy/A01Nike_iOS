@@ -12,6 +12,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+-(void)reSendIVPushRequestIpsSuperSign:(NSString *)customerId;
+
 
 @end
 
