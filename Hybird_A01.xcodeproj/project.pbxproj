@@ -655,6 +655,7 @@
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_A01.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
+		D317745224D26B4B009B1814 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		D318AC1724333BC500183407 /* BTTKSAddBfbWalletController.m in Sources */ = {isa = PBXBuildFile; fileRef = D318AC1524333BC500183407 /* BTTKSAddBfbWalletController.m */; };
 		D318AC1824333BC500183407 /* BTTKSAddBfbWalletController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D318AC1624333BC500183407 /* BTTKSAddBfbWalletController.xib */; };
 		D31B0EEB23B451B0003666BA /* BTTAddUSDTController.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B0EE923B451B0003666BA /* BTTAddUSDTController.m */; };
@@ -2094,6 +2095,7 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
+				D317745224D26B4B009B1814 /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -3600,6 +3602,9 @@
 				D331B20923D539B10080A27D /* BTTConsetiveWinsPopView.h */,
 				D331B20823D539B10080A27D /* BTTConsetiveWinsPopView.m */,
 				D331B20A23D539B10080A27D /* BTTConsetiveWinsPopView.xib */,
+				D317744D24D26471009B1814 /* DSBRedBagPopView.h */,
+				D317744E24D26471009B1814 /* DSBRedBagPopView.m */,
+				D317745024D2648C009B1814 /* DSBRedBagPopView.xib */,
 				3A0CCECF238B7F1B00CFEE22 /* NewAccountGuide */,
 				3A14CC5B237A4AFA009711CF /* NewHomePage */,
 				3AF9EB5822A4B5B200A85D9F /* MidAutumn */,
@@ -3665,9 +3670,6 @@
 				3A14CC5623726A8C009711CF /* BTTJayPopView.h */,
 				3A14CC5723726A8C009711CF /* BTTJayPopView.m */,
 				3A14CC5923726A9E009711CF /* BTTJayPopView.xib */,
-				D317744D24D26471009B1814 /* DSBRedBagPopView.h */,
-				D317744E24D26471009B1814 /* DSBRedBagPopView.m */,
-				D317745024D2648C009B1814 /* DSBRedBagPopView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -8,14 +8,36 @@
 
 #import "DSBRedBagPopView.h"
 
+@interface DSBRedBagPopView ()
+@property (weak, nonatomic) IBOutlet UIImageView *contentImg;
+
+@end
+
 @implementation DSBRedBagPopView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
++ (instancetype)viewFromXib {
+    return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil][0];
 }
-*/
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    [self addGestureRecognizer:tap];
+}
+
+- (void)tap {
+    if (self.tapActivity) {
+        self.tapActivity();
+    }
+}
+- (IBAction)lqBtn_click:(id)sender {
+    if (self.tapConfirm) {
+        self.tapConfirm();
+    }
+}
+
+- (void)setContentMessage:(NSString *)message{
+    _contentImg.image = [UIImage imageNamed:message];
+}
 
 @end

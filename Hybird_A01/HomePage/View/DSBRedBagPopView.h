@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DSBRedBagPopView : BTTBaseAnimationPopView
-
+@property (nonatomic, copy) void(^tapActivity)(void);
+@property (nonatomic, copy) void(^tapConfirm)(void);
+- (void)setContentMessage:(NSString *)message;
 @end
 
 NS_ASSUME_NONNULL_END

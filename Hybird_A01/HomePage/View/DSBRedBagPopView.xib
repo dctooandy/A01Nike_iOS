@@ -13,9 +13,46 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DSBRedBagPopView">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dsb_rb_bg" translatesAutoresizingMaskIntoConstraints="NO" id="yF6-al-JEV">
+                    <rect key="frame" x="57" y="260.5" width="300" height="375"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="AjL-fh-hzP"/>
+                        <constraint firstAttribute="height" constant="375" id="GN6-Lw-MjE"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dsb_content_108" translatesAutoresizingMaskIntoConstraints="NO" id="Wj7-Kk-OO8">
+                    <rect key="frame" x="117" y="430.5" width="180" height="134"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BKK-fP-bQ2">
+                    <rect key="frame" x="117" y="572.5" width="180" height="47"/>
+                    <state key="normal" image="dsb_lq"/>
+                    <connections>
+                        <action selector="lqBtn_click:" destination="iN0-l3-epB" eventType="touchUpInside" id="pub-86-hct"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="BKK-fP-bQ2" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="6hf-W3-YBj"/>
+                <constraint firstItem="Wj7-Kk-OO8" firstAttribute="trailing" secondItem="yF6-al-JEV" secondAttribute="trailing" constant="-60" id="7k7-3H-yWR"/>
+                <constraint firstItem="BKK-fP-bQ2" firstAttribute="leading" secondItem="Wj7-Kk-OO8" secondAttribute="leading" id="80Y-yr-3Yl"/>
+                <constraint firstItem="yF6-al-JEV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="962-Eq-1Lf"/>
+                <constraint firstItem="BKK-fP-bQ2" firstAttribute="bottom" secondItem="yF6-al-JEV" secondAttribute="bottom" constant="-16" id="cVy-ek-vph"/>
+                <constraint firstItem="Wj7-Kk-OO8" firstAttribute="top" secondItem="yF6-al-JEV" secondAttribute="top" constant="170" id="dNb-F1-mMx"/>
+                <constraint firstItem="Wj7-Kk-OO8" firstAttribute="leading" secondItem="yF6-al-JEV" secondAttribute="leading" constant="60" id="fyW-xe-Eh9"/>
+                <constraint firstItem="yF6-al-JEV" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="pVT-AH-5Rd"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="contentImg" destination="Wj7-Kk-OO8" id="74S-YR-U8p"/>
+            </connections>
             <point key="canvasLocation" x="132" y="113"/>
         </view>
     </objects>
+    <resources>
+        <image name="dsb_content_108" width="251" height="134"/>
+        <image name="dsb_lq" width="225" height="47"/>
+        <image name="dsb_rb_bg" width="375" height="465.5"/>
+    </resources>
 </document>

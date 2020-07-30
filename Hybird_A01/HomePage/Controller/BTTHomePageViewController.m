@@ -42,6 +42,7 @@
 #import "BTTConsetiveWinsPopView.h"
 #import "BTTLive800ViewController.h"
 #import "CLive800Manager.h"
+#import "DSBRedBagPopView.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -62,6 +63,7 @@
     if ([IVNetwork savedUserInfo]) {
         self.isLogin = YES;
         [self checkHasShow];
+        [self requestRedbag];
     } else {
         self.isLogin = NO;
     }
@@ -94,6 +96,7 @@
     [self setupFloatWindow];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LoginSuccessNotification object:nil];
     
+    
 }
 
 - (void)checkHasShow{
@@ -116,6 +119,59 @@
             }
         }
     }];
+}
+
+- (void)requestRedbag{
+    [IVNetwork requestPostWithUrl:DSBHasBouns paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]){
+            NSString *flag = [NSString stringWithFormat:@"%@",result.body];
+            if ([flag isEqualToString:@"58"]) {
+                [self showDSBRedBagWithFlag:@"58"];
+            }else if ([flag isEqualToString:@"108"]){
+                [self showDSBRedBagWithFlag:@"108"];
+            }
+        }
+    }];
+    
+}
+
+- (void)showDSBRedBagWithFlag:(NSString *)flag{
+    DSBRedBagPopView *alertView = [DSBRedBagPopView viewFromXib];
+    if ([flag isEqualToString:@"108"]) {
+        [alertView setContentMessage:@"dsb_content_108"];
+    }else{
+        [alertView setContentMessage:@"content_58"];
+    }
+    
+    
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    alertView.tapActivity = ^{
+        [popView dismiss];
+        
+    };
+    alertView.tapConfirm = ^{
+        [self drawBonus];
+        [popView dismiss];
+    };
+}
+
+- (void)drawBonus{
+    if ([IVNetwork savedUserInfo]) {
+            [IVNetwork requestPostWithUrl:DSBDrawBouns paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                IVJResponseObject *result = response;
+                if ([result.head.errCode isEqualToString:@"0000"]) {
+                    
+                    
+                }else{
+                    [MBProgressHUD showError:@"领取失败,请稍后重试" toView:nil];
+                }
+            }];
+        }
+        
 }
 
 - (void)showInsideMessage{
