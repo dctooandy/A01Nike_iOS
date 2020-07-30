@@ -653,6 +653,8 @@
 		3AFCD7D021AD179600B136C1 /* BTTVideoGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CE21AD179600B136C1 /* BTTVideoGameCell.m */; };
 		3AFCD7D121AD179600B136C1 /* BTTVideoGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_A01.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */; };
+		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
+		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
 		D318AC1724333BC500183407 /* BTTKSAddBfbWalletController.m in Sources */ = {isa = PBXBuildFile; fileRef = D318AC1524333BC500183407 /* BTTKSAddBfbWalletController.m */; };
 		D318AC1824333BC500183407 /* BTTKSAddBfbWalletController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D318AC1624333BC500183407 /* BTTKSAddBfbWalletController.xib */; };
 		D31B0EEB23B451B0003666BA /* BTTAddUSDTController.m in Sources */ = {isa = PBXBuildFile; fileRef = D31B0EE923B451B0003666BA /* BTTAddUSDTController.m */; };
@@ -1808,6 +1810,9 @@
 		3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGameCell.xib; sourceTree = "<group>"; };
 		62DAB42824C569F6001F16B4 /* Hybird_A01.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hybird_A01.entitlements; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_A01.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
+		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
+		D317745024D2648C009B1814 /* DSBRedBagPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DSBRedBagPopView.xib; sourceTree = "<group>"; };
 		D318AC1424333BC500183407 /* BTTKSAddBfbWalletController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTKSAddBfbWalletController.h; sourceTree = "<group>"; };
 		D318AC1524333BC500183407 /* BTTKSAddBfbWalletController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTKSAddBfbWalletController.m; sourceTree = "<group>"; };
 		D318AC1624333BC500183407 /* BTTKSAddBfbWalletController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTKSAddBfbWalletController.xib; sourceTree = "<group>"; };
@@ -3660,6 +3665,9 @@
 				3A14CC5623726A8C009711CF /* BTTJayPopView.h */,
 				3A14CC5723726A8C009711CF /* BTTJayPopView.m */,
 				3A14CC5923726A9E009711CF /* BTTJayPopView.xib */,
+				D317744D24D26471009B1814 /* DSBRedBagPopView.h */,
+				D317744E24D26471009B1814 /* DSBRedBagPopView.m */,
+				D317745024D2648C009B1814 /* DSBRedBagPopView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4803,6 +4811,7 @@
 				3A5AE6B022D6E22A0013E8A3 /* liv_radio_unselected@3x.png in Resources */,
 				3A5AE6F422D6E22A0013E8A3 /* VideoSendIcon@2x.png in Resources */,
 				3A5F7A9B21A8E71100128E8B /* BTTXimaSuccessItemCell.xib in Resources */,
+				D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */,
 				3A5AE6B522D6E22A0013E8A3 /* LIVVideoCamera_play@3x.png in Resources */,
 				3A21AEB02394BCBF009E73FD /* BTTShowErcodePopview.xib in Resources */,
 				3A14CC5A23726A9E009711CF /* BTTJayPopView.xib in Resources */,
@@ -5121,6 +5130,7 @@
 				3A8D6E9921633D3E000530DF /* PushManager.m in Sources */,
 				3A8F51A1215F77EC0069D1B3 /* UIColor+Util.m in Sources */,
 				D31B0EEF23B451F1003666BA /* BTTWithDrawUSDTConfirmCell.m in Sources */,
+				D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */,
 				3A34F79E21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m in Sources */,
 				3A5F7A9621A8E4C600128E8B /* BTTXimaSuccessItemModel.m in Sources */,
 				EA5F140B21A26042004305A7 /* BTTRequestPrecache.m in Sources */,
@@ -5644,7 +5654,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.09;
+				MARKETING_VERSION = 3.1.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btta01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5686,7 +5696,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.09;
+				MARKETING_VERSION = 3.1.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btta01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

@@ -666,7 +666,8 @@
             for (int i=0; i<lineArray.count; i++) {
                 NSDictionary *json = lineArray[i];
                 NSString *name = json[@"platformCurrency"];
-                UIAlertAction *unlock = [UIAlertAction actionWithTitle:name style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSString *title = [name isEqualToString:@"USD"]||[name isEqualToString:@"USDT"] ? @"数字币USDT" : @"人民币CNY";
+                UIAlertAction *unlock = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     
                     [self gotoGameWithTag:tag currency:name];
                 }];
@@ -674,7 +675,7 @@
                 if (i==lineArray.count-1) {
                     UIAlertAction *closelock = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                         
-                        [alertVC dismissViewControllerAnimated:YES completion:nil];
+                        [self gotoGameWithTag:tag currency:@"USD"];
                     }];
                     [alertVC addAction:closelock];
                     [self presentViewController:alertVC animated:YES completion:nil];
@@ -696,6 +697,7 @@
 }
 
 - (void)gotoGameWithTag:(NSInteger)tag currency:(NSString *)currency{
+    
     if (tag==1000) {
         BTTAGQJViewController *vc = [BTTAGQJViewController new];
         [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
