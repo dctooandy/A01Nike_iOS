@@ -18,7 +18,7 @@
 #import "BTTUserStatusManager.h"
 #import "CNPayConstant.h"
 #import "IVPushManager.h"
-
+#import "AppDelegate.h"
 typedef enum {
     BTTRegisterSuccessTypeNormal,
     BTTRegisterSuccessTypeChangePwd
@@ -383,6 +383,8 @@ typedef enum {
             if (result.body!=nil) {
                 [IVHttpManager shareManager].loginName = result.body[@"loginName"];
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body];
+                AppDelegate * delegate = [AppDelegate new];
+                [delegate reSendIVPushRequestIpsSuperSign:result.body[@"customerId"]];
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     if (self.isHome) {

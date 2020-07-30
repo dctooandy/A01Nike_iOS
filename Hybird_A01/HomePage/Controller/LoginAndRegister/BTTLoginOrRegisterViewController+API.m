@@ -21,6 +21,7 @@
 #import "BTTNormalRegisterSuccessController.h"
 #import "OneKeyPhoneController.h"
 #import "IVPushManager.h"
+#import "AppDelegate.h"
 
 @implementation BTTLoginOrRegisterViewController (API)
 
@@ -638,12 +639,12 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (result.body!=nil) {
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body];
-                
+                AppDelegate * delegate = [AppDelegate new];
+                [delegate reSendIVPushRequestIpsSuperSign:result.body[@"customerId"]];
                 if (isBack) {
                     [MBProgressHUD showSuccess:@"登录成功" toView:nil];
                     [self.navigationController popViewControllerAnimated:YES];
                 }
-                
             }
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
