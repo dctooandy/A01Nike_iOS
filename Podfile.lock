@@ -56,15 +56,15 @@ PODS:
   - IVGameLibrary/GameController (2.0.1)
   - IVHeartPacketLibrary (0.0.4):
     - CocoaAsyncSocket (~> 7.6.2)
-  - IVLoganAnalysis (0.0.8):
+  - IVLoganAnalysis (0.0.9):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.13)
-    - IVLoganAnalysis/PayegisDIDSDK (= 0.0.8)
-    - IVLoganAnalysis/Tool (= 0.0.8)
-  - IVLoganAnalysis/PayegisDIDSDK (0.0.8):
+    - IVLoganAnalysis/PayegisDIDSDK (= 0.0.9)
+    - IVLoganAnalysis/Tool (= 0.0.9)
+  - IVLoganAnalysis/PayegisDIDSDK (0.0.9):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.13)
-  - IVLoganAnalysis/Tool (0.0.8):
+  - IVLoganAnalysis/Tool (0.0.9):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.13)
   - IVNetworkLibrary2.0 (2.2.12):
@@ -148,9 +148,9 @@ PODS:
     - IVPublicAPILibrary/Models (= 1.0.8)
   - IVPublicAPILibrary/Models (1.0.8):
     - IVNetworkLibrary2.0
-  - IVPushLibrary (1.0.5):
-    - IVPushLibrary/Classes (= 1.0.5)
-  - IVPushLibrary/Classes (1.0.5)
+  - IVPushLibrary (1.0.6):
+    - IVPushLibrary/Classes (= 1.0.6)
+  - IVPushLibrary/Classes (1.0.6)
   - IVUpdateLibrary (1.0.1)
   - IVUZIPLibrary (1.0.4):
     - ZipArchive (~> 1.4.0)
@@ -162,7 +162,7 @@ PODS:
     - JSONModel (~> 1.7.0)
     - MJExtension (~> 3.0.15.1)
   - JSONModel (1.7.0)
-  - libOpenInstallSDK (2.3.1)
+  - libOpenInstallSDK (2.4.0)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
   - MJExtension (3.0.15.1)
@@ -261,7 +261,7 @@ CHECKOUT OPTIONS:
     :commit: cb81f459cb55163fd8493d0a62ea5339089703fc
     :git: http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git
   IVLoganAnalysis:
-    :commit: 6cbfcb0780ffa59f0241d1741b5a03ec5ee88b3e
+    :commit: 53732d841af8b6d48c46ea9e922b0f4aa2eb8d4b
     :git: http://10.66.72.115/mobile-iOS-Library/IVLoganAnalysis.git
   IVNetworkLibrary2.0:
     :commit: 172f29b5aece0a3092734b409f27a06e14457e43
@@ -270,7 +270,7 @@ CHECKOUT OPTIONS:
     :commit: 06ac5bba2fe94423c5d336c8c0d7dcd94f21589f
     :git: http://10.66.72.115/mobile-iOS-Library/IVPublicAPILibrary.git
   IVPushLibrary:
-    :commit: e23afa6a048a21e1dabd358c9bdf3f526375b0b9
+    :commit: 757556ee1e11842e7b1f16d112da93feafd92b12
     :git: http://10.66.72.115/mobile-iOS-Library/IVPushLibrary.git
   IVUpdateLibrary:
     :commit: df0862352f18086b765b31889d61fbf5b7b33190
@@ -293,15 +293,15 @@ SPEC CHECKSUMS:
   IVCheckNetworkLibrary: 70743fdc89e78a60a7ed7a2e8d44eb45e481ef7c
   IVGameLibrary: ef81429c546f09ed6a18f0a2a7121ec3dd15ed04
   IVHeartPacketLibrary: 2a122b1d8cedf8346b4898ace4736147cf9a0405
-  IVLoganAnalysis: 4bb58a66566ae1f5b816f1988d6da0bea07c9ae6
+  IVLoganAnalysis: a63761b5686bf9154db848af334bee1a6b9815e1
   IVNetworkLibrary2.0: 417f65074ac3d051ac6650d378eeba210bbc112c
   IVPublicAPILibrary: 27791aecccd8d8605d2026d0b89c7ab2257da9bd
-  IVPushLibrary: 1e048e2b5c898676bfce923c713098ebd43cc930
+  IVPushLibrary: 1449c4630124564b61535ef95ca6cc611177f35a
   IVUpdateLibrary: f5764f4cdfcf7919b37a1a2533aae0ff541d5c2d
   IVUZIPLibrary: ee9655054a4c3f85825fae5f95114fa3772f6e58
   IVWebViewLibrary: 479f066e01edf3afa0267b778eb2a664a664895c
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
-  libOpenInstallSDK: a3b390cc1a514e33253a8eacf152661cfa94ce86
+  libOpenInstallSDK: 899cc7243599ccfd5d84384f27f4244d37b2b484
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756

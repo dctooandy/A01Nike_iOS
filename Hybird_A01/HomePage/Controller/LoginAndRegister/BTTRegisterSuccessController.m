@@ -326,7 +326,9 @@ typedef enum {
                 [IVHttpManager shareManager].userToken = result.body[@"token"];
                 [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
                 [[NSUserDefaults standardUserDefaults]setObject:result.body[@"customerId"] forKey:@"pushcustomerid"];
-                [IVPushManager sharedManager].customerId = result.body[@"customerId"];
+//                [IVPushManager sharedManager].customerId = result.body[@"customerId"];
+                AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                [delegate reSendIVPushRequestIpsSuperSign:result.body[@"customerId"]];
                 NSInteger flag = [[NSString stringWithFormat:@"%@",result.body[@"newAccountFlag"]] integerValue];
                 if (flag==1) {
                     [self switchAccountWithName:result.body[@"loginName"]];
@@ -383,8 +385,6 @@ typedef enum {
             if (result.body!=nil) {
                 [IVHttpManager shareManager].loginName = result.body[@"loginName"];
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body];
-                AppDelegate * delegate = [AppDelegate new];
-                [delegate reSendIVPushRequestIpsSuperSign:result.body[@"customerId"]];
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     if (self.isHome) {
