@@ -40,4 +40,10 @@
     _contentImg.image = [UIImage imageNamed:message];
 }
 
+- (IBAction)cancelBtnAction:(id)sender {
+    if (self.tapActivity) {
+        self.tapActivity();
+    }
+}
+
 @end

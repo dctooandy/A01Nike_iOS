@@ -72,15 +72,18 @@
     [self setupCollectionView];
     [self setupLoginAndRegisterBtnsView];
     [self setupElements];
+    [self loadDataOfHomePage];
+    [self registerNotification];
+//    [IVNetwork registException];
+    
     weakSelf(weakSelf);
     [self pulldownRefreshWithRefreshBlock:^{
         strongSelf(strongSelf);
         NSLog(@"下拉刷新");
         [strongSelf refreshDatasOfHomePage];
     }];
-    [self loadDataOfHomePage];
-    [self registerNotification];
-//    [IVNetwork registException];
+    
+    //jay AD
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
         NSTimeInterval interval = [[userDefault objectForKey:@"jayTimeStamp"] doubleValue] / 1000.0;
@@ -93,12 +96,52 @@
             }
         }
     });
+    
     [self setupFloatWindow];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LoginSuccessNotification object:nil];
-    
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestRedbag) name:LoginSuccessNotification object:nil];
 }
 
+#pragma mark - viewDidAppear
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    //第一次登入顯示提示
+    BOOL isShowAccountGride = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowAccountGride] boolValue];
+    if ([PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork savedUserInfo].lastLoginDate]] && !isShowAccountGride) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowAccountGride];
+        [self showNewAccountGrideView];
+    }
+    //第一次出现预加载游戏
+    if (!self.isloaded) {
+        self.isloaded = YES;
+        //AG旗舰预加载
+        [BTTAGQJViewController addGameViewToWindow];
+        
+        //AG国际预加载
+        [BTTAGGJViewController addGameViewToWindow];
+        [[IVGameManager sharedManager] reloadCacheGame];
+        [IN3SAnalytics launchFinished];
+    }
+}
+
+#pragma mark - viewWillAppear
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.collectionView reloadData];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    if ([IVNetwork savedUserInfo]) {
+        [BTTHttpManager requestUnReadMessageNum:nil];
+        NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
+        if (![NSDate isToday:timestamp]) {
+            [self loadLuckyWheelCoinStatus];
+            NSString *timestamp = [NSString stringWithFormat:@"%@",@([[NSDate date] timeIntervalSince1970] * 1000)];
+            [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+}
+
+#pragma mark - 提示
 - (void)checkHasShow{
     [IVNetwork requestPostWithUrl:BTTQueryLoginedShow paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
@@ -119,59 +162,6 @@
             }
         }
     }];
-}
-
-- (void)requestRedbag{
-    [IVNetwork requestPostWithUrl:DSBHasBouns paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]){
-            NSString *flag = [NSString stringWithFormat:@"%@",result.body];
-            if ([flag isEqualToString:@"58"]) {
-                [self showDSBRedBagWithFlag:@"58"];
-            }else if ([flag isEqualToString:@"108"]){
-                [self showDSBRedBagWithFlag:@"108"];
-            }
-        }
-    }];
-    
-}
-
-- (void)showDSBRedBagWithFlag:(NSString *)flag{
-    DSBRedBagPopView *alertView = [DSBRedBagPopView viewFromXib];
-    if ([flag isEqualToString:@"108"]) {
-        [alertView setContentMessage:@"dsb_content_108"];
-    }else{
-        [alertView setContentMessage:@"content_58"];
-    }
-    
-    
-    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-    
-    popView.isClickBGDismiss = YES;
-    [popView pop];
-    alertView.tapActivity = ^{
-        [popView dismiss];
-        
-    };
-    alertView.tapConfirm = ^{
-        [self drawBonus];
-        [popView dismiss];
-    };
-}
-
-- (void)drawBonus{
-    if ([IVNetwork savedUserInfo]) {
-            [IVNetwork requestPostWithUrl:DSBDrawBouns paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-                IVJResponseObject *result = response;
-                if ([result.head.errCode isEqualToString:@"0000"]) {
-                    
-                    
-                }else{
-                    [MBProgressHUD showError:@"领取失败,请稍后重试" toView:nil];
-                }
-            }];
-        }
-        
 }
 
 - (void)showInsideMessage{
@@ -224,63 +214,81 @@
     }];
 }
 
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    BOOL isShowAccountGride = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowAccountGride] boolValue];
-    if ([PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork savedUserInfo].lastLoginDate]] && !isShowAccountGride) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowAccountGride];
-        [self showNewAccountGrideView];
-    }
-    //第一次出现预加载游戏
-    if (!self.isloaded) {
-        self.isloaded = YES;
-        //AG旗舰预加载
-        [BTTAGQJViewController addGameViewToWindow];
-        
-        //AG国际预加载
-        [BTTAGGJViewController addGameViewToWindow];
-        [[IVGameManager sharedManager] reloadCacheGame];
-        [IN3SAnalytics launchFinished];
-    }
+#pragma mark - 紅包
+- (void)requestRedbag{
+    [IVNetwork requestPostWithUrl:DSBHasBouns paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]){
+            NSString *flag = [NSString stringWithFormat:@"%@",result.body];
+            if ([flag isEqualToString:@"58"]) {
+                [self showDSBRedBagWithFlag:@"58"];
+            }else if ([flag isEqualToString:@"108"]){
+                [self showDSBRedBagWithFlag:@"108"];
+            }
+        }
+    }];
     
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.collectionView reloadData];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
-    if ([IVNetwork savedUserInfo]) {
-        [BTTHttpManager requestUnReadMessageNum:nil];
-        NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
-        if (![NSDate isToday:timestamp]) {
-            [self loadLuckyWheelCoinStatus];
-            NSString *timestamp = [NSString stringWithFormat:@"%@",@([[NSDate date] timeIntervalSince1970] * 1000)];
-            [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
+- (void)showDSBRedBagWithFlag:(NSString *)flag{
+    DSBRedBagPopView *alertView = [DSBRedBagPopView viewFromXib];
+    if ([flag isEqualToString:@"108"]) {
+        [alertView setContentMessage:@"dsb_content_108"];
+    }else{
+        [alertView setContentMessage:@"content_58"];
     }
+    
+    
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    alertView.tapActivity = ^{
+        [popView dismiss];
+        
+    };
+    alertView.tapConfirm = ^{
+        [self drawBonus];
+        [popView dismiss];
+    };
 }
 
+- (void)drawBonus{
+    if ([IVNetwork savedUserInfo]) {
+            [IVNetwork requestPostWithUrl:DSBDrawBouns paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                IVJResponseObject *result = response;
+                if ([result.head.errCode isEqualToString:@"0000"]) {
+                    [MBProgressHUD showSuccess:@"领取成功" toView:nil];
+                    
+                }else{
+                    [MBProgressHUD showError:@"领取失败,请稍后重试" toView:nil];
+                }
+            }];
+        }
+}
+
+#pragma mark - collectionView
 - (void)setupCollectionView {
     [super setupCollectionView];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     self.collectionView.frame = CGRectMake(0, BTTNavHeightLogin, SCREEN_WIDTH, SCREEN_HEIGHT - BTTNavHeightLogin);
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageBannerCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageBannerCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageADCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageADCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageBannerCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageBannerCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageNoticeCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageNoticeCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageGamesCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageGamesCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageAppsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageAppsCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageSeparateCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageSeparateCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageDiscountHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageDiscountHeaderCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageDiscountCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageDiscountCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageActivitiesCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageActivitiesCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageAmountsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageAmountsCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageFooterCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageFooterCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTRealPersonGameCell" bundle:nil] forCellWithReuseIdentifier:@"BTTRealPersonGameCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTElectronicGamesCell" bundle:nil] forCellWithReuseIdentifier:@"BTTElectronicGamesCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTOtherGameCell" bundle:nil] forCellWithReuseIdentifier:@"BTTOtherGameCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHotPromotionsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHotPromotionsCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageAppsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageAppsCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageActivitiesCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageActivitiesCell"];
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageSeparateCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageSeparateCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageFooterCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageFooterCell"];
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageGamesCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageGamesCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageDiscountHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageDiscountHeaderCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageDiscountCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageDiscountCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageAmountsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageAmountsCell"];
 //    BTTElectronicGamesCell BTTOtherGameCell BTTHotPromotionsCell
 }
 
@@ -607,6 +615,8 @@
     return 0;
 }
 
+
+#pragma mark - Calculation cell height
 - (void)setupElements {
     NSInteger total = 0;
     if (self.posters.count) {
@@ -623,20 +633,28 @@
     for (int i = 0; i < total; i++) {
         if (self.adCellShow) {
             if (i == 0 || i == 2) {
+                //AD Notice
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 45)]];
             } else if (i == 1) {
+                //Banner
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, BTTBnnnerDefaultHeight * (SCREEN_WIDTH / BTTBannerDefaultWidth))]];
             } else if (i == 3) {
+                //RealPerson
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, ((SCREEN_WIDTH - 30) / 2 - 5) / 168.0 * 133 + 60)]];
             } else if (i == 4) {
+                //Electronic
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, (SCREEN_WIDTH - 40) / 335.0 * 144 + 60)]];
             } else if (i == 5) {
+                //Other
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, (SCREEN_WIDTH - 40) / 335.0 * 227 + 72.5)]];
             } else if (i == 7) {
+                //Promotion
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 140)]];
             } else if (i == 9) {
+                //Download App
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 180)]];
             } else if (i == 11) {
+                //Customer Activity
                 if (self.Activities.count) {
                     BTTActivityModel *model = self.Activities[self.nextGroup];
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, model.cellHeight)]];
@@ -644,12 +662,14 @@
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 388)]];
                 }
             } else if (i == 6 || i == 8 || i == 10 || i == 12) {
+                //Space
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
             }
 //            else if (i == 13) {
 //                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 300)]];
 //            }
             else {
+                //Footer Logo
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 60)]];
             }
         } else {

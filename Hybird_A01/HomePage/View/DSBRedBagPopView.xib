@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,6 +31,17 @@
                         <action selector="lqBtn_click:" destination="iN0-l3-epB" eventType="touchUpInside" id="pub-86-hct"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVL-I7-zPi">
+                    <rect key="frame" x="187" y="675.5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="9a2-WQ-28G"/>
+                        <constraint firstAttribute="height" constant="40" id="D1f-hp-XQB"/>
+                    </constraints>
+                    <state key="normal" image="dsb_rb_close"/>
+                    <connections>
+                        <action selector="cancelBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="ANn-CT-VhQ"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -38,6 +49,8 @@
                 <constraint firstItem="Wj7-Kk-OO8" firstAttribute="trailing" secondItem="yF6-al-JEV" secondAttribute="trailing" constant="-60" id="7k7-3H-yWR"/>
                 <constraint firstItem="BKK-fP-bQ2" firstAttribute="leading" secondItem="Wj7-Kk-OO8" secondAttribute="leading" id="80Y-yr-3Yl"/>
                 <constraint firstItem="yF6-al-JEV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="962-Eq-1Lf"/>
+                <constraint firstItem="EVL-I7-zPi" firstAttribute="top" secondItem="yF6-al-JEV" secondAttribute="bottom" constant="40" id="98M-0m-7op"/>
+                <constraint firstItem="EVL-I7-zPi" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="XJf-gb-5Jy"/>
                 <constraint firstItem="BKK-fP-bQ2" firstAttribute="bottom" secondItem="yF6-al-JEV" secondAttribute="bottom" constant="-16" id="cVy-ek-vph"/>
                 <constraint firstItem="Wj7-Kk-OO8" firstAttribute="top" secondItem="yF6-al-JEV" secondAttribute="top" constant="170" id="dNb-F1-mMx"/>
                 <constraint firstItem="Wj7-Kk-OO8" firstAttribute="leading" secondItem="yF6-al-JEV" secondAttribute="leading" constant="60" id="fyW-xe-Eh9"/>
@@ -54,5 +67,6 @@
         <image name="dsb_content_108" width="251" height="134"/>
         <image name="dsb_lq" width="225" height="47"/>
         <image name="dsb_rb_bg" width="375" height="465.5"/>
+        <image name="dsb_rb_close" width="41" height="41"/>
     </resources>
 </document>
