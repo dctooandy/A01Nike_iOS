@@ -7,7 +7,7 @@
 //
 
 #import "OTCInsideCell.h"
-#import "OTCInsideModel.h"
+
 
 @interface OTCInsideCell ()
 @property (strong, nonatomic) UIImageView *iconImg;
@@ -31,15 +31,19 @@
         [self.contentView addSubview:iconImg];
         self.iconImg = iconImg;
         
-
-        
-        
+        self.recommendTagImg = [[UIImageView alloc] init];
+        self.recommendTagImg.hidden = true;
+        self.recommendTagImg.image = [UIImage imageNamed:@"bfb_youhui"];
+        [self.iconImg addSubview:self.recommendTagImg];
+        [self.recommendTagImg mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.iconImg).offset(-5);
+            make.top.equalTo(self.iconImg).offset(5);
+        }];
     }
     return self;
 }
 
--(void)cellConfigJson:(NSDictionary *)json{
-    OTCInsideModel *model = [OTCInsideModel yy_modelWithJSON:json];
+-(void)cellConfigJson:(OTCInsideModel *)model{
     [self.iconImg sd_setImageWithURL:[NSURL URLWithString:model.otcMarketLogo]];
 }
 

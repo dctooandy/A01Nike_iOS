@@ -183,7 +183,9 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
 
     OTCInsideCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OTCInsideCell" forIndexPath:indexPath];
-    [cell cellConfigJson:self.bankList[indexPath.row]];
+    OTCInsideModel *model = [OTCInsideModel yy_modelWithJSON:self.bankList[indexPath.row]];
+    cell.recommendTagImg.hidden = ![model.otcMarketName isEqualToString:@"bitbase"];
+    [cell cellConfigJson:model];
     return cell;
 }
 
