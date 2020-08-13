@@ -13,6 +13,8 @@
 #import "BTTMeMainModel.h"
 #import "BTTForgetPasswordController+LoadData.h"
 #import "BTTForgetPasswordStepTwoController.h"
+#import "CLive800Manager.h"
+#import "BTTForgetPasswordController+Nav.h"
 
 @interface BTTForgetPasswordController ()<BTTElementsFlowLayoutDelegate,UITextFieldDelegate>
 
@@ -27,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"忘记密码";
+    [self setUpNav];
     [self setupCollectionView];
     [self loadMainData];
     [self loadVerifyCode];
