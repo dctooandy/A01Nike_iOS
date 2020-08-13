@@ -313,6 +313,7 @@
 }
 
 - (void)textFieldDidChanged:(id)sender {
+    _accountTextField.text = [_accountTextField.text lowercaseString];
     NSString *name = _accountTextField.text;
     if (name.length > 11) {
         _accountTextField.text = [name substringToIndex:11];
