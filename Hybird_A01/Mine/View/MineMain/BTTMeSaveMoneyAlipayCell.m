@@ -15,6 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *bfbsendImg;
+@property (weak, nonatomic) IBOutlet UILabel *subTitleLab;
 
 
 @end
@@ -32,7 +33,9 @@
     _model = model;
     self.iconImageView.image = ImageNamed(model.iconName);
     self.nameLabel.text = model.name;
-    self.bfbsendImg.hidden = ![model.name isEqualToString:@"充值/购买USDT"];
+//    self.bfbsendImg.hidden = ![model.name isEqualToString:@"充值/购买USDT"];
+    self.subTitleLab.text = model.desc;
+    self.subTitleLab.hidden = [model.name isEqualToString:@"充值USDT"];
 }
 
 @end

@@ -155,11 +155,20 @@
                     
                     if ([model.payTypeName isEqualToString:@"OTC"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                        mainModel.name = @"充值/购买USDT";
+                        mainModel.name = @"充值USDT";
+//                        mainModel.name = @"充值/购买USDT";
                         mainModel.iconName = @"recharge_otc_tab";
                         mainModel.paymentType = model.payType;
                         mainModel.payModel = model;
                         [self.bigDataSoure insertObject:mainModel atIndex:0];
+                        
+                        BTTMeMainModel *buyModel = [BTTMeMainModel new];
+                        buyModel.name = @"购买USDT";
+                        buyModel.iconName = @"buy_otc_tab";
+                        buyModel.paymentType = model.payType+1;
+                        buyModel.payModel = model;
+                        buyModel.desc = @"人民币直接上分";
+                        [self.bigDataSoure insertObject:buyModel atIndex:1];
                     }
                     
                     if ([model.payTypeName isEqualToString:@"小金库"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
@@ -168,6 +177,7 @@
                         mainModel.iconName = @"me_dcbox";
                         mainModel.paymentType = model.payType;
                         mainModel.payModel = model;
+                        mainModel.desc = @"秒到-无痕";
                         [self.bigDataSoure addObject:mainModel];
                     }
                     
@@ -322,6 +332,7 @@
                     if ([model.payTypeName isEqualToString:@"USDT支付"]) {
                         usdtModel.name = @"泰达币-USDT";
                         usdtModel.iconName = @"me_usdt";
+                        usdtModel.desc = @"支持更多钱包";
                         usdtModel.paymentType = 99;
                         if (model!=nil) {
                             usdtModel.payModel = model;

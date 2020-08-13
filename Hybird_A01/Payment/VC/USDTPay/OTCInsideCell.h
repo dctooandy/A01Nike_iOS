@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "OTCInsideModel.h"
-
+ 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface OTCInsideCell : UICollectionViewCell
 @property(nonatomic, strong) UIImageView * recommendTagImg;
-
+-(void)setBitbaseBgImg;
 - (void)cellConfigJson:(OTCInsideModel *)model;
 
 @end

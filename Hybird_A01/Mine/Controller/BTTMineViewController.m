@@ -56,6 +56,8 @@
 #import "IVCNetworkStatusView.h"
 #import "IVCDetailViewController.h"
 #import "OTCInsideController.h"
+#import "USDTRechargeController.h"
+#import "USDTBuyController.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -257,11 +259,12 @@
     } else if (indexPath.row >= 2 && indexPath.row <= 2 + self.saveMoneyCount - 1) {
         if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
             if (indexPath.row == 2) {
+                //推薦存款
                 BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
                 cell.saveMoneyShowType = self.saveMoneyShowType;
                 cell.dataSource = self.bigDataSoure;
                 weakSelf(weakSelf);
-                
+
                 cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTMeMainModel *model = value;
@@ -269,10 +272,12 @@
                 };
                 return cell;
             } else if (indexPath.row == 3) {
+                //更多存款title
                 BTTMeMoreSaveMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell" forIndexPath:indexPath];
                 cell.saveMoneyShowType = self.saveMoneyShowType;
                 return cell;
             } else {
+                //更多存款
                 BTTMeMoreSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
                 if (indexPath.row == 4) {
                     cell.dataSource = self.normalDataSoure;
@@ -424,16 +429,23 @@
         BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
         [self.navigationController pushViewController:personInfo animated:YES];
         return;
-    }else if ([model.name isEqualToString:@"充值/购买USDT"]){
-        [self jumpToBuyUsdt];
+    } else if ([model.name isEqualToString:@"充值USDT"]){
+        USDTRechargeController *vc = [[USDTRechargeController alloc]init];
+        vc.title = @"充值USDT";
+        [self.navigationController pushViewController:vc animated:true];
+        return;
+    } else if ([model.name isEqualToString:@"购买USDT"]){
+        USDTBuyController * vc = [[USDTBuyController alloc] init];
+        vc.title = @"购买USDT";
+        [self.navigationController pushViewController:vc animated:true];
         return;
     }
+    
     NSMutableArray *bigArray = [[NSMutableArray alloc]init];
-    bigArray = self.bigDataSoure;
-    if (self.bigDataSoure.count>0) {
-        BTTMeMainModel *otcmodel = self.bigDataSoure.firstObject;
-        if ([otcmodel.name isEqualToString:@"充值/购买USDT"]) {
-            [bigArray removeObjectAtIndex:0];
+    for (int i = 0; i < self.bigDataSoure.count; i++) {
+        BTTMeMainModel *otcmodel = self.bigDataSoure[i];
+        if (![otcmodel.name isEqualToString:@"充值USDT"] && ![otcmodel.name isEqualToString:@"购买USDT"]) {
+            [bigArray addObject:otcmodel];
         }
     }
     [[CNTimeLog shareInstance] startRecordTime:CNEventPayLaunch];
@@ -714,7 +726,7 @@
         } else if (i >= 2  && i <= 2 + self.saveMoneyCount - 1) {
             if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
                 if (i == 2) {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 180)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 210)]];
                 } else if (i == 3) {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
                 } else if (i == 4) {

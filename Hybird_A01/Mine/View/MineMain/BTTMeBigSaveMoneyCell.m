@@ -39,7 +39,7 @@ typedef enum {
     self.collectionView.showsHorizontalScrollIndicator = NO;
 //    self.collectionView.backgroundColor = COLOR_RGBA(41, 45, 54, 1);
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    layout.itemSize = CGSizeMake(90, 120);
+    layout.itemSize = CGSizeMake(90, 160);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumLineSpacing = 15;
     self.collectionView.collectionViewLayout = layout;
@@ -61,15 +61,15 @@ typedef enum {
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BTTMeMainModel *model = self.dataSource.count ? self.dataSource[indexPath.row] : nil;
-    if (indexPath.row == 0) {
+//    if (indexPath.row == 0) {
         BTTMeSaveMoneyAlipayCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeSaveMoneyAlipayCell" forIndexPath:indexPath];
         cell.model = model;
         return cell;
-    } else {
-        BTTMeSaveMoneyWechatCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeSaveMoneyWechatCell" forIndexPath:indexPath];
-        cell.model = model;
-        return cell;
-    }
+//    } else {
+//        BTTMeSaveMoneyWechatCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeSaveMoneyWechatCell" forIndexPath:indexPath];
+//        cell.model = model;
+//        return cell;
+//    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

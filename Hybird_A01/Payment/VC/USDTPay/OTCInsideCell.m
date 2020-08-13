@@ -8,8 +8,8 @@
 
 #import "OTCInsideCell.h"
 
-
 @interface OTCInsideCell ()
+@property(nonatomic, strong) UIImageView * bgImgView;
 @property (strong, nonatomic) UIImageView *iconImg;
 @property (strong, nonatomic) UILabel *nameLabel;
 @end
@@ -19,14 +19,14 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:CGRectMake(0, 0, (SCREEN_WIDTH-44)/2, (SCREEN_WIDTH-44)/3)];
     if (self) {
-        UIImageView *bgImgView = [[UIImageView alloc]init];
-        bgImgView.image = [UIImage imageNamed:@"otc_inside_bg"];
-        bgImgView.size = CGSizeMake((SCREEN_WIDTH-44)/2, (SCREEN_WIDTH-44)/3);
-        bgImgView.contentMode = UIViewContentModeScaleToFill;
+        self.bgImgView = [[UIImageView alloc]init];
+        self.bgImgView.image = [UIImage imageNamed:@"otc_inside_bg"];
+        self.bgImgView.size = CGSizeMake((SCREEN_WIDTH-44)/2, (SCREEN_WIDTH-44)/3);
+        self.bgImgView.contentMode = UIViewContentModeScaleToFill;
 
-        [self.contentView addSubview:bgImgView];
+        [self.contentView addSubview:self.bgImgView];
         
-        UIImageView *iconImg = [[UIImageView alloc]initWithFrame:bgImgView.frame];
+        UIImageView *iconImg = [[UIImageView alloc]initWithFrame:self.bgImgView.frame];
         iconImg.contentMode = UIViewContentModeScaleAspectFit;
         [self.contentView addSubview:iconImg];
         self.iconImg = iconImg;
@@ -39,12 +39,30 @@
             make.right.equalTo(self.iconImg).offset(-5);
             make.top.equalTo(self.iconImg).offset(5);
         }];
+
     }
     return self;
 }
 
--(void)cellConfigJson:(OTCInsideModel *)model{
+-(void)cellConfigJson:(OTCInsideModel *)model {
     [self.iconImg sd_setImageWithURL:[NSURL URLWithString:model.otcMarketLogo]];
+}
+
+-(void)setBitbaseBgImg {
+    self.bgImgView.image = [UIImage imageNamed:@"ic_usdt_bitbase_bg"];
+    self.iconImg.size = CGSizeMake(self.bgImgView.frame.size.width, self.bgImgView.frame.size.height*0.9);
+    UILabel * lab = [[UILabel alloc] init];
+    lab.text = @"支持文信, 支付寶, 銀聯";
+    lab.adjustsFontSizeToFitWidth = true;
+    lab.textColor = [UIColor whiteColor];
+    lab.textAlignment = NSTextAlignmentCenter;
+    [self.bgImgView addSubview:lab];
+    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.bgImgView);
+        make.left.equalTo(self.bgImgView).offset(5);
+        make.right.equalTo(self.bgImgView).offset(-5);
+        make.height.offset(self.bgImgView.frame.size.height*0.23);
+    }];
 }
 
 @end
