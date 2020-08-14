@@ -14,12 +14,14 @@
 @property (nonatomic, strong) UICollectionView * walletCollectionView;
 @property (nonatomic, strong) NSArray * bankList;
 @property (nonatomic, strong) UILabel * bitBaseTitleLab;
+@property (nonatomic, strong) NSMutableDictionary * cellDic;
 @end
 
 @implementation USDTBuyController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.cellDic = [[NSMutableDictionary alloc] init];
     self.navigationController.navigationBarHidden = false;
     [self setUpView];
     [self requestBankList];
@@ -93,7 +95,16 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
     
-    OTCInsideCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"OTCInsideCell" forIndexPath:indexPath];
+    // 每次先从字典中根据IndexPath取出唯一标识符
+    NSString *identifier = [_cellDic objectForKey:[NSString stringWithFormat:@"%@", indexPath]];
+    // 如果取出的唯一标示符不存在，则初始化唯一标示符，并将其存入字典中，对应唯一标示符注册Cell
+    if (identifier == nil) {
+        identifier = [NSString stringWithFormat:@"%@%@", @"OTCInsideCell", [NSString stringWithFormat:@"%@", indexPath]];
+        [_cellDic setValue:identifier forKey:[NSString stringWithFormat:@"%@", indexPath]];
+        // 注册Cell
+        [self.walletCollectionView registerClass:[OTCInsideCell class]  forCellWithReuseIdentifier:identifier];
+    }
+    OTCInsideCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     OTCInsideModel *model = [OTCInsideModel yy_modelWithJSON:self.bankList[indexPath.row]];
     cell.recommendTagImg.hidden = ![model.otcMarketName isEqualToString:@"bitbase"];
     if ([model.otcMarketName isEqualToString:@"bitbase"]) {
@@ -123,8 +134,6 @@
         
         _walletCollectionView.bounces = NO;   //设置弹跳
         _walletCollectionView.alwaysBounceVertical = NO;  //只允许垂直方向滑动
-        //注册 cell  为了cell的重用机制  使用NIB  也可以使用代码 registerClass xxxx
-        [_walletCollectionView registerClass:[OTCInsideCell class] forCellWithReuseIdentifier:@"OTCInsideCell"];
     }
     return _walletCollectionView;
 }
