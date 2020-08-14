@@ -52,7 +52,7 @@
     self.bgImgView.image = [UIImage imageNamed:@"ic_usdt_bitbase_bg"];
     self.iconImg.size = CGSizeMake(self.bgImgView.frame.size.width, self.bgImgView.frame.size.height*0.9);
     UILabel * lab = [[UILabel alloc] init];
-    lab.text = @"支持文信, 支付寶, 銀聯";
+    lab.text = @"支持微信, 支付宝, 银联";
     lab.adjustsFontSizeToFitWidth = true;
     lab.textColor = [UIColor whiteColor];
     lab.textAlignment = NSTextAlignmentCenter;

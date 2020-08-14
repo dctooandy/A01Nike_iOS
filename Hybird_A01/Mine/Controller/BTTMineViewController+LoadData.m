@@ -332,7 +332,7 @@
                     if ([model.payTypeName isEqualToString:@"USDT支付"]) {
                         usdtModel.name = @"泰达币-USDT";
                         usdtModel.iconName = @"me_usdt";
-                        usdtModel.desc = @"支持更多钱包";
+                        usdtModel.desc = @"支持多钱包";
                         usdtModel.paymentType = 99;
                         if (model!=nil) {
                             usdtModel.payModel = model;
