@@ -56,15 +56,15 @@ PODS:
   - IVGameLibrary/GameController (2.0.1)
   - IVHeartPacketLibrary (0.0.4):
     - CocoaAsyncSocket (~> 7.6.2)
-  - IVLoganAnalysis (0.0.9):
+  - IVLoganAnalysis (0.1.4):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.13)
-    - IVLoganAnalysis/PayegisDIDSDK (= 0.0.9)
-    - IVLoganAnalysis/Tool (= 0.0.9)
-  - IVLoganAnalysis/PayegisDIDSDK (0.0.9):
+    - IVLoganAnalysis/PayegisDIDSDK (= 0.1.4)
+    - IVLoganAnalysis/Tool (= 0.1.4)
+  - IVLoganAnalysis/PayegisDIDSDK (0.1.4):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.13)
-  - IVLoganAnalysis/Tool (0.0.9):
+  - IVLoganAnalysis/Tool (0.1.4):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.13)
   - IVNetworkLibrary2.0 (2.2.12):
@@ -261,7 +261,7 @@ CHECKOUT OPTIONS:
     :commit: cb81f459cb55163fd8493d0a62ea5339089703fc
     :git: http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git
   IVLoganAnalysis:
-    :commit: 53732d841af8b6d48c46ea9e922b0f4aa2eb8d4b
+    :commit: acd5671c1c7a8c14cc19057dc26b05ce988190f1
     :git: http://10.66.72.115/mobile-iOS-Library/IVLoganAnalysis.git
   IVNetworkLibrary2.0:
     :commit: 172f29b5aece0a3092734b409f27a06e14457e43
@@ -293,7 +293,7 @@ SPEC CHECKSUMS:
   IVCheckNetworkLibrary: ba80700650c60f02bbbf5633f65459da2e73e361
   IVGameLibrary: ef81429c546f09ed6a18f0a2a7121ec3dd15ed04
   IVHeartPacketLibrary: 2a122b1d8cedf8346b4898ace4736147cf9a0405
-  IVLoganAnalysis: a63761b5686bf9154db848af334bee1a6b9815e1
+  IVLoganAnalysis: d9c40aade46ce02ff7ef19a3f3879c92a8dd9f1f
   IVNetworkLibrary2.0: 417f65074ac3d051ac6650d378eeba210bbc112c
   IVPublicAPILibrary: 27791aecccd8d8605d2026d0b89c7ab2257da9bd
   IVPushLibrary: 1449c4630124564b61535ef95ca6cc611177f35a
