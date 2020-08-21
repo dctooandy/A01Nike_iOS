@@ -160,6 +160,7 @@
                         mainModel.iconName = @"recharge_otc_tab";
                         mainModel.paymentType = model.payType;
                         mainModel.payModel = model;
+                        mainModel.desc = @"扫码转币";
                         [self.bigDataSoure insertObject:mainModel atIndex:0];
                         
                         BTTMeMainModel *buyModel = [BTTMeMainModel new];
@@ -329,16 +330,16 @@
                         mainModel.payModel = model;
                         [self.normalDataTwo addObject:mainModel];
                     }
-                    if ([model.payTypeName isEqualToString:@"USDT支付"]) {
-                        usdtModel.name = @"泰达币-USDT";
-                        usdtModel.iconName = @"me_usdt";
-                        usdtModel.desc = @"支持多钱包";
-                        usdtModel.paymentType = 99;
-                        if (model!=nil) {
-                            usdtModel.payModel = model;
-                        }
-                        haveUSDT = YES;
-                    }
+//                    if ([model.payTypeName isEqualToString:@"USDT支付"]) {
+//                        usdtModel.name = @"泰达币-USDT";
+//                        usdtModel.iconName = @"me_usdt";
+//                        usdtModel.desc = @"支持多钱包";
+//                        usdtModel.paymentType = 99;
+//                        if (model!=nil) {
+//                            usdtModel.payModel = model;
+//                        }
+//                        haveUSDT = YES;
+//                    }
                     if ([model.payTypeName isEqualToString:@"币付宝"]) {
                         bfbModel.name = @"币付宝";
                         bfbModel.iconName = @"me_bfb";

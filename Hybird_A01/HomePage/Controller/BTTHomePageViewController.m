@@ -100,6 +100,7 @@
     [self setupFloatWindow];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestRedbag) name:LoginSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadBanner) name:LoginSuccessNotification object:nil];
 }
 
 #pragma mark - viewDidAppear
@@ -139,6 +140,11 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }
+}
+
+#pragma mark - 換幣種帳號banner不同所以要刷新
+-(void)reloadBanner {
+    [self refreshDatasOfHomePage];
 }
 
 #pragma mark - 提示
@@ -322,7 +328,7 @@
         } else if (indexPath.row == 2) {
             BTTHomePageNoticeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageNoticeCell" forIndexPath:indexPath];
             cell.noticeStr = self.noticeStr;
-            weakSelf(weakSelf); 
+            weakSelf(weakSelf);
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
@@ -723,13 +729,18 @@
         case 1001:
             jsonKey = @"A01026";
             break;
+        case 1003:
+            jsonKey = @"A01026";
+            break;
         case 1006:
             jsonKey = @"A01031";
             break;
         case 1010:
             jsonKey = @"A01064";
             break;
-            
+//        case 1011:
+//            jsonKey = @"A01004";
+//            break;
         default:
             break;
     }
@@ -751,7 +762,7 @@
                 if (i==lineArray.count-1) {
                     UIAlertAction *closelock = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                         
-                        [self gotoGameWithTag:tag currency:@"USD"];
+                        [self gotoGameWithTag:tag currency:@"USDT"];
                     }];
                     [alertVC addAction:closelock];
                     [self presentViewController:alertVC animated:YES completion:nil];
@@ -766,9 +777,6 @@
                 [self gotoGameWithTag:tag currency:name];
             }
         }
-            
-        
-        
     }];
 }
 
@@ -800,7 +808,25 @@
         model.provider = kASSlotProvider;
         model.platformCurrency = currency;
         [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+    } else if (tag==1003) {
+        IVGameModel *model = [[IVGameModel alloc] init];
+        model.cnName =  kFishCnName;
+        model.enName =  kFishEnName;
+        model.provider = kAGINProvider;
+        model.gameCode = @"A01026";
+        model.gameType = kFishType;
+        model.platformCurrency = currency;
+        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
     }
+//    else if (tag==1011) {
+//        IVGameModel *model = [[IVGameModel alloc] init];
+//        model.cnName = @"AG彩票";
+//        model.gameCode = @"A01004";
+//        model.enName = @"K8";
+//        model.provider = @"K8";
+//        model.platformCurrency = currency;
+//        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+//    }
 }
 
 - (void)forwardToGameViewWithTag:(NSInteger)tag
@@ -816,7 +842,7 @@
         case 1001://AG国际
             vc = [BTTAGGJViewController new];
             break;
-        case 1002://沙巴体育
+        case 1002://TTG
 
         {
             BTTPosterModel * model = self.posters.count ? self.posters[1] : nil;
@@ -922,7 +948,8 @@
             }
         }
         if (model) {
-            if (tag==1006||tag==1010) {
+            if (tag==1006||tag==1010||tag==1003) {
+                //||tag==1011
                 [self choseGameLineWithTag:tag];
             }else{
                 [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
@@ -954,7 +981,7 @@
                         }
                     }
                     if (model) {
-                        if (tag==1006||tag==1010) {
+                        if (tag==1006||tag==1010||tag==1003) {
                             [self choseGameLineWithTag:tag];
                         }else{
                             [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];

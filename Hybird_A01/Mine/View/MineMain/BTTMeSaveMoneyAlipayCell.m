@@ -35,7 +35,6 @@
     self.nameLabel.text = model.name;
 //    self.bfbsendImg.hidden = ![model.name isEqualToString:@"充值/购买USDT"];
     self.subTitleLab.text = model.desc;
-    self.subTitleLab.hidden = [model.name isEqualToString:@"充值USDT"];
 }
 
 @end

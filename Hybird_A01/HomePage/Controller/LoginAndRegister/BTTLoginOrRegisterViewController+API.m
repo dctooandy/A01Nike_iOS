@@ -640,6 +640,7 @@
         [self hideLoading];
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (result.body!=nil) {
+                [IVHttpManager shareManager].loginName = result.body[@"loginName"];
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body];
                 
                 if (isBack) {

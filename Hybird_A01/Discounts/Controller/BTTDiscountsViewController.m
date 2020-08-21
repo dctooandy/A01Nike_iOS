@@ -48,7 +48,11 @@
     }
     [self showLoading];
     [self loadMainData];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:LoginSuccessNotification object:nil];
+}
+
+-(void)reloadData {
+    [self loadMainData];
 }
 
 - (void)setupNav {

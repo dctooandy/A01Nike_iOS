@@ -25,7 +25,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ii1-Xt-0Wd">
-                        <rect key="frame" x="32.5" y="110" width="35.5" height="17"/>
+                        <rect key="frame" x="32.5" y="105" width="35.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -38,7 +38,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RYm-t2-5Vc">
-                        <rect key="frame" x="33.5" y="129" width="33" height="16"/>
+                        <rect key="frame" x="33.5" y="124" width="33" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="Ii1-Xt-0Wd" firstAttribute="top" secondItem="eJB-7Y-fsg" secondAttribute="bottom" constant="10" id="1eK-zi-pxJ"/>
+                <constraint firstItem="Ii1-Xt-0Wd" firstAttribute="top" secondItem="eJB-7Y-fsg" secondAttribute="bottom" constant="5" id="1eK-zi-pxJ"/>
                 <constraint firstAttribute="trailing" secondItem="pa4-ts-UQp" secondAttribute="trailing" id="6zz-0H-nYT"/>
                 <constraint firstItem="eJB-7Y-fsg" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="B7z-1T-t7s"/>
                 <constraint firstItem="Ii1-Xt-0Wd" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="DCB-vR-W8s"/>
