@@ -435,6 +435,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTIsBindStatusAPI                         @"/public/verify/isNewBind"
 #define BTTGamePlatforms                           @"/A01/game/platforms"
 
+#define BTTDynamicQuery                         @"dynamic/query"
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)      ([UIFont systemFontOfSize:X])

@@ -56,8 +56,20 @@
 
 - (void)initAnalysis{
     [IVLAManager setLogEnabled:YES];
-    [IVLAManager startWithProductId:@"A01" productName:@"btt" channelId:@"" appId:@"5308e20b" appKey:@"5308e20b" sessionTimeout:5000 environment:IVLA_Dis loginName:^NSString * _Nonnull{
+    [IVLAManager startWithProductId:@"A01" productName:@"btt" channelId:@"" appId:@"5308e20b" appKey:@"5308e20b" sessionTimeout:5000 environment:IVLA_Loacl loginName:^NSString * _Nonnull{
         return [IVNetwork savedUserInfo].loginName==nil?@"":[IVNetwork savedUserInfo].loginName;
+    }];
+}
+
+-(void)setDynamicQuery {
+    NSDictionary * params = @{@"bizCode":@"SKYNET_SDK_CONFIG"};
+    [IVNetwork requestPostWithUrl:BTTDynamicQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSArray * arr = result.body[@"data"];
+            [IVLAManager setPayegisSDKDomain:arr[0][@"PROD_DID"]];
+            [IVLAManager setUploadDomain:arr[0][@"PROD_GATHER"]];
+        }
     }];
 }
 
@@ -122,6 +134,7 @@
     [self setupTabbarController];
     [self.window makeKeyAndVisible];
     [self initAnalysis];
+    [self setDynamicQuery];
     [self initPushSDKWithApplication:application options:launchOptions];
     [CNPreCacheMananger prepareCacheDataNormal];
     [CNPreCacheMananger prepareCacheDataNeedLogin];

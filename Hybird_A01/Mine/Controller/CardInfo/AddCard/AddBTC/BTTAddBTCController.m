@@ -159,8 +159,7 @@
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSDictionary *json = @{@"status":@"success"};
-            [IVLAManager singleEventId:@"A01_bankcard_update" errorCode:@"3846" errorMsg:@"网络错误信息" customsData:json];
+            [IVLAManager singleEventId:@"A01_bankcard_update" errorCode:@"" errorMsg:@"" customsData:@{}];
 
             [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
             BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];

@@ -23,6 +23,7 @@
     [super viewDidLoad];
     self.cellDic = [[NSMutableDictionary alloc] init];
     self.navigationController.navigationBarHidden = false;
+    self.title = @"购买USDT";
     [self setUpView];
     [self requestBankList];
 }

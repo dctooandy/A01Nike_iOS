@@ -209,6 +209,7 @@
             [self hideLoading];
             [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
             if ([result.head.errCode isEqualToString:@"0000"]) {
+                [IVLAManager singleEventId:@"A01_bankcard_update" errorCode:@"" errorMsg:@"" customsData:@{}];
                 if (self.isWithDraw&&[model.code isEqualToString:@"bitoll"]) {
                     [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"bitollAddCard"];
                     [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];

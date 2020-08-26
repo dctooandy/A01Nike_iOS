@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _selectedProtocol = @"ERC20";
+    self.title = @"充值USDT";
     self.navigationController.navigationBarHidden = NO;
     [self setupViews];
     [self requestUSDTRate];

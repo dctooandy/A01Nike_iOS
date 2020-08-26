@@ -14,6 +14,7 @@
 #import "BTTUsdtWalletModel.h"
 #import "BTTCardInfosController.h"
 #import "USDTWalletCollectionCell.h"
+#import "USDTBuyController.h"
 
 @interface BTTDcboxPayController ()<UITextFieldDelegate,UICollectionViewDelegate, UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UIView *choseMoneyView;
@@ -528,14 +529,16 @@
     return cell;
 }
 - (IBAction)onekeyBuyUsdt:(id)sender {
-    if (self.buyUsdtLink!=nil&&![self.buyUsdtLink isEqualToString:@""]) {
-        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-        vc.title = @"一键买币";
-        vc.webConfigModel.theme = @"outside";
-        vc.webConfigModel.newView = YES;
-        vc.webConfigModel.url = self.buyUsdtLink;
-        [self pushViewController:vc];
-    }
+    USDTBuyController * vc = [[USDTBuyController alloc] init];
+    [self pushViewController:vc];
+//    if (self.buyUsdtLink!=nil&&![self.buyUsdtLink isEqualToString:@""]) {
+//        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+//        vc.title = @"一键买币";
+//        vc.webConfigModel.theme = @"outside";
+//        vc.webConfigModel.newView = YES;
+//        vc.webConfigModel.url = self.buyUsdtLink;
+//        [self pushViewController:vc];
+//    }
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{

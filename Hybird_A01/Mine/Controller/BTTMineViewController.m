@@ -431,12 +431,10 @@
         return;
     } else if ([model.name isEqualToString:@"充值USDT"]){
         USDTRechargeController *vc = [[USDTRechargeController alloc]init];
-        vc.title = @"充值USDT";
         [self.navigationController pushViewController:vc animated:true];
         return;
     } else if ([model.name isEqualToString:@"购买USDT"]){
         USDTBuyController * vc = [[USDTBuyController alloc] init];
-        vc.title = @"购买USDT";
         [self.navigationController pushViewController:vc animated:true];
         return;
     }
