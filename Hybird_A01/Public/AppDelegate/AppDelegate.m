@@ -56,7 +56,7 @@
 
 - (void)initAnalysis{
     [IVLAManager setLogEnabled:YES];
-    [IVLAManager startWithProductId:@"A01" productName:@"btt" channelId:@"" appId:@"5308e20b" appKey:@"5308e20b" sessionTimeout:5000 environment:IVLA_Loacl loginName:^NSString * _Nonnull{
+    [IVLAManager startWithProductId:@"A01" productName:@"btt" channelId:@"" appId:@"5308e20b" appKey:@"5308e20b" sessionTimeout:5000 environment:IVLA_Dis loginName:^NSString * _Nonnull{
         return [IVNetwork savedUserInfo].loginName==nil?@"":[IVNetwork savedUserInfo].loginName;
     }];
 }
