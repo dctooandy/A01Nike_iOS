@@ -493,7 +493,7 @@
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSDictionary *json = @{@"request_id":result.body[@"referenceId"]};
-            [IVLAManager singleEventId:@"withdraw_create" errorCode:@"" errorMsg:@"" customsData:json];
+            [IVLAManager singleEventId:@"A01_withdraw_create" errorCode:@"" errorMsg:@"" customsData:json];
             BTTWithdrawalSuccessController *vc = [[BTTWithdrawalSuccessController alloc] init];
             vc.amount = amount;
             vc.isSell = self.isSellUsdt&&isUSDTSell;
