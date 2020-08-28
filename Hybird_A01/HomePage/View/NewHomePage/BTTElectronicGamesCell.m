@@ -16,6 +16,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *mgBtn;
 
+@property (weak, nonatomic) IBOutlet UIButton *allBtn;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ttgBtnHeight;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ttgBtnWidth;
@@ -42,6 +44,7 @@
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccess:) name:LogoutSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockGameBtnPress) name:@"UnlockGameBtnPress" object:nil];
 }
 
 - (void)loginSuccess:(NSNotification *)notifi {
@@ -56,6 +59,12 @@
     _mgTryIcon.hidden = NO;
 }
 
+-(void)unlockGameBtnPress {
+    self.ttgBtn.userInteractionEnabled = true;
+    self.fishBtn.userInteractionEnabled = true;
+    self.mgBtn.userInteractionEnabled = true;
+    self.allBtn.userInteractionEnabled = true;
+}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -82,24 +91,28 @@
 
 - (IBAction)ttgBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
+        sender.userInteractionEnabled = false;
         self.buttonClickBlock(sender);
     }
 }
 
 - (IBAction)fishBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
+        sender.userInteractionEnabled = false;
         self.buttonClickBlock(sender);
     }
 }
 
 - (IBAction)mgBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
+        sender.userInteractionEnabled = false;
         self.buttonClickBlock(sender);
     }
 }
 
 - (IBAction)allBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
+        sender.userInteractionEnabled = false;
         self.buttonClickBlock(sender);
     }
 }

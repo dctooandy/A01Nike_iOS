@@ -36,27 +36,27 @@
         [self.normalDataTwo removeAllObjects];
     }
     
-    NSArray *icons =  @[@"me_bankscan",@"me_jdscan",@"me_aliwap",@"me_online",@"me_aliSacn",@"me_wechatscan",@"me_qqScan",@"me_hand",@"me_wap",@"me_YSF",@"me_quick",@"me_bibao",@"me_pointCard",@"me_btc",@"me_tiaoma",@"me_bishang",@"me_bank",@"me_wechatsecond",@"me_alipaySecond",@"me_usdt",@"me_bfb",@"recharge_otc_tab",@"me_dcbox"];
-    NSArray *names = @[@"银联扫码",@"京东扫码",@"支付宝wap",@"在线支付",@"支付宝扫码",@"微信扫码",@"QQ扫码",@"手工存款",@"微信/QQ/京东wap",@"云闪付扫码",@"银行快捷网银",@"点卡",@"钻石币",@"比特币",@"微信条码支付",@"币商充值",@"迅捷网银",@"微信秒存",@"支付宝秒存",@"泰达币-USDT",@"币付宝",@"充值/购买USDT",@"小金库"];
-    for (NSString *name in names) {
-        NSInteger index = [names indexOfObject:name];
-        BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
-        model.name = name;
-        model.iconName = icons[index];
-        model.available = YES;
-        if ([model.name isEqualToString:@"银联扫码"] || [model.name isEqualToString:@"微信扫码"] || [model.name isEqualToString:@"云闪付扫码"]||[model.name isEqualToString:@"币商充值"]||[model.name isEqualToString:@"泰达币-USDT"]||[model.name isEqualToString:@"币付宝"]||[model.name isEqualToString:@"充值/购买USDT"]||[model.name isEqualToString:@"小金库"]) {
-            [self.bigDataSoure addObject:model];
-        } else if ([model.name isEqualToString:@"QQ扫码"] ||
-                   [model.name isEqualToString:@"京东扫码"] ||
-                   [model.name isEqualToString:@"支付宝wap"] ||
-                   [model.name isEqualToString:@"支付宝扫码"] ||
-                   [model.name isEqualToString:@"手工存款"] ||
-                   [model.name isEqualToString:@"币商充值"]) {
-            [self.normalDataSoure addObject:model];
-        } else {
-            [self.normalDataTwo addObject:model];
-        }
-    }
+//    NSArray *icons =  @[@"me_bankscan",@"me_jdscan",@"me_aliwap",@"me_online",@"me_aliSacn",@"me_wechatscan",@"me_qqScan",@"me_hand",@"me_wap",@"me_YSF",@"me_quick",@"me_bibao",@"me_pointCard",@"me_btc",@"me_tiaoma",@"me_bishang",@"me_bank",@"me_wechatsecond",@"me_alipaySecond",@"me_usdt",@"me_bfb",@"recharge_otc_tab",@"me_dcbox"];
+//    NSArray *names = @[@"银联扫码",@"京东扫码",@"支付宝wap",@"在线支付",@"支付宝扫码",@"微信扫码",@"QQ扫码",@"手工存款",@"微信/QQ/京东wap",@"云闪付扫码",@"银行快捷网银",@"点卡",@"钻石币",@"比特币",@"微信条码支付",@"币商充值",@"迅捷网银",@"微信秒存",@"支付宝秒存",@"泰达币-USDT",@"币付宝",@"充值/购买USDT",@"小金库"];
+//    for (NSString *name in names) {
+//        NSInteger index = [names indexOfObject:name];
+//        BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
+//        model.name = name;
+//        model.iconName = icons[index];
+//        model.available = YES;
+//        if ([model.name isEqualToString:@"银联扫码"] || [model.name isEqualToString:@"微信扫码"] || [model.name isEqualToString:@"云闪付扫码"]||[model.name isEqualToString:@"币商充值"]||[model.name isEqualToString:@"泰达币-USDT"]||[model.name isEqualToString:@"币付宝"]||[model.name isEqualToString:@"充值/购买USDT"]||[model.name isEqualToString:@"小金库"]) {
+//            [self.bigDataSoure addObject:model];
+//        } else if ([model.name isEqualToString:@"QQ扫码"] ||
+//                   [model.name isEqualToString:@"京东扫码"] ||
+//                   [model.name isEqualToString:@"支付宝wap"] ||
+//                   [model.name isEqualToString:@"支付宝扫码"] ||
+//                   [model.name isEqualToString:@"手工存款"] ||
+//                   [model.name isEqualToString:@"币商充值"]) {
+//            [self.normalDataSoure addObject:model];
+//        } else {
+//            [self.normalDataTwo addObject:model];
+//        }
+//    }
     [self setupElements];
 }
 
@@ -413,7 +413,7 @@
     }
     
     self.isOpenSellUsdt = NO;
-    NSString *cardString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"提现地址管理" : @"银行卡资料";
+    NSString *cardString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"钱包管理" : @"银行卡资料";
     NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
     NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
     [self handleDataOneWithNames:names icons:icons];
@@ -427,18 +427,18 @@
             if ([isOpen isEqualToString:@"1"]) {
                 self.isOpenSellUsdt = YES;
                 [self requestSellUsdtLink];
-                NSString *cardString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"提现地址管理" : @"银行卡资料";
+                NSString *cardString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"钱包管理" : @"银行卡资料";
                 NSMutableArray *names = @[@"取款",@"一键卖币",@"洗码",cardString,@"绑定手机",@"个人资料"].mutableCopy;
                 NSMutableArray *icons = @[@"me_withdrawal",@"me_sell_usdt",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
                 [self handleDataOneWithNames:names icons:icons];
             }else{
-                NSString *cardString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"提现地址管理" : @"银行卡资料";
+                NSString *cardString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"钱包管理" : @"银行卡资料";
                 NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
                 NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
                 [self handleDataOneWithNames:names icons:icons];
             }
         }else{
-            NSString *cardString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"提现地址管理" : @"银行卡资料";
+            NSString *cardString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"钱包管理" : @"银行卡资料";
             NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
             NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
             [self handleDataOneWithNames:names icons:icons];

@@ -48,6 +48,7 @@
 
 @property (nonatomic, assign) BOOL adCellShow;
 @property (nonatomic, assign) BOOL   isloaded;
+@property (nonatomic, assign) BOOL idDisable;
 
 @end
 
@@ -128,6 +129,7 @@
 #pragma mark - viewWillAppear
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.idDisable = false;
     [self.collectionView reloadData];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork savedUserInfo]) {
@@ -139,6 +141,13 @@
             [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
+    }
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (self.idDisable) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockGameBtnPress" object:nil];
     }
 }
 
@@ -343,6 +352,7 @@
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
+                strongSelf.idDisable = true;
                 [strongSelf forwardToGameViewWithTag:button.tag];
             };
             return cell;
@@ -351,6 +361,7 @@
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
+                strongSelf.idDisable = true;
                 [strongSelf forwardToGameViewWithTag:button.tag];
             };
             return cell;
@@ -360,6 +371,7 @@
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
+                strongSelf.idDisable = true;
                 [strongSelf forwardToGameViewWithTag:button.tag];
             };
             return cell;
@@ -461,6 +473,7 @@
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
+                strongSelf.idDisable = true;
                 [strongSelf forwardToGameViewWithTag:button.tag];
             };
             return cell;
@@ -469,6 +482,7 @@
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
+                strongSelf.idDisable = true;
                 [strongSelf forwardToGameViewWithTag:button.tag];
             };
             return cell;
@@ -478,6 +492,7 @@
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
+                strongSelf.idDisable = true;
                 [strongSelf forwardToGameViewWithTag:button.tag];
             };
             return cell;

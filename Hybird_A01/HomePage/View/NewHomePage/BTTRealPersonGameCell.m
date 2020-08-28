@@ -35,6 +35,7 @@
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccess:) name:LogoutSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockGameBtnPress) name:@"UnlockGameBtnPress" object:nil];
 }
 
 - (void)loginSuccess:(NSNotification *)notifi {
@@ -45,6 +46,11 @@
 - (void)logoutSuccess:(NSNotification *)notifi {
     self.aginTryIcon.hidden = NO;
     self.agqjTryIcon.hidden = NO;
+}
+
+-(void)unlockGameBtnPress {
+    self.aginBtn.userInteractionEnabled = true;
+    self.agqjBtn.userInteractionEnabled = true;
 }
 
 - (void)layoutSubviews {
@@ -66,12 +72,14 @@
 
 - (IBAction)agqjBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
+        sender.userInteractionEnabled = false;
         self.buttonClickBlock(sender);
     }
 }
 
 - (IBAction)aginBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
+        sender.userInteractionEnabled = false;
         self.buttonClickBlock(sender);
     }
 }

@@ -75,10 +75,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.saveMoneyCount = 4;
+    self.saveMoneyCount = 0;
     self.isOpenSellUsdt = NO;
-    self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
-    self.saveMoneyTimesType = BTTSaveMoneyTimesTypeLessTen;
     self.title = @"会员中心";
     self.totalAmount = @"加载中";
     self.collectionView.bounces = NO;
@@ -88,7 +86,6 @@
     [self setupCollectionView];
     [self requestBuyUsdtLink];
     [self queryBiShangStatus];
-    [self loadPaymentDefaultData];
     [self loadMeAllData];
     [self registerNotification];
     [self loadWeiXinRediect];
@@ -115,9 +112,7 @@
         [self loadSaveMoneyTimes];
         
     } else {
-        self.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
-        self.saveMoneyTimesType = BTTSaveMoneyTimesTypeLessTen;
-        self.saveMoneyCount = 4;
+        self.saveMoneyCount = 0;
         [self loadPaymentDefaultData];
     }
 }
@@ -626,13 +621,11 @@
             [IVNetwork cleanUserInfo];
             [IVHttpManager shareManager].loginName = @"";
             [strongSelf.navigationController popToRootViewControllerAnimated:NO];
-            strongSelf.saveMoneyShowType = BTTMeSaveMoneyShowTypeAll;
-            strongSelf.saveMoneyTimesType = BTTSaveMoneyTimesTypeLessTen;
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
             [BTTUserStatusManager logoutSuccess];
+            strongSelf.saveMoneyCount = 0;
             [strongSelf loadPaymentDefaultData];
-            [strongSelf setupElements];
             strongSelf.totalAmount = @"-";
             [MBProgressHUD showSuccess:@"退出成功" toView:nil];
         };

@@ -59,6 +59,7 @@
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccess:) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccess:) name:LogoutSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockGameBtnPress) name:@"UnlockGameBtnPress" object:nil];
 }
 
 - (void)loginSuccess:(NSNotification *)notifi {
@@ -71,6 +72,14 @@
     _btiTryIcon.hidden = NO;
     _vipTryIcon.hidden = NO;
     _asTryIcon.hidden = NO;
+}
+
+-(void)unlockGameBtnPress {
+    self.shabaBtn.userInteractionEnabled = true;
+    self.btiBtn.userInteractionEnabled = true;
+    self.jingcaiBtn.userInteractionEnabled = true;
+    self.asBtn.userInteractionEnabled = true;
+    self.cpBtn.userInteractionEnabled = true;
 }
 
 
@@ -105,18 +114,21 @@
 
 - (IBAction)shabaBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
+        sender.userInteractionEnabled = false;
         self.buttonClickBlock(sender);
     }
 }
 
 - (IBAction)btiBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
+        sender.userInteractionEnabled = false;
         self.buttonClickBlock(sender);
     }
 }
 
 - (IBAction)jingcaiBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
+        sender.userInteractionEnabled = false;
         self.buttonClickBlock(sender);
     }
 }
@@ -124,12 +136,14 @@
 
 - (IBAction)asBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
+        sender.userInteractionEnabled = false;
         self.buttonClickBlock(sender);
     }
 }
 
-- (IBAction)agBtnClick:(id)sender {
+- (IBAction)agBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
+        sender.userInteractionEnabled = false;
         self.buttonClickBlock(sender);
     }
 }
