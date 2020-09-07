@@ -47,13 +47,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *xmType;
 
-@property (nonatomic, assign) NSInteger betAmount;
+@property (nonatomic, assign) double betAmount;
 
 @property (nonatomic, assign) NSInteger remBetAmount;
 
 @property (nonatomic, assign) NSInteger sortNo;
 
-@property (nonatomic, assign) NSInteger totalBetAmont;
+@property (nonatomic, assign) double totalBetAmont;
 
 @property (nonatomic, assign) double xmAmount;
 

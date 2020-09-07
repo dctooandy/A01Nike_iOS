@@ -32,7 +32,8 @@
 }
 
 - (void)loadTotalAvailableData:(dispatch_group_t)group {
-    self.totalAmount = [PublicMethod stringWithDecimalNumber:self.balanceModel.balance];
+    CGFloat totalAmount = self.balanceModel.balance - [self.balanceModel.platformTotalBalance floatValue];
+    self.totalAmount = [PublicMethod stringWithDecimalNumber:totalAmount];
     if (self.totalAmount.floatValue) {
         [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"PTTransfer"];
     } else {

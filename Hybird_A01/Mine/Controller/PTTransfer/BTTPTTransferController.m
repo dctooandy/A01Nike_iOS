@@ -67,7 +67,7 @@ typedef enum {
         if ([self.totalAmount isEqualToString:@"加载中"]) {
             cell.userableLabel.text = self.totalAmount;
         } else {
-            cell.userableLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%@%@",[NSString stringWithFormat:@"%ld",(long)(total - pt)],unitString]];
+            cell.userableLabel.attributedText = [self labelAttributeWithString:[NSString stringWithFormat:@"%@%@",[NSString stringWithFormat:@"%ld",total],unitString]];
         }
         if ([self.ptAmount isEqualToString:@"加载中"]) {
             cell.PTLabel.text = self.ptAmount;
