@@ -684,25 +684,24 @@
 }
 
 - (void)bannerToGame:(BTTBannerModel *)model {
-    if ([model.action.detail hasSuffix:@".htm"] ) {
+    if ([model.action.type isEqualToString:@"1"] ) {
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
         vc.webConfigModel.url = [model.action.detail stringByReplacingOccurrencesOfString:@" " withString:@""];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
         [self.navigationController pushViewController:vc animated:YES];
     } else {
-//        UIViewController *vc = nil;
         NSRange gameIdRange = [model.action.detail rangeOfString:@"gameId"];
         if (gameIdRange.location != NSNotFound) {
             NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
             NSString *gameid = arr[1];
-            UIViewController *vc = nil;
             if ([gameid isEqualToString:@"A01003"]) {
-                vc = [BTTAGQJViewController new];
+                BTTAGQJViewController *vc = [BTTAGQJViewController new];
+                vc.platformLine = [IVNetwork savedUserInfo].uiMode;
                 [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
                 [self.navigationController pushViewController:vc animated:YES];
             } else if ([gameid isEqualToString:@"A01026"]) {
-                vc = [BTTAGGJViewController new];
+                BTTAGGJViewController *vc = [BTTAGGJViewController new];
                 [self.navigationController pushViewController:vc animated:YES];
             }
         }

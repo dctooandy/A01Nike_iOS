@@ -392,13 +392,13 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         if (gameIdRange.location != NSNotFound) {
             NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
             NSString *gameid = arr[1];
-            UIViewController *vc = nil;
             if ([gameid isEqualToString:@"A01003"]) {
-                vc = [BTTAGQJViewController new];
+                BTTAGQJViewController *vc = [BTTAGQJViewController new];
+                vc.platformLine = [IVNetwork savedUserInfo].uiMode;
                 [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
                 [self.navigationController pushViewController:vc animated:YES];
             } else if ([gameid isEqualToString:@"A01026"]) {
-                vc = [BTTAGGJViewController new];
+                BTTAGGJViewController *vc = [BTTAGGJViewController new];
                 [self.navigationController pushViewController:vc animated:YES];
             }
         }

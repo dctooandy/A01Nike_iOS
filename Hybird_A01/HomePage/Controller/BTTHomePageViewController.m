@@ -733,9 +733,7 @@
 }
 
 - (void)choseGameLineWithTag:(NSInteger)tag{
-    NSDictionary *params = @{
-        @"currency": [IVNetwork savedUserInfo].uiMode,
-    };
+    NSDictionary *params = @{@"currency": [IVNetwork savedUserInfo] ? [IVNetwork savedUserInfo].uiMode:@"CNY"};
     NSString *jsonKey = @"";
     switch (tag) {
         case 1000:
