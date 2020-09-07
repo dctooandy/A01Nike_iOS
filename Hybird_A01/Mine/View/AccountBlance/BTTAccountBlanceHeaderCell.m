@@ -22,7 +22,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.trasferToLocal.enabled = YES;
-    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         self.topTipLabel.text = @"总余额(USDT)";
     }else{
         self.topTipLabel.text = @"总余额(元)";

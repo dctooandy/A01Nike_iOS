@@ -289,7 +289,7 @@
     _moneyTextField.attributedPlaceholder = attrString;
     _moneyTextField.delegate = self;
     
-    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         self.arriveView.hidden = YES;
         self.usdtTipLabel.hidden = YES;
         [self.saveView mas_updateConstraints:^(MASConstraintMaker *make) {

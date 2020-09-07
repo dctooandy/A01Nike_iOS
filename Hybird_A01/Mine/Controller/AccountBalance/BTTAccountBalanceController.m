@@ -48,7 +48,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         BTTAccountBlanceHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAccountBlanceHeaderCell" forIndexPath:indexPath];
-        NSString *unitString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"USDT" : @"¥";
+        NSString *unitString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT" : @"¥";
         cell.totalLabel.text = [NSString stringWithFormat:@"%@ %@",unitString,[PublicMethod transferNumToThousandFormat:self.amount.floatValue]];
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
@@ -57,7 +57,7 @@
         };
         return cell;
     } else if (indexPath.row == 1 || indexPath.row == 2) {
-        NSString *unitString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"USDT" : @"¥";
+        NSString *unitString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT" : @"¥";
         BTTMeMainModel *model = self.sheetDatas.count ? self.sheetDatas[indexPath.row - 1] : nil;
         BTTAccountBlanceCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAccountBlanceCell" forIndexPath:indexPath];
         cell.model = model;

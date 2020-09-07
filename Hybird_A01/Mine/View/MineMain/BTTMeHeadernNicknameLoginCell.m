@@ -18,6 +18,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *changeModeBtn;
+
 @end
 
 @implementation BTTMeHeadernNicknameLoginCell
@@ -54,10 +56,22 @@
 - (void)setTotalAmount:(NSString *)totalAmount {
     _totalAmount = totalAmount;
     self.amountLabel.text = _totalAmount;
-    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         self.amountTipLabel.text = @"账户总余额(USDT)";
     }else{
         self.amountTipLabel.text = @"账户总余额(¥)";
+    }
+}
+
+-(void)setChangModeImgStr:(NSString *)changModeImgStr {
+    _changModeImgStr = changModeImgStr;
+    [self.changeModeBtn setImage:[UIImage imageNamed:_changModeImgStr] forState:UIControlStateNormal];
+    self.changeModeBtn.hidden = [IVNetwork savedUserInfo].uiModeOptions.count <= 1;
+    for (int i = 0; i < [IVNetwork savedUserInfo].uiModeOptions.count; i++) {
+        NSString * option = [IVNetwork savedUserInfo].uiModeOptions[i];
+        if ([IVNetwork savedUserInfo].uiMode != option) {
+            self.changeModeBtn.tag = i;
+        }
     }
 }
 
@@ -67,5 +81,11 @@
     }
 }
 
+- (IBAction)changeModeBtn_click:(UIButton *)sender {
+    if (self.changModeTap) {
+//        self.changModeTap([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"CNY":@"USDT");
+        self.changModeTap([IVNetwork savedUserInfo].uiModeOptions[sender.tag]);
+    }
+}
 
 @end

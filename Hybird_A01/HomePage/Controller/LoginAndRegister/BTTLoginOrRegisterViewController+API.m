@@ -108,12 +108,7 @@
             [IVHttpManager shareManager].loginName = loginName;
             [IVHttpManager shareManager].userToken = result.body[@"token"];
             [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
-            NSInteger flag = [[NSString stringWithFormat:@"%@",result.body[@"newAccountFlag"]] integerValue];
-            if (flag==1) {
-                [self switchAccountWithName:loginName isBack:isback];
-            }else{
-                [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
-            }
+            [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
             
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:self.view];
@@ -170,12 +165,7 @@
                 [IVHttpManager shareManager].userToken = result.body[@"token"];
                 [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
                 NSString *loginName = [NSString stringWithFormat:@"%@",result.body[@"loginName"]];
-                NSInteger flag = [[NSString stringWithFormat:@"%@",result.body[@"newAccountFlag"]] integerValue];
-                if (flag==1) {
-                    [self switchAccountWithName:loginName isBack:isback];
-                }else{
-                    [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
-                }
+                [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
             }
             
         }else{
@@ -281,18 +271,21 @@
 
 - (void)onekeyRegisteAccount{
     [self showLoading];
-    [IVNetwork requestPostWithUrl:BTTOneKeyRegister paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    NSDictionary * params = @{@"randomStr":[PublicMethod getRandomTimeString]};
+    [IVNetwork requestPostWithUrl:BTTOneKeyRegister paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         [self hideLoading];
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSDictionary *json = result.body;
             NSString *account = json[@"loginName"];
-            NSString *pwd = json[@"pwd"];
+            NSString *mainAccountName = json[@"mainAccountName"];
+            NSString *pwd = json[@"password"];
             
             [MBProgressHUD showSuccess:@"开户成功" toView:nil];
             BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
             vc.registerOrLoginType = self.registerOrLoginType;
             vc.account = account;
+            vc.mainAccountName = mainAccountName;
             vc.pwd = pwd;
             [self.navigationController pushViewController:vc animated:YES];
             
@@ -558,7 +551,7 @@
     }
     [self showLoading];
 
-    [IVNetwork requestPostWithUrl:BTTUserRegister paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTMobileUserRegister paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
@@ -568,6 +561,7 @@
                     BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
                     vc.registerOrLoginType = self.registerOrLoginType;
                     vc.account = result.body[@"loginName"];
+                    vc.mainAccountName = result.body[@"mainAccountName"];
                     vc.pwd = pwd;
                     [self.navigationController pushViewController:vc animated:YES];
 
@@ -641,7 +635,7 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (result.body!=nil) {
                 [IVHttpManager shareManager].loginName = result.body[@"loginName"];
-                [BTTUserStatusManager loginSuccessWithUserInfo:result.body];
+                [BTTUserStatusManager loginSuccessWithUserInfo:result.body isBackHome:true];
                 
                 if (isBack) {
                     [MBProgressHUD showSuccess:@"登录成功" toView:nil];
@@ -652,24 +646,6 @@
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
 
-    }];
-}
-
-- (void)switchAccountWithName:(NSString *)name isBack:(BOOL)isBack{
-    [self showLoading];
-    NSMutableDictionary *params = [NSMutableDictionary new];
-    params[@"loginName"] = name;
-    params[@"accountType"] = @2;
-    [IVNetwork requestPostWithUrl:BTTSwitchAccount paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        [self hideLoading];
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            if (result.body!=nil) {
-                [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"] isBack:isBack];
-            }
-        }else{
-            [MBProgressHUD showError:result.head.errMsg toView:nil];
-        }
     }];
 }
 

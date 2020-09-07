@@ -38,6 +38,7 @@ typedef enum {
     self.ptAmount = @"加载中";
     self.transferAmount = @"加载中";
     self.submitBtnEnable = NO;
+    self.transferType = BTTPTTransferTypePT;
     [self setupCollectionView];
     [self setupElements];
     [self loadMainData];
@@ -58,7 +59,7 @@ typedef enum {
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        NSString *unitString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"USDT" : @"元";
+        NSString *unitString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT" : @"元";
         BTTPTTransferNewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPTTransferNewCell" forIndexPath:indexPath];
         NSInteger total = floor(self.totalAmount.floatValue);
         NSInteger pt = floor(self.ptAmount.floatValue);
@@ -76,14 +77,14 @@ typedef enum {
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
-            if (button.tag == 1020) {
+            if (button.tag == 1020) {//pt
                 strongSelf.transferType = BTTPTTransferTypePT;
                 if (strongSelf.ptAmount.floatValue && strongSelf.ptAmount.floatValue >= 1) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"PTTransfer"];
                 } else {
                     [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnDisableNotification object:@"PTTransfer"];
                 }
-            } else if (button.tag == 1021) {
+            } else if (button.tag == 1021) {//local
                 strongSelf.transferType = BTTPTTransferTypeLocal;
                 if (strongSelf.totalAmount.floatValue && strongSelf.totalAmount.floatValue >= 1) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"PTTransfer"];
@@ -106,10 +107,10 @@ typedef enum {
             NSInteger pt = floor(self.ptAmount.floatValue);
             NSInteger total = floor(self.totalAmount.floatValue);
             if (self.transferType == BTTPTTransferTypeLocal) {
-                self.transferAmount = [NSString stringWithFormat:@"%ld",total - pt];
+                self.transferAmount = [NSString stringWithFormat:@"%ld", pt];
             } else {
                 self.ptAmount = [NSString stringWithFormat:@"%ld",pt];
-                self.transferAmount = self.ptAmount;
+                self.transferAmount = [NSString stringWithFormat:@"%ld",total];
             }
         }
         
@@ -129,9 +130,10 @@ typedef enum {
             BTTPTTransferNewCell *headerCell = (BTTPTTransferNewCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             BTTPTTransferInputCell *amountCell = (BTTPTTransferInputCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
             if (!amountCell.amountTextField.text.floatValue) {
+                [MBProgressHUD showError:[NSString stringWithFormat:@"转账最小金额为%@",weakSelf.balanceModel.minWithdrawAmount] toView:nil];
                 return;
             }
-            [strongSelf loadCreditsTransfer:headerCell.useableBtn.selected amount:amountCell.amountTextField.text];
+            [strongSelf loadCreditsTransfer:headerCell.useableBtn.selected amount:amountCell.amountTextField.text transferType:strongSelf.transferType];
         };
         return cell;
     }

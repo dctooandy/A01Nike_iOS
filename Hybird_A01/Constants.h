@@ -260,6 +260,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTVerifyCaptcha                           @"captcha/generate"
 // 创建账号
 #define BTTUserRegister                            @"customer/createRealAccount"
+// 手機创建账号
+#define BTTMobileUserRegister                      @"customer/createAccountByMobileNo"
 // 验证账号信息
 #define BTTCheckAccountInfo                        @"_extra_/api/v1/ws/check-account-info"
 // 验证短信验证码
@@ -430,7 +432,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTQueryLoginedShow                        @"_extra_/api/v1/activity/checkHasPop"
 #define BTTUnreadInsideMessage                      @"letter/query"
 #define BTTReadInsideMessage                      @"letter/batchViewLetter"
-#define BTTOneKeyRegister                      @"_extra_/api/v1/ws/fast-create-account"
+#define BTTOneKeyRegister                      @"customer/createAccountAuto"
 
 #define BTTIsBindStatusAPI                         @"/public/verify/isNewBind"
 #define BTTGamePlatforms                           @"/A01/game/platforms"

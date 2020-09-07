@@ -143,7 +143,7 @@
     _saveInputField.delegate = self;
     [_saveInputField addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
     
-    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         self.arriveView.hidden = YES;
     }
 }

@@ -125,7 +125,7 @@
     }else if ([model.bankName isEqualToString:@"USDT"]){
         typeString = @"绑定USDT钱包";
     }
-    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         typeString = @"提现地址";
     }
     

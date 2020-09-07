@@ -122,7 +122,7 @@
     NSArray *names3 = @[@"金额",@"比特币",@"取款至",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
     NSArray *names4 = @[@"金额",@"预估到账",@"取款至",@"",@"",@""];
     
-    NSString *pString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"最少1USDT" : @"最少10元";
+    NSString *pString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"最少1USDT" : @"最少10元";
     
     NSArray *placeholders1 = @[@"",@""];
     NSArray *placeholders3 = @[pString,rateStr,@"***银行-尾号*****",@""];

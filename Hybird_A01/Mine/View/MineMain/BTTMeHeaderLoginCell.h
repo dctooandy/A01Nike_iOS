@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *totalAmount;
 
+@property (nonatomic, copy) NSString *changModeImgStr;
+
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *vipLevelLabel;
@@ -32,8 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UIButton *nickNameBtn;
 
-@property (nonatomic, copy) void (^changmodeTap)(void);
-
+@property (nonatomic, copy) void (^changModeTap)(NSString * modeStr);
 
 @end
 

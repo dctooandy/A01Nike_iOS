@@ -27,7 +27,7 @@
 - (void)setModel:(BTTXimaTotalModel *)model {
     _model = model;
     double amount = 0;
-    NSString *unitString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"USDT" : @"元";
+    NSString *unitString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT" : @"元";
     for (int i =0; i<model.xmList.count; i++) {
         amount = amount+model.xmList[i].xmAmount;
         if (i==model.xmList.count-1) {

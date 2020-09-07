@@ -69,6 +69,7 @@
             NSArray * arr = result.body[@"data"];
             [IVLAManager setPayegisSDKDomain:arr[0][@"PROD_DID"]];
             [IVLAManager setUploadDomain:arr[0][@"PROD_GATHER"]];
+            [self initAnalysis];
         }
     }];
 }
@@ -133,13 +134,12 @@
     [self getWMSForm];
     [self setupTabbarController];
     [self.window makeKeyAndVisible];
-    [self initAnalysis];
     [self setDynamicQuery];
     [self initPushSDKWithApplication:application options:launchOptions];
     [CNPreCacheMananger prepareCacheDataNormal];
     [CNPreCacheMananger prepareCacheDataNeedLogin];
     [OpenInstallSDK initWithDelegate:self];
-    
+    [[UIButton appearance] setExclusiveTouch:YES];
     return YES;
 }
 

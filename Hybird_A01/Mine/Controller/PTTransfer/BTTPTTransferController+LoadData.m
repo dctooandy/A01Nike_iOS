@@ -54,7 +54,8 @@
     }
 }
 
-- (void)loadCreditsTransfer:(BOOL)isReverse amount:(NSString *)amount {
+- (void)loadCreditsTransfer:(BOOL)isReverse amount:(NSString *)amount transferType:(NSInteger)transferType {
+    NSString * urlStr = transferType == 0 ?  BTTTransferAllMoneyToLocal:BTTTransferToGame;
     if ([amount doubleValue]<[self.balanceModel.minWithdrawAmount doubleValue]) {
         [MBProgressHUD showError:[NSString stringWithFormat:@"转账最小金额为%@",self.balanceModel.minWithdrawAmount] toView:nil];
     }else{
@@ -64,7 +65,7 @@
         [params setValue:@1 forKey:@"isQueryBalanceBeforeTransfer"];
         [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
         [self showLoading];
-        [IVNetwork requestPostWithUrl:BTTTransferToGame paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [IVNetwork requestPostWithUrl:urlStr paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
             [self hideLoading];
             IVJResponseObject *result = response;
             if ([result.head.errCode isEqualToString:@"0000"]) {

@@ -29,7 +29,6 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.vipLevelLabel.layer.cornerRadius = 2;
-    self.changeModeBtn.hidden = YES;
 }
 
 - (void)setNoticeStr:(NSString *)noticeStr {
@@ -52,10 +51,22 @@
 - (void)setTotalAmount:(NSString *)totalAmount {
     _totalAmount = totalAmount;
     self.amountLabel.text = _totalAmount;
-    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         self.amountTipLabel.text = @"账户总余额(USDT)";
     }else{
         self.amountTipLabel.text = @"账户总余额(¥)";
+    }
+}
+
+-(void)setChangModeImgStr:(NSString *)changModeImgStr {
+    _changModeImgStr = changModeImgStr;
+    [self.changeModeBtn setImage:[UIImage imageNamed:_changModeImgStr] forState:UIControlStateNormal];
+    self.changeModeBtn.hidden = [IVNetwork savedUserInfo].uiModeOptions.count <= 1;
+    for (int i = 0; i < [IVNetwork savedUserInfo].uiModeOptions.count; i++) {
+        NSString * option = [IVNetwork savedUserInfo].uiModeOptions[i];
+        if ([IVNetwork savedUserInfo].uiMode != option) {
+            self.changeModeBtn.tag = i;
+        }
     }
 }
 
@@ -76,9 +87,10 @@
         self.buttonClickBlock(sender);
     }
 }
-- (IBAction)changeModeBtn_click:(id)sender {
-    if (self.changmodeTap) {
-        self.changmodeTap();
+- (IBAction)changeModeBtn_click:(UIButton *)sender {
+    if (self.changModeTap) {
+//        self.changModeTap([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"CNY":@"USDT");
+        self.changModeTap([IVNetwork savedUserInfo].uiModeOptions[sender.tag]);
     }
 }
 

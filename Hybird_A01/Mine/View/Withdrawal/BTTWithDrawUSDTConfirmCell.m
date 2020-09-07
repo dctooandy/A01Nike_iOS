@@ -31,7 +31,7 @@
 }
 
 -(void)setCellRateWithRate:(CGFloat)rate{
-    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         _ratelabel.text = @"";
         return;
     }

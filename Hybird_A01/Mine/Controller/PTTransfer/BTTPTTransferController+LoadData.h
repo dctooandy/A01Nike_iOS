@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadMainData;
 
-- (void)loadCreditsTransfer:(BOOL)isReverse amount:(NSString *)amount;
+- (void)loadCreditsTransfer:(BOOL)isReverse amount:(NSString *)amount transferType:(NSInteger)transferType;
 
 @end
 

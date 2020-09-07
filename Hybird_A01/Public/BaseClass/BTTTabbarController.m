@@ -60,7 +60,10 @@
 }
 
 - (void)loginSuccess:(NSNotification *)notifi {
-    [self resetTabar];
+    NSDictionary * dic = notifi.object;
+    if ([[dic objectForKey:@"isBackHome"] boolValue]) {
+        [self resetTabar];
+    }
 }
 
 - (void)logoutSuccess:(NSNotification *)notifi {

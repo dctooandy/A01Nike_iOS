@@ -31,9 +31,11 @@
 @property (nonatomic, copy) NSString *selectedMoney;
 @property  BTTUsdtWalletModel *bfbModel;
 @property (weak, nonatomic) IBOutlet UIView *secondView;
-@property (weak, nonatomic) IBOutlet UIView *secondSaveView;
+@property (weak, nonatomic) IBOutlet UIView *secondMoneyView;
 @property (weak, nonatomic) IBOutlet UILabel *secondMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondArriveLabel;
+@property (weak, nonatomic) IBOutlet UIView *secondArriveView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *qrcodeView;
 @property (weak, nonatomic) IBOutlet UIButton *saveFinishBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *bfbBanner;
@@ -240,7 +242,8 @@
     
     
     _secondView.layer.backgroundColor = kBlackBackgroundColor.CGColor;
-    _secondSaveView.layer.backgroundColor = kBlackLightColor.CGColor;
+    _secondMoneyView.layer.backgroundColor = kBlackLightColor.CGColor;
+    _secondArriveView.layer.backgroundColor = kBlackLightColor.CGColor;
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dowloadBfbApp)];
     [self.dcboxDownload addGestureRecognizer:tap];
@@ -302,7 +305,7 @@
     _moneyTextField.attributedPlaceholder = attrString;
     _moneyTextField.delegate = self;
     
-    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         self.arriveView.hidden = YES;
         self.usdtTipLabel.hidden = YES;
         [self.saveView mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -378,7 +381,9 @@
             CGFloat rmbCash = [weakSelf.moneyTextField.text integerValue] * weakSelf.usdtRate;
             NSString *cnyStr = [NSString stringWithFormat:@"%.3f",rmbCash];
             weakSelf.secondArriveLabel.text = [cnyStr substringWithRange:NSMakeRange(0, cnyStr.length-1)];
-            
+            if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"]) {
+                weakSelf.secondArriveView.hidden = YES;
+            }
             if ([[UIApplication sharedApplication]
               canOpenURL:[NSURL URLWithString:address]]){
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:address]];

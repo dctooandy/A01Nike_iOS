@@ -61,6 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)queryBiShangStatus;
 
+-(void)changeMode:(NSString *)modeStr;
 
 @end
 

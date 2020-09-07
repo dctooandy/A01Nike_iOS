@@ -317,7 +317,7 @@
     self.noteInfoView.layer.backgroundColor = [[UIColor colorWithRed:41.0f/255.0f green:45.0f/255.0f blue:54.0f/255.0f alpha:1.0f] CGColor];
     self.noteInfoView.alpha = 1;
     
-    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         self.arriveView.hidden = YES;
         self.exchangeRateLabel.hidden = YES;
         self.elseRateLabel.hidden = YES;

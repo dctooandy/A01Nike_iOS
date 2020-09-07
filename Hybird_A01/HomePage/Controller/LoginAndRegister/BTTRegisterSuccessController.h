@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BTTRegisterSuccessController : BTTCollectionViewController
 
 @property (nonatomic, copy) NSString *account;
-
+@property (nonatomic, copy) NSString *mainAccountName;
 @property (nonatomic, copy) NSString *pwd;
 
 @property (nonatomic, assign) BTTRegisterOrLoginType registerOrLoginType;

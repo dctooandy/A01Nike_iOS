@@ -22,6 +22,8 @@ typedef void (^AccountBlanceBlock)(void);
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
+@property (nonatomic, copy) NSString *changModeImgStr;
+
 @property (weak, nonatomic) IBOutlet UILabel *vipLevelLabel;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *vipLabelWidth;
@@ -31,6 +33,8 @@ typedef void (^AccountBlanceBlock)(void);
 @property (weak, nonatomic) IBOutlet UILabel *nicknameLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *nickNameBtn;
+
+@property (nonatomic, copy) void (^changModeTap)(NSString * modeStr);
 
 @end
 

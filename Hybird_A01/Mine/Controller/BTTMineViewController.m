@@ -154,13 +154,14 @@
                     cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
                 }
                 
-
+                cell.changModeImgStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"go_main_mode":@"go_usdt_mode";
                 cell.nameLabel.text = [[IVNetwork savedUserInfo].loginName containsString:@"usdt"] ? [[IVNetwork savedUserInfo].loginName stringByReplacingOccurrencesOfString:@"usdt" withString:@""] : [IVNetwork savedUserInfo].loginName;
                 cell.vipLevelLabel.text = ([IVNetwork savedUserInfo].starLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ", @([IVNetwork savedUserInfo].starLevel)];
+                
                 weakSelf(weakSelf);
-                cell.changmodeTap = ^{
-//                    strongSelf(strongSelf);
-                    
+                cell.changModeTap = ^(NSString * _Nonnull modeStr) {
+                    strongSelf(strongSelf);
+                    [strongSelf changeMode:modeStr];
                 };
                 cell.accountBlanceBlock = ^{
                     strongSelf(strongSelf);
@@ -189,10 +190,15 @@
                 } else {
                     cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
                 }
+                cell.changModeImgStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"go_main_mode":@"go_usdt_mode";
                 cell.nicknameLabel.text = nickName;
                 cell.nameLabel.text = [IVNetwork savedUserInfo].loginName;
                 cell.vipLevelLabel.text = ([IVNetwork savedUserInfo].starLevel == 7) ? @" 准VIP5 " : [NSString stringWithFormat:@" VIP%@ ", @([IVNetwork savedUserInfo].starLevel)];
                 weakSelf(weakSelf);
+                cell.changModeTap = ^(NSString * _Nonnull modeStr) {
+                    strongSelf(strongSelf);
+                    [strongSelf changeMode:modeStr];
+                };
                 cell.accountBlanceBlock = ^{
                     strongSelf(strongSelf);
                     BTTAccountBalanceController *accountBalance = [[BTTAccountBalanceController alloc] init];
@@ -453,10 +459,11 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     NSLog(@"%@", @(indexPath.row));
-    if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 10&&[IVNetwork savedUserInfo].newAccountFlag!=1)||(indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 8&&[IVNetwork savedUserInfo].newAccountFlag==1)) {
+    BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
+    if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 10 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 8 && isUSDTAcc)) {
         [IVNetwork checkAppUpdate];
         return;
-    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 11&&[IVNetwork savedUserInfo].newAccountFlag!=1)||(indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 9&&[IVNetwork savedUserInfo].newAccountFlag==1)) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 11 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 9 && isUSDTAcc)) {
         // 网络监测
         IVCNetworkStatusView *statusView = [[IVCNetworkStatusView alloc] initWithFrame:self.view.frame];
 
@@ -553,7 +560,7 @@
     } else if ((indexPath.row == self.saveMoneyCount + 7&&!self.isOpenSellUsdt)||(indexPath.row == self.saveMoneyCount + 8&&self.isOpenSellUsdt)) {
         BTTPersonalInfoController *personInfo = [[BTTPersonalInfoController alloc] init];
         [self.navigationController pushViewController:personInfo animated:YES];
-    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 4&&[IVNetwork savedUserInfo].newAccountFlag!=1) {
+    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 4 && !isUSDTAcc) {
         
         NSMutableArray *names = @[@"首存优惠"].mutableCopy;
         if (self.isFanLi) {
@@ -585,33 +592,33 @@
             }
         }];
         [actionSheet show];
-    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 5&&[IVNetwork savedUserInfo].newAccountFlag!=1) {
+    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 5 && !isUSDTAcc) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.title = @"推荐礼金";
         vc.webConfigModel.theme = @"outside";
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/gift/lucky_pot"];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6&&[IVNetwork savedUserInfo].newAccountFlag!=1)||(indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 4&&[IVNetwork savedUserInfo].newAccountFlag==1)) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 4 && isUSDTAcc)) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.url = @"customer/log.htm";
         vc.webConfigModel.theme = @"inside";
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 7&&[IVNetwork savedUserInfo].newAccountFlag!=1)||(indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 5&&[IVNetwork savedUserInfo].newAccountFlag==1)) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 7 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 5 && isUSDTAcc)) {
         BTTAccountSafeController *vc = [[BTTAccountSafeController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 8&&[IVNetwork savedUserInfo].newAccountFlag!=1)||(indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6&&[IVNetwork savedUserInfo].newAccountFlag==1)) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 8 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6 && isUSDTAcc)) {
         BTTPTTransferController *vc = [[BTTPTTransferController alloc] init];
         vc.balanceModel = self.balanceModel;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 9&&[IVNetwork savedUserInfo].newAccountFlag!=1)||(indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 7&&[IVNetwork savedUserInfo].newAccountFlag==1)) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 9 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 7 && isUSDTAcc)) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.url = @"customer/letter.htm";
         vc.webConfigModel.theme = @"inside";
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 12&&[IVNetwork savedUserInfo].newAccountFlag!=1)||(indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 10&&[IVNetwork savedUserInfo].newAccountFlag==1)) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 12 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 10 && isUSDTAcc)) {
         // 设置
         BTTSettingsController *vc = [[BTTSettingsController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
@@ -701,16 +708,15 @@
 
 - (void)setupElements {
     NSInteger total = self.saveMoneyCount + 4 + self.mainDataOne.count + self.mainDataTwo.count;
-
     NSMutableArray *elementsHight = [NSMutableArray array];
     for (int i = 0; i < total; i++) {
         if (i == 0) {
             if (SCREEN_WIDTH == 414) {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 172)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 200)]];
             } else if (SCREEN_WIDTH == 320) {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 158)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 190)]];
             } else {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 158)]];
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 190)]];
             }
         } else if (i == 1) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 63)]];

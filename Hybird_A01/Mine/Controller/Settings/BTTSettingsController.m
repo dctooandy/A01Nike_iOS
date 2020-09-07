@@ -119,7 +119,7 @@
 - (NSMutableArray *)sheetDatas {
     if (!_sheetDatas) {
         _sheetDatas = [NSMutableArray array];
-        NSString *cardString = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"提现地址管理" : @"银行卡资料";
+        NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"提现地址管理" : @"银行卡资料";
         NSArray *titles = @[@"个人资料",cardString,@"修改限红",@"短信订阅",@"退出登录"];
         NSArray *placeholders = @[@"",@"",@"",@"",@""];
         for (NSString *title in titles) {

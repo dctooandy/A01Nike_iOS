@@ -129,8 +129,8 @@ typedef enum {
             BTTRegisterSuccessTwoCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterSuccessTwoCell" forIndexPath:indexPath];
             NSString *tipStr = self.isModifyPwd ? @"密码修改成功" : @"恭喜您,开户成功";
             cell.tipLabel.text = tipStr;
-            NSString *accountStr = [NSString stringWithFormat:@"您的账号: %@",self.account];
-            NSRange accountRange = [accountStr rangeOfString:self.account];
+            NSString *accountStr = [NSString stringWithFormat:@"您的账号: %@",self.mainAccountName];
+            NSRange accountRange = [accountStr rangeOfString:self.mainAccountName];
             NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:accountStr];
             [attstr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:accountRange];
             cell.accountLabel.attributedText = attstr;
@@ -310,7 +310,7 @@ typedef enum {
 - (void)doLogin{
         NSString *loginUrl = BTTUserLoginAPI;
         NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setValue:self.account forKey:BTTLoginName];
+    [parameters setValue:self.mainAccountName forKey:BTTLoginName];
     [parameters setValue:[IVRsaEncryptWrapper encryptorString:self.pwd] forKey:BTTPassword];
     [parameters setValue:[PublicMethod timeIntervalSince1970] forKey:BTTTimestamp];
     [parameters setValue:@(0) forKey:@"loginType"];
@@ -322,43 +322,20 @@ typedef enum {
             [[NSUserDefaults standardUserDefaults] synchronize];
             IVJResponseObject *result = response;
             if ([result.head.errCode isEqualToString:@"0000"]) {
-                [IVHttpManager shareManager].loginName = self.account;
+                [IVHttpManager shareManager].loginName = self.mainAccountName;
                 [IVHttpManager shareManager].userToken = result.body[@"token"];
                 [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
                 [[NSUserDefaults standardUserDefaults]setObject:result.body[@"customerId"] forKey:@"pushcustomerid"];
 //                [IVPushManager sharedManager].customerId = result.body[@"customerId"];
                 AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
                 [delegate reSendIVPushRequestIpsSuperSign:result.body[@"customerId"]];
-                NSInteger flag = [[NSString stringWithFormat:@"%@",result.body[@"newAccountFlag"]] integerValue];
-                if (flag==1) {
-                    [self switchAccountWithName:result.body[@"loginName"]];
-                }else{
-                    [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"]];
-                }
-                
-                
+                [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"]];
             }else{
                 [self hideLoading];
                 
             }
             
         }];
-}
-
-- (void)switchAccountWithName:(NSString *)name{
-    NSMutableDictionary *params = [NSMutableDictionary new];
-    params[@"loginName"] = name;
-    params[@"accountType"] = @2;
-    [IVNetwork requestPostWithUrl:BTTSwitchAccount paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            if (result.body!=nil) {
-                [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"]];
-            }
-        }else{
-            [MBProgressHUD showError:result.head.errMsg toView:nil];
-        }
-    }];
 }
 
 - (void)getCustomerInfoByLoginNameWithName:(NSString *)name{
@@ -384,7 +361,7 @@ typedef enum {
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (result.body!=nil) {
                 [IVHttpManager shareManager].loginName = result.body[@"loginName"];
-                [BTTUserStatusManager loginSuccessWithUserInfo:result.body];
+                [BTTUserStatusManager loginSuccessWithUserInfo:result.body isBackHome:true];
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     if (self.isHome) {

@@ -37,7 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [IVNetwork savedUserInfo].newAccountFlag==1 ? @"提现地址管理" : @"银行卡资料";
+    self.title = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"提现地址管理" : @"银行卡资料";
     _haveBFB = NO;
     _bankNum = 0;
     _bitNum = 0;
@@ -224,7 +224,7 @@
             for (int i =0 ; i<array.count; i++) {
                 NSDictionary *json = array[i];
                 BTTBankModel *model = [BTTBankModel yy_modelWithDictionary:json];
-                if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+                if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
                     if (![model.accountType isEqualToString:@"信用卡"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"存折"]) {
                         [bankList addObject:model];
                     }
@@ -418,7 +418,7 @@
         }
     }
     self.bankList = bList;
-    if ([[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]||[IVNetwork savedUserInfo].newAccountFlag==1) {
+    if ([[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"] || [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         _bankNum=3;
     }
     [self setupElements];

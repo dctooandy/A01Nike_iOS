@@ -260,7 +260,7 @@
         }
     }
     CGFloat amount = [self.amount doubleValue];
-    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         BOOL enable = amount >= 1 && amount <= 1430000;
         [self getSubmitBtn].enabled = enable;
     }else{
@@ -268,7 +268,7 @@
         [self getSubmitBtn].enabled = enable;
     }
     
-    if ([IVNetwork savedUserInfo].newAccountFlag==1) {
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         if (amount > 1430000) {
             [MBProgressHUD showMessagNoActivity:@"超过最大取款额度!" toView:self.view];
         }
@@ -408,11 +408,11 @@
         return;
     }
     
-    if (self.amount.floatValue < 10&&[IVNetwork savedUserInfo].newAccountFlag!=1) {
+    if (self.amount.floatValue < 10 && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         [MBProgressHUD showError:@"最少10元" toView:nil];
         return;
     }
-    if (self.amount.floatValue < 1&&[IVNetwork savedUserInfo].newAccountFlag==1) {
+    if (self.amount.floatValue < 1 && [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         [MBProgressHUD showError:@"最少1USDT" toView:nil];
         return;
     }

@@ -63,6 +63,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger weeklyBetAmount;
 @property (nonatomic, assign) NSInteger xmFlag;
 @property (nonatomic, assign) NSInteger newAccountFlag;
+@property (nonatomic, copy) NSString * uiMode;
+@property (nonatomic, copy) NSArray * uiModeOptions;
+
 @end
 
 NS_ASSUME_NONNULL_END

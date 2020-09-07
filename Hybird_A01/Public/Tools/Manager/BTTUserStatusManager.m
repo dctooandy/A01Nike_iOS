@@ -15,7 +15,7 @@
 #import "CNPreCacheMananger.h"
 #import "IVPushManager.h"
 @implementation BTTUserStatusManager
-+ (void)loginSuccessWithUserInfo:(NSDictionary *)userInfo
++ (void)loginSuccessWithUserInfo:(NSDictionary *)userInfo isBackHome:(BOOL)isBackHome
 {
     [IVNetwork updateUserInfo:userInfo];
     NSString *userId = [IVNetwork savedUserInfo].customerId;
@@ -32,7 +32,7 @@
     [IVPushManager sharedManager].customerId = [IVNetwork savedUserInfo].customerId;
     [[IVPushManager sharedManager] sendIpsSuperSign];
     [CLive800Manager switchLive800UserWithCustomerId:userModel];
-    [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccessNotification object:@{@"isBackHome":[NSNumber numberWithBool:isBackHome]}];
     [BTTRequestPrecache updateCacheNeedLoginRequest];
     [CNPreCacheMananger prepareCacheDataNeedLogin];
 }

@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface BTTUserStatusManager : NSObject
-+ (void)loginSuccessWithUserInfo:(NSDictionary *)userInfo;
++ (void)loginSuccessWithUserInfo:(NSDictionary *)userInfo isBackHome:(BOOL)isBackHome;
 + (void)logoutSuccess;
 @end
