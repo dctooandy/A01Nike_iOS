@@ -39,11 +39,12 @@
 
 -(void)setHistory:(NSArray *)history{
     double amount = 0;
+    NSString *unitString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT" : @"元";
     for (int i=0; i<history.count; i++) {
         BTTXimaLastWeekItemModel *model = [BTTXimaLastWeekItemModel yy_modelWithJSON:history[i]];
         amount = amount+[model.amount doubleValue];
         if (i==history.count-1) {
-            self.totalLabel.text = [NSString stringWithFormat:@"%@元",[PublicMethod transferNumToThousandFormat:amount]];
+            self.totalLabel.text = [NSString stringWithFormat:@"%@%@",[PublicMethod transferNumToThousandFormat:amount],unitString];
         }
     }
 }
