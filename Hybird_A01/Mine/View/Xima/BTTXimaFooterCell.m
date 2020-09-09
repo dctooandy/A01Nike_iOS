@@ -23,10 +23,10 @@
     self.backgroundColor = [UIColor colorWithHexString:@"212229"];
     
     NSString * firstStr = @"1. 所有游戏厅可随时结算洗码，洗码金额≥";
-    NSString * currencyStr = @"￥1";
-    NSString * secondStr = @"元可自助提交添加，洗码礼金无上限，可随时申请提款；";
+    NSString * currencyStr = @"￥1元";
+    NSString * secondStr = @"可自助提交添加，洗码礼金无上限，可随时申请提款；";
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"]) {
-        currencyStr = @"￥1";
+        currencyStr = @"￥1元";
     } else {
         currencyStr = @"1USDT";
     }

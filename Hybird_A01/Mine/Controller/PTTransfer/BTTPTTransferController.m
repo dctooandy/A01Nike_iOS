@@ -141,7 +141,8 @@ typedef enum {
 }
 
 - (NSMutableAttributedString *)labelAttributeWithString:(NSString *)str {
-    NSRange range = [str rangeOfString:@"元"];
+    NSString *unitString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT" : @"元";
+    NSRange range = [str rangeOfString:unitString];
     NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
     [attStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"818791"],NSFontAttributeName:kFontSystem(12)} range:range];
     return attStr;
