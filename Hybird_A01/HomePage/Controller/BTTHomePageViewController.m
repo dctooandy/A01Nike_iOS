@@ -99,6 +99,7 @@
     });
     
     [self setupFloatWindow];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBannerData) name:@"CHANGE_MODE" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestRedbag) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadBanner) name:LoginSuccessNotification object:nil];
@@ -107,12 +108,12 @@
 #pragma mark - viewDidAppear
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    //第一次登入顯示提示
-    BOOL isShowAccountGride = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowAccountGride] boolValue];
-    if ([PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork savedUserInfo].lastLoginDate]] && !isShowAccountGride) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowAccountGride];
-        [self showNewAccountGrideView];
-    }
+    //第一次登入顯示提示 引導頁
+//    BOOL isShowAccountGride = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowAccountGride] boolValue];
+//    if ([PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork savedUserInfo].lastLoginDate]] && !isShowAccountGride) {
+//        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowAccountGride];
+//        [self showNewAccountGrideView];
+//    }
     //第一次出现预加载游戏
     if (!self.isloaded) {
         self.isloaded = YES;
@@ -152,6 +153,10 @@
 }
 
 #pragma mark - 換幣種帳號banner不同所以要刷新
+-(void)removeBannerData {
+    [self.imageUrls removeAllObjects];
+}
+
 -(void)reloadBanner {
     [self refreshDatasOfHomePage];
 }

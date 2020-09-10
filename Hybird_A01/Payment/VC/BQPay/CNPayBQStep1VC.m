@@ -20,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *amountBtn;
 @property (weak, nonatomic) IBOutlet UILabel *nameLb;
 @property (weak, nonatomic) IBOutlet CNPayNameTF *nameTF;
-@property (weak, nonatomic) IBOutlet CNPayNormalTF *bankTF;
 @property (weak, nonatomic) IBOutlet CNPayAmountRecommendView *nameView;
 @property (weak, nonatomic) IBOutlet UIView *nameAreaView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameAreaViewHeight;
@@ -29,12 +28,10 @@
 
 @property (weak, nonatomic) IBOutlet UIView *bottomTipView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTipViewHeight;
-@property (weak, nonatomic) IBOutlet UIView *bankView;
 @property (weak, nonatomic) IBOutlet UIView *topView;
 
 @property (nonatomic, strong) BTTBishangStep1VC *BSStep1VC;
 
-@property (nonatomic, strong) CNPayBankCardModel *chooseBank;
 @property (nonatomic, copy) NSArray *bankNames;
 @property (nonatomic, strong) NSArray *amountList;
 @property (nonatomic, strong) NSArray *bankList;
@@ -51,9 +48,7 @@
     [self configDifferentUI];
     [self queryAmountList];
     // 初始化数据
-    [self updateAllContentWithModel:self.paymentModel];
     [self setViewHeight:450 fullScreen:NO];
-    self.bankView.hidden = YES;
     [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(150);
     }];
@@ -71,7 +66,7 @@
 
 - (void)configBishangUI {
     _BSStep1VC = [[BTTBishangStep1VC alloc] init];
-//    _BSStep1VC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, 1000);
+    //    _BSStep1VC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, 1000);
     _BSStep1VC.paymentModel = self.paymentModel;
     [self addChildViewController:_BSStep1VC];
     [self.view addSubview:_BSStep1VC.view];
@@ -101,6 +96,9 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (result.body[@"amounts"]!=nil) {
                 self.amountList = result.body[@"amounts"];
+                NSNumber * min = result.body[@"minAmount"];
+                NSNumber * max = result.body[@"maxAmount"];
+                self.amountTF.placeholder = [NSString stringWithFormat:@"最少%@，最多%@", min, max];
                 [self configAmountList];
             }
         }else{
@@ -120,30 +118,13 @@
         default:
             break;
     }
-    weakSelf(weakSelf);
-    self.nameTF.endedHandler = ^{
-        weakSelf.bankTF.text = nil;
-        weakSelf.bankNames = nil;
-    };
 }
-
-/// 刷新数据
-- (void)updateAllContentWithModel:(CNPaymentModel *)model {
-    self.amountTF.text = @"";
-    // 金额提示语
-    if (model.maxAmount > model.minAmount) {
-        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%ld，最多%ld", (long)model.minAmount, (long)model.maxAmount];
-    } else {
-        self.amountTF.placeholder = [NSString stringWithFormat:@"最少%ld", (long)model.minAmount];
-    }
-}
-
 
 - (void)configAmountList {
-//    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
-//    if (!self.paymentModel.amountCanEdit) {
-//        self.amountTF.placeholder = @"仅可选择以下金额";
-//    }
+    //    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
+    //    if (!self.paymentModel.amountCanEdit) {
+    //        self.amountTF.placeholder = @"仅可选择以下金额";
+    //    }
 }
 
 
@@ -172,68 +153,6 @@
         }
         
     }];
-
-}
-
-- (IBAction)selectedBank:(UIButton *)sender {
-    [self.view endEditing:YES];
-    if (self.nameTF.text.length == 0) {
-        [self showError:@"请输入姓名"];
-        return;
-    }
-    if (!self.bankNames) {
-        [self BQGetBank];
-        return;
-    }
-    [self selectBank];
-}
-
-- (void)BQGetBank {
-    [self showLoading];
-    __weak typeof(self) weakSelf = self;
-    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
-    params[@"depositor"] = self.nameTF.text;
-    params[@"payType"] = @(self.paymentModel.payType);
-    [IVNetwork requestPostWithUrl:BTTQueryBQBankList paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        [weakSelf hideLoading];
-        IVJResponseObject *result =response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            self.bankView.hidden = NO;
-            [self.commitBtn setTitle:@"提交" forState:UIControlStateNormal];
-            [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(200);
-            }];
-            NSArray *array = result.body[@"bankList"];
-            self.bankList = array;
-            if (array.count == 0) {
-                [self showError:@"暂无银行数据"];
-                return;
-            }
-            NSMutableArray *bankNames = [NSMutableArray array];
-            for (NSDictionary *json in array) {
-                CNPayBankCardModel *model = [CNPayBankCardModel yy_modelWithJSON:json];
-                [bankNames addObject:model.bankName];
-            }
-            weakSelf.bankNames = [bankNames copy];
-            [weakSelf selectBank];
-            return;
-        }else{
-            [weakSelf showError:result.head.errMsg];
-        }
-    }];
-}
-
-- (void)selectBank {
-    weakSelf(weakSelf);
-    [BRStringPickerView showStringPickerWithTitle:_bankTF.placeholder dataSource:self.bankNames defaultSelValue:self.bankTF.text resultBlock:^(id selectValue, NSInteger index) {
-        if ([weakSelf.bankTF.text isEqualToString:selectValue]) {
-            return;
-        }
-        weakSelf.bankTF.text = selectValue;
-        self.haveBankData = YES;
-        weakSelf.chooseBank = [CNPayBankCardModel yy_modelWithJSON:weakSelf.bankList[index]];
-    }];
 }
 
 - (IBAction)submitAction:(UIButton *)sender {
@@ -253,29 +172,17 @@
         [self showError:[NSString stringWithFormat:@"存款金额必须是%ld~%.f之间，最大允许2位小数", (long)self.paymentModel.minAmount, maxAmount]];
         return;
     }
-
+    
     if (self.nameTF.text.length == 0) {
         [self showError:@"请输入存款人姓名"];
         return;
     }
-    if (!_haveBankData) {
-        [self BQGetBank];
-    }else{
-        if (self.bankTF.text.length == 0) {
-            [self showError:self.bankTF.placeholder];
-            return;
-        }else{
-            self.writeModel.depositBy = self.nameTF.text;
-            self.writeModel.amount = self.amountTF.text;
-            self.writeModel.chooseBank = self.chooseBank;
-            [self sumbitBill:sender amount:self.amountTF.text bankCode:self.chooseBank.bankCode depositor:self.nameTF.text depositorType:@"" payType:[NSString stringWithFormat:@"%ld",(long)self.paymentModel.payType]];
-        }
-    }
-    
-    
+    self.writeModel.depositBy = self.nameTF.text;
+    self.writeModel.amount = self.amountTF.text;
+    [self sumbitBill:sender amount:self.amountTF.text depositor:self.nameTF.text depositorType:@"" payType:[NSString stringWithFormat:@"%ld",(long)self.paymentModel.payType]];
 }
 
-- (void)sumbitBill:(UIButton *)sender amount:(NSString *)amount bankCode:(NSString *)bankCode depositor:(NSString *)depositor depositorType:(NSString *)depositorType payType:(NSString *)payType{
+- (void)sumbitBill:(UIButton *)sender amount:(NSString *)amount depositor:(NSString *)depositor depositorType:(NSString *)depositorType payType:(NSString *)payType{
     if (sender.selected) {
         return;
     }
@@ -285,7 +192,6 @@
     __weak typeof(sender) weakSender = sender;
     NSDictionary *params = @{
         @"amount":amount,
-        @"bankCode":bankCode,
         @"depositor":depositor,
         @"depositorType":depositorType,
         @"payType":payType,
