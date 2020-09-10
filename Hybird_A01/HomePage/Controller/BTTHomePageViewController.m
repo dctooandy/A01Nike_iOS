@@ -43,6 +43,7 @@
 #import "BTTLive800ViewController.h"
 #import "CLive800Manager.h"
 #import "DSBRedBagPopView.h"
+#import "BTTUserStatusManager.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -97,7 +98,7 @@
             }
         }
     });
-    
+    [self checkLoginVersion];
     [self setupFloatWindow];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBannerData) name:@"CHANGE_MODE" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LoginSuccessNotification object:nil];
@@ -149,6 +150,20 @@
     [super viewWillDisappear:animated];
     if (self.idDisable) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockGameBtnPress" object:nil];
+    }
+}
+
+-(void)checkLoginVersion {
+    if ([IVNetwork savedUserInfo]) {
+        NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+        NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
+        if ([appVersion compare:[IVNetwork savedUserInfo].version options:NSNumericSearch] == NSOrderedDescending) {
+            [IVNetwork cleanUserInfo];
+            [IVHttpManager shareManager].loginName = @"";
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
+            [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
+        }
     }
 }
 
