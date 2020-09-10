@@ -24,6 +24,7 @@
 #import "IVKUpdateViewController.h"
 #import "IVPushManager.h"
 #import "HAInitConfig.h"
+#import "BTTUserStatusManager.h"
 
 @interface AppDelegate ()<OpenInstallDelegate,IVPushDelegate>
 
@@ -125,6 +126,19 @@
 
 }
 
+-(void)checkLoginVersion {
+    if ([IVNetwork savedUserInfo]) {
+        NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+        NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
+        if ([appVersion compare:[IVNetwork savedUserInfo].version options:NSNumericSearch] == NSOrderedDescending) {
+            [IVNetwork cleanUserInfo];
+            [IVHttpManager shareManager].loginName = @"";
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
+            [BTTUserStatusManager logoutSuccess];
+        }
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -136,6 +150,7 @@
     [self.window makeKeyAndVisible];
     [self setDynamicQuery];
     [self initPushSDKWithApplication:application options:launchOptions];
+    [self checkLoginVersion];
     [CNPreCacheMananger prepareCacheDataNormal];
     [CNPreCacheMananger prepareCacheDataNeedLogin];
     [OpenInstallSDK initWithDelegate:self];

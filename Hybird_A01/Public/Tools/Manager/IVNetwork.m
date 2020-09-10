@@ -90,7 +90,11 @@
     if (!userInfo) {
         return;
     }
-    [IVCacheWrapper setObject:userInfo forKey:@"customer"];
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:userInfo];
+    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+    NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
+    [dict setValue:appVersion forKey:@"version"];
+    [IVCacheWrapper setObject:dict forKey:@"customer"];
 }
 
 + (void)cleanUserInfo{

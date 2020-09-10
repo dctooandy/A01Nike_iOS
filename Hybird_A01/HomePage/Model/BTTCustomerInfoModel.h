@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger newAccountFlag;
 @property (nonatomic, copy) NSString * uiMode;
 @property (nonatomic, copy) NSArray * uiModeOptions;
-
+@property (nonatomic, copy) NSString * version;
 @end
 
 NS_ASSUME_NONNULL_END
