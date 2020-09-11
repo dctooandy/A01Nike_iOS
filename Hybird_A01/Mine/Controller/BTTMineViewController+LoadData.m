@@ -525,6 +525,7 @@
     [IVNetwork requestPostWithUrl:BTTSwitchAccount paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGE_MODE" object:nil];
             [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"]];
         }else{
             [self hideLoading];
