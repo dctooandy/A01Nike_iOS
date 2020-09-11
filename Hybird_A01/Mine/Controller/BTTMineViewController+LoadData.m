@@ -559,6 +559,7 @@
                 [IVHttpManager shareManager].loginName = result.body[@"loginName"];
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body isBackHome:false];
                 self.totalAmount = @"加载中";
+                self.saveMoneyCount = 0;
                 [self loadBankList];
                 if (!self.isLoading) {
                     [self loadGamesListAndGameAmount];
