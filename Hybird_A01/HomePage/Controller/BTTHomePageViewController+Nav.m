@@ -393,10 +393,25 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
             NSArray *arr = [model.action.detail componentsSeparatedByString:@":"];
             NSString *gameid = arr[1];
             if ([gameid isEqualToString:@"A01003"]) {
-                BTTAGQJViewController *vc = [BTTAGQJViewController new];
-                vc.platformLine = [IVNetwork savedUserInfo].uiMode;
-                [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
-                [self.navigationController pushViewController:vc animated:YES];
+                if ([IVNetwork savedUserInfo]) {
+                    BTTAGQJViewController *vc = [BTTAGQJViewController new];
+                    vc.platformLine = [IVNetwork savedUserInfo].uiMode;
+                    [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else {
+                    [self showTryAlertViewWithBlock:^(UIButton * _Nonnull btn) {
+                        if (btn.tag == 1090) {
+                            BTTAGQJViewController *vc = [BTTAGQJViewController new];
+                            vc.platformLine = @"CNY";
+                            [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        } else {
+                            [MBProgressHUD showError:@"请先登录" toView:nil];
+                            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }
+                    }];
+                }
             } else if ([gameid isEqualToString:@"A01026"]) {
                 BTTAGGJViewController *vc = [BTTAGGJViewController new];
                 [self.navigationController pushViewController:vc animated:YES];

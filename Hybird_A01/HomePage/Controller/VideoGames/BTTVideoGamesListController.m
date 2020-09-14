@@ -697,7 +697,7 @@
             NSString *gameid = arr[1];
             if ([gameid isEqualToString:@"A01003"]) {
                 BTTAGQJViewController *vc = [BTTAGQJViewController new];
-                vc.platformLine = [IVNetwork savedUserInfo].uiMode;
+                vc.platformLine = [IVNetwork savedUserInfo] ? [IVNetwork savedUserInfo].uiMode:@"CNY";
                 [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
                 [self.navigationController pushViewController:vc animated:YES];
             } else if ([gameid isEqualToString:@"A01026"]) {

@@ -20,6 +20,7 @@
 #import "IVUtility.h"
 #import "BTTKSAddBfbWalletController.h"
 #import "BTTAddBitollCardController.h"
+#import "BTTActionSheet.h"
 
 @interface BTTCardInfosController ()<BTTElementsFlowLayoutDelegate>
 
@@ -129,7 +130,11 @@
     [alertControllerMessageStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"333333"] range:NSMakeRange(0, 7)];
     [alertControllerMessageStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 7)];
     [alertVC setValue:alertControllerMessageStr forKey:@"attributedMessage"];
-    
+    if (alertVC.popoverPresentationController) {
+        [alertVC.popoverPresentationController setPermittedArrowDirections:0];//去掉arrow箭头
+        alertVC.popoverPresentationController.sourceView = self.view;
+        alertVC.popoverPresentationController.sourceRect=CGRectMake(0, self.view.height, self.view.width, self.view.height);
+    }
     for (int i = 0; i<titleArray.count; i++) {
         NSString *title = titleArray[i];
         UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {

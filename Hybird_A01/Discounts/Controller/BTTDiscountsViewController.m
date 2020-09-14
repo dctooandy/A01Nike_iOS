@@ -26,6 +26,7 @@
 #import "BTTAGQJViewController.h"
 #import "BTTAGGJViewController.h"
 #import "BTTActionSheet.h"
+#import "BTTGamesTryAlertView.h"
 
 @interface BTTDiscountsViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -282,10 +283,25 @@
             NSArray *arr = [model.href componentsSeparatedByString:@":"];
             NSString *gameid = arr[1];
             if ([gameid isEqualToString:@"A01003"]) {
-                BTTAGQJViewController *vc = [BTTAGQJViewController new];
-                vc.platformLine = [IVNetwork savedUserInfo].uiMode;
-                [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
-                [self.navigationController pushViewController:vc animated:YES];
+                if ([IVNetwork savedUserInfo]) {
+                    BTTAGQJViewController *vc = [BTTAGQJViewController new];
+                    vc.platformLine = [IVNetwork savedUserInfo].uiMode;
+                    [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else {
+                    [self showTryAlertViewWithBlock:^(UIButton * _Nonnull btn) {
+                        if (btn.tag == 1090) {
+                            BTTAGQJViewController *vc = [BTTAGQJViewController new];
+                            vc.platformLine = @"CNY";
+                            [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        } else {
+                            [MBProgressHUD showError:@"请先登录" toView:nil];
+                            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }
+                    }];
+                }
             } else if ([gameid isEqualToString:@"A01026"]) {
                 BTTAGGJViewController *vc = [BTTAGGJViewController new];
                 [self.navigationController pushViewController:vc animated:YES];
@@ -403,5 +419,23 @@
     });
 }
 
+- (void)showTryAlertViewWithBlock:(BTTBtnBlock)btnClickBlock {
+    BTTGamesTryAlertView *customView = [BTTGamesTryAlertView viewFromXib];
+    if (SCREEN_WIDTH == 414) {
+        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 120, 132);
+    } else {
+        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 60, 132);
+    }
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    customView.btnBlock = ^(UIButton *btn) {
+        [popView dismiss];
+        btnClickBlock(btn);
+    };
+}
 
 @end

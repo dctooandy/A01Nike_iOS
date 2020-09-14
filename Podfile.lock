@@ -51,9 +51,9 @@ PODS:
     - IVCheckNetworkLibrary/Classes/Http
     - IVCheckNetworkLibrary/Classes/SDK/Ping
     - IVNetworkLibrary2.0
-  - IVGameLibrary (2.0.1):
-    - IVGameLibrary/GameController (= 2.0.1)
-  - IVGameLibrary/GameController (2.0.1)
+  - IVGameLibrary (2.0.2):
+    - IVGameLibrary/GameController (= 2.0.2)
+  - IVGameLibrary/GameController (2.0.2)
   - IVHeartPacketLibrary (0.0.4):
     - CocoaAsyncSocket (~> 7.6.2)
   - IVLoganAnalysis (0.1.6):
@@ -255,7 +255,7 @@ CHECKOUT OPTIONS:
     :commit: ab745c42a4740edf7fcc6418b628f1a96b778594
     :git: http://10.66.72.115/mobile-iOS-Library/IVCheckNetworkLibrary.git
   IVGameLibrary:
-    :commit: 6dcc9101900a2c40ef2ec5179ba6cd65668ad623
+    :commit: 8912c4a962fde87efa9e0c0d0b078e2e6e5ec2de
     :git: http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git
   IVHeartPacketLibrary:
     :commit: cb81f459cb55163fd8493d0a62ea5339089703fc
@@ -291,7 +291,7 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 266cb7b1d11f94a3e71229d77f960f9a1b538e5b
   IVCacheLibrary: df3d2654c929743d92df5fa77d22894fb36b3d29
   IVCheckNetworkLibrary: fd77a42b32be9f870dec6b83ec2166680a2189cd
-  IVGameLibrary: ef81429c546f09ed6a18f0a2a7121ec3dd15ed04
+  IVGameLibrary: 2e16dfd5d88b16e8c92d1269931337771c1418ee
   IVHeartPacketLibrary: 2a122b1d8cedf8346b4898ace4736147cf9a0405
   IVLoganAnalysis: fb72168edcc1f9baa833d5ab83141ea423b1c22a
   IVNetworkLibrary2.0: 417f65074ac3d051ac6650d378eeba210bbc112c
