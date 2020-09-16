@@ -264,7 +264,7 @@
         BOOL enable = amount >= 1 && amount <= 1430000;
         [self getSubmitBtn].enabled = enable;
     }else{
-        BOOL enable = amount >= 10 && amount <= 10000000;
+        BOOL enable = amount >= 100 && amount <= 10000000;
         [self getSubmitBtn].enabled = enable;
     }
     
@@ -408,8 +408,8 @@
         return;
     }
     
-    if (self.amount.floatValue < 10 && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-        [MBProgressHUD showError:@"最少10元" toView:nil];
+    if (self.amount.floatValue < 100 && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+        [MBProgressHUD showError:@"最少100元" toView:nil];
         return;
     }
     if (self.amount.floatValue < 1 && [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
