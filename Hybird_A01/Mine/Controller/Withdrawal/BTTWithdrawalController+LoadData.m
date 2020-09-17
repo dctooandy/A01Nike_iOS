@@ -114,6 +114,7 @@
     
     [self requestCustomerInfoEx];
     [self.sheetDatas removeAllObjects];
+    BOOL isUsdt = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
     NSMutableArray *sheetDatas = [NSMutableArray array];
     NSString *btcrate = isNull(self.btcRate) ? @"0" : self.btcRate;
     NSString *rateStr = [NSString stringWithFormat:@"¥%.2lf=1BTC(实时汇率)",[btcrate doubleValue]];
@@ -122,7 +123,10 @@
     NSArray *names3 = @[@"金额",@"比特币",@"取款至",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
     NSArray *names4 = @[@"金额",@"预估到账",@"取款至",@"",@"",@""];
     
-    NSString *pString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"最少1USDT" : @"最少100元";
+    NSString *pString = isUsdt ? @"最少1USDT" : @"最少10元";
+    if (!isUsdt && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
+        pString = @"最少100元";
+    }
     
     NSArray *placeholders1 = @[@"",@""];
     NSArray *placeholders3 = @[pString,rateStr,@"***银行-尾号*****",@""];
@@ -175,7 +179,8 @@
         [heights removeObjectAtIndex:btcRateIndex];
         [canEdits removeObjectAtIndex:btcRateIndex];
         [values removeObjectAtIndex:btcRateIndex];
-    }else{
+    }
+    if (isUsdt) {
         [heights replaceObjectAtIndex:3 withObject:@0];
     }
     if ([self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]) {

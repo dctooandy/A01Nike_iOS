@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BTTWithdrawalHeaderCell : BTTBaseCollectionViewCell
 
 @property (nonatomic, copy) NSString *totalAvailable;
-
+@property (weak, nonatomic) IBOutlet UILabel *limitLabel;
 @end
 
 NS_ASSUME_NONNULL_END

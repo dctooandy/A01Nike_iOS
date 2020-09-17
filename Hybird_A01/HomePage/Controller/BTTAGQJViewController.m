@@ -7,10 +7,10 @@
 //
 
 #import "BTTAGQJViewController.h"
-#import "BTTBJLPopView.h"
+//#import "BTTBJLPopView.h"
 
 @interface BTTAGQJViewController ()
-@property (nonatomic, strong) BTTBJLPopView *customView;
+//@property (nonatomic, strong) BTTBJLPopView *customView;
 @end
 
 @implementation BTTAGQJViewController
@@ -41,15 +41,15 @@
     
     [self addGameViewToSelf];
     [self registerNotifiction];
-    [[IVGameManager sharedManager].agqjVC addObserver:self forKeyPath:@"loadStatus" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+//    [[IVGameManager sharedManager].agqjVC addObserver:self forKeyPath:@"loadStatus" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
 }
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if([keyPath isEqualToString:@"loadStatus"]) {
-        if ([IVGameManager sharedManager].agqjVC.loadStatus == IVGameLoadStatusSuccess) {
-            [self showBjlPopView];
-        }
-    }
-}
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+//    if([keyPath isEqualToString:@"loadStatus"]) {
+//        if ([IVGameManager sharedManager].agqjVC.loadStatus == IVGameLoadStatusSuccess) {
+//            [self showBjlPopView];
+//        }
+//    }
+//}
 - (void)registerNotifiction {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishLoginGame) name:@"FinishLoginGame" object:nil];
 }
@@ -57,9 +57,9 @@
 - (void)finishLoginGame {
     if ([IVGameManager sharedManager].agqjVC.loadStatus == IVGameLoadStatusSuccess) {
         [[CNTimeLog shareInstance] endRecordTime:CNEventAGQJLaunch];
-        if (self.customView == nil) {
-            [self showBjlPopView];
-        }
+//        if (self.customView == nil) {
+//            [self showBjlPopView];
+//        }
     }
 }
 - (void)viewDidAppear:(BOOL)animated
@@ -72,6 +72,9 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+//    if ([[IVGameManager sharedManager].agqjVC observationInfo]) {
+//        [[IVGameManager sharedManager].agqjVC removeObserver:self forKeyPath:@"loadStatus" context:nil];
+//    }
 //    [BTTAGQJViewController addGameViewToWindow];
 }
 - (void)didReceiveMemoryWarning {
@@ -98,18 +101,18 @@
     [IVGameManager sharedManager].agqjVC.view.frame = keyWin.frame;
 }
 
--(void)showBjlPopView {
-    self.customView = [BTTBJLPopView viewFromXib];
-    self.customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:self.customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
-    [popView pop];
-    weakSelf(weakSelf);
-    self.customView.dismissBlock = ^{
-        strongSelf(strongSelf);
-        [popView dismiss];
-        if ([[IVGameManager sharedManager].agqjVC observationInfo]) {
-            [[IVGameManager sharedManager].agqjVC removeObserver:strongSelf forKeyPath:@"loadStatus" context:nil];
-        }
-    };
-}
+//-(void)showBjlPopView {
+//    self.customView = [BTTBJLPopView viewFromXib];
+//    self.customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+//    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:self.customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
+//    [popView pop];
+//    weakSelf(weakSelf);
+//    self.customView.dismissBlock = ^{
+//        strongSelf(strongSelf);
+//        [popView dismiss];
+//        if ([[IVGameManager sharedManager].agqjVC observationInfo]) {
+//            [[IVGameManager sharedManager].agqjVC removeObserver:strongSelf forKeyPath:@"loadStatus" context:nil];
+//        }
+//    };
+//}
 @end

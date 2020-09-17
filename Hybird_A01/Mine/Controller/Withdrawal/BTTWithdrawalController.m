@@ -82,6 +82,15 @@
     if (indexPath.row == 0) {
         BTTWithdrawalHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalHeaderCell" forIndexPath:indexPath];
         cell.totalAvailable = self.totalAvailable;
+        if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+            cell.limitLabel.text = @"取款限额:1USDT-143万USDT,未享受优惠全额投注即可取款";
+        } else {
+            if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]) {
+                cell.limitLabel.text = @"取款限额:100-1000万RMB,未享受优惠全额投注即可取款";
+            } else {
+                cell.limitLabel.text = @"取款限额:10-1000万RMB,未享受优惠全额投注即可取款";
+            }
+        }
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
             BTTAccountBalanceController *accountBalance = [[BTTAccountBalanceController alloc] init];
@@ -118,7 +127,7 @@
         [cell setImageViewHidden:imgHidden onekeyHidden:!imgHidden sellHidden:isSellUSDT];
         cell.confirmTap = ^{
             if (self.bankList[self.selectIndex].accountId==nil) {
-                            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCard"];
+                [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCard"];
                 BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
                 return;
@@ -146,7 +155,7 @@
     if ([cellName isEqualToString:@"取款至"]) {
         BTTWithdrawalCardSelectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalCardSelectCell" forIndexPath:indexPath];
         cell.model = self.bankList[self.selectIndex];
-
+        
         return cell;
     }
     
@@ -254,17 +263,25 @@
     } else if (textField.tag == 8002) {
         self.amount = textField.text;
         if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]) {
-            NSString *fUsdtAmount = [NSString stringWithFormat:@"%.5f",([self.amount doubleValue] * self.usdtRate)];
-            self.usdtAmount = [NSString stringWithFormat:@"%@ USDT",[fUsdtAmount substringWithRange:NSMakeRange(0, fUsdtAmount.length-1)]];
+            if (self.amount.length != 0) {
+                NSString *fUsdtAmount = [NSString stringWithFormat:@"%.5f",([self.amount doubleValue] * self.usdtRate)];
+                self.usdtAmount = [NSString stringWithFormat:@"%@ USDT",[fUsdtAmount substringWithRange:NSMakeRange(0, fUsdtAmount.length-1)]];
+            } else {
+                self.usdtAmount = @"";
+            }
             _usdtField.text = self.usdtAmount;
         }
+    }
+    NSInteger limitNum = 10;
+    if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
+        limitNum = 100;
     }
     CGFloat amount = [self.amount doubleValue];
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         BOOL enable = amount >= 1 && amount <= 1430000;
         [self getSubmitBtn].enabled = enable;
     }else{
-        BOOL enable = amount >= 100 && amount <= 10000000;
+        BOOL enable = amount >= limitNum && amount <= 10000000;
         [self getSubmitBtn].enabled = enable;
     }
     
@@ -348,6 +365,9 @@
             }
         }
         [self.view endEditing:YES];
+        self.usdtAmount = @"";
+        self.usdtField.text = self.usdtAmount;
+        [self getSubmitBtn].enabled = false;
         [self loadMainData];
     }];
 }
@@ -408,8 +428,12 @@
         return;
     }
     
-    if (self.amount.floatValue < 100 && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-        [MBProgressHUD showError:@"最少100元" toView:nil];
+    NSInteger limitNum = 10;
+    if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
+        limitNum = 100;
+    }
+    if (self.amount.floatValue < limitNum && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+        [MBProgressHUD showError:[NSString stringWithFormat:@"最少%ld元", limitNum] toView:nil];
         return;
     }
     if (self.amount.floatValue < 1 && [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
@@ -450,7 +474,6 @@
         params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
         [self showLoading];
         [IVNetwork requestPostWithUrl:BTTCurrencyExchanged paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            [self hideLoading];
             IVJResponseObject *result = response;
             if ([result.head.errCode isEqualToString:@"0000"]) {
                 CNPayUSDTRateModel *rateModel = [CNPayUSDTRateModel yy_modelWithJSON:result.body];
