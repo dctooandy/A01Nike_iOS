@@ -31,7 +31,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy)  NSString *provider;  ///< 平台
 
-@property (nonatomic, copy)  NSString *typeStr;  ///< 類別
 @end
 
 NS_ASSUME_NONNULL_END
