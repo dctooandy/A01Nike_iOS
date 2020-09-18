@@ -70,5 +70,11 @@
     }
 }
 
+-(void)setTypeStr:(NSString *)typeStr {
+    _typeStr = typeStr;
+    if (_typeStr.length) {
+        [self.btn1 setTitle:_typeStr forState:UIControlStateNormal];
+    }
+}
 
 @end

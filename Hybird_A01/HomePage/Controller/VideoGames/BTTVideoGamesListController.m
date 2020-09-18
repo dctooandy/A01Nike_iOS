@@ -86,7 +86,8 @@
 }
 
 - (void)resetRequestModel {
-    _type = @"";
+    _typeStr = @"热门游戏";
+    _type = @"hot";
     _line = @"";
     _platform = self.provider;
     _keyword = @"";
@@ -209,6 +210,7 @@
         } else if (indexPath.row == 1) {
             __weak BTTVideoGamesFilterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesFilterCell" forIndexPath:indexPath];
             cell.provider = self.provider;
+            cell.typeStr = self.typeStr;
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
@@ -322,6 +324,7 @@
             } else if (indexPath.row == 2) {
                 __weak BTTVideoGamesFilterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesFilterCell" forIndexPath:indexPath];
                 cell.provider = self.provider;
+                cell.typeStr = self.typeStr;
                 weakSelf(weakSelf);
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                     strongSelf(strongSelf);
@@ -457,6 +460,7 @@
             } else if (indexPath.row == 1) {
                 __weak BTTVideoGamesFilterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesFilterCell" forIndexPath:indexPath];
                 cell.provider = self.provider;
+                cell.typeStr = self.typeStr;
                 weakSelf(weakSelf);
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                     strongSelf(strongSelf);
@@ -601,12 +605,16 @@
         self.page = 1;
         if ([selectValue isEqualToString:@"所有类别"]) {
             self.type = @"";
+            self.typeStr = selectValue;
         } else if ([selectValue isEqualToString:@"热门游戏"]) {
             self.type = @"hot";
+            self.typeStr = selectValue;
         } else if ([selectValue isEqualToString:@"彩金池游戏"]) {
             self.type = @"moneypool";
+            self.typeStr = selectValue;
         } else if ([selectValue isEqualToString:@"最新游戏"]) {
             self.type = @"new";
+            self.typeStr = selectValue;
         } else if ([selectValue isEqualToString:@"全平台"]) {
             self.platform = @"";
             self.provider = selectValue;

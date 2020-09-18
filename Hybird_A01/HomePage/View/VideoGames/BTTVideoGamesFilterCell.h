@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BTTVideoGamesFilterCell : BTTBaseCollectionViewCell
 
 @property (nonatomic, copy) NSString *provider;
+@property (nonatomic, copy) NSString *typeStr;
 
 @end
 
