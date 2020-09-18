@@ -49,7 +49,6 @@
 
 @property (nonatomic, assign) BOOL adCellShow;
 @property (nonatomic, assign) BOOL   isloaded;
-@property (nonatomic, assign) BOOL idDisable;
 
 @end
 
@@ -903,7 +902,7 @@
             videoGamesVC.banners = self.banners;
             videoGamesVC.imageUrls = self.imageUrls;
             videoGamesVC.poster = model;
-            videoGamesVC.provider = @"MG";
+            videoGamesVC.provider = @"PP";
         }
             break;
         case 1005:

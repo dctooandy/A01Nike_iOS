@@ -255,6 +255,12 @@ static const char *BTTNextGroupKey = "nextGroup";
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
     popView.isClickBGDismiss = YES;
     [popView pop];
+    popView.dismissComplete = ^{
+        if (self.idDisable) {
+            self.idDisable = false;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockGameBtnPress" object:nil];
+        }
+    };
     customView.dismissBlock = ^{
         [popView dismiss];
     };

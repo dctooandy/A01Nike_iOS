@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isVIP;
 
+@property (nonatomic, assign) BOOL idDisable;
+
 - (void)setupElements;
 
 @end

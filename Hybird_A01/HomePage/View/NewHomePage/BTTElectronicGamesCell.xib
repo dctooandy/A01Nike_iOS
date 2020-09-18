@@ -47,7 +47,7 @@
                     </button>
                     <button opaque="NO" tag="1004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9UA-IZ-Nq7">
                         <rect key="frame" x="207" y="119.5" width="153" height="69"/>
-                        <state key="normal" backgroundImage="MG"/>
+                        <state key="normal" backgroundImage="PP"/>
                         <connections>
                             <action selector="mgBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="nNQ-Dd-S1V"/>
                         </connections>
@@ -85,8 +85,8 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MG" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHt-wG-Gv9">
-                        <rect key="frame" x="215" y="163.5" width="22.5" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QHt-wG-Gv9">
+                        <rect key="frame" x="215" y="163.5" width="17.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -148,7 +148,7 @@
     </objects>
     <resources>
         <image name="Fishing_king" width="152.5" height="69"/>
-        <image name="MG" width="152.5" height="69"/>
+        <image name="PP" width="152.5" height="71"/>
         <image name="TTG" width="182.5" height="143.5"/>
         <image name="tryPlay" width="25" height="17.5"/>
     </resources>

@@ -589,7 +589,7 @@
         contents = @[@"所有类别",@"热门游戏",@"彩金池游戏",@"最新游戏"];
         title = @"请选择游戏类别";
     } else if (button.tag == 1071) {
-        contents = @[@"全平台",@"MG",@"AG",@"PT",@"TTG",@"PP",@"PS"];
+        contents = @[@"全平台",@"MG",@"PP",@"AG",@"PT",@"TTG",@"PS"];
         title = @"请选择游戏平台";
         
     } else if (button.tag == 1072) {
@@ -609,6 +609,7 @@
             self.type = @"new";
         } else if ([selectValue isEqualToString:@"全平台"]) {
             self.platform = @"";
+            self.provider = selectValue;
         } else if ([selectValue isEqualToString:@"MG"] ||
                    [selectValue isEqualToString:@"AG"] ||
                    [selectValue isEqualToString:@"PT"] ||
@@ -616,6 +617,7 @@
                    [selectValue isEqualToString:@"PP"] ||
                    [selectValue isEqualToString:@"PS"]) {
             self.platform = selectValue;
+            self.provider = selectValue;
         } else if ([selectValue isEqualToString:@"全赔付"]) {
             self.line = @"";
         } else if ([selectValue isEqualToString:@"1-4线"]) {
