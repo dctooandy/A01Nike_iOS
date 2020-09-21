@@ -31,7 +31,7 @@
             return @"http://m.a01f.com/";
             break;
         case 1:
-            return @"https://fm.918rr.com/";
+            return @"http://fm.918rr.com/";
             break;
         case 2:
             return @"https://m.918nee.com/";
@@ -47,7 +47,7 @@
             return @"http://m.a01f.com/";
             break;
         case 1:
-            return @"https://fm.918rr.com/";
+            return @"http://fm.918rr.com/";
             break;
         case 2:
             return @"https://m.918nee.com/";
