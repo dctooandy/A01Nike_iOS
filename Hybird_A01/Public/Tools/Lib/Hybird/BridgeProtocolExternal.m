@@ -26,6 +26,7 @@
 #import "BTTSaveMoneyModifyViewController.h"
 #import "NSString+MD5.h"
 #import "BTTXimaController.h"
+#import "BTTGamesTryAlertView.h"
 
 @interface BridgeProtocolExternal ()<JXRegisterManagerDelegate>
 
@@ -205,14 +206,96 @@
     }
     else if ([url containsString:@"customer/withdrawl.htm"]){//提现
         [self.controller.navigationController pushViewController:[BTTWithdrawalController new] animated:YES];
-    } else if([url containsString:@"common/ximaOther.htm"]) {
+    }
+    else if([url containsString:@"common/ximaOther.htm"]) {
         BTTXimaController *xima = [BTTXimaController new];
         [self.controller.navigationController pushViewController:xima animated:YES];
+    }
+    else if ([url containsString:@"common/agqj.htm"]) {
+        if ([IVNetwork savedUserInfo]) {
+            NSDictionary *params = @{@"currency": [IVNetwork savedUserInfo] ? [IVNetwork savedUserInfo].uiMode:@"CNY"};
+            [self checkAccount:params];
+        } else {
+            [self showTryAlertViewWithBlock:^(UIButton * _Nonnull btn) {
+                if (btn.tag == 1090) {
+                    BTTAGQJViewController *vc = [BTTAGQJViewController new];
+                    vc.platformLine = @"CNY";
+                    [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+                    [self.controller.navigationController pushViewController:vc animated:YES];
+                } else {
+                    [MBProgressHUD showError:@"请先登录" toView:nil];
+                    BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+                    [self.controller.navigationController pushViewController:vc animated:YES];
+                }
+            }];
+        }
     }
     else {
         should = NO;
     }
     return should;
+}
+
+-(void)checkAccount:(NSDictionary *)params {
+    [IVNetwork requestPostWithUrl:QUERYGames paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        NSArray *lineArray = result.body[@"A01003"];
+        if (nil != lineArray && lineArray.count >= 2) {
+            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择游戏币种" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+            for (int i=0; i<lineArray.count; i++) {
+                NSDictionary *json = lineArray[i];
+                NSString *name = json[@"platformCurrency"];
+                NSString *title = [name isEqualToString:@"USD"]||[name isEqualToString:@"USDT"] ? @"数字币USDT" : @"人民币CNY";
+                UIAlertAction *unlock = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    [self gotoGame:name];
+                }];
+                [alertVC addAction:unlock];
+                if (i == lineArray.count-1) {
+                    UIAlertAction *closelock = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        
+                        [self gotoGame:@"USDT"];
+                    }];
+                    [alertVC addAction:closelock];
+                    [self.controller presentViewController:alertVC animated:YES completion:nil];
+                }
+            }
+        }else{
+            if (nil == lineArray) {
+                [self gotoGame:@"CNY"];
+            }else{
+                NSDictionary *json = lineArray[0];
+                NSString *name = json[@"platformCurrency"];
+                [self gotoGame:name];
+            }
+        }
+    }];
+}
+
+- (void)gotoGame:(NSString *)currency {
+    BTTAGQJViewController *vc = [BTTAGQJViewController new];
+    [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+    vc.platformLine = currency;
+    [self.controller.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)showTryAlertViewWithBlock:(BTTBtnBlock)btnClickBlock {
+    BTTGamesTryAlertView *customView = [BTTGamesTryAlertView viewFromXib];
+    if (SCREEN_WIDTH == 414) {
+        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 120, 132);
+    } else {
+        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH - 60, 132);
+    }
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    customView.btnBlock = ^(UIButton *btn) {
+        [popView dismiss];
+        btnClickBlock(btn);
+    };
 }
 
 - (id)forward_outside:(BridgeModel *)bridgeModel { // custom/VOIP
