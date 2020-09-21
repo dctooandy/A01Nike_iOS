@@ -201,6 +201,7 @@
     }
     else if ([url containsString:@"common/login.htm"] && ![IVNetwork savedUserInfo]){//登录
         BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
+        loginAndRegister.isWebIn = true;
         loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
         [self.controller.navigationController pushViewController:loginAndRegister animated:YES];
     }

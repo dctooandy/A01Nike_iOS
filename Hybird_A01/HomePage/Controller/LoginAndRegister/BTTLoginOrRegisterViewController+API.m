@@ -637,7 +637,10 @@
                 [IVHttpManager shareManager].loginName = result.body[@"loginName"];
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body isBackHome:true];
                 
-                if (isBack) {
+                if (self.isWebIn) {
+                    [MBProgressHUD showSuccess:@"登录成功" toView:nil];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                } else if (isBack) {
                     [MBProgressHUD showSuccess:@"登录成功" toView:nil];
                     [self.navigationController popViewControllerAnimated:YES];
                 }

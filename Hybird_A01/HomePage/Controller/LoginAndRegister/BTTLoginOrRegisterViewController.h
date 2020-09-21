@@ -43,6 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) BTTLoginInfoView *loginView;
 
+@property (nonatomic, assign) BOOL isWebIn;
 @end
 
 NS_ASSUME_NONNULL_END
