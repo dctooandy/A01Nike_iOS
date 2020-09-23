@@ -30,7 +30,6 @@
 #import "BTTWithdrawalController.h"
 #import "BTTPTTransferController.h"
 #import "BTTAccountSafeController.h"
-#import "BTTSheetsViewController.h"
 #import "WebViewUserAgaent.h"
 #import "BTTBaseWebViewController.h"
 #import "BTTSettingsController.h"
@@ -58,6 +57,7 @@
 #import "OTCInsideController.h"
 #import "USDTRechargeController.h"
 #import "USDTBuyController.h"
+#import "BTTCustomerReportController.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -600,10 +600,7 @@
         vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/gift/lucky_pot"];
         [self.navigationController pushViewController:vc animated:YES];
     } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 4 && isUSDTAcc)) {
-        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-        vc.webConfigModel.newView = YES;
-        vc.webConfigModel.url = @"customer/log.htm";
-        vc.webConfigModel.theme = @"inside";
+        BTTCustomerReportController * vc = [[BTTCustomerReportController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 7 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 5 && isUSDTAcc)) {
         BTTAccountSafeController *vc = [[BTTAccountSafeController alloc] init];

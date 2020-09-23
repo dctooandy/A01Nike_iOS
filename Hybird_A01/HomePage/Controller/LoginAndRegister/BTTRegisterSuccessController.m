@@ -355,6 +355,7 @@ typedef enum {
     params[@"inclXmFlag"] = @1;
     params[@"verifyCode"] = @1;
     params[@"inclNickNameFlag"] = @1;
+    params[@"inclXmTransferState"] = @1;
     [IVNetwork requestPostWithUrl:BTTGetLoginInfoByName paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         [self hideLoading];

@@ -53,6 +53,11 @@
     self.agqjBtn.userInteractionEnabled = true;
 }
 
+-(void)lockGameBtnPress {
+    self.aginBtn.userInteractionEnabled = false;
+    self.agqjBtn.userInteractionEnabled = false;
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self setupUI];
@@ -72,14 +77,14 @@
 
 - (IBAction)agqjBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
-        sender.userInteractionEnabled = false;
+        [self lockGameBtnPress];
         self.buttonClickBlock(sender);
     }
 }
 
 - (IBAction)aginBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
-        sender.userInteractionEnabled = false;
+        [self lockGameBtnPress];
         self.buttonClickBlock(sender);
     }
 }

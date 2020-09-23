@@ -82,6 +82,13 @@
     self.cpBtn.userInteractionEnabled = true;
 }
 
+-(void)lockGameBtnPress {
+    self.shabaBtn.userInteractionEnabled = false;
+    self.btiBtn.userInteractionEnabled = false;
+    self.jingcaiBtn.userInteractionEnabled = false;
+    self.asBtn.userInteractionEnabled = false;
+    self.cpBtn.userInteractionEnabled = false;
+}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -114,21 +121,21 @@
 
 - (IBAction)shabaBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
-        sender.userInteractionEnabled = false;
+        [self lockGameBtnPress];
         self.buttonClickBlock(sender);
     }
 }
 
 - (IBAction)btiBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
-        sender.userInteractionEnabled = false;
+        [self lockGameBtnPress];
         self.buttonClickBlock(sender);
     }
 }
 
 - (IBAction)jingcaiBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
-        sender.userInteractionEnabled = false;
+        [self lockGameBtnPress];
         self.buttonClickBlock(sender);
     }
 }
@@ -136,14 +143,14 @@
 
 - (IBAction)asBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
-        sender.userInteractionEnabled = false;
+        [self lockGameBtnPress];
         self.buttonClickBlock(sender);
     }
 }
 
 - (IBAction)agBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
-        sender.userInteractionEnabled = false;
+        [self lockGameBtnPress];
         self.buttonClickBlock(sender);
     }
 }

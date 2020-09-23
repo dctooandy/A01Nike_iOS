@@ -439,6 +439,29 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 #define BTTDynamicQuery                         @"dynamic/query"
 
+//客户报表 - 存款
+#define BTTCustomerReportDeposit                   @"deposit/queryTrans"
+//客户报表 - 存款 - 删除纪录
+#define BTTDeleteDepositRecord                     @"deposit/deleteTrans"
+//客户报表 - 取款
+#define BTTCustomerReportWithdraw                  @"withdraw/queryRequest"
+//客户报表 - 取款 - 删除纪录
+#define BTTDeleteWithdrawRecord                    @"withdraw/deleteRequest"
+//客户报表 - 优惠
+#define BTTCustomerReportPromo                     @"promo/queryRequest"
+//客户报表 - 优惠 - 删除纪录
+#define BTTDeletePromoRecord                       @"promo/deleteRequest"
+//客户报表 - 转账
+#define BTTCustomerReportCredit                    @"credit/queryCreditLogs"
+//客户报表 - 转账 - 删除纪录
+#define BTTDeleteCreditRecord                      @"credit/deleteCreditLog"
+//客户报表 - 洗码
+#define BTTCustomerReportXm                        @"xm/queryRequest"
+//客户报表 - 洗码 - 删除纪录
+#define BTTDeleteXmRecord                          @"xm/deleteRequest"
+//客户报表 - 銀行卡更改
+#define BTTCustomerReportBank                      @"account/queryModifyBankRequests"
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)      ([UIFont systemFontOfSize:X])

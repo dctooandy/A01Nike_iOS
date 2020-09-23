@@ -66,6 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * uiMode;
 @property (nonatomic, copy) NSArray * uiModeOptions;
 @property (nonatomic, copy) NSString * version;
+@property (nonatomic, copy) NSString *xmTransferCurrency;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -769,7 +769,9 @@
         default:
             break;
     }
+    [self showLoading];
     [IVNetwork requestPostWithUrl:QUERYGames paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
         IVJResponseObject *result = response;
         NSLog(@"%@",result.body);
         NSArray *lineArray = result.body[jsonKey];

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTPromoRecordHeaderCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xzT-0j-b9r">
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="29"/>
+                        <color key="backgroundColor" red="0.13357511162757874" green="0.13267907500267029" blue="0.16078805923461914" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="Io7-Th-h6o"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.45534062385559082" green="0.46977657079696655" blue="0.50588804483413696" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="优惠类型" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fe6-xk-aA7">
+                        <rect key="frame" x="81" y="0.0" width="100" height="29"/>
+                        <color key="backgroundColor" red="0.13357511162757874" green="0.13267907500267029" blue="0.16078805923461914" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="QXQ-h5-guf"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.45534062390000002" green="0.46977657080000002" blue="0.50588804480000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="金额" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOp-IR-oWX">
+                        <rect key="frame" x="182" y="0.0" width="152" height="29"/>
+                        <color key="backgroundColor" red="0.12965399026870728" green="0.12875625491142273" blue="0.15686646103858948" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.45534062390000002" green="0.46977657080000002" blue="0.50588804480000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="状态" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bge-Vd-4US">
+                        <rect key="frame" x="335" y="0.0" width="40" height="29"/>
+                        <color key="backgroundColor" red="0.12965399029999999" green="0.12875625490000001" blue="0.15686646100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="bNk-hx-ffN"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.45534062390000002" green="0.46977657080000002" blue="0.50588804480000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="xzT-0j-b9r" secondAttribute="bottom" constant="1" id="0Mq-oD-J1k"/>
+                <constraint firstItem="fe6-xk-aA7" firstAttribute="leading" secondItem="xzT-0j-b9r" secondAttribute="trailing" constant="1" id="3dx-8d-cwT"/>
+                <constraint firstItem="Bge-Vd-4US" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="KpG-t2-NVH"/>
+                <constraint firstItem="wOp-IR-oWX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="LhX-Rn-MW8"/>
+                <constraint firstAttribute="trailing" secondItem="Bge-Vd-4US" secondAttribute="trailing" id="M53-Eg-MIY"/>
+                <constraint firstItem="Bge-Vd-4US" firstAttribute="leading" secondItem="wOp-IR-oWX" secondAttribute="trailing" constant="1" id="Rec-fF-Bko"/>
+                <constraint firstItem="xzT-0j-b9r" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="S1A-eI-X8R"/>
+                <constraint firstItem="xzT-0j-b9r" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Tuf-3b-2TK"/>
+                <constraint firstItem="wOp-IR-oWX" firstAttribute="leading" secondItem="fe6-xk-aA7" secondAttribute="trailing" constant="1" id="ZQr-x9-zGV"/>
+                <constraint firstAttribute="bottom" secondItem="wOp-IR-oWX" secondAttribute="bottom" constant="1" id="frj-15-gS2"/>
+                <constraint firstItem="fe6-xk-aA7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="iJU-nP-5zV"/>
+                <constraint firstAttribute="bottom" secondItem="Bge-Vd-4US" secondAttribute="bottom" constant="1" id="qKg-ha-bAF"/>
+                <constraint firstAttribute="bottom" secondItem="fe6-xk-aA7" secondAttribute="bottom" constant="1" id="vzY-6S-wNg"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <point key="canvasLocation" x="136.95652173913044" y="152.67857142857142"/>
+        </collectionViewCell>
+    </objects>
+</document>

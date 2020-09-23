@@ -66,6 +66,13 @@
     self.allBtn.userInteractionEnabled = true;
 }
 
+-(void)lockGameBtnPress {
+    self.ttgBtn.userInteractionEnabled = false;
+    self.fishBtn.userInteractionEnabled = false;
+    self.mgBtn.userInteractionEnabled = false;
+    self.allBtn.userInteractionEnabled = false;
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self setupUI];
@@ -91,28 +98,28 @@
 
 - (IBAction)ttgBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
-        sender.userInteractionEnabled = false;
+        [self lockGameBtnPress];
         self.buttonClickBlock(sender);
     }
 }
 
 - (IBAction)fishBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
-        sender.userInteractionEnabled = false;
+        [self lockGameBtnPress];
         self.buttonClickBlock(sender);
     }
 }
 
 - (IBAction)mgBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
-        sender.userInteractionEnabled = false;
+        [self lockGameBtnPress];
         self.buttonClickBlock(sender);
     }
 }
 
 - (IBAction)allBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
-        sender.userInteractionEnabled = false;
+        [self lockGameBtnPress];
         self.buttonClickBlock(sender);
     }
 }
