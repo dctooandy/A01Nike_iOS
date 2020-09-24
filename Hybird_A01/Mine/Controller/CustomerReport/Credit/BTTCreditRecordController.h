@@ -8,9 +8,13 @@
 
 #import "BTTCollectionViewController.h"
 #import "BTTCreditRecordModel.h"
+#import "BTTCreditXmRecordModel.h"
 
 @class BTTCreditRecordModel;
 @class BTTCreditRecordItemModel;
+@class BTTCreditXmRecordModel;
+@class BTTCreditXmRecordItemModel;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTCreditRecordController : BTTCollectionViewController
@@ -19,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong)NSMutableArray * referenceIdsArr;
 @property (nonatomic, strong)NSMutableArray * modelArr;
 @property (nonatomic, strong)BTTCreditRecordModel * model;
+
+@property (nonatomic, strong)NSMutableArray * xmModelArr;
+@property (nonatomic, strong)BTTCreditXmRecordModel * xmModel;
 @property (nonatomic, assign)NSInteger pageNo;
 @end
 

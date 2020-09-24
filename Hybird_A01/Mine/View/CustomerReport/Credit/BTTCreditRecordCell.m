@@ -38,9 +38,41 @@
 }
 
 -(void)setData:(BTTCreditRecordItemModel *)model {
+    [self transDateStringToLabeText:model.beginDate];
+    self.sourceLab.text = model.title;
+    
+    self.cashLabel.text = [NSString stringWithFormat:@"现金：支出%@，余额%@", [PublicMethod transferNumToThousandFormat:[model.amount floatValue]], [PublicMethod transferNumToThousandFormat:[model.destAmount floatValue]]];
+    self.gameLab.text = [NSString stringWithFormat:@"游戏：支出%@，余额%@", [PublicMethod transferNumToThousandFormat:[model.gameAmount floatValue]], [PublicMethod transferNumToThousandFormat:[model.gameDestAmount floatValue]]];
+    
+    self.referenceIdStr = model.referenceId;
+    self.referenceIdLab.text = [NSString stringWithFormat:@"订单：%@", model.referenceId];
+}
+
+-(void)setXmData:(BTTCreditXmRecordItemModel *)model {
+    [self.checkBtn setImage:[UIImage imageNamed:@"ic_all_check_default"] forState:UIControlStateNormal];
+    self.checkBtn.enabled = false;
+    [self transDateStringToLabeText:model.createdDate];
+    NSString * cashStr = @"";
+    NSString * gameStr = @"";
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+        self.sourceLab.text = @"CNY洗码转入";
+        cashStr = [NSString stringWithFormat:@"转入%@", [PublicMethod transferNumToThousandFormat:[model.targetCredit floatValue]]];
+        gameStr = [NSString stringWithFormat:@"转入%@", [PublicMethod transferNumToThousandFormat:[model.targetCredit floatValue]]];
+    } else {
+        self.sourceLab.text = @"CNY至USDT";
+        cashStr = [NSString stringWithFormat:@"支出%@", [PublicMethod transferNumToThousandFormat:[model.sourceCredit floatValue]]];
+        gameStr = [NSString stringWithFormat:@"支出%@", [PublicMethod transferNumToThousandFormat:[model.sourceCredit floatValue]]];
+    }
+    self.cashLabel.text = [NSString stringWithFormat:@"现金：%@，状态：%@", cashStr, [self transFlagToStr:model.flag]];
+    self.gameLab.text = [NSString stringWithFormat:@"游戏：%@，状态：%@", gameStr, [self transFlagToStr:model.flag]];
+    
+    self.referenceIdLab.text = [NSString stringWithFormat:@"订单：%@", model.requestId];
+}
+
+-(void)transDateStringToLabeText:(NSString *)str {
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate * date = [dateFormatter dateFromString:model.beginDate];
+    NSDate * date = [dateFormatter dateFromString:str];
     
     [dateFormatter setDateFormat:@"MM-dd"];
     NSString * dateStr = [dateFormatter stringFromDate:date];
@@ -49,14 +81,31 @@
     [dateFormatter setDateFormat:@"HH:mm"];
     NSString * timeStr = [dateFormatter stringFromDate:date];
     self.timeLab.text = timeStr;
-    
-    self.sourceLab.text = model.title;
-    
-    self.cashLabel.text = [NSString stringWithFormat:@"现金：支出%@，余额%@", [PublicMethod transferNumToThousandFormat:[model.amount floatValue]], [PublicMethod transferNumToThousandFormat:[model.destAmount floatValue]]];
-    self.gameLab.text = [NSString stringWithFormat:@"游戏：支出%@，余额%@", [PublicMethod transferNumToThousandFormat:[model.gameAmount floatValue]], [PublicMethod transferNumToThousandFormat:[model.gameDestAmount floatValue]]];
-    
-    self.referenceIdStr = model.referenceId;
-    self.referenceIdLab.text = [NSString stringWithFormat:@"订单：%@", model.referenceId];
+}
+
+-(NSString *)transFlagToStr:(NSInteger)flag {
+    NSString * str = @"";
+    switch (flag) {
+        case 0:
+            str = @"受理中";
+            break;
+        case 2:
+            str = @"已批准";
+            break;
+        case 9:
+            str = @"待审核";
+            break;
+        case -2:
+            str = @"取消";
+            break;
+        case -3:
+            str = @"拒绝";
+            break;
+        default:
+            str = @"拒绝";
+            break;
+    }
+    return str;
 }
 
 -(IBAction)btnAction:(id)sender {

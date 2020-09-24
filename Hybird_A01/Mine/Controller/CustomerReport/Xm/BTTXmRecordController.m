@@ -14,6 +14,7 @@
 
 @interface BTTXmRecordController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, strong)BTTPromoRecordFooterView * footerView;
+@property (nonatomic, strong) NSMutableDictionary * cellDic;
 @end
 
 @implementation BTTXmRecordController
@@ -23,6 +24,7 @@
     self.title = @"洗码记录";
     self.requestIdArr = [[NSMutableArray alloc] init];
     self.modelArr = [[NSMutableArray alloc] init];
+    self.cellDic = [[NSMutableDictionary alloc] init];
     self.pageNo = 1;
     [self setupCollectionView];
     [self showLoading];
@@ -48,7 +50,6 @@
     }];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTXmRecordHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTXmRecordHeaderCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTXmRecordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTXmRecordCell"];
     
     weakSelf(weakSelf);
     [self.footerView setAllBtnClickBlock:^(BOOL selected) {
@@ -98,7 +99,13 @@
         BTTXmRecordHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXmRecordHeaderCell" forIndexPath:indexPath];
         return cell;
     } else {
-        BTTXmRecordCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXmRecordCell" forIndexPath:indexPath];
+        NSString *identifier = [_cellDic objectForKey:[NSString stringWithFormat:@"%@", indexPath]];
+        if (identifier == nil) {
+            identifier = [NSString stringWithFormat:@"%@%@", @"BTTXmRecordCell", [NSString stringWithFormat:@"%@", indexPath]];
+            [_cellDic setValue:identifier forKey:[NSString stringWithFormat:@"%@", indexPath]];
+            [self.collectionView registerNib:[UINib nibWithNibName:@"BTTXmRecordCell" bundle:nil] forCellWithReuseIdentifier:identifier];
+        }
+        BTTXmRecordCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
         [cell setData:self.modelArr[indexPath.row - 1]];
         weakSelf(weakSelf);
         [cell setCheckBtnClickBlock:^(NSString * _Nonnull requestId, BOOL selected) {

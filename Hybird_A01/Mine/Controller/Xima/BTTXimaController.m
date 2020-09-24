@@ -23,7 +23,7 @@
 #import "BTTXimaSuccessItemModel.h"
 #import "BTTXimaLogController.h"
 #import "BTTXimaRecordController.h"
-
+#import "BTTCustomerReportController.h"
 
 @interface BTTXimaController ()<BTTElementsFlowLayoutDelegate>
 
@@ -283,6 +283,30 @@
                     }
                 }
             }
+        } else if ([[IVNetwork savedUserInfo].xmTransferCurrency isEqualToString:@"USDT"]) {
+            if (indexPath.row == self.xmResults.count + 1) {
+                BTTXimaSuccessBtnsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaSuccessBtnsCell" forIndexPath:indexPath];
+                weakSelf(weakSelf);
+                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                    strongSelf(strongSelf);
+                    if (button.tag == 1060) {
+                        //left
+                        [strongSelf.navigationController popToRootViewControllerAnimated:true];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCustomerReportNotification" object:nil];
+                    } else if (button.tag == 1061) {
+                        //right
+                        [strongSelf.navigationController popToRootViewControllerAnimated:true];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeModeNotification" object:nil];
+                    }
+                };
+                return cell;
+            } else {
+                BTTXimaSuccessItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaSuccessItemCell" forIndexPath:indexPath];
+                BTTXimaSuccessItemModel *model = self.xmResults.count ? [BTTXimaSuccessItemModel yy_modelWithJSON:self.xmResults[indexPath.row - 1]] : nil;
+                cell.model = model;
+                return cell;
+            }
+            
         } else {
             if (indexPath.row == self.xmResults.count + 1) {
                 BTTXimaSuccessBtnsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTXimaSuccessBtnsCell" forIndexPath:indexPath];
@@ -297,11 +321,13 @@
                         strongSelf.thisWeekDataType = BTTXimaThisWeekTypeVaild;
                         [strongSelf loadMainData];
                     } else if (button.tag == 1061) {
-                        BTTXimaLogController *vc = [BTTXimaLogController new];
-                        vc.webConfigModel.url = @"customer/log_xm.htm?days=15";
-                        vc.webConfigModel.newView = YES;
-                        vc.webConfigModel.theme = @"inside";
-                        [strongSelf.navigationController pushViewController:vc animated:YES];
+//                        BTTXimaLogController *vc = [BTTXimaLogController new];
+//                        vc.webConfigModel.url = @"customer/log_xm.htm?days=15";
+//                        vc.webConfigModel.newView = YES;
+//                        vc.webConfigModel.theme = @"inside";
+//                        [strongSelf.navigationController pushViewController:vc animated:YES];
+                        [strongSelf.navigationController popToRootViewControllerAnimated:true];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCustomerReportNotification" object:nil];
                     }
                 };
                 return cell;

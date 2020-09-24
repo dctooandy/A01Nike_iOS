@@ -57,8 +57,10 @@
 }
 
 - (void)loadTransferAllMoneyToLocal:(UIButton *)button {
+    [self showLoading];
     NSDictionary *params = @{@"loginName":[IVNetwork savedUserInfo].loginName};
     [IVNetwork requestPostWithUrl:BTTTransferAllMoneyToLocal paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             self.amount = @"-";

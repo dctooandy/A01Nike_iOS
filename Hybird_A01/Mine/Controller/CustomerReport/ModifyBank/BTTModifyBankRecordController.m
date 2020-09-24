@@ -12,6 +12,7 @@
 #import "BTTModifyBankRecordCell.h"
 
 @interface BTTModifyBankRecordController ()<BTTElementsFlowLayoutDelegate>
+@property (nonatomic, strong) NSMutableDictionary * cellDic;
 @end
 
 @implementation BTTModifyBankRecordController
@@ -19,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"银行卡更改记录";
+    self.cellDic = [[NSMutableDictionary alloc] init];
     [self setupCollectionView];
     [self loadRecords];
 }
@@ -30,7 +32,6 @@
     }];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTModifyBankRecordHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTModifyBankRecordHeaderCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTModifyBankRecordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTModifyBankRecordCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -42,7 +43,13 @@
         BTTModifyBankRecordHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTModifyBankRecordHeaderCell" forIndexPath:indexPath];
         return cell;
     } else {
-        BTTModifyBankRecordCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTModifyBankRecordCell" forIndexPath:indexPath];
+        NSString *identifier = [_cellDic objectForKey:[NSString stringWithFormat:@"%@", indexPath]];
+        if (identifier == nil) {
+            identifier = [NSString stringWithFormat:@"%@%@", @"BTTModifyBankRecordCell", [NSString stringWithFormat:@"%@", indexPath]];
+            [_cellDic setValue:identifier forKey:[NSString stringWithFormat:@"%@", indexPath]];
+            [self.collectionView registerNib:[UINib nibWithNibName:@"BTTModifyBankRecordCell" bundle:nil] forCellWithReuseIdentifier:identifier];
+        }
+        BTTModifyBankRecordCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
         [cell setData:self.model.accounts[indexPath.row - 1]];
         return cell;
     }

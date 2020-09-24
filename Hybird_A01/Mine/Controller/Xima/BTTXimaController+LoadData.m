@@ -154,6 +154,12 @@
         [array addObject:json];
     }
     params[@"xmRequests"] = array;
+//    [self hideLoading];
+//    self.ximaStatusType = BTTXimaStatusTypeSuccess;
+//    BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+//    [cell setBtnOneType:BTTXimaHeaderBtnOneTypeOtherNormal];
+//    [self setupElements];
+//    [MBProgressHUD showError:@"333333333" toView:nil];
     [IVNetwork requestPostWithUrl:BTTXiMaRequest paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;

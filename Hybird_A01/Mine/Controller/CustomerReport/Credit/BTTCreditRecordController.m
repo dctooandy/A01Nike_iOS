@@ -14,6 +14,7 @@
 
 @interface BTTCreditRecordController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, strong)BTTPromoRecordFooterView * footerView;
+@property (nonatomic, strong) NSMutableDictionary * cellDic;
 @end
 
 @implementation BTTCreditRecordController
@@ -22,15 +23,17 @@
     [super viewDidLoad];
     self.title = @"转账记录";
     self.referenceIdsArr = [[NSMutableArray alloc] init];
+    self.cellDic = [[NSMutableDictionary alloc] init];
     self.modelArr = [[NSMutableArray alloc] init];
+    self.xmModelArr = [[NSMutableArray alloc] init];
     self.pageNo = 1;
     [self setupCollectionView];
     [self showLoading];
-    [self loadRecords];
+    [self loadAllRecords];
     [self loadmoreWithBlock:^{
         self.pageNo+=1;
         [self showLoading];
-        [self loadRecords];
+        [self loadAllRecords];
     }];
 }
 
@@ -49,14 +52,14 @@
     }];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTCreditRecordHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTCreditRecordHeaderCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTCreditRecordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTCreditRecordCell"];
+//    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTCreditRecordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTCreditRecordCell"];
     
     weakSelf(weakSelf);
     [self.footerView setAllBtnClickBlock:^(BOOL selected) {
         strongSelf(strongSelf);
         [strongSelf.referenceIdsArr removeAllObjects];
         if (selected) {
-            if (strongSelf.referenceIdsArr.count == strongSelf.modelArr.count ) {
+            if (strongSelf.referenceIdsArr.count == strongSelf.modelArr.count) {
                 return;
             }
             for (BTTCreditRecordItemModel * model in strongSelf.modelArr) {
@@ -97,24 +100,36 @@
         BTTCreditRecordHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCreditRecordHeaderCell" forIndexPath:indexPath];
         return cell;
     } else {
-        BTTCreditRecordCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCreditRecordCell" forIndexPath:indexPath];
-        [cell setData:self.modelArr[indexPath.row - 1]];
-        weakSelf(weakSelf);
-        [cell setCheckBtnClickBlock:^(NSString * _Nonnull requestId, BOOL selected) {
-            strongSelf(strongSelf);
-            if (selected) {
-                [strongSelf.referenceIdsArr addObject:requestId];
-            } else {
-                for (NSString * str in strongSelf.referenceIdsArr) {
-                    if ([str isEqualToString:requestId]) {
-                        [strongSelf.referenceIdsArr removeObject:str];
-                        break;
+        NSString *identifier = [_cellDic objectForKey:[NSString stringWithFormat:@"%@", indexPath]];
+        if (identifier == nil) {
+            identifier = [NSString stringWithFormat:@"%@%@", @"BTTCreditRecordCell", [NSString stringWithFormat:@"%@", indexPath]];
+            [_cellDic setValue:identifier forKey:[NSString stringWithFormat:@"%@", indexPath]];
+            [self.collectionView registerNib:[UINib nibWithNibName:@"BTTCreditRecordCell" bundle:nil] forCellWithReuseIdentifier:identifier];
+        }
+        if (self.xmModelArr.count > indexPath.row-1) {
+            BTTCreditRecordCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+            [cell setXmData:self.xmModelArr[indexPath.row - 1]];
+            return cell;
+        } else {
+            BTTCreditRecordCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+            [cell setData:self.modelArr[indexPath.row - 1 - self.xmModelArr.count]];
+            weakSelf(weakSelf);
+            [cell setCheckBtnClickBlock:^(NSString * _Nonnull requestId, BOOL selected) {
+                strongSelf(strongSelf);
+                if (selected) {
+                    [strongSelf.referenceIdsArr addObject:requestId];
+                } else {
+                    for (NSString * str in strongSelf.referenceIdsArr) {
+                        if ([str isEqualToString:requestId]) {
+                            [strongSelf.referenceIdsArr removeObject:str];
+                            break;
+                        }
                     }
                 }
-            }
-            [strongSelf.footerView allBtnselect:strongSelf.referenceIdsArr.count == strongSelf.modelArr.count];
-        }];
-        return cell;
+                [strongSelf.footerView allBtnselect:strongSelf.referenceIdsArr.count == strongSelf.modelArr.count];
+            }];
+            return cell;
+        }
     }
 }
 
@@ -151,7 +166,7 @@
     if (self.elementsHight.count) {
         [self.elementsHight removeAllObjects];
     }
-    NSInteger total = self.modelArr.count + 1;
+    NSInteger total = self.xmModelArr.count + self.modelArr.count + 1;
     NSMutableArray *elementsHight = [NSMutableArray array];
     for (int i = 0; i < total; i++) {
         if (i == 0) {
@@ -162,7 +177,7 @@
     }
     self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.modelArr.count < self.pageNo * 10) {
+        if (self.modelArr.count < self.pageNo * 10 && self.xmModelArr.count < self.pageNo * 10) {
             [self.collectionView.mj_footer endRefreshingWithNoMoreData];
         } else {
             [self endRefreshing];

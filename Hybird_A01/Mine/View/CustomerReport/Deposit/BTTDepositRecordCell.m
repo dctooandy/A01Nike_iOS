@@ -107,7 +107,7 @@
             str = @"me_bankscan";
             break;
         default:
-            str = @"";
+            str = @"me_bankscan";
             break;
     }
     return str;

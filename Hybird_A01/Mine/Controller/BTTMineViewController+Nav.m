@@ -22,6 +22,7 @@
 #import "BTTActionSheet.h"
 #import "BTTShowErcodePopview.h"
 #import "BTTWithdrawalController.h"
+#import "BTTCustomerReportController.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
@@ -103,6 +104,8 @@ static const char *BTTHeaderViewKey = "headerView";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveMoneyTimes:) name:BTTSaveMoneyTimesNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoCardInfo) name:@"gotoCardInfoNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoTakeMoney) name:@"gotoTakeMoneyNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoCustomerReport) name:@"gotoCustomerReportNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMode) name:@"changeModeNotification" object:nil];
 }
 
 - (void)saveMoneyTimes:(NSNotification *)notifi {
@@ -134,6 +137,23 @@ static const char *BTTHeaderViewKey = "headerView";
         BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     });
+}
+
+-(void)gotoCustomerReport {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        BTTCustomerReportController * vc = [[BTTCustomerReportController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    });
+}
+
+-(void)changeMode {
+    for (NSString * str in [IVNetwork savedUserInfo].uiModeOptions) {
+        if (![str isEqualToString:[IVNetwork savedUserInfo].uiMode]) {
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:false];
+            [self changeMode:str];
+            break;
+        }
+    }
 }
 
 - (void)setupNav {

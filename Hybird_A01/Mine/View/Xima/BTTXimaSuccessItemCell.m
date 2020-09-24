@@ -12,6 +12,7 @@
 @interface BTTXimaSuccessItemCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *noticeLabel;
 
 
 @end
@@ -27,7 +28,13 @@
 
 - (void)setModel:(BTTXimaSuccessItemModel *)model {
     _model = model;
-    self.nameLabel.text = model.xmTypeName;
+    if ([[IVNetwork savedUserInfo].xmTransferCurrency isEqualToString:@"USDT"]) {
+        self.nameLabel.text = [NSString stringWithFormat:@"%@洗码成功！", model.xmTypeName];
+        self.noticeLabel.text = @"洗码金额已经添加至您的币多多账户";
+    } else {
+        self.nameLabel.text = model.xmTypeName;
+        self.noticeLabel.text = @"成功! 洗码金额已添加至您账户";
+    }
 }
 
 @end

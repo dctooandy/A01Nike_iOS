@@ -18,6 +18,7 @@
 @interface BTTWithdrawRecordController ()<BTTElementsFlowLayoutDelegate>
 @property(nonatomic, copy)NSString * sortTypeStr;
 @property (nonatomic, strong)BTTPromoRecordFooterView * footerView;
+@property (nonatomic, strong) NSMutableDictionary * cellDic;
 @end
 
 @implementation BTTWithdrawRecordController
@@ -27,6 +28,7 @@
     self.title = @"取款纪录";
     self.requestIdArr = [[NSMutableArray alloc] init];
     self.modelArr = [[NSMutableArray alloc] init];
+    self.cellDic = [[NSMutableDictionary alloc] init];
     self.pageNo = 1;
     [self setupCollectionView];
     [self showLoading];
@@ -54,7 +56,6 @@
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTWithdrawHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTWithdrawHeaderCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTWithdrawHeaderTwoCell" bundle:nil] forCellWithReuseIdentifier:@"BTTWithdrawHeaderTwoCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTWithdrawRecordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTWithdrawRecordCell"];
     
     weakSelf(weakSelf);
     [self.footerView setAllBtnClickBlock:^(BOOL selected) {
@@ -108,7 +109,14 @@
         return cell;
     }
     else {
-        BTTWithdrawRecordCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawRecordCell" forIndexPath:indexPath];
+        
+        NSString *identifier = [_cellDic objectForKey:[NSString stringWithFormat:@"%@", indexPath]];
+        if (identifier == nil) {
+            identifier = [NSString stringWithFormat:@"%@%@", @"BTTWithdrawRecordCell", [NSString stringWithFormat:@"%@", indexPath]];
+            [_cellDic setValue:identifier forKey:[NSString stringWithFormat:@"%@", indexPath]];
+            [self.collectionView registerNib:[UINib nibWithNibName:@"BTTWithdrawRecordCell" bundle:nil] forCellWithReuseIdentifier:identifier];
+        }
+        BTTWithdrawRecordCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
         BTTWithdrawRecordItemModel * model = self.modelArr[indexPath.row-2];
         [cell setData:model];
         weakSelf(weakSelf);

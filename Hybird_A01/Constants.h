@@ -453,6 +453,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTDeletePromoRecord                       @"promo/deleteRequest"
 //客户报表 - 转账
 #define BTTCustomerReportCredit                    @"credit/queryCreditLogs"
+//客户报表 - 转账洗碼數據
+#define BTTCustomerReportCreditXm                  @"deposit/queryCreditExchange"
 //客户报表 - 转账 - 删除纪录
 #define BTTDeleteCreditRecord                      @"credit/deleteCreditLog"
 //客户报表 - 洗码

@@ -14,6 +14,7 @@
 
 @interface BTTDepositRecordController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, strong)BTTPromoRecordFooterView * footerView;
+@property (nonatomic, strong) NSMutableDictionary * cellDic;
 @end
 
 @implementation BTTDepositRecordController
@@ -23,6 +24,7 @@
     self.title = @"存款纪录";
     self.requestIdArr = [[NSMutableArray alloc] init];
     self.modelArr = [[NSMutableArray alloc] init];
+    self.cellDic = [[NSMutableDictionary alloc] init];
     self.pageNo = 1;
     [self setupCollectionView];
     [self showLoading];
@@ -48,7 +50,6 @@
     }];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTDepositRecordHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTDepositRecordHeaderCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTDepositRecordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTDepositRecordCell"];
     
     weakSelf(weakSelf);
     [self.footerView setAllBtnClickBlock:^(BOOL selected) {
@@ -98,7 +99,13 @@
         BTTDepositRecordHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTDepositRecordHeaderCell" forIndexPath:indexPath];
         return cell;
     } else {
-        BTTDepositRecordCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTDepositRecordCell" forIndexPath:indexPath];
+        NSString *identifier = [_cellDic objectForKey:[NSString stringWithFormat:@"%@", indexPath]];
+        if (identifier == nil) {
+            identifier = [NSString stringWithFormat:@"%@%@", @"BTTDepositRecordCell", [NSString stringWithFormat:@"%@", indexPath]];
+            [_cellDic setValue:identifier forKey:[NSString stringWithFormat:@"%@", indexPath]];
+            [self.collectionView registerNib:[UINib nibWithNibName:@"BTTDepositRecordCell" bundle:nil] forCellWithReuseIdentifier:identifier];
+        }
+        BTTDepositRecordCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
         BTTDepositRecordItemModel * model = self.modelArr[indexPath.row-1];
         [cell setData:model];
         weakSelf(weakSelf);
