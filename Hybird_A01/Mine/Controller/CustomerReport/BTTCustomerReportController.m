@@ -17,6 +17,7 @@
 #import "BTTCreditRecordController.h"
 #import "BTTXmRecordController.h"
 #import "BTTModifyBankRecordController.h"
+#import "BTTXmTransferRecordController.h"
 
 @interface BTTCustomerReportController ()<BTTElementsFlowLayoutDelegate>
 
@@ -68,7 +69,7 @@
                 return;
             }
             NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-            params[@"pageSize"] = @"10";
+            params[@"pageSize"] = @10;
             params[@"lastDays"] = [NSNumber numberWithInteger:strongSelf.timeNum];
             params[@"flags"] = [[NSArray alloc] init];
             
@@ -97,7 +98,10 @@
                     break;
                 case 4:
                 {
-                    BTTCreditRecordController * vc = [[BTTCreditRecordController alloc] init];
+                    params[@"pageNo"] = @1;
+                    params[@"pageSize"] = @100;
+                    params[@"flags"] = @"";
+                    BTTXmTransferRecordController * vc = [[BTTXmTransferRecordController alloc] init];
                     vc.params = params;
                     [strongSelf.navigationController pushViewController:vc animated:YES];
                 }
@@ -114,6 +118,13 @@
                     [params removeAllObjects];
                     params[@"flag"] = @"MODIFY_BANK_REQUEST_FLAG_ALL";
                     BTTModifyBankRecordController * vc = [[BTTModifyBankRecordController alloc] init];
+                    vc.params = params;
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case 7:
+                {
+                    BTTCreditRecordController * vc = [[BTTCreditRecordController alloc] init];
                     vc.params = params;
                     [strongSelf.navigationController pushViewController:vc animated:YES];
                 }
@@ -140,7 +151,7 @@
         BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
         
         weakSelf(weakSelf);
-        [BRStringPickerView showStringPickerWithTitle:@"请选择记录类型" dataSource:@[@"存款", @"取款",@"优惠",@"转账",@"洗码", @"银行卡更改"] defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
+        [BRStringPickerView showStringPickerWithTitle:@"请选择记录类型" dataSource:@[@"存款", @"取款",@"优惠",@"洗码转账",@"洗码",@"银行卡更改", @"转账"] defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
             strongSelf(strongSelf);
             cell.textField.text = selectValue;
             strongSelf.typeNum = index + 1;

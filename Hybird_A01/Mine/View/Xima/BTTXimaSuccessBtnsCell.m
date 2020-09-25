@@ -20,7 +20,7 @@
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.backgroundColor = [UIColor colorWithHexString:@"212229"];
     if ([[IVNetwork savedUserInfo].xmTransferCurrency isEqualToString:@"USDT"]) {
-        [self.successLeftBtn setTitle:@"前往转账记录查询" forState:UIControlStateNormal];
+        [self.successLeftBtn setTitle:@"前往洗码转账记录" forState:UIControlStateNormal];
         [self.successRightBtn setTitle:@"切换币多多账户" forState:UIControlStateNormal];
     } else {
         [self.successLeftBtn setTitle:@"继续洗码" forState:UIControlStateNormal];

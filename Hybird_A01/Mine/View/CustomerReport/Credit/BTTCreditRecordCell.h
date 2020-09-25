@@ -8,10 +8,10 @@
 
 #import "BTTBaseCollectionViewCell.h"
 #import "BTTCreditRecordModel.h"
-#import "BTTCreditXmRecordModel.h"
+#import "BTTXmTransferRecordModel.h"
 
 @class BTTCreditRecordItemModel;
-@class BTTCreditXmRecordItemModel;
+@class BTTXmTransferRecordItemModel;
 
 NS_ASSUME_NONNULL_BEGIN
 typedef void(^CheckBtnClickBlock)(NSString * requestId, BOOL selected);
@@ -20,7 +20,7 @@ typedef void(^CheckBtnClickBlock)(NSString * requestId, BOOL selected);
 @property (nonatomic, copy) CheckBtnClickBlock checkBtnClickBlock;
 -(void)setData:(BTTCreditRecordItemModel *)model;
 
--(void)setXmData:(BTTCreditXmRecordItemModel *)model;
+-(void)setXmTransferData:(BTTXmTransferRecordItemModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

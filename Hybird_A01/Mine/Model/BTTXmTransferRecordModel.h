@@ -1,5 +1,5 @@
 //
-//  BTTCreditXmRecordModel.h
+//  BTTXmTransferRecordModel.h
 //  Hybird_A01
 //
 //  Created by Jairo on 24/09/2020.
@@ -7,19 +7,19 @@
 //
 
 #import "BTTBaseModel.h"
-@class BTTCreditXmRecordItemModel;
+@class BTTXmTransferRecordItemModel;
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BTTCreditXmRecordModel : BTTBaseModel
+@interface BTTXmTransferRecordModel : BTTBaseModel
 
 @property (nonatomic, copy) NSString *pageNo;
 @property (nonatomic, copy) NSString *pageSize;
 @property (nonatomic, copy) NSString *totalPage;
 @property (nonatomic, copy) NSString *totalRow;
-@property (nonatomic, strong) NSArray<BTTCreditXmRecordItemModel *> *data;
+@property (nonatomic, strong) NSArray<BTTXmTransferRecordItemModel *> *data;
 @end
 
-@interface BTTCreditXmRecordItemModel : BTTBaseModel
+@interface BTTXmTransferRecordItemModel : BTTBaseModel
 
 @property (nonatomic, copy) NSString *sourceCredit;
 @property (nonatomic, copy) NSString *uuid;

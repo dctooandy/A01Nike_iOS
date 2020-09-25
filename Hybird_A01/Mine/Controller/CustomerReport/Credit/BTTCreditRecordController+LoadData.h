@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTCreditRecordController (LoadData)
--(void)loadAllRecords;
+-(void)loadRecords;
 -(void)deleteRecords;
 @end
 

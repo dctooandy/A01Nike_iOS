@@ -48,7 +48,7 @@
     self.referenceIdLab.text = [NSString stringWithFormat:@"订单：%@", model.referenceId];
 }
 
--(void)setXmData:(BTTCreditXmRecordItemModel *)model {
+-(void)setXmTransferData:(BTTXmTransferRecordItemModel *)model {
     [self.checkBtn setImage:[UIImage imageNamed:@"ic_all_check_default"] forState:UIControlStateNormal];
     self.checkBtn.enabled = false;
     [self transDateStringToLabeText:model.createdDate];
@@ -87,22 +87,26 @@
     NSString * str = @"";
     switch (flag) {
         case 0:
-            str = @"受理中";
+            str = @"等待处理";
             break;
         case 2:
-            str = @"已批准";
+            str = @"已到账";
             break;
+        case 1:
         case 9:
-            str = @"待审核";
+            str = @"处理中";
+            break;
+        case -1:
+            str = @"客户取消";
             break;
         case -2:
-            str = @"取消";
+            str = @"后台取消";
             break;
         case -3:
-            str = @"拒绝";
+            str = @"被拒绝";
             break;
         default:
-            str = @"拒绝";
+            str = @"被拒绝";
             break;
     }
     return str;
