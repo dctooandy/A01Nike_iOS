@@ -85,7 +85,7 @@
     }];
     
     UILabel *rechargeTipLabel = [[UILabel alloc]init];
-    rechargeTipLabel.text = @"最低充值 1 USDT,无需填写充值金额,\n充值成功后款项将自动添加到帐";
+    rechargeTipLabel.text = @"最低充值 1 USDT,无需填写充值金额,\n充值成功后款项将自动添加到账";
     rechargeTipLabel.numberOfLines = 2;
     rechargeTipLabel.textAlignment = NSTextAlignmentCenter;
     rechargeTipLabel.font = [UIFont systemFontOfSize:12];

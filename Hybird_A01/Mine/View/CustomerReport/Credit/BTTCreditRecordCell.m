@@ -9,7 +9,6 @@
 #import "BTTCreditRecordCell.h"
 
 @interface BTTCreditRecordCell()
-@property (weak, nonatomic) IBOutlet UIButton *checkBtn;
 @property (weak, nonatomic) IBOutlet UILabel *dateLab;
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (weak, nonatomic) IBOutlet UILabel *sourceLab;
@@ -27,14 +26,9 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeSingleLine;
     self.backgroundColor = [UIColor clearColor];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectAll:) name:@"SELECTALL" object:nil];
     self.cashLabel.adjustsFontSizeToFitWidth = true;
     self.gameLab.adjustsFontSizeToFitWidth = true;
     self.referenceIdLab.adjustsFontSizeToFitWidth = true;
-}
-
--(void)selectAll:(NSNotification *)notification {
-    [self.checkBtn setSelected:[notification.object isEqualToString:@"0"]? true:false];
 }
 
 -(void)setData:(BTTCreditRecordItemModel *)model {

@@ -47,7 +47,7 @@
 //        [infoView addSubview:imgView];
 //        _imgView = imgView;
         
-        NSString *str = @"取款USDT到帐后,可一键卖币提现至银行卡";
+        NSString *str = @"取款USDT到账后,可一键卖币提现至银行卡";
         NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
         
         [attrStr addAttribute:NSForegroundColorAttributeName

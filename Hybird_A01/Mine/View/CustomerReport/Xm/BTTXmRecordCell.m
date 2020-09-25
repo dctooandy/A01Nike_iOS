@@ -9,7 +9,6 @@
 #import "BTTXmRecordCell.h"
 
 @interface BTTXmRecordCell()
-@property (weak, nonatomic) IBOutlet UIButton *checkBtn;
 @property (weak, nonatomic) IBOutlet UILabel *dateLab;
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (weak, nonatomic) IBOutlet UILabel *sourceLab;
@@ -27,16 +26,9 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeSingleLine;
     self.backgroundColor = [UIColor clearColor];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectAll:) name:@"SELECTALL" object:nil];
     self.amountLab.adjustsFontSizeToFitWidth = true;
     self.betAmountLab.adjustsFontSizeToFitWidth = true;
     self.requestIdLab.adjustsFontSizeToFitWidth = true;
-}
-
--(void)selectAll:(NSNotification *)notification {
-    if (self.checkBtn.enabled) {
-        [self.checkBtn setSelected:[notification.object isEqualToString:@"0"]? true:false];
-    }
 }
 
 -(void)setData:(BTTXmRecordItemModel *)model {

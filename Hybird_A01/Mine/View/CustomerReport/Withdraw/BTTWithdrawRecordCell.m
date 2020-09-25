@@ -9,7 +9,6 @@
 #import "BTTWithdrawRecordCell.h"
 
 @interface BTTWithdrawRecordCell()
-@property (weak, nonatomic) IBOutlet UIButton *checkBtn;
 @property (weak, nonatomic) IBOutlet UILabel *dateLab;
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (weak, nonatomic) IBOutlet UILabel *sourceLab;
@@ -26,13 +25,6 @@
     self.mineSparaterType = BTTMineSparaterTypeSingleLine;
     self.backgroundColor = [UIColor clearColor];
     self.requestIdLab.adjustsFontSizeToFitWidth = true;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectAll:) name:@"SELECTALL" object:nil];
-}
-
--(void)selectAll:(NSNotification *)notification {
-    if (self.checkBtn.enabled) {
-        [self.checkBtn setSelected:[notification.object isEqualToString:@"0"]? true:false];
-    }
 }
 
 -(void)setData:(BTTWithdrawRecordItemModel *)model {

@@ -42,7 +42,7 @@
     self.confirmBtn.clipsToBounds = YES;
     self.confirmBtn.backgroundColor = COLOR_RGBA(243, 130, 50, 1);
     
-    NSAttributedString *attrStringAccount = [[NSAttributedString alloc] initWithString:@"请输入小金库帐号" attributes:
+    NSAttributedString *attrStringAccount = [[NSAttributedString alloc] initWithString:@"请输入小金库账号" attributes:
                                           @{ NSForegroundColorAttributeName: COLOR_RGBA(110, 115, 125, 1),
                                              NSFontAttributeName: self.accountField.font }];
     self.accountField.attributedPlaceholder = attrStringAccount;

@@ -239,7 +239,7 @@
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (result.body&&[result.body isKindOfClass:[NSString class]]&&[result.body isEqualToString:@"1000"]) {
-                [MBProgressHUD showError:@"手机号已注册帐号,请直接登录" toView:nil];
+                [MBProgressHUD showError:@"手机号已注册账号,请直接登录" toView:nil];
             }else{
                 [self MobileNoAndCodeRegisterAPIModel:model];
             }

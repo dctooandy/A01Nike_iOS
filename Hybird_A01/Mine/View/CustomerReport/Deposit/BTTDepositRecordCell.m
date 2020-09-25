@@ -10,7 +10,6 @@
 
 @interface BTTDepositRecordCell()
 
-@property (weak, nonatomic) IBOutlet UIButton *checkBtn;
 @property (weak, nonatomic) IBOutlet UILabel *dateLab;
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImgView;
@@ -28,13 +27,6 @@
     self.mineSparaterType = BTTMineSparaterTypeSingleLine;
     self.backgroundColor = [UIColor clearColor];
     self.moneyLab.adjustsFontSizeToFitWidth = true;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectAll:) name:@"SELECTALL" object:nil];
-}
-
--(void)selectAll:(NSNotification *)notification {
-    if (self.checkBtn.enabled) {
-        [self.checkBtn setSelected:[notification.object isEqualToString:@"0"]? true:false];
-    }
 }
 
 -(void)setData:(BTTDepositRecordItemModel *)model {

@@ -15,6 +15,7 @@
 @interface BTTCreditRecordController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, strong)BTTPromoRecordFooterView * footerView;
 @property (nonatomic, strong) NSMutableDictionary * cellDic;
+@property (nonatomic, assign) BOOL isSelectAll;
 @end
 
 @implementation BTTCreditRecordController
@@ -22,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"转账记录";
+    self.isSelectAll = false;
     self.referenceIdsArr = [[NSMutableArray alloc] init];
     self.cellDic = [[NSMutableDictionary alloc] init];
     self.modelArr = [[NSMutableArray alloc] init];
@@ -34,6 +36,12 @@
         [self showLoading];
         [self loadRecords];
     }];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectAll:) name:@"SELECTALL" object:nil];
+}
+
+-(void)selectAll:(NSNotification *)notification {
+    self.isSelectAll = [notification.object isEqualToString:@"0"]? true:false;
+    [self.collectionView reloadData];
 }
 
 - (void)setupCollectionView {
@@ -75,7 +83,7 @@
         }
         strongSelf.deleteParams = [[NSMutableDictionary alloc] init];
         strongSelf.deleteParams[@"referenceIds"] = strongSelf.referenceIdsArr;
-        UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"确定要删除选中的纪录吗？" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController * alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"确定要删除选中的记录吗？" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction * confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [strongSelf showLoading];
             [strongSelf deleteRecords];
@@ -106,6 +114,9 @@
         }
         BTTCreditRecordCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
         [cell setData:self.modelArr[indexPath.row - 1]];
+        if (cell.checkBtn.enabled) {
+            [cell.checkBtn setSelected:self.isSelectAll];
+        }
         weakSelf(weakSelf);
         [cell setCheckBtnClickBlock:^(NSString * _Nonnull requestId, BOOL selected) {
             strongSelf(strongSelf);

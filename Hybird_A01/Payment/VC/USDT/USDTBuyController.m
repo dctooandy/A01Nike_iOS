@@ -142,7 +142,7 @@
 -(UILabel *)bitBaseTitleLab {
     if (!_bitBaseTitleLab) {
         _bitBaseTitleLab = [[UILabel alloc] init];
-        _bitBaseTitleLab.text = @"点击Bitbase存款(支持微信, 支付宝, 银联)金额将直接存入您的游戏帐号";
+        _bitBaseTitleLab.text = @"点击Bitbase存款(支持微信, 支付宝, 银联)金额将直接存入您的游戏账号";
         _bitBaseTitleLab.textColor = [UIColor redColor];
         _bitBaseTitleLab.font = [UIFont systemFontOfSize:17];
         _bitBaseTitleLab.textAlignment = NSTextAlignmentCenter;

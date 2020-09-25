@@ -48,7 +48,7 @@
     
 
     if (![model.login_name hasPrefix:@"g"] && ![PublicMethod isValidatePhone:model.login_name]) {
-        [MBProgressHUD showError:@"请输入正确帐号" toView:self.view];
+        [MBProgressHUD showError:@"请输入正确账号" toView:self.view];
         return;
     }
 

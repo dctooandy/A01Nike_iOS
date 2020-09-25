@@ -88,7 +88,7 @@
             if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]) {
                 cell.limitLabel.text = @"取款限额:100-1000万RMB,未享受优惠全额投注即可取款";
             } else {
-                cell.limitLabel.text = @"取款限额:10-1000万RMB,未享受优惠全额投注即可取款";
+                cell.limitLabel.text = @"取款限额:100-1000万RMB,未享受优惠全额投注即可取款";
             }
         }
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
@@ -272,7 +272,7 @@
             _usdtField.text = self.usdtAmount;
         }
     }
-    NSInteger limitNum = 10;
+    NSInteger limitNum = 100;
     if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
         limitNum = 100;
     }
@@ -428,7 +428,7 @@
         return;
     }
     
-    NSInteger limitNum = 10;
+    NSInteger limitNum = 100;
     if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
         limitNum = 100;
     }

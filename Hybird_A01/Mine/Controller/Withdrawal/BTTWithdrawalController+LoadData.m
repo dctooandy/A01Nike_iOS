@@ -123,7 +123,7 @@
     NSArray *names3 = @[@"金额",@"比特币",@"取款至",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
     NSArray *names4 = @[@"金额",@"预估到账",@"取款至",@"",@"",@""];
     
-    NSString *pString = isUsdt ? @"最少1USDT" : @"最少10元";
+    NSString *pString = isUsdt ? @"最少1USDT" : @"最少100元";
     if (!isUsdt && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
         pString = @"最少100元";
     }

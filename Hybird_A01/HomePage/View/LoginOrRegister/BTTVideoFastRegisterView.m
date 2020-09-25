@@ -126,7 +126,7 @@
         }];
         
         UIButton *oneKeyBtn = [[UIButton alloc]init];
-        [oneKeyBtn setTitle:@"一键生成帐号密码" forState:UIControlStateNormal];
+        [oneKeyBtn setTitle:@"一键生成账号密码" forState:UIControlStateNormal];
         [oneKeyBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         oneKeyBtn.titleLabel.font = [UIFont systemFontOfSize:15];
         oneKeyBtn.layer.cornerRadius = 22.5;

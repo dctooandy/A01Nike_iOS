@@ -13,6 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 typedef void(^CheckBtnClickBlock)(NSString * requestId, BOOL selected);
 @interface BTTXmRecordCell : BTTBaseCollectionViewCell
+@property (weak, nonatomic) IBOutlet UIButton *checkBtn;
 @property (nonatomic, copy) CheckBtnClickBlock checkBtnClickBlock;
 -(void)setData:(BTTXmRecordItemModel *)model;
 @end
