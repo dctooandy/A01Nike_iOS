@@ -34,6 +34,8 @@
     [IVNetwork requestPostWithUrl:BTTDeleteCreditRecord paramters:self.deleteParams completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
+            self.pageNo = 1;
+            [self.modelArr removeAllObjects];
             [self loadRecords];
         } else {
             [self hideLoading];
