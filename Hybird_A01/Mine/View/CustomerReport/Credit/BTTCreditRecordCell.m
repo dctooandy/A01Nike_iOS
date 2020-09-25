@@ -87,26 +87,16 @@
     NSString * str = @"";
     switch (flag) {
         case 0:
-            str = @"等待处理";
+            str = @"处理中";
             break;
         case 2:
             str = @"已到账";
-            break;
-        case 1:
-        case 9:
-            str = @"处理中";
-            break;
-        case -1:
-            str = @"客户取消";
-            break;
-        case -2:
-            str = @"后台取消";
             break;
         case -3:
             str = @"被拒绝";
             break;
         default:
-            str = @"被拒绝";
+            str = @"处理中";
             break;
     }
     return str;
