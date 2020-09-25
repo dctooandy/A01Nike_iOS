@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImgView;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLab;
+@property (weak, nonatomic) IBOutlet UILabel *requestIdLab;
 @property (weak, nonatomic) IBOutlet UILabel *typeLab;
 
 @property (nonatomic, copy) NSString *requestIdStr;
@@ -57,14 +58,9 @@
     self.iconImgView.image = [UIImage imageNamed:[self transIconImgStr:[model.transCode integerValue]]];
     
     NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
-    NSString * str = [NSString stringWithFormat:@"%@%@ %@", model.arrivalAmount, unitStr, model.requestId];
-    NSString *colorString = [NSString stringWithFormat:@"%@%@", model.arrivalAmount, unitStr];
-    NSRange range = [str rangeOfString:colorString];
-    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:str];
-    [attStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed: 0.88 green: 0.78 blue: 0.58 alpha: 1.00],NSFontAttributeName:kFontSystem(12)} range:range];
-    self.moneyLab.attributedText = attStr;
+    self.moneyLab.text = [NSString stringWithFormat:@"%@%@", model.arrivalAmount, unitStr];
     self.requestIdStr = model.requestId;
-    
+    self.requestIdLab.text = self.requestIdStr;
     self.typeLab.text = model.flagDesc;
 }
 

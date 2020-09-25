@@ -53,23 +53,13 @@
             self.typeLab.text = @"等待处理";
             break;
         case 2:
-            self.typeLab.text = @"已到账";
-            break;
-        case 1:
-        case 9:
-            self.typeLab.text = @"处理中";
-            break;
-        case -1:
-            self.typeLab.text = @"客户取消";
-            break;
-        case -2:
-            self.typeLab.text = @"后台取消";
+            self.typeLab.text = @"批准";
             break;
         case -3:
-            self.typeLab.text = @"被拒绝";
+            self.typeLab.text = @"拒绝";
             break;
         default:
-            self.typeLab.text = @"被拒绝";
+            self.typeLab.text = @"处理中";
             break;
     }
 }

@@ -18,8 +18,8 @@
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BTTPromoRecordModel * model = [BTTPromoRecordModel yy_modelWithJSON:result.body];
+            self.model = model;
             if (model.data.count) {
-                self.model = model;
                 [self.modelArr addObjectsFromArray:self.model.data];
             }
             [self setupElements];

@@ -45,19 +45,9 @@
                         <color key="textColor" red="0.45534062390000002" green="0.46977657080000002" blue="0.50588804480000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="金额" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xN-LM-YB5">
-                        <rect key="frame" x="137" y="0.0" width="197" height="29"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xN-LM-YB5">
+                        <rect key="frame" x="81" y="0.0" width="253" height="29"/>
                         <color key="backgroundColor" red="0.12965399029999999" green="0.12875625490000001" blue="0.15686646100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.45534062390000002" green="0.46977657080000002" blue="0.50588804480000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="存款类型" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fet-nl-HbS">
-                        <rect key="frame" x="81" y="0.0" width="55" height="29"/>
-                        <color key="backgroundColor" red="0.13357511159999999" green="0.13267907500000001" blue="0.1607880592" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="55" id="OfH-EY-Jp6"/>
-                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.45534062390000002" green="0.46977657080000002" blue="0.50588804480000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
@@ -71,14 +61,11 @@
                 <constraint firstItem="Pb9-J0-Xxn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="C2J-Cv-mWo"/>
                 <constraint firstItem="4xN-LM-YB5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="CZo-Vz-1RB"/>
                 <constraint firstAttribute="bottom" secondItem="t68-cI-h9H" secondAttribute="bottom" constant="1" id="Fme-zz-n8X"/>
-                <constraint firstAttribute="bottom" secondItem="Fet-nl-HbS" secondAttribute="bottom" constant="1" id="Iu1-rV-YfQ"/>
                 <constraint firstItem="Pb9-J0-Xxn" firstAttribute="leading" secondItem="4xN-LM-YB5" secondAttribute="trailing" constant="1" id="Pxc-2m-qIg"/>
-                <constraint firstItem="Fet-nl-HbS" firstAttribute="leading" secondItem="t68-cI-h9H" secondAttribute="trailing" constant="1" id="aI1-7f-Jqu"/>
+                <constraint firstItem="4xN-LM-YB5" firstAttribute="leading" secondItem="t68-cI-h9H" secondAttribute="trailing" constant="1" id="cUK-EN-fXp"/>
                 <constraint firstAttribute="bottom" secondItem="4xN-LM-YB5" secondAttribute="bottom" constant="1" id="j6O-mn-qlC"/>
                 <constraint firstItem="t68-cI-h9H" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="m5X-Wm-JuX"/>
-                <constraint firstItem="4xN-LM-YB5" firstAttribute="leading" secondItem="Fet-nl-HbS" secondAttribute="trailing" constant="1" id="md5-cn-pEG"/>
                 <constraint firstItem="t68-cI-h9H" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="uvZ-Sx-Lvl"/>
-                <constraint firstItem="Fet-nl-HbS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="wOw-ej-0jv"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <point key="canvasLocation" x="139" y="153"/>
