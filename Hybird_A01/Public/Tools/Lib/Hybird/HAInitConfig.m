@@ -28,7 +28,7 @@
 + (NSString *)defaultH5Domain {
     switch (EnvirmentType) {
         case 0:
-            return @"http://m.a01f.com/";
+            return @"http://m.a01.com/";
             break;
         case 1:
             return @"http://fm.918rr.com/";

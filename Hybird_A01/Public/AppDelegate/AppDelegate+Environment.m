@@ -89,6 +89,11 @@
      ];
     
     [IVPublicAPIManager checkAppUpdateWithH5Version:1 callBack:^(IVPCheckUpdateModel * _Nonnull result, IVJResponseObject * _Nonnull response) {
+        NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+        NSString *appVersion = [infoDic objectForKey: @"CFBundleShortVersionString"];
+        if ([appVersion compare:result.versionCode options:NSNumericSearch] == NSOrderedDescending && result.versionCode) {
+            return;
+        }
         if (result.flag!=0) {
             [IVKUpdateViewController showWithUrl:result.appDownUrl content:result.upgradeDesc originVersion:result.versionCode isForce:result.flag==2 isManual:NO];
         }

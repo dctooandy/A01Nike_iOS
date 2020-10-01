@@ -11,6 +11,7 @@
 
 @interface BTTAGQJViewController ()
 @property (nonatomic, strong) BTTBJLPopView *customView;
+@property (nonatomic, assign) BOOL isRemoved;
 @end
 
 @implementation BTTAGQJViewController
@@ -42,11 +43,14 @@
     [self addGameViewToSelf];
     [self registerNotifiction];
     [[IVGameManager sharedManager].agqjVC addObserver:self forKeyPath:@"loadStatus" options:NSKeyValueObservingOptionOld|NSKeyValueObservingOptionNew context:nil];
+    self.isRemoved = false;
 }
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if([keyPath isEqualToString:@"loadStatus"]) {
         if ([IVGameManager sharedManager].agqjVC.loadStatus == IVGameLoadStatusSuccess) {
-            [self showBjlPopView];
+            if (self.customView == nil) {
+                [self showBjlPopView];
+            }
         }
     }
 }
@@ -72,7 +76,8 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    if ([[IVGameManager sharedManager].agqjVC observationInfo]) {
+    if (!self.isRemoved) {
+        self.isRemoved = true;
         [[IVGameManager sharedManager].agqjVC removeObserver:self forKeyPath:@"loadStatus" context:nil];
     }
 //    [BTTAGQJViewController addGameViewToWindow];
@@ -110,7 +115,8 @@
     self.customView.dismissBlock = ^{
         strongSelf(strongSelf);
         [popView dismiss];
-        if ([[IVGameManager sharedManager].agqjVC observationInfo]) {
+        if (!strongSelf.isRemoved) {
+            strongSelf.isRemoved = true;
             [[IVGameManager sharedManager].agqjVC removeObserver:strongSelf forKeyPath:@"loadStatus" context:nil];
         }
     };

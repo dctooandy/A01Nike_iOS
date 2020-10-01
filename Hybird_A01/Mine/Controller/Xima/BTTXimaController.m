@@ -23,7 +23,6 @@
 #import "BTTXimaSuccessItemModel.h"
 #import "BTTXimaLogController.h"
 #import "BTTXimaRecordController.h"
-#import "BTTCustomerReportController.h"
 
 @interface BTTXimaController ()<BTTElementsFlowLayoutDelegate>
 

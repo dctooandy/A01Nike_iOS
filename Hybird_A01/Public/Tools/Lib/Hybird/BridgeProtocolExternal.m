@@ -200,10 +200,7 @@
         [self.controller.navigationController popToRootViewControllerAnimated:YES];
     }
     else if ([url containsString:@"common/login.htm"] && ![IVNetwork savedUserInfo]){//登录
-        BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
-        loginAndRegister.isWebIn = true;
-        loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
-        [self.controller.navigationController pushViewController:loginAndRegister animated:YES];
+        [self goToLoginPage:true];
     }
     else if ([url containsString:@"customer/withdrawl.htm"]){//提现
         [self.controller.navigationController pushViewController:[BTTWithdrawalController new] animated:YES];
@@ -225,16 +222,35 @@
                     [self.controller.navigationController pushViewController:vc animated:YES];
                 } else {
                     [MBProgressHUD showError:@"请先登录" toView:nil];
-                    BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
-                    [self.controller.navigationController pushViewController:vc animated:YES];
+                    [self goToLoginPage:true];
                 }
             }];
+        }
+    }
+    else if ([url containsString:@"common/switch_account.htm"]) {
+        if ([IVNetwork savedUserInfo] && [[IVNetwork savedUserInfo].uiMode isEqual:@"CNY"]) {
+            dispatch_time_t dipatchTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5));
+            dispatch_after(dipatchTime, dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"changeModeNotification" object:nil];
+            });
+            tabVC.selectedIndex = 4;
+            [self.controller.navigationController popToRootViewControllerAnimated:YES];
+        } else {
+            [MBProgressHUD showError:@"请先登录" toView:nil];
+            [self goToLoginPage:true];
         }
     }
     else {
         should = NO;
     }
     return should;
+}
+
+-(void)goToLoginPage:(BOOL)isWebIn {
+    BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+    vc.isWebIn = isWebIn;
+    vc.registerOrLoginType = BTTRegisterOrLoginTypeLogin;
+    [self.controller.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)checkAccount:(NSDictionary *)params {
