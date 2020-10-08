@@ -634,6 +634,7 @@
             [strongSelf.navigationController popToRootViewControllerAnimated:NO];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
             [BTTUserStatusManager logoutSuccess];
             strongSelf.saveMoneyCount = 0;
             [strongSelf loadPaymentDefaultData];
