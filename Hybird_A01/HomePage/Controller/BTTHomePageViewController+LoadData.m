@@ -78,6 +78,22 @@ static const char *BTTNextGroupKey = "nextGroup";
     });
 }
 
+-(void)loadBiBiCun {
+    [IVNetwork requestPostWithUrl:BBTBiBiCunAlert paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString * contentStr = result.body;
+            if (contentStr.length != 0) {
+                NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                NSString * dateStr = [dateFormatter stringFromDate:[NSDate date]];
+                [[NSUserDefaults standardUserDefaults] setObject:dateStr forKey:BTTBiBiCunDate];
+                [self showBiBiCunPopView:result.body];
+            }
+        }
+    }];
+}
+
 // 博币数量查询
 - (void)loadLuckyWheelCoinStatus {
     

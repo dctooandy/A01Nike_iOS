@@ -14,6 +14,7 @@
 
 -(void)reSendIVPushRequestIpsSuperSign:(NSString *)customerId;
 
+-(void)jumpToTabIndex:(NSInteger )type;
 
 @end
 

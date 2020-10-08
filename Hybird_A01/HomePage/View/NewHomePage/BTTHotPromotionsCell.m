@@ -51,9 +51,11 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    BTTPromotionModel *model = self.promotions[indexPath.row];
-    if (self.clickEventBlock) {
-        self.clickEventBlock(model);
+    if (self.promotions.count > indexPath.row) {
+        BTTPromotionModel *model = self.promotions[indexPath.row];
+        if (self.clickEventBlock) {
+            self.clickEventBlock(model);
+        }
     }
 }
 

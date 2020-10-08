@@ -643,7 +643,6 @@
 		3AFCD7D121AD179600B136C1 /* BTTVideoGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */; };
 		410997F9251DC870001FA895 /* BTTDepositRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410997F8251DC870001FA895 /* BTTDepositRecordCell.xib */; };
 		410997FB251DC876001FA895 /* BTTDepositRecordHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410997FA251DC876001FA895 /* BTTDepositRecordHeaderCell.xib */; };
-		413622DE24F39260007FAC71 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		413DF78E25010780005ABCC6 /* BTTMeHeaderLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 413DF78D25010780005ABCC6 /* BTTMeHeaderLoginCell.xib */; };
 		413DF79025010787005ABCC6 /* BTTMeHeadernNicknameLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 413DF78F25010787005ABCC6 /* BTTMeHeadernNicknameLoginCell.xib */; };
 		413E324E251B3520000804E2 /* BTTCreditRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413E324B251B3520000804E2 /* BTTCreditRecordController.m */; };
@@ -709,6 +708,9 @@
 		418F756F251D94A400DF4A71 /* BTTXmTransferRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 418F756E251D94A400DF4A71 /* BTTXmTransferRecordModel.m */; };
 		419AEC5A250F64F100D089DD /* BTTBJLPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 419AEC57250F64F000D089DD /* BTTBJLPopView.m */; };
 		419AEC5B250F64F100D089DD /* BTTBJLPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419AEC59250F64F100D089DD /* BTTBJLPopView.xib */; };
+		41BC7100252D6509003944ED /* BTTBiBiCunPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BC70FD252D6509003944ED /* BTTBiBiCunPopView.m */; };
+		41BC7101252D6509003944ED /* BTTBiBiCunPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BC70FE252D6509003944ED /* BTTBiBiCunPopView.xib */; };
+		41BF090E252EB6D0004D233D /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_A01.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
@@ -1960,6 +1962,9 @@
 		419AEC57250F64F000D089DD /* BTTBJLPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTBJLPopView.m; sourceTree = "<group>"; };
 		419AEC58250F64F100D089DD /* BTTBJLPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTBJLPopView.h; sourceTree = "<group>"; };
 		419AEC59250F64F100D089DD /* BTTBJLPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTBJLPopView.xib; sourceTree = "<group>"; };
+		41BC70FD252D6509003944ED /* BTTBiBiCunPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTBiBiCunPopView.m; sourceTree = "<group>"; };
+		41BC70FE252D6509003944ED /* BTTBiBiCunPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTBiBiCunPopView.xib; sourceTree = "<group>"; };
+		41BC70FF252D6509003944ED /* BTTBiBiCunPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTBiBiCunPopView.h; sourceTree = "<group>"; };
 		62DAB42824C569F6001F16B4 /* Hybird_A01.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hybird_A01.entitlements; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_A01.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_A01.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
@@ -2243,7 +2248,7 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
-				413622DE24F39260007FAC71 /* libboringssl_simulator.a in Frameworks */,
+				41BF090E252EB6D0004D233D /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -3814,6 +3819,9 @@
 				419AEC58250F64F100D089DD /* BTTBJLPopView.h */,
 				419AEC57250F64F000D089DD /* BTTBJLPopView.m */,
 				419AEC59250F64F100D089DD /* BTTBJLPopView.xib */,
+				41BC70FF252D6509003944ED /* BTTBiBiCunPopView.h */,
+				41BC70FD252D6509003944ED /* BTTBiBiCunPopView.m */,
+				41BC70FE252D6509003944ED /* BTTBiBiCunPopView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5316,6 +5324,7 @@
 				D599252B21AFF23B001E885A /* CNPayVC.xib in Resources */,
 				3A5AE6E722D6E22A0013E8A3 /* LIVLibraryItem@2x.png in Resources */,
 				3A6D59002390E60800C658FC /* BTTShareNoticeView.xib in Resources */,
+				41BC7101252D6509003944ED /* BTTBiBiCunPopView.xib in Resources */,
 				3A11AE132182AAB300B1AFF4 /* BTTPTTransferNewCell.xib in Resources */,
 				3A8F518B215F77AC0069D1B3 /* intro_2.jpg in Resources */,
 				3A5AE6A222D6E22A0013E8A3 /* LIVLocationItem@3x.png in Resources */,
@@ -5868,6 +5877,7 @@
 				D339CE9C24C03CB7009ACD1C /* OTCInsideModel.m in Sources */,
 				3A8D6E9821633D3E000530DF /* CLive800Manager.m in Sources */,
 				4184DE10251B32E500D433D4 /* BTTCreditRecordHeaderCell.m in Sources */,
+				41BC7100252D6509003944ED /* BTTBiBiCunPopView.m in Sources */,
 				4184DE02251B329E00D433D4 /* BTTWithdrawHeaderTwoCell.m in Sources */,
 				3A11ADFE2181B72700B1AFF4 /* BTTWithdrawalCardSelectCell.m in Sources */,
 				3AE1EAE82180034C0073A32D /* BTTCardInfoAddCell.m in Sources */,
@@ -6072,7 +6082,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.156;
+				MARKETING_VERSION = 3.2.157;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btta01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6114,7 +6124,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.156;
+				MARKETING_VERSION = 3.2.157;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btta01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

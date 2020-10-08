@@ -128,7 +128,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 /**********************************************通知常量*******************************************************/
 
 #define BTTShowAccountGride                        @"BTTShowAccountGride"
-
+#define BTTBiBiCunDate                             @"BTTBiBiCunDate"
 #define BTTShareNoticeTag                          @"BTTShareNoticeTag"
 
 //Flurry
@@ -463,6 +463,9 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTDeleteXmRecord                          @"xm/deleteRequest"
 //客户报表 - 銀行卡更改
 #define BTTCustomerReportBank                      @"account/queryModifyBankRequests"
+
+//優惠活動 - 筆筆存
+#define BBTBiBiCunAlert                            @"_extra_/api/v1/activity/usdtFree2/alert"
 
 /********************************************常用宏*********************************************************/
 

@@ -301,4 +301,27 @@
     return YES;
 }
 
+- (void)jumpToTabIndex:(NSInteger )type {
+    
+    switch (type) {
+        case 0:  // 首页
+            [self.tabVC.myTabbar setSeletedIndex:0];
+            break;
+        case 1:
+            [self.tabVC.myTabbar setSeletedIndex:1];
+            break;
+        case 2:
+            [self.tabVC.myTabbar setSeletedIndex:2];
+            break;
+        case 3:  // 優惠
+            [self.tabVC.myTabbar setSeletedIndex:3];
+            break;
+        case 4:  // 會員中心
+            [self.tabVC.myTabbar setSeletedIndex:4];
+            break;
+        default:
+            break;
+    }
+}
+
 @end

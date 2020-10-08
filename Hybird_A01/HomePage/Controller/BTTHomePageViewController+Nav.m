@@ -29,6 +29,8 @@
 #import "UIImage+GIF.h"
 #import <IVCacheLibrary/IVCacheWrapper.h>
 #import "BTTActionSheet.h"
+#import "BTTBiBiCunPopView.h"
+#import "AppDelegate.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
@@ -111,6 +113,22 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     };
 }
 
+-(void)showBiBiCunPopView:(NSString *)contentStr {
+    BTTBiBiCunPopView *customView = [BTTBiBiCunPopView viewFromXib];
+    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    customView.contentStr = contentStr;
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    customView.btnBlock = ^(UIButton * _Nullable btn) {
+        AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        [delegate jumpToTabIndex:4];
+        [popView dismiss];
+    };
+}
 
 - (void)logoutSuccess:(NSNotification *)notifi {
     self.isLogin = NO;

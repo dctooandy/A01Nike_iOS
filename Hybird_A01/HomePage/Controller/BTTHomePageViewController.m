@@ -134,6 +134,10 @@
     [self.collectionView reloadData];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork savedUserInfo]) {
+        NSDate * saveDate = [PublicMethod transferDateStringToDate:[[NSUserDefaults standardUserDefaults] objectForKey:BTTBiBiCunDate]];
+        if ([IVNetwork savedUserInfo].starLevel >= 2 && (![PublicMethod isDateToday:saveDate] || saveDate == nil)) {
+            [self loadBiBiCun];
+        }
         [BTTHttpManager requestUnReadMessageNum:nil];
         NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
         if (![NSDate isToday:timestamp]) {
@@ -169,6 +173,7 @@
 #pragma mark - 換幣種帳號banner不同所以要刷新
 -(void)removeBannerData {
     [self.imageUrls removeAllObjects];
+    [self.promotions removeAllObjects];
 }
 
 -(void)reloadBanner {

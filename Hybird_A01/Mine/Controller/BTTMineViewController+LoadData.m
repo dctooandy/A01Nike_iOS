@@ -153,7 +153,7 @@
                     CNPaymentModel *model = [CNPaymentModel yy_modelWithJSON:dict];
                     [payments addObject:model];
                     //bigData
-                    if ([model.payTypeName isEqualToString:@"OTC"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
+                    if ([model.payTypeName isEqualToString:@"OTC"]) {
                         BTTMeMainModel *buyModel = [BTTMeMainModel new];
                         buyModel.name = @"购买USDT";
                         buyModel.iconName = @"buy_otc_tab";
@@ -170,7 +170,7 @@
                         mainModel.desc = @"扫码转币";
                         [self.bigDataSoure insertObject:mainModel atIndex:1];
                     }
-                    if ([model.payTypeName isEqualToString:@"小金库"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
+                    if ([model.payTypeName isEqualToString:@"小金库"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
                         mainModel.name = @"小金库";
                         mainModel.iconName = @"me_dcbox";

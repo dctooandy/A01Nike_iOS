@@ -496,17 +496,24 @@
     }
     if (indexPath.row == self.saveMoneyCount + 3) {
         if (self.isCompletePersonalInfo) {
-            if ([IVNetwork savedUserInfo].bankCardNum > 0 || [IVNetwork savedUserInfo].usdtNum > 0||[IVNetwork savedUserInfo].bfbNum>0||[IVNetwork savedUserInfo].dcboxNum>0) {
+            if ([IVNetwork savedUserInfo].bankCardNum > 0
+                || [IVNetwork savedUserInfo].usdtNum > 0
+                || [IVNetwork savedUserInfo].bfbNum > 0
+                || [IVNetwork savedUserInfo].dcboxNum > 0) {
+                
                 NSInteger usdtCount = [IVNetwork savedUserInfo].usdtNum;
+                NSInteger dcboxCount = [IVNetwork savedUserInfo].dcboxNum;
+                NSInteger btcCount = [IVNetwork savedUserInfo].btcNum;
                 BOOL isBlackNineteen = [[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"];
                 
-                if (isBlackNineteen&&usdtCount==0&&[IVNetwork savedUserInfo].btcNum==0) {
-                    [MBProgressHUD showMessagNoActivity:@"请先绑定USDT或BTC钱包" toView:nil];
+                if (isBlackNineteen && usdtCount == 0 && dcboxCount == 0 && btcCount == 0) {
+                    [MBProgressHUD showMessagNoActivity:@"请先绑定小金库，USDT钱包或BTC钱包" toView:nil];
+                    BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+                    [self.navigationController pushViewController:vc animated:YES];
                     return;
                 }
                 BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
-                
                 
             } else {
                 [MBProgressHUD showMessagNoActivity:@"请先绑定银行卡" toView:nil];

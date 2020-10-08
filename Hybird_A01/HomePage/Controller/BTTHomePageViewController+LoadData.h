@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showMidAutumnPopView;
 
-
+-(void)loadBiBiCun;
 @end
 
 NS_ASSUME_NONNULL_END

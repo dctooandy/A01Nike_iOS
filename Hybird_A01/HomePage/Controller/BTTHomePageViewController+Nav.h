@@ -37,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showNewAccountGrideView;
 
+-(void)showBiBiCunPopView:(NSString *)contentStr;
+
 - (void)setupFloatWindow;
 
 @end
