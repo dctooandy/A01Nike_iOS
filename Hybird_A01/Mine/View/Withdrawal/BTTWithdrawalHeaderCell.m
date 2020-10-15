@@ -19,8 +19,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.tipLabel.text = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"可取金额(USDT)" : @"可取金额(元)";
-//    self.limitLabel.text = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"取款限额:1USDT-143万USDT,全额投注即可申请取款" : @"取款限额:100-1000万RMB,全额投注即可申请取款";
-    
 }
 
 - (void)setTotalAvailable:(NSString *)totalAvailable {

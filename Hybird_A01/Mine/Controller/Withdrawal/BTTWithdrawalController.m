@@ -83,12 +83,12 @@
         BTTWithdrawalHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalHeaderCell" forIndexPath:indexPath];
         cell.totalAvailable = self.totalAvailable;
         if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-            cell.limitLabel.text = @"取款限额:1USDT-143万USDT,未享受优惠全额投注即可取款";
+            cell.limitLabel.text = @"取款限额:5USDT-143万USDT,全额投注即可申请取款";
         } else {
             if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]) {
-                cell.limitLabel.text = @"取款限额:100-1000万RMB,未享受优惠全额投注即可取款";
+                cell.limitLabel.text = @"取款限额:100-1000万RMB,全额投注即可申请取款";
             } else {
-                cell.limitLabel.text = @"取款限额:100-1000万RMB,未享受优惠全额投注即可取款";
+                cell.limitLabel.text = @"取款限额:100-1000万RMB,全额投注即可申请取款";
             }
         }
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
@@ -197,7 +197,7 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     if (indexPath.row != self.sheetDatas.count) {
         if (indexPath.row==self.sheetDatas.count-1&&![self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]) {
-            [self submitWithDraw];
+//            [self submitWithDraw];
         }else{
             BTTMeMainModel *model = self.sheetDatas[indexPath.row];
             if ([model.name isEqualToString:@"取款至"]) {
@@ -278,7 +278,7 @@
     }
     CGFloat amount = [self.amount doubleValue];
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-        BOOL enable = amount >= 1 && amount <= 1430000;
+        BOOL enable = amount >= 5 && amount <= 1430000;
         [self getSubmitBtn].enabled = enable;
     }else{
         BOOL enable = amount >= limitNum && amount <= 10000000;
@@ -436,8 +436,8 @@
         [MBProgressHUD showError:[NSString stringWithFormat:@"最少%ld元", limitNum] toView:nil];
         return;
     }
-    if (self.amount.floatValue < 1 && [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-        [MBProgressHUD showError:@"最少1USDT" toView:nil];
+    if (self.amount.floatValue < 5 && [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+        [MBProgressHUD showError:@"最少5USDT" toView:nil];
         return;
     }
     if (self.canWithdraw>0) {

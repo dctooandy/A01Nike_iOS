@@ -123,7 +123,7 @@
     NSArray *names3 = @[@"金额",@"比特币",@"取款至",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
     NSArray *names4 = @[@"金额",@"预估到账",@"取款至",@"",@"",@""];
     
-    NSString *pString = isUsdt ? @"最少1USDT" : @"最少100元";
+    NSString *pString = isUsdt ? @"单笔取款限额5-143万USDT" : @"最少100元";
     if (!isUsdt && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
         pString = @"最少100元";
     }
@@ -133,7 +133,7 @@
     NSArray *placeholders4 = @[pString,@"USDT",@"***银行-尾号*****",@"",@"",@""];
     NSArray *heights1 = @[@205.0,@15.0];
     NSArray *heights3 = @[@44.0,@44.0,@44.0,@100.0];
-    NSArray *heights4 = @[@44.0,@44.0,@44,@44,@27,@240.0];
+    NSArray *heights4 = @[@44.0,@44.0,@44,@44,@28,@240.0];
     
     NSArray *canEdits1 = @[@NO,@NO];
     NSArray *canEdits3 = @[@YES,@NO,@NO,@NO];

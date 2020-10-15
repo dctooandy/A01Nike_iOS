@@ -52,11 +52,25 @@
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:ALPHANUM] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         return [string isEqualToString:filtered];
-    }else{
+    } else if ([self.model.name isEqualToString:@"金额"] && [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+        NSMutableString * futureString = [NSMutableString stringWithString:textField.text];
+        [futureString insertString:string atIndex:range.location];
+        NSInteger flag = 0;
+        const NSInteger limited = 2;//小数点后需要限制的个数
+        for (int i = (int)(futureString.length - 1); i>=0; i--) {
+            if ([futureString characterAtIndex:i] == '.') {
+                if (flag > limited) {
+                    [MBProgressHUD showError:@"取款金额仅支持小数点后两位" toView:nil];
+                    return NO;
+                }
+                break;
+            }
+            flag++;
+        }
+        return YES;
+    } else {
         return YES;
     }
-    
-    
 }
 
 - (void)setModel:(BTTMeMainModel *)model {

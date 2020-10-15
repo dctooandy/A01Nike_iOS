@@ -17,6 +17,10 @@
 @implementation BTTAGQJViewController
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if (!self.isRemoved) {
+        self.isRemoved = true;
+        [[IVGameManager sharedManager].agqjVC removeObserver:self forKeyPath:@"loadStatus" context:nil];
+    }
 }
 - (BOOL)shouldAutorotate
 {
@@ -76,10 +80,6 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    if (!self.isRemoved) {
-        self.isRemoved = true;
-        [[IVGameManager sharedManager].agqjVC removeObserver:self forKeyPath:@"loadStatus" context:nil];
-    }
 //    [BTTAGQJViewController addGameViewToWindow];
 }
 - (void)didReceiveMemoryWarning {
