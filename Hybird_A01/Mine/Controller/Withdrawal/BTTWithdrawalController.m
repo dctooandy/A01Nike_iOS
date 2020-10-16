@@ -46,8 +46,14 @@
     self.usdtAmount = @"";
     self.password = @"";
     self.totalAvailable = @"-";
+    self.dcboxLimit = @"";
+    self.usdtLimit = @"";
     [self setupCollectionView];
-    [self loadMainData];
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+        [self getLimitUSDT];
+    } else {
+        [self loadMainData];
+    }
     [self refreshBankList];
     [self requestSellUsdtSwitch];
 }
@@ -84,9 +90,9 @@
         cell.totalAvailable = self.totalAvailable;
         if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
             if ([self.bankList[self.selectIndex].accountType isEqualToString:@"DCBOX"]) {
-                cell.limitLabel.text = @"取款限额:5USDT-143万USDT,全额投注即可申请取款";
+                cell.limitLabel.text = [NSString stringWithFormat:@"取款限额:%@USDT-143万USDT,全额投注即可申请取款", self.dcboxLimit];
             } else {
-                cell.limitLabel.text = @"取款限额:15USDT-143万USDT,全额投注即可申请取款";
+                cell.limitLabel.text = [NSString stringWithFormat:@"取款限额:%@USDT-143万USDT,全额投注即可申请取款", self.usdtLimit];;
             }
             
         } else {
@@ -283,9 +289,9 @@
     if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
         cnyLimitNum = 100;
     }
-    NSInteger usdtLimitNum = 15;
+    NSInteger usdtLimitNum = [self.usdtLimit integerValue];
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && [self.bankList[self.selectIndex].accountType isEqualToString:@"DCBOX"]) {
-        usdtLimitNum = 5;
+        usdtLimitNum = [self.dcboxLimit integerValue];
     }
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         BOOL enable = amount >= usdtLimitNum && amount <= 1430000;
@@ -446,9 +452,9 @@
         [MBProgressHUD showError:[NSString stringWithFormat:@"最少%ld元", cnyLimitNum] toView:nil];
         return;
     }
-    NSInteger usdtLimitNum = 15;
+    NSInteger usdtLimitNum = [self.usdtLimit integerValue];
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && [self.bankList[self.selectIndex].accountType isEqualToString:@"DCBOX"]) {
-        usdtLimitNum = 5;
+        usdtLimitNum = [self.dcboxLimit integerValue];
     }
     if (self.amount.floatValue < usdtLimitNum && [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         [MBProgressHUD showError:[NSString stringWithFormat:@"最少%ld元", usdtLimitNum] toView:nil];

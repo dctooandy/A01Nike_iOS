@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *btcRate;
 @property (nonatomic, copy) NSString *sellUsdtLink;
 @property (nonatomic, assign) BOOL isSellUsdt;
+@property (nonatomic, copy) NSString * dcboxLimit;
+@property (nonatomic, copy) NSString * usdtLimit;
 @end
 
 NS_ASSUME_NONNULL_END

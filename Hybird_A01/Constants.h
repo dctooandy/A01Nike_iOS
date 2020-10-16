@@ -439,6 +439,9 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 #define BTTDynamicQuery                         @"dynamic/query"
 
+//USDT取款限額
+#define BTTUsdtLimit                               @"_extra_/api/v1/getLimitUSDT"
+
 //客户报表 - 存款
 #define BTTCustomerReportDeposit                   @"deposit/queryTrans"
 //客户报表 - 存款 - 删除记录

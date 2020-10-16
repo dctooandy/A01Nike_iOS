@@ -17,7 +17,7 @@
 @implementation BTTAGQJViewController
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    if (!self.isRemoved) {
+    if (!self.isRemoved && self.isViewLoaded) {
         self.isRemoved = true;
         [[IVGameManager sharedManager].agqjVC removeObserver:self forKeyPath:@"loadStatus" context:nil];
     }

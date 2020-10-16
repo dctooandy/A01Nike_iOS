@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)requestSellUsdtSwitch;
 
-
+-(void)getLimitUSDT;
 
 @end
 
