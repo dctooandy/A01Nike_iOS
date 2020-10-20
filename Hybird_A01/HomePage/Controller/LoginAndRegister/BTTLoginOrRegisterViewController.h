@@ -44,6 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) BTTLoginInfoView *loginView;
 
 @property (nonatomic, assign) BOOL isWebIn;
+
+@property (nonatomic, strong) NSMutableArray * specifyWordArr;
+@property (nonatomic, strong) NSMutableArray * pressLocationArr;
 @end
 
 NS_ASSUME_NONNULL_END

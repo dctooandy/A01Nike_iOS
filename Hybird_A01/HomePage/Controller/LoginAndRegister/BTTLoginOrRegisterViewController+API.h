@@ -28,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)MobileNoAndCodeRegisterAPIModel:(BTTCreateAPIModel *)model;
 
 - (void)onekeyRegisteAccount;
+
+-(void)checkChineseCaptcha:(NSString *)captchaStr;
 @end
 
 NS_ASSUME_NONNULL_END

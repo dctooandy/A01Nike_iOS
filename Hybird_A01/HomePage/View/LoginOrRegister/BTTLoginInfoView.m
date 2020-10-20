@@ -18,6 +18,10 @@
 @property (nonatomic, strong) UIButton *forgetPwdBtn;
 @property (nonatomic, strong) UIButton *registerBtn;
 @property (nonatomic, strong) UIButton *loginBtn;
+@property (nonatomic, strong) UIButton *showBtn;
+@property (nonatomic, strong) UILabel * noticeLab;
+@property (nonatomic, strong) UILabel * pressNumLab;
+@property (nonatomic, assign) NSInteger pressNum;
 @end
 
 @implementation BTTLoginInfoView
@@ -26,6 +30,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         _isCode = NO;
+        self.pressNum = 0;
         UIView *accountView = [[UIView alloc]initWithFrame:CGRectMake(36, 0, SCREEN_WIDTH - 72, 60)];
 //        accountView.backgroundColor = [UIColor yellowColor];
         [self addSubview:accountView];
@@ -109,51 +114,60 @@
         pwdLayer.frame = CGRectMake(0, 59.5, SCREEN_WIDTH - 72, 0.5);
         [pwdView.layer addSublayer:pwdLayer];
 
-        UIView *codeImgView = [[UIView alloc]initWithFrame:CGRectMake(36, 120, SCREEN_WIDTH - 72, 60)];
+        UIView *codeImgView = [[UIView alloc]init];
         codeImgView.hidden = YES;
         [self addSubview:codeImgView];
         _codeImgView = codeImgView;
-
-        UIImageView *codeLeftImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"login_verify"]];
-        [codeImgView addSubview:codeLeftImg];
-        [codeLeftImg mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(codeImgView.mas_left);
-            make.top.mas_equalTo(codeImgView.mas_top).offset(37);
-            make.width.mas_equalTo(16);
-            make.height.mas_equalTo(18);
+        
+        UIButton * showBtn = [[UIButton alloc] init];
+        [showBtn setTitle:@"点此进行验证" forState:UIControlStateNormal];
+        [showBtn setImage:[UIImage imageNamed:@"ic_login_show_captcha_icon"] forState:UIControlStateNormal];
+        [showBtn setTitleColor:[UIColor brownColor] forState:UIControlStateNormal];
+        [showBtn setBackgroundColor:[UIColor whiteColor]];
+        showBtn.layer.borderColor = [UIColor brownColor].CGColor;
+        showBtn.layer.borderWidth = 2.0;
+        showBtn.layer.cornerRadius = 5.0;
+        showBtn.clipsToBounds = true;
+        _showBtn = showBtn;
+        [showBtn addTarget:self action:@selector(regetCodeImage) forControlEvents:UIControlEventTouchUpInside];
+        [codeImgView addSubview:showBtn];
+        [showBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(codeImgView);
+            make.top.equalTo(codeImgView).offset(5);
+            make.height.mas_equalTo(50);
         }];
-
-        UIButton *imgCodeBtn = [[UIButton alloc]init];
-        [imgCodeBtn addTarget:self action:@selector(regetCodeImage) forControlEvents:UIControlEventTouchUpInside];
-        //        imgCodeBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+        
+        UIButton * imgCodeBtn = [[UIButton alloc] init];
+        imgCodeBtn.hidden = true;
+        imgCodeBtn.adjustsImageWhenHighlighted = NO;
+        [imgCodeBtn addTarget:self action:@selector(savePressLocation:event:) forControlEvents:UIControlEventTouchUpInside];
         [codeImgView addSubview:imgCodeBtn];
         _imgCodeBtn = imgCodeBtn;
         [imgCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(codeImgView.mas_right);
-            make.top.mas_equalTo(codeImgView.mas_top).offset(25);
-            make.width.mas_equalTo(80);
-            make.height.mas_equalTo(30);
+            make.centerX.equalTo(showBtn);
+            make.bottom.mas_equalTo(showBtn.mas_top);
+            make.height.mas_equalTo(100);
         }];
-        //图形验证码
-        UITextField *codeImgField = [[UITextField alloc]init];
-        codeImgField.font = [UIFont systemFontOfSize:16];
-        codeImgField.textColor = [UIColor whiteColor];
-        NSAttributedString *attrStringCode = [[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:
-                                              @{ NSForegroundColorAttributeName: [UIColor whiteColor],
-                                                 NSFontAttributeName: codeImgField.font }];
-        codeImgField.attributedPlaceholder = attrStringCode;
-        [codeImgView addSubview:codeImgField];
-        _imgCodeField = codeImgField;
-        [codeImgField mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(imgCodeBtn.mas_left);
-            make.top.mas_equalTo(codeImgView.mas_top).offset(30);
-            make.left.mas_equalTo(codeLeftImg.mas_right).offset(12);
-            make.height.mas_equalTo(30);
+        
+        UIButton * refreshBtn = [[UIButton alloc] init];
+        [refreshBtn setImage:[UIImage imageNamed:@"bjl_refresh"] forState:UIControlStateNormal];
+        refreshBtn.adjustsImageWhenHighlighted = NO;
+        [refreshBtn addTarget:self action:@selector(refreshAction) forControlEvents:UIControlEventTouchUpInside];
+        [imgCodeBtn addSubview:refreshBtn];
+        [refreshBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.right.equalTo(self.imgCodeBtn);
+            make.width.height.offset(30);
         }];
-        CALayer *codeLayer = [CALayer new];
-        codeLayer.backgroundColor = [UIColor whiteColor].CGColor;
-        codeLayer.frame = CGRectMake(0, 59.5, SCREEN_WIDTH - 72, 0.5);
-        [codeImgView.layer addSublayer:codeLayer];
+        
+        UILabel * noticeLab = [[UILabel alloc] init];
+        noticeLab.backgroundColor = [UIColor colorWithRed: 0.00 green: 0.00 blue: 0.00 alpha: 0.60];
+        noticeLab.textColor = [UIColor whiteColor];
+        noticeLab.textAlignment = NSTextAlignmentCenter;
+        [imgCodeBtn addSubview:noticeLab];
+        _noticeLab = noticeLab;
+        [noticeLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.equalTo(imgCodeBtn);
+        }];
 
         UIButton *forgetPwdBtn = [[UIButton alloc]init];
         [forgetPwdBtn setTitle:@"忘记账号,密码？" forState:UIControlStateNormal];
@@ -209,15 +223,25 @@
     return self;
 }
 
+-(void)setNoticeStrArr:(NSArray *)noticeStrArr {
+    _noticeStrArr = noticeStrArr;
+    NSMutableString * wordStr = [[NSMutableString alloc] init];
+    for (NSString * str in _noticeStrArr) {
+        [wordStr appendString:[NSString stringWithFormat:@"[%@]", str]];
+    }
+    self.noticeLab.text = [NSString stringWithFormat:@"请“依次”点击%@", wordStr];
+}
+
 -(void)handleCodeImageView{
     self.codeImgView.hidden = NO;
     [self.codeImgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.pwdView.mas_bottom);
-        make.left.right.mas_equalTo(self.pwdView);
+        make.centerX.mas_equalTo(self.pwdView);
+        make.width.mas_equalTo(300);
         make.height.mas_equalTo(60);
     }];
     [self.forgetPwdBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.pwdView.mas_bottom).offset(77);
+        make.top.mas_equalTo(self.pwdView.mas_bottom).offset(60);
     }];
 }
 
@@ -230,9 +254,100 @@
 }
 
 - (void)regetCodeImage{
+    [self removeLocationView];
     if (self.refreshCodeImage) {
+        [self.showBtn setTitle:@"点击图片进行验证" forState:UIControlStateNormal];
+        self.imgCodeBtn.hidden = false;
+        [self.codeImgView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(160);
+        }];
+        [self.showBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.codeImgView).offset(110);
+        }];
+        [self.forgetPwdBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.pwdView.mas_bottom).offset(170);
+        }];
         self.refreshCodeImage();
     }
+}
+
+-(void)savePressLocation:(UIButton *)sender event:(UIEvent *)event {
+    self.pressNum += 1;
+    UITouch *touch = [[event touchesForView:sender] anyObject];
+    CGPoint point = [touch locationInView:sender];
+    NSDictionary * dict = @{@"x":@(point.x), @"y":@(point.y)};
+    [self addLocationImg:point.x y:point.y num:self.pressNum];
+    if (self.pressLocation) {
+        self.pressLocation(dict);
+    }
+}
+
+-(void)addLocationImg:(CGFloat)x y:(CGFloat)y num:(NSInteger)num {
+    UIImage * img = [UIImage imageNamed:@"ic_login_captcha_location"];
+    CGSize size = CGSizeMake(img.size.width, img.size.height);
+    UIImageView * locImageView = [[UIImageView alloc] init];
+    locImageView.tag = num;
+    locImageView.frame = CGRectMake(x-size.width/2, y-size.height, size.width, size.height);
+    locImageView.image = img;
+    [self.imgCodeBtn addSubview:locImageView];
+    
+    UILabel * pressNumLab = [[UILabel alloc] init];
+    pressNumLab.font = [UIFont systemFontOfSize:14];
+    pressNumLab.text = [NSString stringWithFormat:@"%ld", num];
+    pressNumLab.backgroundColor = [UIColor clearColor];
+    pressNumLab.textColor = [UIColor whiteColor];
+    pressNumLab.textAlignment = NSTextAlignmentCenter;
+    [locImageView addSubview:pressNumLab];
+    _pressNumLab = pressNumLab;
+    [pressNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.equalTo(locImageView);
+    }];
+}
+
+-(void)removeLocationView {
+    self.pressNum = 0;
+    for (UIView * subView in self.imgCodeBtn.subviews) {
+        if ([subView isKindOfClass:[UIImageView class]] && subView.tag > 0) {
+            [subView removeFromSuperview];
+        }
+    }
+}
+
+-(void)refreshAction {
+    if (self.refreshBtnAction) {
+        self.refreshBtnAction();
+    }
+}
+
+-(void)checkChineseCaptchaSuccess {
+    [self.showBtn setTitle:@"验证成功" forState:UIControlStateNormal];
+    [self.showBtn setTitleColor:[UIColor colorWithRed: 0.45 green: 0.96 blue: 0.62 alpha: 1.00] forState:UIControlStateNormal];
+    self.showBtn.layer.borderColor = [UIColor colorWithRed: 0.45 green: 0.96 blue: 0.62 alpha: 1.00].CGColor;
+    [self.showBtn setImage:[UIImage imageNamed:@"ic_login_captcha_success"] forState:UIControlStateNormal];
+    self.showBtn.userInteractionEnabled = false;
+    self.imgCodeBtn.hidden = true;
+    [self.codeImgView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(60);
+    }];
+    [self.showBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.codeImgView).offset(5);
+    }];
+    [self.forgetPwdBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.pwdView.mas_bottom).offset(60);
+    }];
+}
+
+-(void)checkChineseCaptchaAgain {
+    [self.showBtn setTitle:@"点此进行验证" forState:UIControlStateNormal];
+    [self.showBtn setTitleColor:[UIColor brownColor] forState:UIControlStateNormal];
+    self.showBtn.layer.borderColor = [UIColor brownColor].CGColor;
+    [self.showBtn setImage:[UIImage imageNamed:@"ic_login_show_captcha_icon"] forState:UIControlStateNormal];
+    self.showBtn.userInteractionEnabled = true;
+    self.ticketStr = @"";
+}
+
+-(void)setTicketStr:(NSString *)ticketStr {
+    _ticketStr = ticketStr;
 }
 
 - (void)setCodeImage:(UIImage *)codeImg{
@@ -251,9 +366,11 @@
     } else if (_pwdTextField.text.length == 0) {
         NSString *errorMsg = _isCode ? @"请输入验证码" : @"请输入密码";
         [MBProgressHUD showError:errorMsg toView:nil];
+    } else if (!self.codeImgView.hidden && self.ticketStr.length == 0) {
+        [MBProgressHUD showError:@"请先完成验证" toView:nil];
     } else {
         if (self.tapLogin) {
-            self.tapLogin(_accountTextField.text, _pwdTextField.text, _isCode,_imgCodeField.text);
+            self.tapLogin(_accountTextField.text, _pwdTextField.text, _isCode, self.ticketStr);
         }
     }
 }

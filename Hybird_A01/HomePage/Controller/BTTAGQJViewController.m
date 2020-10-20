@@ -115,7 +115,7 @@
     self.customView.dismissBlock = ^{
         strongSelf(strongSelf);
         [popView dismiss];
-        if (!strongSelf.isRemoved) {
+        if (!strongSelf.isRemoved && [[IVGameManager sharedManager].agqjVC observationInfo] != nil) {
             strongSelf.isRemoved = true;
             [[IVGameManager sharedManager].agqjVC removeObserver:strongSelf forKeyPath:@"loadStatus" context:nil];
         }

@@ -54,7 +54,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
-    
+    self.pressLocationArr = [[NSMutableArray alloc] init];
     //设置本地视频路径
     NSString *mpath=[[NSBundle mainBundle] pathForResource:@"login_bg_video" ofType:@"mp4"];
     NSURL *url=[NSURL fileURLWithPath:mpath];
@@ -84,7 +84,7 @@
     } else {
         self.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
         self.title = @"立即开户";
-        [self loadVerifyCode];
+//        [self loadVerifyCode];
     }
     
     [self setUpView];
@@ -193,13 +193,31 @@
     loginInfoView.tapRegister = ^{
         strongSelf(strongSelf);
         weaklginView.hidden = YES;
-        [strongSelf loadVerifyCode];
+//        [strongSelf loadVerifyCode];
         strongSelf.fastRegisterView.hidden = NO;
         
     };
     loginInfoView.refreshCodeImage = ^{
-        [weakSelf loadVerifyCode];
+        strongSelf(strongSelf);
+        [strongSelf loadVerifyCode];
     };
+    
+    loginInfoView.pressLocation = ^(NSDictionary * _Nonnull locationDict) {
+        strongSelf(strongSelf);
+        [strongSelf.pressLocationArr addObject:locationDict];
+        if (strongSelf.pressLocationArr.count == strongSelf.specifyWordArr.count) {
+            NSData *data = [NSJSONSerialization dataWithJSONObject:strongSelf.pressLocationArr options:NSJSONWritingPrettyPrinted error:nil];
+            NSString * result = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+            [self checkChineseCaptcha:result];
+        }
+    };
+    
+    loginInfoView.refreshBtnAction = ^{
+        strongSelf(strongSelf);
+        [strongSelf.pressLocationArr removeAllObjects];
+        [strongSelf loadVerifyCode];
+    };
+    
     [self.view addSubview:loginInfoView];
     self.loginView = loginInfoView;
     
@@ -218,7 +236,7 @@
     [self.view addSubview:fastRegisterView];
     _fastRegisterView = fastRegisterView;
     
-    [self loadVerifyCode];
+//    [self loadVerifyCode];
 }
 
 

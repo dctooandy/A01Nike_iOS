@@ -170,17 +170,18 @@
             
         }else{
             [self hideLoading];
+            if ([result.head.errCode isEqualToString:@"GW_800101"]) {
+                [self.loginView handleCodeImageView];
+                return;
+            }
+            [self.pressLocationArr removeAllObjects];
+            [self.loginView checkChineseCaptchaAgain];
             if ([result.head.errMsg isEqualToString:@""]) {
                 [MBProgressHUD showError:@"请输入正确验证码" toView:nil];
                 return;
             }
             if ([result.head.errCode isEqualToString:@"WS_202020"]) {
                 [self showAlertWithLoginName:model.login_name];
-                return;
-            }
-            if ([result.head.errCode isEqualToString:@"GW_800101"]) {
-                [self.loginView handleCodeImageView];
-                [self loadVerifyCode];
                 return;
             }
             if ([result.head.errCode isEqualToString:@"GW_800510"]) {
@@ -580,7 +581,9 @@
 // 图形验证码
 - (void)loadVerifyCode {
     [self showLoading];
-    [IVNetwork requestPostWithUrl:BTTVerifyCaptcha paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+    dict[@"use"] = @2;
+    [IVNetwork requestPostWithUrl:BTTChineseVerifyCaptcha paramters:dict completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         NSLog(@"%@",result.body);
         [self hideLoading];
@@ -599,7 +602,9 @@
                         if (self.loginView.isHidden) {
                             
                         }else{
-                          [self.loginView.imgCodeBtn setImage:decodedImage forState:UIControlStateNormal];
+                            self.specifyWordArr = [[NSMutableArray alloc] initWithArray:result.body[@"specifyWord"]];
+                            self.loginView.noticeStrArr = result.body[@"specifyWord"];
+                            [self.loginView.imgCodeBtn setImage:decodedImage forState:UIControlStateNormal];
                         }
                         
                     });
@@ -608,7 +613,33 @@
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
-      
+        
+    }];
+}
+
+// 驗證漢字圖片驗證碼
+-(void)checkChineseCaptcha:(NSString *)captchaStr {
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"use"] = @2;
+    params[@"captcha"] = captchaStr;
+    params[@"captchaId"] = self.captchaId;
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTCheckChineseCaptcha paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [self hideLoading];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSNumber * validateResult = result.body[@"validateResult"];
+            if ([validateResult integerValue] == 1) {
+                self.loginView.ticketStr = result.body[@"ticket"];
+                [self.loginView checkChineseCaptchaSuccess];
+            } else {
+                [self.pressLocationArr removeAllObjects];
+                [self.loginView removeLocationView];
+                [self loadVerifyCode];
+            }
+        } else {
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
     }];
 }
 

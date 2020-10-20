@@ -258,6 +258,10 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTUserLoginByMobileNo                     @"customer/loginByMobileNo"
 // 生成图片验证
 #define BTTVerifyCaptcha                           @"captcha/generate"
+// 生成漢字图片验证
+#define BTTChineseVerifyCaptcha                    @"captcha/generateCaptcha"
+// 驗證漢字圖片驗證碼
+#define BTTCheckChineseCaptcha                     @"captcha/validateCaptcha"
 // 创建账号
 #define BTTUserRegister                            @"customer/createRealAccount"
 // 手機创建账号
