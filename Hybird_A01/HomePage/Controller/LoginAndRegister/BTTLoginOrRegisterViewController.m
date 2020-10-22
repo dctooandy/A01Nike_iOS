@@ -199,6 +199,7 @@
     };
     loginInfoView.refreshCodeImage = ^{
         strongSelf(strongSelf);
+        [strongSelf.pressLocationArr removeAllObjects];
         [strongSelf loadVerifyCode];
     };
     

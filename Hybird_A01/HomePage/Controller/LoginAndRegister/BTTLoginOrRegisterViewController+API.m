@@ -170,10 +170,6 @@
             
         }else{
             [self hideLoading];
-            if ([result.head.errCode isEqualToString:@"GW_800101"]) {
-                [self.loginView handleCodeImageView];
-                return;
-            }
             [self.pressLocationArr removeAllObjects];
             [self.loginView checkChineseCaptchaAgain];
             if ([result.head.errMsg isEqualToString:@""]) {

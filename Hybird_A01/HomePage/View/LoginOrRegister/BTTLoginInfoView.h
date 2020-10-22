@@ -26,7 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) void(^refreshCodeImage)(void);
 
--(void)handleCodeImageView;
 -(void)checkChineseCaptchaSuccess;
 -(void)checkChineseCaptchaAgain;
 -(void)removeLocationView;

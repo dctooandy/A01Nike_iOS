@@ -115,9 +115,14 @@
         [pwdView.layer addSublayer:pwdLayer];
 
         UIView *codeImgView = [[UIView alloc]init];
-        codeImgView.hidden = YES;
         [self addSubview:codeImgView];
         _codeImgView = codeImgView;
+        [self.codeImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.pwdView.mas_bottom);
+            make.centerX.mas_equalTo(self.pwdView);
+            make.width.mas_equalTo(300);
+            make.height.mas_equalTo(60);
+        }];
         
         UIButton * showBtn = [[UIButton alloc] init];
         [showBtn setTitle:@"点此进行验证" forState:UIControlStateNormal];
@@ -129,7 +134,7 @@
         showBtn.layer.cornerRadius = 5.0;
         showBtn.clipsToBounds = true;
         _showBtn = showBtn;
-        [showBtn addTarget:self action:@selector(regetCodeImage) forControlEvents:UIControlEventTouchUpInside];
+        [showBtn addTarget:self action:@selector(regetCodeImage:) forControlEvents:UIControlEventTouchUpInside];
         [codeImgView addSubview:showBtn];
         [showBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(codeImgView);
@@ -177,7 +182,7 @@
         [self addSubview:forgetPwdBtn];
         _forgetPwdBtn = forgetPwdBtn;
         [forgetPwdBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(pwdView.mas_bottom).offset(17);
+            make.top.mas_equalTo(pwdView.mas_bottom).offset(60);
             make.right.mas_equalTo(pwdView.mas_right);
             make.width.mas_greaterThanOrEqualTo(60);
             make.height.mas_equalTo(15);
@@ -232,19 +237,6 @@
     self.noticeLab.text = [NSString stringWithFormat:@"请“依次”点击%@", wordStr];
 }
 
--(void)handleCodeImageView{
-    self.codeImgView.hidden = NO;
-    [self.codeImgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.pwdView.mas_bottom);
-        make.centerX.mas_equalTo(self.pwdView);
-        make.width.mas_equalTo(300);
-        make.height.mas_equalTo(60);
-    }];
-    [self.forgetPwdBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.pwdView.mas_bottom).offset(60);
-    }];
-}
-
 - (void)showPwdSecurity {
     if (!_isCode) {
         _pwdTextField.secureTextEntry = !_pwdTextField.isSecureTextEntry;
@@ -253,21 +245,36 @@
     }
 }
 
-- (void)regetCodeImage{
+- (void)regetCodeImage:(UIButton *)sender {
+    sender.selected = !sender.selected;
     [self removeLocationView];
-    if (self.refreshCodeImage) {
-        [self.showBtn setTitle:@"点击图片进行验证" forState:UIControlStateNormal];
-        self.imgCodeBtn.hidden = false;
+    if (sender.selected) {
+        if (self.refreshCodeImage) {
+            [self.showBtn setTitle:@"点击图片进行验证" forState:UIControlStateNormal];
+            self.imgCodeBtn.hidden = false;
+            [self.codeImgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(160);
+            }];
+            [self.showBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.codeImgView).offset(110);
+            }];
+            [self.forgetPwdBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.pwdView.mas_bottom).offset(170);
+            }];
+            self.refreshCodeImage();
+        }
+    } else {
+        [self.showBtn setTitle:@"点此进行验证" forState:UIControlStateNormal];
+        self.imgCodeBtn.hidden = true;
         [self.codeImgView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(160);
+            make.height.mas_equalTo(60);
         }];
         [self.showBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.codeImgView).offset(110);
+            make.top.equalTo(self.codeImgView).offset(5);
         }];
         [self.forgetPwdBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.pwdView.mas_bottom).offset(170);
+            make.top.mas_equalTo(self.pwdView.mas_bottom).offset(60);
         }];
-        self.refreshCodeImage();
     }
 }
 
@@ -314,6 +321,7 @@
 }
 
 -(void)refreshAction {
+    [self removeLocationView];
     if (self.refreshBtnAction) {
         self.refreshBtnAction();
     }
