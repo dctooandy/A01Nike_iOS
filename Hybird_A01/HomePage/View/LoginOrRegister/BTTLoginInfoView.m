@@ -18,10 +18,6 @@
 @property (nonatomic, strong) UIButton *forgetPwdBtn;
 @property (nonatomic, strong) UIButton *registerBtn;
 @property (nonatomic, strong) UIButton *loginBtn;
-@property (nonatomic, strong) UIButton *showBtn;
-@property (nonatomic, strong) UILabel * noticeLab;
-@property (nonatomic, strong) UILabel * pressNumLab;
-@property (nonatomic, assign) NSInteger pressNum;
 @end
 
 @implementation BTTLoginInfoView
@@ -30,7 +26,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         _isCode = NO;
-        self.pressNum = 0;
         UIView *accountView = [[UIView alloc]initWithFrame:CGRectMake(36, 0, SCREEN_WIDTH - 72, 60)];
 //        accountView.backgroundColor = [UIColor yellowColor];
         [self addSubview:accountView];
@@ -142,38 +137,6 @@
             make.height.mas_equalTo(50);
         }];
         
-        UIButton * imgCodeBtn = [[UIButton alloc] init];
-        imgCodeBtn.hidden = true;
-        imgCodeBtn.adjustsImageWhenHighlighted = NO;
-        [imgCodeBtn addTarget:self action:@selector(savePressLocation:event:) forControlEvents:UIControlEventTouchUpInside];
-        [codeImgView addSubview:imgCodeBtn];
-        _imgCodeBtn = imgCodeBtn;
-        [imgCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(showBtn);
-            make.bottom.mas_equalTo(showBtn.mas_top);
-            make.height.mas_equalTo(100);
-        }];
-        
-        UIButton * refreshBtn = [[UIButton alloc] init];
-        [refreshBtn setImage:[UIImage imageNamed:@"bjl_refresh"] forState:UIControlStateNormal];
-        refreshBtn.adjustsImageWhenHighlighted = NO;
-        [refreshBtn addTarget:self action:@selector(refreshAction) forControlEvents:UIControlEventTouchUpInside];
-        [imgCodeBtn addSubview:refreshBtn];
-        [refreshBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.right.equalTo(self.imgCodeBtn);
-            make.width.height.offset(30);
-        }];
-        
-        UILabel * noticeLab = [[UILabel alloc] init];
-        noticeLab.backgroundColor = [UIColor colorWithRed: 0.00 green: 0.00 blue: 0.00 alpha: 0.60];
-        noticeLab.textColor = [UIColor whiteColor];
-        noticeLab.textAlignment = NSTextAlignmentCenter;
-        [imgCodeBtn addSubview:noticeLab];
-        _noticeLab = noticeLab;
-        [noticeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.bottom.equalTo(imgCodeBtn);
-        }];
-
         UIButton *forgetPwdBtn = [[UIButton alloc]init];
         [forgetPwdBtn setTitle:@"忘记账号,密码？" forState:UIControlStateNormal];
         [forgetPwdBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -228,15 +191,6 @@
     return self;
 }
 
--(void)setNoticeStrArr:(NSArray *)noticeStrArr {
-    _noticeStrArr = noticeStrArr;
-    NSMutableString * wordStr = [[NSMutableString alloc] init];
-    for (NSString * str in _noticeStrArr) {
-        [wordStr appendString:[NSString stringWithFormat:@"[%@]", str]];
-    }
-    self.noticeLab.text = [NSString stringWithFormat:@"请“依次”点击%@", wordStr];
-}
-
 - (void)showPwdSecurity {
     if (!_isCode) {
         _pwdTextField.secureTextEntry = !_pwdTextField.isSecureTextEntry;
@@ -246,120 +200,13 @@
 }
 
 - (void)regetCodeImage:(UIButton *)sender {
-    sender.selected = !sender.selected;
-    [self removeLocationView];
-    if (sender.selected) {
-        if (self.refreshCodeImage) {
-            [self.showBtn setTitle:@"点击图片进行验证" forState:UIControlStateNormal];
-            self.imgCodeBtn.hidden = false;
-            [self.codeImgView mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(160);
-            }];
-            [self.showBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.top.equalTo(self.codeImgView).offset(110);
-            }];
-            [self.forgetPwdBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.top.mas_equalTo(self.pwdView.mas_bottom).offset(170);
-            }];
-            self.refreshCodeImage();
-        }
-    } else {
-        [self.showBtn setTitle:@"点此进行验证" forState:UIControlStateNormal];
-        self.imgCodeBtn.hidden = true;
-        [self.codeImgView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(60);
-        }];
-        [self.showBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.codeImgView).offset(5);
-        }];
-        [self.forgetPwdBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.pwdView.mas_bottom).offset(60);
-        }];
+    if (self.refreshCodeImage) {
+        self.refreshCodeImage();
     }
-}
-
--(void)savePressLocation:(UIButton *)sender event:(UIEvent *)event {
-    self.pressNum += 1;
-    UITouch *touch = [[event touchesForView:sender] anyObject];
-    CGPoint point = [touch locationInView:sender];
-    NSDictionary * dict = @{@"x":@(point.x), @"y":@(point.y)};
-    [self addLocationImg:point.x y:point.y num:self.pressNum];
-    if (self.pressLocation) {
-        self.pressLocation(dict);
-    }
-}
-
--(void)addLocationImg:(CGFloat)x y:(CGFloat)y num:(NSInteger)num {
-    UIImage * img = [UIImage imageNamed:@"ic_login_captcha_location"];
-    CGSize size = CGSizeMake(img.size.width, img.size.height);
-    UIImageView * locImageView = [[UIImageView alloc] init];
-    locImageView.tag = num;
-    locImageView.frame = CGRectMake(x-size.width/2, y-size.height, size.width, size.height);
-    locImageView.image = img;
-    [self.imgCodeBtn addSubview:locImageView];
-    
-    UILabel * pressNumLab = [[UILabel alloc] init];
-    pressNumLab.font = [UIFont systemFontOfSize:14];
-    pressNumLab.text = [NSString stringWithFormat:@"%ld", num];
-    pressNumLab.backgroundColor = [UIColor clearColor];
-    pressNumLab.textColor = [UIColor whiteColor];
-    pressNumLab.textAlignment = NSTextAlignmentCenter;
-    [locImageView addSubview:pressNumLab];
-    _pressNumLab = pressNumLab;
-    [pressNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(locImageView);
-    }];
-}
-
--(void)removeLocationView {
-    self.pressNum = 0;
-    for (UIView * subView in self.imgCodeBtn.subviews) {
-        if ([subView isKindOfClass:[UIImageView class]] && subView.tag > 0) {
-            [subView removeFromSuperview];
-        }
-    }
-}
-
--(void)refreshAction {
-    [self removeLocationView];
-    if (self.refreshBtnAction) {
-        self.refreshBtnAction();
-    }
-}
-
--(void)checkChineseCaptchaSuccess {
-    [self.showBtn setTitle:@"验证成功" forState:UIControlStateNormal];
-    [self.showBtn setTitleColor:[UIColor colorWithRed: 0.45 green: 0.96 blue: 0.62 alpha: 1.00] forState:UIControlStateNormal];
-    self.showBtn.layer.borderColor = [UIColor colorWithRed: 0.45 green: 0.96 blue: 0.62 alpha: 1.00].CGColor;
-    [self.showBtn setImage:[UIImage imageNamed:@"ic_login_captcha_success"] forState:UIControlStateNormal];
-    self.showBtn.userInteractionEnabled = false;
-    self.imgCodeBtn.hidden = true;
-    [self.codeImgView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(60);
-    }];
-    [self.showBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.codeImgView).offset(5);
-    }];
-    [self.forgetPwdBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.pwdView.mas_bottom).offset(60);
-    }];
-}
-
--(void)checkChineseCaptchaAgain {
-    [self.showBtn setTitle:@"点此进行验证" forState:UIControlStateNormal];
-    [self.showBtn setTitleColor:[UIColor brownColor] forState:UIControlStateNormal];
-    self.showBtn.layer.borderColor = [UIColor brownColor].CGColor;
-    [self.showBtn setImage:[UIImage imageNamed:@"ic_login_show_captcha_icon"] forState:UIControlStateNormal];
-    self.showBtn.userInteractionEnabled = true;
-    self.ticketStr = @"";
 }
 
 -(void)setTicketStr:(NSString *)ticketStr {
     _ticketStr = ticketStr;
-}
-
-- (void)setCodeImage:(UIImage *)codeImg{
-    [self.imgCodeBtn setImage:codeImg forState:UIControlStateNormal];
 }
 
 - (void)forgetAccountAndPwd {

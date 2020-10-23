@@ -171,7 +171,7 @@
         }else{
             [self hideLoading];
             [self.pressLocationArr removeAllObjects];
-            [self.loginView checkChineseCaptchaAgain];
+            [self checkChineseCaptchaAgain];
             if ([result.head.errMsg isEqualToString:@""]) {
                 [MBProgressHUD showError:@"请输入正确验证码" toView:nil];
                 return;
@@ -599,8 +599,8 @@
                             
                         }else{
                             self.specifyWordArr = [[NSMutableArray alloc] initWithArray:result.body[@"specifyWord"]];
-                            self.loginView.noticeStrArr = result.body[@"specifyWord"];
-                            [self.loginView.imgCodeBtn setImage:decodedImage forState:UIControlStateNormal];
+                            self.noticeStrArr = result.body[@"specifyWord"];
+                            self.imgCodeImg = decodedImage;
                         }
                         
                     });
@@ -627,10 +627,10 @@
             NSNumber * validateResult = result.body[@"validateResult"];
             if ([validateResult integerValue] == 1) {
                 self.loginView.ticketStr = result.body[@"ticket"];
-                [self.loginView checkChineseCaptchaSuccess];
+                [self checkChineseCaptchaSuccess];
             } else {
                 [self.pressLocationArr removeAllObjects];
-                [self.loginView removeLocationView];
+                [self removeLocationView];
                 [self loadVerifyCode];
             }
         } else {

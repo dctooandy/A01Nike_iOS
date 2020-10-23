@@ -47,6 +47,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray * specifyWordArr;
 @property (nonatomic, strong) NSMutableArray * pressLocationArr;
+@property (nonatomic, strong) UIImage * imgCodeImg;
+@property (nonatomic, copy) NSArray * noticeStrArr;
+-(void)removeLocationView;
+-(void)checkChineseCaptchaSuccess;
+-(void)checkChineseCaptchaAgain;
 @end
 
 NS_ASSUME_NONNULL_END
