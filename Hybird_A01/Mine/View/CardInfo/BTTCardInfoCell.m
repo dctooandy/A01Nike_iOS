@@ -32,11 +32,11 @@
 }
 
 
-- (IBAction)modifyClick:(UIButton *)sender { // tag 6005
-    if (self.buttonClickBlock) {
-        self.buttonClickBlock(sender);
-    }
-}
+//- (IBAction)modifyClick:(UIButton *)sender { // tag 6005
+//    if (self.buttonClickBlock) {
+//        self.buttonClickBlock(sender);
+//    }
+//}
 
 - (IBAction)deleteClick:(UIButton *)sender { // tag 6006
     if (self.buttonClickBlock) {
@@ -61,7 +61,8 @@
     }
     self.cardBgImageView.image = [UIImage imageNamed:bgImageDefault];
 //    [self.cardBgImageView sd_setImageWithURL:bgUrl placeholderImage:[UIImage imageNamed:bgImageDefault]];
-    self.modifyBtn.hidden = self.isChecking || [model.accountType isEqualToString:@"BTC"] || [model.bankName isEqualToString:@"USDT"] || [model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"];
+//    self.modifyBtn.hidden = self.isChecking || [model.accountType isEqualToString:@"BTC"] || [model.bankName isEqualToString:@"USDT"] || [model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"];
+    self.modifyBtn.hidden = true;
     self.deleteBtn.hidden = self.isChecking || self.isOnlyOneCard;
     self.setDefaultBtn.hidden = [model.accountType isEqualToString:@"BTC"];
     self.bottomDefaultBtn.hidden = [model.accountType isEqualToString:@"BTC"];
