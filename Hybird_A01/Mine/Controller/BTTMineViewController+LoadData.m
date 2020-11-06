@@ -16,6 +16,8 @@
 #import "BTTCustomerBalanceModel.h"
 #import "HAInitConfig.h"
 #import "BTTUserStatusManager.h"
+#import "BTTWithdrawToUsdtPromoPop.h"
+#import "CLive800Manager.h"
 
 @implementation BTTMineViewController (LoadData)
 
@@ -36,28 +38,6 @@
     if (self.normalDataTwo.count) {
         [self.normalDataTwo removeAllObjects];
     }
-    
-    //    NSArray *icons =  @[@"me_bankscan",@"me_jdscan",@"me_aliwap",@"me_online",@"me_aliSacn",@"me_wechatscan",@"me_qqScan",@"me_hand",@"me_wap",@"me_YSF",@"me_quick",@"me_bibao",@"me_pointCard",@"me_btc",@"me_tiaoma",@"me_bishang",@"me_bank",@"me_wechatsecond",@"me_alipaySecond",@"me_usdt",@"me_bfb",@"recharge_otc_tab",@"me_dcbox"];
-    //    NSArray *names = @[@"银联扫码",@"京东扫码",@"支付宝wap",@"在线支付",@"支付宝扫码",@"微信扫码",@"QQ扫码",@"手工存款",@"微信/QQ/京东wap",@"云闪付扫码",@"银行快捷网银",@"点卡",@"钻石币",@"比特币",@"微信条码支付",@"币商充值",@"迅捷网银",@"微信秒存",@"支付宝秒存",@"泰达币-USDT",@"币付宝",@"充值/购买USDT",@"小金库"];
-    //    for (NSString *name in names) {
-    //        NSInteger index = [names indexOfObject:name];
-    //        BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
-    //        model.name = name;
-    //        model.iconName = icons[index];
-    //        model.available = YES;
-    //        if ([model.name isEqualToString:@"银联扫码"] || [model.name isEqualToString:@"微信扫码"] || [model.name isEqualToString:@"云闪付扫码"]||[model.name isEqualToString:@"币商充值"]||[model.name isEqualToString:@"泰达币-USDT"]||[model.name isEqualToString:@"币付宝"]||[model.name isEqualToString:@"充值/购买USDT"]||[model.name isEqualToString:@"小金库"]) {
-    //            [self.bigDataSoure addObject:model];
-    //        } else if ([model.name isEqualToString:@"QQ扫码"] ||
-    //                   [model.name isEqualToString:@"京东扫码"] ||
-    //                   [model.name isEqualToString:@"支付宝wap"] ||
-    //                   [model.name isEqualToString:@"支付宝扫码"] ||
-    //                   [model.name isEqualToString:@"手工存款"] ||
-    //                   [model.name isEqualToString:@"币商充值"]) {
-    //            [self.normalDataSoure addObject:model];
-    //        } else {
-    //            [self.normalDataTwo addObject:model];
-    //        }
-    //    }
     [self setupElements];
 }
 
@@ -98,25 +78,6 @@
 }
 
 - (void)loadPaymentData {
-//    NSMutableArray *arr = [NSMutableArray array];
-//    NSArray *icons = nil;
-//    NSArray *names = nil;
-//    if (self.saveMoneyTimesType == BTTSaveMoneyTimesTypeLessTen) {
-//        icons =  @[@"me_bishang",@"me_bankscan",@"me_jdscan",@"me_aliwap",@"me_bank",@"me_wechatsecond",@"me_alipaySecond",@"me_online",@"me_aliSacn",@"me_wechatscan",@"me_qqScan",@"me_hand",@"me_wap",@"me_YSF",@"me_quick",@"me_bibao",@"me_pointCard",@"me_btc",@"me_tiaoma"];
-//        names = @[@"币商充值",@"银联扫码",@"京东扫码",@"支付宝wap",@"迅捷网银",@"微信秒存",@"支付宝秒存",@"在线支付",@"支付宝扫码",@"微信扫码",@"QQ扫码",@"手工存款",@"微信/QQ/京东wap",@"云闪付扫码",@"银行快捷网银",@"点卡",@"钻石币",@"比特币",@"微信条码支付"];
-//    } else {
-//        icons =  @[@"me_bank",@"me_alipaySecond",@"me_wechatsecond",@"me_hand",@"me_bankscan",@"me_online",@"me_wechatscan",@"me_aliSacn",@"me_wechatscan",@"me_jdscan",@"me_qqScan",@"me_wap",@"me_YSF",@"me_quick",@"me_bibao",@"me_pointCard",@"me_btc",@"me_tiaoma"];
-//        names = @[@"迅捷网银",@"支付宝秒存",@"微信秒存",@"手工存款",@"银联扫码",@"支付宝扫码",@"在线支付",@"微信扫码",@"京东扫码",@"QQ扫码",@"支付宝/微信/QQ/京东wap",@"云闪付扫码",@"银行快捷网银",@"钻石币",@"点卡",@"比特币",@"微信条码支付"];
-//    }
-//
-//    for (NSString *name in names) {
-//        NSInteger index = [names indexOfObject:name];
-//        BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
-//        model.name = name;
-//        model.iconName = icons[index];
-//        model.available = YES;
-//        [arr addObject:model];
-//    }
     if ([IVNetwork savedUserInfo]) {
         [self loadPersonalPaymentData];
     }
@@ -666,7 +627,33 @@
     }];
 }
 
-
+-(void)loadGetPopWithDraw {
+    [IVNetwork requestPostWithUrl:BTTGetPopWithDraw paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BOOL showPop = [result.body[@"showPop"] boolValue];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:BTTIsAlreadyShowPopWithDraw];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            if (showPop) {
+                BTTWithdrawToUsdtPromoPop *customView = [BTTWithdrawToUsdtPromoPop viewFromXib];
+                customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+                popView.isClickBGDismiss = YES;
+                [popView pop];
+                customView.dismissBlock = ^{
+                    [popView dismiss];
+                };
+                customView.btnBlock = ^(UIButton * _Nullable btn) {
+                    //kefu
+                    [popView dismiss];
+                    [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+                };
+            }
+        } else {
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
 
 #pragma mark - 动态添加属性
 

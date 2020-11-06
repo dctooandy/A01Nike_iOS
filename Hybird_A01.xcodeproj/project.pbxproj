@@ -706,6 +706,8 @@
 		418F756B251D943400DF4A71 /* BTTXmTransferRecordController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 418F7569251D943400DF4A71 /* BTTXmTransferRecordController+LoadData.m */; };
 		418F756C251D943400DF4A71 /* BTTXmTransferRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 418F756A251D943400DF4A71 /* BTTXmTransferRecordController.m */; };
 		418F756F251D94A400DF4A71 /* BTTXmTransferRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 418F756E251D94A400DF4A71 /* BTTXmTransferRecordModel.m */; };
+		4196BEA82554EEBC00F41EED /* BTTWithdrawToUsdtPromoPop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4196BEA52554EEBC00F41EED /* BTTWithdrawToUsdtPromoPop.xib */; };
+		4196BEA92554EEBC00F41EED /* BTTWithdrawToUsdtPromoPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 4196BEA72554EEBC00F41EED /* BTTWithdrawToUsdtPromoPop.m */; };
 		419AEC5A250F64F100D089DD /* BTTBJLPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 419AEC57250F64F000D089DD /* BTTBJLPopView.m */; };
 		419AEC5B250F64F100D089DD /* BTTBJLPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419AEC59250F64F100D089DD /* BTTBJLPopView.xib */; };
 		41BC7100252D6509003944ED /* BTTBiBiCunPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BC70FD252D6509003944ED /* BTTBiBiCunPopView.m */; };
@@ -1958,6 +1960,9 @@
 		418F756A251D943400DF4A71 /* BTTXmTransferRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTXmTransferRecordController.m; sourceTree = "<group>"; };
 		418F756D251D94A300DF4A71 /* BTTXmTransferRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTXmTransferRecordModel.h; sourceTree = "<group>"; };
 		418F756E251D94A400DF4A71 /* BTTXmTransferRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTXmTransferRecordModel.m; sourceTree = "<group>"; };
+		4196BEA52554EEBC00F41EED /* BTTWithdrawToUsdtPromoPop.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTWithdrawToUsdtPromoPop.xib; sourceTree = "<group>"; };
+		4196BEA62554EEBC00F41EED /* BTTWithdrawToUsdtPromoPop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTWithdrawToUsdtPromoPop.h; sourceTree = "<group>"; };
+		4196BEA72554EEBC00F41EED /* BTTWithdrawToUsdtPromoPop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTWithdrawToUsdtPromoPop.m; sourceTree = "<group>"; };
 		419AEC57250F64F000D089DD /* BTTBJLPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTBJLPopView.m; sourceTree = "<group>"; };
 		419AEC58250F64F100D089DD /* BTTBJLPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTBJLPopView.h; sourceTree = "<group>"; };
 		419AEC59250F64F100D089DD /* BTTBJLPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTBJLPopView.xib; sourceTree = "<group>"; };
@@ -4094,6 +4099,9 @@
 				D365536423C05739007E50BE /* BTTPayUsdtNoticeView.h */,
 				D365536523C05739007E50BE /* BTTPayUsdtNoticeView.m */,
 				D365536723C05755007E50BE /* BTTPayUsdtNoticeView.xib */,
+				4196BEA62554EEBC00F41EED /* BTTWithdrawToUsdtPromoPop.h */,
+				4196BEA72554EEBC00F41EED /* BTTWithdrawToUsdtPromoPop.m */,
+				4196BEA52554EEBC00F41EED /* BTTWithdrawToUsdtPromoPop.xib */,
 			);
 			path = MineMain;
 			sourceTree = "<group>";
@@ -5271,6 +5279,7 @@
 				D331B20C23D539B10080A27D /* BTTConsetiveWinsPopView.xib in Resources */,
 				3A5AE6A022D6E22A0013E8A3 /* LIVVideoCamera_close@2x.png in Resources */,
 				3A11AE632186CDA100B1AFF4 /* BTTXimaHeaderCell.xib in Resources */,
+				4196BEA82554EEBC00F41EED /* BTTWithdrawToUsdtPromoPop.xib in Resources */,
 				3A5AE6B822D6E22A0013E8A3 /* LIVFileMessage_TypePPT@3x.png in Resources */,
 				3A5AE6A622D6E22A0013E8A3 /* LIVAutoScrollTextView11.png in Resources */,
 				3A5AE68822D6E22A0013E8A3 /* LIVVideoCamera_flashOff@2x.png in Resources */,
@@ -5463,6 +5472,7 @@
 				3A0CCED2238B7FE000CFEE22 /* BTTNewAccountGuidePopView.m in Sources */,
 				3AA7892E21FFF2580047A372 /* SDWebImageTransition.m in Sources */,
 				3ADD23EF2179B97A00FA959A /* TAPageControl.m in Sources */,
+				4196BEA92554EEBC00F41EED /* BTTWithdrawToUsdtPromoPop.m in Sources */,
 				D5DBEB3A21ABB774008AF629 /* CNPayConstant.m in Sources */,
 				3A8F51C6215F78230069D1B3 /* BTTNoticeView.m in Sources */,
 				3AF1B80B21AE59C300BF8C3A /* BTTVideoGameModel.m in Sources */,
@@ -6080,7 +6090,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.169;
+				MARKETING_VERSION = 3.2.174;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btta01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6122,7 +6132,7 @@
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_A01/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.169;
+				MARKETING_VERSION = 3.2.174;
 				PRODUCT_BUNDLE_IDENTIFIER = com.a01iphone.btta01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

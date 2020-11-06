@@ -130,6 +130,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTShowAccountGride                        @"BTTShowAccountGride"
 #define BTTBiBiCunDate                             @"BTTBiBiCunDate"
 #define BTTShareNoticeTag                          @"BTTShareNoticeTag"
+#define BTTIsAlreadyShowPopWithDraw                @"BTTIsAlreadyShowPopWithDraw"
 
 //Flurry
 #define FlurryKey                                  @"RY7GPP2V792PMZK3PYNX"
@@ -473,6 +474,9 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 //優惠活動 - 筆筆存
 #define BBTBiBiCunAlert                            @"_extra_/api/v1/activity/usdtFree2/alert"
+
+//取款優惠彈窗
+#define BTTGetPopWithDraw                            @"_extra_/api/v1/getPopWithDraw"
 
 /********************************************常用宏*********************************************************/
 

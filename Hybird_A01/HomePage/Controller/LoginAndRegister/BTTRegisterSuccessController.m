@@ -33,6 +33,19 @@ typedef enum {
 @property (nonatomic, assign) BOOL isModifyPwd;
 @property (nonatomic, assign) BOOL isSavedPwd;
 @property (nonatomic, assign)BOOL isHome;
+
+@property (nonatomic, strong) UILabel * noticeLab;
+@property (nonatomic, strong) UILabel * pressNumLab;
+@property (nonatomic, assign) NSInteger pressNum;
+@property (nonatomic, strong) UIButton *imgCodeBtn;
+@property (nonatomic, strong) UIButton * cancelBtn;
+@property (nonatomic, strong)UIView * imgCodePopViewBg;
+@property (nonatomic, strong) NSMutableArray * specifyWordArr;
+@property (nonatomic, strong) NSMutableArray * pressLocationArr;
+@property (nonatomic, strong) UIImage * imgCodeImg;
+@property (nonatomic, copy) NSArray * noticeStrArr;
+@property (nonatomic, copy) NSString *captchaId;
+@property (nonatomic, copy) NSString *ticketStr;
 @end
 
 @implementation BTTRegisterSuccessController
@@ -47,6 +60,7 @@ typedef enum {
     self.isModifyPwd = NO;
     self.isSavedPwd = NO;
     _isHome = NO;
+    self.pressLocationArr = [[NSMutableArray alloc] init];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem new];
     self.title = @"注册成功";
     self.registerSuccessType = BTTRegisterSuccessTypeNormal;
@@ -86,7 +100,7 @@ typedef enum {
 }
 
 - (void)cropThePasswordView{
-   UICollectionView *shadowView = self.collectionView;
+    UICollectionView *shadowView = self.collectionView;
     // 开启图片上下文
     UIGraphicsBeginImageContextWithOptions(shadowView.contentSize, NO, 0.f);
     // 保存现在视图的位置偏移信息
@@ -113,6 +127,7 @@ typedef enum {
     shadowView.frame = saveFrame;
     // 保存相册
     UIImageWriteToSavedPhotosAlbum(image, NULL, NULL, NULL);
+    [self doLogin];
 }
 
 - (void)goToBack {
@@ -155,15 +170,17 @@ typedef enum {
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
+                if (button.tag==40010) {
+                    strongSelf.isHome = YES;
+                }else if (button.tag==40011){
+                    strongSelf.isHome = NO;
+                }
                 if (strongSelf.isSavedPwd) {
-                    if (button.tag==40010) {
-                        strongSelf.isHome = YES;
-                    }else if (button.tag==40011){
-                        strongSelf.isHome = NO;
-                    }
                     [strongSelf doLogin];
                 }else{
-                    [strongSelf showCropAlert];
+                    [strongSelf imgCodeBtnPopView];
+                    [strongSelf showLoading];
+                    [strongSelf loadVerifyCode];
                 }
                 
             };
@@ -246,6 +263,233 @@ typedef enum {
     return 0;
 }
 
+- (void)setupElements {
+    NSMutableArray *elementsHight = [NSMutableArray array];
+    for (int i = 0; i < 2; i++) {
+        if (i == 0) {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 274)]];
+        } else if (i == 1) {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 71)]];
+        }
+    }
+    self.elementsHight = elementsHight.mutableCopy;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+    });
+}
+
+-(void)imgCodeBtnPopView {
+    self.pressNum = 0;
+    [self.view endEditing:true];
+    
+    UIView * view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTap)];
+    tap.numberOfTapsRequired = 1;
+    view.userInteractionEnabled = true;
+    [view addGestureRecognizer:tap];
+    _imgCodePopViewBg = view;
+    [self.view addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.equalTo(self.view);
+    }];
+    
+    UIButton * imgCodeBtn = [[UIButton alloc] init];
+    imgCodeBtn.adjustsImageWhenHighlighted = NO;
+    [imgCodeBtn addTarget:self action:@selector(savePressLocation:event:) forControlEvents:UIControlEventTouchUpInside];
+    [_imgCodePopViewBg addSubview:imgCodeBtn];
+    _imgCodeBtn = imgCodeBtn;
+    [imgCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(view).offset(-20);
+        make.center.equalTo(view);
+    }];
+    
+    UIButton * refreshBtn = [[UIButton alloc] init];
+    [refreshBtn setImage:[UIImage imageNamed:@"bjl_refresh"] forState:UIControlStateNormal];
+    refreshBtn.adjustsImageWhenHighlighted = NO;
+    [refreshBtn addTarget:self action:@selector(refreshAction) forControlEvents:UIControlEventTouchUpInside];
+    [_imgCodePopViewBg addSubview:refreshBtn];
+    [refreshBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.equalTo(imgCodeBtn);
+        make.width.height.offset(30);
+    }];
+    
+    UILabel * noticeLab = [[UILabel alloc] init];
+    noticeLab.backgroundColor = [UIColor colorWithRed: 0.00 green: 0.00 blue: 0.00 alpha: 0.60];
+    noticeLab.textColor = [UIColor whiteColor];
+    noticeLab.textAlignment = NSTextAlignmentCenter;
+    _noticeLab = noticeLab;
+    [_imgCodePopViewBg addSubview:noticeLab];
+    [noticeLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(imgCodeBtn);
+    }];
+}
+
+-(void)addLocationImg:(CGFloat)x y:(CGFloat)y num:(NSInteger)num {
+    UIImage * img = [UIImage imageNamed:@"ic_login_captcha_location"];
+    CGSize size = CGSizeMake(img.size.width, img.size.height);
+    UIImageView * locImageView = [[UIImageView alloc] init];
+    locImageView.tag = num;
+    locImageView.frame = CGRectMake(x-size.width/2, y-size.height, size.width, size.height);
+    locImageView.image = img;
+    [self.imgCodeBtn addSubview:locImageView];
+    
+    UILabel * pressNumLab = [[UILabel alloc] init];
+    pressNumLab.font = [UIFont systemFontOfSize:14];
+    pressNumLab.text = [NSString stringWithFormat:@"%ld", (long)num];
+    pressNumLab.backgroundColor = [UIColor clearColor];
+    pressNumLab.textColor = [UIColor whiteColor];
+    pressNumLab.textAlignment = NSTextAlignmentCenter;
+    [locImageView addSubview:pressNumLab];
+    _pressNumLab = pressNumLab;
+    [pressNumLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.bottom.right.equalTo(locImageView);
+    }];
+}
+
+-(void)refreshAction {
+    [self removeLocationView];
+    [self.pressLocationArr removeAllObjects];
+    [self showLoading];
+    [self loadVerifyCode];
+}
+
+-(void)setImgCodeImg:(UIImage *)imgCodeImg {
+    _imgCodeImg = imgCodeImg;
+    [self.imgCodeBtn setImage:imgCodeImg forState:UIControlStateNormal];
+    if (self.cancelBtn == nil) {
+        UIButton * cancelBtn = [[UIButton alloc] init];
+        [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [cancelBtn setTitleColor:[UIColor brownColor] forState:UIControlStateNormal];
+        [cancelBtn setBackgroundColor:[UIColor whiteColor]];
+        cancelBtn.layer.borderColor = [UIColor brownColor].CGColor;
+        cancelBtn.layer.borderWidth = 2.0;
+        cancelBtn.layer.cornerRadius = 5.0;
+        cancelBtn.clipsToBounds = true;
+        cancelBtn.adjustsImageWhenHighlighted = NO;
+        [cancelBtn addTarget:self action:@selector(bgTap) forControlEvents:UIControlEventTouchUpInside];
+        _cancelBtn = cancelBtn;
+        [_imgCodePopViewBg addSubview:cancelBtn];
+        [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(_noticeLab.mas_bottom).offset(10);
+            make.left.right.equalTo(_noticeLab);
+            make.height.offset(50);
+        }];
+    }
+}
+
+-(void)setNoticeStrArr:(NSArray *)noticeStrArr {
+    _noticeStrArr = noticeStrArr;
+    NSMutableString * wordStr = [[NSMutableString alloc] init];
+    for (NSString * str in _noticeStrArr) {
+        [wordStr appendString:[NSString stringWithFormat:@" [%@] ", str]];
+    }
+    self.noticeLab.text = [NSString stringWithFormat:@"请 “依次” 点击 %@", wordStr];
+}
+
+-(void)removeLocationView {
+    self.pressNum = 0;
+    for (UIView * subView in self.imgCodeBtn.subviews) {
+        if ([subView isKindOfClass:[UIImageView class]] && subView.tag > 0) {
+            [subView removeFromSuperview];
+        }
+    }
+}
+
+-(void)savePressLocation:(UIButton *)sender event:(UIEvent *)event {
+    self.pressNum += 1;
+    UITouch *touch = [[event touchesForView:sender] anyObject];
+    CGPoint point = [touch locationInView:sender];
+    NSDictionary * dict = @{@"x":@(point.x), @"y":@(point.y)};
+    [self addLocationImg:point.x y:point.y num:self.pressNum];
+    [self.pressLocationArr addObject:dict];
+    if (self.pressLocationArr.count == self.specifyWordArr.count) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:self.pressLocationArr options:NSJSONWritingPrettyPrinted error:nil];
+        NSString * result = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+        [self checkChineseCaptcha:result];
+    }
+}
+
+-(void)checkChineseCaptchaSuccess {
+    [self.imgCodePopViewBg removeFromSuperview];
+    [self showCropAlert];
+}
+
+-(void)checkChineseCaptchaAgain {
+    self.ticketStr = @"";
+    self.cancelBtn = nil;
+}
+
+-(void)bgTap {
+    [self.imgCodePopViewBg removeFromSuperview];
+    self.cancelBtn = nil;
+}
+
+// 图形验证码
+- (void)loadVerifyCode {
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+    dict[@"use"] = @2;
+    [IVNetwork requestPostWithUrl:BTTChineseVerifyCaptcha paramters:dict completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        NSLog(@"%@",result.body);
+        [self hideLoading];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body && ![result.body isKindOfClass:[NSNull class]]) {
+                if (result.body[@"image"] && ![result.body[@"image"] isKindOfClass:[NSNull class]]) {
+                    NSString *base64Str = result.body[@"image"];
+                    // 将base64字符串转为NSData
+                    NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+                    // 将NSData转为UIImage
+                    UIImage *decodedImage = [UIImage imageWithData: decodeData];
+                    //获取到验证码ID
+                    self.captchaId = result.body[@"captchaId"];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.specifyWordArr = [[NSMutableArray alloc] initWithArray:result.body[@"specifyWord"]];
+                        self.noticeStrArr = result.body[@"specifyWord"];
+                        self.imgCodeImg = decodedImage;
+                    });
+                }
+            }
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+        
+    }];
+}
+
+// 驗證漢字圖片驗證碼
+-(void)checkChineseCaptcha:(NSString *)captchaStr {
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"use"] = @2;
+    params[@"captcha"] = captchaStr;
+    params[@"captchaId"] = self.captchaId;
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTCheckChineseCaptcha paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSNumber * validateResult = result.body[@"validateResult"];
+            if ([validateResult integerValue] == 1) {
+                [self hideLoading];
+                self.ticketStr = result.body[@"ticket"];
+                [self checkChineseCaptchaSuccess];
+            } else {
+                [self.pressLocationArr removeAllObjects];
+                [self removeLocationView];
+                [self loadVerifyCode];
+            }
+        } else {
+            [self hideLoading];
+            if ([result.head.errCode isEqualToString:@"GW_800105"]) {
+                [self.pressLocationArr removeAllObjects];
+                [self removeLocationView];
+                [self loadVerifyCode];
+            }
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
+
 - (void)changePwd {
     if (!_newPwd.length) {
         [MBProgressHUD showError:@"请输入新密码" toView:nil];
@@ -282,7 +526,7 @@ typedef enum {
             strongSelf.isModifyPwd = YES;
             strongSelf.registerSuccessType = BTTRegisterSuccessTypeNormal;
             [strongSelf.collectionView reloadData];
-            [strongSelf showCropAlert];
+//            [strongSelf showCropAlert];
 //            BTTRegisterChangePwdSuccessController *vc = (BTTRegisterChangePwdSuccessController *)[BTTRegisterChangePwdSuccessController getVCFromStoryboard];
 //            vc.account = self.account;
 //            [self.navigationController pushViewController:vc animated:YES];
@@ -292,50 +536,39 @@ typedef enum {
     }];
 }
 
-- (void)setupElements {
-    NSMutableArray *elementsHight = [NSMutableArray array];
-    for (int i = 0; i < 2; i++) {
-        if (i == 0) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 274)]];
-        } else if (i == 1) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 71)]];
-        }
-    }
-    self.elementsHight = elementsHight.mutableCopy;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.collectionView reloadData];
-    });
-}
-
 - (void)doLogin{
-        NSString *loginUrl = BTTUserLoginAPI;
-        NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    NSString *loginUrl = BTTUserLoginAPI;
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     [parameters setValue:self.mainAccountName forKey:BTTLoginName];
     [parameters setValue:[IVRsaEncryptWrapper encryptorString:self.pwd] forKey:BTTPassword];
     [parameters setValue:[PublicMethod timeIntervalSince1970] forKey:BTTTimestamp];
     [parameters setValue:@(0) forKey:@"loginType"];
-        
+    if (self.ticketStr.length) {
+        [parameters setValue:self.ticketStr forKey:@"captcha"];
+    }
+    if (self.captchaId.length) {
+        [parameters setValue:self.captchaId forKey:@"captchaId"];
+    }
     [self showLoading];
     [IVNetwork requestPostWithUrl:loginUrl paramters:parameters completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            
+        
         [[NSUserDefaults standardUserDefaults] setObject:self.account forKey:BTTCacheAccountName];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            IVJResponseObject *result = response;
-            if ([result.head.errCode isEqualToString:@"0000"]) {
-                [IVHttpManager shareManager].loginName = self.mainAccountName;
-                [IVHttpManager shareManager].userToken = result.body[@"token"];
-                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
-                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"customerId"] forKey:@"pushcustomerid"];
-//                [IVPushManager sharedManager].customerId = result.body[@"customerId"];
-                AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-                [delegate reSendIVPushRequestIpsSuperSign:result.body[@"customerId"]];
-                [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"]];
-            }else{
-                [self hideLoading];
-                
-            }
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [IVHttpManager shareManager].loginName = self.mainAccountName;
+            [IVHttpManager shareManager].userToken = result.body[@"token"];
+            [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
+            [[NSUserDefaults standardUserDefaults]setObject:result.body[@"customerId"] forKey:@"pushcustomerid"];
+            //                [IVPushManager sharedManager].customerId = result.body[@"customerId"];
+            AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            [delegate reSendIVPushRequestIpsSuperSign:result.body[@"customerId"]];
+            [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"]];
+        }else{
+            [self hideLoading];
             
-        }];
+        }
+    }];
 }
 
 - (void)getCustomerInfoByLoginNameWithName:(NSString *)name{
@@ -375,7 +608,6 @@ typedef enum {
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
-
     }];
 }
 

@@ -63,6 +63,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)changeMode:(NSString *)modeStr;
 
+-(void)loadGetPopWithDraw;
+
 @end
 
 NS_ASSUME_NONNULL_END

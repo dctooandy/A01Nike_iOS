@@ -634,6 +634,11 @@
                 [self loadVerifyCode];
             }
         } else {
+            if ([result.head.errCode isEqualToString:@"GW_800105"]) {
+                [self.pressLocationArr removeAllObjects];
+                [self removeLocationView];
+                [self loadVerifyCode];
+            }
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];

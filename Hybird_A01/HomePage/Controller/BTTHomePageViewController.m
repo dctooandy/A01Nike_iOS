@@ -165,6 +165,8 @@
             [IVHttpManager shareManager].loginName = @"";
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTIsAlreadyShowPopWithDraw];
             [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
         }
     }

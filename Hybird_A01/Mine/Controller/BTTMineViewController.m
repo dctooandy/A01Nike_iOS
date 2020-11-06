@@ -110,6 +110,10 @@
         [self loadPaymentData];
         [self loadRebateStatus];
         [self loadSaveMoneyTimes];
+        BOOL isAlreadyShowPopWithDraw = [PublicMethod isDateToday:[[NSUserDefaults standardUserDefaults] objectForKey:BTTIsAlreadyShowPopWithDraw]];
+        if (!isAlreadyShowPopWithDraw) {
+            [self loadGetPopWithDraw];
+        }
         
     } else {
         self.saveMoneyCount = 0;
@@ -635,6 +639,7 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTIsAlreadyShowPopWithDraw];
             [BTTUserStatusManager logoutSuccess];
             strongSelf.saveMoneyCount = 0;
             [strongSelf loadPaymentDefaultData];
