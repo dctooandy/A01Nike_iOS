@@ -49,6 +49,7 @@
     self.dcboxLimit = @"";
     self.usdtLimit = @"";
     [self setupCollectionView];
+    [self setUpNav];
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         [self getLimitUSDT];
     } else {
@@ -61,6 +62,17 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self loadCreditsTotalAvailable];
+}
+
+-(void)setUpNav {
+    UIButton * leftBtn = [[UIButton alloc] init];
+    [leftBtn setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [leftBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+}
+
+-(void)backAction {
+    [self.navigationController popToRootViewControllerAnimated:true];
 }
 
 - (void)setupCollectionView {

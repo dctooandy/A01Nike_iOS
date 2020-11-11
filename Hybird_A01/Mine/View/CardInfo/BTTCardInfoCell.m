@@ -101,8 +101,10 @@
         [self.bankIcon sd_setImageWithURL:iconUrl placeholderImage:[UIImage imageNamed:@"defaultCardIcon"]];
     }
     NSString *setDefaultImageName = model.isDefault ? @"defaultCard" : @"unDefaultCard";
-    [self.setDefaultBtn setImage:[UIImage imageNamed:setDefaultImageName] forState:UIControlStateNormal];
-    [self.bottomDefaultBtn setImage:[UIImage imageNamed:setDefaultImageName] forState:UIControlStateNormal];
+    NSString *setUsdtDefaultImageName = model.isDefault ? @"ic_usdt_default_card" : @"ic_usdt_undefault_card";
+    NSString * imageStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? setUsdtDefaultImageName:setDefaultImageName;
+    [self.setDefaultBtn setImage:[UIImage imageNamed:imageStr] forState:UIControlStateNormal];
+    [self.bottomDefaultBtn setImage:[UIImage imageNamed:imageStr] forState:UIControlStateNormal];
     if ([model.bankName isEqualToString:@"USDT"]) {
         NSString *resultStr=[model.accountType stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[model.accountType substringToIndex:1] capitalizedString]];
         if ([model.accountType isEqualToString:@"others"]) {
@@ -127,7 +129,7 @@
         typeString = @"绑定USDT钱包";
     }
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-        typeString = @"提现地址";
+        typeString = @"取款钱包";
     }
     
     self.cardNoLabel.text = [NSString stringWithFormat:@"%@(%ld)",typeString,(long)(self.indexPath.row + 1)];
@@ -135,12 +137,14 @@
     if (!isNull(model.protocol)&&![model.protocol isEqualToString:@""]&&[model.bankName isEqualToString:@"USDT"]) {
         self.protocolLabel.text = [NSString stringWithFormat:@"USDT-%@",model.protocol];
         self.protocolLabel.hidden = NO;
-        self.bottomDefaultBtn.hidden = [model.accountType isEqualToString:@"BTC"];
-        self.setDefaultBtn.hidden = YES;
+        //        self.bottomDefaultBtn.hidden = [model.accountType isEqualToString:@"BTC"];
+        //        self.setDefaultBtn.hidden = YES;
     }else{
         self.protocolLabel.hidden = YES;
-        self.bottomDefaultBtn.hidden = YES;
+        //        self.bottomDefaultBtn.hidden = YES;
     }
+    self.bottomDefaultBtn.hidden = [model.accountType isEqualToString:@"BTC"];
+    self.setDefaultBtn.hidden = YES;
 }
 
 - (IBAction)bottomDefault_Click:(id)sender {

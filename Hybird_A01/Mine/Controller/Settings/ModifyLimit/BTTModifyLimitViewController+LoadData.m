@@ -35,10 +35,13 @@
 
 - (void)loadSetBetLimitWithAgin:(NSString *)agin bbin:(NSString *)bbin {
     NSString *contentStr = [NSString stringWithFormat:@"AGIN:%@;BBIN:%@",agin,bbin];
-    NSDictionary *params = @{
-        @"remarks":contentStr,
-        @"loginName":[IVNetwork savedUserInfo].loginName
-    };
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"remarks"] = contentStr;
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+//    NSDictionary *params = @{
+//        @"remarks":contentStr,
+//        @"loginName":[IVNetwork savedUserInfo].loginName
+//    };
     [self showLoading];
     [IVNetwork requestPostWithUrl:BTTLimitRedModify paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];

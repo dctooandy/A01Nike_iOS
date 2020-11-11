@@ -12,7 +12,7 @@
 
 @interface USDTBuyController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView * walletCollectionView;
-@property (nonatomic, strong) NSArray * bankList;
+@property (nonatomic, strong) NSMutableArray * bankList;
 @property (nonatomic, strong) UILabel * bitBaseTitleLab;
 @property (nonatomic, strong) NSMutableDictionary * cellDic;
 @end
@@ -22,28 +22,73 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.cellDic = [[NSMutableDictionary alloc] init];
+    self.bankList = [[NSMutableArray alloc] init];
     self.navigationController.navigationBarHidden = false;
     self.title = @"购买USDT";
     [self setUpView];
     [self requestBankList];
 }
 
-- (void)requestBankList{
+- (void)requestBankList {
     [self showLoading];
     weakSelf(weakSelf)
     [IVNetwork requestPostWithUrl:BTTQueryCounterList paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            weakSelf.bankList = result.body;
+            [weakSelf.bankList addObjectsFromArray:result.body];
             
-            for (int i = 0; i < weakSelf.bankList.count; i++) {
-                OTCInsideModel * model = [OTCInsideModel yy_modelWithJSON:weakSelf.bankList[i]];
-                if ([model.otcMarketName isEqualToString:@"bitbase"]) {
-                    weakSelf.bitBaseTitleLab.hidden = false;
+            if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+                [weakSelf loadIsShowBiteBase];
+            } else {
+                for (int i = 0; i < weakSelf.bankList.count; i++) {
+                    OTCInsideModel * model = [OTCInsideModel yy_modelWithJSON:weakSelf.bankList[i]];
+                    if ([model.otcMarketName isEqualToString:@"bitbase"]) {
+                        weakSelf.bitBaseTitleLab.hidden = false;
+                        [weakSelf.walletCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+                            make.top.equalTo(weakSelf.bitBaseTitleLab).offset(weakSelf.bitBaseTitleLab.frame.size.height + 15);
+                        }];
+                        break;
+                    }
+                }
+                [weakSelf hideLoading];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf.walletCollectionView reloadData];
+                });
+            }
+        } else {
+            [weakSelf hideLoading];
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
+
+-(void)loadIsShowBiteBase {
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTIsShowBiteBase paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [weakSelf hideLoading];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BOOL show = [result.body[@"show"] boolValue];
+            if (show) {
+                weakSelf.bitBaseTitleLab.hidden = false;
+                [weakSelf.walletCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.top.equalTo(weakSelf.bitBaseTitleLab).offset(weakSelf.bitBaseTitleLab.frame.size.height + 15);
+                }];
+            } else {
+                for (int i = 0; i < weakSelf.bankList.count; i++) {
+                    OTCInsideModel * model = [OTCInsideModel yy_modelWithJSON:weakSelf.bankList[i]];
+                    if ([model.otcMarketName isEqualToString:@"bitbase"]) {
+                        [weakSelf.bankList removeObject:weakSelf.bankList[i]];
+                        break;
+                    }
                 }
             }
-            [weakSelf.walletCollectionView reloadData];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf.walletCollectionView reloadData];
+            });
+        } else {
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];
 }
@@ -68,7 +113,7 @@
     
     [buyView addSubview:self.walletCollectionView];
     [self.walletCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.bitBaseTitleLab.mas_bottom).offset(15);
+        make.top.equalTo(self.bitBaseTitleLab);
         make.left.equalTo(buyView).offset(15);
         make.bottom.right.equalTo(buyView).offset(-15);
     }];

@@ -368,7 +368,7 @@
     }
     
     self.isOpenSellUsdt = NO;
-    NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"提现地址管理" : @"银行卡资料";
+    NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
     NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
     NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
     [self handleDataOneWithNames:names icons:icons];
@@ -382,18 +382,18 @@
             if ([isOpen isEqualToString:@"1"]) {
                 self.isOpenSellUsdt = YES;
                 [self requestSellUsdtLink];
-                NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"提现地址管理" : @"银行卡资料";
+                NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
                 NSMutableArray *names = @[@"取款",@"一键卖币",@"洗码",cardString,@"绑定手机",@"个人资料"].mutableCopy;
                 NSMutableArray *icons = @[@"me_withdrawal",@"me_sell_usdt",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
                 [self handleDataOneWithNames:names icons:icons];
             }else{
-                NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"提现地址管理" : @"银行卡资料";
+                NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
                 NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
                 NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
                 [self handleDataOneWithNames:names icons:icons];
             }
         }else{
-            NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"提现地址管理" : @"银行卡资料";
+            NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
             NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
             NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
             [self handleDataOneWithNames:names icons:icons];
@@ -632,8 +632,6 @@
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BOOL showPop = [result.body[@"showPop"] boolValue];
-            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:BTTIsAlreadyShowPopWithDraw];
-            [[NSUserDefaults standardUserDefaults] synchronize];
             if (showPop) {
                 BTTWithdrawToUsdtPromoPop *customView = [BTTWithdrawToUsdtPromoPop viewFromXib];
                 customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);

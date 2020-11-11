@@ -11,8 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTCardInfosController : BTTCollectionViewController
-
-
+@property (nonatomic, assign) BOOL showAlert;
+@property (nonatomic, assign) BOOL showToast;
+@property (nonatomic, assign) BOOL showNotice;
 @end
 
 NS_ASSUME_NONNULL_END

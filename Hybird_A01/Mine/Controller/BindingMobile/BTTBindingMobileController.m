@@ -23,6 +23,9 @@
 #import "IVRsaEncryptWrapper.h"
 #import "BTTAddBitollCardController.h"
 #import "BTTAddUSDTController.h"
+#import "BTTHumanModifyCell.h"
+#import "BTTActionSheet.h"
+#import "CLive800Manager.h"
 
 @interface BTTBindingMobileController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, copy) NSString *messageId;
@@ -40,18 +43,51 @@
         case BTTSafeVerifyTypeMobileBindDelBankCard:
         case BTTSafeVerifyTypeMobileBindAddBTCard:
         case BTTSafeVerifyTypeMobileBindDelBTCard:
+        case BTTSafeVerifyTypeMobileBindDelUSDTCard:
             self.title = @"绑定手机";
             break;
         case BTTSafeVerifyTypeChangeMobile:
         case BTTSafeVerifyTypeVerifyMobile:
             self.title = @"更换手机";
             break;
+        case BTTSafeVerifyTypeMobileDelBankCard:
+            self.title = @"删除银行卡";
+            break;
+        case BTTSafeVerifyTypeMobileDelBTCard:
+        case BTTSafeVerifyTypeMobileDelUSDTCard:
+            self.title = @"删除取款钱包";
+            break;
         default:
             self.title = @"安全验证";
             break;
     }
-    [self setupCollectionView];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"212229"];
+    [self setUpNoticeView];
     [self loadMianData];
+}
+
+-(void)setUpNoticeView {
+    if ([IVNetwork savedUserInfo].mobileNoBind != 1 && [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && self.showNotice) {
+        UILabel * lab = [[UILabel alloc] init];
+        lab.text = @"老板为了您的资金安全，请先绑定手机再绑定取款钱包再提款哦";
+        lab.textColor = [UIColor colorWithHexString:@"fab765"];
+        lab.adjustsFontSizeToFitWidth = true;
+        lab.textAlignment = NSTextAlignmentCenter;
+        CGSize size = [lab sizeThatFits:CGSizeMake(SCREEN_WIDTH, CGFLOAT_MAX)];
+        [self.view addSubview:lab];
+        [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.view);
+            make.top.equalTo(self.view).offset(5);
+            make.width.offset(SCREEN_WIDTH);
+            make.height.offset(size.height);
+        }];
+        
+        [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(lab.mas_bottom);
+            make.left.bottom.right.equalTo(self.view);
+        }];
+    }
+    [self setupCollectionView];
 }
 
 - (void)setupCollectionView {
@@ -60,6 +96,9 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileTwoCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileTwoCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
+    if (self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard || self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard) {
+        [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHumanModifyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHumanModifyCell"];
+    }
 }
 
 
@@ -96,14 +135,23 @@
             
         };
         return cell;
-    } else {
+    } else if (indexPath.row == 2) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf submitBind];
         };
         return cell;
+    } else {
+        BTTHumanModifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHumanModifyCell" forIndexPath:indexPath];
+        if (self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard
+            || self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard) {
+            cell.btnTitle = @"联系客服";
+        }
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf goToKeFu];
+        };
+        return cell;
     }
-   
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -126,7 +174,7 @@
 }
 
 - (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
-    return UIEdgeInsetsMake(15, 0, 40, 0);
+    return UIEdgeInsetsMake(5, 0, 40, 0);
 }
 
 /**
@@ -148,7 +196,11 @@
         [self.elementsHight removeAllObjects];
     }
     NSMutableArray *elementsHight = [NSMutableArray array];
-    for (int i = 0; i < 3; i++) {
+    NSInteger count = 3;
+    if (self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard || self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard) {
+        count = 4;
+    }
+    for (int i = 0; i < count; i++) {
         if (i == 0 || i == 1) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         } else {
@@ -335,179 +387,185 @@
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
-        NSString *messageId = result.body[@"messageId"];
-        NSString *validateId = result.body[@"validateId"];
+        
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         if ([result.head.errCode isEqualToString:@"0000"]) {
-                    if (successStr) {
-                        [MBProgressHUD showSuccess:successStr toView:nil];
-                    }
-                    switch (self.mobileCodeType) {
-                        case BTTSafeVerifyTypeBindMobile:
-                        case BTTSafeVerifyTypeChangeMobile:{
-                            NSString *phone = [self getPhoneTF].text;
-                            
-                            BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-                            vc.mobileCodeType = self.mobileCodeType;
-                            vc.phoneNumber = phone;
-                            [weakSelf.navigationController pushViewController:vc animated:YES];
-                        }
-                            break;
-                        case BTTSafeVerifyTypeVerifyMobile:{
-                            BTTBindingMobileController *vc = [BTTBindingMobileController new];
-                            vc.mobileCodeType = BTTSafeVerifyTypeChangeMobile;
-                            [weakSelf.navigationController pushViewController:vc animated:YES];
-                        }
-                            break;
-                        case BTTSafeVerifyTypeMobileBindAddBankCard:
-                        case BTTSafeVerifyTypeMobileBindChangeBankCard:
-                            [weakSelf goToBack];
-                            break;
-                        case BTTSafeVerifyTypeMobileAddBankCard:{
-                            BTTAddCardController *vc = [BTTAddCardController new];
-                            vc.addCardType = BTTSafeVerifyTypeMobileAddBankCard;
-                            vc.messageId = messageId;
-                            vc.validateId = validateId;
-                            [weakSelf.navigationController pushViewController:vc animated:YES];
-                        }
-                            break;
-                        case BTTSafeVerifyTypeMobileChangeBankCard:{
-                            BTTCardModifyVerifyController *vc = [BTTCardModifyVerifyController new];
-                            vc.safeVerifyType = BTTSafeVerifyTypeMobileChangeBankCard;
-                            vc.bankModel = self.bankModel;
-                            vc.messageId = messageId;
-                            vc.validateId = validateId;
-                            [self.navigationController pushViewController:vc animated:YES];
-                        }
-                            break;
-                        case BTTSafeVerifyTypeMobileAddBTCard:{
-                            BTTAddBTCController *vc = [BTTAddBTCController new];
-                            vc.addCardType = BTTSafeVerifyTypeMobileAddBTCard;
-                            vc.messageId = messageId;
-                            vc.validateId = validateId;
-                            [self.navigationController pushViewController:vc animated:YES];
-                        }
-                            break;
-                        case BTTSafeVerifyTypeMobileAddUSDTCard:{
-                            BTTAddUSDTController *vc = [BTTAddUSDTController new];
-                            vc.messageId = messageId;
-                            vc.validateId = validateId;
-                            [self.navigationController pushViewController:vc animated:YES];
-                        }
-                            break;
-                        case BTTSafeVerifyTypeMobileAddDCBOXCard:{
-                            BTTAddBitollCardController *vc = [BTTAddBitollCardController new];
-                            vc.messageId = messageId;
-                            vc.validateId = validateId;
-                            [self.navigationController pushViewController:vc animated:YES];
-                        }
-                                break;
-                        case BTTSafeVerifyTypeMobileBindAddBTCard:{
-                            BTTAddBTCController *vc = [BTTAddBTCController new];
-                            vc.addCardType = BTTSafeVerifyTypeMobileBindAddBTCard;
-                            vc.messageId = messageId;
-                            vc.validateId = validateId;
-                            [self.navigationController pushViewController:vc animated:YES];
-                        }
-                            break;
-                        case BTTSafeVerifyTypeMobileBindAddUSDTCard:{
-                            BTTAddUSDTController *vc = [BTTAddUSDTController new];
-                            vc.messageId = messageId;
-                            vc.validateId = validateId;
-                            [self.navigationController pushViewController:vc animated:YES];
-                        }
-                            break;
-                        case BTTSafeVerifyTypeMobileBindAddDCBOXCard:{
-                            BTTAddBitollCardController *vc = [BTTAddBitollCardController new];
-                            vc.messageId = messageId;
-                            vc.validateId = validateId;
-                            [self.navigationController pushViewController:vc animated:YES];
-                        }
-                            break;
-                        case BTTSafeVerifyTypeMobileDelBankCard:
-                            [self deleteBankOrBTC:NO isAuto:YES];
-                            break;
-                        case BTTSafeVerifyTypeMobileDelBTCard:
-                            [self deleteBankOrBTC:YES isAuto:YES];
-                            break;
-                        case BTTSafeVerifyTypeMobileDelUSDTCard:
-                            [self deleteBankOrBTC:YES isAuto:YES];
-                            break;
-                        default:
-                            break;
-                    }
-                } else {
-                    [MBProgressHUD showError:result.head.errMsg toView:nil];
-                    if ([result.head.errCode isEqualToString:@"30022"]) {//验证码输入错误超过次数
-                        switch (self.mobileCodeType) {
-                            case BTTSafeVerifyTypeVerifyMobile:
-                            {
-                                BTTChangeMobileManualController *vc = [BTTChangeMobileManualController new];
-                                [self.navigationController pushViewController:vc animated:YES];
-                            }
-                                break;
-                            case BTTSafeVerifyTypeMobileAddBankCard:
-                            {
-                                BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
-                                vc.verifyType = BTTSafeVerifyTypeHumanAddBankCard;
-                                [self.navigationController pushViewController:vc animated:YES];
-                            }
-                                break;
-                            case BTTSafeVerifyTypeMobileChangeBankCard:
-                            {
-                                BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
-                                vc.verifyType = BTTSafeVerifyTypeHumanChangeBankCard;
-                                vc.bankModel = self.bankModel;
-                                [self.navigationController pushViewController:vc animated:YES];
-                            }
-                                break;
-                            case BTTSafeVerifyTypeMobileAddBTCard:
-                            {
-                                BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
-                                vc.verifyType = BTTSafeVerifyTypeHumanAddBTCard;
-                                [self.navigationController pushViewController:vc animated:YES];
-                            }
-                                break;
-                            case BTTSafeVerifyTypeMobileAddUSDTCard:
-                            {
-                                BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
-                                vc.verifyType = BTTSafeVerifyTypeHumanAddUSDTCard;
-                                [self.navigationController pushViewController:vc animated:YES];
-                            }
-                                break;
-                            case BTTSafeVerifyTypeMobileAddDCBOXCard:
-                            {
-                                BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
-                                vc.verifyType = BTTSafeVerifyTypeHumanAddUSDTCard;
-                                [self.navigationController pushViewController:vc animated:YES];
-                            }
-                                break;
-                            case BTTSafeVerifyTypeMobileDelBankCard:
-                            {
-                                BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
-                                vc.verifyType = BTTSafeVerifyTypeHumanDelBankCard;
-                                [self.navigationController pushViewController:vc animated:YES];
-                            }
-                                break;
-                            case BTTSafeVerifyTypeMobileDelBTCard:
-                            {
-                                BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
-                                vc.verifyType = BTTSafeVerifyTypeHumanDelBTCard;
-                                [self.navigationController pushViewController:vc animated:YES];
-                            }
-                                break;
-                            case BTTSafeVerifyTypeMobileDelUSDTCard:
-                            {
-                                BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
-                                vc.verifyType = BTTSafeVerifyTypeHumanDelUSDTCard;
-                                [self.navigationController pushViewController:vc animated:YES];
-                            }
-                                break;
-                            default:
-                                break;
-                        }
-                    }
+            NSString *messageId = result.body[@"messageId"];
+            self.messageId = messageId;
+            NSString *validateId = result.body[@"validateId"];
+            self.validateId = validateId;
+            if (successStr) {
+                [MBProgressHUD showSuccess:successStr toView:nil];
+            }
+            switch (self.mobileCodeType) {
+                case BTTSafeVerifyTypeBindMobile:
+                case BTTSafeVerifyTypeChangeMobile:
+                case BTTSafeVerifyTypeMobileBindDelUSDTCard:
+                case BTTSafeVerifyTypeMobileBindDelBTCard:
+                {
+                    NSString *phone = [self getPhoneTF].text;
+                    
+                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+                    vc.mobileCodeType = self.mobileCodeType;
+                    vc.phoneNumber = phone;
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
                 }
+                    break;
+                case BTTSafeVerifyTypeVerifyMobile:{
+                    BTTBindingMobileController *vc = [BTTBindingMobileController new];
+                    vc.mobileCodeType = BTTSafeVerifyTypeChangeMobile;
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case BTTSafeVerifyTypeMobileBindAddBankCard:
+                case BTTSafeVerifyTypeMobileBindChangeBankCard:
+                    [weakSelf goToBack];
+                    break;
+                case BTTSafeVerifyTypeMobileAddBankCard:{
+                    BTTAddCardController *vc = [BTTAddCardController new];
+                    vc.addCardType = BTTSafeVerifyTypeMobileAddBankCard;
+                    vc.messageId = messageId;
+                    vc.validateId = validateId;
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case BTTSafeVerifyTypeMobileChangeBankCard:{
+                    BTTCardModifyVerifyController *vc = [BTTCardModifyVerifyController new];
+                    vc.safeVerifyType = BTTSafeVerifyTypeMobileChangeBankCard;
+                    vc.bankModel = self.bankModel;
+                    vc.messageId = messageId;
+                    vc.validateId = validateId;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case BTTSafeVerifyTypeMobileAddBTCard:{
+                    BTTAddBTCController *vc = [BTTAddBTCController new];
+                    vc.addCardType = BTTSafeVerifyTypeMobileAddBTCard;
+                    vc.messageId = messageId;
+                    vc.validateId = validateId;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case BTTSafeVerifyTypeMobileAddUSDTCard:{
+                    BTTAddUSDTController *vc = [BTTAddUSDTController new];
+                    vc.messageId = messageId;
+                    vc.validateId = validateId;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case BTTSafeVerifyTypeMobileAddDCBOXCard:{
+                    BTTAddBitollCardController *vc = [BTTAddBitollCardController new];
+                    vc.messageId = messageId;
+                    vc.validateId = validateId;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case BTTSafeVerifyTypeMobileBindAddBTCard:{
+                    BTTAddBTCController *vc = [BTTAddBTCController new];
+                    vc.addCardType = BTTSafeVerifyTypeMobileBindAddBTCard;
+                    vc.messageId = messageId;
+                    vc.validateId = validateId;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case BTTSafeVerifyTypeMobileBindAddUSDTCard:{
+                    BTTAddUSDTController *vc = [BTTAddUSDTController new];
+                    vc.messageId = messageId;
+                    vc.validateId = validateId;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case BTTSafeVerifyTypeMobileBindAddDCBOXCard:{
+                    BTTAddBitollCardController *vc = [BTTAddBitollCardController new];
+                    vc.messageId = messageId;
+                    vc.validateId = validateId;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                    break;
+                case BTTSafeVerifyTypeMobileDelBankCard:
+                    [self deleteBankOrBTC:NO];
+                    break;
+                case BTTSafeVerifyTypeMobileDelBTCard:
+                    [self deleteBankOrBTC:YES];
+                    break;
+                case BTTSafeVerifyTypeMobileDelUSDTCard:
+                    [self deleteBankOrBTC:YES];
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+            if ([result.head.errCode isEqualToString:@"30022"]) {//验证码输入错误超过次数
+                switch (self.mobileCodeType) {
+                    case BTTSafeVerifyTypeVerifyMobile:
+                    {
+                        BTTChangeMobileManualController *vc = [BTTChangeMobileManualController new];
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    case BTTSafeVerifyTypeMobileAddBankCard:
+                    {
+                        BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
+                        vc.verifyType = BTTSafeVerifyTypeHumanAddBankCard;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    case BTTSafeVerifyTypeMobileChangeBankCard:
+                    {
+                        BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
+                        vc.verifyType = BTTSafeVerifyTypeHumanChangeBankCard;
+                        vc.bankModel = self.bankModel;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    case BTTSafeVerifyTypeMobileAddBTCard:
+                    {
+                        BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
+                        vc.verifyType = BTTSafeVerifyTypeHumanAddBTCard;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    case BTTSafeVerifyTypeMobileAddUSDTCard:
+                    {
+                        BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
+                        vc.verifyType = BTTSafeVerifyTypeHumanAddUSDTCard;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    case BTTSafeVerifyTypeMobileAddDCBOXCard:
+                    {
+                        BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
+                        vc.verifyType = BTTSafeVerifyTypeHumanAddUSDTCard;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    case BTTSafeVerifyTypeMobileDelBankCard:
+                    {
+                        BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
+                        vc.verifyType = BTTSafeVerifyTypeHumanDelBankCard;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    case BTTSafeVerifyTypeMobileDelBTCard:
+                    {
+                        BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
+                        vc.verifyType = BTTSafeVerifyTypeHumanDelBTCard;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    case BTTSafeVerifyTypeMobileDelUSDTCard:
+                    {
+                        BTTVerifyTypeSelectController *vc = [BTTVerifyTypeSelectController new];
+                        vc.verifyType = BTTSafeVerifyTypeHumanDelUSDTCard;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }];
 }
 
@@ -553,7 +611,8 @@
             break;
     }
 }
-- (void)deleteBankOrBTC:(BOOL)isBTC isAuto:(BOOL)isAuto
+
+- (void)deleteBankOrBTC:(BOOL)isBackToCardInfo
 {
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     weakSelf(weakSelf)
@@ -572,16 +631,32 @@
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
-            BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-            vc.mobileCodeType = self.mobileCodeType;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
+            if (isBackToCardInfo) {
+                [self.navigationController popToRootViewControllerAnimated:true];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:@{@"showToast":[NSNumber numberWithBool:true]}];
+            } else {
+                [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
+                BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+                vc.mobileCodeType = self.mobileCodeType;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }
         }else{
             NSString *message = [NSString isBlankString:result.head.errMsg] ? @"删除失败，请重试!" : result.head.errMsg;
             [MBProgressHUD showError:message toView:nil];
             [weakSelf goToBack];
         }
     }];
+    
+}
 
+-(void)goToKeFu {
+    BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+        if (buttonIndex == 0) {
+            [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+        }else if (buttonIndex == 1){
+            [[CLive800Manager sharedInstance] startLive800Chat:self];
+        }
+    }];
+    [actionSheet show];
 }
 @end

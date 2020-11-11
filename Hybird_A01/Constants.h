@@ -130,7 +130,6 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTShowAccountGride                        @"BTTShowAccountGride"
 #define BTTBiBiCunDate                             @"BTTBiBiCunDate"
 #define BTTShareNoticeTag                          @"BTTShareNoticeTag"
-#define BTTIsAlreadyShowPopWithDraw                @"BTTIsAlreadyShowPopWithDraw"
 
 //Flurry
 #define FlurryKey                                  @"RY7GPP2V792PMZK3PYNX"
@@ -478,6 +477,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 //取款優惠彈窗
 #define BTTGetPopWithDraw                            @"_extra_/api/v1/getPopWithDraw"
 
+//是否顯示BiteBase
+#define BTTIsShowBiteBase                          @"_extra_/api/v1/isShowBiteBase"
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)      ([UIFont systemFontOfSize:X])

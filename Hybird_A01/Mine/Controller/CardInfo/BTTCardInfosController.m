@@ -21,6 +21,9 @@
 #import "BTTKSAddBfbWalletController.h"
 #import "BTTAddBitollCardController.h"
 #import "BTTActionSheet.h"
+#import "AppDelegate.h"
+#import "BTTActionSheet.h"
+#import "CLive800Manager.h"
 
 @interface BTTCardInfosController ()<BTTElementsFlowLayoutDelegate>
 
@@ -38,20 +41,64 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"提现地址管理" : @"银行卡资料";
+    self.title = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
     _haveBFB = NO;
     _bankNum = 0;
     _bitNum = 0;
     _dcboxNum = 0;
     _usdtNum = 0;
-    [self setupCollectionView];
+    [self setUpNoticeView];
     [self setupElements];
 }
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self refreshBankList];
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && self.showAlert) {
+        IVActionHandler home = ^(UIAlertAction *action){
+            dispatch_time_t dipatchTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5));
+            dispatch_after(dipatchTime, dispatch_get_main_queue(), ^{
+                [self.navigationController popToRootViewControllerAnimated:true];
+            });
+            AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            [delegate jumpToTabIndex:0];
+        };
+        IVActionHandler withdraw = ^(UIAlertAction *action){
+//            [self.navigationController popToRootViewControllerAnimated:true];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoTakeMoneyNotification" object:nil];
+        };
+        IVActionHandler cancel = ^(UIAlertAction *action){};
+        NSString *title = @"老板～您想继续提交取款嘛？";
+        [IVUtility showAlertWithActionTitles:@[@"返回首页", @"前往取款", @"取消"] handlers:@[home, withdraw, cancel] title:title message:@""];
+    }
+    if (self.showToast) {
+        [MBProgressHUD showSuccess:@"删除成功" toView:nil];
+    }
 }
+
+-(void)setUpNoticeView {
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && self.showNotice) {
+        UILabel * lab = [[UILabel alloc] init];
+        lab.text = @"老板请您先绑定钱包再提款哦";
+        lab.textColor = [UIColor colorWithHexString:@"fab765"];
+        lab.font = [UIFont systemFontOfSize:16];
+        lab.textAlignment = NSTextAlignmentCenter;
+        CGSize size = [lab sizeThatFits:CGSizeMake(SCREEN_WIDTH, CGFLOAT_MAX)];
+        [self.view addSubview:lab];
+        [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.view);
+            make.top.equalTo(self.view).offset(10);
+            make.width.offset(SCREEN_WIDTH);
+            make.height.offset(size.height);
+        }];
+        
+        [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(lab.mas_bottom);
+            make.left.bottom.right.equalTo(self.view);
+        }];
+    }
+    [self setupCollectionView];
+}
+
 - (void)setupCollectionView {
     [super setupCollectionView];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTCardInfoCell" bundle:nil] forCellWithReuseIdentifier:@"BTTCardInfoCell"];
@@ -90,7 +137,7 @@
         return cell;
     } else {
         BTTCardInfoAddCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardInfoAddCell" forIndexPath:indexPath];
-        NSString *bankString = _bankNum<3 ? @"银行卡/" : @"";
+        NSString *bankString = _bankNum<3 && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"银行卡/" : @"";
         NSString *bitString = _bitNum==1 ? @"" : @"比特币钱包/";
         NSString *usdtString = _usdtNum<5 ? @"USDT钱包/" : @"";
         NSString *dcboxString = _dcboxNum==1 ? @"" : @"小金库钱包/";
@@ -356,32 +403,58 @@
             }
             [weakSelf.navigationController pushViewController:vc animated:YES];
         } else {
-
-            [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
-            BTTBindingMobileController *vc = [BTTBindingMobileController new];
-            if ([selectModel.accountType isEqualToString:@"USDT"]) {
-                vc.mobileCodeType = BTTSafeVerifyTypeMobileBindDelUSDTCard;
-            }else if ([selectModel.accountType isEqualToString:@"BTC"]){
-                vc.mobileCodeType = BTTSafeVerifyTypeMobileBindDelBTCard;
-            }else{
+            if ([selectModel.accountType isEqualToString:@"借记卡"]||[selectModel.accountType isEqualToString:@"信用卡"]||[selectModel.accountType isEqualToString:@"存折"]) {
+                BTTBindingMobileController *vc = [BTTBindingMobileController new];
+                vc.bankModel = selectModel;
+                [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
                 vc.mobileCodeType = BTTSafeVerifyTypeMobileBindDelBankCard;
+                [self.navigationController pushViewController:vc animated:YES];
+            } else if ([selectModel.accountType isEqualToString:@"BTC"]) {
+                [self showNoBindAlert:BTTSafeVerifyTypeMobileBindDelBTCard selectModel:selectModel];
+            } else {
+                [self showNoBindAlert:BTTSafeVerifyTypeMobileBindDelUSDTCard selectModel:selectModel];
             }
-            [self.navigationController pushViewController:vc animated:YES];
         }
     };
     NSString *title = @"要删除银行卡?";
     NSString *message = @"若以后继续使用该银行卡需要重新添加并审核";
-    if ([selectModel.accountType isEqualToString:@"BTC"]) {
+    if ([selectModel.accountType isEqualToString:@"借记卡"]||[selectModel.accountType isEqualToString:@"信用卡"]||[selectModel.accountType isEqualToString:@"存折"]) {
+        title = @"要删除银行卡?";
+        message = @"若以后继续使用该银行卡需要重新添加并审核";
+    } else if ([selectModel.accountType isEqualToString:@"BTC"]) {
         title = @"要删除比特币钱包?";
         message = @"若以后继续使用该钱包需要重新添加并审核";
-    }
-    if ([selectModel.accountType isEqualToString:@"USDT"]) {
-        title = @"要删除USDT钱包?";
-        message = @"若以后继续使用该钱包需要重新添加并审核";
+    } else {
+        title = @"要删除此取款钱包？";
+        message = @"若以后继续使用该取款钱包需重新添加";
     }
     [IVUtility showAlertWithActionTitles:@[@"取消",@"删除"] handlers:@[handler,handler1] title:title message:message];
     
 }
+
+-(void)showNoBindAlert:(BTTSafeVerifyType)type selectModel:(BTTBankModel*)selectModel {
+    IVActionHandler bind = ^(UIAlertAction *action){
+        BTTBindingMobileController *vc = [BTTBindingMobileController new];
+        vc.mobileCodeType = type;
+        vc.bankModel = selectModel;
+        [self.navigationController pushViewController:vc animated:YES];
+    };
+    IVActionHandler kf = ^(UIAlertAction *action){
+        BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+            if (buttonIndex == 0) {
+                [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+            }else if (buttonIndex == 1){
+                [[CLive800Manager sharedInstance] startLive800Chat:self];
+            }
+        }];
+        [actionSheet show];
+    };
+    
+    IVActionHandler cancel = ^(UIAlertAction *action){};
+    NSString *title = @"该帐号尚未绑定或验证手机，无法使用手机短信验证删除取款钱包";
+    [IVUtility showAlertWithActionTitles:@[@"绑定手机", @"联系客服", @"取消"] handlers:@[bind, kf, cancel] title:title message:@""];
+}
+
 - (void)setDefaultBtnClicked
 {
     NSString *bankId = [[NSUserDefaults standardUserDefaults] valueForKey:BTTSelectedBankId];

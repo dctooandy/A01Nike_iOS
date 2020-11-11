@@ -8,6 +8,10 @@
 
 #import "BTTChangeMobileSuccessBtnCell.h"
 
+@interface BTTChangeMobileSuccessBtnCell()
+@property (weak, nonatomic) IBOutlet UIButton *cardInfoBtn;
+@end
+
 @implementation BTTChangeMobileSuccessBtnCell
 
 - (void)awakeFromNib {
@@ -15,6 +19,8 @@
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.backgroundColor = [UIColor colorWithHexString:@"212229"];
     self.memberCenterBtn.layer.cornerRadius = 4;
+    
+    [self.cardInfoBtn setTitle:[[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理":@"银行卡资料" forState:UIControlStateNormal];
 }
 - (IBAction)backMemberCenter:(id)sender {
     if (self.buttonClickBlock) {

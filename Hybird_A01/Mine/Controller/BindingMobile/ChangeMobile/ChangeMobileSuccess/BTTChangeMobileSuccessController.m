@@ -46,11 +46,11 @@
         case BTTSafeVerifyTypeMobileBindDelBankCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
         case BTTSafeVerifyTypeMobileDelUSDTCard:
-        case BTTSafeVerifyTypeMobileBindDelBTCard:
-        case BTTSafeVerifyTypeMobileBindDelUSDTCard:
             self.title = @"删除成功!";
             break;
         case BTTSafeVerifyTypeBindMobile:
+        case BTTSafeVerifyTypeMobileBindDelBTCard:
+        case BTTSafeVerifyTypeMobileBindDelUSDTCard:
             self.title = @"绑定手机号成功";
             break;
         case BTTSafeVerifyTypeBindEmail:

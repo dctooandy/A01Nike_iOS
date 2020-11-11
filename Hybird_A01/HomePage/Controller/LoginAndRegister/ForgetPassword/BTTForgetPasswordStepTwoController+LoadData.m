@@ -15,7 +15,11 @@
     if (!account.length) {
         return;
     }
-    NSDictionary *params = @{BTTLoginName:account,@"use":@4,@"validateId":self.validateId};
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[BTTLoginName] = account;
+    params[@"use"] = @4;
+    params[@"validateId"] = self.validateId;
+//    NSDictionary *params = @{BTTLoginName:account,@"use":@4,@"validateId":self.validateId};
     [IVNetwork requestPostWithUrl:BTTStepOneSendCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
@@ -31,7 +35,12 @@
     if (!code.length || !account.length) {
         return;
     }
-    NSDictionary *params = @{BTTLoginName: account, @"smsCode":code,@"messageId":self.messageId,@"use":@4};
+//    NSDictionary *params = @{BTTLoginName: account, @"smsCode":code,@"messageId":self.messageId,@"use":@4};
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[BTTLoginName] = account;
+    params[@"smsCode"] = code;
+    params[@"messageId"] = self.messageId;
+    params[@"use"] = @4;
     [IVNetwork requestPostWithUrl:BTTVerifySmsCode paramters:params completionBlock:completeBlock];
 }
 

@@ -62,10 +62,13 @@
 }
 
 - (void)requestDataWithStr:(NSString *)dateStr isLastWeek:(BOOL)isLastWeek{
-    NSDictionary *params = @{
-        @"dayGroup":dateStr,
-        @"loginName":[IVNetwork savedUserInfo].loginName
-    };
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"dayGroup"] = dateStr;
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+//    NSDictionary *params = @{
+//        @"dayGroup":dateStr,
+//        @"loginName":[IVNetwork savedUserInfo].loginName
+//    };
     [self showLoading];
     [IVNetwork requestPostWithUrl:BTTXiMaHistoryListUrl paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];

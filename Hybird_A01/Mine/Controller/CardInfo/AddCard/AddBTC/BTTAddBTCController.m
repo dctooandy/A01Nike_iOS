@@ -161,10 +161,16 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [IVLAManager singleEventId:@"A01_bankcard_update" errorCode:@"" errorMsg:@"" customsData:@{}];
 
-            [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
-            BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-            vc.mobileCodeType = self.addCardType;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
+            [BTTHttpManager fetchBankListWithUseCache:NO completion:^(id  _Nullable response, NSError * _Nullable error) {
+                if ([IVNetwork savedUserInfo].bankCardNum > 0 || [IVNetwork savedUserInfo].usdtNum > 0||[IVNetwork savedUserInfo].bfbNum>0||[IVNetwork savedUserInfo].dcboxNum>0) {
+                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+                    vc.mobileCodeType = self.addCardType;
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                } else {
+                    [self.navigationController popToRootViewControllerAnimated:true];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:@{@"showAlert":[NSNumber numberWithBool:true]}];
+                }
+            }];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }

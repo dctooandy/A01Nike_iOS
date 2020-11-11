@@ -54,8 +54,41 @@
     headerLabel.frame = CGRectMake(40, 0, SCREEN_WIDTH - 55, 44);
     headerLabel.font = kFontSystem(12);
     headerLabel.textColor = [UIColor colorWithHexString:@"818791"];
-    NSString *str = (self.verifyType == BTTSafeVerifyTypeChangeMobile) ? @"手机号" : @"银行卡";
-    headerLabel.text = [NSString stringWithFormat:@"经过安全监测，您可以通过以下方式修改%@",str];
+    
+    NSString * typeStr = @"";
+    switch (self.verifyType) {
+        case BTTSafeVerifyTypeMobileAddBankCard:
+        case BTTSafeVerifyTypeHumanAddBankCard:
+            typeStr = @"添加银行卡";
+            break;
+        case BTTSafeVerifyTypeHumanChangeBankCard:
+            typeStr = @"修改银行卡";
+            break;
+        case BTTSafeVerifyTypeHumanDelBankCard:
+            typeStr = @"删除银行卡";
+            break;
+            
+        case BTTSafeVerifyTypeMobileAddBTCard:
+        case BTTSafeVerifyTypeMobileAddUSDTCard:
+        case BTTSafeVerifyTypeMobileAddDCBOXCard:
+        case BTTSafeVerifyTypeHumanAddBTCard:
+        case BTTSafeVerifyTypeHumanAddUSDTCard:
+            typeStr = @"添加取款钱包";
+            break;
+            
+        case BTTSafeVerifyTypeHumanDelBTCard:
+        case BTTSafeVerifyTypeHumanDelUSDTCard:
+            typeStr = @"删除取款钱包";
+            break;
+        case BTTSafeVerifyTypeChangeMobile:
+            typeStr = @"修改手机号";
+            break;
+        
+            
+        default:
+            break;
+    }
+    headerLabel.text = [NSString stringWithFormat:@"经过安全监测，您可以通过以下方式%@",typeStr];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {

@@ -85,20 +85,20 @@
     }];
     
     //jay AD
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-        NSTimeInterval interval = [[userDefault objectForKey:@"jayTimeStamp"] doubleValue] / 1000.0;
-        NSInteger today = [PublicMethod timeIntervalSince1970].integerValue;
-        NSInteger endTime = [PublicMethod timeSwitchTimestamp:@"2019-11-17 23:59:59" andFormatter:@"yyyy-MM-dd HH:mm:ss"];
-        if (today <= endTime) {
-            if (![PublicMethod isDateToday:[NSDate dateWithTimeIntervalSince1970:interval]]) {
-                [userDefault setObject:[PublicMethod timeIntervalSince1970] forKey:@"jayTimeStamp"];
-                [self showJay];
-            }
-        }
-    });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+//        NSTimeInterval interval = [[userDefault objectForKey:@"jayTimeStamp"] doubleValue] / 1000.0;
+//        NSInteger today = [PublicMethod timeIntervalSince1970].integerValue;
+//        NSInteger endTime = [PublicMethod timeSwitchTimestamp:@"2019-11-17 23:59:59" andFormatter:@"yyyy-MM-dd HH:mm:ss"];
+//        if (today <= endTime) {
+//            if (![PublicMethod isDateToday:[NSDate dateWithTimeIntervalSince1970:interval]]) {
+//                [userDefault setObject:[PublicMethod timeIntervalSince1970] forKey:@"jayTimeStamp"];
+//                [self showJay];
+//            }
+//        }
+//    });
     [self checkLoginVersion];
-    [self setupFloatWindow];
+//    [self setupFloatWindow];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBannerData) name:@"CHANGE_MODE" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestRedbag) name:LoginSuccessNotification object:nil];
@@ -166,7 +166,6 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTIsAlreadyShowPopWithDraw];
             [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
         }
     }
@@ -245,9 +244,11 @@
 
 - (void)batchNewsWithId:(NSString *)msgId{
     NSArray *ids = [[NSArray alloc]initWithObjects:msgId, nil];
-    NSDictionary *params = @{
-        @"ids":ids,
-    };
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"ids"] = ids;
+//    NSDictionary *params = @{
+//        @"ids":ids,
+//    };
     
     [IVNetwork requestPostWithUrl:BTTReadInsideMessage paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         NSLog(@"%@",response);
@@ -752,7 +753,8 @@
 }
 
 - (void)choseGameLineWithTag:(NSInteger)tag{
-    NSDictionary *params = @{@"currency": [IVNetwork savedUserInfo] ? [IVNetwork savedUserInfo].uiMode:@"CNY"};
+    NSString * currencyStr = [IVNetwork savedUserInfo].uiMode.length != 0 ? [IVNetwork savedUserInfo].uiMode:@"CNY";
+    NSDictionary *params = @{@"currency": [IVNetwork savedUserInfo] ? currencyStr:@"CNY"};
     NSString *jsonKey = @"";
     switch (tag) {
         case 1000:

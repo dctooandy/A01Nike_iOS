@@ -39,13 +39,16 @@
             self.notifyLabel.hidden = YES;
             break;
         case BTTSafeVerifyTypeMobileDelBankCard:
-        case BTTSafeVerifyTypeMobileBindDelBankCard:
         case BTTSafeVerifyTypeMobileDelBTCard:
-        case BTTSafeVerifyTypeMobileBindDelBTCard:
+        case BTTSafeVerifyTypeMobileDelUSDTCard:
             self.statusLabel.text = @"删除成功!";
             self.notifyLabel.hidden = YES;
             break;
         case BTTSafeVerifyTypeBindMobile:
+        case BTTSafeVerifyTypeMobileBindDelBankCard:
+        case BTTSafeVerifyTypeMobileBindDelBTCard:
+        case BTTSafeVerifyTypeMobileBindDelUSDTCard:
+            
             self.statusLabel.text = [NSString stringWithFormat:@"已绑定手机号码:%@",self.mobileNo];
             self.notifyLabel.hidden = YES;
             break;

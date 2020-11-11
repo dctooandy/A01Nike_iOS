@@ -33,7 +33,7 @@
         case BTTSafeVerifyTypeMobileBindAddBTCard:
         case BTTSafeVerifyTypeMobileBindDelBTCard:
         case BTTSafeVerifyTypeMobileBindAddUSDTCard:
-            case BTTSafeVerifyTypeMobileBindAddDCBOXCard:
+        case BTTSafeVerifyTypeMobileBindAddDCBOXCard:
         case BTTSafeVerifyTypeMobileBindDelUSDTCard:
         case BTTSafeVerifyTypeBindMobile:{
             phoneTitle = @"手机号码";

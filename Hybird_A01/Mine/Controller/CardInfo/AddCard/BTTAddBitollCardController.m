@@ -84,16 +84,6 @@
             [IVLAManager singleEventId:@"A01_bankcard_update" errorCode:@"" errorMsg:@"" customsData:@{}];
 
             [BTTHttpManager fetchUserInfoCompleteBlock:nil];
-//            if (self.isWithDraw) {
-//                [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"bitollAddCard"];
-//                [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-//                [BTTHttpManager fetchBankListWithUseCache:NO completion:^(IVRequestResultModel *result, id response) {
-//                    [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-//                    [self.navigationController popToRootViewControllerAnimated:YES];
-//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoTakeMoneyNotification" object:nil];
-//                }];
-//
-//            }else
             if(self.isSave){
                 [IVNetwork savedUserInfo].bfbNum = 1;
                 [[NSUserDefaults standardUserDefaults]setBool:NO forKey:@"bitollAddCardSave"];
@@ -103,10 +93,16 @@
             
             }else{
                 [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
-                [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
-                BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-                vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddUSDTCard;
-                [weakSelf.navigationController pushViewController:vc animated:YES];
+                [BTTHttpManager fetchBankListWithUseCache:NO completion:^(id  _Nullable response, NSError * _Nullable error) {
+                    if ([IVNetwork savedUserInfo].bankCardNum > 0 || [IVNetwork savedUserInfo].usdtNum > 0||[IVNetwork savedUserInfo].bfbNum>0||[IVNetwork savedUserInfo].dcboxNum>0) {
+                        BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+                        vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddUSDTCard;
+                        [weakSelf.navigationController pushViewController:vc animated:YES];
+                    } else {
+                        [self.navigationController popToRootViewControllerAnimated:true];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:@{@"showAlert":[NSNumber numberWithBool:true]}];
+                    }
+                }];
             }
             
         }else{

@@ -94,12 +94,17 @@
 
 - (void)loginByMobileNo:(NSString*)loginName withValidateId:(NSString *)validateId messageId:(NSString *)messageId smsCode:(NSString *)smsCode isBack:(BOOL)isback{
     [self showLoading];
-    NSDictionary *params = @{
-        @"messageId":messageId,
-        @"smsCode":smsCode,
-        @"validateId":validateId,
-        @"loginName":loginName
-    };
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"messageId"] = messageId;
+    params[@"smsCode"] = smsCode;
+    params[@"validateId"] = validateId;
+    params[@"loginName"] = loginName;
+//    NSDictionary *params = @{
+//        @"messageId":messageId,
+//        @"smsCode":smsCode,
+//        @"validateId":validateId,
+//        @"loginName":loginName
+//    };
     [IVHttpManager shareManager].userToken = @"";
     [IVNetwork requestPostWithUrl:BTTUserLoginByMobileNo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
@@ -687,7 +692,12 @@
 
 // 手机验证码
 - (void)loadMobileVerifyCodeWithPhone:(NSString *)phone use:(NSInteger)use{
-    NSDictionary *params = @{@"use":@(use),@"productId":@"A01APP02",@"mobileNo":[IVRsaEncryptWrapper encryptorString:phone]};
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    params[@"use"] = @(use);
+    params[@"productId"] = @"A01APP02";
+    params[@"mobileNo"] = [IVRsaEncryptWrapper encryptorString:phone];
+    
+//    NSDictionary *params = @{@"use":@(use),@"productId":@"A01APP02",@"mobileNo":[IVRsaEncryptWrapper encryptorString:phone]};
     [IVNetwork requestPostWithUrl:BTTSendMsgCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         NSLog(@"%@",response);
         IVJResponseObject *result = response;
@@ -702,7 +712,11 @@
 }
 
 - (void)sendCodeWithPhone:(NSString *)phone use:(NSInteger)use{
-    NSDictionary *params = @{@"use":@(use),@"productId":@"A01APP02",@"mobileNo":[IVRsaEncryptWrapper encryptorString:phone]};
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    params[@"use"] = @(use);
+    params[@"productId"] = @"A01APP02";
+    params[@"mobileNo"] = [IVRsaEncryptWrapper encryptorString:phone];
+//    NSDictionary *params = @{@"use":@(use),@"productId":@"A01APP02",@"mobileNo":[IVRsaEncryptWrapper encryptorString:phone]};
    [IVNetwork requestPostWithUrl:BTTSendMsgCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         self.messageId = result.body[@"messageId"];

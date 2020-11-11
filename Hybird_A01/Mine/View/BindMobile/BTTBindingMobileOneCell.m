@@ -93,7 +93,7 @@
         [model.name isEqualToString:@"波音厅"] ||
         [model.name isEqualToString:@"个人资料"] ||
         [model.name isEqualToString:@"银行卡资料"] ||
-        [model.name isEqualToString:@"提现地址管理"] ||
+        [model.name isEqualToString:@"钱包管理"] ||
         [model.name isEqualToString:@"修改限红"] ||
         [model.name isEqualToString:@"短信订阅"]) {
         self.rightConstants.constant = 46;

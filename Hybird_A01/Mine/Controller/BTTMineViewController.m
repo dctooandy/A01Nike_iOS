@@ -110,10 +110,7 @@
         [self loadPaymentData];
         [self loadRebateStatus];
         [self loadSaveMoneyTimes];
-        BOOL isAlreadyShowPopWithDraw = [PublicMethod isDateToday:[[NSUserDefaults standardUserDefaults] objectForKey:BTTIsAlreadyShowPopWithDraw]];
-        if (!isAlreadyShowPopWithDraw) {
-            [self loadGetPopWithDraw];
-        }
+        [self loadGetPopWithDraw];
         
     } else {
         self.saveMoneyCount = 0;
@@ -464,10 +461,10 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     NSLog(@"%@", @(indexPath.row));
     BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
-    if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 10 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 8 && isUSDTAcc)) {
+    if (indexPath.row == self.elementsHight.count - 3) {
         [IVNetwork checkAppUpdate];
         return;
-    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 11 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 9 && isUSDTAcc)) {
+    } else if (indexPath.row == self.elementsHight.count - 2) {
         // 网络监测
         IVCNetworkStatusView *statusView = [[IVCNetworkStatusView alloc] initWithFrame:self.view.frame];
 
@@ -499,8 +496,14 @@
         return;
     }
     if (indexPath.row == self.saveMoneyCount + 3) {
+        //取款
         if (self.isCompletePersonalInfo) {
-            if ([IVNetwork savedUserInfo].bankCardNum > 0
+            if ([IVNetwork savedUserInfo].mobileNoBind != 1 && [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+                BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
+                vc.mobileCodeType = BTTSafeVerifyTypeBindMobile;
+                vc.showNotice = true;
+                [self.navigationController pushViewController:vc animated:YES];
+            } else if ([IVNetwork savedUserInfo].bankCardNum > 0
                 || [IVNetwork savedUserInfo].usdtNum > 0
                 || [IVNetwork savedUserInfo].bfbNum > 0
                 || [IVNetwork savedUserInfo].dcboxNum > 0) {
@@ -513,6 +516,7 @@
                 if (isBlackNineteen && usdtCount == 0 && dcboxCount == 0 && btcCount == 0) {
                     [MBProgressHUD showMessagNoActivity:@"请先绑定小金库，USDT钱包或BTC钱包" toView:nil];
                     BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+                    vc.showNotice = false;
                     [self.navigationController pushViewController:vc animated:YES];
                     return;
                 }
@@ -522,8 +526,10 @@
             } else {
                 [MBProgressHUD showMessagNoActivity:@"请先绑定银行卡" toView:nil];
                 BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+                vc.showNotice = true;
                 [self.navigationController pushViewController:vc animated:YES];
             }
+            
         } else {
             [MBProgressHUD showMessagNoActivity:@"请先完善个人信息" toView:nil];
             BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
@@ -639,7 +645,6 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTIsAlreadyShowPopWithDraw];
             [BTTUserStatusManager logoutSuccess];
             strongSelf.saveMoneyCount = 0;
             [strongSelf loadPaymentDefaultData];

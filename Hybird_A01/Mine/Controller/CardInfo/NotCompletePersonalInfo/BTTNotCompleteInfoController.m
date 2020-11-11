@@ -60,7 +60,13 @@
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
-        [cell.textField addTarget:self action:@selector(textChanged) forControlEvents:UIControlEventEditingChanged];
+        cell.textField.text = indexPath.row == 0 ? [IVNetwork savedUserInfo].verifyCode:[IVNetwork savedUserInfo].realName;
+        if (cell.textField.text.length > 0) {
+            [cell.textField setEnabled:false];
+        } else {
+            [cell.textField setEnabled:true];
+            [cell.textField addTarget:self action:@selector(textChanged) forControlEvents:UIControlEventEditingChanged];
+        }
         return cell;
     }
 }
@@ -129,8 +135,13 @@
     UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    cell.btn.enabled = [PublicMethod isValidateLeaveMessage:retentionTF.text] && [PublicMethod checkRealName:realNameTF.text];
-    
+    if ([IVNetwork savedUserInfo].verifyCode.length > 0) {
+        cell.btn.enabled = [PublicMethod checkRealName:realNameTF.text];
+    } else if ([IVNetwork savedUserInfo].realName.length > 0) {
+        cell.btn.enabled = [PublicMethod isValidateLeaveMessage:retentionTF.text];
+    } else {
+        cell.btn.enabled = [PublicMethod isValidateLeaveMessage:retentionTF.text] && [PublicMethod checkRealName:realNameTF.text];
+    }
 }
 - (void)submitChange
 {
@@ -138,13 +149,20 @@
     UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    if ([IVNetwork savedUserInfo].verifyCode.length == 0) {
+        params[@"reservedInfo"] = retentionTF.text;
+    }
+    if ([IVNetwork savedUserInfo].realName.length == 0) {
+        params[@"realName"] = realNameTF.text;
+    }
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     
-    
-    NSDictionary *params = @{
-        @"reservedInfo" : retentionTF.text,
-        @"realName" : realNameTF.text,
-        @"loginName" : [IVNetwork savedUserInfo].loginName
-    };
+//    NSDictionary *params = @{
+//        @"reservedInfo" : retentionTF.text,
+//        @"realName" : realNameTF.text,
+//        @"loginName" : [IVNetwork savedUserInfo].loginName
+//    };
     [IVNetwork requestPostWithUrl:BTTModifyCustomerInfo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];

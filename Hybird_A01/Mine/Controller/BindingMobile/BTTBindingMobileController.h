@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) BTTBankModel *bankModel;
 
+@property (nonatomic, assign) BOOL showNotice;
+
 - (void)setupElements;
 
 @end

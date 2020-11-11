@@ -102,7 +102,7 @@ static const char *BTTHeaderViewKey = "headerView";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccess:) name:LogoutSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(versionUpdate:) name:IVCheckUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveMoneyTimes:) name:BTTSaveMoneyTimesNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoCardInfo) name:@"gotoCardInfoNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoCardInfo:) name:@"gotoCardInfoNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoTakeMoney) name:@"gotoTakeMoneyNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoCustomerReport) name:@"gotoCustomerReportNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMode) name:@"changeModeNotification" object:nil];
@@ -125,9 +125,12 @@ static const char *BTTHeaderViewKey = "headerView";
     
 }
 
-- (void)gotoCardInfo {
+- (void)gotoCardInfo:(NSNotification *)notifi {
+    NSDictionary * dic = notifi.object;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+        vc.showAlert = [[dic objectForKey:@"showAlert"] boolValue];
+        vc.showToast = [[dic objectForKey:@"showToast"] boolValue];
         [self.navigationController pushViewController:vc animated:YES];
     });
 }
