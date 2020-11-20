@@ -833,7 +833,12 @@
 
 // 直接进入游戏
 - (void)enterVideoGameWithGameModel:(BTTVideoGameModel *)gameModel {
-    IVGameModel *model = [[IVGameModel alloc] init];
+    if ([gameModel.provider isEqualToString:@"TTG"] || [gameModel.provider isEqualToString:@"PP"] || [gameModel.provider isEqualToString:@"PT"] || [gameModel.provider isEqualToString:@"PS"] || [gameModel.gameCode isEqualToString:@"A01026"]) {
+        [self chooseGameLine:gameModel];
+        return;
+    }
+    IVGameModel *model = [[IVGameModel alloc] init];\
+                                                
     model.cnName = gameModel.cnName;
     model.enName = gameModel.engName;
     model.provider = gameModel.provider;
@@ -846,9 +851,7 @@
         }else{
             model.gameCode = gameModel.gameCode;
         }
-        
     }
-    
     [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
 }
 // 试玩进入游戏
@@ -870,17 +873,7 @@
         [popView dismiss];
         strongSelf(strongSelf);
         if (btn.tag == 1090) {
-            IVGameModel *model = [[IVGameModel alloc] init];
-            model.cnName = gameModel.cnName;
-            model.enName = gameModel.engName;
-            model.provider = gameModel.provider;
-            model.gameId = gameModel.gameid;
-            model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
-            model.gameStyle = gameModel.gameStyle;
-            if (gameModel.gameCode!=nil) {
-                model.gameCode = gameModel.gameCode;
-            }
-            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:strongSelf];
+            [strongSelf enterVideoGameWithGameModel:gameModel];
         } else {
             BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
             [strongSelf.navigationController pushViewController:vc animated:YES];

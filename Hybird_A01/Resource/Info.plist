@@ -34,8 +34,6 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
-	<key>LSApplicationCategoryType</key>
-	<string>Light</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>dcbox</string>
@@ -96,6 +94,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>com.openinstall.APP_KEY</key>
 	<string>oo1ago</string>
 </dict>

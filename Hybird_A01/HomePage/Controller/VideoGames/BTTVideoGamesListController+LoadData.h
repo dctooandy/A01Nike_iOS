@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadAddOrCancelFavorite:(BOOL)favorite gameModel:(BTTVideoGameModel *)model;
 
+- (void)chooseGameLine:(BTTVideoGameModel *)gameModel;
+
 @end
 
 NS_ASSUME_NONNULL_END

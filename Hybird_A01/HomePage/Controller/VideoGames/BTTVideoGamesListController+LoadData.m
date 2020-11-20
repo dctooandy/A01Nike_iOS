@@ -81,4 +81,68 @@
     }];
 }
 
+- (void)chooseGameLine:(BTTVideoGameModel *)gameModel {
+    NSString * currencyStr = [IVNetwork savedUserInfo].uiMode.length != 0 ? [IVNetwork savedUserInfo].uiMode:@"CNY";
+    NSDictionary *params = @{@"currency": [IVNetwork savedUserInfo] ? currencyStr:@"CNY"};
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:QUERYGames paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        IVJResponseObject *result = response;
+        NSString * gameCode = gameModel.gameCode;
+        if ([gameModel.provider isEqualToString:@"PS"]) {
+            gameCode = @"A01094";
+        }
+        NSArray *lineArray = result.body[gameCode];
+        
+        if (lineArray != nil && lineArray.count >= 2) {
+            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"请选择游戏币种" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+            for (int i = 0; i < lineArray.count; i++) {
+                NSDictionary *json = lineArray[i];
+                NSString *platformCurrency = json[@"platformCurrency"];
+                NSString *title = [platformCurrency isEqualToString:@"USD"]||[platformCurrency isEqualToString:@"USDT"] ? @"数字币USDT" : @"人民币CNY";
+                
+                UIAlertAction *unlock = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [self goToGame:gameModel currency:platformCurrency];
+                }];
+                [alertVC addAction:unlock];
+                
+                if (i == lineArray.count-1) {
+                    UIAlertAction *closelock = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [self goToGame:gameModel currency:@"USDT"];
+                    }];
+                    [alertVC addAction:closelock];
+                    [self presentViewController:alertVC animated:YES completion:nil];
+                }
+            }
+        }else{
+            if (lineArray == nil) {
+                [self goToGame:gameModel currency:@"CNY"];
+            } else {
+                NSDictionary *json = lineArray[0];
+                NSString *platformCurrency = json[@"platformCurrency"];
+                [self goToGame:gameModel currency:platformCurrency];
+            }
+        }
+    }];
+}
+
+-(void)goToGame:(BTTVideoGameModel *)gameModel currency:(NSString *)currency {
+    IVGameModel *model = [[IVGameModel alloc] init];
+    model.cnName = gameModel.cnName;
+    model.enName = gameModel.engName;
+    model.provider = gameModel.provider;
+    model.gameId = gameModel.gameid;
+    model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
+    model.gameStyle = gameModel.gameStyle;
+    model.platformCurrency = currency;
+    if (gameModel.gameCode!=nil) {
+        if ([gameModel.provider isEqualToString:@"PS"]) {
+            model.gameCode = @"A01094";
+        }else{
+            model.gameCode = gameModel.gameCode;
+        }
+    }
+    [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+}
+
 @end

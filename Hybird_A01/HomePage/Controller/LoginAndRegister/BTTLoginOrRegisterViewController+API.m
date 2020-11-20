@@ -110,10 +110,10 @@
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            [IVHttpManager shareManager].loginName = loginName;
+            [IVHttpManager shareManager].loginName = result.body[@"loginName"];
             [IVHttpManager shareManager].userToken = result.body[@"token"];
             [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
-            [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
+            [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"] isBack:isback];
             
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:self.view];
@@ -132,17 +132,17 @@
         [parameters setValue:[IVRsaEncryptWrapper encryptorString:model.password] forKey:BTTPassword];
         [parameters setValue:model.timestamp forKey:BTTTimestamp];
         [parameters setValue:@(loginType) forKey:@"loginType"];
-        if (model.code.length) {
-            [parameters setValue:model.code forKey:@"captcha"];
-        }
-        if (self.captchaId.length) {
-            [parameters setValue:self.captchaId forKey:@"captchaId"];
-        }
     }else{
         [parameters setValue:model.password forKey:@"verifyStr"];
         [parameters setValue:self.messageId forKey:@"messageId"];
         [parameters setValue:@"" forKey:@"captcha"];
         [parameters setValue:@"" forKey:@"captchaId"];
+    }
+    if (model.code.length) {
+        [parameters setValue:model.code forKey:@"captcha"];
+    }
+    if (self.captchaId.length) {
+        [parameters setValue:self.captchaId forKey:@"captchaId"];
     }
     [IVHttpManager shareManager].userToken = @"";
     

@@ -101,6 +101,7 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork savedUserInfo]) {
+        [self loadGetPopWithDraw];
         [self loadUserInfo];
         [self loadBankList];
         if (!self.isLoading) {
@@ -110,8 +111,6 @@
         [self loadPaymentData];
         [self loadRebateStatus];
         [self loadSaveMoneyTimes];
-        [self loadGetPopWithDraw];
-        
     } else {
         self.saveMoneyCount = 0;
         [self loadPaymentDefaultData];

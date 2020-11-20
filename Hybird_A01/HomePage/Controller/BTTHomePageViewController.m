@@ -772,9 +772,9 @@
         case 1010:
             jsonKey = @"A01064";
             break;
-//        case 1011:
-//            jsonKey = @"A01004";
-//            break;
+        case 1011:
+            jsonKey = @"A01004";
+            break;
         default:
             break;
     }
@@ -853,16 +853,15 @@
         model.gameType = kFishType;
         model.platformCurrency = currency;
         [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+    } else if (tag==1011) {
+        IVGameModel *model = [[IVGameModel alloc] init];
+        model.cnName = @"AG彩票";
+        model.gameCode = @"A01004";
+        model.enName = @"K8";
+        model.provider = @"K8";
+        model.platformCurrency = currency;
+        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
     }
-//    else if (tag==1011) {
-//        IVGameModel *model = [[IVGameModel alloc] init];
-//        model.cnName = @"AG彩票";
-//        model.gameCode = @"A01004";
-//        model.enName = @"K8";
-//        model.provider = @"K8";
-//        model.platformCurrency = currency;
-//        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
-//    }
 }
 
 - (void)forwardToGameViewWithTag:(NSInteger)tag
@@ -984,8 +983,7 @@
             }
         }
         if (model) {
-            if (tag==1006||tag==1010||tag==1003) {
-                //||tag==1011
+            if (tag==1006||tag==1010||tag==1003||tag==1011) {
                 [self choseGameLineWithTag:tag];
             }else{
                 [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
