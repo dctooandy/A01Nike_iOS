@@ -631,16 +631,15 @@
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            [BTTHttpManager fetchBankListWithUseCache:NO completion:^(id  _Nullable response, NSError * _Nullable error) {
-                if (isBackToCardInfo) {
-                    [self.navigationController popToRootViewControllerAnimated:true];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:@{@"showToast":[NSNumber numberWithBool:true]}];
-                } else {
-                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-                    vc.mobileCodeType = self.mobileCodeType;
-                    [weakSelf.navigationController pushViewController:vc animated:YES];
-                }
-            }];
+            [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
+            if (isBackToCardInfo) {
+                [self.navigationController popToRootViewControllerAnimated:true];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:@{@"showToast":[NSNumber numberWithBool:true]}];
+            } else {
+                BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+                vc.mobileCodeType = self.mobileCodeType;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }
         }else{
             NSString *message = [NSString isBlankString:result.head.errMsg] ? @"删除失败，请重试!" : result.head.errMsg;
             [MBProgressHUD showError:message toView:nil];
