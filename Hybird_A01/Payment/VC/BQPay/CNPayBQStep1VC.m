@@ -50,7 +50,7 @@
     // 初始化数据
     [self setViewHeight:450 fullScreen:NO];
     [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(150);
+        make.height.mas_equalTo(100);
     }];
     if (self.paymentModel.payType == 100) {
         [self configBishangUI];

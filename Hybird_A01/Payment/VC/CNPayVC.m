@@ -221,7 +221,7 @@
         return;
     }
     BTTMeMainModel *channel = [_payments objectAtIndex:indexPath.row];
-    if ([IVNetwork savedUserInfo].starLevel == 0 && (![IVNetwork savedUserInfo].verifyCode.length || ![IVNetwork savedUserInfo].realName.length)) {
+    if ([IVNetwork savedUserInfo].starLevel == 0 && ![IVNetwork savedUserInfo].realName.length) {
         if (channel.paymentType == 90 || channel.paymentType == 91 || channel.paymentType == 92 || channel.paymentType == 0) {
             BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
             [self.navigationController pushViewController:personInfo animated:YES];

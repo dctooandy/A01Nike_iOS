@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -71,10 +69,10 @@
                                     <rect key="frame" x="0.0" y="20" width="315" height="110"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4rN-v7-LoO">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="315" height="110"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="真实姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyk-Y7-Xce">
-                                                    <rect key="frame" x="22" y="18" width="65.5" height="19.5"/>
+                                                    <rect key="frame" x="22" y="45.5" width="65.5" height="19.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="65.5" id="fYH-cQ-rMc"/>
                                                     </constraints>
@@ -83,7 +81,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="银行卡的开户姓名" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Tgw-Sy-0WS" customClass="CNPayNameTF">
-                                                    <rect key="frame" x="97.5" y="12.5" width="195.5" height="30"/>
+                                                    <rect key="frame" x="97.5" y="38" width="195.5" height="34"/>
                                                     <color key="textColor" red="0.29411764709999999" green="0.29411764709999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -96,34 +94,6 @@
                                                 <constraint firstItem="Wyk-Y7-Xce" firstAttribute="leading" secondItem="4rN-v7-LoO" secondAttribute="leading" constant="22" id="Xp1-J6-TCZ"/>
                                                 <constraint firstItem="Tgw-Sy-0WS" firstAttribute="leading" secondItem="Wyk-Y7-Xce" secondAttribute="trailing" constant="10" id="lbg-A6-d5a"/>
                                                 <constraint firstAttribute="trailing" secondItem="Tgw-Sy-0WS" secondAttribute="trailing" constant="22" id="zlg-oR-TCW"/>
-                                            </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rEv-OQ-AMM">
-                                            <rect key="frame" x="0.0" y="55" width="315" height="55"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预留信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aV2-AC-Vcl">
-                                                    <rect key="frame" x="22" y="18.5" width="66" height="19.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="65.5" id="SpD-q6-J41"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.29411764709999999" green="0.29411764709999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1-6位数字，字母或文字" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="GVV-1b-OR1">
-                                                    <rect key="frame" x="97.5" y="12.5" width="195.5" height="30"/>
-                                                    <color key="textColor" red="0.29411764709999999" green="0.29411764709999999" blue="0.29411764709999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstItem="GVV-1b-OR1" firstAttribute="centerY" secondItem="rEv-OQ-AMM" secondAttribute="centerY" id="2CD-la-ncZ"/>
-                                                <constraint firstItem="aV2-AC-Vcl" firstAttribute="leading" secondItem="rEv-OQ-AMM" secondAttribute="leading" constant="22" id="512-sP-zkr"/>
-                                                <constraint firstItem="GVV-1b-OR1" firstAttribute="leading" secondItem="aV2-AC-Vcl" secondAttribute="trailing" constant="10" id="LC5-E2-3ie"/>
-                                                <constraint firstAttribute="trailing" secondItem="GVV-1b-OR1" secondAttribute="trailing" constant="22" id="LYP-Gc-BHG"/>
-                                                <constraint firstItem="aV2-AC-Vcl" firstAttribute="centerY" secondItem="rEv-OQ-AMM" secondAttribute="centerY" id="WQK-Wr-kkp"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -163,6 +133,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.74657534246575341" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="mFq-2L-Ttl" secondAttribute="trailing" constant="30" id="700-tk-BVb"/>
@@ -170,10 +141,8 @@
                 <constraint firstItem="mFq-2L-Ttl" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="dAE-c1-eZ8"/>
                 <constraint firstItem="mFq-2L-Ttl" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-50" id="pk0-e6-KQD"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <connections>
                 <outlet property="nameTF" destination="Tgw-Sy-0WS" id="5iJ-aP-Lp0"/>
-                <outlet property="preSetTF" destination="GVV-1b-OR1" id="FYW-g5-l6Q"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>

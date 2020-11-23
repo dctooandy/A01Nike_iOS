@@ -426,7 +426,7 @@
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
-    } else if ([IVNetwork savedUserInfo].starLevel == 0 && (![IVNetwork savedUserInfo].realName.length) && (![IVNetwork savedUserInfo].verifyCode.length)) {
+    } else if ([IVNetwork savedUserInfo].starLevel == 0 && ![IVNetwork savedUserInfo].realName.length) {
         BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
         [self.navigationController pushViewController:personInfo animated:YES];
         return;
@@ -779,7 +779,7 @@
 
 - (BOOL)isCompletePersonalInfo
 {
-    BOOL isComplete = (![[IVNetwork savedUserInfo].realName isEqualToString:@""]) && (![[IVNetwork savedUserInfo].verifyCode isEqualToString:@""]);
+    BOOL isComplete = (![[IVNetwork savedUserInfo].realName isEqualToString:@""]);
     return isComplete;
 }
 

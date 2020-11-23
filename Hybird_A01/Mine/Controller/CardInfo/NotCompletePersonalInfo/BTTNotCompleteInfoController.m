@@ -48,7 +48,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 2) {
+    if (indexPath.row == self.elementsHight.count - 1) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
         weakSelf(weakSelf)
         cell.buttonType = BTTButtonTypeSave;
@@ -60,7 +60,7 @@
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
-        cell.textField.text = indexPath.row == 0 ? [IVNetwork savedUserInfo].verifyCode:[IVNetwork savedUserInfo].realName;
+        cell.textField.text = [IVNetwork savedUserInfo].realName;
         if (cell.textField.text.length > 0) {
             [cell.textField setEnabled:false];
         } else {
@@ -73,12 +73,6 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    
-//    NSLog(@"%zd", indexPath.item);
-//    if (indexPath.row == 2) {
-//        BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource
@@ -116,8 +110,9 @@
 
 - (void)setupElements {
     NSMutableArray *elementsHight = [NSMutableArray array];
-    for (int i = 0; i < 3; i++) {
-        if (i == 2) {
+    NSInteger count = self.sheetDatas.count + 1;
+    for (int i = 0; i < count; i++) {
+        if (i == count - 1) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
         } else {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
@@ -131,38 +126,21 @@
 
 - (void)textChanged
 {
-    UITextField *retentionTF = [self getCellTextFieldWithIndex:0];
-    UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    UITextField *realNameTF = [self getCellTextFieldWithIndex:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.elementsHight.count - 1 inSection:0];
     BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    if ([IVNetwork savedUserInfo].verifyCode.length > 0) {
-        cell.btn.enabled = [PublicMethod checkRealName:realNameTF.text];
-    } else if ([IVNetwork savedUserInfo].realName.length > 0) {
-        cell.btn.enabled = [PublicMethod isValidateLeaveMessage:retentionTF.text];
-    } else {
-        cell.btn.enabled = [PublicMethod isValidateLeaveMessage:retentionTF.text] && [PublicMethod checkRealName:realNameTF.text];
-    }
+    cell.btn.enabled = [PublicMethod checkRealName:realNameTF.text];
 }
 - (void)submitChange
 {
-    UITextField *retentionTF = [self getCellTextFieldWithIndex:0];
-    UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
+    UITextField *realNameTF = [self getCellTextFieldWithIndex:0];
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
-    if ([IVNetwork savedUserInfo].verifyCode.length == 0) {
-        params[@"reservedInfo"] = retentionTF.text;
-    }
     if ([IVNetwork savedUserInfo].realName.length == 0) {
         params[@"realName"] = realNameTF.text;
     }
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
-    
-//    NSDictionary *params = @{
-//        @"reservedInfo" : retentionTF.text,
-//        @"realName" : realNameTF.text,
-//        @"loginName" : [IVNetwork savedUserInfo].loginName
-//    };
     [IVNetwork requestPostWithUrl:BTTModifyCustomerInfo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];

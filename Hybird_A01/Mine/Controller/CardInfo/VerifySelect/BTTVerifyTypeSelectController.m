@@ -147,7 +147,7 @@
                 vc.mobileCodeType = BTTSafeVerifyTypeVerifyMobile;
                 [self.navigationController pushViewController:vc animated:YES];
             } else {
-                if ([IVNetwork savedUserInfo].realName.length != 0 && [IVNetwork savedUserInfo].verifyCode.length != 0) {
+                if ([IVNetwork savedUserInfo].realName.length != 0) {
                     BTTChangeMobileManualController *vc = [BTTChangeMobileManualController new];
                     [self.navigationController pushViewController:vc animated:YES];
                 } else {

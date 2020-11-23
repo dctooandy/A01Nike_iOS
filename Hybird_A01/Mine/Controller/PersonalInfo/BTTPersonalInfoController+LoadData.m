@@ -12,16 +12,15 @@
 @implementation BTTPersonalInfoController (LoadData)
 
 - (void)loadMainData {
-    NSArray *names = @[@"预留信息",@"真实姓名",@"性别",@"出生日期",@"邮箱地址",@"地址",@"备注"];
-    NSArray *placeholders = @[@"1-16位数字, 字母或文字",@"需与持卡人姓名相同",@"请选择性别",@"请选择出生日期",@"请填写邮箱地址",@"请填写地址",@"请填写备注"];
-    NSString *verifyCode = [IVNetwork savedUserInfo].verifyCode ? [IVNetwork savedUserInfo].verifyCode : @"";
+    NSArray *names = @[@"真实姓名",@"性别",@"出生日期",@"邮箱地址",@"地址",@"备注"];
+    NSArray *placeholders = @[@"需与持卡人姓名相同",@"请选择性别",@"请选择出生日期",@"请填写邮箱地址",@"请填写地址",@"请填写备注"];
     NSString *realName = [IVNetwork savedUserInfo].realName ? [IVNetwork savedUserInfo].realName : @"";
     NSString *sex = [[IVNetwork savedUserInfo].gender isEqualToString:@"M"] ? @"男" : @"女";
     NSString *birthDay = [IVNetwork savedUserInfo].birthday ? [[IVNetwork savedUserInfo].birthday substringWithRange:NSMakeRange(0, 10)] : @"";
     NSString *email = [IVNetwork savedUserInfo].email ? [IVNetwork savedUserInfo].email : @"";
     NSString *address = [IVNetwork savedUserInfo].address ? [IVNetwork savedUserInfo].address : @"";
     NSString *remark = [IVNetwork savedUserInfo].remark ? [IVNetwork savedUserInfo].remark : @"";
-    NSArray *values = @[verifyCode,realName,sex,birthDay,email,address,remark];
+    NSArray *values = @[realName,sex,birthDay,email,address,remark];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];

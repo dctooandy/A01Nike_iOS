@@ -106,8 +106,7 @@
 
 - (void)submitInfo {
     [self.view endEditing:YES];
-    UITextField *retentionTF = [self getCellTextFieldWithIndex:0];
-    UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
+    UITextField *realNameTF = [self getCellTextFieldWithIndex:0];
     NSMutableDictionary *params = @{}.mutableCopy;
     if ([IVNetwork savedUserInfo].realName.length == 0) {
         if (![PublicMethod checkRealName:realNameTF.text]) {
@@ -115,14 +114,6 @@
             return;
         } else {
             params[@"realName"] = realNameTF.text;
-        }
-    }
-    if ([IVNetwork savedUserInfo].verifyCode.length == 0) {
-        if (![PublicMethod isValidateLeaveMessage:retentionTF.text]) {
-            [MBProgressHUD showError:@"输入的预留信息格式有误！" toView:self.view];
-            return;
-        } else {
-            params[@"reservedInfo"] = retentionTF.text;
         }
     }
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
@@ -144,8 +135,8 @@
 
 // 构造数据源
 - (void)loadData {
-    NSArray *nameArr = @[@"预留信息",@"真实姓名"];
-    NSArray *placeholders = @[@"预留信息",@"需与取款银行卡持卡人姓名相同"];
+    NSArray *nameArr = @[@"真实姓名"];
+    NSArray *placeholders = @[@"需与取款银行卡持卡人姓名相同"];
     
     NSMutableArray *sheetData = [NSMutableArray array];
     for (NSString *name in nameArr) {
