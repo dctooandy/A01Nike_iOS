@@ -636,7 +636,6 @@
                     [self.navigationController popToRootViewControllerAnimated:true];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:@{@"showToast":[NSNumber numberWithBool:true]}];
                 } else {
-                    [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
                     BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
                     vc.mobileCodeType = self.mobileCodeType;
                     [weakSelf.navigationController pushViewController:vc animated:YES];
