@@ -554,7 +554,10 @@
         return headView;
     } else if ([IVNetwork savedUserInfo].dcboxNum == 0) {
         UILabel *noticeLabel = [[UILabel alloc]init];
-        noticeLabel.text = @"点击绑定小金库存款，到账更快哦";
+        NSMutableAttributedString * str = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"点击绑定小金库存款，到账更快哦"]];
+        NSRange range = {0,[str length]};
+        [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:range];
+        noticeLabel.attributedText = str;
         noticeLabel.textColor = [UIColor colorWithRed: 0.24 green: 0.60 blue: 0.97 alpha: 1.00];
         noticeLabel.font = [UIFont systemFontOfSize:12];
         CGSize size = [noticeLabel sizeThatFits:CGSizeMake(CGFLOAT_MAX, 14)];
