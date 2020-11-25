@@ -35,7 +35,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *secondMoneyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondArriveLabel;
 @property (weak, nonatomic) IBOutlet UIView *secondArriveView;
-
+@property (weak, nonatomic) IBOutlet UIImageView *bfbNoteImg;
 @property (weak, nonatomic) IBOutlet UIImageView *qrcodeView;
 @property (weak, nonatomic) IBOutlet UIButton *saveFinishBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *bfbBanner;
@@ -258,7 +258,15 @@
     _commitBtn.layer.cornerRadius = 5;
     _commitBtn.layer.backgroundColor = [[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] CGColor];
     _commitBtn.alpha = 1;
-    
+    if (self.bfbNoteImg.isHidden) {
+        [self.commitBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.usdtTipLabel.mas_bottom).offset(10);
+        }];
+    } else {
+        [self.commitBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.usdtTipLabel.mas_bottom).offset(40);
+        }];
+    }
     _saveFinishBtn.layer.cornerRadius = 5;
     _saveFinishBtn.layer.backgroundColor = [[UIColor colorWithRed:255.0f/255.0f green:255.0f/255.0f blue:255.0f/255.0f alpha:1.0f] CGColor];
     _saveFinishBtn.alpha = 1;
@@ -308,13 +316,16 @@
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         self.arriveView.hidden = YES;
         self.usdtTipLabel.hidden = YES;
+        sepratorView.hidden = YES;
         [self.saveView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.height.mas_equalTo(44);
         }];
+        [self.commitBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.usdtTipLabel).offset(10);
+        }];
     }
-    
-    
 }
+
 - (IBAction)saveFinishBtn_clikc:(id)sender {
     self.infoView.hidden = NO;
     self.secondView.hidden = YES;
