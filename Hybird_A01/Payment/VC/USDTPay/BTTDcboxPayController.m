@@ -329,19 +329,10 @@
         if ([_moneyTextField.text doubleValue]<[_bfbModel.minAmount doubleValue]||[_moneyTextField.text doubleValue]>[_bfbModel.maxAmount doubleValue]){
             [self showError:[NSString stringWithFormat:@"请输入%@-%@的存款金额",_bfbModel.minAmount,_bfbModel.maxAmount]];
         }else{
-            
-          if ([IVNetwork savedUserInfo].dcboxNum<1) {
-              [self showConfirmAlertWithUrl:@""];
-          }else{
-              [self createOnlineOrdersWithPayType:[_bfbModel.payType integerValue]];
-          }
-        }
-    }else{
-        if ([IVNetwork savedUserInfo].bfbNum<1) {
-            [self showConfirmAlertWithUrl:@""];
-        }else{
             [self createOnlineOrdersWithPayType:[_bfbModel.payType integerValue]];
         }
+    }else{
+        [self createOnlineOrdersWithPayType:[_bfbModel.payType integerValue]];
     }
 }
 
@@ -420,23 +411,6 @@
     }];
     
 }
-
-- (void)showConfirmAlertWithUrl:(NSString *)payUrl{
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"存款绑定小金库,到账速度更快哦~" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"继续存款" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        [self createOnlineOrdersWithPayType:[self.bfbModel.payType integerValue]];
-    }];
-    [alertVC addAction:cancel];
-    UIAlertAction *unlock = [UIAlertAction actionWithTitle:@"去绑定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"bitollAddCardSave"];
-        BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
-        [self pushViewController:vc];
-    }];
-    [alertVC addAction:unlock];
-    [self presentViewController:alertVC animated:YES completion:nil];
-}
-
 
 - (IBAction)moneyTextFieldDidchange:(id)sender {
     if (_moneyTextField.text.length>0) {
@@ -553,26 +527,48 @@
     for (UIView *view in headView.subviews) {
         [view removeFromSuperview];
     }
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 15, 60, 14)];
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.font = [UIFont systemFontOfSize:14];
-
-    [headView addSubview:titleLabel];
-
-    UILabel *noticeLabel = [[UILabel alloc]initWithFrame:CGRectMake(70, 15, SCREEN_WIDTH-90, 14)];
-    noticeLabel.textColor = COLOR_RGBA(129, 135, 145, 1);
-    noticeLabel.font = [UIFont systemFontOfSize:12];
-    [headView addSubview:noticeLabel];
-    if (indexPath.section==0) {
+    if (indexPath.section == 0) {
+        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 15, 60, 14)];
+        titleLabel.textColor = [UIColor whiteColor];
+        titleLabel.font = [UIFont systemFontOfSize:14];
         titleLabel.text = @"协议";
-        noticeLabel.text = @" ";
-    }else{
-        titleLabel.text = @"";
-        noticeLabel.text = @"";
-    }
-    
+        [headView addSubview:titleLabel];
 
-    return headView;
+        UILabel *noticeLabel = [[UILabel alloc]initWithFrame:CGRectMake(70, 15, SCREEN_WIDTH-90, 14)];
+        noticeLabel.textColor = COLOR_RGBA(129, 135, 145, 1);
+        noticeLabel.font = [UIFont systemFontOfSize:12];
+        noticeLabel.text = @" ";
+        headView.userInteractionEnabled = false;
+        [headView addSubview:noticeLabel];
+        return headView;
+    } else if ([IVNetwork savedUserInfo].dcboxNum == 0) {
+        UILabel *noticeLabel = [[UILabel alloc]init];
+        noticeLabel.text = @"点击绑定小金库存款，到账更快哦";
+        noticeLabel.textColor = [UIColor colorWithRed: 0.24 green: 0.60 blue: 0.97 alpha: 1.00];
+        noticeLabel.font = [UIFont systemFontOfSize:12];
+        CGSize size = [noticeLabel sizeThatFits:CGSizeMake(CGFLOAT_MAX, 14)];
+        noticeLabel.frame = CGRectMake(SCREEN_WIDTH-size.width-30, 15, size.width, 14);
+        [headView addSubview:noticeLabel];
+        
+        headView.userInteractionEnabled = true;
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToBind)];
+        tap.numberOfTapsRequired = 1;
+        [headView addGestureRecognizer:tap];
+        return headView;
+    } else {
+        UIView *view = [[UIView alloc]init];
+        [headView addSubview:view];
+        return headView;
+    }
+}
+
+// 设置Header的尺寸
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    return CGSizeMake(SCREEN_WIDTH-30, 44);
+}
+
+-(void)goToBind {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:nil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

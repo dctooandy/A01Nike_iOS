@@ -37,6 +37,7 @@
     [self.rechargeView.ercBtn addTarget:self action:@selector(ercBtn_click:) forControlEvents:UIControlEventTouchUpInside];
     [self.rechargeView.omniBtn addTarget:self action:@selector(omniBtn_click:) forControlEvents:UIControlEventTouchUpInside];
     [self.rechargeView.commitBtn addTarget:self action:@selector(commitBtn_click:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rechargeView.urlCopyBtn addTarget:self action:@selector(urlCopyBtnAction) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)requestUSDTRate{
@@ -93,6 +94,7 @@
                 weakSelf.rechargeView.ercBtn.hidden = NO;
                 self.selectedProtocol = @"ERC20";
                 weakSelf.rechargeView.qrcodeImg.image = [PublicMethod QRCodeMethod:json[@"erc20"]];
+                weakSelf.rechargeView.locationUrlTextView.text = json[@"erc20"];
             }
             if ([json objectForKey:@"omni"]) {
                 weakSelf.rechargeView.omniBtn.hidden = NO;
@@ -100,6 +102,7 @@
                     weakSelf.rechargeView.omniBtn.frame = CGRectMake(16, 48, 100, 30);
                     [self omniBtn_click:nil];
                     weakSelf.rechargeView.qrcodeImg.image = [PublicMethod QRCodeMethod:json[@"omni"]];
+                    weakSelf.rechargeView.locationUrlTextView.text = json[@"omni"];
                 }
             }
         }
@@ -129,6 +132,12 @@
 
 - (void)commitBtn_click:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)urlCopyBtnAction {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = self.rechargeView.locationUrlTextView.text;
+    [MBProgressHUD showSuccess:@"已复制" toView:nil];
 }
 
 -(OCTRechargeUSDTView *)rechargeView {

@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIButton *omniBtn;
 @property (nonatomic, strong) UIButton *commitBtn;
 @property (nonatomic, strong) UILabel *rateLabel;
+@property (nonatomic, strong) UITextView *locationUrlTextView;
+@property (nonatomic, strong) UIButton *urlCopyBtn;
 @property (nonatomic, strong) UIImageView *qrcodeImg;
 @end
 

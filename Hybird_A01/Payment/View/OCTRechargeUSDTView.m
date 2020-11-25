@@ -119,13 +119,59 @@
     rateLabel.textAlignment = NSTextAlignmentCenter;
     rateLabel.font = [UIFont systemFontOfSize:12];
     rateLabel.textColor = [UIColor colorWithHexString:@"#818791"];
+    rateLabel.hidden = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
     [self.rechargeView addSubview:rateLabel];
     self.rateLabel = rateLabel;
     [rateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.rechargeView).offset(16);
         make.bottom.mas_equalTo(commitBtn.mas_top).offset(-20);
-        make.height.mas_greaterThanOrEqualTo(20);
+        make.height.offset(20);
         make.right.mas_equalTo(self.rechargeView).offset(-16);
+    }];
+    
+    UILabel *locationLabel = [[UILabel alloc]init];
+    locationLabel.text = @"钱包地址";
+    locationLabel.numberOfLines = 2;
+    locationLabel.textAlignment = NSTextAlignmentCenter;
+    locationLabel.font = [UIFont systemFontOfSize:14];
+    locationLabel.backgroundColor = [UIColor whiteColor];
+    [self.rechargeView addSubview:locationLabel];
+    [locationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.rechargeView).offset(16);
+        if (rateLabel.isHidden) {
+            make.bottom.mas_equalTo(commitBtn.mas_top).offset(-20);
+        } else {
+            make.bottom.mas_equalTo(rateLabel.mas_top).offset(-20);
+        }
+        make.height.offset(40);
+        make.width.offset(70);
+    }];
+    
+    UITextView *locationUrlTextView = [[UITextView alloc]init];
+    locationUrlTextView.text = @"";
+    locationUrlTextView.textAlignment = NSTextAlignmentLeft;
+    locationUrlTextView.font = [UIFont systemFontOfSize:14];
+    locationUrlTextView.backgroundColor = [UIColor whiteColor];
+    locationUrlTextView.userInteractionEnabled = false;
+    locationUrlTextView.contentInset = UIEdgeInsetsMake(-5, 0, 5, 0);
+    [self.rechargeView addSubview:locationUrlTextView];
+    self.locationUrlTextView = locationUrlTextView;
+    [locationUrlTextView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(locationLabel.mas_right).offset(16);
+        make.right.mas_equalTo(self.rechargeView).offset(-76);
+        make.height.centerY.mas_equalTo(locationLabel);
+    }];
+    
+    UIButton *urlCopyBtn = [[UIButton alloc]init];
+    [urlCopyBtn setTitleColor:[UIColor colorWithRed: 0.24 green: 0.60 blue: 0.97 alpha: 1.00] forState:UIControlStateNormal];
+    [urlCopyBtn setTitle:@"复制" forState:UIControlStateNormal];
+    urlCopyBtn.titleLabel.font = [UIFont systemFontOfSize:17.0];
+    [self.rechargeView addSubview:urlCopyBtn];
+    self.urlCopyBtn = urlCopyBtn;
+    [urlCopyBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.rechargeView).offset(-16);
+        make.left.mas_equalTo(locationUrlTextView.mas_right).offset(16);
+        make.height.centerY.mas_equalTo(locationLabel);
     }];
     
     UIImageView *qrCodeView = [[UIImageView alloc]init];
@@ -135,8 +181,8 @@
     self.qrcodeImg = qrCodeView;
     [qrCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(rechargeTipLabel.mas_bottom).offset(20);
-        make.bottom.mas_equalTo(rateLabel.mas_top).offset(-20);
-        make.left.right.mas_equalTo(self.rechargeView);
+        make.bottom.mas_equalTo(locationLabel.mas_top).offset(-20);
+        make.left.right.mas_equalTo(self.commitBtn);
     }];
 }
 
