@@ -27,89 +27,103 @@ PODS:
     - GJRedDot/GJDeallocBlockExecutor (= 1.1.1)
   - GJRedDot/GJDeallocBlockExecutor (1.1.1)
   - IQKeyboardManager (5.0.8)
-  - IVCacheLibrary (1.0.4)
-  - IVCheckNetworkLibrary (1.0.9):
-    - IVCheckNetworkLibrary/Classes (= 1.0.9)
+  - IVCacheLibrary (1.0.6)
+  - IVCheckNetworkLibrary (1.0.10):
+    - CocoaAsyncSocket
+    - IVCheckNetworkLibrary/Classes (= 1.0.10)
+    - IVLoganAnalysis
     - IVNetworkLibrary2.0
-  - IVCheckNetworkLibrary/Classes (1.0.9):
-    - IVCheckNetworkLibrary/Classes/Http (= 1.0.9)
-    - IVCheckNetworkLibrary/Classes/Models (= 1.0.9)
-    - IVCheckNetworkLibrary/Classes/SDK (= 1.0.9)
-    - IVCheckNetworkLibrary/Classes/UI (= 1.0.9)
+  - IVCheckNetworkLibrary/Classes (1.0.10):
+    - CocoaAsyncSocket
+    - IVCheckNetworkLibrary/Classes/Http (= 1.0.10)
+    - IVCheckNetworkLibrary/Classes/Models (= 1.0.10)
+    - IVCheckNetworkLibrary/Classes/SDK (= 1.0.10)
+    - IVCheckNetworkLibrary/Classes/UI (= 1.0.10)
+    - IVLoganAnalysis
     - IVNetworkLibrary2.0
-  - IVCheckNetworkLibrary/Classes/Http (1.0.9):
+  - IVCheckNetworkLibrary/Classes/Http (1.0.10):
+    - CocoaAsyncSocket
     - IVCheckNetworkLibrary/Classes/Models
+    - IVLoganAnalysis
     - IVNetworkLibrary2.0
-  - IVCheckNetworkLibrary/Classes/Models (1.0.9):
+  - IVCheckNetworkLibrary/Classes/Models (1.0.10):
+    - CocoaAsyncSocket
+    - IVLoganAnalysis
     - IVNetworkLibrary2.0
-  - IVCheckNetworkLibrary/Classes/SDK (1.0.9):
-    - IVCheckNetworkLibrary/Classes/SDK/Ping (= 1.0.9)
+  - IVCheckNetworkLibrary/Classes/SDK (1.0.10):
+    - CocoaAsyncSocket
+    - IVCheckNetworkLibrary/Classes/SDK/Ping (= 1.0.10)
+    - IVLoganAnalysis
     - IVNetworkLibrary2.0
-  - IVCheckNetworkLibrary/Classes/SDK/Ping (1.0.9):
+  - IVCheckNetworkLibrary/Classes/SDK/Ping (1.0.10):
+    - CocoaAsyncSocket
+    - IVLoganAnalysis
     - IVNetworkLibrary2.0
-  - IVCheckNetworkLibrary/Classes/UI (1.0.9):
+  - IVCheckNetworkLibrary/Classes/UI (1.0.10):
+    - CocoaAsyncSocket
     - IVCheckNetworkLibrary/Classes/Http
     - IVCheckNetworkLibrary/Classes/SDK/Ping
+    - IVLoganAnalysis
     - IVNetworkLibrary2.0
-  - IVGameLibrary (2.0.7):
-    - IVGameLibrary/GameController (= 2.0.7)
-  - IVGameLibrary/GameController (2.0.7)
+  - IVGameLibrary (2.0.10):
+    - IVGameLibrary/GameController (= 2.0.10)
+  - IVGameLibrary/GameController (2.0.10)
   - IVHeartPacketLibrary (0.0.4):
     - CocoaAsyncSocket (~> 7.6.2)
-  - IVLoganAnalysis (0.1.7):
+  - IVLoganAnalysis (0.1.12):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.13)
-    - IVLoganAnalysis/PayegisDIDSDK (= 0.1.7)
-    - IVLoganAnalysis/Tool (= 0.1.7)
-  - IVLoganAnalysis/PayegisDIDSDK (0.1.7):
+    - IVLoganAnalysis/PayegisDIDSDK (= 0.1.12)
+    - IVLoganAnalysis/Tool (= 0.1.12)
+  - IVLoganAnalysis/PayegisDIDSDK (0.1.12):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.13)
-  - IVLoganAnalysis/Tool (0.1.7):
+  - IVLoganAnalysis/Tool (0.1.12):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.13)
-  - IVNetworkLibrary2.0 (2.2.12):
+  - IVNetworkLibrary2.0 (4.0.3):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
     - FCUUID (~> 1.3.1)
     - IVCacheLibrary
-    - IVNetworkLibrary2.0/Base (= 2.2.12)
-    - IVNetworkLibrary2.0/Business (= 2.2.12)
+    - IVNetworkLibrary2.0/Base (= 4.0.3)
+    - IVNetworkLibrary2.0/Business (= 4.0.3)
     - JSONModel (~> 1.7.0)
     - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Base (2.2.12):
-    - AFNetworking (~> 3.2.1)
-    - BGFMDB (~> 2.0.9)
-    - FCUUID (~> 1.3.1)
-    - IVCacheLibrary
-    - JSONModel (~> 1.7.0)
-    - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Business (2.2.12):
-    - AFNetworking (~> 3.2.1)
-    - BGFMDB (~> 2.0.9)
-    - FCUUID (~> 1.3.1)
-    - IVCacheLibrary
-    - IVNetworkLibrary2.0/Business/Category (= 2.2.12)
-    - IVNetworkLibrary2.0/Business/Common (= 2.2.12)
-    - IVNetworkLibrary2.0/Business/Http (= 2.2.12)
-    - IVNetworkLibrary2.0/Business/Model (= 2.2.12)
-    - IVNetworkLibrary2.0/Business/SDK (= 2.2.12)
-    - JSONModel (~> 1.7.0)
-    - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Business/Category (2.2.12):
+  - IVNetworkLibrary2.0/Base (4.0.3):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
     - FCUUID (~> 1.3.1)
     - IVCacheLibrary
     - JSONModel (~> 1.7.0)
     - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Business/Common (2.2.12):
+  - IVNetworkLibrary2.0/Business (4.0.3):
+    - AFNetworking (~> 3.2.1)
+    - BGFMDB (~> 2.0.9)
+    - FCUUID (~> 1.3.1)
+    - IVCacheLibrary
+    - IVNetworkLibrary2.0/Business/Category (= 4.0.3)
+    - IVNetworkLibrary2.0/Business/Common (= 4.0.3)
+    - IVNetworkLibrary2.0/Business/Http (= 4.0.3)
+    - IVNetworkLibrary2.0/Business/Model (= 4.0.3)
+    - IVNetworkLibrary2.0/Business/SDK (= 4.0.3)
+    - JSONModel (~> 1.7.0)
+    - UICKeyChainStore (~> 2.1.2)
+  - IVNetworkLibrary2.0/Business/Category (4.0.3):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
     - FCUUID (~> 1.3.1)
     - IVCacheLibrary
     - JSONModel (~> 1.7.0)
     - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Business/Http (2.2.12):
+  - IVNetworkLibrary2.0/Business/Common (4.0.3):
+    - AFNetworking (~> 3.2.1)
+    - BGFMDB (~> 2.0.9)
+    - FCUUID (~> 1.3.1)
+    - IVCacheLibrary
+    - JSONModel (~> 1.7.0)
+    - UICKeyChainStore (~> 2.1.2)
+  - IVNetworkLibrary2.0/Business/Http (4.0.3):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
     - FCUUID (~> 1.3.1)
@@ -121,32 +135,32 @@ PODS:
     - IVNetworkLibrary2.0/Business/SDK/Sign
     - JSONModel (~> 1.7.0)
     - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Business/Model (2.2.12):
+  - IVNetworkLibrary2.0/Business/Model (4.0.3):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
     - FCUUID (~> 1.3.1)
     - IVCacheLibrary
     - JSONModel (~> 1.7.0)
     - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Business/SDK (2.2.12):
+  - IVNetworkLibrary2.0/Business/SDK (4.0.3):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
     - FCUUID (~> 1.3.1)
     - IVCacheLibrary
-    - IVNetworkLibrary2.0/Business/SDK/Sign (= 2.2.12)
+    - IVNetworkLibrary2.0/Business/SDK/Sign (= 4.0.3)
     - JSONModel (~> 1.7.0)
     - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Business/SDK/Sign (2.2.12):
+  - IVNetworkLibrary2.0/Business/SDK/Sign (4.0.3):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
     - FCUUID (~> 1.3.1)
     - IVCacheLibrary
     - JSONModel (~> 1.7.0)
     - UICKeyChainStore (~> 2.1.2)
-  - IVPublicAPILibrary (1.0.8):
+  - IVPublicAPILibrary (1.0.9):
     - IVNetworkLibrary2.0
-    - IVPublicAPILibrary/Models (= 1.0.8)
-  - IVPublicAPILibrary/Models (1.0.8):
+    - IVPublicAPILibrary/Models (= 1.0.9)
+  - IVPublicAPILibrary/Models (1.0.9):
     - IVNetworkLibrary2.0
   - IVPushLibrary (1.0.6):
     - IVPushLibrary/Classes (= 1.0.6)
@@ -185,7 +199,7 @@ DEPENDENCIES:
   - IVGameLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git`, branch `v2.0`)
   - IVHeartPacketLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git`)
   - IVLoganAnalysis (from `http://10.66.72.115/mobile-iOS-Library/IVLoganAnalysis.git`)
-  - IVNetworkLibrary2.0 (from `http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary2.0.git`)
+  - IVNetworkLibrary2.0 (from `http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary2.0.git`, branch `sensitiveWords`)
   - IVPublicAPILibrary (from `http://10.66.72.115/mobile-iOS-Library/IVPublicAPILibrary.git`)
   - IVPushLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVPushLibrary.git`)
   - IVUpdateLibrary (from `http://10.66.72.115/mobile-iOS-Library/IVUpdateLibrary.git`)
@@ -234,6 +248,7 @@ EXTERNAL SOURCES:
   IVLoganAnalysis:
     :git: http://10.66.72.115/mobile-iOS-Library/IVLoganAnalysis.git
   IVNetworkLibrary2.0:
+    :branch: sensitiveWords
     :git: http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary2.0.git
   IVPublicAPILibrary:
     :git: http://10.66.72.115/mobile-iOS-Library/IVPublicAPILibrary.git
@@ -249,25 +264,25 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   IVCacheLibrary:
-    :commit: f78eaf41b82dc2f050eedecec34c403c27715ad6
+    :commit: a1683e7540d13c3e81ff99e51ba32046aa48be84
     :git: http://10.66.72.115/mobile-iOS-Library/IVCacheLibrary.git
   IVCheckNetworkLibrary:
-    :commit: ab745c42a4740edf7fcc6418b628f1a96b778594
+    :commit: 49a19de6c169cfef2cc3ba39ce99b6043ca65354
     :git: http://10.66.72.115/mobile-iOS-Library/IVCheckNetworkLibrary.git
   IVGameLibrary:
-    :commit: 2227a6037eb1330b458d8196bb70ff4726f05d25
+    :commit: 075ae745ef1c793fcca9227847062f23aa29010c
     :git: http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git
   IVHeartPacketLibrary:
     :commit: cb81f459cb55163fd8493d0a62ea5339089703fc
     :git: http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git
   IVLoganAnalysis:
-    :commit: f9a4bca3e1eaa50d8708cf0c1e8f7523ff0dcf02
+    :commit: 72c9721cc85a762cf00b632d3c6319a29aea2b0d
     :git: http://10.66.72.115/mobile-iOS-Library/IVLoganAnalysis.git
   IVNetworkLibrary2.0:
-    :commit: a8524751636c409533a7773b5375a13a43b34a8a
+    :commit: 34e3da57e6a0e515af6ddb9efa81c5f36d5db137
     :git: http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary2.0.git
   IVPublicAPILibrary:
-    :commit: 06ac5bba2fe94423c5d336c8c0d7dcd94f21589f
+    :commit: d27593a63b1a1afc27e47cad2e0d5cd5e32095cb
     :git: http://10.66.72.115/mobile-iOS-Library/IVPublicAPILibrary.git
   IVPushLibrary:
     :commit: 757556ee1e11842e7b1f16d112da93feafd92b12
@@ -276,7 +291,7 @@ CHECKOUT OPTIONS:
     :commit: df0862352f18086b765b31889d61fbf5b7b33190
     :git: http://10.66.72.115/mobile-iOS-Library/IVUpdateLibrary.git
   IVUZIPLibrary:
-    :commit: b51c600fc194ad588630a940e608843a03ea11d5
+    :commit: 84f1f093de76ba0836d147ff48e3004c1649edf7
     :git: http://10.66.72.115/mobile-iOS-Library/IVUZIPLibrary.git
   IVWebViewLibrary:
     :commit: f293db48688301578e809670ff660b91e712ca97
@@ -289,13 +304,13 @@ SPEC CHECKSUMS:
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
   GJRedDot: de661162a700f3395f0cd70f3629e4d3abe8e181
   IQKeyboardManager: 266cb7b1d11f94a3e71229d77f960f9a1b538e5b
-  IVCacheLibrary: df3d2654c929743d92df5fa77d22894fb36b3d29
-  IVCheckNetworkLibrary: fd77a42b32be9f870dec6b83ec2166680a2189cd
-  IVGameLibrary: 5663e3cb71bd0ea9d97464133bf7996a7358925d
+  IVCacheLibrary: c1fe8ccdefc59283a79ea73c69a1f7f80976e87e
+  IVCheckNetworkLibrary: a328cafee62fed69ca5b43d1e586947b3eef6694
+  IVGameLibrary: b2a4e7ed32b9cef4f6dd8b4fa423bb66037f04cf
   IVHeartPacketLibrary: 2a122b1d8cedf8346b4898ace4736147cf9a0405
-  IVLoganAnalysis: 911915c970df1de86a92a171f29789837fe3ee30
-  IVNetworkLibrary2.0: 417f65074ac3d051ac6650d378eeba210bbc112c
-  IVPublicAPILibrary: 27791aecccd8d8605d2026d0b89c7ab2257da9bd
+  IVLoganAnalysis: 3c4b3405602784590314e62c318b223dcf8e7ba6
+  IVNetworkLibrary2.0: d0e632c7fafc6335adb5d07b3e765e75e91f9654
+  IVPublicAPILibrary: 31c84d352b34dfb7cd019b9db89163ebab8324e1
   IVPushLibrary: 1449c4630124564b61535ef95ca6cc611177f35a
   IVUpdateLibrary: f5764f4cdfcf7919b37a1a2533aae0ff541d5c2d
   IVUZIPLibrary: fcb8036d85eaab2d1ed2fea31908ded84a95a7b5
@@ -312,6 +327,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
-PODFILE CHECKSUM: dd93af95ac9cfb84101d350f2041d3f68726968b
+PODFILE CHECKSUM: e8ebb8c664939abfceff06b820b00ae96dc64050
 
 COCOAPODS: 1.9.3

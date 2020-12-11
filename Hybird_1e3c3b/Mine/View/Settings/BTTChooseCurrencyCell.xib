@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTChooseCurrencyCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzU-gS-8Op">
+                        <rect key="frame" x="10" y="10" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="人民币 CNY 1:7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2SA-dS-xKp">
+                        <rect key="frame" x="40" y="49" width="142.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数字币 USDT 1:1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gY0-5y-Q88">
+                        <rect key="frame" x="222.5" y="49" width="142.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U8W-Je-OXu">
+                        <rect key="frame" x="10" y="50" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="AkL-8i-XIY"/>
+                            <constraint firstAttribute="width" constant="20" id="ehX-zc-kX7"/>
+                        </constraints>
+                        <state key="normal" image="ic_choose_currency_btn"/>
+                        <state key="selected" image="ic_choose_currency_btn_s"/>
+                        <connections>
+                            <action selector="btnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="lsm-6Y-zGh"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yuz-cv-anM">
+                        <rect key="frame" x="192.5" y="50" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="ESW-co-SVm"/>
+                            <constraint firstAttribute="width" constant="20" id="tRd-Ha-9hH"/>
+                        </constraints>
+                        <state key="normal" image="ic_choose_currency_btn"/>
+                        <state key="selected" image="ic_choose_currency_btn_s"/>
+                        <connections>
+                            <action selector="btnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="3Ve-ms-aOV"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <constraints>
+                <constraint firstItem="2SA-dS-xKp" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.5" constant="-45" id="30I-uk-uyX"/>
+                <constraint firstItem="dzU-gS-8Op" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="3kz-ps-Vim"/>
+                <constraint firstItem="gY0-5y-Q88" firstAttribute="leading" secondItem="yuz-cv-anM" secondAttribute="trailing" constant="10" id="57a-kK-Con"/>
+                <constraint firstItem="dzU-gS-8Op" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="7bI-yD-ROo"/>
+                <constraint firstItem="2SA-dS-xKp" firstAttribute="bottom" secondItem="U8W-Je-OXu" secondAttribute="bottom" id="7hO-R6-nKo"/>
+                <constraint firstItem="U8W-Je-OXu" firstAttribute="leading" secondItem="dzU-gS-8Op" secondAttribute="leading" id="JXr-2b-VxW"/>
+                <constraint firstItem="yuz-cv-anM" firstAttribute="leading" secondItem="2SA-dS-xKp" secondAttribute="trailing" constant="10" id="b9g-zi-d3b"/>
+                <constraint firstItem="yuz-cv-anM" firstAttribute="bottom" secondItem="U8W-Je-OXu" secondAttribute="bottom" id="bqh-bU-U6H"/>
+                <constraint firstItem="gY0-5y-Q88" firstAttribute="width" secondItem="2SA-dS-xKp" secondAttribute="width" id="iaB-GM-oj4"/>
+                <constraint firstAttribute="bottom" secondItem="U8W-Je-OXu" secondAttribute="bottom" constant="10" id="jhs-Of-KLS"/>
+                <constraint firstItem="gY0-5y-Q88" firstAttribute="bottom" secondItem="U8W-Je-OXu" secondAttribute="bottom" id="kAi-03-EuD"/>
+                <constraint firstItem="2SA-dS-xKp" firstAttribute="leading" secondItem="U8W-Je-OXu" secondAttribute="trailing" constant="10" id="v5E-s9-cFD"/>
+            </constraints>
+            <connections>
+                <outlet property="cnyBtn" destination="U8W-Je-OXu" id="Mhe-8A-Adr"/>
+                <outlet property="cnyLab" destination="2SA-dS-xKp" id="Dt3-zb-eCq"/>
+                <outlet property="gameTitleLab" destination="dzU-gS-8Op" id="khY-Yy-g5B"/>
+                <outlet property="usdtBtn" destination="yuz-cv-anM" id="wv9-tj-nY7"/>
+                <outlet property="usdtLab" destination="gY0-5y-Q88" id="Pdm-zz-q6r"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="121"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="ic_choose_currency_btn" width="22" height="22"/>
+        <image name="ic_choose_currency_btn_s" width="22" height="22"/>
+    </resources>
+</document>
