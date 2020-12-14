@@ -135,7 +135,7 @@
 - (void)submitChange
 {
 //    UITextField *retentionTF = [self getCellTextFieldWithIndex:0];
-//    UITextField *realNameTF = [self getCellTextFieldWithIndex:1];
+    UITextField *realNameTF = [self getCellTextFieldWithIndex:0];
     UITextField *sexTF = [self getCellTextFieldWithIndex:1];
     UITextField *birthdayTF = [self getCellTextFieldWithIndex:2];
     UITextField *emailTF = [self getCellTextFieldWithIndex:3];
@@ -143,8 +143,9 @@
     UITextField *remarkTF = [self getCellTextFieldWithIndex:5];
     
     NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
-    
+    if ([IVNetwork savedUserInfo].realName.length == 0) {
+        params[@"realName"] = realNameTF.text;
+    }
     if ([IVNetwork savedUserInfo].email.length == 0) {
         if (emailTF.text.length !=0 && ![PublicMethod isValidateEmail:emailTF.text]) {
             [MBProgressHUD showError:@"输入的邮箱地址格式有误！" toView:self.view];
@@ -152,10 +153,10 @@
         }
         params[@"email"] = emailTF.text;
     }
-    if (sexTF.text.length != 0 ) {
+    if (sexTF.text.length != 0) {
         params[@"gender"] = [sexTF.text isEqualToString:@"男"] ? @"M" : @"F";
     }
-    if ([IVNetwork savedUserInfo].birthday.length>0) {
+    if ([IVNetwork savedUserInfo].birthday.length == 0) {
         if (birthdayTF.text.length != 0) {
             NSString *birthdayStr = birthdayTF.text;
             BOOL isAdult = [PublicMethod isAdultWithBirthday:birthdayStr];
