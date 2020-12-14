@@ -29,6 +29,10 @@
 
 - (NSString *)detail {
     if (_detail.length && ![_detail hasPrefix:@"http"]&&![_detail containsString:@"gameId"]) {
+        NSString * str = [_detail substringWithRange:NSMakeRange(0,1)];
+        if ([str isEqualToString:@"/"]) {
+            _detail = [_detail substringWithRange:NSMakeRange(str.length,_detail.length-str.length)];
+        }
         _detail = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],_detail];
     }
     return _detail;

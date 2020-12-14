@@ -61,12 +61,12 @@
     
     NSLog(@"%zd", indexPath.item);
     
-    if (indexPath.item == 2) {
+    if (indexPath.item == 1) {
         BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
         [BRStringPickerView showStringPickerWithTitle:@"请选择性别" dataSource:@[@"男", @"女"] defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
             cell.textField.text = selectValue;
         }];
-    } else if (indexPath.item == 3) {
+    } else if (indexPath.item == 2) {
         if ([IVNetwork savedUserInfo].birthday.length>0) {
             return;
         }

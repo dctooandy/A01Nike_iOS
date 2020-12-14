@@ -44,7 +44,7 @@ static const char *BTTHeaderViewKey = "headerView";
         [popView dismiss];
         strongSelf(strongSelf);
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.webConfigModel.url = [NSString stringWithFormat:@"%@#/activity_pages/recommendFriends",[IVNetwork h5Domain]];
+        vc.webConfigModel.url = [NSString stringWithFormat:@"%@activity_pages/recommendFriends",[IVNetwork h5Domain]];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
         [strongSelf.navigationController pushViewController:vc animated:YES];

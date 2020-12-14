@@ -521,6 +521,7 @@
         } else if (indexPath.row == 6) {
             BTTHotPromotionsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHotPromotionsCell" forIndexPath:indexPath];
             weakSelf(weakSelf);
+            cell.promotions = self.promotions;
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
                 BTTPromotionModel *model = value;
@@ -662,11 +663,11 @@
 #pragma mark - Calculation cell height
 - (void)setupElements {
     NSInteger total = 0;
-    if (self.posters.count) {
-        self.adCellShow = YES;
-    } else {
-        self.adCellShow = NO;
-    }
+//    if (self.posters.count) {
+//        self.adCellShow = YES;
+//    } else {
+        self.adCellShow = NO;//AV女優活動拿掉
+//    }
     if (self.adCellShow) {
         total = 14;
     } else {

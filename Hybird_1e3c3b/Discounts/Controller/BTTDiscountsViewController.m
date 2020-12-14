@@ -271,7 +271,7 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
     BTTPromotionModel *model = self.sheetDatas[indexPath.row];
-    if ([model.href containsString:@"htm"]||[model.href containsString:@"#/activity_pages"]) {
+    if ([model.href containsString:@"htm"]||[model.href containsString:@"activity_pages"]) {
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
         vc.title = model.name;
         vc.webConfigModel.url = [model.href stringByReplacingOccurrencesOfString:@" " withString:@""];

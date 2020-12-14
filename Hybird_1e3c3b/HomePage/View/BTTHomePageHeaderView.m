@@ -59,15 +59,15 @@
 //            [self addSubview:moonImage];
             
             //聖膽装饰
-//            NSString *path = [[NSBundle mainBundle] pathForResource:@"christmas" ofType:@"gif"];
-//            NSData *data = [NSData dataWithContentsOfFile:path];
-//            UIImageView * img = [[UIImageView alloc] init];
-//            img.image = [UIImage sd_animatedGIFWithData:data];
-//            [self addSubview:img];
-//            [img mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.left.bottom.right.equalTo(self);
-//                make.height.offset(52);
-//            }];
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"christmas" ofType:@"gif"];
+            NSData *data = [NSData dataWithContentsOfFile:path];
+            UIImageView * img = [[UIImageView alloc] init];
+            img.image = [UIImage sd_animatedGIFWithData:data];
+            img.contentMode = UIViewContentModeScaleToFill;
+            [self addSubview:img];
+            [img mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.left.bottom.right.equalTo(self);
+            }];
             
             UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
             [self addSubview:logoImageView];

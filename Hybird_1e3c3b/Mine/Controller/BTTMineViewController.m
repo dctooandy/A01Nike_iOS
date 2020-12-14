@@ -415,7 +415,7 @@
     vc.title = @"存款小助手";
     vc.webConfigModel.theme = @"outside";
     vc.webConfigModel.newView = YES;
-    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/rechargeAssistant"];
+    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"rechargeAssistant"];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -598,11 +598,11 @@
                 NSString *title = names[buttonIndex];
                 vc.title = title;
                 if ([title isEqualToString:@"1%存款返利"]) {
-                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/activity_pages/deposit_rebate"];
+                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"activity_pages/deposit_rebate"];
                 } else if ([title isEqualToString:@"开户礼金"]) {
-                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/activity_pages/promo_open_account"];
+                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"activity_pages/promo_open_account"];
                 } else if ([title isEqualToString:@"首存优惠"]) {
-                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/first_deposit"];
+                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"first_deposit"];
                 }
                 [self.navigationController pushViewController:vc animated:YES];
             }
@@ -613,7 +613,7 @@
         vc.title = @"推荐礼金";
         vc.webConfigModel.theme = @"outside";
         vc.webConfigModel.newView = YES;
-        vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"#/gift/lucky_pot"];
+        vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"gift/lucky_pot"];
         [self.navigationController pushViewController:vc animated:YES];
     } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 4 && isUSDTAcc)) {
         BTTCustomerReportController * vc = [[BTTCustomerReportController alloc] init];

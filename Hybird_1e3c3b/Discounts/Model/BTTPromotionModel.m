@@ -11,7 +11,11 @@
 @implementation BTTPromotionModel
 
 - (NSString *)href {
-    if (![_href hasPrefix:@"http"] && ([_href containsString:@"htm"]||[_href containsString:@"#/activity_pages"])) {
+    if (![_href hasPrefix:@"http"] && ([_href containsString:@"htm"]||[_href containsString:@"activity_pages"])) {
+        NSString * str = [_href substringWithRange:NSMakeRange(0,2)];
+        if ([str isEqualToString:@"#/"]) {
+            _href = [_href substringWithRange:NSMakeRange(str.length,_href.length-str.length)];
+        }
         return [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain], _href];
     }
     return _href;
