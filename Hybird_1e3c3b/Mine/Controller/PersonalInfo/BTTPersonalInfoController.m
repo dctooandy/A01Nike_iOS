@@ -60,7 +60,7 @@
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
     NSLog(@"%zd", indexPath.item);
-    
+    [self.view endEditing:true];
     if (indexPath.item == 1) {
         BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
         [BRStringPickerView showStringPickerWithTitle:@"请选择性别" dataSource:@[@"男", @"女"] defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
