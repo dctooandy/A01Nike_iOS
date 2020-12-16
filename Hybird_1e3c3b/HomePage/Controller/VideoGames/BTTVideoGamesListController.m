@@ -838,11 +838,12 @@
 
 // 直接进入游戏
 - (void)enterVideoGameWithGameModel:(BTTVideoGameModel *)gameModel {
+    //    [gameModel.provider isEqualToString:@"MG"] ||
     if ([gameModel.provider isEqualToString:@"TTG"] || [gameModel.provider isEqualToString:@"PP"] || [gameModel.provider isEqualToString:@"PT"] || [gameModel.provider isEqualToString:@"PS"] || [gameModel.gameCode isEqualToString:BTTAGGJKEY]) {
         [self chooseGameLine:gameModel];
         return;
     }
-    IVGameModel *model = [[IVGameModel alloc] init];\
+    IVGameModel *model = [[IVGameModel alloc] init];
                                                 
     model.cnName = gameModel.cnName;
     model.enName = gameModel.engName;

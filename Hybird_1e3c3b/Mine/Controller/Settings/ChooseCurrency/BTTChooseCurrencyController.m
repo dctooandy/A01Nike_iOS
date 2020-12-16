@@ -39,7 +39,7 @@
 
 -(void)initSheetDatas {
     self.sheetDatas = [[NSMutableArray alloc] init];
-    NSArray *titles = @[@"AG旗舰厅", @"AG国际厅", @"AS真人棋牌", @"沙巴体育", @"AG彩票", @"PT", @"TTG", @"PP", @"PS"];
+    NSArray *titles = BTTGameTitlesArr;
     NSArray *gameKeys = BTTGameKeysArr;
     for (NSString *gameKey in gameKeys) {
         NSInteger index = [gameKeys indexOfObject:gameKey];

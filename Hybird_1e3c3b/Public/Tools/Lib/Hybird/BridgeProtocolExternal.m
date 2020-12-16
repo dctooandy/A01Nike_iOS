@@ -285,7 +285,7 @@
                 customView.dismissBlock = ^{
                     strongSelf(strongSelf);
                     [popView dismiss];
-                    [strongSelf saveCurrencysArrToBGFMDB:@"USDT" userCurrencysArr:userCurrencysArr];
+//                    [strongSelf saveCurrencysArrToBGFMDB:@"USDT" userCurrencysArr:userCurrencysArr];
                     [strongSelf gotoGame:@"USDT"];
                 };
                 

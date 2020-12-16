@@ -47,12 +47,6 @@
                         <action selector="btnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="tuk-st-kWv"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择币种后如需更换请前往【会员中心-设置-游戏币种】" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="trM-Bz-n27">
-                    <rect key="frame" x="82" y="582" width="250" height="36"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I9k-gh-3gP">
                     <rect key="frame" x="186" y="658" width="42" height="42"/>
                     <state key="normal" image="ic_bibicun_close_btn"/>
@@ -60,21 +54,36 @@
                         <action selector="closeBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="DhN-dw-4H2"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="【会员中心-设置-游戏币种】" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m3f-i3-c5z">
+                    <rect key="frame" x="82" y="605" width="250" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择币种后如需更换请前往" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="trM-Bz-n27">
+                    <rect key="frame" x="82" y="582" width="250" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <constraints>
+                <constraint firstItem="m3f-i3-c5z" firstAttribute="bottom" secondItem="jMV-fR-dfa" secondAttribute="bottom" constant="-15" id="135-jY-ozm"/>
                 <constraint firstItem="I9k-gh-3gP" firstAttribute="top" secondItem="jMV-fR-dfa" secondAttribute="bottom" constant="20" id="4s6-iC-GLX"/>
                 <constraint firstItem="I9k-gh-3gP" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="7qz-VZ-gpw"/>
                 <constraint firstItem="OoL-P9-x45" firstAttribute="leading" secondItem="trM-Bz-n27" secondAttribute="leading" id="Df8-AR-9M7"/>
                 <constraint firstItem="HtS-we-tBH" firstAttribute="top" secondItem="OoL-P9-x45" secondAttribute="bottom" constant="10" id="GQw-It-Ym7"/>
                 <constraint firstItem="OoL-P9-x45" firstAttribute="trailing" secondItem="trM-Bz-n27" secondAttribute="trailing" id="Ie8-YY-7Et"/>
+                <constraint firstItem="m3f-i3-c5z" firstAttribute="trailing" secondItem="trM-Bz-n27" secondAttribute="trailing" id="KZy-qc-7Sn"/>
+                <constraint firstItem="m3f-i3-c5z" firstAttribute="top" secondItem="trM-Bz-n27" secondAttribute="bottom" constant="5" id="LMs-jn-v2u"/>
                 <constraint firstItem="HtS-we-tBH" firstAttribute="trailing" secondItem="trM-Bz-n27" secondAttribute="trailing" id="O69-Yj-FkZ"/>
                 <constraint firstItem="trM-Bz-n27" firstAttribute="leading" secondItem="jMV-fR-dfa" secondAttribute="leading" constant="20" id="Pit-r5-jk5"/>
                 <constraint firstItem="trM-Bz-n27" firstAttribute="trailing" secondItem="jMV-fR-dfa" secondAttribute="trailing" constant="-20" id="XX6-pX-gX0"/>
                 <constraint firstItem="trM-Bz-n27" firstAttribute="top" secondItem="HtS-we-tBH" secondAttribute="bottom" constant="10" id="bDD-ND-xSP"/>
                 <constraint firstItem="jMV-fR-dfa" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cU5-bI-ybR"/>
+                <constraint firstItem="m3f-i3-c5z" firstAttribute="leading" secondItem="trM-Bz-n27" secondAttribute="leading" id="hfw-eH-foh"/>
                 <constraint firstItem="jMV-fR-dfa" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="ivj-Og-grM"/>
-                <constraint firstItem="trM-Bz-n27" firstAttribute="bottom" secondItem="jMV-fR-dfa" secondAttribute="bottom" constant="-20" id="quA-Lw-OfW"/>
                 <constraint firstItem="HtS-we-tBH" firstAttribute="leading" secondItem="trM-Bz-n27" secondAttribute="leading" id="vRm-U6-jJu"/>
             </constraints>
             <connections>

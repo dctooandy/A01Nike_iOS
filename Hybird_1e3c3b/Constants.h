@@ -239,26 +239,17 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTTTGKEY                                  @"027"
 #define BTTPTKEY                                   @"039"
 #define BTTPSKEY                                   @"094"
+#define BTTMGKEY                                   @"035"
 //下方是沒有多幣種(CNY USDT)的
 #define BTTBTIKEY                                  @"062"
 #define BTTNBKEY                                   @"069"
 #define BTTCSKEY                                   @"087"
 
-//#define BTTAGQJKEY                                 @"A01003"
-//#define BTTAGGJKEY                                 @"A01026"
-//#define BTTSABAKEY                                 @"A01031"
-//#define BTTASKEY                                   @"A01064"
-//#define BTTAGLotteryKEY                            @"A01004"
-//#define BTTPPKEY                                   @"A01067"
-//#define BTTTTGKEY                                  @"A01027"
-//#define BTTPTKEY                                   @"A01039"
-//#define BTTPSKEY                                   @"A01094"
-////下方是沒有多幣種(CNY USDT)的
-//#define BTTBTIKEY                                  @"A01062"
-//#define BTTNBKEY                                   @"A01069"
-//#define BTTCSKEY                                   @"A01087"
 //儲存使用者選擇幣種相對應的keyArr
 #define BTTGameKeysArr                             @[BTTAGQJKEY,BTTAGGJKEY,BTTASKEY,BTTSABAKEY,BTTAGLotteryKEY,BTTPTKEY,BTTTTGKEY,BTTPPKEY,BTTPSKEY]
+#define BTTGameTitlesArr                           @[@"AG旗舰厅", @"AG国际厅", @"AS真人棋牌", @"沙巴体育", @"AG彩票", @"PT", @"TTG", @"PP", @"PS"]
+//#define BTTGameKeysArr                             @[BTTAGQJKEY,BTTAGGJKEY,BTTASKEY,BTTSABAKEY,BTTAGLotteryKEY,BTTPTKEY,BTTTTGKEY,BTTPPKEY,BTTPSKEY,BTTMGKEY]
+//#define BTTGameTitlesArr                           @[@"AG旗舰厅", @"AG国际厅", @"AS真人棋牌", @"沙巴体育", @"AG彩票", @"PT", @"TTG", @"PP", @"PS", @"MG"]
 
 /*********************************************API********************************************************/
 
