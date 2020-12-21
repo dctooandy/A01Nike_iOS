@@ -190,8 +190,8 @@ typedef enum {
         if (indexPath.row == 0) {
             BTTRegisterSuccessChangePwdCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTRegisterSuccessChangePwdCell" forIndexPath:indexPath];
             [cell.pwdTextField addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
-            NSString *accountStr = [NSString stringWithFormat:@"您的账号: %@",self.account];
-            NSRange accountRange = [accountStr rangeOfString:self.account];
+            NSString *accountStr = [NSString stringWithFormat:@"您的账号: %@",self.mainAccountName];
+            NSRange accountRange = [accountStr rangeOfString:self.mainAccountName];
             NSMutableAttributedString *attstr = [[NSMutableAttributedString alloc] initWithString:accountStr];
             [attstr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"f4e933"]} range:accountRange];
             cell.accountLabel.attributedText = attstr;

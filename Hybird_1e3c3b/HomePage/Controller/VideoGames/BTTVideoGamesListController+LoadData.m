@@ -166,16 +166,29 @@
 -(void)saveCurrencysArrToBGFMDB:(NSString *)currency userCurrencysArr:(NSMutableArray *)userCurrencysArr {
     NSMutableArray * saveArr = [[NSMutableArray alloc] init];
     if (userCurrencysArr.count != 0) {
-        for (BTTUserGameCurrencyModel * model in userCurrencysArr) {
-            if (model.currency.length != 0) {
-                [saveArr addObject:model];
-            } else {
-                model.currency = currency;
-                [saveArr addObject:model];
+        for (NSString * str in BTTGameKeysArr) {
+            for (BTTUserGameCurrencyModel * model in userCurrencysArr) {
+                if ([str isEqualToString:model.gameKey]) {
+                    if (model.currency.length == 0) {
+                        model.currency = currency;
+                    }
+                    [saveArr addObject:model];
+                    break;
+                } else {
+                    NSInteger index = [userCurrencysArr indexOfObject:model];
+                    if (index == userCurrencysArr.count - 1) {
+                        index = [BTTGameKeysArr indexOfObject:str];
+                        BTTUserGameCurrencyModel * model = [[BTTUserGameCurrencyModel alloc] init];
+                        model.title = BTTGameTitlesArr[index];
+                        model.gameKey = str;
+                        model.currency = currency;
+                        [saveArr addObject:model];
+                    }
+                }
             }
         }
     } else {
-        NSArray *titles = @[@"AG旗舰厅", @"AG国际厅", @"AS真人棋牌", @"沙巴体育", @"AG彩票", @"PT", @"TTG", @"PP", @"PS"];
+        NSArray *titles = BTTGameTitlesArr;
         NSArray *gameKeys = BTTGameKeysArr;
         for (NSString *gameKey in gameKeys) {
             NSInteger index = [gameKeys indexOfObject:gameKey];
@@ -206,6 +219,7 @@
             model.gameCode = gameModel.gameCode;
         }
     }
+    [[IVGameManager sharedManager].lastGameVC reloadGame];
     [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
 }
 

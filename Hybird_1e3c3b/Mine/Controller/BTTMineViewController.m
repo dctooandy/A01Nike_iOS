@@ -54,7 +54,7 @@
 #import "BTTUsdtTodayNoticeView.h"
 #import "IVCNetworkStatusView.h"
 #import "IVCDetailViewController.h"
-#import "OTCInsideController.h"
+//#import "OTCInsideController.h"//充值/购买USDT
 #import "USDTRechargeController.h"
 #import "USDTBuyController.h"
 #import "BTTCustomerReportController.h"
@@ -385,25 +385,6 @@
     }
 }
 
-- (void)jumpToBuyUsdt{
-    if (![IVNetwork savedUserInfo]) {
-        [MBProgressHUD showError:@"请先登录" toView:nil];
-        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-        return;
-    }
-//    if (self.buyUsdtLink!=nil&&![self.buyUsdtLink isEqualToString:@""]) {
-//        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-//        vc.title = @"充值/购买USDT";
-//        vc.webConfigModel.theme = @"outside";
-//        vc.webConfigModel.newView = YES;
-//        vc.webConfigModel.url = self.buyUsdtLink;
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }
-    OTCInsideController *vc = [[OTCInsideController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
 - (void)pushToRechargeAssistantViewController{
     if (![IVNetwork savedUserInfo]) {
         [MBProgressHUD showError:@"请先登录" toView:nil];
@@ -426,7 +407,7 @@
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
-    } else if ([IVNetwork savedUserInfo].starLevel == 0 && ![IVNetwork savedUserInfo].realName.length) {
+    } else if ([IVNetwork savedUserInfo].starLevel == 0 && ![IVNetwork savedUserInfo].realName.length && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
         [self.navigationController pushViewController:personInfo animated:YES];
         return;
@@ -779,7 +760,7 @@
 
 - (BOOL)isCompletePersonalInfo
 {
-    BOOL isComplete = (![[IVNetwork savedUserInfo].realName isEqualToString:@""]);
+    BOOL isComplete = ![[IVNetwork savedUserInfo].realName isEqualToString:@""];
     return isComplete;
 }
 

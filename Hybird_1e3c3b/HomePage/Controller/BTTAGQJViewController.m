@@ -80,7 +80,9 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-//    [BTTAGQJViewController addGameViewToWindow];
+    [[IVGameManager sharedManager].agqjVC willMoveToParentViewController:nil];
+    [[IVGameManager sharedManager].agqjVC.view removeFromSuperview];
+    [[IVGameManager sharedManager].agqjVC removeFromParentViewController];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -90,12 +92,16 @@
     IVGameManager *manager = [IVGameManager sharedManager];
     IVGameModel *gameModel = manager.agqjVC.gameModel;
     gameModel.platformCurrency = self.platformLine;
+    gameModel.gameCode = BTTAGQJKEY;
     manager.agqjVC.gameModel = gameModel;
     [self addChildViewController:[IVGameManager sharedManager].agqjVC];
     [self.view addSubview:[IVGameManager sharedManager].agqjVC.view];
     [IVGameManager sharedManager].agqjVC.view.frame = self.view.frame;
     [IVGameManager sharedManager].agqjVC.view.hidden = NO;
+    [[IVGameManager sharedManager].agqjVC didMoveToParentViewController:self];
+    [[IVGameManager sharedManager].agqjVC reloadGame];
 }
+
 + (void)addGameViewToWindow
 {
     [[CNTimeLog shareInstance] AGQJFirstLoad];

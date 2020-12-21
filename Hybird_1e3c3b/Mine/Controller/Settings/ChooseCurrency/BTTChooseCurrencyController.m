@@ -27,6 +27,10 @@
         [self initSheetDatas];
         [self saveCurrencysArrToBGFMDB];
     }
+    if (self.sheetDatas.count != BTTGameKeysArr.count) {
+        [self updateCurrencysArrToBGFMDB];
+        self.sheetDatas = [[NSMutableArray alloc] initWithArray:[NSArray bg_arrayWithName:BTTGameCurrencysWithName]];
+    }
 }
 
 -(void)saveCurrencysArrToBGFMDB {
@@ -49,6 +53,41 @@
         model.currency = @"";
         [_sheetDatas addObject:model];
     }
+}
+
+-(void)updateCurrencysArrToBGFMDB {
+    NSMutableArray * saveArr = [[NSMutableArray alloc] init];
+    if (self.sheetDatas.count < BTTGameKeysArr.count) {
+        for (NSString * str in BTTGameKeysArr) {
+            for (BTTUserGameCurrencyModel * model in self.sheetDatas) {
+                if ([str isEqualToString:model.gameKey]) {
+                    [saveArr addObject:model];
+                    break;
+                } else {
+                    NSInteger index = [self.sheetDatas indexOfObject:model];
+                    if (index == self.sheetDatas.count - 1) {
+                        index = [BTTGameKeysArr indexOfObject:str];
+                        BTTUserGameCurrencyModel * model = [[BTTUserGameCurrencyModel alloc] init];
+                        model.title = BTTGameTitlesArr[index];
+                        model.gameKey = str;
+                        model.currency = @"";
+                        [saveArr addObject:model];
+                    }
+                }
+            }
+        }
+    } else {
+        for (BTTUserGameCurrencyModel * model in self.sheetDatas) {
+            for (NSString * str in BTTGameKeysArr) {
+                if ([model.gameKey isEqualToString:str]) {
+                    [saveArr addObject:model];
+                    break;
+                }
+            }
+        }
+    }
+    [NSArray bg_clearArrayWithName:BTTGameCurrencysWithName];
+    [saveArr bg_saveArrayWithName:BTTGameCurrencysWithName];
 }
 
 - (void)setupCollectionView {

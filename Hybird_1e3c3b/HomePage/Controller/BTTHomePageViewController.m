@@ -78,7 +78,6 @@
     [self loadDataOfHomePage];
     [self registerNotification];
 //    [IVNetwork registException];
-    
     weakSelf(weakSelf);
     [self pulldownRefreshWithRefreshBlock:^{
         strongSelf(strongSelf);
@@ -121,10 +120,9 @@
         self.isloaded = YES;
         //AG旗舰预加载
         [BTTAGQJViewController addGameViewToWindow];
-        
         //AG国际预加载
         [BTTAGGJViewController addGameViewToWindow];
-        [[IVGameManager sharedManager] reloadCacheGame];
+//        [[IVGameManager sharedManager] reloadCacheGame];
         [IN3SAnalytics launchFinished];
     }
 }
@@ -850,16 +848,29 @@
 -(void)saveCurrencysArrToBGFMDB:(NSString *)currency userCurrencysArr:(NSMutableArray *)userCurrencysArr {
     NSMutableArray * saveArr = [[NSMutableArray alloc] init];
     if (userCurrencysArr.count != 0) {
-        for (BTTUserGameCurrencyModel * model in userCurrencysArr) {
-            if (model.currency.length != 0) {
-                [saveArr addObject:model];
-            } else {
-                model.currency = currency;
-                [saveArr addObject:model];
+        for (NSString * str in BTTGameKeysArr) {
+            for (BTTUserGameCurrencyModel * model in userCurrencysArr) {
+                if ([str isEqualToString:model.gameKey]) {
+                    if (model.currency.length == 0) {
+                        model.currency = currency;
+                    }
+                    [saveArr addObject:model];
+                    break;
+                } else {
+                    NSInteger index = [userCurrencysArr indexOfObject:model];
+                    if (index == userCurrencysArr.count - 1) {
+                        index = [BTTGameKeysArr indexOfObject:str];
+                        BTTUserGameCurrencyModel * model = [[BTTUserGameCurrencyModel alloc] init];
+                        model.title = BTTGameTitlesArr[index];
+                        model.gameKey = str;
+                        model.currency = currency;
+                        [saveArr addObject:model];
+                    }
+                }
             }
         }
     } else {
-        NSArray *titles = @[@"AG旗舰厅", @"AG国际厅", @"AS真人棋牌", @"沙巴体育", @"AG彩票", @"PT", @"TTG", @"PP", @"PS"];
+        NSArray *titles = BTTGameTitlesArr;
         NSArray *gameKeys = BTTGameKeysArr;
         for (NSString *gameKey in gameKeys) {
             NSInteger index = [gameKeys indexOfObject:gameKey];
@@ -885,39 +896,38 @@
         BTTAGGJViewController *vc = [BTTAGGJViewController new];
         vc.platformLine = currency;
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (tag==1006){
+    } else {
         IVGameModel *model = [[IVGameModel alloc] init];
-        model.cnName = @"沙巴体育";
-        model.enName =  kASBEnName;
-        model.gameCode = BTTSABAKEY;
-        model.provider =  kShaBaProvider;
-        model.platformCurrency = currency;
-        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
-    }else if (tag==1010){
-        IVGameModel *model = [[IVGameModel alloc] init];
-        model = [[IVGameModel alloc] init];
-        model.cnName = @"AS真人棋牌";
-        model.gameCode = BTTASKEY;
-        model.enName =  kASSlotEnName;
-        model.provider = kASSlotProvider;
-        model.platformCurrency = currency;
-        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
-    } else if (tag==1003) {
-        IVGameModel *model = [[IVGameModel alloc] init];
-        model.cnName =  kFishCnName;
-        model.enName =  kFishEnName;
-        model.provider = kAGINProvider;
-        model.gameCode = BTTAGGJKEY;
-        model.gameType = kFishType;
-        model.platformCurrency = currency;
-        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
-    } else if (tag==1011) {
-        IVGameModel *model = [[IVGameModel alloc] init];
-        model.cnName = @"AG彩票";
-        model.gameCode = BTTAGLotteryKEY;
-        model.enName = @"K8";
-        model.provider = @"K8";
-        model.platformCurrency = currency;
+        if (tag==1006){
+            model.cnName = @"沙巴体育";
+            model.enName =  kASBEnName;
+            model.gameCode = BTTSABAKEY;
+            model.provider =  kShaBaProvider;
+            model.platformCurrency = currency;
+        }else if (tag==1010){
+            model = [[IVGameModel alloc] init];
+            model.cnName = @"AS真人棋牌";
+            model.gameCode = BTTASKEY;
+            model.enName =  kASSlotEnName;
+            model.provider = kASSlotProvider;
+            model.platformCurrency = currency;
+        } else if (tag==1003) {
+            model = [[IVGameModel alloc] init];
+            model.cnName =  kFishCnName;
+            model.enName =  kFishEnName;
+            model.provider = kAGINProvider;
+            model.gameCode = BTTAGGJKEY;
+            model.gameType = kFishType;
+            model.platformCurrency = currency;
+        } else if (tag==1011) {
+            model = [[IVGameModel alloc] init];
+            model.cnName = @"AG彩票";
+            model.gameCode = BTTAGLotteryKEY;
+            model.enName = @"K8";
+            model.provider = @"K8";
+            model.platformCurrency = currency;
+        }
+        [[IVGameManager sharedManager].lastGameVC reloadGame];
         [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
     }
 }
