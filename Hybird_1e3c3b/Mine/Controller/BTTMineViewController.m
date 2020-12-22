@@ -376,22 +376,6 @@
     }
 }
 
-- (void)pushToRechargeAssistantViewController{
-    if (![IVNetwork savedUserInfo]) {
-        [MBProgressHUD showError:@"请先登录" toView:nil];
-        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-        return;
-    }
-    BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-    vc.title = @"存款小助手";
-    vc.webConfigModel.theme = @"outside";
-    vc.webConfigModel.newView = YES;
-    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"rechargeAssistant"];
-    [self.navigationController pushViewController:vc animated:YES];
-    
-}
-
 - (void)goSaveMoneyWithModel:(BTTMeMainModel *)model {
     if (![IVNetwork savedUserInfo]) {
         [MBProgressHUD showError:@"请先登录" toView:nil];
