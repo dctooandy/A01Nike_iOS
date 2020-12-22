@@ -9,7 +9,6 @@
 #import "BTTMeMoneyHeaderCell.h"
 
 @interface BTTMeMoneyHeaderCell ()
-@property (weak, nonatomic) IBOutlet UIButton *assistantBtn;
 
 @end
 
@@ -18,15 +17,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-}
-- (IBAction)rechargeAssistant_click:(id)sender {
-    if (self.rechargeAssistantTap) {
-        self.rechargeAssistantTap();
-    }
-}
-
--(void)setAssistantShow:(BOOL)show{
-    self.assistantBtn.hidden = !show;
 }
 
 @end

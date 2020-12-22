@@ -247,15 +247,6 @@
         }
     } else if (indexPath.row == 1) {
         BTTMeMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoneyHeaderCell" forIndexPath:indexPath];
-        if ([IVNetwork savedUserInfo].loginName) {
-            [cell setAssistantShow:([IVNetwork savedUserInfo].starLevel==0 && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"])];
-        }else{
-            [cell setAssistantShow:NO];
-        }
-        weakSelf(weakSelf)
-        cell.rechargeAssistantTap = ^{
-            [weakSelf pushToRechargeAssistantViewController];
-        };
         return cell;
     } else if (indexPath.row >= 2 && indexPath.row <= 2 + self.saveMoneyCount - 1) {
         if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
