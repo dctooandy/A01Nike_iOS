@@ -97,10 +97,12 @@
 
 - (void)loadXimaBillOut {
     [self showLoading];
-    
-    NSDate *nowDate = [NSDate date];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
     NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDate *nowDate = [NSDate date];
     NSDateComponents *comp = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday  fromDate:nowDate];
+    
     // 获取今天是周几
     NSInteger weekDay = [comp weekday];
     // 获取几天是几号
@@ -120,24 +122,19 @@
     }
     // 在当前日期(去掉时分秒)基础上加上差的天数
     NSDateComponents *baseDayComp = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay  fromDate:nowDate];
-    
     int weekday = 0;
     
-    NSString *dateStr = @"";
-    
     [baseDayComp setDay:day + firstDiff - weekday];
-    NSDate *dayOfWeek = [calendar dateFromComponents:baseDayComp];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"YYYY-MM-dd"];
-    dateStr = [dateStr stringByAppendingString:[formatter stringFromDate:dayOfWeek]];
+    NSDate *beginDate = [calendar dateFromComponents:baseDayComp];
+    NSString *beginStr = [formatter stringFromDate:beginDate];
+    
     [baseDayComp setDay:day - weekday + lastDiff];
     NSDate *endDate = [calendar dateFromComponents:baseDayComp];
-    NSString *endStr = @"";
-    endStr=[endStr stringByAppendingString:[formatter stringFromDate:endDate]];
+    NSString *endStr = [formatter stringFromDate:endDate];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     params[@"isXm"] = @0;
-    params[@"xmBeginDate"] = [NSString stringWithFormat:@"%@ 00:00:00",dateStr];
+    params[@"xmBeginDate"] = [NSString stringWithFormat:@"%@ 00:00:00",beginStr];
     params[@"xmEndDate"] = [NSString stringWithFormat:@"%@ 23:59:59",endStr];
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     NSMutableArray *array = [NSMutableArray new];
@@ -154,12 +151,6 @@
         [array addObject:json];
     }
     params[@"xmRequests"] = array;
-//    [self hideLoading];
-//    self.ximaStatusType = BTTXimaStatusTypeSuccess;
-//    BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-//    [cell setBtnOneType:BTTXimaHeaderBtnOneTypeOtherNormal];
-//    [self setupElements];
-//    [MBProgressHUD showError:@"333333333" toView:nil];
     [IVNetwork requestPostWithUrl:BTTXiMaRequest paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;
@@ -174,32 +165,6 @@
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];
-
-//    [IVNetwork sendRequestWithSubURL:BTTXimaBillOut paramters:params completionBlock:^(IVRequestResultModel *result, id response) {
-//        NSLog(@"%@",response);
-//        [self hideLoading];
-//        if (self.xmResults.count) {
-//            [self.xmResults removeAllObjects];
-//        }
-//        if (result.status) {
-//            if (result.data && [result.data isKindOfClass:[NSArray class]]) {
-//                for (NSDictionary *dict in result.data) {
-//                    BTTXimaSuccessItemModel *model = [BTTXimaSuccessItemModel yy_modelWithDictionary:dict];
-//                    [xmResults addObject:model];
-//                }
-//                self.xmResults = xmResults.mutableCopy;
-//                self.ximaStatusType = BTTXimaStatusTypeSuccess;
-//                BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-//                [cell setBtnOneType:BTTXimaHeaderBtnOneTypeOtherNormal];
-//                [self setupElements];
-//            }
-//
-//        }
-//        if (result.message.length) {
-//            [MBProgressHUD showError:result.message toView:nil];
-//        }
-//
-//    }];
 }
 
 
