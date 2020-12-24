@@ -283,7 +283,8 @@
             NSString *account = json[@"loginName"];
             NSString *mainAccountName = json[@"mainAccountName"];
             NSString *pwd = json[@"password"];
-            
+            [IVHttpManager shareManager].userToken = result.body[@"token"];
+            [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
             [MBProgressHUD showSuccess:@"开户成功" toView:nil];
             BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
             vc.registerOrLoginType = self.registerOrLoginType;
@@ -559,6 +560,8 @@
             if (![result.body isKindOfClass:[NSNull class]] && [result.body isKindOfClass:[NSDictionary class]]) {
                 if (![result.body[@"loginName"] isKindOfClass:[NSNull class]] && result.body[@"loginName"]) {
                     [MBProgressHUD showSuccess:@"开户成功" toView:nil];
+                    [IVHttpManager shareManager].userToken = result.body[@"token"];
+                    [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
                     BTTRegisterSuccessController *vc = [[BTTRegisterSuccessController alloc] init];
                     vc.registerOrLoginType = self.registerOrLoginType;
                     vc.account = result.body[@"loginName"];
