@@ -507,16 +507,14 @@ typedef enum {
         [MBProgressHUD showError:@"8-10位数字和字母" toView:nil];
         return;
     }
-    NSString *url = @"customer/modifyPwd";
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"loginName"] = self.account;
-    params[@"oldPassword"] = [IVRsaEncryptWrapper encryptorString:self.pwd];
-    params[@"newPassword"] = [IVRsaEncryptWrapper encryptorString:_newPwd];
-    params[@"type"] = @1;
+    params[@"password"] = [IVRsaEncryptWrapper encryptorString:_newPwd];
+    params[@"type"] = @2;
     weakSelf(weakSelf)
     NSString *npwd = _newPwd;
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [IVNetwork requestPostWithUrl:url paramters:params.copy completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTModifyNewAccPwd paramters:params.copy completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         if ([result.head.errCode isEqualToString:@"0000"]) {
@@ -526,10 +524,6 @@ typedef enum {
             strongSelf.isModifyPwd = YES;
             strongSelf.registerSuccessType = BTTRegisterSuccessTypeNormal;
             [strongSelf.collectionView reloadData];
-//            [strongSelf showCropAlert];
-//            BTTRegisterChangePwdSuccessController *vc = (BTTRegisterChangePwdSuccessController *)[BTTRegisterChangePwdSuccessController getVCFromStoryboard];
-//            vc.account = self.account;
-//            [self.navigationController pushViewController:vc animated:YES];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
