@@ -111,7 +111,7 @@
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
         [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
-        
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
     }
     
 }

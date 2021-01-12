@@ -131,6 +131,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTShowAccountGride                        @"BTTShowAccountGride"
 #define BTTBiBiCunDate                             @"BTTBiBiCunDate"
 #define BTTShareNoticeTag                          @"BTTShareNoticeTag"
+#define BTTShowYuFenHong                           @"BTTShowYuFenHong"
 #define BTTGameCurrencysWithName                   [NSString stringWithFormat:@"%@GameCurrencys", [IVNetwork savedUserInfo].loginName]
 
 //Flurry
@@ -496,15 +497,16 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTDeleteXmRecord                          @"xm/deleteRequest"
 //客户报表 - 銀行卡更改
 #define BTTCustomerReportBank                      @"account/queryModifyBankRequests"
-
 //優惠活動 - 筆筆存
 #define BBTBiBiCunAlert                            @"_extra_/api/v1/activity/usdtFree2/alert"
-
 //取款優惠彈窗
 #define BTTGetPopWithDraw                            @"_extra_/api/v1/getPopWithDraw"
-
 //是否顯示BiteBase
 #define BTTIsShowBiteBase                          @"_extra_/api/v1/isShowBiteBase"
+
+//2021月分紅是否是老用戶
+#define BTTIsOldMember                             @"_extra_/api/v1/activity/monthly-activity2021/isVip"
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)      ([UIFont systemFontOfSize:X])

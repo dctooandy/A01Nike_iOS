@@ -94,6 +94,17 @@ static const char *BTTNextGroupKey = "nextGroup";
     }];
 }
 
+//2021月分紅
+-(void)loadYenFenHong {
+    [IVNetwork requestPostWithUrl:BTTIsOldMember paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTYenFenHongModel * model = [BTTYenFenHongModel yy_modelWithJSON:result.body];
+            [self showYueFenHong:model];
+        }
+    }];
+}
+
 // 博币数量查询
 - (void)loadLuckyWheelCoinStatus {
     

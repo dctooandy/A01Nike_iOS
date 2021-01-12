@@ -31,6 +31,7 @@
 #import "BTTActionSheet.h"
 #import "BTTBiBiCunPopView.h"
 #import "AppDelegate.h"
+#import "BTTYueFenHongPopView.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
@@ -127,6 +128,27 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         [delegate jumpToTabIndex:4];
         [popView dismiss];
+    };
+}
+
+- (void)showYueFenHong:(BTTYenFenHongModel *)model {
+    BTTYueFenHongPopView * customView = [BTTYueFenHongPopView viewFromXib];
+    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    customView.model = model;
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    
+    customView.btnBlock = ^(UIButton * _Nullable btn) {
+        [popView dismiss];
+        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+        vc.title = @"博天堂股东 分红月月领～第二季";
+        vc.webConfigModel.url = @"/activity_pages/withdraw_gift";
+        vc.webConfigModel.newView = YES;
+        [self.navigationController pushViewController:vc animated:YES];
     };
 }
 

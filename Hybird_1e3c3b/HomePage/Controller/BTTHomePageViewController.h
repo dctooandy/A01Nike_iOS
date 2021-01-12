@@ -7,6 +7,7 @@
 //
 
 #import "BTTCollectionViewController.h"
+#import "BTTYenFenHongModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

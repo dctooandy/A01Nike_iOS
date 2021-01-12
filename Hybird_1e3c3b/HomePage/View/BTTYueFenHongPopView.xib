@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BTTYueFenHongPopView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cZh-le-wW8">
+                    <rect key="frame" x="20.5" y="330.5" width="373" height="235"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_yue_fen_hong_title_bg" translatesAutoresizingMaskIntoConstraints="NO" id="v0E-vW-zb7">
+                            <rect key="frame" x="0.0" y="0.0" width="373" height="32"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="股东分红月月领~第二季" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QgG-d0-Jeh">
+                            <rect key="frame" x="0.0" y="0.0" width="373" height="32"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="特别大礼包" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dx-rQ-iC3">
+                            <rect key="frame" x="135.5" y="52" width="102" height="24"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                            <color key="textColor" red="0.8784313725490196" green="0.17254901960784313" blue="0.34901960784313724" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byp-QH-pMl">
+                            <rect key="frame" x="5" y="92" width="363" height="20.5"/>
+                            <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i38-0O-ZtC">
+                            <rect key="frame" x="74.5" y="137.5" width="224" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="i38-0O-ZtC" secondAttribute="height" multiplier="167:33" id="Y7g-Kt-Jdy"/>
+                            </constraints>
+                            <state key="normal" title="查看活动详情" backgroundImage="ic_yue_fen_hong_btn_bg"/>
+                            <connections>
+                                <action selector="btnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="44x-IO-dF8"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="i38-0O-ZtC" firstAttribute="centerX" secondItem="cZh-le-wW8" secondAttribute="centerX" id="0bA-LF-hV2"/>
+                        <constraint firstAttribute="trailing" secondItem="byp-QH-pMl" secondAttribute="trailing" constant="5" id="1OZ-Ab-UAM"/>
+                        <constraint firstAttribute="trailing" secondItem="v0E-vW-zb7" secondAttribute="trailing" id="2o6-cW-8nW"/>
+                        <constraint firstItem="byp-QH-pMl" firstAttribute="top" secondItem="QgG-d0-Jeh" secondAttribute="bottom" constant="60" id="57v-Uo-XYN"/>
+                        <constraint firstAttribute="height" constant="235" id="7UH-KY-0N9"/>
+                        <constraint firstItem="v0E-vW-zb7" firstAttribute="top" secondItem="cZh-le-wW8" secondAttribute="top" id="80v-x3-7kf"/>
+                        <constraint firstItem="v0E-vW-zb7" firstAttribute="leading" secondItem="cZh-le-wW8" secondAttribute="leading" id="E2d-Fl-xbH"/>
+                        <constraint firstItem="QgG-d0-Jeh" firstAttribute="leading" secondItem="v0E-vW-zb7" secondAttribute="leading" id="Gvy-Uv-XpH"/>
+                        <constraint firstItem="4dx-rQ-iC3" firstAttribute="centerX" secondItem="cZh-le-wW8" secondAttribute="centerX" id="ICz-V2-B0F"/>
+                        <constraint firstItem="4dx-rQ-iC3" firstAttribute="top" secondItem="v0E-vW-zb7" secondAttribute="bottom" constant="20" id="OBr-6M-Viz"/>
+                        <constraint firstItem="QgG-d0-Jeh" firstAttribute="trailing" secondItem="v0E-vW-zb7" secondAttribute="trailing" id="OaJ-aY-OfC"/>
+                        <constraint firstItem="byp-QH-pMl" firstAttribute="leading" secondItem="cZh-le-wW8" secondAttribute="leading" constant="5" id="fni-xY-UO8"/>
+                        <constraint firstItem="i38-0O-ZtC" firstAttribute="top" secondItem="byp-QH-pMl" secondAttribute="bottom" constant="25" id="iiC-IN-R1I"/>
+                        <constraint firstItem="QgG-d0-Jeh" firstAttribute="top" secondItem="v0E-vW-zb7" secondAttribute="top" id="sea-wd-9rU"/>
+                        <constraint firstItem="i38-0O-ZtC" firstAttribute="width" secondItem="cZh-le-wW8" secondAttribute="width" multiplier="0.6" id="yLm-oo-th4"/>
+                        <constraint firstItem="QgG-d0-Jeh" firstAttribute="bottom" secondItem="v0E-vW-zb7" secondAttribute="bottom" id="z8Z-mC-EQx"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6U-SF-KyP">
+                    <rect key="frame" x="366.5" y="293.5" width="27" height="27"/>
+                    <state key="normal" image="ic_yue_fen_hong_close_btn"/>
+                    <connections>
+                        <action selector="closeBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="4Md-Z4-cqw"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <constraints>
+                <constraint firstItem="p6U-SF-KyP" firstAttribute="trailing" secondItem="cZh-le-wW8" secondAttribute="trailing" id="CUm-ge-yaL"/>
+                <constraint firstItem="cZh-le-wW8" firstAttribute="top" secondItem="p6U-SF-KyP" secondAttribute="bottom" constant="10" id="QIA-nc-0El"/>
+                <constraint firstItem="cZh-le-wW8" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="i0A-6L-lms"/>
+                <constraint firstItem="cZh-le-wW8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="iqa-uR-v0D"/>
+                <constraint firstItem="cZh-le-wW8" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.9" id="p5d-aP-XuG"/>
+            </constraints>
+            <connections>
+                <outlet property="btnTopLayout" destination="iiC-IN-R1I" id="o53-L4-NEg"/>
+                <outlet property="contentLab" destination="byp-QH-pMl" id="ETR-Iy-EL6"/>
+                <outlet property="contentLabTopLayout" destination="57v-Uo-XYN" id="Bdl-9k-xsf"/>
+                <outlet property="oldMemberSunTitleLab" destination="4dx-rQ-iC3" id="0ev-Nf-apv"/>
+                <outlet property="titleLab" destination="QgG-d0-Jeh" id="QNE-zs-BVo"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="121"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_yue_fen_hong_btn_bg" width="167" height="33"/>
+        <image name="ic_yue_fen_hong_close_btn" width="27" height="27"/>
+        <image name="ic_yue_fen_hong_title_bg" width="330" height="32"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
