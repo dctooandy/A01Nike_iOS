@@ -31,7 +31,7 @@
     BOOL show = [_model.show boolValue] && [model.needMoney integerValue] != 0;
     NSString * titleStr = @"";
     NSString * contentStr = @"";
-    NSString * typeStr = [model.type isEqualToString:@"slot"] ? @"电子游戏":@"真人娱乐";
+    NSString * typeStr = [model.type isEqualToString:@"slot"] ? @"电子游艺":@"真人娱乐";
     if (show) {
         titleStr = @"股东分红月月领~第二季";
         NSString * perStr = [NSString stringWithFormat:@"%@%%", model.per];
