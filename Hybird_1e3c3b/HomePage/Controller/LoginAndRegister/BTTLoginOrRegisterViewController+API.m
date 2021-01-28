@@ -606,6 +606,7 @@
                             
                         }else{
                             self.specifyWordArr = [[NSMutableArray alloc] initWithArray:result.body[@"specifyWord"]];
+                            self.specifyWordNum = [result.body[@"specifyWordNum"] integerValue];
                             self.noticeStrArr = result.body[@"specifyWord"];
                             self.imgCodeImg = decodedImage;
                         }

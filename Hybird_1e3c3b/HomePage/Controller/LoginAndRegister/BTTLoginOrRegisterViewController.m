@@ -353,7 +353,7 @@
     NSDictionary * dict = @{@"x":@(point.x), @"y":@(point.y)};
     [self addLocationImg:point.x y:point.y num:self.pressNum];
     [self.pressLocationArr addObject:dict];
-    if (self.pressLocationArr.count == self.specifyWordArr.count) {
+    if (self.pressLocationArr.count == self.specifyWordNum) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:self.pressLocationArr options:NSJSONWritingPrettyPrinted error:nil];
         NSString * result = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         [self checkChineseCaptcha:result];

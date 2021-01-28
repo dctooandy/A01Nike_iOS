@@ -42,6 +42,7 @@ typedef enum {
 @property (nonatomic, strong)UIView * imgCodePopViewBg;
 @property (nonatomic, strong) NSMutableArray * specifyWordArr;
 @property (nonatomic, strong) NSMutableArray * pressLocationArr;
+@property (nonatomic, assign) NSInteger specifyWordNum;
 @property (nonatomic, strong) UIImage * imgCodeImg;
 @property (nonatomic, copy) NSArray * noticeStrArr;
 @property (nonatomic, copy) NSString *captchaId;
@@ -403,7 +404,7 @@ typedef enum {
     NSDictionary * dict = @{@"x":@(point.x), @"y":@(point.y)};
     [self addLocationImg:point.x y:point.y num:self.pressNum];
     [self.pressLocationArr addObject:dict];
-    if (self.pressLocationArr.count == self.specifyWordArr.count) {
+    if (self.pressLocationArr.count == self.specifyWordNum) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:self.pressLocationArr options:NSJSONWritingPrettyPrinted error:nil];
         NSString * result = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         [self checkChineseCaptcha:result];
@@ -445,6 +446,7 @@ typedef enum {
                     self.captchaId = result.body[@"captchaId"];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         self.specifyWordArr = [[NSMutableArray alloc] initWithArray:result.body[@"specifyWord"]];
+                        self.specifyWordNum = [result.body[@"specifyWordNum"] integerValue];
                         self.noticeStrArr = result.body[@"specifyWord"];
                         self.imgCodeImg = decodedImage;
                     });
