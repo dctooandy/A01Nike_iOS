@@ -16,7 +16,6 @@
 #import "BTTRegisterSuccessController.h"
 #import "BTTUserStatusManager.h"
 #import "BTTLoginAccountSelectView.h"
-#import "BTTRegisterCheckPopView.h"
 #import "IVRsaEncryptWrapper.h"
 #import "BTTNormalRegisterSuccessController.h"
 #import "OneKeyPhoneController.h"
@@ -264,8 +263,6 @@
                     [self loginWithLoginAPIModel:loginModel isBack:NO];
                 }
             }
-        }else if ([result.head.errCode isEqualToString:@"WS_201722"]&&[result.head.errMsg isEqualToString:@"很抱歉,该电话已被注册,请联系客服,谢谢！"]){
-            [self showRegisterCheckViewWithModel:model];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
@@ -451,11 +448,7 @@
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            if (result.body&&[result.body isKindOfClass:[NSString class]]&&[result.body isEqualToString:@"1000"]) {
-                [self showRegisterCheckViewWithModel:model];
-            }else{
-                [self MobileNoAndCodeRegisterAPIModel:model];
-            }
+            [self MobileNoAndCodeRegisterAPIModel:model];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:self.view];
         }
@@ -572,8 +565,6 @@
                     
                 }
             }
-        }else if ([result.head.errCode isEqualToString:@"WS_201722"]&&[result.head.errMsg isEqualToString:@"很抱歉,该电话已被注册,请联系客服,谢谢！"]){
-            [self showRegisterCheckViewWithModel:model];
         }else if ([result.head.errCode isEqualToString:@"GW_800503"]&&[result.head.errMsg isEqualToString:@"手机号已被用户绑定或激活"]) {
             [MBProgressHUD showErrorWithTime:result.head.errMsg toView:nil duration:4.0];
         }else{
