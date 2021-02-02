@@ -39,6 +39,33 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 
 @implementation BTTHomePageViewController (Nav)
 
+-(void)setUpAssistiveButton {
+    UIImage * image = [UIImage imageNamed:@"ic_assistive_btn"];
+    CGFloat assistiveBtnHeight = image.size.height + [UIImage imageNamed:@"ic_assistive_close_btn"].size.height;
+    CGFloat loginBtnViewHeight = [IVNetwork savedUserInfo] ? 0:87;
+    CGFloat postionY = SCREEN_HEIGHT - kTabbarHeight - assistiveBtnHeight/2 - loginBtnViewHeight;
+    self.assistiveButton = [[AssistiveButton alloc] initMainBtnWithBackgroundImage:image highlightImage:nil position:CGPointMake(image.size.width/2 + 10, postionY)];
+    //主按鈕可移動或不可移動
+    self.assistiveButton.positionMode = SpreadPositionModeTouchBorder;
+    weakSelf(weakSelf);
+    [self.assistiveButton setMainButtonClickActionBlock:^{
+        weakSelf.assistiveButton.hidden = true;
+        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+        vc.webConfigModel.url = @"/activity_pages/new_year_2021";
+        vc.webConfigModel.newView = YES;
+        vc.webConfigModel.theme = @"outside";
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    }];
+    [self.assistiveButton setCloseBtnActionBlock:^{
+        [weakSelf.assistiveButton removeFromSuperview];
+    }];
+}
+
+-(void)showAssistiveButton {
+    if (self.assistiveButton.hidden) {
+        self.assistiveButton.hidden = false;
+    }
+}
 
 - (void)setupFloatWindow {
 //    UIImageView *floatWindow = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - 61, SCREEN_HEIGHT / 2 + 120, 68.8, 66)];

@@ -574,6 +574,8 @@
             }
         }else if ([result.head.errCode isEqualToString:@"WS_201722"]&&[result.head.errMsg isEqualToString:@"很抱歉,该电话已被注册,请联系客服,谢谢！"]){
             [self showRegisterCheckViewWithModel:model];
+        }else if ([result.head.errCode isEqualToString:@"GW_800503"]&&[result.head.errMsg isEqualToString:@"手机号已被用户绑定或激活"]) {
+            [MBProgressHUD showErrorWithTime:result.head.errMsg toView:nil duration:4.0];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
@@ -607,7 +609,6 @@
                         }else{
                             self.specifyWordArr = [[NSMutableArray alloc] initWithArray:result.body[@"specifyWord"]];
                             self.specifyWordNum = [result.body[@"specifyWordNum"] integerValue];
-                            self.noticeStrArr = result.body[@"specifyWord"];
                             self.imgCodeImg = decodedImage;
                         }
                         

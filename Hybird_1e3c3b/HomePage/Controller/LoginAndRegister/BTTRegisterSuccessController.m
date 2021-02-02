@@ -34,7 +34,6 @@ typedef enum {
 @property (nonatomic, assign) BOOL isSavedPwd;
 @property (nonatomic, assign)BOOL isHome;
 
-@property (nonatomic, strong) UILabel * noticeLab;
 @property (nonatomic, strong) UILabel * pressNumLab;
 @property (nonatomic, assign) NSInteger pressNum;
 @property (nonatomic, strong) UIButton *imgCodeBtn;
@@ -44,7 +43,6 @@ typedef enum {
 @property (nonatomic, strong) NSMutableArray * pressLocationArr;
 @property (nonatomic, assign) NSInteger specifyWordNum;
 @property (nonatomic, strong) UIImage * imgCodeImg;
-@property (nonatomic, copy) NSArray * noticeStrArr;
 @property (nonatomic, copy) NSString *captchaId;
 @property (nonatomic, copy) NSString *ticketStr;
 @end
@@ -314,16 +312,6 @@ typedef enum {
         make.top.right.equalTo(imgCodeBtn);
         make.width.height.offset(30);
     }];
-    
-    UILabel * noticeLab = [[UILabel alloc] init];
-    noticeLab.backgroundColor = [UIColor colorWithRed: 0.00 green: 0.00 blue: 0.00 alpha: 0.60];
-    noticeLab.textColor = [UIColor whiteColor];
-    noticeLab.textAlignment = NSTextAlignmentCenter;
-    _noticeLab = noticeLab;
-    [_imgCodePopViewBg addSubview:noticeLab];
-    [noticeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(imgCodeBtn);
-    }];
 }
 
 -(void)addLocationImg:(CGFloat)x y:(CGFloat)y num:(NSInteger)num {
@@ -372,20 +360,11 @@ typedef enum {
         _cancelBtn = cancelBtn;
         [_imgCodePopViewBg addSubview:cancelBtn];
         [cancelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(_noticeLab.mas_bottom).offset(10);
-            make.left.right.equalTo(_noticeLab);
+            make.top.equalTo(self.imgCodeBtn.mas_bottom).offset(10);
+            make.left.right.equalTo(self.imgCodeBtn);
             make.height.offset(50);
         }];
     }
-}
-
--(void)setNoticeStrArr:(NSArray *)noticeStrArr {
-    _noticeStrArr = noticeStrArr;
-    NSMutableString * wordStr = [[NSMutableString alloc] init];
-    for (NSString * str in _noticeStrArr) {
-        [wordStr appendString:[NSString stringWithFormat:@" [%@] ", str]];
-    }
-    self.noticeLab.text = [NSString stringWithFormat:@"请 “依次” 点击 %@", wordStr];
 }
 
 -(void)removeLocationView {
@@ -404,7 +383,7 @@ typedef enum {
     NSDictionary * dict = @{@"x":@(point.x), @"y":@(point.y)};
     [self addLocationImg:point.x y:point.y num:self.pressNum];
     [self.pressLocationArr addObject:dict];
-    if (self.pressLocationArr.count == self.specifyWordArr.count) {
+    if (self.pressLocationArr.count == self.specifyWordNum) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:self.pressLocationArr options:NSJSONWritingPrettyPrinted error:nil];
         NSString * result = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         [self checkChineseCaptcha:result];
@@ -447,7 +426,6 @@ typedef enum {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         self.specifyWordArr = [[NSMutableArray alloc] initWithArray:result.body[@"specifyWord"]];
                         self.specifyWordNum = [result.body[@"specifyWordNum"] integerValue];
-                        self.noticeStrArr = result.body[@"specifyWord"];
                         self.imgCodeImg = decodedImage;
                     });
                 }

@@ -43,6 +43,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setupFloatWindow;
 
+-(void)setUpAssistiveButton;
+
+-(void)showAssistiveButton;
+
 @end
 
 NS_ASSUME_NONNULL_END

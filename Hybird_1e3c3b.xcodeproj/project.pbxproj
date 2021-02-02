@@ -721,6 +721,7 @@
 		4196BEF2255BC21B00F41EED /* BTTWithdrawToUsdtPromoPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 4196BEF0255BC21B00F41EED /* BTTWithdrawToUsdtPromoPop.m */; };
 		419AEC5A250F64F100D089DD /* BTTBJLPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 419AEC57250F64F000D089DD /* BTTBJLPopView.m */; };
 		419AEC5B250F64F100D089DD /* BTTBJLPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419AEC59250F64F100D089DD /* BTTBJLPopView.xib */; };
+		41B8FCD625C92B310022F886 /* AssistiveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B8FCD525C92B310022F886 /* AssistiveButton.m */; };
 		41BC7100252D6509003944ED /* BTTBiBiCunPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BC70FD252D6509003944ED /* BTTBiBiCunPopView.m */; };
 		41BC7101252D6509003944ED /* BTTBiBiCunPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BC70FE252D6509003944ED /* BTTBiBiCunPopView.xib */; };
 		41C53A9C25A851B500CFA3A1 /* BTTYenFenHongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C53A9A25A851B400CFA3A1 /* BTTYenFenHongModel.m */; };
@@ -1993,6 +1994,8 @@
 		419AEC57250F64F000D089DD /* BTTBJLPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTBJLPopView.m; sourceTree = "<group>"; };
 		419AEC58250F64F100D089DD /* BTTBJLPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTBJLPopView.h; sourceTree = "<group>"; };
 		419AEC59250F64F100D089DD /* BTTBJLPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTBJLPopView.xib; sourceTree = "<group>"; };
+		41B8FCD425C92B310022F886 /* AssistiveButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssistiveButton.h; sourceTree = "<group>"; };
+		41B8FCD525C92B310022F886 /* AssistiveButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssistiveButton.m; sourceTree = "<group>"; };
 		41BC70FD252D6509003944ED /* BTTBiBiCunPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTBiBiCunPopView.m; sourceTree = "<group>"; };
 		41BC70FE252D6509003944ED /* BTTBiBiCunPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTBiBiCunPopView.xib; sourceTree = "<group>"; };
 		41BC70FF252D6509003944ED /* BTTBiBiCunPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTBiBiCunPopView.h; sourceTree = "<group>"; };
@@ -3189,6 +3192,7 @@
 		3A8F5167215F758A0069D1B3 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				41B8FCD325C92B310022F886 /* AssistiveButton */,
 				3AD1A9322236538C00515628 /* 3S */,
 				EA5F141221A28514004305A7 /* IVFoundation */,
 				3AD9CD5D21670FB100685B43 /* ThirdParty */,
@@ -4544,6 +4548,15 @@
 				418F7569251D943400DF4A71 /* BTTXmTransferRecordController+LoadData.m */,
 			);
 			path = XmTransfer;
+			sourceTree = "<group>";
+		};
+		41B8FCD325C92B310022F886 /* AssistiveButton */ = {
+			isa = PBXGroup;
+			children = (
+				41B8FCD425C92B310022F886 /* AssistiveButton.h */,
+				41B8FCD525C92B310022F886 /* AssistiveButton.m */,
+			);
+			path = AssistiveButton;
 			sourceTree = "<group>";
 		};
 		8746ABB2D5D61EF30A4942D6 /* Frameworks */ = {
@@ -5939,6 +5952,7 @@
 				3A8F51A0215F77EC0069D1B3 /* NSDate+Extension.m in Sources */,
 				418F756F251D94A400DF4A71 /* BTTXmTransferRecordModel.m in Sources */,
 				3AE05816217030CC00C7E70D /* BTTHomePageActivitiesCell.m in Sources */,
+				41B8FCD625C92B310022F886 /* AssistiveButton.m in Sources */,
 				3AAE8214219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.m in Sources */,
 				D35BF23F23B451340085D6A1 /* CNPayUSDTQRSecondVC.m in Sources */,
 				3AA7892921FFF2580047A372 /* SDWebImageCoder.m in Sources */,

@@ -13,6 +13,7 @@
 + (void)showLoadingSingleInView:(UIView *)view animated:(BOOL)animated;
 
 + (void)showError:(NSString *)error toView:(UIView *)view;
++ (void)showErrorWithTime:(NSString *)error toView:(UIView *)view duration:(NSTimeInterval)duration;
 + (void)showSuccess:(NSString *)success toView:(UIView *)view;
 
 + (MBProgressHUD *)showMessag:(NSString *)message toView:(UIView *)view;

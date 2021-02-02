@@ -53,9 +53,34 @@ static const NSInteger loadingTag = 10101;
     [hud hideAnimated:YES afterDelay:1.0];
 }
 
++ (void)showWithTime:(NSString *)text icon:(NSString *)icon view:(UIView *)view duration:(NSTimeInterval)duration {
+    if (view == nil) view = [UIApplication sharedApplication].keyWindow;
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    
+    hud.bezelView.color = [[UIColor blackColor] colorWithAlphaComponent:.8f];
+    hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+    hud.contentColor = [UIColor whiteColor];
+    
+    [view bringSubviewToFront:hud];
+    if (text.length > 10) {
+        hud.detailsLabel.text = text;
+    }else{
+       hud.label.text = text;
+    }
+    UIImageView *iconImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:icon]];
+    hud.customView = iconImage;
+    hud.mode = MBProgressHUDModeCustomView;
+    hud.removeFromSuperViewOnHide = YES;
+    [hud hideAnimated:YES afterDelay:duration];
+}
+
 #pragma mark 显示错误信息
 + (void)showError:(NSString *)error toView:(UIView *)view{
     [self show:error icon:@"app_sad" view:view];
+}
+
++ (void)showErrorWithTime:(NSString *)error toView:(UIView *)view duration:(NSTimeInterval)duration{
+    [self showWithTime:error icon:@"app_sad" view:view duration:duration];
 }
 
 + (void)showSuccess:(NSString *)success toView:(UIView *)view
