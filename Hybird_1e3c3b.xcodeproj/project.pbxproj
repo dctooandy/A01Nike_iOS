@@ -707,6 +707,8 @@
 		4184FDF324E4EA7D008521D0 /* BTTForgetPasswordController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 4184FDF224E4EA7D008521D0 /* BTTForgetPasswordController+Nav.m */; };
 		4184FDF824E4EA92008521D0 /* BTTForgetPasswordController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4184FDF424E4EA92008521D0 /* BTTForgetPasswordController+LoadData.m */; };
 		4184FDF924E4EA92008521D0 /* BTTForgetPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4184FDF524E4EA92008521D0 /* BTTForgetPasswordController.m */; };
+		418C4A5D25CD4D2100BD85ED /* new_year_2021_x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 418C4A5B25CD4D2000BD85ED /* new_year_2021_x.gif */; };
+		418C4A5E25CD4D2100BD85ED /* new_year_2021.gif in Resources */ = {isa = PBXBuildFile; fileRef = 418C4A5C25CD4D2000BD85ED /* new_year_2021.gif */; };
 		418E72C6257777CE00D9BF95 /* BTTChooseCurrencyPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E72C3257777CE00D9BF95 /* BTTChooseCurrencyPopView.m */; };
 		418E72C9257777E300D9BF95 /* BTTChooseCurrencyPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 418E72C4257777CE00D9BF95 /* BTTChooseCurrencyPopView.xib */; };
 		418E72CF2577782800D9BF95 /* BTTChooseCurrencyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E72CD2577782800D9BF95 /* BTTChooseCurrencyController.m */; };
@@ -1971,6 +1973,8 @@
 		4184FDF524E4EA92008521D0 /* BTTForgetPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTForgetPasswordController.m; sourceTree = "<group>"; };
 		4184FDF624E4EA92008521D0 /* BTTForgetPasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTForgetPasswordController.h; sourceTree = "<group>"; };
 		4184FDF724E4EA92008521D0 /* BTTForgetPasswordController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTForgetPasswordController+LoadData.h"; sourceTree = "<group>"; };
+		418C4A5B25CD4D2000BD85ED /* new_year_2021_x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = new_year_2021_x.gif; sourceTree = "<group>"; };
+		418C4A5C25CD4D2000BD85ED /* new_year_2021.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = new_year_2021.gif; sourceTree = "<group>"; };
 		418E72C3257777CE00D9BF95 /* BTTChooseCurrencyPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTChooseCurrencyPopView.m; sourceTree = "<group>"; };
 		418E72C4257777CE00D9BF95 /* BTTChooseCurrencyPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTChooseCurrencyPopView.xib; sourceTree = "<group>"; };
 		418E72C5257777CE00D9BF95 /* BTTChooseCurrencyPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTChooseCurrencyPopView.h; sourceTree = "<group>"; };
@@ -3116,6 +3120,8 @@
 		3A8F5160215F75010069D1B3 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				418C4A5B25CD4D2000BD85ED /* new_year_2021_x.gif */,
+				418C4A5C25CD4D2000BD85ED /* new_year_2021.gif */,
 				4139C82A25CA9E08008B8EBD /* ic_assistive_btn.gif */,
 				D3708E1323FB902300602715 /* login_bg_video.mp4 */,
 				D3B47D5823B70A5400D37C7F /* app.zip */,
@@ -5271,6 +5277,7 @@
 				3A5AE6B022D6E22A0013E8A3 /* liv_radio_unselected@3x.png in Resources */,
 				3A5AE6F422D6E22A0013E8A3 /* VideoSendIcon@2x.png in Resources */,
 				3A5F7A9B21A8E71100128E8B /* BTTXimaSuccessItemCell.xib in Resources */,
+				418C4A5D25CD4D2100BD85ED /* new_year_2021_x.gif in Resources */,
 				D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */,
 				3A5AE6B522D6E22A0013E8A3 /* LIVVideoCamera_play@3x.png in Resources */,
 				3A21AEB02394BCBF009E73FD /* BTTShowErcodePopview.xib in Resources */,
@@ -5279,6 +5286,7 @@
 				D3A9A71B240E2B6A007F672A /* BTTNormalRegisterSuccessController.xib in Resources */,
 				3ADD23772177328B00FA959A /* BTTMeSaveMoneyCell.xib in Resources */,
 				3A5AE6C022D6E22A0013E8A3 /* LIVVideoRecorderItem@2x.png in Resources */,
+				418C4A5E25CD4D2100BD85ED /* new_year_2021.gif in Resources */,
 				3A5AE68422D6E22A0013E8A3 /* photo_sel_photoPickerVc@2x.png in Resources */,
 				D3B47D5923B70A5500D37C7F /* app.zip in Resources */,
 				3A5AE70E22D6E22B0013E8A3 /* tired.gif in Resources */,

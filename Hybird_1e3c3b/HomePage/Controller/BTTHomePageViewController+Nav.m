@@ -46,7 +46,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     CGFloat assistiveBtnHeight = image.size.height + [UIImage imageNamed:@"ic_assistive_close_btn"].size.height;
     CGFloat loginBtnViewHeight = [IVNetwork savedUserInfo] ? 0:87;
     CGFloat postionY = SCREEN_HEIGHT - kTabbarHeight - assistiveBtnHeight/2 - loginBtnViewHeight;
-    self.assistiveButton = [[AssistiveButton alloc] initMainBtnWithBackgroundImage:image highlightImage:nil position:CGPointMake(image.size.width/2 + 10, postionY)];
+    self.assistiveButton = [[AssistiveButton alloc] initMainBtnWithBackgroundImage:image highlightImage:nil position:CGPointMake(SCREEN_WIDTH - image.size.width/2 - 10, postionY)];
     //主按鈕可移動或不可移動
     self.assistiveButton.positionMode = SpreadPositionModeTouchBorder;
     weakSelf(weakSelf);
