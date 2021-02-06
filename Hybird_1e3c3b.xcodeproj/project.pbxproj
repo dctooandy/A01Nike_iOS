@@ -671,7 +671,6 @@
 		41649F8F258352EC0033FFA9 /* IN3SResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41649F8C258352EB0033FFA9 /* IN3SResource.bundle */; };
 		41649F90258352EC0033FFA9 /* tingyunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41649F8D258352EB0033FFA9 /* tingyunApp.framework */; };
 		41649F91258352EC0033FFA9 /* IN3SAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41649F8E258352EB0033FFA9 /* IN3SAnalytics.framework */; };
-		417E01FA25AF0CAD0039D4EF /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		4184DD98251B308D00D433D4 /* BTTXmRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4184DD8C251B308B00D433D4 /* BTTXmRecordModel.m */; };
 		4184DD99251B308D00D433D4 /* BTTModifyBankRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4184DD92251B308C00D433D4 /* BTTModifyBankRecordModel.m */; };
 		4184DD9A251B308D00D433D4 /* BTTPromoRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4184DD8E251B308B00D433D4 /* BTTPromoRecordModel.m */; };
@@ -709,6 +708,7 @@
 		4184FDF924E4EA92008521D0 /* BTTForgetPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4184FDF524E4EA92008521D0 /* BTTForgetPasswordController.m */; };
 		418C4A5D25CD4D2100BD85ED /* new_year_2021_x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 418C4A5B25CD4D2000BD85ED /* new_year_2021_x.gif */; };
 		418C4A5E25CD4D2100BD85ED /* new_year_2021.gif in Resources */ = {isa = PBXBuildFile; fileRef = 418C4A5C25CD4D2000BD85ED /* new_year_2021.gif */; };
+		418C4A6725CD51BF00BD85ED /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		418E72C6257777CE00D9BF95 /* BTTChooseCurrencyPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E72C3257777CE00D9BF95 /* BTTChooseCurrencyPopView.m */; };
 		418E72C9257777E300D9BF95 /* BTTChooseCurrencyPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 418E72C4257777CE00D9BF95 /* BTTChooseCurrencyPopView.xib */; };
 		418E72CF2577782800D9BF95 /* BTTChooseCurrencyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E72CD2577782800D9BF95 /* BTTChooseCurrencyController.m */; };
@@ -2291,7 +2291,7 @@
 				3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */,
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
-				417E01FA25AF0CAD0039D4EF /* libboringssl_simulator.a in Frameworks */,
+				418C4A6725CD51BF00BD85ED /* libboringssl_simulator.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
@@ -6184,7 +6184,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.207;
+				MARKETING_VERSION = 3.2.208;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt1e3c3b;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6226,7 +6226,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.207;
+				MARKETING_VERSION = 3.2.208;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt1e3c3b;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
