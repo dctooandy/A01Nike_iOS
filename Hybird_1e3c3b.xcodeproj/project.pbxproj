@@ -640,6 +640,7 @@
 		3AFCD7CC21AD15D700B136C1 /* BTTVideoGamesHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CA21AD15D700B136C1 /* BTTVideoGamesHeaderCell.xib */; };
 		3AFCD7D021AD179600B136C1 /* BTTVideoGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CE21AD179600B136C1 /* BTTVideoGameCell.m */; };
 		3AFCD7D121AD179600B136C1 /* BTTVideoGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */; };
+		4105C9A425CE86C500B16CDB /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		410997F9251DC870001FA895 /* BTTDepositRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410997F8251DC870001FA895 /* BTTDepositRecordCell.xib */; };
 		410997FB251DC876001FA895 /* BTTDepositRecordHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410997FA251DC876001FA895 /* BTTDepositRecordHeaderCell.xib */; };
 		4139C82B25CA9E08008B8EBD /* ic_assistive_btn.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4139C82A25CA9E08008B8EBD /* ic_assistive_btn.gif */; };
@@ -708,7 +709,6 @@
 		4184FDF924E4EA92008521D0 /* BTTForgetPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4184FDF524E4EA92008521D0 /* BTTForgetPasswordController.m */; };
 		418C4A5D25CD4D2100BD85ED /* new_year_2021_x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 418C4A5B25CD4D2000BD85ED /* new_year_2021_x.gif */; };
 		418C4A5E25CD4D2100BD85ED /* new_year_2021.gif in Resources */ = {isa = PBXBuildFile; fileRef = 418C4A5C25CD4D2000BD85ED /* new_year_2021.gif */; };
-		418C4A6725CD51BF00BD85ED /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		418E72C6257777CE00D9BF95 /* BTTChooseCurrencyPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E72C3257777CE00D9BF95 /* BTTChooseCurrencyPopView.m */; };
 		418E72C9257777E300D9BF95 /* BTTChooseCurrencyPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 418E72C4257777CE00D9BF95 /* BTTChooseCurrencyPopView.xib */; };
 		418E72CF2577782800D9BF95 /* BTTChooseCurrencyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E72CD2577782800D9BF95 /* BTTChooseCurrencyController.m */; };
@@ -2291,7 +2291,7 @@
 				3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */,
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
-				418C4A6725CD51BF00BD85ED /* libboringssl_simulator.a in Frameworks */,
+				4105C9A425CE86C500B16CDB /* libboringssl_simulator.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,

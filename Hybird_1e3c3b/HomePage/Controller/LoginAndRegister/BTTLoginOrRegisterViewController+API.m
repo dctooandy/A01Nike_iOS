@@ -565,10 +565,8 @@
                     
                 }
             }
-        }else if ([result.head.errCode isEqualToString:@"GW_800503"]&&[result.head.errMsg isEqualToString:@"手机号已被用户绑定或激活"]) {
+        } else {
             [MBProgressHUD showErrorWithTime:result.head.errMsg toView:nil duration:4.0];
-        }else{
-            [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];
 }
