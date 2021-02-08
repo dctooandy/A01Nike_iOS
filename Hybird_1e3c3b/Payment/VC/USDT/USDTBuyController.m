@@ -13,8 +13,9 @@
 @interface USDTBuyController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView * walletCollectionView;
 @property (nonatomic, strong) NSMutableArray * bankList;
-@property (nonatomic, strong) UILabel * bitBaseTitleLab;
+@property (nonatomic, strong) UILabel * redTitleLab;
 @property (nonatomic, strong) NSMutableDictionary * cellDic;
+@property (nonatomic, copy) NSString * redTitleBankName;
 @end
 
 @implementation USDTBuyController
@@ -25,6 +26,7 @@
     self.bankList = [[NSMutableArray alloc] init];
     self.navigationController.navigationBarHidden = false;
     self.title = @"购买USDT";
+    self.redTitleBankName = @"DEXCHANGE";
     [self setUpView];
     [self requestBankList];
 }
@@ -42,10 +44,10 @@
             } else {
                 for (int i = 0; i < weakSelf.bankList.count; i++) {
                     OTCInsideModel * model = [OTCInsideModel yy_modelWithJSON:weakSelf.bankList[i]];
-                    if ([model.otcMarketName isEqualToString:@"bitbase"]) {
-                        weakSelf.bitBaseTitleLab.hidden = false;
+                    if ([model.otcMarketName isEqualToString:self.redTitleBankName]) {
+                        weakSelf.redTitleLab.hidden = false;
                         [weakSelf.walletCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
-                            make.top.equalTo(weakSelf.bitBaseTitleLab).offset(weakSelf.bitBaseTitleLab.frame.size.height + 15);
+                            make.top.equalTo(weakSelf.redTitleLab).offset(weakSelf.redTitleLab.frame.size.height + 15);
                         }];
                         break;
                     }
@@ -70,14 +72,14 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BOOL show = [result.body[@"show"] boolValue];
             if (show) {
-                weakSelf.bitBaseTitleLab.hidden = false;
+                weakSelf.redTitleLab.hidden = false;
                 [weakSelf.walletCollectionView mas_updateConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(weakSelf.bitBaseTitleLab).offset(weakSelf.bitBaseTitleLab.frame.size.height + 15);
+                    make.top.equalTo(weakSelf.redTitleLab).offset(weakSelf.redTitleLab.frame.size.height + 15);
                 }];
             } else {
                 for (int i = 0; i < weakSelf.bankList.count; i++) {
                     OTCInsideModel * model = [OTCInsideModel yy_modelWithJSON:weakSelf.bankList[i]];
-                    if ([model.otcMarketName isEqualToString:@"bitbase"]) {
+                    if ([model.otcMarketName isEqualToString:self.redTitleBankName]) {
                         [weakSelf.bankList removeObject:weakSelf.bankList[i]];
                         break;
                     }
@@ -102,9 +104,9 @@
         make.left.right.bottom.equalTo(self.view);
     }];
     
-    CGSize size = [self.bitBaseTitleLab sizeThatFits:CGSizeMake(SCREEN_WIDTH-15*2, MAXFLOAT)];
-    [buyView addSubview:self.bitBaseTitleLab];
-    [self.bitBaseTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+    CGSize size = [self.redTitleLab sizeThatFits:CGSizeMake(SCREEN_WIDTH-15*2, MAXFLOAT)];
+    [buyView addSubview:self.redTitleLab];
+    [self.redTitleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.offset(size.width);
         make.height.offset(size.height);
         make.centerX.equalTo(buyView);
@@ -113,7 +115,7 @@
     
     [buyView addSubview:self.walletCollectionView];
     [self.walletCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.bitBaseTitleLab);
+        make.top.equalTo(self.redTitleLab);
         make.left.equalTo(buyView).offset(15);
         make.bottom.right.equalTo(buyView).offset(-15);
     }];
@@ -152,8 +154,8 @@
     }
     OTCInsideCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
     OTCInsideModel *model = [OTCInsideModel yy_modelWithJSON:self.bankList[indexPath.row]];
-    cell.recommendTagImg.hidden = ![model.otcMarketName isEqualToString:@"bitbase"];
-    if ([model.otcMarketName isEqualToString:@"bitbase"]) {
+    cell.recommendTagImg.hidden = ![model.otcMarketName isEqualToString:self.redTitleBankName];
+    if ([model.otcMarketName isEqualToString:self.redTitleBankName]) {
         [cell setBitbaseBgImg];
     }
     [cell cellConfigJson:model];
@@ -184,17 +186,17 @@
     return _walletCollectionView;
 }
 
--(UILabel *)bitBaseTitleLab {
-    if (!_bitBaseTitleLab) {
-        _bitBaseTitleLab = [[UILabel alloc] init];
-        _bitBaseTitleLab.text = @"点击Bitbase存款(支持微信, 支付宝, 银联)金额将直接存入您的游戏账号";
-        _bitBaseTitleLab.textColor = [UIColor redColor];
-        _bitBaseTitleLab.font = [UIFont systemFontOfSize:17];
-        _bitBaseTitleLab.textAlignment = NSTextAlignmentCenter;
-        _bitBaseTitleLab.numberOfLines = 0;
-        _bitBaseTitleLab.hidden = true;
+-(UILabel *)redTitleLab {
+    if (!_redTitleLab) {
+        _redTitleLab = [[UILabel alloc] init];
+        _redTitleLab.text = @"点击Dexchange存款(支持微信, 支付宝, 银联)金额将直接存入您的游戏账号";
+        _redTitleLab.textColor = [UIColor redColor];
+        _redTitleLab.font = [UIFont systemFontOfSize:17];
+        _redTitleLab.textAlignment = NSTextAlignmentCenter;
+        _redTitleLab.numberOfLines = 0;
+        _redTitleLab.hidden = true;
     }
-    return _bitBaseTitleLab;
+    return _redTitleLab;
 }
 
 @end
