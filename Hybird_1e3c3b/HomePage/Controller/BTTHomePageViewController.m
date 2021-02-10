@@ -143,11 +143,17 @@
         if ([IVNetwork savedUserInfo].starLevel >= 2 && (![PublicMethod isDateToday:saveDate] || saveDate == nil)) {
             [self loadBiBiCun];
         }
-        BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
-        if (!isShowYuFenHong) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
-            [self loadYenFenHong];
+        BOOL isShowNewYear = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowNewYear] boolValue];
+        if (!isShowNewYear) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowNewYear];
+            [self showNewYear];
         }
+        //暫時下掉月分紅
+//        BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
+//        if (!isShowYuFenHong) {
+//            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
+//            [self loadYenFenHong];
+//        }
         [BTTHttpManager requestUnReadMessageNum:nil];
         NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
         if (![NSDate isToday:timestamp]) {
@@ -177,6 +183,7 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowNewYear];
             [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
         }
     }

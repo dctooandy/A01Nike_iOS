@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,14 +16,14 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="me_deposit" translatesAutoresizingMaskIntoConstraints="NO" id="Eb2-Ph-UNr">
-                        <rect key="frame" x="15" y="15" width="21.5" height="18"/>
+                        <rect key="frame" x="10" y="15" width="21.5" height="18"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="21.5" id="CwS-0X-cHb"/>
                             <constraint firstAttribute="height" constant="18" id="opa-I4-8qQ"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="存款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKd-ph-uLn">
-                        <rect key="frame" x="51.5" y="15" width="33" height="19.5"/>
+                        <rect key="frame" x="46.5" y="15" width="33" height="19.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="19.5" id="ecQ-6E-lKQ"/>
                             <constraint firstAttribute="width" constant="33" id="xOi-CV-NqA"/>
@@ -34,8 +32,8 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="存款前务必核对最新收款账户，入款至停用账户将无法添加额度" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afh-Wv-WXP">
-                        <rect key="frame" x="15" y="40.5" width="344" height="16.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请每次存款前核实最新收款账户，转账至网站银行卡无须填写备注" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afh-Wv-WXP">
+                        <rect key="frame" x="10" y="40.5" width="365" height="16.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.90588235294117647" blue="0.40392156862745099" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -44,11 +42,11 @@
             </view>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <constraints>
-                <constraint firstItem="Eb2-Ph-UNr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="1Z6-xK-yMb"/>
+                <constraint firstItem="Eb2-Ph-UNr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="1Z6-xK-yMb"/>
                 <constraint firstItem="afh-Wv-WXP" firstAttribute="leading" secondItem="Eb2-Ph-UNr" secondAttribute="leading" id="38N-Dn-Qeo"/>
                 <constraint firstItem="afh-Wv-WXP" firstAttribute="top" secondItem="pKd-ph-uLn" secondAttribute="bottom" constant="6" id="3oC-Jt-qnY"/>
                 <constraint firstItem="pKd-ph-uLn" firstAttribute="leading" secondItem="Eb2-Ph-UNr" secondAttribute="trailing" constant="15" id="4bS-gc-GHL"/>
-                <constraint firstAttribute="trailing" secondItem="afh-Wv-WXP" secondAttribute="trailing" constant="16" id="BBh-yj-O4m"/>
+                <constraint firstAttribute="trailing" secondItem="afh-Wv-WXP" secondAttribute="trailing" id="BBh-yj-O4m"/>
                 <constraint firstItem="Eb2-Ph-UNr" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="ZvI-KH-ul5"/>
                 <constraint firstItem="pKd-ph-uLn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="hQt-3Y-iXP"/>
                 <constraint firstAttribute="bottom" secondItem="afh-Wv-WXP" secondAttribute="bottom" constant="6" id="rvg-52-Iha"/>

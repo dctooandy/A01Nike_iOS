@@ -14,7 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btiBtn;
 
-@property (weak, nonatomic) IBOutlet UIButton *jingcaiBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *jingcaiBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *asBtn;
 
@@ -28,9 +28,9 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btiBtnWidth;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *vipBtnHeight;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *vipBtnHeight;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *vipBtnWidth;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *vipBtnWidth;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *asBtnHeight;
 
@@ -38,9 +38,9 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *btiTryIcon;
 
-@property (weak, nonatomic) IBOutlet UIImageView *vipTryIcon;
+//@property (weak, nonatomic) IBOutlet UIImageView *vipTryIcon;
 
-@property (weak, nonatomic) IBOutlet UIImageView *jingcaiTryIcon;
+//@property (weak, nonatomic) IBOutlet UIImageView *jingcaiTryIcon;
 
 @property (weak, nonatomic) IBOutlet UIImageView *asTryIcon;
 
@@ -51,7 +51,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    _jingcaiTryIcon.hidden = YES;
+//    _jingcaiTryIcon.hidden = YES;
     self.mineSparaterType = BTTMineSparaterTypeNone;
     [self registerNotification];
 }
@@ -64,20 +64,20 @@
 
 - (void)loginSuccess:(NSNotification *)notifi {
     _btiTryIcon.hidden = YES;
-    _vipTryIcon.hidden = YES;
+//    _vipTryIcon.hidden = YES;
     _asTryIcon.hidden = YES;
 }
 
 - (void)logoutSuccess:(NSNotification *)notifi {
     _btiTryIcon.hidden = NO;
-    _vipTryIcon.hidden = NO;
+//    _vipTryIcon.hidden = NO;
     _asTryIcon.hidden = NO;
 }
 
 -(void)unlockGameBtnPress {
     self.shabaBtn.userInteractionEnabled = true;
     self.btiBtn.userInteractionEnabled = true;
-    self.jingcaiBtn.userInteractionEnabled = true;
+//    self.jingcaiBtn.userInteractionEnabled = true;
     self.asBtn.userInteractionEnabled = true;
     self.cpBtn.userInteractionEnabled = true;
 }
@@ -85,7 +85,7 @@
 -(void)lockGameBtnPress {
     self.shabaBtn.userInteractionEnabled = false;
     self.btiBtn.userInteractionEnabled = false;
-    self.jingcaiBtn.userInteractionEnabled = false;
+//    self.jingcaiBtn.userInteractionEnabled = false;
     self.asBtn.userInteractionEnabled = false;
     self.cpBtn.userInteractionEnabled = false;
 }
@@ -96,25 +96,26 @@
 }
 
 - (void)setupUI {
-    self.shabaBtnWidth.constant = (SCREEN_WIDTH - 40) / 335.0 * 182.5;
+    CGFloat width = (SCREEN_WIDTH - 40) / 2 ;
+    self.shabaBtnWidth.constant = width;
     self.shabaBtnHeight.constant = self.shabaBtnWidth.constant / 182.5 * 144;
         
-    self.btiBtnWidth.constant = (SCREEN_WIDTH - 40) / 335.0 * 152.5;
-    self.btiBtnHeight.constant = self.btiBtnWidth.constant / 152.5 * 69;
+    self.btiBtnWidth.constant = width;
+    self.btiBtnHeight.constant = self.btiBtnWidth.constant / 182.5 * 144;
     
-    self.vipBtnWidth.constant = (SCREEN_WIDTH - 40) / 335.0 * 74;
-    self.vipBtnHeight.constant = self.vipBtnWidth.constant / 74.0 * 69;
+//    self.vipBtnWidth.constant = (SCREEN_WIDTH - 40) / 335.0 * 74;
+//    self.vipBtnHeight.constant = self.vipBtnWidth.constant / 74.0 * 69;
     
-    self.asBtnWidth.constant = (SCREEN_WIDTH - 40) / 335.0 * 167.5;
+    self.asBtnWidth.constant = width;
     self.asBtnHeight.constant = self.asBtnWidth.constant / 167.5 * 83;
     
     if ([IVNetwork savedUserInfo]) {
         _btiTryIcon.hidden = YES;
-        _vipTryIcon.hidden = YES;
+//        _vipTryIcon.hidden = YES;
         _asTryIcon.hidden = YES;
     } else {
         _btiTryIcon.hidden = NO;
-        _vipTryIcon.hidden = NO;
+//        _vipTryIcon.hidden = NO;
         _asTryIcon.hidden = NO;
     }
 }
@@ -133,12 +134,12 @@
     }
 }
 
-- (IBAction)jingcaiBtnClick:(UIButton *)sender {
-    if (self.buttonClickBlock) {
-        [self lockGameBtnPress];
-        self.buttonClickBlock(sender);
-    }
-}
+//- (IBAction)jingcaiBtnClick:(UIButton *)sender {
+//    if (self.buttonClickBlock) {
+//        [self lockGameBtnPress];
+//        self.buttonClickBlock(sender);
+//    }
+//}
 
 
 - (IBAction)asBtnClick:(UIButton *)sender {

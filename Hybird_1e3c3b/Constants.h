@@ -132,6 +132,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTBiBiCunDate                             @"BTTBiBiCunDate"
 #define BTTShareNoticeTag                          @"BTTShareNoticeTag"
 #define BTTShowYuFenHong                           @"BTTShowYuFenHong"
+#define BTTShowNewYear                             @"BTTShowNewYear"
 #define BTTGameCurrencysWithName                   [NSString stringWithFormat:@"%@GameCurrencys", [IVNetwork savedUserInfo].loginName]
 
 //Flurry

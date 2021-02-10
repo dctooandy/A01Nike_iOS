@@ -601,6 +601,7 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowNewYear];
             [BTTUserStatusManager logoutSuccess];
             strongSelf.saveMoneyCount = 0;
             [strongSelf loadPaymentDefaultData];

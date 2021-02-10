@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BTTNewYearPopView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_new_year_pop_bg" translatesAutoresizingMaskIntoConstraints="NO" id="hmD-Pk-Nef">
+                    <rect key="frame" x="10.5" y="246.5" width="393" height="403"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="hmD-Pk-Nef" secondAttribute="height" multiplier="39:40" id="atR-vQ-8uU"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="irX-H6-gqc">
+                    <rect key="frame" x="122" y="625.5" width="170.5" height="41"/>
+                    <state key="normal" image="ic_new_year_pop_btn"/>
+                    <connections>
+                        <action selector="btnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="dBa-QK-fCc"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击参加" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4EE-66-Nbp">
+                    <rect key="frame" x="122" y="625.5" width="170.5" height="35"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                    <color key="textColor" red="0.67843137254901964" green="0.086274509803921567" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nx-ae-eAh">
+                    <rect key="frame" x="365.5" y="208.5" width="38" height="38"/>
+                    <state key="normal" image="ic_new_year_pop_close_btn"/>
+                    <connections>
+                        <action selector="closeBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="sVf-iS-vIS"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <constraints>
+                <constraint firstItem="irX-H6-gqc" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.0457589" id="GPw-bo-UTD"/>
+                <constraint firstItem="hmD-Pk-Nef" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Gis-8M-kQW"/>
+                <constraint firstItem="irX-H6-gqc" firstAttribute="bottom" secondItem="hmD-Pk-Nef" secondAttribute="bottom" constant="17" id="OsG-9e-xhO"/>
+                <constraint firstItem="hmD-Pk-Nef" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.95" id="TPD-KG-QQO"/>
+                <constraint firstItem="hmD-Pk-Nef" firstAttribute="top" secondItem="7nx-ae-eAh" secondAttribute="bottom" id="VSW-WN-xtL"/>
+                <constraint firstItem="7nx-ae-eAh" firstAttribute="trailing" secondItem="hmD-Pk-Nef" secondAttribute="trailing" id="Xvn-jr-USE"/>
+                <constraint firstItem="hmD-Pk-Nef" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="YXY-ub-YD6"/>
+                <constraint firstItem="irX-H6-gqc" firstAttribute="centerX" secondItem="hmD-Pk-Nef" secondAttribute="centerX" id="cDU-9q-IIG"/>
+                <constraint firstItem="irX-H6-gqc" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.411836" id="idf-bb-ohX"/>
+                <constraint firstItem="4EE-66-Nbp" firstAttribute="trailing" secondItem="irX-H6-gqc" secondAttribute="trailing" id="j6L-q7-tA0"/>
+                <constraint firstItem="irX-H6-gqc" firstAttribute="centerY" secondItem="4EE-66-Nbp" secondAttribute="centerY" constant="3" id="jAX-lt-48d"/>
+                <constraint firstItem="4EE-66-Nbp" firstAttribute="top" secondItem="irX-H6-gqc" secondAttribute="top" id="ks2-OW-OOv"/>
+                <constraint firstItem="4EE-66-Nbp" firstAttribute="leading" secondItem="irX-H6-gqc" secondAttribute="leading" id="p8S-Cw-ijU"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="116.51785714285714"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_new_year_pop_bg" width="351.5" height="360"/>
+        <image name="ic_new_year_pop_btn" width="170.5" height="40.5"/>
+        <image name="ic_new_year_pop_close_btn" width="38" height="38"/>
+    </resources>
+</document>

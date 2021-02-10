@@ -451,7 +451,7 @@
     };
     
     IVActionHandler cancel = ^(UIAlertAction *action){};
-    NSString *title = @"该帐号尚未绑定或验证手机，无法使用手机短信验证删除取款钱包";
+    NSString *title = @"该账号尚未绑定或验证手机，无法使用手机短信验证删除取款钱包";
     [IVUtility showAlertWithActionTitles:@[@"绑定手机", @"联系客服", @"取消"] handlers:@[bind, kf, cancel] title:title message:@""];
 }
 

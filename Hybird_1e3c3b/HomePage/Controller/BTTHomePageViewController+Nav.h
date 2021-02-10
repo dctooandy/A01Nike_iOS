@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showYueFenHong:(BTTYenFenHongModel *)model;
 
+- (void)showNewYear;
+
 - (void)setupFloatWindow;
 
 -(void)setUpAssistiveButton;
