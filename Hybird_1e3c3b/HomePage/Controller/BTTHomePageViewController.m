@@ -98,10 +98,6 @@
 //            }
 //        }
 //    });
-    [self setUpAssistiveButton];
-    if (self.assistiveButton != nil) {
-        [self.view addSubview:self.assistiveButton];
-    }
     [self checkLoginVersion];
 //    [self setupFloatWindow];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBannerData) name:@"CHANGE_MODE" object:nil];
@@ -135,7 +131,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.idDisable = false;
-    [self showAssistiveButton];
     [self.collectionView reloadData];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork savedUserInfo]) {
@@ -143,17 +138,12 @@
         if ([IVNetwork savedUserInfo].starLevel >= 2 && (![PublicMethod isDateToday:saveDate] || saveDate == nil)) {
             [self loadBiBiCun];
         }
-        BOOL isShowNewYear = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowNewYear] boolValue];
-        if (!isShowNewYear) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowNewYear];
-            [self showNewYear];
+        //月分紅
+        BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
+        if (!isShowYuFenHong) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
+            [self loadYenFenHong];
         }
-        //暫時下掉月分紅
-//        BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
-//        if (!isShowYuFenHong) {
-//            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
-//            [self loadYenFenHong];
-//        }
         [BTTHttpManager requestUnReadMessageNum:nil];
         NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
         if (![NSDate isToday:timestamp]) {
@@ -179,6 +169,7 @@
         if ([appVersion compare:[IVNetwork savedUserInfo].version options:NSNumericSearch] == NSOrderedDescending) {
             [IVNetwork cleanUserInfo];
             [IVHttpManager shareManager].loginName = @"";
+            [IVHttpManager shareManager].userToken = @"";
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];

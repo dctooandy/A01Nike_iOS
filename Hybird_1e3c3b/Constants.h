@@ -275,6 +275,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTUserLoginAPI                            @"customer/login"
 // 模糊登录
 #define BTTUserLoginEXAPI                          @"customer/loginEx"
+// 異地登入
+#define BTTUserLoginWith2FA                        @"customer/loginWith2FA"
 // 验证登录名是否存在
 #define BTTCheckLoginname                         @"customer/checkLoginName"
 // 根据手机验证码登录

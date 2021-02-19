@@ -7,6 +7,7 @@
 //
 
 #import "BTTLoginOrRegisterViewController.h"
+#import "BTTLoginAPIModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showRegisterCheckViewWithModel:(BTTCreateAPIModel *)mdoel;
 
-
+-(void)showAlert:(NSDictionary *)resultDic model:(BTTLoginAPIModel *)model isBack:(BOOL)isback;
 
 @end
 

@@ -32,44 +32,12 @@
 #import "BTTBiBiCunPopView.h"
 #import "AppDelegate.h"
 #import "BTTYueFenHongPopView.h"
-#import "BTTNewYearPopView.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
 static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 
 @implementation BTTHomePageViewController (Nav)
-
--(void)setUpAssistiveButton {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"ic_assistive_btn" ofType:@"gif"];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    UIImage * image = [UIImage sd_animatedGIFWithData:data];
-    CGFloat assistiveBtnHeight = image.size.height + [UIImage imageNamed:@"ic_assistive_close_btn"].size.height;
-    CGFloat loginBtnViewHeight = 87;
-    CGFloat postionY = SCREEN_HEIGHT - kTabbarHeight - assistiveBtnHeight/2 - loginBtnViewHeight;
-    self.assistiveButton = [[AssistiveButton alloc] initMainBtnWithBackgroundImage:image highlightImage:nil position:CGPointMake(SCREEN_WIDTH - image.size.width/2 - 10, postionY)];
-    //主按鈕可移動或不可移動
-    self.assistiveButton.positionMode = SpreadPositionModeTouchBorder;
-    weakSelf(weakSelf);
-    [self.assistiveButton setMainButtonClickActionBlock:^{
-        weakSelf.assistiveButton.hidden = true;
-        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.title = @"欢乐迎新年 优惠享不停！";
-        vc.webConfigModel.url = @"/activity_pages/new_year_2021";
-        vc.webConfigModel.newView = YES;
-        vc.webConfigModel.theme = @"outside";
-        [weakSelf.navigationController pushViewController:vc animated:YES];
-    }];
-    [self.assistiveButton setCloseBtnActionBlock:^{
-        [weakSelf.assistiveButton removeFromSuperview];
-    }];
-}
-
--(void)showAssistiveButton {
-    if (self.assistiveButton.hidden) {
-        self.assistiveButton.hidden = false;
-    }
-}
 
 - (void)setupFloatWindow {
 //    UIImageView *floatWindow = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 15 - 61, SCREEN_HEIGHT / 2 + 120, 68.8, 66)];
@@ -133,7 +101,6 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     });
 }
 
-
 - (void)showNewAccountGrideView {
     BTTNewAccountGuidePopView *customView = [BTTNewAccountGuidePopView viewFromXib];
     customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -179,27 +146,6 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
         vc.title = @"博天堂股东 分红月月领～第二季";
         vc.webConfigModel.url = @"/activity_pages/withdraw_gift";
-        vc.webConfigModel.newView = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    };
-}
-
-//2021新年活動
--(void)showNewYear {
-    BTTNewYearPopView * customView = [BTTNewYearPopView viewFromXib];
-    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-    popView.isClickBGDismiss = YES;
-    [popView pop];
-    customView.dismissBlock = ^{
-        [popView dismiss];
-    };
-    
-    customView.btnBlock = ^(UIButton * _Nullable btn) {
-        [popView dismiss];
-        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.title = @"欢乐迎新年 优惠享不停！";
-        vc.webConfigModel.url = @"/activity_pages/new_year_2021";
         vc.webConfigModel.newView = YES;
         [self.navigationController pushViewController:vc animated:YES];
     };
@@ -294,7 +240,6 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         }
     };
 }
-
 
 - (void)rightClick:(UIButton *)btn {
     
@@ -575,7 +520,6 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     }
 }
 
-
 #pragma mark - 动态添加属性
 
 - (void)setHeaderView:(BTTHomePageHeaderView *)headerView {
@@ -594,6 +538,4 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 - (BTTLoginOrRegisterBtsView *)loginAndRegisterBtnsView {
     return objc_getAssociatedObject(self, &BTTLoginAndRegisterKey);
 }
-
-
 @end

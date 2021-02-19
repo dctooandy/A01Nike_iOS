@@ -23,6 +23,9 @@
 #import "AppDelegate.h"
 #import "HAInitConfig.h"
 
+static const char *confirmKey = "confirmKey";
+static const char *exModelKey = "exModelKey";
+
 @implementation BTTLoginOrRegisterViewController (API)
 
 
@@ -124,6 +127,10 @@
 
 // 登录逻辑处理
 - (void)loginWithLoginAPIModel:(BTTLoginAPIModel *)model isBack:(BOOL)isback {
+    if (self.isDifferentLoc && [self.exModel.login_name isEqualToString:model.login_name] && [self.exModel.password isEqualToString:model.password]) {
+        [self sendSmsCodeAgain:model.login_name model:model isBack:isback];
+        return;
+    }
     NSInteger loginType = [PublicMethod isValidatePhone:model.login_name] ? 1 : 0;
     NSString *loginUrl = loginType==0 ? BTTUserLoginAPI : BTTUserLoginEXAPI;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -175,6 +182,13 @@
             
         }else{
             [self hideLoading];
+            if ([result.head.errCode isEqualToString:@"GW_100002"]) {
+                self.isDifferentLoc = true;
+                self.exModel = model;
+                [self showAlert:result.body model:model isBack:isback];
+                return;
+            }
+            self.isDifferentLoc = false;
             [self.pressLocationArr removeAllObjects];
             [self checkChineseCaptchaAgain];
             if ([result.head.errMsg isEqualToString:@""]) {
@@ -217,6 +231,55 @@
     }];
 }
 
+-(void)loginWith2FA:(NSDictionary *)resultDic smsCode:(NSString *)smsCode model:(BTTLoginAPIModel *)model isBack:(BOOL)isback {
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"messageId"] = resultDic[@"messageId"];
+    params[@"loginName"] = resultDic[@"loginName"];
+    params[@"phase"] = @2;
+    params[@"smsCode"] = smsCode;
+    params[@"type"] = @1;
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTUserLoginWith2FA paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body[@"samePhoneLoginNames"]!=nil) {
+                NSArray *loginArray = result.body[@"samePhoneLoginNames"];
+                NSString *messageId = result.body[@"messageId"];
+                NSString *validateId = result.body[@"validateId"];
+                [self showPopViewWithAccounts:loginArray withPhone:model.login_name withValidateId:validateId messageId:messageId smsCode:model.password isBack:isback];
+            }else{
+                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"customerId"] forKey:@"pushcustomerid"];
+                AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                [delegate reSendIVPushRequestIpsSuperSign:result.body[@"customerId"]];
+                [IVHttpManager shareManager].loginName = model.login_name;
+                [IVHttpManager shareManager].userToken = result.body[@"token"];
+                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
+                NSString *loginName = [NSString stringWithFormat:@"%@",result.body[@"loginName"]];
+                [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
+            }
+        } else {
+            [self hideLoading];
+            [self.pressLocationArr removeAllObjects];
+            [self checkChineseCaptchaAgain];
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
+
+-(void)sendSmsCodeAgain:(NSString *)loginName model:(BTTLoginAPIModel *)model isBack:(BOOL)isback  {
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"use"] = @2;
+    params[@"loginName"] = loginName;
+    [IVNetwork requestPostWithUrl:BTTStepOneSendCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [self hideLoading];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [self showAlert:result.body model:model isBack:isback];
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
 
 - (void)showAlertWithLoginName:(NSString *)loginName {
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"很抱歉!" message:@"多次密码输入错误, 已被锁住!" preferredStyle:UIAlertControllerStyleAlert];
@@ -546,7 +609,7 @@
     }
     [self showLoading];
 
-    [IVNetwork requestPostWithUrl:BTTMobileUserRegister paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTUserRegister paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
@@ -716,5 +779,20 @@
     }];
 }
 
+- (UIAlertAction *)confirm {
+    return objc_getAssociatedObject(self, &confirmKey);
+}
+
+-(void)setConfirm:(UIAlertAction *)confirm {
+    objc_setAssociatedObject(self, &confirmKey, confirm, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+-(BTTLoginAPIModel *)exModel {
+    return objc_getAssociatedObject(self, &exModelKey);
+}
+
+-(void)setExModel:(BTTLoginAPIModel *)exModel {
+    objc_setAssociatedObject(self, &exModelKey, exModel, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 
 @end

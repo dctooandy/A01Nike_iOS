@@ -8,13 +8,10 @@
 
 #import "BTTCollectionViewController.h"
 #import "BTTYenFenHongModel.h"
-#import "AssistiveButton.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTHomePageViewController : BTTCollectionViewController
-
-@property (nonatomic, strong) AssistiveButton * assistiveButton;
 
 @property (nonatomic, assign) BOOL isLogin;
 

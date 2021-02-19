@@ -67,6 +67,11 @@ typedef enum {
     [self setupElements];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setHidden:NO];
+}
+
 - (void)setupCollectionView {
     [super setupCollectionView];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
@@ -487,14 +492,17 @@ typedef enum {
         [MBProgressHUD showError:@"8-10位数字和字母" toView:nil];
         return;
     }
+    
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"loginName"] = self.account;
-    params[@"password"] = [IVRsaEncryptWrapper encryptorString:_newPwd];
-    params[@"type"] = @2;
+    params[@"oldPassword"] = [IVRsaEncryptWrapper encryptorString:self.pwd];
+    params[@"newPassword"] = [IVRsaEncryptWrapper encryptorString:_newPwd];
+    params[@"type"] = @1;
     weakSelf(weakSelf)
     NSString *npwd = _newPwd;
+    
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [IVNetwork requestPostWithUrl:BTTModifyNewAccPwd paramters:params.copy completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTModifyLoginPwd paramters:params.copy completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
         if ([result.head.errCode isEqualToString:@"0000"]) {
@@ -584,10 +592,4 @@ typedef enum {
         }
     }];
 }
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar setHidden:NO];
-}
-
 @end

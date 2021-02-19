@@ -436,7 +436,9 @@
 
         statusView.detailBtnClickedBlock = ^{
             IVCDetailViewController *vc = [[IVCDetailViewController alloc] initWithThemeColor:[UIColor blueColor]];
-            [self presentViewController:vc animated:YES completion:nil];
+            [self presentViewController:vc animated:YES completion:^{
+                [vc start];
+            }];
         };
 
         [self.view addSubview:statusView];
@@ -596,6 +598,7 @@
             strongSelf(strongSelf);
             [IVNetwork cleanUserInfo];
             [IVHttpManager shareManager].loginName = @"";
+            [IVHttpManager shareManager].userToken = @"";
             [strongSelf.navigationController popToRootViewControllerAnimated:NO];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];

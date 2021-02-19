@@ -28,46 +28,46 @@ PODS:
   - GJRedDot/GJDeallocBlockExecutor (1.1.1)
   - IQKeyboardManager (5.0.8)
   - IVCacheLibrary (1.0.6)
-  - IVCheckNetworkLibrary (1.0.15):
+  - IVCheckNetworkLibrary (1.0.16):
     - CocoaAsyncSocket
-    - IVCheckNetworkLibrary/Classes (= 1.0.15)
+    - IVCheckNetworkLibrary/Classes (= 1.0.16)
     - IVLoganAnalysis
     - IVNetworkLibrary2.0
-  - IVCheckNetworkLibrary/Classes (1.0.15):
+  - IVCheckNetworkLibrary/Classes (1.0.16):
     - CocoaAsyncSocket
-    - IVCheckNetworkLibrary/Classes/Http (= 1.0.15)
-    - IVCheckNetworkLibrary/Classes/Models (= 1.0.15)
-    - IVCheckNetworkLibrary/Classes/SDK (= 1.0.15)
-    - IVCheckNetworkLibrary/Classes/UI (= 1.0.15)
+    - IVCheckNetworkLibrary/Classes/Http (= 1.0.16)
+    - IVCheckNetworkLibrary/Classes/Models (= 1.0.16)
+    - IVCheckNetworkLibrary/Classes/SDK (= 1.0.16)
+    - IVCheckNetworkLibrary/Classes/UI (= 1.0.16)
     - IVLoganAnalysis
     - IVNetworkLibrary2.0
-  - IVCheckNetworkLibrary/Classes/Http (1.0.15):
+  - IVCheckNetworkLibrary/Classes/Http (1.0.16):
     - CocoaAsyncSocket
     - IVCheckNetworkLibrary/Classes/Models
     - IVLoganAnalysis
     - IVNetworkLibrary2.0
-  - IVCheckNetworkLibrary/Classes/Models (1.0.15):
+  - IVCheckNetworkLibrary/Classes/Models (1.0.16):
     - CocoaAsyncSocket
     - IVLoganAnalysis
     - IVNetworkLibrary2.0
-  - IVCheckNetworkLibrary/Classes/SDK (1.0.15):
+  - IVCheckNetworkLibrary/Classes/SDK (1.0.16):
     - CocoaAsyncSocket
-    - IVCheckNetworkLibrary/Classes/SDK/Ping (= 1.0.15)
+    - IVCheckNetworkLibrary/Classes/SDK/Ping (= 1.0.16)
     - IVLoganAnalysis
     - IVNetworkLibrary2.0
-  - IVCheckNetworkLibrary/Classes/SDK/Ping (1.0.15):
+  - IVCheckNetworkLibrary/Classes/SDK/Ping (1.0.16):
     - CocoaAsyncSocket
     - IVLoganAnalysis
     - IVNetworkLibrary2.0
-  - IVCheckNetworkLibrary/Classes/UI (1.0.15):
+  - IVCheckNetworkLibrary/Classes/UI (1.0.16):
     - CocoaAsyncSocket
     - IVCheckNetworkLibrary/Classes/Http
     - IVCheckNetworkLibrary/Classes/SDK/Ping
     - IVLoganAnalysis
     - IVNetworkLibrary2.0
-  - IVGameLibrary (2.0.10):
-    - IVGameLibrary/GameController (= 2.0.10)
-  - IVGameLibrary/GameController (2.0.10)
+  - IVGameLibrary (2.0.11):
+    - IVGameLibrary/GameController (= 2.0.11)
+  - IVGameLibrary/GameController (2.0.11)
   - IVHeartPacketLibrary (0.0.4):
     - CocoaAsyncSocket (~> 7.6.2)
   - IVLoganAnalysis (0.1.14):
@@ -267,10 +267,10 @@ CHECKOUT OPTIONS:
     :commit: a1683e7540d13c3e81ff99e51ba32046aa48be84
     :git: http://10.66.72.115/mobile-iOS-Library/IVCacheLibrary.git
   IVCheckNetworkLibrary:
-    :commit: 3693070c16a293b819a52b6d21dcea7b3c635f72
+    :commit: 071b6cda0a2e6960f2867cb15ea97060d02449b5
     :git: http://10.66.72.115/mobile-iOS-Library/IVCheckNetworkLibrary.git
   IVGameLibrary:
-    :commit: 075ae745ef1c793fcca9227847062f23aa29010c
+    :commit: f23e8d3b466cfbc82d29d9a158c9f0b6b9fc5b64
     :git: http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git
   IVHeartPacketLibrary:
     :commit: cb81f459cb55163fd8493d0a62ea5339089703fc
@@ -305,8 +305,8 @@ SPEC CHECKSUMS:
   GJRedDot: de661162a700f3395f0cd70f3629e4d3abe8e181
   IQKeyboardManager: 266cb7b1d11f94a3e71229d77f960f9a1b538e5b
   IVCacheLibrary: c1fe8ccdefc59283a79ea73c69a1f7f80976e87e
-  IVCheckNetworkLibrary: 57d6ae75f937b1bd1c47d7a380a1d7fe1252e83c
-  IVGameLibrary: b2a4e7ed32b9cef4f6dd8b4fa423bb66037f04cf
+  IVCheckNetworkLibrary: 88251f0613e45ba809efe0704b6e09278c95b7f0
+  IVGameLibrary: 47a440b37d0da0e299a47cd410a64894272d390d
   IVHeartPacketLibrary: 2a122b1d8cedf8346b4898ace4736147cf9a0405
   IVLoganAnalysis: cbb091f241f135364bd1b750cb9f6a12f566ae74
   IVNetworkLibrary2.0: a546aba794b8a4f1b1ae1a1d115e52adcf084fb4

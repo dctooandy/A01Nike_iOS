@@ -106,6 +106,7 @@
         [MBProgressHUD showError:@"登录超时，请重新登录" toView:nil];
         [IVNetwork cleanUserInfo];
         [IVHttpManager shareManager].loginName = @"";
+        [IVHttpManager shareManager].userToken = @"";
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
