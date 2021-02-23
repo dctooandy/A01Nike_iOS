@@ -566,30 +566,23 @@
             }
         }];
         [actionSheet show];
-    } else if (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 5 && !isUSDTAcc) {
-        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-        vc.title = @"推荐礼金";
-        vc.webConfigModel.theme = @"outside";
-        vc.webConfigModel.newView = YES;
-        vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"gift/lucky_pot"];
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 4 && isUSDTAcc)) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 5 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 4 && isUSDTAcc)) {
         BTTCustomerReportController * vc = [[BTTCustomerReportController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 7 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 5 && isUSDTAcc)) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 5 && isUSDTAcc)) {
         BTTAccountSafeController *vc = [[BTTAccountSafeController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 8 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6 && isUSDTAcc)) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 7 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 6 && isUSDTAcc)) {
         BTTPTTransferController *vc = [[BTTPTTransferController alloc] init];
         vc.balanceModel = self.balanceModel;
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 9 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 7 && isUSDTAcc)) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 8 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 7 && isUSDTAcc)) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.url = @"customer/letter.htm";
         vc.webConfigModel.theme = @"inside";
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 12 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 10 && isUSDTAcc)) {
+    } else if ((indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 11 && !isUSDTAcc) || (indexPath.row == self.saveMoneyCount + self.mainDataOne.count + 10 && isUSDTAcc)) {
         // 设置
         BTTSettingsController *vc = [[BTTSettingsController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];

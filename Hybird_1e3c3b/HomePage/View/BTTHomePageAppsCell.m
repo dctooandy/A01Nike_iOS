@@ -55,8 +55,17 @@
     }
 }
 
-- (void)setDownloads:(NSArray *)downloads {
-    _downloads = downloads;
+- (void)setDownloads:(NSMutableArray *)downloads {
+    NSMutableArray * arr = [[NSMutableArray alloc] initWithArray:downloads];
+    for (BTTDownloadModel *model in arr) {
+        if ([model.name containsString:@"旗舰厅"]) {
+            if (![IVNetwork savedUserInfo] || [IVNetwork savedUserInfo].starLevel < 1) {
+                [arr removeObject:model];
+                break;
+            }
+        }
+    }
+    _downloads = [[NSMutableArray alloc] initWithArray:arr];
     [self.collectionView reloadData];
 }
 

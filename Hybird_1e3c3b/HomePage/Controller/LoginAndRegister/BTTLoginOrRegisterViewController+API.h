@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)checkChineseCaptcha:(NSString *)captchaStr;
 
 -(void)loginWith2FA:(NSDictionary *)resultDic smsCode:(NSString *)smsCode model:(BTTLoginAPIModel *)model isBack:(BOOL)isback;
+-(void)sendSmsCodeAgain:(NSString *)loginName model:(BTTLoginAPIModel *)model isBack:(BOOL)isback show:(BOOL)show;
 
 @property (nonatomic, strong) UIAlertAction *confirm;
 @property (nonatomic, strong) BTTLoginAPIModel *exModel;

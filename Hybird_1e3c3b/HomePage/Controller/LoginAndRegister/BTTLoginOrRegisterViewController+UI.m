@@ -67,32 +67,28 @@
 }
 
 -(void)showAlert:(NSDictionary *)resultDic model:(BTTLoginAPIModel *)model isBack:(BOOL)isback {
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"系统检测到您的账号在异地登入，为了确保您的账户安全需要进行短信验证" preferredStyle:UIAlertControllerStyleAlert];
-    [alertVC addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = @"请输入短信验证码";
-        [textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
-    }];
-    self.confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UITextField *textField = alertVC.textFields.firstObject;
-        NSString * inputeStr = textField.text;
-        [self loginWith2FA:resultDic smsCode:inputeStr model:model isBack:isback];
-    }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self.pressLocationArr removeAllObjects];
-        [self checkChineseCaptchaAgain];
-        [self hideLoading];
-    }];
-    [self.confirm setEnabled:false];
-    [alertVC addAction:cancel];
-    [alertVC addAction:self.confirm];
-    [self presentViewController:alertVC animated:YES completion:nil];
-}
-
-- (void)textChanged:(UITextField *)textField {
-    NSString * str = textField.text;
-    if (str.length != 0) {
-        [self.confirm setEnabled:true];
-    }
+    self.differentLocPopView = [BTTDifferentLocPopView viewFromXib];
+    self.differentLocPopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    NSString * countDownStr = resultDic[@"expire"];
+    [self.differentLocPopView countDown:[countDownStr integerValue]];
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:self.differentLocPopView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    weakSelf(weakSelf);
+    self.differentLocPopView.dismissBlock = ^{
+        [weakSelf.pressLocationArr removeAllObjects];
+        [weakSelf checkChineseCaptchaAgain];
+        [weakSelf hideLoading];
+        [popView dismiss];
+    };
+    self.differentLocPopView.sendCodeBtnAction = ^{
+        [weakSelf sendSmsCodeAgain:model.login_name model:model isBack:isback show:false];
+    };
+    self.differentLocPopView.confirmBtnBlock = ^(NSString * _Nonnull str) {
+        NSString * inputeStr = str;
+        [weakSelf loginWith2FA:resultDic smsCode:inputeStr model:model isBack:isback];
+        [popView dismiss];
+    };
 }
 
 @end

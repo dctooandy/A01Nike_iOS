@@ -9,6 +9,7 @@
 #import "BTTCollectionViewController.h"
 #import "BTTVideoFastRegisterView.h"
 #import "BTTLoginInfoView.h"
+#import "BTTDifferentLocPopView.h"
 
 typedef enum {
     BTTLoginCellTypeNormal,    // 无码
@@ -42,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) BTTVideoFastRegisterView *fastRegisterView;
 
 @property (nonatomic, strong) BTTLoginInfoView *loginView;
+
+@property (nonatomic, strong) BTTDifferentLocPopView *differentLocPopView;
 
 @property (nonatomic, assign) BOOL isWebIn;
 @property (nonatomic, assign) BOOL isDifferentLoc;

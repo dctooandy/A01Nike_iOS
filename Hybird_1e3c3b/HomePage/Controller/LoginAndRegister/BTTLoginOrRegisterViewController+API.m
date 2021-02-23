@@ -22,6 +22,7 @@
 #import "IVPushManager.h"
 #import "AppDelegate.h"
 #import "HAInitConfig.h"
+#import "IVWebViewManager.h"
 
 static const char *confirmKey = "confirmKey";
 static const char *exModelKey = "exModelKey";
@@ -128,7 +129,7 @@ static const char *exModelKey = "exModelKey";
 // 登录逻辑处理
 - (void)loginWithLoginAPIModel:(BTTLoginAPIModel *)model isBack:(BOOL)isback {
     if (self.isDifferentLoc && [self.exModel.login_name isEqualToString:model.login_name] && [self.exModel.password isEqualToString:model.password]) {
-        [self sendSmsCodeAgain:model.login_name model:model isBack:isback];
+        [self sendSmsCodeAgain:model.login_name model:model isBack:isback show:true];
         return;
     }
     NSInteger loginType = [PublicMethod isValidatePhone:model.login_name] ? 1 : 0;
@@ -266,15 +267,25 @@ static const char *exModelKey = "exModelKey";
     }];
 }
 
--(void)sendSmsCodeAgain:(NSString *)loginName model:(BTTLoginAPIModel *)model isBack:(BOOL)isback  {
+-(void)sendSmsCodeAgain:(NSString *)loginName model:(BTTLoginAPIModel *)model isBack:(BOOL)isback show:(BOOL)show {
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"use"] = @2;
     params[@"loginName"] = loginName;
+    if (!show) {
+        [[IVWebViewManager sharaManager].delegate showLoadingInView:self.differentLocPopView animated:YES];
+    }
     [IVNetwork requestPostWithUrl:BTTStepOneSendCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         [self hideLoading];
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            [self showAlert:result.body model:model isBack:isback];
+            if (show) {
+                [self showAlert:result.body model:model isBack:isback];
+            } else {
+                [[IVWebViewManager sharaManager].delegate hideHUDForView:self.differentLocPopView animated:YES];
+                NSString * countDomnStr = result.body[@"expire"];
+                [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
+                [self.differentLocPopView countDown:[countDomnStr integerValue]];
+            }
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }

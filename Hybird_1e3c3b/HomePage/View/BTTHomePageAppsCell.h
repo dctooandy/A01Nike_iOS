@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTHomePageAppsCell : BTTBaseCollectionViewCell
 
-@property (nonatomic, strong) NSArray *downloads;
+@property (nonatomic, strong) NSMutableArray *downloads;
 
 @end
 
