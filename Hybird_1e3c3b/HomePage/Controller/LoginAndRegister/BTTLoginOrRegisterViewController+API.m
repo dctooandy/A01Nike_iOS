@@ -282,9 +282,8 @@ static const char *exModelKey = "exModelKey";
                 [self showAlert:result.body model:model isBack:isback];
             } else {
                 [[IVWebViewManager sharaManager].delegate hideHUDForView:self.differentLocPopView animated:YES];
-                NSString * countDomnStr = result.body[@"expire"];
                 [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
-                [self.differentLocPopView countDown:[countDomnStr integerValue]];
+                [self.differentLocPopView countDown:60];
             }
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];

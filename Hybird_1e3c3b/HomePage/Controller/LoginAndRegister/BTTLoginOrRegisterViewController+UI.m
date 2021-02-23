@@ -69,8 +69,7 @@
 -(void)showAlert:(NSDictionary *)resultDic model:(BTTLoginAPIModel *)model isBack:(BOOL)isback {
     self.differentLocPopView = [BTTDifferentLocPopView viewFromXib];
     self.differentLocPopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    NSString * countDownStr = resultDic[@"expire"];
-    [self.differentLocPopView countDown:[countDownStr integerValue]];
+    [self.differentLocPopView countDown:60];
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:self.differentLocPopView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
     popView.isClickBGDismiss = YES;
     [popView pop];
