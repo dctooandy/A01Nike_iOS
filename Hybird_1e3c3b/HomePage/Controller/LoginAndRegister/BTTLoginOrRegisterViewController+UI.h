@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showRegisterCheckViewWithModel:(BTTCreateAPIModel *)mdoel;
 
--(void)showAlert:(NSDictionary *)resultDic model:(BTTLoginAPIModel *)model isBack:(BOOL)isback;
+-(void)showDifferentLocPopView:(BTTLoginAPIModel *)model isBack:(BOOL)isback;
 
 @end
 

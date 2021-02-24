@@ -44,18 +44,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) BTTLoginInfoView *loginView;
 
-@property (nonatomic, strong) BTTDifferentLocPopView *differentLocPopView;
+@property (nonatomic, strong) BTTDifferentLocPopView *differentLocPopView;///< 異地登入彈窗
+@property (nonatomic, assign) BOOL isDifferentLoc;///< 是否是異地登入
+@property (nonatomic, strong) NSMutableDictionary * differentLocResultDict;///< 異地登入返回的body
 
 @property (nonatomic, assign) BOOL isWebIn;
-@property (nonatomic, assign) BOOL isDifferentLoc;
 
-@property (nonatomic, strong) NSMutableArray * specifyWordArr;
-@property (nonatomic, strong) NSMutableArray * pressLocationArr;
-@property (nonatomic, assign) NSInteger specifyWordNum;
-@property (nonatomic, strong) UIImage * imgCodeImg;
--(void)removeLocationView;
--(void)checkChineseCaptchaSuccess;
--(void)checkChineseCaptchaAgain;
+@property (nonatomic, strong) NSMutableArray * pressLocationArr;///< 使用者點擊圖片的座標Array
+@property (nonatomic, assign) NSInteger specifyWordNum;///< 漢字驗證碼需要點擊的次數
+@property (nonatomic, strong) UIImage * imgCodeImg;///< 漢字驗證碼的圖
+-(void)removeLocationView;///< 刪除使用者點擊的座標圖
+-(void)checkChineseCaptchaSuccess;///< 漢字驗證成功
+-(void)checkChineseCaptchaAgain;///< 重新驗證漢字驗證碼
 @end
 
 NS_ASSUME_NONNULL_END

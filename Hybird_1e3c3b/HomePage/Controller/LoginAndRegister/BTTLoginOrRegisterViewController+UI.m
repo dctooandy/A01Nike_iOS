@@ -66,7 +66,7 @@
     };
 }
 
--(void)showAlert:(NSDictionary *)resultDic model:(BTTLoginAPIModel *)model isBack:(BOOL)isback {
+-(void)showDifferentLocPopView:(BTTLoginAPIModel *)model isBack:(BOOL)isback {
     self.differentLocPopView = [BTTDifferentLocPopView viewFromXib];
     self.differentLocPopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [self.differentLocPopView countDown:60];
@@ -85,7 +85,7 @@
     };
     self.differentLocPopView.confirmBtnBlock = ^(NSString * _Nonnull str) {
         NSString * inputeStr = str;
-        [weakSelf loginWith2FA:resultDic smsCode:inputeStr model:model isBack:isback];
+        [weakSelf loginWith2FA:weakSelf.differentLocResultDict smsCode:inputeStr model:model isBack:isback];
         [popView dismiss];
     };
 }

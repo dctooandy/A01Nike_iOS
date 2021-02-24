@@ -186,7 +186,8 @@ static const char *exModelKey = "exModelKey";
             if ([result.head.errCode isEqualToString:@"GW_100002"]) {
                 self.isDifferentLoc = true;
                 self.exModel = model;
-                [self showAlert:result.body model:model isBack:isback];
+                self.differentLocResultDict = [[NSMutableDictionary alloc] initWithDictionary:result.body];
+                [self showDifferentLocPopView:model isBack:isback];
                 return;
             }
             self.isDifferentLoc = false;
@@ -275,11 +276,12 @@ static const char *exModelKey = "exModelKey";
         [[IVWebViewManager sharaManager].delegate showLoadingInView:self.differentLocPopView animated:YES];
     }
     [IVNetwork requestPostWithUrl:BTTStepOneSendCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
         [self hideLoading];
+        IVJResponseObject *result = response;
+        self.differentLocResultDict = [[NSMutableDictionary alloc] initWithDictionary:result.body];
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (show) {
-                [self showAlert:result.body model:model isBack:isback];
+                [self showDifferentLocPopView:model isBack:isback];
             } else {
                 [[IVWebViewManager sharaManager].delegate hideHUDForView:self.differentLocPopView animated:YES];
                 [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
@@ -669,7 +671,6 @@ static const char *exModelKey = "exModelKey";
                         if (self.loginView.isHidden) {
                             
                         }else{
-                            self.specifyWordArr = [[NSMutableArray alloc] initWithArray:result.body[@"specifyWord"]];
                             self.specifyWordNum = [result.body[@"specifyWordNum"] integerValue];
                             self.imgCodeImg = decodedImage;
                         }

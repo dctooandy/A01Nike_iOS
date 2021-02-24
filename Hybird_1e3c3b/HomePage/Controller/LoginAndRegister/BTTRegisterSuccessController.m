@@ -39,7 +39,6 @@ typedef enum {
 @property (nonatomic, strong) UIButton *imgCodeBtn;
 @property (nonatomic, strong) UIButton * cancelBtn;
 @property (nonatomic, strong)UIView * imgCodePopViewBg;
-@property (nonatomic, strong) NSMutableArray * specifyWordArr;
 @property (nonatomic, strong) NSMutableArray * pressLocationArr;
 @property (nonatomic, assign) NSInteger specifyWordNum;
 @property (nonatomic, strong) UIImage * imgCodeImg;
@@ -429,7 +428,6 @@ typedef enum {
                     //获取到验证码ID
                     self.captchaId = result.body[@"captchaId"];
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        self.specifyWordArr = [[NSMutableArray alloc] initWithArray:result.body[@"specifyWord"]];
                         self.specifyWordNum = [result.body[@"specifyWordNum"] integerValue];
                         self.imgCodeImg = decodedImage;
                     });
