@@ -35,6 +35,8 @@
 
 -(void)setData:(BTTWithdrawRecordItemModel *)model {
     if (model.flag == 0 || model.flag == 9) {
+        [self.checkBtn setImage:[UIImage imageNamed:@"ic_all_check_default"] forState:UIControlStateNormal];
+        self.checkBtn.enabled = false;
         self.cancelBtn.hidden = false;
         [self.typeLab mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self).offset(-14.5/2);
@@ -42,6 +44,8 @@
             make.right.equalTo(self);
         }];
     } else {
+        [self.checkBtn setImage:[UIImage imageNamed:@"ic_check_default"] forState:UIControlStateNormal];
+        self.checkBtn.enabled = true;
         self.cancelBtn.hidden = true;
         [self.typeLab mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.moneyLab.mas_right);

@@ -78,8 +78,10 @@
             if (strongSelf.requestIdArr.count == strongSelf.modelArr.count ) {
                 return;
             }
-             for (BTTWithdrawRecordItemModel * model in strongSelf.modelArr) {
-                 [strongSelf.requestIdArr addObject:model.requestId];
+            for (BTTWithdrawRecordItemModel * model in strongSelf.modelArr) {
+                if (!(model.flag == 0 || model.flag == 9)) {
+                    [strongSelf.requestIdArr addObject:model.requestId];
+                }
              }
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SELECTALL" object:selected? @"0":@"1"];
