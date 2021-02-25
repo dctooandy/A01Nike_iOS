@@ -484,6 +484,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTCustomerReportWithdraw                  @"withdraw/queryRequest"
 //客户报表 - 取款 - 删除记录
 #define BTTDeleteWithdrawRecord                    @"withdraw/deleteRequest"
+//客户报表 - 取款 - 取消請求
+#define BTTCancelWithdrawRequest                   @"withdraw/cancelRequest"
 //客户报表 - 优惠
 #define BTTCustomerReportPromo                     @"promo/queryRequest"
 //客户报表 - 优惠 - 删除记录

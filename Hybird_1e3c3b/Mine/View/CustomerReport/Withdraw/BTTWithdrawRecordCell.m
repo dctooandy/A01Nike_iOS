@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *moneyLab;
 @property (weak, nonatomic) IBOutlet UILabel *requestIdLab;
 @property (weak, nonatomic) IBOutlet UILabel *typeLab;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+
 @end
 
 @implementation BTTWithdrawRecordCell
@@ -25,12 +27,26 @@
     self.mineSparaterType = BTTMineSparaterTypeSingleLine;
     self.backgroundColor = [UIColor clearColor];
     self.requestIdLab.adjustsFontSizeToFitWidth = true;
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"取消"];
+    [attrString setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Oblique" size:12.0],NSForegroundColorAttributeName:[UIColor colorWithRed: 0.90 green: 0.78 blue: 0.55 alpha: 1.00],NSUnderlineStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]} range:NSMakeRange(0,[attrString length])];
+    
+    [self.cancelBtn setAttributedTitle:attrString forState:UIControlStateNormal];
 }
 
 -(void)setData:(BTTWithdrawRecordItemModel *)model {
     if (model.flag == 0 || model.flag == 9) {
-        [self.checkBtn setImage:[UIImage imageNamed:@"ic_all_check_default"] forState:UIControlStateNormal];
-        self.checkBtn.enabled = false;
+        self.cancelBtn.hidden = false;
+        [self.typeLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self).offset(-14.5/2);
+            make.left.equalTo(self.moneyLab.mas_right);
+            make.right.equalTo(self);
+        }];
+    } else {
+        self.cancelBtn.hidden = true;
+        [self.typeLab mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.moneyLab.mas_right);
+            make.right.centerY.equalTo(self);
+        }];
     }
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -63,6 +79,12 @@
         if (self.checkBtnClickBlock) {
             self.checkBtnClickBlock(self.requestIdLab.text, self.checkBtn.selected);
         }
+    }
+}
+
+- (IBAction)cancelBtnAction:(UIButton *)sender {
+    if (self.cancelRequestBlock) {
+        self.cancelRequestBlock(self.requestIdLab.text);
     }
 }
 

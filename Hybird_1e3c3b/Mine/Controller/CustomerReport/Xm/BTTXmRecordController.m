@@ -73,9 +73,7 @@
                 return;
             }
              for (BTTXmRecordItemModel * model in strongSelf.modelArr) {
-                 if (!(model.flag == 0 || model.flag == 9)) {
-                     [strongSelf.requestIdArr addObject:model.requestId];
-                 }
+                 [strongSelf.requestIdArr addObject:model.requestId];
              }
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SELECTALL" object:selected? @"0":@"1"];

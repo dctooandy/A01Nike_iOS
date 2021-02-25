@@ -79,9 +79,7 @@
                 return;
             }
              for (BTTWithdrawRecordItemModel * model in strongSelf.modelArr) {
-                 if (!(model.flag == 0 || model.flag == 9)) {
-                     [strongSelf.requestIdArr addObject:model.requestId];
-                 }
+                 [strongSelf.requestIdArr addObject:model.requestId];
              }
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"SELECTALL" object:selected? @"0":@"1"];
@@ -150,6 +148,10 @@
             }
             [strongSelf.footerView allBtnselect:strongSelf.requestIdArr.count == strongSelf.modelArr.count];
         }];
+        [cell setCancelRequestBlock:^(NSString * _Nonnull requestId) {
+            strongSelf(strongSelf);
+            [strongSelf cancelRequest:requestId];
+        }];
         return cell;
     }
 }
@@ -201,6 +203,8 @@
         self.params[@"flags"] = [NSArray arrayWithObject:self.sortTypeStr];
     }
     [self showLoading];
+    self.pageNo = 1;
+    [self.modelArr removeAllObjects];
     [self loadRecords];
 }
 

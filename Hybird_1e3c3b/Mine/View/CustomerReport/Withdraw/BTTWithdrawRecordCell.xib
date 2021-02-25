@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -78,20 +78,30 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="前台取消" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8SZ-e4-VHt">
-                        <rect key="frame" x="335" y="0.0" width="40" height="60"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="40" id="8ps-PJ-VFS"/>
-                        </constraints>
+                        <rect key="frame" x="335" y="15.5" width="40" height="29"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.32919841999999999" green="0.60190469030000004" blue="0.94121557469999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQZ-M5-n0y">
+                        <rect key="frame" x="335" y="24" width="40" height="27"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="取消">
+                            <color key="titleColor" red="0.89803921568627454" green="0.7803921568627451" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="cancelBtnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="zit-Zq-7RV"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <constraints>
                 <constraint firstItem="fzu-CK-pEr" firstAttribute="leading" secondItem="U6r-Ve-I9l" secondAttribute="trailing" constant="1" id="50g-g6-s0f"/>
                 <constraint firstItem="Bab-cn-aP1" firstAttribute="top" secondItem="0rU-qM-pEP" secondAttribute="top" id="9PU-dQ-fRu"/>
-                <constraint firstItem="8SZ-e4-VHt" firstAttribute="leading" secondItem="H3a-0j-fR4" secondAttribute="trailing" id="IPE-8n-6HK"/>
+                <constraint firstItem="H3a-0j-fR4" firstAttribute="trailing" secondItem="Orv-7Q-DAr" secondAttribute="trailing" id="EBX-JF-Pfi"/>
+                <constraint firstAttribute="trailing" secondItem="vQZ-M5-n0y" secondAttribute="trailing" id="EU4-u1-W2x"/>
+                <constraint firstAttribute="trailing" secondItem="Orv-7Q-DAr" secondAttribute="trailing" constant="40" id="Gq4-bX-qJD"/>
                 <constraint firstItem="U6r-Ve-I9l" firstAttribute="leading" secondItem="IzY-wK-z5l" secondAttribute="trailing" id="LxI-UA-kd9"/>
                 <constraint firstItem="0rU-qM-pEP" firstAttribute="top" secondItem="U6r-Ve-I9l" secondAttribute="bottom" id="OYD-aL-70p"/>
                 <constraint firstItem="IzY-wK-z5l" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="PA3-Jr-G6s"/>
@@ -99,18 +109,19 @@
                 <constraint firstItem="Orv-7Q-DAr" firstAttribute="bottom" secondItem="fzu-CK-pEr" secondAttribute="bottom" id="Suh-TQ-ug9"/>
                 <constraint firstItem="0rU-qM-pEP" firstAttribute="leading" secondItem="IzY-wK-z5l" secondAttribute="trailing" id="VC0-cg-o4w"/>
                 <constraint firstItem="Orv-7Q-DAr" firstAttribute="leading" secondItem="fzu-CK-pEr" secondAttribute="trailing" constant="1" id="WIc-js-Pcp"/>
+                <constraint firstAttribute="trailing" secondItem="8SZ-e4-VHt" secondAttribute="trailing" id="WcP-aW-R4R"/>
                 <constraint firstItem="Bab-cn-aP1" firstAttribute="leading" secondItem="0rU-qM-pEP" secondAttribute="trailing" constant="1" id="WkM-ab-3UX"/>
-                <constraint firstAttribute="trailing" secondItem="8SZ-e4-VHt" secondAttribute="trailing" id="Xan-5O-9AQ"/>
                 <constraint firstAttribute="bottom" secondItem="U6r-Ve-I9l" secondAttribute="bottom" constant="30" id="bWu-mC-jMk"/>
                 <constraint firstItem="fzu-CK-pEr" firstAttribute="bottom" secondItem="U6r-Ve-I9l" secondAttribute="bottom" id="bgS-np-5XJ"/>
+                <constraint firstItem="vQZ-M5-n0y" firstAttribute="leading" secondItem="Orv-7Q-DAr" secondAttribute="trailing" id="dzd-PS-xel"/>
+                <constraint firstItem="8SZ-e4-VHt" firstAttribute="leading" secondItem="Orv-7Q-DAr" secondAttribute="trailing" id="gDt-VO-rcb"/>
                 <constraint firstItem="H3a-0j-fR4" firstAttribute="leading" secondItem="Bab-cn-aP1" secondAttribute="trailing" constant="1" id="gP0-yf-o8l"/>
-                <constraint firstAttribute="bottom" secondItem="8SZ-e4-VHt" secondAttribute="bottom" id="qro-GV-aLh"/>
-                <constraint firstItem="8SZ-e4-VHt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="roj-4a-ENm"/>
-                <constraint firstItem="8SZ-e4-VHt" firstAttribute="leading" secondItem="Orv-7Q-DAr" secondAttribute="trailing" id="tQS-ZX-KZN"/>
+                <constraint firstItem="vQZ-M5-n0y" firstAttribute="centerY" secondItem="H3a-0j-fR4" secondAttribute="centerY" id="kIK-IW-NC6"/>
+                <constraint firstItem="8SZ-e4-VHt" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="qho-F8-zHu"/>
                 <constraint firstItem="IzY-wK-z5l" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="toh-L3-7Ib"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
+                <outlet property="cancelBtn" destination="vQZ-M5-n0y" id="dRh-iJ-Jek"/>
                 <outlet property="cardNumberLab" destination="Bab-cn-aP1" id="Td0-dv-hKt"/>
                 <outlet property="checkBtn" destination="IzY-wK-z5l" id="KM6-n5-MFZ"/>
                 <outlet property="dateLab" destination="U6r-Ve-I9l" id="DIV-oz-xr6"/>
@@ -120,7 +131,7 @@
                 <outlet property="timeLab" destination="0rU-qM-pEP" id="83V-Ku-XY7"/>
                 <outlet property="typeLab" destination="8SZ-e4-VHt" id="FlL-zG-NtM"/>
             </connections>
-            <point key="canvasLocation" x="139" y="153"/>
+            <point key="canvasLocation" x="138.40579710144928" y="152.67857142857142"/>
         </collectionViewCell>
     </objects>
     <resources>

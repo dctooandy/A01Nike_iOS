@@ -26,10 +26,6 @@
 }
 
 -(void)setData:(BTTPromoRecordItemModel *)model {
-    if (model.flag == 0 || model.flag == 9) {
-        [self.checkBtn setImage:[UIImage imageNamed:@"ic_all_check_default"] forState:UIControlStateNormal];
-        self.checkBtn.enabled = false;
-    }
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate * date = [dateFormatter dateFromString:model.createDate];

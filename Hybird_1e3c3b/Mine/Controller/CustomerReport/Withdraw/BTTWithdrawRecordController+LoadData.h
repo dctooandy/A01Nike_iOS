@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BTTWithdrawRecordController (LoadData)
 -(void)loadRecords;
 -(void)deleteRecords;
+-(void)cancelRequest:(NSString *)referenceId;
 @end
 
 NS_ASSUME_NONNULL_END

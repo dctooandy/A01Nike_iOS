@@ -43,4 +43,21 @@
     }];
 }
 
+-(void)cancelRequest:(NSString *)referenceId {
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+    dict[@"referenceId"] = referenceId;
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTCancelWithdrawRequest paramters:dict completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            self.pageNo = 1;
+            [self.modelArr removeAllObjects];
+            [self loadRecords];
+        } else {
+            [self hideLoading];
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
+
 @end

@@ -12,10 +12,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 typedef void(^CheckBtnClickBlock)(NSString * requestId, BOOL selected);
+typedef void(^CancelRequestBlock)(NSString * requestId);
 
 @interface BTTWithdrawRecordCell : BTTBaseCollectionViewCell
 @property (weak, nonatomic) IBOutlet UIButton *checkBtn;
 @property (nonatomic, copy) CheckBtnClickBlock checkBtnClickBlock;
+@property (nonatomic, copy) CancelRequestBlock cancelRequestBlock;
 -(void)setData:(BTTWithdrawRecordItemModel *)model;
 @end
 
