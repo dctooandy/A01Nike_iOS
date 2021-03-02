@@ -101,7 +101,8 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork savedUserInfo]) {
-        [self loadGetPopWithDraw];
+        //usdt取款優惠彈窗
+//        [self loadGetPopWithDraw];
         [self loadUserInfo];
         [self loadBankList];
         if (!self.isLoading) {
@@ -597,7 +598,6 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowNewYear];
             [BTTUserStatusManager logoutSuccess];
             strongSelf.saveMoneyCount = 0;
             [strongSelf loadPaymentDefaultData];

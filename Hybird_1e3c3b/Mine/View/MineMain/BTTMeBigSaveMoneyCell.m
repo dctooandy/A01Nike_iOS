@@ -11,6 +11,8 @@
 #import "BTTMeSaveMoneyWechatCell.h"
 #import "BTTMeMainModel.h"
 
+#define itemCount 4
+#define space 10
 typedef enum {
     BTTMeBigSaveMoneyTypeNormal, ///< 通用模式
     BTTMeBigSaveMoneyTypeTen,    ///< 存款超过10次显示模式
@@ -39,9 +41,10 @@ typedef enum {
     self.collectionView.showsHorizontalScrollIndicator = NO;
 //    self.collectionView.backgroundColor = COLOR_RGBA(41, 45, 54, 1);
     UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
-    layout.itemSize = CGSizeMake(90, 160);
+    CGFloat itemW = (SCREEN_WIDTH - 15 * 2 - space * (itemCount - 1)) / itemCount;//減去15*2是這個cell的寬
+    layout.itemSize = CGSizeMake(itemW, 160);
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.minimumLineSpacing = 15;
+    layout.minimumLineSpacing = space;
     self.collectionView.collectionViewLayout = layout;
 //    BTTMeSaveMoneyShowTypeAll = 0,
 //    BTTMeSaveMoneyShowTypeBig = 1,

@@ -113,7 +113,6 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowNewYear];
     }
     
 }

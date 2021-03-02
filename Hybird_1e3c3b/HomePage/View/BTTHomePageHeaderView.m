@@ -58,20 +58,17 @@
 //            }
 //            [self addSubview:moonImage];
             
-            NSString * pathStr = @"";
-            //聖膽装饰
-//            pathStr = @"christmas";
             //2021新年装饰
-            pathStr = KIsiPhoneX? @"new_year_2021_x":@"new_year_2021";
-            NSString *path = [[NSBundle mainBundle] pathForResource:pathStr ofType:@"gif"];
-            NSData *data = [NSData dataWithContentsOfFile:path];
-            UIImageView * img = [[UIImageView alloc] init];
-            img.image = [UIImage sd_animatedGIFWithData:data];
-            img.contentMode = UIViewContentModeScaleToFill;
-            [self addSubview:img];
-            [img mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.top.left.bottom.right.equalTo(self);
-            }];
+//            NSString * pathStr = KIsiPhoneX? @"new_year_2021_x":@"new_year_2021";
+//            NSString *path = [[NSBundle mainBundle] pathForResource:pathStr ofType:@"gif"];
+//            NSData *data = [NSData dataWithContentsOfFile:path];
+//            UIImageView * img = [[UIImageView alloc] init];
+//            img.image = [UIImage sd_animatedGIFWithData:data];
+//            img.contentMode = UIViewContentModeScaleToFill;
+//            [self addSubview:img];
+//            [img mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.top.left.bottom.right.equalTo(self);
+//            }];
             
             UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
             [self addSubview:logoImageView];
