@@ -482,7 +482,8 @@
                 vc.showNotice = true;
                 [self.navigationController pushViewController:vc animated:YES];
             } else {
-                [MBProgressHUD showMessagNoActivity:@"请先绑定银行卡" toView:nil];
+                NSString * str = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"请先绑定钱包":@"请先绑定银行卡";
+                [MBProgressHUD showMessagNoActivity:str toView:nil];
                 BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
                 vc.showNotice = true;
                 [self.navigationController pushViewController:vc animated:YES];
