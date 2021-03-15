@@ -28,7 +28,7 @@
 
 @property (nonatomic, strong) BTTHomePageViewController *homePageVC;
 
-@property (nonatomic, strong) BTTBaseViewController *voiceCall;
+//@property (nonatomic, strong) BTTBaseViewController *voiceCall;
 
 @property (nonatomic, strong) BTTLuckyWheelViewController *lucky;
 
@@ -67,7 +67,7 @@
 }
 
 - (void)logoutSuccess:(NSNotification *)notifi {
-    [self.myTabbar setSeletedIndex:0];
+    [self.myTabbar setSeletedIndex:BTTHome];
     [self resetTabar];
 }
 
@@ -77,7 +77,7 @@
     if ([IVNetwork savedUserInfo]) {
         for (UITabBarItem *item in self.items) {
             NSInteger index = [self.items indexOfObject:item];
-            if (index == 3) {
+            if (index == BTTPromo) {
                 item.title = @"优惠";
                 item.image = ImageNamed(@"preferential_normal");
                 item.selectedImage = ImageNamed(@"preferential_pressed");
@@ -87,7 +87,7 @@
     } else {
         for (UITabBarItem *item in self.items) {
             NSInteger index = [self.items indexOfObject:item];
-            if (index == 3) {
+            if (index == BTTPromo) {
                 item.title = @"登录/开户";
                 item.image = ImageNamed(@"login_normal");
                 item.selectedImage = ImageNamed(@"login_pressed");
@@ -122,11 +122,11 @@
 }
 
 - (void)registerSuccessGotoHomePageNotification {
-    [self.myTabbar setSeletedIndex:0];
+    [self.myTabbar setSeletedIndex:BTTHome];
 }
 
 - (void)registerSuccessGotoMineNotification {
-    [self.myTabbar setSeletedIndex:4];
+    [self.myTabbar setSeletedIndex:BTTMine];
 }
 
 - (void)requestCustomerVipLine{
@@ -160,8 +160,8 @@
 
 - (void)setupViewControllers {
     [self addOneChildVC:self.homePageVC title:@"首页" imageName:@"home_normal" selectedImageName:@"home_pressed"];
-    [self addOneChildVC:self.voiceCall title:@"APP语音" imageName:@"tab_voiceCall" selectedImageName:@"tab_voiceCall"];
-    [self addOneChildVC:self.lucky title:@"抽奖" imageName:@"lottery_pressed" selectedImageName:@"lottery_pressed"];
+//    [self addOneChildVC:self.voiceCall title:@"APP语音" imageName:@"tab_voiceCall" selectedImageName:@"tab_voiceCall"];
+    [self addOneChildVC:self.lucky title:@"抽奖" imageName:@"lottery_normal" selectedImageName:@"lottery_pressed"];
     if ([IVNetwork savedUserInfo]) {
         [self addOneChildVC:self.discountsVC title:@"优惠" imageName:@"preferential_normal" selectedImageName:@"preferential_pressed"];
     } else {
@@ -215,51 +215,53 @@
 
 - (void)tabBar:(BTTTabBar *)tabBar didClickBtn:(NSInteger)index {
     [super setSelectedIndex:index];
-    if (index == 2) {
+    if (index == BTTLuckyWheel) {
         self.selectVC = (BTTBaseViewController *)self.lucky;
         NSString *domain = [IVNetwork h5Domain];
         self.lucky.webConfigModel.theme = @"inside";
         self.lucky.webConfigModel.url = [NSString stringWithFormat:@"%@%@",domain,@"activity_pages/lucky_wheel_2020"]; //@"customer/lucky_wheel.htm";
         self.preSelectIndex = index;
         [self.selectVC.navigationController popToRootViewControllerAnimated:NO];
-    } else if (index == 1) {
-        self.selectVC = self.voiceCall;
-        BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"欢迎使用免费语音通话" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"APP语音"] actionSheetBlock:^(NSInteger buttonIndex) {
-            NSLog(@"选择了%@",@(buttonIndex));
-            weakSelf(weakSelf);
-            if (buttonIndex == 0) {
-                if ([IVNetwork savedUserInfo]) {
-                    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-                    [self loadVoiceCallNumWithIsLogin:YES makeCall:^(NSString *uid) {
-                        [MBProgressHUD hideHUDForView:self.view animated:YES];
-                        if (uid == nil || uid.length == 0) {
-                            [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
-                        } else {
-                            strongSelf(strongSelf);
-                            [strongSelf registerUID:uid];
-                        }
-                        
-                    }];
-                } else {
-                    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-                    [self loadVoiceCallNumWithIsLogin:NO makeCall:^(NSString *uid) {
-                        [MBProgressHUD hideHUDForView:self.view animated:YES];
-                        if (uid == nil || uid.length == 0) {
-                            [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
-                        } else {
-                            strongSelf(strongSelf);
-                            [strongSelf registerUID:uid];
-                        }
-                    }];
-                }
-            }
-        }];
-        [actionSheet show];
-        self.myTabbar.seletedIndex = self.preSelectIndex;
-    } else if (index == 0) {
+    }
+//    else if (index == BTTAppPhone) {
+//        self.selectVC = self.voiceCall;
+//        BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"欢迎使用免费语音通话" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"APP语音"] actionSheetBlock:^(NSInteger buttonIndex) {
+//            NSLog(@"选择了%@",@(buttonIndex));
+//            weakSelf(weakSelf);
+//            if (buttonIndex == 0) {
+//                if ([IVNetwork savedUserInfo]) {
+//                    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+//                    [self loadVoiceCallNumWithIsLogin:YES makeCall:^(NSString *uid) {
+//                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                        if (uid == nil || uid.length == 0) {
+//                            [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
+//                        } else {
+//                            strongSelf(strongSelf);
+//                            [strongSelf registerUID:uid];
+//                        }
+//
+//                    }];
+//                } else {
+//                    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+//                    [self loadVoiceCallNumWithIsLogin:NO makeCall:^(NSString *uid) {
+//                        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                        if (uid == nil || uid.length == 0) {
+//                            [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
+//                        } else {
+//                            strongSelf(strongSelf);
+//                            [strongSelf registerUID:uid];
+//                        }
+//                    }];
+//                }
+//            }
+//        }];
+//        [actionSheet show];
+//        self.myTabbar.seletedIndex = self.preSelectIndex;
+//    }
+    else if (index == BTTHome) {
         self.selectVC = self.homePageVC;
         self.preSelectIndex = index;
-    } else if (index == 3) {
+    } else if (index == BTTPromo) {//優惠
         self.selectVC = self.discountsVC;
         if ([IVNetwork savedUserInfo]) {
             self.preSelectIndex = index;
@@ -359,12 +361,12 @@
     return _homePageVC;
 }
 
-- (BTTBaseViewController *)voiceCall {
-    if (!_voiceCall) {
-        _voiceCall = [[BTTBaseViewController alloc] init];
-    }
-    return _voiceCall;
-}
+//- (BTTBaseViewController *)voiceCall {
+//    if (!_voiceCall) {
+//        _voiceCall = [[BTTBaseViewController alloc] init];
+//    }
+//    return _voiceCall;
+//}
 
 - (BTTLuckyWheelViewController *)lucky {
     if (!_lucky) {

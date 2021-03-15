@@ -134,6 +134,12 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTShowYuFenHong                           @"BTTShowYuFenHong"
 #define BTTGameCurrencysWithName                   [NSString stringWithFormat:@"%@GameCurrencys", [IVNetwork savedUserInfo].loginName]
 
+#define BTTHome                                    0
+//#define BTTAppPhone                                1
+#define BTTLuckyWheel                              1
+#define BTTPromo                                   2
+#define BTTMine                                    3
+
 //Flurry
 #define FlurryKey                                  @"RY7GPP2V792PMZK3PYNX"
 

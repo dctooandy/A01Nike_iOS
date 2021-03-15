@@ -146,6 +146,7 @@ static const char *BTTNextGroupKey = "nextGroup";
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSArray *data = result.body[@"data"];
             if (![data isKindOfClass:[NSArray class]]) {
+                dispatch_group_leave(group);
                 return;
             }
             self.noticeStr = @"";

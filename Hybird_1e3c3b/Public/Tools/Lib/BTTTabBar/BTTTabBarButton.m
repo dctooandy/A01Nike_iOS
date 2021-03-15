@@ -70,7 +70,8 @@
     self.titleImageLabel.text = _item.title;
     
     if ([item.title isEqualToString:@"抽奖"]) {
-        [self.titleImageLabel setTextColor:COLOR_RGBA(248, 211, 75, 1)];
+//        [self.titleImageLabel setTextColor:COLOR_RGBA(248, 211, 75, 1)];
+        [self.titleImageLabel setTextColor:COLOR_RGBA(128, 135, 146, 1)];
         self.hotImageView.hidden = NO;
     } else {
         [self.titleImageLabel setTextColor:COLOR_RGBA(128, 135, 146, 1)];
@@ -85,9 +86,9 @@
         [self.titleImageLabel setTextColor:COLOR_RGBA(248, 211, 75, 1)];
     } else {
         self.titleImage.image = _item.image;
-        if (![self.titleImageLabel.text isEqualToString:@"抽奖"]) {
-            [self.titleImageLabel setTextColor:COLOR_RGBA(128, 135, 146, 1)];
-        }
+//        if (![self.titleImageLabel.text isEqualToString:@"抽奖"]) {
+        [self.titleImageLabel setTextColor:COLOR_RGBA(128, 135, 146, 1)];
+//        }
         
     }
 }

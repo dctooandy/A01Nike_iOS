@@ -60,7 +60,7 @@
                 [self.navigationController popToRootViewControllerAnimated:true];
             });
             AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            [delegate jumpToTabIndex:0];
+            [delegate jumpToTabIndex:BTTHome];
         };
         IVActionHandler withdraw = ^(UIAlertAction *action){
 //            [self.navigationController popToRootViewControllerAnimated:true];

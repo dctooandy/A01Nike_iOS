@@ -304,20 +304,20 @@
 - (void)jumpToTabIndex:(NSInteger )type {
     
     switch (type) {
-        case 0:  // 首页
-            [self.tabVC.myTabbar setSeletedIndex:0];
+        case BTTHome:  // 首页
+            [self.tabVC.myTabbar setSeletedIndex:BTTHome];
             break;
-        case 1:
-            [self.tabVC.myTabbar setSeletedIndex:1];
+//        case BTTAppPhone:
+//            [self.tabVC.myTabbar setSeletedIndex:BTTAppPhone];
+//            break;
+        case BTTLuckyWheel:
+            [self.tabVC.myTabbar setSeletedIndex:BTTLuckyWheel];
             break;
-        case 2:
-            [self.tabVC.myTabbar setSeletedIndex:2];
+        case BTTPromo:  // 優惠
+            [self.tabVC.myTabbar setSeletedIndex:BTTPromo];
             break;
-        case 3:  // 優惠
-            [self.tabVC.myTabbar setSeletedIndex:3];
-            break;
-        case 4:  // 會員中心
-            [self.tabVC.myTabbar setSeletedIndex:4];
+        case BTTMine:  // 會員中心
+            [self.tabVC.myTabbar setSeletedIndex:BTTMine];
             break;
         default:
             break;
