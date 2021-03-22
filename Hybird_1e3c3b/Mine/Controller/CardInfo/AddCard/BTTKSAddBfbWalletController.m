@@ -78,6 +78,7 @@
                  NSFontAttributeName:self.smsCodeField.font
          }];
     self.smsCodeField.attributedPlaceholder = attrString1;
+    [self.smsCodeField setEnabled:false];
 }
 - (IBAction)smsBtn_click:(id)sender {
     [self sendSmsCode];
@@ -94,8 +95,10 @@
             IVJResponseObject *result = response;
             if ([result.head.errCode isEqualToString:@"0000"]) {
                 [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
+                [self.smsCodeField setEnabled:true];
                 self.messageId = result.body[@"messageId"];
             }else{
+                [self.smsCodeField setEnabled:false];
                 [MBProgressHUD showError:result.head.errMsg toView:nil];
             }
             

@@ -98,6 +98,10 @@
 //            }
 //        }
 //    });
+    [self setUpAssistiveButton];
+    if (self.assistiveButton != nil) {
+        [self.view addSubview:self.assistiveButton];
+    }
     [self checkLoginVersion];
 //    [self setupFloatWindow];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBannerData) name:@"CHANGE_MODE" object:nil];
@@ -131,6 +135,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.idDisable = false;
+    [self showAssistiveButton];
     [self.collectionView reloadData];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork savedUserInfo]) {

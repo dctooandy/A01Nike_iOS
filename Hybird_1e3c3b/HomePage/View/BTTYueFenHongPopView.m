@@ -2,7 +2,7 @@
 //  BTTYueFenHongPopView.m
 //  Hybird_1e3c3b
 //
-//  Created by JerryHU on 2021/1/6.
+//  Created by Jairo on 1/6/21.
 //  Copyright © 2021 BTT. All rights reserved.
 //
 

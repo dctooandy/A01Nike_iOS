@@ -10,7 +10,6 @@
 
 @interface BTTVideoFastRegisterView ()
 @property (nonatomic, strong) UITextField *accountField;
-@property (nonatomic, strong) UITextField *imgCodeField;
 
 @end
 
@@ -94,6 +93,7 @@
                      NSFontAttributeName:pwdField.font
              }];
         pwdField.attributedPlaceholder = attrStringPwd;
+        [pwdField setEnabled:false];
         [pwdView addSubview:pwdField];
         _imgCodeField = pwdField;
         [pwdField mas_makeConstraints:^(MASConstraintMaker *make) {

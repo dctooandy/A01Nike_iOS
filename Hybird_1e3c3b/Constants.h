@@ -132,7 +132,9 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTBiBiCunDate                             @"BTTBiBiCunDate"
 #define BTTShareNoticeTag                          @"BTTShareNoticeTag"
 #define BTTShowYuFenHong                           @"BTTShowYuFenHong"
+#define BTTLoginSuccessShow918ScrollText           @"BTTLoginSuccessShow918ScrollText"
 #define BTTGameCurrencysWithName                   [NSString stringWithFormat:@"%@GameCurrencys", [IVNetwork savedUserInfo].loginName]
+#define reload918Sec 20 * 60
 
 #define BTTHome                                    0
 //#define BTTAppPhone                                1
@@ -516,6 +518,9 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 //2021月分紅是否是老用戶
 #define BTTIsOldMember                             @"_extra_/api/v1/activity/monthly-activity2021/isVip"
+
+//918贏牌-好運紅包及來
+#define BTTFirtWinningList                         @"_extra_/api/v1/activity/winner/first-winning-list"
 
 /********************************************常用宏*********************************************************/
 

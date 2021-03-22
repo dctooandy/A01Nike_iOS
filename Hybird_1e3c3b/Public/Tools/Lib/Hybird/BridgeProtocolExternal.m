@@ -213,6 +213,7 @@
     }
     else if ([url containsString:@"common/agqj.htm"]) {
         if ([IVNetwork savedUserInfo]) {
+            [MBProgressHUD showLoadingSingleInView:self.controller.view animated:true];
             [self checkAccount:BTTAGQJKEY];
         } else {
             [self showTryAlertViewWithBlock:^(UIButton * _Nonnull btn) {
@@ -238,10 +239,26 @@
             [self goToLoginPage:true];
         }
     }
+    else if ([url containsString:@"common/switch_account_in_game.htm"]) {
+        if ([IVNetwork savedUserInfo] && [[IVNetwork savedUserInfo].uiMode isEqual:@"CNY"]) {
+            [MBProgressHUD showLoadingSingleInView:self.controller.view animated:true];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"changeModeEnterGameNotification" object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeModeSuccessToGame) name:@"changeModeSuccess" object:nil];
+        }
+    }
+    else if ([url containsString:@"common/switch_account_change_web_mode.htm"]) {
+        if ([IVNetwork savedUserInfo] && [[IVNetwork savedUserInfo].uiMode isEqual:@"CNY"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"changeModeNotification" object:nil];
+        }
+    }
     else {
         should = NO;
     }
     return should;
+}
+
+-(void)changeModeSuccessToGame {
+    [self checkAccount:BTTAGQJKEY];
 }
 
 -(void)goToLoginPage:(BOOL)isWebIn {
@@ -261,6 +278,7 @@
     [IVNetwork requestPostWithUrl:QUERYGames paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         NSArray *lineArray = result.body[jsonKey];
+        [MBProgressHUD hideHUDForView:self.controller.view animated:true];
         if (lineArray != nil && lineArray.count >= 2) {
             NSMutableArray * userCurrencysArr = [[NSMutableArray alloc] initWithArray:[NSArray bg_arrayWithName:BTTGameCurrencysWithName]];
             NSString * gameCurrency = @"";

@@ -117,6 +117,7 @@
         return cell;
     } else if (indexPath.row == 1) {
         BTTBindingMobileTwoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileTwoCell" forIndexPath:indexPath];
+        [cell.textField setEnabled:false];
         [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
         cell.model = model;
@@ -302,8 +303,10 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
             self.messageId = result.body[@"messageId"];
+            [[weakSelf getCodeTF] setEnabled:true];
             [[weakSelf getVerifyCell] countDown];
         }else{
+            [[weakSelf getCodeTF] setEnabled:false];
             [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
         
@@ -343,8 +346,10 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
             self.messageId = result.body[@"messageId"];
+            [[weakSelf getCodeTF] setEnabled:true];
             [[weakSelf getVerifyCell] countDown];
         }else{
+            [[weakSelf getCodeTF] setEnabled:false];
             [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
         
@@ -352,6 +357,7 @@
 }
 - (void)submitBind
 {
+    [self.view endEditing:true];
     NSString *url = BTTBindPhone;
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"messageId"] = self.messageId;
@@ -631,15 +637,16 @@
         [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
-            if (isBackToCardInfo) {
-                [self.navigationController popToRootViewControllerAnimated:true];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:@{@"showToast":[NSNumber numberWithBool:true]}];
-            } else {
-                BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-                vc.mobileCodeType = self.mobileCodeType;
-                [weakSelf.navigationController pushViewController:vc animated:YES];
-            }
+            [BTTHttpManager fetchBankListWithUseCache:NO completion:^(id  _Nullable response, NSError * _Nullable error) {
+                if (isBackToCardInfo) {
+                    [self.navigationController popToRootViewControllerAnimated:true];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:@{@"showToast":[NSNumber numberWithBool:true]}];
+                } else {
+                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+                    vc.mobileCodeType = self.mobileCodeType;
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                }
+            }];
         }else{
             NSString *message = [NSString isBlankString:result.head.errMsg] ? @"删除失败，请重试!" : result.head.errMsg;
             [MBProgressHUD showError:message toView:nil];

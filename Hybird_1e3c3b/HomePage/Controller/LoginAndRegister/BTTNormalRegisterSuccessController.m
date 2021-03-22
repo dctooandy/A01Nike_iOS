@@ -44,6 +44,8 @@
     self.confirmBtn.layer.cornerRadius = 20.0;
     self.confirmBtn.clipsToBounds = YES;
     [_phoneField addTarget:self action:@selector(textFieldDidChanged) forControlEvents:UIControlEventEditingChanged];
+    
+    [self.smsCodeField setEnabled:false];
 }
 
 - (IBAction)jumpBtn_click:(id)sender {
@@ -107,8 +109,10 @@
                 [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
                 self.messageId = result.body[@"messageId"];
                 [weakSelf countDown];
+                [self.smsCodeField setEnabled:true];
                 [self.smsCodeField becomeFirstResponder];
             } else {
+                [self.smsCodeField setEnabled:false];
                 [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
             }
         }];

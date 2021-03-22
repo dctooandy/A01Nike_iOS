@@ -2,7 +2,7 @@
 //  AssistiveButton.h
 //  Hybird_A01
 //
-//  Created by JerryHU on 2020/10/28.
+//  Created by Jairo on 10/28/20.
 //  Copyright © 2020 BTT. All rights reserved.
 //
 

@@ -741,11 +741,12 @@ static const char *exModelKey = "exModelKey";
             if (result.body!=nil) {
                 [IVHttpManager shareManager].loginName = result.body[@"loginName"];
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body isBackHome:true];
-                
-                if (self.isWebIn) {
-                    [MBProgressHUD showSuccess:@"登录成功" toView:nil];
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                } else if (isBack) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:BTTLoginSuccessShow918ScrollText object:nil];
+//                if (self.isWebIn) {
+//                    [MBProgressHUD showSuccess:@"登录成功" toView:nil];
+//                    [self.navigationController popToRootViewControllerAnimated:YES];
+//                } else
+                if (isBack) {
                     [MBProgressHUD showSuccess:@"登录成功" toView:nil];
                     [self.navigationController popViewControllerAnimated:YES];
                 }
@@ -758,24 +759,25 @@ static const char *exModelKey = "exModelKey";
 }
 
 // 手机验证码
-- (void)loadMobileVerifyCodeWithPhone:(NSString *)phone use:(NSInteger)use{
+- (void)loadMobileVerifyCodeWithPhone:(NSString *)phone use:(NSInteger)use completionBlock:(KYHTTPCallBack)completionBlock{
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     params[@"use"] = @(use);
     params[@"productId"] = [HAInitConfig appId];
     params[@"mobileNo"] = [IVRsaEncryptWrapper encryptorString:phone];
     
 //    NSDictionary *params = @{@"use":@(use),@"productId":@"A01APP02",@"mobileNo":[IVRsaEncryptWrapper encryptorString:phone]};
-    [IVNetwork requestPostWithUrl:BTTSendMsgCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        NSLog(@"%@",response);
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
-            self.messageId = result.body[@"messageId"];
-        }else{
-            [MBProgressHUD showError:result.head.errMsg toView:nil];
-        }
-        
-    }];
+    [[IVHttpManager shareManager]sendRequestWithUrl:BTTSendMsgCode parameters:params callBack:completionBlock];
+    
+//    [IVNetwork requestPostWithUrl:BTTSendMsgCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//        NSLog(@"%@",response);
+//        IVJResponseObject *result = response;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
+//            self.messageId = result.body[@"messageId"];
+//        }else{
+//            [MBProgressHUD showError:result.head.errMsg toView:nil];
+//        }
+//    }];
 }
 
 - (void)sendCodeWithPhone:(NSString *)phone use:(NSInteger)use{

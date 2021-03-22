@@ -45,6 +45,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *onekeyBuyBtn;
 @property (weak, nonatomic) IBOutlet UIButton *onekeyBtnTwo;
 @property (nonatomic, copy) NSString *buyUsdtLink;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *dcboxDownloadTopLayout;
+@property (nonatomic, strong) UIButton * goToH5Btn;
+@property (nonatomic, copy) NSString *dcboxH5Link;
 @end
 
 @implementation BTTDcboxPayController
@@ -75,11 +78,6 @@
     return _walletCollectionView;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self setViewHeight:600 fullScreen:NO];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.selectedProtocol = @"OMNI";
@@ -90,7 +88,7 @@
     [self requestUSDTRate];
     [self requestWalletType];
     [self requestBuyUsdtLink];
-    [self setViewHeight:600 fullScreen:NO];
+    [self setViewHeight:630 fullScreen:NO];
 }
 
 
@@ -231,7 +229,11 @@
 }
 
 - (void)dowloadBfbApp{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.bitoll.com/ios.html"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.dcbox.com/ios.html"]];
+}
+
+-(void)goToH5Dcbox {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.dcboxH5Link]];
 }
 
 - (void)setupView{
@@ -245,6 +247,11 @@
     _secondMoneyView.layer.backgroundColor = kBlackLightColor.CGColor;
     _secondArriveView.layer.backgroundColor = kBlackLightColor.CGColor;
     
+    self.bfbBanner.hidden = false;
+    self.bfbBanner.image = [UIImage imageNamed:@"dcbox_download"];
+    UITapGestureRecognizer *firstImgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dowloadBfbApp)];
+    [self.bfbBanner addGestureRecognizer:firstImgTap];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dowloadBfbApp)];
     [self.dcboxDownload addGestureRecognizer:tap];
     
@@ -252,6 +259,11 @@
     [self.qrcodeView addGestureRecognizer:longpress];
     
     _infoView.layer.backgroundColor = kBlackForgroundColor.CGColor;
+    
+    CGFloat infoH = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? 380:480;
+    [self.infoView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.offset(infoH);
+    }];
     
     _saveView.backgroundColor = kBlackLightColor;
     
@@ -324,6 +336,18 @@
             make.top.equalTo(self.usdtTipLabel).offset(10);
         }];
     }
+    
+    self.goToH5Btn = [[UIButton alloc] init];
+    self.goToH5Btn.hidden = true;
+    [self.goToH5Btn setTitle:@"若无法唤起小金库，可使用H5支付" forState:UIControlStateNormal];
+    [self.goToH5Btn setTitleColor:[self.onekeyBtnTwo.titleLabel textColor] forState:UIControlStateNormal];
+    self.goToH5Btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [self.goToH5Btn addTarget:self action:@selector(goToH5Dcbox) forControlEvents:UIControlEventTouchUpInside];
+    [self.secondView addSubview:self.goToH5Btn];
+    [self.goToH5Btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.onekeyBtnTwo.mas_bottom).offset(10);
+        make.left.right.height.equalTo(self.onekeyBtnTwo);
+    }];
 }
 
 - (IBAction)saveFinishBtn_clikc:(id)sender {
@@ -377,7 +401,13 @@
             NSString *address = result.body[@"address"];
             self.infoView.hidden = YES;
             self.secondView.hidden = NO;
+            self.goToH5Btn.hidden = false;
+            self.dcboxDownloadTopLayout.constant = 54;
             [self.qrcodeView setImage:[PublicMethod QRCodeMethod:address]];
+            NSRange range = [address rangeOfString:@"dcbox://pay"];
+            if (range.location != NSNotFound) {
+                self.dcboxH5Link = [address stringByReplacingOccurrencesOfString:@"dcbox://pay" withString:@"https://www.dcbox.com/payment.html"];
+            }
             
             weakSelf.secondMoneyLabel.text = weakSelf.moneyTextField.text;
             CGFloat rmbCash = [weakSelf.moneyTextField.text integerValue] * weakSelf.usdtRate;

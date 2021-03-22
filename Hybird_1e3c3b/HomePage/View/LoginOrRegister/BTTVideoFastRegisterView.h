@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^sendSmdCode)(NSString *phone);
 @property (nonatomic, copy) void(^tapRegister)(NSString *account,NSString *code);
 @property (nonatomic, copy) void(^tapOneKeyRegister)(void);
+@property (nonatomic, strong) UITextField *imgCodeField;
 
 @end
 

@@ -9,7 +9,6 @@
 #import "BTTLoginInfoView.h"
 
 @interface BTTLoginInfoView ()
-@property (nonatomic, strong) UITextField *pwdTextField;
 @property (nonatomic, strong) UITextField *accountTextField;
 @property (nonatomic, strong) UITextField *imgCodeField;
 @property (nonatomic, strong) UIButton *showPwdBtn;
@@ -295,6 +294,7 @@
         if (!_isCode) {
             _isCode = YES;
             _pwdTextField.text = @"";
+            [_pwdTextField setEnabled:false];
             _pwdTextField.secureTextEntry = NO;
             NSAttributedString *attrStringPwd = [[NSAttributedString alloc] initWithString:@"验证码" attributes:
                                                  @{ NSForegroundColorAttributeName: [UIColor whiteColor],

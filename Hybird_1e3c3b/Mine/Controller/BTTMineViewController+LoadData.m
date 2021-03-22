@@ -471,7 +471,7 @@
     [BTTHttpManager fetchUserInfoCompleteBlock:nil];
 }
 
--(void)changeMode:(NSString *)modeStr {
+-(void)changeMode:(NSString *)modeStr isInGame:(BOOL)isInGame {
     [self showLoading];
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"uiMode"] = modeStr;
@@ -479,7 +479,7 @@
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"CHANGE_MODE" object:nil];
-            [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"]];
+            [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"] isInGame:isInGame];
         }else{
             [self hideLoading];
             [MBProgressHUD showError:result.head.errMsg toView:nil];
@@ -487,7 +487,7 @@
     }];
 }
 
-- (void)getCustomerInfoByLoginNameWithName:(NSString *)name {
+- (void)getCustomerInfoByLoginNameWithName:(NSString *)name isInGame:(BOOL)isInGame {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     params[@"loginName"] = name;
     params[@"inclAddress"] = @1;
@@ -522,6 +522,9 @@
                 [self loadPaymentData];
                 [self loadRebateStatus];
                 [self loadSaveMoneyTimes];
+                if (isInGame) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeModeSuccess" object:nil];
+                }
             }
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];

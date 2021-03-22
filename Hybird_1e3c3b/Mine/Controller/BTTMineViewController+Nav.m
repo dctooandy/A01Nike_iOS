@@ -106,6 +106,7 @@ static const char *BTTHeaderViewKey = "headerView";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoTakeMoney) name:@"gotoTakeMoneyNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoCustomerReport) name:@"gotoCustomerReportNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeMode) name:@"changeModeNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeModeEnterGame) name:@"changeModeEnterGameNotification" object:nil];
 }
 
 - (void)saveMoneyTimes:(NSNotification *)notifi {
@@ -153,7 +154,17 @@ static const char *BTTHeaderViewKey = "headerView";
     for (NSString * str in [IVNetwork savedUserInfo].uiModeOptions) {
         if (![str isEqualToString:[IVNetwork savedUserInfo].uiMode]) {
             [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:false];
-            [self changeMode:str];
+            [self changeMode:str isInGame:false];
+            break;
+        }
+    }
+}
+
+-(void)changeModeEnterGame {
+    for (NSString * str in [IVNetwork savedUserInfo].uiModeOptions) {
+        if (![str isEqualToString:[IVNetwork savedUserInfo].uiMode]) {
+            [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:false];
+            [self changeMode:str isInGame:true];
             break;
         }
     }

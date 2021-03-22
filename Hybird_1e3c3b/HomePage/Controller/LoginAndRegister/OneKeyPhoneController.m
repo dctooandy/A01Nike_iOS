@@ -53,6 +53,7 @@
         return cell;
     } else if (indexPath.row == 1) {
         BTTBindingMobileTwoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileTwoCell" forIndexPath:indexPath];
+        [cell.textField setEnabled:false];
         [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf sendCode];
@@ -188,8 +189,10 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
             self.messageId = result.body[@"messageId"];
+            [[self getCodeTF] setEnabled:true];
             [[self getVerifyCell] countDown];
         }else{
+            [[self getCodeTF] setEnabled:false];
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
         

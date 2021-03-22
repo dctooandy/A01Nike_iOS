@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadVerifyCode;
 
-- (void)loadMobileVerifyCodeWithPhone:(NSString *)phone use:(NSInteger)use;
+- (void)loadMobileVerifyCodeWithPhone:(NSString *)phone use:(NSInteger)use completionBlock:(KYHTTPCallBack)completionBlock;
 
 - (void)createAccountNormalWithAPIModel:(BTTCreateAPIModel *)model;
 

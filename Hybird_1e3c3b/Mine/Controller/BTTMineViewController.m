@@ -162,7 +162,7 @@
                 weakSelf(weakSelf);
                 cell.changModeTap = ^(NSString * _Nonnull modeStr) {
                     strongSelf(strongSelf);
-                    [strongSelf changeMode:modeStr];
+                    [strongSelf changeMode:modeStr isInGame:false];
                 };
                 cell.accountBlanceBlock = ^{
                     strongSelf(strongSelf);
@@ -198,7 +198,7 @@
                 weakSelf(weakSelf);
                 cell.changModeTap = ^(NSString * _Nonnull modeStr) {
                     strongSelf(strongSelf);
-                    [strongSelf changeMode:modeStr];
+                    [strongSelf changeMode:modeStr isInGame:false];
                 };
                 cell.accountBlanceBlock = ^{
                     strongSelf(strongSelf);

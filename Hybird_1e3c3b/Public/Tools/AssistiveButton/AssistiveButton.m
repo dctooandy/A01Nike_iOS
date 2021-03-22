@@ -2,7 +2,7 @@
 //  AssistiveButton.m
 //  Hybird_A01
 //
-//  Created by JerryHU on 2020/10/28.
+//  Created by Jairo on 10/28/20.
 //  Copyright © 2020 BTT. All rights reserved.
 //
 
@@ -17,7 +17,7 @@
 -(instancetype)initMainBtnWithBackgroundImage:(UIImage *)backgroundImage highlightImage:(UIImage *)highlightImage position:(CGPoint)position {
     self = [super init];
     if (self) {
-        UIImage * closeImage = [UIImage imageNamed:@"ic_assistive_close_btn"];
+        UIImage * closeImage = [UIImage imageNamed:@"ic_918_assistive_close_btn"];
         self.mainFrame = CGRectMake(position.x, position.y, backgroundImage.size.width, backgroundImage.size.height+closeImage.size.height);
         self.superViewRelativePosition = position;
         

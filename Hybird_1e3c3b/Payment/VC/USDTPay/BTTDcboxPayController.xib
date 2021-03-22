@@ -17,6 +17,7 @@
                 <outlet property="choseMoneyView" destination="4sh-c0-YrS" id="p8B-Xv-hgR"/>
                 <outlet property="commitBtn" destination="20U-8l-3d9" id="3Ev-Jn-YZU"/>
                 <outlet property="dcboxDownload" destination="THm-Jm-q0J" id="k4k-UE-Vhb"/>
+                <outlet property="dcboxDownloadTopLayout" destination="KEk-Lh-Dwk" id="MEY-hP-4S4"/>
                 <outlet property="infoView" destination="rkU-g3-58M" id="LdN-0w-HQp"/>
                 <outlet property="moneyTextField" destination="08B-XG-dg3" id="CwA-3Z-rdx"/>
                 <outlet property="onekeyBtnTwo" destination="yih-T1-CWP" id="iu2-PF-rZz"/>
@@ -163,7 +164,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="提交">
-                                <color key="titleColor" systemColor="darkTextColor"/>
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
                                 <action selector="nextBtn_click:" destination="-1" eventType="touchUpInside" id="KFj-XH-GCP"/>
@@ -211,16 +212,16 @@
                         <constraint firstItem="uYR-SV-x9x" firstAttribute="leading" secondItem="rkU-g3-58M" secondAttribute="leading" constant="16" id="ztT-t5-MOX"/>
                     </constraints>
                 </view>
-                <imageView hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bfb_banner" translatesAutoresizingMaskIntoConstraints="NO" id="sgn-9m-rV4">
-                    <rect key="frame" x="74.5" y="542" width="265" height="87"/>
+                <imageView hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bfb_banner" translatesAutoresizingMaskIntoConstraints="NO" id="sgn-9m-rV4">
+                    <rect key="frame" x="16" y="542" width="382" height="87"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="bGt-2n-jAF"/>
                         <constraint firstAttribute="height" constant="87" id="oAA-Na-AOu"/>
                     </constraints>
                 </imageView>
-                <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7rK-8X-peL">
-                    <rect key="frame" x="0.0" y="680" width="414" height="600"/>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rK-8X-peL">
+                    <rect key="frame" x="0.0" y="44" width="414" height="600"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFS-oe-pQX">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -343,7 +344,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="存款完成">
-                                <color key="titleColor" systemColor="darkTextColor"/>
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
                                 <action selector="saveFinishBtn_clikc:" destination="-1" eventType="touchUpInside" id="Y87-Z0-YNc"/>
@@ -359,7 +360,7 @@
                                 <action selector="onekeyBuyUsdt:" destination="-1" eventType="touchUpInside" id="g82-FH-IJY"/>
                             </connections>
                         </button>
-                        <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dcbox_download" translatesAutoresizingMaskIntoConstraints="NO" id="THm-Jm-q0J">
+                        <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dcbox_download" translatesAutoresizingMaskIntoConstraints="NO" id="THm-Jm-q0J">
                             <rect key="frame" x="16" y="467" width="382" height="87"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -404,8 +405,9 @@
                 <constraint firstItem="7rK-8X-peL" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="2HE-cg-XXQ"/>
                 <constraint firstItem="7rK-8X-peL" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="2WE-UG-XZk"/>
                 <constraint firstItem="rkU-g3-58M" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="3KP-2T-7ez"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="sgn-9m-rV4" secondAttribute="trailing" constant="16" id="Ab0-gv-dto"/>
                 <constraint firstItem="rkU-g3-58M" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="BNa-au-56K"/>
-                <constraint firstItem="sgn-9m-rV4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="D15-iY-Iut"/>
+                <constraint firstItem="sgn-9m-rV4" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="16" id="EJR-JA-E1p"/>
                 <constraint firstAttribute="trailing" secondItem="7rK-8X-peL" secondAttribute="trailing" id="O6U-tz-KsN"/>
                 <constraint firstItem="sgn-9m-rV4" firstAttribute="top" secondItem="rkU-g3-58M" secondAttribute="bottom" constant="12" id="VXf-QA-TBw"/>
             </constraints>
@@ -416,12 +418,6 @@
         <image name="bfb_banner" width="265" height="93"/>
         <image name="bfb_save_note" width="324" height="18"/>
         <image name="dcbox_download" width="256" height="58.5"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

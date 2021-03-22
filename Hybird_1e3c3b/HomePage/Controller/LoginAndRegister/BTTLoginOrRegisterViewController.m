@@ -182,9 +182,20 @@
     
     weakSelf(weakSelf);
     BTTLoginInfoView *loginInfoView = [[BTTLoginInfoView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 345)];
+    __weak typeof(loginInfoView) weaklginView = loginInfoView;
     loginInfoView.hidden = YES;
     loginInfoView.sendSmdCode = ^(NSString * _Nonnull phone) {
-        [weakSelf loadMobileVerifyCodeWithPhone:phone use:2];
+        [weakSelf loadMobileVerifyCodeWithPhone:phone use:2 completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
+                [weaklginView.pwdTextField setEnabled:true];
+                self.messageId = result.body[@"messageId"];
+            }else{
+                [weaklginView.pwdTextField setEnabled:false];
+                [MBProgressHUD showError:result.head.errMsg toView:nil];
+            }
+        }];
     };
     loginInfoView.tapLogin = ^(NSString * _Nonnull account, NSString * _Nonnull password, BOOL isSmsCode, NSString *codeStr) {
         [weakSelf loginWithAccount:account pwd:password isSmsCode:isSmsCode codeStr:codeStr];
@@ -194,7 +205,7 @@
         BTTForgetPasswordController *vc = [[BTTForgetPasswordController alloc] init];
         [strongSelf.navigationController pushViewController:vc animated:YES];
     };
-    __weak typeof(loginInfoView) weaklginView = loginInfoView;
+    
     loginInfoView.tapRegister = ^{
         strongSelf(strongSelf);
         weaklginView.hidden = YES;
@@ -212,6 +223,7 @@
     self.loginView = loginInfoView;
     
     BTTVideoFastRegisterView *fastRegisterView = [[BTTVideoFastRegisterView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 285)];
+    __weak typeof(fastRegisterView) weakFastRegisterView = fastRegisterView;
     fastRegisterView.hidden = YES;
     fastRegisterView.tapRegister = ^(NSString * _Nonnull account, NSString * _Nonnull code) {
         [weakSelf verifySmsCodeCorrectWithAccount:account code:code];
@@ -220,7 +232,17 @@
         [weakSelf onekeyRegisteAccount];
     };
     fastRegisterView.sendSmdCode = ^(NSString * _Nonnull phone) {
-        [weakSelf loadMobileVerifyCodeWithPhone:phone use:1];
+        [weakSelf loadMobileVerifyCodeWithPhone:phone use:1 completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
+                [weakFastRegisterView.imgCodeField setEnabled:true];
+                self.messageId = result.body[@"messageId"];
+            }else{
+                [weakFastRegisterView.imgCodeField setEnabled:false];
+                [MBProgressHUD showError:result.head.errMsg toView:nil];
+            }
+        }];
     };
 
     [self.view addSubview:fastRegisterView];

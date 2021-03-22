@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)queryBiShangStatus;
 
--(void)changeMode:(NSString *)modeStr;
+-(void)changeMode:(NSString *)modeStr isInGame:(BOOL)isInGame;
 
 -(void)loadGetPopWithDraw;
 
