@@ -8,6 +8,7 @@
 
 #import "BTTMeInfoCell.h"
 #import "BTTMeMainModel.h"
+#import "UIImage+GIF.h"
 
 @interface BTTMeInfoCell ()
 
@@ -16,6 +17,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *statusIcon;
+
+@property (weak, nonatomic) IBOutlet UIImageView *hotImg;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstants;
 
@@ -32,10 +35,17 @@
     [self setSelectedBackgroundView:backgroundView];
 }
 
+-(void)setIsShowHot:(BOOL)isShowHot {
+    _isShowHot = isShowHot;
+}
+
 - (void)setModel:(BTTMeMainModel *)model {
     _model = model;
     self.iconImg.image = ImageNamed(model.iconName);
     self.nameLabel.text = model.name;
+    self.hotImg.hidden = YES;
+    self.statusIcon.hidden = YES;
+    
     if ([model.name isEqualToString:@"银行卡资料"] ||
         [model.name isEqualToString:@"绑定手机"] ||
         [model.name isEqualToString:@"个人资料"] ||
@@ -62,14 +72,17 @@
             self.rightConstants.constant = 10;
         }
         else {
-            if ([IVNetwork savedUserInfo].bankCardNum!=0||[IVNetwork savedUserInfo].usdtNum>0||[IVNetwork savedUserInfo].bfbNum>0) {
+            if ([IVNetwork savedUserInfo].bankCardNum!=0||[IVNetwork savedUserInfo].usdtNum>0||[IVNetwork savedUserInfo].bfbNum>0||[IVNetwork savedUserInfo].dcboxNum>0) {
                self.statusIcon.image = ImageNamed(@"me_phone_status_yes");
            } else {
                self.statusIcon.image = ImageNamed(@"me_phone_status_no");
            }
         }
-    } else {
-        self.statusIcon.hidden = YES;
+    } else if ([model.name isEqualToString:@"我的优惠"]) {
+        self.hotImg.hidden = !_isShowHot;
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"hot" ofType:@"gif"];
+        NSData *data = [NSData dataWithContentsOfFile:path];
+        self.hotImg.image = [UIImage sd_animatedGIFWithData:data];
     }
 }
 

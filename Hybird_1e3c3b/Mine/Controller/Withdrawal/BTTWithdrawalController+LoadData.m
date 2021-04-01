@@ -112,8 +112,8 @@
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            self.dcboxLimit = result.body[@"DCBox"];
-            self.usdtLimit = result.body[@"USDT"];
+            self.dcboxLimit = result.body[@"DCBox"] != nil ? result.body[@"DCBox"]:@"15";
+            self.usdtLimit = result.body[@"USDT"] != nil ? result.body[@"USDT"]:@"15";
             [self loadMainData];
         }
     }];

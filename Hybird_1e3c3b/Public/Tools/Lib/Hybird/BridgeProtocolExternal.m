@@ -177,7 +177,7 @@
     AppDelegate *app = (AppDelegate *)[UIApplication sharedApplication].delegate;
     BTTTabbarController *tabVC = (BTTTabbarController *)app.window.rootViewController;
     if ([url containsString:@"customer/member_center.htm"]) {//会员中心
-        tabVC.selectedIndex = 4;
+        tabVC.selectedIndex = BTTMine;
         [self.controller.navigationController popToRootViewControllerAnimated:YES];
     }
     else if ([url containsString:@"customer/personal_info.htm"]){//完善个人资料
@@ -194,11 +194,11 @@
     }
     else if ([url containsString:@"promotions/promotion_list.htm"] ||
              [url containsString:@"common/promotion_list.htm"]){//优惠
-        tabVC.selectedIndex = 3;
+        tabVC.selectedIndex = BTTPromo;
         [self.controller.navigationController popToRootViewControllerAnimated:YES];
     }
     else if ([url containsString:@"common/index.htm"]){//首页
-        tabVC.selectedIndex = 0;
+        tabVC.selectedIndex = BTTHome;
         [self.controller.navigationController popToRootViewControllerAnimated:YES];
     }
     else if ([url containsString:@"common/login.htm"] && ![IVNetwork savedUserInfo]){//登录
@@ -210,6 +210,9 @@
     else if([url containsString:@"common/ximaOther.htm"]) {
         BTTXimaController *xima = [BTTXimaController new];
         [self.controller.navigationController pushViewController:xima animated:YES];
+    }
+    else if ([url containsString:@"common/kefu.htm"]) {//客服
+        [[CLive800Manager sharedInstance] startLive800Chat:self.controller];
     }
     else if ([url containsString:@"common/agqj.htm"]) {
         if ([IVNetwork savedUserInfo]) {
@@ -232,7 +235,7 @@
             dispatch_after(dipatchTime, dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"changeModeNotification" object:nil];
             });
-            tabVC.selectedIndex = 4;
+            tabVC.selectedIndex = BTTMine;
             [self.controller.navigationController popToRootViewControllerAnimated:YES];
         } else {
             [MBProgressHUD showError:@"请先登录" toView:nil];

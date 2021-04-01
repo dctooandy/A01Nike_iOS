@@ -76,7 +76,7 @@
 }
 
 -(void)setUpNoticeView {
-    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && self.showNotice) {
+    if (self.showNotice) {
         UILabel * lab = [[UILabel alloc] init];
         lab.text = @"老板请您先绑定钱包再提款哦";
         lab.textColor = [UIColor colorWithHexString:@"fab765"];
@@ -276,18 +276,17 @@
             for (int i =0 ; i<array.count; i++) {
                 NSDictionary *json = array[i];
                 BTTBankModel *model = [BTTBankModel yy_modelWithDictionary:json];
-                if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-                    if (![model.accountType isEqualToString:@"信用卡"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"存折"]) {
+                if (![model.accountType isEqualToString:@"Bitbase"]) {
+                    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+                        if (![model.accountType isEqualToString:@"信用卡"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"存折"]) {
+                            [bankList addObject:model];
+                        }
+                    }else{
                         [bankList addObject:model];
                     }
-                }else{
-                    [bankList addObject:model];
-                }
-                
-                if (i==bankList.count-1) {
-                    self.bankList = bankList;
                 }
             }
+            self.bankList = bankList;
             for (BTTBankModel *model in self.bankList) {
                 if (model.flag == 9) {
                     self.isChecking = YES;
@@ -316,6 +315,7 @@
 }
 - (void)addBTC
 {
+    [[NSUserDefaults standardUserDefaults]setBool:self.showNotice forKey:@"pressWithdrawAddUSDTCard"];
     if ([IVNetwork savedUserInfo].mobileNoBind==1) {
         BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
         vc.verifyType = BTTSafeVerifyTypeMobileAddBTCard;
@@ -331,6 +331,7 @@
 
 - (void)addUSDT
 {
+    [[NSUserDefaults standardUserDefaults]setBool:self.showNotice forKey:@"pressWithdrawAddUSDTCard"];
     if ([IVNetwork savedUserInfo].mobileNoBind==1) {
         BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
         vc.verifyType = BTTSafeVerifyTypeMobileAddUSDTCard;
@@ -345,6 +346,7 @@
 
 - (void)addDCBOX
 {
+    [[NSUserDefaults standardUserDefaults]setBool:self.showNotice forKey:@"pressWithdrawAddUSDTCard"];
     if ([IVNetwork savedUserInfo].mobileNoBind==1) {
         [[NSUserDefaults standardUserDefaults]setInteger:5 forKey:@"BITOLLBACK"];
         BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];

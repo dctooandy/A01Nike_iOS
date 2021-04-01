@@ -93,7 +93,7 @@
     if (!isShowShareNotice) {
         [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShareNoticeTag];
         [[NSUserDefaults standardUserDefaults] synchronize];
-//        [self showShareNoticeView];
+        //        [self showShareNoticeView];
     }
 }
 
@@ -102,7 +102,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     if ([IVNetwork savedUserInfo]) {
         //usdt取款優惠彈窗
-//        [self loadGetPopWithDraw];
+        //        [self loadGetPopWithDraw];
         [self loadUserInfo];
         [self loadBankList];
         if (!self.isLoading) {
@@ -257,7 +257,7 @@
                 cell.saveMoneyShowType = self.saveMoneyShowType;
                 cell.dataSource = self.bigDataSoure;
                 weakSelf(weakSelf);
-
+                
                 cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
                     BTTMeMainModel *model = value;
@@ -340,9 +340,9 @@
                 return cell;
             } else {
                 BTTMeMoreSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
-
+                
                 cell.dataSource = self.normalDataSoure.count ? self.normalDataSoure : self.normalDataTwo;
-
+                
                 weakSelf(weakSelf);
                 cell.clickEventBlock = ^(id _Nonnull value) {
                     strongSelf(strongSelf);
@@ -372,6 +372,7 @@
         } else {
             model = self.mainDataTwo[indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4];
         }
+        cell.isShowHot = self.isShowHot;
         cell.model = model;
         return cell;
     }
@@ -424,7 +425,7 @@
     } else if (indexPath.row == self.elementsHight.count - 2) {
         // 网络监测
         IVCNetworkStatusView *statusView = [[IVCNetworkStatusView alloc] initWithFrame:self.view.frame];
-
+        
         IVCheckNetworkModel *gatewayModel = [[IVCheckNetworkModel alloc] init];
         gatewayModel.title = @"当前业务线路";
         gatewayModel.urls = [IVHttpManager shareManager].gateways;
@@ -433,19 +434,19 @@
         domainModel.title = @"当前手机站";
         domainModel.urls = [IVHttpManager shareManager].domains;
         domainModel.type = IVKCheckNetworkTypeDomain;
-
+        
         statusView.datas = @[gatewayModel, domainModel];
-
+        
         statusView.detailBtnClickedBlock = ^{
             IVCDetailViewController *vc = [[IVCDetailViewController alloc] initWithThemeColor:[UIColor blueColor]];
             [self presentViewController:vc animated:YES completion:^{
                 [vc start];
             }];
         };
-
+        
         [self.view addSubview:statusView];
         [statusView startCheck];
-
+        
         return;
     }
     if (![IVNetwork savedUserInfo]) {
@@ -470,7 +471,7 @@
                 if (isBlackNineteen && usdtCount == 0 && dcboxCount == 0 && btcCount == 0) {
                     [MBProgressHUD showMessagNoActivity:@"请先绑定小金库，USDT钱包或BTC钱包" toView:nil];
                     BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
-                    vc.showNotice = false;
+                    vc.showNotice = isUSDTAcc;
                     [self.navigationController pushViewController:vc animated:YES];
                     return;
                 }
@@ -486,7 +487,7 @@
                 NSString * str = isUSDTAcc ? @"请先绑定钱包":@"请先绑定银行卡";
                 [MBProgressHUD showMessagNoActivity:str toView:nil];
                 BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
-                vc.showNotice = true;
+                vc.showNotice = isUSDTAcc;
                 [self.navigationController pushViewController:vc animated:YES];
             }
             
@@ -538,81 +539,86 @@
     }
     
     if (indexPath.row == self.elementsHight.count - 1) {
-            // 设置
-            BTTSettingsController *vc = [[BTTSettingsController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-            weakSelf(weakSelf);
-            vc.refreshBlock = ^{
-                strongSelf(strongSelf);
-                [IVNetwork cleanUserInfo];
-                [IVHttpManager shareManager].loginName = @"";
-                [IVHttpManager shareManager].userToken = @"";
-                [strongSelf.navigationController popToRootViewControllerAnimated:NO];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
-                [BTTUserStatusManager logoutSuccess];
-                strongSelf.saveMoneyCount = 0;
-                [strongSelf loadPaymentDefaultData];
-                strongSelf.totalAmount = @"-";
-                [MBProgressHUD showSuccess:@"退出成功" toView:nil];
-            };
-        } else if (indexPath.row == self.elementsHight.count - 4) {
-            //站內信
-            BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-            vc.webConfigModel.newView = YES;
-            vc.webConfigModel.url = @"customer/letter.htm";
-            vc.webConfigModel.theme = @"inside";
-            [self.navigationController pushViewController:vc animated:YES];
-        } else if (indexPath.row == self.elementsHight.count - 5) {
-            //額度轉帳
-            BTTPTTransferController *vc = [[BTTPTTransferController alloc] init];
-            vc.balanceModel = self.balanceModel;
-            [self.navigationController pushViewController:vc animated:YES];
-        } else if (indexPath.row == self.elementsHight.count - 6) {
-            //帳號安全
-            BTTAccountSafeController *vc = [[BTTAccountSafeController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        } else if (indexPath.row == self.elementsHight.count - 7) {
-            //客戶報表
-            BTTCustomerReportController * vc = [[BTTCustomerReportController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-        
-        if (indexPath.row == self.elementsHight.count - 8 && !isUSDTAcc) {
-            //我的優惠
-            NSMutableArray *names = @[@"首存优惠"].mutableCopy;
-            if (self.isFanLi) {
-                NSInteger index = [names indexOfObject:@"首存优惠"];
-                [names insertObject:@"1%存款返利" atIndex:index + 1];
-            }
-            if (self.isOpenAccount) {
-                NSInteger index = [names indexOfObject:@"首存优惠"];
-                [names insertObject:@"开户礼金" atIndex:index + 1];
-            }
-            BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"我的优惠" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:names actionSheetBlock:^(NSInteger buttonIndex) {
-                NSLog(@"选择了%@", @(buttonIndex));
-                if (buttonIndex == names.count) {
-                } else {
-                    BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-                    vc.webConfigModel.theme = @"outside";
-                    vc.webConfigModel.newView = YES;
-                    //            vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"lucky_pot.htm"];
-                    NSString *title = names[buttonIndex];
-                    vc.title = title;
-                    if ([title isEqualToString:@"1%存款返利"]) {
-                        vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"activity_pages/deposit_rebate"];
-                    } else if ([title isEqualToString:@"开户礼金"]) {
-                        vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"activity_pages/promo_open_account"];
-                    } else if ([title isEqualToString:@"首存优惠"]) {
-                        vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"first_deposit"];
-                    }
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-            }];
-            [actionSheet show];
-        }
+        // 设置
+        BTTSettingsController *vc = [[BTTSettingsController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        weakSelf(weakSelf);
+        vc.refreshBlock = ^{
+            strongSelf(strongSelf);
+            [IVNetwork cleanUserInfo];
+            [IVHttpManager shareManager].loginName = @"";
+            [IVHttpManager shareManager].userToken = @"";
+            [strongSelf.navigationController popToRootViewControllerAnimated:NO];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
+            [BTTUserStatusManager logoutSuccess];
+            strongSelf.saveMoneyCount = 0;
+            [strongSelf loadPaymentDefaultData];
+            strongSelf.totalAmount = @"-";
+            [MBProgressHUD showSuccess:@"退出成功" toView:nil];
+        };
+    } else if (indexPath.row == self.elementsHight.count - 4) {
+        //站內信
+        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+        vc.webConfigModel.newView = YES;
+        vc.webConfigModel.url = @"customer/letter.htm";
+        vc.webConfigModel.theme = @"inside";
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == self.elementsHight.count - 5) {
+        //額度轉帳
+        BTTPTTransferController *vc = [[BTTPTTransferController alloc] init];
+        vc.balanceModel = self.balanceModel;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == self.elementsHight.count - 6) {
+        //帳號安全
+        BTTAccountSafeController *vc = [[BTTAccountSafeController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == self.elementsHight.count - 7) {
+        //客戶報表
+        BTTCustomerReportController * vc = [[BTTCustomerReportController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (indexPath.row == self.elementsHight.count - 8) {
+        //我的優惠
+        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+        vc.webConfigModel.theme = @"outside";
+        vc.webConfigModel.newView = YES;
+        vc.title = @"我的优惠";
+        vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"my_coupon"];
+        [self.navigationController pushViewController:vc animated:YES];
+        //        NSMutableArray *names = @[@"首存优惠"].mutableCopy;
+        //        if (self.isFanLi) {
+        //            NSInteger index = [names indexOfObject:@"首存优惠"];
+        //            [names insertObject:@"1%存款返利" atIndex:index + 1];
+        //        }
+        //        if (self.isOpenAccount) {
+        //            NSInteger index = [names indexOfObject:@"首存优惠"];
+        //            [names insertObject:@"开户礼金" atIndex:index + 1];
+        //        }
+        //        BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"我的优惠" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:names actionSheetBlock:^(NSInteger buttonIndex) {
+        //            NSLog(@"选择了%@", @(buttonIndex));
+        //            if (buttonIndex == names.count) {
+        //            } else {
+        //                BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+        //                vc.webConfigModel.theme = @"outside";
+        //                vc.webConfigModel.newView = YES;
+        //                vc.title = @"我的优惠";
+        //            vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"lucky_pot.htm"];
+        //                NSString *title = names[buttonIndex];
+        //                vc.title = title;
+        //                if ([title isEqualToString:@"1%存款返利"]) {
+        //                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"activity_pages/deposit_rebate"];
+        //                } else if ([title isEqualToString:@"开户礼金"]) {
+        //                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"activity_pages/promo_open_account"];
+        //                } else if ([title isEqualToString:@"首存优惠"]) {
+        //                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"first_deposit"];
+        //                }
+        //                [self.navigationController pushViewController:vc animated:YES];
+        //            }
+        //        }];
+        //        [actionSheet show];
+    }
 }
 
 - (void)requestTakeMoneyTimes{
@@ -654,7 +660,7 @@
 
 - (UICollectionViewLayout *)collectionViewController:(BTTCollectionViewController *)collectionViewController layoutForCollectionView:(UICollectionView *)collectionView {
     BTTCollectionViewFlowlayout *elementsFlowLayout = [[BTTCollectionViewFlowlayout alloc] initWithDelegate:self];
-
+    
     return elementsFlowLayout;
 }
 

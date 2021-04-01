@@ -47,8 +47,8 @@
     self.usdtAmount = @"";
     self.password = @"";
     self.totalAvailable = @"-";
-    self.dcboxLimit = @"";
-    self.usdtLimit = @"";
+    self.dcboxLimit = @"15";
+    self.usdtLimit = @"15";
     [self setupCollectionView];
     [self setUpNav];
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
@@ -415,21 +415,23 @@
             for (int i =0 ; i<array.count; i++) {
                 NSDictionary *json = array[i];
                 BTTBankModel *model = [BTTBankModel yy_modelWithDictionary:json];
-                if (isBlackNineteen) {
-                    if (![model.accountType isEqualToString:@"存折"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"信用卡"]) {
-                        if ([model.accountType isEqualToString:@"DCBOX"]) {
+                if (![model.accountType isEqualToString:@"Bitbase"]) {
+                    if (isBlackNineteen) {
+                        if (![model.accountType isEqualToString:@"存折"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"信用卡"]) {
+                            if ([model.accountType isEqualToString:@"DCBOX"]) {
+                                [bankList insertObject:model atIndex:0];
+                                isHaveBitoll = YES;
+                            }else{
+                                [bankList addObject:model];
+                            }
+                        }
+                    }else{
+                        if ([model.bankName isEqualToString:@"DCBOX"]) {
                             [bankList insertObject:model atIndex:0];
                             isHaveBitoll = YES;
-                        }else{
+                        }else if(![model.bankName isEqualToString:@"BITOLL"]){
                             [bankList addObject:model];
                         }
-                    }
-                }else{
-                    if ([model.bankName isEqualToString:@"DCBOX"]) {
-                        [bankList insertObject:model atIndex:0];
-                        isHaveBitoll = YES;
-                    }else if(![model.bankName isEqualToString:@"BITOLL"]){
-                        [bankList addObject:model];
                     }
                 }
                 if (i==array.count-1) {
@@ -439,16 +441,16 @@
                         bModel.bankName = @"DCBOX";
                         [bankList insertObject:bModel atIndex:0];
                     }
-                    self.bankList = bankList;
-                    [self loadMainData];
-                    [self setupElements];
-                    self.selectedProtocol = self.bankList.firstObject.protocol;
                 }
             }
-            
+            self.bankList = bankList;
+            [self loadMainData];
+            [self setupElements];
+            self.selectedProtocol = self.bankList.firstObject.protocol;
         }
     }
 }
+
 - (void)submitWithDraw
 {
     

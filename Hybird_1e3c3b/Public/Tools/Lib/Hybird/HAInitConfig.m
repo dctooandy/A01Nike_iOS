@@ -93,7 +93,7 @@
 }
 
 + (NSString *)product3SId {
-    return @"1e3c3b";
+    return @"A01";
 }
 
 + (NSString *)productCodeExt {

@@ -317,6 +317,7 @@
         if (_isCode) {
             _isCode = NO;
             _pwdTextField.text = @"";
+            [_pwdTextField setEnabled:true];
             NSAttributedString *attrStringPwd = [[NSAttributedString alloc] initWithString:@"密码" attributes:
                                                  @{ NSForegroundColorAttributeName: [UIColor whiteColor],
                                                     NSFontAttributeName: _pwdTextField.font }];

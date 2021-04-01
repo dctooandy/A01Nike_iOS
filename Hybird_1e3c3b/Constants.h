@@ -272,12 +272,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTCacheBankListKey                        @"BTTCacheBankListKey"
 #define BTTCacheBTCRateKey                         @"BTTCacheBTCRateKey"
 
-/*********************************************API********************************************************/
+/*********************************************平台API********************************************************/
 
-//app语音未登录回拨
-#define BTTVoiceCall                               @"_extra_/api/v1/app/public/appCall"
-//app语音登录回拨
-#define BTTVoiceCallLogin                          @"_extra_/api/v1/app/public/appCallByLogin"
 // 登录注册
 #define BTTUserLoginAPI                            @"customer/login"
 // 模糊登录
@@ -298,8 +294,6 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTUserRegister                            @"customer/createRealAccount"
 // 手機创建账号
 #define BTTMobileUserRegister                      @"customer/createAccountByMobileNo"
-// 验证账号信息
-#define BTTCheckAccountInfo                        @"_extra_/api/v1/ws/check-account-info"
 // 验证短信验证码
 #define BTTVerifySmsCode                           @"phone/verifySmsCode"
 // 发送短信验证码
@@ -335,7 +329,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 // 查询会员修改银行卡
 #define BTTModifyBankRequests                      @"customer/checkPhoneAndBankCard"
 // zi账户
-#define BTTSwitchAccount                      @"customer/switchAccount"
+#define BTTSwitchAccount                           @"customer/switchAccount"
 // 删除银行卡
 #define BTTDeleteBankAccount                       @"account/delete"
 // 获取USDT钱包下钱包
@@ -344,18 +338,6 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTSetDefaultCard                          @"account/setDefaultBankCard"
 /// 查询存款方式
 #define kPaymentValidate                           @"deposit/queryPayWaysV3"
-// 首页聚合
-#define BTTHomePageNewAPI                          @"_extra_/api/v1/app/indexCombo"
-// 首页banner
-#define BTTIndexBannerDownloads                    @"_extra_/api/v1/app/banners?v=1.1"
-//#define BTTIndexBannerDownloads                    @"_extra_/api/v1/app/banners"
-// 首页form
-#define BTTBrandHighlights                         @"_extra_/api/v1/wms/form"
-// 首页公告
-#define BTTHomeAnnouncementAPI                     @"_extra_/api/v1/other/announcement/common"
-// 优惠列表
-#define BTTPromotionList                           @"_extra_/api/v1/wms/promotions?v=1.1"
-//#define BTTPromotionList                           @"_extra_/api/v1/wms/promotions"
 // 获取用户额度信息全厅
 #define BTTCreditsALL                              @"customer/getBalance"
 // 金额转账本地接口
@@ -372,19 +354,6 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTSubscriptionModify                      @"subscribe/modify"
 // 开户礼金和存款礼金即可欧 ---NO
 #define BTTOpenAccountStatus                       @"/A01/openAccount/isOpen"
-// 请求游戏列表
-#define BTTVideoGamesList                          @"_extra_/api/v1/wms/game?v=1.1"
-//#define BTTVideoGamesList                          @"_extra_/api/v1/wms/game"
-// 获取收藏列表
-#define BTTFavotiteList                            @"_extra_/api/v1/wms/gameFavorList"
-// 添加收藏
-#define BTTAddFavotites                            @"_extra_/api/v1/wms/gameFavor"
-// 查询每日存款次数
-#define BTTQueryTakeMoneyTimes                     @"_extra_/api/v1/getWithDrawByDay"
-// 搏币数量查询
-#define BTTQueryIntegralAPI                        @"_extra_/api/v1/activity/luckyWheel/myLeftPrize"
-// 搏币兑换
-#define BTTCoinDepositAPI                          @"_extra_/api/v1/activity/luckyWheel/depositPrize"
 // 请求未读消息的数量
 #define BTTIsUnviewedAPI                           @"letter/countUnread"
 // 人工存款信息错误重新提交---NO
@@ -395,10 +364,6 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTCreditAppealAPI                         @"/A01/payment/createCreditAppeal"
 // 迅捷, 在线催款催单接口---NO
 #define BTTAreditAppealAPI                         @"/A01/payment/createAreditAppeal"
-// 客户存款次数的接口
-#define BTTSaveMoneyTimesAPI                       @"_extra_/api/v1/app/deposit/getIsDepositAmount"
-// 查询可分享链接
-#define BTTGetWeiXinRediect                        @"_extra_/api/v1/app/public/getWeiXinRedirect"
 // 查询存款金额列表
 #define BTTQueryAmountList                         @"deposit/queryAmountList"
 // 查询洗码额度v2
@@ -406,8 +371,6 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define QUERYGames                                 @"game/queryGames"
 // 查询洗码提案列表
 #define BTTXimaQueryRequest                        @"xm/queryRequest"
-// 查询洗码历史记录
-#define BTTXiMaHistoryListUrl                      @"_extra_/api/v1/getBetAmountByDay"
 // 查询BQ存款银行
 #define BTTQueryBQBankList                         @"deposit/queryBQBanks"
 // 查询USDT汇率
@@ -415,13 +378,13 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 // USDT手工支付存款
 #define BTTManualPay                               @"deposit/createManualDepositRequest"
 // 在线支付
-#define BTTCreateOnlineOrder                        @"deposit/createOnlineOrder"
+#define BTTCreateOnlineOrder                       @"deposit/createOnlineOrder"
 // 查询在线支付银行列表
 #define BTTQueryOnlineBanks                        @"deposit/queryOnlineBanks"
 // 创建在线支付订单
 #define BTTCreateOnlineOrder                       @"deposit/createOnlineOrder"
 // 创建在线支付订单
-#define BTTCreateOnlineOrderV2                      @"deposit/createOnlineOrderV2"
+#define BTTCreateOnlineOrderV2                     @"deposit/createOnlineOrderV2"
 // 查询人工存款账号
 #define BTTQueryManualAccount                      @"deposit/queryManualDepositAccount"
 // 邮箱发送验证码
@@ -446,43 +409,32 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTBQPayment                               @"deposit/BQPayment"
 //
 #define BTTXiMaRequest                             @"xm/createRequest"
-//查询是否开启币商充值
-#define BTTQueryBiShangOpen                        @"_extra_/api/v1/agent/getBMerchantStatus"
-//查询是否开启迅捷存款和开户礼金
-#define BTTGiftRebateStatus                        @"_extra_/api/v1/app/promo/giftRebateStatus"
-//查询是否开启迅捷存款和开户礼金
-#define BTTOneKeySellUSDT                        @"_extra_/api/v1/getOTCStatus"
-#define DSBHasBouns                        @"_extra_/api/v1/activity/newLuckyWheel/hasBonus"
-#define DSBDrawBouns                        @"_extra_/api/v1/activity/newLuckyWheel/drawBonus"
-
 //点卡存款
 #define BTTPointCardPayment                        @"deposit/pointCardPayment"
 //查询点卡
 #define BTTQueryPointCardList                      @"deposit/queryPointCardList"
 //查询点卡
-#define BTTCreateBfbAccount                      @"account/createGoldAccount"
+#define BTTCreateBfbAccount                        @"account/createGoldAccount"
 //查询USDT钱包类型
 #define BTTQueryUSDTWallet                         @"account/queryWalletType"
 //查询USDT钱包类型
-#define BTTQueryCounterQRCode                        @"deposit/queryDepositCounterQRCode"
+#define BTTQueryCounterQRCode                      @"deposit/queryDepositCounterQRCode"
 //查询USDT钱包类型
 #define BTTQueryCounterList                        @"deposit/queryDepositCounterExchangeInfo"
 //充值购买USDT链接
-#define BTTBuyUSDTLINK                         @"deposit/queryDepositCounter"
+#define BTTBuyUSDTLINK                             @"deposit/queryDepositCounter"
 //
-#define BTTQueryLoginedShow                        @"_extra_/api/v1/activity/checkHasPop"
-#define BTTUnreadInsideMessage                      @"letter/query"
-#define BTTReadInsideMessage                      @"letter/batchViewLetter"
-#define BTTOneKeyRegister                      @"customer/createAccountAuto"
-
+#define BTTUnreadInsideMessage                     @"letter/query"
+//
+#define BTTReadInsideMessage                       @"letter/batchViewLetter"
+//
+#define BTTOneKeyRegister                          @"customer/createAccountAuto"
+//
 #define BTTIsBindStatusAPI                         @"/public/verify/isNewBind"
+//
 #define BTTGamePlatforms                           @"/A01/game/platforms"
-
-#define BTTDynamicQuery                         @"dynamic/query"
-
-//USDT取款限額
-#define BTTUsdtLimit                               @"_extra_/api/v1/getLimitUSDT"
-
+//
+#define BTTDynamicQuery                            @"dynamic/query"
 //客户报表 - 存款
 #define BTTCustomerReportDeposit                   @"deposit/queryTrans"
 //客户报表 - 存款 - 删除记录
@@ -509,18 +461,69 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTDeleteXmRecord                          @"xm/deleteRequest"
 //客户报表 - 銀行卡更改
 #define BTTCustomerReportBank                      @"account/queryModifyBankRequests"
+
+/*********************************************產品API********************************************************/
+
+//USDT取款限額
+#define BTTUsdtLimit                               @"_extra_/api/v1/getLimitUSDT"
+//app语音未登录回拨
+#define BTTVoiceCall                               @"_extra_/api/v1/app/public/appCall"
+//app语音登录回拨
+#define BTTVoiceCallLogin                          @"_extra_/api/v1/app/public/appCallByLogin"
+// 验证账号信息
+#define BTTCheckAccountInfo                        @"_extra_/api/v1/ws/check-account-info"
+// 首页聚合
+#define BTTHomePageNewAPI                          @"_extra_/api/v1/app/indexCombo"
+// 首页banner
+#define BTTIndexBannerDownloads                    @"_extra_/api/v1/app/banners?v=1.1"
+// 首页form
+#define BTTBrandHighlights                         @"_extra_/api/v1/wms/form"
+// 首页公告
+#define BTTHomeAnnouncementAPI                     @"_extra_/api/v1/other/announcement/common"
+// 优惠列表
+#define BTTPromotionList                           @"_extra_/api/v1/wms/promotions?v=1.1"
+// 请求游戏列表
+#define BTTVideoGamesList                          @"_extra_/api/v1/wms/game?v=1.1"
+// 获取收藏列表
+#define BTTFavotiteList                            @"_extra_/api/v1/wms/gameFavorList"
+// 添加收藏
+#define BTTAddFavotites                            @"_extra_/api/v1/wms/gameFavor"
+// 查询每日存款次数
+#define BTTQueryTakeMoneyTimes                     @"_extra_/api/v1/getWithDrawByDay"
+// 搏币数量查询
+#define BTTQueryIntegralAPI                        @"_extra_/api/v1/activity/luckyWheel/myLeftPrize"
+// 搏币兑换
+#define BTTCoinDepositAPI                          @"_extra_/api/v1/activity/luckyWheel/depositPrize"
+// 客户存款次数的接口
+#define BTTSaveMoneyTimesAPI                       @"_extra_/api/v1/app/deposit/getIsDepositAmount"
+// 查询可分享链接
+#define BTTGetWeiXinRediect                        @"_extra_/api/v1/app/public/getWeiXinRedirect"
+// 查询洗码历史记录
+#define BTTXiMaHistoryListUrl                      @"_extra_/api/v1/getBetAmountByDay"
+//查询是否开启币商充值
+#define BTTQueryBiShangOpen                        @"_extra_/api/v1/agent/getBMerchantStatus"
+//查询是否开启迅捷存款和开户礼金
+#define BTTGiftRebateStatus                        @"_extra_/api/v1/app/promo/giftRebateStatus"
+//查询是否开启迅捷存款和开户礼金
+#define BTTOneKeySellUSDT                          @"_extra_/api/v1/getOTCStatus"
+//
+#define DSBHasBouns                                @"_extra_/api/v1/activity/newLuckyWheel/hasBonus"
+//
+#define DSBDrawBouns                               @"_extra_/api/v1/activity/newLuckyWheel/drawBonus"
+//
+#define BTTQueryLoginedShow                        @"_extra_/api/v1/activity/checkHasPop"
 //優惠活動 - 筆筆存
 #define BBTBiBiCunAlert                            @"_extra_/api/v1/activity/usdtFree2/alert"
 //取款優惠彈窗
-#define BTTGetPopWithDraw                            @"_extra_/api/v1/getPopWithDraw"
+#define BTTGetPopWithDraw                          @"_extra_/api/v1/getPopWithDraw"
 //是否顯示BiteBase
 #define BTTIsShowBiteBase                          @"_extra_/api/v1/isShowBiteBase"
-
 //2021月分紅是否是老用戶
 #define BTTIsOldMember                             @"_extra_/api/v1/activity/monthly-activity2021/isVip"
-
 //918贏牌-好運紅包及來
 #define BTTFirtWinningList                         @"_extra_/api/v1/activity/winner/first-winning-list"
+//vip優惠券自動派發
+#define BTTVipHasPromo                             @"_extra_/api/v1/activity/vip-promo/has-promos"
 
 /********************************************常用宏*********************************************************/
 

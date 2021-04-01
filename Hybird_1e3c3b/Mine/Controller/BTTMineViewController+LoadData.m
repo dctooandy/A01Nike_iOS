@@ -22,6 +22,7 @@
 @implementation BTTMineViewController (LoadData)
 
 - (void)loadMeAllData {
+    [self loadIsHavePromo];
     [self loadMainDataOne];
     [self loadMainDataTwo];
     [self loadMainDataThree];
@@ -39,6 +40,17 @@
         [self.normalDataTwo removeAllObjects];
     }
     [self setupElements];
+}
+
+-(void)loadIsHavePromo {
+    [IVNetwork requestPostWithUrl:BTTVipHasPromo paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSInteger promoCount = [result.body[@"count"] integerValue];
+            self.isShowHot = promoCount > 0;
+            [self.collectionView reloadData];
+        }
+    }];
 }
 
 - (void)requestBuyUsdtLink{
@@ -429,14 +441,14 @@
     }
     NSArray *names = [NSArray new];
     NSArray *icons = [NSArray new];
-    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-        names = @[@"客户报表",@"账号安全",@"额度转账",@"站内信",@"版本更新",@"网站检测",@"设置"];
-        icons = @[@"me_sheet",@"me_amountsafe",@"me_transfer",@"me_message",@"me_version",@"me_speed",@"me_setting"];
-        
-    }else{
+//    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+//        names = @[@"客户报表",@"账号安全",@"额度转账",@"站内信",@"版本更新",@"网站检测",@"设置"];
+//        icons = @[@"me_sheet",@"me_amountsafe",@"me_transfer",@"me_message",@"me_version",@"me_speed",@"me_setting"];
+//
+//    }else{
         names = @[@"我的优惠",@"客户报表",@"账号安全",@"额度转账",@"站内信",@"版本更新",@"网站检测",@"设置"];
         icons = @[@"me_preferential",@"me_sheet",@"me_amountsafe",@"me_transfer",@"me_message",@"me_version",@"me_speed",@"me_setting"];
-    }
+//    }
     
     
     for (NSString *name in names) {

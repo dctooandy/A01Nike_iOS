@@ -104,36 +104,36 @@
 }
 
 #pragma mark ---------------------获取WMS自定义表单配置--------------------------------------------
-- (void)getWMSForm
-{
-    [IVPublicAPIManager getAPPConfigFormWithCallBack:^(IVPAppDynamicFormModel * _Nonnull result, IVJResponseObject * _Nonnull response) {
-        if (result) {
-            //手机站逻辑
-            if (result.domains) {
-                [IVHttpManager shareManager].domains = result.domains;
-                //获取最优的手机站域名
-                [IVCheckNetworkWrapper getOptimizeUrlWithArray:result.domains isAuto:YES type:IVKCheckNetworkTypeDomain progress:nil completion:nil];
-            }
-            //cdn逻辑
-            if (result.cdn) {
-                [IVHttpManager shareManager].cdn = result.cdn;
-            }
-            //游戏站逻辑
-            if (result.gcHosts) {
-                //获取最优的游戏站域名
-                [IVCheckNetworkWrapper getOptimizeUrlWithArray:result.gcHosts isAuto:YES type:IVKCheckNetworkTypeGameDomian progress:nil completion:nil];
-            }
-        }
-    }];
-
-}
+//- (void)getWMSForm
+//{
+//    [IVPublicAPIManager getAPPConfigFormWithCallBack:^(IVPAppDynamicFormModel * _Nonnull result, IVJResponseObject * _Nonnull response) {
+//        if (result) {
+//            //手机站逻辑
+//            if (result.domains) {
+//                [IVHttpManager shareManager].domains = result.domains;
+//                //获取最优的手机站域名
+//                [IVCheckNetworkWrapper getOptimizeUrlWithArray:result.domains isAuto:YES type:IVKCheckNetworkTypeDomain progress:nil completion:nil];
+//            }
+//            //cdn逻辑
+//            if (result.cdn) {
+//                [IVHttpManager shareManager].cdn = result.cdn;
+//            }
+//            //游戏站逻辑
+//            if (result.gcHosts) {
+//                //获取最优的游戏站域名
+//                [IVCheckNetworkWrapper getOptimizeUrlWithArray:result.gcHosts isAuto:YES type:IVKCheckNetworkTypeGameDomian progress:nil completion:nil];
+//            }
+//        }
+//    }];
+//
+//}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [self setupAPPEnvironment];
     [self checkArearLimit];
     [self unzipLocationH5Package];
-    [self getWMSForm];
+//    [self getWMSForm];
     [self setupTabbarController];
     [self.window makeKeyAndVisible];
     [self setDynamicQuery];

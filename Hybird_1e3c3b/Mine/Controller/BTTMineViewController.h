@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isLoading;  ///< 余额计算中
 
+@property (nonatomic, assign) BOOL isShowHot;  ///< 我的優惠的 hot icon
+
 @property (nonatomic, assign) BTTMeSaveMoneyShowType saveMoneyShowType;
 
 @property (nonatomic, assign) NSInteger saveMoneyCount;

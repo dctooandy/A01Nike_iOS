@@ -229,7 +229,7 @@
                             [weakSelf.navigationController pushViewController:vc animated:YES];
                         } else {
                             [self.navigationController popToRootViewControllerAnimated:true];
-                            [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:@{@"showAlert":[NSNumber numberWithBool:true]}];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:@{@"showAlert":[NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults]boolForKey:@"pressWithdrawAddUSDTCard"]]}];
                         }
                     }];
                 }

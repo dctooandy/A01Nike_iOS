@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BTTMeInfoCell : BTTBaseCollectionViewCell
 
 @property (nonatomic, strong) BTTMeMainModel *model;
-
+@property (nonatomic, assign) BOOL isShowHot;
 @end
 
 NS_ASSUME_NONNULL_END

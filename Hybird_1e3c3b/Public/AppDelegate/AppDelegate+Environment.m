@@ -65,33 +65,37 @@
         [IVHttpManager shareManager].userToken = userToken;
     }
 
-    // 所有手机站,先从缓存取，缓存没有使用默认配置
-    [IVHttpManager shareManager].domains = [IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey] ? : @[[HAInitConfig defaultH5Domain]];
-    // 手机站,先从缓存取，缓存没有使用默认配置
-    [IVHttpManager shareManager].domain = [IVCacheWrapper objectForKey:IVCacheH5DomainKey] ? : [HAInitConfig defaultH5Domain];
-     //cdn,先从缓存取，缓存没有使用默认配置
-    [IVHttpManager shareManager].cdn = [IVCacheWrapper objectForKey:IVCacheCDNKey] ? : [HAInitConfig defaultCDN];
+//    // 所有手机站,先从缓存取，缓存没有使用默认配置
+//    [IVHttpManager shareManager].domains = [IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey] ? : @[[HAInitConfig defaultH5Domain]];
+//    // 手机站,先从缓存取，缓存没有使用默认配置
+//    [IVHttpManager shareManager].domain = [IVCacheWrapper objectForKey:IVCacheH5DomainKey] ? : [HAInitConfig defaultH5Domain];
+//     //cdn,先从缓存取，缓存没有使用默认配置
+//    [IVHttpManager shareManager].cdn = [IVCacheWrapper objectForKey:IVCacheCDNKey] ? : [HAInitConfig defaultCDN];
+    
+    [IVHttpManager shareManager].domains = @[[HAInitConfig defaultH5Domain]];
+    [IVHttpManager shareManager].domain = [HAInitConfig defaultH5Domain];
+    [IVHttpManager shareManager].cdn = [HAInitConfig defaultCDN];
     [IN3SAnalytics debugEnable:YES];
     [IN3SAnalytics setUserName:[IVHttpManager shareManager].loginName];
     [[CNTimeLog shareInstance] configProduct:[HAInitConfig product3SId]];
     
     [self setupRedDot];
     [self setupLive800];
-    
-    //获取最优的网关
-    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways
-                                            isAuto:YES
-                                              type:IVKCheckNetworkTypeGateway
-                                          progress:nil
-                                        completion:nil
-     ];
-    //获取最优的手机站
-    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].domains
-                                            isAuto:YES
-                                              type:IVKCheckNetworkTypeDomain
-                                          progress:nil
-                                        completion:nil
-     ];
+    [IVCheckNetworkWrapper initSDK];
+//    //获取最优的网关
+//    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways
+//                                            isAuto:YES
+//                                              type:IVKCheckNetworkTypeGateway
+//                                          progress:nil
+//                                        completion:nil
+//     ];
+//    //获取最优的手机站
+//    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].domains
+//                                            isAuto:YES
+//                                              type:IVKCheckNetworkTypeDomain
+//                                          progress:nil
+//                                        completion:nil
+//     ];
     
     [IVPublicAPIManager checkAppUpdateWithH5Version:1 callBack:^(IVPCheckUpdateModel * _Nonnull result, IVJResponseObject * _Nonnull response) {
         NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];

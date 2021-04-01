@@ -127,7 +127,7 @@
         //AG国际预加载
         [BTTAGGJViewController addGameViewToWindow];
 //        [[IVGameManager sharedManager] reloadCacheGame];
-        [IN3SAnalytics launchFinished];
+        [[CNTimeLog shareInstance] endRecordTime:CNEventAppLaunch];
     }
 }
 
@@ -953,7 +953,7 @@
     switch (tag) {
         case 1000://AG旗舰
             vc = [BTTAGQJViewController new];
-            [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+//            [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
             break;
         case 1001://AG国际
             vc = [BTTAGGJViewController new];
