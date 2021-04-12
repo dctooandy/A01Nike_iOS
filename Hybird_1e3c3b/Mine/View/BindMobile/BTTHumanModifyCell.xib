@@ -17,8 +17,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="原绑定手机号无法使用或收不到验证码？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dK2-r3-xPB">
-                        <rect key="frame" x="15" y="0.0" width="257.5" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="原绑定手机号无法使用或收不到验证码？" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dK2-r3-xPB">
+                        <rect key="frame" x="15" y="0.0" width="345" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -40,12 +40,14 @@
             </view>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="dK2-r3-xPB" secondAttribute="trailing" constant="15" id="MbC-2n-WUC"/>
                 <constraint firstAttribute="trailing" secondItem="c69-Hc-56K" secondAttribute="trailing" constant="15" id="ZWp-td-XAx"/>
                 <constraint firstItem="dK2-r3-xPB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hDY-rg-aqD"/>
                 <constraint firstItem="dK2-r3-xPB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="ikC-T6-ff6"/>
                 <constraint firstItem="c69-Hc-56K" firstAttribute="top" secondItem="dK2-r3-xPB" secondAttribute="bottom" constant="5" id="xhn-w0-uT9"/>
             </constraints>
             <connections>
+                <outlet property="contentLab" destination="dK2-r3-xPB" id="lXc-lL-T91"/>
                 <outlet property="modifyBtn" destination="c69-Hc-56K" id="ndO-XT-GtG"/>
             </connections>
             <point key="canvasLocation" x="138.40579710144928" y="144.64285714285714"/>

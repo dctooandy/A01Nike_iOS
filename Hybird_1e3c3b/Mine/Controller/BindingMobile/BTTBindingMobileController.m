@@ -38,12 +38,15 @@
     [super viewDidLoad];
     switch (self.mobileCodeType) {
         case BTTSafeVerifyTypeBindMobile:
+        case BTTSafeVerifyTypeWithdrawPwdBindMobile:
         case BTTSafeVerifyTypeMobileBindAddBankCard:
         case BTTSafeVerifyTypeMobileBindChangeBankCard:
         case BTTSafeVerifyTypeMobileBindDelBankCard:
         case BTTSafeVerifyTypeMobileBindAddBTCard:
         case BTTSafeVerifyTypeMobileBindDelBTCard:
+        case BTTSafeVerifyTypeMobileBindAddUSDTCard:
         case BTTSafeVerifyTypeMobileBindDelUSDTCard:
+        case BTTSafeVerifyTypeMobileBindAddDCBOXCard:
             self.title = @"绑定手机";
             break;
         case BTTSafeVerifyTypeChangeMobile:
@@ -404,7 +407,6 @@
                 [MBProgressHUD showSuccess:successStr toView:nil];
             }
             switch (self.mobileCodeType) {
-                case BTTSafeVerifyTypeBindMobile:
                 case BTTSafeVerifyTypeChangeMobile:
                 case BTTSafeVerifyTypeMobileBindDelUSDTCard:
                 case BTTSafeVerifyTypeMobileBindDelBTCard:
@@ -417,6 +419,34 @@
                     [weakSelf.navigationController pushViewController:vc animated:YES];
                 }
                     break;
+                case BTTSafeVerifyTypeBindMobile:
+                {
+                    if (self.isWithdrawIn) {
+                        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                        [BTTHttpManager fetchUserInfoCompleteBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoTakeMoneyNotification" object:nil];
+                        }];
+                    } else {
+                        NSString *phone = [self getPhoneTF].text;
+                        BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+                        vc.mobileCodeType = self.mobileCodeType;
+                        vc.phoneNumber = phone;
+                        [weakSelf.navigationController pushViewController:vc animated:YES];
+                    }
+                    break;
+                }
+                case BTTSafeVerifyTypeWithdrawPwdBindMobile:
+                
+                {
+                    [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                    [BTTHttpManager fetchUserInfoCompleteBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                        [self.navigationController popViewControllerAnimated:true];
+                    }];
+                    
+                    break;
+                }
                 case BTTSafeVerifyTypeVerifyMobile:{
                     BTTBindingMobileController *vc = [BTTBindingMobileController new];
                     vc.mobileCodeType = BTTSafeVerifyTypeChangeMobile;
@@ -425,7 +455,16 @@
                     break;
                 case BTTSafeVerifyTypeMobileBindAddBankCard:
                 case BTTSafeVerifyTypeMobileBindChangeBankCard:
-                    [weakSelf goToBack];
+                case BTTSafeVerifyTypeMobileBindAddUSDTCard:
+                case BTTSafeVerifyTypeMobileBindAddDCBOXCard:
+                case BTTSafeVerifyTypeMobileBindAddBTCard:
+                {
+                    [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                    [BTTHttpManager fetchUserInfoCompleteBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                        [weakSelf goToBack];
+                    }];
+                }
                     break;
                 case BTTSafeVerifyTypeMobileAddBankCard:{
                     BTTAddCardController *vc = [BTTAddCardController new];
@@ -460,28 +499,6 @@
                 }
                     break;
                 case BTTSafeVerifyTypeMobileAddDCBOXCard:{
-                    BTTAddBitollCardController *vc = [BTTAddBitollCardController new];
-                    vc.messageId = messageId;
-                    vc.validateId = validateId;
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-                case BTTSafeVerifyTypeMobileBindAddBTCard:{
-                    BTTAddBTCController *vc = [BTTAddBTCController new];
-                    vc.addCardType = BTTSafeVerifyTypeMobileBindAddBTCard;
-                    vc.messageId = messageId;
-                    vc.validateId = validateId;
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-                case BTTSafeVerifyTypeMobileBindAddUSDTCard:{
-                    BTTAddUSDTController *vc = [BTTAddUSDTController new];
-                    vc.messageId = messageId;
-                    vc.validateId = validateId;
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                    break;
-                case BTTSafeVerifyTypeMobileBindAddDCBOXCard:{
                     BTTAddBitollCardController *vc = [BTTAddBitollCardController new];
                     vc.messageId = messageId;
                     vc.validateId = validateId;
@@ -620,7 +637,7 @@
 
 - (void)deleteBankOrBTC:(BOOL)isBackToCardInfo
 {
-    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    [self showLoading];
     weakSelf(weakSelf)
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
@@ -634,10 +651,10 @@
     }
     
     [IVNetwork requestPostWithUrl:BTTDeleteBankAccount paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [BTTHttpManager fetchBankListWithUseCache:NO completion:^(id  _Nullable response, NSError * _Nullable error) {
+                [self hideLoading];
                 if (isBackToCardInfo) {
                     [self.navigationController popToRootViewControllerAnimated:true];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:@{@"showToast":[NSNumber numberWithBool:true]}];
@@ -648,6 +665,7 @@
                 }
             }];
         }else{
+            [self hideLoading];
             NSString *message = [NSString isBlankString:result.head.errMsg] ? @"删除失败，请重试!" : result.head.errMsg;
             [MBProgressHUD showError:message toView:nil];
             [weakSelf goToBack];

@@ -67,6 +67,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSArray * uiModeOptions;
 @property (nonatomic, copy) NSString * version;
 @property (nonatomic, copy) NSString *xmTransferCurrency;
+@property (nonatomic, assign) NSInteger unbondPhoneCount;
+@property (nonatomic, assign) NSInteger withdralPwdFlag;
 @end
 
 NS_ASSUME_NONNULL_END

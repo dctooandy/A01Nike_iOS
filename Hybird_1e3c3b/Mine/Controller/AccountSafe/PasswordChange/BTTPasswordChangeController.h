@@ -7,10 +7,34 @@
 //
 
 #import "BTTCollectionViewController.h"
+#import "BTTBindingMobileTwoCell.h"
+#import "IVRsaEncryptWrapper.h"
+#import "BTTBindingMobileBtnCell.h"
+#import "BTTPasswordChangeBtnsCell.h"
+#import "BTTBankModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTPasswordChangeController : BTTCollectionViewController
+@property (nonatomic, assign) BTTChangePasswordType selectedType;
+@property (nonatomic, assign) BTTSafeVerifyType mobileCodeType;
+@property (nonatomic, copy) NSString *messageId;
+@property (nonatomic, copy) NSString *validateId;
+@property (nonatomic, assign) BOOL isVerifySuccess;
+@property (nonatomic, assign) BOOL isGoToMinePage;
+@property (nonatomic, strong) BTTBankModel *bankModel;
+
+-(UITextField *)getPhoneTF;
+-(UITextField *)getCodeTF;
+-(BTTBindingMobileTwoCell *)getVerifyCell;
+-(UIButton *)getSubmitBtn;
+-(void)changeSheetDatas:(NSInteger)tag;
+-(BTTBindingMobileBtnCell *)getSubmitBtnCell;
+-(BTTPasswordChangeBtnsCell *)getPwdChangeBtnCell;
+-(BOOL)isWithdrawPwd;
+-(NSString *)getLoginPwd;
+-(NSString *)getNewPwd;
+-(BOOL)haveWithdrawPwd;
 
 @end
 

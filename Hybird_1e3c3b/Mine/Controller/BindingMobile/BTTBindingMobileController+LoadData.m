@@ -35,7 +35,8 @@
         case BTTSafeVerifyTypeMobileBindAddUSDTCard:
         case BTTSafeVerifyTypeMobileBindAddDCBOXCard:
         case BTTSafeVerifyTypeMobileBindDelUSDTCard:
-        case BTTSafeVerifyTypeBindMobile:{
+        case BTTSafeVerifyTypeBindMobile:
+        case BTTSafeVerifyTypeWithdrawPwdBindMobile:{
             phoneTitle = @"手机号码";
             if ([IVNetwork savedUserInfo].mobileNo.length != 0&&[IVNetwork savedUserInfo].mobileNoBind==0) {
                 phone = [IVNetwork savedUserInfo].mobileNo;

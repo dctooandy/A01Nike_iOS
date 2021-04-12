@@ -27,6 +27,10 @@
 #import "BTTBitollWithDrawCell.h"
 #import "BTTCardInfosController.h"
 #import "HAInitConfig.h"
+#import "IVRsaEncryptWrapper.h"
+#import "BTTPasswordChangeController.h"
+#import "BTTActionSheet.h"
+#import "CLive800Manager.h"
 
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate>
 @property(nonatomic, copy)NSString *amount;
@@ -51,17 +55,17 @@
     self.usdtLimit = @"15";
     [self setupCollectionView];
     [self setUpNav];
-    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-        [self getLimitUSDT];
-    } else {
-        [self loadMainData];
-    }
     [self refreshBankList];
     [self requestSellUsdtSwitch];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+        [self getLimitUSDT];
+    } else {
+        [self loadMainData];
+    }
     [self loadCreditsTotalAvailable];
 }
 
@@ -196,7 +200,7 @@
         cell.textField.textColor = [UIColor colorWithHexString:@"2497FF"];
     } else if ([cellName isEqualToString:@"已经达成的投注额"]) {
         cell.textField.textColor = [UIColor colorWithHexString:@"2497FF"];
-    } else if ([cellName isEqualToString:@"登录密码"]) {
+    } else if ([cellName isEqualToString:@"资金密码"]) {
         cell.textField.secureTextEntry = YES;
         cell.textField.keyboardType = UIKeyboardTypeDefault;
         cell.textField.text = self.password;
@@ -221,6 +225,13 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    BTTMeMainModel * model = self.sheetDatas[indexPath.row];
+    if ([model.iconName isEqualToString:@"没有资金密码？点击设置资金密码"]) {
+        BTTPasswordChangeController *vc = [[BTTPasswordChangeController alloc] init];
+        vc.selectedType = BTTChangeWithdrawPwd;
+        vc.isGoToMinePage = false;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     if (indexPath.row != self.sheetDatas.count) {
         if (indexPath.row==self.sheetDatas.count-1&&![self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]) {
 //            [self submitWithDraw];
@@ -286,6 +297,11 @@
 {
     if (textField.tag == 8001) {
         self.password = textField.text;
+        if ([PublicMethod isValidateWithdrawPwdNumber:self.password]) {
+            [self getSubmitBtn].enabled = true;
+        } else {
+            [self getSubmitBtn].enabled = false;
+        }
     } else if (textField.tag == 8002) {
         self.amount = textField.text;
         if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]) {
@@ -309,10 +325,10 @@
         usdtLimitNum = [self.dcboxLimit integerValue];
     }
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-        BOOL enable = amount >= usdtLimitNum && amount <= 1430000;
+        BOOL enable = amount >= usdtLimitNum && amount <= 1430000 && [PublicMethod isValidateWithdrawPwdNumber:self.password];
         [self getSubmitBtn].enabled = enable;
     }else{
-        BOOL enable = amount >= cnyLimitNum && amount <= 10000000;
+        BOOL enable = amount >= cnyLimitNum && amount <= 10000000 && [PublicMethod isValidateWithdrawPwdNumber:self.password];
         [self getSubmitBtn].enabled = enable;
     }
     
@@ -481,7 +497,10 @@
         [MBProgressHUD showError:[NSString stringWithFormat:@"您有%ld个未处理的取款提案",(long)self.canWithdraw] toView:nil];
         return;
     }
-    
+    if (![PublicMethod isValidateWithdrawPwdNumber:self.password]) {
+        [MBProgressHUD showError:@"输入的资金密码格式有误！" toView:nil];
+        return;
+    }
     
     if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]) {
         [self showLoading];
@@ -545,6 +564,7 @@
     if ([model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"]) {
         params[@"protocol"] = @"ERC20";
     }
+    params[@"password"] = [IVRsaEncryptWrapper encryptorString:self.password];
     BOOL isUSDTSell = [model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"]||[model.bankName isEqualToString:@"USDT"];
     weakSelf(weakSelf)
     [IVNetwork requestPostWithUrl:BTTWithDrawCreate paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
@@ -560,6 +580,25 @@
             vc.sellLink = self.sellUsdtLink;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         }else{
+            if ([result.head.errCode isEqualToString:@"GW_601596"]) {
+                IVActionHandler confirm = ^(UIAlertAction *action){
+                    
+                };
+                IVActionHandler kf = ^(UIAlertAction *action){
+                    BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+                        if (buttonIndex == 0) {
+                            [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+                        }else if (buttonIndex == 1){
+                            [[CLive800Manager sharedInstance] startLive800Chat:self];
+                        }
+                    }];
+                    [actionSheet show];
+                };
+                NSString *title = @"温馨提示";
+                NSString *message = @"资金密码错输入误，请重新输入或联系客服!";
+                [IVUtility showAlertWithActionTitles:@[@"确认", @"联系客服"] handlers:@[confirm, kf] title:title message:message];
+                return;
+            }
             [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
     }];

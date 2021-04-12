@@ -57,6 +57,8 @@
     NSLog(@"%zd", indexPath.item);
     if (indexPath.row == 0) {
         BTTPasswordChangeController *vc = [[BTTPasswordChangeController alloc] init];
+        vc.selectedType = BTTChangeLoginPwd;
+        vc.isGoToMinePage = true;
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 1) {
         UIViewController *vc = nil;
@@ -130,7 +132,7 @@
 - (NSMutableArray *)sheetDatas {
     if (!_sheetDatas) {
         _sheetDatas = [NSMutableArray array];
-        NSArray *titles = @[@"修改密码",@"绑定手机",@"绑定邮箱"];
+        NSArray *titles = @[@"设置/修改密码",@"绑定手机",@"绑定邮箱"];
         NSArray *placeholders = @[@"",@"",@""];
         for (NSString *title in titles) {
             NSInteger index = [titles indexOfObject:title];

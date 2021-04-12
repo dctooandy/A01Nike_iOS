@@ -458,7 +458,15 @@
     if (indexPath.row == self.saveMoneyCount + 3) {
         //取款
         if (self.isCompletePersonalInfo) {
-            if ([IVNetwork savedUserInfo].bankCardNum > 0
+            
+            if ([IVNetwork savedUserInfo].mobileNoBind != 1) {
+                BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
+                vc.mobileCodeType = BTTSafeVerifyTypeBindMobile;
+                vc.showNotice = isUSDTAcc;
+                vc.isWithdrawIn = true;
+                [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else if ([IVNetwork savedUserInfo].bankCardNum > 0
                 || [IVNetwork savedUserInfo].usdtNum > 0
                 || [IVNetwork savedUserInfo].bfbNum > 0
                 || [IVNetwork savedUserInfo].dcboxNum > 0) {
@@ -478,11 +486,6 @@
                 BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
                 
-            } else if ([IVNetwork savedUserInfo].mobileNoBind != 1 && isUSDTAcc) {
-                BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-                vc.mobileCodeType = BTTSafeVerifyTypeBindMobile;
-                vc.showNotice = true;
-                [self.navigationController pushViewController:vc animated:YES];
             } else {
                 NSString * str = isUSDTAcc ? @"请先绑定钱包":@"请先绑定银行卡";
                 [MBProgressHUD showMessagNoActivity:str toView:nil];

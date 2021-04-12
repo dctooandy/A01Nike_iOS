@@ -21,10 +21,13 @@
 #import "BTTKSAddBfbWalletController.h"
 #import "BTTWithdrawalController.h"
 #import "HAInitConfig.h"
+#import "BTTCardInfosController.h"
+#import "BTTPasswordCell.h"
 
 @interface BTTAddUSDTController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, copy) NSString *walletString;
 @property (nonatomic, copy) NSString *confirmString;
+@property (nonatomic, copy) NSString *withdrawPwdString;
 @property (nonatomic, assign) NSInteger selectedType;
 @property (nonatomic, copy) NSString *selectedProtocol;
 @property (nonatomic, assign) BOOL isWithDraw;
@@ -38,6 +41,7 @@
     self.title = @"添加USDT钱包";
     _walletString = @"";
     _confirmString = @"";
+    _withdrawPwdString = @"";
     _selectedType = 0;
     [self setupCollectionView];
     [self loadUSDTData];
@@ -53,6 +57,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPublicBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPublicBtnCell"];
     [self.collectionView registerClass:[BTTAddUsdtHeaderCell class] forCellWithReuseIdentifier:@"BTTAddUsdtHeaderCell"];
     [self.collectionView registerClass:[BTTOneKeyRegisterBitollCell class] forCellWithReuseIdentifier:@"BTTOneKeyRegisterBitollCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPasswordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPasswordCell"];
 }
 
 #pragma mark - collectionview delegate
@@ -125,13 +130,16 @@
             cell.textField.text = weakSelf.walletString;
         }
         return cell;
-    } else if (indexPath.row == 4) {
-        BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
-        cell.btnType = BTTPublicBtnTypeSave;
-        cell.btn.enabled = YES;
-        [cell.btn addTarget:self action:@selector(submitButton_Click:) forControlEvents:UIControlEventTouchUpInside];
+    } else if (indexPath.row == 5) {
+        BTTPasswordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPasswordCell" forIndexPath:indexPath];
+        BTTMeMainModel *model = [BTTMeMainModel new];
+        model.name = @"资金密码";
+        model.iconName = @"6位数数字组合";
+        [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+        cell.model = model;
+        cell.textField.textAlignment = NSTextAlignmentLeft;
         return cell;
-    }else if (indexPath.row==5){
+    } else if (indexPath.row == 6){
         BTTPublicBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPublicBtnCell" forIndexPath:indexPath];
         cell.btnType = BTTPublicBtnTypeSave;
         cell.btn.enabled = YES;
@@ -158,6 +166,10 @@
         return cell;
         
     }
+}
+
+-(void)textChanged:(UITextField *)textField {
+    self.withdrawPwdString = textField.text;
 }
 
 - (void)submitButton_Click:(id)sender{
@@ -192,10 +204,13 @@
         [MBProgressHUD showError:@"OMNI协议钱包，请以1或3开头" toView:self.view];
     }else if ([self.selectedProtocol isEqualToString:@"ERC20"]&&![firstTwochar isEqualToString:@"0x"]&&![model.code isEqualToString:@"bitoll"]){
         [MBProgressHUD showError:@"ERC20协议钱包，请以0x开头" toView:self.view];
+    }else if (![PublicMethod isValidateWithdrawPwdNumber:self.withdrawPwdString]) {
+        [MBProgressHUD showError:@"输入的资金密码格式有误" toView:self.view];
     }else{
         [self showLoading];
         NSMutableDictionary *params = @{}.mutableCopy;
         params[@"accountNo"] = _walletString;
+        params[@"password"] = [IVRsaEncryptWrapper encryptorString:self.withdrawPwdString];
         params[@"accountType"] = [model.code isEqualToString:@"bitoll"]? @"BITOLL" : @"USDT";
         params[@"bankName"] = model.code;
         params[@"expire"] = @0;
@@ -235,9 +250,28 @@
                 }
                 
             }else{
+                if ([result.head.errCode isEqualToString:@"GW_601596"]) {
+                    IVActionHandler confirm = ^(UIAlertAction *action){
+                        [self goToBack];
+                    };
+                    NSString *title = @"温馨提示";
+                    NSString *message = [NSString stringWithFormat:@"密码错误，请重新添加%@钱包资料", model.name];
+                    [IVUtility showAlertWithActionTitles:@[@"确认"] handlers:@[confirm] title:title message:message];
+                    return;
+                }
                 [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
             }
         }];
+    }
+}
+
+- (void)goToBack
+{
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[BTTCardInfosController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
     }
 }
 
@@ -282,19 +316,15 @@
         [self.elementsHight removeAllObjects];
     }
     NSMutableArray *elementsHight = [NSMutableArray array];
-    NSInteger total = 7;
+    NSInteger total = 8;
     for (int i = 0; i < total; i++) {
         if (i == 0) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 60)]];
         } else if (i == 1) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 85)]];
-        }else if (i == 2) {
+        } else if (i == 2) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
-        } else if (i == 3) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
-        } else if (i == 4) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
-        }else if (i==5){
+        } else if (i == 6){
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
         } else {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];

@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTUnBindingHeaderCell : BTTBaseCollectionViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *iconImgView;
 
 @end
 

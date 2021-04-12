@@ -12,9 +12,11 @@
 #import "BTTChangeMobileSuccessController.h"
 #import "BTTKSAddBfbWalletController.h"
 #import "HAInitConfig.h"
+#import "BTTCardInfosController.h"
 
 @interface BTTAddBitollCardController ()
 @property (weak, nonatomic) IBOutlet UITextField *accountField;
+@property (weak, nonatomic) IBOutlet UITextField *withdrawPwdField;
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
 @property (weak, nonatomic) IBOutlet UIButton *oneKeyBtn;
 @property (weak, nonatomic) IBOutlet UIView *infoView;
@@ -48,7 +50,13 @@
                                              NSFontAttributeName: self.accountField.font }];
     self.accountField.attributedPlaceholder = attrStringAccount;
     
+    NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:@"6位数数字组合" attributes:
+                                   @{ NSForegroundColorAttributeName: COLOR_RGBA(110, 115, 125, 1),
+                                      NSFontAttributeName: self.accountField.font }];
+    self.withdrawPwdField.attributedPlaceholder = attrStr;
+    
 }
+
 - (IBAction)confirmBtn_click:(id)sender {
     [self.view endEditing:YES];
     NSInteger back = [[NSUserDefaults standardUserDefaults]integerForKey:@"BITOLLBACK"];
@@ -67,10 +75,16 @@
         firstTwochar = [_accountField.text substringWithRange:NSMakeRange(0, 2)];
     }
     
+    if (![PublicMethod isValidateWithdrawPwdNumber:self.withdrawPwdField.text]) {
+        [MBProgressHUD showError:@"输入的资金密码格式有误" toView:self.view];
+        return;
+    }
+    
     weakSelf(weakSelf)
     [self showLoading];
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"accountNo"] = _accountField.text;
+    params[@"password"] = [IVRsaEncryptWrapper encryptorString:self.withdrawPwdField.text];
     params[@"accountType"] = @"DCBOX";
     params[@"bankName"] = @"DCBOX";
     params[@"expire"] = @0;
@@ -107,11 +121,29 @@
             }
             
         }else{
+            if ([result.head.errCode isEqualToString:@"GW_601596"]) {
+                IVActionHandler confirm = ^(UIAlertAction *action){
+                    [self goToBack];
+                };
+                NSString *title = @"温馨提示";
+                NSString *message = @"密码错误，请重新添加小金库钱包资料";
+                [IVUtility showAlertWithActionTitles:@[@"确认"] handlers:@[confirm] title:title message:message];
+                return;
+            }
             [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
     }];
 }
 
+- (void)goToBack
+{
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[BTTCardInfosController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
+}
 
 - (IBAction)oneKeyBtn_click:(id)sender {
     weakSelf(weakSelf)
@@ -122,6 +154,13 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-
+- (IBAction)showClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        self.withdrawPwdField.secureTextEntry = NO;
+    } else {
+        self.withdrawPwdField.secureTextEntry = YES;
+    }
+}
 
 @end

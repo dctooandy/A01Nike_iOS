@@ -66,7 +66,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //设置界面的按钮显示 根据自己需求设置
                 self.timeOut = 60;
-                self.sendBtn.enabled = NO;
+                self.sendBtn.enabled = YES;
                 self.sendBtn.titleLabel.text = @"发送验证码";
                 [self.sendBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
             });

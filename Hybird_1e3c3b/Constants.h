@@ -34,6 +34,9 @@
 #import "IVRequestResultModel.h"
 #import "BTTHttpManager.h"
 #import "BGFMDB.h"
+#import "IVUtility.h"
+#import "IVRsaEncryptWrapper.h"
+#import "BTTActionSheet.h"
 
 typedef enum {
     BTTCanAddCardTypeNone,          // 不能添加任何卡
@@ -80,6 +83,7 @@ typedef enum {
     BTTSafeVerifyTypeHumanDelUSDTCard,
     BTTSafeVerifyTypeChangeMobile,               // 更改手机号
     BTTSafeVerifyTypeBindMobile,                 // 绑定手机号
+    BTTSafeVerifyTypeWithdrawPwdBindMobile,      // 新增資金密碼時綁定手機
     BTTSafeVerifyTypeVerifyMobile,               // 验证手机号
     BTTSafeVerifyTypeHumanChangeMoblie,          // 更改手机号人工服务
     BTTSafeVerifyTypeBindEmail,                  // 绑定邮箱
@@ -87,6 +91,11 @@ typedef enum {
     BTTSafeVerifyTypeChangeEmail,                // 更改邮箱
 }BTTSafeVerifyType; // 安全验证种类
 
+typedef enum : NSUInteger {
+    BTTChangeLoginPwd = 0,
+    BTTChangeWithdrawPwd = 1,
+    BTTChangePTPwd = 2,
+} BTTChangePasswordType;
 
 typedef enum : NSUInteger {
     BTTMeSaveMoneyShowTypeAll = 0,

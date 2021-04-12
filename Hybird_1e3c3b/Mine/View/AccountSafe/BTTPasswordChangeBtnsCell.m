@@ -10,9 +10,9 @@
 
 @interface BTTPasswordChangeBtnsCell ()
 
-@property (weak, nonatomic) IBOutlet UIButton *loginPwdBtn;
-
 @property (weak, nonatomic) IBOutlet UIImageView *loginArrowIcon;
+
+@property (weak, nonatomic) IBOutlet UIImageView *withdrawArrowIcon;
 
 @property (weak, nonatomic) IBOutlet UIImageView *PTArrowIcon;
 
@@ -23,26 +23,41 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
-    self.loginPwdBtn.selected = YES;
-    [self setupArrow];
 }
-
 
 - (IBAction)loginPwdBtnClick:(UIButton *)sender {
     sender.selected = YES;
+    self.withdrawPwdBtn.selected = NO;
     self.PTPwdBtn.selected = NO;
     [self setupArrow];
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
 }
 
+- (IBAction)withdrawPwdBtnClick:(UIButton *)sender {
+    sender.selected = YES;
+    self.loginPwdBtn.selected = NO;
+    self.PTPwdBtn.selected = NO;
+    [self setupArrow];
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
+}
 
 - (IBAction)PTPwdBtnClick:(UIButton *)sender {
     sender.selected = YES;
     self.loginPwdBtn.selected = NO;
+    self.withdrawPwdBtn.selected = NO;
     [self setupArrow];
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
 }
 
 - (void)setupArrow {
     self.loginArrowIcon.hidden = !self.loginPwdBtn.selected;
+    self.withdrawArrowIcon.hidden = !self.withdrawPwdBtn.selected;
     self.PTArrowIcon.hidden = !self.PTPwdBtn.selected;
 }
 

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString * btnTitle;
 @property (nonatomic, assign) NSInteger btnTag;
+@property (weak, nonatomic) IBOutlet UILabel *contentLab;
 
 @end
 

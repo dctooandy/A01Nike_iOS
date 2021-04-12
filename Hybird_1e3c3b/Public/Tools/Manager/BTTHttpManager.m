@@ -188,6 +188,8 @@
     params[@"verifyCode"] = @1;
     params[@"inclNickNameFlag"] = @1;
     params[@"inclXmTransferState"] = @1;
+    params[@"inclUnBondPhoneCount"] = @1;
+    params[@"inclExistsWithdralPwd"] = @1;
     [IVNetwork requestPostWithUrl:BTTGetLoginInfoByName paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
@@ -197,7 +199,9 @@
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
-
+        if (completeBlock) {
+            completeBlock(response, error);
+        }
     }];
 }
 

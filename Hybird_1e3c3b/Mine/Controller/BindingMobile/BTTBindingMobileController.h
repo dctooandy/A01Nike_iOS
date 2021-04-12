@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL showNotice;
 
+@property (nonatomic, assign) BOOL isWithdrawIn;
+
 - (void)setupElements;
 
 @end

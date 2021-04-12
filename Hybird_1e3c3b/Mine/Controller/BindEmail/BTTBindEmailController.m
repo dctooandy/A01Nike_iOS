@@ -321,8 +321,5 @@
         }
     }];
 }
-- (void)goToBack
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
+
 @end

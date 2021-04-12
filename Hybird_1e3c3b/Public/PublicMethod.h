@@ -168,7 +168,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isValidatePwd:(NSString *)originalPwd;
 //正则表达式验证银行卡是否合法
 + (BOOL)isValidateBankNumber:(NSString *)number;
-
+//正则表达式验证資金密碼是否合法
++ (BOOL)isValidateWithdrawPwdNumber:(NSString *)number;
 /** 转换货币字符串 */
 + (NSString *)getMoneyString:(double)money;
 

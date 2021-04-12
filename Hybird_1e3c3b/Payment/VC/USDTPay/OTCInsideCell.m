@@ -63,6 +63,17 @@
         make.right.equalTo(self.bgImgView).offset(-5);
         make.height.offset(self.bgImgView.frame.size.height*0.23);
     }];
+    
+    UILabel * chineseTextLab = [[UILabel alloc] init];
+    chineseTextLab.text = @"戴克斯";
+    chineseTextLab.font = [UIFont systemFontOfSize:16];
+    chineseTextLab.textColor = [UIColor colorWithRed: 0.36 green: 0.80 blue: 0.96 alpha: 1.00];
+    chineseTextLab.textAlignment = NSTextAlignmentCenter;
+    [self.bgImgView addSubview:chineseTextLab];
+    [chineseTextLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.bgImgView.mas_centerX).offset(15);
+        make.bottom.equalTo(self.bgImgView.mas_centerY).offset(5);
+    }];
 }
 
 @end

@@ -24,6 +24,7 @@
 #import "AppDelegate.h"
 #import "BTTActionSheet.h"
 #import "CLive800Manager.h"
+#import "BTTPasswordChangeController.h"
 
 @interface BTTCardInfosController ()<BTTElementsFlowLayoutDelegate>
 
@@ -43,15 +44,16 @@
     [super viewDidLoad];
     self.title = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
     _haveBFB = NO;
+    [self setUpNoticeView];
+    [self setupElements];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     _bankNum = 0;
     _bitNum = 0;
     _dcboxNum = 0;
     _usdtNum = 0;
-    [self setUpNoticeView];
-    [self setupElements];
-}
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     [self refreshBankList];
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && self.showAlert) {
         IVActionHandler home = ^(UIAlertAction *action){
@@ -185,16 +187,40 @@
     for (int i = 0; i<titleArray.count; i++) {
         NSString *title = titleArray[i];
         UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            if ([title isEqualToString:@"银行卡"]) {
-                [weakSelf addBankCard];
-            }else if ([title isEqualToString:@"比特币钱包"]){
-                [weakSelf addBTC];
-            }else if ([title isEqualToString:@"USDT钱包"]){
-                [weakSelf addUSDT];
-            }else if ([title isEqualToString:@"小金库钱包"]){
-                [weakSelf addDCBOX];
+            if ([IVNetwork savedUserInfo].mobileNoBind == 1) {
+                if ([IVNetwork savedUserInfo].withdralPwdFlag == 1) {
+                    //bindPhone = 1 withdralPwdFlag = 1
+                    if ([title isEqualToString:@"银行卡"]) {
+                        [weakSelf addBankCard];
+                    }else if ([title isEqualToString:@"比特币钱包"]){
+                        [weakSelf addBTC];
+                    }else if ([title isEqualToString:@"USDT钱包"]){
+                        [weakSelf addUSDT];
+                    }else if ([title isEqualToString:@"小金库钱包"]){
+                        [weakSelf addDCBOX];
+                    }
+                } else {
+                    //bindPhone = 1 withdralPwdFlag != 1
+                    BTTPasswordChangeController *vc = [[BTTPasswordChangeController alloc] init];
+                    vc.selectedType = BTTChangeWithdrawPwd;
+                    vc.isGoToMinePage = false;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                
+            } else {
+                //bindPhone != 1
+                BTTSafeVerifyType type = BTTSafeVerifyTypeMobileBindAddBankCard;
+                if ([title isEqualToString:@"银行卡"]) {
+                    type = BTTSafeVerifyTypeMobileBindAddBankCard;
+                }else if ([title isEqualToString:@"比特币钱包"]){
+                    type = BTTSafeVerifyTypeMobileBindAddBTCard;
+                }else if ([title isEqualToString:@"USDT钱包"]){
+                    type = BTTSafeVerifyTypeMobileBindAddUSDTCard;
+                }else if ([title isEqualToString:@"小金库钱包"]){
+                    type = BTTSafeVerifyTypeMobileBindAddDCBOXCard;
+                }
+                [self showNoBindAlert:type selectModel:nil];
             }
-            
         }];
         [action setValue:[UIColor colorWithHexString:@"212229"] forKey:@"titleTextColor"];
         [alertVC addAction:action];
@@ -299,66 +325,38 @@
     }
     
 }
+
 - (void)addBankCard
 {
-    if ([IVNetwork savedUserInfo].mobileNoBind==1) {
-        BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
-        vc.verifyType = BTTSafeVerifyTypeMobileAddBankCard;
-        [self.navigationController pushViewController:vc animated:YES];
-    } else {
-        [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
-        BTTBindingMobileController *vc = [BTTBindingMobileController new];
-        vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBankCard;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    
+    BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
+    vc.verifyType = BTTSafeVerifyTypeMobileAddBankCard;
+    [self.navigationController pushViewController:vc animated:YES];
 }
+
 - (void)addBTC
 {
     [[NSUserDefaults standardUserDefaults]setBool:self.showNotice forKey:@"pressWithdrawAddUSDTCard"];
-    if ([IVNetwork savedUserInfo].mobileNoBind==1) {
-        BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
-        vc.verifyType = BTTSafeVerifyTypeMobileAddBTCard;
-        [self.navigationController pushViewController:vc animated:YES];
-    } else {
-        
-        [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
-        BTTBindingMobileController *vc = [BTTBindingMobileController new];
-        vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddBTCard;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
+    vc.verifyType = BTTSafeVerifyTypeMobileAddBTCard;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)addUSDT
 {
     [[NSUserDefaults standardUserDefaults]setBool:self.showNotice forKey:@"pressWithdrawAddUSDTCard"];
-    if ([IVNetwork savedUserInfo].mobileNoBind==1) {
-        BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
-        vc.verifyType = BTTSafeVerifyTypeMobileAddUSDTCard;
-        [self.navigationController pushViewController:vc animated:YES];
-    } else {
-        [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
-        BTTBindingMobileController *vc = [BTTBindingMobileController new];
-        vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddUSDTCard;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
+    vc.verifyType = BTTSafeVerifyTypeMobileAddUSDTCard;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)addDCBOX
 {
     [[NSUserDefaults standardUserDefaults]setBool:self.showNotice forKey:@"pressWithdrawAddUSDTCard"];
-    if ([IVNetwork savedUserInfo].mobileNoBind==1) {
-        [[NSUserDefaults standardUserDefaults]setInteger:5 forKey:@"BITOLLBACK"];
-        BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
-        vc.verifyType = BTTSafeVerifyTypeMobileAddDCBOXCard;
-        [self.navigationController pushViewController:vc animated:YES];
-    } else {
-        [[NSUserDefaults standardUserDefaults]setInteger:4 forKey:@"BITOLLBACK"];
-        [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
-        BTTBindingMobileController *vc = [BTTBindingMobileController new];
-        vc.mobileCodeType = BTTSafeVerifyTypeMobileBindAddDCBOXCard;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    [[NSUserDefaults standardUserDefaults]setInteger:5 forKey:@"BITOLLBACK"];
+    BTTVerifyTypeSelectController *vc = [[BTTVerifyTypeSelectController alloc] init];
+    vc.verifyType = BTTSafeVerifyTypeMobileAddDCBOXCard;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)modifyBtnClickedBankModel:(BTTBankModel *)bankModel
@@ -376,6 +374,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
 - (void)deleteBtnClicked
 {
     if (self.bankList.count == 1) {

@@ -68,7 +68,19 @@
             flag++;
         }
         return YES;
-    } else {
+    }
+    else if ([self.model.name isEqualToString:@"资金密码"]) {
+        if (string.length == 0) return YES;
+        
+        NSInteger existedLength = textField.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = string.length;
+        if (existedLength - selectedLength + replaceLength > 6){
+            return NO;
+        }
+        return YES;
+    }
+    else {
         return YES;
     }
 }
@@ -84,7 +96,7 @@
         [model.name isEqualToString:@"卡片类别"] ||
         [model.name isEqualToString:@"开户省份"] ||
         [model.name isEqualToString:@"开户城市"] ||
-        [model.name isEqualToString:@"修改密码"] ||
+        [model.name isEqualToString:@"设置/修改密码"] ||
         [model.name isEqualToString:@"绑定手机"] ||
         [model.name isEqualToString:@"绑定邮箱"] ||
         [model.name isEqualToString:@"记录类型"] ||
@@ -179,6 +191,20 @@
         self.textField.userInteractionEnabled = NO;
     }
 
+    if ([model.name isEqualToString:@"资金密码"] && [model.iconName isEqualToString:@"没有资金密码？点击设置资金密码"]) {
+        NSMutableAttributedString * str = [[NSMutableAttributedString alloc]initWithString:@"没有资金密码？点击设置资金密码"];
+        NSRange range = {0,[str length]};
+        [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:range];
+        [str addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed: 0.24 green: 0.60 blue: 0.97 alpha: 1.00],NSFontAttributeName:kFontSystem(14)} range:range];
+        self.textField.attributedPlaceholder = str;
+    } else {
+        NSMutableAttributedString * str = [[NSMutableAttributedString alloc]initWithString:model.iconName];
+        NSRange range = {0,[str length]};
+        [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleNone] range:range];
+        [str addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"C0C0C0"],NSFontAttributeName:kFontSystem(14)} range:range];
+        self.textField.attributedPlaceholder = str;
+    }
+    
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

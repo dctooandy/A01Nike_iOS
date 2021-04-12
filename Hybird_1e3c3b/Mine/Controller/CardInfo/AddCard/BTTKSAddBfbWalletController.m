@@ -202,7 +202,7 @@
     }];
 }
 - (IBAction)downLoadBtn_click:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.dcbox.com/downloadapp.php"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.dcusdt.com/downloadapp.php"]];
 }
 
 /*

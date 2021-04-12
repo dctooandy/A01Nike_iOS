@@ -14,9 +14,10 @@
 #import "BTTCardInfosController.h"
 #import "BTTChangeMobileSuccessController.h"
 #import "HAInitConfig.h"
+#import "BTTPasswordCell.h"
 
 @interface BTTAddBTCController ()<BTTElementsFlowLayoutDelegate>
-
+@property (nonatomic, copy) NSString *withdrawPwdString;
 @end
 
 @implementation BTTAddBTCController
@@ -24,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"添加比特币钱包";
+    self.withdrawPwdString = @"";
     [self setupCollectionView];
     [self loadMainData];
 }
@@ -33,6 +35,7 @@
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPasswordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPasswordCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -46,6 +49,16 @@
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf saveBtnClickded:button];
         };
+        return cell;
+    } else if (indexPath.row == 2) {
+        BTTPasswordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPasswordCell" forIndexPath:indexPath];
+        BTTMeMainModel *model = [BTTMeMainModel new];
+        model.name = @"资金密码";
+        model.iconName = @"6位数数字组合";
+        cell.textField.tag = 1001;
+        [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+        cell.model = model;
+        cell.textField.textAlignment = NSTextAlignmentLeft;
         return cell;
     } else {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
@@ -65,6 +78,95 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
 
+}
+
+- (void)textChanged:(UITextField *)textField
+{
+    if (textField.tag == 1001) {
+        self.withdrawPwdString = textField.text;
+    }
+    BOOL enable = [PublicMethod checkBitcoinAddress:[self getAddressTF].text] && [PublicMethod checkBitcoinAddress:[self getSureAddressTF].text]
+    && [[self getAddressTF].text isEqualToString:[self getSureAddressTF].text] && [PublicMethod isValidateWithdrawPwdNumber:self.withdrawPwdString];
+    [self getSubmitBtn].enabled = enable;
+}
+
+- (UITextField *)getAddressTF
+{
+    return [self getCellTextFieldWithIndex:0];
+}
+
+- (UITextField *)getSureAddressTF
+{
+    return [self getCellTextFieldWithIndex:1];
+}
+
+- (UITextField *)getCellTextFieldWithIndex:(NSInteger)index
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.textField;
+}
+
+- (UIButton *)getSubmitBtn
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+    BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.btn;
+}
+
+- (void)saveBtnClickded:(UIButton *)sender
+{
+    NSString *url = BTTAddBankCard;
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"accountNo"] = [self getSureAddressTF].text;
+    params[@"password"] = [IVRsaEncryptWrapper encryptorString:self.withdrawPwdString];
+    params[@"accountType"] = @"BTC";
+    params[@"expire"] = @0;
+    params[@"messageId"] = self.messageId;
+    params[@"validateId"] = self.validateId;
+    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    
+    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [IVLAManager singleEventId:@"A01_bankcard_update" errorCode:@"" errorMsg:@"" customsData:@{}];
+
+            [BTTHttpManager fetchBankListWithUseCache:NO completion:^(id  _Nullable response, NSError * _Nullable error) {
+                if ([IVNetwork savedUserInfo].bankCardNum > 0 || [IVNetwork savedUserInfo].usdtNum > 0||[IVNetwork savedUserInfo].bfbNum>0||[IVNetwork savedUserInfo].dcboxNum>0) {
+                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
+                    vc.mobileCodeType = self.addCardType;
+                    [weakSelf.navigationController pushViewController:vc animated:YES];
+                } else {
+                    [self.navigationController popToRootViewControllerAnimated:true];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:@{@"showAlert":[NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults]boolForKey:@"pressWithdrawAddUSDTCard"]]}];
+                }
+            }];
+        }else{
+            if ([result.head.errCode isEqualToString:@"GW_601596"]) {
+                IVActionHandler confirm = ^(UIAlertAction *action){
+                    [self goToBack];
+                };
+                NSString *title = @"温馨提示";
+                NSString *message = @"密码错误，请重新添加比特币钱包资料";
+                [IVUtility showAlertWithActionTitles:@[@"确认"] handlers:@[confirm] title:title message:message];
+                return;
+            }
+            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
+        }
+    }];
+}
+
+- (void)goToBack
+{
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[BTTCardInfosController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource
@@ -118,64 +220,5 @@
         [self.collectionView reloadData];
     });
 }
-- (void)textChanged:(UITextField *)textField
-{
-    BOOL enable = [PublicMethod checkBitcoinAddress:[self getAddressTF].text] && [PublicMethod checkBitcoinAddress:[self getSureAddressTF].text]
-    && [[self getAddressTF].text isEqualToString:[self getSureAddressTF].text];
-    [self getSubmitBtn].enabled = enable;
-}
-- (UITextField *)getAddressTF
-{
-    return [self getCellTextFieldWithIndex:0];
-}
-- (UITextField *)getSureAddressTF
-{
-    return [self getCellTextFieldWithIndex:1];
-}
-- (UITextField *)getCellTextFieldWithIndex:(NSInteger)index
-{
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    return cell.textField;
-}
-- (UIButton *)getSubmitBtn
-{
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
-    BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    return cell.btn;
-}
-- (void)saveBtnClickded:(UIButton *)sender
-{
-    NSString *url = BTTAddBankCard;
-    NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"accountNo"] = [self getSureAddressTF].text;
-    params[@"accountType"] = @"BTC";
-    params[@"expire"] = @0;
-    params[@"messageId"] = self.messageId;
-    params[@"validateId"] = self.validateId;
-    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
-    
-    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    weakSelf(weakSelf)
-    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            [IVLAManager singleEventId:@"A01_bankcard_update" errorCode:@"" errorMsg:@"" customsData:@{}];
 
-            [BTTHttpManager fetchBankListWithUseCache:NO completion:^(id  _Nullable response, NSError * _Nullable error) {
-                if ([IVNetwork savedUserInfo].bankCardNum > 0 || [IVNetwork savedUserInfo].usdtNum > 0||[IVNetwork savedUserInfo].bfbNum>0||[IVNetwork savedUserInfo].dcboxNum>0) {
-                    BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
-                    vc.mobileCodeType = self.addCardType;
-                    [weakSelf.navigationController pushViewController:vc animated:YES];
-                } else {
-                    [self.navigationController popToRootViewControllerAnimated:true];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:@{@"showAlert":[NSNumber numberWithBool:[[NSUserDefaults standardUserDefaults]boolForKey:@"pressWithdrawAddUSDTCard"]]}];
-                }
-            }];
-        }else{
-            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
-        }
-    }];
-}
 @end

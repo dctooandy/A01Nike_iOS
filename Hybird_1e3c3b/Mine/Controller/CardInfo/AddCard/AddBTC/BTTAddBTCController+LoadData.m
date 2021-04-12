@@ -13,8 +13,8 @@
 
 
 - (void)loadMainData {
-    NSArray *names = @[@"钱包地址",@"确认地址"];
-    NSArray *placeholders = @[@"请输入钱包地址",@"请确认地址"];
+    NSArray *names = @[@"钱包地址",@"确认地址",@"资金密码"];
+    NSArray *placeholders = @[@"请输入钱包地址",@"请确认地址",@"6位数数字组合"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];

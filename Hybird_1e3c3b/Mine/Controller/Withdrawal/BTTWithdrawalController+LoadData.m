@@ -133,8 +133,8 @@
     NSString *rateStr = [NSString stringWithFormat:@"¥%.2lf=1BTC(实时汇率)",[btcrate doubleValue]];
     
     NSArray *names1 = @[@"",@""];
-    NSArray *names3 = @[@"金额",@"比特币",@"取款至",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
-    NSArray *names4 = @[@"金额",@"预估到账",@"取款至",@"",@"",@""];
+    NSArray *names3 = @[@"金额",@"比特币",@"取款至",@"资金密码",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
+    NSArray *names4 = @[@"金额",@"预估到账",@"取款至",@"资金密码",@"",@"",@""];
     
     NSString *pString = isUsdt ? [NSString stringWithFormat:@"单笔取款限额%@-143万USDT", self.usdtLimit] : @"最少100元";
     if (!isUsdt && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
@@ -144,20 +144,23 @@
         pString = [NSString stringWithFormat:@"单笔取款限额%@-143万USDT", self.dcboxLimit];
     }
     
+    NSString * withdrawPwdP = [IVNetwork savedUserInfo].withdralPwdFlag == 0 ? @"没有资金密码？点击设置资金密码":@"6位数字组合";
+    BOOL withdrawPwdCanEdits = [IVNetwork savedUserInfo].withdralPwdFlag == 0 ? false:true;
+    
     NSArray *placeholders1 = @[@"",@""];
-    NSArray *placeholders3 = @[pString,rateStr,@"***银行-尾号*****",@""];
-    NSArray *placeholders4 = @[pString,@"USDT",@"***银行-尾号*****",@"",@"",@""];
+    NSArray *placeholders3 = @[pString,rateStr,@"***银行-尾号*****",withdrawPwdP,@""];
+    NSArray *placeholders4 = @[pString,@"USDT",@"***银行-尾号*****",withdrawPwdP,@"",@"",@""];
     NSArray *heights1 = @[@205.0,@15.0];
-    NSArray *heights3 = @[@44.0,@44.0,@44.0,@100.0];
-    NSArray *heights4 = @[@44.0,@44.0,@44,@44,@28,@240.0];
+    NSArray *heights3 = @[@44.0,@44.0,@44.0,@44.0,@100.0];
+    NSArray *heights4 = @[@44.0,@44.0,@44,@44,@44.0,@28,@240.0];
     
     NSArray *canEdits1 = @[@NO,@NO];
-    NSArray *canEdits3 = @[@YES,@NO,@NO,@NO];
-    NSArray *canEdits4 = @[@YES,@NO,@NO,@NO,@NO,@NO];
+    NSArray *canEdits3 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO];
+    NSArray *canEdits4 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO];
     
     NSArray *values1 = @[@"",@""];
-    NSArray *values3 = @[@"",@"",@"",@""];
-    NSArray *values4 = @[@"",@"",@"",@"",@"",@""];
+    NSArray *values3 = @[@"",@"",@"",@"",@""];
+    NSArray *values4 = @[@"",@"",@"",@"",@"",@"",@""];
  
     NSMutableArray *names = @[].mutableCopy;
     NSMutableArray *placeholders = @[].mutableCopy;
@@ -200,11 +203,11 @@
         [heights replaceObjectAtIndex:3 withObject:@0];
     }
     if ([self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]) {
-        [names removeObjectAtIndex:5];
-        [placeholders removeObjectAtIndex:5];
-        [heights removeObjectAtIndex:5];
-        [canEdits removeObjectAtIndex:5];
-        [values removeObjectAtIndex:5];
+        [names removeObjectAtIndex:6];
+        [placeholders removeObjectAtIndex:6];
+        [heights removeObjectAtIndex:6];
+        [canEdits removeObjectAtIndex:6];
+        [values removeObjectAtIndex:6];
     }
     for (NSInteger index = 0; index < names.count; index++) {
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];

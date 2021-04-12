@@ -7,57 +7,167 @@
 //
 
 #import "BTTPasswordChangeController.h"
+#import "BTTPasswordChangeController+Nav.h"
+#import "BTTPasswordChangeController+LoadData.h"
+#import "BTTBindingMobileController.h"
 #import "BTTPasswordCell.h"
-#import "BTTPasswordChangeBtnsCell.h"
 #import "BTTHomePageSeparateCell.h"
-#import "BTTBindingMobileBtnCell.h"
+#import "BTTBindingMobileOneCell.h"
+#import "BTTUnBindingHeaderCell.h"
+#import "BTTUnBindingBtnCell.h"
+#import "BTTHumanModifyCell.h"
 #import "BTTMeMainModel.h"
-#import "IVRsaEncryptWrapper.h"
 
 @interface BTTPasswordChangeController ()<BTTElementsFlowLayoutDelegate>
-
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
-
+@property (nonatomic, strong) NSMutableArray *bindPhoneData;
 @end
 
 @implementation BTTPasswordChangeController
 
-- (void)viewDidLoad {
+-(void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"修改密码";
     [self setupCollectionView];
-    [self setupElements];
 }
 
-- (void)setupCollectionView {
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.isVerifySuccess = false;
+    [self setUpNav];
+    [self changeSheetDatas:self.selectedType];
+    [self.collectionView reloadData];
+}
+
+-(void)setupCollectionView {
     [super setupCollectionView];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPasswordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPasswordCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPasswordChangeBtnsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPasswordChangeBtnsCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageSeparateCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageSeparateCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileTwoCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileTwoCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTUnBindingHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTUnBindingHeaderCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTUnBindingBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTUnBindingBtnCell"];
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHumanModifyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHumanModifyCell"];
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.elementsHight.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    weakSelf(weakSelf)
     if (indexPath.row == 0) {
         BTTPasswordChangeBtnsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPasswordChangeBtnsCell" forIndexPath:indexPath];
+        switch (self.selectedType) {
+            case BTTChangeLoginPwd:
+                cell.loginPwdBtn.selected = true;
+                break;
+            case BTTChangeWithdrawPwd:
+                cell.withdrawPwdBtn.selected = true;
+                break;
+            case BTTChangePTPwd:
+                cell.PTPwdBtn.selected = true;
+                break;
+        }
+        [cell setupArrow];
+        if (self.isVerifySuccess) {
+            NSString * str = [IVNetwork savedUserInfo].withdralPwdFlag == 0 ? @"资金密码":@"修改资金密码";
+            [cell.withdrawPwdBtn setTitle:str forState:UIControlStateNormal];
+        }
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            weakSelf.selectedType = button.tag;
+            [weakSelf changeSheetDatas:button.tag];
+        };
         return cell;
     } else if (indexPath.row == 1) {
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
+    } else if ([self isWithdrawPwd] && [self haveBindPhone]) {
+        //已綁定手機
+        if ([self haveUnbondPhoneCount] && [self haveWithdrawPwd]) {
+            //溫馨提示
+            BTTHumanModifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHumanModifyCell" forIndexPath:indexPath];
+            cell.btnTitle = @"联系客服";
+            BTTMeMainModel *model = self.sheetDatas[indexPath.row - 2];
+            cell.contentLab.text = model.name;
+            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                [weakSelf kefuBtnAction];
+            };
+            return cell;
+        } else if (self.isVerifySuccess) {
+            //簡訊驗證通過後
+            if (indexPath.row == 4) {
+                BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                    [weakSelf submitChange];
+                };
+                return cell;
+            } else {
+                BTTPasswordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPasswordCell" forIndexPath:indexPath];
+                cell.textField.tag = 1000;
+                [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+                BTTMeMainModel *model = self.sheetDatas[indexPath.row - 2];
+                cell.model = model;
+                return cell;
+            }
+        } else {
+            //簡訊驗證通過前
+            if (indexPath.row == 2) {
+                BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
+                BTTMeMainModel *model = self.bindPhoneData[indexPath.row - 2];
+                cell.model = model;
+                return cell;
+            } else if (indexPath.row == 3) {
+                BTTBindingMobileTwoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileTwoCell" forIndexPath:indexPath];
+                [cell.textField setEnabled:false];
+                BTTMeMainModel *model = self.bindPhoneData[indexPath.row - 2];
+                cell.model = model;
+                [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+//                    if ([[weakSelf getPhoneTF].text containsString:@"*"]) {
+                        [weakSelf sendCode];
+//                    }else{
+//                        [weakSelf sendCodeByPhone];
+//                    }
+                };
+                return cell;
+            } else {
+                BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+                cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                    //驗證簡訊驗證證碼的確定按鈕
+                    [weakSelf submitVerifySmsCode];
+                };
+                return cell;
+            }
+        }
+    } else if ([self isWithdrawPwd] && ![self haveBindPhone]) {
+        //沒綁定手機
+        if (indexPath.row == 2) {
+            BTTUnBindingHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTUnBindingHeaderCell" forIndexPath:indexPath];
+            cell.iconImgView.image = [UIImage imageNamed:@"card_sms"];
+            cell.mineSparaterType = BTTMineSparaterTypeNone;
+            [cell.iconImgView mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(cell).offset(35);
+                make.width.height.offset(50);
+            }];
+            return cell;
+        } else {
+            BTTUnBindingBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTUnBindingBtnCell" forIndexPath:indexPath];
+            return cell;
+        }
     } else if (indexPath.row == 4) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
-        weakSelf(weakSelf)
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf submitChange];
         };
         return cell;
     } else {
         BTTPasswordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPasswordCell" forIndexPath:indexPath];
+        cell.textField.tag = 1001;
         [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row - 2];
         cell.model = model;
@@ -65,14 +175,20 @@
     }
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    if ([self isWithdrawPwd] && ![self haveBindPhone] && indexPath.row == 3) {
+        //立即綁定按鈕
+        BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
+        vc.mobileCodeType = BTTSafeVerifyTypeWithdrawPwdBindMobile;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     NSLog(@"%zd", indexPath.item);
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource
 
-- (UICollectionViewLayout *)collectionViewController:(BTTCollectionViewController *)collectionViewController layoutForCollectionView:(UICollectionView *)collectionView {
+-(UICollectionViewLayout *)collectionViewController:(BTTCollectionViewController *)collectionViewController layoutForCollectionView:(UICollectionView *)collectionView {
     BTTCollectionViewFlowlayout *elementsFlowLayout = [[BTTCollectionViewFlowlayout alloc] initWithDelegate:self];
     
     return elementsFlowLayout;
@@ -80,31 +196,98 @@
 
 #pragma mark - LMJElementsFlowLayoutDelegate
 
-- (CGSize)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+-(CGSize)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return self.elementsHight[indexPath.item].CGSizeValue;
 }
 
-- (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
+-(UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
     return UIEdgeInsetsMake(0, 0, 40, 0);
 }
 
 /**
  *  列间距, 默认10
  */
-- (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView columnsMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
+-(CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView columnsMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
     return 0;
 }
 
 /**
  *  行间距, 默认10
  */
-- (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView linesMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
+-(CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView linesMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
     return 0;
 }
 
-- (void)setupElements {
+-(void)textChanged:(UITextField *)textField {
+    if ([self isWithdrawPwd]) {
+        if (self.isVerifySuccess) {
+            BOOL enabel = ([PublicMethod isValidateWithdrawPwdNumber:[self getLoginPwd]] && [PublicMethod isValidateWithdrawPwdNumber:[self getNewPwd]]);
+            [self getSubmitBtn].enabled = enabel;
+        } else {
+            if (textField == [self getCodeTF]) {
+                if ([self getCodeTF].text.length == 0) {
+                    [self getSubmitBtn].enabled = NO;
+                } else {
+                    [self getSubmitBtn].enabled = YES;
+                }
+            }
+        }
+    } else {
+        BOOL enabel = ([PublicMethod isValidatePwd:[self getLoginPwd]] && [PublicMethod isValidatePwd:[self getNewPwd]]);
+        [self getSubmitBtn].enabled = enabel;
+    }
+}
+
+-(void)changeSheetDatas:(NSInteger)tag {
+    if ([[self getNewPwdCell] isKindOfClass:[BTTPasswordCell class]] && [[self getLoginPwdCell] isKindOfClass:[BTTPasswordCell class]]) {
+        [self getLoginPwdCell].textField.text = @"";
+        [self getNewPwdCell].textField.text = @"";
+    }
+    self.sheetDatas = [[NSMutableArray alloc] init];
+    NSArray *titles = @[];
+    NSArray *placeholders = @[];
+    switch (self.selectedType) {
+        case BTTChangeLoginPwd:
+        case BTTChangePTPwd: {
+            self.title = @"修改密码";
+            titles = @[@"登录密码",@"新密码"];
+            placeholders = @[@"请输入当前账号密码",@"8-10位字母和数字组合"];
+        }
+            break;
+        case BTTChangeWithdrawPwd: {
+            self.title = [self haveWithdrawPwd] ? @"修改密码":@"设置密码";
+            if ([self haveUnbondPhoneCount] && [self haveWithdrawPwd]) {
+                titles = @[@"温馨提示：您在近期更换了绑定手机，为了您的账户资金安全，如需修改资金密码，请联系客服处理！"];
+                placeholders = @[@""];
+                
+            } else {
+                titles = [self haveWithdrawPwd] ? @[@"新资金密码", @"确认新资金密码"]:@[@"资金密码",@"确认资金密码"];
+                placeholders = [self haveWithdrawPwd] ?  @[@"6位数数字组合",@""]:@[@"6位数数字组合",@""];
+            }
+        }
+            break;
+    }
+    for (NSString *title in titles) {
+        BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
+        NSInteger index = [titles indexOfObject:title];
+        model.name = title;
+        model.iconName = placeholders[index];
+        [self.sheetDatas addObject:model];
+    }
+    [self setupElements];
+}
+
+-(void)setupElements {
     NSMutableArray *elementsHight = [NSMutableArray array];
-    for (int i = 0; i < 5; i++) {
+    NSInteger count = 5;
+    
+    if (self.selectedType == BTTChangeWithdrawPwd && ![self haveBindPhone]) {
+        count = 4;
+    } else if (self.selectedType == BTTChangeWithdrawPwd && [self haveUnbondPhoneCount] && [self haveWithdrawPwd])  {
+        count = 3;
+    }
+    
+    for (int i = 0; i < count; i++) {
         if (i == 0) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 48)]];
         } else if (i == 1) {
@@ -112,7 +295,17 @@
         } else if (i == 4) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
         } else {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+            if (self.selectedType == BTTChangeWithdrawPwd && ![self haveBindPhone]) {
+                if (i == 2) {
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 160)]];
+                } else {
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
+                }
+            } else if (self.selectedType == BTTChangeWithdrawPwd && [self haveUnbondPhoneCount] && [self haveWithdrawPwd])  {
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 120)]];
+            } else {
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+            }
         }
     }
     self.elementsHight = elementsHight.mutableCopy;
@@ -120,79 +313,93 @@
         [self.collectionView reloadData];
     });
 }
-- (void)textChanged:(UITextField *)textField
-{
-    BOOL enabel = ([PublicMethod isValidatePwd:[self getLoginPwd]] && [PublicMethod isValidatePwd:[self getNewPwd]]);
-    [self getSubmitBtn].enabled = enabel;
-    
-}
-- (NSString *)getLoginPwd
-{
+
+-(BTTPasswordCell *)getLoginPwdCell {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
     BTTPasswordCell *loginPwdCell = (BTTPasswordCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    NSString *loginPwd = loginPwdCell.textField.text;
+    return loginPwdCell;
+}
+
+-(NSString *)getLoginPwd {
+    NSString *loginPwd = [self getLoginPwdCell].textField.text;
     return loginPwd;
 }
-- (NSString *)getNewPwd
-{
+
+-(BTTPasswordCell *)getNewPwdCell {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     BTTPasswordCell *newCell = (BTTPasswordCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    NSString *new = newCell.textField.text;
+    return newCell;
+}
+
+-(NSString *)getNewPwd {
+    NSString *new = [self getNewPwdCell].textField.text;
     return new;
 }
-- (UIButton *)getSubmitBtn
-{
+
+-(UIButton *)getSubmitBtn {
+    return [self getSubmitBtnCell].btn;
+}
+
+-(UITextField *)getPhoneTF {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell.textField;
+}
+
+-(UITextField *)getCodeTF {
+    return [self getVerifyCell].textField;
+}
+
+-(BTTBindingMobileBtnCell *)getSubmitBtnCell {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:0];
     BTTBindingMobileBtnCell *btnsCell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    return btnsCell.btn;
+    return btnsCell;
 }
-- (void)submitChange
-{
+
+- (BTTBindingMobileTwoCell *)getVerifyCell {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+    BTTBindingMobileTwoCell *cell = (BTTBindingMobileTwoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell;
+}
+
+-(BTTPasswordChangeBtnsCell *)getPwdChangeBtnCell {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     BTTPasswordChangeBtnsCell *btnsCell = (BTTPasswordChangeBtnsCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    BOOL isPT = btnsCell.PTPwdBtn.selected;
-    NSString *loginPwd = [self getLoginPwd];
-    NSString *new = [self getNewPwd];
-    if (![PublicMethod isValidatePwd:loginPwd]) {
-        [MBProgressHUD showError:@"输入的登录密码格式有误！"toView:self.view];
-        return;
-    }
-    if (![PublicMethod isValidatePwd:new]) {
-        [MBProgressHUD showError:@"输入的新密码格式有误！"toView:self.view];
-        return;
-    }
-    NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"newPassword"] = [IVRsaEncryptWrapper encryptorString:new];
-    params[@"oldPassword"] = [IVRsaEncryptWrapper encryptorString:loginPwd];
-    params[@"type"]= isPT ? @2 : @1;
-    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
-    weakSelf(weakSelf)
-    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    [IVNetwork requestPostWithUrl:BTTModifyLoginPwd paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            [MBProgressHUD showSuccess:@"密码修改成功!" toView:nil];
-            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-        }else{
-            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
-        }
-    }];
+    return btnsCell;
 }
-- (NSMutableArray *)sheetDatas {
-    if (!_sheetDatas) {
-        _sheetDatas = [NSMutableArray array];
-        NSArray *titles = @[@"登录密码",@"新密码"];
-        NSArray  *placeholders = @[@"请输入当前账号密码",@"8-10位字母和数字组合"];
-        for (NSString *title in titles) {
+
+-(BOOL)isWithdrawPwd {
+    return [self getPwdChangeBtnCell].withdrawPwdBtn.selected;;
+}
+
+-(BOOL)haveBindPhone {
+    return [IVNetwork savedUserInfo].mobileNoBind == 1;
+}
+
+-(BOOL)haveWithdrawPwd {
+    return [IVNetwork savedUserInfo].withdralPwdFlag == 1;
+}
+
+-(BOOL)haveUnbondPhoneCount {
+    return [IVNetwork savedUserInfo].unbondPhoneCount > 0;
+}
+
+-(NSMutableArray *)bindPhoneData {
+    if (!_bindPhoneData) {
+        _bindPhoneData = [NSMutableArray array];
+        NSArray *names = @[@"已绑定手机",@"验证码"];
+        NSArray *placeholders =@[@"请输入待绑定手机号码",@"请输入验证码"];
+        NSArray *vals = @[[IVNetwork savedUserInfo].mobileNo,@""];
+        for (NSString *title in names) {
             BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
-            NSInteger index = [titles indexOfObject:title];
+            NSInteger index = [names indexOfObject:title];
             model.name = title;
             model.iconName = placeholders[index];
-            [_sheetDatas addObject:model];
+            model.desc = vals[index];
+            [_bindPhoneData addObject:model];
         }
     }
-    return _sheetDatas;
+    return _bindPhoneData;
 }
 
 @end

@@ -862,6 +862,11 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     NSPredicate *num = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numberRegex];
     return [num evaluateWithObject:number];
 }
++ (BOOL)isValidateWithdrawPwdNumber:(NSString *)number{
+    NSString *numberRegex = @"^\\d{6,6}$";
+    NSPredicate *num = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", numberRegex];
+    return [num evaluateWithObject:number];
+}
 /** 转换货币字符串 */
 + (NSString *)getMoneyString:(double)money {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];

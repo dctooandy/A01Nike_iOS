@@ -16,10 +16,12 @@
 #import "BTTChangeMobileSuccessController.h"
 #import "BTTProvinceModel.h"
 #import "HAInitConfig.h"
+#import "BTTPasswordCell.h"
 
 @interface BTTAddCardController ()<BTTElementsFlowLayoutDelegate, UITextFieldDelegate>
 
 @property (nonatomic, assign) CGRect activedTextFieldRect;
+@property (nonatomic, copy) NSString *withdrawPwdString;
 
 @end
 
@@ -36,6 +38,7 @@
             self.title = @"添加银行卡";
             break;
     }
+    self.withdrawPwdString = @"";
     [self setupCollectionView];
     [self loadMainData];
 }
@@ -45,39 +48,40 @@
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTAddCardBtnsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTAddCardBtnsCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPasswordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPasswordCell"];
 }
 
-- (void)keyboardWillShow:(NSNotification *)notification {
-    //取出键盘最终的frame
-    CGRect rect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    //取出键盘弹出需要花费的时间
-    double duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    //获取最佳位置距离屏幕上方的距离
-    if ((self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height) >  ([UIScreen mainScreen].bounds.size.height - rect.size.height)) {//键盘的高度 高于textView的高度 需要滚动
-        [UIView animateWithDuration:duration animations:^{
-            self.collectionView.contentOffset = CGPointMake(0, 64 + self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height - ([UIScreen mainScreen].bounds.size.height - rect.size.height));
-        }];
-    }
-}
-
-- (void)keyboardWillHide:(NSNotification *)notify {
-    [UIView animateWithDuration:.25 animations:^{
-        self.collectionView.contentOffset = CGPointMake(0, 0);
-    }];
-}
-
-- (void)keyboardFrameChange:(NSNotification *)notify {
-    NSLog(@"%@",notify.userInfo);
-    //取出键盘最终的frame
-    CGRect rect = [notify.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    //取出键盘弹出需要花费的时间
-    double duration = [notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    //获取最佳位置距离屏幕上方的距离
-    [UIView animateWithDuration:duration animations:^{
-        self.collectionView.contentOffset = CGPointMake(0, 64 + self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height - ([UIScreen mainScreen].bounds.size.height - rect.size.height));
-    }];
-    
-}
+//- (void)keyboardWillShow:(NSNotification *)notification {
+//    //取出键盘最终的frame
+//    CGRect rect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//    //取出键盘弹出需要花费的时间
+//    double duration = [notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+//    //获取最佳位置距离屏幕上方的距离
+//    if ((self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height) >  ([UIScreen mainScreen].bounds.size.height - rect.size.height)) {//键盘的高度 高于textView的高度 需要滚动
+//        [UIView animateWithDuration:duration animations:^{
+//            self.collectionView.contentOffset = CGPointMake(0, 64 + self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height - ([UIScreen mainScreen].bounds.size.height - rect.size.height));
+//        }];
+//    }
+//}
+//
+//- (void)keyboardWillHide:(NSNotification *)notify {
+//    [UIView animateWithDuration:.25 animations:^{
+//        self.collectionView.contentOffset = CGPointMake(0, 0);
+//    }];
+//}
+//
+//- (void)keyboardFrameChange:(NSNotification *)notify {
+//    NSLog(@"%@",notify.userInfo);
+//    //取出键盘最终的frame
+//    CGRect rect = [notify.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//    //取出键盘弹出需要花费的时间
+//    double duration = [notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+//    //获取最佳位置距离屏幕上方的距离
+//    [UIView animateWithDuration:duration animations:^{
+//        self.collectionView.contentOffset = CGPointMake(0, 64 + self.activedTextFieldRect.origin.y + self.activedTextFieldRect.size.height - ([UIScreen mainScreen].bounds.size.height - rect.size.height));
+//    }];
+//
+//}
 
 #pragma mark - textfielddelegate
 
@@ -101,6 +105,15 @@
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf saveBtnClickded:button];
         };
+        return cell;
+    } else if (indexPath.row == 7) {
+        BTTPasswordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPasswordCell" forIndexPath:indexPath];
+        BTTMeMainModel *model = [BTTMeMainModel new];
+        model.name = @"资金密码";
+        model.iconName = @"6位数数字组合";
+        [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+        cell.model = model;
+        cell.textField.textAlignment = NSTextAlignmentLeft;
         return cell;
     } else {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
@@ -142,62 +155,17 @@
     }
 }
 
-#pragma mark - LMJCollectionViewControllerDataSource
-
-- (UICollectionViewLayout *)collectionViewController:(BTTCollectionViewController *)collectionViewController layoutForCollectionView:(UICollectionView *)collectionView {
-    BTTCollectionViewFlowlayout *elementsFlowLayout = [[BTTCollectionViewFlowlayout alloc] initWithDelegate:self];
-    
-    return elementsFlowLayout;
+-(void)textChanged:(UITextField *)textField {
+    self.withdrawPwdString = textField.text;
 }
 
-#pragma mark - LMJElementsFlowLayoutDelegate
-
-- (CGSize)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return self.elementsHight[indexPath.item].CGSizeValue;
-}
-
-- (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
-    return UIEdgeInsetsMake(15, 0, 40, 0);
-}
-
-/**
- *  列间距, 默认10
- */
-- (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView columnsMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return 0;
-}
-
-/**
- *  行间距, 默认10
- */
-- (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView linesMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return 0;
-}
-
-- (void)setupElements {
-    if (self.elementsHight.count) {
-        [self.elementsHight removeAllObjects];
-    }
-    NSMutableArray *elementsHight = [NSMutableArray array];
-    NSInteger total = self.sheetDatas.count + 1;
-    for (int i = 0; i < total; i++) {
-        if (i == self.sheetDatas.count) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
-        } else {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
-        }
-    }
-    self.elementsHight = elementsHight.mutableCopy;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.collectionView reloadData];
-    });
-}
 - (UITextField *)getCellTextFieldWithIndex:(NSInteger)index
 {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
     BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     return cell.textField;
 }
+
 - (void)saveBtnClickded:(UIButton *)sender
 {
     NSInteger setDefaultCard = [sender.titleLabel.text isEqualToString:@"保存"] ? 0 : 1;
@@ -208,6 +176,7 @@
     UITextField *provinceTF = [self getCellTextFieldWithIndex:4];
     UITextField *cityTF = [self getCellTextFieldWithIndex:5];
     UITextField *locationTF = [self getCellTextFieldWithIndex:6];
+    NSString *withdrawPwdStr = self.withdrawPwdString;
     if (bankNameTF.text.length == 0) {
         [MBProgressHUD showError:@"请选择开户行" toView:self.view];
         return;
@@ -232,6 +201,10 @@
         [MBProgressHUD showError:@"请填写正确的开户地点" toView:self.view];
         return;
     }
+    if (![PublicMethod isValidateWithdrawPwdNumber:withdrawPwdStr]) {
+        [MBProgressHUD showError:@"输入的资金密码格式有误" toView:self.view];
+        return;
+    }
     NSMutableDictionary *params = @{}.mutableCopy;
     
     params[@"accountName"] = realNameTF.text;
@@ -241,6 +214,7 @@
     params[@"province"] = provinceTF.text;
     params[@"city"] = cityTF.text;
     params[@"bankBranchName"] = locationTF.text;
+    params[@"password"] = [IVRsaEncryptWrapper encryptorString:withdrawPwdStr];
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     params[@"saveDefault"] = @(setDefaultCard);
     
@@ -295,10 +269,20 @@
             vc.mobileCodeType = self.addCardType;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         } else {
+            if ([result.head.errCode isEqualToString:@"GW_601596"]) {
+                IVActionHandler confirm = ^(UIAlertAction *action){
+                    [self goToBack];
+                };
+                NSString *title = @"温馨提示";
+                NSString *message = @"密码错误，请重新添加银行卡资料";
+                [IVUtility showAlertWithActionTitles:@[@"确认"] handlers:@[confirm] title:title message:message];
+                return;
+            }
             [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
     }];
 }
+
 - (void)goToBack
 {
     for (UIViewController *vc in self.navigationController.viewControllers) {
@@ -308,4 +292,57 @@
         }
     }
 }
+
+
+#pragma mark - LMJCollectionViewControllerDataSource
+
+- (UICollectionViewLayout *)collectionViewController:(BTTCollectionViewController *)collectionViewController layoutForCollectionView:(UICollectionView *)collectionView {
+    BTTCollectionViewFlowlayout *elementsFlowLayout = [[BTTCollectionViewFlowlayout alloc] initWithDelegate:self];
+    
+    return elementsFlowLayout;
+}
+
+#pragma mark - LMJElementsFlowLayoutDelegate
+
+- (CGSize)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return self.elementsHight[indexPath.item].CGSizeValue;
+}
+
+- (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
+    return UIEdgeInsetsMake(15, 0, 40, 0);
+}
+
+/**
+ *  列间距, 默认10
+ */
+- (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView columnsMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return 0;
+}
+
+/**
+ *  行间距, 默认10
+ */
+- (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView linesMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return 0;
+}
+
+- (void)setupElements {
+    if (self.elementsHight.count) {
+        [self.elementsHight removeAllObjects];
+    }
+    NSMutableArray *elementsHight = [NSMutableArray array];
+    NSInteger total = self.sheetDatas.count + 1;
+    for (int i = 0; i < total; i++) {
+        if (i == self.sheetDatas.count) {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+        } else {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+        }
+    }
+    self.elementsHight = elementsHight.mutableCopy;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+    });
+}
+
 @end
