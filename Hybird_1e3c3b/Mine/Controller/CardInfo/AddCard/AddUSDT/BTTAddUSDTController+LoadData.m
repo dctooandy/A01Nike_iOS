@@ -26,7 +26,8 @@
                         BTTUSDTWalletTypeModel *typeModel = [BTTUSDTWalletTypeModel yy_modelWithJSON:array[i]];
                         if (![typeModel.code isEqualToString:@"bitoll"] &&
                             ![typeModel.code isEqualToString:@"DCBOX"] &&
-                            ![typeModel.code isEqualToString:@"Bitbase"]) {
+                            ![typeModel.code isEqualToString:@"Bitbase"] &&
+                            ![typeModel.code isEqualToString:@"ICHIPAY"]) {
                             [self.usdtDatas addObject:array[i]];
                         }
                         if (i==array.count-1) {
