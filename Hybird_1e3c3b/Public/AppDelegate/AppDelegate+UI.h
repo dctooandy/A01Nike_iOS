@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import <TXScrollLabelView/TXScrollLabelView.h>
+#import "TXScrollLabelView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

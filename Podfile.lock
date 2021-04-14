@@ -188,7 +188,6 @@ PODS:
   - MBProgressHUD (1.1.0)
   - MJExtension (3.0.15.1)
   - MJRefresh (3.5.0)
-  - TXScrollLabelView (1.3.2)
   - UICKeyChainStore (2.1.2)
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
@@ -218,7 +217,6 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.1.0)
   - MJExtension (~> 3.0.15.1)
   - MJRefresh
-  - TXScrollLabelView
   - YYImage
   - YYModel
 
@@ -236,7 +234,6 @@ SPEC REPOS:
     - MBProgressHUD
     - MJExtension
     - MJRefresh
-    - TXScrollLabelView
     - UICKeyChainStore
     - YYImage
     - YYModel
@@ -328,12 +325,11 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
-  TXScrollLabelView: 0e1650caf61198bf5dc0938ea6493254aeb80f90
   UICKeyChainStore: 85db518bb1d294366d15ec9b92a416c4e670518f
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
-PODFILE CHECKSUM: e8ebb8c664939abfceff06b820b00ae96dc64050
+PODFILE CHECKSUM: 1dda525b82b97b1a1bfd4988fc5e24a74b22626c
 
 COCOAPODS: 1.9.3
