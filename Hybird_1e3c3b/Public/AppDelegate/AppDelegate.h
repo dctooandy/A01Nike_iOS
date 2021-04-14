@@ -8,19 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>{
-    dispatch_source_t _timer;
-}
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-@property (nonatomic, strong) UIView * winningTextView;
 
 -(void)reSendIVPushRequestIpsSuperSign:(NSString *)customerId;
 
 -(void)jumpToTabIndex:(NSInteger )type;
-
--(void)load918FirstWinningList;
 
 @end
 

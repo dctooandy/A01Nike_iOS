@@ -743,7 +743,6 @@ static const char *exModelKey = "exModelKey";
             if (result.body!=nil) {
                 [IVHttpManager shareManager].loginName = result.body[@"loginName"];
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body isBackHome:true];
-                [[NSNotificationCenter defaultCenter] postNotificationName:BTTLoginSuccessShow918ScrollText object:nil];
 //                if (self.isWebIn) {
 //                    [MBProgressHUD showSuccess:@"登录成功" toView:nil];
 //                    [self.navigationController popToRootViewControllerAnimated:YES];

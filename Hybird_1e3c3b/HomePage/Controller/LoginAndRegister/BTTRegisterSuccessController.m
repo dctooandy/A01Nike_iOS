@@ -578,7 +578,6 @@ typedef enum {
             if (result.body!=nil) {
                 [IVHttpManager shareManager].loginName = result.body[@"loginName"];
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body isBackHome:true];
-                [[NSNotificationCenter defaultCenter] postNotificationName:BTTLoginSuccessShow918ScrollText object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     if (self.isHome) {

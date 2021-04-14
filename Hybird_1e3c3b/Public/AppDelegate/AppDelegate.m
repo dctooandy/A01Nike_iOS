@@ -25,7 +25,6 @@
 #import "IVPushManager.h"
 #import "HAInitConfig.h"
 #import "BTTUserStatusManager.h"
-#import "AppDelegate+UI.h"
 #import "BTTFirstWinningListModel.h"
 
 @interface AppDelegate ()<OpenInstallDelegate,IVPushDelegate>
@@ -142,51 +141,7 @@
     [CNPreCacheMananger prepareCacheDataNeedLogin];
     [OpenInstallSDK initWithDelegate:self];
     [[UIButton appearance] setExclusiveTouch:YES];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessShow918ScrollText) name:BTTLoginSuccessShow918ScrollText object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutSuccess) name:LogoutSuccessNotification object:nil];
-    if ([IVNetwork savedUserInfo]) {
-        [self load918FirstWinningList];
-    }
     return YES;
-}
-
--(void)loginSuccessShow918ScrollText {
-    [self load918FirstWinningList];
-}
-
--(void)logoutSuccess {
-    [self.scrollLabelView endScrolling];
-    self.scrollLabelView = nil;
-    [self.winningTextView removeFromSuperview];
-}
-
--(void)load918FirstWinningList {
-    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
-    params[@"page"] = @1;
-    params[@"pageSize"] = @10;
-    [IVNetwork requestPostWithUrl:BTTFirtWinningList paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSMutableArray * dataArr = [[NSMutableArray alloc] initWithArray:result.body[@"data"]];
-            if (dataArr.count > 0) {
-                NSString * scrollTextLabStr = @"";
-                for (NSDictionary * dict in dataArr) {
-                    BTTFirstWinningListModel * model = [BTTFirstWinningListModel yy_modelWithJSON:dict];
-                    NSString * contentStr = [NSString stringWithFormat:@"恭喜%@客户在%@%@%@玩法以%@牌型获胜，派发红包%@USDT！", model.loginName, model.gameingRoom, model.gameType, model.betWay, model.cardType, model.amount];
-                    if (scrollTextLabStr.length > 0) {
-                        scrollTextLabStr  = [NSString stringWithFormat:@"%@%@%@", scrollTextLabStr,@"                ",contentStr];
-                    } else {
-                        scrollTextLabStr = contentStr;
-                    }
-                }
-                [self setUp918ScrollTextView:scrollTextLabStr];
-            } else {
-                [self appearCountDown:reload918Sec];
-            }
-        } else {
-            [self appearCountDown:reload918Sec];
-        }
-    }];
 }
 
 // open install delegate
