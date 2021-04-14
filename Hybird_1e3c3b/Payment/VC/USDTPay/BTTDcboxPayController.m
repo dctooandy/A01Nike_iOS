@@ -229,7 +229,7 @@
 }
 
 - (void)dowloadBfbApp{
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.dcbox.com/ios.html"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.dcusdt.com/ios.html"]];
 }
 
 -(void)goToH5Dcbox {
@@ -406,7 +406,7 @@
             [self.qrcodeView setImage:[PublicMethod QRCodeMethod:address]];
             NSRange range = [address rangeOfString:@"dcbox://pay"];
             if (range.location != NSNotFound) {
-                self.dcboxH5Link = [address stringByReplacingOccurrencesOfString:@"dcbox://pay" withString:@"https://www.dcbox.com/payment.html"];
+                self.dcboxH5Link = [address stringByReplacingOccurrencesOfString:@"dcbox://pay" withString:@"https://www.dcusdt.com/payment.html"];
             }
             
             weakSelf.secondMoneyLabel.text = weakSelf.moneyTextField.text;

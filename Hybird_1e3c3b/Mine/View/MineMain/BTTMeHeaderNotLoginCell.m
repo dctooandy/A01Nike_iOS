@@ -7,7 +7,7 @@
 //
 
 #import "BTTMeHeaderNotLoginCell.h"
-#import <TXScrollLabelView/TXScrollLabelView.h>
+#import "TXScrollLabelView.h"
 
 @interface BTTMeHeaderNotLoginCell ()<TXScrollLabelViewDelegate>
 

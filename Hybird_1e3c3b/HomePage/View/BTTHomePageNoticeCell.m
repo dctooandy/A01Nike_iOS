@@ -7,7 +7,7 @@
 //
 
 #import "BTTHomePageNoticeCell.h"
-#import <TXScrollLabelView/TXScrollLabelView.h>
+#import "TXScrollLabelView.h"
 
 @interface BTTHomePageNoticeCell ()<TXScrollLabelViewDelegate>
 

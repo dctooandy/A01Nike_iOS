@@ -11,7 +11,6 @@ target ‘Hybird_1e3c3b’ do
   pod 'MBProgressHUD','~> 1.1.0'
   pod 'MJExtension', '~> 3.0.15.1'
   pod 'CocoaAsyncSocket', '~>7.6.3'
-  pod 'TXScrollLabelView'
   
 #  pod 'IVNetworkLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary.git'
   pod 'IVGameLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git',:branch=>'v2.0'

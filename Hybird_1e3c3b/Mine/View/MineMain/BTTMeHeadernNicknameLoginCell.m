@@ -7,7 +7,7 @@
 //
 
 #import "BTTMeHeadernNicknameLoginCell.h"
-#import <TXScrollLabelView/TXScrollLabelView.h>
+#import "TXScrollLabelView.h"
 
 @interface BTTMeHeadernNicknameLoginCell ()<TXScrollLabelViewDelegate>
 

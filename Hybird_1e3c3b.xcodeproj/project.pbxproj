@@ -639,6 +639,8 @@
 		3AFCD7D121AD179600B136C1 /* BTTVideoGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */; };
 		410997F9251DC870001FA895 /* BTTDepositRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410997F8251DC870001FA895 /* BTTDepositRecordCell.xib */; };
 		410997FB251DC876001FA895 /* BTTDepositRecordHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410997FA251DC876001FA895 /* BTTDepositRecordHeaderCell.xib */; };
+		412079A72626D17C00595F8C /* TXScrollLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 412079A52626D17C00595F8C /* TXScrollLabelView.m */; };
+		412079A82626D17C00595F8C /* UIView+TXFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 412079A62626D17C00595F8C /* UIView+TXFrame.m */; };
 		413DF78E25010780005ABCC6 /* BTTMeHeaderLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 413DF78D25010780005ABCC6 /* BTTMeHeaderLoginCell.xib */; };
 		413DF79025010787005ABCC6 /* BTTMeHeadernNicknameLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 413DF78F25010787005ABCC6 /* BTTMeHeadernNicknameLoginCell.xib */; };
 		413E324E251B3520000804E2 /* BTTCreditRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413E324B251B3520000804E2 /* BTTCreditRecordController.m */; };
@@ -1870,6 +1872,10 @@
 		3AFCD7CF21AD179600B136C1 /* BTTVideoGameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTVideoGameCell.xib; sourceTree = "<group>"; };
 		410997F8251DC870001FA895 /* BTTDepositRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDepositRecordCell.xib; sourceTree = "<group>"; };
 		410997FA251DC876001FA895 /* BTTDepositRecordHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDepositRecordHeaderCell.xib; sourceTree = "<group>"; };
+		412079A32626D17C00595F8C /* TXScrollLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXScrollLabelView.h; sourceTree = "<group>"; };
+		412079A42626D17C00595F8C /* UIView+TXFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TXFrame.h"; sourceTree = "<group>"; };
+		412079A52626D17C00595F8C /* TXScrollLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXScrollLabelView.m; sourceTree = "<group>"; };
+		412079A62626D17C00595F8C /* UIView+TXFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TXFrame.m"; sourceTree = "<group>"; };
 		413DF78D25010780005ABCC6 /* BTTMeHeaderLoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTMeHeaderLoginCell.xib; sourceTree = "<group>"; };
 		413DF78F25010787005ABCC6 /* BTTMeHeadernNicknameLoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTMeHeadernNicknameLoginCell.xib; sourceTree = "<group>"; };
 		413E324A251B3520000804E2 /* BTTCreditRecordController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTCreditRecordController+LoadData.h"; sourceTree = "<group>"; };
@@ -3724,6 +3730,7 @@
 		3AD9CD5D21670FB100685B43 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				412079A22626D17C00595F8C /* TXScrollLabelView */,
 				3AA788E621FFF2580047A372 /* SDWebImage */,
 				D5C501BB21B7CEDC00C6DA02 /* BRPickerView */,
 				3AE0581D21704D5B00C7E70D /* UUMarqueeView */,
@@ -4368,6 +4375,17 @@
 				3AF9EB5C22A4B62300A85D9F /* BTTMidAutumnPopView.xib */,
 			);
 			path = MidAutumn;
+			sourceTree = "<group>";
+		};
+		412079A22626D17C00595F8C /* TXScrollLabelView */ = {
+			isa = PBXGroup;
+			children = (
+				412079A32626D17C00595F8C /* TXScrollLabelView.h */,
+				412079A52626D17C00595F8C /* TXScrollLabelView.m */,
+				412079A42626D17C00595F8C /* UIView+TXFrame.h */,
+				412079A62626D17C00595F8C /* UIView+TXFrame.m */,
+			);
+			path = TXScrollLabelView;
 			sourceTree = "<group>";
 		};
 		413E3245251B34A1000804E2 /* Xm */ = {
@@ -5830,6 +5848,7 @@
 				4184DD98251B308D00D433D4 /* BTTXmRecordModel.m in Sources */,
 				3A8F518F215F77AC0069D1B3 /* BTTTabBarBigButton.m in Sources */,
 				D5DBEB3221ABB774008AF629 /* CNPayAmountRecommendView.m in Sources */,
+				412079A72626D17C00595F8C /* TXScrollLabelView.m in Sources */,
 				3A9E4C16219D1D2A00E7D8C0 /* BTTForgetPwdCodeCell.m in Sources */,
 				3A37E0FD2164691300FB13A1 /* AppDelegate+AD.m in Sources */,
 				3AA7893721FFF2580047A372 /* SDWebImageImageIOCoder.m in Sources */,
@@ -5854,6 +5873,7 @@
 				3A8F51E6215F78F50069D1B3 /* BTTCollectionViewController.m in Sources */,
 				415CA1DE24E53A7C005E0E9F /* BTTMeSaveMoneyAlipayCell.m in Sources */,
 				D5DBEB4421AD3721008AF629 /* CNPayQRStep2VC.m in Sources */,
+				412079A82626D17C00595F8C /* UIView+TXFrame.m in Sources */,
 				3A8F51C2215F78180069D1B3 /* BTTActionSheet.m in Sources */,
 				3A49DFA02179DA0D00FEFBDA /* BTTBindingMobileTwoCell.m in Sources */,
 				3ADD235E2176D7F000FA959A /* BTTHomePageViewController+Nav.m in Sources */,
