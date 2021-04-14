@@ -668,7 +668,6 @@
 		415CA1EB24E53ADF005E0E9F /* USDTRechargeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1E724E53ADF005E0E9F /* USDTRechargeController.m */; };
 		415CA1EE24E53AF6005E0E9F /* OCTRechargeUSDTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1EC24E53AF6005E0E9F /* OCTRechargeUSDTView.m */; };
 		415CA1F024E53B0B005E0E9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 415CA1EF24E53B0B005E0E9F /* Assets.xcassets */; };
-		41631F08260095E7009EED8F /* AppDelegate+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 41631F07260095E7009EED8F /* AppDelegate+UI.m */; };
 		41649F8F258352EC0033FFA9 /* IN3SResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41649F8C258352EB0033FFA9 /* IN3SResource.bundle */; };
 		41649F90258352EC0033FFA9 /* tingyunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41649F8D258352EB0033FFA9 /* tingyunApp.framework */; };
 		41649F91258352EC0033FFA9 /* IN3SAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41649F8E258352EB0033FFA9 /* IN3SAnalytics.framework */; };
@@ -1920,8 +1919,6 @@
 		415CA1EC24E53AF6005E0E9F /* OCTRechargeUSDTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTRechargeUSDTView.m; sourceTree = "<group>"; };
 		415CA1ED24E53AF6005E0E9F /* OCTRechargeUSDTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTRechargeUSDTView.h; sourceTree = "<group>"; };
 		415CA1EF24E53B0B005E0E9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		41631F06260095E7009EED8F /* AppDelegate+UI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate+UI.h"; sourceTree = "<group>"; };
-		41631F07260095E7009EED8F /* AppDelegate+UI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate+UI.m"; sourceTree = "<group>"; };
 		41649F8C258352EB0033FFA9 /* IN3SResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IN3SResource.bundle; sourceTree = "<group>"; };
 		41649F8D258352EB0033FFA9 /* tingyunApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = tingyunApp.framework; sourceTree = "<group>"; };
 		41649F8E258352EB0033FFA9 /* IN3SAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IN3SAnalytics.framework; sourceTree = "<group>"; };
@@ -2646,8 +2643,6 @@
 				3A37E0F92164685600FB13A1 /* AppDelegate+Environment.m */,
 				3A37E0FB2164691300FB13A1 /* AppDelegate+AD.h */,
 				3A37E0FC2164691300FB13A1 /* AppDelegate+AD.m */,
-				41631F06260095E7009EED8F /* AppDelegate+UI.h */,
-				41631F07260095E7009EED8F /* AppDelegate+UI.m */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -5760,7 +5755,6 @@
 				3A9E4C7121A2559800E7D8C0 /* BTTChangeMobileController+LoadData.m in Sources */,
 				3A929412219BBD4F00764E7E /* BTTLoginAPIModel.m in Sources */,
 				3A92940C219BBCCD00764E7E /* BTTLoginOrRegisterViewController+API.m in Sources */,
-				41631F08260095E7009EED8F /* AppDelegate+UI.m in Sources */,
 				3A21AEAE2394BCAA009E73FD /* BTTShowErcodePopview.m in Sources */,
 				3A7A1A6621BDF21100572B50 /* BTTLuckyWheelCoinView.m in Sources */,
 				3AD9CF44216EDCE300685B43 /* BTTBaseCollectionViewCell.m in Sources */,
