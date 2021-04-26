@@ -99,7 +99,11 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 - (void)registerSuccessGotoHomePageNotification:(NSNotification *)notif {
     if ([notif.object isEqualToString:@"gotoOnlineChat"]) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [[CLive800Manager sharedInstance] startLive800Chat:self];
+            [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
+                if (errCode != CSServiceCode_Request_Suc) {//异常处理
+                    [[CLive800Manager sharedInstance] startLive800Chat:self];
+                }
+            }];
         });
     }
 }
@@ -239,10 +243,12 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
                     [strongSelf.navigationController pushViewController:vc animated:YES];
                     return;
                 }
+                //站內信
                 BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
                 vc.webConfigModel.newView = YES;
-                vc.webConfigModel.url = @"customer/letter.htm";
-                vc.webConfigModel.theme = @"inside";
+                vc.webConfigModel.url = @"mailApp?type=mail/inbox";
+                vc.webConfigModel.theme = @"outside";
+                vc.title = @"站內信";
                 [strongSelf.navigationController pushViewController:vc animated:YES];
             }
                 break;
@@ -272,15 +278,18 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 - (void)rightClick:(UIButton *)btn {
     
     BTTPopoverAction *action1 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineService") title:@"在线客服      " handler:^(BTTPopoverAction *action) {
-        BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
-            if (buttonIndex == 0) {
-                [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
-            }else if (buttonIndex == 1){
-                [[CLive800Manager sharedInstance] startLive800Chat:self];
+        [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
+            if (errCode != CSServiceCode_Request_Suc) {//异常处理
+                BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+                    if (buttonIndex == 0) {
+                        [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+                    }else if (buttonIndex == 1){
+                        [[CLive800Manager sharedInstance] startLive800Chat:self];
+                    }
+                }];
+                [actionSheet show];
             }
         }];
-        [actionSheet show];
-
     }];
     
     BTTPopoverAction *action2 = [BTTPopoverAction actionWithImage:ImageNamed(@"voiceCall") title:@"APP语音通信" handler:^(BTTPopoverAction *action) {

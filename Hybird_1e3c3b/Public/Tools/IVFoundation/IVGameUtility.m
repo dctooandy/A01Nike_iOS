@@ -136,7 +136,13 @@
             controller = [[CNPayVC alloc] init];
             break;
         case IVGameForwardPageTypeCustomerService:
-            [[CLive800Manager sharedInstance] startLive800Chat:gameController];
+        {
+            [LiveChat startKeFu:gameController csServicecompleteBlock:^(CSServiceCode errCode) {
+                if (errCode != CSServiceCode_Request_Suc) {//异常处理
+                    [[CLive800Manager sharedInstance] startLive800Chat:gameController];
+                }
+            }];
+        }
             return;
         case IVGameForwardPageTypeBJLDetails:
             configModel.url = @"gameRule/table_baccarat.htm";
@@ -188,7 +194,11 @@
     UIViewController *vc =  (UIViewController *)webView.navigationDelegate;
     if ([navigationAction.request.URL.absoluteString containsString:@"nbapp://"]) {
         if ([[navigationAction.request.URL.absoluteString URLDecodedString] containsString:@"https://www.why918.com"]) {
-            [[CLive800Manager sharedInstance] startLive800Chat:(UIViewController *)webView.navigationDelegate];
+            [LiveChat startKeFu:(UIViewController *)webView.navigationDelegate csServicecompleteBlock:^(CSServiceCode errCode) {
+                if (errCode != CSServiceCode_Request_Suc) {
+                    [[CLive800Manager sharedInstance] startLive800Chat:(UIViewController *)webView.navigationDelegate];
+                }
+            }];
         } else if ([[navigationAction.request.URL.absoluteString URLDecodedString] containsString:@"/deposit_xunjie.htm"]) {
             
             [vc.navigationController pushViewController:[[CNPayVC alloc] init] animated:YES];

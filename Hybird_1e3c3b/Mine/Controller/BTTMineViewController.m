@@ -566,8 +566,9 @@
         //站內信
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.webConfigModel.newView = YES;
-        vc.webConfigModel.url = @"customer/letter.htm";
-        vc.webConfigModel.theme = @"inside";
+        vc.webConfigModel.url = @"mailApp?type=mail/inbox";
+        vc.webConfigModel.theme = @"outside";
+        vc.title = @"站內信";
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == self.elementsHight.count - 5) {
         //額度轉帳
@@ -588,7 +589,7 @@
         vc.webConfigModel.theme = @"outside";
         vc.webConfigModel.newView = YES;
         vc.title = @"我的优惠";
-        vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"my_coupon"];
+        vc.webConfigModel.url = @"my_coupon";
         [self.navigationController pushViewController:vc animated:YES];
         //        NSMutableArray *names = @[@"首存优惠"].mutableCopy;
         //        if (self.isFanLi) {

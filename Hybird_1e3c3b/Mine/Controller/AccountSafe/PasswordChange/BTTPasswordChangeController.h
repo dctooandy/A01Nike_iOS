@@ -34,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(BOOL)isWithdrawPwd;
 -(NSString *)getLoginPwd;
 -(NSString *)getNewPwd;
+-(NSString *)getAgainNewPwd;
 -(BOOL)haveWithdrawPwd;
 
 @end

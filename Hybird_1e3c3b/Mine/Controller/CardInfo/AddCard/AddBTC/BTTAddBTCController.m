@@ -55,7 +55,7 @@
         BTTMeMainModel *model = [BTTMeMainModel new];
         model.name = @"资金密码";
         model.iconName = @"6位数数字组合";
-        cell.textField.tag = 1001;
+        cell.textField.tag = 1000;
         [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         cell.model = model;
         cell.textField.textAlignment = NSTextAlignmentLeft;
@@ -82,7 +82,7 @@
 
 - (void)textChanged:(UITextField *)textField
 {
-    if (textField.tag == 1001) {
+    if (textField.tag == 1000) {
         self.withdrawPwdString = textField.text;
     }
     BOOL enable = [PublicMethod checkBitcoinAddress:[self getAddressTF].text] && [PublicMethod checkBitcoinAddress:[self getSureAddressTF].text]
@@ -147,26 +147,15 @@
         }else{
             if ([result.head.errCode isEqualToString:@"GW_601596"]) {
                 IVActionHandler confirm = ^(UIAlertAction *action){
-                    [self goToBack];
                 };
                 NSString *title = @"温馨提示";
-                NSString *message = @"密码错误，请重新添加比特币钱包资料";
+                NSString *message = @"资金密码错误，请重新输入！";
                 [IVUtility showAlertWithActionTitles:@[@"确认"] handlers:@[confirm] title:title message:message];
                 return;
             }
             [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
     }];
-}
-
-- (void)goToBack
-{
-    for (UIViewController *vc in self.navigationController.viewControllers) {
-        if ([vc isKindOfClass:[BTTCardInfosController class]]) {
-            [self.navigationController popToViewController:vc animated:YES];
-            break;
-        }
-    }
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource

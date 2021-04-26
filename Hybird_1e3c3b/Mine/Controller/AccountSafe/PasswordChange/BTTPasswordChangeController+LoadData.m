@@ -2,7 +2,7 @@
 //  BTTPasswordChangeController+LoadData.m
 //  Hybird_1e3c3b
 //
-//  Created by JerryHU on 2021/4/7.
+//  Created by Jairo on 7/4/2021.
 //  Copyright © 2021 BTT. All rights reserved.
 //
 
@@ -30,7 +30,7 @@
 //            [[weakSelf getCodeTF] setEnabled:false];
 //            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
 //        }
-//        
+//
 //    }];
 //}
 
@@ -90,14 +90,32 @@
     NSString *loginPwd = [self getLoginPwd];
     NSString *new = [self getNewPwd];
     if (isWithdraw) {
-        if (![PublicMethod isValidateWithdrawPwdNumber:loginPwd]) {
-            [MBProgressHUD showError:@"输入的资金密码格式有误！"toView:self.view];
-            return;
+        if ([self haveWithdrawPwd]) {
+            NSString *again = [self getAgainNewPwd];
+            if (![PublicMethod isValidateWithdrawPwdNumber:loginPwd]) {
+                [MBProgressHUD showError:@"输入的旧资金密码格式有误！"toView:self.view];
+                return;
+            }
+            if (![PublicMethod isValidateWithdrawPwdNumber:new]) {
+                [MBProgressHUD showError:@"输入的新资金密码格式有误！"toView:self.view];
+                return;
+            }
+            if (![again isEqualToString:new]) {
+                [MBProgressHUD showError:@"再次输入资金密码与资金密码不一致！"toView:self.view];
+                return;
+            }
+        } else {
+            if (![PublicMethod isValidateWithdrawPwdNumber:loginPwd]) {
+                [MBProgressHUD showError:@"输入的资金密码格式有误！"toView:self.view];
+                return;
+            }
+            if (![loginPwd isEqualToString:new]) {
+                [MBProgressHUD showError:@"再次输入资金密码与资金密码不一致！"toView:self.view];
+                return;
+            }
         }
-        if (![loginPwd isEqualToString:new]) {
-            [MBProgressHUD showError:@"再次输入资金密码与资金密码不一致！"toView:self.view];
-            return;
-        }
+        
+        
     } else {
         if (![PublicMethod isValidatePwd:loginPwd]) {
             [MBProgressHUD showError:@"输入的登录密码格式有误！"toView:self.view];
@@ -120,7 +138,6 @@
         params[@"use"]= @10;
         params[@"messageId"] = self.messageId;
         params[@"validateId"] = self.validateId;
-        [params removeObjectForKey:@"oldPassword"];
     }
     params[@"type"]= @(type);
     

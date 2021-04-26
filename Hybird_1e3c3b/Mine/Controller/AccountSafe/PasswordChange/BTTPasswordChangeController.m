@@ -88,19 +88,9 @@
         return cell;
     } else if ([self isWithdrawPwd] && [self haveBindPhone]) {
         //已綁定手機
-        if ([self haveUnbondPhoneCount] && [self haveWithdrawPwd]) {
-            //溫馨提示
-            BTTHumanModifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHumanModifyCell" forIndexPath:indexPath];
-            cell.btnTitle = @"联系客服";
-            BTTMeMainModel *model = self.sheetDatas[indexPath.row - 2];
-            cell.contentLab.text = model.name;
-            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-                [weakSelf kefuBtnAction];
-            };
-            return cell;
-        } else if (self.isVerifySuccess) {
+        if (self.isVerifySuccess) {
             //簡訊驗證通過後
-            if (indexPath.row == 4) {
+            if (indexPath.row == self.elementsHight.count - 1) {
                 BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                     [weakSelf submitChange];
@@ -128,11 +118,7 @@
                 cell.model = model;
                 [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-//                    if ([[weakSelf getPhoneTF].text containsString:@"*"]) {
-                        [weakSelf sendCode];
-//                    }else{
-//                        [weakSelf sendCodeByPhone];
-//                    }
+                    [weakSelf sendCode];
                 };
                 return cell;
             } else {
@@ -222,6 +208,9 @@
     if ([self isWithdrawPwd]) {
         if (self.isVerifySuccess) {
             BOOL enabel = ([PublicMethod isValidateWithdrawPwdNumber:[self getLoginPwd]] && [PublicMethod isValidateWithdrawPwdNumber:[self getNewPwd]]);
+            if ([self haveWithdrawPwd]) {
+                enabel = ([PublicMethod isValidateWithdrawPwdNumber:[self getLoginPwd]] && [PublicMethod isValidateWithdrawPwdNumber:[self getNewPwd]] && [PublicMethod isValidateWithdrawPwdNumber:[self getAgainNewPwd]]);
+            }
             [self getSubmitBtn].enabled = enabel;
         } else {
             if (textField == [self getCodeTF]) {
@@ -242,7 +231,11 @@
     if ([[self getNewPwdCell] isKindOfClass:[BTTPasswordCell class]] && [[self getLoginPwdCell] isKindOfClass:[BTTPasswordCell class]]) {
         [self getLoginPwdCell].textField.text = @"";
         [self getNewPwdCell].textField.text = @"";
+        if ([self haveWithdrawPwd] && [[self getAgainNewPwdCell] isKindOfClass:[BTTPasswordCell class]]) {
+            [self getAgainNewPwdCell].textField.text = @"";
+        }
     }
+    [self.collectionView reloadData];
     self.sheetDatas = [[NSMutableArray alloc] init];
     NSArray *titles = @[];
     NSArray *placeholders = @[];
@@ -256,13 +249,13 @@
             break;
         case BTTChangeWithdrawPwd: {
             self.title = [self haveWithdrawPwd] ? @"修改密码":@"设置密码";
-            if ([self haveUnbondPhoneCount] && [self haveWithdrawPwd]) {
-                titles = @[@"温馨提示：您在近期更换了绑定手机，为了您的账户资金安全，如需修改资金密码，请联系客服处理！"];
-                placeholders = @[@""];
+            if ([self haveWithdrawPwd]) {
+                titles = @[@"旧资金密码",@"新资金密码",@"确认新资金密码"];
+                placeholders = @[@"6位数数字组合",@"6位数数字组合",@""];
                 
             } else {
-                titles = [self haveWithdrawPwd] ? @[@"新资金密码", @"确认新资金密码"]:@[@"资金密码",@"确认资金密码"];
-                placeholders = [self haveWithdrawPwd] ?  @[@"6位数数字组合",@""]:@[@"6位数数字组合",@""];
+                titles = @[@"资金密码", @"确认资金密码"];
+                placeholders = @[@"6位数数字组合", @""];
             }
         }
             break;
@@ -280,11 +273,12 @@
 -(void)setupElements {
     NSMutableArray *elementsHight = [NSMutableArray array];
     NSInteger count = 5;
-    
-    if (self.selectedType == BTTChangeWithdrawPwd && ![self haveBindPhone]) {
-        count = 4;
-    } else if (self.selectedType == BTTChangeWithdrawPwd && [self haveUnbondPhoneCount] && [self haveWithdrawPwd])  {
-        count = 3;
+    if (self.selectedType == BTTChangeWithdrawPwd) {
+        if (![self haveBindPhone]) {
+            count = 4;
+        } else if (self.isVerifySuccess && [self haveWithdrawPwd]) {
+            count = 6;
+        }
     }
     
     for (int i = 0; i < count; i++) {
@@ -292,19 +286,19 @@
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 48)]];
         } else if (i == 1) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
-        } else if (i == 4) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
         } else {
-            if (self.selectedType == BTTChangeWithdrawPwd && ![self haveBindPhone]) {
-                if (i == 2) {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 160)]];
-                } else {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
-                }
-            } else if (self.selectedType == BTTChangeWithdrawPwd && [self haveUnbondPhoneCount] && [self haveWithdrawPwd])  {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 120)]];
+            if (i == count - 1) {
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
             } else {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+                if (self.selectedType == BTTChangeWithdrawPwd && ![self haveBindPhone]) {
+                    if (i == 2) {
+                        [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 160)]];
+                    } else {
+                        [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 80)]];
+                    }
+                } else {
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+                }
             }
         }
     }
@@ -336,6 +330,17 @@
     return new;
 }
 
+-(BTTPasswordCell *)getAgainNewPwdCell {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:0];
+    BTTPasswordCell *newCell = (BTTPasswordCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return newCell;
+}
+
+-(NSString *)getAgainNewPwd {
+    NSString *str = [self getAgainNewPwdCell].textField.text;
+    return str;
+}
+
 -(UIButton *)getSubmitBtn {
     return [self getSubmitBtnCell].btn;
 }
@@ -351,7 +356,7 @@
 }
 
 -(BTTBindingMobileBtnCell *)getSubmitBtnCell {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:4 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.elementsHight.count - 1 inSection:0];
     BTTBindingMobileBtnCell *btnsCell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     return btnsCell;
 }
@@ -378,10 +383,6 @@
 
 -(BOOL)haveWithdrawPwd {
     return [IVNetwork savedUserInfo].withdralPwdFlag == 1;
-}
-
--(BOOL)haveUnbondPhoneCount {
-    return [IVNetwork savedUserInfo].unbondPhoneCount > 0;
 }
 
 -(NSMutableArray *)bindPhoneData {

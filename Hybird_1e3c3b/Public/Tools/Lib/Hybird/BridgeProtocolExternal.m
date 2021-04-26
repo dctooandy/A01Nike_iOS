@@ -50,7 +50,11 @@
 }
 
 - (id)driver_live800:(BridgeModel *)bridgeModel {
-    [[CLive800Manager sharedInstance] startLive800Chat:self.controller];
+    [LiveChat startKeFu:self.controller csServicecompleteBlock:^(CSServiceCode errCode) {
+        if (errCode != CSServiceCode_Request_Suc) {//异常处理
+            [[CLive800Manager sharedInstance] startLive800Chat:self.controller];
+        }
+    }];
     return nil;
 }
 - (id)driver_live800ol:(BridgeModel *)bridgeModel {
@@ -212,7 +216,11 @@
         [self.controller.navigationController pushViewController:xima animated:YES];
     }
     else if ([url containsString:@"common/kefu.htm"]) {//客服
-        [[CLive800Manager sharedInstance] startLive800Chat:self.controller];
+        [LiveChat startKeFu:self.controller csServicecompleteBlock:^(CSServiceCode errCode) {
+            if (errCode != CSServiceCode_Request_Suc) {//异常处理
+                [[CLive800Manager sharedInstance] startLive800Chat:self.controller];
+            }
+        }];
     }
     else if ([url containsString:@"common/agqj.htm"]) {
         if ([IVNetwork savedUserInfo]) {
@@ -221,12 +229,18 @@
         } else {
             [self showTryAlertViewWithBlock:^(UIButton * _Nonnull btn) {
                 if (btn.tag == 1090) {
-                    [self gotoGame:@"CNY"];
+                    [self gotoGame:@"CNY" gameKey:BTTAGQJKEY];
                 } else {
                     [MBProgressHUD showError:@"请先登录" toView:nil];
                     [self goToLoginPage:true];
                 }
             }];
+        }
+    }
+    else if ([url containsString:@"common/as.htm"]) {
+        if ([IVNetwork savedUserInfo]) {
+            [MBProgressHUD showLoadingSingleInView:self.controller.view animated:true];
+            [self checkAccount:BTTASKEY];
         }
     }
     else if ([url containsString:@"common/switch_account.htm"]) {
@@ -273,7 +287,7 @@
 
 -(void)checkAccount:(NSString *)jsonKey {
     if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-        [self gotoGame:[IVNetwork savedUserInfo].uiMode];
+        [self gotoGame:[IVNetwork savedUserInfo].uiMode gameKey:jsonKey];
         return;
     }
     NSString * currencyStr = [IVNetwork savedUserInfo].uiMode.length != 0 ? [IVNetwork savedUserInfo].uiMode:@"CNY";
@@ -296,7 +310,7 @@
             }
 
             if (gameCurrency.length != 0) {
-                [self gotoGame:gameCurrency];
+                [self gotoGame:gameCurrency gameKey:jsonKey];
             } else {
                 BTTChooseCurrencyPopView *customView = [BTTChooseCurrencyPopView viewFromXib];
                 customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -306,8 +320,7 @@
                 customView.dismissBlock = ^{
                     strongSelf(strongSelf);
                     [popView dismiss];
-//                    [strongSelf saveCurrencysArrToBGFMDB:@"USDT" userCurrencysArr:userCurrencysArr];
-                    [strongSelf gotoGame:@"USDT"];
+                    [strongSelf gotoGame:@"USDT" gameKey:jsonKey];
                 };
                 
                 customView.btnBlock = ^(UIButton *btn) {
@@ -316,21 +329,21 @@
                     if (btn.tag == 1000) {
                         //cny
                         [strongSelf saveCurrencysArrToBGFMDB:@"CNY" userCurrencysArr:userCurrencysArr];
-                        [strongSelf gotoGame:@"CNY"];
+                        [strongSelf gotoGame:@"CNY" gameKey:jsonKey];
                     } else {
                         //usdt
                         [strongSelf saveCurrencysArrToBGFMDB:@"USDT" userCurrencysArr:userCurrencysArr];
-                        [strongSelf gotoGame:@"USDT"];
+                        [strongSelf gotoGame:@"USDT" gameKey:jsonKey];
                     }
                 };
             }
         } else {
             if (nil == lineArray) {
-                [self gotoGame:@"CNY"];
+                [self gotoGame:@"CNY" gameKey:jsonKey];
             }else{
                 NSDictionary *json = lineArray[0];
                 NSString *name = json[@"platformCurrency"];
-                [self gotoGame:name];
+                [self gotoGame:name gameKey:jsonKey];
             }
         }
     }];
@@ -376,11 +389,24 @@
     [saveArr bg_saveArrayWithName:BTTGameCurrencysWithName];
 }
 
-- (void)gotoGame:(NSString *)currency {
-    BTTAGQJViewController *vc = [BTTAGQJViewController new];
-    [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
-    vc.platformLine = currency;
-    [self.controller.navigationController pushViewController:vc animated:YES];
+- (void)gotoGame:(NSString *)currency gameKey:(NSString *)gameKey {
+    if ([gameKey isEqualToString:BTTAGQJKEY]) {
+        BTTAGQJViewController *vc = [BTTAGQJViewController new];
+        [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+        vc.platformLine = currency;
+        [self.controller.navigationController pushViewController:vc animated:YES];
+    } else if ([gameKey isEqualToString:BTTASKEY]) {
+        IVGameModel *model = [[IVGameModel alloc] init];
+        model = [[IVGameModel alloc] init];
+        model.cnName = @"AS真人棋牌";
+        model.gameCode = BTTASKEY;
+        model.enName =  kASSlotEnName;
+        model.provider = kASSlotProvider;
+        model.platformCurrency = currency;
+        [[IVGameManager sharedManager].lastGameVC reloadGame];
+        [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self.controller];
+    }
+    
 }
 
 - (void)showTryAlertViewWithBlock:(BTTBtnBlock)btnClickBlock {

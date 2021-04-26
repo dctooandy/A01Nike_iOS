@@ -661,7 +661,12 @@
                 customView.btnBlock = ^(UIButton * _Nullable btn) {
                     //kefu
                     [popView dismiss];
-                    [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+                    [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
+                        if (errCode != CSServiceCode_Request_Suc) {//异常处理
+                            [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+                        }
+                    }];
+                    
                 };
             }
         } else {

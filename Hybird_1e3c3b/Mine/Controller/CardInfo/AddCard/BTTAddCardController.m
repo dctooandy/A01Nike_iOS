@@ -113,6 +113,7 @@
         model.iconName = @"6位数数字组合";
         [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         cell.model = model;
+        cell.textField.tag = 1000;
         cell.textField.textAlignment = NSTextAlignmentLeft;
         return cell;
     } else {
@@ -271,10 +272,9 @@
         } else {
             if ([result.head.errCode isEqualToString:@"GW_601596"]) {
                 IVActionHandler confirm = ^(UIAlertAction *action){
-                    [self goToBack];
                 };
                 NSString *title = @"温馨提示";
-                NSString *message = @"密码错误，请重新添加银行卡资料";
+                NSString *message = @"资金密码错误，请重新输入！";
                 [IVUtility showAlertWithActionTitles:@[@"确认"] handlers:@[confirm] title:title message:message];
                 return;
             }
@@ -282,17 +282,6 @@
         }
     }];
 }
-
-- (void)goToBack
-{
-    for (UIViewController *vc in self.navigationController.viewControllers) {
-        if ([vc isKindOfClass:[BTTCardInfosController class]]) {
-            [self.navigationController popToViewController:vc animated:YES];
-            break;
-        }
-    }
-}
-
 
 #pragma mark - LMJCollectionViewControllerDataSource
 
