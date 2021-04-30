@@ -527,6 +527,8 @@
                 [IVHttpManager shareManager].loginName = result.body[@"loginName"];
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body isBackHome:false];
                 self.totalAmount = @"加载中";
+                self.yebAmount = @"加载中";
+                self.yebInterest = @"加载中";
                 self.saveMoneyCount = 0;
                 [self loadBankList];
                 if (!self.isLoading) {
@@ -624,6 +626,8 @@
             self.preAmount = [PublicMethod stringWithDecimalNumber:model.balance];
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.totalAmount = [PublicMethod stringWithDecimalNumber:model.balance];
+                self.yebAmount = [PublicMethod stringWithDecimalNumber:model.yebAmount];
+                self.yebInterest = [PublicMethod stringWithDecimalNumber:model.yebInterest];
                 self.isLoading = NO;
                 [self.collectionView reloadData];
             });

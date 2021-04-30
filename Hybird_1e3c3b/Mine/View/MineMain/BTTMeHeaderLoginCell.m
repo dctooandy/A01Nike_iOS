@@ -12,14 +12,16 @@
 @interface BTTMeHeaderLoginCell ()<TXScrollLabelViewDelegate>
 
 @property (nonatomic, strong) TXScrollLabelView *scrollLabelView;
-
 @property (weak, nonatomic) IBOutlet UIView *topBgView;
-
-@property (weak, nonatomic) IBOutlet UILabel *amountLabel;
-@property (weak, nonatomic) IBOutlet UILabel *amountTipLabel;
 @property (weak, nonatomic) IBOutlet UIButton *changeModeBtn;
 
+@property (weak, nonatomic) IBOutlet UILabel *amountTipLabel;
+@property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *liCaiTipLabel;
+@property (weak, nonatomic) IBOutlet UILabel *liCaiLabel;
+@property (weak, nonatomic) IBOutlet UILabel *liCaiPlusLabel;
+@property (weak, nonatomic) IBOutlet UILabel *symbolPlusLabel;
 
 @end
 
@@ -53,8 +55,24 @@
     self.amountLabel.text = _totalAmount;
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         self.amountTipLabel.text = @"账户总余额(USDT)";
+        self.liCaiTipLabel.text = @"活期理财钱包(USDT)";
     }else{
         self.amountTipLabel.text = @"账户总余额(¥)";
+        self.liCaiTipLabel.text = @"活期理财钱包(¥)";
+    }
+}
+
+-(void)setLiCaiAmount:(NSString *)liCaiAmount {
+    _liCaiAmount = liCaiAmount;
+    self.liCaiLabel.text = _liCaiAmount;
+}
+
+-(void)setLiCaiPlusAmount:(NSString *)liCaiPlusAmount {
+    _liCaiPlusAmount = liCaiPlusAmount;
+    self.liCaiPlusLabel.text = _liCaiPlusAmount;
+    if ([self.liCaiPlusAmount floatValue] < 0.01) {
+        self.liCaiPlusLabel.hidden = true;
+        self.symbolPlusLabel.hidden = true;
     }
 }
 
@@ -79,6 +97,12 @@
 - (IBAction)btnClick:(UIButton *)sender {
     if (_accountBlanceBlock) {
         _accountBlanceBlock();
+    }
+}
+
+- (IBAction)liCaiBtnClick:(UIButton *)sender {
+    if (self.liCaiBlock) {
+        self.liCaiBlock();
     }
 }
 

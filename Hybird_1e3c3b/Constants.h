@@ -471,6 +471,13 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 //客户报表 - 銀行卡更改
 #define BTTCustomerReportBank                      @"account/queryModifyBankRequests"
 
+//活期理財 - 轉賬記錄
+#define BTTLiCaiTransferRecords                      @"yeb/yebTransferLogs"
+//活期理財 - 理財額度記錄
+#define BTTLiCaiWallet                               @"yeb/yebInterestCreditLogs"
+//活期理財 - 配置信息
+#define BTTLiCaiConfig                               @"yeb/yebConfig"
+
 /*********************************************產品API********************************************************/
 
 //USDT取款限額

@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^AccountBlanceBlock)(void);
+typedef void (^LiCaiBlock)(void);
 
 @interface BTTMeHeadernNicknameLoginCell : BTTBaseCollectionViewCell
 
@@ -18,7 +19,13 @@ typedef void (^AccountBlanceBlock)(void);
 
 @property (nonatomic, copy) AccountBlanceBlock accountBlanceBlock;
 
+@property (nonatomic, copy) LiCaiBlock liCaiBlock;
+
 @property (nonatomic, copy) NSString *totalAmount;
+
+@property (nonatomic, copy) NSString *liCaiAmount;
+
+@property (nonatomic, copy) NSString *liCaiPlusAmount;
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 

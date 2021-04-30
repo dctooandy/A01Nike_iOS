@@ -27,6 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *totalAmount;
 
+@property (nonatomic, copy) NSString *yebAmount;
+
+@property (nonatomic, copy) NSString *yebInterest;
+
 @property (nonatomic, assign) BOOL isFanLi;  ///< 返利
 
 @property (nonatomic, assign) BOOL isOpenAccount;  ///< 开户礼金

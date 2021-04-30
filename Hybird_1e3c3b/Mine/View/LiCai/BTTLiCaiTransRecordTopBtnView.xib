@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BTTLiCaiTransRecordTopBtnView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="117"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DDz-Up-LpQ">
+                    <rect key="frame" x="15" y="15" width="76" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="76" id="C2D-hN-uvd"/>
+                        <constraint firstAttribute="height" constant="28" id="qYK-vL-9jR"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="转出记录" backgroundImage="ic_LiCai_record_btn">
+                        <color key="titleColor" red="0.50196078431372548" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="selected" title="转出记录" backgroundImage="ic_LiCai_record_btn_s">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="typeBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="xmf-Bo-MHK"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8R-hj-hkF">
+                    <rect key="frame" x="101" y="15" width="76" height="28"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="转入记录" backgroundImage="ic_LiCai_record_btn">
+                        <color key="titleColor" red="0.50196078431372548" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="selected" title="转入记录" backgroundImage="ic_LiCai_record_btn_s">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="typeBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="d2C-Gf-hZG"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Py6-qj-tfh">
+                    <rect key="frame" x="187" y="15" width="76" height="28"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="利息账单" backgroundImage="ic_LiCai_record_btn">
+                        <color key="titleColor" red="0.50196078431372548" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="selected" title="利息账单" backgroundImage="ic_LiCai_record_btn_s">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="typeBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="S7W-Yo-wfw"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KrW-Jv-MBg">
+                    <rect key="frame" x="15" y="74" width="76" height="28"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="近一天" backgroundImage="ic_LiCai_record_btn">
+                        <color key="titleColor" red="0.50196078431372548" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="selected" title="近一天" backgroundImage="ic_LiCai_record_btn_s">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="dayBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="h7Y-qE-Sfs"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="42b-wN-22h">
+                    <rect key="frame" x="101" y="74" width="76" height="28"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="近一周" backgroundImage="ic_LiCai_record_btn">
+                        <color key="titleColor" red="0.50196078431372548" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="selected" title="近一周" backgroundImage="ic_LiCai_record_btn_s">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="dayBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="TOc-Ak-xJm"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9r-Ky-g1z">
+                    <rect key="frame" x="187" y="74" width="76" height="28"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="半年" backgroundImage="ic_LiCai_record_btn">
+                        <color key="titleColor" red="0.50196078431372548" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="selected" title="半年" backgroundImage="ic_LiCai_record_btn_s">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="dayBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="LUz-gG-yO5"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWk-Gd-9lo">
+                    <rect key="frame" x="273" y="74" width="76" height="28"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="一年" backgroundImage="ic_LiCai_record_btn">
+                        <color key="titleColor" red="0.50196078431372548" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="selected" title="一年" backgroundImage="ic_LiCai_record_btn_s">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="dayBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="wng-Iv-z4Y"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wdr-bo-Oy9">
+                    <rect key="frame" x="0.0" y="58" width="375" height="1"/>
+                    <color key="backgroundColor" red="0.1764705882352941" green="0.1803921568627451" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="EJM-Z1-wMM"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <constraints>
+                <constraint firstItem="Py6-qj-tfh" firstAttribute="width" secondItem="DDz-Up-LpQ" secondAttribute="width" id="3ut-UU-xiA"/>
+                <constraint firstAttribute="trailing" secondItem="Wdr-bo-Oy9" secondAttribute="trailing" id="5Py-U6-4oB"/>
+                <constraint firstItem="Py6-qj-tfh" firstAttribute="leading" secondItem="B8R-hj-hkF" secondAttribute="trailing" constant="10" id="5tG-R9-DcR"/>
+                <constraint firstItem="KrW-Jv-MBg" firstAttribute="width" secondItem="DDz-Up-LpQ" secondAttribute="width" id="8Dg-3T-2yZ"/>
+                <constraint firstItem="42b-wN-22h" firstAttribute="height" secondItem="DDz-Up-LpQ" secondAttribute="height" id="9Lm-fB-7PC"/>
+                <constraint firstItem="rWk-Gd-9lo" firstAttribute="height" secondItem="DDz-Up-LpQ" secondAttribute="height" id="9nC-5g-nYQ"/>
+                <constraint firstItem="Py6-qj-tfh" firstAttribute="top" secondItem="DDz-Up-LpQ" secondAttribute="top" id="BKU-Zv-bP3"/>
+                <constraint firstItem="rWk-Gd-9lo" firstAttribute="width" secondItem="DDz-Up-LpQ" secondAttribute="width" id="BtG-FJ-TFy"/>
+                <constraint firstItem="B8R-hj-hkF" firstAttribute="width" secondItem="DDz-Up-LpQ" secondAttribute="width" id="CHf-yF-04f"/>
+                <constraint firstItem="Wdr-bo-Oy9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HSe-f6-DQL"/>
+                <constraint firstItem="KrW-Jv-MBg" firstAttribute="height" secondItem="DDz-Up-LpQ" secondAttribute="height" id="LiI-8P-juB"/>
+                <constraint firstItem="B8R-hj-hkF" firstAttribute="top" secondItem="DDz-Up-LpQ" secondAttribute="top" id="RsI-xi-LQu"/>
+                <constraint firstItem="DDz-Up-LpQ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="15" id="Umc-Gk-YTy"/>
+                <constraint firstItem="C9r-Ky-g1z" firstAttribute="width" secondItem="DDz-Up-LpQ" secondAttribute="width" id="Xi4-Uy-4f7"/>
+                <constraint firstItem="Py6-qj-tfh" firstAttribute="height" secondItem="DDz-Up-LpQ" secondAttribute="height" id="aLd-QC-roq"/>
+                <constraint firstItem="B8R-hj-hkF" firstAttribute="height" secondItem="DDz-Up-LpQ" secondAttribute="height" id="cAW-YG-LzC"/>
+                <constraint firstItem="C9r-Ky-g1z" firstAttribute="leading" secondItem="42b-wN-22h" secondAttribute="trailing" constant="10" id="hAN-YL-4JF"/>
+                <constraint firstItem="42b-wN-22h" firstAttribute="bottom" secondItem="KrW-Jv-MBg" secondAttribute="bottom" id="hcv-y7-qge"/>
+                <constraint firstItem="Wdr-bo-Oy9" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="hnp-Wx-sM3"/>
+                <constraint firstItem="42b-wN-22h" firstAttribute="width" secondItem="DDz-Up-LpQ" secondAttribute="width" id="i18-O8-vD5"/>
+                <constraint firstItem="rWk-Gd-9lo" firstAttribute="bottom" secondItem="KrW-Jv-MBg" secondAttribute="bottom" id="j4E-DS-yhD"/>
+                <constraint firstItem="rWk-Gd-9lo" firstAttribute="leading" secondItem="C9r-Ky-g1z" secondAttribute="trailing" constant="10" id="jjb-yh-csq"/>
+                <constraint firstItem="B8R-hj-hkF" firstAttribute="leading" secondItem="DDz-Up-LpQ" secondAttribute="trailing" constant="10" id="niz-bv-eSC"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="KrW-Jv-MBg" secondAttribute="bottom" constant="15" id="nkT-s2-214"/>
+                <constraint firstItem="DDz-Up-LpQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="o8w-VB-YGU"/>
+                <constraint firstItem="C9r-Ky-g1z" firstAttribute="bottom" secondItem="KrW-Jv-MBg" secondAttribute="bottom" id="ohg-q4-epd"/>
+                <constraint firstItem="C9r-Ky-g1z" firstAttribute="height" secondItem="DDz-Up-LpQ" secondAttribute="height" id="pTB-NB-rvZ"/>
+                <constraint firstItem="42b-wN-22h" firstAttribute="leading" secondItem="KrW-Jv-MBg" secondAttribute="trailing" constant="10" id="qQC-Iv-uzM"/>
+                <constraint firstItem="KrW-Jv-MBg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="xvK-QP-KcL"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="billBtn" destination="Py6-qj-tfh" id="EQ3-JH-qtO"/>
+                <outlet property="halfYearBtn" destination="C9r-Ky-g1z" id="7hA-bU-ZJS"/>
+                <outlet property="inRecordBtn" destination="B8R-hj-hkF" id="eFb-fe-6G4"/>
+                <outlet property="oneDayBtn" destination="KrW-Jv-MBg" id="iqS-sm-xCy"/>
+                <outlet property="oneYearBtn" destination="rWk-Gd-9lo" id="9LX-5U-3Dz"/>
+                <outlet property="outRecordBtn" destination="DDz-Up-LpQ" id="GG0-0l-N7J"/>
+                <outlet property="sevenDayBtn" destination="42b-wN-22h" id="Kea-Jq-bDm"/>
+            </connections>
+            <point key="canvasLocation" x="138.40579710144928" y="116.51785714285714"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_LiCai_record_btn" width="76" height="27.5"/>
+        <image name="ic_LiCai_record_btn_s" width="74" height="25.5"/>
+    </resources>
+</document>

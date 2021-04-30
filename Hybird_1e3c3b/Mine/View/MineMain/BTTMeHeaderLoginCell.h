@@ -9,6 +9,7 @@
 #import "BTTBaseCollectionViewCell.h"
 
 typedef void (^AccountBlanceBlock)(void);
+typedef void (^LiCaiBlock)(void);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,7 +19,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) AccountBlanceBlock accountBlanceBlock;
 
+@property (nonatomic, copy) LiCaiBlock liCaiBlock;
+
 @property (nonatomic, copy) NSString *totalAmount;
+
+@property (nonatomic, copy) NSString *liCaiAmount;
+
+@property (nonatomic, copy) NSString *liCaiPlusAmount;
 
 @property (nonatomic, copy) NSString *changModeImgStr;
 
