@@ -224,7 +224,7 @@ DEPENDENCIES:
   - YYModel
 
 SPEC REPOS:
-  trunk:
+  https://github.com/cocoapods/specs.git:
     - AFNetworking
     - BGFMDB
     - CocoaAsyncSocket
@@ -342,4 +342,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 66e9b867f9fe9b31ca07d2f567b998ad45dc945f
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.7.2
