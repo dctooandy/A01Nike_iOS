@@ -53,7 +53,7 @@
     self.timeLab.text = timeStr;
     self.orderNumberLab.text = self.model.billno;
     self.statusLab.text = [self statusToStr:[self.model.status integerValue]];
-    self.amountLab.text = self.model.amount;
+    self.amountLab.text = [PublicMethod transferNumToThousandFormat:[self.model.amount floatValue]];
 }
 
 -(NSString *)statusToStr:(NSInteger)status {

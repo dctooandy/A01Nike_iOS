@@ -23,6 +23,9 @@
                 self.interestRate = [PublicMethod stringWithDecimalNumber:rate];
                 [self.collectionView reloadData];
             });
+        } else {
+            [self hideLoading];
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];
 }
@@ -47,6 +50,7 @@
                 [self.collectionView reloadData];
             });
         } else {
+            [self hideLoading];
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];

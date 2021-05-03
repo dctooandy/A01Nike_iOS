@@ -73,6 +73,9 @@
     if ([self.liCaiPlusAmount floatValue] < 0.01) {
         self.liCaiPlusLabel.hidden = true;
         self.symbolPlusLabel.hidden = true;
+    } else {
+        self.liCaiPlusLabel.hidden = false;
+        self.symbolPlusLabel.hidden = false;
     }
 }
 

@@ -13,6 +13,7 @@
 #import "BTTLiCaiBtnCell.h"
 #import "BTTLiCaiTransRecordController.h"
 #import "BTTLiCaiViewController+LoadData.h"
+#import "CLive800Manager.h"
 
 @interface BTTLiCaiViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -27,9 +28,36 @@
     self.earn = @"加载中";
     self.interestRate = @"加载中";
     self.accountBalance = @"加载中";
+    [self setUpNav];
     [self LoadLiCaiConfig];
     [self loadLocalAmount];
     [self setupElements];
+}
+
+-(void)setUpNav {
+    UIButton * rightBtn = [[UIButton alloc] init];
+    rightBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    rightBtn.adjustsImageWhenHighlighted = false;
+    [rightBtn setTitle:@" 咨询客服" forState:UIControlStateNormal];
+    [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [rightBtn setImage:[UIImage imageNamed:@"homepage_service"] forState:UIControlStateNormal];
+    [rightBtn addTarget:self action:@selector(kefuBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+}
+
+-(void)kefuBtnAction {
+    [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
+        if (errCode != CSServiceCode_Request_Suc) {//异常处理
+            BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+                if (buttonIndex == 0) {
+                    [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+                }else if (buttonIndex == 1){
+                    [[CLive800Manager sharedInstance] startLive800Chat:self];
+                }
+            }];
+            [actionSheet show];
+        }
+    }];
 }
 
 - (void)setupCollectionView {
