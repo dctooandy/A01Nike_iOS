@@ -472,11 +472,17 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTCustomerReportBank                      @"account/queryModifyBankRequests"
 
 //活期理財 - 轉賬記錄
-#define BTTLiCaiTransferRecords                      @"yeb/yebTransferLogs"
+#define BTTLiCaiTransferRecords                    @"yeb/yebTransferLogs"
 //活期理財 - 理財額度記錄
-#define BTTLiCaiWallet                               @"yeb/yebInterestCreditLogs"
+#define BTTLiCaiWallet                             @"yeb/yebInterestCreditLogs"
 //活期理財 - 配置信息
-#define BTTLiCaiConfig                               @"yeb/yebConfig"
+#define BTTLiCaiConfig                             @"yeb/yebConfig"
+
+//活期理財 - 轉出至賬戶餘額
+#define BTTLiCaiTransferOut                        @"yeb/transferOut"
+//活期理財 - 轉入理財錢包
+#define BTTLiCaiTransferIn                         @"yeb/transferIn"
+
 
 /*********************************************產品API********************************************************/
 
@@ -540,6 +546,12 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTFirtWinningList                         @"_extra_/api/v1/activity/winner/first-winning-list"
 //vip優惠券自動派發
 #define BTTVipHasPromo                             @"_extra_/api/v1/activity/vip-promo/has-promos"
+//伺服器時間
+#define BTTServerTime                              @"_extra_/api/v1/serverTime"
+//活期理財 - 利息賬單紀錄
+#define BTTLiCaiInterestRecords                    @"_extra_/api/v1/ws/query-yeb-interest-logs"
+//活期理財 - 累積收益
+#define BTTLiCaiInterestSum                        @"_extra_/api/v1/ws/yeb-interest-logs-sum"
 
 /********************************************常用宏*********************************************************/
 

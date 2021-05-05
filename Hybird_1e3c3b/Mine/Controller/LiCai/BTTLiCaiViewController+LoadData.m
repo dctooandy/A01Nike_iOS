@@ -10,12 +10,8 @@
 
 @implementation BTTLiCaiViewController (LoadData)
 -(void)LoadLiCaiConfig {
-    [self showLoading];
     [IVNetwork requestPostWithUrl:BTTLiCaiConfig paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
-        if (![self.accountBalance isEqualToString:@"加载中"]) {
-            [self hideLoading];
-        }
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BTTLiCaiConfigModel * model = [BTTLiCaiConfigModel yy_modelWithJSON:result.body];
             CGFloat rate = [model.rate floatValue] * 1000000 * 365 /10000;
@@ -30,16 +26,47 @@
     }];
 }
 
+-(void)loadInterestSum {
+    [self loadServerTime:^(NSString * _Nonnull timeStr) {
+        NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+        params[@"beginTime"] = @"2021-04-01 00:00:00";
+        params[@"endTime"] = timeStr;
+
+        [IVNetwork requestPostWithUrl:BTTLiCaiInterestSum paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                NSArray * arr = result.body;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.earn = [PublicMethod stringWithDecimalNumber:[arr[0][@"sumInterest"] floatValue]];
+                    [self.collectionView reloadData];
+                });
+            } else {
+                [MBProgressHUD showError:result.head.errMsg toView:nil];
+            }
+        }];
+    }];
+}
+
+-(void)loadServerTime:(ServerTimeCompleteBlock)completeBlock {
+    [IVNetwork requestPostWithUrl:BTTServerTime paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSDate *timeDate = [[NSDate alloc]initWithTimeIntervalSince1970:[result.body longLongValue]];
+            NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            completeBlock([dateFormatter stringFromDate:timeDate]);
+        } else {
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
+
 -(void)loadLocalAmount {
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     params[@"flag"] = @1;
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
-    [self showLoading];
     [IVNetwork requestPostWithUrl:BTTCreditsALL paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
-        if (![self.interestRate isEqualToString:@"加载中"]) {
-            [self hideLoading];
-        }
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BTTCustomerBalanceModel *model = [BTTCustomerBalanceModel yy_modelWithJSON:result.body];
             NSString * accountBalance = [PublicMethod stringWithDecimalNumber:model.balance];
@@ -50,7 +77,6 @@
                 [self.collectionView reloadData];
             });
         } else {
-            [self hideLoading];
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];
@@ -89,13 +115,13 @@
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     params[@"clientType"] = @"4";
     [self showLoading];
-    [IVNetwork requestPostWithUrl:@"yeb/transferOut" paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTLiCaiTransferOut paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
+        [self hideLoading];
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [self loadLocalAmount];
             completeBlock();
         } else {
-            [self hideLoading];
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];
@@ -106,13 +132,13 @@
     params[@"clientType"] = @"4";
     params[@"amount"] = amount;
     [self showLoading];
-    [IVNetwork requestPostWithUrl:@"yeb/transferIn" paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTLiCaiTransferIn paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
+        [self hideLoading];
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [self loadLocalAmount];
             completeBlock();
         } else {
-            [self hideLoading];
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];

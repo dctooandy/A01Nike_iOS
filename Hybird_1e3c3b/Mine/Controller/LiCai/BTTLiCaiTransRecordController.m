@@ -30,6 +30,7 @@
     self.view.backgroundColor = [UIColor colorWithHexString:@"212229"];
     self.page = 1;
     self.modelArr = [[NSMutableArray alloc] init];
+    self.interestModelArr = [[NSMutableArray alloc] init];
     [self setUpNav];
     [self loadRecords];
     weakSelf(weakSelf);
@@ -81,20 +82,24 @@
     self.btnView.typeBtnClickBlock = ^(UIButton * _Nonnull button) {
         //0->out 1->in 2->bill
         [weakSelf.modelArr removeAllObjects];
+        [weakSelf.interestModelArr removeAllObjects];
         switch (button.tag) {
             case 0:
                 weakSelf.titleArr = @[@"转出时间", @"订单编号", @"状态", @"金额"];
+                weakSelf.page = 1;
                 weakSelf.transferType = 2;
                 [weakSelf loadRecords];
                 break;
             case 1:
                 weakSelf.titleArr = @[@"转入时间", @"订单编号", @"状态", @"金额"];
+                weakSelf.page = 1;
                 weakSelf.transferType = 1;
                 [weakSelf loadRecords];
                 break;
             case 2:
                 weakSelf.titleArr = @[@"利息账单时间", @"订单编号", @"状态", @"利息", @"年利率", @"计息时长"];
-                [weakSelf setupElements];
+                weakSelf.page = 1;
+                [weakSelf loadInterestRecords];
                 break;
                 
             default:
@@ -105,6 +110,7 @@
     self.btnView.dayBtnClickBlock = ^(UIButton * _Nonnull button) {
         //0->1 1->7 2->halfYear 3->oneYear
         [weakSelf.modelArr removeAllObjects];
+        [weakSelf.interestModelArr removeAllObjects];
         switch (button.tag) {
             case 0:
                 weakSelf.lastDays = 1;
@@ -122,7 +128,12 @@
             default:
                 break;
         }
-        [weakSelf loadRecords];
+        weakSelf.page = 1;
+        if (weakSelf.btnView.billBtn.selected) {
+            [weakSelf loadInterestRecords];
+        } else {
+            [weakSelf loadRecords];
+        }
     };
     
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
@@ -141,12 +152,21 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.btnView.billBtn.selected) {
-        BTTLiCaiInterestRateBillCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLiCaiInterestRateBillCell" forIndexPath:indexPath];
-        return cell;
+        if (self.interestModelArr.count > 0) {
+            BTTLiCaiInterestRateBillCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLiCaiInterestRateBillCell" forIndexPath:indexPath];
+            cell.model = self.interestModelArr[indexPath.row];
+            return cell;
+        } else {
+            BTTVideoGamesNoDataCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesNoDataCell" forIndexPath:indexPath];
+            cell.noDataLabel.text = @"暂无纪录";
+            return cell;
+        }
+         
     } else {
         if (self.modelArr.count > 0) {
             BTTLiCaiRecordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLiCaiRecordCell" forIndexPath:indexPath];
             cell.titleArr = self.titleArr;
+            cell.isTransferOut = self.btnView.outRecordBtn.selected;
             cell.model = self.modelArr[indexPath.row];
             return cell;
         } else {
@@ -197,17 +217,18 @@
     if (self.elementsHight.count) {
         [self.elementsHight removeAllObjects];
     }
-    NSInteger total = self.btnView.billBtn.selected? 4:self.modelArr.count;
+    NSInteger total = self.btnView.billBtn.selected ?  self.interestModelArr.count:self.modelArr.count;
+    NSInteger height = 111;
+    if (self.btnView.billBtn.selected) {
+        height = 138;
+    }
     if (total == 0) {
         total = 1;
+        height = 111;
     }
     NSMutableArray *elementsHight = [NSMutableArray array];
     for (int i = 0; i < total; i++) {
-        if (self.btnView.billBtn.selected) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 138)]];
-        } else {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 111)]];
-        }
+        [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, height)]];
     }
     self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{

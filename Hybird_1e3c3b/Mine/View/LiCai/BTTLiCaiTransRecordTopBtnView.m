@@ -9,8 +9,6 @@
 #import "BTTLiCaiTransRecordTopBtnView.h"
 
 @interface BTTLiCaiTransRecordTopBtnView()
-@property (weak, nonatomic) IBOutlet UIButton *outRecordBtn;
-@property (weak, nonatomic) IBOutlet UIButton *inRecordBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *oneDayBtn;
 @property (weak, nonatomic) IBOutlet UIButton *sevenDayBtn;

@@ -115,6 +115,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)twoDateIsSameMonth:(NSDate *)fistDate_ second:(NSDate *)secondDate_;
 + (BOOL)twoDateIsSameDay:(NSDate *)fistDate_ second:(NSDate *)secondDate_;
 
+//前幾天的年月日（減多少決定）
++(NSString *)lastDateStr:(NSInteger)minus;
+
 // 获取指定日期所在月的天数
 + (NSInteger)numberDaysInMonthOfDate:(NSDate *)date_;
 + (NSDate *)dateByAddingComponents:(NSDate *)date_ offsetComponents:(NSDateComponents *)offsetComponents_;

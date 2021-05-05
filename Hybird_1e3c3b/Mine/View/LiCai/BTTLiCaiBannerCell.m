@@ -25,7 +25,7 @@
     self.bannerView.image = [UIImage imageNamed:@"ic_LiCai_banner"];
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bannerClick)];
     tap.numberOfTapsRequired = 1;
-    [self.bannerView addGestureRecognizer:tap];
+    [self addGestureRecognizer:tap];
     [self addSubview:self.bannerView];
     [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.bottom.right.equalTo(self);

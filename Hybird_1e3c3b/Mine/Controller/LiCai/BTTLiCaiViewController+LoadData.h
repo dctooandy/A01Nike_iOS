@@ -10,15 +10,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void (^ServerTimeCompleteBlock)(NSString * timeStr);
 typedef void (^ShowOutPopViewCompleteBlock)(NSMutableArray * modelArr);
 typedef void (^TransferCompleteBlock)(void);
 
 @interface BTTLiCaiViewController (LoadData)
 -(void)LoadLiCaiConfig;
+-(void)loadInterestSum;
 -(void)loadLocalAmount;
 -(void)loadTransferInRecords:(ShowOutPopViewCompleteBlock)completeBlock;
 -(void)transferOut:(TransferCompleteBlock)completeBlock;
 -(void)transferIn:(NSString *)amount completeBlock:(TransferCompleteBlock)completeBlock;
+-(void)loadServerTime:(ServerTimeCompleteBlock)completeBlock;
 @end
 
 NS_ASSUME_NONNULL_END

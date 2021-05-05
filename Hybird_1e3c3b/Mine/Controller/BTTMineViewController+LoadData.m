@@ -626,11 +626,37 @@
             self.preAmount = [PublicMethod stringWithDecimalNumber:model.balance];
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.totalAmount = [PublicMethod stringWithDecimalNumber:model.balance];
-                self.yebAmount = [PublicMethod stringWithDecimalNumber:model.yebAmount];
-                self.yebInterest = [PublicMethod stringWithDecimalNumber:model.yebInterest];
+                self.yebAmount = [PublicMethod stringWithDecimalNumber:model.yebAmount+model.yebInterest];
+                if ([self.yebAmount floatValue] > 0) {
+                    [self loadInterestRecords];
+                }
                 self.isLoading = NO;
                 [self.collectionView reloadData];
             });
+        }
+    }];
+}
+
+-(void)loadInterestRecords {
+    NSString * dateStr = [PublicMethod lastDateStr:1];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"beginTime"] = [NSString stringWithFormat:@"%@ 00:00:00", dateStr];
+    params[@"endTime"] = [NSString stringWithFormat:@"%@ 23:59:59", dateStr];
+    params[@"pageNo"] = @1;
+    params[@"pageSize"] = @15;
+    [IVNetwork requestPostWithUrl:BTTLiCaiInterestRecords paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTInterestRecordsModel * model = [BTTInterestRecordsModel yy_modelWithJSON:result.body];
+            if (model.data.count > 0) {
+                BTTInterestRecordsItemModel * itemModel = model.data[0];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.yebInterest = [PublicMethod stringWithDecimalNumber:[itemModel.interestAmount floatValue]];
+                    [self.collectionView reloadData];
+                });
+            }
+        } else {
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];
 }

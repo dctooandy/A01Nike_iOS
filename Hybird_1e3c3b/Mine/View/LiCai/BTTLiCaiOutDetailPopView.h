@@ -18,6 +18,7 @@ typedef void (^TransferOutBtnClickBlock)(UIButton * button);
 @property (nonatomic, copy) CloseBtnClickBlock closeBtnClickBlock;
 @property (nonatomic, copy) TransferOutBtnClickBlock transferOutBtnClickBlock;
 @property (nonatomic, strong)NSMutableArray <BTTLiCaiTransferRecordItemModel *> * modelArr;
+@property  (nonatomic, copy) NSString * serverTimeStr;
 @end
 
 NS_ASSUME_NONNULL_END

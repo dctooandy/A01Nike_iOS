@@ -67,6 +67,7 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
     
     BTTLiCaiOutDetailPopViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLiCaiOutDetailPopViewCell" forIndexPath:indexPath];
+    cell.endDateStr = self.serverTimeStr;
     cell.model = self.modelArr[indexPath.row];
     return cell;
 }

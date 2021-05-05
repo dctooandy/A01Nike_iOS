@@ -20,6 +20,8 @@ typedef void (^DayBtnClickBlock)(UIButton * button);
 @property (nonatomic, copy) DayBtnClickBlock dayBtnClickBlock;
 
 @property (weak, nonatomic) IBOutlet UIButton *billBtn;
+@property (weak, nonatomic) IBOutlet UIButton *inRecordBtn;
+@property (weak, nonatomic) IBOutlet UIButton *outRecordBtn;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -22,18 +22,20 @@
     [super awakeFromNib];
 }
 
+-(void)setEndDateStr:(NSString *)endDateStr{
+    _endDateStr = endDateStr;
+}
+
 -(void)setModel:(BTTLiCaiTransferRecordItemModel *)model {
     _model = model;
     self.timeLabel.text = self.model.createdTime;
     self.amountLabel.text = self.model.amount;
-    self.interestAmountLabel.text = self.model.totalInterest;
-    
-    self.durationLabel.text = @"";
+    self.interestAmountLabel.text = [NSString stringWithFormat:@"%.6lf", [self.model.totalInterest floatValue]];
     
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *beginDate = [dateFormatter dateFromString:model.acturalBeginTime];
-    NSDate *endDate = [dateFormatter dateFromString:model.expectEndTime];
+    NSDate *beginDate = [dateFormatter dateFromString:model.transferInTime];
+    NSDate *endDate = [dateFormatter dateFromString:self.endDateStr];
     NSInteger timeDistance= [endDate timeIntervalSinceDate:beginDate] / 60 / 60;
     self.durationLabel.text = [NSString stringWithFormat:@"%ld小时", timeDistance];
 }

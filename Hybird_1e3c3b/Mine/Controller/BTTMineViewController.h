@@ -11,7 +11,7 @@
 #import "BTTShareRedirectModel.h"
 #import "BTTCustomerBalanceModel.h"
 #import "CLive800Manager.h"
-
+#import "BTTInterestRecordsModel.h"
 
 
 

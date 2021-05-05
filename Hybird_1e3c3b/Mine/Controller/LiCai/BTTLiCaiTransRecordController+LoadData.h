@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLiCaiTransRecordController (LoadData)
 -(void)loadRecords;
+-(void)loadInterestRecords;
 @end
 
 NS_ASSUME_NONNULL_END

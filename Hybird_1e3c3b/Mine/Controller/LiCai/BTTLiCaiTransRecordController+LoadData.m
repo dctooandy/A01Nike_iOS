@@ -32,4 +32,25 @@
     }];
 }
 
+-(void)loadInterestRecords {
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"lastDays"] = @(self.lastDays);
+    params[@"pageNo"] = @(self.page);
+    params[@"pageSize"] = @15;
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTLiCaiInterestRecords paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [self hideLoading];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTInterestRecordsModel * model = [BTTInterestRecordsModel yy_modelWithJSON:result.body];
+            if (model.data.count > 0) {
+                [self.interestModelArr addObjectsFromArray:model.data];
+            }
+            [self setupElements];
+        } else {
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
+
 @end

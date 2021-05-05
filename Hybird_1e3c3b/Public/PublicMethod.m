@@ -513,6 +513,15 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     return NO;
 }
 
++(NSString *)lastDateStr:(NSInteger)minus {
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSTimeInterval lastTime = -minus * 24 * 60 * 60;
+    NSDate * date = [[NSDate date] dateByAddingTimeInterval:lastTime];
+    NSString * dateStr = [dateFormatter stringFromDate:date];
+    return dateStr;
+}
+
 + (NSInteger)numberDaysInMonthOfDate:(NSDate *)date_
 {
     NSCalendar *calender = [NSCalendar currentCalendar];

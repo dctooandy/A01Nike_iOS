@@ -14,6 +14,7 @@
 #import "BTTLiCaiTransRecordController.h"
 #import "BTTLiCaiViewController+LoadData.h"
 #import "CLive800Manager.h"
+#import "BTTPromotionDetailController.h"
 
 @interface BTTLiCaiViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -31,6 +32,7 @@
     [self setUpNav];
     [self LoadLiCaiConfig];
     [self loadLocalAmount];
+    [self loadInterestSum];
     [self setupElements];
 }
 
@@ -78,7 +80,11 @@
     if (indexPath.row == 0) {
         BTTLiCaiBannerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLiCaiBannerCell" forIndexPath:indexPath];
         cell.bannerClickBlock = ^{
-            //TODO: go to h5
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            vc.title = @"";
+            vc.webConfigModel.url = @"/activity_pages/insterest30";
+            vc.webConfigModel.newView = YES;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
         };
         
         return cell;
@@ -97,6 +103,12 @@
         } else {
             cell.interestRate = [NSString stringWithFormat:@"%@%%", [PublicMethod transferNumToThousandFormat:[self.interestRate floatValue]]];
         }
+        if ([self.earn isEqualToString:@"加载中"]) {
+            cell.earn = self.earn;
+        } else {
+            cell.earn = [PublicMethod transferNumToThousandFormat:[self.earn floatValue]];
+        }
+        
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             BTTLiCaiTransRecordController * vc = [[BTTLiCaiTransRecordController alloc] init];
             vc.transferType = 2;
@@ -107,29 +119,31 @@
     } else {
         BTTLiCaiBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLiCaiBtnCell" forIndexPath:indexPath];
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-            //TODO: in out pop view
             if (button.tag == 0) {//out
                 [self loadTransferInRecords:^(NSMutableArray * _Nonnull modelArr) {
                     if (modelArr.count >0) {
-                        self.OutDetailPopView = [BTTLiCaiOutDetailPopView viewFromXib];
-                        [self.view addSubview:self.OutDetailPopView];
-                        self.OutDetailPopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height);
-                        self.OutDetailPopView.modelArr = modelArr;
-                        weakSelf(weakSelf)
-                        self.OutDetailPopView.closeBtnClickBlock = ^(UIButton * _Nonnull button) {
-                            [weakSelf.OutDetailPopView removeFromSuperview];
-                        };
-                        
-                        self.OutDetailPopView.transferOutBtnClickBlock = ^(UIButton * _Nonnull button) {
-                            [weakSelf transferOut:^{
+                        [self loadServerTime:^(NSString * _Nonnull timeStr) {
+                            self.OutDetailPopView = [BTTLiCaiOutDetailPopView viewFromXib];
+                            self.OutDetailPopView.serverTimeStr = timeStr;
+                            [self.view addSubview:self.OutDetailPopView];
+                            self.OutDetailPopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height);
+                            self.OutDetailPopView.modelArr = modelArr;
+                            weakSelf(weakSelf)
+                            self.OutDetailPopView.closeBtnClickBlock = ^(UIButton * _Nonnull button) {
                                 [weakSelf.OutDetailPopView removeFromSuperview];
-                                [MBProgressHUD showSuccess:@"转出成功" toView:nil];
-                            }];
-                        };
+                            };
+                            
+                            self.OutDetailPopView.transferOutBtnClickBlock = ^(UIButton * _Nonnull button) {
+                                [weakSelf transferOut:^{
+                                    [weakSelf.OutDetailPopView removeFromSuperview];
+                                    [MBProgressHUD showSuccess:@"转出成功" toView:nil];
+                                }];
+                            };
+                        }];
+                        
                     } else {
                         [MBProgressHUD showError:@"当前无计息订单" toView:nil];
                     }
-                    
                 }];
                 
             } else if (button.tag == 1) {//in

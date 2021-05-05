@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLiCaiOutDetailPopViewCell : UICollectionViewCell
 @property (nonatomic, strong)BTTLiCaiTransferRecordItemModel * model;
+@property (nonatomic, copy) NSString * endDateStr;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -56,10 +56,15 @@
 
 - (IBAction)btnClick:(UIButton *)sender {
     
-    if ([self.inputAmountStr floatValue] <= 0) {
+    if ([self.inputAmountStr floatValue] < 1) {
         NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
         NSString * str = [NSString stringWithFormat:@"输入金额不正确，最少请输入1%@", unitStr];
         [MBProgressHUD showError:str toView:nil];
+        return;
+    }
+    NSString * replacedStr = [self.accountBalance stringByReplacingOccurrencesOfString:@","withString:@""];
+    if ([self.inputAmountStr floatValue] > [replacedStr floatValue]) {
+        [MBProgressHUD showError:@"转帐金额不能超过账户余额！" toView:nil];
         return;
     }
     if (self.transferBtnClickBlock) {
@@ -87,22 +92,24 @@
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField {
-    self.cancelAmountBtn.hidden = false;
-    self.inputAmountStr = textField.text;
-    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-        self.textField.text = [NSString stringWithFormat:@"%@USDT", textField.text];
-    } else {
-        self.textField.text = [NSString stringWithFormat:@"%@元", textField.text];
-    }
-    NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
-    NSInteger length = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? 4:1;
-    NSString * str = [textField.text substringWithRange:NSMakeRange(0,textField.text.length - length)];
-    if ([str floatValue] <= 1) {
-        self.tipLabel.textColor = [UIColor colorWithHexString:@"CC0000"];
-        self.tipLabel.text = [NSString stringWithFormat:@"输入金额不正确，最少请输入1%@", unitStr];
-    } else {
-        self.tipLabel.textColor = [UIColor colorWithHexString:@"999999"];
-        self.tipLabel.text = @"请输入转账金额，最少1USDT";
+    if (textField.text.length > 0) {
+        self.cancelAmountBtn.hidden = false;
+        self.inputAmountStr = textField.text;
+        if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+            self.textField.text = [NSString stringWithFormat:@"%@USDT", textField.text];
+        } else {
+            self.textField.text = [NSString stringWithFormat:@"%@元", textField.text];
+        }
+        NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
+        NSInteger length = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? 4:1;
+        NSString * str = [textField.text substringWithRange:NSMakeRange(0,textField.text.length - length)];
+        if ([str floatValue] <= 1) {
+            self.tipLabel.textColor = [UIColor colorWithHexString:@"CC0000"];
+            self.tipLabel.text = [NSString stringWithFormat:@"输入金额不正确，最少请输入1%@", unitStr];
+        } else {
+            self.tipLabel.textColor = [UIColor colorWithHexString:@"999999"];
+            self.tipLabel.text = @"请输入转账金额，最少1USDT";
+        }
     }
 }
 
@@ -116,39 +123,18 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-        if ([textField.text rangeOfString:@"."].location != NSNotFound) {
-            self.isHaveDian = true;
-        } else {
-            self.isHaveDian = false;
-        }
-        if (self.isHaveDian && [string isEqualToString:@"."]) {
-            return false;
-        }
-        NSMutableString * futureString = [NSMutableString stringWithString:textField.text];
-        [futureString insertString:string atIndex:range.location];
-        NSInteger flag = 0;
-        const NSInteger limited = 2 ;//小数点后需要限制的个数
-        for (int i = (int)(futureString.length - 1); i>=0; i--) {
-            if ([futureString characterAtIndex:i] == '.') {
-                if (flag > limited) {
-                    [MBProgressHUD showError:@"转入钱包金额仅支持小数点后两位" toView:nil];
-                    return NO;
-                }
-                break;
-            }
-            flag++;
-        }
-        return YES;
-    } else {
-        if ([string isEqualToString:@"."]) {
-            [MBProgressHUD showError:@"转入钱包金额仅支持整数" toView:nil];
-            return false;
-        } else if ([textField.text isEqualToString:@"0"] && string.length > 0) {
-            return false;
-        }
-        return true;
+    if ([string isEqualToString:@"."]) {
+        [MBProgressHUD showError:@"转入钱包金额仅支持整数" toView:nil];
+        return false;
+    } else if (textField.text.length == 0 && [string isEqualToString:@"0"]) {
+        NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
+        NSString * str = [NSString stringWithFormat:@"输入金额不正确，最少请输入1%@", unitStr];
+        [MBProgressHUD showError:str toView:nil];
+        return false;
+    } else if ([textField.text isEqualToString:@"0"] && string.length > 0) {
+        return false;
     }
+    return true;
 }
 
 @end

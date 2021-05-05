@@ -53,7 +53,12 @@
     self.timeLab.text = timeStr;
     self.orderNumberLab.text = self.model.billno;
     self.statusLab.text = [self statusToStr:[self.model.status integerValue]];
-    self.amountLab.text = [PublicMethod transferNumToThousandFormat:[self.model.amount floatValue]];
+    CGFloat total = self.isTransferOut ? [self.model.amount floatValue] + [self.model.finalInterestAmt floatValue]:[self.model.amount floatValue];
+    self.amountLab.text = [PublicMethod transferNumToThousandFormat:total];
+}
+
+-(void)setIsTransferOut:(BOOL)isTransferOut {
+    _isTransferOut = isTransferOut;
 }
 
 -(NSString *)statusToStr:(NSInteger)status {
@@ -66,7 +71,7 @@
             str = @"成功";
             break;
         case -1:
-        case 2:
+        case -9:
             str = @"失败";
             break;
             

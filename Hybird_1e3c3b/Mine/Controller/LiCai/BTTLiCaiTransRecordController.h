@@ -8,6 +8,7 @@
 
 #import "BTTCollectionViewController.h"
 #import "BTTLiCaiTransferRecordModel.h"
+#import "BTTInterestRecordsModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger lastDays;
 @property (nonatomic, assign) NSInteger page;
 @property (nonatomic, strong)NSMutableArray <BTTLiCaiTransferRecordItemModel *> * modelArr;
+@property (nonatomic, strong)NSMutableArray <BTTInterestRecordsItemModel *> * interestModelArr;
 - (void)setupElements;
 @end
 

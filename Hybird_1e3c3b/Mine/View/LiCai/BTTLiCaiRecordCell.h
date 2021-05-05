@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLiCaiRecordCell : BTTBaseCollectionViewCell
 @property (nonatomic, copy) NSArray *titleArr;
+@property (nonatomic, assign) BOOL isTransferOut;
 @property (nonatomic, strong)BTTLiCaiTransferRecordItemModel * model;
 @end
 

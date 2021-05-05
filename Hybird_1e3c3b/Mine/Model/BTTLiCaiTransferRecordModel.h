@@ -51,7 +51,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *expectEndTime;
 @property (nonatomic, copy) NSString *finalInterestAmt;
 @property (nonatomic, copy) NSString *status;
-
+@property (nonatomic, copy) NSString *yebStatus;
+@property (nonatomic, copy) NSString *lastInterestCreatedTime;
 
 @end
 

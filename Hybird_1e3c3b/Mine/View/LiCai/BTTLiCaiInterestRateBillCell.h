@@ -7,10 +7,11 @@
 //
 
 #import "BTTBaseCollectionViewCell.h"
-
+#import "BTTInterestRecordsModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLiCaiInterestRateBillCell : BTTBaseCollectionViewCell
+@property (nonatomic, strong)BTTInterestRecordsItemModel * model;
 @end
 
 NS_ASSUME_NONNULL_END
