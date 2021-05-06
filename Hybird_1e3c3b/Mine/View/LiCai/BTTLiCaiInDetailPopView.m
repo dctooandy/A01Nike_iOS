@@ -103,7 +103,7 @@
         NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
         NSInteger length = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? 4:1;
         NSString * str = [textField.text substringWithRange:NSMakeRange(0,textField.text.length - length)];
-        if ([str floatValue] <= 1) {
+        if ([str floatValue] < 1) {
             self.tipLabel.textColor = [UIColor colorWithHexString:@"CC0000"];
             self.tipLabel.text = [NSString stringWithFormat:@"输入金额不正确，最少请输入1%@", unitStr];
         } else {

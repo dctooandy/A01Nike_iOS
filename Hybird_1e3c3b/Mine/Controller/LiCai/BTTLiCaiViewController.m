@@ -15,6 +15,7 @@
 #import "BTTLiCaiViewController+LoadData.h"
 #import "CLive800Manager.h"
 #import "BTTPromotionDetailController.h"
+#import <IQKeyboardManager.h>
 
 @interface BTTLiCaiViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -34,6 +35,34 @@
     [self loadLocalAmount];
     [self loadInterestSum];
     [self setupElements];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
+}
+
+-(void)keyboardWillHideNotification:(NSNotification*)notify {
+    CGFloat duration = [notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    [UIView animateWithDuration:duration animations:^{
+        self.inDetailPopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height);
+    }];
+}
+
+-(void)keyboardWillShowNotification:(NSNotification*)notify {
+    CGFloat duration = [notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    CGRect keyboardFrame = [notify.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat transformY = 320-self.inDetailPopView.textField.frame.origin.y-self.inDetailPopView.textField.frame.size.height-25-keyboardFrame.size.height;
+    [UIView animateWithDuration:duration animations:^{
+        self.inDetailPopView.frame = CGRectMake(0, transformY, SCREEN_WIDTH, self.view.frame.size.height);
+    }];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[IQKeyboardManager sharedManager] setEnable:NO];
+}
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[IQKeyboardManager sharedManager] setEnable:YES];
 }
 
 -(void)setUpNav {

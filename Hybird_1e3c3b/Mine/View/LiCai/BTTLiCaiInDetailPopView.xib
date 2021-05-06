@@ -65,7 +65,7 @@
                             <rect key="frame" x="15" y="119.5" width="230" height="29"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
-                            <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfP-xx-wpJ">
                             <rect key="frame" x="275" y="109.5" width="35" height="74"/>
@@ -154,6 +154,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="pxx-mK-Huw" secondAttribute="bottom" id="6rY-Ga-AbM"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pxx-mK-Huw" secondAttribute="trailing" id="W75-Ou-737"/>

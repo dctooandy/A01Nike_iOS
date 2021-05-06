@@ -118,6 +118,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="eDI-oq-9uP" secondAttribute="trailing" id="45y-cA-ekI"/>
                 <constraint firstItem="eDI-oq-9uP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UUZ-Lh-aWn"/>

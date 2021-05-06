@@ -36,8 +36,9 @@
             IVJResponseObject *result = response;
             if ([result.head.errCode isEqualToString:@"0000"]) {
                 NSArray * arr = result.body;
+                CGFloat num = arr.count > 0 ? [arr[0][@"sumInterest"] floatValue]: 0.00;
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    self.earn = [PublicMethod stringWithDecimalNumber:[arr[0][@"sumInterest"] floatValue]];
+                    self.earn =  [PublicMethod stringWithDecimalNumber:num];
                     [self.collectionView reloadData];
                 });
             } else {
