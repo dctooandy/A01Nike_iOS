@@ -627,9 +627,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.totalAmount = [PublicMethod stringWithDecimalNumber:model.balance];
                 self.yebAmount = [PublicMethod stringWithDecimalNumber:model.yebAmount+model.yebInterest];
-                if ([self.yebAmount floatValue] > 0) {
-                    [self loadInterestSum];
-                }
+                [self loadInterestSum];
                 self.isLoading = NO;
                 [self.collectionView reloadData];
             });
