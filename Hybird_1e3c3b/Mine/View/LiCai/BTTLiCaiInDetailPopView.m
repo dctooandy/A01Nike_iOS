@@ -134,6 +134,7 @@
     } else if ([textField.text isEqualToString:@"0"] && string.length > 0) {
         return false;
     }
+    self.cancelAmountBtn.hidden = false;
     return true;
 }
 

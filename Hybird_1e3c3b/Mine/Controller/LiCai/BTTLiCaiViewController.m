@@ -35,8 +35,6 @@
     [self loadLocalAmount];
     [self loadInterestSum];
     [self setupElements];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
 }
 
 -(void)keyboardWillHideNotification:(NSNotification*)notify {
@@ -58,6 +56,8 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [[IQKeyboardManager sharedManager] setEnable:NO];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
 }
 -(void)viewDidDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
