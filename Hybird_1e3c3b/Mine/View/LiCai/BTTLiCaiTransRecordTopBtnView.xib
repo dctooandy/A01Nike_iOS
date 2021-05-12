@@ -24,7 +24,7 @@
                     <state key="normal" title="转出记录" backgroundImage="ic_LiCai_record_btn">
                         <color key="titleColor" red="0.50196078431372548" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
-                    <state key="selected" title="转出记录" backgroundImage="ic_LiCai_record_btn_s">
+                    <state key="selected" backgroundImage="ic_LiCai_record_btn_s">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
@@ -49,10 +49,10 @@
                     <rect key="frame" x="192.5" y="15" width="79" height="28"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="利息账单" backgroundImage="ic_LiCai_record_btn">
+                    <state key="normal" title="利息记录" backgroundImage="ic_LiCai_record_btn">
                         <color key="titleColor" red="0.50196078431372548" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
-                    <state key="selected" title="利息账单" backgroundImage="ic_LiCai_record_btn_s">
+                    <state key="selected" backgroundImage="ic_LiCai_record_btn_s">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
