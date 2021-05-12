@@ -110,8 +110,8 @@
         BTTLiCaiBannerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLiCaiBannerCell" forIndexPath:indexPath];
         cell.bannerClickBlock = ^{
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            vc.title = @"";
-            vc.webConfigModel.url = @"/activity_pages/insterest30";
+            vc.title = @"活期理财30%";
+            vc.webConfigModel.url = @"/activity_pages/interest30";
             vc.webConfigModel.newView = YES;
             [weakSelf.navigationController pushViewController:vc animated:YES];
         };
