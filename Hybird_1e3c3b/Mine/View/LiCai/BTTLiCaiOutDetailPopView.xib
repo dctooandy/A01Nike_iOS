@@ -43,25 +43,19 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="转入时间" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkH-56-FAS">
-                            <rect key="frame" x="0.0" y="51" width="80" height="17"/>
+                            <rect key="frame" x="0.0" y="51" width="106.5" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本金" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kv2-Xh-r1q">
-                            <rect key="frame" x="80" y="51" width="80" height="17"/>
+                            <rect key="frame" x="106.5" y="51" width="107" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="利息时长" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qdU-I1-D4L">
-                            <rect key="frame" x="160" y="51" width="80" height="17"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="利息" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YuF-wL-sBO">
-                            <rect key="frame" x="240" y="51" width="80" height="17"/>
+                            <rect key="frame" x="213.5" y="51" width="106.5" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -106,10 +100,7 @@
                         <constraint firstItem="wiE-ZJ-IRU" firstAttribute="centerY" secondItem="GaF-dg-ZHm" secondAttribute="centerY" id="gjv-Qw-CRx"/>
                         <constraint firstItem="qdU-I1-D4L" firstAttribute="leading" secondItem="Kv2-Xh-r1q" secondAttribute="trailing" id="i49-7q-tBr"/>
                         <constraint firstItem="Fie-e7-Qit" firstAttribute="leading" secondItem="eDI-oq-9uP" secondAttribute="leading" id="klk-R6-uF7"/>
-                        <constraint firstItem="YuF-wL-sBO" firstAttribute="leading" secondItem="qdU-I1-D4L" secondAttribute="trailing" id="l4M-xW-9q4"/>
                         <constraint firstAttribute="bottom" secondItem="hdu-jC-lBm" secondAttribute="bottom" constant="25" id="oVN-0z-4ra"/>
-                        <constraint firstItem="YuF-wL-sBO" firstAttribute="width" secondItem="IkH-56-FAS" secondAttribute="width" id="pfy-Up-Xc3"/>
-                        <constraint firstItem="YuF-wL-sBO" firstAttribute="centerY" secondItem="IkH-56-FAS" secondAttribute="centerY" id="ppL-qo-twX"/>
                         <constraint firstItem="Kv2-Xh-r1q" firstAttribute="leading" secondItem="IkH-56-FAS" secondAttribute="trailing" id="wbr-EI-J0W"/>
                         <constraint firstItem="wiE-ZJ-IRU" firstAttribute="centerX" secondItem="eDI-oq-9uP" secondAttribute="centerX" id="z4M-x4-yfb"/>
                         <constraint firstItem="qdU-I1-D4L" firstAttribute="centerY" secondItem="IkH-56-FAS" secondAttribute="centerY" id="zjy-gi-5i2"/>
@@ -123,7 +114,7 @@
                 <constraint firstAttribute="trailing" secondItem="eDI-oq-9uP" secondAttribute="trailing" id="45y-cA-ekI"/>
                 <constraint firstItem="eDI-oq-9uP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="UUZ-Lh-aWn"/>
                 <constraint firstAttribute="bottom" secondItem="eDI-oq-9uP" secondAttribute="bottom" id="nLK-0n-ohd"/>
-                <constraint firstItem="IkH-56-FAS" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.25" id="tS8-2A-dN8"/>
+                <constraint firstItem="IkH-56-FAS" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="1/3" id="tS8-2A-dN8"/>
             </constraints>
             <connections>
                 <outlet property="collectionTopLine" destination="Fie-e7-Qit" id="bPx-FT-y5k"/>

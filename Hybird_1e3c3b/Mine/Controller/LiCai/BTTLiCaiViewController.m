@@ -125,17 +125,17 @@
         if ([self.walletAmount isEqualToString:@"加载中"]) {
             cell.walletAmount = self.walletAmount;
         } else {
-            cell.walletAmount = [PublicMethod transferNumToThousandFormat:[self.walletAmount floatValue]];
+            cell.walletAmount = [PublicMethod transferNumToThousandFormat:[self.walletAmount doubleValue]];
         }
         if ([self.interestRate isEqualToString:@"加载中"]) {
             cell.interestRate = self.interestRate;
         } else {
-            cell.interestRate = [NSString stringWithFormat:@"%@%%", [PublicMethod transferNumToThousandFormat:[self.interestRate floatValue]]];
+            cell.interestRate = [NSString stringWithFormat:@"%@%%", self.interestRate];
         }
         if ([self.earn isEqualToString:@"加载中"]) {
             cell.earn = self.earn;
         } else {
-            cell.earn = [PublicMethod transferNumToThousandFormat:[self.earn floatValue]];
+            cell.earn = [PublicMethod transferNumToThousandFormat:[self.earn doubleValue]];
         }
         
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
@@ -183,7 +183,7 @@
                 if ([self.accountBalance isEqualToString:@"加载中"]) {
                     self.inDetailPopView.accountBalance = self.accountBalance;
                 } else {
-                    self.inDetailPopView.accountBalance = [PublicMethod transferNumToThousandFormat:[self.accountBalance floatValue]];
+                    self.inDetailPopView.accountBalance = [PublicMethod transferNumToThousandFormat:[self.accountBalance doubleValue]];
                 }
                 weakSelf(weakSelf)
                 self.inDetailPopView.closeBtnClickBlock = ^(UIButton * _Nonnull button) {

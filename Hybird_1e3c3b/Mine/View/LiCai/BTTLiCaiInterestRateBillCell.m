@@ -32,24 +32,30 @@
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate * date = [dateFormatter dateFromString:model.createdTime];
-    [dateFormatter setDateFormat:@"MM-dd"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
 
     NSString * dateStr = [dateFormatter stringFromDate:date];
     self.dateLab.text = dateStr;
-    [dateFormatter setDateFormat:@"HH:mm"];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
     NSString * timeStr = [dateFormatter stringFromDate:date];
     self.timeLab.text = timeStr;
     self.orderNumberLab.text = self.model.yebBillno;
     self.statusLab.text = @"成功";
     self.amountLab.text = self.model.interestAmount;
-    self.interestRateLab.text =
-    [NSString stringWithFormat:@"%@%%", [PublicMethod transferNumToThousandFormat:[self.model.yearRate floatValue]]];
+    self.interestRateLab.text = [NSString stringWithFormat:@"%@%%", self.model.yearRate];
     
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *beginDate = [dateFormatter dateFromString:model.fromTime];
     NSDate *endDate = [dateFormatter dateFromString:model.toTime];
-    NSInteger timeDistance= [endDate timeIntervalSinceDate:beginDate] / 60 / 60;
-    self.calculateTimeLab.text = [NSString stringWithFormat:@"%ld小时", timeDistance];
+    NSInteger dayDistance = [endDate timeIntervalSinceDate:beginDate] / 60 / 60 / 24;
+    NSInteger timeDistance = [endDate timeIntervalSinceDate:beginDate] / 60 / 60 - 24 * dayDistance;
+    if (dayDistance == 0) {
+        self.calculateTimeLab.text = [NSString stringWithFormat:@"%ld小时", timeDistance];
+    } else if (timeDistance == 0) {
+        self.calculateTimeLab.text = [NSString stringWithFormat:@"%ld天", dayDistance];
+    } else {
+        self.calculateTimeLab.text = [NSString stringWithFormat:@"%ld天%ld小时", dayDistance, timeDistance];
+    }
 }
 
 @end

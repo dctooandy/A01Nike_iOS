@@ -72,7 +72,7 @@
     self.cardNumberLab.text = [NSString stringWithFormat:@"尾号(%@)", replaceStr];
     
     NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
-    self.moneyLab.text = [NSString stringWithFormat:@"%@%@", [PublicMethod transferNumToThousandFormat:[model.amount floatValue]], unitStr];
+    self.moneyLab.text = [NSString stringWithFormat:@"%@%@", [PublicMethod transferNumToThousandFormat:[model.amount doubleValue]], unitStr];
     self.requestIdLab.text = model.requestId;
     self.typeLab.text = model.flagDesc;
 }

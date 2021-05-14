@@ -31,6 +31,9 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.vipLevelLabel.layer.cornerRadius = 2;
+    self.amountLabel.adjustsFontSizeToFitWidth = true;
+    self.liCaiLabel.adjustsFontSizeToFitWidth = true;
+    self.liCaiPlusLabel.adjustsFontSizeToFitWidth = true;
 }
 
 - (void)setNoticeStr:(NSString *)noticeStr {

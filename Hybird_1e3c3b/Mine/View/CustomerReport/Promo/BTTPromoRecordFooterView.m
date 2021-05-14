@@ -96,7 +96,7 @@
 }
 
 -(void)calculateAmount:(NSString *)amount {
-    self.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue] + [amount floatValue]];
+    self.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount doubleValue] + [amount doubleValue]];
     NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
     self.totalAmountLab.text = [NSString stringWithFormat:@"总计: %@ %@", self.totalAmount, unitStr];
 }

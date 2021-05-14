@@ -12,7 +12,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *durationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *interestAmountLabel;
 
 @end
 
@@ -28,16 +27,30 @@
 
 -(void)setModel:(BTTLiCaiTransferRecordItemModel *)model {
     _model = model;
-    self.timeLabel.text = self.model.transferInTime;
-    self.amountLabel.text = self.model.amount;
-    self.interestAmountLabel.text = [NSString stringWithFormat:@"%.6lf", [self.model.totalInterest floatValue]];
-    
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *beginDate = [dateFormatter dateFromString:model.acturalBeginTime];
+    NSDate * date = [dateFormatter dateFromString:self.model.createdTime];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString * dateStr = [dateFormatter stringFromDate:date];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    NSString * timeStr = [dateFormatter stringFromDate:date];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@\n%@", dateStr, timeStr];
+    self.amountLabel.text = [PublicMethod transferNumToThousandFormat:[self.model.amount doubleValue]];
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *beginDate = [dateFormatter dateFromString:self.model.transferInTime];
     NSDate *endDate = [dateFormatter dateFromString:self.endDateStr];
-    NSInteger timeDistance= [endDate timeIntervalSinceDate:beginDate] / 60 / 60;
-    self.durationLabel.text = [NSString stringWithFormat:@"%ld小时", timeDistance];
+    NSInteger dayDistance = [endDate timeIntervalSinceDate:beginDate] / 60 / 60 / 24;
+    NSInteger timeDistance = [endDate timeIntervalSinceDate:beginDate] / 60 / 60 - 24 * dayDistance;
+    self.durationLabel.text = [NSString stringWithFormat:@"%ld天%ld小时", dayDistance, timeDistance];
+    if (dayDistance == 0) {
+        self.durationLabel.text = [NSString stringWithFormat:@"%ld小时", timeDistance];
+    } else if (timeDistance == 0) {
+        self.durationLabel.text = [NSString stringWithFormat:@"%ld天", dayDistance];
+    } else {
+        self.durationLabel.text = [NSString stringWithFormat:@"%ld天%ld小时", dayDistance, timeDistance];
+    }
 }
 
 @end

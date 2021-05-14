@@ -157,9 +157,9 @@
                     cell.liCaiAmount = self.yebAmount;
                     cell.liCaiPlusAmount = self.yebInterest;
                 } else {
-                    cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
-                    cell.liCaiAmount = [PublicMethod transferNumToThousandFormat:[self.yebAmount floatValue]];
-                    cell.liCaiPlusAmount = [PublicMethod transferNumToThousandFormat:[self.yebInterest floatValue]];
+                    cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount doubleValue]];
+                    cell.liCaiAmount = [PublicMethod transferNumToThousandFormat:[self.yebAmount doubleValue]];
+                    cell.liCaiPlusAmount = [PublicMethod transferNumToThousandFormat:[self.yebInterest doubleValue]];
                 }
                 
                 cell.changModeImgStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"go_main_mode":@"go_usdt_mode";
@@ -203,9 +203,9 @@
                     cell.liCaiAmount = self.yebAmount;
                     cell.liCaiPlusAmount = self.yebInterest;
                 } else {
-                    cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
-                    cell.liCaiAmount = [PublicMethod transferNumToThousandFormat:[self.yebAmount floatValue]];
-                    cell.liCaiPlusAmount = [PublicMethod transferNumToThousandFormat:[self.yebInterest floatValue]];
+                    cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount doubleValue]];
+                    cell.liCaiAmount = [PublicMethod transferNumToThousandFormat:[self.yebAmount doubleValue]];
+                    cell.liCaiPlusAmount = [PublicMethod transferNumToThousandFormat:[self.yebInterest doubleValue]];
                 }
                 cell.changModeImgStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"go_main_mode":@"go_usdt_mode";
                 cell.nicknameLabel.text = nickName;

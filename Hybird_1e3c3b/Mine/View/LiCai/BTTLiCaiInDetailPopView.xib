@@ -62,7 +62,7 @@
                             </constraints>
                         </view>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eii-0X-H0Y">
-                            <rect key="frame" x="15" y="119.5" width="230" height="29"/>
+                            <rect key="frame" x="15" y="119.5" width="250" height="29"/>
                             <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -99,21 +99,11 @@
                             </connections>
                         </button>
                         <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入转账金额，最少1USDT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHO-lY-5Ox">
-                            <rect key="frame" x="15" y="158.5" width="230" height="15"/>
+                            <rect key="frame" x="15" y="158.5" width="250" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCt-B6-Ie1">
-                            <rect key="frame" x="250" y="109.5" width="20" height="74"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="20" id="ZCB-ia-kUK"/>
-                            </constraints>
-                            <state key="normal" image="ic_LiCai_pop_delete_amount"/>
-                            <connections>
-                                <action selector="cancelAmountBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ggf-Z5-wdK"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
@@ -121,12 +111,10 @@
                         <constraint firstItem="RGQ-R6-MhO" firstAttribute="top" secondItem="nnK-6r-U4f" secondAttribute="bottom" constant="10" id="1B9-UB-ql5"/>
                         <constraint firstItem="n2b-lO-V7x" firstAttribute="leading" secondItem="Eii-0X-H0Y" secondAttribute="leading" id="8XM-Qr-TuO"/>
                         <constraint firstAttribute="trailing" secondItem="yfP-xx-wpJ" secondAttribute="trailing" constant="10" id="A9G-PG-60B"/>
-                        <constraint firstItem="n2b-lO-V7x" firstAttribute="top" secondItem="MCt-B6-Ie1" secondAttribute="bottom" id="AKw-JG-YeV"/>
                         <constraint firstItem="nnK-6r-U4f" firstAttribute="leading" secondItem="bAY-SC-xAW" secondAttribute="leading" id="C6U-s5-GJD"/>
                         <constraint firstItem="o2d-gX-SQa" firstAttribute="centerY" secondItem="GdX-Oe-MIy" secondAttribute="centerY" id="CA3-0D-NF0"/>
                         <constraint firstAttribute="trailing" secondItem="RGQ-R6-MhO" secondAttribute="trailing" id="CJ1-fb-78Z"/>
                         <constraint firstItem="GdX-Oe-MIy" firstAttribute="leading" secondItem="pxx-mK-Huw" secondAttribute="leading" constant="15" id="DVo-se-zbQ"/>
-                        <constraint firstItem="yfP-xx-wpJ" firstAttribute="leading" secondItem="MCt-B6-Ie1" secondAttribute="trailing" constant="5" id="Fwx-Ng-zCe"/>
                         <constraint firstAttribute="trailing" secondItem="DpX-pp-1Dc" secondAttribute="trailing" id="H5R-oI-u3Z"/>
                         <constraint firstItem="o2d-gX-SQa" firstAttribute="centerX" secondItem="pxx-mK-Huw" secondAttribute="centerX" id="KRT-AU-7jp"/>
                         <constraint firstAttribute="trailing" secondItem="n2b-lO-V7x" secondAttribute="trailing" id="LOu-d5-FIM"/>
@@ -138,14 +126,13 @@
                         <constraint firstItem="mHO-lY-5Ox" firstAttribute="top" secondItem="Eii-0X-H0Y" secondAttribute="bottom" constant="10" id="U9J-FZ-vTV"/>
                         <constraint firstItem="Eii-0X-H0Y" firstAttribute="leading" secondItem="nnK-6r-U4f" secondAttribute="leading" id="W9u-f1-DOI"/>
                         <constraint firstItem="bAY-SC-xAW" firstAttribute="top" secondItem="DpX-pp-1Dc" secondAttribute="bottom" constant="10" id="aXy-zY-oxl"/>
-                        <constraint firstItem="MCt-B6-Ie1" firstAttribute="top" secondItem="RGQ-R6-MhO" secondAttribute="bottom" id="b6p-Gd-5sJ"/>
                         <constraint firstItem="9mX-gI-N5x" firstAttribute="leading" secondItem="pxx-mK-Huw" secondAttribute="leading" constant="10" id="cCN-6Y-bOB"/>
                         <constraint firstAttribute="trailing" secondItem="9mX-gI-N5x" secondAttribute="trailing" constant="10" id="cSe-yG-ENC"/>
                         <constraint firstItem="bAY-SC-xAW" firstAttribute="leading" secondItem="GdX-Oe-MIy" secondAttribute="leading" id="dY4-GL-0Dn"/>
                         <constraint firstItem="yfP-xx-wpJ" firstAttribute="top" secondItem="RGQ-R6-MhO" secondAttribute="bottom" id="f34-gt-AvU"/>
                         <constraint firstItem="n2b-lO-V7x" firstAttribute="top" secondItem="yfP-xx-wpJ" secondAttribute="bottom" id="fpS-aM-rIo"/>
                         <constraint firstItem="9mX-gI-N5x" firstAttribute="top" secondItem="n2b-lO-V7x" secondAttribute="bottom" constant="25" id="g5U-Oj-dgZ"/>
-                        <constraint firstAttribute="trailing" secondItem="Eii-0X-H0Y" secondAttribute="trailing" constant="75" id="jnh-Ln-DMZ"/>
+                        <constraint firstAttribute="trailing" secondItem="Eii-0X-H0Y" secondAttribute="trailing" constant="55" id="jnh-Ln-DMZ"/>
                         <constraint firstItem="nnK-6r-U4f" firstAttribute="top" secondItem="bAY-SC-xAW" secondAttribute="bottom" constant="5" id="kIU-Vo-kdm"/>
                         <constraint firstItem="mHO-lY-5Ox" firstAttribute="trailing" secondItem="Eii-0X-H0Y" secondAttribute="trailing" id="kve-Q6-Uaa"/>
                         <constraint firstItem="Eii-0X-H0Y" firstAttribute="top" secondItem="RGQ-R6-MhO" secondAttribute="bottom" constant="10" id="r6H-fF-ghY"/>
@@ -162,7 +149,6 @@
             </constraints>
             <connections>
                 <outlet property="amountLabel" destination="bAY-SC-xAW" id="3aO-ZQ-ehj"/>
-                <outlet property="cancelAmountBtn" destination="MCt-B6-Ie1" id="jgG-rG-0KY"/>
                 <outlet property="textField" destination="Eii-0X-H0Y" id="xqm-uQ-dAd"/>
                 <outlet property="tipLabel" destination="mHO-lY-5Ox" id="JYc-AS-JEh"/>
                 <outlet property="whiteView" destination="pxx-mK-Huw" id="yit-Xr-3aK"/>
@@ -173,7 +159,6 @@
     <resources>
         <image name="ic_LiCai_pop_bottom_btn" width="347" height="43"/>
         <image name="ic_LiCai_pop_closw" width="12" height="12"/>
-        <image name="ic_LiCai_pop_delete_amount" width="17" height="17"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -14,9 +14,9 @@
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BTTLiCaiConfigModel * model = [BTTLiCaiConfigModel yy_modelWithJSON:result.body];
-            CGFloat rate = [model.rate floatValue] * 1000000 * 365 /10000;
+//            CGFloat rate = [model.rate floatValue] * 1000000 * 365 /10000;
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.interestRate = [PublicMethod stringWithDecimalNumber:rate];
+                self.interestRate = model.yearRate;
                 [self.collectionView reloadData];
             });
         } else {

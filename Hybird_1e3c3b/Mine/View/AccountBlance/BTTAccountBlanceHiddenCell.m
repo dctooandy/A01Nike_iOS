@@ -35,7 +35,7 @@
 - (void)setModel:(platformBanlaceModel *)model {
     _model = model;
     self.nameLabel.text = model.platformName;
-    self.amountLabel.text = [PublicMethod transferNumToThousandFormat:[model.balance floatValue]];
+    self.amountLabel.text = [PublicMethod transferNumToThousandFormat:[model.balance doubleValue]];
     [self.activityView stopAnimating];
     self.activityView.hidden = YES;
     self.amountLabel.hidden = NO;

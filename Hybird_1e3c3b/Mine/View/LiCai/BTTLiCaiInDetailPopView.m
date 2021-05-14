@@ -11,7 +11,6 @@
 @interface BTTLiCaiInDetailPopView()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *whiteView;
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
-@property (weak, nonatomic) IBOutlet UIButton *cancelAmountBtn;
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 @property (nonatomic, assign) BOOL isHaveDian;
 @property (nonatomic, copy) NSString * inputAmountStr;
@@ -27,10 +26,11 @@
     [super awakeFromNib];
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         self.tipLabel.text = @"请输入转账金额，最少1USDT";
+        self.textField.placeholder = @"1USDT";
     } else {
         self.tipLabel.text = @"请输入转账金额，最少1元";
+        self.textField.placeholder = @"1元";
     }
-    self.cancelAmountBtn.hidden = true;
     self.textField.delegate = self;
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tipLabelClick)];
     tap.numberOfTapsRequired = 1;
@@ -44,8 +44,9 @@
 
 - (IBAction)allInBtnClick:(UIButton *)sender {
     NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
-    self.textField.text = [NSString stringWithFormat:@"%@%@", self.accountBalance, unitStr];
-    self.cancelAmountBtn.hidden = false;
+    NSString * string = self.accountBalance;
+    NSArray * array = [string componentsSeparatedByString:@"."];
+    self.textField.text = [NSString stringWithFormat:@"%@%@", array[0], unitStr];
 }
 
 - (IBAction)closeBtnClick:(UIButton *)sender {
@@ -55,7 +56,6 @@
 }
 
 - (IBAction)btnClick:(UIButton *)sender {
-    
     if ([self.inputAmountStr floatValue] < 1) {
         NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
         NSString * str = [NSString stringWithFormat:@"输入金额不正确，最少请输入1%@", unitStr];
@@ -74,7 +74,6 @@
 
 - (IBAction)cancelAmountBtnClick:(UIButton *)sender {
     self.textField.text = @"";
-    self.cancelAmountBtn.hidden = true;
 }
 
 -(void)tipLabelClick {
@@ -93,7 +92,6 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     if (textField.text.length > 0) {
-        self.cancelAmountBtn.hidden = false;
         self.inputAmountStr = textField.text;
         if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
             self.textField.text = [NSString stringWithFormat:@"%@USDT", textField.text];
@@ -134,7 +132,6 @@
     } else if ([textField.text isEqualToString:@"0"] && string.length > 0) {
         return false;
     }
-    self.cancelAmountBtn.hidden = false;
     return true;
 }
 

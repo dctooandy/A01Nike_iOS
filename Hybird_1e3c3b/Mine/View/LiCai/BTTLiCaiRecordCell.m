@@ -43,17 +43,21 @@
     NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate * date = [dateFormatter dateFromString:model.createdTime];
-    [dateFormatter setDateFormat:@"MM-dd"];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     
     NSString * dateStr = [dateFormatter stringFromDate:date];
     self.dateLab.text = dateStr;
     
-    [dateFormatter setDateFormat:@"HH:mm"];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
     NSString * timeStr = [dateFormatter stringFromDate:date];
     self.timeLab.text = timeStr;
     self.orderNumberLab.text = self.model.billno;
     self.statusLab.text = [self statusToStr:[self.model.status integerValue]];
-    CGFloat total = self.isTransferOut ? [self.model.amount floatValue] + [self.model.finalInterestAmt floatValue]:[self.model.amount floatValue];
+    
+    double amount = [self.model.amount doubleValue];
+    NSString * finalInterestAmtStr = [NSString stringWithFormat:@"%.2lf", [self.model.finalInterestAmt doubleValue]];
+    double finalInterestAmt = [finalInterestAmtStr doubleValue];
+    double total = self.isTransferOut ? amount + finalInterestAmt:amount;
     self.amountLab.text = [PublicMethod transferNumToThousandFormat:total];
 }
 
