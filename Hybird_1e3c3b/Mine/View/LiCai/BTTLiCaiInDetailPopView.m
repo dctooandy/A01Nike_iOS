@@ -106,7 +106,7 @@
             self.tipLabel.text = [NSString stringWithFormat:@"输入金额不正确，最少请输入1%@", unitStr];
         } else {
             self.tipLabel.textColor = [UIColor colorWithHexString:@"999999"];
-            self.tipLabel.text = @"请输入转账金额，最少1USDT";
+            self.tipLabel.text = [NSString stringWithFormat:@"请输入转账金额，最少1%@", unitStr];
         }
     }
 }
