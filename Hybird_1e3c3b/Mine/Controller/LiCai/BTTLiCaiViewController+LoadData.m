@@ -121,7 +121,13 @@
         [self hideLoading];
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [self loadLocalAmount];
-            completeBlock();
+            [self loadInterestSum];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.walletAmount = @"加载中";
+                self.earn = @"加载中";
+                [self.collectionView reloadData];
+                completeBlock();
+            });
         } else {
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }

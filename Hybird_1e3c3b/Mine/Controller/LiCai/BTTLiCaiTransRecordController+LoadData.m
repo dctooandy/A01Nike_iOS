@@ -15,7 +15,7 @@
     params[@"transferType"] = @(self.transferType);
     params[@"lastDays"] = @(self.lastDays);
     params[@"pageNo"] = @(self.page);
-    params[@"pageSize"] = @15;
+    params[@"pageSize"] = @10;
     [self showLoading];
     [IVNetwork requestPostWithUrl:BTTLiCaiTransferRecords paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
@@ -36,7 +36,7 @@
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     params[@"lastDays"] = @(self.lastDays);
     params[@"pageNo"] = @(self.page);
-    params[@"pageSize"] = @15;
+    params[@"pageSize"] = @10;
     [self showLoading];
     [IVNetwork requestPostWithUrl:BTTLiCaiInterestRecords paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;

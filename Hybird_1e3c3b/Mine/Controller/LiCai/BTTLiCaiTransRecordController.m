@@ -37,7 +37,11 @@
     [self loadmoreWithBlock:^{
         strongSelf(strongSelf);
         strongSelf.page+=1;
-        [strongSelf loadRecords];
+        if (weakSelf.btnView.billBtn.selected) {
+            [weakSelf loadInterestRecords];
+        } else {
+            [weakSelf loadRecords];
+        }
     }];
 }
 
@@ -232,7 +236,7 @@
     }
     self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.modelArr.count < self.page * 10) {
+        if (total < self.page * 10) {
             [self.collectionView.mj_footer endRefreshingWithNoMoreData];
         } else {
             [self endRefreshing];
