@@ -43,10 +43,17 @@
 }
 
 - (IBAction)allInBtnClick:(UIButton *)sender {
+    if ([self.accountBalance isEqualToString:@"加载中"]) {
+        return;
+    }
     NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
     NSString * string = self.accountBalance;
     NSArray * array = [string componentsSeparatedByString:@"."];
-    self.textField.text = [NSString stringWithFormat:@"%@%@", array[0], unitStr];
+    if (self.textField.isEditing) {
+        self.textField.text = array[0];
+    } else {
+        self.textField.text = [NSString stringWithFormat:@"%@%@", array[0], unitStr];
+    }
 }
 
 - (IBAction)closeBtnClick:(UIButton *)sender {
@@ -87,7 +94,7 @@
         return;
     }
     NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
-    self.amountLabel.text = [NSString stringWithFormat:@"%@%@", _accountBalance, unitStr];
+    self.amountLabel.text = [NSString stringWithFormat:@"%@%@", [PublicMethod transferNumToThousandFormat:[self.accountBalance doubleValue]], unitStr];
 }
 
 -(void)textFieldDidEndEditing:(UITextField *)textField {

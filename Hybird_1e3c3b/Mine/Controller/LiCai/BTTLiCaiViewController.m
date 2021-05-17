@@ -28,10 +28,8 @@
     self.title = @"活期理财钱包";
     self.walletAmount = @"加载中";
     self.earn = @"加载中";
-    self.interestRate = @"加载中";
     self.accountBalance = @"加载中";
     [self setUpNav];
-    [self LoadLiCaiConfig];
     [self loadLocalAmount];
     [self loadInterestSum];
     [self setupElements];
@@ -127,17 +125,12 @@
         } else {
             cell.walletAmount = [PublicMethod transferNumToThousandFormat:[self.walletAmount doubleValue]];
         }
-        if ([self.interestRate isEqualToString:@"加载中"]) {
-            cell.interestRate = self.interestRate;
-        } else {
-            cell.interestRate = [NSString stringWithFormat:@"%@%%", self.interestRate];
-        }
         if ([self.earn isEqualToString:@"加载中"]) {
             cell.earn = self.earn;
         } else {
             cell.earn = [PublicMethod transferNumToThousandFormat:[self.earn doubleValue]];
         }
-        
+        cell.interestRate = [NSString stringWithFormat:@"%@%%-%@%%", @"8", @"30"];
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             BTTLiCaiTransRecordController * vc = [[BTTLiCaiTransRecordController alloc] init];
             vc.transferType = 2;
@@ -180,11 +173,7 @@
                 self.inDetailPopView = [BTTLiCaiInDetailPopView viewFromXib];
                 [self.view addSubview:self.inDetailPopView];
                 self.inDetailPopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height);
-                if ([self.accountBalance isEqualToString:@"加载中"]) {
-                    self.inDetailPopView.accountBalance = self.accountBalance;
-                } else {
-                    self.inDetailPopView.accountBalance = [PublicMethod transferNumToThousandFormat:[self.accountBalance doubleValue]];
-                }
+                self.inDetailPopView.accountBalance = self.accountBalance;
                 weakSelf(weakSelf)
                 self.inDetailPopView.closeBtnClickBlock = ^(UIButton * _Nonnull button) {
                     [weakSelf.inDetailPopView removeFromSuperview];
