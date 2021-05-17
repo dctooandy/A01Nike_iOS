@@ -627,7 +627,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.totalAmount = [PublicMethod stringWithDecimalNumber:model.balance];
                 self.yebAmount = [PublicMethod stringWithDecimalNumber:model.yebAmount+model.yebInterest];
-                [self loadInterestSum];
+                [self loadInterestRecords];
                 self.isLoading = NO;
                 [self.collectionView reloadData];
             });
@@ -635,21 +635,29 @@
     }];
 }
 
--(void)loadInterestSum {
-    NSString * dateStr = [PublicMethod lastDateStr:1];
+-(void)loadInterestRecords {
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
-    params[@"beginTime"] = [NSString stringWithFormat:@"%@ 00:00:00", dateStr];
-    params[@"endTime"] = [NSString stringWithFormat:@"%@ 23:59:59", dateStr];
-    
-    [IVNetwork requestPostWithUrl:BTTLiCaiInterestSum paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    params[@"lastDays"] = @1;
+    params[@"pageNo"] = @1;
+    params[@"pageSize"] = @15;
+    [IVNetwork requestPostWithUrl:BTTLiCaiInterestRecords paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSArray * arr = result.body;
-            CGFloat num = arr.count > 0 ? [arr[0][@"sumInterest"] floatValue]: 0.00;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.yebInterest =  [PublicMethod stringWithDecimalNumber:num];
-                [self.collectionView reloadData];
-            });
+            BTTInterestRecordsModel * model = [BTTInterestRecordsModel yy_modelWithJSON:result.body];
+            if (model.data.count > 0) {
+                BTTInterestRecordsItemModel * itemModel = model.data[0];
+                NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                NSDate * beginDate = [dateFormatter dateFromString:itemModel.createdTime];
+                NSDate * endDate = [NSDate date];
+                CGFloat distance = [endDate timeIntervalSinceDate:beginDate] / 60 / 60 / 24;
+                if (distance <= 1) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.yebInterest = [PublicMethod stringWithDecimalNumber:[itemModel.interestAmount floatValue]];
+                        [self.collectionView reloadData];
+                    });
+                }
+            }
         } else {
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
