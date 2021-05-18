@@ -54,7 +54,7 @@
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BTTCustomerBalanceModel *model = [BTTCustomerBalanceModel yy_modelWithJSON:result.body];
-            NSString * accountBalance = [PublicMethod stringWithDecimalNumber:model.balance];
+            NSString * accountBalance = [PublicMethod stringWithDecimalNumber:model.localBalance];
             self.accountBalance = accountBalance;
             self.inDetailPopView.accountBalance = accountBalance;
             dispatch_async(dispatch_get_main_queue(), ^{

@@ -162,7 +162,7 @@
             return cell;
         } else {
             BTTVideoGamesNoDataCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesNoDataCell" forIndexPath:indexPath];
-            cell.noDataLabel.text = @"暂无纪录";
+            cell.noDataLabel.text = @"暂无记录";
             return cell;
         }
          
@@ -175,7 +175,7 @@
             return cell;
         } else {
             BTTVideoGamesNoDataCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesNoDataCell" forIndexPath:indexPath];
-            cell.noDataLabel.text = @"暂无纪录";
+            cell.noDataLabel.text = @"暂无记录";
             return cell;
         }
     }

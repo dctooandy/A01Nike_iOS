@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
 @property (nonatomic, assign) BOOL isHaveDian;
-@property (nonatomic, copy) NSString * inputAmountStr;
 @end
 
 @implementation BTTLiCaiInDetailPopView
@@ -63,19 +62,26 @@
 }
 
 - (IBAction)btnClick:(UIButton *)sender {
-    if ([self.inputAmountStr floatValue] < 1) {
+    NSString * inputAmountStr = @"";
+    NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
+    if ([self.textField.text rangeOfString:unitStr].location != NSNotFound) {
+        inputAmountStr = [self.textField.text stringByReplacingOccurrencesOfString:unitStr withString:@""];
+    } else {
+        inputAmountStr = self.textField.text;
+    }
+    if ([inputAmountStr floatValue] < 1) {
         NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
         NSString * str = [NSString stringWithFormat:@"输入金额不正确，最少请输入1%@", unitStr];
         [MBProgressHUD showError:str toView:nil];
         return;
     }
     NSString * replacedStr = [self.accountBalance stringByReplacingOccurrencesOfString:@","withString:@""];
-    if ([self.inputAmountStr floatValue] > [replacedStr floatValue]) {
+    if ([inputAmountStr floatValue] > [replacedStr floatValue]) {
         [MBProgressHUD showError:@"转帐金额不能超过账户余额！" toView:nil];
         return;
     }
     if (self.transferBtnClickBlock) {
-        self.transferBtnClickBlock(sender, self.inputAmountStr);
+        self.transferBtnClickBlock(sender, inputAmountStr);
     }
 }
 
@@ -99,7 +105,6 @@
 
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     if (textField.text.length > 0) {
-        self.inputAmountStr = textField.text;
         if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
             self.textField.text = [NSString stringWithFormat:@"%@USDT", textField.text];
         } else {
