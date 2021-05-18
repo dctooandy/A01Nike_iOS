@@ -37,7 +37,7 @@
 -(void)sendCode {
     [self.view endEditing:YES];
     NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"use"] = @"10";
+    params[@"use"] = @"20";
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
@@ -61,7 +61,7 @@
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"messageId"] = self.messageId;
     params[@"smsCode"] = [self getCodeTF].text;
-    params[@"use"] = @"10";
+    params[@"use"] = @"20";
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     weakSelf(weakSelf)
     [IVNetwork requestPostWithUrl:BTTVerifySmsCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
@@ -135,7 +135,7 @@
         type = 2;
     } else if (isWithdraw) {
         type = [self haveWithdrawPwd] ? 3:4;
-        params[@"use"]= @10;
+        params[@"use"]= @20;
         params[@"messageId"] = self.messageId;
         params[@"validateId"] = self.validateId;
     }
