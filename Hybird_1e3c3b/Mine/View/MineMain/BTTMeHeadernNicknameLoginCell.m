@@ -73,7 +73,7 @@
 -(void)setLiCaiPlusAmount:(NSString *)liCaiPlusAmount {
     _liCaiPlusAmount = liCaiPlusAmount;
     self.liCaiPlusLabel.text = _liCaiPlusAmount;
-    if ([self.liCaiPlusAmount floatValue] < 0.01) {
+    if ([self.liCaiPlusAmount doubleValue] < 0.01) {
         self.liCaiPlusLabel.hidden = true;
         self.symbolPlusLabel.hidden = true;
     } else {

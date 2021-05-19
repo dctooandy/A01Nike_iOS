@@ -41,7 +41,7 @@
     self.timeLab.text = timeStr;
     self.orderNumberLab.text = self.model.yebBillno;
     self.statusLab.text = @"成功";
-    self.amountLab.text = self.model.interestAmount;
+    self.amountLab.text = [NSString stringWithFormat:@"%.6lf", self.model.interestAmount];
     self.interestRateLab.text = [NSString stringWithFormat:@"%@%%", self.model.yearRate];
     
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];

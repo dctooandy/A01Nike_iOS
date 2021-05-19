@@ -55,10 +55,9 @@
     self.statusLab.text = [self statusToStr:[self.model.status integerValue]];
     
     double amount = [self.model.amount doubleValue];
-    NSString * finalInterestAmtStr = [NSString stringWithFormat:@"%.2lf", [self.model.finalInterestAmt doubleValue]];
-    double finalInterestAmt = [finalInterestAmtStr doubleValue];
+    double finalInterestAmt = [self.model.finalInterestAmt doubleValue];
     double total = self.isTransferOut ? amount + finalInterestAmt:amount;
-    self.amountLab.text = [PublicMethod transferNumToThousandFormat:total];
+    self.amountLab.text = [PublicMethod transferNumToThousandFormat:[PublicMethod calculateTwoDecimals:total]];
 }
 
 -(void)setIsTransferOut:(BOOL)isTransferOut {

@@ -626,7 +626,7 @@
             self.preAmount = [PublicMethod stringWithDecimalNumber:model.balance];
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.totalAmount = [PublicMethod stringWithDecimalNumber:model.balance];
-                self.yebAmount = [PublicMethod stringWithDecimalNumber:model.yebAmount+model.yebInterest];
+                self.yebAmount = [PublicMethod stringWithDecimalNumber:[PublicMethod calculateTwoDecimals:(model.yebAmount+model.yebInterest)]];
                 [self loadInterestRecords];
                 self.isLoading = NO;
                 [self.collectionView reloadData];
@@ -653,7 +653,7 @@
                 CGFloat distance = [endDate timeIntervalSinceDate:beginDate] / 60 / 60 / 24;
                 if (distance <= 1) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        self.yebInterest = [PublicMethod stringWithDecimalNumber:[itemModel.interestAmount floatValue]];
+                        self.yebInterest = [PublicMethod stringWithDecimalNumber:[PublicMethod calculateTwoDecimals:itemModel.interestAmount]];
                         [self.collectionView reloadData];
                     });
                 }

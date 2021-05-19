@@ -243,6 +243,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSString *)stringWithDecimalNumber:(double)num;
 
+//無條件捨去至小數點下2位
++ (double)calculateTwoDecimals:(double)num;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1251,5 +1251,9 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     return [NSDecimalNumber decimalNumberWithString:subNumber];
 }
 
++ (double)calculateTwoDecimals:(double)num {
+    double amount = ((int)(num * 100))/100.0;
+    return amount;
+}
 
 @end

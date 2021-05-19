@@ -22,7 +22,7 @@
                 NSArray * arr = result.body;
                 CGFloat num = arr.count > 0 ? [arr[0][@"sumInterest"] floatValue]: 0.00;
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    self.earn =  [PublicMethod stringWithDecimalNumber:num];
+                    self.earn = [PublicMethod stringWithDecimalNumber:[PublicMethod calculateTwoDecimals:num]];
                     [self.collectionView reloadData];
                 });
             } else {
@@ -58,7 +58,7 @@
             self.accountBalance = accountBalance;
             self.inDetailPopView.accountBalance = accountBalance;
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.walletAmount = [PublicMethod stringWithDecimalNumber:model.yebAmount+model.yebInterest];
+                self.walletAmount = [PublicMethod stringWithDecimalNumber:[PublicMethod calculateTwoDecimals:(model.yebAmount+model.yebInterest)]];
                 [self.collectionView reloadData];
             });
         } else {
