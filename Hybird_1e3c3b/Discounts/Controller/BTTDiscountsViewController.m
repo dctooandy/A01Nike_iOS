@@ -292,14 +292,14 @@
                 if ([IVNetwork savedUserInfo]) {
                     BTTAGQJViewController *vc = [BTTAGQJViewController new];
                     vc.platformLine = [IVNetwork savedUserInfo].uiMode;
-                    [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+                    [CNTimeLog startRecordTime:CNEventAGQJLaunch];
                     [self.navigationController pushViewController:vc animated:YES];
                 } else {
                     [self showTryAlertViewWithBlock:^(UIButton * _Nonnull btn) {
                         if (btn.tag == 1090) {
                             BTTAGQJViewController *vc = [BTTAGQJViewController new];
                             vc.platformLine = @"CNY";
-                            [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+                            [CNTimeLog startRecordTime:CNEventAGQJLaunch];
                             [self.navigationController pushViewController:vc animated:YES];
                         } else {
                             [MBProgressHUD showError:@"请先登录" toView:nil];

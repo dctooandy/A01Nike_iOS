@@ -124,7 +124,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 
 - (void)loginSuccess:(NSNotification *)notifi {
     self.isLogin = YES;
-    [IN3SAnalytics setUserName:[IVNetwork savedUserInfo].loginName];
+    [CNTimeLog setUserName:[IVNetwork savedUserInfo].loginName];
     
     dispatch_async(dispatch_get_main_queue(), ^{
 //        [self updateUI];
@@ -186,7 +186,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 - (void)logoutSuccess:(NSNotification *)notifi {
     self.isLogin = NO;
     self.isVIP = NO;
-    [IN3SAnalytics setUserName:nil];
+    [CNTimeLog setUserName:nil];
     dispatch_async(dispatch_get_main_queue(), ^{
 //        [self updateUI];
         self.loginAndRegisterBtnsView.hidden = NO;
@@ -472,14 +472,14 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
                 if ([IVNetwork savedUserInfo]) {
                     BTTAGQJViewController *vc = [BTTAGQJViewController new];
                     vc.platformLine = [IVNetwork savedUserInfo].uiMode;
-                    [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+                    [CNTimeLog startRecordTime:CNEventAGQJLaunch];
                     [self.navigationController pushViewController:vc animated:YES];
                 } else {
                     [self showTryAlertViewWithBlock:^(UIButton * _Nonnull btn) {
                         if (btn.tag == 1090) {
                             BTTAGQJViewController *vc = [BTTAGQJViewController new];
                             vc.platformLine = @"CNY";
-                            [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+                            [CNTimeLog startRecordTime:CNEventAGQJLaunch];
                             [self.navigationController pushViewController:vc animated:YES];
                         } else {
                             [MBProgressHUD showError:@"请先登录" toView:nil];
@@ -542,7 +542,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
                 UIViewController *vc = nil;
                 if ([provider isEqualToString:@"AGQJ"]) {
                     vc = [BTTAGQJViewController new];
-                    [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+                    [CNTimeLog startRecordTime:CNEventAGQJLaunch];
                     [self.navigationController pushViewController:vc animated:YES];
                 } else if ([provider isEqualToString:@"AGIN"]) {
                     vc = [BTTAGGJViewController new];

@@ -705,7 +705,7 @@
             if ([gameid isEqualToString:BTTAGQJKEY]) {
                 BTTAGQJViewController *vc = [BTTAGQJViewController new];
                 vc.platformLine = [IVNetwork savedUserInfo] ? [IVNetwork savedUserInfo].uiMode:@"CNY";
-                [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+                [CNTimeLog startRecordTime:CNEventAGQJLaunch];
                 [self.navigationController pushViewController:vc animated:YES];
             } else if ([gameid isEqualToString:BTTAGGJKEY]) {
                 BTTAGGJViewController *vc = [BTTAGGJViewController new];
@@ -762,7 +762,7 @@
                 UIViewController *vc = nil;
                 if ([provider isEqualToString:@"AGQJ"]) {
                     vc = [BTTAGQJViewController new];
-                    [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+                    [CNTimeLog startRecordTime:CNEventAGQJLaunch];
                     [self.navigationController pushViewController:vc animated:YES];
                 } else if ([provider isEqualToString:@"AGIN"]) {
                     vc = [BTTAGGJViewController new];

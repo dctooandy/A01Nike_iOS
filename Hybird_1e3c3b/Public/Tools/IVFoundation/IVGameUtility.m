@@ -49,7 +49,7 @@
 {
     if ([provider isEqualToString:kAGQJProvider]) {
         [IVGameManager sharedManager].agqjVC.loadStatus = IVGameLoadStatusLoading;
-        [[CNTimeLog shareInstance] AGQJReLoad];
+        [CNTimeLog AGQJReLoad];
     }
 }
 

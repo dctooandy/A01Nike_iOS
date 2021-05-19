@@ -426,7 +426,7 @@
             [bigArray addObject:otcmodel];
         }
     }
-    [[CNTimeLog shareInstance] startRecordTime:CNEventPayLaunch];
+    [CNTimeLog startRecordTime:CNEventPayLaunch];
     NSMutableArray *channelArray = [NSMutableArray new];
     [channelArray addObjectsFromArray:bigArray];
     [channelArray addObjectsFromArray:self.normalDataSoure];

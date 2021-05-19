@@ -28,8 +28,7 @@
 #import "MBProgressHUD+Add.h"
 #import "BTTBaseWebViewController.h"
 #import "BTTAnimationPopView.h"
-#import <IN3SAnalytics/IN3SAnalytics.h>
-#import "CNTimeLog.h"
+#import <IN3SAnalytics/CNTimeLog.h>
 #import "IVNetwork.h"
 #import "IVRequestResultModel.h"
 #import "BTTHttpManager.h"
