@@ -694,7 +694,6 @@
 		415CA1EB24E53ADF005E0E9F /* USDTRechargeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1E724E53ADF005E0E9F /* USDTRechargeController.m */; };
 		415CA1EE24E53AF6005E0E9F /* OCTRechargeUSDTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1EC24E53AF6005E0E9F /* OCTRechargeUSDTView.m */; };
 		415CA1F024E53B0B005E0E9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 415CA1EF24E53B0B005E0E9F /* Assets.xcassets */; };
-		4171CDA226524BCF00F4C5E5 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		41755C52262E74D600B6884D /* LiveChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 41755C50262E74D600B6884D /* LiveChat.m */; };
 		41800D5A2623E95900FAC27B /* BTTAddBitollCardController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41800D592623E95900FAC27B /* BTTAddBitollCardController.xib */; };
 		4180B03925D36EBB00139E88 /* BTTOtherGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4180B03725D36EBB00139E88 /* BTTOtherGameCell.m */; };
@@ -2100,6 +2099,7 @@
 		41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = tingyunApp.framework; sourceTree = "<group>"; };
 		62DAB42824C569F6001F16B4 /* Hybird_1e3c3b.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hybird_1e3c3b.entitlements; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_1e3c3b.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76CC62BD265677E00042AEDF /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = Hybird_1e3c3b/Public/Tools/ThirdParty/libboringssl_simulator.a; sourceTree = "<group>"; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
 		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
 		D317745024D2648C009B1814 /* DSBRedBagPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DSBRedBagPopView.xib; sourceTree = "<group>"; };
@@ -2376,7 +2376,6 @@
 				3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */,
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
-				4171CDA226524BCF00F4C5E5 /* libboringssl_simulator.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
@@ -4736,6 +4735,7 @@
 			isa = PBXGroup;
 			children = (
 				D3399698243C215D00B91A52 /* libboringssl_simulator.a */,
+				76CC62BD265677E00042AEDF /* libboringssl_simulator.a */,
 				D3399696243B08E000B91A52 /* libboringssl.tbd */,
 				3AD9CF03216C425200685B43 /* CoreTelephony.framework */,
 				3AD9CEE821675A9B00685B43 /* libresolv.tbd */,
@@ -6380,7 +6380,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.252;
+				MARKETING_VERSION = 3.2.253;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6422,7 +6422,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.252;
+				MARKETING_VERSION = 3.2.253;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
