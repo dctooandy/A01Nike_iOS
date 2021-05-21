@@ -58,6 +58,7 @@
 #import "USDTRechargeController.h"
 #import "USDTBuyController.h"
 #import "BTTCustomerReportController.h"
+#import "BTTLiCaiViewController.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -79,6 +80,8 @@
     self.isOpenSellUsdt = NO;
     self.title = @"会员中心";
     self.totalAmount = @"加载中";
+    self.yebAmount = @"加载中";
+    self.yebInterest = @"加载中";
     self.collectionView.bounces = NO;
     [self setupNav];
     self.isCompletePersonalInfo = [self isCompletePersonalInfo];
@@ -151,8 +154,12 @@
                 cell.noticeStr = homeVC.noticeStr.length ? homeVC.noticeStr : @"";
                 if ([self.totalAmount isEqualToString:@"加载中"]) {
                     cell.totalAmount = self.totalAmount;
+                    cell.liCaiAmount = self.yebAmount;
+                    cell.liCaiPlusAmount = self.yebInterest;
                 } else {
-                    cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
+                    cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount doubleValue]];
+                    cell.liCaiAmount = [PublicMethod transferNumToThousandFormat:[self.yebAmount doubleValue]];
+                    cell.liCaiPlusAmount = [PublicMethod transferNumToThousandFormat:[self.yebInterest doubleValue]];
                 }
                 
                 cell.changModeImgStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"go_main_mode":@"go_usdt_mode";
@@ -168,6 +175,11 @@
                     strongSelf(strongSelf);
                     BTTAccountBalanceController *accountBalance = [[BTTAccountBalanceController alloc] init];
                     [strongSelf.navigationController pushViewController:accountBalance animated:YES];
+                };
+                cell.liCaiBlock = ^{
+                    strongSelf(strongSelf);
+                    BTTLiCaiViewController *vc = [[BTTLiCaiViewController alloc] init];
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
                 };
                 cell.buttonClickBlock = ^(UIButton *_Nonnull button) {
                     strongSelf(strongSelf);
@@ -188,8 +200,12 @@
                 cell.noticeStr = homeVC.noticeStr.length ? homeVC.noticeStr : @"";
                 if ([self.totalAmount isEqualToString:@"加载中"]) {
                     cell.totalAmount = self.totalAmount;
+                    cell.liCaiAmount = self.yebAmount;
+                    cell.liCaiPlusAmount = self.yebInterest;
                 } else {
-                    cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount floatValue]];
+                    cell.totalAmount = [PublicMethod transferNumToThousandFormat:[self.totalAmount doubleValue]];
+                    cell.liCaiAmount = [PublicMethod transferNumToThousandFormat:[self.yebAmount doubleValue]];
+                    cell.liCaiPlusAmount = [PublicMethod transferNumToThousandFormat:[self.yebInterest doubleValue]];
                 }
                 cell.changModeImgStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"go_main_mode":@"go_usdt_mode";
                 cell.nicknameLabel.text = nickName;
@@ -204,6 +220,11 @@
                     strongSelf(strongSelf);
                     BTTAccountBalanceController *accountBalance = [[BTTAccountBalanceController alloc] init];
                     [strongSelf.navigationController pushViewController:accountBalance animated:YES];
+                };
+                cell.liCaiBlock = ^{
+                    strongSelf(strongSelf);
+                    BTTLiCaiViewController *vc = [[BTTLiCaiViewController alloc] init];
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
                 };
                 cell.buttonClickBlock = ^(UIButton *_Nonnull button) {
                     strongSelf(strongSelf);
@@ -405,7 +426,7 @@
             [bigArray addObject:otcmodel];
         }
     }
-    [[CNTimeLog shareInstance] startRecordTime:CNEventPayLaunch];
+    [CNTimeLog startRecordTime:CNEventPayLaunch];
     NSMutableArray *channelArray = [NSMutableArray new];
     [channelArray addObjectsFromArray:bigArray];
     [channelArray addObjectsFromArray:self.normalDataSoure];
@@ -560,6 +581,8 @@
             strongSelf.saveMoneyCount = 0;
             [strongSelf loadPaymentDefaultData];
             strongSelf.totalAmount = @"-";
+            strongSelf.yebAmount = @"-";
+            strongSelf.yebInterest = @"-";
             [MBProgressHUD showSuccess:@"退出成功" toView:nil];
         };
     } else if (indexPath.row == self.elementsHight.count - 4) {

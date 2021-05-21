@@ -1,6 +1,0 @@
-framework module IN3SAnalytics {
-  umbrella header "IN3SAnalytics.h"
-
-  export *
-  module * { export * }
-}

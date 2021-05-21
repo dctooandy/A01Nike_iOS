@@ -127,7 +127,7 @@
         //AG国际预加载
         [BTTAGGJViewController addGameViewToWindow];
 //        [[IVGameManager sharedManager] reloadCacheGame];
-        [[CNTimeLog shareInstance] endRecordTime:CNEventAppLaunch];
+        [CNTimeLog endRecordTime:CNEventAppLaunch];
     }
 }
 
@@ -901,7 +901,7 @@
 - (void)gotoGameWithTag:(NSInteger)tag currency:(NSString *)currency{
     if (tag==1000) {
         BTTAGQJViewController *vc = [BTTAGQJViewController new];
-        [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+        [CNTimeLog startRecordTime:CNEventAGQJLaunch];
         vc.platformLine = currency;
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -953,7 +953,6 @@
     switch (tag) {
         case 1000://AG旗舰
             vc = [BTTAGQJViewController new];
-//            [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
             break;
         case 1001://AG国际
             vc = [BTTAGGJViewController new];

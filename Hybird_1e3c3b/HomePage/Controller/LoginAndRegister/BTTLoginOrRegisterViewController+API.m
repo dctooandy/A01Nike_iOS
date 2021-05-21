@@ -165,6 +165,7 @@ static const char *exModelKey = "exModelKey";
             self.wrongPwdNum = 0;
             
             if (result.body[@"samePhoneLoginNames"]!=nil) {
+                [self hideLoading];
                 NSArray *loginArray = result.body[@"samePhoneLoginNames"];
                 NSString *messageId = result.body[@"messageId"];
                 NSString *validateId = result.body[@"validateId"];

@@ -28,8 +28,7 @@
 #import "MBProgressHUD+Add.h"
 #import "BTTBaseWebViewController.h"
 #import "BTTAnimationPopView.h"
-#import <IN3SAnalytics/IN3SAnalytics.h>
-#import "CNTimeLog.h"
+#import <IN3SAnalytics/CNTimeLog.h>
 #import "IVNetwork.h"
 #import "IVRequestResultModel.h"
 #import "BTTHttpManager.h"
@@ -471,6 +470,19 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 //客户报表 - 銀行卡更改
 #define BTTCustomerReportBank                      @"account/queryModifyBankRequests"
 
+//活期理財 - 轉賬記錄
+#define BTTLiCaiTransferRecords                    @"yeb/yebTransferLogs"
+//活期理財 - 理財額度記錄
+#define BTTLiCaiWallet                             @"yeb/yebInterestCreditLogs"
+//活期理財 - 配置信息
+#define BTTLiCaiConfig                             @"yeb/yebConfig"
+
+//活期理財 - 轉出至賬戶餘額
+#define BTTLiCaiTransferOut                        @"yeb/transferOut"
+//活期理財 - 轉入理財錢包
+#define BTTLiCaiTransferIn                         @"yeb/transferIn"
+
+
 /*********************************************產品API********************************************************/
 
 //USDT取款限額
@@ -533,6 +545,12 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTFirtWinningList                         @"_extra_/api/v1/activity/winner/first-winning-list"
 //vip優惠券自動派發
 #define BTTVipHasPromo                             @"_extra_/api/v1/activity/vip-promo/has-promos"
+//伺服器時間
+#define BTTServerTime                              @"_extra_/api/v1/serverTime"
+//活期理財 - 利息賬單紀錄
+#define BTTLiCaiInterestRecords                    @"_extra_/api/v1/ws/query-yeb-interest-logs"
+//活期理財 - 累積收益
+#define BTTLiCaiInterestSum                        @"_extra_/api/v1/ws/yeb-interest-logs-sum"
 
 /********************************************常用宏*********************************************************/
 

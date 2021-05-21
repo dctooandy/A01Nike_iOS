@@ -61,7 +61,6 @@
 		3A21AEB02394BCBF009E73FD /* BTTShowErcodePopview.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A21AEAF2394BCBF009E73FD /* BTTShowErcodePopview.xib */; };
 		3A2894FE237BE701008EB579 /* BTTLoginOrRegisterBtsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2894FD237BE701008EB579 /* BTTLoginOrRegisterBtsView.m */; };
 		3A289500237BE70C008EB579 /* BTTLoginOrRegisterBtsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A2894FF237BE70C008EB579 /* BTTLoginOrRegisterBtsView.xib */; };
-		3A2DAAC322768D350093C122 /* BTTMeHeadernNicknameLoginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2DAAC122768D350093C122 /* BTTMeHeadernNicknameLoginCell.m */; };
 		3A34F79321B6630D007BC4D4 /* BTTGamesTryAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34F79221B6630D007BC4D4 /* BTTGamesTryAlertView.m */; };
 		3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A34F79421B6631B007BC4D4 /* BTTGamesTryAlertView.xib */; };
 		3A34F79E21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34F79C21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m */; };
@@ -507,7 +506,6 @@
 		3AC3FFA9219ACD48008AECCB /* BTTLoginOrRegisterViewController+UI.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFA8219ACD48008AECCB /* BTTLoginOrRegisterViewController+UI.m */; };
 		3AC3FFAD219BB19E008AECCB /* BTTLoginCodeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AC3FFAB219BB19E008AECCB /* BTTLoginCodeCell.m */; };
 		3AC3FFB0219BB1D0008AECCB /* BTTLoginCodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AC3FFAF219BB1D0008AECCB /* BTTLoginCodeCell.xib */; };
-		3AD1A93C2237B4B200515628 /* CNTimeLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD1A93A2237B4B200515628 /* CNTimeLog.m */; };
 		3AD4C9C321635AEC00FC0A63 /* app.json in Resources */ = {isa = PBXBuildFile; fileRef = 3AD4C9C221635AEC00FC0A63 /* app.json */; };
 		3AD9CD532165B2C900685B43 /* BTTPopoverAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CD4E2165B2C900685B43 /* BTTPopoverAction.m */; };
 		3AD9CD542165B2C900685B43 /* BTTPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD9CD502165B2C900685B43 /* BTTPopoverView.m */; };
@@ -570,7 +568,6 @@
 		3ADD237C2177366B00FA959A /* BTTMeMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ADD237A2177366B00FA959A /* BTTMeMainCell.xib */; };
 		3ADD2389217819D500FA959A /* BTTMeMainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD2388217819D500FA959A /* BTTMeMainModel.m */; };
 		3ADD238F217836B300FA959A /* BTTMineViewController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD238D217836B200FA959A /* BTTMineViewController+Nav.m */; };
-		3ADD2393217837FF00FA959A /* BTTMeHeaderLoginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD2391217837FF00FA959A /* BTTMeHeaderLoginCell.m */; };
 		3ADD23972179A9E200FA959A /* BTTLive800ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD23962179A9E200FA959A /* BTTLive800ViewController.m */; };
 		3ADD23EC2179B97A00FA959A /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD23DF2179B97A00FA959A /* TAAbstractDotView.m */; };
 		3ADD23ED2179B97A00FA959A /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD23E12179B97A00FA959A /* TAAnimatedDotView.m */; };
@@ -643,9 +640,35 @@
 		411DE809261AFC270076BCE2 /* BTTPasswordChangeBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 411DE808261AFC260076BCE2 /* BTTPasswordChangeBtnsCell.xib */; };
 		412078AA26268FB000595F8C /* TXScrollLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 412078A626268FB000595F8C /* TXScrollLabelView.m */; };
 		412078AB26268FB000595F8C /* UIView+TXFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 412078A726268FB000595F8C /* UIView+TXFrame.m */; };
-		413AE5C52637A77700CC0C35 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
-		413DF78E25010780005ABCC6 /* BTTMeHeaderLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 413DF78D25010780005ABCC6 /* BTTMeHeaderLoginCell.xib */; };
-		413DF79025010787005ABCC6 /* BTTMeHeadernNicknameLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 413DF78F25010787005ABCC6 /* BTTMeHeadernNicknameLoginCell.xib */; };
+		4135A6D7263941AA00D3BF17 /* BTTLiCaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6D3263941AA00D3BF17 /* BTTLiCaiViewController.m */; };
+		4135A6D8263941AA00D3BF17 /* BTTLiCaiTransRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6D5263941AA00D3BF17 /* BTTLiCaiTransRecordController.m */; };
+		4135A6F7263941D000D3BF17 /* BTTLiCaiTransRecordTopBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6DC263941CD00D3BF17 /* BTTLiCaiTransRecordTopBtnView.m */; };
+		4135A6F9263941D000D3BF17 /* BTTLiCaiTransRecordTopBtnView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6DE263941CD00D3BF17 /* BTTLiCaiTransRecordTopBtnView.xib */; };
+		4135A6FA263941D000D3BF17 /* BTTLiCaiRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6DF263941CE00D3BF17 /* BTTLiCaiRecordCell.m */; };
+		4135A6FB263941D000D3BF17 /* BTTLiCaiTotalAmountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6E0263941CE00D3BF17 /* BTTLiCaiTotalAmountCell.m */; };
+		4135A6FC263941D000D3BF17 /* BTTLiCaiInterestRateBillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6E1263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.xib */; };
+		4135A6FE263941D000D3BF17 /* BTTLiCaiOutDetailPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6E4263941CE00D3BF17 /* BTTLiCaiOutDetailPopView.m */; };
+		4135A6FF263941D000D3BF17 /* BTTLiCaiInterestRateBillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6E5263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.m */; };
+		4135A700263941D000D3BF17 /* BTTLiCaiOutDetailPopViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6E6263941CE00D3BF17 /* BTTLiCaiOutDetailPopViewCell.xib */; };
+		4135A701263941D000D3BF17 /* BTTLiCaiBannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6EB263941CF00D3BF17 /* BTTLiCaiBannerCell.m */; };
+		4135A702263941D000D3BF17 /* BTTLiCaiBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6EC263941CF00D3BF17 /* BTTLiCaiBtnCell.xib */; };
+		4135A703263941D000D3BF17 /* BTTLiCaiOutDetailPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6ED263941CF00D3BF17 /* BTTLiCaiOutDetailPopView.xib */; };
+		4135A704263941D000D3BF17 /* BTTLiCaiOutDetailPopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6EE263941CF00D3BF17 /* BTTLiCaiOutDetailPopViewCell.m */; };
+		4135A705263941D000D3BF17 /* BTTLiCaiRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6F0263941CF00D3BF17 /* BTTLiCaiRecordCell.xib */; };
+		4135A706263941D000D3BF17 /* BTTLiCaiBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6F1263941CF00D3BF17 /* BTTLiCaiBtnCell.m */; };
+		4135A707263941D000D3BF17 /* BTTLiCaiBannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6F2263941CF00D3BF17 /* BTTLiCaiBannerCell.xib */; };
+		4135A708263941D000D3BF17 /* BTTLiCaiTotalAmountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6F6263941D000D3BF17 /* BTTLiCaiTotalAmountCell.xib */; };
+		4135A7132639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A70D2639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.m */; };
+		4135A7142639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A70E2639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.xib */; };
+		4135A7152639420700D3BF17 /* BTTMeHeaderLoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A70F2639420700D3BF17 /* BTTMeHeaderLoginCell.xib */; };
+		4135A7162639420700D3BF17 /* BTTMeHeaderLoginCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A7122639420700D3BF17 /* BTTMeHeaderLoginCell.m */; };
+		4135A71B2639440700D3BF17 /* BTTLiCaiTransRecordController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A71A2639440700D3BF17 /* BTTLiCaiTransRecordController+LoadData.m */; };
+		4135A72226394A4800D3BF17 /* BTTLiCaiTransferRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A72126394A4800D3BF17 /* BTTLiCaiTransferRecordModel.m */; };
+		4135A729263A58D100D3BF17 /* BTTLiCaiViewController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A728263A58D100D3BF17 /* BTTLiCaiViewController+LoadData.m */; };
+		4135A732263A667400D3BF17 /* BTTLiCaiInDetailPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A730263A667400D3BF17 /* BTTLiCaiInDetailPopView.xib */; };
+		4135A733263A667400D3BF17 /* BTTLiCaiInDetailPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A731263A667400D3BF17 /* BTTLiCaiInDetailPopView.m */; };
+		4135A738263AAE4A00D3BF17 /* BTTInterestCreditLogsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A737263AAE4A00D3BF17 /* BTTInterestCreditLogsModel.m */; };
+		4135A742263AB93200D3BF17 /* BTTLiCaiConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A73B263AB89F00D3BF17 /* BTTLiCaiConfigModel.m */; };
 		413E324E251B3520000804E2 /* BTTCreditRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413E324B251B3520000804E2 /* BTTCreditRecordController.m */; };
 		413E324F251B3520000804E2 /* BTTCreditRecordController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 413E324D251B3520000804E2 /* BTTCreditRecordController+LoadData.m */; };
 		413E3254251B352A000804E2 /* BTTDepositRecordController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 413E3250251B3529000804E2 /* BTTDepositRecordController+LoadData.m */; };
@@ -671,9 +694,6 @@
 		415CA1EB24E53ADF005E0E9F /* USDTRechargeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1E724E53ADF005E0E9F /* USDTRechargeController.m */; };
 		415CA1EE24E53AF6005E0E9F /* OCTRechargeUSDTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1EC24E53AF6005E0E9F /* OCTRechargeUSDTView.m */; };
 		415CA1F024E53B0B005E0E9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 415CA1EF24E53B0B005E0E9F /* Assets.xcassets */; };
-		41649F8F258352EC0033FFA9 /* IN3SResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41649F8C258352EB0033FFA9 /* IN3SResource.bundle */; };
-		41649F90258352EC0033FFA9 /* tingyunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41649F8D258352EB0033FFA9 /* tingyunApp.framework */; };
-		41649F91258352EC0033FFA9 /* IN3SAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41649F8E258352EB0033FFA9 /* IN3SAnalytics.framework */; };
 		41755C52262E74D600B6884D /* LiveChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 41755C50262E74D600B6884D /* LiveChat.m */; };
 		41800D5A2623E95900FAC27B /* BTTAddBitollCardController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41800D592623E95900FAC27B /* BTTAddBitollCardController.xib */; };
 		4180B03925D36EBB00139E88 /* BTTOtherGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4180B03725D36EBB00139E88 /* BTTOtherGameCell.m */; };
@@ -736,10 +756,12 @@
 		41BC7100252D6509003944ED /* BTTBiBiCunPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BC70FD252D6509003944ED /* BTTBiBiCunPopView.m */; };
 		41BC7101252D6509003944ED /* BTTBiBiCunPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BC70FE252D6509003944ED /* BTTBiBiCunPopView.xib */; };
 		41C53A9C25A851B500CFA3A1 /* BTTYenFenHongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C53A9A25A851B400CFA3A1 /* BTTYenFenHongModel.m */; };
+		41CA82CB26412D1800A550EE /* BTTInterestRecordsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CA82C926412D1800A550EE /* BTTInterestRecordsModel.m */; };
 		41EAF0F2260D93BD0091FE09 /* BTTMeInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41EAF0F1260D93BD0091FE09 /* BTTMeInfoCell.xib */; };
 		41EAF0F6260D94290091FE09 /* hot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 41EAF0F5260D94290091FE09 /* hot.gif */; };
 		41F14AF025A69CA1008E8CAD /* BTTYueFenHongPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */; };
 		41F14AF125A69CA1008E8CAD /* BTTYueFenHongPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F14AEF25A69CA1008E8CAD /* BTTYueFenHongPopView.m */; };
+		41FD5E602654AC8C00B38644 /* tingyunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
@@ -1014,8 +1036,6 @@
 		3A2894FC237BE701008EB579 /* BTTLoginOrRegisterBtsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLoginOrRegisterBtsView.h; sourceTree = "<group>"; };
 		3A2894FD237BE701008EB579 /* BTTLoginOrRegisterBtsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLoginOrRegisterBtsView.m; sourceTree = "<group>"; };
 		3A2894FF237BE70C008EB579 /* BTTLoginOrRegisterBtsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTLoginOrRegisterBtsView.xib; sourceTree = "<group>"; };
-		3A2DAAC022768D350093C122 /* BTTMeHeadernNicknameLoginCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTMeHeadernNicknameLoginCell.h; sourceTree = "<group>"; };
-		3A2DAAC122768D350093C122 /* BTTMeHeadernNicknameLoginCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMeHeadernNicknameLoginCell.m; sourceTree = "<group>"; };
 		3A34F79121B6630D007BC4D4 /* BTTGamesTryAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTGamesTryAlertView.h; sourceTree = "<group>"; };
 		3A34F79221B6630D007BC4D4 /* BTTGamesTryAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTGamesTryAlertView.m; sourceTree = "<group>"; };
 		3A34F79421B6631B007BC4D4 /* BTTGamesTryAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTGamesTryAlertView.xib; sourceTree = "<group>"; };
@@ -1652,8 +1672,6 @@
 		3AC3FFAA219BB19E008AECCB /* BTTLoginCodeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLoginCodeCell.h; sourceTree = "<group>"; };
 		3AC3FFAB219BB19E008AECCB /* BTTLoginCodeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLoginCodeCell.m; sourceTree = "<group>"; };
 		3AC3FFAF219BB1D0008AECCB /* BTTLoginCodeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLoginCodeCell.xib; sourceTree = "<group>"; };
-		3AD1A93A2237B4B200515628 /* CNTimeLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNTimeLog.m; sourceTree = "<group>"; };
-		3AD1A93B2237B4B200515628 /* CNTimeLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNTimeLog.h; sourceTree = "<group>"; };
 		3AD4C9C221635AEC00FC0A63 /* app.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = app.json; sourceTree = "<group>"; };
 		3AD9CD472164B10000685B43 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AD9CD4D2165B2C900685B43 /* BTTPopoverAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTPopoverAction.h; sourceTree = "<group>"; };
@@ -1757,8 +1775,6 @@
 		3ADD2388217819D500FA959A /* BTTMeMainModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMeMainModel.m; sourceTree = "<group>"; };
 		3ADD238D217836B200FA959A /* BTTMineViewController+Nav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTMineViewController+Nav.m"; sourceTree = "<group>"; };
 		3ADD238E217836B200FA959A /* BTTMineViewController+Nav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTMineViewController+Nav.h"; sourceTree = "<group>"; };
-		3ADD2390217837FF00FA959A /* BTTMeHeaderLoginCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTMeHeaderLoginCell.h; sourceTree = "<group>"; };
-		3ADD2391217837FF00FA959A /* BTTMeHeaderLoginCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMeHeaderLoginCell.m; sourceTree = "<group>"; };
 		3ADD23952179A9E200FA959A /* BTTLive800ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLive800ViewController.h; sourceTree = "<group>"; };
 		3ADD23962179A9E200FA959A /* BTTLive800ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLive800ViewController.m; sourceTree = "<group>"; };
 		3ADD23DE2179B97A00FA959A /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
@@ -1882,8 +1898,53 @@
 		412078A526268FB000595F8C /* UIView+TXFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TXFrame.h"; sourceTree = "<group>"; };
 		412078A626268FB000595F8C /* TXScrollLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXScrollLabelView.m; sourceTree = "<group>"; };
 		412078A726268FB000595F8C /* UIView+TXFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TXFrame.m"; sourceTree = "<group>"; };
-		413DF78D25010780005ABCC6 /* BTTMeHeaderLoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTMeHeaderLoginCell.xib; sourceTree = "<group>"; };
-		413DF78F25010787005ABCC6 /* BTTMeHeadernNicknameLoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTMeHeadernNicknameLoginCell.xib; sourceTree = "<group>"; };
+		4135A6D3263941AA00D3BF17 /* BTTLiCaiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiViewController.m; sourceTree = "<group>"; };
+		4135A6D4263941AA00D3BF17 /* BTTLiCaiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiViewController.h; sourceTree = "<group>"; };
+		4135A6D5263941AA00D3BF17 /* BTTLiCaiTransRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiTransRecordController.m; sourceTree = "<group>"; };
+		4135A6D6263941AA00D3BF17 /* BTTLiCaiTransRecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiTransRecordController.h; sourceTree = "<group>"; };
+		4135A6DC263941CD00D3BF17 /* BTTLiCaiTransRecordTopBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiTransRecordTopBtnView.m; sourceTree = "<group>"; };
+		4135A6DE263941CD00D3BF17 /* BTTLiCaiTransRecordTopBtnView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiTransRecordTopBtnView.xib; sourceTree = "<group>"; };
+		4135A6DF263941CE00D3BF17 /* BTTLiCaiRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiRecordCell.m; sourceTree = "<group>"; };
+		4135A6E0263941CE00D3BF17 /* BTTLiCaiTotalAmountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiTotalAmountCell.m; sourceTree = "<group>"; };
+		4135A6E1263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiInterestRateBillCell.xib; sourceTree = "<group>"; };
+		4135A6E3263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiInterestRateBillCell.h; sourceTree = "<group>"; };
+		4135A6E4263941CE00D3BF17 /* BTTLiCaiOutDetailPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiOutDetailPopView.m; sourceTree = "<group>"; };
+		4135A6E5263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiInterestRateBillCell.m; sourceTree = "<group>"; };
+		4135A6E6263941CE00D3BF17 /* BTTLiCaiOutDetailPopViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiOutDetailPopViewCell.xib; sourceTree = "<group>"; };
+		4135A6E7263941CE00D3BF17 /* BTTLiCaiBannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiBannerCell.h; sourceTree = "<group>"; };
+		4135A6E8263941CE00D3BF17 /* BTTLiCaiTotalAmountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiTotalAmountCell.h; sourceTree = "<group>"; };
+		4135A6E9263941CF00D3BF17 /* BTTLiCaiInDetailPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiInDetailPopView.h; sourceTree = "<group>"; };
+		4135A6EA263941CF00D3BF17 /* BTTLiCaiBtnCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiBtnCell.h; sourceTree = "<group>"; };
+		4135A6EB263941CF00D3BF17 /* BTTLiCaiBannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiBannerCell.m; sourceTree = "<group>"; };
+		4135A6EC263941CF00D3BF17 /* BTTLiCaiBtnCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiBtnCell.xib; sourceTree = "<group>"; };
+		4135A6ED263941CF00D3BF17 /* BTTLiCaiOutDetailPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiOutDetailPopView.xib; sourceTree = "<group>"; };
+		4135A6EE263941CF00D3BF17 /* BTTLiCaiOutDetailPopViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiOutDetailPopViewCell.m; sourceTree = "<group>"; };
+		4135A6EF263941CF00D3BF17 /* BTTLiCaiTransRecordTopBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiTransRecordTopBtnView.h; sourceTree = "<group>"; };
+		4135A6F0263941CF00D3BF17 /* BTTLiCaiRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiRecordCell.xib; sourceTree = "<group>"; };
+		4135A6F1263941CF00D3BF17 /* BTTLiCaiBtnCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiBtnCell.m; sourceTree = "<group>"; };
+		4135A6F2263941CF00D3BF17 /* BTTLiCaiBannerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiBannerCell.xib; sourceTree = "<group>"; };
+		4135A6F3263941CF00D3BF17 /* BTTLiCaiRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiRecordCell.h; sourceTree = "<group>"; };
+		4135A6F4263941D000D3BF17 /* BTTLiCaiOutDetailPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiOutDetailPopView.h; sourceTree = "<group>"; };
+		4135A6F5263941D000D3BF17 /* BTTLiCaiOutDetailPopViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiOutDetailPopViewCell.h; sourceTree = "<group>"; };
+		4135A6F6263941D000D3BF17 /* BTTLiCaiTotalAmountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiTotalAmountCell.xib; sourceTree = "<group>"; };
+		4135A70D2639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTMeHeadernNicknameLoginCell.m; sourceTree = "<group>"; };
+		4135A70E2639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTMeHeadernNicknameLoginCell.xib; sourceTree = "<group>"; };
+		4135A70F2639420700D3BF17 /* BTTMeHeaderLoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTMeHeaderLoginCell.xib; sourceTree = "<group>"; };
+		4135A7102639420700D3BF17 /* BTTMeHeaderLoginCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTMeHeaderLoginCell.h; sourceTree = "<group>"; };
+		4135A7112639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTMeHeadernNicknameLoginCell.h; sourceTree = "<group>"; };
+		4135A7122639420700D3BF17 /* BTTMeHeaderLoginCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTMeHeaderLoginCell.m; sourceTree = "<group>"; };
+		4135A7192639440700D3BF17 /* BTTLiCaiTransRecordController+LoadData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTTLiCaiTransRecordController+LoadData.h"; sourceTree = "<group>"; };
+		4135A71A2639440700D3BF17 /* BTTLiCaiTransRecordController+LoadData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTTLiCaiTransRecordController+LoadData.m"; sourceTree = "<group>"; };
+		4135A72026394A4800D3BF17 /* BTTLiCaiTransferRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiTransferRecordModel.h; sourceTree = "<group>"; };
+		4135A72126394A4800D3BF17 /* BTTLiCaiTransferRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiTransferRecordModel.m; sourceTree = "<group>"; };
+		4135A727263A58D100D3BF17 /* BTTLiCaiViewController+LoadData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTTLiCaiViewController+LoadData.h"; sourceTree = "<group>"; };
+		4135A728263A58D100D3BF17 /* BTTLiCaiViewController+LoadData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTTLiCaiViewController+LoadData.m"; sourceTree = "<group>"; };
+		4135A730263A667400D3BF17 /* BTTLiCaiInDetailPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiInDetailPopView.xib; sourceTree = "<group>"; };
+		4135A731263A667400D3BF17 /* BTTLiCaiInDetailPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiInDetailPopView.m; sourceTree = "<group>"; };
+		4135A736263AAE4A00D3BF17 /* BTTInterestCreditLogsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTInterestCreditLogsModel.h; sourceTree = "<group>"; };
+		4135A737263AAE4A00D3BF17 /* BTTInterestCreditLogsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTInterestCreditLogsModel.m; sourceTree = "<group>"; };
+		4135A73B263AB89F00D3BF17 /* BTTLiCaiConfigModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiConfigModel.m; sourceTree = "<group>"; };
+		4135A73C263AB89F00D3BF17 /* BTTLiCaiConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiConfigModel.h; sourceTree = "<group>"; };
 		413E324A251B3520000804E2 /* BTTCreditRecordController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTCreditRecordController+LoadData.h"; sourceTree = "<group>"; };
 		413E324B251B3520000804E2 /* BTTCreditRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTCreditRecordController.m; sourceTree = "<group>"; };
 		413E324C251B3520000804E2 /* BTTCreditRecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTCreditRecordController.h; sourceTree = "<group>"; };
@@ -1926,9 +1987,6 @@
 		415CA1EC24E53AF6005E0E9F /* OCTRechargeUSDTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTRechargeUSDTView.m; sourceTree = "<group>"; };
 		415CA1ED24E53AF6005E0E9F /* OCTRechargeUSDTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTRechargeUSDTView.h; sourceTree = "<group>"; };
 		415CA1EF24E53B0B005E0E9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		41649F8C258352EB0033FFA9 /* IN3SResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = IN3SResource.bundle; sourceTree = "<group>"; };
-		41649F8D258352EB0033FFA9 /* tingyunApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = tingyunApp.framework; sourceTree = "<group>"; };
-		41649F8E258352EB0033FFA9 /* IN3SAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IN3SAnalytics.framework; sourceTree = "<group>"; };
 		41755C50262E74D600B6884D /* LiveChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveChat.m; sourceTree = "<group>"; };
 		41755C51262E74D600B6884D /* LiveChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveChat.h; sourceTree = "<group>"; };
 		41800D592623E95900FAC27B /* BTTAddBitollCardController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTAddBitollCardController.xib; sourceTree = "<group>"; };
@@ -2031,13 +2089,17 @@
 		41BC70FF252D6509003944ED /* BTTBiBiCunPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTBiBiCunPopView.h; sourceTree = "<group>"; };
 		41C53A9A25A851B400CFA3A1 /* BTTYenFenHongModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTYenFenHongModel.m; sourceTree = "<group>"; };
 		41C53A9B25A851B400CFA3A1 /* BTTYenFenHongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTYenFenHongModel.h; sourceTree = "<group>"; };
+		41CA82C926412D1800A550EE /* BTTInterestRecordsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTInterestRecordsModel.m; sourceTree = "<group>"; };
+		41CA82CA26412D1800A550EE /* BTTInterestRecordsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTInterestRecordsModel.h; sourceTree = "<group>"; };
 		41EAF0F1260D93BD0091FE09 /* BTTMeInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTMeInfoCell.xib; sourceTree = "<group>"; };
 		41EAF0F5260D94290091FE09 /* hot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = hot.gif; sourceTree = "<group>"; };
 		41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTYueFenHongPopView.xib; sourceTree = "<group>"; };
 		41F14AEE25A69CA1008E8CAD /* BTTYueFenHongPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTYueFenHongPopView.h; sourceTree = "<group>"; };
 		41F14AEF25A69CA1008E8CAD /* BTTYueFenHongPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTYueFenHongPopView.m; sourceTree = "<group>"; };
+		41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = tingyunApp.framework; sourceTree = "<group>"; };
 		62DAB42824C569F6001F16B4 /* Hybird_1e3c3b.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hybird_1e3c3b.entitlements; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_1e3c3b.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76CC62BD265677E00042AEDF /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = Hybird_1e3c3b/Public/Tools/ThirdParty/libboringssl_simulator.a; sourceTree = "<group>"; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
 		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
 		D317745024D2648C009B1814 /* DSBRedBagPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DSBRedBagPopView.xib; sourceTree = "<group>"; };
@@ -2305,17 +2367,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41649F91258352EC0033FFA9 /* IN3SAnalytics.framework in Frameworks */,
 				3AD9CF04216C425200685B43 /* CoreTelephony.framework in Frameworks */,
 				3AD9CEE921675A9B00685B43 /* libresolv.tbd in Frameworks */,
 				3AD9CE312167107B00685B43 /* libpjsua-arm-apple-darwin9.a in Frameworks */,
-				41649F90258352EC0033FFA9 /* tingyunApp.framework in Frameworks */,
+				41FD5E602654AC8C00B38644 /* tingyunApp.framework in Frameworks */,
 				3A5AE71D22D6E22B0013E8A3 /* libLive800ChatLib.a in Frameworks */,
 				3AD9CE2B2167107B00685B43 /* libilbccodec-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */,
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
-				413AE5C52637A77700CC0C35 /* libboringssl_simulator.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
@@ -2715,6 +2775,7 @@
 				3ADD238E217836B200FA959A /* BTTMineViewController+Nav.h */,
 				3ADD238D217836B200FA959A /* BTTMineViewController+Nav.m */,
 				3A685BA222715F6600A8F59D /* Nickname */,
+				4135A6D2263940AE00D3BF17 /* LiCai */,
 				3AAFF8B521DDF88300F875B1 /* SaveMoneySearch */,
 				3A11AE5A2186B69800B1AFF4 /* Xima */,
 				4184DE1B251B343600D433D4 /* CustomerReport */,
@@ -3216,7 +3277,7 @@
 				3A8D6E8921630EE5000530DF /* PublicMethod.h */,
 				3A8D6E8A21630EE5000530DF /* PublicMethod.m */,
 				3A37E0F72164680600FB13A1 /* AppDelegate */,
-				3A8F516A215F75C70069D1B3 /* Framework */,
+				41FD5E5E2654AC6E00B38644 /* Framework */,
 				3A8F5169215F75BB0069D1B3 /* Category */,
 				3A8F5168215F75B00069D1B3 /* BaseClass */,
 				3A8F5167215F758A0069D1B3 /* Tools */,
@@ -3229,7 +3290,6 @@
 			children = (
 				41755C4F262E74A300B6884D /* LiveChat */,
 				41B8FCD325C92B310022F886 /* AssistiveButton */,
-				3AD1A9322236538C00515628 /* 3S */,
 				EA5F141221A28514004305A7 /* IVFoundation */,
 				3AD9CD5D21670FB100685B43 /* ThirdParty */,
 				3AD9CD5C21670F6E00685B43 /* Lib */,
@@ -3289,16 +3349,6 @@
 				3A7C0B1F21EC9F2E002658CC /* NSString+MD5.m */,
 			);
 			path = Category;
-			sourceTree = "<group>";
-		};
-		3A8F516A215F75C70069D1B3 /* Framework */ = {
-			isa = PBXGroup;
-			children = (
-				41649F8E258352EB0033FFA9 /* IN3SAnalytics.framework */,
-				41649F8C258352EB0033FFA9 /* IN3SResource.bundle */,
-				41649F8D258352EB0033FFA9 /* tingyunApp.framework */,
-			);
-			path = Framework;
 			sourceTree = "<group>";
 		};
 		3A8F516D215F77A50069D1B3 /* Advertise */ = {
@@ -3695,15 +3745,6 @@
 			path = BTTAnimationPopView;
 			sourceTree = "<group>";
 		};
-		3AD1A9322236538C00515628 /* 3S */ = {
-			isa = PBXGroup;
-			children = (
-				3AD1A93B2237B4B200515628 /* CNTimeLog.h */,
-				3AD1A93A2237B4B200515628 /* CNTimeLog.m */,
-			);
-			path = 3S;
-			sourceTree = "<group>";
-		};
 		3AD9CD4C2165B2C900685B43 /* PopoverView */ = {
 			isa = PBXGroup;
 			children = (
@@ -4005,6 +4046,7 @@
 		3ADD2363217722CB00FA959A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4135A6DB263941B600D3BF17 /* LiCai */,
 				4184DDCC251B321000D433D4 /* CustomerReport */,
 				3AAFF8BC21DE044A00F875B1 /* SaveMoneySearch */,
 				3AB0686521A4F26100072FB7 /* PublicCell */,
@@ -4080,6 +4122,14 @@
 				418F756E251D94A400DF4A71 /* BTTXmTransferRecordModel.m */,
 				418E72D22577784D00D9BF95 /* BTTUserGameCurrencyModel.h */,
 				418E72D32577784D00D9BF95 /* BTTUserGameCurrencyModel.m */,
+				4135A72026394A4800D3BF17 /* BTTLiCaiTransferRecordModel.h */,
+				4135A72126394A4800D3BF17 /* BTTLiCaiTransferRecordModel.m */,
+				4135A736263AAE4A00D3BF17 /* BTTInterestCreditLogsModel.h */,
+				4135A737263AAE4A00D3BF17 /* BTTInterestCreditLogsModel.m */,
+				4135A73C263AB89F00D3BF17 /* BTTLiCaiConfigModel.h */,
+				4135A73B263AB89F00D3BF17 /* BTTLiCaiConfigModel.m */,
+				41CA82CA26412D1800A550EE /* BTTInterestRecordsModel.h */,
+				41CA82C926412D1800A550EE /* BTTInterestRecordsModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -4148,12 +4198,12 @@
 				3ADD23642177230300FA959A /* BTTMeHeaderNotLoginCell.h */,
 				3ADD23652177230300FA959A /* BTTMeHeaderNotLoginCell.m */,
 				3ADD23662177230300FA959A /* BTTMeHeaderNotLoginCell.xib */,
-				3ADD2390217837FF00FA959A /* BTTMeHeaderLoginCell.h */,
-				3ADD2391217837FF00FA959A /* BTTMeHeaderLoginCell.m */,
-				413DF78D25010780005ABCC6 /* BTTMeHeaderLoginCell.xib */,
-				3A2DAAC022768D350093C122 /* BTTMeHeadernNicknameLoginCell.h */,
-				3A2DAAC122768D350093C122 /* BTTMeHeadernNicknameLoginCell.m */,
-				413DF78F25010787005ABCC6 /* BTTMeHeadernNicknameLoginCell.xib */,
+				4135A7102639420700D3BF17 /* BTTMeHeaderLoginCell.h */,
+				4135A7122639420700D3BF17 /* BTTMeHeaderLoginCell.m */,
+				4135A70F2639420700D3BF17 /* BTTMeHeaderLoginCell.xib */,
+				4135A7112639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.h */,
+				4135A70D2639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.m */,
+				4135A70E2639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.xib */,
 				3ADD236921772A1E00FA959A /* BTTMeInfoCell.h */,
 				3ADD236A21772A1E00FA959A /* BTTMeInfoCell.m */,
 				41EAF0F1260D93BD0091FE09 /* BTTMeInfoCell.xib */,
@@ -4397,6 +4447,55 @@
 			path = TXScrollLabelView;
 			sourceTree = "<group>";
 		};
+		4135A6D2263940AE00D3BF17 /* LiCai */ = {
+			isa = PBXGroup;
+			children = (
+				4135A6D4263941AA00D3BF17 /* BTTLiCaiViewController.h */,
+				4135A6D3263941AA00D3BF17 /* BTTLiCaiViewController.m */,
+				4135A727263A58D100D3BF17 /* BTTLiCaiViewController+LoadData.h */,
+				4135A728263A58D100D3BF17 /* BTTLiCaiViewController+LoadData.m */,
+				4135A6D6263941AA00D3BF17 /* BTTLiCaiTransRecordController.h */,
+				4135A6D5263941AA00D3BF17 /* BTTLiCaiTransRecordController.m */,
+				4135A7192639440700D3BF17 /* BTTLiCaiTransRecordController+LoadData.h */,
+				4135A71A2639440700D3BF17 /* BTTLiCaiTransRecordController+LoadData.m */,
+			);
+			path = LiCai;
+			sourceTree = "<group>";
+		};
+		4135A6DB263941B600D3BF17 /* LiCai */ = {
+			isa = PBXGroup;
+			children = (
+				4135A6E7263941CE00D3BF17 /* BTTLiCaiBannerCell.h */,
+				4135A6EB263941CF00D3BF17 /* BTTLiCaiBannerCell.m */,
+				4135A6F2263941CF00D3BF17 /* BTTLiCaiBannerCell.xib */,
+				4135A6E8263941CE00D3BF17 /* BTTLiCaiTotalAmountCell.h */,
+				4135A6E0263941CE00D3BF17 /* BTTLiCaiTotalAmountCell.m */,
+				4135A6F6263941D000D3BF17 /* BTTLiCaiTotalAmountCell.xib */,
+				4135A6EA263941CF00D3BF17 /* BTTLiCaiBtnCell.h */,
+				4135A6F1263941CF00D3BF17 /* BTTLiCaiBtnCell.m */,
+				4135A6EC263941CF00D3BF17 /* BTTLiCaiBtnCell.xib */,
+				4135A6E9263941CF00D3BF17 /* BTTLiCaiInDetailPopView.h */,
+				4135A731263A667400D3BF17 /* BTTLiCaiInDetailPopView.m */,
+				4135A730263A667400D3BF17 /* BTTLiCaiInDetailPopView.xib */,
+				4135A6F4263941D000D3BF17 /* BTTLiCaiOutDetailPopView.h */,
+				4135A6E4263941CE00D3BF17 /* BTTLiCaiOutDetailPopView.m */,
+				4135A6ED263941CF00D3BF17 /* BTTLiCaiOutDetailPopView.xib */,
+				4135A6F5263941D000D3BF17 /* BTTLiCaiOutDetailPopViewCell.h */,
+				4135A6EE263941CF00D3BF17 /* BTTLiCaiOutDetailPopViewCell.m */,
+				4135A6E6263941CE00D3BF17 /* BTTLiCaiOutDetailPopViewCell.xib */,
+				4135A6EF263941CF00D3BF17 /* BTTLiCaiTransRecordTopBtnView.h */,
+				4135A6DC263941CD00D3BF17 /* BTTLiCaiTransRecordTopBtnView.m */,
+				4135A6DE263941CD00D3BF17 /* BTTLiCaiTransRecordTopBtnView.xib */,
+				4135A6F3263941CF00D3BF17 /* BTTLiCaiRecordCell.h */,
+				4135A6DF263941CE00D3BF17 /* BTTLiCaiRecordCell.m */,
+				4135A6F0263941CF00D3BF17 /* BTTLiCaiRecordCell.xib */,
+				4135A6E3263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.h */,
+				4135A6E5263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.m */,
+				4135A6E1263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.xib */,
+			);
+			path = LiCai;
+			sourceTree = "<group>";
+		};
 		413E3245251B34A1000804E2 /* Xm */ = {
 			isa = PBXGroup;
 			children = (
@@ -4624,10 +4723,19 @@
 			path = AssistiveButton;
 			sourceTree = "<group>";
 		};
+		41FD5E5E2654AC6E00B38644 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
 		8746ABB2D5D61EF30A4942D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				D3399698243C215D00B91A52 /* libboringssl_simulator.a */,
+				76CC62BD265677E00042AEDF /* libboringssl_simulator.a */,
 				D3399696243B08E000B91A52 /* libboringssl.tbd */,
 				3AD9CF03216C425200685B43 /* CoreTelephony.framework */,
 				3AD9CEE821675A9B00685B43 /* libresolv.tbd */,
@@ -5137,15 +5245,18 @@
 				3A5AE6B422D6E22A0013E8A3 /* photo_original_sel@2x.png in Resources */,
 				418E72DA2577786700D9BF95 /* BTTChooseCurrencyCell.xib in Resources */,
 				3A5AE67F22D6E22A0013E8A3 /* Emotion.plist in Resources */,
+				4135A703263941D000D3BF17 /* BTTLiCaiOutDetailPopView.xib in Resources */,
 				3A49DF9C2179D90D00FEFBDA /* BTTBindingMobileOneCell.xib in Resources */,
 				3A5AE6FD22D6E22A0013E8A3 /* LIVMediaFileSaveToLibraryButton@2x.png in Resources */,
 				3A5AE6DE22D6E22A0013E8A3 /* liv_satisfactionr_circular_selected_un@2x.png in Resources */,
 				3A5AE66C22D6E22A0013E8A3 /* LIVTextWithIconToast.nib in Resources */,
 				3A5AE67B22D6E22A0013E8A3 /* LIVVideoCameraViewController.nib in Resources */,
 				4184DE16251B331000D433D4 /* BTTModifyBankRecordHeaderCell.xib in Resources */,
+				4135A6F9263941D000D3BF17 /* BTTLiCaiTransRecordTopBtnView.xib in Resources */,
 				3A5AE6E022D6E22A0013E8A3 /* LIVResendButton@2x.png in Resources */,
 				3A5AE70722D6E22A0013E8A3 /* LIVChatViewControllerColor.plist in Resources */,
 				3A8F518C215F77AC0069D1B3 /* intro_3.jpg in Resources */,
+				4135A732263A667400D3BF17 /* BTTLiCaiInDetailPopView.xib in Resources */,
 				3A3DF1E2237BA276006129F6 /* BTTHotPromotionsCell.xib in Resources */,
 				3A11ADD721816E5800B1AFF4 /* SVProgressHUD.bundle in Resources */,
 				D31B0EF523B45251003666BA /* BTTUSDTItemCell.xib in Resources */,
@@ -5162,6 +5273,7 @@
 				3A5AE6BC22D6E22A0013E8A3 /* LIVVideoMessage_DefaultThumbnail@2x.png in Resources */,
 				3A5AE6C322D6E22A0013E8A3 /* LIVVoiceItem@3x.png in Resources */,
 				3AE05817217030CC00C7E70D /* BTTHomePageActivitiesCell.xib in Resources */,
+				4135A700263941D000D3BF17 /* BTTLiCaiOutDetailPopViewCell.xib in Resources */,
 				3A11ADF72181A22F00B1AFF4 /* BTTWithdrawalHeaderCell.xib in Resources */,
 				3A5AE71A22D6E22B0013E8A3 /* like.gif in Resources */,
 				3A5AE70A22D6E22A0013E8A3 /* angry.gif in Resources */,
@@ -5184,6 +5296,7 @@
 				3A5AE6DF22D6E22A0013E8A3 /* LIVFileMessage_TypeUnknown@3x.png in Resources */,
 				4184DE19251B331800D433D4 /* BTTModifyBankRecordCell.xib in Resources */,
 				3A5AE6F322D6E22A0013E8A3 /* LIVAutoScrollTextView1.png in Resources */,
+				4135A6FC263941D000D3BF17 /* BTTLiCaiInterestRateBillCell.xib in Resources */,
 				3A5AE6BD22D6E22A0013E8A3 /* sentVoicePlaying3@2x.png in Resources */,
 				3ADD237221772FB900FA959A /* BTTMeMoneyHeaderCell.xib in Resources */,
 				3AD9CF51216EFB3700685B43 /* BTTHomePageBannerCell.xib in Resources */,
@@ -5192,6 +5305,7 @@
 				3A5AE71222D6E22B0013E8A3 /* doubt.gif in Resources */,
 				3A5AE71022D6E22B0013E8A3 /* cute.gif in Resources */,
 				D5DBEB2F21ABB774008AF629 /* CNCompleteInfoView.xib in Resources */,
+				4135A7152639420700D3BF17 /* BTTMeHeaderLoginCell.xib in Resources */,
 				3AF1B81021AE680A00BF8C3A /* BTTVideoGamesSearchCell.xib in Resources */,
 				3A5AE4A322CDE5680013E8A3 /* BTTBishangStep1VC.xib in Resources */,
 				3A5AE66D22D6E22A0013E8A3 /* LIVSatisfactionEvaluationTableViewHeader.nib in Resources */,
@@ -5276,11 +5390,11 @@
 				3A7C0B1A21EC7E07002658CC /* BTTSaveMoneyModifyCell.xib in Resources */,
 				3A5AE69322D6E22A0013E8A3 /* sentVoicePlaying2@3x.png in Resources */,
 				3A5AE70D22D6E22B0013E8A3 /* money.gif in Resources */,
-				41649F8F258352EC0033FFA9 /* IN3SResource.bundle in Resources */,
 				3A5AE6D022D6E22A0013E8A3 /* navi_back@2x.png in Resources */,
 				3A5AE6BB22D6E22A0013E8A3 /* LIVVideoMessage_PlayButtonIcon.png in Resources */,
 				3A5AE6D222D6E22A0013E8A3 /* liv_radio_selected@2x.png in Resources */,
 				3A7A1A6821BDF21F00572B50 /* BTTLuckyWheelCoinView.xib in Resources */,
+				4135A702263941D000D3BF17 /* BTTLiCaiBtnCell.xib in Resources */,
 				410997FB251DC876001FA895 /* BTTDepositRecordHeaderCell.xib in Resources */,
 				3A5AE68B22D6E22A0013E8A3 /* LIVFileMessage_TypeExcel@3x.png in Resources */,
 				3A5AE65E22D6E22A0013E8A3 /* LIVEmotionBoardSendCell.nib in Resources */,
@@ -5295,6 +5409,7 @@
 				3A9E4C34219D9D6B00E7D8C0 /* BTTMakeCallLoginView.xib in Resources */,
 				3A5AE66A22D6E22A0013E8A3 /* LIVTimestampInCell.nib in Resources */,
 				3A5AE6E522D6E22A0013E8A3 /* LIVAutoScrollTextView4.png in Resources */,
+				4135A707263941D000D3BF17 /* BTTLiCaiBannerCell.xib in Resources */,
 				3AAFF88721D378E800F875B1 /* BTTMeSaveMoneyWechatCell.xib in Resources */,
 				3A5B0280234F0D6700D8828B /* BTTXimaRecordCell.xib in Resources */,
 				D5DBEB0921ABB774008AF629 /* CNPayBQStep2VC.xib in Resources */,
@@ -5362,7 +5477,6 @@
 				3A5AE71922D6E22B0013E8A3 /* daxiao.gif in Resources */,
 				3AE1EB2121805E980073A32D /* BTTAddCardBtnsCell.xib in Resources */,
 				3A5AE6C122D6E22A0013E8A3 /* LIVVideoMessage_PlayButtonIcon@3x.png in Resources */,
-				413DF78E25010780005ABCC6 /* BTTMeHeaderLoginCell.xib in Resources */,
 				3A5AE70022D6E22A0013E8A3 /* LIVVoiceItem_highlight@2x.png in Resources */,
 				4196BEF1255BC21B00F41EED /* BTTWithdrawToUsdtPromoPop.xib in Resources */,
 				3AAE821F219A738B003EC8B0 /* BTTLoginCell.xib in Resources */,
@@ -5370,6 +5484,7 @@
 				4184DE0C251B32CE00D433D4 /* BTTPromoRecordCell.xib in Resources */,
 				3A289500237BE70C008EB579 /* BTTLoginOrRegisterBtsView.xib in Resources */,
 				3A5AE6E122D6E22A0013E8A3 /* LIVCSDefaultAvatar@3x.png in Resources */,
+				4135A7142639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.xib in Resources */,
 				3A685B9522706A2700A8F59D /* BTTChangePwdBtnsCell.xib in Resources */,
 				D5DBEB2E21ABB774008AF629 /* CNPayRecommendCell.xib in Resources */,
 				3AD9CF61216F1EAB00685B43 /* BTTHomePageNoticeCell.xib in Resources */,
@@ -5408,7 +5523,6 @@
 				3A5AE71822D6E22B0013E8A3 /* embarrassed.gif in Resources */,
 				3A5AE68E22D6E22A0013E8A3 /* LIVRadioButton_selected@2x.png in Resources */,
 				3A5AE6A522D6E22A0013E8A3 /* receivedVoicePlaying2@2x.png in Resources */,
-				413DF79025010787005ABCC6 /* BTTMeHeadernNicknameLoginCell.xib in Resources */,
 				3A5AE71422D6E22B0013E8A3 /* cry.gif in Resources */,
 				3AB0682A21A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.xib in Resources */,
 				3A5AE67822D6E22A0013E8A3 /* LIVTextToast.nib in Resources */,
@@ -5423,6 +5537,7 @@
 				3A5AE6B822D6E22A0013E8A3 /* LIVFileMessage_TypePPT@3x.png in Resources */,
 				3A5AE6A622D6E22A0013E8A3 /* LIVAutoScrollTextView11.png in Resources */,
 				3A5AE68822D6E22A0013E8A3 /* LIVVideoCamera_flashOff@2x.png in Resources */,
+				4135A705263941D000D3BF17 /* BTTLiCaiRecordCell.xib in Resources */,
 				3A75A17722114DB100584A35 /* BTTLoginNoRegisterCell.xib in Resources */,
 				3A5AE6E622D6E22A0013E8A3 /* LIVMediaFileSaveToLibraryButton@3x.png in Resources */,
 				3A5AE67E22D6E22A0013E8A3 /* TZImagePickerController.bundle in Resources */,
@@ -5459,6 +5574,7 @@
 				D599251921AE6719001E885A /* CNPayCardStep2VC.xib in Resources */,
 				D5DBEB4521AD3721008AF629 /* CNPayQRStep2VC.xib in Resources */,
 				3ADD23FB2179CA8C00FA959A /* BTTAccountBlanceHeaderCell.xib in Resources */,
+				4135A708263941D000D3BF17 /* BTTLiCaiTotalAmountCell.xib in Resources */,
 				3A5AE6C222D6E22A0013E8A3 /* liv_radio_selected@3x.png in Resources */,
 				411DE809261AFC270076BCE2 /* BTTPasswordChangeBtnsCell.xib in Resources */,
 				3AAE8223219A738B003EC8B0 /* BTTRegisterQuickAutoCell.xib in Resources */,
@@ -5579,6 +5695,7 @@
 				4184DE0D251B32D100D433D4 /* BTTPromoRecordFooterView.m in Sources */,
 				3AAE8220219A738B003EC8B0 /* BTTLoginOrRegisterBtnCell.m in Sources */,
 				413E3255251B352A000804E2 /* BTTDepositRecordController.m in Sources */,
+				4135A704263941D000D3BF17 /* BTTLiCaiOutDetailPopViewCell.m in Sources */,
 				3A7C0B1D21EC92E5002658CC /* NSArray+JSON.m in Sources */,
 				3AA7892D21FFF2580047A372 /* SDWebImageDownloaderOperation.m in Sources */,
 				3AD9CF6D216F33F300685B43 /* BTTGameCollectionViewCell.m in Sources */,
@@ -5610,10 +5727,10 @@
 				D5C5018E21B4FC8C00C6DA02 /* CNPayWechatTipView.m in Sources */,
 				419AEC5A250F64F100D089DD /* BTTBJLPopView.m in Sources */,
 				3AA7893221FFF2580047A372 /* SDWebImageGIFCoder.m in Sources */,
-				3ADD2393217837FF00FA959A /* BTTMeHeaderLoginCell.m in Sources */,
 				3AE1EAFC218021080073A32D /* BTTVerifyTypeSelectController+LoadData.m in Sources */,
 				D5DBEAFF21ABB774008AF629 /* NSString+CNPayment.m in Sources */,
 				3A0CCED2238B7FE000CFEE22 /* BTTNewAccountGuidePopView.m in Sources */,
+				4135A6F7263941D000D3BF17 /* BTTLiCaiTransRecordTopBtnView.m in Sources */,
 				3AA7892E21FFF2580047A372 /* SDWebImageTransition.m in Sources */,
 				3ADD23EF2179B97A00FA959A /* TAPageControl.m in Sources */,
 				D5DBEB3A21ABB774008AF629 /* CNPayConstant.m in Sources */,
@@ -5708,6 +5825,7 @@
 				3AB0682921A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.m in Sources */,
 				D3A9A71324065576007F672A /* BTTVideoFastRegisterView.m in Sources */,
 				3AFCD7CB21AD15D700B136C1 /* BTTVideoGamesHeaderCell.m in Sources */,
+				4135A733263A667400D3BF17 /* BTTLiCaiInDetailPopView.m in Sources */,
 				3ADD23F62179C6A800FA959A /* BTTAccountBalanceController.m in Sources */,
 				4184DE04251B32A400D433D4 /* BTTWithdrawRecordCell.m in Sources */,
 				3A11ADF62181A22F00B1AFF4 /* BTTWithdrawalHeaderCell.m in Sources */,
@@ -5729,6 +5847,7 @@
 				EA5F141121A265B0004305A7 /* BTTBankModel.m in Sources */,
 				3A2894FE237BE701008EB579 /* BTTLoginOrRegisterBtsView.m in Sources */,
 				3AE1EB192180585B0073A32D /* BTTAddCardController.m in Sources */,
+				41CA82CB26412D1800A550EE /* BTTInterestRecordsModel.m in Sources */,
 				413E3266251B354A000804E2 /* BTTWithdrawRecordController.m in Sources */,
 				3AD9CF60216F1EAB00685B43 /* BTTHomePageNoticeCell.m in Sources */,
 				3A9E4C62219FDA7300E7D8C0 /* BTTGameModel.m in Sources */,
@@ -5740,6 +5859,7 @@
 				3AA7892021FFF2580047A372 /* SDWebImageFrame.m in Sources */,
 				D31B0EEB23B451B0003666BA /* BTTAddUSDTController.m in Sources */,
 				3AD9CD552165B2C900685B43 /* BTTPopoverViewCell.m in Sources */,
+				4135A6FA263941D000D3BF17 /* BTTLiCaiRecordCell.m in Sources */,
 				413E326D251B3553000804E2 /* BTTXmRecordController+LoadData.m in Sources */,
 				3A11AE672186D94B00B1AFF4 /* BTTThisWeekCell.m in Sources */,
 				3AAFF8B821DDF8D300F875B1 /* BTTSaveMoneyModifyViewController.m in Sources */,
@@ -5747,9 +5867,9 @@
 				3AA7892721FFF2580047A372 /* SDWebImageCompat.m in Sources */,
 				4184DD99251B308D00D433D4 /* BTTModifyBankRecordModel.m in Sources */,
 				41755C52262E74D600B6884D /* LiveChat.m in Sources */,
+				4135A7132639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.m in Sources */,
 				D345F28F23CFFC2300E658A6 /* IVNetworkManager.m in Sources */,
 				3AE1EB052180457A0073A32D /* BTTCardModifyVerifyController.m in Sources */,
-				3AD1A93C2237B4B200515628 /* CNTimeLog.m in Sources */,
 				3A11AE272184025900B1AFF4 /* BTTPasswordCell.m in Sources */,
 				3A9E4C32219D9D5600E7D8C0 /* BTTMakeCallLoginView.m in Sources */,
 				3A9E4C24219D56F600E7D8C0 /* BTTForgetPasswordStepThreeController.m in Sources */,
@@ -5797,6 +5917,7 @@
 				D5DBEB2B21ABB774008AF629 /* CNPayRecommendCell.m in Sources */,
 				3A11ADD621816E5800B1AFF4 /* SVIndefiniteAnimatedView.m in Sources */,
 				3AA7892B21FFF2580047A372 /* SDAnimatedImageRep.m in Sources */,
+				4135A72226394A4800D3BF17 /* BTTLiCaiTransferRecordModel.m in Sources */,
 				418F756B251D943400DF4A71 /* BTTXmTransferRecordController+LoadData.m in Sources */,
 				3A11ADE121818C8800B1AFF4 /* BTTAddBTCController+LoadData.m in Sources */,
 				3AD9CF4C216EE11A00685B43 /* BTTHomePageHeaderView.m in Sources */,
@@ -5810,12 +5931,14 @@
 				4184FDF924E4EA92008521D0 /* BTTForgetPasswordController.m in Sources */,
 				3AA7891E21FFF2580047A372 /* SDWebImageManager.m in Sources */,
 				D5DBEB2A21ABB774008AF629 /* CNPaySubmitButton.m in Sources */,
+				4135A6D8263941AA00D3BF17 /* BTTLiCaiTransRecordController.m in Sources */,
 				3A11AE1C2183FC0D00B1AFF4 /* BTTPasswordChangeController.m in Sources */,
 				3A7C0B0821E82D80002658CC /* CNPayQRVC.m in Sources */,
 				4184DDFC251B324100D433D4 /* BTTDepositRecordHeaderCell.m in Sources */,
 				413E3260251B3542000804E2 /* BTTPromoRecordController.m in Sources */,
 				3A92941E219C3A0000764E7E /* BTTRegisterSuccessController.m in Sources */,
 				3AD9CD532165B2C900685B43 /* BTTPopoverAction.m in Sources */,
+				4135A742263AB93200D3BF17 /* BTTLiCaiConfigModel.m in Sources */,
 				4196BEF2255BC21B00F41EED /* BTTWithdrawToUsdtPromoPop.m in Sources */,
 				3A3DF1E1237BA276006129F6 /* BTTHotPromotionsCell.m in Sources */,
 				413E3267251B354A000804E2 /* BTTWithdrawRecordController+LoadData.m in Sources */,
@@ -5857,20 +5980,24 @@
 				3A14CC5F237A4B56009711CF /* BTTRealPersonGameCell.m in Sources */,
 				3ADD23672177230300FA959A /* BTTMeHeaderNotLoginCell.m in Sources */,
 				3A9E4C3A219E509100E7D8C0 /* BTTBaseAnimationPopView.m in Sources */,
+				4135A6FE263941D000D3BF17 /* BTTLiCaiOutDetailPopView.m in Sources */,
 				3AA7893521FFF2580047A372 /* UIView+WebCacheOperation.m in Sources */,
 				3A9E4C5F219FD8F900E7D8C0 /* BTTDownloadModel.m in Sources */,
 				3AA7892521FFF2580047A372 /* UIImage+MultiFormat.m in Sources */,
 				3AD9CEF0216B3DD900685B43 /* WebViewUserAgaent.m in Sources */,
+				4135A6FF263941D000D3BF17 /* BTTLiCaiInterestRateBillCell.m in Sources */,
 				3AA7893321FFF2580047A372 /* UIImage+MemoryCacheCost.m in Sources */,
 				3A8F5190215F77AC0069D1B3 /* BTTTabBarButton.m in Sources */,
 				3A7C0B1921EC7E07002658CC /* BTTSaveMoneyModifyCell.m in Sources */,
 				4184DD98251B308D00D433D4 /* BTTXmRecordModel.m in Sources */,
+				4135A6D7263941AA00D3BF17 /* BTTLiCaiViewController.m in Sources */,
 				3A8F518F215F77AC0069D1B3 /* BTTTabBarBigButton.m in Sources */,
 				D5DBEB3221ABB774008AF629 /* CNPayAmountRecommendView.m in Sources */,
 				3A9E4C16219D1D2A00E7D8C0 /* BTTForgetPwdCodeCell.m in Sources */,
 				3A37E0FD2164691300FB13A1 /* AppDelegate+AD.m in Sources */,
 				3AA7893721FFF2580047A372 /* SDWebImageImageIOCoder.m in Sources */,
 				D38A44AA246E97ED00BC8764 /* BTTBitollWithDrawCell.m in Sources */,
+				4135A71B2639440700D3BF17 /* BTTLiCaiTransRecordController+LoadData.m in Sources */,
 				3ADD23ED2179B97A00FA959A /* TAAnimatedDotView.m in Sources */,
 				3AE1EB09218046D80073A32D /* BTTCardModifyTitleCell.m in Sources */,
 				3A8F5130215F74CF0069D1B3 /* AppDelegate.m in Sources */,
@@ -5881,6 +6008,7 @@
 				3AD9CF08216C71F500685B43 /* NSString+Expand.m in Sources */,
 				4180B03925D36EBB00139E88 /* BTTOtherGameCell.m in Sources */,
 				3ADD23F12179B97A00FA959A /* SDCycleScrollView.m in Sources */,
+				4135A6FB263941D000D3BF17 /* BTTLiCaiTotalAmountCell.m in Sources */,
 				D5C5018B21B4BFD000C6DA02 /* CNPayDepositNameModel.m in Sources */,
 				3A9E4C7521A2571600E7D8C0 /* BTTChangeMobileManualController.m in Sources */,
 				3ADD23762177328B00FA959A /* BTTMeSaveMoneyCell.m in Sources */,
@@ -5895,6 +6023,7 @@
 				3A49DFA02179DA0D00FEFBDA /* BTTBindingMobileTwoCell.m in Sources */,
 				3ADD235E2176D7F000FA959A /* BTTHomePageViewController+Nav.m in Sources */,
 				D5DBEB0621ABB774008AF629 /* CNPayDepositStep2VC.m in Sources */,
+				4135A729263A58D100D3BF17 /* BTTLiCaiViewController+LoadData.m in Sources */,
 				3A34F79321B6630D007BC4D4 /* BTTGamesTryAlertView.m in Sources */,
 				D318AC1724333BC500183407 /* BTTKSAddBfbWalletController.m in Sources */,
 				3A8D6E9C21633D83000530DF /* BTTBaseWebViewController.m in Sources */,
@@ -5954,8 +6083,10 @@
 				3A5B027B234F080100D8828B /* BTTXimaRecordController.m in Sources */,
 				D357F0E12431C8DE00FD530A /* BTTBiFuBaoController.m in Sources */,
 				D39D7C0323CEFA5B00898546 /* BTTUsdtTodayNoticeView.m in Sources */,
+				4135A738263AAE4A00D3BF17 /* BTTInterestCreditLogsModel.m in Sources */,
 				3AAE821B219A738B003EC8B0 /* BTTLoginOrRegisterTypeSelectCell.m in Sources */,
 				3AE1EB1C21805B460073A32D /* BTTAddCardController+LoadData.m in Sources */,
+				4135A701263941D000D3BF17 /* BTTLiCaiBannerCell.m in Sources */,
 				414AAA272602021100518D32 /* BTTFirstWinningListModel.m in Sources */,
 				4184DE1E251B344F00D433D4 /* BTTCustomerReportController.m in Sources */,
 				3A11ADD421816E5800B1AFF4 /* SVProgressAnimatedView.m in Sources */,
@@ -5969,7 +6100,6 @@
 				412078AA26268FB000595F8C /* TXScrollLabelView.m in Sources */,
 				3AD9CF5B216F1A4400685B43 /* BTTHomePageADCell.m in Sources */,
 				3A8D6EA021634306000530DF /* BridgeProtocolExternal.m in Sources */,
-				3A2DAAC322768D350093C122 /* BTTMeHeadernNicknameLoginCell.m in Sources */,
 				3A9E4C1E219D416700E7D8C0 /* BTTForgetPasswordStepTwoController.m in Sources */,
 				415CA1D924E539F3005E0E9F /* BTTMineViewController+LoadData.m in Sources */,
 				3AF1B81421AE8C5500BF8C3A /* BTTVideoGamesNoDataCell.m in Sources */,
@@ -6002,6 +6132,7 @@
 				3AAFF88621D378E800F875B1 /* BTTMeSaveMoneyWechatCell.m in Sources */,
 				3A11AE4B21869B2200B1AFF4 /* BTTSettingsController.m in Sources */,
 				418E72C6257777CE00D9BF95 /* BTTChooseCurrencyPopView.m in Sources */,
+				4135A706263941D000D3BF17 /* BTTLiCaiBtnCell.m in Sources */,
 				4184DD9D251B308D00D433D4 /* BTTWithdrawRecordModel.m in Sources */,
 				3AAE821E219A738B003EC8B0 /* BTTRegisterQuickManualCell.m in Sources */,
 				3A7A1A6C21BF68AA00572B50 /* BTTRegisterSuccessTwoCell.m in Sources */,
@@ -6039,6 +6170,7 @@
 				3AB0688021A63D6C00072FB7 /* BTTModifyLimitViewController+LoadData.m in Sources */,
 				3A11ADE521818FD400B1AFF4 /* BTTBTCInfoCell.m in Sources */,
 				4184FDF824E4EA92008521D0 /* BTTForgetPasswordController+LoadData.m in Sources */,
+				4135A7162639420700D3BF17 /* BTTMeHeaderLoginCell.m in Sources */,
 				3A8F518E215F77AC0069D1B3 /* BTTTabBar.m in Sources */,
 				D339CE9C24C03CB7009ACD1C /* OTCInsideModel.m in Sources */,
 				3A8D6E9821633D3E000530DF /* CLive800Manager.m in Sources */,
@@ -6225,7 +6357,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H9Q37UVSB6;
+				DEVELOPMENT_TEAM = 5GYDQY5HP9;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6248,11 +6380,11 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.244;
-				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt;
+				MARKETING_VERSION = 3.2.253;
+				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = 1e3c3b_btt_hoc;
+				PROVISIONING_PROFILE_SPECIFIER = btt_ad_hoc;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -6267,7 +6399,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H9Q37UVSB6;
+				DEVELOPMENT_TEAM = 5GYDQY5HP9;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6290,11 +6422,11 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.244;
-				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt;
+				MARKETING_VERSION = 3.2.253;
+				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
-				PROVISIONING_PROFILE_SPECIFIER = 1e3c3b_btt_hoc;
+				PROVISIONING_PROFILE_SPECIFIER = btt_ad_hoc;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

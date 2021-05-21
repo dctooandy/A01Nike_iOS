@@ -392,7 +392,7 @@
 - (void)gotoGame:(NSString *)currency gameKey:(NSString *)gameKey {
     if ([gameKey isEqualToString:BTTAGQJKEY]) {
         BTTAGQJViewController *vc = [BTTAGQJViewController new];
-        [[CNTimeLog shareInstance] startRecordTime:CNEventAGQJLaunch];
+        [CNTimeLog startRecordTime:CNEventAGQJLaunch];
         vc.platformLine = currency;
         [self.controller.navigationController pushViewController:vc animated:YES];
     } else if ([gameKey isEqualToString:BTTASKEY]) {

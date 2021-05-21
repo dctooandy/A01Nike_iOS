@@ -35,8 +35,8 @@
     [self transDateStringToLabeText:model.beginDate];
     self.sourceLab.text = model.title;
     
-    self.cashLabel.text = [NSString stringWithFormat:@"现金：支出%@，余额%@", [PublicMethod transferNumToThousandFormat:[model.amount floatValue]], [PublicMethod transferNumToThousandFormat:[model.destAmount floatValue]]];
-    self.gameLab.text = [NSString stringWithFormat:@"游戏：支出%@，余额%@", [PublicMethod transferNumToThousandFormat:[model.gameAmount floatValue]], [PublicMethod transferNumToThousandFormat:[model.gameDestAmount floatValue]]];
+    self.cashLabel.text = [NSString stringWithFormat:@"现金：支出%@，余额%@", [PublicMethod transferNumToThousandFormat:[model.amount doubleValue]], [PublicMethod transferNumToThousandFormat:[model.destAmount doubleValue]]];
+    self.gameLab.text = [NSString stringWithFormat:@"游戏：支出%@，余额%@", [PublicMethod transferNumToThousandFormat:[model.gameAmount doubleValue]], [PublicMethod transferNumToThousandFormat:[model.gameDestAmount doubleValue]]];
     
     self.referenceIdStr = model.referenceId;
     self.referenceIdLab.text = [NSString stringWithFormat:@"订单：%@", model.referenceId];
@@ -50,12 +50,12 @@
     NSString * gameStr = @"";
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         self.sourceLab.text = @"CNY洗码转入";
-        cashStr = [NSString stringWithFormat:@"转入%@", [PublicMethod transferNumToThousandFormat:[model.targetCredit floatValue]]];
-        gameStr = [NSString stringWithFormat:@"转入%@", [PublicMethod transferNumToThousandFormat:[model.targetCredit floatValue]]];
+        cashStr = [NSString stringWithFormat:@"转入%@", [PublicMethod transferNumToThousandFormat:[model.targetCredit doubleValue]]];
+        gameStr = [NSString stringWithFormat:@"转入%@", [PublicMethod transferNumToThousandFormat:[model.targetCredit doubleValue]]];
     } else {
         self.sourceLab.text = @"CNY至USDT";
-        cashStr = [NSString stringWithFormat:@"支出%@", [PublicMethod transferNumToThousandFormat:[model.sourceCredit floatValue]]];
-        gameStr = [NSString stringWithFormat:@"支出%@", [PublicMethod transferNumToThousandFormat:[model.sourceCredit floatValue]]];
+        cashStr = [NSString stringWithFormat:@"支出%@", [PublicMethod transferNumToThousandFormat:[model.sourceCredit doubleValue]]];
+        gameStr = [NSString stringWithFormat:@"支出%@", [PublicMethod transferNumToThousandFormat:[model.sourceCredit doubleValue]]];
     }
     self.cashLabel.text = [NSString stringWithFormat:@"现金：%@，状态：%@", cashStr, [self transFlagToStr:model.flag]];
     self.gameLab.text = [NSString stringWithFormat:@"游戏：%@，状态：%@", gameStr, [self transFlagToStr:model.flag]];

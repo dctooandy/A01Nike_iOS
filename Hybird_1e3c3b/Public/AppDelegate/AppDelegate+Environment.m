@@ -75,9 +75,9 @@
     [IVHttpManager shareManager].domains = @[[HAInitConfig defaultH5Domain]];
     [IVHttpManager shareManager].domain = [HAInitConfig defaultH5Domain];
     [IVHttpManager shareManager].cdn = [HAInitConfig defaultCDN];
-    [IN3SAnalytics debugEnable:YES];
-    [IN3SAnalytics setUserName:[IVHttpManager shareManager].loginName];
-    [[CNTimeLog shareInstance] configProduct:[HAInitConfig product3SId]];
+    [CNTimeLog debugEnable:YES];
+    [CNTimeLog setUserName:[IVHttpManager shareManager].loginName];
+    [CNTimeLog configProduct:[HAInitConfig product3SId]];
     
     [self setupRedDot];
     [self setupLive800];

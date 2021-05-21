@@ -527,6 +527,8 @@
                 [IVHttpManager shareManager].loginName = result.body[@"loginName"];
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body isBackHome:false];
                 self.totalAmount = @"加载中";
+                self.yebAmount = @"加载中";
+                self.yebInterest = @"加载中";
                 self.saveMoneyCount = 0;
                 [self loadBankList];
                 if (!self.isLoading) {
@@ -624,9 +626,40 @@
             self.preAmount = [PublicMethod stringWithDecimalNumber:model.balance];
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.totalAmount = [PublicMethod stringWithDecimalNumber:model.balance];
+                self.yebAmount = [PublicMethod stringWithDecimalNumber:[PublicMethod calculateTwoDecimals:(model.yebAmount+model.yebInterest)]];
+                [self loadInterestRecords];
                 self.isLoading = NO;
                 [self.collectionView reloadData];
             });
+        }
+    }];
+}
+
+-(void)loadInterestRecords {
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"lastDays"] = @1;
+    params[@"pageNo"] = @1;
+    params[@"pageSize"] = @15;
+    [IVNetwork requestPostWithUrl:BTTLiCaiInterestRecords paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTInterestRecordsModel * model = [BTTInterestRecordsModel yy_modelWithJSON:result.body];
+            if (model.data.count > 0) {
+                BTTInterestRecordsItemModel * itemModel = model.data[0];
+                NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                NSDate * beginDate = [dateFormatter dateFromString:itemModel.createdTime];
+                NSDate * endDate = [NSDate date];
+                CGFloat distance = [endDate timeIntervalSinceDate:beginDate] / 60 / 60 / 24;
+                if (distance <= 1) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.yebInterest = [PublicMethod stringWithDecimalNumber:[PublicMethod calculateTwoDecimals:itemModel.interestAmount]];
+                        [self.collectionView reloadData];
+                    });
+                }
+            }
+        } else {
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];
 }

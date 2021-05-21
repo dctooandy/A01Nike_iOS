@@ -43,7 +43,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addGameViewToSelf];
-    [self registerNotifiction];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -60,16 +59,6 @@
     [[IVGameManager sharedManager].agqjVC willMoveToParentViewController:nil];
     [[IVGameManager sharedManager].agqjVC.view removeFromSuperview];
     [[IVGameManager sharedManager].agqjVC removeFromParentViewController];
-}
-
-- (void)registerNotifiction {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishLoginGame) name:@"FinishLoginGame" object:nil];
-}
-
-- (void)finishLoginGame {
-    if ([IVGameManager sharedManager].agqjVC.loadStatus == IVGameLoadStatusSuccess) {
-        [[CNTimeLog shareInstance] endRecordTime:CNEventAGQJLaunch];
-    }
 }
 
 - (void)addGameViewToSelf
@@ -96,7 +85,7 @@
 
 + (void)addGameViewToWindow
 {
-    [[CNTimeLog shareInstance] AGQJFirstLoad];
+    [CNTimeLog AGQJFirstLoad];
     [[IVGameManager sharedManager].agqjVC removeFromParentViewController];
     UIWindow *keyWin = [UIApplication sharedApplication].keyWindow;
     [IVGameManager sharedManager].agqjVC.view.hidden = YES;

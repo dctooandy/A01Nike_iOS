@@ -11,7 +11,7 @@
 #import "BTTShareRedirectModel.h"
 #import "BTTCustomerBalanceModel.h"
 #import "CLive800Manager.h"
-
+#import "BTTInterestRecordsModel.h"
 
 
 
@@ -26,6 +26,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) BTTBindStatusModel *statusModel;
 
 @property (nonatomic, copy) NSString *totalAmount;
+
+@property (nonatomic, copy) NSString *yebAmount;
+
+@property (nonatomic, copy) NSString *yebInterest;
 
 @property (nonatomic, assign) BOOL isFanLi;  ///< 返利
 

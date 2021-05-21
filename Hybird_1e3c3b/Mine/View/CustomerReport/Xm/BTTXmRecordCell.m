@@ -51,7 +51,7 @@
     self.sourceLab.text = sourceStr;
     
     NSString * unitStr = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT":@"元";
-    NSString * amountStr = [PublicMethod transferNumToThousandFormat:[model.amount floatValue]];
+    NSString * amountStr = [PublicMethod transferNumToThousandFormat:[model.amount doubleValue]];
     NSString * str = [NSString stringWithFormat:@"金额：%@%@", amountStr, unitStr];
     NSString * colorString = [NSString stringWithFormat:@"%@%@", amountStr, unitStr];
     NSRange range = [str rangeOfString:colorString];
@@ -59,7 +59,7 @@
     [attStr addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed: 0.88 green: 0.78 blue: 0.58 alpha: 1.00],NSFontAttributeName:kFontSystem(12)} range:range];
     self.amountLab.attributedText = attStr;
     
-    NSString * betAmountStr = [PublicMethod transferNumToThousandFormat:[model.bettingAmount floatValue]];
+    NSString * betAmountStr = [PublicMethod transferNumToThousandFormat:[model.bettingAmount doubleValue]];
     str = [NSString stringWithFormat:@"投注额：%@", betAmountStr];
     colorString = [NSString stringWithFormat:@"%@", betAmountStr];
     range = [str rangeOfString:colorString];

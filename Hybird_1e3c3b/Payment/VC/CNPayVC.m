@@ -101,7 +101,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (!_isFirstLoad) {
-        [[CNTimeLog shareInstance] endRecordTime:CNEventPayLaunch];
+        [CNTimeLog endRecordTime:CNEventPayLaunch];
         _isFirstLoad = YES;
     }
 }

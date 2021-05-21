@@ -49,7 +49,7 @@
     if (indexPath.row == 0) {
         BTTAccountBlanceHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTAccountBlanceHeaderCell" forIndexPath:indexPath];
         NSString *unitString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT" : @"¥";
-        cell.totalLabel.text = [NSString stringWithFormat:@"%@ %@",unitString,[PublicMethod transferNumToThousandFormat:self.amount.floatValue]];
+        cell.totalLabel.text = [NSString stringWithFormat:@"%@ %@",unitString,[PublicMethod transferNumToThousandFormat:self.amount.doubleValue]];
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
@@ -63,10 +63,10 @@
         cell.model = model;
         if (indexPath.row == 1) {
             cell.mineArrowsType = BTTMineArrowsTypeHidden;
-            cell.amountLabel.text = [self.localAmount isEqualToString:@"加载中"] ? self.localAmount : [NSString stringWithFormat:@"%@ %@",unitString,[PublicMethod transferNumToThousandFormat:self.localAmount.floatValue]];
+            cell.amountLabel.text = [self.localAmount isEqualToString:@"加载中"] ? self.localAmount : [NSString stringWithFormat:@"%@ %@",unitString,[PublicMethod transferNumToThousandFormat:self.localAmount.doubleValue]];
         } else {
             cell.mineArrowsType = BTTMineArrowsTypeNoHidden;
-            cell.amountLabel.text = [self.hallAmount isEqualToString:@"加载中"] ? self.hallAmount : [NSString stringWithFormat:@"%@ %@",unitString,[PublicMethod transferNumToThousandFormat:self.hallAmount.floatValue]];
+            cell.amountLabel.text = [self.hallAmount isEqualToString:@"加载中"] ? self.hallAmount : [NSString stringWithFormat:@"%@ %@",unitString,[PublicMethod transferNumToThousandFormat:self.hallAmount.doubleValue]];
         }
         if (self.isShowHidden) {
             cell.mineArrowsDirectionType = BTTMineArrowsDirectionTypeUp;
