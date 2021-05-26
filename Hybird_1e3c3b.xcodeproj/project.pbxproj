@@ -762,6 +762,7 @@
 		41F14AF025A69CA1008E8CAD /* BTTYueFenHongPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */; };
 		41F14AF125A69CA1008E8CAD /* BTTYueFenHongPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F14AEF25A69CA1008E8CAD /* BTTYueFenHongPopView.m */; };
 		41FD5E602654AC8C00B38644 /* tingyunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */; };
+		76C9F10A265DFBBA0002591D /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
@@ -2375,6 +2376,7 @@
 				3AD9CE2B2167107B00685B43 /* libilbccodec-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */,
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
+				76C9F10A265DFBBA0002591D /* libboringssl_simulator.a in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
