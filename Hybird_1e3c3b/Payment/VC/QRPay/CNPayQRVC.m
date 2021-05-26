@@ -274,21 +274,39 @@
 
     /// 提交
     __weak typeof(self) weakSelf =  self;
-    NSDictionary *params = @{
-            @"amount": text,
-            @"payType": @(self.paymentModel.payType),
-            @"payid": self.typeModel.payid,
-            @"loginName": [IVNetwork savedUserInfo].loginName,
-            @"bankNo": @""
-    };
+//    NSDictionary *params = @{
+//            @"amount": text,
+//            @"payType": @(self.paymentModel.payType),
+//            @"payid": self.typeModel.payid,
+//            @"loginName": [IVNetwork savedUserInfo].loginName,
+//            @"bankNo": @""
+//    };
     [self showLoading];
-    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrder paramters:params completionBlock:^(id _Nullable response, NSError *_Nullable error) {
-        [weakSelf hideLoading];
+//    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrder paramters:params completionBlock:^(id _Nullable response, NSError *_Nullable error) {
+//        [weakSelf hideLoading];
+//        IVJResponseObject *result = response;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            __strong typeof(weakSelf) strongSelf = weakSelf;
+//            sender.selected = NO;
+//            [strongSelf handlerResult:result];
+//        }
+//    }];
+    NSDictionary *params = @{
+        @"amount":text,
+        @"payType":@(self.paymentModel.payType),
+        @"currency":@"CNY",
+        @"loginName":[IVNetwork savedUserInfo].loginName
+        //        ,@"protocol" : self.selectedProtocol
+    };
+    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrderV2 paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
+            strongSelf(strongSelf)
             sender.selected = NO;
             [strongSelf handlerResult:result];
+        }else{
+            [self showError:result.head.errMsg];
         }
     }];
 }

@@ -192,18 +192,36 @@
 
     /// 提交
     __weak typeof(self) weakSelf =  self;
+//    NSDictionary *params = @{
+//        @"amount":text,
+//        @"payType":@(self.paymentModel.payType),
+//        @"payId":self.typeModel.payid,
+//        @"bankNo":self.chooseBank==nil||self.chooseBank.accountNo==nil?@"":self.chooseBank.accountNo,
+//    };
+//    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrder paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//        IVJResponseObject *result = response;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            sender.selected = NO;
+//            __strong typeof(weakSelf) strongSelf = weakSelf;
+//            [strongSelf paySucessHandler:result.body repay:nil];
+//        }
+//    }];
     NSDictionary *params = @{
         @"amount":text,
         @"payType":@(self.paymentModel.payType),
-        @"payId":self.typeModel.payid,
-        @"bankNo":self.chooseBank==nil||self.chooseBank.accountNo==nil?@"":self.chooseBank.accountNo,
+        @"currency":@"CNY",
+        @"loginName":[IVNetwork savedUserInfo].loginName
+        //        ,@"protocol" : self.selectedProtocol
     };
-    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrder paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrderV2 paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             sender.selected = NO;
-            __strong typeof(weakSelf) strongSelf = weakSelf;
+            strongSelf(strongSelf)
             [strongSelf paySucessHandler:result.body repay:nil];
+        }else{
+            [self showError:result.head.errMsg];
         }
     }];
 }
