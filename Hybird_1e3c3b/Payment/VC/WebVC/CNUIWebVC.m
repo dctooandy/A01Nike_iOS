@@ -11,6 +11,7 @@
 
 @interface CNUIWebVC ()
 @property (nonatomic, strong) CNPayOrderModel *order;
+@property (nonatomic, strong) CNPayOrderModelV2 *v2Order;
 @end
 
 @implementation CNUIWebVC
@@ -26,7 +27,17 @@
     }
     return self;
 }
-
+- (instancetype)initWithV2Order:(CNPayOrderModelV2 *)order title:(NSString *)title {
+    if (self = [super init]) {
+        self.v2Order = order;
+        WebConfigModel *webConfig = [[WebConfigModel alloc] init];
+        webConfig.url = order.address;
+        webConfig.newView = YES;
+        self.webConfigModel = webConfig;
+        self.title = title;
+    }
+    return self;
+}
 - (instancetype)initWithUrl:(NSString *)url title:(NSString *)title {
     if (self = [super init]) {
         WebConfigModel *webConfig = [[WebConfigModel alloc] init];

@@ -219,7 +219,8 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             sender.selected = NO;
             strongSelf(strongSelf)
-            [strongSelf paySucessHandler:result.body repay:nil];
+//            [strongSelf paySucessHandler:result.body repay:nil];
+            [strongSelf payV2SucessHandler:result.body repay:nil];
         }else{
             [self showError:result.head.errMsg];
         }

@@ -421,7 +421,8 @@
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            [weakSelf paySucessUSDTHandler:result repay:nil];
+//            [weakSelf paySucessUSDTHandler:result repay:nil];
+            [weakSelf payV2SucessUSDTHandler:result repay:nil];
         }else{
             [self showError:result.head.errMsg];
         }

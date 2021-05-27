@@ -14,6 +14,7 @@
 
 #import "CNPayTipView.h"
 #import "CNPayOrderModel.h"
+#import "CNPayOrderModelV2.h"
 
 
 
@@ -128,7 +129,24 @@
     CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:orderModel title:self.paymentModel.payTypeName];
     [self pushViewController:webVC];
 }
+- (void)payV2SucessHandler:(NSDictionary *)model repay:(dispatch_block_t)repayBlock {
+    // 数据容灾
+    if (![model isKindOfClass:[NSDictionary class]]) {
+        // 后台返回类型不一，全部转成字符串
+        [self showError:@"数据类型错误"];
+        return;
+    }
 
+    NSError *error;
+    CNPayOrderModelV2 *orderModel = [[CNPayOrderModelV2 alloc] initWithDictionary:model error:&error];
+    if (error && !orderModel) {
+        [self showError:@"操作失败！请联系客户，或者稍后重试!"];
+        return;
+    }
+    [self showPayTipView];
+    CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithV2Order:orderModel title:self.paymentModel.payTypeName];
+    [self pushViewController:webVC];
+}
 /**
  充值成功回调处理USDT
  */
@@ -151,7 +169,25 @@
     CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:orderModel title:@"泰达币-USDT"];
     [self pushViewController:webVC];
 }
+- (void)payV2SucessUSDTHandler:(IVJResponseObject *)model repay:(dispatch_block_t)repayBlock {
+    
+    // 数据容灾
+    if (![model.body isKindOfClass:[NSDictionary class]]) {
+        // 后台返回类型不一，全部转成字符串
+        [self showError:[NSString stringWithFormat:@"%@", model.head.errMsg]];
+        return;
+    }
 
+    NSError *error;
+    CNPayOrderModelV2 *orderModel = [[CNPayOrderModelV2 alloc] initWithDictionary:model.body error:&error];
+    if (error && !orderModel) {
+        [self showError:@"操作失败！请联系客户，或者稍后重试!"];
+        return;
+    }
+    [self showPayTipView];
+    CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithV2Order:orderModel title:@"泰达币-USDT"];
+    [self pushViewController:webVC];
+}
 - (void)pushUIWebViewWithURLString:(NSString *)url title:(NSString *)title {
     CNUIWebVC *payWebVC = [[CNUIWebVC alloc] initWithUrl:url title:title];
     [self pushViewController:payWebVC];

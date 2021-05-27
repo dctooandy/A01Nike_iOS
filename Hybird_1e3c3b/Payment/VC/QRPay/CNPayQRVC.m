@@ -320,12 +320,14 @@
     }
 
     NSError *error;
-    CNPayOrderModel *orderModel = [[CNPayOrderModel alloc] initWithDictionary:model.body error:&error];
+    CNPayOrderModelV2 *orderModel = [[CNPayOrderModelV2 alloc] initWithDictionary:model.body error:&error];
+//    CNPayOrderModel *orderModel = [[CNPayOrderModel alloc] initWithDictionary:model.body error:&error];
     if (error && !orderModel) {
         [self showError:@"操作失败！请联系客户，或者稍后重试!"];
         return;
     }
-    self.writeModel.orderModel = orderModel;
+//    self.writeModel.orderModel = orderModel;
+    self.writeModel.orderModelV2 = orderModel;
     self.writeModel.depositType = self.paymentModel.payTypeName;
     [self goToStep:1];
 }

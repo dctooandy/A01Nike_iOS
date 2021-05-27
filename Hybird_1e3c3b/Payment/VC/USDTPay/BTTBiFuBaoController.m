@@ -386,7 +386,14 @@
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            [weakSelf requestPayDetailUrl:result.body[@"payUrl"]];
+            if (result.body[@"address"])
+            {
+                [weakSelf requestPayDetailUrl:result.body[@"address"]];
+            }else
+            {
+                printf("\nAddress Empty");
+                [weakSelf requestPayDetailUrl:@""];
+            }
             
         }else{
             [self showError:result.head.errMsg];
@@ -412,7 +419,8 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        [self hideLoading];
+        printf("\nURL error");
     }];
     
 }

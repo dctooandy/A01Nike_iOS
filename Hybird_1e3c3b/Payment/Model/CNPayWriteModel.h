@@ -10,6 +10,7 @@
 #import "CNPayBankCardModel.h"
 #import "CNPayOrderModel.h"
 #import "CNPayCardModel.h"
+#import "CNPayOrderModelV2.h"
 
 /// BQ转账支付类型，用于差异化UI
 typedef NS_ENUM(NSUInteger, CNPayBQType) {
@@ -58,6 +59,9 @@ typedef NS_ENUM(NSUInteger, CNPayBQType) {
 
 /// 订单信息
 @property (nonatomic, strong) CNPayOrderModel *orderModel;
+
+/// 订单信息
+@property (nonatomic, strong) CNPayOrderModelV2 *orderModelV2;
 
 /// 点卡信息
 @property (nonatomic, strong) CNPayCardModel *cardModel;

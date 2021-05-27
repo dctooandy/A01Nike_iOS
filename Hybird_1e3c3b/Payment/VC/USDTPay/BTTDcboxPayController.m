@@ -448,7 +448,8 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        [self hideLoading];
+        printf("\nURL error");
     }];
     
 }
