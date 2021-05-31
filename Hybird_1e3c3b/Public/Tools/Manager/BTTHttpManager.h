@@ -32,6 +32,7 @@
 //获取银行卡列表
 + (void)fetchBankListWithUseCache:(BOOL)useCache completion:(KYHTTPCallBack)completion;
 //获取手机、邮箱、银行卡、比特币钱包绑定状态
+// 暫時拔掉
 //+ (void)fetchBindStatusWithUseCache:(BOOL)useCache completionBlock:(KYHTTPCallBack)completionBlock;
 /**
  添加、修改银行卡
@@ -52,7 +53,8 @@
 //人工服务更换手机号
 + (void)updatePhoneHumanWithParams:(NSDictionary *)params completion:(KYHTTPCallBack)completion;
 //获取比特币汇率
-+ (void)fetchBTCRateWithUseCache:(BOOL)useCache;
+// 暫時拔掉
+//+ (void)fetchBTCRateWithUseCache:(BOOL)useCache;
 //取款
 + (void)submitWithdrawWithUrl:(NSString *)url params:(NSDictionary *)params completion:(KYHTTPCallBack)completion;
 
