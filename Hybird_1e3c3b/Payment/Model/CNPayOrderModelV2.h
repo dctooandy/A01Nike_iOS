@@ -10,8 +10,12 @@
 
 @interface CNPayOrderModelV2 : JSONModel
 @property(nonatomic, copy) NSString *address;
+@property(nonatomic, copy) NSString *amount;
+
 @property(nonatomic, copy) NSString *billNo;
 @property(nonatomic, copy) NSString *crc;
+@property(nonatomic, copy) NSString *refAmount;
+@property(nonatomic, copy) NSString *refCurrency;
 @property(nonatomic, copy) NSString *refRate;
 
 @end

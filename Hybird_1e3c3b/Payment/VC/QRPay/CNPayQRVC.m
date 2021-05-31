@@ -291,8 +291,9 @@
 //            [strongSelf handlerResult:result];
 //        }
 //    }];
+    NSString *tempAmount = [NSString stringWithFormat:@"%.2f",[text floatValue]];
     NSDictionary *params = @{
-        @"amount":text,
+        @"amount":tempAmount,
         @"payType":@(self.paymentModel.payType),
         @"currency":@"CNY",
         @"loginName":[IVNetwork savedUserInfo].loginName

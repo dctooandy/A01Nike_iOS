@@ -375,8 +375,9 @@
 //}
 - (void)createOnlineOrdersV2WithPayType:(NSInteger)payType{
     weakSelf(weakSelf)
+    NSString *tempAmount = [NSString stringWithFormat:@"%.2f",[_moneyTextField.text floatValue]];
     NSDictionary *params = @{
-        @"amount":_moneyTextField.text,
+        @"amount":tempAmount,
         @"payType":@(payType),
         @"currency":@"USDT",
         @"loginName":[IVNetwork savedUserInfo].loginName,
@@ -482,7 +483,8 @@
  */
 - (BOOL)checkDecimal:(NSString *)str
 {
-    NSString *regex = [self.selectedProtocol isEqualToString:@"OMNI"] ? @"^[0-9]+(\\.[0-9]{1,8})?$" : @"^[0-9]+(\\.[0-9]{1,6})?$";
+    // 所有接口入參amount 都僅能接受小數點後兩位
+    NSString *regex = [self.selectedProtocol isEqualToString:@"OMNI"] ? @"^[0-9]+(\\.[0-9]{1,2})?$" : @"^[0-9]+(\\.[0-9]{1,2})?$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     
     if([pred evaluateWithObject: str])

@@ -31,14 +31,17 @@
 
 - (void)configUI {
     CNPayOrderModel *order = self.writeModel.orderModel;
-    _amountLb.text = [NSString stringWithFormat:@"￥%@", order.amount];
-    _billNoLb.text = order.billNo;
+    CNPayOrderModelV2 *orderV2 = self.writeModel.orderModelV2;
+
+    _amountLb.text = [NSString stringWithFormat:@"￥%@", orderV2.amount];
+    _billNoLb.text = orderV2.billNo;
     _titleLb.text = [NSString stringWithFormat:@"%@确认支付订单", self.writeModel.depositType];
 }
 
 - (IBAction)clickBtn:(CNPaySubmitButton *)sender {
     [self showPayTipView];
-    CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:self.writeModel.orderModel title:self.writeModel.depositType];
+//    CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:self.writeModel.orderModel title:self.writeModel.depositType];
+    CNUIWebVC *webVC = [[CNUIWebVC alloc] initWithOrder:self.writeModel.orderModelV2 title:self.writeModel.depositType];
     [self pushViewController:webVC];
 }
 
