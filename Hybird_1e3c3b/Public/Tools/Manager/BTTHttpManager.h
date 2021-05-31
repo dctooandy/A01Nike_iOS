@@ -32,7 +32,7 @@
 //获取银行卡列表
 + (void)fetchBankListWithUseCache:(BOOL)useCache completion:(KYHTTPCallBack)completion;
 //获取手机、邮箱、银行卡、比特币钱包绑定状态
-+ (void)fetchBindStatusWithUseCache:(BOOL)useCache completionBlock:(KYHTTPCallBack)completionBlock;
+//+ (void)fetchBindStatusWithUseCache:(BOOL)useCache completionBlock:(KYHTTPCallBack)completionBlock;
 /**
  添加、修改银行卡
  */
