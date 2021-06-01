@@ -24,8 +24,8 @@
         return;
     }
     [BTTHttpManager fetchUserInfoCompleteBlock:nil];
-//    [BTTHttpManager fetchBTCRateWithUseCache:NO];
-//    [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
+    [BTTHttpManager fetchBTCRateWithUseCache:NO];
+    [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
     [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
 }
 @end

@@ -237,7 +237,7 @@
                     }];
                     
                 }else{
-//                    [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
+                    [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
                     [BTTHttpManager fetchBankListWithUseCache:NO completion:^(id  _Nullable response, NSError * _Nullable error) {
                         if ([IVNetwork savedUserInfo].bankCardNum > 0 || [IVNetwork savedUserInfo].usdtNum > 0||[IVNetwork savedUserInfo].bfbNum>0||[IVNetwork savedUserInfo].dcboxNum>0) {
                             BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
