@@ -1,8 +1,18 @@
 {
   "images" : [
     {
-      "filename" : "dragonBoatDismissIcon.png",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "dragonBoatDismissIcon@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "dragonBoatDismissIcon@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {

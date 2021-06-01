@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -50,7 +49,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="cZh-le-wW8" secondAttribute="height" multiplier="75:71" id="BuN-TY-mF4"/>
                         <constraint firstItem="p6U-SF-KyP" firstAttribute="top" secondItem="cZh-le-wW8" secondAttribute="top" constant="5" id="Ekb-tS-p5H"/>
@@ -78,11 +77,8 @@
         </view>
     </objects>
     <resources>
-        <image name="dragonBoatBG" width="750" height="711"/>
-        <image name="dragonBoatDetailIcon" width="328" height="110"/>
-        <image name="dragonBoatDismissIcon" width="35" height="35"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="dragonBoatBG" width="375" height="355.66665649414062"/>
+        <image name="dragonBoatDetailIcon" width="164" height="55"/>
+        <image name="dragonBoatDismissIcon" width="17.666666030883789" height="17.666666030883789"/>
     </resources>
 </document>
