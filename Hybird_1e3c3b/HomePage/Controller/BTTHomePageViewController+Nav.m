@@ -32,6 +32,7 @@
 #import "BTTBiBiCunPopView.h"
 #import "AppDelegate.h"
 #import "BTTYueFenHongPopView.h"
+#import "BTTDragonBoatPopView.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
@@ -185,29 +186,26 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 
 //龍舟
 - (void)showDragonBoat {
-//    BTTYueFenHongPopView * customView = [BTTYueFenHongPopView viewFromXib];
-//    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//    customView.model = model;
-//    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-//    popView.isClickBGDismiss = YES;
-//    [popView pop];
-//    customView.dismissBlock = ^{
-//        [popView dismiss];
-//    };
-//
-//    customView.btnBlock = ^(UIButton * _Nullable btn) {
-//        [popView dismiss];
-//        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-//        vc.title = @"迎端午 赛龙舟 领奖券 300万热力回馈";
-//        vc.webConfigModel.url = @"/activity_pages/lantern-fest";
-//        vc.webConfigModel.newView = YES;
-//        [self.navigationController pushViewController:vc animated:YES];
-//    };
-    BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-    vc.title = @"迎端午 赛龙舟 领奖券 300万热力回馈";
-    vc.webConfigModel.url = @"/activity_pages/lantern-fest";
-    vc.webConfigModel.newView = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    BTTDragonBoatPopView * customView = [BTTDragonBoatPopView viewFromXib];
+    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+
+    customView.btnBlock = ^(UIButton * _Nullable btn) {
+        [popView dismiss];
+        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+        vc.title = @"迎端午 赛龙舟 领奖券 300万热力回馈";
+        vc.webConfigModel.url = @"/activity_pages/lantern-fest";
+        vc.webConfigModel.newView = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    };
+   
 }
 - (void)logoutSuccess:(NSNotification *)notifi {
     self.isLogin = NO;

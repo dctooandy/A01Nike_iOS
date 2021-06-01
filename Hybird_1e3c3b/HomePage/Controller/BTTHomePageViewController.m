@@ -147,12 +147,12 @@
         BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
         if (!isShowYuFenHong) {
             [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
-            [self loadYenFenHong];
+//            [self loadYenFenHong];
         }
         BOOL isShowDragonBoat = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowDragonBoat] boolValue];
         if (!isShowDragonBoat) {
             [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowDragonBoat];
-//            [self showDragonBoat];
+            [self showDragonBoat];
         }
         
         [BTTHttpManager requestUnReadMessageNum:nil];

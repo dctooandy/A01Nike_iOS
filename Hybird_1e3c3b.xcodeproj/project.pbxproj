@@ -763,6 +763,8 @@
 		41F14AF125A69CA1008E8CAD /* BTTYueFenHongPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F14AEF25A69CA1008E8CAD /* BTTYueFenHongPopView.m */; };
 		41FD5E602654AC8C00B38644 /* tingyunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */; };
 		76C9F2912664CFE00002591D /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
+		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
+		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
@@ -2100,6 +2102,9 @@
 		41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = tingyunApp.framework; sourceTree = "<group>"; };
 		62DAB42824C569F6001F16B4 /* Hybird_1e3c3b.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hybird_1e3c3b.entitlements; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_1e3c3b.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatPopView.xib; sourceTree = "<group>"; };
+		76C9F2D72665BEA70002591D /* BTTDragonBoatPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatPopView.h; sourceTree = "<group>"; };
+		76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatPopView.m; sourceTree = "<group>"; };
 		76CC62BD265677E00042AEDF /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = Hybird_1e3c3b/Public/Tools/ThirdParty/libboringssl_simulator.a; sourceTree = "<group>"; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
 		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
@@ -3950,6 +3955,9 @@
 				41F14AEE25A69CA1008E8CAD /* BTTYueFenHongPopView.h */,
 				41F14AEF25A69CA1008E8CAD /* BTTYueFenHongPopView.m */,
 				41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */,
+				76C9F2D72665BEA70002591D /* BTTDragonBoatPopView.h */,
+				76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */,
+				76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */,
 				4180B04125D3C23800139E88 /* BTTNewYearPopView.h */,
 				4180B04225D3C23800139E88 /* BTTNewYearPopView.m */,
 				4180B04325D3C23800139E88 /* BTTNewYearPopView.xib */,
@@ -5387,6 +5395,7 @@
 				3A5AE67922D6E22A0013E8A3 /* LIVLocationMessageContentView.nib in Resources */,
 				3AAE8222219A738B003EC8B0 /* BTTForgetPasswordCell.xib in Resources */,
 				3A5AE66722D6E22A0013E8A3 /* LIVInformationNotificationMessageCell.nib in Resources */,
+				76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */,
 				3A5AE6AE22D6E22A0013E8A3 /* LIVRadioButton_unselected@3x.png in Resources */,
 				3A11AE682186D94B00B1AFF4 /* BTTThisWeekCell.xib in Resources */,
 				3A7C0B1A21EC7E07002658CC /* BTTSaveMoneyModifyCell.xib in Resources */,
@@ -5858,6 +5867,7 @@
 				3AB0683121A2964000072FB7 /* BTTDiscountsViewController+LoadData.m in Sources */,
 				D599251821AE6719001E885A /* CNPayCardStep2VC.m in Sources */,
 				3A11ADDE21818A1A00B1AFF4 /* BTTAddBTCController.m in Sources */,
+				76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */,
 				3AA7892021FFF2580047A372 /* SDWebImageFrame.m in Sources */,
 				D31B0EEB23B451B0003666BA /* BTTAddUSDTController.m in Sources */,
 				3AD9CD552165B2C900685B43 /* BTTPopoverViewCell.m in Sources */,
