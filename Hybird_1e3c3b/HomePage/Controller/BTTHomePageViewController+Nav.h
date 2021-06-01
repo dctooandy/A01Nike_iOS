@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showYueFenHong:(BTTYenFenHongModel *)model;
 
+- (void)showDragonBoat;
+
 - (void)setupFloatWindow;
 
 -(void)setUpAssistiveButton;

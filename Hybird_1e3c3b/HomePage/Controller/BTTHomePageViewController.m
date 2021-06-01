@@ -149,6 +149,12 @@
             [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
             [self loadYenFenHong];
         }
+        BOOL isShowDragonBoat = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowDragonBoat] boolValue];
+        if (!isShowDragonBoat) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowDragonBoat];
+//            [self showDragonBoat];
+        }
+        
         [BTTHttpManager requestUnReadMessageNum:nil];
         NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
         if (![NSDate isToday:timestamp]) {
@@ -179,6 +185,7 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowDragonBoat];
             [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
         }
     }
