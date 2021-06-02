@@ -30,6 +30,6 @@ target ‘Hybird_1e3c3b’ do
   pod 'IN3SAnalyticsSDK',:git =>'http://10.66.72.115/mobile-iOS-library/IV3SLibrary.git'
   pod 'IQKeyboardManager','~> 5.0.6'
   pod 'FCUUID'
-  pod 'libOpenInstallSDK'
+#  pod 'libOpenInstallSDK'
   
 end

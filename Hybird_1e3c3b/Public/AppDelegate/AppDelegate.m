@@ -17,7 +17,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import "CNPreCacheMananger.h"
 #import "BTTTabBar.h"
-#import "OpenInstallSDK.h"
+//#import "OpenInstallSDK.h"
 #import "IVPublicAPIManager.h"
 #import "IVCheckNetworkWrapper.h"
 #import "IVUzipWrapper.h"
@@ -27,7 +27,8 @@
 #import "BTTUserStatusManager.h"
 #import "BTTFirstWinningListModel.h"
 
-@interface AppDelegate ()<OpenInstallDelegate,IVPushDelegate>
+//@interface AppDelegate ()<OpenInstallDelegate,IVPushDelegate>
+@interface AppDelegate ()<IVPushDelegate>
 
 @property (nonatomic, strong) UIWindow *areaLimitWindow;
 @property (nonatomic, strong) BTTTabbarController *tabVC;
@@ -139,7 +140,7 @@
     [self initPushSDKWithApplication:application options:launchOptions];
     [CNPreCacheMananger prepareCacheDataNormal];
     [CNPreCacheMananger prepareCacheDataNeedLogin];
-    [OpenInstallSDK initWithDelegate:self];
+//    [OpenInstallSDK initWithDelegate:self];
     [[UIButton appearance] setExclusiveTouch:YES];
     return YES;
 }
