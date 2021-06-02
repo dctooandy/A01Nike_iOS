@@ -149,11 +149,12 @@
             [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
 //            [self loadYenFenHong];
         }
-        BOOL isShowDragonBoat = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowDragonBoat] boolValue];
-        if (!isShowDragonBoat) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowDragonBoat];
+//        BOOL isShowDragonBoat = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowDragonBoat] boolValue];
+        if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork savedUserInfo].lastLoginDate]]) {
+//            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowDragonBoat];
             [self showDragonBoat];
         }
+       
         
         [BTTHttpManager requestUnReadMessageNum:nil];
         NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
