@@ -142,6 +142,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTShareNoticeTag                          @"BTTShareNoticeTag"
 #define BTTShowYuFenHong                           @"BTTShowYuFenHong"
 #define BTTShowDragonBoat                          @"BTTShowDragonBoat"
+#define BTTBeforeLoginDate                         @"BTTBeforeLoginDate"
 #define BTTGameCurrencysWithName                   [NSString stringWithFormat:@"%@GameCurrencys", [IVNetwork savedUserInfo].loginName]
 #define reload918Sec 20 * 60
 

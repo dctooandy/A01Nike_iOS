@@ -149,10 +149,36 @@
             [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
 //            [self loadYenFenHong];
         }
-//        BOOL isShowDragonBoat = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowDragonBoat] boolValue];
-        if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork savedUserInfo].lastLoginDate]]) {
-//            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowDragonBoat];
-            [self showDragonBoat];
+        NSString * showDragonBoatDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTShowDragonBoat];
+        NSString * realLastLoginDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTBeforeLoginDate];
+        
+        if (showDragonBoatDate == nil)
+        {
+            NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
+            [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowDragonBoat];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            if (realLastLoginDate && ![realLastLoginDate isEqualToString:@"NO"])
+            {
+                if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:realLastLoginDate]]) {
+                    [self showDragonBoat];
+                }
+            }else
+            {
+                [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTBeforeLoginDate];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [self showDragonBoat];
+            }
+//            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork savedUserInfo].lastLoginDate]]) {
+//                [self showDragonBoat];
+//            }
+        }else{
+            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:showDragonBoatDate]])
+            {
+                NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
+                [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowDragonBoat];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [self showDragonBoat];
+            }
         }
        
         
@@ -187,6 +213,7 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowDragonBoat];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBeforeLoginDate];
             [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
         }
     }

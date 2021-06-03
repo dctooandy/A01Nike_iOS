@@ -578,6 +578,7 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowDragonBoat];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBeforeLoginDate];
             [BTTUserStatusManager logoutSuccess];
             strongSelf.saveMoneyCount = 0;
             [strongSelf loadPaymentDefaultData];

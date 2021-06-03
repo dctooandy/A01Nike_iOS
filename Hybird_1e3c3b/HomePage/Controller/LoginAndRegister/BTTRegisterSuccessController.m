@@ -536,6 +536,13 @@ typedef enum {
         [[NSUserDefaults standardUserDefaults] synchronize];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body[@"beforeLoginDate"])
+            {
+                [[NSUserDefaults standardUserDefaults] setObject:result.body[@"beforeLoginDate"] forKey:BTTBeforeLoginDate];
+            }else{
+                [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:BTTBeforeLoginDate];
+            }
+            [[NSUserDefaults standardUserDefaults] synchronize];
             [IVHttpManager shareManager].loginName = self.mainAccountName;
             [IVHttpManager shareManager].userToken = result.body[@"token"];
             [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];

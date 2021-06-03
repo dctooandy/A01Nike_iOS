@@ -173,6 +173,13 @@ static const char *exModelKey = "exModelKey";
             }else{
                 [[NSUserDefaults standardUserDefaults]setObject:result.body[@"customerId"] forKey:@"pushcustomerid"];
 //                [IVPushManager sharedManager].customerId = result.body[@"customerId"];
+                if (result.body[@"beforeLoginDate"])
+                {
+                    [[NSUserDefaults standardUserDefaults] setObject:result.body[@"beforeLoginDate"] forKey:BTTBeforeLoginDate];
+                }else{
+                    [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:BTTBeforeLoginDate];
+                }
+                [[NSUserDefaults standardUserDefaults] synchronize];
                 AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
                 [delegate reSendIVPushRequestIpsSuperSign:result.body[@"customerId"]];
                 [IVHttpManager shareManager].loginName = model.login_name;
