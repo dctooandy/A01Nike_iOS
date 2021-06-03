@@ -56,6 +56,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)loadBiBiCun;
 
 -(void)loadYenFenHong;
+//2021龍舟選碼彈窗
+-(void)loadDragonBoatChance;
 @end
 
 NS_ASSUME_NONNULL_END

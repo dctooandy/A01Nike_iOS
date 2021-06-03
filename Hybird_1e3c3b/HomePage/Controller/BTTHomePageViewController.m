@@ -180,8 +180,9 @@
                 [self showDragonBoat];
             }
         }
-       
-        
+        [self loadDragonBoatChance];
+        //暫時寫出來
+        [self showDragonBoarChanceView:999];
         [BTTHttpManager requestUnReadMessageNum:nil];
         NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
         if (![NSDate isToday:timestamp]) {

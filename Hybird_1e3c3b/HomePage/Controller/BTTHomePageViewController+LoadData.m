@@ -104,6 +104,26 @@ static const char *BTTNextGroupKey = "nextGroup";
         }
     }];
 }
+//2021龍舟選碼彈窗
+//查询用户机会次数统计
+-(void)loadDragonBoatChance
+{
+    
+    NSDictionary *params = @{@"productId":@"A01",
+                             @"loginName":[IVNetwork savedUserInfo].loginName};
+    [IVNetwork requestPostWithUrl:BTTDragonBoatChance paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if ([result.body isKindOfClass:[NSDictionary class]]) {
+                if ([result.body[@"availableTimes"] integerValue]) {
+                    NSInteger chanceValue = [result.body[@"availableTimes"] integerValue];
+                    printf("次數:%ld",chanceValue);
+                    [self showDragonBoarChanceView:chanceValue];
+                }
+            }
+        }
+    }];
+}
 
 // 博币数量查询
 - (void)loadLuckyWheelCoinStatus {

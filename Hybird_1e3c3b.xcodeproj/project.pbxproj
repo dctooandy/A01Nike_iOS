@@ -762,9 +762,13 @@
 		41F14AF025A69CA1008E8CAD /* BTTYueFenHongPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */; };
 		41F14AF125A69CA1008E8CAD /* BTTYueFenHongPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F14AEF25A69CA1008E8CAD /* BTTYueFenHongPopView.m */; };
 		41FD5E602654AC8C00B38644 /* tingyunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */; };
+		7629D73B2668CE7300CF758C /* BTTDragonBoatMenualPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629D7382668CE7300CF758C /* BTTDragonBoatMenualPopView.m */; };
+		7629D73C2668CE7300CF758C /* BTTDragonBoatMenualPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629D7392668CE7300CF758C /* BTTDragonBoatMenualPopView.xib */; };
 		76C9F2912664CFE00002591D /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
+		76C9F42C2668A3070002591D /* BTTDragonBoatChancePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F4292668A3060002591D /* BTTDragonBoatChancePopView.xib */; };
+		76C9F42D2668A3070002591D /* BTTDragonBoatChancePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F42A2668A3060002591D /* BTTDragonBoatChancePopView.m */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
@@ -2102,9 +2106,15 @@
 		41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = tingyunApp.framework; sourceTree = "<group>"; };
 		62DAB42824C569F6001F16B4 /* Hybird_1e3c3b.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hybird_1e3c3b.entitlements; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_1e3c3b.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7629D7382668CE7300CF758C /* BTTDragonBoatMenualPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatMenualPopView.m; sourceTree = "<group>"; };
+		7629D7392668CE7300CF758C /* BTTDragonBoatMenualPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatMenualPopView.xib; sourceTree = "<group>"; };
+		7629D73A2668CE7300CF758C /* BTTDragonBoatMenualPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatMenualPopView.h; sourceTree = "<group>"; };
 		76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatPopView.xib; sourceTree = "<group>"; };
 		76C9F2D72665BEA70002591D /* BTTDragonBoatPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatPopView.h; sourceTree = "<group>"; };
 		76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatPopView.m; sourceTree = "<group>"; };
+		76C9F4292668A3060002591D /* BTTDragonBoatChancePopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatChancePopView.xib; sourceTree = "<group>"; };
+		76C9F42A2668A3060002591D /* BTTDragonBoatChancePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatChancePopView.m; sourceTree = "<group>"; };
+		76C9F42B2668A3060002591D /* BTTDragonBoatChancePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatChancePopView.h; sourceTree = "<group>"; };
 		76CC62BD265677E00042AEDF /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = Hybird_1e3c3b/Public/Tools/ThirdParty/libboringssl_simulator.a; sourceTree = "<group>"; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
 		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
@@ -3958,6 +3968,12 @@
 				76C9F2D72665BEA70002591D /* BTTDragonBoatPopView.h */,
 				76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */,
 				76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */,
+				76C9F42B2668A3060002591D /* BTTDragonBoatChancePopView.h */,
+				76C9F42A2668A3060002591D /* BTTDragonBoatChancePopView.m */,
+				76C9F4292668A3060002591D /* BTTDragonBoatChancePopView.xib */,
+				7629D73A2668CE7300CF758C /* BTTDragonBoatMenualPopView.h */,
+				7629D7382668CE7300CF758C /* BTTDragonBoatMenualPopView.m */,
+				7629D7392668CE7300CF758C /* BTTDragonBoatMenualPopView.xib */,
 				4180B04125D3C23800139E88 /* BTTNewYearPopView.h */,
 				4180B04225D3C23800139E88 /* BTTNewYearPopView.m */,
 				4180B04325D3C23800139E88 /* BTTNewYearPopView.xib */,
@@ -5385,6 +5401,7 @@
 				3A5AE6E222D6E22A0013E8A3 /* LIVVoiceItem_highlight@3x.png in Resources */,
 				3A5AE6EA22D6E22A0013E8A3 /* photo_number_icon@2x.png in Resources */,
 				4184DE12251B32F900D433D4 /* BTTXmRecordHeaderCell.xib in Resources */,
+				76C9F42C2668A3070002591D /* BTTDragonBoatChancePopView.xib in Resources */,
 				3AB0682421A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.xib in Resources */,
 				3A5AE6D722D6E22A0013E8A3 /* sentVoicePlaying1@2x.png in Resources */,
 				4184DE14251B32FF00D433D4 /* BTTXmRecordCell.xib in Resources */,
@@ -5434,6 +5451,7 @@
 				3AFCD7D121AD179600B136C1 /* BTTVideoGameCell.xib in Resources */,
 				3A5AE70422D6E22A0013E8A3 /* liv_satisfactionr_circular_selected_un@3x.png in Resources */,
 				3A5AE68622D6E22A0013E8A3 /* LIVFileMessage_TypeZip@3x.png in Resources */,
+				7629D73C2668CE7300CF758C /* BTTDragonBoatMenualPopView.xib in Resources */,
 				3A514E3F2186E24000B83881 /* BTTThisWeekTotalCell.xib in Resources */,
 				D5DBEB0021ABB774008AF629 /* CNPayDepositStep3VC.xib in Resources */,
 				3A5AE6CC22D6E22A0013E8A3 /* nav_link_close@2x.png in Resources */,
@@ -5715,6 +5733,7 @@
 				4184DE18251B331500D433D4 /* BTTModifyBankRecordCell.m in Sources */,
 				D5DBEB3F21AC1355008AF629 /* CNPayQRCell.m in Sources */,
 				D345F2AB23D0091600E658A6 /* BTTCustomerBalanceModel.m in Sources */,
+				7629D73B2668CE7300CF758C /* BTTDragonBoatMenualPopView.m in Sources */,
 				D331B20F23D546600080A27D /* BTTBTCRateModel.m in Sources */,
 				3A929415219BFEE100764E7E /* BTTCreateAPIModel.m in Sources */,
 				EAA4811C21ABD265000C0273 /* BTTAGGJViewController.m in Sources */,
@@ -6078,6 +6097,7 @@
 				3AB0682321A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.m in Sources */,
 				3AD9CF38216C7D9400685B43 /* HAConstant.m in Sources */,
 				D3896A5123F5380900D48271 /* BTTPointCardModel.m in Sources */,
+				76C9F42D2668A3070002591D /* BTTDragonBoatChancePopView.m in Sources */,
 				418E72DB2577786700D9BF95 /* BTTChooseCurrencyCell.m in Sources */,
 				3AA7891F21FFF2580047A372 /* UIImageView+HighlightedWebCache.m in Sources */,
 				418F756C251D943400DF4A71 /* BTTXmTransferRecordController.m in Sources */,

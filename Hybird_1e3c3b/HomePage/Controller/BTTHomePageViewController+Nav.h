@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showDragonBoat;
 
+- (void)showDragonBoarChanceView:(NSInteger )chanceCount;
+
 - (void)setupFloatWindow;
 
 -(void)setUpAssistiveButton;

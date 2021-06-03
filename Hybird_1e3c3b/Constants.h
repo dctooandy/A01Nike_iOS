@@ -553,7 +553,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTLiCaiInterestRecords                    @"_extra_/api/v1/ws/query-yeb-interest-logs"
 //活期理財 - 累積收益
 #define BTTLiCaiInterestSum                        @"_extra_/api/v1/ws/yeb-interest-logs-sum"
-
+//龍舟活動ㄦ-查询用户机会次数统计
+#define BTTDragonBoatChance                        @"_extra_/api/v1/activity/dragon-boat-festival-2021/chance"
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)      ([UIFont systemFontOfSize:X])
