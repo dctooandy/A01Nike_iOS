@@ -34,6 +34,7 @@
 #import "BTTYueFenHongPopView.h"
 #import "BTTDragonBoatPopView.h"
 #import "BTTDragonBoatChancePopView.h"
+#import "BTTDragonBoatMenualPopView.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
@@ -218,13 +219,22 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     customView.dismissBlock = ^{
         [popView dismiss];
     };
-
+    weakSelf(weakSelf)
     customView.btnBlock = ^(UIButton * _Nullable btn) {
+        [popView dismiss];
         if (btn.tag ==1)
         {//隨機
-            
         }else
         {//手動
+            BTTDragonBoatMenualPopView * customView = [BTTDragonBoatMenualPopView viewFromXib];
+            customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            [customView configForAmount:chanceCount];
+            BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+            popView.isClickBGDismiss = YES;
+            [popView pop];
+            customView.dismissBlock = ^{
+                [popView dismiss];
+            };
             
         }
     };

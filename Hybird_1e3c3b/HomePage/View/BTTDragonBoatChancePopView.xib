@@ -27,7 +27,7 @@
                             </constraints>
                             <state key="normal" title="随机选码" backgroundImage="btn1"/>
                             <connections>
-                                <action selector="btnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="44x-IO-dF8"/>
+                                <action selector="btnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Dxr-yX-r18"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4DD-ag-FNp">
@@ -63,7 +63,7 @@
                             <rect key="frame" x="195" y="217" width="93.666666666666686" height="31.333333333333343"/>
                             <state key="normal" title="手动选码" backgroundImage="btn2"/>
                             <connections>
-                                <action selector="btnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="eV1-dh-9Xj"/>
+                                <action selector="btnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="in9-Wo-k2D"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fRM-kN-Ydl">
