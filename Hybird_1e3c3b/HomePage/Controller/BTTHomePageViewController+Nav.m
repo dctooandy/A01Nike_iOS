@@ -235,6 +235,15 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
             customView.dismissBlock = ^{
                 [popView dismiss];
             };
+            customView.callBackBlock = ^(NSString * _Nullable phone, NSString * _Nullable captcha, NSString * _Nullable captchaId) {
+                if ([phone isEqualToString:@""])
+                {
+                    //上一張
+                }else
+                {
+                    //下一張
+                }
+            };
             
         }
     };
