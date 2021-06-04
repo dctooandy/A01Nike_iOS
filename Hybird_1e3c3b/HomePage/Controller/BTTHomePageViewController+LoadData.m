@@ -173,7 +173,22 @@ static const char *BTTNextGroupKey = "nextGroup";
      
     });
 }
-
+- (NSArray *)randomArrayWithInt:(NSInteger)sender
+{
+    NSMutableArray * resultArray = [[NSMutableArray alloc] init];
+    for (int i = 0 ; i < sender ; i++) {
+        NSString *r1 = [NSString stringWithFormat:@"%u",(arc4random() % 10)];
+        NSString *r2 = [NSString stringWithFormat:@"%u",(arc4random() % 10)];
+        NSString *r3 = [NSString stringWithFormat:@"%u",(arc4random() % 10)];
+        NSString *r4 = [NSString stringWithFormat:@"%u",(arc4random() % 10)];
+        NSString *r5 = [NSString stringWithFormat:@"%u",(arc4random() % 10)];
+        
+//        NSArray *randomArray = [[NSArray alloc] initWithObjects:r1,r2,r3,r4,r5, nil];
+        NSString *randomString = [NSString stringWithFormat:@"[%@,%@,%@,%@,%@]",r1,r2,r3,r4,r5];
+        [resultArray addObject:randomString];
+    }
+    return resultArray.copy;
+}
 // 博币数量查询
 - (void)loadLuckyWheelCoinStatus {
     

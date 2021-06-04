@@ -58,6 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)loadYenFenHong;
 //2021龍舟選碼彈窗
 - (void)loadDragonBoatData;
+- (NSArray *)randomArrayWithInt:(NSInteger)sender;
 @end
 
 NS_ASSUME_NONNULL_END

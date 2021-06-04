@@ -183,6 +183,7 @@
 //        [self loadDragonBoatData];
         //暫時寫出來
         [self showDragonBoarChanceView:999 availableRandom:YES];
+        NSArray * testArray = [self randomArrayWithInt:20];
         [BTTHttpManager requestUnReadMessageNum:nil];
         NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
         if (![NSDate isToday:timestamp]) {
