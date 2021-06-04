@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTDragonBoatMenualPopView : BTTBaseAnimationPopView
-
+@property (strong, nonatomic) NSMutableArray *currentDataArray;
 - (void)configForAmount:(NSInteger)amountValue;
 
 @end
