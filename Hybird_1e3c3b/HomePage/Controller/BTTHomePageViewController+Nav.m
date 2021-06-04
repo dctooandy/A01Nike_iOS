@@ -208,11 +208,11 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         [self.navigationController pushViewController:vc animated:YES];
     };
 }
-- (void)showDragonBoarChanceView:(NSInteger )chanceCount
+- (void)showDragonBoarChanceView:(NSInteger )chanceCount availableRandom:(BOOL)availableRandom
 {
     BTTDragonBoatChancePopView * customView = [BTTDragonBoatChancePopView viewFromXib];
     customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    [customView configForAmount:chanceCount];
+    [customView configForAmount:chanceCount withAvailableRandom:availableRandom];
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
     popView.isClickBGDismiss = YES;
     [popView pop];

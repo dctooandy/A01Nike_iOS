@@ -12,6 +12,7 @@
 
 
 @property (weak, nonatomic) IBOutlet UILabel *amountLabel;
+@property (weak, nonatomic) IBOutlet UIButton *availableRandomButton;
 @end
 
 @implementation BTTDragonBoatChancePopView
@@ -23,8 +24,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
 }
-- (void)configForAmount:(NSInteger)amountValue
+- (void)configForAmount:(NSInteger)amountValue withAvailableRandom:(BOOL)available
 {
+    [self.availableRandomButton setHidden:!available];
     self.amountLabel.text = [NSString stringWithFormat:@"%li",(long)amountValue];
 }
 

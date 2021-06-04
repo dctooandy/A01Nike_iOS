@@ -25,7 +25,9 @@
 static const char *noticeStrKey = "noticeStr";
 
 static const char *BTTNextGroupKey = "nextGroup";
-
+@interface BTTHomePageViewController (LoadData)
+@property (nonatomic, assign) NSInteger availableNum;
+@end
 @implementation BTTHomePageViewController (LoadData)
 
 
@@ -44,6 +46,9 @@ static const char *BTTNextGroupKey = "nextGroup";
     dispatch_group_enter(group);
     [self loadOtherData:group];
 
+    dispatch_group_enter(group);
+    [self loadHightlightsBrand:group];
+    
     dispatch_group_enter(group);
     [self loadHightlightsBrand:group];
 
@@ -106,9 +111,9 @@ static const char *BTTNextGroupKey = "nextGroup";
 }
 //2021龍舟選碼彈窗
 //查询用户机会次数统计
--(void)loadDragonBoatChance
+- (void)loadDragonBoatChance
 {
-    
+    weakSelf(weakSelf)
     NSDictionary *params = @{@"productId":@"A01",
                              @"loginName":[IVNetwork savedUserInfo].loginName};
     [IVNetwork requestPostWithUrl:BTTDragonBoatChance paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
@@ -118,11 +123,55 @@ static const char *BTTNextGroupKey = "nextGroup";
                 if ([result.body[@"availableTimes"] integerValue]) {
                     NSInteger chanceValue = [result.body[@"availableTimes"] integerValue];
                     printf("次數:%ld",chanceValue);
-                    [self showDragonBoarChanceView:chanceValue];
+                    [self showDragonBoarChanceView:chanceValue availableRandom:(weakSelf.availableNum == 0 ? NO:YES)];
                 }
             }
         }
     }];
+}
+- (void)loadDragonBoatCurrRound:(dispatch_group_t)group
+{
+    weakSelf(weakSelf)
+    NSDictionary *params = @{@"productId":@"A01"};
+    [IVNetwork requestPostWithUrl:BTTDragonBoatCurrRound paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if ([result.body isKindOfClass:[NSDictionary class]]) {
+                NSDictionary * resultBody = result.body;
+                if ([resultBody[@"result"] isKindOfClass:[NSArray class]]) {
+                    NSArray *resultArray = resultBody[@"result"];
+                    if ([resultArray.firstObject isKindOfClass:[NSDictionary class]]) {
+                        if ([resultArray.firstObject[@"availableNum"] integerValue]) {
+                            NSInteger availableValue = [resultArray.firstObject[@"availableNum"] integerValue];
+                            printf("次數:%ld",availableValue);
+                            weakSelf.availableNum = availableValue;
+                            dispatch_group_leave(group);
+                        }
+                    }
+                }
+            }
+        }else{
+            weakSelf.availableNum = 0;
+            dispatch_group_leave(group);
+        }
+    }];
+}
+-(void)loadDragonBoatData
+{
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_queue_t queue = dispatch_queue_create("homepage.dragonboatdata", DISPATCH_QUEUE_CONCURRENT);
+ 
+    
+    dispatch_group_async(group, queue, ^{
+        dispatch_group_enter(group);
+        [self loadDragonBoatCurrRound:group];
+    });
+    dispatch_group_notify(group,queue, ^{
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self loadDragonBoatChance];
+        }];
+     
+    });
 }
 
 // 博币数量查询
@@ -564,4 +613,12 @@ static const char *BTTNextGroupKey = "nextGroup";
     objc_setAssociatedObject(self, @selector(games), games, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+
+- (void)setAvailableNum:(NSInteger)availableNum {
+    objc_setAssociatedObject(self, &BTTNextGroupKey, @(availableNum), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSInteger)availableNum {
+    return [objc_getAssociatedObject(self, &BTTNextGroupKey) integerValue];
+}
 @end

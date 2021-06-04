@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTDragonBoatChancePopView : BTTBaseAnimationPopView
 
-- (void)configForAmount:(NSInteger)amountValue;
+- (void)configForAmount:(NSInteger)amountValue withAvailableRandom:(BOOL)available;
 
 @end
 
