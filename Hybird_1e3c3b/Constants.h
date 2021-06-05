@@ -129,6 +129,13 @@ typedef enum {
     BTTStringFormatStyleOther    ///< 包含特殊符号
 }BTTStringFormatStyle;
 
+typedef enum {
+    BTTConfirmSelect = 1, ///只有一張券
+    BTTOneWaySelect, ///一張券以上的第一張
+    BTTTwoWaySelect,    ///兩張券以上
+    BTTOneWaySelectAndConfirm, ///一張券以上的最後一張
+}BTTMenualSelectMode;
+
 typedef void (^CompleteBlock)(IVJResponseObject *response);
 
 typedef void (^BTTLive800ResponseBlock)(NSString *info);

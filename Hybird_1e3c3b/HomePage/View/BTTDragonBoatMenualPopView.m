@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIStackView *stackViewThree;
 @property (weak, nonatomic) IBOutlet UIStackView *stackViewFour;
 @property (weak, nonatomic) IBOutlet UIStackView *stackViewFive;
+@property (weak, nonatomic) IBOutlet UIButton *lastButton;
+@property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @property (strong, nonatomic) NSMutableArray *currentCouponArray;
 @property (strong, nonatomic) NSString *stringOne;
 @property (strong, nonatomic) NSString *stringTwo;
@@ -35,9 +37,45 @@
     [self resetCurrentCouponArray];
     [super awakeFromNib];
 }
-- (void)configForAmount:(NSInteger)amountValue
+- (void)configForMenualValue:(NSString*)value withSelectMode:(BTTMenualSelectMode)mode
 {
-
+    if (![value isEqualToString:@"empty"])
+    {
+        NSCharacterSet* characterSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789,"] invertedSet];
+        NSString* newString = [[value componentsSeparatedByCharactersInSet:characterSet] componentsJoinedByString:@""];
+        NSArray *newArray = [newString componentsSeparatedByString:@","];
+        [self setCurrentCouponPage:newArray];
+    }
+        
+    switch (mode) {
+        case BTTConfirmSelect:
+        {
+            [self.lastButton setHidden:YES];
+            [self.nextButton setBackgroundImage:ImageNamed(@"submitSelect") forState:UIControlStateNormal];
+        }
+            break;
+        case BTTOneWaySelect:
+        {
+            [self.lastButton setHidden:YES];
+            [self.nextButton setBackgroundImage:ImageNamed(@"Slice_Btn2") forState:UIControlStateNormal];
+        }
+            break;
+        case BTTTwoWaySelect:
+        {
+            [self.lastButton setHidden:NO];
+            [self.nextButton setBackgroundImage:ImageNamed(@"Slice_Btn2") forState:UIControlStateNormal];
+        }
+            break;
+        case BTTOneWaySelectAndConfirm:
+        {
+            [self.lastButton setHidden:NO];
+            [self.nextButton setBackgroundImage:ImageNamed(@"submitSelect") forState:UIControlStateNormal];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (IBAction)closeBtnAction:(UIButton *)sender {
@@ -62,17 +100,34 @@
     {
         if (self.callBackBlock) {
             self.callBackBlock([NSString stringWithFormat:@"[%@,%@,%@,%@,%@]",self.stringOne,self.stringTwo,self.stringThree,self.stringFour,self.stringFive],@"",@"");
+            [self resetCurrentCouponArray];
+            [self resetAllStackView];
         }
-        [self resetCurrentCouponArray];
-        [self resetAllStackView];
     }
 }
 - (void)setCurrentCouponPage:(NSArray*)couponArray
 {
     if ([couponArray count] == 5)
     {
-       
+        for (int i = 5; i > 0; i --) {
+            UIButton *zeroButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            zeroButton.tag =  ([self returnZeroWith:i]) + [couponArray[i-1] intValue];
+            [self ballBtnAction:zeroButton];
+        }
     }
+}
+- (NSInteger)returnZeroWith:(NSInteger)sender
+{
+    NSString *newIntString = @"1";
+    for (int i = 0; i < sender; i ++) {
+        newIntString = [newIntString stringByAppendingString:@"0"];
+    }
+    NSInteger newInt = (100000 / [newIntString integerValue]);
+    if (newInt == 1)
+    {
+        newInt = 0;
+    }
+    return newInt;
 }
 - (void)resetAllStackView
 {
@@ -103,26 +158,28 @@
     return ![self.currentCouponArray containsObject:@"99"];
 }
 - (IBAction)ballBtnAction:(UIButton *)sender {
-    [sender setBackgroundImage:ImageNamed(@"redBall") forState:UIControlStateNormal];
-    [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     if (sender.tag >= 10000)
     {
-        
+        self.stringOne = [NSString stringWithFormat:@"%ld",(long)sender.tag - 10000];
         [self.currentCouponArray replaceObjectAtIndex:0 withObject: [NSString stringWithFormat:@"%ld",(long)sender.tag - 10000]];
         [self changeStackView:self.stackViewOne whitButton:sender clearAction:NO];
     }else if (sender.tag >= 1000)
     {
+        self.stringTwo = [NSString stringWithFormat:@"%ld",(long)sender.tag - 1000];
         [self.currentCouponArray replaceObjectAtIndex:1 withObject: [NSString stringWithFormat:@"%ld",(long)sender.tag - 1000]];
         [self changeStackView:self.stackViewTwo whitButton:sender clearAction:NO];
     }else if (sender.tag >= 100)
     {
+        self.stringThree = [NSString stringWithFormat:@"%ld",(long)sender.tag - 100];
         [self.currentCouponArray replaceObjectAtIndex:2 withObject: [NSString stringWithFormat:@"%ld",(long)sender.tag - 100]];
         [self changeStackView:self.stackViewThree whitButton:sender clearAction:NO];
     }else if (sender.tag >= 10)
     {
+        self.stringFour = [NSString stringWithFormat:@"%ld",(long)sender.tag - 10];
         [self.currentCouponArray replaceObjectAtIndex:3 withObject: [NSString stringWithFormat:@"%ld",(long)sender.tag - 10]];
         [self changeStackView:self.stackViewFour whitButton:sender clearAction:NO];
     }else{
+        self.stringFive = [NSString stringWithFormat:@"%ld",(long)sender.tag];
         [self.currentCouponArray replaceObjectAtIndex:4 withObject: [NSString stringWithFormat:@"%ld",(long)sender.tag]];
         [self changeStackView:self.stackViewFive whitButton:sender clearAction:NO];
     }
@@ -135,6 +192,9 @@
             {
                 [(UIButton *)button setBackgroundImage:ImageNamed(@"whiteBall") forState:UIControlStateNormal];
                 [(UIButton *)button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            }else{
+                [(UIButton *)button setBackgroundImage:ImageNamed(@"redBall") forState:UIControlStateNormal];
+                [(UIButton *)button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             }
         }
     }

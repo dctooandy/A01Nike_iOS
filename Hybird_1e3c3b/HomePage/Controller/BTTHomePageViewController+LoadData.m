@@ -636,4 +636,16 @@ static const char *BTTNextGroupKey = "nextGroup";
 - (NSInteger)availableNum {
     return [objc_getAssociatedObject(self, &BTTNextGroupKey) integerValue];
 }
+- (NSMutableArray *)lotteryNumList {
+    NSMutableArray *lotteryNumList = objc_getAssociatedObject(self, _cmd);
+    if (!lotteryNumList) {
+        lotteryNumList = [NSMutableArray array];
+        [self setLotteryNumList:lotteryNumList];
+    }
+    return lotteryNumList;
+}
+
+- (void)setLotteryNumList:(NSMutableArray *)lotteryNumList {
+    objc_setAssociatedObject(self, @selector(lotteryNumList), lotteryNumList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 @end

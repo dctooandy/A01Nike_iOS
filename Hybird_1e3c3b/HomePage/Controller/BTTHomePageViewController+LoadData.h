@@ -34,6 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *imageUrls;
 
 @property (nonatomic, assign) NSInteger nextGroup;
+//
+@property (nonatomic, strong) NSMutableArray *lotteryNumList;
 
 
 #pragma mark 加载所有数据

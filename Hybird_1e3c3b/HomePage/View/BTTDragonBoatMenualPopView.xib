@@ -1010,6 +1010,8 @@
                 <constraint firstItem="cZh-le-wW8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="vQZ-m2-BdW"/>
             </constraints>
             <connections>
+                <outlet property="lastButton" destination="Bgk-YS-GsA" id="Weh-83-iLT"/>
+                <outlet property="nextButton" destination="5Ac-5U-RNj" id="tS9-X0-SGA"/>
                 <outlet property="stackViewFive" destination="pOR-sO-wYu" id="HvZ-uD-Tbe"/>
                 <outlet property="stackViewFour" destination="HaN-lc-XXF" id="nSv-G0-KwH"/>
                 <outlet property="stackViewOne" destination="HTi-JG-2XR" id="MCY-q8-Qss"/>

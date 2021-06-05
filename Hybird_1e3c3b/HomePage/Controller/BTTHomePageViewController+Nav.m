@@ -39,7 +39,11 @@
 static const char *BTTHeaderViewKey = "headerView";
 
 static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
+static const char *BTTMenualPopViewKey = "menualPopView";
+@interface BTTHomePageViewController (Nav)
 
+@property (nonatomic, strong) BTTDragonBoatMenualPopView *menualPopView;
+@end
 @implementation BTTHomePageViewController (Nav)
 
 -(void)setUpAssistiveButton {
@@ -226,22 +230,31 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         {//隨機
         }else
         {//手動
-            BTTDragonBoatMenualPopView * customView = [BTTDragonBoatMenualPopView viewFromXib];
-            customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            [customView configForAmount:chanceCount];
-            BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+            strongSelf(strongSelf)
+            self.menualPopView = [BTTDragonBoatMenualPopView viewFromXib];
+            self.menualPopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:self.menualPopView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
             popView.isClickBGDismiss = YES;
             [popView pop];
-            customView.dismissBlock = ^{
+            self.menualPopView.dismissBlock = ^{
                 [popView dismiss];
             };
-            customView.callBackBlock = ^(NSString * _Nullable phone, NSString * _Nullable captcha, NSString * _Nullable captchaId) {
-                if ([phone isEqualToString:@""])
+            self.menualPopView.callBackBlock = ^(NSString * _Nullable nextCouponNum, NSString * _Nullable captcha, NSString * _Nullable captchaId) {
+                
+                if ([nextCouponNum isEqualToString:@""])
                 {
                     //上一張
+                    if (strongSelf.lotteryNumList.count > 0)
+                    {
+                        [strongSelf.menualPopView configForMenualValue:[strongSelf.lotteryNumList lastObject] withSelectMode:(strongSelf.lotteryNumList.count == 1 ? BTTOneWaySelect : BTTTwoWaySelect)];
+                        [strongSelf.lotteryNumList removeLastObject];
+                    }
+                    
                 }else
                 {
                     //下一張
+                    [weakSelf.lotteryNumList addObject:nextCouponNum];
+                    [strongSelf.menualPopView configForMenualValue:@"empty" withSelectMode:(strongSelf.lotteryNumList.count == chanceCount-1 ? BTTOneWaySelectAndConfirm : BTTTwoWaySelect)];
                 }
             };
             
@@ -640,5 +653,13 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 
 - (BTTLoginOrRegisterBtsView *)loginAndRegisterBtnsView {
     return objc_getAssociatedObject(self, &BTTLoginAndRegisterKey);
+}
+- (void)setMenualPopView:(BTTDragonBoatMenualPopView *)menualPopView {
+    objc_setAssociatedObject(self, &BTTMenualPopViewKey, menualPopView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+
+- (BTTDragonBoatMenualPopView *)menualPopView {
+    return objc_getAssociatedObject(self, &BTTMenualPopViewKey);
 }
 @end
