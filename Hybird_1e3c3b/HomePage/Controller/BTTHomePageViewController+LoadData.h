@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) NSInteger nextGroup;
 //
+@property (nonatomic, assign) NSInteger chanceCount;
 @property (nonatomic, strong) NSMutableArray *lotteryNumList;
 
 
@@ -61,7 +62,11 @@ NS_ASSUME_NONNULL_BEGIN
 //2021龍舟選碼彈窗
 - (void)loadDragonBoatData;
 - (NSArray *)randomArrayWithInt:(NSInteger)sender;
-- (void)assignDragonBoatLotteryWithMode:(NSString *)mode withNumber:(NSString *)number withLotteryNumValue:(NSArray * _Nullable)lotteryNumValue;
+- (void)assignDragonBoatLotteryWithMode:(NSString *)mode
+                             withNumber:(NSString *)number
+                    withLotteryNumValue:(NSArray * _Nullable)lotteryNumValue
+                              withGroup:(dispatch_group_t _Nullable)group;
+- (void)dismissPopViewWithoutSelect;
 @end
 
 NS_ASSUME_NONNULL_END

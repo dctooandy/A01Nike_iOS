@@ -180,9 +180,10 @@
                 [self showDragonBoat];
             }
         }
-//        [self loadDragonBoatData];
         //暫時寫出來
-        [self showDragonBoarChanceView:3 availableRandom:YES];
+        [self loadDragonBoatData];
+
+
         NSArray * testArray = [self randomArrayWithInt:20];
         [BTTHttpManager requestUnReadMessageNum:nil];
         NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
@@ -195,7 +196,7 @@
     }
 }
 -(void)assignLotteryWithMode:(NSString *)mode withNumber:(NSString *)number withLotteryNumValue:(NSArray *)lotteryNumValue{
-    [self assignDragonBoatLotteryWithMode:mode withNumber:number withLotteryNumValue:lotteryNumValue];
+    [self assignDragonBoatLotteryWithMode:mode withNumber:number withLotteryNumValue:lotteryNumValue withGroup:nil];
 }
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];

@@ -26,6 +26,7 @@ static const char *noticeStrKey = "noticeStr";
 
 static const char *BTTNextGroupKey = "nextGroup";
 static const char *BTTAvailableNumKey = "availableNum";
+static const char *BTTChanceCountKey = "chanceCount";
 @interface BTTHomePageViewController (LoadData)
 @property (nonatomic, assign) NSInteger availableNum;
 @end
@@ -118,17 +119,39 @@ static const char *BTTAvailableNumKey = "availableNum";
     NSDictionary *params = @{@"productId":@"A01",
                              @"loginName":[IVNetwork savedUserInfo].loginName};
     [IVNetwork requestPostWithUrl:BTTDragonBoatChance paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        strongSelf(strongSelf)
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if ([result.body isKindOfClass:[NSDictionary class]]) {
-                if ([result.body[@"availableTimes"] integerValue]) {
-                    NSInteger chanceValue = [result.body[@"availableTimes"] integerValue];
-                    printf("次數:%ld",chanceValue);
-                    [self showDragonBoarChanceView:chanceValue availableRandom:(weakSelf.availableNum == 0 ? NO:YES)];
+                if ([result.body[@"result"] isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary * resultBody = result.body[@"result"];
+                    if (resultBody[@"availableTimes"]) {
+                        NSInteger chanceValue = [[NSString stringWithFormat:@"%@",resultBody[@"availableTimes"]] integerValue];
+                        strongSelf.chanceCount = chanceValue;
+                        printf("\n用户机会次数:%ld",strongSelf.chanceCount);
+                        if (strongSelf.chanceCount > 0)
+                        {
+                            [strongSelf showDragonBoarChanceViewWithAvailableRandom:(weakSelf.availableNum == 0 ? NO:YES)];
+                        }else
+                        {
+                            //測試
+                            [strongSelf toTestTheLAvailableView];
+                        }
+                    }
                 }
             }
+        }else
+        {
+            //測試
+            [strongSelf toTestTheLAvailableView];
         }
     }];
+}
+- (void)toTestTheLAvailableView
+{
+    //測試
+    self.chanceCount = 3;
+    [self showDragonBoarChanceViewWithAvailableRandom:(self.availableNum == 0 ? NO:YES)];
 }
 - (void)loadDragonBoatCurrRound:(dispatch_group_t)group
 {
@@ -152,7 +175,7 @@ static const char *BTTAvailableNumKey = "availableNum";
                 }
             }
         }else{
-            weakSelf.availableNum = 0;
+            weakSelf.availableNum = 1;
             dispatch_group_leave(group);
         }
     }];
@@ -177,13 +200,16 @@ static const char *BTTAvailableNumKey = "availableNum";
 // mode <string> 1:隨機選碼;2:指定選碼
 // number <string> 彩票張數
 // lotteryNumValue <array>
-- (void)assignDragonBoatLotteryWithMode:(NSString *)mode withNumber:(NSString *)number withLotteryNumValue:(NSArray * _Nullable)lotteryNumValue
+- (void)assignDragonBoatLotteryWithMode:(NSString *)mode
+                             withNumber:(NSString *)number
+                    withLotteryNumValue:(NSArray * _Nullable)lotteryNumValue
+                              withGroup:(dispatch_group_t _Nullable)group
 {
     weakSelf(weakSelf)
     NSMutableString *params = @{@"productId":@"A01",
-                             @"loginName":[IVNetwork savedUserInfo].loginName,
-                             @"mode":mode,
-                             @"number":number}.mutableCopy;
+                                @"loginName":[IVNetwork savedUserInfo].loginName,
+                                @"mode":mode,
+                                @"number":number}.mutableCopy;
     if (lotteryNumValue && [mode isEqualToString:@"2"])
     {
         [params setValue:lotteryNumValue forKey:@"lotteryNumValue"];
@@ -206,7 +232,43 @@ static const char *BTTAvailableNumKey = "availableNum";
                 }
             }
         }
+        if (group)
+        {
+            dispatch_group_leave(group);
+        }
     }];
+}
+
+- (void)dismissPopViewWithoutSelect
+{
+    if ((self.chanceCount - self.lotteryNumList.count) > 0)
+    {
+        //隨機
+        NSString *numberString = [NSString stringWithFormat:@"%ld",self.chanceCount - self.lotteryNumList.count];
+        NSString * modeString = @"1";
+        if (self.availableNum == 0)
+        {
+            modeString = @"2";
+        }
+        dispatch_group_t group = dispatch_group_create();
+        dispatch_queue_t queue = dispatch_queue_create("homepage.lotterydata", DISPATCH_QUEUE_CONCURRENT);
+        dispatch_group_enter(group);
+        [self assignDragonBoatLotteryWithMode:modeString
+                                   withNumber:numberString
+                          withLotteryNumValue:[self randomArrayWithInt:[numberString intValue]]
+                                    withGroup:group];
+        
+        
+        dispatch_group_notify(group,queue, ^{
+            if (self.lotteryNumList.count > 0)
+            {
+                [self assignDragonBoatLotteryWithMode:@"2"
+                                           withNumber:[NSString stringWithFormat:@"%ld",self.lotteryNumList.count]
+                                  withLotteryNumValue:self.lotteryNumList.copy
+                                            withGroup:nil];
+            }
+        });
+    }
 }
 - (NSArray *)randomArrayWithInt:(NSInteger)sender
 {
@@ -682,5 +744,13 @@ static const char *BTTAvailableNumKey = "availableNum";
 
 - (void)setLotteryNumList:(NSMutableArray *)lotteryNumList {
     objc_setAssociatedObject(self, @selector(lotteryNumList), lotteryNumList, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)setChanceCount:(NSInteger)chanceCount {
+    objc_setAssociatedObject(self, &BTTChanceCountKey, @(chanceCount), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSInteger)chanceCount {
+    return [objc_getAssociatedObject(self, &BTTChanceCountKey) integerValue];
 }
 @end
