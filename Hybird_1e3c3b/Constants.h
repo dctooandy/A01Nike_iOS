@@ -563,6 +563,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 //龍舟活動ㄦ-查询用户机会次数统计
 #define BTTDragonBoatChance                        @"_extra_/api/v1/activity/dragon-boat-festival-2021/chance"
 #define BTTDragonBoatCurrRound                     @"_extra_/api/v1/activity/dragon-boat-festival-2021/currRound"
+#define BTTDragonBoatAssignLottery                 @"_extra_/api/v1/activity/dragon-boat-festival-2021/assignLottery"
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)      ([UIFont systemFontOfSize:X])

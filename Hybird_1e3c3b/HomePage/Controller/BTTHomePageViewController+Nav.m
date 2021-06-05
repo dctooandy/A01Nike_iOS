@@ -40,9 +40,11 @@ static const char *BTTHeaderViewKey = "headerView";
 
 static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 static const char *BTTMenualPopViewKey = "menualPopView";
+static const char *BTTChanceCountKey = "chanceCount";
 @interface BTTHomePageViewController (Nav)
 
 @property (nonatomic, strong) BTTDragonBoatMenualPopView *menualPopView;
+@property (nonatomic, assign) NSInteger chanceCount;
 @end
 @implementation BTTHomePageViewController (Nav)
 
@@ -214,6 +216,7 @@ static const char *BTTMenualPopViewKey = "menualPopView";
 }
 - (void)showDragonBoarChanceView:(NSInteger )chanceCount availableRandom:(BOOL)availableRandom
 {
+    self.chanceCount = chanceCount;
     BTTDragonBoatChancePopView * customView = [BTTDragonBoatChancePopView viewFromXib];
     customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     [customView configForAmount:chanceCount withAvailableRandom:availableRandom];
@@ -233,13 +236,14 @@ static const char *BTTMenualPopViewKey = "menualPopView";
             strongSelf(strongSelf)
             self.menualPopView = [BTTDragonBoatMenualPopView viewFromXib];
             self.menualPopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            [self.menualPopView configForMenualValue:@"empty" withSelectMode:(strongSelf.lotteryNumList.count == 1 ? BTTConfirmSelect : BTTTwoWaySelect)];
             BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:self.menualPopView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
             popView.isClickBGDismiss = YES;
             [popView pop];
             self.menualPopView.dismissBlock = ^{
                 [popView dismiss];
             };
-            self.menualPopView.callBackBlock = ^(NSString * _Nullable nextCouponNum, NSString * _Nullable captcha, NSString * _Nullable captchaId) {
+            self.menualPopView.callBackBlock = ^(NSString * _Nullable nextCouponNum, NSString * _Nullable confirmSelect, NSString * _Nullable captchaId) {
                 
                 if ([nextCouponNum isEqualToString:@""])
                 {
@@ -253,8 +257,17 @@ static const char *BTTMenualPopViewKey = "menualPopView";
                 }else
                 {
                     //下一張
-                    [weakSelf.lotteryNumList addObject:nextCouponNum];
+                    [strongSelf.lotteryNumList addObject:nextCouponNum];
                     [strongSelf.menualPopView configForMenualValue:@"empty" withSelectMode:(strongSelf.lotteryNumList.count == chanceCount-1 ? BTTOneWaySelectAndConfirm : BTTTwoWaySelect)];
+                    if ([confirmSelect isEqualToString:@"confirmSelect"])
+                    {
+                        [popView dismiss];
+                        [MBProgressHUD showSuccess:@"选码成功" toView:nil];
+                        
+                        [strongSelf assignDragonBoatLotteryWithMode:@"2"
+                                                         withNumber:[NSString stringWithFormat:@"%ld",weakSelf.chanceCount]
+                                                withLotteryNumValue:strongSelf.lotteryNumList.copy];
+                    }
                 }
             };
             
@@ -661,5 +674,12 @@ static const char *BTTMenualPopViewKey = "menualPopView";
 
 - (BTTDragonBoatMenualPopView *)menualPopView {
     return objc_getAssociatedObject(self, &BTTMenualPopViewKey);
+}
+- (void)setChanceCount:(NSInteger)chanceCount {
+    objc_setAssociatedObject(self, &BTTChanceCountKey, @(chanceCount), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSInteger)chanceCount {
+    return [objc_getAssociatedObject(self, &BTTChanceCountKey) integerValue];
 }
 @end

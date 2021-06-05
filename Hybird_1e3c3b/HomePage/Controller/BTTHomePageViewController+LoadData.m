@@ -25,6 +25,7 @@
 static const char *noticeStrKey = "noticeStr";
 
 static const char *BTTNextGroupKey = "nextGroup";
+static const char *BTTAvailableNumKey = "availableNum";
 @interface BTTHomePageViewController (LoadData)
 @property (nonatomic, assign) NSInteger availableNum;
 @end
@@ -172,6 +173,40 @@ static const char *BTTNextGroupKey = "nextGroup";
         }];
      
     });
+}
+// mode <string> 1:隨機選碼;2:指定選碼
+// number <string> 彩票張數
+// lotteryNumValue <array>
+- (void)assignDragonBoatLotteryWithMode:(NSString *)mode withNumber:(NSString *)number withLotteryNumValue:(NSArray * _Nullable)lotteryNumValue
+{
+    weakSelf(weakSelf)
+    NSMutableString *params = @{@"productId":@"A01",
+                             @"loginName":[IVNetwork savedUserInfo].loginName,
+                             @"mode":mode,
+                             @"number":number}.mutableCopy;
+    if (lotteryNumValue && [mode isEqualToString:@"2"])
+    {
+        [params setValue:lotteryNumValue forKey:@"lotteryNumValue"];
+    }
+    [IVNetwork requestPostWithUrl:BTTDragonBoatAssignLottery paramters:params.copy completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if ([result.body isKindOfClass:[NSDictionary class]]) {
+                NSDictionary * resultBody = result.body;
+                if ([resultBody[@"result"] isKindOfClass:[NSArray class]]) {
+                    NSArray *resultArray = resultBody[@"result"];
+                    if ([resultArray.firstObject isKindOfClass:[NSDictionary class]]) {
+                        if ([resultArray.firstObject[@"lotteryNumber"] isKindOfClass:[NSArray class]]) {
+                            NSArray *lotteryArray = resultArray.firstObject[@"lotteryNumber"];
+                            NSArray *errMsg = resultArray.firstObject[@"errMsg"];
+                      
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }];
 }
 - (NSArray *)randomArrayWithInt:(NSInteger)sender
 {
@@ -630,11 +665,11 @@ static const char *BTTNextGroupKey = "nextGroup";
 
 
 - (void)setAvailableNum:(NSInteger)availableNum {
-    objc_setAssociatedObject(self, &BTTNextGroupKey, @(availableNum), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, &BTTAvailableNumKey, @(availableNum), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSInteger)availableNum {
-    return [objc_getAssociatedObject(self, &BTTNextGroupKey) integerValue];
+    return [objc_getAssociatedObject(self, &BTTAvailableNumKey) integerValue];
 }
 - (NSMutableArray *)lotteryNumList {
     NSMutableArray *lotteryNumList = objc_getAssociatedObject(self, _cmd);

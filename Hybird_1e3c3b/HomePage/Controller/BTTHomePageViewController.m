@@ -194,7 +194,9 @@
         }
     }
 }
-
+-(void)assignLotteryWithMode:(NSString *)mode withNumber:(NSString *)number withLotteryNumValue:(NSArray *)lotteryNumValue{
+    [self assignDragonBoatLotteryWithMode:mode withNumber:number withLotteryNumValue:lotteryNumValue];
+}
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if (self.idDisable) {

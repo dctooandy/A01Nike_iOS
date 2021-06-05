@@ -22,7 +22,7 @@
 @property (strong, nonatomic) NSString *stringThree;
 @property (strong, nonatomic) NSString *stringFour;
 @property (strong, nonatomic) NSString *stringFive;
-
+@property (assign, nonatomic) BOOL isConfirmSelect;
 
 @end
 
@@ -34,6 +34,7 @@
 
 - (void)awakeFromNib {
     currentCouponArray = [[NSMutableArray alloc] init];
+    self.isConfirmSelect = NO;
     [self resetCurrentCouponArray];
     [super awakeFromNib];
 }
@@ -51,24 +52,28 @@
         case BTTConfirmSelect:
         {
             [self.lastButton setHidden:YES];
+            self.isConfirmSelect = YES;
             [self.nextButton setBackgroundImage:ImageNamed(@"submitSelect") forState:UIControlStateNormal];
         }
             break;
         case BTTOneWaySelect:
         {
             [self.lastButton setHidden:YES];
+            self.isConfirmSelect = NO;
             [self.nextButton setBackgroundImage:ImageNamed(@"Slice_Btn2") forState:UIControlStateNormal];
         }
             break;
         case BTTTwoWaySelect:
         {
             [self.lastButton setHidden:NO];
+            self.isConfirmSelect = NO;
             [self.nextButton setBackgroundImage:ImageNamed(@"Slice_Btn2") forState:UIControlStateNormal];
         }
             break;
         case BTTOneWaySelectAndConfirm:
         {
             [self.lastButton setHidden:NO];
+            self.isConfirmSelect = YES;
             [self.nextButton setBackgroundImage:ImageNamed(@"submitSelect") forState:UIControlStateNormal];
         }
             break;
@@ -99,7 +104,13 @@
     if ([self checkSelectedNumForArray])
     {
         if (self.callBackBlock) {
-            self.callBackBlock([NSString stringWithFormat:@"[%@,%@,%@,%@,%@]",self.stringOne,self.stringTwo,self.stringThree,self.stringFour,self.stringFive],@"",@"");
+            if (self.isConfirmSelect == YES)
+            {
+                self.callBackBlock([NSString stringWithFormat:@"[%@,%@,%@,%@,%@]",self.stringOne,self.stringTwo,self.stringThree,self.stringFour,self.stringFive],@"confirmSelect",@"");
+            }else
+            {
+                self.callBackBlock([NSString stringWithFormat:@"[%@,%@,%@,%@,%@]",self.stringOne,self.stringTwo,self.stringThree,self.stringFour,self.stringFive],@"",@"");
+            }
             [self resetCurrentCouponArray];
             [self resetAllStackView];
         }

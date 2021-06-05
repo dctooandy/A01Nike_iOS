@@ -61,6 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 //2021龍舟選碼彈窗
 - (void)loadDragonBoatData;
 - (NSArray *)randomArrayWithInt:(NSInteger)sender;
+- (void)assignDragonBoatLotteryWithMode:(NSString *)mode withNumber:(NSString *)number withLotteryNumValue:(NSArray * _Nullable)lotteryNumValue;
 @end
 
 NS_ASSUME_NONNULL_END
