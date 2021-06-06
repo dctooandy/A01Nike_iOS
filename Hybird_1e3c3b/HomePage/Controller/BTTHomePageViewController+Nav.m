@@ -35,6 +35,7 @@
 #import "BTTDragonBoatPopView.h"
 #import "BTTDragonBoatChancePopView.h"
 #import "BTTDragonBoatMenualPopView.h"
+#import "BTTDragonBoatAutoPopView.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
@@ -229,12 +230,21 @@ static const char *BTTMenualPopViewKey = "menualPopView";
     };
     
     customView.btnBlock = ^(UIButton * _Nullable btn) {
+        strongSelf(strongSelf)
         [popView dismiss];
         if (btn.tag ==1)
         {//隨機
+            BTTDragonBoatAutoPopView * customView = [BTTDragonBoatAutoPopView viewFromXib];
+            customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            [customView configForCouponNum:[NSString stringWithFormat:@"%ld",self.chanceCount]];
+            BTTAnimationPopView * popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+            popView.isClickBGDismiss = YES;
+            [popView pop];
+            customView.dismissBlock = ^{
+                [popView dismiss];
+            };
         }else
         {//手動
-            strongSelf(strongSelf)
             self.menualPopView = [BTTDragonBoatMenualPopView viewFromXib];
             self.menualPopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
             [self.menualPopView configForMenualValue:@"empty" withSelectMode:(strongSelf.lotteryNumList.count == 1 ? BTTConfirmSelect : BTTTwoWaySelect)];

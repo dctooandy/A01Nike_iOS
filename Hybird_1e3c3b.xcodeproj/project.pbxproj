@@ -764,6 +764,8 @@
 		41FD5E602654AC8C00B38644 /* tingyunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */; };
 		7629D73B2668CE7300CF758C /* BTTDragonBoatMenualPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629D7382668CE7300CF758C /* BTTDragonBoatMenualPopView.m */; };
 		7629D73C2668CE7300CF758C /* BTTDragonBoatMenualPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629D7392668CE7300CF758C /* BTTDragonBoatMenualPopView.xib */; };
+		7629D7E8266C933E00CF758C /* BTTDragonBoatAutoPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629D7E5266C933E00CF758C /* BTTDragonBoatAutoPopView.xib */; };
+		7629D7E9266C933E00CF758C /* BTTDragonBoatAutoPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629D7E6266C933E00CF758C /* BTTDragonBoatAutoPopView.m */; };
 		76C9F2912664CFE00002591D /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
@@ -2109,6 +2111,9 @@
 		7629D7382668CE7300CF758C /* BTTDragonBoatMenualPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatMenualPopView.m; sourceTree = "<group>"; };
 		7629D7392668CE7300CF758C /* BTTDragonBoatMenualPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatMenualPopView.xib; sourceTree = "<group>"; };
 		7629D73A2668CE7300CF758C /* BTTDragonBoatMenualPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatMenualPopView.h; sourceTree = "<group>"; };
+		7629D7E5266C933E00CF758C /* BTTDragonBoatAutoPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatAutoPopView.xib; sourceTree = "<group>"; };
+		7629D7E6266C933E00CF758C /* BTTDragonBoatAutoPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatAutoPopView.m; sourceTree = "<group>"; };
+		7629D7E7266C933E00CF758C /* BTTDragonBoatAutoPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatAutoPopView.h; sourceTree = "<group>"; };
 		76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatPopView.xib; sourceTree = "<group>"; };
 		76C9F2D72665BEA70002591D /* BTTDragonBoatPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatPopView.h; sourceTree = "<group>"; };
 		76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatPopView.m; sourceTree = "<group>"; };
@@ -3974,6 +3979,9 @@
 				7629D73A2668CE7300CF758C /* BTTDragonBoatMenualPopView.h */,
 				7629D7382668CE7300CF758C /* BTTDragonBoatMenualPopView.m */,
 				7629D7392668CE7300CF758C /* BTTDragonBoatMenualPopView.xib */,
+				7629D7E7266C933E00CF758C /* BTTDragonBoatAutoPopView.h */,
+				7629D7E6266C933E00CF758C /* BTTDragonBoatAutoPopView.m */,
+				7629D7E5266C933E00CF758C /* BTTDragonBoatAutoPopView.xib */,
 				4180B04125D3C23800139E88 /* BTTNewYearPopView.h */,
 				4180B04225D3C23800139E88 /* BTTNewYearPopView.m */,
 				4180B04325D3C23800139E88 /* BTTNewYearPopView.xib */,
@@ -5592,6 +5600,7 @@
 				3A5F7A7B21A6C6BB00128E8B /* BTTXimaNoDataCell.xib in Resources */,
 				4196BEDA255A3F2400F41EED /* BTTHumanModifyCell.xib in Resources */,
 				3A5AE6D822D6E22A0013E8A3 /* photo_original_def@2x.png in Resources */,
+				7629D7E8266C933E00CF758C /* BTTDragonBoatAutoPopView.xib in Resources */,
 				D5C5019021B4FC9700C6DA02 /* CNPayWechatTipView.xib in Resources */,
 				D5DBEB0321ABB774008AF629 /* CNPayDepositStep2VC.xib in Resources */,
 				D5C501D421B7CEDC00C6DA02 /* BRPickerView.bundle in Resources */,
@@ -5739,6 +5748,7 @@
 				EAA4811C21ABD265000C0273 /* BTTAGGJViewController.m in Sources */,
 				D5DBEB2721ABB774008AF629 /* CNPayChannelModel.m in Sources */,
 				3A514E3E2186E24000B83881 /* BTTThisWeekTotalCell.m in Sources */,
+				7629D7E9266C933E00CF758C /* BTTDragonBoatAutoPopView.m in Sources */,
 				3A9F31A2223F69C600B92693 /* BTTCompleteMeterialController.m in Sources */,
 				3A8F519F215F77EC0069D1B3 /* UIView+Frame.m in Sources */,
 				3A6D58FE2390E5F900C658FC /* BTTShareNoticeView.m in Sources */,

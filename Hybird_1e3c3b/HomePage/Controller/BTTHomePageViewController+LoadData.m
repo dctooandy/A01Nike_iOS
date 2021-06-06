@@ -150,7 +150,7 @@ static const char *BTTChanceCountKey = "chanceCount";
 - (void)toTestTheLAvailableView
 {
     //測試
-    self.chanceCount = 3;
+    self.chanceCount = 15;
     [self showDragonBoarChanceViewWithAvailableRandom:(self.availableNum == 0 ? NO:YES)];
 }
 - (void)loadDragonBoatCurrRound:(dispatch_group_t)group
@@ -225,7 +225,7 @@ static const char *BTTChanceCountKey = "chanceCount";
                         if ([resultArray.firstObject[@"lotteryNumber"] isKindOfClass:[NSArray class]]) {
                             NSArray *lotteryArray = resultArray.firstObject[@"lotteryNumber"];
                             NSArray *errMsg = resultArray.firstObject[@"errMsg"];
-                      
+                            //投注完畢
                             
                         }
                     }
