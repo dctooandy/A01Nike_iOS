@@ -150,7 +150,7 @@ static const char *BTTChanceCountKey = "chanceCount";
 - (void)toTestTheLAvailableView
 {
     //測試
-    self.chanceCount = 6;
+    self.chanceCount = 3;
     [self showDragonBoarChanceViewWithAvailableRandom:(self.availableNum == 0 ? NO:YES)];
 }
 - (void)loadDragonBoatCurrRound:(dispatch_group_t)group
