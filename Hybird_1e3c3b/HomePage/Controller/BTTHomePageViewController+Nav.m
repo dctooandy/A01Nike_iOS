@@ -267,6 +267,14 @@ static const char *BTTMenualPopViewKey = "menualPopView";
                     customView.dismissBlock = ^{
                         [popView dismiss];
                     };
+                    customView.btnBlock = ^(UIButton * _Nullable btn) {
+                        [popView dismiss];
+                        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                        vc.title = @"迎端午 赛龙舟 领奖券 300万热力回馈";
+                        vc.webConfigModel.url = @"/activity_pages/lantern-fest";
+                        vc.webConfigModel.newView = YES;
+                        [strongSelf.navigationController pushViewController:vc animated:YES];
+                    };
                 }];
             }else
             {//手動

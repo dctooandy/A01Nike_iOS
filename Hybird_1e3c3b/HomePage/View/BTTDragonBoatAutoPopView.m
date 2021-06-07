@@ -112,7 +112,13 @@
 {
     NSInteger modNum = self.randomArray.count % 5;
     NSInteger groupInt = ([self.chanceNumLabel.text integerValue] >= 5 ? [self.chanceNumLabel.text integerValue]/5 + (modNum != 0 ? 1: 0) : 1);
-    self.dataLabel.text = [NSString stringWithFormat:@"共計%@张      %ld/%ld組",self.chanceNumLabel.text,self.currentPage,groupInt];
+//    self.dataLabel.text = [NSString stringWithFormat:@"共計%@张      %ld/%ld組",self.chanceNumLabel.text,self.currentPage,groupInt];
+    self.dataLabel.text = [NSString stringWithFormat:@"共計%@张",self.chanceNumLabel.text];
+}
+- (IBAction)checkCurrentCouponData:(UIButton *)sender {
+    if (self.btnBlock) {
+        self.btnBlock(sender);
+    }
 }
 
 @end
