@@ -47,7 +47,6 @@
             [strongSelf loadMainData];
         }];
     }
-    [self showLoading];
     [self loadMainData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllData) name:@"CHANGE_MODE" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:LoginSuccessNotification object:nil];
@@ -219,11 +218,7 @@
     };
 }
 
-
-
-
 #pragma mark - JXRegisterManagerDelegate
-
 - (void)registerUID:(NSString *)uid {
     JXRegisterManager *registerManager = [JXRegisterManager sharedInstance];
     registerManager.delegate = self;
@@ -417,7 +412,16 @@
     NSMutableArray *elementsHight = [NSMutableArray array];
     NSInteger total = self.sheetDatas.count;
     for (int i = 0; i < total; i++) {
-        [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 130)]];
+        BTTPromotionModel *model = self.sheetDatas[i];
+        UILabel * lab = [[UILabel alloc] init];
+        lab.text = model.name;
+        lab.font = [UIFont systemFontOfSize:18];
+        CGSize size = [lab sizeThatFits:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)];
+        if (size.width > SCREEN_WIDTH - 15 * 3 - BTTDiscountIconWidth) {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, BTTDiscountDefaultCellHeight + size.height - 21.5 + 15)]];
+        } else {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, BTTDiscountDefaultCellHeight)]];
+        }
     }
     self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{

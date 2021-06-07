@@ -167,6 +167,9 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 #define BTTBannerDefaultWidth                      1280
 #define BTTBnnnerDefaultHeight                     440
+#define BTTDiscountDefaultCellHeight               130
+#define BTTDiscountIconWidth                       130
+#define BTTDiscountDefaultIconHeight               90
 
 #define BTTNavHeightNotLogin                       (KIsiPhoneX ? (88 + 49) : 113)
 #define BTTNavHeightLogin                          (KIsiPhoneX ? 88 : 64)

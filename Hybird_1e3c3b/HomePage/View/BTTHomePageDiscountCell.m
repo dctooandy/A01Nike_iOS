@@ -20,6 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *detailBtn;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *discountIconHeight;
 
 
 @end
@@ -45,6 +46,11 @@
         [self.discountIcon sd_setImageWithURL:[NSURL URLWithString:model.imgurl] placeholderImage:ImageNamed(@"default_2")];
         self.titleLabel.text = model.name;
         self.detailLabel.text = model.desc;
+    }
+    if (self.frame.size.height > BTTDiscountDefaultCellHeight) {
+        self.discountIconHeight.constant = 100;
+    } else {
+        self.discountIconHeight.constant = BTTDiscountDefaultIconHeight;
     }
 }
 
