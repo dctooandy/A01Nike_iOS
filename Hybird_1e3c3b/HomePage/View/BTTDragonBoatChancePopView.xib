@@ -91,7 +91,7 @@
                             <color key="textColor" red="0.24513804910000001" green="0.47147476669999999" blue="0.23918104170000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="奖卷" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3d5-xs-FKw">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="奖券" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3d5-xs-FKw">
                             <rect key="frame" x="124.00000000000001" y="177.33333333333331" width="48.666666666666671" height="29.333333333333343"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                             <color key="textColor" red="0.24513804910000001" green="0.47147476669999999" blue="0.23918104170000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
