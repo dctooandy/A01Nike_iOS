@@ -258,6 +258,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTLoginName                               @"loginName"
 
 #define BTTBindUsdtCount                           @"BTTBindUsdtCount"
+#define BTShowDBPopView                            @"BTShowDBPopView"
 /*********************************************Video Game Key********************************************************/
 #define BTTAGQJKEY                                 @"003"
 #define BTTAGGJKEY                                 @"026"

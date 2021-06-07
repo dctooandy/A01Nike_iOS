@@ -65,7 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)assignDragonBoatLotteryWithMode:(NSString *)mode
                              withNumber:(NSString *)number
                     withLotteryNumValue:(NSArray * _Nullable)lotteryNumValue
-                              withGroup:(dispatch_group_t _Nullable)group;
+                              withGroup:(dispatch_group_t _Nullable)group
+                        completionBlock:(void (^)(NSArray * _Nullable lotteryArray))completionHandler;
 - (void)dismissPopViewWithoutSelect;
 @end
 

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTDragonBoatAutoPopView : BTTBaseAnimationPopView
 
-- (void)configForCouponNum:(NSString *)coupon;
+- (void)configForCouponNum:(NSString *)coupon couponData:(NSArray*)dataArray;
 @end
 
 NS_ASSUME_NONNULL_END

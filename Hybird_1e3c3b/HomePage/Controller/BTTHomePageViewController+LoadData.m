@@ -135,7 +135,7 @@ static const char *BTTChanceCountKey = "chanceCount";
                         }else
                         {
                             //測試
-                            [strongSelf toTestTheLAvailableView];
+//                            [strongSelf toTestTheLAvailableView];
                         }
                     }
                 }
@@ -143,14 +143,14 @@ static const char *BTTChanceCountKey = "chanceCount";
         }else
         {
             //測試
-            [strongSelf toTestTheLAvailableView];
+//            [strongSelf toTestTheLAvailableView];
         }
     }];
 }
 - (void)toTestTheLAvailableView
 {
     //測試
-    self.chanceCount = 15;
+    self.chanceCount = 6;
     [self showDragonBoarChanceViewWithAvailableRandom:(self.availableNum == 0 ? NO:YES)];
 }
 - (void)loadDragonBoatCurrRound:(dispatch_group_t)group
@@ -204,6 +204,7 @@ static const char *BTTChanceCountKey = "chanceCount";
                              withNumber:(NSString *)number
                     withLotteryNumValue:(NSArray * _Nullable)lotteryNumValue
                               withGroup:(dispatch_group_t _Nullable)group
+                        completionBlock:(void (^)(NSArray * _Nullable lotteryArray))completionHandler
 {
     weakSelf(weakSelf)
     NSMutableString *params = @{@"productId":@"A01",
@@ -217,20 +218,39 @@ static const char *BTTChanceCountKey = "chanceCount";
     [IVNetwork requestPostWithUrl:BTTDragonBoatAssignLottery paramters:params.copy completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            if ([result.body isKindOfClass:[NSDictionary class]]) {
-                NSDictionary * resultBody = result.body;
-                if ([resultBody[@"result"] isKindOfClass:[NSArray class]]) {
-                    NSArray *resultArray = resultBody[@"result"];
-                    if ([resultArray.firstObject isKindOfClass:[NSDictionary class]]) {
-                        if ([resultArray.firstObject[@"lotteryNumber"] isKindOfClass:[NSArray class]]) {
-                            NSArray *lotteryArray = resultArray.firstObject[@"lotteryNumber"];
-                            NSArray *errMsg = resultArray.firstObject[@"errMsg"];
-                            //投注完畢
-                            
-                        }
+            if ([result.body[@"result"] isKindOfClass:[NSDictionary class]]) {
+                NSDictionary * resultBody = result.body[@"result"];
+                if (resultBody[@"lotteryNumber"] && [resultBody[@"lotteryNumber"] isKindOfClass:[NSArray class]])
+                {
+                    NSArray *lotteryArray = resultBody[@"lotteryNumber"];
+                    if (completionHandler)
+                    {
+                        completionHandler(lotteryArray);
                     }
                 }
             }
+//            if ([result.body isKindOfClass:[NSDictionary class]]) {
+//                NSDictionary * resultBody = result.body;
+//                if ([resultBody[@"result"] isKindOfClass:[NSArray class]]) {
+//                    NSArray *resultArray = resultBody[@"result"];
+//                    if ([resultArray.firstObject isKindOfClass:[NSDictionary class]]) {
+//                        if ([resultArray.firstObject[@"lotteryNumber"] isKindOfClass:[NSArray class]]) {
+//                            NSArray *lotteryArray = resultArray.firstObject[@"lotteryNumber"];
+//                            NSArray *errMsg = resultArray.firstObject[@"errMsg"];
+//                            //投注完畢
+//
+//                        }
+//                    }
+//                }
+//            }
+        }else
+        {
+            //測試
+            
+//            if (completionHandler)
+//            {
+//                completionHandler([weakSelf randomArrayWithInt:[number intValue]]);
+//            }
         }
         if (group)
         {
@@ -255,8 +275,11 @@ static const char *BTTChanceCountKey = "chanceCount";
         dispatch_group_enter(group);
         [self assignDragonBoatLotteryWithMode:modeString
                                    withNumber:numberString
-                          withLotteryNumValue:[self randomArrayWithInt:[numberString intValue]]
-                                    withGroup:group];
+                          withLotteryNumValue:nil
+                                    withGroup:group
+                              completionBlock:^(NSArray * _Nullable lotteryArray) {
+            [MBProgressHUD showSuccess:@"选码成功" toView:nil];
+        }];
         
         
         dispatch_group_notify(group,queue, ^{
@@ -265,7 +288,8 @@ static const char *BTTChanceCountKey = "chanceCount";
                 [self assignDragonBoatLotteryWithMode:@"2"
                                            withNumber:[NSString stringWithFormat:@"%ld",self.lotteryNumList.count]
                                   withLotteryNumValue:self.lotteryNumList.copy
-                                            withGroup:nil];
+                                            withGroup:nil
+                                      completionBlock:nil];
             }
         });
     }
@@ -281,7 +305,7 @@ static const char *BTTChanceCountKey = "chanceCount";
         NSString *r5 = [NSString stringWithFormat:@"%u",(arc4random() % 10)];
         
 //        NSArray *randomArray = [[NSArray alloc] initWithObjects:r1,r2,r3,r4,r5, nil];
-        NSString *randomString = [NSString stringWithFormat:@"[%@,%@,%@,%@,%@]",r1,r2,r3,r4,r5];
+        NSString *randomString = [NSString stringWithFormat:@"%@,%@,%@,%@,%@",r1,r2,r3,r4,r5];
         [resultArray addObject:randomString];
     }
     return resultArray.copy;

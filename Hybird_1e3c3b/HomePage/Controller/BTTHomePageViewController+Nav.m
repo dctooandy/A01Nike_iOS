@@ -217,75 +217,103 @@ static const char *BTTMenualPopViewKey = "menualPopView";
 }
 - (void)showDragonBoarChanceViewWithAvailableRandom:(BOOL)availableRandom
 {
-    weakSelf(weakSelf)
-    BTTDragonBoatChancePopView * customView = [BTTDragonBoatChancePopView viewFromXib];
-    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    [customView configForAmount:self.chanceCount withAvailableRandom:availableRandom];
-    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-    popView.isClickBGDismiss = YES;
-    [popView pop];
-    customView.dismissBlock = ^{
-        [weakSelf dismissPopViewWithoutSelect];
-        [popView dismiss];
-    };
     
-    customView.btnBlock = ^(UIButton * _Nullable btn) {
-        strongSelf(strongSelf)
-        [popView dismiss];
-        if (btn.tag ==1)
-        {//隨機
-            BTTDragonBoatAutoPopView * customView = [BTTDragonBoatAutoPopView viewFromXib];
-            customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            [customView configForCouponNum:[NSString stringWithFormat:@"%ld",self.chanceCount]];
-            BTTAnimationPopView * popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-            popView.isClickBGDismiss = YES;
-            [popView pop];
-            customView.dismissBlock = ^{
-                [popView dismiss];
-            };
-        }else
-        {//手動
-            self.menualPopView = [BTTDragonBoatMenualPopView viewFromXib];
-            self.menualPopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            [self.menualPopView configForMenualValue:@"empty" withSelectMode:(strongSelf.lotteryNumList.count == 1 ? BTTConfirmSelect : BTTTwoWaySelect)];
-            BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:self.menualPopView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-            popView.isClickBGDismiss = YES;
-            [popView pop];
-            self.menualPopView.dismissBlock = ^{
-                [strongSelf dismissPopViewWithoutSelect];
-                [popView dismiss];
-            };
-            self.menualPopView.callBackBlock = ^(NSString * _Nullable nextCouponNum, NSString * _Nullable confirmSelect, NSString * _Nullable captchaId) {
-                
-                if ([nextCouponNum isEqualToString:@""])
-                {
-                    //上一張
-                    if (strongSelf.lotteryNumList.count > 0)
-                    {
-                        [strongSelf.menualPopView configForMenualValue:[strongSelf.lotteryNumList lastObject] withSelectMode:(strongSelf.lotteryNumList.count == 1 ? BTTOneWaySelect : BTTTwoWaySelect)];
-                        [strongSelf.lotteryNumList removeLastObject];
-                    }
-                    
-                }else
-                {
-                    //下一張
-                    [strongSelf.lotteryNumList addObject:nextCouponNum];
-                    [strongSelf.menualPopView configForMenualValue:@"empty" withSelectMode:(strongSelf.lotteryNumList.count == strongSelf.chanceCount-1 ? BTTOneWaySelectAndConfirm : BTTTwoWaySelect)];
-                    if ([confirmSelect isEqualToString:@"confirmSelect"])
-                    {
-                        [popView dismiss];
-                        [MBProgressHUD showSuccess:@"选码成功" toView:nil];
-                        
-                        [strongSelf assignDragonBoatLotteryWithMode:@"2"
-                                                         withNumber:[NSString stringWithFormat:@"%ld",weakSelf.chanceCount]
-                                                withLotteryNumValue:strongSelf.lotteryNumList.copy
-                                                          withGroup:nil];
-                    }
-                }
-            };
+    weakSelf(weakSelf)
+    NSString *showView = [[NSUserDefaults standardUserDefaults] objectForKey:BTShowDBPopView];
+    if ([showView isEqualToString:@"NO"])
+    {// 不彈窗
+        [weakSelf assignDragonBoatLotteryWithMode:@"1"
+                                         withNumber:[NSString stringWithFormat:@"%ld",weakSelf.chanceCount]
+                                withLotteryNumValue:nil
+                                          withGroup:nil
+                                    completionBlock:^(NSArray * _Nullable lotteryArray) {
             
-        }
-    };
+            printf("隨機完成");
+        }];
+        
+    }else
+    {
+        
+        
+        BTTDragonBoatChancePopView * customView = [BTTDragonBoatChancePopView viewFromXib];
+        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [customView configForAmount:self.chanceCount withAvailableRandom:availableRandom];
+        BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+        popView.isClickBGDismiss = YES;
+        [popView pop];
+        customView.dismissBlock = ^{
+            [weakSelf dismissPopViewWithoutSelect];
+            [popView dismiss];
+        };
+        
+        customView.btnBlock = ^(UIButton * _Nullable btn) {
+            strongSelf(strongSelf)
+            [popView dismiss];
+            if (btn.tag ==1)
+            {//隨機
+                [strongSelf assignDragonBoatLotteryWithMode:@"1"
+                                                 withNumber:[NSString stringWithFormat:@"%ld",weakSelf.chanceCount]
+                                        withLotteryNumValue:nil
+                                                  withGroup:nil
+                                            completionBlock:^(NSArray * _Nullable lotteryArray) {
+                    
+                    BTTDragonBoatAutoPopView * customView = [BTTDragonBoatAutoPopView viewFromXib];
+                    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                    
+                    [customView configForCouponNum:[NSString stringWithFormat:@"%ld",self.chanceCount] couponData:lotteryArray];
+                    BTTAnimationPopView * popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+                    popView.isClickBGDismiss = YES;
+                    [popView pop];
+                    customView.dismissBlock = ^{
+                        [popView dismiss];
+                    };
+                }];
+            }else
+            {//手動
+                self.menualPopView = [BTTDragonBoatMenualPopView viewFromXib];
+                self.menualPopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                [self.menualPopView configForMenualValue:@"empty" withSelectMode:(strongSelf.chanceCount == 1 ? BTTConfirmSelect : BTTTwoWaySelect)];
+                BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:self.menualPopView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+                popView.isClickBGDismiss = YES;
+                [popView pop];
+                self.menualPopView.dismissBlock = ^{
+                    [strongSelf dismissPopViewWithoutSelect];
+                    [popView dismiss];
+                };
+                self.menualPopView.callBackBlock = ^(NSString * _Nullable nextCouponNum, NSString * _Nullable confirmSelect, NSString * _Nullable captchaId) {
+                    
+                    if ([nextCouponNum isEqualToString:@""])
+                    {
+                        //上一張
+                        if (strongSelf.lotteryNumList.count > 0)
+                        {
+                            [strongSelf.menualPopView configForMenualValue:[strongSelf.lotteryNumList lastObject] withSelectMode:(strongSelf.lotteryNumList.count == 1 ? BTTOneWaySelect : BTTTwoWaySelect)];
+                            [strongSelf.lotteryNumList removeLastObject];
+                        }
+                        
+                    }else
+                    {
+                        //下一張
+                        [strongSelf.lotteryNumList addObject:nextCouponNum];
+                        [strongSelf.menualPopView configForMenualValue:@"empty" withSelectMode:(strongSelf.lotteryNumList.count == strongSelf.chanceCount-1 ? BTTOneWaySelectAndConfirm : BTTTwoWaySelect)];
+                        if ([confirmSelect isEqualToString:@"confirmSelect"])
+                        {
+                            [popView dismiss];
+                            
+                            [strongSelf assignDragonBoatLotteryWithMode:@"2"
+                                                             withNumber:[NSString stringWithFormat:@"%ld",weakSelf.chanceCount]
+                                                    withLotteryNumValue:strongSelf.lotteryNumList.copy
+                                                              withGroup:nil
+                                                        completionBlock:^(NSArray * _Nullable lotteryArray) {
+                                [MBProgressHUD showSuccess:@"选码成功" toView:nil];
+                            }];
+                        }
+                    }
+                };
+                
+            }
+        };
+    }
 }
 - (void)logoutSuccess:(NSNotification *)notifi {
     self.isLogin = NO;

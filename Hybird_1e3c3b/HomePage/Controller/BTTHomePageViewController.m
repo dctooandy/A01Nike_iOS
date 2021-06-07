@@ -180,11 +180,16 @@
                 [self showDragonBoat];
             }
         }
+        
         //暫時寫出來
+        
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:BTShowDBPopView])
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:BTShowDBPopView];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
         [self loadDragonBoatData];
 
-
-        NSArray * testArray = [self randomArrayWithInt:20];
         [BTTHttpManager requestUnReadMessageNum:nil];
         NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
         if (![NSDate isToday:timestamp]) {
@@ -195,9 +200,7 @@
         }
     }
 }
--(void)assignLotteryWithMode:(NSString *)mode withNumber:(NSString *)number withLotteryNumValue:(NSArray *)lotteryNumValue{
-    [self assignDragonBoatLotteryWithMode:mode withNumber:number withLotteryNumValue:lotteryNumValue withGroup:nil];
-}
+
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     if (self.idDisable) {

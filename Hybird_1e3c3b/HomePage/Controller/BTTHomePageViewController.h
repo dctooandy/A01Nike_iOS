@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL idDisable;
 
 - (void)setupElements;
-- (void)assignLotteryWithMode:(NSString *)mode withNumber:(NSString *)number withLotteryNumValue:(NSArray *)lotteryNumValue;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -106,10 +106,10 @@
         if (self.callBackBlock) {
             if (self.isConfirmSelect == YES)
             {
-                self.callBackBlock([NSString stringWithFormat:@"[%@,%@,%@,%@,%@]",self.stringOne,self.stringTwo,self.stringThree,self.stringFour,self.stringFive],@"confirmSelect",@"");
+                self.callBackBlock([NSString stringWithFormat:@"%@,%@,%@,%@,%@",self.stringOne,self.stringTwo,self.stringThree,self.stringFour,self.stringFive],@"confirmSelect",@"");
             }else
             {
-                self.callBackBlock([NSString stringWithFormat:@"[%@,%@,%@,%@,%@]",self.stringOne,self.stringTwo,self.stringThree,self.stringFour,self.stringFive],@"",@"");
+                self.callBackBlock([NSString stringWithFormat:@"%@,%@,%@,%@,%@",self.stringOne,self.stringTwo,self.stringThree,self.stringFour,self.stringFive],@"",@"");
             }
             [self resetCurrentCouponArray];
             [self resetAllStackView];

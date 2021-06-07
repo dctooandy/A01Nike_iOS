@@ -45,10 +45,13 @@
     if ([sender.titleLabel.text isEqualToString:@"○"])
     {
         [sender setTitle:@"◎" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:BTShowDBPopView];
     }else
     {
         [sender setTitle:@"○" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:BTShowDBPopView];
     }
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self layoutSubviews];
 }
 
