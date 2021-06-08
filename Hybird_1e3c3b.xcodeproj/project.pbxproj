@@ -669,6 +669,11 @@
 		4135A733263A667400D3BF17 /* BTTLiCaiInDetailPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A731263A667400D3BF17 /* BTTLiCaiInDetailPopView.m */; };
 		4135A738263AAE4A00D3BF17 /* BTTInterestCreditLogsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A737263AAE4A00D3BF17 /* BTTInterestCreditLogsModel.m */; };
 		4135A742263AB93200D3BF17 /* BTTLiCaiConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A73B263AB89F00D3BF17 /* BTTLiCaiConfigModel.m */; };
+		4135C70B266F724100C3A9E9 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
+		4135C714266F736900C3A9E9 /* BTTLiCaiOutRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135C70E266F736800C3A9E9 /* BTTLiCaiOutRecordCell.m */; };
+		4135C715266F736900C3A9E9 /* BTTLiCaiInRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135C70F266F736800C3A9E9 /* BTTLiCaiInRecordCell.xib */; };
+		4135C716266F736900C3A9E9 /* BTTLiCaiInRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135C710266F736900C3A9E9 /* BTTLiCaiInRecordCell.m */; };
+		4135C717266F736900C3A9E9 /* BTTLiCaiOutRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135C713266F736900C3A9E9 /* BTTLiCaiOutRecordCell.xib */; };
 		413E324E251B3520000804E2 /* BTTCreditRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413E324B251B3520000804E2 /* BTTCreditRecordController.m */; };
 		413E324F251B3520000804E2 /* BTTCreditRecordController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 413E324D251B3520000804E2 /* BTTCreditRecordController+LoadData.m */; };
 		413E3254251B352A000804E2 /* BTTDepositRecordController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 413E3250251B3529000804E2 /* BTTDepositRecordController+LoadData.m */; };
@@ -1953,6 +1958,12 @@
 		4135A737263AAE4A00D3BF17 /* BTTInterestCreditLogsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTInterestCreditLogsModel.m; sourceTree = "<group>"; };
 		4135A73B263AB89F00D3BF17 /* BTTLiCaiConfigModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiConfigModel.m; sourceTree = "<group>"; };
 		4135A73C263AB89F00D3BF17 /* BTTLiCaiConfigModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiConfigModel.h; sourceTree = "<group>"; };
+		4135C70E266F736800C3A9E9 /* BTTLiCaiOutRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiOutRecordCell.m; sourceTree = "<group>"; };
+		4135C70F266F736800C3A9E9 /* BTTLiCaiInRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiInRecordCell.xib; sourceTree = "<group>"; };
+		4135C710266F736900C3A9E9 /* BTTLiCaiInRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiInRecordCell.m; sourceTree = "<group>"; };
+		4135C711266F736900C3A9E9 /* BTTLiCaiOutRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiOutRecordCell.h; sourceTree = "<group>"; };
+		4135C712266F736900C3A9E9 /* BTTLiCaiInRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiInRecordCell.h; sourceTree = "<group>"; };
+		4135C713266F736900C3A9E9 /* BTTLiCaiOutRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiOutRecordCell.xib; sourceTree = "<group>"; };
 		413E324A251B3520000804E2 /* BTTCreditRecordController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTCreditRecordController+LoadData.h"; sourceTree = "<group>"; };
 		413E324B251B3520000804E2 /* BTTCreditRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTCreditRecordController.m; sourceTree = "<group>"; };
 		413E324C251B3520000804E2 /* BTTCreditRecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTCreditRecordController.h; sourceTree = "<group>"; };
@@ -2395,6 +2406,7 @@
 				3AD9CE2B2167107B00685B43 /* libilbccodec-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */,
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
+				4135C70B266F724100C3A9E9 /* libboringssl_simulator.a in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
@@ -4524,6 +4536,12 @@
 				4135A6E3263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.h */,
 				4135A6E5263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.m */,
 				4135A6E1263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.xib */,
+				4135C712266F736900C3A9E9 /* BTTLiCaiInRecordCell.h */,
+				4135C710266F736900C3A9E9 /* BTTLiCaiInRecordCell.m */,
+				4135C70F266F736800C3A9E9 /* BTTLiCaiInRecordCell.xib */,
+				4135C711266F736900C3A9E9 /* BTTLiCaiOutRecordCell.h */,
+				4135C70E266F736800C3A9E9 /* BTTLiCaiOutRecordCell.m */,
+				4135C713266F736900C3A9E9 /* BTTLiCaiOutRecordCell.xib */,
 			);
 			path = LiCai;
 			sourceTree = "<group>";
@@ -5514,6 +5532,7 @@
 				3A5AE6C122D6E22A0013E8A3 /* LIVVideoMessage_PlayButtonIcon@3x.png in Resources */,
 				3A5AE70022D6E22A0013E8A3 /* LIVVoiceItem_highlight@2x.png in Resources */,
 				4196BEF1255BC21B00F41EED /* BTTWithdrawToUsdtPromoPop.xib in Resources */,
+				4135C715266F736900C3A9E9 /* BTTLiCaiInRecordCell.xib in Resources */,
 				3AAE821F219A738B003EC8B0 /* BTTLoginCell.xib in Resources */,
 				3A5AE71722D6E22B0013E8A3 /* evilGrin.gif in Resources */,
 				4184DE0C251B32CE00D433D4 /* BTTPromoRecordCell.xib in Resources */,
@@ -5531,6 +5550,7 @@
 				3A5AE71F22D6E4560013E8A3 /* LIVConfig.plist in Resources */,
 				3A5AE6B122D6E22A0013E8A3 /* LIVNavigationBackArrow@2x.png in Resources */,
 				3A5AE69522D6E22A0013E8A3 /* LIVAutoScrollTextViewShutdown@3x.png in Resources */,
+				4135C717266F736900C3A9E9 /* BTTLiCaiOutRecordCell.xib in Resources */,
 				41EAF0F6260D94290091FE09 /* hot.gif in Resources */,
 				D5C5019921B67C0800C6DA02 /* CNPayDepositSuccessVC.xib in Resources */,
 				3AAFF87D21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.xib in Resources */,
@@ -5760,6 +5780,7 @@
 				4184DD9A251B308D00D433D4 /* BTTPromoRecordModel.m in Sources */,
 				3A5F7AB521AD0E6800128E8B /* BTTVideoGamesFilterCell.m in Sources */,
 				3A5B0286234F26B000D8828B /* BTTXimaRecordController+loadData.m in Sources */,
+				4135C716266F736900C3A9E9 /* BTTLiCaiInRecordCell.m in Sources */,
 				3A11AE0D21829F4B00B1AFF4 /* BTTPTTransferController.m in Sources */,
 				3A11AE532186A6A200B1AFF4 /* BTTBookMessageController.m in Sources */,
 				D5C5018E21B4FC8C00C6DA02 /* CNPayWechatTipView.m in Sources */,
@@ -5976,6 +5997,7 @@
 				4184DDFC251B324100D433D4 /* BTTDepositRecordHeaderCell.m in Sources */,
 				413E3260251B3542000804E2 /* BTTPromoRecordController.m in Sources */,
 				3A92941E219C3A0000764E7E /* BTTRegisterSuccessController.m in Sources */,
+				4135C714266F736900C3A9E9 /* BTTLiCaiOutRecordCell.m in Sources */,
 				3AD9CD532165B2C900685B43 /* BTTPopoverAction.m in Sources */,
 				4135A742263AB93200D3BF17 /* BTTLiCaiConfigModel.m in Sources */,
 				4196BEF2255BC21B00F41EED /* BTTWithdrawToUsdtPromoPop.m in Sources */,
@@ -6420,7 +6442,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.47;
+				MARKETING_VERSION = 3.2.255;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6462,7 +6484,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.47;
+				MARKETING_VERSION = 3.2.255;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
