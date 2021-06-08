@@ -129,6 +129,13 @@ typedef enum {
     BTTStringFormatStyleOther    ///< 包含特殊符号
 }BTTStringFormatStyle;
 
+typedef enum {
+    BTTConfirmSelect = 1, ///只有一張券
+    BTTOneWaySelect, ///一張券以上的第一張
+    BTTTwoWaySelect,    ///兩張券以上
+    BTTOneWaySelectAndConfirm, ///一張券以上的最後一張
+}BTTMenualSelectMode;
+
 typedef void (^CompleteBlock)(IVJResponseObject *response);
 
 typedef void (^BTTLive800ResponseBlock)(NSString *info);
@@ -160,6 +167,9 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 #define BTTBannerDefaultWidth                      1280
 #define BTTBnnnerDefaultHeight                     440
+#define BTTDiscountDefaultCellHeight               130
+#define BTTDiscountIconWidth                       130
+#define BTTDiscountDefaultIconHeight               90
 
 #define BTTNavHeightNotLogin                       (KIsiPhoneX ? (88 + 49) : 113)
 #define BTTNavHeightLogin                          (KIsiPhoneX ? 88 : 64)
@@ -248,6 +258,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTLoginName                               @"loginName"
 
 #define BTTBindUsdtCount                           @"BTTBindUsdtCount"
+#define BTShowDBPopView                            @"BTShowDBPopView"
 /*********************************************Video Game Key********************************************************/
 #define BTTAGQJKEY                                 @"003"
 #define BTTAGGJKEY                                 @"026"
@@ -555,6 +566,9 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTLiCaiInterestSum                        @"_extra_/api/v1/ws/yeb-interest-logs-sum"
 //龍舟活動ㄦ-查询用户机会次数统计
 #define BTTDragonBoatChance                        @"_extra_/api/v1/activity/dragon-boat-festival-2021/chance"
+#define BTTDragonBoatCurrRound                     @"_extra_/api/v1/activity/dragon-boat-festival-2021/currRound"
+#define BTTDragonBoatAssignLottery                 @"_extra_/api/v1/activity/dragon-boat-festival-2021/assignLottery"
+
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)      ([UIFont systemFontOfSize:X])

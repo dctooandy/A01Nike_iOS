@@ -11,8 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTDragonBoatMenualPopView : BTTBaseAnimationPopView
-
-- (void)configForAmount:(NSInteger)amountValue;
+- (void)setCurrentCouponPage:(NSArray*)couponArray;
+- (void)configForMenualValue:(NSString*)value withSelectMode:(BTTMenualSelectMode)mode;
 
 @end
 

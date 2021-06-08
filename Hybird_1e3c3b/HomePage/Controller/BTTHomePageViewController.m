@@ -180,9 +180,16 @@
                 [self showDragonBoat];
             }
         }
-//        [self loadDragonBoatChance];
+        
         //暫時寫出來
-//        [self showDragonBoarChanceView:999];
+        
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:BTShowDBPopView])
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:BTShowDBPopView];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        [self loadDragonBoatData];
+
         [BTTHttpManager requestUnReadMessageNum:nil];
         NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
         if (![NSDate isToday:timestamp]) {

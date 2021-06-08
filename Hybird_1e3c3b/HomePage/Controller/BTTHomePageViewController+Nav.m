@@ -35,11 +35,18 @@
 #import "BTTDragonBoatPopView.h"
 #import "BTTDragonBoatChancePopView.h"
 #import "BTTDragonBoatMenualPopView.h"
+#import "BTTDragonBoatAutoPopView.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
 static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
+static const char *BTTMenualPopViewKey = "menualPopView";
 
+@interface BTTHomePageViewController (Nav)
+
+@property (nonatomic, strong) BTTDragonBoatMenualPopView *menualPopView;
+
+@end
 @implementation BTTHomePageViewController (Nav)
 
 -(void)setUpAssistiveButton {
@@ -208,36 +215,113 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         [self.navigationController pushViewController:vc animated:YES];
     };
 }
-- (void)showDragonBoarChanceView:(NSInteger )chanceCount
+- (void)showDragonBoarChanceViewWithAvailableRandom:(BOOL)availableRandom
 {
-    BTTDragonBoatChancePopView * customView = [BTTDragonBoatChancePopView viewFromXib];
-    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    [customView configForAmount:chanceCount];
-    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-    popView.isClickBGDismiss = YES;
-    [popView pop];
-    customView.dismissBlock = ^{
-        [popView dismiss];
-    };
+    
     weakSelf(weakSelf)
-    customView.btnBlock = ^(UIButton * _Nullable btn) {
-        [popView dismiss];
-        if (btn.tag ==1)
-        {//隨機
-        }else
-        {//手動
-            BTTDragonBoatMenualPopView * customView = [BTTDragonBoatMenualPopView viewFromXib];
-            customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            [customView configForAmount:chanceCount];
-            BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-            popView.isClickBGDismiss = YES;
-            [popView pop];
-            customView.dismissBlock = ^{
-                [popView dismiss];
-            };
+    NSString *showView = [[NSUserDefaults standardUserDefaults] objectForKey:BTShowDBPopView];
+    if ([showView isEqualToString:@"NO"])
+    {// 不彈窗
+        [weakSelf assignDragonBoatLotteryWithMode:@"1"
+                                         withNumber:[NSString stringWithFormat:@"%ld",weakSelf.chanceCount]
+                                withLotteryNumValue:nil
+                                          withGroup:nil
+                                    completionBlock:^(NSArray * _Nullable lotteryArray) {
             
-        }
-    };
+            printf("隨機完成");
+        }];
+        
+    }else
+    {
+        
+        
+        BTTDragonBoatChancePopView * customView = [BTTDragonBoatChancePopView viewFromXib];
+        customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [customView configForAmount:self.chanceCount withAvailableRandom:availableRandom];
+        BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+        popView.isClickBGDismiss = YES;
+        [popView pop];
+        customView.dismissBlock = ^{
+            [weakSelf dismissPopViewWithoutSelect];
+            [popView dismiss];
+        };
+        
+        customView.btnBlock = ^(UIButton * _Nullable btn) {
+            strongSelf(strongSelf)
+            [popView dismiss];
+            if (btn.tag ==1)
+            {//隨機
+                [strongSelf assignDragonBoatLotteryWithMode:@"1"
+                                                 withNumber:[NSString stringWithFormat:@"%ld",weakSelf.chanceCount]
+                                        withLotteryNumValue:nil
+                                                  withGroup:nil
+                                            completionBlock:^(NSArray * _Nullable lotteryArray) {
+                    
+                    BTTDragonBoatAutoPopView * customView = [BTTDragonBoatAutoPopView viewFromXib];
+                    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                    
+                    [customView configForCouponNum:[NSString stringWithFormat:@"%ld",self.chanceCount] couponData:lotteryArray];
+                    BTTAnimationPopView * popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+                    popView.isClickBGDismiss = YES;
+                    [popView pop];
+                    customView.dismissBlock = ^{
+                        [popView dismiss];
+                    };
+                    customView.btnBlock = ^(UIButton * _Nullable btn) {
+                        [popView dismiss];
+                        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                        vc.title = @"迎端午 赛龙舟 领奖券 300万热力回馈";
+                        vc.webConfigModel.url = @"/activity_pages/lantern-fest";
+                        vc.webConfigModel.newView = YES;
+                        [strongSelf.navigationController pushViewController:vc animated:YES];
+                    };
+                }];
+            }else
+            {//手動
+                self.menualPopView = [BTTDragonBoatMenualPopView viewFromXib];
+                self.menualPopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                [self.menualPopView configForMenualValue:@"empty" withSelectMode:(strongSelf.chanceCount == 1 ? BTTConfirmSelect : BTTTwoWaySelect)];
+                BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:self.menualPopView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+                popView.isClickBGDismiss = YES;
+                [popView pop];
+                self.menualPopView.dismissBlock = ^{
+                    [strongSelf dismissPopViewWithoutSelect];
+                    [popView dismiss];
+                };
+                self.menualPopView.callBackBlock = ^(NSString * _Nullable nextCouponNum, NSString * _Nullable confirmSelect, NSString * _Nullable captchaId) {
+                    
+                    if ([nextCouponNum isEqualToString:@""])
+                    {
+                        //上一張
+                        if (strongSelf.lotteryNumList.count > 0)
+                        {
+                            [strongSelf.menualPopView configForMenualValue:[strongSelf.lotteryNumList lastObject] withSelectMode:(strongSelf.lotteryNumList.count == 1 ? BTTOneWaySelect : BTTTwoWaySelect)];
+                            [strongSelf.lotteryNumList removeLastObject];
+                        }
+                        
+                    }else
+                    {
+                        //下一張
+                        [strongSelf.lotteryNumList addObject:nextCouponNum];
+                        [strongSelf.menualPopView configForMenualValue:@"empty" withSelectMode:(strongSelf.lotteryNumList.count == strongSelf.chanceCount-1 ? BTTOneWaySelectAndConfirm : BTTTwoWaySelect)];
+                        if ([confirmSelect isEqualToString:@"confirmSelect"])
+                        {
+                            [popView dismiss];
+                            
+                            [strongSelf assignDragonBoatLotteryWithMode:@"2"
+                                                             withNumber:[NSString stringWithFormat:@"%ld",weakSelf.chanceCount]
+                                                    withLotteryNumValue:strongSelf.lotteryNumList.copy
+                                                              withGroup:nil
+                                                        completionBlock:^(NSArray * _Nullable lotteryArray) {
+                                [MBProgressHUD showSuccess:@"选码成功" toView:nil];
+                            }];
+                        }
+                    }
+                };
+                
+            }
+        };
+    }
 }
 - (void)logoutSuccess:(NSNotification *)notifi {
     self.isLogin = NO;
@@ -632,4 +716,13 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 - (BTTLoginOrRegisterBtsView *)loginAndRegisterBtnsView {
     return objc_getAssociatedObject(self, &BTTLoginAndRegisterKey);
 }
+- (void)setMenualPopView:(BTTDragonBoatMenualPopView *)menualPopView {
+    objc_setAssociatedObject(self, &BTTMenualPopViewKey, menualPopView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+
+- (BTTDragonBoatMenualPopView *)menualPopView {
+    return objc_getAssociatedObject(self, &BTTMenualPopViewKey);
+}
+
 @end

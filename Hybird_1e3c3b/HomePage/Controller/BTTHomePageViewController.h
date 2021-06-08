@@ -23,7 +23,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL idDisable;
 
 - (void)setupElements;
-
 @end
 
 NS_ASSUME_NONNULL_END
