@@ -75,19 +75,22 @@
         [BRStringPickerView showStringPickerWithTitle:@"请选择金额" dataSource:self.agin defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
             cell.textField.text = selectValue;
             self.aginStr = selectValue;
-            if (self.aginStr.length && self.bbinStr.length) {
+//            if (self.aginStr.length && self.bbinStr.length) {
+//                [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"BetLimit"];
+//            }
+            if (self.aginStr.length) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"BetLimit"];
             }
         }];
     } else if (indexPath.row == 1) {
-        BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
-        [BRStringPickerView showStringPickerWithTitle:@"请选择金额" dataSource:self.bbin defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
-            cell.textField.text = selectValue;
-            self.bbinStr = selectValue;
-            if (self.aginStr.length && self.bbinStr.length) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"BetLimit"];
-            }
-        }];
+//        BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//        [BRStringPickerView showStringPickerWithTitle:@"请选择金额" dataSource:self.bbin defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
+//            cell.textField.text = selectValue;
+//            self.bbinStr = selectValue;
+//            if (self.aginStr.length && self.bbinStr.length) {
+//                [[NSNotificationCenter defaultCenter] postNotificationName:BTTPublicBtnEnableNotification object:@"BetLimit"];
+//            }
+//        }];
     }
 }
 
@@ -125,8 +128,8 @@
 
 - (void)setupElements {
     NSMutableArray *elementsHight = [NSMutableArray array];
-    for (int i = 0; i < 3; i ++) {
-        if (i == 2) {
+    for (int i = 0; i < 2; i ++) {
+        if (i == 1) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
         } else {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
@@ -141,7 +144,8 @@
 - (NSMutableArray *)sheetDatas {
     if (!_sheetDatas) {
         _sheetDatas = [NSMutableArray array];
-        NSArray *titles = @[@"AG国际厅",@"波音厅"];
+//        NSArray *titles = @[@"AG国际厅",@"波音厅"];
+        NSArray *titles = @[@"AG国际厅"];
         NSArray *placeholders = @[@"请选择金额",@"请选择金额"];
         for (NSString *title in titles) {
             NSInteger index = [titles indexOfObject:title];
