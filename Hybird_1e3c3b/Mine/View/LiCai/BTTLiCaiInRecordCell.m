@@ -57,10 +57,10 @@
     self.orderNumberLab.text = self.model.billno;
     self.statusLab.text = [self statusToStr:[self.model.status integerValue]];
     
-    double amount = [self.model.amount doubleValue];
+    double amount = [self.model.yebOriginalAmount doubleValue] > 0.00 ? [self.model.yebOriginalAmount doubleValue]:[self.model.amount doubleValue];
     self.inAmountLab.text = [PublicMethod transferNumToThousandFormat:[PublicMethod calculateTwoDecimals:amount]];
     
-    self.balanceLab.text = @"餘額";
+    self.balanceLab.text = [PublicMethod transferNumToThousandFormat:[PublicMethod calculateTwoDecimals:[self.model.amount doubleValue]]];
 }
 
 -(NSString *)statusToStr:(NSInteger)status {

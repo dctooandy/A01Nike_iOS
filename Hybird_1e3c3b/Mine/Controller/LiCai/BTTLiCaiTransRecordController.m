@@ -8,7 +8,6 @@
 
 #import "BTTLiCaiTransRecordController.h"
 #import "BTTLiCaiTransRecordTopBtnView.h"
-#import "BTTLiCaiRecordCell.h"
 #import "BTTLiCaiInterestRateBillCell.h"
 #import "BTTVideoGamesNoDataCell.h"
 #import "BTTLiCaiInRecordCell.h"
@@ -147,7 +146,6 @@
         make.top.equalTo(self.btnView.mas_bottom);
         make.left.bottom.right.equalTo(self.view);
     }];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTLiCaiRecordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTLiCaiRecordCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTLiCaiInterestRateBillCell" bundle:nil] forCellWithReuseIdentifier:@"BTTLiCaiInterestRateBillCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTVideoGamesNoDataCell" bundle:nil] forCellWithReuseIdentifier:@"BTTVideoGamesNoDataCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTLiCaiInRecordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTLiCaiInRecordCell"];

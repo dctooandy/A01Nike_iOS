@@ -644,7 +644,6 @@
 		4135A6D8263941AA00D3BF17 /* BTTLiCaiTransRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6D5263941AA00D3BF17 /* BTTLiCaiTransRecordController.m */; };
 		4135A6F7263941D000D3BF17 /* BTTLiCaiTransRecordTopBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6DC263941CD00D3BF17 /* BTTLiCaiTransRecordTopBtnView.m */; };
 		4135A6F9263941D000D3BF17 /* BTTLiCaiTransRecordTopBtnView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6DE263941CD00D3BF17 /* BTTLiCaiTransRecordTopBtnView.xib */; };
-		4135A6FA263941D000D3BF17 /* BTTLiCaiRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6DF263941CE00D3BF17 /* BTTLiCaiRecordCell.m */; };
 		4135A6FB263941D000D3BF17 /* BTTLiCaiTotalAmountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6E0263941CE00D3BF17 /* BTTLiCaiTotalAmountCell.m */; };
 		4135A6FC263941D000D3BF17 /* BTTLiCaiInterestRateBillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6E1263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.xib */; };
 		4135A6FE263941D000D3BF17 /* BTTLiCaiOutDetailPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6E4263941CE00D3BF17 /* BTTLiCaiOutDetailPopView.m */; };
@@ -654,7 +653,6 @@
 		4135A702263941D000D3BF17 /* BTTLiCaiBtnCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6EC263941CF00D3BF17 /* BTTLiCaiBtnCell.xib */; };
 		4135A703263941D000D3BF17 /* BTTLiCaiOutDetailPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6ED263941CF00D3BF17 /* BTTLiCaiOutDetailPopView.xib */; };
 		4135A704263941D000D3BF17 /* BTTLiCaiOutDetailPopViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6EE263941CF00D3BF17 /* BTTLiCaiOutDetailPopViewCell.m */; };
-		4135A705263941D000D3BF17 /* BTTLiCaiRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6F0263941CF00D3BF17 /* BTTLiCaiRecordCell.xib */; };
 		4135A706263941D000D3BF17 /* BTTLiCaiBtnCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6F1263941CF00D3BF17 /* BTTLiCaiBtnCell.m */; };
 		4135A707263941D000D3BF17 /* BTTLiCaiBannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6F2263941CF00D3BF17 /* BTTLiCaiBannerCell.xib */; };
 		4135A708263941D000D3BF17 /* BTTLiCaiTotalAmountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135A6F6263941D000D3BF17 /* BTTLiCaiTotalAmountCell.xib */; };
@@ -1917,7 +1915,6 @@
 		4135A6D6263941AA00D3BF17 /* BTTLiCaiTransRecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiTransRecordController.h; sourceTree = "<group>"; };
 		4135A6DC263941CD00D3BF17 /* BTTLiCaiTransRecordTopBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiTransRecordTopBtnView.m; sourceTree = "<group>"; };
 		4135A6DE263941CD00D3BF17 /* BTTLiCaiTransRecordTopBtnView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiTransRecordTopBtnView.xib; sourceTree = "<group>"; };
-		4135A6DF263941CE00D3BF17 /* BTTLiCaiRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiRecordCell.m; sourceTree = "<group>"; };
 		4135A6E0263941CE00D3BF17 /* BTTLiCaiTotalAmountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiTotalAmountCell.m; sourceTree = "<group>"; };
 		4135A6E1263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiInterestRateBillCell.xib; sourceTree = "<group>"; };
 		4135A6E3263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiInterestRateBillCell.h; sourceTree = "<group>"; };
@@ -1933,10 +1930,8 @@
 		4135A6ED263941CF00D3BF17 /* BTTLiCaiOutDetailPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiOutDetailPopView.xib; sourceTree = "<group>"; };
 		4135A6EE263941CF00D3BF17 /* BTTLiCaiOutDetailPopViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiOutDetailPopViewCell.m; sourceTree = "<group>"; };
 		4135A6EF263941CF00D3BF17 /* BTTLiCaiTransRecordTopBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiTransRecordTopBtnView.h; sourceTree = "<group>"; };
-		4135A6F0263941CF00D3BF17 /* BTTLiCaiRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiRecordCell.xib; sourceTree = "<group>"; };
 		4135A6F1263941CF00D3BF17 /* BTTLiCaiBtnCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTLiCaiBtnCell.m; sourceTree = "<group>"; };
 		4135A6F2263941CF00D3BF17 /* BTTLiCaiBannerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiBannerCell.xib; sourceTree = "<group>"; };
-		4135A6F3263941CF00D3BF17 /* BTTLiCaiRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiRecordCell.h; sourceTree = "<group>"; };
 		4135A6F4263941D000D3BF17 /* BTTLiCaiOutDetailPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiOutDetailPopView.h; sourceTree = "<group>"; };
 		4135A6F5263941D000D3BF17 /* BTTLiCaiOutDetailPopViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTLiCaiOutDetailPopViewCell.h; sourceTree = "<group>"; };
 		4135A6F6263941D000D3BF17 /* BTTLiCaiTotalAmountCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTLiCaiTotalAmountCell.xib; sourceTree = "<group>"; };
@@ -4530,9 +4525,6 @@
 				4135A6EF263941CF00D3BF17 /* BTTLiCaiTransRecordTopBtnView.h */,
 				4135A6DC263941CD00D3BF17 /* BTTLiCaiTransRecordTopBtnView.m */,
 				4135A6DE263941CD00D3BF17 /* BTTLiCaiTransRecordTopBtnView.xib */,
-				4135A6F3263941CF00D3BF17 /* BTTLiCaiRecordCell.h */,
-				4135A6DF263941CE00D3BF17 /* BTTLiCaiRecordCell.m */,
-				4135A6F0263941CF00D3BF17 /* BTTLiCaiRecordCell.xib */,
 				4135A6E3263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.h */,
 				4135A6E5263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.m */,
 				4135A6E1263941CE00D3BF17 /* BTTLiCaiInterestRateBillCell.xib */,
@@ -5592,7 +5584,6 @@
 				3A5AE6B822D6E22A0013E8A3 /* LIVFileMessage_TypePPT@3x.png in Resources */,
 				3A5AE6A622D6E22A0013E8A3 /* LIVAutoScrollTextView11.png in Resources */,
 				3A5AE68822D6E22A0013E8A3 /* LIVVideoCamera_flashOff@2x.png in Resources */,
-				4135A705263941D000D3BF17 /* BTTLiCaiRecordCell.xib in Resources */,
 				3A75A17722114DB100584A35 /* BTTLoginNoRegisterCell.xib in Resources */,
 				3A5AE6E622D6E22A0013E8A3 /* LIVMediaFileSaveToLibraryButton@3x.png in Resources */,
 				3A5AE67E22D6E22A0013E8A3 /* TZImagePickerController.bundle in Resources */,
@@ -5919,7 +5910,6 @@
 				3AA7892021FFF2580047A372 /* SDWebImageFrame.m in Sources */,
 				D31B0EEB23B451B0003666BA /* BTTAddUSDTController.m in Sources */,
 				3AD9CD552165B2C900685B43 /* BTTPopoverViewCell.m in Sources */,
-				4135A6FA263941D000D3BF17 /* BTTLiCaiRecordCell.m in Sources */,
 				413E326D251B3553000804E2 /* BTTXmRecordController+LoadData.m in Sources */,
 				3A11AE672186D94B00B1AFF4 /* BTTThisWeekCell.m in Sources */,
 				3AAFF8B821DDF8D300F875B1 /* BTTSaveMoneyModifyViewController.m in Sources */,
