@@ -264,7 +264,7 @@
         weakSelf(weakSelf)
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [IVLAManager singleEventId:@"A01_bankcard_update" errorCode:@"" errorMsg:@"" customsData:@{}];
-            [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
+//            [BTTHttpManager fetchBindStatusWithUseCache:NO completionBlock:nil];
             [BTTHttpManager fetchBankListWithUseCache:NO completion:nil];
             BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
             vc.mobileCodeType = self.addCardType;

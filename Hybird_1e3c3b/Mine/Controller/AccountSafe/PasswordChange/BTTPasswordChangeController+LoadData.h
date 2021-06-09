@@ -11,7 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTPasswordChangeController (LoadData)
-//- (void)sendCodeByPhone;
 - (void)sendCode;
 - (void)submitVerifySmsCode;
 - (void)submitChange;

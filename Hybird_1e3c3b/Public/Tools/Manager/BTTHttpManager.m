@@ -77,22 +77,22 @@
     }
 }
 //处理绑定状态获取结果
-+ (void)fetchBindStatusWithUseCache:(BOOL)useCache completionBlock:(KYHTTPCallBack)completionBlock
-{
-    NSString *typeList = @"phone;email;bank;btc";
-    NSDictionary *params = @{@"typeList":typeList};
-    NSString *url = BTTIsBindStatusAPI;
-    weakSelf(weakSelf)
-    if (useCache) {
-        [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            [weakSelf fetchBindStatusResult:response completionBlock:completionBlock];
-        }];
-    } else {
-        [self sendRequestWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            [weakSelf fetchBindStatusResult:response completionBlock:completionBlock];
-        }];
-    }
-}
+//+ (void)fetchBindStatusWithUseCache:(BOOL)useCache completionBlock:(KYHTTPCallBack)completionBlock
+//{
+//    NSString *typeList = @"phone;email;bank;btc";
+//    NSDictionary *params = @{@"typeList":typeList};
+//    NSString *url = BTTIsBindStatusAPI;
+//    weakSelf(weakSelf)
+//    if (useCache) {
+//        [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//            [weakSelf fetchBindStatusResult:response completionBlock:completionBlock];
+//        }];
+//    } else {
+//        [self sendRequestWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//            [weakSelf fetchBindStatusResult:response completionBlock:completionBlock];
+//        }];
+//    }
+//}
 + (void)fetchBindStatusResult:(NSDictionary *)result completionBlock:(KYHTTPCallBack)completionBlock {
 }
 
@@ -141,21 +141,21 @@
 {
     [self sendRequestWithUrl:@"users/updatePhone" paramters:params completionBlock:completion];
 }
-+ (void)fetchBTCRateWithUseCache:(BOOL)useCache
-{
-    NSDictionary *params = @{@"amount":@"1",@"querytype" : @"01"};
-    NSString *url = @"public/payment/btcRate";
-    weakSelf(weakSelf)
-    if (useCache) {
-        [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            [weakSelf fetchBTCRateResult:response];
-        }];
-    } else {
-        [self sendRequestWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            [weakSelf fetchBTCRateResult:response];
-        }];
-    }
-}
+//+ (void)fetchBTCRateWithUseCache:(BOOL)useCache
+//{
+//    NSDictionary *params = @{@"amount":@"1",@"querytype" : @"01"};
+//    NSString *url = @"public/payment/btcRate";
+//    weakSelf(weakSelf)
+//    if (useCache) {
+//        [self sendRequestUseCacheWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//            [weakSelf fetchBTCRateResult:response];
+//        }];
+//    } else {
+//        [self sendRequestWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//            [weakSelf fetchBTCRateResult:response];
+//        }];
+//    }
+//}
 + (void)fetchBTCRateResult:(IVJResponseObject *)result {
     if (result.body && [result.body isKindOfClass:[NSDictionary class]] && [result.body valueForKey:@"btcrate"]) {
         NSString *rate = [result.body valueForKey:@"btcrate"];

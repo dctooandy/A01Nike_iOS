@@ -10,34 +10,11 @@
 #import "BTTBindingMobileController.h"
 
 @implementation BTTPasswordChangeController (LoadData)
-//-(void)sendCodeByPhone {
-//    [self.view endEditing:YES];
-//    NSMutableDictionary *params = @{}.mutableCopy;
-//    params[@"use"] = @"3";
-//    NSString *phone = [self getPhoneTF].text;
-//    params[@"mobileNo"] = [IVRsaEncryptWrapper encryptorString:phone];
-//    weakSelf(weakSelf)
-//    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-//    [IVNetwork requestPostWithUrl:BTTSendMsgCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-//        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
-//        IVJResponseObject *result = response;
-//        if ([result.head.errCode isEqualToString:@"0000"]) {
-//            [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
-//            self.messageId = result.body[@"messageId"];
-//            [[weakSelf getCodeTF] setEnabled:true];
-//            [[weakSelf getVerifyCell] countDown];
-//        }else{
-//            [[weakSelf getCodeTF] setEnabled:false];
-//            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
-//        }
-//
-//    }];
-//}
 
 -(void)sendCode {
     [self.view endEditing:YES];
     NSMutableDictionary *params = @{}.mutableCopy;
-    params[@"use"] = @"10";
+    params[@"use"] = @"20";
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
@@ -61,7 +38,7 @@
     NSMutableDictionary *params = @{}.mutableCopy;
     params[@"messageId"] = self.messageId;
     params[@"smsCode"] = [self getCodeTF].text;
-    params[@"use"] = @"10";
+    params[@"use"] = @"20";
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
     weakSelf(weakSelf)
     [IVNetwork requestPostWithUrl:BTTVerifySmsCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
@@ -135,7 +112,7 @@
         type = 2;
     } else if (isWithdraw) {
         type = [self haveWithdrawPwd] ? 3:4;
-        params[@"use"]= @10;
+        params[@"use"] = @20;
         params[@"messageId"] = self.messageId;
         params[@"validateId"] = self.validateId;
     }
