@@ -116,9 +116,9 @@ static const char *BTTChanceCountKey = "chanceCount";
 - (void)loadDragonBoatChance
 {
     weakSelf(weakSelf)
-    NSDictionary *params = @{@"productId":@"A01",
-                             @"loginName":[IVNetwork savedUserInfo].loginName};
-    [IVNetwork requestPostWithUrl:BTTDragonBoatChance paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//    NSDictionary *params = @{@"productId":@"A01",
+//                             @"loginName":[IVNetwork savedUserInfo].loginName};
+    [IVNetwork requestPostWithUrl:BTTDragonBoatChance paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         strongSelf(strongSelf)
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
@@ -131,11 +131,15 @@ static const char *BTTChanceCountKey = "chanceCount";
                         printf("\n用户机会次数:%ld",strongSelf.chanceCount);
                         if (strongSelf.chanceCount > 0)
                         {
-                            [strongSelf showDragonBoarChanceViewWithAvailableRandom:(weakSelf.availableNum == 0 ? NO:YES)];
+                            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                                [strongSelf showDragonBoarChanceViewWithAvailableRandom:(weakSelf.availableNum == 0 ? NO:YES)];
+                            }];
                         }else
                         {
                             //測試
-//                            [strongSelf toTestTheLAvailableView];
+//                            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//                                [strongSelf toTestTheLAvailableView];
+//                            }];
                         }
                     }
                 }
@@ -191,9 +195,8 @@ static const char *BTTChanceCountKey = "chanceCount";
         [self loadDragonBoatCurrRound:group];
     });
     dispatch_group_notify(group,queue, ^{
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self loadDragonBoatChance];
-        }];
+        
+        [self loadDragonBoatChance];
      
     });
 }
