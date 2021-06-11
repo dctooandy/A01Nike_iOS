@@ -85,6 +85,23 @@ static const char *BTTChanceCountKey = "chanceCount";
     });
 }
 
+-(void)loadDragonBoatData {
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_queue_t queue = dispatch_queue_create("homepage.dragonboatdata", DISPATCH_QUEUE_CONCURRENT);
+ 
+    
+    dispatch_group_async(group, queue, ^{
+        dispatch_group_enter(group);
+        [self loadDragonBoatCurrRound:group];
+    });
+    dispatch_group_notify(group,queue, ^{
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self loadDragonBoatChance];
+        }];
+     
+    });
+}
+
 -(void)loadBiBiCun {
     [IVNetwork requestPostWithUrl:BBTBiBiCunAlert paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
@@ -111,14 +128,12 @@ static const char *BTTChanceCountKey = "chanceCount";
         }
     }];
 }
+
 //2021龍舟選碼彈窗
 //查询用户机会次数统计
-- (void)loadDragonBoatChance
-{
+- (void)loadDragonBoatChance {
     weakSelf(weakSelf)
-    NSDictionary *params = @{@"productId":@"A01",
-                             @"loginName":[IVNetwork savedUserInfo].loginName};
-    [IVNetwork requestPostWithUrl:BTTDragonBoatChance paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTDragonBoatChance paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         strongSelf(strongSelf)
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
@@ -129,35 +144,32 @@ static const char *BTTChanceCountKey = "chanceCount";
                         NSInteger chanceValue = [[NSString stringWithFormat:@"%@",resultBody[@"availableTimes"]] integerValue];
                         strongSelf.chanceCount = chanceValue;
                         printf("\n用户机会次数:%ld",strongSelf.chanceCount);
-                        if (strongSelf.chanceCount > 0)
-                        {
+                        if (strongSelf.chanceCount > 0) {
                             [strongSelf showDragonBoarChanceViewWithAvailableRandom:(weakSelf.availableNum == 0 ? NO:YES)];
-                        }else
-                        {
+                            
+                        } else {
                             //測試
 //                            [strongSelf toTestTheLAvailableView];
                         }
                     }
                 }
             }
-        }else
-        {
+        } else {
             //測試
 //            [strongSelf toTestTheLAvailableView];
         }
     }];
 }
-- (void)toTestTheLAvailableView
-{
+
+- (void)toTestTheLAvailableView {
     //測試
     self.chanceCount = 3;
     [self showDragonBoarChanceViewWithAvailableRandom:(self.availableNum == 0 ? NO:YES)];
 }
-- (void)loadDragonBoatCurrRound:(dispatch_group_t)group
-{
+
+- (void)loadDragonBoatCurrRound:(dispatch_group_t)group {
     weakSelf(weakSelf)
-    NSDictionary *params = @{@"productId":@"A01"};
-    [IVNetwork requestPostWithUrl:BTTDragonBoatCurrRound paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTDragonBoatCurrRound paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if ([result.body isKindOfClass:[NSDictionary class]]) {
@@ -174,29 +186,13 @@ static const char *BTTChanceCountKey = "chanceCount";
                     }
                 }
             }
-        }else{
+        } else {
             weakSelf.availableNum = 1;
             dispatch_group_leave(group);
         }
     }];
 }
--(void)loadDragonBoatData
-{
-    dispatch_group_t group = dispatch_group_create();
-    dispatch_queue_t queue = dispatch_queue_create("homepage.dragonboatdata", DISPATCH_QUEUE_CONCURRENT);
- 
-    
-    dispatch_group_async(group, queue, ^{
-        dispatch_group_enter(group);
-        [self loadDragonBoatCurrRound:group];
-    });
-    dispatch_group_notify(group,queue, ^{
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self loadDragonBoatChance];
-        }];
-     
-    });
-}
+
 // mode <string> 1:隨機選碼;2:指定選碼
 // number <string> 彩票張數
 // lotteryNumValue <array>
@@ -207,12 +203,9 @@ static const char *BTTChanceCountKey = "chanceCount";
                         completionBlock:(void (^)(NSArray * _Nullable lotteryArray))completionHandler
 {
     weakSelf(weakSelf)
-    NSMutableString *params = @{@"productId":@"A01",
-                                @"loginName":[IVNetwork savedUserInfo].loginName,
-                                @"mode":mode,
+    NSMutableString *params = @{@"mode":mode,
                                 @"number":number}.mutableCopy;
-    if (lotteryNumValue && [mode isEqualToString:@"2"])
-    {
+    if (lotteryNumValue && [mode isEqualToString:@"2"]) {
         [params setValue:lotteryNumValue forKey:@"lotteryNumValue"];
     }
     [IVNetwork requestPostWithUrl:BTTDragonBoatAssignLottery paramters:params.copy completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
@@ -220,11 +213,9 @@ static const char *BTTChanceCountKey = "chanceCount";
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if ([result.body[@"result"] isKindOfClass:[NSDictionary class]]) {
                 NSDictionary * resultBody = result.body[@"result"];
-                if (resultBody[@"lotteryNumber"] && [resultBody[@"lotteryNumber"] isKindOfClass:[NSArray class]])
-                {
+                if (resultBody[@"lotteryNumber"] && [resultBody[@"lotteryNumber"] isKindOfClass:[NSArray class]]) {
                     NSArray *lotteryArray = resultBody[@"lotteryNumber"];
-                    if (completionHandler)
-                    {
+                    if (completionHandler) {
                         completionHandler(lotteryArray);
                     }
                 }
@@ -243,8 +234,7 @@ static const char *BTTChanceCountKey = "chanceCount";
 //                    }
 //                }
 //            }
-        }else
-        {
+        } else {
             //測試
             
 //            if (completionHandler)
@@ -252,22 +242,18 @@ static const char *BTTChanceCountKey = "chanceCount";
 //                completionHandler([weakSelf randomArrayWithInt:[number intValue]]);
 //            }
         }
-        if (group)
-        {
+        if (group) {
             dispatch_group_leave(group);
         }
     }];
 }
 
-- (void)dismissPopViewWithoutSelect
-{
-    if ((self.chanceCount - self.lotteryNumList.count) > 0)
-    {
+- (void)dismissPopViewWithoutSelect {
+    if ((self.chanceCount - self.lotteryNumList.count) > 0) {
         //隨機
         NSString *numberString = [NSString stringWithFormat:@"%ld",self.chanceCount - self.lotteryNumList.count];
         NSString * modeString = @"1";
-        if (self.availableNum == 0)
-        {
+        if (self.availableNum == 0) {
             modeString = @"2";
         }
         dispatch_group_t group = dispatch_group_create();
@@ -281,10 +267,8 @@ static const char *BTTChanceCountKey = "chanceCount";
             [MBProgressHUD showSuccess:@"选码成功" toView:nil];
         }];
         
-        
         dispatch_group_notify(group,queue, ^{
-            if (self.lotteryNumList.count > 0)
-            {
+            if (self.lotteryNumList.count > 0) {
                 [self assignDragonBoatLotteryWithMode:@"2"
                                            withNumber:[NSString stringWithFormat:@"%ld",self.lotteryNumList.count]
                                   withLotteryNumValue:self.lotteryNumList.copy
@@ -294,8 +278,8 @@ static const char *BTTChanceCountKey = "chanceCount";
         });
     }
 }
-- (NSArray *)randomArrayWithInt:(NSInteger)sender
-{
+
+- (NSArray *)randomArrayWithInt:(NSInteger)sender {
     NSMutableArray * resultArray = [[NSMutableArray alloc] init];
     for (int i = 0 ; i < sender ; i++) {
         NSString *r1 = [NSString stringWithFormat:@"%u",(arc4random() % 10)];
@@ -310,11 +294,10 @@ static const char *BTTChanceCountKey = "chanceCount";
     }
     return resultArray.copy;
 }
+
 // 博币数量查询
 - (void)loadLuckyWheelCoinStatus {
-    
-    NSDictionary *params = @{@"loginName":[IVNetwork savedUserInfo].loginName};
-    [IVNetwork requestPostWithUrl:BTTQueryIntegralAPI paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTQueryIntegralAPI paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if ([result.body isKindOfClass:[NSDictionary class]]) {
@@ -327,7 +310,6 @@ static const char *BTTChanceCountKey = "chanceCount";
 }
 
 // 博币兑现
-
 - (void)loadLuckyWheelCoinChangeWithAmount:(NSString *)amount {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
@@ -337,32 +319,25 @@ static const char *BTTChanceCountKey = "chanceCount";
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [MBProgressHUD showSuccess:@"兑换成功" toView:nil];
-        }else{
+        } else {
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];
-
 }
-
 
 - (void)loadScrollText:(dispatch_group_t)group {
     [IVNetwork requestPostWithUrl:BTTHomeAnnouncementAPI paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSArray *data = result.body[@"data"];
-            if (![data isKindOfClass:[NSArray class]]) {
-                dispatch_group_leave(group);
-                return;
-            }
+            BTTNoticeMainModel *noticeModel = [BTTNoticeMainModel yy_modelWithDictionary:result.body];
             self.noticeStr = @"";
-            for (NSDictionary *dict in data) {
+            for (BTTNoticeModel *dict in noticeModel.data) {
                 NSError *error = nil;
-                BTTNoticeModel *noticeModel = [BTTNoticeModel yy_modelWithDictionary:dict];
                 NSLog(@"%@",error.description);
                 if (self.noticeStr) {
-                    self.noticeStr  = [NSString stringWithFormat:@"%@%@%@",self.noticeStr,@"                ",noticeModel.content];
+                    self.noticeStr  = [NSString stringWithFormat:@"%@%@%@",self.noticeStr,@"                ",dict.content];
                 } else {
-                    self.noticeStr = noticeModel.content;
+                    self.noticeStr = dict.content;
                 }
             }
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -399,8 +374,6 @@ static const char *BTTChanceCountKey = "chanceCount";
     });
 }
 
-
-
 - (void)makeCallWithPhoneNum:(NSString *)phone captcha:(NSString *)captcha captchaId:(NSString *)captchaId {
     NSMutableDictionary *params = @{}.mutableCopy;
     [params setValue:captcha forKey:@"captcha"];
@@ -421,7 +394,7 @@ static const char *BTTChanceCountKey = "chanceCount";
             IVJResponseObject *result = response;
             if ([result.head.errCode isEqualToString:@"0000"]) {
                 [self showCallBackSuccessView];
-            }else{
+            } else {
                 NSString *errInfo = [NSString stringWithFormat:@"申请失败,%@",result.head.errMsg];
                 [MBProgressHUD showError:errInfo toView:nil];
             }
@@ -463,7 +436,6 @@ static const char *BTTChanceCountKey = "chanceCount";
     };
 }
 
-
 - (void)showCallBackSuccessView {
     BTTMakeCallSuccessView *customView = [BTTMakeCallSuccessView viewFromXib];
     customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -503,7 +475,6 @@ static const char *BTTChanceCountKey = "chanceCount";
     };
 }
 
-
 - (void)loadMainData:(dispatch_group_t)group {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     NSString *date_start = [PublicMethod getCurrentTimesWithFormat:@"YYYY-MM-dd"];
@@ -521,7 +492,7 @@ static const char *BTTChanceCountKey = "chanceCount";
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (![result.body[@"maxRecords"] isKindOfClass:[NSNull class]]) {
                 [self.amounts removeAllObjects];
-                for (NSDictionary *dict in result.body[@"maxRecords"]) {
+                for (NSMutableDictionary *dict in result.body[@"maxRecords"]) {
                     BTTAmountModel *model = [BTTAmountModel yy_modelWithDictionary:dict];
                     [amounts addObject:model];
                 }
@@ -530,7 +501,7 @@ static const char *BTTChanceCountKey = "chanceCount";
 
             if (![result.body[@"poster"] isKindOfClass:[NSNull class]]) {
                 [self.posters removeAllObjects];
-                for (NSDictionary *dict in result.body[@"poster"]) {
+                for (NSMutableDictionary *dict in result.body[@"poster"]) {
                     BTTPosterModel *model = [BTTPosterModel yy_modelWithDictionary:dict];
                     [posters addObject:model];
                 }
@@ -539,7 +510,7 @@ static const char *BTTChanceCountKey = "chanceCount";
 
             if (![result.body[@"promotions"] isKindOfClass:[NSNull class]]) {
                 [self.promotions removeAllObjects];
-                for (NSDictionary *dict in result.body[@"promotions"]) {
+                for (NSMutableDictionary *dict in result.body[@"promotions"]) {
                     BTTPromotionModel *model = [BTTPromotionModel yy_modelWithDictionary:dict];
                     [promotions addObject:model];
                 }
@@ -557,17 +528,13 @@ static const char *BTTChanceCountKey = "chanceCount";
     NSMutableArray *banners = [NSMutableArray array];
     NSMutableArray *imageUrls = [NSMutableArray array];
     NSMutableArray *downloads = [NSMutableArray array];
-    NSDictionary *params = nil;
-    if ([IVNetwork savedUserInfo]) {
-        params = @{@"loginName":[IVNetwork savedUserInfo].loginName};
-    }
-    [IVNetwork requestPostWithUrl:BTTIndexBannerDownloads paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTIndexBannerDownloads paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (![result.body[@"banners"] isKindOfClass:[NSNull class]]) {
                 [self.banners removeAllObjects];
                 [self.imageUrls removeAllObjects];
-                for (NSDictionary *dict in result.body[@"banners"]) {
+                for (NSMutableDictionary *dict in result.body[@"banners"]) {
                     BTTBannerModel *model = [BTTBannerModel yy_modelWithDictionary:dict];
                     [imageUrls addObject:model.imgurl];
                     [banners addObject:model];
@@ -577,7 +544,7 @@ static const char *BTTChanceCountKey = "chanceCount";
             }
             if (![result.body[@"downloads"] isKindOfClass:[NSNull class]]) {
                 [self.downloads removeAllObjects];
-                for (NSDictionary *dict in result.body[@"downloads"]) {
+                for (NSMutableDictionary *dict in result.body[@"downloads"]) {
                     BTTDownloadModel *model = [BTTDownloadModel yy_modelWithDictionary:dict];
                     [downloads addObject:model];
                 }
@@ -601,7 +568,7 @@ static const char *BTTChanceCountKey = "chanceCount";
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (result.body) {
                 [self.Activities removeAllObjects];
-                for (NSDictionary *imageDict in result.body) {
+                for (NSMutableDictionary *imageDict in result.body) {
                     BTTActivityModel *model = [BTTActivityModel yy_modelWithDictionary:imageDict];
                     [Activities addObject:model];
                 }
@@ -612,9 +579,7 @@ static const char *BTTChanceCountKey = "chanceCount";
     }];
 }
 
-
 #pragma mark - 动态添加属性
-
 - (void)setNextGroup:(NSInteger)nextGroup {
     objc_setAssociatedObject(self, &BTTNextGroupKey, @(nextGroup), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
@@ -652,7 +617,6 @@ static const char *BTTChanceCountKey = "chanceCount";
     }
     return headers;
 }
-
 
 - (void)setHeaders:(NSMutableArray *)headers {
      objc_setAssociatedObject(self, @selector(headers), headers, OBJC_ASSOCIATION_RETAIN_NONATOMIC);

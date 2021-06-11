@@ -215,13 +215,13 @@ static const char *BTTMenualPopViewKey = "menualPopView";
         [self.navigationController pushViewController:vc animated:YES];
     };
 }
-- (void)showDragonBoarChanceViewWithAvailableRandom:(BOOL)availableRandom
-{
+
+- (void)showDragonBoarChanceViewWithAvailableRandom:(BOOL)availableRandom {
     
     weakSelf(weakSelf)
     NSString *showView = [[NSUserDefaults standardUserDefaults] objectForKey:BTShowDBPopView];
-    if ([showView isEqualToString:@"NO"])
-    {// 不彈窗
+    if ([showView isEqualToString:@"NO"]) {
+        // 不彈窗
         [weakSelf assignDragonBoatLotteryWithMode:@"1"
                                          withNumber:[NSString stringWithFormat:@"%ld",weakSelf.chanceCount]
                                 withLotteryNumValue:nil
@@ -231,9 +231,7 @@ static const char *BTTMenualPopViewKey = "menualPopView";
             printf("隨機完成");
         }];
         
-    }else
-    {
-        
+    } else {
         
         BTTDragonBoatChancePopView * customView = [BTTDragonBoatChancePopView viewFromXib];
         customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -249,8 +247,8 @@ static const char *BTTMenualPopViewKey = "menualPopView";
         customView.btnBlock = ^(UIButton * _Nullable btn) {
             strongSelf(strongSelf)
             [popView dismiss];
-            if (btn.tag ==1)
-            {//隨機
+            if (btn.tag ==1) {
+                //隨機
                 [strongSelf assignDragonBoatLotteryWithMode:@"1"
                                                  withNumber:[NSString stringWithFormat:@"%ld",weakSelf.chanceCount]
                                         withLotteryNumValue:nil
@@ -276,8 +274,8 @@ static const char *BTTMenualPopViewKey = "menualPopView";
                         [strongSelf.navigationController pushViewController:vc animated:YES];
                     };
                 }];
-            }else
-            {//手動
+            } else {
+                //手動
                 self.menualPopView = [BTTDragonBoatMenualPopView viewFromXib];
                 self.menualPopView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
                 [self.menualPopView configForMenualValue:@"empty" withSelectMode:(strongSelf.chanceCount == 1 ? BTTConfirmSelect : BTTTwoWaySelect)];
@@ -290,8 +288,7 @@ static const char *BTTMenualPopViewKey = "menualPopView";
                 };
                 self.menualPopView.callBackBlock = ^(NSString * _Nullable nextCouponNum, NSString * _Nullable confirmSelect, NSString * _Nullable captchaId) {
                     
-                    if ([nextCouponNum isEqualToString:@""])
-                    {
+                    if ([nextCouponNum isEqualToString:@""]) {
                         //上一張
                         if (strongSelf.lotteryNumList.count > 0)
                         {
@@ -299,13 +296,11 @@ static const char *BTTMenualPopViewKey = "menualPopView";
                             [strongSelf.lotteryNumList removeLastObject];
                         }
                         
-                    }else
-                    {
+                    } else {
                         //下一張
                         [strongSelf.lotteryNumList addObject:nextCouponNum];
                         [strongSelf.menualPopView configForMenualValue:@"empty" withSelectMode:(strongSelf.lotteryNumList.count == strongSelf.chanceCount-1 ? BTTOneWaySelectAndConfirm : BTTTwoWaySelect)];
-                        if ([confirmSelect isEqualToString:@"confirmSelect"])
-                        {
+                        if ([confirmSelect isEqualToString:@"confirmSelect"]) {
                             [popView dismiss];
                             
                             [strongSelf assignDragonBoatLotteryWithMode:@"2"
@@ -318,11 +313,11 @@ static const char *BTTMenualPopViewKey = "menualPopView";
                         }
                     }
                 };
-                
             }
         };
     }
 }
+
 - (void)logoutSuccess:(NSNotification *)notifi {
     self.isLogin = NO;
     self.isVIP = NO;

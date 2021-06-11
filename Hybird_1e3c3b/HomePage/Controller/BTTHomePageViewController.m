@@ -144,26 +144,24 @@
             [self loadBiBiCun];
         }
         //月分紅
-        BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
-        if (!isShowYuFenHong) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
+//        BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
+//        if (!isShowYuFenHong) {
+//            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
 //            [self loadYenFenHong];
-        }
+//        }
         NSString * showDragonBoatDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTShowDragonBoat];
         NSString * realLastLoginDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTBeforeLoginDate];
         
-        if (showDragonBoatDate == nil)
-        {
+        if (showDragonBoatDate == nil) {
             NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
             [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowDragonBoat];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            if (realLastLoginDate && ![realLastLoginDate isEqualToString:@"NO"])
-            {
+            if (realLastLoginDate && ![realLastLoginDate isEqualToString:@"NO"]) {
                 if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:realLastLoginDate]]) {
                     [self showDragonBoat];
                 }
-            }else
-            {
+                
+            } else {
                 [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTBeforeLoginDate];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [self showDragonBoat];
@@ -171,9 +169,8 @@
 //            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork savedUserInfo].lastLoginDate]]) {
 //                [self showDragonBoat];
 //            }
-        }else{
-            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:showDragonBoatDate]])
-            {
+        } else {
+            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:showDragonBoatDate]]) {
                 NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
                 [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowDragonBoat];
                 [[NSUserDefaults standardUserDefaults] synchronize];
@@ -183,8 +180,7 @@
         
         //暫時寫出來
         
-        if (![[NSUserDefaults standardUserDefaults] objectForKey:BTShowDBPopView])
-        {
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:BTShowDBPopView]) {
             [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:BTShowDBPopView];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
@@ -302,9 +298,6 @@
     NSArray *ids = [[NSArray alloc]initWithObjects:msgId, nil];
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     params[@"ids"] = ids;
-//    NSDictionary *params = @{
-//        @"ids":ids,
-//    };
     
     [IVNetwork requestPostWithUrl:BTTReadInsideMessage paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         NSLog(@"%@",response);
@@ -582,6 +575,7 @@
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
                 vc.webConfigModel.url = [model.href stringByReplacingOccurrencesOfString:@" " withString:@""];
                 vc.webConfigModel.newView = YES;
+                vc.title = model.name;
                 [strongSelf.navigationController pushViewController:vc animated:YES];
             };
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {

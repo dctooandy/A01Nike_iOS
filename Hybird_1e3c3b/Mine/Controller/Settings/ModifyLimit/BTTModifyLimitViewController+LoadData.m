@@ -42,11 +42,6 @@
     NSString *contentStr = [NSString stringWithFormat:@"AGIN:%@;BBIN:%@",agin,bbin];
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     params[@"remarks"] = contentStr;
-    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
-//    NSDictionary *params = @{
-//        @"remarks":contentStr,
-//        @"loginName":[IVNetwork savedUserInfo].loginName
-//    };
     [self showLoading];
     [IVNetwork requestPostWithUrl:BTTLimitRedModify paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];

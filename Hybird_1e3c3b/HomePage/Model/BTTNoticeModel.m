@@ -8,6 +8,12 @@
 
 #import "BTTNoticeModel.h"
 
+@implementation BTTNoticeMainModel
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"data":[BTTNoticeModel class]};
+}
+@end
+
 @implementation BTTNoticeModel
 
 @end

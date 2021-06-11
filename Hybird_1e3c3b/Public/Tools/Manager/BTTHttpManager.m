@@ -78,7 +78,7 @@
 }
 //处理绑定状态获取结果
 //+ (void)fetchBindStatusWithUseCache:(BOOL)useCache completionBlock:(KYHTTPCallBack)completionBlock
-{
+//{
 //    NSString *typeList = @"phone;email;bank;btc";
 //    NSDictionary *params = @{@"typeList":typeList};
 //    NSString *url = BTTIsBindStatusAPI;

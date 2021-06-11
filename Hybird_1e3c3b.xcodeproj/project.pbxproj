@@ -767,11 +767,11 @@
 		7629D73C2668CE7300CF758C /* BTTDragonBoatMenualPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629D7392668CE7300CF758C /* BTTDragonBoatMenualPopView.xib */; };
 		7629D7E8266C933E00CF758C /* BTTDragonBoatAutoPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629D7E5266C933E00CF758C /* BTTDragonBoatAutoPopView.xib */; };
 		7629D7E9266C933E00CF758C /* BTTDragonBoatAutoPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629D7E6266C933E00CF758C /* BTTDragonBoatAutoPopView.m */; };
+		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
 		76C9F42C2668A3070002591D /* BTTDragonBoatChancePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F4292668A3060002591D /* BTTDragonBoatChancePopView.xib */; };
 		76C9F42D2668A3070002591D /* BTTDragonBoatChancePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F42A2668A3060002591D /* BTTDragonBoatChancePopView.m */; };
-		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
@@ -2115,14 +2115,14 @@
 		7629D7E5266C933E00CF758C /* BTTDragonBoatAutoPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatAutoPopView.xib; sourceTree = "<group>"; };
 		7629D7E6266C933E00CF758C /* BTTDragonBoatAutoPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatAutoPopView.m; sourceTree = "<group>"; };
 		7629D7E7266C933E00CF758C /* BTTDragonBoatAutoPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatAutoPopView.h; sourceTree = "<group>"; };
+		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
+		76C9F150265E404B0002591D /* CNPayOrderModelV2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayOrderModelV2.m; sourceTree = "<group>"; };
 		76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatPopView.xib; sourceTree = "<group>"; };
 		76C9F2D72665BEA70002591D /* BTTDragonBoatPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatPopView.h; sourceTree = "<group>"; };
 		76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatPopView.m; sourceTree = "<group>"; };
 		76C9F4292668A3060002591D /* BTTDragonBoatChancePopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatChancePopView.xib; sourceTree = "<group>"; };
 		76C9F42A2668A3060002591D /* BTTDragonBoatChancePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatChancePopView.m; sourceTree = "<group>"; };
 		76C9F42B2668A3060002591D /* BTTDragonBoatChancePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatChancePopView.h; sourceTree = "<group>"; };
-		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
-		76C9F150265E404B0002591D /* CNPayOrderModelV2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayOrderModelV2.m; sourceTree = "<group>"; };
 		76CC62BD265677E00042AEDF /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = Hybird_1e3c3b/Public/Tools/ThirdParty/libboringssl_simulator.a; sourceTree = "<group>"; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
 		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
@@ -6428,7 +6428,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.257;
+				MARKETING_VERSION = 3.2.258;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6470,7 +6470,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.257;
+				MARKETING_VERSION = 3.2.258;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

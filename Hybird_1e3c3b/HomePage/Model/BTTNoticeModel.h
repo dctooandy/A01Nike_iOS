@@ -7,6 +7,21 @@
 //
 
 #import "BTTBaseModel.h"
+@class BTTNoticeModel;
+
+@interface BTTNoticeMainModel : BTTBaseModel
+
+@property (nonatomic, copy) NSString *totalRow;
+
+@property (nonatomic, copy) NSString *pageSize;
+
+@property (nonatomic, copy) NSString *totalPage;
+
+@property (nonatomic, copy) NSString *pageNo;
+
+@property (nonatomic, strong) NSArray<BTTNoticeModel *> *data;
+
+@end
 
 @interface BTTNoticeModel : BTTBaseModel
 
