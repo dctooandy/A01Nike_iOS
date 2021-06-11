@@ -333,46 +333,74 @@
 - (void)usdtOnlinePayHanlerWithType:(NSInteger)type{
     
     [self showLoading];
-    NSDictionary *params = @{
-        @"payType":_bfbModel.payType,
-        @"currency":@"USDT",
-        @"loginName":[IVNetwork savedUserInfo].loginName,
-        @"usdtProtocol":self.selectedProtocol
-    };
-    [IVNetwork requestPostWithUrl:BTTQueryOnlineBanks paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            
-            NSString *payId = [NSString stringWithFormat:@"%@",result.body[@"payid"]];
-            [self createOnlineOrdersWithPayType:type payId:payId];
-        }else{
-            [self hideLoading];
-            [self showError:result.head.errMsg];
-        }
-    }];
+//    NSDictionary *params = @{
+//        @"payType":_bfbModel.payType,
+//        @"currency":@"USDT",
+//        @"loginName":[IVNetwork savedUserInfo].loginName,
+//        @"usdtProtocol":self.selectedProtocol
+//    };
+//    [IVNetwork requestPostWithUrl:BTTQueryOnlineBanks paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//        IVJResponseObject *result = response;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//
+//            NSString *payId = [NSString stringWithFormat:@"%@",result.body[@"payid"]];
+//            [self createOnlineOrdersWithPayType:type payId:payId];
+//        }else{
+//            [self hideLoading];
+//            [self showError:result.head.errMsg];
+//        }
+//    }];
+    [self createOnlineOrdersV2WithPayType:type];
 }
 
-- (void)createOnlineOrdersWithPayType:(NSInteger)payType payId:(NSString *)payId{
-    [self showLoading];
+//- (void)createOnlineOrdersWithPayType:(NSInteger)payType payId:(NSString *)payId{
+//    [self showLoading];
+//    NSDictionary *params = @{
+//        @"amount":_moneyTextField.text,
+//        @"payType":@(payType),
+//        @"payid":payId,
+//        @"currency":@"USDT",
+//        @"loginName":[IVNetwork savedUserInfo].loginName,
+//        @"usdtProtocol" : self.selectedProtocol
+//    };
+//    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrder paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//        [self hideLoading];
+//        IVJResponseObject *result = response;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            [self requestPayDetailUrl:result.body[@"payUrl"]];
+//        }else{
+//            [self showError:result.head.errMsg];
+//        }
+//    }];
+//}
+- (void)createOnlineOrdersV2WithPayType:(NSInteger)payType{
+    weakSelf(weakSelf)
+    NSString *tempAmount = [NSString stringWithFormat:@"%.2f",[_moneyTextField.text floatValue]];
     NSDictionary *params = @{
-        @"amount":_moneyTextField.text,
+        @"amount":tempAmount,
         @"payType":@(payType),
-        @"payid":payId,
         @"currency":@"USDT",
         @"loginName":[IVNetwork savedUserInfo].loginName,
-        @"usdtProtocol" : self.selectedProtocol
+        @"protocol" : self.selectedProtocol
     };
-    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrder paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrderV2 paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            [self requestPayDetailUrl:result.body[@"payUrl"]];
+            if (result.body[@"address"])
+            {
+                [weakSelf requestPayDetailUrl:result.body[@"address"]];
+            }else
+            {
+                printf("\nAddress Empty");
+                [weakSelf requestPayDetailUrl:@""];
+            }
+            
         }else{
             [self showError:result.head.errMsg];
         }
     }];
 }
-
 - (void)requestPayDetailUrl:(NSString *)url{
     //初始化一个AFHTTPSessionManager
     [self showLoading];
@@ -392,7 +420,8 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        [self hideLoading];
+        printf("\nURL error");
     }];
     
 }
@@ -454,7 +483,8 @@
  */
 - (BOOL)checkDecimal:(NSString *)str
 {
-    NSString *regex = [self.selectedProtocol isEqualToString:@"OMNI"] ? @"^[0-9]+(\\.[0-9]{1,8})?$" : @"^[0-9]+(\\.[0-9]{1,6})?$";
+    // 所有接口入參amount 都僅能接受小數點後兩位
+    NSString *regex = [self.selectedProtocol isEqualToString:@"OMNI"] ? @"^[0-9]+(\\.[0-9]{1,2})?$" : @"^[0-9]+(\\.[0-9]{1,2})?$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     
     if([pred evaluateWithObject: str])

@@ -369,44 +369,66 @@
 - (void)usdtOnlinePayHanlerWithType:(NSInteger)type{
     [self showLoading];
     type = type==0 ? 25 : type;
-    NSDictionary *params = @{
-        @"payType":@(type),
-        @"currency":@"USDT",
-        @"loginName":[IVNetwork savedUserInfo].loginName,
-        @"usdtProtocol":self.selectedProtocol
-    };
-    [IVNetwork requestPostWithUrl:BTTQueryOnlineBanks paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSString *payId = [NSString stringWithFormat:@"%@",result.body[@"payid"]];
-            [self createOnlineOrdersWithPayType:type payId:payId];
-        }else{
-            [self hideLoading];
-            [self showError:result.head.errMsg];
-        }
-    }];
+//    NSDictionary *params = @{
+//        @"payType":@(type),
+//        @"currency":@"USDT",
+//        @"loginName":[IVNetwork savedUserInfo].loginName,
+//        @"usdtProtocol":self.selectedProtocol
+//    };
+//    [IVNetwork requestPostWithUrl:BTTQueryOnlineBanks paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//        IVJResponseObject *result = response;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            NSString *payId = [NSString stringWithFormat:@"%@",result.body[@"payid"]];
+//            [self createOnlineOrdersWithPayType:type payId:payId];
+//        }else{
+//            [self hideLoading];
+//            [self showError:result.head.errMsg];
+//        }
+//    }];
+    [self createOnlineOrdersV2WithPayType:type];
 }
 
-- (void)createOnlineOrdersWithPayType:(NSInteger)payType payId:(NSString *)payId{
+//- (void)createOnlineOrdersWithPayType:(NSInteger)payType payId:(NSString *)payId{
+//    NSDictionary *params = @{
+//        @"amount":_usdtInputField.text,
+//        @"payType":@(payType),
+//        @"payid":payId,
+//        @"currency":@"USDT",
+//        @"loginName":[IVNetwork savedUserInfo].loginName,
+//        @"usdtProtocol" : self.selectedProtocol
+//    };
+//    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrder paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//        [self hideLoading];
+//        IVJResponseObject *result = response;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            [self paySucessUSDTHandler:result repay:nil];
+//        }else{
+//            [self showError:result.head.errMsg];
+//        }
+//    }];
+//}
+- (void)createOnlineOrdersV2WithPayType:(NSInteger)payType{
+    [self showLoading];
+    NSString *tempAmount = [NSString stringWithFormat:@"%.2f",[_usdtInputField.text floatValue]];
     NSDictionary *params = @{
-        @"amount":_usdtInputField.text,
+        @"amount":tempAmount,
         @"payType":@(payType),
-        @"payid":payId,
         @"currency":@"USDT",
         @"loginName":[IVNetwork savedUserInfo].loginName,
-        @"usdtProtocol" : self.selectedProtocol
+        @"protocol" : self.selectedProtocol
     };
-    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrder paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrderV2 paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            [self paySucessUSDTHandler:result repay:nil];
+//            [weakSelf paySucessUSDTHandler:result repay:nil];
+            [weakSelf payV2SucessUSDTHandler:result repay:nil];
         }else{
             [self showError:result.head.errMsg];
         }
     }];
 }
-
 - (IBAction)finishedBtn_click:(id)sender {
     BTTUsdtWalletModel *model = [[BTTUsdtWalletModel alloc]init];
     if (_selectedIndex==999) {
@@ -463,7 +485,8 @@
  */
 - (BOOL)checkDecimal:(NSString *)str
 {
-    NSString *regex = [self.selectedProtocol isEqualToString:@"OMNI"] ? @"^[0-9]+(\\.[0-9]{1,8})?$" : @"^[0-9]+(\\.[0-9]{1,6})?$";
+    // 所有接口入參amount 都僅能接受小數點後兩位
+    NSString *regex = [self.selectedProtocol isEqualToString:@"OMNI"] ? @"^[0-9]+(\\.[0-9]{1,2})?$" : @"^[0-9]+(\\.[0-9]{1,2})?$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     
     if([pred evaluateWithObject: str])

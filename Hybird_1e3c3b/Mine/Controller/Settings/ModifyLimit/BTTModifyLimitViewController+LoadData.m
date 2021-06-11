@@ -13,7 +13,12 @@
 
 
 - (void)loadMainData {
-    self.agin = [[NSArray alloc]initWithObjects:@"20-50000",@"1000-100000",@"2000-200000",@"10000-500000",@"20000-1000000", nil];
+    if (![[IVNetwork savedUserInfo].uiMode isEqual:@"CNY"])
+    {
+        self.agin = [[NSArray alloc]initWithObjects:@"5-1000",@"140-16000",@"280-32000",@"1400-160000", nil];
+    }else{
+        self.agin = [[NSArray alloc]initWithObjects:@"20-50000",@"1000-100000",@"2000-200000",@"10000-500000",@"20000-1000000", nil];        
+    }
     self.bbin = [[NSArray alloc]initWithObjects:@"20-10000",@"200-20000",@"300-30000",@"400-40000",@"500-50000",@"1000-100000",@"2000-200000",@"3000-300000", nil];
     [self showLoading];
     NSDictionary *params = @{

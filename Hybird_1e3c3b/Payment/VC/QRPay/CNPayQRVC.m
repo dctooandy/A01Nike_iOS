@@ -274,21 +274,40 @@
 
     /// 提交
     __weak typeof(self) weakSelf =  self;
-    NSDictionary *params = @{
-            @"amount": text,
-            @"payType": @(self.paymentModel.payType),
-            @"payid": self.typeModel.payid,
-            @"loginName": [IVNetwork savedUserInfo].loginName,
-            @"bankNo": @""
-    };
+//    NSDictionary *params = @{
+//            @"amount": text,
+//            @"payType": @(self.paymentModel.payType),
+//            @"payid": self.typeModel.payid,
+//            @"loginName": [IVNetwork savedUserInfo].loginName,
+//            @"bankNo": @""
+//    };
     [self showLoading];
-    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrder paramters:params completionBlock:^(id _Nullable response, NSError *_Nullable error) {
-        [weakSelf hideLoading];
+//    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrder paramters:params completionBlock:^(id _Nullable response, NSError *_Nullable error) {
+//        [weakSelf hideLoading];
+//        IVJResponseObject *result = response;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            __strong typeof(weakSelf) strongSelf = weakSelf;
+//            sender.selected = NO;
+//            [strongSelf handlerResult:result];
+//        }
+//    }];
+    NSString *tempAmount = [NSString stringWithFormat:@"%.2f",[text floatValue]];
+    NSDictionary *params = @{
+        @"amount":tempAmount,
+        @"payType":@(self.paymentModel.payType),
+        @"currency":@"CNY",
+        @"loginName":[IVNetwork savedUserInfo].loginName
+        //        ,@"protocol" : self.selectedProtocol
+    };
+    [IVNetwork requestPostWithUrl:BTTCreateOnlineOrderV2 paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
+            strongSelf(strongSelf)
             sender.selected = NO;
             [strongSelf handlerResult:result];
+        }else{
+            [self showError:result.head.errMsg];
         }
     }];
 }
@@ -302,12 +321,14 @@
     }
 
     NSError *error;
-    CNPayOrderModel *orderModel = [[CNPayOrderModel alloc] initWithDictionary:model.body error:&error];
+    CNPayOrderModelV2 *orderModel = [[CNPayOrderModelV2 alloc] initWithDictionary:model.body error:&error];
+//    CNPayOrderModel *orderModel = [[CNPayOrderModel alloc] initWithDictionary:model.body error:&error];
     if (error && !orderModel) {
         [self showError:@"操作失败！请联系客户，或者稍后重试!"];
         return;
     }
-    self.writeModel.orderModel = orderModel;
+//    self.writeModel.orderModel = orderModel;
+    self.writeModel.orderModelV2 = orderModel;
     self.writeModel.depositType = self.paymentModel.payTypeName;
     [self goToStep:1];
 }

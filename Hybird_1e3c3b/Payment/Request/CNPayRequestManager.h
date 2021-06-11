@@ -32,6 +32,8 @@ extern NSInteger const kPayTypeTotalCount;
  */
 + (NSString *)submitPayFormWithOrderModel:(CNPayOrderModel *)model;
 
++ (NSString *)submitPayFormWithOrderModelV2:(CNPayOrderModelV2 *)model;
+
 
 @end
 

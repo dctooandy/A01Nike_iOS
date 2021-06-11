@@ -125,8 +125,9 @@
 
 - (void)setupElements {
     NSMutableArray *elementsHight = [NSMutableArray array];
-    for (int i = 0; i < 3; i ++) {
-        if (i == 2) {
+    NSInteger cellCount = 3;
+    for (int i = 0; i < cellCount; i ++) {
+        if (i == cellCount - 1) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
         } else {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
