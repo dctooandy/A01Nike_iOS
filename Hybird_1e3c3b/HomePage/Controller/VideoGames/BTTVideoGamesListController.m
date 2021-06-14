@@ -692,7 +692,11 @@
 
 - (void)bannerToGame:(BTTBannerModel *)model {
     if ([model.action.type isEqualToString:@"1"] ) {
+        if (model.action.detail.length <= 0) {
+            return;
+        }
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+        vc.title = model.title;
         vc.webConfigModel.url = [model.action.detail stringByReplacingOccurrencesOfString:@" " withString:@""];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";

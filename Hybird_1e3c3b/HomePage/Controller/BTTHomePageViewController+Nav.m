@@ -64,6 +64,7 @@ static const char *BTTMenualPopViewKey = "menualPopView";
         vc.webConfigModel.url = @"/activity_pages/ag_crads918";
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
+        vc.title = @"918赢牌，好运红包即来";
         [weakSelf.navigationController pushViewController:vc animated:YES];
     }];
     [self.assistiveButton setCloseBtnActionBlock:^{
@@ -592,6 +593,9 @@ static const char *BTTMenualPopViewKey = "menualPopView";
 
 - (void)bannerToGame:(BTTBannerModel *)model {
     if ([model.action.type isEqualToString:@"1"] ) {
+        if (model.action.detail.length <= 0) {
+            return;
+        }
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
         vc.title = model.title;
         vc.webConfigModel.url = [model.action.detail stringByReplacingOccurrencesOfString:@" " withString:@""];
