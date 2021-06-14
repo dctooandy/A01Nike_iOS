@@ -57,6 +57,20 @@
     [self.navigationController.navigationBar setHidden:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController.navigationBar setHidden:NO];
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.player = nil;
+    [self.item removeObserver:self forKeyPath:@"status"];
+    [self.item removeObserver:self forKeyPath:@"loadedTimeRanges"];
+    self.item = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
@@ -125,16 +139,15 @@
     AVPlayerItem *playerItem = (AVPlayerItem *)object;
 
     if ([keyPath isEqualToString:@"loadedTimeRanges"]){
-
+        
     }else if ([keyPath isEqualToString:@"status"]){
         if (playerItem.status == AVPlayerItemStatusReadyToPlay){
             NSLog(@"playerItem is ready");
             //如果视频准备好 就开始播放
             [self.player play];
-            } else if(playerItem.status==AVPlayerStatusUnknown){
+        } else if(playerItem.status == AVPlayerStatusUnknown){
             NSLog(@"playerItem Unknown错误");
-            }
-        else if (playerItem.status==AVPlayerStatusFailed){
+        } else if (playerItem.status == AVPlayerStatusFailed){
             NSLog(@"playerItem 失败");
         }
     }
@@ -394,19 +407,6 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     self.activedTextFieldRect = [textField convertRect:textField.frame toView:self.view];
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self.navigationController.navigationBar setHidden:NO];
-    self.player=nil;
-    
-    [self.item removeObserver:self forKeyPath:@"status"];
-    [self.item removeObserver:self forKeyPath:@"loadedTimeRanges"];
-    self.item = nil;
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
 }
 
 - (void)dealloc {
