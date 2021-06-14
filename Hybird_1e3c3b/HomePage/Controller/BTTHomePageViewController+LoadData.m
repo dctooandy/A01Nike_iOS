@@ -95,10 +95,7 @@ static const char *BTTChanceCountKey = "chanceCount";
         [self loadDragonBoatCurrRound:group];
     });
     dispatch_group_notify(group,queue, ^{
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            [self loadDragonBoatChance];
-        }];
-     
+        [self loadDragonBoatChance];
     });
 }
 
@@ -144,12 +141,17 @@ static const char *BTTChanceCountKey = "chanceCount";
                         NSInteger chanceValue = [[NSString stringWithFormat:@"%@",resultBody[@"availableTimes"]] integerValue];
                         strongSelf.chanceCount = chanceValue;
                         printf("\n用户机会次数:%ld",strongSelf.chanceCount);
-                        if (strongSelf.chanceCount > 0) {
-                            [strongSelf showDragonBoarChanceViewWithAvailableRandom:(weakSelf.availableNum == 0 ? NO:YES)];
-                            
-                        } else {
+                        if (strongSelf.chanceCount > 0)
+                        {
+                            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                                [strongSelf showDragonBoarChanceViewWithAvailableRandom:(weakSelf.availableNum == 0 ? NO:YES)];
+                            }];
+                        }else
+                        {
                             //測試
-//                            [strongSelf toTestTheLAvailableView];
+//                            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//                                [strongSelf toTestTheLAvailableView];
+//                            }];
                         }
                     }
                 }
