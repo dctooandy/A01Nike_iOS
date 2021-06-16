@@ -140,7 +140,7 @@
     [self showAssistiveButton];
     [self.collectionView reloadData];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    if (self.isHaveUserToken) {
+    if (self.isHaveUserToken && [IVNetwork savedUserInfo]) {
         [self showHomePopView];
     }
 }
