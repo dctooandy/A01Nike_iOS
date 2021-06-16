@@ -695,7 +695,6 @@
 		415CA1EE24E53AF6005E0E9F /* OCTRechargeUSDTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1EC24E53AF6005E0E9F /* OCTRechargeUSDTView.m */; };
 		415CA1F024E53B0B005E0E9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 415CA1EF24E53B0B005E0E9F /* Assets.xcassets */; };
 		41755C52262E74D600B6884D /* LiveChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 41755C50262E74D600B6884D /* LiveChat.m */; };
-		417C785E2676EABD00F7062C /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		41800D5A2623E95900FAC27B /* BTTAddBitollCardController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41800D592623E95900FAC27B /* BTTAddBitollCardController.xib */; };
 		4180B03925D36EBB00139E88 /* BTTOtherGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4180B03725D36EBB00139E88 /* BTTOtherGameCell.m */; };
 		4180B03A25D36EBB00139E88 /* BTTOtherGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4180B03825D36EBB00139E88 /* BTTOtherGameCell.xib */; };
@@ -753,6 +752,7 @@
 		419AEC5B250F64F100D089DD /* BTTBJLPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419AEC59250F64F100D089DD /* BTTBJLPopView.xib */; };
 		41A09D3825E4F4BD00255681 /* BTTDifferentLocPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A09D3525E4F4BD00255681 /* BTTDifferentLocPopView.xib */; };
 		41A09D3925E4F4BD00255681 /* BTTDifferentLocPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A09D3725E4F4BD00255681 /* BTTDifferentLocPopView.m */; };
+		41A733E52679E0F400046E7C /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		41B8FCD625C92B310022F886 /* AssistiveButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B8FCD525C92B310022F886 /* AssistiveButton.m */; };
 		41BC7100252D6509003944ED /* BTTBiBiCunPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BC70FD252D6509003944ED /* BTTBiBiCunPopView.m */; };
 		41BC7101252D6509003944ED /* BTTBiBiCunPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BC70FE252D6509003944ED /* BTTBiBiCunPopView.xib */; };
@@ -2399,7 +2399,7 @@
 				3AD9CE2B2167107B00685B43 /* libilbccodec-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */,
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
-				417C785E2676EABD00F7062C /* libboringssl_simulator.a in Frameworks */,
+				41A733E52679E0F400046E7C /* libboringssl_simulator.a in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
@@ -6428,7 +6428,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.264;
+				MARKETING_VERSION = 3.2.265;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6470,7 +6470,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.264;
+				MARKETING_VERSION = 3.2.265;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

@@ -51,8 +51,6 @@
 
 @property (nonatomic, assign) BOOL adCellShow;
 @property (nonatomic, assign) BOOL   isloaded;
-@property (nonatomic, assign) BOOL isHaveUserToken;
-
 @end
 
 @implementation BTTHomePageViewController
@@ -109,7 +107,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestRedbag) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadBanner) name:LoginSuccessNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userTokenExpired) name:IVNUserTokenExpiredNotification object:nil];
 }
 
 #pragma mark - viewDidAppear
@@ -140,8 +137,14 @@
     [self showAssistiveButton];
     [self.collectionView reloadData];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    if (self.isHaveUserToken && [IVNetwork savedUserInfo]) {
-        [self showHomePopView];
+    if ([IVNetwork savedUserInfo]) {
+        //因為異地登入時token失效，但是會先進到viewWillAppaer不會先清空userInfo
+        [IVNetwork requestPostWithUrl:BTTUnreadInsideMessage paramters:@{@"flag":@"0", @"pageSize":@"1"} completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                [self showHomePopView];
+            }
+        }];
     }
 }
 
@@ -208,10 +211,6 @@
     }
 }
 
--(void)userTokenExpired {
-    self.isHaveUserToken = false;
-}
-
 -(void)checkLoginVersion {
     if ([IVNetwork savedUserInfo]) {
         NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
@@ -273,8 +272,6 @@
     [IVNetwork requestPostWithUrl:BTTUnreadInsideMessage paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            self.isHaveUserToken = true;
-            [self showHomePopView];
             NSArray *msgList = [[NSArray alloc]initWithArray:result.body[@"data"]];
             if (msgList.count>0) {
                 NSDictionary *json = msgList.firstObject;
