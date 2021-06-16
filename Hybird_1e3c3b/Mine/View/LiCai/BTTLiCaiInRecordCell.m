@@ -37,8 +37,8 @@
     self.timeTitleLab.text = titleArr[0];
     self.orderNumberTitleLab.text = titleArr[1];
     self.statusTitleLab.text = titleArr[2];
-    self.inAmountTitleLab.text = [NSString stringWithFormat:@"%@(%@)", titleArr[3], [IVNetwork savedUserInfo].uiMode];
-    self.balanceTitleLab.text = [NSString stringWithFormat:@"%@(%@)", titleArr[4], [IVNetwork savedUserInfo].uiMode];;
+    self.inAmountTitleLab.text = titleArr[3];
+    self.balanceTitleLab.text = titleArr[4];
 }
 
 -(void)setModel:(BTTLiCaiTransferRecordItemModel *)model {
@@ -57,7 +57,7 @@
     self.orderNumberLab.text = self.model.billno;
     self.statusLab.text = [self statusToStr:[self.model.status integerValue]];
     
-    double amount = [self.model.yebOriginalAmount doubleValue] > 0.00 ? [self.model.yebOriginalAmount doubleValue]:[self.model.amount doubleValue];
+    double amount = [self.model.yebOriginalAmount doubleValue];
     self.inAmountLab.text = [PublicMethod transferNumToThousandFormat:[PublicMethod calculateTwoDecimals:amount]];
     
     self.balanceLab.text = [PublicMethod transferNumToThousandFormat:[PublicMethod calculateTwoDecimals:[self.model.amount doubleValue]]];

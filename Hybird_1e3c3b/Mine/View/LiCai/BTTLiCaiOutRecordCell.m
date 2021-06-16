@@ -42,9 +42,9 @@
     self.orderNumberTitleLab.text = titleArr[1];
     self.statusTitleLab.text = titleArr[2];
     
-    self.outAmountTitleLab.text = [NSString stringWithFormat:@"%@(%@)", titleArr[3], [IVNetwork savedUserInfo].uiMode];
-    self.balanceTitleLab.text = [NSString stringWithFormat:@"%@(%@)", titleArr[4], [IVNetwork savedUserInfo].uiMode];
-    self.interestTitleLab.text = [NSString stringWithFormat:@"%@(%@)", titleArr[5], [IVNetwork savedUserInfo].uiMode];
+    self.outAmountTitleLab.text = titleArr[3];
+    self.balanceTitleLab.text = titleArr[4];
+    self.interestTitleLab.text = titleArr[5];
 }
 
 -(void)setModel:(BTTLiCaiTransferRecordItemModel *)model {
