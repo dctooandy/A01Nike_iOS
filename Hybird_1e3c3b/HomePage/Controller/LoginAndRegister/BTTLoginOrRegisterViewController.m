@@ -64,6 +64,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    [self.player pause];
     self.player = nil;
     [self.item removeObserver:self forKeyPath:@"status"];
     [self.item removeObserver:self forKeyPath:@"loadedTimeRanges"];
