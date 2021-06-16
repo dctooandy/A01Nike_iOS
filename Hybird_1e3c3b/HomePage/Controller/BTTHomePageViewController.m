@@ -51,6 +51,7 @@
 
 @property (nonatomic, assign) BOOL adCellShow;
 @property (nonatomic, assign) BOOL   isloaded;
+@property (nonatomic, assign) BOOL isHaveUserToken;
 
 @end
 
@@ -108,6 +109,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestRedbag) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadBanner) name:LoginSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userTokenExpired) name:IVNUserTokenExpiredNotification object:nil];
 }
 
 #pragma mark - viewDidAppear
@@ -138,62 +140,64 @@
     [self showAssistiveButton];
     [self.collectionView reloadData];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    if ([IVNetwork savedUserInfo]) {
-        NSDate * saveDate = [PublicMethod transferDateStringToDate:[[NSUserDefaults standardUserDefaults] objectForKey:BTTBiBiCunDate]];
-        if ([IVNetwork savedUserInfo].starLevel >= 2 && (![PublicMethod isDateToday:saveDate] || saveDate == nil)) {
-            [self loadBiBiCun];
+    if (self.isHaveUserToken) {
+        [self showHomePopView];
+    }
+}
+
+-(void)showHomePopView {
+    NSDate * saveDate = [PublicMethod transferDateStringToDate:[[NSUserDefaults standardUserDefaults] objectForKey:BTTBiBiCunDate]];
+    if ([IVNetwork savedUserInfo].starLevel >= 2 && (![PublicMethod isDateToday:saveDate] || saveDate == nil)) {
+        [self loadBiBiCun];
+    }
+    //月分紅
+    //        BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
+    //        if (!isShowYuFenHong) {
+    //            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
+    //            [self loadYenFenHong];
+    //        }
+    NSString * showDragonBoatDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTShowDragonBoat];
+    NSString * realLastLoginDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTBeforeLoginDate];
+
+    if (showDragonBoatDate == nil) {
+        NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
+        [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowDragonBoat];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        if (realLastLoginDate && ![realLastLoginDate isEqualToString:@"NO"]) {
+            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:realLastLoginDate]]) {
+                [self showDragonBoat];
+            }
+
+        } else {
+            [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTBeforeLoginDate];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self showDragonBoat];
         }
-        //月分紅
-//        BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
-//        if (!isShowYuFenHong) {
-//            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
-//            [self loadYenFenHong];
-//        }
-        NSString * showDragonBoatDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTShowDragonBoat];
-        NSString * realLastLoginDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTBeforeLoginDate];
-        
-        if (showDragonBoatDate == nil) {
+        //            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork savedUserInfo].lastLoginDate]]) {
+        //                [self showDragonBoat];
+        //            }
+    } else {
+        if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:showDragonBoatDate]]) {
             NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
             [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowDragonBoat];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            if (realLastLoginDate && ![realLastLoginDate isEqualToString:@"NO"]) {
-                if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:realLastLoginDate]]) {
-                    [self showDragonBoat];
-                }
-                
-            } else {
-                [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTBeforeLoginDate];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [self showDragonBoat];
-            }
-//            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork savedUserInfo].lastLoginDate]]) {
-//                [self showDragonBoat];
-//            }
-        } else {
-            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:showDragonBoatDate]]) {
-                NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
-                [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowDragonBoat];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [self showDragonBoat];
-            }
+            [self showDragonBoat];
         }
-        
-        //暫時寫出來
-        
-        if (![[NSUserDefaults standardUserDefaults] objectForKey:BTShowDBPopView]) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:BTShowDBPopView];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
-        [self loadDragonBoatData];
+    }
 
-        [BTTHttpManager requestUnReadMessageNum:nil];
-        NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
-        if (![NSDate isToday:timestamp]) {
-            [self loadLuckyWheelCoinStatus];
-            NSString *timestamp = [NSString stringWithFormat:@"%@",@([[NSDate date] timeIntervalSince1970] * 1000)];
-            [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:BTShowDBPopView]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:BTShowDBPopView];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    [self loadDragonBoatData];
+
+    [BTTHttpManager requestUnReadMessageNum:nil];
+    NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
+    if (![NSDate isToday:timestamp]) {
+        [self loadLuckyWheelCoinStatus];
+        NSString *timestamp = [NSString stringWithFormat:@"%@",@([[NSDate date] timeIntervalSince1970] * 1000)];
+        [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 
@@ -202,6 +206,10 @@
     if (self.idDisable) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockGameBtnPress" object:nil];
     }
+}
+
+-(void)userTokenExpired {
+    self.isHaveUserToken = false;
 }
 
 -(void)checkLoginVersion {
@@ -265,6 +273,8 @@
     [IVNetwork requestPostWithUrl:BTTUnreadInsideMessage paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
+            self.isHaveUserToken = true;
+            [self showHomePopView];
             NSArray *msgList = [[NSArray alloc]initWithArray:result.body[@"data"]];
             if (msgList.count>0) {
                 NSDictionary *json = msgList.firstObject;

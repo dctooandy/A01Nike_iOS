@@ -75,6 +75,7 @@
     [IVHttpManager shareManager].domains = @[[HAInitConfig defaultH5Domain]];
     [IVHttpManager shareManager].domain = [HAInitConfig defaultH5Domain];
     [IVHttpManager shareManager].cdn = [HAInitConfig defaultCDN];
+    [IVHttpManager shareManager].isSensitive = YES;
     [CNTimeLog debugEnable:YES];
     [CNTimeLog setUserName:[IVHttpManager shareManager].loginName];
     [CNTimeLog configProduct:[HAInitConfig product3SId]];
