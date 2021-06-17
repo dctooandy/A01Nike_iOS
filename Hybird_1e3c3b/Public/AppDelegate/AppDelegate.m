@@ -64,6 +64,7 @@
 }
 
 -(void)setDynamicQuery {
+    [IVLAManager needUploadWithNewDomain:YES];
     NSDictionary * params = @{@"bizCode":@"SKYNET_SDK_CONFIG"};
     [IVNetwork requestPostWithUrl:BTTDynamicQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
