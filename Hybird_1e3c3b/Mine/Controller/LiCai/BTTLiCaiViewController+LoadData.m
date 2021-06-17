@@ -10,6 +10,21 @@
 
 @implementation BTTLiCaiViewController (LoadData)
 
+-(void)loadYebConfig {
+    [IVNetwork requestPostWithUrl:BTTLiCaiConfig paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTLiCaiConfigModel * model = [BTTLiCaiConfigModel yy_modelWithJSON:result.body];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.interestRate = model.yearRate;
+                [self.collectionView reloadData];
+            });
+        } else {
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
+
 -(void)loadInterestSum {
     [self loadServerTime:^(NSString * _Nonnull timeStr) {
         NSMutableDictionary * params = [[NSMutableDictionary alloc] init];

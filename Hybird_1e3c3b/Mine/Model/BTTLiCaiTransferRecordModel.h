@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, copy) NSString *yebStatus;
 @property (nonatomic, copy) NSString *lastInterestCreatedTime;
-
+@property (nonatomic, copy) NSString *yebOriginalAmount;//多比轉入開放後，返回初始轉入/操作金額
 @end
 
 NS_ASSUME_NONNULL_END

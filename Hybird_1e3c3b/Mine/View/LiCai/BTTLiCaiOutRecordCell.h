@@ -1,8 +1,8 @@
 //
-//  BTTLiCaiRecordCell.h
+//  BTTLiCaiOutRecordCell.h
 //  Hybird_1e3c3b
 //
-//  Created by Jairo on 4/27/21.
+//  Created by JerryHU on 2021/5/20.
 //  Copyright © 2021 BTT. All rights reserved.
 //
 
@@ -11,9 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BTTLiCaiRecordCell : BTTBaseCollectionViewCell
+@interface BTTLiCaiOutRecordCell : BTTBaseCollectionViewCell
 @property (nonatomic, copy) NSArray *titleArr;
-@property (nonatomic, assign) BOOL isTransferOut;
 @property (nonatomic, strong)BTTLiCaiTransferRecordItemModel * model;
 @end
 
