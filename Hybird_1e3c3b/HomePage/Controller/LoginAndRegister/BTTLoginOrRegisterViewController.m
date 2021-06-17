@@ -83,6 +83,8 @@
     self.item=[AVPlayerItem playerItemWithAsset:asset];
     //设置AVPlayer中的AVPlayerItem
     self.player=[AVPlayer playerWithPlayerItem:self.item];
+    //靜音
+    self.player.volume = 0;
     //初始化layer 传入player
     AVPlayerLayer *layer=[AVPlayerLayer playerLayerWithPlayer:self.player];
     //设置layer的属性
