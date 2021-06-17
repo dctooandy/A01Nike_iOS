@@ -25,6 +25,7 @@
 #import <AVKit/AVKit.h>
 #import "BTTLoginInfoView.h"
 #import "BTTVideoNormalRegisterView.h"
+#import "AppInitializeConfig.h"
 
 @interface BTTLoginOrRegisterViewController ()<UITextFieldDelegate>
 
@@ -195,6 +196,11 @@
         make.width.height.mas_equalTo(72);
         make.centerX.mas_equalTo(self.view.mas_centerX);
     }];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    appIcon.userInteractionEnabled = YES;
+    tap.numberOfTapsRequired = 5;
+    [appIcon addGestureRecognizer:tap];
     
     weakSelf(weakSelf);
     BTTLoginInfoView *loginInfoView = [[BTTLoginInfoView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 345)];
@@ -399,6 +405,30 @@
 -(void)bgTap {
     [self.imgCodePopViewBg removeFromSuperview];
     self.cancelBtn = nil;
+}
+
+- (void)tap {
+    NSString *type = @"";
+    switch (EnvirmentType) {
+        case 0:
+        {
+            type = @"本地版本";
+        }
+            break;
+        case 1:
+        {
+            type = @"运测版本";
+        }
+            break;
+        case 2:
+        {
+            type = @"运营版本";
+        }
+            break;
+        default:
+            break;
+    }
+    [MBProgressHUD showMessagNoActivity:[NSString stringWithFormat:@"当前版本是: %@ \n\n %@",app_version,type] toView:nil];
 }
 
 #pragma mark - textfielddelegate

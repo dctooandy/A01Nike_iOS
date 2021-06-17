@@ -18,7 +18,7 @@
 #import "BTTVoiceCallViewController.h"
 #import "BTTLoginOrRegisterViewController.h"
 #import <IVCacheLibrary/IVCacheWrapper.h>
-
+#import "BTTRegisterSuccessController.h"
 
 @interface BTTTabbarController ()<BTTTabBarDelegate, UINavigationControllerDelegate,JXRegisterManagerDelegate>
 
@@ -335,7 +335,9 @@
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
     UIViewController *root = navigationController.viewControllers.firstObject;
     BTTBaseNavigationController *nav = (BTTBaseNavigationController *)navigationController;
-    if (viewController == root) {
+    if ([viewController isKindOfClass:[BTTRegisterSuccessController class]]) {
+        navigationController.interactivePopGestureRecognizer.enabled = NO;
+    } else if (viewController == root) {
         navigationController.interactivePopGestureRecognizer.delegate = nav.popDelegate;
         // 让Dock从root上移除
         [_myTabbar removeFromSuperview];
