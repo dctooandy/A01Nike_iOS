@@ -180,6 +180,9 @@
         };
         return cell;
     }
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"] && indexPath.row == self.sheetDatas.count-3) {
+        cellModel = self.sheetDatas[indexPath.row - 1];
+    }
     NSString *cellName = cellModel.name;
     if ([cellName isEqualToString:@"取款至"]) {
         BTTWithdrawalCardSelectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalCardSelectCell" forIndexPath:indexPath];
@@ -189,9 +192,6 @@
     }
     
     BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
-    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"] && indexPath.row == self.sheetDatas.count-3) {
-        cellModel = self.sheetDatas[indexPath.row - 1];
-    }
     cell.model = cellModel;
     cell.textField.userInteractionEnabled = cellModel.available;
     cell.textField.text = cellModel.desc;
@@ -415,6 +415,7 @@
         }
         [self.view endEditing:YES];
         self.usdtAmount = @"";
+        self.password = @"";
         self.usdtField.text = self.usdtAmount;
         [self getSubmitBtn].enabled = false;
         [self loadMainData];
