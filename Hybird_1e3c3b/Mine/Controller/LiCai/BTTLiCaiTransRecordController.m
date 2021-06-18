@@ -235,13 +235,11 @@
         [self.elementsHight removeAllObjects];
     }
     NSInteger total = 0;
-    NSInteger height = 0;
+    NSInteger height = 138;
     if (self.btnView.billBtn.selected) {
         total = self.interestModelArr.count;
-        height = 138;
     } else {
         total = self.modelArr.count;
-        height = 163;
     }
     if (total == 0) {
         total = 1;
