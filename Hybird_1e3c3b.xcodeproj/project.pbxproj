@@ -668,7 +668,6 @@
 		4135A733263A667400D3BF17 /* BTTLiCaiInDetailPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A731263A667400D3BF17 /* BTTLiCaiInDetailPopView.m */; };
 		4135A738263AAE4A00D3BF17 /* BTTInterestCreditLogsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A737263AAE4A00D3BF17 /* BTTInterestCreditLogsModel.m */; };
 		4135A742263AB93200D3BF17 /* BTTLiCaiConfigModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A73B263AB89F00D3BF17 /* BTTLiCaiConfigModel.m */; };
-		4135C70B266F724100C3A9E9 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		4135C714266F736900C3A9E9 /* BTTLiCaiOutRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135C70E266F736800C3A9E9 /* BTTLiCaiOutRecordCell.m */; };
 		4135C715266F736900C3A9E9 /* BTTLiCaiInRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4135C70F266F736800C3A9E9 /* BTTLiCaiInRecordCell.xib */; };
 		4135C716266F736900C3A9E9 /* BTTLiCaiInRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135C710266F736900C3A9E9 /* BTTLiCaiInRecordCell.m */; };
@@ -6439,7 +6438,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.267;
+				MARKETING_VERSION = 3.2.269;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6481,7 +6480,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.267;
+				MARKETING_VERSION = 3.2.269;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

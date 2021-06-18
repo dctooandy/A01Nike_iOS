@@ -68,8 +68,8 @@
     double total = amount + finalInterestAmt;
     self.outAmountLab.text = [PublicMethod transferNumToThousandFormat:[PublicMethod calculateTwoDecimals:total]];
     
-    self.balanceLab.text = self.model.amount;
-    self.interestLab.text = self.model.finalInterestAmt;
+    self.balanceLab.text = [PublicMethod transferNumToThousandFormat:[PublicMethod calculateTwoDecimals:amount]];
+    self.interestLab.text = [PublicMethod transferNumToThousandFormat:[PublicMethod calculateTwoDecimals:finalInterestAmt]];
 }
 
 -(NSString *)statusToStr:(NSInteger)status {
