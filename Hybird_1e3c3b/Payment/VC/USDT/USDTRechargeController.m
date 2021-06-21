@@ -14,6 +14,7 @@
 @property (nonatomic, strong) OCTRechargeUSDTView * rechargeView;
 @property (nonatomic,copy) NSString *selectedProtocol;
 @property (nonatomic, strong) NSDictionary *qrJson;
+@property (nonatomic, assign) BOOL isFirstLoad;
 @end
 
 @implementation USDTRechargeController
@@ -26,6 +27,14 @@
     [self setupViews];
     [self requestUSDTRate];
     [self requestQrcode];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (!_isFirstLoad) {
+        [CNTimeLog endRecordTime:CNEventPayLaunch];
+        _isFirstLoad = YES;
+    }
 }
 
 -(void)setupViews {

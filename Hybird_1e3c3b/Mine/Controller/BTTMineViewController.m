@@ -410,10 +410,12 @@
         [self.navigationController pushViewController:personInfo animated:YES];
         return;
     } else if ([model.name isEqualToString:@"充值USDT"]){
+        [CNTimeLog startRecordTime:CNEventPayLaunch];
         USDTRechargeController *vc = [[USDTRechargeController alloc]init];
         [self.navigationController pushViewController:vc animated:true];
         return;
     } else if ([model.name isEqualToString:@"购买USDT"]){
+        [CNTimeLog startRecordTime:CNEventPayLaunch];
         USDTBuyController * vc = [[USDTBuyController alloc] init];
         [self.navigationController pushViewController:vc animated:true];
         return;
