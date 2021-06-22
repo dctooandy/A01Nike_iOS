@@ -697,6 +697,7 @@
 		415CA1EB24E53ADF005E0E9F /* USDTRechargeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1E724E53ADF005E0E9F /* USDTRechargeController.m */; };
 		415CA1EE24E53AF6005E0E9F /* OCTRechargeUSDTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1EC24E53AF6005E0E9F /* OCTRechargeUSDTView.m */; };
 		415CA1F024E53B0B005E0E9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 415CA1EF24E53B0B005E0E9F /* Assets.xcassets */; };
+		4161031F2681E18200328EEF /* login_bg_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4161031E2681E18200328EEF /* login_bg_video.mp4 */; };
 		41755C52262E74D600B6884D /* LiveChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 41755C50262E74D600B6884D /* LiveChat.m */; };
 		41800D5A2623E95900FAC27B /* BTTAddBitollCardController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41800D592623E95900FAC27B /* BTTAddBitollCardController.xib */; };
 		4180B03925D36EBB00139E88 /* BTTOtherGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4180B03725D36EBB00139E88 /* BTTOtherGameCell.m */; };
@@ -816,7 +817,6 @@
 		D35BF24323B451340085D6A1 /* CNPayUSDTQRSecondVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D35BF23E23B451330085D6A1 /* CNPayUSDTQRSecondVC.xib */; };
 		D365536623C05739007E50BE /* BTTPayUsdtNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D365536523C05739007E50BE /* BTTPayUsdtNoticeView.m */; };
 		D365536823C05755007E50BE /* BTTPayUsdtNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D365536723C05755007E50BE /* BTTPayUsdtNoticeView.xib */; };
-		D3708E1423FB902300602715 /* login_bg_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D3708E1323FB902300602715 /* login_bg_video.mp4 */; };
 		D3708E1723FB973000602715 /* BTTLoginInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = D3708E1623FB973000602715 /* BTTLoginInfoView.m */; };
 		D3896A5123F5380900D48271 /* BTTPointCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D3896A5023F5380900D48271 /* BTTPointCardModel.m */; };
 		D38A44AA246E97ED00BC8764 /* BTTBitollWithDrawCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D38A44A9246E97ED00BC8764 /* BTTBitollWithDrawCell.m */; };
@@ -2002,6 +2002,7 @@
 		415CA1EC24E53AF6005E0E9F /* OCTRechargeUSDTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTRechargeUSDTView.m; sourceTree = "<group>"; };
 		415CA1ED24E53AF6005E0E9F /* OCTRechargeUSDTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTRechargeUSDTView.h; sourceTree = "<group>"; };
 		415CA1EF24E53B0B005E0E9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4161031E2681E18200328EEF /* login_bg_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = login_bg_video.mp4; sourceTree = "<group>"; };
 		41755C50262E74D600B6884D /* LiveChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveChat.m; sourceTree = "<group>"; };
 		41755C51262E74D600B6884D /* LiveChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveChat.h; sourceTree = "<group>"; };
 		41800D592623E95900FAC27B /* BTTAddBitollCardController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTAddBitollCardController.xib; sourceTree = "<group>"; };
@@ -2203,7 +2204,6 @@
 		D365536423C05739007E50BE /* BTTPayUsdtNoticeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPayUsdtNoticeView.h; sourceTree = "<group>"; };
 		D365536523C05739007E50BE /* BTTPayUsdtNoticeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPayUsdtNoticeView.m; sourceTree = "<group>"; };
 		D365536723C05755007E50BE /* BTTPayUsdtNoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTPayUsdtNoticeView.xib; sourceTree = "<group>"; };
-		D3708E1323FB902300602715 /* login_bg_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = login_bg_video.mp4; sourceTree = "<group>"; };
 		D3708E1523FB973000602715 /* BTTLoginInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLoginInfoView.h; sourceTree = "<group>"; };
 		D3708E1623FB973000602715 /* BTTLoginInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLoginInfoView.m; sourceTree = "<group>"; };
 		D3896A4F23F5380900D48271 /* BTTPointCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPointCardModel.h; sourceTree = "<group>"; };
@@ -3239,8 +3239,8 @@
 		3A8F5160215F75010069D1B3 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				4161031E2681E18200328EEF /* login_bg_video.mp4 */,
 				41EAF0F5260D94290091FE09 /* hot.gif */,
-				D3708E1323FB902300602715 /* login_bg_video.mp4 */,
 				D3B47D5823B70A5400D37C7F /* app.zip */,
 				3A8F5134215F74CF0069D1B3 /* Main.storyboard */,
 				415CA1EF24E53B0B005E0E9F /* Assets.xcassets */,
@@ -5309,7 +5309,6 @@
 				D31B0EF523B45251003666BA /* BTTUSDTItemCell.xib in Resources */,
 				3A5AE69222D6E22A0013E8A3 /* LIVFileMessage_TypeExcel@2x.png in Resources */,
 				3A5AE6D422D6E22A0013E8A3 /* LIVWarningIcon@2x.png in Resources */,
-				D3708E1423FB902300602715 /* login_bg_video.mp4 in Resources */,
 				D5DBEB3421ABB774008AF629 /* CNPayChannelCell.xib in Resources */,
 				419AEC5B250F64F100D089DD /* BTTBJLPopView.xib in Resources */,
 				3A9E4C3F219E55E200E7D8C0 /* BTTMakeCallSuccessView.xib in Resources */,
@@ -5585,6 +5584,7 @@
 				3A5AE66122D6E22A0013E8A3 /* LIVEmotionBoardCell.nib in Resources */,
 				D331B20C23D539B10080A27D /* BTTConsetiveWinsPopView.xib in Resources */,
 				3A5AE6A022D6E22A0013E8A3 /* LIVVideoCamera_close@2x.png in Resources */,
+				4161031F2681E18200328EEF /* login_bg_video.mp4 in Resources */,
 				3A11AE632186CDA100B1AFF4 /* BTTXimaHeaderCell.xib in Resources */,
 				3A5AE6B822D6E22A0013E8A3 /* LIVFileMessage_TypePPT@3x.png in Resources */,
 				3A5AE6A622D6E22A0013E8A3 /* LIVAutoScrollTextView11.png in Resources */,
