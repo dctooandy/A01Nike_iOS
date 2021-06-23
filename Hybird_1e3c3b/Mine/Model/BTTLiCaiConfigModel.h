@@ -37,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *currency;
 @property (nonatomic, copy) NSString *periodHours;
 @property (nonatomic, copy) NSString *yearRate;
+@property (nonatomic, copy) NSString *yebAmount;
+@property (nonatomic, copy) NSString *yebInterest;
 @end
 
 NS_ASSUME_NONNULL_END

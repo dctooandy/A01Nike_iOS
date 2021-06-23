@@ -1,29 +1,35 @@
 //
-//  BTTLiCaiRecordCell.m
+//  BTTLiCaiOutRecordCell.m
 //  Hybird_1e3c3b
 //
-//  Created by Jairo on 4/27/21.
+//  Created by JerryHU on 2021/5/20.
 //  Copyright © 2021 BTT. All rights reserved.
 //
 
-#import "BTTLiCaiRecordCell.h"
+#import "BTTLiCaiOutRecordCell.h"
 
-@interface BTTLiCaiRecordCell()
+@interface BTTLiCaiOutRecordCell()
 
 @property (weak, nonatomic) IBOutlet UILabel *timeTitleLab;
 @property (weak, nonatomic) IBOutlet UILabel *orderNumberTitleLab;
 @property (weak, nonatomic) IBOutlet UILabel *statusTitleLab;
-@property (weak, nonatomic) IBOutlet UILabel *amountTitleLab;
+@property (weak, nonatomic) IBOutlet UILabel *outAmountTitleLab;
+@property (weak, nonatomic) IBOutlet UILabel *balanceTitleLab;
+@property (weak, nonatomic) IBOutlet UILabel *interestTitleLab;
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLab;
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property (weak, nonatomic) IBOutlet UILabel *orderNumberLab;
 @property (weak, nonatomic) IBOutlet UILabel *statusLab;
-@property (weak, nonatomic) IBOutlet UILabel *amountLab;
+@property (weak, nonatomic) IBOutlet UILabel *outAmountLab;
+@property (weak, nonatomic) IBOutlet UILabel *balanceLab;
+@property (weak, nonatomic) IBOutlet UILabel *interestLab;
+
 
 @end
 
-@implementation BTTLiCaiRecordCell
+
+@implementation BTTLiCaiOutRecordCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -35,7 +41,10 @@
     self.timeTitleLab.text = titleArr[0];
     self.orderNumberTitleLab.text = titleArr[1];
     self.statusTitleLab.text = titleArr[2];
-    self.amountTitleLab.text = titleArr[3];
+    
+    self.outAmountTitleLab.text = titleArr[3];
+    self.balanceTitleLab.text = titleArr[4];
+    self.interestTitleLab.text = titleArr[5];
 }
 
 -(void)setModel:(BTTLiCaiTransferRecordItemModel *)model {
@@ -56,12 +65,11 @@
     
     double amount = [self.model.amount doubleValue];
     double finalInterestAmt = [self.model.finalInterestAmt doubleValue];
-    double total = self.isTransferOut ? amount + finalInterestAmt:amount;
-    self.amountLab.text = [PublicMethod transferNumToThousandFormat:[PublicMethod calculateTwoDecimals:total]];
-}
-
--(void)setIsTransferOut:(BOOL)isTransferOut {
-    _isTransferOut = isTransferOut;
+    double total = amount + finalInterestAmt;
+    self.outAmountLab.text = [PublicMethod transferNumToThousandFormat:[PublicMethod calculateTwoDecimals:total]];
+    
+    self.balanceLab.text = [PublicMethod transferNumToThousandFormat:[PublicMethod calculateTwoDecimals:amount]];
+    self.interestLab.text = [PublicMethod transferNumToThousandFormat:[PublicMethod calculateTwoDecimals:finalInterestAmt]];
 }
 
 -(NSString *)statusToStr:(NSInteger)status {

@@ -15,6 +15,7 @@ typedef void (^ShowOutPopViewCompleteBlock)(NSMutableArray * modelArr);
 typedef void (^TransferCompleteBlock)(void);
 
 @interface BTTLiCaiViewController (LoadData)
+-(void)loadYebConfig;
 -(void)loadInterestSum;
 -(void)loadLocalAmount;
 -(void)loadTransferInRecords:(ShowOutPopViewCompleteBlock)completeBlock;

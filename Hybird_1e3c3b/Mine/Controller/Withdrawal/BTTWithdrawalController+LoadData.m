@@ -152,7 +152,7 @@
     NSArray *placeholders4 = @[pString,@"USDT",@"***银行-尾号*****",withdrawPwdP,@"",@"",@""];
     NSArray *heights1 = @[@205.0,@15.0];
     NSArray *heights3 = @[@44.0,@44.0,@44.0,@44.0,@100.0];
-    NSArray *heights4 = @[@44.0,@44.0,@44,@44,@44.0,@28,@240.0];
+    NSArray *heights4 = @[@44.0,@44.0,@44,@44,@44.0,@46.0,@240.0];
     
     NSArray *canEdits1 = @[@NO,@NO];
     NSArray *canEdits3 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO];

@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UILabel * redTitleLab;
 @property (nonatomic, strong) NSMutableDictionary * cellDic;
 @property (nonatomic, copy) NSString * redTitleBankName;
+@property (nonatomic, assign) BOOL isFirstLoad;
 @end
 
 @implementation USDTBuyController
@@ -29,6 +30,14 @@
     self.redTitleBankName = @"DEXCHANGE";
     [self setUpView];
     [self requestBankList];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (!_isFirstLoad) {
+        [CNTimeLog endRecordTime:CNEventPayLaunch];
+        _isFirstLoad = YES;
+    }
 }
 
 - (void)requestBankList {

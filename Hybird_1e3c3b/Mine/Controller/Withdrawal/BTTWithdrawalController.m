@@ -136,7 +136,7 @@
         [cell setCellRateWithRate:self.usdtRate];
         return cell;
     }
-    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]&&indexPath.row==self.sheetDatas.count-3) {
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]&&indexPath.row==self.sheetDatas.count-4) {
         BTTWithDrawProtocolView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawProtocolView" forIndexPath:indexPath];
         if ([self.bankList[self.selectIndex].protocol isEqualToString:@""]) {
             [cell setTypeData:@[@"OMNI",@"ERC20"]];
@@ -179,6 +179,9 @@
             [self.navigationController pushViewController:vc animated:YES];
         };
         return cell;
+    }
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"] && indexPath.row == self.sheetDatas.count-3) {
+        cellModel = self.sheetDatas[indexPath.row - 1];
     }
     NSString *cellName = cellModel.name;
     if ([cellName isEqualToString:@"取款至"]) {
@@ -412,6 +415,7 @@
         }
         [self.view endEditing:YES];
         self.usdtAmount = @"";
+        self.password = @"";
         self.usdtField.text = self.usdtAmount;
         [self getSubmitBtn].enabled = false;
         [self loadMainData];

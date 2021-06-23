@@ -26,10 +26,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"活期理财钱包";
+    self.interestRate = @"加载中";
     self.walletAmount = @"加载中";
     self.earn = @"加载中";
     self.accountBalance = @"加载中";
     [self setUpNav];
+    [self loadYebConfig];
     [self loadLocalAmount];
     [self loadInterestSum];
     [self setupElements];
@@ -130,7 +132,12 @@
         } else {
             cell.earn = [PublicMethod transferNumToThousandFormat:[self.earn doubleValue]];
         }
-        cell.interestRate = [NSString stringWithFormat:@"%@%%-%@%%", @"8", @"30"];
+        
+        if ([self.interestRate isEqualToString:@"加载中"]) {
+            cell.interestRate = self.interestRate;
+        } else {
+            cell.interestRate = [NSString stringWithFormat:@"%@%%", self.interestRate];
+        }
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             BTTLiCaiTransRecordController * vc = [[BTTLiCaiTransRecordController alloc] init];
             vc.transferType = 2;
@@ -237,7 +244,7 @@
     NSMutableArray *elementsHight = [NSMutableArray array];
     for (int i = 0; i < total; i++) {
         if (i == 0) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, BTTBnnnerDefaultHeight * (SCREEN_WIDTH / BTTBannerDefaultWidth))]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, BTTBnnnerDefaultHeight * (SCREEN_WIDTH / BTTBannerDefaultWidth) + 2 * 10)]];
         } else if (i == 1) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 10)]];
         } else if (i == 2) {

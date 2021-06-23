@@ -28,7 +28,7 @@
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(16, 12, 100, 20)];
         label.text = @"协议";
         label.textColor = [UIColor whiteColor];
-        label.font = [UIFont boldSystemFontOfSize:14];
+        label.font = [UIFont boldSystemFontOfSize:16];
         [infoView addSubview:label];
         
         _ercBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-115, 5, 100, 30)];

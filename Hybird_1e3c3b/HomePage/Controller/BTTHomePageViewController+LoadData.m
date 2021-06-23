@@ -342,11 +342,11 @@ static const char *BTTChanceCountKey = "chanceCount";
                     self.noticeStr = dict.content;
                 }
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.collectionView reloadData];
-            });
-            dispatch_group_leave(group);
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+        });
+        dispatch_group_leave(group);
     }];
 }
 

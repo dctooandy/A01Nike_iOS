@@ -8,9 +8,10 @@
 
 #import "BTTLiCaiTransRecordController.h"
 #import "BTTLiCaiTransRecordTopBtnView.h"
-#import "BTTLiCaiRecordCell.h"
 #import "BTTLiCaiInterestRateBillCell.h"
 #import "BTTVideoGamesNoDataCell.h"
+#import "BTTLiCaiInRecordCell.h"
+#import "BTTLiCaiOutRecordCell.h"
 #import "BTTLiCaiTransRecordController+LoadData.h"
 #import "CLive800Manager.h"
 
@@ -26,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"转账记录";
-    self.titleArr = @[@"转出时间", @"订单编号", @"状态", @"金额"];
+    self.titleArr = @[@"转出时间", @"订单编号", @"状态", @"转出金额", @"本金", @"利息"];
     self.view.backgroundColor = [UIColor colorWithHexString:@"212229"];
     self.page = 1;
     self.modelArr = [[NSMutableArray alloc] init];
@@ -89,13 +90,13 @@
         [weakSelf.interestModelArr removeAllObjects];
         switch (button.tag) {
             case 0:
-                weakSelf.titleArr = @[@"转出时间", @"订单编号", @"状态", @"金额"];
+                weakSelf.titleArr = @[@"转出时间", @"订单编号", @"状态", @"转出金额", @"本金", @"利息"];
                 weakSelf.page = 1;
                 weakSelf.transferType = 2;
                 [weakSelf loadRecords];
                 break;
             case 1:
-                weakSelf.titleArr = @[@"转入时间", @"订单编号", @"状态", @"金额"];
+                weakSelf.titleArr = @[@"转入时间", @"订单编号", @"状态", @"转入金额", @"余额"];
                 weakSelf.page = 1;
                 weakSelf.transferType = 1;
                 [weakSelf loadRecords];
@@ -145,9 +146,10 @@
         make.top.equalTo(self.btnView.mas_bottom);
         make.left.bottom.right.equalTo(self.view);
     }];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTLiCaiRecordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTLiCaiRecordCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTLiCaiInterestRateBillCell" bundle:nil] forCellWithReuseIdentifier:@"BTTLiCaiInterestRateBillCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTVideoGamesNoDataCell" bundle:nil] forCellWithReuseIdentifier:@"BTTVideoGamesNoDataCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTLiCaiInRecordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTLiCaiInRecordCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTLiCaiOutRecordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTLiCaiOutRecordCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -165,12 +167,23 @@
             cell.noDataLabel.text = @"暂无记录";
             return cell;
         }
-         
+        
+    } else if(self.btnView.outRecordBtn.selected) {
+        if (self.modelArr.count > 0) {
+            BTTLiCaiOutRecordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLiCaiOutRecordCell" forIndexPath:indexPath];
+            cell.titleArr = self.titleArr;
+            cell.model = self.modelArr[indexPath.row];
+            return cell;
+        } else {
+            BTTVideoGamesNoDataCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVideoGamesNoDataCell" forIndexPath:indexPath];
+            cell.noDataLabel.text = @"暂无记录";
+            return cell;
+        }
+        
     } else {
         if (self.modelArr.count > 0) {
-            BTTLiCaiRecordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLiCaiRecordCell" forIndexPath:indexPath];
+            BTTLiCaiInRecordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTLiCaiInRecordCell" forIndexPath:indexPath];
             cell.titleArr = self.titleArr;
-            cell.isTransferOut = self.btnView.outRecordBtn.selected;
             cell.model = self.modelArr[indexPath.row];
             return cell;
         } else {
@@ -221,10 +234,12 @@
     if (self.elementsHight.count) {
         [self.elementsHight removeAllObjects];
     }
-    NSInteger total = self.btnView.billBtn.selected ?  self.interestModelArr.count:self.modelArr.count;
-    NSInteger height = 111;
+    NSInteger total = 0;
+    NSInteger height = 138;
     if (self.btnView.billBtn.selected) {
-        height = 138;
+        total = self.interestModelArr.count;
+    } else {
+        total = self.modelArr.count;
     }
     if (total == 0) {
         total = 1;
