@@ -323,7 +323,7 @@ static const char *exModelKey = "exModelKey";
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:model.login_name forKey:@"loginName"];
     if (self.askInputCodeId.length) {
-        [params setValue:self.askInputCodeId forKey:@"referralCode"];
+        [params setValue:self.askInputCodeId.copy forKey:@"referralCode"];
     }
     [params setValue:[IVRsaEncryptWrapper encryptorString:model.password] forKey:@"password"];
     

@@ -203,7 +203,8 @@
         [MBProgressHUD showError:@"请输入正确的验证码" toView:nil];
     }else{
         if (self.tapRegister) {
-            self.tapRegister(_accountField.text, _imgCodeField.text , _askInputCodeField.text);
+            self.tapRegister(_accountField.text, _imgCodeField.text , _askInputCodeField.text.copy);
+            _askInputCodeField.text = @"";
         }
     }
 }
