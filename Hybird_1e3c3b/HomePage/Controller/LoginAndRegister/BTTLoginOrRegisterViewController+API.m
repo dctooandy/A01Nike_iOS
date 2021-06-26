@@ -322,7 +322,9 @@ static const char *exModelKey = "exModelKey";
 - (void)createRealAccountWithModel:(BTTCreateAPIModel *)model{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setValue:model.login_name forKey:@"loginName"];
-    
+    if (self.askInputCodeId.length) {
+        [params setValue:self.askInputCodeId forKey:@"referralCode"];
+    }
     [params setValue:[IVRsaEncryptWrapper encryptorString:model.password] forKey:@"password"];
     
     [self showLoading];
@@ -561,6 +563,9 @@ static const char *exModelKey = "exModelKey";
     if (model.phone.length) {
         [params setObject:[IVRsaEncryptWrapper encryptorString:model.phone] forKey:@"mobileNo"];
     }
+    if (self.askInputCodeId.length) {
+        [params setValue:self.askInputCodeId forKey:@"referralCode"];
+    }
     [self showLoading];
     [IVNetwork requestPostWithUrl:BTTUserRegister paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
@@ -621,6 +626,9 @@ static const char *exModelKey = "exModelKey";
     [params setValue:model.login_name forKey:@"loginName"];
     
     [params setValue:self.messageId forKey:@"messageId"];
+    if (self.askInputCodeId.length) {
+        [params setValue:self.askInputCodeId forKey:@"referralCode"];
+    }
     NSString *pwd = [self getRandomPassword];
     [params setValue:[IVRsaEncryptWrapper encryptorString:pwd] forKey:@"password"];
     
