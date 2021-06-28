@@ -487,12 +487,10 @@
                     [MBProgressHUD showError:@"抱歉, 该游戏不支持苹果手机, 请使用安卓系统手机下载就可以了" toView:nil];
                     return;
                 }
-
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.iosLink]];
             };
             return cell;
-        }
-        else if (indexPath.row == 11) {
+        } else if (indexPath.row == 11) {
             BTTHomePageActivitiesCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageActivitiesCell" forIndexPath:indexPath];
             BTTActivityModel *model = self.Activities.count ? self.Activities[self.nextGroup] : nil;
             cell.activityModel = model;
