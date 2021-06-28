@@ -9,6 +9,7 @@
 #import "USDTBuyController.h"
 #import "OTCInsideModel.h"
 #import "OTCInsideCell.h"
+#import "BTTBindingMobileController.h"
 
 @interface USDTBuyController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView * walletCollectionView;
@@ -140,7 +141,14 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     OTCInsideModel *model = [OTCInsideModel yy_modelWithJSON:self.bankList[indexPath.row]];
-    if (model.otcMarketLink!=nil&&![model.otcMarketLink isEqualToString:@""]) {
+    if (model.otcMarketName.length != 0 && [model.otcMarketName isEqualToString:self.redTitleBankName]&&[IVNetwork savedUserInfo].mobileNoBind != 1) {
+        BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
+        vc.mobileCodeType = BTTSafeVerifyTypeBindMobile;
+        vc.showNotice = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
+        vc.isWithdrawIn = false;
+        [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (model.otcMarketLink!=nil&&![model.otcMarketLink isEqualToString:@""]) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.title = model.otcMarketName;
         vc.webConfigModel.theme = @"outside";
