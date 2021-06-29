@@ -103,12 +103,10 @@
         [self.view addSubview:self.assistiveButton];
     }
     [self checkLoginVersion];
-    if ([IVNetwork savedUserInfo]) {
-        [self checkUserForzen];
-    } else {
-        
-    }
+
 //    [self setupFloatWindow];
+    //监听内部广播
+    //状态:已登入过,检查没有Token过期
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBannerData) name:@"CHANGE_MODE" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestRedbag) name:LoginSuccessNotification object:nil];
@@ -134,6 +132,11 @@
         [BTTAGGJViewController addGameViewToWindow];
 //        [[IVGameManager sharedManager] reloadCacheGame];
         [CNTimeLog endRecordTime:CNEventAppLaunch];
+        if ([IVNetwork savedUserInfo]) {
+            [self checkUserForzen];
+        } else {
+//            [self checkUserForzen];
+        }
     }
 }
 
@@ -316,7 +319,9 @@
         [self drawBonus];
         [popView dismiss];
     };
-    
+    popView.popComplete = ^{
+        
+    };
 }
 - (void)showDSBRedBagWithFlag:(NSString *)flag{
     DSBRedBagPopView *alertView = [DSBRedBagPopView viewFromXib];
