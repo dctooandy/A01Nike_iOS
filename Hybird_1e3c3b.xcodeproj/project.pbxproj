@@ -751,7 +751,7 @@
 		4196BEDA255A3F2400F41EED /* BTTHumanModifyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4196BED7255A3F2400F41EED /* BTTHumanModifyCell.xib */; };
 		4196BEF1255BC21B00F41EED /* BTTWithdrawToUsdtPromoPop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4196BEEF255BC21B00F41EED /* BTTWithdrawToUsdtPromoPop.xib */; };
 		4196BEF2255BC21B00F41EED /* BTTWithdrawToUsdtPromoPop.m in Sources */ = {isa = PBXBuildFile; fileRef = 4196BEF0255BC21B00F41EED /* BTTWithdrawToUsdtPromoPop.m */; };
-		4198128E268AFAEB00CE309F /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
+		4198128F268B027800CE309F /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		419AEC5A250F64F100D089DD /* BTTBJLPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 419AEC57250F64F000D089DD /* BTTBJLPopView.m */; };
 		419AEC5B250F64F100D089DD /* BTTBJLPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419AEC59250F64F100D089DD /* BTTBJLPopView.xib */; };
 		41A09D3825E4F4BD00255681 /* BTTDifferentLocPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A09D3525E4F4BD00255681 /* BTTDifferentLocPopView.xib */; };
@@ -2404,7 +2404,7 @@
 				3AD9CE2B2167107B00685B43 /* libilbccodec-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */,
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
-				4198128E268AFAEB00CE309F /* libboringssl_simulator.a in Frameworks */,
+				4198128F268B027800CE309F /* libboringssl_simulator.a in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
