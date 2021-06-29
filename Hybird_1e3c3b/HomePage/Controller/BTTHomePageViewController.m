@@ -46,6 +46,7 @@
 #import "BTTUserStatusManager.h"
 #import "BTTChooseCurrencyPopView.h"
 #import "BTTUserGameCurrencyModel.h"
+#import "BTTUserForzenPopView.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -102,11 +103,17 @@
         [self.view addSubview:self.assistiveButton];
     }
     [self checkLoginVersion];
+    if ([IVNetwork savedUserInfo]) {
+        [self checkUserForzen];
+    } else {
+        
+    }
 //    [self setupFloatWindow];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBannerData) name:@"CHANGE_MODE" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestRedbag) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadBanner) name:LoginSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkUserForzen) name:LoginSuccessNotification object:nil];
 }
 
 #pragma mark - viewDidAppear
@@ -286,7 +293,31 @@
     }];
     
 }
-
+#pragma mark - 检查用户资金冻结
+- (void)checkUserForzen{
+    [self showUserForzenPopView];
+}
+- (void)showUserForzenPopView
+{
+    BTTUserForzenPopView *alertView = [BTTUserForzenPopView viewFromXib];
+    
+    [alertView setContentMessage:@"content_58"];
+    
+    
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    alertView.tapActivity = ^{
+        [popView dismiss];
+        
+    };
+    alertView.tapConfirm = ^{
+        [self drawBonus];
+        [popView dismiss];
+    };
+    
+}
 - (void)showDSBRedBagWithFlag:(NSString *)flag{
     DSBRedBagPopView *alertView = [DSBRedBagPopView viewFromXib];
     if ([flag isEqualToString:@"108"]) {

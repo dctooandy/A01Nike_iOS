@@ -770,6 +770,8 @@
 		7629D7E8266C933E00CF758C /* BTTDragonBoatAutoPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629D7E5266C933E00CF758C /* BTTDragonBoatAutoPopView.xib */; };
 		7629D7E9266C933E00CF758C /* BTTDragonBoatAutoPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629D7E6266C933E00CF758C /* BTTDragonBoatAutoPopView.m */; };
 		7629DCEE268B133C00CF758C /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
+		7629DCF4268B245C00CF758C /* BTTUserForzenPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629DCF1268B245C00CF758C /* BTTUserForzenPopView.m */; };
+		7629DCF5268B245C00CF758C /* BTTUserForzenPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629DCF2268B245C00CF758C /* BTTUserForzenPopView.xib */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
@@ -2121,6 +2123,9 @@
 		7629D7E5266C933E00CF758C /* BTTDragonBoatAutoPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatAutoPopView.xib; sourceTree = "<group>"; };
 		7629D7E6266C933E00CF758C /* BTTDragonBoatAutoPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatAutoPopView.m; sourceTree = "<group>"; };
 		7629D7E7266C933E00CF758C /* BTTDragonBoatAutoPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatAutoPopView.h; sourceTree = "<group>"; };
+		7629DCF1268B245C00CF758C /* BTTUserForzenPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTUserForzenPopView.m; sourceTree = "<group>"; };
+		7629DCF2268B245C00CF758C /* BTTUserForzenPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTUserForzenPopView.xib; sourceTree = "<group>"; };
+		7629DCF3268B245C00CF758C /* BTTUserForzenPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTUserForzenPopView.h; sourceTree = "<group>"; };
 		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
 		76C9F150265E404B0002591D /* CNPayOrderModelV2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayOrderModelV2.m; sourceTree = "<group>"; };
 		76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatPopView.xib; sourceTree = "<group>"; };
@@ -3895,6 +3900,9 @@
 		3AD9CF39216EDC6C00685B43 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7629DCF3268B245C00CF758C /* BTTUserForzenPopView.h */,
+				7629DCF1268B245C00CF758C /* BTTUserForzenPopView.m */,
+				7629DCF2268B245C00CF758C /* BTTUserForzenPopView.xib */,
 				D331B20923D539B10080A27D /* BTTConsetiveWinsPopView.h */,
 				D331B20823D539B10080A27D /* BTTConsetiveWinsPopView.m */,
 				D331B20A23D539B10080A27D /* BTTConsetiveWinsPopView.xib */,
@@ -5620,6 +5628,7 @@
 				D5C501D421B7CEDC00C6DA02 /* BRPickerView.bundle in Resources */,
 				3A5AE6A922D6E22A0013E8A3 /* liv_radio_unselected@2x.png in Resources */,
 				3A5AE67A22D6E22A0013E8A3 /* LIVSatisfactionEvaluationItemCell.nib in Resources */,
+				7629DCF5268B245C00CF758C /* BTTUserForzenPopView.xib in Resources */,
 				3AE1EAB6217D986A0073A32D /* BTTMeInfoHiddenCell.xib in Resources */,
 				3A5AE70122D6E22A0013E8A3 /* LIVCSDefaultAvatar@2x.png in Resources */,
 				3A5AE6CA22D6E22A0013E8A3 /* LIVFileMessage_TypeWord@3x.png in Resources */,
@@ -5814,6 +5823,7 @@
 				3ADD237B2177366B00FA959A /* BTTMeMainCell.m in Sources */,
 				3AE1EB15218048940073A32D /* BTTCardModifyVerifyController+LoadData.m in Sources */,
 				D5DBEB1521ABB774008AF629 /* CNPayOnlineVC.m in Sources */,
+				7629DCF4268B245C00CF758C /* BTTUserForzenPopView.m in Sources */,
 				41042F5E261D88090020B0AA /* BTTPasswordChangeController+LoadData.m in Sources */,
 				413E324F251B3520000804E2 /* BTTCreditRecordController+LoadData.m in Sources */,
 				3A7A1A7121BF859000572B50 /* BTTRegisterSuccessChangePwdCell.m in Sources */,
