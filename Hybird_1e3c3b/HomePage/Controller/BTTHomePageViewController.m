@@ -147,48 +147,45 @@
         BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
         if (!isShowYuFenHong) {
             [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
-//            [self loadYenFenHong];
+            [self loadYenFenHong];
         }
-        NSString * showDragonBoatDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTShowDragonBoat];
-        NSString * realLastLoginDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTBeforeLoginDate];
-        
-        if (showDragonBoatDate == nil)
-        {
-            NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
-            [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowDragonBoat];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            if (realLastLoginDate && ![realLastLoginDate isEqualToString:@"NO"])
-            {
-                if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:realLastLoginDate]]) {
-                    [self showDragonBoat];
-                }
-            }else
-            {
-                [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTBeforeLoginDate];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [self showDragonBoat];
-            }
-//            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:[IVNetwork savedUserInfo].lastLoginDate]]) {
+//        NSString * showDragonBoatDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTShowDragonBoat];
+//        NSString * realLastLoginDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTBeforeLoginDate];
+//
+//        if (showDragonBoatDate == nil)
+//        {
+//            NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
+//            [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowDragonBoat];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            if (realLastLoginDate && ![realLastLoginDate isEqualToString:@"NO"])
+//            {
+//                if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:realLastLoginDate]]) {
+//                    [self showDragonBoat];
+//                }
+//            }else
+//            {
+//                [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTBeforeLoginDate];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
 //                [self showDragonBoat];
 //            }
-        }else{
-            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:showDragonBoatDate]])
-            {
-                NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
-                [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowDragonBoat];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [self showDragonBoat];
-            }
-        }
-        
-        //暫時寫出來
-        
-        if (![[NSUserDefaults standardUserDefaults] objectForKey:BTShowDBPopView])
-        {
-            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:BTShowDBPopView];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
-        [self loadDragonBoatData];
+//        }else{
+//            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:showDragonBoatDate]])
+//            {
+//                NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
+//                [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowDragonBoat];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+//                [self showDragonBoat];
+//            }
+//        }
+//
+//        //暫時寫出來
+//
+//        if (![[NSUserDefaults standardUserDefaults] objectForKey:BTShowDBPopView])
+//        {
+//            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:BTShowDBPopView];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//        }
+//        [self loadDragonBoatData];
 
         [BTTHttpManager requestUnReadMessageNum:nil];
         NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
