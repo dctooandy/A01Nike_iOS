@@ -27,7 +27,7 @@
     [super viewDidLoad];
     self.title = @"解锁账户";
     self.withdrawPwdString = @"";
-    if (_sheetDatas) {
+    if (!_sheetDatas) {
         _sheetDatas = [NSMutableArray array];
     }
     [self setupCollectionView];
@@ -48,7 +48,7 @@
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;
         model.iconName = placeholders[index];
-        [self.sheetDatas addObject:model];
+        [_sheetDatas addObject:model];
     }
     [self setupElements];
 }
