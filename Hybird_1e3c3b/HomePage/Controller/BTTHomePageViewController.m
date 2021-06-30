@@ -354,12 +354,12 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else {
         if ([IVNetwork savedUserInfo].withdralPwdFlag == 1) {
-            ///已设置资金密码
-            //出现验证资金密码VC
-            // 打解锁API
+            /// 已设置资金密码
+            /// 出现验证资金密码VC
+            /// 打解锁API
             [self unbindUserAccount];
         } else {
-            ///未设置资金密码
+            /// 未设置资金密码
             BTTPasswordChangeController *vc = [[BTTPasswordChangeController alloc] init];
             vc.selectedType = BTTChangeWithdrawPwd;
             vc.isGoToMinePage = false;
