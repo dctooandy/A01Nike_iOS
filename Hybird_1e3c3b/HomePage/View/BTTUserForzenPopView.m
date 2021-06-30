@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *activityImage;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
-@property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
+@property (weak, nonatomic) IBOutlet UIButton *dismissButton;
 @end
 
 @implementation BTTUserForzenPopView
@@ -23,20 +23,23 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    _confirmBtn.layer.cornerRadius = 4.0;
-    _confirmBtn.clipsToBounds = YES;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
-    [self addGestureRecognizer:tap];
+    _dismissButton.layer.cornerRadius = 4.0;
+    _dismissButton.clipsToBounds = YES;
 }
 
-- (void)tap {
+- (IBAction)activityBtn_click:(id)sender {
     if (self.tapActivity) {
         self.tapActivity();
     }
 }
-- (IBAction)confirmBtn_click:(id)sender {
-    if (self.tapActivity) {
-        self.tapActivity();
+- (IBAction)serviceBtn_click:(id)sender {
+    if (self.tapService) {
+        self.tapService();
+    }
+}
+- (IBAction)dismissBtn_click:(id)sender {
+    if (self.tapDismiss) {
+        self.tapDismiss();
     }
 }
 

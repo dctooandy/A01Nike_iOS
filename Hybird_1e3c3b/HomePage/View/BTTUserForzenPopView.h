@@ -12,8 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTUserForzenPopView : BTTBaseAnimationPopView
 
+@property (nonatomic, copy) void(^tapDismiss)(void);
 @property (nonatomic, copy) void(^tapActivity)(void);
-@property (nonatomic, copy) void(^tapConfirm)(void);
+@property (nonatomic, copy) void(^tapService)(void);
 - (void)setContentMessage:(NSString *)message;
 
 @end

@@ -47,6 +47,8 @@
 #import "BTTChooseCurrencyPopView.h"
 #import "BTTUserGameCurrencyModel.h"
 #import "BTTUserForzenPopView.h"
+#import "BTTBindingMobileController.h"
+#import "BTTPasswordChangeController.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -298,30 +300,67 @@
 }
 #pragma mark - 检查用户资金冻结
 - (void)checkUserForzen{
+    ///檢查是否凍結用戶,這邊先過
     [self showUserForzenPopView];
 }
 - (void)showUserForzenPopView
 {
     BTTUserForzenPopView *alertView = [BTTUserForzenPopView viewFromXib];
-    
-    [alertView setContentMessage:@"content_58"];
-    
-    
+//    alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+//    [alertView setContentMessage:@"content_58"];
+ 
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
     
     popView.isClickBGDismiss = YES;
     [popView pop];
+    weakSelf(weakSelf)
+    [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
     alertView.tapActivity = ^{
         [popView dismiss];
-        
+        [weakSelf checkForMobileNum];
     };
-    alertView.tapConfirm = ^{
-        [self drawBonus];
+    alertView.tapDismiss = ^{
         [popView dismiss];
     };
-    popView.popComplete = ^{
-        
+    alertView.tapService = ^{
+        [popView dismiss];
+        [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
+            if (errCode != CSServiceCode_Request_Suc) {//异常处理
+                BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+                    if (buttonIndex == 0) {
+                        [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+                    }else if (buttonIndex == 1){
+                        [[CLive800Manager sharedInstance] startLive800Chat:self];
+                    }
+                }];
+                [actionSheet show];
+            }
+        }];
     };
+}
+- (void)checkForMobileNum
+{
+    if ([IVNetwork savedUserInfo].mobileNoBind != 1) {
+        BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
+        BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
+        vc.mobileCodeType = BTTSafeVerifyTypeBindMobile;
+        vc.showNotice = isUSDTAcc;
+        vc.isWithdrawIn = true;
+        [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else {
+        if ([IVNetwork savedUserInfo].withdralPwdFlag == 1) {
+            //出现验证资金密码VC
+        } else {
+            
+            BTTPasswordChangeController *vc = [[BTTPasswordChangeController alloc] init];
+            vc.selectedType = BTTChangeWithdrawPwd;
+            vc.isGoToMinePage = false;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
 }
 - (void)showDSBRedBagWithFlag:(NSString *)flag{
     DSBRedBagPopView *alertView = [DSBRedBagPopView viewFromXib];
