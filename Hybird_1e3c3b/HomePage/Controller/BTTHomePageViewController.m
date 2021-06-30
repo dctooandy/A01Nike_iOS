@@ -49,6 +49,7 @@
 #import "BTTUserForzenPopView.h"
 #import "BTTBindingMobileController.h"
 #import "BTTPasswordChangeController.h"
+#import "BTTUserForzenVerityViewController.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -356,8 +357,10 @@
         if ([IVNetwork savedUserInfo].withdralPwdFlag == 1) {
             /// 已设置资金密码
             /// 出现验证资金密码VC
+            BTTUserForzenVerityViewController *vc = [BTTUserForzenVerityViewController new];
+            [self.navigationController pushViewController:vc animated:YES];
             /// 打解锁API
-            [self unbindUserAccount];
+//            [self unbindUserAccount];
         } else {
             /// 未设置资金密码
             BTTPasswordChangeController *vc = [[BTTPasswordChangeController alloc] init];
