@@ -135,6 +135,7 @@
                     [self.navigationController popToRootViewControllerAnimated:true];
                 } else if (weakSelf.isGoToUserForzenVC){
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoUnBindUser" object:nil];
+                    [self.navigationController popToRootViewControllerAnimated:true];
                 }else{
                     [self.navigationController popViewControllerAnimated:true];
                 }
