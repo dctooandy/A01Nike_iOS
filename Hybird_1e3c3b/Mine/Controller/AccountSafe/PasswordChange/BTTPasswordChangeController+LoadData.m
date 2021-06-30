@@ -133,7 +133,9 @@
                 
                 if (weakSelf.isGoToMinePage) {
                     [self.navigationController popToRootViewControllerAnimated:true];
-                } else {
+                } else if (weakSelf.isGoToUserForzenVC){
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoUnBindUser" object:nil];
+                }else{
                     [self.navigationController popViewControllerAnimated:true];
                 }
             }];

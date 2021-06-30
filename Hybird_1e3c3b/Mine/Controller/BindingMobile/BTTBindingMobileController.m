@@ -60,6 +60,9 @@
         case BTTSafeVerifyTypeMobileDelUSDTCard:
             self.title = @"删除取款钱包";
             break;
+        case BTTUserForzenTypeBindMobile:
+            self.title = @"解锁帐户";
+            break;
         default:
             self.title = @"安全验证";
             break;
@@ -518,6 +521,15 @@
                 case BTTSafeVerifyTypeMobileDelUSDTCard:
                     [self deleteBankOrBTC:YES];
                     break;
+                case BTTUserForzenTypeBindMobile:
+                {
+                    [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                    [BTTHttpManager fetchUserInfoCompleteBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoUserForzenVC" object:nil];
+                    }];
+                    break;
+                }
                 default:
                     break;
             }

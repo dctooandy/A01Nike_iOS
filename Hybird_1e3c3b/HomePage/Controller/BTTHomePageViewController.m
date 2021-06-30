@@ -114,6 +114,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestRedbag) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadBanner) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkUserForzen) name:LoginSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkForMobileNumAndCode) name:@"gotoUserForzenVC" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unbindUserAccount) name:@"gotoUnBindUser" object:nil];
 }
 
 #pragma mark - viewDidAppear
@@ -319,7 +321,7 @@
     }];
     alertView.tapActivity = ^{
         [popView dismiss];
-        [weakSelf checkForMobileNum];
+        [weakSelf checkForMobileNumAndCode];
     };
     alertView.tapDismiss = ^{
         [popView dismiss];
@@ -340,27 +342,35 @@
         }];
     };
 }
-- (void)checkForMobileNum
+- (void)checkForMobileNumAndCode
 {
     if ([IVNetwork savedUserInfo].mobileNoBind != 1) {
+        ///没有绑定手机
         BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
         BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-        vc.mobileCodeType = BTTSafeVerifyTypeBindMobile;
+        vc.mobileCodeType = BTTUserForzenTypeBindMobile;
         vc.showNotice = isUSDTAcc;
-        vc.isWithdrawIn = true;
         [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
         [self.navigationController pushViewController:vc animated:YES];
     }else {
         if ([IVNetwork savedUserInfo].withdralPwdFlag == 1) {
+            ///已设置资金密码
             //出现验证资金密码VC
+            // 打解锁API
+            [self unbindUserAccount];
         } else {
-            
+            ///未设置资金密码
             BTTPasswordChangeController *vc = [[BTTPasswordChangeController alloc] init];
             vc.selectedType = BTTChangeWithdrawPwd;
             vc.isGoToMinePage = false;
+            vc.isGoToUserForzenVC = true;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
+}
+- (void)unbindUserAccount
+{
+    [MBProgressHUD showMessagNoActivity:@"解锁成功!!!" toView:nil];
 }
 - (void)showDSBRedBagWithFlag:(NSString *)flag{
     DSBRedBagPopView *alertView = [DSBRedBagPopView viewFromXib];

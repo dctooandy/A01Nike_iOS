@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *validateId;
 @property (nonatomic, assign) BOOL isVerifySuccess;
 @property (nonatomic, assign) BOOL isGoToMinePage;
+@property (nonatomic, assign) BOOL isGoToUserForzenVC;
 @property (nonatomic, strong) BTTBankModel *bankModel;
 
 -(UITextField *)getPhoneTF;
