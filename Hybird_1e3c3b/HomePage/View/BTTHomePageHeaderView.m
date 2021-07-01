@@ -190,6 +190,15 @@
             [self setRedDotKey:BTTMineCenterNavMessage refreshBlock:^(BOOL show) {
                 messageBtn.showRedDot = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey] integerValue];
             } handler:self];
+            
+            ///
+            UIButton *testBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [self addSubview:testBtn];
+            testBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - 30 - 30 - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            [testBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
+            testBtn.tag = 2003;
+            [testBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+            ///
         }
         default:
             break;

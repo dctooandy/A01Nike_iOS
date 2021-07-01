@@ -773,6 +773,7 @@
 		7629DCF4268B245C00CF758C /* BTTUserForzenPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629DCF1268B245C00CF758C /* BTTUserForzenPopView.m */; };
 		7629DCF5268B245C00CF758C /* BTTUserForzenPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629DCF2268B245C00CF758C /* BTTUserForzenPopView.xib */; };
 		7629DCFE268C30D000CF758C /* BTTUserForzenVerityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629DCFD268C30D000CF758C /* BTTUserForzenVerityViewController.m */; };
+		7629DDB5268D4DD700CF758C /* BTTUserForzenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629DDB4268D4DD700CF758C /* BTTUserForzenManager.m */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
@@ -2129,6 +2130,8 @@
 		7629DCF3268B245C00CF758C /* BTTUserForzenPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTUserForzenPopView.h; sourceTree = "<group>"; };
 		7629DCFC268C30D000CF758C /* BTTUserForzenVerityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUserForzenVerityViewController.h; sourceTree = "<group>"; };
 		7629DCFD268C30D000CF758C /* BTTUserForzenVerityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUserForzenVerityViewController.m; sourceTree = "<group>"; };
+		7629DDB3268D4DD700CF758C /* BTTUserForzenManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUserForzenManager.h; sourceTree = "<group>"; };
+		7629DDB4268D4DD700CF758C /* BTTUserForzenManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUserForzenManager.m; sourceTree = "<group>"; };
 		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
 		76C9F150265E404B0002591D /* CNPayOrderModelV2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayOrderModelV2.m; sourceTree = "<group>"; };
 		76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatPopView.xib; sourceTree = "<group>"; };
@@ -3181,6 +3184,8 @@
 				EA5F140D21A261BA004305A7 /* BTTHttpManager.m */,
 				EA5F141E21A2AEC1004305A7 /* BTTUserStatusManager.h */,
 				EA5F141F21A2AEC1004305A7 /* BTTUserStatusManager.m */,
+				7629DDB3268D4DD700CF758C /* BTTUserForzenManager.h */,
+				7629DDB4268D4DD700CF758C /* BTTUserForzenManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -6084,6 +6089,7 @@
 				3A9E4C7521A2571600E7D8C0 /* BTTChangeMobileManualController.m in Sources */,
 				3ADD23762177328B00FA959A /* BTTMeSaveMoneyCell.m in Sources */,
 				3AAE8217219A738B003EC8B0 /* BTTLoginCell.m in Sources */,
+				7629DDB5268D4DD700CF758C /* BTTUserForzenManager.m in Sources */,
 				3AD9CD542165B2C900685B43 /* BTTPopoverView.m in Sources */,
 				D3A0413724BEA9070022BEDC /* BTTDcboxPayController.m in Sources */,
 				3A7C0B1521EC6B0F002658CC /* BTTSaveMoneyErrorModel.m in Sources */,

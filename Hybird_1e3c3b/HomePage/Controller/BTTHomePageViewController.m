@@ -46,10 +46,7 @@
 #import "BTTUserStatusManager.h"
 #import "BTTChooseCurrencyPopView.h"
 #import "BTTUserGameCurrencyModel.h"
-#import "BTTUserForzenPopView.h"
-#import "BTTBindingMobileController.h"
-#import "BTTPasswordChangeController.h"
-#import "BTTUserForzenVerityViewController.h"
+#import "BTTUserForzenManager.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -114,9 +111,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestRedbag) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadBanner) name:LoginSuccessNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkUserForzen) name:LoginSuccessNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkForMobileNumAndCode) name:@"gotoUserForzenVC" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unbindUserAccount) name:@"gotoUnBindUser" object:nil];
 }
 
 #pragma mark - viewDidAppear
@@ -138,9 +132,8 @@
 //        [[IVGameManager sharedManager] reloadCacheGame];
         [CNTimeLog endRecordTime:CNEventAppLaunch];
         if ([IVNetwork savedUserInfo]) {
-            [self checkUserForzen];
+            [[BTTUserForzenManager sharedInstance] checkUserForzen];
         } else {
-//            [self checkUserForzen];
         }
     }
 }
@@ -301,80 +294,7 @@
     }];
     
 }
-#pragma mark - 检查用户资金冻结
-- (void)checkUserForzen{
-    ///檢查是否凍結用戶,這邊先過
-    [self showUserForzenPopView];
-}
-- (void)showUserForzenPopView
-{
-    BTTUserForzenPopView *alertView = [BTTUserForzenPopView viewFromXib];
-//    alertView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//    [alertView setContentMessage:@"content_58"];
- 
-    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-    
-    popView.isClickBGDismiss = YES;
-    [popView pop];
-    weakSelf(weakSelf)
-    [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
-    }];
-    alertView.tapActivity = ^{
-        [popView dismiss];
-        [weakSelf checkForMobileNumAndCode];
-    };
-    alertView.tapDismiss = ^{
-        [popView dismiss];
-    };
-    alertView.tapService = ^{
-        [popView dismiss];
-        [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
-            if (errCode != CSServiceCode_Request_Suc) {//异常处理
-                BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
-                    if (buttonIndex == 0) {
-                        [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
-                    }else if (buttonIndex == 1){
-                        [[CLive800Manager sharedInstance] startLive800Chat:self];
-                    }
-                }];
-                [actionSheet show];
-            }
-        }];
-    };
-}
-- (void)checkForMobileNumAndCode
-{
-    if ([IVNetwork savedUserInfo].mobileNoBind != 1) {
-        ///没有绑定手机
-        BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
-        BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-        vc.mobileCodeType = BTTUserForzenTypeBindMobile;
-        vc.showNotice = isUSDTAcc;
-        [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
-        [self.navigationController pushViewController:vc animated:YES];
-    }else {
-        if ([IVNetwork savedUserInfo].withdralPwdFlag == 1) {
-            /// 已设置资金密码
-            /// 出现验证资金密码VC
-            BTTUserForzenVerityViewController *vc = [BTTUserForzenVerityViewController new];
-            [self.navigationController pushViewController:vc animated:YES];
-            /// 打解锁API
-//            [self unbindUserAccount];
-        } else {
-            /// 未设置资金密码
-            BTTPasswordChangeController *vc = [[BTTPasswordChangeController alloc] init];
-            vc.selectedType = BTTChangeWithdrawPwd;
-            vc.isGoToMinePage = false;
-            vc.isGoToUserForzenVC = true;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-    }
-}
-- (void)unbindUserAccount
-{
-    [MBProgressHUD showMessagNoActivity:@"解锁成功!!!" toView:nil];
-}
+
 - (void)showDSBRedBagWithFlag:(NSString *)flag{
     DSBRedBagPopView *alertView = [DSBRedBagPopView viewFromXib];
     if ([flag isEqualToString:@"108"]) {
