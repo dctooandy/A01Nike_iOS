@@ -8,7 +8,7 @@
 
 #import "BTTPasswordChangeController+LoadData.h"
 #import "BTTBindingMobileController.h"
-
+#import "BTTUserForzenManager.h"
 @implementation BTTPasswordChangeController (LoadData)
 
 -(void)sendCode {
@@ -134,7 +134,12 @@
                 if (weakSelf.isGoToMinePage) {
                     [self.navigationController popToRootViewControllerAnimated:true];
                 } else if (weakSelf.isGoToUserForzenVC){
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoUnBindUser" object:@{@"wPassword":[IVRsaEncryptWrapper encryptorString:new]}];
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoUnBindUser" object:@{@"wPassword":[IVRsaEncryptWrapper encryptorString:new]}];
+                    weakSelf(weakSelf)
+                    [[BTTUserForzenManager sharedInstance] unBindUserForzenAccount:[IVRsaEncryptWrapper encryptorString:new] completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                        [MBProgressHUD showMessagNoActivity:@"解锁成功!!!" toView:nil];
+                        [weakSelf.navigationController popToRootViewControllerAnimated:true];
+                    }];
                     [self.navigationController popToRootViewControllerAnimated:true];
                 }else{
                     [self.navigationController popViewControllerAnimated:true];

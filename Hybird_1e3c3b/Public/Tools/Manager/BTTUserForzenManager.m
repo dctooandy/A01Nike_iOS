@@ -37,7 +37,7 @@ static BTTUserForzenManager * sharedSingleton;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkUserForzen) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showUserForzenPopViewByNoti) name:@"showUserForzenPopView" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkForMobileNumAndCode) name:@"gotoUserForzenVC" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unbindUserAccount:) name:@"gotoUnBindUser" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unbindUserAccountByNotifi:) name:@"gotoUnBindUser" object:nil];
 }
 #pragma mark - 检查用户资金冻结
 - (void)checkUserForzen{
@@ -116,32 +116,39 @@ static BTTUserForzenManager * sharedSingleton;
         }
     }
 }
-- (void)unbindUserAccount:(NSNotification *)notifi
+- (void)unbindUserAccountByNotifi:(NSNotification *)notifi
 {
     NSDictionary * dic = notifi.object;
     if (dic[@"wPassword"])
     {
-        NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-        params[@"password"] = dic[@"wPassword"];//资金密码
-        
-//        params[@"smsCode"] = [HAInitConfig appId];///短信验证码
-        
-        //    NSDictionary *params = @{@"use":@(use),@"productId":@"A01APP02",@"mobileNo":[IVRsaEncryptWrapper encryptorString:phone]};
-        [IVNetwork requestPostWithUrl:BTTUnlockBalance paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            IVJResponseObject *result = response;
-            
-            if ([result.head.errCode isEqualToString:@"0000"]) {
-                
-                [[self currentViewController].navigationController popToRootViewControllerAnimated:true];
-                [MBProgressHUD showMessagNoActivity:@"解锁成功!!!" toView:nil];
-            }else
-            {
-                [MBProgressHUD showError:result.head.errMsg toView:nil];
-            }
-            
+        weakSelf(weakSelf)
+        [self unBindUserForzenAccount:dic[@"wPassword"] completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            [MBProgressHUD showMessagNoActivity:@"解锁成功!!!" toView:nil];
+            [[weakSelf currentViewController].navigationController popToRootViewControllerAnimated:true];
         }];
-        
     }
+}
+-(void)unBindUserForzenAccount:(NSString *)wPassword completionBlock:(UserForzenCallBack)completionBlock
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    params[@"password"] = wPassword;//资金密码
+    
+    //        params[@"smsCode"] = [HAInitConfig appId];///短信验证码
+    
+    [IVNetwork requestPostWithUrl:BTTUnlockBalance paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            
+//            [[self currentViewController].navigationController popToRootViewControllerAnimated:true];
+            
+            completionBlock(nil,nil);
+        }else
+        {
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+        
+    }];
 }
 - (UIViewController*)topMostWindowController
 {

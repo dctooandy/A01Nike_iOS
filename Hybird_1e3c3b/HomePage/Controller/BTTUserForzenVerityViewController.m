@@ -14,10 +14,13 @@
 #import "BTTChangeMobileSuccessController.h"
 #import "HAInitConfig.h"
 #import "BTTPasswordCell.h"
+#import "BTTUserForzenManager.h"
+#import "BTTUserForzenBGView.h"
 
 @interface BTTUserForzenVerityViewController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, copy) NSString *withdrawPwdString;
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
+@property (nonatomic, assign) BOOL isSuccess;
 @end
 
 
@@ -31,7 +34,9 @@
         _sheetDatas = [NSMutableArray array];
     }
     [self setupCollectionView];
+    [self setupBackGroundView];
     [self loadMainData];
+    _isSuccess = NO;
 }
 - (void)setupCollectionView {
     [super setupCollectionView];
@@ -39,6 +44,25 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPasswordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPasswordCell"];
+}
+- (void)setupBackGroundView
+{
+    BTTUserForzenBGView *bgView = [BTTUserForzenBGView viewFromXib];
+    [self.collectionView setBackgroundView:bgView];
+    weakSelf(weakSelf)
+    bgView.tapToWithdraw = ^{
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoMineNotification object:nil];
+        });
+    };
+    bgView.tapToHome = ^{
+        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoHomePageNotification object:nil];
+        });
+    };
+    [[self.collectionView backgroundView] setHidden:YES];
 }
 - (void)loadMainData {
     NSArray *names = @[@"资金密码"];
@@ -53,7 +77,14 @@
     [self setupElements];
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.elementsHight.count;
+    if (self.isSuccess == NO)
+    {
+        return self.elementsHight.count;
+    }else
+    {
+        return 0;
+    }
+    
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     weakSelf(weakSelf)
@@ -97,36 +128,20 @@
 }
 - (void)saveBtnClickded:(UIButton *)sender
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoUnBindUser" object:@{@"wPassword":[IVRsaEncryptWrapper encryptorString:self.withdrawPwdString]}];
-//    NSString *url = BTTAddBankCard;
-//    NSMutableDictionary *params = @{}.mutableCopy;
-////    params[@"accountNo"] = [self getSureAddressTF].text;
-//    params[@"password"] = [IVRsaEncryptWrapper encryptorString:self.withdrawPwdString];
-//    params[@"accountType"] = @"BTC";
-//    params[@"expire"] = @0;
-////    params[@"messageId"] = self.messageId;
-////    params[@"validateId"] = self.validateId;
-//    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
-//    
-//    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-//    weakSelf(weakSelf)
-//    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-//        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-//        IVJResponseObject *result = response;
-//        if ([result.head.errCode isEqualToString:@"0000"]) {
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoUserForzenVC" object:nil];
-//        }else{
-//            if ([result.head.errCode isEqualToString:@"GW_601596"]) {
-//                IVActionHandler confirm = ^(UIAlertAction *action){
-//                };
-//                NSString *title = @"温馨提示";
-//                NSString *message = @"资金密码错误，请重新输入！";
-//                [IVUtility showAlertWithActionTitles:@[@"确认"] handlers:@[confirm] title:title message:message];
-//                return;
-//            }
-//            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
-//        }
-//    }];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoUnBindUser" object:@{@"wPassword":[IVRsaEncryptWrapper encryptorString:self.withdrawPwdString]}];
+    weakSelf(weakSelf)
+    [[BTTUserForzenManager sharedInstance] unBindUserForzenAccount:[IVRsaEncryptWrapper encryptorString:self.withdrawPwdString] completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [weakSelf successActions];
+    }];
+    // 测试
+//    [self successActions];
+}
+- (void)successActions
+{
+    [MBProgressHUD showMessagNoActivity:@"解锁成功!!!" toView:nil];
+    _isSuccess = YES;
+    [[self.collectionView backgroundView] setHidden:NO];
+    [self setupElements];
 }
 #pragma mark - LMJCollectionViewControllerDataSource
 
@@ -173,8 +188,8 @@
         }
     }
     self.elementsHight = elementsHight.mutableCopy;
-    dispatch_async(dispatch_get_main_queue(), ^{
+//    dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
-    });
+//    });
 }
 @end
