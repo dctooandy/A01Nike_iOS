@@ -63,6 +63,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"首页";
+    [BTTUserForzenManager sharedInstance];
     if ([IVNetwork savedUserInfo]) {
         self.isLogin = YES;
         [self checkHasShow];
@@ -131,10 +132,10 @@
         [BTTAGGJViewController addGameViewToWindow];
 //        [[IVGameManager sharedManager] reloadCacheGame];
         [CNTimeLog endRecordTime:CNEventAppLaunch];
-        if ([IVNetwork savedUserInfo]) {
-            [[BTTUserForzenManager sharedInstance] checkUserForzen];
-        } else {
-        }
+//        if ([IVNetwork savedUserInfo]) {
+//            [[BTTUserForzenManager sharedInstance] checkUserForzen];
+//        } else {
+//        }
     }
 }
 

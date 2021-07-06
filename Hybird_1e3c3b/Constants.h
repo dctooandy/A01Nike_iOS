@@ -334,6 +334,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTGetLoginInfoByName                      @"customer/getByLoginName"
 // 根据登录名获取会员统计信息
 #define BTTGetLoginInfoByNameEx                    @"customer/getByLoginNameEx"
+// 解除资金冻结绑定
+#define BTTUnlockBalance                    @"customer/unlockBalanceStatus"
 // 查询400热线
 #define BTT400Line                                 @"queryVIPLine"
 // 解锁账号
@@ -563,6 +565,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTServerTime                              @"_extra_/api/v1/serverTime"
 //活期理財 - 利息賬單紀錄
 #define BTTLiCaiInterestRecords                    @"_extra_/api/v1/ws/query-yeb-interest-logs"
+//活期理財 - 累積收益
+#define BTTLiCaiInterestSum                        @"_extra_/api/v1/ws/yeb-interest-logs-sum"
 //活期理財 - 累積收益
 #define BTTLiCaiInterestSum                        @"_extra_/api/v1/ws/yeb-interest-logs-sum"
 //龍舟活動ㄦ-查询用户机会次数统计

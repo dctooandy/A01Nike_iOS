@@ -97,35 +97,36 @@
 }
 - (void)saveBtnClickded:(UIButton *)sender
 {
-    NSString *url = BTTAddBankCard;
-    NSMutableDictionary *params = @{}.mutableCopy;
-//    params[@"accountNo"] = [self getSureAddressTF].text;
-    params[@"password"] = [IVRsaEncryptWrapper encryptorString:self.withdrawPwdString];
-    params[@"accountType"] = @"BTC";
-    params[@"expire"] = @0;
-//    params[@"messageId"] = self.messageId;
-//    params[@"validateId"] = self.validateId;
-    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
-    
-    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
-    weakSelf(weakSelf)
-    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoUserForzenVC" object:nil];
-        }else{
-            if ([result.head.errCode isEqualToString:@"GW_601596"]) {
-                IVActionHandler confirm = ^(UIAlertAction *action){
-                };
-                NSString *title = @"温馨提示";
-                NSString *message = @"资金密码错误，请重新输入！";
-                [IVUtility showAlertWithActionTitles:@[@"确认"] handlers:@[confirm] title:title message:message];
-                return;
-            }
-            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
-        }
-    }];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoUnBindUser" object:@{@"wPassword":[IVRsaEncryptWrapper encryptorString:self.withdrawPwdString]}];
+//    NSString *url = BTTAddBankCard;
+//    NSMutableDictionary *params = @{}.mutableCopy;
+////    params[@"accountNo"] = [self getSureAddressTF].text;
+//    params[@"password"] = [IVRsaEncryptWrapper encryptorString:self.withdrawPwdString];
+//    params[@"accountType"] = @"BTC";
+//    params[@"expire"] = @0;
+////    params[@"messageId"] = self.messageId;
+////    params[@"validateId"] = self.validateId;
+//    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+//    
+//    [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
+//    weakSelf(weakSelf)
+//    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//        [MBProgressHUD hideHUDForView:weakSelf.view animated:NO];
+//        IVJResponseObject *result = response;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoUserForzenVC" object:nil];
+//        }else{
+//            if ([result.head.errCode isEqualToString:@"GW_601596"]) {
+//                IVActionHandler confirm = ^(UIAlertAction *action){
+//                };
+//                NSString *title = @"温馨提示";
+//                NSString *message = @"资金密码错误，请重新输入！";
+//                [IVUtility showAlertWithActionTitles:@[@"确认"] handlers:@[confirm] title:title message:message];
+//                return;
+//            }
+//            [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
+//        }
+//    }];
 }
 #pragma mark - LMJCollectionViewControllerDataSource
 

@@ -519,6 +519,7 @@
     params[@"inclXmTransferState"] = @1;
     params[@"inclUnBondPhoneCount"] = @1;
     params[@"inclExistsWithdralPwd"] = @1;
+    params[@"inclLockBalanceInfoFlag"] = @1;
     [IVNetwork requestPostWithUrl:BTTGetLoginInfoByName paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;

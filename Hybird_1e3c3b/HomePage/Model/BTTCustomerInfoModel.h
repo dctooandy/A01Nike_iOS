@@ -69,6 +69,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *xmTransferCurrency;
 @property (nonatomic, assign) NSInteger unbondPhoneCount;
 @property (nonatomic, assign) NSInteger withdralPwdFlag;
+@property (nonatomic, assign) NSInteger lockBalanceStatus;
+@property (nonatomic, assign) NSInteger lockBalanceDays;
 @end
 
 NS_ASSUME_NONNULL_END
