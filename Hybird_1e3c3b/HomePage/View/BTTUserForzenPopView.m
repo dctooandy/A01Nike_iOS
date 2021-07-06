@@ -44,7 +44,7 @@
 }
 
 - (void)setContentMessage:(NSString *)message{
-    _contentLabel.text = message;
+    _contentLabel.text = [NSString stringWithFormat:@"您已经超过%@天没有登录网站了\n为了您的资金安全，我们已经将您的余额暂时锁定\n锁定期间，您的以下操作已经被限制：",message];
 }
 
 

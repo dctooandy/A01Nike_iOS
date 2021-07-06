@@ -17,6 +17,7 @@
 #import "BTTUnBindingBtnCell.h"
 #import "BTTHumanModifyCell.h"
 #import "BTTMeMainModel.h"
+#import "BTTUserForzenBGView.h"
 
 @interface BTTPasswordChangeController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
@@ -52,10 +53,22 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTUnBindingBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTUnBindingBtnCell"];
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHumanModifyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHumanModifyCell"];
+    [self setupCollectionBackGroundView];
 }
-
+- (void)setupCollectionBackGroundView
+{
+    BTTUserForzenBGView *bgView = [BTTUserForzenBGView viewFromXib];
+    [bgView setupViewController:self];
+    [self.collectionView setBackgroundView:bgView];
+    [[self.collectionView backgroundView] setHidden:YES];
+}
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.elementsHight.count;
+    if (self.isSuccess == YES)
+    {
+        return  0;
+    }else{
+        return self.elementsHight.count;
+    }
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

@@ -231,7 +231,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="activityImage" destination="wC2-z6-3Q6" id="W6f-ew-nfj"/>
-                <outlet property="contentLabel" destination="7rv-tE-4zx" id="zNy-hA-X4p"/>
+                <outlet property="contentLabel" destination="nOk-tp-Pj9" id="zyn-Sp-juh"/>
                 <outlet property="dismissButton" destination="rgd-SX-t7i" id="lyq-Kl-bqn"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="152.67857142857142"/>

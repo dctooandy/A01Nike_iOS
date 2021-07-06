@@ -132,10 +132,10 @@
         [BTTAGGJViewController addGameViewToWindow];
 //        [[IVGameManager sharedManager] reloadCacheGame];
         [CNTimeLog endRecordTime:CNEventAppLaunch];
-//        if ([IVNetwork savedUserInfo]) {
-//            [[BTTUserForzenManager sharedInstance] checkUserForzen];
-//        } else {
-//        }
+        if ([IVNetwork savedUserInfo]) {
+            [[BTTUserForzenManager sharedInstance] checkUserForzen];
+        } else {
+        }
     }
 }
 

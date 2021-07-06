@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void(^tapToWithdraw)(void);
 @property (nonatomic, copy) void(^tapToHome)(void);
 + (instancetype)viewFromXib;
+-(void)setupViewController:(UIViewController *)cView;
 @end
 
 NS_ASSUME_NONNULL_END

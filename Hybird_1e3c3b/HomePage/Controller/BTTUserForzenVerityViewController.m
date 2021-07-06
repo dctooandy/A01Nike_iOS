@@ -48,20 +48,8 @@
 - (void)setupBackGroundView
 {
     BTTUserForzenBGView *bgView = [BTTUserForzenBGView viewFromXib];
+    [bgView setupViewController:self];
     [self.collectionView setBackgroundView:bgView];
-    weakSelf(weakSelf)
-    bgView.tapToWithdraw = ^{
-        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoMineNotification object:nil];
-        });
-    };
-    bgView.tapToHome = ^{
-        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoHomePageNotification object:nil];
-        });
-    };
     [[self.collectionView backgroundView] setHidden:YES];
 }
 - (void)loadMainData {
@@ -128,7 +116,6 @@
 }
 - (void)saveBtnClickded:(UIButton *)sender
 {
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoUnBindUser" object:@{@"wPassword":[IVRsaEncryptWrapper encryptorString:self.withdrawPwdString]}];
     weakSelf(weakSelf)
     [[BTTUserForzenManager sharedInstance] unBindUserForzenAccount:[IVRsaEncryptWrapper encryptorString:self.withdrawPwdString] completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [weakSelf successActions];

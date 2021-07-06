@@ -11,6 +11,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *withdrawButton;
 @property (weak, nonatomic) IBOutlet UIButton *homePageButton;
+@property (strong, nonatomic) UIViewController * currentViewController;
 @end
 @implementation BTTUserForzenBGView
 
@@ -20,7 +21,35 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    [self setupUI];
+}
+-(void)setupViewController:(UIViewController *)cView
+{
+    _currentViewController = cView;
+}
+-(void)setupUI
+{
+    weakSelf(weakSelf)
     
+    self.tapToWithdraw = ^{
+        if ([weakSelf.currentViewController navigationController])
+        {
+            [[weakSelf.currentViewController navigationController] popToRootViewControllerAnimated:YES];
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoMineNotification object:nil];
+        });
+    };
+    self.tapToHome = ^{
+        if ([weakSelf.currentViewController navigationController])
+        {
+            [[weakSelf.currentViewController navigationController] popToRootViewControllerAnimated:YES];
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:BTTRegisterSuccessGotoHomePageNotification object:nil];
+        });
+    };
+
 }
 - (IBAction)withdrawBtn_click:(id)sender {
     if (self.tapToWithdraw) {
