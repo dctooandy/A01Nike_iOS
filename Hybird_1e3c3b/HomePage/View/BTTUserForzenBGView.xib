@@ -21,7 +21,7 @@
                         <constraint firstAttribute="width" constant="10" id="A7X-LA-8nE"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="withdrawal_successicon" translatesAutoresizingMaskIntoConstraints="NO" id="3qV-VX-IEf">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="duigou" translatesAutoresizingMaskIntoConstraints="NO" id="3qV-VX-IEf">
                     <rect key="frame" x="166" y="150" width="82" height="82"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="3qV-VX-IEf" secondAttribute="height" multiplier="1:1" id="zxq-wk-1ml"/>
@@ -99,9 +99,9 @@
     </objects>
     <resources>
         <image name="binding_confirm_enable_press" width="345" height="44"/>
+        <image name="duigou" width="74" height="74"/>
         <image name="pay_blueBtn" width="345" height="44"/>
         <image name="pay_blueBtnHL" width="345" height="44"/>
-        <image name="withdrawal_successicon" width="82" height="82"/>
         <image name="xima_btn1" width="155" height="41"/>
     </resources>
 </document>
