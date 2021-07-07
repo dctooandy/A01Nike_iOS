@@ -78,15 +78,17 @@
     weakSelf(weakSelf)
     if (indexPath.row == self.sheetDatas.count) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        [cell setButtonType:BTTButtonTypeUserForzen];
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf saveBtnClickded:button];
         };
         return cell;
     } else {
         BTTPasswordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPasswordCell" forIndexPath:indexPath];
+        [cell disableSecureText:YES withTextAlign:NSTextAlignmentRight];
         BTTMeMainModel *model = [BTTMeMainModel new];
         model.name = @"资金密码";
-        model.iconName = @"6位数数字组合";
+        model.iconName = @"请输入资金密码";
         cell.textField.tag = 1000;
         [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         cell.model = model;
@@ -117,15 +119,21 @@
 - (void)saveBtnClickded:(UIButton *)sender
 {
     weakSelf(weakSelf)
-    [[BTTUserForzenManager sharedInstance] unBindUserForzenAccount:[IVRsaEncryptWrapper encryptorString:self.withdrawPwdString] completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        [weakSelf successActions];
+    [[BTTUserForzenManager sharedInstance] unBindUserForzenAccount:[IVRsaEncryptWrapper encryptorString:self.withdrawPwdString] completionBlock:^(NSString *  _Nullable response, NSString * _Nullable error) {
+        if (error)
+        {
+            
+        }else
+        {        
+            [weakSelf successActions:response];
+        }
     }];
     // 测试
 //    [self successActions];
 }
-- (void)successActions
+- (void)successActions:(NSString *)msgString
 {
-    [MBProgressHUD showMessagNoActivity:@"解锁成功!!!" toView:nil];
+    [MBProgressHUD showMessagNoActivity:msgString toView:nil];
     _isSuccess = YES;
     [[self.collectionView backgroundView] setHidden:NO];
     [self setupElements];

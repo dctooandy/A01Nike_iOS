@@ -134,9 +134,15 @@
                 if (weakSelf.isGoToMinePage) {
                     [self.navigationController popToRootViewControllerAnimated:true];
                 } else if (weakSelf.isGoToUserForzenVC){
+                    self.isSuccess = YES;
                     weakSelf(weakSelf)
-                    [[BTTUserForzenManager sharedInstance] unBindUserForzenAccount:[IVRsaEncryptWrapper encryptorString:new] completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-                        [weakSelf successActions];
+                    [[BTTUserForzenManager sharedInstance] unBindUserForzenAccount:[IVRsaEncryptWrapper encryptorString:new] completionBlock:^(NSString *  _Nullable response, NSString * _Nullable error) {
+                        if (error)
+                        {
+                            [self setupElements];
+                        }else{
+                            [weakSelf successActions:response];
+                        }
                     }];
                     // 测试
 //                    [self successActions];
@@ -150,9 +156,9 @@
         }
     }];
 }
-- (void)successActions
+- (void)successActions:(NSString *)msgString
 {
-    [MBProgressHUD showMessagNoActivity:@"解锁成功!!!" toView:nil];
+    [MBProgressHUD showMessagNoActivity:msgString toView:nil];
     self.isSuccess = YES;
     [[self.collectionView backgroundView] setHidden:NO];
     [self setupElements];

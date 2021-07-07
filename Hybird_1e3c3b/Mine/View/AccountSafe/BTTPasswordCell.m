@@ -10,7 +10,8 @@
 #import "BTTMeMainModel.h"
 
 @interface BTTPasswordCell ()<UITextFieldDelegate>
-
+@property (weak, nonatomic) IBOutlet UIButton *eyeButton;
+@property (nonatomic, assign) NSTextAlignment currentAlign;
 
 
 @end
@@ -26,6 +27,7 @@
     _textField.attributedPlaceholder = attrString;
     _textField.delegate = self;
     _textField.secureTextEntry = YES;
+    _currentAlign = NSTextAlignmentLeft;
 }
 
 - (IBAction)showClick:(UIButton *)sender {
@@ -45,7 +47,32 @@
         self.mineSparaterType = BTTMineSparaterTypeNone;
     }
 }
+- (void)disableSecureText:(BOOL)disableSecure withTextAlign:(NSTextAlignment)align
+{
+    _textField.secureTextEntry = !disableSecure;
+    [_eyeButton setHidden:disableSecure];
+    _currentAlign = align;
+}
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    if (self.eyeButton.hidden == NO)
+    {
+        [_textField mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(self.contentView.mas_right).offset(-55);
+        }];
+    }
+    [_textField setTextAlignment:self.currentAlign];
+    NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.alignment = self.currentAlign;
+    NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:_textField.placeholder attributes:
+                                      @{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"818791"],
+                                        NSFontAttributeName:_textField.font
+                                        ,NSParagraphStyleAttributeName:paragraphStyle
+                                      }];
+    _textField.attributedPlaceholder = attrString;
+}
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if (textField.tag == 1000) {

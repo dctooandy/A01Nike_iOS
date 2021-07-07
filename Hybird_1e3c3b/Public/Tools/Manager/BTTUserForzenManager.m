@@ -94,7 +94,7 @@ static BTTUserForzenManager * sharedSingleton;
         ///没有绑定手机
         BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
         BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-        vc.mobileCodeType = BTTUserForzenTypeBindMobile;
+        vc.mobileCodeType = BTTSafeVerifyTypeUserForzenBindMobile;
         vc.showNotice = isUSDTAcc;
         [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
         [[self currentViewController].navigationController pushViewController:vc animated:YES];
@@ -122,9 +122,15 @@ static BTTUserForzenManager * sharedSingleton;
     if (dic[@"wPassword"])
     {
         weakSelf(weakSelf)
-        [self unBindUserForzenAccount:dic[@"wPassword"] completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            [MBProgressHUD showMessagNoActivity:@"解锁成功!!!" toView:nil];
-            [[weakSelf currentViewController].navigationController popToRootViewControllerAnimated:true];
+        [self unBindUserForzenAccount:dic[@"wPassword"] completionBlock:^(NSString *  _Nullable response, NSString * _Nullable error) {
+            if (error)
+            {
+                
+            }else
+            {
+                [MBProgressHUD showMessagNoActivity:response toView:nil];
+                [[weakSelf currentViewController].navigationController popToRootViewControllerAnimated:true];                
+            }
         }];
     }
 }
@@ -138,14 +144,15 @@ static BTTUserForzenManager * sharedSingleton;
     [IVNetwork requestPostWithUrl:BTTUnlockBalance paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         
-        if ([result.head.errCode isEqualToString:@"0000"]) {
+        if ([result.head.errCode isEqualToString:@"0000"] || [result.head.errCode isEqualToString:@"GW_200001"]) {
             
 //            [[self currentViewController].navigationController popToRootViewControllerAnimated:true];
             
-            completionBlock(nil,nil);
+            completionBlock(result.head.errMsg,nil);
         }else
         {
             [MBProgressHUD showError:result.head.errMsg toView:nil];
+            completionBlock(nil,result.head.errMsg);
         }
         
     }];

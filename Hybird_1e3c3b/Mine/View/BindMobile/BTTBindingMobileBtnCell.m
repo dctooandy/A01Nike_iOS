@@ -102,6 +102,9 @@
         case BTTButtonTypeMemberCenter:
             [self.btn setTitle:@"返回会员中心" forState:UIControlStateNormal];
             break;
+        case BTTButtonTypeUserForzen:
+            [self.btn setTitle:@"马上去解锁" forState:UIControlStateNormal];
+            break;
         default:
             break;
     }

@@ -60,7 +60,7 @@
         case BTTSafeVerifyTypeMobileDelUSDTCard:
             self.title = @"删除取款钱包";
             break;
-        case BTTUserForzenTypeBindMobile:
+        case BTTSafeVerifyTypeUserForzenBindMobile:
             self.title = @"解锁帐户";
             break;
         default:
@@ -102,7 +102,7 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileTwoCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileTwoCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
-    if (self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard || self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard) {
+    if (self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard || self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard || self.mobileCodeType == BTTSafeVerifyTypeUserForzenBindMobile) {
         [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHumanModifyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHumanModifyCell"];
     }
 }
@@ -151,7 +151,8 @@
     } else {
         BTTHumanModifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHumanModifyCell" forIndexPath:indexPath];
         if (self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard
-            || self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard) {
+            || self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard
+            || self.mobileCodeType == BTTSafeVerifyTypeUserForzenBindMobile) {
             cell.btnTitle = @"联系客服";
         }
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
@@ -204,7 +205,9 @@
     }
     NSMutableArray *elementsHight = [NSMutableArray array];
     NSInteger count = 3;
-    if (self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard || self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard) {
+    if (self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard
+        || self.mobileCodeType == BTTSafeVerifyTypeMobileDelUSDTCard
+        || self.mobileCodeType == BTTSafeVerifyTypeUserForzenBindMobile) {
         count = 4;
     }
     for (int i = 0; i < count; i++) {
@@ -521,7 +524,7 @@
                 case BTTSafeVerifyTypeMobileDelUSDTCard:
                     [self deleteBankOrBTC:YES];
                     break;
-                case BTTUserForzenTypeBindMobile:
+                case BTTSafeVerifyTypeUserForzenBindMobile:
                 {
                     [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                     [BTTHttpManager fetchUserInfoCompleteBlock:^(id  _Nullable response, NSError * _Nullable error) {

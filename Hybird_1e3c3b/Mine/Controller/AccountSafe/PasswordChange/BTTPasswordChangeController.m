@@ -111,6 +111,7 @@
                 return cell;
             } else {
                 BTTPasswordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPasswordCell" forIndexPath:indexPath];
+                [cell disableSecureText:NO withTextAlign:NSTextAlignmentRight];
                 cell.textField.tag = 1000;
                 [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
                 BTTMeMainModel *model = self.sheetDatas[indexPath.row - 2];
@@ -261,14 +262,14 @@
         }
             break;
         case BTTChangeWithdrawPwd: {
-            self.title = [self haveWithdrawPwd] ? @"修改密码":@"设置密码";
+            self.title = ((self.isGoToUserForzenVC == YES) ? @"解锁帐户": [self haveWithdrawPwd] ? @"修改密码":@"设置密码");
             if ([self haveWithdrawPwd]) {
                 titles = @[@"旧资金密码",@"新资金密码",@"确认新资金密码"];
                 placeholders = @[@"6位数数字组合",@"6位数数字组合",@""];
                 
             } else {
                 titles = @[@"资金密码", @"确认资金密码"];
-                placeholders = @[@"6位数数字组合", @""];
+                placeholders = @[@"6位数数字组合", (self.isGoToUserForzenVC == YES) ? @"确认资金密码":@""];
             }
         }
             break;

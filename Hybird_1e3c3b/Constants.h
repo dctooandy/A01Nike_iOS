@@ -89,7 +89,7 @@ typedef enum {
     BTTSafeVerifyTypeBindEmail,                  // 绑定邮箱
     BTTSafeVerifyTypeVerifyEmail,                // 验证邮箱
     BTTSafeVerifyTypeChangeEmail,                // 更改邮箱
-    BTTUserForzenTypeBindMobile,                 // 用户冻结绑定手机
+    BTTSafeVerifyTypeUserForzenBindMobile,                 // 用户冻结绑定手机
 }BTTSafeVerifyType; // 安全验证种类
 
 typedef enum : NSUInteger {

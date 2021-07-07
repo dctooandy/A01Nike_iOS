@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-typedef void(^UserForzenCallBack)(id _Nullable response, NSError * _Nullable error);
+typedef void(^UserForzenCallBack)(NSString * _Nullable response, NSString * _Nullable error);
 @interface BTTUserForzenManager : NSObject
 SingletonInterface(BTTUserForzenManager);
 
