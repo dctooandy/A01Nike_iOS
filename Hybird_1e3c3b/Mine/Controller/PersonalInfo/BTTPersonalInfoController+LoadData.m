@@ -13,7 +13,7 @@
 
 - (void)loadMainData {
     NSArray *names = @[@"真实姓名",@"性别",@"出生日期",@"邮箱地址",@"地址",@"备注"];
-    NSArray *placeholders = @[@"需与持卡人姓名相同",@"请选择性别",@"请选择出生日期",@"请填写邮箱地址",@"请填写地址",@"请填写备注"];
+    NSArray *placeholders = @[@"提交后不可修改，请仔细核对",@"请选择性别",@"请选择出生日期",@"请填写邮箱地址",@"请填写地址",@"请填写备注"];
     NSString *realName = [IVNetwork savedUserInfo].realName ? [IVNetwork savedUserInfo].realName : @"";
     NSString *sex = [[IVNetwork savedUserInfo].gender isEqualToString:@"M"] ? @"男" : @"女";
     NSString *birthDay = [IVNetwork savedUserInfo].birthday ? [[IVNetwork savedUserInfo].birthday substringWithRange:NSMakeRange(0, 10)] : @"";
