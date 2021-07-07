@@ -42,7 +42,7 @@ static BTTUserForzenManager * sharedSingleton;
 - (void)checkUserForzen{
     ///檢查是否凍結用戶
     ///lockBalanceStatus=1 就是被锁了
-    if ([IVNetwork savedUserInfo] && [IVNetwork savedUserInfo].lockBalanceStatus == 1)
+    if (UserForzenStatus)
     {
         [self showUserForzenPopView];        
     }

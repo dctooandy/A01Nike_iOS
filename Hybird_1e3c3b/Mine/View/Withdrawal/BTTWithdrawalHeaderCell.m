@@ -39,7 +39,7 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    if ([IVNetwork savedUserInfo] && [IVNetwork savedUserInfo].lockBalanceStatus == 1)
+    if (UserForzenStatus)
     {
         _lockView.hidden = NO;
     }else
