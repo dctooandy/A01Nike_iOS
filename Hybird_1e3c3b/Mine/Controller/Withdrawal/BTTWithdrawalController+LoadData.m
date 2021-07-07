@@ -143,7 +143,10 @@
     if (isUsdt && [self.bankList[self.selectIndex].accountType isEqualToString:@"DCBOX"]) {
         pString = [NSString stringWithFormat:@"单笔取款限额%@-143万USDT", self.dcboxLimit];
     }
-    
+    if (UserForzenStatus)
+    {
+        pString = @"额度已锁定,无法取款";
+    }
     NSString * withdrawPwdP = [IVNetwork savedUserInfo].withdralPwdFlag == 0 ? @"没有资金密码？点击设置资金密码":@"6位数字组合";
     BOOL withdrawPwdCanEdits = [IVNetwork savedUserInfo].withdralPwdFlag == 0 ? false:true;
     

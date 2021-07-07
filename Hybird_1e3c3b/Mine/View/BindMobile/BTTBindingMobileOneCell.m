@@ -45,7 +45,15 @@
         _textFieldChanged(_textField.text);
     }
 }
-
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if ([self.model.name isEqualToString:@"金额"])
+    {
+        return (UserForzenStatus ? NO : YES);
+    }else{
+        return true;
+    }
+}
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if ([self.model.name isEqualToString:@"钱包地址"]||[self.model.name isEqualToString:@"确认地址"]) {

@@ -7,7 +7,7 @@
 //
 
 #import "BTTLiCaiBtnCell.h"
-
+#import "BTTUserForzenManager.h"
 @interface BTTLiCaiBtnCell()
 
 @end
@@ -21,8 +21,14 @@
 }
 
 - (IBAction)btnClick:(UIButton *)sender {
-    if (self.buttonClickBlock) {
-        self.buttonClickBlock(sender);
+    if (UserForzenStatus)
+    {
+        [[BTTUserForzenManager sharedInstance] checkUserForzen];
+    }else
+    {
+        if (self.buttonClickBlock) {
+            self.buttonClickBlock(sender);        
+        }
     }
 }
 

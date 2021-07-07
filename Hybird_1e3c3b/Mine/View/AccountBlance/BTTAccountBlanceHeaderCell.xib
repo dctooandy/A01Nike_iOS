@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,7 +33,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="账户总余额 = 本地余额 + 各厅额度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9VG-ZJ-p3r">
-                        <rect key="frame" x="93.5" y="107.5" width="188.5" height="14.5"/>
+                        <rect key="frame" x="93.5" y="107.5" width="188" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -46,25 +46,36 @@
                             <action selector="totalBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="pda-dO-jsI"/>
                         </connections>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tNG-dw-B8t">
+                        <rect key="frame" x="150" y="55" width="20" height="22"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="tNG-dw-B8t" secondAttribute="height" multiplier="10:11" id="dWW-dn-SrI"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <constraints>
                 <constraint firstItem="9VG-ZJ-p3r" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="3PM-T3-6SP"/>
                 <constraint firstAttribute="trailing" secondItem="gnG-qx-wVb" secondAttribute="trailing" id="4Gp-rM-vXm"/>
+                <constraint firstItem="tNG-dw-B8t" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.114583" id="5HP-L7-YHR"/>
                 <constraint firstItem="9VG-ZJ-p3r" firstAttribute="top" secondItem="ngI-LR-0Uo" secondAttribute="bottom" constant="20" id="78P-Jq-U0o"/>
                 <constraint firstItem="gnG-qx-wVb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="AMP-5k-EfB"/>
+                <constraint firstItem="tNG-dw-B8t" firstAttribute="centerY" secondItem="ngI-LR-0Uo" secondAttribute="centerY" id="EZ9-Tg-Ia6"/>
                 <constraint firstItem="ngn-ns-BGG" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="J8I-q2-MOO"/>
                 <constraint firstItem="Vq4-X7-Dax" firstAttribute="top" secondItem="9VG-ZJ-p3r" secondAttribute="bottom" constant="15" id="KWR-12-6kP"/>
                 <constraint firstAttribute="bottom" secondItem="gnG-qx-wVb" secondAttribute="bottom" id="N7q-kY-7I0"/>
                 <constraint firstItem="Vq4-X7-Dax" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Qvx-B7-wgB"/>
                 <constraint firstItem="gnG-qx-wVb" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="SXp-jb-jWx"/>
                 <constraint firstItem="ngI-LR-0Uo" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="hSq-Kl-aQ4"/>
+                <constraint firstItem="ngI-LR-0Uo" firstAttribute="leading" secondItem="tNG-dw-B8t" secondAttribute="trailing" constant="5.5" id="hcN-hL-d28"/>
                 <constraint firstItem="ngI-LR-0Uo" firstAttribute="top" secondItem="ngn-ns-BGG" secondAttribute="bottom" constant="15" id="l3g-Lw-JIR"/>
                 <constraint firstItem="ngn-ns-BGG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="yM6-um-yTv"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="375" height="190"/>
             <connections>
+                <outlet property="lockView" destination="tNG-dw-B8t" id="OKy-TH-drB"/>
                 <outlet property="topTipLabel" destination="ngn-ns-BGG" id="lzr-rP-sGv"/>
                 <outlet property="totalLabel" destination="ngI-LR-0Uo" id="qvm-Es-TCc"/>
                 <outlet property="trasferToLocal" destination="Vq4-X7-Dax" id="fwL-f9-pba"/>

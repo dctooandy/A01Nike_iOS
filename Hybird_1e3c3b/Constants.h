@@ -607,7 +607,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 #define SCREEN_WIDTH                     ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT                    ([UIScreen mainScreen].bounds.size.height)
-#define UserForzenStatus                 ([IVNetwork savedUserInfo] && [IVNetwork savedUserInfo].lockBalanceStatus == 1)
+#define UserForzenStatus                 ([IVNetwork savedUserInfo] && [IVNetwork savedUserInfo].lockBalanceStatus == 0)
 // tabbar 适配iPhone X
 #define kTabbarHeight                    (KIsiPhoneX ? (BTTDangerousAreaH + 49) : 49)
 // 是否为iPhoneX
