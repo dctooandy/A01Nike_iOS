@@ -49,7 +49,7 @@ static BTTUserForzenManager * sharedSingleton;
 }
 - (void)showUserForzenPopViewByNoti
 {
-    [self showUserForzenPopView];
+    [self checkUserForzen];
 }
 - (void)showUserForzenPopView
 {
