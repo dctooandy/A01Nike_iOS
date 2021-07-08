@@ -144,6 +144,11 @@
         NSString *usdtString = _usdtNum<5 ? @"USDT钱包/" : @"";
         NSString *dcboxString = _dcboxNum==1 ? @"" : @"小金库钱包/";
         NSString *bindString = [NSString stringWithFormat:@"添加%@%@%@%@",bankString,bitString,usdtString,dcboxString];
+        if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+            bindString = [NSString stringWithFormat:@"添加%@",bankString];
+        } else {
+            bindString = [NSString stringWithFormat:@"添加%@%@%@",bitString,usdtString,dcboxString];
+        }
         NSString *textString = [bindString substringToIndex:bindString.length-1];
         self.titleString = textString;
         cell.titleLabel.text = textString;
@@ -295,6 +300,7 @@
 - (void)refreshBankList
 {
     NSDictionary *json = [IVCacheWrapper objectForKey:BTTCacheBankListKey];
+    BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
     if (json!=nil) {
         NSArray *array = json[@"accounts"];
         if (isArrayWithCountMoreThan0(array)) {
@@ -303,12 +309,14 @@
                 NSDictionary *json = array[i];
                 BTTBankModel *model = [BTTBankModel yy_modelWithDictionary:json];
                 if (![model.accountType isEqualToString:@"Bitbase"]) {
-                    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+                    if (isUSDTAcc) {
                         if (![model.accountType isEqualToString:@"信用卡"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"存折"]) {
                             [bankList addObject:model];
                         }
-                    }else{
-                        [bankList addObject:model];
+                    } else {
+                        if ([model.accountType isEqualToString:@"存折"] || [model.accountType isEqualToString:@"借记卡"] || [model.accountType isEqualToString:@"信用卡"]) {
+                                [bankList addObject:model];
+                        }
                     }
                 }
             }
