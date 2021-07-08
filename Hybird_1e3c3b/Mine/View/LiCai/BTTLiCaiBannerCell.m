@@ -30,7 +30,6 @@
     [self addGestureRecognizer:tap];
     [self addSubview:self.bannerView];
     [self.bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.bottom.right.equalTo(self);
         make.top.left.equalTo(self).offset(10);
         make.bottom.right.equalTo(self).offset(-10);
     }];
