@@ -43,8 +43,12 @@
     }
 }
 
-- (void)setContentMessage:(NSString *)message{
-    _contentLabel.text = [NSString stringWithFormat:@"您已经超过%@天没有登录网站了\n为了您的资金安全，我们已经将您的余额暂时锁定\n锁定期间，您的以下操作已经被限制：",message];
+- (void)setuUserForzenContentMessage:(NSNumber *)message{
+    NSString *correctString = (message.intValue <= 183 ? [NSString stringWithFormat:@"您距离上次登录已经过了%@天",message]:[NSString stringWithFormat:@"您已经超过%@天没有登录网站了",message]);
+    
+    
+    _contentLabel.text = [NSString stringWithFormat:@"%@\n为了您的资金安全，我们已经将您的余额暂时锁定\n锁定期间，您的以下操作已经被限制：",correctString];
+    
 }
 
 

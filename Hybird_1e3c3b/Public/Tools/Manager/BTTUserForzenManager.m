@@ -55,7 +55,7 @@ static BTTUserForzenManager * sharedSingleton;
 {
     BTTUserForzenPopView *alertView = [BTTUserForzenPopView viewFromXib];
     NSNumber * days = [NSNumber numberWithInteger:[[IVNetwork savedUserInfo] lockBalanceDays]];
-    [alertView setContentMessage:[NSString stringWithFormat:@"%@",days]];
+    [alertView setuUserForzenContentMessage:days];
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
     
     popView.isClickBGDismiss = YES;

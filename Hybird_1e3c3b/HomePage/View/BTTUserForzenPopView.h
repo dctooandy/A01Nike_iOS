@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void(^tapDismiss)(void);
 @property (nonatomic, copy) void(^tapActivity)(void);
 @property (nonatomic, copy) void(^tapService)(void);
-- (void)setContentMessage:(NSString *)message;
+- (void)setuUserForzenContentMessage:(NSNumber *)message;
 
 @end
 
