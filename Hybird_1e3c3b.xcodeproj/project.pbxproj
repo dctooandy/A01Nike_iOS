@@ -778,6 +778,7 @@
 		76756BB5269454690065F99B /* BTTUserForzenBGView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756BB4269454690065F99B /* BTTUserForzenBGView.xib */; };
 		76756C1B26956A6D0065F99B /* BTTLockButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756C1A26956A6D0065F99B /* BTTLockButtonView.m */; };
 		76756C1F26956ADF0065F99B /* BTTLockButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756C1E26956ADF0065F99B /* BTTLockButtonView.xib */; };
+		76756CCC269855B30065F99B /* BTTUserForzenVerityViewController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756CCB269855B30065F99B /* BTTUserForzenVerityViewController+LoadData.m */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
@@ -2142,6 +2143,8 @@
 		76756C1926956A6D0065F99B /* BTTLockButtonView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLockButtonView.h; sourceTree = "<group>"; };
 		76756C1A26956A6D0065F99B /* BTTLockButtonView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLockButtonView.m; sourceTree = "<group>"; };
 		76756C1E26956ADF0065F99B /* BTTLockButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTLockButtonView.xib; sourceTree = "<group>"; };
+		76756CCA269855B30065F99B /* BTTUserForzenVerityViewController+LoadData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTTUserForzenVerityViewController+LoadData.h"; sourceTree = "<group>"; };
+		76756CCB269855B30065F99B /* BTTUserForzenVerityViewController+LoadData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTTUserForzenVerityViewController+LoadData.m"; sourceTree = "<group>"; };
 		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
 		76C9F150265E404B0002591D /* CNPayOrderModelV2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayOrderModelV2.m; sourceTree = "<group>"; };
 		76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatPopView.xib; sourceTree = "<group>"; };
@@ -4047,6 +4050,8 @@
 				EAA4811721ABD264000C0273 /* BTTAGQJViewController.m */,
 				7629DCFC268C30D000CF758C /* BTTUserForzenVerityViewController.h */,
 				7629DCFD268C30D000CF758C /* BTTUserForzenVerityViewController.m */,
+				76756CCA269855B30065F99B /* BTTUserForzenVerityViewController+LoadData.h */,
+				76756CCB269855B30065F99B /* BTTUserForzenVerityViewController+LoadData.m */,
 				3A5F7AA521ABCCE400128E8B /* VideoGames */,
 				3A9E4C6321A0059300E7D8C0 /* PromotionDetail */,
 				3ADD23982179A9E900FA959A /* Live800 */,
@@ -5893,6 +5898,7 @@
 				3A8F51A1215F77EC0069D1B3 /* UIColor+Util.m in Sources */,
 				D31B0EEF23B451F1003666BA /* BTTWithDrawUSDTConfirmCell.m in Sources */,
 				D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */,
+				76756CCC269855B30065F99B /* BTTUserForzenVerityViewController+LoadData.m in Sources */,
 				3A34F79E21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m in Sources */,
 				3A5F7A9621A8E4C600128E8B /* BTTXimaSuccessItemModel.m in Sources */,
 				EA5F140B21A26042004305A7 /* BTTRequestPrecache.m in Sources */,

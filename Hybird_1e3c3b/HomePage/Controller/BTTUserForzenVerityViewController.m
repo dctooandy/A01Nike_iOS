@@ -7,6 +7,7 @@
 //
 
 #import "BTTUserForzenVerityViewController.h"
+#import "BTTUserForzenVerityViewController+LoadData.h"
 #import "BTTMeMainModel.h"
 #import "BTTBindingMobileOneCell.h"
 #import "BTTBindingMobileBtnCell.h"
@@ -19,6 +20,7 @@
 
 @interface BTTUserForzenVerityViewController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, copy) NSString *withdrawPwdString;
+@property (nonatomic, copy) NSString *sCodeString;
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
 @property (nonatomic, assign) BOOL isSuccess;
 @end
@@ -30,6 +32,7 @@
     [super viewDidLoad];
     self.title = @"解锁账户";
     self.withdrawPwdString = @"";
+    self.sCodeString = @"";
     if (!_sheetDatas) {
         _sheetDatas = [NSMutableArray array];
     }
@@ -43,6 +46,7 @@
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileOneCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileTwoCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileTwoCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTPasswordCell" bundle:nil] forCellWithReuseIdentifier:@"BTTPasswordCell"];
 }
 - (void)setupBackGroundView
@@ -53,13 +57,17 @@
     [[self.collectionView backgroundView] setHidden:YES];
 }
 - (void)loadMainData {
-    NSArray *names = @[@"资金密码"];
-    NSArray *placeholders = @[@"6位数数字组合"];
+    NSArray *names = @[@"已绑定手机",@"验证码",@"资金密码"];
+    NSArray *placeholders = @[@"请输入待绑定手机号码",@"请输入验证码",@"6位数数字组合"];
+    NSString * phone = [IVNetwork savedUserInfo].mobileNo;
+    NSArray *phoneValues = @[phone,@"",@""];
+    
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
         model.name = name;
         model.iconName = placeholders[index];
+        model.desc = phoneValues[index];
         [_sheetDatas addObject:model];
     }
     [self setupElements];
@@ -76,14 +84,24 @@
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     weakSelf(weakSelf)
-    if (indexPath.row == self.sheetDatas.count) {
-        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
-        [cell setButtonType:BTTButtonTypeUserForzen];
+    if (indexPath.row == 0) {
+        BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
+        BTTMeMainModel *model = self.sheetDatas[indexPath.row];
+        cell.model = model;
+        return cell;
+    } else if (indexPath.row == 1) {
+        BTTBindingMobileTwoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileTwoCell" forIndexPath:indexPath];
+        [cell.textField setEnabled:false];
+        BTTMeMainModel *model = self.sheetDatas[indexPath.row];
+        cell.model = model;
+        cell.textField.tag = 1001;
+        [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-            [weakSelf saveBtnClickded:button];
+            [weakSelf sendCode];
         };
         return cell;
-    } else {
+    } else if (indexPath.row == 2)
+    {
         BTTPasswordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPasswordCell" forIndexPath:indexPath];
         [cell disableSecureText:YES withTextAlign:NSTextAlignmentRight];
         BTTMeMainModel *model = [BTTMeMainModel new];
@@ -94,7 +112,13 @@
         cell.model = model;
         cell.textField.textAlignment = NSTextAlignmentLeft;
         return cell;
-        
+    }else{
+        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        [cell setButtonType:BTTButtonTypeUserForzen];
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf saveBtnClickded:button];
+        };
+        return cell;
     }
 }
 
@@ -107,27 +131,34 @@
     if (textField.tag == 1000) {
         self.withdrawPwdString = textField.text;
     }
-    BOOL enable = [PublicMethod isValidateWithdrawPwdNumber:self.withdrawPwdString];
-    [self getSubmitBtn].enabled = enable;
+    if (textField.tag == 1001) {
+        self.sCodeString = textField.text;
+    }
+    BOOL withDrawalEnable = [PublicMethod isValidateWithdrawPwdNumber:self.withdrawPwdString];
+    BOOL messageIDEnable = !(self.messageId==nil || [self.messageId isEqualToString:@""]);
+    BOOL sCodeEnable = !(self.sCodeString==nil || [self.sCodeString isEqualToString:@""]);
+    
+    [self getSubmitBtn].enabled = (withDrawalEnable && messageIDEnable && sCodeEnable);
 }
 - (UIButton *)getSubmitBtn
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
     BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     return cell.btn;
 }
 - (void)saveBtnClickded:(UIButton *)sender
 {
     weakSelf(weakSelf)
-    [[BTTUserForzenManager sharedInstance] unBindUserForzenAccount:[IVRsaEncryptWrapper encryptorString:self.withdrawPwdString] completionBlock:^(NSString *  _Nullable response, NSString * _Nullable error) {
+    [[BTTUserForzenManager sharedInstance] unBindUserForzenAccount:[IVRsaEncryptWrapper encryptorString:self.withdrawPwdString] withMessageID:self.messageId withSCode:self.sCodeString completionBlock:^(NSString * _Nullable response, NSString * _Nullable error) {
         if (error)
         {
             
         }else
-        {        
+        {
             [weakSelf successActions:response];
         }
-    }];
+    }] ;
+
     // 测试
 //    [self successActions];
 }
@@ -187,4 +218,15 @@
         [self.collectionView reloadData];
 //    });
 }
+
+
+-(UITextField *)getCodeTF {
+    return [self getVerifyCell].textField;
+}
+- (BTTBindingMobileTwoCell *)getVerifyCell {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    BTTBindingMobileTwoCell *cell = (BTTBindingMobileTwoCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell;
+}
+
 @end

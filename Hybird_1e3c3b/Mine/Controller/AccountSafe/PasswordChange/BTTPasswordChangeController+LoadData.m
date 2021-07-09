@@ -135,15 +135,8 @@
                     [self.navigationController popToRootViewControllerAnimated:true];
                 } else if (weakSelf.isGoToUserForzenVC){
                     self.isSuccess = YES;
-                    weakSelf(weakSelf)
-                    [[BTTUserForzenManager sharedInstance] unBindUserForzenAccount:[IVRsaEncryptWrapper encryptorString:new] completionBlock:^(NSString *  _Nullable response, NSString * _Nullable error) {
-                        if (error)
-                        {
-                            [self setupElements];
-                        }else{
-                            [weakSelf successActions:response];
-                        }
-                    }];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoUserForzenVC" object:nil];
+
                     // 测试
 //                    [self successActions];
                 }else{

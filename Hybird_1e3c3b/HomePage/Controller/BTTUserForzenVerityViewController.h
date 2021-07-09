@@ -7,11 +7,13 @@
 //
 
 #import "BTTCollectionViewController.h"
-
+#import "BTTBindingMobileTwoCell.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTUserForzenVerityViewController : BTTCollectionViewController
-
+@property (nonatomic, copy) NSString *messageId;
+-(UITextField *)getCodeTF;
+-(BTTBindingMobileTwoCell *)getVerifyCell;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -36,7 +36,7 @@ static BTTUserForzenManager * sharedSingleton;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkUserForzen) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showUserForzenPopViewByNoti) name:@"showUserForzenPopView" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkForMobileNumAndCode) name:@"gotoUserForzenVC" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unbindUserAccountByNotifi:) name:@"gotoUnBindUser" object:nil];
+    
 }
 #pragma mark - 检查用户资金冻结
 - (void)checkUserForzen{
@@ -116,30 +116,51 @@ static BTTUserForzenManager * sharedSingleton;
         }
     }
 }
-- (void)unbindUserAccountByNotifi:(NSNotification *)notifi
+
+-(void)unBindUserForzenAccount:(NSString *)wPassword
+                     withMessageID:(NSString *)messageID
+                     withSCode:(NSString *)sCode
+               completionBlock:(UserForzenCallBack)completionBlock
 {
-    NSDictionary * dic = notifi.object;
-    if (dic[@"wPassword"])
-    {
-        weakSelf(weakSelf)
-        [self unBindUserForzenAccount:dic[@"wPassword"] completionBlock:^(NSString *  _Nullable response, NSString * _Nullable error) {
-            if (error)
-            {
-                
-            }else
-            {
-                [MBProgressHUD showMessagNoActivity:response toView:nil];
-                [[weakSelf currentViewController].navigationController popToRootViewControllerAnimated:true];                
-            }
-        }];
-    }
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"messageId"] = messageID;
+    params[@"smsCode"] = sCode;
+    params[@"use"] = @22;
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTVerifySmsCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [MBProgressHUD showSuccess:@"验证成功!" toView:nil];
+            NSString * messageId = result.body[@"messageId"];
+            NSString * validateId = result.body[@"validateId"];
+            [weakSelf turenUBindUserForzenAccount:wPassword
+                                    withMessageID:messageId
+                                        withSCode:sCode
+                                   withValidateId:validateId
+                                  completionBlock:^(NSString * _Nullable response, NSString * _Nullable error) {
+                completionBlock(response,error);
+            }];
+
+        }else{
+
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+            completionBlock(nil,result.head.errMsg);
+        }
+    }];
+
 }
--(void)unBindUserForzenAccount:(NSString *)wPassword completionBlock:(UserForzenCallBack)completionBlock
+-(void)turenUBindUserForzenAccount:(NSString *)wPassword
+                     withMessageID:(NSString *)messageID
+                         withSCode:(NSString *)sCode
+                    withValidateId:(NSString *)validateId
+                   completionBlock:(UserForzenCallBack)completionBlock
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     params[@"password"] = wPassword;//资金密码
-    
-    //        params[@"smsCode"] = [HAInitConfig appId];///短信验证码
+    params[@"smsCode"] = sCode;///短信验证码
+    params[@"messageId"] = messageID;
+    params[@"validateId"] = validateId;
     
     [IVNetwork requestPostWithUrl:BTTUnlockBalance paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
@@ -157,6 +178,7 @@ static BTTUserForzenManager * sharedSingleton;
         
     }];
 }
+
 - (UIViewController*)topMostWindowController
 {
     UIWindow *win = [UIApplication sharedApplication].delegate.window;

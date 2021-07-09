@@ -14,7 +14,10 @@ typedef void(^UserForzenCallBack)(NSString * _Nullable response, NSString * _Nul
 SingletonInterface(BTTUserForzenManager);
 
 - (void)checkUserForzen;
--(void)unBindUserForzenAccount:(NSString *)wPassword completionBlock:(UserForzenCallBack)completionBlock;
+-(void)unBindUserForzenAccount:(NSString *)wPassword
+                     withMessageID:(NSString *)messageID
+                     withSCode:(NSString *)sCode
+               completionBlock:(UserForzenCallBack)completionBlock;
 @end
 
 NS_ASSUME_NONNULL_END
