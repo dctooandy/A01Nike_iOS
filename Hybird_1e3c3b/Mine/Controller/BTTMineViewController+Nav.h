@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showShareActionSheet;
 
+-(void)showCompleteNamePopView;
+
 @end
 
 NS_ASSUME_NONNULL_END

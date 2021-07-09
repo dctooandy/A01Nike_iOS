@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void (^CompleteRealNameBlock)(IVJResponseHead * errHead);
+
 @interface BTTMineViewController (LoadData)
 
 @property (nonatomic, strong) NSMutableArray *personalInfos;
@@ -30,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-
+- (void)completeRealName:(NSString *)nameStr completeRealNameBlock:(CompleteRealNameBlock)completeRealNameBlock;
 
 - (void)loadMeAllData;
 

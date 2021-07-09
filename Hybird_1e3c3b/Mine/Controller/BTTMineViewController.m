@@ -400,14 +400,14 @@
 }
 
 - (void)goSaveMoneyWithModel:(BTTMeMainModel *)model {
+    if (!self.isCompletePersonalInfo && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {//未完善姓名
+        [self showCompleteNamePopView];
+        return;
+    }
     if (![IVNetwork savedUserInfo]) {
         [MBProgressHUD showError:@"请先登录" toView:nil];
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-        return;
-    } else if ([IVNetwork savedUserInfo].starLevel == 0 && ![IVNetwork savedUserInfo].realName.length && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-        BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
-        [self.navigationController pushViewController:personInfo animated:YES];
         return;
     } else if ([model.name isEqualToString:@"充值USDT"]){
         [CNTimeLog startRecordTime:CNEventPayLaunch];
@@ -480,47 +480,49 @@
     }
     if (indexPath.row == self.saveMoneyCount + 3) {
         //取款
-        if (self.isCompletePersonalInfo) {
-            
-            if ([IVNetwork savedUserInfo].mobileNoBind != 1) {
-                BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-                vc.mobileCodeType = BTTSafeVerifyTypeBindMobile;
-                vc.showNotice = isUSDTAcc;
-                vc.isWithdrawIn = true;
-                [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
-                [self.navigationController pushViewController:vc animated:YES];
-            } else if ([IVNetwork savedUserInfo].bankCardNum > 0
-                || [IVNetwork savedUserInfo].usdtNum > 0
-                || [IVNetwork savedUserInfo].bfbNum > 0
-                || [IVNetwork savedUserInfo].dcboxNum > 0) {
-                
-                NSInteger usdtCount = [IVNetwork savedUserInfo].usdtNum;
-                NSInteger dcboxCount = [IVNetwork savedUserInfo].dcboxNum;
-                NSInteger btcCount = [IVNetwork savedUserInfo].btcNum;
-                BOOL isBlackNineteen = [[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"];
-                
-                if (isBlackNineteen && usdtCount == 0 && dcboxCount == 0 && btcCount == 0) {
+        if (isUSDTAcc) {
+            if (self.isCompletePersonalInfo) {
+                if ([IVNetwork savedUserInfo].mobileNoBind != 1) {
+                    BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
+                    vc.mobileCodeType = BTTSafeVerifyTypeBindMobile;
+                    vc.showNotice = isUSDTAcc;
+                    vc.isWithdrawIn = true;
+                    [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else if ([IVNetwork savedUserInfo].usdtNum > 0
+                           || [IVNetwork savedUserInfo].bfbNum > 0
+                           || [IVNetwork savedUserInfo].dcboxNum > 0) {
+                    
+                    BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                } else {
                     [MBProgressHUD showMessagNoActivity:@"请先绑定小金库，USDT钱包或BTC钱包" toView:nil];
                     BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
                     vc.showNotice = isUSDTAcc;
                     [self.navigationController pushViewController:vc animated:YES];
-                    return;
                 }
-                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
                 
             } else {
-                NSString * str = isUSDTAcc ? @"请先绑定钱包":@"请先绑定银行卡";
-                [MBProgressHUD showMessagNoActivity:str toView:nil];
-                BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
-                vc.showNotice = isUSDTAcc;
+                [MBProgressHUD showMessagNoActivity:@"请先完善个人信息" toView:nil];
+                BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
             }
-            
         } else {
-            [MBProgressHUD showMessagNoActivity:@"请先完善个人信息" toView:nil];
-            BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+            if ([self judgmentBindPhoneAndName] == BTTYesPhoneYesName) {//都完善
+                if ([IVNetwork savedUserInfo].bankCardNum > 0) {
+                    
+                    BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                } else {
+                    NSString * str = @"请先绑定银行卡";
+                    [MBProgressHUD showMessagNoActivity:str toView:nil];
+                    BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+                    vc.showNotice = isUSDTAcc;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            }
         }
     } else if ((indexPath.row == self.saveMoneyCount + 4 && self.isOpenSellUsdt)) {
         //一键卖币
@@ -538,12 +540,19 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else if ((indexPath.row == self.saveMoneyCount + 5 && !self.isOpenSellUsdt) || (indexPath.row == self.saveMoneyCount + 6 && self.isOpenSellUsdt)) {
         //銀行卡
-        if (self.isCompletePersonalInfo) {
-            BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+        if (isUSDTAcc) {
+            if (self.isCompletePersonalInfo) {
+                BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         } else {
-            BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+            if ([self judgmentBindPhoneAndName] == BTTYesPhoneYesName) {//都完善
+                BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
     } else if ((indexPath.row == self.saveMoneyCount + 6 && !self.isOpenSellUsdt) || (indexPath.row == self.saveMoneyCount + 7 && self.isOpenSellUsdt)) {
         //綁定手機
@@ -618,73 +627,22 @@
         vc.title = @"我的优惠";
         vc.webConfigModel.url = @"my_coupon";
         [self.navigationController pushViewController:vc animated:YES];
-        //        NSMutableArray *names = @[@"首存优惠"].mutableCopy;
-        //        if (self.isFanLi) {
-        //            NSInteger index = [names indexOfObject:@"首存优惠"];
-        //            [names insertObject:@"1%存款返利" atIndex:index + 1];
-        //        }
-        //        if (self.isOpenAccount) {
-        //            NSInteger index = [names indexOfObject:@"首存优惠"];
-        //            [names insertObject:@"开户礼金" atIndex:index + 1];
-        //        }
-        //        BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"我的优惠" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:names actionSheetBlock:^(NSInteger buttonIndex) {
-        //            NSLog(@"选择了%@", @(buttonIndex));
-        //            if (buttonIndex == names.count) {
-        //            } else {
-        //                BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-        //                vc.webConfigModel.theme = @"outside";
-        //                vc.webConfigModel.newView = YES;
-        //                vc.title = @"我的优惠";
-        //            vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@",[IVNetwork h5Domain],@"lucky_pot.htm"];
-        //                NSString *title = names[buttonIndex];
-        //                vc.title = title;
-        //                if ([title isEqualToString:@"1%存款返利"]) {
-        //                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"activity_pages/deposit_rebate"];
-        //                } else if ([title isEqualToString:@"开户礼金"]) {
-        //                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"activity_pages/promo_open_account"];
-        //                } else if ([title isEqualToString:@"首存优惠"]) {
-        //                    vc.webConfigModel.url = [NSString stringWithFormat:@"%@%@", [IVNetwork h5Domain], @"first_deposit"];
-        //                }
-        //                [self.navigationController pushViewController:vc animated:YES];
-        //            }
-        //        }];
-        //        [actionSheet show];
     }
 }
 
-- (void)requestTakeMoneyTimes{
-    [self showLoading];
-    [IVNetwork requestPostWithUrl:BTTQueryTakeMoneyTimes paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        [self hideLoading];
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSString *times = [NSString stringWithFormat:@"%@",result.body];
-            NSString *message = @"";
-            if ([times isEqualToString:@"1"]||[times isEqualToString:@"2"]) {
-                message = [NSString stringWithFormat:@"为配合菲新冠疫情防治实施远程办公,日取款上限二次.您今天取款剩余次数为%@次,取款到账时间为2小时",times];
-            }else{
-                message = @"为配合菲新冠疫情防治实施远程办公,日取款上限二次.您今天取款次数已达2次,请明日再来取款";
-            }
-            UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:message preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                if ([times isEqualToString:@"1"]||[times isEqualToString:@"2"]) {
-                    BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                
-                
-            }];
-            UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                
-            }];
-            [alertVC addAction:cancel];
-            [alertVC addAction:confirm];
-            [self presentViewController:alertVC animated:YES completion:nil];
-        }else{
-            [MBProgressHUD showError:@"接口请求异常,请稍后重试" toView:nil];
-        }
-    }];
+-(BTTPresonalInfoType)judgmentBindPhoneAndName {
+    if ([IVNetwork savedUserInfo].mobileNoBind != 1 && !self.isCompletePersonalInfo) {//未綁定手機號 ＆ 未完善姓名
+        
+        return BTTNoPhoneNoName;
+    } else if ([IVNetwork savedUserInfo].mobileNoBind != 1 && self.isCompletePersonalInfo) {//未綁定手機號 & 已完善姓名
+        
+        return BTTNoPhoneYesName;
+    } else if ([IVNetwork savedUserInfo].mobileNoBind == 1 && !self.isCompletePersonalInfo) {//已綁定手機號 & 未完善姓名
+        [self showCompleteNamePopView];
+        return BTTYesPhoneNoName;
+    } else {
+        return BTTYesPhoneYesName;
+    }
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource

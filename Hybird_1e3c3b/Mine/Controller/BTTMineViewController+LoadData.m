@@ -711,6 +711,18 @@
     }];
 }
 
+- (void)completeRealName:(NSString *)nameStr completeRealNameBlock:(CompleteRealNameBlock)completeRealNameBlock;
+{
+    [self showLoading];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"realName"] = nameStr;
+    [IVNetwork requestPostWithUrl:BTTModifyCustomerInfo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [self hideLoading];
+        completeRealNameBlock(result.head);
+    }];
+}
+
 #pragma mark - 动态添加属性
 
 - (NSMutableArray *)personalInfos {

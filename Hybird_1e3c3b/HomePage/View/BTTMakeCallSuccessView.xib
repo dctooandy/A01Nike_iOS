@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,7 +26,7 @@
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVI-lC-jNv">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVI-lC-jNv">
                             <rect key="frame" x="40" y="127.5" width="235" height="51"/>
                             <state key="normal" backgroundImage="homepage_btn_normal"/>
                             <connections>
@@ -40,7 +40,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="hVI-lC-jNv" firstAttribute="top" secondItem="nQE-ex-MzJ" secondAttribute="top" constant="-10" id="4z7-pX-zNq"/>
                         <constraint firstAttribute="trailing" secondItem="1jA-EK-EbD" secondAttribute="trailing" constant="40" id="5UG-Wk-rnv"/>
@@ -54,10 +54,11 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Soj-xs-KMD" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="8Xy-Vc-l7J"/>
-                <constraint firstItem="Soj-xs-KMD" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="JHz-Pa-n5A"/>
+                <constraint firstItem="Soj-xs-KMD" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="JHz-Pa-n5A"/>
                 <constraint firstItem="Soj-xs-KMD" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="MTv-mh-s9H"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="i0l-2u-cza" secondAttribute="trailing" constant="30" id="WVc-MC-oWd"/>
                 <constraint firstItem="i0l-2u-cza" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="jKW-LB-Tu1"/>
@@ -65,7 +66,6 @@
                 <constraint firstItem="i0l-2u-cza" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="vSm-k1-sDH"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="bgImageView" destination="Soj-xs-KMD" id="aVa-d6-qmv"/>
                 <outlet property="bgView" destination="i0l-2u-cza" id="1D1-kd-IdV"/>
@@ -76,5 +76,8 @@
     <resources>
         <image name="homepage_bg" width="375" height="667"/>
         <image name="homepage_btn_normal" width="229" height="51"/>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

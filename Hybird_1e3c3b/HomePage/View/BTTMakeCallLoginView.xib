@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,19 +21,19 @@
                     <rect key="frame" x="30" y="134" width="315" height="396"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您绑定的电话为: 132********" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1g8-w2-Ijl">
-                            <rect key="frame" x="55" y="40" width="205.5" height="19.5"/>
+                            <rect key="frame" x="54" y="40" width="207" height="19.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" tag="50010" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8PR-Ta-fCb">
+                        <button opaque="NO" tag="50010" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8PR-Ta-fCb">
                             <rect key="frame" x="40" y="192.5" width="235" height="51"/>
                             <state key="normal" backgroundImage="homepage_btn_normal"/>
                             <connections>
                                 <action selector="confirmClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="2FQ-Eo-1ts"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="50011" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLf-Ih-vNN">
+                        <button opaque="NO" tag="50011" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HLf-Ih-vNN">
                             <rect key="frame" x="40" y="251.5" width="235" height="51"/>
                             <state key="normal" backgroundImage="homepage_btn_normal"/>
                             <connections>
@@ -58,7 +58,7 @@
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBK-LK-g5j">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBK-LK-g5j">
                             <rect key="frame" x="95.5" y="347" width="74" height="27"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                             <state key="normal" title="免费回拨服务"/>
@@ -73,7 +73,7 @@
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XRK-dA-hFH">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XRK-dA-hFH">
                             <rect key="frame" x="190.5" y="347" width="74" height="27"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                             <state key="normal" title="联系在线客服"/>
@@ -107,7 +107,7 @@
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="rJn-fY-Ua8" firstAttribute="leading" secondItem="z9x-AS-8LV" secondAttribute="leading" constant="40" id="0uE-4a-9qn"/>
                         <constraint firstItem="RVe-F7-e1r" firstAttribute="centerX" secondItem="z9x-AS-8LV" secondAttribute="centerX" id="2j9-dl-FAs"/>
@@ -143,6 +143,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="z9x-AS-8LV" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="1WF-g4-Wbn"/>
@@ -150,11 +151,10 @@
                 <constraint firstItem="wf0-bb-IeE" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="79H-Cb-Q5r"/>
                 <constraint firstItem="wf0-bb-IeE" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="IdS-Rn-DsI"/>
                 <constraint firstItem="wf0-bb-IeE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="W3s-11-xAk"/>
-                <constraint firstItem="wf0-bb-IeE" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="WK5-dc-O4O"/>
+                <constraint firstItem="wf0-bb-IeE" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="WK5-dc-O4O"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="z9x-AS-8LV" secondAttribute="trailing" constant="30" id="ptA-wK-3l4"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="bgImageView" destination="wf0-bb-IeE" id="67t-ed-K5q"/>
                 <outlet property="bgView" destination="z9x-AS-8LV" id="EIh-Tu-gec"/>
@@ -168,5 +168,8 @@
     <resources>
         <image name="homepage_bg" width="375" height="667"/>
         <image name="homepage_btn_normal" width="229" height="51"/>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

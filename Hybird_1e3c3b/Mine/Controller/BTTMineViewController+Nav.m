@@ -23,12 +23,35 @@
 #import "BTTShowErcodePopview.h"
 #import "BTTWithdrawalController.h"
 #import "BTTCustomerReportController.h"
+#import "BTTCompleteNamePopView.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
 
 @implementation BTTMineViewController (Nav)
 
+-(void)showCompleteNamePopView {
+    BTTCompleteNamePopView *pop = [BTTCompleteNamePopView viewFromXib];
+    pop.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:pop popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    pop.dismissBlock = ^{
+        [popView dismiss];
+    };
+    weakSelf(weakSelf);
+    pop.commitBtnBlock = ^(NSString * _Nullable nameStr) {
+        [weakSelf completeRealName:nameStr completeRealNameBlock:^(IVJResponseHead * _Nonnull errHead) {
+            if ([errHead.errCode isEqualToString:@"0000"]) {
+                [popView dismiss];
+                [self loadUserInfo];
+                [MBProgressHUD showSuccess:@"完善成功!" toView:nil];
+            } else {
+                [MBProgressHUD showError:errHead.errMsg toView:self.view];
+            }
+        }];
+    };
+}
 
 - (void)showShareNoticeView {
     BTTShareNoticeView *customView = [BTTShareNoticeView viewFromXib];
