@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIView *bgImgView;
 @property (weak, nonatomic) IBOutlet UIButton *commitBtn;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
+@property (weak, nonatomic) IBOutlet UILabel *contentLab;
 
 @end
 
@@ -30,6 +31,11 @@
     UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTap)];
     self.bgImgView.userInteractionEnabled = true;
     [self.bgImgView addGestureRecognizer:bgTap];
+}
+
+-(void)setContentStr:(NSString *)contentStr {
+    _contentStr = contentStr;
+    self.contentLab.text = _contentStr;
 }
 
 -(void)bgTap {

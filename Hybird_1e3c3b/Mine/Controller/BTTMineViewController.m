@@ -509,7 +509,7 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
         } else {
-            if ([self judgmentBindPhoneAndName] == BTTYesPhoneYesName) {//都完善
+            if ([self judgmentBindPhoneAndName]) {//都完善
                 if ([IVNetwork savedUserInfo].bankCardNum > 0) {
                     
                     BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
@@ -549,7 +549,7 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
         } else {
-            if ([self judgmentBindPhoneAndName] == BTTYesPhoneYesName) {//都完善
+            if ([self judgmentBindPhoneAndName]) {//都完善
                 BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
             }
@@ -630,18 +630,23 @@
     }
 }
 
--(BTTPresonalInfoType)judgmentBindPhoneAndName {
+-(BOOL)judgmentBindPhoneAndName {
     if ([IVNetwork savedUserInfo].mobileNoBind != 1 && !self.isCompletePersonalInfo) {//未綁定手機號 ＆ 未完善姓名
+        //TODO:未綁定手機號 ＆ 未完善姓名
+        [self showBindNameAndPhonePopView];
+        return false;
         
-        return BTTNoPhoneNoName;
     } else if ([IVNetwork savedUserInfo].mobileNoBind != 1 && self.isCompletePersonalInfo) {//未綁定手機號 & 已完善姓名
+        //TODO:未綁定手機號 & 已完善姓名
+        [self showBindNameAndPhonePopView];
+        return false;
         
-        return BTTNoPhoneYesName;
     } else if ([IVNetwork savedUserInfo].mobileNoBind == 1 && !self.isCompletePersonalInfo) {//已綁定手機號 & 未完善姓名
         [self showCompleteNamePopView];
-        return BTTYesPhoneNoName;
+        return false;
+        
     } else {
-        return BTTYesPhoneYesName;
+        return true;
     }
 }
 

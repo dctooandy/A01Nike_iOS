@@ -630,7 +630,6 @@
             pop.dismissBlock = ^{
                 [popView dismiss];
             };
-            weakSelf(weakSelf);
             pop.btnBlock = ^(UIButton * _Nullable btn) {
                 [popView dismiss];
                 [self.navigationController popToRootViewControllerAnimated:YES];

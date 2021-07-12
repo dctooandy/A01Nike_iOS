@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)showCompleteNamePopView;
 
+-(void)showBindNameAndPhonePopView;
+
 @end
 
 NS_ASSUME_NONNULL_END

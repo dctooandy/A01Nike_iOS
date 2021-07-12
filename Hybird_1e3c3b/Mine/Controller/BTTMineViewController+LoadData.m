@@ -711,16 +711,66 @@
     }];
 }
 
-- (void)completeRealName:(NSString *)nameStr completeRealNameBlock:(CompleteRealNameBlock)completeRealNameBlock;
-{
-    [self showLoading];
+-(void)completeCustomerInfo:(NSString * _Nullable )nameStr phoneStr:(NSString * _Nullable)phoneStr completeBlock:(KYHTTPCallBack)completeBlock {
+    [self.view endEditing:true];
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
-    params[@"realName"] = nameStr;
-    [IVNetwork requestPostWithUrl:BTTModifyCustomerInfo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    if (nameStr.length) {
+        params[@"realName"] = nameStr;
+    }
+    if (phoneStr.length) {
+        params[@"phone"] = [IVRsaEncryptWrapper encryptorString:phoneStr];
+    }
+    [IVNetwork requestPostWithUrl:BTTModifyCustomerInfo paramters:params completionBlock:completeBlock];
+}
+
+-(void)sendCodeByLoginName:(KYHTTPCallBack)completionBlock {
+    [self.view endEditing:true];
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"use"] = @3;
+    [IVNetwork requestPostWithUrl:BTTStepOneSendCode paramters:params completionBlock:completionBlock];
+}
+
+-(void)sendCodeByPhone:(NSString *)phoneStr completionBlock:(KYHTTPCallBack)completionBlock {
+    [self.view endEditing:true];
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"use"] = @3;
+    params[@"mobileNo"] = [IVRsaEncryptWrapper encryptorString:phoneStr];
+    [IVNetwork requestPostWithUrl:BTTSendMsgCode paramters:params completionBlock:completionBlock];
+}
+
+-(void)verifySmsCode:(NSString *)smsCodeStr completeBlock:(KYHTTPCallBack)completeBlock {
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"messageId"] = self.messageId;
+    params[@"smsCode"] = smsCodeStr;
+    params[@"use"] = @"3";
+    [MBProgressHUD showLoadingSingleInView:[UIApplication sharedApplication].keyWindow animated:YES];
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTVerifySmsCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
-        [self hideLoading];
-        completeRealNameBlock(result.head);
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            weakSelf.messageId = result.body[@"messageId"];
+            weakSelf.validateId = result.body[@"validateId"];
+            [weakSelf bindPhone:smsCodeStr completeBlock:completeBlock];
+        }else{
+            completeBlock(response, error);
+        }
     }];
+}
+
+-(void)bindPhone:(NSString *)smsCodeStr completeBlock:(KYHTTPCallBack)completeBlock {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"messageId"] = self.messageId;
+    params[@"validateId"] = self.validateId;
+    params[@"smsCode"] = smsCodeStr;
+    [IVNetwork requestPostWithUrl:BTTBindPhone paramters:params completionBlock:completeBlock];
+}
+
+-(void)completeInfoGroup:(NSString *)nameStr group:(dispatch_group_t)group completeBlock:(KYHTTPCallBack)completeBlock {
+    [self completeCustomerInfo:nameStr phoneStr:nil completeBlock:completeBlock];
+}
+
+-(void)verifySmsGroup:(NSString *)smsCodeStr group:(dispatch_group_t)group completeBlock:(KYHTTPCallBack)completeBlock {
+    [self verifySmsCode:smsCodeStr completeBlock:completeBlock];
 }
 
 #pragma mark - 动态添加属性

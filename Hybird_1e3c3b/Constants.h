@@ -136,13 +136,6 @@ typedef enum {
     BTTOneWaySelectAndConfirm, ///一張券以上的最後一張
 }BTTMenualSelectMode;
 
-typedef enum : NSUInteger {
-    BTTNoPhoneNoName = 0,
-    BTTNoPhoneYesName = 1,
-    BTTYesPhoneNoName = 2,
-    BTTYesPhoneYesName,
-} BTTPresonalInfoType;
-
 typedef void (^CompleteBlock)(IVJResponseObject *response);
 
 typedef void (^BTTLive800ResponseBlock)(NSString *info);

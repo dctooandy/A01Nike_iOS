@@ -10,7 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^CompleteRealNameBlock)(IVJResponseHead * errHead);
 
 @interface BTTMineViewController (LoadData)
 
@@ -30,9 +29,17 @@ typedef void (^CompleteRealNameBlock)(IVJResponseHead * errHead);
 
 @property (nonatomic, strong) NSMutableArray *normalDataTwo;
 
+-(void)verifySmsCode:(NSString *)smsCodeStr completeBlock:(KYHTTPCallBack)completeBlock;
 
+-(void)sendCodeByPhone:(NSString *)phoneStr completionBlock:(KYHTTPCallBack)completionBlock;
 
-- (void)completeRealName:(NSString *)nameStr completeRealNameBlock:(CompleteRealNameBlock)completeRealNameBlock;
+-(void)sendCodeByLoginName:(KYHTTPCallBack)completionBlock;
+
+-(void)completeCustomerInfo:( NSString * _Nullable )nameStr phoneStr:(NSString * _Nullable)phoneStr completeBlock:(KYHTTPCallBack)completeBlock;
+
+-(void)completeInfoGroup:(NSString *)nameStr group:(dispatch_group_t)group completeBlock:(KYHTTPCallBack)completeBlock;
+
+-(void)verifySmsGroup:(NSString *)smsCodeStr group:(dispatch_group_t)group completeBlock:(KYHTTPCallBack)completeBlock;
 
 - (void)loadMeAllData;
 
