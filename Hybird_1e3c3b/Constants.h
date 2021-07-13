@@ -37,6 +37,7 @@
 #import "IVRsaEncryptWrapper.h"
 #import "BTTActionSheet.h"
 #import "LiveChat.h"
+#import "BTTUserStatusManager.h"
 
 typedef enum {
     BTTCanAddCardTypeNone,          // 不能添加任何卡

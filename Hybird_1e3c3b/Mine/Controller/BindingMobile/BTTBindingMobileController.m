@@ -613,7 +613,6 @@
 }
 
 -(void)dontUseRegPhone {
-    [self showLoading];
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     params[@"phone"] = [IVRsaEncryptWrapper encryptorString:[self getPhoneTF].text];
     [self showLoading];
@@ -723,7 +722,7 @@
 }
 
 -(void)goToKeFu {
-    [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
+    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
         if (errCode != CSServiceCode_Request_Suc) {//异常处理
             BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
                 if (buttonIndex == 0) {

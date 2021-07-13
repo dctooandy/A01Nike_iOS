@@ -82,6 +82,7 @@
     
     [self setupRedDot];
     [self setupLive800];
+    [LiveChat initOcssSDKNetWork];
     [IVCheckNetworkWrapper initSDK];
 //    //获取最优的网关
 //    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways

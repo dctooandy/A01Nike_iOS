@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,14 +11,17 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTXimaSuccessBtnsCell">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" tag="1060" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fud-2s-MIv">
-                        <rect key="frame" x="15" y="29.5" width="165" height="41"/>
+                    <button opaque="NO" tag="1060" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fud-2s-MIv">
+                        <rect key="frame" x="15" y="0.0" width="165" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="HAi-RN-U7O"/>
+                        </constraints>
                         <state key="normal" title="继续洗码" backgroundImage="xima_btn1">
                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
@@ -26,8 +29,8 @@
                             <action selector="continueClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="SNj-81-UeY"/>
                         </connections>
                     </button>
-                    <button opaque="NO" tag="1061" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cM9-hU-vR8">
-                        <rect key="frame" x="195" y="29.5" width="165" height="41"/>
+                    <button opaque="NO" tag="1061" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cM9-hU-vR8">
+                        <rect key="frame" x="195" y="0.0" width="165" height="40"/>
                         <state key="normal" title="查看洗码记录" backgroundImage="xima_btn2">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
@@ -35,18 +38,35 @@
                             <action selector="ximaRecordClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="DTJ-7Q-MEj"/>
                         </connections>
                     </button>
+                    <button hidden="YES" opaque="NO" tag="1060" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q12-it-abD">
+                        <rect key="frame" x="15" y="0.0" width="345" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="ehW-IC-zgx"/>
+                        </constraints>
+                        <state key="normal" title="前往洗码转帐记录" backgroundImage="xima_btn1">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="ximaRecordClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Qwc-XJ-odH"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
-            <constraints>
-                <constraint firstItem="cM9-hU-vR8" firstAttribute="leading" secondItem="Fud-2s-MIv" secondAttribute="trailing" constant="15" id="9rK-DR-MDB"/>
-                <constraint firstItem="Fud-2s-MIv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="HRq-X9-QLb"/>
-                <constraint firstItem="Fud-2s-MIv" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Ngw-xF-3jG"/>
-                <constraint firstItem="cM9-hU-vR8" firstAttribute="width" secondItem="Fud-2s-MIv" secondAttribute="width" id="PPW-EG-OIp"/>
-                <constraint firstItem="cM9-hU-vR8" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Rb2-XP-5Ha"/>
-                <constraint firstAttribute="trailing" secondItem="cM9-hU-vR8" secondAttribute="trailing" constant="15" id="VIa-hK-lsA"/>
-            </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <constraints>
+                <constraint firstItem="Q12-it-abD" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="1BT-FC-Ht0"/>
+                <constraint firstItem="cM9-hU-vR8" firstAttribute="leading" secondItem="Fud-2s-MIv" secondAttribute="trailing" constant="15" id="9rK-DR-MDB"/>
+                <constraint firstItem="cM9-hU-vR8" firstAttribute="centerY" secondItem="Fud-2s-MIv" secondAttribute="centerY" id="CD9-hl-0gv"/>
+                <constraint firstItem="cM9-hU-vR8" firstAttribute="height" secondItem="Fud-2s-MIv" secondAttribute="height" id="EzQ-MG-XgY"/>
+                <constraint firstItem="Fud-2s-MIv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="HRq-X9-QLb"/>
+                <constraint firstItem="Q12-it-abD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="MaX-wf-Nwm"/>
+                <constraint firstItem="cM9-hU-vR8" firstAttribute="width" secondItem="Fud-2s-MIv" secondAttribute="width" id="PPW-EG-OIp"/>
+                <constraint firstAttribute="trailing" secondItem="Q12-it-abD" secondAttribute="trailing" constant="15" id="Rwb-Pu-MIf"/>
+                <constraint firstAttribute="trailing" secondItem="cM9-hU-vR8" secondAttribute="trailing" constant="15" id="VIa-hK-lsA"/>
+                <constraint firstItem="Fud-2s-MIv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ijL-th-fYF"/>
+            </constraints>
             <connections>
+                <outlet property="successLargeBtn" destination="Q12-it-abD" id="6UP-4e-Ljr"/>
                 <outlet property="successLeftBtn" destination="Fud-2s-MIv" id="lYa-vo-b7N"/>
                 <outlet property="successRightBtn" destination="cM9-hU-vR8" id="5jL-zx-a3f"/>
             </connections>

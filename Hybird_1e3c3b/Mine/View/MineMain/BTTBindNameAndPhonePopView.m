@@ -70,7 +70,6 @@
         if(timeout <= 0){ //倒计时结束，关闭
             dispatch_source_cancel(self->_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
-//                设置界面的按钮显示 根据自己需求设置
                 self.sendSmsBtn.enabled = YES;
                 self.sendSmsBtn.titleLabel.text = @"重新发送";
                 [self.sendSmsBtn setTitle:@"重新发送" forState:UIControlStateNormal];
@@ -83,7 +82,6 @@
                 strTime = [NSString stringWithFormat:@"%.1d", seconds];
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-//                设置界面的按钮显示 根据自己需求设置
                 self.sendSmsBtn.titleLabel.text = [NSString stringWithFormat:@"重新发送(%@)",strTime];
                 [self.sendSmsBtn setTitle:[NSString stringWithFormat:@"重新发送(%@)",strTime] forState:UIControlStateNormal];
                 self.sendSmsBtn.backgroundColor = [UIColor colorWithHexString:@"#686868"];
@@ -133,7 +131,7 @@
         [MBProgressHUD showError:@"请填写手机号码" toView:nil];
         return;
     }
-    if (![PublicMethod isValidatePhone:self.phoneTextField.text]) {
+    if (![PublicMethod isValidatePhone:self.phoneTextField.text] && ![self.phoneTextField.text containsString:@"*"]) {
         [MBProgressHUD showError:@"请填写正确的手机号码" toView:nil];
         return;
     }

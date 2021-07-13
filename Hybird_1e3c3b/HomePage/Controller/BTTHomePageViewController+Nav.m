@@ -110,7 +110,7 @@ static const char *BTTMenualPopViewKey = "menualPopView";
 - (void)registerSuccessGotoHomePageNotification:(NSNotification *)notif {
     if ([notif.object isEqualToString:@"gotoOnlineChat"]) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
+            [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
                 if (errCode != CSServiceCode_Request_Suc) {//异常处理
                     [[CLive800Manager sharedInstance] startLive800Chat:self];
                 }
@@ -289,7 +289,7 @@ static const char *BTTMenualPopViewKey = "menualPopView";
 - (void)rightClick:(UIButton *)btn {
     
     BTTPopoverAction *action1 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineService") title:@"在线客服      " handler:^(BTTPopoverAction *action) {
-        [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
+        [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
             if (errCode != CSServiceCode_Request_Suc) {//异常处理
                 BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
                     if (buttonIndex == 0) {

@@ -632,12 +632,10 @@
 
 -(BOOL)judgmentBindPhoneAndName {
     if ([IVNetwork savedUserInfo].mobileNoBind != 1 && !self.isCompletePersonalInfo) {//未綁定手機號 ＆ 未完善姓名
-        //TODO:未綁定手機號 ＆ 未完善姓名
         [self showBindNameAndPhonePopView];
         return false;
         
     } else if ([IVNetwork savedUserInfo].mobileNoBind != 1 && self.isCompletePersonalInfo) {//未綁定手機號 & 已完善姓名
-        //TODO:未綁定手機號 & 已完善姓名
         [self showBindNameAndPhonePopView];
         return false;
         
