@@ -9,6 +9,8 @@
 #import "LiveChat.h"
 #import <CSCustomSerVice/CSCustomSerVice.h>
 #import "HAInitConfig.h"
+#import "IVCheckNetworkWrapper.h"
+#import "IVCheckDetailModel.h"
 
 @implementation LiveChat
 
@@ -106,27 +108,34 @@
 }
 
 +(void)testSpeed:(NSDictionary *)response chatInfo:(CSChatInfo *)info {
-    NSDictionary * body = response[@"body"];
-    info.response = body;
-    NSArray * domainBakList = body[@"domainBakList"];
-    info.domainBakList = domainBakList;
-    [CSVisitChatmanager reloadSDK:info finish:^(CSServiceCode errCode) {
-        NSLog(@"222222");
+    
+    NSMutableArray * arr = [[NSMutableArray alloc] init];
+    for (NSString * str in response[@"domainBakList"]) {
+        [arr addObject:[NSString stringWithFormat:@"%@/", str]];
+    }
+    [IVCheckNetworkWrapper getOptimizeUrlWithArray:arr isAuto:YES type:IVKCheckNetworkTypeOnline progress:nil completion:^(IVCheckDetailModel * _Nonnull model) {
+        info.domainBakList = @[model.url];
+        [CSVisitChatmanager reloadSDK:info finish:^(CSServiceCode errCode) {
+            NSLog(@"222222");
+        }];
     }];
+    
 }
 
 //app进行速度测试
 +(void)initTestSpeed:(NSDictionary *)response chatInfo:(CSChatInfo *)info{
-    //取body里面的内容
-    NSDictionary *body = response[@"body"];
-    info.response = body;
     //app有域名测速功能就使用，没有直接注释domainBakList赋值即可
-    NSArray *domainBakList = body[@"domainBakList"];
+    NSMutableArray * arr = [[NSMutableArray alloc] init];
+    for (NSString * str in response[@"domainBakList"]) {
+        [arr addObject:[NSString stringWithFormat:@"%@/", str]];
+    }
     //...测速代码，速度从快到慢
-    info.domainBakList = domainBakList;//速度从快到慢。
-    [CSVisitChatmanager initSDK:info finish:^(CSServiceCode errCode) {
-        NSLog(@"222222");
-    } appearblock:nil disbock:nil];
+    [IVCheckNetworkWrapper getOptimizeUrlWithArray:arr isAuto:YES type:IVKCheckNetworkTypeOnline progress:nil completion:^(IVCheckDetailModel * _Nonnull model) {
+        info.domainBakList = @[model.url];
+        [CSVisitChatmanager initSDK:info finish:^(CSServiceCode errCode) {
+            NSLog(@"222222");
+        } appearblock:nil disbock:nil];
+    }];
 }
 
 
