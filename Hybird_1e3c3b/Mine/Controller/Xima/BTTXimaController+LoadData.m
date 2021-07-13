@@ -156,7 +156,7 @@
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSArray *xmResult = result.body[@"xmResult"];
-            [self.xmResults addObjectsFromArray:xmResult];
+            self.xmResults = [[NSMutableArray alloc] initWithArray:xmResult];
             self.ximaStatusType = BTTXimaStatusTypeSuccess;
             BTTXimaHeaderCell *cell = (BTTXimaHeaderCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
             [cell setBtnOneType:BTTXimaHeaderBtnOneTypeOtherNormal];

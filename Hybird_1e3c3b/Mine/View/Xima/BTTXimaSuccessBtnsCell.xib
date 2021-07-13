@@ -43,7 +43,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="ehW-IC-zgx"/>
                         </constraints>
-                        <state key="normal" title="前往洗码转帐记录" backgroundImage="xima_btn1">
+                        <state key="normal" title="查看洗码记录" backgroundImage="xima_btn1">
                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <connections>

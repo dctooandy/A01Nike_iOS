@@ -190,12 +190,16 @@ static const char *BTTHeaderViewKey = "headerView";
         [MBProgressHUD showLoadingSingleInView:[UIApplication sharedApplication].keyWindow animated:YES];
         [weakSelf completeCustomerInfo:nameStr phoneStr:nil completeBlock:^(id  _Nullable response, NSError * _Nullable error) {
             IVJResponseObject *result = response;
-            [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
             if ([result.head.errCode isEqualToString:@"0000"]) {
-                [popView dismiss];
-                [weakSelf loadUserInfo];
-                [MBProgressHUD showSuccess:@"完善成功!" toView:nil];
+                [BTTHttpManager fetchUserInfoCompleteBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                        [popView dismiss];
+                        [MBProgressHUD showSuccess:@"完善成功!" toView:nil];
+                    });
+                }];
             } else {
+                [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
                 [MBProgressHUD showError:result.head.errMsg toView:[UIApplication sharedApplication].keyWindow];
             }
         }];
