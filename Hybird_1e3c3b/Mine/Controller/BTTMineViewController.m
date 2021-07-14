@@ -400,16 +400,17 @@
 }
 
 - (void)goSaveMoneyWithModel:(BTTMeMainModel *)model {
-    if (!self.isCompletePersonalInfo && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {//未完善姓名
-        [self showCompleteNamePopView];
-        return;
-    }
-    if (![IVNetwork savedUserInfo]) {
+    if (![IVNetwork savedUserInfo]) {//未登入
         [MBProgressHUD showError:@"请先登录" toView:nil];
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         return;
-    } else if ([model.name isEqualToString:@"充值USDT"]){
+    }
+    if (!self.isCompletePersonalInfo && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {//未完善姓名
+        [self showCompleteNamePopView];
+        return;
+    }
+    if ([model.name isEqualToString:@"充值USDT"]){
         [CNTimeLog startRecordTime:CNEventPayLaunch];
         USDTRechargeController *vc = [[USDTRechargeController alloc]init];
         [self.navigationController pushViewController:vc animated:true];

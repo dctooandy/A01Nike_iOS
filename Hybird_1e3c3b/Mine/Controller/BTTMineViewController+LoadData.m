@@ -18,6 +18,7 @@
 #import "BTTUserStatusManager.h"
 #import "BTTWithdrawToUsdtPromoPop.h"
 #import "CLive800Manager.h"
+#import "BTTMineViewController+Nav.h"
 
 @implementation BTTMineViewController (LoadData)
 
@@ -372,8 +373,14 @@
                 self.saveMoneyCount = 0;
             }
         }
-        
-        [self setupElements];
+        BOOL alreadyShowNoDesposit = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTAlreadyShowNoDesposit] boolValue];
+        if (self.saveMoneyCount == 0 && !alreadyShowNoDesposit && [IVNetwork savedUserInfo]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTAlreadyShowNoDesposit];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self showPaymentWarningPopView];
+        } else {
+            [self setupElements];
+        }
     }];
 }
 

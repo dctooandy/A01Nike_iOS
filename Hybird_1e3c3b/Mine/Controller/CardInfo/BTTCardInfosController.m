@@ -175,11 +175,8 @@
 
 - (void)showCanAddSheetWithTitles:(NSString *)titles{
     weakSelf(weakSelf)
-    
     NSArray *titleArray = [titles componentsSeparatedByString:@"/"];
-    
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:@"请选择以下方式" preferredStyle:UIAlertControllerStyleActionSheet];
-    
     NSMutableAttributedString *alertControllerMessageStr = [[NSMutableAttributedString alloc] initWithString:@"请选择以下方式"];
     [alertControllerMessageStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"333333"] range:NSMakeRange(0, 7)];
     [alertControllerMessageStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 7)];
@@ -188,6 +185,28 @@
         [alertVC.popoverPresentationController setPermittedArrowDirections:0];//去掉arrow箭头
         alertVC.popoverPresentationController.sourceView = self.view;
         alertVC.popoverPresentationController.sourceRect=CGRectMake(0, self.view.height, self.view.width, self.view.height);
+    }
+    if (titleArray.count == 1) {
+        NSString *title = titleArray[0];
+        if ([IVNetwork savedUserInfo].withdralPwdFlag == 1) {
+            //bindPhone = 1 withdralPwdFlag = 1
+            if ([title isEqualToString:@"银行卡"]) {
+                [weakSelf addBankCard];
+            }else if ([title isEqualToString:@"比特币钱包"]){
+                [weakSelf addBTC];
+            }else if ([title isEqualToString:@"USDT钱包"]){
+                [weakSelf addUSDT];
+            }else if ([title isEqualToString:@"小金库钱包"]){
+                [weakSelf addDCBOX];
+            }
+        } else {
+            //bindPhone = 1 withdralPwdFlag != 1
+            BTTPasswordChangeController *vc = [[BTTPasswordChangeController alloc] init];
+            vc.selectedType = BTTChangeWithdrawPwd;
+            vc.isGoToMinePage = false;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        return;
     }
     for (int i = 0; i<titleArray.count; i++) {
         NSString *title = titleArray[i];

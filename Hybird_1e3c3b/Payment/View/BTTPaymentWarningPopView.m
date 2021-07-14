@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *kefuBtn;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
+@property (weak, nonatomic) IBOutlet UILabel *contentLab;
 
 @end
 
@@ -32,6 +33,11 @@
     UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bgTap)];
     self.bgView.userInteractionEnabled = true;
     [self.bgView addGestureRecognizer:bgTap];
+}
+
+-(void)setContentStr:(NSString *)contentStr {
+    _contentStr = contentStr;
+    self.contentLab.text = _contentStr;
 }
 
 -(void)bgTap {

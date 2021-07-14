@@ -218,6 +218,7 @@
             if ([result.head.errCode isEqualToString:@"GW_800705"]) {
                 BTTPaymentWarningPopView *pop = [BTTPaymentWarningPopView viewFromXib];
                 pop.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                pop.contentStr = @"存款人姓名与绑定姓名不符，无法充值，请填写绑定姓名，或切换必多多账户买币存款";
                 BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:pop popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
                 popView.isClickBGDismiss = YES;
                 [popView pop];

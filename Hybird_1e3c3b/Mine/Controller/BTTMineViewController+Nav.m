@@ -26,11 +26,44 @@
 #import "BTTCompleteNamePopView.h"
 #import "BTTBindNameAndPhonePopView.h"
 #import "BTTDontUseRegularPhonePopView.h"
+#import "BTTPaymentWarningPopView.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
 
 @implementation BTTMineViewController (Nav)
+
+-(void)showPaymentWarningPopView {
+    BTTPaymentWarningPopView *pop = [BTTPaymentWarningPopView viewFromXib];
+    pop.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    pop.contentStr = @"暂无存款渠道，请联系客服或切换币多多模式使用USDT存款";
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:pop popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    pop.dismissBlock = ^{
+        [popView dismiss];
+    };
+    pop.btnBlock = ^(UIButton * _Nullable btn) {
+        //0=>kefu 1=>changeMode
+        [popView dismiss];
+        if (btn.tag == 0) {
+            [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+                if (errCode != CSServiceCode_Request_Suc) {//异常处理
+                    BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+                        if (buttonIndex == 0) {
+                            [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+                        }else if (buttonIndex == 1){
+                            [[CLive800Manager sharedInstance] startLive800Chat:self];
+                        }
+                    }];
+                    [actionSheet show];
+                }
+            }];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"changeModeNotification" object:nil];
+        }
+    };
+}
 
 -(void)showBindNameAndPhonePopView {
     BTTBindNameAndPhonePopView *pop = [BTTBindNameAndPhonePopView viewFromXib];
