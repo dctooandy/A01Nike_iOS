@@ -46,6 +46,7 @@
     [CLive800Manager switchLive800UserWithCustomerId:nil];
     [NBSAppAgent setUserIdentifier:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTAlreadyShowNoDesposit];
     [LiveChat reloadSDK];
 }
 @end
