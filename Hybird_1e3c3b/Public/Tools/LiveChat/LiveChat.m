@@ -111,10 +111,16 @@
     
     NSMutableArray * arr = [[NSMutableArray alloc] init];
     for (NSString * str in response[@"domainBakList"]) {
-        [arr addObject:[NSString stringWithFormat:@"%@/", str]];
+        if ([[str substringFromIndex:str.length-1] isEqualToString:@"/"]) {
+            [arr addObject:str];
+        } else {
+            [arr addObject:[NSString stringWithFormat:@"%@/", str]];
+        }
     }
     [IVCheckNetworkWrapper getOptimizeUrlWithArray:arr isAuto:YES type:IVKCheckNetworkTypeOnline progress:nil completion:^(IVCheckDetailModel * _Nonnull model) {
-        info.domainBakList = @[model.url];
+        if (model != nil) {
+            info.domainBakList = @[model.url];
+        }
         [CSVisitChatmanager reloadSDK:info finish:^(CSServiceCode errCode) {
             NSLog(@"222222");
         }];
@@ -127,11 +133,17 @@
     //app有域名测速功能就使用，没有直接注释domainBakList赋值即可
     NSMutableArray * arr = [[NSMutableArray alloc] init];
     for (NSString * str in response[@"domainBakList"]) {
-        [arr addObject:[NSString stringWithFormat:@"%@/", str]];
+        if ([[str substringFromIndex:str.length-1] isEqualToString:@"/"]) {
+            [arr addObject:str];
+        } else {
+            [arr addObject:[NSString stringWithFormat:@"%@/", str]];
+        }
     }
     //...测速代码，速度从快到慢
     [IVCheckNetworkWrapper getOptimizeUrlWithArray:arr isAuto:YES type:IVKCheckNetworkTypeOnline progress:nil completion:^(IVCheckDetailModel * _Nonnull model) {
-        info.domainBakList = @[model.url];
+        if (model != nil) {
+            info.domainBakList = @[model.url];
+        }
         [CSVisitChatmanager initSDK:info finish:^(CSServiceCode errCode) {
             NSLog(@"222222");
         } appearblock:nil disbock:nil];
