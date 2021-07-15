@@ -21,7 +21,7 @@ PODS:
     - BGFMDB/FMDB
   - BGFMDB/FMDB (2.0.13)
   - CocoaAsyncSocket (7.6.5)
-  - CSSerVice (1.0.0):
+  - CSSerVice (1.0.1):
     - MBProgressHUD (~> 1.1.0)
   - FCUUID (1.3.1):
     - UICKeyChainStore (~> 2.1.0)
@@ -279,7 +279,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   CSSerVice:
-    :commit: a21003dda8a84f91423a40d9339d8a984dc1a464
+    :commit: afa990dea7e3a2bc0f4035cdb116fba53493122e
     :git: http://10.66.72.115/mobile-iOS-library/ocss-webview-sdk-demo-ios.git
   IN3SAnalyticsSDK:
     :commit: 695843053cd20edfe842658e866447826b36523a
@@ -322,7 +322,7 @@ SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   BGFMDB: 48e6823027232402a678acc7f71484b1fc9171d0
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
-  CSSerVice: f5c7f84eba1e59b889acc941f87252ccbbe078aa
+  CSSerVice: 7cc7365386b253a6b9196c3ebacb512164b3364a
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
   GJRedDot: de661162a700f3395f0cd70f3629e4d3abe8e181
   IN3SAnalyticsSDK: 977242e401a22c9cc8cc30ae32c4409594c5e158
