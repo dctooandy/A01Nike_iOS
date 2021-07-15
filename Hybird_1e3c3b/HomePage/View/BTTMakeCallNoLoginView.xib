@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -56,7 +56,7 @@
                                 <constraint firstAttribute="height" constant="1" id="s0g-ME-OeS"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHu-QD-rvi">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHu-QD-rvi">
                             <rect key="frame" x="40" y="264" width="235" height="51"/>
                             <state key="normal" backgroundImage="homepage_btn_normal"/>
                             <connections>
@@ -77,7 +77,7 @@
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="OxN-ZG-j7p" firstAttribute="top" secondItem="T6y-XY-n93" secondAttribute="bottom" constant="35" id="3gd-1T-AX5"/>
                         <constraint firstItem="QHu-QD-rvi" firstAttribute="top" secondItem="ALP-T2-zB6" secondAttribute="bottom" constant="-30.5" id="4mZ-1M-IXh"/>
@@ -104,10 +104,11 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="qnz-kq-xgj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="30" id="A3C-Rg-zDU"/>
-                <constraint firstItem="vne-WG-CUC" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="M2G-ef-THc"/>
+                <constraint firstItem="vne-WG-CUC" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="M2G-ef-THc"/>
                 <constraint firstItem="qnz-kq-xgj" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Rfc-UB-WnT"/>
                 <constraint firstItem="vne-WG-CUC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="V63-jm-exH"/>
                 <constraint firstItem="vne-WG-CUC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="dR8-L4-bmD"/>
@@ -115,7 +116,6 @@
                 <constraint firstItem="vne-WG-CUC" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="rYp-k4-LdU"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="bgImageView" destination="vne-WG-CUC" id="H7b-gI-xHK"/>
                 <outlet property="bgView" destination="qnz-kq-xgj" id="78Z-Jr-4k8"/>
@@ -129,5 +129,8 @@
     <resources>
         <image name="homepage_bg" width="375" height="667"/>
         <image name="homepage_btn_normal" width="229" height="51"/>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
