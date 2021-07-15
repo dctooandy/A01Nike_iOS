@@ -61,6 +61,4 @@
     [self.collectionView reloadData];
 }
 
-
-
 @end

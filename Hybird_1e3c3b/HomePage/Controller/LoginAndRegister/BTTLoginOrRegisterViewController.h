@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *messageId; ///< 验证码的ID
 
+@property (nonatomic, copy) NSString *askInputCodeId; ///< 邀请码的ID
+
 @property (nonatomic, copy) NSString *validateId;
 
 @property (nonatomic, strong) BTTVideoFastRegisterView *fastRegisterView;

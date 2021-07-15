@@ -36,7 +36,9 @@
         titleStr = @"股东分红月月领~第二季";
         NSString * perStr = [NSString stringWithFormat:@"%@%%", model.per];
         NSString * accountStr = [[IVNetwork savedUserInfo].loginName stringByReplacingOccurrencesOfString:@"usdt" withString:@""];
-        contentStr = [NSString stringWithFormat:@"尊敬的%@客户, 您可享%@特别大礼包, %@仅需再投%@有效额, 即可每月领%@分红。", accountStr, perStr, typeStr, model.needMoney, model.amount];
+        double moneyValue = [model.needMoney doubleValue];
+        NSString * moneyStr = [PublicMethod transferNumToThousandFormat:moneyValue];
+        contentStr = [NSString stringWithFormat:@"尊敬的%@客户, 您可享%@特别大礼包, %@仅需再投%@有效额, 即可每月领%@分红。", accountStr, perStr, typeStr, moneyStr, model.amount];
     } else {
         titleStr = @"股东分红月月领~第二季";
         contentStr = [NSString stringWithFormat:@"股东分红月月领第二季已上线, \n有效流水不清零 持续累积领分红, \n月月领分红最高180000¥"];

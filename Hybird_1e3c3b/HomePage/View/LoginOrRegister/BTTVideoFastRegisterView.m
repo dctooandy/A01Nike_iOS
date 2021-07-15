@@ -107,6 +107,42 @@
         pwdLayer.frame = CGRectMake(0, 59.5, SCREEN_WIDTH-72, 0.5);
         [pwdView.layer addSublayer:pwdLayer];
         
+        UIView *askInputView = [[UIView alloc]initWithFrame:CGRectMake(36, 120, SCREEN_WIDTH-72, 60)];
+        [self addSubview:askInputView];
+        
+        UIImageView *askInputLeftImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"askInput"]];
+        [askInputView addSubview:askInputLeftImg];
+        [askInputLeftImg mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(askInputView.mas_left);
+            make.top.mas_equalTo(askInputView.mas_top).offset(37);
+            make.width.mas_equalTo(16);
+            make.height.mas_equalTo(18);
+        }];
+     
+        //邀请码输入框
+        UITextField *askInputField = [[UITextField alloc]init];
+        askInputField.font = [UIFont systemFontOfSize:16];
+        askInputField.textColor = [UIColor whiteColor];
+        NSAttributedString *attrStringASK = [[NSAttributedString alloc] initWithString:@"请输入您的邀请码(选填)" attributes:
+        @{NSForegroundColorAttributeName:[UIColor whiteColor],
+                     NSFontAttributeName:askInputField.font
+             }];
+        askInputField.attributedPlaceholder = attrStringASK;
+        [askInputField setEnabled:YES];
+        [askInputView addSubview:askInputField];
+        _askInputCodeField = askInputField;
+        [askInputField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(askInputView.mas_right);
+            make.top.mas_equalTo(askInputView.mas_top).offset(30);
+            make.left.mas_equalTo(askInputLeftImg.mas_right).offset(12);
+            make.height.mas_equalTo(30);
+        }];
+        CALayer *askInputLayer = [CALayer new];
+        askInputLayer.backgroundColor = [UIColor whiteColor].CGColor;
+        askInputLayer.frame = CGRectMake(0, 59.5, SCREEN_WIDTH-72, 0.5);
+        [askInputView.layer addSublayer:askInputLayer];
+        
+        
         UIButton *registerBtn = [[UIButton alloc]init];
         [registerBtn setTitle:@"立即开户" forState:UIControlStateNormal];
         [registerBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -119,7 +155,7 @@
         [registerBtn addTarget:self action:@selector(registerBtn_click) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:registerBtn];
         [registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(pwdView.mas_bottom).offset(30);
+            make.top.mas_equalTo(askInputView.mas_bottom).offset(30);
             make.width.mas_equalTo(SCREEN_WIDTH-72);
             make.height.mas_equalTo(45);
             make.centerX.mas_equalTo(pwdView.mas_centerX);
@@ -167,7 +203,8 @@
         [MBProgressHUD showError:@"请输入正确的验证码" toView:nil];
     }else{
         if (self.tapRegister) {
-            self.tapRegister(_accountField.text, _imgCodeField.text);
+            self.tapRegister(_accountField.text, _imgCodeField.text , _askInputCodeField.text.copy);
+            _askInputCodeField.text = @"";
         }
     }
 }

@@ -247,7 +247,8 @@
     BTTVideoFastRegisterView *fastRegisterView = [[BTTVideoFastRegisterView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 285)];
     __weak typeof(fastRegisterView) weakFastRegisterView = fastRegisterView;
     fastRegisterView.hidden = YES;
-    fastRegisterView.tapRegister = ^(NSString * _Nonnull account, NSString * _Nonnull code) {
+    fastRegisterView.tapRegister = ^(NSString * _Nonnull account, NSString * _Nonnull code, NSString * _Nullable askInputCode) {
+        weakSelf.askInputCodeId = askInputCode;
         [weakSelf verifySmsCodeCorrectWithAccount:account code:code];
     };
     fastRegisterView.tapOneKeyRegister = ^{

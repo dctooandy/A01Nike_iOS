@@ -15,9 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setCodeImage:(UIImage *)codeImg;
 
 @property (nonatomic, copy) void (^sendSmdCode)(NSString *phone);
-@property (nonatomic, copy) void(^tapRegister)(NSString *account,NSString *code);
+@property (nonatomic, copy) void(^tapRegister)(NSString *account,NSString *code , NSString *askInputCode);
 @property (nonatomic, copy) void(^tapOneKeyRegister)(void);
 @property (nonatomic, strong) UITextField *imgCodeField;
+@property (nonatomic, strong) UITextField *askInputCodeField;
 
 @end
 
