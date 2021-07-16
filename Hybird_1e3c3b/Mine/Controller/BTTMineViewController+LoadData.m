@@ -392,11 +392,14 @@
     if (self.mainDataOne.count) {
         [self.mainDataOne removeAllObjects];
     }
-    
+    BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
     self.isOpenSellUsdt = NO;
-    NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
-    NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
+    NSMutableArray *names = @[@"取款",@"洗码",@"钱包管理",@"绑定手机",@"个人资料",@""].mutableCopy;
     NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
+    if (!isUSDTAcc && [IVNetwork savedUserInfo]) {
+        names = @[@"取款",@"洗码",@"银行卡资料",@"绑定手机",@"个人资料"].mutableCopy;
+        icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
+    }
     [self handleDataOneWithNames:names icons:icons];
     [IVNetwork requestPostWithUrl:BTTOneKeySellUSDT paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
@@ -405,19 +408,25 @@
         }
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSString *isOpen = [NSString stringWithFormat:@"%@",result.body];
-            if ([isOpen isEqualToString:@"1"] && [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-                self.isOpenSellUsdt = YES;
-                [self requestSellUsdtLink];
-                NSMutableArray *names = @[@"取款",@"一键卖币",@"洗码",@"钱包管理",@"绑定手机",@"个人资料"].mutableCopy;
+            if ([isOpen isEqualToString:@"1"] && [IVNetwork savedUserInfo]) {
+                if (isUSDTAcc) {
+                    self.isOpenSellUsdt = YES;
+                    [self requestSellUsdtLink];
+                    NSMutableArray *names = @[@"取款",@"一键卖币",@"洗码",@"钱包管理",@"绑定手机",@"个人资料"].mutableCopy;
+                    NSMutableArray *icons = @[@"me_withdrawal",@"me_sell_usdt",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
+                    [self handleDataOneWithNames:names icons:icons];
+                } else {
+                    NSMutableArray *names = @[@"取款",@"洗码",@"银行卡资料",@"绑定手机",@"个人资料"].mutableCopy;
+                    NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
+                    [self handleDataOneWithNames:names icons:icons];
+                }
+            } else {
+                NSMutableArray *names = @[@"取款",@"一键卖币",@"洗码",@"银行卡资料",@"绑定手机",@"个人资料"].mutableCopy;
                 NSMutableArray *icons = @[@"me_withdrawal",@"me_sell_usdt",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
-                [self handleDataOneWithNames:names icons:icons];
-            }else{
-                NSMutableArray *names = @[@"取款",@"洗码",@"银行卡资料",@"绑定手机",@"个人资料",@""].mutableCopy;
-                NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
                 [self handleDataOneWithNames:names icons:icons];
             }
         }else{
-            NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
+            NSString *cardString = isUSDTAcc ? @"钱包管理" : @"银行卡资料";
             NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
             NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
             [self handleDataOneWithNames:names icons:icons];
@@ -542,11 +551,11 @@
                 self.yebAmount = @"加载中";
                 self.yebInterest = @"加载中";
                 self.saveMoneyCount = 0;
+                [self loadMeAllData];
                 [self loadBankList];
                 if (!self.isLoading) {
                     [self loadGamesListAndGameAmount];
                 }
-                [self loadMeAllData];
                 [self loadPaymentData];
                 [self loadRebateStatus];
                 [self loadSaveMoneyTimes];

@@ -106,7 +106,19 @@
 }
 
 + (void)requestPostWithUrl:(NSString *)url paramters:(NSDictionary * __nullable)paramters completionBlock:(KYHTTPCallBack)completionBlock{
-    [[IVHttpManager shareManager]sendRequestWithUrl:url parameters:paramters callBack:completionBlock];
+    [[IVHttpManager shareManager]sendRequestWithUrl:url parameters:paramters callBack:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"GW_890406"] ||
+            [result.head.errCode isEqualToString:@"GW_890201"] ||
+            [result.head.errCode isEqualToString:@"GW_890202"] ||
+            [result.head.errCode isEqualToString:@"GW_890204"] ||
+            [result.head.errCode isEqualToString:@"GW_890205"]) {
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:IVNUserTokenExpiredNotification object:nil];
+        } else {
+            completionBlock(response, error);
+        }
+    }];
 }
 
 + (void)requestWithUseCache:(BOOL)useCache url:(NSString *)url paramters:(NSDictionary *__nullable)paramters completionBlock:(KYHTTPCallBack)completionBlock

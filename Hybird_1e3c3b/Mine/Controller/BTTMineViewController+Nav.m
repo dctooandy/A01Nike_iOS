@@ -355,8 +355,7 @@ static const char *BTTHeaderViewKey = "headerView";
 }
 
 - (void)logoutSuccess:(NSNotification *)notifi {
-    
-    
+    [self loadMeAllData];
 }
 
 - (void)gotoCardInfo:(NSNotification *)notifi {
