@@ -229,6 +229,7 @@ static const char *BTTHeaderViewKey = "headerView";
                         [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
                         [popView dismiss];
                         [MBProgressHUD showSuccess:@"完善成功!" toView:nil];
+                        [weakSelf.collectionView reloadData];
                     });
                 }];
             } else {
