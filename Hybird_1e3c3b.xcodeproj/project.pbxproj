@@ -770,6 +770,9 @@
 		7629D7E8266C933E00CF758C /* BTTDragonBoatAutoPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629D7E5266C933E00CF758C /* BTTDragonBoatAutoPopView.xib */; };
 		7629D7E9266C933E00CF758C /* BTTDragonBoatAutoPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629D7E6266C933E00CF758C /* BTTDragonBoatAutoPopView.m */; };
 		76756E7A26A5705D0065F99B /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
+		76756EA826A57AC80065F99B /* BTTActivityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756EA726A57AC80065F99B /* BTTActivityManager.m */; };
+		76756EAE26A582130065F99B /* BTTSevenXiPriHotPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756EAC26A582130065F99B /* BTTSevenXiPriHotPopView.m */; };
+		76756EAF26A582130065F99B /* BTTSevenXiPriHotPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756EAD26A582130065F99B /* BTTSevenXiPriHotPopView.xib */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
@@ -2121,6 +2124,11 @@
 		7629D7E5266C933E00CF758C /* BTTDragonBoatAutoPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatAutoPopView.xib; sourceTree = "<group>"; };
 		7629D7E6266C933E00CF758C /* BTTDragonBoatAutoPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatAutoPopView.m; sourceTree = "<group>"; };
 		7629D7E7266C933E00CF758C /* BTTDragonBoatAutoPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatAutoPopView.h; sourceTree = "<group>"; };
+		76756EA626A57AC80065F99B /* BTTActivityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTActivityManager.h; sourceTree = "<group>"; };
+		76756EA726A57AC80065F99B /* BTTActivityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTActivityManager.m; sourceTree = "<group>"; };
+		76756EAB26A582120065F99B /* BTTSevenXiPriHotPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTSevenXiPriHotPopView.h; sourceTree = "<group>"; };
+		76756EAC26A582130065F99B /* BTTSevenXiPriHotPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSevenXiPriHotPopView.m; sourceTree = "<group>"; };
+		76756EAD26A582130065F99B /* BTTSevenXiPriHotPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTSevenXiPriHotPopView.xib; sourceTree = "<group>"; };
 		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
 		76C9F150265E404B0002591D /* CNPayOrderModelV2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayOrderModelV2.m; sourceTree = "<group>"; };
 		76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatPopView.xib; sourceTree = "<group>"; };
@@ -3173,6 +3181,8 @@
 				EA5F140D21A261BA004305A7 /* BTTHttpManager.m */,
 				EA5F141E21A2AEC1004305A7 /* BTTUserStatusManager.h */,
 				EA5F141F21A2AEC1004305A7 /* BTTUserStatusManager.m */,
+				76756EA626A57AC80065F99B /* BTTActivityManager.h */,
+				76756EA726A57AC80065F99B /* BTTActivityManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -3990,6 +4000,9 @@
 				7629D7E7266C933E00CF758C /* BTTDragonBoatAutoPopView.h */,
 				7629D7E6266C933E00CF758C /* BTTDragonBoatAutoPopView.m */,
 				7629D7E5266C933E00CF758C /* BTTDragonBoatAutoPopView.xib */,
+				76756EAB26A582120065F99B /* BTTSevenXiPriHotPopView.h */,
+				76756EAC26A582130065F99B /* BTTSevenXiPriHotPopView.m */,
+				76756EAD26A582130065F99B /* BTTSevenXiPriHotPopView.xib */,
 				4180B04125D3C23800139E88 /* BTTNewYearPopView.h */,
 				4180B04225D3C23800139E88 /* BTTNewYearPopView.m */,
 				4180B04325D3C23800139E88 /* BTTNewYearPopView.xib */,
@@ -5438,6 +5451,7 @@
 				3A7C0B1A21EC7E07002658CC /* BTTSaveMoneyModifyCell.xib in Resources */,
 				3A5AE69322D6E22A0013E8A3 /* sentVoicePlaying2@3x.png in Resources */,
 				3A5AE70D22D6E22B0013E8A3 /* money.gif in Resources */,
+				76756EAF26A582130065F99B /* BTTSevenXiPriHotPopView.xib in Resources */,
 				3A5AE6D022D6E22A0013E8A3 /* navi_back@2x.png in Resources */,
 				3A5AE6BB22D6E22A0013E8A3 /* LIVVideoMessage_PlayButtonIcon.png in Resources */,
 				3A5AE6D222D6E22A0013E8A3 /* liv_radio_selected@2x.png in Resources */,
@@ -6176,6 +6190,7 @@
 				415CA1E424E53AC6005E0E9F /* OTCInsideController.m in Sources */,
 				3AAFF8C021DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.m in Sources */,
 				D345F29023CFFC2300E658A6 /* IVNetwork.m in Sources */,
+				76756EA826A57AC80065F99B /* BTTActivityManager.m in Sources */,
 				3AA7892F21FFF2580047A372 /* NSData+ImageContentType.m in Sources */,
 				3AD9CD5B21661BE800685B43 /* BTTRedDotManager.m in Sources */,
 				3A11AE072181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.m in Sources */,
@@ -6236,6 +6251,7 @@
 				4184DE02251B329E00D433D4 /* BTTWithdrawHeaderTwoCell.m in Sources */,
 				3A11ADFE2181B72700B1AFF4 /* BTTWithdrawalCardSelectCell.m in Sources */,
 				3AE1EAE82180034C0073A32D /* BTTCardInfoAddCell.m in Sources */,
+				76756EAE26A582130065F99B /* BTTSevenXiPriHotPopView.m in Sources */,
 				76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

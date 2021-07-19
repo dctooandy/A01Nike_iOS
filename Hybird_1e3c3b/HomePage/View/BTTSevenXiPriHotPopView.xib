@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BTTSevenXiPriHotPopView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cZh-le-wW8">
+                    <rect key="frame" x="0.0" y="228.66666666666663" width="375" height="355"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dragonBoatBG" translatesAutoresizingMaskIntoConstraints="NO" id="v0E-vW-zb7">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="355"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i38-0O-ZtC">
+                            <rect key="frame" x="105.66666666666669" y="260" width="164" height="55"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="i38-0O-ZtC" secondAttribute="height" multiplier="164:55" id="Z1Q-NS-kG6"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="dragonBoatDetailIcon"/>
+                            <connections>
+                                <action selector="btnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="44x-IO-dF8"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4DD-ag-FNp">
+                            <rect key="frame" x="182.66666666666666" y="315" width="10" height="40"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="10" id="oN8-k3-Rfh"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6U-SF-KyP">
+                            <rect key="frame" x="335" y="5" width="35" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="35" id="FtZ-Nt-9tL"/>
+                                <constraint firstAttribute="height" constant="35" id="IM7-cv-BaO"/>
+                            </constraints>
+                            <state key="normal" image="dragonBoatDismissIcon"/>
+                            <connections>
+                                <action selector="closeBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="4Md-Z4-cqw"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="cZh-le-wW8" secondAttribute="height" multiplier="75:71" id="BuN-TY-mF4"/>
+                        <constraint firstItem="p6U-SF-KyP" firstAttribute="top" secondItem="cZh-le-wW8" secondAttribute="top" constant="5" id="Ekb-tS-p5H"/>
+                        <constraint firstAttribute="bottom" secondItem="4DD-ag-FNp" secondAttribute="bottom" id="JAm-86-5fB"/>
+                        <constraint firstItem="4DD-ag-FNp" firstAttribute="top" secondItem="i38-0O-ZtC" secondAttribute="bottom" id="K1j-As-7TM"/>
+                        <constraint firstAttribute="trailing" secondItem="p6U-SF-KyP" secondAttribute="trailing" constant="5" id="M7t-su-MpK"/>
+                        <constraint firstItem="v0E-vW-zb7" firstAttribute="top" secondItem="cZh-le-wW8" secondAttribute="top" id="U6S-2H-xXJ"/>
+                        <constraint firstItem="i38-0O-ZtC" firstAttribute="height" secondItem="cZh-le-wW8" secondAttribute="height" multiplier="0.15493" id="YEz-Fr-xA7"/>
+                        <constraint firstAttribute="bottom" secondItem="v0E-vW-zb7" secondAttribute="bottom" id="Ydv-UF-1YG"/>
+                        <constraint firstItem="4DD-ag-FNp" firstAttribute="height" secondItem="cZh-le-wW8" secondAttribute="height" multiplier="0.112676" id="aRt-19-XVB"/>
+                        <constraint firstAttribute="trailing" secondItem="v0E-vW-zb7" secondAttribute="trailing" id="adC-cD-qxv"/>
+                        <constraint firstItem="4DD-ag-FNp" firstAttribute="centerX" secondItem="cZh-le-wW8" secondAttribute="centerX" id="fIt-77-vfL"/>
+                        <constraint firstItem="i38-0O-ZtC" firstAttribute="centerX" secondItem="cZh-le-wW8" secondAttribute="centerX" id="pcf-DA-J4N"/>
+                        <constraint firstItem="v0E-vW-zb7" firstAttribute="leading" secondItem="cZh-le-wW8" secondAttribute="leading" id="t9Z-6e-bhK"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <constraints>
+                <constraint firstItem="cZh-le-wW8" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="QXS-gh-EUV"/>
+                <constraint firstItem="cZh-le-wW8" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.437192" id="TOs-hG-oIn"/>
+                <constraint firstItem="cZh-le-wW8" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="vQZ-m2-BdW"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="121"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="dragonBoatBG" width="375" height="355.66665649414062"/>
+        <image name="dragonBoatDetailIcon" width="164" height="55"/>
+        <image name="dragonBoatDismissIcon" width="17.666666030883789" height="17.666666030883789"/>
+    </resources>
+</document>

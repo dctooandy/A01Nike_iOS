@@ -757,6 +757,12 @@ static const char *exModelKey = "exModelKey";
         [self hideLoading];
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (result.body!=nil) {
+                if (result.body[@"registDate"])
+                {
+                    [[NSUserDefaults standardUserDefaults] setObject:result.body[@"registDate"] forKey:BTTRegistDate];
+                }else{
+                    [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:BTTRegistDate];
+                }
                 [IVHttpManager shareManager].loginName = result.body[@"loginName"];
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body isBackHome:true];
 //                if (self.isWebIn) {

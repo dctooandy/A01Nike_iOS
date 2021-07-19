@@ -46,6 +46,7 @@
 #import "BTTUserStatusManager.h"
 #import "BTTChooseCurrencyPopView.h"
 #import "BTTUserGameCurrencyModel.h"
+#import "BTTActivityManager.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -66,6 +67,7 @@
         self.isLogin = YES;
         [self checkHasShow];
         [self requestRedbag];
+        [BTTActivityManager sharedInstance];
     } else {
         self.isLogin = NO;
     }
@@ -161,36 +163,10 @@
         [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    NSString * showSevenXiDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTShowSevenXi];
-    NSString * realLastLoginDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTBeforeLoginDate];
-    if (showSevenXiDate == nil)
-    {
-        NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
-        [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:showSevenXiDate];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        if (realLastLoginDate && ![realLastLoginDate isEqualToString:@"NO"])
-        {
-            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:realLastLoginDate]]) {
-                [self showSevenXiPriHotPopView];
-            }
-        }else
-        {
-            [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTBeforeLoginDate];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self showSevenXiPriHotPopView];
-        }
-    }else{
-        if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:showSevenXiDate]])
-        {
-            NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
-            [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowSevenXi];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self showSevenXiPriHotPopView];
-        }
-    }
-    
-    [self loadSevenXiData];
-
+    //检查七夕活动日期
+    [[BTTActivityManager sharedInstance] checkSevenXiDate];
+    //检查七夕活动接口资料(正式开跑后)
+    [[BTTActivityManager sharedInstance] loadSevenXiDatawWithCompletionBlock:nil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
