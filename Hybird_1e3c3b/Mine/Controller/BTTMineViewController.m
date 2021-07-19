@@ -106,12 +106,12 @@
     if ([IVNetwork savedUserInfo]) {
         //usdt取款優惠彈窗
         //        [self loadGetPopWithDraw];
-        [self loadMeAllData];
         [self loadUserInfo];
         [self loadBankList];
         if (!self.isLoading) {
             [self loadGamesListAndGameAmount];
         }
+        [self loadMeAllData];
         [self loadPaymentData];
         [self loadRebateStatus];
         [self loadSaveMoneyTimes];
@@ -376,7 +376,8 @@
             return [UICollectionViewCell new];
         }
     } else if (indexPath.row == 2 + self.saveMoneyCount ||
-               indexPath.row == self.saveMoneyCount + ((![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && [IVNetwork savedUserInfo]) ? 8:9)) {
+        indexPath.row == self.saveMoneyCount + (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? 8:9)) {
+        
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
     } else {
@@ -388,20 +389,19 @@
             cell.mineSparaterType = BTTMineSparaterTypeDoubleLineTwo;
         }
         BTTMeMainModel *model = nil;
-        if (self.mainDataOne.count == 5) {
-            if (indexPath.row >= self.saveMoneyCount + 3 && indexPath.row <= self.saveMoneyCount + 7) {
-                model = self.mainDataOne[indexPath.row - self.saveMoneyCount - 3];
-            } else {
-                model = self.mainDataTwo[indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4];
-            }
-        } else {
+        if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
             if (indexPath.row >= self.saveMoneyCount + 3 && indexPath.row <= self.saveMoneyCount + 8) {
                 model = self.mainDataOne[indexPath.row - self.saveMoneyCount - 3];
             } else {
                 model = self.mainDataTwo[indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4];
             }
+        } else {
+            if (indexPath.row >= self.saveMoneyCount + 3 && indexPath.row <= self.saveMoneyCount + 7) {
+                model = self.mainDataOne[indexPath.row - self.saveMoneyCount - 3];
+            } else {
+                model = self.mainDataTwo[indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4];
+            }
         }
-        
         cell.isShowHot = self.isShowHot;
         cell.model = model;
         return cell;
@@ -735,10 +735,10 @@
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
                 }
             }
-        } else if (i == 1 + self.saveMoneyCount + 1 || i == self.saveMoneyCount + ((![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && [IVNetwork savedUserInfo]) ? 8:9)) {
+        } else if (i == 1 + self.saveMoneyCount + 1 || i == self.saveMoneyCount + (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? 8:9)) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 10)]];
         } else {
-            if ((i == self.saveMoneyCount + 3 || i == self.saveMoneyCount + 4) && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && [IVNetwork savedUserInfo]) {
+            if ((i == self.saveMoneyCount + 3 || i == self.saveMoneyCount + 4) && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 2, 100)]];
             } else {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 3, 100)]];
