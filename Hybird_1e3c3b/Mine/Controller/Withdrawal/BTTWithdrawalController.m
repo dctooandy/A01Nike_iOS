@@ -598,7 +598,7 @@
                     
                 };
                 IVActionHandler kf = ^(UIAlertAction *action){
-                    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+                    [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
                         if (errCode != CSServiceCode_Request_Suc) {//异常处理
                             BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
                                 if (buttonIndex == 0) {
@@ -610,6 +610,18 @@
                             [actionSheet show];
                         }
                     }];
+//                    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//                        if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//                            BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+//                                if (buttonIndex == 0) {
+//                                    [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+//                                }else if (buttonIndex == 1){
+//                                    [[CLive800Manager sharedInstance] startLive800Chat:self];
+//                                }
+//                            }];
+//                            [actionSheet show];
+//                        }
+//                    }];
                 };
                 NSString *title = @"温馨提示";
                 NSString *message = @"资金密码错输入误，请重新输入或联系客服!";

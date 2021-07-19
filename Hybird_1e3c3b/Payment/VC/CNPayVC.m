@@ -111,11 +111,16 @@
 }
 
 -(void)gotoKefu {
-    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+    [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
         if (errCode != CSServiceCode_Request_Suc) {//异常处理
             [[CLive800Manager sharedInstance] startLive800Chat:self];
         }
     }];
+//    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//        if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//            [[CLive800Manager sharedInstance] startLive800Chat:self];
+//        }
+//    }];
 }
 
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full {

@@ -14,8 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^CSServiceCompleteBlock)(CSServiceCode errCode);
 
 @interface LiveChat : NSObject
-+(void)initOcssSDKNetWork;
-+(void)reloadSDK;
++(void)startKeFu:(UIViewController *)vc csServicecompleteBlock:(CSServiceCompleteBlock)csServicecompleteBlock;
+//+(void)initOcssSDKNetWork;
+//+(void)reloadSDK;
 @end
 
 NS_ASSUME_NONNULL_END

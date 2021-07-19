@@ -137,11 +137,16 @@
             break;
         case IVGameForwardPageTypeCustomerService:
         {
-            [CSVisitChatmanager startWithSuperVC:gameController finish:^(CSServiceCode errCode) {
+            [LiveChat startKeFu:gameController csServicecompleteBlock:^(CSServiceCode errCode) {
                 if (errCode != CSServiceCode_Request_Suc) {//异常处理
                     [[CLive800Manager sharedInstance] startLive800Chat:gameController];
                 }
             }];
+//            [CSVisitChatmanager startWithSuperVC:gameController finish:^(CSServiceCode errCode) {
+//                if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//                    [[CLive800Manager sharedInstance] startLive800Chat:gameController];
+//                }
+//            }];
         }
             return;
         case IVGameForwardPageTypeBJLDetails:
@@ -194,11 +199,16 @@
     UIViewController *vc =  (UIViewController *)webView.navigationDelegate;
     if ([navigationAction.request.URL.absoluteString containsString:@"nbapp://"]) {
         if ([[navigationAction.request.URL.absoluteString URLDecodedString] containsString:@"https://www.why918.com"]) {
-            [CSVisitChatmanager startWithSuperVC:(UIViewController *)webView.navigationDelegate finish:^(CSServiceCode errCode) {
+            [LiveChat startKeFu:(UIViewController *)webView.navigationDelegate csServicecompleteBlock:^(CSServiceCode errCode) {
                 if (errCode != CSServiceCode_Request_Suc) {
                     [[CLive800Manager sharedInstance] startLive800Chat:(UIViewController *)webView.navigationDelegate];
                 }
             }];
+//            [CSVisitChatmanager startWithSuperVC:(UIViewController *)webView.navigationDelegate finish:^(CSServiceCode errCode) {
+//                if (errCode != CSServiceCode_Request_Suc) {
+//                    [[CLive800Manager sharedInstance] startLive800Chat:(UIViewController *)webView.navigationDelegate];
+//                }
+//            }];
         } else if ([[navigationAction.request.URL.absoluteString URLDecodedString] containsString:@"/deposit_xunjie.htm"]) {
             
             [vc.navigationController pushViewController:[[CNPayVC alloc] init] animated:YES];

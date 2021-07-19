@@ -50,11 +50,16 @@
 }
 
 - (id)driver_live800:(BridgeModel *)bridgeModel {
-    [CSVisitChatmanager startWithSuperVC:self.controller finish:^(CSServiceCode errCode) {
+    [LiveChat startKeFu:self.controller csServicecompleteBlock:^(CSServiceCode errCode) {
         if (errCode != CSServiceCode_Request_Suc) {//异常处理
             [[CLive800Manager sharedInstance] startLive800Chat:self.controller];
         }
     }];
+//    [CSVisitChatmanager startWithSuperVC:self.controller finish:^(CSServiceCode errCode) {
+//        if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//            [[CLive800Manager sharedInstance] startLive800Chat:self.controller];
+//        }
+//    }];
     return nil;
 }
 - (id)driver_live800ol:(BridgeModel *)bridgeModel {
@@ -216,11 +221,16 @@
         [self.controller.navigationController pushViewController:xima animated:YES];
     }
     else if ([url containsString:@"common/kefu.htm"]) {//客服
-        [CSVisitChatmanager startWithSuperVC:self.controller finish:^(CSServiceCode errCode) {
+        [LiveChat startKeFu:self.controller csServicecompleteBlock:^(CSServiceCode errCode) {
             if (errCode != CSServiceCode_Request_Suc) {//异常处理
                 [[CLive800Manager sharedInstance] startLive800Chat:self.controller];
             }
         }];
+//        [CSVisitChatmanager startWithSuperVC:self.controller finish:^(CSServiceCode errCode) {
+//            if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//                [[CLive800Manager sharedInstance] startLive800Chat:self.controller];
+//            }
+//        }];
     }
     else if ([url containsString:@"common/agqj.htm"]) {
         if ([IVNetwork savedUserInfo]) {

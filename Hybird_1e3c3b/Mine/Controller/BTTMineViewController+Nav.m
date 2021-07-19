@@ -47,7 +47,7 @@ static const char *BTTHeaderViewKey = "headerView";
         //0=>kefu 1=>changeMode
         [popView dismiss];
         if (btn.tag == 0) {
-            [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+            [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
                 if (errCode != CSServiceCode_Request_Suc) {//异常处理
                     BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
                         if (buttonIndex == 0) {
@@ -59,6 +59,18 @@ static const char *BTTHeaderViewKey = "headerView";
                     [actionSheet show];
                 }
             }];
+//            [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//                if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//                    BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+//                        if (buttonIndex == 0) {
+//                            [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+//                        }else if (buttonIndex == 1){
+//                            [[CLive800Manager sharedInstance] startLive800Chat:self];
+//                        }
+//                    }];
+//                    [actionSheet show];
+//                }
+//            }];
         } else {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"changeModeNotification" object:nil];
         }
@@ -442,7 +454,7 @@ static const char *BTTHeaderViewKey = "headerView";
 - (void)rightClick:(UIButton *)btn {
     
     BTTPopoverAction *action1 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineService") title:@"在线客服      " handler:^(BTTPopoverAction *action) {
-        [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+        [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
             if (errCode != CSServiceCode_Request_Suc) {//异常处理
                 BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
                     if (buttonIndex == 0) {
@@ -454,6 +466,18 @@ static const char *BTTHeaderViewKey = "headerView";
                 [actionSheet show];
             }
         }];
+//        [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//            if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//                BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+//                    if (buttonIndex == 0) {
+//                        [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+//                    }else if (buttonIndex == 1){
+//                        [[CLive800Manager sharedInstance] startLive800Chat:self];
+//                    }
+//                }];
+//                [actionSheet show];
+//            }
+//        }];
     }];
     
     BTTPopoverAction *action2 = [BTTPopoverAction actionWithImage:ImageNamed(@"voiceCall") title:@"APP语音通信" handler:^(BTTPopoverAction *action) {
