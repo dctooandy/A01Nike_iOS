@@ -244,7 +244,7 @@
     [self.view addSubview:loginInfoView];
     self.loginView = loginInfoView;
     
-    BTTVideoFastRegisterView *fastRegisterView = [[BTTVideoFastRegisterView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 285)];
+    BTTVideoFastRegisterView *fastRegisterView = [[BTTVideoFastRegisterView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 345)];
     __weak typeof(fastRegisterView) weakFastRegisterView = fastRegisterView;
     fastRegisterView.hidden = YES;
     fastRegisterView.tapRegister = ^(NSString * _Nonnull account, NSString * _Nonnull code, NSString * _Nullable askInputCode) {
