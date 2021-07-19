@@ -21,7 +21,7 @@ PODS:
     - BGFMDB/FMDB
   - BGFMDB/FMDB (2.0.13)
   - CocoaAsyncSocket (7.6.5)
-  - CSSerVice (0.1.9.3):
+  - CSSerVice (0.1.9.2):
     - MBProgressHUD (~> 1.1.0)
   - FCUUID (1.3.1):
     - UICKeyChainStore (~> 2.1.0)
@@ -204,7 +204,7 @@ PODS:
 
 DEPENDENCIES:
   - CocoaAsyncSocket (~> 7.6.3)
-  - CSSerVice (from `http://10.66.72.115/mobile-iOS-library/ocss-webview-sdk-demo-ios.git`, tag `0.1.9.3`)
+  - CSSerVice (from `http://10.66.72.115/mobile-iOS-library/ocss-webview-sdk-demo-ios.git`, tag `0.1.9.2`)
   - FCUUID
   - GJRedDot
   - IN3SAnalyticsSDK (from `http://10.66.72.115/mobile-iOS-library/IV3SLibrary.git`)
@@ -249,7 +249,7 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   CSSerVice:
     :git: http://10.66.72.115/mobile-iOS-library/ocss-webview-sdk-demo-ios.git
-    :tag: 0.1.9.3
+    :tag: 0.1.9.2
   IN3SAnalyticsSDK:
     :git: http://10.66.72.115/mobile-iOS-library/IV3SLibrary.git
   IVCacheLibrary:
@@ -280,7 +280,7 @@ EXTERNAL SOURCES:
 CHECKOUT OPTIONS:
   CSSerVice:
     :git: http://10.66.72.115/mobile-iOS-library/ocss-webview-sdk-demo-ios.git
-    :tag: 0.1.9.3
+    :tag: 0.1.9.2
   IN3SAnalyticsSDK:
     :commit: 695843053cd20edfe842658e866447826b36523a
     :git: http://10.66.72.115/mobile-iOS-library/IV3SLibrary.git
@@ -322,7 +322,7 @@ SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   BGFMDB: 48e6823027232402a678acc7f71484b1fc9171d0
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
-  CSSerVice: e142eb901544c4a69a025495eacda4536864cbb6
+  CSSerVice: 07ec0beb0141ad5d7a50938ddb15b9d362d504de
   FCUUID: bb054fc90cd7cd99320f9f6ff8e130fe607fba05
   GJRedDot: de661162a700f3395f0cd70f3629e4d3abe8e181
   IN3SAnalyticsSDK: 977242e401a22c9cc8cc30ae32c4409594c5e158
@@ -348,6 +348,6 @@ SPEC CHECKSUMS:
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
-PODFILE CHECKSUM: 2d5336aa4c8a48b3ea327ab4a0372ba805bf8383
+PODFILE CHECKSUM: f98139b1270198b1c5fe69ffcb58f06b4be1d1e9
 
 COCOAPODS: 1.7.2
