@@ -161,6 +161,43 @@
         [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    NSString * showSevenXiDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTShowSevenXi];
+    NSString * realLastLoginDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTBeforeLoginDate];
+    if (showSevenXiDate == nil)
+    {
+        NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
+        [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:showSevenXiDate];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        if (realLastLoginDate && ![realLastLoginDate isEqualToString:@"NO"])
+        {
+            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:realLastLoginDate]]) {
+                [self showDragonBoat];
+            }
+        }else
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTBeforeLoginDate];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self showDragonBoat];
+        }
+    }else{
+        if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:showSevenXiDate]])
+        {
+            NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
+            [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowSevenXi];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self showDragonBoat];
+        }
+    }
+    
+    //暫時寫出來
+    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:BTShowDBPopView])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:BTShowDBPopView];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    [self loadDragonBoatData];
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -183,6 +220,7 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowDragonBoat];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowSevenXi];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBeforeLoginDate];
             [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
         }
