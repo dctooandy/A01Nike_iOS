@@ -1256,4 +1256,12 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     return amount;
 }
 
++(void)setViewSelectCorner:(UIRectCorner)position view:(UIView *)view cornerRadius:(CGFloat)cornerRadius {
+    UIBezierPath * path = [UIBezierPath bezierPathWithRoundedRect:view.bounds byRoundingCorners:position cornerRadii:CGSizeMake(cornerRadius, cornerRadius)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = view.bounds;
+    maskLayer.path = path.CGPath;
+    view.layer.mask = maskLayer;
+}
+
 @end

@@ -115,6 +115,11 @@ static const char *BTTMenualPopViewKey = "menualPopView";
                     [[CLive800Manager sharedInstance] startLive800Chat:self];
                 }
             }];
+//            [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//                if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//                    [[CLive800Manager sharedInstance] startLive800Chat:self];
+//                }
+//            }];
         });
     }
 }
@@ -301,6 +306,18 @@ static const char *BTTMenualPopViewKey = "menualPopView";
                 [actionSheet show];
             }
         }];
+//        [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//            if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//                BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+//                    if (buttonIndex == 0) {
+//                        [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+//                    }else if (buttonIndex == 1){
+//                        [[CLive800Manager sharedInstance] startLive800Chat:self];
+//                    }
+//                }];
+//                [actionSheet show];
+//            }
+//        }];
     }];
     
     BTTPopoverAction *action2 = [BTTPopoverAction actionWithImage:ImageNamed(@"voiceCall") title:@"APP语音通信" handler:^(BTTPopoverAction *action) {

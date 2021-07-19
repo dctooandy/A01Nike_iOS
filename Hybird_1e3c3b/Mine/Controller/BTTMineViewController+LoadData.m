@@ -18,6 +18,7 @@
 #import "BTTUserStatusManager.h"
 #import "BTTWithdrawToUsdtPromoPop.h"
 #import "CLive800Manager.h"
+#import "BTTMineViewController+Nav.h"
 
 @implementation BTTMineViewController (LoadData)
 
@@ -96,6 +97,7 @@
 }
 
 - (void)loadPersonalPaymentData {
+    BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
     [CNPayRequestManager queryAllChannelCompleteHandler:^(id response,NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if (self.bigDataSoure.count) {
@@ -126,31 +128,33 @@
                     CNPaymentModel *model = [CNPaymentModel yy_modelWithJSON:dict];
                     [payments addObject:model];
                     //bigData
-                    if ([model.payTypeName isEqualToString:@"OTC"]) {
-                        BTTMeMainModel *buyModel = [BTTMeMainModel new];
-                        buyModel.name = @"购买USDT";
-                        buyModel.iconName = @"buy_otc_tab";
-                        buyModel.paymentType = model.payType+1;
-                        buyModel.payModel = model;
-                        buyModel.desc = @"人民币存款";
-                        [self.bigDataSoure insertObject:buyModel atIndex:0];
-
-                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                        mainModel.name = @"充值USDT";
-                        mainModel.iconName = @"recharge_otc_tab";
-                        mainModel.paymentType = model.payType;
-                        mainModel.payModel = model;
-                        mainModel.desc = @"扫码转币";
-                        [self.bigDataSoure insertObject:mainModel atIndex:1];
-                    }
-                    if ([model.payTypeName isEqualToString:@"小金库"]) {
-                        BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                        mainModel.name = @"小金库";
-                        mainModel.iconName = @"me_dcbox";
-                        mainModel.paymentType = model.payType;
-                        mainModel.payModel = model;
-                        mainModel.desc = @"秒到-无痕";
-                        [self.bigDataSoure addObject:mainModel];
+                    if (isUSDTAcc) {
+                        if ([model.payTypeName isEqualToString:@"OTC"]) {
+                            BTTMeMainModel *buyModel = [BTTMeMainModel new];
+                            buyModel.name = @"购买USDT";
+                            buyModel.iconName = @"buy_otc_tab";
+                            buyModel.paymentType = model.payType+1;
+                            buyModel.payModel = model;
+                            buyModel.desc = @"人民币存款";
+                            [self.bigDataSoure insertObject:buyModel atIndex:0];
+                            
+                            BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                            mainModel.name = @"充值USDT";
+                            mainModel.iconName = @"recharge_otc_tab";
+                            mainModel.paymentType = model.payType;
+                            mainModel.payModel = model;
+                            mainModel.desc = @"扫码转币";
+                            [self.bigDataSoure insertObject:mainModel atIndex:1];
+                        }
+                        if ([model.payTypeName isEqualToString:@"小金库"]) {
+                            BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                            mainModel.name = @"小金库";
+                            mainModel.iconName = @"me_dcbox";
+                            mainModel.paymentType = model.payType;
+                            mainModel.payModel = model;
+                            mainModel.desc = @"秒到-无痕";
+                            [self.bigDataSoure addObject:mainModel];
+                        }
                     }
                     if ([model.payTypeName isEqualToString:@"银联扫码"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
@@ -274,7 +278,11 @@
                         mainModel.iconName = @"me_bank";
                         mainModel.paymentType = model.payType;
                         mainModel.payModel = model;
-                        [self.normalDataTwo addObject:mainModel];
+                        if (self.normalDataTwo.count > 0) {
+                            [self.normalDataTwo insertObject:mainModel atIndex:0];
+                        } else {
+                            [self.normalDataTwo addObject:mainModel];
+                        }
                     }
                     if ([model.payTypeName isEqualToString:@"微信转账银行卡"]&&![[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"]) {
                         BTTMeMainModel *mainModel = [BTTMeMainModel new];
@@ -369,8 +377,14 @@
                 self.saveMoneyCount = 0;
             }
         }
-        
-        [self setupElements];
+        BOOL alreadyShowNoDesposit = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTAlreadyShowNoDesposit] boolValue];
+        if (self.saveMoneyCount == 0 && !alreadyShowNoDesposit && [IVNetwork savedUserInfo] && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTAlreadyShowNoDesposit];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self showPaymentWarningPopView];
+        } else {
+            [self setupElements];
+        }
     }];
 }
 
@@ -378,11 +392,14 @@
     if (self.mainDataOne.count) {
         [self.mainDataOne removeAllObjects];
     }
-    
+    BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
     self.isOpenSellUsdt = NO;
-    NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
-    NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
+    NSMutableArray *names = @[@"取款",@"洗码",@"钱包管理",@"绑定手机",@"个人资料",@""].mutableCopy;
     NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
+    if (!isUSDTAcc && [IVNetwork savedUserInfo]) {
+        names = @[@"取款",@"洗码",@"银行卡资料",@"绑定手机",@"个人资料"].mutableCopy;
+        icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
+    }
     [self handleDataOneWithNames:names icons:icons];
     [IVNetwork requestPostWithUrl:BTTOneKeySellUSDT paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
@@ -391,21 +408,25 @@
         }
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSString *isOpen = [NSString stringWithFormat:@"%@",result.body];
-            if ([isOpen isEqualToString:@"1"]) {
-                self.isOpenSellUsdt = YES;
-                [self requestSellUsdtLink];
-                NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
-                NSMutableArray *names = @[@"取款",@"一键卖币",@"洗码",cardString,@"绑定手机",@"个人资料"].mutableCopy;
+            if ([isOpen isEqualToString:@"1"] && [IVNetwork savedUserInfo]) {
+                if (isUSDTAcc) {
+                    self.isOpenSellUsdt = YES;
+                    [self requestSellUsdtLink];
+                    NSMutableArray *names = @[@"取款",@"一键卖币",@"洗码",@"钱包管理",@"绑定手机",@"个人资料"].mutableCopy;
+                    NSMutableArray *icons = @[@"me_withdrawal",@"me_sell_usdt",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
+                    [self handleDataOneWithNames:names icons:icons];
+                } else {
+                    NSMutableArray *names = @[@"取款",@"洗码",@"银行卡资料",@"绑定手机",@"个人资料"].mutableCopy;
+                    NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
+                    [self handleDataOneWithNames:names icons:icons];
+                }
+            } else {
+                NSMutableArray *names = @[@"取款",@"一键卖币",@"洗码",@"银行卡资料",@"绑定手机",@"个人资料"].mutableCopy;
                 NSMutableArray *icons = @[@"me_withdrawal",@"me_sell_usdt",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
-                [self handleDataOneWithNames:names icons:icons];
-            }else{
-                NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
-                NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
-                NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
                 [self handleDataOneWithNames:names icons:icons];
             }
         }else{
-            NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
+            NSString *cardString = isUSDTAcc ? @"钱包管理" : @"银行卡资料";
             NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
             NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
             [self handleDataOneWithNames:names icons:icons];
@@ -530,11 +551,11 @@
                 self.yebAmount = @"加载中";
                 self.yebInterest = @"加载中";
                 self.saveMoneyCount = 0;
+                [self loadMeAllData];
                 [self loadBankList];
                 if (!self.isLoading) {
                     [self loadGamesListAndGameAmount];
                 }
-                [self loadMeAllData];
                 [self loadPaymentData];
                 [self loadRebateStatus];
                 [self loadSaveMoneyTimes];
@@ -699,6 +720,11 @@
                             [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
                         }
                     }];
+//                    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//                        if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//                            [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+//                        }
+//                    }];
                     
                 };
             }
@@ -706,6 +732,68 @@
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];
+}
+
+-(void)completeCustomerInfo:(NSString * _Nullable )nameStr phoneStr:(NSString * _Nullable)phoneStr completeBlock:(KYHTTPCallBack)completeBlock {
+    [self.view endEditing:true];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    if (nameStr.length) {
+        params[@"realName"] = nameStr;
+    }
+    if (phoneStr.length) {
+        params[@"phone"] = [IVRsaEncryptWrapper encryptorString:phoneStr];
+    }
+    [IVNetwork requestPostWithUrl:BTTModifyCustomerInfo paramters:params completionBlock:completeBlock];
+}
+
+-(void)sendCodeByLoginName:(KYHTTPCallBack)completionBlock {
+    [self.view endEditing:true];
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"use"] = @3;
+    [IVNetwork requestPostWithUrl:BTTStepOneSendCode paramters:params completionBlock:completionBlock];
+}
+
+-(void)sendCodeByPhone:(NSString *)phoneStr completionBlock:(KYHTTPCallBack)completionBlock {
+    [self.view endEditing:true];
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"use"] = @3;
+    params[@"mobileNo"] = [IVRsaEncryptWrapper encryptorString:phoneStr];
+    [IVNetwork requestPostWithUrl:BTTSendMsgCode paramters:params completionBlock:completionBlock];
+}
+
+-(void)verifySmsCode:(NSString *)smsCodeStr completeBlock:(KYHTTPCallBack)completeBlock {
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"messageId"] = self.messageId;
+    params[@"smsCode"] = smsCodeStr;
+    params[@"use"] = @"3";
+    [MBProgressHUD showLoadingSingleInView:[UIApplication sharedApplication].keyWindow animated:YES];
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTVerifySmsCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            weakSelf.messageId = result.body[@"messageId"];
+            weakSelf.validateId = result.body[@"validateId"];
+            [weakSelf bindPhone:smsCodeStr completeBlock:completeBlock];
+        }else{
+            completeBlock(response, error);
+        }
+    }];
+}
+
+-(void)bindPhone:(NSString *)smsCodeStr completeBlock:(KYHTTPCallBack)completeBlock {
+    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+    params[@"messageId"] = self.messageId;
+    params[@"validateId"] = self.validateId;
+    params[@"smsCode"] = smsCodeStr;
+    [IVNetwork requestPostWithUrl:BTTBindPhone paramters:params completionBlock:completeBlock];
+}
+
+-(void)completeInfoGroup:(NSString *)nameStr group:(dispatch_group_t)group completeBlock:(KYHTTPCallBack)completeBlock {
+    [self completeCustomerInfo:nameStr phoneStr:nil completeBlock:completeBlock];
+}
+
+-(void)verifySmsGroup:(NSString *)smsCodeStr group:(dispatch_group_t)group completeBlock:(KYHTTPCallBack)completeBlock {
+    [self verifySmsCode:smsCodeStr completeBlock:completeBlock];
 }
 
 #pragma mark - 动态添加属性

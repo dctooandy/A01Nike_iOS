@@ -64,6 +64,11 @@
                     [[CLive800Manager sharedInstance] startLive800Chat:strongSelf];
                 }
             }];
+//            [CSVisitChatmanager startWithSuperVC:strongSelf finish:^(CSServiceCode errCode) {
+//                if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//                    [[CLive800Manager sharedInstance] startLive800Chat:strongSelf];
+//                }
+//            }];
         } else if (btn.tag == 1002) {
             [strongSelf MobileNoAndCodeRegisterAPIModel:model];
         }

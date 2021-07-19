@@ -35,6 +35,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccessNotification object:@{@"isBackHome":[NSNumber numberWithBool:isBackHome]}];
     [BTTRequestPrecache updateCacheNeedLoginRequest];
     [CNPreCacheMananger prepareCacheDataNeedLogin];
+//    [LiveChat reloadSDK];
 }
 + (void)logoutSuccess
 {
@@ -45,5 +46,7 @@
     [CLive800Manager switchLive800UserWithCustomerId:nil];
     [NBSAppAgent setUserIdentifier:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTAlreadyShowNoDesposit];
+//    [LiveChat reloadSDK];
 }
 @end

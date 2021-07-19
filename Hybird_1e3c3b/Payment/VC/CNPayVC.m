@@ -18,6 +18,7 @@
 #import "CNPayDepositNameModel.h"
 #import "BTTCompleteMeterialController.h"
 #import "BTTMeMainModel.h"
+#import "CLive800Manager.h"
 
 /// 顶部渠道单元尺寸
 #define kPayChannelItemSize CGSizeMake(102, 132)
@@ -76,22 +77,6 @@
     [self registerNotification];
     [self setupChannelView];
 }
--(void)viewDidLayoutSubviews{
-    [super viewDidLayoutSubviews];
-    [_payCollectionView reloadData];
-    [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-}
-
-- (void)registerNotification {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUIItems:) name:@"BTTUpdateSaveMoneyUINotification" object:nil];
-}
-
-- (void)updateUIItems:(NSNotification *)notifi  {
-    NSLog(@"%@",notifi.object);
-    _payChannelVC.segmentVC.items = notifi.object;
-    _segmentVC.items = notifi.object;
-    [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];
-}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -104,6 +89,38 @@
         [CNTimeLog endRecordTime:CNEventPayLaunch];
         _isFirstLoad = YES;
     }
+}
+
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    [_payCollectionView reloadData];
+    [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+}
+
+- (void)registerNotification {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUIItems:) name:@"BTTUpdateSaveMoneyUINotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoKefu) name:@"gotoKefu" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToBack) name:@"gotoBack" object:nil];
+}
+
+- (void)updateUIItems:(NSNotification *)notifi  {
+    NSLog(@"%@",notifi.object);
+    _payChannelVC.segmentVC.items = notifi.object;
+    _segmentVC.items = notifi.object;
+    [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];
+}
+
+-(void)gotoKefu {
+    [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
+        if (errCode != CSServiceCode_Request_Suc) {//异常处理
+            [[CLive800Manager sharedInstance] startLive800Chat:self];
+        }
+    }];
+//    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//        if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//            [[CLive800Manager sharedInstance] startLive800Chat:self];
+//        }
+//    }];
 }
 
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full {

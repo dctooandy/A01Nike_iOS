@@ -11,6 +11,8 @@
 @interface BTTXimaSuccessBtnsCell ()
 @property (weak, nonatomic) IBOutlet UIButton *successLeftBtn;
 @property (weak, nonatomic) IBOutlet UIButton *successRightBtn;
+
+@property (weak, nonatomic) IBOutlet UIButton *successLargeBtn;
 @end
 
 @implementation BTTXimaSuccessBtnsCell
@@ -19,12 +21,14 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.backgroundColor = [UIColor colorWithHexString:@"212229"];
-    if ([[IVNetwork savedUserInfo].xmTransferCurrency isEqualToString:@"USDT"]) {
-        [self.successLeftBtn setTitle:@"前往洗码转账记录" forState:UIControlStateNormal];
-        [self.successRightBtn setTitle:@"切换币多多账户" forState:UIControlStateNormal];
-    } else {
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+        self.successLargeBtn.hidden = true;
         [self.successLeftBtn setTitle:@"继续洗码" forState:UIControlStateNormal];
         [self.successRightBtn setTitle:@"查看洗码记录" forState:UIControlStateNormal];
+    } else {
+        self.successLargeBtn.hidden = false;
+        self.successLeftBtn.hidden = true;
+        self.successRightBtn.hidden = true;
     }
 }
 
@@ -32,7 +36,6 @@
     if (self.buttonClickBlock) {
         self.buttonClickBlock(sender);
     }
-    
 }
 
 - (IBAction)ximaRecordClick:(UIButton *)sender {

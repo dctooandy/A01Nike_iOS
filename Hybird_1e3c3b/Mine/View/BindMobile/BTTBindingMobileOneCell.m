@@ -80,6 +80,9 @@
         }
         return YES;
     }
+    else if ([self.model.name isEqualToString:@"手机号码"] && textField.text.length >= 11 && string.length > 0) {
+        return false;
+    }
     else {
         return YES;
     }

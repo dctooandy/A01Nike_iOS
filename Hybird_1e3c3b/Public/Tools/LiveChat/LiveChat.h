@@ -15,6 +15,8 @@ typedef void (^CSServiceCompleteBlock)(CSServiceCode errCode);
 
 @interface LiveChat : NSObject
 +(void)startKeFu:(UIViewController *)vc csServicecompleteBlock:(CSServiceCompleteBlock)csServicecompleteBlock;
+//+(void)initOcssSDKNetWork;
+//+(void)reloadSDK;
 @end
 
 NS_ASSUME_NONNULL_END

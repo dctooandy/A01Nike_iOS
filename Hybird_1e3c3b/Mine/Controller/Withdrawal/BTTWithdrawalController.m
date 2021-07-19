@@ -354,9 +354,12 @@
 //选中银行卡
 - (void)bankCardPick:(NSIndexPath *)indexPath
 {
+    BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
     BTTWithdrawalCardSelectCell *cell = (BTTWithdrawalCardSelectCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     NSMutableArray *textArray = @[].mutableCopy;
-    [textArray addObject:[NSString stringWithFormat:@"➕ 小金库钱包"]];
+    if (isUSDTAcc) {
+        [textArray addObject:[NSString stringWithFormat:@"➕ 小金库钱包"]];
+    }
     BOOL haveBfb = NO;
     
     for (BTTBankModel *model in self.bankList) {
@@ -427,38 +430,45 @@
     NSDictionary *json = [IVCacheWrapper objectForKey:BTTCacheBankListKey];
     if (json!=nil) {
         NSArray *array = json[@"accounts"];
-        BOOL isBlackNineteen = [[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"];
+//        BOOL isBlackNineteen = [[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"];
         BOOL isHaveBitoll = NO;
+        BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
         if (isArrayWithCountMoreThan0(array)) {
             NSMutableArray *bankList = [[NSMutableArray alloc]init];
             for (int i =0 ; i<array.count; i++) {
                 NSDictionary *json = array[i];
                 BTTBankModel *model = [BTTBankModel yy_modelWithDictionary:json];
                 if (![model.accountType isEqualToString:@"Bitbase"]) {
-                    if (isBlackNineteen) {
-                        if (![model.accountType isEqualToString:@"存折"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"信用卡"]) {
-                            if ([model.accountType isEqualToString:@"DCBOX"]) {
+                    if (isUSDTAcc) {
+//                        if (isBlackNineteen) {
+//                            if (![model.accountType isEqualToString:@"存折"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"信用卡"]) {
+//                                if ([model.accountType isEqualToString:@"DCBOX"]) {
+//                                    [bankList insertObject:model atIndex:0];
+//                                    isHaveBitoll = YES;
+//                                }else{
+//                                    [bankList addObject:model];
+//                                }
+//                            }
+//                        }else{
+                            if ([model.bankName isEqualToString:@"DCBOX"]) {
                                 [bankList insertObject:model atIndex:0];
                                 isHaveBitoll = YES;
-                            }else{
+                            }else if(![model.bankName isEqualToString:@"BITOLL"]){
                                 [bankList addObject:model];
                             }
+//                        }
+                        if (i==array.count-1) {
+                            if (!isHaveBitoll) {
+                                BTTBankModel *bModel = [[BTTBankModel alloc]init];
+                                bModel.accountType = @"DCBOX";
+                                bModel.bankName = @"DCBOX";
+                                [bankList insertObject:bModel atIndex:0];
+                            }
                         }
-                    }else{
-                        if ([model.bankName isEqualToString:@"DCBOX"]) {
-                            [bankList insertObject:model atIndex:0];
-                            isHaveBitoll = YES;
-                        }else if(![model.bankName isEqualToString:@"BITOLL"]){
-                            [bankList addObject:model];
+                    } else { //CNY
+                        if ([model.accountType isEqualToString:@"存折"] || [model.accountType isEqualToString:@"借记卡"] || [model.accountType isEqualToString:@"信用卡"]) {
+                                [bankList addObject:model];
                         }
-                    }
-                }
-                if (i==array.count-1) {
-                    if (!isHaveBitoll) {
-                        BTTBankModel *bModel = [[BTTBankModel alloc]init];
-                        bModel.accountType = @"DCBOX";
-                        bModel.bankName = @"DCBOX";
-                        [bankList insertObject:bModel atIndex:0];
                     }
                 }
             }
@@ -600,6 +610,18 @@
                             [actionSheet show];
                         }
                     }];
+//                    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//                        if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//                            BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+//                                if (buttonIndex == 0) {
+//                                    [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+//                                }else if (buttonIndex == 1){
+//                                    [[CLive800Manager sharedInstance] startLive800Chat:self];
+//                                }
+//                            }];
+//                            [actionSheet show];
+//                        }
+//                    }];
                 };
                 NSString *title = @"温馨提示";
                 NSString *message = @"资金密码错输入误，请重新输入或联系客服!";

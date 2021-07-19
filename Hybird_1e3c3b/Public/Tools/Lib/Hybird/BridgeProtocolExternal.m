@@ -55,6 +55,11 @@
             [[CLive800Manager sharedInstance] startLive800Chat:self.controller];
         }
     }];
+//    [CSVisitChatmanager startWithSuperVC:self.controller finish:^(CSServiceCode errCode) {
+//        if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//            [[CLive800Manager sharedInstance] startLive800Chat:self.controller];
+//        }
+//    }];
     return nil;
 }
 - (id)driver_live800ol:(BridgeModel *)bridgeModel {
@@ -221,6 +226,11 @@
                 [[CLive800Manager sharedInstance] startLive800Chat:self.controller];
             }
         }];
+//        [CSVisitChatmanager startWithSuperVC:self.controller finish:^(CSServiceCode errCode) {
+//            if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//                [[CLive800Manager sharedInstance] startLive800Chat:self.controller];
+//            }
+//        }];
     }
     else if ([url containsString:@"common/agqj.htm"]) {
         if ([IVNetwork savedUserInfo]) {

@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
 @interface BTTMineViewController (LoadData)
 
 @property (nonatomic, strong) NSMutableArray *personalInfos;
@@ -28,9 +29,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *normalDataTwo;
 
+-(void)verifySmsCode:(NSString *)smsCodeStr completeBlock:(KYHTTPCallBack)completeBlock;
 
+-(void)sendCodeByPhone:(NSString *)phoneStr completionBlock:(KYHTTPCallBack)completionBlock;
 
+-(void)sendCodeByLoginName:(KYHTTPCallBack)completionBlock;
 
+-(void)completeCustomerInfo:( NSString * _Nullable )nameStr phoneStr:(NSString * _Nullable)phoneStr completeBlock:(KYHTTPCallBack)completeBlock;
+
+-(void)completeInfoGroup:(NSString *)nameStr group:(dispatch_group_t)group completeBlock:(KYHTTPCallBack)completeBlock;
+
+-(void)verifySmsGroup:(NSString *)smsCodeStr group:(dispatch_group_t)group completeBlock:(KYHTTPCallBack)completeBlock;
 
 - (void)loadMeAllData;
 

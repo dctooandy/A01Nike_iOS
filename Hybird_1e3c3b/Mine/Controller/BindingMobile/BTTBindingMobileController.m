@@ -26,6 +26,7 @@
 #import "BTTHumanModifyCell.h"
 #import "BTTActionSheet.h"
 #import "CLive800Manager.h"
+#import "BTTDontUseRegularPhonePopView.h"
 
 @interface BTTBindingMobileController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, copy) NSString *messageId;
@@ -142,7 +143,12 @@
     } else if (indexPath.row == 2) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-            [weakSelf submitBind];
+            BOOL isUseRegPhone = ([IVNetwork savedUserInfo].mobileNo.length != 0&&[IVNetwork savedUserInfo].mobileNoBind==0);
+            if (isUseRegPhone && ![self getSendBtn].enabled) {
+                [weakSelf dontUseRegPhone];
+            }else {
+                [weakSelf submitBind];
+            }
         };
         return cell;
     } else {
@@ -229,7 +235,17 @@
 - (void)textChanged:(UITextField *)textField
 {
     if (textField == [self getPhoneTF]) {
-        [self getSendBtn].enabled = [PublicMethod isValidatePhone:[self getPhoneTF].text];
+        if ([IVNetwork savedUserInfo].mobileNo.length != 0 && [IVNetwork savedUserInfo].mobileNoBind != 1) {
+            if ([[self getPhoneTF].text isEqualToString:[IVNetwork savedUserInfo].mobileNo]) {
+                [self getSendBtn].enabled = true;
+            } else {
+                [self getSendBtn].enabled = false;
+                [self getSubmitBtn].enabled = [PublicMethod isValidatePhone:[self getPhoneTF].text];
+                return;
+            }
+        } else {
+            [self getSendBtn].enabled = [PublicMethod isValidatePhone:[self getPhoneTF].text];
+        }
     }
     if ([self getCodeTF].text.length == 0) {
         [self getSubmitBtn].enabled = NO;
@@ -596,6 +612,33 @@
     }];
 }
 
+-(void)dontUseRegPhone {
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"phone"] = [IVRsaEncryptWrapper encryptorString:[self getPhoneTF].text];
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTModifyCustomerInfo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [self hideLoading];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            
+            BTTDontUseRegularPhonePopView *pop = [BTTDontUseRegularPhonePopView viewFromXib];
+            pop.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:pop popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+            popView.isClickBGDismiss = YES;
+            [popView pop];
+            pop.dismissBlock = ^{
+                [popView dismiss];
+            };
+            pop.btnBlock = ^(UIButton * _Nullable btn) {
+                [popView dismiss];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            };
+        } else {
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
+
 - (void)goToBack
 {
     switch (self.mobileCodeType) {
@@ -691,5 +734,17 @@
             [actionSheet show];
         }
     }];
+//    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//        if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//            BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+//                if (buttonIndex == 0) {
+//                    [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+//                }else if (buttonIndex == 1){
+//                    [[CLive800Manager sharedInstance] startLive800Chat:self];
+//                }
+//            }];
+//            [actionSheet show];
+//        }
+//    }];
 }
 @end

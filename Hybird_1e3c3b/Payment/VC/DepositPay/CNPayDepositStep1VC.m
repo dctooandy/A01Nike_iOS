@@ -7,7 +7,7 @@
 //
 
 #import "CNPayDepositStep1VC.h"
-
+#import "BTTPaymentWarningPopView.h"
 
 @interface CNPayDepositStep1VC ()
 @property (weak, nonatomic) IBOutlet UITextField *nameTF;
@@ -83,7 +83,29 @@
             weakSelf.writeModel.chooseBank = bankList.firstObject;
             [weakSelf goToStep:1];
         }else{
-            [weakSelf showError:result.head.errMsg];
+            if ([result.head.errCode isEqualToString:@"GW_800705"]) {
+                BTTPaymentWarningPopView *pop = [BTTPaymentWarningPopView viewFromXib];
+                pop.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                pop.contentStr = @"存款人姓名与绑定姓名不符，无法充值，请填写绑定姓名，或切换必多多账户买币存款";
+                BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:pop popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+                popView.isClickBGDismiss = YES;
+                [popView pop];
+                pop.dismissBlock = ^{
+                    [popView dismiss];
+                };
+                pop.btnBlock = ^(UIButton * _Nullable btn) {
+                    //0=>kefu 1=>changeMode
+                    [popView dismiss];
+                    if (btn.tag == 0) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoKefu" object:nil];
+                    } else {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoBack" object:nil];
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"changeModeNotification" object:nil];
+                    }
+                };
+            } else {
+                [weakSelf showError:result.head.errMsg];
+            }
         }
     }];
 }

@@ -185,6 +185,7 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowDragonBoat];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBeforeLoginDate];
             [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
+            [BTTUserStatusManager logoutSuccess];
         }
     }
 }

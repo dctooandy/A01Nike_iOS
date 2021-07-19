@@ -144,6 +144,11 @@
         NSString *usdtString = _usdtNum<5 ? @"USDT钱包/" : @"";
         NSString *dcboxString = _dcboxNum==1 ? @"" : @"小金库钱包/";
         NSString *bindString = [NSString stringWithFormat:@"添加%@%@%@%@",bankString,bitString,usdtString,dcboxString];
+        if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+            bindString = [NSString stringWithFormat:@"添加%@",bankString];
+        } else {
+            bindString = [NSString stringWithFormat:@"添加%@%@%@",bitString,usdtString,dcboxString];
+        }
         NSString *textString = [bindString substringToIndex:bindString.length-1];
         self.titleString = textString;
         cell.titleLabel.text = textString;
@@ -170,11 +175,8 @@
 
 - (void)showCanAddSheetWithTitles:(NSString *)titles{
     weakSelf(weakSelf)
-    
     NSArray *titleArray = [titles componentsSeparatedByString:@"/"];
-    
     UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"" message:@"请选择以下方式" preferredStyle:UIAlertControllerStyleActionSheet];
-    
     NSMutableAttributedString *alertControllerMessageStr = [[NSMutableAttributedString alloc] initWithString:@"请选择以下方式"];
     [alertControllerMessageStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"333333"] range:NSMakeRange(0, 7)];
     [alertControllerMessageStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, 7)];
@@ -183,6 +185,28 @@
         [alertVC.popoverPresentationController setPermittedArrowDirections:0];//去掉arrow箭头
         alertVC.popoverPresentationController.sourceView = self.view;
         alertVC.popoverPresentationController.sourceRect=CGRectMake(0, self.view.height, self.view.width, self.view.height);
+    }
+    if (titleArray.count == 1) {
+        NSString *title = titleArray[0];
+        if ([IVNetwork savedUserInfo].withdralPwdFlag == 1) {
+            //bindPhone = 1 withdralPwdFlag = 1
+            if ([title isEqualToString:@"银行卡"]) {
+                [weakSelf addBankCard];
+            }else if ([title isEqualToString:@"比特币钱包"]){
+                [weakSelf addBTC];
+            }else if ([title isEqualToString:@"USDT钱包"]){
+                [weakSelf addUSDT];
+            }else if ([title isEqualToString:@"小金库钱包"]){
+                [weakSelf addDCBOX];
+            }
+        } else {
+            //bindPhone = 1 withdralPwdFlag != 1
+            BTTPasswordChangeController *vc = [[BTTPasswordChangeController alloc] init];
+            vc.selectedType = BTTChangeWithdrawPwd;
+            vc.isGoToMinePage = false;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        return;
     }
     for (int i = 0; i<titleArray.count; i++) {
         NSString *title = titleArray[i];
@@ -295,6 +319,7 @@
 - (void)refreshBankList
 {
     NSDictionary *json = [IVCacheWrapper objectForKey:BTTCacheBankListKey];
+    BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
     if (json!=nil) {
         NSArray *array = json[@"accounts"];
         if (isArrayWithCountMoreThan0(array)) {
@@ -303,12 +328,14 @@
                 NSDictionary *json = array[i];
                 BTTBankModel *model = [BTTBankModel yy_modelWithDictionary:json];
                 if (![model.accountType isEqualToString:@"Bitbase"]) {
-                    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+                    if (isUSDTAcc) {
                         if (![model.accountType isEqualToString:@"信用卡"]&&![model.accountType isEqualToString:@"借记卡"]&&![model.accountType isEqualToString:@"存折"]) {
                             [bankList addObject:model];
                         }
-                    }else{
-                        [bankList addObject:model];
+                    } else {
+                        if ([model.accountType isEqualToString:@"存折"] || [model.accountType isEqualToString:@"借记卡"] || [model.accountType isEqualToString:@"信用卡"]) {
+                                [bankList addObject:model];
+                        }
                     }
                 }
             }
@@ -453,6 +480,18 @@
                 [actionSheet show];
             }
         }];
+//        [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//            if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//                BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+//                    if (buttonIndex == 0) {
+//                        [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+//                    }else if (buttonIndex == 1){
+//                        [[CLive800Manager sharedInstance] startLive800Chat:self];
+//                    }
+//                }];
+//                [actionSheet show];
+//            }
+//        }];
     };
     
     IVActionHandler cancel = ^(UIAlertAction *action){};

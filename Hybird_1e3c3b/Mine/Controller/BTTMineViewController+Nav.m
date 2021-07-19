@@ -23,12 +23,257 @@
 #import "BTTShowErcodePopview.h"
 #import "BTTWithdrawalController.h"
 #import "BTTCustomerReportController.h"
+#import "BTTCompleteNamePopView.h"
+#import "BTTBindNameAndPhonePopView.h"
+#import "BTTDontUseRegularPhonePopView.h"
+#import "BTTPaymentWarningPopView.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
 
 @implementation BTTMineViewController (Nav)
 
+-(void)showPaymentWarningPopView {
+    BTTPaymentWarningPopView *pop = [BTTPaymentWarningPopView viewFromXib];
+    pop.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    pop.contentStr = @"暂无存款渠道，请联系客服或切换币多多模式使用USDT存款";
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:pop popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    pop.dismissBlock = ^{
+        [popView dismiss];
+    };
+    pop.btnBlock = ^(UIButton * _Nullable btn) {
+        //0=>kefu 1=>changeMode
+        [popView dismiss];
+        if (btn.tag == 0) {
+            [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
+                if (errCode != CSServiceCode_Request_Suc) {//异常处理
+                    BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+                        if (buttonIndex == 0) {
+                            [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+                        }else if (buttonIndex == 1){
+                            [[CLive800Manager sharedInstance] startLive800Chat:self];
+                        }
+                    }];
+                    [actionSheet show];
+                }
+            }];
+//            [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//                if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//                    BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+//                        if (buttonIndex == 0) {
+//                            [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+//                        }else if (buttonIndex == 1){
+//                            [[CLive800Manager sharedInstance] startLive800Chat:self];
+//                        }
+//                    }];
+//                    [actionSheet show];
+//                }
+//            }];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"changeModeNotification" object:nil];
+        }
+    };
+}
+
+-(void)showBindNameAndPhonePopView {
+    BTTBindNameAndPhonePopView *pop = [BTTBindNameAndPhonePopView viewFromXib];
+    pop.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    pop.nameStr = [IVNetwork savedUserInfo].realName;
+    pop.phoneStr = [IVNetwork savedUserInfo].mobileNo;
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:pop popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    pop.dismissBlock = ^{
+        [popView dismiss];
+    };
+    weakSelf(weakSelf);
+    __block BTTBindNameAndPhonePopView * blockPop = pop;
+    pop.sendSmsBtnAction = ^(NSString * _Nonnull phone) {
+        [MBProgressHUD showLoadingSingleInView:[UIApplication sharedApplication].keyWindow animated:YES];
+        
+        if ([IVNetwork savedUserInfo].mobileNo.length != 0 && [IVNetwork savedUserInfo].mobileNoBind != 1) {
+            [weakSelf sendCodeByLoginName:^(id  _Nullable response, NSError * _Nullable error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    IVJResponseObject *result = response;
+                    [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                    if ([result.head.errCode isEqualToString:@"0000"]) {
+                        [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
+                        self.messageId = result.body[@"messageId"];
+                        [blockPop.captchaTextField setEnabled:true];
+                        [blockPop countDown];
+                    } else {
+                        [blockPop.captchaTextField setEnabled:false];
+                        [MBProgressHUD showError:result.head.errMsg toView:[UIApplication sharedApplication].keyWindow];
+                    }
+                });
+            }];
+        } else {
+            [weakSelf sendCodeByPhone:phone completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    IVJResponseObject *result = response;
+                    [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                    if ([result.head.errCode isEqualToString:@"0000"]) {
+                        [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
+                        self.messageId = result.body[@"messageId"];
+                        [blockPop.captchaTextField setEnabled:true];
+                        [blockPop countDown];
+                    } else {
+                        [blockPop.captchaTextField setEnabled:false];
+                        [MBProgressHUD showError:result.head.errMsg toView:[UIApplication sharedApplication].keyWindow];
+                    }
+                });
+            }];
+        }
+    };
+    pop.btnBlock = ^(UIButton * _Nullable btn) {
+        [MBProgressHUD showLoadingSingleInView:[UIApplication sharedApplication].keyWindow animated:YES];
+        if ([IVNetwork savedUserInfo].realName.length > 0) {//未綁定手機號 & 已完善姓名
+            if (blockPop.captchaTextField.isUserInteractionEnabled) {
+                [weakSelf verifySmsCode:blockPop.captchaTextField.text completeBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        IVJResponseObject *result = response;
+                        
+                        if ([result.head.errCode isEqualToString:@"0000"]) {
+                            [BTTHttpManager fetchUserInfoCompleteBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                                    [popView dismiss];
+                                    [MBProgressHUD showSuccess:@"绑定成功" toView:[UIApplication sharedApplication].keyWindow];
+                                    [weakSelf.collectionView reloadData];
+                                });
+                            }];
+                        } else {
+                            [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                            [MBProgressHUD showError:result.head.errMsg toView:[UIApplication sharedApplication].keyWindow];
+                        }
+                    });
+                }];
+            } else {
+                [weakSelf completeCustomerInfo:nil phoneStr:blockPop.phoneTextField.text completeBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        IVJResponseObject *result = response;
+                        [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                        if ([result.head.errCode isEqualToString:@"0000"]) {
+                            [popView dismiss];
+                            [weakSelf showDontUseRegularPhonePopView:@"手机号修改请等待审批"];
+                        } else {
+                            [MBProgressHUD showError:result.head.errMsg toView:[UIApplication sharedApplication].keyWindow];
+                        }
+                    });
+                }];
+            }
+            
+        } else {//未綁定手機號 ＆ 未完善姓名
+            if (blockPop.captchaTextField.isUserInteractionEnabled) {
+                //modify verifySmsCode sendCode
+                
+                dispatch_group_t group = dispatch_group_create();
+                dispatch_queue_t queue = dispatch_queue_create("personal.data", DISPATCH_QUEUE_CONCURRENT);
+                dispatch_group_enter(group);
+                [weakSelf completeInfoGroup:blockPop.nameTextField.text group:group completeBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                    IVJResponseObject *result = response;
+                    if ([result.head.errCode isEqualToString:@"0000"]) {
+                    } else {
+                        [MBProgressHUD showError:result.head.errMsg toView:[UIApplication sharedApplication].keyWindow];
+                    }
+                    dispatch_group_leave(group);
+                }];
+                
+                dispatch_group_enter(group);
+                [weakSelf verifySmsGroup:blockPop.captchaTextField.text group:group completeBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                    IVJResponseObject *result = response;
+                    if ([result.head.errCode isEqualToString:@"0000"]) {
+                    } else {
+                        [MBProgressHUD showError:result.head.errMsg toView:[UIApplication sharedApplication].keyWindow];
+                    }
+                    dispatch_group_leave(group);
+                }];
+                
+                dispatch_group_notify(group,queue, ^{
+                    [BTTHttpManager fetchUserInfoCompleteBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                            [popView dismiss];
+//                            [MBProgressHUD showSuccess:@"完善成功!" toView:nil];
+                            [weakSelf.collectionView reloadData];
+                        });
+                    }];
+                });
+                
+            } else {
+                //modify
+                [weakSelf completeCustomerInfo:blockPop.nameTextField.text phoneStr:blockPop.phoneTextField.text completeBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        IVJResponseObject *result = response;
+                        [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                        if ([result.head.errCode isEqualToString:@"0000"]) {
+                            [popView dismiss];
+                            [weakSelf showDontUseRegularPhonePopView:@"真实姓名已完善 \n手机号修改请等待审批"];
+                        } else {
+                            [MBProgressHUD showError:result.head.errMsg toView:[UIApplication sharedApplication].keyWindow];
+                        }
+                    });
+                }];
+            }
+        }
+    };
+}
+
+-(void)showCompleteNamePopView {
+    BTTCompleteNamePopView *pop = [BTTCompleteNamePopView viewFromXib];
+    pop.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:pop popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    pop.dismissBlock = ^{
+        [popView dismiss];
+    };
+    weakSelf(weakSelf);
+    pop.commitBtnBlock = ^(NSString * _Nullable nameStr) {
+        [MBProgressHUD showLoadingSingleInView:[UIApplication sharedApplication].keyWindow animated:YES];
+        [weakSelf completeCustomerInfo:nameStr phoneStr:nil completeBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                [BTTHttpManager fetchUserInfoCompleteBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                        [popView dismiss];
+                        [MBProgressHUD showSuccess:@"完善成功!" toView:nil];
+                        [weakSelf.collectionView reloadData];
+                    });
+                }];
+            } else {
+                [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                [MBProgressHUD showError:result.head.errMsg toView:[UIApplication sharedApplication].keyWindow];
+            }
+        }];
+    };
+}
+
+-(void)showDontUseRegularPhonePopView:(NSString *)contentStr {
+    BTTDontUseRegularPhonePopView *pop = [BTTDontUseRegularPhonePopView viewFromXib];
+    pop.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    pop.contentStr = contentStr;
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:pop popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    pop.dismissBlock = ^{
+        [popView dismiss];
+    };
+    weakSelf(weakSelf);
+    pop.btnBlock = ^(UIButton * _Nullable btn) {
+        [MBProgressHUD showLoadingSingleInView:[UIApplication sharedApplication].keyWindow animated:YES];
+        [BTTHttpManager fetchUserInfoCompleteBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [popView dismiss];
+                [MBProgressHUD hideHUDForView:[UIApplication sharedApplication].keyWindow animated:YES];
+                [weakSelf.collectionView reloadData];
+            });
+        }];
+    };
+}
 
 - (void)showShareNoticeView {
     BTTShareNoticeView *customView = [BTTShareNoticeView viewFromXib];
@@ -122,8 +367,7 @@ static const char *BTTHeaderViewKey = "headerView";
 }
 
 - (void)logoutSuccess:(NSNotification *)notifi {
-    
-    
+    [self loadMeAllData];
 }
 
 - (void)gotoCardInfo:(NSNotification *)notifi {
@@ -222,6 +466,18 @@ static const char *BTTHeaderViewKey = "headerView";
                 [actionSheet show];
             }
         }];
+//        [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//            if (errCode != CSServiceCode_Request_Suc) {//异常处理
+//                BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
+//                    if (buttonIndex == 0) {
+//                        [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+//                    }else if (buttonIndex == 1){
+//                        [[CLive800Manager sharedInstance] startLive800Chat:self];
+//                    }
+//                }];
+//                [actionSheet show];
+//            }
+//        }];
     }];
     
     BTTPopoverAction *action2 = [BTTPopoverAction actionWithImage:ImageNamed(@"voiceCall") title:@"APP语音通信" handler:^(BTTPopoverAction *action) {

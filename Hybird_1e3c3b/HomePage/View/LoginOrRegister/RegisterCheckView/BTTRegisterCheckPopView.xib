@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,7 +26,7 @@
                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fa2-kD-XYr">
+                <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fa2-kD-XYr">
                     <rect key="frame" x="30" y="137" width="260" height="41"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="41" id="Kkc-Vn-7JR"/>
@@ -41,7 +39,7 @@
                         <action selector="cancelClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="nJq-2e-tkW"/>
                     </connections>
                 </button>
-                <button opaque="NO" clipsSubviews="YES" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELr-Rc-bye">
+                <button opaque="NO" clipsSubviews="YES" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELr-Rc-bye">
                     <rect key="frame" x="30" y="193" width="260" height="41"/>
                     <color key="backgroundColor" red="0.47058823529411764" green="0.50588235294117645" blue="0.56470588235294117" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -54,7 +52,7 @@
                         <action selector="logoutClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="u3l-pc-8D2"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAN-s8-mVe">
+                <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAN-s8-mVe">
                     <rect key="frame" x="39" y="249" width="242" height="41"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="41" id="bf1-Ml-tLf"/>
@@ -65,6 +63,7 @@
                     </connections>
                 </button>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="DAN-s8-mVe" secondAttribute="bottom" constant="20" id="4vu-Ds-Mwl"/>
@@ -83,7 +82,6 @@
                 <constraint firstItem="ELr-Rc-bye" firstAttribute="top" secondItem="fa2-kD-XYr" secondAttribute="bottom" constant="15" id="xth-ob-L8u"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="logoutBtn" destination="ELr-Rc-bye" id="sfy-NQ-liz"/>
                 <outlet property="registerBtn" destination="DAN-s8-mVe" id="6gI-M4-tP1"/>

@@ -246,6 +246,9 @@ NS_ASSUME_NONNULL_BEGIN
 //無條件捨去至小數點下2位
 + (double)calculateTwoDecimals:(double)num;
 
+//設置指定圓角
++(void)setViewSelectCorner:(UIRectCorner)position view:(UIView *)view cornerRadius:(CGFloat)cornerRadius;
+
 @end
 
 NS_ASSUME_NONNULL_END

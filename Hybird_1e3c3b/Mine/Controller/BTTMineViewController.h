@@ -56,6 +56,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isOpenSellUsdt;
 
+@property (nonatomic, copy) NSString *messageId;
+
+@property (nonatomic, copy) NSString *validateId;
+
 @end
 
 NS_ASSUME_NONNULL_END
