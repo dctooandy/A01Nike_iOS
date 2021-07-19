@@ -171,13 +171,13 @@
         if (realLastLoginDate && ![realLastLoginDate isEqualToString:@"NO"])
         {
             if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:realLastLoginDate]]) {
-                [self showDragonBoat];
+                [self showSevenXiPriHotPopView];
             }
         }else
         {
             [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTBeforeLoginDate];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            [self showDragonBoat];
+            [self showSevenXiPriHotPopView];
         }
     }else{
         if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:showSevenXiDate]])
@@ -185,18 +185,11 @@
             NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
             [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowSevenXi];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            [self showDragonBoat];
+            [self showSevenXiPriHotPopView];
         }
     }
     
-    //暫時寫出來
-    
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:BTShowDBPopView])
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:BTShowDBPopView];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-    [self loadDragonBoatData];
+    [self loadSevenXiData];
 
 }
 
