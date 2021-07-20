@@ -10,10 +10,10 @@
 #import "BTTSevenXiPriHotPopView.h"
 #import "BTTBaseWebViewController.h"
 @interface BTTActivityManager()
-
+@property(nonatomic,strong)NSString * sevenXiData;
 @end
 @implementation BTTActivityManager
-//SingletonImplementation(BTTUserForzenManager);
+//SingletonImplementation(BTTActivityManager);
 static BTTActivityManager * sharedSingleton;
 + (void)initialize
 {
@@ -31,9 +31,6 @@ static BTTActivityManager * sharedSingleton;
 }
 - (void)setNoti{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkSevenXiDate) name:LoginSuccessNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showUserForzenPopViewByNoti) name:@"showUserForzenPopView" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkForMobileNumAndCode) name:@"gotoUserForzenVC" object:nil];
-    
 }
 #pragma mark - 检查七夕预热弹窗是否已启用过
 -(void)checkSevenXiDate
@@ -67,6 +64,10 @@ static BTTActivityManager * sharedSingleton;
             [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowSevenXi];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self showSevenXiPriHotPopView];
+        }else
+        {
+            //测试
+            [self showSevenXiPriHotPopView];
         }
     }
     
@@ -86,13 +87,14 @@ static BTTActivityManager * sharedSingleton;
             [MBProgressHUD showSuccess:@"取得资料成功!" toView:nil];
             if (completionBlock)
             {
-                completionBlock(response,error);
+                weakSelf.sevenXiData = @"5056";
+                completionBlock(response,[error description]);
             }
         }else{
-
             [MBProgressHUD showError:result.head.errMsg toView:nil];
             if (completionBlock)
             {
+                weakSelf.sevenXiData = @"";
                 completionBlock(nil,result.head.errMsg);
             }
         }
@@ -101,7 +103,7 @@ static BTTActivityManager * sharedSingleton;
 - (void)showSevenXiPriHotPopView
 {
     BTTSevenXiPriHotPopView *alertView = [BTTSevenXiPriHotPopView viewFromXib];
-    
+    [alertView configForContent:self.sevenXiData];
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
     
     popView.isClickBGDismiss = YES;

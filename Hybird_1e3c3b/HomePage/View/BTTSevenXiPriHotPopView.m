@@ -9,11 +9,10 @@
 #import "BTTSevenXiPriHotPopView.h"
 
 @interface BTTSevenXiPriHotPopView()
-@property (weak, nonatomic) IBOutlet UILabel *titleLab;
-@property (weak, nonatomic) IBOutlet UILabel *oldMemberSunTitleLab;
-@property (weak, nonatomic) IBOutlet UILabel *contentLab;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnTopLayout;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabTopLayout;
+@property (weak, nonatomic) IBOutlet UIView *topTitleView;
+@property (weak, nonatomic) IBOutlet UILabel *bottomTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+
 @end
 
 @implementation BTTSevenXiPriHotPopView
@@ -26,7 +25,17 @@
     [super awakeFromNib];
 }
 
-
+- (void)configForContent:(NSString *)sender
+{
+    if (sender.length > 0)
+    {
+        self.contentLabel.text = sender;
+    }else
+    {
+        [self.topTitleView setHidden:YES];
+        [self.bottomTitleLabel setHidden:YES];
+    }
+}
 - (IBAction)closeBtnAction:(UIButton *)sender {
     if (self.dismissBlock) {
         self.dismissBlock();

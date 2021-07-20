@@ -163,10 +163,12 @@
         [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    //检查七夕活动日期
-    [[BTTActivityManager sharedInstance] checkSevenXiDate];
+    
     //检查七夕活动接口资料(正式开跑后)
-    [[BTTActivityManager sharedInstance] loadSevenXiDatawWithCompletionBlock:nil];
+    [[BTTActivityManager sharedInstance] loadSevenXiDatawWithCompletionBlock:^(NSString * _Nullable response, NSString * _Nullable error) {
+        //检查七夕活动日期
+        [[BTTActivityManager sharedInstance] checkSevenXiDate];
+    }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
