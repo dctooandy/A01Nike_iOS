@@ -152,6 +152,7 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTShowSevenXi                             @"BTTShowSevenXi"
 #define BTTBeforeLoginDate                         @"BTTBeforeLoginDate"
 #define BTTRegistDate                              @"BTTRegistDate"
+#define BTTShowDefaultPopDate                      @"BTTShowDefaultPopDate"
 #define BTTGameCurrencysWithName                   [NSString stringWithFormat:@"%@GameCurrencys", [IVNetwork savedUserInfo].loginName]
 #define reload918Sec 20 * 60
 
@@ -572,6 +573,8 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTDragonBoatAssignLottery                 @"_extra_/api/v1/activity/dragon-boat-festival-2021/assignLottery"
 //七夕活动用
 #define BTTSevenXiDataBridge                       @"_extra_/api/v1/activity/dragon-boat-festival-2021/assignLottery"
+//WMS弹窗查询(暂时)
+#define BTTCheckPopView                            @"_extra_/api/v1/activity/five-lottery/windows-popup"
 
 /********************************************常用宏*********************************************************/
 

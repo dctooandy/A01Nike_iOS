@@ -774,6 +774,8 @@
 		76756EAE26A582130065F99B /* BTTSevenXiPriHotPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756EAC26A582130065F99B /* BTTSevenXiPriHotPopView.m */; };
 		76756EAF26A582130065F99B /* BTTSevenXiPriHotPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756EAD26A582130065F99B /* BTTSevenXiPriHotPopView.xib */; };
 		76756ED326A654FD0065F99B /* IVHttpManager+Property.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756ED226A654FD0065F99B /* IVHttpManager+Property.m */; };
+		76756F8626A6C5790065F99B /* BTTDefaultPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756F8326A6C5780065F99B /* BTTDefaultPopView.xib */; };
+		76756F8726A6C5790065F99B /* BTTDefaultPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756F8526A6C5790065F99B /* BTTDefaultPopView.m */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
@@ -2132,6 +2134,9 @@
 		76756EAD26A582130065F99B /* BTTSevenXiPriHotPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTSevenXiPriHotPopView.xib; sourceTree = "<group>"; };
 		76756ED126A654FD0065F99B /* IVHttpManager+Property.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IVHttpManager+Property.h"; sourceTree = "<group>"; };
 		76756ED226A654FD0065F99B /* IVHttpManager+Property.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "IVHttpManager+Property.m"; sourceTree = "<group>"; };
+		76756F8326A6C5780065F99B /* BTTDefaultPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDefaultPopView.xib; sourceTree = "<group>"; };
+		76756F8426A6C5790065F99B /* BTTDefaultPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDefaultPopView.h; sourceTree = "<group>"; };
+		76756F8526A6C5790065F99B /* BTTDefaultPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDefaultPopView.m; sourceTree = "<group>"; };
 		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
 		76C9F150265E404B0002591D /* CNPayOrderModelV2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayOrderModelV2.m; sourceTree = "<group>"; };
 		76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatPopView.xib; sourceTree = "<group>"; };
@@ -4008,6 +4013,9 @@
 				76756EAB26A582120065F99B /* BTTSevenXiPriHotPopView.h */,
 				76756EAC26A582130065F99B /* BTTSevenXiPriHotPopView.m */,
 				76756EAD26A582130065F99B /* BTTSevenXiPriHotPopView.xib */,
+				76756F8426A6C5790065F99B /* BTTDefaultPopView.h */,
+				76756F8526A6C5790065F99B /* BTTDefaultPopView.m */,
+				76756F8326A6C5780065F99B /* BTTDefaultPopView.xib */,
 				4180B04125D3C23800139E88 /* BTTNewYearPopView.h */,
 				4180B04225D3C23800139E88 /* BTTNewYearPopView.m */,
 				4180B04325D3C23800139E88 /* BTTNewYearPopView.xib */,
@@ -5497,6 +5505,7 @@
 				3A5AE6A122D6E22A0013E8A3 /* deleteButton_LIVEmotionBoard@3x.png in Resources */,
 				3A5AE68022D6E22A0013E8A3 /* deleteButton_LIVEmotionBoard@2x.png in Resources */,
 				3A7740A6224DE90800A65841 /* BTTPayBQAliStep2VC.xib in Resources */,
+				76756F8626A6C5790065F99B /* BTTDefaultPopView.xib in Resources */,
 				3A5AE68522D6E22A0013E8A3 /* LIVSentMessageBackground@2x.png in Resources */,
 				3A5AE71522D6E22B0013E8A3 /* supprise.gif in Resources */,
 				3AAFF88C21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.xib in Resources */,
@@ -5867,6 +5876,7 @@
 				3A7391CC230CD12A00E2DFD5 /* BTTRegisterCheckPopView.m in Sources */,
 				EAA4811B21ABD265000C0273 /* BTTAGQJViewController.m in Sources */,
 				3A8F51E7215F78F50069D1B3 /* BTTBaseNavigationController.m in Sources */,
+				76756F8726A6C5790065F99B /* BTTDefaultPopView.m in Sources */,
 				D3C64B142477CFEE0063B0D7 /* OneKeyPhoneController.m in Sources */,
 				415CA1E224E53AB5005E0E9F /* OTCInsideCell.m in Sources */,
 				3A929423219C3B7500764E7E /* BTTRegisterSuccessOneCell.m in Sources */,
