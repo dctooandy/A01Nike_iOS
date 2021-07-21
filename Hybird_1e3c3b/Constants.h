@@ -150,8 +150,11 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTShareNoticeTag                          @"BTTShareNoticeTag"
 #define BTTShowYuFenHong                           @"BTTShowYuFenHong"
 #define BTTShowDragonBoat                          @"BTTShowDragonBoat"
+#define BTTShowSevenXi                             @"BTTShowSevenXi"
 #define BTTBeforeLoginDate                         @"BTTBeforeLoginDate"
 #define BTTAlreadyShowNoDesposit                   @"BTTAlreadyShowNoDesposit"
+#define BTTRegistDate                              @"BTTRegistDate"
+#define BTTShowDefaultPopDate                      @"BTTShowDefaultPopDate"
 #define BTTGameCurrencysWithName                   [NSString stringWithFormat:@"%@GameCurrencys", [IVNetwork savedUserInfo].loginName]
 #define reload918Sec 20 * 60
 
@@ -570,6 +573,10 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTDragonBoatChance                        @"_extra_/api/v1/activity/dragon-boat-festival-2021/chance"
 #define BTTDragonBoatCurrRound                     @"_extra_/api/v1/activity/dragon-boat-festival-2021/currRound"
 #define BTTDragonBoatAssignLottery                 @"_extra_/api/v1/activity/dragon-boat-festival-2021/assignLottery"
+//七夕活动用
+#define BTTSevenXiDataBridge                       @"_extra_/api/v1/activity/dragon-boat-festival-2021/assignLottery"
+//WMS弹窗查询(暂时)
+#define BTTCheckPopView                            @"_extra_/api/v1/activity/five-lottery/windows-popup"
 
 /********************************************常用宏*********************************************************/
 

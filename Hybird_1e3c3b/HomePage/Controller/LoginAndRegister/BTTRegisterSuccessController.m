@@ -542,6 +542,7 @@ typedef enum {
             }else{
                 [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:BTTBeforeLoginDate];
             }
+            
             [[NSUserDefaults standardUserDefaults] synchronize];
             [IVHttpManager shareManager].loginName = self.account;
             [IVHttpManager shareManager].userToken = result.body[@"token"];
@@ -584,6 +585,12 @@ typedef enum {
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (result.body!=nil) {
                 [IVHttpManager shareManager].loginName = result.body[@"loginName"];
+                if (result.body[@"registDate"])
+                {
+                    [[NSUserDefaults standardUserDefaults] setObject:result.body[@"registDate"] forKey:BTTRegistDate];
+                }else{
+                    [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:BTTRegistDate];
+                }
                 [BTTUserStatusManager loginSuccessWithUserInfo:result.body isBackHome:true];
                 [self.navigationController popToRootViewControllerAnimated:YES];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.25 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

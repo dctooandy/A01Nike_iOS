@@ -395,7 +395,10 @@ static const char *BTTChanceCountKey = "chanceCount";
         dispatch_group_leave(group);
     }];
 }
-
+- (void)loadSevenXiData
+{
+    
+}
 #pragma mark - 动态添加属性
 - (void)setNextGroup:(NSInteger)nextGroup {
     objc_setAssociatedObject(self, &BTTNextGroupKey, @(nextGroup), OBJC_ASSOCIATION_RETAIN_NONATOMIC);

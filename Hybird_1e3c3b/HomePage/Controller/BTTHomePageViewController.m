@@ -46,6 +46,7 @@
 #import "BTTUserStatusManager.h"
 #import "BTTChooseCurrencyPopView.h"
 #import "BTTUserGameCurrencyModel.h"
+#import "BTTActivityManager.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -66,6 +67,7 @@
         self.isLogin = YES;
         [self checkHasShow];
         [self requestRedbag];
+        [BTTActivityManager sharedInstance];
     } else {
         self.isLogin = NO;
     }
@@ -147,12 +149,22 @@
     if ([IVNetwork savedUserInfo].starLevel >= 2 && (![PublicMethod isDateToday:saveDate] || saveDate == nil)) {
         [self loadBiBiCun];
     }
-    //月分紅
-    BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
-    if (!isShowYuFenHong) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
-        [self loadYenFenHong];
-    }
+    //检查wms popView 相关资料
+    weakSelf(weakSelf)
+    [[BTTActivityManager sharedInstance] checkPopViewWithCompletionBlock:^(NSString * _Nullable response, NSString * _Nullable error) {
+        if (response)
+        {
+            //做其他事情
+        }else
+        {
+            //月分紅
+            BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
+            if (!isShowYuFenHong) {
+                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
+                [weakSelf loadYenFenHong];
+            }
+        }
+    }];
     [BTTHttpManager requestUnReadMessageNum:nil];
     NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
     if (![NSDate isToday:timestamp]) {
@@ -161,6 +173,12 @@
         [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+
+//    //检查七夕活动接口资料(正式开跑后)
+//    [[BTTActivityManager sharedInstance] loadSevenXiDatawWithCompletionBlock:^(NSString * _Nullable response, NSString * _Nullable error) {
+//        //检查七夕活动日期
+//        [[BTTActivityManager sharedInstance] checkSevenXiDate];
+//    }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -183,7 +201,9 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowDragonBoat];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowSevenXi];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBeforeLoginDate];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowDefaultPopDate];
             [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
             [BTTUserStatusManager logoutSuccess];
         }

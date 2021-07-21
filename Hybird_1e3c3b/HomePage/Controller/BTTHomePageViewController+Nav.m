@@ -159,7 +159,10 @@ static const char *BTTMenualPopViewKey = "menualPopView";
         [popView dismiss];
     };
 }
-
+-(void)showSevenXiPriHotPopView
+{
+    
+}
 -(void)showBiBiCunPopView:(NSString *)contentStr {
     BTTBiBiCunPopView *customView = [BTTBiBiCunPopView viewFromXib];
     customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
