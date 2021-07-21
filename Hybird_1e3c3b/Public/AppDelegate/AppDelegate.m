@@ -70,8 +70,16 @@
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSArray * arr = result.body[@"data"];
-            [IVLAManager setPayegisSDKDomain:arr[0][@"PROD_DID"]];
-            [IVLAManager setUploadDomain:arr[0][@"PROD_GATHER"]];
+            NSString * PROD_DID = @"";
+            NSString * PROD_GATHER = @"";
+            NSString * NEW_PROD_GATHER = @"";
+            if (arr.count > 0) {
+                PROD_DID = arr[0][@"PROD_DID"] != nil ? arr[0][@"PROD_DID"]:@"";
+                PROD_GATHER = arr[0][@"PROD_GATHER"] != nil ? arr[0][@"PROD_GATHER"]:@"";
+                NEW_PROD_GATHER = arr[0][@"NEW_PROD_GATHER"] != nil ? arr[0][@"NEW_PROD_GATHER"]:@"";
+            }
+            [IVLAManager setPayegisSDKDomain:PROD_DID];
+            [IVLAManager setUploadDomain:NEW_PROD_GATHER];
             [self initAnalysis];
         }
     }];

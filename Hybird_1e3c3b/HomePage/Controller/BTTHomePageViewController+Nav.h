@@ -31,8 +31,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)bannerToGame:(BTTBannerModel *)model;
 
-- (void)showJay;
-
 - (void)setupLoginAndRegisterBtnsView;
 
 - (void)showNewAccountGrideView;

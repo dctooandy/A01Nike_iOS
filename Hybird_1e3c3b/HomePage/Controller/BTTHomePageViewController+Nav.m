@@ -24,7 +24,6 @@
 #import "BTTAGGJViewController.h"
 #import "BTTVideoGamesListController.h"
 #import "BTTLoginAccountSelectView.h"
-#import "BTTJayPopView.h"
 #import "BTTNewAccountGuidePopView.h"
 #import "UIImage+GIF.h"
 #import <IVCacheLibrary/IVCacheWrapper.h>
@@ -423,29 +422,6 @@ static const char *BTTMenualPopViewKey = "menualPopView";
     customView.btnBlock = ^(UIButton *btn) {
         [popView dismiss];
         [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
-    };
-}
-
-- (void)showJay {
-    
-    BTTJayPopView *customView = [BTTJayPopView viewFromXib];
-    customView.frame = CGRectMake(0, 0, 296, 528);
-    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
-    [popView pop];
-    weakSelf(weakSelf);
-    customView.dismissBlock = ^{
-       [popView dismiss];
-    };
-   
-    customView.btnBlock = ^(UIButton *btn) {
-       strongSelf(strongSelf);
-        [popView dismiss];
-        NSString *url = [NSString stringWithFormat:@"%@jays_concert_2.htm",[IVNetwork h5Domain]];
-        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.webConfigModel.url = url;
-        vc.webConfigModel.newView = YES;
-        vc.webConfigModel.theme = @"outside";
-        [strongSelf.navigationController pushViewController:vc animated:YES];
     };
 }
 

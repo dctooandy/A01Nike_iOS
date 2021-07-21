@@ -49,8 +49,6 @@
 		3A11AE682186D94B00B1AFF4 /* BTTThisWeekCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11AE662186D94B00B1AFF4 /* BTTThisWeekCell.xib */; };
 		3A11AE6C2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11AE6A2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.m */; };
 		3A11AE6D2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A11AE6B2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib */; };
-		3A14CC5823726A8C009711CF /* BTTJayPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A14CC5723726A8C009711CF /* BTTJayPopView.m */; };
-		3A14CC5A23726A9E009711CF /* BTTJayPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A14CC5923726A9E009711CF /* BTTJayPopView.xib */; };
 		3A14CC5F237A4B56009711CF /* BTTRealPersonGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A14CC5D237A4B56009711CF /* BTTRealPersonGameCell.m */; };
 		3A14CC60237A4B56009711CF /* BTTRealPersonGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A14CC5E237A4B56009711CF /* BTTRealPersonGameCell.xib */; };
 		3A14CC64237A8D65009711CF /* BTTElectronicGamesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A14CC62237A8D65009711CF /* BTTElectronicGamesCell.m */; };
@@ -636,6 +634,7 @@
 		41042F5E261D88090020B0AA /* BTTPasswordChangeController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 41042F5A261D88090020B0AA /* BTTPasswordChangeController+LoadData.m */; };
 		410997F9251DC870001FA895 /* BTTDepositRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410997F8251DC870001FA895 /* BTTDepositRecordCell.xib */; };
 		410997FB251DC876001FA895 /* BTTDepositRecordHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410997FA251DC876001FA895 /* BTTDepositRecordHeaderCell.xib */; };
+		410E320D26A7E6A300C7D2B8 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		411B89E026980E9800F45A22 /* BTTCompleteNamePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 411B89DF26980E9800F45A22 /* BTTCompleteNamePopView.m */; };
 		411B89E226980EA700F45A22 /* BTTCompleteNamePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 411B89E126980EA700F45A22 /* BTTCompleteNamePopView.xib */; };
 		411B89E52698533300F45A22 /* BTTDontUseRegularPhonePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 411B89E42698533300F45A22 /* BTTDontUseRegularPhonePopView.m */; };
@@ -777,7 +776,6 @@
 		7629D73C2668CE7300CF758C /* BTTDragonBoatMenualPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629D7392668CE7300CF758C /* BTTDragonBoatMenualPopView.xib */; };
 		7629D7E8266C933E00CF758C /* BTTDragonBoatAutoPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629D7E5266C933E00CF758C /* BTTDragonBoatAutoPopView.xib */; };
 		7629D7E9266C933E00CF758C /* BTTDragonBoatAutoPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629D7E6266C933E00CF758C /* BTTDragonBoatAutoPopView.m */; };
-		76756E7A26A5705D0065F99B /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
 		76756EA826A57AC80065F99B /* BTTActivityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756EA726A57AC80065F99B /* BTTActivityManager.m */; };
 		76756EAE26A582130065F99B /* BTTSevenXiPriHotPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756EAC26A582130065F99B /* BTTSevenXiPriHotPopView.m */; };
 		76756EAF26A582130065F99B /* BTTSevenXiPriHotPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756EAD26A582130065F99B /* BTTSevenXiPriHotPopView.xib */; };
@@ -1042,9 +1040,6 @@
 		3A11AE692186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTThisWeekBtnsCell.h; sourceTree = "<group>"; };
 		3A11AE6A2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTThisWeekBtnsCell.m; sourceTree = "<group>"; };
 		3A11AE6B2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTThisWeekBtnsCell.xib; sourceTree = "<group>"; };
-		3A14CC5623726A8C009711CF /* BTTJayPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTJayPopView.h; sourceTree = "<group>"; };
-		3A14CC5723726A8C009711CF /* BTTJayPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTJayPopView.m; sourceTree = "<group>"; };
-		3A14CC5923726A9E009711CF /* BTTJayPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTJayPopView.xib; sourceTree = "<group>"; };
 		3A14CC5C237A4B56009711CF /* BTTRealPersonGameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTRealPersonGameCell.h; sourceTree = "<group>"; };
 		3A14CC5D237A4B56009711CF /* BTTRealPersonGameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTRealPersonGameCell.m; sourceTree = "<group>"; };
 		3A14CC5E237A4B56009711CF /* BTTRealPersonGameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTRealPersonGameCell.xib; sourceTree = "<group>"; };
@@ -2440,7 +2435,7 @@
 				3AD9CE2B2167107B00685B43 /* libilbccodec-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */,
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
-				76756E7A26A5705D0065F99B /* libboringssl_simulator.a in Frameworks */,
+				410E320D26A7E6A300C7D2B8 /* libboringssl_simulator.a in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
@@ -4003,9 +3998,6 @@
 				3A34F79B21B7A9DA007BC4D4 /* BTTHomePageFooterCell.h */,
 				3A34F79C21B7A9DA007BC4D4 /* BTTHomePageFooterCell.m */,
 				3A34F79D21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib */,
-				3A14CC5623726A8C009711CF /* BTTJayPopView.h */,
-				3A14CC5723726A8C009711CF /* BTTJayPopView.m */,
-				3A14CC5923726A9E009711CF /* BTTJayPopView.xib */,
 				419AEC58250F64F100D089DD /* BTTBJLPopView.h */,
 				419AEC57250F64F000D089DD /* BTTBJLPopView.m */,
 				419AEC59250F64F100D089DD /* BTTBJLPopView.xib */,
@@ -5564,7 +5556,6 @@
 				D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */,
 				3A5AE6B522D6E22A0013E8A3 /* LIVVideoCamera_play@3x.png in Resources */,
 				3A21AEB02394BCBF009E73FD /* BTTShowErcodePopview.xib in Resources */,
-				3A14CC5A23726A9E009711CF /* BTTJayPopView.xib in Resources */,
 				3A5AE6FA22D6E22A0013E8A3 /* LIVVideoCamera_flashOn@3x.png in Resources */,
 				D3A9A71B240E2B6A007F672A /* BTTNormalRegisterSuccessController.xib in Resources */,
 				3ADD23772177328B00FA959A /* BTTMeSaveMoneyCell.xib in Resources */,
@@ -5894,7 +5885,6 @@
 				3AA7892C21FFF2580047A372 /* SDImageCache.m in Sources */,
 				3A8F518D215F77AC0069D1B3 /* BTTBadgeView.m in Sources */,
 				3A49DF922179D62900FEFBDA /* BTTAccountBlanceCell.m in Sources */,
-				3A14CC5823726A8C009711CF /* BTTJayPopView.m in Sources */,
 				3A5B028F234F3AC100D8828B /* BTTXimaRecordButtonsView.m in Sources */,
 				3AE1EB0E218047050073A32D /* BTTCardModifyCell.m in Sources */,
 				415CA1D724E539ED005E0E9F /* BTTMineViewController.m in Sources */,
@@ -6510,7 +6500,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.55;
+				MARKETING_VERSION = 3.2.294;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6552,7 +6542,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.55;
+				MARKETING_VERSION = 3.2.294;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

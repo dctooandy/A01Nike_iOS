@@ -85,20 +85,6 @@
         NSLog(@"下拉刷新");
         [strongSelf refreshDatasOfHomePage];
     }];
-    
-    //jay AD
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-//        NSTimeInterval interval = [[userDefault objectForKey:@"jayTimeStamp"] doubleValue] / 1000.0;
-//        NSInteger today = [PublicMethod timeIntervalSince1970].integerValue;
-//        NSInteger endTime = [PublicMethod timeSwitchTimestamp:@"2019-11-17 23:59:59" andFormatter:@"yyyy-MM-dd HH:mm:ss"];
-//        if (today <= endTime) {
-//            if (![PublicMethod isDateToday:[NSDate dateWithTimeIntervalSince1970:interval]]) {
-//                [userDefault setObject:[PublicMethod timeIntervalSince1970] forKey:@"jayTimeStamp"];
-//                [self showJay];
-//            }
-//        }
-//    });
     [self setUpAssistiveButton];
     if (self.assistiveButton != nil) {
         [self.view addSubview:self.assistiveButton];

@@ -34,7 +34,6 @@
 @property (nonatomic, assign) NSInteger bankNum;
 @property (nonatomic, assign) NSInteger bitNum;
 @property (nonatomic, assign) NSInteger dcboxNum;
-@property (nonatomic, assign) NSInteger usdtNum;
 @property (nonatomic, copy) NSString *titleString;
 @end
 
@@ -53,7 +52,6 @@
     _bankNum = 0;
     _bitNum = 0;
     _dcboxNum = 0;
-    _usdtNum = 0;
     [self refreshBankList];
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && self.showAlert) {
         IVActionHandler home = ^(UIAlertAction *action){
@@ -141,7 +139,7 @@
         BTTCardInfoAddCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTCardInfoAddCell" forIndexPath:indexPath];
         NSString *bankString = _bankNum<3 && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"银行卡/" : @"";
         NSString *bitString = _bitNum==1 ? @"" : @"比特币钱包/";
-        NSString *usdtString = _usdtNum<5 ? @"USDT钱包/" : @"";
+        NSString *usdtString = @"USDT钱包/";
         NSString *dcboxString = _dcboxNum==1 ? @"" : @"小金库钱包/";
         NSString *bindString = [NSString stringWithFormat:@"添加%@%@%@%@",bankString,bitString,usdtString,dcboxString];
         if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
@@ -295,6 +293,10 @@
 - (void)setupElements {
     [self.elementsHight removeAllObjects];
     NSMutableArray *elementsHight = [NSMutableArray array];
+    BOOL isShowAddCell = true;
+    if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && _bankNum==3) {
+        isShowAddCell = false;
+    }
     for (int i = 0; i <= self.bankList.count+1; i++) {
         if (i < self.bankList.count) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 240)]];
@@ -302,7 +304,7 @@
             if (i==self.bankList.count) {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
             }else{
-                if (self.isChecking || (_usdtNum==5&&_dcboxNum==1&&_bankNum==3&&_bitNum==1)) {
+                if (self.isChecking || !isShowAddCell) {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
                 } else {
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 174)]];
@@ -532,8 +534,6 @@
             _bankNum++;
         }else if ([model.accountType isEqualToString:@"DCBOX"]){
             _dcboxNum++;
-        }else if ([model.accountType isEqualToString:@"USDT"]){
-            _usdtNum++;
         }
         if ([model.isOpen isEqualToString:@"0"]) {
             [bList removeObject:model];

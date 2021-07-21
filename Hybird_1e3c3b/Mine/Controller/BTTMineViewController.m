@@ -376,7 +376,7 @@
             return [UICollectionViewCell new];
         }
     } else if (indexPath.row == 2 + self.saveMoneyCount ||
-        indexPath.row == self.saveMoneyCount + (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? 8:9)) {
+        indexPath.row == self.saveMoneyCount + ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]||![IVNetwork savedUserInfo] ? 9:8)) {
         
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
@@ -389,7 +389,8 @@
             cell.mineSparaterType = BTTMineSparaterTypeDoubleLineTwo;
         }
         BTTMeMainModel *model = nil;
-        if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+        BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
+        if (![IVNetwork savedUserInfo] || isUSDTAcc) {
             if (indexPath.row >= self.saveMoneyCount + 3 && indexPath.row <= self.saveMoneyCount + 8) {
                 model = self.mainDataOne[indexPath.row - self.saveMoneyCount - 3];
             } else {
@@ -737,10 +738,10 @@
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
                 }
             }
-        } else if (i == 1 + self.saveMoneyCount + 1 || i == self.saveMoneyCount + (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? 8:9)) {
+        } else if (i == 1 + self.saveMoneyCount + 1 || i == self.saveMoneyCount + ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]||![IVNetwork savedUserInfo] ? 9:8)) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 10)]];
         } else {
-            if ((i == self.saveMoneyCount + 3 || i == self.saveMoneyCount + 4) && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+            if ((i == self.saveMoneyCount + 3 || i == self.saveMoneyCount + 4) && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && [IVNetwork savedUserInfo]) {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 2, 100)]];
             } else {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 3, 100)]];
