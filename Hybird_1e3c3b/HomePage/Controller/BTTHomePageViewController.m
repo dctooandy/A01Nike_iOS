@@ -154,15 +154,18 @@
     [[BTTActivityManager sharedInstance] checkPopViewWithCompletionBlock:^(NSString * _Nullable response, NSString * _Nullable error) {
         if (response)
         {
-            //做其他事情
+            if ([response isEqualToString:@"2"])
+            {
+                //月分紅
+                BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
+                if (!isShowYuFenHong) {
+                    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
+                    [weakSelf loadYenFenHong];
+                }
+            }
         }else
         {
-            //月分紅
-            BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
-            if (!isShowYuFenHong) {
-                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
-                [weakSelf loadYenFenHong];
-            }
+            //做其他事情
         }
     }];
     [BTTHttpManager requestUnReadMessageNum:nil];

@@ -110,7 +110,7 @@ static BTTActivityManager * sharedSingleton;
         }else
         {
             //测试
-            [self showDefaultPopView];
+//            [self showDefaultPopView];
         }
     }
     
@@ -124,7 +124,7 @@ static BTTActivityManager * sharedSingleton;
         
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            if (result.body[@"isShow"])
+            if (result.body[@"isShow"])//0 不弹窗,1五重礼,2月分红,预计数字会一直增加
             {
                 if (result.body[@"image"]){
                     weakSelf.imageUrlString = result.body[@"image"];
@@ -132,10 +132,28 @@ static BTTActivityManager * sharedSingleton;
                 if (result.body[@"link"]){
                     weakSelf.linkString = result.body[@"link"];
                 }
-                [weakSelf checkDefaultPopViewDate];
+                NSNumber *iSshowNumber = [result valueForKey:@"isShow"];
+                int isShowType = [iSshowNumber intValue];
+                //测试
+//                isShowType = 1;
+                switch (isShowType) {
+                    case 0:
+                        
+                        break;
+                    case 1:
+                        [weakSelf checkDefaultPopViewDate];
+                        break;
+                    case 2:
+                    
+                        break;
+                        
+                    default:
+                        break;
+                }
                 if (completionBlock)
                 {
-                    completionBlock(response,[error description]);
+                    NSString * isShowString = [NSString stringWithFormat:@"%d",isShowType];
+                    completionBlock(isShowString,[error description]);
                 }
             }else
             {
