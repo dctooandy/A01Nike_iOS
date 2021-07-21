@@ -110,7 +110,7 @@ static BTTActivityManager * sharedSingleton;
         }else
         {
             //测试
-//            [self showDefaultPopView];
+            [self showDefaultPopView];
         }
     }
     
@@ -227,6 +227,7 @@ static BTTActivityManager * sharedSingleton;
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
         vc.webConfigModel.url = self.linkString;
+        vc.webConfigModel.title = @"呼朋唤友彩金拿不停";
         [[weakSelf currentViewController].navigationController pushViewController:vc animated:YES];
     };
 
