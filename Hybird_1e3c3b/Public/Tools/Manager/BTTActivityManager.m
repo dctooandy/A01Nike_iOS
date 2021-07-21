@@ -109,7 +109,7 @@ static BTTActivityManager * sharedSingleton;
             [self showDefaultPopView];
         }else
         {
-            //测试
+//            测试
 //            [self showDefaultPopView];
         }
     }
@@ -132,10 +132,10 @@ static BTTActivityManager * sharedSingleton;
                 if (result.body[@"link"]){
                     weakSelf.linkString = result.body[@"link"];
                 }
-                NSNumber *iSshowNumber = [result valueForKey:@"isShow"];
+                NSNumber *iSshowNumber = [result.body valueForKey:@"isShow"];
                 int isShowType = [iSshowNumber intValue];
                 //测试
-//                isShowType = 1;
+//                isShowType = 2;
                 switch (isShowType) {
                     case 0:
                         
