@@ -18,7 +18,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v0E-vW-zb7">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            <rect key="frame" x="15" y="0.0" width="345" height="812"/>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wb-EI-Z3i">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
@@ -44,11 +44,11 @@
                         <constraint firstItem="v0E-vW-zb7" firstAttribute="top" secondItem="cZh-le-wW8" secondAttribute="top" id="U6S-2H-xXJ"/>
                         <constraint firstAttribute="trailing" secondItem="0wb-EI-Z3i" secondAttribute="trailing" id="Wf1-81-EEv"/>
                         <constraint firstAttribute="bottom" secondItem="v0E-vW-zb7" secondAttribute="bottom" id="Ydv-UF-1YG"/>
-                        <constraint firstAttribute="trailing" secondItem="v0E-vW-zb7" secondAttribute="trailing" id="adC-cD-qxv"/>
+                        <constraint firstAttribute="trailing" secondItem="v0E-vW-zb7" secondAttribute="trailing" constant="15" id="adC-cD-qxv"/>
                         <constraint firstAttribute="bottom" secondItem="0wb-EI-Z3i" secondAttribute="bottom" id="dt9-G6-rhG"/>
                         <constraint firstItem="0wb-EI-Z3i" firstAttribute="top" secondItem="cZh-le-wW8" secondAttribute="top" id="hbW-0M-NZB"/>
                         <constraint firstItem="p6U-SF-KyP" firstAttribute="centerX" secondItem="cZh-le-wW8" secondAttribute="centerX" id="pZz-78-2aV"/>
-                        <constraint firstItem="v0E-vW-zb7" firstAttribute="leading" secondItem="cZh-le-wW8" secondAttribute="leading" id="t9Z-6e-bhK"/>
+                        <constraint firstItem="v0E-vW-zb7" firstAttribute="leading" secondItem="cZh-le-wW8" secondAttribute="leading" constant="15" id="t9Z-6e-bhK"/>
                         <constraint firstAttribute="bottom" secondItem="p6U-SF-KyP" secondAttribute="bottom" constant="100" id="vOc-mi-x4R"/>
                     </constraints>
                 </view>
