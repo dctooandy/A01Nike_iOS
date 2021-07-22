@@ -624,7 +624,6 @@
 		41042F5E261D88090020B0AA /* BTTPasswordChangeController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 41042F5A261D88090020B0AA /* BTTPasswordChangeController+LoadData.m */; };
 		410997F9251DC870001FA895 /* BTTDepositRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410997F8251DC870001FA895 /* BTTDepositRecordCell.xib */; };
 		410997FB251DC876001FA895 /* BTTDepositRecordHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 410997FA251DC876001FA895 /* BTTDepositRecordHeaderCell.xib */; };
-		410E320D26A7E6A300C7D2B8 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		411B89E026980E9800F45A22 /* BTTCompleteNamePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 411B89DF26980E9800F45A22 /* BTTCompleteNamePopView.m */; };
 		411B89E226980EA700F45A22 /* BTTCompleteNamePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 411B89E126980EA700F45A22 /* BTTCompleteNamePopView.xib */; };
 		411B89E52698533300F45A22 /* BTTDontUseRegularPhonePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 411B89E42698533300F45A22 /* BTTDontUseRegularPhonePopView.m */; };
@@ -767,6 +766,7 @@
 		41D1075626A9143E00721F61 /* BTTChangeMobileNextController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D1074926A9143E00721F61 /* BTTChangeMobileNextController+LoadData.m */; };
 		41D1075726A9143E00721F61 /* BTTBindingMobileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D1074D26A9143E00721F61 /* BTTBindingMobileController.m */; };
 		41D1075826A9143E00721F61 /* BTTBindingMobileController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D1074E26A9143E00721F61 /* BTTBindingMobileController+LoadData.m */; };
+		41D1075926A91DC100721F61 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		41EAF0F2260D93BD0091FE09 /* BTTMeInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41EAF0F1260D93BD0091FE09 /* BTTMeInfoCell.xib */; };
 		41EAF0F6260D94290091FE09 /* hot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 41EAF0F5260D94290091FE09 /* hot.gif */; };
 		41F14AF025A69CA1008E8CAD /* BTTYueFenHongPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */; };
@@ -2435,7 +2435,7 @@
 				3AD9CE2B2167107B00685B43 /* libilbccodec-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */,
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
-				410E320D26A7E6A300C7D2B8 /* libboringssl_simulator.a in Frameworks */,
+				41D1075926A91DC100721F61 /* libboringssl_simulator.a in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
@@ -4753,8 +4753,8 @@
 			children = (
 				41D1073626A9143E00721F61 /* ChangeMobile */,
 				41D1074B26A9143E00721F61 /* BTTBindingMobileController.h */,
-				41D1074C26A9143E00721F61 /* BTTBindingMobileController+LoadData.h */,
 				41D1074D26A9143E00721F61 /* BTTBindingMobileController.m */,
+				41D1074C26A9143E00721F61 /* BTTBindingMobileController+LoadData.h */,
 				41D1074E26A9143E00721F61 /* BTTBindingMobileController+LoadData.m */,
 			);
 			path = BindingMobile;
@@ -4763,13 +4763,13 @@
 		41D1073626A9143E00721F61 /* ChangeMobile */ = {
 			isa = PBXGroup;
 			children = (
+				41D1073F26A9143E00721F61 /* BTTChangeMobileController.h */,
 				41D1073726A9143E00721F61 /* BTTChangeMobileController.m */,
+				41D1074526A9143E00721F61 /* BTTChangeMobileController+LoadData.h */,
+				41D1073E26A9143E00721F61 /* BTTChangeMobileController+LoadData.m */,
 				41D1073826A9143E00721F61 /* ChangeMobileSuccess */,
 				41D1073B26A9143E00721F61 /* UnBindingMobile */,
-				41D1073E26A9143E00721F61 /* BTTChangeMobileController+LoadData.m */,
-				41D1073F26A9143E00721F61 /* BTTChangeMobileController.h */,
 				41D1074026A9143E00721F61 /* Manual */,
-				41D1074526A9143E00721F61 /* BTTChangeMobileController+LoadData.h */,
 				41D1074626A9143E00721F61 /* ChangeMobileNext */,
 			);
 			path = ChangeMobile;
@@ -4796,10 +4796,10 @@
 		41D1074026A9143E00721F61 /* Manual */ = {
 			isa = PBXGroup;
 			children = (
-				41D1074126A9143E00721F61 /* BTTChangeMobileManualController.m */,
-				41D1074226A9143E00721F61 /* BTTChangeMobileManualController+LoadData.m */,
 				41D1074326A9143E00721F61 /* BTTChangeMobileManualController.h */,
+				41D1074126A9143E00721F61 /* BTTChangeMobileManualController.m */,
 				41D1074426A9143E00721F61 /* BTTChangeMobileManualController+LoadData.h */,
+				41D1074226A9143E00721F61 /* BTTChangeMobileManualController+LoadData.m */,
 			);
 			path = Manual;
 			sourceTree = "<group>";
@@ -4807,10 +4807,10 @@
 		41D1074626A9143E00721F61 /* ChangeMobileNext */ = {
 			isa = PBXGroup;
 			children = (
-				41D1074726A9143E00721F61 /* BTTChangeMobileNextController+LoadData.h */,
-				41D1074826A9143E00721F61 /* BTTChangeMobileNextController.m */,
-				41D1074926A9143E00721F61 /* BTTChangeMobileNextController+LoadData.m */,
 				41D1074A26A9143E00721F61 /* BTTChangeMobileNextController.h */,
+				41D1074826A9143E00721F61 /* BTTChangeMobileNextController.m */,
+				41D1074726A9143E00721F61 /* BTTChangeMobileNextController+LoadData.h */,
+				41D1074926A9143E00721F61 /* BTTChangeMobileNextController+LoadData.m */,
 			);
 			path = ChangeMobileNext;
 			sourceTree = "<group>";
@@ -6500,7 +6500,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.294;
+				MARKETING_VERSION = 3.2.295;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6542,7 +6542,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.294;
+				MARKETING_VERSION = 3.2.295;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

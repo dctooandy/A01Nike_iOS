@@ -133,7 +133,7 @@ static BTTActivityManager * sharedSingleton;
         
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            if (result.body[@"isShow"])//0 不弹窗,1五重礼,2月分红,预计数字会一直增加
+            if (result.body[@"isShow"])//0 不弹窗,1五重礼,2月分红
             {
                 if (result.body[@"image"]){
                     weakSelf.imageUrlString = result.body[@"image"];
@@ -148,14 +148,14 @@ static BTTActivityManager * sharedSingleton;
                 switch (isShowType) {
                     case 0://不弹窗
                         break;
-                    case 1://五重礼
+                    case 1://一般彈窗
                         [weakSelf checkDefaultPopViewDate];
                         break;
                     case 2://月分红
                         [weakSelf checkYenFenHong];
                         break;
-                    case 3://七夕
-                        [weakSelf checkSevenXiDate:@""];
+//                    case 3://七夕
+//                        [weakSelf checkSevenXiDate:@""];
                         break;
                     default:
                         break;
