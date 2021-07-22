@@ -101,17 +101,6 @@ static const char *BTTChanceCountKey = "chanceCount";
     }];
 }
 
-//2021月分紅
--(void)loadYenFenHong {
-    [IVNetwork requestPostWithUrl:BTTIsOldMember paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            BTTYenFenHongModel * model = [BTTYenFenHongModel yy_modelWithJSON:result.body];
-            [self showYueFenHong:model];
-        }
-    }];
-}
-
 // 博币数量查询
 - (void)loadLuckyWheelCoinStatus {
     [IVNetwork requestPostWithUrl:BTTQueryIntegralAPI paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
@@ -394,10 +383,6 @@ static const char *BTTChanceCountKey = "chanceCount";
         }
         dispatch_group_leave(group);
     }];
-}
-- (void)loadSevenXiData
-{
-    
 }
 #pragma mark - 动态添加属性
 - (void)setNextGroup:(NSInteger)nextGroup {

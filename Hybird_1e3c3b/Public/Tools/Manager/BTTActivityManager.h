@@ -13,10 +13,8 @@ typedef void(^SevenXiCallBack)(NSString * _Nullable response, NSString * _Nullab
 typedef void(^PopViewCallBack)(NSString * _Nullable response, NSString * _Nullable error);
 @interface BTTActivityManager : NSObject
 SingletonInterface(BTTActivityManager);
-//检查七夕活动日期
-- (void)checkSevenXiDate;
 //检查七夕活动接口资料(正式开跑后)
--(void)loadSevenXiDatawWithCompletionBlock:(SevenXiCallBack _Nullable)completionBlock;
+-(void)loadSevenXiData;
 
 //检查wms弹窗API
 - (void)checkPopViewWithCompletionBlock:(PopViewCallBack _Nullable)completionBlock;

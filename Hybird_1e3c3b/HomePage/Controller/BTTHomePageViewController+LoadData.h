@@ -58,9 +58,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)loadBiBiCun;
 
--(void)loadYenFenHong;
-
--(void)loadSevenXiData;
 @end
 
 NS_ASSUME_NONNULL_END

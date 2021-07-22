@@ -10,17 +10,17 @@
 #import "BTTSevenXiPriHotPopView.h"
 #import "BTTBaseWebViewController.h"
 #import "BTTDefaultPopView.h"
+#import "BTTYueFenHongPopView.h"
+#import "BTTYenFenHongModel.h"
 
 @interface BTTActivityManager()
-@property(nonatomic,strong)NSString * sevenXiData;
 @property(nonatomic,strong)NSString * imageUrlString;
 @property(nonatomic,strong)NSString * linkString;
 @end
 @implementation BTTActivityManager
-//SingletonImplementation(BTTActivityManager);
 static BTTActivityManager * sharedSingleton;
-+ (void)initialize
-{
+
++ (void)initialize {
     static BOOL initialized = NO;
     if (!initialized)
     {
@@ -29,16 +29,17 @@ static BTTActivityManager * sharedSingleton;
         [sharedSingleton setNoti];
     }
 }
-+ (BTTActivityManager *)sharedInstance
-{
+
++ (BTTActivityManager *)sharedInstance {
     return sharedSingleton;
 }
-- (void)setNoti{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkSevenXiDate) name:LoginSuccessNotification object:nil];
+
+- (void)setNoti {
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkSevenXiDate) name:LoginSuccessNotification object:nil];
 }
+
 #pragma mark - 检查七夕预热弹窗是否已启用过
--(void)checkSevenXiDate
-{
+-(void)checkSevenXiDate:(NSString *)playedNumStr {
     NSString * showSevenXiDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTShowSevenXi];
     NSString * realLastLoginDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTBeforeLoginDate];
     NSString * registDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTRegistDate];
@@ -50,16 +51,16 @@ static BTTActivityManager * sharedSingleton;
         if (realLastLoginDate && ![realLastLoginDate isEqualToString:@"NO"])
         {
             if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:realLastLoginDate]]) {
-                [self showSevenXiPriHotPopView];
+                [self showSevenXiPriHotPopView:playedNumStr];
             }else if ([PublicMethod isDateToday:[PublicMethod transferDateStringToDate:registDate]]) 
             {
-                [self showSevenXiPriHotPopView];
+                [self showSevenXiPriHotPopView:playedNumStr];
             }
         }else
         {
             [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTBeforeLoginDate];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            [self showSevenXiPriHotPopView];
+            [self showSevenXiPriHotPopView:playedNumStr];
         }
     }else{
         if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:showSevenXiDate]])
@@ -67,18 +68,18 @@ static BTTActivityManager * sharedSingleton;
             NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
             [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowSevenXi];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            [self showSevenXiPriHotPopView];
+            [self showSevenXiPriHotPopView:playedNumStr];
         }else
         {
             //测试
-            [self showSevenXiPriHotPopView];
+//            [self showSevenXiPriHotPopView:playedNumStr];
         }
     }
     
 }
+
 #pragma mark - 检查Default弹窗是否已启用过
--(void)checkDefaultPopViewDate
-{
+-(void)checkDefaultPopViewDate {
     NSString * showSevenXiDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTShowDefaultPopDate];
     NSString * realLastLoginDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTBeforeLoginDate];
     NSString * registDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTRegistDate];
@@ -113,10 +114,18 @@ static BTTActivityManager * sharedSingleton;
 //            [self showDefaultPopView];
         }
     }
-    
 }
-- (void)checkPopViewWithCompletionBlock:(PopViewCallBack _Nullable)completionBlock
-{
+
+#pragma mark - 檢查月分彈窗
+-(void)checkYenFenHong {
+    BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
+    if (!isShowYuFenHong) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
+        [self loadYenFenHong];
+    }
+}
+
+- (void)checkPopViewWithCompletionBlock:(PopViewCallBack _Nullable)completionBlock {
     //等待正确API参数
     NSMutableDictionary *params = @{}.mutableCopy;
     weakSelf(weakSelf)
@@ -135,18 +144,19 @@ static BTTActivityManager * sharedSingleton;
                 NSNumber *iSshowNumber = [result.body valueForKey:@"isShow"];
                 int isShowType = [iSshowNumber intValue];
                 //测试
-//                isShowType = 2;
+//                isShowType = 1;
                 switch (isShowType) {
-                    case 0:
-                        
+                    case 0://不弹窗
                         break;
-                    case 1:
+                    case 1://五重礼
                         [weakSelf checkDefaultPopViewDate];
                         break;
-                    case 2:
-                    
+                    case 2://月分红
+                        [weakSelf checkYenFenHong];
                         break;
-                        
+                    case 3://七夕
+                        [weakSelf checkSevenXiDate:@""];
+                        break;
                     default:
                         break;
                 }
@@ -155,8 +165,8 @@ static BTTActivityManager * sharedSingleton;
                     NSString * isShowString = [NSString stringWithFormat:@"%d",isShowType];
                     completionBlock(isShowString,[error description]);
                 }
-            }else
-            {
+                
+            } else {
                 if (completionBlock)
                 {
                     completionBlock(nil,[error description]);
@@ -171,37 +181,30 @@ static BTTActivityManager * sharedSingleton;
         }
     }];
 }
--(void)loadSevenXiDatawWithCompletionBlock:(SevenXiCallBack _Nullable)completionBlock
-{
-    //等待正确API参数
-    NSMutableDictionary *params = @{}.mutableCopy;
-//    params[@"messageId"] = messageID;
-//    params[@"smsCode"] = sCode;
-//    params[@"use"] = @22;
-    weakSelf(weakSelf)
-    [IVNetwork requestPostWithUrl:BTTSevenXiDataBridge paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            if (completionBlock)
-            {
-                weakSelf.sevenXiData = @"5056";
-                completionBlock(response,[error description]);
-            }
-        }else{
-            [MBProgressHUD showError:result.head.errMsg toView:nil];
-            if (completionBlock)
-            {
-                weakSelf.sevenXiData = @"";
-                completionBlock(nil,result.head.errMsg);
-            }
-        }
-    }];
+
+#pragma mark - 七夕
+-(void)loadSevenXiData {
+//    NSMutableDictionary *params = @{}.mutableCopy;
+//    weakSelf(weakSelf)
+//    [IVNetwork requestPostWithUrl:BTTSevenXiDataBridge paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//        IVJResponseObject *result = response;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            //TODO: 判斷有無局數 有七夕彈窗 沒有走彈窗接口
+//            NSString * playedNumStr = result.body[@"下注局數"];
+//            if ([playedNumStr integerValue] > 0) {
+//                [weakSelf checkSevenXiDate:playedNumStr];
+//            } else {
+                [self checkPopViewWithCompletionBlock:nil];
+//            }
+//        } else {
+//            [weakSelf checkPopViewWithCompletionBlock:nil];
+//        }
+//    }];
 }
-- (void)showSevenXiPriHotPopView
-{
+
+- (void)showSevenXiPriHotPopView:(NSString *)playedNumStr {
     BTTSevenXiPriHotPopView *alertView = [BTTSevenXiPriHotPopView viewFromXib];
-    [alertView configForContent:self.sevenXiData];
+    [alertView configForContent:playedNumStr];
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
     
     popView.isClickBGDismiss = YES;
@@ -212,19 +215,19 @@ static BTTActivityManager * sharedSingleton;
     }];
     alertView.dismissBlock = ^{
         [popView dismiss];
-        
     };
     alertView.btnBlock = ^(UIButton * _Nullable btn) {
         BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
-        vc.webConfigModel.url = @"history";
+        vc.webConfigModel.url = self.linkString;
+        vc.webConfigModel.title = @"七夕鹊桥会~918给您搭桥了";
         [[weakSelf currentViewController].navigationController pushViewController:vc animated:YES];
     };
-
 }
-- (void)showDefaultPopView
-{
+
+#pragma mark - 基礎彈窗
+- (void)showDefaultPopView {
     BTTDefaultPopView *alertView = [BTTDefaultPopView viewFromXib];
     [alertView configForContent:self.imageUrlString];
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
@@ -248,10 +251,41 @@ static BTTActivityManager * sharedSingleton;
         vc.webConfigModel.title = @"呼朋唤友彩金拿不停";
         [[weakSelf currentViewController].navigationController pushViewController:vc animated:YES];
     };
-
 }
-- (UIViewController*)topMostWindowController
-{
+
+#pragma mark - 月分紅
+-(void)loadYenFenHong {
+    [IVNetwork requestPostWithUrl:BTTIsOldMember paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTYenFenHongModel * model = [BTTYenFenHongModel yy_modelWithJSON:result.body];
+            [self showYueFenHong:model];
+        }
+    }];
+}
+
+- (void)showYueFenHong:(BTTYenFenHongModel *)model {
+    BTTYueFenHongPopView * customView = [BTTYueFenHongPopView viewFromXib];
+    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    customView.model = model;
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    weakSelf(weakSelf)
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    customView.btnBlock = ^(UIButton * _Nullable btn) {
+        [popView dismiss];
+        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+        vc.title = @"博天堂股东 分红月月领～第二季";
+        vc.webConfigModel.url = @"/activity_pages/withdraw_gift";
+        vc.webConfigModel.newView = YES;
+        [[weakSelf currentViewController].navigationController pushViewController:vc animated:YES];
+    };
+}
+
+- (UIViewController*)topMostWindowController {
     UIWindow *win = [UIApplication sharedApplication].delegate.window;
     UIViewController *topController = [win rootViewController];
     if ([topController isKindOfClass:[UITabBarController class]]) {
@@ -261,8 +295,7 @@ static BTTActivityManager * sharedSingleton;
     return topController;
 }
 
-- (UIViewController*)currentViewController;
-{
+- (UIViewController*)currentViewController {
     UIViewController *currentViewController = [self topMostWindowController];
     
     while ([currentViewController isKindOfClass:[UINavigationController class]] && [(UINavigationController*)currentViewController topViewController])

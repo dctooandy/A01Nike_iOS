@@ -375,8 +375,7 @@
         } else {
             return [UICollectionViewCell new];
         }
-    } else if (indexPath.row == 2 + self.saveMoneyCount ||
-        indexPath.row == self.saveMoneyCount + ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]||![IVNetwork savedUserInfo] ? 9:8)) {
+    } else if (indexPath.row == 2 + self.saveMoneyCount || indexPath.row == self.saveMoneyCount + 9) {
         
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
@@ -389,19 +388,10 @@
             cell.mineSparaterType = BTTMineSparaterTypeDoubleLineTwo;
         }
         BTTMeMainModel *model = nil;
-        BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
-        if (![IVNetwork savedUserInfo] || isUSDTAcc) {
-            if (indexPath.row >= self.saveMoneyCount + 3 && indexPath.row <= self.saveMoneyCount + 8) {
-                model = self.mainDataOne[indexPath.row - self.saveMoneyCount - 3];
-            } else {
-                model = self.mainDataTwo[indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4];
-            }
+        if (indexPath.row >= self.saveMoneyCount + 3 && indexPath.row <= self.saveMoneyCount + 8) {
+            model = self.mainDataOne[indexPath.row - self.saveMoneyCount - 3];
         } else {
-            if (indexPath.row >= self.saveMoneyCount + 3 && indexPath.row <= self.saveMoneyCount + 7) {
-                model = self.mainDataOne[indexPath.row - self.saveMoneyCount - 3];
-            } else {
-                model = self.mainDataTwo[indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4];
-            }
+            model = self.mainDataTwo[indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4];
         }
         cell.isShowHot = self.isShowHot;
         cell.model = model;
@@ -599,9 +589,9 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowDragonBoat];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowSevenXi];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBeforeLoginDate];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowSevenXi];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTRegistDate];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowDefaultPopDate];
             [BTTUserStatusManager logoutSuccess];
             strongSelf.saveMoneyCount = 0;
@@ -738,14 +728,11 @@
                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
                 }
             }
-        } else if (i == 1 + self.saveMoneyCount + 1 || i == self.saveMoneyCount + ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]||![IVNetwork savedUserInfo] ? 9:8)) {
+        } else if (i == 1 + self.saveMoneyCount + 1 ||
+                   i == self.saveMoneyCount + 9) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 10)]];
         } else {
-            if ((i == self.saveMoneyCount + 3 || i == self.saveMoneyCount + 4) && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && [IVNetwork savedUserInfo]) {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 2, 100)]];
-            } else {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 3, 100)]];
-            }
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 3, 100)]];
         }
     }
     self.elementsHight = elementsHight.mutableCopy;

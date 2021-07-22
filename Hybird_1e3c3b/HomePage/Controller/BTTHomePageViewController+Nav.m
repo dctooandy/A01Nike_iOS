@@ -30,20 +30,13 @@
 #import "BTTActionSheet.h"
 #import "BTTBiBiCunPopView.h"
 #import "AppDelegate.h"
-#import "BTTYueFenHongPopView.h"
-#import "BTTDragonBoatPopView.h"
-#import "BTTDragonBoatChancePopView.h"
-#import "BTTDragonBoatMenualPopView.h"
-#import "BTTDragonBoatAutoPopView.h"
 
 static const char *BTTHeaderViewKey = "headerView";
 
 static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
-static const char *BTTMenualPopViewKey = "menualPopView";
 
 @interface BTTHomePageViewController (Nav)
 
-@property (nonatomic, strong) BTTDragonBoatMenualPopView *menualPopView;
 
 @end
 @implementation BTTHomePageViewController (Nav)
@@ -158,10 +151,7 @@ static const char *BTTMenualPopViewKey = "menualPopView";
         [popView dismiss];
     };
 }
--(void)showSevenXiPriHotPopView
-{
-    
-}
+
 -(void)showBiBiCunPopView:(NSString *)contentStr {
     BTTBiBiCunPopView *customView = [BTTBiBiCunPopView viewFromXib];
     customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -176,28 +166,6 @@ static const char *BTTMenualPopViewKey = "menualPopView";
         AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         [delegate jumpToTabIndex:BTTMine];
         [popView dismiss];
-    };
-}
-
-//月分紅
-- (void)showYueFenHong:(BTTYenFenHongModel *)model {
-    BTTYueFenHongPopView * customView = [BTTYueFenHongPopView viewFromXib];
-    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    customView.model = model;
-    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-    popView.isClickBGDismiss = YES;
-    [popView pop];
-    customView.dismissBlock = ^{
-        [popView dismiss];
-    };
-    
-    customView.btnBlock = ^(UIButton * _Nullable btn) {
-        [popView dismiss];
-        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.title = @"博天堂股东 分红月月领～第二季";
-        vc.webConfigModel.url = @"/activity_pages/withdraw_gift";
-        vc.webConfigModel.newView = YES;
-        [self.navigationController pushViewController:vc animated:YES];
     };
 }
 
@@ -585,14 +553,6 @@ static const char *BTTMenualPopViewKey = "menualPopView";
 
 - (BTTLoginOrRegisterBtsView *)loginAndRegisterBtnsView {
     return objc_getAssociatedObject(self, &BTTLoginAndRegisterKey);
-}
-- (void)setMenualPopView:(BTTDragonBoatMenualPopView *)menualPopView {
-    objc_setAssociatedObject(self, &BTTMenualPopViewKey, menualPopView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-
-- (BTTDragonBoatMenualPopView *)menualPopView {
-    return objc_getAssociatedObject(self, &BTTMenualPopViewKey);
 }
 
 @end

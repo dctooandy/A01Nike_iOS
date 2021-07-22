@@ -9,9 +9,11 @@
 #import "BTTSevenXiPriHotPopView.h"
 
 @interface BTTSevenXiPriHotPopView()
-@property (weak, nonatomic) IBOutlet UIView *topTitleView;
+@property (weak, nonatomic) IBOutlet UIView *textBgView;
 @property (weak, nonatomic) IBOutlet UILabel *bottomTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *topTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (weak, nonatomic) IBOutlet UIView *normalBgView;
 
 @end
 
@@ -27,13 +29,15 @@
 
 - (void)configForContent:(NSString *)sender
 {
-    if (sender.length > 0)
-    {
-        self.contentLabel.text = sender;
-    }else
-    {
-        [self.topTitleView setHidden:YES];
-        [self.bottomTitleLabel setHidden:YES];
+    if (sender.length > 0){
+        //TODO: 把局數和局兩部分字體大小顏色改下
+        self.contentLabel.text = [NSString stringWithFormat:@"%@局", sender];
+        [self.textBgView setHidden:NO];
+        [self.normalBgView setHidden:YES];
+    }else{
+        
+        [self.normalBgView setHidden:NO];
+        [self.textBgView setHidden:YES];
     }
 }
 - (IBAction)closeBtnAction:(UIButton *)sender {

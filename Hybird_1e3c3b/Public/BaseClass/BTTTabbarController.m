@@ -107,15 +107,14 @@
         [IVNetwork cleanUserInfo];
         [IVHttpManager shareManager].loginName = @"";
         [IVHttpManager shareManager].userToken = @"";
+        [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
-        [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowDragonBoat];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowSevenXi];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBeforeLoginDate];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowSevenXi];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTRegistDate];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowDefaultPopDate];
         [BTTUserStatusManager logoutSuccess];
     }

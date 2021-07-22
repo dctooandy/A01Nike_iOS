@@ -118,6 +118,13 @@
     }
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (self.idDisable) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockGameBtnPress" object:nil];
+    }
+}
+
 #pragma mark - viewWillAppear
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -131,50 +138,27 @@
 }
 
 -(void)showHomePopView {
-    NSDate * saveDate = [PublicMethod transferDateStringToDate:[[NSUserDefaults standardUserDefaults] objectForKey:BTTBiBiCunDate]];
-    if ([IVNetwork savedUserInfo].starLevel >= 2 && (![PublicMethod isDateToday:saveDate] || saveDate == nil)) {
-        [self loadBiBiCun];
-    }
-    //检查wms popView 相关资料
-    weakSelf(weakSelf)
-    [[BTTActivityManager sharedInstance] checkPopViewWithCompletionBlock:^(NSString * _Nullable response, NSString * _Nullable error) {
-        if (response)
-        {
-            if ([response isEqualToString:@"2"])
-            {
-                //月分紅
-                BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
-                if (!isShowYuFenHong) {
-                    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
-                    [weakSelf loadYenFenHong];
-                }
-            }
-        }else
-        {
-            //做其他事情
-        }
-    }];
+    //比比存
+//    NSDate * saveDate = [PublicMethod transferDateStringToDate:[[NSUserDefaults standardUserDefaults] objectForKey:BTTBiBiCunDate]];
+//    if ([IVNetwork savedUserInfo].starLevel >= 2 && (![PublicMethod isDateToday:saveDate] || saveDate == nil)) {
+//        [self loadBiBiCun];
+//    }
+    
+    //七夕
+    [[BTTActivityManager sharedInstance] loadSevenXiData];
+    //其他彈窗
+//    [[BTTActivityManager sharedInstance] checkPopViewWithCompletionBlock:nil];
+    
     [BTTHttpManager requestUnReadMessageNum:nil];
-    NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
-    if (![NSDate isToday:timestamp]) {
-        [self loadLuckyWheelCoinStatus];
-        NSString *timestamp = [NSString stringWithFormat:@"%@",@([[NSDate date] timeIntervalSince1970] * 1000)];
-        [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-
-//    //检查七夕活动接口资料(正式开跑后)
-//    [[BTTActivityManager sharedInstance] loadSevenXiDatawWithCompletionBlock:^(NSString * _Nullable response, NSString * _Nullable error) {
-//        //检查七夕活动日期
-//        [[BTTActivityManager sharedInstance] checkSevenXiDate];
-//    }];
-}
-
--(void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    if (self.idDisable) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"UnlockGameBtnPress" object:nil];
-    }
+    
+    //博幣彈窗
+//    NSString *timestamp = [[NSUserDefaults standardUserDefaults] objectForKey:BTTCoinTimestamp];
+//    if (![NSDate isToday:timestamp]) {
+//        [self loadLuckyWheelCoinStatus];
+//        NSString *timestamp = [NSString stringWithFormat:@"%@",@([[NSDate date] timeIntervalSince1970] * 1000)];
+//        [[NSUserDefaults standardUserDefaults] setObject:timestamp forKey:BTTCoinTimestamp];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//    }
 }
 
 -(void)checkLoginVersion {
@@ -189,9 +173,9 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowDragonBoat];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowSevenXi];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBeforeLoginDate];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowSevenXi];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTRegistDate];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowDefaultPopDate];
             [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
             [BTTUserStatusManager logoutSuccess];

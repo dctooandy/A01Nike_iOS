@@ -37,15 +37,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)showBiBiCunPopView:(NSString *)contentStr;
 
-- (void)showYueFenHong:(BTTYenFenHongModel *)model;
-
 - (void)setupFloatWindow;
 
 -(void)setUpAssistiveButton;
 
 -(void)showAssistiveButton;
-
--(void)showSevenXiPriHotPopView;
 
 @end
 
