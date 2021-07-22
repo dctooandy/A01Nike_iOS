@@ -61,13 +61,31 @@
         [MBProgressHUD hideHUDForView:vc.view animated:true];
         if ([result.head.errCode isEqualToString:@"0000"]) {
             info.response = result.body;
-            [CSVisitChatmanager startWithSuperVC:vc chatInfo:info finish:^(CSServiceCode errCode) {
-                csServicecompleteBlock(errCode);
-            }];
+            [self testSpeed:info.response chatInfo:info vc:vc csServicecompleteBlock:csServicecompleteBlock];
         } else {
             csServicecompleteBlock(CSServiceCode_Request_Fail);
         }
     }];
+}
+
++(void)testSpeed:(NSDictionary *)response chatInfo:(CSChatInfo *)info vc:(UIViewController *)vc csServicecompleteBlock:(CSServiceCompleteBlock)csServicecompleteBlock{
+    NSMutableArray * arr = [[NSMutableArray alloc] init];
+    for (NSString * str in response[@"domainBakList"]) {
+        if ([[str substringFromIndex:str.length-1] isEqualToString:@"/"]) {
+            [arr addObject:str];
+        } else {
+            [arr addObject:[NSString stringWithFormat:@"%@/", str]];
+        }
+    }
+    [IVCheckNetworkWrapper getOptimizeUrlWithArray:arr isAuto:YES type:IVKCheckNetworkTypeOnline progress:nil completion:^(IVCheckDetailModel * _Nonnull model) {
+        if (model != nil) {
+            info.domainBakList = @[model.url];
+        }
+        [CSVisitChatmanager startWithSuperVC:vc chatInfo:info finish:^(CSServiceCode errCode) {
+            csServicecompleteBlock(errCode);
+        }];
+    }];
+
 }
 
 //+(void)initOcssSDKNetWork {
