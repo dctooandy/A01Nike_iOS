@@ -35,94 +35,7 @@ static BTTActivityManager * sharedSingleton;
 }
 
 - (void)setNoti {
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkSevenXiDate) name:LoginSuccessNotification object:nil];
-}
 
-#pragma mark - 检查七夕预热弹窗是否已启用过
--(void)checkSevenXiDate:(NSString *)playedNumStr {
-    NSString * showSevenXiDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTShowSevenXi];
-    NSString * realLastLoginDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTBeforeLoginDate];
-    NSString * registDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTRegistDate];
-    if (showSevenXiDate == nil)
-    {
-        NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
-        [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowSevenXi];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        if (realLastLoginDate && ![realLastLoginDate isEqualToString:@"NO"])
-        {
-            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:realLastLoginDate]]) {
-                [self showSevenXiPriHotPopView:playedNumStr];
-            }else if ([PublicMethod isDateToday:[PublicMethod transferDateStringToDate:registDate]]) 
-            {
-                [self showSevenXiPriHotPopView:playedNumStr];
-            }
-        }else
-        {
-            [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTBeforeLoginDate];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self showSevenXiPriHotPopView:playedNumStr];
-        }
-    }else{
-        if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:showSevenXiDate]])
-        {
-            NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
-            [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowSevenXi];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self showSevenXiPriHotPopView:playedNumStr];
-        }else
-        {
-            //测试
-//            [self showSevenXiPriHotPopView:playedNumStr];
-        }
-    }
-    
-}
-
-#pragma mark - 检查Default弹窗是否已启用过
--(void)checkDefaultPopViewDate {
-    NSString * showSevenXiDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTShowDefaultPopDate];
-    NSString * realLastLoginDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTBeforeLoginDate];
-    NSString * registDate = [[NSUserDefaults standardUserDefaults] objectForKey:BTTRegistDate];
-    if (showSevenXiDate == nil)
-    {
-        NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
-        [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowDefaultPopDate];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        if (realLastLoginDate && ![realLastLoginDate isEqualToString:@"NO"])
-        {
-            if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:realLastLoginDate]]) {
-                [self showDefaultPopView];
-            }else if ([PublicMethod isDateToday:[PublicMethod transferDateStringToDate:registDate]]) {
-                [self showDefaultPopView];
-            }
-        }else
-        {
-            [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTBeforeLoginDate];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self showDefaultPopView];
-        }
-    }else{
-        if (![PublicMethod isDateToday:[PublicMethod transferDateStringToDate:showSevenXiDate]])
-        {
-            NSString *currentDate = [PublicMethod getCurrentTimesWithFormat:@"yyyy-MM-dd HH:mm:ss" ];
-            [[NSUserDefaults standardUserDefaults] setObject:currentDate forKey:BTTShowDefaultPopDate];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self showDefaultPopView];
-        }else
-        {
-//            测试
-//            [self showDefaultPopView];
-        }
-    }
-}
-
-#pragma mark - 檢查月分彈窗
--(void)checkYenFenHong {
-    BOOL isShowYuFenHong = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTShowYuFenHong] boolValue];
-    if (!isShowYuFenHong) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:BTTShowYuFenHong];
-        [self loadYenFenHong];
-    }
 }
 
 - (void)checkPopViewWithCompletionBlock:(PopViewCallBack _Nullable)completionBlock {
@@ -133,7 +46,13 @@ static BTTActivityManager * sharedSingleton;
         
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            if (result.body[@"isShow"])//0 不弹窗,1五重礼,2月分红
+//            0722 isshow
+//            0. 没配置任何东西 (月工资弹窗)
+//            1. 预热时间内
+//            2. 活动时间内
+//            3. 不在预热也不在活动, 但有配置 (月工资弹窗)
+//            4. 今天不用再弹弹窗 (什么弹窗都不出现了)
+            if (result.body[@"isShow"])
             {
                 if (result.body[@"image"]){
                     weakSelf.imageUrlString = result.body[@"image"];
@@ -146,16 +65,18 @@ static BTTActivityManager * sharedSingleton;
                 //测试
 //                isShowType = 1;
                 switch (isShowType) {
-                    case 0://不弹窗
+                    case 0://没配置任何东西 (月工资弹窗)
+                        [weakSelf directToShowYenFenHongPopView];
                         break;
-                    case 1://一般彈窗
-                        [weakSelf checkDefaultPopViewDate];
+                    case 1://预热彈窗
+                        [weakSelf directToShowDefaultPopView];
                         break;
-                    case 2://月分红
-                        [weakSelf checkYenFenHong];
+                    case 2://活动彈窗
+                        [weakSelf loadSevenXiData];// 七夕
                         break;
-//                    case 3://七夕
-//                        [weakSelf checkSevenXiDate:@""];
+                    case 3://不在预热也不在活动, 但有配置(月工资弹窗)
+                        [weakSelf directToShowYenFenHongPopView];
+                    case 4://今天不用再弹弹窗 (什么弹窗都不出现了)
                         break;
                     default:
                         break;
@@ -172,6 +93,46 @@ static BTTActivityManager * sharedSingleton;
                     completionBlock(nil,[error description]);
                 }
             }
+
+//            if (result.body[@"isShow"])//0 不弹窗,1五重礼,2月分红
+//            {
+//                if (result.body[@"image"]){
+//                    weakSelf.imageUrlString = result.body[@"image"];
+//                }
+//                if (result.body[@"link"]){
+//                    weakSelf.linkString = result.body[@"link"];
+//                }
+//                NSNumber *iSshowNumber = [result.body valueForKey:@"isShow"];
+//                int isShowType = [iSshowNumber intValue];
+//                //测试
+////                 isShowType = 1;
+//                switch (isShowType) {
+//                    case 0://不弹窗
+//                        break;
+//                    case 1://一般彈窗
+//                        [weakSelf directToShowDefaultPopView];
+//                        break;
+//                    case 2://月分红
+//                        [weakSelf directToShowYenFenHongPopView];
+//                        break;
+////                    case 3://七夕
+////                        [weakSelf directToShowSevenXiPopView:@""];
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                if (completionBlock)
+//                {
+//                    NSString * isShowString = [NSString stringWithFormat:@"%d",isShowType];
+//                    completionBlock(isShowString,[error description]);
+//                }
+//
+//            } else {
+//                if (completionBlock)
+//                {
+//                    completionBlock(nil,[error description]);
+//                }
+//            }
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
             if (completionBlock)
@@ -192,17 +153,31 @@ static BTTActivityManager * sharedSingleton;
 //            //TODO: 判斷有無局數 有七夕彈窗 沒有走彈窗接口
 //            NSString * playedNumStr = result.body[@"下注局數"];
 //            if ([playedNumStr integerValue] > 0) {
-//                [weakSelf checkSevenXiDate:playedNumStr];
+//                [weakSelf directToShowSevenXiPopView:playedNumStr];
 //            } else {
-                [self checkPopViewWithCompletionBlock:nil];
+                [self directToShowSevenXiPopView:@""];
 //            }
 //        } else {
 //            [weakSelf checkPopViewWithCompletionBlock:nil];
 //        }
 //    }];
 }
+#pragma mark - 检查七夕预热弹窗是否已启用过
+-(void)directToShowSevenXiPopView:(NSString *)playedNumStr {
+    [self showSevenXiPopView:playedNumStr];
+}
 
-- (void)showSevenXiPriHotPopView:(NSString *)playedNumStr {
+#pragma mark - 检查Default弹窗是否已启用过
+-(void)directToShowDefaultPopView {
+    [self showDefaultPopView];
+}
+
+#pragma mark - 檢查月分彈窗
+-(void)directToShowYenFenHongPopView {
+    [self loadYenFenHong];
+}
+
+- (void)showSevenXiPopView:(NSString *)playedNumStr {
     BTTSevenXiPriHotPopView *alertView = [BTTSevenXiPriHotPopView viewFromXib];
     [alertView configForContent:playedNumStr];
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
@@ -217,6 +192,7 @@ static BTTActivityManager * sharedSingleton;
         [popView dismiss];
     };
     alertView.btnBlock = ^(UIButton * _Nullable btn) {
+        [popView dismiss];
         BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";

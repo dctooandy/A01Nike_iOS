@@ -144,10 +144,8 @@
 //        [self loadBiBiCun];
 //    }
     
-    //七夕
-    [[BTTActivityManager sharedInstance] loadSevenXiData];
-    //其他彈窗
-//    [[BTTActivityManager sharedInstance] checkPopViewWithCompletionBlock:nil];
+    //彈窗集成
+    [[BTTActivityManager sharedInstance] checkPopViewWithCompletionBlock:nil];
     
     [BTTHttpManager requestUnReadMessageNum:nil];
     
@@ -172,11 +170,9 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTSaveMoneyTimesKey];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTNicknameCache];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBiBiCunDate];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowYuFenHong];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTBeforeLoginDate];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowSevenXi];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTRegistDate];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTShowDefaultPopDate];
             [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
             [BTTUserStatusManager logoutSuccess];
         }
