@@ -12,10 +12,12 @@
 #import "BTTDefaultPopView.h"
 #import "BTTYueFenHongPopView.h"
 #import "BTTYenFenHongModel.h"
+#import "BTTPopViewModel.h"
 
 @interface BTTActivityManager()
 @property(nonatomic,strong)NSString * imageUrlString;
 @property(nonatomic,strong)NSString * linkString;
+@property(nonatomic,strong)NSString * titleString;
 @end
 @implementation BTTActivityManager
 static BTTActivityManager * sharedSingleton;
@@ -52,16 +54,19 @@ static BTTActivityManager * sharedSingleton;
 //            2. 活动时间内
 //            3. 不在预热也不在活动, 但有配置 (月工资弹窗)
 //            4. 今天不用再弹弹窗 (什么弹窗都不出现了)
-            if (result.body[@"isShow"])
+            BTTPopViewModel * model = [BTTPopViewModel yy_modelWithJSON:result.body];
+            if (model.isShow)
             {
-                if (result.body[@"image"]){
-                    weakSelf.imageUrlString = result.body[@"image"];
+                if (model.image){
+                    weakSelf.imageUrlString = model.image;
                 }
-                if (result.body[@"link"]){
-                    weakSelf.linkString = result.body[@"link"];
+                if (model.link){
+                    weakSelf.linkString = model.link;
                 }
-                NSNumber *iSshowNumber = [result.body valueForKey:@"isShow"];
-                int isShowType = [iSshowNumber intValue];
+                if (model.title){
+                    weakSelf.titleString = model.title;
+                }
+                int isShowType =[model.isShow intValue];
                 //测试
 //                isShowType = 1;
                 switch (isShowType) {
@@ -224,7 +229,7 @@ static BTTActivityManager * sharedSingleton;
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
         vc.webConfigModel.url = self.linkString;
-        vc.webConfigModel.title = @"呼朋唤友彩金拿不停";
+        vc.webConfigModel.title = self.titleString;
         [[weakSelf currentViewController].navigationController pushViewController:vc animated:YES];
     };
 }

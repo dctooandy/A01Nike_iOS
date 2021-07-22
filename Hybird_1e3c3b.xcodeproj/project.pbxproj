@@ -782,6 +782,7 @@
 		76756ED326A654FD0065F99B /* IVHttpManager+Property.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756ED226A654FD0065F99B /* IVHttpManager+Property.m */; };
 		76756F8626A6C5790065F99B /* BTTDefaultPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756F8326A6C5780065F99B /* BTTDefaultPopView.xib */; };
 		76756F8726A6C5790065F99B /* BTTDefaultPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756F8526A6C5790065F99B /* BTTDefaultPopView.m */; };
+		7675705A26A9657A0065F99B /* BTTPopViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675705926A9657A0065F99B /* BTTPopViewModel.m */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
@@ -2152,6 +2153,8 @@
 		76756F8326A6C5780065F99B /* BTTDefaultPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDefaultPopView.xib; sourceTree = "<group>"; };
 		76756F8426A6C5790065F99B /* BTTDefaultPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDefaultPopView.h; sourceTree = "<group>"; };
 		76756F8526A6C5790065F99B /* BTTDefaultPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDefaultPopView.m; sourceTree = "<group>"; };
+		7675705826A9657A0065F99B /* BTTPopViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPopViewModel.h; sourceTree = "<group>"; };
+		7675705926A9657A0065F99B /* BTTPopViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPopViewModel.m; sourceTree = "<group>"; };
 		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
 		76C9F150265E404B0002591D /* CNPayOrderModelV2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayOrderModelV2.m; sourceTree = "<group>"; };
 		76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatPopView.xib; sourceTree = "<group>"; };
@@ -4043,6 +4046,8 @@
 				3A929414219BFEE100764E7E /* BTTCreateAPIModel.m */,
 				41C53A9B25A851B400CFA3A1 /* BTTYenFenHongModel.h */,
 				41C53A9A25A851B400CFA3A1 /* BTTYenFenHongModel.m */,
+				7675705826A9657A0065F99B /* BTTPopViewModel.h */,
+				7675705926A9657A0065F99B /* BTTPopViewModel.m */,
 				414AAA252602021100518D32 /* BTTFirstWinningListModel.h */,
 				414AAA262602021100518D32 /* BTTFirstWinningListModel.m */,
 			);
@@ -5901,6 +5906,7 @@
 				3AA7892321FFF2580047A372 /* SDWebImageDownloader.m in Sources */,
 				3A37E1392164A29600FB13A1 /* BTTRefreshGIFHeader.m in Sources */,
 				D599251421AE5AF6001E885A /* CNPayNormalTF.m in Sources */,
+				7675705A26A9657A0065F99B /* BTTPopViewModel.m in Sources */,
 				4146810626999F250093B610 /* BTTBindNameAndPhonePopView.m in Sources */,
 				3AD9CF72216F3D6800685B43 /* BTTHomePageAppsCell.m in Sources */,
 				3A7391CC230CD12A00E2DFD5 /* BTTRegisterCheckPopView.m in Sources */,
