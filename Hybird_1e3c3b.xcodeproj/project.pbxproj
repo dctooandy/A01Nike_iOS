@@ -779,7 +779,6 @@
 		76756EA826A57AC80065F99B /* BTTActivityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756EA726A57AC80065F99B /* BTTActivityManager.m */; };
 		76756EAE26A582130065F99B /* BTTSevenXiPriHotPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756EAC26A582130065F99B /* BTTSevenXiPriHotPopView.m */; };
 		76756EAF26A582130065F99B /* BTTSevenXiPriHotPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756EAD26A582130065F99B /* BTTSevenXiPriHotPopView.xib */; };
-		76756ED326A654FD0065F99B /* IVHttpManager+Property.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756ED226A654FD0065F99B /* IVHttpManager+Property.m */; };
 		76756F8626A6C5790065F99B /* BTTDefaultPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756F8326A6C5780065F99B /* BTTDefaultPopView.xib */; };
 		76756F8726A6C5790065F99B /* BTTDefaultPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756F8526A6C5790065F99B /* BTTDefaultPopView.m */; };
 		7675705A26A9657A0065F99B /* BTTPopViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675705926A9657A0065F99B /* BTTPopViewModel.m */; };
@@ -2148,8 +2147,6 @@
 		76756EAB26A582120065F99B /* BTTSevenXiPriHotPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTSevenXiPriHotPopView.h; sourceTree = "<group>"; };
 		76756EAC26A582130065F99B /* BTTSevenXiPriHotPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTSevenXiPriHotPopView.m; sourceTree = "<group>"; };
 		76756EAD26A582130065F99B /* BTTSevenXiPriHotPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTSevenXiPriHotPopView.xib; sourceTree = "<group>"; };
-		76756ED126A654FD0065F99B /* IVHttpManager+Property.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IVHttpManager+Property.h"; sourceTree = "<group>"; };
-		76756ED226A654FD0065F99B /* IVHttpManager+Property.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "IVHttpManager+Property.m"; sourceTree = "<group>"; };
 		76756F8326A6C5780065F99B /* BTTDefaultPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDefaultPopView.xib; sourceTree = "<group>"; };
 		76756F8426A6C5790065F99B /* BTTDefaultPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDefaultPopView.h; sourceTree = "<group>"; };
 		76756F8526A6C5790065F99B /* BTTDefaultPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDefaultPopView.m; sourceTree = "<group>"; };
@@ -3197,8 +3194,6 @@
 				EA5F141F21A2AEC1004305A7 /* BTTUserStatusManager.m */,
 				76756EA626A57AC80065F99B /* BTTActivityManager.h */,
 				76756EA726A57AC80065F99B /* BTTActivityManager.m */,
-				76756ED126A654FD0065F99B /* IVHttpManager+Property.h */,
-				76756ED226A654FD0065F99B /* IVHttpManager+Property.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -6249,7 +6244,6 @@
 				3A7C0B0221E5CC43002658CC /* BTTBankUnionAppIconCell.m in Sources */,
 				3AB0684C21A3EA8500072FB7 /* BTTGamesHallModel.m in Sources */,
 				3AC3FFA4219ABEBF008AECCB /* BTTUnlockPopView.m in Sources */,
-				76756ED326A654FD0065F99B /* IVHttpManager+Property.m in Sources */,
 				413E3261251B3542000804E2 /* BTTPromoRecordController+LoadData.m in Sources */,
 				3AAFF88621D378E800F875B1 /* BTTMeSaveMoneyWechatCell.m in Sources */,
 				3A11AE4B21869B2200B1AFF4 /* BTTSettingsController.m in Sources */,
