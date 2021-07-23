@@ -15,9 +15,7 @@
 #import "BTTPopViewModel.h"
 
 @interface BTTActivityManager()
-@property(nonatomic,strong)NSString * imageUrlString;
-@property(nonatomic,strong)NSString * linkString;
-@property(nonatomic,strong)NSString * titleString;
+@property(nonatomic,strong)BTTPopViewModel * popModel;
 @end
 @implementation BTTActivityManager
 static BTTActivityManager * sharedSingleton;
@@ -54,74 +52,34 @@ static BTTActivityManager * sharedSingleton;
 //            2. 活动时间内
 //            3. 不在预热也不在活动, 但有配置 (月工资弹窗)
 //            4. 今天不用再弹弹窗 (什么弹窗都不出现了)
-            BTTPopViewModel * model = [BTTPopViewModel yy_modelWithJSON:result.body];
-            if (model.isShow)
-            {
-                if (model.image){
-                    weakSelf.imageUrlString = model.image;
-                }
-                if (model.link){
-                    weakSelf.linkString = model.link;
-                }
-                if (model.title){
-                    weakSelf.titleString = model.title;
-                }
-                int isShowType =[model.isShow intValue];
-                //测试
-//                isShowType = 1;
-                switch (isShowType) {
-                    case 0://没配置任何东西 (月工资弹窗)
-                        [weakSelf directToShowYenFenHongPopView];
-                        break;
-                    case 1://预热彈窗
-                        [weakSelf directToShowDefaultPopView];
-                        break;
-                    case 2://活动彈窗
-                        [weakSelf loadSevenXiData];// 七夕
-                        break;
-                    case 3://不在预热也不在活动, 但有配置(月工资弹窗)
-                        [weakSelf directToShowYenFenHongPopView];
-                    case 4://今天不用再弹弹窗 (什么弹窗都不出现了)
-                        break;
-                    default:
-                        break;
-                }
-                if (completionBlock)
-                {
-                    NSString * isShowString = [NSString stringWithFormat:@"%d",isShowType];
-                    completionBlock(isShowString,[error description]);
-                }
-                
-            } else {
-                if (completionBlock)
-                {
-                    completionBlock(nil,[error description]);
-                }
-            }
-
-//            if (result.body[@"isShow"])//0 不弹窗,1五重礼,2月分红
+            self.popModel = [BTTPopViewModel yy_modelWithJSON:result.body];
+//            if (model.isShow)
 //            {
-//                if (result.body[@"image"]){
-//                    weakSelf.imageUrlString = result.body[@"image"];
+//                if (model.image){
+//                    weakSelf.imageUrlString = model.image;
 //                }
-//                if (result.body[@"link"]){
-//                    weakSelf.linkString = result.body[@"link"];
+//                if (model.link){
+//                    weakSelf.linkString = model.link;
 //                }
-//                NSNumber *iSshowNumber = [result.body valueForKey:@"isShow"];
-//                int isShowType = [iSshowNumber intValue];
+//                if (model.title){
+//                    weakSelf.titleString = model.title;
+//                }
+//                int isShowType =[model.isShow intValue];
 //                //测试
-////                 isShowType = 1;
+////                isShowType = 1;
 //                switch (isShowType) {
-//                    case 0://不弹窗
-//                        break;
-//                    case 1://一般彈窗
-//                        [weakSelf directToShowDefaultPopView];
-//                        break;
-//                    case 2://月分红
+//                    case 0://没配置任何东西 (月工资弹窗)
 //                        [weakSelf directToShowYenFenHongPopView];
 //                        break;
-////                    case 3://七夕
-////                        [weakSelf directToShowSevenXiPopView:@""];
+//                    case 1://预热彈窗
+//                        [weakSelf directToShowDefaultPopView];
+//                        break;
+//                    case 2://活动彈窗
+//                        [weakSelf loadSevenXiData];// 七夕
+//                        break;
+//                    case 3://不在预热也不在活动, 但有配置(月工资弹窗)
+//                        [weakSelf directToShowYenFenHongPopView];
+//                    case 4://今天不用再弹弹窗 (什么弹窗都不出现了)
 //                        break;
 //                    default:
 //                        break;
@@ -138,6 +96,42 @@ static BTTActivityManager * sharedSingleton;
 //                    completionBlock(nil,[error description]);
 //                }
 //            }
+
+            if (self.popModel.isShow)//0 不弹窗,1五重礼,2月分红
+            {
+//                if (self.popModel.image){
+//                    weakSelf.imageUrlString = self.popModel.image;
+//                }
+//                if (self.popModel.link){
+//                    weakSelf.linkString = self.popModel.link;
+//                }
+                int isShowType = [self.popModel.isShow intValue];
+                //测试
+//                 isShowType = 1;
+                switch (isShowType) {
+                    case 0://不弹窗
+                        break;
+                    case 1://一般彈窗
+                        [weakSelf directToShowDefaultPopView];
+                        break;
+                    case 2://月分红
+                        [weakSelf directToShowYenFenHongPopView];
+                        break;
+                    default:
+                        break;
+                }
+                if (completionBlock)
+                {
+                    NSString * isShowString = [NSString stringWithFormat:@"%d",isShowType];
+                    completionBlock(isShowString,[error description]);
+                }
+
+            } else {
+                if (completionBlock)
+                {
+                    completionBlock(nil,[error description]);
+                }
+            }
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
             if (completionBlock)
@@ -199,7 +193,7 @@ static BTTActivityManager * sharedSingleton;
         BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
-        vc.webConfigModel.url = self.linkString;
+        vc.webConfigModel.url = self.popModel.link;
         vc.webConfigModel.title = @"七夕鹊桥会~918给您搭桥了";
         [[weakSelf currentViewController].navigationController pushViewController:vc animated:YES];
     };
@@ -208,7 +202,7 @@ static BTTActivityManager * sharedSingleton;
 #pragma mark - 基礎彈窗
 - (void)showDefaultPopView {
     BTTDefaultPopView *alertView = [BTTDefaultPopView viewFromXib];
-    [alertView configForContent:self.imageUrlString];
+    [alertView configForContent:self.popModel.image];
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
     
     popView.isClickBGDismiss = YES;
@@ -226,8 +220,8 @@ static BTTActivityManager * sharedSingleton;
         BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
-        vc.webConfigModel.url = self.linkString;
-        vc.webConfigModel.title = self.titleString;
+        vc.webConfigModel.url = self.popModel.link;
+//        vc.webConfigModel.title = self.titleString;
         [[weakSelf currentViewController].navigationController pushViewController:vc animated:YES];
     };
 }
