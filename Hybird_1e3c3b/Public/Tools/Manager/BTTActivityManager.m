@@ -46,25 +46,15 @@ static BTTActivityManager * sharedSingleton;
         
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-//            0722 isshow
-//            0. 没配置任何东西 (月工资弹窗)
+//            0723 isshow
 //            1. 预热时间内
 //            2. 活动时间内
 //            3. 不在预热也不在活动, 但有配置 (月工资弹窗)
 //            4. 今天不用再弹弹窗 (什么弹窗都不出现了)
             self.popModel = [BTTPopViewModel yy_modelWithJSON:result.body];
-//            if (model.isShow)
+//            if (self.popModel.isShow)
 //            {
-//                if (model.image){
-//                    weakSelf.imageUrlString = model.image;
-//                }
-//                if (model.link){
-//                    weakSelf.linkString = model.link;
-//                }
-//                if (model.title){
-//                    weakSelf.titleString = model.title;
-//                }
-//                int isShowType =[model.isShow intValue];
+//                int isShowType =[self.popModel.isShow intValue];
 //                //测试
 ////                isShowType = 1;
 //                switch (isShowType) {

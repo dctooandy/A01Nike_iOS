@@ -19,6 +19,14 @@
 
 @property (nonatomic, copy) NSString *image;
 
+@property (nonatomic, copy) NSString *preStartDate;
+
+@property (nonatomic, copy) NSString *preEndDate;
+
+@property (nonatomic, copy) NSString *startDate;
+
+@property (nonatomic, copy) NSString *endDate;
+
 
 @end
 
