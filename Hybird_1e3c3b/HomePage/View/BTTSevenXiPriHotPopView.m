@@ -30,8 +30,15 @@
 - (void)configForContent:(NSString *)sender
 {
     if (sender.length > 0){
-        //TODO: 把局數和局兩部分字體大小顏色改下
-        self.contentLabel.text = [NSString stringWithFormat:@"%@局", sender];
+        NSString *string = [NSString stringWithFormat:@"%@局", sender];
+        NSMutableAttributedString *myString = [[NSMutableAttributedString alloc] initWithString:string];
+        NSRange range = [string rangeOfString:@"局"];
+        [myString addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor]} range:range];
+        
+        range = [string rangeOfString:sender];
+        [myString addAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:26], NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#e14358"]} range:range];
+        self.contentLabel.attributedText = myString;
+        
         [self.textBgView setHidden:NO];
         [self.normalBgView setHidden:YES];
     }else{

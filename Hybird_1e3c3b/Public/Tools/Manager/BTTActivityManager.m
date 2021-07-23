@@ -150,22 +150,20 @@ static BTTActivityManager * sharedSingleton;
 
 #pragma mark - 七夕
 -(void)loadSevenXiData {
-//    NSMutableDictionary *params = @{}.mutableCopy;
-//    weakSelf(weakSelf)
-//    [IVNetwork requestPostWithUrl:BTTSevenXiDataBridge paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-//        IVJResponseObject *result = response;
-//        if ([result.head.errCode isEqualToString:@"0000"]) {
-//            //TODO: 判斷有無局數 有七夕彈窗 沒有走彈窗接口
-//            NSString * playedNumStr = result.body[@"下注局數"];
-//            if ([playedNumStr integerValue] > 0) {
-//                [weakSelf directToShowSevenXiPopView:playedNumStr];
-//            } else {
-                [self directToShowSevenXiPopView:@""];
-//            }
-//        } else {
-//            [weakSelf checkPopViewWithCompletionBlock:nil];
-//        }
-//    }];
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTSevenXiMyData paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString * playedNumStr = result.body[@"accumulative"];
+            if ([playedNumStr integerValue] > 0) {
+                [weakSelf directToShowSevenXiPopView:playedNumStr];
+            } else {
+                [weakSelf directToShowSevenXiPopView:@""];
+            }
+        } else {
+            [weakSelf checkPopViewWithCompletionBlock:nil];
+        }
+    }];
 }
 #pragma mark - 检查七夕预热弹窗是否已启用过
 -(void)directToShowSevenXiPopView:(NSString *)playedNumStr {
