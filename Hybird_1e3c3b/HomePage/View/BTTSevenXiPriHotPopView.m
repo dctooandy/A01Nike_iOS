@@ -27,15 +27,15 @@
     [super awakeFromNib];
 }
 
-- (void)configForContent:(NSString *)sender
+- (void)configForContent:(NSNumber *)sender
 {
-    if (sender.length > 0){
+    if (sender > 0){
         NSString *string = [NSString stringWithFormat:@"%@局", sender];
         NSMutableAttributedString *myString = [[NSMutableAttributedString alloc] initWithString:string];
         NSRange range = [string rangeOfString:@"局"];
         [myString addAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor]} range:range];
         
-        range = [string rangeOfString:sender];
+        range = [string rangeOfString:[NSString stringWithFormat:@"%@", sender]];
         [myString addAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:26], NSForegroundColorAttributeName:[UIColor colorWithHexString:@"#e14358"]} range:range];
         self.contentLabel.attributedText = myString;
         

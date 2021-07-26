@@ -571,11 +571,11 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 #define BTTDragonBoatCurrRound                     @"_extra_/api/v1/activity/dragon-boat-festival-2021/currRound"
 #define BTTDragonBoatAssignLottery                 @"_extra_/api/v1/activity/dragon-boat-festival-2021/assignLottery"
 //七夕活动用
-#define BTTSevenXiMyData                           @"_extra_/api/v1/activity/xiqi/my-rank"
+#define BTTSevenXiMyData                           @"_extra_/api/v1/activity/qixi/my-rank"
 //WMS弹窗查询(新)
-//#define BTTCheckPopView                            @"_extra_/api/v1/activity/common-window/window-popup"
+#define BTTCheckPopView                            @"_extra_/api/v1/activity/common-window/window-popup"
 //WMS弹窗查询(舊)
-#define BTTCheckPopView                            @"_extra_/api/v1/activity/five-lottery/windows-popup"
+//#define BTTCheckPopView                            @"_extra_/api/v1/activity/five-lottery/windows-popup"
 
 /********************************************常用宏*********************************************************/
 

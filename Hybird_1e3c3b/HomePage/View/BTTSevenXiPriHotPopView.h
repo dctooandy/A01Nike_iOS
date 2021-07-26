@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTSevenXiPriHotPopView : BTTBaseAnimationPopView
 
-- (void)configForContent:(NSString *)sender;
+- (void)configForContent:(NSNumber *)sender;
 
 @end
 
