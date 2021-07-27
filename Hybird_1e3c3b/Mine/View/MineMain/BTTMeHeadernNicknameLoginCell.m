@@ -8,7 +8,8 @@
 
 #import "BTTMeHeadernNicknameLoginCell.h"
 #import "TXScrollLabelView.h"
-
+#import "BTTLockButtonView.h"
+#import "BTTUserForzenManager.h"
 @interface BTTMeHeadernNicknameLoginCell ()<TXScrollLabelViewDelegate>
 
 @property (nonatomic, strong) TXScrollLabelView *scrollLabelView;
@@ -22,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *liCaiLabel;
 @property (weak, nonatomic) IBOutlet UILabel *liCaiPlusLabel;
 @property (weak, nonatomic) IBOutlet UILabel *symbolPlusLabel;
+@property (weak, nonatomic) IBOutlet UIView *leftLockView;
+@property (weak, nonatomic) IBOutlet UIView *rightLockView;
 
 @end
 
@@ -34,6 +37,7 @@
     self.amountLabel.adjustsFontSizeToFitWidth = true;
     self.liCaiLabel.adjustsFontSizeToFitWidth = true;
     self.liCaiPlusLabel.adjustsFontSizeToFitWidth = true;
+    [self setupIconview];
 }
 
 - (void)setNoticeStr:(NSString *)noticeStr {
@@ -52,7 +56,42 @@
         [_scrollLabelView beginScrolling];
     }
 }
-
+- (void)setupIconview
+{
+    BTTLockButtonView * leftBtnView = [BTTLockButtonView viewFromXib];
+    [_leftLockView addSubview:leftBtnView];
+    [leftBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
+    leftBtnView.tapLock = ^{
+        if ([IVNetwork savedUserInfo]) {
+            [[BTTUserForzenManager sharedInstance] checkUserForzen];
+        }
+    };
+    BTTLockButtonView * rightBtnView = [BTTLockButtonView viewFromXib];
+    [_rightLockView addSubview:rightBtnView];
+    [rightBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
+    rightBtnView.tapLock = ^{
+        if ([IVNetwork savedUserInfo]) {
+            [[BTTUserForzenManager sharedInstance] checkUserForzen];
+        }
+    };
+}
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    if (UserForzenStatus)
+    {
+        _leftLockView.hidden = NO;
+        _rightLockView.hidden = NO;
+    }else
+    {
+        _leftLockView.hidden = YES;
+        _rightLockView.hidden = YES;
+    }
+}
 - (void)setTotalAmount:(NSString *)totalAmount {
     _totalAmount = totalAmount;
     self.amountLabel.text = _totalAmount;

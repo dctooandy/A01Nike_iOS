@@ -229,11 +229,6 @@
                 <constraint firstItem="nOk-tp-Pj9" firstAttribute="top" secondItem="osz-Ca-xMF" secondAttribute="bottom" id="ylZ-7c-LBo"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="subviews">
-                    <exclude reference="rgd-SX-t7i"/>
-                </mask>
-            </variation>
             <connections>
                 <outlet property="activityImage" destination="wC2-z6-3Q6" id="W6f-ew-nfj"/>
                 <outlet property="contentLabel" destination="nOk-tp-Pj9" id="zyn-Sp-juh"/>
