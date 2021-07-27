@@ -55,13 +55,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rgd-SX-t7i">
-                    <rect key="frame" x="311.5" y="212.5" width="20" height="19.5"/>
+                    <rect key="frame" x="168" y="733.5" width="39" height="39"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="rgd-SX-t7i" secondAttribute="height" multiplier="1:1" id="ccH-xd-JLE"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                    <state key="normal" backgroundImage="nav_link_close.png">
+                    <state key="normal" backgroundImage="userForzenClose">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
@@ -175,7 +175,6 @@
                 <constraint firstItem="XzQ-0t-iFM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4vS-YT-15c"/>
                 <constraint firstItem="wC2-z6-3Q6" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="55O-3V-pR8"/>
                 <constraint firstItem="myV-rA-O0l" firstAttribute="trailing" secondItem="7rv-tE-4zx" secondAttribute="trailing" id="5f5-Uk-6km"/>
-                <constraint firstItem="rgd-SX-t7i" firstAttribute="top" secondItem="wC2-z6-3Q6" secondAttribute="top" constant="10" id="6gM-V6-hrG"/>
                 <constraint firstItem="MxJ-qC-dz6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="71Q-N3-Ji6"/>
                 <constraint firstItem="7rv-tE-4zx" firstAttribute="height" secondItem="wC2-z6-3Q6" secondAttribute="height" multiplier="0.1" id="83s-cc-t63"/>
                 <constraint firstItem="v4K-eG-E4Z" firstAttribute="width" secondItem="XzQ-0t-iFM" secondAttribute="width" id="86c-Lk-YpL"/>
@@ -197,6 +196,7 @@
                 <constraint firstItem="Baa-mS-x3o" firstAttribute="trailing" secondItem="wC2-z6-3Q6" secondAttribute="trailing" id="LfK-w5-DbU"/>
                 <constraint firstItem="ACv-74-Cht" firstAttribute="height" secondItem="wC2-z6-3Q6" secondAttribute="height" multiplier="0.0407332" id="N5A-UP-CgS"/>
                 <constraint firstItem="Baa-mS-x3o" firstAttribute="top" secondItem="wC2-z6-3Q6" secondAttribute="top" id="N7a-IL-zRq"/>
+                <constraint firstItem="rgd-SX-t7i" firstAttribute="top" secondItem="wC2-z6-3Q6" secondAttribute="bottom" constant="40" id="RSp-zb-ACy"/>
                 <constraint firstItem="pAT-ey-2ZW" firstAttribute="height" secondItem="wC2-z6-3Q6" secondAttribute="height" multiplier="0.0407332" id="SBi-5P-wtn"/>
                 <constraint firstItem="n3m-XR-0xp" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="SHs-91-Kf7"/>
                 <constraint firstItem="JrG-Y4-CBu" firstAttribute="trailing" secondItem="7rv-tE-4zx" secondAttribute="trailing" id="Tx9-LJ-QEm"/>
@@ -206,7 +206,7 @@
                 <constraint firstItem="pAT-ey-2ZW" firstAttribute="top" secondItem="JrG-Y4-CBu" secondAttribute="bottom" id="Z3c-VZ-OLe"/>
                 <constraint firstItem="zIJ-YG-b1b" firstAttribute="leading" secondItem="rig-oG-MgB" secondAttribute="trailing" id="bb7-bg-lPJ"/>
                 <constraint firstItem="v4K-eG-E4Z" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="dex-X2-Kcm"/>
-                <constraint firstItem="rgd-SX-t7i" firstAttribute="height" secondItem="wC2-z6-3Q6" secondAttribute="height" multiplier="0.04" id="eb7-1m-ai1"/>
+                <constraint firstItem="rgd-SX-t7i" firstAttribute="height" secondItem="wC2-z6-3Q6" secondAttribute="height" multiplier="0.08" id="eb7-1m-ai1"/>
                 <constraint firstItem="7rv-tE-4zx" firstAttribute="trailing" secondItem="wC2-z6-3Q6" secondAttribute="trailing" constant="-20" id="fNX-El-Bzy"/>
                 <constraint firstItem="rig-oG-MgB" firstAttribute="top" secondItem="wC2-z6-3Q6" secondAttribute="top" id="g0r-KN-eAn"/>
                 <constraint firstItem="MxJ-qC-dz6" firstAttribute="height" secondItem="wC2-z6-3Q6" secondAttribute="height" multiplier="0.07" id="iH3-Bk-TPn"/>
@@ -217,7 +217,7 @@
                 <constraint firstItem="wC2-z6-3Q6" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.82" id="lS6-Mc-qLh"/>
                 <constraint firstItem="nOk-tp-Pj9" firstAttribute="leading" secondItem="zIJ-YG-b1b" secondAttribute="leading" id="nNV-rW-R9g"/>
                 <constraint firstItem="pAT-ey-2ZW" firstAttribute="bottom" secondItem="XzQ-0t-iFM" secondAttribute="top" id="nfK-Ov-GgE"/>
-                <constraint firstItem="rgd-SX-t7i" firstAttribute="trailing" secondItem="wC2-z6-3Q6" secondAttribute="trailing" constant="-10" id="q3g-nP-V62"/>
+                <constraint firstItem="rgd-SX-t7i" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="paN-lq-gQt"/>
                 <constraint firstItem="myV-rA-O0l" firstAttribute="top" secondItem="n3m-XR-0xp" secondAttribute="bottom" id="qeW-8M-PMT"/>
                 <constraint firstItem="osz-Ca-xMF" firstAttribute="height" secondItem="wC2-z6-3Q6" secondAttribute="height" multiplier="0.0101833" id="s53-Y6-ina"/>
                 <constraint firstItem="JrG-Y4-CBu" firstAttribute="leading" secondItem="7rv-tE-4zx" secondAttribute="leading" id="uGO-eJ-jwe"/>
@@ -239,7 +239,7 @@
     </objects>
     <resources>
         <image name="b-r-icon" width="252" height="38.5"/>
-        <image name="nav_link_close.png" width="17" height="22"/>
+        <image name="userForzenClose" width="37.5" height="37.5"/>
         <image name="userForzenPopViewBG" width="310.5" height="430"/>
         <image name="y-r-icon" width="252" height="38.5"/>
         <systemColor name="systemBackgroundColor">
