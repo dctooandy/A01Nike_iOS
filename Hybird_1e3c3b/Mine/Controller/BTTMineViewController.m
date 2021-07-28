@@ -59,6 +59,7 @@
 #import "USDTBuyController.h"
 #import "BTTCustomerReportController.h"
 #import "BTTLiCaiViewController.h"
+#import "BTTUserForzenManager.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -480,47 +481,52 @@
     }
     if (indexPath.row == self.saveMoneyCount + 3) {
         //取款
-        if (self.isCompletePersonalInfo) {
-            
-            if ([IVNetwork savedUserInfo].mobileNoBind != 1) {
-                BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-                vc.mobileCodeType = BTTSafeVerifyTypeBindMobile;
-                vc.showNotice = isUSDTAcc;
-                vc.isWithdrawIn = true;
-                [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
-                [self.navigationController pushViewController:vc animated:YES];
-            } else if ([IVNetwork savedUserInfo].bankCardNum > 0
-                || [IVNetwork savedUserInfo].usdtNum > 0
-                || [IVNetwork savedUserInfo].bfbNum > 0
-                || [IVNetwork savedUserInfo].dcboxNum > 0) {
+        if (UserForzenStatus)
+        {
+            [[BTTUserForzenManager sharedInstance] checkUserForzen];
+        }else{
+            if (self.isCompletePersonalInfo) {
                 
-                NSInteger usdtCount = [IVNetwork savedUserInfo].usdtNum;
-                NSInteger dcboxCount = [IVNetwork savedUserInfo].dcboxNum;
-                NSInteger btcCount = [IVNetwork savedUserInfo].btcNum;
-                BOOL isBlackNineteen = [[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"];
-                
-                if (isBlackNineteen && usdtCount == 0 && dcboxCount == 0 && btcCount == 0) {
-                    [MBProgressHUD showMessagNoActivity:@"请先绑定小金库，USDT钱包或BTC钱包" toView:nil];
+                if ([IVNetwork savedUserInfo].mobileNoBind != 1) {
+                    BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
+                    vc.mobileCodeType = BTTSafeVerifyTypeBindMobile;
+                    vc.showNotice = isUSDTAcc;
+                    vc.isWithdrawIn = true;
+                    [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else if ([IVNetwork savedUserInfo].bankCardNum > 0
+                           || [IVNetwork savedUserInfo].usdtNum > 0
+                           || [IVNetwork savedUserInfo].bfbNum > 0
+                           || [IVNetwork savedUserInfo].dcboxNum > 0) {
+                    
+                    NSInteger usdtCount = [IVNetwork savedUserInfo].usdtNum;
+                    NSInteger dcboxCount = [IVNetwork savedUserInfo].dcboxNum;
+                    NSInteger btcCount = [IVNetwork savedUserInfo].btcNum;
+                    BOOL isBlackNineteen = [[IVNetwork savedUserInfo].depositLevel isEqualToString:@"-19"];
+                    
+                    if (isBlackNineteen && usdtCount == 0 && dcboxCount == 0 && btcCount == 0) {
+                        [MBProgressHUD showMessagNoActivity:@"请先绑定小金库，USDT钱包或BTC钱包" toView:nil];
+                        BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+                        vc.showNotice = isUSDTAcc;
+                        [self.navigationController pushViewController:vc animated:YES];
+                        return;
+                    }
+                    BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                } else {
+                    NSString * str = isUSDTAcc ? @"请先绑定钱包":@"请先绑定银行卡";
+                    [MBProgressHUD showMessagNoActivity:str toView:nil];
                     BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
                     vc.showNotice = isUSDTAcc;
                     [self.navigationController pushViewController:vc animated:YES];
-                    return;
                 }
-                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                [self.navigationController pushViewController:vc animated:YES];
                 
             } else {
-                NSString * str = isUSDTAcc ? @"请先绑定钱包":@"请先绑定银行卡";
-                [MBProgressHUD showMessagNoActivity:str toView:nil];
-                BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
-                vc.showNotice = isUSDTAcc;
+                [MBProgressHUD showMessagNoActivity:@"请先完善个人信息" toView:nil];
+                BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
             }
-            
-        } else {
-            [MBProgressHUD showMessagNoActivity:@"请先完善个人信息" toView:nil];
-            BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
         }
     } else if ((indexPath.row == self.saveMoneyCount + 4 && self.isOpenSellUsdt)) {
         //一键卖币
@@ -534,8 +540,13 @@
         }
     } else if ((indexPath.row == self.saveMoneyCount + 4 && !self.isOpenSellUsdt) || (indexPath.row == self.saveMoneyCount + 5 && self.isOpenSellUsdt)) {
         //洗碼
-        BTTXimaController *vc = [[BTTXimaController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        if (UserForzenStatus)
+        {
+            [[BTTUserForzenManager sharedInstance] checkUserForzen];
+        }else{
+            BTTXimaController *vc = [[BTTXimaController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     } else if ((indexPath.row == self.saveMoneyCount + 5 && !self.isOpenSellUsdt) || (indexPath.row == self.saveMoneyCount + 6 && self.isOpenSellUsdt)) {
         //銀行卡
         if (self.isCompletePersonalInfo) {
