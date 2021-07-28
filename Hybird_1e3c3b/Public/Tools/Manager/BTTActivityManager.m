@@ -138,7 +138,7 @@ static BTTActivityManager * sharedSingleton;
     [IVNetwork requestPostWithUrl:BTTSevenXiMyData paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSNumber * playedNum = result.body[@"accumulative"] != nil ? result.body[@"accumulative"]:@"";
+            NSNumber * playedNum = [result.body isKindOfClass:[NSArray class]] && [[NSMutableArray alloc] initWithArray:result.body].count==0 ? 0:result.body[@"accumulative"];
             if (playedNum > 0) {
                 [weakSelf directToShowSevenXiPopView:playedNum];
             } else {
