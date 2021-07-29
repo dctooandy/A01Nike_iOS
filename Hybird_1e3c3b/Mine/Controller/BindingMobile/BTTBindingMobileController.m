@@ -25,7 +25,6 @@
 #import "BTTAddUSDTController.h"
 #import "BTTHumanModifyCell.h"
 #import "BTTActionSheet.h"
-#import "CLive800Manager.h"
 #import "BTTDontUseRegularPhonePopView.h"
 
 @interface BTTBindingMobileController ()<BTTElementsFlowLayoutDelegate>
@@ -722,18 +721,7 @@
 }
 
 -(void)goToKeFu {
-    [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
-        if (errCode != CSServiceCode_Request_Suc) {//异常处理
-            BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
-                if (buttonIndex == 0) {
-                    [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
-                }else if (buttonIndex == 1){
-                    [[CLive800Manager sharedInstance] startLive800Chat:self];
-                }
-            }];
-            [actionSheet show];
-        }
-    }];
+    [LiveChat startKeFu:self];
 //    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
 //        if (errCode != CSServiceCode_Request_Suc) {//异常处理
 //            BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {

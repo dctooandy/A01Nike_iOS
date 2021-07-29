@@ -139,7 +139,6 @@ typedef enum {
 
 typedef void (^CompleteBlock)(IVJResponseObject *response);
 
-typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 /***********************************************存储关键字******************************************************/
 
@@ -163,9 +162,6 @@ typedef void (^BTTLive800ResponseBlock)(NSString *info);
 
 //Flurry
 #define FlurryKey                                  @"RY7GPP2V792PMZK3PYNX"
-
-//live800相关
-#define Live800SkillId                             @"10"
 
 #define BTTBannerDefaultWidth                      1280
 #define BTTBnnnerDefaultHeight                     440

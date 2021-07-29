@@ -9,7 +9,6 @@
 #import "BTTKSAddBfbWalletController.h"
 #import "CNPayConstant.h"
 #import "IVRsaEncryptWrapper.h"
-#import "CLive800Manager.h"
 
 @interface BTTKSAddBfbWalletController ()
 @property (weak, nonatomic) IBOutlet UIView *bindView;
@@ -27,11 +26,7 @@
 }
 
 - (void)contactService {
-    [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
-        if (errCode != CSServiceCode_Request_Suc) {//异常处理
-            [[CLive800Manager sharedInstance] startLive800Chat:self];
-        }
-    }];
+    [LiveChat startKeFu:self];
 //    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
 //        if (errCode != CSServiceCode_Request_Suc) {//异常处理
 //            [[CLive800Manager sharedInstance] startLive800Chat:self];

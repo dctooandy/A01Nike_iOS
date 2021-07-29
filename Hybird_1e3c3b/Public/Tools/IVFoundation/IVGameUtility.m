@@ -14,7 +14,6 @@
 #import "CNPayVC.h"
 #import "BTTTabbarController.h"
 #import "BTTLoginOrRegisterViewController.h"
-#import "CLive800Manager.h"
 #import "BTTCardInfosController.h"
 #import "BTTPersonalInfoController.h"
 @implementation IVGameUtility
@@ -137,11 +136,7 @@
             break;
         case IVGameForwardPageTypeCustomerService:
         {
-            [LiveChat startKeFu:gameController csServicecompleteBlock:^(CSServiceCode errCode) {
-                if (errCode != CSServiceCode_Request_Suc) {//异常处理
-                    [[CLive800Manager sharedInstance] startLive800Chat:gameController];
-                }
-            }];
+            [LiveChat startKeFu:gameController];
 //            [CSVisitChatmanager startWithSuperVC:gameController finish:^(CSServiceCode errCode) {
 //                if (errCode != CSServiceCode_Request_Suc) {//异常处理
 //                    [[CLive800Manager sharedInstance] startLive800Chat:gameController];
@@ -199,11 +194,7 @@
     UIViewController *vc =  (UIViewController *)webView.navigationDelegate;
     if ([navigationAction.request.URL.absoluteString containsString:@"nbapp://"]) {
         if ([[navigationAction.request.URL.absoluteString URLDecodedString] containsString:@"https://www.why918.com"]) {
-            [LiveChat startKeFu:(UIViewController *)webView.navigationDelegate csServicecompleteBlock:^(CSServiceCode errCode) {
-                if (errCode != CSServiceCode_Request_Suc) {
-                    [[CLive800Manager sharedInstance] startLive800Chat:(UIViewController *)webView.navigationDelegate];
-                }
-            }];
+            [LiveChat startKeFu:(UIViewController *)webView.navigationDelegate];
 //            [CSVisitChatmanager startWithSuperVC:(UIViewController *)webView.navigationDelegate finish:^(CSServiceCode errCode) {
 //                if (errCode != CSServiceCode_Request_Suc) {
 //                    [[CLive800Manager sharedInstance] startLive800Chat:(UIViewController *)webView.navigationDelegate];
