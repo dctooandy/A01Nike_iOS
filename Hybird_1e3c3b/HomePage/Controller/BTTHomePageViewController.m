@@ -40,8 +40,6 @@
 #import "BTTOtherGameCell.h"
 #import "BTTHotPromotionsCell.h"
 #import "BTTConsetiveWinsPopView.h"
-#import "BTTLive800ViewController.h"
-#import "CLive800Manager.h"
 #import "DSBRedBagPopView.h"
 #import "BTTUserStatusManager.h"
 #import "BTTChooseCurrencyPopView.h"

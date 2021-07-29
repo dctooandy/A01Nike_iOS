@@ -7,7 +7,6 @@
 //
 
 #import "BTTBishangStep1VC.h"
-#import "BTTLive800ViewController.h"
 
 @interface BTTBishangStep1VC ()
 
@@ -40,12 +39,7 @@
 }
 
 - (IBAction)confirmBtnClick:(UIButton *)sender {
-    NSLog(@"confirmBtnClick");
-    NSString *url = @"https://www.why918.com/chat/chatClient/chatbox.jsp?companyID=8990&configID=126&skillId=44";
-    BTTLive800ViewController *live800 = [[BTTLive800ViewController alloc] init];
-    live800.webConfigModel.url = url;
-    live800.webConfigModel.newView = YES;
-    [self pushViewController:live800];
+    [LiveChat startKeFu:self];
 }
 
 

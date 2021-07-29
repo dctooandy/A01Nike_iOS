@@ -14,7 +14,7 @@
 
 @implementation LiveChat
 
-+(void)startKeFu:(UIViewController *)vc csServicecompleteBlock:(CSServiceCompleteBlock)csServicecompleteBlock {
++(void)startKeFu:(UIViewController *)vc {
     CSChatInfo *info = [[CSChatInfo alloc]init];
     info.title = @"在线客服";//导航栏标题
     info.productId = [HAInitConfig productId];//产品ID
@@ -61,14 +61,14 @@
         [MBProgressHUD hideHUDForView:vc.view animated:true];
         if ([result.head.errCode isEqualToString:@"0000"]) {
             info.response = result.body;
-            [self testSpeed:info.response chatInfo:info vc:vc csServicecompleteBlock:csServicecompleteBlock];
+            [self testSpeed:info.response chatInfo:info vc:vc];
         } else {
-            csServicecompleteBlock(CSServiceCode_Request_Fail);
+            [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:vc.view duration:3];
         }
     }];
 }
 
-+(void)testSpeed:(NSDictionary *)response chatInfo:(CSChatInfo *)info vc:(UIViewController *)vc csServicecompleteBlock:(CSServiceCompleteBlock)csServicecompleteBlock{
++(void)testSpeed:(NSDictionary *)response chatInfo:(CSChatInfo *)info vc:(UIViewController *)vc {
     NSMutableArray * arr = [[NSMutableArray alloc] init];
     for (NSString * str in response[@"domainBakList"]) {
         if ([[str substringFromIndex:str.length-1] isEqualToString:@"/"]) {
@@ -82,7 +82,11 @@
             info.domainBakList = @[model.url];
         }
         [CSVisitChatmanager startWithSuperVC:vc chatInfo:info finish:^(CSServiceCode errCode) {
-            csServicecompleteBlock(errCode);
+            if (errCode != CSServiceCode_Request_Suc) {
+                [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:vc.view duration:3];
+            } else {
+                
+            }
         }];
     }];
 

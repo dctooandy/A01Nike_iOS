@@ -13,7 +13,6 @@
 #import "BTTMeMainModel.h"
 #import "BTTForgetPasswordController+LoadData.h"
 #import "BTTForgetPasswordStepTwoController.h"
-#import "CLive800Manager.h"
 #import "BTTForgetPasswordController+Nav.h"
 
 @interface BTTForgetPasswordController ()<BTTElementsFlowLayoutDelegate,UITextFieldDelegate>

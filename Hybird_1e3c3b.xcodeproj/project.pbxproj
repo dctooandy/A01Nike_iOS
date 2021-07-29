@@ -90,199 +90,6 @@
 		3A514E492186FCE800B83881 /* BTTXimaFooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A514E472186FCE800B83881 /* BTTXimaFooterCell.xib */; };
 		3A5AE4A222CDE5680013E8A3 /* BTTBishangStep1VC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5AE4A022CDE5680013E8A3 /* BTTBishangStep1VC.m */; };
 		3A5AE4A322CDE5680013E8A3 /* BTTBishangStep1VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE4A122CDE5680013E8A3 /* BTTBishangStep1VC.xib */; };
-		3A5AE65D22D6E22A0013E8A3 /* LIVChatFunctionBarColor.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE54F22D6E2280013E8A3 /* LIVChatFunctionBarColor.plist */; };
-		3A5AE65E22D6E22A0013E8A3 /* LIVEmotionBoardSendCell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55122D6E2280013E8A3 /* LIVEmotionBoardSendCell.nib */; };
-		3A5AE65F22D6E22A0013E8A3 /* LIVFileMessageContentView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55222D6E2280013E8A3 /* LIVFileMessageContentView.nib */; };
-		3A5AE66022D6E22A0013E8A3 /* LIVMoreBoardCell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55322D6E2280013E8A3 /* LIVMoreBoardCell.nib */; };
-		3A5AE66122D6E22A0013E8A3 /* LIVEmotionBoardCell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55422D6E2280013E8A3 /* LIVEmotionBoardCell.nib */; };
-		3A5AE66222D6E22A0013E8A3 /* LIVTextWithActivityIndicatorToast.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55522D6E2280013E8A3 /* LIVTextWithActivityIndicatorToast.nib */; };
-		3A5AE66322D6E22A0013E8A3 /* LIVRadioButton.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55622D6E2280013E8A3 /* LIVRadioButton.nib */; };
-		3A5AE66422D6E22A0013E8A3 /* LIVReceivedRobotMessageCell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55722D6E2280013E8A3 /* LIVReceivedRobotMessageCell.nib */; };
-		3A5AE66522D6E22A0013E8A3 /* LIVVoiceBoardViewController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55822D6E2280013E8A3 /* LIVVoiceBoardViewController.nib */; };
-		3A5AE66622D6E22A0013E8A3 /* LIVSingleImagePreviewController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55922D6E2280013E8A3 /* LIVSingleImagePreviewController.nib */; };
-		3A5AE66722D6E22A0013E8A3 /* LIVInformationNotificationMessageCell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55A22D6E2280013E8A3 /* LIVInformationNotificationMessageCell.nib */; };
-		3A5AE66822D6E22A0013E8A3 /* LIVLocationPreviewController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55B22D6E2280013E8A3 /* LIVLocationPreviewController.nib */; };
-		3A5AE66922D6E22A0013E8A3 /* LIVEvaluateLevel2Cell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55C22D6E2280013E8A3 /* LIVEvaluateLevel2Cell.nib */; };
-		3A5AE66A22D6E22A0013E8A3 /* LIVTimestampInCell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55D22D6E2280013E8A3 /* LIVTimestampInCell.nib */; };
-		3A5AE66B22D6E22A0013E8A3 /* LIVTextWithSmallIconToast.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55E22D6E2280013E8A3 /* LIVTextWithSmallIconToast.nib */; };
-		3A5AE66C22D6E22A0013E8A3 /* LIVTextWithIconToast.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE55F22D6E2280013E8A3 /* LIVTextWithIconToast.nib */; };
-		3A5AE66D22D6E22A0013E8A3 /* LIVSatisfactionEvaluationTableViewHeader.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56022D6E2280013E8A3 /* LIVSatisfactionEvaluationTableViewHeader.nib */; };
-		3A5AE66E22D6E22A0013E8A3 /* LIVSentMessageCell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56122D6E2280013E8A3 /* LIVSentMessageCell.nib */; };
-		3A5AE66F22D6E22A0013E8A3 /* LIVCollectionBoard.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56222D6E2280013E8A3 /* LIVCollectionBoard.nib */; };
-		3A5AE67022D6E22A0013E8A3 /* LIVBackButton.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56322D6E2280013E8A3 /* LIVBackButton.nib */; };
-		3A5AE67122D6E22A0013E8A3 /* LIVEvaluateCell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56422D6E2280013E8A3 /* LIVEvaluateCell.nib */; };
-		3A5AE67222D6E22A0013E8A3 /* LIVRobotRelatedQuestionCell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56522D6E2280013E8A3 /* LIVRobotRelatedQuestionCell.nib */; };
-		3A5AE67322D6E22A0013E8A3 /* LIVReceivedMessageCell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56622D6E2280013E8A3 /* LIVReceivedMessageCell.nib */; };
-		3A5AE67422D6E22A0013E8A3 /* LIVBackAlertViewController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56722D6E2280013E8A3 /* LIVBackAlertViewController.nib */; };
-		3A5AE67522D6E22A0013E8A3 /* LIVChatFunctionBar.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56822D6E2280013E8A3 /* LIVChatFunctionBar.nib */; };
-		3A5AE67622D6E22A0013E8A3 /* LIVAutoScrollTextViewController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56922D6E2280013E8A3 /* LIVAutoScrollTextViewController.nib */; };
-		3A5AE67722D6E22A0013E8A3 /* LIVSatisfactionEvaluationCommentCell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56A22D6E2280013E8A3 /* LIVSatisfactionEvaluationCommentCell.nib */; };
-		3A5AE67822D6E22A0013E8A3 /* LIVTextToast.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56B22D6E2280013E8A3 /* LIVTextToast.nib */; };
-		3A5AE67922D6E22A0013E8A3 /* LIVLocationMessageContentView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56C22D6E2280013E8A3 /* LIVLocationMessageContentView.nib */; };
-		3A5AE67A22D6E22A0013E8A3 /* LIVSatisfactionEvaluationItemCell.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56D22D6E2280013E8A3 /* LIVSatisfactionEvaluationItemCell.nib */; };
-		3A5AE67B22D6E22A0013E8A3 /* LIVVideoCameraViewController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56E22D6E2280013E8A3 /* LIVVideoCameraViewController.nib */; };
-		3A5AE67C22D6E22A0013E8A3 /* LIVVideoMessageContentView.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE56F22D6E2280013E8A3 /* LIVVideoMessageContentView.nib */; };
-		3A5AE67D22D6E22A0013E8A3 /* LIVVideoPlayerViewController.nib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57022D6E2280013E8A3 /* LIVVideoPlayerViewController.nib */; };
-		3A5AE67E22D6E22A0013E8A3 /* TZImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57122D6E2280013E8A3 /* TZImagePickerController.bundle */; };
-		3A5AE67F22D6E22A0013E8A3 /* Emotion.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57222D6E2280013E8A3 /* Emotion.plist */; };
-		3A5AE68022D6E22A0013E8A3 /* deleteButton_LIVEmotionBoard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57422D6E2280013E8A3 /* deleteButton_LIVEmotionBoard@2x.png */; };
-		3A5AE68122D6E22A0013E8A3 /* LIVVideoCamera_close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57522D6E2280013E8A3 /* LIVVideoCamera_close@3x.png */; };
-		3A5AE68222D6E22A0013E8A3 /* LIVMoreItem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57622D6E2280013E8A3 /* LIVMoreItem@2x.png */; };
-		3A5AE68322D6E22A0013E8A3 /* back-arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57722D6E2280013E8A3 /* back-arrow@3x.png */; };
-		3A5AE68422D6E22A0013E8A3 /* photo_sel_photoPickerVc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57822D6E2280013E8A3 /* photo_sel_photoPickerVc@2x.png */; };
-		3A5AE68522D6E22A0013E8A3 /* LIVSentMessageBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57922D6E2280013E8A3 /* LIVSentMessageBackground@2x.png */; };
-		3A5AE68622D6E22A0013E8A3 /* LIVFileMessage_TypeZip@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57A22D6E2280013E8A3 /* LIVFileMessage_TypeZip@3x.png */; };
-		3A5AE68722D6E22A0013E8A3 /* LIVReceivedMessageBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57B22D6E2280013E8A3 /* LIVReceivedMessageBackground@2x.png */; };
-		3A5AE68822D6E22A0013E8A3 /* LIVVideoCamera_flashOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57C22D6E2280013E8A3 /* LIVVideoCamera_flashOff@2x.png */; };
-		3A5AE68922D6E22A0013E8A3 /* LIVVideoCamera_OK@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57D22D6E2280013E8A3 /* LIVVideoCamera_OK@2x.png */; };
-		3A5AE68A22D6E22A0013E8A3 /* LIVAutoScrollTextViewShutdown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57E22D6E2280013E8A3 /* LIVAutoScrollTextViewShutdown@2x.png */; };
-		3A5AE68B22D6E22A0013E8A3 /* LIVFileMessage_TypeExcel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE57F22D6E2280013E8A3 /* LIVFileMessage_TypeExcel@3x.png */; };
-		3A5AE68C22D6E22A0013E8A3 /* sentVoicePlaying2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58022D6E2280013E8A3 /* sentVoicePlaying2@2x.png */; };
-		3A5AE68D22D6E22A0013E8A3 /* LIVRobotDisagreeIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58122D6E2280013E8A3 /* LIVRobotDisagreeIcon@3x.png */; };
-		3A5AE68E22D6E22A0013E8A3 /* LIVRadioButton_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58222D6E2280013E8A3 /* LIVRadioButton_selected@2x.png */; };
-		3A5AE68F22D6E22A0013E8A3 /* LIVRadioButton_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58322D6E2280013E8A3 /* LIVRadioButton_selected@3x.png */; };
-		3A5AE69022D6E22A0013E8A3 /* LIVAutoScrollTextView8.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58422D6E2280013E8A3 /* LIVAutoScrollTextView8.png */; };
-		3A5AE69122D6E22A0013E8A3 /* LIVRobotDisagreeIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58522D6E2280013E8A3 /* LIVRobotDisagreeIcon@2x.png */; };
-		3A5AE69222D6E22A0013E8A3 /* LIVFileMessage_TypeExcel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58622D6E2280013E8A3 /* LIVFileMessage_TypeExcel@2x.png */; };
-		3A5AE69322D6E22A0013E8A3 /* sentVoicePlaying2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58722D6E2280013E8A3 /* sentVoicePlaying2@3x.png */; };
-		3A5AE69422D6E22A0013E8A3 /* LIVVideoCamera_OK@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58822D6E2280013E8A3 /* LIVVideoCamera_OK@3x.png */; };
-		3A5AE69522D6E22A0013E8A3 /* LIVAutoScrollTextViewShutdown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58922D6E2280013E8A3 /* LIVAutoScrollTextViewShutdown@3x.png */; };
-		3A5AE69622D6E22A0013E8A3 /* LIVVideoCamera_flashOff@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58A22D6E2280013E8A3 /* LIVVideoCamera_flashOff@3x.png */; };
-		3A5AE69722D6E22A0013E8A3 /* LIVAutoScrollTextView9.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58B22D6E2280013E8A3 /* LIVAutoScrollTextView9.png */; };
-		3A5AE69822D6E22A0013E8A3 /* LIVReceivedMessageBackground@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58C22D6E2280013E8A3 /* LIVReceivedMessageBackground@3x.png */; };
-		3A5AE69922D6E22A0013E8A3 /* MMVideoPreviewPlayHL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58D22D6E2280013E8A3 /* MMVideoPreviewPlayHL@2x.png */; };
-		3A5AE69A22D6E22A0013E8A3 /* LIVFileMessage_TypeZip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58E22D6E2280013E8A3 /* LIVFileMessage_TypeZip@2x.png */; };
-		3A5AE69B22D6E22A0013E8A3 /* LIVSentMessageBackground@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE58F22D6E2280013E8A3 /* LIVSentMessageBackground@3x.png */; };
-		3A5AE69C22D6E22A0013E8A3 /* back-arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59022D6E2280013E8A3 /* back-arrow@2x.png */; };
-		3A5AE69D22D6E22A0013E8A3 /* LIVMoreItem@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59122D6E2280013E8A3 /* LIVMoreItem@3x.png */; };
-		3A5AE69E22D6E22A0013E8A3 /* photo_sel_previewVc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59222D6E2280013E8A3 /* photo_sel_previewVc@2x.png */; };
-		3A5AE69F22D6E22A0013E8A3 /* MMVideoPreviewPlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59322D6E2280013E8A3 /* MMVideoPreviewPlay@2x.png */; };
-		3A5AE6A022D6E22A0013E8A3 /* LIVVideoCamera_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59422D6E2280013E8A3 /* LIVVideoCamera_close@2x.png */; };
-		3A5AE6A122D6E22A0013E8A3 /* deleteButton_LIVEmotionBoard@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59522D6E2280013E8A3 /* deleteButton_LIVEmotionBoard@3x.png */; };
-		3A5AE6A222D6E22A0013E8A3 /* LIVLocationItem@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59622D6E2280013E8A3 /* LIVLocationItem@3x.png */; };
-		3A5AE6A322D6E22A0013E8A3 /* LIVVideoCamera_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59722D6E2280013E8A3 /* LIVVideoCamera_play@2x.png */; };
-		3A5AE6A422D6E22A0013E8A3 /* LIVFileMessage_TypeTxt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59822D6E2280013E8A3 /* LIVFileMessage_TypeTxt@2x.png */; };
-		3A5AE6A522D6E22A0013E8A3 /* receivedVoicePlaying2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59922D6E2280013E8A3 /* receivedVoicePlaying2@2x.png */; };
-		3A5AE6A622D6E22A0013E8A3 /* LIVAutoScrollTextView11.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59A22D6E2280013E8A3 /* LIVAutoScrollTextView11.png */; };
-		3A5AE6A722D6E22A0013E8A3 /* preview_original_def@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59B22D6E2280013E8A3 /* preview_original_def@2x.png */; };
-		3A5AE6A822D6E22A0013E8A3 /* LIVNavigationBackArrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59C22D6E2280013E8A3 /* LIVNavigationBackArrow@3x.png */; };
-		3A5AE6A922D6E22A0013E8A3 /* liv_radio_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59D22D6E2280013E8A3 /* liv_radio_unselected@2x.png */; };
-		3A5AE6AA22D6E22A0013E8A3 /* LIVRadioButton_unselected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59E22D6E2280013E8A3 /* LIVRadioButton_unselected@2x.png */; };
-		3A5AE6AB22D6E22A0013E8A3 /* voiceIcon_LIVVoiceBoard@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE59F22D6E2280013E8A3 /* voiceIcon_LIVVoiceBoard@3x.png */; };
-		3A5AE6AC22D6E22A0013E8A3 /* LIVAutoScrollTextView10.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5A022D6E2280013E8A3 /* LIVAutoScrollTextView10.png */; };
-		3A5AE6AD22D6E22A0013E8A3 /* voiceIcon_LIVVoiceBoard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5A122D6E2280013E8A3 /* voiceIcon_LIVVoiceBoard@2x.png */; };
-		3A5AE6AE22D6E22A0013E8A3 /* LIVRadioButton_unselected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5A222D6E2280013E8A3 /* LIVRadioButton_unselected@3x.png */; };
-		3A5AE6AF22D6E22A0013E8A3 /* photo_def_previewVc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5A322D6E2280013E8A3 /* photo_def_previewVc@2x.png */; };
-		3A5AE6B022D6E22A0013E8A3 /* liv_radio_unselected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5A422D6E2280013E8A3 /* liv_radio_unselected@3x.png */; };
-		3A5AE6B122D6E22A0013E8A3 /* LIVNavigationBackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5A522D6E2280013E8A3 /* LIVNavigationBackArrow@2x.png */; };
-		3A5AE6B222D6E22A0013E8A3 /* receivedVoicePlaying2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5A622D6E2280013E8A3 /* receivedVoicePlaying2@3x.png */; };
-		3A5AE6B322D6E22A0013E8A3 /* LIVFileMessage_TypeTxt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5A722D6E2280013E8A3 /* LIVFileMessage_TypeTxt@3x.png */; };
-		3A5AE6B422D6E22A0013E8A3 /* photo_original_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5A822D6E2280013E8A3 /* photo_original_sel@2x.png */; };
-		3A5AE6B522D6E22A0013E8A3 /* LIVVideoCamera_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5A922D6E2280013E8A3 /* LIVVideoCamera_play@3x.png */; };
-		3A5AE6B622D6E22A0013E8A3 /* LIVLocationItem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5AA22D6E2280013E8A3 /* LIVLocationItem@2x.png */; };
-		3A5AE6B722D6E22A0013E8A3 /* LIVWarningSmallIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5AB22D6E2280013E8A3 /* LIVWarningSmallIcon@3x.png */; };
-		3A5AE6B822D6E22A0013E8A3 /* LIVFileMessage_TypePPT@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5AC22D6E2280013E8A3 /* LIVFileMessage_TypePPT@3x.png */; };
-		3A5AE6B922D6E22A0013E8A3 /* LIVCameraItem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5AD22D6E2280013E8A3 /* LIVCameraItem@2x.png */; };
-		3A5AE6BA22D6E22A0013E8A3 /* sentVoicePlaying1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5AE22D6E2280013E8A3 /* sentVoicePlaying1@3x.png */; };
-		3A5AE6BB22D6E22A0013E8A3 /* LIVVideoMessage_PlayButtonIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5AF22D6E2280013E8A3 /* LIVVideoMessage_PlayButtonIcon.png */; };
-		3A5AE6BC22D6E22A0013E8A3 /* LIVVideoMessage_DefaultThumbnail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5B022D6E2280013E8A3 /* LIVVideoMessage_DefaultThumbnail@2x.png */; };
-		3A5AE6BD22D6E22A0013E8A3 /* sentVoicePlaying3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5B122D6E2280013E8A3 /* sentVoicePlaying3@2x.png */; };
-		3A5AE6BE22D6E22A0013E8A3 /* LIVWarningIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5B222D6E2280013E8A3 /* LIVWarningIcon@3x.png */; };
-		3A5AE6BF22D6E22A0013E8A3 /* photo_def_photoPickerVc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5B322D6E2280013E8A3 /* photo_def_photoPickerVc@2x.png */; };
-		3A5AE6C022D6E22A0013E8A3 /* LIVVideoRecorderItem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5B422D6E2280013E8A3 /* LIVVideoRecorderItem@2x.png */; };
-		3A5AE6C122D6E22A0013E8A3 /* LIVVideoMessage_PlayButtonIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5B522D6E2280013E8A3 /* LIVVideoMessage_PlayButtonIcon@3x.png */; };
-		3A5AE6C222D6E22A0013E8A3 /* liv_radio_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5B622D6E2280013E8A3 /* liv_radio_selected@3x.png */; };
-		3A5AE6C322D6E22A0013E8A3 /* LIVVoiceItem@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5B722D6E2280013E8A3 /* LIVVoiceItem@3x.png */; };
-		3A5AE6C422D6E22A0013E8A3 /* LIVEmotionItem@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5B822D6E2280013E8A3 /* LIVEmotionItem@3x.png */; };
-		3A5AE6C522D6E22A0013E8A3 /* LIVRobotRelatedQuestionIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5B922D6E2280013E8A3 /* LIVRobotRelatedQuestionIcon@2x.png */; };
-		3A5AE6C622D6E22A0013E8A3 /* nav_link_close@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5BA22D6E2280013E8A3 /* nav_link_close@3x.png */; };
-		3A5AE6C722D6E22A0013E8A3 /* LIVFileMessage_TypeWord@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5BB22D6E2280013E8A3 /* LIVFileMessage_TypeWord@2x.png */; };
-		3A5AE6C822D6E22A0013E8A3 /* liv_satisfactionr_circular_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5BC22D6E2280013E8A3 /* liv_satisfactionr_circular_selected@2x.png */; };
-		3A5AE6C922D6E22A0013E8A3 /* liv_satisfactionr_circular_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5BD22D6E2280013E8A3 /* liv_satisfactionr_circular_selected@3x.png */; };
-		3A5AE6CA22D6E22A0013E8A3 /* LIVFileMessage_TypeWord@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5BE22D6E2280013E8A3 /* LIVFileMessage_TypeWord@3x.png */; };
-		3A5AE6CB22D6E22A0013E8A3 /* preview_number_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5BF22D6E2280013E8A3 /* preview_number_icon@2x.png */; };
-		3A5AE6CC22D6E22A0013E8A3 /* nav_link_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5C022D6E2280013E8A3 /* nav_link_close@2x.png */; };
-		3A5AE6CD22D6E22A0013E8A3 /* LIVRobotRelatedQuestionIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5C122D6E2280013E8A3 /* LIVRobotRelatedQuestionIcon@3x.png */; };
-		3A5AE6CE22D6E22A0013E8A3 /* LIVEmotionItem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5C222D6E2280013E8A3 /* LIVEmotionItem@2x.png */; };
-		3A5AE6CF22D6E22A0013E8A3 /* LIVVoiceItem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5C322D6E2280013E8A3 /* LIVVoiceItem@2x.png */; };
-		3A5AE6D022D6E22A0013E8A3 /* navi_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5C422D6E2280013E8A3 /* navi_back@2x.png */; };
-		3A5AE6D122D6E22A0013E8A3 /* LIVVideoMessage_PlayButtonIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5C522D6E2280013E8A3 /* LIVVideoMessage_PlayButtonIcon@2x.png */; };
-		3A5AE6D222D6E22A0013E8A3 /* liv_radio_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5C622D6E2280013E8A3 /* liv_radio_selected@2x.png */; };
-		3A5AE6D322D6E22A0013E8A3 /* LIVVideoRecorderItem@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5C722D6E2280013E8A3 /* LIVVideoRecorderItem@3x.png */; };
-		3A5AE6D422D6E22A0013E8A3 /* LIVWarningIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5C822D6E2280013E8A3 /* LIVWarningIcon@2x.png */; };
-		3A5AE6D522D6E22A0013E8A3 /* sentVoicePlaying3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5C922D6E2280013E8A3 /* sentVoicePlaying3@3x.png */; };
-		3A5AE6D622D6E22A0013E8A3 /* LIVVideoMessage_DefaultThumbnail@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5CA22D6E2280013E8A3 /* LIVVideoMessage_DefaultThumbnail@3x.png */; };
-		3A5AE6D722D6E22A0013E8A3 /* sentVoicePlaying1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5CB22D6E2280013E8A3 /* sentVoicePlaying1@2x.png */; };
-		3A5AE6D822D6E22A0013E8A3 /* photo_original_def@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5CC22D6E2280013E8A3 /* photo_original_def@2x.png */; };
-		3A5AE6D922D6E22A0013E8A3 /* LIVCameraItem@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5CD22D6E2280013E8A3 /* LIVCameraItem@3x.png */; };
-		3A5AE6DA22D6E22A0013E8A3 /* LIVFileMessage_TypePPT@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5CE22D6E2280013E8A3 /* LIVFileMessage_TypePPT@2x.png */; };
-		3A5AE6DB22D6E22A0013E8A3 /* LIVWarningSmallIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5CF22D6E2280013E8A3 /* LIVWarningSmallIcon@2x.png */; };
-		3A5AE6DC22D6E22A0013E8A3 /* LIVVideoCamera_switchCamera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5D022D6E2280013E8A3 /* LIVVideoCamera_switchCamera@2x.png */; };
-		3A5AE6DD22D6E22A0013E8A3 /* LIVAutoScrollTextView7.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5D122D6E2280013E8A3 /* LIVAutoScrollTextView7.png */; };
-		3A5AE6DE22D6E22A0013E8A3 /* liv_satisfactionr_circular_selected_un@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5D222D6E2280013E8A3 /* liv_satisfactionr_circular_selected_un@2x.png */; };
-		3A5AE6DF22D6E22A0013E8A3 /* LIVFileMessage_TypeUnknown@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5D322D6E2280013E8A3 /* LIVFileMessage_TypeUnknown@3x.png */; };
-		3A5AE6E022D6E22A0013E8A3 /* LIVResendButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5D422D6E2280013E8A3 /* LIVResendButton@2x.png */; };
-		3A5AE6E122D6E22A0013E8A3 /* LIVCSDefaultAvatar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5D522D6E2280013E8A3 /* LIVCSDefaultAvatar@3x.png */; };
-		3A5AE6E222D6E22A0013E8A3 /* LIVVoiceItem_highlight@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5D622D6E2280013E8A3 /* LIVVoiceItem_highlight@3x.png */; };
-		3A5AE6E322D6E22A0013E8A3 /* LIVUserDefaultAvatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5D722D6E2280013E8A3 /* LIVUserDefaultAvatar@2x.png */; };
-		3A5AE6E422D6E22A0013E8A3 /* LIVAutoScrollTextView6.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5D822D6E2280013E8A3 /* LIVAutoScrollTextView6.png */; };
-		3A5AE6E522D6E22A0013E8A3 /* LIVAutoScrollTextView4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5D922D6E2280013E8A3 /* LIVAutoScrollTextView4.png */; };
-		3A5AE6E622D6E22A0013E8A3 /* LIVMediaFileSaveToLibraryButton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5DA22D6E2280013E8A3 /* LIVMediaFileSaveToLibraryButton@3x.png */; };
-		3A5AE6E722D6E22A0013E8A3 /* LIVLibraryItem@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5DB22D6E2280013E8A3 /* LIVLibraryItem@2x.png */; };
-		3A5AE6E822D6E22A0013E8A3 /* LIVRobotAgreeIcon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5DC22D6E2280013E8A3 /* LIVRobotAgreeIcon@3x.png */; };
-		3A5AE6E922D6E22A0013E8A3 /* LIVVideoCamera_flashOn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5DD22D6E2280013E8A3 /* LIVVideoCamera_flashOn@2x.png */; };
-		3A5AE6EA22D6E22A0013E8A3 /* photo_number_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5DE22D6E2280013E8A3 /* photo_number_icon@2x.png */; };
-		3A5AE6EB22D6E22A0013E8A3 /* receivedVoicePlaying3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5DF22D6E2280013E8A3 /* receivedVoicePlaying3@2x.png */; };
-		3A5AE6EC22D6E22A0013E8A3 /* LIVDefaultImageThumbnail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5E022D6E2280013E8A3 /* LIVDefaultImageThumbnail@2x.png */; };
-		3A5AE6ED22D6E22A0013E8A3 /* LIVVideoCamera_trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5E122D6E2280013E8A3 /* LIVVideoCamera_trash@2x.png */; };
-		3A5AE6EE22D6E22A0013E8A3 /* LIVFileMessage_TypePdf@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5E222D6E2280013E8A3 /* LIVFileMessage_TypePdf@2x.png */; };
-		3A5AE6EF22D6E22A0013E8A3 /* LIVVideoCamera_pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5E322D6E2280013E8A3 /* LIVVideoCamera_pause@2x.png */; };
-		3A5AE6F022D6E22A0013E8A3 /* LIVAutoScrollTextView5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5E422D6E2280013E8A3 /* LIVAutoScrollTextView5.png */; };
-		3A5AE6F122D6E22A0013E8A3 /* receivedVoicePlaying1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5E522D6E2280013E8A3 /* receivedVoicePlaying1@3x.png */; };
-		3A5AE6F222D6E22A0013E8A3 /* receivedVoicePlaying1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5E622D6E2280013E8A3 /* receivedVoicePlaying1@2x.png */; };
-		3A5AE6F322D6E22A0013E8A3 /* LIVAutoScrollTextView1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5E722D6E2280013E8A3 /* LIVAutoScrollTextView1.png */; };
-		3A5AE6F422D6E22A0013E8A3 /* VideoSendIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5E822D6E2280013E8A3 /* VideoSendIcon@2x.png */; };
-		3A5AE6F522D6E22A0013E8A3 /* LIVVideoCamera_pause@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5E922D6E2280013E8A3 /* LIVVideoCamera_pause@3x.png */; };
-		3A5AE6F622D6E22A0013E8A3 /* LIVFileMessage_TypePdf@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5EA22D6E2280013E8A3 /* LIVFileMessage_TypePdf@3x.png */; };
-		3A5AE6F722D6E22A0013E8A3 /* LIVVideoCamera_trash@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5EB22D6E2280013E8A3 /* LIVVideoCamera_trash@3x.png */; };
-		3A5AE6F822D6E22A0013E8A3 /* LIVDefaultImageThumbnail@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5EC22D6E2280013E8A3 /* LIVDefaultImageThumbnail@3x.png */; };
-		3A5AE6F922D6E22A0013E8A3 /* receivedVoicePlaying3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5ED22D6E2280013E8A3 /* receivedVoicePlaying3@3x.png */; };
-		3A5AE6FA22D6E22A0013E8A3 /* LIVVideoCamera_flashOn@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5EE22D6E2280013E8A3 /* LIVVideoCamera_flashOn@3x.png */; };
-		3A5AE6FB22D6E22A0013E8A3 /* LIVLibraryItem@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5EF22D6E2280013E8A3 /* LIVLibraryItem@3x.png */; };
-		3A5AE6FC22D6E22A0013E8A3 /* LIVRobotAgreeIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5F022D6E2280013E8A3 /* LIVRobotAgreeIcon@2x.png */; };
-		3A5AE6FD22D6E22A0013E8A3 /* LIVMediaFileSaveToLibraryButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5F122D6E2280013E8A3 /* LIVMediaFileSaveToLibraryButton@2x.png */; };
-		3A5AE6FE22D6E22A0013E8A3 /* LIVUserDefaultAvatar@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5F222D6E2280013E8A3 /* LIVUserDefaultAvatar@3x.png */; };
-		3A5AE6FF22D6E22A0013E8A3 /* LIVAutoScrollTextView2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5F322D6E2280013E8A3 /* LIVAutoScrollTextView2.png */; };
-		3A5AE70022D6E22A0013E8A3 /* LIVVoiceItem_highlight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5F422D6E2280013E8A3 /* LIVVoiceItem_highlight@2x.png */; };
-		3A5AE70122D6E22A0013E8A3 /* LIVCSDefaultAvatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5F522D6E2280013E8A3 /* LIVCSDefaultAvatar@2x.png */; };
-		3A5AE70222D6E22A0013E8A3 /* LIVResendButton@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5F622D6E2280013E8A3 /* LIVResendButton@3x.png */; };
-		3A5AE70322D6E22A0013E8A3 /* LIVFileMessage_TypeUnknown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5F722D6E2280013E8A3 /* LIVFileMessage_TypeUnknown@2x.png */; };
-		3A5AE70422D6E22A0013E8A3 /* liv_satisfactionr_circular_selected_un@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5F822D6E2280013E8A3 /* liv_satisfactionr_circular_selected_un@3x.png */; };
-		3A5AE70522D6E22A0013E8A3 /* LIVAutoScrollTextView3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5F922D6E2280013E8A3 /* LIVAutoScrollTextView3.png */; };
-		3A5AE70622D6E22A0013E8A3 /* LIVVideoCamera_switchCamera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5FA22D6E2280013E8A3 /* LIVVideoCamera_switchCamera@3x.png */; };
-		3A5AE70722D6E22A0013E8A3 /* LIVChatViewControllerColor.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5FB22D6E2280013E8A3 /* LIVChatViewControllerColor.plist */; };
-		3A5AE70822D6E22A0013E8A3 /* LIVMessageTableViewColor.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5FC22D6E2280013E8A3 /* LIVMessageTableViewColor.plist */; };
-		3A5AE70922D6E22A0013E8A3 /* ill.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5FE22D6E2280013E8A3 /* ill.gif */; };
-		3A5AE70A22D6E22A0013E8A3 /* angry.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE5FF22D6E2280013E8A3 /* angry.gif */; };
-		3A5AE70B22D6E22A0013E8A3 /* nowords.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60022D6E2280013E8A3 /* nowords.gif */; };
-		3A5AE70C22D6E22B0013E8A3 /* puzzledom.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60122D6E2280013E8A3 /* puzzledom.gif */; };
-		3A5AE70D22D6E22B0013E8A3 /* money.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60222D6E2280013E8A3 /* money.gif */; };
-		3A5AE70E22D6E22B0013E8A3 /* tired.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60322D6E2280013E8A3 /* tired.gif */; };
-		3A5AE70F22D6E22B0013E8A3 /* inebriation.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60422D6E2280013E8A3 /* inebriation.gif */; };
-		3A5AE71022D6E22B0013E8A3 /* cute.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60522D6E2280013E8A3 /* cute.gif */; };
-		3A5AE71122D6E22B0013E8A3 /* cool_eye.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60622D6E2280013E8A3 /* cool_eye.gif */; };
-		3A5AE71222D6E22B0013E8A3 /* doubt.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60722D6E2280013E8A3 /* doubt.gif */; };
-		3A5AE71322D6E22B0013E8A3 /* sad.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60822D6E2280013E8A3 /* sad.gif */; };
-		3A5AE71422D6E22B0013E8A3 /* cry.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60922D6E2280013E8A3 /* cry.gif */; };
-		3A5AE71522D6E22B0013E8A3 /* supprise.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60A22D6E2280013E8A3 /* supprise.gif */; };
-		3A5AE71622D6E22B0013E8A3 /* sweat.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60B22D6E2280013E8A3 /* sweat.gif */; };
-		3A5AE71722D6E22B0013E8A3 /* evilGrin.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60C22D6E2280013E8A3 /* evilGrin.gif */; };
-		3A5AE71822D6E22B0013E8A3 /* embarrassed.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60D22D6E2280013E8A3 /* embarrassed.gif */; };
-		3A5AE71922D6E22B0013E8A3 /* daxiao.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60E22D6E2280013E8A3 /* daxiao.gif */; };
-		3A5AE71A22D6E22B0013E8A3 /* like.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE60F22D6E2280013E8A3 /* like.gif */; };
-		3A5AE71B22D6E22B0013E8A3 /* LIVImagePicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE61022D6E2280013E8A3 /* LIVImagePicker.bundle */; };
-		3A5AE71D22D6E22B0013E8A3 /* libLive800ChatLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5AE61322D6E22A0013E8A3 /* libLive800ChatLib.a */; };
-		3A5AE71F22D6E4560013E8A3 /* LIVConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A5AE71E22D6E4560013E8A3 /* LIVConfig.plist */; };
 		3A5B027B234F080100D8828B /* BTTXimaRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B027A234F080100D8828B /* BTTXimaRecordController.m */; };
 		3A5B027F234F0D6700D8828B /* BTTXimaRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5B027D234F0D6700D8828B /* BTTXimaRecordCell.m */; };
 		3A5B0280234F0D6700D8828B /* BTTXimaRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A5B027E234F0D6700D8828B /* BTTXimaRecordCell.xib */; };
@@ -343,7 +150,6 @@
 		3A80AB0723A381CD004BF8C0 /* BTTShareRedirectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A80AB0623A381CD004BF8C0 /* BTTShareRedirectModel.m */; };
 		3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E7F21621268000530DF /* BTTBaseModel.m */; };
 		3A8D6E8B21630EE5000530DF /* PublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E8A21630EE5000530DF /* PublicMethod.m */; };
-		3A8D6E9821633D3E000530DF /* CLive800Manager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E9521633D3E000530DF /* CLive800Manager.m */; };
 		3A8D6E9921633D3E000530DF /* PushManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E9721633D3E000530DF /* PushManager.m */; };
 		3A8D6E9C21633D83000530DF /* BTTBaseWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E9B21633D83000530DF /* BTTBaseWebViewController.m */; };
 		3A8D6EA021634306000530DF /* BridgeProtocolExternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8D6E9F21634306000530DF /* BridgeProtocolExternal.m */; };
@@ -558,7 +364,6 @@
 		3ADD237C2177366B00FA959A /* BTTMeMainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ADD237A2177366B00FA959A /* BTTMeMainCell.xib */; };
 		3ADD2389217819D500FA959A /* BTTMeMainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD2388217819D500FA959A /* BTTMeMainModel.m */; };
 		3ADD238F217836B300FA959A /* BTTMineViewController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD238D217836B200FA959A /* BTTMineViewController+Nav.m */; };
-		3ADD23972179A9E200FA959A /* BTTLive800ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD23962179A9E200FA959A /* BTTLive800ViewController.m */; };
 		3ADD23EC2179B97A00FA959A /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD23DF2179B97A00FA959A /* TAAbstractDotView.m */; };
 		3ADD23ED2179B97A00FA959A /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD23E12179B97A00FA959A /* TAAnimatedDotView.m */; };
 		3ADD23EE2179B97A00FA959A /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ADD23E32179B97A00FA959A /* TADotView.m */; };
@@ -756,6 +561,7 @@
 		41BC7101252D6509003944ED /* BTTBiBiCunPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BC70FE252D6509003944ED /* BTTBiBiCunPopView.xib */; };
 		41C53A9C25A851B500CFA3A1 /* BTTYenFenHongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C53A9A25A851B400CFA3A1 /* BTTYenFenHongModel.m */; };
 		41CA82CB26412D1800A550EE /* BTTInterestRecordsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CA82C926412D1800A550EE /* BTTInterestRecordsModel.m */; };
+		41CC663B26B2B351005AD275 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		41D1074F26A9143E00721F61 /* BTTChangeMobileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D1073726A9143E00721F61 /* BTTChangeMobileController.m */; };
 		41D1075026A9143E00721F61 /* BTTChangeMobileSuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D1073A26A9143E00721F61 /* BTTChangeMobileSuccessController.m */; };
 		41D1075126A9143E00721F61 /* BTTUnBindingMobileNoticeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D1073D26A9143E00721F61 /* BTTUnBindingMobileNoticeController.m */; };
@@ -781,7 +587,6 @@
 		76756F8626A6C5790065F99B /* BTTDefaultPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756F8326A6C5780065F99B /* BTTDefaultPopView.xib */; };
 		76756F8726A6C5790065F99B /* BTTDefaultPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756F8526A6C5790065F99B /* BTTDefaultPopView.m */; };
 		7675705A26A9657A0065F99B /* BTTPopViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675705926A9657A0065F99B /* BTTPopViewModel.m */; };
-		767577B626B286270065F99B /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7675752726B286040065F99B /* libboringssl_simulator.a */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
@@ -933,7 +738,6 @@
 		EAA4811B21ABD265000C0273 /* BTTAGQJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4811721ABD264000C0273 /* BTTAGQJViewController.m */; };
 		EAA4811C21ABD265000C0273 /* BTTAGGJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAA4811A21ABD265000C0273 /* BTTAGGJViewController.m */; };
 		EACCD202218FE1680090B5E6 /* IVWebViewUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */; };
-		EAE89DCB218C3A7400C29393 /* SDWebImage+Compat3_8_1.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE89DC9218C3A7300C29393 /* SDWebImage+Compat3_8_1.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1108,201 +912,6 @@
 		3A5AE49F22CDE5680013E8A3 /* BTTBishangStep1VC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBishangStep1VC.h; sourceTree = "<group>"; };
 		3A5AE4A022CDE5680013E8A3 /* BTTBishangStep1VC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBishangStep1VC.m; sourceTree = "<group>"; };
 		3A5AE4A122CDE5680013E8A3 /* BTTBishangStep1VC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTBishangStep1VC.xib; sourceTree = "<group>"; };
-		3A5AE54F22D6E2280013E8A3 /* LIVChatFunctionBarColor.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LIVChatFunctionBarColor.plist; sourceTree = "<group>"; };
-		3A5AE55122D6E2280013E8A3 /* LIVEmotionBoardSendCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVEmotionBoardSendCell.nib; sourceTree = "<group>"; };
-		3A5AE55222D6E2280013E8A3 /* LIVFileMessageContentView.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVFileMessageContentView.nib; sourceTree = "<group>"; };
-		3A5AE55322D6E2280013E8A3 /* LIVMoreBoardCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVMoreBoardCell.nib; sourceTree = "<group>"; };
-		3A5AE55422D6E2280013E8A3 /* LIVEmotionBoardCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVEmotionBoardCell.nib; sourceTree = "<group>"; };
-		3A5AE55522D6E2280013E8A3 /* LIVTextWithActivityIndicatorToast.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVTextWithActivityIndicatorToast.nib; sourceTree = "<group>"; };
-		3A5AE55622D6E2280013E8A3 /* LIVRadioButton.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVRadioButton.nib; sourceTree = "<group>"; };
-		3A5AE55722D6E2280013E8A3 /* LIVReceivedRobotMessageCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVReceivedRobotMessageCell.nib; sourceTree = "<group>"; };
-		3A5AE55822D6E2280013E8A3 /* LIVVoiceBoardViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVVoiceBoardViewController.nib; sourceTree = "<group>"; };
-		3A5AE55922D6E2280013E8A3 /* LIVSingleImagePreviewController.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVSingleImagePreviewController.nib; sourceTree = "<group>"; };
-		3A5AE55A22D6E2280013E8A3 /* LIVInformationNotificationMessageCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVInformationNotificationMessageCell.nib; sourceTree = "<group>"; };
-		3A5AE55B22D6E2280013E8A3 /* LIVLocationPreviewController.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVLocationPreviewController.nib; sourceTree = "<group>"; };
-		3A5AE55C22D6E2280013E8A3 /* LIVEvaluateLevel2Cell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVEvaluateLevel2Cell.nib; sourceTree = "<group>"; };
-		3A5AE55D22D6E2280013E8A3 /* LIVTimestampInCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVTimestampInCell.nib; sourceTree = "<group>"; };
-		3A5AE55E22D6E2280013E8A3 /* LIVTextWithSmallIconToast.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVTextWithSmallIconToast.nib; sourceTree = "<group>"; };
-		3A5AE55F22D6E2280013E8A3 /* LIVTextWithIconToast.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVTextWithIconToast.nib; sourceTree = "<group>"; };
-		3A5AE56022D6E2280013E8A3 /* LIVSatisfactionEvaluationTableViewHeader.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVSatisfactionEvaluationTableViewHeader.nib; sourceTree = "<group>"; };
-		3A5AE56122D6E2280013E8A3 /* LIVSentMessageCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVSentMessageCell.nib; sourceTree = "<group>"; };
-		3A5AE56222D6E2280013E8A3 /* LIVCollectionBoard.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVCollectionBoard.nib; sourceTree = "<group>"; };
-		3A5AE56322D6E2280013E8A3 /* LIVBackButton.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVBackButton.nib; sourceTree = "<group>"; };
-		3A5AE56422D6E2280013E8A3 /* LIVEvaluateCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVEvaluateCell.nib; sourceTree = "<group>"; };
-		3A5AE56522D6E2280013E8A3 /* LIVRobotRelatedQuestionCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVRobotRelatedQuestionCell.nib; sourceTree = "<group>"; };
-		3A5AE56622D6E2280013E8A3 /* LIVReceivedMessageCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVReceivedMessageCell.nib; sourceTree = "<group>"; };
-		3A5AE56722D6E2280013E8A3 /* LIVBackAlertViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVBackAlertViewController.nib; sourceTree = "<group>"; };
-		3A5AE56822D6E2280013E8A3 /* LIVChatFunctionBar.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVChatFunctionBar.nib; sourceTree = "<group>"; };
-		3A5AE56922D6E2280013E8A3 /* LIVAutoScrollTextViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVAutoScrollTextViewController.nib; sourceTree = "<group>"; };
-		3A5AE56A22D6E2280013E8A3 /* LIVSatisfactionEvaluationCommentCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVSatisfactionEvaluationCommentCell.nib; sourceTree = "<group>"; };
-		3A5AE56B22D6E2280013E8A3 /* LIVTextToast.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVTextToast.nib; sourceTree = "<group>"; };
-		3A5AE56C22D6E2280013E8A3 /* LIVLocationMessageContentView.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVLocationMessageContentView.nib; sourceTree = "<group>"; };
-		3A5AE56D22D6E2280013E8A3 /* LIVSatisfactionEvaluationItemCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVSatisfactionEvaluationItemCell.nib; sourceTree = "<group>"; };
-		3A5AE56E22D6E2280013E8A3 /* LIVVideoCameraViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVVideoCameraViewController.nib; sourceTree = "<group>"; };
-		3A5AE56F22D6E2280013E8A3 /* LIVVideoMessageContentView.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVVideoMessageContentView.nib; sourceTree = "<group>"; };
-		3A5AE57022D6E2280013E8A3 /* LIVVideoPlayerViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVVideoPlayerViewController.nib; sourceTree = "<group>"; };
-		3A5AE57122D6E2280013E8A3 /* TZImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TZImagePickerController.bundle; sourceTree = "<group>"; };
-		3A5AE57222D6E2280013E8A3 /* Emotion.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Emotion.plist; sourceTree = "<group>"; };
-		3A5AE57422D6E2280013E8A3 /* deleteButton_LIVEmotionBoard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "deleteButton_LIVEmotionBoard@2x.png"; sourceTree = "<group>"; };
-		3A5AE57522D6E2280013E8A3 /* LIVVideoCamera_close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_close@3x.png"; sourceTree = "<group>"; };
-		3A5AE57622D6E2280013E8A3 /* LIVMoreItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVMoreItem@2x.png"; sourceTree = "<group>"; };
-		3A5AE57722D6E2280013E8A3 /* back-arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-arrow@3x.png"; sourceTree = "<group>"; };
-		3A5AE57822D6E2280013E8A3 /* photo_sel_photoPickerVc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_sel_photoPickerVc@2x.png"; sourceTree = "<group>"; };
-		3A5AE57922D6E2280013E8A3 /* LIVSentMessageBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVSentMessageBackground@2x.png"; sourceTree = "<group>"; };
-		3A5AE57A22D6E2280013E8A3 /* LIVFileMessage_TypeZip@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVFileMessage_TypeZip@3x.png"; sourceTree = "<group>"; };
-		3A5AE57B22D6E2280013E8A3 /* LIVReceivedMessageBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVReceivedMessageBackground@2x.png"; sourceTree = "<group>"; };
-		3A5AE57C22D6E2280013E8A3 /* LIVVideoCamera_flashOff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_flashOff@2x.png"; sourceTree = "<group>"; };
-		3A5AE57D22D6E2280013E8A3 /* LIVVideoCamera_OK@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_OK@2x.png"; sourceTree = "<group>"; };
-		3A5AE57E22D6E2280013E8A3 /* LIVAutoScrollTextViewShutdown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVAutoScrollTextViewShutdown@2x.png"; sourceTree = "<group>"; };
-		3A5AE57F22D6E2280013E8A3 /* LIVFileMessage_TypeExcel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVFileMessage_TypeExcel@3x.png"; sourceTree = "<group>"; };
-		3A5AE58022D6E2280013E8A3 /* sentVoicePlaying2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sentVoicePlaying2@2x.png"; sourceTree = "<group>"; };
-		3A5AE58122D6E2280013E8A3 /* LIVRobotDisagreeIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVRobotDisagreeIcon@3x.png"; sourceTree = "<group>"; };
-		3A5AE58222D6E2280013E8A3 /* LIVRadioButton_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVRadioButton_selected@2x.png"; sourceTree = "<group>"; };
-		3A5AE58322D6E2280013E8A3 /* LIVRadioButton_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVRadioButton_selected@3x.png"; sourceTree = "<group>"; };
-		3A5AE58422D6E2280013E8A3 /* LIVAutoScrollTextView8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIVAutoScrollTextView8.png; sourceTree = "<group>"; };
-		3A5AE58522D6E2280013E8A3 /* LIVRobotDisagreeIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVRobotDisagreeIcon@2x.png"; sourceTree = "<group>"; };
-		3A5AE58622D6E2280013E8A3 /* LIVFileMessage_TypeExcel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVFileMessage_TypeExcel@2x.png"; sourceTree = "<group>"; };
-		3A5AE58722D6E2280013E8A3 /* sentVoicePlaying2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sentVoicePlaying2@3x.png"; sourceTree = "<group>"; };
-		3A5AE58822D6E2280013E8A3 /* LIVVideoCamera_OK@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_OK@3x.png"; sourceTree = "<group>"; };
-		3A5AE58922D6E2280013E8A3 /* LIVAutoScrollTextViewShutdown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVAutoScrollTextViewShutdown@3x.png"; sourceTree = "<group>"; };
-		3A5AE58A22D6E2280013E8A3 /* LIVVideoCamera_flashOff@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_flashOff@3x.png"; sourceTree = "<group>"; };
-		3A5AE58B22D6E2280013E8A3 /* LIVAutoScrollTextView9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIVAutoScrollTextView9.png; sourceTree = "<group>"; };
-		3A5AE58C22D6E2280013E8A3 /* LIVReceivedMessageBackground@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVReceivedMessageBackground@3x.png"; sourceTree = "<group>"; };
-		3A5AE58D22D6E2280013E8A3 /* MMVideoPreviewPlayHL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MMVideoPreviewPlayHL@2x.png"; sourceTree = "<group>"; };
-		3A5AE58E22D6E2280013E8A3 /* LIVFileMessage_TypeZip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVFileMessage_TypeZip@2x.png"; sourceTree = "<group>"; };
-		3A5AE58F22D6E2280013E8A3 /* LIVSentMessageBackground@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVSentMessageBackground@3x.png"; sourceTree = "<group>"; };
-		3A5AE59022D6E2280013E8A3 /* back-arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-arrow@2x.png"; sourceTree = "<group>"; };
-		3A5AE59122D6E2280013E8A3 /* LIVMoreItem@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVMoreItem@3x.png"; sourceTree = "<group>"; };
-		3A5AE59222D6E2280013E8A3 /* photo_sel_previewVc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_sel_previewVc@2x.png"; sourceTree = "<group>"; };
-		3A5AE59322D6E2280013E8A3 /* MMVideoPreviewPlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MMVideoPreviewPlay@2x.png"; sourceTree = "<group>"; };
-		3A5AE59422D6E2280013E8A3 /* LIVVideoCamera_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_close@2x.png"; sourceTree = "<group>"; };
-		3A5AE59522D6E2280013E8A3 /* deleteButton_LIVEmotionBoard@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "deleteButton_LIVEmotionBoard@3x.png"; sourceTree = "<group>"; };
-		3A5AE59622D6E2280013E8A3 /* LIVLocationItem@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVLocationItem@3x.png"; sourceTree = "<group>"; };
-		3A5AE59722D6E2280013E8A3 /* LIVVideoCamera_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_play@2x.png"; sourceTree = "<group>"; };
-		3A5AE59822D6E2280013E8A3 /* LIVFileMessage_TypeTxt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVFileMessage_TypeTxt@2x.png"; sourceTree = "<group>"; };
-		3A5AE59922D6E2280013E8A3 /* receivedVoicePlaying2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "receivedVoicePlaying2@2x.png"; sourceTree = "<group>"; };
-		3A5AE59A22D6E2280013E8A3 /* LIVAutoScrollTextView11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIVAutoScrollTextView11.png; sourceTree = "<group>"; };
-		3A5AE59B22D6E2280013E8A3 /* preview_original_def@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preview_original_def@2x.png"; sourceTree = "<group>"; };
-		3A5AE59C22D6E2280013E8A3 /* LIVNavigationBackArrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVNavigationBackArrow@3x.png"; sourceTree = "<group>"; };
-		3A5AE59D22D6E2280013E8A3 /* liv_radio_unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liv_radio_unselected@2x.png"; sourceTree = "<group>"; };
-		3A5AE59E22D6E2280013E8A3 /* LIVRadioButton_unselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVRadioButton_unselected@2x.png"; sourceTree = "<group>"; };
-		3A5AE59F22D6E2280013E8A3 /* voiceIcon_LIVVoiceBoard@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "voiceIcon_LIVVoiceBoard@3x.png"; sourceTree = "<group>"; };
-		3A5AE5A022D6E2280013E8A3 /* LIVAutoScrollTextView10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIVAutoScrollTextView10.png; sourceTree = "<group>"; };
-		3A5AE5A122D6E2280013E8A3 /* voiceIcon_LIVVoiceBoard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "voiceIcon_LIVVoiceBoard@2x.png"; sourceTree = "<group>"; };
-		3A5AE5A222D6E2280013E8A3 /* LIVRadioButton_unselected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVRadioButton_unselected@3x.png"; sourceTree = "<group>"; };
-		3A5AE5A322D6E2280013E8A3 /* photo_def_previewVc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_def_previewVc@2x.png"; sourceTree = "<group>"; };
-		3A5AE5A422D6E2280013E8A3 /* liv_radio_unselected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liv_radio_unselected@3x.png"; sourceTree = "<group>"; };
-		3A5AE5A522D6E2280013E8A3 /* LIVNavigationBackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVNavigationBackArrow@2x.png"; sourceTree = "<group>"; };
-		3A5AE5A622D6E2280013E8A3 /* receivedVoicePlaying2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "receivedVoicePlaying2@3x.png"; sourceTree = "<group>"; };
-		3A5AE5A722D6E2280013E8A3 /* LIVFileMessage_TypeTxt@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVFileMessage_TypeTxt@3x.png"; sourceTree = "<group>"; };
-		3A5AE5A822D6E2280013E8A3 /* photo_original_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_original_sel@2x.png"; sourceTree = "<group>"; };
-		3A5AE5A922D6E2280013E8A3 /* LIVVideoCamera_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_play@3x.png"; sourceTree = "<group>"; };
-		3A5AE5AA22D6E2280013E8A3 /* LIVLocationItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVLocationItem@2x.png"; sourceTree = "<group>"; };
-		3A5AE5AB22D6E2280013E8A3 /* LIVWarningSmallIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVWarningSmallIcon@3x.png"; sourceTree = "<group>"; };
-		3A5AE5AC22D6E2280013E8A3 /* LIVFileMessage_TypePPT@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVFileMessage_TypePPT@3x.png"; sourceTree = "<group>"; };
-		3A5AE5AD22D6E2280013E8A3 /* LIVCameraItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVCameraItem@2x.png"; sourceTree = "<group>"; };
-		3A5AE5AE22D6E2280013E8A3 /* sentVoicePlaying1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sentVoicePlaying1@3x.png"; sourceTree = "<group>"; };
-		3A5AE5AF22D6E2280013E8A3 /* LIVVideoMessage_PlayButtonIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIVVideoMessage_PlayButtonIcon.png; sourceTree = "<group>"; };
-		3A5AE5B022D6E2280013E8A3 /* LIVVideoMessage_DefaultThumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoMessage_DefaultThumbnail@2x.png"; sourceTree = "<group>"; };
-		3A5AE5B122D6E2280013E8A3 /* sentVoicePlaying3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sentVoicePlaying3@2x.png"; sourceTree = "<group>"; };
-		3A5AE5B222D6E2280013E8A3 /* LIVWarningIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVWarningIcon@3x.png"; sourceTree = "<group>"; };
-		3A5AE5B322D6E2280013E8A3 /* photo_def_photoPickerVc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_def_photoPickerVc@2x.png"; sourceTree = "<group>"; };
-		3A5AE5B422D6E2280013E8A3 /* LIVVideoRecorderItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoRecorderItem@2x.png"; sourceTree = "<group>"; };
-		3A5AE5B522D6E2280013E8A3 /* LIVVideoMessage_PlayButtonIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoMessage_PlayButtonIcon@3x.png"; sourceTree = "<group>"; };
-		3A5AE5B622D6E2280013E8A3 /* liv_radio_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liv_radio_selected@3x.png"; sourceTree = "<group>"; };
-		3A5AE5B722D6E2280013E8A3 /* LIVVoiceItem@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVoiceItem@3x.png"; sourceTree = "<group>"; };
-		3A5AE5B822D6E2280013E8A3 /* LIVEmotionItem@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVEmotionItem@3x.png"; sourceTree = "<group>"; };
-		3A5AE5B922D6E2280013E8A3 /* LIVRobotRelatedQuestionIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVRobotRelatedQuestionIcon@2x.png"; sourceTree = "<group>"; };
-		3A5AE5BA22D6E2280013E8A3 /* nav_link_close@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_link_close@3x.png"; sourceTree = "<group>"; };
-		3A5AE5BB22D6E2280013E8A3 /* LIVFileMessage_TypeWord@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVFileMessage_TypeWord@2x.png"; sourceTree = "<group>"; };
-		3A5AE5BC22D6E2280013E8A3 /* liv_satisfactionr_circular_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liv_satisfactionr_circular_selected@2x.png"; sourceTree = "<group>"; };
-		3A5AE5BD22D6E2280013E8A3 /* liv_satisfactionr_circular_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liv_satisfactionr_circular_selected@3x.png"; sourceTree = "<group>"; };
-		3A5AE5BE22D6E2280013E8A3 /* LIVFileMessage_TypeWord@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVFileMessage_TypeWord@3x.png"; sourceTree = "<group>"; };
-		3A5AE5BF22D6E2280013E8A3 /* preview_number_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preview_number_icon@2x.png"; sourceTree = "<group>"; };
-		3A5AE5C022D6E2280013E8A3 /* nav_link_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "nav_link_close@2x.png"; sourceTree = "<group>"; };
-		3A5AE5C122D6E2280013E8A3 /* LIVRobotRelatedQuestionIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVRobotRelatedQuestionIcon@3x.png"; sourceTree = "<group>"; };
-		3A5AE5C222D6E2280013E8A3 /* LIVEmotionItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVEmotionItem@2x.png"; sourceTree = "<group>"; };
-		3A5AE5C322D6E2280013E8A3 /* LIVVoiceItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVoiceItem@2x.png"; sourceTree = "<group>"; };
-		3A5AE5C422D6E2280013E8A3 /* navi_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navi_back@2x.png"; sourceTree = "<group>"; };
-		3A5AE5C522D6E2280013E8A3 /* LIVVideoMessage_PlayButtonIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoMessage_PlayButtonIcon@2x.png"; sourceTree = "<group>"; };
-		3A5AE5C622D6E2280013E8A3 /* liv_radio_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liv_radio_selected@2x.png"; sourceTree = "<group>"; };
-		3A5AE5C722D6E2280013E8A3 /* LIVVideoRecorderItem@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoRecorderItem@3x.png"; sourceTree = "<group>"; };
-		3A5AE5C822D6E2280013E8A3 /* LIVWarningIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVWarningIcon@2x.png"; sourceTree = "<group>"; };
-		3A5AE5C922D6E2280013E8A3 /* sentVoicePlaying3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sentVoicePlaying3@3x.png"; sourceTree = "<group>"; };
-		3A5AE5CA22D6E2280013E8A3 /* LIVVideoMessage_DefaultThumbnail@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoMessage_DefaultThumbnail@3x.png"; sourceTree = "<group>"; };
-		3A5AE5CB22D6E2280013E8A3 /* sentVoicePlaying1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sentVoicePlaying1@2x.png"; sourceTree = "<group>"; };
-		3A5AE5CC22D6E2280013E8A3 /* photo_original_def@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_original_def@2x.png"; sourceTree = "<group>"; };
-		3A5AE5CD22D6E2280013E8A3 /* LIVCameraItem@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVCameraItem@3x.png"; sourceTree = "<group>"; };
-		3A5AE5CE22D6E2280013E8A3 /* LIVFileMessage_TypePPT@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVFileMessage_TypePPT@2x.png"; sourceTree = "<group>"; };
-		3A5AE5CF22D6E2280013E8A3 /* LIVWarningSmallIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVWarningSmallIcon@2x.png"; sourceTree = "<group>"; };
-		3A5AE5D022D6E2280013E8A3 /* LIVVideoCamera_switchCamera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_switchCamera@2x.png"; sourceTree = "<group>"; };
-		3A5AE5D122D6E2280013E8A3 /* LIVAutoScrollTextView7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIVAutoScrollTextView7.png; sourceTree = "<group>"; };
-		3A5AE5D222D6E2280013E8A3 /* liv_satisfactionr_circular_selected_un@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liv_satisfactionr_circular_selected_un@2x.png"; sourceTree = "<group>"; };
-		3A5AE5D322D6E2280013E8A3 /* LIVFileMessage_TypeUnknown@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVFileMessage_TypeUnknown@3x.png"; sourceTree = "<group>"; };
-		3A5AE5D422D6E2280013E8A3 /* LIVResendButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVResendButton@2x.png"; sourceTree = "<group>"; };
-		3A5AE5D522D6E2280013E8A3 /* LIVCSDefaultAvatar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVCSDefaultAvatar@3x.png"; sourceTree = "<group>"; };
-		3A5AE5D622D6E2280013E8A3 /* LIVVoiceItem_highlight@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVoiceItem_highlight@3x.png"; sourceTree = "<group>"; };
-		3A5AE5D722D6E2280013E8A3 /* LIVUserDefaultAvatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVUserDefaultAvatar@2x.png"; sourceTree = "<group>"; };
-		3A5AE5D822D6E2280013E8A3 /* LIVAutoScrollTextView6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIVAutoScrollTextView6.png; sourceTree = "<group>"; };
-		3A5AE5D922D6E2280013E8A3 /* LIVAutoScrollTextView4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIVAutoScrollTextView4.png; sourceTree = "<group>"; };
-		3A5AE5DA22D6E2280013E8A3 /* LIVMediaFileSaveToLibraryButton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVMediaFileSaveToLibraryButton@3x.png"; sourceTree = "<group>"; };
-		3A5AE5DB22D6E2280013E8A3 /* LIVLibraryItem@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVLibraryItem@2x.png"; sourceTree = "<group>"; };
-		3A5AE5DC22D6E2280013E8A3 /* LIVRobotAgreeIcon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVRobotAgreeIcon@3x.png"; sourceTree = "<group>"; };
-		3A5AE5DD22D6E2280013E8A3 /* LIVVideoCamera_flashOn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_flashOn@2x.png"; sourceTree = "<group>"; };
-		3A5AE5DE22D6E2280013E8A3 /* photo_number_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_number_icon@2x.png"; sourceTree = "<group>"; };
-		3A5AE5DF22D6E2280013E8A3 /* receivedVoicePlaying3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "receivedVoicePlaying3@2x.png"; sourceTree = "<group>"; };
-		3A5AE5E022D6E2280013E8A3 /* LIVDefaultImageThumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVDefaultImageThumbnail@2x.png"; sourceTree = "<group>"; };
-		3A5AE5E122D6E2280013E8A3 /* LIVVideoCamera_trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_trash@2x.png"; sourceTree = "<group>"; };
-		3A5AE5E222D6E2280013E8A3 /* LIVFileMessage_TypePdf@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVFileMessage_TypePdf@2x.png"; sourceTree = "<group>"; };
-		3A5AE5E322D6E2280013E8A3 /* LIVVideoCamera_pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_pause@2x.png"; sourceTree = "<group>"; };
-		3A5AE5E422D6E2280013E8A3 /* LIVAutoScrollTextView5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIVAutoScrollTextView5.png; sourceTree = "<group>"; };
-		3A5AE5E522D6E2280013E8A3 /* receivedVoicePlaying1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "receivedVoicePlaying1@3x.png"; sourceTree = "<group>"; };
-		3A5AE5E622D6E2280013E8A3 /* receivedVoicePlaying1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "receivedVoicePlaying1@2x.png"; sourceTree = "<group>"; };
-		3A5AE5E722D6E2280013E8A3 /* LIVAutoScrollTextView1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIVAutoScrollTextView1.png; sourceTree = "<group>"; };
-		3A5AE5E822D6E2280013E8A3 /* VideoSendIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "VideoSendIcon@2x.png"; sourceTree = "<group>"; };
-		3A5AE5E922D6E2280013E8A3 /* LIVVideoCamera_pause@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_pause@3x.png"; sourceTree = "<group>"; };
-		3A5AE5EA22D6E2280013E8A3 /* LIVFileMessage_TypePdf@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVFileMessage_TypePdf@3x.png"; sourceTree = "<group>"; };
-		3A5AE5EB22D6E2280013E8A3 /* LIVVideoCamera_trash@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_trash@3x.png"; sourceTree = "<group>"; };
-		3A5AE5EC22D6E2280013E8A3 /* LIVDefaultImageThumbnail@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVDefaultImageThumbnail@3x.png"; sourceTree = "<group>"; };
-		3A5AE5ED22D6E2280013E8A3 /* receivedVoicePlaying3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "receivedVoicePlaying3@3x.png"; sourceTree = "<group>"; };
-		3A5AE5EE22D6E2280013E8A3 /* LIVVideoCamera_flashOn@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_flashOn@3x.png"; sourceTree = "<group>"; };
-		3A5AE5EF22D6E2280013E8A3 /* LIVLibraryItem@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVLibraryItem@3x.png"; sourceTree = "<group>"; };
-		3A5AE5F022D6E2280013E8A3 /* LIVRobotAgreeIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVRobotAgreeIcon@2x.png"; sourceTree = "<group>"; };
-		3A5AE5F122D6E2280013E8A3 /* LIVMediaFileSaveToLibraryButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVMediaFileSaveToLibraryButton@2x.png"; sourceTree = "<group>"; };
-		3A5AE5F222D6E2280013E8A3 /* LIVUserDefaultAvatar@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVUserDefaultAvatar@3x.png"; sourceTree = "<group>"; };
-		3A5AE5F322D6E2280013E8A3 /* LIVAutoScrollTextView2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIVAutoScrollTextView2.png; sourceTree = "<group>"; };
-		3A5AE5F422D6E2280013E8A3 /* LIVVoiceItem_highlight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVoiceItem_highlight@2x.png"; sourceTree = "<group>"; };
-		3A5AE5F522D6E2280013E8A3 /* LIVCSDefaultAvatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVCSDefaultAvatar@2x.png"; sourceTree = "<group>"; };
-		3A5AE5F622D6E2280013E8A3 /* LIVResendButton@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVResendButton@3x.png"; sourceTree = "<group>"; };
-		3A5AE5F722D6E2280013E8A3 /* LIVFileMessage_TypeUnknown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVFileMessage_TypeUnknown@2x.png"; sourceTree = "<group>"; };
-		3A5AE5F822D6E2280013E8A3 /* liv_satisfactionr_circular_selected_un@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "liv_satisfactionr_circular_selected_un@3x.png"; sourceTree = "<group>"; };
-		3A5AE5F922D6E2280013E8A3 /* LIVAutoScrollTextView3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LIVAutoScrollTextView3.png; sourceTree = "<group>"; };
-		3A5AE5FA22D6E2280013E8A3 /* LIVVideoCamera_switchCamera@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LIVVideoCamera_switchCamera@3x.png"; sourceTree = "<group>"; };
-		3A5AE5FB22D6E2280013E8A3 /* LIVChatViewControllerColor.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LIVChatViewControllerColor.plist; sourceTree = "<group>"; };
-		3A5AE5FC22D6E2280013E8A3 /* LIVMessageTableViewColor.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LIVMessageTableViewColor.plist; sourceTree = "<group>"; };
-		3A5AE5FE22D6E2280013E8A3 /* ill.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ill.gif; sourceTree = "<group>"; };
-		3A5AE5FF22D6E2280013E8A3 /* angry.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = angry.gif; sourceTree = "<group>"; };
-		3A5AE60022D6E2280013E8A3 /* nowords.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = nowords.gif; sourceTree = "<group>"; };
-		3A5AE60122D6E2280013E8A3 /* puzzledom.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = puzzledom.gif; sourceTree = "<group>"; };
-		3A5AE60222D6E2280013E8A3 /* money.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = money.gif; sourceTree = "<group>"; };
-		3A5AE60322D6E2280013E8A3 /* tired.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = tired.gif; sourceTree = "<group>"; };
-		3A5AE60422D6E2280013E8A3 /* inebriation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = inebriation.gif; sourceTree = "<group>"; };
-		3A5AE60522D6E2280013E8A3 /* cute.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cute.gif; sourceTree = "<group>"; };
-		3A5AE60622D6E2280013E8A3 /* cool_eye.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cool_eye.gif; sourceTree = "<group>"; };
-		3A5AE60722D6E2280013E8A3 /* doubt.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = doubt.gif; sourceTree = "<group>"; };
-		3A5AE60822D6E2280013E8A3 /* sad.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sad.gif; sourceTree = "<group>"; };
-		3A5AE60922D6E2280013E8A3 /* cry.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cry.gif; sourceTree = "<group>"; };
-		3A5AE60A22D6E2280013E8A3 /* supprise.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = supprise.gif; sourceTree = "<group>"; };
-		3A5AE60B22D6E2280013E8A3 /* sweat.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sweat.gif; sourceTree = "<group>"; };
-		3A5AE60C22D6E2280013E8A3 /* evilGrin.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = evilGrin.gif; sourceTree = "<group>"; };
-		3A5AE60D22D6E2280013E8A3 /* embarrassed.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = embarrassed.gif; sourceTree = "<group>"; };
-		3A5AE60E22D6E2280013E8A3 /* daxiao.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = daxiao.gif; sourceTree = "<group>"; };
-		3A5AE60F22D6E2280013E8A3 /* like.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = like.gif; sourceTree = "<group>"; };
-		3A5AE61022D6E2280013E8A3 /* LIVImagePicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = LIVImagePicker.bundle; sourceTree = "<group>"; };
-		3A5AE61122D6E2290013E8A3 /* Live800ChatLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Live800ChatLib.h; sourceTree = "<group>"; };
-		3A5AE61322D6E22A0013E8A3 /* libLive800ChatLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libLive800ChatLib.a; sourceTree = "<group>"; };
-		3A5AE61422D6E22A0013E8A3 /* LIVUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LIVUserInfo.h; sourceTree = "<group>"; };
-		3A5AE71E22D6E4560013E8A3 /* LIVConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LIVConfig.plist; sourceTree = "<group>"; };
 		3A5B0279234F080100D8828B /* BTTXimaRecordController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTXimaRecordController.h; sourceTree = "<group>"; };
 		3A5B027A234F080100D8828B /* BTTXimaRecordController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTXimaRecordController.m; sourceTree = "<group>"; };
 		3A5B027C234F0D6700D8828B /* BTTXimaRecordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTXimaRecordCell.h; sourceTree = "<group>"; };
@@ -1401,8 +1010,6 @@
 		3A8D6E7F21621268000530DF /* BTTBaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseModel.m; sourceTree = "<group>"; };
 		3A8D6E8921630EE5000530DF /* PublicMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicMethod.h; sourceTree = "<group>"; };
 		3A8D6E8A21630EE5000530DF /* PublicMethod.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicMethod.m; sourceTree = "<group>"; };
-		3A8D6E9421633D3E000530DF /* CLive800Manager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLive800Manager.h; sourceTree = "<group>"; };
-		3A8D6E9521633D3E000530DF /* CLive800Manager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLive800Manager.m; sourceTree = "<group>"; };
 		3A8D6E9621633D3E000530DF /* PushManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushManager.h; sourceTree = "<group>"; };
 		3A8D6E9721633D3E000530DF /* PushManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushManager.m; sourceTree = "<group>"; };
 		3A8D6E9A21633D83000530DF /* BTTBaseWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTBaseWebViewController.h; sourceTree = "<group>"; };
@@ -1780,8 +1387,6 @@
 		3ADD2388217819D500FA959A /* BTTMeMainModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMeMainModel.m; sourceTree = "<group>"; };
 		3ADD238D217836B200FA959A /* BTTMineViewController+Nav.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTMineViewController+Nav.m"; sourceTree = "<group>"; };
 		3ADD238E217836B200FA959A /* BTTMineViewController+Nav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTMineViewController+Nav.h"; sourceTree = "<group>"; };
-		3ADD23952179A9E200FA959A /* BTTLive800ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTLive800ViewController.h; sourceTree = "<group>"; };
-		3ADD23962179A9E200FA959A /* BTTLive800ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTLive800ViewController.m; sourceTree = "<group>"; };
 		3ADD23DE2179B97A00FA959A /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
 		3ADD23DF2179B97A00FA959A /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
 		3ADD23E02179B97A00FA959A /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
@@ -2748,38 +2353,38 @@
 		7675740E26B286030065F99B /* SDWebImage+Compat3_8_1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SDWebImage+Compat3_8_1.m"; sourceTree = "<group>"; };
 		7675740F26B286030065F99B /* LIVUserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LIVUserInfo.h; sourceTree = "<group>"; };
 		7675741126B286030065F99B /* LIVChatFunctionBarColor.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = LIVChatFunctionBarColor.plist; sourceTree = "<group>"; };
-		7675741326B286030065F99B /* LIVEmotionBoardSendCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVEmotionBoardSendCell.nib; sourceTree = "<group>"; };
-		7675741426B286030065F99B /* LIVFileMessageContentView.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVFileMessageContentView.nib; sourceTree = "<group>"; };
-		7675741526B286030065F99B /* LIVMoreBoardCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVMoreBoardCell.nib; sourceTree = "<group>"; };
-		7675741626B286030065F99B /* LIVEmotionBoardCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVEmotionBoardCell.nib; sourceTree = "<group>"; };
-		7675741726B286030065F99B /* LIVTextWithActivityIndicatorToast.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVTextWithActivityIndicatorToast.nib; sourceTree = "<group>"; };
-		7675741826B286030065F99B /* LIVRadioButton.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVRadioButton.nib; sourceTree = "<group>"; };
-		7675741926B286030065F99B /* LIVReceivedRobotMessageCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVReceivedRobotMessageCell.nib; sourceTree = "<group>"; };
-		7675741A26B286030065F99B /* LIVVoiceBoardViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVVoiceBoardViewController.nib; sourceTree = "<group>"; };
-		7675741B26B286030065F99B /* LIVSingleImagePreviewController.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVSingleImagePreviewController.nib; sourceTree = "<group>"; };
-		7675741C26B286030065F99B /* LIVInformationNotificationMessageCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVInformationNotificationMessageCell.nib; sourceTree = "<group>"; };
-		7675741D26B286030065F99B /* LIVLocationPreviewController.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVLocationPreviewController.nib; sourceTree = "<group>"; };
-		7675741E26B286030065F99B /* LIVEvaluateLevel2Cell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVEvaluateLevel2Cell.nib; sourceTree = "<group>"; };
-		7675741F26B286030065F99B /* LIVTimestampInCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVTimestampInCell.nib; sourceTree = "<group>"; };
-		7675742026B286030065F99B /* LIVTextWithSmallIconToast.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVTextWithSmallIconToast.nib; sourceTree = "<group>"; };
-		7675742126B286030065F99B /* LIVTextWithIconToast.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVTextWithIconToast.nib; sourceTree = "<group>"; };
-		7675742226B286030065F99B /* LIVSatisfactionEvaluationTableViewHeader.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVSatisfactionEvaluationTableViewHeader.nib; sourceTree = "<group>"; };
-		7675742326B286030065F99B /* LIVSentMessageCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVSentMessageCell.nib; sourceTree = "<group>"; };
-		7675742426B286030065F99B /* LIVCollectionBoard.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVCollectionBoard.nib; sourceTree = "<group>"; };
-		7675742526B286030065F99B /* LIVBackButton.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVBackButton.nib; sourceTree = "<group>"; };
-		7675742626B286030065F99B /* LIVEvaluateCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVEvaluateCell.nib; sourceTree = "<group>"; };
-		7675742726B286030065F99B /* LIVRobotRelatedQuestionCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVRobotRelatedQuestionCell.nib; sourceTree = "<group>"; };
-		7675742826B286030065F99B /* LIVReceivedMessageCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVReceivedMessageCell.nib; sourceTree = "<group>"; };
-		7675742926B286030065F99B /* LIVBackAlertViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVBackAlertViewController.nib; sourceTree = "<group>"; };
-		7675742A26B286030065F99B /* LIVChatFunctionBar.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVChatFunctionBar.nib; sourceTree = "<group>"; };
-		7675742B26B286030065F99B /* LIVAutoScrollTextViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVAutoScrollTextViewController.nib; sourceTree = "<group>"; };
-		7675742C26B286030065F99B /* LIVSatisfactionEvaluationCommentCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVSatisfactionEvaluationCommentCell.nib; sourceTree = "<group>"; };
-		7675742D26B286030065F99B /* LIVTextToast.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVTextToast.nib; sourceTree = "<group>"; };
-		7675742E26B286030065F99B /* LIVLocationMessageContentView.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVLocationMessageContentView.nib; sourceTree = "<group>"; };
-		7675742F26B286030065F99B /* LIVSatisfactionEvaluationItemCell.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVSatisfactionEvaluationItemCell.nib; sourceTree = "<group>"; };
-		7675743026B286030065F99B /* LIVVideoCameraViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVVideoCameraViewController.nib; sourceTree = "<group>"; };
-		7675743126B286030065F99B /* LIVVideoMessageContentView.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVVideoMessageContentView.nib; sourceTree = "<group>"; };
-		7675743226B286030065F99B /* LIVVideoPlayerViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = file; path = LIVVideoPlayerViewController.nib; sourceTree = "<group>"; };
+		7675741326B286030065F99B /* LIVEmotionBoardSendCell.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVEmotionBoardSendCell.nib; sourceTree = "<group>"; };
+		7675741426B286030065F99B /* LIVFileMessageContentView.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVFileMessageContentView.nib; sourceTree = "<group>"; };
+		7675741526B286030065F99B /* LIVMoreBoardCell.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVMoreBoardCell.nib; sourceTree = "<group>"; };
+		7675741626B286030065F99B /* LIVEmotionBoardCell.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVEmotionBoardCell.nib; sourceTree = "<group>"; };
+		7675741726B286030065F99B /* LIVTextWithActivityIndicatorToast.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVTextWithActivityIndicatorToast.nib; sourceTree = "<group>"; };
+		7675741826B286030065F99B /* LIVRadioButton.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVRadioButton.nib; sourceTree = "<group>"; };
+		7675741926B286030065F99B /* LIVReceivedRobotMessageCell.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVReceivedRobotMessageCell.nib; sourceTree = "<group>"; };
+		7675741A26B286030065F99B /* LIVVoiceBoardViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVVoiceBoardViewController.nib; sourceTree = "<group>"; };
+		7675741B26B286030065F99B /* LIVSingleImagePreviewController.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVSingleImagePreviewController.nib; sourceTree = "<group>"; };
+		7675741C26B286030065F99B /* LIVInformationNotificationMessageCell.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVInformationNotificationMessageCell.nib; sourceTree = "<group>"; };
+		7675741D26B286030065F99B /* LIVLocationPreviewController.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVLocationPreviewController.nib; sourceTree = "<group>"; };
+		7675741E26B286030065F99B /* LIVEvaluateLevel2Cell.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVEvaluateLevel2Cell.nib; sourceTree = "<group>"; };
+		7675741F26B286030065F99B /* LIVTimestampInCell.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVTimestampInCell.nib; sourceTree = "<group>"; };
+		7675742026B286030065F99B /* LIVTextWithSmallIconToast.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVTextWithSmallIconToast.nib; sourceTree = "<group>"; };
+		7675742126B286030065F99B /* LIVTextWithIconToast.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVTextWithIconToast.nib; sourceTree = "<group>"; };
+		7675742226B286030065F99B /* LIVSatisfactionEvaluationTableViewHeader.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVSatisfactionEvaluationTableViewHeader.nib; sourceTree = "<group>"; };
+		7675742326B286030065F99B /* LIVSentMessageCell.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVSentMessageCell.nib; sourceTree = "<group>"; };
+		7675742426B286030065F99B /* LIVCollectionBoard.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVCollectionBoard.nib; sourceTree = "<group>"; };
+		7675742526B286030065F99B /* LIVBackButton.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVBackButton.nib; sourceTree = "<group>"; };
+		7675742626B286030065F99B /* LIVEvaluateCell.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVEvaluateCell.nib; sourceTree = "<group>"; };
+		7675742726B286030065F99B /* LIVRobotRelatedQuestionCell.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVRobotRelatedQuestionCell.nib; sourceTree = "<group>"; };
+		7675742826B286030065F99B /* LIVReceivedMessageCell.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVReceivedMessageCell.nib; sourceTree = "<group>"; };
+		7675742926B286030065F99B /* LIVBackAlertViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVBackAlertViewController.nib; sourceTree = "<group>"; };
+		7675742A26B286030065F99B /* LIVChatFunctionBar.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVChatFunctionBar.nib; sourceTree = "<group>"; };
+		7675742B26B286030065F99B /* LIVAutoScrollTextViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVAutoScrollTextViewController.nib; sourceTree = "<group>"; };
+		7675742C26B286030065F99B /* LIVSatisfactionEvaluationCommentCell.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVSatisfactionEvaluationCommentCell.nib; sourceTree = "<group>"; };
+		7675742D26B286030065F99B /* LIVTextToast.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVTextToast.nib; sourceTree = "<group>"; };
+		7675742E26B286030065F99B /* LIVLocationMessageContentView.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVLocationMessageContentView.nib; sourceTree = "<group>"; };
+		7675742F26B286030065F99B /* LIVSatisfactionEvaluationItemCell.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVSatisfactionEvaluationItemCell.nib; sourceTree = "<group>"; };
+		7675743026B286030065F99B /* LIVVideoCameraViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVVideoCameraViewController.nib; sourceTree = "<group>"; };
+		7675743126B286030065F99B /* LIVVideoMessageContentView.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVVideoMessageContentView.nib; sourceTree = "<group>"; };
+		7675743226B286030065F99B /* LIVVideoPlayerViewController.nib */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; path = LIVVideoPlayerViewController.nib; sourceTree = "<group>"; };
 		7675743326B286030065F99B /* TZImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TZImagePickerController.bundle; sourceTree = "<group>"; };
 		7675743426B286030065F99B /* Emotion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Emotion.plist; sourceTree = "<group>"; };
 		7675743626B286040065F99B /* deleteButton_LIVEmotionBoard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "deleteButton_LIVEmotionBoard@2x.png"; sourceTree = "<group>"; };
@@ -3861,8 +3466,6 @@
 		EAA4811A21ABD265000C0273 /* BTTAGGJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTAGGJViewController.m; sourceTree = "<group>"; };
 		EACCD200218FE1680090B5E6 /* IVWebViewUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IVWebViewUtility.m; sourceTree = "<group>"; };
 		EACCD201218FE1680090B5E6 /* IVWebViewUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IVWebViewUtility.h; sourceTree = "<group>"; };
-		EAE89DC9218C3A7300C29393 /* SDWebImage+Compat3_8_1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImage+Compat3_8_1.m"; sourceTree = "<group>"; };
-		EAE89DCA218C3A7400C29393 /* SDWebImage+Compat3_8_1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDWebImage+Compat3_8_1.h"; sourceTree = "<group>"; };
 		F552EBE6A22A8836B6F9284B /* Pods-Hybird_1e3c3b.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hybird_1e3c3b.release.xcconfig"; path = "Pods/Target Support Files/Pods-Hybird_1e3c3b/Pods-Hybird_1e3c3b.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -3875,13 +3478,12 @@
 				3AD9CEE921675A9B00685B43 /* libresolv.tbd in Frameworks */,
 				3AD9CE312167107B00685B43 /* libpjsua-arm-apple-darwin9.a in Frameworks */,
 				41FD5E602654AC8C00B38644 /* tingyunApp.framework in Frameworks */,
-				3A5AE71D22D6E22B0013E8A3 /* libLive800ChatLib.a in Frameworks */,
 				3AD9CE2B2167107B00685B43 /* libilbccodec-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */,
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
-				767577B626B286270065F99B /* libboringssl_simulator.a in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
+				41CC663B26B2B351005AD275 /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -4306,228 +3908,6 @@
 			path = RefreshTool;
 			sourceTree = "<group>";
 		};
-		3A5AE54E22D6E2280013E8A3 /* LIVResources */ = {
-			isa = PBXGroup;
-			children = (
-				3A5AE54F22D6E2280013E8A3 /* LIVChatFunctionBarColor.plist */,
-				3A5AE55022D6E2280013E8A3 /* nib */,
-				3A5AE57122D6E2280013E8A3 /* TZImagePickerController.bundle */,
-				3A5AE57222D6E2280013E8A3 /* Emotion.plist */,
-				3A5AE57322D6E2280013E8A3 /* image */,
-				3A5AE5FB22D6E2280013E8A3 /* LIVChatViewControllerColor.plist */,
-				3A5AE5FC22D6E2280013E8A3 /* LIVMessageTableViewColor.plist */,
-				3A5AE5FD22D6E2280013E8A3 /* emotion */,
-				3A5AE61022D6E2280013E8A3 /* LIVImagePicker.bundle */,
-			);
-			path = LIVResources;
-			sourceTree = "<group>";
-		};
-		3A5AE55022D6E2280013E8A3 /* nib */ = {
-			isa = PBXGroup;
-			children = (
-				3A5AE55122D6E2280013E8A3 /* LIVEmotionBoardSendCell.nib */,
-				3A5AE55222D6E2280013E8A3 /* LIVFileMessageContentView.nib */,
-				3A5AE55322D6E2280013E8A3 /* LIVMoreBoardCell.nib */,
-				3A5AE55422D6E2280013E8A3 /* LIVEmotionBoardCell.nib */,
-				3A5AE55522D6E2280013E8A3 /* LIVTextWithActivityIndicatorToast.nib */,
-				3A5AE55622D6E2280013E8A3 /* LIVRadioButton.nib */,
-				3A5AE55722D6E2280013E8A3 /* LIVReceivedRobotMessageCell.nib */,
-				3A5AE55822D6E2280013E8A3 /* LIVVoiceBoardViewController.nib */,
-				3A5AE55922D6E2280013E8A3 /* LIVSingleImagePreviewController.nib */,
-				3A5AE55A22D6E2280013E8A3 /* LIVInformationNotificationMessageCell.nib */,
-				3A5AE55B22D6E2280013E8A3 /* LIVLocationPreviewController.nib */,
-				3A5AE55C22D6E2280013E8A3 /* LIVEvaluateLevel2Cell.nib */,
-				3A5AE55D22D6E2280013E8A3 /* LIVTimestampInCell.nib */,
-				3A5AE55E22D6E2280013E8A3 /* LIVTextWithSmallIconToast.nib */,
-				3A5AE55F22D6E2280013E8A3 /* LIVTextWithIconToast.nib */,
-				3A5AE56022D6E2280013E8A3 /* LIVSatisfactionEvaluationTableViewHeader.nib */,
-				3A5AE56122D6E2280013E8A3 /* LIVSentMessageCell.nib */,
-				3A5AE56222D6E2280013E8A3 /* LIVCollectionBoard.nib */,
-				3A5AE56322D6E2280013E8A3 /* LIVBackButton.nib */,
-				3A5AE56422D6E2280013E8A3 /* LIVEvaluateCell.nib */,
-				3A5AE56522D6E2280013E8A3 /* LIVRobotRelatedQuestionCell.nib */,
-				3A5AE56622D6E2280013E8A3 /* LIVReceivedMessageCell.nib */,
-				3A5AE56722D6E2280013E8A3 /* LIVBackAlertViewController.nib */,
-				3A5AE56822D6E2280013E8A3 /* LIVChatFunctionBar.nib */,
-				3A5AE56922D6E2280013E8A3 /* LIVAutoScrollTextViewController.nib */,
-				3A5AE56A22D6E2280013E8A3 /* LIVSatisfactionEvaluationCommentCell.nib */,
-				3A5AE56B22D6E2280013E8A3 /* LIVTextToast.nib */,
-				3A5AE56C22D6E2280013E8A3 /* LIVLocationMessageContentView.nib */,
-				3A5AE56D22D6E2280013E8A3 /* LIVSatisfactionEvaluationItemCell.nib */,
-				3A5AE56E22D6E2280013E8A3 /* LIVVideoCameraViewController.nib */,
-				3A5AE56F22D6E2280013E8A3 /* LIVVideoMessageContentView.nib */,
-				3A5AE57022D6E2280013E8A3 /* LIVVideoPlayerViewController.nib */,
-			);
-			path = nib;
-			sourceTree = "<group>";
-		};
-		3A5AE57322D6E2280013E8A3 /* image */ = {
-			isa = PBXGroup;
-			children = (
-				3A5AE57422D6E2280013E8A3 /* deleteButton_LIVEmotionBoard@2x.png */,
-				3A5AE57522D6E2280013E8A3 /* LIVVideoCamera_close@3x.png */,
-				3A5AE57622D6E2280013E8A3 /* LIVMoreItem@2x.png */,
-				3A5AE57722D6E2280013E8A3 /* back-arrow@3x.png */,
-				3A5AE57822D6E2280013E8A3 /* photo_sel_photoPickerVc@2x.png */,
-				3A5AE57922D6E2280013E8A3 /* LIVSentMessageBackground@2x.png */,
-				3A5AE57A22D6E2280013E8A3 /* LIVFileMessage_TypeZip@3x.png */,
-				3A5AE57B22D6E2280013E8A3 /* LIVReceivedMessageBackground@2x.png */,
-				3A5AE57C22D6E2280013E8A3 /* LIVVideoCamera_flashOff@2x.png */,
-				3A5AE57D22D6E2280013E8A3 /* LIVVideoCamera_OK@2x.png */,
-				3A5AE57E22D6E2280013E8A3 /* LIVAutoScrollTextViewShutdown@2x.png */,
-				3A5AE57F22D6E2280013E8A3 /* LIVFileMessage_TypeExcel@3x.png */,
-				3A5AE58022D6E2280013E8A3 /* sentVoicePlaying2@2x.png */,
-				3A5AE58122D6E2280013E8A3 /* LIVRobotDisagreeIcon@3x.png */,
-				3A5AE58222D6E2280013E8A3 /* LIVRadioButton_selected@2x.png */,
-				3A5AE58322D6E2280013E8A3 /* LIVRadioButton_selected@3x.png */,
-				3A5AE58422D6E2280013E8A3 /* LIVAutoScrollTextView8.png */,
-				3A5AE58522D6E2280013E8A3 /* LIVRobotDisagreeIcon@2x.png */,
-				3A5AE58622D6E2280013E8A3 /* LIVFileMessage_TypeExcel@2x.png */,
-				3A5AE58722D6E2280013E8A3 /* sentVoicePlaying2@3x.png */,
-				3A5AE58822D6E2280013E8A3 /* LIVVideoCamera_OK@3x.png */,
-				3A5AE58922D6E2280013E8A3 /* LIVAutoScrollTextViewShutdown@3x.png */,
-				3A5AE58A22D6E2280013E8A3 /* LIVVideoCamera_flashOff@3x.png */,
-				3A5AE58B22D6E2280013E8A3 /* LIVAutoScrollTextView9.png */,
-				3A5AE58C22D6E2280013E8A3 /* LIVReceivedMessageBackground@3x.png */,
-				3A5AE58D22D6E2280013E8A3 /* MMVideoPreviewPlayHL@2x.png */,
-				3A5AE58E22D6E2280013E8A3 /* LIVFileMessage_TypeZip@2x.png */,
-				3A5AE58F22D6E2280013E8A3 /* LIVSentMessageBackground@3x.png */,
-				3A5AE59022D6E2280013E8A3 /* back-arrow@2x.png */,
-				3A5AE59122D6E2280013E8A3 /* LIVMoreItem@3x.png */,
-				3A5AE59222D6E2280013E8A3 /* photo_sel_previewVc@2x.png */,
-				3A5AE59322D6E2280013E8A3 /* MMVideoPreviewPlay@2x.png */,
-				3A5AE59422D6E2280013E8A3 /* LIVVideoCamera_close@2x.png */,
-				3A5AE59522D6E2280013E8A3 /* deleteButton_LIVEmotionBoard@3x.png */,
-				3A5AE59622D6E2280013E8A3 /* LIVLocationItem@3x.png */,
-				3A5AE59722D6E2280013E8A3 /* LIVVideoCamera_play@2x.png */,
-				3A5AE59822D6E2280013E8A3 /* LIVFileMessage_TypeTxt@2x.png */,
-				3A5AE59922D6E2280013E8A3 /* receivedVoicePlaying2@2x.png */,
-				3A5AE59A22D6E2280013E8A3 /* LIVAutoScrollTextView11.png */,
-				3A5AE59B22D6E2280013E8A3 /* preview_original_def@2x.png */,
-				3A5AE59C22D6E2280013E8A3 /* LIVNavigationBackArrow@3x.png */,
-				3A5AE59D22D6E2280013E8A3 /* liv_radio_unselected@2x.png */,
-				3A5AE59E22D6E2280013E8A3 /* LIVRadioButton_unselected@2x.png */,
-				3A5AE59F22D6E2280013E8A3 /* voiceIcon_LIVVoiceBoard@3x.png */,
-				3A5AE5A022D6E2280013E8A3 /* LIVAutoScrollTextView10.png */,
-				3A5AE5A122D6E2280013E8A3 /* voiceIcon_LIVVoiceBoard@2x.png */,
-				3A5AE5A222D6E2280013E8A3 /* LIVRadioButton_unselected@3x.png */,
-				3A5AE5A322D6E2280013E8A3 /* photo_def_previewVc@2x.png */,
-				3A5AE5A422D6E2280013E8A3 /* liv_radio_unselected@3x.png */,
-				3A5AE5A522D6E2280013E8A3 /* LIVNavigationBackArrow@2x.png */,
-				3A5AE5A622D6E2280013E8A3 /* receivedVoicePlaying2@3x.png */,
-				3A5AE5A722D6E2280013E8A3 /* LIVFileMessage_TypeTxt@3x.png */,
-				3A5AE5A822D6E2280013E8A3 /* photo_original_sel@2x.png */,
-				3A5AE5A922D6E2280013E8A3 /* LIVVideoCamera_play@3x.png */,
-				3A5AE5AA22D6E2280013E8A3 /* LIVLocationItem@2x.png */,
-				3A5AE5AB22D6E2280013E8A3 /* LIVWarningSmallIcon@3x.png */,
-				3A5AE5AC22D6E2280013E8A3 /* LIVFileMessage_TypePPT@3x.png */,
-				3A5AE5AD22D6E2280013E8A3 /* LIVCameraItem@2x.png */,
-				3A5AE5AE22D6E2280013E8A3 /* sentVoicePlaying1@3x.png */,
-				3A5AE5AF22D6E2280013E8A3 /* LIVVideoMessage_PlayButtonIcon.png */,
-				3A5AE5B022D6E2280013E8A3 /* LIVVideoMessage_DefaultThumbnail@2x.png */,
-				3A5AE5B122D6E2280013E8A3 /* sentVoicePlaying3@2x.png */,
-				3A5AE5B222D6E2280013E8A3 /* LIVWarningIcon@3x.png */,
-				3A5AE5B322D6E2280013E8A3 /* photo_def_photoPickerVc@2x.png */,
-				3A5AE5B422D6E2280013E8A3 /* LIVVideoRecorderItem@2x.png */,
-				3A5AE5B522D6E2280013E8A3 /* LIVVideoMessage_PlayButtonIcon@3x.png */,
-				3A5AE5B622D6E2280013E8A3 /* liv_radio_selected@3x.png */,
-				3A5AE5B722D6E2280013E8A3 /* LIVVoiceItem@3x.png */,
-				3A5AE5B822D6E2280013E8A3 /* LIVEmotionItem@3x.png */,
-				3A5AE5B922D6E2280013E8A3 /* LIVRobotRelatedQuestionIcon@2x.png */,
-				3A5AE5BA22D6E2280013E8A3 /* nav_link_close@3x.png */,
-				3A5AE5BB22D6E2280013E8A3 /* LIVFileMessage_TypeWord@2x.png */,
-				3A5AE5BC22D6E2280013E8A3 /* liv_satisfactionr_circular_selected@2x.png */,
-				3A5AE5BD22D6E2280013E8A3 /* liv_satisfactionr_circular_selected@3x.png */,
-				3A5AE5BE22D6E2280013E8A3 /* LIVFileMessage_TypeWord@3x.png */,
-				3A5AE5BF22D6E2280013E8A3 /* preview_number_icon@2x.png */,
-				3A5AE5C022D6E2280013E8A3 /* nav_link_close@2x.png */,
-				3A5AE5C122D6E2280013E8A3 /* LIVRobotRelatedQuestionIcon@3x.png */,
-				3A5AE5C222D6E2280013E8A3 /* LIVEmotionItem@2x.png */,
-				3A5AE5C322D6E2280013E8A3 /* LIVVoiceItem@2x.png */,
-				3A5AE5C422D6E2280013E8A3 /* navi_back@2x.png */,
-				3A5AE5C522D6E2280013E8A3 /* LIVVideoMessage_PlayButtonIcon@2x.png */,
-				3A5AE5C622D6E2280013E8A3 /* liv_radio_selected@2x.png */,
-				3A5AE5C722D6E2280013E8A3 /* LIVVideoRecorderItem@3x.png */,
-				3A5AE5C822D6E2280013E8A3 /* LIVWarningIcon@2x.png */,
-				3A5AE5C922D6E2280013E8A3 /* sentVoicePlaying3@3x.png */,
-				3A5AE5CA22D6E2280013E8A3 /* LIVVideoMessage_DefaultThumbnail@3x.png */,
-				3A5AE5CB22D6E2280013E8A3 /* sentVoicePlaying1@2x.png */,
-				3A5AE5CC22D6E2280013E8A3 /* photo_original_def@2x.png */,
-				3A5AE5CD22D6E2280013E8A3 /* LIVCameraItem@3x.png */,
-				3A5AE5CE22D6E2280013E8A3 /* LIVFileMessage_TypePPT@2x.png */,
-				3A5AE5CF22D6E2280013E8A3 /* LIVWarningSmallIcon@2x.png */,
-				3A5AE5D022D6E2280013E8A3 /* LIVVideoCamera_switchCamera@2x.png */,
-				3A5AE5D122D6E2280013E8A3 /* LIVAutoScrollTextView7.png */,
-				3A5AE5D222D6E2280013E8A3 /* liv_satisfactionr_circular_selected_un@2x.png */,
-				3A5AE5D322D6E2280013E8A3 /* LIVFileMessage_TypeUnknown@3x.png */,
-				3A5AE5D422D6E2280013E8A3 /* LIVResendButton@2x.png */,
-				3A5AE5D522D6E2280013E8A3 /* LIVCSDefaultAvatar@3x.png */,
-				3A5AE5D622D6E2280013E8A3 /* LIVVoiceItem_highlight@3x.png */,
-				3A5AE5D722D6E2280013E8A3 /* LIVUserDefaultAvatar@2x.png */,
-				3A5AE5D822D6E2280013E8A3 /* LIVAutoScrollTextView6.png */,
-				3A5AE5D922D6E2280013E8A3 /* LIVAutoScrollTextView4.png */,
-				3A5AE5DA22D6E2280013E8A3 /* LIVMediaFileSaveToLibraryButton@3x.png */,
-				3A5AE5DB22D6E2280013E8A3 /* LIVLibraryItem@2x.png */,
-				3A5AE5DC22D6E2280013E8A3 /* LIVRobotAgreeIcon@3x.png */,
-				3A5AE5DD22D6E2280013E8A3 /* LIVVideoCamera_flashOn@2x.png */,
-				3A5AE5DE22D6E2280013E8A3 /* photo_number_icon@2x.png */,
-				3A5AE5DF22D6E2280013E8A3 /* receivedVoicePlaying3@2x.png */,
-				3A5AE5E022D6E2280013E8A3 /* LIVDefaultImageThumbnail@2x.png */,
-				3A5AE5E122D6E2280013E8A3 /* LIVVideoCamera_trash@2x.png */,
-				3A5AE5E222D6E2280013E8A3 /* LIVFileMessage_TypePdf@2x.png */,
-				3A5AE5E322D6E2280013E8A3 /* LIVVideoCamera_pause@2x.png */,
-				3A5AE5E422D6E2280013E8A3 /* LIVAutoScrollTextView5.png */,
-				3A5AE5E522D6E2280013E8A3 /* receivedVoicePlaying1@3x.png */,
-				3A5AE5E622D6E2280013E8A3 /* receivedVoicePlaying1@2x.png */,
-				3A5AE5E722D6E2280013E8A3 /* LIVAutoScrollTextView1.png */,
-				3A5AE5E822D6E2280013E8A3 /* VideoSendIcon@2x.png */,
-				3A5AE5E922D6E2280013E8A3 /* LIVVideoCamera_pause@3x.png */,
-				3A5AE5EA22D6E2280013E8A3 /* LIVFileMessage_TypePdf@3x.png */,
-				3A5AE5EB22D6E2280013E8A3 /* LIVVideoCamera_trash@3x.png */,
-				3A5AE5EC22D6E2280013E8A3 /* LIVDefaultImageThumbnail@3x.png */,
-				3A5AE5ED22D6E2280013E8A3 /* receivedVoicePlaying3@3x.png */,
-				3A5AE5EE22D6E2280013E8A3 /* LIVVideoCamera_flashOn@3x.png */,
-				3A5AE5EF22D6E2280013E8A3 /* LIVLibraryItem@3x.png */,
-				3A5AE5F022D6E2280013E8A3 /* LIVRobotAgreeIcon@2x.png */,
-				3A5AE5F122D6E2280013E8A3 /* LIVMediaFileSaveToLibraryButton@2x.png */,
-				3A5AE5F222D6E2280013E8A3 /* LIVUserDefaultAvatar@3x.png */,
-				3A5AE5F322D6E2280013E8A3 /* LIVAutoScrollTextView2.png */,
-				3A5AE5F422D6E2280013E8A3 /* LIVVoiceItem_highlight@2x.png */,
-				3A5AE5F522D6E2280013E8A3 /* LIVCSDefaultAvatar@2x.png */,
-				3A5AE5F622D6E2280013E8A3 /* LIVResendButton@3x.png */,
-				3A5AE5F722D6E2280013E8A3 /* LIVFileMessage_TypeUnknown@2x.png */,
-				3A5AE5F822D6E2280013E8A3 /* liv_satisfactionr_circular_selected_un@3x.png */,
-				3A5AE5F922D6E2280013E8A3 /* LIVAutoScrollTextView3.png */,
-				3A5AE5FA22D6E2280013E8A3 /* LIVVideoCamera_switchCamera@3x.png */,
-			);
-			path = image;
-			sourceTree = "<group>";
-		};
-		3A5AE5FD22D6E2280013E8A3 /* emotion */ = {
-			isa = PBXGroup;
-			children = (
-				3A5AE5FE22D6E2280013E8A3 /* ill.gif */,
-				3A5AE5FF22D6E2280013E8A3 /* angry.gif */,
-				3A5AE60022D6E2280013E8A3 /* nowords.gif */,
-				3A5AE60122D6E2280013E8A3 /* puzzledom.gif */,
-				3A5AE60222D6E2280013E8A3 /* money.gif */,
-				3A5AE60322D6E2280013E8A3 /* tired.gif */,
-				3A5AE60422D6E2280013E8A3 /* inebriation.gif */,
-				3A5AE60522D6E2280013E8A3 /* cute.gif */,
-				3A5AE60622D6E2280013E8A3 /* cool_eye.gif */,
-				3A5AE60722D6E2280013E8A3 /* doubt.gif */,
-				3A5AE60822D6E2280013E8A3 /* sad.gif */,
-				3A5AE60922D6E2280013E8A3 /* cry.gif */,
-				3A5AE60A22D6E2280013E8A3 /* supprise.gif */,
-				3A5AE60B22D6E2280013E8A3 /* sweat.gif */,
-				3A5AE60C22D6E2280013E8A3 /* evilGrin.gif */,
-				3A5AE60D22D6E2280013E8A3 /* embarrassed.gif */,
-				3A5AE60E22D6E2280013E8A3 /* daxiao.gif */,
-				3A5AE60F22D6E2280013E8A3 /* like.gif */,
-			);
-			path = emotion;
-			sourceTree = "<group>";
-		};
 		3A5F7AA521ABCCE400128E8B /* VideoGames */ = {
 			isa = PBXGroup;
 			children = (
@@ -4626,8 +4006,6 @@
 				D345F28E23CFFC2300E658A6 /* IVUtility.h */,
 				D345F28D23CFFC2200E658A6 /* IVUtility.m */,
 				EA5F140821A25EB5004305A7 /* NetworkCache */,
-				3A8D6E9421633D3E000530DF /* CLive800Manager.h */,
-				3A8D6E9521633D3E000530DF /* CLive800Manager.m */,
 				3A8D6E9621633D3E000530DF /* PushManager.h */,
 				3A8D6E9721633D3E000530DF /* PushManager.m */,
 				3AD9CD5921661BE700685B43 /* BTTRedDotManager.h */,
@@ -5239,7 +4617,6 @@
 				3AA788E621FFF2580047A372 /* SDWebImage */,
 				D5C501BB21B7CEDC00C6DA02 /* BRPickerView */,
 				3AE0581D21704D5B00C7E70D /* UUMarqueeView */,
-				3AD9CD6E2167107B00685B43 /* Live800 */,
 				3AD9CD5E2167107A00685B43 /* VOIP */,
 			);
 			path = ThirdParty;
@@ -5279,20 +4656,6 @@
 				3AD9CD6C2167107A00685B43 /* libsrtp-arm-apple-darwin9.a */,
 			);
 			path = pjsip;
-			sourceTree = "<group>";
-		};
-		3AD9CD6E2167107B00685B43 /* Live800 */ = {
-			isa = PBXGroup;
-			children = (
-				3A5AE71E22D6E4560013E8A3 /* LIVConfig.plist */,
-				3A5AE61322D6E22A0013E8A3 /* libLive800ChatLib.a */,
-				3A5AE61122D6E2290013E8A3 /* Live800ChatLib.h */,
-				3A5AE54E22D6E2280013E8A3 /* LIVResources */,
-				3A5AE61422D6E22A0013E8A3 /* LIVUserInfo.h */,
-				EAE89DCA218C3A7400C29393 /* SDWebImage+Compat3_8_1.h */,
-				EAE89DC9218C3A7300C29393 /* SDWebImage+Compat3_8_1.m */,
-			);
-			path = Live800;
 			sourceTree = "<group>";
 		};
 		3AD9CEED216B3DC900685B43 /* WebViewUserAgaent */ = {
@@ -5443,7 +4806,6 @@
 				EAA4811721ABD264000C0273 /* BTTAGQJViewController.m */,
 				3A5F7AA521ABCCE400128E8B /* VideoGames */,
 				3A9E4C6321A0059300E7D8C0 /* PromotionDetail */,
-				3ADD23982179A9E900FA959A /* Live800 */,
 				3ADD235F2176FF6100FA959A /* LoginAndRegister */,
 			);
 			path = Controller;
@@ -5604,15 +4966,6 @@
 				41CA82C926412D1800A550EE /* BTTInterestRecordsModel.m */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		3ADD23982179A9E900FA959A /* Live800 */ = {
-			isa = PBXGroup;
-			children = (
-				3ADD23952179A9E200FA959A /* BTTLive800ViewController.h */,
-				3ADD23962179A9E200FA959A /* BTTLive800ViewController.m */,
-			);
-			path = Live800;
 			sourceTree = "<group>";
 		};
 		3ADD23DC2179B97A00FA959A /* SDCycleScrollView */ = {
@@ -9460,132 +8813,66 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A5AE6C922D6E22A0013E8A3 /* liv_satisfactionr_circular_selected@3x.png in Resources */,
-				3A5AE68322D6E22A0013E8A3 /* back-arrow@3x.png in Resources */,
-				3A5AE6CF22D6E22A0013E8A3 /* LIVVoiceItem@2x.png in Resources */,
 				3A7A1A6D21BF68AA00572B50 /* BTTRegisterSuccessTwoCell.xib in Resources */,
-				3A5AE67722D6E22A0013E8A3 /* LIVSatisfactionEvaluationCommentCell.nib in Resources */,
 				3A0CCED4238B7FF000CFEE22 /* BTTNewAccountGuidePopView.xib in Resources */,
-				3A5AE6CE22D6E22A0013E8A3 /* LIVEmotionItem@2x.png in Resources */,
-				3A5AE6B422D6E22A0013E8A3 /* photo_original_sel@2x.png in Resources */,
 				418E72DA2577786700D9BF95 /* BTTChooseCurrencyCell.xib in Resources */,
-				3A5AE67F22D6E22A0013E8A3 /* Emotion.plist in Resources */,
 				4135A703263941D000D3BF17 /* BTTLiCaiOutDetailPopView.xib in Resources */,
 				3A49DF9C2179D90D00FEFBDA /* BTTBindingMobileOneCell.xib in Resources */,
-				3A5AE6FD22D6E22A0013E8A3 /* LIVMediaFileSaveToLibraryButton@2x.png in Resources */,
-				3A5AE6DE22D6E22A0013E8A3 /* liv_satisfactionr_circular_selected_un@2x.png in Resources */,
-				3A5AE66C22D6E22A0013E8A3 /* LIVTextWithIconToast.nib in Resources */,
-				3A5AE67B22D6E22A0013E8A3 /* LIVVideoCameraViewController.nib in Resources */,
 				4184DE16251B331000D433D4 /* BTTModifyBankRecordHeaderCell.xib in Resources */,
 				4135A6F9263941D000D3BF17 /* BTTLiCaiTransRecordTopBtnView.xib in Resources */,
-				3A5AE6E022D6E22A0013E8A3 /* LIVResendButton@2x.png in Resources */,
-				3A5AE70722D6E22A0013E8A3 /* LIVChatViewControllerColor.plist in Resources */,
 				3A8F518C215F77AC0069D1B3 /* intro_3.jpg in Resources */,
 				4135A732263A667400D3BF17 /* BTTLiCaiInDetailPopView.xib in Resources */,
 				3A3DF1E2237BA276006129F6 /* BTTHotPromotionsCell.xib in Resources */,
 				3A11ADD721816E5800B1AFF4 /* SVProgressHUD.bundle in Resources */,
 				D31B0EF523B45251003666BA /* BTTUSDTItemCell.xib in Resources */,
-				3A5AE69222D6E22A0013E8A3 /* LIVFileMessage_TypeExcel@2x.png in Resources */,
-				3A5AE6D422D6E22A0013E8A3 /* LIVWarningIcon@2x.png in Resources */,
 				D5DBEB3421ABB774008AF629 /* CNPayChannelCell.xib in Resources */,
 				419AEC5B250F64F100D089DD /* BTTBJLPopView.xib in Resources */,
 				3A9E4C3F219E55E200E7D8C0 /* BTTMakeCallSuccessView.xib in Resources */,
-				3A5AE67622D6E22A0013E8A3 /* LIVAutoScrollTextViewController.nib in Resources */,
 				3AF1B81521AE8C5500BF8C3A /* BTTVideoGamesNoDataCell.xib in Resources */,
 				3AC3FFB0219BB1D0008AECCB /* BTTLoginCodeCell.xib in Resources */,
 				3A11AE282184025900B1AFF4 /* BTTPasswordCell.xib in Resources */,
 				4146810526999F250093B610 /* BTTBindNameAndPhonePopView.xib in Resources */,
-				3A5AE6BC22D6E22A0013E8A3 /* LIVVideoMessage_DefaultThumbnail@2x.png in Resources */,
-				3A5AE6C322D6E22A0013E8A3 /* LIVVoiceItem@3x.png in Resources */,
 				3AE05817217030CC00C7E70D /* BTTHomePageActivitiesCell.xib in Resources */,
 				4135A700263941D000D3BF17 /* BTTLiCaiOutDetailPopViewCell.xib in Resources */,
 				3A11ADF72181A22F00B1AFF4 /* BTTWithdrawalHeaderCell.xib in Resources */,
-				3A5AE71A22D6E22B0013E8A3 /* like.gif in Resources */,
-				3A5AE70A22D6E22A0013E8A3 /* angry.gif in Resources */,
-				3A5AE71622D6E22B0013E8A3 /* sweat.gif in Resources */,
-				3A5AE70B22D6E22A0013E8A3 /* nowords.gif in Resources */,
-				3A5AE70222D6E22A0013E8A3 /* LIVResendButton@3x.png in Resources */,
-				3A5AE6ED22D6E22A0013E8A3 /* LIVVideoCamera_trash@2x.png in Resources */,
 				D5DBEB4021AC1355008AF629 /* CNPayQRCell.xib in Resources */,
-				3A5AE71B22D6E22B0013E8A3 /* LIVImagePicker.bundle in Resources */,
 				3A7391CE230CD14600E2DFD5 /* BTTRegisterCheckPopView.xib in Resources */,
-				3A5AE6F922D6E22A0013E8A3 /* receivedVoicePlaying3@3x.png in Resources */,
-				3A5AE6B222D6E22A0013E8A3 /* receivedVoicePlaying2@3x.png in Resources */,
-				3A5AE6FB22D6E22A0013E8A3 /* LIVLibraryItem@3x.png in Resources */,
 				3AD9CF80216F462600685B43 /* BTTHomePageSeparateCell.xib in Resources */,
 				D599251E21AFC8CA001E885A /* CNPayDepostiBankCell.xib in Resources */,
-				3A5AE68222D6E22A0013E8A3 /* LIVMoreItem@2x.png in Resources */,
 				3AB0686F21A5033700072FB7 /* BTTPTTransferInputCell.xib in Resources */,
 				41EAF0F2260D93BD0091FE09 /* BTTMeInfoCell.xib in Resources */,
-				3A5AE69C22D6E22A0013E8A3 /* back-arrow@2x.png in Resources */,
-				3A5AE6DF22D6E22A0013E8A3 /* LIVFileMessage_TypeUnknown@3x.png in Resources */,
 				4184DE19251B331800D433D4 /* BTTModifyBankRecordCell.xib in Resources */,
-				3A5AE6F322D6E22A0013E8A3 /* LIVAutoScrollTextView1.png in Resources */,
 				4135A6FC263941D000D3BF17 /* BTTLiCaiInterestRateBillCell.xib in Resources */,
-				3A5AE6BD22D6E22A0013E8A3 /* sentVoicePlaying3@2x.png in Resources */,
 				3ADD237221772FB900FA959A /* BTTMeMoneyHeaderCell.xib in Resources */,
 				3AD9CF51216EFB3700685B43 /* BTTHomePageBannerCell.xib in Resources */,
-				3A5AE6F722D6E22A0013E8A3 /* LIVVideoCamera_trash@3x.png in Resources */,
 				414AAA222601F76F00518D32 /* BTTDcboxPayController.xib in Resources */,
-				3A5AE71222D6E22B0013E8A3 /* doubt.gif in Resources */,
-				3A5AE71022D6E22B0013E8A3 /* cute.gif in Resources */,
 				D5DBEB2F21ABB774008AF629 /* CNCompleteInfoView.xib in Resources */,
 				4135A7152639420700D3BF17 /* BTTMeHeaderLoginCell.xib in Resources */,
 				3AF1B81021AE680A00BF8C3A /* BTTVideoGamesSearchCell.xib in Resources */,
 				3A5AE4A322CDE5680013E8A3 /* BTTBishangStep1VC.xib in Resources */,
-				3A5AE66D22D6E22A0013E8A3 /* LIVSatisfactionEvaluationTableViewHeader.nib in Resources */,
-				3A5AE67C22D6E22A0013E8A3 /* LIVVideoMessageContentView.nib in Resources */,
 				EA5F141C21A28515004305A7 /* NeedDeviceURL.plist in Resources */,
-				3A5AE66622D6E22A0013E8A3 /* LIVSingleImagePreviewController.nib in Resources */,
 				3A8F518A215F77AC0069D1B3 /* intro_1.jpg in Resources */,
 				3A685B90226DAAB900A8F59D /* BTTRegisterNinameNormalCell.xib in Resources */,
-				3A5AE6DA22D6E22A0013E8A3 /* LIVFileMessage_TypePPT@2x.png in Resources */,
-				3A5AE69A22D6E22A0013E8A3 /* LIVFileMessage_TypeZip@2x.png in Resources */,
-				3A5AE67222D6E22A0013E8A3 /* LIVRobotRelatedQuestionCell.nib in Resources */,
 				3AAE8221219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.xib in Resources */,
-				3A5AE6E422D6E22A0013E8A3 /* LIVAutoScrollTextView6.png in Resources */,
-				3A5AE6AA22D6E22A0013E8A3 /* LIVRadioButton_unselected@2x.png in Resources */,
-				3A5AE70322D6E22A0013E8A3 /* LIVFileMessage_TypeUnknown@2x.png in Resources */,
-				3A5AE67122D6E22A0013E8A3 /* LIVEvaluateCell.nib in Resources */,
 				3A514E492186FCE800B83881 /* BTTXimaFooterCell.xib in Resources */,
-				3A5AE68F22D6E22A0013E8A3 /* LIVRadioButton_selected@3x.png in Resources */,
-				3A5AE65F22D6E22A0013E8A3 /* LIVFileMessageContentView.nib in Resources */,
-				3A5AE70F22D6E22B0013E8A3 /* inebriation.gif in Resources */,
 				D599252621AFCFEE001E885A /* CNPayBankView.xib in Resources */,
-				3A5AE69022D6E22A0013E8A3 /* LIVAutoScrollTextView8.png in Resources */,
 				3A8F513B215F74D00069D1B3 /* LaunchScreen.storyboard in Resources */,
 				D5DBEB1421ABB774008AF629 /* CNPayOnlineVC.xib in Resources */,
-				3A5AE6D522D6E22A0013E8A3 /* sentVoicePlaying3@3x.png in Resources */,
-				3A5AE67522D6E22A0013E8A3 /* LIVChatFunctionBar.nib in Resources */,
-				3A5AE6CD22D6E22A0013E8A3 /* LIVRobotRelatedQuestionIcon@3x.png in Resources */,
 				3A8F5189215F77AC0069D1B3 /* intro_0.jpg in Resources */,
-				3A5AE6D922D6E22A0013E8A3 /* LIVCameraItem@3x.png in Resources */,
 				411B89E226980EA700F45A22 /* BTTCompleteNamePopView.xib in Resources */,
-				3A5AE6EE22D6E22A0013E8A3 /* LIVFileMessage_TypePdf@2x.png in Resources */,
-				3A5AE70C22D6E22B0013E8A3 /* puzzledom.gif in Resources */,
 				D365536823C05755007E50BE /* BTTPayUsdtNoticeView.xib in Resources */,
 				D5DBEB0E21ABB774008AF629 /* CNPayBQStep1VC.xib in Resources */,
-				3A5AE66B22D6E22A0013E8A3 /* LIVTextWithSmallIconToast.nib in Resources */,
 				3AD9CF69216F314700685B43 /* BTTHomePageGamesCell.xib in Resources */,
 				3AE1EAE4217F25750073A32D /* BTTCardInfoCell.xib in Resources */,
 				3A5F7A8021A6C86A00128E8B /* BTTXimaSingleBtnCell.xib in Resources */,
-				3A5AE6BE22D6E22A0013E8A3 /* LIVWarningIcon@3x.png in Resources */,
 				3AE1EAE92180034C0073A32D /* BTTCardInfoAddCell.xib in Resources */,
 				4180B04525D3C23800139E88 /* BTTNewYearPopView.xib in Resources */,
 				3A11ADFF2181B72700B1AFF4 /* BTTWithdrawalCardSelectCell.xib in Resources */,
-				3A5AE6F622D6E22A0013E8A3 /* LIVFileMessage_TypePdf@3x.png in Resources */,
 				3AAE821C219A738B003EC8B0 /* BTTLoginOrRegisterTypeSelectCell.xib in Resources */,
 				4184DE01251B329300D433D4 /* BTTWithdrawHeaderCell.xib in Resources */,
-				3A5AE6B922D6E22A0013E8A3 /* LIVCameraItem@2x.png in Resources */,
 				3A6DD5F62289161C000288B2 /* BTTAndroid88PopView.xib in Resources */,
-				3A5AE6D622D6E22A0013E8A3 /* LIVVideoMessage_DefaultThumbnail@3x.png in Resources */,
 				3AAE8219219A738B003EC8B0 /* BTTRegisterQuickManualCell.xib in Resources */,
 				41B3127D269D1FC0002AF76D /* BTTPaymentWarningPopView.xib in Resources */,
-				3A5AE6DC22D6E22A0013E8A3 /* LIVVideoCamera_switchCamera@2x.png in Resources */,
-				3A5AE6A822D6E22A0013E8A3 /* LIVNavigationBackArrow@3x.png in Resources */,
-				3A5AE6B722D6E22A0013E8A3 /* LIVWarningSmallIcon@3x.png in Resources */,
-				3A5AE6DD22D6E22A0013E8A3 /* LIVAutoScrollTextView7.png in Resources */,
-				3A5AE6FF22D6E22A0013E8A3 /* LIVAutoScrollTextView2.png in Resources */,
 				3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */,
 				3A75A182221164BC00584A35 /* BTTLoginAccountSelectCell.xib in Resources */,
 				D339CE9924C03CAC009ACD1C /* OTCInsideController.xib in Resources */,
@@ -9594,128 +8881,67 @@
 				3A49DFA62179DDA100FEFBDA /* BTTBindingMobileBtnCell.xib in Resources */,
 				3A49DF932179D62900FEFBDA /* BTTAccountBlanceCell.xib in Resources */,
 				3ADD23682177230300FA959A /* BTTMeHeaderNotLoginCell.xib in Resources */,
-				3A5AE6B622D6E22A0013E8A3 /* LIVLocationItem@2x.png in Resources */,
 				3A11AE6D2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib in Resources */,
-				3A5AE66422D6E22A0013E8A3 /* LIVReceivedRobotMessageCell.nib in Resources */,
-				3A5AE6AC22D6E22A0013E8A3 /* LIVAutoScrollTextView10.png in Resources */,
-				3A5AE69D22D6E22A0013E8A3 /* LIVMoreItem@3x.png in Resources */,
-				3A5AE6E222D6E22A0013E8A3 /* LIVVoiceItem_highlight@3x.png in Resources */,
-				3A5AE6EA22D6E22A0013E8A3 /* photo_number_icon@2x.png in Resources */,
 				4184DE12251B32F900D433D4 /* BTTXmRecordHeaderCell.xib in Resources */,
 				76C9F42C2668A3070002591D /* BTTDragonBoatChancePopView.xib in Resources */,
 				3AB0682421A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.xib in Resources */,
-				3A5AE6D722D6E22A0013E8A3 /* sentVoicePlaying1@2x.png in Resources */,
 				4184DE14251B32FF00D433D4 /* BTTXmRecordCell.xib in Resources */,
-				3A5AE66922D6E22A0013E8A3 /* LIVEvaluateLevel2Cell.nib in Resources */,
-				3A5AE6A422D6E22A0013E8A3 /* LIVFileMessage_TypeTxt@2x.png in Resources */,
 				415CA1DF24E53A7C005E0E9F /* BTTMeSaveMoneyAlipayCell.xib in Resources */,
 				3A5B0290234F3AC100D8828B /* BTTXimaRecordButtonsView.xib in Resources */,
-				3A5AE67922D6E22A0013E8A3 /* LIVLocationMessageContentView.nib in Resources */,
 				3AAE8222219A738B003EC8B0 /* BTTForgetPasswordCell.xib in Resources */,
-				3A5AE66722D6E22A0013E8A3 /* LIVInformationNotificationMessageCell.nib in Resources */,
 				76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */,
-				3A5AE6AE22D6E22A0013E8A3 /* LIVRadioButton_unselected@3x.png in Resources */,
 				3A11AE682186D94B00B1AFF4 /* BTTThisWeekCell.xib in Resources */,
 				3A7C0B1A21EC7E07002658CC /* BTTSaveMoneyModifyCell.xib in Resources */,
-				3A5AE69322D6E22A0013E8A3 /* sentVoicePlaying2@3x.png in Resources */,
-				3A5AE70D22D6E22B0013E8A3 /* money.gif in Resources */,
 				76756EAF26A582130065F99B /* BTTSevenXiPriHotPopView.xib in Resources */,
-				3A5AE6D022D6E22A0013E8A3 /* navi_back@2x.png in Resources */,
-				3A5AE6BB22D6E22A0013E8A3 /* LIVVideoMessage_PlayButtonIcon.png in Resources */,
-				3A5AE6D222D6E22A0013E8A3 /* liv_radio_selected@2x.png in Resources */,
 				3A7A1A6821BDF21F00572B50 /* BTTLuckyWheelCoinView.xib in Resources */,
 				4135A702263941D000D3BF17 /* BTTLiCaiBtnCell.xib in Resources */,
 				410997FB251DC876001FA895 /* BTTDepositRecordHeaderCell.xib in Resources */,
-				3A5AE68B22D6E22A0013E8A3 /* LIVFileMessage_TypeExcel@3x.png in Resources */,
-				3A5AE65E22D6E22A0013E8A3 /* LIVEmotionBoardSendCell.nib in Resources */,
-				3A5AE69422D6E22A0013E8A3 /* LIVVideoCamera_OK@3x.png in Resources */,
 				3A75A17D22115CA700584A35 /* BTTLoginAccountSelectView.xib in Resources */,
-				3A5AE70922D6E22A0013E8A3 /* ill.gif in Resources */,
 				3AD9CF77216F3F6300685B43 /* BTTAppCollectionViewCell.xib in Resources */,
-				3A5AE66F22D6E22A0013E8A3 /* LIVCollectionBoard.nib in Resources */,
-				3A5AE6D322D6E22A0013E8A3 /* LIVVideoRecorderItem@3x.png in Resources */,
-				3A5AE70622D6E22A0013E8A3 /* LIVVideoCamera_switchCamera@3x.png in Resources */,
-				3A5AE6F822D6E22A0013E8A3 /* LIVDefaultImageThumbnail@3x.png in Resources */,
 				3A9E4C34219D9D6B00E7D8C0 /* BTTMakeCallLoginView.xib in Resources */,
-				3A5AE66A22D6E22A0013E8A3 /* LIVTimestampInCell.nib in Resources */,
-				3A5AE6E522D6E22A0013E8A3 /* LIVAutoScrollTextView4.png in Resources */,
 				4135A707263941D000D3BF17 /* BTTLiCaiBannerCell.xib in Resources */,
 				3AAFF88721D378E800F875B1 /* BTTMeSaveMoneyWechatCell.xib in Resources */,
 				3A5B0280234F0D6700D8828B /* BTTXimaRecordCell.xib in Resources */,
 				D5DBEB0921ABB774008AF629 /* CNPayBQStep2VC.xib in Resources */,
-				3A5AE68C22D6E22A0013E8A3 /* sentVoicePlaying2@2x.png in Resources */,
-				3A5AE69822D6E22A0013E8A3 /* LIVReceivedMessageBackground@3x.png in Resources */,
-				3A5AE69122D6E22A0013E8A3 /* LIVRobotDisagreeIcon@2x.png in Resources */,
-				3A5AE6EB22D6E22A0013E8A3 /* receivedVoicePlaying3@2x.png in Resources */,
 				3A929432219D1B4700764E7E /* BTTForgetPwdOneCell.xib in Resources */,
 				3AB0684321A3998200072FB7 /* BTTUnBindingBtnCell.xib in Resources */,
 				D5DBEB2D21ABB774008AF629 /* CNPayTipView.xib in Resources */,
 				3AFCD7D121AD179600B136C1 /* BTTVideoGameCell.xib in Resources */,
-				3A5AE70422D6E22A0013E8A3 /* liv_satisfactionr_circular_selected_un@3x.png in Resources */,
-				3A5AE68622D6E22A0013E8A3 /* LIVFileMessage_TypeZip@3x.png in Resources */,
 				7629D73C2668CE7300CF758C /* BTTDragonBoatMenualPopView.xib in Resources */,
 				3A514E3F2186E24000B83881 /* BTTThisWeekTotalCell.xib in Resources */,
 				D5DBEB0021ABB774008AF629 /* CNPayDepositStep3VC.xib in Resources */,
-				3A5AE6CC22D6E22A0013E8A3 /* nav_link_close@2x.png in Resources */,
-				3A5AE6A122D6E22A0013E8A3 /* deleteButton_LIVEmotionBoard@3x.png in Resources */,
-				3A5AE68022D6E22A0013E8A3 /* deleteButton_LIVEmotionBoard@2x.png in Resources */,
 				3A7740A6224DE90800A65841 /* BTTPayBQAliStep2VC.xib in Resources */,
 				76756F8626A6C5790065F99B /* BTTDefaultPopView.xib in Resources */,
-				3A5AE68522D6E22A0013E8A3 /* LIVSentMessageBackground@2x.png in Resources */,
-				3A5AE71522D6E22B0013E8A3 /* supprise.gif in Resources */,
 				3AAFF88C21D37E9000F875B1 /* BTTMeMoreSaveMoneyHeaderCell.xib in Resources */,
-				3A5AE6E822D6E22A0013E8A3 /* LIVRobotAgreeIcon@3x.png in Resources */,
 				3A5F7AB621AD0E6800128E8B /* BTTVideoGamesFilterCell.xib in Resources */,
 				3AD9CF6E216F33F300685B43 /* BTTGameCollectionViewCell.xib in Resources */,
 				3ADD237C2177366B00FA959A /* BTTMeMainCell.xib in Resources */,
 				41800D5A2623E95900FAC27B /* BTTAddBitollCardController.xib in Resources */,
 				3AF1B81A21AF994A00BF8C3A /* BTTVideoGamesFooterCell.xib in Resources */,
-				3A5AE6F522D6E22A0013E8A3 /* LIVVideoCamera_pause@3x.png in Resources */,
-				3A5AE6D122D6E22A0013E8A3 /* LIVVideoMessage_PlayButtonIcon@2x.png in Resources */,
 				41A09D3825E4F4BD00255681 /* BTTDifferentLocPopView.xib in Resources */,
 				3A34F79F21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib in Resources */,
-				3A5AE6A722D6E22A0013E8A3 /* preview_original_def@2x.png in Resources */,
-				3A5AE67422D6E22A0013E8A3 /* LIVBackAlertViewController.nib in Resources */,
 				415CA1F024E53B0B005E0E9F /* Assets.xcassets in Resources */,
 				3A11AE082181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.xib in Resources */,
-				3A5AE6B022D6E22A0013E8A3 /* liv_radio_unselected@3x.png in Resources */,
-				3A5AE6F422D6E22A0013E8A3 /* VideoSendIcon@2x.png in Resources */,
 				3A5F7A9B21A8E71100128E8B /* BTTXimaSuccessItemCell.xib in Resources */,
 				D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */,
-				3A5AE6B522D6E22A0013E8A3 /* LIVVideoCamera_play@3x.png in Resources */,
 				3A21AEB02394BCBF009E73FD /* BTTShowErcodePopview.xib in Resources */,
-				3A5AE6FA22D6E22A0013E8A3 /* LIVVideoCamera_flashOn@3x.png in Resources */,
 				D3A9A71B240E2B6A007F672A /* BTTNormalRegisterSuccessController.xib in Resources */,
 				3ADD23772177328B00FA959A /* BTTMeSaveMoneyCell.xib in Resources */,
-				3A5AE6C022D6E22A0013E8A3 /* LIVVideoRecorderItem@2x.png in Resources */,
-				3A5AE68422D6E22A0013E8A3 /* photo_sel_photoPickerVc@2x.png in Resources */,
 				D3B47D5923B70A5500D37C7F /* app.zip in Resources */,
-				3A5AE70E22D6E22B0013E8A3 /* tired.gif in Resources */,
-				3A5AE66022D6E22A0013E8A3 /* LIVMoreBoardCell.nib in Resources */,
-				3A5AE68D22D6E22A0013E8A3 /* LIVRobotDisagreeIcon@3x.png in Resources */,
-				3A5AE6C522D6E22A0013E8A3 /* LIVRobotRelatedQuestionIcon@2x.png in Resources */,
 				3A11AE592186A71100B1AFF4 /* BTTBookMessageCell.xib in Resources */,
-				3A5AE66322D6E22A0013E8A3 /* LIVRadioButton.nib in Resources */,
 				3AAE821A219A738B003EC8B0 /* BTTLoginOrRegisterBtnCell.xib in Resources */,
 				3A5F7AA021A8FD3100128E8B /* BTTXimaSuccessBtnsCell.xib in Resources */,
 				3A929429219C3D6200764E7E /* BTTRegisterSuccessBtnsCell.xib in Resources */,
 				3AAE8216219A738B003EC8B0 /* BTTRegisterNormalCell.xib in Resources */,
-				3A5AE66222D6E22A0013E8A3 /* LIVTextWithActivityIndicatorToast.nib in Resources */,
 				EA55F37C21C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.xib in Resources */,
 				410997F9251DC870001FA895 /* BTTDepositRecordCell.xib in Resources */,
-				3A5AE68A22D6E22A0013E8A3 /* LIVAutoScrollTextViewShutdown@2x.png in Resources */,
 				3AF9EB5D22A4B62300A85D9F /* BTTMidAutumnPopView.xib in Resources */,
-				3A5AE71922D6E22B0013E8A3 /* daxiao.gif in Resources */,
 				3AE1EB2121805E980073A32D /* BTTAddCardBtnsCell.xib in Resources */,
-				3A5AE6C122D6E22A0013E8A3 /* LIVVideoMessage_PlayButtonIcon@3x.png in Resources */,
-				3A5AE70022D6E22A0013E8A3 /* LIVVoiceItem_highlight@2x.png in Resources */,
 				4196BEF1255BC21B00F41EED /* BTTWithdrawToUsdtPromoPop.xib in Resources */,
 				4135C715266F736900C3A9E9 /* BTTLiCaiInRecordCell.xib in Resources */,
 				3AAE821F219A738B003EC8B0 /* BTTLoginCell.xib in Resources */,
-				3A5AE71722D6E22B0013E8A3 /* evilGrin.gif in Resources */,
 				4184DE0C251B32CE00D433D4 /* BTTPromoRecordCell.xib in Resources */,
 				3A289500237BE70C008EB579 /* BTTLoginOrRegisterBtsView.xib in Resources */,
-				3A5AE6E122D6E22A0013E8A3 /* LIVCSDefaultAvatar@3x.png in Resources */,
 				4135A7142639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.xib in Resources */,
 				3A685B9522706A2700A8F59D /* BTTChangePwdBtnsCell.xib in Resources */,
 				D5DBEB2E21ABB774008AF629 /* CNPayRecommendCell.xib in Resources */,
@@ -9723,141 +8949,76 @@
 				3AE1EB012180228B0073A32D /* BTTVerifySelectCell.xib in Resources */,
 				3A9E4C2F219D924800E7D8C0 /* BTTMakeCallNoLoginView.xib in Resources */,
 				3AE0582521704DCB00C7E70D /* BTTHomePageAmountsCell.xib in Resources */,
-				3A5AE6F122D6E22A0013E8A3 /* receivedVoicePlaying1@3x.png in Resources */,
-				3A5AE6BF22D6E22A0013E8A3 /* photo_def_photoPickerVc@2x.png in Resources */,
-				3A5AE71F22D6E4560013E8A3 /* LIVConfig.plist in Resources */,
-				3A5AE6B122D6E22A0013E8A3 /* LIVNavigationBackArrow@2x.png in Resources */,
-				3A5AE69522D6E22A0013E8A3 /* LIVAutoScrollTextViewShutdown@3x.png in Resources */,
 				4135C717266F736900C3A9E9 /* BTTLiCaiOutRecordCell.xib in Resources */,
 				41EAF0F6260D94290091FE09 /* hot.gif in Resources */,
 				D5C5019921B67C0800C6DA02 /* CNPayDepositSuccessVC.xib in Resources */,
 				3AAFF87D21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.xib in Resources */,
-				3A5AE6CB22D6E22A0013E8A3 /* preview_number_icon@2x.png in Resources */,
 				D318AC1824333BC500183407 /* BTTKSAddBfbWalletController.xib in Resources */,
-				3A5AE6E922D6E22A0013E8A3 /* LIVVideoCamera_flashOn@2x.png in Resources */,
-				3A5AE6EF22D6E22A0013E8A3 /* LIVVideoCamera_pause@2x.png in Resources */,
-				3A5AE68122D6E22A0013E8A3 /* LIVVideoCamera_close@3x.png in Resources */,
-				3A5AE6BA22D6E22A0013E8A3 /* sentVoicePlaying1@3x.png in Resources */,
-				3A5AE66522D6E22A0013E8A3 /* LIVVoiceBoardViewController.nib in Resources */,
-				3A5AE69E22D6E22A0013E8A3 /* photo_sel_previewVc@2x.png in Resources */,
 				3A7A1A7221BF859000572B50 /* BTTRegisterSuccessChangePwdCell.xib in Resources */,
 				D5DBEB1E21ABB774008AF629 /* CNPayCardStep1VC.xib in Resources */,
 				EA5F141B21A28515004305A7 /* DeviceModelsForIOS.plist in Resources */,
-				3A5AE6FE22D6E22A0013E8A3 /* LIVUserDefaultAvatar@3x.png in Resources */,
 				3AD9CF8A216F4E5400685B43 /* BTTHomePageDiscountCell.xib in Resources */,
 				3AC3FFA6219ABED9008AECCB /* BTTUnlockPopView.xib in Resources */,
-				3A5AE69F22D6E22A0013E8A3 /* MMVideoPreviewPlay@2x.png in Resources */,
-				3A5AE6EC22D6E22A0013E8A3 /* LIVDefaultImageThumbnail@2x.png in Resources */,
 				41F14AF025A69CA1008E8CAD /* BTTYueFenHongPopView.xib in Resources */,
-				3A5AE6E322D6E22A0013E8A3 /* LIVUserDefaultAvatar@2x.png in Resources */,
-				3A5AE69622D6E22A0013E8A3 /* LIVVideoCamera_flashOff@3x.png in Resources */,
 				411B89E72698533D00F45A22 /* BTTDontUseRegularPhonePopView.xib in Resources */,
 				3A8F5136215F74CF0069D1B3 /* Main.storyboard in Resources */,
 				3AAFF8C121DE047200F875B1 /* BTTSaveMoneySuccessHeaderCell.xib in Resources */,
-				3A5AE71822D6E22B0013E8A3 /* embarrassed.gif in Resources */,
-				3A5AE68E22D6E22A0013E8A3 /* LIVRadioButton_selected@2x.png in Resources */,
-				3A5AE6A522D6E22A0013E8A3 /* receivedVoicePlaying2@2x.png in Resources */,
-				3A5AE71422D6E22B0013E8A3 /* cry.gif in Resources */,
 				3AB0682A21A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.xib in Resources */,
-				3A5AE67822D6E22A0013E8A3 /* LIVTextToast.nib in Resources */,
-				3A5AE68722D6E22A0013E8A3 /* LIVReceivedMessageBackground@2x.png in Resources */,
 				3AB0686A21A4F29B00072FB7 /* BTTPublicBtnCell.xib in Resources */,
-				3A5AE6F022D6E22A0013E8A3 /* LIVAutoScrollTextView5.png in Resources */,
-				3A5AE71322D6E22B0013E8A3 /* sad.gif in Resources */,
-				3A5AE66122D6E22A0013E8A3 /* LIVEmotionBoardCell.nib in Resources */,
 				D331B20C23D539B10080A27D /* BTTConsetiveWinsPopView.xib in Resources */,
-				3A5AE6A022D6E22A0013E8A3 /* LIVVideoCamera_close@2x.png in Resources */,
 				4161031F2681E18200328EEF /* login_bg_video.mp4 in Resources */,
 				3A11AE632186CDA100B1AFF4 /* BTTXimaHeaderCell.xib in Resources */,
-				3A5AE6B822D6E22A0013E8A3 /* LIVFileMessage_TypePPT@3x.png in Resources */,
-				3A5AE6A622D6E22A0013E8A3 /* LIVAutoScrollTextView11.png in Resources */,
-				3A5AE68822D6E22A0013E8A3 /* LIVVideoCamera_flashOff@2x.png in Resources */,
 				3A75A17722114DB100584A35 /* BTTLoginNoRegisterCell.xib in Resources */,
-				3A5AE6E622D6E22A0013E8A3 /* LIVMediaFileSaveToLibraryButton@3x.png in Resources */,
-				3A5AE67E22D6E22A0013E8A3 /* TZImagePickerController.bundle in Resources */,
 				3A14CC65237A8D65009711CF /* BTTElectronicGamesCell.xib in Resources */,
-				3A5AE6FC22D6E22A0013E8A3 /* LIVRobotAgreeIcon@2x.png in Resources */,
 				3A11ADE621818FD400B1AFF4 /* BTTBTCInfoCell.xib in Resources */,
-				3A5AE68922D6E22A0013E8A3 /* LIVVideoCamera_OK@2x.png in Resources */,
 				3AFCD7CC21AD15D700B136C1 /* BTTVideoGamesHeaderCell.xib in Resources */,
 				3A929424219C3B7500764E7E /* BTTRegisterSuccessOneCell.xib in Resources */,
-				3A5AE67322D6E22A0013E8A3 /* LIVReceivedMessageCell.nib in Resources */,
 				3AD4C9C321635AEC00FC0A63 /* app.json in Resources */,
 				3A7C0B0321E5CC43002658CC /* BTTBankUnionAppIconCell.xib in Resources */,
-				3A5AE6C822D6E22A0013E8A3 /* liv_satisfactionr_circular_selected@2x.png in Resources */,
-				3A5AE69922D6E22A0013E8A3 /* MMVideoPreviewPlayHL@2x.png in Resources */,
-				3A5AE6AB22D6E22A0013E8A3 /* voiceIcon_LIVVoiceBoard@3x.png in Resources */,
 				4184DE0A251B32C900D433D4 /* BTTPromoRecordHeaderCell.xib in Resources */,
-				3A5AE65D22D6E22A0013E8A3 /* LIVChatFunctionBarColor.plist in Resources */,
 				3AAFF87821D3749F00F875B1 /* BTTMeBigSaveMoneyCell.xib in Resources */,
-				3A5AE70822D6E22A0013E8A3 /* LIVMessageTableViewColor.plist in Resources */,
-				3A5AE6A322D6E22A0013E8A3 /* LIVVideoCamera_play@2x.png in Resources */,
 				3AD9CF85216F482B00685B43 /* BTTHomePageDiscountHeaderCell.xib in Resources */,
-				3A5AE66822D6E22A0013E8A3 /* LIVLocationPreviewController.nib in Resources */,
 				3A5F7A7B21A6C6BB00128E8B /* BTTXimaNoDataCell.xib in Resources */,
 				4196BEDA255A3F2400F41EED /* BTTHumanModifyCell.xib in Resources */,
-				3A5AE6D822D6E22A0013E8A3 /* photo_original_def@2x.png in Resources */,
 				7629D7E8266C933E00CF758C /* BTTDragonBoatAutoPopView.xib in Resources */,
 				D5C5019021B4FC9700C6DA02 /* CNPayWechatTipView.xib in Resources */,
 				D5DBEB0321ABB774008AF629 /* CNPayDepositStep2VC.xib in Resources */,
 				D5C501D421B7CEDC00C6DA02 /* BRPickerView.bundle in Resources */,
-				3A5AE6A922D6E22A0013E8A3 /* liv_radio_unselected@2x.png in Resources */,
-				3A5AE67A22D6E22A0013E8A3 /* LIVSatisfactionEvaluationItemCell.nib in Resources */,
 				3AE1EAB6217D986A0073A32D /* BTTMeInfoHiddenCell.xib in Resources */,
-				3A5AE70122D6E22A0013E8A3 /* LIVCSDefaultAvatar@2x.png in Resources */,
-				3A5AE6CA22D6E22A0013E8A3 /* LIVFileMessage_TypeWord@3x.png in Resources */,
 				D599251921AE6719001E885A /* CNPayCardStep2VC.xib in Resources */,
 				D5DBEB4521AD3721008AF629 /* CNPayQRStep2VC.xib in Resources */,
 				3ADD23FB2179CA8C00FA959A /* BTTAccountBlanceHeaderCell.xib in Resources */,
 				4135A708263941D000D3BF17 /* BTTLiCaiTotalAmountCell.xib in Resources */,
-				3A5AE6C222D6E22A0013E8A3 /* liv_radio_selected@3x.png in Resources */,
 				411DE809261AFC270076BCE2 /* BTTPasswordChangeBtnsCell.xib in Resources */,
 				3AAE8223219A738B003EC8B0 /* BTTRegisterQuickAutoCell.xib in Resources */,
 				3AE1EB0F218047050073A32D /* BTTCardModifyCell.xib in Resources */,
 				3AD9CF73216F3D6800685B43 /* BTTHomePageAppsCell.xib in Resources */,
-				3A5AE69B22D6E22A0013E8A3 /* LIVSentMessageBackground@3x.png in Resources */,
 				D5C5019521B6681F00C6DA02 /* CNPayDepositTipView.xib in Resources */,
 				3A9E4C17219D1D2A00E7D8C0 /* BTTForgetPwdCodeCell.xib in Resources */,
 				3AD9CF5C216F1A4400685B43 /* BTTHomePageADCell.xib in Resources */,
 				D599252B21AFF23B001E885A /* CNPayVC.xib in Resources */,
-				3A5AE6E722D6E22A0013E8A3 /* LIVLibraryItem@2x.png in Resources */,
 				3A6D59002390E60800C658FC /* BTTShareNoticeView.xib in Resources */,
 				41BC7101252D6509003944ED /* BTTBiBiCunPopView.xib in Resources */,
 				3A11AE132182AAB300B1AFF4 /* BTTPTTransferNewCell.xib in Resources */,
 				3A8F518B215F77AC0069D1B3 /* intro_2.jpg in Resources */,
-				3A5AE6A222D6E22A0013E8A3 /* LIVLocationItem@3x.png in Resources */,
 				418E72C9257777E300D9BF95 /* BTTChooseCurrencyPopView.xib in Resources */,
 				4184DE0F251B32E200D433D4 /* BTTCreditRecordCell.xib in Resources */,
 				4184DE05251B32A700D433D4 /* BTTWithdrawRecordCell.xib in Resources */,
 				4180B03A25D36EBB00139E88 /* BTTOtherGameCell.xib in Resources */,
 				3A7C0B0721E82D80002658CC /* CNPayQRVC.xib in Resources */,
 				3A8F51C1215F78180069D1B3 /* BTTActionSheet.bundle in Resources */,
-				3A5AE67022D6E22A0013E8A3 /* LIVBackButton.nib in Resources */,
-				3A5AE67D22D6E22A0013E8A3 /* LIVVideoPlayerViewController.nib in Resources */,
 				3A514E442186F3CB00B83881 /* BTTLastWeekCell.xib in Resources */,
 				D35BF24223B451340085D6A1 /* CNPayUSDTStep1VC.xib in Resources */,
 				4184DE11251B32E800D433D4 /* BTTCreditRecordHeaderCell.xib in Resources */,
-				3A5AE6AD22D6E22A0013E8A3 /* voiceIcon_LIVVoiceBoard@2x.png in Resources */,
-				3A5AE66E22D6E22A0013E8A3 /* LIVSentMessageCell.nib in Resources */,
 				D357F0E22431C8DE00FD530A /* BTTBiFuBaoController.xib in Resources */,
-				3A5AE6AF22D6E22A0013E8A3 /* photo_def_previewVc@2x.png in Resources */,
 				D35BF24323B451340085D6A1 /* CNPayUSDTQRSecondVC.xib in Resources */,
-				3A5AE6F222D6E22A0013E8A3 /* receivedVoicePlaying1@2x.png in Resources */,
 				411DE803261AFC190076BCE2 /* BTTUnBindingHeaderCell.xib in Resources */,
-				3A5AE6C722D6E22A0013E8A3 /* LIVFileMessage_TypeWord@2x.png in Resources */,
-				3A5AE6DB22D6E22A0013E8A3 /* LIVWarningSmallIcon@2x.png in Resources */,
 				3A49DFA12179DA0D00FEFBDA /* BTTBindingMobileTwoCell.xib in Resources */,
-				3A5AE6B322D6E22A0013E8A3 /* LIVFileMessage_TypeTxt@3x.png in Resources */,
-				3A5AE6C422D6E22A0013E8A3 /* LIVEmotionItem@3x.png in Resources */,
 				3A14CC60237A4B56009711CF /* BTTRealPersonGameCell.xib in Resources */,
-				3A5AE70522D6E22A0013E8A3 /* LIVAutoScrollTextView3.png in Resources */,
 				D5DBEB0221ABB774008AF629 /* CNPayDepositStep1VC.xib in Resources */,
-				3A5AE6C622D6E22A0013E8A3 /* nav_link_close@3x.png in Resources */,
 				3A3DF1E7237BA445006129F6 /* BTTHotPromotionCell.xib in Resources */,
 				3AE1EAAC217D65330073A32D /* BTTAccountBlanceHiddenCell.xib in Resources */,
-				3A5AE69722D6E22A0013E8A3 /* LIVAutoScrollTextView9.png in Resources */,
 				4184DE03251B32A100D433D4 /* BTTWithdrawHeaderTwoCell.xib in Resources */,
-				3A5AE71122D6E22B0013E8A3 /* cool_eye.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10134,7 +9295,6 @@
 				D5C501D121B7CEDC00C6DA02 /* BRDatePickerView.m in Sources */,
 				3AA7892621FFF2580047A372 /* SDWebImageCoderHelper.m in Sources */,
 				3AAE821D219A738B003EC8B0 /* BTTRegisterNormalCell.m in Sources */,
-				EAE89DCB218C3A7400C29393 /* SDWebImage+Compat3_8_1.m in Sources */,
 				3AC3FFAD219BB19E008AECCB /* BTTLoginCodeCell.m in Sources */,
 				3AE1EAB5217D986A0073A32D /* BTTMeInfoHiddenCell.m in Sources */,
 				3A37E0FA2164685600FB13A1 /* AppDelegate+Environment.m in Sources */,
@@ -10206,7 +9366,6 @@
 				4184DE09251B32C500D433D4 /* BTTPromoRecordHeaderCell.m in Sources */,
 				3A21AEA92390F53A009E73FD /* BTTVerButton.m in Sources */,
 				3AD9CF64216F208C00685B43 /* BTTNoticeModel.m in Sources */,
-				3ADD23972179A9E200FA959A /* BTTLive800ViewController.m in Sources */,
 				3AE05828217066FE00C7E70D /* BTTAmountModel.m in Sources */,
 				D5DBEB3521ABB774008AF629 /* CNPayChannelCell.m in Sources */,
 				4184DD9C251B308D00D433D4 /* BTTDepositRecordModel.m in Sources */,
@@ -10419,7 +9578,6 @@
 				4135A7162639420700D3BF17 /* BTTMeHeaderLoginCell.m in Sources */,
 				3A8F518E215F77AC0069D1B3 /* BTTTabBar.m in Sources */,
 				D339CE9C24C03CB7009ACD1C /* OTCInsideModel.m in Sources */,
-				3A8D6E9821633D3E000530DF /* CLive800Manager.m in Sources */,
 				4184DE10251B32E500D433D4 /* BTTCreditRecordHeaderCell.m in Sources */,
 				41BC7100252D6509003944ED /* BTTBiBiCunPopView.m in Sources */,
 				4184DE02251B329E00D433D4 /* BTTWithdrawHeaderTwoCell.m in Sources */,
@@ -10641,10 +9799,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP/lib/pjsip",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
-					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.56;
+				MARKETING_VERSION = 3.1.57;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -10683,10 +9840,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP/lib/pjsip",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
-					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/Live800",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.56;
+				MARKETING_VERSION = 3.1.57;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

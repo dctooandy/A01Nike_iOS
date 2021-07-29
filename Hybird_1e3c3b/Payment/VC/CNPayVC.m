@@ -18,7 +18,6 @@
 #import "CNPayDepositNameModel.h"
 #import "BTTCompleteMeterialController.h"
 #import "BTTMeMainModel.h"
-#import "CLive800Manager.h"
 
 /// 顶部渠道单元尺寸
 #define kPayChannelItemSize CGSizeMake(102, 132)
@@ -111,11 +110,7 @@
 }
 
 -(void)gotoKefu {
-    [LiveChat startKeFu:self csServicecompleteBlock:^(CSServiceCode errCode) {
-        if (errCode != CSServiceCode_Request_Suc) {//异常处理
-            [[CLive800Manager sharedInstance] startLive800Chat:self];
-        }
-    }];
+    [LiveChat startKeFu:self];
 //    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
 //        if (errCode != CSServiceCode_Request_Suc) {//异常处理
 //            [[CLive800Manager sharedInstance] startLive800Chat:self];

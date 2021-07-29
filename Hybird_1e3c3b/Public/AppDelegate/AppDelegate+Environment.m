@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate+Environment.h"
-#import "CLive800Manager.h"
 #import "BridgeProtocolExternal.h"
 #import "BTTRedDotManager.h"
 #import "WebViewUserAgaent.h"
@@ -81,7 +80,6 @@
     [CNTimeLog configProduct:[HAInitConfig product3SId]];
     
     [self setupRedDot];
-    [self setupLive800];
 //    [LiveChat initOcssSDKNetWork];
     [IVCheckNetworkWrapper initSDK];
 //    //获取最优的网关
@@ -115,19 +113,6 @@
     [GJRedDot registWithProfile:[BTTRedDotManager registerProfiles] defaultShow:YES];
     [GJRedDot setDefaultRadius:4];
     [GJRedDot setDefaultColor:[UIColor colorWithHexString:@"d13847"]];
-}
-
-- (void)setupLive800 {
-    
-    LIVUserInfo *userInfo = nil;
-    if ([IVNetwork savedUserInfo]) {
-        userInfo = [LIVUserInfo new];
-        userInfo.userAccount = [NSString stringWithFormat:@"%@",[IVNetwork savedUserInfo].customerId];
-        userInfo.grade = [NSString stringWithFormat:@"%@",@([IVNetwork savedUserInfo].starLevel)];;
-        userInfo.loginName = [IVNetwork savedUserInfo].loginName;
-        userInfo.name = [IVNetwork savedUserInfo].loginName;
-    }
-    [[CLive800Manager sharedInstance] setUpLive800WithUserInfo:userInfo];
 }
 
 @end
