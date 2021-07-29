@@ -528,12 +528,22 @@
     } else if ((indexPath.row == self.saveMoneyCount + 4 && self.isOpenSellUsdt)) {
         //一键卖币
         if (self.sellUsdtLink!=nil&&![self.sellUsdtLink isEqualToString:@""]) {
-            BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-            vc.title = @"一键卖币";
-            vc.webConfigModel.theme = @"outside";
-            vc.webConfigModel.newView = YES;
-            vc.webConfigModel.url = self.sellUsdtLink;
-            [self.navigationController pushViewController:vc animated:YES];
+            if ([IVNetwork savedUserInfo].mobileNoBind != 1) {
+                BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
+                vc.mobileCodeType = BTTSafeVerifyTypeBindMobile;
+                vc.showNotice = isUSDTAcc;
+                vc.isWithdrawIn = false;
+                vc.isSellUsdtIn = true;
+                [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+                vc.title = @"一键卖币";
+                vc.webConfigModel.theme = @"outside";
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.url = self.sellUsdtLink;
+                [self.navigationController pushViewController:vc animated:YES];                
+            }
         }
     } else if ((indexPath.row == self.saveMoneyCount + 4 && !self.isOpenSellUsdt) || (indexPath.row == self.saveMoneyCount + 5 && self.isOpenSellUsdt)) {
         //洗碼

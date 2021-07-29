@@ -446,7 +446,16 @@
                             [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
                             [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoTakeMoneyNotification" object:nil];
                         }];
-                    } else {
+                    }
+                    else if (self.isSellUsdtIn)
+                    {
+                        [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                        [BTTHttpManager fetchUserInfoCompleteBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                            [MBProgressHUD hideHUDForView:weakSelf.view animated:YES];
+                            [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoSellUsdtMoneyNotification" object:nil];
+                        }];
+                    }
+                    else {
                         NSString *phone = [self getPhoneTF].text;
                         BTTChangeMobileSuccessController *vc = [BTTChangeMobileSuccessController new];
                         vc.mobileCodeType = self.mobileCodeType;

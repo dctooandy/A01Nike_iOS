@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BOOL isWithdrawIn;
 
+@property (nonatomic, assign) BOOL isSellUsdtIn;
+
 - (void)setupElements;
 
 @end
