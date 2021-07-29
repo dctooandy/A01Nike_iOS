@@ -182,7 +182,7 @@ static BTTActivityManager * sharedSingleton;
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
         vc.webConfigModel.url = self.popModel.link;
-        vc.webConfigModel.title = @"七夕鹊桥会~918给您搭桥了";
+        vc.title = self.popModel.title;
         [[weakSelf currentViewController].navigationController pushViewController:vc animated:YES];
     };
 }
@@ -209,7 +209,7 @@ static BTTActivityManager * sharedSingleton;
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
         vc.webConfigModel.url = self.popModel.link;
-//        vc.webConfigModel.title = self.titleString;
+        vc.title = self.popModel.title;
         [[weakSelf currentViewController].navigationController pushViewController:vc animated:YES];
     };
 }
