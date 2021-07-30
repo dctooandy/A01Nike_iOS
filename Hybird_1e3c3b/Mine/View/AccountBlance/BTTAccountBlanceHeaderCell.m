@@ -7,9 +7,12 @@
 //
 
 #import "BTTAccountBlanceHeaderCell.h"
+#import "BTTLockButtonView.h"
+#import "BTTUserForzenManager.h"
 
 @interface BTTAccountBlanceHeaderCell ()
 @property (weak, nonatomic) IBOutlet UILabel *topTipLabel;
+@property (weak, nonatomic) IBOutlet UIView *lockView;
 
 @end
 
@@ -27,12 +30,44 @@
     }else{
         self.topTipLabel.text = @"总余额(元)";
     }
+    [self setupIconview];
 }
 
-
+- (void)setupIconview
+{
+    BTTLockButtonView * btnView = [BTTLockButtonView viewFromXib];
+    [_lockView addSubview:btnView];
+    [btnView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+    }];
+    btnView.tapLock = ^{
+        if ([IVNetwork savedUserInfo]) {
+            [[BTTUserForzenManager sharedInstance] checkUserForzen];
+        }
+    };
+}
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    if (UserForzenStatus)
+    {
+        _lockView.hidden = NO;
+    }else
+    {
+        _lockView.hidden = YES;
+    }
+}
 - (IBAction)totalBtnClick:(UIButton *)sender {
-    if (self.buttonClickBlock) {
-        self.buttonClickBlock(sender);
+    if (UserForzenStatus)
+    {
+        if ([IVNetwork savedUserInfo]) {
+            [[BTTUserForzenManager sharedInstance] checkUserForzen];
+        }
+    }else
+    {
+        if (self.buttonClickBlock) {
+            self.buttonClickBlock(sender);
+        }        
     }
 }
 

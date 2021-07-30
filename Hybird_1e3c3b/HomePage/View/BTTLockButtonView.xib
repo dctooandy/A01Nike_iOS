@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BTTLockButtonView">
+            <rect key="frame" x="0.0" y="0.0" width="60" height="65"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ltr-dp-eI6">
+                    <rect key="frame" x="0.0" y="0.0" width="60" height="65"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Ltr-dp-eI6" secondAttribute="height" multiplier="12:13" id="6nh-pO-N7U"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="y-luckIcon"/>
+                    <connections>
+                        <action selector="lockBtn_click:" destination="iN0-l3-epB" eventType="touchUpInside" id="IGc-Pd-wiz"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Ltr-dp-eI6" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="Cgz-Yg-aIg"/>
+                <constraint firstItem="Ltr-dp-eI6" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ZWr-9W-hiO"/>
+                <constraint firstItem="Ltr-dp-eI6" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="h3z-Fq-Gok"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="lockButton" destination="Ltr-dp-eI6" id="v48-pg-I8N"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="96"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="y-luckIcon" width="19.5" height="21.5"/>
+    </resources>
+</document>

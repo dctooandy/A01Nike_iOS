@@ -19,6 +19,7 @@ typedef enum {
     BTTButtonTypeback,       // 返回
     BTTButtonTypeSave,        // 保存
     BTTButtonTypeMemberCenter, // 返回会员中心
+    BTTButtonTypeUserForzen, // 马上去解锁
 }BTTButtonType;
 
 

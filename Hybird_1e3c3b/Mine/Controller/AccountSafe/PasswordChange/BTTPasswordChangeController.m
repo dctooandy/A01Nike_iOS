@@ -17,6 +17,7 @@
 #import "BTTUnBindingBtnCell.h"
 #import "BTTHumanModifyCell.h"
 #import "BTTMeMainModel.h"
+#import "BTTUserForzenBGView.h"
 
 @interface BTTPasswordChangeController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
@@ -52,10 +53,22 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTUnBindingBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTUnBindingBtnCell"];
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHumanModifyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHumanModifyCell"];
+    [self setupCollectionBackGroundView];
 }
-
+- (void)setupCollectionBackGroundView
+{
+    BTTUserForzenBGView *bgView = [BTTUserForzenBGView viewFromXib];
+    [bgView setupViewController:self];
+    [self.collectionView setBackgroundView:bgView];
+    [[self.collectionView backgroundView] setHidden:YES];
+}
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.elementsHight.count;
+    if (self.isSuccess == YES)
+    {
+        return  0;
+    }else{
+        return self.elementsHight.count;
+    }
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -98,6 +111,7 @@
                 return cell;
             } else {
                 BTTPasswordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTPasswordCell" forIndexPath:indexPath];
+                [cell disableSecureText:NO withTextAlign:NSTextAlignmentRight];
                 cell.textField.tag = 1000;
                 [cell.textField addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
                 BTTMeMainModel *model = self.sheetDatas[indexPath.row - 2];
@@ -248,14 +262,14 @@
         }
             break;
         case BTTChangeWithdrawPwd: {
-            self.title = [self haveWithdrawPwd] ? @"修改密码":@"设置密码";
+            self.title = ((self.isGoToUserForzenVC == YES) ? @"解锁帐户": [self haveWithdrawPwd] ? @"修改密码":@"设置密码");
             if ([self haveWithdrawPwd]) {
                 titles = @[@"旧资金密码",@"新资金密码",@"确认新资金密码"];
                 placeholders = @[@"6位数数字组合",@"6位数数字组合",@""];
                 
             } else {
                 titles = @[@"资金密码", @"确认资金密码"];
-                placeholders = @[@"6位数数字组合", @""];
+                placeholders = @[@"6位数数字组合", (self.isGoToUserForzenVC == YES) ? @"确认资金密码":@""];
             }
         }
             break;

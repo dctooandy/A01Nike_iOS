@@ -45,6 +45,7 @@
 #import "BTTChooseCurrencyPopView.h"
 #import "BTTUserGameCurrencyModel.h"
 #import "BTTActivityManager.h"
+#import "BTTUserForzenManager.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -61,6 +62,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"首页";
+    [BTTUserForzenManager sharedInstance];
     if ([IVNetwork savedUserInfo]) {
         self.isLogin = YES;
         [self checkHasShow];
@@ -88,7 +90,10 @@
         [self.view addSubview:self.assistiveButton];
     }
     [self checkLoginVersion];
+
 //    [self setupFloatWindow];
+    //监听内部广播
+    //状态:已登入过,检查没有Token过期
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeBannerData) name:@"CHANGE_MODE" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestRedbag) name:LoginSuccessNotification object:nil];
@@ -113,6 +118,10 @@
         [BTTAGGJViewController addGameViewToWindow];
 //        [[IVGameManager sharedManager] reloadCacheGame];
         [CNTimeLog endRecordTime:CNEventAppLaunch];
+        if ([IVNetwork savedUserInfo]) {
+            [[BTTUserForzenManager sharedInstance] checkUserForzen];
+        } else {
+        }
     }
 }
 

@@ -8,7 +8,7 @@
 
 #import "BTTPasswordChangeController+LoadData.h"
 #import "BTTBindingMobileController.h"
-
+#import "BTTUserForzenManager.h"
 @implementation BTTPasswordChangeController (LoadData)
 
 -(void)sendCode {
@@ -133,7 +133,13 @@
                 
                 if (weakSelf.isGoToMinePage) {
                     [self.navigationController popToRootViewControllerAnimated:true];
-                } else {
+                } else if (weakSelf.isGoToUserForzenVC){
+                    self.isSuccess = YES;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoUserForzenVC" object:nil];
+
+                    // 测试
+//                    [self successActions];
+                }else{
                     [self.navigationController popViewControllerAnimated:true];
                 }
             }];
@@ -143,5 +149,11 @@
         }
     }];
 }
-
+- (void)successActions:(NSString *)msgString
+{
+    [MBProgressHUD showMessagNoActivity:msgString toView:nil];
+    self.isSuccess = YES;
+    [[self.collectionView backgroundView] setHidden:NO];
+    [self setupElements];
+}
 @end

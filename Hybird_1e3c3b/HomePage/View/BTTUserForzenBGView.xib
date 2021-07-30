@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BTTUserForzenBGView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqi-2Z-jI5" userLabel="TopView">
+                    <rect key="frame" x="202" y="0.0" width="10" height="150"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="10" id="A7X-LA-8nE"/>
+                    </constraints>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="duigou" translatesAutoresizingMaskIntoConstraints="NO" id="3qV-VX-IEf">
+                    <rect key="frame" x="166" y="150" width="82" height="82"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="3qV-VX-IEf" secondAttribute="height" multiplier="1:1" id="zxq-wk-1ml"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yQP-US-MzQ">
+                    <rect key="frame" x="20.5" y="301" width="373" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qos-NL-iJd">
+                            <rect key="frame" x="0.0" y="2.5" width="177.5" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="jOY-z1-D5P"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="存款" backgroundImage="xima_btn1">
+                                <color key="titleColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="binding_confirm_enable_press">
+                                <color key="titleColor" red="0.16078431369999999" green="0.18039215689999999" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="withdrawBtn_click:" destination="iN0-l3-epB" eventType="touchUpInside" id="shh-tv-552"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHs-UF-kwY">
+                            <rect key="frame" x="195.5" y="3" width="177.5" height="44"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="游戏大厅" backgroundImage="pay_blueBtn"/>
+                            <state key="highlighted" backgroundImage="pay_blueBtnHL"/>
+                            <connections>
+                                <action selector="homepageBtn_click:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ku4-Yl-CkW"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="qos-NL-iJd" firstAttribute="centerY" secondItem="yQP-US-MzQ" secondAttribute="centerY" id="0Im-Zm-JmI"/>
+                        <constraint firstAttribute="height" constant="50" id="7Hm-Ge-dbl"/>
+                        <constraint firstItem="qHs-UF-kwY" firstAttribute="width" secondItem="qos-NL-iJd" secondAttribute="width" id="LUH-pE-S9C"/>
+                        <constraint firstItem="qHs-UF-kwY" firstAttribute="centerY" secondItem="yQP-US-MzQ" secondAttribute="centerY" id="Rgs-fb-9lm"/>
+                        <constraint firstItem="qos-NL-iJd" firstAttribute="leading" secondItem="yQP-US-MzQ" secondAttribute="leading" id="Xr7-Qz-qoA"/>
+                        <constraint firstItem="qHs-UF-kwY" firstAttribute="leading" secondItem="qos-NL-iJd" secondAttribute="trailing" constant="18" id="bXN-oR-Ju4"/>
+                        <constraint firstAttribute="trailing" secondItem="qHs-UF-kwY" secondAttribute="trailing" id="eqW-87-K6r"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="恭喜您,已经成功解锁!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JeD-6n-aQN">
+                    <rect key="frame" x="91.5" y="252" width="231.5" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="yQP-US-MzQ" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.9" id="0O3-Uw-cha"/>
+                <constraint firstItem="yQP-US-MzQ" firstAttribute="top" secondItem="JeD-6n-aQN" secondAttribute="bottom" constant="20" id="7CP-w0-mLG"/>
+                <constraint firstItem="3qV-VX-IEf" firstAttribute="top" secondItem="hqi-2Z-jI5" secondAttribute="bottom" id="FoI-4P-nhN"/>
+                <constraint firstItem="hqi-2Z-jI5" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.184729" id="Qml-Sc-4B0"/>
+                <constraint firstItem="yQP-US-MzQ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="X7A-B6-tl7"/>
+                <constraint firstItem="JeD-6n-aQN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Yym-Qb-AJb"/>
+                <constraint firstItem="3qV-VX-IEf" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.100985" id="eox-Z6-kzv"/>
+                <constraint firstItem="hqi-2Z-jI5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hSz-Tx-9jr"/>
+                <constraint firstItem="3qV-VX-IEf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="mle-M5-1fE"/>
+                <constraint firstItem="hqi-2Z-jI5" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="pQ4-u2-8an"/>
+                <constraint firstItem="JeD-6n-aQN" firstAttribute="top" secondItem="3qV-VX-IEf" secondAttribute="bottom" constant="20" id="wfL-t5-s4q"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="homePageButton" destination="qHs-UF-kwY" id="izc-wV-dFC"/>
+                <outlet property="withdrawButton" destination="qos-NL-iJd" id="Mgf-dX-HvG"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="96"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="binding_confirm_enable_press" width="345" height="44"/>
+        <image name="duigou" width="74" height="74"/>
+        <image name="pay_blueBtn" width="345" height="44"/>
+        <image name="pay_blueBtnHL" width="345" height="44"/>
+        <image name="xima_btn1" width="155" height="41"/>
+    </resources>
+</document>

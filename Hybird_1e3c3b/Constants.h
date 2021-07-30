@@ -90,6 +90,7 @@ typedef enum {
     BTTSafeVerifyTypeBindEmail,                  // 绑定邮箱
     BTTSafeVerifyTypeVerifyEmail,                // 验证邮箱
     BTTSafeVerifyTypeChangeEmail,                // 更改邮箱
+    BTTSafeVerifyTypeUserForzenBindMobile,                 // 用户冻结绑定手机
 }BTTSafeVerifyType; // 安全验证种类
 
 typedef enum : NSUInteger {
@@ -331,6 +332,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTGetLoginInfoByName                      @"customer/getByLoginName"
 // 根据登录名获取会员统计信息
 #define BTTGetLoginInfoByNameEx                    @"customer/getByLoginNameEx"
+// 解除资金冻结绑定
+#define BTTUnlockBalance                           @"customer/unlockBalanceStatus"
 // 查询400热线
 #define BTT400Line                                 @"queryVIPLine"
 // 解锁账号
@@ -562,6 +565,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTLiCaiInterestRecords                    @"_extra_/api/v1/ws/query-yeb-interest-logs"
 //活期理財 - 累積收益
 #define BTTLiCaiInterestSum                        @"_extra_/api/v1/ws/yeb-interest-logs-sum"
+//活期理財 - 累積收益
+#define BTTLiCaiInterestSum                        @"_extra_/api/v1/ws/yeb-interest-logs-sum"
 //龍舟活動ㄦ-查询用户机会次数统计
 #define BTTDragonBoatChance                        @"_extra_/api/v1/activity/dragon-boat-festival-2021/chance"
 #define BTTDragonBoatCurrRound                     @"_extra_/api/v1/activity/dragon-boat-festival-2021/currRound"
@@ -606,6 +611,7 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 
 #define SCREEN_WIDTH                     ([UIScreen mainScreen].bounds.size.width)
 #define SCREEN_HEIGHT                    ([UIScreen mainScreen].bounds.size.height)
+#define UserForzenStatus                 ([IVNetwork savedUserInfo] && [IVNetwork savedUserInfo].lockBalanceStatus == 1)
 // tabbar 适配iPhone X
 #define kTabbarHeight                    (KIsiPhoneX ? (BTTDangerousAreaH + 49) : 49)
 // 是否为iPhoneX

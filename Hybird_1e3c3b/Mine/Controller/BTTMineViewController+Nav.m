@@ -440,6 +440,9 @@ static const char *BTTHeaderViewKey = "headerView";
                 [strongSelf showShareActionSheet];
             }
                 break;
+            case 2003:
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"showUserForzenPopView" object:nil];
+                break;
                 
             default:
                 break;

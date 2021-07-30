@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @property (nonatomic, strong) BTTMeMainModel *model;
-
+- (void)disableSecureText:(BOOL)disableSecure withTextAlign:(NSTextAlignment)align;
 @end
 
 NS_ASSUME_NONNULL_END
