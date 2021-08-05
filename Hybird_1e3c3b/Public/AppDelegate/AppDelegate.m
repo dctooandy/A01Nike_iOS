@@ -79,7 +79,7 @@
                 NEW_PROD_GATHER = arr[0][@"NEW_PROD_GATHER"] != nil ? arr[0][@"NEW_PROD_GATHER"]:@"";
             }
             [IVLAManager setPayegisSDKDomain:PROD_DID];
-            [IVLAManager setUploadDomain:PROD_GATHER];
+            [IVLAManager setUploadDomain:NEW_PROD_GATHER];
             [self initAnalysis];
         }
     }];
