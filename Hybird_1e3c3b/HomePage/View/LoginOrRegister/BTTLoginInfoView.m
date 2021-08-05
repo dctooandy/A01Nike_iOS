@@ -131,7 +131,7 @@
         [showBtn addTarget:self action:@selector(regetCodeImage:) forControlEvents:UIControlEventTouchUpInside];
         [codeImgView addSubview:showBtn];
         [showBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(codeImgView);
+            make.width.left.mas_equalTo(codeImgView);
             make.top.equalTo(codeImgView).offset(5);
             make.height.mas_equalTo(50);
         }];

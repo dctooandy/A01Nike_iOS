@@ -273,25 +273,24 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 //        }];
     }];
     
-    BTTPopoverAction *action2 = [BTTPopoverAction actionWithImage:ImageNamed(@"voiceCall") title:@"APP语音通信" handler:^(BTTPopoverAction *action) {
-        BTTTabbarController *tabbar = (BTTTabbarController *)self.tabBarController;
-        BOOL isLogin = [IVNetwork savedUserInfo] ? YES : NO;
-        weakSelf(weakSelf);
-        [MBProgressHUD showLoadingSingleInView:tabbar.view animated:YES];
-        [tabbar loadVoiceCallNumWithIsLogin:isLogin makeCall:^(NSString *uid) {
-            [MBProgressHUD hideHUDForView:tabbar.view animated:YES];
-            if (uid == nil || uid.length == 0) {
-                [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
-            } else {
-                strongSelf(strongSelf);
-                [strongSelf registerUID:uid];
-            }
-        }];
-    }];
+//    BTTPopoverAction *action2 = [BTTPopoverAction actionWithImage:ImageNamed(@"voiceCall") title:@"APP语音通信" handler:^(BTTPopoverAction *action) {
+//        BTTTabbarController *tabbar = (BTTTabbarController *)self.tabBarController;
+//        BOOL isLogin = [IVNetwork savedUserInfo] ? YES : NO;
+//        weakSelf(weakSelf);
+//        [MBProgressHUD showLoadingSingleInView:tabbar.view animated:YES];
+//        [tabbar loadVoiceCallNumWithIsLogin:isLogin makeCall:^(NSString *uid) {
+//            [MBProgressHUD hideHUDForView:tabbar.view animated:YES];
+//            if (uid == nil || uid.length == 0) {
+//                [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
+//            } else {
+//                strongSelf(strongSelf);
+//                [strongSelf registerUID:uid];
+//            }
+//        }];
+//    }];
     
-    int currentHour = [PublicMethod hour:[NSDate date]];
-    BOOL isNormalUser = (![IVNetwork savedUserInfo] || [IVNetwork savedUserInfo].starLevel < 5 || ((currentHour >= 0 && currentHour < 12) || (currentHour > 21 && currentHour <= 23)));
-    NSString *callTitle = isNormalUser ? @"电话回拨" : @"VIP经理回拨";
+    BOOL isVipUser = [PublicMethod isVipUser];
+    NSString *callTitle = isVipUser ? @"VIP经理回拨":@"电话回拨";
     BTTPopoverAction *action3 = [BTTPopoverAction actionWithImage:ImageNamed(@"callBack") title:callTitle handler:^(BTTPopoverAction *action) {
         if ([IVNetwork savedUserInfo]) {
             [self showCallBackViewLogin];
@@ -319,8 +318,8 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     if (!vipPhone.length) {
         vipPhone = @"400-120-3612";
     }
-    NSString *telUrl = isNormalUser ? [NSString stringWithFormat:@"tel://%@",normalPhone]  : [NSString stringWithFormat:@"tel://%@",vipPhone];
-    NSString *title = isNormalUser ? normalPhone : vipPhone;
+    NSString *telUrl = isVipUser ? [NSString stringWithFormat:@"tel://%@",vipPhone]:[NSString stringWithFormat:@"tel://%@",normalPhone];
+    NSString *title = isVipUser ? vipPhone:normalPhone;
     title = [NSString stringWithFormat:@"     客服热线\n%@",title];
     BTTPopoverAction *action5 = [BTTPopoverAction actionWithTitle:title detailTitle:title handler:^(BTTPopoverAction *action) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telUrl]];

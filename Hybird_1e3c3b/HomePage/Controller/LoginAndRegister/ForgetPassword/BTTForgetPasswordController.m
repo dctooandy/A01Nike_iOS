@@ -19,6 +19,8 @@
 
 @property (nonatomic, copy) NSString *account;
 
+@property (nonatomic, copy) NSString *phone;
+
 @property (nonatomic, copy) NSString *code;
 
 @end
@@ -47,14 +49,28 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        BTTMeMainModel *model = self.mainData[indexPath.row];
-        BTTForgetPwdOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTForgetPwdOneCell" forIndexPath:indexPath];
-        cell.detailTextField.delegate = self;
-        [cell.detailTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
-        cell.model = model;
+    if (indexPath.row == self.elementsHight.count - 1) {
+        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        cell.buttonType = BTTButtonTypeDone;
+        weakSelf(weakSelf);
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            strongSelf(strongSelf);
+            [strongSelf.view endEditing:true];
+            [strongSelf verifyPhotoCode:self.code loginName:strongSelf.account WithCaptchaId:strongSelf.uuid mobileNo:strongSelf.phone completeBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                IVJResponseObject *result = response;
+                if ([result.head.errCode isEqualToString:@"0000"]) {
+                    BTTForgetPasswordStepTwoController *vc = [[BTTForgetPasswordStepTwoController alloc] init];
+                    vc.account = strongSelf.account;
+                    vc.validateId = result.body[@"validateId"];
+                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                }else{
+                    [MBProgressHUD showError:result.head.errMsg toView:strongSelf.view];
+                    [self loadVerifyCode];
+                }
+            }];
+        };
         return cell;
-    } else if (indexPath.row == 1) {
+    } else if (indexPath.row == self.elementsHight.count - 2) {
         BTTMeMainModel *model = self.mainData[indexPath.row];
         BTTForgetPwdCodeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTForgetPwdCodeCell" forIndexPath:indexPath];
         [cell.detailTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
@@ -69,24 +85,13 @@
         };
         return cell;
     } else {
-        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
-        cell.buttonType = BTTButtonTypeDone;
-        weakSelf(weakSelf);
-        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-            strongSelf(strongSelf);
-            [strongSelf verifyPhotoCode:self.code loginName:strongSelf.account WithCaptchaId:strongSelf.uuid completeBlock:^(id  _Nullable response, NSError * _Nullable error) {
-                IVJResponseObject *result = response;
-                if ([result.head.errCode isEqualToString:@"0000"]) {
-                    BTTForgetPasswordStepTwoController *vc = [[BTTForgetPasswordStepTwoController alloc] init];
-                    vc.account = strongSelf.account;
-                    vc.validateId = result.body[@"validateId"];
-                    [strongSelf.navigationController pushViewController:vc animated:YES];
-                }else{
-                    [MBProgressHUD showError:result.head.errMsg toView:strongSelf.view];
-                    [self loadVerifyCode];
-                }
-            }];
-        };
+        BTTMeMainModel *model = self.mainData[indexPath.row];
+        BTTForgetPwdOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTForgetPwdOneCell" forIndexPath:indexPath];
+        cell.detailTextField.delegate = self;
+        cell.detailTextField.tag = 30010 + indexPath.row;
+        cell.detailTextField.text = cell.detailTextField.tag == 30010 ? self.account:self.phone;
+        [cell.detailTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
+        cell.model = model;
         return cell;
     }
 }
@@ -139,17 +144,21 @@
 - (void)textFieldChange:(UITextField *)textField {
     NSLog(@"%@",textField.text);
     if (textField.tag == 30010) {
+        textField.text = [textField.text lowercaseString];
         self.account = textField.text;
         
     } else if (textField.tag == 30011) {
+        self.phone = textField.text;
+        
+    } else if (textField.tag == 30012) {
         self.code = textField.text;
     }
     
     NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     BOOL isAccount = [predicate evaluateWithObject:self.account];
-    
-    if (self.code.length >= 4 && isAccount) {
+    BOOL isPhone = [PublicMethod isValidatePhone:self.phone];
+    if (self.code.length >= 5 && isAccount && isPhone) {
         [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeEnableNotification object:@"verifycode"];
     } else {
         [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeDisableNotification object:@"verifycode"];
@@ -157,7 +166,16 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    
+    if (textField.tag == 30012) {
+        if (textField.text.length >= 5 && string.length > 0) {
+            return false;
+        }
+    } else {
+        if (textField.text.length >= 11 && string.length > 0) {
+            return false;
+        }
+        
+    }
     return YES;
 }
 
@@ -166,13 +184,12 @@
         [self.elementsHight removeAllObjects];
     }
     NSMutableArray *elementsHight = [NSMutableArray array];
-    for (int i = 0; i < 3; i++) {
-        if (i == 0) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
-        } else if (i == 1) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
-        } else if (i == 2) {
+    NSInteger count = self.mainData.count + 1;
+    for (int i = 0; i < count; i++) {
+        if (i == count - 1) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+        } else {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
         }
     }
     self.elementsHight = elementsHight.mutableCopy;

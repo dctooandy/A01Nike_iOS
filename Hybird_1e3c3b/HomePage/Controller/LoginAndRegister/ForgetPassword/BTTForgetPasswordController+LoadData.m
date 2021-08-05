@@ -40,18 +40,18 @@
     }];
 }
 
-- (void)verifyPhotoCode:(NSString *)code loginName:(NSString *)loginName WithCaptchaId:(NSString *)captchaId completeBlock:(KYHTTPCallBack)completeBlock {
+-(void)verifyPhotoCode:(NSString *)code loginName:(NSString *)loginName WithCaptchaId:(NSString *)captchaId mobileNo:(NSString *)mobileNo completeBlock:(KYHTTPCallBack)completeBlock {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setValue:code forKey:@"captcha"];
     [params setValue:captchaId forKey:@"captchaId"];
-    [params setValue:@0 forKey:@"type"];
     [params setValue:loginName forKey:@"loginName"];
+    [params setValue:[IVRsaEncryptWrapper encryptorString:mobileNo] forKey:@"mobileNo"];
     [IVNetwork requestPostWithUrl:BTTValidateCaptcha paramters:params completionBlock:completeBlock];
 }
 
 - (void)loadMainData {
-    NSArray *names = @[@"登录账号",@"验证码"];
-    NSArray *placeholds = @[@"请输入账号",@"请输入验证码"];
+    NSArray *names = @[@"登录账号",@"手机号",@"验证码"];
+    NSArray *placeholds = @[@"请输入账号",@"请输入手机号",@"请输入验证码"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];

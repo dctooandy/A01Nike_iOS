@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)loadVerifyCode;
 
-- (void)verifyPhotoCode:(NSString *)code loginName:(NSString *)loginName WithCaptchaId:(NSString *)captchaId completeBlock:(KYHTTPCallBack)completeBlock;
+- (void)verifyPhotoCode:(NSString *)code loginName:(NSString *)loginName WithCaptchaId:(NSString *)captchaId mobileNo:(NSString *)mobileNo completeBlock:(KYHTTPCallBack)completeBlock;
 
 - (void)makeCallWithPhoneNum:(NSString *)phone captcha:(NSString *)captcha captchaId:(NSString *)captchaId;
 

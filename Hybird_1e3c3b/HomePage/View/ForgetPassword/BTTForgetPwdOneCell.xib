@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,17 +23,17 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" tag="30010" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OpC-pD-aVw">
+                    <textField opaque="NO" tag="30010" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OpC-pD-aVw">
                         <rect key="frame" x="72" y="10" width="288" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="gL5-Jk-gjL"/>
                         </constraints>
-                        <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                     </textField>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <constraints>
                 <constraint firstItem="OpC-pD-aVw" firstAttribute="leading" secondItem="UtZ-Tb-IPN" secondAttribute="trailing" constant="15" id="I6u-C1-xcb"/>
                 <constraint firstItem="UtZ-Tb-IPN" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Nnj-pJ-apv"/>
@@ -43,7 +41,6 @@
                 <constraint firstAttribute="trailing" secondItem="OpC-pD-aVw" secondAttribute="trailing" constant="15" id="oti-x6-Max"/>
                 <constraint firstItem="UtZ-Tb-IPN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="qy5-0X-U2G"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
                 <outlet property="detailTextField" destination="OpC-pD-aVw" id="ty1-jB-A0C"/>
                 <outlet property="nameLabel" destination="UtZ-Tb-IPN" id="wE2-H7-z95"/>

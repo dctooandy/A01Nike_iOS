@@ -9,6 +9,7 @@
 #import "BTTForgetPasswordStepThreeController+LoadData.h"
 #import "BTTMeMainModel.h"
 #import "IVRsaEncryptWrapper.h"
+#import "BTTLoginOrRegisterViewController.h"
 
 @implementation BTTForgetPasswordStepThreeController (LoadData)
 
@@ -22,7 +23,8 @@
     [IVNetwork requestPostWithUrl:BTTStepThreeUpdatePassword paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            BTTLoginOrRegisterViewController * vc = [[BTTLoginOrRegisterViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }else{
             [MBProgressHUD showSuccess:result.head.errMsg toView:nil];
         }

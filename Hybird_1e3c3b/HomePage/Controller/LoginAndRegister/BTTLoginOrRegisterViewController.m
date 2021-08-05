@@ -49,12 +49,16 @@
 @property (nonatomic, strong) UIButton *imgCodeBtn;
 @property (nonatomic, strong) UIButton * cancelBtn;
 @property (nonatomic, strong)UIView * imgCodePopViewBg;
+@property (nonatomic, strong)AVPlayerLayer *exLayer;
 @end
 
 @implementation BTTLoginOrRegisterViewController
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if (self.player == nil) {
+        [self loadPlayer];
+    }
     [self.navigationController.navigationBar setHidden:YES];
 }
 
@@ -77,6 +81,21 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     self.pressLocationArr = [[NSMutableArray alloc] init];
+    [self loadPlayer];
+
+    self.qucikRegisterType = BTTQuickRegisterTypeAuto;
+    self.loginCellType = BTTLoginCellTypeNormal;
+    if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
+        self.title = @"登录";
+    } else {
+        self.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
+        self.title = @"立即开户";
+    }
+    [self setUpView];
+    [self handleShowOrHide];
+}
+
+-(void)loadPlayer {
     //设置本地视频路径
     NSString *mpath=[[NSBundle mainBundle] pathForResource:@"login_bg_video" ofType:@"mp4"];
     NSURL *url=[NSURL fileURLWithPath:mpath];
@@ -94,24 +113,18 @@
     layer.frame = self.view.bounds;
     layer.backgroundColor=[UIColor blackColor].CGColor;
     //将视频的layer添加到视图的layer中
-    [self.view.layer addSublayer:layer];
+    if (self.view.subviews.count == 0) {
+        self.exLayer = layer;
+        [self.view.layer addSublayer:layer];
+    } else {
+        [self.view.layer replaceSublayer:(CALayer *)self.exLayer with:(CALayer *)layer];
+        self.exLayer = layer;
+    }
     //监听status属性，注意监听的是AVPlayerItem
     [self.item addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
     //监听loadedTimeRanges属性
     [self.item addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(runLoopTheMovie:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
-
-    self.qucikRegisterType = BTTQuickRegisterTypeAuto;
-    self.loginCellType = BTTLoginCellTypeNormal;
-    if (self.registerOrLoginType == BTTRegisterOrLoginTypeLogin) {
-        self.title = @"登录";
-    } else {
-        self.registerOrLoginType = BTTRegisterOrLoginTypeRegisterQuick;
-        self.title = @"立即开户";
-    }
-    
-    [self setUpView];
-    [self handleShowOrHide];
 }
 
 - (void)handleShowOrHide{
@@ -159,17 +172,17 @@
 
 - (void)backBtn_click:(id)sender{
     if (self.registerOrLoginType==BTTRegisterOrLoginTypeRegisterNormal) {
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }else if (self.registerOrLoginType==BTTRegisterOrLoginTypeLogin){
         if (self.loginView.isHidden) {
             self.noramlRegisterView.hidden = YES;
             self.fastRegisterView.hidden = YES;
             self.loginView.hidden = NO;
         }else{
-            [self.navigationController popViewControllerAnimated:YES];
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
     }else if (self.registerOrLoginType==BTTRegisterOrLoginTypeRegisterQuick){
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
     
 }
@@ -192,9 +205,8 @@
     appIcon.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:appIcon];
     [appIcon mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view.mas_top).offset(122);
-        make.width.height.mas_equalTo(72);
-        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.top.mas_equalTo(self.view).offset(122);
+        make.centerX.mas_equalTo(self.view);
     }];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
@@ -295,7 +307,7 @@
     _imgCodeBtn = imgCodeBtn;
     [imgCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.equalTo(view).offset(-20);
-        make.center.equalTo(view);
+        make.centerX.equalTo(view);
     }];
     
     UIButton * refreshBtn = [[UIButton alloc] init];

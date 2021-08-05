@@ -772,7 +772,7 @@ static const char *exModelKey = "exModelKey";
 //                } else
                 if (isBack) {
                     [MBProgressHUD showSuccess:@"登录成功" toView:nil];
-                    [self.navigationController popViewControllerAnimated:YES];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
                 }
             }
         }else{

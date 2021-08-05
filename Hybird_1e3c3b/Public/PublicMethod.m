@@ -1264,4 +1264,9 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     view.layer.mask = maskLayer;
 }
 
++(BOOL)isVipUser {
+    int currentHour = [PublicMethod hour:[NSDate date]];
+    return [IVNetwork savedUserInfo].starLevel >= 3 && [IVNetwork savedUserInfo] && currentHour >= 12 && currentHour <= 21;
+}
+
 @end

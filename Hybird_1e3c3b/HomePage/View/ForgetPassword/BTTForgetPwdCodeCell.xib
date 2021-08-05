@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,17 +30,17 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" tag="30011" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Rc-aO-hxo">
+                    <textField opaque="NO" tag="30012" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Rc-aO-hxo">
                         <rect key="frame" x="77" y="10" width="213" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="YJZ-kE-vB7"/>
                         </constraints>
-                        <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                     </textField>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <constraints>
                 <constraint firstItem="3Rc-aO-hxo" firstAttribute="leading" secondItem="4DQ-NW-Vc1" secondAttribute="trailing" constant="20" id="1fT-AE-tCs"/>
                 <constraint firstItem="s8d-V9-H34" firstAttribute="leading" secondItem="3Rc-aO-hxo" secondAttribute="trailing" constant="15" id="3sD-E1-Bck"/>
@@ -52,7 +50,6 @@
                 <constraint firstAttribute="trailing" secondItem="s8d-V9-H34" secondAttribute="trailing" constant="15" id="NKD-V1-ncA"/>
                 <constraint firstItem="3Rc-aO-hxo" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="O2s-3D-TCr"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
                 <outlet property="codeImage" destination="s8d-V9-H34" id="6S5-oa-rHr"/>
                 <outlet property="detailTextField" destination="3Rc-aO-hxo" id="dt2-7R-JJb"/>

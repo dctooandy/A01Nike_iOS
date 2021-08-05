@@ -390,9 +390,13 @@
         }
         BTTMeMainModel *model = nil;
         if (indexPath.row >= self.saveMoneyCount + 3 && indexPath.row <= self.saveMoneyCount + 8) {
-            model = self.mainDataOne[indexPath.row - self.saveMoneyCount - 3];
+            if (self.mainDataOne.count != 0) {
+                model = self.mainDataOne[indexPath.row - self.saveMoneyCount - 3];
+            }
         } else {
-            model = self.mainDataTwo[indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4];
+            if (self.mainDataTwo.count != 0 && self.mainDataOne.count != 0) {
+                model = self.mainDataTwo[indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4];
+            }
         }
         cell.isShowHot = self.isShowHot;
         cell.model = model;

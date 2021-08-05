@@ -22,11 +22,9 @@
 @implementation BTTMineViewController (LoadData)
 
 - (void)loadMeAllData {
-    [self loadIsHavePromo];
     [self loadMainDataOne];
     [self loadMainDataTwo];
-    [self loadMainDataThree];
-    [self setupElements];
+    [self loadIsHavePromo];
 }
 
 - (void)loadPaymentDefaultData {
@@ -452,24 +450,15 @@
         model.iconName = icons[index];
         [self.mainDataOne addObject:model];
     }
-    [self.collectionView reloadData];
+    [self setupElements];
 }
 
 - (void)loadMainDataTwo {
-    if (self.mainDataTwo.count>0) {
+    if (self.mainDataTwo.count) {
         [self.mainDataTwo removeAllObjects];
     }
-    NSArray *names = [NSArray new];
-    NSArray *icons = [NSArray new];
-//    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-//        names = @[@"客户报表",@"账号安全",@"额度转账",@"站内信",@"版本更新",@"网站检测",@"设置"];
-//        icons = @[@"me_sheet",@"me_amountsafe",@"me_transfer",@"me_message",@"me_version",@"me_speed",@"me_setting"];
-//
-//    }else{
-        names = @[@"我的优惠",@"客户报表",@"账号安全",@"额度转账",@"站内信",@"版本更新",@"网站检测",@"设置"];
-        icons = @[@"me_preferential",@"me_sheet",@"me_amountsafe",@"me_transfer",@"me_message",@"me_version",@"me_speed",@"me_setting"];
-//    }
-    
+    NSArray *names = @[@"我的优惠",@"客户报表",@"账号安全",@"额度转账",@"站内信",@"版本更新",@"网站检测",@"设置"];
+    NSArray *icons = @[@"me_preferential",@"me_sheet",@"me_amountsafe",@"me_transfer",@"me_message",@"me_version",@"me_speed",@"me_setting"];
     
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
@@ -478,7 +467,7 @@
         model.iconName = icons[index];
         [self.mainDataTwo addObject:model];
     }
-    [self.collectionView reloadData];
+    [self setupElements];
 }
 
 - (void)loadMainDataThree {

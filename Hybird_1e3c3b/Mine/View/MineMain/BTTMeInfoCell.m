@@ -70,13 +70,20 @@
             self.statusIcon.image = ImageNamed(@"me_hot");
             self.topConstants.constant = 10;
             self.rightConstants.constant = 10;
-        }
-        else {
-            if ([IVNetwork savedUserInfo].bankCardNum!=0||[IVNetwork savedUserInfo].usdtNum>0||[IVNetwork savedUserInfo].bfbNum>0||[IVNetwork savedUserInfo].dcboxNum>0) {
-               self.statusIcon.image = ImageNamed(@"me_phone_status_yes");
-           } else {
-               self.statusIcon.image = ImageNamed(@"me_phone_status_no");
-           }
+        } else {
+            if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+                if ([IVNetwork savedUserInfo].usdtNum>0||[IVNetwork savedUserInfo].dcboxNum>0) {
+                    self.statusIcon.image = ImageNamed(@"me_phone_status_yes");
+                } else {
+                    self.statusIcon.image = ImageNamed(@"me_phone_status_no");
+                }
+            } else {
+                if ([IVNetwork savedUserInfo].bankCardNum!=0||[IVNetwork savedUserInfo].bfbNum>0) {
+                    self.statusIcon.image = ImageNamed(@"me_phone_status_yes");
+                } else {
+                    self.statusIcon.image = ImageNamed(@"me_phone_status_no");
+                }
+            }
         }
     } else if ([model.name isEqualToString:@"我的优惠"]) {
         self.hotImg.hidden = !_isShowHot;

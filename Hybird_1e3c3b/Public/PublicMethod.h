@@ -249,6 +249,8 @@ NS_ASSUME_NONNULL_BEGIN
 //設置指定圓角
 +(void)setViewSelectCorner:(UIRectCorner)position view:(UIView *)view cornerRadius:(CGFloat)cornerRadius;
 
++(BOOL)isVipUser;
+
 @end
 
 NS_ASSUME_NONNULL_END

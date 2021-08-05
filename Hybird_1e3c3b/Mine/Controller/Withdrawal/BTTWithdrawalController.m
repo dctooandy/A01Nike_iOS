@@ -59,12 +59,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-        [self getLimitUSDT];
-    } else {
-        [self loadMainData];
+    if (self.bankList.count != 0) {
+        if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+            [self getLimitUSDT];
+        } else {
+            [self loadMainData];
+        }
+        [self loadCreditsTotalAvailable];
     }
-    [self loadCreditsTotalAvailable];
 }
 
 -(void)setUpNav {
@@ -472,6 +474,12 @@
                 }
             }
             self.bankList = bankList;
+            if (self.bankList.count == 0) {
+                [self hideLoading];
+                [MBProgressHUD showErrorWithTime:@"还没获取到可用的银行卡 请稍候" toView:[UIApplication sharedApplication].keyWindow duration:4];
+                [self.navigationController popToRootViewControllerAnimated:true];
+                return;
+            }
             [self loadMainData];
             [self setupElements];
             self.selectedProtocol = self.bankList.firstObject.protocol;
