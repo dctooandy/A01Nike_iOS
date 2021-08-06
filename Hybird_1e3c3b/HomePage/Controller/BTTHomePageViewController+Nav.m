@@ -370,8 +370,13 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         [strongSelf makeCallWithPhoneNum:[IVNetwork savedUserInfo].mobileNo captcha:captcha captchaId:captchaId];
     };
     customView.btnBlock = ^(UIButton *btn) {
+        strongSelf(strongSelf);
         [popView dismiss];
-        [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
+        if (btn.tag == 50011) {
+            [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
+        } else if (btn.tag == 50012) {
+            [LiveChat startKeFu:strongSelf];
+        }
     };
 }
 
