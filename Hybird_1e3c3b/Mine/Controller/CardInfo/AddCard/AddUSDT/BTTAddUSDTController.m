@@ -23,6 +23,7 @@
 #import "HAInitConfig.h"
 #import "BTTCardInfosController.h"
 #import "BTTPasswordCell.h"
+#import "BTTAddUSDTController+Nav.h"
 
 @interface BTTAddUSDTController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, copy) NSString *walletString;
@@ -258,6 +259,10 @@
                     NSString *message = @"资金密码错误，请重新输入！";
                     [IVUtility showAlertWithActionTitles:@[@"确认"] handlers:@[confirm] title:title message:message];
                     return;
+                } else if ([result.head.errCode isEqualToString:@"GW_601640"]) {
+                    strongSelf(strongSelf);
+                    [strongSelf showCantBindCardPopView];
+                    return;
                 }
                 [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
             }
@@ -325,6 +330,15 @@
         [self.collectionView reloadData];
         [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     });
+}
+
+- (void)goToBack {
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[BTTCardInfosController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 
 @end

@@ -17,6 +17,7 @@
 #import "BTTProvinceModel.h"
 #import "HAInitConfig.h"
 #import "BTTPasswordCell.h"
+#import "BTTAddCardController+Nav.h"
 
 @interface BTTAddCardController ()<BTTElementsFlowLayoutDelegate, UITextFieldDelegate>
 
@@ -277,6 +278,10 @@
                 NSString *message = @"资金密码错误，请重新输入！";
                 [IVUtility showAlertWithActionTitles:@[@"确认"] handlers:@[confirm] title:title message:message];
                 return;
+            } else if ([result.head.errCode isEqualToString:@"GW_601640"]) {
+                strongSelf(strongSelf);
+                [strongSelf showCantBindCardPopView];
+                return;
             }
             [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
@@ -332,6 +337,15 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
+}
+
+- (void)goToBack {
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[BTTCardInfosController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 
 @end

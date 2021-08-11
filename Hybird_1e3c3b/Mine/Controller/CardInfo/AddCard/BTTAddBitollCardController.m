@@ -13,6 +13,7 @@
 #import "BTTKSAddBfbWalletController.h"
 #import "HAInitConfig.h"
 #import "BTTCardInfosController.h"
+#import "BTTAddBitollCardController+Nav.h"
 
 @interface BTTAddBitollCardController ()
 @property (weak, nonatomic) IBOutlet UITextField *accountField;
@@ -128,6 +129,10 @@
                 NSString *message = @"资金密码错误，请重新输入！";
                 [IVUtility showAlertWithActionTitles:@[@"确认"] handlers:@[confirm] title:title message:message];
                 return;
+            } else if ([result.head.errCode isEqualToString:@"GW_601640"]) {
+                strongSelf(strongSelf);
+                [strongSelf showCantBindCardPopView];
+                return;
             }
             [MBProgressHUD showError:result.head.errMsg toView:weakSelf.view];
         }
@@ -149,6 +154,42 @@
         self.withdrawPwdField.secureTextEntry = NO;
     } else {
         self.withdrawPwdField.secureTextEntry = YES;
+    }
+}
+
+- (void)makeCallWithPhoneNum:(NSString *)phone captcha:(NSString *)captcha captchaId:(NSString *)captchaId {
+    NSMutableDictionary *params = @{}.mutableCopy;
+    [params setValue:captcha forKey:@"captcha"];
+    [params setValue:captchaId forKey:@"captchaId"];
+    if ([phone containsString:@"*"]) {
+        [params setValue:@1 forKey:@"type"];
+    } else {
+        [params setValue:@0 forKey:@"type"];
+    }
+    if ([IVNetwork savedUserInfo]) {
+        [params setValue:[IVNetwork savedUserInfo].mobileNo forKey:@"mobileNo"];
+        [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
+    } else {
+        [params setValue:phone forKey:@"mobileNo"];
+    }
+    
+    [IVNetwork requestPostWithUrl:BTTCallBackAPI paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [self showCallBackSuccessView];
+        }else{
+            NSString *errInfo = [NSString stringWithFormat:@"申请失败,%@",result.head.errMsg];
+            [MBProgressHUD showError:errInfo toView:nil];
+        }
+    }];
+}
+
+- (void)goToBack {
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[BTTCardInfosController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
     }
 }
 

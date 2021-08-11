@@ -9,6 +9,7 @@
 #import "BTTAddUSDTController+LoadData.h"
 #import "CNPayRequestManager.h"
 #import "BTTUSDTWalletTypeModel.h"
+#import "BTTAddUSDTController+Nav.h"
 
 @implementation BTTAddUSDTController (LoadData)
 
@@ -47,6 +48,33 @@
         }
     }];
     
+}
+
+- (void)makeCallWithPhoneNum:(NSString *)phone captcha:(NSString *)captcha captchaId:(NSString *)captchaId {
+    NSMutableDictionary *params = @{}.mutableCopy;
+    [params setValue:captcha forKey:@"captcha"];
+    [params setValue:captchaId forKey:@"captchaId"];
+    if ([phone containsString:@"*"]) {
+        [params setValue:@1 forKey:@"type"];
+    } else {
+        [params setValue:@0 forKey:@"type"];
+    }
+    if ([IVNetwork savedUserInfo]) {
+        [params setValue:[IVNetwork savedUserInfo].mobileNo forKey:@"mobileNo"];
+        [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
+    } else {
+        [params setValue:phone forKey:@"mobileNo"];
+    }
+    
+    [IVNetwork requestPostWithUrl:BTTCallBackAPI paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            [self showCallBackSuccessView];
+        }else{
+            NSString *errInfo = [NSString stringWithFormat:@"申请失败,%@",result.head.errMsg];
+            [MBProgressHUD showError:errInfo toView:nil];
+        }
+    }];
 }
 
 - (NSMutableArray *)usdtDatas {
