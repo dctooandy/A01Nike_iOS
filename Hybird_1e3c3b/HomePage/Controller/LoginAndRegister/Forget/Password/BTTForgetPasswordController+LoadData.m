@@ -8,7 +8,6 @@
 
 #import "BTTForgetPasswordController+LoadData.h"
 #import "BTTMeMainModel.h"
-#import "BTTMakeCallSuccessView.h"
 
 @implementation BTTForgetPasswordController (LoadData)
 
@@ -45,18 +44,29 @@
     [params setValue:code forKey:@"captcha"];
     [params setValue:captchaId forKey:@"captchaId"];
     [params setValue:loginName forKey:@"loginName"];
-    [params setValue:[IVRsaEncryptWrapper encryptorString:mobileNo] forKey:@"mobileNo"];
+    [params setValue:self.findType == BTTFindWithPhone ? @0:@1 forKey:@"type"];
+    [params setValue:[IVRsaEncryptWrapper encryptorString:mobileNo] forKey:self.findType == BTTFindWithPhone ? @"mobileNo":@"email"];
+    [params setValue:@4 forKey:@"use"];
     [IVNetwork requestPostWithUrl:BTTValidateCaptcha paramters:params completionBlock:completeBlock];
 }
 
 - (void)loadMainData {
-    NSArray *names = @[@"登录账号",@"手机号",@"验证码"];
-    NSArray *placeholds = @[@"请输入账号",@"请输入手机号",@"请输入验证码"];
-    for (NSString *name in names) {
-        NSInteger index = [names indexOfObject:name];
+    NSString * str = @"";
+    NSString * strPlacehold = @"";
+    if (self.findType == BTTFindWithPhone) {
+        str = @"ic_forget_phone_logo";
+        strPlacehold = @"请输入您的手机号";
+    } else if (self.findType == BTTFindWithEmail) {
+        str = @"ic_forget_email_logo";
+        strPlacehold = @"请输入您的邮箱地址";
+    }
+    NSArray *iconNames = @[@"ic_forget_account_logo",str,@"ic_forget_captcha_logo"];
+    NSArray *placeholds = @[@"请输入账号",strPlacehold,@"请输入验证码"];
+    for (NSString *name in iconNames) {
+        NSInteger index = [iconNames indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
-        model.name = name;
-        model.iconName = placeholds[index];
+        model.name = placeholds[index];
+        model.iconName = iconNames[index];
         [self.mainData addObject:model];
     }
     [self setupElements];
@@ -73,47 +83,6 @@
         [self setMainData:mainData];
     }
     return mainData;
-}
-
-- (void)makeCallWithPhoneNum:(NSString *)phone captcha:(NSString *)captcha captchaId:(NSString *)captchaId {
-    NSMutableDictionary *params = @{}.mutableCopy;
-    [params setValue:captcha forKey:@"captcha"];
-    [params setValue:captchaId forKey:@"captchaId"];
-    if ([phone containsString:@"*"]) {
-        [params setValue:@1 forKey:@"type"];
-    } else {
-        [params setValue:@0 forKey:@"type"];
-    }
-    if ([IVNetwork savedUserInfo]) {
-            [params setValue:[IVNetwork savedUserInfo].mobileNo forKey:@"mobileNo"];
-            [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
-        } else {
-            [params setValue:phone forKey:@"mobileNo"];
-        }
-    
-        [IVNetwork requestPostWithUrl:BTTCallBackAPI paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            IVJResponseObject *result = response;
-            if ([result.head.errCode isEqualToString:@"0000"]) {
-                [self showCallBackSuccessView];
-            }else{
-                NSString *errInfo = [NSString stringWithFormat:@"申请失败,%@",result.head.errMsg];
-                [MBProgressHUD showError:errInfo toView:nil];
-            }
-        }];
-}
-
-- (void)showCallBackSuccessView {
-    BTTMakeCallSuccessView *customView = [BTTMakeCallSuccessView viewFromXib];
-    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-    popView.isClickBGDismiss = YES;
-    [popView pop];
-    customView.dismissBlock = ^{
-        [popView dismiss];
-    };
-    customView.btnBlock = ^(UIButton *btn) {
-        [popView dismiss];
-    };
 }
 
 @end

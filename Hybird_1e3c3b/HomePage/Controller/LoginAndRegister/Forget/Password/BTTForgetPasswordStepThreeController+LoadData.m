@@ -32,13 +32,13 @@
 }
 
 - (void)loadMainData {
-    NSArray *names = @[@"新密码"];
-    NSArray *placeholds = @[@"请输入新密码"];
-    for (NSString *name in names) {
-        NSInteger index = [names indexOfObject:name];
+    NSArray *iconNames = @[@"ic_forget_reset_pwd_logo", @"ic_forget_reset_again_pwd_logo"];
+    NSArray *placeholds = @[@"请输入新密码", @"请再次输入新密码"];
+    for (NSString *name in iconNames) {
+        NSInteger index = [iconNames indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
-        model.name = name;
-        model.iconName = placeholds[index];
+        model.name = placeholds[index];
+        model.iconName = iconNames[index];
         [self.mainData addObject:model];
     }
     [self setupElements];

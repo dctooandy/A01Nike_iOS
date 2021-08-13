@@ -19,11 +19,14 @@
     params[BTTLoginName] = account;
     params[@"use"] = @4;
     params[@"validateId"] = self.validateId;
-//    NSDictionary *params = @{BTTLoginName:account,@"use":@4,@"validateId":self.validateId};
-    [IVNetwork requestPostWithUrl:BTTStepOneSendCode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    NSString * url = self.findType == BTTFindWithPhone ? BTTStepOneSendCode:BTTEmailSendCodeLoginName;
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
+        [self hideLoading];
         if ([result.head.errCode isEqualToString:@"0000"]) {
             [MBProgressHUD showSuccess:@"验证码已发送, 请注意查收" toView:nil];
+            [[self getForgetPhoneCell] countDown:60];
             self.messageId = result.body[@"messageId"];
         }else{
             [MBProgressHUD showSuccess:result.head.errMsg toView:self.view];
@@ -35,23 +38,30 @@
     if (!code.length || !account.length) {
         return;
     }
-//    NSDictionary *params = @{BTTLoginName: account, @"smsCode":code,@"messageId":self.messageId,@"use":@4};
+    NSString * url = @"";
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     params[BTTLoginName] = account;
-    params[@"smsCode"] = code;
+    if (self.findType == BTTFindWithPhone) {
+        url = BTTVerifySmsCode;
+        params[@"smsCode"] = code;
+    } else if (self.findType == BTTFindWithEmail) {
+        url = BTTEmailCodeVerify;
+        params[@"emailCode"] = code;
+    }
     params[@"messageId"] = self.messageId;
     params[@"use"] = @4;
-    [IVNetwork requestPostWithUrl:BTTVerifySmsCode paramters:params completionBlock:completeBlock];
+     
+    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:completeBlock];
 }
 
 - (void)loadMainData {
-    NSArray *names = @[@"验证码"];
+    NSArray *iconNames = @[@"ic_forget_captcha_logo"];
     NSArray *placeholds = @[@"请输入验证码"];
-    for (NSString *name in names) {
-        NSInteger index = [names indexOfObject:name];
+    for (NSString *name in iconNames) {
+        NSInteger index = [iconNames indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
-        model.name = name;
-        model.iconName = placeholds[index];
+        model.name = placeholds[index];
+        model.iconName = iconNames[index];
         [self.mainData addObject:model];
     }
     [self setupElements];

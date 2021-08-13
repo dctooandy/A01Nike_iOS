@@ -13,7 +13,6 @@
 #import "BTTMeMainModel.h"
 #import "BTTForgetPasswordController+LoadData.h"
 #import "BTTForgetPasswordStepTwoController.h"
-#import "BTTForgetPasswordController+Nav.h"
 
 @interface BTTForgetPasswordController ()<BTTElementsFlowLayoutDelegate,UITextFieldDelegate>
 
@@ -29,8 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"忘记密码";
-    [self setUpNav];
+    self.title = self.findType == BTTFindWithPhone ? @"选择手机找回密码方式":@"选择邮箱找回密码方式";
     [self setupCollectionView];
     [self loadMainData];
     [self loadVerifyCode];
@@ -51,17 +49,21 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == self.elementsHight.count - 1) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
-        cell.buttonType = BTTButtonTypeDone;
+        cell.buttonType = BTTButtonTypeConfirm;
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
             [strongSelf.view endEditing:true];
+            [strongSelf showLoading];
             [strongSelf verifyPhotoCode:self.code loginName:strongSelf.account WithCaptchaId:strongSelf.uuid mobileNo:strongSelf.phone completeBlock:^(id  _Nullable response, NSError * _Nullable error) {
                 IVJResponseObject *result = response;
+                [strongSelf hideLoading];
                 if ([result.head.errCode isEqualToString:@"0000"]) {
                     BTTForgetPasswordStepTwoController *vc = [[BTTForgetPasswordStepTwoController alloc] init];
                     vc.account = strongSelf.account;
                     vc.validateId = result.body[@"validateId"];
+                    vc.findType = strongSelf.findType;
+                    vc.BindStr = strongSelf.phone;
                     [strongSelf.navigationController pushViewController:vc animated:YES];
                 }else{
                     [MBProgressHUD showError:result.head.errMsg toView:strongSelf.view];
@@ -75,7 +77,6 @@
         BTTForgetPwdCodeCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTForgetPwdCodeCell" forIndexPath:indexPath];
         [cell.detailTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
         cell.codeImage.image = self.codeImage;
-        cell.mineSparaterType = BTTMineSparaterTypeNone;
         cell.detailTextField.delegate = self;
         cell.model = model;
         weakSelf(weakSelf);
@@ -117,7 +118,7 @@
 }
 
 - (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
-    return UIEdgeInsetsMake(20, 0, 40, 0);
+    return UIEdgeInsetsMake(30, 20, 0, 0);
 }
 
 /**
@@ -131,7 +132,7 @@
  *  行间距, 默认10
  */
 - (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView linesMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return 0;
+    return 20;
 }
 
 #pragma mark - textfielddelegate
@@ -157,7 +158,7 @@
     NSString *regex = @"^[a-zA-Z0-9]{4,11}$";
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     BOOL isAccount = [predicate evaluateWithObject:self.account];
-    BOOL isPhone = [PublicMethod isValidatePhone:self.phone];
+    BOOL isPhone = self.findType == BTTFindWithPhone ? [PublicMethod isValidatePhone:self.phone]:[PublicMethod isValidateEmail:self.phone];
     if (self.code.length >= 5 && isAccount && isPhone) {
         [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeEnableNotification object:@"verifycode"];
     } else {
@@ -170,11 +171,14 @@
         if (textField.text.length >= 5 && string.length > 0) {
             return false;
         }
+    } else if (textField.tag == 30011) {
+        if (textField.text.length >= 11 && string.length > 0 && self.findType == BTTFindWithPhone) {
+            return false;
+        }
     } else {
         if (textField.text.length >= 11 && string.length > 0) {
             return false;
         }
-        
     }
     return YES;
 }
@@ -187,9 +191,9 @@
     NSInteger count = self.mainData.count + 1;
     for (int i = 0; i < count; i++) {
         if (i == count - 1) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 40, 100)]];
         } else {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 40, 44)]];
         }
     }
     self.elementsHight = elementsHight.mutableCopy;
@@ -197,6 +201,5 @@
         [self.collectionView reloadData];
     });
 }
-
 
 @end

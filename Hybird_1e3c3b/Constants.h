@@ -40,6 +40,11 @@
 #import "BTTUserStatusManager.h"
 
 typedef enum {
+    BTTFindWithPhone = 1000,   //用手機找回帳號或密碼
+    BTTFindWithEmail = 1001,   //用郵箱找回帳號或密碼
+}BTTChooseFindWay;
+
+typedef enum {
     BTTCanAddCardTypeNone,          // 不能添加任何卡
     BTTCanAddCardTypeAll,           // 银行卡和比特币钱包
     BTTCanAddCardTypeBank,          // 只能添加银行卡
@@ -324,6 +329,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTBindPhone                               @"phone/bind"
 // update绑定手机号
 #define BTTBindPhoneUpdate                         @"phone/updateBind"
+// 使用已綁定手機號找回賬號
+#define BTTCheckCustomerBySmsCode                  @"phone/checkCustomerBySmsCode"
 //忘记密码第一步验证
 #define BTTValidateCaptcha                         @"customer/preForgetPwd"
 // 根据code修改密码
