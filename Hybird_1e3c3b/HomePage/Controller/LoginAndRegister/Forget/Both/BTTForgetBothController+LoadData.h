@@ -7,6 +7,7 @@
 //
 
 #import "BTTForgetBothController.h"
+#import "BTTCheckCustomerModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

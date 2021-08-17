@@ -7,8 +7,9 @@
 //
 
 #import "BTTForgetAccountStepTwoController.h"
+#import "BTTBindingMobileBtnCell.h"
 
-@interface BTTForgetAccountStepTwoController ()
+@interface BTTForgetAccountStepTwoController ()<BTTElementsFlowLayoutDelegate>
 
 @end
 
@@ -19,6 +20,7 @@
     self.title =  @"完成找回账号";
     self.view.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self setupCollectionView];
+    [self setupElements];
 }
 
 -(void)setupCollectionView {
@@ -56,10 +58,81 @@
         make.right.equalTo(self.view).offset(-20);
     }];
     
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lab.mas_bottom);
         make.left.bottom.right.equalTo(self.view);
     }];
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.elementsHight.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+    cell.buttonType = BTTButtonTypeConfirm;
+    
+    cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+        
+    };
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    NSLog(@"%zd", indexPath.item);
+}
+
+#pragma mark - LMJCollectionViewControllerDataSource
+
+- (UICollectionViewLayout *)collectionViewController:(BTTCollectionViewController *)collectionViewController layoutForCollectionView:(UICollectionView *)collectionView {
+    BTTCollectionViewFlowlayout *elementsFlowLayout = [[BTTCollectionViewFlowlayout alloc] initWithDelegate:self];
+    
+    return elementsFlowLayout;
+}
+
+#pragma mark - LMJElementsFlowLayoutDelegate
+
+- (CGSize)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return self.elementsHight[indexPath.item].CGSizeValue;
+}
+
+- (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
+    return UIEdgeInsetsMake(20, 20, 0, 0);
+}
+
+/**
+ *  列间距, 默认10
+ */
+- (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView columnsMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return 0;
+}
+
+/**
+ *  行间距, 默认10
+ */
+- (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView linesMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return 20;
+}
+
+- (void)setupElements {
+    if (self.elementsHight.count) {
+        [self.elementsHight removeAllObjects];
+    }
+    NSMutableArray *elementsHight = [NSMutableArray array];
+    NSInteger count = self.itemArr.count + 1;
+    for (int i = 0; i < count; i++) {
+        if (i == count - 1) {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 40, 100)]];
+        } else {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 40, 40)]];
+        }
+    }
+    self.elementsHight = elementsHight.mutableCopy;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+    });
 }
 
 @end

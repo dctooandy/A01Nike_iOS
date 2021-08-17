@@ -7,6 +7,7 @@
 //
 
 #import "BTTForgetBothController+LoadData.h"
+#import "BTTForgetAccountStepTwoController.h"
 #import "BTTMeMainModel.h"
 #import "BTTMakeCallSuccessView.h"
 
@@ -22,7 +23,11 @@
         IVJResponseObject *result = response;
         [self hideLoading];
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            
+            BTTCheckCustomerModel * model = [BTTCheckCustomerModel yy_modelWithJSON:result.body];
+            BTTForgetAccountStepTwoController * vc = [[BTTForgetAccountStepTwoController alloc] init];
+            vc.itemArr = model.loginNames;
+            vc.findType = self.findType;
+            [self.navigationController pushViewController:vc animated:true];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }

@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTForgetAccountStepTwoController : BTTCollectionViewController
 
+@property (nonatomic, assign) BTTChooseFindWay findType;
+
 @property (nonatomic, copy) NSArray<BTTCheckCustomerItemModel*> * itemArr;
 
 @end
