@@ -7,6 +7,7 @@
 //
 
 #import "BTTForgetAccountController.h"
+#import "BTTCheckCustomerModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)loadMainData;
 -(void)sendCodeByPhone:(NSString *)phone;
 -(void)checkCustomerBySmsCode:(NSString *)code;
+- (void)makeCallWithPhoneNum:(NSString *)phone captcha:(NSString *)captcha captchaId:(NSString *)captchaId;
 @end
 
 NS_ASSUME_NONNULL_END

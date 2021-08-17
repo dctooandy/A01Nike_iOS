@@ -8,6 +8,7 @@
 
 #import "BTTForgetBothController.h"
 #import "BTTForgetBothController+LoadData.h"
+#import "BTTForgetBothController+Nav.h"
 #import "BTTForgetPwdOneCell.h"
 #import "BTTBindingMobileBtnCell.h"
 
@@ -22,6 +23,7 @@
     [super viewDidLoad];
     self.title = self.findType == BTTFindWithPhone ? @"使用手机号找回账号, 密码":@"使用邮箱找回账号, 密码";
     [self setupCollectionView];
+    [self setUpNav];
     [self loadMainData];
 }
 

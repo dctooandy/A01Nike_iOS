@@ -12,6 +12,7 @@
 #import "BTTBindingMobileBtnCell.h"
 #import "BTTMeMainModel.h"
 #import "BTTForgetPasswordController+LoadData.h"
+#import "BTTForgetPasswordController+Nav.h"
 #import "BTTForgetPasswordStepTwoController.h"
 
 @interface BTTForgetPasswordController ()<BTTElementsFlowLayoutDelegate,UITextFieldDelegate>
@@ -30,6 +31,7 @@
     [super viewDidLoad];
     self.title = self.findType == BTTFindWithPhone ? @"选择手机找回密码方式":@"选择邮箱找回密码方式";
     [self setupCollectionView];
+    [self setUpNav];
     [self loadMainData];
     [self loadVerifyCode];
 }

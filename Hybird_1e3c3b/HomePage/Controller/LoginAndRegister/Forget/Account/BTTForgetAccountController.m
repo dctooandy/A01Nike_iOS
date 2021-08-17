@@ -10,6 +10,7 @@
 #import "BTTForgetAccountController+LoadData.h"
 #import "BTTForgetPwdOneCell.h"
 #import "BTTBindingMobileBtnCell.h"
+#import "BTTForgetAccountController+Nav.h"
 
 @interface BTTForgetAccountController ()<BTTElementsFlowLayoutDelegate,UITextFieldDelegate>
 @property (nonatomic, copy) NSString *phone;
@@ -22,6 +23,7 @@
     [super viewDidLoad];
     self.title = self.findType == BTTFindWithPhone ? @"使用手机号找回账号":@"使用邮箱找回账号";
     [self setupCollectionView];
+    [self setUpNav];
     [self loadMainData];
 }
 

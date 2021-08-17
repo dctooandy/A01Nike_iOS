@@ -24,6 +24,7 @@
     _detailTextField.textColor = [UIColor blackColor];
     self.backgroundColor = [UIColor whiteColor];
     self.layer.cornerRadius = 4.0;
+    self.showPwdBtn.hidden = true;
 }
 
 - (void)setModel:(BTTMeMainModel *)model {
@@ -37,6 +38,13 @@
     _detailTextField.attributedPlaceholder = attrString;
 }
 
-
+- (IBAction)showClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        self.detailTextField.secureTextEntry = NO;
+    } else {
+        self.detailTextField.secureTextEntry = YES;
+    }
+}
 
 @end

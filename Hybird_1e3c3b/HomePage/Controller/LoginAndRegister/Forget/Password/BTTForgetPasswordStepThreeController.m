@@ -51,6 +51,8 @@
     } else {
         BTTMeMainModel *model = self.mainData[indexPath.row];
         BTTForgetPwdOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTForgetPwdOneCell" forIndexPath:indexPath];
+        cell.showPwdBtn.hidden = false;
+        cell.detailTextField.secureTextEntry = true;
         [cell.detailTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
         cell.detailTextField.tag = indexPath.row;
         cell.model = model;

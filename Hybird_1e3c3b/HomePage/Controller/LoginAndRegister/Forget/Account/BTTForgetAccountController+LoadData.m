@@ -7,7 +7,9 @@
 //
 
 #import "BTTForgetAccountController+LoadData.h"
+#import "BTTForgetAccountStepTwoController.h"
 #import "BTTMeMainModel.h"
+#import "BTTMakeCallSuccessView.h"
 
 @implementation BTTForgetAccountController (LoadData)
 
@@ -21,7 +23,10 @@
         IVJResponseObject *result = response;
         [self hideLoading];
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            
+            BTTCheckCustomerModel * model = [BTTCheckCustomerModel yy_modelWithJSON:result.body];
+            BTTForgetAccountStepTwoController * vc = [[BTTForgetAccountStepTwoController alloc] init];
+            vc.itemArr = model.loginNames;
+            [self.navigationController pushViewController:vc animated:true];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
@@ -44,6 +49,47 @@
             [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];
+}
+
+- (void)makeCallWithPhoneNum:(NSString *)phone captcha:(NSString *)captcha captchaId:(NSString *)captchaId {
+    NSMutableDictionary *params = @{}.mutableCopy;
+    [params setValue:captcha forKey:@"captcha"];
+    [params setValue:captchaId forKey:@"captchaId"];
+    if ([phone containsString:@"*"]) {
+        [params setValue:@1 forKey:@"type"];
+    } else {
+        [params setValue:@0 forKey:@"type"];
+    }
+    if ([IVNetwork savedUserInfo]) {
+            [params setValue:[IVNetwork savedUserInfo].mobileNo forKey:@"mobileNo"];
+            [params setValue:[IVNetwork savedUserInfo].loginName forKey:@"loginName"];
+        } else {
+            [params setValue:phone forKey:@"mobileNo"];
+        }
+    
+        [IVNetwork requestPostWithUrl:BTTCallBackAPI paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                [self showCallBackSuccessView];
+            }else{
+                NSString *errInfo = [NSString stringWithFormat:@"申请失败,%@",result.head.errMsg];
+                [MBProgressHUD showError:errInfo toView:nil];
+            }
+        }];
+}
+
+- (void)showCallBackSuccessView {
+    BTTMakeCallSuccessView *customView = [BTTMakeCallSuccessView viewFromXib];
+    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    customView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    customView.btnBlock = ^(UIButton *btn) {
+        [popView dismiss];
+    };
 }
 
 -(void)loadMainData {
