@@ -407,7 +407,7 @@
             [self.qrcodeView setImage:[PublicMethod QRCodeMethod:address]];
             NSRange range = [address rangeOfString:@"dcbox://pay"];
             if (range.location != NSNotFound) {
-                self.dcboxH5Link = [address stringByReplacingOccurrencesOfString:@"dcbox://pay" withString:@"https://www.dcusdt.com/payment.html"];
+                self.dcboxH5Link = [address stringByReplacingOccurrencesOfString:@"dcbox://pay" withString:@"https://app.dcusdt.com/pay"];
             }
             
             weakSelf.secondMoneyLabel.text = tempAmount;

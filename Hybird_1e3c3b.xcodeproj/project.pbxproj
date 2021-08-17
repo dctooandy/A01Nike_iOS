@@ -499,6 +499,8 @@
 		416D787926C3D3B400CB9E6D /* BTTCantBindCardPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 416D787626C3D3B400CB9E6D /* BTTCantBindCardPopView.m */; };
 		416D787A26C3D3B400CB9E6D /* BTTCantBindCardPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 416D787726C3D3B400CB9E6D /* BTTCantBindCardPopView.xib */; };
 		41755C52262E74D600B6884D /* LiveChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 41755C50262E74D600B6884D /* LiveChat.m */; };
+		417E32D126CBB700005C1AB3 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
+		417E32D526CBD3ED005C1AB3 /* BTTVipPaymentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 417E32D426CBD3ED005C1AB3 /* BTTVipPaymentController.m */; };
 		41800D5A2623E95900FAC27B /* BTTAddBitollCardController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41800D592623E95900FAC27B /* BTTAddBitollCardController.xib */; };
 		4180B03925D36EBB00139E88 /* BTTOtherGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4180B03725D36EBB00139E88 /* BTTOtherGameCell.m */; };
 		4180B03A25D36EBB00139E88 /* BTTOtherGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4180B03825D36EBB00139E88 /* BTTOtherGameCell.xib */; };
@@ -1625,6 +1627,8 @@
 		416D787826C3D3B400CB9E6D /* BTTCantBindCardPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTCantBindCardPopView.h; sourceTree = "<group>"; };
 		41755C50262E74D600B6884D /* LiveChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveChat.m; sourceTree = "<group>"; };
 		41755C51262E74D600B6884D /* LiveChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveChat.h; sourceTree = "<group>"; };
+		417E32D326CBD3ED005C1AB3 /* BTTVipPaymentController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVipPaymentController.h; sourceTree = "<group>"; };
+		417E32D426CBD3ED005C1AB3 /* BTTVipPaymentController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVipPaymentController.m; sourceTree = "<group>"; };
 		41800D592623E95900FAC27B /* BTTAddBitollCardController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTAddBitollCardController.xib; sourceTree = "<group>"; };
 		4180B03725D36EBB00139E88 /* BTTOtherGameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTOtherGameCell.m; sourceTree = "<group>"; };
 		4180B03825D36EBB00139E88 /* BTTOtherGameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTOtherGameCell.xib; sourceTree = "<group>"; };
@@ -2079,6 +2083,7 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
+				417E32D126CBB700005C1AB3 /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -4012,6 +4017,15 @@
 			path = LiveChat;
 			sourceTree = "<group>";
 		};
+		417E32D226CBD3CB005C1AB3 /* VipPay */ = {
+			isa = PBXGroup;
+			children = (
+				417E32D326CBD3ED005C1AB3 /* BTTVipPaymentController.h */,
+				417E32D426CBD3ED005C1AB3 /* BTTVipPaymentController.m */,
+			);
+			path = VipPay;
+			sourceTree = "<group>";
+		};
 		4184DDCC251B321000D433D4 /* CustomerReport */ = {
 			isa = PBXGroup;
 			children = (
@@ -4398,6 +4412,7 @@
 				D5DBEAAF21ABB774008AF629 /* OnlinePay */,
 				D5DBEAC621ABB774008AF629 /* QRPay */,
 				D5DBEACD21ABB774008AF629 /* StepVC */,
+				417E32D226CBD3CB005C1AB3 /* VipPay */,
 				D5DBEAB621ABB774008AF629 /* WebVC */,
 			);
 			path = VC;
@@ -5345,6 +5360,7 @@
 				3A9E4C16219D1D2A00E7D8C0 /* BTTForgetPwdCodeCell.m in Sources */,
 				3A37E0FD2164691300FB13A1 /* AppDelegate+AD.m in Sources */,
 				3AA7893721FFF2580047A372 /* SDWebImageImageIOCoder.m in Sources */,
+				417E32D526CBD3ED005C1AB3 /* BTTVipPaymentController.m in Sources */,
 				D38A44AA246E97ED00BC8764 /* BTTBitollWithDrawCell.m in Sources */,
 				4135A71B2639440700D3BF17 /* BTTLiCaiTransRecordController+LoadData.m in Sources */,
 				3ADD23ED2179B97A00FA959A /* TAAnimatedDotView.m in Sources */,
@@ -5715,7 +5731,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5GYDQY5HP9;
+				DEVELOPMENT_TEAM = TC9HF6MY92;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5737,11 +5753,11 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.60;
-				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
+				MARKETING_VERSION = 3.2.311;
+				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = btt_ad_hoc;
+				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_btt;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -5756,7 +5772,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5GYDQY5HP9;
+				DEVELOPMENT_TEAM = TC9HF6MY92;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5778,11 +5794,11 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.60;
-				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone.btt01;
+				MARKETING_VERSION = 3.2.311;
+				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
-				PROVISIONING_PROFILE_SPECIFIER = btt_ad_hoc;
+				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_btt;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -12,9 +12,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LiveChat : NSObject
-+(void)startKeFu:(UIViewController *)vc;
-//+(void)initOcssSDKNetWork;
-//+(void)reloadSDK;
++(void)initOcssSDKNetWork;
++(void)reloadSDK;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -26,7 +26,7 @@ target ‘Hybird_1e3c3b’ do
   pod 'IVHeartPacketLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git'
   pod 'IVLoganAnalysis',:git =>'http://10.66.72.115/mobile-iOS-Library/IVLoganAnalysis.git'
   pod 'IVPushLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVPushLibrary.git'
-  pod 'CSSerVice',:git =>'http://10.66.72.115/mobile-iOS-library/ocss-webview-sdk-demo-ios.git' ,:tag=>'0.1.9.3'
+  pod 'CSSerVice',:git =>'http://10.66.72.115/mobile-iOS-library/ocss-webview-sdk-demo-ios.git' ,:tag=>'1.0.3'
   pod 'IN3SAnalyticsSDK',:git =>'http://10.66.72.115/mobile-iOS-library/IV3SLibrary.git'
   pod 'IQKeyboardManager','~> 5.0.6'
   pod 'FCUUID'
