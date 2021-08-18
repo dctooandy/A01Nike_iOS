@@ -14,12 +14,12 @@
 
 @implementation LiveChat
 
-+(void)initOcssSDKNetWork {
++(void)startKeFu:(UIViewController *)vc {
     CSChatInfo *info = [[CSChatInfo alloc]init];
     info.title = @"在线客服";//导航栏标题
     info.productId = [HAInitConfig productId];//产品ID
     info.appid = [HAInitConfig appId];//AppID
-
+    
     //网站登陆后的token
     NSString *userToken = [[NSUserDefaults standardUserDefaults]objectForKey:@"userToken"];
     if (userToken!=nil) {
@@ -42,72 +42,33 @@
     info.baseUrl = gatewayStr;
     //设备id，不傳会默认生成
     info.uuid = [UIDevice uuidForDevice];
-
-    //下面几个是标题栏具体参数设置，默认为系统样式，可以自定义
-    info.backColor = [UIColor whiteColor];
-    info.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
-    info.barTintColor = [UIColor colorWithRed: 0.13 green: 0.37 blue: 0.76 alpha: 1.00];
-
-    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
-    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
-    params[@"productId"] = [HAInitConfig productId];
-    weakSelf(weakSelf);
-    [IVNetwork requestPostWithUrl:@"liveChatAddressOCSS" paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        info.response = result.body;
-        [weakSelf initTestSpeed:info.response chatInfo:info];
-    }];
-}
-
-+(void)reloadSDK {
-    CSChatInfo *info = [[CSChatInfo alloc]init];
-    info.title = @"在线客服";//导航栏标题
-    info.productId = [HAInitConfig productId];//产品ID
-    info.appid = [HAInitConfig appId];//AppID
-
-    //网站登陆后的token
-    NSString *userToken = [[NSUserDefaults standardUserDefaults]objectForKey:@"userToken"];
-    if (userToken!=nil) {
-        info.token = userToken;
-    }
-    //网站用户名
-    if ([IVNetwork savedUserInfo]) {
-        info.loginName = [IVNetwork savedUserInfo].loginName;
-    }
-    //请求头中的v,不穿默认取 CFBundleShortVersionString
-    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
-    NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
-    info.v = appVersion;
-    //网站域名
-    NSString * gatewayStr = [[HAInitConfig gateways] objectAtIndex:(arc4random() % [HAInitConfig gateways].count)];
-    NSURL *gatewayUrl = [NSURL URLWithString:gatewayStr];
-    NSString *domainName = [NSString stringWithFormat:@"%@",gatewayUrl.host];
-    info.domainName = domainName;
-    //app网关地址
-    info.baseUrl = gatewayStr;
-    //设备id，不傳会默认生成
-    info.uuid = [UIDevice uuidForDevice];
-
+    
     //下面几个是标题栏具体参数设置，默认为系统样式，可以自定义
     info.backColor = [UIColor whiteColor];
     info.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
     info.barTintColor = [UIColor colorWithRed: 0.13 green: 0.37 blue: 0.76 alpha: 1.00];
     
-    [CSVisitChatmanager cleanSDK];
+    //隐藏log，默认不隐藏  隐藏 YES。不隐藏 NO
+    //    info.hidenLog = YES;
+    //    info.hidenLoading = YES;//隐藏网络请求时的转圈圈
     
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     params[@"productId"] = [HAInitConfig productId];
-    weakSelf(weakSelf);
+    [MBProgressHUD showLoadingSingleInView:vc.view animated:true];
     [IVNetwork requestPostWithUrl:@"liveChatAddressOCSS" paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
-        info.response = result.body;
-        [weakSelf testSpeed:info.response chatInfo:info];
+        [MBProgressHUD hideHUDForView:vc.view animated:true];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            info.response = result.body;
+            [self testSpeed:info.response chatInfo:info vc:vc];
+        } else {
+            [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:vc.view duration:3];
+        }
     }];
 }
 
-+(void)testSpeed:(NSDictionary *)response chatInfo:(CSChatInfo *)info {
-
++(void)testSpeed:(NSDictionary *)response chatInfo:(CSChatInfo *)info vc:(UIViewController *)vc {
     NSMutableArray * arr = [[NSMutableArray alloc] init];
     for (NSString * str in response[@"domainBakList"]) {
         if ([[str substringFromIndex:str.length-1] isEqualToString:@"/"]) {
@@ -120,34 +81,151 @@
         if (model != nil) {
             info.domainBakList = @[model.url];
         }
-        [CSVisitChatmanager reloadSDK:info finish:^(CSServiceCode errCode) {
-            NSLog(@"222222");
+        [CSVisitChatmanager startWithSuperVC:vc chatInfo:info finish:^(CSServiceCode errCode) {
+            if (errCode != CSServiceCode_Request_Suc) {
+                [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:vc.view duration:3];
+            } else {
+                
+            }
         }];
     }];
 
 }
 
-//app进行速度测试
-+(void)initTestSpeed:(NSDictionary *)response chatInfo:(CSChatInfo *)info{
-    //app有域名测速功能就使用，没有直接注释domainBakList赋值即可
-    NSMutableArray * arr = [[NSMutableArray alloc] init];
-    for (NSString * str in response[@"domainBakList"]) {
-        if ([[str substringFromIndex:str.length-1] isEqualToString:@"/"]) {
-            [arr addObject:str];
-        } else {
-            [arr addObject:[NSString stringWithFormat:@"%@/", str]];
-        }
-    }
-    //...测速代码，速度从快到慢
-    [IVCheckNetworkWrapper getOptimizeUrlWithArray:arr isAuto:YES type:IVKCheckNetworkTypeOnline progress:nil completion:^(IVCheckDetailModel * _Nonnull model) {
-        if (model != nil) {
-            info.domainBakList = @[model.url];
-        }
-        [CSVisitChatmanager initSDK:info finish:^(CSServiceCode errCode) {
-            NSLog(@"222222");
-        } appearblock:nil disbock:nil];
-    }];
-}
+//+(void)initOcssSDKNetWork {
+//    CSChatInfo *info = [[CSChatInfo alloc]init];
+//    info.title = @"在线客服";//导航栏标题
+//    info.productId = [HAInitConfig productId];//产品ID
+//    info.appid = [HAInitConfig appId];//AppID
+//
+//    //网站登陆后的token
+//    NSString *userToken = [[NSUserDefaults standardUserDefaults]objectForKey:@"userToken"];
+//    if (userToken!=nil) {
+//        info.token = userToken;
+//    }
+//    //网站用户名
+//    if ([IVNetwork savedUserInfo]) {
+//        info.loginName = [IVNetwork savedUserInfo].loginName;
+//    }
+//    //请求头中的v,不穿默认取 CFBundleShortVersionString
+//    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+//    NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
+//    info.v = appVersion;
+//    //网站域名
+//    NSString * gatewayStr = [[HAInitConfig gateways] objectAtIndex:(arc4random() % [HAInitConfig gateways].count)];
+//    NSURL *gatewayUrl = [NSURL URLWithString:gatewayStr];
+//    NSString *domainName = [NSString stringWithFormat:@"%@",gatewayUrl.host];
+//    info.domainName = domainName;
+//    //app网关地址
+//    info.baseUrl = gatewayStr;
+//    //设备id，不傳会默认生成
+//    info.uuid = [UIDevice uuidForDevice];
+//
+//    //下面几个是标题栏具体参数设置，默认为系统样式，可以自定义
+//    info.backColor = [UIColor whiteColor];
+//    info.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
+//    info.barTintColor = [UIColor colorWithRed: 0.13 green: 0.37 blue: 0.76 alpha: 1.00];
+//
+//    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+//    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+//    params[@"productId"] = [HAInitConfig productId];
+//    weakSelf(weakSelf);
+//    [IVNetwork requestPostWithUrl:@"liveChatAddressOCSS" paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//        IVJResponseObject *result = response;
+//        info.response = result.body;
+//        [weakSelf initTestSpeed:info.response chatInfo:info];
+//    }];
+//}
+//
+//+(void)reloadSDK {
+//    CSChatInfo *info = [[CSChatInfo alloc]init];
+//    info.title = @"在线客服";//导航栏标题
+//    info.productId = [HAInitConfig productId];//产品ID
+//    info.appid = [HAInitConfig appId];//AppID
+//
+//    //网站登陆后的token
+//    NSString *userToken = [[NSUserDefaults standardUserDefaults]objectForKey:@"userToken"];
+//    if (userToken!=nil) {
+//        info.token = userToken;
+//    }
+//    //网站用户名
+//    if ([IVNetwork savedUserInfo]) {
+//        info.loginName = [IVNetwork savedUserInfo].loginName;
+//    }
+//    //请求头中的v,不穿默认取 CFBundleShortVersionString
+//    NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
+//    NSString *appVersion = [infoDic objectForKey:@"CFBundleShortVersionString"];
+//    info.v = appVersion;
+//    //网站域名
+//    NSString * gatewayStr = [[HAInitConfig gateways] objectAtIndex:(arc4random() % [HAInitConfig gateways].count)];
+//    NSURL *gatewayUrl = [NSURL URLWithString:gatewayStr];
+//    NSString *domainName = [NSString stringWithFormat:@"%@",gatewayUrl.host];
+//    info.domainName = domainName;
+//    //app网关地址
+//    info.baseUrl = gatewayStr;
+//    //设备id，不傳会默认生成
+//    info.uuid = [UIDevice uuidForDevice];
+//
+//    //下面几个是标题栏具体参数设置，默认为系统样式，可以自定义
+//    info.backColor = [UIColor whiteColor];
+//    info.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
+//    info.barTintColor = [UIColor colorWithRed: 0.13 green: 0.37 blue: 0.76 alpha: 1.00];
+//
+//    [CSVisitChatmanager cleanSDK];
+//
+//    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+//    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+//    params[@"productId"] = [HAInitConfig productId];
+//    weakSelf(weakSelf);
+//    [IVNetwork requestPostWithUrl:@"liveChatAddressOCSS" paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//        IVJResponseObject *result = response;
+//        info.response = result.body;
+//        [weakSelf testSpeed:info.response chatInfo:info];
+//    }];
+//}
+//
+//+(void)testSpeed:(NSDictionary *)response chatInfo:(CSChatInfo *)info {
+//
+//    NSMutableArray * arr = [[NSMutableArray alloc] init];
+//    for (NSString * str in response[@"domainBakList"]) {
+//        if ([[str substringFromIndex:str.length-1] isEqualToString:@"/"]) {
+//            [arr addObject:str];
+//        } else {
+//            [arr addObject:[NSString stringWithFormat:@"%@/", str]];
+//        }
+//    }
+//    [IVCheckNetworkWrapper getOptimizeUrlWithArray:arr isAuto:YES type:IVKCheckNetworkTypeOnline progress:nil completion:^(IVCheckDetailModel * _Nonnull model) {
+//        if (model != nil) {
+//            info.domainBakList = @[model.url];
+//        }
+//        [CSVisitChatmanager reloadSDK:info finish:^(CSServiceCode errCode) {
+//            NSLog(@"222222");
+//        }];
+//    }];
+//
+//}
+//
+////app进行速度测试
+//+(void)initTestSpeed:(NSDictionary *)response chatInfo:(CSChatInfo *)info{
+//    //app有域名测速功能就使用，没有直接注释domainBakList赋值即可
+//    NSMutableArray * arr = [[NSMutableArray alloc] init];
+//    for (NSString * str in response[@"domainBakList"]) {
+//        if ([[str substringFromIndex:str.length-1] isEqualToString:@"/"]) {
+//            [arr addObject:str];
+//        } else {
+//            [arr addObject:[NSString stringWithFormat:@"%@/", str]];
+//        }
+//    }
+//    //...测速代码，速度从快到慢
+//    [IVCheckNetworkWrapper getOptimizeUrlWithArray:arr isAuto:YES type:IVKCheckNetworkTypeOnline progress:nil completion:^(IVCheckDetailModel * _Nonnull model) {
+//        if (model != nil) {
+//            info.domainBakList = @[model.url];
+//        }
+//        [CSVisitChatmanager initSDK:info finish:^(CSServiceCode errCode) {
+//            NSLog(@"222222");
+//        } appearblock:nil disbock:nil];
+//    }];
+//}
 
 @end
 

@@ -49,13 +49,14 @@
 }
 
 - (id)driver_live800:(BridgeModel *)bridgeModel {
-    [CSVisitChatmanager startWithSuperVC:self.controller finish:^(CSServiceCode errCode) {
-        if (errCode != CSServiceCode_Request_Suc) {
-            [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
-        } else {
-
-        }
-    }];
+    [LiveChat startKeFu:self.controller];
+//    [CSVisitChatmanager startWithSuperVC:self.controller finish:^(CSServiceCode errCode) {
+//        if (errCode != CSServiceCode_Request_Suc) {
+//            [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+//        } else {
+//
+//        }
+//    }];
     return nil;
 }
 - (id)driver_live800ol:(BridgeModel *)bridgeModel {
@@ -217,13 +218,14 @@
         [self.controller.navigationController pushViewController:xima animated:YES];
     }
     else if ([url containsString:@"common/kefu.htm"]) {//客服
-        [CSVisitChatmanager startWithSuperVC:self.controller finish:^(CSServiceCode errCode) {
-            if (errCode != CSServiceCode_Request_Suc) {
-                [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
-            } else {
-
-            }
-        }];
+        [LiveChat startKeFu:self.controller];
+//        [CSVisitChatmanager startWithSuperVC:self.controller finish:^(CSServiceCode errCode) {
+//            if (errCode != CSServiceCode_Request_Suc) {
+//                [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+//            } else {
+//
+//            }
+//        }];
     }
     else if ([url containsString:@"common/agqj.htm"]) {
         if ([IVNetwork savedUserInfo]) {

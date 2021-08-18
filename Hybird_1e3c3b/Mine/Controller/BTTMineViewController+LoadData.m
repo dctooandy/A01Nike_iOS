@@ -740,13 +740,14 @@
                 customView.btnBlock = ^(UIButton * _Nullable btn) {
                     //kefu
                     [popView dismiss];
-                    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
-                        if (errCode != CSServiceCode_Request_Suc) {
-                            [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
-                        } else {
-
-                        }
-                    }];
+                    [LiveChat startKeFu:self];
+//                    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//                        if (errCode != CSServiceCode_Request_Suc) {
+//                            [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+//                        } else {
+//
+//                        }
+//                    }];
                     
                 };
             }

@@ -80,7 +80,7 @@
     [CNTimeLog configProduct:[HAInitConfig product3SId]];
     
     [self setupRedDot];
-    [LiveChat initOcssSDKNetWork];
+//    [LiveChat initOcssSDKNetWork];
     [IVCheckNetworkWrapper initSDK];
 //    //获取最优的网关
 //    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways

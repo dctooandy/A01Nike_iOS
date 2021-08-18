@@ -100,13 +100,14 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 - (void)registerSuccessGotoHomePageNotification:(NSNotification *)notif {
     if ([notif.object isEqualToString:@"gotoOnlineChat"]) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
-                if (errCode != CSServiceCode_Request_Suc) {
-                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
-                } else {
-
-                }
-            }];
+            [LiveChat startKeFu:self];
+//            [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//                if (errCode != CSServiceCode_Request_Suc) {
+//                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+//                } else {
+//
+//                }
+//            }];
         });
     }
 }
@@ -259,13 +260,14 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 - (void)rightClick:(UIButton *)btn {
     
     BTTPopoverAction *action1 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineService") title:@"在线客服      " handler:^(BTTPopoverAction *action) {
-        [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
-            if (errCode != CSServiceCode_Request_Suc) {
-                [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
-            } else {
-
-            }
-        }];
+        [LiveChat startKeFu:self];
+//        [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//            if (errCode != CSServiceCode_Request_Suc) {
+//                [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+//            } else {
+//
+//            }
+//        }];
     }];
     
 //    BTTPopoverAction *action2 = [BTTPopoverAction actionWithImage:ImageNamed(@"voiceCall") title:@"APP语音通信" handler:^(BTTPopoverAction *action) {
@@ -370,13 +372,14 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         if (btn.tag == 50011) {
             [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
         } else if (btn.tag == 50012) {
-            [CSVisitChatmanager startWithSuperVC:strongSelf finish:^(CSServiceCode errCode) {
-                if (errCode != CSServiceCode_Request_Suc) {
-                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
-                } else {
-
-                }
-            }];
+            [LiveChat startKeFu:strongSelf];
+//            [CSVisitChatmanager startWithSuperVC:strongSelf finish:^(CSServiceCode errCode) {
+//                if (errCode != CSServiceCode_Request_Suc) {
+//                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+//                } else {
+//
+//                }
+//            }];
         }
     };
 }
