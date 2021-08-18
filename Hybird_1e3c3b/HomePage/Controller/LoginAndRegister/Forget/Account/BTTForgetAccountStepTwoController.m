@@ -8,9 +8,10 @@
 
 #import "BTTForgetAccountStepTwoController.h"
 #import "BTTBindingMobileBtnCell.h"
+#import "BTTForgetAccountChooseCell.h"
 
 @interface BTTForgetAccountStepTwoController ()<BTTElementsFlowLayoutDelegate>
-
+@property (nonatomic, copy) NSString *chooseNameStr;
 @end
 
 @implementation BTTForgetAccountStepTwoController
@@ -27,7 +28,7 @@
     [super setupCollectionView];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     
-    NSString * titleStr = @"  恭喜您找回帐号,请选择一个账号登入游戏，选择后其他账号会被禁用";
+    NSString * titleStr = @"  恭喜您找回帐号，请选择一个账号登入游戏，选择后其他账号会被禁用";
     UILabel * lab = [[UILabel alloc] init];
     lab.numberOfLines = 0;
     lab.font = [UIFont systemFontOfSize:14];
@@ -59,6 +60,7 @@
     }];
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTForgetAccountChooseCell" bundle:nil] forCellWithReuseIdentifier:@"BTTForgetAccountChooseCell"];
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lab.mas_bottom);
         make.left.bottom.right.equalTo(self.view);
@@ -70,13 +72,43 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
-    cell.buttonType = BTTButtonTypeConfirm;
-    
-    cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-        
-    };
+    if (indexPath.row == self.elementsHight.count - 1) {
+        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+        cell.buttonType = BTTButtonTypeConfirm;
+        [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeEnableNotification object:@"verifycode"];
+        weakSelf(weakSelf);
+        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+            [weakSelf goToNextPage];
+        };
+        return cell;
+    } else {
+        __weak BTTForgetAccountChooseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTForgetAccountChooseCell" forIndexPath:indexPath];
+        BTTCheckCustomerItemModel * model  = self.itemArr[indexPath.row];
+        cell.accountNameStr = model.loginName;
+        cell.chooseBtn.tag = indexPath.row;
+        weakSelf(weakSelf);
+        cell.chooseBtnClickBlock = ^(UIButton * _Nonnull button, NSString * _Nonnull str) {
+            for (int i = 0; i < self.itemArr.count; i++) {
+                [weakSelf getCorrectBtn:i].isSelect = cell.chooseBtn.tag == i && cell.correct_s.hidden;
+            }
+            weakSelf.chooseNameStr = str;
+        };
+        return cell;
+    }
+}
+
+-(BTTForgetAccountChooseCell *)getCorrectBtn:(NSInteger)index {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+    BTTForgetAccountChooseCell *cell = (BTTForgetAccountChooseCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     return cell;
+}
+
+-(void)goToNextPage {
+    if (self.chooseNameStr.length) {
+        NSLog(@"3333");
+    } else {
+        [MBProgressHUD showError:@"请选择一个账号登入游戏" toView:nil];
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

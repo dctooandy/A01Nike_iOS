@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="BTTForgetAccountChooseCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r0O-IW-rgo">
+                        <rect key="frame" x="20" y="10" width="30" height="30"/>
+                        <subviews>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_forget_correct" translatesAutoresizingMaskIntoConstraints="NO" id="xJp-Or-Ohg">
+                                <rect key="frame" x="2" y="2" width="26" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="Rip-R3-8Ch"/>
+                                    <constraint firstAttribute="width" constant="26" id="crc-fC-s0G"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="xJp-Or-Ohg" firstAttribute="centerY" secondItem="r0O-IW-rgo" secondAttribute="centerY" id="GXA-lG-odF"/>
+                            <constraint firstItem="xJp-Or-Ohg" firstAttribute="centerX" secondItem="r0O-IW-rgo" secondAttribute="centerX" id="IVk-8u-alc"/>
+                            <constraint firstAttribute="width" constant="30" id="kst-sa-Iex"/>
+                            <constraint firstAttribute="height" constant="30" id="qr7-Qu-hhx"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="gtj485960" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sUT-gD-bgK">
+                        <rect key="frame" x="70" y="14.5" width="285" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rb7-sV-hMt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                        <connections>
+                            <action selector="btnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="J10-u8-LsQ"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <constraints>
+                <constraint firstItem="r0O-IW-rgo" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="2nL-Mh-3MA"/>
+                <constraint firstAttribute="trailing" secondItem="Rb7-sV-hMt" secondAttribute="trailing" id="92Q-32-sTA"/>
+                <constraint firstItem="Rb7-sV-hMt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="BZG-nc-sSs"/>
+                <constraint firstAttribute="trailing" secondItem="sUT-gD-bgK" secondAttribute="trailing" constant="20" id="T76-VO-K5F"/>
+                <constraint firstItem="r0O-IW-rgo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="WxM-od-OCa"/>
+                <constraint firstItem="Rb7-sV-hMt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="g3C-EJ-xd9"/>
+                <constraint firstItem="sUT-gD-bgK" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="iY8-BM-kj6"/>
+                <constraint firstItem="sUT-gD-bgK" firstAttribute="leading" secondItem="r0O-IW-rgo" secondAttribute="trailing" constant="20" id="mnP-PJ-mxf"/>
+                <constraint firstAttribute="bottom" secondItem="Rb7-sV-hMt" secondAttribute="bottom" id="pje-MZ-ZWC"/>
+            </constraints>
+            <connections>
+                <outlet property="accountNameLab" destination="sUT-gD-bgK" id="YRC-Rd-GKy"/>
+                <outlet property="chooseBtn" destination="Rb7-sV-hMt" id="Zg4-pV-P70"/>
+                <outlet property="correct_d" destination="r0O-IW-rgo" id="Cun-pu-vwA"/>
+                <outlet property="correct_s" destination="xJp-Or-Ohg" id="6Ve-bM-Yrj"/>
+            </connections>
+            <point key="canvasLocation" x="136.95652173913044" y="129.91071428571428"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="ic_forget_correct" width="14" height="14"/>
+    </resources>
+</document>

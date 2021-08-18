@@ -27,12 +27,6 @@
             BTTForgetAccountStepTwoController * vc = [[BTTForgetAccountStepTwoController alloc] init];
             vc.itemArr = model.loginNames;
             vc.findType = self.findType;
-//            BTTCheckCustomerItemModel * item = [[BTTCheckCustomerItemModel alloc] init];
-//            item.flag = @"1";
-//            item.customerLevel = @"6";
-//            item.lastLoginDate = @"2021-08-16 13:55:39";
-//            item.loginName = @"gtj485960";
-//            vc.itemArr = @[item];
             [self.navigationController pushViewController:vc animated:true];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];

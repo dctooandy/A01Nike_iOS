@@ -7,7 +7,7 @@
 //
 
 #import "BTTCollectionViewController.h"
-@class BTTCheckCustomerItemModel;
+#import "BTTCheckCustomerModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
