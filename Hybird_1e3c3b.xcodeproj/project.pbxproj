@@ -437,7 +437,6 @@
 		411DE809261AFC270076BCE2 /* BTTPasswordChangeBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 411DE808261AFC260076BCE2 /* BTTPasswordChangeBtnsCell.xib */; };
 		412078AA26268FB000595F8C /* TXScrollLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 412078A626268FB000595F8C /* TXScrollLabelView.m */; };
 		412078AB26268FB000595F8C /* UIView+TXFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 412078A726268FB000595F8C /* UIView+TXFrame.m */; };
-		41282B3A26CCA44A008FF5DF /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		4135A6D7263941AA00D3BF17 /* BTTLiCaiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6D3263941AA00D3BF17 /* BTTLiCaiViewController.m */; };
 		4135A6D8263941AA00D3BF17 /* BTTLiCaiTransRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6D5263941AA00D3BF17 /* BTTLiCaiTransRecordController.m */; };
 		4135A6F7263941D000D3BF17 /* BTTLiCaiTransRecordTopBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4135A6DC263941CD00D3BF17 /* BTTLiCaiTransRecordTopBtnView.m */; };
@@ -2083,7 +2082,6 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
-				41282B3A26CCA44A008FF5DF /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -5753,7 +5751,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.313;
+				MARKETING_VERSION = 3.1.61;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5794,7 +5792,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.313;
+				MARKETING_VERSION = 3.1.61;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
