@@ -99,6 +99,7 @@
 - (void)registerNotification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUIItems:) name:@"BTTUpdateSaveMoneyUINotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoKefu) name:@"gotoKefu" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gotoVIPKefu) name:@"gotoVIPKefu" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToBack) name:@"gotoBack" object:nil];
 }
 
@@ -111,6 +112,16 @@
 
 -(void)gotoKefu {
     [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+        if (errCode != CSServiceCode_Request_Suc) {
+            [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+        } else {
+
+        }
+    }];
+}
+
+-(void)gotoVIPKefu {
+    [CSVisitChatmanager startWithSuperVC:self extraParam:@{@"userTextTag":@"[贵宾存款] 你好，麻烦给我一个专属存款账号"} finish:^(CSServiceCode errCode) {
         if (errCode != CSServiceCode_Request_Suc) {
             [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
         } else {

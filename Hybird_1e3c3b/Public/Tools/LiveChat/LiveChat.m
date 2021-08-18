@@ -92,7 +92,9 @@
     info.backColor = [UIColor whiteColor];
     info.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
     info.barTintColor = [UIColor colorWithRed: 0.13 green: 0.37 blue: 0.76 alpha: 1.00];
-
+    
+    [CSVisitChatmanager cleanSDK];
+    
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     params[@"productId"] = [HAInitConfig productId];

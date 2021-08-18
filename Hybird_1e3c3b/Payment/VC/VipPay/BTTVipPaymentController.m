@@ -79,7 +79,7 @@
 }
 
 -(void)kefu {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoKefu" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoVIPKefu" object:nil];
 }
 
 @end
