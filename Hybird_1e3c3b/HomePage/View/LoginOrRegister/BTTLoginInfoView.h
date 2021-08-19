@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTLoginInfoView : UIView
 @property (nonatomic, strong) UITextField *pwdTextField;
-
+@property (nonatomic, strong) UITextField *accountTextField;
 @property (nonatomic, copy) void (^sendSmdCode)(NSString *phone);
 @property (nonatomic, copy) void (^tapLogin)(NSString *account,NSString *password,BOOL isSmsCode,NSString *codeStr);
 @property (nonatomic, copy) void (^tapRegister)(void);

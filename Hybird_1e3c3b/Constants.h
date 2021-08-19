@@ -45,6 +45,12 @@ typedef enum {
 }BTTChooseFindWay;
 
 typedef enum {
+    BTTForgetAccount = 0,
+    BTTForgetPassword = 1,
+    BTTForgetBoth = 2,
+}BTTChooseForgetType;
+
+typedef enum {
     BTTCanAddCardTypeNone,          // 不能添加任何卡
     BTTCanAddCardTypeAll,           // 银行卡和比特币钱包
     BTTCanAddCardTypeBank,          // 只能添加银行卡

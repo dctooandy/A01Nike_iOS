@@ -13,7 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTForgetBothController : BTTCollectionViewController
 @property (nonatomic, assign) BTTChooseFindWay findType;
+@property (nonatomic, assign) BTTChooseForgetType forgetType;
 @property (nonatomic, copy) NSString *messageId;
+@property (nonatomic, copy) NSString *validateId;
+
 -(BTTForgetPwdPhoneCell *)getForgetPhoneCell;
 @end
 

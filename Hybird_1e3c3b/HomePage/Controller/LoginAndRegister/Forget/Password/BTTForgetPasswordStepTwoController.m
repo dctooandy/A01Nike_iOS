@@ -66,7 +66,9 @@
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
+            [strongSelf showLoading];
             [strongSelf verifyCode:strongSelf.code account:strongSelf.account completeBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                [strongSelf hideLoading];
                 IVJResponseObject *result = response;
                 if ([result.head.errCode isEqualToString:@"0000"]) {
                     BTTForgetPasswordStepThreeController *vc = [[BTTForgetPasswordStepThreeController alloc] init];

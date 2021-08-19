@@ -216,6 +216,7 @@
     
     weakSelf(weakSelf);
     BTTLoginInfoView *loginInfoView = [[BTTLoginInfoView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 345)];
+    loginInfoView.accountTextField.text = self.accountStr;
     __weak typeof(loginInfoView) weaklginView = loginInfoView;
     loginInfoView.hidden = YES;
     loginInfoView.sendSmdCode = ^(NSString * _Nonnull phone) {

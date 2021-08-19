@@ -11,12 +11,6 @@
 #import "BTTForgetPasswordController.h"
 #import "BTTForgetBothController.h"
 
-typedef enum {
-    BTTForgetAccount = 0,
-    BTTForgetPassword = 1,
-    BTTForgetBoth = 2,
-}BTTChooseForgetType;
-
 @interface BTTForgetController ()
 @property (nonatomic, assign)NSInteger chooseType;
 @end
@@ -93,7 +87,7 @@ typedef enum {
 //                [arr addObject:@"使用绑定手机找回账号"];
 //                [arr addObject:@"使用绑定邮箱找回账号"];
 //                self.title = @"选择找回账号方式";
-                [self findAccount:(NSInteger)BTTFindWithPhone];
+                [self findAccount:(NSInteger)BTTFindWithPhone forgetType:BTTForgetAccount];
             }
                 break;
             case BTTForgetPassword:
@@ -109,7 +103,7 @@ typedef enum {
 //                [arr addObject:@"使用绑定手机找回账号, 密码"];
 //                [arr addObject:@"使用绑定邮箱找回账号, 密码"];
 //                self.title = @"选择找回账号, 密码方式";
-                [self findBoth:(NSInteger)BTTFindWithPhone];
+                [self findBoth:(NSInteger)BTTFindWithPhone forgetType:BTTForgetBoth];
             }
                 break;
                 
@@ -120,22 +114,23 @@ typedef enum {
     } else {
         switch (self.chooseType) {
             case BTTForgetAccount:
-                [self findAccount:btn.tag];
+                [self findAccount:btn.tag forgetType:BTTForgetAccount];
                 break;
                 
             case BTTForgetPassword:
                 [self findPassword:btn.tag];
                 break;
             case BTTForgetBoth:
-                [self findBoth:btn.tag];
+                [self findBoth:btn.tag forgetType:BTTForgetBoth];
                 break;
         }
     }
 }
 
--(void)findAccount:(NSInteger)type {
+-(void)findAccount:(NSInteger)type forgetType:(NSInteger)forgetType {
     BTTForgetAccountController * vc = [[BTTForgetAccountController alloc] init];
     vc.findType = (BTTChooseFindWay)type;
+    vc.forgetType = (BTTChooseForgetType)forgetType;
     [self.navigationController pushViewController:vc animated:true];
 }
 
@@ -145,9 +140,10 @@ typedef enum {
     [self.navigationController pushViewController:vc animated:true];
 }
 
--(void)findBoth:(NSInteger)type {
+-(void)findBoth:(NSInteger)type forgetType:(NSInteger)forgetType {
     BTTForgetBothController * vc = [[BTTForgetBothController alloc] init];
     vc.findType = (BTTChooseFindWay)type;
+    vc.forgetType = (BTTChooseForgetType)forgetType;
     [self.navigationController pushViewController:vc animated:true];
 }
 

@@ -576,6 +576,7 @@
 		41BC7100252D6509003944ED /* BTTBiBiCunPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41BC70FD252D6509003944ED /* BTTBiBiCunPopView.m */; };
 		41BC7101252D6509003944ED /* BTTBiBiCunPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BC70FE252D6509003944ED /* BTTBiBiCunPopView.xib */; };
 		41C53A9C25A851B500CFA3A1 /* BTTYenFenHongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C53A9A25A851B400CFA3A1 /* BTTYenFenHongModel.m */; };
+		41C8D05426CE023900076A19 /* BTTForgetFinalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C8D05226CE023900076A19 /* BTTForgetFinalController.m */; };
 		41CA82CB26412D1800A550EE /* BTTInterestRecordsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CA82C926412D1800A550EE /* BTTInterestRecordsModel.m */; };
 		41D0DC7A26C37D99003E55E1 /* BTTAddBTCController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D0DC7926C37D99003E55E1 /* BTTAddBTCController+Nav.m */; };
 		41D0DC7D26C37EC1003E55E1 /* BTTAddCardController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D0DC7C26C37EC1003E55E1 /* BTTAddCardController+Nav.m */; };
@@ -1766,6 +1767,8 @@
 		41BC70FF252D6509003944ED /* BTTBiBiCunPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTBiBiCunPopView.h; sourceTree = "<group>"; };
 		41C53A9A25A851B400CFA3A1 /* BTTYenFenHongModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTYenFenHongModel.m; sourceTree = "<group>"; };
 		41C53A9B25A851B400CFA3A1 /* BTTYenFenHongModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTYenFenHongModel.h; sourceTree = "<group>"; };
+		41C8D05226CE023900076A19 /* BTTForgetFinalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTForgetFinalController.m; sourceTree = "<group>"; };
+		41C8D05326CE023900076A19 /* BTTForgetFinalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTForgetFinalController.h; sourceTree = "<group>"; };
 		41CA82C926412D1800A550EE /* BTTInterestRecordsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTInterestRecordsModel.m; sourceTree = "<group>"; };
 		41CA82CA26412D1800A550EE /* BTTInterestRecordsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTInterestRecordsModel.h; sourceTree = "<group>"; };
 		41D0DC7826C37D99003E55E1 /* BTTAddBTCController+Nav.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTTAddBTCController+Nav.h"; sourceTree = "<group>"; };
@@ -2986,6 +2989,8 @@
 			children = (
 				41909A2026C4FCD500E389FC /* BTTForgetController.h */,
 				41909A2126C4FCD500E389FC /* BTTForgetController.m */,
+				41C8D05326CE023900076A19 /* BTTForgetFinalController.h */,
+				41C8D05226CE023900076A19 /* BTTForgetFinalController.m */,
 				41909A2326C5177500E389FC /* Account */,
 				41909A2426C517A900E389FC /* Password */,
 				41909A2526C517E300E389FC /* Both */,
@@ -5129,6 +5134,7 @@
 				D5C501D521B7CEDC00C6DA02 /* BRAddressPickerView.m in Sources */,
 				D5DBEB0C21ABB774008AF629 /* CNPayBQStep1VC.m in Sources */,
 				4184DE18251B331500D433D4 /* BTTModifyBankRecordCell.m in Sources */,
+				41C8D05426CE023900076A19 /* BTTForgetFinalController.m in Sources */,
 				D5DBEB3F21AC1355008AF629 /* CNPayQRCell.m in Sources */,
 				D345F2AB23D0091600E658A6 /* BTTCustomerBalanceModel.m in Sources */,
 				7629D73B2668CE7300CF758C /* BTTDragonBoatMenualPopView.m in Sources */,
@@ -5837,7 +5843,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.308;
+				MARKETING_VERSION = 3.2.314;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5878,7 +5884,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.308;
+				MARKETING_VERSION = 3.2.314;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

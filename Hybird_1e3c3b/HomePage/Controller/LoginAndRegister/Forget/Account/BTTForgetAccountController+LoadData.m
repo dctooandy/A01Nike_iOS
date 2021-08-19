@@ -26,7 +26,7 @@
             BTTCheckCustomerModel * model = [BTTCheckCustomerModel yy_modelWithJSON:result.body];
             BTTForgetAccountStepTwoController * vc = [[BTTForgetAccountStepTwoController alloc] init];
             vc.itemArr = model.loginNames;
-            vc.findType = self.findType;
+            vc.forgetType = self.forgetType;
             [self.navigationController pushViewController:vc animated:true];
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];

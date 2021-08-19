@@ -9,7 +9,7 @@
 #import "BTTForgetPasswordStepThreeController+LoadData.h"
 #import "BTTMeMainModel.h"
 #import "IVRsaEncryptWrapper.h"
-#import "BTTLoginOrRegisterViewController.h"
+#import "BTTForgetFinalController.h"
 
 @implementation BTTForgetPasswordStepThreeController (LoadData)
 
@@ -20,13 +20,22 @@
     [params setValue:messageId forKey:@"messageId"];
     [params setValue:validateId forKey:@"validateId"];
     [params setValue:@2 forKey:@"type"];
+    [self showLoading];
     [IVNetwork requestPostWithUrl:BTTStepThreeUpdatePassword paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            BTTLoginOrRegisterViewController * vc = [[BTTLoginOrRegisterViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
+            [MBProgressHUD showSuccess:@"修改密码成功" toView:nil];
+            BTTForgetFinalController * vc = [[BTTForgetFinalController alloc] init];
+            vc.title = @"完成重置密码";
+            vc.btnTitleArr = @[@"立即登录"];
+            if (self.forgetType == BTTForgetBoth) {
+                vc.accountStr = account;
+                vc.isBothLastStep = true;
+            }
+            [self.navigationController pushViewController:vc animated:true];
         }else{
-            [MBProgressHUD showSuccess:result.head.errMsg toView:nil];
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
         }
     }];
 }

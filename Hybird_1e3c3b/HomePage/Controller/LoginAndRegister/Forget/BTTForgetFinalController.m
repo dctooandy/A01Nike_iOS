@@ -1,25 +1,25 @@
 //
-//  BTTForgetAccountStepTwoController.m
+//  BTTForgetFinalController.m
 //  Hybird_1e3c3b
 //
-//  Created by Jairo on 8/16/21.
+//  Created by Jairo on 8/18/21.
 //  Copyright © 2021 BTT. All rights reserved.
 //
 
-#import "BTTForgetAccountStepTwoController.h"
-#import "BTTBindingMobileBtnCell.h"
-#import "BTTForgetAccountChooseCell.h"
 #import "BTTForgetFinalController.h"
+#import "BTTBindingMobileBtnCell.h"
+#import "BTTLoginOrRegisterViewController.h"
+#import "BTTForgetPasswordStepThreeController.h"
 
-@interface BTTForgetAccountStepTwoController ()<BTTElementsFlowLayoutDelegate>
-@property (nonatomic, copy) NSString *chooseNameStr;
+@interface BTTForgetFinalController ()<BTTElementsFlowLayoutDelegate>
+
 @end
 
-@implementation BTTForgetAccountStepTwoController
+@implementation BTTForgetFinalController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title =  @"完成找回账号";
+//    self.title = @"完成找回帐号，密码";
     self.view.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self setupCollectionView];
     [self setupElements];
@@ -28,8 +28,17 @@
 -(void)setupCollectionView {
     [super setupCollectionView];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
+    NSString * titleStr = @"";
+    if (self.accountStr) {
+        if (self.isBothLastStep) {
+            titleStr = [NSString stringWithFormat:@"  恭喜玩家 %@ 完成找回账号并重置密码，请点击立即登录开始游戏", self.accountStr];
+        } else {
+            titleStr = [NSString stringWithFormat:@"  再次确认是否使用 %@ 登录游戏，其他未使用的账号将被禁用", self.accountStr];
+        }
+    } else {
+        titleStr = @"  恭喜您完成密码重置，请点击立即登录开始游戏";
+    }
     
-    NSString * titleStr = @"  恭喜您找回帐号，请选择一个账号登入游戏，选择后其他账号会被禁用";
     UILabel * lab = [[UILabel alloc] init];
     lab.numberOfLines = 0;
     lab.font = [UIFont systemFontOfSize:14];
@@ -61,7 +70,6 @@
     }];
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTForgetAccountChooseCell" bundle:nil] forCellWithReuseIdentifier:@"BTTForgetAccountChooseCell"];
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lab.mas_bottom);
         make.left.bottom.right.equalTo(self.view);
@@ -73,59 +81,36 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == self.elementsHight.count - 1) {
-        BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
-        cell.buttonType = BTTButtonTypeConfirm;
-        [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeEnableNotification object:@"verifycode"];
-        weakSelf(weakSelf);
-        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-            [weakSelf goToNextPage];
-        };
-        return cell;
-    } else {
-        __weak BTTForgetAccountChooseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTForgetAccountChooseCell" forIndexPath:indexPath];
-        BTTCheckCustomerItemModel * model  = self.itemArr[indexPath.row];
-        cell.accountNameStr = model.loginName;
-        cell.chooseBtn.tag = indexPath.row;
-        weakSelf(weakSelf);
-        cell.chooseBtnClickBlock = ^(UIButton * _Nonnull button, NSString * _Nonnull str) {
-            for (int i = 0; i < self.itemArr.count; i++) {
-                [weakSelf getCorrectBtn:i].isSelect = cell.chooseBtn.tag == i && cell.correct_s.hidden;
-            }
-            weakSelf.chooseNameStr = str;
-        };
-        return cell;
-    }
-}
-
--(BTTForgetAccountChooseCell *)getCorrectBtn:(NSInteger)index {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-    BTTForgetAccountChooseCell *cell = (BTTForgetAccountChooseCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    
+    BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
+    [cell.btn setTitle:self.btnTitleArr[indexPath.row] forState:UIControlStateNormal];
+    cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+        [self btnAction:button.currentTitle];
+    };
+    [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeEnableNotification object:@"verifycode"];
     return cell;
-}
-
--(void)goToNextPage {
-    if (self.chooseNameStr.length) {
-        BTTForgetFinalController * vc = [[BTTForgetFinalController alloc] init];
-        vc.title = @"再次确认";
-        vc.accountStr = self.chooseNameStr;
-        NSArray * arr = self.forgetType == BTTForgetBoth ? @[@"返回重新选择", @"重置密码"]:@[@"返回重新选择", @"立即登录"];
-        vc.btnTitleArr = arr;
-        if (self.forgetType == BTTForgetBoth) {
-            vc.messageId = self.messageId;
-            vc.validateId = self.validateId;
-            vc.forgetType = self.forgetType;
-            vc.isBothLastStep = false;
-        }
-        [self.navigationController pushViewController:vc animated:true];
-    } else {
-        [MBProgressHUD showError:@"请选择一个账号登入游戏" toView:nil];
-    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     NSLog(@"%zd", indexPath.item);
+}
+
+-(void)btnAction:(NSString *)title {
+    if ([title isEqualToString:@"返回重新选择"]) {
+        [self.navigationController popViewControllerAnimated:true];
+    } else if ([title isEqualToString:@"立即登录"]) {
+        BTTLoginOrRegisterViewController * vc = [[BTTLoginOrRegisterViewController alloc] init];
+        vc.accountStr = self.accountStr;
+        [self.navigationController pushViewController:vc animated:true];
+    } else if ([title isEqualToString:@"重置密码"]) {
+        BTTForgetPasswordStepThreeController * vc = [[BTTForgetPasswordStepThreeController alloc] init];
+        vc.messageId = self.messageId;
+        vc.validateId = self.validateId;
+        vc.account = self.accountStr;
+        vc.forgetType = self.forgetType;
+        [self.navigationController pushViewController:vc animated:true];
+    }
 }
 
 #pragma mark - LMJCollectionViewControllerDataSource
@@ -165,13 +150,8 @@
         [self.elementsHight removeAllObjects];
     }
     NSMutableArray *elementsHight = [NSMutableArray array];
-    NSInteger count = self.itemArr.count + 1;
-    for (int i = 0; i < count; i++) {
-        if (i == count - 1) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 40, 100)]];
-        } else {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 40, 40)]];
-        }
+    for (int i = 0; i < self.btnTitleArr.count; i++) {
+        [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 40, 50)]];
     }
     self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{

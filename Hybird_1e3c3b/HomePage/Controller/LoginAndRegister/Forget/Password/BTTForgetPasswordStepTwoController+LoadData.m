@@ -29,7 +29,7 @@
             [[self getForgetPhoneCell] countDown:60];
             self.messageId = result.body[@"messageId"];
         }else{
-            [MBProgressHUD showSuccess:result.head.errMsg toView:self.view];
+            [MBProgressHUD showError:result.head.errMsg toView:self.view];
         }
     }];
 }
