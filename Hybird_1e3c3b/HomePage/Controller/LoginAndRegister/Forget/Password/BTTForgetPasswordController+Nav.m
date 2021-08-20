@@ -29,6 +29,13 @@
     
     BTTPopoverAction *action1 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineService") title:@"在线客服      " handler:^(BTTPopoverAction *action) {
         [LiveChat startKeFu:self];
+//        [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+//            if (errCode != CSServiceCode_Request_Suc) {
+//                [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+//            } else {
+//
+//            }
+//        }];
     }];
     
     int currentHour = [PublicMethod hour:[NSDate date]];
@@ -89,8 +96,20 @@
         [strongSelf makeCallWithPhoneNum:[IVNetwork savedUserInfo].mobileNo captcha:captcha captchaId:captchaId];
     };
     customView.btnBlock = ^(UIButton *btn) {
+        strongSelf(strongSelf);
         [popView dismiss];
-        [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
+        if (btn.tag == 50011) {
+            [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
+        } else if (btn.tag == 50012) {
+            [LiveChat startKeFu:strongSelf];
+//            [CSVisitChatmanager startWithSuperVC:strongSelf finish:^(CSServiceCode errCode) {
+//                if (errCode != CSServiceCode_Request_Suc) {
+//                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+//                } else {
+//
+//                }
+//            }];
+        }
     };
 }
 

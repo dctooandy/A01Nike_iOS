@@ -438,7 +438,6 @@
 		4118D45726CB636800688780 /* BTTForgetPasswordController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 4118D45626CB636800688780 /* BTTForgetPasswordController+Nav.m */; };
 		4118D45A26CB64A200688780 /* BTTForgetAccountController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 4118D45926CB64A200688780 /* BTTForgetAccountController+Nav.m */; };
 		4118D45D26CB661600688780 /* BTTForgetBothController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 4118D45C26CB661600688780 /* BTTForgetBothController+Nav.m */; };
-		4118D45E26CB8C3600688780 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		411B89E026980E9800F45A22 /* BTTCompleteNamePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 411B89DF26980E9800F45A22 /* BTTCompleteNamePopView.m */; };
 		411B89E226980EA700F45A22 /* BTTCompleteNamePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 411B89E126980EA700F45A22 /* BTTCompleteNamePopView.xib */; };
 		411B89E52698533300F45A22 /* BTTDontUseRegularPhonePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 411B89E42698533300F45A22 /* BTTDontUseRegularPhonePopView.m */; };
@@ -511,6 +510,7 @@
 		416D787926C3D3B400CB9E6D /* BTTCantBindCardPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 416D787626C3D3B400CB9E6D /* BTTCantBindCardPopView.m */; };
 		416D787A26C3D3B400CB9E6D /* BTTCantBindCardPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 416D787726C3D3B400CB9E6D /* BTTCantBindCardPopView.xib */; };
 		41755C52262E74D600B6884D /* LiveChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 41755C50262E74D600B6884D /* LiveChat.m */; };
+		417E32D526CBD3ED005C1AB3 /* BTTVipPaymentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 417E32D426CBD3ED005C1AB3 /* BTTVipPaymentController.m */; };
 		41800D5A2623E95900FAC27B /* BTTAddBitollCardController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41800D592623E95900FAC27B /* BTTAddBitollCardController.xib */; };
 		4180B03925D36EBB00139E88 /* BTTOtherGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4180B03725D36EBB00139E88 /* BTTOtherGameCell.m */; };
 		4180B03A25D36EBB00139E88 /* BTTOtherGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4180B03825D36EBB00139E88 /* BTTOtherGameCell.xib */; };
@@ -568,6 +568,7 @@
 		419AEC5B250F64F100D089DD /* BTTBJLPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419AEC59250F64F100D089DD /* BTTBJLPopView.xib */; };
 		41A09D3825E4F4BD00255681 /* BTTDifferentLocPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A09D3525E4F4BD00255681 /* BTTDifferentLocPopView.xib */; };
 		41A09D3925E4F4BD00255681 /* BTTDifferentLocPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41A09D3725E4F4BD00255681 /* BTTDifferentLocPopView.m */; };
+		41A433A226CFAFF700384246 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		41AB7FE526CA4A450086AF9B /* BTTCheckCustomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AB7FE426CA4A450086AF9B /* BTTCheckCustomerModel.m */; };
 		41AB7FE826CA50950086AF9B /* BTTForgetAccountStepTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41AB7FE726CA50950086AF9B /* BTTForgetAccountStepTwoController.m */; };
 		41B3127B269D1FB4002AF76D /* BTTPaymentWarningPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41B3127A269D1FB4002AF76D /* BTTPaymentWarningPopView.m */; };
@@ -1660,6 +1661,8 @@
 		416D787826C3D3B400CB9E6D /* BTTCantBindCardPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTCantBindCardPopView.h; sourceTree = "<group>"; };
 		41755C50262E74D600B6884D /* LiveChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveChat.m; sourceTree = "<group>"; };
 		41755C51262E74D600B6884D /* LiveChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveChat.h; sourceTree = "<group>"; };
+		417E32D326CBD3ED005C1AB3 /* BTTVipPaymentController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTVipPaymentController.h; sourceTree = "<group>"; };
+		417E32D426CBD3ED005C1AB3 /* BTTVipPaymentController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTVipPaymentController.m; sourceTree = "<group>"; };
 		41800D592623E95900FAC27B /* BTTAddBitollCardController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTAddBitollCardController.xib; sourceTree = "<group>"; };
 		4180B03725D36EBB00139E88 /* BTTOtherGameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTOtherGameCell.m; sourceTree = "<group>"; };
 		4180B03825D36EBB00139E88 /* BTTOtherGameCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTOtherGameCell.xib; sourceTree = "<group>"; };
@@ -2120,7 +2123,7 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
-				4118D45E26CB8C3600688780 /* libboringssl_simulator.a in Frameworks */,
+				41A433A226CFAFF700384246 /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -4055,6 +4058,15 @@
 			path = LiveChat;
 			sourceTree = "<group>";
 		};
+		417E32D226CBD3CB005C1AB3 /* VipPay */ = {
+			isa = PBXGroup;
+			children = (
+				417E32D326CBD3ED005C1AB3 /* BTTVipPaymentController.h */,
+				417E32D426CBD3ED005C1AB3 /* BTTVipPaymentController.m */,
+			);
+			path = VipPay;
+			sourceTree = "<group>";
+		};
 		4184DDCC251B321000D433D4 /* CustomerReport */ = {
 			isa = PBXGroup;
 			children = (
@@ -4490,6 +4502,7 @@
 				D5DBEAAF21ABB774008AF629 /* OnlinePay */,
 				D5DBEAC621ABB774008AF629 /* QRPay */,
 				D5DBEACD21ABB774008AF629 /* StepVC */,
+				417E32D226CBD3CB005C1AB3 /* VipPay */,
 				D5DBEAB621ABB774008AF629 /* WebVC */,
 			);
 			path = VC;
@@ -5445,6 +5458,7 @@
 				D5DBEB3221ABB774008AF629 /* CNPayAmountRecommendView.m in Sources */,
 				3A37E0FD2164691300FB13A1 /* AppDelegate+AD.m in Sources */,
 				3AA7893721FFF2580047A372 /* SDWebImageImageIOCoder.m in Sources */,
+				417E32D526CBD3ED005C1AB3 /* BTTVipPaymentController.m in Sources */,
 				D38A44AA246E97ED00BC8764 /* BTTBitollWithDrawCell.m in Sources */,
 				4135A71B2639440700D3BF17 /* BTTLiCaiTransRecordController+LoadData.m in Sources */,
 				3ADD23ED2179B97A00FA959A /* TAAnimatedDotView.m in Sources */,

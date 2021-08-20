@@ -171,6 +171,8 @@
 //    info.titleTextAttributes = @{NSForegroundColorAttributeName:[UIColor whiteColor],NSFontAttributeName:[UIFont boldSystemFontOfSize:17]};
 //    info.barTintColor = [UIColor colorWithRed: 0.13 green: 0.37 blue: 0.76 alpha: 1.00];
 //
+//    [CSVisitChatmanager cleanSDK];
+//
 //    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
 //    params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
 //    params[@"productId"] = [HAInitConfig productId];
@@ -178,9 +180,6 @@
 //    [IVNetwork requestPostWithUrl:@"liveChatAddressOCSS" paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
 //        IVJResponseObject *result = response;
 //        info.response = result.body;
-////        [CSVisitChatmanager reloadSDK:info finish:^(CSServiceCode errCode) {
-////            NSLog(@"222222");
-////        }];
 //        [weakSelf testSpeed:info.response chatInfo:info];
 //    }];
 //}
@@ -227,7 +226,6 @@
 //        } appearblock:nil disbock:nil];
 //    }];
 //}
-
 
 @end
 

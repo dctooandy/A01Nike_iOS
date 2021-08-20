@@ -138,8 +138,10 @@
         {
             [LiveChat startKeFu:gameController];
 //            [CSVisitChatmanager startWithSuperVC:gameController finish:^(CSServiceCode errCode) {
-//                if (errCode != CSServiceCode_Request_Suc) {//异常处理
-//                    [[CLive800Manager sharedInstance] startLive800Chat:gameController];
+//                if (errCode != CSServiceCode_Request_Suc) {
+//                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+//                } else {
+//
 //                }
 //            }];
         }
@@ -197,7 +199,9 @@
             [LiveChat startKeFu:(UIViewController *)webView.navigationDelegate];
 //            [CSVisitChatmanager startWithSuperVC:(UIViewController *)webView.navigationDelegate finish:^(CSServiceCode errCode) {
 //                if (errCode != CSServiceCode_Request_Suc) {
-//                    [[CLive800Manager sharedInstance] startLive800Chat:(UIViewController *)webView.navigationDelegate];
+//                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+//                } else {
+//
 //                }
 //            }];
         } else if ([[navigationAction.request.URL.absoluteString URLDecodedString] containsString:@"/deposit_xunjie.htm"]) {

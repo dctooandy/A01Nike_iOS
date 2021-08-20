@@ -103,15 +103,10 @@
     BTTPopoverAction *action1 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineService") title:@"在线客服      " handler:^(BTTPopoverAction *action) {
         [LiveChat startKeFu:self];
 //        [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
-//            if (errCode != CSServiceCode_Request_Suc) {//异常处理
-//                BTTActionSheet *actionSheet = [[BTTActionSheet alloc] initWithTitle:@"请选择问题类型" cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@[@"存款问题",@"其他问题"] actionSheetBlock:^(NSInteger buttonIndex) {
-//                    if (buttonIndex == 0) {
-//                        [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
-//                    }else if (buttonIndex == 1){
-//                        [[CLive800Manager sharedInstance] startLive800Chat:self];
-//                    }
-//                }];
-//                [actionSheet show];
+//            if (errCode != CSServiceCode_Request_Suc) {
+//                [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+//            } else {
+//
 //            }
 //        }];
     }];
@@ -216,6 +211,13 @@
         [popView dismiss];
         if (btn.tag == 50011) {
             [LiveChat startKeFu:strongSelf];
+//            [CSVisitChatmanager startWithSuperVC:strongSelf finish:^(CSServiceCode errCode) {
+//                if (errCode != CSServiceCode_Request_Suc) {
+//                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+//                } else {
+//
+//                }
+//            }];
         }
     };
 }

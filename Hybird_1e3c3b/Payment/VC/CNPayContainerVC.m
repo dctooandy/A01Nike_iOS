@@ -24,6 +24,7 @@
 #import "BTTBishangStep1VC.h"
 #import "BTTBiFuBaoController.h"
 #import "BTTDcboxPayController.h"
+#import "BTTVipPaymentController.h"
 
 @interface CNPayContainerVC ()
 
@@ -58,6 +59,11 @@
     if (_payments && _payments.count > 0) {
         /// 切换容器
         _segmentVC = [[AMSegmentViewController alloc] initWithItems:[self payItemsWithPaymentType:self.paymentType]];
+        _segmentVC.view.frame = self.view.bounds;
+        [self.view addSubview:_segmentVC.view];
+    } else if (self.paymentType == CNPaymentVip) {
+        BTTVipPaymentController * vc = [[BTTVipPaymentController alloc] init];
+        _segmentVC = [[AMSegmentViewController alloc] initWithItems:@[vc]];
         _segmentVC.view.frame = self.view.bounds;
         [self.view addSubview:_segmentVC.view];
     }

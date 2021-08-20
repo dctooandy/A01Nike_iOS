@@ -588,8 +588,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTSevenXiMyData                           @"_extra_/api/v1/activity/qixi/my-rank"
 //WMS弹窗查询(新)
 #define BTTCheckPopView                            @"_extra_/api/v1/activity/common-window/window-popup"
-//WMS弹窗查询(舊)
-//#define BTTCheckPopView                            @"_extra_/api/v1/activity/five-lottery/windows-popup"
+//vip30存款渠道
+#define BTTCreditVipChannel                        @"_extra_/api/vi/activity/creditVipChannel/popup"
 
 /********************************************常用宏*********************************************************/
 

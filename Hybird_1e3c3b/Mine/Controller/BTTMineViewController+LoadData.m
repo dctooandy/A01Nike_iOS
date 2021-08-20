@@ -37,6 +37,9 @@
     if (self.normalDataTwo.count) {
         [self.normalDataTwo removeAllObjects];
     }
+    if (self.vipBigDataSoure.count) {
+        [self.vipBigDataSoure removeAllObjects];
+    }
     [self setupElements];
 }
 
@@ -89,8 +92,36 @@
 
 - (void)loadPaymentData {
     if ([IVNetwork savedUserInfo]) {
-        [self loadPersonalPaymentData];
+        if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"]) {
+            [self loadCreditVipChannel];
+        } else {
+            if (self.vipBigDataSoure.count) {
+                [self.vipBigDataSoure removeAllObjects];
+            }
+            [self loadPersonalPaymentData];
+        }
     }
+}
+
+-(void)loadCreditVipChannel {
+    [IVNetwork requestPostWithUrl:BTTCreditVipChannel paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            isDisplayVip
+            if (self.vipBigDataSoure.count) {
+                [self.vipBigDataSoure removeAllObjects];
+            }
+            NSNumber * num = result.body[@"isDisplayVip"];
+            if ([num boolValue]) {
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"VIP专属存款";
+                mainModel.iconName = @"me_vip_exclusive";
+                mainModel.paymentType = CNPaymentVip;
+                [self.vipBigDataSoure insertObject:mainModel atIndex:0];
+            }
+            [self loadPersonalPaymentData];
+        }
+    }];
 }
 
 - (void)loadPersonalPaymentData {
@@ -337,6 +368,11 @@
                 if (haveBFB) {
                     //                    [self.bigDataSoure addObject:bfbModel];
                     [self.normalDataTwo addObject:bfbModel];
+                }
+                if (self.vipBigDataSoure.count) {
+                    for (BTTMeMainModel *model in self.vipBigDataSoure) {
+                        [self.bigDataSoure insertObject:model atIndex:0];
+                    }
                 }
                 
                 
@@ -706,8 +742,10 @@
                     [popView dismiss];
                     [LiveChat startKeFu:self];
 //                    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
-//                        if (errCode != CSServiceCode_Request_Suc) {//异常处理
-//                            [[CLive800Manager sharedInstance] startLive800ChatSaveMoney:self];
+//                        if (errCode != CSServiceCode_Request_Suc) {
+//                            [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+//                        } else {
+//
 //                        }
 //                    }];
                     
@@ -809,6 +847,18 @@
     objc_setAssociatedObject(self, @selector(bigDataSoure), bigDataSoure, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
+- (NSMutableArray *)vipBigDataSoure {
+    NSMutableArray *vipBigDataSoure = objc_getAssociatedObject(self, _cmd);
+    if (!vipBigDataSoure) {
+        vipBigDataSoure = [NSMutableArray array];
+        [self setVipBigDataSoure:vipBigDataSoure];
+    }
+    return vipBigDataSoure;
+}
+
+- (void)setVipBigDataSoure:(NSMutableArray *)vipBigDataSoure {
+    objc_setAssociatedObject(self, @selector(vipBigDataSoure), vipBigDataSoure, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
 
 - (NSMutableArray *)normalDataSoure {
     NSMutableArray *normalDataSoure = objc_getAssociatedObject(self, _cmd);

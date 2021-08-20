@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *bigDataSoure;
 
+@property (nonatomic, strong) NSMutableArray *vipBigDataSoure;
+
 @property (nonatomic, strong) NSMutableArray *normalDataSoure;
 
 @property (nonatomic, strong) NSMutableArray *normalDataTwo;
