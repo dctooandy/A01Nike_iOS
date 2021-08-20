@@ -19,10 +19,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title = @"完成找回帐号，密码";
     self.view.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self setupCollectionView];
     [self setupElements];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeEnableNotification object:@"verifycode"];
 }
 
 -(void)setupCollectionView {

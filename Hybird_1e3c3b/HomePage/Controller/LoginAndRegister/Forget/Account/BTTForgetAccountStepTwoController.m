@@ -29,7 +29,7 @@
     [super setupCollectionView];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
     
-    NSString * titleStr = @"  恭喜您找回帐号，请选择一个账号登入游戏，选择后其他账号会被禁用";
+    NSString * titleStr = @"  恭喜您找回账号，请选择一个账号登录游戏，选择后其他账号会被禁用";
     UILabel * lab = [[UILabel alloc] init];
     lab.numberOfLines = 0;
     lab.font = [UIFont systemFontOfSize:14];

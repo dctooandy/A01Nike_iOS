@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"重置密码";
+    self.view.backgroundColor = [UIColor colorWithHexString:@"212229"];
     [self setupCollectionView];
     [self loadMainData];
 }
@@ -30,6 +31,22 @@
 - (void)setupCollectionView {
     [super setupCollectionView];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
+    if (self.forgetType == BTTForgetBoth) {
+        NSString * titleStr = [NSString stringWithFormat:@"游戏账号：%@", self.account];
+        UILabel * lab = [[UILabel alloc] init];
+        lab.font = [UIFont systemFontOfSize:14];
+        lab.text = titleStr;
+        lab.textColor = [UIColor whiteColor];
+        [self.view addSubview:lab];
+        [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.equalTo(self.view).offset(20);
+            make.right.equalTo(self.view).offset(-20);
+        }];
+        [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(lab.mas_bottom);
+            make.left.bottom.right.equalTo(self.view);
+        }];
+    }
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTForgetPwdOneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTForgetPwdOneCell"];
 }
@@ -81,7 +98,7 @@
 }
 
 - (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
-    return UIEdgeInsetsMake(30, 20, 0, 0);
+    return UIEdgeInsetsMake(self.forgetType == BTTForgetBoth ? 20:30, 20, 0, 0);
 }
 
 /**
