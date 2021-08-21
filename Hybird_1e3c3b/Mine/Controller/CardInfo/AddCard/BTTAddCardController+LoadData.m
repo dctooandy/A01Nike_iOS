@@ -26,8 +26,8 @@
                     }
                 }
             }
-            [self.collectionView reloadData];
         }
+        [self.collectionView reloadData];
     }];
 }
 
