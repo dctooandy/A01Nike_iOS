@@ -12,6 +12,25 @@
 
 @implementation BTTAddCardController (LoadData)
 
+-(void)loadQueryBanks {
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTQueryBanks paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            for (NSDictionary * dict in result.body) {
+                if (dict[@"bankName"]) {
+                    NSString * nameStr = dict[@"bankName"];
+                    if (nameStr.length > 0) {
+                        [self.bankNamesArr addObject:nameStr];
+                    }
+                }
+            }
+            [self.collectionView reloadData];
+        }
+    }];
+}
+
 - (void)loadMainData {
     NSArray *names = @[@"持卡人姓名",@"开户行",@"卡片类别",@"卡号",@"开户省份",@"开户城市",@"开户网点",@"资金密码"];
     NSArray *placeholders = @[@"**子",@"请选择收款银行",@"请选择卡片类别",@"请输入银行卡号",@"请选择省份",@"请选择城市",@"请填写具体开户地点",@"6位数数字组合"];
