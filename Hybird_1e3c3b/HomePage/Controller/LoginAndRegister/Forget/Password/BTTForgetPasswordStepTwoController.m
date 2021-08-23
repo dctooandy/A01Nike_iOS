@@ -159,7 +159,7 @@
     NSInteger count = self.mainData.count + 1;
     for (int i = 0; i < count; i++) {
         if (i == count - 1) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 40, 100)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 10, 100)]];
         } else {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 40, 44)]];
         }

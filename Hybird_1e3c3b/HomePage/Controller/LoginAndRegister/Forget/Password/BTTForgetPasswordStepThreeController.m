@@ -59,6 +59,7 @@
     if (indexPath.row == self.elementsHight.count - 1) {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
         cell.buttonType = BTTButtonTypeDone;
+        cell.warningLabel.textColor = [UIColor redColor];
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
@@ -112,7 +113,33 @@
  *  行间距, 默认10
  */
 - (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView linesMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == self.elementsHight.count - 1) {
+        return 0;
+    }
     return 20;
+}
+
+-(NSMutableAttributedString *)warringStr:(NSString  *)titleStr {
+    NSMutableAttributedString * attriStr = [[NSMutableAttributedString alloc] initWithString:titleStr];
+    NSTextAttachment *attchImage = [[NSTextAttachment alloc] init];
+    attchImage.image = [UIImage imageNamed:@"ic_forget_warring_logo"];
+    attchImage.bounds = CGRectMake(0, -3, 15, 15);
+    NSAttributedString *stringImage = [NSAttributedString attributedStringWithAttachment:attchImage];
+    [attriStr insertAttributedString:stringImage atIndex:0];
+    
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    [style setLineSpacing:5];
+    [attriStr addAttribute:NSParagraphStyleAttributeName
+        value:style
+        range:NSMakeRange(0, titleStr.length)];
+    return attriStr;
+}
+
+-(BTTBindingMobileBtnCell *)getBindingMobileBtnCell
+{
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.elementsHight.count - 1 inSection:0];
+    BTTBindingMobileBtnCell *cell = (BTTBindingMobileBtnCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell;
 }
 
 #pragma mark - textfielddelegate
@@ -127,10 +154,19 @@
     NSPredicate *pwdpredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pwdregex];
     BOOL ispwd = [pwdpredicate evaluateWithObject:self.pwd];
     BOOL isSame = [self.pwd isEqualToString:self.againPwd];
-    if (ispwd && isSame) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeEnableNotification object:@"verifycode"];
-    } else {
+    if ((!ispwd && !isSame) || (!ispwd && isSame)) {
+        [self getBindingMobileBtnCell].warningLabel.hidden = false;
+        [self getBindingMobileBtnCell].warningLabel.attributedText = [self warringStr:@"  请输入8-10位数字和字母     "];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeSendNotification object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeDisableNotification object:@"verifycode"];
+    } else if (ispwd && !isSame) {
+        [self getBindingMobileBtnCell].warningLabel.hidden = false;
+        [self getBindingMobileBtnCell].warningLabel.attributedText = [self warringStr:@"  二次密码输入不相符         "];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeSendNotification object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeDisableNotification object:@"verifycode"];
+    } else {
+        [self getBindingMobileBtnCell].warningLabel.hidden = true;
+        [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeEnableNotification object:@"verifycode"];
     }
 }
 
@@ -147,7 +183,7 @@
     NSInteger count = self.mainData.count + 1;
     for (int i = 0; i < count; i++) {
         if (i == count - 1) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 40, 100)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 10, 100)]];
         } else {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 40, 44)]];
         }
