@@ -605,14 +605,14 @@
                     
                 };
                 IVActionHandler kf = ^(UIAlertAction *action){
-                    [LiveChat startKeFu:self];
-//                    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
-//                        if (errCode != CSServiceCode_Request_Suc) {
-//                            [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
-//                        } else {
-//
-//                        }
-//                    }];
+//                    [LiveChat startKeFu:self];
+                    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+                        if (errCode != CSServiceCode_Request_Suc) {
+                            [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+                        } else {
+
+                        }
+                    }];
                 };
                 NSString *title = @"温馨提示";
                 NSString *message = @"资金密码错输入误，请重新输入或联系客服!";
