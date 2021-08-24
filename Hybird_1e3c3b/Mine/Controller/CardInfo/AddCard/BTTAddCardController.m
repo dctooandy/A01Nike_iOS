@@ -42,6 +42,8 @@
     self.withdrawPwdString = @"";
     [self setupCollectionView];
     [self loadMainData];
+    self.bankNamesArr = [[NSMutableArray alloc] init];
+    [self loadQueryBanks];
 }
 
 - (void)setupCollectionView {
@@ -137,8 +139,12 @@
     BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[collectionView cellForItemAtIndexPath:indexPath];
     NSLog(@"%zd", indexPath.item);
     if (indexPath.item == 1) {
-        NSArray *banks = @[@"招商银行", @"交通银行", @"农业银行", @"工商银行", @"建设银行", @"中国银行", @"民生银行", @"光大银行", @"兴业银行", @"平安银行", @"中信银行", @"浦发银行", @"广发银行", @"华夏银行", @"中国邮政银行", @"深圳发展银行", @"农村信用合作社"];
-        [BRStringPickerView showStringPickerWithTitle:@"选择收款银行" dataSource:banks defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
+        if (self.bankNamesArr.count == 0) {
+            NSArray *banks = @[@"广西北部湾银行", @"招商银行", @"交通银行", @"农业银行", @"工商银行", @"建设银行", @"中国银行", @"民生银行", @"光大银行", @"兴业银行", @"平安银行", @"中信银行", @"浦发银行", @"广发银行", @"华夏银行", @"中国邮政银行", @"深圳发展银行", @"农村信用合作社"];
+            self.bankNamesArr = [[NSMutableArray alloc] initWithArray:banks];
+        }
+        
+        [BRStringPickerView showStringPickerWithTitle:@"选择收款银行" dataSource:self.bankNamesArr defaultSelValue:cell.textField.text resultBlock:^(id selectValue, NSInteger index) {
             cell.textField.text = selectValue;
         }];
     } else if (indexPath.item == 2) {

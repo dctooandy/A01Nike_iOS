@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
 
-
+-(void)loadQueryBanks;
 
 
 @end

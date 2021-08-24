@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *messageId;
 @property (nonatomic, copy) NSString *validateId;
 @property (nonatomic, copy) NSString *accountId;
+@property (nonatomic, strong) NSMutableArray *bankNamesArr;
 @end
 
 NS_ASSUME_NONNULL_END

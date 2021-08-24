@@ -495,7 +495,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTLiCaiTransferOut                        @"yeb/transferOut"
 //活期理財 - 轉入理財錢包
 #define BTTLiCaiTransferIn                         @"yeb/transferIn"
-
+//獲取銀行卡列表
+#define BTTQueryBanks                              @"account/queryBanks"
 
 /*********************************************產品API********************************************************/
 
