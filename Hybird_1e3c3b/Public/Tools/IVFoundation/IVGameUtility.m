@@ -136,14 +136,13 @@
             break;
         case IVGameForwardPageTypeCustomerService:
         {
-            [LiveChat startKeFu:gameController];
-//            [CSVisitChatmanager startWithSuperVC:gameController finish:^(CSServiceCode errCode) {
-//                if (errCode != CSServiceCode_Request_Suc) {
-//                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
-//                } else {
-//
-//                }
-//            }];
+            [CSVisitChatmanager startWithSuperVC:gameController finish:^(CSServiceCode errCode) {
+                if (errCode != CSServiceCode_Request_Suc) {
+                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+                } else {
+
+                }
+            }];
         }
             return;
         case IVGameForwardPageTypeBJLDetails:
@@ -196,14 +195,13 @@
     UIViewController *vc =  (UIViewController *)webView.navigationDelegate;
     if ([navigationAction.request.URL.absoluteString containsString:@"nbapp://"]) {
         if ([[navigationAction.request.URL.absoluteString URLDecodedString] containsString:@"https://www.why918.com"]) {
-            [LiveChat startKeFu:(UIViewController *)webView.navigationDelegate];
-//            [CSVisitChatmanager startWithSuperVC:(UIViewController *)webView.navigationDelegate finish:^(CSServiceCode errCode) {
-//                if (errCode != CSServiceCode_Request_Suc) {
-//                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
-//                } else {
-//
-//                }
-//            }];
+            [CSVisitChatmanager startWithSuperVC:(UIViewController *)webView.navigationDelegate finish:^(CSServiceCode errCode) {
+                if (errCode != CSServiceCode_Request_Suc) {
+                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+                } else {
+
+                }
+            }];
         } else if ([[navigationAction.request.URL.absoluteString URLDecodedString] containsString:@"/deposit_xunjie.htm"]) {
             
             [vc.navigationController pushViewController:[[CNPayVC alloc] init] animated:YES];

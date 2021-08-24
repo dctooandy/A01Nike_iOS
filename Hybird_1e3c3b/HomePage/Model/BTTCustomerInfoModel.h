@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy  ) NSString  *clubLevel;
 @property (nonatomic, copy  ) NSString  *currency;
 @property (nonatomic, copy  ) NSString  *customerId;
+@property (nonatomic, copy  ) NSString  *rfCode;
 @property (nonatomic, assign) NSInteger customerType;
 @property (nonatomic, copy  ) NSString  *depositLevel;
 @property (nonatomic, copy  ) NSString  *email;
