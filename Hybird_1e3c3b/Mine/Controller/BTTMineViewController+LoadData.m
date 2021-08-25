@@ -119,8 +119,8 @@
                 mainModel.paymentType = CNPaymentVip;
                 [self.vipBigDataSoure insertObject:mainModel atIndex:0];
             }
-            [self loadPersonalPaymentData];
         }
+        [self loadPersonalPaymentData];
     }];
 }
 
