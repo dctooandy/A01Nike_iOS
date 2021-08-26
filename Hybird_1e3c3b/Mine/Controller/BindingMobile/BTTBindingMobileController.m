@@ -146,7 +146,7 @@
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             BOOL isUseRegPhone = ([IVNetwork savedUserInfo].mobileNo.length != 0&&[IVNetwork savedUserInfo].mobileNoBind==0);
-            if (isUseRegPhone && ![self getSendBtn].enabled) {
+            if (isUseRegPhone && ![[weakSelf getPhoneTF].text containsString:@"*"]) {
                 [weakSelf dontUseRegPhone];
             }else {
                 [weakSelf submitBind];
