@@ -114,7 +114,7 @@
             NSNumber * num = result.body[@"isDisplayVip"];
             if ([num boolValue]) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"VIP专属存款";
+                mainModel.name = @"VIP大额存款";
                 mainModel.iconName = @"me_vip_exclusive";
                 mainModel.paymentType = CNPaymentVip;
                 [self.vipBigDataSoure insertObject:mainModel atIndex:0];

@@ -251,6 +251,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(BOOL)isVipUser;
 
++(BOOL)checkProductDate:(NSString *)tempDate;
+
 @end
 
 NS_ASSUME_NONNULL_END

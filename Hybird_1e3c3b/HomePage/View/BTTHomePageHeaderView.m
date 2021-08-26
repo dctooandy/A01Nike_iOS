@@ -58,22 +58,28 @@
 //            }
 //            [self addSubview:moonImage];
             
-            //2021新年装饰
-//            NSString * pathStr = KIsiPhoneX? @"new_year_2021_x":@"new_year_2021";
-//            NSString *path = [[NSBundle mainBundle] pathForResource:pathStr ofType:@"gif"];
-//            NSData *data = [NSData dataWithContentsOfFile:path];
-//            UIImageView * img = [[UIImageView alloc] init];
-//            img.image = [UIImage sd_animatedGIFWithData:data];
-//            img.contentMode = UIViewContentModeScaleToFill;
-//            [self addSubview:img];
-//            [img mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.top.left.bottom.right.equalTo(self);
-//            }];
+            //TODO: 週年慶裝飾
+            NSString * pathStr = @"";
+            if ([PublicMethod checkProductDate:@"2021-08-26"]) {
+                pathStr = @"";//大于当前时间
+            } else {
+                pathStr = @"";//小于当前时间
+            }
+            if (pathStr.length > 0) {
+                NSString *path = [[NSBundle mainBundle] pathForResource:pathStr ofType:@"gif"];
+                NSData *data = [NSData dataWithContentsOfFile:path];
+                UIImageView * img = [[UIImageView alloc] init];
+                img.image = [UIImage sd_animatedGIFWithData:data];
+                img.contentMode = UIViewContentModeScaleToFill;
+                [self addSubview:img];
+                [img mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.left.bottom.right.equalTo(self);
+                }];
+            }
             
             UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
             [self addSubview:logoImageView];
             logoImageView.image = ImageNamed(@"Navlogo");
-            
             
             self.titleLabel = [UILabel new];
             [self addSubview:self.titleLabel];

@@ -66,7 +66,7 @@
     }];
     
     UIButton * btn = [[UIButton alloc] init];
-    [btn setTitle:@"联系客服" forState:UIControlStateNormal];
+    [btn setTitle:@"联系专员" forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btn setBackgroundImage:[UIImage imageNamed:@"binding_confirm_enable_normal"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(kefu) forControlEvents:UIControlEventTouchUpInside];
