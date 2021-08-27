@@ -19,7 +19,7 @@ typedef enum {
 
 
 NS_ASSUME_NONNULL_BEGIN
-
+typedef void (^ServerTimeCompleteBlock)(NSString * timeStr);
 typedef void (^BTTHomePageBtnClickBlock)(UIButton *button);
 
 @interface BTTHomePageHeaderView : UIImageView

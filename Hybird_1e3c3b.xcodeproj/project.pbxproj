@@ -484,6 +484,7 @@
 		4146810626999F250093B610 /* BTTBindNameAndPhonePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4146810426999F250093B610 /* BTTBindNameAndPhonePopView.m */; };
 		414AAA222601F76F00518D32 /* BTTDcboxPayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AAA212601F76F00518D32 /* BTTDcboxPayController.xib */; };
 		414AAA272602021100518D32 /* BTTFirstWinningListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AAA262602021100518D32 /* BTTFirstWinningListModel.m */; };
+		41588C9726D889BB001060E7 /* 918_Anniversary.gif in Resources */ = {isa = PBXBuildFile; fileRef = 41588C9626D889BB001060E7 /* 918_Anniversary.gif */; };
 		415CA1D724E539ED005E0E9F /* BTTMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1D624E539ED005E0E9F /* BTTMineViewController.m */; };
 		415CA1D924E539F3005E0E9F /* BTTMineViewController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1D824E539F3005E0E9F /* BTTMineViewController+LoadData.m */; };
 		415CA1DB24E53A54005E0E9F /* BTTMeBigSaveMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1DA24E53A54005E0E9F /* BTTMeBigSaveMoneyCell.m */; };
@@ -1606,6 +1607,7 @@
 		414AAA212601F76F00518D32 /* BTTDcboxPayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDcboxPayController.xib; sourceTree = "<group>"; };
 		414AAA252602021100518D32 /* BTTFirstWinningListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTFirstWinningListModel.h; sourceTree = "<group>"; };
 		414AAA262602021100518D32 /* BTTFirstWinningListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTFirstWinningListModel.m; sourceTree = "<group>"; };
+		41588C9626D889BB001060E7 /* 918_Anniversary.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 918_Anniversary.gif; sourceTree = "<group>"; };
 		415CA1D624E539ED005E0E9F /* BTTMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTMineViewController.m; sourceTree = "<group>"; };
 		415CA1D824E539F3005E0E9F /* BTTMineViewController+LoadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTMineViewController+LoadData.m"; sourceTree = "<group>"; };
 		415CA1DA24E53A54005E0E9F /* BTTMeBigSaveMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTMeBigSaveMoneyCell.m; sourceTree = "<group>"; };
@@ -2686,6 +2688,7 @@
 		3A8F5160215F75010069D1B3 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				41588C9626D889BB001060E7 /* 918_Anniversary.gif */,
 				4161031E2681E18200328EEF /* login_bg_video.mp4 */,
 				41EAF0F5260D94290091FE09 /* hot.gif */,
 				D3B47D5823B70A5400D37C7F /* app.zip */,
@@ -4971,6 +4974,7 @@
 				3A49DFA12179DA0D00FEFBDA /* BTTBindingMobileTwoCell.xib in Resources */,
 				3A14CC60237A4B56009711CF /* BTTRealPersonGameCell.xib in Resources */,
 				76756BB5269454690065F99B /* BTTUserForzenBGView.xib in Resources */,
+				41588C9726D889BB001060E7 /* 918_Anniversary.gif in Resources */,
 				D5DBEB0221ABB774008AF629 /* CNPayDepositStep1VC.xib in Resources */,
 				3A3DF1E7237BA445006129F6 /* BTTHotPromotionCell.xib in Resources */,
 				3AE1EAAC217D65330073A32D /* BTTAccountBlanceHiddenCell.xib in Resources */,

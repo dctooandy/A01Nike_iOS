@@ -1269,13 +1269,13 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
     return [IVNetwork savedUserInfo].starLevel >= 3 && [IVNetwork savedUserInfo] && currentHour >= 12 && currentHour <= 21;
 }
 
-+(BOOL)checkProductDate:(NSString *)tempDate {
++(BOOL)checkProductDate:(NSString *)tempDate serverTime:(NSString *)serverTime {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *date = [dateFormatter dateFromString:tempDate];
-    
-    // 判断是否大于当前时间
-    if ([date earlierDate:[NSDate date]] != date) {
+    NSDate *serverDate = [dateFormatter dateFromString:serverTime];
+    // 判断是否大于server时间
+    if ([date earlierDate:serverDate] != date) {
         return true;
     } else {
         return false;

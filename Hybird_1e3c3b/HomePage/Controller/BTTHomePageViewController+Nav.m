@@ -51,10 +51,10 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     [self.assistiveButton setMainButtonClickActionBlock:^{
         weakSelf.assistiveButton.hidden = true;
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.webConfigModel.url = @"/activity_pages/ag_crads918";
+        vc.webConfigModel.url = @"/activity_pages/anniversary";
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
-        vc.title = @"918赢牌，好运红包即来";
+        vc.title = @"博天堂周年庆典";
         [weakSelf.navigationController pushViewController:vc animated:YES];
     }];
     [self.assistiveButton setCloseBtnActionBlock:^{

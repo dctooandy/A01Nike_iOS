@@ -18,8 +18,16 @@
     self = [super init];
     if (self) {
         UIImage * closeImage = [UIImage imageNamed:@"ic_918_assistive_close_btn"];
-        self.mainFrame = CGRectMake(position.x, position.y, backgroundImage.size.width, backgroundImage.size.height+closeImage.size.height);
+        self.mainFrame = CGRectMake(position.x, position.y, backgroundImage.size.width, backgroundImage.size.height);
         self.superViewRelativePosition = position;
+        
+        //main Button
+        self.powerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height)];
+        [self.powerButton setBackgroundImage:backgroundImage forState:UIControlStateNormal];
+        self.powerButton.tag = 0;
+        self.powerButton.adjustsImageWhenHighlighted = NO;
+        [self.powerButton addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_powerButton];
         
         UIButton * closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(backgroundImage.size.width-closeImage.size.width, 0, closeImage.size.width, closeImage.size.height)];
         [closeBtn setBackgroundImage:closeImage forState:UIControlStateNormal];
@@ -27,14 +35,6 @@
         closeBtn.tag = 1;
         closeBtn.adjustsImageWhenHighlighted = NO;
         [self addSubview:closeBtn];
-        
-        //main Button
-        self.powerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, closeImage.size.height, backgroundImage.size.width, backgroundImage.size.height)];
-        [self.powerButton setBackgroundImage:backgroundImage forState:UIControlStateNormal];
-        self.powerButton.tag = 0;
-        self.powerButton.adjustsImageWhenHighlighted = NO;
-        [self.powerButton addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_powerButton];
         
         //configuration
         [self configureDefaultValue];
