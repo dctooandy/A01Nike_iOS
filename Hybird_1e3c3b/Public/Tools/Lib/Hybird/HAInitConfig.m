@@ -21,7 +21,7 @@
         case 1:
             return @[@"http://fm.918rr.com/_glaxy_1e3c3b_/"];
         default:
-            return @[@"https://fen1251.com/_glaxy_1e3c3b_/",@"https://fen1252.com/_glaxy_1e3c3b_/"];
+            return @[@"https://fen1264.com/_glaxy_1e3c3b_/",@"https://fen1265.com/_glaxy_1e3c3b_/"];
     }
 }
 //https://a01mobileimage.sm830.com/static/A01M/_default/__static/_wms/_l/_banner/banner-index-186bd16447a23dc145b57aef0989822cf.jpg?v=d5de123c20360742454ddff7a6a0d94b
@@ -34,7 +34,7 @@
             return @"http://fm.918rr.com/";
             break;
         case 2:
-            return @"https://fen1251.com/";
+            return @"https://fen1264.com/";
             break;
         default:
             break;
@@ -50,7 +50,7 @@
             return @"http://fm.918rr.com/";
             break;
         case 2:
-            return @"https://fen1251.com/";
+            return @"https://fen1264.com/";
             break;
         default:
             break;
