@@ -547,10 +547,10 @@ typedef enum {
             [IVHttpManager shareManager].loginName = self.account;
             [IVHttpManager shareManager].userToken = result.body[@"token"];
             [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
-            [[NSUserDefaults standardUserDefaults]setObject:result.body[@"customerId"] forKey:@"pushcustomerid"];
+            [[NSUserDefaults standardUserDefaults]setObject:result.body[@"rfCode"] forKey:@"pushcustomerid"];
             //                [IVPushManager sharedManager].customerId = result.body[@"customerId"];
             AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            [delegate reSendIVPushRequestIpsSuperSign:result.body[@"customerId"]];
+            [delegate reSendIVPushRequestIpsSuperSign:result.body[@"rfCode"]];
             [self getCustomerInfoByLoginNameWithName:result.body[@"loginName"]];
         }else{
             [self hideLoading];

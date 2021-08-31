@@ -58,54 +58,66 @@
 //            }
 //            [self addSubview:moonImage];
             
-            //2021新年装饰
-//            NSString * pathStr = KIsiPhoneX? @"new_year_2021_x":@"new_year_2021";
-//            NSString *path = [[NSBundle mainBundle] pathForResource:pathStr ofType:@"gif"];
-//            NSData *data = [NSData dataWithContentsOfFile:path];
-//            UIImageView * img = [[UIImageView alloc] init];
-//            img.image = [UIImage sd_animatedGIFWithData:data];
-//            img.contentMode = UIViewContentModeScaleToFill;
-//            [self addSubview:img];
-//            [img mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.top.left.bottom.right.equalTo(self);
-//            }];
-            
-            UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
-            [self addSubview:logoImageView];
-            logoImageView.image = ImageNamed(@"Navlogo");
-            
-            
-            self.titleLabel = [UILabel new];
-            [self addSubview:self.titleLabel];
-            self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
-            self.titleLabel.text = @"首页";
-            self.titleLabel.textAlignment = NSTextAlignmentCenter;
-            self.titleLabel.font = kFontSystem(17);
-            self.titleLabel.textColor = [UIColor whiteColor];
-            
-            UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [self addSubview:serviceBtn];
-            serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
-            [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
-            [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-            serviceBtn.tag = 2001;
-            __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            [self addSubview:messageBtn];
-            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
-            [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
-            messageBtn.redDotOffset = CGPointMake(1, 3);
-            messageBtn.tag = 2002;
-            [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-            
-            [GJRedDot registNodeWithKey:BTTHomePageMessage
-                              parentKey:BTTHomePageItemsKey
-                            defaultShow:NO];
-            [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
-                NSInteger num = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey] integerValue];
-                messageBtn.showRedDot = num;
-            } handler:self];
-            
-//            [self setupLoginAndRegisterBtn];
+            [self serverTime:^(NSString * _Nonnull timeStr) {
+                if (timeStr.length > 0) {
+                    NSString * pathStr = @"";
+                    //手動輸入要更換的日期
+                    if (![PublicMethod checkProductDate:@"2021-10-02" serverTime:timeStr]) {
+                        pathStr = @"";//王者之巔
+                    } else if (![PublicMethod checkProductDate:@"2021-09-22" serverTime:timeStr]) {
+                        pathStr = @"";//國慶
+                    } else if (![PublicMethod checkProductDate:@"2021-09-16" serverTime:timeStr]) {
+                        pathStr = @"";//中秋
+                    } else if (![PublicMethod checkProductDate:@"2021-08-27" serverTime:timeStr]) {
+                        pathStr = @"918_Anniversary";//週年慶
+                    }
+                    if (pathStr.length > 0) {
+                        NSString *path = [[NSBundle mainBundle] pathForResource:pathStr ofType:@"gif"];
+                        NSData *data = [NSData dataWithContentsOfFile:path];
+                        UIImageView * img = [[UIImageView alloc] init];
+                        img.image = [UIImage sd_animatedGIFWithData:data];
+                        [self addSubview:img];
+                        [img mas_makeConstraints:^(MASConstraintMaker *make) {
+                            make.bottom.right.equalTo(self);
+                            make.top.equalTo(self).offset(BTTIconTop+10);
+                            make.left.equalTo(self).offset(5);
+                        }];
+                    }
+                }
+                UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
+                [self addSubview:logoImageView];
+                logoImageView.image = ImageNamed(@"Navlogo");
+                
+                self.titleLabel = [UILabel new];
+                [self addSubview:self.titleLabel];
+                self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
+                self.titleLabel.text = @"首页";
+                self.titleLabel.textAlignment = NSTextAlignmentCenter;
+                self.titleLabel.font = kFontSystem(17);
+                self.titleLabel.textColor = [UIColor whiteColor];
+                
+                UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                [self addSubview:serviceBtn];
+                serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+                [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
+                [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+                serviceBtn.tag = 2001;
+                __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                [self addSubview:messageBtn];
+                messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+                [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
+                messageBtn.redDotOffset = CGPointMake(1, 3);
+                messageBtn.tag = 2002;
+                [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+                
+                [GJRedDot registNodeWithKey:BTTHomePageMessage
+                                  parentKey:BTTHomePageItemsKey
+                                defaultShow:NO];
+                [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
+                    NSInteger num = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey] integerValue];
+                    messageBtn.showRedDot = num;
+                } handler:self];
+            }];
         }
             break;
         case BTTNavTypeOnlyTitle:
@@ -259,6 +271,20 @@
     if (_btnClickBlock) {
         _btnClickBlock(button);
     }
+}
+
+-(void)serverTime:(ServerTimeCompleteBlock)completeBlock {
+    [IVNetwork requestPostWithUrl:BTTServerTime paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSDate *timeDate = [[NSDate alloc]initWithTimeIntervalSince1970:[result.body longLongValue]];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            completeBlock([dateFormatter stringFromDate:timeDate]);
+        } else {
+            completeBlock(@"");
+        }
+    }];
 }
 
 @end

@@ -40,18 +40,19 @@
     UIImageView * title = [[UIImageView alloc] initWithImage:titleImg];
     [self.view addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(line.mas_bottom).offset(15);
+        make.top.equalTo(line.mas_bottom).offset(25);
         make.centerX.equalTo(self.view);
-        make.height.offset(titleImg.size.height);
+        make.height.offset(titleImg.size.height/2);
+        make.width.offset(titleImg.size.width/2);
     }];
     
     lab = [[UILabel alloc]init];
-    lab.text = @"专员全程为您保驾护航，存款成功率100%";
+    lab.text = @"20万人民币以上，一对一服务";
     lab.textColor = [UIColor darkGrayColor];
     lab.adjustsFontSizeToFitWidth = true;
     [self.view addSubview:lab];
     [lab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(title.mas_bottom).offset(15);
+        make.top.equalTo(title.mas_bottom).offset(25);
         make.centerX.equalTo(self.view);
         make.width.offset(titleImg.size.width);
     }];
@@ -60,19 +61,19 @@
     UIImageView * logo = [[UIImageView alloc] initWithImage:logoImg];
     [self.view addSubview:logo];
     [logo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(lab.mas_bottom).offset(15);
+        make.top.equalTo(lab.mas_bottom).offset(25);
         make.centerX.equalTo(self.view);
         make.height.offset(logoImg.size.height);
     }];
     
     UIButton * btn = [[UIButton alloc] init];
-    [btn setTitle:@"联系客服" forState:UIControlStateNormal];
+    [btn setTitle:@"联系专员" forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btn setBackgroundImage:[UIImage imageNamed:@"binding_confirm_enable_normal"] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(kefu) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(logo.mas_bottom).offset(15);
+        make.top.equalTo(logo.mas_bottom).offset(25);
         make.left.right.equalTo(line);
         make.height.offset(50);
     }];

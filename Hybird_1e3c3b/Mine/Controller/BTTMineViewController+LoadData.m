@@ -114,13 +114,13 @@
             NSNumber * num = result.body[@"isDisplayVip"];
             if ([num boolValue]) {
                 BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"VIP专属存款";
+                mainModel.name = @"VIP大额存款";
                 mainModel.iconName = @"me_vip_exclusive";
                 mainModel.paymentType = CNPaymentVip;
                 [self.vipBigDataSoure insertObject:mainModel atIndex:0];
             }
-            [self loadPersonalPaymentData];
         }
+        [self loadPersonalPaymentData];
     }];
 }
 
@@ -740,7 +740,6 @@
                 customView.btnBlock = ^(UIButton * _Nullable btn) {
                     //kefu
                     [popView dismiss];
-//                    [LiveChat startKeFu:self];
                     [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
                         if (errCode != CSServiceCode_Request_Suc) {
                             [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];

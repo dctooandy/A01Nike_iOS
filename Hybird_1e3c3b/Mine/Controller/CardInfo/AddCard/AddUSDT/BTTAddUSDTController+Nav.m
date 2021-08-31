@@ -30,7 +30,6 @@
         strongSelf(strongSelf);
         [popView dismiss];
         if (btn.tag == 0) {
-//            [LiveChat startKeFu:strongSelf];
             [CSVisitChatmanager startWithSuperVC:strongSelf finish:^(CSServiceCode errCode) {
                 if (errCode != CSServiceCode_Request_Suc) {
                     [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
@@ -69,7 +68,6 @@
         if (btn.tag == 50011) {
             [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
         } else if (btn.tag == 50012) {
-//            [LiveChat startKeFu:strongSelf];
             [CSVisitChatmanager startWithSuperVC:strongSelf finish:^(CSServiceCode errCode) {
                 if (errCode != CSServiceCode_Request_Suc) {
                     [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];

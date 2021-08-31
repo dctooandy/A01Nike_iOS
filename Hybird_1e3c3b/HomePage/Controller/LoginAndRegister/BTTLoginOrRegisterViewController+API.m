@@ -171,7 +171,7 @@ static const char *exModelKey = "exModelKey";
                 NSString *validateId = result.body[@"validateId"];
                 [self showPopViewWithAccounts:loginArray withPhone:model.login_name withValidateId:validateId messageId:messageId smsCode:model.password isBack:isback];
             }else{
-                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"customerId"] forKey:@"pushcustomerid"];
+                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"rfCode"] forKey:@"pushcustomerid"];
 //                [IVPushManager sharedManager].customerId = result.body[@"customerId"];
                 if (result.body[@"beforeLoginDate"])
                 {
@@ -181,7 +181,7 @@ static const char *exModelKey = "exModelKey";
                 }
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-                [delegate reSendIVPushRequestIpsSuperSign:result.body[@"customerId"]];
+                [delegate reSendIVPushRequestIpsSuperSign:result.body[@"rfCode"]];
                 [IVHttpManager shareManager].loginName = model.login_name;
                 [IVHttpManager shareManager].userToken = result.body[@"token"];
                 [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
@@ -258,9 +258,9 @@ static const char *exModelKey = "exModelKey";
                 NSString *validateId = result.body[@"validateId"];
                 [self showPopViewWithAccounts:loginArray withPhone:model.login_name withValidateId:validateId messageId:messageId smsCode:model.password isBack:isback];
             }else{
-                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"customerId"] forKey:@"pushcustomerid"];
+                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"rfCode"] forKey:@"pushcustomerid"];
                 AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-                [delegate reSendIVPushRequestIpsSuperSign:result.body[@"customerId"]];
+                [delegate reSendIVPushRequestIpsSuperSign:result.body[@"rfCode"]];
                 [IVHttpManager shareManager].loginName = model.login_name;
                 [IVHttpManager shareManager].userToken = result.body[@"token"];
                 [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];

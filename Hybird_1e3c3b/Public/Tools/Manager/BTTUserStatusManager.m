@@ -17,10 +17,10 @@
 + (void)loginSuccessWithUserInfo:(NSDictionary *)userInfo isBackHome:(BOOL)isBackHome
 {
     [IVNetwork updateUserInfo:userInfo];
-    NSString *userId = [IVNetwork savedUserInfo].customerId;
+    NSString *userId = [IVNetwork savedUserInfo].rfCode;
     [NBSAppAgent setUserIdentifier:userId];
     [[IVGameManager sharedManager] userStatusChanged:YES];
-    [IVPushManager sharedManager].customerId = [IVNetwork savedUserInfo].customerId;
+    [IVPushManager sharedManager].customerId = [IVNetwork savedUserInfo].rfCode;
     [[IVPushManager sharedManager] sendIpsSuperSign];
     [[NSNotificationCenter defaultCenter] postNotificationName:LoginSuccessNotification object:@{@"isBackHome":[NSNumber numberWithBool:isBackHome]}];
     [BTTRequestPrecache updateCacheNeedLoginRequest];

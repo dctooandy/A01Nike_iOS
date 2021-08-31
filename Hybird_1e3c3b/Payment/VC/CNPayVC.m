@@ -111,7 +111,6 @@
 }
 
 -(void)gotoKefu {
-//    [LiveChat startKeFu:self];
     [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
         if (errCode != CSServiceCode_Request_Suc) {
             [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
@@ -122,7 +121,6 @@
 }
 
 -(void)gotoVIPKefu {
-//    [LiveChat startKeFu:self];
     [CSVisitChatmanager startWithSuperVC:self extraParam:@{@"userTextTag":@"[贵宾存款] 你好，麻烦给我一个专属存款账号"} finish:^(CSServiceCode errCode) {
         if (errCode != CSServiceCode_Request_Suc) {
             [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
@@ -198,7 +196,7 @@
     if (channelModel.paymentType==6789) {
         _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.payModels.firstObject.payType];
         _payChannelVC.payments = channelModel.payModels;
-    } else if ([channelModel.name isEqualToString:@"VIP专属存款"]) {
+    } else if (channelModel.paymentType == CNPaymentVip) {
         _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.paymentType];
     } else {
         _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.paymentType];
@@ -235,7 +233,7 @@
         cell.titleLb.font = [UIFont boldSystemFontOfSize:13];
     }
     cell.channelIV.image = [UIImage imageNamed:channel.iconName];
-    cell.discountImg.hidden = ![channel.name isEqualToString:@"VIP专属存款"];
+    cell.discountImg.hidden = !(channel.paymentType == CNPaymentVip);
     
     // 默认选中第一个可以支付的渠道
     if (indexPath.row == _currentSelectedIndex) {
@@ -265,7 +263,7 @@
     if (channel.paymentType==6789) {
         _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payModels.firstObject.payType];
         _payChannelVC.payments = channel.payModels;
-    } else if ([channel.name isEqualToString:@"VIP专属存款"]) {
+    } else if (channel.paymentType == CNPaymentVip) {
         _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.paymentType];
     } else {
         _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.paymentType];

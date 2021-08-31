@@ -51,10 +51,10 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     [self.assistiveButton setMainButtonClickActionBlock:^{
         weakSelf.assistiveButton.hidden = true;
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.webConfigModel.url = @"/activity_pages/ag_crads918";
+        vc.webConfigModel.url = @"/activity_pages/anniversary";
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.theme = @"outside";
-        vc.title = @"918赢牌，好运红包即来";
+        vc.title = @"博天堂周年庆典";
         [weakSelf.navigationController pushViewController:vc animated:YES];
     }];
     [self.assistiveButton setCloseBtnActionBlock:^{
@@ -100,7 +100,6 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 - (void)registerSuccessGotoHomePageNotification:(NSNotification *)notif {
     if ([notif.object isEqualToString:@"gotoOnlineChat"]) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [LiveChat startKeFu:self];
             [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
                 if (errCode != CSServiceCode_Request_Suc) {
                     [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
@@ -260,7 +259,6 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 - (void)rightClick:(UIButton *)btn {
     
     BTTPopoverAction *action1 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineService") title:@"在线客服      " handler:^(BTTPopoverAction *action) {
-//        [LiveChat startKeFu:self];
         [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
             if (errCode != CSServiceCode_Request_Suc) {
                 [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
@@ -372,7 +370,6 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         if (btn.tag == 50011) {
             [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
         } else if (btn.tag == 50012) {
-//            [LiveChat startKeFu:strongSelf];
             [CSVisitChatmanager startWithSuperVC:strongSelf finish:^(CSServiceCode errCode) {
                 if (errCode != CSServiceCode_Request_Suc) {
                     [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
