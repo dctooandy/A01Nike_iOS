@@ -196,6 +196,11 @@ typedef enum {
 /** 轮播文字label对齐方式 */
 @property (nonatomic, assign) NSTextAlignment titleLabelTextAlignment;
 
+@property (nonatomic, weak) UICollectionView *mainView; // 显示图片的collectionView
+
+@property (nonatomic, assign) BOOL canZoomIn;
+@property (nonatomic, copy) void (^dismissBlock)( void);
+@property (nonatomic, copy) void (^tapZoomInBlock)( NSInteger currentIndex );
 /** 滚动手势禁用（文字轮播较实用） */
 - (void)disableScrollGesture;
 

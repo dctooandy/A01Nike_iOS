@@ -32,9 +32,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SDCollectionViewCell : UICollectionViewCell
-
+typedef void (^CellTapForZoomIn)(void);
+typedef void (^CellTap)(void);
+@interface SDCollectionViewCell : UICollectionViewCell<UIScrollViewDelegate>
+@property (nonatomic, copy) CellTapForZoomIn tapForZoomIn;
+@property (nonatomic, copy) CellTap dismissTap;
 @property (weak, nonatomic) UIImageView *imageView;
+@property (weak, nonatomic) UIScrollView *cellScrollView;
 @property (copy, nonatomic) NSString *title;
 
 @property (nonatomic, strong) UIColor *titleLabelTextColor;
@@ -44,7 +48,7 @@
 @property (nonatomic, assign) NSTextAlignment titleLabelTextAlignment;
 
 @property (nonatomic, assign) BOOL hasConfigured;
-
+@property (nonatomic, assign) BOOL canZoomIn;
 /** 只展示文字轮播 */
 @property (nonatomic, assign) BOOL onlyDisplayText;
 
