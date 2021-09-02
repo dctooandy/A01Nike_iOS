@@ -9,8 +9,6 @@
 #import "BTTTabbarController.h"
 #import "BTTTabBar.h"
 #import "BTTHomePageViewController.h"
-#import "BTTVIPClubPageViewController.h"
-//#import "BTTLuckyWheelController.h"
 #import "BTTDiscountsViewController.h"
 #import "BTTMineViewController.h"
 #import "BTTLuckyWheelViewController.h"
@@ -31,7 +29,6 @@
 @property (nonatomic, strong) BTTHomePageViewController *homePageVC;
 
 //@property (nonatomic, strong) BTTBaseViewController *voiceCall;
-@property (nonatomic, strong) BTTVIPClubPageViewController *vipClubVC;
 
 @property (nonatomic, strong) BTTLuckyWheelViewController *lucky;
 
@@ -76,36 +73,28 @@
 
 
 - (void)resetTabar {
-    for (UITabBarItem *item in self.items) {
-        NSInteger index = [self.items indexOfObject:item];
-        if (index == BTTPromo) {
-            item.title = @"优惠";
-            item.image = ImageNamed(@"ic-promo-d");
-            item.selectedImage = ImageNamed(@"ic-promo-a");
-            break;
+    
+    if ([IVNetwork savedUserInfo]) {
+        for (UITabBarItem *item in self.items) {
+            NSInteger index = [self.items indexOfObject:item];
+            if (index == BTTPromo) {
+                item.title = @"优惠";
+                item.image = ImageNamed(@"preferential_normal");
+                item.selectedImage = ImageNamed(@"preferential_pressed");
+                break;
+            }
+        }
+    } else {
+        for (UITabBarItem *item in self.items) {
+            NSInteger index = [self.items indexOfObject:item];
+            if (index == BTTPromo) {
+                item.title = @"登录/开户";
+                item.image = ImageNamed(@"login_normal");
+                item.selectedImage = ImageNamed(@"login_pressed");
+                break;
+            }
         }
     }
-//    if ([IVNetwork savedUserInfo]) {
-//        for (UITabBarItem *item in self.items) {
-//            NSInteger index = [self.items indexOfObject:item];
-//            if (index == BTTPromo) {
-//                item.title = @"优惠";
-//                item.image = ImageNamed(@"preferential_normal");
-//                item.selectedImage = ImageNamed(@"preferential_pressed");
-//                break;
-//            }
-//        }
-//    } else {
-//        for (UITabBarItem *item in self.items) {
-//            NSInteger index = [self.items indexOfObject:item];
-//            if (index == BTTPromo) {
-//                item.title = @"登录/开户";
-//                item.image = ImageNamed(@"login_normal");
-//                item.selectedImage = ImageNamed(@"login_pressed");
-//                break;
-//            }
-//        }
-//    }
     [self customTabbar];
 }
 
@@ -163,8 +152,7 @@
     if (!_myTabbar) {
         _myTabbar = [[BTTTabBar alloc] init];
         _myTabbar.delegate = self;
-//        _myTabbar.backgroundColor = [UIColor colorWithPatternImage:ImageNamed(@"TabBar_bg")];
-        _myTabbar.backgroundColor = [UIColor colorWithHexString:@"212229"];
+        _myTabbar.backgroundColor = [UIColor colorWithPatternImage:ImageNamed(@"TabBar_bg")];
         _myTabbar.frame = self.tabBar.frame;
         [self.view addSubview:_myTabbar];
     }
@@ -173,7 +161,7 @@
 }
 
 - (void)setupViewControllers {
-    [self addOneChildVC:self.homePageVC title:@"首页" imageName:@"ic-home-d" selectedImageName:@"ic-home-a"];
+    [self addOneChildVC:self.homePageVC title:@"首页" imageName:@"home_normal" selectedImageName:@"home_pressed"];
 //    [self addOneChildVC:self.voiceCall title:@"APP语音" imageName:@"tab_voiceCall" selectedImageName:@"tab_voiceCall"];
     [self addOneChildVC:self.lucky title:@"抽奖" imageName:@"lottery_normal" selectedImageName:@"lottery_pressed"];
     if ([IVNetwork savedUserInfo]) {
@@ -229,10 +217,13 @@
 
 - (void)tabBar:(BTTTabBar *)tabBar didClickBtn:(NSInteger)index {
     [super setSelectedIndex:index];
-    [self.homePageVC destoryTimerByOtherVC];
     if (index == BTTLuckyWheel) {
-        self.selectVC = self.luckyWheel;
+        self.selectVC = (BTTBaseViewController *)self.lucky;
+        NSString *domain = [IVNetwork h5Domain];
+        self.lucky.webConfigModel.theme = @"inside";
+        self.lucky.webConfigModel.url = [NSString stringWithFormat:@"%@%@",domain,@"activity_pages/lucky_wheel_2020"]; //@"customer/lucky_wheel.htm";
         self.preSelectIndex = index;
+        [self.selectVC.navigationController popToRootViewControllerAnimated:NO];
     }
 //    else if (index == BTTAppPhone) {
 //        self.selectVC = self.voiceCall;
@@ -274,27 +265,14 @@
         self.preSelectIndex = index;
     } else if (index == BTTPromo) {//優惠
         self.selectVC = self.discountsVC;
-//        self.preSelectIndex = index;
-//        if ([IVNetwork savedUserInfo]) {
-//            self.preSelectIndex = index;
-//        } else {
-//            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
-//            [self.selectVC.navigationController pushViewController:vc animated:YES];
-//        }
+        if ([IVNetwork savedUserInfo]) {
+            self.preSelectIndex = index;
+        } else {
+            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+            [self.selectVC.navigationController pushViewController:vc animated:YES];
+        }
         
-    }
-    else if (index == BTTVIPClub)
-    {
-        //占时先用BTTLuckyWheel
-        self.selectVC = (BTTBaseViewController *)self.vipClubVC;
-        NSString *domain = [IVNetwork h5Domain];
-//        self.luckyFirst.webConfigModel.theme = @"inside";
-//        self.luckyFirst.webConfigModel.url = [NSString stringWithFormat:@"%@%@",domain,@"activity_pages/lucky_wheel_2020"]; //@"customer/lucky_wheel.htm";
-        self.preSelectIndex = index;
-        [self.selectVC.navigationController popToRootViewControllerAnimated:NO];
-        
-    }
-    else {
+    } else {
         self.selectVC = self.mineVC;
         self.preSelectIndex = index;
     }
@@ -393,12 +371,6 @@
 //    }
 //    return _voiceCall;
 //}
-- (BTTVIPClubPageViewController *)vipClubVC {
-    if (!_vipClubVC) {
-        _vipClubVC = [[BTTVIPClubPageViewController alloc] init];
-    }
-    return _vipClubVC;
-}
 
 - (BTTLuckyWheelViewController *)lucky {
     if (!_lucky) {
