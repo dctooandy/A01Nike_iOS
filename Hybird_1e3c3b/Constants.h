@@ -637,7 +637,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
                                           COLOR_RGBA(42, 45, 53, 1), NSBackgroundColorAttributeName, \
                                           [UIColor whiteColor],      NSLaunchTitleColorAttributeName, \
                                           nil]
-
+// 單例List
+#define GradiImage [GradientImage sharedInstance]
 //----------------------单例---------------------------
 #define SingletonInterface(Class) \
     + (Class *)sharedInstance;
