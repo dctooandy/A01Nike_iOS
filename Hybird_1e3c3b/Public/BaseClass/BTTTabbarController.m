@@ -224,7 +224,7 @@
 
 - (void)tabBar:(BTTTabBar *)tabBar didClickBtn:(NSInteger)index {
     [super setSelectedIndex:index];
-    [self.homePageVC destoryTimerByOtherVC];
+//    [self.homePageVC destoryTimerByOtherVC];
     if (index == BTTLuckyWheel) {
         self.selectVC = (BTTBaseViewController *)self.lucky;
         NSString *domain = [IVNetwork h5Domain];

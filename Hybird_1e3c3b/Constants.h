@@ -192,9 +192,10 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 
 #define BTTHome                                    0
 //#define BTTAppPhone                                1
-#define BTTLuckyWheel                              1
-#define BTTPromo                                   2
-#define BTTMine                                    3
+#define BTTVIPClub                                 1
+#define BTTLuckyWheel                              2
+#define BTTPromo                                   3
+#define BTTMine                                    4
 
 //Flurry
 #define FlurryKey                                  @"RY7GPP2V792PMZK3PYNX"
