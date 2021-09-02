@@ -138,6 +138,35 @@ typedef enum {
     BTTOneWaySelectAndConfirm, ///一張券以上的最後一張
 }BTTMenualSelectMode;
 
+typedef enum : NSUInteger {
+    BTTVIPRight = 0,    ///VIP權益
+    BTTVIPHistory = 1,  ///風采歷程
+    BTTVIPActivity = 2,       ///品牌活動
+} BTTVIPPageType;
+
+typedef enum : NSUInteger {
+    RightToLeft = 0,        ///右到左
+    LeftToRight = 1,        ///左到右
+    TopToBottom = 2,        ///上到下
+    BottomToTop = 3,        ///下到上
+} BTTGradientOrientationType;
+
+typedef enum : NSUInteger {
+    VIPRightFirstPage = 0,
+    VIPRightUpgradePage = 1,
+    VIPRightWashRatePage = 2,
+    VIPRightRights = 3,
+    VIPRightRightsDescriptPage = 4,
+    VIPRightTravelPage = 5,
+    VIPRightHistoryPage = 6,
+} BTTVIPClubUserRightPageType;
+
+typedef enum : NSUInteger {
+    VIPSmall = 0,
+    VIPMiddle = 1,
+    VIPLarge = 2,
+} BTTVIPDiscriptionViewType;
+
 typedef void (^CompleteBlock)(IVJResponseObject *response);
 
 
