@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BTTVIPActivitiesPopView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="750"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CvE-3s-Y90">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="750"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <action selector="bgButtonTap:" destination="iN0-l3-epB" eventType="touchUpInside" id="9gK-5A-Mbr"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/40" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oG2-9T-ock">
+                    <rect key="frame" x="0.0" y="709" width="375" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="6y3-60-Nch"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <constraints>
+                <constraint firstItem="CvE-3s-Y90" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="76T-Th-eBm"/>
+                <constraint firstItem="CvE-3s-Y90" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Acl-rS-xCp"/>
+                <constraint firstItem="oG2-9T-ock" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Owv-ci-ywN"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="CvE-3s-Y90" secondAttribute="bottom" id="RXh-3S-MwH"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="oG2-9T-ock" secondAttribute="trailing" id="h29-Zw-2yb"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="CvE-3s-Y90" secondAttribute="trailing" id="kQw-MO-hAc"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="oG2-9T-ock" secondAttribute="bottom" constant="20" id="x6k-v2-0f3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="currentLabel" destination="oG2-9T-ock" id="YwZ-ND-3BC"/>
+            </connections>
+            <point key="canvasLocation" x="138.40579710144928" y="120.53571428571428"/>
+        </view>
+    </objects>
+</document>
