@@ -167,6 +167,12 @@ typedef enum : NSUInteger {
     VIPLarge = 2,
 } BTTVIPDiscriptionViewType;
 
+typedef enum {
+    BTT_DEV = 0,    ///本地
+    BTT_STAGE,      ///運測
+    BTT_DIS,        ///運營
+}BTTDomainMode;
+
 typedef void (^CompleteBlock)(IVJResponseObject *response);
 
 
