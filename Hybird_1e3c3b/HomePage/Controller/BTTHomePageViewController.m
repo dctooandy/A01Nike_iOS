@@ -708,12 +708,13 @@
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 180)]];
             } else if (i == 11) {
                 //Customer Activity
-                if (self.Activities.count) {
-                    BTTActivityModel *model = self.Activities[self.nextGroup];
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, model.cellHeight)]];
-                } else {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 388)]];
-                }
+//                if (self.Activities.count) {
+//                    BTTActivityModel *model = self.Activities[self.nextGroup];
+//                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, model.cellHeight)]];
+//                } else {
+//                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 388)]];
+//                }
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
             } else if (i == 6 || i == 8 || i == 10 || i == 12) {
                 //Space
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
@@ -741,12 +742,13 @@
             } else if (i == 8) {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 180)]];
             } else if (i == 10) {
-                if (self.Activities.count) {
-                    BTTActivityModel *model = self.Activities[self.nextGroup];
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, model.cellHeight)]];
-                } else {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 388)]];
-                }
+//                if (self.Activities.count) {
+//                    BTTActivityModel *model = self.Activities[self.nextGroup];
+//                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, model.cellHeight)]];
+//                } else {
+//                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 388)]];
+//                }
+                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
             } else if (i == 5 || i == 7 || i == 9 || i == 11) {
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 15)]];
             }
