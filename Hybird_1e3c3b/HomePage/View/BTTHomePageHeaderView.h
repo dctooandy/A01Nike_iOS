@@ -13,13 +13,15 @@ typedef enum {
     BTTNavTypeHomePage = 1,
     BTTNavTypeOnlyTitle = 2,
     BTTNavTypeDiscount,
-    BTTNavTypeMine
+    BTTNavTypeLuckyWheel,
+    BTTNavTypeMine,
+    BTTNavTypeVIPClub
 }BTTNavType;
 
 
 
 NS_ASSUME_NONNULL_BEGIN
-typedef void (^ServerTimeCompleteBlock)(NSString * timeStr);
+
 typedef void (^BTTHomePageBtnClickBlock)(UIButton *button);
 
 @interface BTTHomePageHeaderView : UIImageView

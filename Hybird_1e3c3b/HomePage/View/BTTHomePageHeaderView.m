@@ -8,11 +8,13 @@
 
 #import "BTTHomePageHeaderView.h"
 #import "UIImage+GIF.h"
+#import "AppInitializeConfig.h"
+#import "GradientImage.h"
 
 #define BTTIconTop (KIsiPhoneX ? 24 : 0) // 按钮距离顶端的高度
 #define BTTLeftConstants 15 // 边距
 #define BTTBtnAndBtnConstants 30   //
-#define BTTBtnWidthAndHeight 24
+#define BTTBtnWidthAndHeight 22
 #define BTTCornerRadius      4     //圆角度数
 #define BTTBorderWidth       1     //边框宽度
 
@@ -39,85 +41,84 @@
 - (void)setupSubviewsWithNavType:(BTTNavType)navType {
     switch (navType) {
         case BTTNavTypeHomePage:
+        case BTTNavTypeVIPClub:
         {
             // 中秋装饰
-//            NSString *path = nil;
-//            if (KIsiPhoneX) {
-//                path = [[NSBundle mainBundle] pathForResource:@"828x176-min" ofType:@"gif"];;
-//            } else {
-//                path = [[NSBundle mainBundle] pathForResource:@"828x128-min" ofType:@"gif"];;
-//            }
-//            NSData *data = [NSData dataWithContentsOfFile:path];
-//            UIImage *image = [UIImage sd_animatedGIFWithData:data];
-//            [self sd_setImageWithURL:nil placeholderImage:image];
-//            UIImageView *moonImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"moon"]];
-//            if (KIsiPhoneX) {
-//                moonImage.frame = CGRectMake(55, 15, 50, 50);
-//            } else {
-//                moonImage.frame = CGRectMake(80, 0, 50, 50);
-//            }
-//            [self addSubview:moonImage];
+            //            NSString *path = nil;
+            //            if (KIsiPhoneX) {
+            //                path = [[NSBundle mainBundle] pathForResource:@"828x176-min" ofType:@"gif"];;
+            //            } else {
+            //                path = [[NSBundle mainBundle] pathForResource:@"828x128-min" ofType:@"gif"];;
+            //            }
+            //            NSData *data = [NSData dataWithContentsOfFile:path];
+            //            UIImage *image = [UIImage sd_animatedGIFWithData:data];
+            //            [self sd_setImageWithURL:nil placeholderImage:image];
+            //            UIImageView *moonImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"moon"]];
+            //            if (KIsiPhoneX) {
+            //                moonImage.frame = CGRectMake(55, 15, 50, 50);
+            //            } else {
+            //                moonImage.frame = CGRectMake(80, 0, 50, 50);
+            //            }
+            //            [self addSubview:moonImage];
             
-            [self serverTime:^(NSString * _Nonnull timeStr) {
-                if (timeStr.length > 0) {
-                    NSString * pathStr = @"";
-                    //手動輸入要更換的日期
-                    if (![PublicMethod checkProductDate:@"2021-10-02" serverTime:timeStr]) {
-                        pathStr = @"";//王者之巔
-                    } else if (![PublicMethod checkProductDate:@"2021-09-22" serverTime:timeStr]) {
-                        pathStr = @"";//國慶
-                    } else if (![PublicMethod checkProductDate:@"2021-09-16" serverTime:timeStr]) {
-                        pathStr = @"";//中秋
-                    } else if (![PublicMethod checkProductDate:@"2021-08-27" serverTime:timeStr]) {
-                        pathStr = @"918_Anniversary";//週年慶
-                    }
-                    if (pathStr.length > 0) {
-                        NSString *path = [[NSBundle mainBundle] pathForResource:pathStr ofType:@"gif"];
-                        NSData *data = [NSData dataWithContentsOfFile:path];
-                        UIImageView * img = [[UIImageView alloc] init];
-                        img.image = [UIImage sd_animatedGIFWithData:data];
-                        [self addSubview:img];
-                        [img mas_makeConstraints:^(MASConstraintMaker *make) {
-                            make.bottom.right.equalTo(self);
-                            make.top.equalTo(self).offset(BTTIconTop+10);
-                            make.left.equalTo(self).offset(5);
-                        }];
-                    }
-                }
+            //2021新年装饰
+            //            NSString * pathStr = KIsiPhoneX? @"new_year_2021_x":@"new_year_2021";
+            //            NSString *path = [[NSBundle mainBundle] pathForResource:pathStr ofType:@"gif"];
+            //            NSData *data = [NSData dataWithContentsOfFile:path];
+            //            UIImageView * img = [[UIImageView alloc] init];
+            //            img.image = [UIImage sd_animatedGIFWithData:data];
+            //            img.contentMode = UIViewContentModeScaleToFill;
+            //            [self addSubview:img];
+            //            [img mas_makeConstraints:^(MASConstraintMaker *make) {
+            //                make.top.left.bottom.right.equalTo(self);
+            //            }];
+            
+            if (navType != BTTNavTypeVIPClub)
+            {
                 UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
                 [self addSubview:logoImageView];
                 logoImageView.image = ImageNamed(@"Navlogo");
-                
-                self.titleLabel = [UILabel new];
-                [self addSubview:self.titleLabel];
-                self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
-                self.titleLabel.text = @"首页";
-                self.titleLabel.textAlignment = NSTextAlignmentCenter;
-                self.titleLabel.font = kFontSystem(17);
-                self.titleLabel.textColor = [UIColor whiteColor];
-                
-                UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                [self addSubview:serviceBtn];
-                serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
-                [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
-                [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-                serviceBtn.tag = 2001;
-                __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                [self addSubview:messageBtn];
-                messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
-                [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
-                messageBtn.redDotOffset = CGPointMake(1, 3);
-                messageBtn.tag = 2002;
-                [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-                
-                [GJRedDot registNodeWithKey:BTTHomePageMessage
-                                  parentKey:BTTHomePageItemsKey
-                                defaultShow:NO];
-                [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
-                    NSInteger num = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey] integerValue];
-                    messageBtn.showRedDot = num;
-                } handler:self];
-            }];
+                [logoImageView setUserInteractionEnabled:YES];
+                if ([app_version floatValue] > 3.2)
+                {
+                    UITapGestureRecognizer *tapOne = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchEnvirmant)];
+                    tapOne.numberOfTapsRequired = 3;
+                    [logoImageView addGestureRecognizer:tapOne];
+                }
+            }
+            
+            
+            self.titleLabel = [UILabel new];
+            [self addSubview:self.titleLabel];
+            self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
+//            self.titleLabel.text = @"首页";
+            self.titleLabel.textAlignment = NSTextAlignmentCenter;
+            self.titleLabel.font = kFontSystem(17);
+            self.titleLabel.textColor = [UIColor whiteColor];
+            
+            UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [self addSubview:serviceBtn];
+            serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight - 8) / 2 + 5 + 8, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            [serviceBtn setBackgroundImage:ImageNamed(@"ic-24service") forState:UIControlStateNormal];
+            [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+            serviceBtn.tag = 2001;
+            __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [self addSubview:messageBtn];
+            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight - 8) / 2 + 5 + 8, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            [messageBtn setBackgroundImage:ImageNamed(@"ic-mailbox") forState:UIControlStateNormal];
+            messageBtn.redDotOffset = CGPointMake(1, 3);
+            messageBtn.tag = 2002;
+            [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [GJRedDot registNodeWithKey:BTTHomePageMessage
+                              parentKey:BTTHomePageItemsKey
+                            defaultShow:NO];
+            [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
+                NSInteger num = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey] integerValue];
+                messageBtn.showRedDot = num;
+            } handler:self];
+            
+            //            [self setupLoginAndRegisterBtn];
         }
             break;
         case BTTNavTypeOnlyTitle:
@@ -168,7 +169,7 @@
         }
             break;
             
-            case BTTNavTypeMine:
+        case BTTNavTypeMine:
         {
             UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
             [self addSubview:logoImageView];
@@ -219,7 +220,49 @@
     
     
 }
-
+- (void)switchEnvirmant
+{
+    weakSelf(weakSelf)
+    IVActionHandler handler = ^(UIAlertAction *action){
+        [weakSelf rebootBySecWithEnvirment:BTT_DEV];
+    };
+    IVActionHandler handler1 = ^(UIAlertAction *action){
+        [weakSelf rebootBySecWithEnvirment:BTT_STAGE];
+    };
+    IVActionHandler handler2 = ^(UIAlertAction *action){
+        [weakSelf rebootBySecWithEnvirment:BTT_DIS];
+    };
+    IVActionHandler handler3 = ^(UIAlertAction *action){};
+    
+    NSString *title = [NSString stringWithFormat:@"目前环境为 %@",[self formatTypeToString:EnvirmentType]];
+    NSString *message = [NSString stringWithFormat:@"当前版本是: %@ \n选定切换环境,\n1秒后将重启APP",app_version];
+    [IVUtility showAlertWithActionTitles:@[@"测试",@"运测",@"运营",@"取消"] handlers:@[handler,handler1,handler2,handler3] title:title message:message];
+}
+- (void)rebootBySecWithEnvirment:(NSInteger)env
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:env forKey:@"Envirment"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        exit(0);
+    });
+}
+- (NSString*)formatTypeToString:(NSInteger)formatType {
+    NSString *result = nil;
+    switch(formatType) {
+        case BTT_DEV:
+            result = @"测试";
+            break;
+        case BTT_STAGE:
+            result = @"运测";
+            break;
+        case BTT_DIS:
+            result = @"运营";
+            break;
+        default:
+            [NSException raise:NSGenericException format:@"Unexpected FormatType."];
+    }
+    return result;
+}
 - (void)setIsLogin:(BOOL)isLogin {
     _isLogin = isLogin;
     if (_isLogin) {
@@ -271,20 +314,6 @@
     if (_btnClickBlock) {
         _btnClickBlock(button);
     }
-}
-
--(void)serverTime:(ServerTimeCompleteBlock)completeBlock {
-    [IVNetwork requestPostWithUrl:BTTServerTime paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSDate *timeDate = [[NSDate alloc]initWithTimeIntervalSince1970:[result.body longLongValue]];
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-            completeBlock([dateFormatter stringFromDate:timeDate]);
-        } else {
-            completeBlock(@"");
-        }
-    }];
 }
 
 @end
