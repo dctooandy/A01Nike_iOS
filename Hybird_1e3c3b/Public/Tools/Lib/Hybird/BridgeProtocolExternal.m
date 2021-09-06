@@ -506,6 +506,10 @@
         model.cnName = @"BTI体育";
         model.enName =  @"SBT_BTI";
         model.provider =  @"SBT";
+    } else if ([provider isEqualToString:kYSBProvider]) {
+        model.cnName = @"YSB";
+        model.enName =  @"YSB";
+        model.provider =  kYSBProvider;
     } else if ([provider isEqualToString:@"fish"]) {
         model.cnName =  kFishCnName;
         model.enName =  kFishEnName;

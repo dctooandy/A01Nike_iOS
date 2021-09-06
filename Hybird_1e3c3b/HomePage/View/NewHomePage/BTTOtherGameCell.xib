@@ -40,9 +40,9 @@
                             <constraint firstAttribute="width" constant="168" id="6Pf-ga-jHr"/>
                             <constraint firstAttribute="height" constant="133" id="6ca-dZ-fRk"/>
                         </constraints>
-                        <state key="normal" backgroundImage="YBS_Big"/>
+                        <state key="normal" backgroundImage="YSB_Big"/>
                         <connections>
-                            <action selector="ybsBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="GR1-J2-YU2"/>
+                            <action selector="ysbBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="onr-Tg-NbM"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1010" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5n-pS-z6m">
@@ -63,7 +63,7 @@
                             <action selector="agBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="dvg-FB-Qs7"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YBS体育" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGI-fm-VZ5">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YSB体育" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGI-fm-VZ5">
                         <rect key="frame" x="200" y="152.5" width="55.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -136,10 +136,10 @@
                 <outlet property="shabaBtn" destination="nxo-c5-HXv" id="t3F-4x-haF"/>
                 <outlet property="shabaBtnHeight" destination="ecv-dy-SUP" id="7lz-rK-G7M"/>
                 <outlet property="shabaBtnWidth" destination="18U-Of-O4d" id="Xo1-SQ-USX"/>
-                <outlet property="ybsBtn" destination="Utd-7Q-sfN" id="Yp8-mw-XQN"/>
-                <outlet property="ybsBtnHeight" destination="6ca-dZ-fRk" id="pcS-PZ-VqW"/>
-                <outlet property="ybsBtnWidth" destination="6Pf-ga-jHr" id="3Aw-Fh-uXd"/>
-                <outlet property="ybsTryIcon" destination="fsl-kK-926" id="JnM-zm-aqE"/>
+                <outlet property="ysbBtn" destination="Utd-7Q-sfN" id="NPM-W4-Omh"/>
+                <outlet property="ysbBtnHeight" destination="6ca-dZ-fRk" id="J1Z-Sl-IQG"/>
+                <outlet property="ysbBtnWidth" destination="6Pf-ga-jHr" id="mfE-Wl-TWP"/>
+                <outlet property="ysbTryIcon" destination="fsl-kK-926" id="Gco-d7-wTn"/>
             </connections>
             <point key="canvasLocation" x="132.60869565217394" y="72.991071428571431"/>
         </collectionViewCell>
@@ -147,7 +147,7 @@
     <resources>
         <image name="AGCP" width="167.5" height="82.5"/>
         <image name="AS" width="167.5" height="82.5"/>
-        <image name="YBS_Big" width="168" height="133.5"/>
+        <image name="YSB_Big" width="168" height="133.5"/>
         <image name="shaba" width="167.5" height="133"/>
         <image name="tryPlay" width="25" height="17.5"/>
     </resources>

@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *shabaBtn;
 
-@property (weak, nonatomic) IBOutlet UIButton *ybsBtn;
+@property (weak, nonatomic) IBOutlet UIButton *ysbBtn;
 
 //@property (weak, nonatomic) IBOutlet UIButton *jingcaiBtn;
 
@@ -24,9 +24,9 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *shabaBtnWidth;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ybsBtnHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ysbBtnHeight;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ybsBtnWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ysbBtnWidth;
 
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *vipBtnHeight;
 
@@ -36,7 +36,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *asBtnWidth;
 
-@property (weak, nonatomic) IBOutlet UIImageView *ybsTryIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *ysbTryIcon;
 
 //@property (weak, nonatomic) IBOutlet UIImageView *vipTryIcon;
 
@@ -76,7 +76,7 @@
 
 -(void)unlockGameBtnPress {
     self.shabaBtn.userInteractionEnabled = true;
-    self.ybsBtn.userInteractionEnabled = true;
+    self.ysbBtn.userInteractionEnabled = true;
 //    self.jingcaiBtn.userInteractionEnabled = true;
     self.asBtn.userInteractionEnabled = true;
     self.cpBtn.userInteractionEnabled = true;
@@ -84,7 +84,7 @@
 
 -(void)lockGameBtnPress {
     self.shabaBtn.userInteractionEnabled = false;
-    self.ybsBtn.userInteractionEnabled = false;
+    self.ysbBtn.userInteractionEnabled = false;
 //    self.jingcaiBtn.userInteractionEnabled = false;
     self.asBtn.userInteractionEnabled = false;
     self.cpBtn.userInteractionEnabled = false;
@@ -100,8 +100,8 @@
     self.shabaBtnWidth.constant = width;
     self.shabaBtnHeight.constant = self.shabaBtnWidth.constant / 182.5 * 144;
         
-    self.ybsBtnWidth.constant = width;
-    self.ybsBtnHeight.constant = self.ybsBtnWidth.constant / 182.5 * 144;
+    self.ysbBtnWidth.constant = width;
+    self.ysbBtnHeight.constant = self.ysbBtnWidth.constant / 182.5 * 144;
     
 //    self.vipBtnWidth.constant = (SCREEN_WIDTH - 40) / 335.0 * 74;
 //    self.vipBtnHeight.constant = self.vipBtnWidth.constant / 74.0 * 69;
@@ -127,7 +127,7 @@
     }
 }
 
-- (IBAction)ybsBtnClick:(UIButton *)sender {
+- (IBAction)ysbBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
         [self lockGameBtnPress];
         self.buttonClickBlock(sender);

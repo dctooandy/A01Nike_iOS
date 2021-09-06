@@ -789,6 +789,9 @@
         case 1006:
             jsonKey = BTTSABAKEY;
             break;
+        case 1007:
+            jsonKey = BTTYSBKEY;
+            break;
         case 1010:
             jsonKey = BTTASKEY;
             break;
@@ -915,6 +918,12 @@
             model.gameCode = BTTSABAKEY;
             model.provider =  kShaBaProvider;
             model.platformCurrency = currency;
+        }else if (tag==1007){
+            model.cnName = @"YSB";
+            model.enName =  @"YSB";
+            model.gameCode = BTTYSBKEY;
+            model.provider =  kYSBProvider;
+            model.platformCurrency = currency;
         }else if (tag==1010){
             model = [[IVGameModel alloc] init];
             model.cnName = @"AS真人棋牌";
@@ -1005,12 +1014,12 @@
             model.provider =  kShaBaProvider;
         }
             break;
-        case 1007://更改為 YBS体育, 注銷 BTI体育
+        case 1007://更改為 YSB体育, 注銷 BTI体育
             model = [[IVGameModel alloc] init];
-            model.cnName = @"YBS体育";//@"BTI体育";
-            model.enName =  @"SBT_YBS";//@"SBT_BTI";
-            model.gameCode = BTTYBSKEY;//BTTBTIKEY;
-            model.provider =  @"SBT";
+            model.cnName = @"YSB体育";//@"BTI体育";
+            model.enName =  @"YSB";//@"SBT_BTI";
+            model.gameCode = BTTYSBKEY;//BTTBTIKEY;
+            model.provider = kYSBProvider;//@"SBT";
             break;
         case 1008:{
             model = [[IVGameModel alloc] init];
@@ -1062,7 +1071,7 @@
             }
         }
         if (model) {
-            if (tag==1006||tag==1007||tag==1010||tag==1003||tag==1011) {//原先1007 BTI 可試玩,改YBS 不可試玩
+            if (tag==1006||tag==1007||tag==1010||tag==1003||tag==1011) {//原先1007 BTI 可試玩,改YSB 不可試玩
                 [self choseGameLineWithTag:tag];
             }else{
                 [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
@@ -1070,7 +1079,7 @@
             
         }
     } else {
-        if (tag == 1006 || tag== 1007 || tag == 1011 || tag == 1008) {//原先1007 BTI 可試玩,改YBS 不可試玩
+        if (tag == 1006 || tag== 1007 || tag == 1011 || tag == 1008) {//原先1007 BTI 可試玩,改YSB 不可試玩
             [MBProgressHUD showError:@"请先登录" toView:nil];
             BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
@@ -1094,7 +1103,7 @@
                         }
                     }
                     if (model) {
-                        if (tag==1006||tag==1010||tag==1003) {
+                        if (tag==1006||tag==1007||tag==1010||tag==1003) {
                             [self choseGameLineWithTag:tag];
                         }else{
                             [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
