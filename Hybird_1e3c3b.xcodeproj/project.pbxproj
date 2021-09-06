@@ -4390,6 +4390,7 @@
 		76F8638F26E0B5FF00320B60 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				76F863EF26E5EBF500320B60 /* VIPHistoryCell */,
 				76F863BB26E0B64400320B60 /* VIPCollectionCell */,
 				76F863B526E0B62E00320B60 /* TableViewCell */,
 				76F863B126E0B61D00320B60 /* Flowlayout */,
@@ -4468,6 +4469,13 @@
 				76F863C826E0B65400320B60 /* VIPRightWashRateCell.xib */,
 			);
 			path = VIPCollectionCell;
+			sourceTree = "<group>";
+		};
+		76F863EF26E5EBF500320B60 /* VIPHistoryCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VIPHistoryCell;
 			sourceTree = "<group>";
 		};
 		8746ABB2D5D61EF30A4942D6 /* Frameworks */ = {
