@@ -7,18 +7,28 @@
 //
 
 #import "BTTCollectionViewController.h"
-#import "JXRegisterManager.h"
-
-typedef enum {
-    BTTDiscountsVCTypeFirst, ///< 首页
-    BTTDiscountsVCTypeDetail ///< 详情页
-}BTTDiscountsVCType;
+#import "BTTHomePageHeaderView.h"
+#import "BTTPromotionModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BTTDiscountsViewController : BTTCollectionViewController<JXRegisterManagerDelegate>
+@interface BTTDiscountsViewController : BTTCollectionViewController
 
-@property (nonatomic, assign) BTTDiscountsVCType discountsVCType;
+@property (nonatomic, strong) BTTHomePageHeaderView *nav;
+
+@property (nonatomic, strong) BTTPromotionModel *model;
+
+@property (nonatomic, strong) UIView *inProgressView;
+
+@property (nonatomic, strong) UIScrollView *yearsScrollView;
+
+@property (nonatomic, strong) NSMutableArray *yearsBtnTitle;
+
+@property (nonatomic, assign) NSInteger btnIndex;
+
+-(void)setYearsBtnTitle;
+
+-(void)changeToHistoryPage:(NSInteger)index;
 
 @end
 

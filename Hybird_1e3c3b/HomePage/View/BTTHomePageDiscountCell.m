@@ -22,6 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *discountIconHeight;
 
+@property (weak, nonatomic) IBOutlet UIView *overView;
 
 @end
 
@@ -40,7 +41,12 @@
 - (IBAction)detailBtnClick:(UIButton *)sender {
 }
 
-- (void)setModel:(BTTPromotionModel *)model {
+-(void)setIsShowOverView:(BOOL)isShowOverView {
+    _isShowOverView = isShowOverView;
+    self.overView.hidden = self.isShowOverView;
+}
+
+- (void)setModel:(BTTPromotionProcessModel *)model {
     _model = model;
     if (_model) {
         [self.discountIcon sd_setImageWithURL:[NSURL URLWithString:model.imgurl] placeholderImage:ImageNamed(@"default_2")];

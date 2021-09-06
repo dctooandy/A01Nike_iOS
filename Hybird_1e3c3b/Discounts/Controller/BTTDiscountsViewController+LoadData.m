@@ -7,7 +7,6 @@
 //
 
 #import "BTTDiscountsViewController+LoadData.h"
-#import "BTTPromotionModel.h"
 #import "BTTMakeCallSuccessView.h"
 
 @implementation BTTDiscountsViewController (LoadData)
@@ -54,32 +53,43 @@
     };
 }
 
-
 - (void)loadMainData {
-    if (self.discountsVCType == BTTDiscountsVCTypeDetail) {
-        [self showLoading];
-    }
+    [self showLoading];
     NSString *name = [IVNetwork savedUserInfo] ? [IVNetwork savedUserInfo].loginName : @"";
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setValue:name forKey:@"loginName"];
     [params setValue:@"promo" forKey:@"promoName"];
-    [IVNetwork requestPostWithUrl:BTTPromotionList paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTPromotionAndHistoryList paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (![result.body isKindOfClass:[NSNull class]]) {
                 [self.sheetDatas removeAllObjects];
-                NSLog(@"%@",response);
                 [self endRefreshing];
-                for (NSDictionary *dict in result.body) {
-                    BTTPromotionModel *model = [BTTPromotionModel yy_modelWithDictionary:dict];
-                    [self.sheetDatas addObject:model];
+                
+                NSMutableArray * arr = [[NSMutableArray alloc] init];
+                self.model = [BTTPromotionModel yy_modelWithDictionary:result.body];
+                for (BTTPromotionProcessModel *item in self.model.process) {
+                    [arr addObject:item];
                 }
-                [self setupElements];
+                
+                NSMutableArray * strArr = [[NSMutableArray alloc] init];
+                for (NSString * key in self.model.history.allKeys) {
+                    [strArr addObject:key];
+                }
+                NSSortDescriptor * sd = [NSSortDescriptor sortDescriptorWithKey:nil ascending:NO];
+                self.yearsBtnTitle = [[NSMutableArray alloc] initWithArray:[strArr sortedArrayUsingDescriptors:[NSArray arrayWithObjects:sd, nil]]];
+                [self setYearsBtnTitle];
+                
+                if (!self.inProgressView.isHidden) {
+                    [self.sheetDatas addObjectsFromArray:arr];
+                    [self setupElements];
+                } else {
+                    [self changeToHistoryPage:self.btnIndex];
+                }
             }
         }
     }];
-   
 }
 
 
