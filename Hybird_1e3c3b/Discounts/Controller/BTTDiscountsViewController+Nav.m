@@ -22,6 +22,7 @@
     self.nav.hidden = true;
     self.inProgressView.hidden = true;
     self.yearsScrollView.hidden = false;
+    self.title = @"历史优惠";
     UIButton * leftBtn = [[UIButton alloc] init];
     leftBtn.frame = CGRectMake(0, 0, 54, 44);
     leftBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;

@@ -39,6 +39,7 @@
     [self loadMainData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllData) name:@"CHANGE_MODE" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:LoginSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:LogoutSuccessNotification object:nil];
 }
 
 -(void)removeAllData {
