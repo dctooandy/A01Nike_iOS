@@ -88,6 +88,7 @@
                 <outlet property="detailLabel" destination="zGR-4u-hQE" id="83E-aR-yDe"/>
                 <outlet property="discountIcon" destination="EJF-LZ-1MN" id="oNk-qs-EQO"/>
                 <outlet property="discountIconHeight" destination="47e-1S-P1D" id="9vm-It-bes"/>
+                <outlet property="overView" destination="y1E-5s-I0P" id="2sp-0B-lMr"/>
                 <outlet property="titleLabel" destination="rhg-Gh-EZD" id="sGY-WX-EZi"/>
             </connections>
             <point key="canvasLocation" x="-15" y="141"/>
