@@ -9,6 +9,12 @@
 #import "BTTPromotionModel.h"
 
 @implementation BTTPromotionModel
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"process":[BTTPromotionProcessModel class]};
+}
+@end
+
+@implementation BTTPromotionProcessModel
 
 - (NSString *)href {
     if (![_href hasPrefix:@"http"] && ([_href containsString:@"htm"]||[_href containsString:@"activity_pages"])) {
@@ -28,7 +34,5 @@
     }
     return _imgurl;
 }
-
-
 
 @end

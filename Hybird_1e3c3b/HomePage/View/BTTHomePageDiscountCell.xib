@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -47,19 +47,40 @@
                             <constraint firstAttribute="width" constant="130" id="K7C-qY-Zx6"/>
                         </constraints>
                     </imageView>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y1E-5s-I0P">
+                        <rect key="frame" x="15" y="20" width="130" height="90"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_discounts_over_logo" translatesAutoresizingMaskIntoConstraints="NO" id="dMx-Nz-Jfq">
+                                <rect key="frame" x="76" y="0.0" width="54" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="E8M-0e-5Lj"/>
+                                    <constraint firstAttribute="width" constant="54" id="LC8-zy-NfB"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="dMx-Nz-Jfq" firstAttribute="top" secondItem="y1E-5s-I0P" secondAttribute="top" id="gln-NL-GZX"/>
+                            <constraint firstAttribute="trailing" secondItem="dMx-Nz-Jfq" secondAttribute="trailing" id="nDW-xb-No1"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <constraints>
                 <constraint firstItem="EJF-LZ-1MN" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="C6H-1J-ukl"/>
+                <constraint firstItem="y1E-5s-I0P" firstAttribute="bottom" secondItem="EJF-LZ-1MN" secondAttribute="bottom" id="DVh-M6-9z2"/>
                 <constraint firstItem="4FV-yd-g4H" firstAttribute="leading" secondItem="EJF-LZ-1MN" secondAttribute="trailing" constant="15" id="GbL-La-oND"/>
                 <constraint firstItem="rhg-Gh-EZD" firstAttribute="leading" secondItem="EJF-LZ-1MN" secondAttribute="trailing" constant="15" id="T7w-mG-bkx"/>
                 <constraint firstAttribute="trailing" secondItem="zGR-4u-hQE" secondAttribute="trailing" constant="15" id="XgQ-sc-38s"/>
+                <constraint firstItem="y1E-5s-I0P" firstAttribute="top" secondItem="EJF-LZ-1MN" secondAttribute="top" id="XnY-8x-uv8"/>
                 <constraint firstItem="4FV-yd-g4H" firstAttribute="top" secondItem="zGR-4u-hQE" secondAttribute="bottom" constant="8" id="eYa-Mh-ppP"/>
+                <constraint firstItem="y1E-5s-I0P" firstAttribute="trailing" secondItem="EJF-LZ-1MN" secondAttribute="trailing" id="iYP-2N-JQD"/>
                 <constraint firstItem="zGR-4u-hQE" firstAttribute="top" secondItem="rhg-Gh-EZD" secondAttribute="bottom" constant="8" id="irP-C0-Q1T"/>
                 <constraint firstItem="EJF-LZ-1MN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="kcN-28-BfV"/>
                 <constraint firstItem="rhg-Gh-EZD" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="17.5" id="oh9-i2-BwC"/>
                 <constraint firstAttribute="trailing" secondItem="rhg-Gh-EZD" secondAttribute="trailing" constant="15" id="qpY-Gw-IxJ"/>
+                <constraint firstItem="y1E-5s-I0P" firstAttribute="leading" secondItem="EJF-LZ-1MN" secondAttribute="leading" id="uf7-96-qcI"/>
                 <constraint firstItem="zGR-4u-hQE" firstAttribute="leading" secondItem="EJF-LZ-1MN" secondAttribute="trailing" constant="15" id="xxW-FC-YyP"/>
             </constraints>
             <connections>
@@ -67,6 +88,7 @@
                 <outlet property="detailLabel" destination="zGR-4u-hQE" id="83E-aR-yDe"/>
                 <outlet property="discountIcon" destination="EJF-LZ-1MN" id="oNk-qs-EQO"/>
                 <outlet property="discountIconHeight" destination="47e-1S-P1D" id="9vm-It-bes"/>
+                <outlet property="overView" destination="y1E-5s-I0P" id="2sp-0B-lMr"/>
                 <outlet property="titleLabel" destination="rhg-Gh-EZD" id="sGY-WX-EZi"/>
             </connections>
             <point key="canvasLocation" x="-15" y="141"/>
@@ -76,5 +98,6 @@
         <image name="default_2" width="260" height="180"/>
         <image name="homepage_btnbg_normal" width="86.5" height="23"/>
         <image name="homepage_btnbg_pressed" width="86.5" height="23"/>
+        <image name="ic_discounts_over_logo" width="54" height="54"/>
     </resources>
 </document>

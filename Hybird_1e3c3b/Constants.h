@@ -531,6 +531,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTHomeAnnouncementAPI                     @"_extra_/api/v1/other/announcement/common"
 // 优惠列表
 #define BTTPromotionList                           @"_extra_/api/v1/wms/promotions?v=1.1"
+// 优惠列表&歷史優惠列表
+#define BTTPromotionAndHistoryList                 @"_extra_/api/v1/wms/promotionsHistory"
 // 请求游戏列表
 #define BTTVideoGamesList                          @"_extra_/api/v1/wms/game?v=1.1"
 // 获取收藏列表

@@ -22,7 +22,7 @@
     self.mineSparaterType = BTTMineSparaterTypeNone;
 }
 
-- (void)setModel:(BTTPromotionModel *)model {
+- (void)setModel:(BTTPromotionProcessModel *)model {
     _model = model;
     [self.promotionIcon sd_setImageWithURL:[NSURL URLWithString:model.imgurl] placeholderImage:ImageNamed(@"default_3")];
 }

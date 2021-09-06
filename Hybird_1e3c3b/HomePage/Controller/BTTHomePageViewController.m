@@ -15,7 +15,6 @@
 #import "BTTHomePageAppsCell.h"
 #import "BTTHomePageSeparateCell.h"
 #import "BTTHomePageDiscountHeaderCell.h"
-#import "BTTHomePageDiscountCell.h"
 #import "BTTActivityModel.h"
 #import "BTTHomePageActivitiesCell.h"
 #import "BTTHomePageAmountsCell.h"
@@ -27,7 +26,6 @@
 #import "BTTDownloadModel.h"
 #import "BTTAGGJViewController.h"
 #import "BTTAGQJViewController.h"
-#import "BTTDiscountsViewController.h"
 #import "BTTVideoGamesListController.h"
 #import "BTTGamesTryAlertView.h"
 #import "BTTLoginOrRegisterViewController.h"
@@ -46,6 +44,7 @@
 #import "BTTUserGameCurrencyModel.h"
 #import "BTTActivityManager.h"
 #import "BTTUserForzenManager.h"
+#import "AppDelegate.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -341,9 +340,7 @@
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageGamesCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageGamesCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageDiscountHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageDiscountHeaderCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageDiscountCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageDiscountCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageAmountsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageAmountsCell"];
-//    BTTElectronicGamesCell BTTOtherGameCell BTTHotPromotionsCell
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -420,7 +417,7 @@
             weakSelf(weakSelf);
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
-                BTTPromotionModel *model = value;
+                BTTPromotionProcessModel *model = value;
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
                 vc.title = model.name;
                 vc.webConfigModel.url = [model.href stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -428,10 +425,8 @@
                 [strongSelf.navigationController pushViewController:vc animated:YES];
             };
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-                strongSelf(strongSelf);
-                BTTDiscountsViewController *vc = [BTTDiscountsViewController new];
-                vc.discountsVCType = BTTDiscountsVCTypeDetail;
-                [strongSelf.navigationController pushViewController:vc animated:YES];
+                AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                [delegate jumpToTabIndex:BTTPromo];
             };
             return cell;
         } else if (indexPath.row == 9) {
@@ -532,7 +527,7 @@
             cell.promotions = self.promotions;
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
-                BTTPromotionModel *model = value;
+                BTTPromotionProcessModel *model = value;
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
                 vc.webConfigModel.url = [model.href stringByReplacingOccurrencesOfString:@" " withString:@""];
                 vc.webConfigModel.newView = YES;
@@ -540,10 +535,8 @@
                 [strongSelf.navigationController pushViewController:vc animated:YES];
             };
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-                strongSelf(strongSelf);
-                BTTDiscountsViewController *vc = [BTTDiscountsViewController new];
-                vc.discountsVCType = BTTDiscountsVCTypeDetail;
-                [strongSelf.navigationController pushViewController:vc animated:YES];
+                AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                [delegate jumpToTabIndex:BTTPromo];
             };
             return cell;
         } else if (indexPath.row == 8) {
@@ -591,7 +584,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    BTTPosterModel * model = nil;
+    BTTPromotionProcessModel * model = nil;
     if (self.adCellShow) {
         if (indexPath.row == 0) {
             model = self.posters.count ? self.posters[0] : nil;

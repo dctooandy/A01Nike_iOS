@@ -593,6 +593,7 @@
 		41D1075626A9143E00721F61 /* BTTChangeMobileNextController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D1074926A9143E00721F61 /* BTTChangeMobileNextController+LoadData.m */; };
 		41D1075726A9143E00721F61 /* BTTBindingMobileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D1074D26A9143E00721F61 /* BTTBindingMobileController.m */; };
 		41D1075826A9143E00721F61 /* BTTBindingMobileController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D1074E26A9143E00721F61 /* BTTBindingMobileController+LoadData.m */; };
+		41E4FC4B26E5AC2A006F55FD /* BTTDiscountsViewController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E4FC4A26E5AC2A006F55FD /* BTTDiscountsViewController+Nav.m */; };
 		41EAF0F2260D93BD0091FE09 /* BTTMeInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41EAF0F1260D93BD0091FE09 /* BTTMeInfoCell.xib */; };
 		41EAF0F6260D94290091FE09 /* hot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 41EAF0F5260D94290091FE09 /* hot.gif */; };
 		41F14AF025A69CA1008E8CAD /* BTTYueFenHongPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */; };
@@ -1803,6 +1804,8 @@
 		41D1074C26A9143E00721F61 /* BTTBindingMobileController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTBindingMobileController+LoadData.h"; sourceTree = "<group>"; };
 		41D1074D26A9143E00721F61 /* BTTBindingMobileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTBindingMobileController.m; sourceTree = "<group>"; };
 		41D1074E26A9143E00721F61 /* BTTBindingMobileController+LoadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTBindingMobileController+LoadData.m"; sourceTree = "<group>"; };
+		41E4FC4926E5AC2A006F55FD /* BTTDiscountsViewController+Nav.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTTDiscountsViewController+Nav.h"; sourceTree = "<group>"; };
+		41E4FC4A26E5AC2A006F55FD /* BTTDiscountsViewController+Nav.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTTDiscountsViewController+Nav.m"; sourceTree = "<group>"; };
 		41EAF0F1260D93BD0091FE09 /* BTTMeInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTMeInfoCell.xib; sourceTree = "<group>"; };
 		41EAF0F5260D94290091FE09 /* hot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = hot.gif; sourceTree = "<group>"; };
 		41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTYueFenHongPopView.xib; sourceTree = "<group>"; };
@@ -2510,6 +2513,8 @@
 				3A37E1242164A22700FB13A1 /* BTTDiscountsViewController.m */,
 				3AB0682F21A2964000072FB7 /* BTTDiscountsViewController+LoadData.h */,
 				3AB0683021A2964000072FB7 /* BTTDiscountsViewController+LoadData.m */,
+				41E4FC4926E5AC2A006F55FD /* BTTDiscountsViewController+Nav.h */,
+				41E4FC4A26E5AC2A006F55FD /* BTTDiscountsViewController+Nav.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5622,6 +5627,7 @@
 				D5DBEB2221ABB774008AF629 /* CNPayBaseVC.m in Sources */,
 				3A5F7A7F21A6C86A00128E8B /* BTTXimaSingleBtnCell.m in Sources */,
 				D5DBEB1821ABB774008AF629 /* CNWKWebVC.m in Sources */,
+				41E4FC4B26E5AC2A006F55FD /* BTTDiscountsViewController+Nav.m in Sources */,
 				3A11ADF12181A1E200B1AFF4 /* BTTWithdrawalController.m in Sources */,
 				3A75A17622114DB100584A35 /* BTTLoginNoRegisterCell.m in Sources */,
 				3AD9CF68216F314700685B43 /* BTTHomePageGamesCell.m in Sources */,

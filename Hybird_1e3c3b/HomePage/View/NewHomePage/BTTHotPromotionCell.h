@@ -10,11 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class BTTPromotionModel;
+@class BTTPromotionProcessModel;
 
 @interface BTTHotPromotionCell : BTTBaseCollectionViewCell
 
-@property (nonatomic, strong) BTTPromotionModel *model;
+@property (nonatomic, strong) BTTPromotionProcessModel *model;
 
 @end
 

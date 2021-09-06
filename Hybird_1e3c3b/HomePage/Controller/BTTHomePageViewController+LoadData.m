@@ -317,7 +317,7 @@ static const char *BTTChanceCountKey = "chanceCount";
             if (![result.body[@"promotions"] isKindOfClass:[NSNull class]]) {
                 [self.promotions removeAllObjects];
                 for (NSMutableDictionary *dict in result.body[@"promotions"]) {
-                    BTTPromotionModel *model = [BTTPromotionModel yy_modelWithDictionary:dict];
+                    BTTPromotionProcessModel *model = [BTTPromotionProcessModel yy_modelWithDictionary:dict];
                     [promotions addObject:model];
                 }
                 self.promotions = promotions.mutableCopy;
