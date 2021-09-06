@@ -1,26 +1,26 @@
 //
-//  BTTForgetPasswordController+Nav.m
+//  BTTForgetAccountController+Nav.m
 //  Hybird_1e3c3b
 //
-//  Created by Jairo on 12/08/2020.
-//  Copyright © 2020 BTT. All rights reserved.
+//  Created by Jairo on 8/17/21.
+//  Copyright © 2021 BTT. All rights reserved.
 //
 
-#import "BTTForgetPasswordController+Nav.h"
+#import "BTTForgetAccountController+Nav.h"
 #import "BTTPopoverView.h"
 #import "BTTActionSheet.h"
 #import "BTTTabbarController+VoiceCall.h"
 #import "BTTMakeCallNoLoginView.h"
 #import "BTTMakeCallLoginView.h"
-#import "BTTForgetPasswordController+LoadData.h"
+#import "BTTForgetAccountController+LoadData.h"
 #import "BTTVoiceCallViewController.h"
 
-@implementation BTTForgetPasswordController (Nav)
+@implementation BTTForgetAccountController (Nav)
 -(void)setUpNav {
     UIButton * rightBtn = [[UIButton alloc] init];
+    rightBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [rightBtn setTitle:@" 咨询客服" forState:UIControlStateNormal];
     [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [rightBtn setImage:[UIImage imageNamed:@"homepage_service"] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(rightClick:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
 }
@@ -28,33 +28,19 @@
 - (void)rightClick:(UIButton *)btn {
     
     BTTPopoverAction *action1 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineService") title:@"在线客服      " handler:^(BTTPopoverAction *action) {
+//        [LiveChat startKeFu:self];
         [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
             if (errCode != CSServiceCode_Request_Suc) {
                 [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
             } else {
-
+                
             }
         }];
     }];
     
-//    BTTPopoverAction *action2 = [BTTPopoverAction actionWithImage:ImageNamed(@"voiceCall") title:@"APP语音通信" handler:^(BTTPopoverAction *action) {
-//        BTTTabbarController *tabbar = (BTTTabbarController *)self.tabBarController;
-//        BOOL isLogin = [IVNetwork savedUserInfo] ? YES : NO;
-//        weakSelf(weakSelf);
-//        [MBProgressHUD showLoadingSingleInView:tabbar.view animated:YES];
-//        [tabbar loadVoiceCallNumWithIsLogin:isLogin makeCall:^(NSString *uid) {
-//            [MBProgressHUD hideHUDForView:tabbar.view animated:YES];
-//            if (uid == nil || uid.length == 0) {
-//                [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
-//            } else {
-//                strongSelf(strongSelf);
-//                [strongSelf registerUID:uid];
-//            }
-//        }];
-//    }];
-    
-    BOOL isVipUser = [PublicMethod isVipUser];
-    NSString *callTitle = isVipUser ? @"VIP经理回拨":@"电话回拨";
+    int currentHour = [PublicMethod hour:[NSDate date]];
+    BOOL isNormalUser = (![IVNetwork savedUserInfo] || [IVNetwork savedUserInfo].starLevel < 5 || ((currentHour >= 0 && currentHour < 12) || (currentHour > 21 && currentHour <= 23)));
+    NSString *callTitle = isNormalUser ? @"电话回拨" : @"VIP经理回拨";
     BTTPopoverAction *action3 = [BTTPopoverAction actionWithImage:ImageNamed(@"callBack") title:callTitle handler:^(BTTPopoverAction *action) {
         if ([IVNetwork savedUserInfo]) {
             [self showCallBackViewLogin];
@@ -77,8 +63,8 @@
     if (!vipPhone.length) {
         vipPhone = @"400-120-3612";
     }
-    NSString *telUrl = isVipUser ? [NSString stringWithFormat:@"tel://%@",vipPhone]:[NSString stringWithFormat:@"tel://%@",normalPhone];
-    NSString *title = isVipUser ? vipPhone:normalPhone;
+    NSString *telUrl = isNormalUser ? [NSString stringWithFormat:@"tel://%@",normalPhone]  : [NSString stringWithFormat:@"tel://%@",vipPhone];
+    NSString *title = isNormalUser ? normalPhone : vipPhone;
     title = [NSString stringWithFormat:@"     客服热线\n%@",title];
     BTTPopoverAction *action5 = [BTTPopoverAction actionWithTitle:title detailTitle:title handler:^(BTTPopoverAction *action) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telUrl]];
@@ -87,9 +73,7 @@
     popView.style = BTTPopoverViewStyleDark;
     popView.arrowStyle = BTTPopoverViewArrowStyleTriangle;
     popView.showShade = YES;
-//    [popView showToPoint:CGPointMake(SCREEN_WIDTH - 27, KIsiPhoneX ? 88 : 64) withActions:@[action1,action2,action3,action5]];
     [popView showToPoint:CGPointMake(SCREEN_WIDTH - 27, KIsiPhoneX ? 88 : 64) withActions:@[action1,action3,action5]];
-    
 }
 
 - (void)showCallBackViewLogin {
@@ -112,19 +96,8 @@
         [strongSelf makeCallWithPhoneNum:[IVNetwork savedUserInfo].mobileNo captcha:captcha captchaId:captchaId];
     };
     customView.btnBlock = ^(UIButton *btn) {
-        strongSelf(strongSelf);
         [popView dismiss];
-        if (btn.tag == 50011) {
-            [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
-        } else if (btn.tag == 50012) {
-            [CSVisitChatmanager startWithSuperVC:strongSelf finish:^(CSServiceCode errCode) {
-                if (errCode != CSServiceCode_Request_Suc) {
-                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
-                } else {
-
-                }
-            }];
-        }
+        [self showCallBackViewNoLogin:BTTAnimationPopStyleNO];
     };
 }
 

@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *validateId;
 
+@property (nonatomic, copy) NSString *accountStr;
+
 @property (nonatomic, strong) BTTVideoFastRegisterView *fastRegisterView;
 
 @property (nonatomic, strong) BTTLoginInfoView *loginView;

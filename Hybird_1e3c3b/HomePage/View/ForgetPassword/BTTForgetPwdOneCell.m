@@ -11,7 +11,7 @@
 
 @interface BTTForgetPwdOneCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *logo;
 
 
 @end
@@ -20,13 +20,17 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    _detailTextField.textColor = [UIColor whiteColor];
+    self.mineSparaterType = BTTMineSparaterTypeNone;
+    _detailTextField.textColor = [UIColor blackColor];
+    self.backgroundColor = [UIColor whiteColor];
+    self.layer.cornerRadius = 4.0;
+    self.showPwdBtn.hidden = true;
 }
 
 - (void)setModel:(BTTMeMainModel *)model {
     _model = model;
-    self.nameLabel.text = model.name;
-    self.detailTextField.placeholder = model.iconName;
+    self.detailTextField.placeholder = model.name;
+    self.logo.image = [UIImage imageNamed:model.iconName];
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:_detailTextField.placeholder attributes:
     @{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"818791"],
                  NSFontAttributeName:_detailTextField.font
@@ -34,6 +38,13 @@
     _detailTextField.attributedPlaceholder = attrString;
 }
 
-
+- (IBAction)showClick:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        self.detailTextField.secureTextEntry = NO;
+    } else {
+        self.detailTextField.secureTextEntry = YES;
+    }
+}
 
 @end

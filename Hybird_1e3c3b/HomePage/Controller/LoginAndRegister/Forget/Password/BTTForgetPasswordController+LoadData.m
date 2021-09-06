@@ -12,7 +12,6 @@
 
 @implementation BTTForgetPasswordController (LoadData)
 
-
 // 图形验证码
 - (void)loadVerifyCode {
     [self showLoading];
@@ -45,34 +44,10 @@
     [params setValue:code forKey:@"captcha"];
     [params setValue:captchaId forKey:@"captchaId"];
     [params setValue:loginName forKey:@"loginName"];
-    [params setValue:[IVRsaEncryptWrapper encryptorString:mobileNo] forKey:@"mobileNo"];
+    [params setValue:self.findType == BTTFindWithPhone ? @0:@1 forKey:@"type"];
+    [params setValue:[IVRsaEncryptWrapper encryptorString:mobileNo] forKey:self.findType == BTTFindWithPhone ? @"mobileNo":@"email"];
+    [params setValue:@4 forKey:@"use"];
     [IVNetwork requestPostWithUrl:BTTValidateCaptcha paramters:params completionBlock:completeBlock];
-}
-
-- (void)loadMainData {
-    NSArray *names = @[@"登录账号",@"手机号",@"验证码"];
-    NSArray *placeholds = @[@"请输入账号",@"请输入手机号",@"请输入验证码"];
-    for (NSString *name in names) {
-        NSInteger index = [names indexOfObject:name];
-        BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
-        model.name = name;
-        model.iconName = placeholds[index];
-        [self.mainData addObject:model];
-    }
-    [self setupElements];
-}
-
-- (void)setMainData:(NSMutableArray *)mainData {
-    objc_setAssociatedObject(self, @selector(mainData), mainData, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NSMutableArray *)mainData {
-    NSMutableArray *mainData = objc_getAssociatedObject(self, _cmd);
-    if (!mainData) {
-        mainData = [NSMutableArray array];
-        [self setMainData:mainData];
-    }
-    return mainData;
 }
 
 - (void)makeCallWithPhoneNum:(NSString *)phone captcha:(NSString *)captcha captchaId:(NSString *)captchaId {
@@ -114,6 +89,41 @@
     customView.btnBlock = ^(UIButton *btn) {
         [popView dismiss];
     };
+}
+
+- (void)loadMainData {
+    NSString * str = @"";
+    NSString * strPlacehold = @"";
+    if (self.findType == BTTFindWithPhone) {
+        str = @"ic_forget_phone_logo";
+        strPlacehold = @"请输入您的手机号";
+    } else if (self.findType == BTTFindWithEmail) {
+        str = @"ic_forget_email_logo";
+        strPlacehold = @"请输入您的邮箱地址";
+    }
+    NSArray *iconNames = @[@"ic_forget_account_logo",str,@"ic_forget_captcha_logo"];
+    NSArray *placeholds = @[@"请输入账号",strPlacehold,@"请输入验证码"];
+    for (NSString *name in iconNames) {
+        NSInteger index = [iconNames indexOfObject:name];
+        BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
+        model.name = placeholds[index];
+        model.iconName = iconNames[index];
+        [self.mainData addObject:model];
+    }
+    [self setupElements];
+}
+
+- (void)setMainData:(NSMutableArray *)mainData {
+    objc_setAssociatedObject(self, @selector(mainData), mainData, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSMutableArray *)mainData {
+    NSMutableArray *mainData = objc_getAssociatedObject(self, _cmd);
+    if (!mainData) {
+        mainData = [NSMutableArray array];
+        [self setMainData:mainData];
+    }
+    return mainData;
 }
 
 @end

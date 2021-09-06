@@ -7,14 +7,17 @@
 //
 
 #import "BTTCollectionViewController.h"
+#import "BTTForgetPwdPhoneCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTForgetPasswordStepTwoController : BTTCollectionViewController
-
 @property (nonatomic, copy) NSString *account;
 @property (nonatomic, copy) NSString *validateId;
 @property (nonatomic, copy) NSString *messageId;
+@property (nonatomic, copy) NSString *BindStr;
+@property (nonatomic, assign) BTTChooseFindWay findType;
+-(BTTForgetPwdPhoneCell *)getForgetPhoneCell;
 @end
 
 NS_ASSUME_NONNULL_END

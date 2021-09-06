@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *uuid;
 
+@property (nonatomic, assign) BTTChooseFindWay findType;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,7 +7,6 @@
 //
 
 #import "BTTForgetPasswordStepTwoController.h"
-#import "BTTBindingMobileTwoCell.h"
 #import "BTTForgetPasswordStepTwoController+LoadData.h"
 #import "BTTBindingMobileBtnCell.h"
 #import "BTTForgetPasswordStepThreeController.h"
@@ -22,19 +21,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"忘记密码";
+    self.view.backgroundColor = [UIColor colorWithHexString:@"212229"];
+    self.title = self.findType == BTTFindWithPhone ? @"使用手机号找回密码":@"使用邮箱找回密码";
     [self setupCollectionView];
     [self loadMainData];
 }
 
-- (void)goToBack {
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
 - (void)setupCollectionView {
     [super setupCollectionView];
+    NSString * titleStr = self.findType == BTTFindWithPhone ? @"绑定手机号":@"绑定邮箱";
+    UILabel * lab = [[UILabel alloc] init];
+    lab.text = [NSString stringWithFormat:@"%@:  %@", titleStr, self.BindStr];
+    lab.textColor = [UIColor whiteColor];
+    [self.view addSubview:lab];
+    [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(20);
+        make.left.equalTo(self.view).offset(20);
+        make.height.offset(44);
+    }];
+    [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(lab.mas_bottom);
+        make.left.bottom.right.equalTo(self.view);
+    }];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"212229"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileTwoCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileTwoCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTForgetPwdPhoneCell" bundle:nil] forCellWithReuseIdentifier:@"BTTForgetPwdPhoneCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTBindingMobileBtnCell" bundle:nil] forCellWithReuseIdentifier:@"BTTBindingMobileBtnCell"];
 }
 
@@ -45,17 +55,10 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         BTTMeMainModel *model = self.mainData[indexPath.row];
-        BTTBindingMobileTwoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileTwoCell" forIndexPath:indexPath];
-        [cell.textField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
+        BTTForgetPwdPhoneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTForgetPwdPhoneCell" forIndexPath:indexPath];
+        [cell.detailTextField addTarget:self action:@selector(textFieldChange:) forControlEvents:UIControlEventEditingChanged];
         cell.model = model;
-        cell.mineSparaterType = BTTMineSparaterTypeNone;
-        weakSelf(weakSelf);
-        __weak typeof(cell) weakCell = cell;
-        cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-            strongSelf(strongSelf);
-            [strongSelf sendVerifyCodeWithAccount:strongSelf.account];
-            [weakCell countDown];
-        };
+        [cell.sendSmsBtn addTarget:self action:@selector(sendSmsBtnAction) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     } else {
         BTTBindingMobileBtnCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileBtnCell" forIndexPath:indexPath];
@@ -63,7 +66,9 @@
         weakSelf(weakSelf);
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             strongSelf(strongSelf);
+            [strongSelf showLoading];
             [strongSelf verifyCode:strongSelf.code account:strongSelf.account completeBlock:^(id  _Nullable response, NSError * _Nullable error) {
+                [strongSelf hideLoading];
                 IVJResponseObject *result = response;
                 if ([result.head.errCode isEqualToString:@"0000"]) {
                     BTTForgetPasswordStepThreeController *vc = [[BTTForgetPasswordStepThreeController alloc] init];
@@ -101,7 +106,7 @@
 }
 
 - (UIEdgeInsets)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout edgeInsetsInCollectionView:(UICollectionView *)collectionView {
-    return UIEdgeInsetsMake(20, 0, 40, 0);
+    return UIEdgeInsetsMake(20, 20, 0, 0);
 }
 
 /**
@@ -116,6 +121,17 @@
  */
 - (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView linesMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
     return 0;
+}
+
+-(BTTForgetPwdPhoneCell *)getForgetPhoneCell {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    BTTForgetPwdPhoneCell *cell = (BTTForgetPwdPhoneCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+    return cell;
+}
+
+-(void)sendSmsBtnAction {
+    [self.view endEditing:YES];
+    [self sendVerifyCodeWithAccount:self.account];
 }
 
 #pragma mark - textfielddelegate
@@ -140,18 +156,18 @@
         [self.elementsHight removeAllObjects];
     }
     NSMutableArray *elementsHight = [NSMutableArray array];
-    for (int i = 0; i < 2; i++) {
-        if (i == 0) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
-        } else if (i == 1) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
-        } 
+    NSInteger count = self.mainData.count + 1;
+    for (int i = 0; i < count; i++) {
+        if (i == count - 1) {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 10, 100)]];
+        } else {
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH - 40, 44)]];
+        }
     }
     self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
 }
-
 
 @end

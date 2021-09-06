@@ -11,8 +11,9 @@
 
 @interface BTTForgetPwdCodeCell ()
 
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *logo;
 
+@property (weak, nonatomic) IBOutlet UIView *captchaBg;
 
 @end
 
@@ -20,7 +21,11 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    _detailTextField.textColor = [UIColor whiteColor];
+    self.mineSparaterType = BTTMineSparaterTypeNone;
+    _detailTextField.textColor = [UIColor blackColor];
+    self.captchaBg.layer.cornerRadius = 4.0;
+    self.codeImage.clipsToBounds = true;
+    self.codeImage.layer.cornerRadius = 4.0;
     UITapGestureRecognizer *refreshCode = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(refreshCode:)];
     [self.codeImage addGestureRecognizer:refreshCode];
 }
@@ -33,8 +38,8 @@
 
 - (void)setModel:(BTTMeMainModel *)model {
     _model = model;
-    self.nameLabel.text = model.name;
-    self.detailTextField.placeholder = model.iconName;
+    self.detailTextField.placeholder = model.name;
+    self.logo.image = [UIImage imageNamed:model.iconName];
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:_detailTextField.placeholder attributes:
     @{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"818791"],
                  NSFontAttributeName:_detailTextField.font

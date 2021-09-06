@@ -9,7 +9,6 @@
 #import "BTTLoginInfoView.h"
 
 @interface BTTLoginInfoView ()
-@property (nonatomic, strong) UITextField *accountTextField;
 @property (nonatomic, strong) UITextField *imgCodeField;
 @property (nonatomic, strong) UIButton *showPwdBtn;
 @property (nonatomic, assign) BOOL isCode;

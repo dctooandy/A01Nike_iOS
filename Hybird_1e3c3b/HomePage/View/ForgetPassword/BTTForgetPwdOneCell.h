@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet UITextField *detailTextField;
 
+@property (weak, nonatomic) IBOutlet UIButton *showPwdBtn;
 
 @end
 
