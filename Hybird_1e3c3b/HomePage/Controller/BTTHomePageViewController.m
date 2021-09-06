@@ -919,7 +919,7 @@
             model.provider =  kShaBaProvider;
             model.platformCurrency = currency;
         }else if (tag==1007){
-            model.cnName = @"YSB";
+            model.cnName = @"YSB体育";
             model.enName =  @"YSB";
             model.gameCode = BTTYSBKEY;
             model.provider =  kYSBProvider;

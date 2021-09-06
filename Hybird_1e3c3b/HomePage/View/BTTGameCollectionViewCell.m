@@ -37,7 +37,7 @@
     if ([IVNetwork savedUserInfo]) {
         self.tryPlayIcon.hidden = YES;
     } else {
-        if ([self.gameName isEqualToString:@"沙巴体育"] || [self.gameName isEqualToString:@"AG彩票"]) {
+        if ([self.gameName isEqualToString:@"沙巴体育"] || [self.gameName isEqualToString:@"YSB体育"] || [self.gameName isEqualToString:@"AG彩票"]) {
             self.tryPlayIcon.hidden = YES;
         } else {
             self.tryPlayIcon.hidden = NO;
