@@ -139,9 +139,9 @@ typedef enum {
 }BTTMenualSelectMode;
 
 typedef enum : NSUInteger {
-    BTTVIPRight = 0,    ///VIP權益
-    BTTVIPHistory = 1,  ///風采歷程
-    BTTVIPActivity = 2,       ///品牌活動
+    BTTVIPRight = 0,    ///VIP权益
+    BTTVIPHistory = 1,  ///风采历程
+    BTTVIPActivity = 2,       ///品牌活动
 } BTTVIPPageType;
 
 typedef enum : NSUInteger {
