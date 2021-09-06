@@ -271,6 +271,7 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTMGKEY                                   @"035"
 //下方是沒有多幣種(CNY USDT)的
 #define BTTBTIKEY                                  @"062"
+#define BTTYBSKEY                                  @"068"
 #define BTTNBKEY                                   @"069"
 #define BTTCSKEY                                   @"087"
 

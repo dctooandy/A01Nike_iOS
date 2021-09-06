@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -40,9 +40,9 @@
                             <constraint firstAttribute="width" constant="168" id="6Pf-ga-jHr"/>
                             <constraint firstAttribute="height" constant="133" id="6ca-dZ-fRk"/>
                         </constraints>
-                        <state key="normal" backgroundImage="BTI_big"/>
+                        <state key="normal" backgroundImage="YBS_Big"/>
                         <connections>
-                            <action selector="btiBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="7c4-bP-2mm"/>
+                            <action selector="ybsBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="GR1-J2-YU2"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1010" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5n-pS-z6m">
@@ -63,8 +63,8 @@
                             <action selector="agBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="dvg-FB-Qs7"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTI体育" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGI-fm-VZ5">
-                        <rect key="frame" x="200" y="152.5" width="50" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YBS体育" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGI-fm-VZ5">
+                        <rect key="frame" x="200" y="152.5" width="55.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -87,7 +87,7 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tryPlay" translatesAutoresizingMaskIntoConstraints="NO" id="fsl-kK-926">
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tryPlay" translatesAutoresizingMaskIntoConstraints="NO" id="fsl-kK-926">
                         <rect key="frame" x="327" y="59.5" width="25" height="17.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17.5" id="CBC-EF-g9T"/>
@@ -132,14 +132,14 @@
                 <outlet property="asBtnHeight" destination="dT1-Ka-UQM" id="ZMR-JX-YNe"/>
                 <outlet property="asBtnWidth" destination="HBc-Rx-PiP" id="MNM-rt-jac"/>
                 <outlet property="asTryIcon" destination="2b6-MA-mMZ" id="kPX-mf-jx9"/>
-                <outlet property="btiBtn" destination="Utd-7Q-sfN" id="Pj0-Qx-95J"/>
-                <outlet property="btiBtnHeight" destination="6ca-dZ-fRk" id="XhA-XW-cn3"/>
-                <outlet property="btiBtnWidth" destination="6Pf-ga-jHr" id="AzM-Xr-xum"/>
-                <outlet property="btiTryIcon" destination="fsl-kK-926" id="bKm-P0-qgh"/>
                 <outlet property="cpBtn" destination="ZdN-1u-wR6" id="PIw-x3-cQM"/>
                 <outlet property="shabaBtn" destination="nxo-c5-HXv" id="t3F-4x-haF"/>
                 <outlet property="shabaBtnHeight" destination="ecv-dy-SUP" id="7lz-rK-G7M"/>
                 <outlet property="shabaBtnWidth" destination="18U-Of-O4d" id="Xo1-SQ-USX"/>
+                <outlet property="ybsBtn" destination="Utd-7Q-sfN" id="Yp8-mw-XQN"/>
+                <outlet property="ybsBtnHeight" destination="6ca-dZ-fRk" id="pcS-PZ-VqW"/>
+                <outlet property="ybsBtnWidth" destination="6Pf-ga-jHr" id="3Aw-Fh-uXd"/>
+                <outlet property="ybsTryIcon" destination="fsl-kK-926" id="JnM-zm-aqE"/>
             </connections>
             <point key="canvasLocation" x="132.60869565217394" y="72.991071428571431"/>
         </collectionViewCell>
@@ -147,7 +147,7 @@
     <resources>
         <image name="AGCP" width="167.5" height="82.5"/>
         <image name="AS" width="167.5" height="82.5"/>
-        <image name="BTI_big" width="168" height="133"/>
+        <image name="YBS_Big" width="168" height="133.5"/>
         <image name="shaba" width="167.5" height="133"/>
         <image name="tryPlay" width="25" height="17.5"/>
     </resources>

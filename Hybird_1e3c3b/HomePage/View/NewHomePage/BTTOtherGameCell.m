@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *shabaBtn;
 
-@property (weak, nonatomic) IBOutlet UIButton *btiBtn;
+@property (weak, nonatomic) IBOutlet UIButton *ybsBtn;
 
 //@property (weak, nonatomic) IBOutlet UIButton *jingcaiBtn;
 
@@ -24,9 +24,9 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *shabaBtnWidth;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btiBtnHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ybsBtnHeight;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btiBtnWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ybsBtnWidth;
 
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *vipBtnHeight;
 
@@ -36,7 +36,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *asBtnWidth;
 
-@property (weak, nonatomic) IBOutlet UIImageView *btiTryIcon;
+@property (weak, nonatomic) IBOutlet UIImageView *ybsTryIcon;
 
 //@property (weak, nonatomic) IBOutlet UIImageView *vipTryIcon;
 
@@ -63,20 +63,20 @@
 }
 
 - (void)loginSuccess:(NSNotification *)notifi {
-    _btiTryIcon.hidden = YES;
+//    _ybsTryIcon.hidden = YES;
 //    _vipTryIcon.hidden = YES;
     _asTryIcon.hidden = YES;
 }
 
 - (void)logoutSuccess:(NSNotification *)notifi {
-    _btiTryIcon.hidden = NO;
+//    _ybsTryIcon.hidden = NO;
 //    _vipTryIcon.hidden = NO;
     _asTryIcon.hidden = NO;
 }
 
 -(void)unlockGameBtnPress {
     self.shabaBtn.userInteractionEnabled = true;
-    self.btiBtn.userInteractionEnabled = true;
+    self.ybsBtn.userInteractionEnabled = true;
 //    self.jingcaiBtn.userInteractionEnabled = true;
     self.asBtn.userInteractionEnabled = true;
     self.cpBtn.userInteractionEnabled = true;
@@ -84,7 +84,7 @@
 
 -(void)lockGameBtnPress {
     self.shabaBtn.userInteractionEnabled = false;
-    self.btiBtn.userInteractionEnabled = false;
+    self.ybsBtn.userInteractionEnabled = false;
 //    self.jingcaiBtn.userInteractionEnabled = false;
     self.asBtn.userInteractionEnabled = false;
     self.cpBtn.userInteractionEnabled = false;
@@ -100,8 +100,8 @@
     self.shabaBtnWidth.constant = width;
     self.shabaBtnHeight.constant = self.shabaBtnWidth.constant / 182.5 * 144;
         
-    self.btiBtnWidth.constant = width;
-    self.btiBtnHeight.constant = self.btiBtnWidth.constant / 182.5 * 144;
+    self.ybsBtnWidth.constant = width;
+    self.ybsBtnHeight.constant = self.ybsBtnWidth.constant / 182.5 * 144;
     
 //    self.vipBtnWidth.constant = (SCREEN_WIDTH - 40) / 335.0 * 74;
 //    self.vipBtnHeight.constant = self.vipBtnWidth.constant / 74.0 * 69;
@@ -110,11 +110,11 @@
     self.asBtnHeight.constant = self.asBtnWidth.constant / 167.5 * 83;
     
     if ([IVNetwork savedUserInfo]) {
-        _btiTryIcon.hidden = YES;
+//        _ybsTryIcon.hidden = YES;
 //        _vipTryIcon.hidden = YES;
         _asTryIcon.hidden = YES;
     } else {
-        _btiTryIcon.hidden = NO;
+//        _ybsTryIcon.hidden = NO;
 //        _vipTryIcon.hidden = NO;
         _asTryIcon.hidden = NO;
     }
@@ -127,7 +127,7 @@
     }
 }
 
-- (IBAction)btiBtnClick:(UIButton *)sender {
+- (IBAction)ybsBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
         [self lockGameBtnPress];
         self.buttonClickBlock(sender);

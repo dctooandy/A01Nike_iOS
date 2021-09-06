@@ -1005,11 +1005,11 @@
             model.provider =  kShaBaProvider;
         }
             break;
-        case 1007://BTI体育
+        case 1007://更改為 YBS体育, 注銷 BTI体育
             model = [[IVGameModel alloc] init];
-            model.cnName = @"BTI体育";
-            model.enName =  @"SBT_BTI";
-            model.gameCode = BTTBTIKEY;
+            model.cnName = @"YBS体育";//@"BTI体育";
+            model.enName =  @"SBT_YBS";//@"SBT_BTI";
+            model.gameCode = BTTYBSKEY;//BTTBTIKEY;
             model.provider =  @"SBT";
             break;
         case 1008:{
@@ -1062,7 +1062,7 @@
             }
         }
         if (model) {
-            if (tag==1006||tag==1010||tag==1003||tag==1011) {
+            if (tag==1006||tag==1007||tag==1010||tag==1003||tag==1011) {//原先1007 BTI 可試玩,改YBS 不可試玩
                 [self choseGameLineWithTag:tag];
             }else{
                 [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
@@ -1070,7 +1070,7 @@
             
         }
     } else {
-        if (tag == 1006 || tag == 1011 || tag == 1008) {
+        if (tag == 1006 || tag== 1007 || tag == 1011 || tag == 1008) {//原先1007 BTI 可試玩,改YBS 不可試玩
             [MBProgressHUD showError:@"请先登录" toView:nil];
             BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
