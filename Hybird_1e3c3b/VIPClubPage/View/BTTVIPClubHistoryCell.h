@@ -7,7 +7,7 @@
 //
 
 #import "BTTBaseCollectionViewCell.h"
-
+#import "VIPHistoryModel.h"
 typedef void (^MoreHistoryBlock)(void);
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) MoreHistoryBlock moreBlock;
 - (IBAction)moreBtnClick;
 - (void)config;
+- (void)configForCellWithhHistoryDatas:(VIPHistoryModel*)datas;
 @end
 
 NS_ASSUME_NONNULL_END
