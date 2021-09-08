@@ -20,6 +20,7 @@
 #import "BTTLoginOrRegisterViewController.h"
 #import "BTTVIPDiscriptionPopView.h"
 #import "BTTVIPActivitiesPopView.h"
+#import "VIPHistoryModel.h"
 
 @interface BTTVIPClubPageViewController ()<  UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic, strong) NSMutableArray *sheetDatas;
@@ -29,6 +30,7 @@
 @property (nonatomic, strong) NSMutableArray<NSValue *> *elementsHight;
 @property (nonatomic, strong) BTTVIPChangeBtnsView *buttonsView;
 @property (nonatomic, assign) BOOL directToHistoryWebview;
+@property (nonatomic, strong) VIPHistoryModel *tempModel;
 
 @end
 @implementation BTTVIPClubPageViewController
@@ -47,6 +49,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"VIPClub";
+    _tempModel = [self createVIPHistoryData];
     if ([IVNetwork savedUserInfo]) {
         self.isLogin = YES;
     } else {
@@ -354,7 +357,8 @@
         case BTTVIPHistory:
         {
             BTTVIPClubHistoryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTVIPClubHistoryCell" forIndexPath:indexPath];
-
+            [cell configForCellWithhHistoryDatas:self.tempModel];
+            
             weakSelf(weakSelf);
             cell.moreBlock = ^{ //打開Webview
                 weakSelf.vipWebViewController.clickEventBlock = ^(id  _Nonnull value){ // 接收gotoBack事件
@@ -407,5 +411,47 @@
         }
             break;
     }
+}
+- (VIPHistoryModel *)createVIPHistoryData
+{
+    VIPHistorySideBarModel *sData1 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2021" withImageName:@"logo" withIsSelected:YES withIsFirstData:YES];
+    VIPHistorySideBarModel *sData2 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2020" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
+    VIPHistorySideBarModel *sData3 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2019" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
+    VIPHistorySideBarModel *sData4 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2018" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
+    VIPHistorySideBarModel *sData5 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2017" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
+    VIPHistorySideBarModel *sData6 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2016" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
+    VIPHistorySideBarModel *sData7 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2015" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
+    VIPHistorySideBarModel *sData8 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2014" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
+    VIPHistorySideBarModel *sData9 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2013" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
+    
+    VIPHistoryImageModel *iData1 = [[VIPHistoryImageModel alloc] initWithYearString:@"2021" WithMonthString:@"09" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和三上有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:YES];
+    VIPHistoryImageModel *iData11 = [[VIPHistoryImageModel alloc] initWithYearString:@"2021" WithMonthString:@"09" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和三上有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:NO];
+    VIPHistoryImageModel *iData12 = [[VIPHistoryImageModel alloc] initWithYearString:@"2021" WithMonthString:@"09" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和三上有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:NO];
+    VIPHistoryImageModel *iData13 = [[VIPHistoryImageModel alloc] initWithYearString:@"2021" WithMonthString:@"09" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和三上有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:NO];
+    VIPHistoryImageModel *iData14 = [[VIPHistoryImageModel alloc] initWithYearString:@"2021" WithMonthString:@"09" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和三上有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:NO];
+    
+    VIPHistoryImageModel *iData2 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"08" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和三下有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:YES];
+    VIPHistoryImageModel *iData21 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"08" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和三下有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:NO];
+    VIPHistoryImageModel *iData22 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"08" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和三下有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:NO];
+    VIPHistoryImageModel *iData23 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"08" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和三下有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:NO];
+    
+    VIPHistoryImageModel *iData3 = [[VIPHistoryImageModel alloc] initWithYearString:@"2019" WithMonthString:@"07" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和三上下都有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:YES];
+    
+    VIPHistoryImageModel *iData4 = [[VIPHistoryImageModel alloc] initWithYearString:@"2018" WithMonthString:@"06" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和不上不下有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:YES];
+    VIPHistoryImageModel *iData41 = [[VIPHistoryImageModel alloc] initWithYearString:@"2018" WithMonthString:@"06" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和不上不下有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:NO];
+    VIPHistoryImageModel *iData42 = [[VIPHistoryImageModel alloc] initWithYearString:@"2018" WithMonthString:@"06" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和不上不下有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:NO];
+    VIPHistoryImageModel *iData43 = [[VIPHistoryImageModel alloc] initWithYearString:@"2018" WithMonthString:@"06" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和不上不下有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:NO];
+    VIPHistoryImageModel *iData44 = [[VIPHistoryImageModel alloc] initWithYearString:@"2018" WithMonthString:@"06" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和不上不下有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:NO];
+    
+    VIPHistoryImageModel *iData5 = [[VIPHistoryImageModel alloc] initWithYearString:@"2017" WithMonthString:@"05" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"三上有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:YES];
+    VIPHistoryImageModel *iData6 = [[VIPHistoryImageModel alloc] initWithYearString:@"2016" WithMonthString:@"04" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"三上没有约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:YES];
+    VIPHistoryImageModel *iData7 = [[VIPHistoryImageModel alloc] initWithYearString:@"2015" WithMonthString:@"03" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"你和三上有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:YES];
+    VIPHistoryImageModel *iData8 = [[VIPHistoryImageModel alloc] initWithYearString:@"2014" WithMonthString:@"02" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"我和你和三上有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:YES];
+    VIPHistoryImageModel *iData9 = [[VIPHistoryImageModel alloc] initWithYearString:@"2013" WithMonthString:@"01" withImageName:@"logo" withUrl:@"history" withTopTitleString:@"他和三上有个约会" withSubTitleString:@"厉害了我的妈" withIsFirstData:YES];
+    
+    NSMutableArray *dArray = [NSMutableArray arrayWithObjects:sData1,sData2,sData3,sData4,sData5,sData6,sData7,sData8,sData9, nil];
+    NSMutableArray *iArray = [NSMutableArray arrayWithObjects:iData1,iData11,iData12,iData13,iData14,iData2,iData21,iData22,iData23,iData3,iData4,iData41,iData42,iData43,iData44,iData5,iData6,iData7,iData8,iData9, nil];
+    VIPHistoryModel * tempModel = [[VIPHistoryModel alloc] initWithSideBarData:dArray withImageModel:iArray];
+    return tempModel;
 }
 @end
