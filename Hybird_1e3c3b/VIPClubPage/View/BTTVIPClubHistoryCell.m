@@ -38,7 +38,6 @@
 {
     [super layoutSubviews];
 //    [self config];
-    
 }
 - (void)config{
     [self setupWebView];
@@ -56,8 +55,7 @@
         _vipWebViewController.webConfigModel.url = @"history";
         
         self.vipWebViewController.clickEventBlock = ^(id  _Nonnull value){ // 接收gotoBack事件
-            //                        strongSelf(strongSelf)
-            //                        [weakSelf.buttonCell vipRightBtnClick:weakSelf.buttonCell.vipRightBtn]; // 返回之後去選擇左邊第一個頁籤
+
         };
         [self.contentView addSubview:self.vipWebViewController.view];
     }
@@ -110,10 +108,10 @@
     }
     self.sideBarElementsHight = [sideBarElementsHight mutableCopy];
     self.imageElementsHight = [imageElementsHight mutableCopy];
-//    dispatch_async(dispatch_get_main_queue(), ^{
-    [self.sideBarCollectionView reloadData];
-    [self.imageCollectionView reloadData];
-//    });
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.sideBarCollectionView reloadData];
+        [self.imageCollectionView reloadData];
+    });
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
@@ -171,7 +169,7 @@
         NSNumber *currentNunmber = self.imageFirstDatas[self.selectedYear];
         [self setupElements];
         
-        [self.imageCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[currentNunmber intValue] inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+        [self.imageCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[currentNunmber intValue] inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
     }else
     {
 
@@ -208,25 +206,6 @@
         currentModel.isSelected = (i == self.selectedYear) ? YES:NO;
     }
     [self setupElements];
-    if (self.selectedYear > sender)// 如果中间cell的 indexpath item 不等于选择的年份cell 才要处理
-    {
-//        self.selectedYear -= 1;
-//        for (int i = 0; i < self.sideBarDatas.count; i ++) {
-//            VIPHistorySideBarModel *currentModel = self.sideBarDatas[i];
-//            currentModel.isSelected = (i == self.selectedYear) ? YES:NO;
-//        }
-//        [self setupElements];
-    }
-//    if (sender != self.selectedYear)
-//    {
-//        self.selectedYear = sender;
-//        for (int i = 0; i < self.sideBarDatas.count; i ++) {
-//            VIPHistorySideBarModel *currentModel = self.sideBarDatas[i];
-//            currentModel.isSelected = (i == sender) ? YES:NO;
-//        }
-//        [self setupElements];
-//    }
-
 }
 
 #pragma mark Propertys
@@ -263,7 +242,6 @@
     {
         
     }
-    
 }
 - (IBAction)moreBtnClick{
     if (self.moreBlock) {
