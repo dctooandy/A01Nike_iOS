@@ -647,6 +647,10 @@
 		76F863E326E0B65500320B60 /* VIPRightHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F863D326E0B65500320B60 /* VIPRightHistoryCell.xib */; };
 		76F863EC26E0B9C600320B60 /* BTTVIPClubPageActivitiesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F863E926E0B9C600320B60 /* BTTVIPClubPageActivitiesCell.xib */; };
 		76F863ED26E0B9C600320B60 /* BTTVIPClubPageActivitiesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F863EB26E0B9C600320B60 /* BTTVIPClubPageActivitiesCell.m */; };
+		76F8642826E87D5900320B60 /* BTTVIPHistoryImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8642326E87D5800320B60 /* BTTVIPHistoryImageCell.m */; };
+		76F8642926E87D5900320B60 /* BTTVIPHistorySideBarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F8642426E87D5800320B60 /* BTTVIPHistorySideBarCell.xib */; };
+		76F8642A26E87D5900320B60 /* BTTVIPHistoryImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F8642526E87D5800320B60 /* BTTVIPHistoryImageCell.xib */; };
+		76F8642B26E87D5900320B60 /* BTTVIPHistorySideBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8642626E87D5800320B60 /* BTTVIPHistorySideBarCell.m */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
@@ -1910,6 +1914,12 @@
 		76F863E926E0B9C600320B60 /* BTTVIPClubPageActivitiesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTVIPClubPageActivitiesCell.xib; sourceTree = "<group>"; };
 		76F863EA26E0B9C600320B60 /* BTTVIPClubPageActivitiesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTVIPClubPageActivitiesCell.h; sourceTree = "<group>"; };
 		76F863EB26E0B9C600320B60 /* BTTVIPClubPageActivitiesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTVIPClubPageActivitiesCell.m; sourceTree = "<group>"; };
+		76F8642226E87D5800320B60 /* BTTVIPHistoryImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTVIPHistoryImageCell.h; sourceTree = "<group>"; };
+		76F8642326E87D5800320B60 /* BTTVIPHistoryImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTVIPHistoryImageCell.m; sourceTree = "<group>"; };
+		76F8642426E87D5800320B60 /* BTTVIPHistorySideBarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTVIPHistorySideBarCell.xib; sourceTree = "<group>"; };
+		76F8642526E87D5800320B60 /* BTTVIPHistoryImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTVIPHistoryImageCell.xib; sourceTree = "<group>"; };
+		76F8642626E87D5800320B60 /* BTTVIPHistorySideBarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTVIPHistorySideBarCell.m; sourceTree = "<group>"; };
+		76F8642726E87D5900320B60 /* BTTVIPHistorySideBarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTVIPHistorySideBarCell.h; sourceTree = "<group>"; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
 		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
 		D317745024D2648C009B1814 /* DSBRedBagPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DSBRedBagPopView.xib; sourceTree = "<group>"; };
@@ -4390,7 +4400,7 @@
 		76F8638F26E0B5FF00320B60 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				76F863EF26E5EBF500320B60 /* VIPHistoryCell */,
+				76F8642126E87D4D00320B60 /* VIPHistoryCell */,
 				76F863BB26E0B64400320B60 /* VIPCollectionCell */,
 				76F863B526E0B62E00320B60 /* TableViewCell */,
 				76F863B126E0B61D00320B60 /* Flowlayout */,
@@ -4471,9 +4481,15 @@
 			path = VIPCollectionCell;
 			sourceTree = "<group>";
 		};
-		76F863EF26E5EBF500320B60 /* VIPHistoryCell */ = {
+		76F8642126E87D4D00320B60 /* VIPHistoryCell */ = {
 			isa = PBXGroup;
 			children = (
+				76F8642226E87D5800320B60 /* BTTVIPHistoryImageCell.h */,
+				76F8642326E87D5800320B60 /* BTTVIPHistoryImageCell.m */,
+				76F8642526E87D5800320B60 /* BTTVIPHistoryImageCell.xib */,
+				76F8642726E87D5900320B60 /* BTTVIPHistorySideBarCell.h */,
+				76F8642626E87D5800320B60 /* BTTVIPHistorySideBarCell.m */,
+				76F8642426E87D5800320B60 /* BTTVIPHistorySideBarCell.xib */,
 			);
 			path = VIPHistoryCell;
 			sourceTree = "<group>";
@@ -5048,6 +5064,7 @@
 				3AE1EAE4217F25750073A32D /* BTTCardInfoCell.xib in Resources */,
 				3A5F7A8021A6C86A00128E8B /* BTTXimaSingleBtnCell.xib in Resources */,
 				3AE1EAE92180034C0073A32D /* BTTCardInfoAddCell.xib in Resources */,
+				76F8642A26E87D5900320B60 /* BTTVIPHistoryImageCell.xib in Resources */,
 				4180B04525D3C23800139E88 /* BTTNewYearPopView.xib in Resources */,
 				3A11ADFF2181B72700B1AFF4 /* BTTWithdrawalCardSelectCell.xib in Resources */,
 				3AAE821C219A738B003EC8B0 /* BTTLoginOrRegisterTypeSelectCell.xib in Resources */,
@@ -5176,6 +5193,7 @@
 				D5C5019021B4FC9700C6DA02 /* CNPayWechatTipView.xib in Resources */,
 				D5DBEB0321ABB774008AF629 /* CNPayDepositStep2VC.xib in Resources */,
 				D5C501D421B7CEDC00C6DA02 /* BRPickerView.bundle in Resources */,
+				76F8642926E87D5900320B60 /* BTTVIPHistorySideBarCell.xib in Resources */,
 				7629DCF5268B245C00CF758C /* BTTUserForzenPopView.xib in Resources */,
 				3AE1EAB6217D986A0073A32D /* BTTMeInfoHiddenCell.xib in Resources */,
 				D599251921AE6719001E885A /* CNPayCardStep2VC.xib in Resources */,
@@ -5389,6 +5407,7 @@
 				3A5B0283234F233500D8828B /* BTTXimaRecordModel.m in Sources */,
 				3AB0686921A4F29B00072FB7 /* BTTPublicBtnCell.m in Sources */,
 				3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */,
+				76F8642826E87D5900320B60 /* BTTVIPHistoryImageCell.m in Sources */,
 				3AAE81FA219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m in Sources */,
 				D5C501D221B7CEDC00C6DA02 /* BRBaseView.m in Sources */,
 				3AA7892321FFF2580047A372 /* SDWebImageDownloader.m in Sources */,
@@ -5744,6 +5763,7 @@
 				3AB0683421A2E34C00072FB7 /* BTTAccountBalanceController+LoadData.m in Sources */,
 				412078AB26268FB000595F8C /* UIView+TXFrame.m in Sources */,
 				3A11AE5D2186B71600B1AFF4 /* BTTXimaController.m in Sources */,
+				76F8642B26E87D5900320B60 /* BTTVIPHistorySideBarCell.m in Sources */,
 				3A80AB0723A381CD004BF8C0 /* BTTShareRedirectModel.m in Sources */,
 				D35BF24123B451340085D6A1 /* USDTWalletCollectionCell.m in Sources */,
 				D31B0EF723B45251003666BA /* BTTUSDTItemCell.m in Sources */,
