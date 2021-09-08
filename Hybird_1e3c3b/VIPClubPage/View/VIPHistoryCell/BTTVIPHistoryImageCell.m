@@ -47,8 +47,20 @@
     _topView.layer.cornerRadius = 5;
     _topView.layer.masksToBounds = YES;
     
+    _bottomView.layer.shadowOffset = CGSizeMake(0, 5);
+    _bottomView.layer.shadowOpacity = 0.7;
+    _bottomView.layer.shadowRadius = 5 ;
+    _bottomView.layer.shadowColor = [UIColor colorWithRed:20.0/255.0 green:20.0/255.0 blue:20.0/255.0 alpha:1].CGColor;
     _bottomView.layer.cornerRadius = 5;
-    _bottomView.layer.masksToBounds = YES;
+//    _bottomView.layer.masksToBounds = YES;
+        
+    _imageView.layer.cornerRadius = 5;
+    if (@available(iOS 11.0, *)) {
+        _imageView.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner;
+    } else {
+        // Fallback on earlier versions
+    }
+    _imageView.layer.masksToBounds = YES;
     
     _detailBtn.layer.cornerRadius = 5;
     _detailBtn.layer.masksToBounds = YES;

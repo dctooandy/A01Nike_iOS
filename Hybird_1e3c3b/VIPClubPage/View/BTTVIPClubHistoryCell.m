@@ -99,8 +99,8 @@
         }
     }
     
-    CGFloat selectImageListBigHeight = 212 ;
-    CGFloat selectImageListsmallHeight = 168 ;
+    CGFloat selectImageListBigHeight = 222 ;
+    CGFloat selectImageListsmallHeight = 173 ;
     for (int i = 0; i < imageTotal; i++)
     {
         CGFloat currentHeight = self.imageDatas[i].isFirstData ? selectImageListBigHeight:selectImageListsmallHeight;
