@@ -169,7 +169,7 @@
 //    [self addOneChildVC:self.voiceCall title:@"APP语音" imageName:@"tab_voiceCall" selectedImageName:@"tab_voiceCall"];
     //
     [self addOneChildVC:self.vipClubVC title:@"VIP俱乐部" imageName:@"ic-vip-d2" selectedImageName:@"ic-vip-a2"];
-    [self addOneChildVC:self.lucky title:@"抽奖" imageName:@"lottery_normal" selectedImageName:@"lottery_pressed"];
+//    [self addOneChildVC:self.lucky title:@"抽奖" imageName:@"lottery_normal" selectedImageName:@"lottery_pressed"];
     if ([IVNetwork savedUserInfo]) {
 //        [self addOneChildVC:self.discountsVC title:@"优惠" imageName:@"preferential_normal" selectedImageName:@"preferential_pressed"];
         [self addOneChildVC:self.discountsVC title:@"优惠" imageName:@"ic-promo-d" selectedImageName:@"ic-promo-a"];

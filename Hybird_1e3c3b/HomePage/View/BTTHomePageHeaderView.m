@@ -73,52 +73,48 @@
             //                make.top.left.bottom.right.equalTo(self);
             //            }];
             
-            if (navType != BTTNavTypeVIPClub)
+           
+            UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
+            [self addSubview:logoImageView];
+            logoImageView.image = ImageNamed(@"Navlogo");
+            [logoImageView setUserInteractionEnabled:YES];
+            if ([app_version floatValue] > 3.2)
             {
-                UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
-                [self addSubview:logoImageView];
-                logoImageView.image = ImageNamed(@"Navlogo");
-                [logoImageView setUserInteractionEnabled:YES];
-                if ([app_version floatValue] > 3.2)
-                {
-                    UITapGestureRecognizer *tapOne = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchEnvirmant)];
-                    tapOne.numberOfTapsRequired = 3;
-                    [logoImageView addGestureRecognizer:tapOne];
-                }
+                UITapGestureRecognizer *tapOne = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchEnvirmant)];
+                tapOne.numberOfTapsRequired = 3;
+                [logoImageView addGestureRecognizer:tapOne];
             }
             
-            
+
             self.titleLabel = [UILabel new];
             [self addSubview:self.titleLabel];
             self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
-//            self.titleLabel.text = @"首页";
+            self.titleLabel.text = @"首页";
             self.titleLabel.textAlignment = NSTextAlignmentCenter;
             self.titleLabel.font = kFontSystem(17);
             self.titleLabel.textColor = [UIColor whiteColor];
             
             UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self addSubview:serviceBtn];
-            serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight - 8) / 2 + 5 + 8, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
-            [serviceBtn setBackgroundImage:ImageNamed(@"ic-24service") forState:UIControlStateNormal];
-            [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+            serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
             serviceBtn.tag = 2001;
+            [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+            
             __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [self addSubview:messageBtn];
-            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight - 8) / 2 + 5 + 8, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
-            [messageBtn setBackgroundImage:ImageNamed(@"ic-mailbox") forState:UIControlStateNormal];
+            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - 30, BTTIconTop + (64 - 30) / 2 + 5, 30, 30);
+            [messageBtn setImage:ImageNamed(@"me_share") forState:UIControlStateNormal];
             messageBtn.redDotOffset = CGPointMake(1, 3);
             messageBtn.tag = 2002;
             [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             
-            [GJRedDot registNodeWithKey:BTTHomePageMessage
-                              parentKey:BTTHomePageItemsKey
+            [GJRedDot registNodeWithKey:BTTMineCenter
+                              parentKey:BTTMineCenterItemsKey
                             defaultShow:NO];
-            [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
-                NSInteger num = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey] integerValue];
-                messageBtn.showRedDot = num;
+            [self setRedDotKey:BTTMineCenterNavMessage refreshBlock:^(BOOL show) {
+                messageBtn.showRedDot = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey] integerValue];
             } handler:self];
-            
-            //            [self setupLoginAndRegisterBtn];
         }
             break;
         case BTTNavTypeOnlyTitle:
