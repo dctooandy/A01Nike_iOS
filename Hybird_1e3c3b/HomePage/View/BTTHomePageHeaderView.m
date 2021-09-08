@@ -65,14 +65,17 @@
                 if (timeStr.length > 0) {
                     NSString * pathStr = @"";
                     //手動輸入要更換的日期
-                    if (![PublicMethod checkProductDate:@"2021-10-02" serverTime:timeStr]) {
-                        pathStr = @"";//王者之巔
-                    } else if (![PublicMethod checkProductDate:@"2021-09-22" serverTime:timeStr]) {
-                        pathStr = @"";//國慶
-                    } else if (![PublicMethod checkProductDate:@"2021-09-16" serverTime:timeStr]) {
-                        pathStr = @"";//中秋
-                    } else if (![PublicMethod checkProductDate:@"2021-08-27" serverTime:timeStr]) {
-                        pathStr = @"918_Anniversary";//週年慶
+                    if (navType == BTTNavTypeHomePage)
+                    {
+                        if (![PublicMethod checkProductDate:@"2021-10-02" serverTime:timeStr]) {
+                            pathStr = @"";//王者之巔
+                        } else if (![PublicMethod checkProductDate:@"2021-09-22" serverTime:timeStr]) {
+                            pathStr = @"";//國慶
+                        } else if (![PublicMethod checkProductDate:@"2021-09-16" serverTime:timeStr]) {
+                            pathStr = @"";//中秋
+                        } else if (![PublicMethod checkProductDate:@"2021-08-27" serverTime:timeStr]) {
+                            pathStr = @"918_Anniversary";//週年慶
+                        }
                     }
                     if (pathStr.length > 0) {
                         NSString *path = [[NSBundle mainBundle] pathForResource:pathStr ofType:@"gif"];
@@ -103,7 +106,13 @@
                 self.titleLabel = [UILabel new];
                 [self addSubview:self.titleLabel];
                 self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
-                self.titleLabel.text = @"首页";
+                if (navType == BTTNavTypeHomePage)
+                {
+                    self.titleLabel.text = @"首页";
+                }else
+                {
+                    self.titleLabel.text = @"VIPClub";
+                }
                 self.titleLabel.textAlignment = NSTextAlignmentCenter;
                 self.titleLabel.font = kFontSystem(17);
                 self.titleLabel.textColor = [UIColor whiteColor];
