@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lfx-a7-IAQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="32"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUF-QE-6Qs">
                                 <rect key="frame" x="10" y="5" width="36" height="22"/>
@@ -38,10 +38,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCx-hY-4jn">
-                        <rect key="frame" x="0.0" y="44" width="375" height="168"/>
+                        <rect key="frame" x="0.0" y="44" width="370" height="168"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021年10月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4T2-d4-oNT">
-                                <rect key="frame" x="299.5" y="144" width="65.5" height="24"/>
+                                <rect key="frame" x="294.5" y="144" width="65.5" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="2ID-Ei-d47"/>
                                 </constraints>
@@ -50,7 +50,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUQ-0x-y3b">
-                                <rect key="frame" x="0.0" y="88" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="88" width="370" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我和三上悠亚有个约会" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOn-cQ-JXg">
                                         <rect key="frame" x="8" y="10" width="133" height="16"/>
@@ -59,13 +59,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="与三上优雅的浪漫邂逅圆满结束" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vu5-gs-fAe">
-                                        <rect key="frame" x="8" y="33.5" width="172" height="14.5"/>
+                                        <rect key="frame" x="8" y="33.5" width="362" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.51702409979999997" green="0.52899247410000005" blue="0.59216469530000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vvl-4F-aKk">
-                                        <rect key="frame" x="295" y="10" width="72" height="24"/>
+                                        <rect key="frame" x="290" y="10" width="72" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="H1f-dH-bGC"/>
                                             <constraint firstAttribute="width" constant="72" id="i0B-5z-x5x"/>
@@ -80,6 +80,7 @@
                                 <constraints>
                                     <constraint firstItem="Vu5-gs-fAe" firstAttribute="leading" secondItem="TUQ-0x-y3b" secondAttribute="leading" constant="8" id="1QJ-Ba-iuG"/>
                                     <constraint firstAttribute="height" constant="56" id="5hN-sf-KPb"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vu5-gs-fAe" secondAttribute="trailing" id="9in-fQ-OcT"/>
                                     <constraint firstItem="pOn-cQ-JXg" firstAttribute="leading" secondItem="TUQ-0x-y3b" secondAttribute="leading" constant="8" id="Azh-dW-K5r"/>
                                     <constraint firstAttribute="trailing" secondItem="Vvl-4F-aKk" secondAttribute="trailing" constant="8" id="BWx-vf-Npe"/>
                                     <constraint firstItem="pOn-cQ-JXg" firstAttribute="top" secondItem="TUQ-0x-y3b" secondAttribute="top" constant="10" id="L5R-hW-caj"/>
@@ -88,7 +89,7 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_ad" translatesAutoresizingMaskIntoConstraints="NO" id="cUk-Ah-Ohn">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
+                                <rect key="frame" x="0.0" y="0.0" width="370" height="88"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="QuY-oj-Job"/>
                                 </constraints>
@@ -112,10 +113,10 @@
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="TCx-hY-4jn" secondAttribute="bottom" id="8Lb-8G-j0J"/>
-                <constraint firstAttribute="trailing" secondItem="lfx-a7-IAQ" secondAttribute="trailing" id="ftR-IV-VJe"/>
+                <constraint firstAttribute="trailing" secondItem="lfx-a7-IAQ" secondAttribute="trailing" constant="5" id="ftR-IV-VJe"/>
                 <constraint firstItem="lfx-a7-IAQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="o3v-1s-9jQ"/>
                 <constraint firstItem="lfx-a7-IAQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="o6I-nK-T9m"/>
-                <constraint firstAttribute="trailing" secondItem="TCx-hY-4jn" secondAttribute="trailing" id="vnQ-Af-Hoo"/>
+                <constraint firstAttribute="trailing" secondItem="TCx-hY-4jn" secondAttribute="trailing" constant="5" id="vnQ-Af-Hoo"/>
                 <constraint firstItem="TCx-hY-4jn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="xqX-H2-C62"/>
             </constraints>
             <connections>

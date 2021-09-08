@@ -37,6 +37,7 @@
                 withTopTitleString:(NSString* )topTitleString
                 withSubTitleString:(NSString* )subTitleString
                    withIsFirstData:(BOOL )isFirstData
+                     withIsDetails:(BOOL )details
 {
     self = [super init];
     _yearString = yearString;
@@ -46,6 +47,13 @@
     _topTitleString = topTitleString;
     _subTitleString = subTitleString;
     _isFirstData = isFirstData;
+    _details = details;
     return  self;
+}
+- (NSString *)imageURLString {
+    if (![_imageName hasPrefix:@"http"]) {
+        return [PublicMethod nowCDNWithUrl:_imageName];
+    }
+    return _imageName;
 }
 @end

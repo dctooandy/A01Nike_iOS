@@ -36,7 +36,10 @@
     _topTitleLabel.text = model.topTitleString;
     _subTitleLabel.text = model.subTitleString;
     [_detailBtn addTarget:self action:@selector(pushToNewWebView) forControlEvents:UIControlEventTouchUpInside];
+    [_detailBtn setHidden:!model.details];
     _urlString = model.url;
+    
+    [_imageView sd_setImageWithURL:[NSURL URLWithString:model.imageURLString] placeholderImage:ImageNamed(@"default_4")];
 }
 - (void)layoutSubviews
 {

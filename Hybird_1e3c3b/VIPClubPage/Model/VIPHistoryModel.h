@@ -30,17 +30,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *yearString;
 @property (nonatomic, strong) NSString *monthString;
 @property (nonatomic, strong) NSString *imageName;
+@property (nonatomic, strong) NSString *imageURLString;
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *topTitleString;
 @property (nonatomic, strong) NSString *subTitleString;
 @property (nonatomic, assign) BOOL isFirstData;
+@property (nonatomic, assign) BOOL details;
 - (instancetype)initWithYearString:(NSString* )yearString
                    WithMonthString:(NSString* )monthString
                      withImageName:(NSString* )imageName
                            withUrl:(NSString* )url
                 withTopTitleString:(NSString* )topTitleString
                 withSubTitleString:(NSString* )subTitleString
-                   withIsFirstData:(BOOL )isFirstData;
+                   withIsFirstData:(BOOL )isFirstData
+                     withIsDetails:(BOOL )details;
 @end
 NS_ASSUME_NONNULL_END
 
