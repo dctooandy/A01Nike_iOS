@@ -7,7 +7,7 @@
 //
 
 #import "BTTVIPClubPageViewController.h"
-
+#import "VIPHistoryModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTVIPClubPageViewController (LoadData)
@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark 加载所有数据
 - (void)loadDataOfVIPClubPage;
 - (void)makeCallWithPhoneNum:(NSString *)phone captcha:(NSString *)captcha captchaId:(NSString *)captchaId ;
+- (VIPHistoryModel *)createVIPHistoryData;
 @end
 
 NS_ASSUME_NONNULL_END
