@@ -17,7 +17,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *detailBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topLabelWidth;
 
+@property (nonatomic, assign) BOOL isFirstLuanchBtn;
 @property (weak, nonatomic) NSString *urlString;
 
 @end
@@ -26,7 +28,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
-    // Initialization code
+    _isFirstLuanchBtn = YES;
+    [self setCorners];
 }
 - (void)imageConfigForCell:(VIPHistoryImageModel *)model
 {
@@ -35,15 +38,21 @@
     _bottomYearLabel.text = [NSString stringWithFormat:@"%@年%@月",model.yearString,model.monthString];
     _topTitleLabel.text = model.topTitleString;
     _subTitleLabel.text = model.subTitleString;
-    [_detailBtn addTarget:self action:@selector(pushToNewWebView) forControlEvents:UIControlEventTouchUpInside];
     [_detailBtn setHidden:!model.details];
+    _topLabelWidth.constant = (model.details == YES ? SCREEN_WIDTH * 0.57 : SCREEN_WIDTH * 0.76);
     _urlString = model.url;
-    
     [_imageView sd_setImageWithURL:[NSURL URLWithString:model.imageURLString] placeholderImage:ImageNamed(@"default_4")];
 }
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    [self.detailBtn setBackgroundImage:[GradiImage layerImage:LeftToRight
+                                                       colors:@[[UIColor colorWithHexString:@"4C90DE"],
+                                                                [UIColor colorWithHexString:@"1473D8"]]
+                                                       bounds:self.detailBtn.bounds] forState:UIControlStateNormal];
+}
+- (void)setCorners
+{
     _topView.layer.cornerRadius = 5;
     _topView.layer.masksToBounds = YES;
     
@@ -53,7 +62,6 @@
     _bottomView.layer.shadowColor = [UIColor colorWithRed:20.0/255.0 green:20.0/255.0 blue:20.0/255.0 alpha:1].CGColor;
     _bottomView.layer.cornerRadius = 5;
 //    _bottomView.layer.masksToBounds = YES;
-        
     _imageView.layer.cornerRadius = 5;
     if (@available(iOS 11.0, *)) {
         _imageView.layer.maskedCorners = kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner;
@@ -61,13 +69,6 @@
         // Fallback on earlier versions
     }
     _imageView.layer.masksToBounds = YES;
-    
-    _detailBtn.layer.cornerRadius = 5;
-    _detailBtn.layer.masksToBounds = YES;
-    [self.detailBtn setBackgroundImage:[GradiImage layerImage:LeftToRight
-                                                       colors:@[[UIColor colorWithHexString:@"4C90DE"],
-                                                                [UIColor colorWithHexString:@"1473D8"]]
-                                                       bounds:self.detailBtn.bounds] forState:UIControlStateNormal];
 }
 - (void)pushToNewWebView
 {
@@ -77,6 +78,16 @@
     webController.webConfigModel.newView = YES;
     [webController loadWebView];
     [topVC.navigationController pushViewController:webController animated:YES];
+}
+- (UIButton *)detailBtn
+{
+    if (_isFirstLuanchBtn) {
+        [_detailBtn addTarget:self action:@selector(pushToNewWebView) forControlEvents:UIControlEventTouchUpInside];
+        _detailBtn.layer.cornerRadius = 5;
+        _detailBtn.layer.masksToBounds = YES;
+        _isFirstLuanchBtn = NO;
+    }
+    return _detailBtn;
 }
 - (UIViewController*)topMostWindowController
 {

@@ -52,23 +52,30 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUQ-0x-y3b">
                                 <rect key="frame" x="0.0" y="88" width="365" height="56"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我和三上悠亚有个约会" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOn-cQ-JXg">
-                                        <rect key="frame" x="8" y="10" width="133" height="16"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我和三上悠亚有个约会" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pOn-cQ-JXg">
+                                        <rect key="frame" x="8" y="10" width="272" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="272" id="erX-DT-72h"/>
+                                            <constraint firstAttribute="height" constant="21" id="yCt-3z-K52"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="与三上优雅的浪漫邂逅圆满结束" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vu5-gs-fAe">
-                                        <rect key="frame" x="8" y="33.5" width="357" height="14.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="与三上优雅的浪漫邂逅圆满结束" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vu5-gs-fAe">
+                                        <rect key="frame" x="8" y="31" width="357" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="pOd-pP-5xv"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.51702409979999997" green="0.52899247410000005" blue="0.59216469530000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vvl-4F-aKk">
-                                        <rect key="frame" x="285" y="10" width="72" height="24"/>
+                                        <rect key="frame" x="289" y="10.5" width="68" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="H1f-dH-bGC"/>
-                                            <constraint firstAttribute="width" constant="72" id="i0B-5z-x5x"/>
+                                            <constraint firstAttribute="height" constant="20" id="H1f-dH-bGC"/>
+                                            <constraint firstAttribute="width" constant="68" id="i0B-5z-x5x"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <state key="normal" title="查看详情">
@@ -84,8 +91,8 @@
                                     <constraint firstItem="pOn-cQ-JXg" firstAttribute="leading" secondItem="TUQ-0x-y3b" secondAttribute="leading" constant="8" id="Azh-dW-K5r"/>
                                     <constraint firstAttribute="trailing" secondItem="Vvl-4F-aKk" secondAttribute="trailing" constant="8" id="BWx-vf-Npe"/>
                                     <constraint firstItem="pOn-cQ-JXg" firstAttribute="top" secondItem="TUQ-0x-y3b" secondAttribute="top" constant="10" id="L5R-hW-caj"/>
-                                    <constraint firstAttribute="bottom" secondItem="Vu5-gs-fAe" secondAttribute="bottom" constant="8" id="eMK-FI-ccV"/>
-                                    <constraint firstItem="Vvl-4F-aKk" firstAttribute="top" secondItem="TUQ-0x-y3b" secondAttribute="top" constant="10" id="maW-cg-gtV"/>
+                                    <constraint firstItem="Vvl-4F-aKk" firstAttribute="centerY" secondItem="pOn-cQ-JXg" secondAttribute="centerY" id="P0a-k6-1iH"/>
+                                    <constraint firstItem="Vu5-gs-fAe" firstAttribute="top" secondItem="pOn-cQ-JXg" secondAttribute="bottom" id="UkM-WU-HOd"/>
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_ad" translatesAutoresizingMaskIntoConstraints="NO" id="cUk-Ah-Ohn">
@@ -125,6 +132,7 @@
                 <outlet property="detailBtn" destination="Vvl-4F-aKk" id="wl2-aE-vJT"/>
                 <outlet property="imageView" destination="cUk-Ah-Ohn" id="LYm-le-KTP"/>
                 <outlet property="subTitleLabel" destination="Vu5-gs-fAe" id="Ovw-4t-nrc"/>
+                <outlet property="topLabelWidth" destination="erX-DT-72h" id="9Ux-BM-xxF"/>
                 <outlet property="topTitleLabel" destination="pOn-cQ-JXg" id="DIU-Cz-5Ij"/>
                 <outlet property="topView" destination="lfx-a7-IAQ" id="M8P-Gx-73Z"/>
                 <outlet property="topYearLabel" destination="iUF-QE-6Qs" id="W3C-n6-qIM"/>
