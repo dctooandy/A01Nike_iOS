@@ -742,6 +742,11 @@
                 model.cnName = @"BTI体育";
                 model.enName =  @"SBT_BTI";
                 model.provider =  @"SBT";
+            } else if ([provider isEqualToString:kYSBProvider] && [gameKind isEqualToString:@"1"]) {  // YSB体育
+                model = [[IVGameModel alloc] init];
+                model.cnName = @"YSB体育";
+                model.enName =  @"YSB";
+                model.provider = kYSBProvider;
             } else if ([provider isEqualToString:@"MG"] ||
                        [provider isEqualToString:@"AGIN"] ||
                        [provider isEqualToString:@"PT"] ||
