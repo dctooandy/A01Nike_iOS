@@ -37,7 +37,7 @@
         if (self.isBothLastStep) {
             titleStr = [NSString stringWithFormat:@"  恭喜玩家 %@ 完成找回账号并重置密码，请点击立即登录开始游戏", self.accountStr];
         } else {
-            titleStr = [NSString stringWithFormat:@"  再次确认是否使用 %@ 登录游戏，其他未使用的账号将被禁用", self.accountStr];
+            titleStr = [NSString stringWithFormat:@"  再次确认是否使用 %@ 登录游戏。", self.accountStr];
         }
     } else {
         titleStr = @"  恭喜您完成密码重置，请点击立即登录开始游戏";
