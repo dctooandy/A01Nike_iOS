@@ -491,6 +491,8 @@
 		413E3267251B354A000804E2 /* BTTWithdrawRecordController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 413E3263251B354A000804E2 /* BTTWithdrawRecordController+LoadData.m */; };
 		413E326C251B3553000804E2 /* BTTXmRecordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 413E3268251B3553000804E2 /* BTTXmRecordController.m */; };
 		413E326D251B3553000804E2 /* BTTXmRecordController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 413E3269251B3553000804E2 /* BTTXmRecordController+LoadData.m */; };
+		4142CFB126E9EBF000650449 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
+		4142CFB326E9F4F100650449 /* login_bg_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4142CFB226E9F4F100650449 /* login_bg_video.mp4 */; };
 		4146810526999F250093B610 /* BTTBindNameAndPhonePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4146810226999F250093B610 /* BTTBindNameAndPhonePopView.xib */; };
 		4146810626999F250093B610 /* BTTBindNameAndPhonePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4146810426999F250093B610 /* BTTBindNameAndPhonePopView.m */; };
 		414AAA222601F76F00518D32 /* BTTDcboxPayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AAA212601F76F00518D32 /* BTTDcboxPayController.xib */; };
@@ -507,7 +509,6 @@
 		415CA1EB24E53ADF005E0E9F /* USDTRechargeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1E724E53ADF005E0E9F /* USDTRechargeController.m */; };
 		415CA1EE24E53AF6005E0E9F /* OCTRechargeUSDTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1EC24E53AF6005E0E9F /* OCTRechargeUSDTView.m */; };
 		415CA1F024E53B0B005E0E9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 415CA1EF24E53B0B005E0E9F /* Assets.xcassets */; };
-		4161031F2681E18200328EEF /* login_bg_video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 4161031E2681E18200328EEF /* login_bg_video.mp4 */; };
 		416D787926C3D3B400CB9E6D /* BTTCantBindCardPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 416D787626C3D3B400CB9E6D /* BTTCantBindCardPopView.m */; };
 		416D787A26C3D3B400CB9E6D /* BTTCantBindCardPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 416D787726C3D3B400CB9E6D /* BTTCantBindCardPopView.xib */; };
 		41755C52262E74D600B6884D /* LiveChat.m in Sources */ = {isa = PBXBuildFile; fileRef = 41755C50262E74D600B6884D /* LiveChat.m */; };
@@ -1635,6 +1636,7 @@
 		413E3269251B3553000804E2 /* BTTXmRecordController+LoadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTXmRecordController+LoadData.m"; sourceTree = "<group>"; };
 		413E326A251B3553000804E2 /* BTTXmRecordController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTXmRecordController+LoadData.h"; sourceTree = "<group>"; };
 		413E326B251B3553000804E2 /* BTTXmRecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTXmRecordController.h; sourceTree = "<group>"; };
+		4142CFB226E9F4F100650449 /* login_bg_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = login_bg_video.mp4; sourceTree = "<group>"; };
 		4146810226999F250093B610 /* BTTBindNameAndPhonePopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTBindNameAndPhonePopView.xib; sourceTree = "<group>"; };
 		4146810326999F250093B610 /* BTTBindNameAndPhonePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTBindNameAndPhonePopView.h; sourceTree = "<group>"; };
 		4146810426999F250093B610 /* BTTBindNameAndPhonePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTBindNameAndPhonePopView.m; sourceTree = "<group>"; };
@@ -1657,7 +1659,6 @@
 		415CA1EC24E53AF6005E0E9F /* OCTRechargeUSDTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCTRechargeUSDTView.m; sourceTree = "<group>"; };
 		415CA1ED24E53AF6005E0E9F /* OCTRechargeUSDTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCTRechargeUSDTView.h; sourceTree = "<group>"; };
 		415CA1EF24E53B0B005E0E9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4161031E2681E18200328EEF /* login_bg_video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = login_bg_video.mp4; sourceTree = "<group>"; };
 		416D787626C3D3B400CB9E6D /* BTTCantBindCardPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTCantBindCardPopView.m; sourceTree = "<group>"; };
 		416D787726C3D3B400CB9E6D /* BTTCantBindCardPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTCantBindCardPopView.xib; sourceTree = "<group>"; };
 		416D787826C3D3B400CB9E6D /* BTTCantBindCardPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTCantBindCardPopView.h; sourceTree = "<group>"; };
@@ -2127,6 +2128,7 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
+				4142CFB126E9EBF000650449 /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -2732,7 +2734,7 @@
 			isa = PBXGroup;
 			children = (
 				41588C9626D889BB001060E7 /* 918_Anniversary.gif */,
-				4161031E2681E18200328EEF /* login_bg_video.mp4 */,
+				4142CFB226E9F4F100650449 /* login_bg_video.mp4 */,
 				41EAF0F5260D94290091FE09 /* hot.gif */,
 				D3B47D5823B70A5400D37C7F /* app.zip */,
 				3A8F5134215F74CF0069D1B3 /* Main.storyboard */,
@@ -4866,6 +4868,7 @@
 				418E72DA2577786700D9BF95 /* BTTChooseCurrencyCell.xib in Resources */,
 				4135A703263941D000D3BF17 /* BTTLiCaiOutDetailPopView.xib in Resources */,
 				3A49DF9C2179D90D00FEFBDA /* BTTBindingMobileOneCell.xib in Resources */,
+				4142CFB326E9F4F100650449 /* login_bg_video.mp4 in Resources */,
 				4184DE16251B331000D433D4 /* BTTModifyBankRecordHeaderCell.xib in Resources */,
 				4135A6F9263941D000D3BF17 /* BTTLiCaiTransRecordTopBtnView.xib in Resources */,
 				3A8F518C215F77AC0069D1B3 /* intro_3.jpg in Resources */,
@@ -5019,7 +5022,6 @@
 				3AB0682A21A261D500072FB7 /* BTTChangeMobileSuccessBtnCell.xib in Resources */,
 				3AB0686A21A4F29B00072FB7 /* BTTPublicBtnCell.xib in Resources */,
 				D331B20C23D539B10080A27D /* BTTConsetiveWinsPopView.xib in Resources */,
-				4161031F2681E18200328EEF /* login_bg_video.mp4 in Resources */,
 				3A11AE632186CDA100B1AFF4 /* BTTXimaHeaderCell.xib in Resources */,
 				3A75A17722114DB100584A35 /* BTTLoginNoRegisterCell.xib in Resources */,
 				3A14CC65237A8D65009711CF /* BTTElectronicGamesCell.xib in Resources */,
@@ -5865,7 +5867,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.63;
+				MARKETING_VERSION = 3.2.324;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5906,7 +5908,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.63;
+				MARKETING_VERSION = 3.2.324;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

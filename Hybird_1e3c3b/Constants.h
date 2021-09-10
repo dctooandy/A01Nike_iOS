@@ -309,6 +309,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTUserLoginAPI                            @"customer/login"
 // 模糊登录
 #define BTTUserLoginEXAPI                          @"customer/loginEx"
+// 手機登入
+//#define BTTUserLoginEXAPI                          @"customer/loginByMobileEx"
 // 異地登入
 #define BTTUserLoginWith2FA                        @"customer/loginWith2FA"
 // 验证登录名是否存在

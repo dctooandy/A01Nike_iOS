@@ -155,6 +155,16 @@ static const char *exModelKey = "exModelKey";
     [IVHttpManager shareManager].userToken = @"";
     
     [self showLoading];
+    //    if (loginType==0) {
+    //        [parameters setValue:[IVRsaEncryptWrapper encryptorString:model.password] forKey:BTTPassword];
+    //        [parameters setValue:model.timestamp forKey:BTTTimestamp];
+    //        [parameters setValue:model.login_name forKey:BTTLoginName];
+    //    }else{
+    //        [parameters setValue:model.password forKey:@"verifyStr"];
+    //        [parameters setValue:self.messageId forKey:@"messageId"];
+    //        [parameters setValue:@(loginType) forKey:@"loginType"];
+    //        [parameters setValue:[IVRsaEncryptWrapper encryptorString:model.login_name] forKey:@"mobileNo"];
+    //    }
     [IVNetwork requestPostWithUrl:loginUrl paramters:parameters completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         
         [[NSUserDefaults standardUserDefaults] setObject:model.login_name forKey:BTTCacheAccountName];
