@@ -39,7 +39,7 @@
     _topTitleLabel.text = model.topTitleString;
     _subTitleLabel.text = model.subTitleString;
     [_detailBtn setHidden:!model.details];
-    _topLabelWidth.constant = (model.details == YES ? SCREEN_WIDTH * 0.57 : SCREEN_WIDTH * 0.76);
+    _topLabelWidth.constant = (model.details == YES ? SCREEN_WIDTH * 0.55 : SCREEN_WIDTH * 0.76);
     _urlString = model.url;
     [_imageView sd_setImageWithURL:[NSURL URLWithString:model.imageURLString] placeholderImage:ImageNamed(@"default_4")];
 }
