@@ -36,9 +36,10 @@
                                 </connections>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="N77-04-iV6">
-                                <rect key="frame" x="66" y="48" width="309" height="552"/>
+                                <rect key="frame" x="66" y="48" width="299" height="552"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="12" minimumInteritemSpacing="10" id="dca-dW-Zbj">
+                                <inset key="scrollIndicatorInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dca-dW-Zbj">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -56,7 +57,7 @@
                             <constraint firstItem="N77-04-iV6" firstAttribute="leading" secondItem="4HC-zJ-zAI" secondAttribute="trailing" id="Ofb-h3-TgB"/>
                             <constraint firstItem="4HC-zJ-zAI" firstAttribute="leading" secondItem="zUI-7N-lbF" secondAttribute="leading" id="SsL-fw-0Vx"/>
                             <constraint firstAttribute="bottom" secondItem="4HC-zJ-zAI" secondAttribute="bottom" id="hVj-zw-UOK"/>
-                            <constraint firstAttribute="trailing" secondItem="N77-04-iV6" secondAttribute="trailing" id="iBa-Vb-1Ya"/>
+                            <constraint firstAttribute="trailing" secondItem="N77-04-iV6" secondAttribute="trailing" constant="10" id="iBa-Vb-1Ya"/>
                             <constraint firstItem="4HC-zJ-zAI" firstAttribute="top" secondItem="zUI-7N-lbF" secondAttribute="top" constant="48" id="mDH-5U-H0h"/>
                             <constraint firstItem="N77-04-iV6" firstAttribute="top" secondItem="zUI-7N-lbF" secondAttribute="top" constant="48" id="npl-Us-prT"/>
                         </constraints>

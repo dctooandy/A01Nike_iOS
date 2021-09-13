@@ -86,7 +86,7 @@
     NSMutableArray *sideBarElementsHight = [NSMutableArray array];
     NSMutableArray *imageElementsHight = [NSMutableArray array];
     CGFloat sideBarCollectionViewWidth = SCREEN_WIDTH * 0.175;
-    CGFloat imageCollectionViewWidth = SCREEN_WIDTH * (1 - 0.175);
+    CGFloat imageCollectionViewWidth = SCREEN_WIDTH * (1 - 0.175) - 10;
    
     for (int i = 0; i < sideBarTotal; i++)
     {
