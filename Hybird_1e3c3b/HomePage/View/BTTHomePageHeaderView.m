@@ -57,7 +57,7 @@
 //                moonImage.frame = CGRectMake(80, 0, 50, 50);
 //            }
 //            [self addSubview:moonImage];
-            
+            __block BOOL isMiddleAutumn = NO;
             [self serverTime:^(NSString * _Nonnull timeStr) {
                 if (timeStr.length > 0) {
                     NSString * pathStr = @"";
@@ -67,7 +67,8 @@
                     } else if (![PublicMethod checkProductDate:@"2021-09-22" serverTime:timeStr]) {
                         pathStr = @"";//國慶
                     } else if (![PublicMethod checkProductDate:@"2021-09-16" serverTime:timeStr]) {
-                        pathStr = @"";//中秋
+                        pathStr = @"APPMidAutumnFestival";//中秋
+                        isMiddleAutumn = YES;
                     } else if (![PublicMethod checkProductDate:@"2021-08-27" serverTime:timeStr]) {
                         pathStr = @"918_Anniversary";//週年慶
                     }
@@ -85,7 +86,7 @@
                     }
                 }
                 UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
-                [self addSubview:logoImageView];
+                
                 logoImageView.image = ImageNamed(@"Navlogo");
                 
                 self.titleLabel = [UILabel new];
@@ -95,7 +96,14 @@
                 self.titleLabel.textAlignment = NSTextAlignmentCenter;
                 self.titleLabel.font = kFontSystem(17);
                 self.titleLabel.textColor = [UIColor whiteColor];
-                
+                if (isMiddleAutumn == NO)
+                {
+                    [self addSubview:logoImageView];
+                    [self.titleLabel setHidden:NO];
+                }else
+                {
+                    [self.titleLabel setHidden:YES];
+                }
                 UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 [self addSubview:serviceBtn];
                 serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);

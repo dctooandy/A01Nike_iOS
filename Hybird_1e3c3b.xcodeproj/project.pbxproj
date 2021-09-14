@@ -623,6 +623,8 @@
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
 		76C9F42C2668A3070002591D /* BTTDragonBoatChancePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F4292668A3060002591D /* BTTDragonBoatChancePopView.xib */; };
 		76C9F42D2668A3070002591D /* BTTDragonBoatChancePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F42A2668A3060002591D /* BTTDragonBoatChancePopView.m */; };
+		76F8643A26F05C5A00320B60 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
+		76F8643E26F07F1E00320B60 /* APPMidAutumnFestival.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76F8643D26F07F1E00320B60 /* APPMidAutumnFestival.gif */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
@@ -1854,6 +1856,7 @@
 		76C9F42A2668A3060002591D /* BTTDragonBoatChancePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatChancePopView.m; sourceTree = "<group>"; };
 		76C9F42B2668A3060002591D /* BTTDragonBoatChancePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatChancePopView.h; sourceTree = "<group>"; };
 		76CC62BD265677E00042AEDF /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = Hybird_1e3c3b/Public/Tools/ThirdParty/libboringssl_simulator.a; sourceTree = "<group>"; };
+		76F8643D26F07F1E00320B60 /* APPMidAutumnFestival.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = APPMidAutumnFestival.gif; sourceTree = "<group>"; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
 		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
 		D317745024D2648C009B1814 /* DSBRedBagPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DSBRedBagPopView.xib; sourceTree = "<group>"; };
@@ -2127,6 +2130,7 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
+				76F8643A26F05C5A00320B60 /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -2732,6 +2736,7 @@
 			isa = PBXGroup;
 			children = (
 				41588C9626D889BB001060E7 /* 918_Anniversary.gif */,
+				76F8643D26F07F1E00320B60 /* APPMidAutumnFestival.gif */,
 				4142CFB226E9F4F100650449 /* login_bg_video.mp4 */,
 				41EAF0F5260D94290091FE09 /* hot.gif */,
 				D3B47D5823B70A5400D37C7F /* app.zip */,
@@ -4926,6 +4931,7 @@
 				3AAE8219219A738B003EC8B0 /* BTTRegisterQuickManualCell.xib in Resources */,
 				41B3127D269D1FC0002AF76D /* BTTPaymentWarningPopView.xib in Resources */,
 				3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */,
+				76F8643E26F07F1E00320B60 /* APPMidAutumnFestival.gif in Resources */,
 				3A75A182221164BC00584A35 /* BTTLoginAccountSelectCell.xib in Resources */,
 				D339CE9924C03CAC009ACD1C /* OTCInsideController.xib in Resources */,
 				D39D7C0823CF19C500898546 /* BTTUsdtTodayNoticeView.xib in Resources */,
