@@ -66,7 +66,7 @@
                         pathStr = @"";//王者之巔
                     } else if (![PublicMethod checkProductDate:@"2021-09-22" serverTime:timeStr]) {
                         pathStr = @"";//國慶
-                    } else if (![PublicMethod checkProductDate:@"2021-09-16" serverTime:timeStr]) {
+                    } else if (![PublicMethod checkProductDate:@"2021-09-15" serverTime:timeStr]) {
                         pathStr = @"APPMidAutumnFestival";//中秋
                         isMiddleAutumn = YES;
                     } else if (![PublicMethod checkProductDate:@"2021-08-27" serverTime:timeStr]) {
