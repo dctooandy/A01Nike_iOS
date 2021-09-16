@@ -34,7 +34,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self setupBannerView];
-    
+    [self bringSubviewToFront:self.currentLabel];
 }
 -(void)layoutSubviews
 {
