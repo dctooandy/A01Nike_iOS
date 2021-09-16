@@ -18,7 +18,6 @@
 #import "BTTLoginOrRegisterViewController+UI.h"
 #import "BTTLoginCodeCell.h"
 #import "BTTLoginOrRegisterViewController+API.h"
-#import "BTTForgetPasswordController.h"
 #import "BTTLoginNoRegisterCell.h"
 #import "BTTRegisterNinameNormalCell.h"
 #import <MediaPlayer/MediaPlayer.h>
@@ -26,6 +25,7 @@
 #import "BTTLoginInfoView.h"
 #import "BTTVideoNormalRegisterView.h"
 #import "AppInitializeConfig.h"
+#import "BTTForgetController.h"
 
 @interface BTTLoginOrRegisterViewController ()<UITextFieldDelegate>
 
@@ -216,6 +216,7 @@
     
     weakSelf(weakSelf);
     BTTLoginInfoView *loginInfoView = [[BTTLoginInfoView alloc]initWithFrame:CGRectMake(0, 234, SCREEN_WIDTH, 345)];
+    loginInfoView.accountTextField.text = self.accountStr;
     __weak typeof(loginInfoView) weaklginView = loginInfoView;
     loginInfoView.hidden = YES;
     loginInfoView.sendSmdCode = ^(NSString * _Nonnull phone) {
@@ -236,7 +237,7 @@
     };
     loginInfoView.tapForgetAccountAndPwd = ^{
         strongSelf(strongSelf);
-        BTTForgetPasswordController *vc = [[BTTForgetPasswordController alloc] init];
+        BTTForgetController *vc = [[BTTForgetController alloc] init];
         [strongSelf.navigationController pushViewController:vc animated:YES];
     };
     

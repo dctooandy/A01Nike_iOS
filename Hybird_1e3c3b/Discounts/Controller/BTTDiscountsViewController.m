@@ -8,25 +8,17 @@
 
 #import "BTTDiscountsViewController.h"
 #import "BTTHomePageDiscountCell.h"
-#import "BTTHomePageHeaderView.h"
 #import "BTTDiscountsViewController+LoadData.h"
+#import "BTTDiscountsViewController+Nav.h"
 #import "BTTPromotionModel.h"
 #import "BTTPromotionDetailController.h"
 #import "BTTLoginOrRegisterViewController.h"
-#import "BTTPopoverView.h"
-#import "BTTTabbarController+VoiceCall.h"
-#import "BTTVoiceCallViewController.h"
-#import "BTTLoginOrRegisterViewController.h"
-#import "BTTMakeCallNoLoginView.h"
-#import "BTTMakeCallLoginView.h"
-#import "BTTMakeCallSuccessView.h"
 #import "BTTVideoGamesListController.h"
 #import "BTTAGQJViewController.h"
 #import "BTTAGGJViewController.h"
-#import "BTTActionSheet.h"
 #import "BTTGamesTryAlertView.h"
 
-@interface BTTDiscountsViewController ()<BTTElementsFlowLayoutDelegate>
+@interface BTTDiscountsViewController ()<BTTElementsFlowLayoutDelegate, UIScrollViewDelegate>
 
 @end
 
@@ -35,19 +27,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"优惠";
+    self.btnIndex = 0;
     [self setupCollectionView];
-    if (self.discountsVCType == BTTDiscountsVCTypeFirst) {
-        [self setupNav];
-        weakSelf(weakSelf);
-        [self pulldownRefreshWithRefreshBlock:^{
-            NSLog(@"下拉刷新");
-            strongSelf(strongSelf);
-            [strongSelf loadMainData];
-        }];
-    }
+    [self setupNav];
+    weakSelf(weakSelf);
+    [self pulldownRefreshWithRefreshBlock:^{
+        NSLog(@"下拉刷新");
+        strongSelf(strongSelf);
+        [strongSelf loadMainData];
+    }];
     [self loadMainData];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllData) name:@"CHANGE_MODE" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:LoginSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:LogoutSuccessNotification object:nil];
 }
 
 -(void)removeAllData {
@@ -56,201 +48,139 @@
 }
 
 -(void)reloadData {
+    self.btnIndex = 0;
+    [self changeToHistoryPage:self.btnIndex];
     [self loadMainData];
-}
-
-- (void)setupNav {
-    [self.navigationController setNavigationBarHidden:YES];
-    BTTHomePageHeaderView *nav = [[BTTHomePageHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KIsiPhoneX ? 88 : 64) withNavType:BTTNavTypeDiscount];
-    nav.titleLabel.text = @"优惠";
-    [self.view addSubview:nav];
-    weakSelf(weakSelf);
-    nav.btnClickBlock = ^(UIButton *button) {
-        strongSelf(strongSelf);
-        switch (button.tag) {
-            case 2001:
-            {
-                [strongSelf rightClick:button];
-            }
-                break;
-                
-            case 2002:
-            {
-                if (![IVNetwork savedUserInfo]) {
-                    [MBProgressHUD showError:@"请先登录" toView:nil];
-                    BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
-                    [strongSelf.navigationController pushViewController:vc animated:YES];
-                    return;
-                }
-                //站內信
-                BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-                vc.webConfigModel.newView = YES;
-                vc.webConfigModel.url = @"mailApp?type=mail/inbox";
-                vc.webConfigModel.theme = @"outside";
-                vc.title = @"站內信";
-                [strongSelf.navigationController pushViewController:vc animated:YES];
-            }
-                break;
-                
-            default:
-                break;
-        }
-    };
-}
-
-- (void)rightClick:(UIButton *)btn {
-    
-    BTTPopoverAction *action1 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineService") title:@"在线客服      " handler:^(BTTPopoverAction *action) {
-        [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
-            if (errCode != CSServiceCode_Request_Suc) {
-                [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
-            } else {
-
-            }
-        }];
-    }];
-    
-//    BTTPopoverAction *action2 = [BTTPopoverAction actionWithImage:ImageNamed(@"voiceCall") title:@"APP语音通信" handler:^(BTTPopoverAction *action) {
-//        BTTTabbarController *tabbar = (BTTTabbarController *)self.tabBarController;
-//        BOOL isLogin = [IVNetwork savedUserInfo] ? YES : NO;
-//        weakSelf(weakSelf);
-//        [MBProgressHUD showLoadingSingleInView:tabbar.view animated:YES];
-//        [tabbar loadVoiceCallNumWithIsLogin:isLogin makeCall:^(NSString *uid) {
-//            [MBProgressHUD hideHUDForView:tabbar.view animated:YES];
-//            if (uid == nil || uid.length == 0) {
-//                [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
-//            } else {
-//                strongSelf(strongSelf);
-//                [strongSelf registerUID:uid];
-//            }
-//        }];
-//    }];
-    
-    BOOL isVipUser = [PublicMethod isVipUser];
-    NSString *callTitle = isVipUser ? @"VIP经理回拨":@"电话回拨";
-    BTTPopoverAction *action3 = [BTTPopoverAction actionWithImage:ImageNamed(@"callBack") title:callTitle handler:^(BTTPopoverAction *action) {
-        if ([IVNetwork savedUserInfo]) {
-            [self showCallBackViewLogin];
-        } else {
-            [self showCallBackViewNoLogin:BTTAnimationPopStyleScale];
-        }
-    }];
-    
-//    BTTPopoverAction *action4 = [BTTPopoverAction actionWithImage:ImageNamed(@"onlineVoice") title:@"语音聊天" handler:^(BTTPopoverAction *action) {
-//        [[CLive800Manager sharedInstance] startLive800Chat:self];
-//    }];
-    
-    NSString *phoneValue = [IVCacheWrapper objectForKey:@"APP_400_HOTLINE"];
-    NSString *normalPhone = nil;
-    NSString *vipPhone = nil;
-    if (phoneValue.length) {
-        NSArray *phonesArr = [phoneValue componentsSeparatedByString:@";"];
-        normalPhone = phonesArr[0];
-        vipPhone = phonesArr[1];
-    }
-    if (!normalPhone.length) {
-        normalPhone = @"400-120-3611";
-    }
-    if (!vipPhone.length) {
-        vipPhone = @"400-120-3612";
-    }
-    NSString *telUrl = isVipUser ? [NSString stringWithFormat:@"tel://%@",vipPhone]:[NSString stringWithFormat:@"tel://%@",normalPhone];
-        NSString *title = isVipUser ? vipPhone:normalPhone;
-    title = [NSString stringWithFormat:@"     客服热线\n%@",title];
-    BTTPopoverAction *action5 = [BTTPopoverAction actionWithTitle:title detailTitle:title handler:^(BTTPopoverAction *action) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:telUrl]];
-    }];
-    BTTPopoverView *popView = [BTTPopoverView PopoverView];
-    popView.style = BTTPopoverViewStyleDark;
-    popView.arrowStyle = BTTPopoverViewArrowStyleTriangle;
-    popView.showShade = YES;
-//    [popView showToPoint:CGPointMake(SCREEN_WIDTH - 27, KIsiPhoneX ? 88 : 64) withActions:@[action1,action2,action3,action5]];
-    [popView showToPoint:CGPointMake(SCREEN_WIDTH - 27, KIsiPhoneX ? 88 : 64) withActions:@[action1,action3,action5]];
-    
-}
-
-- (void)showCallBackViewNoLogin:(BTTAnimationPopStyle)animationPopStyle {
-    BTTMakeCallNoLoginView *customView = [BTTMakeCallNoLoginView viewFromXib];
-    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:animationPopStyle dismissStyle:BTTAnimationDismissStyleNO];
-    popView.isClickBGDismiss = YES;
-    [popView pop];
-    customView.dismissBlock = ^{
-        [popView dismiss];
-    };
-    weakSelf(weakSelf);
-    customView.callBackBlock = ^(NSString *phone,NSString *captcha,NSString *captchaId) {
-        strongSelf(strongSelf);
-        [popView dismiss];
-        [strongSelf makeCallWithPhoneNum:phone captcha:captcha captchaId:captchaId];
-    } ;
-}
-
-- (void)showCallBackViewLogin {
-    BTTMakeCallLoginView *customView = [BTTMakeCallLoginView viewFromXib];
-    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
-    popView.isClickBGDismiss = YES;
-    [popView pop];
-    weakSelf(weakSelf);
-    customView.dismissBlock = ^{
-        [popView dismiss];
-    };
-    customView.callBackBlock = ^(NSString * _Nullable phone, NSString * _Nullable captcha, NSString * _Nullable captchaId) {
-        strongSelf(strongSelf);
-        if (![IVNetwork savedUserInfo].mobileNo.length) {
-            [MBProgressHUD showError:@"您未绑定手机, 请选择其他电话" toView:nil];
-            return;
-        }
-        [popView dismiss];
-        [strongSelf makeCallWithPhoneNum:[IVNetwork savedUserInfo].mobileNo captcha:captcha captchaId:captchaId];
-    };
-    customView.btnBlock = ^(UIButton *btn) {
-        strongSelf(strongSelf);
-        [popView dismiss];
-        if (btn.tag == 50011) {
-            [CSVisitChatmanager startWithSuperVC:strongSelf finish:^(CSServiceCode errCode) {
-                if (errCode != CSServiceCode_Request_Suc) {
-                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
-                } else {
-
-                }
-            }];
-        }
-    };
-}
-
-#pragma mark - JXRegisterManagerDelegate
-- (void)registerUID:(NSString *)uid {
-    JXRegisterManager *registerManager = [JXRegisterManager sharedInstance];
-    registerManager.delegate = self;
-    [registerManager registerWithUID:uid];
-}
-
-- (void)didRegisterResponse:(NSDictionary *)response {
-    NSInteger statusCode = [response[@"code"] integerValue];
-    if (statusCode == 200 || statusCode == 409) {//当注册成功或者这个号码在别的手机上注册过
-        BTTVoiceCallViewController *vc = (BTTVoiceCallViewController *)[BTTVoiceCallViewController getVCFromStoryboard];
-        [self.navigationController pushViewController:vc animated:NO];
-    } else {
-        NSLog(@"VOIP注册失败");
-        [MBProgressHUD showError:@"拨号失败请重试" toView:nil];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (self.discountsVCType == BTTDiscountsVCTypeFirst) {
-        [self.navigationController setNavigationBarHidden:YES animated:animated];
-    }
+    [self.navigationController setNavigationBarHidden:!self.inProgressView.isHidden animated:animated];
 }
 
 - (void)setupCollectionView {
     [super setupCollectionView];
-    if (self.discountsVCType == BTTDiscountsVCTypeFirst) {
-        self.collectionView.frame = CGRectMake(0, KIsiPhoneX ? 88 : 64, SCREEN_WIDTH, SCREEN_HEIGHT - (KIsiPhoneX ? 88 : 64));
+    if (self.inProgressView == nil) {
+        self.inProgressView = [[UIView alloc] init];
+        self.inProgressView.backgroundColor = [UIColor clearColor];
+        [self.view addSubview:self.inProgressView];
+        [self.inProgressView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset((KIsiPhoneX ? 88 : 64));
+            make.left.equalTo(self.view).offset(20);
+            make.right.equalTo(self.view).offset(-20);
+            make.height.offset(44);
+        }];
+        
+        UILabel * lab = [[UILabel alloc] init];
+        lab.text = @"正在进行";
+        lab.textColor = [UIColor whiteColor];
+        lab.font = [UIFont systemFontOfSize:14];
+        [self.inProgressView addSubview:lab];
+        [lab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.left.equalTo(self.inProgressView);
+            make.height.offset(24);
+        }];
+        
+        UIButton * btn = [[UIButton alloc] init];
+        [btn setTitle:@" 查看历史优惠" forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor colorWithHexString:@"#417DDA"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"ic_discounts_history"] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(historyBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        btn.adjustsImageWhenHighlighted = false;
+        btn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self.inProgressView addSubview:btn];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.right.equalTo(self.inProgressView);
+            make.height.offset(24);
+        }];
+        
+        UIView * line = [[UIView alloc] init];
+        line.backgroundColor = [UIColor colorWithHexString:@"#454C5A"];
+        [self.inProgressView addSubview:line];
+        [line mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.offset(1);
+            make.left.right.equalTo(self.view);
+            make.bottom.equalTo(self.inProgressView);
+        }];
     }
+    
+    if (self.yearsScrollView == nil) {
+        self.yearsScrollView = [[UIScrollView alloc] init];
+        self.yearsScrollView.backgroundColor = [UIColor clearColor];
+        self.yearsScrollView.delegate = self;
+        self.yearsScrollView.alwaysBounceHorizontal = true;
+        self.yearsScrollView.showsHorizontalScrollIndicator = false;
+        self.yearsScrollView.hidden = true;
+        [self.view addSubview:self.yearsScrollView];
+        [self.yearsScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(-1);
+            make.left.right.equalTo(self.view);
+            make.height.offset(45);
+        }];
+    }
+    
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageDiscountCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageDiscountCell"];
+    [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.inProgressView.mas_bottom);
+        make.left.bottom.right.equalTo(self.view);
+        make.width.offset(SCREEN_WIDTH);
+    }];
+}
+
+-(void)historyBtnAction {
+    [self setUpHistoryNav];
+    [self changeToHistoryPage:self.btnIndex];
+}
+
+-(void)yearsBtnAction:(UIButton *)btn {
+    for (UIView * view in self.yearsScrollView.subviews) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton * yearBtn = (UIButton *)view;
+            yearBtn.selected = yearBtn.tag == btn.tag;
+            yearBtn.backgroundColor = yearBtn.tag == btn.tag ? [UIColor colorWithHexString:@"#3082EF"]:[UIColor clearColor];
+        }
+    }
+    [self changeToHistoryPage:btn.tag];
+}
+
+-(void)changeToHistoryPage:(NSInteger)index {
+    self.btnIndex = index;
+    [self.sheetDatas removeAllObjects];
+    for (NSDictionary * dict in [self.model.history valueForKey:self.yearsBtnTitle[index]]) {
+        BTTPromotionProcessModel * item = [BTTPromotionProcessModel yy_modelWithJSON:dict];
+        [self.sheetDatas addObject:item];
+    }
+    [self setupElements];
+}
+
+-(void)setYearsBtnTitle {
+    for (UIView * view in self.yearsScrollView.subviews) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton * yearBtn = (UIButton *)view;
+            [yearBtn removeFromSuperview];
+        }
+    }
+    for (int i = 0; i < _yearsBtnTitle.count; i++) {
+        UIButton * yearBtn = [[UIButton alloc] init];
+        yearBtn.layer.borderColor = [UIColor colorWithHexString:@"#454C5A"].CGColor;
+        yearBtn.layer.borderWidth = 1.0;
+        [yearBtn setTitle:_yearsBtnTitle[i] forState:UIControlStateNormal];
+        [yearBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [yearBtn setTitleColor:[UIColor colorWithHexString:@"#6E778B"] forState:UIControlStateNormal];
+        yearBtn.backgroundColor = i==self.btnIndex ? [UIColor colorWithHexString:@"#3082EF"]:[UIColor clearColor];
+        yearBtn.selected = i==self.btnIndex ? true:false;
+        yearBtn.tag = i;
+        [yearBtn addTarget:self action:@selector(yearsBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        yearBtn.adjustsImageWhenHighlighted = false;
+        yearBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        [self.yearsScrollView addSubview:yearBtn];
+        [yearBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.yearsScrollView).offset(i*SCREEN_WIDTH/4);
+            make.top.height.equalTo(self.yearsScrollView);
+            make.width.offset(SCREEN_WIDTH/4);
+        }];
+    }
+    self.yearsScrollView.contentSize = CGSizeMake(_yearsBtnTitle.count * SCREEN_WIDTH / 4, 0);
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -264,16 +194,16 @@
     } else {
         cell.mineSparaterType = BTTMineSparaterTypeSingleLine;
     }
-    BTTPromotionModel *model = self.sheetDatas.count ? self.sheetDatas[indexPath.row] : nil;
+    BTTPromotionProcessModel *model = self.sheetDatas.count ? self.sheetDatas[indexPath.row] : nil;
     cell.model = model;
-    
+    cell.isShowOverView = self.yearsScrollView.isHidden;
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
-    BTTPromotionModel *model = self.sheetDatas[indexPath.row];
+    BTTPromotionProcessModel *model = self.sheetDatas[indexPath.row];
     if ([model.href containsString:@"htm"]||[model.href containsString:@"activity_pages"]) {
         BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
         vc.title = model.name;
@@ -336,6 +266,11 @@
                 model.cnName = @"BTI体育";
                 model.enName =  @"SBT_BTI";
                 model.provider =  @"SBT";
+            } else if ([provider isEqualToString:kYSBProvider] && [gameKind isEqualToString:@"1"]) {  // YSB体育
+                model = [[IVGameModel alloc] init];
+                model.cnName = @"YSB体育";
+                model.enName =  @"YSB";
+                model.provider = kYSBProvider;
             } else if ([provider isEqualToString:@"MG"] ||
                        [provider isEqualToString:@"AGIN"] ||
                        [provider isEqualToString:@"PT"] ||
@@ -414,7 +349,7 @@
     NSMutableArray *elementsHight = [NSMutableArray array];
     NSInteger total = self.sheetDatas.count;
     for (int i = 0; i < total; i++) {
-        BTTPromotionModel *model = self.sheetDatas[i];
+        BTTPromotionProcessModel *model = self.sheetDatas[i];
         UILabel * lab = [[UILabel alloc] init];
         lab.text = model.name;
         lab.font = [UIFont systemFontOfSize:18];

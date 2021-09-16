@@ -7,14 +7,15 @@
 //
 
 #import "BTTBaseCollectionViewCell.h"
-
-@class BTTPromotionModel;
+@class BTTPromotionProcessModel;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTHomePageDiscountCell : BTTBaseCollectionViewCell
 
-@property (nonatomic, strong) BTTPromotionModel *model;
+@property (nonatomic, strong) BTTPromotionProcessModel *model;
+
+@property (nonatomic, assign) BOOL isShowOverView;
 
 @end
 

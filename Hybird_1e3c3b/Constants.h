@@ -40,6 +40,17 @@
 #import "BTTUserStatusManager.h"
 
 typedef enum {
+    BTTFindWithPhone = 1000,   //用手機找回帳號或密碼
+    BTTFindWithEmail = 1001,   //用郵箱找回帳號或密碼
+}BTTChooseFindWay;
+
+typedef enum {
+    BTTForgetAccount = 0,
+    BTTForgetPassword = 1,
+    BTTForgetBoth = 2,
+}BTTChooseForgetType;
+
+typedef enum {
     BTTCanAddCardTypeNone,          // 不能添加任何卡
     BTTCanAddCardTypeAll,           // 银行卡和比特币钱包
     BTTCanAddCardTypeBank,          // 只能添加银行卡
@@ -307,12 +318,13 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTMGKEY                                   @"035"
 //下方是沒有多幣種(CNY USDT)的
 #define BTTBTIKEY                                  @"062"
+#define BTTYSBKEY                                  @"068"
 #define BTTNBKEY                                   @"069"
 #define BTTCSKEY                                   @"087"
 
 //儲存使用者選擇幣種相對應的keyArr
-#define BTTGameKeysArr                             @[BTTAGQJKEY,BTTAGGJKEY,BTTASKEY,BTTSABAKEY,BTTAGLotteryKEY,BTTPTKEY,BTTTTGKEY,BTTPPKEY,BTTPSKEY,BTTMGKEY]
-#define BTTGameTitlesArr                           @[@"AG旗舰厅", @"AG国际厅", @"AS真人棋牌", @"沙巴体育", @"AG彩票", @"PT", @"TTG", @"PP", @"PS", @"MG"]
+#define BTTGameKeysArr                             @[BTTAGQJKEY,BTTAGGJKEY,BTTASKEY,BTTSABAKEY,BTTYSBKEY,BTTAGLotteryKEY,BTTPTKEY,BTTTTGKEY,BTTPPKEY,BTTPSKEY,BTTMGKEY]
+#define BTTGameTitlesArr                           @[@"AG旗舰厅", @"AG国际厅", @"AS真人棋牌", @"沙巴体育", @"YSB体育", @"AG彩票", @"PT", @"TTG", @"PP", @"PS", @"MG"]
 
 /*********************************************API********************************************************/
 
@@ -334,6 +346,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTUserLoginAPI                            @"customer/login"
 // 模糊登录
 #define BTTUserLoginEXAPI                          @"customer/loginEx"
+// 手機登入
+//#define BTTUserLoginEXAPI                          @"customer/loginByMobileEx"
 // 異地登入
 #define BTTUserLoginWith2FA                        @"customer/loginWith2FA"
 // 验证登录名是否存在
@@ -360,6 +374,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTBindPhone                               @"phone/bind"
 // update绑定手机号
 #define BTTBindPhoneUpdate                         @"phone/updateBind"
+// 使用已綁定手機號找回賬號
+#define BTTCheckCustomerBySmsCode                  @"phone/checkCustomerBySmsCode"
 //忘记密码第一步验证
 #define BTTValidateCaptcha                         @"customer/preForgetPwd"
 // 根据code修改密码
@@ -554,6 +570,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTHomeAnnouncementAPI                     @"_extra_/api/v1/other/announcement/common"
 // 优惠列表
 #define BTTPromotionList                           @"_extra_/api/v1/wms/promotions?v=1.1"
+// 优惠列表&歷史優惠列表
+#define BTTPromotionAndHistoryList                 @"_extra_/api/v1/wms/promotionsHistory"
 // 请求游戏列表
 #define BTTVideoGamesList                          @"_extra_/api/v1/wms/game?v=1.1"
 // 获取收藏列表

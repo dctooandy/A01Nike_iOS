@@ -44,7 +44,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     BTTHotPromotionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHotPromotionCell" forIndexPath:indexPath];
-    BTTPromotionModel *model = self.promotions[indexPath.row];
+    BTTPromotionProcessModel *model = self.promotions[indexPath.row];
     cell.model = model;
     
     return cell;

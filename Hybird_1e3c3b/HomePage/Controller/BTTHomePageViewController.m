@@ -15,7 +15,6 @@
 #import "BTTHomePageAppsCell.h"
 #import "BTTHomePageSeparateCell.h"
 #import "BTTHomePageDiscountHeaderCell.h"
-#import "BTTHomePageDiscountCell.h"
 #import "BTTActivityModel.h"
 #import "BTTHomePageActivitiesCell.h"
 #import "BTTHomePageAmountsCell.h"
@@ -27,7 +26,6 @@
 #import "BTTDownloadModel.h"
 #import "BTTAGGJViewController.h"
 #import "BTTAGQJViewController.h"
-#import "BTTDiscountsViewController.h"
 #import "BTTVideoGamesListController.h"
 #import "BTTGamesTryAlertView.h"
 #import "BTTLoginOrRegisterViewController.h"
@@ -46,6 +44,7 @@
 #import "BTTUserGameCurrencyModel.h"
 #import "BTTActivityManager.h"
 #import "BTTUserForzenManager.h"
+#import "AppDelegate.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -341,9 +340,7 @@
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageGamesCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageGamesCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageDiscountHeaderCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageDiscountHeaderCell"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageDiscountCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageDiscountCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageAmountsCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageAmountsCell"];
-//    BTTElectronicGamesCell BTTOtherGameCell BTTHotPromotionsCell
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -420,7 +417,7 @@
             weakSelf(weakSelf);
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
-                BTTPromotionModel *model = value;
+                BTTPromotionProcessModel *model = value;
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
                 vc.title = model.name;
                 vc.webConfigModel.url = [model.href stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -428,10 +425,8 @@
                 [strongSelf.navigationController pushViewController:vc animated:YES];
             };
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-                strongSelf(strongSelf);
-                BTTDiscountsViewController *vc = [BTTDiscountsViewController new];
-                vc.discountsVCType = BTTDiscountsVCTypeDetail;
-                [strongSelf.navigationController pushViewController:vc animated:YES];
+                AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                [delegate jumpToTabIndex:BTTPromo];
             };
             return cell;
         } else if (indexPath.row == 9) {
@@ -532,7 +527,7 @@
             cell.promotions = self.promotions;
             cell.clickEventBlock = ^(id  _Nonnull value) {
                 strongSelf(strongSelf);
-                BTTPromotionModel *model = value;
+                BTTPromotionProcessModel *model = value;
                 BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
                 vc.webConfigModel.url = [model.href stringByReplacingOccurrencesOfString:@" " withString:@""];
                 vc.webConfigModel.newView = YES;
@@ -540,10 +535,8 @@
                 [strongSelf.navigationController pushViewController:vc animated:YES];
             };
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
-                strongSelf(strongSelf);
-                BTTDiscountsViewController *vc = [BTTDiscountsViewController new];
-                vc.discountsVCType = BTTDiscountsVCTypeDetail;
-                [strongSelf.navigationController pushViewController:vc animated:YES];
+                AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                [delegate jumpToTabIndex:BTTPromo];
             };
             return cell;
         } else if (indexPath.row == 8) {
@@ -591,7 +584,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    BTTPosterModel * model = nil;
+    BTTPromotionProcessModel * model = nil;
     if (self.adCellShow) {
         if (indexPath.row == 0) {
             model = self.posters.count ? self.posters[0] : nil;
@@ -791,6 +784,9 @@
         case 1006:
             jsonKey = BTTSABAKEY;
             break;
+        case 1007:
+            jsonKey = BTTYSBKEY;
+            break;
         case 1010:
             jsonKey = BTTASKEY;
             break;
@@ -917,6 +913,12 @@
             model.gameCode = BTTSABAKEY;
             model.provider =  kShaBaProvider;
             model.platformCurrency = currency;
+        }else if (tag==1007){
+            model.cnName = @"YSB体育";
+            model.enName =  @"YSB";
+            model.gameCode = BTTYSBKEY;
+            model.provider =  kYSBProvider;
+            model.platformCurrency = currency;
         }else if (tag==1010){
             model = [[IVGameModel alloc] init];
             model.cnName = @"AS真人棋牌";
@@ -1007,12 +1009,12 @@
             model.provider =  kShaBaProvider;
         }
             break;
-        case 1007://BTI体育
+        case 1007://更改為 YSB体育, 注銷 BTI体育
             model = [[IVGameModel alloc] init];
-            model.cnName = @"BTI体育";
-            model.enName =  @"SBT_BTI";
-            model.gameCode = BTTBTIKEY;
-            model.provider =  @"SBT";
+            model.cnName = @"YSB体育";//@"BTI体育";
+            model.enName =  @"YSB";//@"SBT_BTI";
+            model.gameCode = BTTYSBKEY;//BTTBTIKEY;
+            model.provider = kYSBProvider;//@"SBT";
             break;
         case 1008:{
             model = [[IVGameModel alloc] init];
@@ -1064,7 +1066,7 @@
             }
         }
         if (model) {
-            if (tag==1006||tag==1010||tag==1003||tag==1011) {
+            if (tag==1006||tag==1007||tag==1010||tag==1003||tag==1011) {//原先1007 BTI 可試玩,改YSB 不可試玩
                 [self choseGameLineWithTag:tag];
             }else{
                 [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
@@ -1072,7 +1074,7 @@
             
         }
     } else {
-        if (tag == 1006 || tag == 1011 || tag == 1008) {
+        if (tag == 1006 || tag== 1007 || tag == 1011 || tag == 1008) {//原先1007 BTI 可試玩,改YSB 不可試玩
             [MBProgressHUD showError:@"请先登录" toView:nil];
             BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
@@ -1096,7 +1098,7 @@
                         }
                     }
                     if (model) {
-                        if (tag==1006||tag==1010||tag==1003) {
+                        if (tag==1006||tag==1007||tag==1010||tag==1003) {
                             [self choseGameLineWithTag:tag];
                         }else{
                             [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
