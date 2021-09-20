@@ -931,8 +931,18 @@
                     BTTChooseCurrencyPopView *customView = [BTTChooseCurrencyPopView viewFromXib];
                     customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
                     if ([rate integerValue] > 1 && gameName.length > 0) {
-                        [customView.cnyBtn setTitle:[NSString stringWithFormat:@"人民币 CNY 1:7  (%@倍投注)",rate] forState:UIControlStateNormal];
-                        [customView.usdtBtn setTitle:[NSString stringWithFormat:@"数字币 USDT 1:1  (%@倍投注)",rate] forState:UIControlStateNormal];
+                        NSString * rateStr = [NSString stringWithFormat:@"(%@倍投注)", rate];
+                        NSString * aStr = [NSString stringWithFormat:@"人民币 CNY 1:7  %@",rateStr];
+                        NSRange range = [aStr rangeOfString:rateStr];
+                        NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:aStr];
+                        [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:range];
+                        [customView.cnyBtn setAttributedTitle:str forState:UIControlStateNormal];
+                        
+                        aStr = [NSString stringWithFormat:@"数字币 USDT 1:1  %@",rateStr];
+                        range = [aStr rangeOfString:rateStr];
+                        str = [[NSMutableAttributedString alloc] initWithString:aStr];
+                        [str addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:range];
+                        [customView.usdtBtn setAttributedTitle:str forState:UIControlStateNormal];
                     }
                     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
                     [popView pop];
