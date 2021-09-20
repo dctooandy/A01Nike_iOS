@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTChooseCurrencyPopView : BTTBaseAnimationPopView
-
+@property (weak, nonatomic) IBOutlet UIButton *cnyBtn;
+@property (weak, nonatomic) IBOutlet UIButton *usdtBtn;
 @end
 
 NS_ASSUME_NONNULL_END

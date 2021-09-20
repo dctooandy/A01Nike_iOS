@@ -513,6 +513,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTLiCaiTransferIn                         @"yeb/transferIn"
 //獲取銀行卡列表
 #define BTTQueryBanks                              @"account/queryBanks"
+//倍投配置查詢
+#define BTTMultiBetInfo                            @"game/queryMultiBetInfoByLoginName"
 
 /*********************************************產品API********************************************************/
 

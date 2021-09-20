@@ -50,6 +50,8 @@
 
 @property (nonatomic, assign) BOOL adCellShow;
 @property (nonatomic, assign) BOOL   isloaded;
+@property (nonatomic, strong) NSMutableArray * userCurrencysArr;
+
 @end
 
 @implementation BTTHomePageViewController
@@ -763,7 +765,7 @@
         return;
     }
     if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT" ]) {
-        [self gotoGameWithTag:tag currency:[IVNetwork savedUserInfo].uiMode];
+        [self checkMultiBetInfo:tag currency:[IVNetwork savedUserInfo].uiMode isShowPop:false];
         return;
     }
     NSString * currencyStr = [IVNetwork savedUserInfo].uiMode.length != 0 ? [IVNetwork savedUserInfo].uiMode:@"CNY";
@@ -800,10 +802,10 @@
         IVJResponseObject *result = response;
         NSArray *lineArray = result.body[jsonKey];
         if (lineArray != nil && lineArray.count >= 2) {
-            NSMutableArray * userCurrencysArr = [[NSMutableArray alloc] initWithArray:[NSArray bg_arrayWithName:BTTGameCurrencysWithName]];
+            self.userCurrencysArr = [[NSMutableArray alloc] initWithArray:[NSArray bg_arrayWithName:BTTGameCurrencysWithName]];
             NSString * gameCurrency = @"";
-            if (userCurrencysArr.count != 0) {
-                for (BTTUserGameCurrencyModel * model in userCurrencysArr) {
+            if (self.userCurrencysArr.count != 0) {
+                for (BTTUserGameCurrencyModel * model in self.userCurrencysArr) {
                     if ([jsonKey isEqualToString:model.gameKey]) {
                         gameCurrency = model.currency;
                         break;
@@ -812,41 +814,17 @@
             }
             
             if (gameCurrency.length != 0) {
-                [self gotoGameWithTag:tag currency:gameCurrency];
+                [self checkMultiBetInfo:tag currency:gameCurrency isShowPop:false];
             } else {
-                BTTChooseCurrencyPopView *customView = [BTTChooseCurrencyPopView viewFromXib];
-                customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-                BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
-                [popView pop];
-                weakSelf(weakSelf);
-                customView.dismissBlock = ^{
-                    strongSelf(strongSelf);
-                    [popView dismiss];
-//                    [strongSelf saveCurrencysArrToBGFMDB:@"USDT" userCurrencysArr:userCurrencysArr];
-                    [strongSelf gotoGameWithTag:tag currency:@"USDT"];
-                };
-
-                customView.btnBlock = ^(UIButton *btn) {
-                    strongSelf(strongSelf);
-                    [popView dismiss];
-                    if (btn.tag == 1000) {
-                        //cny
-                        [strongSelf saveCurrencysArrToBGFMDB:@"CNY" userCurrencysArr:userCurrencysArr];
-                        [strongSelf gotoGameWithTag:tag currency:@"CNY"];
-                    } else {
-                        //usdt
-                        [strongSelf saveCurrencysArrToBGFMDB:@"USDT" userCurrencysArr:userCurrencysArr];
-                        [strongSelf gotoGameWithTag:tag currency:@"USDT"];
-                    }
-                };
+                [self checkMultiBetInfo:tag currency:@"" isShowPop:true];
             }
         } else {
             if (nil == lineArray) {
-                [self gotoGameWithTag:tag currency:@"CNY"];
+                [self checkMultiBetInfo:tag currency:@"CNY" isShowPop:false];
             } else {
                 NSDictionary *json = lineArray[0];
-                NSString *name = json[@"platformCurrency"];
-                [self gotoGameWithTag:tag currency:name];
+                NSString *currency = json[@"platformCurrency"];
+                [self checkMultiBetInfo:tag currency:currency isShowPop:false];
             }
         }
     }];
@@ -892,7 +870,114 @@
     [saveArr bg_saveArrayWithName:BTTGameCurrencysWithName];
 }
 
-- (void)gotoGameWithTag:(NSInteger)tag currency:(NSString *)currency{
+-(void)checkMultiBetInfo:(NSInteger)tag currency:(NSString *)currency isShowPop:(BOOL)isShowPop {
+    [IVNetwork requestPostWithUrl:BTTMultiBetInfo paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString * gameCode = @"";
+            NSString * gameName = @"";
+            NSString * rate = @"";
+            if (tag==1000) {
+                gameCode = BTTAGQJKEY;
+            }else if (tag==1001) {
+                gameCode = BTTAGGJKEY;
+            } else {
+                if (tag==1006){
+                    gameCode = BTTSABAKEY;
+                }else if (tag==1007){
+                    gameCode = BTTYSBKEY;
+                }else if (tag==1010){
+                    gameCode = BTTASKEY;
+                } else if (tag==1003) {
+                    gameCode = BTTAGGJKEY;
+                } else if (tag==1011) {
+                    gameCode = BTTAGLotteryKEY;
+                }
+            }
+            
+            NSMutableArray * arr = result.body[@"multiBetInfo"];
+            for (NSDictionary * dict in arr) {
+                rate = dict[@"multiBetRate"];
+                if ([dict[@"multiBetGameCode"] isEqualToString:gameCode]) {
+                    if ([gameCode isEqualToString:BTTAGQJKEY]) {
+                        gameName = @"AG旗舰";
+                        break;
+                    } else if ([gameCode isEqualToString:BTTAGGJKEY]) {
+                        if (tag == 1001) {
+                            gameName = @"AG国际";
+                        } else {
+                            gameName = @"捕鱼王";
+                        }
+                        break;
+                    } else if ([gameCode isEqualToString:BTTSABAKEY]) {
+                        gameName = @"沙巴体育";
+                        break;
+                    } else if ([gameCode isEqualToString:BTTYSBKEY]) {
+                        gameName = @"YSB体育";
+                        break;
+                    } else if ([gameCode isEqualToString:BTTASKEY]) {
+                        gameName = @"AS真人棋牌";
+                        break;
+                    } else if ([gameCode isEqualToString:BTTAGLotteryKEY]) {
+                        gameName = @"AG彩票";
+                        break;
+                    }
+                }
+            }
+            NSString * message = [NSString stringWithFormat:@"您在%@的单笔投注倍数为%@倍", gameName, rate];
+            
+            if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+                if (isShowPop) {
+                    BTTChooseCurrencyPopView *customView = [BTTChooseCurrencyPopView viewFromXib];
+                    customView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+                    if ([rate integerValue] > 1 && gameName.length > 0) {
+                        [customView.cnyBtn setTitle:[NSString stringWithFormat:@"人民币 CNY 1:7  (%@倍投注)",rate] forState:UIControlStateNormal];
+                        [customView.usdtBtn setTitle:[NSString stringWithFormat:@"数字币 USDT 1:1  (%@倍投注)",rate] forState:UIControlStateNormal];
+                    }
+                    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:customView popStyle:BTTAnimationPopStyleScale dismissStyle:BTTAnimationDismissStyleNO];
+                    [popView pop];
+                    weakSelf(weakSelf);
+                    customView.dismissBlock = ^{
+                        strongSelf(strongSelf);
+                        [popView dismiss];
+                        if ([rate integerValue] > 1 && gameName.length > 0) {
+                            [MBProgressHUD showSuccessWithTime:message toView:nil duration:3];
+                        }
+                        [strongSelf gotoGameWithTag:tag currency:@"USDT"];
+                    };
+
+                    customView.btnBlock = ^(UIButton *btn) {
+                        strongSelf(strongSelf);
+                        [popView dismiss];
+                        if (btn.tag == 1000) {
+                            //cny
+                            [strongSelf saveCurrencysArrToBGFMDB:@"CNY" userCurrencysArr:self.userCurrencysArr];
+                            [strongSelf gotoGameWithTag:tag currency:@"CNY"];
+                        } else {
+                            //usdt
+                            [strongSelf saveCurrencysArrToBGFMDB:@"USDT" userCurrencysArr:self.userCurrencysArr];
+                            [strongSelf gotoGameWithTag:tag currency:@"USDT"];
+                        }
+                    };
+                } else {
+                    if ([rate integerValue] > 1 && gameName.length > 0) {
+                        [MBProgressHUD showSuccessWithTime:message toView:nil duration:3];
+                    }
+                    [self gotoGameWithTag:tag currency:currency];
+                }
+            } else {
+                if ([rate integerValue] > 1 && gameName.length > 0) {
+                    [MBProgressHUD showSuccessWithTime:message toView:nil duration:3];
+                }
+                [self gotoGameWithTag:tag currency:@"CNY"];
+            }
+        } else {
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
+
+- (void)gotoGameWithTag:(NSInteger)tag currency:(NSString *)currency {
     if (tag==1000) {
         BTTAGQJViewController *vc = [BTTAGQJViewController new];
         [CNTimeLog startRecordTime:CNEventAGQJLaunch];
