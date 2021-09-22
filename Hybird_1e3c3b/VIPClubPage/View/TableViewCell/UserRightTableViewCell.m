@@ -68,8 +68,7 @@
     BTTVIPClubFlowLayout *flowLayout = [[BTTVIPClubFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     _flowLayout = flowLayout;
-    [_flowLayout setCellType:self.cellType];
-    [_flowLayout setConfirmTransform:_confirmTransform];
+    
     UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:_flowLayout];
     mainView.backgroundColor = [UIColor clearColor];
     mainView.pagingEnabled = NO;
@@ -101,7 +100,8 @@
 - (void)setCellType:(BTTVIPClubUserRightPageType )cellType
 {
     _cellType = cellType;
-
+    [_flowLayout setCellType:self.cellType];
+    [_flowLayout setConfirmTransform:_confirmTransform];
 }
 -(void)setupElements {
     NSMutableArray *elementsHight = [NSMutableArray array];
@@ -194,8 +194,8 @@
             break;
         case VIPRightTravelPage:
             count = 2;
-            diffSpacing = 5;
-            cellHeightRate = 0.52;
+            diffSpacing = -40;
+            cellHeightRate = 0.6;
             cellTopSpaceRate = 0.36;
             defaultHeight = SCREEN_HEIGHT*cellHeightRate;
             self.backGroundImage.image = ImageNamed(@"SliceTravel_BG");
