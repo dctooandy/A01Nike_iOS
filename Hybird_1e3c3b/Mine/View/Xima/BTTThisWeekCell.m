@@ -21,6 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *rateLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *betRateAlertView;
 
 @end
 
@@ -40,6 +41,13 @@
     self.validAmountLabel.text = [NSString stringWithFormat:@"%@%@",[PublicMethod transferNumToThousandFormat:model.xmAmount],unitString];
     self.totalAmountLabel.text = [NSString stringWithFormat:@"%@", [PublicMethod transferNumToThousandFormat:model.totalBetAmont]];
     self.rateLabel.text = model.xmRate;
+    if ([self.model.xmName isEqualToString:@"沙巴体育"] && [self.model.multiBetRate intValue] > 1)
+    {
+        [self.betRateAlertView setHidden:NO];
+    }else
+    {
+        [self.betRateAlertView setHidden:YES];
+    }
 }
 
 - (void)setThisWeekCellType:(BTTXimaThisWeekCellType)thisWeekCellType {

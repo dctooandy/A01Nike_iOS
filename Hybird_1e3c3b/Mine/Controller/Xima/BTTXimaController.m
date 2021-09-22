@@ -558,7 +558,7 @@
 }
 - (void)showBetRateAlert
 {
-    NSString * message = @"您现在沙巴体育处于倍投状态，需通过人工操作洗码，请联系客服";
-    [MBProgressHUD showSuccessWithTime:message toView:nil duration:3];
+//    NSString * message = @"您现在沙巴体育处于倍投状态，需通过人工操作洗码，请联系客服";
+//    [MBProgressHUD showSuccessWithTime:message toView:nil duration:3];
 }
 @end
