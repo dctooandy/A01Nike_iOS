@@ -264,7 +264,7 @@
 }
 - (void)gatewaySwitchNotification:(NSNotification *)notification
 {
-    [NBSAppAgent trackEvent:@"网关切换" withEventTag:@"gateway_change" withEventProperties:notification.userInfo];
+//    [NBSAppAgent trackEvent:@"网关切换" withEventTag:@"gateway_change" withEventProperties:notification.userInfo];
 }
 - (void)showAreaLimitWithCountry:(NSString *)country goCode:(NSString *)goCode
 {
