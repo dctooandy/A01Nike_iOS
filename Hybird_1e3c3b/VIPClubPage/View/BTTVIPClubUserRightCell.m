@@ -88,9 +88,14 @@
 //        } else  {
 //            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT)]];
 //        }
-        if (i == 5)
+        if (i == 4)
         {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, defaultInnerHeight + 120)]];
+            float newHeight = defaultInnerHeight + 300 ;
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, newHeight)]];
+        }else if (i == 5)
+        {
+            float newHeight = defaultInnerHeight + (SCREEN_HEIGHT/812.0) * 120;
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, newHeight)]];
         }else
         {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, defaultInnerHeight)]];

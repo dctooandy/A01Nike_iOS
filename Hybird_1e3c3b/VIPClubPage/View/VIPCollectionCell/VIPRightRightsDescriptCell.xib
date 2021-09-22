@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,28 +11,44 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="VIPRightRightsDescriptCell">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="1020"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="1020"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uyt-fd-nD4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SliceRightsDescript_PageTwo" translatesAutoresizingMaskIntoConstraints="NO" id="ajd-Yl-lsW">
+                        <rect key="frame" x="0.0" y="600" width="375" height="432"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="432" id="cNO-H3-drb"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SliceRightsDescript_PageOne" translatesAutoresizingMaskIntoConstraints="NO" id="Uyt-fd-nD4">
+                        <rect key="frame" x="0.0" y="200" width="375" height="432"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="432" id="Idg-ps-4Sm"/>
+                        </constraints>
                     </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="Uyt-fd-nD4" secondAttribute="bottom" id="9rd-Di-Enn"/>
                 <constraint firstAttribute="trailing" secondItem="Uyt-fd-nD4" secondAttribute="trailing" id="L04-aa-ElX"/>
-                <constraint firstItem="Uyt-fd-nD4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Zbt-8M-Awg"/>
+                <constraint firstAttribute="trailing" secondItem="ajd-Yl-lsW" secondAttribute="trailing" id="NtT-c8-Uu1"/>
+                <constraint firstItem="Uyt-fd-nD4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="200" id="Zbt-8M-Awg"/>
+                <constraint firstItem="ajd-Yl-lsW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ZgS-io-dW9"/>
                 <constraint firstItem="Uyt-fd-nD4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="d26-E6-5UQ"/>
+                <constraint firstItem="ajd-Yl-lsW" firstAttribute="top" secondItem="Uyt-fd-nD4" secondAttribute="bottom" constant="-32" id="iZ5-WI-ypv"/>
             </constraints>
             <connections>
                 <outlet property="cellImageView" destination="Uyt-fd-nD4" id="eUX-kH-MaM"/>
+                <outlet property="cellSecondImageView" destination="ajd-Yl-lsW" id="1pt-qa-yGx"/>
             </connections>
-            <point key="canvasLocation" x="132" y="128"/>
+            <point key="canvasLocation" x="131.15942028985509" y="127.90178571428571"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="SliceRightsDescript_PageOne" width="352" height="432"/>
+        <image name="SliceRightsDescript_PageTwo" width="352" height="432"/>
+    </resources>
 </document>

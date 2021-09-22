@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VIPRightRightsDescriptCell : BTTBaseCollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *cellSecondImageView;
 
 @end
 

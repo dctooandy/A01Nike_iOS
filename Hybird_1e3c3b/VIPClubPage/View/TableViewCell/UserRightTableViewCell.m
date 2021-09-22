@@ -68,8 +68,9 @@
     BTTVIPClubFlowLayout *flowLayout = [[BTTVIPClubFlowLayout alloc] init];
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     _flowLayout = flowLayout;
-    
-    UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
+    [_flowLayout setCellType:self.cellType];
+    [_flowLayout setConfirmTransform:_confirmTransform];
+    UICollectionView *mainView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:_flowLayout];
     mainView.backgroundColor = [UIColor clearColor];
     mainView.pagingEnabled = NO;
     mainView.showsHorizontalScrollIndicator = NO;
@@ -91,13 +92,16 @@
 - (void)config:(BTTVIPClubUserRightPageType)cellType
 {
     self.cellType = cellType;
+    float collectionViewHeight = (_cellType == VIPRightRightsDescriptPage) ? SCREEN_HEIGHT + 300 : SCREEN_HEIGHT;
+    CGRect oldFrame = self.collectionView.frame;
+    oldFrame.size.height = collectionViewHeight;
+    [self.collectionView setFrame:oldFrame];
     [self setupElements];
 }
 - (void)setCellType:(BTTVIPClubUserRightPageType )cellType
 {
     _cellType = cellType;
-    [_flowLayout setCellType:cellType];
-    [_flowLayout setConfirmTransform:_confirmTransform];
+
 }
 -(void)setupElements {
     NSMutableArray *elementsHight = [NSMutableArray array];
@@ -174,19 +178,19 @@
             [self.discriptionButton setHidden:YES];
             break;
         case VIPRightRightsDescriptPage:
-            count = 2;
+            count = 1;
             diffSpacing = 0;
             cellHeightRate = 0.54;
             cellTopSpaceRate = 0.24;
-            defaultHeight = SCREEN_HEIGHT*cellHeightRate;
+            defaultHeight = (SCREEN_HEIGHT - 49 + 300);
             self.backGroundImage.image = ImageNamed(@"SliceRightsDescript_BG");
             self.wordImageView.image = ImageNamed(@"SliceWordRightsDescript");
             detailCellWidthSpaceRate = 0;
             _cellNameArray = @[@"SliceRightsDescript_PageOne",@"SliceRightsDescript_PageTwo"].mutableCopy;
-            [self.collectionView setPagingEnabled:YES];
+//            [self.collectionView setPagingEnabled:YES];
             [self.discriptionButton setHidden:YES];
             [self.displayNoteOne setHidden:NO];
-            [self.rightLeftArrowIconImageView setHidden:NO];
+            [self.rightLeftArrowIconImageView setHidden:YES];
             break;
         case VIPRightTravelPage:
             count = 2;
@@ -221,10 +225,19 @@
         default:
             break;
     }
-    _flowLayout.sectionInset = UIEdgeInsetsMake(SCREEN_HEIGHT*cellTopSpaceRate,
-                                                SCREEN_WIDTH*detailCellWidthSpaceRate,
-                                                SCREEN_HEIGHT*cellBottomRate,
-                                                SCREEN_WIDTH*detailCellWidthSpaceRate);
+    if (_cellType == VIPRightRightsDescriptPage)
+    {
+        _flowLayout.sectionInset = UIEdgeInsetsMake(0,
+                                                    SCREEN_WIDTH*detailCellWidthSpaceRate,
+                                                    0,
+                                                    SCREEN_WIDTH*detailCellWidthSpaceRate);
+    }else
+    {
+        _flowLayout.sectionInset = UIEdgeInsetsMake(SCREEN_HEIGHT*cellTopSpaceRate,
+                                                    SCREEN_WIDTH*detailCellWidthSpaceRate,
+                                                    SCREEN_HEIGHT*cellBottomRate,
+                                                    SCREEN_WIDTH*detailCellWidthSpaceRate);
+    }
     _flowLayout.minimumLineSpacing = diffSpacing*2;
     self.topViewHeight.constant = SCREEN_HEIGHT * topTitleHeightConstraint;
     self.bottomViewHeight.constant = SCREEN_HEIGHT * bottomViewHeightConstraint;
@@ -282,7 +295,8 @@
         case VIPRightRightsDescriptPage:
         {
             cell = (VIPRightRightsDescriptCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"VIPRightRightsDescriptCell" forIndexPath:indexPath];
-            [[(VIPRightRightsDescriptCell *)cell cellImageView] setImage:ImageNamed(_cellNameArray[indexPath.item])];
+//            [[(VIPRightRightsDescriptCell *)cell cellImageView] setImage:ImageNamed(_cellNameArray[1])];
+//            [[(VIPRightRightsDescriptCell *)cell cellSecondImageView] setImage:ImageNamed(_cellNameArray[0])];
         }
             break;
         case VIPRightTravelPage:
