@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="137"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" tag="1050" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chK-XP-EeD">
+                    <button opaque="NO" tag="1050" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chK-XP-EeD">
                         <rect key="frame" x="15" y="20" width="345" height="41"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="41" id="qWY-F5-WbK"/>
@@ -43,7 +43,7 @@
                             <action selector="otherBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="hrK-aA-09p"/>
                         </connections>
                     </button>
-                    <button opaque="NO" tag="1052" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKi-QN-a6s">
+                    <button opaque="NO" tag="1052" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKi-QN-a6s">
                         <rect key="frame" x="195" y="76" width="165" height="41"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="41" id="SRr-nb-if3"/>
@@ -58,6 +58,7 @@
                     </button>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <constraints>
                 <constraint firstItem="chK-XP-EeD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="6d4-o8-dKa"/>
                 <constraint firstItem="EKi-QN-a6s" firstAttribute="width" secondItem="bc3-zj-PXW" secondAttribute="width" id="7bO-Ku-RMj"/>
@@ -70,7 +71,6 @@
                 <constraint firstItem="EKi-QN-a6s" firstAttribute="centerY" secondItem="bc3-zj-PXW" secondAttribute="centerY" id="bvt-gn-aRF"/>
                 <constraint firstAttribute="trailing" secondItem="chK-XP-EeD" secondAttribute="trailing" constant="15" id="sID-Fx-I87"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="375" height="137"/>
             <point key="canvasLocation" x="125.59999999999999" y="150.67466266866569"/>
         </collectionViewCell>

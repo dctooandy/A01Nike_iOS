@@ -44,6 +44,7 @@
                         self.validModel = model;
                         if (list.count>0) {
                             self.currentListType = BTTXimaCurrentListTypeData;
+                            [self loadMultiBetInfo];
                         }
                         if (otherList.count>0) {
                             self.otherListType = BTTXimaOtherListTypeData;
@@ -62,7 +63,30 @@
     [self loadHistoryData];
 }
 
-
+- (void)loadMultiBetInfo
+{
+    [IVNetwork requestPostWithUrl:BTTMultiBetInfo paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        NSString * rate = @"1";
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSMutableArray * arr = result.body[@"multiBetInfo"];
+            for (NSDictionary * dict in arr) {
+                rate = dict[@"multiBetRate"];
+            }
+        }
+        self.multiBetRate = rate;
+        for (BTTXimaItemModel *model in self.validModel.xmList) {
+            if ([model.xmName isEqualToString:@"沙巴体育"] && [rate integerValue] > 1)
+            {
+                model.multiBetRate = rate;
+                if ([self.selectedArray containsObject:model]) {
+                    [self.selectedArray removeObject:model];
+                }
+            }
+        }
+        [self setupElements];
+    }];
+}
 
 - (void)loadHistoryData {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];

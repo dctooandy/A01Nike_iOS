@@ -224,7 +224,7 @@
                             return cell;
                         } else {
                             BTTThisWeekCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekCell" forIndexPath:indexPath];
-                            
+                            weakSelf(weakSelf)
                             BTTXimaItemModel *model = self.validModel.xmList.count ? self.validModel.xmList[indexPath.row - 1] : nil;
                             [cell setItemSelectedWithState:[self.selectedArray containsObject:self.validModel.xmList[indexPath.row-1]]];
                             cell.tapSelecteButton = ^(BOOL isSelected) {
@@ -236,6 +236,9 @@
                                     }
                                 }
                                 [self.collectionView reloadData];
+                            };
+                            cell.tapBetRateAlertButton = ^{
+                                [weakSelf showBetRateAlert];
                             };
                             cell.model = model;
                             return cell;
@@ -514,10 +517,21 @@
             }
         }
     }
+    for ( BTTXimaItemModel *model in self.validModel.xmList) {
+        if ([model.xmName isEqualToString:@"沙巴体育"] && [model.multiBetRate intValue] > 1)
+        {
+            [self showBetRateAlert];
+        }
+    }
+    
     self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
 }
-
+- (void)showBetRateAlert
+{
+    NSString * message = @"您现在沙巴体育处于倍投状态，需通过人工操作洗码，请联系客服";
+    [MBProgressHUD showSuccessWithTime:message toView:nil duration:3];
+}
 @end

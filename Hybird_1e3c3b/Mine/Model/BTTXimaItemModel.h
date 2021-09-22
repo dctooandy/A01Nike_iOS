@@ -59,6 +59,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *xmRate;
 
+@property (nonatomic, copy) NSString *multiBetRate;
+
 @property (nonatomic, strong) NSArray <BTTXimaItemTypesModel *> *xmTypes;
 
 @end
