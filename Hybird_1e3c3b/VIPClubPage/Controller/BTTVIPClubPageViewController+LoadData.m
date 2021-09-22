@@ -115,15 +115,26 @@ static const char *BTTNextGroupKey = "nextGroup";
 }
 - (VIPHistoryModel *)createVIPHistoryData
 {
-    VIPHistorySideBarModel *sData1 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2019" withImageName:@"logo" withIsSelected:YES withIsFirstData:YES];
-    VIPHistorySideBarModel *sData2 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2018" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
-    VIPHistorySideBarModel *sData3 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2017" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
+    VIPHistorySideBarModel *sData1 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2013" withImageName:@"logo" withIsSelected:NO withIsFirstData:YES];
+    VIPHistorySideBarModel *sData2 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2014" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
+    VIPHistorySideBarModel *sData3 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2015" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
     VIPHistorySideBarModel *sData4 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2016" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
-    VIPHistorySideBarModel *sData5 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2015" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
-    VIPHistorySideBarModel *sData6 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2014" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
-    VIPHistorySideBarModel *sData7 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2013" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
+    VIPHistorySideBarModel *sData5 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2017" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
+    VIPHistorySideBarModel *sData6 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2018" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
+    VIPHistorySideBarModel *sData7 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2019" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
+    VIPHistorySideBarModel *sData8 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2020" withImageName:@"logo" withIsSelected:YES withIsFirstData:NO];
 
-
+    VIPHistoryImageModel *iData8 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"12" withImageName:@"cdn/1e3c3bFM/static/img/img44.258ddc53.jpg" withUrl:@"betting_gift_202011.html"
+                                                                 withTopTitleString:@"USDT投注送华为、顶配手机等您来" withSubTitleString:@"活动圆满结束" withIsFirstData:YES withIsDetails:YES];
+    VIPHistoryImageModel *iData81 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"11" withImageName:@"cdn/1e3c3bFM/static/img/img44.258ddc53.jpg" withUrl:@"promotion/all"
+                                                                 withTopTitleString:@"USDT笔笔存送 150万 豪礼等您领" withSubTitleString:@"金额赠送完毕活动圆满结束" withIsFirstData:NO withIsDetails:YES];
+    VIPHistoryImageModel *iData82 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"2" withImageName:@"cdn/1e3c3bFM/static/img/img44.258ddc53.jpg" withUrl:@"mt_introduction_2020.html"
+                                                                 withTopTitleString:@"赌神赛" withSubTitleString:@"活动圆满结束" withIsFirstData:NO withIsDetails:YES];
+    VIPHistoryImageModel *iData83 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"1" withImageName:@"cdn/1e3c3bFM/static/img/img44.258ddc53.jpg" withUrl:@"win_champions.html"
+                                                                 withTopTitleString:@"连赢争霸" withSubTitleString:@"活动圆满结束" withIsFirstData:NO withIsDetails:YES];
+    
+    
+    
     VIPHistoryImageModel *iData1 = [[VIPHistoryImageModel alloc] initWithYearString:@"2019" WithMonthString:@"10" withImageName:@"cdn/1e3c3bFM/static/img/img44.258ddc53.jpg" withUrl:@"www/promo_av_201910/index.html"
                                                                  withTopTitleString:@"我和三上悠亚有个约会" withSubTitleString:@"与三上悠亚的浪漫邂逅圆满结束" withIsFirstData:YES withIsDetails:YES];
     VIPHistoryImageModel *iData11 = [[VIPHistoryImageModel alloc] initWithYearString:@"2019" WithMonthString:@"02" withImageName:@"cdn/1e3c3bFM/static/img/img43.e4a7c16a.jpg" withUrl:@"www/yacht_tour_201902/index.html"
@@ -252,8 +263,8 @@ static const char *BTTNextGroupKey = "nextGroup";
     
     
     
-    NSMutableArray *dArray = [NSMutableArray arrayWithObjects:sData1,sData2,sData3,sData4,sData5,sData6,sData7, nil];
-    NSMutableArray *iArray = [NSMutableArray arrayWithObjects:iData1,iData11,iData2,iData21,iData22,iData23,iData3,iData31,iData32,iData33,iData34,iData4,iData41,iData42,iData43,iData44,iData45,iData46,iData47,iData48,iData49,iData410,iData411,iData412,iData413,iData5,iData51,iData52,iData53,iData54,iData55,iData56,iData6,iData61,iData62,iData63,iData64,iData65,iData66,iData7,iData71,iData72,iData73,iData74,iData75, nil];
+    NSMutableArray *dArray = [NSMutableArray arrayWithObjects:sData8,sData7,sData6,sData5,sData4,sData3,sData2,sData1, nil];
+    NSMutableArray *iArray = [NSMutableArray arrayWithObjects:iData8,iData81,iData82,iData83,iData1,iData11,iData2,iData21,iData22,iData23,iData3,iData31,iData32,iData33,iData34,iData4,iData41,iData42,iData43,iData44,iData45,iData46,iData47,iData48,iData49,iData410,iData411,iData412,iData413,iData5,iData51,iData52,iData53,iData54,iData55,iData56,iData6,iData61,iData62,iData63,iData64,iData65,iData66,iData7,iData71,iData72,iData73,iData74,iData75, nil];
     VIPHistoryModel * tempModel = [[VIPHistoryModel alloc] initWithSideBarData:dArray withImageModel:iArray];
     return tempModel;
 }
