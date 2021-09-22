@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTThisWeekBtnsCell : BTTBaseCollectionViewCell
 
+- (void)configForExtraCustomerBtn:(BOOL)sender;
+
 @end
 
 NS_ASSUME_NONNULL_END

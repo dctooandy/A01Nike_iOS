@@ -191,10 +191,20 @@
                                 return cell;
                             }else{
                                 BTTThisWeekBtnsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTThisWeekBtnsCell" forIndexPath:indexPath];
+                                [cell configForExtraCustomerBtn:[self detectIfBetRateMode]];
                                 weakSelf(weakSelf);
                                 cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                                     strongSelf(strongSelf);
-                                    if (button.tag == 1050) {
+                                    if (button.tag == 1049)
+                                    {// 客服
+                                        [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+                                            if (errCode != CSServiceCode_Request_Suc) {
+                                                [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+                                            } else {
+
+                                            }
+                                        }];
+                                    } else if (button.tag == 1050) {
                                         if (self.selectedArray.count==0) {
                                             [MBProgressHUD showError:@"请选择要洗码的厅" toView:self.view];
                                         }else{
@@ -411,6 +421,7 @@
         total = 2 + self.xmResults.count;
     }
     NSMutableArray *elementsHight = [NSMutableArray array];
+    BOOL isBetRateMode = [self detectIfBetRateMode];
     for (int i = 0; i < total; i ++) {
         
         if (i == 0) {
@@ -465,7 +476,13 @@
                             if (i == 1 + self.validModel.xmList.count) {
                                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
                             } else if (i == self.validModel.xmList.count + 2) {
-                                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 137)]];
+                                if (isBetRateMode == YES)
+                                {
+                                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 193)]];
+                                }else
+                                {
+                                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 137)]];
+                                }
                             } else if (i == self.validModel.xmList.count + 3) {
                                 if (SCREEN_WIDTH == 414) {
                                     [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 432)]];
@@ -517,17 +534,27 @@
             }
         }
     }
-    for ( BTTXimaItemModel *model in self.validModel.xmList) {
-        if ([model.xmName isEqualToString:@"沙巴体育"] && [model.multiBetRate intValue] > 1)
-        {
-            [self showBetRateAlert];
-        }
+    if (isBetRateMode == YES)
+    {
+        [self showBetRateAlert];
     }
     
     self.elementsHight = elementsHight.mutableCopy;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
+}
+- (BOOL)detectIfBetRateMode
+{
+    BOOL isBetRateMode = NO;
+    // 判断是否有沙巴倍投
+    for ( BTTXimaItemModel *model in self.validModel.xmList) {
+        if ([model.xmName isEqualToString:@"沙巴体育"] && [model.multiBetRate intValue] > 1)
+        {
+            isBetRateMode = YES;
+        }
+    }
+    return isBetRateMode;
 }
 - (void)showBetRateAlert
 {
