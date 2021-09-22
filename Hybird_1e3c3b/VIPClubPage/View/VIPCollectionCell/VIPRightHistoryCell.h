@@ -9,7 +9,7 @@
 #import "BTTBaseCollectionViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+//typedef void (^BTTButtonClickBlock)(UIButton *button);
 @interface VIPRightHistoryCell : BTTBaseCollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
 

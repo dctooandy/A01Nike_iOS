@@ -37,6 +37,7 @@
 @property (nonatomic, assign) BTTVIPClubUserRightPageType cellType;
 @property (nonatomic, assign) BOOL isRightArrow;
 @property (assign, nonatomic) BOOL confirmTransform;
+@property (nonatomic, strong) NSMutableArray *cellHistoryArray;
 @end
 @implementation UserRightTableViewCell
 @synthesize collectionView;
@@ -46,6 +47,7 @@
     self.backgroundColor = [UIColor clearColor];
     self.isRightArrow = YES;
     self.confirmTransform = YES;/// 小大小cell 動畫效果
+    _cellHistoryArray = @[@"/www/yacht_tour/index.html",@"/www/yacht_tour2/index.html",@"/www/dream_island_trip/index.html",@"/www/ph_tour/index.html",@"/www/dream_island_trip2/index.html"].mutableCopy;
 }
 - (void)layoutSubviews
 {
@@ -309,6 +311,10 @@
         {
             cell = (VIPRightHistoryCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"VIPRightHistoryCell" forIndexPath:indexPath];
             [[(VIPRightHistoryCell *)cell cellImageView] setImage:ImageNamed(_cellNameArray[indexPath.item])];
+            weakSelf(weakSelf)
+            cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
+                [weakSelf pushToHistoryWebViewWithRow:indexPath.item];
+            };
         }
             break;
         default:
@@ -316,7 +322,24 @@
     }
     return cell;
 }
-
+- (void)pushToHistoryWebViewWithRow:(NSInteger)sender
+{
+    NSString * urlString = _cellHistoryArray[sender];
+    UIViewController *topVC = [PublicMethod currentViewController];
+    if ([topVC isKindOfClass:[BTTBaseWebViewController class]]) {
+        BTTBaseWebViewController *topWebVC = (BTTBaseWebViewController *)topVC;
+        if (topWebVC.webConfigModel.newView) {
+            topWebVC.webConfigModel.url = urlString;
+            [topWebVC loadWebView];
+            return;
+        }
+    }
+    BTTBaseWebViewController  *webController = [[BTTBaseWebViewController alloc] init];
+    webController.webConfigModel.url = urlString;
+    webController.webConfigModel.newView = YES;
+    [webController loadWebView];
+    [topVC.navigationController pushViewController:webController animated:YES];
+}
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [self animationForDescriptTravelPage];
@@ -407,20 +430,27 @@
         switch (_cellType) {
             case VIPRightUpgradePage:
                 sender.tag = 2001;
+                self.buttonClickBlock(sender);
                 break;
             case VIPRightWashRatePage:
                 sender.tag = 2000;
+                self.buttonClickBlock(sender);
                 break;
             case VIPRightTravelPage:
                 sender.tag = 2002;
+                self.buttonClickBlock(sender);
                 break;
             case VIPRightHistoryPage:
                 sender.tag = 3000;
+            {
+                int itemIndex = [self currentIndex];
+                [self pushToHistoryWebViewWithRow:itemIndex];
+            }
                 break;
             default:
                 break;
         }
-        self.buttonClickBlock(sender);
+        
     }
 }
 - (IBAction)travelNoteChangeAction:(UIButton *)sender {

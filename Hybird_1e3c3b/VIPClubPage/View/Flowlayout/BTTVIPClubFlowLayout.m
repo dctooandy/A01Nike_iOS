@@ -66,6 +66,9 @@
         case VIPRightTravelPage:
             return  CGPointMake(proposedContentOffset.x + adjustOffsetX, proposedContentOffset.y);
             break;
+        case VIPRightHistoryPage:
+            return  CGPointMake(proposedContentOffset.x + adjustOffsetX, proposedContentOffset.y);
+            break;
         default:
             return  CGPointMake(proposedContentOffset.x , proposedContentOffset.y);
             break;

@@ -8,6 +8,10 @@
 
 #import "VIPRightHistoryCell.h"
 
+@interface VIPRightHistoryCell()
+@property (weak, nonatomic) IBOutlet UIButton *imageTapBtn;
+
+@end
 @implementation VIPRightHistoryCell
 
 - (void)awakeFromNib {
@@ -15,6 +19,11 @@
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.backgroundColor = [UIColor clearColor];
     // Initialization code
+}
+- (IBAction)imageTapButtonAction:(id)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
 }
 
 @end
