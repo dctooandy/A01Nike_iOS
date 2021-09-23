@@ -124,13 +124,13 @@ static const char *BTTNextGroupKey = "nextGroup";
     VIPHistorySideBarModel *sData7 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2019" withImageName:@"logo" withIsSelected:NO withIsFirstData:NO];
     VIPHistorySideBarModel *sData8 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2020" withImageName:@"logo" withIsSelected:YES withIsFirstData:NO];
 
-    VIPHistoryImageModel *iData8 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"12" withImageName:@"cdn/1e3c3bFM/static/img/img44.258ddc53.jpg" withUrl:@"betting_gift_202011.html"
+    VIPHistoryImageModel *iData8 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"12" withImageName:@"cellPhone" withUrl:@"http://fwn.918rr.com/betting_gift_202011.html"
                                                                  withTopTitleString:@"USDT投注送华为、顶配手机等您来" withSubTitleString:@"活动圆满结束" withIsFirstData:YES withIsDetails:YES];
-    VIPHistoryImageModel *iData81 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"11" withImageName:@"cdn/1e3c3bFM/static/img/img44.258ddc53.jpg" withUrl:@"promotion/all"
+    VIPHistoryImageModel *iData81 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"11" withImageName:@"noteBook" withUrl:@"www/promotion/all"
                                                                  withTopTitleString:@"USDT笔笔存送 150万 豪礼等您领" withSubTitleString:@"金额赠送完毕活动圆满结束" withIsFirstData:NO withIsDetails:YES];
-    VIPHistoryImageModel *iData82 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"2" withImageName:@"cdn/1e3c3bFM/static/img/img44.258ddc53.jpg" withUrl:@"mt_introduction_2020.html"
+    VIPHistoryImageModel *iData82 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"2" withImageName:@"betGod" withUrl:@"www/mt_introduction_2020.html"
                                                                  withTopTitleString:@"赌神赛" withSubTitleString:@"活动圆满结束" withIsFirstData:NO withIsDetails:YES];
-    VIPHistoryImageModel *iData83 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"1" withImageName:@"cdn/1e3c3bFM/static/img/img44.258ddc53.jpg" withUrl:@"win_champions.html"
+    VIPHistoryImageModel *iData83 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"1" withImageName:@"games" withUrl:@"www/win_champions.html"
                                                                  withTopTitleString:@"连赢争霸" withSubTitleString:@"活动圆满结束" withIsFirstData:NO withIsDetails:YES];
     
     

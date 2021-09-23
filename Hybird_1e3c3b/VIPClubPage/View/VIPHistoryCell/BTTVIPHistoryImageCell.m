@@ -41,7 +41,14 @@
     [_detailBtn setHidden:!model.details];
     _topLabelWidth.constant = (model.details == YES ? SCREEN_WIDTH * 0.55 : SCREEN_WIDTH * 0.76);
     _urlString = model.url;
-    [_imageView sd_setImageWithURL:[NSURL URLWithString:model.imageURLString] placeholderImage:ImageNamed(@"default_4")];
+    
+    if (![model.imageName containsString:@".jpg"] && ![model.imageName containsString:@".png"])
+    {
+        [_imageView setImage:ImageNamed(model.imageName)];
+    }else
+    {
+        [_imageView sd_setImageWithURL:[NSURL URLWithString:model.imageURLString] placeholderImage:ImageNamed(@"default_4")];
+    }
 }
 - (void)layoutSubviews
 {
