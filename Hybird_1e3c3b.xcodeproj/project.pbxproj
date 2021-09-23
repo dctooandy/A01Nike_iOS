@@ -578,7 +578,6 @@
 		41BC7101252D6509003944ED /* BTTBiBiCunPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41BC70FE252D6509003944ED /* BTTBiBiCunPopView.xib */; };
 		41C53A9C25A851B500CFA3A1 /* BTTYenFenHongModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C53A9A25A851B400CFA3A1 /* BTTYenFenHongModel.m */; };
 		41C8D05426CE023900076A19 /* BTTForgetFinalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41C8D05226CE023900076A19 /* BTTForgetFinalController.m */; };
-		41C98DAC26F850AF0012874C /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		41CA82CB26412D1800A550EE /* BTTInterestRecordsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 41CA82C926412D1800A550EE /* BTTInterestRecordsModel.m */; };
 		41D0DC7A26C37D99003E55E1 /* BTTAddBTCController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D0DC7926C37D99003E55E1 /* BTTAddBTCController+Nav.m */; };
 		41D0DC7D26C37EC1003E55E1 /* BTTAddCardController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D0DC7C26C37EC1003E55E1 /* BTTAddCardController+Nav.m */; };
@@ -2130,7 +2129,6 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
-				41C98DAC26F850AF0012874C /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
