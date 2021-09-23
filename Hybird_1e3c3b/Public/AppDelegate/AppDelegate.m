@@ -10,7 +10,7 @@
 #import "BTTTabbarController.h"
 #import "AppDelegate+AD.h"
 #import "AppDelegate+Environment.h"
-#import <tingyunApp/NBSAppAgent.h>
+//#import <tingyunApp/NBSAppAgent.h>
 #import "PushManager.h"
 #import "AppInitializeConfig.h"
 #import <IVHeartPacketLibrary/IVHeartSocketManager.h>

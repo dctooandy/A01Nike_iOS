@@ -8,7 +8,7 @@
 
 #import "BTTUserStatusManager.h"
 #import "WebViewUserAgaent.h"
-#import <tingyunApp/NBSAppAgent.h>
+//#import <tingyunApp/NBSAppAgent.h>
 #import <IVHeartPacketLibrary/IVHeartSocketManager.h>
 #import "BTTRequestPrecache.h"
 #import "CNPreCacheMananger.h"

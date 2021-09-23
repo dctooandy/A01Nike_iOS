@@ -598,7 +598,6 @@
 		41EAF0F6260D94290091FE09 /* hot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 41EAF0F5260D94290091FE09 /* hot.gif */; };
 		41F14AF025A69CA1008E8CAD /* BTTYueFenHongPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */; };
 		41F14AF125A69CA1008E8CAD /* BTTYueFenHongPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F14AEF25A69CA1008E8CAD /* BTTYueFenHongPopView.m */; };
-		41FD5E602654AC8C00B38644 /* tingyunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */; };
 		7629D73B2668CE7300CF758C /* BTTDragonBoatMenualPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629D7382668CE7300CF758C /* BTTDragonBoatMenualPopView.m */; };
 		7629D73C2668CE7300CF758C /* BTTDragonBoatMenualPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629D7392668CE7300CF758C /* BTTDragonBoatMenualPopView.xib */; };
 		7629D7E8266C933E00CF758C /* BTTDragonBoatAutoPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629D7E5266C933E00CF758C /* BTTDragonBoatAutoPopView.xib */; };
@@ -1812,7 +1811,6 @@
 		41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTYueFenHongPopView.xib; sourceTree = "<group>"; };
 		41F14AEE25A69CA1008E8CAD /* BTTYueFenHongPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTYueFenHongPopView.h; sourceTree = "<group>"; };
 		41F14AEF25A69CA1008E8CAD /* BTTYueFenHongPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTYueFenHongPopView.m; sourceTree = "<group>"; };
-		41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = tingyunApp.framework; sourceTree = "<group>"; };
 		62DAB42824C569F6001F16B4 /* Hybird_1e3c3b.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hybird_1e3c3b.entitlements; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_1e3c3b.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7629D7382668CE7300CF758C /* BTTDragonBoatMenualPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatMenualPopView.m; sourceTree = "<group>"; };
@@ -2123,7 +2121,6 @@
 				3AD9CF04216C425200685B43 /* CoreTelephony.framework in Frameworks */,
 				3AD9CEE921675A9B00685B43 /* libresolv.tbd in Frameworks */,
 				3AD9CE312167107B00685B43 /* libpjsua-arm-apple-darwin9.a in Frameworks */,
-				41FD5E602654AC8C00B38644 /* tingyunApp.framework in Frameworks */,
 				3AD9CE2B2167107B00685B43 /* libilbccodec-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */,
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
@@ -4347,7 +4344,6 @@
 		41FD5E5E2654AC6E00B38644 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
