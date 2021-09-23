@@ -125,17 +125,17 @@ static const char *BTTNextGroupKey = "nextGroup";
     VIPHistorySideBarModel *sData8 = [[VIPHistorySideBarModel alloc] initWithYearString:@"2020" withImageName:@"logo" withIsSelected:YES withIsFirstData:NO];
 
     VIPHistoryImageModel *iData8 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"12"
-                                                                      withImageName:@"img45" withUrl:@"http://fwn.918rr.com/betting_gift_202011.html"
+                                                                      withImageName:@"img45" withUrl:@"http://fm.918rr.com/activity_pages/usdt_free_betting"
                                                                  withTopTitleString:@"USDT投注送华为、顶配手机等您来" withSubTitleString:@"活动圆满结束" withIsFirstData:YES withIsDetails:YES];
     VIPHistoryImageModel *iData81 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"11"
-                                                                       withImageName:@"img46" withUrl:@"http://fwn.918rr.com/usdt_deposit_gift_s2.html"
+                                                                       withImageName:@"img46" withUrl:@"http://fm.918rr.com/activity_pages/usdt150"
                                                                  withTopTitleString:@"USDT笔笔存送 150万 豪礼等您领" withSubTitleString:@"金额赠送完毕活动圆满结束" withIsFirstData:NO withIsDetails:YES];
     VIPHistoryImageModel *iData82 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"2"
-                                                                       withImageName:@"img47" withUrl:@"http://fwn.918rr.com/mt_introduction_2020.html"
+                                                                       withImageName:@"img47" withUrl:@"http://fm.918rr.com/www/mt_rules_2020/index.html"
                                                                  withTopTitleString:@"赌神赛" withSubTitleString:@"活动圆满结束" withIsFirstData:NO withIsDetails:YES];
     VIPHistoryImageModel *iData83 = [[VIPHistoryImageModel alloc] initWithYearString:@"2020" WithMonthString:@"1"
-                                                                       withImageName:@"img48" withUrl:@"http://fwn.918rr.com/win_champions.html"
-                                                                 withTopTitleString:@"连赢争霸" withSubTitleString:@"活动圆满结束" withIsFirstData:NO withIsDetails:YES];
+                                                                       withImageName:@"img48" withUrl:@"http://fm.918rr.com/activity_pages/win_champions"
+                                                                 withTopTitleString:@"连赢争霸赛" withSubTitleString:@"活动圆满结束" withIsFirstData:NO withIsDetails:YES];
     
     
     
