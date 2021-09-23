@@ -69,14 +69,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="107"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="YD20210922-181852" translatesAutoresizingMaskIntoConstraints="NO" id="Yyf-LK-MlC">
-                                <rect key="frame" x="10" y="23.5" width="60" height="60"/>
+                                <rect key="frame" x="10" y="38.5" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="QiC-H6-5HP"/>
-                                    <constraint firstAttribute="width" constant="60" id="dtv-ro-hvq"/>
+                                    <constraint firstAttribute="height" constant="30" id="QiC-H6-5HP"/>
+                                    <constraint firstAttribute="width" secondItem="Yyf-LK-MlC" secondAttribute="height" multiplier="1:1" id="Uti-cI-dkO"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您现在沙巴体育处于倍投状态，需通过人工操作洗码，请联系客服" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4w-Kz-A3J">
-                                <rect key="frame" x="80" y="0.0" width="285" height="107"/>
+                                <rect key="frame" x="50" y="0.0" width="315" height="107"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.85490196080000003" green="0.74117647060000003" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
