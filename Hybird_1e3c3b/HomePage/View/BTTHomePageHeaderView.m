@@ -57,18 +57,21 @@
 //                moonImage.frame = CGRectMake(80, 0, 50, 50);
 //            }
 //            [self addSubview:moonImage];
-            __block BOOL isMiddleAutumn = NO;
+            __block BOOL isSpecialHidden = NO;
             [self serverTime:^(NSString * _Nonnull timeStr) {
                 if (timeStr.length > 0) {
                     NSString * pathStr = @"";
                     //手動輸入要更換的日期
-                    if (![PublicMethod checkProductDate:@"2021-10-02" serverTime:timeStr]) {
+                    if (![PublicMethod checkProductDate:@"2021-10-08" serverTime:timeStr]) {
                         pathStr = @"";//王者之巔
+                    } else if (![PublicMethod checkProductDate:@"2021-09-25" serverTime:timeStr]) {
+                        pathStr = @"APPChinaNationalDay";//國慶
+                        isSpecialHidden = YES;
                     } else if (![PublicMethod checkProductDate:@"2021-09-22" serverTime:timeStr]) {
-                        pathStr = @"";//國慶
-                    } else if (![PublicMethod checkProductDate:@"2021-09-15" serverTime:timeStr]) {
+                        pathStr = @"";//
+                    }else if (![PublicMethod checkProductDate:@"2021-09-15" serverTime:timeStr]) {
                         pathStr = @"APPMidAutumnFestival";//中秋
-                        isMiddleAutumn = YES;
+                        isSpecialHidden = YES;
                     } else if (![PublicMethod checkProductDate:@"2021-08-27" serverTime:timeStr]) {
                         pathStr = @"918_Anniversary";//週年慶
                     }
@@ -96,7 +99,7 @@
                 self.titleLabel.textAlignment = NSTextAlignmentCenter;
                 self.titleLabel.font = kFontSystem(17);
                 self.titleLabel.textColor = [UIColor whiteColor];
-                if (isMiddleAutumn == NO)
+                if (isSpecialHidden == NO)
                 {
                     [self addSubview:logoImageView];
                     [self.titleLabel setHidden:NO];
@@ -282,17 +285,22 @@
 }
 
 -(void)serverTime:(ServerTimeCompleteBlock)completeBlock {
-    [IVNetwork requestPostWithUrl:BTTServerTime paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSDate *timeDate = [[NSDate alloc]initWithTimeIntervalSince1970:[result.body longLongValue]];
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-            completeBlock([dateFormatter stringFromDate:timeDate]);
-        } else {
-            completeBlock(@"");
-        }
-    }];
+    NSTimeInterval nowTime = [[NSDate date] timeIntervalSince1970] ;
+    NSDate *timeDate = [[NSDate alloc]initWithTimeIntervalSince1970:nowTime];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    completeBlock([dateFormatter stringFromDate:timeDate]);
+//    [IVNetwork requestPostWithUrl:BTTServerTime paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//        IVJResponseObject *result = response;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            NSDate *timeDate = [[NSDate alloc]initWithTimeIntervalSince1970:[result.body longLongValue]];
+//            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+//            completeBlock([dateFormatter stringFromDate:timeDate]);
+//        } else {
+//            completeBlock(@"");
+//        }
+//    }];
 }
 
 @end

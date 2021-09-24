@@ -10,7 +10,7 @@
 #import "BTTTabbarController.h"
 #import "AppDelegate+AD.h"
 #import "AppDelegate+Environment.h"
-#import <tingyunApp/NBSAppAgent.h>
+//#import <tingyunApp/NBSAppAgent.h>
 #import "PushManager.h"
 #import "AppInitializeConfig.h"
 #import <IVHeartPacketLibrary/IVHeartSocketManager.h>
@@ -264,7 +264,7 @@
 }
 - (void)gatewaySwitchNotification:(NSNotification *)notification
 {
-    [NBSAppAgent trackEvent:@"网关切换" withEventTag:@"gateway_change" withEventProperties:notification.userInfo];
+//    [NBSAppAgent trackEvent:@"网关切换" withEventTag:@"gateway_change" withEventProperties:notification.userInfo];
 }
 - (void)showAreaLimitWithCountry:(NSString *)country goCode:(NSString *)goCode
 {
