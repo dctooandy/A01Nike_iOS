@@ -285,22 +285,17 @@
 }
 
 -(void)serverTime:(ServerTimeCompleteBlock)completeBlock {
-    NSTimeInterval nowTime = [[NSDate date] timeIntervalSince1970] ;
-    NSDate *timeDate = [[NSDate alloc]initWithTimeIntervalSince1970:nowTime];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    completeBlock([dateFormatter stringFromDate:timeDate]);
-//    [IVNetwork requestPostWithUrl:BTTServerTime paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-//        IVJResponseObject *result = response;
-//        if ([result.head.errCode isEqualToString:@"0000"]) {
-//            NSDate *timeDate = [[NSDate alloc]initWithTimeIntervalSince1970:[result.body longLongValue]];
-//            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-//            completeBlock([dateFormatter stringFromDate:timeDate]);
-//        } else {
-//            completeBlock(@"");
-//        }
-//    }];
+    [IVNetwork requestPostWithUrl:BTTServerTime paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSDate *timeDate = [[NSDate alloc]initWithTimeIntervalSince1970:[result.body longLongValue]];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+            completeBlock([dateFormatter stringFromDate:timeDate]);
+        } else {
+            completeBlock(@"");
+        }
+    }];
 }
 
 @end
