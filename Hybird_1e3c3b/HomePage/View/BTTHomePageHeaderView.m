@@ -57,7 +57,7 @@
 //                moonImage.frame = CGRectMake(80, 0, 50, 50);
 //            }
 //            [self addSubview:moonImage];
-            __block BOOL isMiddleAutumn = NO;
+            __block BOOL isSpecialHidden = NO;
             [self serverTime:^(NSString * _Nonnull timeStr) {
                 if (timeStr.length > 0) {
                     NSString * pathStr = @"";
@@ -65,10 +65,11 @@
                     if (![PublicMethod checkProductDate:@"2021-10-02" serverTime:timeStr]) {
                         pathStr = @"";//王者之巔
                     } else if (![PublicMethod checkProductDate:@"2021-09-22" serverTime:timeStr]) {
-                        pathStr = @"";//國慶
+                        pathStr = @"APPChinaNationalDay";//國慶
+                        isSpecialHidden = YES;
                     } else if (![PublicMethod checkProductDate:@"2021-09-15" serverTime:timeStr]) {
                         pathStr = @"APPMidAutumnFestival";//中秋
-                        isMiddleAutumn = YES;
+                        isSpecialHidden = YES;
                     } else if (![PublicMethod checkProductDate:@"2021-08-27" serverTime:timeStr]) {
                         pathStr = @"918_Anniversary";//週年慶
                     }
@@ -96,7 +97,7 @@
                 self.titleLabel.textAlignment = NSTextAlignmentCenter;
                 self.titleLabel.font = kFontSystem(17);
                 self.titleLabel.textColor = [UIColor whiteColor];
-                if (isMiddleAutumn == NO)
+                if (isSpecialHidden == NO)
                 {
                     [self addSubview:logoImageView];
                     [self.titleLabel setHidden:NO];
