@@ -62,9 +62,9 @@
                 if (timeStr.length > 0) {
                     NSString * pathStr = @"";
                     //手動輸入要更換的日期
-                    if (![PublicMethod checkProductDate:@"2021-10-02" serverTime:timeStr]) {
+                    if (![PublicMethod checkProductDate:@"2021-10-08" serverTime:timeStr]) {
                         pathStr = @"";//王者之巔
-                    } else if (![PublicMethod checkProductDate:@"2021-09-22" serverTime:timeStr]) {
+                    } else if (![PublicMethod checkProductDate:@"2021-09-25" serverTime:timeStr]) {
                         pathStr = @"APPChinaNationalDay";//國慶
                         isSpecialHidden = YES;
                     } else if (![PublicMethod checkProductDate:@"2021-09-15" serverTime:timeStr]) {
