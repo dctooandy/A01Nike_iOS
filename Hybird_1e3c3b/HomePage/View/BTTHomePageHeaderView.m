@@ -67,8 +67,10 @@
                     } else if (![PublicMethod checkProductDate:@"2021-09-25" serverTime:timeStr]) {
                         pathStr = @"APPChinaNationalDay";//國慶
                         isSpecialHidden = YES;
-                    } else if (![PublicMethod checkProductDate:@"2021-09-15" serverTime:timeStr]) {
-                        pathStr = @"";//中秋
+                    } else if (![PublicMethod checkProductDate:@"2021-09-22" serverTime:timeStr]) {
+                        pathStr = @"";//
+                    }else if (![PublicMethod checkProductDate:@"2021-09-15" serverTime:timeStr]) {
+                        pathStr = @"APPMidAutumnFestival";//中秋
                         isSpecialHidden = YES;
                     } else if (![PublicMethod checkProductDate:@"2021-08-27" serverTime:timeStr]) {
                         pathStr = @"918_Anniversary";//週年慶
