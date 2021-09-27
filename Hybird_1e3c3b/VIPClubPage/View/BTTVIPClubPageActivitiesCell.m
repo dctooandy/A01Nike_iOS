@@ -211,11 +211,11 @@
 {
     VIPActivitiesImageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"VIPActivitiesImageCell" forIndexPath:indexPath];
     NSString *imagePath = self.activityModel.imageUrls[indexPath.item];
-    NSString * titleString =@"empty" ;
+    NSString * titleString = @"empty" ;
     if (indexPath.item > 7)
     {
         NSInteger disInt = self.activityModel.imageUrls.count - (indexPath.item + 1);
-        titleString = [NSString stringWithFormat:@"+%ld",disInt];
+        titleString = (disInt == 0 ? @"empty" : [NSString stringWithFormat:@"+%ld",disInt]);
     }
     [cell configForTitle:titleString withImageUrl:imagePath];
     
