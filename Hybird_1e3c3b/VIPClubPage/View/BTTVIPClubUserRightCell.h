@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTVIPClubUserRightCell : BTTBaseCollectionViewCell
-
+- (void)scrollToPageWithIndex:(NSIndexPath*)indexPath;
 @end
 
 NS_ASSUME_NONNULL_END

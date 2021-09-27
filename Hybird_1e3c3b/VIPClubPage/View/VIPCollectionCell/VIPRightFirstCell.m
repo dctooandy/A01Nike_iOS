@@ -56,4 +56,9 @@
         self.buttonClickBlock(sender);
     }
 }
+- (IBAction)nextPageAction:(id)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
+}
 @end

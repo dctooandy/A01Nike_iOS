@@ -323,6 +323,9 @@
             weakSelf(weakSelf);
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
+                if (button.tag == 999) {
+                    [cell scrollToPageWithIndex:[NSIndexPath indexPathForItem:1 inSection:0]];
+                }
                 if (button.tag == 1000) {
                     BTTLoginOrRegisterViewController *loginAndRegister = [[BTTLoginOrRegisterViewController alloc] init];
                     loginAndRegister.registerOrLoginType = BTTRegisterOrLoginTypeLogin;

@@ -112,5 +112,8 @@
 //
 //    [self.tableView reloadData];
 //}
-
+- (void)scrollToPageWithIndex:(NSIndexPath*)indexPath
+{
+    [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+}
 @end
