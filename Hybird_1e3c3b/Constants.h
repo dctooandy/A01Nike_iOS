@@ -148,6 +148,15 @@ typedef enum {
     BTTTwoWaySelect,    ///兩張券以上
     BTTOneWaySelectAndConfirm, ///一張券以上的最後一張
 }BTTMenualSelectMode;
+//悬浮按钮位置
+typedef enum {
+    BTTLeftTop = 1,
+    BTTLeftMiddle,
+    BTTLeftBottom,
+    BTTRightTop,
+    BTTRightMiddle,
+    BTTRightBottom,
+}BTTAssistivePosition;
 
 typedef void (^CompleteBlock)(IVJResponseObject *response);
 
