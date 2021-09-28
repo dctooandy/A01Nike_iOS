@@ -658,7 +658,13 @@
                 if ([IVNetwork savedUserInfo]) {
                     [self enterVideoGameWithGameModel:gameModel];
                 } else {
-                    [self showTryAlertViewWithGameModel:gameModel];
+                    if ([gameModel.provider isEqualToString:@"PNG"])
+                    {
+                        [self gameAfterLogin];
+                    }else
+                    {
+                        [self showTryAlertViewWithGameModel:gameModel];
+                    }
                 }
             }
         }
@@ -672,7 +678,13 @@
                 if ([IVNetwork savedUserInfo]) {
                     [self enterVideoGameWithGameModel:gameModel];
                 } else {
-                    [self showTryAlertViewWithGameModel:gameModel];
+                    if ([gameModel.provider isEqualToString:@"PNG"])
+                    {
+                        [self gameAfterLogin];
+                    }else
+                    {
+                        [self showTryAlertViewWithGameModel:gameModel];
+                    }
                 }
             }
         } else {
@@ -684,13 +696,24 @@
                 if ([IVNetwork savedUserInfo]) {
                     [self enterVideoGameWithGameModel:gameModel];
                 } else {
-                    [self showTryAlertViewWithGameModel:gameModel];
+                    if ([gameModel.provider isEqualToString:@"PNG"])
+                    {
+                        [self gameAfterLogin];
+                    }else
+                    {
+                        [self showTryAlertViewWithGameModel:gameModel];
+                    }
                 }
             }
         }
     }
 }
-
+- (void)gameAfterLogin
+{
+    [MBProgressHUD showError:@"请先登录" toView:nil];
+    BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)bannerToGame:(BTTBannerModel *)model {
     if ([model.action.type isEqualToString:@"1"] ) {
         if (model.action.detail.length <= 0) {
@@ -848,7 +871,7 @@
 
 // 直接进入游戏
 - (void)enterVideoGameWithGameModel:(BTTVideoGameModel *)gameModel {
-    if ([gameModel.provider isEqualToString:@"TTG"] || [gameModel.provider isEqualToString:@"PP"] || [gameModel.provider isEqualToString:@"PT"] || [gameModel.provider isEqualToString:@"PS"] || [gameModel.provider isEqualToString:@"MG"] || [gameModel.gameCode isEqualToString:BTTAGGJKEY]) {
+    if ([gameModel.provider isEqualToString:@"TTG"] || [gameModel.provider isEqualToString:@"PP"] || [gameModel.provider isEqualToString:@"PT"] || [gameModel.provider isEqualToString:@"PS"] || [gameModel.provider isEqualToString:@"MG"] || [gameModel.gameCode isEqualToString:BTTAGGJKEY] || [gameModel.provider isEqualToString:@"PNG"]) {
         [self chooseGameLine:gameModel];
         return;
     }
