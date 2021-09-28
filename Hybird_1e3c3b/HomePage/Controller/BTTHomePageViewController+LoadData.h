@@ -8,8 +8,9 @@
 
 #import "BTTHomePageViewController.h"
 #import "BTTGameModel.h"
+#import "BTTAssistiveButtonModel.h"
 NS_ASSUME_NONNULL_BEGIN
-
+typedef void (^BTTAssistiveBlock)(BTTAssistiveButtonModel *model);
 @interface BTTHomePageViewController (LoadData)
 
 
@@ -56,8 +57,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)showMidAutumnPopView;
 
--(void)loadBiBiCun;
+- (void)loadBiBiCun;
 
+- (void)loadAssistiveDataWithBlock:(BTTAssistiveBlock)assistiveBlock;
 @end
 
 NS_ASSUME_NONNULL_END
