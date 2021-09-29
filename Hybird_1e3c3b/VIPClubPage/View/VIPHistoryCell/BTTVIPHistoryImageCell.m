@@ -33,7 +33,8 @@
 }
 - (void)imageConfigForCell:(VIPHistoryImageModel *)model
 {
-    _topView.hidden = !model.isFirstData;
+//    _topView.hidden = !model.isFirstData;// 0929 原本:依照年份出现cell,现改为全部都不要有年份
+    _topView.hidden  = YES;
     _topYearLabel.text = model.yearString;
     _bottomYearLabel.text = [NSString stringWithFormat:@"%@年%@月",model.yearString,model.monthString];
     _topTitleLabel.text = model.topTitleString;

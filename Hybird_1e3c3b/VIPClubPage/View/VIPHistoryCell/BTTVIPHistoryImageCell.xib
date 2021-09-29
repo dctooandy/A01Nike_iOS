@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -40,8 +40,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCx-hY-4jn">
                         <rect key="frame" x="5" y="49" width="365" height="168"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021年10月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4T2-d4-oNT">
-                                <rect key="frame" x="289.5" y="144" width="65.5" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021年10月" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4T2-d4-oNT">
+                                <rect key="frame" x="10" y="144" width="345" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="2ID-Ei-d47"/>
                                 </constraints>
@@ -112,6 +112,7 @@
                             <constraint firstAttribute="bottom" secondItem="4T2-d4-oNT" secondAttribute="bottom" id="asn-Z9-SVK"/>
                             <constraint firstItem="TUQ-0x-y3b" firstAttribute="leading" secondItem="TCx-hY-4jn" secondAttribute="leading" id="gie-Va-ybG"/>
                             <constraint firstAttribute="trailing" secondItem="4T2-d4-oNT" secondAttribute="trailing" constant="10" id="iaf-5e-gsp"/>
+                            <constraint firstItem="4T2-d4-oNT" firstAttribute="leading" secondItem="TCx-hY-4jn" secondAttribute="leading" constant="10" id="w8s-lg-BfW"/>
                             <constraint firstAttribute="trailing" secondItem="cUk-Ah-Ohn" secondAttribute="trailing" id="xzf-0i-HSn"/>
                         </constraints>
                     </view>

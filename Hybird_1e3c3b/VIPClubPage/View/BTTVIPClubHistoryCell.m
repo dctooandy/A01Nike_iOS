@@ -103,7 +103,9 @@
     CGFloat selectImageListsmallHeight = 173 ;
     for (int i = 0; i < imageTotal; i++)
     {
-        CGFloat currentHeight = self.imageDatas[i].isFirstData ? selectImageListBigHeight:selectImageListsmallHeight;
+//        CGFloat currentHeight = self.imageDatas[i].isFirstData ? selectImageListBigHeight:selectImageListsmallHeight;
+        // 0929 原本:依照年份出现cell,现改为全部都不要有年份
+        CGFloat currentHeight = self.imageDatas[i].isFirstData ? selectImageListsmallHeight:selectImageListsmallHeight;
         [imageElementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(imageCollectionViewWidth, currentHeight )]];
     }
     self.sideBarElementsHight = [sideBarElementsHight mutableCopy];

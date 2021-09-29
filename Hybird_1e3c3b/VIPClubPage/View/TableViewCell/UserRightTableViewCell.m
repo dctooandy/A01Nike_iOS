@@ -155,7 +155,7 @@
             detailCellWidthSpaceRate = (SCREEN_WIDTH - defaultHeight/370*250)/2/SCREEN_WIDTH;
             self.backGroundImage.image = ImageNamed(@"Upgrade_BG");
             self.wordImageView.image = ImageNamed(@"Group 9");
-            _cellNameArray = @[@"OneStarCopy3",@"TwoStarCopy",@"ThreeStarCopy",@"FourStarCopy",@"FiveStarCopy",@"SixStarCopy"].mutableCopy;
+            _cellNameArray = @[@"OneStarCopy",@"TwoStarCopy",@"ThreeStarCopy",@"FourStarCopy",@"FiveStarCopy",@"SixStarCopy"].mutableCopy;
             [self.discriptionButton setHidden:NO];
             break;
         case VIPRightWashRatePage:
