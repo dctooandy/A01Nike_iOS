@@ -87,11 +87,9 @@
         NSLog(@"下拉刷新");
         [strongSelf refreshDatasOfHomePage];
     }];
+    //悬浮按钮设定
     [self loadAssistiveDataWithBlock:^(BTTAssistiveButtonModel * _Nonnull model) {
-        
-        BTTAssistiveButtonModel *tempModel = [[BTTAssistiveButtonModel alloc] initWithTitle:@"测试" WithLink:@"www.google.com" withImageName:@"http://fm.918rr.com/cdn/1e3c3bFM/externals/img/_wms/_l/_banner/banner-index-0ed9f19760e4011652fdd1c2fce70954b.jpg" withPosition:@"6"];
         [weakSelf setUpAssistiveButton:model completed:^{
-            
             if (self.assistiveButton != nil) {
                 [weakSelf.view addSubview:weakSelf.assistiveButton];
             }

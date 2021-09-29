@@ -40,34 +40,36 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 @implementation BTTHomePageViewController (Nav)
 
 -(void)setUpAssistiveButton:(BTTAssistiveButtonModel* )model completed:(ButtonCallBack _Nullable)completionBlock {
-//    UIImage * image = [UIImage imageNamed:@"ic_918_assistive_btn_bg"];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 132, 132)];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:model.image] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        
-//        CGFloat assistiveBtnHeight = 132 + [UIImage imageNamed:@"ic_918_assistive_close_btn"].size.height;
-//        CGFloat loginBtnViewHeight = 87;
-//        CGFloat postionY = SCREEN_HEIGHT - kTabbarHeight - assistiveBtnHeight/2 - loginBtnViewHeight;
-        self.assistiveButton = [[AssistiveButton alloc] initMainBtnWithBackgroundImage:imageView.image highlightImage:nil position:model.positionPoint];
-        //主按鈕可移動或不可移動
-        self.assistiveButton.positionMode = SpreadPositionModeTouchBorder;
-        weakSelf(weakSelf);
-        [self.assistiveButton setMainButtonClickActionBlock:^{
-            weakSelf.assistiveButton.hidden = true;
-            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            //        vc.webConfigModel.url = @"/activity_pages/anniversary";
-            vc.webConfigModel.url = model.link;// 吃model的资料
-            vc.webConfigModel.newView = YES;
-            vc.webConfigModel.theme = @"outside";
-            //        vc.title = @"博天堂周年庆典";
-            vc.title = model.title;// 吃model的资料
-            [weakSelf.navigationController pushViewController:vc animated:YES];
+    if (![model.isShow isEqualToString:@"0"])
+    {
+        //    UIImage * image = [UIImage imageNamed:@"ic_918_assistive_btn_bg"];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 132, 132)];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:model.image] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            
+            //        CGFloat assistiveBtnHeight = 132 + [UIImage imageNamed:@"ic_918_assistive_close_btn"].size.height;
+            //        CGFloat loginBtnViewHeight = 87;
+            //        CGFloat postionY = SCREEN_HEIGHT - kTabbarHeight - assistiveBtnHeight/2 - loginBtnViewHeight;
+            self.assistiveButton = [[AssistiveButton alloc] initMainBtnWithBackgroundImage:imageView.image highlightImage:nil position:model.positionPoint];
+            //主按鈕可移動或不可移動
+            self.assistiveButton.positionMode = SpreadPositionModeTouchBorder;
+            weakSelf(weakSelf);
+            [self.assistiveButton setMainButtonClickActionBlock:^{
+                weakSelf.assistiveButton.hidden = true;
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                //        vc.webConfigModel.url = @"/activity_pages/anniversary";
+                vc.webConfigModel.url = model.link;// 吃model的资料
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"outside";
+                //        vc.title = @"博天堂周年庆典";
+                vc.title = model.title;// 吃model的资料
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }];
+            [self.assistiveButton setCloseBtnActionBlock:^{
+                [weakSelf.assistiveButton removeFromSuperview];
+            }];
+            completionBlock();
         }];
-        [self.assistiveButton setCloseBtnActionBlock:^{
-            [weakSelf.assistiveButton removeFromSuperview];
-        }];
-        completionBlock();
-    }];
-    
+    }
 }
 
 -(void)showAssistiveButton {
