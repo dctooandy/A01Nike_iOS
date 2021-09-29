@@ -43,13 +43,21 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     if (![model.isShow isEqualToString:@"0"])
     {
         //    UIImage * image = [UIImage imageNamed:@"ic_918_assistive_btn_bg"];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 132, 132)];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:model.image] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        UIImageView *imageView = [[UIImageView alloc] init];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:model.image] completed:^(NSData * _Nullable data,UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             
             //        CGFloat assistiveBtnHeight = 132 + [UIImage imageNamed:@"ic_918_assistive_close_btn"].size.height;
             //        CGFloat loginBtnViewHeight = 87;
             //        CGFloat postionY = SCREEN_HEIGHT - kTabbarHeight - assistiveBtnHeight/2 - loginBtnViewHeight;
-            self.assistiveButton = [[AssistiveButton alloc] initMainBtnWithBackgroundImage:imageView.image highlightImage:nil position:model.positionPoint];
+        
+            if ([imageURL.description containsString:@"gif"])
+            {
+                UIImage * backgroundImage = [UIImage sd_animatedGIFWithData:data];
+                self.assistiveButton = [[AssistiveButton alloc] initMainBtnWithBackgroundImage:backgroundImage highlightImage:nil position:model.positionPoint];
+            }else
+            {
+                self.assistiveButton = [[AssistiveButton alloc] initMainBtnWithBackgroundImage:imageView.image highlightImage:nil position:model.positionPoint];
+            }
             //主按鈕可移動或不可移動
             self.assistiveButton.positionMode = SpreadPositionModeTouchBorder;
             weakSelf(weakSelf);
