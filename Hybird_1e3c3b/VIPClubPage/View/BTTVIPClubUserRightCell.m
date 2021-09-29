@@ -96,6 +96,10 @@
         {
             float newHeight = defaultInnerHeight + (SCREEN_HEIGHT/812.0) * 120;
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, newHeight)]];
+        }else if (i == 6)
+        {
+            float newHeight = defaultInnerHeight + (SCREEN_HEIGHT/812.0) * 30;
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, newHeight)]];
         }else
         {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, defaultInnerHeight)]];

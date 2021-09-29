@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *wordImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *displayNoteOne;
 @property (weak, nonatomic) IBOutlet UIImageView *displayNoteTwo;
+@property (weak, nonatomic) IBOutlet UIImageView *displayNoteThree;
 @property (weak, nonatomic) IBOutlet UIImageView *rightLeftArrowIconImageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewHeight;
 @property (weak, nonatomic) IBOutlet UIButton *travelLargeButton;
@@ -117,7 +118,7 @@
     CGFloat bottomViewHeightConstraint =  0.14;
     CGFloat washRatePageBottomHeight = 0.1;
     CGFloat ssrTravelBottomHeight = 0.19;
-    CGFloat historyPageBottomHeight = 0.09;
+    CGFloat historyPageBottomHeight = 0.12;
     
     CGFloat cellHeightRate = 0.6;
     CGFloat cellTopSpaceRate = 0.2;
@@ -126,6 +127,7 @@
     CGFloat detailCellWidthSpaceRate = 0.06;
     [self.displayNoteOne setHidden:YES];
     [self.displayNoteTwo setHidden:YES];
+    [self.displayNoteThree setHidden:YES];
     [self.rightLeftArrowIconImageView setHidden:YES];
     [self.collectionView setPagingEnabled:NO];
     [self.travelLargeButton setHidden:YES];
@@ -223,6 +225,7 @@
             bottomViewHeightConstraint = historyPageBottomHeight;
             [self.discriptionButton setHidden:NO];
             [self.discriptionButton setTitle:@"查看回顾" forState:UIControlStateNormal];
+            [self.displayNoteThree setHidden:NO];
             break;
         default:
             break;

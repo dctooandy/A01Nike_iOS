@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -95,16 +95,12 @@
                             <constraint firstAttribute="width" secondItem="AS7-6x-3tB" secondAttribute="height" multiplier="343:93" id="6Gz-Nc-oKu"/>
                         </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPT-CV-Q0A">
-                        <rect key="frame" x="131.5" y="265" width="112.5" height="32.5"/>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Slice_NoteThree" translatesAutoresizingMaskIntoConstraints="NO" id="bMo-Pn-Z8s">
+                        <rect key="frame" x="16" y="768" width="343" height="70"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="VPT-CV-Q0A" secondAttribute="height" multiplier="100:29" id="WS7-2g-0j4"/>
+                            <constraint firstAttribute="height" constant="70" id="SlC-KY-T4z"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                        <state key="normal" title="游艇豪华游">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </state>
-                    </button>
+                    </imageView>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="79M-EO-J28">
                         <rect key="frame" x="268" y="272.5" width="70" height="20"/>
                         <constraints>
@@ -118,6 +114,16 @@
                         <connections>
                             <action selector="travelNoteChangeAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cPP-SO-Smx"/>
                         </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPT-CV-Q0A">
+                        <rect key="frame" x="131.5" y="265" width="112.5" height="32.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="VPT-CV-Q0A" secondAttribute="height" multiplier="100:29" id="WS7-2g-0j4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                        <state key="normal" title="游艇豪华游">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
                     </button>
                 </subviews>
                 <constraints>
@@ -136,6 +142,7 @@
                     <constraint firstItem="TwP-IQ-NpH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Q4F-3m-pdT"/>
                     <constraint firstItem="VPT-CV-Q0A" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="SfV-bx-HIl"/>
                     <constraint firstItem="F8m-3E-Bol" firstAttribute="leading" secondItem="6nt-vp-wbv" secondAttribute="trailing" id="TAw-T4-Cap"/>
+                    <constraint firstItem="bMo-Pn-Z8s" firstAttribute="bottom" secondItem="AS7-6x-3tB" secondAttribute="bottom" id="Wsk-xy-nIK"/>
                     <constraint firstItem="x7n-Wq-zcg" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ZGM-UN-gaR"/>
                     <constraint firstItem="79M-EO-J28" firstAttribute="leading" secondItem="VPT-CV-Q0A" secondAttribute="trailing" constant="24" id="akm-aY-17T"/>
                     <constraint firstAttribute="bottom" secondItem="La3-Ve-8hT" secondAttribute="bottom" id="bK3-Io-Mqc"/>
@@ -148,9 +155,11 @@
                     <constraint firstAttribute="trailing" secondItem="RFa-dV-vJS" secondAttribute="trailing" id="iEb-o0-tGt"/>
                     <constraint firstItem="F8m-3E-Bol" firstAttribute="top" secondItem="TwP-IQ-NpH" secondAttribute="bottom" id="k8w-Ae-ogE"/>
                     <constraint firstItem="AS7-6x-3tB" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="nep-2w-ykS"/>
+                    <constraint firstItem="bMo-Pn-Z8s" firstAttribute="trailing" secondItem="AS7-6x-3tB" secondAttribute="trailing" id="nrr-hb-HEL"/>
                     <constraint firstItem="YT9-pi-5km" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="sh0-ck-fLN"/>
                     <constraint firstItem="dOL-ny-oUW" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="uVH-Im-80w"/>
                     <constraint firstItem="6nt-vp-wbv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vqx-DQ-iEN"/>
+                    <constraint firstItem="bMo-Pn-Z8s" firstAttribute="leading" secondItem="AS7-6x-3tB" secondAttribute="leading" id="w9b-99-dqM"/>
                     <constraint firstItem="6nt-vp-wbv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="y1L-Ep-mF6"/>
                 </constraints>
                 <variation key="default">
@@ -174,6 +183,7 @@
                 <outlet property="bottomViewHeight" destination="yAj-zU-jg8" id="1Ps-3N-80R"/>
                 <outlet property="discriptionButton" destination="x7n-Wq-zcg" id="Esb-5C-V57"/>
                 <outlet property="displayNoteOne" destination="dOL-ny-oUW" id="3PR-xt-4Ji"/>
+                <outlet property="displayNoteThree" destination="bMo-Pn-Z8s" id="Gmc-eO-ZYQ"/>
                 <outlet property="displayNoteTwo" destination="AS7-6x-3tB" id="h18-mc-ItC"/>
                 <outlet property="rightLeftArrowIconImageView" destination="YT9-pi-5km" id="oJo-F5-dxg"/>
                 <outlet property="topViewHeight" destination="suL-No-6Yp" id="EQY-ao-QnP"/>
@@ -189,5 +199,6 @@
         <image name="Icon_Arrow_Right" width="30" height="30"/>
         <image name="SliceRightsDescriptNote" width="343" height="45"/>
         <image name="Slice_Note" width="343" height="93"/>
+        <image name="Slice_NoteThree" width="343" height="70"/>
     </resources>
 </document>
