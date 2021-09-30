@@ -43,7 +43,7 @@
         [self configureDefaultValue];
         [self setFrame:_mainFrame];
         self.center = position;
-        [self configureGesture];
+//        [self configureGesture];
     }
     return self;
 }
@@ -152,7 +152,14 @@
         }
     }
 }
-
+- (void)setPositionMode:(SpreadPositionMode)positionMode
+{
+    _positionMode = positionMode;
+    if (positionMode != SpreadPositionModeNone)
+    {
+        [self configureGesture];
+    }
+}
 - (void)didMoveToSuperview {
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.superview];
 }

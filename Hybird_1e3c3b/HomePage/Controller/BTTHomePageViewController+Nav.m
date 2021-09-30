@@ -58,8 +58,8 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
             {
                 self.assistiveButton = [[AssistiveButton alloc] initMainBtnWithBackgroundImage:imageView.image highlightImage:nil position:model.positionPoint];
             }
-            //主按鈕可移動或不可移動
-            self.assistiveButton.positionMode = SpreadPositionModeTouchBorder;
+            //主按鈕可移動或移動後回彈跟不可移動
+            self.assistiveButton.positionMode = SpreadPositionModeNone;
             weakSelf(weakSelf);
             [self.assistiveButton setMainButtonClickActionBlock:^{
                 weakSelf.assistiveButton.hidden = true;
