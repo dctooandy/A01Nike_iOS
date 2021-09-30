@@ -667,7 +667,6 @@
 		76F8642B26E87D5900320B60 /* BTTVIPHistorySideBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8642626E87D5800320B60 /* BTTVIPHistorySideBarCell.m */; };
 		76F8642F26E87E8E00320B60 /* VIPHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8642E26E87E8E00320B60 /* VIPHistoryModel.m */; };
 		76F8643126E87ECE00320B60 /* BTTVIPClubHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */; };
-		76F8643A26F05C5A00320B60 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
 		76F8644426F0BC0B00320B60 /* APPMidAutumnFestival.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
@@ -2243,7 +2242,6 @@
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
 				41D9E36526E0AEFD00E5CE4A /* libboringssl_simulator.a in Frameworks */,
-				76F8643A26F05C5A00320B60 /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -5505,7 +5503,6 @@
 				413E324F251B3520000804E2 /* BTTCreditRecordController+LoadData.m in Sources */,
 				3A7A1A7121BF859000572B50 /* BTTRegisterSuccessChangePwdCell.m in Sources */,
 				76F863AC26E0B61100320B60 /* BTTVIPClubUserRightCell.m in Sources */,
-				4184FDF324E4EA7D008521D0 /* BTTForgetPasswordController+Nav.m in Sources */,
 				41042F56261D87FC0020B0AA /* BTTPasswordChangeBtnsCell.m in Sources */,
 				D5DBEB0721ABB774008AF629 /* CNPayDepositStep1VC.m in Sources */,
 				3ADD23FA2179CA8C00FA959A /* BTTAccountBlanceHeaderCell.m in Sources */,
@@ -6168,7 +6165,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.326;
+				MARKETING_VERSION = 3.2.341;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6209,7 +6206,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.2.326;
+				MARKETING_VERSION = 3.2.341;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
