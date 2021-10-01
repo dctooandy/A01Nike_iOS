@@ -112,7 +112,7 @@
                     self.titleLabel.text = @"首页";
                 }else
                 {
-                    self.titleLabel.text = @"VIPClub";
+                    self.titleLabel.text = @"VIP俱乐部";
                 }
                 self.titleLabel.textAlignment = NSTextAlignmentCenter;
                 self.titleLabel.font = kFontSystem(17);

@@ -48,7 +48,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"VIPClub";
+    self.title = @"VIP俱乐部";
     _tempModel = [self createVIPHistoryData];
     if ([IVNetwork savedUserInfo]) {
         self.isLogin = YES;

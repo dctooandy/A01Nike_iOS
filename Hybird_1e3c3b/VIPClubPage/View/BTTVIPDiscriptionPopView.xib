@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -64,13 +64,13 @@
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcq-9p-wI2">
                                     <rect key="frame" x="16" y="16" width="236" height="282"/>
                                     <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
-                                    <string key="text">1.有效投注额统计时间为北京时间每周一0：00至每周日23：59：59;
-2.有效投注额计算按单独游戏厅分别计算，具体有按以下厅：AGIN真人，BBIN真人，AG旗舰，AS真人棋牌，龙门电投；AG电游，BBIN电游；AGIN捕鱼王二代；MG，TTG，PT；AG彩票，BBIN彩票；沙巴体育，BTI体育。
+                                    <mutableString key="text">1.有效投注额统计时间为北京时间每周一0：00至每周日23：59：59;
+2.有效投注额计算按单独游戏厅分别计算，具体有按以下厅：AGIN真人，BBIN真人，AG旗舰，AS真人棋牌；AG电游，BBIN电游；AGIN捕鱼王二代；MG，TTG，PT；AG彩票，BBIN彩票；沙巴体育，YSB体育。
 3.每周二进行统计上一周各游戏厅有效投注额，礼金于17：00前添加到账；
 4.晋级礼金添加后即可直接申请提款，无投注额限制；
 5.同一会员，同一姓名，同一收款账号，同一IP只能一个账号享受晋级礼金；
 6.如发现玩家使用不正当手段获取网站奖励，博天堂保留取消该玩家获得优惠的权利；
-7.以上优惠的最终解释权归博天堂所有。</string>
+7.以上优惠的最终解释权归博天堂所有。</mutableString>
                                     <color key="textColor" systemColor="labelColor"/>
                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

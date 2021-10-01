@@ -90,7 +90,7 @@
 //        }
         if (i == 4)
         {
-            float newHeight = defaultInnerHeight + 300 ;
+            float newHeight = defaultInnerHeight + (SCREEN_HEIGHT >= 812 ? 300 : 400) ;
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, newHeight)]];
         }else if (i == 5)
         {

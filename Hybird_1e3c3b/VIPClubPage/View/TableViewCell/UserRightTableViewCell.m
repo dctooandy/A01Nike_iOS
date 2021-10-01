@@ -221,7 +221,7 @@
             defaultHeight = SCREEN_HEIGHT*cellHeightRate;
             self.backGroundImage.image = ImageNamed(@"SliceTravel_History_BG");
             self.wordImageView.image = ImageNamed(@"SliceWordTravelHistory");
-            _cellNameArray = @[@"SliceTravelImageS1",@"SliceTravelImageS2",@"SliceTravelImageS3",@"SliceTravelImageS4",@"SliceTravelImageFCBC"].mutableCopy;
+            _cellNameArray = @[@"SliceTravelImageS1",@"SliceTravelImageS2",@"SliceTravelImageS3",@"SliceTravelImageS4",@"SliceTravelImageS5"].mutableCopy;
             bottomViewHeightConstraint = historyPageBottomHeight;
             [self.discriptionButton setHidden:NO];
             [self.discriptionButton setTitle:@"查看回顾" forState:UIControlStateNormal];
