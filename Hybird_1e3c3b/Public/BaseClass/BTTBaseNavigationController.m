@@ -17,8 +17,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.popDelegate = self.interactivePopGestureRecognizer.delegate;
-//    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg"] forBarMetrics:UIBarMetricsDefault];
-//    self.navigationBar.titleTextAttributes = NavigationBarTitleTextAttributes;
     if (@available(iOS 13.0, *)) {
         UINavigationBarAppearance *app = [UINavigationBarAppearance new];
         [app configureWithOpaqueBackground];
@@ -29,7 +27,6 @@
         [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg"] forBarMetrics:UIBarMetricsDefault];
         self.navigationBar.titleTextAttributes = NavigationBarTitleTextAttributes;
     }
-
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
