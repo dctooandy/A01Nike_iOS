@@ -13,8 +13,9 @@
  *  环境类型 本地 运测 线上 对应 0 1 2
  */
 
-#define EnvirmentType 2
+#define EnvirmentType 1
 
 
 
 #endif /* AppInitializeValueConfig_h */
+//

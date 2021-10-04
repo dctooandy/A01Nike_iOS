@@ -18,18 +18,21 @@
     self = [super init];
     if (self) {
         UIImage * closeImage = [UIImage imageNamed:@"ic_918_assistive_close_btn"];
-        self.mainFrame = CGRectMake(position.x, position.y, backgroundImage.size.width, backgroundImage.size.height);
+//        self.mainFrame = CGRectMake(position.x, position.y, backgroundImage.size.width, backgroundImage.size.height);
+        self.mainFrame = CGRectMake(position.x, position.y, 132, 132);
         self.superViewRelativePosition = position;
         
         //main Button
-        self.powerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height)];
+//        self.powerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height)];
+        self.powerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 132, 132)];
         [self.powerButton setBackgroundImage:backgroundImage forState:UIControlStateNormal];
         self.powerButton.tag = 0;
         self.powerButton.adjustsImageWhenHighlighted = NO;
         [self.powerButton addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_powerButton];
         
-        UIButton * closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(backgroundImage.size.width-closeImage.size.width, 0, closeImage.size.width, closeImage.size.height)];
+//        UIButton * closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(backgroundImage.size.width-closeImage.size.width, 0, closeImage.size.width, closeImage.size.height)];
+        UIButton * closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(132-closeImage.size.width, 0, closeImage.size.width, closeImage.size.height)];
         [closeBtn setBackgroundImage:closeImage forState:UIControlStateNormal];
         [closeBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         closeBtn.tag = 1;
@@ -40,7 +43,7 @@
         [self configureDefaultValue];
         [self setFrame:_mainFrame];
         self.center = position;
-        [self configureGesture];
+//        [self configureGesture];
     }
     return self;
 }
@@ -149,7 +152,14 @@
         }
     }
 }
-
+- (void)setPositionMode:(SpreadPositionMode)positionMode
+{
+    _positionMode = positionMode;
+    if (positionMode != SpreadPositionModeNone)
+    {
+        [self configureGesture];
+    }
+}
 - (void)didMoveToSuperview {
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.superview];
 }

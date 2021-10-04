@@ -599,7 +599,8 @@
 		41EAF0F6260D94290091FE09 /* hot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 41EAF0F5260D94290091FE09 /* hot.gif */; };
 		41F14AF025A69CA1008E8CAD /* BTTYueFenHongPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */; };
 		41F14AF125A69CA1008E8CAD /* BTTYueFenHongPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F14AEF25A69CA1008E8CAD /* BTTYueFenHongPopView.m */; };
-		41FD5E602654AC8C00B38644 /* tingyunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */; };
+		76168DF626F47AC500D6D8AC /* APPChinaNationalDay.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76168DF526F47AC500D6D8AC /* APPChinaNationalDay.gif */; };
+		76168DF926FC516F00D6D8AC /* tingyunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76168DF826FC516F00D6D8AC /* tingyunApp.framework */; };
 		7629D73B2668CE7300CF758C /* BTTDragonBoatMenualPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629D7382668CE7300CF758C /* BTTDragonBoatMenualPopView.m */; };
 		7629D73C2668CE7300CF758C /* BTTDragonBoatMenualPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629D7392668CE7300CF758C /* BTTDragonBoatMenualPopView.xib */; };
 		7629D7E8266C933E00CF758C /* BTTDragonBoatAutoPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629D7E5266C933E00CF758C /* BTTDragonBoatAutoPopView.xib */; };
@@ -667,6 +668,7 @@
 		76F8642B26E87D5900320B60 /* BTTVIPHistorySideBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8642626E87D5800320B60 /* BTTVIPHistorySideBarCell.m */; };
 		76F8642F26E87E8E00320B60 /* VIPHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8642E26E87E8E00320B60 /* VIPHistoryModel.m */; };
 		76F8643126E87ECE00320B60 /* BTTVIPClubHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */; };
+		76E768D62703149B0047ECA0 /* BTTAssistiveButtonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E768D52703149B0047ECA0 /* BTTAssistiveButtonModel.m */; };
 		76F8644426F0BC0B00320B60 /* APPMidAutumnFestival.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
@@ -1856,9 +1858,10 @@
 		41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTYueFenHongPopView.xib; sourceTree = "<group>"; };
 		41F14AEE25A69CA1008E8CAD /* BTTYueFenHongPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTYueFenHongPopView.h; sourceTree = "<group>"; };
 		41F14AEF25A69CA1008E8CAD /* BTTYueFenHongPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTYueFenHongPopView.m; sourceTree = "<group>"; };
-		41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = tingyunApp.framework; sourceTree = "<group>"; };
 		62DAB42824C569F6001F16B4 /* Hybird_1e3c3b.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hybird_1e3c3b.entitlements; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_1e3c3b.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		76168DF526F47AC500D6D8AC /* APPChinaNationalDay.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = APPChinaNationalDay.gif; sourceTree = "<group>"; };
+		76168DF826FC516F00D6D8AC /* tingyunApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = tingyunApp.framework; sourceTree = "<group>"; };
 		7629D7382668CE7300CF758C /* BTTDragonBoatMenualPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatMenualPopView.m; sourceTree = "<group>"; };
 		7629D7392668CE7300CF758C /* BTTDragonBoatMenualPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatMenualPopView.xib; sourceTree = "<group>"; };
 		7629D73A2668CE7300CF758C /* BTTDragonBoatMenualPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatMenualPopView.h; sourceTree = "<group>"; };
@@ -1967,6 +1970,8 @@
 		76F8642D26E87E8E00320B60 /* VIPHistoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPHistoryModel.h; sourceTree = "<group>"; };
 		76F8642E26E87E8E00320B60 /* VIPHistoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPHistoryModel.m; sourceTree = "<group>"; };
 		76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTVIPClubHistoryCell.xib; sourceTree = "<group>"; };
+		76E768D42703149B0047ECA0 /* BTTAssistiveButtonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTAssistiveButtonModel.h; sourceTree = "<group>"; };
+		76E768D52703149B0047ECA0 /* BTTAssistiveButtonModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTAssistiveButtonModel.m; sourceTree = "<group>"; };
 		76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = APPMidAutumnFestival.gif; sourceTree = "<group>"; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
 		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
@@ -2235,9 +2240,9 @@
 				3AD9CF04216C425200685B43 /* CoreTelephony.framework in Frameworks */,
 				3AD9CEE921675A9B00685B43 /* libresolv.tbd in Frameworks */,
 				3AD9CE312167107B00685B43 /* libpjsua-arm-apple-darwin9.a in Frameworks */,
-				41FD5E602654AC8C00B38644 /* tingyunApp.framework in Frameworks */,
 				3AD9CE2B2167107B00685B43 /* libilbccodec-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */,
+				76168DF926FC516F00D6D8AC /* tingyunApp.framework in Frameworks */,
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
@@ -2849,6 +2854,7 @@
 			children = (
 				41588C9626D889BB001060E7 /* 918_Anniversary.gif */,
 				76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */,
+				76168DF526F47AC500D6D8AC /* APPChinaNationalDay.gif */,
 				4142CFB226E9F4F100650449 /* login_bg_video.mp4 */,
 				41EAF0F5260D94290091FE09 /* hot.gif */,
 				D3B47D5823B70A5400D37C7F /* app.zip */,
@@ -3629,6 +3635,8 @@
 				41C53A9A25A851B400CFA3A1 /* BTTYenFenHongModel.m */,
 				7675705826A9657A0065F99B /* BTTPopViewModel.h */,
 				7675705926A9657A0065F99B /* BTTPopViewModel.m */,
+				76E768D42703149B0047ECA0 /* BTTAssistiveButtonModel.h */,
+				76E768D52703149B0047ECA0 /* BTTAssistiveButtonModel.m */,
 				414AAA252602021100518D32 /* BTTFirstWinningListModel.h */,
 				414AAA262602021100518D32 /* BTTFirstWinningListModel.m */,
 				41AB7FE326CA4A450086AF9B /* BTTCheckCustomerModel.h */,
@@ -4462,7 +4470,7 @@
 		41FD5E5E2654AC6E00B38644 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
-				41FD5E5F2654AC8C00B38644 /* tingyunApp.framework */,
+				76168DF826FC516F00D6D8AC /* tingyunApp.framework */,
 			);
 			path = Framework;
 			sourceTree = "<group>";
@@ -5153,6 +5161,7 @@
 				4135A6FC263941D000D3BF17 /* BTTLiCaiInterestRateBillCell.xib in Resources */,
 				76F8643126E87ECE00320B60 /* BTTVIPClubHistoryCell.xib in Resources */,
 				3ADD237221772FB900FA959A /* BTTMeMoneyHeaderCell.xib in Resources */,
+				76168DF626F47AC500D6D8AC /* APPChinaNationalDay.gif in Resources */,
 				3AD9CF51216EFB3700685B43 /* BTTHomePageBannerCell.xib in Resources */,
 				414AAA222601F76F00518D32 /* BTTDcboxPayController.xib in Resources */,
 				D5DBEB2F21ABB774008AF629 /* CNCompleteInfoView.xib in Resources */,
@@ -5553,6 +5562,7 @@
 				3A37E1202164A21900FB13A1 /* BTTLuckyWheelViewController.m in Sources */,
 				D345F29D23D0088C00E658A6 /* BTTCustomerInfoModel.m in Sources */,
 				D345F2A823D0091600E658A6 /* BTTSubcribModel.m in Sources */,
+				76E768D62703149B0047ECA0 /* BTTAssistiveButtonModel.m in Sources */,
 				3AE1EAEC218006820073A32D /* BTTCardBindMobileController.m in Sources */,
 				3AAFF8B421D60A3000F875B1 /* BTTStepTwoContainerController.m in Sources */,
 				3A8F51EB215F78F50069D1B3 /* BTTBaseViewController.m in Sources */,

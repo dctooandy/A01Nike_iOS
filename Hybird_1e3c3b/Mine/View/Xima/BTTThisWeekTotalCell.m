@@ -27,13 +27,24 @@
 - (void)setModel:(BTTXimaTotalModel *)model {
     _model = model;
     double amount = 0;
+    double shabaAmount = 0;
     NSString *unitString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"USDT" : @"元";
     for (int i =0; i<model.xmList.count; i++) {
+        if ([model.xmList[i].xmName isEqualToString:@"沙巴体育"] && [model.xmList[i].multiBetRate intValue] > 1)
+        {
+            shabaAmount = model.xmList[i].xmAmount;
+        }
         amount = amount+model.xmList[i].xmAmount;
         if (i==model.xmList.count-1) {
-            self.totalLabel.text = [NSString stringWithFormat:@"%@%@",[PublicMethod transferNumToThousandFormat:amount],unitString];
+            
+            self.totalLabel.text = [NSString stringWithFormat:@"%@%@",[PublicMethod transferNumToThousandFormat:(amount - shabaAmount)],unitString];
         }
     }
+    
+}
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
     
 }
 

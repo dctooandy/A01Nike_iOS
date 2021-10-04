@@ -74,6 +74,8 @@ typedef enum {
 
 @property (nonatomic, assign) BTTXimaThisWeekType thisWeekDataType; ///< this week 数据类型
 
+@property (nonatomic, copy) NSString *multiBetRate; ///是否有沙巴体育Rate
+
 @end
 
 NS_ASSUME_NONNULL_END

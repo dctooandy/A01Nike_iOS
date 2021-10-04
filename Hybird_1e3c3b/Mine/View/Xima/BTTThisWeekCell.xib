@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,19 +36,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123,456,789.01" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Rs-ym-TCS">
-                        <rect key="frame" x="133.5" y="49.5" width="93.5" height="16"/>
+                        <rect key="frame" x="133.5" y="49.5" width="92.5" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.85490196080000003" green="0.74117647060000003" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="比率:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5G-DS-dvy">
-                        <rect key="frame" x="42" y="75.5" width="30.5" height="16"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" red="0.50588235290000005" green="0.52941176469999995" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.2%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPU-yY-vBU">
-                        <rect key="frame" x="80.5" y="75.5" width="28" height="16"/>
+                        <rect key="frame" x="80.5" y="75.5" width="29" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.85490196080000003" green="0.74117647060000003" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -65,17 +59,55 @@
                             <action selector="selecteBtn_click:" destination="gTV-IL-0wX" eventType="touchUpInside" id="LqC-3P-xaJ"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="比率:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5G-DS-dvy">
+                        <rect key="frame" x="42" y="75.5" width="30.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.50588235290000005" green="0.52941176469999995" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgE-q7-iAw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="107"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="YD20210922-181852" translatesAutoresizingMaskIntoConstraints="NO" id="Yyf-LK-MlC">
+                                <rect key="frame" x="10" y="38.5" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="QiC-H6-5HP"/>
+                                    <constraint firstAttribute="width" secondItem="Yyf-LK-MlC" secondAttribute="height" multiplier="1:1" id="Uti-cI-dkO"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您现在沙巴体育处于倍投状态，需通过人工操作洗码，请联系客服" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4w-Kz-A3J">
+                                <rect key="frame" x="50" y="0.0" width="315" height="107"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.85490196080000003" green="0.74117647060000003" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.12919250130000001" green="0.13317504529999999" blue="0.15686553719999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="Yyf-LK-MlC" firstAttribute="centerY" secondItem="rgE-q7-iAw" secondAttribute="centerY" id="AVN-YT-07X"/>
+                            <constraint firstAttribute="trailing" secondItem="P4w-Kz-A3J" secondAttribute="trailing" constant="10" id="MBN-hQ-yVO"/>
+                            <constraint firstItem="Yyf-LK-MlC" firstAttribute="leading" secondItem="rgE-q7-iAw" secondAttribute="leading" constant="10" id="U0i-O0-Q1J"/>
+                            <constraint firstItem="P4w-Kz-A3J" firstAttribute="top" secondItem="rgE-q7-iAw" secondAttribute="top" id="Viu-ay-LHu"/>
+                            <constraint firstAttribute="bottom" secondItem="P4w-Kz-A3J" secondAttribute="bottom" id="g9Z-2J-EfS"/>
+                            <constraint firstItem="P4w-Kz-A3J" firstAttribute="leading" secondItem="Yyf-LK-MlC" secondAttribute="trailing" constant="10" id="mVW-rp-uwP"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <constraints>
                 <constraint firstItem="pbM-nJ-Xjd" firstAttribute="leading" secondItem="sBu-yY-O87" secondAttribute="trailing" constant="8" id="0fR-sT-xjo"/>
                 <constraint firstAttribute="trailing" secondItem="GA4-wp-TFK" secondAttribute="trailing" constant="15" id="2oE-7U-C63"/>
                 <constraint firstItem="O5G-DS-dvy" firstAttribute="top" secondItem="Gyt-mm-cX6" secondAttribute="bottom" constant="10" id="6vE-Le-2hs"/>
                 <constraint firstItem="GA4-wp-TFK" firstAttribute="centerY" secondItem="pbM-nJ-Xjd" secondAttribute="centerY" id="FEA-w7-mN8"/>
+                <constraint firstAttribute="trailing" secondItem="rgE-q7-iAw" secondAttribute="trailing" id="R9N-5z-i8E"/>
                 <constraint firstItem="sBu-yY-O87" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="SRV-Yq-iJy"/>
                 <constraint firstItem="Gyt-mm-cX6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="42" id="UNt-HZ-GjF"/>
                 <constraint firstItem="pbM-nJ-Xjd" firstAttribute="centerY" secondItem="sBu-yY-O87" secondAttribute="centerY" id="Wvu-bl-8h8"/>
+                <constraint firstItem="rgE-q7-iAw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Zp8-on-co4"/>
+                <constraint firstAttribute="bottom" secondItem="rgE-q7-iAw" secondAttribute="bottom" id="bhz-79-RMe"/>
                 <constraint firstItem="UPU-yY-vBU" firstAttribute="leading" secondItem="O5G-DS-dvy" secondAttribute="trailing" constant="8" id="es4-Yz-H6n"/>
+                <constraint firstItem="rgE-q7-iAw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="iqf-Dc-3vc"/>
                 <constraint firstItem="sBu-yY-O87" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="jf7-P3-dOd"/>
                 <constraint firstItem="2Rs-ym-TCS" firstAttribute="centerY" secondItem="Gyt-mm-cX6" secondAttribute="centerY" id="jhY-sI-aja"/>
                 <constraint firstItem="O5G-DS-dvy" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="42" id="ksh-G6-yh6"/>
@@ -83,9 +115,9 @@
                 <constraint firstItem="2Rs-ym-TCS" firstAttribute="leading" secondItem="Gyt-mm-cX6" secondAttribute="trailing" constant="8" id="oUh-gB-pwo"/>
                 <constraint firstItem="UPU-yY-vBU" firstAttribute="centerY" secondItem="O5G-DS-dvy" secondAttribute="centerY" id="pYp-Is-vuC"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="375" height="105"/>
             <connections>
+                <outlet property="betRateAlertView" destination="rgE-q7-iAw" id="yEq-79-lmJ"/>
                 <outlet property="nameLabel" destination="pbM-nJ-Xjd" id="EtI-bq-JEd"/>
                 <outlet property="rateLabel" destination="UPU-yY-vBU" id="sgo-yY-Alg"/>
                 <outlet property="selectButton" destination="sBu-yY-O87" id="tIs-GC-QQX"/>
@@ -96,6 +128,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="YD20210922-181852" width="70" height="70"/>
         <image name="xima_select" width="19" height="19"/>
         <image name="xima_unselect" width="19" height="19"/>
     </resources>

@@ -7,7 +7,10 @@
 //
 
 #import "BTTThisWeekBtnsCell.h"
+@interface BTTThisWeekBtnsCell()
+@property (weak, nonatomic) IBOutlet UIButton *customerBtn;
 
+@end
 @implementation BTTThisWeekBtnsCell
 
 - (void)awakeFromNib {
@@ -16,7 +19,18 @@
     self.mineSparaterType = BTTMineSparaterTypeNone;
 }
 
+- (void)configForExtraCustomerBtn:(BOOL)sender
+{
+    [_customerBtn setHidden:!sender];
+}
+
 - (IBAction)ximaBtnClick:(UIButton *)sender {
+    if (self.buttonClickBlock) {
+        self.buttonClickBlock(sender);
+    }
+}
+
+- (IBAction)customerServiceClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
         self.buttonClickBlock(sender);
     }

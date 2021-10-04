@@ -88,6 +88,10 @@ static const NSInteger loadingTag = 10101;
     [self show:success icon:@"app_smile" view:view];
 }
 
++ (void)showSuccessWithTime:(NSString *)success toView:(UIView *)view duration:(NSTimeInterval)duration{
+    [self showWithTime:success icon:@"app_smile" view:view duration:duration];
+}
+
 #pragma mark 显示一些信息
 + (MBProgressHUD *)showMessag:(NSString *)message toView:(UIView *)view {
     if (view == nil) view = [UIApplication sharedApplication].keyWindow;

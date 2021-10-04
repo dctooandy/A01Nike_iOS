@@ -8,7 +8,7 @@
 
 #import "BTTUserStatusManager.h"
 #import "WebViewUserAgaent.h"
-#import <tingyunApp/NBSAppAgent.h>
+//#import <tingyunApp/NBSAppAgent.h>
 #import <IVHeartPacketLibrary/IVHeartSocketManager.h>
 #import "BTTRequestPrecache.h"
 #import "CNPreCacheMananger.h"
@@ -18,7 +18,7 @@
 {
     [IVNetwork updateUserInfo:userInfo];
     NSString *userId = [IVNetwork savedUserInfo].rfCode;
-    [NBSAppAgent setUserIdentifier:userId];
+//    [NBSAppAgent setUserIdentifier:userId];
     [[IVGameManager sharedManager] userStatusChanged:YES];
     [IVPushManager sharedManager].customerId = [IVNetwork savedUserInfo].rfCode;
     [[IVPushManager sharedManager] sendIpsSuperSign];
@@ -33,7 +33,7 @@
     [WebViewUserAgaent clearCookie];
     [[IVGameManager sharedManager] userStatusChanged:NO];
     [IVHeartSocketManager exitLoginSendHearPacket];
-    [NBSAppAgent setUserIdentifier:nil];
+//    [NBSAppAgent setUserIdentifier:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSuccessNotification object:nil];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:BTTAlreadyShowNoDesposit];
     [LiveChat reloadSDK];

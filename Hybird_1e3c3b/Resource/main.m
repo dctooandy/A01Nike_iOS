@@ -12,14 +12,14 @@
 
 int main(int argc, char * argv[]) {
     @autoreleasepool {
-        if (EnvirmentType == 2) {
-            [NBSAppAgent startWithAppID:TingYunAppId];
-            [NBSAppAgent setRedirectURL:@"https://app.tingyunfenxi.com"];
-            if ([IVNetwork savedUserInfo]) {
-                NSString *userId = [IVNetwork savedUserInfo].customerId;
-                [NBSAppAgent setUserIdentifier:userId];
-            }
-        }
+//        if (EnvirmentType == 2) {
+//            [NBSAppAgent startWithAppID:TingYunAppId];
+//            [NBSAppAgent setRedirectURL:@"https://app.tingyunfenxi.com"];
+//            if ([IVNetwork savedUserInfo]) {
+//                NSString *userId = [IVNetwork savedUserInfo].customerId;
+//                [NBSAppAgent setUserIdentifier:userId];
+//            }
+//        }
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }
 }

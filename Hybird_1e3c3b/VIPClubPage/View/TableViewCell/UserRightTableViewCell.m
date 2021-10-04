@@ -110,6 +110,7 @@
     NSMutableArray *elementsHight = [NSMutableArray array];
     NSInteger count = 0;
     NSInteger diffSpacing  = 0;
+    CGFloat widthHeightRate = SCREEN_WIDTH/SCREEN_HEIGHT;
     CGFloat defaultHeight = SCREEN_HEIGHT - 49;
     
     CGFloat topTitleHeightConstraint =  0.08;
@@ -198,7 +199,7 @@
             break;
         case VIPRightTravelPage:
             count = 2;
-            diffSpacing = -40;
+            diffSpacing = -(widthHeightRate * (95));
             cellHeightRate = 0.6;
             cellTopSpaceRate = 0.36;
             defaultHeight = SCREEN_HEIGHT*cellHeightRate;
@@ -215,7 +216,7 @@
             break;
         case VIPRightHistoryPage:
             count = 5;
-            diffSpacing = -20;
+            diffSpacing = -(widthHeightRate * (55));
             cellHeightRate = 0.6;
             cellTopSpaceRate = 0.23;
             defaultHeight = SCREEN_HEIGHT*cellHeightRate;

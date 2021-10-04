@@ -72,6 +72,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger withdralPwdFlag;
 @property (nonatomic, assign) NSInteger lockBalanceStatus;
 @property (nonatomic, assign) NSInteger lockBalanceDays;
+@property (nonatomic, copy) NSString *multiBetRate;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -138,7 +138,7 @@ static char TAG_ACTIVITY_SHOW;
                     [sself sd_setNeedsLayout];
                 }
                 if (completedBlock && shouldCallCompletedBlock) {
-                    completedBlock(image, error, cacheType, url);
+                    completedBlock(data,image, error, cacheType, url);
                 }
             };
             
@@ -199,7 +199,7 @@ static char TAG_ACTIVITY_SHOW;
 #endif
             if (completedBlock) {
                 NSError *error = [NSError errorWithDomain:SDWebImageErrorDomain code:-1 userInfo:@{NSLocalizedDescriptionKey : @"Trying to load a nil url"}];
-                completedBlock(nil, error, SDImageCacheTypeNone, url);
+                completedBlock(nil ,nil, error, SDImageCacheTypeNone, url);
             }
         });
     }
