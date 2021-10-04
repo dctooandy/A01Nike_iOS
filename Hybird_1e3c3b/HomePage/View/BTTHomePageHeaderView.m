@@ -112,7 +112,10 @@
                 serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
                 [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
                 [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-                [serviceBtn addTarget:self action:@selector(switchEnvirmant) forControlEvents:UIControlEventTouchUpOutside];
+                if ([app_version floatValue] > 3.2)
+                {
+                    [serviceBtn addTarget:self action:@selector(switchEnvirmant) forControlEvents:UIControlEventTouchUpOutside];
+                }
                 serviceBtn.tag = 2001;
                 __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 [self addSubview:messageBtn];
