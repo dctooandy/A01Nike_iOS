@@ -37,6 +37,7 @@
             return @"https://fen1264.com/";
             break;
         default:
+            return @"http://m.a01.com/";
             break;
     }
 }
@@ -53,6 +54,7 @@
             return @"https://fen1264.com/";
             break;
         default:
+            return @"http://m.a01.com/";
             break;
     }
 }
