@@ -12,8 +12,13 @@
 /**
  *  环境类型 本地 运测 线上 对应 0 1 2
  */
+#define Version [app_version floatValue] > 3.2 ? [[NSUserDefaults standardUserDefaults] integerForKey:@"Envirment"] : 2
+#define EnvirmentType Version
 
-#define EnvirmentType 1
+/**
+ *  首頁改版 版本切換 舊版 新版 NO / YES
+ */
+#define HomePageNewVersion YES
 
 
 

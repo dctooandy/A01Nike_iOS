@@ -7,6 +7,7 @@
 //
 
 #import "BTTHomePageHeaderView.h"
+#import "AppInitializeConfig.h"
 #import "UIImage+GIF.h"
 #import "AppInitializeConfig.h"
 #import "GradientImage.h"
@@ -93,17 +94,7 @@
                 }
                 
                 UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
-                
                 logoImageView.image = ImageNamed(@"Navlogo");
-                [logoImageView setUserInteractionEnabled:YES];
-                if ([app_version floatValue] > 3.2)
-                {
-                    UITapGestureRecognizer *tapOne = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchEnvirmant)];
-                    tapOne.numberOfTapsRequired = 3;
-                    [logoImageView addGestureRecognizer:tapOne];
-                }
-                
-                
                 self.titleLabel = [UILabel new];
                 [self addSubview:self.titleLabel];
                 self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
@@ -130,6 +121,10 @@
                 serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
                 [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
                 [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+                if ([app_version floatValue] > 3.2)
+                {
+                    [serviceBtn addTarget:self action:@selector(switchEnvirmant) forControlEvents:UIControlEventTouchUpOutside];
+                }
                 serviceBtn.tag = 2001;
                 __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 [self addSubview:messageBtn];
@@ -248,10 +243,12 @@
     
     
 }
+
 - (void)switchEnvirmant
 {
     weakSelf(weakSelf)
     IVActionHandler handler = ^(UIAlertAction *action){
+
         [weakSelf rebootBySecWithEnvirment:BTT_DEV];
     };
     IVActionHandler handler1 = ^(UIAlertAction *action){
@@ -274,6 +271,7 @@
         exit(0);
     });
 }
+
 - (NSString*)formatTypeToString:(NSInteger)formatType {
     NSString *result = nil;
     switch(formatType) {
@@ -291,6 +289,7 @@
     }
     return result;
 }
+
 - (void)setIsLogin:(BOOL)isLogin {
     _isLogin = isLogin;
     if (_isLogin) {
