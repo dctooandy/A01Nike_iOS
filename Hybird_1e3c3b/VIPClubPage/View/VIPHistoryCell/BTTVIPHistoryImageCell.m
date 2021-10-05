@@ -84,6 +84,7 @@
     BTTBaseWebViewController  *webController = [[BTTBaseWebViewController alloc] init];
     webController.webConfigModel.url = self.urlString;
     webController.webConfigModel.newView = YES;
+    webController.webConfigModel.title = self.topTitleLabel.text;
     [webController loadWebView];
     [topVC.navigationController pushViewController:webController animated:YES];
 }
