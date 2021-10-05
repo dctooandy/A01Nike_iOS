@@ -593,7 +593,6 @@
 		41D1075626A9143E00721F61 /* BTTChangeMobileNextController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D1074926A9143E00721F61 /* BTTChangeMobileNextController+LoadData.m */; };
 		41D1075726A9143E00721F61 /* BTTBindingMobileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D1074D26A9143E00721F61 /* BTTBindingMobileController.m */; };
 		41D1075826A9143E00721F61 /* BTTBindingMobileController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D1074E26A9143E00721F61 /* BTTBindingMobileController+LoadData.m */; };
-		41D9E36526E0AEFD00E5CE4A /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3399698243C215D00B91A52 /* libboringssl_simulator.a */; };
 		41E4FC4B26E5AC2A006F55FD /* BTTDiscountsViewController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 41E4FC4A26E5AC2A006F55FD /* BTTDiscountsViewController+Nav.m */; };
 		41EAF0F2260D93BD0091FE09 /* BTTMeInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41EAF0F1260D93BD0091FE09 /* BTTMeInfoCell.xib */; };
 		41EAF0F6260D94290091FE09 /* hot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 41EAF0F5260D94290091FE09 /* hot.gif */; };
@@ -620,12 +619,13 @@
 		76756F8626A6C5790065F99B /* BTTDefaultPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756F8326A6C5780065F99B /* BTTDefaultPopView.xib */; };
 		76756F8726A6C5790065F99B /* BTTDefaultPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756F8526A6C5790065F99B /* BTTDefaultPopView.m */; };
 		7675705A26A9657A0065F99B /* BTTPopViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675705926A9657A0065F99B /* BTTPopViewModel.m */; };
-		76A7D7A1270ACCE000BB320F /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
+		76A7D7A3270AFFC200BB320F /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
 		76C9F42C2668A3070002591D /* BTTDragonBoatChancePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F4292668A3060002591D /* BTTDragonBoatChancePopView.xib */; };
 		76C9F42D2668A3070002591D /* BTTDragonBoatChancePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F42A2668A3060002591D /* BTTDragonBoatChancePopView.m */; };
+		76E768D62703149B0047ECA0 /* BTTAssistiveButtonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E768D52703149B0047ECA0 /* BTTAssistiveButtonModel.m */; };
 		76F8638226E0B52C00320B60 /* GradientImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8638126E0B52C00320B60 /* GradientImage.m */; };
 		76F8638C26E0B5F700320B60 /* BTTVIPClubPageViewController+Nav.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8638726E0B5F700320B60 /* BTTVIPClubPageViewController+Nav.m */; };
 		76F8638D26E0B5F700320B60 /* BTTVIPClubPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8638826E0B5F700320B60 /* BTTVIPClubPageViewController.m */; };
@@ -669,7 +669,6 @@
 		76F8642B26E87D5900320B60 /* BTTVIPHistorySideBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8642626E87D5800320B60 /* BTTVIPHistorySideBarCell.m */; };
 		76F8642F26E87E8E00320B60 /* VIPHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8642E26E87E8E00320B60 /* VIPHistoryModel.m */; };
 		76F8643126E87ECE00320B60 /* BTTVIPClubHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */; };
-		76E768D62703149B0047ECA0 /* BTTAssistiveButtonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76E768D52703149B0047ECA0 /* BTTAssistiveButtonModel.m */; };
 		76F8644426F0BC0B00320B60 /* APPMidAutumnFestival.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
@@ -1903,6 +1902,8 @@
 		76C9F42A2668A3060002591D /* BTTDragonBoatChancePopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatChancePopView.m; sourceTree = "<group>"; };
 		76C9F42B2668A3060002591D /* BTTDragonBoatChancePopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTDragonBoatChancePopView.h; sourceTree = "<group>"; };
 		76CC62BD265677E00042AEDF /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = Hybird_1e3c3b/Public/Tools/ThirdParty/libboringssl_simulator.a; sourceTree = "<group>"; };
+		76E768D42703149B0047ECA0 /* BTTAssistiveButtonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTAssistiveButtonModel.h; sourceTree = "<group>"; };
+		76E768D52703149B0047ECA0 /* BTTAssistiveButtonModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTAssistiveButtonModel.m; sourceTree = "<group>"; };
 		76F8638026E0B52C00320B60 /* GradientImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientImage.h; sourceTree = "<group>"; };
 		76F8638126E0B52C00320B60 /* GradientImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientImage.m; sourceTree = "<group>"; };
 		76F8638626E0B5F600320B60 /* BTTVIPClubPageViewController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTVIPClubPageViewController+LoadData.h"; sourceTree = "<group>"; };
@@ -1971,8 +1972,6 @@
 		76F8642D26E87E8E00320B60 /* VIPHistoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPHistoryModel.h; sourceTree = "<group>"; };
 		76F8642E26E87E8E00320B60 /* VIPHistoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPHistoryModel.m; sourceTree = "<group>"; };
 		76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTVIPClubHistoryCell.xib; sourceTree = "<group>"; };
-		76E768D42703149B0047ECA0 /* BTTAssistiveButtonModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTAssistiveButtonModel.h; sourceTree = "<group>"; };
-		76E768D52703149B0047ECA0 /* BTTAssistiveButtonModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTAssistiveButtonModel.m; sourceTree = "<group>"; };
 		76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = APPMidAutumnFestival.gif; sourceTree = "<group>"; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
 		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
@@ -2001,7 +2000,6 @@
 		D339969324371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTOneKeyRegisterBitollCell.h; sourceTree = "<group>"; };
 		D339969424371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTOneKeyRegisterBitollCell.m; sourceTree = "<group>"; };
 		D3399696243B08E000B91A52 /* libboringssl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libboringssl.tbd; path = usr/lib/libboringssl.tbd; sourceTree = SDKROOT; };
-		D3399698243C215D00B91A52 /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = ../Desktop/libboringssl_simulator.a; sourceTree = "<group>"; };
 		D339CE9524C03CAC009ACD1C /* OTCInsideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCInsideController.h; sourceTree = "<group>"; };
 		D339CE9624C03CAC009ACD1C /* OTCInsideController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OTCInsideController.xib; sourceTree = "<group>"; };
 		D339CE9A24C03CB6009ACD1C /* OTCInsideModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCInsideModel.h; sourceTree = "<group>"; };
@@ -2247,7 +2245,7 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
-				41D9E36526E0AEFD00E5CE4A /* libboringssl_simulator.a in Frameworks */,
+				76A7D7A3270AFFC200BB320F /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -4617,7 +4615,6 @@
 		8746ABB2D5D61EF30A4942D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D3399698243C215D00B91A52 /* libboringssl_simulator.a */,
 				76CC62BD265677E00042AEDF /* libboringssl_simulator.a */,
 				D3399696243B08E000B91A52 /* libboringssl.tbd */,
 				3AD9CF03216C425200685B43 /* CoreTelephony.framework */,
