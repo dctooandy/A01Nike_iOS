@@ -41,8 +41,43 @@
 
 - (void)setupSubviewsWithNavType:(BTTNavType)navType {
     switch (navType) {
-        case BTTNavTypeHomePage:
         case BTTNavTypeVIPClub:
+        {
+            UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
+            logoImageView.image = ImageNamed(@"Navlogo");
+            [self addSubview:logoImageView];
+            self.titleLabel = [UILabel new];
+            [self addSubview:self.titleLabel];
+            self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
+            self.titleLabel.textAlignment = NSTextAlignmentCenter;
+            self.titleLabel.font = kFontSystem(17);
+            self.titleLabel.textColor = [UIColor whiteColor];
+            self.titleLabel.text = @"VIP俱乐部";
+
+            UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [self addSubview:serviceBtn];
+            serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
+            [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+            serviceBtn.tag = 2001;
+            __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [self addSubview:messageBtn];
+            messageBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight - BTTBtnAndBtnConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
+            [messageBtn setImage:ImageNamed(@"homepage_messege") forState:UIControlStateNormal];
+            messageBtn.redDotOffset = CGPointMake(1, 3);
+            messageBtn.tag = 2002;
+            [messageBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [GJRedDot registNodeWithKey:BTTHomePageMessage
+                              parentKey:BTTHomePageItemsKey
+                            defaultShow:NO];
+            [self setRedDotKey:BTTHomePageMessage refreshBlock:^(BOOL show) {
+                NSInteger num = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTUnreadMessageNumKey] integerValue];
+                messageBtn.showRedDot = num;
+            } handler:self];
+        }
+            break;
+        case BTTNavTypeHomePage:
         {
             // 中秋装饰
 //            NSString *path = nil;
@@ -98,16 +133,11 @@
                 self.titleLabel = [UILabel new];
                 [self addSubview:self.titleLabel];
                 self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
-                if (navType == BTTNavTypeHomePage)
-                {
-                    self.titleLabel.text = @"首页";
-                }else
-                {
-                    self.titleLabel.text = @"VIP俱乐部";
-                }
+                
                 self.titleLabel.textAlignment = NSTextAlignmentCenter;
                 self.titleLabel.font = kFontSystem(17);
                 self.titleLabel.textColor = [UIColor whiteColor];
+                self.titleLabel.text = @"首页";
                 if (isSpecialHidden == NO)
                 {
                     [self addSubview:logoImageView];
@@ -116,6 +146,7 @@
                 {
                     [self.titleLabel setHidden:YES];
                 }
+                
                 UIButton *serviceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 [self addSubview:serviceBtn];
                 serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
@@ -239,9 +270,6 @@
         default:
             break;
     }
-    
-    
-    
 }
 
 - (void)switchEnvirmant
