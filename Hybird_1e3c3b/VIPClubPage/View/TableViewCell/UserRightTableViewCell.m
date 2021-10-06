@@ -253,7 +253,10 @@
     }
     self.elementsHight = elementsHight.mutableCopy;
     [self.collectionView reloadData];
-    [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+    if (self.cellType != VIPRightHistoryPage)
+    {
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+    }
 }
 #pragma mark - UICollectionViewDataSource
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -348,21 +351,21 @@
 {
     [self animationForDescriptTravelPage];
 }
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    [self animationForDescriptTravelPage];
-}
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    [self animationForDescriptTravelPage];
-}
+//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+//{
+//    [self animationForDescriptTravelPage];
+//}
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+//{
+//    [self animationForDescriptTravelPage];
+//}
 -(void)animationForDescriptTravelPage
 {
     switch (_cellType) {
         case VIPRightRightsDescriptPage:
         {
-            int itemIndex = [self currentIndex];
-            [self animationArrowIcon:(itemIndex == 0)];
+//            int itemIndex = [self currentIndex];
+//            [self animationArrowIcon:(itemIndex == 0)];
         }
         case VIPRightTravelPage:
         {
@@ -416,7 +419,7 @@
     CGFloat itemHeight = [[_elementsHight firstObject] CGSizeValue].height;
     int index = 0;
     if (_flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal) {
-        index = (self.collectionView.contentOffset.x + itemWidth * 0.5) / itemWidth;
+        index = (int)lround(self.collectionView.contentOffset.x / (itemWidth - fabs(self.flowLayout.minimumLineSpacing)));
     } else {
         index = (self.collectionView.contentOffset.y + itemHeight * 0.5) / itemHeight;
     }

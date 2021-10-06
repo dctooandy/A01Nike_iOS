@@ -17,8 +17,7 @@
 + (NSArray *)gateways {
     switch (EnvirmentType) {
         case 0:
-//            return @[@"http://www.pt-gateway.com/_glaxy_1e3c3b_/"];
-            return @[@"http://php.a01.com/_glaxy_1e3c3b_/"];
+            return @[@"http://www.pt-gateway.com/_glaxy_1e3c3b_/"];
             break;
         case 1:
             return @[@"http://fm.918rr.com/_glaxy_1e3c3b_/"];
@@ -27,8 +26,7 @@
             return @[@"https://fen1264.com/_glaxy_1e3c3b_/",@"https://fen1265.com/_glaxy_1e3c3b_/"];
             break;
         default:
-//            return @[@"http://www.pt-gateway.com/_glaxy_1e3c3b_/"];
-            return @[@"http://php.a01.com/_glaxy_1e3c3b_/"];
+            return @[@"http://www.pt-gateway.com/_glaxy_1e3c3b_/"];
             break;
     }
 }
