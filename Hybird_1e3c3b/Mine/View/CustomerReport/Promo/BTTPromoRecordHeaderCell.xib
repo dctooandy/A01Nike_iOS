@@ -27,7 +27,7 @@
                         <color key="textColor" red="0.45534062385559082" green="0.46977657079696655" blue="0.50588804483413696" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="金额" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fe6-xk-aA7">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="优惠金额" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fe6-xk-aA7">
                         <rect key="frame" x="81" y="0.0" width="100" height="29"/>
                         <color key="backgroundColor" red="0.13357511162757874" green="0.13267907500267029" blue="0.16078805923461914" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
