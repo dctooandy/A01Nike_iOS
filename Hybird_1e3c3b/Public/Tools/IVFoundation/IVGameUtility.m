@@ -85,7 +85,7 @@
         
 
         if ([gameController.gameModel.provider isEqualToString:kPTProvider]) {
-            NSDictionary *postMap = [response.body valueForKey:@"postMap"];
+            NSDictionary *postMap = [response.body valueForKey:@"postMapNew"];
             url = [NSString stringWithFormat:@"%@game_pt.html?",[IVHttpManager shareManager].domain] ;
             url = [weakSelf appendingURLString:url parameters:postMap];
         }
