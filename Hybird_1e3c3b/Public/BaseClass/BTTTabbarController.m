@@ -265,13 +265,14 @@
         self.preSelectIndex = index;
     } else if (index == BTTPromo) {//優惠
         self.selectVC = self.discountsVC;
-        if ([IVNetwork savedUserInfo]) {
-            self.preSelectIndex = index;
-        } else {
-            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
-            [self.selectVC.navigationController pushViewController:vc animated:YES];
-        }
-        
+        // 原先未登入时,会先进入登入页面,现在改为直接进入优惠
+        self.preSelectIndex = index;
+//        if ([IVNetwork savedUserInfo]) {
+//            self.preSelectIndex = index;
+//        } else {
+//            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+//            [self.selectVC.navigationController pushViewController:vc animated:YES];
+//        }
     } else {
         self.selectVC = self.mineVC;
         self.preSelectIndex = index;
