@@ -608,6 +608,7 @@
 		7629DCF5268B245C00CF758C /* BTTUserForzenPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629DCF2268B245C00CF758C /* BTTUserForzenPopView.xib */; };
 		7629DCFE268C30D000CF758C /* BTTUserForzenVerityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629DCFD268C30D000CF758C /* BTTUserForzenVerityViewController.m */; };
 		7629DDB5268D4DD700CF758C /* BTTUserForzenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629DDB4268D4DD700CF758C /* BTTUserForzenManager.m */; };
+		762D010F272794FF00BA059A /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
 		76756BB1269454220065F99B /* BTTUserForzenBGView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756BB0269454220065F99B /* BTTUserForzenBGView.m */; };
 		76756BB5269454690065F99B /* BTTUserForzenBGView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756BB4269454690065F99B /* BTTUserForzenBGView.xib */; };
 		76756C1B26956A6D0065F99B /* BTTLockButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756C1A26956A6D0065F99B /* BTTLockButtonView.m */; };
@@ -1888,7 +1889,6 @@
 		D339969324371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTOneKeyRegisterBitollCell.h; sourceTree = "<group>"; };
 		D339969424371A6F00B91A52 /* BTTOneKeyRegisterBitollCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTOneKeyRegisterBitollCell.m; sourceTree = "<group>"; };
 		D3399696243B08E000B91A52 /* libboringssl.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libboringssl.tbd; path = usr/lib/libboringssl.tbd; sourceTree = SDKROOT; };
-		D3399698243C215D00B91A52 /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = ../Desktop/libboringssl_simulator.a; sourceTree = "<group>"; };
 		D339CE9524C03CAC009ACD1C /* OTCInsideController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCInsideController.h; sourceTree = "<group>"; };
 		D339CE9624C03CAC009ACD1C /* OTCInsideController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OTCInsideController.xib; sourceTree = "<group>"; };
 		D339CE9A24C03CB6009ACD1C /* OTCInsideModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCInsideModel.h; sourceTree = "<group>"; };
@@ -2134,6 +2134,7 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
+				762D010F272794FF00BA059A /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -4363,7 +4364,6 @@
 		8746ABB2D5D61EF30A4942D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D3399698243C215D00B91A52 /* libboringssl_simulator.a */,
 				76CC62BD265677E00042AEDF /* libboringssl_simulator.a */,
 				D3399696243B08E000B91A52 /* libboringssl.tbd */,
 				3AD9CF03216C425200685B43 /* CoreTelephony.framework */,
@@ -5879,7 +5879,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.72;
+				MARKETING_VERSION = 3.2.351;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -5920,7 +5920,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.72;
+				MARKETING_VERSION = 3.2.351;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

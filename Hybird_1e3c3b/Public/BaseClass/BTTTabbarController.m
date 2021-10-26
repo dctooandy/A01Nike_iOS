@@ -74,7 +74,7 @@
 
 - (void)resetTabar {
     
-    if ([IVNetwork savedUserInfo]) {
+//    if ([IVNetwork savedUserInfo]) {
         for (UITabBarItem *item in self.items) {
             NSInteger index = [self.items indexOfObject:item];
             if (index == BTTPromo) {
@@ -84,17 +84,17 @@
                 break;
             }
         }
-    } else {
-        for (UITabBarItem *item in self.items) {
-            NSInteger index = [self.items indexOfObject:item];
-            if (index == BTTPromo) {
-                item.title = @"登录/开户";
-                item.image = ImageNamed(@"login_normal");
-                item.selectedImage = ImageNamed(@"login_pressed");
-                break;
-            }
-        }
-    }
+//    } else {
+//        for (UITabBarItem *item in self.items) {
+//            NSInteger index = [self.items indexOfObject:item];
+//            if (index == BTTPromo) {
+//                item.title = @"登录/开户";
+//                item.image = ImageNamed(@"login_normal");
+//                item.selectedImage = ImageNamed(@"login_pressed");
+//                break;
+//            }
+//        }
+//    }
     [self customTabbar];
 }
 
@@ -164,11 +164,11 @@
     [self addOneChildVC:self.homePageVC title:@"首页" imageName:@"home_normal" selectedImageName:@"home_pressed"];
 //    [self addOneChildVC:self.voiceCall title:@"APP语音" imageName:@"tab_voiceCall" selectedImageName:@"tab_voiceCall"];
     [self addOneChildVC:self.lucky title:@"抽奖" imageName:@"lottery_normal" selectedImageName:@"lottery_pressed"];
-    if ([IVNetwork savedUserInfo]) {
+//    if ([IVNetwork savedUserInfo]) {
         [self addOneChildVC:self.discountsVC title:@"优惠" imageName:@"preferential_normal" selectedImageName:@"preferential_pressed"];
-    } else {
-        [self addOneChildVC:self.discountsVC title:@"登录/开户" imageName:@"login_normal" selectedImageName:@"login_pressed"];
-    }
+//    } else {
+//        [self addOneChildVC:self.discountsVC title:@"登录/开户" imageName:@"login_normal" selectedImageName:@"login_pressed"];
+//    }
     [self addOneChildVC:self.mineVC title:@"会员中心" imageName:@"member_normal" selectedImageName:@"member_pressed"];
 }
 
