@@ -21,6 +21,5 @@
 #define HomePageNewVersion YES
 
 
-
 #endif /* AppInitializeValueConfig_h */
 //
