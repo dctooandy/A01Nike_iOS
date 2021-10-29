@@ -593,7 +593,7 @@
         contents = @[@"所有类别",@"热门游戏",@"彩金池游戏",@"最新游戏"];
         title = @"请选择游戏类别";
     } else if (button.tag == 1071) {
-        contents = @[@"全平台",@"PT",@"MG",@"PP",@"AG",@"TTG",@"PS"];
+        contents = @[@"全平台",@"PT",@"MG",@"PP",@"AG",@"TTG",@"PS",@"PNG"];
         title = @"请选择游戏平台";
         
     } else if (button.tag == 1072) {
@@ -619,7 +619,8 @@
                    [selectValue isEqualToString:@"PT"] ||
                    [selectValue isEqualToString:@"TTG"] ||
                    [selectValue isEqualToString:@"PP"] ||
-                   [selectValue isEqualToString:@"PS"]) {
+                   [selectValue isEqualToString:@"PS"]||
+                   [selectValue isEqualToString:@"PNG"]) {
             self.platform = selectValue;
             self.provider = selectValue;
         } else if ([selectValue isEqualToString:@"全赔付"]) {
@@ -657,7 +658,13 @@
                 if ([IVNetwork savedUserInfo]) {
                     [self enterVideoGameWithGameModel:gameModel];
                 } else {
-                    [self showTryAlertViewWithGameModel:gameModel];
+                    if ([gameModel.provider isEqualToString:@"PNG"])
+                    {
+                        [self gameAfterLogin];
+                    }else
+                    {
+                        [self showTryAlertViewWithGameModel:gameModel];
+                    }
                 }
             }
         }
@@ -671,7 +678,13 @@
                 if ([IVNetwork savedUserInfo]) {
                     [self enterVideoGameWithGameModel:gameModel];
                 } else {
-                    [self showTryAlertViewWithGameModel:gameModel];
+                    if ([gameModel.provider isEqualToString:@"PNG"])
+                    {
+                        [self gameAfterLogin];
+                    }else
+                    {
+                        [self showTryAlertViewWithGameModel:gameModel];
+                    }
                 }
             }
         } else {
@@ -683,13 +696,24 @@
                 if ([IVNetwork savedUserInfo]) {
                     [self enterVideoGameWithGameModel:gameModel];
                 } else {
-                    [self showTryAlertViewWithGameModel:gameModel];
+                    if ([gameModel.provider isEqualToString:@"PNG"])
+                    {
+                        [self gameAfterLogin];
+                    }else
+                    {
+                        [self showTryAlertViewWithGameModel:gameModel];
+                    }
                 }
             }
         }
     }
 }
-
+- (void)gameAfterLogin
+{
+    [MBProgressHUD showError:@"请先登录" toView:nil];
+    BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)bannerToGame:(BTTBannerModel *)model {
     if ([model.action.type isEqualToString:@"1"] ) {
         if (model.action.detail.length <= 0) {
@@ -847,7 +871,7 @@
 
 // 直接进入游戏
 - (void)enterVideoGameWithGameModel:(BTTVideoGameModel *)gameModel {
-    if ([gameModel.provider isEqualToString:@"TTG"] || [gameModel.provider isEqualToString:@"PP"] || [gameModel.provider isEqualToString:@"PT"] || [gameModel.provider isEqualToString:@"PS"] || [gameModel.provider isEqualToString:@"MG"] || [gameModel.gameCode isEqualToString:BTTAGGJKEY]) {
+    if ([gameModel.provider isEqualToString:@"TTG"] || [gameModel.provider isEqualToString:@"PP"] || [gameModel.provider isEqualToString:@"PT"] || [gameModel.provider isEqualToString:@"PS"] || [gameModel.provider isEqualToString:@"MG"] || [gameModel.gameCode isEqualToString:BTTAGGJKEY] || [gameModel.provider isEqualToString:@"PNG"]) {
         [self chooseGameLine:gameModel];
         return;
     }

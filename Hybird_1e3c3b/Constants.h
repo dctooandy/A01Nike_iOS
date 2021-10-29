@@ -317,6 +317,7 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 /*********************************************Video Game Key********************************************************/
 #define BTTAGQJKEY                                 @"003"
 #define BTTAGGJKEY                                 @"026"
+#define BTTPNGKEY                                  @"052"
 #define BTTSABAKEY                                 @"031"
 #define BTTASKEY                                   @"064"
 #define BTTAGLotteryKEY                            @"004"
@@ -332,8 +333,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTCSKEY                                   @"087"
 
 //儲存使用者選擇幣種相對應的keyArr
-#define BTTGameKeysArr                             @[BTTAGQJKEY,BTTAGGJKEY,BTTASKEY,BTTSABAKEY,BTTYSBKEY,BTTAGLotteryKEY,BTTPTKEY,BTTTTGKEY,BTTPPKEY,BTTPSKEY,BTTMGKEY]
-#define BTTGameTitlesArr                           @[@"AG旗舰厅", @"AG国际厅", @"AS真人棋牌", @"沙巴体育", @"YSB体育", @"AG彩票", @"PT", @"TTG", @"PP", @"PS", @"MG"]
+#define BTTGameKeysArr                             @[BTTAGQJKEY,BTTAGGJKEY,BTTASKEY,BTTSABAKEY,BTTYSBKEY,BTTAGLotteryKEY,BTTPTKEY,BTTTTGKEY,BTTPPKEY,BTTPSKEY,BTTMGKEY,BTTPNGKEY]
+#define BTTGameTitlesArr                           @[@"AG旗舰厅", @"AG国际厅", @"AS真人棋牌", @"沙巴体育", @"YSB体育", @"AG彩票", @"PT", @"TTG", @"PP", @"PS", @"MG",@"PNG"]
 
 /*********************************************API********************************************************/
 
