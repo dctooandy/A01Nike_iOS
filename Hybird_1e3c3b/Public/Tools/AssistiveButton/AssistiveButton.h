@@ -11,7 +11,8 @@
 @interface AssistiveButton : UIView
 typedef enum {
     SpreadPositionModeFixed,
-    SpreadPositionModeTouchBorder
+    SpreadPositionModeTouchBorder,
+    SpreadPositionModeNone
 }SpreadPositionMode;
 
 #define SPREAD_RADIUS_DEFAULT 100.0f

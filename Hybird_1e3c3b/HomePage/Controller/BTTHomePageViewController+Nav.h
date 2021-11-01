@@ -10,7 +10,8 @@
 #import "BTTHomePageHeaderView.h"
 #import "JXRegisterManager.h"
 #import "BTTLoginOrRegisterBtsView.h"
-
+#import "BTTAssistiveButtonModel.h"
+typedef void(^ButtonCallBack)(void);
 @class BTTBannerModel;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -39,7 +40,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setupFloatWindow;
 
--(void)setUpAssistiveButton;
+//-(void)setUpAssistiveButton;
+-(void)setUpAssistiveButton:(BTTAssistiveButtonModel* )model completed:(ButtonCallBack _Nullable)completionBlock;
 
 -(void)showAssistiveButton;
 

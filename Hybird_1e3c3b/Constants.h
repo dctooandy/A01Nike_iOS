@@ -148,6 +148,28 @@ typedef enum {
     BTTTwoWaySelect,    ///兩張券以上
     BTTOneWaySelectAndConfirm, ///一張券以上的最後一張
 }BTTMenualSelectMode;
+//悬浮按钮位置
+typedef enum {
+    BTTLeftTop = 1,
+    BTTLeftMiddle,
+    BTTLeftBottom,
+    BTTRightTop,
+    BTTRightMiddle,
+    BTTRightBottom,
+}BTTAssistivePosition;
+
+typedef enum : NSUInteger {
+    RightToLeft = 0,        ///右到左
+    LeftToRight = 1,        ///左到右
+    TopToBottom = 2,        ///上到下
+    BottomToTop = 3,        ///下到上
+} BTTGradientOrientationType;
+
+typedef enum {
+    BTT_DEV = 0,    ///本地
+    BTT_STAGE,      ///運測
+    BTT_DIS,        ///運營
+}BTTDomainMode;
 
 typedef void (^CompleteBlock)(IVJResponseObject *response);
 
@@ -600,6 +622,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTCheckPopView                            @"_extra_/api/v1/activity/common-window/window-popup"
 //vip30存款渠道
 #define BTTCreditVipChannel                        @"_extra_/api/vi/activity/creditVipChannel/popup"
+//虚拟按钮
+#define BTTAssistiveData                           @"_extra_/api/v1/activity/common-window/window-floating"
 
 /********************************************常用宏*********************************************************/
 

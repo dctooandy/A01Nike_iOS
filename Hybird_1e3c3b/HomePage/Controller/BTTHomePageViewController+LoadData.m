@@ -384,6 +384,19 @@ static const char *BTTChanceCountKey = "chanceCount";
         dispatch_group_leave(group);
     }];
 }
+- (void)loadAssistiveDataWithBlock:(BTTAssistiveBlock)assistiveBlock
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    [IVNetwork requestPostWithUrl:BTTAssistiveData paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body) {
+                BTTAssistiveButtonModel *model = [BTTAssistiveButtonModel yy_modelWithDictionary:result.body];
+                assistiveBlock(model);
+            }
+        }
+    }];
+}
 #pragma mark - 动态添加属性
 - (void)setNextGroup:(NSInteger)nextGroup {
     objc_setAssociatedObject(self, &BTTNextGroupKey, @(nextGroup), OBJC_ASSOCIATION_RETAIN_NONATOMIC);

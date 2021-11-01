@@ -339,8 +339,27 @@
     
     self.goToH5Btn = [[UIButton alloc] init];
     self.goToH5Btn.hidden = true;
-    [self.goToH5Btn setTitle:@"若无法唤起小金库，可使用H5支付" forState:UIControlStateNormal];
-    [self.goToH5Btn setTitleColor:[self.onekeyBtnTwo.titleLabel textColor] forState:UIControlStateNormal];
+    // 多属性字符串
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"若无法唤起小金库，点击网页版支付"];
+    
+    //设置下划线...
+    /*
+     NSUnderlineStyleNone                                    = 0x00, 无下划线
+     NSUnderlineStyleSingle                                  = 0x01, 单行下划线
+     NSUnderlineStyleThick NS_ENUM_AVAILABLE(10_0, 7_0)      = 0x02, 粗的下划线
+     NSUnderlineStyleDouble NS_ENUM_AVAILABLE(10_0, 7_0)     = 0x09, 双下划线
+     */
+    [attributeString addAttribute:NSUnderlineStyleAttributeName
+                            value:@(NSUnderlineStyleSingle)
+                            range:(NSRange){0,[attributeString length]}];
+    //此时如果设置字体颜色要这样
+    [attributeString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"3A7ADF"] range:NSMakeRange(0,[attributeString length])];
+    
+    //设置下划线颜色...
+    [attributeString addAttribute:NSUnderlineColorAttributeName value:[UIColor colorWithHexString:@"3A7ADF"] range:(NSRange){0,[attributeString length]}];
+    [self.goToH5Btn setAttributedTitle:attributeString forState:UIControlStateNormal];
+//    [self.goToH5Btn setTitle:@"若无法唤起小金库，可使用H5支付" forState:UIControlStateNormal];
+//    [self.goToH5Btn setTitleColor:[self.onekeyBtnTwo.titleLabel textColor] forState:UIControlStateNormal];
     self.goToH5Btn.titleLabel.font = [UIFont systemFontOfSize:15];
     [self.goToH5Btn addTarget:self action:@selector(goToH5Dcbox) forControlEvents:UIControlEventTouchUpInside];
     [self.secondView addSubview:self.goToH5Btn];

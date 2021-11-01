@@ -118,7 +118,7 @@ typedef NS_OPTIONS(NSUInteger, SDWebImageOptions) {
     SDWebImageForceTransition = 1 << 16
 };
 
-typedef void(^SDExternalCompletionBlock)(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL);
+typedef void(^SDExternalCompletionBlock)(NSData * _Nullable data, UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL);
 
 typedef void(^SDInternalCompletionBlock)(UIImage * _Nullable image, NSData * _Nullable data, NSError * _Nullable error, SDImageCacheType cacheType, BOOL finished, NSURL * _Nullable imageURL);
 

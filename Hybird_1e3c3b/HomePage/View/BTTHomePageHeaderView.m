@@ -7,6 +7,7 @@
 //
 
 #import "BTTHomePageHeaderView.h"
+#import "AppInitializeConfig.h"
 #import "UIImage+GIF.h"
 
 #define BTTIconTop (KIsiPhoneX ? 24 : 0) // 按钮距离顶端的高度
@@ -89,9 +90,8 @@
                     }
                 }
                 UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(BTTLeftConstants, BTTIconTop + (64 - 30) / 2 + 5, 80, 30)];
-                
                 logoImageView.image = ImageNamed(@"Navlogo");
-                
+          
                 self.titleLabel = [UILabel new];
                 [self addSubview:self.titleLabel];
                 self.titleLabel.frame = CGRectMake((SCREEN_WIDTH - 150) / 2, BTTIconTop + (64 - 18) / 2 + 10, 150, 18);
@@ -112,6 +112,10 @@
                 serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
                 [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
                 [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+                if ([app_version floatValue] > 3.2)
+                {
+                    [serviceBtn addTarget:self action:@selector(switchEnvirmant) forControlEvents:UIControlEventTouchUpOutside];
+                }
                 serviceBtn.tag = 2001;
                 __block UIButton *messageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 [self addSubview:messageBtn];
@@ -229,6 +233,54 @@
     
     
     
+}
+
+- (void)switchEnvirmant
+{
+    weakSelf(weakSelf)
+    IVActionHandler handler = ^(UIAlertAction *action){
+        
+        [weakSelf rebootBySecWithEnvirment:BTT_DEV];
+    };
+    IVActionHandler handler1 = ^(UIAlertAction *action){
+        [weakSelf rebootBySecWithEnvirment:BTT_STAGE];
+        
+    };
+    
+    IVActionHandler handler2 = ^(UIAlertAction *action){
+        [weakSelf rebootBySecWithEnvirment:BTT_DIS];
+    };
+    IVActionHandler handler3 = ^(UIAlertAction *action){};
+    
+    NSString *title = [NSString stringWithFormat:@"目前环境为 %@",[self formatTypeToString:EnvirmentType]];
+    NSString *message = [NSString stringWithFormat:@"当前版本是: %@ \n选定切换环境,\n1秒后将重启APP",app_version];
+    [IVUtility showAlertWithActionTitles:@[@"测试",@"运测",@"运营",@"取消"] handlers:@[handler,handler1,handler2,handler3] title:title message:message];
+}
+- (void)rebootBySecWithEnvirment:(NSInteger)env
+{
+    [[NSUserDefaults standardUserDefaults] setInteger:env forKey:@"Envirment"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        exit(0);
+    });
+}
+
+- (NSString*)formatTypeToString:(NSInteger)formatType {
+    NSString *result = nil;
+    switch(formatType) {
+        case BTT_DEV:
+            result = @"测试";
+            break;
+        case BTT_STAGE:
+            result = @"运测";
+            break;
+        case BTT_DIS:
+            result = @"运营";
+            break;
+        default:
+            [NSException raise:NSGenericException format:@"Unexpected FormatType."];
+    }
+    return result;
 }
 
 - (void)setIsLogin:(BOOL)isLogin {

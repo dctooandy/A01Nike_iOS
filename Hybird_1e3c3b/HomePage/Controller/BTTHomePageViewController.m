@@ -45,6 +45,7 @@
 #import "BTTActivityManager.h"
 #import "BTTUserForzenManager.h"
 #import "AppDelegate.h"
+#import "BTTAssistiveButtonModel.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -86,10 +87,14 @@
         NSLog(@"下拉刷新");
         [strongSelf refreshDatasOfHomePage];
     }];
-    [self setUpAssistiveButton];
-    if (self.assistiveButton != nil) {
-        [self.view addSubview:self.assistiveButton];
-    }
+    //悬浮按钮设定
+    [self loadAssistiveDataWithBlock:^(BTTAssistiveButtonModel * _Nonnull model) {
+        [weakSelf setUpAssistiveButton:model completed:^{
+            if (self.assistiveButton != nil) {
+                [weakSelf.view addSubview:weakSelf.assistiveButton];
+            }
+        }];
+    }];
     [self checkLoginVersion];
 
 //    [self setupFloatWindow];
