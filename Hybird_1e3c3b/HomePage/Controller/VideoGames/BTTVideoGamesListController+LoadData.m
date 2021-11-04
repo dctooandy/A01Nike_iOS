@@ -105,6 +105,9 @@
     if ([gameModel.provider isEqualToString:@"PNG"]) {
         gameCode = BTTPNGKEY;
     }
+    if ([gameModel.provider isEqualToString:@"NT"]) {
+        gameCode = BTTNTKEY;
+    }
     [self showLoading];
     [IVNetwork requestPostWithUrl:QUERYGames paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
@@ -219,6 +222,8 @@
             model.gameCode = BTTPSKEY;
         }else if ([gameModel.provider isEqualToString:@"PNG"]) {
             model.gameCode = BTTPNGKEY;
+        }else if ([gameModel.provider isEqualToString:@"NT"]) {
+            model.gameCode = BTTNTKEY;
         } else{
             model.gameCode = gameModel.gameCode;
         }
