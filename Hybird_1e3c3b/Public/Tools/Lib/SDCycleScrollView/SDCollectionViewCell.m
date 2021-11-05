@@ -42,7 +42,7 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        [self setupImageView];
+        [self setupScrollView];
         [self setupTitleLabel];
     }
     
@@ -66,14 +66,91 @@
     _titleLabelTextFont = titleLabelTextFont;
     _titleLabel.font = titleLabelTextFont;
 }
-
-- (void)setupImageView
+- (void)setupScrollView
 {
+    _canZoomIn = NO;
+    UIScrollView * cellScrollView = [[UIScrollView alloc] init];
+    cellScrollView.frame = self.contentView.bounds;
+    _cellScrollView = cellScrollView;
+    [self.contentView addSubview:_cellScrollView];
+    
+    cellScrollView.delegate = self;
     UIImageView *imageView = [[UIImageView alloc] init];
     _imageView = imageView;
-    [self.contentView addSubview:imageView];
-}
+    [_cellScrollView addSubview:imageView];
+    cellScrollView.contentSize = imageView.image.size;
 
+    [_imageView setUserInteractionEnabled:YES];
+}
+- (void)tapHandlerTwice
+{
+    if (self.tapForZoomIn)
+    {
+        self.tapForZoomIn();
+    }
+}
+- (void)tapToDismiss
+{
+    if (self.dismissTap)
+    {
+        self.dismissTap();
+    }
+}
+- (void)setTapActions
+{
+//    UILongPressGestureRecognizer *longpress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(tapHandlerTwice)];
+//    [_imageView addGestureRecognizer:longpress];
+    UITapGestureRecognizer *tapOne = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapToDismiss)];
+    tapOne.numberOfTapsRequired = 1;
+    [_imageView addGestureRecognizer:tapOne];
+
+}
+- (void)resetImageView
+{
+    [_imageView removeFromSuperview];
+    [_cellScrollView removeFromSuperview];
+    UIImageView *imageView = [[UIImageView alloc] init];
+    _imageView = imageView;
+    [_imageView setUserInteractionEnabled:YES];
+    [self.contentView addSubview:_imageView];
+}
+- (void)setCanZoomIn:(BOOL)canZoomIn
+{
+    _canZoomIn = canZoomIn;
+    if (canZoomIn == YES)
+    {
+        [self setTapActions];
+        [_cellScrollView setBackgroundColor:[UIColor blackColor]];
+        _cellScrollView.minimumZoomScale = 0.3;
+        _cellScrollView.maximumZoomScale = 3;
+    }else
+    {
+        [self resetImageView];
+        [_cellScrollView setBackgroundColor:[UIColor clearColor]];
+        _cellScrollView.minimumZoomScale = 1;
+        _cellScrollView.maximumZoomScale = 1;
+    }
+}
+//- (void)setupImageView
+//{
+//    UIImageView *imageView = [[UIImageView alloc] init];
+//    _imageView = imageView;
+//    [self.contentView addSubview:imageView];
+//}
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return  _imageView;
+}
+- (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
+{
+    if (scrollView.zoomScale != 1)
+    {
+//        _imageView.center = CGPointMake(scrollView.contentSize.width / 2, scrollView.contentSize.height / 2);
+        [UIView animateWithDuration:0.3 animations:^{
+            scrollView.zoomScale = 1;
+        }];
+    }
+}
 - (void)setupTitleLabel
 {
     UILabel *titleLabel = [[UILabel alloc] init];
@@ -104,6 +181,7 @@
     if (self.onlyDisplayText) {
         _titleLabel.frame = self.bounds;
     } else {
+        _cellScrollView.frame = self.bounds;
         _imageView.frame = self.bounds;
         CGFloat titleLabelW = self.sd_width;
         CGFloat titleLabelH = _titleLabelHeight;

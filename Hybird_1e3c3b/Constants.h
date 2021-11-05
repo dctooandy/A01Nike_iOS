@@ -159,11 +159,33 @@ typedef enum {
 }BTTAssistivePosition;
 
 typedef enum : NSUInteger {
+    BTTVIPRight = 0,    ///VIP权益
+    BTTVIPHistory = 1,  ///风采历程
+    BTTVIPActivity = 2,       ///品牌活动
+} BTTVIPPageType;
+
+typedef enum : NSUInteger {
     RightToLeft = 0,        ///右到左
     LeftToRight = 1,        ///左到右
     TopToBottom = 2,        ///上到下
     BottomToTop = 3,        ///下到上
 } BTTGradientOrientationType;
+
+typedef enum : NSUInteger {
+    VIPRightFirstPage = 0,
+    VIPRightUpgradePage = 1,
+    VIPRightWashRatePage = 2,
+    VIPRightRights = 3,
+    VIPRightRightsDescriptPage = 4,
+    VIPRightTravelPage = 5,
+    VIPRightHistoryPage = 6,
+} BTTVIPClubUserRightPageType;
+
+typedef enum : NSUInteger {
+    VIPSmall = 0,
+    VIPMiddle = 1,
+    VIPLarge = 2,
+} BTTVIPDiscriptionViewType;
 
 typedef enum {
     BTT_DEV = 0,    ///本地
@@ -190,7 +212,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 
 #define BTTHome                                    0
 //#define BTTAppPhone                                1
-#define BTTLuckyWheel                              1
+#define BTTVIPClub                                 1
+//#define BTTLuckyWheel                              2
 #define BTTPromo                                   2
 #define BTTMine                                    3
 
@@ -683,7 +706,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
                                           COLOR_RGBA(42, 45, 53, 1), NSBackgroundColorAttributeName, \
                                           [UIColor whiteColor],      NSLaunchTitleColorAttributeName, \
                                           nil]
-
+// 單例List
+#define GradiImage [GradientImage sharedInstance]
 //----------------------单例---------------------------
 #define SingletonInterface(Class) \
     + (Class *)sharedInstance;

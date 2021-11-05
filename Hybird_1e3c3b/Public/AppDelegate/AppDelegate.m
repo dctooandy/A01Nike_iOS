@@ -320,8 +320,11 @@
 //        case BTTAppPhone:
 //            [self.tabVC.myTabbar setSeletedIndex:BTTAppPhone];
 //            break;
-        case BTTLuckyWheel:
-            [self.tabVC.myTabbar setSeletedIndex:BTTLuckyWheel];
+//        case BTTLuckyWheel:
+//            [self.tabVC.myTabbar setSeletedIndex:BTTLuckyWheel];
+//            break;
+        case BTTVIPClub:  // VIPClub
+            [self.tabVC.myTabbar setSeletedIndex:BTTVIPClub];
             break;
         case BTTPromo:  // 優惠
             [self.tabVC.myTabbar setSeletedIndex:BTTPromo];
