@@ -17,9 +17,12 @@
 #import "BTTAGQJViewController.h"
 #import "BTTAGGJViewController.h"
 #import "BTTGamesTryAlertView.h"
+#import "UIView+MJExtension.h"
 
 @interface BTTDiscountsViewController ()<BTTElementsFlowLayoutDelegate, UIScrollViewDelegate>
-
+{
+    UIButton *nextYear;
+}
 @end
 
 @implementation BTTDiscountsViewController
@@ -118,6 +121,22 @@
             make.height.offset(45);
         }];
     }
+    if (nextYear == nil)
+    {
+        nextYear = [UIButton buttonWithType:UIButtonTypeCustom];
+        nextYear.frame = CGRectMake(0, 0, 45, 45);
+        nextYear.backgroundColor = [UIColor clearColor];
+        nextYear.titleLabel.font = [UIFont systemFontOfSize:13.5];
+        [nextYear setImage:ImageNamed(@"Icon_Arrow_Right") forState:UIControlStateNormal];
+        [self.view addSubview:nextYear];
+        [nextYear mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.yearsScrollView);
+            make.right.right.equalTo(self.yearsScrollView);
+            make.height.offset(45);
+        }];
+        weakSelf(weakSelf);
+        [nextYear addTarget:weakSelf action:@selector(nextYearPageAction) forControlEvents:UIControlEventTouchUpInside];
+    }
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageDiscountCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageDiscountCell"];
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -133,16 +152,64 @@
 }
 
 -(void)yearsBtnAction:(UIButton *)btn {
+//    for (UIView * view in self.yearsScrollView.subviews) {
+//        if ([view isKindOfClass:[UIButton class]]) {
+//            UIButton * yearBtn = (UIButton *)view;
+//            yearBtn.selected = yearBtn.tag == btn.tag;
+//            yearBtn.backgroundColor = yearBtn.tag == btn.tag ? [UIColor colorWithHexString:@"#3082EF"]:[UIColor clearColor];
+//        }
+//    }
+//    [self changeToHistoryPage:btn.tag];
+    [self moveScrollViewWithTag:btn.tag];
+}
+-(void)yearsBtnActionWithTag:(NSInteger )tag {
     for (UIView * view in self.yearsScrollView.subviews) {
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton * yearBtn = (UIButton *)view;
-            yearBtn.selected = yearBtn.tag == btn.tag;
-            yearBtn.backgroundColor = yearBtn.tag == btn.tag ? [UIColor colorWithHexString:@"#3082EF"]:[UIColor clearColor];
+            yearBtn.selected = yearBtn.tag == tag;
+            yearBtn.backgroundColor = yearBtn.tag == tag ? [UIColor colorWithHexString:@"#3082EF"]:[UIColor clearColor];
         }
     }
-    [self changeToHistoryPage:btn.tag];
+    [self changeToHistoryPage:tag];
+
 }
 
+-(void)nextYearPageAction
+{
+    [self moveScrollViewWithTag:self.btnIndex + 1];
+}
+- (void)moveScrollViewWithTag:(NSInteger)currtneTag
+{
+    NSUInteger moveTagX = (_yearsBtnTitle.count - 4);
+    CGPoint offset = self.yearsScrollView.contentOffset;
+    if ((currtneTag) <= _yearsBtnTitle.count - 1)
+    {
+        // 设置滚动位置
+        if (offset.x >= (_yearsBtnTitle.count - 4) * (SCREEN_WIDTH/4))
+        {
+            [nextYear setHidden:YES];
+        }else
+        {
+            if (currtneTag > moveTagX)
+            {
+                offset.x = moveTagX * (SCREEN_WIDTH/4);
+                [nextYear setHidden:YES];
+            }else
+            {
+                offset.x = currtneTag * (SCREEN_WIDTH/4);
+                [nextYear setHidden:NO];
+            }
+        }
+        [self.yearsScrollView setContentOffset:offset animated:YES];
+        [self yearsBtnActionWithTag:currtneTag];
+    }else
+    {
+        offset.x = moveTagX * (SCREEN_WIDTH/4);
+        [nextYear setHidden:YES];
+        [self.yearsScrollView setContentOffset:offset animated:YES];
+        [self yearsBtnActionWithTag:_yearsBtnTitle.count - 1];
+    }
+}
 -(void)changeToHistoryPage:(NSInteger)index {
     self.btnIndex = index;
     [self.sheetDatas removeAllObjects];
@@ -179,6 +246,13 @@
             make.top.height.equalTo(self.yearsScrollView);
             make.width.offset(SCREEN_WIDTH/4);
         }];
+    }
+    if (_yearsBtnTitle.count < 5)
+    {
+        [nextYear setHidden:YES];
+    }else
+    {
+        [nextYear setHidden:NO];
     }
     self.yearsScrollView.contentSize = CGSizeMake(_yearsBtnTitle.count * SCREEN_WIDTH / 4, 0);
 }
@@ -384,5 +458,16 @@
         btnClickBlock(btn);
     };
 }
-
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (_yearsBtnTitle.count - 4 > 0)
+    {
+        if (scrollView.contentOffset.x >= (_yearsBtnTitle.count - 4) * (SCREEN_WIDTH/4)) {
+            [nextYear setHidden:YES];
+        }else
+        {
+            [nextYear setHidden:NO];
+        }
+    }
+}
 @end
