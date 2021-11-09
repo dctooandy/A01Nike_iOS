@@ -204,7 +204,7 @@
             [nextYear setHidden:YES];
         }else
         {//沒超過,判斷點擊按鈕tag 有沒有超過 可點選距離
-            if (currtneTag > moveTagX)
+            if (currtneTag >= moveTagX)
             {//超過,隱藏雙箭號
                 offset.x = moveTagX * (SCREEN_WIDTH/4);
                 [nextYear setHidden:YES];
