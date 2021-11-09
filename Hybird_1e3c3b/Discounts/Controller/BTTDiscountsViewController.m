@@ -126,8 +126,10 @@
         nextYear = [UIButton buttonWithType:UIButtonTypeCustom];
         nextYear.frame = CGRectMake(0, 0, 45, 45);
         nextYear.backgroundColor = [UIColor clearColor];
-        nextYear.titleLabel.font = [UIFont systemFontOfSize:13.5];
-        [nextYear setImage:ImageNamed(@"Icon_Arrow_Right") forState:UIControlStateNormal];
+        nextYear.titleLabel.font = [UIFont systemFontOfSize:20.0];
+        [nextYear setTitle:@">>" forState:UIControlStateNormal];
+        [nextYear setTitleColor:[UIColor colorWithHexString:@"#417DDA"] forState:UIControlStateNormal];
+//        [nextYear setImage:ImageNamed(@"Icon_Arrow_Right") forState:UIControlStateNormal];
         [self.view addSubview:nextYear];
         [nextYear mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.yearsScrollView);
