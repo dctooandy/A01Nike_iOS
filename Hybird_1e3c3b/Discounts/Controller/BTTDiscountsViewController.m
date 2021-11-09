@@ -60,6 +60,12 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:!self.inProgressView.isHidden animated:animated];
 }
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+//    [nextYear.imageView setContentMode:UIViewContentModeScaleToFill];
+    nextYear.subviews.firstObject.contentMode = UIViewContentModeScaleToFill;
+}
 
 - (void)setupCollectionView {
     [super setupCollectionView];
@@ -127,9 +133,10 @@
         nextYear.frame = CGRectMake(0, 0, 45, 45);
         nextYear.backgroundColor = [UIColor clearColor];
         nextYear.titleLabel.font = [UIFont systemFontOfSize:20.0];
-        [nextYear setTitle:@">>" forState:UIControlStateNormal];
-        [nextYear setTitleColor:[UIColor colorWithHexString:@"#417DDA"] forState:UIControlStateNormal];
-//        [nextYear setImage:ImageNamed(@"Icon_Arrow_Right") forState:UIControlStateNormal];
+//        [nextYear setTitle:@">>" forState:UIControlStateNormal];
+//        [nextYear setTitleColor:[UIColor colorWithHexString:@"#417DDA"] forState:UIControlStateNormal];
+//        [nextYear.imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [nextYear setBackgroundImage:ImageNamed(@"u4") forState:UIControlStateNormal];
         [self.view addSubview:nextYear];
         [nextYear mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.yearsScrollView);
@@ -182,34 +189,42 @@
 }
 - (void)moveScrollViewWithTag:(NSInteger)currtneTag
 {
-    NSUInteger moveTagX = (_yearsBtnTitle.count - 4);
+    //可出現右邊雙箭號的距離單位,0 代表小於4顆,不出現雙箭號
+    NSUInteger moveTagX = ((_yearsBtnTitle.count >= 4) ? (_yearsBtnTitle.count - 4) : 0);
+    // 目前 scrollview 的 x,y
     CGPoint offset = self.yearsScrollView.contentOffset;
-    if ((currtneTag) <= _yearsBtnTitle.count - 1)
+    
+    // 判斷上方導航欄要不要移動
+    // 點到的按鈕 小於等於 最大數目,可移動距離超過0單位
+    if (((currtneTag) <= _yearsBtnTitle.count - 1) && moveTagX > 0)
     {
-        // 设置滚动位置
-        if (offset.x >= (_yearsBtnTitle.count - 4) * (SCREEN_WIDTH/4))
-        {
+        // 目前scrollview的 x 有沒有超過 可移動距離單位
+        if (offset.x >= moveTagX * (SCREEN_WIDTH/4))
+        {//超過,所以雙箭號隱藏
             [nextYear setHidden:YES];
         }else
-        {
+        {//沒超過,判斷點擊按鈕tag 有沒有超過 可點選距離
             if (currtneTag > moveTagX)
-            {
+            {//超過,隱藏雙箭號
                 offset.x = moveTagX * (SCREEN_WIDTH/4);
                 [nextYear setHidden:YES];
             }else
-            {
+            {// 沒超過,算出移動到該按鈕的預設x,雙箭號不隱藏
                 offset.x = currtneTag * (SCREEN_WIDTH/4);
                 [nextYear setHidden:NO];
             }
         }
+        // 移動scrollview
         [self.yearsScrollView setContentOffset:offset animated:YES];
+        // vc跳轉
         [self yearsBtnActionWithTag:currtneTag];
     }else
     {
-        offset.x = moveTagX * (SCREEN_WIDTH/4);
+        //可移動距離沒有超過 0 ,年份單位少於4 ,雙箭號隱藏,不移動
+//        offset.x = moveTagX * (SCREEN_WIDTH/4);
         [nextYear setHidden:YES];
-        [self.yearsScrollView setContentOffset:offset animated:YES];
-        [self yearsBtnActionWithTag:_yearsBtnTitle.count - 1];
+//        [self.yearsScrollView setContentOffset:offset animated:YES];
+        [self yearsBtnActionWithTag:currtneTag];
     }
 }
 -(void)changeToHistoryPage:(NSInteger)index {
@@ -462,7 +477,7 @@
 }
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if (_yearsBtnTitle.count - 4 > 0)
+    if (_yearsBtnTitle.count > 4)
     {
         if (scrollView.contentOffset.x >= (_yearsBtnTitle.count - 4) * (SCREEN_WIDTH/4)) {
             [nextYear setHidden:YES];
