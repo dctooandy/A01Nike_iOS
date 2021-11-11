@@ -130,18 +130,20 @@
     if (nextYear == nil)
     {
         nextYear = [UIButton buttonWithType:UIButtonTypeCustom];
-        nextYear.frame = CGRectMake(0, 0, 45, 45);
+        nextYear.frame = CGRectMake(0, 0, 18, 45);
         nextYear.backgroundColor = [UIColor clearColor];
-        nextYear.titleLabel.font = [UIFont systemFontOfSize:20.0];
+//        nextYear.titleLabel.font = [UIFont systemFontOfSize:20.0];
 //        [nextYear setTitle:@">>" forState:UIControlStateNormal];
 //        [nextYear setTitleColor:[UIColor colorWithHexString:@"#417DDA"] forState:UIControlStateNormal];
 //        [nextYear.imageView setContentMode:UIViewContentModeScaleAspectFill];
-        [nextYear setBackgroundImage:ImageNamed(@"u4") forState:UIControlStateNormal];
+        [nextYear setImage:ImageNamed(@"historyArrow") forState:UIControlStateNormal];
+        [nextYear setBackgroundImage:ImageNamed(@"squer") forState:UIControlStateNormal];
         [self.view addSubview:nextYear];
         [nextYear mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.yearsScrollView);
             make.right.right.equalTo(self.yearsScrollView);
             make.height.offset(45);
+            make.width.offset(18);
         }];
         weakSelf(weakSelf);
         [nextYear addTarget:weakSelf action:@selector(nextYearPageAction) forControlEvents:UIControlEventTouchUpInside];
