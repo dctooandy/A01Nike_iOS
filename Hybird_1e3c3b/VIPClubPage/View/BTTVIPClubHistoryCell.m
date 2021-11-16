@@ -174,7 +174,12 @@
         [self.imageCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:[currentNunmber intValue] inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
     }else
     {
-
+        VIPHistoryImageModel *cellModel = self.imageDatas[indexPath.row];
+        if (cellModel.details == YES)
+        {
+            BTTVIPHistoryImageCell * cell = (BTTVIPHistoryImageCell *)[collectionView cellForItemAtIndexPath:indexPath];
+            [cell pushToNewWebView];            
+        }
     }
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView

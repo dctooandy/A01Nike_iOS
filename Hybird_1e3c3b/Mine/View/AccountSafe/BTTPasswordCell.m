@@ -85,7 +85,15 @@
             return NO;
         }
         return YES;
-    } else {
+    } else if( textField.tag == 1001)
+    {
+        if (textField.text.length > 9 && ![string isEqual:@""])
+        {
+            return NO;
+        }
+        return YES;
+    }
+    else{
         return YES;
     }
 }

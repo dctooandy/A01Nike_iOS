@@ -105,9 +105,30 @@
         self.callBackBlock(self.selectAccount,@"",@"");
     }
 }
-
+- (NSArray *)filterFAccountsWithArray:(NSArray *)array
+{
+    NSMutableArray * newAccounts = [array mutableCopy];
+    if (array && array.count > 0) {
+        for (NSDictionary * subDis in newAccounts) {
+            
+            if ([subDis[@"loginName"] hasPrefix:@"f"] == YES)
+            {
+                NSLog(@"string contains f");
+                [newAccounts removeObject:subDis];
+                return [newAccounts copy];
+                break;
+            }else
+            {
+                NSLog(@"string does not contain f");
+                
+            }
+        }
+    }
+    return array;
+}
 - (void)setAccounts:(NSArray *)accounts {
-    _accounts = accounts;
+
+    _accounts = [self filterFAccountsWithArray:accounts];
     NSString *phoneHidden = [NSString stringWithFormat:@"%@*******%@",[self.phone substringToIndex:3],[self.phone substringFromIndex:self.phone.length - 1]];
     NSString *phoneStr = [NSString stringWithFormat:@"手机号%@, 可登录账号如下:", phoneHidden];
     

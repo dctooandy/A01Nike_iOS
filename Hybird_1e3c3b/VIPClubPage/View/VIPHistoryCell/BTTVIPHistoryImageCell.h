@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTVIPHistoryImageCell : BTTBaseCollectionViewCell
 - (void)imageConfigForCell:(VIPHistoryImageModel *)model;
+- (void)pushToNewWebView;
 @end
 
 NS_ASSUME_NONNULL_END

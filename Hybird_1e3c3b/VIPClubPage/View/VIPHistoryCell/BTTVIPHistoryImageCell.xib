@@ -95,7 +95,7 @@
                                     <constraint firstItem="Vu5-gs-fAe" firstAttribute="top" secondItem="pOn-cQ-JXg" secondAttribute="bottom" id="UkM-WU-HOd"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_ad" translatesAutoresizingMaskIntoConstraints="NO" id="cUk-Ah-Ohn">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_ad" translatesAutoresizingMaskIntoConstraints="NO" id="cUk-Ah-Ohn">
                                 <rect key="frame" x="0.0" y="0.0" width="365" height="88"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="QuY-oj-Job"/>
