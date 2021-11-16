@@ -17,9 +17,12 @@
 #import "BTTAGQJViewController.h"
 #import "BTTAGGJViewController.h"
 #import "BTTGamesTryAlertView.h"
+#import "UIView+MJExtension.h"
 
 @interface BTTDiscountsViewController ()<BTTElementsFlowLayoutDelegate, UIScrollViewDelegate>
-
+{
+    UIButton *nextYear;
+}
 @end
 
 @implementation BTTDiscountsViewController
@@ -56,6 +59,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:!self.inProgressView.isHidden animated:animated];
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+//    [nextYear.imageView setContentMode:UIViewContentModeScaleToFill];
+    nextYear.subviews.firstObject.contentMode = UIViewContentModeScaleToFill;
 }
 
 - (void)setupCollectionView {
@@ -118,6 +127,27 @@
             make.height.offset(45);
         }];
     }
+    if (nextYear == nil)
+    {
+        nextYear = [UIButton buttonWithType:UIButtonTypeCustom];
+        nextYear.frame = CGRectMake(0, 0, 18, 45);
+        nextYear.backgroundColor = [UIColor clearColor];
+//        nextYear.titleLabel.font = [UIFont systemFontOfSize:20.0];
+//        [nextYear setTitle:@">>" forState:UIControlStateNormal];
+//        [nextYear setTitleColor:[UIColor colorWithHexString:@"#417DDA"] forState:UIControlStateNormal];
+//        [nextYear.imageView setContentMode:UIViewContentModeScaleAspectFill];
+        [nextYear setImage:ImageNamed(@"historyArrow") forState:UIControlStateNormal];
+        [nextYear setBackgroundImage:ImageNamed(@"squer") forState:UIControlStateNormal];
+        [self.view addSubview:nextYear];
+        [nextYear mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.yearsScrollView);
+            make.right.right.equalTo(self.yearsScrollView);
+            make.height.offset(45);
+            make.width.offset(18);
+        }];
+        weakSelf(weakSelf);
+        [nextYear addTarget:weakSelf action:@selector(nextYearPageAction) forControlEvents:UIControlEventTouchUpInside];
+    }
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTHomePageDiscountCell" bundle:nil] forCellWithReuseIdentifier:@"BTTHomePageDiscountCell"];
     [self.collectionView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -133,16 +163,72 @@
 }
 
 -(void)yearsBtnAction:(UIButton *)btn {
+//    for (UIView * view in self.yearsScrollView.subviews) {
+//        if ([view isKindOfClass:[UIButton class]]) {
+//            UIButton * yearBtn = (UIButton *)view;
+//            yearBtn.selected = yearBtn.tag == btn.tag;
+//            yearBtn.backgroundColor = yearBtn.tag == btn.tag ? [UIColor colorWithHexString:@"#3082EF"]:[UIColor clearColor];
+//        }
+//    }
+//    [self changeToHistoryPage:btn.tag];
+    [self moveScrollViewWithTag:btn.tag];
+}
+-(void)yearsBtnActionWithTag:(NSInteger )tag {
     for (UIView * view in self.yearsScrollView.subviews) {
         if ([view isKindOfClass:[UIButton class]]) {
             UIButton * yearBtn = (UIButton *)view;
-            yearBtn.selected = yearBtn.tag == btn.tag;
-            yearBtn.backgroundColor = yearBtn.tag == btn.tag ? [UIColor colorWithHexString:@"#3082EF"]:[UIColor clearColor];
+            yearBtn.selected = yearBtn.tag == tag;
+            yearBtn.backgroundColor = yearBtn.tag == tag ? [UIColor colorWithHexString:@"#3082EF"]:[UIColor clearColor];
         }
     }
-    [self changeToHistoryPage:btn.tag];
+    [self changeToHistoryPage:tag];
+
 }
 
+-(void)nextYearPageAction
+{
+    [self moveScrollViewWithTag:self.btnIndex + 1];
+}
+- (void)moveScrollViewWithTag:(NSInteger)currtneTag
+{
+    //可出現右邊雙箭號的距離單位,0 代表小於4顆,不出現雙箭號
+    NSUInteger moveTagX = ((_yearsBtnTitle.count >= 4) ? (_yearsBtnTitle.count - 4) : 0);
+    // 目前 scrollview 的 x,y
+    CGPoint offset = self.yearsScrollView.contentOffset;
+    
+    // 判斷上方導航欄要不要移動
+    // 點到的按鈕 小於等於 最大數目,可移動距離超過0單位
+    if (((currtneTag) <= _yearsBtnTitle.count - 1) && moveTagX > 0)
+    {
+        // 目前scrollview的 x 有沒有超過 可移動距離單位
+        if (offset.x >= moveTagX * (SCREEN_WIDTH/4))
+        {//超過,所以雙箭號隱藏
+            [nextYear setHidden:YES];
+        }else
+        {//沒超過,判斷點擊按鈕tag 有沒有超過 可點選距離
+            if (currtneTag >= moveTagX)
+            {//超過,隱藏雙箭號
+                offset.x = moveTagX * (SCREEN_WIDTH/4);
+                [nextYear setHidden:YES];
+            }else
+            {// 沒超過,算出移動到該按鈕的預設x,雙箭號不隱藏
+                offset.x = currtneTag * (SCREEN_WIDTH/4);
+                [nextYear setHidden:NO];
+            }
+        }
+        // 移動scrollview
+        [self.yearsScrollView setContentOffset:offset animated:YES];
+        // vc跳轉
+        [self yearsBtnActionWithTag:currtneTag];
+    }else
+    {
+        //可移動距離沒有超過 0 ,年份單位少於4 ,雙箭號隱藏,不移動
+//        offset.x = moveTagX * (SCREEN_WIDTH/4);
+        [nextYear setHidden:YES];
+//        [self.yearsScrollView setContentOffset:offset animated:YES];
+        [self yearsBtnActionWithTag:currtneTag];
+    }
+}
 -(void)changeToHistoryPage:(NSInteger)index {
     self.btnIndex = index;
     [self.sheetDatas removeAllObjects];
@@ -179,6 +265,13 @@
             make.top.height.equalTo(self.yearsScrollView);
             make.width.offset(SCREEN_WIDTH/4);
         }];
+    }
+    if (_yearsBtnTitle.count < 5)
+    {
+        [nextYear setHidden:YES];
+    }else
+    {
+        [nextYear setHidden:NO];
     }
     self.yearsScrollView.contentSize = CGSizeMake(_yearsBtnTitle.count * SCREEN_WIDTH / 4, 0);
 }
@@ -384,5 +477,16 @@
         btnClickBlock(btn);
     };
 }
-
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (_yearsBtnTitle.count > 4)
+    {
+        if (scrollView.contentOffset.x >= (_yearsBtnTitle.count - 4) * (SCREEN_WIDTH/4)) {
+            [nextYear setHidden:YES];
+        }else
+        {
+            [nextYear setHidden:NO];
+        }
+    }
+}
 @end
