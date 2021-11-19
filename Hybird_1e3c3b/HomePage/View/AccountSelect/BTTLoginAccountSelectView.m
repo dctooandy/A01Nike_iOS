@@ -109,22 +109,25 @@
 {
     NSMutableArray * newAccounts = [array mutableCopy];
     if (array && array.count > 0) {
-        for (NSDictionary * subDis in newAccounts) {
+        for (NSDictionary * subDis in array) {
             
             if ([subDis[@"loginName"] hasPrefix:@"f"] == YES)
             {
                 NSLog(@"string contains f");
                 [newAccounts removeObject:subDis];
-                return [newAccounts copy];
-                break;
+//                return [newAccounts copy];
+//                break;
             }else
             {
                 NSLog(@"string does not contain f");
                 
             }
         }
+        return newAccounts;
+    }else
+    {
+        return @[];
     }
-    return array;
 }
 - (void)setAccounts:(NSArray *)accounts {
 
@@ -136,15 +139,28 @@
     NSMutableAttributedString *attPhone = [[NSMutableAttributedString alloc] initWithString:phoneStr];
     [attPhone addAttributes:@{NSForegroundColorAttributeName:[UIColor colorWithHexString:@"499bf7"]} range:phoneRange];
     self.phoneLabel.attributedText = attPhone;
-    
-    self.selectAccount = accounts[0][@"loginName"];
-    self.preSelectIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    if (SCREEN_WIDTH == 320) {
-        self.heightContstant.constant = 30 * accounts.count;
-        self.bgHeightConstants.constant = 190 + 30 * accounts.count;
-    } else {
-        self.heightContstant.constant = 40 * accounts.count;
-        self.bgHeightConstants.constant = 190 + 40 * accounts.count;
+    if (_accounts.count > 0)
+    {
+        self.selectAccount = _accounts[0][@"loginName"];
+        self.preSelectIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        if (SCREEN_WIDTH == 320) {
+            self.heightContstant.constant = 30 * _accounts.count;
+            self.bgHeightConstants.constant = 190 + 30 * _accounts.count;
+        } else {
+            self.heightContstant.constant = 40 * _accounts.count;
+            self.bgHeightConstants.constant = 190 + 40 * _accounts.count;
+        }
+    }else
+    { // 沒有帳號時,需要另外處理
+        self.selectAccount = @"";
+        self.preSelectIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        if (SCREEN_WIDTH == 320) {
+            self.heightContstant.constant = 30 ;
+            self.bgHeightConstants.constant = 190 ;
+        } else {
+            self.heightContstant.constant = 40;
+            self.bgHeightConstants.constant = 190 + 40;
+        }
     }
     [self.tableView reloadData];
 }
