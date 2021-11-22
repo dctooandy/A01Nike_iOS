@@ -28,6 +28,7 @@
 @property (nonatomic, copy) NSString *selectAccount;
 
 @property (nonatomic, strong) NSIndexPath *preSelectIndexPath;
+@property (weak, nonatomic) IBOutlet UIButton *selectAccountBtn;
 
 @end
 
@@ -141,6 +142,7 @@
     self.phoneLabel.attributedText = attPhone;
     if (_accounts.count > 0)
     {
+        [self.selectAccountBtn setEnabled:YES];
         self.selectAccount = _accounts[0][@"loginName"];
         self.preSelectIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         if (SCREEN_WIDTH == 320) {
@@ -152,6 +154,7 @@
         }
     }else
     { // 沒有帳號時,需要另外處理
+        [self.selectAccountBtn setEnabled:NO];
         self.selectAccount = @"";
         self.preSelectIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         if (SCREEN_WIDTH == 320) {

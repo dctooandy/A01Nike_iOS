@@ -173,8 +173,9 @@ static const char *exModelKey = "exModelKey";
         if ([result.head.errCode isEqualToString:@"0000"]) {
             self.uuid = @"";
             self.wrongPwdNum = 0;
-            
+            // 登入時 檢測是否多帳號
             if (result.body[@"samePhoneLoginNames"]!=nil) {
+                // 多帳號,判斷帳號開頭有F的過濾掉,全部過濾掉的情形下,登入確定按鈕失效,不給選
                 [self hideLoading];
                 NSArray *loginArray = result.body[@"samePhoneLoginNames"];
                 NSString *messageId = result.body[@"messageId"];
@@ -183,6 +184,7 @@ static const char *exModelKey = "exModelKey";
             }else{
                 if ([result.body[@"loginName"] hasPrefix:@"f"] == YES)
                 {
+                    // 單帳號,但帳號開頭為F,仍顯示多帳號選單,但登入確定按鈕失效,不給選
                     [self hideLoading];
                     NSDictionary *loginDic = @{@"loginName":result.body[@"loginName"]};
                     NSArray *loginArray = [[NSArray alloc] initWithObjects:loginDic, nil];
