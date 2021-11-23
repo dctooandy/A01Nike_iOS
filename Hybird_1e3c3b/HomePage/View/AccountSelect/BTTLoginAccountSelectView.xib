@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -39,7 +37,7 @@
                                 <constraint firstAttribute="height" constant="200" id="hrq-5Q-8LV"/>
                             </constraints>
                         </tableView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hn3-lz-65S">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hn3-lz-65S">
                             <rect key="frame" x="30" y="329" width="315" height="41"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="41" id="Vjv-aO-eoU"/>
@@ -67,7 +65,7 @@
                         <constraint firstItem="hn3-lz-65S" firstAttribute="top" secondItem="hgq-Kg-meo" secondAttribute="bottom" constant="25" id="r3a-4d-inm"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sx7-KV-JhG">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sx7-KV-JhG">
                     <rect key="frame" x="162.5" y="405" width="50.5" height="50.5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50.5" id="LaT-8x-PKA"/>
@@ -79,6 +77,7 @@
                     </connections>
                 </button>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="5eZ-lB-5nw" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="FPD-MM-DcO"/>
@@ -88,12 +87,12 @@
                 <constraint firstItem="5eZ-lB-5nw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="yfr-EJ-RNF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="bgHeightConstants" destination="d7s-t5-14Z" id="cVq-1I-aIq"/>
                 <outlet property="bgView" destination="5eZ-lB-5nw" id="FD7-T2-i50"/>
                 <outlet property="heightContstant" destination="hrq-5Q-8LV" id="Chx-Si-zfu"/>
                 <outlet property="phoneLabel" destination="KSa-XD-RIV" id="Un2-Qx-6kZ"/>
+                <outlet property="selectAccountBtn" destination="hn3-lz-65S" id="fD4-qd-J85"/>
                 <outlet property="tableView" destination="hgq-Kg-meo" id="az9-Ki-jx0"/>
                 <outlet property="titleLabel" destination="aMI-cl-q49" id="Cdg-Du-5kx"/>
                 <outlet property="widthConstants" destination="d4e-OA-s6p" id="5W9-GE-vAT"/>

@@ -173,30 +173,43 @@ static const char *exModelKey = "exModelKey";
         if ([result.head.errCode isEqualToString:@"0000"]) {
             self.uuid = @"";
             self.wrongPwdNum = 0;
-            
+            // 登入時 檢測是否多帳號
             if (result.body[@"samePhoneLoginNames"]!=nil) {
+                // 多帳號,判斷帳號開頭有F的過濾掉,全部過濾掉的情形下,登入確定按鈕失效,不給選
                 [self hideLoading];
                 NSArray *loginArray = result.body[@"samePhoneLoginNames"];
                 NSString *messageId = result.body[@"messageId"];
                 NSString *validateId = result.body[@"validateId"];
                 [self showPopViewWithAccounts:loginArray withPhone:model.login_name withValidateId:validateId messageId:messageId smsCode:model.password isBack:isback];
             }else{
-                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"rfCode"] forKey:@"pushcustomerid"];
-//                [IVPushManager sharedManager].customerId = result.body[@"customerId"];
-                if (result.body[@"beforeLoginDate"])
+                if ([result.body[@"loginName"] hasPrefix:@"f"] == YES)
                 {
-                    [[NSUserDefaults standardUserDefaults] setObject:result.body[@"beforeLoginDate"] forKey:BTTBeforeLoginDate];
-                }else{
-                    [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:BTTBeforeLoginDate];
+                    // 單帳號,但帳號開頭為F,仍顯示多帳號選單,但登入確定按鈕失效,不給選
+                    [self hideLoading];
+                    NSDictionary *loginDic = @{@"loginName":result.body[@"loginName"]};
+                    NSArray *loginArray = [[NSArray alloc] initWithObjects:loginDic, nil];
+                    NSString *messageId = result.body[@"messageId"];
+                    NSString *validateId = result.body[@"validateId"];
+                    [self showPopViewWithAccounts:loginArray withPhone:model.login_name withValidateId:validateId messageId:messageId smsCode:model.password isBack:isback];
+                }else
+                {
+                    [[NSUserDefaults standardUserDefaults]setObject:result.body[@"rfCode"] forKey:@"pushcustomerid"];
+                    //                [IVPushManager sharedManager].customerId = result.body[@"customerId"];
+                    if (result.body[@"beforeLoginDate"])
+                    {
+                        [[NSUserDefaults standardUserDefaults] setObject:result.body[@"beforeLoginDate"] forKey:BTTBeforeLoginDate];
+                    }else{
+                        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:BTTBeforeLoginDate];
+                    }
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                    [delegate reSendIVPushRequestIpsSuperSign:result.body[@"rfCode"]];
+                    [IVHttpManager shareManager].loginName = model.login_name;
+                    [IVHttpManager shareManager].userToken = result.body[@"token"];
+                    [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
+                    NSString *loginName = [NSString stringWithFormat:@"%@",result.body[@"loginName"]];
+                    [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
                 }
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-                [delegate reSendIVPushRequestIpsSuperSign:result.body[@"rfCode"]];
-                [IVHttpManager shareManager].loginName = model.login_name;
-                [IVHttpManager shareManager].userToken = result.body[@"token"];
-                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
-                NSString *loginName = [NSString stringWithFormat:@"%@",result.body[@"loginName"]];
-                [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
             }
             
         }else{
@@ -268,14 +281,25 @@ static const char *exModelKey = "exModelKey";
                 NSString *validateId = result.body[@"validateId"];
                 [self showPopViewWithAccounts:loginArray withPhone:model.login_name withValidateId:validateId messageId:messageId smsCode:model.password isBack:isback];
             }else{
-                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"rfCode"] forKey:@"pushcustomerid"];
-                AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-                [delegate reSendIVPushRequestIpsSuperSign:result.body[@"rfCode"]];
-                [IVHttpManager shareManager].loginName = model.login_name;
-                [IVHttpManager shareManager].userToken = result.body[@"token"];
-                [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
-                NSString *loginName = [NSString stringWithFormat:@"%@",result.body[@"loginName"]];
-                [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
+                if ([result.body[@"loginName"] hasPrefix:@"f"] == YES)
+                {
+                    [self hideLoading];
+                    NSDictionary *loginDic = @{@"loginName":result.body[@"loginName"]};
+                    NSArray *loginArray = [[NSArray alloc] initWithObjects:loginDic, nil];
+                    NSString *messageId = result.body[@"messageId"];
+                    NSString *validateId = result.body[@"validateId"];
+                    [self showPopViewWithAccounts:loginArray withPhone:model.login_name withValidateId:validateId messageId:messageId smsCode:model.password isBack:isback];
+                }else
+                {
+                    [[NSUserDefaults standardUserDefaults]setObject:result.body[@"rfCode"] forKey:@"pushcustomerid"];
+                    AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                    [delegate reSendIVPushRequestIpsSuperSign:result.body[@"rfCode"]];
+                    [IVHttpManager shareManager].loginName = model.login_name;
+                    [IVHttpManager shareManager].userToken = result.body[@"token"];
+                    [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
+                    NSString *loginName = [NSString stringWithFormat:@"%@",result.body[@"loginName"]];
+                    [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
+                }
             }
         } else {
             [self hideLoading];
