@@ -240,6 +240,21 @@
             }];
         }
     }
+    else if ([url containsString:@"common/agin.htm"]) {
+        if ([IVNetwork savedUserInfo]) {
+            [MBProgressHUD showLoadingSingleInView:self.controller.view animated:true];
+            [self checkAccount:BTTAGGJKEY];
+        } else {
+            [self showTryAlertViewWithBlock:^(UIButton * _Nonnull btn) {
+                if (btn.tag == 1090) {
+                    [self gotoGame:@"CNY" gameKey:BTTAGGJKEY];
+                } else {
+                    [MBProgressHUD showError:@"请先登录" toView:nil];
+                    [self goToLoginPage:true];
+                }
+            }];
+        }
+    }
     else if ([url containsString:@"common/as.htm"]) {
         if ([IVNetwork savedUserInfo]) {
             [MBProgressHUD showLoadingSingleInView:self.controller.view animated:true];
@@ -408,6 +423,11 @@
         model.platformCurrency = currency;
         [[IVGameManager sharedManager].lastGameVC reloadGame];
         [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self.controller];
+    }else if ([gameKey isEqualToString:BTTAGGJKEY]) {
+        BTTAGGJViewController *vc = [BTTAGGJViewController new];
+//        [CNTimeLog startRecordTime:CNEventAGQJLaunch];
+        vc.platformLine = currency;
+        [self.controller.navigationController pushViewController:vc animated:YES];
     }
     
 }

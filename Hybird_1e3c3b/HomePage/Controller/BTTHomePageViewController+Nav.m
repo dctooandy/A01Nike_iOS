@@ -473,8 +473,23 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
                     }];
                 }
             } else if ([gameid isEqualToString:BTTAGGJKEY]) {
-                BTTAGGJViewController *vc = [BTTAGGJViewController new];
-                [self.navigationController pushViewController:vc animated:YES];
+                if ([IVNetwork savedUserInfo]) {
+                    BTTAGGJViewController *vc = [BTTAGGJViewController new];
+                    vc.platformLine = [IVNetwork savedUserInfo].uiMode;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else {
+                    [self showTryAlertViewWithBlock:^(UIButton * _Nonnull btn) {
+                        if (btn.tag == 1090) {
+                            BTTAGGJViewController *vc = [BTTAGGJViewController new];
+                            vc.platformLine = @"CNY";
+                            [self.navigationController pushViewController:vc animated:YES];
+                        } else {
+                            [MBProgressHUD showError:@"请先登录" toView:nil];
+                            BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }
+                    }];
+                }
             }
         }
         NSRange andRange = [model.action.detail rangeOfString:@"&"];

@@ -49,7 +49,10 @@
 {
     IVGameManager *manager = [IVGameManager sharedManager];
     IVGameModel *gameModel = manager.aginVC.gameModel;
-    gameModel.platformCurrency = self.platformLine;
+    if (!A01IsEmpty(self.platformLine))
+    {
+        gameModel.platformCurrency = self.platformLine;        
+    }
     gameModel.gameCode = BTTAGGJKEY;
     manager.aginVC.gameModel = gameModel;
     [self addChildViewController:[IVGameManager sharedManager].aginVC];
