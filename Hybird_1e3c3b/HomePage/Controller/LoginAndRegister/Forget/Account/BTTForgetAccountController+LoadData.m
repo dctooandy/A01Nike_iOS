@@ -25,7 +25,8 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             BTTCheckCustomerModel * model = [BTTCheckCustomerModel yy_modelWithJSON:result.body];
             BTTForgetAccountStepTwoController * vc = [[BTTForgetAccountStepTwoController alloc] init];
-            vc.itemArr = model.loginNames;
+            NSArray * newItemArr = [self filterFAccountsWithArray:model.loginNames];
+            vc.itemArr = newItemArr;
             vc.forgetType = self.forgetType;
             [self.navigationController pushViewController:vc animated:true];
         }else{
@@ -33,7 +34,30 @@
         }
     }];
 }
-
+- (NSArray *)filterFAccountsWithArray:(NSArray *)array
+{
+    NSMutableArray * newAccounts = [array mutableCopy];
+    if (array && array.count > 0) {
+        for (BTTCheckCustomerItemModel * subDis in array) {
+            
+            if ([subDis.loginName hasPrefix:@"f"] == YES)
+            {
+                NSLog(@"string contains f");
+                [newAccounts removeObject:subDis];
+//                return [newAccounts copy];
+//                break;
+            }else
+            {
+                NSLog(@"string does not contain f");
+                
+            }
+        }
+        return newAccounts;
+    }else
+    {
+        return @[];
+    }
+}
 -(void)sendCodeByPhone:(NSString *)phone {
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     params[@"mobileNo"] = [IVRsaEncryptWrapper encryptorString:phone];
