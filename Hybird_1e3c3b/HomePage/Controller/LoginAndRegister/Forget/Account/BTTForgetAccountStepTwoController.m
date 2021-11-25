@@ -78,6 +78,13 @@
         cell.buttonType = BTTButtonTypeConfirm;
         [[NSNotificationCenter defaultCenter] postNotificationName:BTTVerifyCodeEnableNotification object:@"verifycode"];
         weakSelf(weakSelf);
+        if (self.itemArr.count < 1)
+        {
+            [cell.btn setEnabled:NO];
+        }else
+        {
+            [cell.btn setEnabled:YES];
+        }
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
             [weakSelf goToNextPage];
         };
