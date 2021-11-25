@@ -593,7 +593,7 @@
         contents = @[@"所有类别",@"热门游戏",@"彩金池游戏",@"最新游戏"];
         title = @"请选择游戏类别";
     } else if (button.tag == 1071) {
-        contents = @[@"全平台",@"PT",@"MG",@"PP",@"AG",@"TTG",@"PS",@"PNG",@"NT"];
+        contents = @[@"全平台",@"PT",@"MG",@"PP",@"AG",@"TTG",@"PS",@"PNG"];
         title = @"请选择游戏平台";
         
     } else if (button.tag == 1072) {
