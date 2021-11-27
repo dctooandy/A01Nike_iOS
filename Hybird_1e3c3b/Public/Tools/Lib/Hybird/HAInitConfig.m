@@ -23,7 +23,7 @@
             return @[@"http://fm.918rr.com/_glaxy_1e3c3b_/"];
             break;
         case 2:
-            return @[@"https://wrd.58baili.com/pro",@"https://m.jkfjdfe.com:9188",@"https://m.zncjdhvs.com:9188",@"https://m.pkyorjhn.com:9188"];
+            return @[@"https://m.c349b2.com:9188/_glaxy_1e3c3b_/", @"https://918xxs.com/_glaxy_1e3c3b_/", @"https://918ykk.com/_glaxy_1e3c3b_/", @"https://918ygg.com/_glaxy_1e3c3b_/", @"https://918yjj.com/_glaxy_1e3c3b_/", @"https://918yvv.com/_glaxy_1e3c3b_/", @"https://918yuu.com/_glaxy_1e3c3b_/"];
             break;
         default:
             return @[@"http://www.pt-gateway.com/_glaxy_1e3c3b_/"];
@@ -46,23 +46,6 @@
             return @"http://m.a01.com/";
             break;
     }
-}
-
-+ (NSArray *)defaultH5Domains {
-    switch (EnvirmentType) {
-        case 0:
-            return @[@"http://m.a01.com/"];
-            break;
-        case 1:
-            return @[@"http://fm.918rr.com/"];
-            break;
-        case 2:
-            return @[@"https://m.c349b2.com:9188",@"https://918xxo.com",@"https://918yuu.com",@"https://918xxs.com"];
-            break;
-        default:
-            break;
-    }
-    return [NSArray array];
 }
 
 + (NSString *)defaultCDN {
