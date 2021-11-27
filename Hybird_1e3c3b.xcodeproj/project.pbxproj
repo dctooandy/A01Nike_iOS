@@ -194,6 +194,7 @@
 		3A929424219C3B7500764E7E /* BTTRegisterSuccessOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A929422219C3B7500764E7E /* BTTRegisterSuccessOneCell.xib */; };
 		3A929428219C3D6200764E7E /* BTTRegisterSuccessBtnsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A929426219C3D6200764E7E /* BTTRegisterSuccessBtnsCell.m */; };
 		3A929429219C3D6200764E7E /* BTTRegisterSuccessBtnsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A929427219C3D6200764E7E /* BTTRegisterSuccessBtnsCell.xib */; };
+		3A9897472751E34E005BCE51 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9897462751E2FF005BCE51 /* libboringssl_simulator.a */; };
 		3A9E4C1E219D416700E7D8C0 /* BTTForgetPasswordStepTwoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C1D219D416700E7D8C0 /* BTTForgetPasswordStepTwoController.m */; };
 		3A9E4C21219D418800E7D8C0 /* BTTForgetPasswordStepTwoController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C20219D418800E7D8C0 /* BTTForgetPasswordStepTwoController+LoadData.m */; };
 		3A9E4C24219D56F600E7D8C0 /* BTTForgetPasswordStepThreeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E4C23219D56F600E7D8C0 /* BTTForgetPasswordStepThreeController.m */; };
@@ -1167,6 +1168,8 @@
 		3A929425219C3D6200764E7E /* BTTRegisterSuccessBtnsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTRegisterSuccessBtnsCell.h; sourceTree = "<group>"; };
 		3A929426219C3D6200764E7E /* BTTRegisterSuccessBtnsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTRegisterSuccessBtnsCell.m; sourceTree = "<group>"; };
 		3A929427219C3D6200764E7E /* BTTRegisterSuccessBtnsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTRegisterSuccessBtnsCell.xib; sourceTree = "<group>"; };
+		3A9897452751E276005BCE51 /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = ../Downloads/libboringssl_simulator.a; sourceTree = "<group>"; };
+		3A9897462751E2FF005BCE51 /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = ../Desktop/libboringssl_simulator.a; sourceTree = "<group>"; };
 		3A9E4C1C219D416700E7D8C0 /* BTTForgetPasswordStepTwoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTForgetPasswordStepTwoController.h; sourceTree = "<group>"; };
 		3A9E4C1D219D416700E7D8C0 /* BTTForgetPasswordStepTwoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTForgetPasswordStepTwoController.m; sourceTree = "<group>"; };
 		3A9E4C1F219D418800E7D8C0 /* BTTForgetPasswordStepTwoController+LoadData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTTForgetPasswordStepTwoController+LoadData.h"; sourceTree = "<group>"; };
@@ -2244,6 +2247,7 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
+				3A9897472751E34E005BCE51 /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -4614,6 +4618,8 @@
 			isa = PBXGroup;
 			children = (
 				76CC62BD265677E00042AEDF /* libboringssl_simulator.a */,
+				3A9897452751E276005BCE51 /* libboringssl_simulator.a */,
+				3A9897462751E2FF005BCE51 /* libboringssl_simulator.a */,
 				D3399696243B08E000B91A52 /* libboringssl.tbd */,
 				3AD9CF03216C425200685B43 /* CoreTelephony.framework */,
 				3AD9CEE821675A9B00685B43 /* libresolv.tbd */,
