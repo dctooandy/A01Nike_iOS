@@ -71,7 +71,7 @@
 //     //cdn,先从缓存取，缓存没有使用默认配置
 //    [IVHttpManager shareManager].cdn = [IVCacheWrapper objectForKey:IVCacheCDNKey] ? : [HAInitConfig defaultCDN];
     
-    [IVHttpManager shareManager].domains = [HAInitConfig defaultH5Domains];
+    [IVHttpManager shareManager].domains = @[[HAInitConfig defaultH5Domain]];
     [IVHttpManager shareManager].domain = [HAInitConfig defaultH5Domain];
     [IVHttpManager shareManager].cdn = [HAInitConfig defaultCDN];
     [IVHttpManager shareManager].isSensitive = YES;
@@ -82,60 +82,21 @@
     [self setupRedDot];
     [LiveChat initOcssSDKNetWork];
     [IVCheckNetworkWrapper initSDK];
-    [self getAppSettings];
-    [self checkVersionUpdate];
-}
-
-// 获取APP 的网关配置和域名配置
-- (void)getAppSettings {
-    [IVNetwork requestPostWithUrl:BTTGetAppSetting paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSDictionary *contentDic = result.body;
-            if (contentDic.count != 0) {
-                NSArray *gateways = [contentDic objectForKey:@"getways"];
-                [IVHttpManager shareManager].gateways = gateways;
-                NSArray *websides = [contentDic objectForKey:@"websides"];
-                [IVHttpManager shareManager].domains = websides;
-                [self checkGatewaysAndDomains];
-            }
-        }
-    }];
-}
-
-
-- (void)checkGatewaysAndDomains {
-    NSMutableArray *GTWays = [NSMutableArray array];
-    NSMutableArray *NewDomains = [NSMutableArray array];
-    for (NSString *str in [IVHttpManager shareManager].gateways) {
-        if (str.length) {
-            [GTWays addObject:[str stringByAppendingString:@"/"]];
-        }
-    }
-    //获取最优的网关
-    [IVCheckNetworkWrapper getOptimizeUrlWithArray:GTWays
-                                            isAuto:YES
-                                              type:IVKCheckNetworkTypeGateway
-                                          progress:nil
-                                        completion:nil
-     ];
+//    //获取最优的网关
+//    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways
+//                                            isAuto:YES
+//                                              type:IVKCheckNetworkTypeGateway
+//                                          progress:nil
+//                                        completion:nil
+//     ];
+//    //获取最优的手机站
+//    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].domains
+//                                            isAuto:YES
+//                                              type:IVKCheckNetworkTypeDomain
+//                                          progress:nil
+//                                        completion:nil
+//     ];
     
-    for (NSString *str in [IVHttpManager shareManager].domains) {
-        if (str.length) {
-            [NewDomains addObject:[str stringByAppendingString:@"/"]];
-        }
-    }
-    
-    //获取最优的手机站
-    [IVCheckNetworkWrapper getOptimizeUrlWithArray:NewDomains
-                                            isAuto:YES
-                                              type:IVKCheckNetworkTypeDomain
-                                          progress:nil
-                                        completion:nil
-     ];
-}
-
-- (void)checkVersionUpdate {
     [IVPublicAPIManager checkAppUpdateWithH5Version:1 callBack:^(IVPCheckUpdateModel * _Nonnull result, IVJResponseObject * _Nonnull response) {
         NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
         NSString *appVersion = [infoDic objectForKey: @"CFBundleShortVersionString"];

@@ -13,7 +13,6 @@
 + (NSString *)bundleId;
 + (NSArray *)gateways;
 + (NSString *)defaultH5Domain;
-+ (NSArray *)defaultH5Domains;
 + (NSString *)appKey;
 + (NSString *)appId;
 + (NSString *)socketIp;
