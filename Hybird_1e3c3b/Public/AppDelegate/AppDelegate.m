@@ -26,6 +26,8 @@
 #import "HAInitConfig.h"
 #import "BTTUserStatusManager.h"
 #import "BTTFirstWinningListModel.h"
+#import "BTTCheckDomainModel.h"
+#import "AppdelegateManager.h"
 
 @interface AppDelegate ()<IVPushDelegate>
 
@@ -62,7 +64,28 @@
         return [IVNetwork savedUserInfo].loginName==nil?@"":[IVNetwork savedUserInfo].loginName;
     }];
 }
-
+- (void)checkDomainHandler:(void (^)(void))handler  {
+    NSMutableDictionary *params = @{}.mutableCopy;
+    [IVHttpManager shareManager].appId = [HAInitConfig appId];     // 应用ID
+    [IVHttpManager shareManager].productId = [HAInitConfig productId]; // 产品标识
+    [IVHttpManager shareManager].isSensitive = YES;
+    params[@"productId"] = [IVHttpManager shareManager].productId;
+    params[@"productCodeExt"] = @"FM";
+    params[@"productCode"] = @"";
+    [IVNetwork requestPostWithUrl:BTTAppSetting paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTCheckDomainModel *model = [BTTCheckDomainModel yy_modelWithDictionary:result.body];
+            [[AppdelegateManager shareManager] setGateways:model.getways];
+            [[AppdelegateManager shareManager] setWebsides:model.websides];
+        }else
+        {
+            [[AppdelegateManager shareManager] setGateways:nil];
+            [[AppdelegateManager shareManager] setWebsides:nil];
+        }
+        handler();
+    }];
+}
 -(void)setDynamicQuery {
     [IVLAManager needUploadWithNewDomain:YES];
     NSDictionary * params = @{@"bizCode":@"SKYNET_SDK_CONFIG"};
@@ -138,21 +161,27 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    weakSelf(weakSelf)
+    [self checkDomainHandler:^{
+        [weakSelf continueWithLuanchWithApplication:application options:launchOptions];
+    }];
+    return YES;
+}
+- (void)continueWithLuanchWithApplication:(UIApplication *)application options:(NSDictionary *)options
+{
     [self setupAPPEnvironment];
     [self checkArearLimit];
     [self unzipLocationH5Package];
-//    [self getWMSForm];
+    //    [self getWMSForm];
     [self setupTabbarController];
     [self.window makeKeyAndVisible];
     [self setDynamicQuery];
-    [self initPushSDKWithApplication:application options:launchOptions];
+    [self initPushSDKWithApplication:application options:options];
     [CNPreCacheMananger prepareCacheDataNormal];
     [CNPreCacheMananger prepareCacheDataNeedLogin];
-//    [OpenInstallSDK initWithDelegate:self];
+    //    [OpenInstallSDK initWithDelegate:self];
     [[UIButton appearance] setExclusiveTouch:YES];
-    return YES;
 }
-
 // open install delegate
 
 - (void)getInstallParamsFromOpenInstall:(nullable NSDictionary *)params withError:(nullable NSError *)error {
