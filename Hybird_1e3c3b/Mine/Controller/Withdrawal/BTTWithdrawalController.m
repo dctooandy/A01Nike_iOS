@@ -63,7 +63,8 @@
         if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
             [self getLimitUSDT];
         } else {
-            [self loadMainData];
+            [self getLimitUSDT];//根据用户币种返回限额
+//            [self loadMainData];
         }
         [self loadCreditsTotalAvailable];
     }

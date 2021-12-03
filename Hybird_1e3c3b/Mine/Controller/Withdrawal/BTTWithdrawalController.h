@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isSellUsdt;
 @property (nonatomic, copy) NSString * dcboxLimit;
 @property (nonatomic, copy) NSString * usdtLimit;
+@property (nonatomic, copy) NSString * iChiPayLimit;
+@property (nonatomic, copy) NSString * cnyLimit;
 @end
 
 NS_ASSUME_NONNULL_END
