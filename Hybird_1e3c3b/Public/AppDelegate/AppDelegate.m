@@ -69,6 +69,7 @@
     [IVHttpManager shareManager].appId = [HAInitConfig appId];     // 应用ID
     [IVHttpManager shareManager].productId = [HAInitConfig productId]; // 产品标识
     [IVHttpManager shareManager].isSensitive = YES;
+    [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
     params[@"productId"] = [IVHttpManager shareManager].productId;
     params[@"productCodeExt"] = @"FM";
     params[@"productCode"] = @"";
