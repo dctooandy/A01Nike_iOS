@@ -60,7 +60,9 @@
         NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:ALPHANUM] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
         return [string isEqualToString:filtered];
-    } else if ([self.model.name isEqualToString:@"金额"] && [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+    } else if ([self.model.name isEqualToString:@"金额"]
+//               && [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]
+               ) {
         NSMutableString * futureString = [NSMutableString stringWithString:textField.text];
         [futureString insertString:string atIndex:range.location];
         NSInteger flag = 0;
