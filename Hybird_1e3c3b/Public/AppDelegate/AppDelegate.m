@@ -65,27 +65,51 @@
     }];
 }
 - (void)checkDomainHandler:(void (^)(void))handler  {
-    NSMutableDictionary *params = @{}.mutableCopy;
-    [IVHttpManager shareManager].appId = [HAInitConfig appId];     // 应用ID
-    [IVHttpManager shareManager].productId = [HAInitConfig productId]; // 产品标识
-    [IVHttpManager shareManager].isSensitive = YES;
-    [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
-    params[@"productId"] = [IVHttpManager shareManager].productId;
-    params[@"productCodeExt"] = @"FM";
-    params[@"productCode"] = @"";
-    [IVNetwork requestPostWithUrl:BTTAppSetting paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            BTTCheckDomainModel *model = [BTTCheckDomainModel yy_modelWithDictionary:result.body];
-            [[AppdelegateManager shareManager] setGateways:model.getways];
-            [[AppdelegateManager shareManager] setWebsides:model.websides];
-        }else
-        {
-            [[AppdelegateManager shareManager] setGateways:nil];
-            [[AppdelegateManager shareManager] setWebsides:nil];
-        }
+    // 所有手机站,先从缓存取，缓存没有使用默认配置
+    if (![IVCacheWrapper objectForKey:IVCacheAllGatewayKey] ||
+        ![IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey] )
+    {
+        NSMutableDictionary *params = @{}.mutableCopy;
+        [IVHttpManager shareManager].appId = [HAInitConfig appId];     // 应用ID
+        [IVHttpManager shareManager].productId = [HAInitConfig productId]; // 产品标识
+        [IVHttpManager shareManager].isSensitive = YES;
+        [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
+        params[@"productId"] = [IVHttpManager shareManager].productId;
+        params[@"productCodeExt"] = @"FM";
+        params[@"productCode"] = @"";
+        [IVNetwork requestPostWithUrl:BTTAppSetting paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                BTTCheckDomainModel *model = [BTTCheckDomainModel yy_modelWithDictionary:result.body];
+                [[AppdelegateManager shareManager] setGateways:model.getways];
+                [[AppdelegateManager shareManager] setWebsides:model.websides];
+            }else
+            {
+                [[AppdelegateManager shareManager] setGateways:nil];
+                [[AppdelegateManager shareManager] setWebsides:nil];
+            }
+            handler();
+        }];
+    }else
+    {
+        [IVHttpManager shareManager].gateways = [IVCacheWrapper objectForKey:IVCacheAllGatewayKey];  // 网关列表
+        [IVHttpManager shareManager].domains = [IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey]; // 网页域名
+        //获取最优的网关
+        [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways
+                                                isAuto:YES
+                                                  type:IVKCheckNetworkTypeGateway
+                                              progress:nil
+                                            completion:nil
+         ];
+        //获取最优的手机站
+        [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].domains
+                                                isAuto:YES
+                                                  type:IVKCheckNetworkTypeDomain
+                                              progress:nil
+                                            completion:nil
+         ];
         handler();
-    }];
+    }
 }
 -(void)setDynamicQuery {
     [IVLAManager needUploadWithNewDomain:YES];
