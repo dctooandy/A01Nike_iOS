@@ -72,8 +72,10 @@
         [self recheckDomain:handler];
     }else
     {
-        [IVHttpManager shareManager].gateways = [IVCacheWrapper objectForKey:IVCacheAllGatewayKey];  // 网关列表
-        [IVHttpManager shareManager].domains = [IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey]; // 网页域名
+        [[AppdelegateManager shareManager] setGateways:[IVCacheWrapper objectForKey:IVCacheAllGatewayKey]];
+        [[AppdelegateManager shareManager] setWebsides:[IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey]];
+//        [IVHttpManager shareManager].gateways = [IVCacheWrapper objectForKey:IVCacheAllGatewayKey];  // 网关列表
+//        [IVHttpManager shareManager].domains = [IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey]; // 网页域名
         //获取最优的网关
 //        [self testSpeed:[IVHttpManager shareManager].gateways Handler:handler];
         handler();
@@ -81,6 +83,7 @@
 }
 - (void)testSpeed:(NSArray*)domailArr Handler:(void (^)(void))handler
 {
+    [IVCheckNetworkWrapper initSDK];
     //app有域名测速功能就使用，没有直接注释domainBakList赋值即可
     NSMutableArray * arr = [[NSMutableArray alloc] init];
     for (NSString * str in domailArr) {
@@ -90,17 +93,41 @@
             [arr addObject:[NSString stringWithFormat:@"%@/", str]];
         }
     }
+//    [IVCheckNetworkWrapper getOptimizeUrlSynWithArray:[IVHttpManager shareManager].gateways
+//                                               isAuto:YES
+//                                                 type:IVKCheckNetworkTypeGateway
+//                                             progress:nil
+//                                           completion:^(IVCheckDetailModel * _Nonnull model) {
+//        if (model != nil) {
+//            handler();
+//        }else
+//        {
+//            [[AppdelegateManager shareManager] setGateways:nil];
+//            [[AppdelegateManager shareManager] setWebsides:nil];
+//            [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
+//            [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
+//            [self recheckDomain:handler];
+//        }
+//    }];
     //...测速代码，速度从快到慢
-    [IVCheckNetworkWrapper getOptimizeUrlWithArray:arr isAuto:YES type:IVKCheckNetworkTypeGateway progress:nil completion:^(IVCheckDetailModel * _Nonnull model) {
-        if (model != nil) {
-            handler();
-        }else
-        {
-            [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
-            [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
-            [self recheckDomain:handler];
-        }
-    }];
+//    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways
+//                                            isAuto:YES
+//                                              type:IVKCheckNetworkTypeGateway
+//                                          progress:nil
+//                                        completion:^(IVCheckDetailModel * _Nonnull model) {
+//        if (model != nil) {
+//            handler();
+//        }else
+//        {
+//            [[AppdelegateManager shareManager] setGateways:nil];
+//            [[AppdelegateManager shareManager] setWebsides:nil];
+//            [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
+//            [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
+//            [self recheckDomain:handler];
+//        }
+//    }];
+
+
 }
 - (void)recheckDomain:(void (^)(void))handler  {
     
@@ -120,11 +147,12 @@
             NSMutableArray * tempWebArr = [NSMutableArray new];
             for (NSString *getway in model.getways) {
                 if ([[getway substringFromIndex:getway.length-1] isEqualToString:@"/"]) {
-                    [tempGetArr addObject:getway];
+                    [tempGetArr addObject:[NSString stringWithFormat:@"%@_glaxy_1e3c3b_/", getway]];
                 } else {
-                    [tempGetArr addObject:[NSString stringWithFormat:@"%@/", getway]];
+                    [tempGetArr addObject:[NSString stringWithFormat:@"%@/_glaxy_1e3c3b_/", getway]];
                 }
             }
+           
             for (NSString *websit in model.websides) {
                 if ([[websit substringFromIndex:websit.length-1] isEqualToString:@"/"]) {
                     [tempWebArr addObject:websit];

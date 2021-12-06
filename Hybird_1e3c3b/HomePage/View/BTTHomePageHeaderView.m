@@ -293,6 +293,8 @@
 }
 - (void)rebootBySecWithEnvirment:(NSInteger)env
 {
+    [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
+    [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
     [IVCacheWrapper clearCache];
     [[NSUserDefaults standardUserDefaults] setInteger:env forKey:@"Envirment"];
     [[NSUserDefaults standardUserDefaults] synchronize];
