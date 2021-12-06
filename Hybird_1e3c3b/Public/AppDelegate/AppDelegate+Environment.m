@@ -45,7 +45,7 @@
     [IVHttpManager shareManager].productId = [HAInitConfig productId]; // 产品标识
     [IVHttpManager shareManager].appId = [HAInitConfig appId];     // 应用ID
     [IVHttpManager shareManager].parentId = [HAInitConfig appKey];  // 渠道号
-    [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
+//    [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
     [IVHttpManager shareManager].productCode = [HAInitConfig appKey]; // 产品码
     [IVHttpManager shareManager].productCodeExt = [HAInitConfig productCodeExt];
     NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];
@@ -71,7 +71,7 @@
 //     //cdn,先从缓存取，缓存没有使用默认配置
 //    [IVHttpManager shareManager].cdn = [IVCacheWrapper objectForKey:IVCacheCDNKey] ? : [HAInitConfig defaultCDN];
     
-    [IVHttpManager shareManager].domains = [HAInitConfig websides];
+//    [IVHttpManager shareManager].domains = [HAInitConfig websides];
     [IVHttpManager shareManager].domain = [HAInitConfig defaultH5Domain];
     [IVHttpManager shareManager].cdn = [HAInitConfig defaultCDN];
     [IVHttpManager shareManager].isSensitive = YES;

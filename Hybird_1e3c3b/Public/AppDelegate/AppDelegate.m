@@ -69,48 +69,82 @@
     if (![IVCacheWrapper objectForKey:IVCacheAllGatewayKey] ||
         ![IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey] )
     {
-        NSMutableDictionary *params = @{}.mutableCopy;
-        [IVHttpManager shareManager].appId = [HAInitConfig appId];     // 应用ID
-        [IVHttpManager shareManager].productId = [HAInitConfig productId]; // 产品标识
-        [IVHttpManager shareManager].isSensitive = YES;
-        [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
-        params[@"productId"] = [IVHttpManager shareManager].productId;
-        params[@"productCodeExt"] = @"FM";
-        params[@"productCode"] = @"";
-        [IVNetwork requestPostWithUrl:BTTAppSetting paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            IVJResponseObject *result = response;
-            if ([result.head.errCode isEqualToString:@"0000"]) {
-                BTTCheckDomainModel *model = [BTTCheckDomainModel yy_modelWithDictionary:result.body];
-                [[AppdelegateManager shareManager] setGateways:model.getways];
-                [[AppdelegateManager shareManager] setWebsides:model.websides];
-            }else
-            {
-                [[AppdelegateManager shareManager] setGateways:nil];
-                [[AppdelegateManager shareManager] setWebsides:nil];
-            }
-            handler();
-        }];
+        [self recheckDomain:handler];
     }else
     {
         [IVHttpManager shareManager].gateways = [IVCacheWrapper objectForKey:IVCacheAllGatewayKey];  // 网关列表
         [IVHttpManager shareManager].domains = [IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey]; // 网页域名
         //获取最优的网关
-        [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways
-                                                isAuto:YES
-                                                  type:IVKCheckNetworkTypeGateway
-                                              progress:nil
-                                            completion:nil
-         ];
-        //获取最优的手机站
-        [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].domains
-                                                isAuto:YES
-                                                  type:IVKCheckNetworkTypeDomain
-                                              progress:nil
-                                            completion:nil
-         ];
+//        [self testSpeed:[IVHttpManager shareManager].gateways Handler:handler];
         handler();
     }
 }
+- (void)testSpeed:(NSArray*)domailArr Handler:(void (^)(void))handler
+{
+    //app有域名测速功能就使用，没有直接注释domainBakList赋值即可
+    NSMutableArray * arr = [[NSMutableArray alloc] init];
+    for (NSString * str in domailArr) {
+        if ([[str substringFromIndex:str.length-1] isEqualToString:@"/"]) {
+            [arr addObject:str];
+        } else {
+            [arr addObject:[NSString stringWithFormat:@"%@/", str]];
+        }
+    }
+    //...测速代码，速度从快到慢
+    [IVCheckNetworkWrapper getOptimizeUrlWithArray:arr isAuto:YES type:IVKCheckNetworkTypeGateway progress:nil completion:^(IVCheckDetailModel * _Nonnull model) {
+        if (model != nil) {
+            handler();
+        }else
+        {
+            [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
+            [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
+            [self recheckDomain:handler];
+        }
+    }];
+}
+- (void)recheckDomain:(void (^)(void))handler  {
+    
+    NSMutableDictionary *params = @{}.mutableCopy;
+    [IVHttpManager shareManager].appId = [HAInitConfig appId];     // 应用ID
+    [IVHttpManager shareManager].productId = [HAInitConfig productId]; // 产品标识
+    [IVHttpManager shareManager].isSensitive = YES;
+    [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
+    params[@"productId"] = [IVHttpManager shareManager].productId;
+    params[@"productCodeExt"] = @"FM";
+    params[@"productCode"] = @"";
+    [IVNetwork requestPostWithUrl:BTTAppSetting paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTCheckDomainModel *model = [BTTCheckDomainModel yy_modelWithDictionary:result.body];
+            NSMutableArray * tempGetArr = [NSMutableArray new];
+            NSMutableArray * tempWebArr = [NSMutableArray new];
+            for (NSString *getway in model.getways) {
+                if ([[getway substringFromIndex:getway.length-1] isEqualToString:@"/"]) {
+                    [tempGetArr addObject:getway];
+                } else {
+                    [tempGetArr addObject:[NSString stringWithFormat:@"%@/", getway]];
+                }
+            }
+            for (NSString *websit in model.websides) {
+                if ([[websit substringFromIndex:websit.length-1] isEqualToString:@"/"]) {
+                    [tempWebArr addObject:websit];
+                } else {
+                    [tempWebArr addObject:[NSString stringWithFormat:@"%@/", websit]];
+                }
+            }
+            [[AppdelegateManager shareManager] setGateways:tempGetArr];
+            [[AppdelegateManager shareManager] setWebsides:tempWebArr];
+        }else
+        {
+            [[AppdelegateManager shareManager] setGateways:nil];
+            [[AppdelegateManager shareManager] setWebsides:nil];
+        }
+        [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
+        [IVHttpManager shareManager].domains = [HAInitConfig websides];
+        handler();
+    }];
+}
+
 -(void)setDynamicQuery {
     [IVLAManager needUploadWithNewDomain:YES];
     NSDictionary * params = @{@"bizCode":@"SKYNET_SDK_CONFIG"};
