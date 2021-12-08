@@ -65,25 +65,25 @@
     }];
 }
 - (void)checkDomainHandler:(void (^)(void))handler  {
+        // 启动时先去访问接口
+    [self recheckDomain:handler];
     // 所有手机站,先从缓存取，缓存没有使用默认配置
-    if (![IVCacheWrapper objectForKey:IVCacheAllGatewayKey] ||
-        ![IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey] )
-    {
-        [self recheckDomain:handler];
-    }else
-    {
-        [[AppdelegateManager shareManager] setGateways:[IVCacheWrapper objectForKey:IVCacheAllGatewayKey]];
-        [[AppdelegateManager shareManager] setWebsides:[IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey]];
-//        [IVHttpManager shareManager].gateways = [IVCacheWrapper objectForKey:IVCacheAllGatewayKey];  // 网关列表
-//        [IVHttpManager shareManager].domains = [IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey]; // 网页域名
-        //获取最优的网关
-//        [self testSpeed:[IVHttpManager shareManager].gateways Handler:handler];
-        handler();
-    }
+//    if (![IVCacheWrapper objectForKey:IVCacheAllGatewayKey] ||
+//        ![IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey] )
+//    {
+//        [self recheckDomain:handler];
+//    }else
+//    {
+//        [[AppdelegateManager shareManager] setGateways:[IVCacheWrapper objectForKey:IVCacheAllGatewayKey]];
+//        [[AppdelegateManager shareManager] setWebsides:[IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey]];
+//        //获取最优的网关
+////        [self testSpeed:[IVHttpManager shareManager].gateways Handler:handler];
+//        handler();
+//    }
 }
 - (void)testSpeed:(NSArray*)domailArr Handler:(void (^)(void))handler
 {
-    [IVCheckNetworkWrapper initSDK];
+//    [IVCheckNetworkWrapper initSDK];
     //app有域名测速功能就使用，没有直接注释domainBakList赋值即可
     NSMutableArray * arr = [[NSMutableArray alloc] init];
     for (NSString * str in domailArr) {
@@ -110,22 +110,22 @@
 //        }
 //    }];
     //...测速代码，速度从快到慢
-//    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways
-//                                            isAuto:YES
-//                                              type:IVKCheckNetworkTypeGateway
-//                                          progress:nil
-//                                        completion:^(IVCheckDetailModel * _Nonnull model) {
-//        if (model != nil) {
-//            handler();
-//        }else
-//        {
-//            [[AppdelegateManager shareManager] setGateways:nil];
-//            [[AppdelegateManager shareManager] setWebsides:nil];
-//            [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
-//            [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
-//            [self recheckDomain:handler];
-//        }
-//    }];
+    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways
+                                            isAuto:YES
+                                              type:IVKCheckNetworkTypeGateway
+                                          progress:nil
+                                        completion:^(IVCheckDetailModel * _Nonnull model) {
+        if (model != nil) {
+            handler();
+        }else
+        {
+            [[AppdelegateManager shareManager] setGateways:nil];
+            [[AppdelegateManager shareManager] setWebsides:nil];
+            [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
+            [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
+            [self recheckDomain:handler];
+        }
+    }];
 
 
 }
