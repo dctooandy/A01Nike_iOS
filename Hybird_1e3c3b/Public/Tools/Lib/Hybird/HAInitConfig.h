@@ -12,6 +12,7 @@
 @interface HAInitConfig : NSObject
 + (NSString *)bundleId;
 + (NSArray *)gateways;
++ (NSArray *)websides;
 + (NSString *)defaultH5Domain;
 + (NSString *)appKey;
 + (NSString *)appId;

@@ -647,6 +647,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTCreditVipChannel                        @"_extra_/api/vi/activity/creditVipChannel/popup"
 //虚拟按钮
 #define BTTAssistiveData                           @"_extra_/api/v1/activity/common-window/window-floating"
+//網關域名
+#define BTTAppSetting                              @"_extra_/api/v1/getAppSetting"
 
 /********************************************常用宏*********************************************************/
 

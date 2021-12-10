@@ -310,7 +310,10 @@
 {
     [[NSUserDefaults standardUserDefaults] setInteger:env forKey:@"Envirment"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
+    [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
+    [IVCacheWrapper clearCache];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         exit(0);
     });
 }
