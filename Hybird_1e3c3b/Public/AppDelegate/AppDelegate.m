@@ -33,9 +33,9 @@
 
 @property (nonatomic, strong) UIWindow *areaLimitWindow;
 @property (nonatomic, strong) BTTTabbarController *tabVC;
-@property (nonatomic, strong)dispatch_queue_t unzipQueue;
+@property (nonatomic, strong) dispatch_queue_t unzipQueue;
 @property (nonatomic, strong) NSDictionary *signPushDic;
-
+@property (nonatomic, assign) BOOL getSpeedestDomain;
 @end
 
 @implementation AppDelegate
@@ -77,8 +77,9 @@
 //        [[AppdelegateManager shareManager] setGateways:[IVCacheWrapper objectForKey:IVCacheAllGatewayKey]];
 //        [[AppdelegateManager shareManager] setWebsides:[IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey]];
 //        //获取最优的网关
-////        [self testSpeed:[IVHttpManager shareManager].gateways Handler:handler];
-//        handler();
+//        self.getSpeedestDomain = NO;
+//        [self testSpeed:[IVHttpManager shareManager].gateways Handler:handler];
+////        handler();
 //    }
 }
 - (void)testSpeed:(NSArray*)domailArr Handler:(void (^)(void))handler
@@ -110,14 +111,50 @@
 //        }
 //    }];
     //...测速代码，速度从快到慢
+    weakSelf(weakSelf)
     [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways
                                             isAuto:YES
                                               type:IVKCheckNetworkTypeGateway
-                                          progress:nil
+                                          progress:^(IVCheckDetailModel * _Nonnull respone) {
+        [weakSelf checkProgressWithTableViewWithRespone:respone Handler:handler];
+    }
                                         completion:^(IVCheckDetailModel * _Nonnull model) {
-        if (model != nil) {
-            handler();
-        }else
+//        if (model != nil) {
+//            handler();
+//        }else
+//        {
+//            [[AppdelegateManager shareManager] setGateways:nil];
+//            [[AppdelegateManager shareManager] setWebsides:nil];
+//            [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
+//            [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
+//            [self recheckDomain:handler];
+//        }
+    }];
+}
+- (void)checkProgressWithTableViewWithRespone:(IVCheckDetailModel *)respone Handler:(void (^)(void))handler
+{
+    NSInteger index = 0;
+    BOOL exit = NO;
+    weakSelf(weakSelf)
+    for (NSString *domainString in [IVHttpManager shareManager].gateways) {
+        NSInteger i = [[IVHttpManager shareManager].gateways indexOfObject:domainString];
+        NSURL *url = [NSURL URLWithString:domainString];
+        NSURL *url1 = [NSURL URLWithString:respone.url];
+        if ([url.host isEqualToString:url1.host] ) {
+            if (weakSelf.getSpeedestDomain == NO)
+            {
+                weakSelf.getSpeedestDomain = YES;
+                index = i;
+                exit = YES;
+            }
+        }
+    }
+    if (exit) {
+        [[IVHttpManager shareManager] setGateway:[IVHttpManager shareManager].gateways[index]];
+        handler();
+    }else
+    {
+        if (self.getSpeedestDomain == NO)
         {
             [[AppdelegateManager shareManager] setGateways:nil];
             [[AppdelegateManager shareManager] setWebsides:nil];
@@ -125,9 +162,8 @@
             [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
             [self recheckDomain:handler];
         }
-    }];
-
-
+    }
+    
 }
 - (void)recheckDomain:(void (^)(void))handler  {
     
