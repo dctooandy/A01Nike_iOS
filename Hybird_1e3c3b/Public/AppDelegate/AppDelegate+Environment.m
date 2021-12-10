@@ -71,7 +71,7 @@
 //     //cdn,先从缓存取，缓存没有使用默认配置
 //    [IVHttpManager shareManager].cdn = [IVCacheWrapper objectForKey:IVCacheCDNKey] ? : [HAInitConfig defaultCDN];
     
-    [IVHttpManager shareManager].domains = @[[HAInitConfig defaultH5Domain]];
+    [IVHttpManager shareManager].domains = [HAInitConfig websides];
     [IVHttpManager shareManager].domain = [HAInitConfig defaultH5Domain];
     [IVHttpManager shareManager].cdn = [HAInitConfig defaultCDN];
     [IVHttpManager shareManager].isSensitive = YES;

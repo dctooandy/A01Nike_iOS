@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void(^tapRegister)(NSString *account,NSString *code , NSString *askInputCode);
 @property (nonatomic, copy) void(^tapOneKeyRegister)(void);
 @property (nonatomic, strong) UITextField *imgCodeField;
-@property (nonatomic, strong) UITextField *askInputCodeField;
+//@property (nonatomic, strong) UITextField *askInputCodeField;
 
 @end
 

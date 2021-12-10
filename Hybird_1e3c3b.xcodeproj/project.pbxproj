@@ -608,6 +608,8 @@
 		7629DCF5268B245C00CF758C /* BTTUserForzenPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629DCF2268B245C00CF758C /* BTTUserForzenPopView.xib */; };
 		7629DCFE268C30D000CF758C /* BTTUserForzenVerityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629DCFD268C30D000CF758C /* BTTUserForzenVerityViewController.m */; };
 		7629DDB5268D4DD700CF758C /* BTTUserForzenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629DDB4268D4DD700CF758C /* BTTUserForzenManager.m */; };
+		7662C1EA2758E35D007A9E84 /* BTTCheckDomainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7662C1E92758E35D007A9E84 /* BTTCheckDomainModel.m */; };
+		7662C1ED2758E778007A9E84 /* AppdelegateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7662C1EC2758E778007A9E84 /* AppdelegateManager.m */; };
 		76756BB1269454220065F99B /* BTTUserForzenBGView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756BB0269454220065F99B /* BTTUserForzenBGView.m */; };
 		76756BB5269454690065F99B /* BTTUserForzenBGView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756BB4269454690065F99B /* BTTUserForzenBGView.xib */; };
 		76756C1B26956A6D0065F99B /* BTTLockButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756C1A26956A6D0065F99B /* BTTLockButtonView.m */; };
@@ -619,6 +621,8 @@
 		76756F8626A6C5790065F99B /* BTTDefaultPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756F8326A6C5780065F99B /* BTTDefaultPopView.xib */; };
 		76756F8726A6C5790065F99B /* BTTDefaultPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756F8526A6C5790065F99B /* BTTDefaultPopView.m */; };
 		7675705A26A9657A0065F99B /* BTTPopViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675705926A9657A0065F99B /* BTTPopViewModel.m */; };
+		76B499F22761D4D1003CD35B /* dEgg1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B499F12761D4D0003CD35B /* dEgg1.gif */; };
+		76B499F42761D5C4003CD35B /* dEgg2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B499F32761D5C4003CD35B /* dEgg2.gif */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
@@ -669,6 +673,8 @@
 		76F8642F26E87E8E00320B60 /* VIPHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8642E26E87E8E00320B60 /* VIPHistoryModel.m */; };
 		76F8643126E87ECE00320B60 /* BTTVIPClubHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */; };
 		76F8644426F0BC0B00320B60 /* APPMidAutumnFestival.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */; };
+		76FC864127630587005710FD /* dEgg3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76FC864027630587005710FD /* dEgg3.gif */; };
+		76FC8643276307FE005710FD /* dEgg4.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76FC8642276307FE005710FD /* dEgg4.gif */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
@@ -1874,6 +1880,10 @@
 		7629DCFD268C30D000CF758C /* BTTUserForzenVerityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUserForzenVerityViewController.m; sourceTree = "<group>"; };
 		7629DDB3268D4DD700CF758C /* BTTUserForzenManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUserForzenManager.h; sourceTree = "<group>"; };
 		7629DDB4268D4DD700CF758C /* BTTUserForzenManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUserForzenManager.m; sourceTree = "<group>"; };
+		7662C1E82758E35D007A9E84 /* BTTCheckDomainModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTCheckDomainModel.h; sourceTree = "<group>"; };
+		7662C1E92758E35D007A9E84 /* BTTCheckDomainModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTCheckDomainModel.m; sourceTree = "<group>"; };
+		7662C1EB2758E778007A9E84 /* AppdelegateManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppdelegateManager.h; sourceTree = "<group>"; };
+		7662C1EC2758E778007A9E84 /* AppdelegateManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppdelegateManager.m; sourceTree = "<group>"; };
 		76756BAF269454220065F99B /* BTTUserForzenBGView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUserForzenBGView.h; sourceTree = "<group>"; };
 		76756BB0269454220065F99B /* BTTUserForzenBGView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUserForzenBGView.m; sourceTree = "<group>"; };
 		76756BB4269454690065F99B /* BTTUserForzenBGView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTUserForzenBGView.xib; sourceTree = "<group>"; };
@@ -1892,6 +1902,8 @@
 		76756F8526A6C5790065F99B /* BTTDefaultPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDefaultPopView.m; sourceTree = "<group>"; };
 		7675705826A9657A0065F99B /* BTTPopViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPopViewModel.h; sourceTree = "<group>"; };
 		7675705926A9657A0065F99B /* BTTPopViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPopViewModel.m; sourceTree = "<group>"; };
+		76B499F12761D4D0003CD35B /* dEgg1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg1.gif; sourceTree = "<group>"; };
+		76B499F32761D5C4003CD35B /* dEgg2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg2.gif; sourceTree = "<group>"; };
 		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
 		76C9F150265E404B0002591D /* CNPayOrderModelV2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayOrderModelV2.m; sourceTree = "<group>"; };
 		76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatPopView.xib; sourceTree = "<group>"; };
@@ -1972,6 +1984,8 @@
 		76F8642E26E87E8E00320B60 /* VIPHistoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPHistoryModel.m; sourceTree = "<group>"; };
 		76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTVIPClubHistoryCell.xib; sourceTree = "<group>"; };
 		76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = APPMidAutumnFestival.gif; sourceTree = "<group>"; };
+		76FC864027630587005710FD /* dEgg3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg3.gif; sourceTree = "<group>"; };
+		76FC8642276307FE005710FD /* dEgg4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg4.gif; sourceTree = "<group>"; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
 		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
 		D317745024D2648C009B1814 /* DSBRedBagPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DSBRedBagPopView.xib; sourceTree = "<group>"; };
@@ -2585,6 +2599,8 @@
 				3A37E0F92164685600FB13A1 /* AppDelegate+Environment.m */,
 				3A37E0FB2164691300FB13A1 /* AppDelegate+AD.h */,
 				3A37E0FC2164691300FB13A1 /* AppDelegate+AD.m */,
+				7662C1EB2758E778007A9E84 /* AppdelegateManager.h */,
+				7662C1EC2758E778007A9E84 /* AppdelegateManager.m */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -2852,6 +2868,10 @@
 				41588C9626D889BB001060E7 /* 918_Anniversary.gif */,
 				76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */,
 				76168DF526F47AC500D6D8AC /* APPChinaNationalDay.gif */,
+				76B499F12761D4D0003CD35B /* dEgg1.gif */,
+				76B499F32761D5C4003CD35B /* dEgg2.gif */,
+				76FC864027630587005710FD /* dEgg3.gif */,
+				76FC8642276307FE005710FD /* dEgg4.gif */,
 				4142CFB226E9F4F100650449 /* login_bg_video.mp4 */,
 				41EAF0F5260D94290091FE09 /* hot.gif */,
 				D3B47D5823B70A5400D37C7F /* app.zip */,
@@ -3603,6 +3623,8 @@
 				D345F29323D0088B00E658A6 /* IVRequestResultModel.m */,
 				D345F29223D0088B00E658A6 /* IVUserInfoModel.h */,
 				D345F29423D0088B00E658A6 /* IVUserInfoModel.m */,
+				7662C1E82758E35D007A9E84 /* BTTCheckDomainModel.h */,
+				7662C1E92758E35D007A9E84 /* BTTCheckDomainModel.m */,
 				3AF1B80221AE377C00BF8C3A /* VideoGames */,
 				3AE05826217066FD00C7E70D /* BTTAmountModel.h */,
 				3AE05827217066FE00C7E70D /* BTTAmountModel.m */,
@@ -5126,6 +5148,7 @@
 				418E72DA2577786700D9BF95 /* BTTChooseCurrencyCell.xib in Resources */,
 				4135A703263941D000D3BF17 /* BTTLiCaiOutDetailPopView.xib in Resources */,
 				3A49DF9C2179D90D00FEFBDA /* BTTBindingMobileOneCell.xib in Resources */,
+				76B499F22761D4D1003CD35B /* dEgg1.gif in Resources */,
 				4142CFB326E9F4F100650449 /* login_bg_video.mp4 in Resources */,
 				4184DE16251B331000D433D4 /* BTTModifyBankRecordHeaderCell.xib in Resources */,
 				4135A6F9263941D000D3BF17 /* BTTLiCaiTransRecordTopBtnView.xib in Resources */,
@@ -5137,6 +5160,7 @@
 				D5DBEB3421ABB774008AF629 /* CNPayChannelCell.xib in Resources */,
 				410636CC26C60ED4002785D2 /* BTTForgetPwdOneCell.xib in Resources */,
 				419AEC5B250F64F100D089DD /* BTTBJLPopView.xib in Resources */,
+				76B499F42761D5C4003CD35B /* dEgg2.gif in Resources */,
 				3A9E4C3F219E55E200E7D8C0 /* BTTMakeCallSuccessView.xib in Resources */,
 				3AF1B81521AE8C5500BF8C3A /* BTTVideoGamesNoDataCell.xib in Resources */,
 				3AC3FFB0219BB1D0008AECCB /* BTTLoginCodeCell.xib in Resources */,
@@ -5202,6 +5226,7 @@
 				3A49DF932179D62900FEFBDA /* BTTAccountBlanceCell.xib in Resources */,
 				3ADD23682177230300FA959A /* BTTMeHeaderNotLoginCell.xib in Resources */,
 				3A11AE6D2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib in Resources */,
+				76FC8643276307FE005710FD /* dEgg4.gif in Resources */,
 				4184DE12251B32F900D433D4 /* BTTXmRecordHeaderCell.xib in Resources */,
 				76C9F42C2668A3070002591D /* BTTDragonBoatChancePopView.xib in Resources */,
 				3AB0682421A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.xib in Resources */,
@@ -5278,6 +5303,7 @@
 				4135C717266F736900C3A9E9 /* BTTLiCaiOutRecordCell.xib in Resources */,
 				76F863DB26E0B65500320B60 /* VIPRightWashRateCell.xib in Resources */,
 				41EAF0F6260D94290091FE09 /* hot.gif in Resources */,
+				76FC864127630587005710FD /* dEgg3.gif in Resources */,
 				D5C5019921B67C0800C6DA02 /* CNPayDepositSuccessVC.xib in Resources */,
 				3AAFF87D21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.xib in Resources */,
 				D318AC1824333BC500183407 /* BTTKSAddBfbWalletController.xib in Resources */,
@@ -5857,6 +5883,7 @@
 				3A3DF1E6237BA445006129F6 /* BTTHotPromotionCell.m in Sources */,
 				D5DBEB2921ABB774008AF629 /* CNPayCardModel.m in Sources */,
 				D5DBEB2821ABB774008AF629 /* CNPayBankCardModel.m in Sources */,
+				7662C1EA2758E35D007A9E84 /* BTTCheckDomainModel.m in Sources */,
 				3A5B027B234F080100D8828B /* BTTXimaRecordController.m in Sources */,
 				D357F0E12431C8DE00FD530A /* BTTBiFuBaoController.m in Sources */,
 				41B3127B269D1FB4002AF76D /* BTTPaymentWarningPopView.m in Sources */,
@@ -5876,6 +5903,7 @@
 				3ADD2389217819D500FA959A /* BTTMeMainModel.m in Sources */,
 				3AE1EADC217F1EBD0073A32D /* BTTNotCompleteInfoController+LoadData.m in Sources */,
 				3A37E11A2164A20100FB13A1 /* BTTVoiceCallViewController.m in Sources */,
+				7662C1ED2758E778007A9E84 /* AppdelegateManager.m in Sources */,
 				4184DE13251B32FC00D433D4 /* BTTXmRecordHeaderCell.m in Sources */,
 				412078AA26268FB000595F8C /* TXScrollLabelView.m in Sources */,
 				3AD9CF5B216F1A4400685B43 /* BTTHomePageADCell.m in Sources */,
@@ -6174,7 +6202,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.80;
+				MARKETING_VERSION = 3.1.81;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6216,7 +6244,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.80;
+				MARKETING_VERSION = 3.1.81;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

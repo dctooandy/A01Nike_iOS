@@ -253,6 +253,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(BOOL)checkProductDate:(NSString *)tempDate serverTime:(NSString *)serverTime;
 
++(BOOL)checksStartDate:(NSString *)startTime EndDate:(NSString *)endTime serverTime:(NSString *)serverTime;
 @end
 
 NS_ASSUME_NONNULL_END

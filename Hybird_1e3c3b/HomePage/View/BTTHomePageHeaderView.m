@@ -101,19 +101,33 @@
                 if (timeStr.length > 0) {
                     NSString * pathStr = @"";
                     //手動輸入要更換的日期
-                    if (![PublicMethod checkProductDate:@"2021-10-08" serverTime:timeStr]) {
-                        pathStr = @"";//王者之巔
-                    } else if (![PublicMethod checkProductDate:@"2021-09-25" serverTime:timeStr]) {
-                        pathStr = @"APPChinaNationalDay";//國慶
+                    
+                    if ([PublicMethod checksStartDate:@"2021-12-12" EndDate:@"2022-01-10" serverTime:timeStr])
+                    {
+                        pathStr = KIsiPhoneX ? @"dEgg3":@"dEgg4";//双旦
                         isSpecialHidden = YES;
-                    } else if (![PublicMethod checkProductDate:@"2021-09-22" serverTime:timeStr]) {
-                        pathStr = @"";//
-                    }else if (![PublicMethod checkProductDate:@"2021-09-15" serverTime:timeStr]) {
-                        pathStr = @"APPMidAutumnFestival";//中秋
-                        isSpecialHidden = YES;
-                    } else if (![PublicMethod checkProductDate:@"2021-08-27" serverTime:timeStr]) {
-                        pathStr = @"918_Anniversary";//週年慶
+                    }else
+                    {
+                        /// 不到时间
                     }
+//                    if (![PublicMethod checkProductDate:@"2021-12-10" serverTime:timeStr]) {
+//                        pathStr = @"";
+//                        isSpecialHidden = YES;
+//                    } else if (![PublicMethod checkProductDate:@"2021-12-08" serverTime:timeStr]) {
+//                        pathStr = @"dEgg1";//双旦
+//                        isSpecialHidden = YES;
+//                    }
+//                    else if (![PublicMethod checkProductDate:@"2021-09-25" serverTime:timeStr]) {
+//                        pathStr = @"APPChinaNationalDay";//國慶
+//                        isSpecialHidden = YES;
+//                    } else if (![PublicMethod checkProductDate:@"2021-09-22" serverTime:timeStr]) {
+//                        pathStr = @"";//
+//                    }else if (![PublicMethod checkProductDate:@"2021-09-15" serverTime:timeStr]) {
+//                        pathStr = @"APPMidAutumnFestival";//中秋
+//                        isSpecialHidden = YES;
+//                    } else if (![PublicMethod checkProductDate:@"2021-08-27" serverTime:timeStr]) {
+//                        pathStr = @"918_Anniversary";//週年慶
+//                    }
                     if (pathStr.length > 0) {
                         NSString *path = [[NSBundle mainBundle] pathForResource:pathStr ofType:@"gif"];
                         NSData *data = [NSData dataWithContentsOfFile:path];
@@ -122,8 +136,9 @@
                         [self addSubview:img];
                         [img mas_makeConstraints:^(MASConstraintMaker *make) {
                             make.bottom.right.equalTo(self);
-                            make.top.equalTo(self).offset(BTTIconTop+10);
-                            make.left.equalTo(self).offset(5);
+                            make.top.equalTo(self);
+//                            make.top.equalTo(self);
+                            make.left.equalTo(self);
                         }];
                     }
                 }
@@ -295,7 +310,10 @@
 {
     [[NSUserDefaults standardUserDefaults] setInteger:env forKey:@"Envirment"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
+    [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
+    [IVCacheWrapper clearCache];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         exit(0);
     });
 }
@@ -372,16 +390,20 @@
 }
 
 -(void)serverTime:(ServerTimeCompleteBlock)completeBlock {
-    [IVNetwork requestPostWithUrl:BTTServerTime paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSDate *timeDate = [[NSDate alloc]initWithTimeIntervalSince1970:[result.body longLongValue]];
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-            completeBlock([dateFormatter stringFromDate:timeDate]);
-        } else {
-            completeBlock(@"");
-        }
-    }];
+    NSDate *timeDate = [NSDate new];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    completeBlock([dateFormatter stringFromDate:timeDate]);
+//    [IVNetwork requestPostWithUrl:BTTServerTime paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//        IVJResponseObject *result = response;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            NSDate *timeDate = [[NSDate alloc]initWithTimeIntervalSince1970:[result.body longLongValue]];
+//            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+//            completeBlock([dateFormatter stringFromDate:timeDate]);
+//        } else {
+//            completeBlock(@"");
+//        }
+//    }];
 }
 @end

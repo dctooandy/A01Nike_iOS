@@ -26,14 +26,16 @@
 #import "HAInitConfig.h"
 #import "BTTUserStatusManager.h"
 #import "BTTFirstWinningListModel.h"
+#import "BTTCheckDomainModel.h"
+#import "AppdelegateManager.h"
 
 @interface AppDelegate ()<IVPushDelegate>
 
 @property (nonatomic, strong) UIWindow *areaLimitWindow;
 @property (nonatomic, strong) BTTTabbarController *tabVC;
-@property (nonatomic, strong)dispatch_queue_t unzipQueue;
+@property (nonatomic, strong) dispatch_queue_t unzipQueue;
 @property (nonatomic, strong) NSDictionary *signPushDic;
-
+@property (nonatomic, assign) BOOL getSpeedestDomain;
 @end
 
 @implementation AppDelegate
@@ -60,6 +62,150 @@
     [IVLAManager setLogEnabled:YES];
     [IVLAManager startWithProductId:@"A01" productName:@"btt" channelId:@"" appId:@"5308e20b" appKey:@"5308e20b" sessionTimeout:5000 environment:(EnvirmentType == 2 ? IVLA_Dis : IVLA_Dev) loginName:^NSString * _Nonnull{
         return [IVNetwork savedUserInfo].loginName==nil?@"":[IVNetwork savedUserInfo].loginName;
+    }];
+}
+- (void)checkDomainHandler:(void (^)(void))handler  {
+        // 启动时先去访问接口
+    [self recheckDomain:handler];
+    // 所有手机站,先从缓存取，缓存没有使用默认配置
+//    if (![IVCacheWrapper objectForKey:IVCacheAllGatewayKey] ||
+//        ![IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey] )
+//    {
+//        [self recheckDomain:handler];
+//    }else
+//    {
+//        [[AppdelegateManager shareManager] setGateways:[IVCacheWrapper objectForKey:IVCacheAllGatewayKey]];
+//        [[AppdelegateManager shareManager] setWebsides:[IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey]];
+//        //获取最优的网关
+//        self.getSpeedestDomain = NO;
+//        [self testSpeed:[IVHttpManager shareManager].gateways Handler:handler];
+////        handler();
+//    }
+}
+- (void)testSpeed:(NSArray*)domailArr Handler:(void (^)(void))handler
+{
+//    [IVCheckNetworkWrapper initSDK];
+    //app有域名测速功能就使用，没有直接注释domainBakList赋值即可
+    NSMutableArray * arr = [[NSMutableArray alloc] init];
+    for (NSString * str in domailArr) {
+        if ([[str substringFromIndex:str.length-1] isEqualToString:@"/"]) {
+            [arr addObject:str];
+        } else {
+            [arr addObject:[NSString stringWithFormat:@"%@/", str]];
+        }
+    }
+//    [IVCheckNetworkWrapper getOptimizeUrlSynWithArray:[IVHttpManager shareManager].gateways
+//                                               isAuto:YES
+//                                                 type:IVKCheckNetworkTypeGateway
+//                                             progress:nil
+//                                           completion:^(IVCheckDetailModel * _Nonnull model) {
+//        if (model != nil) {
+//            handler();
+//        }else
+//        {
+//            [[AppdelegateManager shareManager] setGateways:nil];
+//            [[AppdelegateManager shareManager] setWebsides:nil];
+//            [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
+//            [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
+//            [self recheckDomain:handler];
+//        }
+//    }];
+    //...测速代码，速度从快到慢
+    weakSelf(weakSelf)
+    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways
+                                            isAuto:YES
+                                              type:IVKCheckNetworkTypeGateway
+                                          progress:^(IVCheckDetailModel * _Nonnull respone) {
+        [weakSelf checkProgressWithTableViewWithRespone:respone Handler:handler];
+    }
+                                        completion:^(IVCheckDetailModel * _Nonnull model) {
+//        if (model != nil) {
+//            handler();
+//        }else
+//        {
+//            [[AppdelegateManager shareManager] setGateways:nil];
+//            [[AppdelegateManager shareManager] setWebsides:nil];
+//            [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
+//            [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
+//            [self recheckDomain:handler];
+//        }
+    }];
+}
+- (void)checkProgressWithTableViewWithRespone:(IVCheckDetailModel *)respone Handler:(void (^)(void))handler
+{
+    NSInteger index = 0;
+    BOOL exit = NO;
+    weakSelf(weakSelf)
+    for (NSString *domainString in [IVHttpManager shareManager].gateways) {
+        NSInteger i = [[IVHttpManager shareManager].gateways indexOfObject:domainString];
+        NSURL *url = [NSURL URLWithString:domainString];
+        NSURL *url1 = [NSURL URLWithString:respone.url];
+        if ([url.host isEqualToString:url1.host] ) {
+            if (weakSelf.getSpeedestDomain == NO)
+            {
+                weakSelf.getSpeedestDomain = YES;
+                index = i;
+                exit = YES;
+            }
+        }
+    }
+    if (exit) {
+        [[IVHttpManager shareManager] setGateway:[IVHttpManager shareManager].gateways[index]];
+        handler();
+    }else
+    {
+        if (self.getSpeedestDomain == NO)
+        {
+            [[AppdelegateManager shareManager] setGateways:nil];
+            [[AppdelegateManager shareManager] setWebsides:nil];
+            [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
+            [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
+            [self recheckDomain:handler];
+        }
+    }
+    
+}
+- (void)recheckDomain:(void (^)(void))handler  {
+    
+    NSMutableDictionary *params = @{}.mutableCopy;
+    [IVHttpManager shareManager].appId = [HAInitConfig appId];     // 应用ID
+    [IVHttpManager shareManager].productId = [HAInitConfig productId]; // 产品标识
+    [IVHttpManager shareManager].isSensitive = YES;
+    [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
+    params[@"productId"] = [IVHttpManager shareManager].productId;
+    params[@"productCodeExt"] = @"FM";
+    params[@"productCode"] = @"";
+    [IVNetwork requestPostWithUrl:BTTAppSetting paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTCheckDomainModel *model = [BTTCheckDomainModel yy_modelWithDictionary:result.body];
+            NSMutableArray * tempGetArr = [NSMutableArray new];
+            NSMutableArray * tempWebArr = [NSMutableArray new];
+            for (NSString *getway in model.getways) {
+                if ([[getway substringFromIndex:getway.length-1] isEqualToString:@"/"]) {
+                    [tempGetArr addObject:[NSString stringWithFormat:@"%@_glaxy_1e3c3b_/", getway]];
+                } else {
+                    [tempGetArr addObject:[NSString stringWithFormat:@"%@/_glaxy_1e3c3b_/", getway]];
+                }
+            }
+           
+            for (NSString *websit in model.websides) {
+                if ([[websit substringFromIndex:websit.length-1] isEqualToString:@"/"]) {
+                    [tempWebArr addObject:websit];
+                } else {
+                    [tempWebArr addObject:[NSString stringWithFormat:@"%@/", websit]];
+                }
+            }
+            [[AppdelegateManager shareManager] setGateways:tempGetArr];
+            [[AppdelegateManager shareManager] setWebsides:tempWebArr];
+        }else
+        {
+            [[AppdelegateManager shareManager] setGateways:nil];
+            [[AppdelegateManager shareManager] setWebsides:nil];
+        }
+        [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
+        [IVHttpManager shareManager].domains = [HAInitConfig websides];
+        handler();
     }];
 }
 
@@ -138,21 +284,27 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    weakSelf(weakSelf)
+    [self checkDomainHandler:^{
+        [weakSelf continueWithLuanchWithApplication:application options:launchOptions];
+    }];
+    return YES;
+}
+- (void)continueWithLuanchWithApplication:(UIApplication *)application options:(NSDictionary *)options
+{
     [self setupAPPEnvironment];
     [self checkArearLimit];
     [self unzipLocationH5Package];
-//    [self getWMSForm];
+    //    [self getWMSForm];
     [self setupTabbarController];
     [self.window makeKeyAndVisible];
     [self setDynamicQuery];
-    [self initPushSDKWithApplication:application options:launchOptions];
+    [self initPushSDKWithApplication:application options:options];
     [CNPreCacheMananger prepareCacheDataNormal];
     [CNPreCacheMananger prepareCacheDataNeedLogin];
-//    [OpenInstallSDK initWithDelegate:self];
+    //    [OpenInstallSDK initWithDelegate:self];
     [[UIButton appearance] setExclusiveTouch:YES];
-    return YES;
 }
-
 // open install delegate
 
 - (void)getInstallParamsFromOpenInstall:(nullable NSDictionary *)params withError:(nullable NSError *)error {
