@@ -672,6 +672,8 @@
 		76F8642F26E87E8E00320B60 /* VIPHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8642E26E87E8E00320B60 /* VIPHistoryModel.m */; };
 		76F8643126E87ECE00320B60 /* BTTVIPClubHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */; };
 		76F8644426F0BC0B00320B60 /* APPMidAutumnFestival.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */; };
+		76FC864127630587005710FD /* dEgg3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76FC864027630587005710FD /* dEgg3.gif */; };
+		76FC8643276307FE005710FD /* dEgg4.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76FC8642276307FE005710FD /* dEgg4.gif */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
@@ -1977,6 +1979,8 @@
 		76F8642E26E87E8E00320B60 /* VIPHistoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPHistoryModel.m; sourceTree = "<group>"; };
 		76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTVIPClubHistoryCell.xib; sourceTree = "<group>"; };
 		76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = APPMidAutumnFestival.gif; sourceTree = "<group>"; };
+		76FC864027630587005710FD /* dEgg3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg3.gif; sourceTree = "<group>"; };
+		76FC8642276307FE005710FD /* dEgg4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg4.gif; sourceTree = "<group>"; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
 		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
 		D317745024D2648C009B1814 /* DSBRedBagPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DSBRedBagPopView.xib; sourceTree = "<group>"; };
@@ -2860,6 +2864,8 @@
 				76168DF526F47AC500D6D8AC /* APPChinaNationalDay.gif */,
 				76B499F12761D4D0003CD35B /* dEgg1.gif */,
 				76B499F32761D5C4003CD35B /* dEgg2.gif */,
+				76FC864027630587005710FD /* dEgg3.gif */,
+				76FC8642276307FE005710FD /* dEgg4.gif */,
 				4142CFB226E9F4F100650449 /* login_bg_video.mp4 */,
 				41EAF0F5260D94290091FE09 /* hot.gif */,
 				D3B47D5823B70A5400D37C7F /* app.zip */,
@@ -5212,6 +5218,7 @@
 				3A49DF932179D62900FEFBDA /* BTTAccountBlanceCell.xib in Resources */,
 				3ADD23682177230300FA959A /* BTTMeHeaderNotLoginCell.xib in Resources */,
 				3A11AE6D2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib in Resources */,
+				76FC8643276307FE005710FD /* dEgg4.gif in Resources */,
 				4184DE12251B32F900D433D4 /* BTTXmRecordHeaderCell.xib in Resources */,
 				76C9F42C2668A3070002591D /* BTTDragonBoatChancePopView.xib in Resources */,
 				3AB0682421A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.xib in Resources */,
@@ -5288,6 +5295,7 @@
 				4135C717266F736900C3A9E9 /* BTTLiCaiOutRecordCell.xib in Resources */,
 				76F863DB26E0B65500320B60 /* VIPRightWashRateCell.xib in Resources */,
 				41EAF0F6260D94290091FE09 /* hot.gif in Resources */,
+				76FC864127630587005710FD /* dEgg3.gif in Resources */,
 				D5C5019921B67C0800C6DA02 /* CNPayDepositSuccessVC.xib in Resources */,
 				3AAFF87D21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.xib in Resources */,
 				D318AC1824333BC500183407 /* BTTKSAddBfbWalletController.xib in Resources */,

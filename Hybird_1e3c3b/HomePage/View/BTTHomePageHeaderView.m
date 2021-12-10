@@ -104,7 +104,7 @@
                     
                     if ([PublicMethod checksStartDate:@"2021-12-12" EndDate:@"2022-01-11" serverTime:timeStr])
                     {
-                        pathStr = @"dEgg1";//双旦
+                        pathStr = KIsiPhoneX ? @"dEgg3":@"dEgg4";//双旦
                         isSpecialHidden = YES;
                     }else
                     {
@@ -136,8 +136,9 @@
                         [self addSubview:img];
                         [img mas_makeConstraints:^(MASConstraintMaker *make) {
                             make.bottom.right.equalTo(self);
-                            make.top.equalTo(self).offset(BTTIconTop+10);
-                            make.left.equalTo(self).offset(5);
+                            make.top.equalTo(self);
+//                            make.top.equalTo(self);
+                            make.left.equalTo(self);
                         }];
                     }
                 }
