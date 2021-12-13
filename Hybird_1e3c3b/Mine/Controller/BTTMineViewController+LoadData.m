@@ -25,6 +25,7 @@
     [self loadMainDataOne];
     [self loadMainDataTwo];
     [self loadIsHavePromo];
+    [self getDepositCheck];
 }
 
 - (void)loadPaymentDefaultData {
@@ -41,6 +42,18 @@
         [self.vipBigDataSoure removeAllObjects];
     }
     [self setupElements];
+}
+
+-(void)getDepositCheck {
+    NSDictionary * params = @{@"bizCode":@"DEPOSIT_CHECK_NUMBER"};
+    [IVNetwork requestPostWithUrl:BTTDynamicQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSArray * arr = result.body[@"data"];
+            NSString * str = arr[0][@"IS_DEPOSIT_CHECK"];
+            self.isShowDepositCheck = [str.lowercaseString isEqualToString:@"true"] || [str isEqualToString:@"1"];
+        }
+    }];
 }
 
 -(void)loadIsHavePromo {
@@ -107,7 +120,7 @@
     [IVNetwork requestPostWithUrl:BTTCreditVipChannel paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-//            isDisplayVip
+            //            isDisplayVip
             if (self.vipBigDataSoure.count) {
                 [self.vipBigDataSoure removeAllObjects];
             }
@@ -744,7 +757,7 @@
                         if (errCode != CSServiceCode_Request_Suc) {
                             [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
                         } else {
-
+                            
                         }
                     }];
                     

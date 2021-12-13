@@ -411,13 +411,15 @@
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }
-    if (![self judgmentBindPhoneAndName]) {//都完善
+    if (self.isShowDepositCheck) {
+        if (![self judgmentBindPhoneAndName]) {
+            return;
+        }
+    }
+    if (!self.isCompletePersonalInfo && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {//未完善姓名
+        [self showCompleteNamePopView];
         return;
     }
-//    if (!self.isCompletePersonalInfo && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {//未完善姓名
-//        [self showCompleteNamePopView];
-//        return;
-//    }
     if ([model.name isEqualToString:@"充值USDT"]){
         [CNTimeLog startRecordTime:CNEventPayLaunch];
         USDTRechargeController *vc = [[USDTRechargeController alloc]init];

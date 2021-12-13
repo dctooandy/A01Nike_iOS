@@ -54,6 +54,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) BTTCustomerBalanceModel *balanceModel;
 
 @property (nonatomic, assign) BOOL isOpenSellUsdt;
+@property (nonatomic, assign) BOOL isShowDepositCheck;
 
 @property (nonatomic, copy) NSString *messageId;
 
