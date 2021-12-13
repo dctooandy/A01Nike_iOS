@@ -194,7 +194,7 @@
             _cellNameArray = @[@"SliceRightsDescript_PageOne",@"SliceRightsDescript_PageTwo"].mutableCopy;
 //            [self.collectionView setPagingEnabled:YES];
             [self.discriptionButton setHidden:YES];
-            [self.displayNoteOne setHidden:NO];
+            [self.displayNoteOne setHidden:YES];
             [self.rightLeftArrowIconImageView setHidden:YES];
             break;
         case VIPRightTravelPage:

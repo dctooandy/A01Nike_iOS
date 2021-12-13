@@ -82,6 +82,7 @@
     NSMutableArray *elementsHight = [NSMutableArray array];
     NSInteger count = 7;
     CGFloat defaultInnerHeight = (SCREEN_HEIGHT - 49);
+    CGFloat defaultNote1Height = 0;// 原始 100
     for (int i = 0; i < count; i++) {
 //        if (i == 0) {
 //            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, defaultInnerHeight)]];
@@ -90,7 +91,7 @@
 //        }
         if (i == 4)
         {
-            float newHeight = defaultInnerHeight + (SCREEN_HEIGHT >= 812 ? 300 : 400) ;
+            float newHeight = defaultInnerHeight + (SCREEN_HEIGHT >= 812 ? 200 : 300) + defaultNote1Height ;
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, newHeight)]];
         }else if (i == 5)
         {
