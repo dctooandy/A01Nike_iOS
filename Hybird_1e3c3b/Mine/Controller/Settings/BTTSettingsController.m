@@ -66,19 +66,21 @@
     } else if (indexPath.row == 2) {
         BTTModifyLimitViewController *vc = [[BTTModifyLimitViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == 3) {
-        BTTBookMessageController *vc = [[BTTBookMessageController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-        if (indexPath.row == 4) {
+    }
+//    else if (indexPath.row == 3) {
+//        BTTBookMessageController *vc = [[BTTBookMessageController alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
+    else if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+        if (indexPath.row == 3) {
             BTTChooseCurrencyController * vc = [[BTTChooseCurrencyController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
-        } else if (indexPath.row == 5) {
+        } else if (indexPath.row == 4) {
             if (self.refreshBlock) {
                 self.refreshBlock();
             }
         }
-    } else if (indexPath.row == 4) {
+    } else if (indexPath.row == 3) {
         if (self.refreshBlock) {
             self.refreshBlock();
         }
@@ -131,9 +133,11 @@
         _sheetDatas = [NSMutableArray array];
         NSArray *titles = @[];
         if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-            titles = @[@"个人资料",@"钱包管理",@"修改限红",@"短信订阅",@"游戏币种",@"退出登录"];
+//            titles = @[@"个人资料",@"钱包管理",@"修改限红",@"短信订阅",@"游戏币种",@"退出登录"];
+            titles = @[@"个人资料",@"钱包管理",@"修改限红",@"游戏币种",@"退出登录"];
         } else {
-            titles = @[@"个人资料",@"银行卡资料",@"修改限红",@"短信订阅",@"退出登录"];
+//            titles = @[@"个人资料",@"银行卡资料",@"修改限红",@"短信订阅",@"退出登录"];
+            titles = @[@"个人资料",@"银行卡资料",@"修改限红",@"退出登录"];
         }
         NSArray *placeholders = @[@"",@"",@"",@"",@"",@""];
         for (NSString *title in titles) {
