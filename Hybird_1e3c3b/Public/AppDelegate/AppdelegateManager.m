@@ -182,7 +182,7 @@
         handler();
     }];
 }
-- (void)recheckDomainWithGroup:(dispatch_group_t)group
+- (void)recheckDomainWithTestSpeed
 {
     NSMutableDictionary *params = @{}.mutableCopy;
     [IVHttpManager shareManager].appId = [HAInitConfig appId];     // 应用ID
@@ -222,7 +222,10 @@
         }
         [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
         [IVHttpManager shareManager].domains = [HAInitConfig websides];
-        dispatch_group_leave(group);
+        [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways
+                                                isAuto:YES
+                                                  type:IVKCheckNetworkTypeGateway
+                                              progress:nil completion:nil];
     }];
 }
 @end

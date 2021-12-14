@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL getSpeedestDomain;
 + (instancetype)shareManager ;
 - (void)checkDomainHandler:(void (^)(void))handler;
-- (void)recheckDomainWithGroup:(dispatch_group_t)group;
+- (void)recheckDomainWithTestSpeed;
 @end
 
 NS_ASSUME_NONNULL_END

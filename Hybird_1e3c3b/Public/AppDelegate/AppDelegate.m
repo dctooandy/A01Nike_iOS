@@ -139,10 +139,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    weakSelf(weakSelf)
     [[AppdelegateManager shareManager] checkDomainHandler:^{
-        [weakSelf continueWithLuanchWithApplication:application options:launchOptions];
     }];
+    [self continueWithLuanchWithApplication:application options:launchOptions];
     return YES;
 }
 - (void)continueWithLuanchWithApplication:(UIApplication *)application options:(NSDictionary *)options
