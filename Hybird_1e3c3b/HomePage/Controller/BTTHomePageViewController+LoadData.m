@@ -65,6 +65,10 @@ static const char *BTTChanceCountKey = "chanceCount";
     dispatch_queue_t queue = dispatch_queue_create("homepage.data", DISPATCH_QUEUE_CONCURRENT);
     dispatch_group_async(group, queue, ^{
         dispatch_group_enter(group);
+        [[AppdelegateManager shareManager] recheckDomainWithGroup:group];
+    });
+    dispatch_group_async(group, queue, ^{
+        dispatch_group_enter(group);
         [self loadMainData:group];
     });
     

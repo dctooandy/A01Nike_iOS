@@ -8,6 +8,9 @@
 
 #import "AppdelegateManager.h"
 #import "AppInitializeConfig.h"
+#import "IVCheckNetworkWrapper.h"
+#import "HAInitConfig.h"
+#import "BTTCheckDomainModel.h"
 
 @implementation AppdelegateManager
 @synthesize gateways = _gateways;
@@ -69,5 +72,157 @@
         }
     }
     return _websides;
+}
+- (void)checkDomainHandler:(void (^)(void))handler
+{
+    // 启动时先去访问接口
+    [self recheckDomain:handler];
+    //获取最优的网关
+//    self.getSpeedestDomain = NO;
+//    [self testSpeed:[IVHttpManager shareManager].gateways Handler:handler];
+//    handler();
+}
+- (void)testSpeed:(NSArray*)domailArr Handler:(void (^)(void))handler
+{
+//    [IVCheckNetworkWrapper initSDK];
+    //app有域名测速功能就使用，没有直接注释domainBakList赋值即可
+    NSMutableArray * arr = [[NSMutableArray alloc] init];
+    for (NSString * str in domailArr) {
+        if ([[str substringFromIndex:str.length-1] isEqualToString:@"/"]) {
+            [arr addObject:str];
+        } else {
+            [arr addObject:[NSString stringWithFormat:@"%@/", str]];
+        }
+    }
+    //...测速代码，速度从快到慢
+    weakSelf(weakSelf)
+    [IVCheckNetworkWrapper getOptimizeUrlWithArray:[IVHttpManager shareManager].gateways
+                                            isAuto:YES
+                                              type:IVKCheckNetworkTypeGateway
+                                          progress:^(IVCheckDetailModel * _Nonnull respone) {
+        [weakSelf checkProgressWithTableViewWithRespone:respone Handler:handler];
+    }
+                                        completion:^(IVCheckDetailModel * _Nonnull model) {
+
+    }];
+}
+- (void)checkProgressWithTableViewWithRespone:(IVCheckDetailModel *)respone Handler:(void (^)(void))handler
+{
+    NSInteger index = 0;
+    BOOL exit = NO;
+    weakSelf(weakSelf)
+    for (NSString *domainString in [IVHttpManager shareManager].gateways) {
+        NSInteger i = [[IVHttpManager shareManager].gateways indexOfObject:domainString];
+        NSURL *url = [NSURL URLWithString:domainString];
+        NSURL *url1 = [NSURL URLWithString:respone.url];
+        if ([url.host isEqualToString:url1.host] ) {
+            if (weakSelf.getSpeedestDomain == NO)
+            {
+                weakSelf.getSpeedestDomain = YES;
+                index = i;
+                exit = YES;
+            }
+        }
+    }
+    if (exit) {
+        [[IVHttpManager shareManager] setGateway:[IVHttpManager shareManager].gateways[index]];
+        handler();
+    }else
+    {
+        if (self.getSpeedestDomain == NO)
+        {
+            [[AppdelegateManager shareManager] setGateways:nil];
+            [[AppdelegateManager shareManager] setWebsides:nil];
+            [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
+            [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
+            [self recheckDomain:handler];
+        }
+    }
+}
+- (void)recheckDomain:(void (^)(void))handler  {
+    
+    NSMutableDictionary *params = @{}.mutableCopy;
+    [IVHttpManager shareManager].appId = [HAInitConfig appId];     // 应用ID
+    [IVHttpManager shareManager].productId = [HAInitConfig productId]; // 产品标识
+    [IVHttpManager shareManager].isSensitive = YES;
+    [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
+    params[@"productId"] = [IVHttpManager shareManager].productId;
+    params[@"productCodeExt"] = @"FM";
+    params[@"productCode"] = @"";
+    [IVNetwork requestPostWithUrl:BTTAppSetting paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTCheckDomainModel *model = [BTTCheckDomainModel yy_modelWithDictionary:result.body];
+            NSMutableArray * tempGetArr = [NSMutableArray new];
+            NSMutableArray * tempWebArr = [NSMutableArray new];
+            for (NSString *getway in model.getways) {
+                if ([[getway substringFromIndex:getway.length-1] isEqualToString:@"/"]) {
+                    [tempGetArr addObject:[NSString stringWithFormat:@"%@_glaxy_1e3c3b_/", getway]];
+                } else {
+                    [tempGetArr addObject:[NSString stringWithFormat:@"%@/_glaxy_1e3c3b_/", getway]];
+                }
+            }
+           
+            for (NSString *websit in model.websides) {
+                if ([[websit substringFromIndex:websit.length-1] isEqualToString:@"/"]) {
+                    [tempWebArr addObject:websit];
+                } else {
+                    [tempWebArr addObject:[NSString stringWithFormat:@"%@/", websit]];
+                }
+            }
+            [[AppdelegateManager shareManager] setGateways:tempGetArr];
+            [[AppdelegateManager shareManager] setWebsides:tempWebArr];
+        }else
+        {
+            [[AppdelegateManager shareManager] setGateways:nil];
+            [[AppdelegateManager shareManager] setWebsides:nil];
+        }
+        [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
+        [IVHttpManager shareManager].domains = [HAInitConfig websides];
+        handler();
+    }];
+}
+- (void)recheckDomainWithGroup:(dispatch_group_t)group
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    [IVHttpManager shareManager].appId = [HAInitConfig appId];     // 应用ID
+    [IVHttpManager shareManager].productId = [HAInitConfig productId]; // 产品标识
+    [IVHttpManager shareManager].isSensitive = YES;
+    [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
+    params[@"productId"] = [IVHttpManager shareManager].productId;
+    params[@"productCodeExt"] = @"FM";
+    params[@"productCode"] = @"";
+    [IVNetwork requestPostWithUrl:BTTAppSetting paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            BTTCheckDomainModel *model = [BTTCheckDomainModel yy_modelWithDictionary:result.body];
+            NSMutableArray * tempGetArr = [NSMutableArray new];
+            NSMutableArray * tempWebArr = [NSMutableArray new];
+            for (NSString *getway in model.getways) {
+                if ([[getway substringFromIndex:getway.length-1] isEqualToString:@"/"]) {
+                    [tempGetArr addObject:[NSString stringWithFormat:@"%@_glaxy_1e3c3b_/", getway]];
+                } else {
+                    [tempGetArr addObject:[NSString stringWithFormat:@"%@/_glaxy_1e3c3b_/", getway]];
+                }
+            }
+           
+            for (NSString *websit in model.websides) {
+                if ([[websit substringFromIndex:websit.length-1] isEqualToString:@"/"]) {
+                    [tempWebArr addObject:websit];
+                } else {
+                    [tempWebArr addObject:[NSString stringWithFormat:@"%@/", websit]];
+                }
+            }
+            [[AppdelegateManager shareManager] setGateways:tempGetArr];
+            [[AppdelegateManager shareManager] setWebsides:tempWebArr];
+        }else
+        {
+            [[AppdelegateManager shareManager] setGateways:nil];
+            [[AppdelegateManager shareManager] setWebsides:nil];
+        }
+        [IVHttpManager shareManager].gateways = [HAInitConfig gateways];  // 网关列表
+        [IVHttpManager shareManager].domains = [HAInitConfig websides];
+        dispatch_group_leave(group);
+    }];
 }
 @end

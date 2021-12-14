@@ -8,6 +8,7 @@
 
 #import "BTTCollectionViewController.h"
 #import "AssistiveButton.h"
+#import "AppdelegateManager.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -19,7 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 所有网关列表
  */
 @property (nonatomic, copy, nullable) NSArray *websides;
+@property (nonatomic, assign) BOOL getSpeedestDomain;
 + (instancetype)shareManager ;
+- (void)checkDomainHandler:(void (^)(void))handler;
+- (void)recheckDomainWithGroup:(dispatch_group_t)group;
 @end
 
 NS_ASSUME_NONNULL_END
