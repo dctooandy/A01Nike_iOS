@@ -590,7 +590,7 @@
     NSArray *contents = nil;
     NSString *title = @"";
     if (button.tag == 1070) {
-        contents = @[@"所有类别",@"热门游戏",@"彩金池游戏",@"最新游戏"];
+        contents = @[@"所有类别",@"热门游戏",@"彩金池游戏",@"最新游戏",@"特惠游戏"];
         title = @"请选择游戏类别";
     } else if (button.tag == 1071) {
         contents = @[@"全平台",@"PT",@"MG",@"PP",@"AG",@"TTG",@"PS",@"PNG",@"NT"];
@@ -611,6 +611,9 @@
             self.type = @"moneypool";
         } else if ([selectValue isEqualToString:@"最新游戏"]) {
             self.type = @"new";
+        } else if ([selectValue isEqualToString:@"特惠游戏"])
+        {
+            self.type = @"isCoupon";
         } else if ([selectValue isEqualToString:@"全平台"]) {
             self.platform = @"";
             self.provider = selectValue;
