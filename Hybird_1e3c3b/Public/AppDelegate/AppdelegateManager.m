@@ -39,7 +39,7 @@
                 return @[@"http://fm.918rr.com/_glaxy_1e3c3b_/"];
                 break;
             case 2:
-                return @[@"https://m.c349b2.com:9188/_glaxy_1e3c3b_/", @"https://918xxs.com/_glaxy_1e3c3b_/", @"https://918ykk.com/_glaxy_1e3c3b_/", @"https://918ygg.com/_glaxy_1e3c3b_/", @"https://918yjj.com/_glaxy_1e3c3b_/", @"https://918yvv.com/_glaxy_1e3c3b_/", @"https://918yuu.com/_glaxy_1e3c3b_/"];
+                return @[@"https://wrd.58baili.com/pro/_glaxy_1e3c3b_/", @"https://m.jkfjdfe.com:9188/_glaxy_1e3c3b_/", @"https://m.zncjdhvs.com:9188/_glaxy_1e3c3b_/", @"https://m.pkyorjhn.com:9188/_glaxy_1e3c3b_/"];
                 break;
             default:
                 return @[@"http://www.pt-gateway.com/_glaxy_1e3c3b_/"];
@@ -64,7 +64,7 @@
                 return @[@"http://fm.918rr.com/"];
                 break;
             case 2:
-                return @[@"https://918yuu.com/"];
+                return @[@"https://wrd.58baili.com/pro/"];
                 break;
             default:
                 return @[@"http://m.a01.com/"];
