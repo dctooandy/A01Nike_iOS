@@ -1281,5 +1281,18 @@ void ProviderReleaseData (void *info, const void *data, size_t size){
         return false;
     }
 }
-
++(BOOL)checksStartDate:(NSString *)startTime EndDate:(NSString *)endTime serverTime:(NSString *)serverTime {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *startDate = [dateFormatter dateFromString:startTime];
+    NSDate *endDate = [dateFormatter dateFromString:endTime];
+    NSDate *serverDate = [dateFormatter dateFromString:serverTime];
+    // 判断是否大于server时间
+    if (([startDate earlierDate:serverDate] == startDate) &&
+        ([serverDate earlierDate:endDate] == serverDate)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 @end

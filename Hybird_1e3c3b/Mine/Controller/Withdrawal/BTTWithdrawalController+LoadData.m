@@ -22,7 +22,7 @@
     params[@"used"] = @"2";
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
     [IVNetwork requestPostWithUrl:BTTCurrencyExchanged paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        [self hideLoading];
+//        [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if (![result.body isKindOfClass:[NSDictionary class]]) {
@@ -59,10 +59,10 @@
 
 - (void)requestSellUsdtSwitch{
     self.isSellUsdt = NO;
-    [self showLoading];
+//    [self showLoading];
     [IVNetwork requestPostWithUrl:BTTOneKeySellUSDT paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
-        [self hideLoading];
+//        [self hideLoading];
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSString *isOpen = [NSString stringWithFormat:@"%@",result.body];
             if ([isOpen isEqualToString:@"1"]) {
@@ -77,11 +77,11 @@
 }
 
 - (void)requestSellUsdtLink{
-    [self showLoading];
+//    [self showLoading];
     NSDictionary *params = @{@"transferType":@"1"};
     [IVNetwork requestPostWithUrl:BTTBuyUSDTLINK paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
-        [self hideLoading];
+//        [self hideLoading];
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSString *link = [NSString stringWithFormat:@"%@",result.body[@"payUrl"]];
             self.sellUsdtLink = link;
@@ -92,13 +92,13 @@
 
 - (void)requestCustomerInfoEx{
 //    BTTGetLoginInfoByNameEx
-    [self showLoading];
+//    [self showLoading];
     NSDictionary *params = @{
         @"inclPendingWithdraw":@"0",
         @"loginName":[IVNetwork savedUserInfo].loginName
     };
     [IVNetwork requestPostWithUrl:BTTGetLoginInfoByNameEx paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        [self hideLoading];
+//        [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             self.canWithdraw = [result.body[@"pendingWithdraw"] integerValue];
@@ -114,6 +114,8 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             self.dcboxLimit = result.body[@"DCBox"] != nil ? result.body[@"DCBox"]:@"15";
             self.usdtLimit = result.body[@"USDT"] != nil ? result.body[@"USDT"]:@"15";
+            self.iChiPayLimit = result.body[@"IChiPay"] != nil ? result.body[@"IChiPay"]:@"15";
+            self.cnyLimit = result.body[@"CNY"] != nil ? result.body[@"CNY"]:@"300";
             [self loadMainData];
         }
     }];
@@ -136,9 +138,9 @@
     NSArray *names3 = @[@"金额",@"比特币",@"取款至",@"资金密码",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
     NSArray *names4 = @[@"金额",@"预估到账",@"取款至",@"资金密码",@"",@"",@""];
     
-    NSString *pString = isUsdt ? [NSString stringWithFormat:@"单笔取款限额%@-143万USDT", self.usdtLimit] : @"最少100元";
+    NSString *pString = isUsdt ? [NSString stringWithFormat:@"单笔取款限额%@-143万USDT", self.usdtLimit] : [NSString stringWithFormat:@"最少%@元", self.cnyLimit];
     if (!isUsdt && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
-        pString = @"最少100元";
+        pString = [NSString stringWithFormat:@"最少%@元", self.cnyLimit ? self.cnyLimit: @"300"];
     }
     if (isUsdt && [self.bankList[self.selectIndex].accountType isEqualToString:@"DCBOX"]) {
         pString = [NSString stringWithFormat:@"单笔取款限额%@-143万USDT", self.dcboxLimit];
@@ -236,7 +238,12 @@
             BTTCustomerBalanceModel *model = [BTTCustomerBalanceModel yy_modelWithJSON:result.body];
             self.balanceModel = model;
             self.totalAvailable = [PublicMethod stringWithDecimalNumber:model.withdrawBal];
+            self.dcboxLimit = model.minWithdrawAmount != nil ? model.minWithdrawAmount:@"15";
+            self.usdtLimit = model.minWithdrawAmount != nil ? model.minWithdrawAmount:@"15";
+            self.iChiPayLimit = model.minWithdrawAmount != nil ? model.minWithdrawAmount:@"15";
+            self.cnyLimit = model.minWithdrawAmount != nil ? model.minWithdrawAmount:@"300";
             dispatch_async(dispatch_get_main_queue(), ^{;
+                [self loadMainData];
                 [self.collectionView reloadData];
             });
         }

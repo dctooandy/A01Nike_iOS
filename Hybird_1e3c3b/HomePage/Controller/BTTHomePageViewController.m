@@ -47,6 +47,7 @@
 #import "AppDelegate.h"
 #import "BTTAssistiveButtonModel.h"
 
+
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, assign) BOOL adCellShow;
@@ -148,6 +149,7 @@
     if ([IVNetwork savedUserInfo]) {
         [self showHomePopView];
     }
+    [self refreshDatasOfHomePage];
 }
 
 -(void)showHomePopView {

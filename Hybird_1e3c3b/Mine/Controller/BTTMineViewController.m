@@ -411,6 +411,11 @@
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }
+    if (self.isShowDepositCheck) {
+        if (![self judgmentBindPhoneAndName]) {
+            return;
+        }
+    }
     if (!self.isCompletePersonalInfo && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {//未完善姓名
         [self showCompleteNamePopView];
         return;

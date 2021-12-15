@@ -60,11 +60,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     if (self.bankList.count != 0) {
-        if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
-            [self getLimitUSDT];
-        } else {
-            [self loadMainData];
-        }
+//        if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+//            [self getLimitUSDT];
+//        } else {
+//            [self getLimitUSDT];//根据用户币种返回限额
+////            [self loadMainData];
+//        }
         [self loadCreditsTotalAvailable];
     }
 }
@@ -116,9 +117,9 @@
             
         } else {
             if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]) {
-                cell.limitLabel.text = @"取款限额:100-1000万RMB,全额投注即可申请取款";
+                cell.limitLabel.text = [NSString stringWithFormat:@"取款限额:%@-1000万RMB,全额投注即可申请取款", self.cnyLimit];
             } else {
-                cell.limitLabel.text = @"取款限额:100-1000万RMB,全额投注即可申请取款";
+                cell.limitLabel.text = [NSString stringWithFormat:@"取款限额:%@-1000万RMB,全额投注即可申请取款", self.cnyLimit];
             }
         }
         cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
@@ -321,7 +322,7 @@
     CGFloat amount = [self.amount doubleValue];
     NSInteger cnyLimitNum = 100;
     if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
-        cnyLimitNum = 100;
+        cnyLimitNum = [self.cnyLimit integerValue];
     }
     NSInteger usdtLimitNum = [self.usdtLimit integerValue];
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && [self.bankList[self.selectIndex].accountType isEqualToString:@"DCBOX"]) {
@@ -499,7 +500,7 @@
     
     NSInteger cnyLimitNum = 100;
     if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
-        cnyLimitNum = 100;
+        cnyLimitNum =  [self.cnyLimit integerValue];
     }
     if (self.amount.floatValue < cnyLimitNum && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         [MBProgressHUD showError:[NSString stringWithFormat:@"最少%ld元", cnyLimitNum] toView:nil];
