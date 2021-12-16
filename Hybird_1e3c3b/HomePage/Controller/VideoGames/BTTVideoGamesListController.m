@@ -613,7 +613,7 @@
             self.type = @"new";
         } else if ([selectValue isEqualToString:@"特惠游戏"])
         {
-            self.type = @"isCoupon";
+            self.type = @"coupon";
         } else if ([selectValue isEqualToString:@"全平台"]) {
             self.platform = @"";
             self.provider = selectValue;
