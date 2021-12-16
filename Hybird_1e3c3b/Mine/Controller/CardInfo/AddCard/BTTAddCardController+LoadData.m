@@ -9,7 +9,7 @@
 #import "BTTAddCardController+LoadData.h"
 #import "BTTMeMainModel.h"
 #import "BTTAddCardController+Nav.h"
-
+#import "NSString+CNPayment.h"
 @implementation BTTAddCardController (LoadData)
 
 -(void)loadQueryBanks {
@@ -23,6 +23,10 @@
                     NSString * nameStr = dict[@"bankName"];
                     if (nameStr.length > 0) {
                         [self.bankNamesArr addObject:nameStr];
+                    }
+                    NSString * iconStr = dict[@"bankIcon"];
+                    if (iconStr.length > 0) {
+                        [self.bankIconArr addObject:[PublicMethod nowCDNWithUrl:iconStr]];
                     }
                 }
             }

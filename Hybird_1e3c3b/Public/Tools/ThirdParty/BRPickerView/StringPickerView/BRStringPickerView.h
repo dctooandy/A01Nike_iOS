@@ -27,6 +27,21 @@ typedef void(^BRStringCancelBlock)(void);
                        dataSource:(id)dataSource
                   defaultSelValue:(id)defaultSelValue
                       resultBlock:(BRStringResultBlock)resultBlock;
+/**
+ *  1.显示自定义字符串选择器
+ *
+ *  @param title            标题
+ *  @param dataSource       数据源（1.直接传数组：NSArray类型；2.可以传plist文件名：NSString类型，带后缀名，plist文件内容要是数组格式）
+ *  @param defaultSelValue  默认选中的行(单列传字符串，多列传一维数组)
+ *  @param iconUrlArr  iCON 数组
+ *  @param resultBlock      选择后的回调
+ *
+ */
++ (void)showStringPickerWithTitle:(NSString *)title
+                       dataSource:(id)dataSource
+                  defaultSelValue:(id)defaultSelValue
+                      imageURLArr:(NSArray *)iconUrlArr
+                      resultBlock:(BRStringResultBlock)resultBlock;
 
 /**
  *  2.显示自定义字符串选择器（支持 设置自动选择 和 自定义主题颜色）

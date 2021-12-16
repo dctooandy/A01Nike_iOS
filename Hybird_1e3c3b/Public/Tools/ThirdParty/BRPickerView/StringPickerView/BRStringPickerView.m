@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, assign) BRStringPickerMode type;
 @property (nonatomic, strong) NSArray *dataSourceArr;
+@property (nonatomic, strong) NSArray *iconDataSourceArr;
 // 单列选择的值
 @property (nonatomic, strong) NSString *selectValue;
 @property (assign, nonatomic) NSInteger selectIndex;//选中的下标
@@ -48,7 +49,14 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
                       resultBlock:(BRStringResultBlock)resultBlock {
     [self showStringPickerWithTitle:title dataSource:dataSource defaultSelValue:defaultSelValue isAutoSelect:NO themeColor:nil resultBlock:resultBlock cancelBlock:nil];
 }
-
++ (void)showStringPickerWithTitle:(NSString *)title
+                       dataSource:(id)dataSource
+                  defaultSelValue:(id)defaultSelValue
+                      imageURLArr:(NSArray *)iconUrlArr
+                      resultBlock:(BRStringResultBlock)resultBlock
+{
+    [self showStringPickerWithTitle:title dataSource:dataSource defaultSelValue:defaultSelValue imageURLArr:iconUrlArr isAutoSelect:NO themeColor:nil resultBlock:resultBlock cancelBlock:nil];
+}
 #pragma mark - 2.显示自定义字符串选择器（支持 设置自动选择 和 自定义主题颜色）
 + (void)showStringPickerWithTitle:(NSString *)title
                        dataSource:(id)dataSource
@@ -96,8 +104,48 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
     }
     return self;
 }
-
+#pragma mark - 初始化自定义字符串选择器+图片
++ (void)showStringPickerWithTitle:(NSString *)title
+                       dataSource:(id)dataSource
+                  defaultSelValue:(id)defaultSelValue
+                      imageURLArr:(NSArray *)iconUrlArr
+                     isAutoSelect:(BOOL)isAutoSelect
+                       themeColor:(UIColor *)themeColor
+                      resultBlock:(BRStringResultBlock)resultBlock
+                      cancelBlock:(BRStringCancelBlock)cancelBlock {
+    BRStringPickerView *strPickerView = [[BRStringPickerView alloc]initWithTitle:title dataSource:dataSource defaultSelValue:defaultSelValue imageURLArr:iconUrlArr isAutoSelect:isAutoSelect themeColor:themeColor resultBlock:resultBlock cancelBlock:cancelBlock];
+    NSAssert(strPickerView->isDataSourceValid, @"数据源不合法！请检查字符串选择器数据源的格式");
+    if (strPickerView->isDataSourceValid) {
+        [strPickerView showWithAnimation:YES];
+    }
+}
+- (instancetype)initWithTitle:(NSString *)title
+                   dataSource:(id)dataSource
+              defaultSelValue:(id)defaultSelValue
+                  imageURLArr:(NSArray *)iconUrlArr
+                 isAutoSelect:(BOOL)isAutoSelect
+                   themeColor:(UIColor *)themeColor
+                  resultBlock:(BRStringResultBlock)resultBlock
+                  cancelBlock:(BRStringCancelBlock)cancelBlock {
+    if (self = [super init]) {
+        self.title = title;
+        self.isAutoSelect = isAutoSelect;
+        self.themeColor = themeColor;
+        self.resultBlock = resultBlock;
+        self.cancelBlock = cancelBlock;
+        isDataSourceValid = YES;
+        [self configDataSource:dataSource defaultSelValue:defaultSelValue imageURLArr:iconUrlArr];
+        if (isDataSourceValid) {
+            [self initUI];
+        }
+    }
+    return self;
+}
 #pragma mark - 设置数据源
+- (void)configDataSource:(id)dataSource defaultSelValue:(id)defaultSelValue imageURLArr:(NSArray *)iconUrlArr {
+    self.iconDataSourceArr = iconUrlArr;
+    [self configDataSource:dataSource defaultSelValue:defaultSelValue];
+}
 - (void)configDataSource:(id)dataSource defaultSelValue:(id)defaultSelValue {
     // 1.先判断传入的数据源是否合法
     if (!dataSource) {
@@ -284,7 +332,7 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
         
         label.frame = CGRectMake(0, 0, self.alertView.frame.size.width, 35.0f * kScaleFit);
         label.text = self.dataSourceArr[row];
-        
+        NSURL * iconUrl = [NSURL URLWithString:self.iconDataSourceArr[row]];
         if ([self.dataSourceArr[row] isEqualToString:@"➕ 币付宝钱包"]) {
             UIView *noteview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.alertView.frame.size.width, 35)];
             [noteview addSubview:label];
@@ -297,6 +345,16 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
             noteLabel.textAlignment = NSTextAlignmentCenter;
             noteLabel.clipsToBounds = YES;
             [noteview addSubview:noteLabel];
+            return noteview;
+        }else
+        {
+            [label setFrame:CGRectMake(30, 0, self.alertView.frame.size.width*0.6 - 30, 35)];
+            UIView *noteview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.alertView.frame.size.width*0.6, 35)];
+            UIImageView * iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 7.5, 20, 20)];
+            
+            [iconImageView sd_setImageWithURL:iconUrl placeholderImage:ImageNamed(@"defaultCardIcon")];
+            [noteview addSubview:iconImageView];
+            [noteview addSubview:label];
             return noteview;
         }
     } else if (self.type == BRStringPickerComponentMore) {
@@ -380,6 +438,13 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
         _dataSourceArr = [NSArray array];
     }
     return _dataSourceArr;
+}
+- (NSArray *)iconDataSourceArr
+{
+    if (!_iconDataSourceArr) {
+        _iconDataSourceArr = [NSArray array];
+    }
+    return _iconDataSourceArr;
 }
 
 - (NSMutableArray *)selectValueArr {
