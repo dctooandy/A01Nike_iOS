@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, assign) BRStringPickerMode type;
 @property (nonatomic, strong) NSArray *dataSourceArr;
-@property (nonatomic, strong) NSArray *iconDataSourceArr;
+@property (nonatomic, strong) NSMutableArray *iconDataSourceArr;
 // 单列选择的值
 @property (nonatomic, strong) NSString *selectValue;
 @property (assign, nonatomic) NSInteger selectIndex;//选中的下标
@@ -143,7 +143,7 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
 }
 #pragma mark - 设置数据源
 - (void)configDataSource:(id)dataSource defaultSelValue:(id)defaultSelValue imageURLArr:(NSArray *)iconUrlArr {
-    self.iconDataSourceArr = iconUrlArr;
+    self.iconDataSourceArr = iconUrlArr.mutableCopy;
     [self configDataSource:dataSource defaultSelValue:defaultSelValue];
 }
 - (void)configDataSource:(id)dataSource defaultSelValue:(id)defaultSelValue {
@@ -332,7 +332,7 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
         
         label.frame = CGRectMake(0, 0, self.alertView.frame.size.width, 35.0f * kScaleFit);
         label.text = self.dataSourceArr[row];
-        NSURL * iconUrl = [NSURL URLWithString:self.iconDataSourceArr[row]];
+        NSURL * iconUrl = [NSURL URLWithString:self.iconDataSourceArr.count ? self.iconDataSourceArr[row] : @""];
         if ([self.dataSourceArr[row] isEqualToString:@"➕ 币付宝钱包"]) {
             UIView *noteview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.alertView.frame.size.width, 35)];
             [noteview addSubview:label];
@@ -352,7 +352,7 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
             UIView *noteview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.alertView.frame.size.width*0.6, 35)];
             UIImageView * iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 7.5, 20, 20)];
             
-            [iconImageView sd_setImageWithURL:iconUrl placeholderImage:ImageNamed(@"defaultCardIcon")];
+            [iconImageView sd_setImageWithURL:iconUrl placeholderImage:nil];
             [noteview addSubview:iconImageView];
             [noteview addSubview:label];
             return noteview;
@@ -439,10 +439,10 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
     }
     return _dataSourceArr;
 }
-- (NSArray *)iconDataSourceArr
+- (NSMutableArray *)iconDataSourceArr
 {
     if (!_iconDataSourceArr) {
-        _iconDataSourceArr = [NSArray array];
+        _iconDataSourceArr = [NSMutableArray array];
     }
     return _iconDataSourceArr;
 }
