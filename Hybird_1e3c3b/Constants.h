@@ -661,6 +661,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 
 // app_version版本号
 #define app_version   [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
+// 版本号 中间的数字 2以上,不包含2 就是运测/测试
+#define middle_app_version_num   [[(NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"] componentsSeparatedByString:@"."][1] floatValue]
 #define build_version [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]
 
 //沙盒中web资源目录
