@@ -39,7 +39,7 @@
                 return @[@"http://fm.918rr.com/_glaxy_1e3c3b_/"];
                 break;
             case 2:
-                return @[@"https://wrd.58baili.com/pro/_glaxy_1e3c3b_/", @"https://m.jkfjdfe.com:9188/_glaxy_1e3c3b_/", @"https://m.zncjdhvs.com:9188/_glaxy_1e3c3b_/", @"https://m.pkyorjhn.com:9188/_glaxy_1e3c3b_/"];
+                return @[@"https://wrd.58baili.com/pro/_glaxy_1e3c3b_/", @"https://m.pkyorjhn.com:9188/_glaxy_1e3c3b_/"];
                 break;
             default:
                 return @[@"http://www.pt-gateway.com/_glaxy_1e3c3b_/"];

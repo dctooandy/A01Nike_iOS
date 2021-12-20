@@ -637,20 +637,22 @@
         vc.webConfigModel.theme = @"outside";
         vc.title = @"站內信";
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.elementsHight.count - 5) {
-        //額度轉帳
-        BTTPTTransferController *vc = [[BTTPTTransferController alloc] init];
-        vc.balanceModel = self.balanceModel;
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.elementsHight.count - 6) {
+    }
+//    else if (indexPath.row == self.elementsHight.count - 5) {
+//        //額度轉帳
+//        BTTPTTransferController *vc = [[BTTPTTransferController alloc] init];
+//        vc.balanceModel = self.balanceModel;
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
+    else if (indexPath.row == self.elementsHight.count - 5) {
         //帳號安全
         BTTAccountSafeController *vc = [[BTTAccountSafeController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.elementsHight.count - 7) {
+    } else if (indexPath.row == self.elementsHight.count - 6) {
         //客戶報表
         BTTCustomerReportController * vc = [[BTTCustomerReportController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == self.elementsHight.count - 8) {
+    }else if (indexPath.row == self.elementsHight.count - 7) {
         //我的優惠
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.webConfigModel.theme = @"outside";

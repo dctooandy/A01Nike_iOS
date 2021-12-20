@@ -506,9 +506,10 @@
     if (self.mainDataTwo.count) {
         [self.mainDataTwo removeAllObjects];
     }
-    NSArray *names = @[@"我的优惠",@"客户报表",@"账号安全",@"额度转账",@"站内信",@"版本更新",@"网站检测",@"设置"];
-    NSArray *icons = @[@"me_preferential",@"me_sheet",@"me_amountsafe",@"me_transfer",@"me_message",@"me_version",@"me_speed",@"me_setting"];
-    
+//    NSArray *names = @[@"我的优惠",@"客户报表",@"账号安全",@"额度转账",@"站内信",@"版本更新",@"网站检测",@"设置"];
+    NSArray *names = @[@"我的优惠",@"客户报表",@"账号安全",@"站内信",@"版本更新",@"网站检测",@"设置"];
+//    NSArray *icons = @[@"me_preferential",@"me_sheet",@"me_amountsafe",@"me_transfer",@"me_message",@"me_version",@"me_speed",@"me_setting"];
+    NSArray *icons = @[@"me_preferential",@"me_sheet",@"me_amountsafe",@"me_message",@"me_version",@"me_speed",@"me_setting"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];

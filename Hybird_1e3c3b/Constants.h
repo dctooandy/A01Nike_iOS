@@ -334,8 +334,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTNTKEY                                   @"065"
 
 //儲存使用者選擇幣種相對應的keyArr
-#define BTTGameKeysArr                             @[BTTAGQJKEY,BTTAGGJKEY,BTTASKEY,BTTSABAKEY,BTTYSBKEY,BTTAGLotteryKEY,BTTPTKEY,BTTTTGKEY,BTTPPKEY,BTTPSKEY,BTTMGKEY,BTTPNGKEY,BTTNTKEY]
-#define BTTGameTitlesArr                           @[@"AG旗舰厅", @"AG国际厅", @"AS真人棋牌", @"沙巴体育", @"YSB体育", @"AG彩票", @"PT", @"TTG", @"PP", @"PS", @"MG",@"PNG",@"NT"]
+#define BTTGameKeysArr                             @[BTTAGQJKEY,BTTAGGJKEY,BTTASKEY,BTTSABAKEY,BTTYSBKEY,BTTAGLotteryKEY,BTTPTKEY,BTTTTGKEY,BTTPPKEY,BTTPSKEY,BTTMGKEY,BTTPNGKEY]
+#define BTTGameTitlesArr                           @[@"AG旗舰厅", @"AG国际厅", @"AS真人棋牌", @"沙巴体育", @"YSB体育", @"AG彩票", @"PT", @"TTG", @"PP", @"PS", @"MG",@"PNG"]
 
 /*********************************************API********************************************************/
 
@@ -661,6 +661,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 
 // app_version版本号
 #define app_version   [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
+// 版本号 中间的数字 2以上,不包含2 就是运测/测试
+#define middle_app_version_num   [[(NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"] componentsSeparatedByString:@"."][1] floatValue]
 #define build_version [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]
 
 //沙盒中web资源目录
