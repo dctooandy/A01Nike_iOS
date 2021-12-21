@@ -25,7 +25,7 @@
                         [self.bankNamesArr addObject:nameStr];
                     }
                     NSString * iconStr = dict[@"bankIcon"];
-                    if (iconStr.length > 0) {
+                    if (iconStr.length >= 0) {
                         [self.bankIconArr addObject:[PublicMethod nowCDNWithUrl:iconStr]];
                     }
                 }

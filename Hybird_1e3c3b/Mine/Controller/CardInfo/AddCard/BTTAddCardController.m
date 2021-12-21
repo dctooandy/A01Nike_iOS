@@ -145,7 +145,11 @@
             self.bankNamesArr = [[NSMutableArray alloc] initWithArray:banks];
             self.bankIconArr = [[NSMutableArray alloc] initWithCapacity:self.bankNamesArr.count];
         }
-        [BRStringPickerView showStringPickerWithTitle:@"选择收款银行" dataSource:self.bankNamesArr defaultSelValue:cell.textField.text imageURLArr:self.bankIconArr resultBlock:^(id selectValue, NSInteger index) {
+        [BRStringPickerView showStringPickerWithImageURLArr:self.bankIconArr
+                                                  WithTitle:@"选择收款银行"
+                                                 dataSource:self.bankNamesArr
+                                            defaultSelValue:cell.textField.text
+                                                resultBlock:^(id selectValue, NSInteger index) {
             cell.textField.text = selectValue;
         }];
 

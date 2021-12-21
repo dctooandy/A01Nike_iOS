@@ -49,13 +49,13 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
                       resultBlock:(BRStringResultBlock)resultBlock {
     [self showStringPickerWithTitle:title dataSource:dataSource defaultSelValue:defaultSelValue isAutoSelect:NO themeColor:nil resultBlock:resultBlock cancelBlock:nil];
 }
-+ (void)showStringPickerWithTitle:(NSString *)title
-                       dataSource:(id)dataSource
-                  defaultSelValue:(id)defaultSelValue
-                      imageURLArr:(NSArray *)iconUrlArr
-                      resultBlock:(BRStringResultBlock)resultBlock
++ (void)showStringPickerWithImageURLArr:(NSArray *)iconUrlArr
+                              WithTitle:(NSString *)title
+                             dataSource:(id)dataSource
+                        defaultSelValue:(id)defaultSelValue
+                            resultBlock:(BRStringResultBlock)resultBlock
 {
-    [self showStringPickerWithTitle:title dataSource:dataSource defaultSelValue:defaultSelValue imageURLArr:iconUrlArr isAutoSelect:NO themeColor:nil resultBlock:resultBlock cancelBlock:nil];
+    [self showStringPickerWithImageURLArr:iconUrlArr WithTitle:title dataSource:dataSource defaultSelValue:defaultSelValue  isAutoSelect:NO themeColor:nil resultBlock:resultBlock cancelBlock:nil];
 }
 #pragma mark - 2.显示自定义字符串选择器（支持 设置自动选择 和 自定义主题颜色）
 + (void)showStringPickerWithTitle:(NSString *)title
@@ -105,28 +105,28 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
     return self;
 }
 #pragma mark - 初始化自定义字符串选择器+图片
-+ (void)showStringPickerWithTitle:(NSString *)title
-                       dataSource:(id)dataSource
-                  defaultSelValue:(id)defaultSelValue
-                      imageURLArr:(NSArray *)iconUrlArr
-                     isAutoSelect:(BOOL)isAutoSelect
-                       themeColor:(UIColor *)themeColor
-                      resultBlock:(BRStringResultBlock)resultBlock
-                      cancelBlock:(BRStringCancelBlock)cancelBlock {
-    BRStringPickerView *strPickerView = [[BRStringPickerView alloc]initWithTitle:title dataSource:dataSource defaultSelValue:defaultSelValue imageURLArr:iconUrlArr isAutoSelect:isAutoSelect themeColor:themeColor resultBlock:resultBlock cancelBlock:cancelBlock];
++ (void)showStringPickerWithImageURLArr:(NSArray *)iconUrlArr
+                              WithTitle:(NSString *)title
+                             dataSource:(id)dataSource
+                        defaultSelValue:(id)defaultSelValue
+                           isAutoSelect:(BOOL)isAutoSelect
+                             themeColor:(UIColor *)themeColor
+                            resultBlock:(BRStringResultBlock)resultBlock
+                            cancelBlock:(BRStringCancelBlock)cancelBlock {
+    BRStringPickerView *strPickerView = [[BRStringPickerView alloc]initWithImageURLArr:iconUrlArr WithTitle:title dataSource:dataSource defaultSelValue:defaultSelValue isAutoSelect:isAutoSelect themeColor:themeColor resultBlock:resultBlock cancelBlock:cancelBlock];
     NSAssert(strPickerView->isDataSourceValid, @"数据源不合法！请检查字符串选择器数据源的格式");
     if (strPickerView->isDataSourceValid) {
         [strPickerView showWithAnimation:YES];
     }
 }
-- (instancetype)initWithTitle:(NSString *)title
-                   dataSource:(id)dataSource
-              defaultSelValue:(id)defaultSelValue
-                  imageURLArr:(NSArray *)iconUrlArr
-                 isAutoSelect:(BOOL)isAutoSelect
-                   themeColor:(UIColor *)themeColor
-                  resultBlock:(BRStringResultBlock)resultBlock
-                  cancelBlock:(BRStringCancelBlock)cancelBlock {
+- (instancetype)initWithImageURLArr:(NSArray *)iconUrlArr
+                          WithTitle:(NSString *)title
+                         dataSource:(id)dataSource
+                    defaultSelValue:(id)defaultSelValue
+                       isAutoSelect:(BOOL)isAutoSelect
+                         themeColor:(UIColor *)themeColor
+                        resultBlock:(BRStringResultBlock)resultBlock
+                        cancelBlock:(BRStringCancelBlock)cancelBlock {
     if (self = [super init]) {
         self.title = title;
         self.isAutoSelect = isAutoSelect;
@@ -214,11 +214,22 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
         }
         self.selectValueArr = [tempArr copy];
     }
+
 }
 
 #pragma mark - 初始化子视图
 - (void)initUI {
-    [super initUI];
+    if (self.iconDataSourceArr.count > 0)
+    {
+        [super initUIWithSearchView];
+        if (self.iconDataSourceArr.count > 0)
+        {
+            [self.topSearchView addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
+        }
+    }else
+    {
+        [super initUI];
+    }
     self.titleLabel.text = self.title;
     // 添加字符串选择器
     [self.alertView addSubview:self.pickerView];
@@ -230,7 +241,8 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
 #pragma mark - 字符串选择器
 - (UIPickerView *)pickerView {
     if (!_pickerView) {
-        _pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, kTopViewHeight + 0.5, self.alertView.frame.size.width, kPickerHeight)];
+        CGFloat topSpace = self.iconDataSourceArr.count > 0 ? kSearchViewHeight + kTopViewHeight + 0.5 : kTopViewHeight + 0.5;
+        _pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, topSpace, SCREEN_WIDTH, kPickerHeight)];
         _pickerView.backgroundColor = [UIColor whiteColor];
         // 设置子视图的大小随着父视图变化
         _pickerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
@@ -332,7 +344,9 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
         
         label.frame = CGRectMake(0, 0, self.alertView.frame.size.width, 35.0f * kScaleFit);
         label.text = self.dataSourceArr[row];
-        NSURL * iconUrl = [NSURL URLWithString:self.iconDataSourceArr.count ? self.iconDataSourceArr[row] : @""];
+        BOOL isShowIcon = self.iconDataSourceArr.count > 0 ? YES : NO;
+        CGFloat leftLabelSpace = isShowIcon ? 30 : 0;
+        NSURL * iconUrl = [NSURL URLWithString:isShowIcon ? self.iconDataSourceArr[row] : @""];
         if ([self.dataSourceArr[row] isEqualToString:@"➕ 币付宝钱包"]) {
             UIView *noteview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.alertView.frame.size.width, 35)];
             [noteview addSubview:label];
@@ -348,12 +362,14 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
             return noteview;
         }else
         {
-            [label setFrame:CGRectMake(30, 0, self.alertView.frame.size.width*0.6 - 30, 35)];
+            [label setFrame:CGRectMake(leftLabelSpace, 0, self.alertView.frame.size.width*0.6 - leftLabelSpace, 35)];
             UIView *noteview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.alertView.frame.size.width*0.6, 35)];
-            UIImageView * iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 7.5, 20, 20)];
-            
-            [iconImageView sd_setImageWithURL:iconUrl placeholderImage:nil];
-            [noteview addSubview:iconImageView];
+            if (isShowIcon)
+            {
+                UIImageView * iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 7.5, 20, 20)];
+                [iconImageView sd_setImageWithURL:iconUrl placeholderImage:nil];
+                [noteview addSubview:iconImageView];
+            }
             [noteview addSubview:label];
             return noteview;
         }
@@ -372,6 +388,22 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
     return 35.0f * kScaleFit;
 }
 
+- (void)textFieldDidChanged:(UITextField *)sender {
+    sender.text = [sender.text lowercaseString];
+    NSString *name = sender.text;
+    if (name.length >= 1) {
+        for (NSString *bankName in self.dataSourceArr) {
+            if ([bankName containsString:name])
+            {
+                NSUInteger index = [self.dataSourceArr indexOfObject:bankName];
+                [self.pickerView selectRow:index inComponent:0 animated:YES];
+                break;
+            }
+        }
+     
+    }
+    
+}
 #pragma mark - 背景视图的点击事件
 - (void)didTapBackgroundView:(UITapGestureRecognizer *)sender {
     [self dismissWithAnimation:NO];

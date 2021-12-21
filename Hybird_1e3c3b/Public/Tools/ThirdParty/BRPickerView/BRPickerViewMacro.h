@@ -34,6 +34,7 @@ blue:((CGFloat)(rgbValue & 0xFF)) / 255.0 alpha:(a)]
 
 #define kPickerHeight 216
 #define kTopViewHeight 65
+#define kSearchViewHeight 50
 
 // 状态栏的高度(20 / 44(iPhoneX))
 #define BR_STATUSBAR_HEIGHT ([UIApplication sharedApplication].statusBarFrame.size.height)
