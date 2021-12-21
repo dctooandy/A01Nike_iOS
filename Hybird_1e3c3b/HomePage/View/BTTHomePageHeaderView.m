@@ -167,7 +167,7 @@
                 serviceBtn.frame = CGRectMake(SCREEN_WIDTH - BTTLeftConstants - BTTBtnWidthAndHeight, BTTIconTop + (64 - BTTBtnWidthAndHeight) / 2 + 5, BTTBtnWidthAndHeight, BTTBtnWidthAndHeight);
                 [serviceBtn setImage:ImageNamed(@"homepage_service") forState:UIControlStateNormal];
                 [serviceBtn addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-                if ([app_version floatValue] > 3.2)
+                if (middle_app_version_num > 2)
                 {
                     [serviceBtn addTarget:self action:@selector(switchEnvirmant) forControlEvents:UIControlEventTouchUpOutside];
                 }
