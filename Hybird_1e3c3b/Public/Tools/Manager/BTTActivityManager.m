@@ -65,10 +65,11 @@ static BTTActivityManager * sharedSingleton;
                         [weakSelf directToShowDefaultPopView];
                         break;
                     case 2://活动彈窗
-                        [weakSelf loadSevenXiData];// 七夕
+//                        [weakSelf loadSevenXiData];// 七夕
                         break;
                     case 3://不在预热也不在活动, 但有配置(月工资弹窗)
                         [weakSelf directToShowYenFenHongPopView];
+                        break;
                     case 4://今天不用再弹弹窗 (什么弹窗都不出现了)
                         break;
                     default:

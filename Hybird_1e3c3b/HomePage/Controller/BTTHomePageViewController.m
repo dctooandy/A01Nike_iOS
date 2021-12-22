@@ -73,6 +73,8 @@
         [BTTActivityManager sharedInstance];
     } else {
         self.isLogin = NO;
+        //弹窗
+        [self showHomePopView];
     }
     
     [self setupNav];
@@ -146,9 +148,6 @@
     [self showAssistiveButton];
     [self.collectionView reloadData];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    if ([IVNetwork savedUserInfo]) {
-        [self showHomePopView];
-    }
     [self refreshDatasOfHomePage];
 }
 
@@ -225,6 +224,8 @@
 //            }
 //        }
 //    }];
+    //弹窗
+    [self showHomePopView];
 }
 
 - (void)showInsideMessage{
