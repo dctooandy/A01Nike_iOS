@@ -367,7 +367,8 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
             if (isShowIcon)
             {
                 UIImageView * iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 7.5, 20, 20)];
-                [iconImageView sd_setImageWithURL:iconUrl placeholderImage:nil];
+                [iconImageView sd_setImageWithURL:iconUrl placeholderImage:ImageNamed(@"defaultCardIcon") options:SDWebImageRetryFailed];
+//                [iconImageView sd_setImageWithURL:iconUrl placeholderImage:ImageNamed(@"default_4")];
                 [noteview addSubview:iconImageView];
             }
             [noteview addSubview:label];
