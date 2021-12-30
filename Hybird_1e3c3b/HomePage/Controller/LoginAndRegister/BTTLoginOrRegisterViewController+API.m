@@ -363,7 +363,7 @@ static const char *exModelKey = "exModelKey";
     /// 加上 agentID判斷
     IVOtherInfoModel *infoModel = [[IVOtherInfoModel alloc] init];
     if (infoModel.agentId.length != 0) {
-        [IVHttpManager shareManager].parentId = @"918uaa.com";  // 渠道号
+        [IVHttpManager shareManager].parentId = infoModel.agentId;  // 渠道号
     }
 
     [self showLoading];
@@ -399,7 +399,7 @@ static const char *exModelKey = "exModelKey";
     /// 加上 agentID判斷
     IVOtherInfoModel *model = [[IVOtherInfoModel alloc] init];
     if (model.agentId.length != 0) {
-        [IVHttpManager shareManager].parentId = @"918uaa.com";  // 渠道号
+        [IVHttpManager shareManager].parentId = model.agentId;  // 渠道号
     }
     [IVNetwork requestPostWithUrl:BTTOneKeyRegister paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
@@ -613,7 +613,7 @@ static const char *exModelKey = "exModelKey";
     /// 加上 agentID判斷
     IVOtherInfoModel *infoModel = [[IVOtherInfoModel alloc] init];
     if (infoModel.agentId.length != 0) {
-    [IVHttpManager shareManager].parentId = @"918uaa.com";  // 渠道号
+        [IVHttpManager shareManager].parentId = infoModel.agentId;  // 渠道号
     }
 
     [self showLoading];
@@ -688,7 +688,7 @@ static const char *exModelKey = "exModelKey";
     /// 加上 agentID判斷
     IVOtherInfoModel *infoModel = [[IVOtherInfoModel alloc] init];
     if (infoModel.agentId.length != 0) {
-    [IVHttpManager shareManager].parentId = @"918uaa.com";  // 渠道号
+        [IVHttpManager shareManager].parentId = infoModel.agentId;  // 渠道号
     }
 
     [self showLoading];
