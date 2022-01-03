@@ -23,7 +23,7 @@
 #import "AppDelegate.h"
 #import "HAInitConfig.h"
 #import "IVWebViewManager.h"
-
+#import "IVOtherInfoModel.h"
 static const char *confirmKey = "confirmKey";
 static const char *exModelKey = "exModelKey";
 
@@ -360,7 +360,12 @@ static const char *exModelKey = "exModelKey";
         [params setValue:self.askInputCodeId.copy forKey:@"referralCode"];
     }
     [params setValue:[IVRsaEncryptWrapper encryptorString:model.password] forKey:@"password"];
-    
+    /// 加上 agentID判斷
+    IVOtherInfoModel *infoModel = [[IVOtherInfoModel alloc] init];
+    if (infoModel.agentId.length != 0) {
+        [IVHttpManager shareManager].parentId = infoModel.agentId;  // 渠道号
+    }
+
     [self showLoading];
 
     [IVNetwork requestPostWithUrl:BTTUserRegister paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
@@ -390,7 +395,12 @@ static const char *exModelKey = "exModelKey";
 
 - (void)onekeyRegisteAccount{
     [self showLoading];
-    NSDictionary * params = @{@"randomStr":[PublicMethod getRandomTimeString]};
+    NSMutableDictionary *params = @{@"randomStr":[PublicMethod getRandomTimeString]}.mutableCopy;
+    /// 加上 agentID判斷
+    IVOtherInfoModel *model = [[IVOtherInfoModel alloc] init];
+    if (model.agentId.length != 0) {
+        [IVHttpManager shareManager].parentId = model.agentId;  // 渠道号
+    }
     [IVNetwork requestPostWithUrl:BTTOneKeyRegister paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         [self hideLoading];
@@ -600,6 +610,12 @@ static const char *exModelKey = "exModelKey";
     if (self.askInputCodeId.length) {
         [params setValue:self.askInputCodeId forKey:@"referralCode"];
     }
+    /// 加上 agentID判斷
+    IVOtherInfoModel *infoModel = [[IVOtherInfoModel alloc] init];
+    if (infoModel.agentId.length != 0) {
+        [IVHttpManager shareManager].parentId = infoModel.agentId;  // 渠道号
+    }
+
     [self showLoading];
     [IVNetwork requestPostWithUrl:BTTUserRegister paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
@@ -669,6 +685,12 @@ static const char *exModelKey = "exModelKey";
     if (self.validateId!=nil) {
         [params setValue:self.validateId forKey:@"validateId"];
     }
+    /// 加上 agentID判斷
+    IVOtherInfoModel *infoModel = [[IVOtherInfoModel alloc] init];
+    if (infoModel.agentId.length != 0) {
+        [IVHttpManager shareManager].parentId = infoModel.agentId;  // 渠道号
+    }
+
     [self showLoading];
 
     [IVNetwork requestPostWithUrl:BTTUserRegister paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
