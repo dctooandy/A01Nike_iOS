@@ -13,6 +13,7 @@
 #import "BTTYueFenHongPopView.h"
 #import "BTTYenFenHongModel.h"
 #import "BTTPopViewModel.h"
+#import "RedPacketsRainView.h"
 
 @interface BTTActivityManager()
 @property(nonatomic,strong)BTTPopViewModel * popModel;
@@ -70,6 +71,7 @@ static BTTActivityManager * sharedSingleton;
                     case 3://不在预热也不在活动, 但有配置(月工资弹窗)
                         [weakSelf directToShowYenFenHongPopView];
                     case 4://今天不用再弹弹窗 (什么弹窗都不出现了)
+                        [weakSelf showRedPacketsRainView];
                         break;
                     default:
                         break;
@@ -132,6 +134,26 @@ static BTTActivityManager * sharedSingleton;
     }];
 }
 
+#pragma mark - 红包雨
+- (void)showRedPacketsRainView
+{
+    RedPacketsRainView *alertView = [RedPacketsRainView viewFromXib];
+    
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    weakSelf(weakSelf)
+    [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    alertView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    alertView.btnBlock = ^(UIButton * _Nullable btn) {
+        [popView dismiss];
+    };
+}
 #pragma mark - 七夕
 -(void)loadSevenXiData {
     weakSelf(weakSelf)
