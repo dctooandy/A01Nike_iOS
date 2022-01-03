@@ -17,6 +17,7 @@
 #import "BTTCreateAPIModel.h"
 #import "BTTRegisterSuccessController.h"
 #import "HAInitConfig.h"
+#import "IVOtherInfoModel.h"
 
 @interface OneKeyPhoneController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, copy) NSString *messageId;
@@ -293,6 +294,11 @@
         [params setValue:self.validateId forKey:@"validateId"];
     }
     [self showLoading];
+    /// 加上 agentID判斷
+    IVOtherInfoModel *infoModel = [[IVOtherInfoModel alloc] init];
+    if (infoModel.agentId.length != 0) {
+        [IVHttpManager shareManager].parentId = @"918uaa.com";  // 渠道号
+    }
 
     [IVNetwork requestPostWithUrl:BTTUserRegister paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
