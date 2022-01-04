@@ -56,12 +56,20 @@
     }
 }
 - (IBAction)showCardsBonus:(UIButton*)sender {
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.cardsBonusView setAlpha:(sender.tag == 1) ? 1.0 : 0.0];
-        [self.redPocketsRainView setAlpha:(sender.tag == 1) ? 0.0 : 1.0];
-    }];
-//    [self switchToBackWithView:(sender.tag == 1) ? self.redPocketsRainView : self.cardsBonusView];
-//    [self switchToFrontWithView:(sender.tag == 1) ? self.cardsBonusView : self.redPocketsRainView];
+//    [UIView animateWithDuration:0.3 animations:^{
+//        [self.cardsBonusView setAlpha:(sender.tag == 1) ? 1.0 : 0.0];
+//        [self.redPocketsRainView setAlpha:(sender.tag == 1) ? 0.0 : 1.0];
+//    }];
+    if (sender.tag == 1)
+    {
+        [self switchWithView:self.redPocketsRainView withPosition:RedPocketsViewToBack];
+        [self switchWithView:self.cardsBonusView withPosition:RedPocketsViewToFront];
+    }else
+    {
+        [self switchWithView:self.redPocketsRainView withPosition:RedPocketsViewToFront];
+        [self switchWithView:self.cardsBonusView withPosition:RedPocketsViewToBack];
+    }
+    
 }
 
 - (void)startTime
@@ -129,15 +137,13 @@
 {
     UIImageView * imageV = [UIImageView new];
     imageV.image = [UIImage imageNamed:@"dsb_rb_bg"];
-    imageV.frame = CGRectMake(0, 0, 44 , 62.5 );
-    
+    imageV.frame = CGRectMake(0, -75, 44 , 62.5 );
     self.moveLayer = [CALayer new];
     self.moveLayer.bounds = imageV.frame;
     self.moveLayer.anchorPoint = CGPointMake(0, 0);
-    self.moveLayer.position = CGPointMake(0, -62.5 );
+    self.moveLayer.position = CGPointMake(0, -75 );
     self.moveLayer.contents = (id)imageV.image.CGImage;
     [self.redPocketsRainView.layer addSublayer:self.moveLayer];
-    
     [self addAnimation];
 }
 - (void)addAnimation
@@ -266,18 +272,19 @@
         }
     }
 }
--(void)switchToFrontWithView: (UIView*)currentView
+-(void)switchWithView: (UIView*)currentView withPosition:(RedPocketsViewPosition)positionValue
 {
+    CFTimeInterval durationValue = 0.5;
     CABasicAnimation *zPosition = [CABasicAnimation animation];
     zPosition.keyPath = @"zPosition";
-    zPosition.fromValue = [NSNumber numberWithDouble:-1.0];
-    zPosition.toValue = [NSNumber numberWithDouble:1.0];
-    zPosition.duration = 1.2;
+    zPosition.fromValue = [NSNumber numberWithDouble: (positionValue == RedPocketsViewToFront) ? -1.0 : 1.0];
+    zPosition.toValue = [NSNumber numberWithDouble:(positionValue == RedPocketsViewToFront) ? 1.0 : -1.0];
+    zPosition.duration = durationValue;
 
     CAKeyframeAnimation *rotation = [CAKeyframeAnimation animation];
     rotation.keyPath = @"transform.rotation";
-    rotation.values = @[ @0, @-0.14, @0 ];
-    rotation.duration = 1.2;
+    rotation.values = @[ @0, (positionValue == RedPocketsViewToFront) ? @-0.25 : @0.25, @0 ];
+    rotation.duration = durationValue;
     rotation.timingFunctions = @[
         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]
@@ -287,7 +294,7 @@
     position.keyPath = @"position";
     position.values = @[
         [NSValue valueWithCGPoint:CGPointZero],
-        [NSValue valueWithCGPoint:CGPointMake(-350, 20)],
+        [NSValue valueWithCGPoint:CGPointMake((positionValue == RedPocketsViewToFront) ? -300 : 300, (positionValue == RedPocketsViewToFront) ? 20 : -20)],
         [NSValue valueWithCGPoint:CGPointZero]
     ];
     position.timingFunctions = @[
@@ -295,54 +302,12 @@
         [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]
     ];
     position.additive = YES;
-    position.duration = 1.2;
+    position.duration = durationValue;
     
     CAAnimationGroup *group = [[CAAnimationGroup alloc] init];
     group.animations = @[ zPosition, rotation, position ];
-    group.duration = 1.2;
+    group.duration = durationValue;
     group.repeatCount = 1;
-    
-    [currentView.layer addAnimation:group forKey:@"shuffle"];
-    currentView.layer.zPosition = 1;
-    [self bringSubviewToFront:currentView];
-}
--(void)switchToBackWithView: (UIView*)currentView
-{
-    CABasicAnimation *zPosition = [CABasicAnimation animation];
-    zPosition.keyPath = @"zPosition";
-    zPosition.fromValue = [NSNumber numberWithDouble:1.0];
-    zPosition.toValue = [NSNumber numberWithDouble:-1.0];
-    zPosition.duration = 1.2;
-
-    CAKeyframeAnimation *rotation = [CAKeyframeAnimation animation];
-    rotation.keyPath = @"transform.rotation";
-    rotation.values = @[ @0, @0.14, @0 ];
-    rotation.duration = 1.2;
-    rotation.timingFunctions = @[
-        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]
-    ];
-
-    CAKeyframeAnimation *position = [CAKeyframeAnimation animation];
-    position.keyPath = @"position";
-    position.values = @[
-        [NSValue valueWithCGPoint:CGPointZero],
-        [NSValue valueWithCGPoint:CGPointMake(350, -20)],
-        [NSValue valueWithCGPoint:CGPointZero]
-    ];
-    position.timingFunctions = @[
-        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
-        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]
-    ];
-    position.additive = YES;
-    position.duration = 1.2;
-
-    CAAnimationGroup *group = [[CAAnimationGroup alloc] init];
-    group.animations = @[ zPosition, rotation, position ];
-    group.duration = 1.2;
-    group.repeatCount = 1;
-    
-    
     
 //    CABasicAnimation *makeBiggerAnim=[CABasicAnimation animationWithKeyPath:@"cornerRadius"];
 //    makeBiggerAnim.fromValue=[NSNumber numberWithDouble:20.0];
@@ -365,9 +330,11 @@
 //    group.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
 //    group.animations = @[makeBiggerAnim, fadeAnim, rotateAnim];
     
-
     [currentView.layer addAnimation:group forKey:@"shuffle"];
-
-    currentView.layer.zPosition = -1;
+    currentView.layer.zPosition = (positionValue == RedPocketsViewToFront) ? 1 : -1;
+    if (positionValue == RedPocketsViewToFront)
+    {
+        [self bringSubviewToFront:currentView];
+    }
 }
 @end

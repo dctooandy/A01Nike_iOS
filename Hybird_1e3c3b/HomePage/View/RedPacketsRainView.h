@@ -14,6 +14,10 @@ typedef NS_ENUM(NSInteger, RedPocketsViewStyle) {
     RedPocketsViewBegin = 0,
     RedPocketsViewResult
 };
+typedef NS_ENUM(NSInteger, RedPocketsViewPosition) {
+    RedPocketsViewToFront = 0,
+    RedPocketsViewToBack
+};
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RedPacketsRainView : BTTBaseAnimationPopView
