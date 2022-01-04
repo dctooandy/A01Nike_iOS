@@ -71,7 +71,7 @@ static BTTActivityManager * sharedSingleton;
                     case 3://不在预热也不在活动, 但有配置(月工资弹窗)
                         [weakSelf directToShowYenFenHongPopView];
                     case 4://今天不用再弹弹窗 (什么弹窗都不出现了)
-                        [weakSelf showRedPacketsRainView];
+                        [weakSelf checkTimeForRedPoickets];
                         break;
                     default:
                         break;
@@ -133,17 +133,65 @@ static BTTActivityManager * sharedSingleton;
         }
     }];
 }
-
+- (void)checkTimeForRedPoickets
+{
+    [self checkTime:^(NSString * _Nonnull timeStr) {
+        if (timeStr.length > 0) {
+            if ([self checksStartDate:@"10:00" EndDate:@"10:01" serverTime:timeStr])
+            {
+                [self showRedPacketsRainView];
+            }else if ([self checksStartDate:@"14:00" EndDate:@"14:01" serverTime:timeStr])
+            {
+                [self showRedPacketsRainView];
+            }else
+            {
+                /// 不到时间
+                [self showRedPacketsRainView];
+            }
+        }
+    }];
+}
+-(BOOL)checksStartDate:(NSString *)startTime EndDate:(NSString *)endTime serverTime:(NSString *)serverTime {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    NSDate *startDate = [dateFormatter dateFromString:startTime];
+    NSDate *endDate = [dateFormatter dateFromString:endTime];
+    NSDate *serverDate = [dateFormatter dateFromString:serverTime];
+    // 判断是否大于server时间
+    if (([startDate earlierDate:serverDate] == startDate) &&
+        ([serverDate earlierDate:endDate] == serverDate)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+-(void)checkTime:(CheckTimeCompleteBlock)completeBlock {
+    NSDate *timeDate = [NSDate new];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"hh:mm"];
+    completeBlock([dateFormatter stringFromDate:timeDate]);
+//    [IVNetwork requestPostWithUrl:BTTServerTime paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+//        IVJResponseObject *result = response;
+//        if ([result.head.errCode isEqualToString:@"0000"]) {
+//            NSDate *timeDate = [[NSDate alloc]initWithTimeIntervalSince1970:[result.body longLongValue]];
+//            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//            [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+//            completeBlock([dateFormatter stringFromDate:timeDate]);
+//        } else {
+//            completeBlock(@"");
+//        }
+//    }];
+}
 #pragma mark - 红包雨
 - (void)showRedPacketsRainView
 {
     RedPacketsRainView *alertView = [RedPacketsRainView viewFromXib];
-    
+    [alertView configForRedPocketsView:RedPocketsViewBegin];
+//    [alertView configForRedPocketsView:RedPocketsViewResult];
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-    
     popView.isClickBGDismiss = YES;
     [popView pop];
-    weakSelf(weakSelf)
+    
     [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(0);
     }];

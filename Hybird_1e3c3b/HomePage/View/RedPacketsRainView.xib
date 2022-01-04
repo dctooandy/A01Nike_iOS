@@ -34,20 +34,52 @@
                         <action selector="closeBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Nxa-bR-Ku7"/>
                     </connections>
                 </button>
+                <button hidden="YES" opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eqy-K3-5tk">
+                    <rect key="frame" x="20" y="64" width="92" height="34"/>
+                    <state key="normal" title="集福卡大奖"/>
+                    <connections>
+                        <action selector="showCardsBonus:" destination="iN0-l3-epB" eventType="touchUpInside" id="4aA-Yh-2p3"/>
+                    </connections>
+                </button>
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lLp-Md-ud5">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <subviews>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5lj-Xy-MVW">
+                            <rect key="frame" x="20" y="64" width="37" height="34"/>
+                            <state key="normal" title="返回"/>
+                            <connections>
+                                <action selector="showCardsBonus:" destination="iN0-l3-epB" eventType="touchUpInside" id="DLK-wl-3lB"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemPinkColor"/>
+                    <constraints>
+                        <constraint firstItem="5lj-Xy-MVW" firstAttribute="leading" secondItem="lLp-Md-ud5" secondAttribute="leading" constant="20" id="Jeo-ei-WVy"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.14349870492290978" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="iIQ-1T-EZ8" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="0wc-c3-MOd"/>
                 <constraint firstItem="c8d-eI-hg0" firstAttribute="top" secondItem="QQk-D3-WLJ" secondAttribute="bottom" constant="10" id="9QK-LK-yFQ"/>
+                <constraint firstItem="lLp-Md-ud5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Cdf-w0-Lzx"/>
                 <constraint firstItem="QQk-D3-WLJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Qqi-Iz-wpw"/>
+                <constraint firstAttribute="bottom" secondItem="lLp-Md-ud5" secondAttribute="bottom" id="U8c-hX-IG9"/>
+                <constraint firstItem="Eqy-K3-5tk" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="WpX-1S-acY"/>
+                <constraint firstItem="lLp-Md-ud5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YyI-dt-NFZ"/>
+                <constraint firstAttribute="trailing" secondItem="lLp-Md-ud5" secondAttribute="trailing" id="bdj-Yf-2II"/>
                 <constraint firstItem="QQk-D3-WLJ" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="40" id="e9L-Ji-v0E"/>
+                <constraint firstItem="5lj-Xy-MVW" firstAttribute="top" secondItem="Eqy-K3-5tk" secondAttribute="top" id="g5Q-3T-s24"/>
+                <constraint firstItem="Eqy-K3-5tk" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="20" id="plI-jY-YnK"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="iIQ-1T-EZ8" secondAttribute="trailing" constant="20" id="rGa-Nn-2LK"/>
                 <constraint firstItem="c8d-eI-hg0" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="vUy-s7-uZz"/>
             </constraints>
             <connections>
+                <outlet property="cardsBonusView" destination="lLp-Md-ud5" id="MFh-Rc-dIl"/>
                 <outlet property="closeButton" destination="iIQ-1T-EZ8" id="bq9-Fl-P0L"/>
                 <outlet property="countdownLab" destination="c8d-eI-hg0" id="paM-6t-mST"/>
+                <outlet property="showCardsButton" destination="Eqy-K3-5tk" id="6VY-QL-mwo"/>
                 <outlet property="titleLabel" destination="QQk-D3-WLJ" id="M9e-35-Pyx"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="130.58035714285714"/>
@@ -57,6 +89,9 @@
         <image name="ic_new_year_pop_close_btn" width="38" height="38"/>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

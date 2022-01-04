@@ -11,10 +11,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *countdownLab;
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
+@property (weak, nonatomic) IBOutlet UIView *cardsBonusView;
+@property (weak, nonatomic) IBOutlet UIButton *showCardsButton;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) CALayer *moveLayer;
 @property (nonatomic, assign) NSInteger redPacketsResultCount;
 @property (nonatomic, assign) NSInteger selectedRedPacketNum;
+@property (nonatomic, assign) RedPocketsViewStyle viewStyle;
+@property (nonatomic, weak) UITapGestureRecognizer *tapGesture;
 @end
 
 @implementation RedPacketsRainView
@@ -24,17 +28,75 @@
     self.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickRed:)];
     [self addGestureRecognizer:tap];
-    self.selectedRedPacketNum = 0;
-    [self startTime];
+    _tapGesture = tap;
+    [self.tapGesture setEnabled:NO];
+}
+- (void)configForRedPocketsView:(RedPocketsViewStyle)style
+{
+    _viewStyle = style;
+    switch (self.viewStyle) {
+        case RedPocketsViewBegin:
+            self.selectedRedPacketNum = 0;
+            [self startTime];
+            break;
+        case RedPocketsViewResult:
+            [self.tapGesture setEnabled:NO];
+            self.redPacketsResultCount = 0;
+            [self showResult];
+            break;
+            
+        default:
+            break;
+    }
 }
 - (IBAction)closeBtnAction:(UIButton *)sender {
     if (self.dismissBlock) {
         self.dismissBlock();
     }
 }
+- (IBAction)showCardsBonus:(UIButton*)sender {
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.cardsBonusView setAlpha:(sender.tag == 1) ? 1.0 : 0.0];
+    }];
+}
+
 - (void)startTime
 {
+    weakSelf(weakSelf)
     self.titleLabel.text = @"抢红包啦";
+    __block int timeout = 1;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(_timer, ^{
+        if ( timeout <= 0 )
+        {
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf startRedPackerts];
+                [weakSelf.tapGesture setEnabled:YES];
+            });
+        }
+        else
+        {
+            NSString * titleStr = [NSString stringWithFormat:@"%d",timeout];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.countdownLab.text = titleStr;
+            });
+            timeout--;
+        }
+    });
+    dispatch_resume(_timer);
+}
+- (void)startRedPackerts
+{
+    float t = (arc4random() % 10) + 5;
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:(1/t) target:self selector:@selector(showRain) userInfo:nil repeats:YES];
+    [self.timer fire];
+    //红包下落10秒倒数
+    self.titleLabel.text = @"红包结束倒数计时";
+    
+    weakSelf(weakSelf)
     __block int timeout = 3;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
@@ -44,43 +106,14 @@
         {
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self startRedPackerts];
+                [weakSelf endAnimation];
             });
         }
         else
         {
             NSString * titleStr = [NSString stringWithFormat:@"%d",timeout];
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.countdownLab.text = titleStr;
-            });
-            timeout--;
-        }
-    });
-    dispatch_resume(_timer);
-}
-- (void)startRedPackerts
-{
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:(1/4.0) target:self selector:@selector(showRain) userInfo:nil repeats:YES];
-    [self.timer fire];
-    //红包下落10秒倒数
-    self.titleLabel.text = @"红包结束倒数计时";
-    __block int timeout = 60;
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
-    dispatch_source_set_event_handler(_timer, ^{
-        if ( timeout <= 0 )
-        {
-            dispatch_source_cancel(_timer);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self endAnimation];
-            });
-        }
-        else
-        {
-            NSString * titleStr = [NSString stringWithFormat:@"%d",timeout];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.countdownLab.text = titleStr;
+                weakSelf.countdownLab.text = titleStr;
             });
             timeout--;
         }
@@ -127,7 +160,7 @@
 - (void)endAnimation
 {
     [self.timer invalidate];
-    
+    [self.tapGesture setEnabled:NO];
     for (NSInteger i = 0; i < self.layer.sublayers.count ; i ++)
     {
         CALayer * layer = self.layer.sublayers[i];
@@ -140,6 +173,7 @@
     [self.closeButton setHidden:NO];
     self.titleLabel.text = @"红包加总";
     self.countdownLab.text = [NSString stringWithFormat:@"+%ld金币",(long)self.redPacketsResultCount];
+    [self.showCardsButton setHidden:NO];
 }
 - (void)clickRed:(UITapGestureRecognizer *)sender
 {

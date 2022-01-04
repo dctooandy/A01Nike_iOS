@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
+typedef void (^CheckTimeCompleteBlock)(NSString * timeStr);
 typedef void(^SevenXiCallBack)(NSString * _Nullable response, NSString * _Nullable error);
 typedef void(^PopViewCallBack)(NSString * _Nullable response, NSString * _Nullable error);
 @interface BTTActivityManager : NSObject
