@@ -186,6 +186,7 @@ static BTTActivityManager * sharedSingleton;
 - (void)showRedPacketsRainView
 {
     RedPacketsRainView *alertView = [RedPacketsRainView viewFromXib];
+//    alertView.frame = CGRectMake(0, 0, 350, 280);
     [alertView configForRedPocketsView:RedPocketsViewBegin];
 //    [alertView configForRedPocketsView:RedPocketsViewResult];
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
@@ -193,7 +194,9 @@ static BTTActivityManager * sharedSingleton;
     [popView pop];
     
     [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(0);
+        make.center.mas_equalTo(popView);
+        make.width.equalTo(@350);
+        make.height.equalTo(@400);
     }];
     alertView.dismissBlock = ^{
         [popView dismiss];

@@ -11,6 +11,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *countdownLab;
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
+@property (weak, nonatomic) IBOutlet UIView *redPocketsRainView;
 @property (weak, nonatomic) IBOutlet UIView *cardsBonusView;
 @property (weak, nonatomic) IBOutlet UIButton *showCardsButton;
 @property (nonatomic, strong) NSTimer *timer;
@@ -18,7 +19,7 @@
 @property (nonatomic, assign) NSInteger redPacketsResultCount;
 @property (nonatomic, assign) NSInteger selectedRedPacketNum;
 @property (nonatomic, assign) RedPocketsViewStyle viewStyle;
-@property (nonatomic, weak) UITapGestureRecognizer *tapGesture;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @end
 
 @implementation RedPacketsRainView
@@ -27,7 +28,7 @@
     [super awakeFromNib];
     self.userInteractionEnabled = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickRed:)];
-    [self addGestureRecognizer:tap];
+    
     _tapGesture = tap;
     [self.tapGesture setEnabled:NO];
 }
@@ -57,7 +58,10 @@
 - (IBAction)showCardsBonus:(UIButton*)sender {
     [UIView animateWithDuration:0.3 animations:^{
         [self.cardsBonusView setAlpha:(sender.tag == 1) ? 1.0 : 0.0];
+        [self.redPocketsRainView setAlpha:(sender.tag == 1) ? 0.0 : 1.0];
     }];
+//    [self switchToBackWithView:(sender.tag == 1) ? self.redPocketsRainView : self.cardsBonusView];
+//    [self switchToFrontWithView:(sender.tag == 1) ? self.cardsBonusView : self.redPocketsRainView];
 }
 
 - (void)startTime
@@ -90,6 +94,7 @@
 }
 - (void)startRedPackerts
 {
+    [self.redPocketsRainView addGestureRecognizer:self.tapGesture];
     float t = (arc4random() % 10) + 5;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:(1/t) target:self selector:@selector(showRain) userInfo:nil repeats:YES];
     [self.timer fire];
@@ -97,7 +102,7 @@
     self.titleLabel.text = @"红包结束倒数计时";
     
     weakSelf(weakSelf)
-    __block int timeout = 3;
+    __block int timeout = 1;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
     dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
@@ -131,15 +136,15 @@
     self.moveLayer.anchorPoint = CGPointMake(0, 0);
     self.moveLayer.position = CGPointMake(0, -62.5 );
     self.moveLayer.contents = (id)imageV.image.CGImage;
-    [self.layer addSublayer:self.moveLayer];
+    [self.redPocketsRainView.layer addSublayer:self.moveLayer];
     
     [self addAnimation];
 }
 - (void)addAnimation
 {
     CAKeyframeAnimation * moveAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-    NSValue * A = [NSValue valueWithCGPoint:CGPointMake(arc4random() % 414, 0)];
-    NSValue * B = [NSValue valueWithCGPoint:CGPointMake(arc4random() % 414, SCREEN_HEIGHT)];
+    NSValue * A = [NSValue valueWithCGPoint:CGPointMake(arc4random() % (int)self.width, 0)];
+    NSValue * B = [NSValue valueWithCGPoint:CGPointMake(arc4random() % (int)self.width, (int)self.height)];
     moveAnimation.values = @[A,B];
     moveAnimation.duration = arc4random() % 200 / 100.0 + 3.5;
     moveAnimation.repeatCount = 1;
@@ -163,7 +168,8 @@
     [self.tapGesture setEnabled:NO];
     for (NSInteger i = 0; i < self.layer.sublayers.count ; i ++)
     {
-        CALayer * layer = self.layer.sublayers[i];
+        CALayer * layer = self.redPocketsRainView.layer.sublayers[i];
+        [layer setHidden:YES];
         [layer removeAllAnimations];
     }
     [self showResult];
@@ -179,10 +185,11 @@
 {
     CGPoint point = [sender locationInView:self];
     
-    for (int i = 0 ; i < self.layer.sublayers.count ; i ++)
+    for (int i = 0 ; i < self.redPocketsRainView.layer.sublayers.count ; i ++)
     {
-        CALayer * layer = self.layer.sublayers[i];
-        if ([[layer presentationLayer] hitTest:point] != nil && self.selectedRedPacketNum != i)
+        CALayer * layer = self.redPocketsRainView.layer.sublayers[i];
+        
+        if ([[layer presentationLayer] hitTest:point] != nil && self.selectedRedPacketNum != i && ![layer isKindOfClass:[UILabel layerClass]])
         {
             NSLog(@"%d",i);
             self.selectedRedPacketNum = i;
@@ -203,7 +210,7 @@
             [layer removeAnimationForKey:@"p"];
             CAKeyframeAnimation * moveAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
             NSValue * A = [NSValue valueWithCGPoint:CGPointMake(point.x, point.y)];
-            NSValue * B = [NSValue valueWithCGPoint:CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT)];
+            NSValue * B = [NSValue valueWithCGPoint:CGPointMake(self.width/2, self.height)];
             moveAnimation.values = @[A,B];
             moveAnimation.duration = 1.0;
             moveAnimation.repeatCount = 1;
@@ -213,7 +220,7 @@
             UIView * alertView = [UIView new];
             alertView.layer.cornerRadius = 5;
             alertView.frame = CGRectMake(point.x - 50, point.y, 100, 30);
-            [self addSubview:alertView];
+            [self.redPocketsRainView addSubview:alertView];
             
             UILabel * label = [UILabel new];
             label.font = [UIFont systemFontOfSize:17];
@@ -258,5 +265,109 @@
             }];
         }
     }
+}
+-(void)switchToFrontWithView: (UIView*)currentView
+{
+    CABasicAnimation *zPosition = [CABasicAnimation animation];
+    zPosition.keyPath = @"zPosition";
+    zPosition.fromValue = [NSNumber numberWithDouble:-1.0];
+    zPosition.toValue = [NSNumber numberWithDouble:1.0];
+    zPosition.duration = 1.2;
+
+    CAKeyframeAnimation *rotation = [CAKeyframeAnimation animation];
+    rotation.keyPath = @"transform.rotation";
+    rotation.values = @[ @0, @-0.14, @0 ];
+    rotation.duration = 1.2;
+    rotation.timingFunctions = @[
+        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]
+    ];
+
+    CAKeyframeAnimation *position = [CAKeyframeAnimation animation];
+    position.keyPath = @"position";
+    position.values = @[
+        [NSValue valueWithCGPoint:CGPointZero],
+        [NSValue valueWithCGPoint:CGPointMake(-350, 20)],
+        [NSValue valueWithCGPoint:CGPointZero]
+    ];
+    position.timingFunctions = @[
+        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]
+    ];
+    position.additive = YES;
+    position.duration = 1.2;
+    
+    CAAnimationGroup *group = [[CAAnimationGroup alloc] init];
+    group.animations = @[ zPosition, rotation, position ];
+    group.duration = 1.2;
+    group.repeatCount = 1;
+    
+    [currentView.layer addAnimation:group forKey:@"shuffle"];
+    currentView.layer.zPosition = 1;
+    [self bringSubviewToFront:currentView];
+}
+-(void)switchToBackWithView: (UIView*)currentView
+{
+    CABasicAnimation *zPosition = [CABasicAnimation animation];
+    zPosition.keyPath = @"zPosition";
+    zPosition.fromValue = [NSNumber numberWithDouble:1.0];
+    zPosition.toValue = [NSNumber numberWithDouble:-1.0];
+    zPosition.duration = 1.2;
+
+    CAKeyframeAnimation *rotation = [CAKeyframeAnimation animation];
+    rotation.keyPath = @"transform.rotation";
+    rotation.values = @[ @0, @0.14, @0 ];
+    rotation.duration = 1.2;
+    rotation.timingFunctions = @[
+        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]
+    ];
+
+    CAKeyframeAnimation *position = [CAKeyframeAnimation animation];
+    position.keyPath = @"position";
+    position.values = @[
+        [NSValue valueWithCGPoint:CGPointZero],
+        [NSValue valueWithCGPoint:CGPointMake(350, -20)],
+        [NSValue valueWithCGPoint:CGPointZero]
+    ];
+    position.timingFunctions = @[
+        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut],
+        [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]
+    ];
+    position.additive = YES;
+    position.duration = 1.2;
+
+    CAAnimationGroup *group = [[CAAnimationGroup alloc] init];
+    group.animations = @[ zPosition, rotation, position ];
+    group.duration = 1.2;
+    group.repeatCount = 1;
+    
+    
+    
+//    CABasicAnimation *makeBiggerAnim=[CABasicAnimation animationWithKeyPath:@"cornerRadius"];
+//    makeBiggerAnim.fromValue=[NSNumber numberWithDouble:20.0];
+//    makeBiggerAnim.toValue=[NSNumber numberWithDouble:40.0];
+//
+//    CABasicAnimation *fadeAnim=[CABasicAnimation animationWithKeyPath:@"opacity"];
+//    fadeAnim.fromValue=[NSNumber numberWithDouble:1.0];
+//    fadeAnim.toValue=[NSNumber numberWithDouble:0.0];
+//
+//    CABasicAnimation *rotateAnim=[CABasicAnimation animationWithKeyPath:@"transform.rotation.y"];
+//    rotateAnim.fromValue=[NSNumber numberWithDouble:0.0];
+//    rotateAnim.toValue=[NSNumber numberWithDouble:M_PI_4];
+//
+//    // Customizing the group with duration etc, will apply to all the
+//    // animations in the group
+//    CAAnimationGroup *group = [CAAnimationGroup animation];
+//    group.duration = 0.2;
+//    group.repeatCount = 1;
+//    group.autoreverses = YES;
+//    group.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//    group.animations = @[makeBiggerAnim, fadeAnim, rotateAnim];
+    
+
+    [currentView.layer addAnimation:group forKey:@"shuffle"];
+
+    currentView.layer.zPosition = -1;
 }
 @end
