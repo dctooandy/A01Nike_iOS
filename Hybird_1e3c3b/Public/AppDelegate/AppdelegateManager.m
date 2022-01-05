@@ -31,19 +31,26 @@
 - (NSArray *)gateways
 {
     if (!_gateways) {
-        switch (EnvirmentType) {
-            case 0:
-                return @[@"http://www.pt-gateway.com/_glaxy_1e3c3b_/"];
-                break;
-            case 1:
-                return @[@"http://fm.918rr.com/_glaxy_1e3c3b_/"];
-                break;
-            case 2:
-                return @[@"https://wrd.58baili.com/pro/_glaxy_1e3c3b_/", @"https://m.pkyorjhn.com:9188/_glaxy_1e3c3b_/"];
-                break;
-            default:
-                return @[@"http://www.pt-gateway.com/_glaxy_1e3c3b_/"];
-                break;
+        _gateways = [IVCacheWrapper objectForKey:IVCacheAllGatewayKey];
+        if (_gateways.count > 0)
+        {
+            return _gateways;
+        }else
+        {
+            switch (EnvirmentType) {
+                case 0:
+                    _gateways = @[@"http://www.pt-gateway.com/_glaxy_1e3c3b_/"];
+                    break;
+                case 1:
+                    _gateways = @[@"http://fm.918rr.com/_glaxy_1e3c3b_/"];
+                    break;
+                case 2:
+                    _gateways = @[@"https://wrd.58baili.com/pro/_glaxy_1e3c3b_/", @"https://m.pkyorjhn.com:9188/_glaxy_1e3c3b_/"];
+                    break;
+                default:
+                    _gateways = @[@"http://www.pt-gateway.com/_glaxy_1e3c3b_/"];
+                    break;
+            }
         }
     }
     return _gateways;
@@ -55,19 +62,24 @@
 - (NSArray *)websides
 {
     if (!_websides)
+        _websides = [IVCacheWrapper objectForKey:IVCacheAllH5DomainsKey];
+    if (_websides.count > 0)
+    {
+        return _websides;
+    }else
     {
         switch (EnvirmentType) {
             case 0:
-                return @[@"http://m.a01.com/"];
+                _websides = @[@"http://m.a01.com/"];
                 break;
             case 1:
-                return @[@"http://fm.918rr.com/"];
+                _websides = @[@"http://fm.918rr.com/"];
                 break;
             case 2:
-                return @[@"https://wrd.58baili.com/pro/"];
+                _websides = @[@"https://wrd.58baili.com/pro/"];
                 break;
             default:
-                return @[@"http://m.a01.com/"];
+                _websides = @[@"http://m.a01.com/"];
                 break;
         }
     }
