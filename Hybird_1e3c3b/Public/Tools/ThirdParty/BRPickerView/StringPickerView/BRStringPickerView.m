@@ -421,6 +421,8 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
         }
         if (containObject == true)
         {
+            self.selectValue = self.dataSourceArr[0];
+            self.selectIndex = 0;
             [self.pickerView reloadAllComponents];
             [self.pickerView selectRow:0 inComponent:0 animated:YES];
         }else
@@ -436,6 +438,8 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
     {
         self.dataSourceArr = self.originDataSourceArr.mutableCopy;
         self.iconDataSourceArr = self.originIconDataSourceArr.mutableCopy;
+        self.selectValue = self.dataSourceArr[0];
+        self.selectIndex = 0;
         [self.pickerView reloadAllComponents];
         [self.pickerView selectRow:0 inComponent:0 animated:YES];
     }
