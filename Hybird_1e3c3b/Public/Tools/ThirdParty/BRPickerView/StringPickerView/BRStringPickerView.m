@@ -249,7 +249,7 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
         _pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, topSpace, SCREEN_WIDTH, kPickerHeight)];
         _pickerView.backgroundColor = [UIColor whiteColor];
         // 设置子视图的大小随着父视图变化
-        _pickerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+//        _pickerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
         _pickerView.dataSource = self;
         _pickerView.delegate = self;
         _pickerView.showsSelectionIndicator = YES;

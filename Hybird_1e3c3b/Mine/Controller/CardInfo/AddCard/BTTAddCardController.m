@@ -145,6 +145,13 @@
             self.bankNamesArr = [[NSMutableArray alloc] initWithArray:banks];
             self.bankIconArr = [[NSMutableArray alloc] initWithCapacity:self.bankNamesArr.count];
         }
+//        BRStringPickerView *alertView = [[BRStringPickerView alloc] initWithFrame:self.view.frame];
+//
+//        BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+//
+//        popView.isClickBGDismiss = YES;
+//        [popView pop];
+       
         [BRStringPickerView showStringPickerWithImageURLArr:self.bankIconArr
                                                   WithTitle:@"选择收款银行"
                                                  dataSource:self.bankNamesArr
