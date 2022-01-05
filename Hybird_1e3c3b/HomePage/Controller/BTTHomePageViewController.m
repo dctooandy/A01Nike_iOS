@@ -73,6 +73,8 @@
         [BTTActivityManager sharedInstance];
     } else {
         self.isLogin = NO;
+        //弹窗
+        [self showHomePopView];
     }
     
     [self setupNav];
@@ -105,6 +107,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestRedbag) name:LoginSuccessNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadBanner) name:LoginSuccessNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkHasShow) name:LogoutSuccessNotification object:nil];
 }
 
 #pragma mark - viewDidAppear
@@ -146,9 +149,6 @@
     [self showAssistiveButton];
     [self.collectionView reloadData];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    if ([IVNetwork savedUserInfo]) {
-        [self showHomePopView];
-    }
     [self refreshDatasOfHomePage];
 }
 
@@ -225,6 +225,8 @@
 //            }
 //        }
 //    }];
+    //弹窗
+    [self showHomePopView];
 }
 
 - (void)showInsideMessage{
