@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BTTHomePageViewController : BTTCollectionViewController
 
 @property (nonatomic, strong) AssistiveButton * assistiveButton;
+@property (nonatomic, strong) AssistiveButton * redPocketsAssistiveButton;
 
 @property (nonatomic, assign) BOOL isLogin;
 

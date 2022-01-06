@@ -195,9 +195,10 @@ static BTTActivityManager * sharedSingleton;
     [popView pop];
     
     [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(popView);
-        make.width.equalTo(@350);
-        make.height.equalTo(@400);
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+//        make.center.mas_equalTo(popView);
+//        make.width.equalTo(@350);
+//        make.height.equalTo(@400);
     }];
     alertView.dismissBlock = ^{
         [popView dismiss];

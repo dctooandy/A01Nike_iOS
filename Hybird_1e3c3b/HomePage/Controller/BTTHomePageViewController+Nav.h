@@ -43,6 +43,8 @@ NS_ASSUME_NONNULL_BEGIN
 //-(void)setUpAssistiveButton;
 -(void)setUpAssistiveButton:(BTTAssistiveButtonModel* )model completed:(ButtonCallBack _Nullable)completionBlock;
 
+-(void)setUpCustomAssistiveButtonCompleted:(ButtonCallBack _Nullable)completionBlock;
+
 -(void)showAssistiveButton;
 
 @end

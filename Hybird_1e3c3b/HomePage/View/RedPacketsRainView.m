@@ -56,19 +56,19 @@
     }
 }
 - (IBAction)showCardsBonus:(UIButton*)sender {
-//    [UIView animateWithDuration:0.3 animations:^{
-//        [self.cardsBonusView setAlpha:(sender.tag == 1) ? 1.0 : 0.0];
-//        [self.redPocketsRainView setAlpha:(sender.tag == 1) ? 0.0 : 1.0];
-//    }];
-    if (sender.tag == 1)
-    {
-        [self switchWithView:self.redPocketsRainView withPosition:RedPocketsViewToBack];
-        [self switchWithView:self.cardsBonusView withPosition:RedPocketsViewToFront];
-    }else
-    {
-        [self switchWithView:self.redPocketsRainView withPosition:RedPocketsViewToFront];
-        [self switchWithView:self.cardsBonusView withPosition:RedPocketsViewToBack];
-    }
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.cardsBonusView setAlpha:(sender.tag == 1) ? 1.0 : 0.0];
+        [self.redPocketsRainView setAlpha:(sender.tag == 1) ? 0.0 : 1.0];
+    }];
+//    if (sender.tag == 1)
+//    {
+//        [self switchWithView:self.redPocketsRainView withPosition:RedPocketsViewToBack];
+//        [self switchWithView:self.cardsBonusView withPosition:RedPocketsViewToFront];
+//    }else
+//    {
+//        [self switchWithView:self.redPocketsRainView withPosition:RedPocketsViewToFront];
+//        [self switchWithView:self.cardsBonusView withPosition:RedPocketsViewToBack];
+//    }
     
 }
 
@@ -76,7 +76,7 @@
 {
     weakSelf(weakSelf)
     self.titleLabel.text = @"抢红包啦";
-    __block int timeout = 1;
+    __block int timeout = 0;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
     dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
@@ -110,7 +110,7 @@
     self.titleLabel.text = @"红包结束倒数计时";
     
     weakSelf(weakSelf)
-    __block int timeout = 1;
+    __block int timeout = 0;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
     dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
@@ -212,7 +212,7 @@
                 newPacketIV.image = [UIImage imageNamed:@"dsb_rb_close"];
                 newPacketIV.frame = CGRectMake(0, 0, 45.5, 76.5);
             }
-//            layer.contents = (id)newPacketIV.image.CGImage;
+            layer.contents = (id)newPacketIV.image.CGImage;
             [layer removeAnimationForKey:@"p"];
             CAKeyframeAnimation * moveAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
             NSValue * A = [NSValue valueWithCGPoint:CGPointMake(point.x, point.y)];

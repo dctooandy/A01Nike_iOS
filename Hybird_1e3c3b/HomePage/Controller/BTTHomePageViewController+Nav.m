@@ -38,7 +38,43 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 
 @end
 @implementation BTTHomePageViewController (Nav)
-
+-(void)setUpCustomAssistiveButtonCompleted:(ButtonCallBack _Nullable)completionBlock
+{
+    UIImageView *imageView = [[UIImageView alloc] init];
+    [imageView sd_setImageWithURL:[NSURL URLWithString:@"default4"] completed:^(NSData * _Nullable data,UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        
+        //        CGFloat assistiveBtnHeight = 132 + [UIImage imageNamed:@"ic_918_assistive_close_btn"].size.height;
+        //        CGFloat loginBtnViewHeight = 87;
+        //        CGFloat postionY = SCREEN_HEIGHT - kTabbarHeight - assistiveBtnHeight/2 - loginBtnViewHeight;
+    
+        if ([imageURL.description containsString:@"gif"])
+        {
+            UIImage * backgroundImage = [UIImage sd_animatedGIFWithData:data];
+            self.redPocketsAssistiveButton = [[AssistiveButton alloc] initMainBtnWithCustomImage:backgroundImage highlightImage:nil];
+        }else
+        {
+            self.redPocketsAssistiveButton = [[AssistiveButton alloc] initMainBtnWithCustomImage:imageView.image highlightImage:nil];
+        }
+        //主按鈕可移動或移動後回彈跟不可移動
+        self.redPocketsAssistiveButton.positionMode = SpreadPositionModeNone;
+        weakSelf(weakSelf);
+        [self.redPocketsAssistiveButton setMainButtonClickActionBlock:^{
+            weakSelf.redPocketsAssistiveButton.hidden = true;
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            //        vc.webConfigModel.url = @"/activity_pages/anniversary";
+            vc.webConfigModel.url = @"/activity_pages/interest30";// 吃model的资料
+            vc.webConfigModel.newView = YES;
+            vc.webConfigModel.theme = @"outside";
+            //        vc.title = @"博天堂周年庆典";
+            vc.title = @"过夜利息";// 吃model的资料
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }];
+        [self.redPocketsAssistiveButton setCloseBtnActionBlock:^{
+            [weakSelf.redPocketsAssistiveButton removeFromSuperview];
+        }];
+        completionBlock();
+    }];
+}
 -(void)setUpAssistiveButton:(BTTAssistiveButtonModel* )model completed:(ButtonCallBack _Nullable)completionBlock {
     if (![model.isShow isEqualToString:@"0"])
     {

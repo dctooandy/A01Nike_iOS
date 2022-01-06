@@ -98,6 +98,11 @@
             }
         }];
     }];
+    [self setUpCustomAssistiveButtonCompleted:^{
+        if (self.redPocketsAssistiveButton != nil) {
+            [weakSelf.view addSubview:weakSelf.redPocketsAssistiveButton];
+        }
+    }];
     [self checkLoginVersion];
 
 //    [self setupFloatWindow];

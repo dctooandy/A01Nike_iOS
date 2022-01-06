@@ -32,6 +32,7 @@ typedef void (^CloseBtnActionBlock)(void);
 @property (copy, nonatomic) MainButtonClickActionBlock mainButtonClickActionBlock;
 @property (copy, nonatomic) CloseBtnActionBlock closeBtnActionBlock;
 -(instancetype)initMainBtnWithBackgroundImage:(UIImage *)backgroundImage highlightImage:(UIImage *)highlightImage position:(CGPoint)position;
+-(instancetype)initMainBtnWithCustomImage:(UIImage *)backgroundImage highlightImage:(UIImage *)highlightImage;
 
 @end
 
