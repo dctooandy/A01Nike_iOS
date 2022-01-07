@@ -8,6 +8,7 @@
 
 #import "BTTForgetPasswordStepTwoController+LoadData.h"
 #import "BTTMeMainModel.h"
+#import "IVOtherInfoModel.h"
 
 @implementation BTTForgetPasswordStepTwoController (LoadData)
 
@@ -19,6 +20,11 @@
     params[BTTLoginName] = account;
     params[@"use"] = @4;
     params[@"validateId"] = self.validateId;
+    /// 加上 agentID判斷
+    IVOtherInfoModel *infoModel = [[IVOtherInfoModel alloc] init];
+    if (infoModel.agentId.length != 0) {
+        [IVHttpManager shareManager].parentId = infoModel.agentId;  // 渠道号
+    }
     NSString * url = self.findType == BTTFindWithPhone ? BTTStepOneSendCode:BTTEmailSendCodeLoginName;
     [self showLoading];
     [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {

@@ -14,6 +14,7 @@
 #import "BTTBindingMobileTwoCell.h"
 #import "BTTChangeMobileSuccessController.h"
 #import "IVRsaEncryptWrapper.h"
+#import "IVOtherInfoModel.h"
 @interface BTTBindEmailController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, copy) NSString *messageId;
 @property (nonatomic, copy) NSString *validateId;
@@ -226,6 +227,11 @@
         default:
             params[@"use"] = @"12";
             break;
+    }
+    /// 加上 agentID判斷
+    IVOtherInfoModel *infoModel = [[IVOtherInfoModel alloc] init];
+    if (infoModel.agentId.length != 0) {
+        [IVHttpManager shareManager].parentId = infoModel.agentId;  // 渠道号
     }
     weakSelf(weakSelf)
     [MBProgressHUD showLoadingSingleInView:self.view animated:YES];
