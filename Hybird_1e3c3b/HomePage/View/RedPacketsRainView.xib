@@ -90,10 +90,10 @@
             <connections>
                 <outlet property="cardsBonusView" destination="lLp-Md-ud5" id="MFh-Rc-dIl"/>
                 <outlet property="closeButton" destination="iIQ-1T-EZ8" id="bq9-Fl-P0L"/>
-                <outlet property="countdownLab" destination="c8d-eI-hg0" id="paM-6t-mST"/>
+                <outlet property="countdownLab" destination="c8d-eI-hg0" id="weW-1S-jhW"/>
                 <outlet property="redPocketsRainView" destination="5j4-AX-VrT" id="t8Q-i3-s8u"/>
                 <outlet property="showCardsButton" destination="Eqy-K3-5tk" id="6VY-QL-mwo"/>
-                <outlet property="titleLabel" destination="QQk-D3-WLJ" id="M9e-35-Pyx"/>
+                <outlet property="titleLabel" destination="QQk-D3-WLJ" id="wR9-XZ-j10"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="130.58035714285714"/>
         </view>

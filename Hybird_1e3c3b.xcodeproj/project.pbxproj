@@ -609,6 +609,8 @@
 		7629DCFE268C30D000CF758C /* BTTUserForzenVerityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629DCFD268C30D000CF758C /* BTTUserForzenVerityViewController.m */; };
 		7629DDB5268D4DD700CF758C /* BTTUserForzenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629DDB4268D4DD700CF758C /* BTTUserForzenManager.m */; };
 		76485F182783F931004EA51E /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
+		7651991F27882DAE006A59BF /* RedPacketsPreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651991E27882DAE006A59BF /* RedPacketsPreView.m */; };
+		7651992127882DC9006A59BF /* RedPacketsPreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7651992027882DC9006A59BF /* RedPacketsPreView.xib */; };
 		765C64EC2782B76500A6BC34 /* RedPacketsRainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 765C64EB2782B76500A6BC34 /* RedPacketsRainView.m */; };
 		765C64EE2782B7FE00A6BC34 /* RedPacketsRainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 765C64ED2782B7FE00A6BC34 /* RedPacketsRainView.xib */; };
 		7662C1EA2758E35D007A9E84 /* BTTCheckDomainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7662C1E92758E35D007A9E84 /* BTTCheckDomainModel.m */; };
@@ -1883,6 +1885,9 @@
 		7629DCFD268C30D000CF758C /* BTTUserForzenVerityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUserForzenVerityViewController.m; sourceTree = "<group>"; };
 		7629DDB3268D4DD700CF758C /* BTTUserForzenManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTUserForzenManager.h; sourceTree = "<group>"; };
 		7629DDB4268D4DD700CF758C /* BTTUserForzenManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTUserForzenManager.m; sourceTree = "<group>"; };
+		7651991D27882DAE006A59BF /* RedPacketsPreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedPacketsPreView.h; sourceTree = "<group>"; };
+		7651991E27882DAE006A59BF /* RedPacketsPreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedPacketsPreView.m; sourceTree = "<group>"; };
+		7651992027882DC9006A59BF /* RedPacketsPreView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedPacketsPreView.xib; sourceTree = "<group>"; };
 		765C64EA2782B76500A6BC34 /* RedPacketsRainView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedPacketsRainView.h; sourceTree = "<group>"; };
 		765C64EB2782B76500A6BC34 /* RedPacketsRainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedPacketsRainView.m; sourceTree = "<group>"; };
 		765C64ED2782B7FE00A6BC34 /* RedPacketsRainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedPacketsRainView.xib; sourceTree = "<group>"; };
@@ -3596,6 +3601,9 @@
 				765C64EA2782B76500A6BC34 /* RedPacketsRainView.h */,
 				765C64EB2782B76500A6BC34 /* RedPacketsRainView.m */,
 				765C64ED2782B7FE00A6BC34 /* RedPacketsRainView.xib */,
+				7651991D27882DAE006A59BF /* RedPacketsPreView.h */,
+				7651991E27882DAE006A59BF /* RedPacketsPreView.m */,
+				7651992027882DC9006A59BF /* RedPacketsPreView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5279,6 +5287,7 @@
 				3AF1B81A21AF994A00BF8C3A /* BTTVideoGamesFooterCell.xib in Resources */,
 				41A09D3825E4F4BD00255681 /* BTTDifferentLocPopView.xib in Resources */,
 				3A34F79F21B7A9DA007BC4D4 /* BTTHomePageFooterCell.xib in Resources */,
+				7651992127882DC9006A59BF /* RedPacketsPreView.xib in Resources */,
 				415CA1F024E53B0B005E0E9F /* Assets.xcassets in Resources */,
 				3A11AE082181C1B200B1AFF4 /* BTTWithdrawalSuccessCell.xib in Resources */,
 				3A5F7A9B21A8E71100128E8B /* BTTXimaSuccessItemCell.xib in Resources */,
@@ -5575,6 +5584,7 @@
 				7675705A26A9657A0065F99B /* BTTPopViewModel.m in Sources */,
 				4146810626999F250093B610 /* BTTBindNameAndPhonePopView.m in Sources */,
 				76F8638E26E0B5F700320B60 /* BTTVIPClubPageViewController+LoadData.m in Sources */,
+				7651991F27882DAE006A59BF /* RedPacketsPreView.m in Sources */,
 				3AD9CF72216F3D6800685B43 /* BTTHomePageAppsCell.m in Sources */,
 				3A7391CC230CD12A00E2DFD5 /* BTTRegisterCheckPopView.m in Sources */,
 				EAA4811B21ABD265000C0273 /* BTTAGQJViewController.m in Sources */,
