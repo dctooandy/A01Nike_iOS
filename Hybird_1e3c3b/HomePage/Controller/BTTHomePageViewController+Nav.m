@@ -42,11 +42,6 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 {
     UIImageView *imageView = [[UIImageView alloc] init];
     [imageView sd_setImageWithURL:[NSURL URLWithString:@"default4"] completed:^(NSData * _Nullable data,UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-        
-        //        CGFloat assistiveBtnHeight = 132 + [UIImage imageNamed:@"ic_918_assistive_close_btn"].size.height;
-        //        CGFloat loginBtnViewHeight = 87;
-        //        CGFloat postionY = SCREEN_HEIGHT - kTabbarHeight - assistiveBtnHeight/2 - loginBtnViewHeight;
-    
         if ([imageURL.description containsString:@"gif"])
         {
             UIImage * backgroundImage = [UIImage sd_animatedGIFWithData:data];

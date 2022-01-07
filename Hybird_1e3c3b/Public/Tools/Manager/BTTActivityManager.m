@@ -38,6 +38,44 @@ static BTTActivityManager * sharedSingleton;
 - (void)setNoti {
 
 }
+- (void)checkTimeRedPacketRainWithCompletion:(RedPacketCallBack _Nullable)redPacketBlock
+                       WithDefaultCompletion:(RedPacketCallBack _Nullable)defaultBlock
+{
+    weakSelf(weakSelf)
+    [self serverTime:^(NSString *timeStr) {
+        if (timeStr.length > 0)
+        {
+            if ([PublicMethod checksStartDate:@"2021-02-01" EndDate:@"2022-02-07" serverTime:timeStr])
+            {
+                //不到时间,预热
+                if (redPacketBlock)
+                {
+                    redPacketBlock(nil,nil);
+                }
+            }else if ([PublicMethod checksStartDate:@"2022-02-01" EndDate:@"2022-02-07" serverTime:timeStr])
+            {
+                // 活动期间
+                if (redPacketBlock)
+                {
+                    redPacketBlock(@"1",nil);
+                }
+            }else
+            {
+                // 过了活动期
+                if (defaultBlock)
+                {
+                    defaultBlock(nil,nil);
+                }
+            }
+        }
+    }];
+}
+-(void)serverTime:(CheckTimeCompleteBlock)completeBlock {
+    NSDate *timeDate = [NSDate new];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    completeBlock([dateFormatter stringFromDate:timeDate]);
+}
 
 - (void)checkPopViewWithCompletionBlock:(PopViewCallBack _Nullable)completionBlock {
     //等待正确API参数
@@ -88,42 +126,6 @@ static BTTActivityManager * sharedSingleton;
                     completionBlock(nil,[error description]);
                 }
             }
-
-//            if (self.popModel.isShow)//0 不弹窗,1五重礼,2月分红
-//            {
-//                if (self.popModel.image){
-//                    weakSelf.imageUrlString = self.popModel.image;
-//                }
-//                if (self.popModel.link){
-//                    weakSelf.linkString = self.popModel.link;
-//                }
-//                int isShowType = [self.popModel.isShow intValue];
-                //测试
-//                 isShowType = 1;
-//                switch (isShowType) {
-//                    case 0://不弹窗
-//                        break;
-//                    case 1://一般彈窗
-//                        [weakSelf directToShowDefaultPopView];
-//                        break;
-//                    case 2://月分红
-//                        [weakSelf directToShowYenFenHongPopView];
-//                        break;
-//                    default:
-//                        break;
-//                }
-//                if (completionBlock)
-//                {
-//                    NSString * isShowString = [NSString stringWithFormat:@"%d",isShowType];
-//                    completionBlock(isShowString,[error description]);
-//                }
-
-//            } else {
-//                if (completionBlock)
-//                {
-//                    completionBlock(nil,[error description]);
-//                }
-//            }
         }else{
             [MBProgressHUD showError:result.head.errMsg toView:nil];
             if (completionBlock)

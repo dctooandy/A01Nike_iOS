@@ -90,20 +90,7 @@
         NSLog(@"下拉刷新");
         [strongSelf refreshDatasOfHomePage];
     }];
-    //悬浮按钮设定
-    [self loadAssistiveDataWithBlock:^(BTTAssistiveButtonModel * _Nonnull model) {
-        [weakSelf setUpAssistiveButton:model completed:^{
-            if (self.assistiveButton != nil) {
-                [weakSelf.view addSubview:weakSelf.assistiveButton];
-            }
-        }];
-    }];
-    [self setUpCustomAssistiveButtonCompleted:^{
-        if (self.redPocketsAssistiveButton != nil) {
-            [weakSelf.view addSubview:weakSelf.redPocketsAssistiveButton];
-        }
-    }];
-    [[BTTActivityManager sharedInstance] checkTimeForRedPoickets];
+    [self assistiveBtnAndActivitySetting];
     [self checkLoginVersion];
 
 //    [self setupFloatWindow];
@@ -179,7 +166,36 @@
 //        [[NSUserDefaults standardUserDefaults] synchronize];
 //    }
 }
-
+- (void)assistiveBtnAndActivitySetting
+{
+    weakSelf(weakSelf)
+    [[BTTActivityManager sharedInstance] checkTimeRedPacketRainWithCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
+        // 悬浮按钮
+        [weakSelf setUpCustomAssistiveButtonCompleted:^{
+            if (weakSelf.redPocketsAssistiveButton != nil) {
+                [weakSelf.view addSubview:weakSelf.redPocketsAssistiveButton];
+            }
+        }];
+        // 红包雨活动
+        if ([response isEqualToString:@"1"])
+        {
+            // 活动期
+        }else
+        {
+            // 预热
+        }
+    } WithDefaultCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
+        // 一般活动
+        // 悬浮按钮设定
+        [weakSelf loadAssistiveDataWithBlock:^(BTTAssistiveButtonModel * _Nonnull model) {
+            [weakSelf setUpAssistiveButton:model completed:^{
+                if (weakSelf.assistiveButton != nil) {
+                    [weakSelf.view addSubview:weakSelf.assistiveButton];
+                }
+            }];
+        }];
+    }];
+}
 -(void)checkLoginVersion {
     if ([IVNetwork savedUserInfo]) {
         NSDictionary *infoDic = [[NSBundle mainBundle] infoDictionary];

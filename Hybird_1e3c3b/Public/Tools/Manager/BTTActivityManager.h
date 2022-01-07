@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 typedef void (^CheckTimeCompleteBlock)(NSString * timeStr);
-typedef void(^SevenXiCallBack)(NSString * _Nullable response, NSString * _Nullable error);
+typedef void(^RedPacketCallBack)(NSString * _Nullable response, NSString * _Nullable error);
 typedef void(^PopViewCallBack)(NSString * _Nullable response, NSString * _Nullable error);
 @interface BTTActivityManager : NSObject
 SingletonInterface(BTTActivityManager);
@@ -23,7 +23,7 @@ SingletonInterface(BTTActivityManager);
 - (void)checkTimeForRedPoickets;
 
 // 检查客制活动期间
-- (void)checkTimeForRedPoickets;
+- (void)checkTimeRedPacketRainWithCompletion:(RedPacketCallBack _Nullable)redPacketBlock WithDefaultCompletion:(RedPacketCallBack _Nullable)defaultBlock;
 @end
 
 NS_ASSUME_NONNULL_END
