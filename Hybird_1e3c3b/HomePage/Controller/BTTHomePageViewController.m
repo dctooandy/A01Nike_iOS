@@ -103,6 +103,7 @@
             [weakSelf.view addSubview:weakSelf.redPocketsAssistiveButton];
         }
     }];
+    [[BTTActivityManager sharedInstance] checkTimeForRedPoickets];
     [self checkLoginVersion];
 
 //    [self setupFloatWindow];

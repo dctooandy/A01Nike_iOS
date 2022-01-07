@@ -72,7 +72,6 @@ static BTTActivityManager * sharedSingleton;
                         [weakSelf directToShowYenFenHongPopView];
                         break;
                     case 4://今天不用再弹弹窗 (什么弹窗都不出现了)
-                        [weakSelf checkTimeForRedPoickets];
                         break;
                     default:
                         break;

@@ -19,6 +19,11 @@ SingletonInterface(BTTActivityManager);
 
 //检查wms弹窗API
 - (void)checkPopViewWithCompletionBlock:(PopViewCallBack _Nullable)completionBlock;
+// 检查红包雨
+- (void)checkTimeForRedPoickets;
+
+// 检查客制活动期间
+- (void)checkTimeForRedPoickets;
 @end
 
 NS_ASSUME_NONNULL_END
