@@ -209,6 +209,7 @@
     params[@"use"] = @"12";
     
     params[@"loginName"] = [IVNetwork savedUserInfo].loginName;
+    params[@"validateId"] = self.validateId;
     switch (self.codeType) {
         case BTTSafeVerifyTypeBindEmail:
             params[@"use"] = @"12";
@@ -285,6 +286,7 @@
                 case BTTSafeVerifyTypeVerifyEmail:{
                     BTTBindEmailController *vc = [BTTBindEmailController new];
                     vc.codeType = BTTSafeVerifyTypeChangeEmail;
+                    vc.validateId = self.validateId;
                     [weakSelf.navigationController pushViewController:vc animated:YES];
                     
                 }
