@@ -103,7 +103,7 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
         [self addSubview:countDownBottomLabel];
         [self addSubview:countDownLabel];
         _countdownLab = countDownLabel;
-        [self startTime];
+        [self startCountDownTime];
         //configuration
         [self configureDefaultValue];
         [self setFrame:_mainFrame];
@@ -123,92 +123,59 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     return [dateFormatter stringFromDate:timeDate];
 }
-- (void)startTime
+- (void)startCountDownTime
 {
     weakSelf(weakSelf)
-    [self serverTime:^(NSString *timeStr) {
-        if (timeStr.length > 0)
+    NSString *timeStr = [PublicMethod serverTime];
+    if (timeStr.length > 0)
+    {
+        NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
+        BOOL isBeforeDuration = [duractionArray[0] boolValue];
+        BOOL isActivityDuration = [duractionArray[1] boolValue];
+        if (isBeforeDuration || isActivityDuration)
         {
-            BOOL isBeforeDuration = [PublicMethod checksStartDate:@"2021-01-01" EndDate:@"2022-01-31" serverTime:timeStr];
-            BOOL isActivityDuration = [PublicMethod checksStartDate:@"2022-02-01" EndDate:@"2022-02-07" serverTime:timeStr];
-            
-            if (isBeforeDuration || isActivityDuration)
-            {
-                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                NSDate *startDate;
-                NSTimeInterval startDateTime = 0;
-                NSTimeInterval secondStartDateTime = 0;
-                NSTimeInterval countDownInterval = 0;
-                if (!isActivityDuration)
+            __block int timeout = [PublicMethod countDownIntervalWithDurationTag:isActivityDuration];
+            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+            dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
+            dispatch_source_set_event_handler(_timer, ^{
+                if ( timeout <= 0 )
                 {
-                    // 不到时间,预热
-                    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-                    startDate = [dateFormatter dateFromString:@"2022-02-01"];
-                    startDateTime = [[NSDate date] timeIntervalSinceDate:startDate];
-                    countDownInterval = -startDateTime;
-                }else
+                    dispatch_source_cancel(_timer);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        //                [weakSelf startRedPackerts];
+                        //                [weakSelf.tapGesture setEnabled:YES];
+                    });
+                }
+                else
                 {
-                    // 活动期间
-                    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
-                    startDate = [dateFormatter dateFromString:@"2022-02-01 10:00"];// 第一天早上10点
-                    startDateTime = (int)[[NSDate date] timeIntervalSinceDate:startDate] % (60 * 60 * 24);
-                    secondStartDateTime = startDateTime - (60 * 60 * 4);
-
-                    if (startDateTime < 0)
+                    int dInt = (int)timeout / (3600 * 24);      //剩馀天数
+                    int leftTime = timeout - (dInt * 3600 * 24);
+                    int hInt = (int)leftTime / 3600;            //剩馀时数
+                    int mInt = (int)leftTime / 60 % 60;         //剩馀分数
+                    int sInt = (int)leftTime % 60;              //剩馀秒数
+                    NSString * titleStr;
+                    if (isActivityDuration)
                     {
-                        //早于10点
-                        countDownInterval = -startDateTime;
-                    } else if (secondStartDateTime < 0)
-                    {
-                        //介于10点到14点
-                        countDownInterval = -secondStartDateTime;
+                        titleStr = [NSString stringWithFormat:@"%d小时%d分%d秒",hInt,mInt,sInt];
                     }else
                     {
-                        //晚于14点
-                        countDownInterval = (60*60*24 - secondStartDateTime);
+                        titleStr = [NSString stringWithFormat:@"%d天%d小时%d分%d秒",dInt,hInt,mInt,sInt];
                     }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        weakSelf.countdownLab.text = titleStr;
+                    });
+                    timeout--;
                 }
-                __block int timeout = countDownInterval;
-                dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-                dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-                dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
-                dispatch_source_set_event_handler(_timer, ^{
-                    if ( timeout <= 0 )
-                    {
-                        dispatch_source_cancel(_timer);
-                        dispatch_async(dispatch_get_main_queue(), ^{
-            //                [weakSelf startRedPackerts];
-            //                [weakSelf.tapGesture setEnabled:YES];
-                        });
-                    }
-                    else
-                    {
-                        int dInt = (int)timeout / (3600 * 24);      //剩馀天数
-                        int leftTime = timeout - (dInt * 3600 * 24);
-                        int hInt = (int)leftTime / 3600;            //剩馀时数
-                        int mInt = (int)leftTime / 60 % 60;         //剩馀分数
-                        int sInt = (int)leftTime % 60;              //剩馀秒数
-                        NSString * titleStr;
-                        if (isActivityDuration)
-                        {
-                            titleStr = [NSString stringWithFormat:@"%d小时%d分%d秒",hInt,mInt,sInt];
-                        }else
-                        {
-                            titleStr = [NSString stringWithFormat:@"%d天%d小时%d分%d秒",dInt,hInt,mInt,sInt];
-                        }
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            weakSelf.countdownLab.text = titleStr;
-                        });
-                        timeout--;
-                    }
-                });
-                dispatch_resume(_timer);
-            }else
-            {
-                // 过了活动期
-            }
+            });
+            dispatch_resume(_timer);
+        }else
+        {
+            // 过了活动期
         }
-    }];
+    }
+//    [self serverTime:^(NSString *timeStr) {
+//    }];
 }
 
 -(void)btnAction:(UIButton *)sender {

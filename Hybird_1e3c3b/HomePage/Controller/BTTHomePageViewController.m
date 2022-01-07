@@ -46,7 +46,7 @@
 #import "BTTUserForzenManager.h"
 #import "AppDelegate.h"
 #import "BTTAssistiveButtonModel.h"
-
+#import "RedPacketsRainView.h"
 
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -166,6 +166,60 @@
 //        [[NSUserDefaults standardUserDefaults] synchronize];
 //    }
 }
+- (void)popupTenSecondView
+{
+    weakSelf(weakSelf)
+    __block int timeout = [PublicMethod countDownIntervalWithDurationTag:YES] - RedPacketDuration;//倒数10秒前
+    if (timeout <= 0)//刚好在这10秒钟
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf showRedPacketsRainViewWithDuration:(timeout == 0 ? 0: -timeout)];
+        });
+    }else
+    {
+        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+        dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
+        dispatch_source_set_event_handler(_timer, ^{
+            if ( timeout <= 0 )
+            {
+                dispatch_source_cancel(_timer);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakSelf showRedPacketsRainViewWithDuration:RedPacketDuration];
+                });
+            }
+            else
+            {
+                timeout--;
+            }
+        });
+        dispatch_resume(_timer);
+    }
+}
+#pragma mark - 红包雨
+- (void)showRedPacketsRainViewWithDuration:(int)duration
+{
+    RedPacketsRainView *alertView = [RedPacketsRainView viewFromXib];
+//    alertView.frame = CGRectMake(0, 0, 350, 280);
+    [alertView configForRedPocketsView:RedPocketsViewBegin withDuration:duration];
+//    [alertView configForRedPocketsView:RedPocketsViewResult];
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    
+    [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+//        make.center.mas_equalTo(popView);
+//        make.width.equalTo(@350);
+//        make.height.equalTo(@400);
+    }];
+    alertView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    alertView.btnBlock = ^(UIButton * _Nullable btn) {
+        [popView dismiss];
+    };
+}
 - (void)assistiveBtnAndActivitySetting
 {
     weakSelf(weakSelf)
@@ -180,9 +234,14 @@
         if ([response isEqualToString:@"1"])
         {
             // 活动期
+            [weakSelf popupTenSecondView];
         }else
         {
             // 预热
+            //暂时让他出来
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf showRedPacketsRainViewWithDuration:10];
+            });
         }
     } WithDefaultCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
         // 一般活动

@@ -45,19 +45,16 @@ static BTTActivityManager * sharedSingleton;
     [self serverTime:^(NSString *timeStr) {
         if (timeStr.length > 0)
         {
-            if ([PublicMethod checksStartDate:@"2021-02-01" EndDate:@"2022-02-07" serverTime:timeStr])
+            NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
+            BOOL isBeforeDuration = [duractionArray[0] boolValue];
+            BOOL isActivityDuration = [duractionArray[1] boolValue];
+            if (isBeforeDuration || isActivityDuration)
             {
-                //不到时间,预热
-                if (redPacketBlock)
-                {
-                    redPacketBlock(nil,nil);
-                }
-            }else if ([PublicMethod checksStartDate:@"2022-02-01" EndDate:@"2022-02-07" serverTime:timeStr])
-            {
+                // 不到时间,预热
                 // 活动期间
                 if (redPacketBlock)
                 {
-                    redPacketBlock(@"1",nil);
+                    redPacketBlock(isActivityDuration ? @"1" : nil,nil);
                 }
             }else
             {
@@ -141,14 +138,14 @@ static BTTActivityManager * sharedSingleton;
         if (timeStr.length > 0) {
             if ([self checksStartDate:@"10:00" EndDate:@"10:01" serverTime:timeStr])
             {
-                [self showRedPacketsRainView];
+//                [self showRedPacketsRainView];
             }else if ([self checksStartDate:@"14:00" EndDate:@"14:01" serverTime:timeStr])
             {
-                [self showRedPacketsRainView];
+//                [self showRedPacketsRainView];
             }else
             {
                 /// 不到时间
-                [self showRedPacketsRainView];
+//                [self showRedPacketsRainView];
             }
         }
     }];
@@ -184,30 +181,7 @@ static BTTActivityManager * sharedSingleton;
 //        }
 //    }];
 }
-#pragma mark - 红包雨
-- (void)showRedPacketsRainView
-{
-    RedPacketsRainView *alertView = [RedPacketsRainView viewFromXib];
-//    alertView.frame = CGRectMake(0, 0, 350, 280);
-    [alertView configForRedPocketsView:RedPocketsViewBegin];
-//    [alertView configForRedPocketsView:RedPocketsViewResult];
-    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-    popView.isClickBGDismiss = YES;
-    [popView pop];
-    
-    [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
-//        make.center.mas_equalTo(popView);
-//        make.width.equalTo(@350);
-//        make.height.equalTo(@400);
-    }];
-    alertView.dismissBlock = ^{
-        [popView dismiss];
-    };
-    alertView.btnBlock = ^(UIButton * _Nullable btn) {
-        [popView dismiss];
-    };
-}
+
 #pragma mark - 七夕
 -(void)loadSevenXiData {
     weakSelf(weakSelf)

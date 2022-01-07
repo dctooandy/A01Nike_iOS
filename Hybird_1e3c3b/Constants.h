@@ -777,3 +777,10 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
      __array__.count > 0)
 
 #endif /* Constants_h */
+
+// 红包雨
+#define BeforeStartDate                 @"2022-01-31"
+#define RedPacketStartDate              @"2022-02-01"
+#define RedPacketFirstStartTime         @"2022-02-07 10:00"
+#define RedPacketDuration               10 // 倒数前10秒
+#define RedPacketCountDown              60 // 下雨60秒
