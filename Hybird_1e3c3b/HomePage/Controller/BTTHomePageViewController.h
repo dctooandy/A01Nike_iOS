@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL idDisable;
 
 - (void)setupElements;
+- (void)showRedPacketsRainViewWithDuration:(int)duration;
 @end
 
 NS_ASSUME_NONNULL_END

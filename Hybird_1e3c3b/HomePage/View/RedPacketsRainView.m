@@ -77,6 +77,9 @@
     weakSelf(weakSelf)
     self.titleLabel.text = @"抢红包啦";
     __block int timeout = timeValue;
+    NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
+    BOOL isBeforeDuration = [duractionArray[0] boolValue];
+    BOOL isActivityDuration = [duractionArray[1] boolValue];
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
     dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
@@ -91,7 +94,19 @@
         }
         else
         {
-            NSString * titleStr = [NSString stringWithFormat:@"%d",timeout];
+            int dInt = (int)timeout / (3600 * 24);      //剩馀天数
+            int leftTime = timeout - (dInt * 3600 * 24);
+            int hInt = (int)leftTime / 3600;            //剩馀时数
+            int mInt = (int)leftTime / 60 % 60;         //剩馀分数
+            int sInt = (int)leftTime % 60;              //剩馀秒数
+            NSString * titleStr;
+            if (isActivityDuration)
+            {
+                titleStr = [NSString stringWithFormat:@"%d小时%d分%d秒",hInt,mInt,sInt];
+            }else
+            {
+                titleStr = [NSString stringWithFormat:@"%d天%d小时%d分%d秒",dInt,hInt,mInt,sInt];
+            }
             dispatch_async(dispatch_get_main_queue(), ^{
                 weakSelf.countdownLab.text = titleStr;
             });
@@ -162,7 +177,7 @@
     CATransform3D r1 = CATransform3DMakeRotation(M_PI/180 * (arc4random() % 360 ) , 0, 0, -1);
     tranAnimation.values = @[[NSValue valueWithCATransform3D:r0],[NSValue valueWithCATransform3D:r1]];
     tranAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    tranAnimation.duration = arc4random() % 200 / 100.0 + 3.5;
+    tranAnimation.duration = arc4random() % 200 / 100.0 + 13.5;
     //为了避免旋转动画完成后再次回到初始状态。
     [tranAnimation setFillMode:kCAFillModeForwards];
     [tranAnimation setRemovedOnCompletion:NO];

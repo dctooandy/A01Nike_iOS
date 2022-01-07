@@ -46,8 +46,8 @@
                             <color key="textColor" systemColor="systemOrangeColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIQ-1T-EZ8">
-                            <rect key="frame" x="326" y="50" width="38" height="38"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iIQ-1T-EZ8">
+                            <rect key="frame" x="326" y="758" width="38" height="38"/>
                             <state key="normal" image="ic_new_year_pop_close_btn"/>
                             <connections>
                                 <action selector="closeBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Nxa-bR-Ku7"/>
@@ -67,8 +67,8 @@
                         <constraint firstItem="QQk-D3-WLJ" firstAttribute="top" secondItem="5j4-AX-VrT" secondAttribute="top" constant="80" id="6Wp-cW-qK6"/>
                         <constraint firstAttribute="trailing" secondItem="iIQ-1T-EZ8" secondAttribute="trailing" constant="50" id="EJc-gd-ov0"/>
                         <constraint firstItem="Eqy-K3-5tk" firstAttribute="top" secondItem="5j4-AX-VrT" secondAttribute="top" constant="50" id="Tmf-L7-ROC"/>
-                        <constraint firstItem="iIQ-1T-EZ8" firstAttribute="top" secondItem="5j4-AX-VrT" secondAttribute="top" constant="50" id="Z1Q-fr-bLD"/>
                         <constraint firstItem="c8d-eI-hg0" firstAttribute="top" secondItem="QQk-D3-WLJ" secondAttribute="bottom" constant="50" id="bbQ-kX-A5X"/>
+                        <constraint firstAttribute="bottom" secondItem="iIQ-1T-EZ8" secondAttribute="bottom" constant="100" id="boW-3z-XPS"/>
                         <constraint firstItem="Eqy-K3-5tk" firstAttribute="leading" secondItem="5j4-AX-VrT" secondAttribute="leading" constant="20" id="ic4-6X-h9T"/>
                         <constraint firstItem="QQk-D3-WLJ" firstAttribute="centerX" secondItem="5j4-AX-VrT" secondAttribute="centerX" id="ro8-ko-bEp"/>
                     </constraints>

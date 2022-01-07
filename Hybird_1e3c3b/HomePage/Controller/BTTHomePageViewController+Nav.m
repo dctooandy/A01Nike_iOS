@@ -54,15 +54,26 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         self.redPocketsAssistiveButton.positionMode = SpreadPositionModeNone;
         weakSelf(weakSelf);
         [self.redPocketsAssistiveButton setMainButtonClickActionBlock:^{
-            weakSelf.redPocketsAssistiveButton.hidden = true;
-            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-            //        vc.webConfigModel.url = @"/activity_pages/anniversary";
-            vc.webConfigModel.url = @"/activity_pages/interest30";// 吃model的资料
-            vc.webConfigModel.newView = YES;
-            vc.webConfigModel.theme = @"outside";
-            //        vc.title = @"博天堂周年庆典";
-            vc.title = @"过夜利息";// 吃model的资料
-            [weakSelf.navigationController pushViewController:vc animated:YES];
+            
+            NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
+            BOOL isBeforeDuration = [duractionArray[0] boolValue];
+            BOOL isActivityDuration = [duractionArray[1] boolValue];
+            if (isBeforeDuration || isActivityDuration)
+            {
+                __block int timeout = [PublicMethod countDownIntervalWithDurationTag:isActivityDuration];
+                [weakSelf showRedPacketsRainViewWithDuration:timeout];
+            }else
+            {//跳去活动结束画面
+                weakSelf.redPocketsAssistiveButton.hidden = true;
+                BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+                //        vc.webConfigModel.url = @"/activity_pages/anniversary";
+                vc.webConfigModel.url = @"/activity_pages/interest30";// 吃model的资料
+                vc.webConfigModel.newView = YES;
+                vc.webConfigModel.theme = @"outside";
+                //        vc.title = @"博天堂周年庆典";
+                vc.title = @"过夜利息";// 吃model的资料
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }
         }];
         [self.redPocketsAssistiveButton setCloseBtnActionBlock:^{
             [weakSelf.redPocketsAssistiveButton removeFromSuperview];

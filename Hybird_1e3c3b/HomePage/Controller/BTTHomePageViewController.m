@@ -47,7 +47,7 @@
 #import "AppDelegate.h"
 #import "BTTAssistiveButtonModel.h"
 #import "RedPacketsRainView.h"
-
+#import "RedPacketsPreView.h"
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, assign) BOOL adCellShow;
@@ -173,7 +173,7 @@
     if (timeout <= 0)//刚好在这10秒钟
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [weakSelf showRedPacketsRainViewWithDuration:(timeout == 0 ? 0: -timeout)];
+            [weakSelf showRedPacketsPreViewWithDuration:(timeout == 0 ? 0: -timeout)];
         });
     }else
     {
@@ -185,7 +185,7 @@
             {
                 dispatch_source_cancel(_timer);
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf showRedPacketsRainViewWithDuration:RedPacketDuration];
+                    [weakSelf showRedPacketsPreViewWithDuration:RedPacketDuration];
                 });
             }
             else
@@ -196,22 +196,42 @@
         dispatch_resume(_timer);
     }
 }
-#pragma mark - 红包雨
-- (void)showRedPacketsRainViewWithDuration:(int)duration
+#pragma mark - 10s倒计时弹窗
+- (void)showRedPacketsPreViewWithDuration:(int)duration
 {
-    RedPacketsRainView *alertView = [RedPacketsRainView viewFromXib];
-//    alertView.frame = CGRectMake(0, 0, 350, 280);
-    [alertView configForRedPocketsView:RedPocketsViewBegin withDuration:duration];
-//    [alertView configForRedPocketsView:RedPocketsViewResult];
+    weakSelf(weakSelf)
+    RedPacketsPreView *alertView = [RedPacketsPreView viewFromXib];
+    [alertView configForRedPocketsViewWithDuration:duration];
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
     popView.isClickBGDismiss = YES;
     [popView pop];
     
     [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
-//        make.center.mas_equalTo(popView);
-//        make.width.equalTo(@350);
-//        make.height.equalTo(@400);
+    }];
+    alertView.dismissBlock = ^{
+        [popView dismiss];
+    };
+    alertView.btnBlock = ^(UIButton * _Nullable btn) {
+        [popView dismiss];
+    };
+    alertView.getRedBlock = ^{
+        [popView dismiss];
+        __block int timeout = [PublicMethod countDownIntervalWithDurationTag:YES];
+        [weakSelf showRedPacketsRainViewWithDuration:timeout];
+    };
+}
+#pragma mark - 红包雨 预热/活动弹窗
+- (void)showRedPacketsRainViewWithDuration:(int)duration
+{
+    RedPacketsRainView *alertView = [RedPacketsRainView viewFromXib];
+    [alertView configForRedPocketsView:RedPocketsViewBegin withDuration:duration];
+    BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+    popView.isClickBGDismiss = YES;
+    [popView pop];
+    
+    [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
     }];
     alertView.dismissBlock = ^{
         [popView dismiss];
@@ -240,7 +260,7 @@
             // 预热
             //暂时让他出来
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf showRedPacketsRainViewWithDuration:10];
+                [weakSelf showRedPacketsPreViewWithDuration:10];
             });
         }
     } WithDefaultCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {

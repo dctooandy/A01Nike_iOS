@@ -9,9 +9,10 @@
 #import "BTTBaseAnimationPopView.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+typedef void (^GetRedPacketsBlock)(void);
 @interface RedPacketsPreView : BTTBaseAnimationPopView
-
+@property (nonatomic, copy) GetRedPacketsBlock getRedBlock;
+- (void)configForRedPocketsViewWithDuration:(int)duration;
 @end
 
 NS_ASSUME_NONNULL_END
