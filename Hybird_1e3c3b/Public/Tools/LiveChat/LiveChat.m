@@ -143,9 +143,11 @@
         if (model != nil) {
             info.domainBakList = @[model.url];
         }
-        [CSVisitChatmanager initSDK:info finish:^(CSServiceCode errCode) {
-            NSLog(@"222222");
-        } appearblock:nil disbock:nil];
+        if (EnvirmentType != 0) {
+            [CSVisitChatmanager initSDK:info finish:^(CSServiceCode errCode) {
+                NSLog(@"222222");
+            } appearblock:nil disbock:nil];
+        }
     }];
 }
 

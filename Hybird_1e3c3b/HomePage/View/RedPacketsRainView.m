@@ -7,7 +7,9 @@
 //
 
 #import "RedPacketsRainView.h"
-@interface RedPacketsRainView()
+#import "SDCycleScrollView.h"
+#import <Masonry/Masonry.h>
+@interface RedPacketsRainView()<SDCycleScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *labelBackgroundView;
 @property (weak, nonatomic) IBOutlet UILabel *countdownLab;
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
@@ -15,12 +17,15 @@
 @property (weak, nonatomic) IBOutlet UIView *redPocketsRainView;
 @property (weak, nonatomic) IBOutlet UIView *cardsBonusView;
 @property (weak, nonatomic) IBOutlet UIButton *showCardsButton;
+@property (weak, nonatomic) IBOutlet UIView *activityRuleView;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) CALayer *moveLayer;
 @property (nonatomic, assign) NSInteger redPacketsResultCount;
 @property (nonatomic, assign) NSInteger selectedRedPacketNum;
 @property (nonatomic, assign) RedPocketsViewStyle viewStyle;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
+
+@property (nonatomic, strong) SDCycleScrollView *bannerView;
 @end
 
 @implementation RedPacketsRainView
@@ -28,8 +33,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickRed:)];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickRed:)];
     _tapGesture = tap;
     [self.tapGesture setEnabled:NO];
 }
@@ -40,6 +45,7 @@
         case RedPocketsViewBegin:
             self.selectedRedPacketNum = 0;
             [self startTimeWithDuration:duration];
+            [self setupImageGroup];
             break;
         case RedPocketsViewResult:
             [self.tapGesture setEnabled:NO];
@@ -51,16 +57,45 @@
             break;
     }
 }
+-(void)setupImageGroup
+{
+//    FiveStarCopy
+//    FourStarCopy
+    NSMutableArray *h5Images = [[NSMutableArray alloc] initWithObjects:@"FiveStarCopy",@"FourStarCopy", nil];
+    
+    self.bannerView.imageURLStringsGroup = h5Images;
+}
+// 开启规则画面
+- (IBAction)showRulesAction:(id)sender {
+    if (self.activityRuleView.alpha == 0)
+    {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.activityRuleView.alpha = 1;
+        }];
+    }
+}
+// 关闭规则画面
+- (IBAction)dismissRulesView {
+    if (self.activityRuleView.alpha == 1)
+    {
+        [UIView animateWithDuration:0.3 animations:^{
+            self.activityRuleView.alpha = 0;
+        }];
+    }
+}
+// 关闭活动画面
 - (IBAction)closeBtnAction:(UIButton *)sender {
     if (self.dismissBlock) {
         self.dismissBlock();
     }
 }
+// 开启集福卡画面
 - (IBAction)showCardsBonus:(UIButton*)sender {
     [UIView animateWithDuration:0.3 animations:^{
         [self.cardsBonusView setAlpha:(sender.tag == 1) ? 1.0 : 0.0];
         [self.rainBackgroundView setAlpha:(sender.tag == 1) ? 0.0 : 1.0];
         [self.labelBackgroundView setAlpha:(sender.tag == 1) ? 0.0 : 1.0];
+        [self dismissRulesView];
     }];
 //    if (sender.tag == 1)
 //    {
@@ -73,7 +108,6 @@
 //    [self switchWithView:self.labelBackgroundView withPosition:RedPocketsViewToFront];
 //    [self switchWithView:self.cardsBonusView withPosition:RedPocketsViewToBack];
 //    }
-    
 }
 
 - (void)startTimeWithDuration:(int)timeValue
@@ -353,5 +387,26 @@
     {
         [self bringSubviewToFront:currentView];
     }
+}
+
+#pragma mark Lazy Load
+- (SDCycleScrollView *)bannerView {
+    if (!_bannerView) {
+        SDCycleScrollView *bannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:[UIImage imageNamed:@"3"]];
+        [self.activityRuleView addSubview:bannerView];
+        [bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.mas_equalTo(self.activityRuleView);
+            make.height.equalTo(self.activityRuleView).multipliedBy(0.85);
+        }];
+        bannerView.layer.cornerRadius = 10;
+        bannerView.layer.masksToBounds = true;
+        bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+        bannerView.pageControlStyle = SDCycleScrollViewPageContolStyleDefault;
+        bannerView.pageControlDotSize = CGSizeMake(6, 6);
+//        bannerView.autoScrollTimeInterval = 0;
+        bannerView.autoScroll = false;
+        _bannerView = bannerView;
+    }
+    return _bannerView;
 }
 @end

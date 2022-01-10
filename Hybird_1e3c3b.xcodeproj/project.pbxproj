@@ -611,6 +611,7 @@
 		76485F182783F931004EA51E /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
 		7651991F27882DAE006A59BF /* RedPacketsPreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7651991E27882DAE006A59BF /* RedPacketsPreView.m */; };
 		7651992127882DC9006A59BF /* RedPacketsPreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7651992027882DC9006A59BF /* RedPacketsPreView.xib */; };
+		76519924278C09F3006A59BF /* TAExampleDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76519922278C09F2006A59BF /* TAExampleDotView.m */; };
 		765C64EC2782B76500A6BC34 /* RedPacketsRainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 765C64EB2782B76500A6BC34 /* RedPacketsRainView.m */; };
 		765C64EE2782B7FE00A6BC34 /* RedPacketsRainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 765C64ED2782B7FE00A6BC34 /* RedPacketsRainView.xib */; };
 		7662C1EA2758E35D007A9E84 /* BTTCheckDomainModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7662C1E92758E35D007A9E84 /* BTTCheckDomainModel.m */; };
@@ -1888,6 +1889,8 @@
 		7651991D27882DAE006A59BF /* RedPacketsPreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedPacketsPreView.h; sourceTree = "<group>"; };
 		7651991E27882DAE006A59BF /* RedPacketsPreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedPacketsPreView.m; sourceTree = "<group>"; };
 		7651992027882DC9006A59BF /* RedPacketsPreView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedPacketsPreView.xib; sourceTree = "<group>"; };
+		76519922278C09F2006A59BF /* TAExampleDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAExampleDotView.m; sourceTree = "<group>"; };
+		76519923278C09F2006A59BF /* TAExampleDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAExampleDotView.h; sourceTree = "<group>"; };
 		765C64EA2782B76500A6BC34 /* RedPacketsRainView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedPacketsRainView.h; sourceTree = "<group>"; };
 		765C64EB2782B76500A6BC34 /* RedPacketsRainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedPacketsRainView.m; sourceTree = "<group>"; };
 		765C64ED2782B7FE00A6BC34 /* RedPacketsRainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedPacketsRainView.xib; sourceTree = "<group>"; };
@@ -3604,6 +3607,8 @@
 				7651991D27882DAE006A59BF /* RedPacketsPreView.h */,
 				7651991E27882DAE006A59BF /* RedPacketsPreView.m */,
 				7651992027882DC9006A59BF /* RedPacketsPreView.xib */,
+				76519923278C09F2006A59BF /* TAExampleDotView.h */,
+				76519922278C09F2006A59BF /* TAExampleDotView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5478,6 +5483,7 @@
 				3AA7892D21FFF2580047A372 /* SDWebImageDownloaderOperation.m in Sources */,
 				411B89E026980E9800F45A22 /* BTTCompleteNamePopView.m in Sources */,
 				3AD9CF6D216F33F300685B43 /* BTTGameCollectionViewCell.m in Sources */,
+				76519924278C09F3006A59BF /* TAExampleDotView.m in Sources */,
 				76F863A726E0B61100320B60 /* BTTVIPDiscriptionPopView.m in Sources */,
 				D5C501D521B7CEDC00C6DA02 /* BRAddressPickerView.m in Sources */,
 				D5DBEB0C21ABB774008AF629 /* CNPayBQStep1VC.m in Sources */,

@@ -16,5 +16,5 @@
 /* 从十六进制字符串获取颜色 */
 + (UIColor *)colorWithHexString:(NSString *)color alpha:(CGFloat)alpha;
 
-
++ (UIColor*)jk_gradientFromColor:(UIColor*)c1 toColor:(UIColor*)c2 withHeight:(int)height;
 @end
