@@ -41,7 +41,6 @@ static BTTActivityManager * sharedSingleton;
 - (void)checkTimeRedPacketRainWithCompletion:(RedPacketCallBack _Nullable)redPacketBlock
                        WithDefaultCompletion:(RedPacketCallBack _Nullable)defaultBlock
 {
-    weakSelf(weakSelf)
     [self serverTime:^(NSString *timeStr) {
         if (timeStr.length > 0)
         {

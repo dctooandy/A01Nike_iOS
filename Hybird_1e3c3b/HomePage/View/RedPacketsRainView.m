@@ -8,9 +8,10 @@
 
 #import "RedPacketsRainView.h"
 @interface RedPacketsRainView()
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIView *labelBackgroundView;
 @property (weak, nonatomic) IBOutlet UILabel *countdownLab;
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
+@property (weak, nonatomic) IBOutlet UIView *rainBackgroundView;
 @property (weak, nonatomic) IBOutlet UIView *redPocketsRainView;
 @property (weak, nonatomic) IBOutlet UIView *cardsBonusView;
 @property (weak, nonatomic) IBOutlet UIButton *showCardsButton;
@@ -58,16 +59,19 @@
 - (IBAction)showCardsBonus:(UIButton*)sender {
     [UIView animateWithDuration:0.3 animations:^{
         [self.cardsBonusView setAlpha:(sender.tag == 1) ? 1.0 : 0.0];
-        [self.redPocketsRainView setAlpha:(sender.tag == 1) ? 0.0 : 1.0];
+        [self.rainBackgroundView setAlpha:(sender.tag == 1) ? 0.0 : 1.0];
+        [self.labelBackgroundView setAlpha:(sender.tag == 1) ? 0.0 : 1.0];
     }];
 //    if (sender.tag == 1)
 //    {
-//        [self switchWithView:self.redPocketsRainView withPosition:RedPocketsViewToBack];
-//        [self switchWithView:self.cardsBonusView withPosition:RedPocketsViewToFront];
+//    [self switchWithView:self.labelBackgroundView withPosition:RedPocketsViewToBack];
+//    [self switchWithView:self.rainBackgroundView withPosition:RedPocketsViewToBack];
+//    [self switchWithView:self.cardsBonusView withPosition:RedPocketsViewToFront];
 //    }else
 //    {
-//        [self switchWithView:self.redPocketsRainView withPosition:RedPocketsViewToFront];
-//        [self switchWithView:self.cardsBonusView withPosition:RedPocketsViewToBack];
+//    [self switchWithView:self.labelBackgroundView withPosition:RedPocketsViewToFront];
+//    [self switchWithView:self.labelBackgroundView withPosition:RedPocketsViewToFront];
+//    [self switchWithView:self.cardsBonusView withPosition:RedPocketsViewToBack];
 //    }
     
 }
@@ -75,7 +79,7 @@
 - (void)startTimeWithDuration:(int)timeValue
 {
     weakSelf(weakSelf)
-    self.titleLabel.text = @"抢红包啦";
+
     __block int timeout = timeValue;
     NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
     BOOL isBeforeDuration = [duractionArray[0] boolValue];
@@ -121,9 +125,8 @@
     float t = (arc4random() % 10) + 5;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:(1/t) target:self selector:@selector(showRain) userInfo:nil repeats:YES];
     [self.timer fire];
-    //红包下落10秒倒数
-    self.titleLabel.text = @"红包结束倒数计时";
     
+    //红包下落10秒倒数
     weakSelf(weakSelf)
     __block int timeout = RedPacketCountDown;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -198,7 +201,6 @@
 -(void)showResult
 {
     [self.closeButton setHidden:NO];
-    self.titleLabel.text = @"红包加总";
     self.countdownLab.text = [NSString stringWithFormat:@"+%ld金币",(long)self.redPacketsResultCount];
     [self.showCardsButton setHidden:NO];
 }

@@ -90,6 +90,7 @@
         NSLog(@"下拉刷新");
         [strongSelf refreshDatasOfHomePage];
     }];
+    //悬浮按钮等设定
     [self assistiveBtnAndActivitySetting];
     [self checkLoginVersion];
 
@@ -251,7 +252,7 @@
             }
         }];
         // 红包雨活动
-        if ([response isEqualToString:@"1"])
+        if (response != nil)
         {
             // 活动期
             [weakSelf popupTenSecondView];
@@ -260,7 +261,8 @@
             // 预热
             //暂时让他出来
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf showRedPacketsPreViewWithDuration:10];
+//                [weakSelf showRedPacketsPreViewWithDuration:10];
+                [weakSelf showRedPacketsRainViewWithDuration:10];
             });
         }
     } WithDefaultCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
