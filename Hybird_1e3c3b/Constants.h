@@ -783,7 +783,7 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define RedPacketStartDate              @"2022-02-01"
 #define RedPacketFirstStartTime         @"2022-02-01 10:00"
 #define RedPacketDuration               10 // 倒数前10秒
-#define RedPacketCountDown              60 // 下雨60秒
+#define RedPacketCountDown              2 // 下雨60秒
 /** 十六进制颜色 */
 #define kHexColorAlpha(value, a)    [UIColor colorWithRed:((float)(((value) & 0xFF0000) >> 16))/255.0 green:((float)(((value) & 0xFF00) >> 8))/255.0 blue:((float)((value) & 0xFF))/255.0 alpha:(a)]
 #define kHexColor(value)            kHexColorAlpha(value, 1.0)
