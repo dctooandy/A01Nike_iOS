@@ -102,6 +102,8 @@ typedef enum {
 
 /** 每张图片对应要显示的文字数组 */
 @property (nonatomic, strong) NSArray *titlesGroup;
+/** 每张图片对应要显示的文字数组 */
+@property (nonatomic, strong) NSArray *descriptionGroup;
 
 /** 本地图片数组 */
 @property (nonatomic, strong) NSArray *localizationImageNamesGroup;
