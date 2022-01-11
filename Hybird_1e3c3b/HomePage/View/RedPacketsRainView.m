@@ -134,7 +134,7 @@
         {
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf.labelBackgroundView setAlpha:0.0];
+//                [weakSelf.labelBackgroundView setAlpha:0.0];
                 [weakSelf startRedPackerts];
                 [weakSelf.tapGesture setEnabled:YES];
             });
@@ -181,7 +181,7 @@
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf endAnimation];
-                [weakSelf.labelBackgroundView setAlpha:1.0];
+//                [weakSelf.labelBackgroundView setAlpha:1.0];
             });
         }
         else
