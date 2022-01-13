@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) UIButton *omniBtn;
 @property (nonatomic, strong) UIButton *ercBtn;
+@property (nonatomic, strong) UIButton *trcBtn;
 
 @end
 
@@ -31,6 +32,17 @@
         label.textColor = [UIColor whiteColor];
         label.font = [UIFont boldSystemFontOfSize:14];
         [infoView addSubview:label];
+        
+        _trcBtn = [[UIButton alloc]initWithFrame:CGRectMake(246, 44, 100, 31)];
+        [_trcBtn setTitle:@"ERC20" forState:UIControlStateNormal];
+        [_trcBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _trcBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+        _trcBtn.layer.cornerRadius = 4.0;
+        _trcBtn.layer.borderWidth = 0.5;
+        _trcBtn.clipsToBounds = YES;
+        [_trcBtn addTarget:self action:@selector(trcBtn_click) forControlEvents:UIControlEventTouchUpInside];
+        [infoView addSubview:_trcBtn];
         
         _ercBtn = [[UIButton alloc]initWithFrame:CGRectMake(131, 44, 100, 31)];
         [_ercBtn setTitle:@"ERC20" forState:UIControlStateNormal];
@@ -58,29 +70,57 @@
     return self;
 }
 
-- (void)setTypeData:(NSArray *)types{
-    if ([types containsObject:@"OMNI"]) {
-        _ercBtn.hidden = ![types containsObject:@"ERC20"];
+- (void)setTypeData:(NSString *)types{
+    NSArray * arr = [types componentsSeparatedByString:@";"];
+    
+    if ([arr containsObject:@"OMNI"]) {
         _omniBtn.hidden = NO;
+        _ercBtn.hidden = ![arr containsObject:@"ERC20"];
+        _trcBtn.hidden = ![arr containsObject:@"TRC20"];
+        
         _omniBtn.frame = CGRectMake(16, 44, 100, 31);
         _ercBtn.frame = CGRectMake(131, 44, 100, 31);
+        _trcBtn.frame = CGRectMake(246, 44, 100, 31);
         [self omniBtn_click];
-    }else{
+        
+    } else if ([arr containsObject:@"ERC20"]) {
+        _omniBtn.hidden = YES;
+        _omniBtn.frame = CGRectMake(16, 44, 100, 31);
+        _ercBtn.hidden = NO;
+        _ercBtn.frame = CGRectMake(16, 44, 100, 31);
+        [self ercBtn_click];
+        if ([arr containsObject:@"TRC20"]) {
+            _trcBtn.hidden = NO;
+            _trcBtn.frame = CGRectMake(131, 44, 100, 31);
+        }else{
+            _trcBtn.hidden = YES;
+            _trcBtn.frame = CGRectMake(131, 44, 100, 31);
+        }
+        
+    } else if ([arr containsObject:@"TRC20"]) {
         _omniBtn.frame = CGRectMake(16, 44, 100, 31);
         _omniBtn.hidden = YES;
-        if ([types containsObject:@"ERC20"]) {
-            _ercBtn.hidden = NO;
-            _ercBtn.frame = CGRectMake(16, 44, 100, 31);
-            [self ercBtn_click];
-        }else{
-            _ercBtn.frame = CGRectMake(131, 44, 100, 31);
-        }
+        _ercBtn.frame = CGRectMake(16, 44, 100, 31);
+        _ercBtn.hidden = YES;
+        _trcBtn.frame = CGRectMake(16, 44, 100, 31);
+        _trcBtn.hidden = NO;
+        [self trcBtn_click];
+    }
+}
+
+-(void)trcBtn_click {
+    _trcBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
+    _omniBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+    _ercBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+    if (self.tapProtocol) {
+        self.tapProtocol(@"OMNI");
     }
 }
 
 - (void)omniBtn_click{
     _omniBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
     _ercBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+    _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
     if (self.tapProtocol) {
         self.tapProtocol(@"OMNI");
     }
@@ -89,6 +129,7 @@
 - (void)ercBtn_click{
     _ercBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
     _omniBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+    _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
     if (self.tapProtocol) {
         self.tapProtocol(@"ERC20");
     }

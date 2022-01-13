@@ -8,11 +8,14 @@
 
 #import "BTTWithDrawProtocolView.h"
 #import "CNPayConstant.h"
+#define protocolBtnW 80
+#define protocolBtnH 30
 
 @interface BTTWithDrawProtocolView ()
 
 @property (nonatomic, strong) UIButton *omniBtn;
 @property (nonatomic, strong) UIButton *ercBtn;
+@property (nonatomic, strong) UIButton *trcBtn;
 
 @end
 @implementation BTTWithDrawProtocolView
@@ -31,7 +34,18 @@
         label.font = [UIFont boldSystemFontOfSize:16];
         [infoView addSubview:label];
         
-        _ercBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-115, 5, 100, 30)];
+        _trcBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH)];
+        [_trcBtn setTitle:@"TRC20" forState:UIControlStateNormal];
+        [_trcBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _trcBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+        _trcBtn.layer.cornerRadius = 4.0;
+        _trcBtn.layer.borderWidth = 0.5;
+        _trcBtn.clipsToBounds = YES;
+        [_trcBtn addTarget:self action:@selector(trcBtn_click) forControlEvents:UIControlEventTouchUpInside];
+        [infoView addSubview:_trcBtn];
+        
+        _ercBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH)];
         [_ercBtn setTitle:@"ERC20" forState:UIControlStateNormal];
         [_ercBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _ercBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -42,7 +56,7 @@
         [_ercBtn addTarget:self action:@selector(ercBtn_click) forControlEvents:UIControlEventTouchUpInside];
         [infoView addSubview:_ercBtn];
         
-        self.omniBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-230, 5, 100, 30)];
+        _omniBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH)];
         [_omniBtn setTitle:@"OMNI" forState:UIControlStateNormal];
         [_omniBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _omniBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -58,31 +72,95 @@
 }
 
 - (void)setTypeData:(NSArray *)types{
-    if ([types containsObject:@"ERC20"]) {
-        _omniBtn.hidden = ![types containsObject:@"OMNI"];
+    if ([types containsObject:@"OMNI"]) {
+        _omniBtn.hidden = NO;
+        _ercBtn.hidden = ![types containsObject:@"ERC20"];
+        _trcBtn.hidden = ![types containsObject:@"TRC20"];
+        [self omniBtn_click];
+        if (!_ercBtn.isHidden && !_trcBtn.isHidden) {
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+        } else if (!_ercBtn.isHidden && _trcBtn.isHidden) {
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+        } else if (_ercBtn.isHidden && !_trcBtn.isHidden) {
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+        } else {
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+        }
+    } else if ([types containsObject:@"ERC20"]) {
         _ercBtn.hidden = NO;
-        _ercBtn.frame = CGRectMake(SCREEN_WIDTH-115, 5, 100, 30);
-        _omniBtn.frame = CGRectMake(SCREEN_WIDTH-230, 5, 100, 30);
-        if (!_omniBtn.isHidden) {
+        _omniBtn.hidden = ![types containsObject:@"OMNI"];
+        _trcBtn.hidden = ![types containsObject:@"TRC20"];
+        if (!_omniBtn.isHidden && !_trcBtn.isHidden) {
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
             [self omniBtn_click];
-        }else{
+        } else if (!_omniBtn.isHidden && _trcBtn.isHidden) {
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+            [self omniBtn_click];
+        } else if (_omniBtn.isHidden && !_trcBtn.isHidden) {
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+            [self ercBtn_click];
+        } else {
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
             [self ercBtn_click];
         }
+    } else {
+        _trcBtn.hidden = NO;
+        _omniBtn.hidden = ![types containsObject:@"OMNI"];
+        _ercBtn.hidden = ![types containsObject:@"ERC20"];
         
-    }else{
-        _ercBtn.frame = CGRectMake(SCREEN_WIDTH-115, 5, 100, 30);
-        _omniBtn.frame = CGRectMake(SCREEN_WIDTH-115, 5, 100, 30);
-        _ercBtn.hidden = YES;
-        if ([types containsObject:@"OMNI"]) {
-            _omniBtn.hidden = NO;
+        if (!_omniBtn.isHidden && !_ercBtn.isHidden) {
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
             [self omniBtn_click];
+        } else if (!_omniBtn.isHidden && _ercBtn.isHidden) {
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            [self omniBtn_click];
+        } else if (_omniBtn.isHidden && !_ercBtn.isHidden) {
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            [self ercBtn_click];
+        } else {
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            [self trcBtn_click];
         }
+    }
+}
+
+-(void)trcBtn_click {
+    _trcBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
+    _ercBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+    _omniBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+    if (self.tapProtocol) {
+        self.tapProtocol(@"TRC20");
     }
 }
 
 - (void)omniBtn_click{
     _omniBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
     _ercBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+    _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
     if (self.tapProtocol) {
         self.tapProtocol(@"OMNI");
     }
@@ -91,6 +169,7 @@
 - (void)ercBtn_click{
     _ercBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
     _omniBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+    _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
     if (self.tapProtocol) {
         self.tapProtocol(@"ERC20");
     }

@@ -562,6 +562,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTQueryBanks                              @"account/queryBanks"
 //倍投配置查詢
 #define BTTMultiBetInfo                            @"game/queryMultiBetInfoByLoginName"
+//獲取充值USDT的QRCode
+#define BTTRechargeUSDTQrcode                      @"deposit/createCryptoCoinDepositOrder"
 
 /*********************************************產品API********************************************************/
 

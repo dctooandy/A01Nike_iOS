@@ -9,6 +9,8 @@
 #import "USDTRechargeController.h"
 #import "CNPayUSDTRateModel.h"
 #import "OCTRechargeUSDTView.h"
+#define ERCType 0
+#define TRCType 1
 
 @interface USDTRechargeController ()
 @property (nonatomic, strong) OCTRechargeUSDTView * rechargeView;
@@ -26,7 +28,7 @@
     self.navigationController.navigationBarHidden = NO;
     [self setupViews];
     [self requestUSDTRate];
-    [self requestQrcode];
+    [self requestQrcode:ERCType];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -44,6 +46,7 @@
         make.left.right.bottom.equalTo(self.view);
     }];
     [self.rechargeView.ercBtn addTarget:self action:@selector(ercBtn_click:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rechargeView.trcBtn addTarget:self action:@selector(trcBtn_click:) forControlEvents:UIControlEventTouchUpInside];
     [self.rechargeView.omniBtn addTarget:self action:@selector(omniBtn_click:) forControlEvents:UIControlEventTouchUpInside];
     [self.rechargeView.commitBtn addTarget:self action:@selector(commitBtn_click:) forControlEvents:UIControlEventTouchUpInside];
     [self.rechargeView.urlCopyBtn addTarget:self action:@selector(urlCopyBtnAction) forControlEvents:UIControlEventTouchUpInside];
@@ -88,54 +91,49 @@
     }];
 }
 
-- (void)requestQrcode{
+- (void)requestQrcode:(NSInteger)type{
     [self showLoading];
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    [params setValue:@"20" forKey:@"tranAmount"];
+    [params setValue:@"25" forKey:@"payType"];
+    [params setValue:@"USDT" forKey:@"currency"];
+    [params setValue:type == 0 ? @"ERC20":@"TRC20" forKey:@"protocol"];
+    
     weakSelf(weakSelf)
-    [IVNetwork requestPostWithUrl:BTTQueryCounterQRCode paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTRechargeUSDTQrcode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSDictionary *json = result.body;
-            weakSelf.rechargeView.ercBtn.hidden = YES;
-            weakSelf.rechargeView.omniBtn.hidden = YES;
-            weakSelf.qrJson = json;
-            if ([json objectForKey:@"erc20"]) {
-                weakSelf.rechargeView.ercBtn.hidden = NO;
+            NSDictionary *dict = result.body;
+            if (type == 0) {
                 self.selectedProtocol = @"ERC20";
-                weakSelf.rechargeView.qrcodeImg.image = [PublicMethod QRCodeMethod:json[@"erc20"]];
-                weakSelf.rechargeView.locationUrlTextView.text = json[@"erc20"];
+            } else if (type == 1) {
+                self.selectedProtocol = @"TRC20";
             }
-            if ([json objectForKey:@"omni"]) {
-                weakSelf.rechargeView.omniBtn.hidden = NO;
-                if (weakSelf.rechargeView.ercBtn.isHidden) {
-                    weakSelf.rechargeView.omniBtn.frame = CGRectMake(16, 48, 100, 30);
-                    [self omniBtn_click:nil];
-                    weakSelf.rechargeView.qrcodeImg.image = [PublicMethod QRCodeMethod:json[@"omni"]];
-                    weakSelf.rechargeView.locationUrlTextView.text = json[@"omni"];
-                }
-            }
+            weakSelf.rechargeView.qrcodeImg.image = [PublicMethod QRCodeMethod:dict[@"billNo"]];
+            weakSelf.rechargeView.locationUrlTextView.text = dict[@"billNo"];
         }
     }];
 }
 
 - (void)ercBtn_click:(id)sender{
-    if ([_selectedProtocol isEqualToString:@"OMNI"]) {
+    if ([_selectedProtocol isEqualToString:@"TRC20"]) {
+        [self requestQrcode:ERCType];
         [self.rechargeView.ercBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.rechargeView.omniBtn setTitleColor:[UIColor colorWithHexString:@"#6d737c"] forState:UIControlStateNormal];
+        [self.rechargeView.trcBtn setTitleColor:[UIColor colorWithHexString:@"#6d737c"] forState:UIControlStateNormal];
         self.rechargeView.ercBtn.layer.borderColor = [UIColor colorWithHexString:@"#2d83cd"].CGColor;
-        self.rechargeView.omniBtn.layer.borderColor = [UIColor colorWithHexString:@"#6d737c"].CGColor;
+        self.rechargeView.trcBtn.layer.borderColor = [UIColor colorWithHexString:@"#6d737c"].CGColor;
         self.selectedProtocol = @"ERC20";
-        self.rechargeView.qrcodeImg.image = [PublicMethod QRCodeMethod:self.qrJson[@"erc20"]];
     }
 }
-- (void)omniBtn_click:(id)sender{
+- (void)trcBtn_click:(id)sender{
     if ([_selectedProtocol isEqualToString:@"ERC20"]) {
-        [self.rechargeView.omniBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self requestQrcode:TRCType];
+        [self.rechargeView.trcBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.rechargeView.ercBtn setTitleColor:[UIColor colorWithHexString:@"#6d737c"] forState:UIControlStateNormal];
-        self.rechargeView.omniBtn.layer.borderColor = [UIColor colorWithHexString:@"#2d83cd"].CGColor;
+        self.rechargeView.trcBtn.layer.borderColor = [UIColor colorWithHexString:@"#2d83cd"].CGColor;
         self.rechargeView.ercBtn.layer.borderColor = [UIColor colorWithHexString:@"#6d737c"].CGColor;
-        self.selectedProtocol = @"OMNI";
-        self.rechargeView.qrcodeImg.image = [PublicMethod QRCodeMethod:self.qrJson[@"omni"]];
+        self.selectedProtocol = @"TRC20";
     }
 }
 

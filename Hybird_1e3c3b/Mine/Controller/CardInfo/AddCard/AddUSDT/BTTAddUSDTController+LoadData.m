@@ -15,15 +15,15 @@
 
 - (void)loadUSDTData {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-    [params setValue:@"1" forKey:@"walletType"];
-    [IVNetwork requestPostWithUrl:BTTQueryUSDTWallet paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [params setValue:@"WALLET_TYPE" forKey:@"bizCode"];
+    [IVNetwork requestPostWithUrl:BTTDynamicQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
-            if ([result.body isKindOfClass:[NSArray class]]) {
-                NSArray *array = result.body;
-                
+            if ([result.body[@"data"] isKindOfClass:[NSArray class]]) {
+                NSArray *array = result.body[@"data"];
                 if (array.count>0) {
                     for (int i = 0; i<array.count; i++) {
+                        
                         BTTUSDTWalletTypeModel *typeModel = [BTTUSDTWalletTypeModel yy_modelWithJSON:array[i]];
                         if (![typeModel.code isEqualToString:@"bitoll"] &&
                             ![typeModel.code isEqualToString:@"DCBOX"] &&
@@ -37,7 +37,6 @@
                             [self.collectionView reloadData];
                         }
                     }
-                    
                 }else{
                     [self.usdtDatas addObjectsFromArray:array];
                     CGFloat height = 96+(self.usdtDatas.count-1)/3*36;
@@ -47,7 +46,6 @@
             }
         }
     }];
-    
 }
 
 - (void)makeCallWithPhoneNum:(NSString *)phone captcha:(NSString *)captcha captchaId:(NSString *)captchaId {

@@ -141,7 +141,7 @@
     if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]&&indexPath.row==self.sheetDatas.count-4) {
         BTTWithDrawProtocolView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawProtocolView" forIndexPath:indexPath];
         if ([self.bankList[self.selectIndex].protocol isEqualToString:@""]) {
-            [cell setTypeData:@[@"OMNI",@"ERC20"]];
+            [cell setTypeData:@[@"OMNI",@"ERC20", @"TRC20"]];
         }else{
             [cell setTypeData:@[self.bankList[self.selectIndex].protocol]];
         }

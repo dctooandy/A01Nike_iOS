@@ -52,6 +52,17 @@
     [self.rechargeView addSubview:ercBtn];
     self.ercBtn = ercBtn;
     
+    UIButton *trcBtn = [[UIButton alloc]initWithFrame:CGRectMake(132, 48, 100, 30)];
+    [trcBtn setTitle:@"TRC20" forState:UIControlStateNormal];
+    trcBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [trcBtn setTitleColor:[UIColor colorWithHexString:@"#6d737c"] forState:UIControlStateNormal];
+    trcBtn.layer.cornerRadius = 4.0;
+    trcBtn.clipsToBounds = YES;
+    trcBtn.layer.borderWidth = 0.5;
+    trcBtn.layer.borderColor = [UIColor colorWithHexString:@"#6d737c"].CGColor;
+    [self.rechargeView addSubview:trcBtn];
+    self.trcBtn = trcBtn;
+    
     UIButton *omniBtn = [[UIButton alloc]initWithFrame:CGRectMake(132, 48, 100, 30)];
     [omniBtn setTitle:@"OMNI" forState:UIControlStateNormal];
     omniBtn.titleLabel.font = [UIFont systemFontOfSize:14];
