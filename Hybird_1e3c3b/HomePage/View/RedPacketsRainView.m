@@ -36,7 +36,6 @@
 @property (nonatomic, strong) NSTimer *autoOpenBagTimer;
 @property (nonatomic, strong) CALayer *moveLayer;
 @property (nonatomic, strong) CALayer *bagMoveLayer;
-@property (nonatomic, strong) CALayer *btnMoveLayer;
 @property (nonatomic, assign) NSInteger redPacketsResultCount;
 @property (nonatomic, assign) NSInteger selectedRedPacketNum;
 @property (nonatomic, assign) RedPocketsViewStyle viewStyle;
@@ -46,6 +45,7 @@
 @property (nonatomic, strong) SDCycleScrollView *giftBannerView;
 @property (nonatomic, strong) NSMutableArray *bulletViewsArr;
 @property (weak, nonatomic) IBOutlet UIView *bagView;
+@property (weak, nonatomic) IBOutlet UIView *bagResultView;
 @property (weak, nonatomic) IBOutlet UIButton *openGiftBagButton;
 @property (weak, nonatomic) IBOutlet UIButton *closeGiftBagButton;
 
@@ -72,7 +72,6 @@
             [self startTimeWithDuration:duration];
             [self setupImageGroup];
             [self setupDataForSortArray];
-
             [self setupShowGiftBagButtonAnimation];
             break;
         case RedPocketsViewResult:
@@ -211,42 +210,40 @@
         CALayer * layer = self.rainBackgroundView.layer.sublayers[i];
         if ([layer animationForKey:@"bag"])
         {
-//            [layer setHidden:YES];
             CGFloat scaleValue = 1.4;
             [layer removeAnimationForKey:@"bag"];//红包福袋消失
+            [layer removeFromSuperlayer];
             CAKeyframeAnimation * moveAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
             NSValue * A = [NSValue valueWithCGPoint:CGPointMake(0, SCREEN_HEIGHT-200)];
             NSValue * B = [NSValue valueWithCGPoint:CGPointMake(SCREEN_WIDTH/2 - (200 * scaleValue)/2 , SCREEN_HEIGHT * 0.65)];
             UIImageView * newPacketIV = [UIImageView new];
             newPacketIV.image = [UIImage imageNamed:@"img_yellowbag_game_popup"];
             newPacketIV.frame = CGRectMake(0, 0, 200 * scaleValue , 200 * scaleValue);
-            layer.contents = (id)newPacketIV.image.CGImage;
             moveAnimation.values = @[A,B];
             moveAnimation.duration = 0.3;
             moveAnimation.repeatCount = 0;
             moveAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
             [moveAnimation setFillMode:kCAFillModeForwards];
             [moveAnimation setRemovedOnCompletion:NO];
-            [layer addAnimation:moveAnimation forKey:@"bagFly"];// 红包福袋移动到中间上面
-            layer.transform = CATransform3DMakeScale(scaleValue, scaleValue, 1);// 红包福袋放大
+//            layer.contents = (id)newPacketIV.image.CGImage;
+//            [layer addAnimation:moveAnimation forKey:@"bagFly"];// 红包福袋移动到中间上面
+//            layer.transform = CATransform3DMakeScale(scaleValue, scaleValue, 1);// 红包福袋放大
+            self.bagMoveLayer = [CALayer new];
+            UIImageView * imageV = [UIImageView new];
+            imageV.image = [UIImage imageNamed:@"img_redbag"];
+            imageV.frame = CGRectMake(0, 0, 200 , 200 );
+            self.bagMoveLayer.bounds = imageV.frame;
+            self.bagMoveLayer.anchorPoint = CGPointMake(0, 1);
+            self.bagMoveLayer.position = CGPointMake(-50, SCREEN_HEIGHT );
+            self.bagMoveLayer.contents = (id)newPacketIV.image.CGImage;
+            [self.bagMoveLayer addAnimation:moveAnimation forKey:@"bagFly"];// 红包福袋移动到中间上面
+            self.bagMoveLayer.transform = CATransform3DMakeScale(scaleValue, scaleValue, 1);// 红包福袋放大
+            [self.bagView.layer addSublayer:self.bagMoveLayer];
         }
     }
     [self showResult];
 }
-- (void)setupGiftBagButtonAnimation
-{
-    CAKeyframeAnimation * tranAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    CATransform3D r0 = CATransform3DMakeRotation(M_PI/180 * (arc4random() % 360 ) , 0, 0, -1);
-    CATransform3D r1 = CATransform3DMakeRotation(M_PI/180 * (arc4random() % 360 ) , 0, 0, -1);
-    tranAnimation.values = @[[NSValue valueWithCATransform3D:r0],[NSValue valueWithCATransform3D:r1]];
-    tranAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    tranAnimation.duration = arc4random() % 200 / 100.0 + 13.5;
-    //为了避免旋转动画完成后再次回到初始状态。
-    [tranAnimation setFillMode:kCAFillModeForwards];
-    [tranAnimation setRemovedOnCompletion:NO];
-    [self.btnMoveLayer addAnimation:tranAnimation forKey:@"bag"];
-//    layer.transform = CATransform3DMakeScale(scaleValue, scaleValue, 1);
-}
+
 -(void)showResult
 {
     [self.closeButton setHidden:NO];
@@ -680,11 +677,13 @@
     [self.autoOpenBagTimer invalidate];
     [self.closeGiftBagButton setHidden:NO];
     [self.openGiftBagButton setHidden:YES];
+    [self.bagResultView setHidden:NO];
     [self.bagMoveLayer removeFromSuperlayer];
 }
 - (IBAction)closeGiftBagAction:(id)sender {
     [self.bagView setHidden:YES];
     [self.bagView setAlpha:0.0];
+    [self.bagResultView setHidden:YES];
     [self.closeGiftBagButton setHidden:YES];
     [UIView animateWithDuration:0.3 animations:^{
         [self.labelBackgroundView setAlpha:1.0];
