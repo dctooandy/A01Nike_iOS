@@ -206,7 +206,7 @@
         [MBProgressHUD showError:@"OMNI协议钱包，请以1或3开头" toView:self.view];
     }else if ([self.selectedProtocol isEqualToString:@"ERC20"]&&![firstTwochar isEqualToString:@"0x"]&&![model.code isEqualToString:@"bitoll"]){
         [MBProgressHUD showError:@"ERC20协议钱包，请以0x开头" toView:self.view];
-    }else if ([self.selectedProtocol isEqualToString:@"TRC20"]&&![firstTwochar isEqualToString:@"T"]&&![model.code isEqualToString:@"bitoll"]){
+    }else if ([self.selectedProtocol isEqualToString:@"TRC20"]&&![firstChar isEqualToString:@"T"]&&![model.code isEqualToString:@"bitoll"]){
         [MBProgressHUD showError:@"TRC20协议钱包，请以T开头" toView:self.view];
     }else if (![PublicMethod isValidateWithdrawPwdNumber:self.withdrawPwdString]) {
         [MBProgressHUD showError:@"输入的资金密码格式有误" toView:self.view];

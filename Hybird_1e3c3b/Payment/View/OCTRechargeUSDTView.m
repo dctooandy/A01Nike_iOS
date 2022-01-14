@@ -63,16 +63,16 @@
     [self.rechargeView addSubview:trcBtn];
     self.trcBtn = trcBtn;
     
-    UIButton *omniBtn = [[UIButton alloc]initWithFrame:CGRectMake(132, 48, 100, 30)];
-    [omniBtn setTitle:@"OMNI" forState:UIControlStateNormal];
-    omniBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    [omniBtn setTitleColor:[UIColor colorWithHexString:@"#6d737c"] forState:UIControlStateNormal];
-    omniBtn.layer.cornerRadius = 4.0;
-    omniBtn.clipsToBounds = YES;
-    omniBtn.layer.borderWidth = 0.5;
-    omniBtn.layer.borderColor = [UIColor colorWithHexString:@"#6d737c"].CGColor;
-    [self.rechargeView addSubview:omniBtn];
-    self.omniBtn = omniBtn;
+//    UIButton *omniBtn = [[UIButton alloc]initWithFrame:CGRectMake(132, 48, 100, 30)];
+//    [omniBtn setTitle:@"OMNI" forState:UIControlStateNormal];
+//    omniBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+//    [omniBtn setTitleColor:[UIColor colorWithHexString:@"#6d737c"] forState:UIControlStateNormal];
+//    omniBtn.layer.cornerRadius = 4.0;
+//    omniBtn.clipsToBounds = YES;
+//    omniBtn.layer.borderWidth = 0.5;
+//    omniBtn.layer.borderColor = [UIColor colorWithHexString:@"#6d737c"].CGColor;
+//    [self.rechargeView addSubview:omniBtn];
+//    self.omniBtn = omniBtn;
     
     UILabel *tipLabel = [[UILabel alloc]init];
     tipLabel.text = @"请慎重选择协议类型,若协议类型错误则款项无法到账";

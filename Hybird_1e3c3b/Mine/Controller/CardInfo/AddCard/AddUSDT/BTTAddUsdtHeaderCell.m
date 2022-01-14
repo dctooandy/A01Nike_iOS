@@ -34,7 +34,7 @@
         [infoView addSubview:label];
         
         _trcBtn = [[UIButton alloc]initWithFrame:CGRectMake(246, 44, 100, 31)];
-        [_trcBtn setTitle:@"ERC20" forState:UIControlStateNormal];
+        [_trcBtn setTitle:@"TRC20" forState:UIControlStateNormal];
         [_trcBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _trcBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
@@ -113,7 +113,7 @@
     _omniBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
     _ercBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
     if (self.tapProtocol) {
-        self.tapProtocol(@"OMNI");
+        self.tapProtocol(@"TRC20");
     }
 }
 
