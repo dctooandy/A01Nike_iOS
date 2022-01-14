@@ -628,6 +628,7 @@
 		76756F8726A6C5790065F99B /* BTTDefaultPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756F8526A6C5790065F99B /* BTTDefaultPopView.m */; };
 		7675705A26A9657A0065F99B /* BTTPopViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675705926A9657A0065F99B /* BTTPopViewModel.m */; };
 		767DF244278FDB4E00F50520 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
+		767DF24827902F5300F50520 /* mammon2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 767DF24727902F5200F50520 /* mammon2.gif */; };
 		76B499F22761D4D1003CD35B /* dEgg1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B499F12761D4D0003CD35B /* dEgg1.gif */; };
 		76B499F42761D5C4003CD35B /* dEgg2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B499F32761D5C4003CD35B /* dEgg2.gif */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
@@ -1919,6 +1920,7 @@
 		76756F8526A6C5790065F99B /* BTTDefaultPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDefaultPopView.m; sourceTree = "<group>"; };
 		7675705826A9657A0065F99B /* BTTPopViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPopViewModel.h; sourceTree = "<group>"; };
 		7675705926A9657A0065F99B /* BTTPopViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPopViewModel.m; sourceTree = "<group>"; };
+		767DF24727902F5200F50520 /* mammon2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = mammon2.gif; sourceTree = "<group>"; };
 		76B499F12761D4D0003CD35B /* dEgg1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg1.gif; sourceTree = "<group>"; };
 		76B499F32761D5C4003CD35B /* dEgg2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg2.gif; sourceTree = "<group>"; };
 		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
@@ -2886,6 +2888,7 @@
 				41588C9626D889BB001060E7 /* 918_Anniversary.gif */,
 				76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */,
 				76168DF526F47AC500D6D8AC /* APPChinaNationalDay.gif */,
+				767DF24727902F5200F50520 /* mammon2.gif */,
 				76B499F12761D4D0003CD35B /* dEgg1.gif */,
 				76B499F32761D5C4003CD35B /* dEgg2.gif */,
 				76FC864027630587005710FD /* dEgg3.gif */,
@@ -5305,6 +5308,7 @@
 				3A21AEB02394BCBF009E73FD /* BTTShowErcodePopview.xib in Resources */,
 				D3A9A71B240E2B6A007F672A /* BTTNormalRegisterSuccessController.xib in Resources */,
 				3ADD23772177328B00FA959A /* BTTMeSaveMoneyCell.xib in Resources */,
+				767DF24827902F5300F50520 /* mammon2.gif in Resources */,
 				D3B47D5923B70A5500D37C7F /* app.zip in Resources */,
 				3A11AE592186A71100B1AFF4 /* BTTBookMessageCell.xib in Resources */,
 				3AAE821A219A738B003EC8B0 /* BTTLoginOrRegisterBtnCell.xib in Resources */,

@@ -46,6 +46,8 @@
 @property (nonatomic, strong) NSMutableArray *bulletViewsArr;
 @property (weak, nonatomic) IBOutlet UIView *bagView;
 @property (weak, nonatomic) IBOutlet UIView *bagResultView;
+@property (weak, nonatomic) IBOutlet UIImageView *bagImageView;
+
 @property (weak, nonatomic) IBOutlet UIButton *openGiftBagButton;
 @property (weak, nonatomic) IBOutlet UIButton *closeGiftBagButton;
 
@@ -139,15 +141,15 @@
 }
 - (void)setupGiftBag
 {
-    UIImageView * imageV = [UIImageView new];
-    imageV.image = [UIImage imageNamed:@"img_redbag"];
-    imageV.frame = CGRectMake(0, 0, 200 , 200 );
-    self.bagMoveLayer = [CALayer new];
-    self.bagMoveLayer.bounds = imageV.frame;
-    self.bagMoveLayer.anchorPoint = CGPointMake(0, 1);
-    self.bagMoveLayer.position = CGPointMake(-50, SCREEN_HEIGHT );
-    self.bagMoveLayer.contents = (id)imageV.image.CGImage;
-    [self.rainBackgroundView.layer addSublayer:self.bagMoveLayer];
+//    UIImageView * imageV = [UIImageView new];
+//    imageV.image = [UIImage imageNamed:@"img_redbag"];
+//    imageV.frame = CGRectMake(0, 0, 200 , 200 );
+//    self.bagMoveLayer = [CALayer new];
+//    self.bagMoveLayer.bounds = self.bagImageView.frame;
+//    self.bagMoveLayer.anchorPoint = CGPointMake(0, 1);
+//    self.bagMoveLayer.position = CGPointMake(-50, SCREEN_HEIGHT );
+//    self.bagMoveLayer.contents = (id)self.bagImageView.image.CGImage;
+//    [self.rainBackgroundView.layer addSublayer:self.bagMoveLayer];
     [self addGiftBagAnimation];
 }
 - (void)setupShowGiftBagButtonAnimation
@@ -160,18 +162,27 @@
 }
 - (void)addGiftBagAnimation
 {
-    CAKeyframeAnimation * bagTranAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    CATransform3D br0 = CATransform3DMakeRotation((-14) / 180.0 * M_PI, 0, 0, -1);
-    CATransform3D br1 = CATransform3DMakeRotation((0) / 180.0 * M_PI , 0, 0, -1);
-    bagTranAnimation.values = @[[NSValue valueWithCATransform3D:br0],[NSValue valueWithCATransform3D:br1]];
-    bagTranAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    bagTranAnimation.duration = 1;
-    bagTranAnimation.repeatCount = NSIntegerMax;
-    bagTranAnimation.autoreverses = true;
-    //为了避免旋转动画完成后再次回到初始状态。
-    [bagTranAnimation setFillMode:kCAFillModeForwards];
-    [bagTranAnimation setRemovedOnCompletion:NO];
-    [self.bagMoveLayer addAnimation:bagTranAnimation forKey:@"bag"];
+//    CAKeyframeAnimation * bagTranAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+//    CATransform3D br0 = CATransform3DMakeRotation((-14) / 180.0 * M_PI, 0, 0, -1);
+//    CATransform3D br1 = CATransform3DMakeRotation((0) / 180.0 * M_PI , 0, 0, -1);
+//    bagTranAnimation.values = @[[NSValue valueWithCATransform3D:br0],[NSValue valueWithCATransform3D:br1]];
+//    bagTranAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+//    bagTranAnimation.duration = 1;
+//    bagTranAnimation.repeatCount = NSIntegerMax;
+//    bagTranAnimation.autoreverses = true;
+//    //为了避免旋转动画完成后再次回到初始状态。
+//    [bagTranAnimation setFillMode:kCAFillModeForwards];
+//    [bagTranAnimation setRemovedOnCompletion:NO];
+//    [self.bagMoveLayer addAnimation:bagTranAnimation forKey:@"bag"];
+    [self.bagImageView setHidden:NO];
+    CGRect originButton = self.bagImageView.frame;
+    originButton.size.width = originButton.size.width + 10;
+    originButton.size.height = originButton.size.height + 10;
+    originButton.origin.x = originButton.origin.x + 5;
+    originButton.origin.y = originButton.origin.y - 5;
+    [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse animations:^{
+        [self.bagImageView setFrame:originButton];
+    } completion:nil];
 }
 - (void)addRainAnimation
 {
@@ -199,26 +210,27 @@
 {
     [self.timer invalidate];
     [self.tapGesture setEnabled:NO];
+    [self.bagImageView setHidden:YES];
     for (NSInteger i = 0; i < self.redPocketsRainView.layer.sublayers.count ; i ++)
     {
         CALayer * layer = self.redPocketsRainView.layer.sublayers[i];
         
         [layer removeAllAnimations];
     }
-    for (NSInteger i = 0; i < self.rainBackgroundView.layer.sublayers.count ; i ++)
-    {
-        CALayer * layer = self.rainBackgroundView.layer.sublayers[i];
-        if ([layer animationForKey:@"bag"])
-        {
+//    for (NSInteger i = 0; i < self.rainBackgroundView.layer.sublayers.count ; i ++)
+//    {
+//        CALayer * layer = self.rainBackgroundView.layer.sublayers[i];
+//        if ([layer animationForKey:@"bag"])
+//        {
             CGFloat scaleValue = 1.4;
-            [layer removeAnimationForKey:@"bag"];//红包福袋消失
-            [layer removeFromSuperlayer];
+//            [layer removeAnimationForKey:@"bag"];//红包福袋消失
+//            [layer removeFromSuperlayer];
             CAKeyframeAnimation * moveAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
-            NSValue * A = [NSValue valueWithCGPoint:CGPointMake(0, SCREEN_HEIGHT-200)];
-            NSValue * B = [NSValue valueWithCGPoint:CGPointMake(SCREEN_WIDTH/2 - (200 * scaleValue)/2 , SCREEN_HEIGHT * 0.65)];
+            NSValue * A = [NSValue valueWithCGPoint:CGPointMake(0, SCREEN_HEIGHT-SCREEN_WIDTH * (200.0/414.0))];
+            NSValue * B = [NSValue valueWithCGPoint:CGPointMake(SCREEN_WIDTH/2 - (SCREEN_WIDTH * (200.0/414.0) * scaleValue)/2 , SCREEN_HEIGHT * 0.65)];
             UIImageView * newPacketIV = [UIImageView new];
             newPacketIV.image = [UIImage imageNamed:@"img_yellowbag_game_popup"];
-            newPacketIV.frame = CGRectMake(0, 0, 200 * scaleValue , 200 * scaleValue);
+            newPacketIV.frame = CGRectMake(0, 0, SCREEN_WIDTH * (200.0/414.0) * scaleValue , SCREEN_WIDTH * (200.0/414.0) * scaleValue);
             moveAnimation.values = @[A,B];
             moveAnimation.duration = 0.3;
             moveAnimation.repeatCount = 0;
@@ -231,7 +243,8 @@
             self.bagMoveLayer = [CALayer new];
             UIImageView * imageV = [UIImageView new];
             imageV.image = [UIImage imageNamed:@"img_redbag"];
-            imageV.frame = CGRectMake(0, 0, 200 , 200 );
+            
+            imageV.frame = CGRectMake(0, 0, SCREEN_WIDTH * (200.0/414.0) , SCREEN_WIDTH * (200.0/414.0));
             self.bagMoveLayer.bounds = imageV.frame;
             self.bagMoveLayer.anchorPoint = CGPointMake(0, 1);
             self.bagMoveLayer.position = CGPointMake(-50, SCREEN_HEIGHT );
@@ -239,8 +252,8 @@
             [self.bagMoveLayer addAnimation:moveAnimation forKey:@"bagFly"];// 红包福袋移动到中间上面
             self.bagMoveLayer.transform = CATransform3DMakeScale(scaleValue, scaleValue, 1);// 红包福袋放大
             [self.bagView.layer addSublayer:self.bagMoveLayer];
-        }
-    }
+//        }
+//    }
     [self showResult];
 }
 
@@ -260,7 +273,7 @@
 }
 - (void)clickRed:(UITapGestureRecognizer *)sender
 {
-    CGPoint point = [sender locationInView:self];
+    CGPoint point = [sender locationInView:self.redPocketsRainView];
     
     for (int i = 0 ; i < self.redPocketsRainView.layer.sublayers.count ; i ++)
     {
@@ -514,11 +527,11 @@
         self.labelBackgroundView.transform = CGAffineTransformMakeTranslation(0, -(CGRectGetMinY(self.labelBackgroundView.frame) - 50 + CGRectGetHeight(self.labelBackgroundView.frame)/4));
         self.labelBackgroundView.transform = self.labelBackgroundView.transform = CGAffineTransformScale(self.labelBackgroundView.transform, 0.50f, 0.50f);
         self.labelMaskView.transform =  CGAffineTransformMakeTranslation(0,  -CGRectGetHeight(self.labelMaskView.frame)/4);
-        self.labelMaskView.transform = self.labelMaskView.transform = CGAffineTransformScale(self.labelMaskView.transform, 1.0f, 0.20f);
+        self.labelMaskView.transform = self.labelMaskView.transform = CGAffineTransformScale(self.labelMaskView.transform, 1.0f, 0.30f);
         [self.centerGiftBagImageView setAlpha:0.0];
         [self.centerGiftBagImageView setHidden:YES];
         // 加入Gif
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"918_Anniversary" ofType:@"gif"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"mammon2" ofType:@"gif"];
         NSData *data = [NSData dataWithContentsOfFile:path];
         self.mammonImageView.image = [UIImage sd_animatedGIFWithData:data];
     }];
@@ -558,7 +571,7 @@
         [self.rainBackgroundImageView setImage:ImageNamed((@"bg_img2"))];
     }];
     [self.redPocketsRainView addGestureRecognizer:self.tapGesture];
-    float t = (arc4random() % 10) + 5;
+    float t = (arc4random() % 7) + 6;
     self.timer = [NSTimer scheduledTimerWithTimeInterval:(1/t) target:self selector:@selector(showRain) userInfo:nil repeats:YES];
     [self.timer fire];
     
@@ -599,12 +612,27 @@
 - (void)changeBagColor
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [UIView animateWithDuration:0.1 animations:^{
-            UIImageView * imageV = [UIImageView new];
-            imageV.image = [UIImage imageNamed:@"img_yellowbag_game_popup"];
-            imageV.frame = CGRectMake(0, 0, 200 , 200 );
-            self.bagMoveLayer.contents = (id)imageV.image.CGImage;
-        }];
+        [self.bagImageView.layer removeAllAnimations];
+        CGRect originFrame = self.bagImageView.frame;
+        originFrame.size.width = SCREEN_WIDTH * (247.0/414.0);
+        originFrame.size.height = SCREEN_WIDTH * (289.0/414.0);
+        [self.bagImageView setFrame:originFrame];
+//        [self.bagImageView setFrame:];
+        CGRect newFrame = CGRectMake(self.bagImageView.origin.x, self.bagImageView.origin.y, SCREEN_WIDTH * (247.0/414.0) , SCREEN_WIDTH * (289.0/414.0) );
+        newFrame.size.width += 20;
+        newFrame.size.height += 20;
+//        newFrame.origin.x += 30;
+        newFrame.origin.y -= 10;
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse animations:^{
+            self.bagImageView.image = [UIImage imageNamed:@"img_yellowbag_game"];
+            [self.bagImageView setFrame:newFrame];
+//            UIImageView * imageV = [UIImageView new];
+//            imageV.image = [UIImage imageNamed:@"img_yellowbag_game_popup"];
+//            imageV.frame = CGRectMake(0, 0, SCREEN_WIDTH * (247.0/414.0) , SCREEN_WIDTH * (289.0/414.0) );
+////            imageV.frame = CGRectMake(0, 0, 247 , 289 );
+//            self.bagMoveLayer.bounds = imageV.frame;
+//            self.bagMoveLayer.contents = (id)imageV.image.CGImage;
+        } completion:nil];
     });
 }
 - (void)showOpenGiftBagButton
