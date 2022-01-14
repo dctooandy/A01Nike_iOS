@@ -53,7 +53,7 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
 {
     self = [super init];
     if (self) {
-        UIImage * closeImage = [UIImage imageNamed:@"ic_new_year_pop_close_btn"];
+        UIImage * closeImage = [UIImage imageNamed:@"assisClose"];
         CGFloat assistiveBtnHeight = 190 + 30;
         CGFloat loginBtnViewHeight = 87;
         CGFloat postionY = SCREEN_HEIGHT - kTabbarHeight - assistiveBtnHeight/2 - loginBtnViewHeight;
