@@ -61,8 +61,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
             BOOL isActivityDuration = [duractionArray[1] boolValue];
             if (isBeforeDuration || isActivityDuration)
             {
-                __block int timeout = [PublicMethod countDownIntervalWithDurationTag:isActivityDuration];
-                [weakSelf showRedPacketsRainViewWithDuration:timeout];
+                [weakSelf showRedPacketsRainViewwWithStyle:(isActivityDuration ? RedPocketsViewBegin: RedPocketsViewPrefix)];
             }else
             {//跳去活动结束画面
                 weakSelf.redPocketsAssistiveButton.hidden = true;

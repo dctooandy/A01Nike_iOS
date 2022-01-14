@@ -46,7 +46,6 @@
 #import "BTTUserForzenManager.h"
 #import "AppDelegate.h"
 #import "BTTAssistiveButtonModel.h"
-#import "RedPacketsRainView.h"
 #import "RedPacketsPreView.h"
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -1232,8 +1231,8 @@
             // 预热
             //暂时让他出来
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf showRedPacketsPreViewWithDuration:10];
-//                [weakSelf showRedPacketsRainViewWithDuration:RedPacketDuration];
+//                [weakSelf showRedPacketsPreViewWithDuration:10];//10秒倒计时弹窗
+                [weakSelf showRedPacketsRainViewwWithStyle:RedPocketsViewPrefix];
             });
         }
     } WithDefaultCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
@@ -1299,15 +1298,14 @@
     };
     alertView.getRedBlock = ^{
         [popView dismiss];
-        __block int timeout = [PublicMethod countDownIntervalWithDurationTag:YES];
-        [weakSelf showRedPacketsRainViewWithDuration:timeout];
+        [weakSelf showRedPacketsRainViewwWithStyle:RedPocketsViewBegin];
     };
 }
 #pragma mark - 红包雨 预热/活动弹窗
-- (void)showRedPacketsRainViewWithDuration:(int)duration
+- (void)showRedPacketsRainViewwWithStyle:(RedPocketsViewStyle)currentStyle
 {
     RedPacketsRainView *alertView = [RedPacketsRainView viewFromXib];
-    [alertView configForRedPocketsView:RedPocketsViewBegin withDuration:duration];
+    [alertView configForRedPocketsViewWithStyle:currentStyle];
     BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
     popView.isClickBGDismiss = YES;
     [popView pop];

@@ -9,6 +9,7 @@
 #import "BTTCollectionViewController.h"
 #import "AssistiveButton.h"
 #import "AppdelegateManager.h"
+#import "RedPacketsRainView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL idDisable;
 
 - (void)setupElements;
-- (void)showRedPacketsRainViewWithDuration:(int)duration;
+- (void)showRedPacketsRainViewwWithStyle:(RedPocketsViewStyle)currentStyle;
 @end
 
 NS_ASSUME_NONNULL_END
