@@ -7,12 +7,14 @@
 //
 
 #import "RedPacketsPreView.h"
+#import "GradientImage.h"
 
 @interface RedPacketsPreView()
 
 @property (weak, nonatomic) IBOutlet UILabel *countDownSenondLabel;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @end
 @implementation RedPacketsPreView
 - (void)awakeFromNib {
@@ -70,5 +72,15 @@
         self.dismissBlock();
     }
 }
-
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
+    UIImage *myGradient = [[GradientImage sharedInstance] layerImage:TopToBottom
+                                                              colors:@[[UIColor colorWithHexString:@"EB7A73"],
+                                                                       [UIColor colorWithHexString:@"FFEACA"],
+                                                                       [UIColor colorWithHexString:@"FFEC85"]]
+                                                              bounds:self.titleLabel.bounds];
+    self.titleLabel.textColor = [UIColor colorWithPatternImage:myGradient];
+    self.countDownSenondLabel.textColor = [UIColor colorWithPatternImage:myGradient];
+}
 @end
