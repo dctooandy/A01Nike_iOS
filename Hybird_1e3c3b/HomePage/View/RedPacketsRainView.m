@@ -90,7 +90,7 @@
 {
 //    FiveStarCopy
 //    FourStarCopy
-    NSMutableArray *h5Images = [[NSMutableArray alloc] initWithObjects:@"FiveStarCopy",@"FourStarCopy", nil];
+    NSMutableArray *h5Images = [[NSMutableArray alloc] initWithObjects:@"popup1",@"popup2", nil];
     
     self.bannerView.imageURLStringsGroup = h5Images;
 }
@@ -731,9 +731,12 @@
         SDCycleScrollView *bannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:[UIImage imageNamed:@"3"]];
         [self.activityRuleView addSubview:bannerView];
         [bannerView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.left.right.mas_equalTo(self.activityRuleView);
-            make.height.equalTo(self.activityRuleView).multipliedBy(0.85);
+            make.centerX.mas_equalTo(self.activityRuleView.mas_centerX);
+            make.centerY.mas_equalTo(self.activityRuleView.mas_centerY);
+            make.height.equalTo(self.activityRuleView).multipliedBy((595.0/813.0));
+            make.width.equalTo(self.activityRuleView).multipliedBy((340.0/414.0));
         }];
+        bannerView.backgroundColor = [UIColor clearColor];
         bannerView.layer.cornerRadius = 10;
         bannerView.layer.masksToBounds = true;
         bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;

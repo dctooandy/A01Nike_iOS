@@ -40,19 +40,19 @@
                     </constraints>
                 </view>
                 <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H7g-Yz-Bzf">
-                    <rect key="frame" x="50" y="200" width="314" height="496.5"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896.5"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aQT-Dz-Xcs">
-                            <rect key="frame" x="135.5" y="453.5" width="43" height="43"/>
+                            <rect key="frame" x="185.5" y="811" width="43" height="43"/>
                             <state key="normal" image="icon_popup_close"/>
                             <connections>
                                 <action selector="dismissRulesView" destination="iN0-l3-epB" eventType="touchUpInside" id="tuE-TG-nh1"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="aQT-Dz-Xcs" secondAttribute="bottom" id="6XH-PR-pCz"/>
+                        <constraint firstAttribute="bottom" secondItem="aQT-Dz-Xcs" secondAttribute="bottom" multiplier="1.05" id="6XH-PR-pCz"/>
                         <constraint firstItem="aQT-Dz-Xcs" firstAttribute="centerX" secondItem="H7g-Yz-Bzf" secondAttribute="centerX" id="RRM-Ks-Qna"/>
                     </constraints>
                 </view>
@@ -639,19 +639,21 @@
                 <constraint firstItem="H7g-Yz-Bzf" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="322-rp-yOd"/>
                 <constraint firstAttribute="bottom" secondItem="Z5W-E5-F5r" secondAttribute="bottom" id="452-NS-vdb"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="uSV-gi-6bB" secondAttribute="trailing" id="AQK-le-V6U"/>
-                <constraint firstItem="H7g-Yz-Bzf" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.758454" id="BIW-WC-0Zr"/>
                 <constraint firstItem="lLp-Md-ud5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Cdf-w0-Lzx"/>
                 <constraint firstAttribute="bottom" secondItem="uSV-gi-6bB" secondAttribute="bottom" id="D2d-TI-o4r"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="H7g-Yz-Bzf" secondAttribute="trailing" id="O7Q-Yt-pta"/>
                 <constraint firstItem="H7g-Yz-Bzf" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Qzv-Cq-G1g"/>
                 <constraint firstAttribute="trailing" secondItem="Z5W-E5-F5r" secondAttribute="trailing" id="R9f-UL-pH9"/>
                 <constraint firstItem="uSV-gi-6bB" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Tzu-kP-ZO7"/>
                 <constraint firstAttribute="bottom" secondItem="lLp-Md-ud5" secondAttribute="bottom" id="U8c-hX-IG9"/>
+                <constraint firstItem="H7g-Yz-Bzf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="XkG-eo-3rg"/>
                 <constraint firstItem="Z5W-E5-F5r" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="XxZ-RO-ruL"/>
                 <constraint firstItem="lLp-Md-ud5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YyI-dt-NFZ"/>
                 <constraint firstItem="uSV-gi-6bB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bNj-3H-AwN"/>
                 <constraint firstAttribute="trailing" secondItem="lLp-Md-ud5" secondAttribute="trailing" id="bdj-Yf-2II"/>
+                <constraint firstItem="H7g-Yz-Bzf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="edD-Ht-lzo"/>
                 <constraint firstItem="Z5W-E5-F5r" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="giC-8f-6kE"/>
-                <constraint firstItem="H7g-Yz-Bzf" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.553571" id="vsw-en-FDP"/>
+                <constraint firstAttribute="bottom" secondItem="H7g-Yz-Bzf" secondAttribute="bottom" id="o8j-DO-BA3"/>
             </constraints>
             <connections>
                 <outlet property="activityRuleView" destination="H7g-Yz-Bzf" id="4rO-7h-E14"/>
