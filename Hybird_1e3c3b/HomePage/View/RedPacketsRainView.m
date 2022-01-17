@@ -13,27 +13,44 @@
 #import "UIImage+GIF.h"
 #import "GradientImage.h"
 @interface RedPacketsRainView()<SDCycleScrollViewDelegate , QBulletScreenViewDelegate>
-@property (weak, nonatomic) IBOutlet UIView *labelBackgroundView;
-@property (weak, nonatomic) IBOutlet UIImageView *centerGiftBagImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *mammonImageView;
+// 按照页面顺序
+@property (weak, nonatomic) IBOutlet UIView *cardsBonusView;
+@property (weak, nonatomic) IBOutlet UIImageView *cardBonusImageView;
+@property (weak, nonatomic) IBOutlet UIButton *backToRedPacketsViewBtn;
+@property (weak, nonatomic) IBOutlet UIView *giftView;
+@property (weak, nonatomic) IBOutlet UIImageView *giftImageView;
+@property (weak, nonatomic) IBOutlet UILabel *giftTitleLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *countdownLab;
-@property (weak, nonatomic) IBOutlet UIButton *closeButton;
+@property (weak, nonatomic) IBOutlet UIView *activityRuleView;
+
 @property (weak, nonatomic) IBOutlet UIView *rainBackgroundView;
 @property (weak, nonatomic) IBOutlet UIImageView *rainBackgroundImageView;
-@property (weak, nonatomic) IBOutlet UIView *redPocketsRainView;
-@property (weak, nonatomic) IBOutlet UIView *cardsBonusView;
-@property (weak, nonatomic) IBOutlet UIImageView *showCardsImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *cardBonusImageView;
-@property (weak, nonatomic) IBOutlet UIButton *showCardsButton;
-@property (weak, nonatomic) IBOutlet UIView *activityRuleView;
-@property (weak, nonatomic) IBOutlet UIButton *backToRedPacketsViewBtn;
+@property (weak, nonatomic) IBOutlet UIView *labelBackgroundView;
+@property (weak, nonatomic) IBOutlet UIView *labelMaskView;
+@property (weak, nonatomic) IBOutlet UILabel *countDownTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *countdownLab;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *countDownLabelCenter;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *countDownLabelTop;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *mammonTop;
-@property (weak, nonatomic) IBOutlet UIView *labelMaskView;
-@property (weak, nonatomic) IBOutlet UILabel *countDownTitleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *centerGiftBagImageView;
+@property (weak, nonatomic) IBOutlet UIView *redPocketsRainView;
+@property (weak, nonatomic) IBOutlet UIImageView *showCardsImageView;
+@property (weak, nonatomic) IBOutlet UIButton *showCardsButton;
+@property (weak, nonatomic) IBOutlet UIImageView *mammonImageView;
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
+@property (weak, nonatomic) IBOutlet UIImageView *bagImageView;
 
+@property (weak, nonatomic) IBOutlet UIView *bagView;
+@property (weak, nonatomic) IBOutlet UIView *bagResultView;
+@property (weak, nonatomic) IBOutlet UIButton *closeGiftBagButton;
+@property (weak, nonatomic) IBOutlet UIButton *openGiftBagButton;
+
+// 页面collectionArray
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *flyingRedPacketsArray;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *tigerImageViewArray;
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *cardsAmountLabelArray;
+
+// 普通参数
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) NSTimer *autoOpenBagTimer;
 @property (nonatomic, strong) CALayer *moveLayer;
@@ -41,22 +58,9 @@
 @property (nonatomic, assign) NSInteger selectedRedPacketNum;
 @property (nonatomic, assign) RedPocketsViewStyle viewStyle;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
-
 @property (nonatomic, strong) SDCycleScrollView *bannerView;
 @property (nonatomic, strong) SDCycleScrollView *giftBannerView;
 @property (nonatomic, strong) NSMutableArray *bulletViewsArr;
-@property (weak, nonatomic) IBOutlet UIView *bagView;
-@property (weak, nonatomic) IBOutlet UIView *bagResultView;
-@property (weak, nonatomic) IBOutlet UIImageView *bagImageView;
-
-@property (weak, nonatomic) IBOutlet UIButton *openGiftBagButton;
-@property (weak, nonatomic) IBOutlet UIButton *closeGiftBagButton;
-@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *flyingRedPacketsArray;
-@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *tigerImageViewArray;
-@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *cardsAmountLabelArray;
-@property (weak, nonatomic) IBOutlet UIView *giftView;
-@property (weak, nonatomic) IBOutlet UILabel *giftTitleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *giftImageView;
 
 @end
 
@@ -72,17 +76,7 @@
     self.openGiftBagButton.layer.borderColor = COLOR_RGBA(219, 168, 143, 1).CGColor;
     self.openGiftBagButton.layer.borderWidth = 1;
 }
-- (void)setupCardsImageView
-{
-    UIImage *myGradient = [[GradientImage sharedInstance] layerImage:TopToBottom
-                                                              colors:@[[UIColor colorWithHexString:@"FF724E"],
-                                                                       [UIColor colorWithHexString:@"FFCC78"]]
-                                                              bounds:self.cardBonusImageView.bounds];
-    self.cardBonusImageView.image = myGradient;
-//    [self.backToRedPacketsViewBtn setImage:[[UIImage imageNamed:@"navi_back_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-//    [self.backToRedPacketsViewBtn setImage:[[UIImage imageNamed:@"navi_back_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateHighlighted];
-//    [self.backToRedPacketsViewBtn.imageView setTintColor:[UIColor whiteColor]];
-}
+
 - (void)configForRedPocketsViewWithStyle:(RedPocketsViewStyle)style
 {
     _viewStyle = style;
@@ -136,10 +130,71 @@
             break;
     }
 }
--(void)setuprRuleImageBannerGroup
+#pragma mark 初始化方法
+- (void)setuprRuleImageBannerGroup
 {
     NSMutableArray *h5Images = [[NSMutableArray alloc] initWithObjects:@"popup1",@"popup2", nil];
     self.bannerView.imageURLStringsGroup = h5Images;
+}
+- (void)setupCardsImageView
+{
+    UIImage *myGradient = [[GradientImage sharedInstance] layerImage:TopToBottom
+                                                              colors:@[[UIColor colorWithHexString:@"FF724E"],
+                                                                       [UIColor colorWithHexString:@"FFCC78"]]
+                                                              bounds:self.cardBonusImageView.bounds];
+    self.cardBonusImageView.image = myGradient;
+//    [self.backToRedPacketsViewBtn setImage:[[UIImage imageNamed:@"navi_back_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+//    [self.backToRedPacketsViewBtn setImage:[[UIImage imageNamed:@"navi_back_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateHighlighted];
+//    [self.backToRedPacketsViewBtn.imageView setTintColor:[UIColor whiteColor]];
+}
+- (void)startTimeWithDuration:(int)timeValue
+{
+    weakSelf(weakSelf)
+    __block int timeout = timeValue;
+    NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
+//    BOOL isBeforeDuration = [duractionArray[0] boolValue];
+    BOOL isActivityDuration = [duractionArray[1] boolValue];
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(_timer, ^{
+        if ( timeout <= 0 )
+        {
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf moveLabelToTop]; // 移动倒数LAbel到上面
+//                [weakSelf.labelBackgroundView setAlpha:0.0];
+                [weakSelf startRedPackerts]; // 开始下红包雨
+                [weakSelf.tapGesture setEnabled:YES];
+            });
+        }
+        else
+        {
+            int dInt = (int)timeout / (3600 * 24);      //剩馀天数
+            int leftTime = timeout - (dInt * 3600 * 24);
+            int hInt = (int)leftTime / 3600;            //剩馀时数
+            int mInt = (int)leftTime / 60 % 60;         //剩馀分数
+            int sInt = (int)leftTime % 60;              //剩馀秒数
+            NSString * titleStr;
+            if (isActivityDuration)
+            {
+                titleStr = [NSString stringWithFormat:@"%d小时%d分%d秒",hInt,mInt,sInt];
+            }else
+            {
+                titleStr = [NSString stringWithFormat:@"%d天%d小时%d分%d秒",dInt,hInt,mInt,sInt];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.countdownLab.text = titleStr;
+            });
+            timeout--;
+        }
+    });
+    dispatch_resume(_timer);
+}
+- (void)setupDataForSortArray
+{
+    NSArray * tempArray = [[NSArray alloc] initWithObjects:@"恭喜111111会员齐集福卡获得: 索尼PS5游戏机 国行光驱版",@"恭喜222222会员齐集福卡获得: 索尼PS5游戏机 国行光驱版",@"恭喜3333333会员齐集福卡获得: 索尼PS5游戏机 国行光驱版",@"恭喜44444444会员齐集福卡获得: 索尼PS5游戏机 国行光驱版",@"恭喜55555555会员齐集福卡获得: 索尼PS5游戏机 国行光驱版", nil];
+    [self sortArray:tempArray];
 }
 - (void)setupGiftBannerGroup
 {
@@ -165,6 +220,68 @@
     descriptionArray = @[].mutableCopy;
     self.giftBannerView.localizationImageNamesGroup = h5Images;
     self.giftBannerView.descriptionGroup = descriptionArray;
+}
+- (void)showCardsButtonSetHidden:(BOOL)sender
+{
+    [self.showCardsButton setHidden:sender];
+    [self.showCardsImageView setHidden:sender];
+    if (sender == NO)
+    {
+        [self setupShowCardsButtonAnimation];// 集幅卡按钮动画启动
+    }
+}
+- (void)changeBGImageViewWithStyle:(RedPocketsViewStyle)currentStyle
+{
+        for (UIImageView * imageView in self.tigerImageViewArray) {
+            switch (currentStyle) {
+                case RedPocketsViewrRaining:
+                case RedPocketsViewPrefix:
+                {
+                    if (imageView.tag == 1)
+                    {
+                        [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                            [imageView setAlpha:0.0];
+                        } completion:^(BOOL finished) {
+                            [imageView setHidden:YES];
+                        }];
+                    }else
+                    {
+                        [imageView setHidden:NO];
+                        [UIView animateWithDuration:0.2 animations:^{
+                            [imageView setAlpha:1.0];
+                        }];
+                    }
+                }
+                    break;
+                    
+                default:
+                {
+                    if (imageView.tag == 1)
+                    {
+                        [imageView setHidden:NO];
+                        [UIView animateWithDuration:0.2 animations:^{
+                            [imageView setAlpha:1.0];
+                        }];
+                    }else
+                    {
+                        [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                            [imageView setAlpha:0.0];
+                        } completion:^(BOOL finished) {
+                            [imageView setHidden:YES];
+                        }];
+                    }
+                }
+                    break;
+            }
+    
+        }
+}
+-(void)centerGiftBagAndFlyBagSetHidden:(BOOL)sender
+{
+    [self.centerGiftBagImageView setHidden:sender];
+    for (UIImageView * imageView in self.flyingRedPacketsArray) {
+        [imageView setHidden:!sender];
+    }
 }
 - (void)setupCardsAmounts
 {
@@ -484,11 +601,6 @@
     }
 }
 
-- (void)setupDataForSortArray
-{
-    NSArray * tempArray = [[NSArray alloc] initWithObjects:@"恭喜111111会员齐集福卡获得: 索尼PS5游戏机 国行光驱版",@"恭喜222222会员齐集福卡获得: 索尼PS5游戏机 国行光驱版",@"恭喜3333333会员齐集福卡获得: 索尼PS5游戏机 国行光驱版",@"恭喜44444444会员齐集福卡获得: 索尼PS5游戏机 国行光驱版",@"恭喜55555555会员齐集福卡获得: 索尼PS5游戏机 国行光驱版", nil];
-    [self sortArray:tempArray];
-}
 - (void)sortArray:(NSArray *)array {
     if (array.count <= 0) {
         return;
@@ -529,52 +641,6 @@
     
 }
 
-
-#pragma mark Timer
-- (void)startTimeWithDuration:(int)timeValue
-{
-    weakSelf(weakSelf)
-    __block int timeout = timeValue;
-    NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
-//    BOOL isBeforeDuration = [duractionArray[0] boolValue];
-    BOOL isActivityDuration = [duractionArray[1] boolValue];
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
-    dispatch_source_set_event_handler(_timer, ^{
-        if ( timeout <= 0 )
-        {
-            dispatch_source_cancel(_timer);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf moveLabelToTop]; // 移动倒数LAbel到上面
-//                [weakSelf.labelBackgroundView setAlpha:0.0];
-                [weakSelf startRedPackerts]; // 开始下红包雨
-                [weakSelf.tapGesture setEnabled:YES];
-            });
-        }
-        else
-        {
-            int dInt = (int)timeout / (3600 * 24);      //剩馀天数
-            int leftTime = timeout - (dInt * 3600 * 24);
-            int hInt = (int)leftTime / 3600;            //剩馀时数
-            int mInt = (int)leftTime / 60 % 60;         //剩馀分数
-            int sInt = (int)leftTime % 60;              //剩馀秒数
-            NSString * titleStr;
-            if (isActivityDuration)
-            {
-                titleStr = [NSString stringWithFormat:@"%d小时%d分%d秒",hInt,mInt,sInt];
-            }else
-            {
-                titleStr = [NSString stringWithFormat:@"%d天%d小时%d分%d秒",dInt,hInt,mInt,sInt];
-            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                weakSelf.countdownLab.text = titleStr;
-            });
-            timeout--;
-        }
-    });
-    dispatch_resume(_timer);
-}
 - (void)moveLabelToTop
 {
     // 移动
@@ -713,6 +779,19 @@
 {
     [self openGiftBagAction];
 }
+- (BOOL)checkCardsCombineAvailable
+{
+    return YES;
+}
+- (void)showGiftViewWithData:(NSString*)imageData
+{
+    [self.cardsBonusView bringSubviewToFront:self.giftView];
+    [self.giftView setHidden:NO];
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.giftView setAlpha:1.0];
+    }];
+    self.giftTitleLabel.text = @"抽中 XXXXXX";
+}
 #pragma mark IBAction
 // 开启规则画面
 - (IBAction)showRulesAction:(id)sender {
@@ -784,7 +863,23 @@
     [self setupDataForSortArray];
     [self moveLabelToCenter];
 }
-
+- (IBAction)combineCardsAction:(id)sender {
+    if ([self checkCardsCombineAvailable])
+    {
+        [self showGiftViewWithData:@""];
+    }else
+    {
+        [MBProgressHUD showError:@"您暂未集齐全部福卡，继续加油" toView:nil];
+    }
+}
+- (IBAction)dismissGiftView:(id)sender {
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.giftView setAlpha:0.0];
+    }completion:^(BOOL finished) {
+        [self.giftView setHidden:YES];
+    }];
+}
 #pragma mark Lazy Load
 - (SDCycleScrollView *)bannerView {
     if (!_bannerView) {
@@ -829,101 +924,4 @@
     }
     return _giftBannerView;
 }
-- (void)showCardsButtonSetHidden:(BOOL)sender
-{
-    [self.showCardsButton setHidden:sender];
-    [self.showCardsImageView setHidden:sender];
-    if (sender == NO)
-    {
-        [self setupShowCardsButtonAnimation];// 集幅卡按钮动画启动
-    }
-}
-- (void)changeBGImageViewWithStyle:(RedPocketsViewStyle)currentStyle
-{
-        for (UIImageView * imageView in self.tigerImageViewArray) {
-            switch (currentStyle) {
-                case RedPocketsViewrRaining:
-                case RedPocketsViewPrefix:
-                {
-                    if (imageView.tag == 1)
-                    {
-                        [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                            [imageView setAlpha:0.0];
-                        } completion:^(BOOL finished) {
-                            [imageView setHidden:YES];
-                        }];
-                    }else
-                    {
-                        [imageView setHidden:NO];
-                        [UIView animateWithDuration:0.2 animations:^{
-                            [imageView setAlpha:1.0];
-                        }];
-                    }
-                }
-                    break;
-                    
-                default:
-                {
-                    if (imageView.tag == 1)
-                    {
-                        [imageView setHidden:NO];
-                        [UIView animateWithDuration:0.2 animations:^{
-                            [imageView setAlpha:1.0];
-                        }];
-                    }else
-                    {
-                        [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                            [imageView setAlpha:0.0];
-                        } completion:^(BOOL finished) {
-                            [imageView setHidden:YES];
-                        }];
-                    }
-                }
-                    break;
-            }
-    
-        }
-//        [self.rainBackgroundImageView setImage:(currentStyle == RedPocketsViewrRaining ? ImageNamed(@"bg_img1"):ImageNamed(@"bg_img2"))];
-        
-    [UIView animateWithDuration:0.2 animations:^{
-    }];
-}
--(void)centerGiftBagAndFlyBagSetHidden:(BOOL)sender
-{
-    [self.centerGiftBagImageView setHidden:sender];
-    for (UIImageView * imageView in self.flyingRedPacketsArray) {
-        [imageView setHidden:!sender];
-    }
-}
-- (IBAction)combineCardsAction:(id)sender {
-    if ([self checkCardsCombineAvailable])
-    {
-        [self showGiftViewWithData:@""];
-    }else
-    {
-        [MBProgressHUD showError:@"您暂未集齐全部福卡，继续加油" toView:nil];
-    }
-}
-- (BOOL)checkCardsCombineAvailable
-{
-    return YES;
-}
-- (void)showGiftViewWithData:(NSString*)imageData
-{
-    [self.cardsBonusView bringSubviewToFront:self.giftView];
-    [self.giftView setHidden:NO];
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.giftView setAlpha:1.0];
-    }];
-    self.giftTitleLabel.text = @"抽中 XXXXXX";
-}
-- (IBAction)dismissGiftView:(id)sender {
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.giftView setAlpha:0.0];
-    }completion:^(BOOL finished) {
-        [self.giftView setHidden:YES];
-    }];
-}
-
 @end
