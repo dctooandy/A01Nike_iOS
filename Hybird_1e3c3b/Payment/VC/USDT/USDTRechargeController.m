@@ -94,7 +94,7 @@
 - (void)requestQrcode:(NSInteger)type{
     [self showLoading];
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
-    [params setValue:@"20" forKey:@"tranAmount"];
+    [params setValue:@"0" forKey:@"tranAmount"];
     [params setValue:@"25" forKey:@"payType"];
     [params setValue:@"USDT" forKey:@"currency"];
     [params setValue:type == 0 ? @"ERC20":@"TRC20" forKey:@"protocol"];
@@ -110,8 +110,8 @@
             } else if (type == 1) {
                 self.selectedProtocol = @"TRC20";
             }
-            weakSelf.rechargeView.qrcodeImg.image = [PublicMethod QRCodeMethod:dict[@"billNo"]];
-            weakSelf.rechargeView.locationUrlTextView.text = dict[@"billNo"];
+            weakSelf.rechargeView.qrcodeImg.image = [PublicMethod QRCodeMethod:dict[@"address"]];
+            weakSelf.rechargeView.locationUrlTextView.text = dict[@"address"];
         }
     }];
 }
