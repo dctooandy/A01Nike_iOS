@@ -8,7 +8,6 @@
 
 #import "BTTBindingMobileOneCell.h"
 #import "BTTMeMainModel.h"
-
 #define ALPHANUM @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"//数字和字母
 
 @interface BTTBindingMobileOneCell ()<UITextFieldDelegate>
@@ -51,6 +50,10 @@
     {
         return (UserForzenStatus ? NO : YES);
     }else{
+        if ([self.model.name isEqualToString:@"邮箱地址"])
+        {
+            return false;
+        }
         return true;
     }
 }
@@ -136,7 +139,13 @@
              model.desc.length != 0)) {
                 self.textField.userInteractionEnabled = NO;
             } else {
-                self.textField.userInteractionEnabled = YES;
+                if ([model.name isEqualToString:@"邮箱地址"])
+                {
+                    self.textField.userInteractionEnabled = NO;
+                }else
+                {
+                    self.textField.userInteractionEnabled = YES;                    
+                }
             }
         self.rightConstants.constant = 20;
         self.mineArrowsType = BTTMineArrowsTypeHidden;

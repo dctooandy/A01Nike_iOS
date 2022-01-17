@@ -9,10 +9,14 @@
 
 #import "BRBaseView.h"
 #import "BRPickerViewMacro.h"
-
+@interface BRBaseView()
+//  是否有searchView
+@property (nonatomic, assign) BOOL isShowSearchView;
+@end
 @implementation BRBaseView
 
 - (void)initUI {
+    _isShowSearchView = NO;
     self.frame = SCREEN_BOUNDS;
     // 设置子视图的宽度随着父视图变化
     self.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -23,6 +27,29 @@
     // 设置弹出视图子视图
     // 添加顶部标题栏
     [self.alertView addSubview:self.topView];
+    // 添加左边取消按钮
+    [self.topView addSubview:self.leftBtn];
+    // 添加中间标题按钮
+    [self.topView addSubview:self.titleLabel];
+    // 添加右边确定按钮
+    [self.topView addSubview:self.rightBtn];
+    // 添加分割线
+    [self.topView addSubview:self.lineView];
+}
+- (void)initUIWithSearchView {
+    _isShowSearchView = YES;
+    self.frame = SCREEN_BOUNDS;
+    // 设置子视图的宽度随着父视图变化
+    self.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    // 背景遮罩图层
+    [self addSubview:self.backgroundView];
+    // 弹出视图
+    [self addSubview:self.alertView];
+    // 设置弹出视图子视图
+    // 添加顶部标题栏
+    [self.alertView addSubview:self.topView];
+    // 添加搜寻View
+    [self.topView addSubview:self.topSearchView];
     // 添加左边取消按钮
     [self.topView addSubview:self.leftBtn];
     // 添加中间标题按钮
@@ -50,18 +77,34 @@
 #pragma mark - 弹出视图
 - (UIView *)alertView {
     if (!_alertView) {
-        _alertView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - kTopViewHeight - kPickerHeight - BR_BOTTOM_MARGIN, SCREEN_WIDTH, kTopViewHeight + kPickerHeight + BR_BOTTOM_MARGIN)];
+        _alertView = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT - kTopViewHeight - kPickerHeight - BR_BOTTOM_MARGIN - (_isShowSearchView ? kSearchViewHeight: 0), SCREEN_WIDTH, kTopViewHeight + kPickerHeight + BR_BOTTOM_MARGIN + (_isShowSearchView ? kSearchViewHeight: 0))];
         _alertView.backgroundColor = [UIColor whiteColor];
         // 设置子视图的大小随着父视图变化
         _alertView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
     }
     return _alertView;
 }
-
+#pragma mark - 顶部搜索标题栏视图
+- (UITextField *)topSearchView
+{
+    if (!_topSearchView) {
+        _topSearchView = [[UITextField alloc]initWithFrame:CGRectMake(20, 0, self.alertView.frame.size.width - 40, (_isShowSearchView ? kSearchViewHeight: 0))];
+        _topSearchView.font = [UIFont systemFontOfSize:16];
+        _topSearchView.keyboardType = UIKeyboardTypeDefault;
+        _topSearchView.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _topSearchView.autocorrectionType = UITextAutocorrectionTypeNo;
+//        [_topSearchView addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
+        _topSearchView.placeholder = @"选择银行";
+//        _topView.backgroundColor = kBRToolBarColor;
+//        // 设置子视图的大小随着父视图变化
+//        _topView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+    }
+    return _topSearchView;
+}
 #pragma mark - 顶部标题栏视图
 - (UIView *)topView {
     if (!_topView) {
-        _topView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.alertView.frame.size.width, kTopViewHeight + 0.5)];
+        _topView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.alertView.frame.size.width, (_isShowSearchView ? kSearchViewHeight: 0) + kTopViewHeight + 0.5)];
         _topView.backgroundColor = kBRToolBarColor;
         // 设置子视图的大小随着父视图变化
         _topView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
@@ -73,7 +116,7 @@
 - (UIButton *)leftBtn {
     if (!_leftBtn) {
         _leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _leftBtn.frame = CGRectMake(5, 8, 60, kTopViewHeight-16);
+        _leftBtn.frame = CGRectMake(5, (_isShowSearchView ? kSearchViewHeight: 0) + 8, 60, kTopViewHeight-16);
         _leftBtn.backgroundColor = kBRToolBarColor;
         _leftBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
         _leftBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f * kScaleFit];
@@ -89,7 +132,7 @@
 - (UIButton *)rightBtn {
     if (!_rightBtn) {
         _rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _rightBtn.frame = CGRectMake(self.alertView.frame.size.width - 65, 8, 60, kTopViewHeight-16);
+        _rightBtn.frame = CGRectMake(self.alertView.frame.size.width - 65, (_isShowSearchView ? kSearchViewHeight: 0) + 8, 60, kTopViewHeight-16);
         _rightBtn.backgroundColor = kBRToolBarColor;
         _rightBtn.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin;
         _rightBtn.titleLabel.font = [UIFont systemFontOfSize:15.0f * kScaleFit];
@@ -103,7 +146,7 @@
 #pragma mark - 中间标题按钮
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.leftBtn.frame.origin.x + self.leftBtn.frame.size.width + 2, 0, self.alertView.frame.size.width - 2 * (self.leftBtn.frame.origin.x + self.leftBtn.frame.size.width + 2), kTopViewHeight)];
+        _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.leftBtn.frame.origin.x + self.leftBtn.frame.size.width + 2, (_isShowSearchView ? kSearchViewHeight: 0), self.alertView.frame.size.width - 2 * (self.leftBtn.frame.origin.x + self.leftBtn.frame.size.width + 2), kTopViewHeight)];
         _titleLabel.backgroundColor = [UIColor clearColor];
         _titleLabel.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth;
         _titleLabel.font = [UIFont systemFontOfSize:18.0f * kScaleFit];
@@ -117,7 +160,7 @@
 #pragma mark - 分割线
 - (UIView *)lineView {
     if (!_lineView) {
-        _lineView = [[UIView alloc]initWithFrame:CGRectMake(0, kTopViewHeight, self.alertView.frame.size.width, 0.5)];
+        _lineView = [[UIView alloc]initWithFrame:CGRectMake(0, (_isShowSearchView ? kSearchViewHeight: 0) + kTopViewHeight, self.alertView.frame.size.width, 0.5)];
         _lineView.backgroundColor = BR_RGB_HEX(0xEEEEEE, 1.0f);
         _lineView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
         [self.alertView addSubview:_lineView];

@@ -23,7 +23,10 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
 @property (nonatomic, strong) UIPickerView *pickerView;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, assign) BRStringPickerMode type;
-@property (nonatomic, strong) NSArray *dataSourceArr;
+@property (nonatomic, strong) NSArray *originDataSourceArr;
+@property (nonatomic, strong) NSMutableArray *dataSourceArr;
+@property (nonatomic, strong) NSMutableArray *originIconDataSourceArr;
+@property (nonatomic, strong) NSMutableArray *iconDataSourceArr;
 // 单列选择的值
 @property (nonatomic, strong) NSString *selectValue;
 @property (assign, nonatomic) NSInteger selectIndex;//选中的下标
@@ -48,7 +51,14 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
                       resultBlock:(BRStringResultBlock)resultBlock {
     [self showStringPickerWithTitle:title dataSource:dataSource defaultSelValue:defaultSelValue isAutoSelect:NO themeColor:nil resultBlock:resultBlock cancelBlock:nil];
 }
-
++ (void)showStringPickerWithImageURLArr:(NSArray *)iconUrlArr
+                              WithTitle:(NSString *)title
+                             dataSource:(id)dataSource
+                        defaultSelValue:(id)defaultSelValue
+                            resultBlock:(BRStringResultBlock)resultBlock
+{
+    [self showStringPickerWithImageURLArr:iconUrlArr WithTitle:title dataSource:dataSource defaultSelValue:defaultSelValue  isAutoSelect:NO themeColor:nil resultBlock:resultBlock cancelBlock:nil];
+}
 #pragma mark - 2.显示自定义字符串选择器（支持 设置自动选择 和 自定义主题颜色）
 + (void)showStringPickerWithTitle:(NSString *)title
                        dataSource:(id)dataSource
@@ -96,8 +106,49 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
     }
     return self;
 }
-
+#pragma mark - 初始化自定义字符串选择器+图片
++ (void)showStringPickerWithImageURLArr:(NSArray *)iconUrlArr
+                              WithTitle:(NSString *)title
+                             dataSource:(id)dataSource
+                        defaultSelValue:(id)defaultSelValue
+                           isAutoSelect:(BOOL)isAutoSelect
+                             themeColor:(UIColor *)themeColor
+                            resultBlock:(BRStringResultBlock)resultBlock
+                            cancelBlock:(BRStringCancelBlock)cancelBlock {
+    BRStringPickerView *strPickerView = [[BRStringPickerView alloc]initWithImageURLArr:iconUrlArr WithTitle:title dataSource:dataSource defaultSelValue:defaultSelValue isAutoSelect:isAutoSelect themeColor:themeColor resultBlock:resultBlock cancelBlock:cancelBlock];
+    NSAssert(strPickerView->isDataSourceValid, @"数据源不合法！请检查字符串选择器数据源的格式");
+    if (strPickerView->isDataSourceValid) {
+        [strPickerView showWithAnimation:YES];
+    }
+}
+- (instancetype)initWithImageURLArr:(NSArray *)iconUrlArr
+                          WithTitle:(NSString *)title
+                         dataSource:(id)dataSource
+                    defaultSelValue:(id)defaultSelValue
+                       isAutoSelect:(BOOL)isAutoSelect
+                         themeColor:(UIColor *)themeColor
+                        resultBlock:(BRStringResultBlock)resultBlock
+                        cancelBlock:(BRStringCancelBlock)cancelBlock {
+    if (self = [super init]) {
+        self.title = title;
+        self.isAutoSelect = isAutoSelect;
+        self.themeColor = themeColor;
+        self.resultBlock = resultBlock;
+        self.cancelBlock = cancelBlock;
+        isDataSourceValid = YES;
+        [self configDataSource:dataSource defaultSelValue:defaultSelValue imageURLArr:iconUrlArr];
+        if (isDataSourceValid) {
+            [self initUI];
+        }
+    }
+    return self;
+}
 #pragma mark - 设置数据源
+- (void)configDataSource:(id)dataSource defaultSelValue:(id)defaultSelValue imageURLArr:(NSArray *)iconUrlArr {
+    self.originIconDataSourceArr = iconUrlArr.mutableCopy;
+    self.iconDataSourceArr = self.originIconDataSourceArr.mutableCopy;
+    [self configDataSource:dataSource defaultSelValue:defaultSelValue];
+}
 - (void)configDataSource:(id)dataSource defaultSelValue:(id)defaultSelValue {
     // 1.先判断传入的数据源是否合法
     if (!dataSource) {
@@ -130,47 +181,59 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
         return;
     }
     // 2. 给数据源赋值
-    self.dataSourceArr = dataArr;
+    self.originDataSourceArr = dataArr;
+    self.dataSourceArr = dataArr.mutableCopy;
     
     // 3. 根据数据源 数组元素的类型，判断选择器的显示类型
-    if ([[self.dataSourceArr firstObject] isKindOfClass:[NSString class]]) {
+    if ([[self.originDataSourceArr firstObject] isKindOfClass:[NSString class]]) {
         self.type = BRStringPickerComponentSingle;
-    } else if ([[self.dataSourceArr firstObject] isKindOfClass:[NSArray class]]) {
+    } else if ([[self.originDataSourceArr firstObject] isKindOfClass:[NSArray class]]) {
         self.type = BRStringPickerComponentMore;
     }
     // 4. 给选择器设置默认值
     if (self.type == BRStringPickerComponentSingle) {
-        if (defaultSelValue && [defaultSelValue isKindOfClass:[NSString class]] && [defaultSelValue length] > 0 && [self.dataSourceArr containsObject:defaultSelValue]) {
+        if (defaultSelValue && [defaultSelValue isKindOfClass:[NSString class]] && [defaultSelValue length] > 0 && [self.originDataSourceArr containsObject:defaultSelValue]) {
             self.selectValue = defaultSelValue;
         } else {
-            self.selectValue = [self.dataSourceArr firstObject];
+            self.selectValue = [self.originDataSourceArr firstObject];
         }
-        NSInteger row = [self.dataSourceArr indexOfObject:self.selectValue];
+        NSInteger row = [self.originDataSourceArr indexOfObject:self.selectValue];
         self.selectIndex = row;
         // 默认滚动的行
         [self.pickerView selectRow:row inComponent:0 animated:NO];
     } else if (self.type == BRStringPickerComponentMore) {
         NSMutableArray *tempArr = [NSMutableArray array];
-        for (NSInteger i = 0; i < self.dataSourceArr.count; i++) {
+        for (NSInteger i = 0; i < self.originDataSourceArr.count; i++) {
             NSString *selValue = nil;
-            if (defaultSelValue && [defaultSelValue isKindOfClass:[NSArray class]] && [defaultSelValue count] > 0 && i < [defaultSelValue count] && [self.dataSourceArr[i] containsObject:defaultSelValue[i]]) {
+            if (defaultSelValue && [defaultSelValue isKindOfClass:[NSArray class]] && [defaultSelValue count] > 0 && i < [defaultSelValue count] && [self.originDataSourceArr[i] containsObject:defaultSelValue[i]]) {
                 [tempArr addObject:defaultSelValue[i]];
                 selValue = defaultSelValue[i];
             } else {
-                [tempArr addObject:[self.dataSourceArr[i] firstObject]];
-                selValue = [self.dataSourceArr[i] firstObject];
+                [tempArr addObject:[self.originDataSourceArr[i] firstObject]];
+                selValue = [self.originDataSourceArr[i] firstObject];
             }
-            NSInteger row = [self.dataSourceArr[i] indexOfObject:selValue];
+            NSInteger row = [self.originDataSourceArr[i] indexOfObject:selValue];
             // 默认滚动的行
             [self.pickerView selectRow:row inComponent:i animated:NO];
         }
         self.selectValueArr = [tempArr copy];
     }
+
 }
 
 #pragma mark - 初始化子视图
 - (void)initUI {
-    [super initUI];
+    if (self.originIconDataSourceArr.count > 0)
+    {
+        [super initUIWithSearchView];
+        if (self.originIconDataSourceArr.count > 0)
+        {
+            [self.topSearchView addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
+        }
+    }else
+    {
+        [super initUI];
+    }
     self.titleLabel.text = self.title;
     // 添加字符串选择器
     [self.alertView addSubview:self.pickerView];
@@ -182,10 +245,11 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
 #pragma mark - 字符串选择器
 - (UIPickerView *)pickerView {
     if (!_pickerView) {
-        _pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, kTopViewHeight + 0.5, self.alertView.frame.size.width, kPickerHeight)];
+        CGFloat topSpace = self.originIconDataSourceArr.count > 0 ? kSearchViewHeight + kTopViewHeight + 0.5 : kTopViewHeight + 0.5;
+        _pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, topSpace, SCREEN_WIDTH, kPickerHeight)];
         _pickerView.backgroundColor = [UIColor whiteColor];
         // 设置子视图的大小随着父视图变化
-        _pickerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+//        _pickerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
         _pickerView.dataSource = self;
         _pickerView.delegate = self;
         _pickerView.showsSelectionIndicator = YES;
@@ -284,7 +348,9 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
         
         label.frame = CGRectMake(0, 0, self.alertView.frame.size.width, 35.0f * kScaleFit);
         label.text = self.dataSourceArr[row];
-        
+        BOOL isShowIcon = self.iconDataSourceArr.count > 0 ? YES : NO;
+        CGFloat leftLabelSpace = isShowIcon ? 30 : 0;
+        NSURL * iconUrl = [NSURL URLWithString:isShowIcon ? self.iconDataSourceArr[row] : @""];
         if ([self.dataSourceArr[row] isEqualToString:@"➕ 币付宝钱包"]) {
             UIView *noteview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.alertView.frame.size.width, 35)];
             [noteview addSubview:label];
@@ -297,6 +363,19 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
             noteLabel.textAlignment = NSTextAlignmentCenter;
             noteLabel.clipsToBounds = YES;
             [noteview addSubview:noteLabel];
+            return noteview;
+        }else
+        {
+            [label setFrame:CGRectMake(leftLabelSpace, 0, self.alertView.frame.size.width*0.6 - leftLabelSpace, 35)];
+            UIView *noteview = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.alertView.frame.size.width*0.6, 35)];
+            if (isShowIcon)
+            {
+                UIImageView * iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 7.5, 20, 20)];
+                [iconImageView sd_setImageWithURL:iconUrl placeholderImage:ImageNamed(@"defaultCardIcon") options:SDWebImageRetryFailed];
+//                [iconImageView sd_setImageWithURL:iconUrl placeholderImage:ImageNamed(@"default_4")];
+                [noteview addSubview:iconImageView];
+            }
+            [noteview addSubview:label];
             return noteview;
         }
     } else if (self.type == BRStringPickerComponentMore) {
@@ -314,6 +393,58 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
     return 35.0f * kScaleFit;
 }
 
+- (void)textFieldDidChanged:(UITextField *)sender {
+    sender.text = [sender.text lowercaseString];
+    NSString *name = sender.text;
+    [self.dataSourceArr removeAllObjects];
+    [self.iconDataSourceArr removeAllObjects];
+    if (name.length >= 1) {
+       
+        BOOL containObject = false;
+        for (NSString *bankName in self.originDataSourceArr) {
+            if ([bankName containsString:name])
+            {
+                NSUInteger index = [self.originDataSourceArr indexOfObject:bankName];
+                [self.dataSourceArr addObject:bankName];
+                if ([self.originIconDataSourceArr objectAtIndex:index])
+                {
+                    NSString * iconString = [self.originIconDataSourceArr objectAtIndex:index];
+                    [self.iconDataSourceArr addObject:iconString];
+                }else
+                {
+                    [self.iconDataSourceArr addObject:@"empty"];
+                }
+//                [self.pickerView selectRow:index inComponent:0 animated:YES];
+//                break;
+                containObject = true;
+            }
+        }
+        if (containObject == true)
+        {
+            self.selectValue = self.dataSourceArr[0];
+            self.selectIndex = 0;
+            [self.pickerView reloadAllComponents];
+            [self.pickerView selectRow:0 inComponent:0 animated:YES];
+        }else
+        {
+            [self.dataSourceArr addObject:@"No Data"];
+            [self.iconDataSourceArr addObject:@"No Data"];
+            self.selectValue = @"";
+            self.selectIndex = 0;
+            [self.pickerView reloadAllComponents];
+            [self.pickerView selectRow:0 inComponent:0 animated:YES];
+        }
+    }else
+    {
+        self.dataSourceArr = self.originDataSourceArr.mutableCopy;
+        self.iconDataSourceArr = self.originIconDataSourceArr.mutableCopy;
+        self.selectValue = self.dataSourceArr[0];
+        self.selectIndex = 0;
+        [self.pickerView reloadAllComponents];
+        [self.pickerView selectRow:0 inComponent:0 animated:YES];
+    }
+    
+}
 #pragma mark - 背景视图的点击事件
 - (void)didTapBackgroundView:(UITapGestureRecognizer *)sender {
     [self dismissWithAnimation:NO];
@@ -336,7 +467,10 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
     // 点击确定按钮后，执行block回调
     if(_resultBlock) {
         if (self.type == BRStringPickerComponentSingle) {
-            _resultBlock(self.selectValue ,self.selectIndex);
+            if (!A01IsEmpty(self.selectValue))
+            {
+                _resultBlock(self.selectValue ,self.selectIndex);                
+            }
         } else if (self.type == BRStringPickerComponentMore) {
             _resultBlock(self.selectValueArr,self.selectIndex);
         }
@@ -375,11 +509,31 @@ typedef NS_ENUM(NSInteger, BRStringPickerMode) {
     }];
 }
 
-- (NSArray *)dataSourceArr {
+- (NSArray *)originDataSourceArr {
+    if (!_originDataSourceArr) {
+        _originDataSourceArr = [NSArray array];
+    }
+    return _originDataSourceArr;
+}
+- (NSMutableArray *)dataSourceArr {
     if (!_dataSourceArr) {
-        _dataSourceArr = [NSArray array];
+        _dataSourceArr = [NSMutableArray array];
     }
     return _dataSourceArr;
+}
+- (NSMutableArray *)originIconDataSourceArr
+{
+    if (!_originIconDataSourceArr) {
+        _originIconDataSourceArr = [NSMutableArray array];
+    }
+    return _originIconDataSourceArr;
+}
+- (NSMutableArray *)iconDataSourceArr
+{
+    if (!_iconDataSourceArr) {
+        _iconDataSourceArr = [NSMutableArray array];
+    }
+    return _iconDataSourceArr;
 }
 
 - (NSMutableArray *)selectValueArr {

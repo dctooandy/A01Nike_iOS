@@ -14,6 +14,8 @@
 @property (nonatomic, strong) UIView *backgroundView;
 // 弹出视图
 @property (nonatomic, strong) UIView *alertView;
+// 顶部搜寻视图
+@property (nonatomic, strong) UITextField *topSearchView;
 // 顶部视图
 @property (nonatomic, strong) UIView *topView;
 // 左边取消按钮
@@ -27,6 +29,7 @@
 
 /** 初始化子视图 */
 - (void)initUI;
+- (void)initUIWithSearchView;
 
 /** 点击背景遮罩图层事件 */
 - (void)didTapBackgroundView:(UITapGestureRecognizer *)sender;
