@@ -88,7 +88,7 @@
         if ([gameController.gameModel.provider isEqualToString:kPTProvider]) {
             NSDictionary *postMap = [response.body valueForKey:@"postMapNew"];
             NSString *urlString = [response.body valueForKey:@"url"];
-            NSString *domainString = urlString;
+            NSMutableString *domainString = urlString.mutableCopy;
 //            NSInteger versionNum = [[(NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"] componentsSeparatedByString:@"."][1] floatValue] > 2 ? [[NSUserDefaults standardUserDefaults] integerForKey:@"Envirment"] : 2;
 //            if (versionNum == 2) {
 //                domainString = @"https://fen1264.com/";
@@ -96,7 +96,10 @@
 //            {
 //                domainString = @"https://www.178btt.com/";
 //            }
-            url = [NSString stringWithFormat:@"%@game_pt.html?",domainString] ;
+            if (![domainString containsString:@"?"]) {
+                [domainString appendString:@"?"];
+            }
+            url = [NSString stringWithFormat:@"%@",domainString] ;
             url = [weakSelf appendingURLString:url parameters:postMap];
         }
         
