@@ -1232,7 +1232,7 @@
             //暂时让他出来
             dispatch_async(dispatch_get_main_queue(), ^{
 //                [weakSelf showRedPacketsPreViewWithDuration:10];//10秒倒计时弹窗
-                [weakSelf showRedPacketsRainViewwWithStyle:RedPocketsViewPrefix];
+                [weakSelf showRedPacketsRainViewwWithStyle:RedPocketsViewDev];
             });
         }
     } WithDefaultCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
