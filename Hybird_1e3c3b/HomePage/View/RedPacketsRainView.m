@@ -54,6 +54,9 @@
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *flyingRedPacketsArray;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *tigerImageViewArray;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *cardsAmountLabelArray;
+@property (weak, nonatomic) IBOutlet UIView *giftView;
+@property (weak, nonatomic) IBOutlet UILabel *giftTitleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *giftImageView;
 
 @end
 
@@ -149,7 +152,6 @@
                                 @"img_SKG",
                                 @"img_sonya7m4", nil];
     
-    self.giftBannerView.localizationImageNamesGroup = h5Images;
     NSArray * nameArray = @[@[@"g****18",@"g****9",@"g****86",@"g****81",@"g****88",@"g****81"],@[@"g****28",@"g****88",@"g****86",@"g****87",@"g****81",@"g****81"],@[@"g****38",@"g****88",@"g****86",@"g****87",@"g****81",@"g****81"],@[@"g****48",@"g****88",@"g****86",@"g****87",@"g****81",@"g****81"],@[@"g****58",@"g****88",@"g****86",@"g****87",@"g****81",@"g****81"],@[@"g****68",@"g****88",@"g****86",@"g****87",@"g****81",@"g****81"],@[@"g****78",@"g****88",@"g****86",@"g****87",@"g****81",@"g****81"],@[@"g****88",@"g****88",@"g****86",@"g****87",@"g****81",@"g****81"]];
     NSMutableArray *descriptionArray = [[NSMutableArray alloc] init];
     for (NSArray * subNameArray in nameArray) {
@@ -159,6 +161,9 @@
         }
         [descriptionArray addObject:totalString];
     }
+    h5Images = @[].mutableCopy;
+    descriptionArray = @[].mutableCopy;
+    self.giftBannerView.localizationImageNamesGroup = h5Images;
     self.giftBannerView.descriptionGroup = descriptionArray;
 }
 - (void)setupCardsAmounts
@@ -805,7 +810,7 @@
 }
 - (SDCycleScrollView *)giftBannerView {
     if (!_giftBannerView) {
-        SDCycleScrollView *giftBannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:[UIImage imageNamed:@"bgimg_noprice"]];
+        SDCycleScrollView *giftBannerView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectZero delegate:self placeholderImage:[UIImage imageNamed:@"bgimg_noprice_withtext"]];
         [self.cardsBonusView addSubview:giftBannerView];
         [giftBannerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self.cardsBonusView);
@@ -890,4 +895,35 @@
         [imageView setHidden:!sender];
     }
 }
+- (IBAction)combineCardsAction:(id)sender {
+    if ([self checkCardsCombineAvailable])
+    {
+        [self showGiftViewWithData:@""];
+    }else
+    {
+        [MBProgressHUD showError:@"您暂未集齐全部福卡，继续加油" toView:nil];
+    }
+}
+- (BOOL)checkCardsCombineAvailable
+{
+    return YES;
+}
+- (void)showGiftViewWithData:(NSString*)imageData
+{
+    [self.cardsBonusView bringSubviewToFront:self.giftView];
+    [self.giftView setHidden:NO];
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.giftView setAlpha:1.0];
+    }];
+    self.giftTitleLabel.text = @"抽中 XXXXXX";
+}
+- (IBAction)dismissGiftView:(id)sender {
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.giftView setAlpha:0.0];
+    }completion:^(BOOL finished) {
+        [self.giftView setHidden:YES];
+    }];
+}
+
 @end
