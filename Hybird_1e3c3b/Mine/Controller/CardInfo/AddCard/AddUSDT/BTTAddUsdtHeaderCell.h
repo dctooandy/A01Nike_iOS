@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTAddUsdtHeaderCell : UICollectionViewCell
-- (void)setTypeData:(NSArray *)types;
+- (void)setTypeData:(NSString *)types;
 @property (nonatomic, copy) void (^tapProtocol)(NSString *protocol);
 @end
 
