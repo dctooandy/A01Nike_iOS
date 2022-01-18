@@ -11,7 +11,7 @@
 #import "BTTBindingMobileOneCell.h"
 #import "BTTPublicBtnCell.h"
 #import "BRPickerView.h"
-
+#import "BTTBindEmailController.h"
 
 @interface BTTPersonalInfoController ()<BTTElementsFlowLayoutDelegate>
 
@@ -78,6 +78,13 @@
         } cancelBlock:^{
             NSLog(@"点击了背景或取消按钮");
         }];
+    }else if (indexPath.item == 3) {
+        if ([IVNetwork savedUserInfo].email.length>0) {
+            return;
+        }
+        BTTBindEmailController *bindVC = [[BTTBindEmailController alloc] init];
+        bindVC.codeType = BTTSafeVerifyTypeBindEmail;
+        [self.navigationController pushViewController:bindVC animated:YES];
     }
 }
 

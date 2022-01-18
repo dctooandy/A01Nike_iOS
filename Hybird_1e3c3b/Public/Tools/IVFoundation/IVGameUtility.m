@@ -16,6 +16,7 @@
 #import "BTTLoginOrRegisterViewController.h"
 #import "BTTCardInfosController.h"
 #import "BTTPersonalInfoController.h"
+#import "AppInitializeConfig.h"
 @implementation IVGameUtility
 - (UIColor *)IVGameGetNavigationTitleColor {
     return [UIColor whiteColor];
@@ -86,9 +87,19 @@
 
         if ([gameController.gameModel.provider isEqualToString:kPTProvider]) {
             NSDictionary *postMap = [response.body valueForKey:@"postMapNew"];
-            url = [NSString stringWithFormat:@"%@game_pt.html?",[IVHttpManager shareManager].domain] ;
-//            NSString *domainString = [response.body valueForKey:@"url"];
-//            url = [NSString stringWithFormat:@"%@game_pt.html?",domainString] ;
+            NSString *urlString = [response.body valueForKey:@"url"];
+            NSMutableString *domainString = urlString.mutableCopy;
+//            NSInteger versionNum = [[(NSString *)[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"] componentsSeparatedByString:@"."][1] floatValue] > 2 ? [[NSUserDefaults standardUserDefaults] integerForKey:@"Envirment"] : 2;
+//            if (versionNum == 2) {
+//                domainString = @"https://fen1264.com/";
+//            }else
+//            {
+//                domainString = @"https://www.178btt.com/";
+//            }
+            if (![domainString containsString:@"?"]) {
+                [domainString appendString:@"?"];
+            }
+            url = [NSString stringWithFormat:@"%@",domainString] ;
             url = [weakSelf appendingURLString:url parameters:postMap];
         }
         

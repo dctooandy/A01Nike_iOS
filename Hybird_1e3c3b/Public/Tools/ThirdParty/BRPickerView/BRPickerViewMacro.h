@@ -32,8 +32,9 @@ blue:((CGFloat)(rgbValue & 0xFF)) / 255.0 alpha:(a)]
 // 等比例适配系数
 #define kScaleFit (BR_IS_IPHONE ? ((SCREEN_WIDTH < SCREEN_HEIGHT) ? SCREEN_WIDTH / 375.0f : SCREEN_WIDTH / 667.0f) : 1.1f)
 
-#define kPickerHeight 216
+#define kPickerHeight (310 + BR_BOTTOM_MARGIN)
 #define kTopViewHeight 65
+#define kSearchViewHeight 50
 
 // 状态栏的高度(20 / 44(iPhoneX))
 #define BR_STATUSBAR_HEIGHT ([UIApplication sharedApplication].statusBarFrame.size.height)
