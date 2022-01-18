@@ -650,6 +650,21 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 //網關域名
 #define BTTAppSetting                              @"_extra_/api/v1/getAppSetting"
 
+// 红包雨
+// 活动基本信息，包括初始化的倒计时等
+#define BTTRainInfo                               @"_extra_/api/v1/activity/money-rain/info"
+// 红包雨开抢之前，创建唯一的福袋ID ,在红包雨开始时抢第一个红包时调用
+#define BTTRainCreate                             @"_extra_/api/v1/activity/money-rain/create-identify"
+// 打开福袋
+#define BTTRainOpen                               @"_extra_/api/v1/activity/money-rain/open-lucky-bag"
+// 查询我可用的福卡
+#define BTTRainQuery                              @"_extra_/api/v1/activity/money-rain/query-blessing-card"
+// 集成福卡
+#define BTTRainFusing                             @"_extra_/api/v1/activity/money-rain/fusing-blessing-card"
+// 实物中奖记录
+#define BTTRainInKindPrize                        @"_extra_/api/v1/activity/money-rain/in-kind-prize-records"
+// 查询实物奖品与对应的中奖用户名列表
+#define BTTRainGroup                              @"_extra_/api/v1/activity/money-rain/group-by-prize-name"
 /********************************************常用宏*********************************************************/
 
 #define kFontSystem(X)      ([UIFont systemFontOfSize:X])

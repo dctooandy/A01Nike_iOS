@@ -12,6 +12,7 @@
 #import "QBulletScreenView.h"
 #import "UIImage+GIF.h"
 #import "GradientImage.h"
+#import "BTTActivityManager.h"
 @interface RedPacketsRainView()<SDCycleScrollViewDelegate , QBulletScreenViewDelegate>
 // 按照页面顺序
 @property (weak, nonatomic) IBOutlet UIView *cardsBonusView;
@@ -113,7 +114,7 @@
             // 中间福袋隐藏
             [self centerGiftBagAndFlyBagSetHidden:YES];
             break;
-        case RedPocketsViewDev:// 活动结果
+        case RedPocketsViewDev:// 活动测试
             self.selectedRedPacketNum = 0;
             //开始红包雨倒数
             [self startTimeWithDuration:10];
@@ -857,11 +858,15 @@
     [UIView animateWithDuration:0.3 animations:^{
         [self.labelBackgroundView setAlpha:1.0];
     }];
-    __block int timeout = [PublicMethod countDownIntervalWithDurationTag:YES];
-//    [self configForRedPocketsView:RedPocketsViewBegin withDuration:timeout];
-    [self startTimeWithDuration:timeout];
-    [self setupDataForSortArray];
-    [self moveLabelToCenter];
+    weakSelf(weakSelf)
+    [[BTTActivityManager sharedInstance] checkTimeRedPacketRainWithCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            int timeout = [PublicMethod countDownIntervalWithDurationTag:YES];
+            [weakSelf startTimeWithDuration:timeout];
+            [weakSelf setupDataForSortArray];
+            [weakSelf moveLabelToCenter];
+        });
+    } WithDefaultCompletion:nil];
 }
 - (IBAction)combineCardsAction:(id)sender {
     if ([self checkCardsCombineAvailable])

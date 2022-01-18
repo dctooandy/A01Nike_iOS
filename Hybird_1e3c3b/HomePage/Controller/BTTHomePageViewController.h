@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setupElements;
 - (void)showRedPacketsRainViewwWithStyle:(RedPocketsViewStyle)currentStyle;
+- (void)popupTenSecondView;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -17,6 +17,7 @@
 
 @interface BTTActivityManager()
 @property(nonatomic,strong)BTTPopViewModel * popModel;
+
 @end
 @implementation BTTActivityManager
 static BTTActivityManager * sharedSingleton;
@@ -41,28 +42,36 @@ static BTTActivityManager * sharedSingleton;
 - (void)checkTimeRedPacketRainWithCompletion:(RedPacketCallBack _Nullable)redPacketBlock
                        WithDefaultCompletion:(RedPacketCallBack _Nullable)defaultBlock
 {
-    [self serverTime:^(NSString *timeStr) {
-        if (timeStr.length > 0)
-        {
-            NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
-            BOOL isBeforeDuration = [duractionArray[0] boolValue];
-            BOOL isActivityDuration = [duractionArray[1] boolValue];
-            if (isBeforeDuration || isActivityDuration)
-            {
-                // 不到时间,预热
-                // 活动期间
-                if (redPacketBlock)
+    NSMutableDictionary *params = @{}.mutableCopy;
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTRainInfo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            weakSelf.redPacketInfoModel = [RedPacketsInfoModel yy_modelWithJSON:result.body];
+            [weakSelf serverTime:^(NSString *timeStr) {
+                if (timeStr.length > 0)
                 {
-                    redPacketBlock(isActivityDuration ? @"1" : nil,nil);
+                    NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
+                    BOOL isBeforeDuration = [duractionArray[0] boolValue];
+                    BOOL isActivityDuration = [duractionArray[1] boolValue];
+                    if (isBeforeDuration || isActivityDuration)
+                    {
+                        // 不到时间,预热
+                        // 活动期间
+                        if (redPacketBlock)
+                        {
+                            redPacketBlock(isActivityDuration ? @"1" : nil,nil);
+                        }
+                    }else
+                    {
+                        // 过了活动期
+                        if (defaultBlock)
+                        {
+                            defaultBlock(nil,nil);
+                        }
+                    }
                 }
-            }else
-            {
-                // 过了活动期
-                if (defaultBlock)
-                {
-                    defaultBlock(nil,nil);
-                }
-            }
+            }];
         }
     }];
 }

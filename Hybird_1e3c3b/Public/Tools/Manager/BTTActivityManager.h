@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RedPacketsInfoModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 typedef void (^CheckTimeCompleteBlock)(NSString * timeStr);
@@ -14,6 +15,7 @@ typedef void(^RedPacketCallBack)(NSString * _Nullable response, NSString * _Null
 typedef void(^PopViewCallBack)(NSString * _Nullable response, NSString * _Nullable error);
 @interface BTTActivityManager : NSObject
 SingletonInterface(BTTActivityManager);
+@property(nonatomic,strong)RedPacketsInfoModel * redPacketInfoModel;
 //检查七夕活动接口资料(正式开跑后)
 -(void)loadSevenXiData;
 

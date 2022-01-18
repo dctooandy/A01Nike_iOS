@@ -54,6 +54,9 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         //主按鈕可移動或移動後回彈跟不可移動
         self.redPocketsAssistiveButton.positionMode = SpreadPositionModeNone;
         weakSelf(weakSelf);
+        [self.redPocketsAssistiveButton setTenSecondActionBlock:^{
+            [weakSelf popupTenSecondView];
+        }];
         [self.redPocketsAssistiveButton setMainButtonClickActionBlock:^{
             
             NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
