@@ -1247,32 +1247,35 @@
 }
 - (void)popupTenSecondView
 {
-    // 游戏中不弹窗，活动页面不弹，主页的四个导航页面弹窗
-    weakSelf(weakSelf)
-    __block BOOL canPop = YES;
-    UIViewController *topVC = [PublicMethod currentViewController];
-    if ([topVC isKindOfClass:[BTTBaseWebViewController class]] ||
-        [topVC isKindOfClass:[BTTAGQJViewController class]] ||
-        [topVC isKindOfClass:[BTTAGGJViewController class]] ||
-        [topVC isKindOfClass:[IVOtherGameController class]]) {
-        
-    }else
+    if ([IVNetwork savedUserInfo])
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSArray * viewsArray = [[[UIApplication sharedApplication] keyWindow] subviews];
-            for (UIView * currentView in viewsArray) {
-                if ([currentView isKindOfClass:[BTTAnimationPopView class]]) {
-                    canPop = NO;
-                    break;
+        // 游戏中不弹窗，活动页面不弹，主页的四个导航页面弹窗
+        weakSelf(weakSelf)
+        __block BOOL canPop = YES;
+        UIViewController *topVC = [PublicMethod currentViewController];
+        if ([topVC isKindOfClass:[BTTBaseWebViewController class]] ||
+            [topVC isKindOfClass:[BTTAGQJViewController class]] ||
+            [topVC isKindOfClass:[BTTAGGJViewController class]] ||
+            [topVC isKindOfClass:[IVOtherGameController class]]) {
+            
+        }else
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSArray * viewsArray = [[[UIApplication sharedApplication] keyWindow] subviews];
+                for (UIView * currentView in viewsArray) {
+                    if ([currentView isKindOfClass:[BTTAnimationPopView class]]) {
+                        canPop = NO;
+                        break;
+                    }
                 }
-            }
-            if (canPop)
-            {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf showRedPacketsPreViewWithDuration:RedPacketDuration];
-                });
-            }
-        });
+                if (canPop)
+                {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf showRedPacketsPreViewWithDuration:RedPacketDuration];
+                    });
+                }
+            });
+        }
     }
 }
 #pragma mark - 10s倒计时弹窗
@@ -1302,23 +1305,30 @@
 #pragma mark - 红包雨 预热/活动弹窗
 - (void)showRedPacketsRainViewwWithStyle:(RedPocketsViewStyle)currentStyle
 {
-    [[BTTActivityManager sharedInstance] checkTimeRedPacketRainWithCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
-        RedPacketsRainView *alertView = [RedPacketsRainView viewFromXib];
-        [alertView configForRedPocketsViewWithStyle:currentStyle];
-        BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
-        popView.isClickBGDismiss = YES;
-        [popView pop];
-        
-        [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
-        }];
-        alertView.dismissBlock = ^{
-            [popView dismiss];
-        };
-        alertView.btnBlock = ^(UIButton * _Nullable btn) {
-            [popView dismiss];
-        };
-    } WithDefaultCompletion:nil];
+    if (![IVNetwork savedUserInfo]) {
+        [MBProgressHUD showError:@"请先登录" toView:nil];
+        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else
+    {
+        [[BTTActivityManager sharedInstance] checkTimeRedPacketRainWithCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
+            RedPacketsRainView *alertView = [RedPacketsRainView viewFromXib];
+            [alertView configForRedPocketsViewWithStyle:currentStyle];
+            BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+            popView.isClickBGDismiss = YES;
+            [popView pop];
+            
+            [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+            }];
+            alertView.dismissBlock = ^{
+                [popView dismiss];
+            };
+            alertView.btnBlock = ^(UIButton * _Nullable btn) {
+                [popView dismiss];
+            };
+        } WithDefaultCompletion:nil];
+    }
 }
 
 @end
