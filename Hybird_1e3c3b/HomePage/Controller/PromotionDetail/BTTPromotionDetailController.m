@@ -21,6 +21,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if ([self.webConfigModel.url containsString:@"twincitiespk"]) {
+        self.webView.allowsInlineMediaPlayback = true;
+        self.webView.mediaPlaybackRequiresUserAction = false;
+    }
     [self loadWebView];
 }
 
