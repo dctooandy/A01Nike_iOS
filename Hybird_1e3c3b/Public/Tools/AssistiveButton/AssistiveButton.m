@@ -98,7 +98,7 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
     }
     return self;
 }
--(void)serverTime:(TimeCompleteBlock)completeBlock {
+-(void)serverTime:(TimeCompleteBlock)completeBlock {   
     NSDate *timeDate = [NSDate new];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
