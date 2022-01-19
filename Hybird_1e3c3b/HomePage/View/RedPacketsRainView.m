@@ -1122,7 +1122,7 @@
         bannerView.layer.cornerRadius = 10;
         bannerView.layer.masksToBounds = true;
         bannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-        bannerView.pageControlStyle = SDCycleScrollViewPageContolStyleDefault;
+        bannerView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
         bannerView.pageControlDotSize = CGSizeMake(6, 6);
 //        bannerView.autoScrollTimeInterval = 0;
         bannerView.autoScroll = false;
@@ -1143,7 +1143,7 @@
 //        giftBannerView.layer.cornerRadius = 10;
 //        giftBannerView.layer.masksToBounds = true;
         giftBannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
-        giftBannerView.pageControlStyle = SDCycleScrollViewPageContolStyleDefault;
+        giftBannerView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
         giftBannerView.pageControlDotSize = CGSizeMake(6, 6);
 //        bannerView.autoScrollTimeInterval = 0;
         giftBannerView.autoScroll = false;
