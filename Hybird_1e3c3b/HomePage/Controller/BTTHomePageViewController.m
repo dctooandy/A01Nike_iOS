@@ -1305,7 +1305,7 @@
 #pragma mark - 红包雨 预热/活动弹窗
 - (void)showRedPacketsRainViewwWithStyle:(RedPocketsViewStyle)currentStyle
 {
-    if (![IVNetwork savedUserInfo]) {
+    if (![IVNetwork savedUserInfo] && currentStyle == RedPocketsViewBegin) {
         [MBProgressHUD showError:@"请先登录" toView:nil];
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
