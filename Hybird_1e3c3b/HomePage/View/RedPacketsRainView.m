@@ -41,6 +41,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *mammonImageView;
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
 @property (weak, nonatomic) IBOutlet UIImageView *bagImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *yellowBagImageView;
 
 @property (weak, nonatomic) IBOutlet UIView *bagView;
 @property (weak, nonatomic) IBOutlet UIView *bagResultView;
@@ -171,22 +172,22 @@
             }else
             {
                 //测试用
-//                [[NSUserDefaults standardUserDefaults] setObject:@"asdnsmcls" forKey:RedPacketIdentify];
-//                [[NSUserDefaults standardUserDefaults] synchronize];
-//                [weakSelf moveLabelToTop]; // 移动倒数LAbel到上面
-//                [weakSelf startRedPackerts]; // 开始下红包雨
-//                [weakSelf.tapGesture setEnabled:YES];
+                [[NSUserDefaults standardUserDefaults] setObject:@"asdnsmcls" forKey:RedPacketIdentify];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [weakSelf moveLabelToTop]; // 移动倒数LAbel到上面
+                [weakSelf startRedPackerts]; // 开始下红包雨
+                [weakSelf.tapGesture setEnabled:YES];
                 // 不成功
-                [MBProgressHUD showError:messageString toView:nil];
-                [self.closeGiftBagButton setHidden:YES];
-                weakSelf.countdownLab.text = @"";
-                weakSelf(weakSelf)
-                [[BTTActivityManager sharedInstance] checkTimeRedPacketRainWithCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        int timeout = [PublicMethod countDownIntervalWithDurationTag:YES];
-                        [weakSelf startTimeWithDuration:timeout];
-                    });
-                } WithDefaultCompletion:nil];
+//                [MBProgressHUD showError:messageString toView:nil];
+//                [self.closeGiftBagButton setHidden:YES];
+//                weakSelf.countdownLab.text = @"";
+//                weakSelf(weakSelf)
+//                [[BTTActivityManager sharedInstance] checkTimeRedPacketRainWithCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
+//                    dispatch_async(dispatch_get_main_queue(), ^{
+//                        int timeout = [PublicMethod countDownIntervalWithDurationTag:YES];
+//                        [weakSelf startTimeWithDuration:timeout];
+//                    });
+//                } WithDefaultCompletion:nil];
             }
         }
     }];
@@ -372,6 +373,7 @@
 //    self.bagMoveLayer.contents = (id)self.bagImageView.image.CGImage;
 //    [self.rainBackgroundView.layer addSublayer:self.bagMoveLayer];
     [self.bagImageView setHidden:NO];
+    [self.yellowBagImageView setHidden:YES];
 }
 - (void)setupShowCardsButtonAnimation
 {
@@ -398,14 +400,15 @@
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.bagImageView.layer removeAllAnimations];
-        CGRect originButton = self.bagImageView.frame;
-        originButton.size.width = originButton.size.width + 10;
-        originButton.size.height = originButton.size.height + 10;
-        originButton.origin.x = originButton.origin.x + 5;
-        originButton.origin.y = originButton.origin.y - 5;
-        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse animations:^{
-            [self.bagImageView setFrame:originButton];
-        } completion:nil];
+        [self.yellowBagImageView.layer removeAllAnimations];
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [self.bagImageView setAlpha:1.0];
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse animations:^{
+                self.bagImageView.transform =  CGAffineTransformMakeTranslation(5,  -5);
+                self.bagImageView.transform = self.bagImageView.transform = CGAffineTransformScale(self.bagImageView.transform, 1.1f, 1.1f);
+            } completion:nil];
+        }];
     });
 }
 - (void)addRainAnimation
@@ -435,6 +438,9 @@
     [self.timer invalidate];
     [self.tapGesture setEnabled:NO];
     [self.bagImageView setHidden:YES];
+    [self.yellowBagImageView setHidden:YES];
+    [self.bagImageView setAlpha:0.0];
+    [self.yellowBagImageView setAlpha:0.0];
     for (NSInteger i = 0; i < self.redPocketsRainView.layer.sublayers.count ; i ++)
     {
         CALayer * layer = self.redPocketsRainView.layer.sublayers[i];
@@ -468,7 +474,7 @@
             UIImageView * imageV = [UIImageView new];
             imageV.image = [UIImage imageNamed:@"img_redbag"];
             
-            imageV.frame = CGRectMake(0, 0, SCREEN_WIDTH * (200.0/414.0) , SCREEN_WIDTH * (200.0/414.0));
+            imageV.frame = CGRectMake(0, 0, SCREEN_WIDTH * (200.0/414.0) , SCREEN_WIDTH * (234.0/414.0));
             self.bagMoveLayer.bounds = imageV.frame;
             self.bagMoveLayer.anchorPoint = CGPointMake(0, 1);
             self.bagMoveLayer.position = CGPointMake(-50, SCREEN_HEIGHT );
@@ -784,27 +790,22 @@
 - (void)changeBagColor
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.bagImageView.layer removeAllAnimations];
-        CGRect originFrame = self.bagImageView.frame;
-        originFrame.size.width = SCREEN_WIDTH * (247.0/414.0);
-        originFrame.size.height = SCREEN_WIDTH * (289.0/414.0);
-        [self.bagImageView setFrame:originFrame];
-//        [self.bagImageView setFrame:];
-        CGRect newFrame = CGRectMake(self.bagImageView.origin.x, self.bagImageView.origin.y, SCREEN_WIDTH * (247.0/414.0) , SCREEN_WIDTH * (289.0/414.0) );
-        newFrame.size.width += 20;
-        newFrame.size.height += 20;
-//        newFrame.origin.x += 30;
-        newFrame.origin.y -= 10;
-        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse animations:^{
-            self.bagImageView.image = [UIImage imageNamed:@"img_yellowbag_game"];
-            [self.bagImageView setFrame:newFrame];
-//            UIImageView * imageV = [UIImageView new];
-//            imageV.image = [UIImage imageNamed:@"img_yellowbag_game_popup"];
-//            imageV.frame = CGRectMake(0, 0, SCREEN_WIDTH * (247.0/414.0) , SCREEN_WIDTH * (289.0/414.0) );
-////            imageV.frame = CGRectMake(0, 0, 247 , 289 );
-//            self.bagMoveLayer.bounds = imageV.frame;
-//            self.bagMoveLayer.contents = (id)imageV.image.CGImage;
-        } completion:nil];
+        [self.yellowBagImageView.layer removeAllAnimations];
+        [self.yellowBagImageView setHidden:NO];
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.bagImageView setAlpha:0.0];
+            [self.yellowBagImageView setAlpha:1.0];
+        } completion:^(BOOL finished) {
+            [self.bagImageView.layer removeAllAnimations];
+            [self.bagImageView setHidden:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIView animateWithDuration:0.5 delay:0 options: UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat animations:^{
+                    self.yellowBagImageView.transform =  CGAffineTransformMakeTranslation(5,  5);
+                    self.yellowBagImageView.transform = self.yellowBagImageView.transform = CGAffineTransformScale(self.yellowBagImageView.transform, 1.2f, 1.2f);
+                } completion:nil];
+            });
+        }];
+
     });
 }
 - (void)showOpenGiftBagButton
