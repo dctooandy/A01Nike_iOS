@@ -13,6 +13,7 @@
 #import "UIImage+GIF.h"
 #import "GradientImage.h"
 #import "BTTActivityManager.h"
+#import "LuckyBagModel.h"
 @interface RedPacketsRainView()<SDCycleScrollViewDelegate , QBulletScreenViewDelegate>
 // 按照页面顺序
 @property (weak, nonatomic) IBOutlet UIView *cardsBonusView;
@@ -50,6 +51,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *flyingRedPacketsArray;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *tigerImageViewArray;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *cardsAmountLabelArray;
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *luckyBagResultArray;
 
 // 普通参数
 @property (nonatomic, strong) NSTimer *timer;
@@ -63,6 +65,7 @@
 @property (nonatomic, strong) SDCycleScrollView *giftBannerView;
 @property (nonatomic, strong) NSMutableArray *bulletViewsArr;
 @property (nonatomic, assign) NSInteger fetchRedPacketsNum;
+@property(nonatomic,strong)LuckyBagModel * luckyBagModel;
 
 @end
 
@@ -167,8 +170,14 @@
                 [weakSelf.tapGesture setEnabled:YES];
             }else
             {
+                //测试用
+//                [[NSUserDefaults standardUserDefaults] setObject:@"asdnsmcls" forKey:RedPacketIdentify];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+//                [weakSelf moveLabelToTop]; // 移动倒数LAbel到上面
+//                [weakSelf startRedPackerts]; // 开始下红包雨
+//                [weakSelf.tapGesture setEnabled:YES];
+                // 不成功
                 [MBProgressHUD showError:messageString toView:nil];
-                 
                 [self.closeGiftBagButton setHidden:YES];
                 weakSelf.countdownLab.text = @"";
                 weakSelf(weakSelf)
@@ -809,12 +818,12 @@
 - (void)autoOpenGiftBagAction
 {
     //红包袋开启倒数60秒
-    self.autoOpenBagTimer = [NSTimer scheduledTimerWithTimeInterval:RedPacketCountDown target:self selector:@selector(showGiftBag) userInfo:nil repeats:NO];
+    self.autoOpenBagTimer = [NSTimer scheduledTimerWithTimeInterval:RedPacketCountDown target:self selector:@selector(fetchOpenLuckyBagData) userInfo:nil repeats:NO];
 }
-- (void)showGiftBag
+- (void)fetchOpenLuckyBagData
 {
-    NSString *identifyString = [[[NSUserDefaults standardUserDefaults] objectForKey:RedPacketIdentify] stringValue];
-    NSString *numString = [[[NSUserDefaults standardUserDefaults] objectForKey:RedPacketNum] stringValue];
+    NSString *identifyString = [[NSUserDefaults standardUserDefaults] objectForKey:RedPacketIdentify];
+    NSString *numString = [[NSUserDefaults standardUserDefaults] objectForKey:RedPacketNum];
     if (A01IsEmpty(identifyString) || A01IsEmpty(numString))
     {
         [MBProgressHUD showError:@"参数异常" toView:nil];
@@ -827,14 +836,40 @@
         [IVNetwork requestPostWithUrl:BTTRainOpen paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
             IVJResponseObject *result = response;
             if ([result.head.errCode isEqualToString:@"0000"]) {
-                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
-                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [self openGiftBagAction];
+                weakSelf.luckyBagModel = [LuckyBagModel yy_modelWithJSON:result.body];
+                NSString *codeString = weakSelf.luckyBagModel.code;
+                NSString *messageString = weakSelf.luckyBagModel.message;
+                if ([codeString isEqual:@"200"])
+                {
+                    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
+                    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    [weakSelf showBagWithData];
+                }else
+                {
+                    [MBProgressHUD showError:messageString toView:nil];
+                    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
+                    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    [weakSelf showBagWithData];
+                }
             }
         }];
-        
     }
+}
+- (void)showBagWithData
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for (int i = 0; i < self.luckyBagResultArray.count; i++) {
+            UILabel *subLabel = self.luckyBagResultArray[i];
+            subLabel.text = self.luckyBagModel.amountData[i];
+        }
+    });
+    [self.autoOpenBagTimer invalidate];
+    [self.closeGiftBagButton setHidden:NO];
+    [self.openGiftBagButton setHidden:YES];
+    [self.bagResultView setHidden:NO];
+    [self.bagMoveLayer removeFromSuperlayer];
 }
 - (BOOL)checkCardsCombineAvailable
 {
@@ -900,11 +935,7 @@
 //    }
 }
 - (IBAction)openGiftBagAction{
-    [self.autoOpenBagTimer invalidate];
-    [self.closeGiftBagButton setHidden:NO];
-    [self.openGiftBagButton setHidden:YES];
-    [self.bagResultView setHidden:NO];
-    [self.bagMoveLayer removeFromSuperlayer];
+    [self fetchOpenLuckyBagData];
 }
 - (IBAction)closeGiftBagAction:(id)sender {
     [self.bagView setHidden:YES];

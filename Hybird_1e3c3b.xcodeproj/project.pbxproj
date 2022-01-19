@@ -629,6 +629,8 @@
 		7675705A26A9657A0065F99B /* BTTPopViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675705926A9657A0065F99B /* BTTPopViewModel.m */; };
 		767DF24827902F5300F50520 /* mammon2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 767DF24727902F5200F50520 /* mammon2.gif */; };
 		7682A7932795785E001AC772 /* RedPacketsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7922795785D001AC772 /* RedPacketsInfoModel.m */; };
+		7682A7A02797A1A6001AC772 /* LuckyBagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A79F2797A1A6001AC772 /* LuckyBagModel.m */; };
+		7682A7A12797A487001AC772 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
 		76B499F22761D4D1003CD35B /* dEgg1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B499F12761D4D0003CD35B /* dEgg1.gif */; };
 		76B499F42761D5C4003CD35B /* dEgg2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B499F32761D5C4003CD35B /* dEgg2.gif */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
@@ -1923,6 +1925,8 @@
 		767DF24727902F5200F50520 /* mammon2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = mammon2.gif; sourceTree = "<group>"; };
 		7682A7912795785D001AC772 /* RedPacketsInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedPacketsInfoModel.h; sourceTree = "<group>"; };
 		7682A7922795785D001AC772 /* RedPacketsInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedPacketsInfoModel.m; sourceTree = "<group>"; };
+		7682A79E2797A1A6001AC772 /* LuckyBagModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuckyBagModel.h; sourceTree = "<group>"; };
+		7682A79F2797A1A6001AC772 /* LuckyBagModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuckyBagModel.m; sourceTree = "<group>"; };
 		76B499F12761D4D0003CD35B /* dEgg1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg1.gif; sourceTree = "<group>"; };
 		76B499F32761D5C4003CD35B /* dEgg2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg2.gif; sourceTree = "<group>"; };
 		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
@@ -2279,6 +2283,7 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
+				7682A7A12797A487001AC772 /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -3694,6 +3699,8 @@
 				41AB7FE426CA4A450086AF9B /* BTTCheckCustomerModel.m */,
 				7682A7912795785D001AC772 /* RedPacketsInfoModel.h */,
 				7682A7922795785D001AC772 /* RedPacketsInfoModel.m */,
+				7682A79E2797A1A6001AC772 /* LuckyBagModel.h */,
+				7682A79F2797A1A6001AC772 /* LuckyBagModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -5882,6 +5889,7 @@
 				3AF1B81921AF994A00BF8C3A /* BTTVideoGamesFooterCell.m in Sources */,
 				76F863A526E0B61100320B60 /* BTTVIPChangeBtnsCell.m in Sources */,
 				3A5F7AA321A9524D00128E8B /* BTTProvinceModel.m in Sources */,
+				7682A7A02797A1A6001AC772 /* LuckyBagModel.m in Sources */,
 				3A11AE6C2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.m in Sources */,
 				3A37E1262164A22700FB13A1 /* BTTDiscountsViewController.m in Sources */,
 				D3A9A71E24163E20007F672A /* BTTAddUsdtHeaderCell.m in Sources */,
