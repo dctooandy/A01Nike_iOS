@@ -612,7 +612,7 @@
                                 <action selector="closeBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Nxa-bR-Ku7"/>
                             </connections>
                         </button>
-                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_redbag_game" translatesAutoresizingMaskIntoConstraints="NO" id="Hzl-9X-Vwu">
+                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_redbag_game" translatesAutoresizingMaskIntoConstraints="NO" id="Hzl-9X-Vwu">
                             <rect key="frame" x="-30" y="670.5" width="240" height="285.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Hzl-9X-Vwu" secondAttribute="height" multiplier="216:257" id="NQz-CQ-8AC"/>
