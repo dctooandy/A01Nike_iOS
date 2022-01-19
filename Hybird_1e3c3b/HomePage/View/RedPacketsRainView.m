@@ -17,6 +17,7 @@
 #import "GiftCardModel.h"
 #import "PrizeRecordModel.h"
 #import "PrizeNamesModel.h"
+#import "FusingBlessingCardModel.h"
 @interface RedPacketsRainView()<SDCycleScrollViewDelegate , QBulletScreenViewDelegate>
 // 按照页面顺序
 @property (weak, nonatomic) IBOutlet UIView *cardsBonusView;
@@ -73,6 +74,7 @@
 @property (nonatomic, strong) NSArray<GiftCardModel *>* giftCardArray;
 @property (nonatomic, strong) NSArray<PrizeRecordModel *>* prizeRecordArray;
 @property (nonatomic, strong) NSArray<PrizeNamesModel *>* prizeNamesArray;
+@property (nonatomic, strong) FusingBlessingCardModel * fusingBlessingCardModel;
 
 @end
 
@@ -181,22 +183,22 @@
             }else
             {
                 //测试用
-                [[NSUserDefaults standardUserDefaults] setObject:@"asdnsmcls" forKey:RedPacketIdentify];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [weakSelf moveLabelToTop]; // 移动倒数LAbel到上面
-                [weakSelf startRedPackerts]; // 开始下红包雨
-                [weakSelf.tapGesture setEnabled:YES];
+//                [[NSUserDefaults standardUserDefaults] setObject:@"asdnsmcls" forKey:RedPacketIdentify];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+//                [weakSelf moveLabelToTop]; // 移动倒数LAbel到上面
+//                [weakSelf startRedPackerts]; // 开始下红包雨
+//                [weakSelf.tapGesture setEnabled:YES];
                 // 不成功
-//                [MBProgressHUD showError:messageString toView:nil];
-//                [self.closeGiftBagButton setHidden:YES];
-//                weakSelf.countdownLab.text = @"";
-//                weakSelf(weakSelf)
-//                [[BTTActivityManager sharedInstance] checkTimeRedPacketRainWithCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
-//                    dispatch_async(dispatch_get_main_queue(), ^{
-//                        int timeout = [PublicMethod countDownIntervalWithDurationTag:YES];
-//                        [weakSelf startTimeWithDuration:timeout];
-//                    });
-//                } WithDefaultCompletion:nil];
+                [MBProgressHUD showError:messageString toView:nil];
+                [self.closeGiftBagButton setHidden:YES];
+                weakSelf.countdownLab.text = @"";
+                weakSelf(weakSelf)
+                [[BTTActivityManager sharedInstance] checkTimeRedPacketRainWithCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        int timeout = [PublicMethod countDownIntervalWithDurationTag:YES];
+                        [weakSelf startTimeWithDuration:timeout];
+                    });
+                } WithDefaultCompletion:nil];
             }
         }
     }];
@@ -970,18 +972,51 @@
     [self.bagResultView setHidden:NO];
     [self.bagMoveLayer removeFromSuperlayer];
 }
-- (BOOL)checkCardsCombineAvailable
-{
-    return YES;
-}
+
 - (void)showGiftViewWithData:(NSString*)imageData
 {
-    [self.cardsBonusView bringSubviewToFront:self.giftView];
-    [self.giftView setHidden:NO];
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.giftView setAlpha:1.0];
-    }];
-    self.giftTitleLabel.text = @"抽中 XXXXXX";
+    NSString *imageString = @"";
+    if ([imageData containsString:@"海尔除螨仪"])
+    {
+        imageString = @"img_HZC302W";
+    }
+    if ([imageData containsString:@"SKG颈部"])
+    {
+        imageString = @"img_SKG";
+    }
+    if ([imageData containsString:@"奥玛仕"])
+    {
+        imageString = @"img_401as";
+    }
+    if ([imageData containsString:@"戴森吸"])
+    {
+        imageString = @"img_dysonV10";
+    }
+    if ([imageData containsString:@"PS5"])
+    {
+        imageString = @"img_PS5";
+    }
+    if ([imageData containsString:@"苹果"])
+    {
+        imageString = @"img_MacBook13";
+    }
+    if ([imageData containsString:@"三星"])
+    {
+        imageString = @"img_GalaxyZFold3";
+    }
+    if ([imageData containsString:@"a7m4"])
+    {
+        imageString = @"img_sonya7m4";
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.giftImageView.image = ImageNamed(imageString);
+        [self.cardsBonusView bringSubviewToFront:self.giftView];
+        [self.giftView setHidden:NO];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.giftView setAlpha:1.0];
+        }];
+        self.giftTitleLabel.text = [NSString stringWithFormat:@"抽中 %@",imageData];
+    });
 }
 #pragma mark IBAction
 // 开启规则画面
@@ -1042,6 +1077,7 @@
 //    [self switchWithView:self.cardsBonusView withPosition:RedPocketsViewToBack];
 //    }
 }
+
 - (void)fetchGroupPrizeNameData:(dispatch_group_t)group
 {
     NSMutableDictionary *params = @{}.mutableCopy;
@@ -1091,13 +1127,23 @@
     } WithDefaultCompletion:nil];
 }
 - (IBAction)combineCardsAction:(id)sender {
-    if ([self checkCardsCombineAvailable])
-    {
-        [self showGiftViewWithData:@""];
-    }else
-    {
-        [MBProgressHUD showError:@"您暂未集齐全部福卡，继续加油" toView:nil];
-    }
+    NSMutableDictionary *params = @{}.mutableCopy;
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTRainFusing paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString *codeString = result.body[@"code"];
+            NSString *messageString = result.body[@"message"];
+            if ([codeString isEqual:@"200"])
+            {
+                weakSelf.fusingBlessingCardModel = [FusingBlessingCardModel yy_modelWithJSON:result.body[@"data"]];
+                [self showGiftViewWithData:weakSelf.fusingBlessingCardModel.prizeName];
+            }else
+            {
+                [MBProgressHUD showError:messageString toView:nil];
+            }
+        }
+    }];
 }
 - (IBAction)dismissGiftView:(id)sender {
     
