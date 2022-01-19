@@ -630,7 +630,10 @@
 		767DF24827902F5300F50520 /* mammon2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 767DF24727902F5200F50520 /* mammon2.gif */; };
 		7682A7932795785E001AC772 /* RedPacketsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7922795785D001AC772 /* RedPacketsInfoModel.m */; };
 		7682A7A02797A1A6001AC772 /* LuckyBagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A79F2797A1A6001AC772 /* LuckyBagModel.m */; };
-		7682A7AA2797BAAF001AC772 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
+		7682A7AD2797E704001AC772 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
+		7682A7B02797E8A2001AC772 /* GiftCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7AF2797E8A2001AC772 /* GiftCardModel.m */; };
+		7682A7B32797EF29001AC772 /* PrizeRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7B22797EF29001AC772 /* PrizeRecordModel.m */; };
+		7682A7B62797F3F3001AC772 /* PrizeNamesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7B52797F3F3001AC772 /* PrizeNamesModel.m */; };
 		76B499F22761D4D1003CD35B /* dEgg1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B499F12761D4D0003CD35B /* dEgg1.gif */; };
 		76B499F42761D5C4003CD35B /* dEgg2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B499F32761D5C4003CD35B /* dEgg2.gif */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
@@ -1927,6 +1930,12 @@
 		7682A7922795785D001AC772 /* RedPacketsInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedPacketsInfoModel.m; sourceTree = "<group>"; };
 		7682A79E2797A1A6001AC772 /* LuckyBagModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuckyBagModel.h; sourceTree = "<group>"; };
 		7682A79F2797A1A6001AC772 /* LuckyBagModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LuckyBagModel.m; sourceTree = "<group>"; };
+		7682A7AE2797E8A2001AC772 /* GiftCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GiftCardModel.h; sourceTree = "<group>"; };
+		7682A7AF2797E8A2001AC772 /* GiftCardModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GiftCardModel.m; sourceTree = "<group>"; };
+		7682A7B12797EF29001AC772 /* PrizeRecordModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrizeRecordModel.h; sourceTree = "<group>"; };
+		7682A7B22797EF29001AC772 /* PrizeRecordModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrizeRecordModel.m; sourceTree = "<group>"; };
+		7682A7B42797F3F3001AC772 /* PrizeNamesModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrizeNamesModel.h; sourceTree = "<group>"; };
+		7682A7B52797F3F3001AC772 /* PrizeNamesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrizeNamesModel.m; sourceTree = "<group>"; };
 		76B499F12761D4D0003CD35B /* dEgg1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg1.gif; sourceTree = "<group>"; };
 		76B499F32761D5C4003CD35B /* dEgg2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg2.gif; sourceTree = "<group>"; };
 		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
@@ -2283,7 +2292,7 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
-				7682A7AA2797BAAF001AC772 /* libboringssl_simulator.a in Frameworks */,
+				7682A7AD2797E704001AC772 /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -3701,6 +3710,12 @@
 				7682A7922795785D001AC772 /* RedPacketsInfoModel.m */,
 				7682A79E2797A1A6001AC772 /* LuckyBagModel.h */,
 				7682A79F2797A1A6001AC772 /* LuckyBagModel.m */,
+				7682A7AE2797E8A2001AC772 /* GiftCardModel.h */,
+				7682A7AF2797E8A2001AC772 /* GiftCardModel.m */,
+				7682A7B12797EF29001AC772 /* PrizeRecordModel.h */,
+				7682A7B22797EF29001AC772 /* PrizeRecordModel.m */,
+				7682A7B42797F3F3001AC772 /* PrizeNamesModel.h */,
+				7682A7B52797F3F3001AC772 /* PrizeNamesModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -5534,6 +5549,7 @@
 				3A11AE0D21829F4B00B1AFF4 /* BTTPTTransferController.m in Sources */,
 				3A11AE532186A6A200B1AFF4 /* BTTBookMessageController.m in Sources */,
 				D5C5018E21B4FC8C00C6DA02 /* CNPayWechatTipView.m in Sources */,
+				7682A7B32797EF29001AC772 /* PrizeRecordModel.m in Sources */,
 				419AEC5A250F64F100D089DD /* BTTBJLPopView.m in Sources */,
 				3AA7893221FFF2580047A372 /* SDWebImageGIFCoder.m in Sources */,
 				3AE1EAFC218021080073A32D /* BTTVerifyTypeSelectController+LoadData.m in Sources */,
@@ -5925,6 +5941,7 @@
 				3A9E4C48219ECC6C00E7D8C0 /* BTTPosterModel.m in Sources */,
 				3AD9CF7B216F400A00685B43 /* BTTAppIconModel.m in Sources */,
 				3AB0687C21A57A6900072FB7 /* BTTXimaItemModel.m in Sources */,
+				7682A7B02797E8A2001AC772 /* GiftCardModel.m in Sources */,
 				3A9E4C45219E9CAD00E7D8C0 /* BTTBindStatusModel.m in Sources */,
 				D31B0EFA23B46058003666BA /* CNPayUSDTRateModel.m in Sources */,
 				D3A9A72124172611007F672A /* BTTUSDTWalletTypeModel.m in Sources */,
@@ -6025,6 +6042,7 @@
 				3AE0582421704DCB00C7E70D /* BTTHomePageAmountsCell.m in Sources */,
 				3A8F51A0215F77EC0069D1B3 /* NSDate+Extension.m in Sources */,
 				418F756F251D94A400DF4A71 /* BTTXmTransferRecordModel.m in Sources */,
+				7682A7B62797F3F3001AC772 /* PrizeNamesModel.m in Sources */,
 				3AE05816217030CC00C7E70D /* BTTHomePageActivitiesCell.m in Sources */,
 				41A09D3925E4F4BD00255681 /* BTTDifferentLocPopView.m in Sources */,
 				41B8FCD625C92B310022F886 /* AssistiveButton.m in Sources */,
@@ -6252,7 +6270,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.4.20;
+				MARKETING_VERSION = 3.4.21;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6294,7 +6312,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.4.20;
+				MARKETING_VERSION = 3.4.21;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
