@@ -247,9 +247,12 @@
             int mInt = (int)leftTime / 60 % 60;         //剩馀分数
             int sInt = (int)leftTime % 60;              //剩馀秒数
             NSString * titleStr;
-            NSString * dayString = (dInt == 0 ? @"" : [NSString stringWithFormat:@"%d天",dInt]);
-            NSString * hourString = ((hInt == 0 && dInt == 0) ? @"" : [NSString stringWithFormat:@"%d小时",hInt]);
-            NSString * minString = ((mInt == 0 && hInt == 0 && dInt == 0) ? @"" : [NSString stringWithFormat:@"%d分",mInt]);
+//            NSString * dayString = (dInt == 0 ? @"" : [NSString stringWithFormat:@"%d天",dInt]);
+//            NSString * hourString = ((hInt == 0 && dInt == 0) ? @"" : [NSString stringWithFormat:@"%d小时",hInt]);
+//            NSString * minString = ((mInt == 0 && hInt == 0 && dInt == 0) ? @"" : [NSString stringWithFormat:@"%d分",mInt]);
+            NSString * dayString = [NSString stringWithFormat:@"%d天",dInt];
+            NSString * hourString = [NSString stringWithFormat:@"%d小时",hInt];
+            NSString * minString = [NSString stringWithFormat:@"%d分",mInt];
             if (isActivityDuration)
             {
                 titleStr = [NSString stringWithFormat:@"%@%@%d秒",
