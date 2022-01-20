@@ -12,6 +12,8 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
 @interface AssistiveButton () <CAAnimationDelegate>
 @property (strong, nonatomic) UIDynamicAnimator *animator;
 @property (weak, nonatomic) UILabel *countdownLab;
+@property (assign, nonatomic) BOOL isRainning;
+@property (nonatomic, strong) dispatch_source_t assistiveTimer;      //位置弹窗计时器
 @end
 
 @implementation AssistiveButton
@@ -53,6 +55,7 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
 {
     self = [super init];
     if (self) {
+        self.isRainning = NO;
         UIImage * closeImage = [UIImage imageNamed:@"assisClose"];
         CGFloat assistiveBtnHeight = 190 + 30;
         CGFloat loginBtnViewHeight = 87;
@@ -110,13 +113,49 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     return [dateFormatter stringFromDate:timeDate];
 }
+-(void)refetchTimeForRainning
+{
+    if (_assistiveTimer) dispatch_source_cancel(_assistiveTimer);
+    [self reStartCountTime];
+}
 - (void)reStartCountTime
 {
+    self.isRainning = NO;
     weakSelf(weakSelf)
     [[BTTActivityManager sharedInstance] checkTimeRedPacketRainWithCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
-       
         [weakSelf startCountDownTime];
     } WithDefaultCompletion:nil];
+}
+- (void)startRainingCountDown
+{
+    self.isRainning = YES;
+    weakSelf(weakSelf)
+    __block int timeout = 60;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(_timer, ^{
+        if ( timeout <= 0 )
+        {
+            dispatch_source_cancel(_timer);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf reStartCountTime];//访问剩馀秒数再开始倒数
+            });
+        }
+        else
+        {
+            int dInt = (int)timeout / (3600 * 24);      //剩馀天数
+            int leftTime = timeout - (dInt * 3600 * 24);
+            int sInt = (int)leftTime % 60;              //剩馀秒数
+            NSString * titleStr;
+            titleStr = [NSString stringWithFormat:@"红包雨剩馀%d秒",sInt];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                weakSelf.countdownLab.text = titleStr;
+            });
+            timeout--;
+        }
+    });
+    dispatch_resume(_timer);
 }
 - (void)startCountDownTime
 {
@@ -131,14 +170,15 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
         {
             __block int timeout = [PublicMethod countDownIntervalWithDurationTag:isActivityDuration];
             dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-            dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-            dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
-            dispatch_source_set_event_handler(_timer, ^{
+//            dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+            _assistiveTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+            dispatch_source_set_timer(_assistiveTimer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
+            dispatch_source_set_event_handler(_assistiveTimer, ^{
                 if ( timeout <= 0 )
                 {
-                    dispatch_source_cancel(_timer);
+                    dispatch_source_cancel(weakSelf.assistiveTimer);
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [weakSelf reStartCountTime];
+                        [weakSelf startRainingCountDown];// 下雨倒数秒数
                     });
                 }
                 else
@@ -156,12 +196,22 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
                     int mInt = (int)leftTime / 60 % 60;         //剩馀分数
                     int sInt = (int)leftTime % 60;              //剩馀秒数
                     NSString * titleStr;
+                    NSString * dayString = (dInt == 0 ? @"" : [NSString stringWithFormat:@"%d天",dInt]);
+                    NSString * hourString = ((hInt == 0 && dInt == 0) ? @"" : [NSString stringWithFormat:@"%d小时",hInt]);
+                    NSString * minString = ((mInt == 0 && hInt == 0 && dInt == 0) ? @"" : [NSString stringWithFormat:@"%d分",mInt]);
                     if (isActivityDuration)
                     {
-                        titleStr = [NSString stringWithFormat:@"%d小时%d分%d秒",hInt,mInt,sInt];
+                        titleStr = [NSString stringWithFormat:@"%@%@%d秒",
+                                    hourString
+                                    ,minString
+                                    ,sInt];
                     }else
                     {
-                        titleStr = [NSString stringWithFormat:@"%d天%d小时%d分%d秒",dInt,hInt,mInt,sInt];
+                        titleStr = [NSString stringWithFormat:@"%@%@%@%d秒",
+                                    dayString
+                                    ,hourString
+                                    ,minString
+                                    ,sInt];
                     }
                     dispatch_async(dispatch_get_main_queue(), ^{
                         weakSelf.countdownLab.text = titleStr;
@@ -169,15 +219,13 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
                     timeout--;
                 }
             });
-            dispatch_resume(_timer);
+            dispatch_resume(_assistiveTimer);
         }else
         {
             // 过了活动期
             weakSelf.countdownLab.text = @"活动已过";
         }
     }
-//    [self serverTime:^(NSString *timeStr) {
-//    }];
 }
 
 -(void)btnAction:(UIButton *)sender {

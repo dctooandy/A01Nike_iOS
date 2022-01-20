@@ -143,6 +143,7 @@
     [self.collectionView reloadData];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [self refreshDatasOfHomePage];
+    [self.redPocketsAssistiveButton refetchTimeForRainning];
 }
 
 -(void)showHomePopView {
@@ -1229,9 +1230,9 @@
         {
             // 预热
         }
-        //暂时让他出来
+        //测试用
         dispatch_async(dispatch_get_main_queue(), ^{
-//            [weakSelf showRedPacketsRainViewwWithStyle:RedPocketsViewDev];
+//            [weakSelf showRedPacketsRainViewwWithStyle:RedPocketsViewRainning];
         });
     } WithDefaultCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
         // 一般活动
@@ -1293,18 +1294,20 @@
     }];
     alertView.dismissBlock = ^{
         [popView dismiss];
+        [weakSelf.redPocketsAssistiveButton refetchTimeForRainning];
     };
     alertView.btnBlock = ^(UIButton * _Nullable btn) {
         [popView dismiss];
     };
     alertView.getRedBlock = ^{
-        [popView dismiss];
         [weakSelf showRedPacketsRainViewwWithStyle:RedPocketsViewBegin];
+        [popView dismiss];
     };
 }
 #pragma mark - 红包雨 预热/活动弹窗
 - (void)showRedPacketsRainViewwWithStyle:(RedPocketsViewStyle)currentStyle
 {
+    weakSelf(weakSelf)
     if (![IVNetwork savedUserInfo] && currentStyle == RedPocketsViewBegin) {
         [MBProgressHUD showError:@"请先登录" toView:nil];
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
@@ -1322,6 +1325,7 @@
                 make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
             }];
             alertView.dismissBlock = ^{
+                [weakSelf.redPocketsAssistiveButton refetchTimeForRainning];
                 [popView dismiss];
             };
             alertView.btnBlock = ^(UIButton * _Nullable btn) {
