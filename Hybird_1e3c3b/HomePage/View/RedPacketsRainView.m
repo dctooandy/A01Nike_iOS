@@ -551,7 +551,7 @@
     NSValue * A = [NSValue valueWithCGPoint:CGPointMake(arc4random() % (int)self.width, 0)];
     NSValue * B = [NSValue valueWithCGPoint:CGPointMake(arc4random() % (int)self.width, (int)self.height)];
     moveAnimation.values = @[A,B];
-    moveAnimation.duration = arc4random() % 200 / 100.0 + 3.5;
+    moveAnimation.duration = arc4random() % 200 / 100.0 + 3;
     moveAnimation.repeatCount = 1;
     moveAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     [self.moveLayer addAnimation:moveAnimation forKey:@"p"];
@@ -561,7 +561,7 @@
     CATransform3D r1 = CATransform3DMakeRotation(M_PI/180 * (arc4random() % 360 ) , 0, 0, -1);
     tranAnimation.values = @[[NSValue valueWithCATransform3D:r0],[NSValue valueWithCATransform3D:r1]];
     tranAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    tranAnimation.duration = arc4random() % 200 / 100.0 + 3.5;
+    tranAnimation.duration = arc4random() % 200 / 100.0 + 3;
     //为了避免旋转动画完成后再次回到初始状态。
     [tranAnimation setFillMode:kCAFillModeForwards];
     [tranAnimation setRemovedOnCompletion:NO];
@@ -888,7 +888,20 @@
     // 集福卡隐藏
     [self showCardsButtonSetHidden:YES];
     [self.redPocketsRainView addGestureRecognizer:self.tapGesture];
-    float t = (arc4random() % 7) + 6;
+//    float t = (arc4random() % 7) + 6;
+    float t = 13;
+    if ([IVNetwork savedUserInfo].starLevel <= 2)
+    {
+        t = 13;// 1-2星级
+    }else if(([IVNetwork savedUserInfo].starLevel == 3) ||
+           ([IVNetwork savedUserInfo].starLevel == 4) ||
+           ([IVNetwork savedUserInfo].starLevel == 7))
+    {
+        t = 15;// 347星级
+    }else
+    {
+        t = 16;// 5-6星级
+    }
     self.timer = [NSTimer scheduledTimerWithTimeInterval:(1/t) target:self selector:@selector(showRain) userInfo:nil repeats:YES];
     [self.timer fire];
     
