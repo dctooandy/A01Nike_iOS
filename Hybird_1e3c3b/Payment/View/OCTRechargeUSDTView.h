@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface OCTRechargeUSDTView : UIView
 @property (nonatomic, strong) UIView *rechargeView;
 @property (nonatomic, strong) UIButton *ercBtn;
+@property (nonatomic, strong) UIButton *trcBtn;
 @property (nonatomic, strong) UIButton *omniBtn;
 @property (nonatomic, strong) UIButton *commitBtn;
 @property (nonatomic, strong) UILabel *rateLabel;

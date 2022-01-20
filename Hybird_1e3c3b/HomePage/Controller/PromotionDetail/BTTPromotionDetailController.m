@@ -21,6 +21,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.webView.allowsInlineMediaPlayback = true;
+    self.webView.mediaPlaybackRequiresUserAction = false;
     [self loadWebView];
 }
 

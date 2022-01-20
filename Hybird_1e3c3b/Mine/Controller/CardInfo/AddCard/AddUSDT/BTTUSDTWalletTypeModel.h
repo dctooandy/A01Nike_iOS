@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BTTUSDTWalletTypeModel : BTTBaseModel
 
 @property (nonatomic, copy) NSString *code;
-@property (nonatomic, strong) NSArray *protocol;
+@property (nonatomic, copy) NSString *protocol;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *type;
 @end
