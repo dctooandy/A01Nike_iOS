@@ -14,7 +14,7 @@
 #import "BTTYenFenHongModel.h"
 #import "BTTPopViewModel.h"
 #import "RedPacketsRainView.h"
-
+#import "BTTHomePageViewController.h"
 @interface BTTActivityManager()
 @property(nonatomic,strong)BTTPopViewModel * popModel;
 
@@ -263,12 +263,21 @@ static BTTActivityManager * sharedSingleton;
     };
     alertView.btnBlock = ^(UIButton * _Nullable btn) {
         [popView dismiss];
-        BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
-        vc.webConfigModel.newView = YES;
-        vc.webConfigModel.theme = @"outside";
-        vc.webConfigModel.url = self.popModel.link;
-        vc.title = self.popModel.title;
-        [[weakSelf currentViewController].navigationController pushViewController:vc animated:YES];
+        NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
+        BOOL isBeforeDuration = [duractionArray[0] boolValue];
+        BOOL isActivityDuration = [duractionArray[1] boolValue];
+        if (isBeforeDuration || isActivityDuration)
+        {
+            [(BTTHomePageViewController *)[weakSelf currentViewController] showRedPacketsRainViewwWithStyle:(isActivityDuration ? RedPocketsViewBegin: RedPocketsViewPrefix)];
+        }else
+        {
+            BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
+            vc.webConfigModel.newView = YES;
+            vc.webConfigModel.theme = @"outside";
+            vc.webConfigModel.url = self.popModel.link;
+            vc.title = self.popModel.title;
+            [[weakSelf currentViewController].navigationController pushViewController:vc animated:YES];            
+        }
     };
 }
 
