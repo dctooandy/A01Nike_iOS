@@ -486,12 +486,21 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         if (model.action.detail.length <= 0) {
             return;
         }
-        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.title = model.title;
-        vc.webConfigModel.url = [model.action.detail stringByReplacingOccurrencesOfString:@" " withString:@""];
-        vc.webConfigModel.newView = YES;
-        vc.webConfigModel.theme = @"outside";
-        [self.navigationController pushViewController:vc animated:YES];
+        NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
+        BOOL isBeforeDuration = [duractionArray[0] boolValue];
+        BOOL isActivityDuration = [duractionArray[1] boolValue];
+        if ((isBeforeDuration || isActivityDuration) && ([model.action.detail containsString:@"tiger_red_envelope"]))
+        {
+            [self showRedPacketsRainViewwWithStyle:(isActivityDuration ? RedPocketsViewBegin: RedPocketsViewPrefix)];
+        }else
+        {
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            vc.title = model.title;
+            vc.webConfigModel.url = [model.action.detail stringByReplacingOccurrencesOfString:@" " withString:@""];
+            vc.webConfigModel.newView = YES;
+            vc.webConfigModel.theme = @"outside";
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     } else {
         NSRange gameIdRange = [model.action.detail rangeOfString:@"gameId"];
         if (gameIdRange.location != NSNotFound) {

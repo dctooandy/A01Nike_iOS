@@ -18,6 +18,8 @@
 #import "BTTAGGJViewController.h"
 #import "BTTGamesTryAlertView.h"
 #import "UIView+MJExtension.h"
+#import "RedPacketsRainView.h"
+#import "BTTActivityManager.h"
 
 @interface BTTDiscountsViewController ()<BTTElementsFlowLayoutDelegate, UIScrollViewDelegate>
 {
@@ -292,17 +294,55 @@
     cell.isShowOverView = self.yearsScrollView.isHidden;
     return cell;
 }
-
+- (void)showRedPacketsRainViewwWithStyle:(RedPocketsViewStyle)currentStyle
+{
+    if (![IVNetwork savedUserInfo] && (currentStyle == RedPocketsViewBegin ||
+                                       currentStyle == RedPocketsViewRainning ||
+                                       currentStyle == RedPocketsViewDev))
+    {
+        [MBProgressHUD showError:@"请先登录" toView:nil];
+        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else
+    {
+        [[BTTActivityManager sharedInstance] checkTimeRedPacketRainWithCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
+            RedPacketsRainView *alertView = [RedPacketsRainView viewFromXib];
+            [alertView configForRedPocketsViewWithStyle:currentStyle];
+            BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+            popView.isClickBGDismiss = YES;
+            [popView pop];
+            
+            [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+            }];
+            alertView.dismissBlock = ^{
+                [popView dismiss];
+            };
+            alertView.btnBlock = ^(UIButton * _Nullable btn) {
+                [popView dismiss];
+            };
+        } WithDefaultCompletion:nil];
+    }
+}
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
     BTTPromotionProcessModel *model = self.sheetDatas[indexPath.row];
     if ([model.href containsString:@"htm"]||[model.href containsString:@"activity_pages"]) {
-        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.title = model.name;
-        vc.webConfigModel.url = [model.href stringByReplacingOccurrencesOfString:@" " withString:@""];
-        vc.webConfigModel.newView = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
+        BOOL isBeforeDuration = [duractionArray[0] boolValue];
+        BOOL isActivityDuration = [duractionArray[1] boolValue];
+        if ((isBeforeDuration || isActivityDuration) && ([model.link containsString:@"tiger_red_envelope"]))
+        {
+            [self showRedPacketsRainViewwWithStyle:(isActivityDuration ? RedPocketsViewBegin: RedPocketsViewPrefix)];
+        }else
+        {
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            vc.title = model.name;
+            vc.webConfigModel.url = [model.href stringByReplacingOccurrencesOfString:@" " withString:@""];
+            vc.webConfigModel.newView = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     } else {
         NSRange gameIdRange = [model.href rangeOfString:@"gameId"];
         if (gameIdRange.location != NSNotFound) {

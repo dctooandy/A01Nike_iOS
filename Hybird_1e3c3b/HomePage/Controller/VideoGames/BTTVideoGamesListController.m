@@ -22,7 +22,8 @@
 #import "BTTAGQJViewController.h"
 #import "BTTAGGJViewController.h"
 #import "BTTGamesTryAlertView.h"
-
+#import "RedPacketsRainView.h"
+#import "BTTActivityManager.h"
 @interface BTTVideoGamesListController ()<BTTElementsFlowLayoutDelegate,UISearchBarDelegate>
 
 
@@ -721,17 +722,56 @@
     BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
+- (void)showRedPacketsRainViewwWithStyle:(RedPocketsViewStyle)currentStyle
+{
+    if (![IVNetwork savedUserInfo] && (currentStyle == RedPocketsViewBegin ||
+                                       currentStyle == RedPocketsViewRainning ||
+                                       currentStyle == RedPocketsViewDev))
+    {
+        [MBProgressHUD showError:@"请先登录" toView:nil];
+        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else
+    {
+        [[BTTActivityManager sharedInstance] checkTimeRedPacketRainWithCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
+            RedPacketsRainView *alertView = [RedPacketsRainView viewFromXib];
+            [alertView configForRedPocketsViewWithStyle:currentStyle];
+            BTTAnimationPopView *popView = [[BTTAnimationPopView alloc] initWithCustomView:alertView popStyle:BTTAnimationPopStyleNO dismissStyle:BTTAnimationDismissStyleNO];
+            popView.isClickBGDismiss = YES;
+            [popView pop];
+            
+            [alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, 0, 0));
+            }];
+            alertView.dismissBlock = ^{
+                [popView dismiss];
+            };
+            alertView.btnBlock = ^(UIButton * _Nullable btn) {
+                [popView dismiss];
+            };
+        } WithDefaultCompletion:nil];
+    }
+}
 - (void)bannerToGame:(BTTBannerModel *)model {
     if ([model.action.type isEqualToString:@"1"] ) {
         if (model.action.detail.length <= 0) {
             return;
         }
-        BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
-        vc.title = model.title;
-        vc.webConfigModel.url = [model.action.detail stringByReplacingOccurrencesOfString:@" " withString:@""];
-        vc.webConfigModel.newView = YES;
-        vc.webConfigModel.theme = @"outside";
-        [self.navigationController pushViewController:vc animated:YES];
+        NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
+        BOOL isBeforeDuration = [duractionArray[0] boolValue];
+        BOOL isActivityDuration = [duractionArray[1] boolValue];
+        if ((isBeforeDuration || isActivityDuration) && ([model.action.detail containsString:@"tiger_red_envelope"]))
+        {
+            [self showRedPacketsRainViewwWithStyle:(isActivityDuration ? RedPocketsViewBegin: RedPocketsViewPrefix)];
+        }else
+        {
+            BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];
+            vc.title = model.title;
+            vc.webConfigModel.url = [model.action.detail stringByReplacingOccurrencesOfString:@" " withString:@""];
+            vc.webConfigModel.newView = YES;
+            vc.webConfigModel.theme = @"outside";
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     } else {
         NSRange gameIdRange = [model.action.detail rangeOfString:@"gameId"];
         if (gameIdRange.location != NSNotFound) {
