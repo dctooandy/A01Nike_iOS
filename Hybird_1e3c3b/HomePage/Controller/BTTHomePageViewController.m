@@ -1232,7 +1232,7 @@
         }
         //测试用
         dispatch_async(dispatch_get_main_queue(), ^{
-//            [weakSelf showRedPacketsRainViewwWithStyle:RedPocketsViewRainning];
+//            [weakSelf showRedPacketsRainViewwWithStyle:RedPocketsViewDev];
         });
     } WithDefaultCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
         // 一般活动
@@ -1308,7 +1308,10 @@
 - (void)showRedPacketsRainViewwWithStyle:(RedPocketsViewStyle)currentStyle
 {
     weakSelf(weakSelf)
-    if (![IVNetwork savedUserInfo] && currentStyle == RedPocketsViewBegin) {
+    if (![IVNetwork savedUserInfo] && (currentStyle == RedPocketsViewBegin ||
+                                       currentStyle == RedPocketsViewRainning ||
+                                       currentStyle == RedPocketsViewDev))
+    {
         [MBProgressHUD showError:@"请先登录" toView:nil];
         BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];

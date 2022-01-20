@@ -96,69 +96,72 @@
 - (void)configForRedPocketsViewWithStyle:(RedPocketsViewStyle)style
 {
     _viewStyle = style;
-    [self setuprRuleImageBannerGroup];// 游戏规则资料
-    [self setupCardsImageView];//设定集福卡页面背景渐层
-    switch (self.viewStyle) {
-        case RedPocketsViewBegin:// 活动开始
-            self.selectedRedPacketNum = 0;
-            //开始红包雨倒数
-            [self startTimeWithDuration:[PublicMethod countDownIntervalWithDurationTag:YES]];
-            // 活动开始中奖名单跑马灯
-            [self fetchPrizeRecords];
-//            [self setupDataForSortArray];
-            // 集福卡开启
-            [self showCardsButtonSetHidden:NO];
-            // 背景图置换
-            [self changeBGImageViewWithStyle:RedPocketsViewBegin];
-            // 中间福袋展现
-            [self centerGiftBagAndFlyBagSetHidden:NO];
-            break;
-        case RedPocketsViewRainning:// 活动中
-            self.selectedRedPacketNum = 0;
-            //开始红包雨倒数
-            [self startTimeWithDuration:1];
-            // 活动开始中奖名单跑马灯
-            [self fetchPrizeRecords];
-//            [self setupDataForSortArray];
-            // 集福卡开启
-            [self showCardsButtonSetHidden:NO];
-            // 背景图置换
-            [self changeBGImageViewWithStyle:RedPocketsViewBegin];
-            // 中间福袋展现
-            [self centerGiftBagAndFlyBagSetHidden:NO];
-            break;
-        case RedPocketsViewResult:// 活动结果
-            break;
-        case RedPocketsViewPrefix:// 活动预热
-            [self.tapGesture setEnabled:NO];
-            //开始红包雨倒数
-            [self startTimeWithDuration:[PublicMethod countDownIntervalWithDurationTag:NO]];
-            // 集福卡隐藏
-            [self showCardsButtonSetHidden:YES];
-            // 左下幅袋出现
-            [self setupGiftBag];
-            // 背景图置换
-            [self changeBGImageViewWithStyle:RedPocketsViewPrefix];
-            // 中间福袋隐藏
-            [self centerGiftBagAndFlyBagSetHidden:YES];
-            break;
-        case RedPocketsViewDev:// 活动测试
-            self.selectedRedPacketNum = 0;
-            //开始红包雨倒数
-            [self startTimeWithDuration:10];
-            // 活动开始中奖名单跑马灯
-            [self fetchPrizeRecords];
-//            [self setupDataForSortArray];
-            // 集福卡开启
-            [self showCardsButtonSetHidden:NO];
-            // 背景图置换
-            [self changeBGImageViewWithStyle:RedPocketsViewBegin];
-            // 中间福袋展现
-            [self centerGiftBagAndFlyBagSetHidden:NO];
-            break;
-        default:
-            break;
-    }
+    weakSelf(weakSelf)
+    [self goToOpenBagWithCompletionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [weakSelf setuprRuleImageBannerGroup];// 游戏规则资料
+        [weakSelf setupCardsImageView];//设定集福卡页面背景渐层
+        switch (weakSelf.viewStyle) {
+            case RedPocketsViewBegin:// 活动开始
+                weakSelf.selectedRedPacketNum = 0;
+                //开始红包雨倒数
+                [weakSelf startTimeWithDuration:[PublicMethod countDownIntervalWithDurationTag:YES]];
+                // 活动开始中奖名单跑马灯
+                [weakSelf fetchPrizeRecords];
+                //            [self setupDataForSortArray];
+                // 集福卡开启
+                [weakSelf showCardsButtonSetHidden:NO];
+                // 背景图置换
+                [weakSelf changeBGImageViewWithStyle:RedPocketsViewBegin];
+                // 中间福袋展现
+                [weakSelf centerGiftBagAndFlyBagSetHidden:NO];
+                break;
+            case RedPocketsViewRainning:// 活动中
+                weakSelf.selectedRedPacketNum = 0;
+                //开始红包雨倒数
+                [weakSelf startTimeWithDuration:1];
+                // 活动开始中奖名单跑马灯
+                [weakSelf fetchPrizeRecords];
+                //            [self setupDataForSortArray];
+                // 集福卡开启
+                [weakSelf showCardsButtonSetHidden:NO];
+                // 背景图置换
+                [weakSelf changeBGImageViewWithStyle:RedPocketsViewBegin];
+                // 中间福袋展现
+                [weakSelf centerGiftBagAndFlyBagSetHidden:NO];
+                break;
+            case RedPocketsViewResult:// 活动结果
+                break;
+            case RedPocketsViewPrefix:// 活动预热
+                [weakSelf.tapGesture setEnabled:NO];
+                //开始红包雨倒数
+                [weakSelf startTimeWithDuration:[PublicMethod countDownIntervalWithDurationTag:NO]];
+                // 集福卡隐藏
+                [weakSelf showCardsButtonSetHidden:YES];
+                // 左下幅袋出现
+                [weakSelf setupGiftBag];
+                // 背景图置换
+                [weakSelf changeBGImageViewWithStyle:RedPocketsViewPrefix];
+                // 中间福袋隐藏
+                [weakSelf centerGiftBagAndFlyBagSetHidden:YES];
+                break;
+            case RedPocketsViewDev:// 活动测试
+                weakSelf.selectedRedPacketNum = 0;
+                //开始红包雨倒数
+                [weakSelf startTimeWithDuration:10];
+                // 活动开始中奖名单跑马灯
+                [weakSelf fetchPrizeRecords];
+                //            [self setupDataForSortArray];
+                // 集福卡开启
+                [weakSelf showCardsButtonSetHidden:NO];
+                // 背景图置换
+                [weakSelf changeBGImageViewWithStyle:RedPocketsViewBegin];
+                // 中间福袋展现
+                [weakSelf centerGiftBagAndFlyBagSetHidden:NO];
+                break;
+            default:
+                break;
+        }
+    }];
 }
 #pragma mark 初始化方法
 - (void)setuprRuleImageBannerGroup
@@ -199,6 +202,7 @@
                 //测试用
 //                [[NSUserDefaults standardUserDefaults] setObject:@"asdnsmcls" forKey:RedPacketIdentify];
 //                [[NSUserDefaults standardUserDefaults] synchronize];
+//                weakSelf.viewStyle = RedPocketsViewRainning;
 //                [weakSelf moveLabelToTop]; // 移动倒数LAbel到上面
 //                [weakSelf startRedPackerts]; // 开始下红包雨
 //                [weakSelf.tapGesture setEnabled:YES];
@@ -953,42 +957,52 @@
     //红包袋开启倒数60秒
     self.autoOpenBagTimer = [NSTimer scheduledTimerWithTimeInterval:RedPacketCountDown target:self selector:@selector(fetchOpenLuckyBagData) userInfo:nil repeats:NO];
 }
-- (void)fetchOpenLuckyBagData
+- (void)goToOpenBagWithCompletionBlock:(KYHTTPCallBack)completionBlock
 {
     NSString *identifyString = [[NSUserDefaults standardUserDefaults] objectForKey:RedPacketIdentify];
     NSString *numString = [[NSUserDefaults standardUserDefaults] objectForKey:RedPacketNum];
     if (A01IsEmpty(identifyString) || A01IsEmpty(numString))
     {
         [MBProgressHUD showError:@"参数异常" toView:nil];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        completionBlock(nil,nil);
     }else
     {
         NSMutableDictionary *params = @{}.mutableCopy;
         params[@"identify"] = identifyString;
         params[@"times"] = numString;
-        weakSelf(weakSelf)
         [IVNetwork requestPostWithUrl:BTTRainOpen paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            IVJResponseObject *result = response;
-            if ([result.head.errCode isEqualToString:@"0000"]) {
-                weakSelf.luckyBagModel = [LuckyBagModel yy_modelWithJSON:result.body];
-                NSString *codeString = weakSelf.luckyBagModel.code;
-                NSString *messageString = weakSelf.luckyBagModel.message;
-                if ([codeString isEqual:@"200"])
-                {
-                    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
-                    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                    [weakSelf showBagWithData];
-                }else
-                {
-                    [MBProgressHUD showError:messageString toView:nil];
-                    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
-                    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                    [weakSelf showBagWithData];
-                }
-            }
+            completionBlock(response,error);
         }];
     }
+}
+- (void)fetchOpenLuckyBagData
+{
+    weakSelf(weakSelf)
+    [self goToOpenBagWithCompletionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            weakSelf.luckyBagModel = [LuckyBagModel yy_modelWithJSON:result.body];
+            NSString *codeString = weakSelf.luckyBagModel.code;
+            NSString *messageString = weakSelf.luckyBagModel.message;
+            if ([codeString isEqual:@"200"])
+            {
+                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
+                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [weakSelf showBagWithData];
+            }else
+            {
+                [MBProgressHUD showError:messageString toView:nil];
+                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
+                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [weakSelf showBagWithData];
+            }
+        }
+    }];
 }
 - (void)showBagWithData
 {
