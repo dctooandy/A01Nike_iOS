@@ -102,9 +102,9 @@
                     NSString * pathStr = @"";
                     //手動輸入要更換的日期
                     
-                    if ([PublicMethod checksStartDate:@"2021-12-12" EndDate:@"2022-01-10" serverTime:timeStr])
+                    if ([PublicMethod checksStartDate:@"2022-01-25" EndDate:@"2022-02-15" serverTime:timeStr])
                     {
-                        pathStr = KIsiPhoneX ? @"dEgg3":@"dEgg4";//双旦
+                        pathStr = KIsiPhoneX ? @"newYear2":@"newYear1";//new year header
                         isSpecialHidden = YES;
                     }else
                     {

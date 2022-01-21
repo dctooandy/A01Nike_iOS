@@ -496,7 +496,6 @@
 		4146810626999F250093B610 /* BTTBindNameAndPhonePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4146810426999F250093B610 /* BTTBindNameAndPhonePopView.m */; };
 		414AAA222601F76F00518D32 /* BTTDcboxPayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 414AAA212601F76F00518D32 /* BTTDcboxPayController.xib */; };
 		414AAA272602021100518D32 /* BTTFirstWinningListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 414AAA262602021100518D32 /* BTTFirstWinningListModel.m */; };
-		41588C9726D889BB001060E7 /* 918_Anniversary.gif in Resources */ = {isa = PBXBuildFile; fileRef = 41588C9626D889BB001060E7 /* 918_Anniversary.gif */; };
 		415CA1D724E539ED005E0E9F /* BTTMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1D624E539ED005E0E9F /* BTTMineViewController.m */; };
 		415CA1D924E539F3005E0E9F /* BTTMineViewController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1D824E539F3005E0E9F /* BTTMineViewController+LoadData.m */; };
 		415CA1DB24E53A54005E0E9F /* BTTMeBigSaveMoneyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 415CA1DA24E53A54005E0E9F /* BTTMeBigSaveMoneyCell.m */; };
@@ -551,6 +550,8 @@
 		4184DE1E251B344F00D433D4 /* BTTCustomerReportController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4184DE1C251B344F00D433D4 /* BTTCustomerReportController.m */; };
 		4184FDF824E4EA92008521D0 /* BTTForgetPasswordController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4184FDF424E4EA92008521D0 /* BTTForgetPasswordController+LoadData.m */; };
 		4184FDF924E4EA92008521D0 /* BTTForgetPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4184FDF524E4EA92008521D0 /* BTTForgetPasswordController.m */; };
+		41859AFF279A92F400AB84FB /* newYear1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 41859AFD279A92F300AB84FB /* newYear1.gif */; };
+		41859B00279A92F400AB84FB /* newYear2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 41859AFE279A92F300AB84FB /* newYear2.gif */; };
 		418E72C6257777CE00D9BF95 /* BTTChooseCurrencyPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E72C3257777CE00D9BF95 /* BTTChooseCurrencyPopView.m */; };
 		418E72C9257777E300D9BF95 /* BTTChooseCurrencyPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 418E72C4257777CE00D9BF95 /* BTTChooseCurrencyPopView.xib */; };
 		418E72CF2577782800D9BF95 /* BTTChooseCurrencyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E72CD2577782800D9BF95 /* BTTChooseCurrencyController.m */; };
@@ -598,7 +599,6 @@
 		41EAF0F6260D94290091FE09 /* hot.gif in Resources */ = {isa = PBXBuildFile; fileRef = 41EAF0F5260D94290091FE09 /* hot.gif */; };
 		41F14AF025A69CA1008E8CAD /* BTTYueFenHongPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */; };
 		41F14AF125A69CA1008E8CAD /* BTTYueFenHongPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F14AEF25A69CA1008E8CAD /* BTTYueFenHongPopView.m */; };
-		76168DF626F47AC500D6D8AC /* APPChinaNationalDay.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76168DF526F47AC500D6D8AC /* APPChinaNationalDay.gif */; };
 		76168DF926FC516F00D6D8AC /* tingyunApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76168DF826FC516F00D6D8AC /* tingyunApp.framework */; };
 		7629D73B2668CE7300CF758C /* BTTDragonBoatMenualPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7629D7382668CE7300CF758C /* BTTDragonBoatMenualPopView.m */; };
 		7629D73C2668CE7300CF758C /* BTTDragonBoatMenualPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7629D7392668CE7300CF758C /* BTTDragonBoatMenualPopView.xib */; };
@@ -635,8 +635,6 @@
 		7682A7B62797F3F3001AC772 /* PrizeNamesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7B52797F3F3001AC772 /* PrizeNamesModel.m */; };
 		7682A7C22798095F001AC772 /* FusingBlessingCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7C12798095F001AC772 /* FusingBlessingCardModel.m */; };
 		76A5BAD3279954C100E85398 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
-		76B499F22761D4D1003CD35B /* dEgg1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B499F12761D4D0003CD35B /* dEgg1.gif */; };
-		76B499F42761D5C4003CD35B /* dEgg2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B499F32761D5C4003CD35B /* dEgg2.gif */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
@@ -686,9 +684,6 @@
 		76F8642B26E87D5900320B60 /* BTTVIPHistorySideBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8642626E87D5800320B60 /* BTTVIPHistorySideBarCell.m */; };
 		76F8642F26E87E8E00320B60 /* VIPHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8642E26E87E8E00320B60 /* VIPHistoryModel.m */; };
 		76F8643126E87ECE00320B60 /* BTTVIPClubHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */; };
-		76F8644426F0BC0B00320B60 /* APPMidAutumnFestival.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */; };
-		76FC864127630587005710FD /* dEgg3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76FC864027630587005710FD /* dEgg3.gif */; };
-		76FC8643276307FE005710FD /* dEgg4.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76FC8642276307FE005710FD /* dEgg4.gif */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
@@ -1708,7 +1703,6 @@
 		414AAA212601F76F00518D32 /* BTTDcboxPayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDcboxPayController.xib; sourceTree = "<group>"; };
 		414AAA252602021100518D32 /* BTTFirstWinningListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTFirstWinningListModel.h; sourceTree = "<group>"; };
 		414AAA262602021100518D32 /* BTTFirstWinningListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTFirstWinningListModel.m; sourceTree = "<group>"; };
-		41588C9626D889BB001060E7 /* 918_Anniversary.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = 918_Anniversary.gif; sourceTree = "<group>"; };
 		415CA1D624E539ED005E0E9F /* BTTMineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTMineViewController.m; sourceTree = "<group>"; };
 		415CA1D824E539F3005E0E9F /* BTTMineViewController+LoadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTMineViewController+LoadData.m"; sourceTree = "<group>"; };
 		415CA1DA24E53A54005E0E9F /* BTTMeBigSaveMoneyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTMeBigSaveMoneyCell.m; sourceTree = "<group>"; };
@@ -1794,6 +1788,8 @@
 		4184FDF524E4EA92008521D0 /* BTTForgetPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTForgetPasswordController.m; sourceTree = "<group>"; };
 		4184FDF624E4EA92008521D0 /* BTTForgetPasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTForgetPasswordController.h; sourceTree = "<group>"; };
 		4184FDF724E4EA92008521D0 /* BTTForgetPasswordController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTForgetPasswordController+LoadData.h"; sourceTree = "<group>"; };
+		41859AFD279A92F300AB84FB /* newYear1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = newYear1.gif; sourceTree = "<group>"; };
+		41859AFE279A92F300AB84FB /* newYear2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = newYear2.gif; sourceTree = "<group>"; };
 		418E72C3257777CE00D9BF95 /* BTTChooseCurrencyPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTChooseCurrencyPopView.m; sourceTree = "<group>"; };
 		418E72C4257777CE00D9BF95 /* BTTChooseCurrencyPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTChooseCurrencyPopView.xib; sourceTree = "<group>"; };
 		418E72C5257777CE00D9BF95 /* BTTChooseCurrencyPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTChooseCurrencyPopView.h; sourceTree = "<group>"; };
@@ -1879,7 +1875,6 @@
 		41F14AEF25A69CA1008E8CAD /* BTTYueFenHongPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTYueFenHongPopView.m; sourceTree = "<group>"; };
 		62DAB42824C569F6001F16B4 /* Hybird_1e3c3b.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Hybird_1e3c3b.entitlements; sourceTree = "<group>"; };
 		6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Hybird_1e3c3b.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		76168DF526F47AC500D6D8AC /* APPChinaNationalDay.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = APPChinaNationalDay.gif; sourceTree = "<group>"; };
 		76168DF826FC516F00D6D8AC /* tingyunApp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = tingyunApp.framework; sourceTree = "<group>"; };
 		7629D7382668CE7300CF758C /* BTTDragonBoatMenualPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDragonBoatMenualPopView.m; sourceTree = "<group>"; };
 		7629D7392668CE7300CF758C /* BTTDragonBoatMenualPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatMenualPopView.xib; sourceTree = "<group>"; };
@@ -1939,8 +1934,6 @@
 		7682A7B52797F3F3001AC772 /* PrizeNamesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrizeNamesModel.m; sourceTree = "<group>"; };
 		7682A7C02798095F001AC772 /* FusingBlessingCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FusingBlessingCardModel.h; sourceTree = "<group>"; };
 		7682A7C12798095F001AC772 /* FusingBlessingCardModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FusingBlessingCardModel.m; sourceTree = "<group>"; };
-		76B499F12761D4D0003CD35B /* dEgg1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg1.gif; sourceTree = "<group>"; };
-		76B499F32761D5C4003CD35B /* dEgg2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg2.gif; sourceTree = "<group>"; };
 		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
 		76C9F150265E404B0002591D /* CNPayOrderModelV2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayOrderModelV2.m; sourceTree = "<group>"; };
 		76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatPopView.xib; sourceTree = "<group>"; };
@@ -2020,9 +2013,6 @@
 		76F8642D26E87E8E00320B60 /* VIPHistoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPHistoryModel.h; sourceTree = "<group>"; };
 		76F8642E26E87E8E00320B60 /* VIPHistoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPHistoryModel.m; sourceTree = "<group>"; };
 		76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTVIPClubHistoryCell.xib; sourceTree = "<group>"; };
-		76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = APPMidAutumnFestival.gif; sourceTree = "<group>"; };
-		76FC864027630587005710FD /* dEgg3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg3.gif; sourceTree = "<group>"; };
-		76FC8642276307FE005710FD /* dEgg4.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = dEgg4.gif; sourceTree = "<group>"; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
 		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
 		D317745024D2648C009B1814 /* DSBRedBagPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DSBRedBagPopView.xib; sourceTree = "<group>"; };
@@ -2903,14 +2893,9 @@
 		3A8F5160215F75010069D1B3 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				41588C9626D889BB001060E7 /* 918_Anniversary.gif */,
-				76F8644326F0BC0B00320B60 /* APPMidAutumnFestival.gif */,
-				76168DF526F47AC500D6D8AC /* APPChinaNationalDay.gif */,
+				41859AFD279A92F300AB84FB /* newYear1.gif */,
+				41859AFE279A92F300AB84FB /* newYear2.gif */,
 				767DF24727902F5200F50520 /* mammon2.gif */,
-				76B499F12761D4D0003CD35B /* dEgg1.gif */,
-				76B499F32761D5C4003CD35B /* dEgg2.gif */,
-				76FC864027630587005710FD /* dEgg3.gif */,
-				76FC8642276307FE005710FD /* dEgg4.gif */,
 				4142CFB226E9F4F100650449 /* login_bg_video.mp4 */,
 				41EAF0F5260D94290091FE09 /* hot.gif */,
 				D3B47D5823B70A5400D37C7F /* app.zip */,
@@ -5209,7 +5194,6 @@
 				418E72DA2577786700D9BF95 /* BTTChooseCurrencyCell.xib in Resources */,
 				4135A703263941D000D3BF17 /* BTTLiCaiOutDetailPopView.xib in Resources */,
 				3A49DF9C2179D90D00FEFBDA /* BTTBindingMobileOneCell.xib in Resources */,
-				76B499F22761D4D1003CD35B /* dEgg1.gif in Resources */,
 				4142CFB326E9F4F100650449 /* login_bg_video.mp4 in Resources */,
 				4184DE16251B331000D433D4 /* BTTModifyBankRecordHeaderCell.xib in Resources */,
 				4135A6F9263941D000D3BF17 /* BTTLiCaiTransRecordTopBtnView.xib in Resources */,
@@ -5221,7 +5205,6 @@
 				D5DBEB3421ABB774008AF629 /* CNPayChannelCell.xib in Resources */,
 				410636CC26C60ED4002785D2 /* BTTForgetPwdOneCell.xib in Resources */,
 				419AEC5B250F64F100D089DD /* BTTBJLPopView.xib in Resources */,
-				76B499F42761D5C4003CD35B /* dEgg2.gif in Resources */,
 				3A9E4C3F219E55E200E7D8C0 /* BTTMakeCallSuccessView.xib in Resources */,
 				3AF1B81521AE8C5500BF8C3A /* BTTVideoGamesNoDataCell.xib in Resources */,
 				3AC3FFB0219BB1D0008AECCB /* BTTLoginCodeCell.xib in Resources */,
@@ -5242,7 +5225,6 @@
 				4135A6FC263941D000D3BF17 /* BTTLiCaiInterestRateBillCell.xib in Resources */,
 				76F8643126E87ECE00320B60 /* BTTVIPClubHistoryCell.xib in Resources */,
 				3ADD237221772FB900FA959A /* BTTMeMoneyHeaderCell.xib in Resources */,
-				76168DF626F47AC500D6D8AC /* APPChinaNationalDay.gif in Resources */,
 				3AD9CF51216EFB3700685B43 /* BTTHomePageBannerCell.xib in Resources */,
 				414AAA222601F76F00518D32 /* BTTDcboxPayController.xib in Resources */,
 				D5DBEB2F21ABB774008AF629 /* CNCompleteInfoView.xib in Resources */,
@@ -5277,7 +5259,9 @@
 				3A6DD5F62289161C000288B2 /* BTTAndroid88PopView.xib in Resources */,
 				76F863B926E0B64100320B60 /* UserRightTableViewCell.xib in Resources */,
 				3AAE8219219A738B003EC8B0 /* BTTRegisterQuickManualCell.xib in Resources */,
+				41859AFF279A92F400AB84FB /* newYear1.gif in Resources */,
 				41B3127D269D1FC0002AF76D /* BTTPaymentWarningPopView.xib in Resources */,
+				41859B00279A92F400AB84FB /* newYear2.gif in Resources */,
 				3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */,
 				3A75A182221164BC00584A35 /* BTTLoginAccountSelectCell.xib in Resources */,
 				D339CE9924C03CAC009ACD1C /* OTCInsideController.xib in Resources */,
@@ -5287,7 +5271,6 @@
 				3A49DF932179D62900FEFBDA /* BTTAccountBlanceCell.xib in Resources */,
 				3ADD23682177230300FA959A /* BTTMeHeaderNotLoginCell.xib in Resources */,
 				3A11AE6D2186DD6E00B1AFF4 /* BTTThisWeekBtnsCell.xib in Resources */,
-				76FC8643276307FE005710FD /* dEgg4.gif in Resources */,
 				4184DE12251B32F900D433D4 /* BTTXmRecordHeaderCell.xib in Resources */,
 				76C9F42C2668A3070002591D /* BTTDragonBoatChancePopView.xib in Resources */,
 				3AB0682421A25ECF00072FB7 /* BTTChangeMobileSuccessOneCell.xib in Resources */,
@@ -5367,7 +5350,6 @@
 				4135C717266F736900C3A9E9 /* BTTLiCaiOutRecordCell.xib in Resources */,
 				76F863DB26E0B65500320B60 /* VIPRightWashRateCell.xib in Resources */,
 				41EAF0F6260D94290091FE09 /* hot.gif in Resources */,
-				76FC864127630587005710FD /* dEgg3.gif in Resources */,
 				D5C5019921B67C0800C6DA02 /* CNPayDepositSuccessVC.xib in Resources */,
 				3AAFF87D21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.xib in Resources */,
 				D318AC1824333BC500183407 /* BTTKSAddBfbWalletController.xib in Resources */,
@@ -5437,9 +5419,7 @@
 				411DE803261AFC190076BCE2 /* BTTUnBindingHeaderCell.xib in Resources */,
 				3A49DFA12179DA0D00FEFBDA /* BTTBindingMobileTwoCell.xib in Resources */,
 				3A14CC60237A4B56009711CF /* BTTRealPersonGameCell.xib in Resources */,
-				76F8644426F0BC0B00320B60 /* APPMidAutumnFestival.gif in Resources */,
 				76756BB5269454690065F99B /* BTTUserForzenBGView.xib in Resources */,
-				41588C9726D889BB001060E7 /* 918_Anniversary.gif in Resources */,
 				D5DBEB0221ABB774008AF629 /* CNPayDepositStep1VC.xib in Resources */,
 				3A3DF1E7237BA445006129F6 /* BTTHotPromotionCell.xib in Resources */,
 				3AE1EAAC217D65330073A32D /* BTTAccountBlanceHiddenCell.xib in Resources */,
