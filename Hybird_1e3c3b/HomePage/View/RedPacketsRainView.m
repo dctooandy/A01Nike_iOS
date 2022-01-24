@@ -104,7 +104,14 @@
             case RedPocketsViewBegin:// 活动开始
                 weakSelf.selectedRedPacketNum = 0;
                 //开始红包雨倒数
-                [weakSelf startTimeWithDuration:[PublicMethod countDownIntervalWithDurationTag:YES]];
+                if ([[[BTTActivityManager sharedInstance] redPacketInfoModel] isRainningTime])
+                {
+                    [weakSelf startTimeWithDuration:1];
+                }else
+                {
+                    [weakSelf startTimeWithDuration:[PublicMethod countDownIntervalWithDurationTag:YES]];
+                }
+                
                 // 活动开始中奖名单跑马灯
                 [weakSelf fetchPrizeRecords];
                 //            [self setupDataForSortArray];

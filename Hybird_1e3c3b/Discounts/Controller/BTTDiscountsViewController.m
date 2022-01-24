@@ -332,9 +332,10 @@
         NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
         BOOL isBeforeDuration = [duractionArray[0] boolValue];
         BOOL isActivityDuration = [duractionArray[1] boolValue];
+        BOOL isRainningTime = [duractionArray[2] boolValue];
         if ((isBeforeDuration || isActivityDuration) && ([model.link containsString:@"tiger_red_envelope"]))
         {
-            [self showRedPacketsRainViewwWithStyle:(isActivityDuration ? RedPocketsViewBegin: RedPocketsViewPrefix)];
+            [self showRedPacketsRainViewwWithStyle:(isActivityDuration ? (isRainningTime ? RedPocketsViewRainning : RedPocketsViewBegin): RedPocketsViewPrefix)];
         }else
         {
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];

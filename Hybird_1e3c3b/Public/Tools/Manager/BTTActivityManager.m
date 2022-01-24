@@ -266,9 +266,10 @@ static BTTActivityManager * sharedSingleton;
         NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
         BOOL isBeforeDuration = [duractionArray[0] boolValue];
         BOOL isActivityDuration = [duractionArray[1] boolValue];
+        BOOL isRainningTime = [duractionArray[2] boolValue];
         if (isBeforeDuration || isActivityDuration)
         {
-            [(BTTHomePageViewController *)[weakSelf currentViewController] showRedPacketsRainViewwWithStyle:(isActivityDuration ? RedPocketsViewBegin: RedPocketsViewPrefix)];
+            [(BTTHomePageViewController *)[weakSelf currentViewController] showRedPacketsRainViewwWithStyle:(isActivityDuration ? (isRainningTime ? RedPocketsViewRainning : RedPocketsViewBegin): RedPocketsViewPrefix)];
         }else
         {
             BTTBaseWebViewController *vc = [BTTBaseWebViewController new];
