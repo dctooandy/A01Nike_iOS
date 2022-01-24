@@ -14,6 +14,7 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
 @property (weak, nonatomic) UILabel *countdownLab;
 @property (assign, nonatomic) BOOL isRainning;
 @property (nonatomic, strong) dispatch_source_t assistiveTimer;      //位置弹窗计时器
+@property (nonatomic, strong) dispatch_source_t rainningTimer;      //下雨时计时器
 @end
 
 @implementation AssistiveButton
@@ -118,6 +119,7 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
     if (![[[BTTActivityManager sharedInstance] redPacketInfoModel] isRainningTime])
     {
         if (_assistiveTimer) dispatch_source_cancel(_assistiveTimer);
+        if (_rainningTimer) dispatch_source_cancel(_rainningTimer);
         [self reStartCountTime];        
     }
 }
@@ -135,12 +137,12 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
     weakSelf(weakSelf)
     __block int timeout = 60;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
-    dispatch_source_set_event_handler(_timer, ^{
+    _rainningTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_rainningTimer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(_rainningTimer, ^{
         if ( timeout <= 0 )
         {
-            dispatch_source_cancel(_timer);
+            dispatch_source_cancel(weakSelf.rainningTimer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf reStartCountTime];//访问剩馀秒数再开始倒数
             });
@@ -158,7 +160,7 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
             timeout--;
         }
     });
-    dispatch_resume(_timer);
+    dispatch_resume(_rainningTimer);
 }
 - (void)startCountDownTime
 {
