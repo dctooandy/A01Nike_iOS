@@ -984,7 +984,7 @@
 {
     NSString *identifyString = [[NSUserDefaults standardUserDefaults] objectForKey:RedPacketIdentify];
     NSString *numString = [[NSUserDefaults standardUserDefaults] objectForKey:RedPacketNum];
-    if (A01IsEmpty(identifyString) || A01IsEmpty(numString))
+    if ([NSString isBlankString:identifyString] || [NSString isBlankString:numString])
     {
         [MBProgressHUD showError:@"参数异常" toView:nil];
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
