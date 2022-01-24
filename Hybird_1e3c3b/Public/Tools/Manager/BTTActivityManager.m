@@ -48,6 +48,13 @@ static BTTActivityManager * sharedSingleton;
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             weakSelf.redPacketInfoModel = [RedPacketsInfoModel yy_modelWithJSON:result.body];
+//            weakSelf.redPacketInfoModel.leftTime = @"12";
+//            weakSelf.redPacketInfoModel.firstStartAt = @"19:30:00";
+//            weakSelf.redPacketInfoModel.firstEndAt = @"19:31:00";
+//            weakSelf.redPacketInfoModel.secondStartAt = @"19:35:00";
+//            weakSelf.redPacketInfoModel.secondEndAt = @"19:36:00";
+            
+            
             [weakSelf serverTime:^(NSString *timeStr) {
                 if (timeStr.length > 0)
                 {
