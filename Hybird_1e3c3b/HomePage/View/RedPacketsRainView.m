@@ -192,12 +192,11 @@
 - (void)gotoGetIdentify
 {
     NSMutableDictionary *params = @{}.mutableCopy;
-    weakSelf(weakSelf)
     [IVNetwork requestPostWithUrl:BTTRainCreate paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSString *codeString = result.body[@"code"];
-            NSString *messageString = result.body[@"message"];
+//            NSString *messageString = result.body[@"message"];
             if ([codeString isEqual:@"200"])
             {
                 [[NSUserDefaults standardUserDefaults] setObject:result.body[@"identify"] forKey:RedPacketIdentify];
@@ -479,7 +478,7 @@
                 [resultArray replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%@张",subModel.count]];
             }
         }
-        for (int i = 1; i < self.cardsAmountLabelArray.count; i++) {
+        for (int i = 0; i < self.cardsAmountLabelArray.count; i++) {
             UILabel * cardAmountLabel = self.cardsAmountLabelArray[i];
             cardAmountLabel.text = resultArray[i];
         }
@@ -1019,7 +1018,7 @@
     }else
     {
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
-        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
+//        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
         [[NSUserDefaults standardUserDefaults] synchronize];
         completionBlock();
     }
@@ -1045,7 +1044,7 @@
             {
                 [MBProgressHUD showError:messageString toView:nil];
                 [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
-                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
+//                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 [weakSelf.autoOpenBagTimer invalidate];
                 [weakSelf closeGiftBagAction:nil];
@@ -1066,7 +1065,7 @@
     {
         // 可能是第一次参与活动
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
-        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
+//        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
         [[NSUserDefaults standardUserDefaults] synchronize];
         completionBlock(nil,nil);
     }else
