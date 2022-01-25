@@ -114,7 +114,6 @@
                 {
                     [weakSelf startTimeWithDuration:[PublicMethod countDownIntervalWithDurationTag:YES]];
                 }
-                
                 // 活动开始中奖名单跑马灯
                 [weakSelf fetchPrizeRecords];
                 //            [self setupDataForSortArray];
@@ -1031,6 +1030,7 @@
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             weakSelf.luckyBagModel = [LuckyBagModel yy_modelWithJSON:result.body];
+            weakSelf.luckyBagModel.data = [NSArray yy_modelArrayWithClass:[LuckyBagDetailModel class] json:result.body[@"data"]];
             NSString *codeString = weakSelf.luckyBagModel.code;
             NSString *messageString = weakSelf.luckyBagModel.message;
             if ([codeString isEqual:@"200"])
@@ -1303,7 +1303,7 @@
         [giftBannerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self.cardsBonusView);
             make.top.mas_equalTo(self.backToRedPacketsViewBtn.mas_bottom).offset(10);
-            make.height.equalTo(self.cardsBonusView).multipliedBy(220.0/813.0);
+            make.height.equalTo(self.cardsBonusView).multipliedBy(0.25);
         }];
         giftBannerView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
 //        giftBannerView.layer.cornerRadius = 10;
