@@ -803,6 +803,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define RedPacketCountDown              60 // 下雨60秒
 #define RedPacketIdentify               @"RedPacketIdentify" // 开启红包雨之前的验证
 #define RedPacketNum                    @"RedPacketNum" // 红包数量
+#define RedPacketCustomSetting          @"RedPacketCustomSetting" // 红包雨自设定
+#define RedPacketRainningSelectValue    @"RainningSelectValue" // 红包雨自设定时间
 /** 十六进制颜色 */
 #define kHexColorAlpha(value, a)    [UIColor colorWithRed:((float)(((value) & 0xFF0000) >> 16))/255.0 green:((float)(((value) & 0xFF00) >> 8))/255.0 blue:((float)((value) & 0xFF))/255.0 alpha:(a)]
 #define kHexColor(value)            kHexColorAlpha(value, 1.0)

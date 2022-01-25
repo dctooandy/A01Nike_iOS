@@ -290,7 +290,7 @@
 - (void)switchEnvirmant
 {
     weakSelf(weakSelf)
-    BOOL isSetting = [[NSUserDefaults standardUserDefaults] boolForKey:@"Rainning"];
+    BOOL isSetting = [[NSUserDefaults standardUserDefaults] boolForKey:RedPacketCustomSetting];
     IVActionHandler handler = ^(UIAlertAction *action){
 
         [weakSelf rebootBySecWithEnvirment:BTT_DEV];
@@ -304,7 +304,7 @@
     IVActionHandler handler3 = ^(UIAlertAction *action){
         if (isSetting == YES)
         {
-            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"Rainning"];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:RedPacketCustomSetting];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [MBProgressHUD showSuccessWithTime:@"已为您将红包雨时间定为\n接口回传为主\n3秒后将关闭APP\n请重新启动" toView:nil duration:2];
             [self rebootWithSecond:3];
@@ -341,7 +341,7 @@
     NSDate *maxDate = [NSDate br_setYear:2030 month:12 day:31 hour:23 minute:59];
  
     [BRDatePickerView showDatePickerWithTitle:@"红包雨时间" dateType:BRDatePickerModeHM defaultSelValue:nil minDate:minDate maxDate:maxDate isAutoSelect:NO themeColor:nil resultBlock:^(NSString *selectValue) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Rainning"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:RedPacketCustomSetting];
         [[NSUserDefaults standardUserDefaults] setObject:selectValue forKey:@"RainningSelectValue"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [MBProgressHUD showSuccessWithTime:@"已为您将红包雨时间定为\n两分钟之后,一次为限\n3秒后将关闭APP\n请重新启动" toView:nil duration:2];

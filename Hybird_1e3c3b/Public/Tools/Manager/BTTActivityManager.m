@@ -53,10 +53,10 @@ static BTTActivityManager * sharedSingleton;
                 case 0:
                 case 1:
                 {
-                    BOOL isRainningSetting = [[NSUserDefaults standardUserDefaults] boolForKey:@"Rainning"];
+                    BOOL isRainningSetting = [[NSUserDefaults standardUserDefaults] boolForKey:RedPacketCustomSetting];
                     if (isRainningSetting == YES)
                     {
-                        NSString *selectString = [[NSUserDefaults standardUserDefaults] objectForKey:@"RainningSelectValue"];
+                        NSString *selectString = [[NSUserDefaults standardUserDefaults] objectForKey:RedPacketRainningSelectValue];
                         NSArray * timeArray = [selectString componentsSeparatedByString:@":"];
                         int firstStartHour = [[timeArray firstObject] intValue];
                         int firstStartMins = [[timeArray lastObject] intValue];
