@@ -290,6 +290,7 @@
 - (void)switchEnvirmant
 {
     weakSelf(weakSelf)
+    BOOL isSetting = [[NSUserDefaults standardUserDefaults] boolForKey:@"Rainning"];
     IVActionHandler handler = ^(UIAlertAction *action){
 
         [weakSelf rebootBySecWithEnvirment:BTT_DEV];
@@ -301,26 +302,54 @@
         [weakSelf rebootBySecWithEnvirment:BTT_DIS];
     };
     IVActionHandler handler3 = ^(UIAlertAction *action){
-        
+        if (isSetting == YES)
+        {
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"Rainning"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [MBProgressHUD showSuccessWithTime:@"已为您将红包雨时间定为\n接口回传为主\n3秒后将关闭APP\n请重新启动" toView:nil duration:2];
+            [self rebootWithSecond:3];
+        }else
+        {
+            [self showDatePicker];
+        }
     };
     IVActionHandler handler4 = ^(UIAlertAction *action){};
     
     NSString *title = [NSString stringWithFormat:@"目前环境为 %@",[self formatTypeToString:EnvirmentType]];
     NSString *message = [NSString stringWithFormat:@"当前版本是: %@ \n选定切换环境,\n1秒后将重启APP",app_version];
-    [IVUtility showAlertWithActionTitles:@[@"测试",@"运测",@"运营",@"设定红包雨时间",@"取消"] handlers:@[handler,handler1,handler2,handler3,handler4] title:title message:message];
+    
+    [IVUtility showAlertWithActionTitles:@[@"测试",@"运测",@"运营",(isSetting ? @"接口红包雨时间" : @"自设定红包雨时间"),@"取消"] handlers:@[handler,handler1,handler2,handler3,handler4] title:title message:message];
 }
 - (void)rebootBySecWithEnvirment:(NSInteger)env
 {
     [[NSUserDefaults standardUserDefaults] setInteger:env forKey:@"Envirment"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [self rebootWithSecond:1.5];
+}
+- (void)rebootWithSecond:(CGFloat)second
+{
     [IVCacheWrapper setObject:nil forKey:IVCacheAllGatewayKey];
     [IVCacheWrapper setObject:nil forKey:IVCacheAllH5DomainsKey];
     [IVCacheWrapper clearCache];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(second * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         exit(0);
     });
 }
-
+- (void)showDatePicker
+{
+    NSDate *minDate = [NSDate br_setYear:2018 month:01 day:01 hour:0 minute:0];
+    NSDate *maxDate = [NSDate br_setYear:2030 month:12 day:31 hour:23 minute:59];
+ 
+    [BRDatePickerView showDatePickerWithTitle:@"红包雨时间" dateType:BRDatePickerModeHM defaultSelValue:nil minDate:minDate maxDate:maxDate isAutoSelect:NO themeColor:nil resultBlock:^(NSString *selectValue) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Rainning"];
+        [[NSUserDefaults standardUserDefaults] setObject:selectValue forKey:@"RainningSelectValue"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [MBProgressHUD showSuccessWithTime:@"已为您将红包雨时间定为\n两分钟之后,一次为限\n3秒后将关闭APP\n请重新启动" toView:nil duration:2];
+        [self rebootWithSecond:3];
+    } cancelBlock:^{
+        NSLog(@"点击了背景或取消按钮");
+    }];
+}
 - (NSString*)formatTypeToString:(NSInteger)formatType {
     NSString *result = nil;
     switch(formatType) {
