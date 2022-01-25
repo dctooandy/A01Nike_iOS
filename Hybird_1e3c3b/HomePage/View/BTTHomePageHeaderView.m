@@ -300,11 +300,14 @@
     IVActionHandler handler2 = ^(UIAlertAction *action){
         [weakSelf rebootBySecWithEnvirment:BTT_DIS];
     };
-    IVActionHandler handler3 = ^(UIAlertAction *action){};
+    IVActionHandler handler3 = ^(UIAlertAction *action){
+        
+    };
+    IVActionHandler handler4 = ^(UIAlertAction *action){};
     
     NSString *title = [NSString stringWithFormat:@"目前环境为 %@",[self formatTypeToString:EnvirmentType]];
     NSString *message = [NSString stringWithFormat:@"当前版本是: %@ \n选定切换环境,\n1秒后将重启APP",app_version];
-    [IVUtility showAlertWithActionTitles:@[@"测试",@"运测",@"运营",@"取消"] handlers:@[handler,handler1,handler2,handler3] title:title message:message];
+    [IVUtility showAlertWithActionTitles:@[@"测试",@"运测",@"运营",@"设定红包雨时间",@"取消"] handlers:@[handler,handler1,handler2,handler3,handler4] title:title message:message];
 }
 - (void)rebootBySecWithEnvirment:(NSInteger)env
 {
