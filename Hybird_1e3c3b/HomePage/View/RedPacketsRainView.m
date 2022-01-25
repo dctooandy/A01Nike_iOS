@@ -637,8 +637,7 @@
             [self.bagView.layer addSublayer:self.bagMoveLayer];
 //        }
 //    }
-    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%ld",(long)self.fetchRedPacketsNum] forKey:RedPacketNum];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [self showResult];
 }
 
@@ -683,7 +682,7 @@
             ![layer isKindOfClass:[UILabel layerClass]] &&
             (layer.bounds.size.width == 44))
         {
-            self.fetchRedPacketsNum ++;
+            self.fetchRedPacketsNum += 1;
             self.selectedRedPacketNum = i;
 //            BOOL hasRedPacketd = !(i % 3) ;
             BOOL hasRedPacketd = YES ;
@@ -953,6 +952,8 @@
         {
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%ld",weakSelf.fetchRedPacketsNum] forKey:RedPacketNum];
+                [[NSUserDefaults standardUserDefaults] synchronize];
                 [weakSelf endAnimation]; // 红包雨动画结束
             });
         }
@@ -1038,6 +1039,7 @@
                 [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
                 [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
                 [[NSUserDefaults standardUserDefaults] synchronize];
+                [weakSelf.autoOpenBagTimer invalidate];
                 [weakSelf showBagWithData];
             }else
             {
@@ -1303,11 +1305,11 @@
         [giftBannerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self.cardsBonusView);
             make.top.mas_equalTo(self.backToRedPacketsViewBtn.mas_bottom).offset(10);
-            make.height.equalTo(self.cardsBonusView).multipliedBy(0.25);
+            make.height.equalTo(self.cardsBonusView).multipliedBy(220.0/813.0);
         }];
         giftBannerView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
 //        giftBannerView.layer.cornerRadius = 10;
-//        giftBannerView.layer.masksToBounds = true;
+        giftBannerView.layer.masksToBounds = true;
         giftBannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
         giftBannerView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
         giftBannerView.pageControlDotSize = CGSizeMake(6, 6);
