@@ -682,6 +682,8 @@
             (layer.bounds.size.width == 44))
         {
             self.fetchRedPacketsNum += 1;
+            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%ld",self.fetchRedPacketsNum] forKey:RedPacketNum];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             self.selectedRedPacketNum = i;
 //            BOOL hasRedPacketd = !(i % 3) ;
             BOOL hasRedPacketd = YES ;
@@ -1011,16 +1013,18 @@
 }
 - (void)goToCheckIdentifyWithCompletionBlock:(void(^)(void))completionBlock
 {
+    weakSelf(weakSelf)
     if ([[[[BTTActivityManager sharedInstance] redPacketInfoModel] firstRainStatus] isEqualToString:@"1"] ||
         [[[[BTTActivityManager sharedInstance] redPacketInfoModel] secondRainStatus] isEqualToString:@"1"])
     {
         completionBlock();
     }else
     {
-        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
-//        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        completionBlock();
+        // 如果有存在cache
+        [self goToOpenBagWithCompletionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            [weakSelf setDataNil];
+            completionBlock();
+        }];
     }
 }
 - (void)fetchOpenLuckyBagData
@@ -1035,23 +1039,20 @@
             NSString *messageString = weakSelf.luckyBagModel.message;
             if ([codeString isEqual:@"200"])
             {
-                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
-                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
-                [[NSUserDefaults standardUserDefaults] synchronize];
+                [weakSelf setDataNil];
                 [weakSelf.autoOpenBagTimer invalidate];
                 [weakSelf showBagWithData];
             }else
             {
                 [MBProgressHUD showError:messageString toView:nil];
-                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
-//                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
-                [[NSUserDefaults standardUserDefaults] synchronize];
+                [weakSelf setDataNil];
                 [weakSelf.autoOpenBagTimer invalidate];
                 [weakSelf closeGiftBagAction:nil];
             }
         }else
         {
             [MBProgressHUD showSuccess:@"谢谢参与" toView:nil];
+            [weakSelf setDataNil];
             [weakSelf.autoOpenBagTimer invalidate];
             [weakSelf closeGiftBagAction:nil];
         }
@@ -1064,9 +1065,6 @@
     if (A01IsEmpty(identifyString) || A01IsEmpty(numString))
     {
         // 可能是第一次参与活动
-        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
-//        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
-        [[NSUserDefaults standardUserDefaults] synchronize];
         completionBlock(nil,nil);
     }else
     {
@@ -1317,5 +1315,11 @@
         _giftBannerView = giftBannerView;
     }
     return _giftBannerView;
+}
+- (void)setDataNil
+{
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 @end
