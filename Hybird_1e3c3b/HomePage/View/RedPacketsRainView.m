@@ -1069,7 +1069,7 @@
     }
     if ([imageData containsString:@"PS5"])
     {
-        imageString = @"img_PS5";
+        imageString = @"popup_price5";
     }
     if ([imageData containsString:@"苹果"])
     {
@@ -1310,22 +1310,28 @@
 }
 - (void)fetchFusingData
 {
-    NSMutableDictionary *params = @{}.mutableCopy;
-    weakSelf(weakSelf)
-    [IVNetwork requestPostWithUrl:BTTRainFusing paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSString *codeString = result.body[@"code"];
-            NSString *messageString = result.body[@"message"];
-            if ([codeString isEqual:@"200"])
-            {
-                weakSelf.fusingBlessingCardModel = [FusingBlessingCardModel yy_modelWithJSON:result.body[@"data"]];
-                [self showGiftViewWithData:weakSelf.fusingBlessingCardModel.prizeName];
-            }else
-            {
-                [MBProgressHUD showError:messageString toView:nil];
+    if (RedPacketIsDev == YES)
+    {
+        [self showGiftViewWithData:@"PS5"];
+    }else
+    {
+        NSMutableDictionary *params = @{}.mutableCopy;
+        weakSelf(weakSelf)
+        [IVNetwork requestPostWithUrl:BTTRainFusing paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                NSString *codeString = result.body[@"code"];
+                NSString *messageString = result.body[@"message"];
+                if ([codeString isEqual:@"200"])
+                {
+                    weakSelf.fusingBlessingCardModel = [FusingBlessingCardModel yy_modelWithJSON:result.body[@"data"]];
+                    [self showGiftViewWithData:weakSelf.fusingBlessingCardModel.prizeName];
+                }else
+                {
+                    [MBProgressHUD showError:messageString toView:nil];
+                }
             }
-        }
-    }];
+        }];
+    }
 }
 @end
