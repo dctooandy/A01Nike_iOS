@@ -980,7 +980,7 @@
     weakSelf(weakSelf)
     [self goToOpenBagWithCompletionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
-        if ([[[BTTActivityManager sharedInstance] redPacketInfoModel] isDev] == YES)
+        if (RedPacketIsDev == YES)
         {
             weakSelf.luckyBagModel = [LuckyBagModel new];
             weakSelf.luckyBagModel.data = @[[LuckyBagDetailModel new]];
@@ -1264,13 +1264,17 @@
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }else
             {
-                //测试用
-                [[NSUserDefaults standardUserDefaults] setObject:@"asdnsmcls" forKey:RedPacketIdentify];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [MBProgressHUD showError:@"您暂有抽红包机会" toView:nil];
-                
-                // 不成功
-//                [MBProgressHUD showError:@"您暂无抽红包机会" toView:nil];
+                if (RedPacketIsDev == YES)
+                {
+                    //测试用
+                    [[NSUserDefaults standardUserDefaults] setObject:@"asdnsmcls" forKey:RedPacketIdentify];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    [MBProgressHUD showError:@"您暂有抽红包机会" toView:nil];
+                }else
+                {
+                    // 不成功
+                    [MBProgressHUD showError:@"您暂无抽红包机会" toView:nil];
+                }
             }
         }
     }];
