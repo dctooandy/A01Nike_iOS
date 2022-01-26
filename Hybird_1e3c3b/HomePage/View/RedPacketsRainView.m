@@ -189,48 +189,7 @@
 //    [self.backToRedPacketsViewBtn setImage:[[UIImage imageNamed:@"navi_back_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateHighlighted];
 //    [self.backToRedPacketsViewBtn.imageView setTintColor:[UIColor whiteColor]];
 }
-- (void)gotoGetIdentify
-{
-    NSMutableDictionary *params = @{}.mutableCopy;
-    [IVNetwork requestPostWithUrl:BTTRainCreate paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSString *codeString = result.body[@"code"];
-//            NSString *messageString = result.body[@"message"];
-            if ([codeString isEqual:@"200"])
-            {
-                [[NSUserDefaults standardUserDefaults] setObject:result.body[@"identify"] forKey:RedPacketIdentify];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-//                weakSelf.viewStyle = RedPocketsViewRainning;
-//                [weakSelf moveLabelToTop]; // 移动倒数LAbel到上面
-//                [weakSelf startRedPackerts]; // 开始下红包雨
-//                [weakSelf.tapGesture setEnabled:YES];
-//                [weakSelf rainningAction];
-            }else
-            {
-                //测试用
-//                [[NSUserDefaults standardUserDefaults] setObject:@"asdnsmcls" forKey:RedPacketIdentify];
-//                [[NSUserDefaults standardUserDefaults] synchronize];
-//                weakSelf.viewStyle = RedPocketsViewRainning;
-//                [weakSelf moveLabelToTop]; // 移动倒数LAbel到上面
-//                [weakSelf startRedPackerts]; // 开始下红包雨
-//                [weakSelf.tapGesture setEnabled:YES];
-                // 不成功
-//                [MBProgressHUD showError:messageString toView:nil];
-                [MBProgressHUD showError:@"您暂无抽红包机会" toView:nil];
-//                [self.closeGiftBagButton setHidden:YES];
-//                weakSelf.countdownLab.text = @"";
-//                weakSelf(weakSelf)
-//                [[BTTActivityManager sharedInstance] checkTimeRedPacketRainWithCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
-//                    dispatch_async(dispatch_get_main_queue(), ^{
-//                        int timeout = [PublicMethod countDownIntervalWithDurationTag:YES];
-//                        [weakSelf startTimeWithDuration:timeout];
-//                    });
-//                } WithDefaultCompletion:nil];
-            }
-        }
-    }];
-}
+
 - (void)rainningAction
 {
     self.viewStyle = RedPocketsViewRainning;
@@ -292,18 +251,7 @@
     });
     dispatch_resume(_timer);
 }
-- (void)fetchPrizeRecords
-{
-    NSMutableDictionary *params = @{}.mutableCopy;
-    weakSelf(weakSelf)
-    [IVNetwork requestPostWithUrl:BTTRainInKindPrize paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            weakSelf.prizeRecordArray = [NSArray yy_modelArrayWithClass:[PrizeRecordModel class] json:result.body];
-            [weakSelf setupDataForSortArray];
-        }
-    }];
-}
+
 - (void)setupDataForSortArray
 {
     if (self.viewStyle != RedPocketsViewRainning)
@@ -1032,29 +980,39 @@
     weakSelf(weakSelf)
     [self goToOpenBagWithCompletionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            weakSelf.luckyBagModel = [LuckyBagModel yy_modelWithJSON:result.body];
-            weakSelf.luckyBagModel.data = [NSArray yy_modelArrayWithClass:[LuckyBagDetailModel class] json:result.body[@"data"]];
-            NSString *codeString = weakSelf.luckyBagModel.code;
-            NSString *messageString = weakSelf.luckyBagModel.message;
-            if ([codeString isEqual:@"200"])
-            {
-                [weakSelf setDataNil];
-                [weakSelf.autoOpenBagTimer invalidate];
-                [weakSelf showBagWithData];
+        if ([[[BTTActivityManager sharedInstance] redPacketInfoModel] isDev] == YES)
+        {
+            weakSelf.luckyBagModel = [LuckyBagModel new];
+            weakSelf.luckyBagModel.data = @[[LuckyBagDetailModel new]];
+            [weakSelf setDataNil];
+            [weakSelf.autoOpenBagTimer invalidate];
+            [weakSelf showBagWithData];
+        }else
+        {
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                weakSelf.luckyBagModel = [LuckyBagModel yy_modelWithJSON:result.body];
+                weakSelf.luckyBagModel.data = [NSArray yy_modelArrayWithClass:[LuckyBagDetailModel class] json:result.body[@"data"]];
+                NSString *codeString = weakSelf.luckyBagModel.code;
+                NSString *messageString = weakSelf.luckyBagModel.message;
+                if ([codeString isEqual:@"200"])
+                {
+                    [weakSelf setDataNil];
+                    [weakSelf.autoOpenBagTimer invalidate];
+                    [weakSelf showBagWithData];
+                }else
+                {
+                    [MBProgressHUD showError:messageString toView:nil];
+                    [weakSelf setDataNil];
+                    [weakSelf.autoOpenBagTimer invalidate];
+                    [weakSelf closeGiftBagAction:nil];
+                }
             }else
             {
-                [MBProgressHUD showError:messageString toView:nil];
+                [MBProgressHUD showSuccess:@"谢谢参与" toView:nil];
                 [weakSelf setDataNil];
                 [weakSelf.autoOpenBagTimer invalidate];
                 [weakSelf closeGiftBagAction:nil];
             }
-        }else
-        {
-            [MBProgressHUD showSuccess:@"谢谢参与" toView:nil];
-            [weakSelf setDataNil];
-            [weakSelf.autoOpenBagTimer invalidate];
-            [weakSelf closeGiftBagAction:nil];
         }
     }];
 }
@@ -1071,7 +1029,7 @@
         NSMutableDictionary *params = @{}.mutableCopy;
         params[@"identify"] = identifyString;
         params[@"times"] = numString;
-        [IVNetwork requestPostWithUrl:BTTRainOpen paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self fetchOpenBagDataWithParameters:params WithBlock:^(id  _Nullable response, NSError * _Nullable error) {
             completionBlock(response,error);
         }];
     }
@@ -1197,32 +1155,6 @@
 //    }
 }
 
-- (void)fetchGroupPrizeNameData:(dispatch_group_t)group
-{
-    NSMutableDictionary *params = @{}.mutableCopy;
-    weakSelf(weakSelf)
-    [IVNetwork requestPostWithUrl:BTTRainGroup paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            weakSelf.prizeNamesArray = [NSArray yy_modelArrayWithClass:[PrizeNamesModel class] json:result.body];
-            [weakSelf setupGiftBannerGroup];
-        }
-    }];
-    dispatch_group_leave(group);
-}
-- (void)fetchBlessingCardData:(dispatch_group_t)group
-{
-    NSMutableDictionary *params = @{}.mutableCopy;
-    weakSelf(weakSelf)
-    [IVNetwork requestPostWithUrl:BTTRainQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            weakSelf.giftCardArray = [NSArray yy_modelArrayWithClass:[GiftCardModel class] json:result.body];
-            [weakSelf setupCardsAmounts];
-        }
-    }];
-    dispatch_group_leave(group);
-}
 - (IBAction)openGiftBagAction{
     [self fetchOpenLuckyBagData];
 }
@@ -1246,23 +1178,7 @@
     } WithDefaultCompletion:nil];
 }
 - (IBAction)combineCardsAction:(id)sender {
-    NSMutableDictionary *params = @{}.mutableCopy;
-    weakSelf(weakSelf)
-    [IVNetwork requestPostWithUrl:BTTRainFusing paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSString *codeString = result.body[@"code"];
-            NSString *messageString = result.body[@"message"];
-            if ([codeString isEqual:@"200"])
-            {
-                weakSelf.fusingBlessingCardModel = [FusingBlessingCardModel yy_modelWithJSON:result.body[@"data"]];
-                [self showGiftViewWithData:weakSelf.fusingBlessingCardModel.prizeName];
-            }else
-            {
-                [MBProgressHUD showError:messageString toView:nil];
-            }
-        }
-    }];
+    [self fetchFusingData];
 }
 - (IBAction)dismissGiftView:(id)sender {
     
@@ -1321,5 +1237,94 @@
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+#pragma mark Fetch Data
+- (void)fetchPrizeRecords
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTRainInKindPrize paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            weakSelf.prizeRecordArray = [NSArray yy_modelArrayWithClass:[PrizeRecordModel class] json:result.body];
+            [weakSelf setupDataForSortArray];
+        }
+    }];
+}
+- (void)gotoGetIdentify
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    [IVNetwork requestPostWithUrl:BTTRainCreate paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString *codeString = result.body[@"code"];
+            if ([codeString isEqual:@"200"])
+            {
+                [[NSUserDefaults standardUserDefaults] setObject:result.body[@"identify"] forKey:RedPacketIdentify];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }else
+            {
+                //测试用
+                [[NSUserDefaults standardUserDefaults] setObject:@"asdnsmcls" forKey:RedPacketIdentify];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [MBProgressHUD showError:@"您暂有抽红包机会" toView:nil];
+                
+                // 不成功
+//                [MBProgressHUD showError:@"您暂无抽红包机会" toView:nil];
+            }
+        }
+    }];
+}
+- (void)fetchOpenBagDataWithParameters:(NSMutableDictionary *)params WithBlock:(KYHTTPCallBack)completionBlock
+{
+    [IVNetwork requestPostWithUrl:BTTRainOpen paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        completionBlock(response,error);
+    }];
+}
+- (void)fetchGroupPrizeNameData:(dispatch_group_t)group
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTRainGroup paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            weakSelf.prizeNamesArray = [NSArray yy_modelArrayWithClass:[PrizeNamesModel class] json:result.body];
+            [weakSelf setupGiftBannerGroup];
+        }
+    }];
+    dispatch_group_leave(group);
+}
+- (void)fetchBlessingCardData:(dispatch_group_t)group
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTRainQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            weakSelf.giftCardArray = [NSArray yy_modelArrayWithClass:[GiftCardModel class] json:result.body];
+            [weakSelf setupCardsAmounts];
+        }
+    }];
+    dispatch_group_leave(group);
+}
+- (void)fetchFusingData
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTRainFusing paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString *codeString = result.body[@"code"];
+            NSString *messageString = result.body[@"message"];
+            if ([codeString isEqual:@"200"])
+            {
+                weakSelf.fusingBlessingCardModel = [FusingBlessingCardModel yy_modelWithJSON:result.body[@"data"]];
+                [self showGiftViewWithData:weakSelf.fusingBlessingCardModel.prizeName];
+            }else
+            {
+                [MBProgressHUD showError:messageString toView:nil];
+            }
+        }
+    }];
 }
 @end
