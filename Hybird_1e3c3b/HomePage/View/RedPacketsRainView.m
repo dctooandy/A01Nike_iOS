@@ -969,6 +969,7 @@
         // 如果有存在cache
         [self goToOpenBagWithCompletionBlock:^(id  _Nullable response, NSError * _Nullable error) {
             [weakSelf setDataNil];
+            [MBProgressHUD hideHUDForView:self animated:YES];
             completionBlock();
         }];
     }
@@ -977,6 +978,7 @@
 {
     weakSelf(weakSelf)
     [self goToOpenBagWithCompletionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [MBProgressHUD hideHUDForView:self animated:YES];
         IVJResponseObject *result = response;
         if (RedPacketIsDev == YES)
         {
@@ -1123,9 +1125,11 @@
 }
 // 开启集福卡画面
 - (IBAction)showCardsBonus:(UIButton*)sender {
+    [MBProgressHUD showLoadingSingleInView:self animated:YES];
     weakSelf(weakSelf)
     [self fetchCombineDatasForFusingWithComplete:^{
         dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self animated:YES];
             [UIView animateWithDuration:0.3 animations:^{
                 [weakSelf.cardsBonusView setAlpha:(sender.tag == 1) ? 1.0 : 0.0];
                 [weakSelf.rainBackgroundView setAlpha:(sender.tag == 1) ? 0.0 : 1.0];
@@ -1158,7 +1162,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             if (complete)
             {
-                complete();                
+                complete();
             }
         });
     });
@@ -1288,6 +1292,7 @@
 }
 - (void)fetchOpenBagDataWithParameters:(NSMutableDictionary *)params WithBlock:(KYHTTPCallBack)completionBlock
 {
+    [MBProgressHUD showLoadingSingleInView:self animated:YES];
     [IVNetwork requestPostWithUrl:BTTRainOpen paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         completionBlock(response,error);
     }];
@@ -1326,10 +1331,12 @@
         [self showGiftViewWithData:@"苹果MacBook13英寸M1芯片256G"];
     }else
     {
+        [MBProgressHUD showLoadingSingleInView:self animated:YES];
         NSMutableDictionary *params = @{}.mutableCopy;
         weakSelf(weakSelf)
         [IVNetwork requestPostWithUrl:BTTRainFusing paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
             IVJResponseObject *result = response;
+            [MBProgressHUD hideHUDForView:self animated:NO];
             if ([result.head.errCode isEqualToString:@"0000"]) {
                 NSString *codeString = result.body[@"code"];
                 NSString *messageString = result.body[@"message"];
@@ -1344,6 +1351,13 @@
                 }
             }
         }];
+    }
+}
+- (void)didMoveToWindow
+{
+    if (self.autoOpenBagTimer)
+    {
+        [self.autoOpenBagTimer invalidate];
     }
 }
 @end
