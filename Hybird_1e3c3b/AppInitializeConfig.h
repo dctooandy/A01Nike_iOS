@@ -12,7 +12,7 @@
 /**
  *  环境类型 本地 运测 线上 对应 0 1 2
  */
-#define Version middle_app_version_num > 2 ? [[NSUserDefaults standardUserDefaults] integerForKey:@"Envirment"] : 2
+#define Version middle_app_version_num > 3 ? [[NSUserDefaults standardUserDefaults] integerForKey:@"Envirment"] : 2
 #define EnvirmentType Version
 
 /**

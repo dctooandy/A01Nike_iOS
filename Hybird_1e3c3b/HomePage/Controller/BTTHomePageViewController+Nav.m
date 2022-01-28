@@ -62,9 +62,10 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
             NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
             BOOL isBeforeDuration = [duractionArray[0] boolValue];
             BOOL isActivityDuration = [duractionArray[1] boolValue];
+            BOOL isRainningTime = [duractionArray[2] boolValue];
             if (isBeforeDuration || isActivityDuration)
             {
-                [weakSelf showRedPacketsRainViewwWithStyle:(isActivityDuration ? RedPocketsViewBegin: RedPocketsViewPrefix)];
+                [weakSelf showRedPacketsRainViewwWithStyle:(isActivityDuration ?  (isRainningTime ? RedPocketsViewRainning : RedPocketsViewBegin): RedPocketsViewPrefix)];
             }else
             {//跳去活动结束画面
                 weakSelf.redPocketsAssistiveButton.hidden = true;
@@ -489,9 +490,10 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         NSArray *duractionArray = [PublicMethod redPacketDuracionCheck];
         BOOL isBeforeDuration = [duractionArray[0] boolValue];
         BOOL isActivityDuration = [duractionArray[1] boolValue];
+        BOOL isRainningTime = [duractionArray[2] boolValue];
         if ((isBeforeDuration || isActivityDuration) && ([model.action.detail containsString:@"tiger_red_envelope"]))
         {
-            [self showRedPacketsRainViewwWithStyle:(isActivityDuration ? RedPocketsViewBegin: RedPocketsViewPrefix)];
+            [self showRedPacketsRainViewwWithStyle:(isActivityDuration ?  (isRainningTime ? RedPocketsViewRainning : RedPocketsViewBegin): RedPocketsViewPrefix)];
         }else
         {
             BTTPromotionDetailController *vc = [[BTTPromotionDetailController alloc] init];

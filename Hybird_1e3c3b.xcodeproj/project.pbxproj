@@ -550,8 +550,6 @@
 		4184DE1E251B344F00D433D4 /* BTTCustomerReportController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4184DE1C251B344F00D433D4 /* BTTCustomerReportController.m */; };
 		4184FDF824E4EA92008521D0 /* BTTForgetPasswordController+LoadData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4184FDF424E4EA92008521D0 /* BTTForgetPasswordController+LoadData.m */; };
 		4184FDF924E4EA92008521D0 /* BTTForgetPasswordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4184FDF524E4EA92008521D0 /* BTTForgetPasswordController.m */; };
-		41859AFF279A92F400AB84FB /* newYear1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 41859AFD279A92F300AB84FB /* newYear1.gif */; };
-		41859B00279A92F400AB84FB /* newYear2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 41859AFE279A92F300AB84FB /* newYear2.gif */; };
 		418E72C6257777CE00D9BF95 /* BTTChooseCurrencyPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E72C3257777CE00D9BF95 /* BTTChooseCurrencyPopView.m */; };
 		418E72C9257777E300D9BF95 /* BTTChooseCurrencyPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 418E72C4257777CE00D9BF95 /* BTTChooseCurrencyPopView.xib */; };
 		418E72CF2577782800D9BF95 /* BTTChooseCurrencyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 418E72CD2577782800D9BF95 /* BTTChooseCurrencyController.m */; };
@@ -634,6 +632,8 @@
 		7682A7B32797EF29001AC772 /* PrizeRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7B22797EF29001AC772 /* PrizeRecordModel.m */; };
 		7682A7B62797F3F3001AC772 /* PrizeNamesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7B52797F3F3001AC772 /* PrizeNamesModel.m */; };
 		7682A7C22798095F001AC772 /* FusingBlessingCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7C12798095F001AC772 /* FusingBlessingCardModel.m */; };
+		76B16908279FE23C0033F301 /* newYear1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B16906279FE23C0033F301 /* newYear1.gif */; };
+		76B16909279FE23C0033F301 /* newYear2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B16907279FE23C0033F301 /* newYear2.gif */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
@@ -1787,8 +1787,6 @@
 		4184FDF524E4EA92008521D0 /* BTTForgetPasswordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTForgetPasswordController.m; sourceTree = "<group>"; };
 		4184FDF624E4EA92008521D0 /* BTTForgetPasswordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTForgetPasswordController.h; sourceTree = "<group>"; };
 		4184FDF724E4EA92008521D0 /* BTTForgetPasswordController+LoadData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BTTForgetPasswordController+LoadData.h"; sourceTree = "<group>"; };
-		41859AFD279A92F300AB84FB /* newYear1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = newYear1.gif; sourceTree = "<group>"; };
-		41859AFE279A92F300AB84FB /* newYear2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = newYear2.gif; sourceTree = "<group>"; };
 		418E72C3257777CE00D9BF95 /* BTTChooseCurrencyPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTChooseCurrencyPopView.m; sourceTree = "<group>"; };
 		418E72C4257777CE00D9BF95 /* BTTChooseCurrencyPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTChooseCurrencyPopView.xib; sourceTree = "<group>"; };
 		418E72C5257777CE00D9BF95 /* BTTChooseCurrencyPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTChooseCurrencyPopView.h; sourceTree = "<group>"; };
@@ -1867,6 +1865,7 @@
 		41D1074E26A9143E00721F61 /* BTTBindingMobileController+LoadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTBindingMobileController+LoadData.m"; sourceTree = "<group>"; };
 		41E4FC4926E5AC2A006F55FD /* BTTDiscountsViewController+Nav.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTTDiscountsViewController+Nav.h"; sourceTree = "<group>"; };
 		41E4FC4A26E5AC2A006F55FD /* BTTDiscountsViewController+Nav.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTTDiscountsViewController+Nav.m"; sourceTree = "<group>"; };
+		41E8BFAC27A3F5640073BDF0 /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = ../Desktop/libboringssl_simulator.a; sourceTree = "<group>"; };
 		41EAF0F1260D93BD0091FE09 /* BTTMeInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTMeInfoCell.xib; sourceTree = "<group>"; };
 		41EAF0F5260D94290091FE09 /* hot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = hot.gif; sourceTree = "<group>"; };
 		41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTYueFenHongPopView.xib; sourceTree = "<group>"; };
@@ -1933,6 +1932,8 @@
 		7682A7B52797F3F3001AC772 /* PrizeNamesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrizeNamesModel.m; sourceTree = "<group>"; };
 		7682A7C02798095F001AC772 /* FusingBlessingCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FusingBlessingCardModel.h; sourceTree = "<group>"; };
 		7682A7C12798095F001AC772 /* FusingBlessingCardModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FusingBlessingCardModel.m; sourceTree = "<group>"; };
+		76B16906279FE23C0033F301 /* newYear1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = newYear1.gif; sourceTree = "<group>"; };
+		76B16907279FE23C0033F301 /* newYear2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = newYear2.gif; sourceTree = "<group>"; };
 		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
 		76C9F150265E404B0002591D /* CNPayOrderModelV2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayOrderModelV2.m; sourceTree = "<group>"; };
 		76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatPopView.xib; sourceTree = "<group>"; };
@@ -2891,8 +2892,8 @@
 		3A8F5160215F75010069D1B3 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				41859AFD279A92F300AB84FB /* newYear1.gif */,
-				41859AFE279A92F300AB84FB /* newYear2.gif */,
+				76B16906279FE23C0033F301 /* newYear1.gif */,
+				76B16907279FE23C0033F301 /* newYear2.gif */,
 				767DF24727902F5200F50520 /* mammon2.gif */,
 				4142CFB226E9F4F100650449 /* login_bg_video.mp4 */,
 				41EAF0F5260D94290091FE09 /* hot.gif */,
@@ -4680,6 +4681,7 @@
 			isa = PBXGroup;
 			children = (
 				76CC62BD265677E00042AEDF /* libboringssl_simulator.a */,
+				41E8BFAC27A3F5640073BDF0 /* libboringssl_simulator.a */,
 				D3399696243B08E000B91A52 /* libboringssl.tbd */,
 				3AD9CF03216C425200685B43 /* CoreTelephony.framework */,
 				3AD9CEE821675A9B00685B43 /* libresolv.tbd */,
@@ -5257,9 +5259,9 @@
 				3A6DD5F62289161C000288B2 /* BTTAndroid88PopView.xib in Resources */,
 				76F863B926E0B64100320B60 /* UserRightTableViewCell.xib in Resources */,
 				3AAE8219219A738B003EC8B0 /* BTTRegisterQuickManualCell.xib in Resources */,
-				41859AFF279A92F400AB84FB /* newYear1.gif in Resources */,
+				76B16908279FE23C0033F301 /* newYear1.gif in Resources */,
 				41B3127D269D1FC0002AF76D /* BTTPaymentWarningPopView.xib in Resources */,
-				41859B00279A92F400AB84FB /* newYear2.gif in Resources */,
+				76B16909279FE23C0033F301 /* newYear2.gif in Resources */,
 				3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */,
 				3A75A182221164BC00584A35 /* BTTLoginAccountSelectCell.xib in Resources */,
 				D339CE9924C03CAC009ACD1C /* OTCInsideController.xib in Resources */,
@@ -6254,7 +6256,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.90;
+				MARKETING_VERSION = 3.1.91;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6296,7 +6298,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.90;
+				MARKETING_VERSION = 3.1.91;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";

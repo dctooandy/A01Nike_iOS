@@ -61,6 +61,7 @@
 // 普通参数
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) NSTimer *autoOpenBagTimer;
+@property (nonatomic, strong) dispatch_source_t rainTimer;
 @property (nonatomic, strong) CALayer *moveLayer;
 @property (nonatomic, strong) CALayer *bagMoveLayer;
 @property (nonatomic, assign) NSInteger selectedRedPacketNum;
@@ -76,6 +77,8 @@
 @property (nonatomic, strong) NSArray<PrizeNamesModel *>* prizeNamesArray;
 @property (nonatomic, strong) FusingBlessingCardModel * fusingBlessingCardModel;
 
+//点了第一个红包
+@property (nonatomic, assign) BOOL isSelectFirstRedPacket;
 @end
 
 @implementation RedPacketsRainView
@@ -91,20 +94,27 @@
     self.openGiftBagButton.layer.borderWidth = 1;
     self.prizeRecordArray = @[];
     self.countDownLabelTop.constant = SCREEN_HEIGHT * 0.05;
+    self.isSelectFirstRedPacket = NO;
 }
 
 - (void)configForRedPocketsViewWithStyle:(RedPocketsViewStyle)style
 {
     _viewStyle = style;
     weakSelf(weakSelf)
-    [self goToOpenBagWithCompletionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [self goToCheckIdentifyWithCompletionBlock:^{
         [weakSelf setuprRuleImageBannerGroup];// 游戏规则资料
         [weakSelf setupCardsImageView];//设定集福卡页面背景渐层
         switch (weakSelf.viewStyle) {
             case RedPocketsViewBegin:// 活动开始
                 weakSelf.selectedRedPacketNum = 0;
                 //开始红包雨倒数
-                [weakSelf startTimeWithDuration:[PublicMethod countDownIntervalWithDurationTag:YES]];
+                if ([[[BTTActivityManager sharedInstance] redPacketInfoModel] isRainningTime])
+                {
+                    [weakSelf startTimeWithDuration:1];
+                }else
+                {
+                    [weakSelf startTimeWithDuration:[PublicMethod countDownIntervalWithDurationTag:YES]];
+                }
                 // 活动开始中奖名单跑马灯
                 [weakSelf fetchPrizeRecords];
                 //            [self setupDataForSortArray];
@@ -180,46 +190,13 @@
 //    [self.backToRedPacketsViewBtn setImage:[[UIImage imageNamed:@"navi_back_normal"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateHighlighted];
 //    [self.backToRedPacketsViewBtn.imageView setTintColor:[UIColor whiteColor]];
 }
-- (void)gotoGetIdentify
+
+- (void)rainningAction
 {
-    NSMutableDictionary *params = @{}.mutableCopy;
-    weakSelf(weakSelf)
-    [IVNetwork requestPostWithUrl:BTTRainCreate paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSString *codeString = result.body[@"code"];
-            NSString *messageString = result.body[@"message"];
-            if ([codeString isEqual:@"200"])
-            {
-                [[NSUserDefaults standardUserDefaults] setObject:result.body[@"identify"] forKey:RedPacketIdentify];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                weakSelf.viewStyle = RedPocketsViewRainning;
-                [weakSelf moveLabelToTop]; // 移动倒数LAbel到上面
-                [weakSelf startRedPackerts]; // 开始下红包雨
-                [weakSelf.tapGesture setEnabled:YES];
-            }else
-            {
-                //测试用
-//                [[NSUserDefaults standardUserDefaults] setObject:@"asdnsmcls" forKey:RedPacketIdentify];
-//                [[NSUserDefaults standardUserDefaults] synchronize];
-//                weakSelf.viewStyle = RedPocketsViewRainning;
-//                [weakSelf moveLabelToTop]; // 移动倒数LAbel到上面
-//                [weakSelf startRedPackerts]; // 开始下红包雨
-//                [weakSelf.tapGesture setEnabled:YES];
-                // 不成功
-                [MBProgressHUD showError:messageString toView:nil];
-                [self.closeGiftBagButton setHidden:YES];
-                weakSelf.countdownLab.text = @"";
-                weakSelf(weakSelf)
-                [[BTTActivityManager sharedInstance] checkTimeRedPacketRainWithCompletion:^(NSString * _Nullable response, NSString * _Nullable error) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        int timeout = [PublicMethod countDownIntervalWithDurationTag:YES];
-                        [weakSelf startTimeWithDuration:timeout];
-                    });
-                } WithDefaultCompletion:nil];
-            }
-        }
-    }];
+    self.viewStyle = RedPocketsViewRainning;
+    [self moveLabelToTop]; // 移动倒数LAbel到上面
+    [self startRedPackerts]; // 开始下红包雨
+    [self.tapGesture setEnabled:YES];
 }
 - (void)startTimeWithDuration:(int)timeValue
 {
@@ -236,7 +213,7 @@
         {
             dispatch_source_cancel(_timer);
             dispatch_async(dispatch_get_main_queue(), ^{
-                [weakSelf gotoGetIdentify];
+                [weakSelf rainningAction];
             });
         }
         else
@@ -275,18 +252,7 @@
     });
     dispatch_resume(_timer);
 }
-- (void)fetchPrizeRecords
-{
-    NSMutableDictionary *params = @{}.mutableCopy;
-    weakSelf(weakSelf)
-    [IVNetwork requestPostWithUrl:BTTRainInKindPrize paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            weakSelf.prizeRecordArray = [NSArray yy_modelArrayWithClass:[PrizeRecordModel class] json:result.body];
-            [weakSelf setupDataForSortArray];
-        }
-    }];
-}
+
 - (void)setupDataForSortArray
 {
     if (self.viewStyle != RedPocketsViewRainning)
@@ -461,7 +427,7 @@
                 [resultArray replaceObjectAtIndex:5 withObject:[NSString stringWithFormat:@"%@张",subModel.count]];
             }
         }
-        for (int i = 1; i < self.cardsAmountLabelArray.count; i++) {
+        for (int i = 0; i < self.cardsAmountLabelArray.count; i++) {
             UILabel * cardAmountLabel = self.cardsAmountLabelArray[i];
             cardAmountLabel.text = resultArray[i];
         }
@@ -619,23 +585,41 @@
             [self.bagView.layer addSublayer:self.bagMoveLayer];
 //        }
 //    }
-    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%ld",(long)self.fetchRedPacketsNum] forKey:RedPacketNum];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [self showResult];
 }
 
 -(void)showResult
 {
     [self.closeButton setHidden:NO];
+    NSString *identifyString = [[NSUserDefaults standardUserDefaults] objectForKey:RedPacketIdentify];
+    NSString *numString = [[NSUserDefaults standardUserDefaults] objectForKey:RedPacketNum];
+    if (A01IsEmpty(identifyString) || A01IsEmpty(numString))
+    {
+        [MBProgressHUD showSuccess:@"谢谢参与" toView:self];
+        [self.autoOpenBagTimer invalidate];
+        [self closeGiftBagAction:nil];
+    }else
+    {
+        [self showOpenGiftBagButton];// 显示集幅卡按钮
+        [self autoOpenGiftBagAction];// 自动打开红包袋
+    }
     // 集福卡开启
     [self showCardsButtonSetHidden:NO];
-    [self showOpenGiftBagButton];// 显示集幅卡按钮
-    [self autoOpenGiftBagAction];// 自动打开红包袋
     // 背景图置换
     [self changeBGImageViewWithStyle:RedPocketsViewResult];
 }
 - (void)clickRed:(UITapGestureRecognizer *)sender
 {
+    if (self.isSelectFirstRedPacket == NO)
+    {
+        self.isSelectFirstRedPacket = YES;
+        NSString *identifyString = [[NSUserDefaults standardUserDefaults] objectForKey:RedPacketIdentify];
+        if (A01IsEmpty(identifyString))
+        {
+            [self gotoGetIdentify];
+        }
+    }
     CGPoint point = [sender locationInView:self.redPocketsRainView];
     for (int i = 0 ; i < self.redPocketsRainView.layer.sublayers.count ; i ++)
     {
@@ -646,8 +630,9 @@
             ![layer isKindOfClass:[UILabel layerClass]] &&
             (layer.bounds.size.width == 44))
         {
-            NSLog(@"%d",i);
-            self.fetchRedPacketsNum ++;
+            self.fetchRedPacketsNum += 1;
+            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%ld",self.fetchRedPacketsNum] forKey:RedPacketNum];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             self.selectedRedPacketNum = i;
 //            BOOL hasRedPacketd = !(i % 3) ;
             BOOL hasRedPacketd = YES ;
@@ -910,12 +895,12 @@
     weakSelf(weakSelf)
     __block int timeout = RedPacketCountDown;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
-    dispatch_source_set_event_handler(_timer, ^{
+    _rainTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(self.rainTimer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(self.rainTimer, ^{
         if ( timeout <= 0 )
         {
-            dispatch_source_cancel(_timer);
+            dispatch_source_cancel(weakSelf.rainTimer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf endAnimation]; // 红包雨动画结束
             });
@@ -937,7 +922,7 @@
             timeout--;
         }
     });
-    dispatch_resume(_timer);
+    dispatch_resume(_rainTimer);
 }
 - (void)changeBagColor
 {
@@ -973,24 +958,20 @@
     //红包袋开启倒数60秒
     self.autoOpenBagTimer = [NSTimer scheduledTimerWithTimeInterval:RedPacketCountDown target:self selector:@selector(fetchOpenLuckyBagData) userInfo:nil repeats:NO];
 }
-- (void)goToOpenBagWithCompletionBlock:(KYHTTPCallBack)completionBlock
+- (void)goToCheckIdentifyWithCompletionBlock:(void(^)(void))completionBlock
 {
-    NSString *identifyString = [[NSUserDefaults standardUserDefaults] objectForKey:RedPacketIdentify];
-    NSString *numString = [[NSUserDefaults standardUserDefaults] objectForKey:RedPacketNum];
-    if (A01IsEmpty(identifyString) || A01IsEmpty(numString))
+    weakSelf(weakSelf)
+    if ([[[[BTTActivityManager sharedInstance] redPacketInfoModel] firstRainStatus] isEqualToString:@"1"] ||
+        [[[[BTTActivityManager sharedInstance] redPacketInfoModel] secondRainStatus] isEqualToString:@"1"])
     {
-        [MBProgressHUD showError:@"参数异常" toView:nil];
-        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
-        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        completionBlock(nil,nil);
+        completionBlock();
     }else
     {
-        NSMutableDictionary *params = @{}.mutableCopy;
-        params[@"identify"] = identifyString;
-        params[@"times"] = numString;
-        [IVNetwork requestPostWithUrl:BTTRainOpen paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-            completionBlock(response,error);
+        // 如果有存在cache
+        [self goToOpenBagWithCompletionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            [weakSelf setDataNil];
+            [MBProgressHUD hideHUDForView:self animated:YES];
+            completionBlock();
         }];
     }
 }
@@ -998,28 +979,63 @@
 {
     weakSelf(weakSelf)
     [self goToOpenBagWithCompletionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [MBProgressHUD hideHUDForView:self animated:YES];
         IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            weakSelf.luckyBagModel = [LuckyBagModel yy_modelWithJSON:result.body];
-            NSString *codeString = weakSelf.luckyBagModel.code;
-            NSString *messageString = weakSelf.luckyBagModel.message;
-            if ([codeString isEqual:@"200"])
-            {
-                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
-                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [weakSelf showBagWithData];
+        if (RedPacketIsDev == YES)
+        {
+            weakSelf.luckyBagModel = [LuckyBagModel new];
+            weakSelf.luckyBagModel.data = @[[LuckyBagDetailModel new]];
+            [weakSelf setDataNil];
+            [weakSelf.autoOpenBagTimer invalidate];
+            [weakSelf showBagWithData];
+        }else
+        {
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                weakSelf.luckyBagModel = [LuckyBagModel yy_modelWithJSON:result.body];
+                weakSelf.luckyBagModel.data = [NSArray yy_modelArrayWithClass:[LuckyBagDetailModel class] json:result.body[@"data"]];
+                NSString *codeString = weakSelf.luckyBagModel.code;
+                NSString *messageString = weakSelf.luckyBagModel.message;
+                if ([codeString isEqual:@"200"])
+                {
+                    [weakSelf setDataNil];
+                    [weakSelf.autoOpenBagTimer invalidate];
+                    [weakSelf showBagWithData];
+                }else
+                {
+                    [MBProgressHUD showError:messageString toView:self];
+                    [weakSelf setDataNil];
+                    [weakSelf.autoOpenBagTimer invalidate];
+                    [weakSelf closeGiftBagAction:nil];
+                }
             }else
             {
-                [MBProgressHUD showError:messageString toView:nil];
-                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
-                [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                [weakSelf showBagWithData];
+                [MBProgressHUD showSuccess:@"谢谢参与" toView:self];
+                [weakSelf setDataNil];
+                [weakSelf.autoOpenBagTimer invalidate];
+                [weakSelf closeGiftBagAction:nil];
             }
         }
     }];
 }
+- (void)goToOpenBagWithCompletionBlock:(KYHTTPCallBack)completionBlock
+{
+    NSString *identifyString = [[NSUserDefaults standardUserDefaults] objectForKey:RedPacketIdentify];
+    NSString *numString = [[NSUserDefaults standardUserDefaults] objectForKey:RedPacketNum];
+    if (A01IsEmpty(identifyString) || A01IsEmpty(numString))
+    {
+        // 可能是第一次参与活动
+        completionBlock(nil,nil);
+    }else
+    {
+        NSMutableDictionary *params = @{}.mutableCopy;
+        params[@"identify"] = identifyString;
+        params[@"times"] = numString;
+        [self fetchOpenBagDataWithParameters:params WithBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            completionBlock(response,error);
+        }];
+    }
+}
+
 - (void)showBagWithData
 {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -1040,35 +1056,35 @@
     NSString *imageString = @"";
     if ([imageData containsString:@"海尔除螨仪"])
     {
-        imageString = @"img_HZC302W";
+        imageString = @"popup_price6";
     }
     if ([imageData containsString:@"SKG颈部"])
     {
-        imageString = @"img_SKG";
+        imageString = @"popup_price2";
     }
     if ([imageData containsString:@"奥玛仕"])
     {
-        imageString = @"img_401as";
+        imageString = @"popup_price4";
     }
     if ([imageData containsString:@"戴森吸"])
     {
-        imageString = @"img_dysonV10";
+        imageString = @"popup_price3";
     }
     if ([imageData containsString:@"PS5"])
     {
-        imageString = @"img_PS5";
+        imageString = @"popup_price5";
     }
     if ([imageData containsString:@"苹果"])
     {
-        imageString = @"img_MacBook13";
+        imageString = @"popup_price1";
     }
     if ([imageData containsString:@"三星"])
     {
-        imageString = @"img_GalaxyZFold3";
+        imageString = @"popup_price7";
     }
     if ([imageData containsString:@"a7m4"])
     {
-        imageString = @"img_sonya7m4";
+        imageString = @"popup_price8";
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         self.giftImageView.image = ImageNamed(imageString);
@@ -1110,15 +1126,11 @@
 }
 // 开启集福卡画面
 - (IBAction)showCardsBonus:(UIButton*)sender {
+    [MBProgressHUD showLoadingSingleInView:self animated:YES];
     weakSelf(weakSelf)
-    dispatch_group_t group = dispatch_group_create();
-    dispatch_queue_t queue = dispatch_queue_create("fetchDatas", DISPATCH_QUEUE_CONCURRENT);
-    dispatch_group_enter(group);
-    [self fetchBlessingCardData:group];
-    dispatch_group_enter(group);
-    [self fetchGroupPrizeNameData:group];
-    dispatch_group_notify(group,queue, ^{
+    [self fetchCombineDatasForFusingWithComplete:^{
         dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:self animated:YES];
             [UIView animateWithDuration:0.3 animations:^{
                 [weakSelf.cardsBonusView setAlpha:(sender.tag == 1) ? 1.0 : 0.0];
                 [weakSelf.rainBackgroundView setAlpha:(sender.tag == 1) ? 0.0 : 1.0];
@@ -1126,7 +1138,7 @@
                 [weakSelf dismissRulesView];
             }];
         });
-    });
+    }];
 //    if (sender.tag == 1)
 //    {
 //    [self switchWithView:self.labelBackgroundView withPosition:RedPocketsViewToBack];
@@ -1139,37 +1151,27 @@
 //    [self switchWithView:self.cardsBonusView withPosition:RedPocketsViewToBack];
 //    }
 }
-
-- (void)fetchGroupPrizeNameData:(dispatch_group_t)group
+- (void)fetchCombineDatasForFusingWithComplete:(nullable void(^)(void))complete
 {
-    NSMutableDictionary *params = @{}.mutableCopy;
-    weakSelf(weakSelf)
-    [IVNetwork requestPostWithUrl:BTTRainGroup paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            weakSelf.prizeNamesArray = [NSArray yy_modelArrayWithClass:[PrizeNamesModel class] json:result.body];
-            [weakSelf setupGiftBannerGroup];
-        }
-    }];
-    dispatch_group_leave(group);
-}
-- (void)fetchBlessingCardData:(dispatch_group_t)group
-{
-    NSMutableDictionary *params = @{}.mutableCopy;
-    weakSelf(weakSelf)
-    [IVNetwork requestPostWithUrl:BTTRainQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            weakSelf.giftCardArray = [NSArray yy_modelArrayWithClass:[GiftCardModel class] json:result.body];
-            [weakSelf setupCardsAmounts];
-        }
-    }];
-    dispatch_group_leave(group);
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_queue_t queue = dispatch_queue_create("fetchDatas", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_group_enter(group);
+    [self fetchBlessingCardData:group];
+    dispatch_group_enter(group);
+    [self fetchGroupPrizeNameData:group];
+    dispatch_group_notify(group,queue, ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (complete)
+            {
+                complete();
+            }
+        });
+    });
 }
 - (IBAction)openGiftBagAction{
     [self fetchOpenLuckyBagData];
 }
-- (IBAction)closeGiftBagAction:(id)sender {
+- (IBAction)closeGiftBagAction:(nullable id)sender {
     [self.bagView setHidden:YES];
     [self.bagView setAlpha:0.0];
     [self.bagResultView setHidden:YES];
@@ -1182,30 +1184,13 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             int timeout = [PublicMethod countDownIntervalWithDurationTag:YES];
             [weakSelf startTimeWithDuration:timeout];
-            [weakSelf fetchPrizeRecords];
-//            [weakSelf setupDataForSortArray];
-            [weakSelf moveLabelToCenter];
         });
     } WithDefaultCompletion:nil];
+    [self fetchPrizeRecords];
+    [self moveLabelToCenter];
 }
 - (IBAction)combineCardsAction:(id)sender {
-    NSMutableDictionary *params = @{}.mutableCopy;
-    weakSelf(weakSelf)
-    [IVNetwork requestPostWithUrl:BTTRainFusing paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
-        IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
-            NSString *codeString = result.body[@"code"];
-            NSString *messageString = result.body[@"message"];
-            if ([codeString isEqual:@"200"])
-            {
-                weakSelf.fusingBlessingCardModel = [FusingBlessingCardModel yy_modelWithJSON:result.body[@"data"]];
-                [self showGiftViewWithData:weakSelf.fusingBlessingCardModel.prizeName];
-            }else
-            {
-                [MBProgressHUD showError:messageString toView:nil];
-            }
-        }
-    }];
+    [self fetchFusingData];
 }
 - (IBAction)dismissGiftView:(id)sender {
     
@@ -1249,7 +1234,7 @@
         }];
         giftBannerView.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
 //        giftBannerView.layer.cornerRadius = 10;
-//        giftBannerView.layer.masksToBounds = true;
+        giftBannerView.layer.masksToBounds = true;
         giftBannerView.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
         giftBannerView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated;
         giftBannerView.pageControlDotSize = CGSizeMake(6, 6);
@@ -1258,5 +1243,126 @@
         _giftBannerView = giftBannerView;
     }
     return _giftBannerView;
+}
+- (void)setDataNil
+{
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketIdentify];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:RedPacketNum];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+#pragma mark Fetch Data
+- (void)fetchPrizeRecords
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTRainInKindPrize paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            weakSelf.prizeRecordArray = [NSArray yy_modelArrayWithClass:[PrizeRecordModel class] json:result.body];
+            [weakSelf setupDataForSortArray];
+        }
+    }];
+}
+- (void)gotoGetIdentify
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    [IVNetwork requestPostWithUrl:BTTRainCreate paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString *codeString = result.body[@"code"];
+            if ([codeString isEqual:@"200"])
+            {
+                [[NSUserDefaults standardUserDefaults] setObject:result.body[@"identify"] forKey:RedPacketIdentify];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }else
+            {
+                if (RedPacketIsDev == YES)
+                {
+                    //测试用
+                    [[NSUserDefaults standardUserDefaults] setObject:@"asdnsmcls" forKey:RedPacketIdentify];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    [MBProgressHUD showError:@"您暂有抽红包机会" toView:self];
+                }else
+                {
+                    // 不成功
+                    [MBProgressHUD showError:@"您暂无抽红包机会" toView:self];
+                }
+            }
+        }
+    }];
+}
+- (void)fetchOpenBagDataWithParameters:(NSMutableDictionary *)params WithBlock:(KYHTTPCallBack)completionBlock
+{
+    [MBProgressHUD showLoadingSingleInView:self animated:YES];
+    [IVNetwork requestPostWithUrl:BTTRainOpen paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        completionBlock(response,error);
+    }];
+}
+- (void)fetchGroupPrizeNameData:(dispatch_group_t)group
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTRainGroup paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            weakSelf.prizeNamesArray = [NSArray yy_modelArrayWithClass:[PrizeNamesModel class] json:result.body];
+            [weakSelf setupGiftBannerGroup];
+        }
+    }];
+    dispatch_group_leave(group);
+}
+- (void)fetchBlessingCardData:(dispatch_group_t)group
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTRainQuery paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            weakSelf.giftCardArray = [NSArray yy_modelArrayWithClass:[GiftCardModel class] json:result.body];
+            [weakSelf setupCardsAmounts];
+        }
+    }];
+    dispatch_group_leave(group);
+}
+- (void)fetchFusingData
+{
+    if (RedPacketIsDev == YES)
+    {
+        [self fetchCombineDatasForFusingWithComplete:nil];
+        [self showGiftViewWithData:@"苹果MacBook13英寸M1芯片256G"];
+    }else
+    {
+        [MBProgressHUD showLoadingSingleInView:self animated:YES];
+        NSMutableDictionary *params = @{}.mutableCopy;
+        weakSelf(weakSelf)
+        [IVNetwork requestPostWithUrl:BTTRainFusing paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+            IVJResponseObject *result = response;
+            [MBProgressHUD hideHUDForView:self animated:NO];
+            if ([result.head.errCode isEqualToString:@"0000"]) {
+                NSString *codeString = result.body[@"code"];
+                NSString *messageString = result.body[@"message"];
+                if ([codeString isEqual:@"200"])
+                {
+                    weakSelf.fusingBlessingCardModel = [FusingBlessingCardModel yy_modelWithJSON:result.body[@"data"]];
+                    [weakSelf fetchCombineDatasForFusingWithComplete:nil];
+                    [weakSelf showGiftViewWithData:weakSelf.fusingBlessingCardModel.prizeName];
+                }else
+                {
+                    [MBProgressHUD showError:messageString toView:self];
+                }
+            }
+        }];
+    }
+}
+- (void)didMoveToWindow
+{
+    if (self.autoOpenBagTimer)
+    {
+        [self.autoOpenBagTimer invalidate];
+    }
+    if (self.rainTimer)
+    {
+        dispatch_source_cancel(self.rainTimer);
+    }
 }
 @end

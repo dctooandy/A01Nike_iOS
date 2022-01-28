@@ -14,6 +14,7 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
 @property (weak, nonatomic) UILabel *countdownLab;
 @property (assign, nonatomic) BOOL isRainning;
 @property (nonatomic, strong) dispatch_source_t assistiveTimer;      //位置弹窗计时器
+@property (nonatomic, strong) dispatch_source_t rainningTimer;      //下雨时计时器
 @end
 
 @implementation AssistiveButton
@@ -57,16 +58,18 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
     if (self) {
         self.isRainning = NO;
         UIImage * closeImage = [UIImage imageNamed:@"assisClose"];
-        CGFloat assistiveBtnHeight = 190 + 30;
-        CGFloat loginBtnViewHeight = 87;
+        float defaultWidth = SCREEN_WIDTH / 3.0;
+        float defaultHeight = defaultWidth * 1.05;
+        CGFloat assistiveBtnHeight = defaultHeight + 30.0;
+        CGFloat loginBtnViewHeight = 50;
         CGFloat postionY = SCREEN_HEIGHT - kTabbarHeight - assistiveBtnHeight/2 - loginBtnViewHeight;
-        CGPoint position = CGPointMake( assistiveBtnHeight/2 + 10, postionY);
-        self.mainFrame = CGRectMake(position.x, position.y, 180, 190);
+        CGPoint position = CGPointMake( assistiveBtnHeight/2.5 + 10, postionY);
+        self.mainFrame = CGRectMake(position.x, position.y, defaultWidth, defaultHeight);
         self.superViewRelativePosition = position;
         
         //main Button
 //        self.powerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, backgroundImage.size.width, backgroundImage.size.height)];
-        self.powerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 180, 190)];
+        self.powerButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, defaultWidth, defaultHeight)];
         [self.powerButton setBackgroundImage:backgroundImage forState:UIControlStateNormal];
         self.powerButton.tag = 0;
         self.powerButton.adjustsImageWhenHighlighted = NO;
@@ -74,7 +77,7 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
         [self addSubview:_powerButton];
         
 //        UIButton * closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(backgroundImage.size.width-closeImage.size.width, 0, closeImage.size.width, closeImage.size.height)];
-        UIButton * closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(180 - 30, 0, 30, 30)];
+        UIButton * closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(defaultWidth - 30, 0, 30, 30)];
         [closeBtn setBackgroundImage:closeImage forState:UIControlStateNormal];
         [closeBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         closeBtn.tag = 1;
@@ -87,7 +90,7 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
 
         countDownLabel.textColor = kHexColorAlpha(0xFFEC85, 1.0);
 
-        countDownLabel.font = [UIFont systemFontOfSize:11];
+        countDownLabel.font = [UIFont systemFontOfSize:9];
 
         countDownLabel.text = @"5天23小时12分30秒";
 
@@ -115,8 +118,12 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
 }
 -(void)refetchTimeForRainning
 {
-    if (_assistiveTimer) dispatch_source_cancel(_assistiveTimer);
-    [self reStartCountTime];
+    if (![[[BTTActivityManager sharedInstance] redPacketInfoModel] isRainningTime])
+    {
+        if (_assistiveTimer) dispatch_source_cancel(_assistiveTimer);
+        if (_rainningTimer) dispatch_source_cancel(_rainningTimer);
+        [self reStartCountTime];        
+    }
 }
 - (void)reStartCountTime
 {
@@ -132,12 +139,12 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
     weakSelf(weakSelf)
     __block int timeout = 60;
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    dispatch_source_t _timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
-    dispatch_source_set_timer(_timer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
-    dispatch_source_set_event_handler(_timer, ^{
+    _rainningTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,queue);
+    dispatch_source_set_timer(_rainningTimer,dispatch_walltime(NULL, 0),1.0*NSEC_PER_SEC, 0);
+    dispatch_source_set_event_handler(_rainningTimer, ^{
         if ( timeout <= 0 )
         {
-            dispatch_source_cancel(_timer);
+            dispatch_source_cancel(weakSelf.rainningTimer);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [weakSelf reStartCountTime];//访问剩馀秒数再开始倒数
             });
@@ -148,14 +155,14 @@ typedef void (^TimeCompleteBlock)(NSString * timeStr);
             int leftTime = timeout - (dInt * 3600 * 24);
             int sInt = (int)leftTime % 60;              //剩馀秒数
             NSString * titleStr;
-            titleStr = [NSString stringWithFormat:@"红包雨剩馀%d秒",sInt];
+            titleStr = [NSString stringWithFormat:@"红包雨剩余%d秒",sInt];
             dispatch_async(dispatch_get_main_queue(), ^{
                 weakSelf.countdownLab.text = titleStr;
             });
             timeout--;
         }
     });
-    dispatch_resume(_timer);
+    dispatch_resume(_rainningTimer);
 }
 - (void)startCountDownTime
 {
