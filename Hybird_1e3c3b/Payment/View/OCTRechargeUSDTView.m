@@ -47,7 +47,7 @@
     [ercBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     ercBtn.layer.cornerRadius = 4.0;
     ercBtn.clipsToBounds = YES;
-    ercBtn.layer.borderWidth = 0.5;
+    ercBtn.layer.borderWidth = 1;
     ercBtn.layer.borderColor = [UIColor colorWithHexString:@"#2d83cd"].CGColor;
     [self.rechargeView addSubview:ercBtn];
     self.ercBtn = ercBtn;
@@ -58,7 +58,7 @@
     [trcBtn setTitleColor:[UIColor colorWithHexString:@"#6d737c"] forState:UIControlStateNormal];
     trcBtn.layer.cornerRadius = 4.0;
     trcBtn.clipsToBounds = YES;
-    trcBtn.layer.borderWidth = 0.5;
+    trcBtn.layer.borderWidth = 1;
     trcBtn.layer.borderColor = [UIColor colorWithHexString:@"#6d737c"].CGColor;
     [self.rechargeView addSubview:trcBtn];
     self.trcBtn = trcBtn;
