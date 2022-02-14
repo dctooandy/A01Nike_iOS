@@ -5079,12 +5079,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A8F5157215F74D00069D1B3 /* Build configuration list for PBXNativeTarget "Hybird_1e3c3b" */;
 			buildPhases = (
-				26AC39DCCA3B88FA97BCFAC0 /* [CP] Check Pods Manifest.lock */,
+				34A75036F759E9FD7F79B67E /* [CP] Check Pods Manifest.lock */,
 				3A8F5127215F74CF0069D1B3 /* Sources */,
 				3A8F5128215F74CF0069D1B3 /* Frameworks */,
 				3A8F5129215F74CF0069D1B3 /* Resources */,
 				3A8F523A2161F0F80069D1B3 /* Embed Frameworks */,
-				4C4BF741B7895A2E06E6B4FC /* [CP] Copy Pods Resources */,
+				7FA6063764A56F76B17C24F5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -5444,16 +5444,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		26AC39DCCA3B88FA97BCFAC0 /* [CP] Check Pods Manifest.lock */ = {
+		34A75036F759E9FD7F79B67E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-Hybird_1e3c3b-checkManifestLockResult.txt",
 			);
@@ -5462,7 +5466,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4C4BF741B7895A2E06E6B4FC /* [CP] Copy Pods Resources */ = {
+		7FA6063764A56F76B17C24F5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
