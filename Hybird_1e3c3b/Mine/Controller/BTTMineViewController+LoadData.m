@@ -163,6 +163,14 @@
         
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if ([result.body[@"payTypeList"] isKindOfClass:[NSArray class]]) {
+                
+                BTTMeMainModel *mainModel = [BTTMeMainModel new];
+                mainModel.name = @"急速转卡";
+                mainModel.iconName = @"channel_fastpay";
+                mainModel.paymentType = CNPaymentFast;
+                mainModel.payModel = [CNPaymentModel new];
+                [self.bigDataSoure addObject:mainModel];
+                
                 NSArray *payTypeArray = result.body[@"payTypeList"];
                 for (int i = 0; i < payTypeArray.count; i ++) {
                     NSDictionary *dict = payTypeArray[i];
