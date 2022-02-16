@@ -49,6 +49,8 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
     CNPaymentDCBOX=43,//小金库
     
     CNPaymentVip=-1,//vip存款
+    
+    CNPaymentFast=-2,//急速存款
 };
 
 @interface CNPaymentModel : BTTBaseModel

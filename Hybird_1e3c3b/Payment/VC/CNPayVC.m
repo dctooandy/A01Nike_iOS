@@ -188,7 +188,9 @@
         _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.paymentType];
     } else {
         _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.paymentType];
-        _payChannelVC.payments = @[channel.payModel];
+        if (channel.payModel) {
+            _payChannelVC.payments = @[channel.payModel];
+        }
     }
     
 //    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
@@ -241,7 +243,9 @@
         _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.paymentType];
     } else {
         _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.paymentType];
-        _payChannelVC.payments = @[channelModel.payModel];
+        if (channelModel.payModel) {
+            _payChannelVC.payments = @[channelModel.payModel];
+        }
     }
     
     _segmentVC = [[AMSegmentViewController alloc] initWithViewController:_payChannelVC];
