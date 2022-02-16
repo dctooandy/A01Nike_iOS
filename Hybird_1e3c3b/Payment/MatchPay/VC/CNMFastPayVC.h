@@ -6,11 +6,11 @@
 //  Copyright © 2022 BTT. All rights reserved.
 //
 
-#import "HABaseViewController.h"
+#import "CNPayBaseVC.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CNMFastPayVC : HABaseViewController
+@interface CNMFastPayVC : CNPayBaseVC
 
 @end
 

@@ -7,8 +7,26 @@
 //
 
 #import "CNMFastPayVC.h"
+#import "CNMAmountSelectCCell.h"
 
-@interface CNMFastPayVC ()
+#define kCNMAmountSelectCCell  @"CNMAmountSelectCCell"
+
+@interface CNMFastPayVC () <UICollectionViewDataSource, UICollectionViewDelegate>
+@property (weak, nonatomic) IBOutlet UIView *warningView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *warningViewH;
+@property (weak, nonatomic) IBOutlet UILabel *warningLb;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+/// 今日可以使用该通道
+@property (weak, nonatomic) IBOutlet UILabel *allowUseCount;
+/// 今日可以取消/超时次数
+@property (weak, nonatomic) IBOutlet UILabel *allowCancelCount;
+
+@property (weak, nonatomic) IBOutlet UIButton *depositBtn;
+
+@property (weak, nonatomic) IBOutlet UIView *buttonView;
+@property (weak, nonatomic) IBOutlet UIButton *continueBtn;
+@property (weak, nonatomic) IBOutlet UIButton *recommendBtn;
 
 @end
 
@@ -16,17 +34,44 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [self setViewHeight:650 fullScreen:NO];
+    
+    self.buttonView.hidden = YES;
+    self.depositBtn.enabled = NO;
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    [self.collectionView registerNib:[UINib nibWithNibName:kCNMAmountSelectCCell bundle:nil] forCellWithReuseIdentifier:kCNMAmountSelectCCell];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)depositAction:(UIButton *)sender {
+    NSLog(@"cunkun");
 }
-*/
 
+- (IBAction)continueAction:(UIButton *)sender {
+    
+}
+
+- (IBAction)recommendAction:(UIButton *)sender {
+    
+}
+
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 5;
+}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CNMAmountSelectCCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCNMAmountSelectCCell forIndexPath:indexPath];
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.buttonView.hidden) {
+        
+        
+        return;
+    }
+    // 点击任何直接支付
+    [self depositAction:self.depositBtn];
+}
 @end
