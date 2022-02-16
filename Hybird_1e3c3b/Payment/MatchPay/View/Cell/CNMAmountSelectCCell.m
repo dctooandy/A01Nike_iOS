@@ -14,6 +14,13 @@
     [super awakeFromNib];
     self.checkIV.layer.borderWidth = 1;
     self.checkIV.layer.borderColor = kHexColor(0x55AAF5).CGColor;
+    self.checkIV.layer.cornerRadius = 8;
+    self.checkIV.layer.masksToBounds = YES;
+    self.checkIV.hidden = YES;
 }
 
+- (void)setSelected:(BOOL)selected {
+    [super setSelected:selected];
+    self.checkIV.hidden = !selected;
+}
 @end

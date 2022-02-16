@@ -20,6 +20,12 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZo-qh-rov">
                         <rect key="frame" x="0.0" y="0.0" width="253" height="160"/>
                         <color key="backgroundColor" red="0.18431372549019609" green="0.18431372549019609" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottomRight" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="select_check" translatesAutoresizingMaskIntoConstraints="NO" id="puw-Ej-bkk">
                         <rect key="frame" x="0.0" y="0.0" width="253" height="160"/>
