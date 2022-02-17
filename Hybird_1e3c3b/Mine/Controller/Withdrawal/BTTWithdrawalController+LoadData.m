@@ -134,9 +134,9 @@
     NSString *btcrate = isNull(self.btcRate) ? @"0" : self.btcRate;
     NSString *rateStr = [NSString stringWithFormat:@"¥%.2lf=1BTC(实时汇率)",[btcrate doubleValue]];
     
-    NSArray *names1 = @[@"",@""];
-    NSArray *names3 = @[@"金额",@"比特币",@"取款至",@"资金密码",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
-    NSArray *names4 = @[@"金额",@"预估到账",@"取款至",@"资金密码",@"",@"",@""];
+    NSArray *names1 = @[@"",@"金额"];
+    NSArray *names3 = @[@"",@"比特币",@"取款至",@"资金密码",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
+    NSArray *names4 = @[@"",@"预估到账",@"取款至",@"资金密码",@"",@"",@""];
     
     NSString *pString = isUsdt ? [NSString stringWithFormat:@"单笔取款限额%@-143万USDT", self.usdtLimit] : [NSString stringWithFormat:@"最少%@元", self.cnyLimit];
     if (!isUsdt && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
@@ -152,16 +152,27 @@
     NSString * withdrawPwdP = [IVNetwork savedUserInfo].withdralPwdFlag == 0 ? @"没有资金密码？点击设置资金密码":@"6位数字组合";
     BOOL withdrawPwdCanEdits = [IVNetwork savedUserInfo].withdralPwdFlag == 0 ? false:true;
     
-    NSArray *placeholders1 = @[@"",@""];
-    NSArray *placeholders3 = @[pString,rateStr,@"***银行-尾号*****",withdrawPwdP,@""];
-    NSArray *placeholders4 = @[pString,@"USDT",@"***银行-尾号*****",withdrawPwdP,@"",@"",@""];
-    NSArray *heights1 = @[@205.0,@15.0];
-    NSArray *heights3 = @[@44.0,@44.0,@44.0,@44.0,@100.0];
-    NSArray *heights4 = @[@44.0,@44.0,@44,@44,@44.0,@46.0,@240.0];
+    NSArray *placeholders1 = @[@"",pString];
+    NSArray *placeholders3 = @[@"",rateStr,@"***银行-尾号*****",withdrawPwdP,@""];
+    NSArray *placeholders4 = @[@"",@"USDT",@"***银行-尾号*****",withdrawPwdP,@"",@"",@""];
+    NSArray *heights1 = @[@205.0,@44.0];
+    NSArray *heights3 = @[@0.0,@44.0,@44.0,@44.0,@100.0];
+    NSArray *heights4 = @[@0.0,@44.0,@44,@44,@44.0,@46.0,@240.0];
     
-    NSArray *canEdits1 = @[@NO,@NO];
-    NSArray *canEdits3 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO];
-    NSArray *canEdits4 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO];
+    if (self.isMatchWithdrew) {
+        //撮合系统金额列表
+        NSUInteger lineCount = self.matchWithdrewAmountList.count / 3;
+        CGFloat matchWithdrewAmountH = 32 * lineCount + 16 + 8 * (lineCount - 1);
+        heights1 = @[@205.0,@(matchWithdrewAmountH)];
+        if (lineCount > 1) {
+            heights3 = @[@15.0,@44.0,@44.0,@44.0,@100.0];
+            heights4 = @[@15.0,@44.0,@44,@44,@44.0,@46.0,@240.0];
+        }
+    }
+    
+    NSArray *canEdits1 = @[@NO,@YES];
+    NSArray *canEdits3 = @[@NO,@NO,@NO,@(withdrawPwdCanEdits),@NO];
+    NSArray *canEdits4 = @[@NO,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO];
     
     NSArray *values1 = @[@"",@""];
     NSArray *values3 = @[@"",@"",@"",@"",@""];

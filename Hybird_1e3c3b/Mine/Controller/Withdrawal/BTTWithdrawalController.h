@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * usdtLimit;
 @property (nonatomic, copy) NSString * iChiPayLimit;
 @property (nonatomic, copy) NSString * cnyLimit;
+@property (nonatomic, assign) BOOL isMatchWithdrew; //是否为撮合取款
+@property (nonatomic, strong) NSArray *matchWithdrewAmountList;
 @end
 
 NS_ASSUME_NONNULL_END

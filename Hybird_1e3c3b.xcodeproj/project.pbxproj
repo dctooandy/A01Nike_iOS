@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		046287F827BA52E1008BE005 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD9CD632167107A00685B43 /* libboringssl_simulator.a */; };
 		04C48B2527BB6BE900623F5A /* CNMChannelTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C48B2327BB6BE900623F5A /* CNMChannelTCell.m */; };
 		04C48B2627BB6BE900623F5A /* CNMChannelTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C48B2427BB6BE900623F5A /* CNMChannelTCell.xib */; };
 		04C48B2827BB6C4200623F5A /* MatchPay.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04C48B2727BB6C4200623F5A /* MatchPay.xcassets */; };
@@ -755,6 +754,15 @@
 		D3B47D5923B70A5500D37C7F /* app.zip in Resources */ = {isa = PBXBuildFile; fileRef = D3B47D5823B70A5400D37C7F /* app.zip */; };
 		D3C64B142477CFEE0063B0D7 /* OneKeyPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = D3C64B132477CFEE0063B0D7 /* OneKeyPhoneController.m */; };
 		D51AD19F21B8FEE5008C633A /* CNPayBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */; };
+		D5475B1327BC9AE8007238D2 /* MatchWithdrew.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5475B1227BC9AE8007238D2 /* MatchWithdrew.xcassets */; };
+		D5475B1827BCA474007238D2 /* KYMSelectChannelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5475B1627BCA474007238D2 /* KYMSelectChannelVC.m */; };
+		D5475B1927BCA474007238D2 /* KYMSelectChannelVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5475B1727BCA474007238D2 /* KYMSelectChannelVC.xib */; };
+		D5475B1E27BCB201007238D2 /* KYMSelectChannelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D5475B1C27BCB201007238D2 /* KYMSelectChannelCell.m */; };
+		D5475B1F27BCB201007238D2 /* KYMSelectChannelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5475B1D27BCB201007238D2 /* KYMSelectChannelCell.xib */; };
+		D5475B2327BD3844007238D2 /* KYMWithdrewAmountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D5475B2127BD3844007238D2 /* KYMWithdrewAmountCell.m */; };
+		D5475B2427BD3844007238D2 /* KYMWithdrewAmountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5475B2227BD3844007238D2 /* KYMWithdrewAmountCell.xib */; };
+		D5475B2827BDE784007238D2 /* KYMWithdrewAmountListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D5475B2627BDE784007238D2 /* KYMWithdrewAmountListCell.m */; };
+		D5475B2927BDE784007238D2 /* KYMWithdrewAmountListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5475B2727BDE784007238D2 /* KYMWithdrewAmountListCell.xib */; };
 		D599251421AE5AF6001E885A /* CNPayNormalTF.m in Sources */ = {isa = PBXBuildFile; fileRef = D599251321AE5AF6001E885A /* CNPayNormalTF.m */; };
 		D599251821AE6719001E885A /* CNPayCardStep2VC.m in Sources */ = {isa = PBXBuildFile; fileRef = D599251621AE6719001E885A /* CNPayCardStep2VC.m */; };
 		D599251921AE6719001E885A /* CNPayCardStep2VC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D599251721AE6719001E885A /* CNPayCardStep2VC.xib */; };
@@ -2146,6 +2154,19 @@
 		D3C64B132477CFEE0063B0D7 /* OneKeyPhoneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneKeyPhoneController.m; sourceTree = "<group>"; };
 		D51AD19D21B8FEE5008C633A /* CNPayBaseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayBaseView.h; sourceTree = "<group>"; };
 		D51AD19E21B8FEE5008C633A /* CNPayBaseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayBaseView.m; sourceTree = "<group>"; };
+		D5475B1227BC9AE8007238D2 /* MatchWithdrew.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MatchWithdrew.xcassets; sourceTree = "<group>"; };
+		D5475B1527BCA474007238D2 /* KYMSelectChannelVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMSelectChannelVC.h; sourceTree = "<group>"; };
+		D5475B1627BCA474007238D2 /* KYMSelectChannelVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMSelectChannelVC.m; sourceTree = "<group>"; };
+		D5475B1727BCA474007238D2 /* KYMSelectChannelVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KYMSelectChannelVC.xib; sourceTree = "<group>"; };
+		D5475B1B27BCB201007238D2 /* KYMSelectChannelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMSelectChannelCell.h; sourceTree = "<group>"; };
+		D5475B1C27BCB201007238D2 /* KYMSelectChannelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMSelectChannelCell.m; sourceTree = "<group>"; };
+		D5475B1D27BCB201007238D2 /* KYMSelectChannelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KYMSelectChannelCell.xib; sourceTree = "<group>"; };
+		D5475B2027BD3844007238D2 /* KYMWithdrewAmountCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMWithdrewAmountCell.h; sourceTree = "<group>"; };
+		D5475B2127BD3844007238D2 /* KYMWithdrewAmountCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMWithdrewAmountCell.m; sourceTree = "<group>"; };
+		D5475B2227BD3844007238D2 /* KYMWithdrewAmountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KYMWithdrewAmountCell.xib; sourceTree = "<group>"; };
+		D5475B2527BDE784007238D2 /* KYMWithdrewAmountListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMWithdrewAmountListCell.h; sourceTree = "<group>"; };
+		D5475B2627BDE784007238D2 /* KYMWithdrewAmountListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMWithdrewAmountListCell.m; sourceTree = "<group>"; };
+		D5475B2727BDE784007238D2 /* KYMWithdrewAmountListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KYMWithdrewAmountListCell.xib; sourceTree = "<group>"; };
 		D599251221AE5AF6001E885A /* CNPayNormalTF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayNormalTF.h; sourceTree = "<group>"; };
 		D599251321AE5AF6001E885A /* CNPayNormalTF.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayNormalTF.m; sourceTree = "<group>"; };
 		D599251521AE6719001E885A /* CNPayCardStep2VC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayCardStep2VC.h; sourceTree = "<group>"; };
@@ -2302,7 +2323,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				046287F827BA52E1008BE005 /* libboringssl_simulator.a in Frameworks */,
 				3AD9CF04216C425200685B43 /* CoreTelephony.framework in Frameworks */,
 				3AD9CEE921675A9B00685B43 /* libresolv.tbd in Frameworks */,
 				3AD9CE312167107B00685B43 /* libpjsua-arm-apple-darwin9.a in Frameworks */,
@@ -4822,6 +4842,42 @@
 			path = VC/USDTPay;
 			sourceTree = "<group>";
 		};
+		D5475B1127BC9A9E007238D2 /* MatchWithdrew */ = {
+			isa = PBXGroup;
+			children = (
+				D5475B1A27BCB1D3007238D2 /* View */,
+				D5475B1427BC9AF1007238D2 /* VC */,
+				D5475B1227BC9AE8007238D2 /* MatchWithdrew.xcassets */,
+			);
+			path = MatchWithdrew;
+			sourceTree = "<group>";
+		};
+		D5475B1427BC9AF1007238D2 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				D5475B1527BCA474007238D2 /* KYMSelectChannelVC.h */,
+				D5475B1627BCA474007238D2 /* KYMSelectChannelVC.m */,
+				D5475B1727BCA474007238D2 /* KYMSelectChannelVC.xib */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		D5475B1A27BCB1D3007238D2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D5475B1B27BCB201007238D2 /* KYMSelectChannelCell.h */,
+				D5475B1C27BCB201007238D2 /* KYMSelectChannelCell.m */,
+				D5475B1D27BCB201007238D2 /* KYMSelectChannelCell.xib */,
+				D5475B2027BD3844007238D2 /* KYMWithdrewAmountCell.h */,
+				D5475B2127BD3844007238D2 /* KYMWithdrewAmountCell.m */,
+				D5475B2227BD3844007238D2 /* KYMWithdrewAmountCell.xib */,
+				D5475B2527BDE784007238D2 /* KYMWithdrewAmountListCell.h */,
+				D5475B2627BDE784007238D2 /* KYMWithdrewAmountListCell.m */,
+				D5475B2727BDE784007238D2 /* KYMWithdrewAmountListCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D5C501BB21B7CEDC00C6DA02 /* BRPickerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -4879,6 +4935,7 @@
 		D5DBEA8B21ABB774008AF629 /* Payment */ = {
 			isa = PBXGroup;
 			children = (
+				D5475B1127BC9A9E007238D2 /* MatchWithdrew */,
 				04C48B1E27BB5A5200623F5A /* MatchPay */,
 				D35BF23623B451330085D6A1 /* USDTPay */,
 				D5DBEAD021ABB774008AF629 /* Model */,
@@ -5320,6 +5377,7 @@
 				3A685B90226DAAB900A8F59D /* BTTRegisterNinameNormalCell.xib in Resources */,
 				416D787A26C3D3B400CB9E6D /* BTTCantBindCardPopView.xib in Resources */,
 				3AAE8221219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.xib in Resources */,
+				D5475B2427BD3844007238D2 /* KYMWithdrewAmountCell.xib in Resources */,
 				3A514E492186FCE800B83881 /* BTTXimaFooterCell.xib in Resources */,
 				D599252621AFCFEE001E885A /* CNPayBankView.xib in Resources */,
 				3A8F513B215F74D00069D1B3 /* LaunchScreen.storyboard in Resources */,
@@ -5420,6 +5478,7 @@
 				4196BEF1255BC21B00F41EED /* BTTWithdrawToUsdtPromoPop.xib in Resources */,
 				4135C715266F736900C3A9E9 /* BTTLiCaiInRecordCell.xib in Resources */,
 				3AAE821F219A738B003EC8B0 /* BTTLoginCell.xib in Resources */,
+				D5475B2927BDE784007238D2 /* KYMWithdrewAmountListCell.xib in Resources */,
 				4184DE0C251B32CE00D433D4 /* BTTPromoRecordCell.xib in Resources */,
 				3A289500237BE70C008EB579 /* BTTLoginOrRegisterBtsView.xib in Resources */,
 				4135A7142639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.xib in Resources */,
@@ -5483,6 +5542,7 @@
 				3AE1EB0F218047050073A32D /* BTTCardModifyCell.xib in Resources */,
 				76F863DE26E0B65500320B60 /* VIPActivitiesImageCell.xib in Resources */,
 				3AD9CF73216F3D6800685B43 /* BTTHomePageAppsCell.xib in Resources */,
+				D5475B1327BC9AE8007238D2 /* MatchWithdrew.xcassets in Resources */,
 				D5C5019521B6681F00C6DA02 /* CNPayDepositTipView.xib in Resources */,
 				3AD9CF5C216F1A4400685B43 /* BTTHomePageADCell.xib in Resources */,
 				D599252B21AFF23B001E885A /* CNPayVC.xib in Resources */,
@@ -5506,8 +5566,10 @@
 				411DE803261AFC190076BCE2 /* BTTUnBindingHeaderCell.xib in Resources */,
 				3A49DFA12179DA0D00FEFBDA /* BTTBindingMobileTwoCell.xib in Resources */,
 				3A14CC60237A4B56009711CF /* BTTRealPersonGameCell.xib in Resources */,
+				D5475B1927BCA474007238D2 /* KYMSelectChannelVC.xib in Resources */,
 				76756BB5269454690065F99B /* BTTUserForzenBGView.xib in Resources */,
 				D5DBEB0221ABB774008AF629 /* CNPayDepositStep1VC.xib in Resources */,
+				D5475B1F27BCB201007238D2 /* KYMSelectChannelCell.xib in Resources */,
 				3A3DF1E7237BA445006129F6 /* BTTHotPromotionCell.xib in Resources */,
 				3AE1EAAC217D65330073A32D /* BTTAccountBlanceHiddenCell.xib in Resources */,
 				4184DE03251B32A100D433D4 /* BTTWithdrawHeaderTwoCell.xib in Resources */,
@@ -5608,6 +5670,7 @@
 				D5DBEB2721ABB774008AF629 /* CNPayChannelModel.m in Sources */,
 				3A514E3E2186E24000B83881 /* BTTThisWeekTotalCell.m in Sources */,
 				7629D7E9266C933E00CF758C /* BTTDragonBoatAutoPopView.m in Sources */,
+				D5475B1E27BCB201007238D2 /* KYMSelectChannelCell.m in Sources */,
 				3A9F31A2223F69C600B92693 /* BTTCompleteMeterialController.m in Sources */,
 				3A8F519F215F77EC0069D1B3 /* UIView+Frame.m in Sources */,
 				3A6D58FE2390E5F900C658FC /* BTTShareNoticeView.m in Sources */,
@@ -5691,6 +5754,7 @@
 				3A5F7A7A21A6C6BB00128E8B /* BTTXimaNoDataCell.m in Sources */,
 				3A5B0283234F233500D8828B /* BTTXimaRecordModel.m in Sources */,
 				3AB0686921A4F29B00072FB7 /* BTTPublicBtnCell.m in Sources */,
+				D5475B1827BCA474007238D2 /* KYMSelectChannelVC.m in Sources */,
 				3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */,
 				76F8642826E87D5900320B60 /* BTTVIPHistoryImageCell.m in Sources */,
 				3AAE81FA219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m in Sources */,
@@ -5711,6 +5775,7 @@
 				76756F8726A6C5790065F99B /* BTTDefaultPopView.m in Sources */,
 				D3C64B142477CFEE0063B0D7 /* OneKeyPhoneController.m in Sources */,
 				415CA1E224E53AB5005E0E9F /* OTCInsideCell.m in Sources */,
+				D5475B2327BD3844007238D2 /* KYMWithdrewAmountCell.m in Sources */,
 				3A929423219C3B7500764E7E /* BTTRegisterSuccessOneCell.m in Sources */,
 				3A8D6E9921633D3E000530DF /* PushManager.m in Sources */,
 				3A8F51A1215F77EC0069D1B3 /* UIColor+Util.m in Sources */,
@@ -5976,6 +6041,7 @@
 				76F863BA26E0B64100320B60 /* UserRightTableViewCell.m in Sources */,
 				3A9E4C6B21A2530000E7D8C0 /* BTTModifyEmailController.m in Sources */,
 				3AAFF8BB21DE03ED00F875B1 /* BTTSaveMoneySuccessController.m in Sources */,
+				D5475B2827BDE784007238D2 /* KYMWithdrewAmountListCell.m in Sources */,
 				3ADD23F02179B97A00FA959A /* SDCollectionViewCell.m in Sources */,
 				D3A9A72424173409007F672A /* BTTWithDrawProtocolView.m in Sources */,
 				3AC3FFA1219AB8CC008AECCB /* BTTAnimationPopView.m in Sources */,

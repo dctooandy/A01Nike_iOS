@@ -29,19 +29,24 @@
 #import "IVRsaEncryptWrapper.h"
 #import "BTTPasswordChangeController.h"
 #import "BTTActionSheet.h"
+#import "KYMWithdrewAmountCell.h"
 
-@interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate>
+@interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate,KYMWithdrewAmountCellDelegate>
 @property(nonatomic, copy)NSString *amount;
 @property(nonatomic, copy)NSString *password;
 @property(nonatomic, copy)NSString *usdtAmount;
 @property(nonatomic, strong) UITextField *usdtField;
 @property (nonatomic, copy) NSString *selectedProtocol;
+@property(nonatomic, strong) NSIndexPath *selectedMatchIndexPath;
 @end
 
 @implementation BTTWithdrawalController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isMatchWithdrew = YES;
+    _matchWithdrewAmountList = @[@(100.77),@(100),@(100.01),@(310.11),@(101.77),@(210.77),@(100.77)];
+//    _matchWithdrewAmountList = @[@(100.77),@(100),@(100.01)];
     self.title = @"取款";
     self.selectIndex = 0;
     self.isSellUsdt = NO;
@@ -95,7 +100,7 @@
     [self.collectionView registerClass:[BTTWithDrawUSDTConfirmCell class] forCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell"];
     [self.collectionView registerClass:[BTTWithDrawProtocolView class] forCellWithReuseIdentifier:@"BTTWithDrawProtocolView"];
     [self.collectionView registerClass:[BTTBitollWithDrawCell class] forCellWithReuseIdentifier:@"BTTBitollWithDrawCell"];
-    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"KYMWithdrewAmountCell" bundle:nil] forCellWithReuseIdentifier:@"KYMWithdrewAmountCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -129,10 +134,20 @@
         };
         return cell;
     }
-    if (indexPath.row == 1) {
+    
+    //撮合取款
+    if (self.isMatchWithdrew && indexPath.row == 1) {
+        KYMWithdrewAmountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KYMWithdrewAmountCell" forIndexPath:indexPath];
+        cell.amountArray = self.matchWithdrewAmountList;
+        cell.delegate = self;
+        return cell;
+    }
+    
+    if (indexPath.row == 2) {
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
     }
+    
     if (([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"])&&indexPath.row==self.sheetDatas.count-2) {
         BTTWithDrawUSDTConfirmCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell" forIndexPath:indexPath];
         [cell setCellRateWithRate:self.usdtRate];
@@ -281,7 +296,18 @@
 - (CGFloat)waterflowLayout:(BTTCollectionViewFlowlayout *)waterflowLayout collectionView:(UICollectionView *)collectionView linesMarginForItemAtIndexPath:(NSIndexPath *)indexPath {
     return 0;
 }
+#pragma mark - KYMWithdrewAmountCellDelegate
 
+- (void)matchWithdrewAmountCellDidSelected:(KYMWithdrewAmountCell *)cell indexPath:(NSIndexPath *)indexPath
+{
+    self.amount = [NSString stringWithFormat:@"%@",cell.amountArray[indexPath.row]];
+    self.selectedMatchIndexPath = indexPath;
+    if ([PublicMethod isValidateWithdrawPwdNumber:self.password]) {
+        [self getSubmitBtn].enabled = true;
+    } else {
+        [self getSubmitBtn].enabled = false;
+    }
+}
 - (void)setupElements {
     if (self.elementsHight.count) {
         [self.elementsHight removeAllObjects];
