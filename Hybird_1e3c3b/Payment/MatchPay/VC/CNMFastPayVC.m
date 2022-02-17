@@ -8,6 +8,7 @@
 
 #import "CNMFastPayVC.h"
 #import "CNMAmountSelectCCell.h"
+#import "CNMFastPayStatusVC.h"
 
 #define kCNMAmountSelectCCell  @"CNMAmountSelectCCell"
 
@@ -44,11 +45,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
-    
-    self.amountList = @[@"500", @"1000", @"2000", @"5000", @"10000", @"50000"];
-    self.recommendAmountList = @[@"2000", @"5000"];
-    self.collectionViewH.constant = 80 * ceilf(self.amountList.count/3.0);
-    [self setViewHeight:(450 + self.collectionViewH.constant) fullScreen:NO];
 }
     
 - (void)setupUI {
@@ -60,10 +56,25 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     [self.collectionView registerNib:[UINib nibWithNibName:kCNMAmountSelectCCell bundle:nil] forCellWithReuseIdentifier:kCNMAmountSelectCCell];
+    
+    // 数据设置
+    self.allowUseCount.text = self.paymentModel.remainDepositTimes;
+    self.allowCancelCount.text = self.paymentModel.remainCancelDepositTimes;
+    
+    self.amountList = @[@"500", @"1000", @"2000", @"5000", @"10000", @"50000"];
+    self.recommendAmountList = @[@"2000", @"5000"];
+    self.collectionViewH.constant = 80 * ceilf(self.amountList.count/3.0);
+    [self setViewHeight:(450 + self.collectionViewH.constant) fullScreen:NO];
 }
 
 - (IBAction)depositAction:(UIButton *)sender {
     NSLog(@"====%@", self.selectAmount);
+    //提交订单
+    
+    
+    // 成功跳转
+    CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
+    [self pushViewController:statusVC];
 }
 
 - (IBAction)recommendAction:(UIButton *)sender {

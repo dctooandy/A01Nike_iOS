@@ -146,6 +146,7 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     dic[@"type"] = @"1"; // 存款
     dic[@"merchant"] = @"A01";
+    dic[@"currency"] = @"CNY";
     [IVNetwork requestPostWithUrl:BTTMatchChannelOpen paramters:dic completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
@@ -161,8 +162,8 @@
                     fast.payModel = [CNPaymentModel new];
                     fast.payModel.payType = CNPaymentFast;
                     fast.payModel.amountList = amountList;
-                    fast.payModel.remainDepositTimes = [dic objectForKey:@"remainDepositTimes"];
-                    fast.payModel.remainCancelDepositTimes = [dic objectForKey:@"remainCancelDepositTimes"];
+                    fast.payModel.remainDepositTimes = [[dic objectForKey:@"remainDepositTimes"] stringValue];
+                    fast.payModel.remainCancelDepositTimes = [[dic objectForKey:@"remainCancelDepositTimes"] stringValue];
                     if ([self.bigDataSoure containsObject:self.fastModel]) {
                         [self.bigDataSoure removeObject:self.fastModel];
                     }
@@ -202,7 +203,7 @@
             if ([result.body[@"payTypeList"] isKindOfClass:[NSArray class]]) {
                 
                 // 上面清空数据，需要在添加一次
-                if (![self.bigDataSoure containsObject:self.fastModel]) {
+                if (self.fastModel && ![self.bigDataSoure containsObject:self.fastModel]) {
                     [self.bigDataSoure addObject:self.fastModel];
                 }
                 
