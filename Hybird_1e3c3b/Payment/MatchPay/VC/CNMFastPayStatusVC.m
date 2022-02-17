@@ -15,6 +15,8 @@ typedef NS_ENUM(NSUInteger, CNMPayStatus) {
 };
 
 @interface CNMFastPayStatusVC ()
+
+#pragma mark - 顶部状态试图
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *statusIVs;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *statusLbs;
 @property (nonatomic, assign) CNMPayStatus status;
@@ -32,13 +34,55 @@ typedef NS_ENUM(NSUInteger, CNMPayStatus) {
 @property (weak, nonatomic) IBOutlet UILabel *tip5Lb;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tip5LbH;
 
+#pragma mark - 中间金额视图
+@property (weak, nonatomic) IBOutlet UILabel *amountTitleLb;
+@property (weak, nonatomic) IBOutlet UILabel *amountLb;
+@property (weak, nonatomic) IBOutlet UILabel *amountTipLb;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *amountTipLbH;
+
+#pragma mark - 中间银行卡视图
+@property (weak, nonatomic) IBOutlet UIView *bankView;
+
+
+#pragma mark - 底部提示内容
+@property (weak, nonatomic) IBOutlet UIView *clockView;
+@property (weak, nonatomic) IBOutlet UIView *submitTipView;
+@property (weak, nonatomic) IBOutlet UIView *confirmTipView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *confirmTipViewH;
+
+#pragma mark - 底部按钮组
+@property (weak, nonatomic) IBOutlet UIView *btnView;
+@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+@property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
+@property (weak, nonatomic) IBOutlet UIButton *customerServerBtn;
+
 @end
 
 @implementation CNMFastPayStatusVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setStatusUI:CNMPayStatusPaying];
+    [self setupUI];
+}
+
+- (void)setupUI {
+    self.bankView.layer.borderWidth = 1;
+    self.bankView.layer.borderColor = kHexColor(0x3A3D46).CGColor;
+    self.bankView.layer.cornerRadius = 8;
+    
+    self.clockView.layer.borderWidth = 1;
+    self.clockView.layer.borderColor = kHexColor(0x0994E7).CGColor;
+    self.clockView.layer.cornerRadius = 8;
+    
+    self.cancelBtn.layer.borderWidth = 1;
+    self.cancelBtn.layer.borderColor = kHexColor(0xF2DA0F).CGColor;
+    self.cancelBtn.layer.cornerRadius = 8;
+    
+    self.amountTipLb.hidden = YES;
+    self.amountTipLbH.constant = 0;
+    self.submitTipView.hidden = NO;
+    self.confirmTipView.hidden = YES;
+    self.customerServerBtn.hidden = YES;
 }
 
 - (void)setStatusUI:(CNMPayStatus)status {
@@ -59,6 +103,9 @@ typedef NS_ENUM(NSUInteger, CNMPayStatus) {
             self.tip3Lb.hidden = YES;
             self.tip4Lb.hidden = YES;
             self.tip5Lb.hidden = YES;
+            
+            self.submitTipView.hidden = YES;
+            self.confirmTipView.hidden = NO;
             break;
         case CNMPayStatusSuccess:
             self.headerH.constant = 140;
@@ -70,9 +117,33 @@ typedef NS_ENUM(NSUInteger, CNMPayStatus) {
             self.tip5Lb.textColor = kHexColor(0x818791);
             self.tip5Lb.text = @"您完成了一笔存款";
             self.tip5LbH.constant = 16;
+            
+            self.amountTitleLb.hidden = YES;
+            self.amountTipLb.hidden = NO;
+            self.amountTipLbH.constant = 50;
+            
+            self.submitTipView.hidden = YES;
+            self.confirmTipView.hidden = YES;
+            self.confirmTipViewH.constant = 0;
+            self.btnView.hidden = YES;
+            self.customerServerBtn.hidden = NO;
             break;
         default:
             break;
     }
 }
+
+#pragma mark - 底部按钮组事件
+- (IBAction)cancel:(UIButton *)sender {
+    [self setStatusUI:CNMPayStatusSuccess];
+}
+
+- (IBAction)confirm:(UIButton *)sender {
+    [self setStatusUI:CNMPayStatusConfirm];
+}
+
+- (IBAction)customerServer:(UIButton *)sender {
+}
+
+
 @end
