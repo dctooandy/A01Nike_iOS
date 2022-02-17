@@ -48,11 +48,10 @@
     self.amountList = @[@"500", @"1000", @"2000", @"5000", @"10000", @"50000"];
     self.recommendAmountList = @[@"2000", @"5000"];
     self.collectionViewH.constant = 80 * ceilf(self.amountList.count/3.0);
+    [self setViewHeight:(450 + self.collectionViewH.constant) fullScreen:NO];
 }
     
 - (void)setupUI {
-    [self setViewHeight:650 fullScreen:NO];
-    
     self.buttonView.hidden = YES;
     self.continueBtn.layer.borderWidth = 1;
     self.continueBtn.layer.borderColor = kHexColor(0xF7F952).CGColor;
