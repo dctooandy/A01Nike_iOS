@@ -1,8 +1,8 @@
 //
-//  CNMFastPayVC.h
+//  CNMFastPayStatusVC.h
 //  Hybird_1e3c3b
 //
-//  Created by cean on 2/16/22.
+//  Created by cean on 2/17/22.
 //  Copyright © 2022 BTT. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CNMFastPayVC : CNPayBaseVC
+@interface CNMFastPayStatusVC : CNPayBaseVC
 
 @end
 

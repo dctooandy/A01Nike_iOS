@@ -71,4 +71,8 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 
 @property (nonatomic, assign) NSInteger maxAmount;
 
+/// 金额列表，撮合系统使用
+@property (nonatomic, strong) NSArray *amountList;
+@property (nonatomic, copy) NSString *remainDepositTimes;
+@property (nonatomic, copy) NSString *remainCancelDepositTimes;
 @end

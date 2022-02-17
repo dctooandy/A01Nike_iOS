@@ -19,6 +19,10 @@
 #import "BTTWithdrawToUsdtPromoPop.h"
 #import "BTTMineViewController+Nav.h"
 
+@interface BTTMineViewController ()
+@property (nonatomic, strong) BTTMeMainModel *fastModel;
+@end
+
 @implementation BTTMineViewController (LoadData)
 
 - (void)loadMeAllData {
@@ -113,6 +117,7 @@
             }
             [self loadPersonalPaymentData];
         }
+        [self checkFastChannelOpen];
     }
 }
 
@@ -134,6 +139,39 @@
             }
         }
         [self loadPersonalPaymentData];
+    }];
+}
+
+-(void)checkFastChannelOpen {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    dic[@"type"] = @"1"; // 存款
+    dic[@"merchant"] = @"A01";
+    dic[@"currency"] = @"CNY";
+    [IVNetwork requestPostWithUrl:BTTMatchChannelOpen paramters:dic completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSDictionary *dic = result.body[@"data"];
+            if ([dic isKindOfClass:[NSDictionary class]]) {
+                BOOL open = [[dic objectForKey:@"isAvailable"] boolValue];
+                NSArray *amountList = [dic objectForKey:@"amountList"];
+                if (open) { //&& amountList.count > 0) {
+                    BTTMeMainModel *fast = [BTTMeMainModel new];
+                    fast.name = @"急速转卡";
+                    fast.iconName = @"channel_fastpay";
+                    fast.paymentType = CNPaymentFast;
+                    fast.payModel = [CNPaymentModel new];
+                    fast.payModel.payType = CNPaymentFast;
+                    fast.payModel.amountList = amountList;
+                    fast.payModel.remainDepositTimes = [[dic objectForKey:@"remainDepositTimes"] stringValue];
+                    fast.payModel.remainCancelDepositTimes = [[dic objectForKey:@"remainCancelDepositTimes"] stringValue];
+                    if ([self.bigDataSoure containsObject:self.fastModel]) {
+                        [self.bigDataSoure removeObject:self.fastModel];
+                    }
+                    self.fastModel = fast;
+                    [self.bigDataSoure insertObject:fast atIndex:0];
+                }
+            }
+        }
     }];
 }
 
@@ -164,12 +202,10 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if ([result.body[@"payTypeList"] isKindOfClass:[NSArray class]]) {
                 
-                BTTMeMainModel *mainModel = [BTTMeMainModel new];
-                mainModel.name = @"急速转卡";
-                mainModel.iconName = @"channel_fastpay";
-                mainModel.paymentType = CNPaymentFast;
-                mainModel.payModel = [CNPaymentModel new];
-                [self.bigDataSoure addObject:mainModel];
+                // 上面清空数据，需要在添加一次
+                if (self.fastModel && ![self.bigDataSoure containsObject:self.fastModel]) {
+                    [self.bigDataSoure addObject:self.fastModel];
+                }
                 
                 NSArray *payTypeArray = result.body[@"payTypeList"];
                 for (int i = 0; i < payTypeArray.count; i ++) {
@@ -957,6 +993,14 @@
 
 - (void)setGames:(NSMutableArray *)games {
     objc_setAssociatedObject(self, @selector(games), games, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)setFastModel:(BTTMeMainModel *)fastModel {
+    objc_setAssociatedObject(self, @selector(fastModel), fastModel, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BTTMeMainModel *)fastModel {
+    return objc_getAssociatedObject(self, _cmd);
 }
 
 @end

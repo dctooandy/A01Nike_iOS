@@ -80,11 +80,11 @@
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="channel_recommend" translatesAutoresizingMaskIntoConstraints="NO" id="Ygb-Ob-KjM">
                                             <rect key="frame" x="130.5" y="40" width="56" height="16"/>
                                         </imageView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="44D-tr-qrj" customClass="CNPayOnePixView">
-                                            <rect key="frame" x="0.0" y="116" width="345" height="1"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="44D-tr-qrj">
+                                            <rect key="frame" x="12" y="116" width="321" height="1"/>
+                                            <color key="backgroundColor" red="0.17254901960784313" green="0.1764705882352941" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" priority="750" constant="1" id="Ojt-VK-qn2"/>
+                                                <constraint firstAttribute="height" constant="1" id="Ojt-VK-qn2"/>
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BE2-XQ-ycU">
@@ -105,14 +105,14 @@
                                         <constraint firstAttribute="bottom" secondItem="44D-tr-qrj" secondAttribute="bottom" id="OX1-59-oVg"/>
                                         <constraint firstItem="qLT-o5-5WJ" firstAttribute="leading" secondItem="Vxf-cU-lyv" secondAttribute="leading" constant="10" id="PZE-WZ-sZG"/>
                                         <constraint firstItem="qLT-o5-5WJ" firstAttribute="centerY" secondItem="Vxf-cU-lyv" secondAttribute="centerY" id="Slb-tD-ywb"/>
-                                        <constraint firstItem="44D-tr-qrj" firstAttribute="leading" secondItem="Vxf-cU-lyv" secondAttribute="leading" id="bux-ZG-mC6"/>
+                                        <constraint firstItem="44D-tr-qrj" firstAttribute="leading" secondItem="Vxf-cU-lyv" secondAttribute="leading" constant="12" id="bux-ZG-mC6"/>
                                         <constraint firstAttribute="bottom" secondItem="BE2-XQ-ycU" secondAttribute="bottom" id="ceH-MH-NO0"/>
                                         <constraint firstItem="DY5-FJ-Vmj" firstAttribute="leading" secondItem="bVI-IG-JCM" secondAttribute="trailing" constant="7" id="dRv-uZ-9e1"/>
                                         <constraint firstItem="Ygb-Ob-KjM" firstAttribute="top" secondItem="Uoa-eU-0xF" secondAttribute="top" constant="3" id="kw7-9M-7te"/>
                                         <constraint firstItem="Uoa-eU-0xF" firstAttribute="centerY" secondItem="Vxf-cU-lyv" secondAttribute="centerY" id="lKH-ew-lXM"/>
                                         <constraint firstItem="Ygb-Ob-KjM" firstAttribute="leading" secondItem="Uoa-eU-0xF" secondAttribute="trailing" constant="10" id="mBo-hv-v8t"/>
                                         <constraint firstItem="BE2-XQ-ycU" firstAttribute="top" secondItem="Vxf-cU-lyv" secondAttribute="top" id="ttn-30-P2v"/>
-                                        <constraint firstAttribute="trailing" secondItem="44D-tr-qrj" secondAttribute="trailing" id="vzw-kI-0Wc"/>
+                                        <constraint firstAttribute="trailing" secondItem="44D-tr-qrj" secondAttribute="trailing" constant="12" id="vzw-kI-0Wc"/>
                                         <constraint firstItem="Uoa-eU-0xF" firstAttribute="leading" secondItem="qLT-o5-5WJ" secondAttribute="trailing" constant="7" id="w44-iB-U1X"/>
                                         <constraint firstAttribute="height" constant="117" id="z75-an-yOA"/>
                                     </constraints>

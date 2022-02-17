@@ -158,6 +158,7 @@
             break;
         case CNPaymentFast:{
             CNMFastPayVC *vc = [[CNMFastPayVC alloc] init];
+            vc.paymentModel = payment;
             [viewControllers addObjectsFromArray:@[vc]];
         }
             break;
