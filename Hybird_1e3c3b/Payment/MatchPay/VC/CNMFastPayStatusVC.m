@@ -48,7 +48,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *submitDate;
 /// 确认时间/订单编号公用
 @property (weak, nonatomic) IBOutlet UILabel *confirmDate;
-
 /// 复制内容标签组
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray <UILabel *> *contentLbArray;
 
@@ -65,6 +64,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
 @property (weak, nonatomic) IBOutlet UIButton *customerServerBtn;
 
+#pragma mark - 相册选择
+@property (strong, nonatomic) IBOutlet UIView *pictureView;
+/// 上面一个按钮
+@property (weak, nonatomic) IBOutlet UIButton *pictureBtn;
+@property (weak, nonatomic) IBOutlet UILabel *countLb1;
+/// 下面面按钮组
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *pictureBtnArr;
+@property (weak, nonatomic) IBOutlet UILabel *countLb2;
 @end
 
 @implementation CNMFastPayStatusVC
@@ -166,7 +173,7 @@
     }
 }
 
-#pragma mark - 底部按钮组事件
+#pragma mark - 按钮组事件
 - (IBAction)cancel:(UIButton *)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"取消存款" message:@"老板！如已存款，请不要取消" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *commit = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -197,9 +204,21 @@
     [self showSuccess:@"复制成功"];
 }
 
-
 - (void)goToBack {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+/// 选择相册
+- (IBAction)selectSinglePicture:(UIButton *)sender {
+    if (sender.selected) {
+        sender.selected = NO;
+        return;
+    }
+    
+}
+
+
+- (IBAction)selectPictures:(UIButton *)sender {
 }
 
 
