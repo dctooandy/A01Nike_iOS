@@ -10,19 +10,30 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CNMFastPayStatusVC">
             <connections>
+                <outlet property="accountName" destination="IBN-BR-PRs" id="MR0-9R-AAr"/>
+                <outlet property="accountNo" destination="lMW-eM-nbh" id="Gwk-wc-ycy"/>
                 <outlet property="amountLb" destination="az3-Ng-B4K" id="rxs-Uc-TS1"/>
                 <outlet property="amountTipLb" destination="iVX-5s-52Y" id="Jke-ho-l4y"/>
                 <outlet property="amountTipLbH" destination="D51-Ha-WpG" id="aVD-J6-EKr"/>
                 <outlet property="amountTitleLb" destination="Z8O-Gn-dUw" id="9OO-Fq-bKU"/>
+                <outlet property="bankAmount" destination="cOd-j9-prl" id="QKd-cP-7Ma"/>
+                <outlet property="bankLogo" destination="aN7-ka-cHi" id="7hT-PK-wdS"/>
+                <outlet property="bankName" destination="1F0-JF-YfW" id="Uuo-EZ-lX3"/>
+                <outlet property="bankRow5" destination="thp-sV-fhg" id="ovn-T7-IXD"/>
+                <outlet property="bankRow6" destination="1Au-mN-jqr" id="rVY-U7-uHH"/>
+                <outlet property="bankRow7" destination="GGK-PY-flV" id="vvn-J5-mHr"/>
                 <outlet property="bankView" destination="PoK-fU-Iad" id="beP-Ie-oE7"/>
                 <outlet property="btnView" destination="CZH-wS-Mpe" id="Taw-1I-pcc"/>
                 <outlet property="cancelBtn" destination="Ubp-EN-6Xx" id="bBO-Zs-KGQ"/>
                 <outlet property="clockView" destination="zXz-4k-uYc" id="AM0-ne-iZ9"/>
                 <outlet property="confirmBtn" destination="vYd-ok-Vjf" id="ubN-eH-5MJ"/>
+                <outlet property="confirmDate" destination="6Uw-9K-s3n" id="1vD-jl-fGR"/>
                 <outlet property="confirmTipView" destination="JKa-cG-4MO" id="xQ7-CI-EjZ"/>
                 <outlet property="confirmTipViewH" destination="ZZn-en-qvE" id="GvJ-Gx-0fR"/>
                 <outlet property="customerServerBtn" destination="GK5-gg-Slu" id="i9L-l2-WD2"/>
                 <outlet property="headerH" destination="SuG-ee-S1H" id="Kod-5j-Ew3"/>
+                <outlet property="rowTitle6" destination="RBm-Nc-Ias" id="FuJ-6J-C6r"/>
+                <outlet property="submitDate" destination="IUU-yp-nA9" id="GNp-67-lvh"/>
                 <outlet property="submitTipView" destination="cAU-Fk-PiW" id="TVi-21-yGu"/>
                 <outlet property="tip1Lb" destination="3yX-on-TGu" id="b5O-a4-Uwa"/>
                 <outlet property="tip2Lb" destination="6pR-un-h8i" id="lKj-lQ-EBK"/>
@@ -39,6 +50,11 @@
                 <outletCollection property="statusIVs" destination="HyW-FP-1zg" id="EOV-UT-Bft"/>
                 <outletCollection property="statusLbs" destination="xR7-sy-GXC" id="WDa-GV-ig2"/>
                 <outletCollection property="statusLbs" destination="lZ9-Ce-ajn" id="plN-o8-nta"/>
+                <outletCollection property="contentLbArray" destination="IBN-BR-PRs" id="Pug-hF-bVQ"/>
+                <outletCollection property="contentLbArray" destination="lMW-eM-nbh" id="qJ5-4I-HMT"/>
+                <outletCollection property="contentLbArray" destination="cOd-j9-prl" id="gIz-T4-bJ9"/>
+                <outletCollection property="contentLbArray" destination="IUU-yp-nA9" id="icz-b2-NLE"/>
+                <outletCollection property="contentLbArray" destination="6Uw-9K-s3n" id="aUi-wu-R14"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -313,6 +329,9 @@
                                                             </constraints>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <state key="normal" image="copy"/>
+                                                            <connections>
+                                                                <action selector="copyContent:" destination="-1" eventType="touchUpInside" id="cba-j8-mDI"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -341,13 +360,16 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8nb-xM-wLp">
+                                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8nb-xM-wLp">
                                                             <rect key="frame" x="239.5" y="0.0" width="40" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="hSq-Ra-ZY9"/>
                                                             </constraints>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <state key="normal" image="copy"/>
+                                                            <connections>
+                                                                <action selector="copyContent:" destination="-1" eventType="touchUpInside" id="kky-gk-lYw"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -376,13 +398,16 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYQ-Dh-MqM">
+                                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYQ-Dh-MqM">
                                                             <rect key="frame" x="153.5" y="0.0" width="40" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="ewj-t5-jeg"/>
                                                             </constraints>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <state key="normal" image="copy"/>
+                                                            <connections>
+                                                                <action selector="copyContent:" destination="-1" eventType="touchUpInside" id="qSQ-3N-v5D"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -411,13 +436,16 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="own-Ch-4RG">
+                                                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="own-Ch-4RG">
                                                             <rect key="frame" x="269" y="0.0" width="40" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="zh5-8o-DfK"/>
                                                             </constraints>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <state key="normal" image="copy"/>
+                                                            <connections>
+                                                                <action selector="copyContent:" destination="-1" eventType="touchUpInside" id="7PE-60-47I"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -446,13 +474,16 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Wy-Qx-2ir">
+                                                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Wy-Qx-2ir">
                                                             <rect key="frame" x="269" y="0.0" width="40" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="8d4-61-f9K"/>
                                                             </constraints>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <state key="normal" image="copy"/>
+                                                            <connections>
+                                                                <action selector="copyContent:" destination="-1" eventType="touchUpInside" id="9qA-Wi-4mM"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

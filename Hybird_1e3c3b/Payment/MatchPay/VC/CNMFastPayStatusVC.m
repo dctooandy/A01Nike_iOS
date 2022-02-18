@@ -40,8 +40,24 @@ typedef NS_ENUM(NSUInteger, CNMPayStatus) {
 @property (weak, nonatomic) IBOutlet UILabel *amountTipLb;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *amountTipLbH;
 
-#pragma mark - 中间银行卡视图
+#pragma mark - 中间银行卡视图，一共有7行信息栏
 @property (weak, nonatomic) IBOutlet UIView *bankView;
+@property (weak, nonatomic) IBOutlet UIView *bankRow5;
+@property (weak, nonatomic) IBOutlet UIView *bankRow6;
+@property (weak, nonatomic) IBOutlet UIView *bankRow7;
+@property (weak, nonatomic) IBOutlet UILabel *rowTitle6;
+
+@property (weak, nonatomic) IBOutlet UIImageView *bankLogo;
+@property (weak, nonatomic) IBOutlet UILabel *bankName;
+@property (weak, nonatomic) IBOutlet UILabel *accountName;
+@property (weak, nonatomic) IBOutlet UILabel *accountNo;
+@property (weak, nonatomic) IBOutlet UILabel *bankAmount;
+@property (weak, nonatomic) IBOutlet UILabel *submitDate;
+/// 确认时间/订单编号公用
+@property (weak, nonatomic) IBOutlet UILabel *confirmDate;
+
+/// 复制内容标签组
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray <UILabel *> *contentLbArray;
 
 
 #pragma mark - 底部提示内容
@@ -63,6 +79,7 @@ typedef NS_ENUM(NSUInteger, CNMPayStatus) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
+    [self setStatusUI:CNMPayStatusPaying];
 }
 
 - (void)setupUI {
@@ -77,15 +94,10 @@ typedef NS_ENUM(NSUInteger, CNMPayStatus) {
     self.cancelBtn.layer.borderWidth = 1;
     self.cancelBtn.layer.borderColor = kHexColor(0xF2DA0F).CGColor;
     self.cancelBtn.layer.cornerRadius = 8;
-    
-    self.amountTipLb.hidden = YES;
-    self.amountTipLbH.constant = 0;
-    self.submitTipView.hidden = NO;
-    self.confirmTipView.hidden = YES;
-    self.customerServerBtn.hidden = YES;
 }
 
 - (void)setStatusUI:(CNMPayStatus)status {
+    self.status = status;
     for (int i = 0; i <= status; i++) {
         if (i >= self.statusIVs.count) {
             break;
@@ -98,16 +110,26 @@ typedef NS_ENUM(NSUInteger, CNMPayStatus) {
     
     switch (status) {
         case CNMPayStatusConfirm:
+            self.title = @"待确认到账";
             self.headerH.constant = 140;
             self.tip1Lb.text = @"已等待";
             self.tip3Lb.hidden = YES;
             self.tip4Lb.hidden = YES;
             self.tip5Lb.hidden = YES;
             
+            self.bankRow5.hidden = NO;
+            self.bankRow6.hidden = NO;
+            self.bankRow7.hidden = YES;
+            
             self.submitTipView.hidden = YES;
             self.confirmTipView.hidden = NO;
+            
+            self.btnView.hidden = YES;
+            self.customerServerBtn.hidden = NO;
+            self.customerServerBtn.enabled = YES;
             break;
         case CNMPayStatusSuccess:
+            self.title = @"存款完成";
             self.headerH.constant = 140;
             self.tip1Lb.hidden = YES;
             self.tip2Lb.hidden = YES;
@@ -122,20 +144,47 @@ typedef NS_ENUM(NSUInteger, CNMPayStatus) {
             self.amountTipLb.hidden = NO;
             self.amountTipLbH.constant = 50;
             
+            self.bankRow5.hidden = YES;
+            self.bankRow6.hidden = NO;
+            self.bankRow7.hidden = YES;
+            self.rowTitle6.text = @"订单编号：";
+            
             self.submitTipView.hidden = YES;
             self.confirmTipView.hidden = YES;
             self.confirmTipViewH.constant = 0;
             self.btnView.hidden = YES;
             self.customerServerBtn.hidden = NO;
+            self.customerServerBtn.enabled = YES;
+            [self.customerServerBtn setTitle:@"返回首页" forState:UIControlStateNormal];
             break;
         default:
+            self.title = @"等待存款";
+            self.amountTipLb.hidden = YES;
+            self.amountTipLbH.constant = 0;
+            self.submitTipView.hidden = NO;
+            
+            self.bankRow5.hidden = YES;
+            self.bankRow6.hidden = YES;
+            self.bankRow7.hidden = NO;
+            
+            self.confirmTipView.hidden = YES;
+            self.customerServerBtn.hidden = YES;
             break;
     }
 }
 
 #pragma mark - 底部按钮组事件
 - (IBAction)cancel:(UIButton *)sender {
-    [self setStatusUI:CNMPayStatusSuccess];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"取消存款" message:@"老板！如已存款，请不要取消" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *commit = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alert addAction:commit];
+    [alert addAction:cancel];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)confirm:(UIButton *)sender {
@@ -143,6 +192,21 @@ typedef NS_ENUM(NSUInteger, CNMPayStatus) {
 }
 
 - (IBAction)customerServer:(UIButton *)sender {
+    if (self.status == CNMPayStatusSuccess) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        return;
+    }
+    [self setStatusUI:CNMPayStatusSuccess];
+}
+
+- (IBAction)copyContent:(UIButton *)sender {
+    [UIPasteboard generalPasteboard].string = self.contentLbArray[sender.tag].text;
+    [self showSuccess:@"复制成功"];
+}
+
+
+- (void)goToBack {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 
