@@ -17,7 +17,7 @@
 #import "IVCheckNetworkWrapper.h"
 #import "IVKUpdateViewController.h"
 #import "IVPublicAPIManager.h"
-
+#import "IVOtherInfoModel.h"
 @implementation AppDelegate (Environment)
 
 /**
@@ -103,8 +103,13 @@
         if ([appVersion compare:result.versionCode options:NSNumericSearch] == NSOrderedDescending && result.versionCode) {
             return;
         }
+        NSString *appDownUrl = result.appDownUrl;
         if (result.flag!=0) {
-            [IVKUpdateViewController showWithUrl:result.appDownUrl content:result.upgradeDesc originVersion:result.versionCode isForce:result.flag==2 isManual:NO];
+            IVOtherInfoModel *infoModel = [[IVOtherInfoModel alloc] init];
+            if (infoModel.agentId.length != 0) {
+                [appDownUrl stringByAppendingFormat:@"&agentId=%@",infoModel.agentId];
+            }
+            [IVKUpdateViewController showWithUrl:appDownUrl content:result.upgradeDesc originVersion:result.versionCode isForce:result.flag==2 isManual:NO];
         }
     }];
 }
