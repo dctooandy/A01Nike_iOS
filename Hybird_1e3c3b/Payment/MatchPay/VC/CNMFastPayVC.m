@@ -86,6 +86,7 @@
     
     // 成功跳转
     CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
+    statusVC.status = CNMPayStatusPaying;
     [self pushViewController:statusVC];
 }
 

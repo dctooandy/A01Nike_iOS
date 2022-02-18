@@ -7,19 +7,12 @@
 //
 
 #import "CNMFastPayStatusVC.h"
-typedef NS_ENUM(NSUInteger, CNMPayStatus) {
-    CNMPayStatusSubmit,  //已提交
-    CNMPayStatusPaying,  //等待支付
-    CNMPayStatusConfirm, //已确认
-    CNMPayStatusSuccess  //已完成
-};
 
 @interface CNMFastPayStatusVC ()
 
 #pragma mark - 顶部状态试图
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *statusIVs;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *statusLbs;
-@property (nonatomic, assign) CNMPayStatus status;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerH;
 /// 时间前面
@@ -79,7 +72,7 @@ typedef NS_ENUM(NSUInteger, CNMPayStatus) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
-    [self setStatusUI:CNMPayStatusPaying];
+    [self setStatusUI:self.status];
 }
 
 - (void)setupUI {
