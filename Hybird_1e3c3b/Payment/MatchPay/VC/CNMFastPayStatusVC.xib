@@ -34,6 +34,7 @@
                 <outlet property="countLb2" destination="cGS-FU-dDo" id="0HL-J1-91e"/>
                 <outlet property="customerServerBtn" destination="GK5-gg-Slu" id="i9L-l2-WD2"/>
                 <outlet property="headerH" destination="SuG-ee-S1H" id="Kod-5j-Ew3"/>
+                <outlet property="midView" destination="hwi-1K-OGi" id="zJl-U2-ROB"/>
                 <outlet property="pictureBtn" destination="T0l-eS-QII" id="hma-fV-YNh"/>
                 <outlet property="pictureView" destination="fvc-fh-grn" id="Ur3-Cj-hNf"/>
                 <outlet property="rowTitle6" destination="RBm-Nc-Ias" id="FuJ-6J-C6r"/>
@@ -73,7 +74,7 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S4m-2v-Fqf">
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGU-FP-2gG">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGU-FP-2gG" userLabel="HeaderView">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="185"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="0ca-sO-NAi">
@@ -220,7 +221,7 @@
                                 <constraint firstItem="6Ay-NR-gzG" firstAttribute="leading" secondItem="AGU-FP-2gG" secondAttribute="leading" constant="15" id="wZe-3R-dLi"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwi-1K-OGi">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwi-1K-OGi" userLabel="MiddleView">
                             <rect key="frame" x="0.0" y="185" width="414" height="789.5"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="存款金额" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8O-Gn-dUw">
@@ -645,7 +646,7 @@
                                 <constraint firstItem="xrg-02-VTx" firstAttribute="top" secondItem="hwi-1K-OGi" secondAttribute="top" constant="28" id="yvX-8Y-zCE"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZH-wS-Mpe">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CZH-wS-Mpe" userLabel="BottomView">
                             <rect key="frame" x="0.0" y="974.5" width="414" height="70"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ubp-EN-6Xx">

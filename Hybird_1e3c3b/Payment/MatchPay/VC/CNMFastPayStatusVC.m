@@ -7,6 +7,7 @@
 //
 
 #import "CNMFastPayStatusVC.h"
+#import <ZLPhotoBrowser/ZLPhotoBrowser.h>
 
 @interface CNMFastPayStatusVC ()
 
@@ -65,6 +66,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *customerServerBtn;
 
 #pragma mark - 相册选择
+@property (weak, nonatomic) IBOutlet UIView *midView;
 @property (strong, nonatomic) IBOutlet UIView *pictureView;
 /// 上面一个按钮
 @property (weak, nonatomic) IBOutlet UIButton *pictureBtn;
@@ -72,6 +74,8 @@
 /// 下面面按钮组
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *pictureBtnArr;
 @property (weak, nonatomic) IBOutlet UILabel *countLb2;
+
+@property (nonatomic, strong) ZLPhotoActionSheet *photoSheet;
 @end
 
 @implementation CNMFastPayStatusVC
@@ -188,7 +192,14 @@
 }
 
 - (IBAction)confirm:(UIButton *)sender {
-    [self setStatusUI:CNMPayStatusConfirm];
+    if (self.pictureView.superview) {
+        [self setStatusUI:CNMPayStatusConfirm];
+        [self.pictureView removeFromSuperview];
+        return;
+    }
+    self.pictureView.frame = self.midView.bounds;
+    [self.midView addSubview:self.pictureView];
+    sender.enabled = NO;
 }
 
 - (IBAction)customerServer:(UIButton *)sender {
@@ -208,18 +219,38 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-/// 选择相册
+#pragma mark - 选择相册
+
 - (IBAction)selectSinglePicture:(UIButton *)sender {
-    if (sender.selected) {
-        sender.selected = NO;
-        return;
-    }
-    
+    self.photoSheet.configuration.maxSelectCount = 1;
+    self.photoSheet.configuration.maxPreviewCount = 1;
+    __weak typeof(sender) weakSender = sender;
+    self.photoSheet.selectImageBlock = ^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, BOOL isOriginal) {
+        [weakSender setBackgroundImage:images.firstObject forState:UIControlStateSelected];
+        weakSender.selected = YES;
+    };
+    [self.photoSheet showPreviewAnimated:YES];
 }
 
 
 - (IBAction)selectPictures:(UIButton *)sender {
+    if (sender.selected) {
+        //删除图片
+        
+        return;
+    }
 }
 
+- (ZLPhotoActionSheet *)photoSheet {
+    if (!_photoSheet) {
+        [ZLPhotoConfiguration defaultPhotoConfiguration].allowSelectImage = YES;
+        [ZLPhotoConfiguration defaultPhotoConfiguration].allowSelectVideo = NO;
+        [ZLPhotoConfiguration defaultPhotoConfiguration].allowTakePhotoInLibrary = NO;
+        [ZLPhotoConfiguration defaultPhotoConfiguration].allowEditImage = YES;
+        _photoSheet = [[ZLPhotoActionSheet alloc] init];
+        _photoSheet.sender = self;
+    }
+    return _photoSheet;
+}
 
 @end
