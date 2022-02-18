@@ -8,7 +8,7 @@
 
 #import "BTTHomePageHeaderView.h"
 #import "AppInitializeConfig.h"
-#import "UIImage+GIF.h"
+#import <UIImage+GIF.h>
 #import "AppInitializeConfig.h"
 #import "GradientImage.h"
 
@@ -132,7 +132,7 @@
                         NSString *path = [[NSBundle mainBundle] pathForResource:pathStr ofType:@"gif"];
                         NSData *data = [NSData dataWithContentsOfFile:path];
                         UIImageView * img = [[UIImageView alloc] init];
-                        img.image = [UIImage sd_animatedGIFWithData:data];
+                        img.image = [UIImage sd_imageWithGIFData:data];
                         [self addSubview:img];
                         [img mas_makeConstraints:^(MASConstraintMaker *make) {
                             make.bottom.right.equalTo(self);
