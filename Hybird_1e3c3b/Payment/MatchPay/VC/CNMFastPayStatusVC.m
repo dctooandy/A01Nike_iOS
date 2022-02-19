@@ -247,8 +247,8 @@
         [weakSender setBackgroundImage:images.firstObject forState:UIControlStateSelected];
         weakSender.selected = YES;
         weakSelf.deleteBtn.hidden = NO;
-        weakSelf.confirmBtn.enabled = YES;
         [weakSelf.pictureArr1 addObject:images.firstObject];
+        [weakSelf checkConfirmBtnEnable];
     };
     [self.photoSheet showPhotoLibrary];
 }
@@ -309,6 +309,8 @@
 }
 
 - (void)checkConfirmBtnEnable {
+    self.countLb1.text = [NSString stringWithFormat:@"%ld/1", self.pictureArr1.count];
+    self.countLb2.text = [NSString stringWithFormat:@"%ld/4", self.pictureArr2.count];
     self.confirmBtn.enabled = (self.pictureArr1.count + self.pictureArr2.count) > 0;
 }
 
