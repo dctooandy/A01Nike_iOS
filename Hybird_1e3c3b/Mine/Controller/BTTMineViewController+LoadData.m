@@ -161,7 +161,7 @@
                     fast.paymentType = CNPaymentFast;
                     fast.payModel = [CNPaymentModel new];
                     fast.payModel.payType = CNPaymentFast;
-                    fast.payModel.amountList = amountList;
+                    fast.payModel.amountList = [NSArray yy_modelArrayWithClass:[CNWAmountListModel class] json:amountList];
                     fast.payModel.remainDepositTimes = [[dic objectForKey:@"remainDepositTimes"] stringValue];
                     fast.payModel.remainCancelDepositTimes = [[dic objectForKey:@"remainCancelDepositTimes"] stringValue];
                     if ([self.bigDataSoure containsObject:self.fastModel]) {

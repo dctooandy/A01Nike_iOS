@@ -46,6 +46,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.currentSelectedIndex = indexPath.row;
     !_finish ?: _finish(indexPath.row);
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - OverWrite

@@ -9,6 +9,7 @@
 #import "CNMFastPayVC.h"
 #import "CNMAmountSelectCCell.h"
 #import "CNMFastPayStatusVC.h"
+#import "BTTMeMainModel.h"
 
 #define kCNMAmountSelectCCell  @"CNMAmountSelectCCell"
 
@@ -61,8 +62,19 @@
     self.allowUseCount.text = self.paymentModel.remainDepositTimes;
     self.allowCancelCount.text = self.paymentModel.remainCancelDepositTimes;
     
-    self.amountList = @[@"500", @"1000", @"2000", @"5000", @"10000", @"50000"];
-    self.recommendAmountList = @[@"2000", @"5000"];
+    self.amountList = [self.paymentModel.amountList sortedArrayUsingComparator:^NSComparisonResult(CNWAmountListModel * obj1, CNWAmountListModel * obj2) {
+        if (obj1.amount.floatValue < obj2.amount.floatValue) {
+            return NSOrderedAscending;
+        }
+        return NSOrderedDescending;
+    }];
+    NSMutableArray *temArr = [NSMutableArray array];
+    for (CNWAmountListModel *model in self.amountList) {
+        if (model.isRecommend) {
+            [temArr addObject:model.amount];
+        }
+    }
+    self.recommendAmountList = temArr.copy;
     self.collectionViewH.constant = 80 * ceilf(self.amountList.count/3.0);
     [self setViewHeight:(450 + self.collectionViewH.constant) fullScreen:NO];
 }
@@ -74,6 +86,7 @@
     
     // 成功跳转
     CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
+    statusVC.status = CNMPayStatusPaying;
     [self pushViewController:statusVC];
 }
 
@@ -89,17 +102,21 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CNMAmountSelectCCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCNMAmountSelectCCell forIndexPath:indexPath];
-    NSString *amount = self.amountList[indexPath.row];
-    cell.amountLb.text = amount;
-    cell.recommendTag.hidden = ![self.recommendAmountList containsObject:amount];
+    CNWAmountListModel *model = self.amountList[indexPath.row];
+    cell.amountLb.text = model.amount;
+    cell.recommendTag.hidden = !model.isRecommend;
     return cell;
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake((collectionView.bounds.size.width-20)/3.0, 70);
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.selectAmount = self.amountList[indexPath.row];
+    CNWAmountListModel *model = self.amountList[indexPath.row];
+    self.selectAmount = model.amount;
     // 判断是否推荐
-    BOOL recommend = [self.recommendAmountList containsObject:self.selectAmount];
-    if (recommend) {
+    if (self.recommendAmountList.count == 0 || model.isRecommend) {
         self.buttonView.hidden = YES;
         self.depositBtn.enabled = YES;
         self.depositBtn.hidden = NO;
@@ -121,7 +138,7 @@
 
 /// 计算合理推荐金额
 - (NSString *)getRecommendAmountFromAmount:(NSString *)amount {
-    if ([self.recommendAmountList containsObject:amount]) {
+    if (self.recommendAmountList.count == 0 || [self.recommendAmountList containsObject:amount]) {
         return amount;
     }
     NSMutableArray *array = [NSMutableArray arrayWithArray:self.recommendAmountList];
