@@ -235,6 +235,7 @@
 - (IBAction)selectSinglePicture:(UIButton *)sender {
     if (sender.selected) {
         //放大图片查看
+        [self showBigImages:self.pictureArr1 index:sender.tag];
         return;
     }
     self.photoSheet.configuration.maxSelectCount = 1;
@@ -255,6 +256,7 @@
 - (IBAction)selectPictures:(UIButton *)sender {
     if (sender.selected) {
         //放大图片查看
+        [self showBigImages:self.pictureArr2 index:sender.tag];
         return;
     }
     NSInteger leftCount = 4 - self.pictureArr2.count;
@@ -272,9 +274,20 @@
 }
 
 /// 放大图片查看
-- (void)showBigImages:(NSArray *)images assets:(NSArray *)assets index:(NSInteger)index {
-//    self.photoSheet.selectImageBlock = nil;
-//    [self.photoSheet previewSelectedPhotos:images assets:assets index:index isOriginal:YES];
+- (void)showBigImages:(NSArray *)images index:(NSInteger)index {
+    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:images.count];
+    for (UIImage *img in images) {
+        [photos addObject:GetDictForPreviewPhoto(img, ZLPreviewPhotoTypeUIImage)];
+    }
+    ZLPhotoActionSheet *sheet = [[ZLPhotoActionSheet alloc] init];
+    sheet.sender = self;
+    sheet.configuration.allowSelectImage = NO;
+    sheet.configuration.allowSelectVideo = NO;
+    sheet.configuration.allowTakePhotoInLibrary = NO;
+    sheet.configuration.allowEditImage = NO;
+    sheet.configuration.navTitleColor = self.view.backgroundColor;
+    sheet.configuration.navBarColor = kHexColor(0x4083E8);
+    [sheet previewPhotos:photos index:index hideToolBar:YES complete:^(NSArray * _Nonnull photos) {}];
 }
 
 - (void)reloadImages {
@@ -326,7 +339,7 @@
         _photoSheet.configuration.allowTakePhotoInLibrary = NO;
         _photoSheet.configuration.allowEditImage = YES;
         _photoSheet.configuration.navTitleColor = self.view.backgroundColor;
-        _photoSheet.configuration.navBarColor = self.view.backgroundColor;
+        _photoSheet.configuration.navBarColor = kHexColor(0x4083E8);
     }
     return _photoSheet;
 }

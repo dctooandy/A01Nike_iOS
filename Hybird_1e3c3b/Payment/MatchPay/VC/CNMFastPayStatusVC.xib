@@ -876,7 +876,7 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_add_icon" translatesAutoresizingMaskIntoConstraints="NO" id="tsA-XQ-dfW">
                                     <rect key="frame" x="17" y="17" width="36" height="36"/>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUf-h6-3FX">
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUf-h6-3FX">
                                     <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                     <connections>
                                         <action selector="selectPictures:" destination="-1" eventType="touchUpInside" id="vcL-iJ-ghF"/>
@@ -921,7 +921,7 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_add_icon" translatesAutoresizingMaskIntoConstraints="NO" id="zJR-6N-qYW">
                                     <rect key="frame" x="17" y="17" width="36" height="36"/>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDf-uy-jkX">
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZDf-uy-jkX">
                                     <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                     <connections>
                                         <action selector="selectPictures:" destination="-1" eventType="touchUpInside" id="E8l-WC-jpo"/>
@@ -966,7 +966,7 @@
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card_add_icon" translatesAutoresizingMaskIntoConstraints="NO" id="34R-uK-2dA">
                                     <rect key="frame" x="17" y="17" width="36" height="36"/>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7W5-EW-LYW">
+                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7W5-EW-LYW">
                                     <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
                                     <connections>
                                         <action selector="selectPictures:" destination="-1" eventType="touchUpInside" id="RK2-Ub-Qls"/>
