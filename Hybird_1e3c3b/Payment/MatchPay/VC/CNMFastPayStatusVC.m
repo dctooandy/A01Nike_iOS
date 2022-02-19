@@ -29,6 +29,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *tip5Lb;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tip5LbH;
 
+///倒计时
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) NSInteger timeInterval;
+
 #pragma mark - 中间金额视图
 @property (weak, nonatomic) IBOutlet UILabel *amountTitleLb;
 @property (weak, nonatomic) IBOutlet UILabel *amountLb;
@@ -85,6 +89,8 @@
 @property (nonatomic, strong) NSMutableArray*pictureArr2;
 
 @property (nonatomic, strong) ZLPhotoActionSheet *photoSheet;
+
+#pragma mark - 数据参数
 @end
 
 @implementation CNMFastPayStatusVC
@@ -95,6 +101,7 @@
     [self setStatusUI:self.status];
     self.pictureArr1 = [NSMutableArray arrayWithCapacity:1];
     self.pictureArr2 = [NSMutableArray arrayWithCapacity:4];
+    self.timeInterval = 65;
 }
 
 - (void)setupUI {
@@ -188,7 +195,16 @@
     }
 }
 
+- (void)timerCounter {
+    self.timeInterval -= 1;
+    if (self.timeInterval == 0) {
+        [self.timer setFireDate:[NSDate distantFuture]];
+    }
+    self.tip2Lb.text = [NSString stringWithFormat:@"%02ld分%02ld秒", self.timeInterval/60, self.timeInterval%60];
+}
+
 #pragma mark - 按钮组事件
+
 - (IBAction)cancel:(UIButton *)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"取消存款" message:@"老板！如已存款，请不要取消" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *commit = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -227,6 +243,8 @@
 }
 
 - (void)goToBack {
+    [self.timer setFireDate:[NSDate distantPast]];
+    return;
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -346,4 +364,18 @@
     return _photoSheet;
 }
 
+#pragma mark - Setter Getter
+
+- (NSTimer *)timer {
+    if (!_timer) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerCounter) userInfo:nil repeats:YES];
+        [_timer setFireDate:[NSDate distantFuture]];
+    }
+    return _timer;
+}
+
+- (void)dealloc {
+    [self.timer invalidate];
+    self.timer = nil;
+}
 @end
