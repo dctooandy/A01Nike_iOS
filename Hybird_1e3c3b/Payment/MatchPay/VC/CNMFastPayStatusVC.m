@@ -8,6 +8,7 @@
 
 #import "CNMFastPayStatusVC.h"
 #import <ZLPhotoBrowser/ZLPhotoBrowser.h>
+#import <ZLPhotoBrowser/ZLShowBigImgViewController.h>
 
 @interface CNMFastPayStatusVC ()
 
@@ -68,12 +69,20 @@
 #pragma mark - 相册选择
 @property (weak, nonatomic) IBOutlet UIView *midView;
 @property (strong, nonatomic) IBOutlet UIView *pictureView;
+
 /// 上面一个按钮
 @property (weak, nonatomic) IBOutlet UIButton *pictureBtn;
+@property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (weak, nonatomic) IBOutlet UILabel *countLb1;
+/// 存放图片
+@property (nonatomic, strong) NSMutableArray*pictureArr1;
+
 /// 下面面按钮组
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *pictureBtnArr;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray <UIButton *> *pictureBtnArr;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray <UIButton *> *deleteBtnArr;
 @property (weak, nonatomic) IBOutlet UILabel *countLb2;
+/// 存放图片
+@property (nonatomic, strong) NSMutableArray*pictureArr2;
 
 @property (nonatomic, strong) ZLPhotoActionSheet *photoSheet;
 @end
@@ -84,6 +93,8 @@
     [super viewDidLoad];
     [self setupUI];
     [self setStatusUI:self.status];
+    self.pictureArr1 = [NSMutableArray arrayWithCapacity:1];
+    self.pictureArr2 = [NSMutableArray arrayWithCapacity:4];
 }
 
 - (void)setupUI {
@@ -130,7 +141,7 @@
             
             self.btnView.hidden = YES;
             self.customerServerBtn.hidden = NO;
-            self.customerServerBtn.enabled = YES;
+            self.customerServerBtn.enabled = NO;
             break;
         case CNMPayStatusSuccess:
             self.title = @"存款完成";
@@ -193,8 +204,8 @@
 
 - (IBAction)confirm:(UIButton *)sender {
     if (self.pictureView.superview) {
-        [self setStatusUI:CNMPayStatusConfirm];
-        [self.pictureView removeFromSuperview];
+        // 上传图片
+        [self uploadImages];
         return;
     }
     self.pictureView.frame = self.midView.bounds;
@@ -222,33 +233,100 @@
 #pragma mark - 选择相册
 
 - (IBAction)selectSinglePicture:(UIButton *)sender {
+    if (sender.selected) {
+        //放大图片查看
+        return;
+    }
     self.photoSheet.configuration.maxSelectCount = 1;
     self.photoSheet.configuration.maxPreviewCount = 1;
+    self.photoSheet.configuration.allowTakePhotoInLibrary = NO;
     __weak typeof(sender) weakSender = sender;
+    __weak typeof(self) weakSelf = self;
     self.photoSheet.selectImageBlock = ^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, BOOL isOriginal) {
         [weakSender setBackgroundImage:images.firstObject forState:UIControlStateSelected];
         weakSender.selected = YES;
+        weakSelf.deleteBtn.hidden = NO;
+        weakSelf.confirmBtn.enabled = YES;
+        [weakSelf.pictureArr1 addObject:images.firstObject];
     };
-    [self.photoSheet showPreviewAnimated:YES];
+    [self.photoSheet showPhotoLibrary];
 }
-
 
 - (IBAction)selectPictures:(UIButton *)sender {
     if (sender.selected) {
-        //删除图片
-        
+        //放大图片查看
         return;
     }
+    NSInteger leftCount = 4 - self.pictureArr2.count;
+    self.photoSheet.configuration.maxSelectCount = leftCount;
+    self.photoSheet.configuration.allowTakePhotoInLibrary = NO;
+    __weak typeof(sender) weakSender = sender;
+    __weak typeof(self) weakSelf = self;
+    self.photoSheet.selectImageBlock = ^(NSArray<UIImage *> * _Nullable images, NSArray<PHAsset *> * _Nonnull assets, BOOL isOriginal) {
+        weakSender.selected = YES;
+        [weakSelf.pictureArr2 addObjectsFromArray:images];
+        //按序加载图片
+        [weakSelf reloadImages];
+    };
+    [self.photoSheet showPhotoLibrary];
+}
+
+/// 放大图片查看
+- (void)showBigImages:(NSArray *)images assets:(NSArray *)assets index:(NSInteger)index {
+//    self.photoSheet.selectImageBlock = nil;
+//    [self.photoSheet previewSelectedPhotos:images assets:assets index:index isOriginal:YES];
+}
+
+- (void)reloadImages {
+    
+    for (UIButton *btn in self.pictureBtnArr) {
+        btn.selected = NO;
+    }
+    
+    for (UIButton *btn in self.deleteBtnArr) {
+        btn.hidden = NO;
+    }
+    
+    for (int i = 0; i < self.pictureArr2.count; i++) {
+        [self.pictureBtnArr[i] setImage:self.pictureArr2[i] forState:UIControlStateSelected];
+        self.pictureBtnArr[i].selected = YES;
+        self.deleteBtnArr[i].hidden = NO;
+    }
+    [self checkConfirmBtnEnable];
+}
+
+- (void)checkConfirmBtnEnable {
+    self.confirmBtn.enabled = (self.pictureArr1.count + self.pictureArr2.count) > 0;
+}
+
+- (IBAction)deleteSinglePicture:(UIButton *)sender {
+    self.pictureBtn.selected = NO;
+    sender.hidden = YES;
+    [self.pictureArr1 removeAllObjects];
+    [self checkConfirmBtnEnable];
+}
+
+- (IBAction)deleteSelectPictures:(UIButton *)sender {
+    [self.pictureArr2 removeObjectAtIndex:sender.tag];
+    [self reloadImages];
+}
+
+/// 图片上传
+- (void)uploadImages {
+    [self setStatusUI:CNMPayStatusConfirm];
+    [self.pictureView removeFromSuperview];
 }
 
 - (ZLPhotoActionSheet *)photoSheet {
     if (!_photoSheet) {
-        [ZLPhotoConfiguration defaultPhotoConfiguration].allowSelectImage = YES;
-        [ZLPhotoConfiguration defaultPhotoConfiguration].allowSelectVideo = NO;
-        [ZLPhotoConfiguration defaultPhotoConfiguration].allowTakePhotoInLibrary = NO;
-        [ZLPhotoConfiguration defaultPhotoConfiguration].allowEditImage = YES;
         _photoSheet = [[ZLPhotoActionSheet alloc] init];
         _photoSheet.sender = self;
+        _photoSheet.configuration.allowSelectImage = YES;
+        _photoSheet.configuration.allowSelectVideo = NO;
+        _photoSheet.configuration.allowTakePhotoInLibrary = NO;
+        _photoSheet.configuration.allowEditImage = YES;
+        _photoSheet.configuration.navTitleColor = self.view.backgroundColor;
+        _photoSheet.configuration.navBarColor = self.view.backgroundColor;
     }
     return _photoSheet;
 }
