@@ -101,7 +101,6 @@
     [self setStatusUI:self.status];
     self.pictureArr1 = [NSMutableArray arrayWithCapacity:1];
     self.pictureArr2 = [NSMutableArray arrayWithCapacity:4];
-    self.timeInterval = 65;
 }
 
 - (void)setupUI {
@@ -197,8 +196,9 @@
 
 - (void)timerCounter {
     self.timeInterval -= 1;
-    if (self.timeInterval == 0) {
+    if (self.timeInterval <= 0) {
         [self.timer setFireDate:[NSDate distantFuture]];
+        self.timeInterval = 0;
     }
     self.tip2Lb.text = [NSString stringWithFormat:@"%02ld分%02ld秒", self.timeInterval/60, self.timeInterval%60];
 }
@@ -244,8 +244,6 @@
 
 - (void)goToBack {
     [self.timer setFireDate:[NSDate distantPast]];
-    return;
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - 选择相册
