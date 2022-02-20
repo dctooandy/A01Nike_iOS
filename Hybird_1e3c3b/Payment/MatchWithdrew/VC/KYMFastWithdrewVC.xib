@@ -16,13 +16,8 @@
                 <outlet property="amountStatusLB2Height" destination="k31-v5-zbT" id="7XS-8l-Rfe"/>
                 <outlet property="amountStatusLB2Top" destination="CJh-Oo-OX2" id="8Vy-Ra-LoM"/>
                 <outlet property="amountViewHeight" destination="Vnd-8a-6FL" id="A1A-fj-Uwp"/>
-                <outlet property="statusItemView" destination="ktq-Br-XMz" id="Y6Z-mh-PtD"/>
-                <outlet property="statusLB2" destination="m20-l2-CcC" id="kNt-qN-JDz"/>
-                <outlet property="statusLB2Width" destination="aUT-1D-oUx" id="1zF-DR-UWy"/>
-                <outlet property="statusLB3" destination="YUj-2l-hIs" id="Anh-7W-bPE"/>
-                <outlet property="statusLB4" destination="YeZ-6W-SUb" id="Tdz-SZ-Mnz"/>
+                <outlet property="statusView" destination="5dP-i4-obw" id="wF7-K0-Smx"/>
                 <outlet property="statusViewHeight" destination="wsy-Ul-g8L" id="Sgq-sV-7U7"/>
-                <outlet property="stautsLB1" destination="Df3-cN-U76" id="NpG-CY-AsY"/>
                 <outlet property="submitBtn" destination="Qk3-xg-nDc" id="5uz-X7-dkU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -38,7 +33,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6y-8H-ejY">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="737"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dP-i4-obw">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dP-i4-obw" customClass="KYMWithdrewStatusView">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="160"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ktq-Br-XMz">
@@ -104,6 +99,14 @@
                                         <constraint firstAttribute="trailing" secondItem="Df3-cN-U76" secondAttribute="trailing" id="tog-bq-zWh"/>
                                         <constraint firstAttribute="height" constant="160" id="wsy-Ul-g8L"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="statusItemView" destination="ktq-Br-XMz" id="hxs-ml-DKo"/>
+                                        <outlet property="statusLB2" destination="m20-l2-CcC" id="Iyk-QA-Dj9"/>
+                                        <outlet property="statusLB2Width" destination="aUT-1D-oUx" id="Aqz-O2-g4c"/>
+                                        <outlet property="statusLB3" destination="YUj-2l-hIs" id="opT-l4-7Ea"/>
+                                        <outlet property="statusLB4" destination="YeZ-6W-SUb" id="kVo-y9-5O5"/>
+                                        <outlet property="stautsLB1" destination="Df3-cN-U76" id="PsO-ms-D9a"/>
+                                    </connections>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpt-LW-6Zl">
                                     <rect key="frame" x="0.0" y="179" width="414" height="134"/>

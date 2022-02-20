@@ -9,13 +9,7 @@
 #import "KYMWithdrewStatusView.h"
 
 @interface KYMWithdrewStatusView ()
-@property (weak, nonatomic) IBOutlet UIView *statusItemView;
-@property (nonatomic, strong) NSArray *statusTitleArray;
-@property (weak, nonatomic) IBOutlet UILabel *stautsLB1;
-@property (weak, nonatomic) IBOutlet UILabel *statusLB2;
-@property (weak, nonatomic) IBOutlet UILabel *statusLB3;
-@property (weak, nonatomic) IBOutlet UILabel *statusLB4;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *statusLB2Width;
+
 @end
 @implementation KYMWithdrewStatusView
 
