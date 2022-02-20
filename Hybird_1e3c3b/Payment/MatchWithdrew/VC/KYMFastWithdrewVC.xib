@@ -10,15 +10,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KYMFastWithdrewVC">
             <connections>
-                <outlet property="amountLB" destination="fB2-rR-qsw" id="FlF-Qj-Ism"/>
-                <outlet property="amountStatusLB1" destination="0yp-WR-vJ2" id="SRq-MG-4fG"/>
-                <outlet property="amountStatusLB2" destination="SoT-zN-HZe" id="FVe-Mo-cHY"/>
-                <outlet property="amountStatusLB2Height" destination="k31-v5-zbT" id="7XS-8l-Rfe"/>
-                <outlet property="amountStatusLB2Top" destination="CJh-Oo-OX2" id="8Vy-Ra-LoM"/>
+                <outlet property="amountView" destination="wpt-LW-6Zl" id="XFE-0V-ryL"/>
                 <outlet property="amountViewHeight" destination="Vnd-8a-6FL" id="A1A-fj-Uwp"/>
                 <outlet property="statusView" destination="5dP-i4-obw" id="wF7-K0-Smx"/>
                 <outlet property="statusViewHeight" destination="wsy-Ul-g8L" id="Sgq-sV-7U7"/>
-                <outlet property="submitBtn" destination="Qk3-xg-nDc" id="5uz-X7-dkU"/>
+                <outlet property="submitView" destination="KXS-Pp-Xu1" id="lAJ-oe-67p"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -108,7 +104,7 @@
                                         <outlet property="stautsLB1" destination="Df3-cN-U76" id="PsO-ms-D9a"/>
                                     </connections>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpt-LW-6Zl">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpt-LW-6Zl" customClass="KYMWithdrewAmountView">
                                     <rect key="frame" x="0.0" y="179" width="414" height="134"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="取款金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfP-Wb-4pf">
@@ -164,8 +160,15 @@
                                         <constraint firstItem="0yp-WR-vJ2" firstAttribute="top" secondItem="fB2-rR-qsw" secondAttribute="bottom" constant="-5" id="ide-vV-xYI"/>
                                         <constraint firstItem="fB2-rR-qsw" firstAttribute="centerX" secondItem="wpt-LW-6Zl" secondAttribute="centerX" id="rQT-4t-Aj2"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="amountLB" destination="fB2-rR-qsw" id="gJh-9S-gMc"/>
+                                        <outlet property="amountStatusLB1" destination="0yp-WR-vJ2" id="LZJ-zS-KbO"/>
+                                        <outlet property="amountStatusLB2" destination="SoT-zN-HZe" id="jQr-7U-nuo"/>
+                                        <outlet property="amountStatusLB2Height" destination="k31-v5-zbT" id="OTY-6i-Gd5"/>
+                                        <outlet property="amountStatusLB2Top" destination="CJh-Oo-OX2" id="mJY-Hu-doB"/>
+                                    </connections>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Cd-an-AdV">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Cd-an-AdV" customClass="KYMWithdrewBankView">
                                     <rect key="frame" x="15" y="334" width="384" height="230"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rbd-WN-kJt">
@@ -323,7 +326,7 @@
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KXS-Pp-Xu1">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KXS-Pp-Xu1" customClass="KYMWithdrewSubmitView">
                                     <rect key="frame" x="0.0" y="599" width="414" height="138"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qk3-xg-nDc">
@@ -402,6 +405,9 @@
                                         <constraint firstItem="Qk3-xg-nDc" firstAttribute="top" secondItem="KXS-Pp-Xu1" secondAttribute="top" id="kel-E5-rJj"/>
                                         <constraint firstItem="7kB-Zd-3Gz" firstAttribute="trailing" secondItem="TnB-hc-GBs" secondAttribute="trailing" id="n8I-Wn-uBF"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="submitBtn" destination="Qk3-xg-nDc" id="JV7-kJ-F1X"/>
+                                    </connections>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
