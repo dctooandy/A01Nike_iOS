@@ -7,19 +7,21 @@
 //
 
 #import "CNPayBaseVC.h"
+#import "CNMBankModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-typedef NS_ENUM(NSUInteger, CNMPayStatus) {
-    CNMPayStatusSubmit,  //已提交
-    CNMPayStatusPaying,  //等待支付
-    CNMPayStatusConfirm, //已确认
-    CNMPayStatusSuccess  //已完成
+/// 页面 UI 状态区分
+typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
+    CNMPayUIStatusSubmit,  //已提交
+    CNMPayUIStatusPaying,  //等待支付
+    CNMPayUIStatusConfirm, //已确认
+    CNMPayUIStatusSuccess  //已完成
 };
 
 @interface CNMFastPayStatusVC : CNPayBaseVC
-@property (nonatomic, assign) CNMPayStatus status;
+@property (nonatomic, assign) CNMPayUIStatus status;
+@property (nonatomic, strong) CNMBankModel *bankModel;
 @end
 
 NS_ASSUME_NONNULL_END

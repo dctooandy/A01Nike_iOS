@@ -7,6 +7,7 @@
 //
 
 #import "CNMFastPayStatusVC.h"
+#import "CNMAlertView.h"
 #import <ZLPhotoBrowser/ZLPhotoBrowser.h>
 #import <ZLPhotoBrowser/ZLShowBigImgViewController.h>
 
@@ -117,7 +118,7 @@
     self.cancelBtn.layer.cornerRadius = 8;
 }
 
-- (void)setStatusUI:(CNMPayStatus)status {
+- (void)setStatusUI:(CNMPayUIStatus)status {
     self.status = status;
     for (int i = 0; i <= status; i++) {
         if (i >= self.statusIVs.count) {
@@ -130,7 +131,7 @@
     }
     
     switch (status) {
-        case CNMPayStatusConfirm:
+        case CNMPayUIStatusConfirm:
             self.title = @"待确认到账";
             self.headerH.constant = 140;
             self.tip1Lb.text = @"已等待";
@@ -149,7 +150,7 @@
             self.customerServerBtn.hidden = NO;
             self.customerServerBtn.enabled = NO;
             break;
-        case CNMPayStatusSuccess:
+        case CNMPayUIStatusSuccess:
             self.title = @"存款完成";
             self.headerH.constant = 140;
             self.tip1Lb.hidden = YES;
@@ -206,16 +207,9 @@
 #pragma mark - 按钮组事件
 
 - (IBAction)cancel:(UIButton *)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"取消存款" message:@"老板！如已存款，请不要取消" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *commit = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    [alert addAction:commit];
-    [alert addAction:cancel];
-    [self presentViewController:alert animated:YES completion:nil];
+    [CNMAlertView showAlertTitle:@"取消存款" content:@"老板！如已存款，请不要取消" desc:@"您今天还有 3 次取消机会，如果超过3次，可能会冻结账号。" commitTitle:@"确定" commitAction:^{
+        // 调接口取消
+    } cancelTitle:@"返回" cancelAction:nil];
 }
 
 - (IBAction)confirm:(UIButton *)sender {
@@ -230,11 +224,11 @@
 }
 
 - (IBAction)customerServer:(UIButton *)sender {
-    if (self.status == CNMPayStatusSuccess) {
+    if (self.status == CNMPayUIStatusSuccess) {
         [self.navigationController popToRootViewControllerAnimated:YES];
         return;
     }
-    [self setStatusUI:CNMPayStatusSuccess];
+    [self setStatusUI:CNMPayUIStatusSuccess];
 }
 
 - (IBAction)copyContent:(UIButton *)sender {
@@ -344,7 +338,7 @@
 
 /// 图片上传
 - (void)uploadImages {
-    [self setStatusUI:CNMPayStatusConfirm];
+    [self setStatusUI:CNMPayUIStatusConfirm];
     [self.pictureView removeFromSuperview];
 }
 

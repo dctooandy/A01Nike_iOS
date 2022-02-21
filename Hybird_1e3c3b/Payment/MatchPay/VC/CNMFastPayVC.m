@@ -7,10 +7,13 @@
 //
 
 #import "CNMFastPayVC.h"
-#import "CNMAmountSelectCCell.h"
 #import "CNMFastPayStatusVC.h"
-#import "BTTMeMainModel.h"
+
 #import "CNMatchPayRequest.h"
+
+#import "BTTMeMainModel.h"
+
+#import "CNMAmountSelectCCell.h"
 #import "CNMAlertView.h"
 
 #define kCNMAmountSelectCCell  @"CNMAmountSelectCCell"
@@ -95,11 +98,16 @@
         if ([response isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary *)response;
             if ([[dic objectForKey:@"mmFlag"] boolValue]) {
-                // 成功跳转
-                CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
-                statusVC.status = CNMPayStatusPaying;
-                [weakSelf pushViewController:statusVC];
-                return;
+                NSError *err;
+                CNMBankModel *bank = [[CNMBankModel alloc] initWithDictionary:[dic objectForKey:@"mmPaymentRsp"] error:&err];
+                if (!err) {
+                    // 成功跳转
+                    CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
+                    statusVC.bankModel = bank;
+                    statusVC.status = CNMPayUIStatusPaying;
+                    [weakSelf pushViewController:statusVC];
+                    return;
+                }
             }
         }
         // 失败走普通存款
