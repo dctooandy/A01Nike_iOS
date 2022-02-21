@@ -320,6 +320,10 @@
     [self.payVC addBankView];
 }
 
+- (void)changeToChannel:(NSInteger)index {
+    [self.payVC didSelectChannel:index];
+}
+
 #pragma mark - 支付后提示页面
 
 -(CNPayVC *)payVC {

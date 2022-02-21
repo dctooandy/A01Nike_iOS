@@ -243,7 +243,7 @@
 }
 
 - (void)goToBack {
-    [self.timer setFireDate:[NSDate distantPast]];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - 选择相册

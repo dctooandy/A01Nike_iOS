@@ -59,7 +59,7 @@
     CNMAlertView *alert = [[CNMAlertView alloc] initWithFrame:window.bounds];
     alert.titleLb.text = title;
     alert.contentLb.text = content;
-    alert.timeInterval = interval;
+    alert.timeInterval = interval + 1;
     
     CGRect frame = alert.btnView.bounds;
     alert.commitAction = commitAction;

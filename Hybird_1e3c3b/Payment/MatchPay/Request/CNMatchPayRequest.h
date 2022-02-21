@@ -12,6 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CNMatchPayRequest : NSObject
 
+/// 创建撮合订单
+/// @param amount 撮合的金额
+/// @param finish 完成回调
++ (void)createDepisit:(NSString *)amount finish:(KYHTTPCallBack)finish;
 @end
 
 NS_ASSUME_NONNULL_END
