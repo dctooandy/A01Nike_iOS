@@ -11,6 +11,8 @@
 #import <ZLPhotoBrowser/ZLPhotoBrowser.h>
 #import <ZLPhotoBrowser/ZLShowBigImgViewController.h>
 
+#import "CNMatchPayRequest.h"
+
 @interface CNMFastPayStatusVC ()
 
 #pragma mark - 顶部状态试图
@@ -207,8 +209,23 @@
 #pragma mark - 按钮组事件
 
 - (IBAction)cancel:(UIButton *)sender {
-    [CNMAlertView showAlertTitle:@"取消存款" content:@"老板！如已存款，请不要取消" desc:@"您今天还有 3 次取消机会，如果超过3次，可能会冻结账号。" commitTitle:@"确定" commitAction:^{
+    __weak typeof(self) weakSelf = self;
+    NSString *desc = [NSString stringWithFormat:@"您今天还有 %ld 次取消机会，如果超过%ld次，可能会冻结账号。", self.cancelTime, self.cancelTime];
+    [CNMAlertView showAlertTitle:@"取消存款" content:@"老板！如已存款，请不要取消" desc:desc commitTitle:@"确定" commitAction:^{
         // 调接口取消
+        [CNMatchPayRequest cancelDepisit:weakSelf.bankModel.transactionId finish:^(id  _Nullable response, NSError * _Nullable error) {
+            if ([response isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *dic = (NSDictionary *)response;
+                NSString *result = [dic objectForKey:@"message"];
+                if ([result isKindOfClass:[NSString class]] && [result isEqualToString:@"成功"]) {
+                    [weakSelf showSuccess:@"取消成功"];
+                    [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                    return;
+                }
+            }
+            IVJResponseObject *result = response;
+            [weakSelf showError:result.head.errMsg];
+        }];
     } cancelTitle:@"返回" cancelAction:nil];
 }
 

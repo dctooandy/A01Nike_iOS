@@ -27,4 +27,24 @@
     dic[@"currency"] = @"CNY";
     [self Post:@"deposit/MMPayment" para:dic finish:finish];
 }
+
++ (void)commitDepisit:(NSString *)billId receiptImg:(NSString *)imgName transactionImg:(NSArray *)imgNames finish:(KYHTTPCallBack)finish {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    dic[@"transactionId"] = billId;
+    dic[@"opType"] = @"1"; //确认存款
+    dic[@"receiptImg"] = imgName;
+    dic[@"transactionImg"] = [imgNames componentsJoinedByString:@";"];
+    dic[@"merchant"] = @"A01";
+    dic[@"currency"] = @"CNY";
+    [self Post:@"deposit/depositOperate" para:dic finish:finish];
+}
+
++ (void)cancelDepisit:(NSString *)billId finish:(KYHTTPCallBack)finish {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    dic[@"transactionId"] = billId;
+    dic[@"opType"] = @"2"; //取消存款
+    dic[@"merchant"] = @"A01";
+    dic[@"currency"] = @"CNY";
+    [self Post:@"deposit/depositOperate" para:dic finish:finish];
+}
 @end

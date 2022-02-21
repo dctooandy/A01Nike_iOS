@@ -103,6 +103,7 @@
                 if (!err) {
                     // 成功跳转
                     CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
+                    statusVC.cancelTime = [weakSelf.paymentModel.remainCancelDepositTimes integerValue];
                     statusVC.bankModel = bank;
                     statusVC.status = CNMPayUIStatusPaying;
                     [weakSelf pushViewController:statusVC];
