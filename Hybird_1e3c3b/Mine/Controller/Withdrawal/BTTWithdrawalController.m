@@ -30,6 +30,7 @@
 #import "BTTPasswordChangeController.h"
 #import "BTTActionSheet.h"
 #import "KYMWithdrewAmountCell.h"
+#import "KYMWithdrewHomeNotifyCell.h"
 
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate,KYMWithdrewAmountCellDelegate>
 @property(nonatomic, copy)NSString *amount;
@@ -101,6 +102,7 @@
     [self.collectionView registerClass:[BTTWithDrawProtocolView class] forCellWithReuseIdentifier:@"BTTWithDrawProtocolView"];
     [self.collectionView registerClass:[BTTBitollWithDrawCell class] forCellWithReuseIdentifier:@"BTTBitollWithDrawCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"KYMWithdrewAmountCell" bundle:nil] forCellWithReuseIdentifier:@"KYMWithdrewAmountCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"KYMWithdrewHomeNotifyCell" bundle:nil] forCellWithReuseIdentifier:@"KYMWithdrewHomeNotifyCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -205,6 +207,14 @@
         BTTWithdrawalCardSelectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalCardSelectCell" forIndexPath:indexPath];
         cell.model = self.bankList[self.selectIndex];
         
+        return cell;
+    }
+    if ([cellName isEqualToString:@"联系客服"]) {
+        KYMWithdrewHomeNotifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KYMWithdrewHomeNotifyCell" forIndexPath:indexPath];
+        cell.canUseCount = 100;
+        cell.forgotPwdBlock = ^{
+            
+        };
         return cell;
     }
     
