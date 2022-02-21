@@ -153,22 +153,11 @@
     BOOL withdrawPwdCanEdits = [IVNetwork savedUserInfo].withdralPwdFlag == 0 ? false:true;
     
     NSArray *placeholders1 = @[@"",pString];
-    NSArray *placeholders3 = @[@"",rateStr,@"***银行-尾号*****",withdrawPwdP,@""];
-    NSArray *placeholders4 = @[@"",@"USDT",@"***银行-尾号*****",withdrawPwdP,@"",@"",@""];
+    NSArray *placeholders3 = @[@"",rateStr,@"***银行-尾号*****",withdrawPwdP,@"",@""];
+    NSArray *placeholders4 = @[@"",@"USDT",@"***银行-尾号*****",withdrawPwdP,@"",@"",@"",@""];
     NSArray *heights1 = @[@205.0,@44.0];
     NSArray *heights3 = @[@0.0,@44.0,@44.0,@44.0,@100.0];
     NSArray *heights4 = @[@0.0,@44.0,@44,@44,@44.0,@46.0,@240.0];
-    
-    if (self.isMatchWithdrew) {
-        //撮合系统金额列表
-        NSUInteger lineCount = self.matchWithdrewAmountList.count / 3;
-        CGFloat matchWithdrewAmountH = 32 * lineCount + 16 + 8 * (lineCount - 1);
-        heights1 = @[@205.0,@(matchWithdrewAmountH)];
-        if (lineCount > 1) {
-            heights3 = @[@15.0,@44.0,@44.0,@44.0,@100.0];
-            heights4 = @[@15.0,@44.0,@44,@44,@44.0,@46.0,@240.0];
-        }
-    }
     
     NSArray *canEdits1 = @[@NO,@YES];
     NSArray *canEdits3 = @[@NO,@NO,@NO,@(withdrawPwdCanEdits),@NO];
@@ -177,6 +166,27 @@
     NSArray *values1 = @[@"",@""];
     NSArray *values3 = @[@"",@"",@"",@"",@""];
     NSArray *values4 = @[@"",@"",@"",@"",@"",@"",@""];
+    
+    if (self.isMatchWithdrew) {
+        //撮合系统金额列表
+        
+        names3 = @[@"",@"比特币",@"取款至",@"资金密码",@"联系客服",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
+        names4 = @[@"",@"预估到账",@"取款至",@"资金密码",@"联系客服",@"",@"",@""];
+        
+        NSUInteger lineCount = self.matchWithdrewAmountList.count / 3;
+        CGFloat matchWithdrewAmountH = 32 * lineCount + 16 + 8 * (lineCount - 1);
+        heights1 = @[@205.0,@(matchWithdrewAmountH)];
+        if (lineCount > 1) {
+            heights3 = @[@15.0,@44.0,@44.0,@44.0,@302.0,@100.0];
+            heights4 = @[@15.0,@44.0,@44,@44,@302.0,@44.0,@46.0,@240.0];
+        }
+        canEdits3 = @[@NO,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO];
+        canEdits4 = @[@NO,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO,@NO];
+        
+        values3 = @[@"",@"",@"",@"",@"",@""];
+        values4 = @[@"",@"",@"",@"",@"",@"",@"",@""];
+    }
+    
  
     NSMutableArray *names = @[].mutableCopy;
     NSMutableArray *placeholders = @[].mutableCopy;
