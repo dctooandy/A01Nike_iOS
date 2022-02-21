@@ -60,6 +60,7 @@
 #import "BTTCustomerReportController.h"
 #import "BTTLiCaiViewController.h"
 #import "BTTUserForzenManager.h"
+#import "KYMFastWithdrewVC.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -491,6 +492,7 @@
     }
     if (indexPath.row == self.saveMoneyCount + 3) {
         //取款
+        [self.navigationController pushViewController:[KYMFastWithdrewVC new] animated:YES];return;
         if (UserForzenStatus) {
             [[BTTUserForzenManager sharedInstance] checkUserForzen];
         } else {

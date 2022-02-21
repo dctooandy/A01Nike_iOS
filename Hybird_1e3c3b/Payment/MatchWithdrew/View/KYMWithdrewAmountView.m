@@ -10,6 +10,12 @@
 
 @implementation KYMWithdrewAmountView
 
+- (instancetype)init {
+    self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil].lastObject;
+    if (self) {
+    }
+    return self;
+}
 - (void)setStatus:(KYMWithdrewStatus)status
 {
     _status = status;

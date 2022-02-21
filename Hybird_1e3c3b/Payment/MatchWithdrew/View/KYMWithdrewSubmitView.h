@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface KYMWithdrewSubmitView : UIView
 @property (nonatomic ,assign) KYMWithdrewStatus status;
 @property (weak, nonatomic) IBOutlet UIButton *submitBtn;
+@property (strong, nonatomic) void(^submitBtnHandle)(void);
 @end
 
 NS_ASSUME_NONNULL_END

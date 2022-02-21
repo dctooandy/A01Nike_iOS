@@ -755,6 +755,18 @@
 		D5B42FD627C1E7E4008330CB /* KYMWidthdrewUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B42FD527C1E7E4008330CB /* KYMWidthdrewUtility.m */; };
 		D5B42FD927C1EC8B008330CB /* KYMWithdrewBankView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B42FD827C1EC8B008330CB /* KYMWithdrewBankView.m */; };
 		D5B42FDC27C1ECC1008330CB /* KYMWithdrewSubmitView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B42FDB27C1ECC1008330CB /* KYMWithdrewSubmitView.m */; };
+		D5B42FDF27C1EF37008330CB /* KYMWithdrewStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B42FDE27C1EF37008330CB /* KYMWithdrewStatusView.xib */; };
+		D5B42FE127C1EFE2008330CB /* KYMWithdrewAmountView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B42FE027C1EFE2008330CB /* KYMWithdrewAmountView.xib */; };
+		D5B42FE327C1F043008330CB /* KYMWithdrewBankView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B42FE227C1F043008330CB /* KYMWithdrewBankView.xib */; };
+		D5B42FE527C1F095008330CB /* KYMWithdrewSubmitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B42FE427C1F095008330CB /* KYMWithdrewSubmitView.xib */; };
+		D5B42FE827C33F52008330CB /* KYMWithdrewCusmoterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B42FE727C33F52008330CB /* KYMWithdrewCusmoterView.m */; };
+		D5B42FEA27C33F63008330CB /* KYMWithdrewCusmoterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B42FE927C33F63008330CB /* KYMWithdrewCusmoterView.xib */; };
+		D5B42FED27C356BD008330CB /* KYMWithdrewNoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B42FEC27C356BD008330CB /* KYMWithdrewNoticeView.m */; };
+		D5B42FEF27C356CA008330CB /* KYMWithdrewNoticeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B42FEE27C356CA008330CB /* KYMWithdrewNoticeView.xib */; };
+		D5B42FF227C35F66008330CB /* KYMWithdrewNoticeView1.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B42FF127C35F66008330CB /* KYMWithdrewNoticeView1.m */; };
+		D5B42FF427C35F79008330CB /* KYMWithdrewNoticeView1.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B42FF327C35F79008330CB /* KYMWithdrewNoticeView1.xib */; };
+		D5B42FF727C37623008330CB /* KYMWithdrewNoticeView2.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B42FF627C37623008330CB /* KYMWithdrewNoticeView2.m */; };
+		D5B42FF927C37630008330CB /* KYMWithdrewNoticeView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B42FF827C37630008330CB /* KYMWithdrewNoticeView2.xib */; };
 		D5C5018B21B4BFD000C6DA02 /* CNPayDepositNameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5018A21B4BFD000C6DA02 /* CNPayDepositNameModel.m */; };
 		D5C5018E21B4FC8C00C6DA02 /* CNPayWechatTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5018D21B4FC8C00C6DA02 /* CNPayWechatTipView.m */; };
 		D5C5019021B4FC9700C6DA02 /* CNPayWechatTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5C5018F21B4FC9700C6DA02 /* CNPayWechatTipView.xib */; };
@@ -2127,6 +2139,22 @@
 		D5B42FD827C1EC8B008330CB /* KYMWithdrewBankView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMWithdrewBankView.m; sourceTree = "<group>"; };
 		D5B42FDA27C1ECC1008330CB /* KYMWithdrewSubmitView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMWithdrewSubmitView.h; sourceTree = "<group>"; };
 		D5B42FDB27C1ECC1008330CB /* KYMWithdrewSubmitView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMWithdrewSubmitView.m; sourceTree = "<group>"; };
+		D5B42FDE27C1EF37008330CB /* KYMWithdrewStatusView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KYMWithdrewStatusView.xib; sourceTree = "<group>"; };
+		D5B42FE027C1EFE2008330CB /* KYMWithdrewAmountView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KYMWithdrewAmountView.xib; sourceTree = "<group>"; };
+		D5B42FE227C1F043008330CB /* KYMWithdrewBankView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KYMWithdrewBankView.xib; sourceTree = "<group>"; };
+		D5B42FE427C1F095008330CB /* KYMWithdrewSubmitView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KYMWithdrewSubmitView.xib; sourceTree = "<group>"; };
+		D5B42FE627C33F52008330CB /* KYMWithdrewCusmoterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMWithdrewCusmoterView.h; sourceTree = "<group>"; };
+		D5B42FE727C33F52008330CB /* KYMWithdrewCusmoterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMWithdrewCusmoterView.m; sourceTree = "<group>"; };
+		D5B42FE927C33F63008330CB /* KYMWithdrewCusmoterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KYMWithdrewCusmoterView.xib; sourceTree = "<group>"; };
+		D5B42FEB27C356BD008330CB /* KYMWithdrewNoticeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMWithdrewNoticeView.h; sourceTree = "<group>"; };
+		D5B42FEC27C356BD008330CB /* KYMWithdrewNoticeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMWithdrewNoticeView.m; sourceTree = "<group>"; };
+		D5B42FEE27C356CA008330CB /* KYMWithdrewNoticeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KYMWithdrewNoticeView.xib; sourceTree = "<group>"; };
+		D5B42FF027C35F66008330CB /* KYMWithdrewNoticeView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMWithdrewNoticeView1.h; sourceTree = "<group>"; };
+		D5B42FF127C35F66008330CB /* KYMWithdrewNoticeView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMWithdrewNoticeView1.m; sourceTree = "<group>"; };
+		D5B42FF327C35F79008330CB /* KYMWithdrewNoticeView1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KYMWithdrewNoticeView1.xib; sourceTree = "<group>"; };
+		D5B42FF527C37623008330CB /* KYMWithdrewNoticeView2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMWithdrewNoticeView2.h; sourceTree = "<group>"; };
+		D5B42FF627C37623008330CB /* KYMWithdrewNoticeView2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMWithdrewNoticeView2.m; sourceTree = "<group>"; };
+		D5B42FF827C37630008330CB /* KYMWithdrewNoticeView2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KYMWithdrewNoticeView2.xib; sourceTree = "<group>"; };
 		D5C5018921B4BFD000C6DA02 /* CNPayDepositNameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayDepositNameModel.h; sourceTree = "<group>"; };
 		D5C5018A21B4BFD000C6DA02 /* CNPayDepositNameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayDepositNameModel.m; sourceTree = "<group>"; };
 		D5C5018C21B4FC8C00C6DA02 /* CNPayWechatTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayWechatTipView.h; sourceTree = "<group>"; };
@@ -4777,12 +4805,28 @@
 				D5475B2D27BE458F007238D2 /* KYMWithdrewHomeNotifyCell.xib */,
 				D5B42FCD27C0EA72008330CB /* KYMWithdrewStatusView.h */,
 				D5B42FCE27C0EA72008330CB /* KYMWithdrewStatusView.m */,
+				D5B42FDE27C1EF37008330CB /* KYMWithdrewStatusView.xib */,
 				D5B42FD127C1E77C008330CB /* KYMWithdrewAmountView.h */,
 				D5B42FD227C1E77C008330CB /* KYMWithdrewAmountView.m */,
+				D5B42FE027C1EFE2008330CB /* KYMWithdrewAmountView.xib */,
 				D5B42FD727C1EC8B008330CB /* KYMWithdrewBankView.h */,
 				D5B42FD827C1EC8B008330CB /* KYMWithdrewBankView.m */,
+				D5B42FE227C1F043008330CB /* KYMWithdrewBankView.xib */,
 				D5B42FDA27C1ECC1008330CB /* KYMWithdrewSubmitView.h */,
 				D5B42FDB27C1ECC1008330CB /* KYMWithdrewSubmitView.m */,
+				D5B42FE427C1F095008330CB /* KYMWithdrewSubmitView.xib */,
+				D5B42FE627C33F52008330CB /* KYMWithdrewCusmoterView.h */,
+				D5B42FE727C33F52008330CB /* KYMWithdrewCusmoterView.m */,
+				D5B42FE927C33F63008330CB /* KYMWithdrewCusmoterView.xib */,
+				D5B42FEB27C356BD008330CB /* KYMWithdrewNoticeView.h */,
+				D5B42FEC27C356BD008330CB /* KYMWithdrewNoticeView.m */,
+				D5B42FEE27C356CA008330CB /* KYMWithdrewNoticeView.xib */,
+				D5B42FF027C35F66008330CB /* KYMWithdrewNoticeView1.h */,
+				D5B42FF127C35F66008330CB /* KYMWithdrewNoticeView1.m */,
+				D5B42FF327C35F79008330CB /* KYMWithdrewNoticeView1.xib */,
+				D5B42FF527C37623008330CB /* KYMWithdrewNoticeView2.h */,
+				D5B42FF627C37623008330CB /* KYMWithdrewNoticeView2.m */,
+				D5B42FF827C37630008330CB /* KYMWithdrewNoticeView2.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -5287,7 +5331,9 @@
 				416D787A26C3D3B400CB9E6D /* BTTCantBindCardPopView.xib in Resources */,
 				3AAE8221219A738B003EC8B0 /* BTTLoginOrRegisterHeaderCell.xib in Resources */,
 				D5475B2427BD3844007238D2 /* KYMWithdrewAmountCell.xib in Resources */,
+				D5B42FEF27C356CA008330CB /* KYMWithdrewNoticeView.xib in Resources */,
 				3A514E492186FCE800B83881 /* BTTXimaFooterCell.xib in Resources */,
+				D5B42FE127C1EFE2008330CB /* KYMWithdrewAmountView.xib in Resources */,
 				D599252621AFCFEE001E885A /* CNPayBankView.xib in Resources */,
 				3A8F513B215F74D00069D1B3 /* LaunchScreen.storyboard in Resources */,
 				D5DBEB1421ABB774008AF629 /* CNPayOnlineVC.xib in Resources */,
@@ -5315,6 +5361,7 @@
 				04C48B3B27BE0F3200623F5A /* CNMFastPayStatusVC.xib in Resources */,
 				3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */,
 				3A75A182221164BC00584A35 /* BTTLoginAccountSelectCell.xib in Resources */,
+				D5B42FF427C35F79008330CB /* KYMWithdrewNoticeView1.xib in Resources */,
 				D339CE9924C03CAC009ACD1C /* OTCInsideController.xib in Resources */,
 				D39D7C0823CF19C500898546 /* BTTUsdtTodayNoticeView.xib in Resources */,
 				3AE1EB0A218046D80073A32D /* BTTCardModifyTitleCell.xib in Resources */,
@@ -5370,9 +5417,11 @@
 				3A5F7A9B21A8E71100128E8B /* BTTXimaSuccessItemCell.xib in Resources */,
 				D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */,
 				3A21AEB02394BCBF009E73FD /* BTTShowErcodePopview.xib in Resources */,
+				D5B42FE527C1F095008330CB /* KYMWithdrewSubmitView.xib in Resources */,
 				D3A9A71B240E2B6A007F672A /* BTTNormalRegisterSuccessController.xib in Resources */,
 				3ADD23772177328B00FA959A /* BTTMeSaveMoneyCell.xib in Resources */,
 				767DF24827902F5300F50520 /* mammon2.gif in Resources */,
+				D5B42FDF27C1EF37008330CB /* KYMWithdrewStatusView.xib in Resources */,
 				D3B47D5923B70A5500D37C7F /* app.zip in Resources */,
 				3A11AE592186A71100B1AFF4 /* BTTBookMessageCell.xib in Resources */,
 				3AAE821A219A738B003EC8B0 /* BTTLoginOrRegisterBtnCell.xib in Resources */,
@@ -5382,6 +5431,7 @@
 				3AAE8216219A738B003EC8B0 /* BTTRegisterNormalCell.xib in Resources */,
 				EA55F37C21C1ECF2008FB0E1 /* BTTWithdrawalNotifyCell.xib in Resources */,
 				410997F9251DC870001FA895 /* BTTDepositRecordCell.xib in Resources */,
+				D5B42FEA27C33F63008330CB /* KYMWithdrewCusmoterView.xib in Resources */,
 				3AF9EB5D22A4B62300A85D9F /* BTTMidAutumnPopView.xib in Resources */,
 				3AE1EB2121805E980073A32D /* BTTAddCardBtnsCell.xib in Resources */,
 				4196BEF1255BC21B00F41EED /* BTTWithdrawToUsdtPromoPop.xib in Resources */,
@@ -5476,9 +5526,11 @@
 				D35BF24323B451340085D6A1 /* CNPayUSDTQRSecondVC.xib in Resources */,
 				411DE803261AFC190076BCE2 /* BTTUnBindingHeaderCell.xib in Resources */,
 				3A49DFA12179DA0D00FEFBDA /* BTTBindingMobileTwoCell.xib in Resources */,
+				D5B42FF927C37630008330CB /* KYMWithdrewNoticeView2.xib in Resources */,
 				3A14CC60237A4B56009711CF /* BTTRealPersonGameCell.xib in Resources */,
 				D5475B1927BCA474007238D2 /* KYMSelectChannelVC.xib in Resources */,
 				76756BB5269454690065F99B /* BTTUserForzenBGView.xib in Resources */,
+				D5B42FE327C1F043008330CB /* KYMWithdrewBankView.xib in Resources */,
 				D5DBEB0221ABB774008AF629 /* CNPayDepositStep1VC.xib in Resources */,
 				D5475B1F27BCB201007238D2 /* KYMSelectChannelCell.xib in Resources */,
 				3A3DF1E7237BA445006129F6 /* BTTHotPromotionCell.xib in Resources */,
@@ -5592,6 +5644,7 @@
 				3AD9CF50216EFB3700685B43 /* BTTHomePageBannerCell.m in Sources */,
 				3AE0582021704D5C00C7E70D /* UUMarqueeView.m in Sources */,
 				4184DD9A251B308D00D433D4 /* BTTPromoRecordModel.m in Sources */,
+				D5B42FE827C33F52008330CB /* KYMWithdrewCusmoterView.m in Sources */,
 				3A5F7AB521AD0E6800128E8B /* BTTVideoGamesFilterCell.m in Sources */,
 				3A5B0286234F26B000D8828B /* BTTXimaRecordController+loadData.m in Sources */,
 				4135C716266F736900C3A9E9 /* BTTLiCaiInRecordCell.m in Sources */,
@@ -5615,6 +5668,7 @@
 				3ADD23EC2179B97A00FA959A /* TAAbstractDotView.m in Sources */,
 				D5DBEB1321ABB774008AF629 /* CNPayContainerVC.m in Sources */,
 				3A8F5188215F77AC0069D1B3 /* BTTIntroductoryPagesView.m in Sources */,
+				D5B42FF727C37623008330CB /* KYMWithdrewNoticeView2.m in Sources */,
 				3AD9CF7F216F462600685B43 /* BTTHomePageSeparateCell.m in Sources */,
 				3AD9CF41216EDC9800685B43 /* BTTVoiceCallModel.m in Sources */,
 				3AB0687921A571F700072FB7 /* BTTXimaModel.m in Sources */,
@@ -5965,6 +6019,7 @@
 				3A7740A5224DE90800A65841 /* BTTPayBQAliStep2VC.m in Sources */,
 				3A514E432186F3CB00B83881 /* BTTLastWeekCell.m in Sources */,
 				76F863A426E0B61100320B60 /* BTTVIPClubWebViewController.m in Sources */,
+				D5B42FF227C35F66008330CB /* KYMWithdrewNoticeView1.m in Sources */,
 				3AD9CF89216F4E5400685B43 /* BTTHomePageDiscountCell.m in Sources */,
 				3A8F5173215F77A50069D1B3 /* BTTAdvertiseView.m in Sources */,
 				04C48B2C27BB811F00623F5A /* CNMSelectChannelVC.m in Sources */,
@@ -6023,6 +6078,7 @@
 				3A8F51E5215F78F50069D1B3 /* BTTCollectionViewFlowlayout.m in Sources */,
 				415CA1DB24E53A54005E0E9F /* BTTMeBigSaveMoneyCell.m in Sources */,
 				3A11AE582186A71100B1AFF4 /* BTTBookMessageCell.m in Sources */,
+				D5B42FED27C356BD008330CB /* KYMWithdrewNoticeView.m in Sources */,
 				41D1075826A9143E00721F61 /* BTTBindingMobileController+LoadData.m in Sources */,
 				D599252421AFCFDA001E885A /* CNPayBankView.m in Sources */,
 				3AB0683421A2E34C00072FB7 /* BTTAccountBalanceController+LoadData.m in Sources */,
