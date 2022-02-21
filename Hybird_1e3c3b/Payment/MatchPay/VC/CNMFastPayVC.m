@@ -7,9 +7,14 @@
 //
 
 #import "CNMFastPayVC.h"
-#import "CNMAmountSelectCCell.h"
 #import "CNMFastPayStatusVC.h"
+
+#import "CNMatchPayRequest.h"
+
 #import "BTTMeMainModel.h"
+
+#import "CNMAmountSelectCCell.h"
+#import "CNMAlertView.h"
 
 #define kCNMAmountSelectCCell  @"CNMAmountSelectCCell"
 
@@ -80,14 +85,36 @@
 }
 
 - (IBAction)depositAction:(UIButton *)sender {
-    NSLog(@"====%@", self.selectAmount);
     //提交订单
-    
-    
-    // 成功跳转
-    CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
-    statusVC.status = CNMPayStatusPaying;
-    [self pushViewController:statusVC];
+    [self showLoading];
+    __weak typeof(self) weakSelf = self;
+    [CNMatchPayRequest createDepisit:self.selectAmount finish:^(id  _Nullable response, NSError * _Nullable error) {
+        [weakSelf hideLoading];
+        if (error) {
+            IVJResponseObject *result = response;
+            [weakSelf showError:result.head.errMsg];
+            return;
+        }
+        if ([response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)response;
+            if ([[dic objectForKey:@"mmFlag"] boolValue]) {
+                NSError *err;
+                CNMBankModel *bank = [[CNMBankModel alloc] initWithDictionary:[dic objectForKey:@"mmPaymentRsp"] error:&err];
+                if (!err) {
+                    // 成功跳转
+                    CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
+                    statusVC.bankModel = bank;
+                    statusVC.status = CNMPayUIStatusPaying;
+                    [weakSelf pushViewController:statusVC];
+                    return;
+                }
+            }
+        }
+        // 失败走普通存款
+        [CNMAlertView show3SecondAlertTitle:@"极速转卡系统繁忙" content:@"系统默认转为普通支付通道处理" interval:3 commitAction:^{
+            [weakSelf changeToChannel:1];
+        }];
+    }];
 }
 
 - (IBAction)recommendAction:(UIButton *)sender {
