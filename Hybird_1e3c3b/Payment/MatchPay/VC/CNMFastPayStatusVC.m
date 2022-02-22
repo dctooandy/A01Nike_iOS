@@ -269,6 +269,7 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
             break;
         case CNMPayBillStatusConfirm:
             [self setStatusUI:CNMPayUIStatusConfirm];
+            self.customerServerBtn.enabled = (bank.withdrawStatus == 6);
             break;
         case CNMPayBillStatusUnMatch:
             
@@ -300,9 +301,10 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
             
         case CNMPayUIStatusSuccess: {
             self.confirmDate.text = bank.transactionId;
+            [self.timer invalidate];
+            self.timer = nil;
         }
-            break;
-            
+            return;
         default:
             break;
     }
@@ -325,10 +327,12 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         [CNMatchPayRequest cancelDepisit:weakSelf.bankModel.transactionId finish:^(id  _Nullable response, NSError * _Nullable error) {
             if ([response isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *dic = (NSDictionary *)response;
-                NSString *result = [dic objectForKey:@"message"];
-                if ([result isKindOfClass:[NSString class]] && [result isEqualToString:@"成功"]) {
+                NSString *result = [dic objectForKey:@"code"];
+                if ([result isKindOfClass:[NSString class]] && [result isEqualToString:@"00000"]) {
                     [weakSelf showSuccess:@"取消成功"];
-                    [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                    });
                     return;
                 }
             }
