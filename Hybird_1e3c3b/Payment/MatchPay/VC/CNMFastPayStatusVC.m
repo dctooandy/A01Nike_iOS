@@ -14,6 +14,14 @@
 #import "CNMatchPayRequest.h"
 #import "PublicMethod.h"
 
+/// 页面 UI 状态区分
+typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
+    CNMPayUIStatusSubmit,  //已提交
+    CNMPayUIStatusPaying,  //等待支付
+    CNMPayUIStatusConfirm, //已确认
+    CNMPayUIStatusSuccess  //已完成
+};
+
 @interface CNMFastPayStatusVC ()
 
 #pragma mark - 顶部状态试图
@@ -95,6 +103,10 @@
 @property (nonatomic, strong) ZLPhotoActionSheet *photoSheet;
 
 #pragma mark - 数据参数
+@property (nonatomic, strong) CNMBankModel *bankModel;
+/// 默认 CNMPayUIStatusPaying
+@property (nonatomic, assign) CNMPayUIStatus status;
+
 @end
 
 @implementation CNMFastPayStatusVC
@@ -220,7 +232,7 @@
         [weakSelf hideLoading];
         if ([response isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary *)response;
-            [weakSelf reloadUIWithModel:[[CNMBankModel alloc] initWithDictionary:dic error:nil]];
+            [weakSelf reloadUIWithModel:[[CNMBankModel alloc] initWithDictionary:[dic objectForKey:@"data"] error:nil]];
             return;
         }
         IVJResponseObject *result = response;
@@ -257,22 +269,23 @@
             break;
     }
     
-    [self.bankLogo sd_setImageWithURL:[NSURL URLWithString:[PublicMethod nowCDNWithUrl:bank.bankUrl]]];
+    self.amountLb.text = [NSString stringWithFormat:@"%ld", bank.amount.integerValue];
+    [self.bankLogo sd_setImageWithURL:[NSURL URLWithString:[PublicMethod nowCDNWithUrl:bank.bankIcon]]];
     self.bankName.text = bank.bankName;
     self.accountName.text = bank.bankAccountName;
     self.accountNo.text = bank.bankAccountNo;
-    self.bankAmount.text = [NSString stringWithFormat:@"%@元", bank.amount];
+    self.bankAmount.text = [NSString stringWithFormat:@"%.2f元", bank.amount.floatValue];
     self.submitDate.text = bank.createdDate;
     self.confirmDate.text = bank.comfirmTime;
     
     NSString *time;
     switch (self.status) {
         case CNMPayUIStatusPaying: {
-            time = bank.confirmTimeFmt;
+            time = bank.payLimitTimeFmt;
         }
             break;
         case CNMPayUIStatusConfirm: {
-            time = bank.payLimitTimeFmt;
+            time = bank.confirmTimeFmt;
         }
             break;
             

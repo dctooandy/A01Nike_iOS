@@ -26,10 +26,18 @@
 + (instancetype)showAlertTitle:(NSString *)title content:(NSString *)content desc:(NSString *)desc commitTitle:(NSString *)commit commitAction:(dispatch_block_t)commitAction cancelTitle:(NSString *)cancel cancelAction:(dispatch_block_t)cancelAction {
     AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     UIWindow *window = appDelegate.window;
+    // 允许一个弹框
+    UIView *subview = [window viewWithTag:10001];
+    if (subview) {
+        [subview removeFromSuperview];
+    }
+    
     CNMAlertView *alert = [[CNMAlertView alloc] initWithFrame:window.bounds];
     alert.titleLb.text = title;
     alert.contentLb.text = content;
     alert.descLb.text = desc;
+    alert.tag = 10001;
+    
     CGRect frame = alert.btnView.bounds;
     alert.commitAction = commitAction;
     alert.cancelAction = cancelAction;
@@ -57,10 +65,17 @@
 + (instancetype)show3SecondAlertTitle:(NSString *)title content:(nonnull NSString *)content interval:(NSInteger)interval commitAction:(nonnull dispatch_block_t)commitAction {
     AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     UIWindow *window = appDelegate.window;
+    // 允许一个弹框
+    UIView *subview = [window viewWithTag:10001];
+    if (subview) {
+        [subview removeFromSuperview];
+    }
+    
     CNMAlertView *alert = [[CNMAlertView alloc] initWithFrame:window.bounds];
     alert.titleLb.text = title;
     alert.contentLb.text = content;
     alert.timeInterval = interval + 1;
+    alert.tag = 10001;
     
     CGRect frame = alert.btnView.bounds;
     alert.commitAction = commitAction;

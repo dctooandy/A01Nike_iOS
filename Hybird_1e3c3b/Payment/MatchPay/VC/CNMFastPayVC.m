@@ -53,7 +53,7 @@
     [super viewDidLoad];
     [self setupUI];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self showTradeBill];
+        [self showTradeBill];
     });
 }
 
@@ -131,8 +131,7 @@
                     // 成功跳转
                     CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
                     statusVC.cancelTime = [weakSelf.paymentModel.remainCancelDepositTimes integerValue];
-                    statusVC.bankModel = bank;
-                    statusVC.status = CNMPayUIStatusPaying;
+                    statusVC.transactionId = bank.transactionId;
                     [weakSelf pushViewController:statusVC];
                     return;
                 }

@@ -11,21 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 页面 UI 状态区分
-typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
-    CNMPayUIStatusSubmit,  //已提交
-    CNMPayUIStatusPaying,  //等待支付
-    CNMPayUIStatusConfirm, //已确认
-    CNMPayUIStatusSuccess  //已完成
-};
-
 @interface CNMFastPayStatusVC : CNPayBaseVC
+/// 订单号
 @property (nonatomic, copy) NSString *transactionId;
-/// 不传默认 CNMPayUIStatusPaying
-@property (nonatomic, assign) CNMPayUIStatus status;
-/// 剩余取消次数
+/// 剩余取消次数, 必传
 @property (nonatomic, assign) NSInteger cancelTime;
-@property (nonatomic, strong) CNMBankModel *bankModel;
 @end
 
 NS_ASSUME_NONNULL_END

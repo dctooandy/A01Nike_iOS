@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, CNMPayBillStatus) {
 @property (nonatomic, copy) NSString *bankBranchName;
 @property (nonatomic, copy) NSString *bankCity;
 @property (nonatomic, copy) NSString *bankCode;
-@property (nonatomic, copy) NSString *bankUrl;
+@property (nonatomic, copy) NSString *bankIcon;
 
 /// 单号
 @property (nonatomic, copy) NSString *transactionId;
