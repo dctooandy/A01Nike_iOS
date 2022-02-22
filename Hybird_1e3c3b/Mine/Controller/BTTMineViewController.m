@@ -61,6 +61,7 @@
 #import "BTTLiCaiViewController.h"
 #import "BTTUserForzenManager.h"
 #import "KYMFastWithdrewVC.h"
+#import "BTTMeGoldenCCell.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -139,6 +140,8 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeBigSaveMoneyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeMoreSaveMoneyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeHeadernNicknameLoginCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeHeadernNicknameLoginCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeGoldenCCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeGoldenCCell"];
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -275,39 +278,66 @@
     } else if (indexPath.row >= 2 && indexPath.row <= 2 + self.saveMoneyCount - 1) {
         if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
             if (indexPath.row == 2) {
-                //推薦存款
-                BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
-                cell.saveMoneyShowType = self.saveMoneyShowType;
-                cell.dataSource = self.bigDataSoure;
-                weakSelf(weakSelf);
-                
-                cell.clickEventBlock = ^(id _Nonnull value) {
-                    strongSelf(strongSelf);
-                    BTTMeMainModel *model = value;
-                    [strongSelf goSaveMoneyWithModel:model];
+                BTTMeGoldenCCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeGoldenCCell" forIndexPath:indexPath];
+                __weak typeof(self) weakSelf = self;
+                cell.clickAction = ^(int tag) {
+                    switch (tag) {
+                        case 0: // 存款
+                            [weakSelf goSaveMoneyWithModel:self.bigDataSoure.firstObject];
+                            break;
+                        case 1: // 洗码
+                            if (UserForzenStatus) {
+                                [[BTTUserForzenManager sharedInstance] checkUserForzen];
+                            } else {
+                                BTTXimaController *vc = [[BTTXimaController alloc] init];
+                                [weakSelf.navigationController pushViewController:vc animated:YES];
+                            }
+                            break;
+                        case 2: { // 取款
+                            [self.navigationController pushViewController:[KYMFastWithdrewVC new] animated:YES];
+                        }
+                        break;
+                    }
                 };
-                return cell;
-            } else if (indexPath.row == 3) {
-                //更多存款title
-                BTTMeMoreSaveMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell" forIndexPath:indexPath];
-                cell.saveMoneyShowType = self.saveMoneyShowType;
                 return cell;
             } else {
-                //更多存款
-                BTTMeMoreSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
-                if (indexPath.row == 4) {
-                    cell.dataSource = self.normalDataSoure;
-                } else {
-                    cell.dataSource = self.normalDataTwo;
-                }
-                weakSelf(weakSelf);
-                cell.clickEventBlock = ^(id _Nonnull value) {
-                    strongSelf(strongSelf);
-                    BTTMeMainModel *model = value;
-                    [strongSelf goSaveMoneyWithModel:model];
-                };
+                UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeGoldenCCell" forIndexPath:indexPath];
                 return cell;
             }
+//            if (indexPath.row == 2) {
+//                //推薦存款
+//                BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
+//                cell.saveMoneyShowType = self.saveMoneyShowType;
+//                cell.dataSource = self.bigDataSoure;
+//                weakSelf(weakSelf);
+//
+//                cell.clickEventBlock = ^(id _Nonnull value) {
+//                    strongSelf(strongSelf);
+//                    BTTMeMainModel *model = value;
+//                    [strongSelf goSaveMoneyWithModel:model];
+//                };
+//                return cell;
+//            } else if (indexPath.row == 3) {
+//                //更多存款title
+//                BTTMeMoreSaveMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell" forIndexPath:indexPath];
+//                cell.saveMoneyShowType = self.saveMoneyShowType;
+//                return cell;
+//            } else {
+//                //更多存款
+//                BTTMeMoreSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
+//                if (indexPath.row == 4) {
+//                    cell.dataSource = self.normalDataSoure;
+//                } else {
+//                    cell.dataSource = self.normalDataTwo;
+//                }
+//                weakSelf(weakSelf);
+//                cell.clickEventBlock = ^(id _Nonnull value) {
+//                    strongSelf(strongSelf);
+//                    BTTMeMainModel *model = value;
+//                    [strongSelf goSaveMoneyWithModel:model];
+//                };
+//                return cell;
+//            }
         } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig) {
             BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
             cell.dataSource = self.bigDataSoure;
@@ -391,11 +421,11 @@
         }
         BTTMeMainModel *model = nil;
         if (indexPath.row >= self.saveMoneyCount + 3 && indexPath.row <= self.saveMoneyCount + 8) {
-            if (self.mainDataOne.count != 0) {
+            if (self.mainDataOne.count != 0 && self.mainDataOne.count > (indexPath.row - self.saveMoneyCount - 3)) {
                 model = self.mainDataOne[indexPath.row - self.saveMoneyCount - 3];
             }
         } else {
-            if (self.mainDataTwo.count != 0 && self.mainDataOne.count != 0) {
+            if (self.mainDataTwo.count != 0 && self.mainDataOne.count != 0 && self.mainDataTwo.count > (indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4)) {
                 model = self.mainDataTwo[indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4];
             }
         }
@@ -492,7 +522,7 @@
     }
     if (indexPath.row == self.saveMoneyCount + 3) {
         //取款
-        [self.navigationController pushViewController:[KYMFastWithdrewVC new] animated:YES];return;
+        /*[self.navigationController pushViewController:[KYMFastWithdrewVC new] animated:YES];return;
         if (UserForzenStatus) {
             [[BTTUserForzenManager sharedInstance] checkUserForzen];
         } else {
@@ -540,7 +570,7 @@
                     }
                 }
             }
-        }
+        }*/
     } else if ((indexPath.row == self.saveMoneyCount + 4 && self.isOpenSellUsdt)) {
         //一键卖币
         if (self.sellUsdtLink!=nil&&![self.sellUsdtLink isEqualToString:@""]) {
@@ -563,13 +593,13 @@
         }
     } else if ((indexPath.row == self.saveMoneyCount + 4 && !self.isOpenSellUsdt) || (indexPath.row == self.saveMoneyCount + 5 && self.isOpenSellUsdt)) {
         //洗碼
-        if (UserForzenStatus)
-        {
-            [[BTTUserForzenManager sharedInstance] checkUserForzen];
-        }else{
-            BTTXimaController *vc = [[BTTXimaController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
+//        if (UserForzenStatus)
+//        {
+//            [[BTTUserForzenManager sharedInstance] checkUserForzen];
+//        }else{
+//            BTTXimaController *vc = [[BTTXimaController alloc] init];
+//            [self.navigationController pushViewController:vc animated:YES];
+//        }
     } else if ((indexPath.row == self.saveMoneyCount + 5 && !self.isOpenSellUsdt) || (indexPath.row == self.saveMoneyCount + 6 && self.isOpenSellUsdt)) {
         //銀行卡
         if (isUSDTAcc) {
@@ -728,17 +758,17 @@
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 190)]];
             }
         } else if (i == 1) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 63)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
         } else if (i >= 2  && i <= 2 + self.saveMoneyCount - 1) {
             if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
                 if (i == 2) {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 210)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 150)]];
                 } else if (i == 3) {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
                 } else if (i == 4) {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 90)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
                 } else {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
                 }
             } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBigOneMore) {
                 if (i == 2) {
