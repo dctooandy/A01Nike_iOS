@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -27,15 +26,15 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIc-8S-aaI">
                                         <rect key="frame" x="0.0" y="0.0" width="144.5" height="109"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="13"/>
-                                        <state key="normal" image="APP_AGIN"/>
+                                        <state key="normal" image="icon_充值"/>
                                         <connections>
                                             <action selector="btnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="F4K-6J-clJ"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="充值" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWI-Op-zYF">
-                                        <rect key="frame" x="57.5" y="92" width="29" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" systemColor="systemYellowColor"/>
+                                        <rect key="frame" x="59.5" y="94.5" width="25" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.96862745098039216" green="0.71764705882352942" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -55,15 +54,15 @@
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gkr-UP-ms4">
                                         <rect key="frame" x="0.0" y="0.0" width="144" height="109"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="13"/>
-                                        <state key="normal" image="APP_AGIN"/>
+                                        <state key="normal" image="icon_洗码"/>
                                         <connections>
                                             <action selector="btnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="7dz-U1-f7u"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="洗码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nsd-rd-dIC">
-                                        <rect key="frame" x="57.5" y="92" width="29" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" systemColor="systemYellowColor"/>
+                                        <rect key="frame" x="59.5" y="94.5" width="25" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.96862745098039216" green="0.71764705882352942" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -83,15 +82,15 @@
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8mG-NO-cnJ">
                                         <rect key="frame" x="0.0" y="0.0" width="144.5" height="109"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="13"/>
-                                        <state key="normal" image="APP_AGIN"/>
+                                        <state key="normal" image="icon_取款"/>
                                         <connections>
                                             <action selector="btnAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="bfz-Be-GFO"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="取款" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Adj-PC-dyW">
-                                        <rect key="frame" x="58" y="92" width="29" height="17"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <color key="textColor" systemColor="systemYellowColor"/>
+                                        <rect key="frame" x="60" y="94.5" width="25" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.96862745098039216" green="0.71764705882352942" blue="0.27058823529411763" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -121,9 +120,8 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="APP_AGIN" width="78" height="78"/>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <image name="icon_充值" width="54" height="46"/>
+        <image name="icon_取款" width="40" height="46"/>
+        <image name="icon_洗码" width="52" height="51"/>
     </resources>
 </document>

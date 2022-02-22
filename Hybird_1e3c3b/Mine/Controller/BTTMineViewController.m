@@ -280,7 +280,7 @@
             if (indexPath.row == 2) {
                 BTTMeGoldenCCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeGoldenCCell" forIndexPath:indexPath];
                 __weak typeof(self) weakSelf = self;
-                cell.clickAction = ^(int tag) {
+                cell.clickAction = ^(NSInteger tag) {
                     switch (tag) {
                         case 0: // 存款
                             [weakSelf goSaveMoneyWithModel:self.bigDataSoure.firstObject];
