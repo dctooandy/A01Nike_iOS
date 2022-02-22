@@ -79,13 +79,13 @@
 
 
 - (void)commit {
-    !_commitAction ?: _commitAction();
     [self removeFromSuperview];
+    !self.commitAction ?: self.commitAction();
 }
 
 - (void)cancel {
-    !_cancelAction ?: _cancelAction();
     [self removeFromSuperview];
+    !self.cancelAction ?: self.cancelAction();
 }
 
 - (UIButton *)createBtnWithTitle:(NSString *)title {

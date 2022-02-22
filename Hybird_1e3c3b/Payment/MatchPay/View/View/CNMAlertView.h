@@ -23,8 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)showAlertTitle:(NSString *)title
                        content:(NSString *)content
                           desc:(nullable NSString *)desc
-                   commitTitle:(NSString *)commit
-                  commitAction:(dispatch_block_t)commitAction
+                   commitTitle:(nullable NSString *)commit
+                  commitAction:(nullable dispatch_block_t)commitAction
                    cancelTitle:(nullable NSString *)cancel
                   cancelAction:(nullable dispatch_block_t)cancelAction;
 

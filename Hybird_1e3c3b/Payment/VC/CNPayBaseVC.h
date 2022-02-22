@@ -118,6 +118,6 @@
 - (void)addBankView;
 - (void)showPayTipView;
 
-/// 撮合失败，切换渠道，index 按渠道默认顺序
-- (void)changeToChannel:(NSInteger)index;
+/// 撮合失败，移除并切换渠道
+- (void)removeFastPay;
 @end

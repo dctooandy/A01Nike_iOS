@@ -46,7 +46,6 @@
 @property (nonatomic, strong) AMSegmentViewController *segmentVC;
 @property (nonatomic, strong) UILabel *alertLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
-@property (nonatomic, strong) NSMutableArray *payments;
 
 @property (nonatomic, strong) CNPayContainerVC *payChannelVC;
 

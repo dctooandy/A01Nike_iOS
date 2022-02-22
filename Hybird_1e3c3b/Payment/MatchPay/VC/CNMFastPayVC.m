@@ -8,6 +8,7 @@
 
 #import "CNMFastPayVC.h"
 #import "CNMFastPayStatusVC.h"
+#import "KYMFastWithdrewVC.h"
 
 #import "CNMatchPayRequest.h"
 
@@ -51,6 +52,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupUI];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self showTradeBill];
+    });
+}
+
+- (void)showTradeBill {
+    __weak typeof(self) weakSelf = self;
+    if (self.paymentModel.mmProcessingOrderTransactionId.length > 0) {
+        if (self.paymentModel.mmProcessingOrderType == 1) { // 存款
+            CNMAlertView *alert = [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板！您当前有正在交易的存款订单" desc:nil commitTitle:@"关闭" commitAction:nil cancelTitle:@"查看订单" cancelAction:^{
+                CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
+                statusVC.cancelTime = [weakSelf.paymentModel.remainCancelDepositTimes integerValue];
+                [weakSelf pushViewController:statusVC];
+            }];
+        } else { // 取款
+            [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板！您当前有正在交易的取款订单" desc:nil commitTitle:@"关闭" commitAction:nil cancelTitle:@"查看订单" cancelAction:^{
+                KYMFastWithdrewVC *withdrewVC = [[KYMFastWithdrewVC alloc] init];
+//                statusVC.cancelTime = [self.paymentModel.remainCancelDepositTimes integerValue];
+                [weakSelf pushViewController:withdrewVC];
+            }];
+        }
+    }
 }
     
 - (void)setupUI {
@@ -113,7 +136,7 @@
         }
         // 失败走普通存款
         [CNMAlertView show3SecondAlertTitle:@"极速转卡系统繁忙" content:@"系统默认转为普通支付通道处理" interval:3 commitAction:^{
-            [weakSelf changeToChannel:1];
+            [weakSelf removeFastPay];
         }];
     }];
 }
