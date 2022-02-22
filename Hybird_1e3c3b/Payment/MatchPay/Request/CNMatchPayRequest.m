@@ -55,4 +55,12 @@
     dic[@"currency"] = @"CNY";
     [self Post:@"deposit/depositDetail" para:dic finish:finish];
 }
+
++ (void)uploadImage:(UIImage *)image finish:(KYHTTPCallBack)finish {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    NSData *data = UIImageJPEGRepresentation(image, 0.5);
+    dic[@"fileContent"] = [@"data:image/jpeg;base64," stringByAppendingString:[data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+    dic[@"fileName"] = @"image";
+    [self Post:@"deposit/uploadImg" para:dic finish:finish];
+}
 @end

@@ -91,14 +91,18 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
 @property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (weak, nonatomic) IBOutlet UILabel *countLb1;
 /// 存放图片
-@property (nonatomic, strong) NSMutableArray*pictureArr1;
+@property (nonatomic, strong) NSMutableArray *pictureArr1;
+/// 存放上传后返回图片名
+@property (nonatomic, strong) NSMutableArray *pictureName1;
 
 /// 下面面按钮组
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray <UIButton *> *pictureBtnArr;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray <UIButton *> *deleteBtnArr;
 @property (weak, nonatomic) IBOutlet UILabel *countLb2;
 /// 存放图片
-@property (nonatomic, strong) NSMutableArray*pictureArr2;
+@property (nonatomic, strong) NSMutableArray *pictureArr2;
+/// 存放上传后返回图片名
+@property (nonatomic, strong) NSMutableArray *pictureName2;
 
 @property (nonatomic, strong) ZLPhotoActionSheet *photoSheet;
 
@@ -106,6 +110,7 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
 @property (nonatomic, strong) CNMBankModel *bankModel;
 /// 默认 CNMPayUIStatusPaying
 @property (nonatomic, assign) CNMPayUIStatus status;
+
 
 @end
 
@@ -117,10 +122,6 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
     [self setStatusUI:self.status];
     self.pictureArr1 = [NSMutableArray arrayWithCapacity:1];
     self.pictureArr2 = [NSMutableArray arrayWithCapacity:4];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     [self loadData];
 }
 
@@ -253,10 +254,15 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
             [self setStatusUI:CNMPayUIStatusPaying];
             break;
         case CNMPayBillStatusCancel:
-            
-            break;
-        case CNMPayBillStatusTimeout:
-            
+            // 订单取消，直接回到首页
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            return;
+        case CNMPayBillStatusTimeout: {
+            NSString *desc = [NSString stringWithFormat:@"您今天还有 %ld 次取消机会，如果超过%ld次，可能会冻结账号。", self.cancelTime, self.cancelTime];
+            [CNMAlertView showAlertTitle:@"超时提醒" content:@"老板，您已存款超时，系统自动取消订单" desc:desc commitTitle:@"关闭" commitAction:^{
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            } cancelTitle:nil cancelAction:nil];
+        }
             break;
         case CNMPayBillStatusConfirm:
             [self setStatusUI:CNMPayUIStatusConfirm];
@@ -453,8 +459,61 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
 
 /// 图片上传
 - (void)uploadImages {
-    [self setStatusUI:CNMPayUIStatusConfirm];
-    [self.pictureView removeFromSuperview];
+    self.pictureName1 = [NSMutableArray arrayWithCapacity:1];
+    self.pictureName2 = [NSMutableArray arrayWithCapacity:4];
+    
+    __block NSInteger uploadCount = self.pictureArr1.count + self.pictureArr2.count;
+    [self showLoading];
+    
+    [CNMatchPayRequest uploadImage:self.pictureArr1.lastObject finish:^(id  _Nullable response, NSError * _Nullable error) {
+        uploadCount -= 1;
+        if ([response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)response;
+            NSString *name = [dic objectForKey:@"fileName"];
+            if (name) {
+                [self.pictureName1 addObject:[dic objectForKey:@"fileName"]];
+            }
+        }
+        if (uploadCount == 0) {
+            [self uploadFinish];
+        }
+    }];
+    
+    for (UIImage *image in self.pictureArr2) {
+        [CNMatchPayRequest uploadImage:image finish:^(id  _Nullable response, NSError * _Nullable error) {
+            uploadCount -= 1;
+            if ([response isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *dic = (NSDictionary *)response;
+                NSString *name = [dic objectForKey:@"fileName"];
+                if (name) {
+                    [self.pictureName2 addObject:[dic objectForKey:@"fileName"]];
+                }
+            }
+            if (uploadCount == 0) {
+                [self uploadFinish];
+            }
+        }];
+    }
+}
+
+- (void)uploadFinish {
+    // 只要没有，重选上传
+    if (self.pictureName1.count == 0 || self.pictureName2.count == 0) {
+        [self uploadImages];
+        return;
+    }
+    // 上报数据
+    [CNMatchPayRequest commitDepisit:self.transactionId receiptImg:self.pictureName1.firstObject transactionImg:self.pictureName2 finish:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        if ([response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)response;
+            NSString *name = [dic objectForKey:@"fileName"];
+            if (name) {
+                [self setStatusUI:CNMPayUIStatusConfirm];
+                [self.pictureView removeFromSuperview];
+            }
+        }
+    }];
 }
 
 - (ZLPhotoActionSheet *)photoSheet {
