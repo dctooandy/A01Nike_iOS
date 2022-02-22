@@ -12,6 +12,7 @@
 #import <ZLPhotoBrowser/ZLShowBigImgViewController.h>
 
 #import "CNMatchPayRequest.h"
+#import "PublicMethod.h"
 
 @interface CNMFastPayStatusVC ()
 
@@ -104,6 +105,11 @@
     [self setStatusUI:self.status];
     self.pictureArr1 = [NSMutableArray arrayWithCapacity:1];
     self.pictureArr2 = [NSMutableArray arrayWithCapacity:4];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadData];
 }
 
 - (void)setupUI {
@@ -204,6 +210,85 @@
         self.timeInterval = 0;
     }
     self.tip2Lb.text = [NSString stringWithFormat:@"%02ld分%02ld秒", self.timeInterval/60, self.timeInterval%60];
+}
+
+
+- (void)loadData {
+    __weak typeof(self) weakSelf = self;
+    [self showLoading];
+    [CNMatchPayRequest queryDepisit:self.transactionId finish:^(id  _Nullable response, NSError * _Nullable error) {
+        [weakSelf hideLoading];
+        if ([response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)response;
+            [weakSelf reloadUIWithModel:[[CNMBankModel alloc] initWithDictionary:dic error:nil]];
+            return;
+        }
+        IVJResponseObject *result = response;
+        [weakSelf showError:result.head.errMsg];
+    }];
+}
+
+- (void)reloadUIWithModel:(CNMBankModel *)bank {
+    if (bank == nil) {
+        return;
+    }
+    self.bankModel = bank;
+    switch (bank.status) {
+        case CNMPayBillStatusSubmit:
+            [self setStatusUI:CNMPayUIStatusSubmit];
+            break;
+        case CNMPayBillStatusPaying:
+            [self setStatusUI:CNMPayUIStatusPaying];
+            break;
+        case CNMPayBillStatusCancel:
+            
+            break;
+        case CNMPayBillStatusTimeout:
+            
+            break;
+        case CNMPayBillStatusConfirm:
+            [self setStatusUI:CNMPayUIStatusConfirm];
+            break;
+        case CNMPayBillStatusUnMatch:
+            
+            break;
+        case CNMPayBillStatusSuccess:
+            [self setStatusUI:CNMPayUIStatusSuccess];
+            break;
+    }
+    
+    [self.bankLogo sd_setImageWithURL:[NSURL URLWithString:[PublicMethod nowCDNWithUrl:bank.bankUrl]]];
+    self.bankName.text = bank.bankName;
+    self.accountName.text = bank.bankAccountName;
+    self.accountNo.text = bank.bankAccountNo;
+    self.bankAmount.text = [NSString stringWithFormat:@"%@元", bank.amount];
+    self.submitDate.text = bank.createdDate;
+    self.confirmDate.text = bank.comfirmTime;
+    
+    NSString *time;
+    switch (self.status) {
+        case CNMPayUIStatusPaying: {
+            time = bank.confirmTimeFmt;
+        }
+            break;
+        case CNMPayUIStatusConfirm: {
+            time = bank.payLimitTimeFmt;
+        }
+            break;
+            
+        case CNMPayUIStatusSuccess: {
+            self.confirmDate.text = bank.transactionId;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    if (time) {
+        NSArray *tem = [time componentsSeparatedByString:@";"];
+        self.timeInterval = [tem.firstObject intValue] * 60 + [tem.lastObject intValue];
+        [self.timer setFireDate:[NSDate distantPast]];
+    }
 }
 
 #pragma mark - 按钮组事件

@@ -38,6 +38,7 @@
     // 添加按钮
     UIButton *commitBtn = [alert createBtnWithTitle:commit];
     [commitBtn addTarget:alert action:@selector(commit) forControlEvents:UIControlEventTouchUpInside];
+    alert.commitBtn = commitBtn;
     if (cancel) {
         commitBtn.frame = CGRectMake(0, 1, (frame.size.width-1)*0.5, frame.size.height-1);
         [alert.btnView addSubview:commitBtn];

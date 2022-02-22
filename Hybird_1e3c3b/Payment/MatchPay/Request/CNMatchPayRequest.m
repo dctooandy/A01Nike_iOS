@@ -47,4 +47,12 @@
     dic[@"currency"] = @"CNY";
     [self Post:@"deposit/depositOperate" para:dic finish:finish];
 }
+
++ (void)queryDepisit:(NSString *)billId finish:(KYHTTPCallBack)finish {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    dic[@"transactionId"] = billId;
+    dic[@"merchant"] = @"A01";
+    dic[@"currency"] = @"CNY";
+    [self Post:@"deposit/depositDetail" para:dic finish:finish];
+}
 @end

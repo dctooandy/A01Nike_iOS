@@ -34,9 +34,16 @@ typedef NS_ENUM(NSUInteger, CNMPayBillStatus) {
 /// 单号
 @property (nonatomic, copy) NSString *transactionId;
 @property (nonatomic, copy) NSString *createdDate;
+
+/// 付款超时时间
 @property (nonatomic, copy) NSString *payLimitTime;
-/// 剩余倒计时时间
+/// 付款超时 剩余倒计时时间
 @property (nonatomic, copy) NSString *payLimitTimeFmt;
+/// 存款确认时间
+@property (nonatomic, copy) NSString *comfirmTime;
+/// 存款确认时间剩余倒计时时间
+@property (nonatomic, copy) NSString *confirmTimeFmt;
+
 @property (nonatomic, copy) NSString *currency;
 /// 1-存款提交 2-存款等待 3-存款取消 4-存款超时 5-存款确认 6-存款未匹配 100-存款完成
 @property (nonatomic, assign) CNMPayBillStatus status;

@@ -28,6 +28,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param billId  订单号
 /// @param finish 完成回调
 + (void)cancelDepisit:(NSString *)billId finish:(KYHTTPCallBack)finish;
+
+/// 查询取款详情
+/// @param billId  订单号
+/// @param finish 完成回调
++ (void)queryDepisit:(NSString *)billId finish:(KYHTTPCallBack)finish;
 @end
 
 NS_ASSUME_NONNULL_END

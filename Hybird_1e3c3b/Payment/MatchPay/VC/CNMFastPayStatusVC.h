@@ -20,9 +20,10 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
 };
 
 @interface CNMFastPayStatusVC : CNPayBaseVC
+@property (nonatomic, copy) NSString *transactionId;
 /// 不传默认 CNMPayUIStatusPaying
 @property (nonatomic, assign) CNMPayUIStatus status;
-/// 剩余取消次数, 必传
+/// 剩余取消次数
 @property (nonatomic, assign) NSInteger cancelTime;
 @property (nonatomic, strong) CNMBankModel *bankModel;
 @end
