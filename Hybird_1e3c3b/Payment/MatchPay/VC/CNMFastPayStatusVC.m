@@ -122,6 +122,9 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
     [self setStatusUI:self.status];
     self.pictureArr1 = [NSMutableArray arrayWithCapacity:1];
     self.pictureArr2 = [NSMutableArray arrayWithCapacity:4];
+    self.pictureName1 = [NSMutableArray arrayWithCapacity:1];
+    self.pictureName2 = [NSMutableArray arrayWithCapacity:4];
+    
     [self loadData];
 }
 
@@ -282,16 +285,16 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
     self.accountNo.text = bank.bankAccountNo;
     self.bankAmount.text = [NSString stringWithFormat:@"%.2f元", bank.amount.floatValue];
     self.submitDate.text = bank.createdDate;
-    self.confirmDate.text = bank.comfirmTime;
+    self.confirmDate.text = bank.confirmTime;
     
-    NSString *time;
+    NSString *timeSting;
     switch (self.status) {
         case CNMPayUIStatusPaying: {
-            time = bank.payLimitTimeFmt;
+            timeSting = bank.payLimitTimeFmt;
         }
             break;
         case CNMPayUIStatusConfirm: {
-            time = bank.confirmTimeFmt;
+            timeSting = bank.confirmTimeFmt;
         }
             break;
             
@@ -303,10 +306,12 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         default:
             break;
     }
-    if (time) {
-        NSArray *tem = [time componentsSeparatedByString:@";"];
+    if (timeSting) {
+        NSArray *tem = [timeSting componentsSeparatedByString:@";"];
         self.timeInterval = [tem.firstObject intValue] * 60 + [tem.lastObject intValue];
-        [self.timer setFireDate:[NSDate distantPast]];
+        if (self.timeInterval > 0) {
+            [self.timer setFireDate:[NSDate distantPast]];
+        }
     }
 }
 
@@ -428,7 +433,7 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
     }
     
     for (UIButton *btn in self.deleteBtnArr) {
-        btn.hidden = NO;
+        btn.hidden = YES;
     }
     
     for (int i = 0; i < self.pictureArr2.count; i++) {
@@ -459,26 +464,32 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
 
 /// 图片上传
 - (void)uploadImages {
-    self.pictureName1 = [NSMutableArray arrayWithCapacity:1];
-    self.pictureName2 = [NSMutableArray arrayWithCapacity:4];
-    
-    __block NSInteger uploadCount = self.pictureArr1.count + self.pictureArr2.count;
     [self showLoading];
-    
-    [CNMatchPayRequest uploadImage:self.pictureArr1.lastObject finish:^(id  _Nullable response, NSError * _Nullable error) {
-        uploadCount -= 1;
-        if ([response isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *dic = (NSDictionary *)response;
-            NSString *name = [dic objectForKey:@"fileName"];
-            if (name) {
-                [self.pictureName1 addObject:[dic objectForKey:@"fileName"]];
+    __block NSInteger uploadCount = self.pictureArr1.count + self.pictureArr2.count;
+    // 有就不用再次上传了
+    if (self.pictureName1.count == 0) {
+        [CNMatchPayRequest uploadImage:self.pictureArr1.lastObject finish:^(id  _Nullable response, NSError * _Nullable error) {
+            uploadCount -= 1;
+            if ([response isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *dic = (NSDictionary *)response;
+                NSString *name = [dic objectForKey:@"fileName"];
+                if (name) {
+                    [self.pictureName1 addObject:name];
+                }
             }
-        }
-        if (uploadCount == 0) {
-            [self uploadFinish];
-        }
-    }];
+            if (uploadCount == 0) {
+                [self uploadFinish];
+            }
+        }];
+    } else {
+        uploadCount -= self.pictureArr1.count;
+    }
     
+    // 有就不用再次上传了
+    if (self.pictureName2.count > 0) {
+        uploadCount -= self.pictureArr2.count;
+        return;
+    }
     for (UIImage *image in self.pictureArr2) {
         [CNMatchPayRequest uploadImage:image finish:^(id  _Nullable response, NSError * _Nullable error) {
             uploadCount -= 1;
@@ -486,7 +497,7 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
                 NSDictionary *dic = (NSDictionary *)response;
                 NSString *name = [dic objectForKey:@"fileName"];
                 if (name) {
-                    [self.pictureName2 addObject:[dic objectForKey:@"fileName"]];
+                    [self.pictureName2 addObject:name];
                 }
             }
             if (uploadCount == 0) {
@@ -507,10 +518,12 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         [self hideLoading];
         if ([response isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary *)response;
-            NSString *name = [dic objectForKey:@"fileName"];
-            if (name) {
+            if ([[dic objectForKey:@"code"] isEqualToString:@"00000"]) {
                 [self setStatusUI:CNMPayUIStatusConfirm];
                 [self.pictureView removeFromSuperview];
+                [self loadData];
+            } else {
+                [self showError:[dic objectForKey:@"message"]];
             }
         }
     }];
