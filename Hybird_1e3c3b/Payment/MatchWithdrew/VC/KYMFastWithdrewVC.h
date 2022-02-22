@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "KYMGetWithdrewDetailModel.h"
+#import "HABaseViewController.h"
+#import "KYMWithdrewFaildVC.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface KYMFastWithdrewVC : UIViewController
-
+@interface KYMFastWithdrewVC : HABaseViewController
+@property (nonatomic, strong) KYMGetWithdrewDetailModel *detailModel;
 @end
 
 NS_ASSUME_NONNULL_END

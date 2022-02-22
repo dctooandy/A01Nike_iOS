@@ -24,9 +24,9 @@
 - (void)forgotClicked {
     self.forgotPwdBlock();
 }
-- (void)setCanUseCount:(NSUInteger)canUseCount
+- (void)setCanUseCount:(NSString *)canUseCount
 {
     _canUseCount = canUseCount;
-    self.countLB.text = [@(canUseCount) stringValue];
+    self.countLB.text = canUseCount;
 }
 @end

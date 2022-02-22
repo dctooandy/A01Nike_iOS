@@ -10,6 +10,7 @@
 #import "BTTBankModel.h"
 #import "BTTBetInfoModel.h"
 #import "BTTCustomerBalanceModel.h"
+#import "KYMWithdrewCheckModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTWithdrawalController : BTTCollectionViewController
@@ -30,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * iChiPayLimit;
 @property (nonatomic, copy) NSString * cnyLimit;
 @property (nonatomic, assign) BOOL isMatchWithdrew; //是否为撮合取款
-@property (nonatomic, strong) NSArray *matchWithdrewAmountList;
+@property (nonatomic, strong) KYMWithdrewCheckModel *checkModel;
 @end
 
 NS_ASSUME_NONNULL_END

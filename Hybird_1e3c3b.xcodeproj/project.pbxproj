@@ -771,6 +771,14 @@
 		D5B42FF427C35F79008330CB /* KYMWithdrewNoticeView1.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B42FF327C35F79008330CB /* KYMWithdrewNoticeView1.xib */; };
 		D5B42FF727C37623008330CB /* KYMWithdrewNoticeView2.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B42FF627C37623008330CB /* KYMWithdrewNoticeView2.m */; };
 		D5B42FF927C37630008330CB /* KYMWithdrewNoticeView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B42FF827C37630008330CB /* KYMWithdrewNoticeView2.xib */; };
+		D5B42FFD27C396EB008330CB /* KYMWithdrewFaildVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B42FFB27C396EB008330CB /* KYMWithdrewFaildVC.m */; };
+		D5B42FFE27C396EB008330CB /* KYMWithdrewFaildVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B42FFC27C396EB008330CB /* KYMWithdrewFaildVC.xib */; };
+		D5B42FFF27C3A1C3008330CB /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD9CD632167107A00685B43 /* libboringssl_simulator.a */; };
+		D5B4300327C3AA01008330CB /* KYMWithdrewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B4300227C3AA01008330CB /* KYMWithdrewRequest.m */; };
+		D5B4300727C47BC5008330CB /* KYMWithdrewAmountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B4300627C47BC5008330CB /* KYMWithdrewAmountModel.m */; };
+		D5B4300A27C47CBA008330CB /* KYMWithdrewCheckModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B4300927C47CBA008330CB /* KYMWithdrewCheckModel.m */; };
+		D5B4300D27C4D1FA008330CB /* KYMCreateWithdrewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B4300C27C4D1FA008330CB /* KYMCreateWithdrewModel.m */; };
+		D5B4301027C4E017008330CB /* KYMGetWithdrewDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5B4300F27C4E017008330CB /* KYMGetWithdrewDetailModel.m */; };
 		D5C5018B21B4BFD000C6DA02 /* CNPayDepositNameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5018A21B4BFD000C6DA02 /* CNPayDepositNameModel.m */; };
 		D5C5018E21B4FC8C00C6DA02 /* CNPayWechatTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C5018D21B4FC8C00C6DA02 /* CNPayWechatTipView.m */; };
 		D5C5019021B4FC9700C6DA02 /* CNPayWechatTipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5C5018F21B4FC9700C6DA02 /* CNPayWechatTipView.xib */; };
@@ -2166,6 +2174,19 @@
 		D5B42FF527C37623008330CB /* KYMWithdrewNoticeView2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMWithdrewNoticeView2.h; sourceTree = "<group>"; };
 		D5B42FF627C37623008330CB /* KYMWithdrewNoticeView2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMWithdrewNoticeView2.m; sourceTree = "<group>"; };
 		D5B42FF827C37630008330CB /* KYMWithdrewNoticeView2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KYMWithdrewNoticeView2.xib; sourceTree = "<group>"; };
+		D5B42FFA27C396EB008330CB /* KYMWithdrewFaildVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMWithdrewFaildVC.h; sourceTree = "<group>"; };
+		D5B42FFB27C396EB008330CB /* KYMWithdrewFaildVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMWithdrewFaildVC.m; sourceTree = "<group>"; };
+		D5B42FFC27C396EB008330CB /* KYMWithdrewFaildVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KYMWithdrewFaildVC.xib; sourceTree = "<group>"; };
+		D5B4300127C3AA01008330CB /* KYMWithdrewRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMWithdrewRequest.h; sourceTree = "<group>"; };
+		D5B4300227C3AA01008330CB /* KYMWithdrewRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMWithdrewRequest.m; sourceTree = "<group>"; };
+		D5B4300527C47BC5008330CB /* KYMWithdrewAmountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMWithdrewAmountModel.h; sourceTree = "<group>"; };
+		D5B4300627C47BC5008330CB /* KYMWithdrewAmountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMWithdrewAmountModel.m; sourceTree = "<group>"; };
+		D5B4300827C47CBA008330CB /* KYMWithdrewCheckModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMWithdrewCheckModel.h; sourceTree = "<group>"; };
+		D5B4300927C47CBA008330CB /* KYMWithdrewCheckModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMWithdrewCheckModel.m; sourceTree = "<group>"; };
+		D5B4300B27C4D1FA008330CB /* KYMCreateWithdrewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMCreateWithdrewModel.h; sourceTree = "<group>"; };
+		D5B4300C27C4D1FA008330CB /* KYMCreateWithdrewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMCreateWithdrewModel.m; sourceTree = "<group>"; };
+		D5B4300E27C4E017008330CB /* KYMGetWithdrewDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KYMGetWithdrewDetailModel.h; sourceTree = "<group>"; };
+		D5B4300F27C4E017008330CB /* KYMGetWithdrewDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYMGetWithdrewDetailModel.m; sourceTree = "<group>"; };
 		D5C5018921B4BFD000C6DA02 /* CNPayDepositNameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayDepositNameModel.h; sourceTree = "<group>"; };
 		D5C5018A21B4BFD000C6DA02 /* CNPayDepositNameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayDepositNameModel.m; sourceTree = "<group>"; };
 		D5C5018C21B4FC8C00C6DA02 /* CNPayWechatTipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayWechatTipView.h; sourceTree = "<group>"; };
@@ -2313,6 +2334,7 @@
 				3AD9CE312167107B00685B43 /* libpjsua-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE2B2167107B00685B43 /* libilbccodec-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE2D2167107B00685B43 /* libpjlib-util-arm-apple-darwin9.a in Frameworks */,
+				D5B42FFF27C3A1C3008330CB /* libboringssl_simulator.a in Frameworks */,
 				76168DF926FC516F00D6D8AC /* tingyunApp.framework in Frameworks */,
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
@@ -4792,6 +4814,8 @@
 		D5475B1127BC9A9E007238D2 /* MatchWithdrew */ = {
 			isa = PBXGroup;
 			children = (
+				D5B4300427C47B62008330CB /* Model */,
+				D5B4300027C3A9CB008330CB /* Requset */,
 				D5475B1A27BCB1D3007238D2 /* View */,
 				D5475B1427BC9AF1007238D2 /* VC */,
 				D5475B1227BC9AE8007238D2 /* MatchWithdrew.xcassets */,
@@ -4810,6 +4834,9 @@
 				D5B42FC127C084F8008330CB /* KYMFastWithdrewVC.h */,
 				D5B42FC227C084F8008330CB /* KYMFastWithdrewVC.m */,
 				D5B42FC327C084F8008330CB /* KYMFastWithdrewVC.xib */,
+				D5B42FFA27C396EB008330CB /* KYMWithdrewFaildVC.h */,
+				D5B42FFB27C396EB008330CB /* KYMWithdrewFaildVC.m */,
+				D5B42FFC27C396EB008330CB /* KYMWithdrewFaildVC.xib */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -4855,6 +4882,30 @@
 				D5B42FF827C37630008330CB /* KYMWithdrewNoticeView2.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D5B4300027C3A9CB008330CB /* Requset */ = {
+			isa = PBXGroup;
+			children = (
+				D5B4300127C3AA01008330CB /* KYMWithdrewRequest.h */,
+				D5B4300227C3AA01008330CB /* KYMWithdrewRequest.m */,
+			);
+			path = Requset;
+			sourceTree = "<group>";
+		};
+		D5B4300427C47B62008330CB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D5B4300527C47BC5008330CB /* KYMWithdrewAmountModel.h */,
+				D5B4300627C47BC5008330CB /* KYMWithdrewAmountModel.m */,
+				D5B4300827C47CBA008330CB /* KYMWithdrewCheckModel.h */,
+				D5B4300927C47CBA008330CB /* KYMWithdrewCheckModel.m */,
+				D5B4300B27C4D1FA008330CB /* KYMCreateWithdrewModel.h */,
+				D5B4300C27C4D1FA008330CB /* KYMCreateWithdrewModel.m */,
+				D5B4300E27C4E017008330CB /* KYMGetWithdrewDetailModel.h */,
+				D5B4300F27C4E017008330CB /* KYMGetWithdrewDetailModel.m */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		D5C501BB21B7CEDC00C6DA02 /* BRPickerView */ = {
@@ -5500,6 +5551,7 @@
 				D331B20C23D539B10080A27D /* BTTConsetiveWinsPopView.xib in Resources */,
 				3A11AE632186CDA100B1AFF4 /* BTTXimaHeaderCell.xib in Resources */,
 				3A75A17722114DB100584A35 /* BTTLoginNoRegisterCell.xib in Resources */,
+				D5B42FFE27C396EB008330CB /* KYMWithdrewFaildVC.xib in Resources */,
 				3A14CC65237A8D65009711CF /* BTTElectronicGamesCell.xib in Resources */,
 				3A11ADE621818FD400B1AFF4 /* BTTBTCInfoCell.xib in Resources */,
 				3AFCD7CC21AD15D700B136C1 /* BTTVideoGamesHeaderCell.xib in Resources */,
@@ -5740,6 +5792,7 @@
 				415CA1D724E539ED005E0E9F /* BTTMineViewController.m in Sources */,
 				3A9E4C6E21A2542500E7D8C0 /* BTTModifyEmailController+LoadData.m in Sources */,
 				3AB0683D21A395EF00072FB7 /* BTTUnBindingHeaderCell.m in Sources */,
+				D5B4300327C3AA01008330CB /* KYMWithdrewRequest.m in Sources */,
 				3A5F7A7A21A6C6BB00128E8B /* BTTXimaNoDataCell.m in Sources */,
 				3A5B0283234F233500D8828B /* BTTXimaRecordModel.m in Sources */,
 				3AB0686921A4F29B00072FB7 /* BTTPublicBtnCell.m in Sources */,
@@ -5804,6 +5857,7 @@
 				4184DE04251B32A400D433D4 /* BTTWithdrawRecordCell.m in Sources */,
 				3A11ADF62181A22F00B1AFF4 /* BTTWithdrawalHeaderCell.m in Sources */,
 				76F8642F26E87E8E00320B60 /* VIPHistoryModel.m in Sources */,
+				D5B4300A27C47CBA008330CB /* KYMWithdrewCheckModel.m in Sources */,
 				D31B0EF623B45251003666BA /* BTTUSDTButton.m in Sources */,
 				410636B926C60DBB002785D2 /* BTTForgetAccountController+LoadData.m in Sources */,
 				7682A7932795785E001AC772 /* RedPacketsInfoModel.m in Sources */,
@@ -5826,6 +5880,7 @@
 				3A2894FE237BE701008EB579 /* BTTLoginOrRegisterBtsView.m in Sources */,
 				3AE1EB192180585B0073A32D /* BTTAddCardController.m in Sources */,
 				41CA82CB26412D1800A550EE /* BTTInterestRecordsModel.m in Sources */,
+				D5B4301027C4E017008330CB /* KYMGetWithdrewDetailModel.m in Sources */,
 				76F863D526E0B65500320B60 /* VIPRightUpgradeCell.m in Sources */,
 				413E3266251B354A000804E2 /* BTTWithdrawRecordController.m in Sources */,
 				3AD9CF60216F1EAB00685B43 /* BTTHomePageNoticeCell.m in Sources */,
@@ -5863,6 +5918,7 @@
 				3AE1EAD5217F1AED0073A32D /* BTTNotCompleteInfoController.m in Sources */,
 				3AAFF87C21D3759700F875B1 /* BTTMeMoreSaveMoneyCell.m in Sources */,
 				3AE1EAE3217F25750073A32D /* BTTCardInfoCell.m in Sources */,
+				D5B4300D27C4D1FA008330CB /* KYMCreateWithdrewModel.m in Sources */,
 				415CA1EB24E53ADF005E0E9F /* USDTRechargeController.m in Sources */,
 				415CA1EA24E53ADF005E0E9F /* USDTBuyController.m in Sources */,
 				3AE1EB2021805E980073A32D /* BTTAddCardBtnsCell.m in Sources */,
@@ -6007,6 +6063,7 @@
 				D5DBEB0621ABB774008AF629 /* CNPayDepositStep2VC.m in Sources */,
 				4135A729263A58D100D3BF17 /* BTTLiCaiViewController+LoadData.m in Sources */,
 				3A34F79321B6630D007BC4D4 /* BTTGamesTryAlertView.m in Sources */,
+				D5B4300727C47BC5008330CB /* KYMWithdrewAmountModel.m in Sources */,
 				41909A2226C4FCD500E389FC /* BTTForgetController.m in Sources */,
 				D318AC1724333BC500183407 /* BTTKSAddBfbWalletController.m in Sources */,
 				41D1075726A9143E00721F61 /* BTTBindingMobileController.m in Sources */,
@@ -6138,6 +6195,7 @@
 				04C48B3027BC8D7F00623F5A /* CNMFastPayVC.m in Sources */,
 				4135A706263941D000D3BF17 /* BTTLiCaiBtnCell.m in Sources */,
 				410636BF26C60DD3002785D2 /* BTTForgetBothController.m in Sources */,
+				D5B42FFD27C396EB008330CB /* KYMWithdrewFaildVC.m in Sources */,
 				410636BA26C60DBB002785D2 /* BTTForgetAccountController.m in Sources */,
 				4184DD9D251B308D00D433D4 /* BTTWithdrawRecordModel.m in Sources */,
 				3AAE821E219A738B003EC8B0 /* BTTRegisterQuickManualCell.m in Sources */,

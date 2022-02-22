@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface KYMWithdrewHomeNotifyCell : UICollectionViewCell
 @property (nonatomic, strong) void(^forgotPwdBlock)(void);
-@property (nonatomic, assign) NSUInteger canUseCount;
+@property (nonatomic, copy) NSString *canUseCount;
 @end
 
 NS_ASSUME_NONNULL_END

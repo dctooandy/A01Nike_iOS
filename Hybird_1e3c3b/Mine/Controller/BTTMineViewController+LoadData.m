@@ -7,7 +7,6 @@
 //
 
 #import "BTTMineViewController+LoadData.h"
-#import "BTTMeMainModel.h"
 #import "CNPayRequestManager.h"
 #import "CNPaymentModel.h"
 #import "BTTMakeCallSuccessView.h"
@@ -20,7 +19,7 @@
 #import "BTTMineViewController+Nav.h"
 
 @interface BTTMineViewController ()
-@property (nonatomic, strong) BTTMeMainModel *fastModel;
+
 @end
 
 @implementation BTTMineViewController (LoadData)

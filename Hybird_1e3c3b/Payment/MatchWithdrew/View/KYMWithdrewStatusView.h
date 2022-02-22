@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *statusLB3;
 @property (weak, nonatomic) IBOutlet UILabel *statusLB4;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *statusLB2Width;
-@property (strong, nonatomic) void(^block)(void);
+
 @end
 
 NS_ASSUME_NONNULL_END

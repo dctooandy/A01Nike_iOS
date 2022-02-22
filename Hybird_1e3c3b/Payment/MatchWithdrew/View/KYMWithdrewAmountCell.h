@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "KYMWithdrewAmountModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @class KYMWithdrewAmountCell;
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 @interface KYMWithdrewAmountCell : UICollectionViewCell
-@property (nonatomic, strong) NSArray *amountArray;
+@property (nonatomic, strong) NSArray<KYMWithdrewAmountModel *> *amountArray;
 @property (nonatomic, weak) id<KYMWithdrewAmountCellDelegate> delegate;
 @end
 

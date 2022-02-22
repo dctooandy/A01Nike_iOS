@@ -41,7 +41,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupSubViews];
-    self.status = 0;
+    self.status = self.detailModel.data.status;
+    [self.bankView.iconImgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.data.bankIcon] placeholderImage:nil];
+    self.bankView.bankName.text = self.detailModel.data.bankName;
+    self.bankView.accoutName.text = self.detailModel.data.bankAccountName;
+    self.bankView.account.text = self.detailModel.data.bankAccountNo;
+    self.bankView.withdrawType.text = @"急速取款";
+    self.bankView.amount.text = [self.detailModel.data.amount stringByAppendingString:@"元"];
+    self.bankView.submitTime.text = self.detailModel.data.createdDate;
+    self.amountView.amountLB.text = [NSString stringWithFormat:@"¥ %@元",self.detailModel.data.amount];
 }
 - (void)setupSubViews
 {
@@ -53,9 +61,6 @@
         make.height.offset(CGRectGetHeight([UIScreen mainScreen].bounds));
     }];
     self.statusView = [[KYMWithdrewStatusView alloc] init];
-    self.statusView.block = ^{
-        self.status++;
-    };
     self.amountView = [[KYMWithdrewAmountView alloc] init];
     self.bankView = [[KYMWithdrewBankView alloc] init];
     self.lineView = [[UIView alloc] init];
@@ -143,6 +148,13 @@
 - (void)setStatus:(KYMWithdrewStatus)status
 {
     _status = status;
+    if (status == KYMWithdrewStatusNotMatch || status == KYMWithdrewStatusFaild) {
+        KYMWithdrewFaildVC *vc = [[KYMWithdrewFaildVC alloc] init];
+        vc.userName = self.detailModel.data.loginName;
+        vc.amountStr = self.detailModel.data.amount;
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
     self.statusView.status = status;
     self.amountView.status = status;
     self.submitView.status = status;
@@ -152,7 +164,7 @@
     CGFloat submitTop = 0;
     CGFloat customerTop = 0;
     switch (self.status) {
-        case 0:
+        case KYMWithdrewStatusSubmit:
             statusViewHeight = 160;
             amountViewHeight = 61;
             submitHeight = 48;
@@ -165,7 +177,7 @@
             self.cusmoterView.hidden = YES;
             self.lineView.hidden = YES;
             break;
-        case 1:
+        case KYMWithdrewStatusWaiting:
             statusViewHeight = 160;
             amountViewHeight = 61;
             submitHeight = 48;
@@ -178,7 +190,7 @@
             self.cusmoterView.hidden = NO;
             self.lineView.hidden = NO;
             break;
-        case 2:
+        case KYMWithdrewStatusConfirm:
             statusViewHeight = 160;
             amountViewHeight = 90;
             submitHeight = 125;
@@ -191,7 +203,7 @@
             self.cusmoterView.hidden = NO;
             self.lineView.hidden = NO;
             break;
-        case 3:
+        case KYMWithdrewStatusNotReceived:
             statusViewHeight = 160;
             amountViewHeight = 90;
             submitHeight = 125;
@@ -204,7 +216,7 @@
             self.cusmoterView.hidden = NO;
             self.lineView.hidden = NO;
             break;
-        case 4:
+        case KYMWithdrewStatusTimeout:
             statusViewHeight = 138;
             amountViewHeight = 123;
             submitHeight = 48;
@@ -217,7 +229,7 @@
             self.cusmoterView.hidden = NO;
             self.lineView.hidden = YES;
             break;
-        case 5:
+        case KYMWithdrewStatusSuccessed:
             statusViewHeight = 138;
             amountViewHeight = 102;
             submitHeight = 48;
@@ -255,11 +267,12 @@
     [self.contentView bringSubviewToFront:self.submitView];
 }
 - (void)submitBtnClicked {
-    if (self.status < 5) {
-        self.status++;
-    }
+    
 }
 - (void)customerBtnClicked {
     printf("11111111");
+}
+- (void)goToBack {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end

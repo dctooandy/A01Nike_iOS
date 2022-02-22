@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface KYMWithdrewAmountListCell : UICollectionViewCell
-@property (nonatomic, assign) CGFloat amount;
+@property (nonatomic, copy) NSString *amount;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -173,12 +173,15 @@
         names3 = @[@"",@"比特币",@"取款至",@"资金密码",@"联系客服",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
         names4 = @[@"",@"预估到账",@"取款至",@"资金密码",@"联系客服",@"",@"",@""];
         
-        NSUInteger lineCount = self.matchWithdrewAmountList.count / 3;
+        NSUInteger lineCount = self.checkModel.amountList.count / 3;
         CGFloat matchWithdrewAmountH = 32 * lineCount + 16 + 8 * (lineCount - 1);
         heights1 = @[@205.0,@(matchWithdrewAmountH)];
         if (lineCount > 1) {
             heights3 = @[@15.0,@44.0,@44.0,@44.0,@302.0,@100.0];
             heights4 = @[@15.0,@44.0,@44,@44,@302.0,@44.0,@46.0,@240.0];
+        } else {
+            heights3 = @[@0.0,@44.0,@44.0,@44.0,@302.0,@100.0];
+            heights4 = @[@0.0,@44.0,@44,@44,@302.0,@44.0,@46.0,@240.0];
         }
         canEdits3 = @[@NO,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO];
         canEdits4 = @[@NO,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO,@NO];

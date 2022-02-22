@@ -11,12 +11,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, KYMWithdrewStatus) {
-    KYMWithdrewStatusChecking = 0, //审核中
-    KYMWithdrewStatusChecked = 1, //审核通过，付款中
-    KYMWithdrewStatusPaid = 2, //已付款，等待到账
-    KYMWithdrewStatusFaild = 3, //订单异常
-    KYMWithdrewStatusTimeout = 4, //确认超时
-    KYMWithdrewStatusSuccessed = 5, //成功
+    KYMWithdrewStatusSubmit = 1, //取款提交
+    KYMWithdrewStatusWaiting = 2, //取款等待
+    KYMWithdrewStatusNotMatch = 3, //取款未匹配
+    KYMWithdrewStatusTimeout = 4, //取款超时
+    KYMWithdrewStatusConfirm = 5, //取款确认
+    KYMWithdrewStatusFaild = 6, //取款失败
+    KYMWithdrewStatusNotReceived = 7, //取款未到账
+    KYMWithdrewStatusSuccessed = 100, //取款成功
 };
 
 @interface KYMWidthdrewUtility : NSObject

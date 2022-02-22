@@ -78,7 +78,8 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    self.selectedChannelCallback(indexPath.row);
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)closeBtnClicked:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];

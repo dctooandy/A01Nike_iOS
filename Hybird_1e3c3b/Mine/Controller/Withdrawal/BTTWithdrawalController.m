@@ -31,7 +31,8 @@
 #import "BTTActionSheet.h"
 #import "KYMWithdrewAmountCell.h"
 #import "KYMWithdrewHomeNotifyCell.h"
-
+#import "KYMWithdrewRequest.h"
+#import "KYMFastWithdrewVC.h"
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate,KYMWithdrewAmountCellDelegate>
 @property(nonatomic, copy)NSString *amount;
 @property(nonatomic, copy)NSString *password;
@@ -39,15 +40,13 @@
 @property(nonatomic, strong) UITextField *usdtField;
 @property (nonatomic, copy) NSString *selectedProtocol;
 @property(nonatomic, strong) NSIndexPath *selectedMatchIndexPath;
+@property (nonatomic, assign) BOOL submitBtnEnable;
 @end
 
 @implementation BTTWithdrawalController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.isMatchWithdrew = YES;
-    _matchWithdrewAmountList = @[@(100.77),@(100),@(100.01),@(310.11),@(101.77),@(210.77),@(100.77)];
-//    _matchWithdrewAmountList = @[@(100.77),@(100),@(100.01)];
     self.title = @"取款";
     self.selectIndex = 0;
     self.isSellUsdt = NO;
@@ -104,7 +103,11 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"KYMWithdrewAmountCell" bundle:nil] forCellWithReuseIdentifier:@"KYMWithdrewAmountCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"KYMWithdrewHomeNotifyCell" bundle:nil] forCellWithReuseIdentifier:@"KYMWithdrewHomeNotifyCell"];
 }
-
+- (void)setSubmitBtnEnable:(BOOL)submitBtnEnable
+{
+    _submitBtnEnable = submitBtnEnable;
+    [self getSubmitBtn].enabled = submitBtnEnable;
+}
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.sheetDatas.count;
 }
@@ -140,7 +143,7 @@
     //撮合取款
     if (self.isMatchWithdrew && indexPath.row == 1) {
         KYMWithdrewAmountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KYMWithdrewAmountCell" forIndexPath:indexPath];
-        cell.amountArray = self.matchWithdrewAmountList;
+        cell.amountArray = self.checkModel.amountList;
         cell.delegate = self;
         return cell;
     }
@@ -197,6 +200,7 @@
             BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         };
+        cell.confirmBtn.enabled = self.submitBtnEnable;
         return cell;
     }
     if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"] && indexPath.row == self.sheetDatas.count-3) {
@@ -211,7 +215,7 @@
     }
     if ([cellName isEqualToString:@"联系客服"]) {
         KYMWithdrewHomeNotifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KYMWithdrewHomeNotifyCell" forIndexPath:indexPath];
-        cell.canUseCount = 100;
+        cell.canUseCount = self.checkModel.remainWithdrawTimes;
         cell.forgotPwdBlock = ^{
             
         };
@@ -310,12 +314,12 @@
 
 - (void)matchWithdrewAmountCellDidSelected:(KYMWithdrewAmountCell *)cell indexPath:(NSIndexPath *)indexPath
 {
-    self.amount = [NSString stringWithFormat:@"%@",cell.amountArray[indexPath.row]];
+    self.amount = cell.amountArray[indexPath.row].amount;
     self.selectedMatchIndexPath = indexPath;
     if ([PublicMethod isValidateWithdrawPwdNumber:self.password]) {
-        [self getSubmitBtn].enabled = true;
+        self.submitBtnEnable = true;
     } else {
-        [self getSubmitBtn].enabled = false;
+        self.submitBtnEnable = false;
     }
 }
 - (void)setupElements {
@@ -338,9 +342,9 @@
     if (textField.tag == 8001) {
         self.password = textField.text;
         if ([PublicMethod isValidateWithdrawPwdNumber:self.password]) {
-            [self getSubmitBtn].enabled = true;
+            self.submitBtnEnable = true;
         } else {
-            [self getSubmitBtn].enabled = false;
+            self.submitBtnEnable = false;
         }
     } else if (textField.tag == 8002) {
         self.amount = textField.text;
@@ -366,10 +370,10 @@
     }
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         BOOL enable = amount >= usdtLimitNum && amount <= 1430000 && [PublicMethod isValidateWithdrawPwdNumber:self.password];
-        [self getSubmitBtn].enabled = enable;
+        self.submitBtnEnable = enable;
     }else{
         BOOL enable = amount >= cnyLimitNum && amount <= 10000000 && [PublicMethod isValidateWithdrawPwdNumber:self.password];
-        [self getSubmitBtn].enabled = enable;
+        self.submitBtnEnable = enable;
     }
     
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
@@ -458,7 +462,7 @@
         self.usdtAmount = @"";
         self.password = @"";
         self.usdtField.text = self.usdtAmount;
-        [self getSubmitBtn].enabled = false;
+        self.submitBtnEnable = false;
         [self loadMainData];
     }];
 }
@@ -561,7 +565,15 @@
     
     if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]) {
         [self showLoading];
-        [self createRequestWithBtcModel:nil usdtModel:nil];
+    
+        if (self.isMatchWithdrew) {
+            //撮合取款
+            [self createRequestMatchWithdraw];
+        } else {
+            //普通取款
+            [self createRequestWithBtcModel:nil usdtModel:nil];
+        }
+        
     }else if ([self.bankList[self.selectIndex].accountType isEqualToString:@"BTC"]){
         NSDictionary *params = @{
             @"amount":self.amount,
@@ -598,7 +610,51 @@
         }];
     }
 }
-
+- (void)createRequestMatchWithdraw
+{
+    //撮合取款
+    BTTBankModel *model = self.bankList[self.selectIndex];
+    NSMutableDictionary *mparams = @{}.mutableCopy;
+//            mparams[@"loginName"] = @""; //用户名，底层已拼接
+//            mparams[@"productId"] = @""; //脱敏产品编号，底层已拼接
+    mparams[@"accountId"] = model.accountId;; //银行账户编号
+    mparams[@"amount"] = self.amount; //取款金额
+    mparams[@"currency"] = @"CNY"; //币种
+    mparams[@"withdrawType"] = @"4"; //取款提案类型
+    mparams[@"password"] = [IVRsaEncryptWrapper encryptorString:self.password]; //取款密码
+    [self showLoading];
+    
+    [KYMWithdrewRequest createWithdrawWithParams:mparams.copy callback:^(BOOL status, NSString * _Nonnull msg, KYMCreateWithdrewModel  *_Nonnull model) {
+        [self hideLoading];
+        if (!status) {
+            [MBProgressHUD showMessagNoActivity:msg toView:nil];
+            return;
+        }
+        
+        NSMutableDictionary *mparams1 = @{}.mutableCopy;
+    //            mparams[@"loginName"] = @""; //用户名，底层已拼接
+    //            mparams[@"productId"] = @""; //脱敏产品编号，底层已拼接
+        mparams1[@"merchant"] = @"A01";
+        mparams1[@"transactionId"] = model.referenceId;
+        [self showLoading];
+        [KYMWithdrewRequest getWithdrawDetailWithParams:mparams1.copy callback:^(BOOL status, NSString * _Nonnull msg, KYMGetWithdrewDetailModel * _Nonnull model1) {
+            [self hideLoading];
+            if (!status) {
+                [MBProgressHUD showMessagNoActivity:msg toView:nil];
+                return;
+            }
+            if (model1.data.status == KYMWithdrewStatusFaild || model1.data.status == KYMWithdrewStatusNotMatch) {
+                KYMWithdrewFaildVC *vc = [KYMWithdrewFaildVC new];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
+                vc.detailModel = model1;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        }];
+        
+    }];
+}
 - (void)createRequestWithBtcModel:(BTTBTCRateModel *)btcModel usdtModel:(CNPayUSDTRateModel *)usdtModel{
     NSString *amount = self.amount;
     BTTBankModel *model = self.bankList[self.selectIndex];
