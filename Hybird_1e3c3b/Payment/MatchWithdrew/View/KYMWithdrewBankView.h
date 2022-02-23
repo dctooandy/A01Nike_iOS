@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "KYMWidthdrewUtility.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface KYMWithdrewBankView : UIView
+@property (nonatomic ,assign) KYMWithdrewStep step;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImgView;
 @property (weak, nonatomic) IBOutlet UILabel *bankName;
 @property (weak, nonatomic) IBOutlet UILabel *accoutName;
@@ -18,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *withdrawType;
 @property (weak, nonatomic) IBOutlet UILabel *amount;
 @property (weak, nonatomic) IBOutlet UILabel *submitTime;
+@property (weak, nonatomic) IBOutlet UILabel *confirmTime;
+@property (weak, nonatomic) IBOutlet UIStackView *confirmTimeStack;
 
 @end
 

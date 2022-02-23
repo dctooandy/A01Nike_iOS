@@ -701,7 +701,7 @@
                             [MBProgressHUD showMessagNoActivity:msg toView:nil];
                             return;
                         }
-                        if (model.amountList.count > 0) {
+                        if (model.data.amountList.count > 0) {
                             //取款类型选择弹框
                             KYMSelectChannelVC *vc = [[KYMSelectChannelVC alloc] init];
                             vc.checkModel = model;

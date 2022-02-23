@@ -8,6 +8,7 @@
 
 #import "KYMWithdrewRequest.h"
 
+
 @implementation KYMWithdrewRequest
 
 
@@ -17,16 +18,13 @@
             callback(NO, msg ? : @"操作失败，数据异常",@"");
             return;
         }
-        KYMWithdrewCheckModel *model = nil;
-        NSDictionary *data = [body valueForKey:@"data"];
-        if (data) {
-            model = [KYMWithdrewCheckModel yy_modelWithJSON:data];
+        KYMWithdrewCheckModel *model = [KYMWithdrewCheckModel yy_modelWithJSON:body];
+        NSString *errMsg = model.message ? : msg;
+        if ([model.code isEqualToString:@"00000"]) {
+            callback(YES,model.message,model);
         } else {
-            status = NO;
-            msg = @"操作失败，数据异常";
+            callback(NO,errMsg,model);
         }
-        
-        callback(status,msg,model);
     });
 }
 + (void)createWithdrawWithParams:(NSDictionary *)params callback:(KYMCallback)callback {
@@ -49,6 +47,21 @@
         KYMGetWithdrewDetailModel *model = [KYMGetWithdrewDetailModel yy_modelWithJSON:body];
         
         callback(status,msg,model);
+    });
+}
++ (void)checkReceiveStatus:(NSDictionary *)params callback:(KYMCallback)callback {
+    kym_sendRequest(@"withdraw/withdrawOperate",params, ^(BOOL status, NSString * msg , NSDictionary *body) {
+        if (body == nil || body == NULL || ![body isKindOfClass:[NSDictionary class]]) {
+            callback(NO, msg ? : @"操作失败，数据异常",@"");
+            return;
+        }
+        KYMCheckReceiveModel *model = [KYMCheckReceiveModel yy_modelWithJSON:body];
+        NSString *errMsg = model.message ? : msg;
+        if ([model.code isEqualToString:@"00000"]) {
+            callback(YES,model.message,model);
+        } else {
+            callback(NO,errMsg,model);
+        }
     });
 }
 @end

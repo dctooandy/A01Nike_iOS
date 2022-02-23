@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface KYMWithdrewStatusView : UIView
-@property (nonatomic ,assign) KYMWithdrewStatus status;
+@property (nonatomic ,assign) KYMWithdrewStep step;
 @property (weak, nonatomic) IBOutlet UIView *statusItemView;
 @property (nonatomic, strong) NSArray *statusTitleArray;
 @property (weak, nonatomic) IBOutlet UILabel *stautsLB1;

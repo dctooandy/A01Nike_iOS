@@ -12,7 +12,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface KYMWithdrewAmountView : UIView
-@property (nonatomic ,assign) KYMWithdrewStatus status;
+@property (nonatomic ,assign) KYMWithdrewStep step;
+@property (copy, nonatomic) NSString *amount;
 @property (weak, nonatomic) IBOutlet UILabel *amountLB;
 @property (weak, nonatomic) IBOutlet UILabel *amountStatusLB1;
 @property (weak, nonatomic) IBOutlet UILabel *amountStatusLB2;
