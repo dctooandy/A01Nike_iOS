@@ -62,6 +62,8 @@
 #import "BTTUserForzenManager.h"
 #import "KYMFastWithdrewVC.h"
 #import "BTTMeGoldenCCell.h"
+#import "KYMWithdrewRequest.h"
+#import "KYMSelectChannelVC.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -685,8 +687,41 @@
             if ([self judgmentBindPhoneAndName]) {//都完善
                 if ([IVNetwork savedUserInfo].bankCardNum > 0) {
                     
-                    BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                    [self.navigationController pushViewController:vc animated:YES];
+                    NSMutableDictionary *parmas = @{}.mutableCopy;
+                    parmas[@"merchant"] = @"A01";
+                    //网络库底层自带这两个参数，如果其他产品不带的需要加上
+//                        parmas[@"loginName"] = @"xxx";
+//                        parmas[@"productId"] = @"xxx";
+                    parmas[@"type"] = @"2";
+                    parmas[@"currency"] = @"CNY";
+                    [self showLoading];
+                    [KYMWithdrewRequest checkChannelWithParams:parmas.copy callback:^(BOOL status, NSString * _Nonnull msg, KYMWithdrewCheckModel  * _Nonnull model) {
+                        [self hideLoading];
+                        if (!status) {
+                            [MBProgressHUD showMessagNoActivity:msg toView:nil];
+                            return;
+                        }
+                        if (model.amountList.count > 0) {
+                            //取款类型选择弹框
+                            KYMSelectChannelVC *vc = [[KYMSelectChannelVC alloc] init];
+                            vc.checkModel = model;
+                            __weak typeof(self)weakSelf = self;
+                            vc.selectedChannelCallback = ^(NSInteger index) {
+                                //是否为撮合取款
+                                BOOL isMatchWithdraw = (index == 0);
+                                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                                vc.isMatchWithdrew = isMatchWithdraw;
+                                vc.checkModel = model;
+                                [weakSelf.navigationController pushViewController:vc animated:YES];
+                            };
+                            [self presentViewController:vc animated:YES completion:nil];
+                        } else {
+                            //普通取款
+                            BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                            vc.isMatchWithdrew = NO;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }
+                    }];
                     
                 } else {
                     NSString * str = @"请先绑定银行卡";

@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="KYMWithdrewBankView">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="KYMWithdrewBankView" customClass="KYMWithdrewBankView">
             <rect key="frame" x="0.0" y="0.0" width="405" height="236"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -179,6 +179,15 @@
                 <constraint firstAttribute="trailing" secondItem="j2P-9v-Uxv" secondAttribute="trailing" constant="15" id="YeE-fL-m0a"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="account" destination="eSb-r8-vbb" id="nN4-Nj-dhV"/>
+                <outlet property="accoutName" destination="bv6-2h-kdZ" id="HS4-ZA-Hhc"/>
+                <outlet property="amount" destination="QuT-Fe-Qaj" id="zBC-bx-M3l"/>
+                <outlet property="bankName" destination="x0M-RE-iMf" id="2oe-aO-agK"/>
+                <outlet property="iconImgView" destination="vGi-2a-yA7" id="Gi0-Eg-mdz"/>
+                <outlet property="submitTime" destination="bZJ-5i-Nct" id="lKd-n2-eXN"/>
+                <outlet property="withdrawType" destination="YyI-uu-QFO" id="rp1-bQ-oAV"/>
+            </connections>
             <point key="canvasLocation" x="160.1449275362319" y="73.660714285714278"/>
         </view>
     </objects>

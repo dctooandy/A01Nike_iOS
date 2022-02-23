@@ -29,32 +29,32 @@
 {
     _status = status;
     switch (status) {
-        case 0:
+        case KYMWithdrewStatusSubmit:
             [self.submitBtn setTitle:@"取消取款" forState:UIControlStateNormal];
             self.notReceivedBtn.hidden = YES;
             self.textLB.hidden = YES;
             break;
-        case 1:
+        case KYMWithdrewStatusWaiting:
             [self.submitBtn setTitle:@"取消取款" forState:UIControlStateNormal];
             self.notReceivedBtn.hidden = YES;
             self.textLB.hidden = YES;
             break;
-        case 2:
+        case KYMWithdrewStatusConfirm:
             [self.submitBtn setTitle:@"确认到账" forState:UIControlStateNormal];
             self.notReceivedBtn.hidden = NO;
             self.textLB.hidden = NO;
             break;
-        case 3:
+        case KYMWithdrewStatusNotReceived:
             [self.submitBtn setTitle:@"取消取款" forState:UIControlStateNormal];
             self.notReceivedBtn.hidden = YES;
             self.textLB.hidden = YES;
             break;
-        case 4:
+        case KYMWithdrewStatusTimeout:
             [self.submitBtn setTitle:@"返回首页" forState:UIControlStateNormal];
             self.notReceivedBtn.hidden = YES;
             self.textLB.hidden = YES;
             break;
-        case 5:
+        case KYMWithdrewStatusSuccessed:
             [self.submitBtn setTitle:@"返回首页" forState:UIControlStateNormal];
             self.notReceivedBtn.hidden = YES;
             self.textLB.hidden = YES;

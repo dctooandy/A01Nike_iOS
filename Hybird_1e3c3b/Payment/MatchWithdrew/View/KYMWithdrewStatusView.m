@@ -84,11 +84,10 @@
 - (void)setStatus:(KYMWithdrewStatus)status
 {
     _status = status;
-    
-    UILabel *label = [self.statusItemView viewWithTag:1230 + status];
-    label.textColor =  [UIColor colorWithRed:0xD2 / 255.0 green:0xD2 / 255.0 blue:0xD2 / 255.0 alpha:1];
+    int step = 1;
     switch (status) {
-        case 0:
+        case KYMWithdrewStatusSubmit:{
+            step = 1;
             self.stautsLB1.text = @"已经提交取款订单，系统审核中...";
             self.stautsLB1.textColor = [UIColor colorWithRed:0xF4 / 255.0 green:0x35 / 255.0 blue:0x35 / 255.0 alpha:1];
             self.statusLB2.text = @"耐心等待5秒到1分钟即可";
@@ -97,7 +96,9 @@
             self.statusLB3.hidden = YES;
             self.statusLB4.hidden = YES;
             break;
-        case 1:{
+        }
+        case KYMWithdrewStatusWaiting:{
+            step = 2;
             self.stautsLB1.text = @"审核通过，系统付款中，请等待付款通知...";
             self.stautsLB1.textColor = [UIColor colorWithRed:0xF4 / 255.0 green:0x35 / 255.0 blue:0x35 / 255.0 alpha:1];
             self.statusLB2.text = @"取款到账后，请务必在15分钟内点击确认到账";
@@ -105,11 +106,10 @@
             self.statusLB2.font = [UIFont fontWithName:@"PingFang SC Regular" size:12];
             self.statusLB3.hidden = YES;
             self.statusLB4.hidden = YES;
-            UIImageView *image1 = [self.statusItemView viewWithTag:1130 + 1];
-            image1.image = [UIImage imageNamed:self.selectedImgArray[1]];
             break;
         }
-        case 2:{
+        case KYMWithdrewStatusConfirm:{
+            step = 3;
             self.stautsLB1.text = @"订单已付款，请您核实银行卡是否到账";
             self.stautsLB1.textColor = [UIColor colorWithRed:0x81 / 255.0 green:0x87 / 255.0 blue:0x91 / 255.0 alpha:1];
             self.statusLB2.text = @"请在";
@@ -117,14 +117,10 @@
             self.statusLB2.font = [UIFont fontWithName:@"PingFang SC Regular" size:12];
             self.statusLB3.hidden = NO;
             self.statusLB4.hidden = NO;
-            UIImageView *image1 = [self.statusItemView viewWithTag:1130 + 1];
-            image1.image = [UIImage imageNamed:self.selectedImgArray[1]];
-            UIImageView *image2 = [self.statusItemView viewWithTag:1130 + 2];
-            image1.image = [UIImage imageNamed:self.selectedImgArray[1]];
-            image2.image = [UIImage imageNamed:self.selectedImgArray[2]];
             break;
         }
-        case 3:{
+        case KYMWithdrewStatusNotReceived:{
+            step = 3;
             self.stautsLB1.text = @"订单已付款，请您核实银行卡是否到账";
             self.stautsLB1.textColor = [UIColor colorWithRed:0x81 / 255.0 green:0x87 / 255.0 blue:0x91 / 255.0 alpha:1];
             self.statusLB2.text = @"未确认到账，订单异常";
@@ -132,53 +128,38 @@
             self.statusLB2.font = [UIFont fontWithName:@"PingFang SC Semibold" size:15];
             self.statusLB3.hidden = YES;
             self.statusLB4.hidden = YES;
-            UIImageView *image1 = [self.statusItemView viewWithTag:1130 + 1];
-            image1.image = [UIImage imageNamed:self.selectedImgArray[1]];
-            UIImageView *image2 = [self.statusItemView viewWithTag:1130 + 2];
-            image1.image = [UIImage imageNamed:self.selectedImgArray[1]];
-            image2.image = [UIImage imageNamed:self.selectedImgArray[2]];
-            
             break;
         }
-        case 4:{
+        case KYMWithdrewStatusTimeout:{
+            step = 4;
             self.stautsLB1.text = @"您完成了一笔取款";
             self.stautsLB1.textColor = [UIColor colorWithRed:0x81 / 255.0 green:0x87 / 255.0 blue:0x91 / 255.0 alpha:1];
             self.statusLB2.hidden = YES;
             self.statusLB3.hidden = YES;
             self.statusLB4.hidden = YES;
-            UIImageView *image1 = [self.statusItemView viewWithTag:1130 + 1];
-            image1.image = [UIImage imageNamed:self.selectedImgArray[1]];
-            UIImageView *image2 = [self.statusItemView viewWithTag:1130 + 2];
-            UIImageView *image3 = [self.statusItemView viewWithTag:1130 + 3];
-            image1.image = [UIImage imageNamed:self.selectedImgArray[1]];
-            image2.image = [UIImage imageNamed:self.selectedImgArray[2]];
-            image3.image = [UIImage imageNamed:self.selectedImgArray[3]];
             break;
         }
-        case 5:{
+        case KYMWithdrewStatusSuccessed:{
+            step = 4;
             self.stautsLB1.text = @"您完成了一笔取款";
             self.stautsLB1.textColor = [UIColor colorWithRed:0x81 / 255.0 green:0x87 / 255.0 blue:0x91 / 255.0 alpha:1];
             self.statusLB2.hidden = YES;
             self.statusLB3.hidden = YES;
             self.statusLB4.hidden = YES;
-            UIImageView *image1 = [self.statusItemView viewWithTag:1130 + 1];
-            image1.image = [UIImage imageNamed:self.selectedImgArray[1]];
-            UIImageView *image2 = [self.statusItemView viewWithTag:1130 + 2];
-            UIImageView *image3 = [self.statusItemView viewWithTag:1130 + 3];
-            image1.image = [UIImage imageNamed:self.selectedImgArray[1]];
-            image2.image = [UIImage imageNamed:self.selectedImgArray[2]];
-            image3.image = [UIImage imageNamed:self.selectedImgArray[3]];
             break;
         }
             
         default:
             break;
     }
+    for (int i = 0; i < step; i++) {
+        UIImageView *image = [self.statusItemView viewWithTag:1130 + i];
+        image.image = [UIImage imageNamed:self.selectedImgArray[i]];
+        UILabel *label = [self.statusItemView viewWithTag:1230 + i];
+        label.textColor =  [UIColor colorWithRed:0xD2 / 255.0 green:0xD2 / 255.0 blue:0xD2 / 255.0 alpha:1];
+    }
     CGFloat lable2W = [self.statusLB2.text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.statusLB2.font} context:nil].size.width + 5;
     self.statusLB2Width.constant = lable2W;
 }
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    self.block();
-}
+
 @end

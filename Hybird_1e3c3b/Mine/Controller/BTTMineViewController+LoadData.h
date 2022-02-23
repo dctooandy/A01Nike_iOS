@@ -7,7 +7,7 @@
 //
 
 #import "BTTMineViewController.h"
-
+#import "BTTMeMainModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 
@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *normalDataSoure;
 
 @property (nonatomic, strong) NSMutableArray *normalDataTwo;
+@property (nonatomic, strong) BTTMeMainModel *fastModel;
 
 -(void)verifySmsCode:(NSString *)smsCodeStr completeBlock:(KYHTTPCallBack)completeBlock;
 

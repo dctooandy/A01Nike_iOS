@@ -34,9 +34,15 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.amountArray && self.amountArray.count > indexPath.row) {
-        CGFloat amount = [self.amountArray[indexPath.row] doubleValue];
+        KYMWithdrewAmountModel *model = self.amountArray[indexPath.row];
         KYMWithdrewAmountListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KYMWithdrewAmountListCell" forIndexPath:indexPath];
-        cell.amount = amount;
+        cell.amount = model.amount;
+        if (model.isRecommend) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+            });
+        }
+
         return  cell;
     }
     return nil;

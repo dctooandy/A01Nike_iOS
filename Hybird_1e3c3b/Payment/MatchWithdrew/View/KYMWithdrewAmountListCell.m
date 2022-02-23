@@ -34,9 +34,9 @@
         self.amoutLB.textColor = [UIColor colorWithRed:0x81 / 255.0 green:0x87 / 255.0 blue:0x91 / 255.0 alpha:1];
     }
 }
-- (void)setAmount:(CGFloat)amount
+- (void)setAmount:(NSString *)amount
 {
     _amount = amount;
-    self.amoutLB.text = [NSString stringWithFormat:@"¥ %0.lf",floor(amount)];
+    self.amoutLB.text = amount;
 }
 @end
