@@ -306,6 +306,8 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         if (self.timeInterval <= 0) {
             [self.timer setFireDate:[NSDate distantFuture]];
             self.timeInterval = 0;
+            // 等待倒计时为0，在刷一次接口即可
+            [self loadData];
         }
     }
     self.tip2Lb.text = [NSString stringWithFormat:@"%02ld分%02ld秒", self.timeInterval/60, self.timeInterval%60];
@@ -313,7 +315,7 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
 
 /// 待确认状态 CNMPayUIStatusConfirm 需要定时刷新订单状态
 - (void)refreshBillStatusOntime {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self refreshBillStatus];
     });
 }
@@ -379,7 +381,12 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         [self.navigationController popToRootViewControllerAnimated:YES];
         return;
     }
-    [self setStatusUI:CNMPayUIStatusSuccess];
+    // 联系客服
+    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+        if (errCode != CSServiceCode_Request_Suc) {
+            [self showError:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持"];
+        }
+    }];
 }
 
 - (IBAction)copyContent:(UIButton *)sender {
@@ -486,6 +493,8 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
     [self.pictureArr2 removeObjectAtIndex:sender.tag];
     [self reloadImages];
 }
+
+#pragma mark - 图片上传
 
 /// 图片上传
 - (void)uploadImages {
