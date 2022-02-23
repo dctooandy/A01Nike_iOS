@@ -320,8 +320,9 @@
     [self.payVC addBankView];
 }
 
-- (void)changeToChannel:(NSInteger)index {
-    [self.payVC didSelectChannel:index];
+- (void)removeFastPay {
+    [self.payVC.payments removeObjectAtIndex:0];
+    [self.payVC didSelectChannel:0];
 }
 
 #pragma mark - 支付后提示页面

@@ -61,6 +61,7 @@
 #import "BTTLiCaiViewController.h"
 #import "BTTUserForzenManager.h"
 #import "KYMFastWithdrewVC.h"
+#import "BTTMeGoldenCCell.h"
 #import "KYMWithdrewRequest.h"
 #import "KYMSelectChannelVC.h"
 
@@ -141,6 +142,8 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeBigSaveMoneyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeMoreSaveMoneyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeHeadernNicknameLoginCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeHeadernNicknameLoginCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeGoldenCCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeGoldenCCell"];
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -277,39 +280,66 @@
     } else if (indexPath.row >= 2 && indexPath.row <= 2 + self.saveMoneyCount - 1) {
         if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
             if (indexPath.row == 2) {
-                //推薦存款
-                BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
-                cell.saveMoneyShowType = self.saveMoneyShowType;
-                cell.dataSource = self.bigDataSoure;
-                weakSelf(weakSelf);
-                
-                cell.clickEventBlock = ^(id _Nonnull value) {
-                    strongSelf(strongSelf);
-                    BTTMeMainModel *model = value;
-                    [strongSelf goSaveMoneyWithModel:model];
+                BTTMeGoldenCCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeGoldenCCell" forIndexPath:indexPath];
+                __weak typeof(self) weakSelf = self;
+                cell.clickAction = ^(NSInteger tag) {
+                    switch (tag) {
+                        case 0: // 存款
+                            [weakSelf goSaveMoneyWithModel:weakSelf.bigDataSoure.firstObject];
+                            break;
+                        case 1: // 洗码
+                            if (UserForzenStatus) {
+                                [[BTTUserForzenManager sharedInstance] checkUserForzen];
+                            } else {
+                                BTTXimaController *vc = [[BTTXimaController alloc] init];
+                                [weakSelf.navigationController pushViewController:vc animated:YES];
+                            }
+                            break;
+                        case 2: { // 取款
+                            [weakSelf goToWithdrawVC];
+                        }
+                        break;
+                    }
                 };
-                return cell;
-            } else if (indexPath.row == 3) {
-                //更多存款title
-                BTTMeMoreSaveMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell" forIndexPath:indexPath];
-                cell.saveMoneyShowType = self.saveMoneyShowType;
                 return cell;
             } else {
-                //更多存款
-                BTTMeMoreSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
-                if (indexPath.row == 4) {
-                    cell.dataSource = self.normalDataSoure;
-                } else {
-                    cell.dataSource = self.normalDataTwo;
-                }
-                weakSelf(weakSelf);
-                cell.clickEventBlock = ^(id _Nonnull value) {
-                    strongSelf(strongSelf);
-                    BTTMeMainModel *model = value;
-                    [strongSelf goSaveMoneyWithModel:model];
-                };
+                UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeGoldenCCell" forIndexPath:indexPath];
                 return cell;
             }
+//            if (indexPath.row == 2) {
+//                //推薦存款
+//                BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
+//                cell.saveMoneyShowType = self.saveMoneyShowType;
+//                cell.dataSource = self.bigDataSoure;
+//                weakSelf(weakSelf);
+//
+//                cell.clickEventBlock = ^(id _Nonnull value) {
+//                    strongSelf(strongSelf);
+//                    BTTMeMainModel *model = value;
+//                    [strongSelf goSaveMoneyWithModel:model];
+//                };
+//                return cell;
+//            } else if (indexPath.row == 3) {
+//                //更多存款title
+//                BTTMeMoreSaveMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell" forIndexPath:indexPath];
+//                cell.saveMoneyShowType = self.saveMoneyShowType;
+//                return cell;
+//            } else {
+//                //更多存款
+//                BTTMeMoreSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
+//                if (indexPath.row == 4) {
+//                    cell.dataSource = self.normalDataSoure;
+//                } else {
+//                    cell.dataSource = self.normalDataTwo;
+//                }
+//                weakSelf(weakSelf);
+//                cell.clickEventBlock = ^(id _Nonnull value) {
+//                    strongSelf(strongSelf);
+//                    BTTMeMainModel *model = value;
+//                    [strongSelf goSaveMoneyWithModel:model];
+//                };
+//                return cell;
+//            }
         } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig) {
             BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
             cell.dataSource = self.bigDataSoure;
@@ -393,11 +423,11 @@
         }
         BTTMeMainModel *model = nil;
         if (indexPath.row >= self.saveMoneyCount + 3 && indexPath.row <= self.saveMoneyCount + 8) {
-            if (self.mainDataOne.count != 0) {
+            if (self.mainDataOne.count != 0 && self.mainDataOne.count > (indexPath.row - self.saveMoneyCount - 3)) {
                 model = self.mainDataOne[indexPath.row - self.saveMoneyCount - 3];
             }
         } else {
-            if (self.mainDataTwo.count != 0 && self.mainDataOne.count != 0) {
+            if (self.mainDataTwo.count != 0 && self.mainDataOne.count != 0 && self.mainDataTwo.count > (indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4)) {
                 model = self.mainDataTwo[indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4];
             }
         }
@@ -494,86 +524,7 @@
     }
     if (indexPath.row == self.saveMoneyCount + 3) {
         //取款
-        if (UserForzenStatus) {
-            [[BTTUserForzenManager sharedInstance] checkUserForzen];
-        } else {
-            if (isUSDTAcc) {
-                if (self.isCompletePersonalInfo) {
-                    if ([IVNetwork savedUserInfo].mobileNoBind != 1) {
-                        BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
-                        vc.mobileCodeType = BTTSafeVerifyTypeBindMobile;
-                        vc.showNotice = isUSDTAcc;
-                        vc.isWithdrawIn = true;
-                        [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
-                        [self.navigationController pushViewController:vc animated:YES];
-                    } else if ([IVNetwork savedUserInfo].usdtNum > 0
-                               || [IVNetwork savedUserInfo].bfbNum > 0
-                               || [IVNetwork savedUserInfo].dcboxNum > 0) {
-                        
-                        BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                        [self.navigationController pushViewController:vc animated:YES];
-                        
-                    } else {
-                        [MBProgressHUD showMessagNoActivity:@"请先绑定小金库，USDT钱包或BTC钱包" toView:nil];
-                        BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
-                        vc.showNotice = isUSDTAcc;
-                        [self.navigationController pushViewController:vc animated:YES];
-                    }
-                    
-                } else {
-                    [MBProgressHUD showMessagNoActivity:@"请先完善个人信息" toView:nil];
-                    BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-            } else {
-                if ([self judgmentBindPhoneAndName]) {//都完善
-                    if ([IVNetwork savedUserInfo].bankCardNum > 0) {
-                        NSMutableDictionary *parmas = @{}.mutableCopy;
-                        parmas[@"merchant"] = @"A01";
-                        //网络库底层自带这两个参数，如果其他产品不带的需要加上
-//                        parmas[@"loginName"] = @"xxx";
-//                        parmas[@"productId"] = @"xxx";
-                        parmas[@"type"] = @"2";
-                        parmas[@"currency"] = @"CNY";
-                        [self showLoading];
-                        [KYMWithdrewRequest checkChannelWithParams:parmas.copy callback:^(BOOL status, NSString * _Nonnull msg, KYMWithdrewCheckModel  * _Nonnull model) {
-                            [self hideLoading];
-                            if (!status) {
-                                [MBProgressHUD showMessagNoActivity:msg toView:nil];
-                                return;
-                            }
-                            if (model.amountList.count > 0) {
-                                //取款类型选择弹框
-                                KYMSelectChannelVC *vc = [[KYMSelectChannelVC alloc] init];
-                                vc.checkModel = model;
-                                __weak typeof(self)weakSelf = self;
-                                vc.selectedChannelCallback = ^(NSInteger index) {
-                                    //是否为撮合取款
-                                    BOOL isMatchWithdraw = (index == 0);
-                                    BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                                    vc.isMatchWithdrew = isMatchWithdraw;
-                                    vc.checkModel = model;
-                                    [weakSelf.navigationController pushViewController:vc animated:YES];
-                                };
-                                [self presentViewController:vc animated:YES completion:nil];
-                            } else {
-                                //普通取款
-                                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                                vc.isMatchWithdrew = NO;
-                                [self.navigationController pushViewController:vc animated:YES];
-                            }
-                        }];
-                        
-                    } else {
-                        NSString * str = @"请先绑定银行卡";
-                        [MBProgressHUD showMessagNoActivity:str toView:nil];
-                        BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
-                        vc.showNotice = isUSDTAcc;
-                        [self.navigationController pushViewController:vc animated:YES];
-                    }
-                }
-            }
-        }
+        
     } else if ((indexPath.row == self.saveMoneyCount + 4 && self.isOpenSellUsdt)) {
         //一键卖币
         if (self.sellUsdtLink!=nil&&![self.sellUsdtLink isEqualToString:@""]) {
@@ -596,13 +547,13 @@
         }
     } else if ((indexPath.row == self.saveMoneyCount + 4 && !self.isOpenSellUsdt) || (indexPath.row == self.saveMoneyCount + 5 && self.isOpenSellUsdt)) {
         //洗碼
-        if (UserForzenStatus)
-        {
-            [[BTTUserForzenManager sharedInstance] checkUserForzen];
-        }else{
-            BTTXimaController *vc = [[BTTXimaController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
+//        if (UserForzenStatus)
+//        {
+//            [[BTTUserForzenManager sharedInstance] checkUserForzen];
+//        }else{
+//            BTTXimaController *vc = [[BTTXimaController alloc] init];
+//            [self.navigationController pushViewController:vc animated:YES];
+//        }
     } else if ((indexPath.row == self.saveMoneyCount + 5 && !self.isOpenSellUsdt) || (indexPath.row == self.saveMoneyCount + 6 && self.isOpenSellUsdt)) {
         //銀行卡
         if (isUSDTAcc) {
@@ -698,6 +649,92 @@
     }
 }
 
+/// 点击取款
+- (void)goToWithdrawVC {
+    if (UserForzenStatus) {
+        [[BTTUserForzenManager sharedInstance] checkUserForzen];
+    } else {
+        BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
+        if (isUSDTAcc) {
+            if (self.isCompletePersonalInfo) {
+                if ([IVNetwork savedUserInfo].mobileNoBind != 1) {
+                    BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
+                    vc.mobileCodeType = BTTSafeVerifyTypeBindMobile;
+                    vc.showNotice = isUSDTAcc;
+                    vc.isWithdrawIn = true;
+                    [MBProgressHUD showMessagNoActivity:@"请先绑定手机号!" toView:nil];
+                    [self.navigationController pushViewController:vc animated:YES];
+                } else if ([IVNetwork savedUserInfo].usdtNum > 0
+                           || [IVNetwork savedUserInfo].bfbNum > 0
+                           || [IVNetwork savedUserInfo].dcboxNum > 0) {
+                    
+                    BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                } else {
+                    [MBProgressHUD showMessagNoActivity:@"请先绑定小金库，USDT钱包或BTC钱包" toView:nil];
+                    BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+                    vc.showNotice = isUSDTAcc;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                
+            } else {
+                [MBProgressHUD showMessagNoActivity:@"请先完善个人信息" toView:nil];
+                BTTNotCompleteInfoController *vc = [[BTTNotCompleteInfoController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+        } else {
+            if ([self judgmentBindPhoneAndName]) {//都完善
+                if ([IVNetwork savedUserInfo].bankCardNum > 0) {
+                    
+                    NSMutableDictionary *parmas = @{}.mutableCopy;
+                    parmas[@"merchant"] = @"A01";
+                    //网络库底层自带这两个参数，如果其他产品不带的需要加上
+//                        parmas[@"loginName"] = @"xxx";
+//                        parmas[@"productId"] = @"xxx";
+                    parmas[@"type"] = @"2";
+                    parmas[@"currency"] = @"CNY";
+                    [self showLoading];
+                    [KYMWithdrewRequest checkChannelWithParams:parmas.copy callback:^(BOOL status, NSString * _Nonnull msg, KYMWithdrewCheckModel  * _Nonnull model) {
+                        [self hideLoading];
+                        if (!status) {
+                            [MBProgressHUD showMessagNoActivity:msg toView:nil];
+                            return;
+                        }
+                        if (model.amountList.count > 0) {
+                            //取款类型选择弹框
+                            KYMSelectChannelVC *vc = [[KYMSelectChannelVC alloc] init];
+                            vc.checkModel = model;
+                            __weak typeof(self)weakSelf = self;
+                            vc.selectedChannelCallback = ^(NSInteger index) {
+                                //是否为撮合取款
+                                BOOL isMatchWithdraw = (index == 0);
+                                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                                vc.isMatchWithdrew = isMatchWithdraw;
+                                vc.checkModel = model;
+                                [weakSelf.navigationController pushViewController:vc animated:YES];
+                            };
+                            [self presentViewController:vc animated:YES completion:nil];
+                        } else {
+                            //普通取款
+                            BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                            vc.isMatchWithdrew = NO;
+                            [self.navigationController pushViewController:vc animated:YES];
+                        }
+                    }];
+                    
+                } else {
+                    NSString * str = @"请先绑定银行卡";
+                    [MBProgressHUD showMessagNoActivity:str toView:nil];
+                    BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
+                    vc.showNotice = isUSDTAcc;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            }
+        }
+    }
+}
+
 -(BOOL)judgmentBindPhoneAndName {
     if ([IVNetwork savedUserInfo].mobileNoBind != 1 && !self.isCompletePersonalInfo) {//未綁定手機號 ＆ 未完善姓名
         [self showBindNameAndPhonePopView];
@@ -761,17 +798,17 @@
                 [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 190)]];
             }
         } else if (i == 1) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 63)]];
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
         } else if (i >= 2  && i <= 2 + self.saveMoneyCount - 1) {
             if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
                 if (i == 2) {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 210)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 120)]];
                 } else if (i == 3) {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
                 } else if (i == 4) {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 90)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
                 } else {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
+                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
                 }
             } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBigOneMore) {
                 if (i == 2) {

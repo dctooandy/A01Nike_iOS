@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CNPayVC : HABaseViewController
 /** 渠道选中图标名称  */
 @property (nonatomic, copy) NSString *selectedIcon;
-
+@property (nonatomic, strong) NSMutableArray *payments;
 /**
  支付模块
  

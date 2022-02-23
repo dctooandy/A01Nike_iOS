@@ -83,4 +83,8 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 @property (nonatomic, strong) NSArray <CNWAmountListModel *> *amountList;
 @property (nonatomic, copy) NSString *remainDepositTimes;
 @property (nonatomic, copy) NSString *remainCancelDepositTimes;
+/// 存在撮合，1 存款，2 取款
+@property (nonatomic, assign) NSInteger mmProcessingOrderType;
+/// 存在撮合单ID
+@property (nonatomic, copy) NSString *mmProcessingOrderTransactionId;
 @end
