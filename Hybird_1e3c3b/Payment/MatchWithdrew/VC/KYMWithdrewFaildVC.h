@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HABaseViewController.h"
+#import "BTTBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface KYMWithdrewFaildVC : HABaseViewController
+@interface KYMWithdrewFaildVC : BTTBaseViewController
 @property (nonatomic, copy) NSString *amountStr;
 @property (nonatomic, copy) NSString *userName;
 @end

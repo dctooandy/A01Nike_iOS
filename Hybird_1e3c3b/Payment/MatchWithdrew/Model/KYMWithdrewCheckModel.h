@@ -10,10 +10,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface KYMWithdrewCheckModel : NSObject
+@interface KYMWithdrewCheckDataModel : NSObject
 @property (nonatomic, strong) NSArray<KYMWithdrewAmountModel *> *amountList;
 @property (nonatomic, assign) BOOL isAvaliable;
 @property (nonatomic, copy) NSString *remainWithdrawTimes;
+@end
+
+@interface KYMWithdrewCheckModel : NSObject
+@property (nonatomic, strong) KYMWithdrewCheckDataModel *data;
+@property (nonatomic, copy) NSString *code;
+@property (nonatomic, copy) NSString *message;
+@property (nonatomic, copy) NSString *requestId;
 @end
 
 NS_ASSUME_NONNULL_END

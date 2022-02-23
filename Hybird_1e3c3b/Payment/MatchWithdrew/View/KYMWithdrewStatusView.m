@@ -81,13 +81,13 @@
     }
 }
 
-- (void)setStatus:(KYMWithdrewStatus)status
+- (void)setStep:(KYMWithdrewStep)step
 {
-    _status = status;
-    int step = 1;
-    switch (status) {
-        case KYMWithdrewStatusSubmit:{
-            step = 1;
+    _step = step;
+    int realStep = 1;
+    switch (step) {
+        case KYMWithdrewStepOne:{
+            realStep = 1;
             self.stautsLB1.text = @"已经提交取款订单，系统审核中...";
             self.stautsLB1.textColor = [UIColor colorWithRed:0xF4 / 255.0 green:0x35 / 255.0 blue:0x35 / 255.0 alpha:1];
             self.statusLB2.text = @"耐心等待5秒到1分钟即可";
@@ -97,8 +97,8 @@
             self.statusLB4.hidden = YES;
             break;
         }
-        case KYMWithdrewStatusWaiting:{
-            step = 2;
+        case KYMWithdrewStepTwo:{
+            realStep = 2;
             self.stautsLB1.text = @"审核通过，系统付款中，请等待付款通知...";
             self.stautsLB1.textColor = [UIColor colorWithRed:0xF4 / 255.0 green:0x35 / 255.0 blue:0x35 / 255.0 alpha:1];
             self.statusLB2.text = @"取款到账后，请务必在15分钟内点击确认到账";
@@ -108,8 +108,8 @@
             self.statusLB4.hidden = YES;
             break;
         }
-        case KYMWithdrewStatusConfirm:{
-            step = 3;
+        case KYMWithdrewStepThree:{
+            realStep = 3;
             self.stautsLB1.text = @"订单已付款，请您核实银行卡是否到账";
             self.stautsLB1.textColor = [UIColor colorWithRed:0x81 / 255.0 green:0x87 / 255.0 blue:0x91 / 255.0 alpha:1];
             self.statusLB2.text = @"请在";
@@ -119,8 +119,8 @@
             self.statusLB4.hidden = NO;
             break;
         }
-        case KYMWithdrewStatusNotReceived:{
-            step = 3;
+        case KYMWithdrewStepFour:{
+            realStep = 3;
             self.stautsLB1.text = @"订单已付款，请您核实银行卡是否到账";
             self.stautsLB1.textColor = [UIColor colorWithRed:0x81 / 255.0 green:0x87 / 255.0 blue:0x91 / 255.0 alpha:1];
             self.statusLB2.text = @"未确认到账，订单异常";
@@ -130,8 +130,8 @@
             self.statusLB4.hidden = YES;
             break;
         }
-        case KYMWithdrewStatusTimeout:{
-            step = 4;
+        case KYMWithdrewStepFive:{
+            realStep = 4;
             self.stautsLB1.text = @"您完成了一笔取款";
             self.stautsLB1.textColor = [UIColor colorWithRed:0x81 / 255.0 green:0x87 / 255.0 blue:0x91 / 255.0 alpha:1];
             self.statusLB2.hidden = YES;
@@ -139,8 +139,8 @@
             self.statusLB4.hidden = YES;
             break;
         }
-        case KYMWithdrewStatusSuccessed:{
-            step = 4;
+        case KYMWithdrewStepSix:{
+            realStep = 4;
             self.stautsLB1.text = @"您完成了一笔取款";
             self.stautsLB1.textColor = [UIColor colorWithRed:0x81 / 255.0 green:0x87 / 255.0 blue:0x91 / 255.0 alpha:1];
             self.statusLB2.hidden = YES;
@@ -152,7 +152,7 @@
         default:
             break;
     }
-    for (int i = 0; i < step; i++) {
+    for (int i = 0; i < realStep; i++) {
         UIImageView *image = [self.statusItemView viewWithTag:1130 + i];
         image.image = [UIImage imageNamed:self.selectedImgArray[i]];
         UILabel *label = [self.statusItemView viewWithTag:1230 + i];

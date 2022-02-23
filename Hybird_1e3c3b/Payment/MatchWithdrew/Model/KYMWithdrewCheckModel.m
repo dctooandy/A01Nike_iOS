@@ -8,11 +8,24 @@
 
 #import "KYMWithdrewCheckModel.h"
 
-@implementation KYMWithdrewCheckModel
+@implementation KYMWithdrewCheckDataModel
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
     return YES;
 }
 + (NSDictionary *)modelContainerPropertyGenericClass {
     return @{@"amountList" : [KYMWithdrewAmountModel class]};
+}
+@end
+
+@implementation KYMWithdrewCheckModel
++ (BOOL)propertyIsOptional:(NSString *)propertyName {
+    return YES;
+}
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{@"data" : [KYMWithdrewCheckDataModel class]};
+}
+- (void)setData:(KYMWithdrewCheckDataModel *)data
+{
+    _data = data;
 }
 @end
