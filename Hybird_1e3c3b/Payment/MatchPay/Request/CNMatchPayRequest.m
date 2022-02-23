@@ -57,10 +57,16 @@
 }
 
 + (void)uploadImage:(UIImage *)image finish:(KYHTTPCallBack)finish {
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    NSData *data = UIImageJPEGRepresentation(image, 0.5);
-    dic[@"fileContent"] = [@"data:image/jpeg;base64," stringByAppendingString:[data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
-    dic[@"fileName"] = @"image";
-    [self Post:@"deposit/uploadImg" para:dic finish:finish];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        NSData *data = UIImageJPEGRepresentation(image, 0.5);
+        dic[@"fileContent"] = [@"data:image/jpeg;base64," stringByAppendingString:[data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+        dic[@"fileName"] = @"image";
+        [self Post:@"deposit/uploadImg" para:dic finish:^(id  _Nullable response, NSError * _Nullable error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                !finish ?: finish(response, error);
+            });
+        }];
+    });
 }
 @end
