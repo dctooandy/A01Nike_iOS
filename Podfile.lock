@@ -96,37 +96,29 @@ PODS:
   - IVLoganAnalysis/Tool (0.1.23):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.13)
-  - IVNetworkLibrary2.0 (2.4.1):
+  - IVNetworkLibrary2.0 (2.4.2):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
     - FCUUID (~> 1.3.1)
     - IVCacheLibrary
-    - IVNetworkLibrary2.0/Business (= 2.4.1)
+    - IVNetworkLibrary2.0/Business (= 2.4.2)
     - JSONModel (~> 1.7.0)
     - KYNetworking
     - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Business (2.4.1):
+  - IVNetworkLibrary2.0/Business (2.4.2):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
     - FCUUID (~> 1.3.1)
     - IVCacheLibrary
-    - IVNetworkLibrary2.0/Business/Category (= 2.4.1)
-    - IVNetworkLibrary2.0/Business/Common (= 2.4.1)
-    - IVNetworkLibrary2.0/Business/Http (= 2.4.1)
-    - IVNetworkLibrary2.0/Business/Model (= 2.4.1)
-    - IVNetworkLibrary2.0/Business/SDK (= 2.4.1)
+    - IVNetworkLibrary2.0/Business/Category (= 2.4.2)
+    - IVNetworkLibrary2.0/Business/Common (= 2.4.2)
+    - IVNetworkLibrary2.0/Business/Http (= 2.4.2)
+    - IVNetworkLibrary2.0/Business/Model (= 2.4.2)
+    - IVNetworkLibrary2.0/Business/SDK (= 2.4.2)
     - JSONModel (~> 1.7.0)
     - KYNetworking
     - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Business/Category (2.4.1):
-    - AFNetworking (~> 3.2.1)
-    - BGFMDB (~> 2.0.9)
-    - FCUUID (~> 1.3.1)
-    - IVCacheLibrary
-    - JSONModel (~> 1.7.0)
-    - KYNetworking
-    - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Business/Common (2.4.1):
+  - IVNetworkLibrary2.0/Business/Category (2.4.2):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
     - FCUUID (~> 1.3.1)
@@ -134,7 +126,15 @@ PODS:
     - JSONModel (~> 1.7.0)
     - KYNetworking
     - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Business/Http (2.4.1):
+  - IVNetworkLibrary2.0/Business/Common (2.4.2):
+    - AFNetworking (~> 3.2.1)
+    - BGFMDB (~> 2.0.9)
+    - FCUUID (~> 1.3.1)
+    - IVCacheLibrary
+    - JSONModel (~> 1.7.0)
+    - KYNetworking
+    - UICKeyChainStore (~> 2.1.2)
+  - IVNetworkLibrary2.0/Business/Http (2.4.2):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
     - FCUUID (~> 1.3.1)
@@ -146,7 +146,7 @@ PODS:
     - JSONModel (~> 1.7.0)
     - KYNetworking
     - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Business/Model (2.4.1):
+  - IVNetworkLibrary2.0/Business/Model (2.4.2):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
     - FCUUID (~> 1.3.1)
@@ -154,16 +154,16 @@ PODS:
     - JSONModel (~> 1.7.0)
     - KYNetworking
     - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Business/SDK (2.4.1):
+  - IVNetworkLibrary2.0/Business/SDK (2.4.2):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
     - FCUUID (~> 1.3.1)
     - IVCacheLibrary
-    - IVNetworkLibrary2.0/Business/SDK/Sign (= 2.4.1)
+    - IVNetworkLibrary2.0/Business/SDK/Sign (= 2.4.2)
     - JSONModel (~> 1.7.0)
     - KYNetworking
     - UICKeyChainStore (~> 2.1.2)
-  - IVNetworkLibrary2.0/Business/SDK/Sign (2.4.1):
+  - IVNetworkLibrary2.0/Business/SDK/Sign (2.4.2):
     - AFNetworking (~> 3.2.1)
     - BGFMDB (~> 2.0.9)
     - FCUUID (~> 1.3.1)
@@ -321,7 +321,7 @@ CHECKOUT OPTIONS:
     :commit: 2bd715be6813cde45641f9136a99f771242c4dbe
     :git: http://10.66.72.115/mobile-iOS-Library/IVLoganAnalysis.git
   IVNetworkLibrary2.0:
-    :commit: 16a2220b25e349ede102e2ab0f85918b2765689a
+    :commit: 5866fd06cfddd7c63bd487d883bb707f4b518798
     :git: http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary2.0.git
   IVPublicAPILibrary:
     :commit: 6f9a665fcdd5a9cd5ca42dd603edc261b7992850
@@ -356,7 +356,7 @@ SPEC CHECKSUMS:
   IVGameLibrary: 4d087acf40adc35e85a23fb8dac2078059d2121c
   IVHeartPacketLibrary: 2a122b1d8cedf8346b4898ace4736147cf9a0405
   IVLoganAnalysis: 6af69ffb4225f71d7c03352453e10d6c9eeb602d
-  IVNetworkLibrary2.0: 55af48c7e7b7ce0337ddec3252024013ef4d5e90
+  IVNetworkLibrary2.0: fb6395184a0f18ad68d47f1d68325fc11281e515
   IVPublicAPILibrary: cf9e5b627b951c88fb8071023206ab1596de178f
   IVPushLibrary: 1449c4630124564b61535ef95ca6cc611177f35a
   IVUpdateLibrary: f5764f4cdfcf7919b37a1a2533aae0ff541d5c2d

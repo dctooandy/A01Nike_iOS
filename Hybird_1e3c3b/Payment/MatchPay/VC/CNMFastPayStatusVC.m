@@ -239,6 +239,17 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         return;
     }
     self.bankModel = bank;
+    
+    // 银行卡栏目信息
+    self.amountLb.text = [NSString stringWithFormat:@"%ld", bank.amount.integerValue];
+    [self.bankLogo sd_setImageWithURL:[NSURL URLWithString:[PublicMethod nowCDNWithUrl:bank.bankIcon]]];
+    self.bankName.text = bank.bankName;
+    self.accountName.text = bank.bankAccountName;
+    self.accountNo.text = bank.bankAccountNo;
+    self.bankAmount.text = [NSString stringWithFormat:@"%.2f元", bank.amount.floatValue];
+    self.submitDate.text = bank.createdDate;
+    self.confirmDate.text = bank.confirmTime;
+    
     NSString *timeSting;
     switch (bank.status) {
         case CNMPayBillStatusSubmit:
@@ -278,15 +289,6 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
             self.timer = nil;
             break;
     }
-    
-    self.amountLb.text = [NSString stringWithFormat:@"%ld", bank.amount.integerValue];
-    [self.bankLogo sd_setImageWithURL:[NSURL URLWithString:[PublicMethod nowCDNWithUrl:bank.bankIcon]]];
-    self.bankName.text = bank.bankName;
-    self.accountName.text = bank.bankAccountName;
-    self.accountNo.text = bank.bankAccountNo;
-    self.bankAmount.text = [NSString stringWithFormat:@"%.2f元", bank.amount.floatValue];
-    self.submitDate.text = bank.createdDate;
-    self.confirmDate.text = bank.confirmTime;
     
     if (timeSting) {
         NSArray *tem = [timeSting componentsSeparatedByString:@";"];
