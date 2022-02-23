@@ -219,16 +219,6 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
     }
 }
 
-- (void)timerCounter {
-    self.timeInterval -= 1;
-    if (self.timeInterval <= 0) {
-        [self.timer setFireDate:[NSDate distantFuture]];
-        self.timeInterval = 0;
-    }
-    self.tip2Lb.text = [NSString stringWithFormat:@"%02ld分%02ld秒", self.timeInterval/60, self.timeInterval%60];
-}
-
-
 - (void)loadData {
     __weak typeof(self) weakSelf = self;
     [self showLoading];
@@ -249,12 +239,14 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         return;
     }
     self.bankModel = bank;
+    NSString *timeSting;
     switch (bank.status) {
         case CNMPayBillStatusSubmit:
             [self setStatusUI:CNMPayUIStatusSubmit];
             break;
         case CNMPayBillStatusPaying:
             [self setStatusUI:CNMPayUIStatusPaying];
+            timeSting = bank.payLimitTimeFmt;
             break;
         case CNMPayBillStatusCancel:
             // 订单取消，直接回到首页
@@ -269,13 +261,21 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
             break;
         case CNMPayBillStatusConfirm:
             [self setStatusUI:CNMPayUIStatusConfirm];
+            
             self.customerServerBtn.enabled = (bank.withdrawStatus == 6);
+            timeSting = bank.confirmTimeFmt;
+            // 这个状态需要定时刷新
+            [self refreshBillStatusOntime];
             break;
         case CNMPayBillStatusUnMatch:
             
             break;
         case CNMPayBillStatusSuccess:
             [self setStatusUI:CNMPayUIStatusSuccess];
+            self.confirmDate.text = bank.transactionId;
+            // 停止倒计时
+            [self.timer invalidate];
+            self.timer = nil;
             break;
     }
     
@@ -288,34 +288,53 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
     self.submitDate.text = bank.createdDate;
     self.confirmDate.text = bank.confirmTime;
     
-    NSString *timeSting;
-    switch (self.status) {
-        case CNMPayUIStatusPaying: {
-            timeSting = bank.payLimitTimeFmt;
-        }
-            break;
-        case CNMPayUIStatusConfirm: {
-            timeSting = bank.confirmTimeFmt;
-        }
-            break;
-            
-        case CNMPayUIStatusSuccess: {
-            self.confirmDate.text = bank.transactionId;
-            [self.timer invalidate];
-            self.timer = nil;
-        }
-            return;
-        default:
-            break;
-    }
     if (timeSting) {
         NSArray *tem = [timeSting componentsSeparatedByString:@";"];
         self.timeInterval = [tem.firstObject intValue] * 60 + [tem.lastObject intValue];
-        if (self.timeInterval > 0) {
-            [self.timer setFireDate:[NSDate distantPast]];
-        }
+        [self.timer setFireDate:[NSDate distantPast]];
     }
 }
+
+- (void)timerCounter {
+    // 待确认是正计时
+    if (self.status == CNMPayUIStatusConfirm) {
+        self.timeInterval += 1;
+    } else { // 倒计时
+        self.timeInterval -= 1;
+        if (self.timeInterval <= 0) {
+            [self.timer setFireDate:[NSDate distantFuture]];
+            self.timeInterval = 0;
+        }
+    }
+    self.tip2Lb.text = [NSString stringWithFormat:@"%02ld分%02ld秒", self.timeInterval/60, self.timeInterval%60];
+}
+
+/// 待确认状态 CNMPayUIStatusConfirm 需要定时刷新订单状态
+- (void)refreshBillStatusOntime {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self refreshBillStatus];
+    });
+}
+
+- (void)refreshBillStatus {
+    __weak typeof(self) weakSelf = self;
+    [CNMatchPayRequest queryDepisit:self.transactionId finish:^(id  _Nullable response, NSError * _Nullable error) {
+        if ([response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)response;
+            CNMBankModel *bank = [[CNMBankModel alloc] initWithDictionary:[dic objectForKey:@"data"] error:nil];
+            if (bank.status == CNMPayBillStatusSuccess) {
+                [weakSelf reloadUIWithModel:bank];
+                return;
+            }
+            
+            if (bank.status == CNMPayBillStatusConfirm) {
+                weakSelf.customerServerBtn.enabled = (bank.withdrawStatus == 6);
+            }
+        }
+        [weakSelf refreshBillStatusOntime];
+    }];
+}
+
 
 #pragma mark - 按钮组事件
 
