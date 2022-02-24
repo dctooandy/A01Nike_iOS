@@ -66,7 +66,7 @@
 }
 + (void)cancelWithdrawWithParams:(NSDictionary *)params callback:(KYMCallback)callback {
     kym_sendRequest(@"withdraw/cancelRequest",params, ^(BOOL status, NSString * msg , id body) {
-        if (body == nil || body == NULL) {
+        if (body == nil || body == NULL || ![body isKindOfClass:[NSNumber class]]) {
             callback(NO, msg ? : @"操作失败，数据异常",@"");
             return;
         }

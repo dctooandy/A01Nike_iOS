@@ -265,7 +265,7 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
             return;
         case CNMPayBillStatusTimeout: {
             NSString *desc = [NSString stringWithFormat:@"您今天还有 %ld 次取消机会，如果超过%ld次，可能会冻结账号。", self.cancelTime, self.cancelTime];
-            [CNMAlertView showAlertTitle:@"超时提醒" content:@"老板，您已存款超时，系统自动取消订单" desc:desc commitTitle:@"关闭" commitAction:^{
+            [CNMAlertView showAlertTitle:@"超时提醒" content:@"老板，您已存款超时，系统自动取消订单" desc:desc needRigthTopClose:NO commitTitle:@"关闭" commitAction:^{
                 [self.navigationController popToRootViewControllerAnimated:YES];
             } cancelTitle:nil cancelAction:nil];
         }
@@ -345,7 +345,7 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
 - (IBAction)cancel:(UIButton *)sender {
     __weak typeof(self) weakSelf = self;
     NSString *desc = [NSString stringWithFormat:@"您今天还有 %ld 次取消机会，如果超过%ld次，可能会冻结账号。", self.cancelTime, self.cancelTime];
-    [CNMAlertView showAlertTitle:@"取消存款" content:@"老板！如已存款，请不要取消" desc:desc commitTitle:@"确定" commitAction:^{
+    [CNMAlertView showAlertTitle:@"取消存款" content:@"老板！如已存款，请不要取消" desc:desc needRigthTopClose:NO commitTitle:@"确定" commitAction:^{
         // 调接口取消
         [CNMatchPayRequest cancelDepisit:weakSelf.bankModel.transactionId finish:^(id  _Nullable response, NSError * _Nullable error) {
             if ([response isKindOfClass:[NSDictionary class]]) {

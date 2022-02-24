@@ -414,7 +414,7 @@
             }
         }];
     } else if (self.step == KYMWithdrewStepThree) {
-        [CNMAlertView showAlertTitle:@"再次确认" content:@"老板！请您再次确认是否到账" desc:nil commitTitle:@"没有到账" commitAction:^{
+        [CNMAlertView showAlertTitle:@"再次确认" content:@"老板！请您再次确认是否到账" desc:nil needRigthTopClose:YES commitTitle:@"没有到账" commitAction:^{
             [self checkReceiveStats:YES];
         } cancelTitle:@"确认到账" cancelAction:^{
             [self checkReceiveStats:NO];
@@ -428,7 +428,7 @@
     
 }
 - (void)notRecivedBtnClicked {
-    [CNMAlertView showAlertTitle:@"再次确认" content:@"老板！请您再次确认是否到账" desc:nil commitTitle:@"没有到账" commitAction:^{
+    [CNMAlertView showAlertTitle:@"再次确认" content:@"老板！请您再次确认是否到账" desc:nil needRigthTopClose:YES commitTitle:@"没有到账" commitAction:^{
         [self checkReceiveStats:YES];
     } cancelTitle:@"确认到账" cancelAction:^{
         [self checkReceiveStats:NO];

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param title 标题
 /// @param content 内容
 /// @param desc 内容补充描述，为空传nil
+/// @param need 是否需要右上角关闭按钮
 /// @param commit 确认标题
 /// @param commitAction 确认事件
 /// @param cancel 取消标题，为空传nil
@@ -23,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)showAlertTitle:(NSString *)title
                        content:(NSString *)content
                           desc:(nullable NSString *)desc
+             needRigthTopClose:(BOOL)need
                    commitTitle:(nullable NSString *)commit
                   commitAction:(nullable dispatch_block_t)commitAction
                    cancelTitle:(nullable NSString *)cancel

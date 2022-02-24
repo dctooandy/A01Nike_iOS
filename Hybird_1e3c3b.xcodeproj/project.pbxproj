@@ -25,6 +25,8 @@
 		04C48B5227C3A40B00623F5A /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AD9CD632167107A00685B43 /* libboringssl_simulator.a */; };
 		04C48B5627C4731C00623F5A /* BTTMeGoldenCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C48B5427C4731C00623F5A /* BTTMeGoldenCCell.m */; };
 		04C48B5727C4731C00623F5A /* BTTMeGoldenCCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C48B5527C4731C00623F5A /* BTTMeGoldenCCell.xib */; };
+		04C48B5B27C73D5400623F5A /* CNMUSDTChannelVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C48B5827C73D5400623F5A /* CNMUSDTChannelVC.xib */; };
+		04C48B5C27C73D5400623F5A /* CNMUSDTChannelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C48B5927C73D5400623F5A /* CNMUSDTChannelVC.m */; };
 		3A0CCED2238B7FE000CFEE22 /* BTTNewAccountGuidePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0CCED1238B7FE000CFEE22 /* BTTNewAccountGuidePopView.m */; };
 		3A0CCED4238B7FF000CFEE22 /* BTTNewAccountGuidePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0CCED3238B7FF000CFEE22 /* BTTNewAccountGuidePopView.xib */; };
 		3A11ADD321816E5800B1AFF4 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11ADC921816E5800B1AFF4 /* SVRadialGradientLayer.m */; };
@@ -919,6 +921,9 @@
 		04C48B5327C4731C00623F5A /* BTTMeGoldenCCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTMeGoldenCCell.h; sourceTree = "<group>"; };
 		04C48B5427C4731C00623F5A /* BTTMeGoldenCCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTMeGoldenCCell.m; sourceTree = "<group>"; };
 		04C48B5527C4731C00623F5A /* BTTMeGoldenCCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTMeGoldenCCell.xib; sourceTree = "<group>"; };
+		04C48B5827C73D5400623F5A /* CNMUSDTChannelVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNMUSDTChannelVC.xib; sourceTree = "<group>"; };
+		04C48B5927C73D5400623F5A /* CNMUSDTChannelVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNMUSDTChannelVC.m; sourceTree = "<group>"; };
+		04C48B5A27C73D5400623F5A /* CNMUSDTChannelVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNMUSDTChannelVC.h; sourceTree = "<group>"; };
 		147D64357C20B5867CCCA734 /* Pods-Hybird_1e3c3b.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hybird_1e3c3b.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hybird_1e3c3b/Pods-Hybird_1e3c3b.debug.xcconfig"; sourceTree = "<group>"; };
 		3A0CCED0238B7FE000CFEE22 /* BTTNewAccountGuidePopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTNewAccountGuidePopView.h; sourceTree = "<group>"; };
 		3A0CCED1238B7FE000CFEE22 /* BTTNewAccountGuidePopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTNewAccountGuidePopView.m; sourceTree = "<group>"; };
@@ -2435,6 +2440,9 @@
 				04C48B3727BE0F3200623F5A /* CNMFastPayStatusVC.h */,
 				04C48B3827BE0F3200623F5A /* CNMFastPayStatusVC.m */,
 				04C48B3927BE0F3200623F5A /* CNMFastPayStatusVC.xib */,
+				04C48B5A27C73D5400623F5A /* CNMUSDTChannelVC.h */,
+				04C48B5927C73D5400623F5A /* CNMUSDTChannelVC.m */,
+				04C48B5827C73D5400623F5A /* CNMUSDTChannelVC.xib */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -5396,6 +5404,7 @@
 				4146810526999F250093B610 /* BTTBindNameAndPhonePopView.xib in Resources */,
 				3AE05817217030CC00C7E70D /* BTTHomePageActivitiesCell.xib in Resources */,
 				4135A700263941D000D3BF17 /* BTTLiCaiOutDetailPopViewCell.xib in Resources */,
+				04C48B5B27C73D5400623F5A /* CNMUSDTChannelVC.xib in Resources */,
 				410636CE26C60ED4002785D2 /* BTTForgetPwdPhoneCell.xib in Resources */,
 				3A11ADF72181A22F00B1AFF4 /* BTTWithdrawalHeaderCell.xib in Resources */,
 				D5DBEB4021AC1355008AF629 /* CNPayQRCell.xib in Resources */,
@@ -6151,6 +6160,7 @@
 				D5DBEB2921ABB774008AF629 /* CNPayCardModel.m in Sources */,
 				D5DBEB2821ABB774008AF629 /* CNPayBankCardModel.m in Sources */,
 				7662C1EA2758E35D007A9E84 /* BTTCheckDomainModel.m in Sources */,
+				04C48B5C27C73D5400623F5A /* CNMUSDTChannelVC.m in Sources */,
 				3A5B027B234F080100D8828B /* BTTXimaRecordController.m in Sources */,
 				D357F0E12431C8DE00FD530A /* BTTBiFuBaoController.m in Sources */,
 				41B3127B269D1FB4002AF76D /* BTTPaymentWarningPopView.m in Sources */,

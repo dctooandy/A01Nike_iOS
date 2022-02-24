@@ -6,11 +6,11 @@
 //  Copyright © 2018年 BTT. All rights reserved.
 //
 
-#import "BTTBaseCollectionViewCell.h"
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BTTMeMoneyHeaderCell : BTTBaseCollectionViewCell
+@interface BTTMeMoneyHeaderCell : UICollectionViewCell
 
 @end
 

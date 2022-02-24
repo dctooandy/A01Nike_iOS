@@ -67,12 +67,14 @@
 #import "CNMFastPayStatusVC.h"
 #import "CNMAlertView.h"
 #import "KYMFastWithdrewVC.h"
+#import "CNMUSDTChannelVC.h"
+
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, assign) BOOL isChangeMobile; // 是否改变手机号
 
 @property (nonatomic, assign) BOOL isCompletePersonalInfo; // 是否完善个人信息
-
+@property (nonatomic, strong) NSArray *dataList;
 @end
 
 @implementation BTTMineViewController
@@ -145,7 +147,6 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeMoreSaveMoneyCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeHeadernNicknameLoginCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeHeadernNicknameLoginCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"BTTMeGoldenCCell" bundle:nil] forCellWithReuseIdentifier:@"BTTMeGoldenCCell"];
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"UICollectionViewCell"];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -277,71 +278,68 @@
             return cell;
         }
     } else if (indexPath.row == 1) {
-        BTTMeMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoneyHeaderCell" forIndexPath:indexPath];
-        return cell;
-    } else if (indexPath.row >= 2 && indexPath.row <= 2 + self.saveMoneyCount - 1) {
-        if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
-            if (indexPath.row == 2) {
-                BTTMeGoldenCCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeGoldenCCell" forIndexPath:indexPath];
-                __weak typeof(self) weakSelf = self;
-                cell.clickAction = ^(NSInteger tag) {
-                    switch (tag) {
-                        case 0: // 存款
-                            [weakSelf goSaveMoneyWithModel:weakSelf.bigDataSoure.firstObject];
-                            break;
-                        case 1: // 洗码
-                            if (UserForzenStatus) {
-                                [[BTTUserForzenManager sharedInstance] checkUserForzen];
-                            } else {
-                                BTTXimaController *vc = [[BTTXimaController alloc] init];
-                                [weakSelf.navigationController pushViewController:vc animated:YES];
-                            }
-                            break;
-                        case 2: { // 取款
-                            [weakSelf goToWithdrawVC];
-                        }
-                        break;
+        BTTMeGoldenCCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeGoldenCCell" forIndexPath:indexPath];
+        __weak typeof(self) weakSelf = self;
+        cell.clickAction = ^(NSInteger tag) {
+            if (![IVNetwork savedUserInfo]) {//未登入
+                [MBProgressHUD showError:@"请先登录" toView:nil];
+                BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+                return;
+            }
+            switch (tag) {
+                case 0: // 存款
+                    [weakSelf goToDepositVC];
+                    break;
+                case 1: // 洗码
+                    if (UserForzenStatus) {
+                        [[BTTUserForzenManager sharedInstance] checkUserForzen];
+                    } else {
+                        BTTXimaController *vc = [[BTTXimaController alloc] init];
+                        [weakSelf.navigationController pushViewController:vc animated:YES];
                     }
+                    break;
+                case 2: { // 取款
+                    [weakSelf goToWithdrawVC];
+                }
+                break;
+            }
+        };
+        return cell;
+        /*    if (indexPath.row == 2) {
+                //推薦存款
+                BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
+                cell.saveMoneyShowType = self.saveMoneyShowType;
+                cell.dataSource = self.bigDataSoure;
+                weakSelf(weakSelf);
+
+                cell.clickEventBlock = ^(id _Nonnull value) {
+                    strongSelf(strongSelf);
+                    BTTMeMainModel *model = value;
+                    [strongSelf goSaveMoneyWithModel:model];
                 };
                 return cell;
+            } else if (indexPath.row == 3) {
+                //更多存款title
+                BTTMeMoreSaveMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell" forIndexPath:indexPath];
+                cell.saveMoneyShowType = self.saveMoneyShowType;
+                return cell;
             } else {
-                UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeGoldenCCell" forIndexPath:indexPath];
+                //更多存款
+                BTTMeMoreSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
+                if (indexPath.row == 4) {
+                    cell.dataSource = self.normalDataSoure;
+                } else {
+                    cell.dataSource = self.normalDataTwo;
+                }
+                weakSelf(weakSelf);
+                cell.clickEventBlock = ^(id _Nonnull value) {
+                    strongSelf(strongSelf);
+                    BTTMeMainModel *model = value;
+                    [strongSelf goSaveMoneyWithModel:model];
+                };
                 return cell;
             }
-//            if (indexPath.row == 2) {
-//                //推薦存款
-//                BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
-//                cell.saveMoneyShowType = self.saveMoneyShowType;
-//                cell.dataSource = self.bigDataSoure;
-//                weakSelf(weakSelf);
-//
-//                cell.clickEventBlock = ^(id _Nonnull value) {
-//                    strongSelf(strongSelf);
-//                    BTTMeMainModel *model = value;
-//                    [strongSelf goSaveMoneyWithModel:model];
-//                };
-//                return cell;
-//            } else if (indexPath.row == 3) {
-//                //更多存款title
-//                BTTMeMoreSaveMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyHeaderCell" forIndexPath:indexPath];
-//                cell.saveMoneyShowType = self.saveMoneyShowType;
-//                return cell;
-//            } else {
-//                //更多存款
-//                BTTMeMoreSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoreSaveMoneyCell" forIndexPath:indexPath];
-//                if (indexPath.row == 4) {
-//                    cell.dataSource = self.normalDataSoure;
-//                } else {
-//                    cell.dataSource = self.normalDataTwo;
-//                }
-//                weakSelf(weakSelf);
-//                cell.clickEventBlock = ^(id _Nonnull value) {
-//                    strongSelf(strongSelf);
-//                    BTTMeMainModel *model = value;
-//                    [strongSelf goSaveMoneyWithModel:model];
-//                };
-//                return cell;
-//            }
         } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig) {
             BTTMeBigSaveMoneyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeBigSaveMoneyCell" forIndexPath:indexPath];
             cell.dataSource = self.bigDataSoure;
@@ -410,28 +408,19 @@
             }
         } else {
             return [UICollectionViewCell new];
-        }
-    } else if (indexPath.row == 2 + self.saveMoneyCount || indexPath.row == self.saveMoneyCount + 9) {
-        
-        BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
+        }*/
+    } else if (indexPath.row == 2) {
+        BTTMeMoneyHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeMoneyHeaderCell" forIndexPath:indexPath];
         return cell;
     } else {
         BTTMeInfoCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTMeInfoCell" forIndexPath:indexPath];
-        if ((indexPath.row > self.saveMoneyCount + 5 && indexPath.row <= self.saveMoneyCount + 8) ||
-            (indexPath.row >= self.saveMoneyCount + 16 && indexPath.row <= self.saveMoneyCount + 18)) {
-            cell.mineSparaterType = BTTMineSparaterTypeDoubleLineOne;
-        } else {
-            cell.mineSparaterType = BTTMineSparaterTypeDoubleLineTwo;
-        }
+        cell.mineSparaterType = BTTMineSparaterTypeDoubleLineTwo;
+        
         BTTMeMainModel *model = nil;
-        if (indexPath.row >= self.saveMoneyCount + 3 && indexPath.row <= self.saveMoneyCount + 8) {
-            if (self.mainDataOne.count != 0 && self.mainDataOne.count > (indexPath.row - self.saveMoneyCount - 3)) {
-                model = self.mainDataOne[indexPath.row - self.saveMoneyCount - 3];
-            }
+        if ((indexPath.row-3) < self.mainDataOne.count) {
+            model = self.mainDataOne[indexPath.row-3];
         } else {
-            if (self.mainDataTwo.count != 0 && self.mainDataOne.count != 0 && self.mainDataTwo.count > (indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4)) {
-                model = self.mainDataTwo[indexPath.row - self.saveMoneyCount - self.mainDataOne.count - 4];
-            }
+            model = self.mainDataTwo[indexPath.row-(3+self.mainDataOne.count)];
         }
         cell.isShowHot = self.isShowHot;
         cell.model = model;
@@ -485,14 +474,50 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    NSLog(@"%@", @(indexPath.row));
+    
+    if (![IVNetwork savedUserInfo]) {
+        [MBProgressHUD showError:@"请先登录" toView:nil];
+        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    
+    if (indexPath.row < 2) {
+        return;
+    }
+  
+    // @"我的优惠"
+    if (indexPath.row == 2) {
+        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+        vc.webConfigModel.theme = @"outside";
+        vc.webConfigModel.newView = YES;
+        vc.title = @"我的优惠";
+        vc.webConfigModel.url = @"my_coupon";
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+
+    
+    
+    BTTMeMainModel *model = nil;
+    if ((indexPath.row-3) < self.mainDataOne.count) {
+        model = self.mainDataOne[indexPath.row-3];
+    } else {
+        model = self.mainDataTwo[indexPath.row-(3+self.mainDataOne.count)];
+    }
+    
+    if (model == nil) {
+        return;
+    }
+    
     BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
-    if (indexPath.row == self.elementsHight.count - 3) {
-        //版本更新
+    
+    if ([model.name isEqualToString:@"版本更新"]) {
         [IVNetwork checkAppUpdate];
         return;
-    } else if (indexPath.row == self.elementsHight.count - 2) {
-        // 网络监测
+    }
+    
+    if ([model.name isEqualToString:@"网站检测"]) {
         IVCNetworkStatusView *statusView = [[IVCNetworkStatusView alloc] initWithFrame:self.view.frame];
         
         IVCheckNetworkModel *gatewayModel = [[IVCheckNetworkModel alloc] init];
@@ -518,17 +543,9 @@
         
         return;
     }
-    if (![IVNetwork savedUserInfo]) {
-        [MBProgressHUD showError:@"请先登录" toView:nil];
-        BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-        return;
-    }
-    if (indexPath.row == self.saveMoneyCount + 3) {
-        //取款
-        
-    } else if ((indexPath.row == self.saveMoneyCount + 4 && self.isOpenSellUsdt)) {
-        //一键卖币
+    
+    
+    if ([model.name isEqualToString:@"一键卖币"]) {
         if (self.sellUsdtLink!=nil&&![self.sellUsdtLink isEqualToString:@""]) {
             if ([IVNetwork savedUserInfo].mobileNoBind != 1) {
                 BTTBindingMobileController *vc = [[BTTBindingMobileController alloc] init];
@@ -547,17 +564,10 @@
                 [self.navigationController pushViewController:vc animated:YES];                
             }
         }
-    } else if ((indexPath.row == self.saveMoneyCount + 4 && !self.isOpenSellUsdt) || (indexPath.row == self.saveMoneyCount + 5 && self.isOpenSellUsdt)) {
-        //洗碼
-//        if (UserForzenStatus)
-//        {
-//            [[BTTUserForzenManager sharedInstance] checkUserForzen];
-//        }else{
-//            BTTXimaController *vc = [[BTTXimaController alloc] init];
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }
-    } else if ((indexPath.row == self.saveMoneyCount + 5 && !self.isOpenSellUsdt) || (indexPath.row == self.saveMoneyCount + 6 && self.isOpenSellUsdt)) {
-        //銀行卡
+        return;
+    }
+    
+    if ([model.name isEqualToString:@"银行卡资料"] || [model.name isEqualToString:@"钱包管理"]) {
         if (isUSDTAcc) {
             if (self.isCompletePersonalInfo) {
                 BTTCardInfosController *vc = [[BTTCardInfosController alloc] init];
@@ -572,8 +582,11 @@
                 [self.navigationController pushViewController:vc animated:YES];
             }
         }
-    } else if ((indexPath.row == self.saveMoneyCount + 6 && !self.isOpenSellUsdt) || (indexPath.row == self.saveMoneyCount + 7 && self.isOpenSellUsdt)) {
-        //綁定手機
+        
+        return;
+    }
+    
+    if ([model.name isEqualToString:@"绑定手机"]) {
         UIViewController *vc = nil;
         if ([IVNetwork savedUserInfo].mobileNoBind == 1) {
             BTTVerifyTypeSelectController *selectVC = [BTTVerifyTypeSelectController new];
@@ -585,14 +598,16 @@
             vc = bindingMobileVC;
         }
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ((indexPath.row == self.saveMoneyCount + 7 && !self.isOpenSellUsdt) || (indexPath.row == self.saveMoneyCount + 8 && self.isOpenSellUsdt)) {
-        //個人資料
-        BTTPersonalInfoController *personInfo = [[BTTPersonalInfoController alloc] init];
-        [self.navigationController pushViewController:personInfo animated:YES];
+        return;
     }
     
-    if (indexPath.row == self.elementsHight.count - 1) {
-        // 设置
+    if ([model.name isEqualToString:@"个人资料"]) {
+        BTTPersonalInfoController *personInfo = [[BTTPersonalInfoController alloc] init];
+        [self.navigationController pushViewController:personInfo animated:YES];
+        return;
+    }
+    
+    if ([model.name isEqualToString:@"设置"]) {
         BTTSettingsController *vc = [[BTTSettingsController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         weakSelf(weakSelf);
@@ -617,38 +632,46 @@
             strongSelf.yebInterest = @"-";
             [MBProgressHUD showSuccess:@"退出成功" toView:nil];
         };
-    } else if (indexPath.row == self.elementsHight.count - 4) {
-        //站內信
+        return;
+    }
+    
+    if ([model.name isEqualToString:@"站内信"]) {
         BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
         vc.webConfigModel.newView = YES;
         vc.webConfigModel.url = @"mailApp?type=mail/inbox";
         vc.webConfigModel.theme = @"outside";
         vc.title = @"站內信";
         [self.navigationController pushViewController:vc animated:YES];
+        return;
     }
-//    else if (indexPath.row == self.elementsHight.count - 5) {
-//        //額度轉帳
-//        BTTPTTransferController *vc = [[BTTPTTransferController alloc] init];
-//        vc.balanceModel = self.balanceModel;
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }
-    else if (indexPath.row == self.elementsHight.count - 5) {
-        //帳號安全
+
+    if ([model.name isEqualToString:@"账号安全"]) {
         BTTAccountSafeController *vc = [[BTTAccountSafeController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if (indexPath.row == self.elementsHight.count - 6) {
-        //客戶報表
+        return;
+    }
+    
+    if ([model.name isEqualToString:@"客户报表"]) {
         BTTCustomerReportController * vc = [[BTTCustomerReportController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.row == self.elementsHight.count - 7) {
-        //我的優惠
-        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-        vc.webConfigModel.theme = @"outside";
-        vc.webConfigModel.newView = YES;
-        vc.title = @"我的优惠";
-        vc.webConfigModel.url = @"my_coupon";
-        [self.navigationController pushViewController:vc animated:YES];
+        return;
     }
+}
+
+/// 点击存款
+- (void)goToDepositVC {
+    BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
+    if (!isUSDTAcc) {
+        [self goSaveMoneyWithModel:self.bigDataSoure.firstObject];
+        return;
+    }
+    CNMUSDTChannelVC *vc = [[CNMUSDTChannelVC alloc] init];
+    vc.list = self.bigDataSoure;
+    __weak typeof(self)weakSelf = self;
+    vc.selectedChannelCallback = ^(NSInteger index) {
+        [weakSelf goSaveMoneyWithModel:weakSelf.bigDataSoure[index]];
+    };
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 /// 点击取款
@@ -736,7 +759,7 @@
                     //是否已存在存取款提案
                     if (model.data.mmProcessingOrderTransactionId && model.data.mmProcessingOrderTransactionId.length != 0) {
                         if (model.data.mmProcessingOrderType == 1) { // 存款
-                            [CNMAlertView showAlertTitle:@"交易提醒" content:@"您当前有正在交易的存款订单\n如需取款，请选择在线取款" desc:nil commitTitle:@"查看订单" commitAction:^{
+                            [CNMAlertView showAlertTitle:@"交易提醒" content:@"您当前有正在交易的存款订单\n如需取款，请选择在线取款" desc:nil needRigthTopClose:NO commitTitle:@"查看订单" commitAction:^{
                                 CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
                                 statusVC.cancelTime = [model.data.remainCancelDepositTimes integerValue];
                                 statusVC.transactionId = model.data.mmProcessingOrderTransactionId;
@@ -749,7 +772,7 @@
                                 [weakSelf.navigationController pushViewController:vc animated:YES];
                             }];
                         } else { // 取款
-                            [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板，如需再次取款，请选择在线取款" desc:nil commitTitle:@"关闭" commitAction:^{
+                            [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板，如需再次取款，请选择在线取款" desc:nil needRigthTopClose:NO commitTitle:@"关闭" commitAction:^{
                                 
                             } cancelTitle:@"在线取款" cancelAction:^{
                                 //普通取款
@@ -836,57 +859,28 @@
 }
 
 - (void)setupElements {
-    NSInteger total = self.saveMoneyCount + 4 + self.mainDataOne.count + self.mainDataTwo.count;
+    self.dataList = [self.mainDataOne arrayByAddingObjectsFromArray:self.mainDataTwo];
     NSMutableArray *elementsHight = [NSMutableArray array];
-    for (int i = 0; i < total; i++) {
-        if (i == 0) {
-            if (SCREEN_WIDTH == 414) {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 200)]];
-            } else if (SCREEN_WIDTH == 320) {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 190)]];
-            } else {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 190)]];
-            }
-        } else if (i == 1) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
-        } else if (i >= 2  && i <= 2 + self.saveMoneyCount - 1) {
-            if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeAll) {
-                if (i == 2) {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 120)]];
-                } else if (i == 3) {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
-                } else if (i == 4) {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
-                } else {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 0)]];
-                }
-            } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBigOneMore) {
-                if (i == 2) {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 180)]];
-                } else if (i == 3) {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 44)]];
-                } else {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
-                }
-            } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeBig) {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 180)]];
-            } else if (self.saveMoneyShowType == BTTMeSaveMoneyShowTypeMore) {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
-            } else {
-                if (i == 2) {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 90)]];
-                } else {
-                    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 105)]];
-                }
-            }
-        } else if (i == 1 + self.saveMoneyCount + 1 ||
-                   i == self.saveMoneyCount + 9) {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 10)]];
-        } else {
-            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 3, 100)]];
-        }
+    
+    if (SCREEN_WIDTH == 414) {
+        [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 200)]];
+    } else if (SCREEN_WIDTH == 320) {
+        [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 190)]];
+    } else {
+        [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 190)]];
     }
-    self.elementsHight = elementsHight.mutableCopy;
+    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 120)]];
+    [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, (SCREEN_WIDTH-35)*76/354.0+50)]];
+    
+    for (int i = 0; i < self.mainDataOne.count; i++) {
+        [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 3, 100)]];
+    }
+    
+    for (int i = 0; i < self.mainDataTwo.count; i++) {
+        [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH / 3, 100)]];
+    }
+    
+    self.elementsHight = elementsHight;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
