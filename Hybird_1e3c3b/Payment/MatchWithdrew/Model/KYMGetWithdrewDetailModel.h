@@ -15,6 +15,16 @@ typedef NS_ENUM(NSInteger, KYMWithdrewDetailStatus) {
     KYMWithdrewDetailStatusSuccess = 2, //撮合成功
     KYMWithdrewDetailStatusFaild = -1, //撮合失败
 };
+typedef NS_ENUM(NSInteger, KYMWithdrewStatus) {
+    KYMWithdrewStatusSubmit1 = 0, //撮合提交
+    KYMWithdrewStatusSubmit = 1, //撮合提交
+    KYMWithdrewStatusWaiting = 2, //取款等待
+    KYMWithdrewDetailStatusNotMatch = 3, //取款未匹配
+    KYMWithdrewDetailStatusTimeout = 4, //取款超时
+    KYMWithdrewStatusConfirm = 5, //取款确认
+    KYMWithdrewStatusFaild = 6, //取款失败
+    KYMWithdrewStatusSuccessed = 100, //取款成功
+};
 
 NS_ASSUME_NONNULL_BEGIN
 @interface KYMGetWithdrewDetailDataModel : NSObject
@@ -47,6 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) KYMWithdrewDetailStatus matchStatus;
 @property (nonatomic, copy) NSString *withdrawType;
 @property (nonatomic, copy) NSString *matchConfirmStatus;
+@property (nonatomic, copy) NSString *code;
 @property (nonatomic, copy) NSString *message;
 @property (nonatomic, copy) NSString *requestId;
 @property (nonatomic, copy) KYMGetWithdrewDetailDataModel *data;

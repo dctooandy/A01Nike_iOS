@@ -25,36 +25,36 @@
     }
     return self;
 }
-- (void)setStatus:(KYMWithdrewStatus)status
+- (void)setStep:(KYMWithdrewStep)step
 {
-    _status = status;
-    switch (status) {
-        case KYMWithdrewStatusSubmit:
+    _step = step;
+    switch (step) {
+        case KYMWithdrewStepOne:
             [self.submitBtn setTitle:@"取消取款" forState:UIControlStateNormal];
             self.notReceivedBtn.hidden = YES;
             self.textLB.hidden = YES;
             break;
-        case KYMWithdrewStatusWaiting:
+        case KYMWithdrewStepTwo:
             [self.submitBtn setTitle:@"取消取款" forState:UIControlStateNormal];
             self.notReceivedBtn.hidden = YES;
             self.textLB.hidden = YES;
             break;
-        case KYMWithdrewStatusConfirm:
+        case KYMWithdrewStepThree:
             [self.submitBtn setTitle:@"确认到账" forState:UIControlStateNormal];
             self.notReceivedBtn.hidden = NO;
             self.textLB.hidden = NO;
             break;
-        case KYMWithdrewStatusNotReceived:
+        case KYMWithdrewStepFour:
             [self.submitBtn setTitle:@"取消取款" forState:UIControlStateNormal];
             self.notReceivedBtn.hidden = YES;
             self.textLB.hidden = YES;
             break;
-        case KYMWithdrewStatusTimeout:
+        case KYMWithdrewStepFive:
             [self.submitBtn setTitle:@"返回首页" forState:UIControlStateNormal];
             self.notReceivedBtn.hidden = YES;
             self.textLB.hidden = YES;
             break;
-        case KYMWithdrewStatusSuccessed:
+        case KYMWithdrewStepSix:
             [self.submitBtn setTitle:@"返回首页" forState:UIControlStateNormal];
             self.notReceivedBtn.hidden = YES;
             self.textLB.hidden = YES;
@@ -68,6 +68,7 @@
     self.submitBtnHandle();
 }
 - (IBAction)notReceivedBtnClicked:(id)sender {
+    self.notReceivedBtnHandle();
 }
 
 @end

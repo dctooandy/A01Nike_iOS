@@ -10,6 +10,7 @@
 #import "KYMWithdrewCheckModel.h"
 #import "KYMCreateWithdrewModel.h"
 #import "KYMGetWithdrewDetailModel.h"
+#import "KYMCheckReceiveModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^KYMCallback)(BOOL status,NSString *msg,id body);
@@ -25,6 +26,8 @@ extern void kym_sendRequest(NSString * url, id params, KYMCallback callback);
 + (void)createWithdrawWithParams:(NSDictionary *)params callback:(KYMCallback)callback;
 //获取取款明细
 + (void)getWithdrawDetailWithParams:(NSDictionary *)params callback:(KYMCallback)callback;
+//取款到账/未到账操作
++ (void)checkReceiveStatus:(NSDictionary *)params callback:(KYMCallback)callback;
 @end
 
 NS_ASSUME_NONNULL_END

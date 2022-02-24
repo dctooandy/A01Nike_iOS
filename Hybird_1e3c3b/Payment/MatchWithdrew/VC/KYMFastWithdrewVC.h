@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "KYMGetWithdrewDetailModel.h"
-#import "HABaseViewController.h"
+#import "BTTBaseViewController.h"
 #import "KYMWithdrewFaildVC.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface KYMFastWithdrewVC : HABaseViewController
+@interface KYMFastWithdrewVC : BTTBaseViewController
 @property (nonatomic, strong) KYMGetWithdrewDetailModel *detailModel;
+@property (nonatomic, strong) id checkChannelParams;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -143,7 +143,7 @@
     //撮合取款
     if (self.isMatchWithdrew && indexPath.row == 1) {
         KYMWithdrewAmountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KYMWithdrewAmountCell" forIndexPath:indexPath];
-        cell.amountArray = self.checkModel.amountList;
+        cell.amountArray = self.checkModel.data.amountList;
         cell.delegate = self;
         return cell;
     }
@@ -215,7 +215,7 @@
     }
     if ([cellName isEqualToString:@"联系客服"]) {
         KYMWithdrewHomeNotifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KYMWithdrewHomeNotifyCell" forIndexPath:indexPath];
-        cell.canUseCount = self.checkModel.remainWithdrawTimes;
+        cell.canUseCount = self.checkModel.data.remainWithdrawTimes;
         cell.forgotPwdBlock = ^{
             
         };
@@ -611,7 +611,7 @@
     }
 }
 - (void)createRequestMatchWithdraw
-{
+{    
     //撮合取款
     BTTBankModel *model = self.bankList[self.selectIndex];
     NSMutableDictionary *mparams = @{}.mutableCopy;
@@ -643,12 +643,15 @@
                 [MBProgressHUD showMessagNoActivity:msg toView:nil];
                 return;
             }
-            if (model1.data.status == KYMWithdrewStatusFaild || model1.data.status == KYMWithdrewStatusNotMatch) {
-                KYMWithdrewFaildVC *vc = [KYMWithdrewFaildVC new];
+            if (model1.matchStatus == KYMWithdrewDetailStatusFaild) { //撮合失败,走常规取款
+                KYMWithdrewFaildVC *vc = [[KYMWithdrewFaildVC alloc] init];
+                vc.userName = model1.data.loginName;
+                vc.amountStr = model1.data.amount;
                 [self.navigationController pushViewController:vc animated:YES];
             } else {
                 KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
                 vc.detailModel = model1;
+                vc.checkChannelParams = mparams1;
                 [self.navigationController pushViewController:vc animated:YES];
             }
         }];

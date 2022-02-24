@@ -27,12 +27,23 @@
                             <color key="textColor" red="0.82352941180000006" green="0.82352941180000006" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥ 500元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbC-2C-29u">
-                            <rect key="frame" x="126.5" y="0.0" width="161" height="61"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vbC-2C-29u">
+                            <rect key="frame" x="194" y="0.0" width="26" height="61"/>
                             <constraints>
+                                <constraint firstAttribute="width" constant="26" id="b34-Mm-kXr"/>
                                 <constraint firstAttribute="height" constant="61" id="cuN-0y-5KX"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="43"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5hF-ki-NS1">
+                            <rect key="frame" x="168" y="9.5" width="18" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="18" id="0Sl-nk-p1U"/>
+                                <constraint firstAttribute="height" constant="42" id="EqB-An-aZC"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="30"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -57,6 +68,16 @@
                             <color key="textColor" red="0.035294117649999998" green="0.58039215690000001" blue="0.90588235289999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avS-Rt-VDG">
+                            <rect key="frame" x="228" y="9.5" width="30" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="30" id="i08-mj-QRx"/>
+                                <constraint firstAttribute="height" constant="42" id="x7f-vb-9yd"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="30"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -65,8 +86,12 @@
                         <constraint firstItem="Vqr-Bb-bEw" firstAttribute="top" secondItem="vbC-2C-29u" secondAttribute="bottom" constant="22" id="Fo9-UM-1cS"/>
                         <constraint firstItem="f8J-lE-2OI" firstAttribute="top" secondItem="vbC-2C-29u" secondAttribute="bottom" constant="-5" id="JWF-88-tfd"/>
                         <constraint firstItem="vbC-2C-29u" firstAttribute="centerX" secondItem="qYB-G6-eEV" secondAttribute="centerX" id="Nem-Hc-DGp"/>
+                        <constraint firstItem="vbC-2C-29u" firstAttribute="centerY" secondItem="5hF-ki-NS1" secondAttribute="centerY" id="c7U-0q-KNS"/>
                         <constraint firstItem="Grp-cS-CFo" firstAttribute="top" secondItem="qYB-G6-eEV" secondAttribute="top" constant="2" id="fe5-K3-vyw"/>
                         <constraint firstItem="f8J-lE-2OI" firstAttribute="centerX" secondItem="qYB-G6-eEV" secondAttribute="centerX" id="idw-po-ZcK"/>
+                        <constraint firstItem="vbC-2C-29u" firstAttribute="leading" secondItem="5hF-ki-NS1" secondAttribute="trailing" constant="8" id="q5A-c7-ISc"/>
+                        <constraint firstItem="avS-Rt-VDG" firstAttribute="leading" secondItem="vbC-2C-29u" secondAttribute="trailing" constant="8" id="r2N-0u-c51"/>
+                        <constraint firstItem="avS-Rt-VDG" firstAttribute="centerY" secondItem="vbC-2C-29u" secondAttribute="centerY" id="sfX-BN-oLJ"/>
                         <constraint firstItem="vbC-2C-29u" firstAttribute="top" secondItem="qYB-G6-eEV" secondAttribute="top" id="tS3-2S-poV"/>
                     </constraints>
                 </view>
@@ -86,8 +111,9 @@
                 <outlet property="amountStatusLB2" destination="Vqr-Bb-bEw" id="5wf-ak-qgU"/>
                 <outlet property="amountStatusLB2Height" destination="4KB-yh-D1e" id="Brx-kA-Uwb"/>
                 <outlet property="amountStatusLB2Top" destination="Fo9-UM-1cS" id="jLV-l7-gag"/>
+                <outlet property="amountWidth" destination="b34-Mm-kXr" id="l5G-cp-jd8"/>
             </connections>
-            <point key="canvasLocation" x="139" y="72"/>
+            <point key="canvasLocation" x="137.68115942028987" y="71.651785714285708"/>
         </view>
     </objects>
 </document>
