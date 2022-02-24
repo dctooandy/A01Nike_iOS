@@ -246,21 +246,20 @@ DEPENDENCIES:
   - ZLPhotoBrowser
 
 SPEC REPOS:
-  https://cdn.cocoapods.org/:
-    - CocoaAsyncSocket
-    - FCUUID
-    - JSONModel
-    - UICKeyChainStore
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - AFNetworking
     - BGFMDB
+    - CocoaAsyncSocket
+    - FCUUID
     - GJRedDot
     - IQKeyboardManager
+    - JSONModel
     - Masonry
     - MBProgressHUD
     - MJExtension
     - MJRefresh
     - SDWebImage
+    - UICKeyChainStore
     - YYImage
     - YYModel
     - ZipArchive
@@ -378,4 +377,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 4b4435d119351a19c129c6c1baffa03b7124bc0a
 
-COCOAPODS: 1.7.3
+COCOAPODS: 1.11.2
