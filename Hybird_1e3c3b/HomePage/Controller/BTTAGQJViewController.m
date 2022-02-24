@@ -68,6 +68,12 @@
     gameModel.platformCurrency = self.platformLine;
     gameModel.gameCode = BTTAGQJKEY;
     manager.agqjVC.gameModel = gameModel;
+    for (UILabel *label in [IVGameManager sharedManager].agqjVC.navigationView.subviews) {
+        if ([label isKindOfClass:[UILabel class]])
+        {
+            label.text = @"旗舰厅";
+        }
+    }
     [self addChildViewController:[IVGameManager sharedManager].agqjVC];
     [self.view addSubview:[IVGameManager sharedManager].agqjVC.view];
     [IVGameManager sharedManager].agqjVC.view.frame = self.view.frame;
