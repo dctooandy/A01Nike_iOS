@@ -64,6 +64,7 @@
 #import "BTTMeGoldenCCell.h"
 #import "KYMWithdrewRequest.h"
 #import "KYMSelectChannelVC.h"
+#import "CNMUSDTChannelVC.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
@@ -285,7 +286,7 @@
             }
             switch (tag) {
                 case 0: // 存款
-                    [weakSelf goSaveMoneyWithModel:weakSelf.bigDataSoure.firstObject];
+                    [weakSelf goToDepositVC];
                     break;
                 case 1: // 洗码
                     if (UserForzenStatus) {
@@ -652,6 +653,22 @@
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }
+}
+
+/// 点击存款
+- (void)goToDepositVC {
+    BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
+    if (!isUSDTAcc) {
+        [self goSaveMoneyWithModel:self.bigDataSoure.firstObject];
+        return;
+    }
+    CNMUSDTChannelVC *vc = [[CNMUSDTChannelVC alloc] init];
+    vc.list = self.bigDataSoure;
+    __weak typeof(self)weakSelf = self;
+    vc.selectedChannelCallback = ^(NSInteger index) {
+        [weakSelf goSaveMoneyWithModel:weakSelf.bigDataSoure[index]];
+    };
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 /// 点击取款
