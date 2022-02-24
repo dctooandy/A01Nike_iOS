@@ -745,10 +745,13 @@
     [KYMWithdrewRequest checkChannelWithParams:parmas.copy callback:^(BOOL status, NSString * _Nonnull msg, KYMWithdrewCheckModel  * _Nonnull model) {
         [self hideLoading];
         if (!status) {
-            [MBProgressHUD showMessagNoActivity:msg toView:nil];
+            [MBProgressHUD showError:msg toView:nil];
             return;
         }
-        if (model.data.amountList.count > 0) {
+        //移除比余额小的金额
+        [model.data removeAmountBiggerThanTotal:self.totalAmount];
+        //如果有金额列表，且金额列表中最小的比余额大才走撮合
+        if (model.data.amountList.count > 0 && [self.totalAmount doubleValue] > [model.data.miniAmount doubleValue]) {
             //取款类型选择弹框
             KYMSelectChannelVC *vc = [[KYMSelectChannelVC alloc] init];
             vc.checkModel = model;
@@ -772,16 +775,21 @@
                                 [weakSelf.navigationController pushViewController:vc animated:YES];
                             }];
                         } else { // 取款
+                            
+                            KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
+                            vc.mmProcessingOrderTransactionId = model.data.mmProcessingOrderTransactionId;
+                            
                             [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板，如需再次取款，请选择在线取款" desc:nil needRigthTopClose:NO commitTitle:@"关闭" commitAction:^{
                                 
                             } cancelTitle:@"在线取款" cancelAction:^{
+                                [weakSelf.navigationController popViewControllerAnimated:NO];
+                                [vc stopTimer];
                                 //普通取款
-                                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                                vc.isMatchWithdrew = NO;
-                                [weakSelf.navigationController pushViewController:vc animated:YES];
+                                BTTWithdrawalController *vc1 = [[BTTWithdrawalController alloc] init];
+                                vc1.isMatchWithdrew = NO;
+                                [weakSelf.navigationController pushViewController:vc1 animated:YES];
                             }];
-                            KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
-                            vc.mmProcessingOrderTransactionId = self.fastModel.payModel.mmProcessingOrderTransactionId;
+                            
                             [weakSelf.navigationController pushViewController:vc animated:YES];
                         }
                     } else {
