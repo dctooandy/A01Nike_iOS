@@ -9,8 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KYMSelectChannelVC">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CNMUSDTChannelVC">
             <connections>
+                <outlet property="alertViewHeight" destination="Xi5-86-F3B" id="Yzd-uC-6gU"/>
                 <outlet property="closeBtn" destination="30G-vf-fNR" id="SEO-NB-jhp"/>
                 <outlet property="contentView" destination="H1C-5y-LKH" id="DZO-4L-SYu"/>
                 <outlet property="tableView" destination="Cfe-gg-cvo" id="CDQ-qS-Gbs"/>
@@ -25,7 +26,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1C-5y-LKH">
                     <rect key="frame" x="0.0" y="562" width="414" height="300"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择取款方式" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="het-fo-s7M">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择充值方式" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="het-fo-s7M">
                             <rect key="frame" x="147" y="15" width="120" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="28" id="1Lb-2y-gpg"/>
@@ -44,6 +45,7 @@
                                 <constraint firstAttribute="width" constant="35" id="6kV-2W-Eab"/>
                                 <constraint firstAttribute="height" constant="35" id="jcb-99-FGY"/>
                             </constraints>
+                            <color key="tintColor" red="0.52156862745098043" green="0.5490196078431373" blue="0.61960784313725492" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="mwd_Cancel"/>
                             <connections>

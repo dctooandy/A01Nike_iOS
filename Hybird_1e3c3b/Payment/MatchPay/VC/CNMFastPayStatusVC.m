@@ -528,20 +528,23 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         uploadCount -= self.pictureArr2.count;
         return;
     }
-    for (UIImage *image in self.pictureArr2) {
-        [CNMatchPayRequest uploadImage:image finish:^(id  _Nullable response, NSError * _Nullable error) {
-            uploadCount -= 1;
-            if ([response isKindOfClass:[NSDictionary class]]) {
-                NSDictionary *dic = (NSDictionary *)response;
-                NSString *name = [dic objectForKey:@"fileName"];
-                if (name) {
-                    [self.pictureName2 addObject:name];
+    for (int i = 0; i < self.pictureArr2.count; i ++) {
+        // 同时上传会超时
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)((i+1)*2.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [CNMatchPayRequest uploadImage:self.pictureArr2[i] finish:^(id  _Nullable response, NSError * _Nullable error) {
+                uploadCount -= 1;
+                if ([response isKindOfClass:[NSDictionary class]]) {
+                    NSDictionary *dic = (NSDictionary *)response;
+                    NSString *name = [dic objectForKey:@"fileName"];
+                    if (name) {
+                        [self.pictureName2 addObject:name];
+                    }
                 }
-            }
-            if (uploadCount == 0) {
-                [self uploadFinish];
-            }
-        }];
+                if (uploadCount == 0) {
+                    [self uploadFinish];
+                }
+            }];
+        });
     }
 }
 
