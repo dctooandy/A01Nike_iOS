@@ -16,6 +16,7 @@
 #import "KYMWithdrewNoticeView1.h"
 #import "KYMWithdrewNoticeView2.h"
 #import "KYMWithdrewRequest.h"
+#import "CNMAlertView.h"
 #import "Masonry.h"
 @interface KYMFastWithdrewVC ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -44,17 +45,20 @@
 
 - (void)dealloc
 {
-    [self.timeoutTimer invalidate];
-    self.timeoutTimer = nil;
+    [self stopTimeoutTimer];
     [self stopGetWithdrawDetail];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"急速取款";
     [self setupSubViews];
-    self.step = self.step;
+    self.step = KYMWithdrewStepOne;
+    [self getWithdrawDetail];
     self.isLoadedView = YES;
-    [self statusTimer];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 - (NSTimer *)statusTimer
 {
@@ -162,17 +166,6 @@
         make.width.offset(191);
         make.height.offset(30);
     }];
-    
-    [self.bankView.iconImgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.data.bankIcon] placeholderImage:[UIImage imageNamed:@"mwd_default"]];
-    self.bankView.bankName.text = self.detailModel.data.bankName;
-    self.bankView.accoutName.text = self.detailModel.data.bankAccountName;
-    self.bankView.account.text = self.detailModel.data.bankAccountNo;
-    self.bankView.withdrawType.text = @"急速取款";
-    self.bankView.amount.text = [self.detailModel.data.amount stringByAppendingString:@"元"];
-    self.bankView.submitTime.text = self.detailModel.data.createdDate;
-    self.bankView.confirmTime.text = self.detailModel.data.confirmTime;
-    self.amountView.amount = self.detailModel.data.amount;
-    
 }
 - (void)viewDidLayoutSubviews
 {
@@ -310,7 +303,19 @@
 - (void)setDetailModel:(KYMGetWithdrewDetailModel *)detailModel
 {
     _detailModel = detailModel;
+    [self.bankView.iconImgView sd_setImageWithURL:[NSURL URLWithString:detailModel.data.bankIcon] placeholderImage:[UIImage imageNamed:@"mwd_default"]];
+    self.bankView.bankName.text = detailModel.data.bankName;
+    self.bankView.accoutName.text = detailModel.data.bankAccountName;
+    self.bankView.account.text = detailModel.data.bankAccountNo;
+    self.bankView.withdrawType.text = @"急速取款";
+    self.bankView.amount.text = [detailModel.data.amount stringByAppendingString:@"元"];
+    self.bankView.submitTime.text = detailModel.data.createdDate;
+    self.bankView.confirmTime.text = detailModel.data.confirmTime;
+    self.amountView.amount = detailModel.data.amount;
+    
     if (detailModel.matchStatus == KYMWithdrewDetailStatusFaild) { //撮合失败,走常规取款
+        [self stopTimeoutTimer];
+        [self stopGetWithdrawDetail];
         KYMWithdrewFaildVC *vc = [[KYMWithdrewFaildVC alloc] init];
         vc.userName = self.detailModel.data.loginName;
         vc.amountStr = self.detailModel.data.amount;
@@ -333,7 +338,17 @@
 - (void)getWithdrawDetail
 {
     [self stopGetWithdrawDetail];
-    [KYMWithdrewRequest getWithdrawDetailWithParams:self.checkChannelParams callback:^(BOOL status, NSString * _Nonnull msg, KYMGetWithdrewDetailModel *  _Nonnull model) {
+    
+    NSMutableDictionary *mParams = @{}.mutableCopy;
+    //            mparams[@"loginName"] = @""; //用户名，底层已拼接
+    //            mparams[@"productId"] = @""; //脱敏产品编号，底层已拼接
+    mParams[@"merchant"] = @"A01";
+    mParams[@"transactionId"] = self.mmProcessingOrderTransactionId;
+    if (!self.isViewLoaded) {
+        [self showLoading];
+    }
+    [KYMWithdrewRequest getWithdrawDetailWithParams:mParams callback:^(BOOL status, NSString * _Nonnull msg, KYMGetWithdrewDetailModel *  _Nonnull model) {
+        [self hideLoading];
         if (!status) {
             [self statusTimer];
             return;
@@ -368,8 +383,7 @@
     NSUInteger s = self.timeout - m * 60;
     self.statusView.statusLB3.text = [NSString stringWithFormat:@"%02ld分%02ld秒",m,s];
     if (self.timeout <= 0 ) {
-        [self.timeoutTimer invalidate];
-        self.timeoutTimer = nil;
+        [self stopTimeoutTimer];
         return;
     }
     
@@ -379,18 +393,46 @@
     [self.statusTimer invalidate];
     self.statusTimer = nil;
 }
+- (void)stopTimeoutTimer
+{
+    [self.timeoutTimer invalidate];
+    self.timeoutTimer = nil;
+}
 - (void)submitBtnClicked {
     
-    if (self.step == KYMWithdrewStepThree) {
-        [self checkReceiveStats:NO];
+    if (self.step == KYMWithdrewStepOne) {
+        NSMutableDictionary *mParam = @{}.mutableCopy;
+        mParam[@"referenceId"] = self.mmProcessingOrderTransactionId;
+        [self showLoading];
+        [KYMWithdrewRequest cancelWithdrawWithParams:mParam.copy callback:^(BOOL status, NSString * _Nonnull msg, id  _Nonnull body) {
+            [self hideLoading];
+            if (status) {
+                [MBProgressHUD showMessagNoActivity:@"取消取款成功" toView:nil];
+                [self goToBack];
+            } else {
+                [MBProgressHUD showMessagNoActivity:msg toView:nil];
+            }
+        }];
+    } else if (self.step == KYMWithdrewStepThree) {
+        [CNMAlertView showAlertTitle:@"再次确认" content:@"老板！请您再次确认是否到账" desc:nil needRigthTopClose:YES commitTitle:@"没有到账" commitAction:^{
+            [self checkReceiveStats:YES];
+        } cancelTitle:@"确认到账" cancelAction:^{
+            [self checkReceiveStats:NO];
+        }];
+        
     } else if (self.step == KYMWithdrewStepFive || self.step == KYMWithdrewStepSix) {
         [self stopGetWithdrawDetail];
+        [self stopTimeoutTimer];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
     
 }
 - (void)notRecivedBtnClicked {
-    [self checkReceiveStats:YES];
+    [CNMAlertView showAlertTitle:@"再次确认" content:@"老板！请您再次确认是否到账" desc:nil needRigthTopClose:YES commitTitle:@"没有到账" commitAction:^{
+        [self checkReceiveStats:YES];
+    } cancelTitle:@"确认到账" cancelAction:^{
+        [self checkReceiveStats:NO];
+    }];
 }
 - (void)checkReceiveStats:(BOOL)isNotRceived
 {
@@ -417,10 +459,10 @@
     
 }
 - (void)goToBack {
-    [self.timeoutTimer invalidate];
-    self.timeoutTimer = nil;
+    
     [self stopGetWithdrawDetail];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self stopTimeoutTimer];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 

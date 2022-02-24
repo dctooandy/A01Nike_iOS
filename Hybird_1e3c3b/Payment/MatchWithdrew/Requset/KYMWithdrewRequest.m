@@ -64,4 +64,17 @@
         }
     });
 }
++ (void)cancelWithdrawWithParams:(NSDictionary *)params callback:(KYMCallback)callback {
+    kym_sendRequest(@"withdraw/cancelRequest",params, ^(BOOL status, NSString * msg , id body) {
+        if (body == nil || body == NULL || ![body isKindOfClass:[NSNumber class]]) {
+            callback(NO, msg ? : @"操作失败，数据异常",@"");
+            return;
+        }
+        if ([body boolValue]) {
+            callback(YES, msg ,@(YES));
+        } else {
+            callback(NO, msg ,@(NO));
+        }
+    });
+}
 @end
