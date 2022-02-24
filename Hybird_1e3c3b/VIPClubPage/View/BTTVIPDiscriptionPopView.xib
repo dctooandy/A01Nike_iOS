@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -65,7 +65,7 @@
                                     <rect key="frame" x="16" y="16" width="236" height="282"/>
                                     <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                     <mutableString key="text">1.有效投注额统计时间为北京时间每周一0：00至每周日23：59：59;
-2.有效投注额计算按单独游戏厅分别计算，具体有按以下厅：AGIN真人，BBIN真人，AG旗舰，AS真人棋牌；AG电游，BBIN电游；AGIN捕鱼王二代；MG，TTG，PT；AG彩票，BBIN彩票；沙巴体育，YSB体育。
+2.有效投注额计算按单独游戏厅分别计算，具体有按以下厅：真人，BBIN真人，旗舰，AS真人棋牌；电游，BBIN电游；捕鱼王二代；MG，TTG，PT；彩票，BBIN彩票；沙巴体育，YSB体育。
 3.每周二进行统计上一周各游戏厅有效投注额，礼金于17：00前添加到账；
 4.晋级礼金添加后即可直接申请提款，无投注额限制；
 5.同一会员，同一姓名，同一收款账号，同一IP只能一个账号享受晋级礼金；
