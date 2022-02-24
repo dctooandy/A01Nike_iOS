@@ -59,12 +59,10 @@
 + (void)uploadImage:(UIImage *)image finish:(KYHTTPCallBack)finish {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-        NSData *data = UIImageJPEGRepresentation(image, 0.5);
+        NSData *data = UIImageJPEGRepresentation(image, 0.1);
         CGFloat length = data.length/1024;
-        if (length > 800) {
+        if (length > 300) {
             data = UIImageJPEGRepresentation(image, 0.01);
-        } else if (length > 300) {
-            data = UIImageJPEGRepresentation(image, 0.1);
         }
         dic[@"fileContent"] = [@"data:image/jpeg;base64," stringByAppendingString:[data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
         dic[@"fileName"] = @"image";
