@@ -142,7 +142,8 @@
 - (NSMutableArray *)sheetDatas {
     if (!_sheetDatas) {
         _sheetDatas = [NSMutableArray array];
-        NSArray *titles = @[@"AG国际厅",@"波音厅"];
+//        NSArray *titles = @[@"AG国际厅",@"波音厅"];
+        NSArray *titles = @[@"国际厅",@"波音厅"];
         NSArray *placeholders = @[@"请选择金额",@"请选择金额"];
         for (NSString *title in titles) {
             NSInteger index = [titles indexOfObject:title];

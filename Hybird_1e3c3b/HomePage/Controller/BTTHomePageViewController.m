@@ -905,11 +905,13 @@
                 rate = dict[@"multiBetRate"];
                 if ([dict[@"multiBetGameCode"] isEqualToString:gameCode]) {
                     if ([gameCode isEqualToString:BTTAGQJKEY]) {
-                        gameName = @"AG旗舰";
+//                        gameName = @"AG旗舰";
+                        gameName = @"旗舰";
                         break;
                     } else if ([gameCode isEqualToString:BTTAGGJKEY]) {
                         if (tag == 1001) {
-                            gameName = @"AG国际";
+//                            gameName = @"AG国际";
+                            gameName = @"国际";
                         } else {
                             gameName = @"捕鱼王";
                         }
@@ -924,7 +926,8 @@
                         gameName = @"AS真人棋牌";
                         break;
                     } else if ([gameCode isEqualToString:BTTAGLotteryKEY]) {
-                        gameName = @"AG彩票";
+//                        gameName = @"AG彩票";
+                        gameName = @"彩票";
                         break;
                     }
                 }
@@ -1034,7 +1037,8 @@
             model.platformCurrency = currency;
         } else if (tag==1011) {
             model = [[IVGameModel alloc] init];
-            model.cnName = @"AG彩票";
+//            model.cnName = @"AG彩票";
+            model.cnName = @"彩票";
             model.gameCode = BTTAGLotteryKEY;
             model.enName = @"K8";
             model.provider = @"K8";
@@ -1142,7 +1146,8 @@
             break;
         case 1011://AG彩票
             model = [[IVGameModel alloc] init];
-            model.cnName = @"AG彩票";
+//            model.cnName = @"AG彩票";
+            model.cnName = @"彩票";
             model.gameCode = BTTAGLotteryKEY;
             model.enName = @"K8";
             model.provider = @"K8";
