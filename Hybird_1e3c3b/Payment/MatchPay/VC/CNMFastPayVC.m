@@ -74,6 +74,7 @@
                 [weakSelf removeFastPay];
             } cancelTitle:@"查看订单" cancelAction:^{
                 KYMFastWithdrewVC *withdrewVC = [[KYMFastWithdrewVC alloc] init];
+                withdrewVC.mmProcessingOrderTransactionId = weakSelf.paymentModel.mmProcessingOrderTransactionId;
                 [weakSelf pushViewController:withdrewVC];
             }];
         }

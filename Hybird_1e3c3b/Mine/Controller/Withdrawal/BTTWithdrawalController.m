@@ -631,32 +631,9 @@
             [MBProgressHUD showMessagNoActivity:msg toView:nil];
             return;
         }
-        
-        NSMutableDictionary *mparams1 = @{}.mutableCopy;
-    //            mparams[@"loginName"] = @""; //用户名，底层已拼接
-    //            mparams[@"productId"] = @""; //脱敏产品编号，底层已拼接
-        mparams1[@"merchant"] = @"A01";
-        mparams1[@"transactionId"] = model.referenceId;
-        [self showLoading];
-        [KYMWithdrewRequest getWithdrawDetailWithParams:mparams1.copy callback:^(BOOL status, NSString * _Nonnull msg, KYMGetWithdrewDetailModel * _Nonnull model1) {
-            [self hideLoading];
-            if (!status) {
-                [MBProgressHUD showMessagNoActivity:msg toView:nil];
-                return;
-            }
-            if (model1.matchStatus == KYMWithdrewDetailStatusFaild) { //撮合失败,走常规取款
-                KYMWithdrewFaildVC *vc = [[KYMWithdrewFaildVC alloc] init];
-                vc.userName = model1.data.loginName;
-                vc.amountStr = model1.data.amount;
-                [self.navigationController pushViewController:vc animated:YES];
-            } else {
-                KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
-                vc.detailModel = model1;
-                vc.mmProcessingOrderTransactionId = model.referenceId;
-                [self.navigationController pushViewController:vc animated:YES];
-            }
-        }];
-        
+        KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
+        vc.mmProcessingOrderTransactionId = model.referenceId;
+        [self.navigationController pushViewController:vc animated:YES];
     }];
 }
 - (void)createRequestWithBtcModel:(BTTBTCRateModel *)btcModel usdtModel:(CNPayUSDTRateModel *)usdtModel{
