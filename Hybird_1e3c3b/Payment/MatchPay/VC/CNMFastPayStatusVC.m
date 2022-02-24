@@ -127,7 +127,11 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
     
     [self loadData];
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
 - (void)setupUI {
     self.bankView.layer.borderWidth = 1;
     self.bankView.layer.borderColor = kHexColor(0x3A3D46).CGColor;

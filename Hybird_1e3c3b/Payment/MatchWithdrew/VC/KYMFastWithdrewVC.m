@@ -53,12 +53,19 @@
     self.title = @"急速取款";
     [self setupSubViews];
     self.step = KYMWithdrewStepOne;
-    [self getWithdrawDetail];
-    self.isLoadedView = YES;
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (!self.isLoadedView) {
+        [self getWithdrawDetail];
+    }
+    self.isLoadedView = YES;
 }
 - (NSTimer *)statusTimer
 {
@@ -233,7 +240,7 @@
             break;
         case KYMWithdrewStepFour:
             statusViewHeight = 160;
-            amountViewHeight = 90;
+            amountViewHeight = 61;
             bankViewHeight = 230;
             submitHeight = 125;
             submitTop = 167;
@@ -313,7 +320,8 @@
     self.bankView.confirmTime.text = detailModel.data.confirmTime;
     self.amountView.amount = detailModel.data.amount;
     
-    if (detailModel.matchStatus == KYMWithdrewDetailStatusFaild) { //撮合失败,走常规取款
+    if (detailModel.matchStatus == KYMWithdrewDetailStatusFaild || detailModel.data.status == KYMWithdrewStatusFaild || detailModel.data.status == KYMWithdrewDetailStatusNotMatch) {
+        //撮合失败,取款失败，取款未匹配，走常规取款
         [self stopTimeoutTimer];
         [self stopGetWithdrawDetail];
         KYMWithdrewFaildVC *vc = [[KYMWithdrewFaildVC alloc] init];
@@ -344,7 +352,7 @@
     //            mparams[@"productId"] = @""; //脱敏产品编号，底层已拼接
     mParams[@"merchant"] = @"A01";
     mParams[@"transactionId"] = self.mmProcessingOrderTransactionId;
-    if (!self.isViewLoaded) {
+    if (!self.isLoadedView) {
         [self showLoading];
     }
     [KYMWithdrewRequest getWithdrawDetailWithParams:mParams callback:^(BOOL status, NSString * _Nonnull msg, KYMGetWithdrewDetailModel *  _Nonnull model) {
@@ -373,7 +381,6 @@
         if (model.matchStatus != KYMWithdrewDetailStatusFaild) {
             [self statusTimer];
         }
-        
     }];
 }
 - (void)timeoutCountDown
@@ -387,6 +394,11 @@
         return;
     }
     
+}
+- (void)stopTimer
+{
+    [self stopGetWithdrawDetail];
+    [self stopTimeoutTimer];
 }
 - (void)stopGetWithdrawDetail
 {
@@ -410,7 +422,7 @@
                 [MBProgressHUD showMessagNoActivity:@"取消取款成功" toView:nil];
                 [self goToBack];
             } else {
-                [MBProgressHUD showMessagNoActivity:msg toView:nil];
+                [MBProgressHUD showError:msg toView:nil];
             }
         }];
     } else if (self.step == KYMWithdrewStepThree) {
@@ -449,14 +461,19 @@
     [KYMWithdrewRequest checkReceiveStatus:params callback:^(BOOL status, NSString * _Nonnull msg, id  _Nonnull body) {
         [self hideLoading];
         if (!status) {
-            [MBProgressHUD showMessagNoActivity:msg toView:nil];
+            [MBProgressHUD showError:msg toView:nil];
             return;
         }
         self.step =  isNotRceived ? KYMWithdrewStepFour : KYMWithdrewStepSix;
     }];
 }
 - (void)customerBtnClicked {
-    
+    // 联系客服
+    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+        if (errCode != CSServiceCode_Request_Suc) {
+            [MBProgressHUD showError:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil];
+        }
+    }];
 }
 - (void)goToBack {
     

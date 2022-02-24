@@ -20,6 +20,17 @@
         _bankAccountNo = [NSString stringWithFormat:@"%@ xxxx xxxx xxxx",_bankAccountNo];
     }
 }
+- (void)setBankIcon:(NSString *)bankIcon
+{
+    _bankIcon = bankIcon;
+    if (_bankIcon.length < 2) {
+        return;
+    }
+    if ([_bankIcon hasPrefix:@"/"]) {
+        _bankIcon = [_bankIcon substringFromIndex:1];
+    }
+    _bankIcon = [NSString stringWithFormat:@"%@%@",[IVHttpManager shareManager].cdn,_bankIcon];
+}
 @end
 
 @implementation KYMGetWithdrewDetailModel

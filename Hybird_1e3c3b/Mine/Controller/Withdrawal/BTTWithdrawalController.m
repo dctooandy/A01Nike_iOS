@@ -218,7 +218,13 @@
         KYMWithdrewHomeNotifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KYMWithdrewHomeNotifyCell" forIndexPath:indexPath];
         cell.canUseCount = self.checkModel.data.remainWithdrawTimes;
         cell.forgotPwdBlock = ^{
-            
+            [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+                if (errCode != CSServiceCode_Request_Suc) {
+                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+                } else {
+
+                }
+            }];
         };
         return cell;
     }
@@ -628,7 +634,7 @@
     [KYMWithdrewRequest createWithdrawWithParams:mparams.copy callback:^(BOOL status, NSString * _Nonnull msg, KYMCreateWithdrewModel  *_Nonnull model) {
         [self hideLoading];
         if (!status) {
-            [MBProgressHUD showMessagNoActivity:msg toView:nil];
+            [MBProgressHUD showError:msg toView:nil];
             return;
         }
         KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
