@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *contentLb;
 @property (weak, nonatomic) IBOutlet UILabel *descLb;
 @property (weak, nonatomic) IBOutlet UIView *btnView;
+@property (weak, nonatomic) IBOutlet UIButton *closeBtn;
 @property (nonatomic, strong) UIButton *commitBtn;
 @property (nonatomic, copy) dispatch_block_t commitAction;
 @property (nonatomic, copy) dispatch_block_t cancelAction;
@@ -23,7 +24,7 @@
 
 @implementation CNMAlertView
 
-+ (instancetype)showAlertTitle:(NSString *)title content:(NSString *)content desc:(NSString *)desc commitTitle:(NSString *)commit commitAction:(dispatch_block_t)commitAction cancelTitle:(NSString *)cancel cancelAction:(dispatch_block_t)cancelAction {
++ (instancetype)showAlertTitle:(NSString *)title content:(NSString *)content desc:(NSString *)desc needRigthTopClose:(BOOL)need commitTitle:(NSString *)commit commitAction:(dispatch_block_t)commitAction cancelTitle:(NSString *)cancel cancelAction:(dispatch_block_t)cancelAction {
     AppDelegate * appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     UIWindow *window = appDelegate.window;
     // 允许一个弹框
@@ -36,6 +37,7 @@
     alert.titleLb.text = title;
     alert.contentLb.text = content;
     alert.descLb.text = desc;
+    alert.closeBtn.hidden = !need;
     alert.tag = 10001;
     
     CGRect frame = alert.btnView.bounds;
@@ -75,6 +77,7 @@
     alert.titleLb.text = title;
     alert.contentLb.text = content;
     alert.timeInterval = interval + 1;
+    alert.closeBtn.hidden = YES;
     alert.tag = 10001;
     
     CGRect frame = alert.btnView.bounds;
@@ -102,6 +105,10 @@
 - (void)cancel {
     [self removeFromSuperview];
     !self.cancelAction ?: self.cancelAction();
+}
+
+- (IBAction)close:(id)sender {
+    [self removeFromSuperview];
 }
 
 - (UIButton *)createBtnWithTitle:(NSString *)title {

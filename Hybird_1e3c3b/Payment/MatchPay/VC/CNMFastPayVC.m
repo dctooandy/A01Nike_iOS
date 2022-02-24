@@ -61,7 +61,7 @@
     __weak typeof(self) weakSelf = self;
     if (self.paymentModel.mmProcessingOrderTransactionId.length > 0) {
         if (self.paymentModel.mmProcessingOrderType == 1) { // 存款
-            [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板！您当前有正在交易的存款订单" desc:nil commitTitle:@"关闭" commitAction:^{
+            [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板！您当前有正在交易的存款订单" desc:nil needRigthTopClose:NO commitTitle:@"关闭" commitAction:^{
                 [weakSelf removeFastPay];
             } cancelTitle:@"查看订单" cancelAction:^{
                 CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
@@ -70,7 +70,7 @@
                 [weakSelf pushViewController:statusVC];
             }];
         } else { // 取款
-            [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板！您当前有正在交易的取款订单" desc:nil commitTitle:@"关闭" commitAction:^{
+            [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板！您当前有正在交易的取款订单" desc:nil needRigthTopClose:NO commitTitle:@"关闭" commitAction:^{
                 [weakSelf removeFastPay];
             } cancelTitle:@"查看订单" cancelAction:^{
                 KYMFastWithdrewVC *withdrewVC = [[KYMFastWithdrewVC alloc] init];
