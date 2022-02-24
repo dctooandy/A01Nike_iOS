@@ -45,6 +45,7 @@
                                 <constraint firstAttribute="width" constant="35" id="6kV-2W-Eab"/>
                                 <constraint firstAttribute="height" constant="35" id="jcb-99-FGY"/>
                             </constraints>
+                            <color key="tintColor" red="0.52156862745098043" green="0.5490196078431373" blue="0.61960784313725492" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" image="mwd_Cancel"/>
                             <connections>
