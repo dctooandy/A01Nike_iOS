@@ -478,28 +478,28 @@
         return;
     }
     
-    if (indexPath.section == 0) {
-        // @"我的优惠"
-        if (indexPath.row == 2) {
-            BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
-            vc.webConfigModel.theme = @"outside";
-            vc.webConfigModel.newView = YES;
-            vc.title = @"我的优惠";
-            vc.webConfigModel.url = @"my_coupon";
-            [self.navigationController pushViewController:vc animated:YES];
-            return;
-        }
+    if (indexPath.row < 2) {
         return;
     }
+  
+    // @"我的优惠"
+    if (indexPath.row == 2) {
+        BTTBaseWebViewController *vc = [[BTTBaseWebViewController alloc] init];
+        vc.webConfigModel.theme = @"outside";
+        vc.webConfigModel.newView = YES;
+        vc.title = @"我的优惠";
+        vc.webConfigModel.url = @"my_coupon";
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+
+    
     
     BTTMeMainModel *model = nil;
-    
-    if (indexPath.section == 1) {
-        
-        model = self.mainDataOne[indexPath.row];
-    } else if (indexPath.section == 2) {
-        
-        model = self.mainDataTwo[indexPath.row];
+    if ((indexPath.row-3) < self.mainDataOne.count) {
+        model = self.mainDataOne[indexPath.row-3];
+    } else {
+        model = self.mainDataTwo[indexPath.row-(3+self.mainDataOne.count)];
     }
     
     if (model == nil) {
@@ -507,6 +507,39 @@
     }
     
     BOOL isUSDTAcc = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"];
+    
+    if ([model.name isEqualToString:@"版本更新"]) {
+        [IVNetwork checkAppUpdate];
+        return;
+    }
+    
+    if ([model.name isEqualToString:@"网站检测"]) {
+        IVCNetworkStatusView *statusView = [[IVCNetworkStatusView alloc] initWithFrame:self.view.frame];
+        
+        IVCheckNetworkModel *gatewayModel = [[IVCheckNetworkModel alloc] init];
+        gatewayModel.title = @"当前业务线路";
+        gatewayModel.urls = [IVHttpManager shareManager].gateways;
+        gatewayModel.type = IVKCheckNetworkTypeGateway;
+        IVCheckNetworkModel *domainModel = [[IVCheckNetworkModel alloc] init];
+        domainModel.title = @"当前手机站";
+        domainModel.urls = [IVHttpManager shareManager].domains;
+        domainModel.type = IVKCheckNetworkTypeDomain;
+        
+        statusView.datas = @[gatewayModel, domainModel];
+        
+        statusView.detailBtnClickedBlock = ^{
+            IVCDetailViewController *vc = [[IVCDetailViewController alloc] initWithThemeColor:[UIColor blueColor]];
+            [self presentViewController:vc animated:YES completion:^{
+                [vc start];
+            }];
+        };
+        
+        [self.view addSubview:statusView];
+        [statusView startCheck];
+        
+        return;
+    }
+    
     
     if ([model.name isEqualToString:@"一键卖币"]) {
         if (self.sellUsdtLink!=nil&&![self.sellUsdtLink isEqualToString:@""]) {
