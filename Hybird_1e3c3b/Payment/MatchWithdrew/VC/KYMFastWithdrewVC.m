@@ -333,7 +333,13 @@
 - (void)getWithdrawDetail
 {
     [self stopGetWithdrawDetail];
-    [KYMWithdrewRequest getWithdrawDetailWithParams:self.checkChannelParams callback:^(BOOL status, NSString * _Nonnull msg, KYMGetWithdrewDetailModel *  _Nonnull model) {
+    
+    NSMutableDictionary *mParams = @{}.mutableCopy;
+    //            mparams[@"loginName"] = @""; //用户名，底层已拼接
+    //            mparams[@"productId"] = @""; //脱敏产品编号，底层已拼接
+    mParams[@"merchant"] = @"A01";
+    mParams[@"transactionId"] = self.mmProcessingOrderTransactionId;
+    [KYMWithdrewRequest getWithdrawDetailWithParams:mParams callback:^(BOOL status, NSString * _Nonnull msg, KYMGetWithdrewDetailModel *  _Nonnull model) {
         if (!status) {
             [self statusTimer];
             return;

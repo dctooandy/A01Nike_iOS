@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface KYMFastWithdrewVC : BTTBaseViewController
 @property (nonatomic, strong) KYMGetWithdrewDetailModel *detailModel;
-@property (nonatomic, strong) id checkChannelParams;
+//@property (nonatomic, strong) id getDetailParams;
+@property (nonatomic, strong) NSString *mmProcessingOrderTransactionId;
 @end
 
 NS_ASSUME_NONNULL_END

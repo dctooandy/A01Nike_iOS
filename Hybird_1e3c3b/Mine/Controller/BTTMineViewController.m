@@ -64,7 +64,9 @@
 #import "BTTMeGoldenCCell.h"
 #import "KYMWithdrewRequest.h"
 #import "KYMSelectChannelVC.h"
-
+#import "CNMFastPayStatusVC.h"
+#import "CNMAlertView.h"
+#import "KYMFastWithdrewVC.h"
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, assign) BOOL isChangeMobile; // 是否改变手机号
@@ -708,11 +710,45 @@
                             __weak typeof(self)weakSelf = self;
                             vc.selectedChannelCallback = ^(NSInteger index) {
                                 //是否为撮合取款
-                                BOOL isMatchWithdraw = (index == 0);
-                                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                                vc.isMatchWithdrew = isMatchWithdraw;
-                                vc.checkModel = model;
-                                [weakSelf.navigationController pushViewController:vc animated:YES];
+                                if (index == 0) {
+                                    //是否已存在存取款提案
+                                    if (model.data.mmProcessingOrderTransactionId && model.data.mmProcessingOrderTransactionId.length != 0) {
+                                        if (model.data.mmProcessingOrderType == 1) { // 存款
+                                            [CNMAlertView showAlertTitle:@"交易提醒" content:@"您当前有正在交易的存款订单\n如需取款，请选择在线取款" desc:nil commitTitle:@"查看订单" commitAction:^{
+                                                CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
+                                                statusVC.cancelTime = [model.data.remainCancelDepositTimes integerValue];
+                                                statusVC.transactionId = model.data.mmProcessingOrderTransactionId;
+                                                [weakSelf.navigationController pushViewController:statusVC animated:YES];
+                                                
+                                            } cancelTitle:@"在线取款" cancelAction:^{
+                                                //普通取款
+                                                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                                                vc.isMatchWithdrew = NO;
+                                                [weakSelf.navigationController pushViewController:vc animated:YES];
+                                            }];
+                                        } else { // 取款
+                                            [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板，如需再次取款，请选择在线取款" desc:nil commitTitle:@"关闭" commitAction:^{
+                                                
+                                            } cancelTitle:@"在线取款" cancelAction:^{
+                                                //普通取款
+                                                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                                                vc.isMatchWithdrew = NO;
+                                                [weakSelf.navigationController pushViewController:vc animated:YES];
+                                            }];
+                                            KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
+                                            vc.mmProcessingOrderTransactionId = self.fastModel.payModel.mmProcessingOrderTransactionId;
+                                            [weakSelf.navigationController pushViewController:vc animated:YES];
+                                        }
+                                    } else {
+                                        BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+                                        vc.isMatchWithdrew = YES;
+                                        vc.checkModel = model;
+                                        [weakSelf.navigationController pushViewController:vc animated:YES];
+                                    }
+                                } else {
+                                    
+                                }
+                                
                             };
                             [self presentViewController:vc animated:YES completion:nil];
                         } else {

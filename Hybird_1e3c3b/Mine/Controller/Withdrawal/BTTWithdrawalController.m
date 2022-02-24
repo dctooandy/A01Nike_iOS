@@ -33,6 +33,7 @@
 #import "KYMWithdrewHomeNotifyCell.h"
 #import "KYMWithdrewRequest.h"
 #import "KYMFastWithdrewVC.h"
+
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate,KYMWithdrewAmountCellDelegate>
 @property(nonatomic, copy)NSString *amount;
 @property(nonatomic, copy)NSString *password;
@@ -651,7 +652,7 @@
             } else {
                 KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
                 vc.detailModel = model1;
-                vc.checkChannelParams = mparams1;
+                vc.mmProcessingOrderTransactionId = model.referenceId;
                 [self.navigationController pushViewController:vc animated:YES];
             }
         }];
