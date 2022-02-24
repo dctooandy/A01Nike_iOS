@@ -9,8 +9,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KYMSelectChannelVC">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CNMUSDTChannelVC">
             <connections>
+                <outlet property="alertViewHeight" destination="Xi5-86-F3B" id="Yzd-uC-6gU"/>
                 <outlet property="closeBtn" destination="30G-vf-fNR" id="SEO-NB-jhp"/>
                 <outlet property="contentView" destination="H1C-5y-LKH" id="DZO-4L-SYu"/>
                 <outlet property="tableView" destination="Cfe-gg-cvo" id="CDQ-qS-Gbs"/>
@@ -25,7 +26,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H1C-5y-LKH">
                     <rect key="frame" x="0.0" y="562" width="414" height="300"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择取款方式" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="het-fo-s7M">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择充值方式" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="het-fo-s7M">
                             <rect key="frame" x="147" y="15" width="120" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="28" id="1Lb-2y-gpg"/>

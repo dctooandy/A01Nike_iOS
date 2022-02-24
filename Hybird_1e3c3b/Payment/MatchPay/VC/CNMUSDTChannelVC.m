@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *closeBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *alertViewHeight;
 
 @end
 
@@ -28,16 +29,15 @@
     maskLayer.path = path.CGPath;
     self.contentView.layer.mask = maskLayer;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.contentView.layer.cornerRadius = 16;
-    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.scrollEnabled = NO;
     [self.tableView registerNib:[UINib nibWithNibName:@"KYMSelectChannelCell" bundle:nil] forCellReuseIdentifier:@"KYMSelectChannelCell"];
-    
+    self.alertViewHeight.constant = MIN(((self.list.count +1)*75), 400);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
