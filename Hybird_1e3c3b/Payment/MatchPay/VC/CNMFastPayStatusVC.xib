@@ -819,7 +819,7 @@
                         <constraint firstAttribute="height" constant="1" id="LFd-mD-4k9"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2、请您上传这笔存款当天的银行卡收支流水（订单开始时间至反馈时间的银行卡收支明显）" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woF-x9-hoz">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2、请您上传这笔存款当天的银行卡收支流水（订单开始时间至反馈时间的银行卡收支明细）" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woF-x9-hoz">
                     <rect key="frame" x="15" y="305.5" width="357" height="39.5"/>
                     <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="14"/>
                     <color key="textColor" red="0.82352941180000006" green="0.82352941180000006" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
@@ -1021,9 +1021,12 @@
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alert_red" translatesAutoresizingMaskIntoConstraints="NO" id="C58-Nd-JGS">
                             <rect key="frame" x="15" y="0.5" width="19" height="19"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="19" id="DpG-FS-2o8"/>
+                            </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="再次提醒，转账金额务必与订单金额一致" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fc-cg-Yul">
-                            <rect key="frame" x="40" y="1.5" width="216" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请老板务必确认已经按照要求，上传凭证，再点击确认" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fc-cg-Yul">
+                            <rect key="frame" x="40" y="1.5" width="331" height="17"/>
                             <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="12"/>
                             <color key="textColor" red="0.95686274510000002" green="0.20784313730000001" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -1032,6 +1035,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="3fc-cg-Yul" firstAttribute="centerY" secondItem="FR1-yh-Vae" secondAttribute="centerY" id="2bA-Wc-94Z"/>
+                        <constraint firstAttribute="trailing" secondItem="3fc-cg-Yul" secondAttribute="trailing" constant="16" id="3Ko-14-xPh"/>
                         <constraint firstItem="3fc-cg-Yul" firstAttribute="leading" secondItem="C58-Nd-JGS" secondAttribute="trailing" constant="6" id="Jcn-PL-qxt"/>
                         <constraint firstItem="C58-Nd-JGS" firstAttribute="leading" secondItem="FR1-yh-Vae" secondAttribute="leading" constant="15" id="gG8-A7-jSB"/>
                         <constraint firstItem="C58-Nd-JGS" firstAttribute="centerY" secondItem="FR1-yh-Vae" secondAttribute="centerY" id="mHW-1X-MzU"/>

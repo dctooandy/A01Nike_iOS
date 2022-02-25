@@ -127,11 +127,12 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
     
     [self loadData];
 }
-- (void)viewWillAppear:(BOOL)animated
-{
+
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
+
 - (void)setupUI {
     self.bankView.layer.borderWidth = 1;
     self.bankView.layer.borderColor = kHexColor(0x3A3D46).CGColor;
@@ -288,6 +289,7 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         case CNMPayBillStatusSuccess:
             [self setStatusUI:CNMPayUIStatusSuccess];
             self.confirmDate.text = bank.transactionId;
+            self.amountTipLb.text = [NSString stringWithFormat:@"恭喜老板！获得存款返利礼金 %.2f 元\n每周一统一发放", (bank.amount.doubleValue *0.005)];
             // 停止倒计时
             [self.timer invalidate];
             self.timer = nil;
@@ -483,7 +485,7 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
 - (void)checkConfirmBtnEnable {
     self.countLb1.text = [NSString stringWithFormat:@"%ld/1", self.pictureArr1.count];
     self.countLb2.text = [NSString stringWithFormat:@"%ld/4", self.pictureArr2.count];
-    self.confirmBtn.enabled = (self.pictureArr1.count + self.pictureArr2.count) > 0;
+    self.confirmBtn.enabled = (self.pictureArr1.count > 0 && self.pictureArr2.count > 0);
 }
 
 - (IBAction)deleteSinglePicture:(UIButton *)sender {
