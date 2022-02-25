@@ -578,6 +578,7 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         _photoSheet.configuration.allowSelectVideo = NO;
         _photoSheet.configuration.allowTakePhotoInLibrary = NO;
         _photoSheet.configuration.allowEditImage = YES;
+        _photoSheet.configuration.allowSelectOriginal = NO;
         _photoSheet.configuration.navTitleColor = self.view.backgroundColor;
         _photoSheet.configuration.navBarColor = kHexColor(0x4083E8);
     }
