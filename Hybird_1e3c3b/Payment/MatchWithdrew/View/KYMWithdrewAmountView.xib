@@ -58,7 +58,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vqr-Bb-bEw">
-                            <rect key="frame" x="53" y="83" width="308" height="40"/>
+                            <rect key="frame" x="0.0" y="83" width="414" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="4KB-yh-D1e"/>
                             </constraints>
@@ -89,6 +89,7 @@
                         <constraint firstItem="vbC-2C-29u" firstAttribute="centerY" secondItem="5hF-ki-NS1" secondAttribute="centerY" id="c7U-0q-KNS"/>
                         <constraint firstItem="Grp-cS-CFo" firstAttribute="top" secondItem="qYB-G6-eEV" secondAttribute="top" constant="2" id="fe5-K3-vyw"/>
                         <constraint firstItem="f8J-lE-2OI" firstAttribute="centerX" secondItem="qYB-G6-eEV" secondAttribute="centerX" id="idw-po-ZcK"/>
+                        <constraint firstItem="Vqr-Bb-bEw" firstAttribute="width" secondItem="qYB-G6-eEV" secondAttribute="width" id="o4s-EV-OPV"/>
                         <constraint firstItem="vbC-2C-29u" firstAttribute="leading" secondItem="5hF-ki-NS1" secondAttribute="trailing" constant="8" id="q5A-c7-ISc"/>
                         <constraint firstItem="avS-Rt-VDG" firstAttribute="leading" secondItem="vbC-2C-29u" secondAttribute="trailing" constant="8" id="r2N-0u-c51"/>
                         <constraint firstItem="avS-Rt-VDG" firstAttribute="centerY" secondItem="vbC-2C-29u" secondAttribute="centerY" id="sfX-BN-oLJ"/>

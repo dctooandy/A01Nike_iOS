@@ -22,7 +22,7 @@
 }
 - (void)setAmount:(NSString *)amount
 {
-    self.amountLB.text = amount;
+    self.amountLB.text = [KYMWidthdrewUtility getMoneyString:[amount doubleValue]] ;
     self.amountWidth.constant = [self.amountLB.text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.amountLB.font} context:nil].size.width + 1; 
 }
 - (void)setStep:(KYMWithdrewStep)step

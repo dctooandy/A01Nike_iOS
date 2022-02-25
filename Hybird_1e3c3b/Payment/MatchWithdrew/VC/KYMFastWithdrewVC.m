@@ -96,7 +96,7 @@
     self.amountView = [[KYMWithdrewAmountView alloc] init];
     self.bankView = [[KYMWithdrewBankView alloc] init];
     self.lineView = [[UIView alloc] init];
-    self.lineView.backgroundColor = [UIColor colorWithRed:0x2c / 255.0 green:0x2d / 255.0 blue:0x33 / 255.0 alpha:1];
+    self.lineView.backgroundColor = [UIColor colorWithRed:0x2C / 255.0 green:0x2D / 255.0 blue:0x33 / 255.0 alpha:1];
     self.submitView = [[KYMWithdrewSubmitView alloc] init];
     self.cusmoterView = [[KYMWithdrewCusmoterView alloc] init];
     self.noticeView = [[KYMWithdrewNoticeView alloc] init];
@@ -209,6 +209,7 @@
             self.noticeView2.hidden = YES;
             self.cusmoterView.hidden = YES;
             self.lineView.hidden = YES;
+            self.title = @"急速取款";
             break;
         case KYMWithdrewStepTwo:
             statusViewHeight = 160;
@@ -223,6 +224,7 @@
             self.noticeView2.hidden = NO;
             self.cusmoterView.hidden = NO;
             self.lineView.hidden = NO;
+            self.title = @"等待付款";
             break;
         case KYMWithdrewStepThree:
             statusViewHeight = 160;
@@ -237,6 +239,7 @@
             self.noticeView2.hidden = YES;
             self.cusmoterView.hidden = NO;
             self.lineView.hidden = NO;
+            self.title = @"待确认到账";
             break;
         case KYMWithdrewStepFour:
             statusViewHeight = 160;
@@ -251,6 +254,7 @@
             self.noticeView2.hidden = YES;
             self.cusmoterView.hidden = NO;
             self.lineView.hidden = NO;
+            self.title = @"订单异常";
             break;
         case KYMWithdrewStepFive:
             statusViewHeight = 138;
@@ -265,6 +269,7 @@
             self.noticeView2.hidden = YES;
             self.cusmoterView.hidden = NO;
             self.lineView.hidden = YES;
+            self.title = @"取款完成";
             break;
         case KYMWithdrewStepSix:
             statusViewHeight = 138;
@@ -279,6 +284,7 @@
             self.noticeView2.hidden = YES;
             self.cusmoterView.hidden = NO;
             self.lineView.hidden = YES;
+            self.title = @"取款完成";
             break;
             
         default:
@@ -315,7 +321,7 @@
     self.bankView.accoutName.text = detailModel.data.bankAccountName;
     self.bankView.account.text = detailModel.data.bankAccountNo;
     self.bankView.withdrawType.text = @"急速取款";
-    self.bankView.amount.text = [detailModel.data.amount stringByAppendingString:@"元"];
+    self.bankView.amount.text = [[KYMWidthdrewUtility getMoneyString:[detailModel.data.amount doubleValue]] stringByAppendingString:@"元"];
     self.bankView.submitTime.text = detailModel.data.createdDate;
     self.bankView.confirmTime.text = detailModel.data.confirmTime;
     self.amountView.amount = detailModel.data.amount;
@@ -402,13 +408,13 @@
 }
 - (void)stopGetWithdrawDetail
 {
-    [self.statusTimer invalidate];
-    self.statusTimer = nil;
+    [_statusTimer invalidate];
+    _statusTimer = nil;
 }
 - (void)stopTimeoutTimer
 {
-    [self.timeoutTimer invalidate];
-    self.timeoutTimer = nil;
+    [_timeoutTimer invalidate];
+    _timeoutTimer = nil;
 }
 - (void)submitBtnClicked {
     

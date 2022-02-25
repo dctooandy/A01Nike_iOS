@@ -48,7 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"取款";
+    self.title = self.isMatchWithdrew ? @"急速取款" : @"取款";
     self.selectIndex = 0;
     self.isSellUsdt = NO;
     self.amount = @"";
@@ -118,7 +118,7 @@
     BTTMeMainModel *cellModel = self.sheetDatas.count ? self.sheetDatas[indexPath.row] : nil;
     if (indexPath.row == 0) {
         BTTWithdrawalHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalHeaderCell" forIndexPath:indexPath];
-        cell.totalAvailable = self.totalAvailable;
+        cell.totalAvailable = [PublicMethod getMoneyString:[self.totalAvailable doubleValue]];
         if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
             if ([self.bankList[self.selectIndex].accountType isEqualToString:@"DCBOX"]) {
                 cell.limitLabel.text = [NSString stringWithFormat:@"取款限额:%@USDT-143万USDT,全额投注即可申请取款", self.dcboxLimit];
@@ -202,6 +202,9 @@
             [self.navigationController pushViewController:vc animated:YES];
         };
         cell.confirmBtn.enabled = self.submitBtnEnable;
+        if (self.isMatchWithdrew) {
+            [cell.confirmBtn setTitle:@"立即取款" forState:UIControlStateNormal];
+        }
         return cell;
     }
     if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"] && indexPath.row == self.sheetDatas.count-3) {

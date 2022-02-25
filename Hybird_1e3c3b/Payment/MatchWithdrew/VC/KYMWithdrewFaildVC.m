@@ -7,7 +7,7 @@
 //
 
 #import "KYMWithdrewFaildVC.h"
-
+#import "KYMWidthdrewUtility.h"
 @interface KYMWithdrewFaildVC ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *usernameWidth;
 @property (weak, nonatomic) IBOutlet UILabel *amountLB;
@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"取款申请";
-    self.amountLB.text = self.amountStr;
+    self.amountLB.text = [KYMWidthdrewUtility getMoneyString:[self.amountStr doubleValue]];
     self.usernameLB.text = self.userName;
     self.usernameWidth.constant = [self.usernameLB.text boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : self.usernameLB.font} context:nil].size.width + 2;
 }
