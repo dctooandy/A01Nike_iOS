@@ -750,8 +750,8 @@
         }
         //移除比余额小的金额
         [model.data removeAmountBiggerThanTotal:self.totalAmount];
-        //如果有金额列表，且金额列表中最小的比余额大才走撮合
-        if (model.data.amountList.count > 0 && [self.totalAmount doubleValue] > [model.data.miniAmount doubleValue]) {
+        //如果渠道开启，有金额列表，且金额列表中最小的比余额大才走撮合
+        if (model.data.isAvailable && model.data.amountList.count > 0 && [self.totalAmount doubleValue] > [model.data.miniAmount doubleValue]) {
             //取款类型选择弹框
             KYMSelectChannelVC *vc = [[KYMSelectChannelVC alloc] init];
             vc.checkModel = model;

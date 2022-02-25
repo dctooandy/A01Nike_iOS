@@ -9,5 +9,14 @@
 #import "KYMWidthdrewUtility.h"
 
 @implementation KYMWidthdrewUtility
-
+/** 转换货币字符串 */
++ (NSString *)getMoneyString:(double)money {
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    numberFormatter.roundingMode = NSNumberFormatterRoundFloor;
+    numberFormatter.maximumFractionDigits = 2;
+    // 设置格式
+    [numberFormatter setPositiveFormat:@"###,##0.00;"];
+    NSString *formattedNumberString = [numberFormatter stringFromNumber:[NSNumber numberWithDouble:money]];
+    return formattedNumberString;
+}
 @end

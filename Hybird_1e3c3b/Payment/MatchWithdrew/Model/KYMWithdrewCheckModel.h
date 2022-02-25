@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface KYMWithdrewCheckDataModel : NSObject
 @property (nonatomic, strong) NSArray<KYMWithdrewAmountModel *> *amountList;
 @property (nonatomic, copy) NSString *miniAmount;
-@property (nonatomic, assign) BOOL isAvaliable;
+@property (nonatomic, assign) BOOL isAvailable;
 @property (nonatomic, copy) NSString *remainWithdrawTimes;
 @property (nonatomic, copy) NSString *remainCancelDepositTimes;
 @property (nonatomic, copy) NSString *mmProcessingOrderTransactionId;
