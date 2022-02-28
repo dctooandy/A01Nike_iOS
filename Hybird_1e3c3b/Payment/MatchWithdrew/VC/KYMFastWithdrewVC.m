@@ -48,6 +48,25 @@
     [self stopTimeoutTimer];
     [self stopGetWithdrawDetail];
 }
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackgroundNotification) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willEnterForegroundNotification) name:UIApplicationWillEnterForegroundNotification object:nil];
+    }
+    return self;
+}
+- (void)didEnterBackgroundNotification
+{
+    [self stopGetWithdrawDetail];
+    [self stopTimeoutTimer];
+}
+- (void)willEnterForegroundNotification
+{
+    self.isStartedTimeout = NO;
+    [self getWithdrawDetail];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"急速取款";
@@ -326,7 +345,7 @@
     self.bankView.confirmTime.text = detailModel.data.confirmTime;
     self.amountView.amount = detailModel.data.amount;
     
-    if (detailModel.matchStatus == KYMWithdrewDetailStatusFaild || detailModel.data.status == KYMWithdrewStatusFaild || detailModel.data.status == KYMWithdrewDetailStatusNotMatch) {
+    if (detailModel.matchStatus == KYMWithdrewDetailStatusFaild  ||  detailModel.data.status == KYMWithdrewStatusNotMatch) {
         //撮合失败,取款失败，取款未匹配，走常规取款
         [self stopTimeoutTimer];
         [self stopGetWithdrawDetail];
