@@ -110,13 +110,13 @@
     if ([IVNetwork savedUserInfo]) {
         if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"]) {
             [self loadCreditVipChannel];
+            [self checkFastChannelOpen];
         } else {
             if (self.vipBigDataSoure.count) {
                 [self.vipBigDataSoure removeAllObjects];
             }
             [self loadPersonalPaymentData];
         }
-        [self checkFastChannelOpen];
     }
 }
 
@@ -204,7 +204,7 @@
             if ([result.body[@"payTypeList"] isKindOfClass:[NSArray class]]) {
                 
                 // 上面清空数据，需要在添加一次
-                if (self.fastModel && ![self.bigDataSoure containsObject:self.fastModel]) {
+                if (!isUSDTAcc && self.fastModel && ![self.bigDataSoure containsObject:self.fastModel]) {
                     [self.bigDataSoure addObject:self.fastModel];
                 }
                 
