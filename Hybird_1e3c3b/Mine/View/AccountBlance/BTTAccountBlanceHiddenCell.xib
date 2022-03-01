@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,8 +17,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AG旗舰厅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aA-CY-oAl">
-                        <rect key="frame" x="15" y="12.5" width="62" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="旗舰厅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aA-CY-oAl">
+                        <rect key="frame" x="15" y="12.5" width="43" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -40,6 +38,7 @@
                     </activityIndicatorView>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="zHn-oW-9nb" secondAttribute="trailing" constant="15" id="DbV-fX-W6t"/>
                 <constraint firstItem="4aA-CY-oAl" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="IFV-j1-tbq"/>
@@ -48,7 +47,6 @@
                 <constraint firstItem="zHn-oW-9nb" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Qfh-t3-ys1"/>
                 <constraint firstItem="hVP-O3-FKn" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="kl7-F2-yUM"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
                 <outlet property="activityView" destination="zHn-oW-9nb" id="08y-e5-Ata"/>
                 <outlet property="amountLabel" destination="hVP-O3-FKn" id="h0x-hV-IUC"/>
