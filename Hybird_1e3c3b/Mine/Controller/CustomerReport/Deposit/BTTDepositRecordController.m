@@ -11,6 +11,7 @@
 #import "BTTDepositRecordModel.h"
 #import "BTTDepositRecordHeaderCell.h"
 #import "BTTDepositRecordCell.h"
+#import "CNMFastPayStatusVC.h"
 
 @interface BTTDepositRecordController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, strong)BTTPromoRecordFooterView * footerView;
@@ -144,6 +145,16 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     NSLog(@"%zd", indexPath.item);
+    if (indexPath.row == 0) {
+        return;
+    }
+    BTTDepositRecordItemModel * model = self.modelArr[indexPath.row-1];
+    if (model.mmStatus == CNMPayBillStatusPaying || model.mmStatus == CNMPayBillStatusConfirm) {
+        CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
+        statusVC.transactionId = model.referenceId;
+        statusVC.backToLastVC = YES;
+        [self.navigationController pushViewController:statusVC animated:YES];
+    }
 }
 
 #pragma mark - LMJElementsFlowLayoutDelegate

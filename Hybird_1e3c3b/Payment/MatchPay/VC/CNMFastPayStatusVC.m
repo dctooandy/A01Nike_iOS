@@ -10,6 +10,7 @@
 #import "CNMAlertView.h"
 #import <ZLPhotoBrowser/ZLPhotoBrowser.h>
 #import <ZLPhotoBrowser/ZLShowBigImgViewController.h>
+#import "BTTMineViewController+LoadData.h"
 
 #import "CNMatchPayRequest.h"
 #import "PublicMethod.h"
@@ -401,7 +402,11 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
 }
 
 - (void)goToBack {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if (_backToLastVC) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - 选择相册
@@ -588,6 +593,19 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
 }
 
 #pragma mark - Setter Getter
+
+- (NSInteger)cancelTime {
+    if (_cancelTime == 0) {
+        for (UIViewController *vc in self.navigationController.viewControllers) {
+            if ([vc isKindOfClass:[BTTMineViewController class]]) {
+                BTTMineViewController *mine = (BTTMineViewController *)vc;
+                _cancelTime = [mine.fastModel.payModel.remainCancelDepositTimes integerValue];
+                break;
+            }
+        }
+    }
+    return _cancelTime;
+}
 
 - (NSTimer *)timer {
     if (!_timer) {

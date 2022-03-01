@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -60,49 +60,57 @@
                             <constraint firstAttribute="width" constant="40" id="COd-tT-eX6"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.32919841999999999" green="0.60190469030000004" blue="0.94121557469999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="textColor" red="0.32941176470588235" green="0.59999999999999998" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="108元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Hi-Vs-NWw">
-                        <rect key="frame" x="133" y="15.5" width="202" height="14.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.88046556710000001" green="0.78008264299999996" blue="0.57643413539999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A01200921002416993E" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaA-JS-nHR">
-                        <rect key="frame" x="133" y="30" width="202" height="15"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.48627450980392156" green="0.50507026909999997" blue="0.54118227959999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="0IN-uz-gpq">
+                        <rect key="frame" x="133" y="8.5" width="137" height="43"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="108元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Hi-Vs-NWw">
+                                <rect key="frame" x="0.0" y="0.0" width="33.5" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.88046556710000001" green="0.78008264299999996" blue="0.57643413539999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A01200921002416993E" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaA-JS-nHR">
+                                <rect key="frame" x="0.0" y="15.5" width="137" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.48627450980392156" green="0.50507026909999997" blue="0.54118227959999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看详情 &gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1K-sU-JDE">
+                                <rect key="frame" x="0.0" y="31" width="50.5" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" red="0.3294117647" green="0.59999999999999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <constraints>
-                <constraint firstItem="Q03-dV-9qw" firstAttribute="leading" secondItem="FaA-JS-nHR" secondAttribute="trailing" id="2bw-Rm-TOM"/>
-                <constraint firstItem="6Hi-Vs-NWw" firstAttribute="leading" secondItem="Ppv-9K-Hin" secondAttribute="trailing" constant="5" id="2vN-UH-d7e"/>
                 <constraint firstItem="Qak-Ib-UZJ" firstAttribute="leading" secondItem="I6d-25-bYY" secondAttribute="trailing" id="5BJ-5m-Hza"/>
                 <constraint firstItem="Qak-Ib-UZJ" firstAttribute="top" secondItem="YJb-hd-qfV" secondAttribute="bottom" id="8v1-tR-uIu"/>
+                <constraint firstItem="0IN-uz-gpq" firstAttribute="leading" secondItem="Ppv-9K-Hin" secondAttribute="trailing" constant="5" id="Dgi-is-YIv"/>
                 <constraint firstAttribute="trailing" secondItem="Q03-dV-9qw" secondAttribute="trailing" id="GkG-Q6-Xxd"/>
                 <constraint firstItem="I6d-25-bYY" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Nmi-EW-g9t"/>
-                <constraint firstItem="FaA-JS-nHR" firstAttribute="leading" secondItem="Ppv-9K-Hin" secondAttribute="trailing" constant="5" id="PrP-3v-7mK"/>
                 <constraint firstAttribute="bottom" secondItem="Q03-dV-9qw" secondAttribute="bottom" id="TMP-2U-EK2"/>
                 <constraint firstAttribute="bottom" secondItem="YJb-hd-qfV" secondAttribute="bottom" constant="30" id="UTK-YC-wwL"/>
                 <constraint firstItem="YJb-hd-qfV" firstAttribute="leading" secondItem="I6d-25-bYY" secondAttribute="trailing" id="Vt4-3M-gj4"/>
                 <constraint firstItem="Ppv-9K-Hin" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="d77-Dn-wZk"/>
-                <constraint firstItem="FaA-JS-nHR" firstAttribute="top" secondItem="6Hi-Vs-NWw" secondAttribute="bottom" id="d7b-f9-3xs"/>
                 <constraint firstItem="Ppv-9K-Hin" firstAttribute="leading" secondItem="YJb-hd-qfV" secondAttribute="trailing" constant="8" id="gZg-QM-lX8"/>
+                <constraint firstItem="0IN-uz-gpq" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="h8x-ue-vuV"/>
                 <constraint firstItem="Q03-dV-9qw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="i0M-I7-7oS"/>
                 <constraint firstItem="I6d-25-bYY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="oeG-Uy-6xQ"/>
-                <constraint firstItem="Q03-dV-9qw" firstAttribute="leading" secondItem="6Hi-Vs-NWw" secondAttribute="trailing" id="p0S-S5-KGb"/>
-                <constraint firstAttribute="bottom" secondItem="6Hi-Vs-NWw" secondAttribute="bottom" constant="30" id="qVG-Jw-YZS"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
                 <outlet property="checkBtn" destination="I6d-25-bYY" id="T5E-md-5wX"/>
                 <outlet property="dateLab" destination="YJb-hd-qfV" id="nVK-my-zfg"/>
                 <outlet property="iconImgView" destination="Ppv-9K-Hin" id="E43-oA-QnQ"/>
                 <outlet property="moneyLab" destination="6Hi-Vs-NWw" id="EbD-P9-HsX"/>
                 <outlet property="requestIdLab" destination="FaA-JS-nHR" id="Y5l-wL-cFW"/>
+                <outlet property="seeDetailLb" destination="n1K-sU-JDE" id="VrD-Z6-Prm"/>
                 <outlet property="timeLab" destination="Qak-Ib-UZJ" id="5OE-w5-91F"/>
                 <outlet property="typeLab" destination="Q03-dV-9qw" id="Fot-Lv-cSm"/>
             </connections>

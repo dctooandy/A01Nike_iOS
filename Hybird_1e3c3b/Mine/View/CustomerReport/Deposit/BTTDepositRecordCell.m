@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *moneyLab;
 @property (weak, nonatomic) IBOutlet UILabel *requestIdLab;
 @property (weak, nonatomic) IBOutlet UILabel *typeLab;
+@property (weak, nonatomic) IBOutlet UILabel *seeDetailLb;
 
 @property (nonatomic, copy) NSString *requestIdStr;
 @end
@@ -49,6 +50,7 @@
     self.requestIdStr = model.requestId;
     self.requestIdLab.text = self.requestIdStr;
     self.typeLab.text = model.flagDesc;
+    self.seeDetailLb.hidden = !(model.mmStatus == CNMPayBillStatusPaying || model.mmStatus == CNMPayBillStatusConfirm);
 }
 
 -(NSString *)transIconImgStr:(NSInteger)transCode {
