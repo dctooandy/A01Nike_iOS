@@ -31,7 +31,7 @@
 - (void)setChannel:(BTTMeMainModel *)channel {
     _channel = channel;
     self.channelLogo.image = [UIImage imageNamed:channel.iconName];
-    self.discountLb.text = (channel.paymentType == CNPaymentFast) ? @"返利0.5%" : nil;
+    self.discountLb.text = (channel.paymentType == CNPaymentFast) ? @"返利1%" : nil;
     self.channelTitle.text = channel.name;
     self.recommendIcon.hidden = (channel.paymentType != CNPaymentFast);
 }

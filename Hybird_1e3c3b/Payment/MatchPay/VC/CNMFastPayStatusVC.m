@@ -69,6 +69,9 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
 @property (weak, nonatomic) IBOutlet UILabel *confirmDate;
 /// 复制内容标签组
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray <UILabel *> *contentLbArray;
+/// 复制按钮
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btnCopyArray;
+@property (weak, nonatomic) IBOutlet UIStackView *tipCopyView;
 
 
 #pragma mark - 底部提示内容
@@ -172,6 +175,10 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
             self.bankRow5.hidden = NO;
             self.bankRow6.hidden = NO;
             self.bankRow7.hidden = YES;
+            self.tipCopyView.hidden = YES;
+            for (UIButton *copy in self.btnCopyArray) {
+                copy.hidden = YES;
+            }
             
             self.submitTipView.hidden = YES;
             self.confirmTipView.hidden = NO;
@@ -200,6 +207,10 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
             self.bankRow6.hidden = NO;
             self.bankRow7.hidden = YES;
             self.rowTitle6.text = @"订单编号：";
+            self.tipCopyView.hidden = YES;
+            for (UIButton *copy in self.btnCopyArray) {
+                copy.hidden = YES;
+            }
             
             self.submitTipView.hidden = YES;
             self.confirmTipView.hidden = YES;
@@ -290,7 +301,7 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         case CNMPayBillStatusSuccess:
             [self setStatusUI:CNMPayUIStatusSuccess];
             self.confirmDate.text = bank.transactionId;
-            self.amountTipLb.text = [NSString stringWithFormat:@"恭喜老板！获得存款返利礼金 %.2f 元\n每周一统一发放", (bank.amount.doubleValue *0.005)];
+            self.amountTipLb.text = [NSString stringWithFormat:@"恭喜老板！获得存款返利礼金 %.2f 元\n每周一统一发放", (bank.amount.doubleValue *0.01)];
             // 停止倒计时
             [self.timer invalidate];
             self.timer = nil;
