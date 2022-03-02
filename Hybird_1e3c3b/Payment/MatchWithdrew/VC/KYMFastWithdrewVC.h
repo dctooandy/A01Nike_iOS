@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) KYMGetWithdrewDetailModel *detailModel;
 @property (nonatomic, strong) NSString *mmProcessingOrderTransactionId;
 - (void)stopTimer;
+@property (nonatomic, assign) BOOL backToLastVC;
 @end
 
 NS_ASSUME_NONNULL_END

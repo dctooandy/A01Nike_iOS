@@ -504,7 +504,11 @@
     
     [self stopGetWithdrawDetail];
     [self stopTimeoutTimer];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if (self.backToLastVC) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 

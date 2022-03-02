@@ -14,6 +14,7 @@
 #import "BTTWithdrawRecordModel.h"
 #import "BRPickerView.h"
 #import "BTTPromoRecordFooterView.h"
+#import "KYMFastWithdrewVC.h"
 
 @interface BTTWithdrawRecordController ()<BTTElementsFlowLayoutDelegate>
 @property(nonatomic, copy)NSString * sortTypeStr;
@@ -171,6 +172,16 @@
         }];
     } else {
         [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    }
+    
+    if (indexPath.row > 1) {
+        BTTWithdrawRecordItemModel *model = self.modelArr[indexPath.row-2];
+        if (model.mmStatus > 0 && model.mmStatus !=100) {
+            KYMFastWithdrewVC *withdrewVC = [[KYMFastWithdrewVC alloc] init];
+            withdrewVC.mmProcessingOrderTransactionId = model.requestId;
+            withdrewVC.backToLastVC = YES;
+            [self.navigationController pushViewController:withdrewVC animated:YES];
+        }
     }
 }
 
