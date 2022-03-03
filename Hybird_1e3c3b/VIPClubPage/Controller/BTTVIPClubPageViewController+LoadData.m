@@ -191,21 +191,31 @@ static const char *BTTNextGroupKey = "nextGroup";
                                                                        withImageName:@"img39" withUrl:@"www/yacht_tour/index.html"
                                                                   withTopTitleString:@"“飞”律宾第一季" withSubTitleString:@"惊喜游艇之旅" withIsFirstData:NO withIsDetails:YES];
     
+//    VIPHistoryImageModel *iData4 = [[VIPHistoryImageModel alloc] initWithYearString:@"2016" WithMonthString:@"10"
+//                                                                      withImageName:@"img1" withUrl:@""
+//                                                                 withTopTitleString:@"AG旗舰厅新增贵宾百万投注桌台" withSubTitleString:@"～百万单注想投就投 盈利机会不容错过～" withIsFirstData:YES withIsDetails:NO];
     VIPHistoryImageModel *iData4 = [[VIPHistoryImageModel alloc] initWithYearString:@"2016" WithMonthString:@"10"
                                                                       withImageName:@"img1" withUrl:@""
-                                                                 withTopTitleString:@"AG旗舰厅新增贵宾百万投注桌台" withSubTitleString:@"～百万单注想投就投 盈利机会不容错过～" withIsFirstData:YES withIsDetails:NO];
+                                                                 withTopTitleString:@"旗舰厅新增贵宾百万投注桌台" withSubTitleString:@"～百万单注想投就投 盈利机会不容错过～" withIsFirstData:YES withIsDetails:NO];
     VIPHistoryImageModel *iData41 = [[VIPHistoryImageModel alloc] initWithYearString:@"2016" WithMonthString:@"09"
                                                                        withImageName:@"img2" withUrl:@"www/bayer_tab4/index.html"
                                                                   withTopTitleString:@"德荷两国欢乐游 现场观战勒 | 沃库森" withSubTitleString:@"观看精彩刺激球赛 尊享贵宾奢华待遇" withIsFirstData:NO withIsDetails:YES];
+//    VIPHistoryImageModel *iData42 = [[VIPHistoryImageModel alloc] initWithYearString:@"2016" WithMonthString:@"09"
+//                                                                       withImageName:@"img34" withUrl:@""
+//                                                                  withTopTitleString:@"AG旗舰厅新增30万盘口" withSubTitleString:@"AG旗舰厅真人单注30万盘口火热开启" withIsFirstData:NO withIsDetails:NO];
     VIPHistoryImageModel *iData42 = [[VIPHistoryImageModel alloc] initWithYearString:@"2016" WithMonthString:@"09"
                                                                        withImageName:@"img34" withUrl:@""
-                                                                  withTopTitleString:@"AG旗舰厅新增30万盘口" withSubTitleString:@"AG旗舰厅真人单注30万盘口火热开启" withIsFirstData:NO withIsDetails:NO];
+                                                                  withTopTitleString:@"旗舰厅新增30万盘口" withSubTitleString:@"旗舰厅真人单注30万盘口火热开启" withIsFirstData:NO withIsDetails:NO];
     VIPHistoryImageModel *iData43 = [[VIPHistoryImageModel alloc] initWithYearString:@"2016" WithMonthString:@"09"
                                                                        withImageName:@"img3" withUrl:@""
                                                                   withTopTitleString:@"真人娱乐开设50、100万盘口，单日提款限额提升至1000万" withSubTitleString:@"50万盘口开设无任何要求,1000万提款工作日1小时到账" withIsFirstData:NO withIsDetails:NO];
+//    VIPHistoryImageModel *iData44 = [[VIPHistoryImageModel alloc] initWithYearString:@"2016" WithMonthString:@"09"
+//                                                                       withImageName:@"img4" withUrl:@""
+//                                                                  withTopTitleString:@"AG旗舰豪华厅正式上线"
+//                                                                  withSubTitleString:@"亚洲新坐标 全球首推" withIsFirstData:NO withIsDetails:NO];
     VIPHistoryImageModel *iData44 = [[VIPHistoryImageModel alloc] initWithYearString:@"2016" WithMonthString:@"09"
                                                                        withImageName:@"img4" withUrl:@""
-                                                                  withTopTitleString:@"AG旗舰豪华厅正式上线"
+                                                                  withTopTitleString:@"旗舰豪华厅正式上线"
                                                                   withSubTitleString:@"亚洲新坐标 全球首推" withIsFirstData:NO withIsDetails:NO];
     VIPHistoryImageModel *iData45 = [[VIPHistoryImageModel alloc] initWithYearString:@"2016" WithMonthString:@"08"
                                                                        withImageName:@"img5" withUrl:@""
