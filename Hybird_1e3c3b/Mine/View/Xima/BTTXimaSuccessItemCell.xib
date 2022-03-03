@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,8 +24,8 @@
                             <constraint firstAttribute="height" constant="35" id="7lg-tU-aaY"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AG旗舰厅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xq-B9-bku">
-                        <rect key="frame" x="70" y="17.5" width="71" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="旗舰厅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xq-B9-bku">
+                        <rect key="frame" x="70" y="17.5" width="49" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.85490196078431369" green="0.74117647058823533" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -38,6 +38,7 @@
                     </label>
                 </subviews>
             </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <constraints>
                 <constraint firstItem="9xq-B9-bku" firstAttribute="leading" secondItem="W8k-k0-PU9" secondAttribute="trailing" constant="20" id="LVV-rb-f9v"/>
                 <constraint firstItem="xtt-O2-Wqe" firstAttribute="leading" secondItem="W8k-k0-PU9" secondAttribute="trailing" constant="20" id="e4w-AA-dN9"/>
@@ -46,7 +47,6 @@
                 <constraint firstItem="xtt-O2-Wqe" firstAttribute="top" secondItem="9xq-B9-bku" secondAttribute="bottom" constant="15" id="rIb-i7-NJR"/>
                 <constraint firstItem="W8k-k0-PU9" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="xch-31-Z9r"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
                 <outlet property="nameLabel" destination="9xq-B9-bku" id="DVZ-IS-2P7"/>
                 <outlet property="noticeLabel" destination="xtt-O2-Wqe" id="bgH-a3-9eT"/>

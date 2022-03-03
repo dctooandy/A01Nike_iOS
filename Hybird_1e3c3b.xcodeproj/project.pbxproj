@@ -1866,7 +1866,6 @@
 		41D1074E26A9143E00721F61 /* BTTBindingMobileController+LoadData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BTTBindingMobileController+LoadData.m"; sourceTree = "<group>"; };
 		41E4FC4926E5AC2A006F55FD /* BTTDiscountsViewController+Nav.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTTDiscountsViewController+Nav.h"; sourceTree = "<group>"; };
 		41E4FC4A26E5AC2A006F55FD /* BTTDiscountsViewController+Nav.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTTDiscountsViewController+Nav.m"; sourceTree = "<group>"; };
-		41E8BFAC27A3F5640073BDF0 /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = ../Desktop/libboringssl_simulator.a; sourceTree = "<group>"; };
 		41EAF0F1260D93BD0091FE09 /* BTTMeInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTMeInfoCell.xib; sourceTree = "<group>"; };
 		41EAF0F5260D94290091FE09 /* hot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = hot.gif; sourceTree = "<group>"; };
 		41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTYueFenHongPopView.xib; sourceTree = "<group>"; };
@@ -4683,7 +4682,6 @@
 			isa = PBXGroup;
 			children = (
 				76CC62BD265677E00042AEDF /* libboringssl_simulator.a */,
-				41E8BFAC27A3F5640073BDF0 /* libboringssl_simulator.a */,
 				D3399696243B08E000B91A52 /* libboringssl.tbd */,
 				3AD9CF03216C425200685B43 /* CoreTelephony.framework */,
 				3AD9CEE821675A9B00685B43 /* libresolv.tbd */,

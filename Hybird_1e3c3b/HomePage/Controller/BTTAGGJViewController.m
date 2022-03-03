@@ -55,6 +55,12 @@
     }
     gameModel.gameCode = BTTAGGJKEY;
     manager.aginVC.gameModel = gameModel;
+    for (UILabel *label in [IVGameManager sharedManager].aginVC.navigationView.subviews) {
+        if ([label isKindOfClass:[UILabel class]])
+        {
+            label.text = @"国际厅";
+        }
+    }
     [self addChildViewController:[IVGameManager sharedManager].aginVC];
     [self.view addSubview:[IVGameManager sharedManager].aginVC.view];
     [IVGameManager sharedManager].aginVC.view.frame = self.view.frame;
