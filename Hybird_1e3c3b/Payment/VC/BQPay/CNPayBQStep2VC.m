@@ -9,6 +9,7 @@
 #import "CNPayBQStep2VC.h"
 #import "CNPayWechatTipView.h"
 #import "BTTPayBQAliStep2VC.h"
+#import "GradientImage.h"
 
 @interface CNPayBQStep2VC ()
 
@@ -25,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *fastTipLb;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fastTipLbHeight;
 
+@property (weak, nonatomic) IBOutlet UIImageView *bankIconIV;
 @property (weak, nonatomic) IBOutlet UIImageView *bankBGIV;
 @property (weak, nonatomic) IBOutlet UIImageView *bankLogoIV;
 @property (weak, nonatomic) IBOutlet UILabel *bankNameLb;
@@ -126,7 +128,12 @@
     self.depositLb.text = self.writeModel.depositBy;
     self.amountLb.text = bankModel.amount;
     
-    [self.bankBGIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankIcon.cn_appendCDN] placeholderImage:[UIImage imageNamed:@"pay_bankBG"]];
+    [self.bankIconIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankIcon.cn_appendCDN] placeholderImage:[UIImage imageNamed:@"pay_bankBG"]];
+    UIImage *myGradient = [[GradientImage sharedInstance] layerImage:TopToBottom
+                                                              colors:@[[UIColor colorWithHexString:@"2F68C1"],
+                                                                       [UIColor colorWithHexString:@"839FDB"]]
+                                                              bounds:self.bankBGIV.bounds];
+    self.bankBGIV.image = myGradient;
     [self.bankLogoIV sd_setImageWithURL:[NSURL URLWithString:bankModel.bankIcon.cn_appendCDN]];
     self.bankNameLb.text = bankModel.bankName;
     self.accountNameLb.text = bankModel.accountName;
