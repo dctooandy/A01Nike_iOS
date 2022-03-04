@@ -324,8 +324,10 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         if (self.timeInterval <= 0) {
             [self.timer setFireDate:[NSDate distantFuture]];
             self.timeInterval = 0;
-            // 等待倒计时为0，在刷一次接口即可
-            [self loadData];
+            if (self.status == CNMPayUIStatusPaying) {
+                // 等待状态下，倒计时为0, 才开始刷新
+                [self refreshBillStatus];
+            }
         }
     }
     self.tip2Lb.text = [NSString stringWithFormat:@"%02ld分%02ld秒", self.timeInterval/60, self.timeInterval%60];
@@ -344,7 +346,7 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         if ([response isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary *)response;
             CNMBankModel *bank = [[CNMBankModel alloc] initWithDictionary:[dic objectForKey:@"data"] error:nil];
-            if (bank.status == CNMPayBillStatusSuccess) {
+            if (bank.status == CNMPayBillStatusTimeout || bank.status == CNMPayBillStatusSuccess) {
                 [weakSelf reloadUIWithModel:bank];
                 return;
             }
