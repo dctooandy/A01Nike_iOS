@@ -745,7 +745,10 @@
     [KYMWithdrewRequest checkChannelWithParams:parmas.copy callback:^(BOOL status, NSString * _Nonnull msg, KYMWithdrewCheckModel  * _Nonnull model) {
         [self hideLoading];
         if (!status) {
-            [MBProgressHUD showError:msg toView:nil];
+            //普通取款
+            BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+            vc.isMatchWithdrew = NO;
+            [self.navigationController pushViewController:vc animated:YES];
             return;
         }
         //移除比余额小的金额
