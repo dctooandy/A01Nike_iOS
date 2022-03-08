@@ -1184,35 +1184,35 @@
         } else if (tag == 3) {
             
         } else {
-            weakSelf(weakSelf);
-            [self showTryAlertViewWithBlock:^(UIButton *btn) {
-                strongSelf(strongSelf);
-                NSLog(@"%@",@(btn.tag));
-                if (btn.tag == 1090) {
-                    if (vc || videoGamesVC) {
-                        if (vc) {
-                            if (tag==1000||tag==1001) {
-                                [self choseGameLineWithTag:tag];
-                            }else{
-                                [self.navigationController pushViewController:vc animated:YES];
-                            }
-                        } else if (videoGamesVC) {
-                            [self.navigationController pushViewController:videoGamesVC animated:YES];
-                        }
+//            weakSelf(weakSelf);
+//            [self showTryAlertViewWithBlock:^(UIButton *btn) {
+//                strongSelf(strongSelf);
+//                NSLog(@"%@",@(btn.tag));
+//                if (btn.tag == 1090) {
+//                } else {
+//                    [MBProgressHUD showError:@"请先登录" toView:nil];
+//                    BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
+//                    [strongSelf.navigationController pushViewController:vc animated:YES];
+//                }
+//            }];
+            if (vc || videoGamesVC) {
+                if (vc) {
+                    if (tag==1000||tag==1001) {
+                        [self choseGameLineWithTag:tag];
+                    }else{
+                        [self.navigationController pushViewController:vc animated:YES];
                     }
-                    if (model) {
-                        if (tag==1006||tag==1007||tag==1010||tag==1003) {
-                            [self choseGameLineWithTag:tag];
-                        }else{
-                            [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
-                        }
-                    }
-                } else {
-                    [MBProgressHUD showError:@"请先登录" toView:nil];
-                    BTTLoginOrRegisterViewController *vc = [[BTTLoginOrRegisterViewController alloc] init];
-                    [strongSelf.navigationController pushViewController:vc animated:YES];
+                } else if (videoGamesVC) {
+                    [self.navigationController pushViewController:videoGamesVC animated:YES];
                 }
-            }];
+            }
+            if (model) {
+                if (tag==1006||tag==1007||tag==1010||tag==1003) {
+                    [self choseGameLineWithTag:tag];
+                }else{
+                    [[IVGameManager sharedManager] forwardToGameWithModel:model controller:self];
+                }
+            }
         }
     }
     
