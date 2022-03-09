@@ -383,7 +383,7 @@
         self.submitBtnEnable = enable;
     }else{
         if (self.isMatchWithdrew) {
-            self.submitBtnEnable = [PublicMethod isValidateWithdrawPwdNumber:self.password];
+            self.submitBtnEnable = amount > 0 && [PublicMethod isValidateWithdrawPwdNumber:self.password];
         } else {
             BOOL enable = amount >= cnyLimitNum && amount <= 10000000 && [PublicMethod isValidateWithdrawPwdNumber:self.password];
             self.submitBtnEnable = enable;
