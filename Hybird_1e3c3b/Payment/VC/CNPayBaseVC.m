@@ -15,6 +15,7 @@
 #import "CNPayTipView.h"
 #import "CNPayOrderModel.h"
 #import "CNPayOrderModelV2.h"
+#import "BTTMeMainModel.h"
 
 
 
@@ -321,7 +322,14 @@
 }
 
 - (void)removeFastPay {
-    [self.payVC.payments removeObjectAtIndex:0];
+    BTTMeMainModel *fastModel;
+    for (BTTMeMainModel *model in self.payVC.payments) {
+        if (model.paymentType == CNPaymentFast) {
+            fastModel = model;
+            break;
+        }
+    }
+    [self.payVC.payments removeObject:fastModel];
     [self.payVC didSelectChannel:0];
 }
 
