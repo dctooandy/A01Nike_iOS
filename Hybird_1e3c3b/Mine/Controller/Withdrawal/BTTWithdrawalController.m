@@ -382,8 +382,12 @@
         BOOL enable = amount >= usdtLimitNum && amount <= 1430000 && [PublicMethod isValidateWithdrawPwdNumber:self.password];
         self.submitBtnEnable = enable;
     }else{
-        BOOL enable = amount >= cnyLimitNum && amount <= 10000000 && [PublicMethod isValidateWithdrawPwdNumber:self.password];
-        self.submitBtnEnable = enable;
+        if (self.isMatchWithdrew) {
+            self.submitBtnEnable = [PublicMethod isValidateWithdrawPwdNumber:self.password];
+        } else {
+            BOOL enable = amount >= cnyLimitNum && amount <= 10000000 && [PublicMethod isValidateWithdrawPwdNumber:self.password];
+            self.submitBtnEnable = enable;
+        }
     }
     
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
