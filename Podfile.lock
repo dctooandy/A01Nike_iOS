@@ -247,7 +247,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://cdn.cocoapods.org/:
-    - BGFMDB
     - CocoaAsyncSocket
     - FCUUID
     - JSONModel
