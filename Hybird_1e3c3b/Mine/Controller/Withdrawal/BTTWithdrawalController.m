@@ -446,7 +446,9 @@
             return;
         }
         cell.detailLabel.text = selectValue;
-        self.amount = @"";
+        if (!self.isMatchWithdrew) {
+            self.amount = @"";
+        }
         for (int i = 0; i < self.bankList.count; i++) {
             NSString *withDrawText = @"";
             if ([self.bankList[i].accountType isEqualToString:@"借记卡"]||[self.bankList[i].accountType isEqualToString:@"信用卡"]||[self.bankList[i].accountType isEqualToString:@"存折"]||[self.bankList[i].accountType isEqualToString:@"BTC"]) {
