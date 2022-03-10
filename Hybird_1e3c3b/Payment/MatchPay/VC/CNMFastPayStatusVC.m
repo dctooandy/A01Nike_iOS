@@ -612,7 +612,7 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         for (UIViewController *vc in self.navigationController.viewControllers) {
             if ([vc isKindOfClass:[BTTMineViewController class]]) {
                 BTTMineViewController *mine = (BTTMineViewController *)vc;
-                _cancelTime = [mine.fastModel.payModel.remainCancelDepositTimes integerValue];
+                _cancelTime = [mine.matchModel.remainCancelDepositTimes integerValue];
                 break;
             }
         }

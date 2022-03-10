@@ -27,6 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)addBankView;
 - (void)removeBankView;
 - (void)didSelectChannel:(NSInteger)index;
+
+
+/// 撮合参数
+@property (nonatomic, strong) CNPaymentModel *matchModel;
 @end
 
 NS_ASSUME_NONNULL_END

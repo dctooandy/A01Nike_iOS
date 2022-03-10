@@ -9,6 +9,7 @@
 #import "JSONModel.h"
 #import "CNPayBankCardModel.h"
 #import "CNPayCardModel.h"
+#import <YYModel.h>
 
 /// 支付方式
 typedef NS_ENUM(NSUInteger, CNPaymentType) {
@@ -56,7 +57,7 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 
 
 
-@interface CNWAmountListModel : JSONModel
+@interface CNWAmountListModel : NSObject <YYModel>
 @property (nonatomic, copy) NSString *amount;
 @property (nonatomic, assign) BOOL isRecommend;
 @end

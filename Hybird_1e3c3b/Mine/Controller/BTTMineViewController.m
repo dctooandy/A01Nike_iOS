@@ -469,7 +469,9 @@
     [channelArray addObjectsFromArray:self.normalDataSoure];
     [channelArray addObjectsFromArray:self.normalDataTwo];
     
-    [self.navigationController pushViewController:[[CNPayVC alloc] initWithChannel:model.paymentType channelArray:channelArray] animated:YES];
+    CNPayVC *payVC = [[CNPayVC alloc] initWithChannel:model.paymentType channelArray:channelArray];
+    payVC.matchModel = self.matchModel;
+    [self.navigationController pushViewController:payVC animated:YES];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
