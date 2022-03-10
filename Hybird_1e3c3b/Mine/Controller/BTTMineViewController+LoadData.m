@@ -155,6 +155,9 @@
                 if (open) {
                     self.matchModel = [CNPaymentModel yy_modelWithDictionary:dic];
                     self.matchModel.payType = CNPaymentFast;
+                    if (self.matchModel.mmProcessingOrderTransactionId.length > 0) {
+                        self.matchModel.amountList = nil;
+                    }
                 }
             }
         }

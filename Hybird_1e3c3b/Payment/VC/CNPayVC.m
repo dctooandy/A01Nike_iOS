@@ -19,6 +19,9 @@
 #import "BTTCompleteMeterialController.h"
 #import "BTTMeMainModel.h"
 #import "CNMSelectChannelVC.h"
+#import "CNMFastPayStatusVC.h"
+#import "KYMFastWithdrewVC.h"
+#import "CNMAlertView.h"
 
 /// 顶部渠道单元尺寸
 #define kPayChannelItemSize CGSizeMake(102, 132)
@@ -88,6 +91,31 @@
     if (!_isFirstLoad) {
         [CNTimeLog endRecordTime:CNEventPayLaunch];
         _isFirstLoad = YES;
+    }
+    [self showTradeBill];
+}
+
+- (void)showTradeBill {
+    __weak typeof(self) weakSelf = self;
+    if (self.matchModel.mmProcessingOrderTransactionId.length > 0) {
+        if (self.matchModel.mmProcessingOrderType == 1) { // 存款
+            [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板！您当前有正在交易的存款订单" desc:nil needRigthTopClose:NO commitTitle:@"关闭" commitAction:^{
+            
+            } cancelTitle:@"查看订单" cancelAction:^{
+                CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
+                statusVC.cancelTime = [weakSelf.matchModel.remainCancelDepositTimes integerValue];
+                statusVC.transactionId = weakSelf.matchModel.mmProcessingOrderTransactionId;
+                [weakSelf.navigationController pushViewController:statusVC animated:YES];
+            }];
+        } else { // 取款
+            [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板！您当前有正在交易的取款订单" desc:nil needRigthTopClose:NO commitTitle:@"关闭" commitAction:^{
+                
+            } cancelTitle:@"查看订单" cancelAction:^{
+                KYMFastWithdrewVC *withdrewVC = [[KYMFastWithdrewVC alloc] init];
+                withdrewVC.mmProcessingOrderTransactionId = weakSelf.matchModel.mmProcessingOrderTransactionId;
+                [weakSelf.navigationController pushViewController:withdrewVC animated:YES];
+            }];
+        }
     }
 }
 
