@@ -158,11 +158,7 @@
     
     NSUInteger lineCount = 0;
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"] && self.checkModel.data.amountList.count > 0) {
-        if (self.checkModel.data.amountList.count / 3 > 0 ) {
-            lineCount = self.checkModel.data.amountList.count / 3;
-        } else {
-            lineCount = 1;
-        }
+        lineCount = ceilf(self.checkModel.data.amountList.count / 3.0) ;
     }
     CGFloat matchWithdrewAmountH = 0;
     CGFloat spaceHeight = 15.0;
@@ -175,7 +171,7 @@
     
     NSArray *canEdits1 = @[@NO,@NO,@NO];
     NSArray *canEdits3 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO];
-    NSArray *canEdits4 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO,@NO];
+    NSArray *canEdits4 = @[@YES,@NO,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO];
     
     NSArray *values1 = @[@"",@"",@""];
     NSArray *values3 = @[@"",@"",@"",@"",@"",@""];
