@@ -14,6 +14,8 @@
                 <outlet property="amountTF" destination="mfj-jI-sdZ" id="0HM-1H-BO1"/>
                 <outlet property="bottomTipView" destination="adG-CK-hLQ" id="Ssy-HE-38U"/>
                 <outlet property="bottomTipViewHeight" destination="WAz-dN-Hfj" id="C02-lV-Hdj"/>
+                <outlet property="collectionView" destination="bw1-gx-IP6" id="ypL-gc-WGD"/>
+                <outlet property="collectionViewH" destination="yKm-wX-54h" id="JWa-dc-dGR"/>
                 <outlet property="commitBtn" destination="1SB-cZ-5cD" id="pPY-s4-YDQ"/>
                 <outlet property="nameLb" destination="EjB-jc-McO" id="psM-YO-FVo"/>
                 <outlet property="nameTF" destination="ezC-Tr-j1G" id="a3R-VC-na0"/>
@@ -26,6 +28,23 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="bw1-gx-IP6">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" id="yKm-wX-54h"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HG4-sE-rNP">
+                        <size key="itemSize" width="100" height="70"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Yv7-1j-NLc"/>
+                        <outlet property="delegate" destination="-1" id="ztJ-kO-hF2"/>
+                    </connections>
+                </collectionView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UX1-5o-iIz">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                     <subviews>
@@ -229,13 +248,16 @@
             <constraints>
                 <constraint firstItem="iHu-0Z-IID" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0Bu-c9-7rM"/>
                 <constraint firstItem="UX1-5o-iIz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GIu-p6-T7y"/>
+                <constraint firstItem="bw1-gx-IP6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NX4-V3-FrN"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="iHu-0Z-IID" secondAttribute="trailing" id="VNR-el-u3G"/>
                 <constraint firstItem="EjW-2J-gnr" firstAttribute="top" secondItem="UX1-5o-iIz" secondAttribute="bottom" id="ZJE-2j-KGQ"/>
+                <constraint firstItem="UX1-5o-iIz" firstAttribute="top" secondItem="bw1-gx-IP6" secondAttribute="bottom" id="jFc-p6-449"/>
                 <constraint firstItem="iHu-0Z-IID" firstAttribute="top" secondItem="EjW-2J-gnr" secondAttribute="bottom" id="u0S-pe-RZQ"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="EjW-2J-gnr" secondAttribute="trailing" id="uXr-Rd-s4i"/>
-                <constraint firstItem="UX1-5o-iIz" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="uqr-Eh-xia"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="UX1-5o-iIz" secondAttribute="trailing" id="vn0-I2-54v"/>
                 <constraint firstItem="EjW-2J-gnr" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="wI8-j2-gV1"/>
+                <constraint firstAttribute="trailing" secondItem="bw1-gx-IP6" secondAttribute="trailing" id="yd6-M0-L6o"/>
+                <constraint firstItem="bw1-gx-IP6" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="zfW-Qn-fU6"/>
             </constraints>
             <point key="canvasLocation" x="-273" y="26"/>
         </view>

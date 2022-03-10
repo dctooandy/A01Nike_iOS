@@ -11,7 +11,11 @@
 #import "BTTBishangStep1VC.h"
 #import "BTTPaymentWarningPopView.h"
 
-@interface CNPayBQStep1VC ()
+#import "CNMAmountSelectCCell.h"
+#import "CNMAlertView.h"
+#define kCNMAmountSelectCCell  @"CNMAmountSelectCCell"
+
+@interface CNPayBQStep1VC () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet CNPayAmountTF *amountTF;
 @property (weak, nonatomic) IBOutlet UIButton *amountBtn;
 @property (weak, nonatomic) IBOutlet UILabel *nameLb;
@@ -29,6 +33,13 @@
 @property (nonatomic, strong) NSArray *amountList;
 @property (nonatomic, strong) NSArray *bankList;
 @property (nonatomic, assign) BOOL haveBankData;
+
+#pragma mark - 撮合相关属性
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewH;
+@property (nonatomic, strong) NSArray *matchAmountList;
+/// 选中金额
+@property (nonatomic, copy) NSString *selectAmount;
 @end
 
 @implementation CNPayBQStep1VC
@@ -56,16 +67,43 @@
     
 }
 
+#pragma mark - 撮合相关
+
+- (void)setupMatchUI {
+    [self.collectionView registerNib:[UINib nibWithNibName:kCNMAmountSelectCCell bundle:nil] forCellWithReuseIdentifier:kCNMAmountSelectCCell];
+    self.collectionViewH.constant = 80 * ceilf(self.matchAmountList.count/3.0);
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.matchAmountList.count;
+}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CNMAmountSelectCCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCNMAmountSelectCCell forIndexPath:indexPath];
+    CNWAmountListModel *model = self.matchAmountList[indexPath.row];
+    cell.amountLb.text = model.amount;
+    cell.recommendTag.hidden = YES;
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake((collectionView.bounds.size.width-20)/3.0, 70);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    CNWAmountListModel *model = self.matchAmountList[indexPath.row];
+    self.selectAmount = model.amount;
+}
+
+
+#pragma mark - BQ相关
+
 - (void)configBishangUI {
     _BSStep1VC = [[BTTBishangStep1VC alloc] init];
     //    _BSStep1VC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, 1000);
     _BSStep1VC.paymentModel = self.paymentModel;
     [self addChildViewController:_BSStep1VC];
     [self.view addSubview:_BSStep1VC.view];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
 }
 
 - (void)queryAmountList{
