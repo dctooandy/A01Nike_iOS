@@ -191,6 +191,7 @@
             _payChannelVC.payments = @[channel.payModel];
         }
     }
+    _payChannelVC.matchModel = self.matchModel;
     
 //    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
     self.title = channel.name;
