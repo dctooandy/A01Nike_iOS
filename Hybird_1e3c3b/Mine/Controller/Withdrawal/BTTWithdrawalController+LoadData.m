@@ -134,9 +134,9 @@
     NSString *btcrate = isNull(self.btcRate) ? @"0" : self.btcRate;
     NSString *rateStr = [NSString stringWithFormat:@"¥%.2lf=1BTC(实时汇率)",[btcrate doubleValue]];
     
-    NSArray *names1 = @[@"",@"金额"];
-    NSArray *names3 = @[@"",@"比特币",@"取款至",@"资金密码",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
-    NSArray *names4 = @[@"",@"预估到账",@"取款至",@"资金密码",@"",@"",@""];
+    NSArray *names1 = @[@"头",@"固定金额",@"分割"];
+    NSArray *names3 = @[@"金额",@"比特币",@"取款至",@"资金密码",@"联系客服",@"提交"];
+    NSArray *names4 = @[@"金额",@"预估到账",@"取款至",@"协议",@"资金密码",@"usdt确认",@"提交",@"联系客服"];
     
     NSString *pString = isUsdt ? [NSString stringWithFormat:@"单笔取款限额%@-143万USDT", self.usdtLimit] : [NSString stringWithFormat:@"最少%@元", self.cnyLimit];
     if (!isUsdt && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
@@ -152,51 +152,41 @@
     NSString * withdrawPwdP = [IVNetwork savedUserInfo].withdralPwdFlag == 0 ? @"没有资金密码？点击设置资金密码":@"6位数字组合";
     BOOL withdrawPwdCanEdits = [IVNetwork savedUserInfo].withdralPwdFlag == 0 ? false:true;
     
-    NSArray *placeholders1 = @[@"",pString];
-    NSArray *placeholders3 = @[@"",rateStr,@"***银行-尾号*****",withdrawPwdP,@"",@""];
-    NSArray *placeholders4 = @[@"",@"USDT",@"***银行-尾号*****",withdrawPwdP,@"",@"",@"",@""];
-    NSArray *heights1 = @[@205.0,@44.0];
-    NSArray *heights3 = @[@0.0,@44.0,@44.0,@44.0,@100.0];
-    NSArray *heights4 = @[@0.0,@44.0,@44,@44,@44.0,@46.0,@240.0];
+    NSArray *placeholders1 = @[@"",@"",@""];
+    NSArray *placeholders3 = @[pString,rateStr,@"***银行-尾号*****",withdrawPwdP,@"",@""];
+    NSArray *placeholders4 = @[pString,@"USDT",@"***银行-尾号*****",@"",withdrawPwdP,@"",@"",@""];
     
-    NSArray *canEdits1 = @[@NO,@YES];
-    NSArray *canEdits3 = @[@NO,@NO,@NO,@(withdrawPwdCanEdits),@NO];
-    NSArray *canEdits4 = @[@NO,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO];
-    
-    NSArray *values1 = @[@"",@""];
-    NSArray *values3 = @[@"",@"",@"",@"",@""];
-    NSArray *values4 = @[@"",@"",@"",@"",@"",@"",@""];
-    
-    if (self.isMatchWithdrew) {
-        //撮合系统金额列表
-        
-        names3 = @[@"",@"比特币",@"取款至",@"资金密码",@"联系客服",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
-        names4 = @[@"",@"预估到账",@"取款至",@"资金密码",@"联系客服",@"",@"",@""];
-        
-        NSUInteger lineCount = self.checkModel.data.amountList.count / 3 > 0 ? self.checkModel.data.amountList.count / 3 : 1;
-        CGFloat matchWithdrewAmountH = 32 * lineCount + 16 + 8 * (lineCount - 1);
-        heights1 = @[@205.0,@(matchWithdrewAmountH)];
-        if (lineCount > 1) {
-            heights3 = @[@15.0,@44.0,@44.0,@44.0,@302.0,@100.0];
-            heights4 = @[@15.0,@44.0,@44,@44,@302.0,@44.0,@46.0,@240.0];
+    NSUInteger lineCount = 0;
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"] && self.checkModel.data.amountList.count > 0) {
+        if (self.checkModel.data.amountList.count / 3 > 0 ) {
+            lineCount = self.checkModel.data.amountList.count / 3;
         } else {
-            heights3 = @[@0.0,@44.0,@44.0,@44.0,@302.0,@100.0];
-            heights4 = @[@0.0,@44.0,@44,@44,@302.0,@44.0,@46.0,@240.0];
+            lineCount = 1;
         }
-        canEdits3 = @[@NO,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO];
-        canEdits4 = @[@NO,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO,@NO];
-        
-        values3 = @[@"",@"",@"",@"",@"",@""];
-        values4 = @[@"",@"",@"",@"",@"",@"",@"",@""];
     }
+    CGFloat matchWithdrewAmountH = 0;
+    CGFloat spaceHeight = 15.0;
+    if (lineCount > 0 && !self.isForceNormalWithdraw) {
+        matchWithdrewAmountH = 32 * lineCount + 16 + 75 + 8 * (lineCount - 1);
+    }
+    NSArray *heights1 = @[@205.0,@(matchWithdrewAmountH),@(spaceHeight)];
+    NSArray *heights3 = @[@44,@44.0,@44.0,@44.0,@(60.0),@100.0];
+    NSArray *heights4 = @[@44,@44.0,@44,@44,@44.0,@46.0,@240.0,@(60.0)];
     
- 
+    NSArray *canEdits1 = @[@NO,@NO,@NO];
+    NSArray *canEdits3 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO];
+    NSArray *canEdits4 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO,@NO];
+    
+    NSArray *values1 = @[@"",@"",@""];
+    NSArray *values3 = @[@"",@"",@"",@"",@"",@""];
+    NSArray *values4 = @[@"",@"",@"",@"",@"",@"",@"",@""];
+    
     NSMutableArray *names = @[].mutableCopy;
     NSMutableArray *placeholders = @[].mutableCopy;
     NSMutableArray *heights = @[].mutableCopy;
     NSMutableArray *canEdits = @[].mutableCopy;
     NSMutableArray *values = @[].mutableCopy;
-    NSInteger btcRateIndex = 3;
+    NSInteger btcRateIndex = 4;
     if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"BTC"]) {
         [names addObjectsFromArray:names1];
         [names addObjectsFromArray:names3];
@@ -229,7 +219,7 @@
         [values removeObjectAtIndex:btcRateIndex];
     }
     if (isUsdt) {
-        [heights replaceObjectAtIndex:3 withObject:@0];
+        [heights replaceObjectAtIndex:4 withObject:@0];
     }
     if ([self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]) {
         [names removeObjectAtIndex:6];

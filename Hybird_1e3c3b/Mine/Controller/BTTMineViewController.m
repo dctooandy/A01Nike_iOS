@@ -63,10 +63,8 @@
 #import "KYMFastWithdrewVC.h"
 #import "BTTMeGoldenCCell.h"
 #import "KYMWithdrewRequest.h"
-#import "KYMSelectChannelVC.h"
 #import "CNMFastPayStatusVC.h"
 #import "CNMAlertView.h"
-#import "KYMFastWithdrewVC.h"
 #import "CNMUSDTChannelVC.h"
 
 @interface BTTMineViewController ()<BTTElementsFlowLayoutDelegate>
@@ -730,7 +728,6 @@
     if (isUSDTAcc) {
         //普通取款
         BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-        vc.isMatchWithdrew = NO;
         [self.navigationController pushViewController:vc animated:YES];
         return;
     }
@@ -744,78 +741,13 @@
     [self showLoading];
     [KYMWithdrewRequest checkChannelWithParams:parmas.copy callback:^(BOOL status, NSString * _Nonnull msg, KYMWithdrewCheckModel  * _Nonnull model) {
         [self hideLoading];
-        if (!status) {
-            //普通取款
-            BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-            vc.isMatchWithdrew = NO;
-            [self.navigationController pushViewController:vc animated:YES];
-            return;
-        }
+  
         //移除比余额小的金额
         [model.data removeAmountBiggerThanTotal:self.totalAmount];
-        //如果渠道开启，有金额列表，且金额列表中最小的比余额大才走撮合
-        if (model.data.isAvailable && model.data.amountList.count > 0 && [self.totalAmount doubleValue] >= [model.data.miniAmount doubleValue]) {
-            //取款类型选择弹框
-            KYMSelectChannelVC *vc = [[KYMSelectChannelVC alloc] init];
-            vc.checkModel = model;
-            __weak typeof(self)weakSelf = self;
-            vc.selectedChannelCallback = ^(NSInteger index) {
-                //是否为撮合取款
-                if (index == 0) {
-                    //是否已存在存取款提案
-                    if (model.data.mmProcessingOrderTransactionId && model.data.mmProcessingOrderTransactionId.length != 0) {
-                        if (model.data.mmProcessingOrderType == 1) { // 存款
-                            [CNMAlertView showAlertTitle:@"交易提醒" content:@"您当前有正在交易的存款订单\n如需取款，请选择在线取款" desc:nil needRigthTopClose:NO commitTitle:@"查看订单" commitAction:^{
-                                CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
-                                statusVC.cancelTime = [model.data.remainCancelDepositTimes integerValue];
-                                statusVC.transactionId = model.data.mmProcessingOrderTransactionId;
-                                [weakSelf.navigationController pushViewController:statusVC animated:YES];
-                                
-                            } cancelTitle:@"在线取款" cancelAction:^{
-                                //普通取款
-                                BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                                vc.isMatchWithdrew = NO;
-                                [weakSelf.navigationController pushViewController:vc animated:YES];
-                            }];
-                        } else { // 取款
-                            
-                            KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
-                            vc.mmProcessingOrderTransactionId = model.data.mmProcessingOrderTransactionId;
-                            
-                            [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板，如需再次取款，请选择在线取款" desc:nil needRigthTopClose:NO commitTitle:@"关闭" commitAction:^{
-                                
-                            } cancelTitle:@"在线取款" cancelAction:^{
-                                [weakSelf.navigationController popViewControllerAnimated:NO];
-                                [vc stopTimer];
-                                //普通取款
-                                BTTWithdrawalController *vc1 = [[BTTWithdrawalController alloc] init];
-                                vc1.isMatchWithdrew = NO;
-                                [weakSelf.navigationController pushViewController:vc1 animated:YES];
-                            }];
-                            
-                            [weakSelf.navigationController pushViewController:vc animated:YES];
-                        }
-                    } else {
-                        BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                        vc.isMatchWithdrew = YES;
-                        vc.checkModel = model;
-                        [weakSelf.navigationController pushViewController:vc animated:YES];
-                    }
-                } else {
-                    //普通取款
-                    BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-                    vc.isMatchWithdrew = NO;
-                    [self.navigationController pushViewController:vc animated:YES];
-                }
-                
-            };
-            [self presentViewController:vc animated:YES completion:nil];
-        } else {
-            //普通取款
-            BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
-            vc.isMatchWithdrew = NO;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
+        
+        BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
+        vc.checkModel = model;
+        [self.navigationController pushViewController:vc animated:YES];
     }];
     
 }
