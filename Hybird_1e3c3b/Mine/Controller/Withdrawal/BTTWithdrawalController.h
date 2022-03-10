@@ -30,8 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * usdtLimit;
 @property (nonatomic, copy) NSString * iChiPayLimit;
 @property (nonatomic, copy) NSString * cnyLimit;
-@property (nonatomic, assign) BOOL isMatchWithdrew; //是否为撮合取款
 @property (nonatomic, strong) KYMWithdrewCheckModel *checkModel;
+@property (nonatomic, assign) BOOL isForceNormalWithdraw; //是否为强制普通取款
 @end
 
 NS_ASSUME_NONNULL_END

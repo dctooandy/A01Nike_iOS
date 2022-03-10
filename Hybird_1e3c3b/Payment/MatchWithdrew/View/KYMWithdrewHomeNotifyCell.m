@@ -10,7 +10,6 @@
 
 @interface KYMWithdrewHomeNotifyCell ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLB;
-@property (weak, nonatomic) IBOutlet UILabel *countLB;
 
 @end
 @implementation KYMWithdrewHomeNotifyCell
@@ -27,6 +26,5 @@
 - (void)setCanUseCount:(NSString *)canUseCount
 {
     _canUseCount = canUseCount;
-    self.countLB.text = canUseCount;
 }
 @end

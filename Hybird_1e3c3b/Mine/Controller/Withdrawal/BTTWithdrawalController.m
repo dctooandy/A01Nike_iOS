@@ -33,6 +33,8 @@
 #import "KYMWithdrewHomeNotifyCell.h"
 #import "KYMWithdrewRequest.h"
 #import "KYMFastWithdrewVC.h"
+#import "CNMFastPayStatusVC.h"
+#import "CNMAlertView.h"
 
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate,KYMWithdrewAmountCellDelegate>
 @property(nonatomic, copy)NSString *amount;
@@ -48,7 +50,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = self.isMatchWithdrew ? @"急速取款" : @"取款";
+    self.title = @"取款申请";
     self.selectIndex = 0;
     self.isSellUsdt = NO;
     self.amount = @"";
@@ -61,6 +63,7 @@
     [self setUpNav];
     [self refreshBankList];
     [self requestSellUsdtSwitch];
+    [self checkIfHasExistingMacthOrder];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -116,7 +119,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     weakSelf(weakSelf);
     BTTMeMainModel *cellModel = self.sheetDatas.count ? self.sheetDatas[indexPath.row] : nil;
-    if (indexPath.row == 0) {
+    if ([cellModel.name isEqualToString:@"头"]) {
         BTTWithdrawalHeaderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalHeaderCell" forIndexPath:indexPath];
         cell.totalAvailable = [PublicMethod getMoneyString:[self.totalAvailable doubleValue]];
         if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
@@ -141,25 +144,25 @@
         return cell;
     }
     
-    //撮合取款
-    if (self.isMatchWithdrew && indexPath.row == 1) {
+    //推荐金额
+    if ([cellModel.name isEqualToString:@"固定金额"]) {
         KYMWithdrewAmountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KYMWithdrewAmountCell" forIndexPath:indexPath];
         cell.amountArray = self.checkModel.data.amountList;
         cell.delegate = self;
         return cell;
     }
     
-    if (indexPath.row == 2) {
+    if ([cellModel.name isEqualToString:@"分割"]) {
         BTTHomePageSeparateCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTHomePageSeparateCell" forIndexPath:indexPath];
         return cell;
     }
     
-    if (([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"])&&indexPath.row==self.sheetDatas.count-2) {
+    if (([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"])&&[cellModel.name isEqualToString:@"usdt确认"]) {
         BTTWithDrawUSDTConfirmCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawUSDTConfirmCell" forIndexPath:indexPath];
         [cell setCellRateWithRate:self.usdtRate];
         return cell;
     }
-    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]&&indexPath.row==self.sheetDatas.count-4) {
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]&& [cellModel.name isEqualToString:@"协议"]) {
         BTTWithDrawProtocolView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawProtocolView" forIndexPath:indexPath];
         if ([self.bankList[self.selectIndex].protocol isEqualToString:@""]) {
             [cell setTypeData:@[@"OMNI",@"ERC20", @"TRC20"]];
@@ -171,7 +174,8 @@
         };
         return cell;
     }
-    if (indexPath.row == self.sheetDatas.count - 1) {
+
+    if ([cellModel.name isEqualToString:@"提交"]) {
         
         BTTBitollWithDrawCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBitollWithDrawCell" forIndexPath:indexPath];
         BOOL imgHidden = ![self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"];
@@ -202,14 +206,10 @@
             [self.navigationController pushViewController:vc animated:YES];
         };
         cell.confirmBtn.enabled = self.submitBtnEnable;
-        if (self.isMatchWithdrew) {
-            [cell.confirmBtn setTitle:@"立即取款" forState:UIControlStateNormal];
-        }
+        [cell.confirmBtn setTitle:@"立即取款" forState:UIControlStateNormal];
         return cell;
     }
-    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"] && indexPath.row == self.sheetDatas.count-3) {
-        cellModel = self.sheetDatas[indexPath.row - 1];
-    }
+
     NSString *cellName = cellModel.name;
     if ([cellName isEqualToString:@"取款至"]) {
         BTTWithdrawalCardSelectCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithdrawalCardSelectCell" forIndexPath:indexPath];
@@ -331,6 +331,7 @@
     } else {
         self.submitBtnEnable = false;
     }
+    [self getAmountTextField].text = self.amount;
 }
 - (void)setupElements {
     if (self.elementsHight.count) {
@@ -367,6 +368,9 @@
             }
             _usdtField.text = self.usdtAmount;
         }
+        if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"]) {
+            [[self getAmountListCell] setCurrentAmount:self.amount];
+        }
     }
     
     CGFloat amount = [self.amount doubleValue];
@@ -382,12 +386,8 @@
         BOOL enable = amount >= usdtLimitNum && amount <= 1430000 && [PublicMethod isValidateWithdrawPwdNumber:self.password];
         self.submitBtnEnable = enable;
     }else{
-        if (self.isMatchWithdrew) {
-            self.submitBtnEnable = amount > 0 && [PublicMethod isValidateWithdrawPwdNumber:self.password];
-        } else {
-            BOOL enable = amount >= cnyLimitNum && amount <= 10000000 && [PublicMethod isValidateWithdrawPwdNumber:self.password];
-            self.submitBtnEnable = enable;
-        }
+        BOOL enable = amount >= cnyLimitNum && amount <= 10000000 && [PublicMethod isValidateWithdrawPwdNumber:self.password];
+        self.submitBtnEnable = enable;
     }
     
     if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
@@ -402,10 +402,40 @@
 }
 - (UIButton *)getSubmitBtn
 {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.sheetDatas.count - 1 inSection:0];
-    BTTBitollWithDrawCell *cell = (BTTBitollWithDrawCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-    return cell.confirmBtn;
+    for (BTTMeMainModel *cellModel in self.sheetDatas) {
+        if ([cellModel.name isEqualToString:@"提交"]) {
+            NSInteger index = [self.sheetDatas indexOfObject:cellModel];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+            BTTBitollWithDrawCell *cell = (BTTBitollWithDrawCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            return cell.confirmBtn;
+        }
+    }
+    return nil;
     
+}
+- (KYMWithdrewAmountCell *)getAmountListCell
+{
+    for (BTTMeMainModel *cellModel in self.sheetDatas) {
+        if ([cellModel.name isEqualToString:@"固定金额"]) {
+            NSInteger index = [self.sheetDatas indexOfObject:cellModel];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+            KYMWithdrewAmountCell *cell = (KYMWithdrewAmountCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            return cell;
+        }
+    }
+    return nil;
+}
+- (UITextField *)getAmountTextField
+{
+    for (BTTMeMainModel *cellModel in self.sheetDatas) {
+        if ([cellModel.name isEqualToString:@"金额"]) {
+            NSInteger index = [self.sheetDatas indexOfObject:cellModel];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+            BTTBindingMobileOneCell *cell = (BTTBindingMobileOneCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+            return cell.textField;
+        }
+    }
+    return nil;
 }
 //选中银行卡
 - (void)bankCardPick:(NSIndexPath *)indexPath
@@ -446,9 +476,7 @@
             return;
         }
         cell.detailLabel.text = selectValue;
-        if (!self.isMatchWithdrew) {
-            self.amount = @"";
-        }
+       
         for (int i = 0; i < self.bankList.count; i++) {
             NSString *withDrawText = @"";
             if ([self.bankList[i].accountType isEqualToString:@"借记卡"]||[self.bankList[i].accountType isEqualToString:@"信用卡"]||[self.bankList[i].accountType isEqualToString:@"存折"]||[self.bankList[i].accountType isEqualToString:@"BTC"]) {
@@ -558,7 +586,7 @@
     if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
         cnyLimitNum =  [self.cnyLimit integerValue];
     }
-    if (!self.isMatchWithdrew && self.amount.floatValue < cnyLimitNum && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
+    if (self.amount.floatValue < cnyLimitNum && ![[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"]) {
         [MBProgressHUD showError:[NSString stringWithFormat:@"最少%ld元", cnyLimitNum] toView:nil];
         return;
     }
@@ -582,7 +610,7 @@
     if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]) {
         [self showLoading];
     
-        if (self.isMatchWithdrew) {
+        if ([self getAmountListCell].selectedIndexPath && !self.isForceNormalWithdraw) {
             //撮合取款
             [self createRequestMatchWithdraw];
         } else {
@@ -711,5 +739,34 @@
         }
     }];
 }
-
+//是否已存在撮合订单
+- (void)checkIfHasExistingMacthOrder
+{
+    //是否已存在存取款提案
+    __weak typeof(self)weakSelf = self;
+    KYMWithdrewCheckModel *model = self.checkModel;
+    if (model.data.mmProcessingOrderTransactionId && model.data.mmProcessingOrderTransactionId.length != 0) {
+        if (model.data.mmProcessingOrderType == 1) { // 存款
+            [CNMAlertView showAlertTitle:@"交易提醒" content:@"您当前有正在交易的存款订单" desc:nil needRigthTopClose:NO commitTitle:@"关闭" commitAction:^{
+                weakSelf.isForceNormalWithdraw = YES;
+                [weakSelf loadMainData];
+            } cancelTitle:@"查看订单" cancelAction:^{
+                CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
+                statusVC.cancelTime = [model.data.remainCancelDepositTimes integerValue];
+                statusVC.transactionId = model.data.mmProcessingOrderTransactionId;
+                [weakSelf.navigationController pushViewController:statusVC animated:YES];
+            }];
+        } else { // 取款
+            
+            [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板，当前有正在交易的取款订单" desc:nil needRigthTopClose:NO commitTitle:@"关闭" commitAction:^{
+                weakSelf.isForceNormalWithdraw = YES;
+                [weakSelf loadMainData];
+            } cancelTitle:@"查看订单" cancelAction:^{
+                KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
+                vc.mmProcessingOrderTransactionId = model.data.mmProcessingOrderTransactionId;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }];
+        }
+    }
+}
 @end
