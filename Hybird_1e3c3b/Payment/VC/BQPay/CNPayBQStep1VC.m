@@ -12,18 +12,10 @@
 #import "BTTPaymentWarningPopView.h"
 
 @interface CNPayBQStep1VC ()
-
-@property (weak, nonatomic) IBOutlet UIView *preSettingView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *preSettingViewHeight;
-@property (weak, nonatomic) IBOutlet UILabel *preSettingMessageLb;
-
 @property (weak, nonatomic) IBOutlet CNPayAmountTF *amountTF;
 @property (weak, nonatomic) IBOutlet UIButton *amountBtn;
 @property (weak, nonatomic) IBOutlet UILabel *nameLb;
 @property (weak, nonatomic) IBOutlet CNPayNameTF *nameTF;
-@property (weak, nonatomic) IBOutlet CNPayAmountRecommendView *nameView;
-@property (weak, nonatomic) IBOutlet UIView *nameAreaView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameAreaViewHeight;
 
 @property (weak, nonatomic) IBOutlet CNPaySubmitButton *commitBtn;
 
@@ -45,7 +37,6 @@
     [super viewDidLoad];
     _haveBankData = NO;
     self.amountBtn.hidden = YES;
-    [self configPreSettingMessage];
     [self configDifferentUI];
     [self queryAmountList];
     // 初始化数据
@@ -77,17 +68,6 @@
     [super viewDidAppear:animated];
 }
 
-- (void)configPreSettingMessage {
-    if (self.preSaveMsg.length > 0) {
-        self.preSettingMessageLb.text = self.preSaveMsg;
-        self.preSettingViewHeight.constant = 50;
-        self.preSettingView.hidden = NO;
-    } else {
-        self.preSettingViewHeight.constant = 0;
-        self.preSettingView.hidden = YES;
-    }
-}
-
 - (void)queryAmountList{
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setValue:@(self.paymentModel.payType) forKey:@"payType"];
@@ -100,7 +80,6 @@
                 NSNumber * min = result.body[@"minAmount"];
                 NSNumber * max = result.body[@"maxAmount"];
                 self.amountTF.placeholder = [NSString stringWithFormat:@"最少%@，最多%@", min, max];
-                [self configAmountList];
             }
         }else{
             self.amountTF.text = @"";
@@ -120,14 +99,6 @@
             break;
     }
 }
-
-- (void)configAmountList {
-    //    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
-    //    if (!self.paymentModel.amountCanEdit) {
-    //        self.amountTF.placeholder = @"仅可选择以下金额";
-    //    }
-}
-
 
 - (IBAction)selectAmountList:(id)sender {
     weakSelf(weakSelf);
