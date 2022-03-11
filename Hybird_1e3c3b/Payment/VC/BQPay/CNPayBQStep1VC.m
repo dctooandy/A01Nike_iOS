@@ -37,8 +37,7 @@
 #pragma mark - 撮合相关属性
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewH;
-/// 选中金额
-@property (nonatomic, copy) NSString *selectAmount;
+@property (nonatomic, strong) NSArray *matchAmountList;
 @end
 
 @implementation CNPayBQStep1VC
@@ -76,20 +75,35 @@
     self.matchModel.amountList = arr.copy;
     
     if (self.matchModel.amountList.count > 0) {
+        NSMutableArray *array = [NSMutableArray array];
+        for (CNWAmountListModel *model in self.matchModel.amountList) {
+            [array addObject:model.amount];
+        }
+        self.matchAmountList = array.copy;
+        
         [self.collectionView registerNib:[UINib nibWithNibName:kCNMAmountSelectCCell bundle:nil] forCellWithReuseIdentifier:kCNMAmountSelectCCell];
-        self.collectionViewH.constant = 80 * ceilf(self.matchModel.amountList.count/3.0)+30;
+        self.collectionViewH.constant = 80 * ceilf(self.matchAmountList.count/3.0)+30;
+        [self.amountTF addTarget:self action:@selector(textFieldValueChange:) forControlEvents:UIControlEventEditingChanged];
     }
     [self setViewHeight:(self.collectionViewH.constant + 300) fullScreen:NO];
 }
 
+- (void)textFieldValueChange:(UITextField *)tf {
+    if ([self.matchAmountList containsObject:tf.text]) {
+        NSInteger index = [self.matchAmountList indexOfObject:tf.text];
+        [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+    } else {
+        [self.collectionView deselectItemAtIndexPath:[self.collectionView indexPathsForSelectedItems].lastObject animated:YES];
+    }
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.matchModel.amountList.count;
+    return self.matchAmountList.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CNMAmountSelectCCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCNMAmountSelectCCell forIndexPath:indexPath];
-    CNWAmountListModel *model = self.matchModel.amountList[indexPath.row];
-    cell.amountLb.text = model.amount;
+    cell.amountLb.text = self.matchAmountList[indexPath.row];
     cell.recommendTag.hidden = YES;
     return cell;
 }
@@ -99,8 +113,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    CNWAmountListModel *model = self.matchModel.amountList[indexPath.row];
-    self.selectAmount = model.amount;
+    self.amountTF.text = self.matchAmountList[indexPath.row];
 }
 
 
@@ -165,6 +178,7 @@
                 return;
             }
             weakSelf.amountTF.text = selectValue;
+            [weakSelf textFieldValueChange:weakSelf.amountTF];
         }else{
             self.amountBtn.hidden = YES;
             self.amountTF.text = @"";

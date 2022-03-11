@@ -289,7 +289,9 @@
 
 - (UILabel *)alertLabel {
     if (!_alertLabel) {
-        UILabel *alertLabel = [[UILabel alloc] initWithFrame:self.view.bounds];
+        CGRect frame = self.view.bounds;
+        frame.size.width = UIScreen.mainScreen.bounds.size.width;
+        UILabel *alertLabel = [[UILabel alloc] initWithFrame:frame];
         alertLabel.text = @"充值方式已经关闭，请联系客服!";
         alertLabel.textColor = [UIColor grayColor];
         alertLabel.textAlignment = NSTextAlignmentCenter;
