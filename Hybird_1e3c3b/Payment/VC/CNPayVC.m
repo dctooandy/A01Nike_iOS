@@ -34,6 +34,10 @@
 @property (weak, nonatomic) IBOutlet CNPayBankView *bankView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bankViewHeight;
 
+@property (weak, nonatomic) IBOutlet UIView *channelView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *channelViewH;
+
+
 @property (weak, nonatomic) IBOutlet UIView *stepView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *stepViewHeight;
 
@@ -154,6 +158,8 @@
 }
 
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full {
+    self.channelView.hidden = full;
+    self.channelViewH.constant = full ? 0: 117;
     self.stepViewHeight.constant = height;
     [self.payScrollView scrollsToTop];
 }
@@ -320,6 +326,9 @@
 - (void)goToBack {
     [self removeBankView];
     UIViewController *vc = self.segmentVC.childViewControllers.firstObject;
+    if (self.segmentVC.currentDisplayItemIndex == 0) {
+        [self setContentViewHeight:650 fullScreen:NO];
+    }
     if (vc && [vc isKindOfClass:[CNPayContainerVC class]]) {
         if ([((CNPayContainerVC *)vc) canPopViewController]) {
             [self.navigationController popViewControllerAnimated:YES];

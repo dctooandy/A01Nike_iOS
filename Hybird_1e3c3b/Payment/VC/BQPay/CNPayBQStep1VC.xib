@@ -19,6 +19,7 @@
                 <outlet property="commitBtn" destination="1SB-cZ-5cD" id="pPY-s4-YDQ"/>
                 <outlet property="nameLb" destination="EjB-jc-McO" id="psM-YO-FVo"/>
                 <outlet property="nameTF" destination="ezC-Tr-j1G" id="a3R-VC-na0"/>
+                <outlet property="submitBtn" destination="1SB-cZ-5cD" id="5h9-6i-E8p"/>
                 <outlet property="topView" destination="UX1-5o-iIz" id="J9D-cf-wkw"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
