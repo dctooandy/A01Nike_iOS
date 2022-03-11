@@ -151,13 +151,10 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSDictionary *dic = result.body[@"data"];
             if ([dic isKindOfClass:[NSDictionary class]]) {
-                BOOL open = [[dic objectForKey:@"isAvailable"] boolValue];
-                if (open) {
-                    self.matchModel = [CNPaymentModel yy_modelWithDictionary:dic];
-                    self.matchModel.payType = CNPaymentFast;
-                    if (self.matchModel.mmProcessingOrderTransactionId.length > 0) {
-                        self.matchModel.amountList = nil;
-                    }
+                self.matchModel = [CNPaymentModel yy_modelWithDictionary:dic];
+                self.matchModel.payType = CNPaymentFast;
+                if (!self.matchModel.isAvailable || self.matchModel.mmProcessingOrderTransactionId.length > 0) {
+                    self.matchModel.amountList = nil;
                 }
             }
         }

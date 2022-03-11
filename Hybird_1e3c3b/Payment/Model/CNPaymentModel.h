@@ -88,4 +88,5 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 @property (nonatomic, assign) NSInteger mmProcessingOrderType;
 /// 存在撮合单ID
 @property (nonatomic, copy) NSString *mmProcessingOrderTransactionId;
+@property (nonatomic, assign) BOOL isAvailable;
 @end

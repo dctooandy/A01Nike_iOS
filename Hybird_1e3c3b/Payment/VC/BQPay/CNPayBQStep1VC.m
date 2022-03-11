@@ -14,6 +14,9 @@
 #import "CNMAmountSelectCCell.h"
 #import "CNMAlertView.h"
 #define kCNMAmountSelectCCell  @"CNMAmountSelectCCell"
+#import "CNMatchPayRequest.h"
+#import "CNMBankModel.h"
+#import "CNMFastPayStatusVC.h"
 
 @interface CNPayBQStep1VC () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet CNPayAmountTF *amountTF;
@@ -26,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomTipView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTipViewHeight;
 @property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 
 @property (nonatomic, strong) BTTBishangStep1VC *BSStep1VC;
 
@@ -63,17 +67,6 @@
 #pragma mark - 撮合相关
 
 - (void)setupMatchUI {
-    NSMutableArray *arr = [NSMutableArray array];
-    for (int i = 1; i < 10; i++) {
-        CNWAmountListModel *model = [CNWAmountListModel new];
-        model.amount = [NSString stringWithFormat:@"%d", i * 1000];
-        [arr addObject:model];
-    }
-    if (!self.matchModel) {
-        self.matchModel = [CNPaymentModel new];
-    }
-    self.matchModel.amountList = arr.copy;
-    
     if (self.matchModel.amountList.count > 0) {
         NSMutableArray *array = [NSMutableArray array];
         for (CNWAmountListModel *model in self.matchModel.amountList) {
@@ -114,6 +107,32 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.amountTF.text = self.matchAmountList[indexPath.row];
+}
+
+- (void)submitMatchBill {
+    //提交订单
+    [self showLoading];
+    __weak typeof(self) weakSelf = self;
+    [CNMatchPayRequest createDepisit:self.amountTF.text finish:^(id  _Nullable response, NSError * _Nullable error) {
+        [weakSelf hideLoading];
+        if ([response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)response;
+            if ([[dic objectForKey:@"mmFlag"] boolValue]) {
+                NSError *err;
+                CNMBankModel *bank = [[CNMBankModel alloc] initWithDictionary:[dic objectForKey:@"mmPaymentRsp"] error:&err];
+                if (!err) {
+                    // 成功跳转
+                    CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
+                    statusVC.cancelTime = [weakSelf.paymentModel.remainCancelDepositTimes integerValue];
+                    statusVC.transactionId = bank.transactionId;
+                    [weakSelf pushViewController:statusVC];
+                    return;
+                }
+            }
+        }
+        // 失败走普通存款
+        [weakSelf submitBQBill];
+    }];
 }
 
 
@@ -196,30 +215,43 @@
         [self showError:@"请输入充值金额"];
         return;
     }
-    /// 超出额度范围
-    NSNumber *amount = [NSString convertNumber:text];
-    double maxAmount = self.paymentModel.maxAmount > self.paymentModel.minAmount ? self.paymentModel.maxAmount : CGFLOAT_MAX;
-    if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minAmount) {
-        _amountTF.text = nil;
-        [self showError:[NSString stringWithFormat:@"存款金额必须是%ld~%.f之间，最大允许2位小数", (long)self.paymentModel.minAmount, maxAmount]];
-        return;
+    
+    BOOL isMatch = [self.matchAmountList containsObject:text];
+    if (!isMatch) {
+        /// 超出额度范围
+        NSNumber *amount = [NSString convertNumber:text];
+        double maxAmount = self.paymentModel.maxAmount > self.paymentModel.minAmount ? self.paymentModel.maxAmount : CGFLOAT_MAX;
+        if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minAmount) {
+            _amountTF.text = nil;
+            [self showError:[NSString stringWithFormat:@"存款金额必须是%ld~%.f之间，最大允许2位小数", (long)self.paymentModel.minAmount, maxAmount]];
+            return;
+        }
     }
     
     if (self.nameTF.text.length == 0) {
         [self showError:@"请输入存款人姓名"];
         return;
     }
-    self.writeModel.depositBy = self.nameTF.text;
-    self.writeModel.amount = self.amountTF.text;
-    [self sumbitBill:sender amount:self.amountTF.text depositor:self.nameTF.text depositorType:@"" payType:[NSString stringWithFormat:@"%ld",(long)self.paymentModel.payType]];
-}
-
-- (void)sumbitBill:(UIButton *)sender amount:(NSString *)amount depositor:(NSString *)depositor depositorType:(NSString *)depositorType payType:(NSString *)payType{
+    
+    
     if (sender.selected) {
         return;
     }
     sender.selected = YES;
-    
+    if (isMatch) {
+        [self submitMatchBill];
+    } else {
+        [self submitBQBill];
+    }
+}
+
+- (void)submitBQBill {
+    self.writeModel.depositBy = self.nameTF.text;
+    self.writeModel.amount = self.amountTF.text;
+    [self sumbitBill:self.submitBtn amount:self.amountTF.text depositor:self.nameTF.text depositorType:@"" payType:[NSString stringWithFormat:@"%ld",(long)self.paymentModel.payType]];
+}
+
+- (void)sumbitBill:(UIButton *)sender amount:(NSString *)amount depositor:(NSString *)depositor depositorType:(NSString *)depositorType payType:(NSString *)payType{
     __weak typeof(self) weakSelf = self;
     __weak typeof(sender) weakSender = sender;
     NSDictionary *params = @{
@@ -233,6 +265,7 @@
     [IVNetwork requestPostWithUrl:BTTBQPayment paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         [self hideLoading];
+        weakSender.selected = NO;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             CNPayBankCardModel *model = [[CNPayBankCardModel alloc] initWithDictionary:result.body error:nil];
             if (!model) {
@@ -243,9 +276,6 @@
             weakSelf.writeModel.chooseBank = model;
             [weakSelf goToStep:1];
         }else{
-            if (sender.selected) {
-                sender.selected = !sender.selected;
-            }
             if ([result.head.errCode isEqualToString:@"GW_800705"]) {
                 BTTPaymentWarningPopView *pop = [BTTPaymentWarningPopView viewFromXib];
                 pop.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
