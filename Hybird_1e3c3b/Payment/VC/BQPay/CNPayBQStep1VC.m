@@ -37,7 +37,6 @@
 #pragma mark - 撮合相关属性
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewH;
-@property (nonatomic, strong) NSArray *matchAmountList;
 /// 选中金额
 @property (nonatomic, copy) NSString *selectAmount;
 @end
@@ -51,47 +50,56 @@
     [self configDifferentUI];
     [self queryAmountList];
     // 初始化数据
-    [self setViewHeight:450 fullScreen:NO];
     [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(100);
     }];
     if (self.paymentModel.payType == 100) {
+        [self setViewHeight:300 fullScreen:NO];
         [self configBishangUI];
-        [self setViewHeight:400 fullScreen:NO];
+    } else {
+        [self setupMatchUI];
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self setViewHeight:450 fullScreen:NO];
-    
 }
 
 #pragma mark - 撮合相关
 
 - (void)setupMatchUI {
-    [self.collectionView registerNib:[UINib nibWithNibName:kCNMAmountSelectCCell bundle:nil] forCellWithReuseIdentifier:kCNMAmountSelectCCell];
-    self.collectionViewH.constant = 80 * ceilf(self.matchAmountList.count/3.0);
+    NSMutableArray *arr = [NSMutableArray array];
+    for (int i = 1; i < 10; i++) {
+        CNWAmountListModel *model = [CNWAmountListModel new];
+        model.amount = [NSString stringWithFormat:@"%d", i * 1000];
+        [arr addObject:model];
+    }
+    if (!self.matchModel) {
+        self.matchModel = [CNPaymentModel new];
+    }
+    self.matchModel.amountList = arr.copy;
+    
+    if (self.matchModel.amountList.count > 0) {
+        [self.collectionView registerNib:[UINib nibWithNibName:kCNMAmountSelectCCell bundle:nil] forCellWithReuseIdentifier:kCNMAmountSelectCCell];
+        self.collectionViewH.constant = 80 * ceilf(self.matchModel.amountList.count/3.0)+30;
+    }
+    [self setViewHeight:(self.collectionViewH.constant + 300) fullScreen:NO];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.matchAmountList.count;
+    return self.matchModel.amountList.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CNMAmountSelectCCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCNMAmountSelectCCell forIndexPath:indexPath];
-    CNWAmountListModel *model = self.matchAmountList[indexPath.row];
+    CNWAmountListModel *model = self.matchModel.amountList[indexPath.row];
     cell.amountLb.text = model.amount;
     cell.recommendTag.hidden = YES;
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake((collectionView.bounds.size.width-20)/3.0, 70);
+    return CGSizeMake((collectionView.bounds.size.width-40)/3.0, 70);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    CNWAmountListModel *model = self.matchAmountList[indexPath.row];
+    CNWAmountListModel *model = self.matchModel.amountList[indexPath.row];
     self.selectAmount = model.amount;
 }
 
