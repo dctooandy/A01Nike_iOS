@@ -83,6 +83,7 @@
     self.contentWidth.constant = [UIScreen mainScreen].bounds.size.width-30;
     [self registerNotification];
     [self setupChannelView];
+    [self showTradeBill];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -96,7 +97,6 @@
         [CNTimeLog endRecordTime:CNEventPayLaunch];
         _isFirstLoad = YES;
     }
-    [self showTradeBill];
 }
 
 - (void)showTradeBill {

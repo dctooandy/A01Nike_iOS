@@ -580,6 +580,7 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
         return;
     } */
     // 上报数据
+    [self showLoading];
     [CNMatchPayRequest commitDepisit:self.transactionId receiptImg:self.pictureName1.firstObject transactionImg:self.pictureName2 finish:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         if ([response isKindOfClass:[NSDictionary class]]) {
