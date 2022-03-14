@@ -277,7 +277,7 @@
             break;
         case KYMWithdrewStepFive:
             statusViewHeight = 138;
-            amountViewHeight = 123;
+            amountViewHeight = 163;
             bankViewHeight = 263;
             submitHeight = 48;
             submitTop = 35;
@@ -388,7 +388,7 @@
         }
         
         self.detailModel = model;
-    
+
         if (!self.isStartedTimeout && model.data.confirmTimeFmt && model.data.confirmTimeFmt.length > 0) {
             NSUInteger m = 0;
             NSUInteger s = 0;
@@ -406,6 +406,8 @@
         if (model.matchStatus != KYMWithdrewDetailStatusFaild) {
             [self statusTimer];
         }
+        
+//        self.step = KYMWithdrewStepSix;
     }];
 }
 - (void)timeoutCountDown
