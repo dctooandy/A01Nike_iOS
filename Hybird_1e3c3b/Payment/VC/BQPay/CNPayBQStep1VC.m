@@ -41,7 +41,10 @@
 #pragma mark - 撮合相关属性
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewH;
+@property (weak, nonatomic) IBOutlet UILabel *matchTipLb;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *matchTipLbH;
 @property (nonatomic, strong) NSArray *matchAmountList;
+@property (nonatomic, strong) NSArray *dataAList;
 @end
 
 @implementation CNPayBQStep1VC
@@ -67,23 +70,35 @@
 #pragma mark - 撮合相关
 
 - (void)setupMatchUI {
-    if (self.matchModel.amountList.count > 0) {
+//    if (self.matchModel.amountList.count > 0) {
         NSMutableArray *array = [NSMutableArray array];
         for (CNWAmountListModel *model in self.matchModel.amountList) {
             [array addObject:model.amount];
         }
-        self.matchAmountList = array.copy;
+        array = [@[@"100000", @"90000", @"8000", @"5000", @"7000", @"6000", @"5500", @"100", @"1000", @"1500", @"3500", @"2500"] mutableCopy];
+    
+        self.matchAmountList = [array sortedArrayUsingComparator:^NSComparisonResult(NSString *  _Nonnull obj1, NSString *  _Nonnull obj2) {
+            if (obj1.intValue < obj2.intValue) {
+                return NSOrderedDescending;
+            }
+            return NSOrderedAscending;
+        }];
+        self.dataAList = [self getRecommendAmountFromAmount:nil];
         
         [self.collectionView registerNib:[UINib nibWithNibName:kCNMAmountSelectCCell bundle:nil] forCellWithReuseIdentifier:kCNMAmountSelectCCell];
-        self.collectionViewH.constant = 80 * ceilf(self.matchAmountList.count/3.0)+30;
+        self.collectionViewH.constant = 42 * MIN(ceilf(self.matchAmountList.count/3.0), 3) +30;
+        self.matchTipLb.hidden = NO;
+        self.matchTipLbH.constant = 20;
         [self.amountTF addTarget:self action:@selector(textFieldValueChange:) forControlEvents:UIControlEventEditingChanged];
-    }
+//    }
     [self setViewHeight:(self.collectionViewH.constant + 300) fullScreen:NO];
 }
 
 - (void)textFieldValueChange:(UITextField *)tf {
-    if ([self.matchAmountList containsObject:tf.text]) {
-        NSInteger index = [self.matchAmountList indexOfObject:tf.text];
+    self.dataAList = [self getRecommendAmountFromAmount:tf.text];
+    [self.collectionView reloadData];
+    if ([self.dataAList containsObject:tf.text]) {
+        NSInteger index = [self.dataAList indexOfObject:tf.text];
         [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     } else {
         [self.collectionView deselectItemAtIndexPath:[self.collectionView indexPathsForSelectedItems].lastObject animated:YES];
@@ -91,22 +106,22 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.matchAmountList.count;
+    return self.dataAList.count;
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CNMAmountSelectCCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCNMAmountSelectCCell forIndexPath:indexPath];
-    cell.amountLb.text = self.matchAmountList[indexPath.row];
+    cell.amountLb.text = self.dataAList[indexPath.row];
     cell.recommendTag.hidden = YES;
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake((collectionView.bounds.size.width-40)/3.0, 70);
+    return CGSizeMake((collectionView.bounds.size.width-50)/3.0, 32);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.amountTF.text = self.matchAmountList[indexPath.row];
+    self.amountTF.text = self.dataAList[indexPath.row];
 }
 
 - (void)submitMatchBill {
@@ -135,6 +150,40 @@
     }];
 }
 
+
+/// 计算合理推荐金额
+- (NSArray *)getRecommendAmountFromAmount:(NSString *)amount {
+    
+    NSArray *sourceArray = self.matchAmountList;
+    
+    if (sourceArray.count < 9) {
+        return sourceArray;
+    }
+    
+    if (amount == nil || amount.length == 0) {
+        return [sourceArray subarrayWithRange:NSMakeRange(sourceArray.count - 9, 9)];
+    }
+    
+    NSMutableArray *sortArr = [sourceArray mutableCopy];
+    [sortArr addObject:amount];
+    
+    sortArr = [[sortArr sortedArrayUsingComparator:^NSComparisonResult(NSString *  _Nonnull obj1, NSString *  _Nonnull obj2) {
+        if (obj1.intValue < obj2.intValue) {
+            return NSOrderedDescending;
+        }
+        return NSOrderedAscending;
+    }] mutableCopy];
+    
+    NSInteger index = [sortArr indexOfObject:amount];
+
+    if (index < 5) {
+        return [sourceArray subarrayWithRange:NSMakeRange(0, 9)];
+    } else if  (index > (sourceArray.count - 5)) {
+        return [sourceArray subarrayWithRange:NSMakeRange(sourceArray.count - 9, 9)];
+    } else {
+        return [sourceArray subarrayWithRange:NSMakeRange(index - 4, 9)];
+    }
+}
 
 #pragma mark - BQ相关
 
@@ -216,7 +265,7 @@
         return;
     }
     
-    BOOL isMatch = [self.matchAmountList containsObject:text];
+    BOOL isMatch = [self.dataAList containsObject:text];
     if (!isMatch) {
         /// 超出额度范围
         NSNumber *amount = [NSString convertNumber:text];
