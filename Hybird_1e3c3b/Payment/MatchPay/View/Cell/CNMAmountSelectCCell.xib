@@ -70,6 +70,7 @@
             <size key="customSize" width="253" height="160"/>
             <connections>
                 <outlet property="amountLb" destination="FGC-at-Dix" id="t5u-Fx-1nF"/>
+                <outlet property="bgView" destination="CZo-qh-rov" id="bbh-S3-H4x"/>
                 <outlet property="checkIV" destination="puw-Ej-bkk" id="UhN-r9-QJO"/>
                 <outlet property="recommendTag" destination="Ayf-JY-TuB" id="k6q-qP-cuO"/>
             </connections>

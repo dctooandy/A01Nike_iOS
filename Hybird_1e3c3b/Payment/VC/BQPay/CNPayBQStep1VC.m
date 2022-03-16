@@ -43,6 +43,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewH;
 @property (weak, nonatomic) IBOutlet UILabel *matchTipLb;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *matchTipLbH;
+
+@property (weak, nonatomic) IBOutlet UIView *billView;
+@property (weak, nonatomic) IBOutlet UILabel *billIdLb;
+@property (weak, nonatomic) IBOutlet UIButton *statusBtn;
+@property (weak, nonatomic) IBOutlet UILabel *billAmountLb;
 @property (nonatomic, strong) NSArray *matchAmountList;
 @property (nonatomic, strong) NSArray *dataAList;
 @end
@@ -91,7 +96,54 @@
         self.matchTipLbH.constant = 20;
         [self.amountTF addTarget:self action:@selector(textFieldValueChange:) forControlEvents:UIControlEventEditingChanged];
 //    }
-    [self setViewHeight:(self.collectionViewH.constant + 300) fullScreen:NO];
+    CGFloat height = 300 + self.collectionViewH.constant;
+    if (self.matchModel.mmProcessingOrderType == 1 && self.matchModel.mmProcessingOrderTransactionId.length > 0) {
+        height += 100;
+        [self hideBillUI:NO];
+    }
+    [self setViewHeight:height fullScreen:NO];
+}
+
+- (void)hideBillUI:(BOOL)hidden {
+    self.billView.hidden = hidden;
+    self.billAmountLb.text = self.matchModel.mmProcessingOrderAmount;
+    self.billIdLb.text = self.matchModel.mmProcessingOrderTransactionId;
+    self.statusBtn.layer.borderColor = self.statusBtn.titleLabel.textColor.CGColor;
+    self.statusBtn.layer.borderWidth = 1;
+    self.statusBtn.layer.cornerRadius = 4;
+    
+    switch (self.matchModel.mmProcessingOrderStatus) {
+        case CNMPayBillStatusSubmit: {
+            [self.statusBtn setTitle:@"上传凭证" forState:UIControlStateNormal];
+            [self.statusBtn addTarget:self action:@selector(showUploadUI) forControlEvents:UIControlEventTouchUpInside];
+        }
+            break;
+        case CNMPayBillStatusPaying: {
+            [self.statusBtn setTitle:@"确认存款" forState:UIControlStateNormal];
+            [self.statusBtn addTarget:self action:@selector(confirmBill) forControlEvents:UIControlEventTouchUpInside];
+        }
+            break;
+        case CNMPayBillStatusSuccess: {
+            [self.statusBtn setTitle:@"我要催单" forState:UIControlStateNormal];
+            [self.statusBtn addTarget:self action:@selector(customerServer) forControlEvents:UIControlEventTouchUpInside];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)showUploadUI {
+    
+}
+
+- (void)confirmBill {
+    
+}
+
+- (void)customerServer {
+    
 }
 
 - (void)textFieldValueChange:(UITextField *)tf {
