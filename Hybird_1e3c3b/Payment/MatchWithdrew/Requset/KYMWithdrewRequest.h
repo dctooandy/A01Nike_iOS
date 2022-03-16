@@ -30,6 +30,8 @@ extern void kym_sendRequest(NSString * url, id params, KYMCallback callback);
 + (void)checkReceiveStatus:(NSDictionary *)params callback:(KYMCallback)callback;
 //取消撮合存款
 + (void)cancelWithdrawWithParams:(NSDictionary *)params callback:(KYMCallback)callback;
+//是否到账
++ (void)checkReceiveStats:(BOOL)isNotRceived transactionId:(NSString *)transactionId   callBack:(void(^)(BOOL status, NSString *msg))callBack;
 @end
 
 NS_ASSUME_NONNULL_END
