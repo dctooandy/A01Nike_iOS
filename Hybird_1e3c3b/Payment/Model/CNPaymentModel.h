@@ -9,7 +9,6 @@
 #import "JSONModel.h"
 #import "CNPayBankCardModel.h"
 #import "CNPayCardModel.h"
-#import "CNMBankModel.h"
 #import <YYModel.h>
 
 /// 支付方式
@@ -87,7 +86,8 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 @property (nonatomic, copy) NSString *remainCancelDepositTimes;
 /// 存在撮合，1 存款，2 取款
 @property (nonatomic, assign) NSInteger mmProcessingOrderType;
-@property (nonatomic, assign) CNMPayBillStatus mmProcessingOrderStatus;
+@property (nonatomic, assign) NSInteger mmProcessingOrderStatus;
+@property (nonatomic, assign) NSInteger status;
 /// 存在撮合单ID
 @property (nonatomic, copy) NSString *mmProcessingOrderTransactionId;
 @property (nonatomic, copy) NSString *mmProcessingOrderAmount;
