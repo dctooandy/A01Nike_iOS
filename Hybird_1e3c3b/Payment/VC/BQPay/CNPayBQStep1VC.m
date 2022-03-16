@@ -16,7 +16,7 @@
 #define kCNMAmountSelectCCell  @"CNMAmountSelectCCell"
 #import "CNMatchPayRequest.h"
 #import "CNMBankModel.h"
-#import "CNMFastPayStatusVC.h"
+#import "CNMatchDepositStatusVC.h"
 
 @interface CNPayBQStep1VC () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet CNPayAmountTF *amountTF;
@@ -138,7 +138,7 @@
 }
 
 - (void)customerServer {
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoKefu" object:nil];
 }
 
 - (void)textFieldValueChange:(UITextField *)tf {
@@ -184,8 +184,7 @@
                 CNMBankModel *bank = [[CNMBankModel alloc] initWithDictionary:[dic objectForKey:@"mmPaymentRsp"] error:&err];
                 if (!err) {
                     // 成功跳转
-                    CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
-                    statusVC.cancelTime = [weakSelf.paymentModel.remainCancelDepositTimes integerValue];
+                    CNMatchDepositStatusVC *statusVC = [[CNMatchDepositStatusVC alloc] init];
                     statusVC.transactionId = bank.transactionId;
                     [weakSelf pushViewController:statusVC];
                     return;

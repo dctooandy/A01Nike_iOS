@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04516F7127E1BEBB0049269A /* CNMatchDepositStatusVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04516F6E27E1BEBA0049269A /* CNMatchDepositStatusVC.xib */; };
+		04516F7227E1BEBB0049269A /* CNMatchDepositStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04516F7027E1BEBB0049269A /* CNMatchDepositStatusVC.m */; };
 		04C48B2527BB6BE900623F5A /* CNMChannelTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C48B2327BB6BE900623F5A /* CNMChannelTCell.m */; };
 		04C48B2627BB6BE900623F5A /* CNMChannelTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C48B2427BB6BE900623F5A /* CNMChannelTCell.xib */; };
 		04C48B2827BB6C4200623F5A /* MatchPay.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04C48B2727BB6C4200623F5A /* MatchPay.xcassets */; };
@@ -892,6 +894,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04516F6E27E1BEBA0049269A /* CNMatchDepositStatusVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNMatchDepositStatusVC.xib; sourceTree = "<group>"; };
+		04516F6F27E1BEBA0049269A /* CNMatchDepositStatusVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNMatchDepositStatusVC.h; sourceTree = "<group>"; };
+		04516F7027E1BEBB0049269A /* CNMatchDepositStatusVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNMatchDepositStatusVC.m; sourceTree = "<group>"; };
 		04C48B2227BB6BE900623F5A /* CNMChannelTCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNMChannelTCell.h; sourceTree = "<group>"; };
 		04C48B2327BB6BE900623F5A /* CNMChannelTCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNMChannelTCell.m; sourceTree = "<group>"; };
 		04C48B2427BB6BE900623F5A /* CNMChannelTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNMChannelTCell.xib; sourceTree = "<group>"; };
@@ -2438,6 +2443,9 @@
 				04C48B5A27C73D5400623F5A /* CNMUSDTChannelVC.h */,
 				04C48B5927C73D5400623F5A /* CNMUSDTChannelVC.m */,
 				04C48B5827C73D5400623F5A /* CNMUSDTChannelVC.xib */,
+				04516F6F27E1BEBA0049269A /* CNMatchDepositStatusVC.h */,
+				04516F7027E1BEBB0049269A /* CNMatchDepositStatusVC.m */,
+				04516F6E27E1BEBA0049269A /* CNMatchDepositStatusVC.xib */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -5417,6 +5425,7 @@
 				414AAA222601F76F00518D32 /* BTTDcboxPayController.xib in Resources */,
 				D5DBEB2F21ABB774008AF629 /* CNCompleteInfoView.xib in Resources */,
 				4135A7152639420700D3BF17 /* BTTMeHeaderLoginCell.xib in Resources */,
+				04516F7127E1BEBB0049269A /* CNMatchDepositStatusVC.xib in Resources */,
 				3AF1B81021AE680A00BF8C3A /* BTTVideoGamesSearchCell.xib in Resources */,
 				3A5AE4A322CDE5680013E8A3 /* BTTBishangStep1VC.xib in Resources */,
 				76F863DF26E0B65500320B60 /* VIPRightRightsCell.xib in Resources */,
@@ -5818,6 +5827,7 @@
 				D5475B1827BCA474007238D2 /* KYMSelectChannelVC.m in Sources */,
 				3A8D6E8021621268000530DF /* BTTBaseModel.m in Sources */,
 				76F8642826E87D5900320B60 /* BTTVIPHistoryImageCell.m in Sources */,
+				04516F7227E1BEBB0049269A /* CNMatchDepositStatusVC.m in Sources */,
 				3AAE81FA219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m in Sources */,
 				D5C501D221B7CEDC00C6DA02 /* BRBaseView.m in Sources */,
 				7651992F278C1E3F006A59BF /* QBulletScreenView.m in Sources */,
