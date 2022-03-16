@@ -9,6 +9,7 @@
 #import "KYMWithdrewSuccessVC.h"
 #import "KYMWidthdrewUtility.h"
 #import "KYMWithdrawAlertVC.h"
+#import "KYMWithdrewRequest.h"
 
 @interface KYMWithdrewSuccessVC ()
 
@@ -31,14 +32,42 @@
     KYMWithdrawAlertVC *vc = [KYMWithdrawAlertVC new];
     __weak typeof(self)weakSelf = self;
     vc.confirmBtnHandler = ^{
-        
+        [weakSelf showLoading];
+        [KYMWithdrewRequest checkReceiveStats:NO transactionId:weakSelf.transactionId callBack:^(BOOL status, NSString *msg) {
+            [weakSelf hideLoading];
+            if (status) {
+                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            } else {
+                [MBProgressHUD showError:msg toView:nil];
+            }
+        }];
     };
     vc.noConfirmBtnHandler = ^{
-        [weakSelf customerBtnClicked:nil];
+        [weakSelf noConfirmGetMathWithdraw];
     };
     [self presentViewController:vc animated:YES completion:nil];
 }
+- (void)noConfirmGetMathWithdraw
+{
+    [self showLoading];
+    [KYMWithdrewRequest checkReceiveStats:YES transactionId:self.transactionId callBack:^(BOOL status, NSString *msg) {
+        [self hideLoading];
+        if (status) {
+            [self customerBtnClicked:nil];
+        } else {
+            [MBProgressHUD showError:msg toView:nil];
+        }
+    }];
+}
+
 - (IBAction)customerBtnClicked:(id)sender {
+    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+        if (errCode != CSServiceCode_Request_Suc) {
+            [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+        } else {
+
+        }
+    }];
 }
 
 - (void)goToBack {

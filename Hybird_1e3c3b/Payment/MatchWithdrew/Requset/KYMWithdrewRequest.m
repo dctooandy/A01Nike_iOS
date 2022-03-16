@@ -77,4 +77,21 @@
         }
     });
 }
++ (void)checkReceiveStats:(BOOL)isNotRceived transactionId:(NSString *)transactionId   callBack:(void(^)(BOOL status, NSString *msg))callBack
+{
+    NSMutableDictionary *params = @{}.mutableCopy;
+    params[@"merchant"] = @"A01";
+    //            mparams[@"loginName"] = @""; //用户名，底层已拼接
+    //            mparams[@"productId"] = @""; //脱敏产品编号，底层已拼接
+    params[@"opType"] = isNotRceived ? @"2" : @"1"; //是否为未到账
+    params[@"transactionId"] = transactionId;
+    
+    [self checkReceiveStatus:params callback:^(BOOL status, NSString * _Nonnull msg, id  _Nonnull body) {
+        if (!status) {
+            callBack(NO,msg);
+        } else {
+            callBack(YES,msg);
+        }
+    }];
+}
 @end

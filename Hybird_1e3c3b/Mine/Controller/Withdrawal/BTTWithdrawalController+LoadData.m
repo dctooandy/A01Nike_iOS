@@ -120,7 +120,18 @@
         }
     }];
 }
-
+- (CGFloat)getMatchAmountListHeight
+{
+    NSUInteger lineCount = 0;
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"] && self.checkModel.data.currentAmountList.count > 0) {
+        lineCount = ceilf(self.checkModel.data.currentAmountList.count / 3.0) ;
+    }
+    CGFloat matchWithdrewAmountH = 0;
+    if (lineCount > 0 && !self.isForceNormalWithdraw) {
+        matchWithdrewAmountH = 32 * lineCount + 16 + 29 + 8 * (lineCount - 1);
+    }
+    return matchWithdrewAmountH;
+}
 - (void)loadMainData {
     [self requestUSDTRate];
     if ([IVNetwork savedUserInfo].btcNum>0) {
@@ -135,7 +146,7 @@
     NSString *rateStr = [NSString stringWithFormat:@"¥%.2lf=1BTC(实时汇率)",[btcrate doubleValue]];
     
     NSArray *names1 = @[@"头",@"固定金额",@"分割"];
-    NSArray *names3 = @[@"金额",@"比特币",@"取款至",@"资金密码",@"联系客服",@"提交"];
+    NSArray *names3 = @[@"金额",@"比特币",@"取款至",@"资金密码",@"联系客服",@"提交",@"历史"];
     NSArray *names4 = @[@"金额",@"预估到账",@"取款至",@"协议",@"资金密码",@"usdt确认",@"提交",@"联系客服"];
     
     NSString *pString = isUsdt ? [NSString stringWithFormat:@"单笔取款限额%@-143万USDT", self.usdtLimit] : [NSString stringWithFormat:@"最少%@元", self.cnyLimit];
@@ -153,28 +164,28 @@
     BOOL withdrawPwdCanEdits = [IVNetwork savedUserInfo].withdralPwdFlag == 0 ? false:true;
     
     NSArray *placeholders1 = @[@"",@"",@""];
-    NSArray *placeholders3 = @[pString,rateStr,@"***银行-尾号*****",withdrawPwdP,@"",@""];
+    NSArray *placeholders3 = @[pString,rateStr,@"***银行-尾号*****",withdrawPwdP,@"",@"",@""];
     NSArray *placeholders4 = @[pString,@"USDT",@"***银行-尾号*****",@"",withdrawPwdP,@"",@"",@""];
     
-    NSUInteger lineCount = 0;
-    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"] && self.checkModel.data.amountList.count > 0) {
-        lineCount = ceilf(self.checkModel.data.amountList.count / 3.0) ;
+    CGFloat matchHistoryHeight = 0.0;
+    if (self.checkModel.data.mmProcessingOrderType == 2) {
+        self.isForceNormalWithdraw = YES;
+        matchHistoryHeight = 54.0;
     }
-    CGFloat matchWithdrewAmountH = 0;
-    CGFloat spaceHeight = 15.0;
-    if (lineCount > 0 && !self.isForceNormalWithdraw) {
-        matchWithdrewAmountH = 32 * lineCount + 16 + 75 + 8 * (lineCount - 1);
-    }
+    
+    CGFloat matchWithdrewAmountH = [self getMatchAmountListHeight];
+    CGFloat spaceHeight = 0.0;
+    
     NSArray *heights1 = @[@205.0,@(matchWithdrewAmountH),@(spaceHeight)];
-    NSArray *heights3 = @[@44,@44.0,@44.0,@44.0,@(60.0),@100.0];
+    NSArray *heights3 = @[@44,@44.0,@44.0,@44.0,@(60.0),@100.0,@(matchHistoryHeight)];
     NSArray *heights4 = @[@44,@44.0,@44,@44,@44.0,@46.0,@240.0,@(60.0)];
     
     NSArray *canEdits1 = @[@NO,@NO,@NO];
-    NSArray *canEdits3 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO];
+    NSArray *canEdits3 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO];
     NSArray *canEdits4 = @[@YES,@NO,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO];
     
     NSArray *values1 = @[@"",@"",@""];
-    NSArray *values3 = @[@"",@"",@"",@"",@"",@""];
+    NSArray *values3 = @[@"",@"",@"",@"",@"",@"",@""];
     NSArray *values4 = @[@"",@"",@"",@"",@"",@"",@"",@""];
     
     NSMutableArray *names = @[].mutableCopy;
