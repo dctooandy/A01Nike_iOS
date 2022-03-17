@@ -87,7 +87,8 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 /// 存在撮合，1 存款，2 取款
 @property (nonatomic, assign) NSInteger mmProcessingOrderType;
 @property (nonatomic, assign) NSInteger mmProcessingOrderStatus;
-@property (nonatomic, assign) NSInteger status;
+@property (nonatomic, assign) NSInteger mmProcessingOrderPairStatus;
+@property (nonatomic, assign) BOOL mmProcessingOrderUploadFlag;
 /// 存在撮合单ID
 @property (nonatomic, copy) NSString *mmProcessingOrderTransactionId;
 @property (nonatomic, copy) NSString *mmProcessingOrderAmount;

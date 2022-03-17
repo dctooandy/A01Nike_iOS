@@ -65,7 +65,7 @@
         make.height.mas_equalTo(100);
     }];
     if (self.paymentModel.payType == 100) {
-        [self setViewHeight:300 fullScreen:NO];
+        [self setViewHeight:400 fullScreen:NO];
         [self configBishangUI];
     } else {
         [self setupMatchUI];
@@ -75,7 +75,11 @@
 #pragma mark - 撮合相关
 
 - (void)setupMatchUI {
-    if (self.matchModel.amountList.count > 0) {
+    CGFloat height = 400;
+    if (self.matchModel.mmProcessingOrderType == 1 && self.matchModel.mmProcessingOrderTransactionId.length > 0) {
+        height += 100;
+        [self hideBillUI:NO];
+    } else if (self.matchModel.mmProcessingOrderTransactionId.length == 0 && self.matchModel.amountList.count > 0) {
         NSMutableArray *array = [NSMutableArray array];
         for (CNWAmountListModel *model in self.matchModel.amountList) {
             [array addObject:model.amount];
@@ -83,7 +87,7 @@
 //    array = [@[@"100000", @"90000", @"8000", @"5000", @"7000", @"6000", @"5500", @"100", @"1000", @"1500", @"3500", @"2500"] mutableCopy];
 //    self.matchModel.mmProcessingOrderType = 1;
 //    self.matchModel.status = 2;
-//    self.matchModel.mmProcessingOrderStatus = 6;
+//    self.matchModel.mmProcessingOrderStatus = 3;
 //    self.matchModel.mmProcessingOrderAmount = @"6000";
 //    self.matchModel.mmProcessingOrderTransactionId = @"324";
         self.matchAmountList = [array sortedArrayUsingComparator:^NSComparisonResult(NSString *  _Nonnull obj1, NSString *  _Nonnull obj2) {
@@ -99,34 +103,35 @@
         self.matchTipLb.hidden = NO;
         self.matchTipLbH.constant = 20;
         [self.amountTF addTarget:self action:@selector(textFieldValueChange:) forControlEvents:UIControlEventEditingChanged];
-    }
-    CGFloat height = 300 + self.collectionViewH.constant;
-    if (self.matchModel.mmProcessingOrderType == 1 && self.matchModel.mmProcessingOrderTransactionId.length > 0) {
-        height += 100;
-        [self hideBillUI:NO];
+        height += self.collectionViewH.constant;
     }
     [self setViewHeight:height fullScreen:NO];
 }
 
 - (void)hideBillUI:(BOOL)hidden {
+    if (self.matchModel.mmProcessingOrderPairStatus == 6 && self.matchModel.mmProcessingOrderStatus == 5) {
+        [self.statusBtn setTitle:@"我要催单" forState:UIControlStateNormal];
+        [self.statusBtn addTarget:self action:@selector(customerServer) forControlEvents:UIControlEventTouchUpInside];
+    }
+//    else if (!self.matchModel.mmProcessingOrderUploadFlag) {
+//        [self.statusBtn setTitle:@"上传凭证" forState:UIControlStateNormal];
+//        [self.statusBtn addTarget:self action:@selector(showUploadUI) forControlEvents:UIControlEventTouchUpInside];
+//    }
+    else if (self.matchModel.mmProcessingOrderStatus == 2) {
+        [self.statusBtn setTitle:@"确认存款" forState:UIControlStateNormal];
+        [self.statusBtn addTarget:self action:@selector(confirmBill) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        self.billView.hidden = YES;
+        return;
+    }
+    
     self.billView.hidden = hidden;
     self.billView.backgroundColor = kHexColor(0x23262F);
-    self.billAmountLb.text = self.matchModel.mmProcessingOrderAmount;
+    self.billAmountLb.text = [NSString stringWithFormat:@"%.2f", self.matchModel.mmProcessingOrderAmount.doubleValue];
     self.billIdLb.text = self.matchModel.mmProcessingOrderTransactionId;
     self.statusBtn.layer.borderColor = self.statusBtn.titleLabel.textColor.CGColor;
     self.statusBtn.layer.borderWidth = 1;
     self.statusBtn.layer.cornerRadius = 4;
-    
-    if (self.matchModel.mmProcessingOrderStatus == 6 && self.matchModel.status) {
-        [self.statusBtn setTitle:@"我要催单" forState:UIControlStateNormal];
-        [self.statusBtn addTarget:self action:@selector(customerServer) forControlEvents:UIControlEventTouchUpInside];
-    } else if (self.matchModel.status == 2) {
-        [self.statusBtn setTitle:@"确认存款" forState:UIControlStateNormal];
-        [self.statusBtn addTarget:self action:@selector(confirmBill) forControlEvents:UIControlEventTouchUpInside];
-    } else if (self.matchModel.status == 1) {
-        [self.statusBtn setTitle:@"上传凭证" forState:UIControlStateNormal];
-        [self.statusBtn addTarget:self action:@selector(showUploadUI) forControlEvents:UIControlEventTouchUpInside];
-    }
 }
 
 - (void)showUploadUI {
@@ -134,7 +139,9 @@
 }
 
 - (void)confirmBill {
-    
+    CNMatchDepositStatusVC *statusVC = [[CNMatchDepositStatusVC alloc] init];
+    statusVC.transactionId = self.matchModel.mmProcessingOrderTransactionId;
+    [self pushViewController:statusVC];
 }
 
 - (void)customerServer {

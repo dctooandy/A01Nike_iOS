@@ -130,6 +130,8 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
     self.accountName.text = bank.bankAccountName;
     self.accountNo.text = bank.bankAccountNo;
     self.subBankName.text = bank.bankBranchName;
+    self.amountTipLb.text = [NSString stringWithFormat:@"完成存款将获得%.2f元存款礼金，24小时到账", (bank.amount.doubleValue *0.01)];
+
     
     switch (bank.status) {
         case CNMPayBillStatusSubmit:
@@ -178,12 +180,16 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
     } */
     // 上报数据
     [self showLoading];
+    __weak typeof(self) weakSelf = self;
     [CNMatchPayRequest commitDepisit:self.transactionId receiptImg:self.pictureName1.firstObject transactionImg:self.pictureName2 finish:^(id  _Nullable response, NSError * _Nullable error) {
-        [self hideLoading];
+        [weakSelf hideLoading];
         if ([response isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary *)response;
             if ([[dic objectForKey:@"code"] isEqualToString:@"00000"]) {
-                [self goToBack];
+                [weakSelf showSuccess:@"提交成功"];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+                });
             } else {
                 [self showError:[dic objectForKey:@"message"]];
             }
