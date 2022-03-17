@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "KYMGetWithdrewDetailModel.h"
 #import "BTTBaseViewController.h"
-#import "KYMWithdrewFaildVC.h"
+#import "KYMWithdrewSuccessVC.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface KYMFastWithdrewVC : BTTBaseViewController

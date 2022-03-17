@@ -745,7 +745,9 @@
         [self hideLoading];
   
         //移除比余额小的金额
-        [model.data removeAmountBiggerThanTotal:self.totalAmount];
+        if (model && model.data) {
+            [model.data removeAmountBiggerThanTotal:self.totalAmount];
+        }
         
         BTTWithdrawalController *vc = [[BTTWithdrawalController alloc] init];
         vc.checkModel = model;

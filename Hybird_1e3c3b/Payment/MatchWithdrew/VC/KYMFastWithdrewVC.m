@@ -349,7 +349,7 @@
         //撮合失败,取款失败，取款未匹配，走常规取款
         [self stopTimeoutTimer];
         [self stopGetWithdrawDetail];
-        KYMWithdrewFaildVC *vc = [[KYMWithdrewFaildVC alloc] init];
+        KYMWithdrewSuccessVC *vc = [[KYMWithdrewSuccessVC alloc] init];
         vc.userName = self.detailModel.data.loginName;
         vc.amountStr = self.detailModel.data.amount;
         [self.navigationController pushViewController:vc animated:YES];

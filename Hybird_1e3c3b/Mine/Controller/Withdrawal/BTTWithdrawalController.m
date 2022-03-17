@@ -35,7 +35,9 @@
 #import "KYMFastWithdrewVC.h"
 #import "CNMFastPayStatusVC.h"
 #import "CNMAlertView.h"
-
+#import "KYMWithdrawHistoryCell.h"
+#import "KYMWithdrewSuccessVC.h"
+#import "KYMWithdrawAlertVC.h"
 @interface BTTWithdrawalController ()<BTTElementsFlowLayoutDelegate,KYMWithdrewAmountCellDelegate>
 @property(nonatomic, copy)NSString *amount;
 @property(nonatomic, copy)NSString *password;
@@ -63,7 +65,7 @@
     [self setUpNav];
     [self refreshBankList];
     [self requestSellUsdtSwitch];
-    [self checkIfHasExistingMacthOrder];
+//    [self checkIfHasExistingMacthOrder];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -106,6 +108,8 @@
     [self.collectionView registerClass:[BTTBitollWithDrawCell class] forCellWithReuseIdentifier:@"BTTBitollWithDrawCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"KYMWithdrewAmountCell" bundle:nil] forCellWithReuseIdentifier:@"KYMWithdrewAmountCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"KYMWithdrewHomeNotifyCell" bundle:nil] forCellWithReuseIdentifier:@"KYMWithdrewHomeNotifyCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"KYMWithdrawHistoryCell" bundle:nil] forCellWithReuseIdentifier:@"KYMWithdrawHistoryCell"];
+    
 }
 - (void)setSubmitBtnEnable:(BOOL)submitBtnEnable
 {
@@ -147,7 +151,7 @@
     //推荐金额
     if ([cellModel.name isEqualToString:@"固定金额"]) {
         KYMWithdrewAmountCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KYMWithdrewAmountCell" forIndexPath:indexPath];
-        cell.amountArray = self.checkModel.data.amountList;
+        cell.amountArray = self.checkModel.data.currentAmountList;
         cell.delegate = self;
         return cell;
     }
@@ -220,18 +224,24 @@
     if ([cellName isEqualToString:@"联系客服"]) {
         KYMWithdrewHomeNotifyCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KYMWithdrewHomeNotifyCell" forIndexPath:indexPath];
         cell.canUseCount = self.checkModel.data.remainWithdrawTimes;
+        __weak typeof(self)weakSelf = self;
         cell.forgotPwdBlock = ^{
-            [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
-                if (errCode != CSServiceCode_Request_Suc) {
-                    [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
-                } else {
-
-                }
-            }];
+            [weakSelf customerBtnClicked];
         };
         return cell;
     }
-    
+    if ([cellName isEqualToString:@"历史"]) {
+        KYMWithdrawHistoryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KYMWithdrawHistoryCell" forIndexPath:indexPath];
+        cell.historyView.amount = self.checkModel.data.mmProcessingOrderAmount;
+        cell.historyView.orderNo = self.checkModel.data.mmProcessingOrderTransactionId;
+        cell.historyView.confirmBtnHandler = ^{
+            [weakSelf confirmGetMathWithdraw];
+        };
+        cell.historyView.noConfirmBtnHandler = ^ {
+            [weakSelf noConfirmGetMathWithdraw];
+        };
+        return cell;
+    }
     BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
     cell.model = cellModel;
     cell.textField.userInteractionEnabled = cellModel.available;
@@ -369,7 +379,22 @@
             _usdtField.text = self.usdtAmount;
         }
         if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"]) {
+            self.checkModel.data.inputAmount = self.amount;
+            [self getAmountListCell].amountArray = self.checkModel.data.currentAmountList;
             [[self getAmountListCell] setCurrentAmount:self.amount];
+            for (BTTMeMainModel *cellModel in self.sheetDatas) {
+                if ([cellModel.name isEqualToString:@"固定金额"]) {
+                    NSInteger index = [self.sheetDatas indexOfObject:cellModel];
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+                    CGSize size = self.elementsHight[indexPath.item].CGSizeValue;
+                    CGFloat height = [self getMatchAmountListHeight];
+                    if (size.height != height) {
+                        size.height = [self getMatchAmountListHeight];
+                        self.elementsHight[indexPath.item] = @(size);
+                        [self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+                    }
+                }
+            }
         }
     }
     
@@ -674,8 +699,12 @@
             [MBProgressHUD showError:msg toView:nil];
             return;
         }
-        KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
-        vc.mmProcessingOrderTransactionId = model.referenceId;
+//        KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
+//        vc.mmProcessingOrderTransactionId = model.referenceId;
+        
+        KYMWithdrewSuccessVC *vc = [[KYMWithdrewSuccessVC alloc] init];
+        vc.amountStr = model.amount;
+        vc.transactionId = model.referenceId;
         [self.navigationController pushViewController:vc animated:YES];
     }];
 }
@@ -721,14 +750,9 @@
                 IVActionHandler confirm = ^(UIAlertAction *action){
                     
                 };
+                __weak typeof(self)weakSelf = self;
                 IVActionHandler kf = ^(UIAlertAction *action){
-                    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
-                        if (errCode != CSServiceCode_Request_Suc) {
-                            [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
-                        } else {
-
-                        }
-                    }];
+                    [weakSelf customerBtnClicked];
                 };
                 NSString *title = @"温馨提示";
                 NSString *message = @"资金密码错输入误，请重新输入或联系客服!";
@@ -769,4 +793,48 @@
         }
     }
 }
+- (void)customerBtnClicked
+{
+    [CSVisitChatmanager startWithSuperVC:self finish:^(CSServiceCode errCode) {
+        if (errCode != CSServiceCode_Request_Suc) {
+            [MBProgressHUD showErrorWithTime:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil duration:3];
+        } else {
+
+        }
+    }];
+}
+- (void)confirmGetMathWithdraw
+{
+    __weak typeof(self)weakSelf = self;
+    KYMWithdrawAlertVC *vc = [KYMWithdrawAlertVC new];
+    vc.confirmBtnHandler = ^{
+        [weakSelf showLoading];
+        [KYMWithdrewRequest checkReceiveStats:NO transactionId:weakSelf.checkModel.data.mmProcessingOrderTransactionId callBack:^(BOOL status, NSString *msg) {
+            [weakSelf hideLoading];
+            if (status) {
+                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            } else {
+                [MBProgressHUD showError:msg toView:nil];
+            }
+        }];
+        
+    };
+    vc.noConfirmBtnHandler = ^{
+        [weakSelf noConfirmGetMathWithdraw];
+    };
+    [self presentViewController:vc animated:YES completion:nil];
+}
+- (void)noConfirmGetMathWithdraw
+{
+    [self showLoading];
+    [KYMWithdrewRequest checkReceiveStats:YES transactionId:self.checkModel.data.mmProcessingOrderTransactionId callBack:^(BOOL status, NSString *msg) {
+        [self hideLoading];
+        if (status) {
+            [self customerBtnClicked];
+        } else {
+            [MBProgressHUD showError:msg toView:nil];
+        }
+    }];
+}
+
 @end

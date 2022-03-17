@@ -81,6 +81,7 @@
     if (self.selectedIndexPath) {
         [self.collectionView deselectItemAtIndexPath:self.selectedIndexPath animated:NO];
     }
+    [self.collectionView reloadData];
     
     for (int i = 0; i < self.amountArray.count; i++) {
         NSString *a = self.amountArray[i].amount;
