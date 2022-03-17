@@ -33,7 +33,6 @@
 #import "KYMWithdrewHomeNotifyCell.h"
 #import "KYMWithdrewRequest.h"
 #import "KYMFastWithdrewVC.h"
-#import "CNMFastPayStatusVC.h"
 #import "CNMAlertView.h"
 #import "KYMWithdrawHistoryCell.h"
 #import "KYMWithdrewSuccessVC.h"
@@ -775,10 +774,6 @@
                 weakSelf.isForceNormalWithdraw = YES;
                 [weakSelf loadMainData];
             } cancelTitle:@"查看订单" cancelAction:^{
-                CNMFastPayStatusVC *statusVC = [[CNMFastPayStatusVC alloc] init];
-                statusVC.cancelTime = [model.data.remainCancelDepositTimes integerValue];
-                statusVC.transactionId = model.data.mmProcessingOrderTransactionId;
-                [weakSelf.navigationController pushViewController:statusVC animated:YES];
             }];
         } else { // 取款
             

@@ -25,7 +25,6 @@
 #import "BTTBiFuBaoController.h"
 #import "BTTDcboxPayController.h"
 #import "BTTVipPaymentController.h"
-#import "CNMFastPayVC.h"
 
 @interface CNPayContainerVC ()
 
@@ -157,9 +156,7 @@
         }
             break;
         case CNPaymentFast:{
-            CNMFastPayVC *vc = [[CNMFastPayVC alloc] init];
-            vc.paymentModel = payment;
-            [viewControllers addObjectsFromArray:@[vc]];
+            
         }
             break;
     }

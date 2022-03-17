@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *requestIdLab;
 @property (weak, nonatomic) IBOutlet UILabel *typeLab;
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
-@property (weak, nonatomic) IBOutlet UILabel *seeDetailLb;
 @end
 
 @implementation BTTWithdrawRecordCell
@@ -66,7 +65,6 @@
     self.moneyLab.text = [NSString stringWithFormat:@"%@%@", [PublicMethod transferNumToThousandFormat:[model.amount doubleValue]], unitStr];
     self.requestIdLab.text = model.requestId;
     self.typeLab.text = model.flagDesc;
-    self.seeDetailLb.hidden = !(model.mmStatus > 0 && model.mmStatus !=100);
 }
 
 -(IBAction)btnAction:(id)sender {

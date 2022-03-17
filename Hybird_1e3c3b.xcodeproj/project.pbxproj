@@ -13,12 +13,8 @@
 		04C48B2627BB6BE900623F5A /* CNMChannelTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C48B2427BB6BE900623F5A /* CNMChannelTCell.xib */; };
 		04C48B2827BB6C4200623F5A /* MatchPay.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04C48B2727BB6C4200623F5A /* MatchPay.xcassets */; };
 		04C48B2C27BB811F00623F5A /* CNMSelectChannelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C48B2B27BB811F00623F5A /* CNMSelectChannelVC.m */; };
-		04C48B3027BC8D7F00623F5A /* CNMFastPayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C48B2E27BC8D7F00623F5A /* CNMFastPayVC.m */; };
-		04C48B3127BC8D7F00623F5A /* CNMFastPayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C48B2F27BC8D7F00623F5A /* CNMFastPayVC.xib */; };
 		04C48B3527BCA0E400623F5A /* CNMAmountSelectCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C48B3327BCA0E400623F5A /* CNMAmountSelectCCell.m */; };
 		04C48B3627BCA0E400623F5A /* CNMAmountSelectCCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C48B3427BCA0E400623F5A /* CNMAmountSelectCCell.xib */; };
-		04C48B3A27BE0F3200623F5A /* CNMFastPayStatusVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C48B3827BE0F3200623F5A /* CNMFastPayStatusVC.m */; };
-		04C48B3B27BE0F3200623F5A /* CNMFastPayStatusVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C48B3927BE0F3200623F5A /* CNMFastPayStatusVC.xib */; };
 		04C48B4027C0BFC800623F5A /* CNMatchPayRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C48B3F27C0BFC800623F5A /* CNMatchPayRequest.m */; };
 		04C48B4327C336C100623F5A /* CNBaseXibView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C48B4127C336C100623F5A /* CNBaseXibView.m */; };
 		04C48B4627C3370400623F5A /* CNMAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C48B4527C3370400623F5A /* CNMAlertView.m */; };
@@ -909,15 +905,9 @@
 		04C48B2727BB6C4200623F5A /* MatchPay.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MatchPay.xcassets; sourceTree = "<group>"; };
 		04C48B2A27BB811F00623F5A /* CNMSelectChannelVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNMSelectChannelVC.h; sourceTree = "<group>"; };
 		04C48B2B27BB811F00623F5A /* CNMSelectChannelVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNMSelectChannelVC.m; sourceTree = "<group>"; };
-		04C48B2D27BC8D7F00623F5A /* CNMFastPayVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNMFastPayVC.h; sourceTree = "<group>"; };
-		04C48B2E27BC8D7F00623F5A /* CNMFastPayVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNMFastPayVC.m; sourceTree = "<group>"; };
-		04C48B2F27BC8D7F00623F5A /* CNMFastPayVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNMFastPayVC.xib; sourceTree = "<group>"; };
 		04C48B3227BCA0E400623F5A /* CNMAmountSelectCCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNMAmountSelectCCell.h; sourceTree = "<group>"; };
 		04C48B3327BCA0E400623F5A /* CNMAmountSelectCCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNMAmountSelectCCell.m; sourceTree = "<group>"; };
 		04C48B3427BCA0E400623F5A /* CNMAmountSelectCCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNMAmountSelectCCell.xib; sourceTree = "<group>"; };
-		04C48B3727BE0F3200623F5A /* CNMFastPayStatusVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNMFastPayStatusVC.h; sourceTree = "<group>"; };
-		04C48B3827BE0F3200623F5A /* CNMFastPayStatusVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNMFastPayStatusVC.m; sourceTree = "<group>"; };
-		04C48B3927BE0F3200623F5A /* CNMFastPayStatusVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CNMFastPayStatusVC.xib; sourceTree = "<group>"; };
 		04C48B3E27C0BFC800623F5A /* CNMatchPayRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNMatchPayRequest.h; sourceTree = "<group>"; };
 		04C48B3F27C0BFC800623F5A /* CNMatchPayRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNMatchPayRequest.m; sourceTree = "<group>"; };
 		04C48B4127C336C100623F5A /* CNBaseXibView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNBaseXibView.m; sourceTree = "<group>"; };
@@ -2449,12 +2439,6 @@
 			children = (
 				04C48B2A27BB811F00623F5A /* CNMSelectChannelVC.h */,
 				04C48B2B27BB811F00623F5A /* CNMSelectChannelVC.m */,
-				04C48B2D27BC8D7F00623F5A /* CNMFastPayVC.h */,
-				04C48B2E27BC8D7F00623F5A /* CNMFastPayVC.m */,
-				04C48B2F27BC8D7F00623F5A /* CNMFastPayVC.xib */,
-				04C48B3727BE0F3200623F5A /* CNMFastPayStatusVC.h */,
-				04C48B3827BE0F3200623F5A /* CNMFastPayStatusVC.m */,
-				04C48B3927BE0F3200623F5A /* CNMFastPayStatusVC.xib */,
 				04C48B5A27C73D5400623F5A /* CNMUSDTChannelVC.h */,
 				04C48B5927C73D5400623F5A /* CNMUSDTChannelVC.m */,
 				04C48B5827C73D5400623F5A /* CNMUSDTChannelVC.xib */,
@@ -5441,7 +5425,6 @@
 				D599251E21AFC8CA001E885A /* CNPayDepostiBankCell.xib in Resources */,
 				3AB0686F21A5033700072FB7 /* BTTPTTransferInputCell.xib in Resources */,
 				41EAF0F2260D93BD0091FE09 /* BTTMeInfoCell.xib in Resources */,
-				04C48B3127BC8D7F00623F5A /* CNMFastPayVC.xib in Resources */,
 				4184DE19251B331800D433D4 /* BTTModifyBankRecordCell.xib in Resources */,
 				4135A6FC263941D000D3BF17 /* BTTLiCaiInterestRateBillCell.xib in Resources */,
 				76F8643126E87ECE00320B60 /* BTTVIPClubHistoryCell.xib in Resources */,
@@ -5487,7 +5470,6 @@
 				76B16908279FE23C0033F301 /* newYear1.gif in Resources */,
 				41B3127D269D1FC0002AF76D /* BTTPaymentWarningPopView.xib in Resources */,
 				76B16909279FE23C0033F301 /* newYear2.gif in Resources */,
-				04C48B3B27BE0F3200623F5A /* CNMFastPayStatusVC.xib in Resources */,
 				3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */,
 				3A75A182221164BC00584A35 /* BTTLoginAccountSelectCell.xib in Resources */,
 				D5B42FF427C35F79008330CB /* KYMWithdrewNoticeView1.xib in Resources */,
@@ -6105,7 +6087,6 @@
 				3ADD23F12179B97A00FA959A /* SDCycleScrollView.m in Sources */,
 				4118D45D26CB661600688780 /* BTTForgetBothController+Nav.m in Sources */,
 				4135A6FB263941D000D3BF17 /* BTTLiCaiTotalAmountCell.m in Sources */,
-				04C48B3A27BE0F3200623F5A /* CNMFastPayStatusVC.m in Sources */,
 				D5C5018B21B4BFD000C6DA02 /* CNPayDepositNameModel.m in Sources */,
 				3ADD23762177328B00FA959A /* BTTMeSaveMoneyCell.m in Sources */,
 				3AAE8217219A738B003EC8B0 /* BTTLoginCell.m in Sources */,
@@ -6254,7 +6235,6 @@
 				3AAFF88621D378E800F875B1 /* BTTMeSaveMoneyWechatCell.m in Sources */,
 				3A11AE4B21869B2200B1AFF4 /* BTTSettingsController.m in Sources */,
 				418E72C6257777CE00D9BF95 /* BTTChooseCurrencyPopView.m in Sources */,
-				04C48B3027BC8D7F00623F5A /* CNMFastPayVC.m in Sources */,
 				4135A706263941D000D3BF17 /* BTTLiCaiBtnCell.m in Sources */,
 				410636BF26C60DD3002785D2 /* BTTForgetBothController.m in Sources */,
 				D5B42FFD27C396EB008330CB /* KYMWithdrewSuccessVC.m in Sources */,

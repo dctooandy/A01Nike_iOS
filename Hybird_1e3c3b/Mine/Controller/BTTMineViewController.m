@@ -63,7 +63,6 @@
 #import "KYMFastWithdrewVC.h"
 #import "BTTMeGoldenCCell.h"
 #import "KYMWithdrewRequest.h"
-#import "CNMFastPayStatusVC.h"
 #import "CNMAlertView.h"
 #import "CNMUSDTChannelVC.h"
 
