@@ -14,11 +14,9 @@
                 <outlet property="accountNo" destination="lMW-eM-nbh" id="Gwk-wc-ycy"/>
                 <outlet property="amountLb" destination="az3-Ng-B4K" id="rxs-Uc-TS1"/>
                 <outlet property="amountTipLb" destination="iVX-5s-52Y" id="Jke-ho-l4y"/>
-                <outlet property="amountTipLbH" destination="D51-Ha-WpG" id="aVD-J6-EKr"/>
                 <outlet property="bankLogo" destination="aN7-ka-cHi" id="7hT-PK-wdS"/>
                 <outlet property="bankName" destination="1F0-JF-YfW" id="Uuo-EZ-lX3"/>
                 <outlet property="bankView" destination="PoK-fU-Iad" id="beP-Ie-oE7"/>
-                <outlet property="btnView" destination="CZH-wS-Mpe" id="Taw-1I-pcc"/>
                 <outlet property="confirmBtn" destination="vYd-ok-Vjf" id="ubN-eH-5MJ"/>
                 <outlet property="countLb1" destination="kNP-uI-Pgb" id="eTU-0M-sSd"/>
                 <outlet property="countLb2" destination="cGS-FU-dDo" id="0HL-J1-91e"/>

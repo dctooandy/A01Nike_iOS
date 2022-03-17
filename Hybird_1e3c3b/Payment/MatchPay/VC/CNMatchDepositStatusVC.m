@@ -15,22 +15,14 @@
 #import "CNMatchPayRequest.h"
 #import "PublicMethod.h"
 
-/// 页面 UI 状态区分
-typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
-    CNMPayUIStatusSubmit,  //已提交
-    CNMPayUIStatusPaying,  //等待支付
-    CNMPayUIStatusConfirm, //已确认
-    CNMPayUIStatusSuccess  //已完成
-};
 
 @interface CNMatchDepositStatusVC ()
 
 #pragma mark - 中间金额视图
 @property (weak, nonatomic) IBOutlet UILabel *amountLb;
 @property (weak, nonatomic) IBOutlet UILabel *amountTipLb;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *amountTipLbH;
 
-#pragma mark - 中间银行卡视图，一共有7行信息栏
+#pragma mark - 中间银行卡视图，一共有4行信息栏
 @property (weak, nonatomic) IBOutlet UIView *bankView;
 @property (weak, nonatomic) IBOutlet UIImageView *bankLogo;
 @property (weak, nonatomic) IBOutlet UILabel *bankName;
@@ -42,9 +34,9 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
 /// 复制按钮
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *btnCopyArray;
 
-#pragma mark - 底部按钮组
-@property (weak, nonatomic) IBOutlet UIView *btnView;
+#pragma mark - 底部按钮
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
+
 #pragma mark - 相册选择
 @property (weak, nonatomic) IBOutlet UIView *midView;
 @property (strong, nonatomic) IBOutlet UIView *pictureView;
@@ -71,9 +63,6 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
 
 #pragma mark - 数据参数
 @property (nonatomic, strong) CNMBankModel *bankModel;
-/// 默认 CNMPayUIStatusPaying
-@property (nonatomic, assign) CNMPayUIStatus status;
-
 
 @end
 
@@ -100,6 +89,18 @@ typedef NS_ENUM(NSUInteger, CNMPayUIStatus) {
     self.bankView.layer.borderColor = kHexColor(0x3A3D46).CGColor;
     self.bankView.layer.cornerRadius = 8;
     self.title = @"存款";
+    
+    for (UIButton *btn in self.btnCopyArray) {
+        NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"复制"];
+        [attributeString addAttribute:NSUnderlineStyleAttributeName
+                          value:@(NSUnderlineStyleSingle)
+                          range:(NSRange){0,[attributeString length]}];
+        [attributeString addAttribute:NSForegroundColorAttributeName value:btn.titleLabel.textColor range:NSMakeRange(0,[attributeString length])];
+
+        //设置下划线颜色
+        [attributeString addAttribute:NSUnderlineColorAttributeName value:btn.titleLabel.textColor range:(NSRange){0,[attributeString length]}];
+        [btn setAttributedTitle:attributeString forState:UIControlStateNormal];
+    }
 }
 
 - (void)loadData {
