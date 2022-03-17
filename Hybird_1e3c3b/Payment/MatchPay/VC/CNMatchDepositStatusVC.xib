@@ -138,7 +138,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3M-hr-fSt">
-                                                            <rect key="frame" x="85" y="0.0" width="40" height="50"/>
+                                                            <rect key="frame" x="334" y="0.0" width="40" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="0uA-D0-Yvg"/>
                                                             </constraints>
@@ -154,8 +154,8 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="h3M-hr-fSt" firstAttribute="leading" secondItem="IBN-BR-PRs" secondAttribute="trailing" constant="10" id="7mH-Zh-YSG"/>
                                                         <constraint firstItem="Nus-B2-b2e" firstAttribute="centerY" secondItem="37s-xJ-2a8" secondAttribute="centerY" id="A8V-0I-VTL"/>
+                                                        <constraint firstAttribute="trailing" secondItem="h3M-hr-fSt" secondAttribute="trailing" constant="10" id="Hq6-VE-Vax"/>
                                                         <constraint firstItem="IBN-BR-PRs" firstAttribute="centerY" secondItem="37s-xJ-2a8" secondAttribute="centerY" id="TDc-cu-y4h"/>
                                                         <constraint firstItem="h3M-hr-fSt" firstAttribute="top" secondItem="37s-xJ-2a8" secondAttribute="top" id="aGT-s5-9fm"/>
                                                         <constraint firstAttribute="bottom" secondItem="h3M-hr-fSt" secondAttribute="bottom" id="aOG-Zo-WmI"/>
@@ -179,7 +179,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8nb-xM-wLp">
-                                                            <rect key="frame" x="85" y="0.0" width="40" height="50"/>
+                                                            <rect key="frame" x="334" y="0.0" width="40" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="hSq-Ra-ZY9"/>
                                                             </constraints>
@@ -199,8 +199,8 @@
                                                         <constraint firstItem="9hF-DK-5zq" firstAttribute="leading" secondItem="IKE-mF-OjY" secondAttribute="leading" constant="15" id="Q0S-Fq-d51"/>
                                                         <constraint firstAttribute="bottom" secondItem="8nb-xM-wLp" secondAttribute="bottom" id="Rhh-pB-I5e"/>
                                                         <constraint firstItem="lMW-eM-nbh" firstAttribute="centerY" secondItem="IKE-mF-OjY" secondAttribute="centerY" id="foX-Mt-bqK"/>
+                                                        <constraint firstAttribute="trailing" secondItem="8nb-xM-wLp" secondAttribute="trailing" constant="10" id="fy0-Cb-7sb"/>
                                                         <constraint firstItem="8nb-xM-wLp" firstAttribute="top" secondItem="IKE-mF-OjY" secondAttribute="top" id="igt-gt-swS"/>
-                                                        <constraint firstItem="8nb-xM-wLp" firstAttribute="leading" secondItem="lMW-eM-nbh" secondAttribute="trailing" constant="10" id="n0v-t3-9ZO"/>
                                                         <constraint firstItem="9hF-DK-5zq" firstAttribute="centerY" secondItem="IKE-mF-OjY" secondAttribute="centerY" id="vkI-E5-bBI"/>
                                                     </constraints>
                                                 </view>
@@ -220,7 +220,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xYQ-Dh-MqM">
-                                                            <rect key="frame" x="73" y="0.0" width="40" height="50"/>
+                                                            <rect key="frame" x="334" y="0.0" width="40" height="50"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="ewj-t5-jeg"/>
                                                             </constraints>
@@ -241,8 +241,8 @@
                                                         <constraint firstAttribute="bottom" secondItem="xYQ-Dh-MqM" secondAttribute="bottom" id="Ika-k0-nKp"/>
                                                         <constraint firstItem="xYQ-Dh-MqM" firstAttribute="top" secondItem="1Rs-UT-axN" secondAttribute="top" id="LGJ-MP-juU"/>
                                                         <constraint firstItem="cOd-j9-prl" firstAttribute="leading" secondItem="dJs-Wj-hUh" secondAttribute="trailing" id="Z8x-2f-0e1"/>
+                                                        <constraint firstAttribute="trailing" secondItem="xYQ-Dh-MqM" secondAttribute="trailing" constant="10" id="ZYn-QZ-Z6n"/>
                                                         <constraint firstItem="cOd-j9-prl" firstAttribute="centerY" secondItem="1Rs-UT-axN" secondAttribute="centerY" id="bMw-wp-6iC"/>
-                                                        <constraint firstItem="xYQ-Dh-MqM" firstAttribute="leading" secondItem="cOd-j9-prl" secondAttribute="trailing" constant="10" id="gGR-58-6Fl"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
