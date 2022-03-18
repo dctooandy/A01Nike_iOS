@@ -108,6 +108,12 @@
     [self setViewHeight:height fullScreen:NO];
 }
 
+- (IBAction)copyBill:(id)sender {
+    [UIPasteboard generalPasteboard].string = self.billIdLb.text;
+    [self showSuccess:@"已复制"];
+}
+
+
 - (void)hideBillUI:(BOOL)hidden {
     if (self.matchModel.mmProcessingOrderPairStatus == 6 && self.matchModel.mmProcessingOrderStatus == 5) {
         [self.statusBtn setTitle:@"我要催单" forState:UIControlStateNormal];

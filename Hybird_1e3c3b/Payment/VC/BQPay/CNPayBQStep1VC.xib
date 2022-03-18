@@ -314,13 +314,24 @@
                                 </stackView>
                             </subviews>
                         </stackView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NlZ-BU-1up">
+                            <rect key="frame" x="15" y="17" width="83" height="32.5"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <connections>
+                                <action selector="copyBill:" destination="-1" eventType="touchUpInside" id="6zh-jJ-w0A"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="x4Z-MI-EJN" firstAttribute="centerY" secondItem="1mv-XS-hIh" secondAttribute="centerY" id="7bS-Xg-nQK"/>
+                        <constraint firstItem="NlZ-BU-1up" firstAttribute="leading" secondItem="ikN-XW-Hkn" secondAttribute="leading" id="CAL-hX-OqW"/>
+                        <constraint firstItem="NlZ-BU-1up" firstAttribute="top" secondItem="ikN-XW-Hkn" secondAttribute="top" id="UXC-K8-qVH"/>
                         <constraint firstItem="x4Z-MI-EJN" firstAttribute="leading" secondItem="1mv-XS-hIh" secondAttribute="leading" constant="15" id="Zfa-Gg-kK0"/>
                         <constraint firstAttribute="height" constant="66" id="bXS-C8-xUR"/>
+                        <constraint firstItem="NlZ-BU-1up" firstAttribute="bottom" secondItem="ikN-XW-Hkn" secondAttribute="bottom" id="dGc-MZ-Ide"/>
                         <constraint firstItem="Z6U-zA-WAG" firstAttribute="top" secondItem="1mv-XS-hIh" secondAttribute="top" constant="17" id="jDd-cB-1NW"/>
+                        <constraint firstItem="NlZ-BU-1up" firstAttribute="trailing" secondItem="ikN-XW-Hkn" secondAttribute="trailing" id="mh8-dx-nKy"/>
                         <constraint firstAttribute="trailing" secondItem="Z6U-zA-WAG" secondAttribute="trailing" constant="15" id="wP4-31-FNV"/>
                     </constraints>
                 </view>
