@@ -36,6 +36,9 @@
 
 #pragma mark - 底部按钮
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
+///倒计时
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) NSInteger timeInterval;
 
 #pragma mark - 相册选择
 @property (weak, nonatomic) IBOutlet UIView *midView;
@@ -153,6 +156,24 @@
             
             break;
     }
+    
+    if (bank.createdDateFmt > 0) {
+        self.timeInterval = bank.createdDateFmt;
+        [self.timer setFireDate:[NSDate distantPast]];
+    } else {
+        self.confirmBtn.enabled = YES;
+    }
+}
+
+- (void)timerCounter {
+    
+    self.timeInterval -= 1;
+    if (self.timeInterval <= 0) {
+        [self.timer setFireDate:[NSDate distantFuture]];
+        self.confirmBtn.enabled = YES;
+        return;
+    }
+    [self.confirmBtn setTitle:[NSString stringWithFormat:@"确认存款(%lds)", self.timeInterval] forState:UIControlStateDisabled];
 }
 
 #pragma mark - 按钮组事件
@@ -367,5 +388,18 @@
         _photoSheet.configuration.navBarColor = kHexColor(0x4083E8);
     }
     return _photoSheet;
+}
+
+- (NSTimer *)timer {
+    if (!_timer) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerCounter) userInfo:nil repeats:YES];
+        [_timer setFireDate:[NSDate distantFuture]];
+    }
+    return _timer;
+}
+
+- (void)dealloc {
+    [_timer invalidate];
+    _timer = nil;
 }
 @end
