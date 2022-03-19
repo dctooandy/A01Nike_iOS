@@ -151,25 +151,10 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSDictionary *dic = result.body[@"data"];
             if ([dic isKindOfClass:[NSDictionary class]]) {
-                BOOL open = [[dic objectForKey:@"isAvailable"] boolValue];
-                NSArray *amountList = [dic objectForKey:@"amountList"];
-                if (open) { //&& amountList.count > 0) {
-                    BTTMeMainModel *fast = [BTTMeMainModel new];
-                    fast.name = @"急速转卡";
-                    fast.iconName = @"channel_fastpay";
-                    fast.paymentType = CNPaymentFast;
-                    fast.payModel = [CNPaymentModel new];
-                    fast.payModel.payType = CNPaymentFast;
-                    fast.payModel.amountList = [NSArray yy_modelArrayWithClass:[CNWAmountListModel class] json:amountList];
-                    fast.payModel.remainDepositTimes = [[dic objectForKey:@"remainDepositTimes"] stringValue];
-                    fast.payModel.remainCancelDepositTimes = [[dic objectForKey:@"remainCancelDepositTimes"] stringValue];
-                    fast.payModel.mmProcessingOrderType = [[dic objectForKey:@"mmProcessingOrderType"] integerValue];
-                    fast.payModel.mmProcessingOrderTransactionId = [dic objectForKey:@"mmProcessingOrderTransactionId"];
-                    if ([self.bigDataSoure containsObject:self.fastModel]) {
-                        [self.bigDataSoure removeObject:self.fastModel];
-                    }
-                    self.fastModel = fast;
-                    [self.bigDataSoure insertObject:fast atIndex:0];
+                self.matchModel = [CNPaymentModel yy_modelWithDictionary:dic];
+                self.matchModel.payType = CNPaymentFast;
+                if (!self.matchModel.isAvailable || self.matchModel.mmProcessingOrderTransactionId.length > 0) {
+                    self.matchModel.amountList = nil;
                 }
             }
         }
@@ -202,12 +187,6 @@
         
         if ([result.head.errCode isEqualToString:@"0000"]) {
             if ([result.body[@"payTypeList"] isKindOfClass:[NSArray class]]) {
-                
-                // 上面清空数据，需要在添加一次
-                if (!isUSDTAcc && self.fastModel && ![self.bigDataSoure containsObject:self.fastModel]) {
-                    [self.bigDataSoure addObject:self.fastModel];
-                }
-                
                 NSArray *payTypeArray = result.body[@"payTypeList"];
                 for (int i = 0; i < payTypeArray.count; i ++) {
                     NSDictionary *dict = payTypeArray[i];
@@ -995,13 +974,4 @@
 - (void)setGames:(NSMutableArray *)games {
     objc_setAssociatedObject(self, @selector(games), games, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-
-- (void)setFastModel:(BTTMeMainModel *)fastModel {
-    objc_setAssociatedObject(self, @selector(fastModel), fastModel, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (BTTMeMainModel *)fastModel {
-    return objc_getAssociatedObject(self, _cmd);
-}
-
 @end

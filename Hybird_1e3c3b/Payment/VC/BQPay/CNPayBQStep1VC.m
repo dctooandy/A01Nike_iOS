@@ -11,25 +11,25 @@
 #import "BTTBishangStep1VC.h"
 #import "BTTPaymentWarningPopView.h"
 
-@interface CNPayBQStep1VC ()
+#import "CNMAmountSelectCCell.h"
+#import "CNMAlertView.h"
+#define kCNMAmountSelectCCell  @"CNMAmountSelectCCell"
+#import "CNMatchPayRequest.h"
+#import "CNMBankModel.h"
+#import "CNMatchDepositStatusVC.h"
 
-@property (weak, nonatomic) IBOutlet UIView *preSettingView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *preSettingViewHeight;
-@property (weak, nonatomic) IBOutlet UILabel *preSettingMessageLb;
-
+@interface CNPayBQStep1VC () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet CNPayAmountTF *amountTF;
 @property (weak, nonatomic) IBOutlet UIButton *amountBtn;
 @property (weak, nonatomic) IBOutlet UILabel *nameLb;
 @property (weak, nonatomic) IBOutlet CNPayNameTF *nameTF;
-@property (weak, nonatomic) IBOutlet CNPayAmountRecommendView *nameView;
-@property (weak, nonatomic) IBOutlet UIView *nameAreaView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameAreaViewHeight;
 
 @property (weak, nonatomic) IBOutlet CNPaySubmitButton *commitBtn;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomTipView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomTipViewHeight;
 @property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 
 @property (nonatomic, strong) BTTBishangStep1VC *BSStep1VC;
 
@@ -37,6 +37,19 @@
 @property (nonatomic, strong) NSArray *amountList;
 @property (nonatomic, strong) NSArray *bankList;
 @property (nonatomic, assign) BOOL haveBankData;
+
+#pragma mark - 撮合相关属性
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewH;
+@property (weak, nonatomic) IBOutlet UILabel *matchTipLb;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *matchTipLbH;
+
+@property (weak, nonatomic) IBOutlet UIView *billView;
+@property (weak, nonatomic) IBOutlet UILabel *billIdLb;
+@property (weak, nonatomic) IBOutlet UIButton *statusBtn;
+@property (weak, nonatomic) IBOutlet UILabel *billAmountLb;
+@property (nonatomic, strong) NSArray *matchAmountList;
+@property (nonatomic, strong) NSArray *dataAList;
 @end
 
 @implementation CNPayBQStep1VC
@@ -45,25 +58,193 @@
     [super viewDidLoad];
     _haveBankData = NO;
     self.amountBtn.hidden = YES;
-    [self configPreSettingMessage];
     [self configDifferentUI];
     [self queryAmountList];
     // 初始化数据
-    [self setViewHeight:450 fullScreen:NO];
     [self.topView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(100);
     }];
     if (self.paymentModel.payType == 100) {
-        [self configBishangUI];
         [self setViewHeight:400 fullScreen:NO];
+        [self configBishangUI];
+    } else {
+        [self setupMatchUI];
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self setViewHeight:450 fullScreen:NO];
+#pragma mark - 撮合相关
+
+- (void)setupMatchUI {
+    CGFloat height = 400;
+    if (self.matchModel.mmProcessingOrderType == 1 && self.matchModel.mmProcessingOrderTransactionId.length > 0) {
+        height += 100;
+        [self hideBillUI:NO];
+    } else if (self.matchModel.mmProcessingOrderTransactionId.length == 0 && self.matchModel.amountList.count > 0) {
+        NSMutableArray *array = [NSMutableArray array];
+        for (CNWAmountListModel *model in self.matchModel.amountList) {
+            [array addObject:model.amount];
+        }
+//    array = [@[@"100000", @"90000", @"8000", @"5000", @"7000", @"6000", @"5500", @"100", @"1000", @"1500", @"3500", @"2500"] mutableCopy];
+//    self.matchModel.mmProcessingOrderType = 1;
+//    self.matchModel.status = 2;
+//    self.matchModel.mmProcessingOrderStatus = 3;
+//    self.matchModel.mmProcessingOrderAmount = @"6000";
+//    self.matchModel.mmProcessingOrderTransactionId = @"324";
+        self.matchAmountList = [array sortedArrayUsingComparator:^NSComparisonResult(NSString *  _Nonnull obj1, NSString *  _Nonnull obj2) {
+            if (obj1.intValue < obj2.intValue) {
+                return NSOrderedDescending;
+            }
+            return NSOrderedAscending;
+        }];
+        self.dataAList = [self getRecommendAmountFromAmount:nil];
+        
+        [self.collectionView registerNib:[UINib nibWithNibName:kCNMAmountSelectCCell bundle:nil] forCellWithReuseIdentifier:kCNMAmountSelectCCell];
+        self.collectionViewH.constant = 42 * MIN(ceilf(self.matchAmountList.count/3.0), 3) +30;
+        self.matchTipLb.hidden = NO;
+        self.matchTipLbH.constant = 20;
+        [self.amountTF addTarget:self action:@selector(textFieldValueChange:) forControlEvents:UIControlEventEditingChanged];
+        height += self.collectionViewH.constant;
+    }
+    [self setViewHeight:height fullScreen:NO];
+}
+
+- (IBAction)copyBill:(id)sender {
+    [UIPasteboard generalPasteboard].string = self.billIdLb.text;
+    [self showSuccess:@"已复制"];
+}
+
+
+- (void)hideBillUI:(BOOL)hidden {
+    if (self.matchModel.mmProcessingOrderPairStatus == 6 && self.matchModel.mmProcessingOrderStatus == 5) {
+        [self.statusBtn setTitle:@"我要催单" forState:UIControlStateNormal];
+        [self.statusBtn addTarget:self action:@selector(customerServer) forControlEvents:UIControlEventTouchUpInside];
+    }
+//    else if (!self.matchModel.mmProcessingOrderUploadFlag) {
+//        [self.statusBtn setTitle:@"上传凭证" forState:UIControlStateNormal];
+//        [self.statusBtn addTarget:self action:@selector(showUploadUI) forControlEvents:UIControlEventTouchUpInside];
+//    }
+    else if (self.matchModel.mmProcessingOrderStatus == 2) {
+        [self.statusBtn setTitle:@"确认存款" forState:UIControlStateNormal];
+        [self.statusBtn addTarget:self action:@selector(confirmBill) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        self.billView.hidden = YES;
+        return;
+    }
+    
+    self.billView.hidden = hidden;
+    self.billView.backgroundColor = kHexColor(0x23262F);
+    self.billAmountLb.text = [NSString stringWithFormat:@"%.2f", self.matchModel.mmProcessingOrderAmount.doubleValue];
+    self.billIdLb.text = self.matchModel.mmProcessingOrderTransactionId;
+    self.statusBtn.layer.borderColor = self.statusBtn.titleLabel.textColor.CGColor;
+    self.statusBtn.layer.borderWidth = 1;
+    self.statusBtn.layer.cornerRadius = 4;
+}
+
+- (void)showUploadUI {
     
 }
+
+- (void)confirmBill {
+    CNMatchDepositStatusVC *statusVC = [[CNMatchDepositStatusVC alloc] init];
+    statusVC.transactionId = self.matchModel.mmProcessingOrderTransactionId;
+    [self pushViewController:statusVC];
+}
+
+- (void)customerServer {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoKefu" object:nil];
+}
+
+- (void)textFieldValueChange:(UITextField *)tf {
+    self.dataAList = [self getRecommendAmountFromAmount:tf.text];
+    [self.collectionView reloadData];
+    if ([self.dataAList containsObject:tf.text]) {
+        NSInteger index = [self.dataAList indexOfObject:tf.text];
+        [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
+    } else {
+        [self.collectionView deselectItemAtIndexPath:[self.collectionView indexPathsForSelectedItems].lastObject animated:YES];
+    }
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.dataAList.count;
+}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CNMAmountSelectCCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCNMAmountSelectCCell forIndexPath:indexPath];
+    cell.amountLb.text = self.dataAList[indexPath.row];
+    cell.recommendTag.hidden = YES;
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake((collectionView.bounds.size.width-50)/3.0, 32);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    self.amountTF.text = self.dataAList[indexPath.row];
+}
+
+- (void)submitMatchBill {
+    //提交订单
+    [self showLoading];
+    __weak typeof(self) weakSelf = self;
+    [CNMatchPayRequest createDepisit:self.amountTF.text finish:^(id  _Nullable response, NSError * _Nullable error) {
+        [weakSelf hideLoading];
+        if ([response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)response;
+            if ([[dic objectForKey:@"mmFlag"] boolValue]) {
+                NSError *err;
+                CNMBankModel *bank = [[CNMBankModel alloc] initWithDictionary:[dic objectForKey:@"mmPaymentRsp"] error:&err];
+                if (!err) {
+                    // 成功跳转
+                    CNMatchDepositStatusVC *statusVC = [[CNMatchDepositStatusVC alloc] init];
+                    statusVC.transactionId = bank.transactionId;
+                    [weakSelf pushViewController:statusVC];
+                    return;
+                }
+            }
+        }
+        // 失败走普通存款
+        [weakSelf submitBQBill];
+    }];
+}
+
+
+/// 计算合理推荐金额
+- (NSArray *)getRecommendAmountFromAmount:(NSString *)amount {
+    
+    NSArray *sourceArray = self.matchAmountList;
+    
+    if (sourceArray.count < 9) {
+        return sourceArray;
+    }
+    
+    if (amount == nil || amount.length == 0) {
+        return [sourceArray subarrayWithRange:NSMakeRange(sourceArray.count - 9, 9)];
+    }
+    
+    NSMutableArray *sortArr = [sourceArray mutableCopy];
+    [sortArr addObject:amount];
+    
+    sortArr = [[sortArr sortedArrayUsingComparator:^NSComparisonResult(NSString *  _Nonnull obj1, NSString *  _Nonnull obj2) {
+        if (obj1.intValue < obj2.intValue) {
+            return NSOrderedDescending;
+        }
+        return NSOrderedAscending;
+    }] mutableCopy];
+    
+    NSInteger index = [sortArr indexOfObject:amount];
+
+    if (index < 5) {
+        return [sourceArray subarrayWithRange:NSMakeRange(0, 9)];
+    } else if  (index > (sourceArray.count - 5)) {
+        return [sourceArray subarrayWithRange:NSMakeRange(sourceArray.count - 9, 9)];
+    } else {
+        return [sourceArray subarrayWithRange:NSMakeRange(index - 4, 9)];
+    }
+}
+
+#pragma mark - BQ相关
 
 - (void)configBishangUI {
     _BSStep1VC = [[BTTBishangStep1VC alloc] init];
@@ -71,21 +252,6 @@
     _BSStep1VC.paymentModel = self.paymentModel;
     [self addChildViewController:_BSStep1VC];
     [self.view addSubview:_BSStep1VC.view];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-}
-
-- (void)configPreSettingMessage {
-    if (self.preSaveMsg.length > 0) {
-        self.preSettingMessageLb.text = self.preSaveMsg;
-        self.preSettingViewHeight.constant = 50;
-        self.preSettingView.hidden = NO;
-    } else {
-        self.preSettingViewHeight.constant = 0;
-        self.preSettingView.hidden = YES;
-    }
 }
 
 - (void)queryAmountList{
@@ -100,7 +266,6 @@
                 NSNumber * min = result.body[@"minAmount"];
                 NSNumber * max = result.body[@"maxAmount"];
                 self.amountTF.placeholder = [NSString stringWithFormat:@"最少%@，最多%@", min, max];
-                [self configAmountList];
             }
         }else{
             self.amountTF.text = @"";
@@ -121,14 +286,6 @@
     }
 }
 
-- (void)configAmountList {
-    //    self.amountBtn.hidden = self.paymentModel.amountCanEdit;
-    //    if (!self.paymentModel.amountCanEdit) {
-    //        self.amountTF.placeholder = @"仅可选择以下金额";
-    //    }
-}
-
-
 - (IBAction)selectAmountList:(id)sender {
     weakSelf(weakSelf);
     [self.view endEditing:YES];
@@ -148,6 +305,7 @@
                 return;
             }
             weakSelf.amountTF.text = selectValue;
+            [weakSelf textFieldValueChange:weakSelf.amountTF];
         }else{
             self.amountBtn.hidden = YES;
             self.amountTF.text = @"";
@@ -165,30 +323,43 @@
         [self showError:@"请输入充值金额"];
         return;
     }
-    /// 超出额度范围
-    NSNumber *amount = [NSString convertNumber:text];
-    double maxAmount = self.paymentModel.maxAmount > self.paymentModel.minAmount ? self.paymentModel.maxAmount : CGFLOAT_MAX;
-    if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minAmount) {
-        _amountTF.text = nil;
-        [self showError:[NSString stringWithFormat:@"存款金额必须是%ld~%.f之间，最大允许2位小数", (long)self.paymentModel.minAmount, maxAmount]];
-        return;
+    
+    BOOL isMatch = [self.dataAList containsObject:text];
+    if (!isMatch) {
+        /// 超出额度范围
+        NSNumber *amount = [NSString convertNumber:text];
+        double maxAmount = self.paymentModel.maxAmount > self.paymentModel.minAmount ? self.paymentModel.maxAmount : CGFLOAT_MAX;
+        if ([amount doubleValue] > maxAmount || [amount doubleValue] < self.paymentModel.minAmount) {
+            _amountTF.text = nil;
+            [self showError:[NSString stringWithFormat:@"存款金额必须是%ld~%.f之间，最大允许2位小数", (long)self.paymentModel.minAmount, maxAmount]];
+            return;
+        }
     }
     
     if (self.nameTF.text.length == 0) {
         [self showError:@"请输入存款人姓名"];
         return;
     }
-    self.writeModel.depositBy = self.nameTF.text;
-    self.writeModel.amount = self.amountTF.text;
-    [self sumbitBill:sender amount:self.amountTF.text depositor:self.nameTF.text depositorType:@"" payType:[NSString stringWithFormat:@"%ld",(long)self.paymentModel.payType]];
-}
-
-- (void)sumbitBill:(UIButton *)sender amount:(NSString *)amount depositor:(NSString *)depositor depositorType:(NSString *)depositorType payType:(NSString *)payType{
+    
+    
     if (sender.selected) {
         return;
     }
     sender.selected = YES;
-    
+    if (isMatch) {
+        [self submitMatchBill];
+    } else {
+        [self submitBQBill];
+    }
+}
+
+- (void)submitBQBill {
+    self.writeModel.depositBy = self.nameTF.text;
+    self.writeModel.amount = self.amountTF.text;
+    [self sumbitBill:self.submitBtn amount:self.amountTF.text depositor:self.nameTF.text depositorType:@"" payType:[NSString stringWithFormat:@"%ld",(long)self.paymentModel.payType]];
+}
+
+- (void)sumbitBill:(UIButton *)sender amount:(NSString *)amount depositor:(NSString *)depositor depositorType:(NSString *)depositorType payType:(NSString *)payType{
     __weak typeof(self) weakSelf = self;
     __weak typeof(sender) weakSender = sender;
     NSDictionary *params = @{
@@ -202,6 +373,7 @@
     [IVNetwork requestPostWithUrl:BTTBQPayment paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         [self hideLoading];
+        weakSender.selected = NO;
         if ([result.head.errCode isEqualToString:@"0000"]) {
             CNPayBankCardModel *model = [[CNPayBankCardModel alloc] initWithDictionary:result.body error:nil];
             if (!model) {
@@ -212,9 +384,6 @@
             weakSelf.writeModel.chooseBank = model;
             [weakSelf goToStep:1];
         }else{
-            if (sender.selected) {
-                sender.selected = !sender.selected;
-            }
             if ([result.head.errCode isEqualToString:@"GW_800705"]) {
                 BTTPaymentWarningPopView *pop = [BTTPaymentWarningPopView viewFromXib];
                 pop.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);

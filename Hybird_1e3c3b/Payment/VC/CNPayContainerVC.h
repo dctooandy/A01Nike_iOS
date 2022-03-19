@@ -21,4 +21,7 @@
 - (instancetype)initWithPaymentType:(NSInteger)payChannel;
 - (BOOL)canPopViewController;
 - (void)setupView;
+
+/// 撮合参数
+@property (nonatomic, strong) CNPaymentModel *matchModel;
 @end

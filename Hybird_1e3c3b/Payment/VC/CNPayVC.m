@@ -19,6 +19,8 @@
 #import "BTTCompleteMeterialController.h"
 #import "BTTMeMainModel.h"
 #import "CNMSelectChannelVC.h"
+#import "KYMFastWithdrewVC.h"
+#import "CNMAlertView.h"
 
 /// 顶部渠道单元尺寸
 #define kPayChannelItemSize CGSizeMake(102, 132)
@@ -30,6 +32,10 @@
 
 @property (weak, nonatomic) IBOutlet CNPayBankView *bankView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bankViewHeight;
+
+@property (weak, nonatomic) IBOutlet UIView *channelView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *channelViewH;
+
 
 @property (weak, nonatomic) IBOutlet UIView *stepView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *stepViewHeight;
@@ -126,6 +132,8 @@
 }
 
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full {
+    self.channelView.hidden = full;
+    self.channelViewH.constant = full ? 0: 117;
     self.stepViewHeight.constant = height;
     [self.payScrollView scrollsToTop];
 }
@@ -191,6 +199,7 @@
             _payChannelVC.payments = @[channel.payModel];
         }
     }
+    _payChannelVC.matchModel = self.matchModel;
     
 //    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
     self.title = channel.name;
@@ -260,7 +269,9 @@
 
 - (UILabel *)alertLabel {
     if (!_alertLabel) {
-        UILabel *alertLabel = [[UILabel alloc] initWithFrame:self.view.bounds];
+        CGRect frame = self.view.bounds;
+        frame.size.width = UIScreen.mainScreen.bounds.size.width;
+        UILabel *alertLabel = [[UILabel alloc] initWithFrame:frame];
         alertLabel.text = @"充值方式已经关闭，请联系客服!";
         alertLabel.textColor = [UIColor grayColor];
         alertLabel.textAlignment = NSTextAlignmentCenter;
@@ -289,6 +300,9 @@
 - (void)goToBack {
     [self removeBankView];
     UIViewController *vc = self.segmentVC.childViewControllers.firstObject;
+    if (self.segmentVC.currentDisplayItemIndex == 0) {
+        [self setContentViewHeight:650 fullScreen:NO];
+    }
     if (vc && [vc isKindOfClass:[CNPayContainerVC class]]) {
         if ([((CNPayContainerVC *)vc) canPopViewController]) {
             [self.navigationController popViewControllerAnimated:YES];

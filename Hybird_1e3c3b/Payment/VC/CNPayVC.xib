@@ -14,6 +14,8 @@
                 <outlet property="bankViewHeight" destination="HNr-2z-gfr" id="7F0-pM-d1h"/>
                 <outlet property="channelLogo" destination="qLT-o5-5WJ" id="lyr-fc-8fZ"/>
                 <outlet property="channelTitle" destination="jkc-2H-zDU" id="XTo-ij-tcW"/>
+                <outlet property="channelView" destination="Vxf-cU-lyv" id="xZx-lT-mzK"/>
+                <outlet property="channelViewH" destination="z75-an-yOA" id="E1a-aD-Wxf"/>
                 <outlet property="contentWidth" destination="MZY-Me-Doh" id="R7t-DB-GTN"/>
                 <outlet property="discountLb" destination="iIi-Ba-7gg" id="8LV-Fn-eDR"/>
                 <outlet property="payScrollView" destination="QJU-Je-JNv" id="2PJ-Se-qr8"/>

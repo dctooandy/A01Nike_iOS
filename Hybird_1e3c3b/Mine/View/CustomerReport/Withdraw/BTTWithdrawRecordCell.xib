@@ -66,7 +66,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="RWX-ph-E6h">
-                        <rect key="frame" x="181" y="9.5" width="134.5" height="41"/>
+                        <rect key="frame" x="181" y="15.5" width="134.5" height="29"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="108元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Orv-7Q-DAr">
                                 <rect key="frame" x="0.0" y="0.0" width="33.5" height="14.5"/>
@@ -78,12 +78,6 @@
                                 <rect key="frame" x="0.0" y="14.5" width="134.5" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.4867474437" green="0.50507026909999997" blue="0.54118227959999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="查看详情 &gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s7k-R4-J5J">
-                                <rect key="frame" x="0.0" y="29" width="50.5" height="12"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                <color key="textColor" red="0.3294117647" green="0.59999999999999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -135,7 +129,6 @@
                 <outlet property="dateLab" destination="U6r-Ve-I9l" id="DIV-oz-xr6"/>
                 <outlet property="moneyLab" destination="Orv-7Q-DAr" id="z5k-l6-1Hj"/>
                 <outlet property="requestIdLab" destination="H3a-0j-fR4" id="eTk-Kv-nl0"/>
-                <outlet property="seeDetailLb" destination="s7k-R4-J5J" id="6KX-ug-J4g"/>
                 <outlet property="sourceLab" destination="fzu-CK-pEr" id="7qO-a4-c7F"/>
                 <outlet property="timeLab" destination="0rU-qM-pEP" id="83V-Ku-XY7"/>
                 <outlet property="typeLab" destination="8SZ-e4-VHt" id="FlL-zG-NtM"/>

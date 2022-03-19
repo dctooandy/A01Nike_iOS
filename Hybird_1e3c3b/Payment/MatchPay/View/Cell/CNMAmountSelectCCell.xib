@@ -34,16 +34,16 @@
                         <rect key="frame" x="221" y="0.0" width="32" height="17"/>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="gle-CC-COg">
-                        <rect key="frame" x="92.5" y="62" width="68.5" height="36.5"/>
+                        <rect key="frame" x="106.5" y="71" width="40" height="18.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGC-at-Dix">
-                                <rect key="frame" x="0.0" y="0.0" width="57.5" height="36.5"/>
-                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="26"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2C-tj-HE7">
+                                <rect key="frame" x="0.0" y="0.0" width="8" height="18.5"/>
+                                <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F2C-tj-HE7">
-                                <rect key="frame" x="60.5" y="0.0" width="8" height="36.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGC-at-Dix">
+                                <rect key="frame" x="11" y="0.0" width="29" height="18.5"/>
                                 <fontDescription key="fontDescription" name="PingFangSC-Regular" family="PingFang SC" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -70,6 +70,7 @@
             <size key="customSize" width="253" height="160"/>
             <connections>
                 <outlet property="amountLb" destination="FGC-at-Dix" id="t5u-Fx-1nF"/>
+                <outlet property="bgView" destination="CZo-qh-rov" id="bbh-S3-H4x"/>
                 <outlet property="checkIV" destination="puw-Ej-bkk" id="UhN-r9-QJO"/>
                 <outlet property="recommendTag" destination="Ayf-JY-TuB" id="k6q-qP-cuO"/>
             </connections>
