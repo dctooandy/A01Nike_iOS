@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *amountLB;
 @property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
 @property (weak, nonatomic) IBOutlet UIButton *noConfirmBtn;
+@property (weak, nonatomic) IBOutlet UIStackView *orderStackView;
 
 @end
 @implementation KYMWithdrawHistoryView
@@ -30,12 +31,22 @@
 {
     self.confirmBtn.layer.borderWidth = 1.0;
     self.confirmBtn.layer.cornerRadius = 4;
-    self.confirmBtn.layer.borderColor = [UIColor colorWithRed:0xFF / 255.0 green:0xEB / 255.0 blue:0x3B / 255.0 alpha:0.2].CGColor;
+    self.confirmBtn.layer.borderColor = [UIColor colorWithRed:0xFF / 255.0 green:0xEB / 255.0 blue:0x3B / 255.0 alpha:1].CGColor;
     self.noConfirmBtn.layer.borderWidth = 1.0;
     self.noConfirmBtn.layer.cornerRadius = 4;
-    self.noConfirmBtn.layer.borderColor = [UIColor colorWithRed:0xFF / 255.0 green:0xEB / 255.0 blue:0x3B / 255.0 alpha:0.2].CGColor;
+    self.noConfirmBtn.layer.borderColor = [UIColor colorWithRed:0xFF / 255.0 green:0xEB / 255.0 blue:0x3B / 255.0 alpha:1].CGColor;
     self.amountLB.text = _amount;
     self.orderNoLB.text = _orderNo;
+    
+    self.orderStackView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gesture)];
+    [self.orderStackView addGestureRecognizer:gesture];
+}
+- (void)gesture
+{
+    UIPasteboard *pastboard = [UIPasteboard generalPasteboard];
+    pastboard.string = self.orderNo;
+    [MBProgressHUD showMessagNoActivity:@"已复制" toView:nil];
 }
 - (IBAction)confirmBtnClicked:(id)sender {
     self.confirmBtnHandler();
