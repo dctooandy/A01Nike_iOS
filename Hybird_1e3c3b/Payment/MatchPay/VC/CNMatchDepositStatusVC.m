@@ -234,7 +234,6 @@
     } else {
         [UIPasteboard generalPasteboard].string = self.contentLbArray[sender.tag].text;
     }
-    [UIPasteboard generalPasteboard].string = self.contentLbArray[sender.tag].text;
     [self showSuccess:@"复制成功"];
 }
 
