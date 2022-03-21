@@ -32,7 +32,6 @@
 #import "KYMWithdrewAmountCell.h"
 #import "KYMWithdrewHomeNotifyCell.h"
 #import "KYMWithdrewRequest.h"
-#import "KYMFastWithdrewVC.h"
 #import "CNMAlertView.h"
 #import "KYMWithdrawHistoryCell.h"
 #import "KYMWithdrewSuccessVC.h"
