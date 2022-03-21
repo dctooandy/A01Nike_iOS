@@ -34,7 +34,7 @@
                             <constraint firstAttribute="height" constant="1" id="cEk-KH-RaO"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择固定取款金额，可以获得0.5%返利，礼金无上限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAW-uR-jLs">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="固定金额成功取款返利0.5%，24小时到账，礼金无上限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAW-uR-jLs">
                         <rect key="frame" x="15" y="9" width="316" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="gHK-ZO-RYd"/>
