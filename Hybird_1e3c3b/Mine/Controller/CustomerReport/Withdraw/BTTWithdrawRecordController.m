@@ -14,7 +14,6 @@
 #import "BTTWithdrawRecordModel.h"
 #import "BRPickerView.h"
 #import "BTTPromoRecordFooterView.h"
-#import "KYMFastWithdrewVC.h"
 
 @interface BTTWithdrawRecordController ()<BTTElementsFlowLayoutDelegate>
 @property(nonatomic, copy)NSString * sortTypeStr;

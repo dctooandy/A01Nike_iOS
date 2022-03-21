@@ -32,7 +32,6 @@
 #import "KYMWithdrewAmountCell.h"
 #import "KYMWithdrewHomeNotifyCell.h"
 #import "KYMWithdrewRequest.h"
-#import "KYMFastWithdrewVC.h"
 #import "CNMAlertView.h"
 #import "KYMWithdrawHistoryCell.h"
 #import "KYMWithdrewSuccessVC.h"
@@ -49,6 +48,11 @@
 
 @implementation BTTWithdrawalController
 
+- (void)setCheckModel:(KYMWithdrewCheckModel *)checkModel
+{
+    _checkModel = checkModel;
+    [self checkIfHasExistingMacthOrder];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"取款申请";
@@ -64,7 +68,6 @@
     [self setUpNav];
     [self refreshBankList];
     [self requestSellUsdtSwitch];
-//    [self checkIfHasExistingMacthOrder];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -765,27 +768,9 @@
 //是否已存在撮合订单
 - (void)checkIfHasExistingMacthOrder
 {
-    //是否已存在存取款提案
-    __weak typeof(self)weakSelf = self;
     KYMWithdrewCheckModel *model = self.checkModel;
     if (model.data.mmProcessingOrderTransactionId && model.data.mmProcessingOrderTransactionId.length != 0) {
-        if (model.data.mmProcessingOrderType == 1) { // 存款
-            [CNMAlertView showAlertTitle:@"交易提醒" content:@"您当前有正在交易的存款订单" desc:nil needRigthTopClose:NO commitTitle:@"关闭" commitAction:^{
-                weakSelf.isForceNormalWithdraw = YES;
-                [weakSelf loadMainData];
-            } cancelTitle:@"查看订单" cancelAction:^{
-            }];
-        } else { // 取款
-            
-            [CNMAlertView showAlertTitle:@"交易提醒" content:@"老板，当前有正在交易的取款订单" desc:nil needRigthTopClose:NO commitTitle:@"关闭" commitAction:^{
-                weakSelf.isForceNormalWithdraw = YES;
-                [weakSelf loadMainData];
-            } cancelTitle:@"查看订单" cancelAction:^{
-                KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
-                vc.mmProcessingOrderTransactionId = model.data.mmProcessingOrderTransactionId;
-                [weakSelf.navigationController pushViewController:vc animated:YES];
-            }];
-        }
+        self.isForceNormalWithdraw = YES;
     }
 }
 - (void)customerBtnClicked

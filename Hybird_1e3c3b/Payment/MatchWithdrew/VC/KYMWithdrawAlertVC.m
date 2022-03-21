@@ -19,7 +19,7 @@
     [super viewDidLoad];
     self.noGetMoneyBtn.layer.borderWidth = 1.0;
 //    self.noGetMoneyBtn.layer.cornerRadius = 4;
-    self.noGetMoneyBtn.layer.borderColor = [UIColor colorWithRed:0xFF / 255.0 green:0xEB / 255.0 blue:0x3B / 255.0 alpha:0.2].CGColor;
+    self.noGetMoneyBtn.layer.borderColor = [UIColor colorWithRed:0xF2 / 255.0 green:0xDA / 255.0 blue:0x0F / 255.0 alpha:1].CGColor;
 }
 - (IBAction)confirmBtnClicked:(id)sender {
     [self dismissViewControllerAnimated:YES completion:^{
