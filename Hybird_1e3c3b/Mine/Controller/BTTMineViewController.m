@@ -60,7 +60,6 @@
 #import "BTTCustomerReportController.h"
 #import "BTTLiCaiViewController.h"
 #import "BTTUserForzenManager.h"
-#import "KYMFastWithdrewVC.h"
 #import "BTTMeGoldenCCell.h"
 #import "KYMWithdrewRequest.h"
 #import "CNMAlertView.h"

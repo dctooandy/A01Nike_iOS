@@ -19,7 +19,6 @@
 #import "BTTCompleteMeterialController.h"
 #import "BTTMeMainModel.h"
 #import "CNMSelectChannelVC.h"
-#import "KYMFastWithdrewVC.h"
 #import "CNMAlertView.h"
 
 /// 顶部渠道单元尺寸
