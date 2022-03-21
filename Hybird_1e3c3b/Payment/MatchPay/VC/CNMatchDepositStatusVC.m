@@ -92,6 +92,7 @@
     self.bankView.layer.borderColor = kHexColor(0x3A3D46).CGColor;
     self.bankView.layer.cornerRadius = 8;
     self.title = @"存款";
+    self.confirmBtn.enabled = NO;
     
     for (UIButton *btn in self.btnCopyArray) {
         NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"复制"];
