@@ -15,6 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *amountLB;
 @property (weak, nonatomic) IBOutlet UILabel *notifyLB;
+@property (weak, nonatomic) IBOutlet UIButton *goBackBtn;
 
 @end
 
@@ -26,7 +27,15 @@
     CGFloat amount = [self.amountStr doubleValue];
     self.amountLB.text = [KYMWidthdrewUtility getMoneyString:amount];
     self.notifyLB.text = [NSString stringWithFormat:@"您将获得%0.2lf元取款礼金，24小时到账",amount * 0.005];
+    
+    self.goBackBtn.layer.cornerRadius = 6;
+    self.goBackBtn.layer.masksToBounds = YES;
+    self.goBackBtn.layer.borderWidth = 1;
+    self.goBackBtn.layer.borderColor = [UIColor colorWithRed:0xFF / 255.0 green:0xFF / 255.0 blue:0x00 / 255.0 alpha:1].CGColor;
    
+}
+- (IBAction)goBackUserCenter:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 - (IBAction)submitBtnClicked:(id)sender {
     KYMWithdrawAlertVC *vc = [KYMWithdrawAlertVC new];
