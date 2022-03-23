@@ -8,6 +8,7 @@
 
 #import "BTTBindingMobileOneCell.h"
 #import "BTTMeMainModel.h"
+#import "NSString+CNPayment.h"
 #define ALPHANUM @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"//数字和字母
 
 @interface BTTBindingMobileOneCell ()<UITextFieldDelegate>
@@ -95,6 +96,22 @@
     }
     else if ([self.model.name isEqualToString:@"手机号码"] && textField.text.length >= 11 && string.length > 0) {
         return false;
+    }
+    else if ([self.model.name isEqualToString:@"开户网点"]) {
+        if (![PublicMethod checkTextFieldString:string] && string.length > 0) {
+            [MBProgressHUD showError:@"开户网点格式有误" toView:nil];
+            return NO;
+        } else {
+            return YES;
+        }
+    }
+    else if ([self.model.name isEqualToString:@"备注"]) {
+        if (![PublicMethod checkTextFieldString:string] && string.length > 0) {
+            [MBProgressHUD showError:@"备注信息格式有误" toView:nil];
+            return NO;
+        } else {
+            return YES;
+        }
     }
     else {
         return YES;

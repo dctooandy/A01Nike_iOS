@@ -18,7 +18,6 @@
 #import "HAInitConfig.h"
 #import "BTTPasswordCell.h"
 #import "BTTAddCardController+Nav.h"
-
 @interface BTTAddCardController ()<BTTElementsFlowLayoutDelegate, UITextFieldDelegate>
 
 @property (nonatomic, assign) CGRect activedTextFieldRect;
@@ -123,7 +122,13 @@
     } else {
         BTTBindingMobileOneCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTBindingMobileOneCell" forIndexPath:indexPath];
         BTTMeMainModel *model = self.sheetDatas[indexPath.row];
-        cell.textField.delegate = self;
+        if ([model.name isEqualToString:@"开户网点"])
+        {
+            
+        }else
+        {
+            cell.textField.delegate = self;            
+        }
         cell.model = model;
         if (indexPath.row == self.sheetDatas.count - 1) {
             cell.mineSparaterType = BTTMineSparaterTypeNone;
