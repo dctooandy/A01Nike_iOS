@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KYMWithdrewSuccessVC">
             <connections>
                 <outlet property="amountLB" destination="pP0-rr-5lU" id="xhP-K3-bCP"/>
+                <outlet property="goBackBtn" destination="HcC-cm-fkX" id="PHq-7X-rIc"/>
                 <outlet property="notifyLB" destination="x5d-id-ba1" id="OfJ-rD-1cI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -94,26 +95,6 @@
                         <constraint firstItem="pP0-rr-5lU" firstAttribute="leading" secondItem="zn7-ho-TLj" secondAttribute="leading" id="ubA-0D-yVc"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jR-97-foI">
-                    <rect key="frame" x="15" y="371" width="384" height="48"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="48" id="9XC-In-wAF"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
-                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                    <state key="normal" title="确认到账" backgroundImage="mwd_submit">
-                        <color key="titleColor" red="0.12941176469999999" green="0.1333333333" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="8"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="submitBtnClicked:" destination="-1" eventType="touchUpInside" id="26m-Ro-DO2"/>
-                    </connections>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如取款未到账或金额不符，请及时联系客服" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TiS-8x-rKr">
                     <rect key="frame" x="0.0" y="433" width="414" height="22"/>
                     <constraints>
@@ -146,21 +127,92 @@
                         <action selector="customerBtnClicked:" destination="-1" eventType="touchUpInside" id="GCc-JZ-uet"/>
                     </connections>
                 </button>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="abC-2i-ARM">
+                    <rect key="frame" x="15" y="371" width="384" height="48"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HcC-cm-fkX">
+                            <rect key="frame" x="0.0" y="0.0" width="184.5" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="RLX-xv-A4a"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="返回会员中心">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <font key="NSFont" size="16" name="PingFangTC-Semibold"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="goBackUserCenter:" destination="-1" eventType="touchUpInside" id="d1R-ta-pMn"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jR-97-foI">
+                            <rect key="frame" x="199.5" y="0.0" width="184.5" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="9XC-In-wAF"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="确认到账" backgroundImage="mwd_submit">
+                                <color key="titleColor" red="0.12941176469999999" green="0.1333333333" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <buttonConfiguration key="configuration" style="plain" title="确认到账">
+                                <backgroundConfiguration key="background" image="mwd_submit"/>
+                                <fontDescription key="titleFontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
+                                <color key="baseForegroundColor" red="0.12941176469999999" green="0.1333333333" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </buttonConfiguration>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="submitBtnClicked:" destination="-1" eventType="touchUpInside" id="26m-Ro-DO2"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="6jR-97-foI" firstAttribute="width" secondItem="HcC-cm-fkX" secondAttribute="width" id="av4-2T-NXQ"/>
+                    </constraints>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="额外0.5%返利礼金" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gec-C6-3h5">
+                    <rect key="frame" x="214.5" y="404" width="184.5" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="V5B-5e-p6V"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="TiS-8x-rKr" firstAttribute="top" secondItem="6jR-97-foI" secondAttribute="bottom" constant="14" id="068-hZ-fSE"/>
+                <constraint firstItem="abC-2i-ARM" firstAttribute="top" secondItem="zn7-ho-TLj" secondAttribute="bottom" constant="30" id="1qH-2Q-jvc"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="TiS-8x-rKr" secondAttribute="trailing" id="2xo-BS-4FU"/>
-                <constraint firstItem="6jR-97-foI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="52x-0c-j1J"/>
                 <constraint firstItem="VGh-et-4G6" firstAttribute="top" secondItem="TiS-8x-rKr" secondAttribute="bottom" constant="2" id="9fd-Pu-uFZ"/>
                 <constraint firstItem="zn7-ho-TLj" firstAttribute="top" secondItem="Mwl-uY-0p5" secondAttribute="bottom" constant="3" id="BJM-cR-eaT"/>
                 <constraint firstItem="VGh-et-4G6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="DK2-MA-R8U"/>
-                <constraint firstItem="6jR-97-foI" firstAttribute="top" secondItem="zn7-ho-TLj" secondAttribute="bottom" constant="30" id="SdM-wy-E8D"/>
+                <constraint firstItem="abC-2i-ARM" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="15" id="H6S-yu-oEL"/>
                 <constraint firstItem="Mwl-uY-0p5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="UlZ-mV-5Ou"/>
                 <constraint firstItem="TiS-8x-rKr" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Yjr-4m-R5v"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="zn7-ho-TLj" secondAttribute="trailing" constant="15" id="Zo4-fF-95q"/>
-                <constraint firstAttribute="trailing" secondItem="6jR-97-foI" secondAttribute="trailing" constant="15" id="fbB-7U-lEd"/>
+                <constraint firstItem="gec-C6-3h5" firstAttribute="bottom" secondItem="6jR-97-foI" secondAttribute="bottom" id="dgT-rK-1CR"/>
+                <constraint firstItem="gec-C6-3h5" firstAttribute="leading" secondItem="6jR-97-foI" secondAttribute="leading" id="fjO-SN-GiN"/>
+                <constraint firstAttribute="trailing" secondItem="abC-2i-ARM" secondAttribute="trailing" constant="15" id="gXL-wD-9z3"/>
+                <constraint firstItem="gec-C6-3h5" firstAttribute="trailing" secondItem="6jR-97-foI" secondAttribute="trailing" id="i4R-rZ-wFr"/>
+                <constraint firstItem="TiS-8x-rKr" firstAttribute="top" secondItem="abC-2i-ARM" secondAttribute="bottom" constant="14" id="mmW-oi-71y"/>
                 <constraint firstItem="zn7-ho-TLj" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="15" id="qhd-fN-ADi"/>
                 <constraint firstItem="Mwl-uY-0p5" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="szV-EN-y9z"/>
             </constraints>

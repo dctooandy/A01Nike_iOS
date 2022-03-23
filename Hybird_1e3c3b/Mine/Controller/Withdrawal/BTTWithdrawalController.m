@@ -701,9 +701,6 @@
             [MBProgressHUD showError:msg toView:nil];
             return;
         }
-//        KYMFastWithdrewVC *vc = [[KYMFastWithdrewVC alloc] init];
-//        vc.mmProcessingOrderTransactionId = model.referenceId;
-        
         KYMWithdrewSuccessVC *vc = [[KYMWithdrewSuccessVC alloc] init];
         vc.amountStr = model.amount;
         vc.transactionId = model.referenceId;
