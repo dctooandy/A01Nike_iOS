@@ -86,6 +86,9 @@
     self.contentWidth.constant = [UIScreen mainScreen].bounds.size.width-30;
     [self registerNotification];
     [self setupChannelView];
+    if (self.fastModel.mmProcessingOrderType == 1 && self.fastModel.mmProcessingOrderTransactionId.length > 0) {
+        [self showTradeBill];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

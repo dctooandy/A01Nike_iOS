@@ -57,6 +57,7 @@
     [super loadViewFromXib];
     self.pictureArr1 = [NSMutableArray arrayWithCapacity:1];
     self.pictureArr2 = [NSMutableArray arrayWithCapacity:4];
+    self.confirmBtn.enabled = NO;
     
     NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"联系客服"];
     [attributeString addAttribute:NSUnderlineStyleAttributeName

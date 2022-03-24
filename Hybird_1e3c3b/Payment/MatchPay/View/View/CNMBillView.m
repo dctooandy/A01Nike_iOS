@@ -12,7 +12,7 @@
 
 - (void)loadViewFromXib {
     [super loadViewFromXib];
-    self.statusBtn.layer.cornerRadius = 16;
+    self.statusBtn.layer.cornerRadius = 4;
     self.statusBtn.layer.borderColor = self.statusBtn.titleLabel.textColor.CGColor;
     self.statusBtn.layer.borderWidth = 1;
     self.statusBtn.layer.masksToBounds = YES;

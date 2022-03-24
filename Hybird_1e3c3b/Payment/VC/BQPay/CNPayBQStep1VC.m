@@ -43,11 +43,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewH;
 @property (weak, nonatomic) IBOutlet UILabel *matchTipLb;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *matchTipLbH;
-
-@property (weak, nonatomic) IBOutlet UIView *billView;
-@property (weak, nonatomic) IBOutlet UILabel *billIdLb;
-@property (weak, nonatomic) IBOutlet UIButton *statusBtn;
-@property (weak, nonatomic) IBOutlet UILabel *billAmountLb;
 @property (nonatomic, strong) NSArray *matchAmountList;
 @property (nonatomic, strong) NSArray *dataAList;
 @end

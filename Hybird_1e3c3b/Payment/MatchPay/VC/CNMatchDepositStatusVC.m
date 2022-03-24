@@ -69,6 +69,10 @@
     self.title = @"存款";
     self.confirmBtn.enabled = NO;
     
+    self.backBtn.layer.cornerRadius = 8;
+    self.backBtn.layer.borderWidth = 1;
+    self.backBtn.layer.borderColor = kHexColor(0xF2DA0F).CGColor;
+    
     for (UIButton *btn in self.btnCopyArray) {
         NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:@"复制"];
         [attributeString addAttribute:NSUnderlineStyleAttributeName
