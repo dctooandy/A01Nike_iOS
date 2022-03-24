@@ -10,5 +10,5 @@
 
 @interface CNPayBQStep1VC : CNPayBaseVC
 /// 撮合参数
-@property (nonatomic, strong) CNPaymentModel *matchModel;
+@property (nonatomic, strong) CNPaymentModel *fastModel;
 @end

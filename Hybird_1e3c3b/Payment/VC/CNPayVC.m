@@ -20,6 +20,9 @@
 #import "BTTMeMainModel.h"
 #import "CNMSelectChannelVC.h"
 #import "CNMAlertView.h"
+#import "CNMBillView.h"
+#import "CNMUploadView.h"
+#import "CNMatchDepositStatusVC.h"
 
 /// 顶部渠道单元尺寸
 #define kPayChannelItemSize CGSizeMake(102, 132)
@@ -35,6 +38,8 @@
 @property (weak, nonatomic) IBOutlet UIView *channelView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *channelViewH;
 
+@property (weak, nonatomic) IBOutlet UIView *billView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *billViewH;
 
 @property (weak, nonatomic) IBOutlet UIView *stepView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *stepViewHeight;
@@ -94,6 +99,36 @@
         [CNTimeLog endRecordTime:CNEventPayLaunch];
         _isFirstLoad = YES;
     }
+}
+
+#pragma mark - 撮合相关
+
+- (void)showTradeBill {
+    CNMBillView *view = [[CNMBillView alloc] init];
+    if (self.fastModel.mmProcessingOrderStatus == 2) {
+        [view.statusBtn setTitle:@"确认存款" forState:UIControlStateNormal];
+        [view.statusBtn addTarget:self action:@selector(confirmBill) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [view.statusBtn setTitle:@"我要催单" forState:UIControlStateNormal];
+        [view.statusBtn addTarget:self action:@selector(showUploadUI) forControlEvents:UIControlEventTouchUpInside];
+    }
+    self.billViewH.constant = 66;
+    [self.billView addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    view.amountLb.text = [NSString stringWithFormat:@"%.2f", self.fastModel.mmProcessingOrderAmount.doubleValue];
+    view.billNoLb.text = self.fastModel.mmProcessingOrderTransactionId;
+}
+
+- (void)showUploadUI {
+    [CNMUploadView showUploadViewTo:self billId:self.fastModel.mmProcessingOrderTransactionId commitDeposit:nil];
+}
+
+- (void)confirmBill {
+    CNMatchDepositStatusVC *statusVC = [[CNMatchDepositStatusVC alloc] init];
+    statusVC.transactionId = self.fastModel.mmProcessingOrderTransactionId;
+    [self.navigationController pushViewController:statusVC animated:YES];
 }
 
 - (void)registerNotification {
@@ -198,7 +233,7 @@
             _payChannelVC.payments = @[channel.payModel];
         }
     }
-    _payChannelVC.matchModel = self.matchModel;
+    _payChannelVC.fastModel = self.fastModel;
     
 //    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
     self.title = channel.name;

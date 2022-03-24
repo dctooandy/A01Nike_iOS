@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,6 +13,8 @@
             <connections>
                 <outlet property="bankView" destination="MYj-Ou-aGS" id="4Cs-7z-cgm"/>
                 <outlet property="bankViewHeight" destination="HNr-2z-gfr" id="7F0-pM-d1h"/>
+                <outlet property="billView" destination="aKC-YH-rVd" id="SK9-ff-N1R"/>
+                <outlet property="billViewH" destination="ed4-Vz-vCs" id="YL7-X7-PMG"/>
                 <outlet property="channelLogo" destination="qLT-o5-5WJ" id="lyr-fc-8fZ"/>
                 <outlet property="channelTitle" destination="jkc-2H-zDU" id="XTo-ij-tcW"/>
                 <outlet property="channelView" destination="Vxf-cU-lyv" id="xZx-lT-mzK"/>
@@ -119,6 +122,13 @@
                                         <constraint firstAttribute="height" constant="117" id="z75-an-yOA"/>
                                     </constraints>
                                 </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKC-YH-rVd" userLabel="BillView">
+                                    <rect key="frame" x="0.0" y="117" width="345" height="0.0"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" id="ed4-Vz-vCs"/>
+                                    </constraints>
+                                </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tkf-1e-xpL">
                                     <rect key="frame" x="0.0" y="117" width="345" height="300"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -130,12 +140,15 @@
                             <color key="backgroundColor" red="0.12941176470588234" green="0.13333333333333333" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="tkf-1e-xpL" secondAttribute="bottom" id="0bL-ZS-stU"/>
+                                <constraint firstItem="aKC-YH-rVd" firstAttribute="top" secondItem="Vxf-cU-lyv" secondAttribute="bottom" id="LG5-Dp-uqA"/>
                                 <constraint firstAttribute="width" constant="345" id="MZY-Me-Doh"/>
                                 <constraint firstItem="Vxf-cU-lyv" firstAttribute="top" secondItem="MYj-Ou-aGS" secondAttribute="bottom" id="RBi-tn-YqJ"/>
                                 <constraint firstAttribute="trailing" secondItem="MYj-Ou-aGS" secondAttribute="trailing" id="VME-Cq-PdJ"/>
-                                <constraint firstItem="tkf-1e-xpL" firstAttribute="top" secondItem="Vxf-cU-lyv" secondAttribute="bottom" id="eq8-JT-igo"/>
+                                <constraint firstItem="tkf-1e-xpL" firstAttribute="top" secondItem="aKC-YH-rVd" secondAttribute="bottom" id="bxo-gF-EXD"/>
                                 <constraint firstItem="Vxf-cU-lyv" firstAttribute="leading" secondItem="bJH-b5-xaB" secondAttribute="leading" id="hCg-4a-Cdd"/>
+                                <constraint firstAttribute="trailing" secondItem="aKC-YH-rVd" secondAttribute="trailing" id="lBT-3i-l2N"/>
                                 <constraint firstItem="MYj-Ou-aGS" firstAttribute="leading" secondItem="bJH-b5-xaB" secondAttribute="leading" id="r8d-7X-3lE"/>
+                                <constraint firstItem="aKC-YH-rVd" firstAttribute="leading" secondItem="bJH-b5-xaB" secondAttribute="leading" id="sW2-RV-FdJ"/>
                                 <constraint firstAttribute="trailing" secondItem="tkf-1e-xpL" secondAttribute="trailing" id="tDA-hc-VG0"/>
                                 <constraint firstItem="MYj-Ou-aGS" firstAttribute="top" secondItem="bJH-b5-xaB" secondAttribute="top" id="vqM-jE-Rfj"/>
                                 <constraint firstAttribute="trailing" secondItem="Vxf-cU-lyv" secondAttribute="trailing" id="yLt-q0-jlu"/>
@@ -173,5 +186,8 @@
         <image name="channel_fastpay" width="50" height="50"/>
         <image name="channel_recommend" width="56" height="16"/>
         <image name="me_arrow" width="16" height="16"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
