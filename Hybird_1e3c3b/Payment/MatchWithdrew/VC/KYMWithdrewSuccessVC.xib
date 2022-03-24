@@ -156,21 +156,16 @@
                                 <action selector="goBackUserCenter:" destination="-1" eventType="touchUpInside" id="d1R-ta-pMn"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jR-97-foI">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jR-97-foI" customClass="CNPaySubmitButton">
                             <rect key="frame" x="199.5" y="0.0" width="184.5" height="48"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="48" id="9XC-In-wAF"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" title="确认到账" backgroundImage="mwd_submit">
+                            <state key="normal" title="确认到账">
                                 <color key="titleColor" red="0.12941176469999999" green="0.1333333333" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
-                            <buttonConfiguration key="configuration" style="plain" title="确认到账">
-                                <backgroundConfiguration key="background" image="mwd_submit"/>
-                                <fontDescription key="titleFontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
-                                <color key="baseForegroundColor" red="0.12941176469999999" green="0.1333333333" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </buttonConfiguration>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                     <integer key="value" value="8"/>
@@ -220,7 +215,6 @@
         </view>
     </objects>
     <resources>
-        <image name="mwd_submit" width="345" height="44"/>
         <image name="mwd_success" width="100" height="100"/>
     </resources>
 </document>
