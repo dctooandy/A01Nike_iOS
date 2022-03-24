@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void(^HandlerBlock)(id _Nullable responseObj,  NSString * _Nullable errorMsg);
+
 @interface CNMatchPayRequest : NSObject
 
 /// 创建撮合订单
@@ -35,9 +37,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)queryDepisit:(NSString *)billId finish:(KYHTTPCallBack)finish;
 
 /// 上传图片
-/// @param image  图片
+/// @param receiptImages  回执单图片组
+/// @param recordImages  流水图片数组
+/// @param billId  订单号
 /// @param finish 完成回调
-+ (void)uploadImage:(UIImage *)image finish:(KYHTTPCallBack)finish;
++ (void)uploadReceiptImages:(NSArray *)receiptImages recordImages:(NSArray *)recordImages billId:(NSString *)billId finish:(HandlerBlock)finish;
 @end
 
 NS_ASSUME_NONNULL_END
