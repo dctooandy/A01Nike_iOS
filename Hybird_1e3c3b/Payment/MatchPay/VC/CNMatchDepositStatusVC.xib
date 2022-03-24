@@ -295,6 +295,9 @@
                                             <state key="normal" title="返回个人中心">
                                                 <color key="titleColor" red="1" green="0.92156862750000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="goToHomePage:" destination="-1" eventType="touchUpInside" id="tXf-RN-Jg1"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vYd-ok-Vjf" customClass="CNPaySubmitButton">
                                             <rect key="frame" x="202" y="0.0" width="182" height="48"/>
@@ -342,6 +345,9 @@
                                     <state key="normal" title="联系客服">
                                         <color key="titleColor" red="0.035294117647058823" green="0.58039215686274503" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="customerServer" destination="-1" eventType="touchUpInside" id="xHx-aq-zML"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
