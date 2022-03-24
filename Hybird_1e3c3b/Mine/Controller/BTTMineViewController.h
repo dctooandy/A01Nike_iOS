@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *validateId;
 
 /// 撮合参数
-@property (nonatomic, strong) CNPaymentModel *matchModel;
+@property (nonatomic, strong) CNPaymentModel *fastModel;
 @end
 
 NS_ASSUME_NONNULL_END

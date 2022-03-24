@@ -466,7 +466,7 @@
     [channelArray addObjectsFromArray:self.normalDataTwo];
     
     CNPayVC *payVC = [[CNPayVC alloc] initWithChannel:model.paymentType channelArray:channelArray];
-    payVC.matchModel = self.matchModel;
+    payVC.fastModel = self.fastModel;
     [self.navigationController pushViewController:payVC animated:YES];
 }
 

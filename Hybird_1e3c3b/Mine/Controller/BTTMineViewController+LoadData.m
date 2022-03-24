@@ -151,10 +151,10 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             NSDictionary *dic = result.body[@"data"];
             if ([dic isKindOfClass:[NSDictionary class]]) {
-                self.matchModel = [CNPaymentModel yy_modelWithDictionary:dic];
-                self.matchModel.payType = CNPaymentFast;
-                if (!self.matchModel.isAvailable || self.matchModel.mmProcessingOrderTransactionId.length > 0) {
-                    self.matchModel.amountList = nil;
+                self.fastModel = [CNPaymentModel yy_modelWithDictionary:dic];
+                self.fastModel.payType = CNPaymentFast;
+                if (!self.fastModel.isAvailable || self.fastModel.mmProcessingOrderTransactionId.length > 0) {
+                    self.fastModel.amountList = nil;
                 }
             }
         }
