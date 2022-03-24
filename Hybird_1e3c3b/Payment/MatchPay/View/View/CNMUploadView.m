@@ -182,7 +182,7 @@
     // 联系客服
     [CSVisitChatmanager startWithSuperVC:self.superVC finish:^(CSServiceCode errCode) {
         if (errCode != CSServiceCode_Request_Suc) {
-            [CNTOPHUB showError:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持"];
+            [MBProgressHUD showError:@"暂时无法链接，请贵宾改以电话联系，感谢您的理解与支持" toView:nil];
         }
     }];
 }
@@ -191,16 +191,16 @@
 
 /// 图片上传
 - (void)uploadImages {
-    [LoadingView showLoadingViewWithToView:self needMask:YES];
+    [MBProgressHUD showLoadingSingleInView:self animated:YES];
     __weak typeof(self) weakSelf = self;
     [CNMatchPayRequest uploadReceiptImages:self.pictureArr1 recordImages:self.pictureArr2 billId:self.billId finish:^(id responseObj, NSString *errorMsg) {
-        [LoadingView hideLoadingViewForView:self];
+        [MBProgressHUD hideHUDForView:self animated:NO];
         if (errorMsg) {
-            [CNTOPHUB showError:errorMsg];
+            [MBProgressHUD showError:errorMsg toView:nil];
             return;
         }
         if ([responseObj isKindOfClass:[NSDictionary class]]) {
-            [CNTOPHUB showSuccess:@"图片上传成功"];
+            [MBProgressHUD showSuccess:@"图片上传成功" toView:nil];
             NSDictionary *dic = (NSDictionary *)responseObj;
             [weakSelf removeFromSuperview];
             !weakSelf.commitBlock ?: weakSelf.commitBlock([dic objectForKey:@"receiptOriginalFileNames"], [dic objectForKey:@"transactionOriginalFileNames"]);

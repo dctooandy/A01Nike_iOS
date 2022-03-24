@@ -20,7 +20,7 @@
 
 - (IBAction)copyBill:(id)sender {
     [UIPasteboard generalPasteboard].string = self.billNoLb.text;
-    [CNTOPHUB showSuccess:@"已复制"];
+    [MBProgressHUD showSuccess:@"已复制" toView:nil];
 }
 
 @end
