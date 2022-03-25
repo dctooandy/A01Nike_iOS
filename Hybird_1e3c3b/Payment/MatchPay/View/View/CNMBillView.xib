@@ -11,7 +11,10 @@
             <connections>
                 <outlet property="amountLb" destination="hIA-7A-YTt" id="xOy-1m-pXK"/>
                 <outlet property="billNoLb" destination="hmh-EB-Hyr" id="L8c-9B-m7z"/>
+                <outlet property="promoTagIV" destination="ys5-fT-wZh" id="ZoZ-vb-7bi"/>
                 <outlet property="statusBtn" destination="JhZ-fA-tvw" id="A1B-sF-saa"/>
+                <outlet property="statusBtnH" destination="hFH-8F-yJw" id="jtr-HI-kab"/>
+                <outlet property="statusBtnW" destination="qRj-g1-SFh" id="qr1-qO-4wF"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -33,6 +36,9 @@
                                 <color key="titleColor" red="1" green="0.92156862750000001" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="promo_tag" translatesAutoresizingMaskIntoConstraints="NO" id="ys5-fT-wZh">
+                            <rect key="frame" x="359" y="60.5" width="40" height="12"/>
+                        </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="n35-ss-yCe">
                             <rect key="frame" x="15" y="60.5" width="144.5" height="32.5"/>
                             <subviews>
@@ -97,6 +103,8 @@
                         <constraint firstAttribute="trailing" secondItem="JhZ-fA-tvw" secondAttribute="trailing" constant="15" id="Ptk-v0-G2e"/>
                         <constraint firstItem="ur7-NP-dUu" firstAttribute="trailing" secondItem="GEn-90-X04" secondAttribute="trailing" id="Rnd-uB-jyr"/>
                         <constraint firstItem="BXI-42-t07" firstAttribute="leading" secondItem="CBN-ZO-Rbt" secondAttribute="leading" constant="15" id="Xzd-uY-PT3"/>
+                        <constraint firstItem="JhZ-fA-tvw" firstAttribute="top" secondItem="ys5-fT-wZh" secondAttribute="top" id="bZE-h3-D0A"/>
+                        <constraint firstItem="JhZ-fA-tvw" firstAttribute="trailing" secondItem="ys5-fT-wZh" secondAttribute="trailing" id="fSN-Gv-cNy"/>
                         <constraint firstItem="JhZ-fA-tvw" firstAttribute="centerY" secondItem="CBN-ZO-Rbt" secondAttribute="centerY" id="pcJ-TP-R9m"/>
                         <constraint firstItem="n35-ss-yCe" firstAttribute="centerY" secondItem="CBN-ZO-Rbt" secondAttribute="centerY" id="rag-Sx-M5n"/>
                         <constraint firstAttribute="trailing" secondItem="BXI-42-t07" secondAttribute="trailing" constant="15" id="t9R-XR-DLk"/>
@@ -114,4 +122,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="-144.30803571428569"/>
         </view>
     </objects>
+    <resources>
+        <image name="promo_tag" width="40" height="12"/>
+    </resources>
 </document>

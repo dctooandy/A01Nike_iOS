@@ -109,10 +109,10 @@
 - (void)showTradeBill {
     CNMBillView *view = [[CNMBillView alloc] init];
     if (self.fastModel.mmProcessingOrderStatus == 2) {
-        [view.statusBtn setTitle:@"确认存款" forState:UIControlStateNormal];
+        [view setPromoTag:NO];
         [view.statusBtn addTarget:self action:@selector(confirmBill) forControlEvents:UIControlEventTouchUpInside];
     } else {
-        [view.statusBtn setTitle:@"我要催单" forState:UIControlStateNormal];
+        [view setPromoTag:YES];
         [view.statusBtn addTarget:self action:@selector(showUploadUI) forControlEvents:UIControlEventTouchUpInside];
     }
     self.billViewH.constant = 66;
