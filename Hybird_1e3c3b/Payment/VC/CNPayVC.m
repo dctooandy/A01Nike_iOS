@@ -169,6 +169,10 @@
 }
 
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full {
+    if (full && self.billViewH.constant > 0) {
+        self.billViewH.constant = 0;
+        self.billView.hidden = YES;
+    }
     self.channelView.hidden = full;
     self.channelViewH.constant = full ? 0: 117;
     self.stepViewHeight.constant = height;
