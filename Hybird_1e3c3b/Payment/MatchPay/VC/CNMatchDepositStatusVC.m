@@ -114,7 +114,7 @@
     self.accountName.text = bank.bankAccountName;
     self.accountNo.text = [self addSpaceForNum:bank.bankAccountNo];
     self.subBankName.text = bank.bankBranchName;
-    self.amountTipLb.text = [NSString stringWithFormat:@"完成存款将获得%@元存款礼金，24小时到账", [self twoDecimalPointFromAmount:(bank.amount.doubleValue *0.01)]];
+    self.amountTipLb.text = [NSString stringWithFormat:@"完成存款将获得%@元存款礼金，24小时到账", (bank.amount.doubleValue *0.01)];
     
     if (bank.needUploadFlag) {
         self.confirmBtn.enabled = YES;
@@ -131,16 +131,6 @@
             self.confirmBtn.enabled = YES;
         }
     }
-}
-
-/// 金额不要四舍五入，直接截取两位小数
-- (NSString *)twoDecimalPointFromAmount:(double)amount {
-    NSNumber *number = [NSNumber numberWithDouble:amount];
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    [formatter setPositiveFormat:@"###0.00"];
-    formatter.roundingMode = NSNumberFormatterRoundDown;
-    formatter.maximumFractionDigits = 2;
-    return [formatter stringFromNumber:number];
 }
 
 - (NSString *)addSpaceForNum:(NSString *)num {
