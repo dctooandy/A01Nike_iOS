@@ -237,10 +237,10 @@
         cell.historyView.amount = self.checkModel.data.mmProcessingOrderAmount;
         cell.historyView.orderNo = self.checkModel.data.mmProcessingOrderTransactionId;
         cell.historyView.confirmBtnHandler = ^{
-            [weakSelf confirmGetMathWithdraw];
+            [weakSelf showConfirmMathWithdrawAlert];
         };
         cell.historyView.noConfirmBtnHandler = ^ {
-            [weakSelf noConfirmGetMathWithdraw];
+            [weakSelf showConfirmMathWithdrawAlert];
         };
         return cell;
     }
@@ -780,7 +780,7 @@
         }
     }];
 }
-- (void)confirmGetMathWithdraw
+- (void)showConfirmMathWithdrawAlert
 {
     __weak typeof(self)weakSelf = self;
     KYMWithdrawAlertVC *vc = [KYMWithdrawAlertVC new];
