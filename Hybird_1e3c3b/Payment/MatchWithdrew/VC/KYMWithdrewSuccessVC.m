@@ -26,7 +26,8 @@
     self.title = @"取款申请";
     CGFloat amount = [self.amountStr doubleValue];
     self.amountLB.text = [KYMWidthdrewUtility getMoneyString:amount];
-    self.notifyLB.text = [NSString stringWithFormat:@"您将获得%0.2lf元取款礼金，24小时到账",amount * 0.005];
+    CGFloat notAmount = floor(amount * 0.005 * 100) / 100;
+    self.notifyLB.text = [NSString stringWithFormat:@"您将获得%0.2lf元取款礼金，24小时到账",notAmount];
     
     self.goBackBtn.layer.cornerRadius = 8;
     self.goBackBtn.layer.masksToBounds = YES;
