@@ -169,9 +169,14 @@
 }
 
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full {
-    if (full && self.billViewH.constant > 0) {
+    if (full) {
         self.billViewH.constant = 0;
         self.billView.hidden = YES;
+    } else {
+        if (self.fastModel.mmProcessingOrderType == 1 && self.fastModel.mmProcessingOrderTransactionId.length > 0) {
+            self.billViewH.constant = 66;
+            self.billView.hidden = NO;
+        }
     }
     self.channelView.hidden = full;
     self.channelViewH.constant = full ? 0: 117;
