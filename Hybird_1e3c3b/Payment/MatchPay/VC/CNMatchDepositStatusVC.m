@@ -114,7 +114,7 @@
     self.accountName.text = bank.bankAccountName;
     self.accountNo.text = [self addSpaceForNum:bank.bankAccountNo];
     self.subBankName.text = bank.bankBranchName;
-    self.amountTipLb.text = [NSString stringWithFormat:@"完成存款将获得%@元存款礼金，24小时到账", (bank.amount.doubleValue *0.01)];
+    self.amountTipLb.text = [NSString stringWithFormat:@"完成存款将获得%.2f元存款礼金，24小时到账", (bank.amount.doubleValue *0.01)];
     
     if (bank.needUploadFlag) {
         self.confirmBtn.enabled = YES;
