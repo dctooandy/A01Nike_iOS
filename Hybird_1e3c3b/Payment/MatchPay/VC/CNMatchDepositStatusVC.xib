@@ -20,8 +20,6 @@
                 <outlet property="bankName" destination="1F0-JF-YfW" id="Uuo-EZ-lX3"/>
                 <outlet property="bankView" destination="PoK-fU-Iad" id="beP-Ie-oE7"/>
                 <outlet property="confirmBtn" destination="vYd-ok-Vjf" id="ubN-eH-5MJ"/>
-                <outlet property="serverView" destination="1io-t5-V24" id="9NG-wb-FcD"/>
-                <outlet property="serverViewH" destination="E2z-B4-j59" id="nhI-dp-rbt"/>
                 <outlet property="subBankName" destination="cOd-j9-prl" id="mu8-Qe-V3Q"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outletCollection property="contentLbArray" destination="IBN-BR-PRs" id="Pug-hF-bVQ"/>
@@ -329,8 +327,8 @@
                                 <constraint firstItem="e1W-ak-i4Y" firstAttribute="top" secondItem="Mmb-bI-Faa" secondAttribute="bottom" constant="15" id="rgW-if-Bw3"/>
                             </constraints>
                         </view>
-                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1io-t5-V24" userLabel="ServerView">
-                            <rect key="frame" x="0.0" y="538.5" width="414" height="0.0"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1io-t5-V24" userLabel="ServerView">
+                            <rect key="frame" x="0.0" y="538.5" width="414" height="80"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如有疑问，请及时联系客服" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8M-t5-aTS">
                                     <rect key="frame" x="135" y="15" width="144" height="17"/>
@@ -354,7 +352,7 @@
                             <constraints>
                                 <constraint firstItem="gQF-vU-d7D" firstAttribute="centerX" secondItem="1io-t5-V24" secondAttribute="centerX" id="1TI-dV-s1V"/>
                                 <constraint firstItem="gQF-vU-d7D" firstAttribute="top" secondItem="t8M-t5-aTS" secondAttribute="bottom" constant="6" id="9ku-zK-hnY"/>
-                                <constraint firstAttribute="height" id="E2z-B4-j59"/>
+                                <constraint firstAttribute="height" constant="80" id="E2z-B4-j59"/>
                                 <constraint firstItem="t8M-t5-aTS" firstAttribute="top" secondItem="1io-t5-V24" secondAttribute="top" constant="15" id="XPk-fO-gqE"/>
                                 <constraint firstItem="t8M-t5-aTS" firstAttribute="centerX" secondItem="1io-t5-V24" secondAttribute="centerX" id="tJx-e8-dMD"/>
                             </constraints>
