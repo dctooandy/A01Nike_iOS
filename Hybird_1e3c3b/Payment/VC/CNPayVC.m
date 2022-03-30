@@ -18,23 +18,36 @@
 #import "CNPayDepositNameModel.h"
 #import "BTTCompleteMeterialController.h"
 #import "BTTMeMainModel.h"
+#import "CNMSelectChannelVC.h"
+#import "CNMAlertView.h"
+#import "CNMBillView.h"
+#import "CNMUploadView.h"
+#import "CNMatchDepositStatusVC.h"
 
 /// 顶部渠道单元尺寸
 #define kPayChannelItemSize CGSizeMake(102, 132)
 #define kChannelCellIndentifier   @"CNPayChannelCell"
 
-@interface CNPayVC () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface CNPayVC ()
 @property (weak, nonatomic) IBOutlet UIScrollView *payScrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentWidth;
 
 @property (weak, nonatomic) IBOutlet CNPayBankView *bankView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bankViewHeight;
 
-@property (weak, nonatomic) IBOutlet UICollectionView *payCollectionView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *payCollectionViewHeight;
+@property (weak, nonatomic) IBOutlet UIView *channelView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *channelViewH;
+
+@property (weak, nonatomic) IBOutlet UIView *billView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *billViewH;
 
 @property (weak, nonatomic) IBOutlet UIView *stepView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *stepViewHeight;
+
+@property (weak, nonatomic) IBOutlet UIImageView *channelLogo;
+@property (weak, nonatomic) IBOutlet UILabel *channelTitle;
+@property (weak, nonatomic) IBOutlet UILabel *discountLb;
+@property (weak, nonatomic) IBOutlet UIImageView *recommendIcon;
 
 
 @property (nonatomic, assign) NSInteger defaultChannel;
@@ -43,7 +56,6 @@
 @property (nonatomic, strong) AMSegmentViewController *segmentVC;
 @property (nonatomic, strong) UILabel *alertLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *activityView;
-@property (nonatomic, strong) NSMutableArray *payments;
 
 @property (nonatomic, strong) CNPayContainerVC *payChannelVC;
 
@@ -71,10 +83,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = kBlackBackgroundColor;
     self.payScrollView.backgroundColor = kBlackBackgroundColor;
-    self.contentWidth.constant = [UIScreen mainScreen].bounds.size.width;
-    [self.payCollectionView registerNib:[UINib nibWithNibName:kChannelCellIndentifier bundle:nil] forCellWithReuseIdentifier:kChannelCellIndentifier];
+    self.contentWidth.constant = [UIScreen mainScreen].bounds.size.width-30;
     [self registerNotification];
     [self setupChannelView];
+    if (self.fastModel.mmProcessingOrderType == 1 && self.fastModel.mmProcessingOrderTransactionId.length > 0) {
+        [self showTradeBill];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -90,10 +104,34 @@
     }
 }
 
--(void)viewDidLayoutSubviews{
-    [super viewDidLayoutSubviews];
-    [_payCollectionView reloadData];
-    [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+#pragma mark - 撮合相关
+
+- (void)showTradeBill {
+    CNMBillView *view = [[CNMBillView alloc] init];
+    if (self.fastModel.mmProcessingOrderStatus == 2) {
+        [view setPromoTag:NO];
+        [view.statusBtn addTarget:self action:@selector(confirmBill) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [view setPromoTag:YES];
+        [view.statusBtn addTarget:self action:@selector(showUploadUI) forControlEvents:UIControlEventTouchUpInside];
+    }
+    self.billViewH.constant = 66;
+    [self.billView addSubview:view];
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(0);
+    }];
+    view.amountLb.text = [NSString stringWithFormat:@"%.2f", self.fastModel.mmProcessingOrderAmount.doubleValue];
+    view.billNoLb.text = self.fastModel.mmProcessingOrderTransactionId;
+}
+
+- (void)showUploadUI {
+    [CNMUploadView showUploadViewTo:self billId:self.fastModel.mmProcessingOrderTransactionId commitDeposit:nil];
+}
+
+- (void)confirmBill {
+    CNMatchDepositStatusVC *statusVC = [[CNMatchDepositStatusVC alloc] init];
+    statusVC.transactionId = self.fastModel.mmProcessingOrderTransactionId;
+    [self.navigationController pushViewController:statusVC animated:YES];
 }
 
 - (void)registerNotification {
@@ -131,8 +169,17 @@
 }
 
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full {
-    self.payCollectionView.hidden = full;
-    self.payCollectionViewHeight.constant = full ? 0: 142;
+    if (full) {
+        self.billViewH.constant = 0;
+        self.billView.hidden = YES;
+    } else {
+        if (self.fastModel.mmProcessingOrderType == 1 && self.fastModel.mmProcessingOrderTransactionId.length > 0) {
+            self.billViewH.constant = 66;
+            self.billView.hidden = NO;
+        }
+    }
+    self.channelView.hidden = full;
+    self.channelViewH.constant = full ? 0: 117;
     self.stepViewHeight.constant = height;
     [self.payScrollView scrollsToTop];
 }
@@ -156,6 +203,56 @@
 //    [self setupChannelView];
 }
 
+- (IBAction)selectChannel:(id)sender {
+    CNMSelectChannelVC *vc = [[CNMSelectChannelVC alloc] init];
+    vc.payments = self.payments;
+    vc.currentSelectedIndex = self.currentSelectedIndex;
+    __weak typeof(self) weakSelf = self;
+    vc.finish = ^(NSInteger currentSelectedIndex) {
+        [weakSelf didSelectChannel:currentSelectedIndex];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)updateChannelUI:(BTTMeMainModel *)channel {
+    self.channelLogo.image = [UIImage imageNamed:channel.iconName];
+    self.discountLb.text = (channel.paymentType == CNPaymentFast) ? @"返利1%" : nil;
+    self.channelTitle.text = channel.name;
+    self.recommendIcon.hidden = (channel.paymentType != CNPaymentFast);
+}
+
+- (void)didSelectChannel:(NSInteger)index {
+    BTTMeMainModel *channel = [_payments objectAtIndex:index];
+    [self updateChannelUI:channel];
+    if ([IVNetwork savedUserInfo].starLevel == 0 && ![IVNetwork savedUserInfo].realName.length) {
+        if (channel.paymentType == 90 || channel.paymentType == 91 || channel.paymentType == 92 || channel.paymentType == 0) {
+            BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
+            [self.navigationController pushViewController:personInfo animated:YES];
+            return;
+        }
+    }
+    [self removeBankView];
+    self.currentSelectedIndex = index;
+    
+    if (channel.paymentType==6789) {
+        _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payModels.firstObject.payType];
+        _payChannelVC.payments = channel.payModels;
+    } else if (channel.paymentType == CNPaymentVip) {
+        _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.paymentType];
+    } else {
+        _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.paymentType];
+        if (channel.payModel) {
+            _payChannelVC.payments = @[channel.payModel];
+        }
+    }
+    _payChannelVC.fastModel = self.fastModel;
+    
+//    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
+    self.title = channel.name;
+    self.selectedIcon = channel.iconName;
+    [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];
+    
+}
 
 /**
  构建展示视图
@@ -200,7 +297,9 @@
         _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.paymentType];
     } else {
         _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channelModel.paymentType];
-        _payChannelVC.payments = @[channelModel.payModel];
+        if (channelModel.payModel) {
+            _payChannelVC.payments = @[channelModel.payModel];
+        }
     }
     
     _segmentVC = [[AMSegmentViewController alloc] initWithViewController:_payChannelVC];
@@ -209,84 +308,16 @@
         make.edges.mas_equalTo(0);
     }];
     
-    [_payCollectionView reloadData];
-    [self.payCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForItem:_currentSelectedIndex inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-}
-
-#pragma mark- UICollectionViewDelegate, UICollectionViewDataSource
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.payments.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    CNPayChannelCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kChannelCellIndentifier forIndexPath:indexPath];
-    
-    BTTMeMainModel *channel = [_payments objectAtIndex:indexPath.row];
-    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
-    if ([channel.name isEqualToString:@"微信/QQ/京东"] && savetimes) {
-        cell.titleLb.text = @"支付宝/微信/QQ/京东";
-        cell.titleLb.font = [UIFont boldSystemFontOfSize:11];
-    } else {
-        cell.titleLb.text = channel.name;
-        cell.titleLb.font = [UIFont boldSystemFontOfSize:13];
-    }
-    cell.channelIV.image = [UIImage imageNamed:channel.iconName];
-    cell.discountImg.hidden = !(channel.paymentType == CNPaymentVip);
-    
-    // 默认选中第一个可以支付的渠道
-    if (indexPath.row == _currentSelectedIndex) {
-        cell.selected = YES;
-    }
-    return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    if (indexPath.row == _currentSelectedIndex) {
-        return;
-    }
-    BTTMeMainModel *channel = [_payments objectAtIndex:indexPath.row];
-    if ([IVNetwork savedUserInfo].starLevel == 0 && ![IVNetwork savedUserInfo].realName.length) {
-        if (channel.paymentType == 90 || channel.paymentType == 91 || channel.paymentType == 92 || channel.paymentType == 0) {
-            BTTCompleteMeterialController *personInfo = [[BTTCompleteMeterialController alloc] init];
-            [self.navigationController pushViewController:personInfo animated:YES];
-            [collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:self.currentSelectedIndex inSection:0] animated:NO scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
-            [collectionView reloadData];
-            return;
-        }
-    }
-    [self removeBankView];
-    self.currentSelectedIndex = indexPath.row;
-    [self.payCollectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
-    
-    if (channel.paymentType==6789) {
-        _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.payModels.firstObject.payType];
-        _payChannelVC.payments = channel.payModels;
-    } else if (channel.paymentType == CNPaymentVip) {
-        _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.paymentType];
-    } else {
-        _payChannelVC = [[CNPayContainerVC alloc] initWithPaymentType:channel.paymentType];
-        _payChannelVC.payments = @[channel.payModel];
-    }
-    
-//    BOOL savetimes = [[[NSUserDefaults standardUserDefaults] objectForKey:BTTSaveMoneyTimesKey] integerValue];
-    self.title = channel.name;
-    self.selectedIcon = channel.iconName;
-    [self.segmentVC addOrUpdateDisplayViewController:_payChannelVC];
-    
-}
-
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return kPayChannelItemSize;
+    [self didSelectChannel:_currentSelectedIndex];
 }
 
 #pragma mark - Getter
 
 - (UILabel *)alertLabel {
     if (!_alertLabel) {
-        UILabel *alertLabel = [[UILabel alloc] initWithFrame:self.view.bounds];
+        CGRect frame = self.view.bounds;
+        frame.size.width = UIScreen.mainScreen.bounds.size.width;
+        UILabel *alertLabel = [[UILabel alloc] initWithFrame:frame];
         alertLabel.text = @"充值方式已经关闭，请联系客服!";
         alertLabel.textColor = [UIColor grayColor];
         alertLabel.textAlignment = NSTextAlignmentCenter;
@@ -315,6 +346,9 @@
 - (void)goToBack {
     [self removeBankView];
     UIViewController *vc = self.segmentVC.childViewControllers.firstObject;
+    if (self.segmentVC.currentDisplayItemIndex == 0) {
+        [self setContentViewHeight:650 fullScreen:NO];
+    }
     if (vc && [vc isKindOfClass:[CNPayContainerVC class]]) {
         if ([((CNPayContainerVC *)vc) canPopViewController]) {
             [self.navigationController popViewControllerAnimated:YES];

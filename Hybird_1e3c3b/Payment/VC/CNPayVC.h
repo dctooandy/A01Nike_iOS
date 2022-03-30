@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface CNPayVC : HABaseViewController
 /** 渠道选中图标名称  */
 @property (nonatomic, copy) NSString *selectedIcon;
-
+@property (nonatomic, strong) NSMutableArray *payments;
 /**
  支付模块
  
@@ -26,6 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setContentViewHeight:(CGFloat)height fullScreen:(BOOL)full;
 - (void)addBankView;
 - (void)removeBankView;
+- (void)didSelectChannel:(NSInteger)index;
+
+
+/// 撮合参数
+@property (nonatomic, strong) CNPaymentModel *fastModel;
 @end
 
 NS_ASSUME_NONNULL_END

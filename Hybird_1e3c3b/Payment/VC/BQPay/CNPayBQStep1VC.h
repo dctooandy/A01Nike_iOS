@@ -9,5 +9,6 @@
 #import "CNPayBaseVC.h"
 
 @interface CNPayBQStep1VC : CNPayBaseVC
-
+/// 撮合参数
+@property (nonatomic, strong) CNPaymentModel *fastModel;
 @end

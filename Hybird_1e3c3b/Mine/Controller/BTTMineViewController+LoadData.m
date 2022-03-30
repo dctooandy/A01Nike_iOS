@@ -7,7 +7,6 @@
 //
 
 #import "BTTMineViewController+LoadData.h"
-#import "BTTMeMainModel.h"
 #import "CNPayRequestManager.h"
 #import "CNPaymentModel.h"
 #import "BTTMakeCallSuccessView.h"
@@ -18,6 +17,10 @@
 #import "BTTUserStatusManager.h"
 #import "BTTWithdrawToUsdtPromoPop.h"
 #import "BTTMineViewController+Nav.h"
+
+@interface BTTMineViewController ()
+
+@end
 
 @implementation BTTMineViewController (LoadData)
 
@@ -107,6 +110,7 @@
     if ([IVNetwork savedUserInfo]) {
         if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"]) {
             [self loadCreditVipChannel];
+            [self checkFastChannelOpen];
         } else {
             if (self.vipBigDataSoure.count) {
                 [self.vipBigDataSoure removeAllObjects];
@@ -134,6 +138,26 @@
             }
         }
         [self loadPersonalPaymentData];
+    }];
+}
+
+-(void)checkFastChannelOpen {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    dic[@"type"] = @"1"; // 存款
+    dic[@"merchant"] = @"A01";
+    dic[@"currency"] = @"CNY";
+    [IVNetwork requestPostWithUrl:BTTMatchChannelOpen paramters:dic completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSDictionary *dic = result.body[@"data"];
+            if ([dic isKindOfClass:[NSDictionary class]]) {
+                self.fastModel = [CNPaymentModel yy_modelWithDictionary:dic];
+                self.fastModel.payType = CNPaymentFast;
+                if (!self.fastModel.isAvailable || self.fastModel.mmProcessingOrderTransactionId.length > 0) {
+                    self.fastModel.amountList = nil;
+                }
+            }
+        }
     }];
 }
 
@@ -440,8 +464,8 @@
     }
     self.isOpenSellUsdt = NO;
     NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
-    NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
-    NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
+    NSMutableArray *names = @[cardString,@"绑定手机",@"个人资料"].mutableCopy;
+    NSMutableArray *icons = @[@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
     [self handleDataOneWithNames:names icons:icons];
     [IVNetwork requestPostWithUrl:BTTOneKeySellUSDT paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
@@ -455,26 +479,26 @@
                     self.isOpenSellUsdt = YES;
                     [self requestSellUsdtLink];
                     NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
-                    NSMutableArray *names = @[@"取款",@"一键卖币",@"洗码",cardString,@"绑定手机",@"个人资料"].mutableCopy;
-                    NSMutableArray *icons = @[@"me_withdrawal",@"me_sell_usdt",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
+                    NSMutableArray *names = @[@"一键卖币",cardString,@"绑定手机",@"个人资料"].mutableCopy;
+                    NSMutableArray *icons = @[@"me_sell_usdt",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
                     [self handleDataOneWithNames:names icons:icons];
                 } else {
                     NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
-                    NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
-                    NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
+                    NSMutableArray *names = @[cardString,@"绑定手机",@"个人资料"].mutableCopy;
+                    NSMutableArray *icons = @[@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
                     [self handleDataOneWithNames:names icons:icons];
                 }
                 
             }else{
                 NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
-                NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
-                NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
+                NSMutableArray *names = @[cardString,@"绑定手机",@"个人资料"].mutableCopy;
+                NSMutableArray *icons = @[@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
                 [self handleDataOneWithNames:names icons:icons];
             }
         }else{
             NSString *cardString = [[IVNetwork savedUserInfo].uiMode isEqualToString:@"USDT"] ? @"钱包管理" : @"银行卡资料";
-            NSMutableArray *names = @[@"取款",@"洗码",cardString,@"绑定手机",@"个人资料",@""].mutableCopy;
-            NSMutableArray *icons = @[@"me_withdrawal",@"me_washcode",@"me_card_band",@"me_mobile_band",@"me_personalInfo_band",@""].mutableCopy;
+            NSMutableArray *names = @[cardString,@"绑定手机",@"个人资料"].mutableCopy;
+            NSMutableArray *icons = @[@"me_card_band",@"me_mobile_band",@"me_personalInfo_band"].mutableCopy;
             [self handleDataOneWithNames:names icons:icons];
         }
     }];
@@ -507,9 +531,9 @@
         [self.mainDataTwo removeAllObjects];
     }
 //    NSArray *names = @[@"我的优惠",@"客户报表",@"账号安全",@"额度转账",@"站内信",@"版本更新",@"网站检测",@"设置"];
-    NSArray *names = @[@"我的优惠",@"客户报表",@"账号安全",@"站内信",@"版本更新",@"网站检测",@"设置"];
+    NSArray *names = @[@"客户报表",@"账号安全",@"站内信",@"版本更新",@"网站检测",@"设置"];
 //    NSArray *icons = @[@"me_preferential",@"me_sheet",@"me_amountsafe",@"me_transfer",@"me_message",@"me_version",@"me_speed",@"me_setting"];
-    NSArray *icons = @[@"me_preferential",@"me_sheet",@"me_amountsafe",@"me_message",@"me_version",@"me_speed",@"me_setting"];
+    NSArray *icons = @[@"me_sheet",@"me_amountsafe",@"me_message",@"me_version",@"me_speed",@"me_setting"];
     for (NSString *name in names) {
         NSInteger index = [names indexOfObject:name];
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
@@ -950,5 +974,4 @@
 - (void)setGames:(NSMutableArray *)games {
     objc_setAssociatedObject(self, @selector(games), games, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-
 @end

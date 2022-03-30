@@ -653,6 +653,11 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 //網關域名
 #define BTTAppSetting                              @"_extra_/api/v1/getAppSetting"
 
+#pragma mark - 撮合系统
+//查询撮合存款是否开启
+#define BTTMatchChannelOpen                        @"deposit/checkChannel"
+
+
 // 红包雨
 // 活动基本信息，包括初始化的倒计时等
 #define BTTRainInfo                               @"_extra_/api/v1/activity/money-rain/info"
