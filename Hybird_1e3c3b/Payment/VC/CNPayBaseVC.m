@@ -15,6 +15,7 @@
 #import "CNPayTipView.h"
 #import "CNPayOrderModel.h"
 #import "CNPayOrderModelV2.h"
+#import "BTTMeMainModel.h"
 
 
 
@@ -27,7 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = kBlackBackgroundColor;
+    self.view.backgroundColor = kBlackForgroundColor;
+    [self setViewHeight:300 fullScreen:NO];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -317,6 +319,18 @@
 
 - (void)addBankView {
     [self.payVC addBankView];
+}
+
+- (void)removeFastPay {
+    BTTMeMainModel *fastModel;
+    for (BTTMeMainModel *model in self.payVC.payments) {
+        if (model.paymentType == CNPaymentFast) {
+            fastModel = model;
+            break;
+        }
+    }
+    [self.payVC.payments removeObject:fastModel];
+    [self.payVC didSelectChannel:0];
 }
 
 #pragma mark - 支付后提示页面

@@ -7,7 +7,7 @@
 //
 
 #import "BTTMineViewController.h"
-
+#import "BTTMeMainModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 

@@ -7,6 +7,8 @@
 //
 
 #import "BTTBaseModel.h"
+#import "CNMBankModel.h"
+
 @class BTTDepositRecordExtraModel;
 @class BTTDepositRecordItemModel;
 
@@ -45,6 +47,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *transAmount;
 @property (nonatomic, copy) NSString *transCode;
 
+
+@property (nonatomic, copy) NSString *referenceId;
+@property (nonatomic, assign) CNMPayBillStatus mmStatus;
 @end
 
 @interface BTTDepositRecordExtraModel : BTTBaseModel

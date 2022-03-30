@@ -16,7 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *moneyLab;
 @property (weak, nonatomic) IBOutlet UILabel *requestIdLab;
 @property (weak, nonatomic) IBOutlet UILabel *typeLab;
-
 @property (nonatomic, copy) NSString *requestIdStr;
 @end
 

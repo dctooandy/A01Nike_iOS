@@ -28,6 +28,7 @@
 #import "BTTFirstWinningListModel.h"
 #import "BTTCheckDomainModel.h"
 #import "AppdelegateManager.h"
+#import "KYMWithdrewRequest.h"
 
 @interface AppDelegate ()<IVPushDelegate>
 
@@ -38,7 +39,6 @@
 @end
 
 @implementation AppDelegate
-
 
 - (instancetype)init
 {
@@ -343,4 +343,15 @@
     }
 }
 
+#pragma marks ------------------------撮合系统内联函数------------------------------------
+inline void kym_sendRequest(NSString * url, id params, KYMCallback callback) {
+    [IVNetwork requestPostWithUrl:url paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            !callback ?: callback(YES, result.head.errMsg,result.body);
+        } else {
+            !callback ?: callback(NO, result.head.errMsg,error);
+        }
+    }];
+}
 @end
