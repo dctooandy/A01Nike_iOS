@@ -178,16 +178,16 @@
     __weak typeof(self) weakSelf = self;
     [CNMatchPayRequest commitDepisit:self.transactionId receiptImg:receiptImages.lastObject transactionImg:recordImages finish:^(id  _Nullable responseObj, NSError * _Nullable error) {
         [weakSelf hideLoading];
+        if (error) {
+            [self showError:error.localizedDescription];
+            return;
+        }
         if ([responseObj isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary *)responseObj;
             if ([[dic objectForKey:@"code"] isEqualToString:@"00000"]) {
                 [weakSelf.navigationController popToRootViewControllerAnimated:YES];
             } else {
-                if (error) {
-                    [self showError:error.localizedDescription];
-                } else {
-                    [self showError:[dic objectForKey:@"message"]];
-                }
+                [self showError:[dic objectForKey:@"message"]];
             }
         }
     }];
