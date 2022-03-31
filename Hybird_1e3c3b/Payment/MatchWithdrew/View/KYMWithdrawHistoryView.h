@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface KYMWithdrawHistoryView : UIView
 @property (nonatomic,copy) NSString *amount;
 @property (nonatomic,copy) NSString *orderNo;
+@property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
+@property (weak, nonatomic) IBOutlet UIButton *noConfirmBtn;
 @property (nonatomic,strong) void(^(confirmBtnHandler))(void);
 @property (nonatomic,strong) void(^(noConfirmBtnHandler))(void);
 @end

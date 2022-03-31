@@ -11,8 +11,6 @@
 @interface KYMWithdrawHistoryView ()
 @property (weak, nonatomic) IBOutlet UILabel *orderNoLB;
 @property (weak, nonatomic) IBOutlet UILabel *amountLB;
-@property (weak, nonatomic) IBOutlet UIButton *confirmBtn;
-@property (weak, nonatomic) IBOutlet UIButton *noConfirmBtn;
 @property (weak, nonatomic) IBOutlet UIStackView *orderStackView;
 
 @end
