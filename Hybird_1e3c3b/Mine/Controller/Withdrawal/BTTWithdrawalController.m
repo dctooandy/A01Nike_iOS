@@ -236,9 +236,17 @@
         KYMWithdrawHistoryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KYMWithdrawHistoryCell" forIndexPath:indexPath];
         cell.historyView.amount = self.checkModel.data.mmProcessingOrderAmount;
         cell.historyView.orderNo = self.checkModel.data.mmProcessingOrderTransactionId;
-        cell.historyView.confirmBtnHandler = ^{
-            [weakSelf showConfirmMathWithdrawAlert];
-        };
+        if (self.checkModel.data.mmProcessingOrderManualStatus == 4) {
+            cell.isManualStatus = YES;
+            cell.historyView.confirmBtnHandler = ^{
+                [weakSelf customerBtnClicked];
+            };
+        } else {
+            cell.historyView.confirmBtnHandler = ^{
+                [weakSelf showConfirmMathWithdrawAlert];
+            };
+        }
+        
         cell.historyView.noConfirmBtnHandler = ^ {
             [weakSelf showConfirmMathWithdrawAlert];
         };
