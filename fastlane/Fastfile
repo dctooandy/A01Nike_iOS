@@ -27,11 +27,24 @@ platform :ios do
         @receiverName = "ieandy"
     else
         @receiverName = "{FD375D42-F34C-43C9-951C-334F1510A69B}"
+    end
+    commandMessage = "🍺🍺🍺🍺🍺呼叫iTalk,传送开始打包讯息"
+    # 文字代号 传输 用 %()
+    receiverString = %({ "receiver" : "#{@receiverName}" ,"content" : "【A01Nike_iOS】【#{environment}】【分支：#{git_branch}】开始进行打包!!! ##{build_number}"})
+    command = "curl -X POST http://10.82.64.30:8000/api/italk/send -H 'appid: A01' \
+      -H 'authorization: Bearer S7BG2g5Cn6MJLD6Obce2p/Ma7BJ5K8BnyBRLKkMPgZA=' \
+      -H 'cache-control: no-cache' \
+      -H 'content-type: application/json' \
+      -H 'postman-token: 1e650d7e-71e4-8329-827d-e4aea0c30050' \
+      -d '#{receiverString}'"
+    callOut_Command(COMMAND:command , COMMAND_MESSAGE:commandMessage)
+    
+    if isTestMode
+    else
         sh "open ad_hoc_btt.mobileprovision"
         update_project_provisioning(
         profile: "./fastlane/ad_hoc_btt.mobileprovision",
-        build_configuration: "AD_Hoc"
-        )
+        build_configuration: "AD_Hoc")
     gym(scheme: ENV['SCHEME'],
         workspace: ENV['WORKSPACE'],
         clean:true,
@@ -136,6 +149,7 @@ platform :ios do
     #gitDiffString = sh("git log --pretty=format:'%s(%an)' $(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))..$(git describe --abbrev=0)").gsub(/[\n]/, '\\n')
     #UI.message "🍺🍺🍺🍺🍺🍺🍺🍺🍺🍺第一种\n #{gitDiffString}\n🍺🍺🍺🍺🍺🍺🍺🍺🍺🍺"
     
+    sh ("git pull origin master:master")
     gitDiffStringTwo = changelog_from_git_commits(
         between: ["#{short_hash}", "master"],
         pretty: "%s(%an)",
@@ -147,7 +161,7 @@ platform :ios do
     UI.message "🍺🍺🍺🍺🍺🍺🍺🍺🍺🍺第二种\n #{gitDiffStringTwo}\n🍺🍺🍺🍺🍺🍺🍺🍺🍺🍺"
     
 # 文字代号 传输 用 %()
-    receiverString = %({ "receiver" : "#{@receiverName}" ,"content" : "【A03ios-usdt】【#{environment}】【分支：#{git_branch}】打包成功!!! #{build_number}\\n-----------------------------------------------------------\\n#{gitDiffStringTwo}"})
+    receiverString = %({ "receiver" : "#{@receiverName}" ,"content" : "【A01Nike_iOS】【#{environment}】【分支：#{git_branch}】打包成功!!! ##{build_number}\\n-----------------------------------------------------------\\n#{gitDiffStringTwo}"})
         UI.message "🍺🍺🍺#{receiverString}🍺🍺🍺"
 
 # 轉換成json格式
