@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3A8F512A215F74CF0069D1B3"
-               BuildableName = "Hybird_1e3c3b.app"
+               BuildableName = "&#x535a;&#x5929;&#x5802;_dev.app"
                BlueprintName = "Hybird_1e3c3b"
                ReferencedContainer = "container:Hybird_1e3c3b.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3A8F512A215F74CF0069D1B3"
-            BuildableName = "Hybird_1e3c3b.app"
+            BuildableName = "&#x535a;&#x5929;&#x5802;_dev.app"
             BlueprintName = "Hybird_1e3c3b"
             ReferencedContainer = "container:Hybird_1e3c3b.xcodeproj">
          </BuildableReference>
@@ -69,7 +69,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3A8F512A215F74CF0069D1B3"
-            BuildableName = "Hybird_1e3c3b.app"
+            BuildableName = "&#x535a;&#x5929;&#x5802;_dev.app"
             BlueprintName = "Hybird_1e3c3b"
             ReferencedContainer = "container:Hybird_1e3c3b.xcodeproj">
          </BuildableReference>
