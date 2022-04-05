@@ -114,10 +114,13 @@
     self.subBankName.text = bank.bankBranchName;
     self.amountTipLb.text = [NSString stringWithFormat:@"完成存款将获得%.2f元存款礼金，24小时到账", (bank.amount.doubleValue *0.01)];
     
+    //确认按钮状态
     if (bank.needUploadFlag) {
         self.confirmBtn.enabled = YES;
         [self.confirmBtn setTitle:@"上传凭证" forState:UIControlStateNormal];
         self.actionTipLb.text = @"请完成存款后，再点击上传凭证";
+    } else if ([bank.manualStatus isEqualToString:@"4"]) {// 交易挂起
+        self.confirmBtn.hidden = YES;
     } else {
         self.actionTipLb.text = @"请完成存款后，再点击确认存款";
         if (bank.createdDateFmt > 0) {
@@ -157,7 +160,10 @@
     if (self.bankModel.needUploadFlag) {
         __weak typeof(self) weakSelf = self;
         [CNMUploadView showUploadViewTo:self billId:self.bankModel.transactionId commitDeposit:^(NSArray *receiptImages, NSArray *recordImages) {
-            [weakSelf commitDepisitWithReceiptImages:receiptImages recordImages:recordImages];
+            // 交易挂起
+            if (![weakSelf.bankModel.manualStatus isEqualToString:@"4"]) {
+                [weakSelf commitDepisitWithReceiptImages:receiptImages recordImages:recordImages];
+            }
         }];
     } else {
         [self commitDepisitWithReceiptImages:nil recordImages:nil];
@@ -167,21 +173,13 @@
 - (void)commitDepisitWithReceiptImages:(NSArray *)receiptImages recordImages:(NSArray *)recordImages {
     // 上报数据
     [self showLoading];
-    __weak typeof(self) weakSelf = self;
     [CNMatchPayRequest commitDepisit:self.transactionId receiptImg:receiptImages.lastObject transactionImg:recordImages finish:^(id  _Nullable responseObj, NSError * _Nullable error) {
-        [weakSelf hideLoading];
-        if ([responseObj isKindOfClass:[NSDictionary class]]) {
-            NSDictionary *dic = (NSDictionary *)responseObj;
-            if ([[dic objectForKey:@"code"] isEqualToString:@"00000"]) {
-                [weakSelf.navigationController popToRootViewControllerAnimated:YES];
-            } else {
-                if (error) {
-                    [self showError:error.localizedDescription];
-                } else {
-                    [self showError:[dic objectForKey:@"message"]];
-                }
-            }
+        [self hideLoading];
+        if (error) {
+            [self showError:error.localizedDescription];
+            return;
         }
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }];
 }
 

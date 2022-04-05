@@ -168,8 +168,12 @@
     NSArray *placeholders4 = @[pString,@"USDT",@"***银行-尾号*****",@"",withdrawPwdP,@"",@"",@""];
     
     CGFloat matchHistoryHeight = 0.0;
-    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"] && self.checkModel.data.mmProcessingOrderType == 2 && self.checkModel.data.mmProcessingOrderStatus == 2 && self.checkModel.data.mmProcessingOrderPairStatus == 5) {
-        matchHistoryHeight = 89.0;
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"] && self.checkModel.data.mmProcessingOrderType == 2 && ((self.checkModel.data.mmProcessingOrderStatus == 2 && self.checkModel.data.mmProcessingOrderPairStatus == 5) || self.checkModel.data.mmProcessingOrderManualStatus == 4)) {
+        if (self.checkModel.data.mmProcessingOrderManualStatus == 4) {
+            matchHistoryHeight = 52.0;
+        } else {
+            matchHistoryHeight = 89.0;
+        }
     }
     CGFloat matchWithdrewAmountH = [self getMatchAmountListHeight];
     CGFloat spaceHeight = 0.0;

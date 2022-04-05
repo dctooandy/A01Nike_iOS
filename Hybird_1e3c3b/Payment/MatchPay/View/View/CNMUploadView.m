@@ -48,8 +48,9 @@
     view.billId = billId;
     if (commitBlock) {
         view.commitBlock = commitBlock;
-        [view.confirmBtn setBackgroundImage:[UIImage imageNamed:@"submit_light"] forState:UIControlStateNormal];
-        [view.confirmBtn setBackgroundImage:[UIImage imageNamed:@"submit_grey"] forState:UIControlStateDisabled];
+        [view.confirmBtn setBackgroundImage:[UIImage imageNamed:@"binding_confirm_enable_normal"] forState:UIControlStateNormal];
+        [view.confirmBtn setBackgroundImage:[UIImage imageNamed:@"binding_confirm_disable"] forState:UIControlStateDisabled];
+        [view.confirmBtn setTitle:@"确认存款" forState:UIControlStateNormal];
     } else {
         [view.confirmBtn setBackgroundImage:[UIImage imageNamed:@"upload_light"] forState:UIControlStateNormal];
         [view.confirmBtn setBackgroundImage:[UIImage imageNamed:@"upload_grey"] forState:UIControlStateDisabled];

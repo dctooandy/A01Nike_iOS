@@ -353,7 +353,10 @@
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="Qne-sW-f5Y" secondAttribute="height" multiplier="320:54" id="nYs-AT-7N2"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name=".PingFangSC-Regular" family=".PingFang SC" pointSize="16"/>
+                                    <fontDescription key="fontDescription" name="PingFangSC-Medium" family="PingFang SC" pointSize="18"/>
+                                    <state key="normal">
+                                        <color key="titleColor" red="0.17254901960784313" green="0.1803921568627451" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
                                     <connections>
                                         <action selector="confirm:" destination="-1" eventType="touchUpInside" id="NiE-fZ-HCr"/>
                                     </connections>
