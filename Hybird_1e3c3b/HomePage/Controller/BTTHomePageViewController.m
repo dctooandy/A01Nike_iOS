@@ -1139,7 +1139,7 @@
             break;
         case 1010://AS电游
             model = [[IVGameModel alloc] init];
-            model.cnName = @"AS真人棋牌";
+            model.cnName = @"区块链游戏";
             model.gameCode = BTTASKEY;
             model.enName =  kASSlotEnName;
             model.provider = kASSlotProvider;
