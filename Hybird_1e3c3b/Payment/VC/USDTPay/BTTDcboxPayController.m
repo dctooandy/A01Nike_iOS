@@ -16,7 +16,7 @@
 #import "USDTWalletCollectionCell.h"
 #import "USDTBuyController.h"
 
-@interface BTTDcboxPayController ()<UITextFieldDelegate,UICollectionViewDelegate, UICollectionViewDataSource>
+@interface BTTDcboxPayController ()<UITextFieldDelegate,UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UIView *choseMoneyView;
 @property (weak, nonatomic) IBOutlet UIView *infoView;
 @property (weak, nonatomic) IBOutlet UITextField *moneyTextField;
@@ -59,7 +59,7 @@
         flowLayout.minimumLineSpacing = 12;  //行间距
         flowLayout.minimumInteritemSpacing = 12; //列间距
 //        flowLayout.estimatedItemSize = CGSizeMake((SCREEN_WIDTH-60)/3, 36);  //预定的itemsize
-        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH-90)/4, 36); //固定的itemsize
+        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH-90 - 30)/4, 36); //固定的itemsize
         flowLayout.headerReferenceSize = CGSizeMake(0, 43);
         //初始化 UICollectionView
         _walletCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
@@ -129,9 +129,10 @@
                         BTTUsdtWalletModel *paymodel = [BTTUsdtWalletModel yy_modelWithJSON:paymentArray.firstObject];
                         NSArray *protocolArray = [paymodel.usdtProtocol componentsSeparatedByString:@";"];
                         NSArray *protocolDetailArray = [protocolArray.firstObject componentsSeparatedByString:@":"];
-                        self.selectedProtocol = protocolDetailArray.firstObject;
-                        self.protocolArray = protocolArray;
-                        
+//                        self.selectedProtocol = protocolDetailArray.firstObject;
+//                        self.protocolArray = protocolArray;
+                        self.protocolArray = @[@"TRC20",@"ERC20"];
+                        self.selectedProtocol = self.protocolArray.firstObject;
                         [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
                         
                         return;
@@ -239,7 +240,7 @@
 - (void)setupView{
     self.view.backgroundColor = kBlackBackgroundColor;
     self.choseMoneyView.layer.backgroundColor = [[UIColor colorWithRed:41.0f/255.0f green:45.0f/255.0f blue:54.0f/255.0f alpha:1.0f] CGColor];
-    self.walletCollectionView.frame = CGRectMake(15, 0, SCREEN_WIDTH-30, 220);
+    self.walletCollectionView.frame = CGRectMake(15, 0, SCREEN_WIDTH-60, 220);
     [self.choseMoneyView addSubview:self.walletCollectionView];
     
     
@@ -383,10 +384,12 @@
         if ([_moneyTextField.text doubleValue]<[_bfbModel.minAmount doubleValue]||[_moneyTextField.text doubleValue]>[_bfbModel.maxAmount doubleValue]){
             [self showError:[NSString stringWithFormat:@"请输入%@-%@的存款金额",_bfbModel.minAmount,_bfbModel.maxAmount]];
         }else{
-            [self createOnlineOrdersWithPayType:[_bfbModel.payType integerValue]];
+//            [self createOnlineOrdersWithPayType:[_bfbModel.payType integerValue]];
+            [self createCryptoCoinDepositOrderWithPayType:[_bfbModel.payType integerValue]];
         }
     }else{
-        [self createOnlineOrdersWithPayType:[_bfbModel.payType integerValue]];
+//        [self createOnlineOrdersWithPayType:[_bfbModel.payType integerValue]];
+        [self createCryptoCoinDepositOrderWithPayType:[_bfbModel.payType integerValue]];
     }
 }
 
@@ -401,7 +404,51 @@
         }
     }];
 }
-
+- (void)createCryptoCoinDepositOrderWithPayType:(NSInteger)payType{
+    [self showLoading];
+    NSString *tempAmount = [NSString stringWithFormat:@"%.2f",[_moneyTextField.text floatValue]];
+    NSDictionary *params = @{
+        @"tranAmount":tempAmount,
+        @"payType":@(payType),
+        @"currency":@"USDT",
+        @"loginName":[IVNetwork savedUserInfo].loginName,
+        @"protocol" : self.selectedProtocol
+    };
+    weakSelf(weakSelf)
+    [IVNetwork requestPostWithUrl:BTTRechargeUSDTQrcode paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            NSString *address = result.body[@"address"];
+            self.infoView.hidden = YES;
+            self.secondView.hidden = NO;
+            self.goToH5Btn.hidden = false;
+            self.dcboxDownloadTopLayout.constant = 54;
+            [self.qrcodeView setImage:[PublicMethod QRCodeMethod:address]];
+            NSRange range = [address rangeOfString:@"dcbox://pay"];
+            if (range.location != NSNotFound) {
+                self.dcboxH5Link = [address stringByReplacingOccurrencesOfString:@"dcbox://pay" withString:@"https://app.dcusdt.com/pay"];
+            }
+            
+            weakSelf.secondMoneyLabel.text = tempAmount;
+            CGFloat rmbCash = [weakSelf.moneyTextField.text integerValue] * weakSelf.usdtRate;
+            NSString *cnyStr = [NSString stringWithFormat:@"%.3f",rmbCash];
+            weakSelf.secondArriveLabel.text = [cnyStr substringWithRange:NSMakeRange(0, cnyStr.length-1)];
+            if (![[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"]) {
+                weakSelf.secondArriveView.hidden = YES;
+            }
+            if ([[UIApplication sharedApplication]
+              canOpenURL:[NSURL URLWithString:address]]){
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:address]];
+              
+            }else{
+            }
+            
+        }else{
+            [self showError:result.head.errMsg];
+        }
+    }];
+}
 
 - (void)createOnlineOrdersWithPayType:(NSInteger)payType{
     [self showLoading];
@@ -543,15 +590,29 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    self.selectedMoney = self.moneyArray[indexPath.row];
-    _moneyTextField.text = self.selectedMoney;
-    CGFloat rmbCash = [_moneyTextField.text integerValue] * self.usdtRate;
-    NSString *cnyStr = [NSString stringWithFormat:@"%.3f",rmbCash];
-    _usdtLabel.text = [cnyStr substringWithRange:NSMakeRange(0, cnyStr.length-1)];
-    [UIView performWithoutAnimation:^{
-        [self.walletCollectionView reloadData];
-    }];
-            
+    if (indexPath.section == 0)
+    {
+        if ([self.selectedProtocol isEqualToString:@"TRC20"])
+        {
+            self.selectedProtocol = @"ERC20";
+        }else
+        {
+            self.selectedProtocol = @"TRC20";
+        }
+        [UIView performWithoutAnimation:^{
+            [self.walletCollectionView reloadData];
+        }];
+    }else
+    {
+        self.selectedMoney = self.moneyArray[indexPath.row];
+        _moneyTextField.text = self.selectedMoney;
+        CGFloat rmbCash = [_moneyTextField.text integerValue] * self.usdtRate;
+        NSString *cnyStr = [NSString stringWithFormat:@"%.3f",rmbCash];
+        _usdtLabel.text = [cnyStr substringWithRange:NSMakeRange(0, cnyStr.length-1)];
+        [UIView performWithoutAnimation:^{
+            [self.walletCollectionView reloadData];
+        }];
+    }
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
@@ -600,7 +661,7 @@
         UILabel *noticeLabel = [[UILabel alloc]initWithFrame:CGRectMake(70, 15, SCREEN_WIDTH-90, 14)];
         noticeLabel.textColor = COLOR_RGBA(129, 135, 145, 1);
         noticeLabel.font = [UIFont systemFontOfSize:12];
-        noticeLabel.text = @" ";
+        noticeLabel.text = @"建议优先使用TRC20协议,手续费更低";
         headView.userInteractionEnabled = false;
         [headView addSubview:noticeLabel];
         return headView;
@@ -633,6 +694,26 @@
     return CGSizeMake(SCREEN_WIDTH-30, 44);
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section==0)
+    {
+        return CGSizeMake((SCREEN_WIDTH - 60 - 60)/3, 36); //固定的itemsize
+    }else
+    {
+        return CGSizeMake((SCREEN_WIDTH - 90 - 60)/4, 36); //固定的itemsize
+    }
+}
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    if (section==0)
+    {
+        return 30; //列间距
+    }else
+    {
+        return 12; //列间距
+    }
+}
 -(void)goToBind {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"gotoCardInfoNotification" object:nil];
 }

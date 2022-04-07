@@ -678,6 +678,7 @@
 		76F8642F26E87E8E00320B60 /* VIPHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8642E26E87E8E00320B60 /* VIPHistoryModel.m */; };
 		76F8643126E87ECE00320B60 /* BTTVIPClubHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
+		A1DA5A3A27FEAE240036F2F7 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
 		D318AC1724333BC500183407 /* BTTKSAddBfbWalletController.m in Sources */ = {isa = PBXBuildFile; fileRef = D318AC1524333BC500183407 /* BTTKSAddBfbWalletController.m */; };
@@ -1863,7 +1864,6 @@
 		41E4FC4A26E5AC2A006F55FD /* BTTDiscountsViewController+Nav.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTTDiscountsViewController+Nav.m"; sourceTree = "<group>"; };
 		41EAF0F1260D93BD0091FE09 /* BTTMeInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTMeInfoCell.xib; sourceTree = "<group>"; };
 		41EAF0F5260D94290091FE09 /* hot.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = hot.gif; sourceTree = "<group>"; };
-		41ED58AF27FC337F00E49058 /* libboringssl_simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboringssl_simulator.a; path = ../Desktop/libboringssl_simulator.a; sourceTree = "<group>"; };
 		41F14AED25A69CA1008E8CAD /* BTTYueFenHongPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTYueFenHongPopView.xib; sourceTree = "<group>"; };
 		41F14AEE25A69CA1008E8CAD /* BTTYueFenHongPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTTYueFenHongPopView.h; sourceTree = "<group>"; };
 		41F14AEF25A69CA1008E8CAD /* BTTYueFenHongPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTYueFenHongPopView.m; sourceTree = "<group>"; };
@@ -2320,6 +2320,7 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
+				A1DA5A3A27FEAE240036F2F7 /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -4741,7 +4742,6 @@
 			isa = PBXGroup;
 			children = (
 				76CC62BD265677E00042AEDF /* libboringssl_simulator.a */,
-				41ED58AF27FC337F00E49058 /* libboringssl_simulator.a */,
 				D3399696243B08E000B91A52 /* libboringssl.tbd */,
 				3AD9CF03216C425200685B43 /* CoreTelephony.framework */,
 				3AD9CEE821675A9B00685B43 /* libresolv.tbd */,
@@ -6418,7 +6418,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.95;
+				MARKETING_VERSION = 3.4.80;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -6461,7 +6461,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.95;
+				MARKETING_VERSION = 3.4.80;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
