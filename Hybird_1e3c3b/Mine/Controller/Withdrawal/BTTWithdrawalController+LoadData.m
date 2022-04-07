@@ -230,12 +230,16 @@
     if (isUsdt) {
         [heights replaceObjectAtIndex:4 withObject:@0];
     }
-    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]) {
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]) {
         [names removeObjectAtIndex:6];
         [placeholders removeObjectAtIndex:6];
         [heights removeObjectAtIndex:6];
         [canEdits removeObjectAtIndex:6];
         [values removeObjectAtIndex:6];
+    }
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]) {
+        [heights removeObjectAtIndex:6];
+        [heights insertObject:@70 atIndex:6];
     }
     for (NSInteger index = 0; index < names.count; index++) {
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];
