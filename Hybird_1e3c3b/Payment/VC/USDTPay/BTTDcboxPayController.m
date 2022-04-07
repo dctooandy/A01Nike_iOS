@@ -59,7 +59,7 @@
         flowLayout.minimumLineSpacing = 12;  //行间距
         flowLayout.minimumInteritemSpacing = 12; //列间距
 //        flowLayout.estimatedItemSize = CGSizeMake((SCREEN_WIDTH-60)/3, 36);  //预定的itemsize
-        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH-90 - 30)/4, 36); //固定的itemsize
+        flowLayout.itemSize = CGSizeMake((SCREEN_WIDTH - 90 - 70)/4, 36); //固定的itemsize
         flowLayout.headerReferenceSize = CGSizeMake(0, 43);
         //初始化 UICollectionView
         _walletCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
@@ -68,7 +68,7 @@
         _walletCollectionView.backgroundColor = kBlackLightColor;
         
         [_walletCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"UICollectionViewHeader"];
- 
+        [_walletCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"UICollectionViewFooter"];
         _walletCollectionView.bounces = NO;   //设置弹跳
         _walletCollectionView.alwaysBounceVertical = NO;  //只允许垂直方向滑动
         //注册 cell  为了cell的重用机制  使用NIB  也可以使用代码 registerClass xxxx
@@ -645,55 +645,97 @@
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    UICollectionReusableView *headView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                                                withReuseIdentifier:@"UICollectionViewHeader"
+    if (kind == UICollectionElementKindSectionHeader)
+    {
+        UICollectionReusableView *headView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                                                                             withReuseIdentifier:@"UICollectionViewHeader"
                                                                                        forIndexPath:indexPath];
-    for (UIView *view in headView.subviews) {
-        [view removeFromSuperview];
-    }
-    if (indexPath.section == 0) {
-        UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 15, 60, 14)];
-        titleLabel.textColor = [UIColor whiteColor];
-        titleLabel.font = [UIFont systemFontOfSize:14];
-        titleLabel.text = @"协议";
-        [headView addSubview:titleLabel];
-
-        UILabel *noticeLabel = [[UILabel alloc]initWithFrame:CGRectMake(70, 15, SCREEN_WIDTH-90, 14)];
-        noticeLabel.textColor = COLOR_RGBA(129, 135, 145, 1);
-        noticeLabel.font = [UIFont systemFontOfSize:12];
-        noticeLabel.text = @"建议优先使用TRC20协议,手续费更低";
-        headView.userInteractionEnabled = false;
-        [headView addSubview:noticeLabel];
-        return headView;
-    } else if ([IVNetwork savedUserInfo].dcboxNum == 0) {
-        UILabel *noticeLabel = [[UILabel alloc]init];
-        NSMutableAttributedString * str = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"点击绑定小金库存款，到账更快哦"]];
-        NSRange range = {0,[str length]};
-        [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:range];
-        noticeLabel.attributedText = str;
-        noticeLabel.textColor = [UIColor colorWithRed: 0.24 green: 0.60 blue: 0.97 alpha: 1.00];
-        noticeLabel.font = [UIFont systemFontOfSize:12];
-        CGSize size = [noticeLabel sizeThatFits:CGSizeMake(CGFLOAT_MAX, 14)];
-        noticeLabel.frame = CGRectMake(SCREEN_WIDTH-size.width-30, 15, size.width, 14);
-        [headView addSubview:noticeLabel];
+        for (UIView *view in headView.subviews) {
+            [view removeFromSuperview];
+        }
+        if (indexPath.section == 0) {
+            UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 15, 60, 14)];
+            titleLabel.textColor = [UIColor whiteColor];
+            titleLabel.font = [UIFont systemFontOfSize:14];
+            titleLabel.text = @"协议";
+            [headView addSubview:titleLabel];
+            
+            UILabel *noticeLabel = [[UILabel alloc]initWithFrame:CGRectMake(70, 15, SCREEN_WIDTH-90, 14)];
+            noticeLabel.textColor = COLOR_RGBA(129, 135, 145, 1);
+            noticeLabel.font = [UIFont systemFontOfSize:12];
+            noticeLabel.text = @" ";
+            headView.userInteractionEnabled = false;
+            [headView addSubview:noticeLabel];
+            return headView;
+        } else if ([IVNetwork savedUserInfo].dcboxNum == 0) {
+            UILabel *noticeLabel = [[UILabel alloc]init];
+            NSMutableAttributedString * str = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"点击绑定小金库存款，到账更快哦"]];
+            NSRange range = {0,[str length]};
+            [str addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:range];
+            noticeLabel.attributedText = str;
+            noticeLabel.textColor = [UIColor colorWithRed: 0.24 green: 0.60 blue: 0.97 alpha: 1.00];
+            noticeLabel.font = [UIFont systemFontOfSize:12];
+            CGSize size = [noticeLabel sizeThatFits:CGSizeMake(CGFLOAT_MAX, 14)];
+            noticeLabel.frame = CGRectMake(SCREEN_WIDTH-size.width-30, 15, size.width, 14);
+            [headView addSubview:noticeLabel];
+            
+            headView.userInteractionEnabled = true;
+            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToBind)];
+            tap.numberOfTapsRequired = 1;
+            [headView addGestureRecognizer:tap];
+            return headView;
+        } else {
+            UIView *view = [[UIView alloc]init];
+            [headView addSubview:view];
+            return headView;
+        }
+    }else
+    {
         
-        headView.userInteractionEnabled = true;
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToBind)];
-        tap.numberOfTapsRequired = 1;
-        [headView addGestureRecognizer:tap];
-        return headView;
-    } else {
-        UIView *view = [[UIView alloc]init];
-        [headView addSubview:view];
-        return headView;
+        UICollectionReusableView *footer = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                                                                              withReuseIdentifier:@"UICollectionViewFooter"
+                                                                                     forIndexPath:indexPath];
+        for (UIView *view in footer.subviews) {
+            [view removeFromSuperview];
+        }
+        if (indexPath.section == 0) {
+            UILabel *noticeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-90, 14)];
+            noticeLabel.textColor = COLOR_RGBA(129, 135, 145, 1);
+            noticeLabel.font = [UIFont systemFontOfSize:12];
+            noticeLabel.text = @"建议优先使用TRC20协议,手续费更低";
+            footer.userInteractionEnabled = false;
+            [footer addSubview:noticeLabel];
+            return footer;
+        } else if ([IVNetwork savedUserInfo].dcboxNum == 0) {
+            return footer;
+        } else {
+            UIView *view = [[UIView alloc]init];
+            [footer addSubview:view];
+            return footer;
+        }
     }
 }
 
 // 设置Header的尺寸
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
-    return CGSizeMake(SCREEN_WIDTH-30, 44);
+    if (section == 0)
+    {
+        return CGSizeMake(SCREEN_WIDTH-30, 44);
+    }else
+    {
+        return CGSizeMake(SCREEN_WIDTH-30, 10);;
+    }
 }
-
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+{
+    if (section == 0)
+    {
+        return CGSizeMake(SCREEN_WIDTH-30, 20);
+    }else
+    {
+        return CGSizeZero;
+    }
+}
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section==0)
@@ -701,7 +743,7 @@
         return CGSizeMake((SCREEN_WIDTH - 60 - 60)/3, 36); //固定的itemsize
     }else
     {
-        return CGSizeMake((SCREEN_WIDTH - 90 - 60)/4, 36); //固定的itemsize
+        return CGSizeMake((SCREEN_WIDTH - 60 - 36)/4, 36); //固定的itemsize
     }
 }
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
