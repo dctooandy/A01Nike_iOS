@@ -657,7 +657,7 @@
             UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 15, 60, 14)];
             titleLabel.textColor = [UIColor whiteColor];
             titleLabel.font = [UIFont systemFontOfSize:14];
-            titleLabel.text = @"协议";
+            titleLabel.text = @"选择协议";
             [headView addSubview:titleLabel];
             
             UILabel *noticeLabel = [[UILabel alloc]initWithFrame:CGRectMake(70, 15, SCREEN_WIDTH-90, 14)];
@@ -676,7 +676,7 @@
             noticeLabel.textColor = [UIColor colorWithRed: 0.24 green: 0.60 blue: 0.97 alpha: 1.00];
             noticeLabel.font = [UIFont systemFontOfSize:12];
             CGSize size = [noticeLabel sizeThatFits:CGSizeMake(CGFLOAT_MAX, 14)];
-            noticeLabel.frame = CGRectMake(SCREEN_WIDTH-size.width-30, 15, size.width, 14);
+            noticeLabel.frame = CGRectMake(SCREEN_WIDTH-size.width-60, 15, size.width, 14);
             [headView addSubview:noticeLabel];
             
             headView.userInteractionEnabled = true;
@@ -723,7 +723,13 @@
         return CGSizeMake(SCREEN_WIDTH-30, 44);
     }else
     {
-        return CGSizeMake(SCREEN_WIDTH-30, 10);;
+        if ([IVNetwork savedUserInfo].dcboxNum == 0)
+        {
+            return CGSizeMake(SCREEN_WIDTH-30, 35);
+        }else
+        {
+            return CGSizeMake(SCREEN_WIDTH-30, 10);
+        }
     }
 }
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
