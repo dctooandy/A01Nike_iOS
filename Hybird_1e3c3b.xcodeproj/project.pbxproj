@@ -679,6 +679,7 @@
 		76F8643126E87ECE00320B60 /* BTTVIPClubHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		A1DA5A3927FDA0680036F2F7 /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
+		A1DA5A3F280013470036F2F7 /* BTTASGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DA5A3E280013470036F2F7 /* BTTASGameModel.m */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
 		D318AC1724333BC500183407 /* BTTKSAddBfbWalletController.m in Sources */ = {isa = PBXBuildFile; fileRef = D318AC1524333BC500183407 /* BTTKSAddBfbWalletController.m */; };
@@ -2009,6 +2010,8 @@
 		76F8642D26E87E8E00320B60 /* VIPHistoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPHistoryModel.h; sourceTree = "<group>"; };
 		76F8642E26E87E8E00320B60 /* VIPHistoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPHistoryModel.m; sourceTree = "<group>"; };
 		76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTVIPClubHistoryCell.xib; sourceTree = "<group>"; };
+		A1DA5A3D280013470036F2F7 /* BTTASGameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTASGameModel.h; sourceTree = "<group>"; };
+		A1DA5A3E280013470036F2F7 /* BTTASGameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTASGameModel.m; sourceTree = "<group>"; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
 		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
 		D317745024D2648C009B1814 /* DSBRedBagPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DSBRedBagPopView.xib; sourceTree = "<group>"; };
@@ -3737,6 +3740,8 @@
 				3AE0580C21702C1F00C7E70D /* BTTHomePageHeaderModel.m */,
 				3AE058192170314900C7E70D /* BTTActivityModel.h */,
 				3AE058182170314900C7E70D /* BTTActivityModel.m */,
+				A1DA5A3D280013470036F2F7 /* BTTASGameModel.h */,
+				A1DA5A3E280013470036F2F7 /* BTTASGameModel.m */,
 				3A929411219BBD4F00764E7E /* BTTLoginAPIModel.h */,
 				3A929410219BBD4F00764E7E /* BTTLoginAPIModel.m */,
 				3A929413219BFEE100764E7E /* BTTCreateAPIModel.h */,
@@ -5676,6 +5681,7 @@
 				3A929415219BFEE100764E7E /* BTTCreateAPIModel.m in Sources */,
 				EAA4811C21ABD265000C0273 /* BTTAGGJViewController.m in Sources */,
 				D5DBEB2721ABB774008AF629 /* CNPayChannelModel.m in Sources */,
+				A1DA5A3F280013470036F2F7 /* BTTASGameModel.m in Sources */,
 				3A514E3E2186E24000B83881 /* BTTThisWeekTotalCell.m in Sources */,
 				7629D7E9266C933E00CF758C /* BTTDragonBoatAutoPopView.m in Sources */,
 				3A9F31A2223F69C600B92693 /* BTTCompleteMeterialController.m in Sources */,
