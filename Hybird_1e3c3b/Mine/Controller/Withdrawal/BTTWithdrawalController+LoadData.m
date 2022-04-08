@@ -180,7 +180,7 @@
     
     NSArray *heights1 = @[@205.0,@(matchWithdrewAmountH),@(spaceHeight)];
     NSArray *heights3 = @[@44,@44.0,@44.0,@44.0,@(60.0),@100.0,@(matchHistoryHeight)];
-    NSArray *heights4 = @[@44,@44.0,@44,@44,@44.0,@46.0,@240.0,@(60.0)];
+    NSArray *heights4 = @[@44,@44.0,@44,@44,@44.0,@46.0,@120.0,@(60.0)];
     
     NSArray *canEdits1 = @[@NO,@NO,@NO];
     NSArray *canEdits3 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO];
