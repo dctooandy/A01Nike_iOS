@@ -180,6 +180,18 @@
         };
         return cell;
     }
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]&& [cellModel.name isEqualToString:@"协议"]) {
+        BTTWithDrawProtocolView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawProtocolView" forIndexPath:indexPath];
+        [cell setTypeData:@[@"TRC20", @"ERC20"]];
+//        if ([self.bankList[self.selectIndex].protocol isEqualToString:@""]) {
+//        }else{
+//            [cell setTypeData:@[self.bankList[self.selectIndex].protocol]];
+//        }
+        cell.tapProtocol = ^(NSString * _Nonnull protocol) {
+            self.selectedProtocol = protocol;
+        };
+        return cell;
+    }
 
     if ([cellModel.name isEqualToString:@"提交"]) {
         
@@ -734,8 +746,11 @@
     if (!(isNull(self.selectedProtocol)||[self.selectedProtocol isEqualToString:@""])) {
         params[@"protocol"] = self.selectedProtocol;
     }
-    if ([model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"]) {
+    if ([model.bankName isEqualToString:@"BITOLL"]) {
         params[@"protocol"] = @"ERC20";
+    }
+    if ([model.bankName isEqualToString:@"DCBOX"]) {
+        params[@"protocol"] = self.selectedProtocol;
     }
     params[@"password"] = [IVRsaEncryptWrapper encryptorString:self.password];
     BOOL isUSDTSell = [model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"]||[model.bankName isEqualToString:@"USDT"];
