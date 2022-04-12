@@ -398,6 +398,13 @@ static const char *BTTChanceCountKey = "chanceCount";
                 [self.asGameData removeAllObjects];
                 for (NSMutableDictionary *imageDict in result.body) {
                     BTTASGameModel *model = [BTTASGameModel yy_modelWithDictionary:imageDict];
+                    //测试
+//                    model.gameName = @"汪汪之家";
+//                    model.gameEnName = @"The Dog‘s House";
+//                    model.gameId = @"1547739735";
+//                    model.gameCode = @"067";
+//                    model.gameType = @"1";
+//                    model.gameKind = @"1";
                     [asGameData addObject:model];
                 }
                 self.asGameData = asGameData.mutableCopy;
