@@ -41,10 +41,10 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
 -(void)setUpCustomAssistiveButtonCompleted:(ButtonCallBack _Nullable)completionBlock
 {
     UIImageView *imageView = [[UIImageView alloc] init];
-    [imageView sd_setImageWithURL:[NSURL URLWithString:@""] completed:^(NSData * _Nullable data,UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+    [imageView sd_setImageWithURL:[NSURL URLWithString:@""] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         if ([imageURL.description containsString:@"gif"])
         {
-            UIImage * backgroundImage = [UIImage sd_animatedGIFWithData:data];
+            UIImage * backgroundImage = [UIImage sd_imageWithGIFData:[NSData dataWithContentsOfURL:imageURL]];
             self.redPocketsAssistiveButton = [[AssistiveButton alloc] initMainBtnWithCustomImage:backgroundImage highlightImage:nil];
         }else
         {
@@ -90,7 +90,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
     {
         //    UIImage * image = [UIImage imageNamed:@"ic_918_assistive_btn_bg"];
         UIImageView *imageView = [[UIImageView alloc] init];
-        [imageView sd_setImageWithURL:[NSURL URLWithString:model.image] completed:^(NSData * _Nullable data,UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        [imageView sd_setImageWithURL:[NSURL URLWithString:model.image] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             
             //        CGFloat assistiveBtnHeight = 132 + [UIImage imageNamed:@"ic_918_assistive_close_btn"].size.height;
             //        CGFloat loginBtnViewHeight = 87;
@@ -98,7 +98,7 @@ static const char *BTTLoginAndRegisterKey = "lgoinOrRegisterBtnsView";
         
             if ([imageURL.description containsString:@"gif"])
             {
-                UIImage * backgroundImage = [UIImage sd_animatedGIFWithData:data];
+                UIImage * backgroundImage = [UIImage sd_imageWithGIFData:[NSData dataWithContentsOfURL:imageURL]];
                 self.assistiveButton = [[AssistiveButton alloc] initMainBtnWithBackgroundImage:backgroundImage highlightImage:nil position:model.positionPoint];
             }else
             {

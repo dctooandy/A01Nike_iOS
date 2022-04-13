@@ -34,10 +34,11 @@
 //    self.layer.shadowColor = COLOR_RGBA(0, 0, 0, 0.27).CGColor;
 //    self.layer.shadowOffset = CGSizeMake(0, 2);
 //    self.layer.shadowOpacity = 1;
-    self.titleLabel.font = [UIFont systemFontOfSize:16];
+    self.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     [self setTitleColor:kBlackForgroundColor forState:UIControlStateNormal];
     [self setBackgroundImage:[UIImage imageNamed:@"binding_confirm_enable_normal"] forState:UIControlStateNormal];
     [self setBackgroundImage:[UIImage imageNamed:@"binding_confirm_enable_press"] forState:UIControlStateHighlighted];
+    [self setBackgroundImage:[UIImage imageNamed:@"binding_confirm_disable"] forState:UIControlStateDisabled];
     [self setTitle:@"提交中..." forState:UIControlStateSelected];
 }
 

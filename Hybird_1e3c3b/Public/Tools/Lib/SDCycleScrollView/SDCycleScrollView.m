@@ -34,7 +34,7 @@
 #import "UIView+SDExtension.h"
 #import "TAPageControl.h"
 #import "SDWebImageManager.h"
-#import "UIImageView+WebCache.h"
+#import "SDImageCache.h"
 #import "TAExampleDotView.h"
 #define kCycleScrollViewInitialPageControlDotSize CGSizeMake(10, 10)
 
@@ -501,7 +501,7 @@ NSString * const ID = @"SDCycleScrollViewCell";
 
 + (void)clearImagesCache
 {
-    [[[SDWebImageManager sharedManager] imageCache] clearDiskOnCompletion:nil];
+    [[SDWebImageManager sharedManager].imageCache clearWithCacheType:SDImageCacheTypeDisk completion:nil];
 }
 
 #pragma mark - life circles
