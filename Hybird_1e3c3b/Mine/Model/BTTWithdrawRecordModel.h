@@ -41,7 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, strong) NSNumber *transAmount;
 @property (nonatomic, copy) NSString *updateDate;
-
+/// 订单状态
+@property (nonatomic, assign) NSInteger mmStatus;
 @end
 
 NS_ASSUME_NONNULL_END

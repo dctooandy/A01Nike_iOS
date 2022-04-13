@@ -11,12 +11,14 @@ target ‘Hybird_1e3c3b’ do
   pod 'MBProgressHUD','~> 1.1.0'
   pod 'MJExtension', '~> 3.0.15.1'
   pod 'CocoaAsyncSocket', '~>7.6.3'
+  pod 'ZLPhotoBrowser'
   
 #  pod 'IVNetworkLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary.git'
   pod 'IVGameLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git',:branch=>'v2.0'
   pod 'IVWebViewLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVWebViewLibrary.git',:branch=>'1.0'
 #  pod 'IVHeartPacketLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git'
   
+  pod 'KYNetworking',:git =>'http://10.66.72.115/mobile-iOS-Library/KYNetworking.git'
   pod 'IVNetworkLibrary2.0',:git =>'http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary2.0.git'
   pod 'IVUZIPLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVUZIPLibrary.git'
   pod 'IVUpdateLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVUpdateLibrary.git'

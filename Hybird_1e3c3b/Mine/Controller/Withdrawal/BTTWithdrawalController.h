@@ -10,6 +10,7 @@
 #import "BTTBankModel.h"
 #import "BTTBetInfoModel.h"
 #import "BTTCustomerBalanceModel.h"
+#import "KYMWithdrewCheckModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTWithdrawalController : BTTCollectionViewController
@@ -29,6 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString * usdtLimit;
 @property (nonatomic, copy) NSString * iChiPayLimit;
 @property (nonatomic, copy) NSString * cnyLimit;
+@property (nonatomic, strong) KYMWithdrewCheckModel *checkModel;
+@property (nonatomic, assign) BOOL isForceNormalWithdraw; //是否为强制普通取款
 @end
 
 NS_ASSUME_NONNULL_END

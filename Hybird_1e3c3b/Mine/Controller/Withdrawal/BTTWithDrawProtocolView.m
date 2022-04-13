@@ -16,6 +16,8 @@
 @property (nonatomic, strong) UIButton *omniBtn;
 @property (nonatomic, strong) UIButton *ercBtn;
 @property (nonatomic, strong) UIButton *trcBtn;
+@property (nonatomic, strong) UILabel *protocolLabel;
+@property (nonatomic, strong) UILabel *protocolSubLabel;
 
 @end
 @implementation BTTWithDrawProtocolView
@@ -28,11 +30,11 @@
         infoView.backgroundColor = kBlackLightColor;
         [self.contentView addSubview:infoView];
         
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(16, 12, 100, 20)];
-        label.text = @"协议";
-        label.textColor = [UIColor whiteColor];
-        label.font = [UIFont boldSystemFontOfSize:16];
-        [infoView addSubview:label];
+        _protocolLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, 12, 100, 20)];
+        _protocolLabel.text = @"协议";
+        _protocolLabel.textColor = [UIColor whiteColor];
+        _protocolLabel.font = [UIFont boldSystemFontOfSize:16];
+        [infoView addSubview:_protocolLabel];
         
         _trcBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH)];
         [_trcBtn setTitle:@"TRC20" forState:UIControlStateNormal];
@@ -66,12 +68,19 @@
         _omniBtn.clipsToBounds = YES;
         [_omniBtn addTarget:self action:@selector(omniBtn_click) forControlEvents:UIControlEventTouchUpInside];
         [infoView addSubview:_omniBtn];
-        
+        _protocolSubLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, 38, SCREEN_WIDTH - 40, 20)];
+        _protocolSubLabel.text = @"建议优先使用TRC20协议,手续费更低";
+        _protocolSubLabel.textColor = [UIColor grayColor];
+        _protocolSubLabel.font = [UIFont boldSystemFontOfSize:11];
+        [_protocolSubLabel setHidden:YES];
+        [infoView addSubview:_protocolSubLabel];
     }
     return self;
 }
 
 - (void)setTypeData:(NSArray *)types{
+    [_protocolSubLabel setHidden:YES];
+    _protocolLabel.text = @"协议";
     if ([types containsObject:@"OMNI"]) {
         _omniBtn.hidden = NO;
         _ercBtn.hidden = ![types containsObject:@"ERC20"];
@@ -95,6 +104,7 @@
             _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
         }
     } else if ([types containsObject:@"ERC20"]) {
+        BOOL isTrcFirst = [types.firstObject isEqualToString:@"TRC20"];
         _ercBtn.hidden = NO;
         _omniBtn.hidden = ![types containsObject:@"OMNI"];
         _trcBtn.hidden = ![types containsObject:@"TRC20"];
@@ -108,6 +118,13 @@
             _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
             _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
             [self omniBtn_click];
+        } else if (isTrcFirst) {
+            _protocolLabel.text = @"选择协议";
+            [_protocolSubLabel setHidden:NO];
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+            [self trcBtn_click];
         } else if (_omniBtn.isHidden && !_trcBtn.isHidden) {
             _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
             _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);

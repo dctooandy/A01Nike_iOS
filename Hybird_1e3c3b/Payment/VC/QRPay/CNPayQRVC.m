@@ -55,11 +55,7 @@
     if (self.payments.count > 0) {
         [self.collectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self setViewHeight:800 fullScreen:NO];
+    [self setViewHeight:450 fullScreen:NO];
 }
 
 - (void)queryOnlineBanks {

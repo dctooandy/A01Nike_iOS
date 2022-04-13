@@ -113,7 +113,10 @@
             [result.head.errCode isEqualToString:@"GW_890202"] ||
             [result.head.errCode isEqualToString:@"GW_890204"] ||
             [result.head.errCode isEqualToString:@"GW_890205"]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:IVNUserTokenExpiredNotification object:nil];
+            if (![url containsString:@"queryPayWaysV3"])// V3执行时须搭配loginByLoginName,需延时处理
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:IVNUserTokenExpiredNotification object:nil];
+            }
         } else {
             completionBlock(response, error);
         }
