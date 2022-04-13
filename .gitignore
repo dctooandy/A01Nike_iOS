@@ -33,13 +33,6 @@ fastlane/screenshots
 fastlane/test_output
 fastlane/README.md
 
-## Obj-C/Swift specific
-*.hmap
-*.ipa
-*.dSYM.zip
-*.dSYM
-
-
 #CocoaPods
 Pods
 #Podfile

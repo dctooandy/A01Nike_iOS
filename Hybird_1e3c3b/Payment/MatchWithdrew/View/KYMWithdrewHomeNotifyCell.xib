@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="KYMWithdrewHomeNotifyCell" id="gTV-IL-0wX" customClass="KYMWithdrewHomeNotifyCell">
+            <rect key="frame" x="0.0" y="0.0" width="382" height="81"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="382" height="81"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="忘记资金密码？联系客服" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdG-8M-W5r">
+                        <rect key="frame" x="116" y="24.5" width="150" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="S9i-oy-vkw"/>
+                            <constraint firstAttribute="width" constant="150" id="SgZ-JP-k6T"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="12"/>
+                        <color key="textColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="shM-70-wtV">
+                        <rect key="frame" x="121" y="46.5" width="140" height="1"/>
+                        <color key="backgroundColor" red="0.50588235294117645" green="0.52941176470588236" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="lfL-TE-73E"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <constraints>
+                <constraint firstItem="shM-70-wtV" firstAttribute="leading" secondItem="kdG-8M-W5r" secondAttribute="leading" constant="5" id="6l9-na-D0F"/>
+                <constraint firstItem="kdG-8M-W5r" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="24.5" id="8Xo-nN-vqX"/>
+                <constraint firstItem="shM-70-wtV" firstAttribute="trailing" secondItem="kdG-8M-W5r" secondAttribute="trailing" constant="-5" id="DW7-7A-Niz"/>
+                <constraint firstItem="shM-70-wtV" firstAttribute="top" secondItem="kdG-8M-W5r" secondAttribute="bottom" constant="-8" id="Fju-97-iT6"/>
+                <constraint firstItem="kdG-8M-W5r" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="T5i-kC-ZFi"/>
+            </constraints>
+            <size key="customSize" width="382" height="81"/>
+            <connections>
+                <outlet property="titleLB" destination="kdG-8M-W5r" id="7a3-GR-JN2"/>
+            </connections>
+            <point key="canvasLocation" x="302.89855072463769" y="61.272321428571423"/>
+        </collectionViewCell>
+    </objects>
+</document>

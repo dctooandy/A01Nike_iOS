@@ -117,4 +117,7 @@
 
 - (void)addBankView;
 - (void)showPayTipView;
+
+/// 撮合失败，移除并切换渠道
+- (void)removeFastPay;
 @end

@@ -11,6 +11,7 @@
 
 @interface BTTWithdrawalCardSelectCell()
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineHeight;
 @end
 
 @implementation BTTWithdrawalCardSelectCell
@@ -19,6 +20,7 @@
     [super awakeFromNib];
     self.mineSparaterType = BTTMineSparaterTypeNone;
     self.mineArrowsType = BTTMineArrowsTypeHidden;
+    self.lineHeight.constant = 1 / [UIScreen mainScreen].scale;
 
 }
 - (void)setModel:(BTTBankModel *)model

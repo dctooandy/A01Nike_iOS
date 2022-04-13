@@ -89,7 +89,7 @@
         self.hotImg.hidden = !_isShowHot;
         NSString *path = [[NSBundle mainBundle] pathForResource:@"hot" ofType:@"gif"];
         NSData *data = [NSData dataWithContentsOfFile:path];
-        self.hotImg.image = [UIImage sd_animatedGIFWithData:data];
+        self.hotImg.image = [UIImage sd_imageWithGIFData:data];
     }
 }
 

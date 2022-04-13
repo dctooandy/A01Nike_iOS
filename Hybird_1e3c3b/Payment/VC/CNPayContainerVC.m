@@ -155,6 +155,10 @@
             [viewControllers addObjectsFromArray:@[vc1]];
         }
             break;
+        case CNPaymentFast:{
+            
+        }
+            break;
     }
     
     
@@ -193,6 +197,7 @@
     CNPayBQStep2VC *step2VC = [[CNPayBQStep2VC alloc] init];
     step1VC.paymentModel = payment;
     step2VC.paymentModel = payment;
+    step1VC.fastModel = self.fastModel;
     return @[step1VC, step2VC];
 }
 
