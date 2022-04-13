@@ -134,7 +134,7 @@
     //提交订单
     [self showLoading];
     __weak typeof(self) weakSelf = self;
-    [CNMatchPayRequest createDepisit:self.amountTF.text finish:^(id  _Nullable response, NSError * _Nullable error) {
+    [CNMatchPayRequest createDepisit:self.amountTF.text realName:self.nameTF.text finish:^(id  _Nullable response, NSError * _Nullable error) {
         [weakSelf hideLoading];
         if ([response isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary *)response;

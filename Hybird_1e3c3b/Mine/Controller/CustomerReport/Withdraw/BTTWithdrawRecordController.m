@@ -14,7 +14,7 @@
 #import "BTTWithdrawRecordModel.h"
 #import "BRPickerView.h"
 #import "BTTPromoRecordFooterView.h"
-
+#import "KYMWithdrewSuccessVC.h"
 @interface BTTWithdrawRecordController ()<BTTElementsFlowLayoutDelegate>
 @property(nonatomic, copy)NSString * sortTypeStr;
 @property (nonatomic, strong)BTTPromoRecordFooterView * footerView;
@@ -135,6 +135,8 @@
         if (cell.checkBtn.enabled) {
             [cell.checkBtn setSelected:self.isSelectAll];
         }
+        cell.detailBtn.hidden = !(model.mmStatus == 2 || model.mmStatus == 5);
+        
         weakSelf(weakSelf);
         [cell setCheckBtnClickBlock:^(NSString * _Nonnull requestId, BOOL selected) {
             strongSelf(strongSelf);
@@ -154,6 +156,14 @@
             strongSelf(strongSelf);
             [strongSelf cancelRequest:requestId];
         }];
+        cell.detailBtnBlock = ^{
+            KYMWithdrewSuccessVC *vc = [KYMWithdrewSuccessVC new];
+            vc.amountStr = model.amount;
+            vc.transactionId = model.requestId;
+            vc.backToLastVC = YES;
+            strongSelf(strongSelf);
+            [strongSelf.navigationController pushViewController:vc animated:YES];
+        };
         return cell;
     }
 }

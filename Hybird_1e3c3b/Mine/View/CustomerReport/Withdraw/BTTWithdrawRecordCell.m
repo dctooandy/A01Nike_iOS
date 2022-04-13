@@ -81,5 +81,8 @@
         self.cancelRequestBlock(self.requestIdLab.text);
     }
 }
+- (IBAction)detailBtnAction:(id)sender {
+    self.detailBtnBlock();
+}
 
 @end
