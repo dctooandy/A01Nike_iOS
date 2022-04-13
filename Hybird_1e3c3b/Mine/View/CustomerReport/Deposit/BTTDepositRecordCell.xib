@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -64,7 +64,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="0IN-uz-gpq">
-                        <rect key="frame" x="133" y="15" width="137" height="30"/>
+                        <rect key="frame" x="133" y="4.5" width="137" height="51"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="108元" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Hi-Vs-NWw">
                                 <rect key="frame" x="0.0" y="0.0" width="33.5" height="14.5"/>
@@ -78,6 +78,20 @@
                                 <color key="textColor" red="0.48627450980392156" green="0.50507026909999997" blue="0.54118227959999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rWR-1w-CrQ">
+                                <rect key="frame" x="0.0" y="31" width="51" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="4JF-2V-jyr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="查看详情 &gt;">
+                                    <color key="titleColor" red="0.035294117649999998" green="0.58039215690000001" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="seeDetail:" destination="gTV-IL-0wX" eventType="touchUpInside" id="fJj-Do-BGg"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </stackView>
                 </subviews>
@@ -101,6 +115,7 @@
             <connections>
                 <outlet property="checkBtn" destination="I6d-25-bYY" id="T5E-md-5wX"/>
                 <outlet property="dateLab" destination="YJb-hd-qfV" id="nVK-my-zfg"/>
+                <outlet property="detailBtn" destination="rWR-1w-CrQ" id="48C-Ay-iuP"/>
                 <outlet property="iconImgView" destination="Ppv-9K-Hin" id="E43-oA-QnQ"/>
                 <outlet property="moneyLab" destination="6Hi-Vs-NWw" id="EbD-P9-HsX"/>
                 <outlet property="requestIdLab" destination="FaA-JS-nHR" id="Y5l-wL-cFW"/>
