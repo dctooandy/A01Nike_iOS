@@ -77,6 +77,8 @@
     {
         [param setObject:@"1" forKey:@"blockChainSingle"];
         [param setObject:@"0" forKey:@"inclLog"];
+        [param setObject:@"AS" forKey:@"text"];
+        [param setObject:@"AS" forKey:@"key"];
     }
     [[IVHttpManager shareManager] sendRequestWithUrl:@"game/inGame" parameters:param.copy callBack:^(IVJResponseObject * _Nullable response, NSError * _Nullable error) {
         

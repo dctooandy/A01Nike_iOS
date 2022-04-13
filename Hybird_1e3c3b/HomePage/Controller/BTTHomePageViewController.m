@@ -1030,11 +1030,11 @@
             model.cnName = asGameModel.gameName ? asGameModel.gameName:@"AS真人棋牌";;
             model.gameCode = asGameModel.gameCode;
             model.enName = asGameModel.gameEnName;
-//            model.provider = kASSlotProvider;
+            model.provider = kASSlotProvider;
             model.platformCurrency = currency;
             model.gameType = asGameModel.gameType;
             model.gameId = asGameModel.gameId;
-//            model.gameKind = asGameModel.gameKind;
+            model.gameKind = asGameModel.gameKind;
         } else if (tag==1003) {
             model = [[IVGameModel alloc] init];
             model.cnName =  kFishCnName;
