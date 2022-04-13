@@ -160,6 +160,7 @@
             KYMWithdrewSuccessVC *vc = [KYMWithdrewSuccessVC new];
             vc.amountStr = model.amount;
             vc.transactionId = model.requestId;
+            vc.backToLastVC = YES;
             strongSelf(strongSelf);
             [strongSelf.navigationController pushViewController:vc animated:YES];
         };
@@ -261,12 +262,7 @@
         } else if (i == 1) {
             [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 30)]];
         } else {
-            BTTWithdrawRecordItemModel * model = self.modelArr[i - 2];
-            if (model.mmStatus == 2 || model.mmStatus == 5) {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 100)]];
-            } else {
-                [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 60)]];
-            }
+            [elementsHight addObject:[NSValue valueWithCGSize:CGSizeMake(SCREEN_WIDTH, 60)]];
         }
     }
     self.elementsHight = elementsHight.mutableCopy;
