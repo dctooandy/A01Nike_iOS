@@ -123,10 +123,10 @@
 }
 - (void)setAsGameData:(BTTASGameModel *)asGameData
 {
-//    if (asGameData.gameImg)
-//    {
-//        [self.asImageView sd_setImageWithURL:[NSURL URLWithString:asGameData.gameImg] placeholderImage:[UIImage imageNamed:@"AS"]];
-//    }
+    if (asGameData.gameImg)
+    {
+        [self.asImageView sd_setImageWithURL:[NSURL URLWithString:asGameData.gameImg] placeholderImage:[UIImage imageNamed:@"AS"]];
+    }
 }
 - (IBAction)shabaBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
