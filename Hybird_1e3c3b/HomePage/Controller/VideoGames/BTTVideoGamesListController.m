@@ -932,6 +932,10 @@
     model.gameId = gameModel.gameId;
     model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
     model.gameStyle = gameModel.gameStyle;
+    if ([gameModel.provider isEqualToString:@"AS"])
+    {
+//        model.blockChainSingle = @"1";
+    }
     if (gameModel.gameCode!=nil) {
         if ([gameModel.provider isEqualToString:@"PS"]) {
             model.gameCode = BTTPSKEY;

@@ -13,7 +13,7 @@ target ‘Hybird_1e3c3b’ do
   pod 'CocoaAsyncSocket', '~>7.6.3'
   pod 'ZLPhotoBrowser'
   
-  pod 'IVGameLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVGameLibrary.git',:branch=>'master'
+  pod 'IVGameLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVGameLibraÏry.git',:branch=>'master'
 #  pod 'IVNetworkLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVNetworkLibrary.git'
   pod 'IVWebViewLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVWebViewLibrary.git',:branch=>'1.0'
 #  pod 'IVHeartPacketLibrary',:git =>'http://10.66.72.115/mobile-iOS-Library/IVHeartPacketLibrary.git'
