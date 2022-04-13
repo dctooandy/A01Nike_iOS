@@ -112,7 +112,7 @@
         [view setPromoTag:NO];
         [view.statusBtn addTarget:self action:@selector(confirmBill) forControlEvents:UIControlEventTouchUpInside];
     } else {
-        [view setPromoTag:YES];
+        [view setPromoTag:(self.fastModel.needUploadFlag != 1)];
         [view.statusBtn addTarget:self action:@selector(showUploadUI) forControlEvents:UIControlEventTouchUpInside];
     }
     self.billViewH.constant = 66;
