@@ -16,10 +16,10 @@
 @implementation BTTBitollChoseMoneyCell
 
 -(instancetype)initWithFrame:(CGRect)frame{
-    self = [super initWithFrame:CGRectMake(0, 0, (SCREEN_WIDTH-90)/4, 36)];
+    self = [super initWithFrame:CGRectMake(0, 0, (SCREEN_WIDTH-90 - 30)/4, 36)];
     if (self) {
         UIButton *itemButton = [[UIButton alloc]init];
-        itemButton.size = CGSizeMake((SCREEN_WIDTH-90)/4, 36);
+        itemButton.size = CGSizeMake((SCREEN_WIDTH-90 - 30)/4, 36);
         itemButton.imageView.contentMode = UIViewContentModeScaleToFill;
         itemButton.contentHorizontalAlignment = UIViewContentModeScaleToFill;
         itemButton.titleLabel.font = [UIFont systemFontOfSize:12];

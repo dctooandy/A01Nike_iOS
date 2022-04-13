@@ -10,7 +10,7 @@
 #import "SDCycleScrollView.h"
 #import <Masonry/Masonry.h>
 #import "QBulletScreenView.h"
-#import "UIImage+GIF.h"
+#import <UIImage+GIF.h>
 #import "GradientImage.h"
 #import "BTTActivityManager.h"
 #import "LuckyBagModel.h"
@@ -833,7 +833,7 @@
         // 加入Gif
         NSString *path = [[NSBundle mainBundle] pathForResource:@"mammon2" ofType:@"gif"];
         NSData *data = [NSData dataWithContentsOfFile:path];
-        self.mammonImageView.image = [UIImage sd_animatedGIFWithData:data];
+        self.mammonImageView.image = [UIImage sd_imageWithGIFData:data];
     }];
 }
 - (void)moveLabelToCenter

@@ -120,7 +120,18 @@
         }
     }];
 }
-
+- (CGFloat)getMatchAmountListHeight
+{
+    NSUInteger lineCount = 0;
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"] && self.checkModel.data.currentAmountList.count > 0) {
+        lineCount = ceilf(self.checkModel.data.currentAmountList.count / 3.0) ;
+    }
+    CGFloat matchWithdrewAmountH = 0;
+    if (lineCount > 0 && !self.isForceNormalWithdraw) {
+        matchWithdrewAmountH = 32 * lineCount + 16 + 29 + 8 * (lineCount - 1);
+    }
+    return matchWithdrewAmountH;
+}
 - (void)loadMainData {
     [self requestUSDTRate];
     if ([IVNetwork savedUserInfo].btcNum>0) {
@@ -134,9 +145,9 @@
     NSString *btcrate = isNull(self.btcRate) ? @"0" : self.btcRate;
     NSString *rateStr = [NSString stringWithFormat:@"¥%.2lf=1BTC(实时汇率)",[btcrate doubleValue]];
     
-    NSArray *names1 = @[@"",@""];
-    NSArray *names3 = @[@"金额",@"比特币",@"取款至",@"资金密码",@""];//@[@"金额(元)",@"比特币",@"取款至",@"登录密码",@""];
-    NSArray *names4 = @[@"金额",@"预估到账",@"取款至",@"资金密码",@"",@"",@""];
+    NSArray *names1 = @[@"头",@"固定金额",@"分割"];
+    NSArray *names3 = @[@"金额",@"比特币",@"取款至",@"资金密码",@"联系客服",@"提交",@"历史"];
+    NSArray *names4 = @[@"金额",@"预估到账",@"取款至",@"协议",@"资金密码",@"usdt确认",@"提交",@"联系客服"];
     
     NSString *pString = isUsdt ? [NSString stringWithFormat:@"单笔取款限额%@-143万USDT", self.usdtLimit] : [NSString stringWithFormat:@"最少%@元", self.cnyLimit];
     if (!isUsdt && ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"])) {
@@ -152,27 +163,39 @@
     NSString * withdrawPwdP = [IVNetwork savedUserInfo].withdralPwdFlag == 0 ? @"没有资金密码？点击设置资金密码":@"6位数字组合";
     BOOL withdrawPwdCanEdits = [IVNetwork savedUserInfo].withdralPwdFlag == 0 ? false:true;
     
-    NSArray *placeholders1 = @[@"",@""];
-    NSArray *placeholders3 = @[pString,rateStr,@"***银行-尾号*****",withdrawPwdP,@""];
-    NSArray *placeholders4 = @[pString,@"USDT",@"***银行-尾号*****",withdrawPwdP,@"",@"",@""];
-    NSArray *heights1 = @[@205.0,@15.0];
-    NSArray *heights3 = @[@44.0,@44.0,@44.0,@44.0,@100.0];
-    NSArray *heights4 = @[@44.0,@44.0,@44,@44,@44.0,@46.0,@240.0];
+    NSArray *placeholders1 = @[@"",@"",@""];
+    NSArray *placeholders3 = @[pString,rateStr,@"***银行-尾号*****",withdrawPwdP,@"",@"",@""];
+    NSArray *placeholders4 = @[pString,@"USDT",@"***银行-尾号*****",@"",withdrawPwdP,@"",@"",@""];
     
-    NSArray *canEdits1 = @[@NO,@NO];
-    NSArray *canEdits3 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO];
-    NSArray *canEdits4 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO];
+    CGFloat matchHistoryHeight = 0.0;
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"] && self.checkModel.data.mmProcessingOrderType == 2 && ((self.checkModel.data.mmProcessingOrderStatus == 2 && self.checkModel.data.mmProcessingOrderPairStatus == 5) || self.checkModel.data.mmProcessingOrderManualStatus == 4)) {
+        if (self.checkModel.data.mmProcessingOrderManualStatus == 4) {
+            matchHistoryHeight = 52.0;
+        } else {
+            matchHistoryHeight = 89.0;
+        }
+    }
+    CGFloat matchWithdrewAmountH = [self getMatchAmountListHeight];
+    CGFloat spaceHeight = 0.0;
     
-    NSArray *values1 = @[@"",@""];
-    NSArray *values3 = @[@"",@"",@"",@"",@""];
-    NSArray *values4 = @[@"",@"",@"",@"",@"",@"",@""];
- 
+    NSArray *heights1 = @[@205.0,@(matchWithdrewAmountH),@(spaceHeight)];
+    NSArray *heights3 = @[@44,@44.0,@44.0,@44.0,@(60.0),@100.0,@(matchHistoryHeight)];
+    NSArray *heights4 = @[@44,@44.0,@44,@44,@44.0,@46.0,@120.0,@(60.0)];
+    
+    NSArray *canEdits1 = @[@NO,@NO,@NO];
+    NSArray *canEdits3 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO];
+    NSArray *canEdits4 = @[@YES,@NO,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO];
+    
+    NSArray *values1 = @[@"",@"",@""];
+    NSArray *values3 = @[@"",@"",@"",@"",@"",@"",@""];
+    NSArray *values4 = @[@"",@"",@"",@"",@"",@"",@"",@""];
+    
     NSMutableArray *names = @[].mutableCopy;
     NSMutableArray *placeholders = @[].mutableCopy;
     NSMutableArray *heights = @[].mutableCopy;
     NSMutableArray *canEdits = @[].mutableCopy;
     NSMutableArray *values = @[].mutableCopy;
-    NSInteger btcRateIndex = 3;
+    NSInteger btcRateIndex = 4;
     if ([self.bankList[self.selectIndex].accountType isEqualToString:@"借记卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"信用卡"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"存折"]||[self.bankList[self.selectIndex].accountType isEqualToString:@"BTC"]) {
         [names addObjectsFromArray:names1];
         [names addObjectsFromArray:names3];
@@ -205,14 +228,18 @@
         [values removeObjectAtIndex:btcRateIndex];
     }
     if (isUsdt) {
-        [heights replaceObjectAtIndex:3 withObject:@0];
+        [heights replaceObjectAtIndex:4 withObject:@0];
     }
-    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]) {
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]) {
         [names removeObjectAtIndex:6];
         [placeholders removeObjectAtIndex:6];
         [heights removeObjectAtIndex:6];
         [canEdits removeObjectAtIndex:6];
         [values removeObjectAtIndex:6];
+    }
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]) {
+        [heights removeObjectAtIndex:6];
+        [heights insertObject:@70 atIndex:6];
     }
     for (NSInteger index = 0; index < names.count; index++) {
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];

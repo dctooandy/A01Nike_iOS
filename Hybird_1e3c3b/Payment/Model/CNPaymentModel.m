@@ -8,7 +8,16 @@
 
 #import "CNPaymentModel.h"
 
+@implementation CNWAmountListModel
+
+
+@end
+
 @implementation CNPaymentModel
+
++ (NSDictionary<NSString *,id> *)modelContainerPropertyGenericClass {
+    return @{@"amountList":[CNWAmountListModel class]};
+}
 
 //+ (JSONKeyMapper *)keyMapper {
 //    return [[JSONKeyMapper alloc] initWithModelToJSONDictionary:@{@"isAvailable": @"status"}];
