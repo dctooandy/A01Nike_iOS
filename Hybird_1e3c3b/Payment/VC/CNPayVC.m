@@ -109,10 +109,10 @@
 - (void)showTradeBill {
     CNMBillView *view = [[CNMBillView alloc] init];
     if (self.fastModel.mmProcessingOrderStatus == 2) {
-        [view setPromoTag:NO];
+        [view setUpload:NO promoTag:NO];
         [view.statusBtn addTarget:self action:@selector(confirmBill) forControlEvents:UIControlEventTouchUpInside];
     } else {
-        [view setPromoTag:(self.fastModel.needUploadFlag != 1)];
+        [view setUpload:YES promoTag:(self.fastModel.needUploadFlag != 1)];
         [view.statusBtn addTarget:self action:@selector(showUploadUI) forControlEvents:UIControlEventTouchUpInside];
     }
     self.billViewH.constant = 66;
