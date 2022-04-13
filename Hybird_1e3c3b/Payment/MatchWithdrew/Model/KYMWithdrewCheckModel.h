@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *mmProcessingOrderAmount;
 @property (nonatomic, assign) NSInteger mmProcessingOrderStatus;
 @property (nonatomic, assign) NSInteger mmProcessingOrderPairStatus;
+@property (nonatomic, assign) NSInteger mmProcessingOrderManualStatus;
 
 /// 存在撮合，1 存款，2 取款
 @property (nonatomic, assign) NSInteger mmProcessingOrderType;

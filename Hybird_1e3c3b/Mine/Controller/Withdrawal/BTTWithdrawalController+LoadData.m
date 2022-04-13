@@ -168,15 +168,19 @@
     NSArray *placeholders4 = @[pString,@"USDT",@"***银行-尾号*****",@"",withdrawPwdP,@"",@"",@""];
     
     CGFloat matchHistoryHeight = 0.0;
-    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"] && self.checkModel.data.mmProcessingOrderType == 2 && self.checkModel.data.mmProcessingOrderStatus == 2 && self.checkModel.data.mmProcessingOrderPairStatus == 5) {
-        matchHistoryHeight = 89.0;
+    if ([[IVNetwork savedUserInfo].uiMode isEqualToString:@"CNY"] && self.checkModel.data.mmProcessingOrderType == 2 && ((self.checkModel.data.mmProcessingOrderStatus == 2 && self.checkModel.data.mmProcessingOrderPairStatus == 5) || self.checkModel.data.mmProcessingOrderManualStatus == 4)) {
+        if (self.checkModel.data.mmProcessingOrderManualStatus == 4) {
+            matchHistoryHeight = 52.0;
+        } else {
+            matchHistoryHeight = 89.0;
+        }
     }
     CGFloat matchWithdrewAmountH = [self getMatchAmountListHeight];
     CGFloat spaceHeight = 0.0;
     
     NSArray *heights1 = @[@205.0,@(matchWithdrewAmountH),@(spaceHeight)];
     NSArray *heights3 = @[@44,@44.0,@44.0,@44.0,@(60.0),@100.0,@(matchHistoryHeight)];
-    NSArray *heights4 = @[@44,@44.0,@44,@44,@44.0,@46.0,@240.0,@(60.0)];
+    NSArray *heights4 = @[@44,@44.0,@44,@44,@44.0,@46.0,@120.0,@(60.0)];
     
     NSArray *canEdits1 = @[@NO,@NO,@NO];
     NSArray *canEdits3 = @[@YES,@NO,@NO,@(withdrawPwdCanEdits),@NO,@NO,@NO];
@@ -226,12 +230,16 @@
     if (isUsdt) {
         [heights replaceObjectAtIndex:4 withObject:@0];
     }
-    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]||[self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]) {
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"BITOLL"]) {
         [names removeObjectAtIndex:6];
         [placeholders removeObjectAtIndex:6];
         [heights removeObjectAtIndex:6];
         [canEdits removeObjectAtIndex:6];
         [values removeObjectAtIndex:6];
+    }
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]) {
+        [heights removeObjectAtIndex:6];
+        [heights insertObject:@70 atIndex:6];
     }
     for (NSInteger index = 0; index < names.count; index++) {
         BTTMeMainModel *model = [[BTTMeMainModel alloc] init];

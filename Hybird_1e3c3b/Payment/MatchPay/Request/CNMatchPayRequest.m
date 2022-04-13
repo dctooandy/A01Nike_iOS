@@ -15,6 +15,9 @@
         if ([result.head.errCode isEqualToString:@"0000"]) {
             !finish ?: finish(result.body, nil);
         } else {
+            if (error == nil && result.head.errMsg) {
+                error = [NSError errorWithDomain:@"" code:result.head.errCode.intValue userInfo:@{NSLocalizedDescriptionKey : result.head.errMsg}];
+            }
             !finish ?: finish(result, error);
         }
     }];
@@ -36,7 +39,7 @@
     dic[@"transactionImg"] = [imgNames componentsJoinedByString:@";"];
     dic[@"merchant"] = @"A01";
     dic[@"currency"] = @"CNY";
-    [self Post:@"deposit/depositOperate" para:dic finish:finish];
+    [self Post:@"deposit/depositOperateV2" para:dic finish:finish];
 }
 
 + (void)cancelDepisit:(NSString *)billId finish:(KYHTTPCallBack)finish {

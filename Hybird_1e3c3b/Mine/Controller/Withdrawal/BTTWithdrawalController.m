@@ -180,6 +180,18 @@
         };
         return cell;
     }
+    if ([self.bankList[self.selectIndex].bankName isEqualToString:@"DCBOX"]&& [cellModel.name isEqualToString:@"协议"]) {
+        BTTWithDrawProtocolView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawProtocolView" forIndexPath:indexPath];
+        [cell setTypeData:@[@"TRC20", @"ERC20"]];
+//        if ([self.bankList[self.selectIndex].protocol isEqualToString:@""]) {
+//        }else{
+//            [cell setTypeData:@[self.bankList[self.selectIndex].protocol]];
+//        }
+        cell.tapProtocol = ^(NSString * _Nonnull protocol) {
+            self.selectedProtocol = protocol;
+        };
+        return cell;
+    }
 
     if ([cellModel.name isEqualToString:@"提交"]) {
         
@@ -236,9 +248,17 @@
         KYMWithdrawHistoryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KYMWithdrawHistoryCell" forIndexPath:indexPath];
         cell.historyView.amount = self.checkModel.data.mmProcessingOrderAmount;
         cell.historyView.orderNo = self.checkModel.data.mmProcessingOrderTransactionId;
-        cell.historyView.confirmBtnHandler = ^{
-            [weakSelf showConfirmMathWithdrawAlert];
-        };
+        if (self.checkModel.data.mmProcessingOrderManualStatus == 4) {
+            cell.isManualStatus = YES;
+            cell.historyView.confirmBtnHandler = ^{
+                [weakSelf customerBtnClicked];
+            };
+        } else {
+            cell.historyView.confirmBtnHandler = ^{
+                [weakSelf showConfirmMathWithdrawAlert];
+            };
+        }
+        
         cell.historyView.noConfirmBtnHandler = ^ {
             [weakSelf showConfirmMathWithdrawAlert];
         };
@@ -726,8 +746,11 @@
     if (!(isNull(self.selectedProtocol)||[self.selectedProtocol isEqualToString:@""])) {
         params[@"protocol"] = self.selectedProtocol;
     }
-    if ([model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"]) {
+    if ([model.bankName isEqualToString:@"BITOLL"]) {
         params[@"protocol"] = @"ERC20";
+    }
+    if ([model.bankName isEqualToString:@"DCBOX"]) {
+        params[@"protocol"] = self.selectedProtocol;
     }
     params[@"password"] = [IVRsaEncryptWrapper encryptorString:self.password];
     BOOL isUSDTSell = [model.bankName isEqualToString:@"BITOLL"]||[model.bankName isEqualToString:@"DCBOX"]||[model.bankName isEqualToString:@"USDT"];
