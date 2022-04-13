@@ -21,7 +21,7 @@
         UIButton *itemButton = [[UIButton alloc]init];
         itemButton.size = CGSizeMake((SCREEN_WIDTH-60)/3, 36);
         itemButton.imageView.contentMode = UIViewContentModeScaleToFill;
-        itemButton.contentHorizontalAlignment = UIViewContentModeScaleToFill;
+        itemButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         itemButton.titleLabel.font = [UIFont systemFontOfSize:12];
         [itemButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         itemButton.userInteractionEnabled = NO;
