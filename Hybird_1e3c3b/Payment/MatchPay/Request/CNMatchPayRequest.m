@@ -26,7 +26,7 @@
 + (void)createDepisit:(NSString *)amount realName:(NSString *)realName finish:(KYHTTPCallBack)finish {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     dic[@"amount"] = amount;
-    dic[@"depositor"] = [IVRsaEncryptWrapper encryptorString:realName];
+//    dic[@"depositor"] = [IVRsaEncryptWrapper encryptorString:realName];
     dic[@"merchant"] = @"A01";
     dic[@"currency"] = @"CNY";
     [self Post:@"deposit/MMPayment" para:dic finish:finish];
