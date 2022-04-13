@@ -125,7 +125,7 @@
 }
 
 - (void)showUploadUI {
-    [CNMUploadView showUploadViewTo:self billId:self.fastModel.mmProcessingOrderTransactionId commitDeposit:nil];
+    [CNMUploadView showUploadViewTo:self billId:self.fastModel.mmProcessingOrderTransactionId promo:(self.fastModel.needUploadFlag != 1) commitDeposit:nil];
 }
 
 - (void)confirmBill {
