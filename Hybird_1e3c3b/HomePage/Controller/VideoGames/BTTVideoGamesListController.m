@@ -939,7 +939,10 @@
     if (gameModel.gameCode!=nil) {
         if ([gameModel.provider isEqualToString:@"PS"]) {
             model.gameCode = BTTPSKEY;
-        }else{
+        }else if ([gameModel.provider isEqualToString:@"AS"]) {
+            model.gameCode = BTTASKEY;
+        }else
+        {
             model.gameCode = gameModel.gameCode;
         }
     }
