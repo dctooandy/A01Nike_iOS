@@ -131,7 +131,7 @@
                         NSArray *protocolDetailArray = [protocolArray.firstObject componentsSeparatedByString:@":"];
 //                        self.selectedProtocol = protocolDetailArray.firstObject;
 //                        self.protocolArray = protocolArray;
-                        self.protocolArray = @[@"TRC20",@"ERC20"];
+                        self.protocolArray = @[@"ERC20",@"TRC20"];
                         self.selectedProtocol = self.protocolArray.firstObject;
                         [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
                         
@@ -703,7 +703,9 @@
             noticeLabel.textColor = COLOR_RGBA(129, 135, 145, 1);
             noticeLabel.font = [UIFont systemFontOfSize:12];
             noticeLabel.text = @"建议优先使用TRC20协议,手续费更低";
+            noticeLabel.textColor = [UIColor redColor];
             footer.userInteractionEnabled = false;
+            [footer setHidden:([self.selectedProtocol isEqualToString:@"ERC20"] ? NO:YES)];
             [footer addSubview:noticeLabel];
             return footer;
         } else if ([IVNetwork savedUserInfo].dcboxNum == 0) {

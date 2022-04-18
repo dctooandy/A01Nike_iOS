@@ -10,6 +10,7 @@
 
 @interface USDTWalletCollectionCell()
 @property (weak, nonatomic) IBOutlet UIButton *itemButton;
+@property (weak, nonatomic) UILabel *youCanTrustLabel;
 
 @end
 
@@ -30,8 +31,20 @@
         
         [itemButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 6, 0)];
         [itemButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 6, 0)];
+        UILabel *youCanTrustLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-60)/3.0 - 20, 0, 20, 15)];
+        youCanTrustLabel.backgroundColor = [UIColor redColor];
+        youCanTrustLabel.font = [UIFont systemFontOfSize:8];;
+        youCanTrustLabel.textColor = [UIColor whiteColor];
+        youCanTrustLabel.textAlignment = NSTextAlignmentCenter;
+        youCanTrustLabel.text = @"推荐";
+        youCanTrustLabel.layer.cornerRadius = 5;
+        youCanTrustLabel.layer.masksToBounds = true;
+     
+        [youCanTrustLabel setHidden:YES];
+        [itemButton addSubview:youCanTrustLabel];
         [self.contentView addSubview:itemButton];
         _itemButton = itemButton;
+        _youCanTrustLabel = youCanTrustLabel;
         
     }
     return self;
@@ -42,6 +55,13 @@
 
     [_itemButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [_itemButton setTitle:resultStr forState:UIControlStateNormal];
+    if ([name isEqualToString:@"TRC20"])
+    {
+        [_youCanTrustLabel setHidden:NO];
+    }else
+    {
+        [_youCanTrustLabel setHidden:YES];
+    }
 }
 
 
