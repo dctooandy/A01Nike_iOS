@@ -8,8 +8,9 @@
 
 #import "BTTWithDrawProtocolView.h"
 #import "CNPayConstant.h"
-#define protocolBtnW 80
+#define protocolBtnW 90
 #define protocolBtnH 30
+#define diff 10
 
 @interface BTTWithDrawProtocolView ()
 
@@ -36,7 +37,7 @@
         _protocolLabel.font = [UIFont boldSystemFontOfSize:16];
         [infoView addSubview:_protocolLabel];
         
-        _trcBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH)];
+        _trcBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH- 95 - diff, 5, protocolBtnW, protocolBtnH)];
         [_trcBtn setTitle:@"TRC20" forState:UIControlStateNormal];
         [_trcBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _trcBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -45,9 +46,20 @@
         _trcBtn.layer.borderWidth = 0.5;
         _trcBtn.clipsToBounds = YES;
         [_trcBtn addTarget:self action:@selector(trcBtn_click) forControlEvents:UIControlEventTouchUpInside];
+        UILabel *youCanTrustLabel = [[UILabel alloc] initWithFrame:CGRectMake(protocolBtnW - 20, 0, 20, 15)];
+        youCanTrustLabel.backgroundColor = [UIColor redColor];
+        youCanTrustLabel.font = [UIFont systemFontOfSize:8];;
+        youCanTrustLabel.textColor = [UIColor whiteColor];
+        youCanTrustLabel.textAlignment = NSTextAlignmentCenter;
+        youCanTrustLabel.text = @"推荐";
+        youCanTrustLabel.layer.cornerRadius = 5;
+        youCanTrustLabel.layer.masksToBounds = true;
+     
+//        [youCanTrustLabel setHidden:YES];
+        [_trcBtn addSubview:youCanTrustLabel];
         [infoView addSubview:_trcBtn];
         
-        _ercBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH)];
+        _ercBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH)];
         [_ercBtn setTitle:@"ERC20" forState:UIControlStateNormal];
         [_ercBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _ercBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -58,7 +70,7 @@
         [_ercBtn addTarget:self action:@selector(ercBtn_click) forControlEvents:UIControlEventTouchUpInside];
         [infoView addSubview:_ercBtn];
         
-        _omniBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH)];
+        _omniBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH)];
         [_omniBtn setTitle:@"OMNI" forState:UIControlStateNormal];
         [_omniBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _omniBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -70,7 +82,7 @@
         [infoView addSubview:_omniBtn];
         _protocolSubLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, 38, SCREEN_WIDTH - 40, 20)];
         _protocolSubLabel.text = @"建议优先使用TRC20协议,手续费更低";
-        _protocolSubLabel.textColor = [UIColor grayColor];
+        _protocolSubLabel.textColor = [UIColor redColor];
         _protocolSubLabel.font = [UIFont boldSystemFontOfSize:11];
         [_protocolSubLabel setHidden:YES];
         [infoView addSubview:_protocolSubLabel];
@@ -87,53 +99,52 @@
         _trcBtn.hidden = ![types containsObject:@"TRC20"];
         [self omniBtn_click];
         if (!_ercBtn.isHidden && !_trcBtn.isHidden) {
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
         } else if (!_ercBtn.isHidden && _trcBtn.isHidden) {
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
         } else if (_ercBtn.isHidden && !_trcBtn.isHidden) {
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
         } else {
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
         }
     } else if ([types containsObject:@"ERC20"]) {
-        BOOL isTrcFirst = [types.firstObject isEqualToString:@"TRC20"];
+        BOOL isTrcLast = [types.lastObject isEqualToString:@"TRC20"];
         _ercBtn.hidden = NO;
         _omniBtn.hidden = ![types containsObject:@"OMNI"];
         _trcBtn.hidden = ![types containsObject:@"TRC20"];
         if (!_omniBtn.isHidden && !_trcBtn.isHidden) {
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
             [self omniBtn_click];
         } else if (!_omniBtn.isHidden && _trcBtn.isHidden) {
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
             [self omniBtn_click];
-        } else if (isTrcFirst) {
+        } else if (isTrcLast) {
             _protocolLabel.text = @"选择协议";
-            [_protocolSubLabel setHidden:NO];
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
-            [self trcBtn_click];
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
+            [self ercBtn_click];
         } else if (_omniBtn.isHidden && !_trcBtn.isHidden) {
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
             [self ercBtn_click];
         } else {
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
             [self ercBtn_click];
         }
     } else {
@@ -142,24 +153,24 @@
         _ercBtn.hidden = ![types containsObject:@"ERC20"];
         
         if (!_omniBtn.isHidden && !_ercBtn.isHidden) {
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
             [self omniBtn_click];
         } else if (!_omniBtn.isHidden && _ercBtn.isHidden) {
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
             [self omniBtn_click];
         } else if (_omniBtn.isHidden && !_ercBtn.isHidden) {
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
             [self ercBtn_click];
         } else {
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285, 5, protocolBtnW, protocolBtnH);
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
             [self trcBtn_click];
         }
     }
@@ -169,6 +180,7 @@
     _trcBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
     _ercBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
     _omniBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+    [_protocolSubLabel setHidden:YES];
     if (self.tapProtocol) {
         self.tapProtocol(@"TRC20");
     }
@@ -178,6 +190,7 @@
     _omniBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
     _ercBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
     _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+    [_protocolSubLabel setHidden:YES];
     if (self.tapProtocol) {
         self.tapProtocol(@"OMNI");
     }
@@ -187,6 +200,7 @@
     _ercBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
     _omniBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
     _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+    [_protocolSubLabel setHidden:NO];
     if (self.tapProtocol) {
         self.tapProtocol(@"ERC20");
     }
