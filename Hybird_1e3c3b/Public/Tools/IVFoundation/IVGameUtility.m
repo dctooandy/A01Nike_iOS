@@ -73,7 +73,7 @@
     __weak typeof(self)weakSelf = self;
     NSMutableDictionary *param = [NSMutableDictionary dictionaryWithCapacity:1];
     [param setDictionary:paramters];
-    if ([paramters[@"gameCode"] isEqualToString:@"064"])
+    if ([paramters[@"gameCode"] isEqualToString:@"064"] && paramters[@"gameId"])
     {
         [param setObject:@"1" forKey:@"blockChainSingle"];
         [param setObject:@"0" forKey:@"inclLog"];
