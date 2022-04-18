@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *amountStr;
 @property (nonatomic, copy) NSString *userName;
 @property (nonatomic, copy) NSString *transactionId;
+///  YES 回到上一级页面，NO 回到 rootVC，默认NO
+@property (nonatomic, assign) BOOL backToLastVC;
 @end
 
 NS_ASSUME_NONNULL_END

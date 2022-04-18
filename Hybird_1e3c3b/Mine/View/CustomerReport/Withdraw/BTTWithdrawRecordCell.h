@@ -18,6 +18,9 @@ typedef void(^CancelRequestBlock)(NSString * requestId);
 @property (weak, nonatomic) IBOutlet UIButton *checkBtn;
 @property (nonatomic, copy) CheckBtnClickBlock checkBtnClickBlock;
 @property (nonatomic, copy) CancelRequestBlock cancelRequestBlock;
+@property (nonatomic, copy) void (^detailBtnBlock)(void);
+@property (weak, nonatomic) IBOutlet UIButton *detailBtn;
+
 -(void)setData:(BTTWithdrawRecordItemModel *)model;
 @end
 

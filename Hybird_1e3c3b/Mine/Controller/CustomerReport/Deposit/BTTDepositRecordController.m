@@ -11,6 +11,7 @@
 #import "BTTDepositRecordModel.h"
 #import "BTTDepositRecordHeaderCell.h"
 #import "BTTDepositRecordCell.h"
+#import "CNMatchDepositStatusVC.h"
 
 @interface BTTDepositRecordController ()<BTTElementsFlowLayoutDelegate>
 @property (nonatomic, strong)BTTPromoRecordFooterView * footerView;
@@ -137,6 +138,14 @@
             }
             [strongSelf.footerView allBtnselect:strongSelf.requestIdArr.count == strongSelf.modelArr.count];
         }];
+        if (model.mmStatus == CNMPayBillStatusPaying || model.mmStatus == CNMPayBillStatusConfirm) {
+            cell.detailBlock = ^{
+                CNMatchDepositStatusVC *statusVC = [[CNMatchDepositStatusVC alloc] init];
+                statusVC.transactionId = model.referenceId;
+                statusVC.backToLastVC = YES;
+                [weakSelf.navigationController pushViewController:statusVC animated:YES];
+            };
+        }
         return cell;
     }
 }

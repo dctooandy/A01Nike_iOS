@@ -6416,7 +6416,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.96;
+				MARKETING_VERSION = 3.1.97;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "博天堂_dev";
 				PROVISIONING_PROFILE = "62fdaebd-ee1d-48b0-a50f-308fe89d81ae";
@@ -6461,7 +6461,7 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.96;
+				MARKETING_VERSION = 3.1.97;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
 				PRODUCT_NAME = "博天堂";
 				PROVISIONING_PROFILE = "62fdaebd-ee1d-48b0-a50f-308fe89d81ae";

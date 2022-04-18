@@ -16,8 +16,9 @@ typedef void(^HandlerBlock)(id _Nullable responseObj,  NSString * _Nullable erro
 
 /// 创建撮合订单
 /// @param amount 撮合的金额
+/// @param realName  存款人真实名字
 /// @param finish 完成回调
-+ (void)createDepisit:(NSString *)amount finish:(KYHTTPCallBack)finish;
++ (void)createDepisit:(NSString *)amount realName:(NSString *)realName finish:(KYHTTPCallBack)finish;
 
 /// 确认撮合订单
 /// @param billId  订单号

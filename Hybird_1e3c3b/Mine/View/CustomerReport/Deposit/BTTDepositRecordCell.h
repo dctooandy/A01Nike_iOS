@@ -16,6 +16,7 @@ typedef void(^CheckBtnClickBlock)(NSString * requestId, BOOL selected);
 @interface BTTDepositRecordCell : BTTBaseCollectionViewCell
 @property (weak, nonatomic) IBOutlet UIButton *checkBtn;
 @property (nonatomic, copy) CheckBtnClickBlock checkBtnClickBlock;
+@property (nonatomic, copy) dispatch_block_t detailBlock;
 -(void)setData:(BTTDepositRecordItemModel *)model;
 @end
 

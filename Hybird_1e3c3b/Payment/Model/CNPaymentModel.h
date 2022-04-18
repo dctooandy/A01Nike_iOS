@@ -93,5 +93,8 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 @property (nonatomic, copy) NSString *mmProcessingOrderTransactionId;
 @property (nonatomic, copy) NSString *mmProcessingOrderAmount;
 
+/// 是否需要上传凭证， = 1 时需要先上传
+@property (nonatomic, assign) NSInteger needUploadFlag;
+
 @property (nonatomic, assign) BOOL isAvailable;
 @end

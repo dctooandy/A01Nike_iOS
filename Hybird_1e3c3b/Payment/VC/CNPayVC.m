@@ -109,10 +109,10 @@
 - (void)showTradeBill {
     CNMBillView *view = [[CNMBillView alloc] init];
     if (self.fastModel.mmProcessingOrderStatus == 2) {
-        [view setPromoTag:NO];
+        [view setUpload:NO promoTag:NO];
         [view.statusBtn addTarget:self action:@selector(confirmBill) forControlEvents:UIControlEventTouchUpInside];
     } else {
-        [view setPromoTag:YES];
+        [view setUpload:YES promoTag:(self.fastModel.needUploadFlag != 1)];
         [view.statusBtn addTarget:self action:@selector(showUploadUI) forControlEvents:UIControlEventTouchUpInside];
     }
     self.billViewH.constant = 66;
@@ -125,7 +125,7 @@
 }
 
 - (void)showUploadUI {
-    [CNMUploadView showUploadViewTo:self billId:self.fastModel.mmProcessingOrderTransactionId commitDeposit:nil];
+    [CNMUploadView showUploadViewTo:self billId:self.fastModel.mmProcessingOrderTransactionId promo:(self.fastModel.needUploadFlag != 1) commitDeposit:nil];
 }
 
 - (void)confirmBill {
