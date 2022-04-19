@@ -24,10 +24,10 @@
 @implementation BTTWithDrawProtocolView
 
 -(instancetype)initWithFrame:(CGRect)frame{
-    self = [super initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+    self = [super initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80)];
     if (self) {
         self.contentView.backgroundColor = kBlackLightColor;
-        UIView *infoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        UIView *infoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 80)];
         infoView.backgroundColor = kBlackLightColor;
         [self.contentView addSubview:infoView];
         
@@ -37,14 +37,16 @@
         _protocolLabel.font = [UIFont boldSystemFontOfSize:16];
         [infoView addSubview:_protocolLabel];
         
-        _trcBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH- 95 - diff, 5, protocolBtnW, protocolBtnH)];
+        _trcBtn = [self getPortocalBtn];
+//        _trcBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH- 95 - diff, 5, protocolBtnW, protocolBtnH)];
+        _trcBtn.frame = CGRectMake(SCREEN_WIDTH- 95 - diff, 5, protocolBtnW, protocolBtnH);
         [_trcBtn setTitle:@"TRC20" forState:UIControlStateNormal];
         [_trcBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _trcBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
-        _trcBtn.layer.cornerRadius = 4.0;
-        _trcBtn.layer.borderWidth = 0.5;
-        _trcBtn.clipsToBounds = YES;
+//        _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+//        _trcBtn.layer.cornerRadius = 4.0;
+//        _trcBtn.layer.borderWidth = 0.5;
+//        _trcBtn.clipsToBounds = YES;
         [_trcBtn addTarget:self action:@selector(trcBtn_click) forControlEvents:UIControlEventTouchUpInside];
         UILabel *youCanTrustLabel = [[UILabel alloc] initWithFrame:CGRectMake(protocolBtnW - 20, 0, 20, 15)];
         youCanTrustLabel.backgroundColor = [UIColor redColor];
@@ -54,30 +56,35 @@
         youCanTrustLabel.text = @"推荐";
         youCanTrustLabel.layer.cornerRadius = 5;
         youCanTrustLabel.layer.masksToBounds = true;
-     
+        UIImageView *trustImgView = [[UIImageView alloc] initWithImage:ImageNamed(@"A01_H5APP_充值&取款")];
+        trustImgView.frame = CGRectMake(protocolBtnW/2 - 8, -10, 34, 19);
 //        [youCanTrustLabel setHidden:YES];
-        [_trcBtn addSubview:youCanTrustLabel];
+        [_trcBtn addSubview:trustImgView];
         [infoView addSubview:_trcBtn];
         
-        _ercBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH)];
+        _ercBtn = [self getPortocalBtn];
+        _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+//        _ercBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH)];
         [_ercBtn setTitle:@"ERC20" forState:UIControlStateNormal];
         [_ercBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _ercBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        _ercBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
-        _ercBtn.layer.cornerRadius = 4.0;
-        _ercBtn.layer.borderWidth = 0.5;
-        _ercBtn.clipsToBounds = YES;
+//        _ercBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+//        _ercBtn.layer.cornerRadius = 4.0;
+//        _ercBtn.layer.borderWidth = 0.5;
+//        _ercBtn.clipsToBounds = YES;
         [_ercBtn addTarget:self action:@selector(ercBtn_click) forControlEvents:UIControlEventTouchUpInside];
         [infoView addSubview:_ercBtn];
         
-        _omniBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH)];
+        _omniBtn = [self getPortocalBtn];
+        _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
+//        _omniBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH)];
         [_omniBtn setTitle:@"OMNI" forState:UIControlStateNormal];
         [_omniBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _omniBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-        _omniBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
-        _omniBtn.layer.cornerRadius = 4.0;
-        _omniBtn.layer.borderWidth = 0.5;
-        _omniBtn.clipsToBounds = YES;
+//        _omniBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
+//        _omniBtn.layer.cornerRadius = 4.0;
+//        _omniBtn.layer.borderWidth = 0.5;
+//        _omniBtn.clipsToBounds = YES;
         [_omniBtn addTarget:self action:@selector(omniBtn_click) forControlEvents:UIControlEventTouchUpInside];
         [infoView addSubview:_omniBtn];
         _protocolSubLabel = [[UILabel alloc]initWithFrame:CGRectMake(16, 38, SCREEN_WIDTH - 40, 20)];
@@ -89,7 +96,17 @@
     }
     return self;
 }
+#pragma mark - Protocol
 
+- (UIButton *)getPortocalBtn {
+    UIButton *btn = [UIButton new];
+    [btn setImage:[UIImage imageNamed:@"unSelect"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"icon_newrecharge_sel"] forState:UIControlStateSelected];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    btn.titleLabel.font = [UIFont systemFontOfSize:16];
+    btn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+    return btn;
+}
 - (void)setTypeData:(NSArray *)types{
     [_protocolSubLabel setHidden:YES];
     _protocolLabel.text = @"协议";
@@ -177,9 +194,12 @@
 }
 
 -(void)trcBtn_click {
-    _trcBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
-    _ercBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
-    _omniBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+//    _trcBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
+//    _ercBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+//    _omniBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+    [_omniBtn setSelected:NO];
+    [_ercBtn setSelected:NO];
+    [_trcBtn setSelected:YES];
     [_protocolSubLabel setHidden:YES];
     if (self.tapProtocol) {
         self.tapProtocol(@"TRC20");
@@ -187,9 +207,12 @@
 }
 
 - (void)omniBtn_click{
-    _omniBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
-    _ercBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
-    _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+//    _omniBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
+//    _ercBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+//    _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+    [_omniBtn setSelected:YES];
+    [_ercBtn setSelected:NO];
+    [_trcBtn setSelected:NO];
     [_protocolSubLabel setHidden:YES];
     if (self.tapProtocol) {
         self.tapProtocol(@"OMNI");
@@ -197,9 +220,12 @@
 }
 
 - (void)ercBtn_click{
-    _ercBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
-    _omniBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
-    _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+//    _ercBtn.layer.borderColor = COLOR_RGBA(36, 151, 255, 1).CGColor;
+//    _omniBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+//    _trcBtn.layer.borderColor = COLOR_RGBA(74, 74, 110, 1).CGColor;
+    [_omniBtn setSelected:NO];
+    [_ercBtn setSelected:YES];
+    [_trcBtn setSelected:NO];
     [_protocolSubLabel setHidden:NO];
     if (self.tapProtocol) {
         self.tapProtocol(@"ERC20");
