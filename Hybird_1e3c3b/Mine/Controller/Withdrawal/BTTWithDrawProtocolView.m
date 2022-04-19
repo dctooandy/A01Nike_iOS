@@ -116,52 +116,47 @@
         _trcBtn.hidden = ![types containsObject:@"TRC20"];
         [self omniBtn_click];
         if (!_ercBtn.isHidden && !_trcBtn.isHidden) {
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
         } else if (!_ercBtn.isHidden && _trcBtn.isHidden) {
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
-        } else if (_ercBtn.isHidden && !_trcBtn.isHidden) {
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
             _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
+        } else if (_ercBtn.isHidden && !_trcBtn.isHidden) {
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
         } else {
             _omniBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
         }
     } else if ([types containsObject:@"ERC20"]) {
         BOOL isTrcLast = [types.lastObject isEqualToString:@"TRC20"];
         _ercBtn.hidden = NO;
         _omniBtn.hidden = ![types containsObject:@"OMNI"];
         _trcBtn.hidden = ![types containsObject:@"TRC20"];
+        _protocolLabel.text = @"选择协议";
         if (!_omniBtn.isHidden && !_trcBtn.isHidden) {
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
-            [self omniBtn_click];
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
+            [self ercBtn_click];
         } else if (!_omniBtn.isHidden && _trcBtn.isHidden) {
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
-            [self omniBtn_click];
-        } else if (isTrcLast) {
-            _protocolLabel.text = @"选择协议";
             _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
             [self ercBtn_click];
         } else if (_omniBtn.isHidden && !_trcBtn.isHidden) {
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
-            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
+            _trcBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
             [self ercBtn_click];
         } else {
-            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
+            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-95 - diff, 5, protocolBtnW, protocolBtnH);
             _trcBtn.frame = CGRectMake(SCREEN_WIDTH-190 - diff, 5, protocolBtnW, protocolBtnH);
-            _omniBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
+            _ercBtn.frame = CGRectMake(SCREEN_WIDTH-285 - diff, 5, protocolBtnW, protocolBtnH);
             [self ercBtn_click];
         }
     } else {

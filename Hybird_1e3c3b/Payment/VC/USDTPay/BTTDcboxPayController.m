@@ -131,12 +131,18 @@
                         NSArray *protocolDetailArray = [protocolArray.firstObject componentsSeparatedByString:@":"];
 //                        self.selectedProtocol = protocolDetailArray.firstObject;
 //                        self.protocolArray = protocolArray;
+                        __block NSMutableArray *models = @[].mutableCopy;
+                        __block NSInteger ercIdx = 0;
+                        __block NSInteger omnIdx = 0;
+                        
                         if (self.payments && self.payments.count > 0)
                         {
                             for (CNPaymentModel *paymentModel in self.payments) {
                                 if (paymentModel.payType == 43)
                                 {
                                     self.protocolArray = paymentModel.protocolList.copy;
+//                                    self.protocolArray = @[@"OMNI",@"ERC20",@"TRC20"];
+                                    [self sortProtocolList];
                                 }
                             }
                         }else
@@ -153,7 +159,40 @@
         }
     }];
 }
-
+- (void)sortProtocolList
+{
+    self.protocolArray = [self sortProtocolListArray:self.protocolArray].mutableCopy;
+}
+- (NSMutableArray *)sortProtocolListArray:(NSArray *)currentArray
+{
+    __block NSMutableArray *models = @[].mutableCopy;
+    __block NSInteger ercIdx = 0;
+    __block NSInteger omnIdx = self.protocolArray.count - 1;
+    [currentArray enumerateObjectsUsingBlock:^(NSString * _Nonnull protocolName, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([protocolName caseInsensitiveCompare:@"ERC20"] == NSOrderedSame) {
+            [models addObject:protocolName];
+            ercIdx = idx;
+        }else if ([protocolName caseInsensitiveCompare:@"OMNI"] == NSOrderedSame) {
+            [models addObject:protocolName];
+            omnIdx = idx;
+        }else
+        {
+            [models addObject:protocolName];
+        }
+    }];
+    // 将ERC20排到第一位
+    if (ercIdx != 0) {
+        [models exchangeObjectAtIndex:0 withObjectAtIndex:ercIdx];
+        self.protocolArray = models.mutableCopy;
+        [self sortProtocolList];
+        return models;
+    }
+    // 将Omni排到最后一位
+    if (omnIdx != (self.protocolArray.count - 1)) {
+        [models exchangeObjectAtIndex:(self.protocolArray.count - 1) withObjectAtIndex:omnIdx];
+    }
+    return models;
+}
 - (void)requestUSDTRate{
     [self showLoading];
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
