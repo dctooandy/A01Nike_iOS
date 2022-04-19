@@ -594,7 +594,7 @@
         contents = @[@"所有类别",@"热门游戏",@"彩金池游戏",@"最新游戏",@"特惠游戏"];
         title = @"请选择游戏类别";
     } else if (button.tag == 1071) {
-        contents = @[@"全平台",@"PT",@"MG",@"PP",@"AG",@"TTG",@"PS",@"PNG"];
+        contents = @[@"全平台",@"PT",@"MG",@"PP",@"AG",@"TTG",@"AS",@"PS",@"PNG"];
         title = @"请选择游戏平台";
         
     } else if (button.tag == 1072) {
@@ -625,7 +625,8 @@
                    [selectValue isEqualToString:@"PP"] ||
                    [selectValue isEqualToString:@"PS"] ||
                    [selectValue isEqualToString:@"PNG"] ||
-                   [selectValue isEqualToString:@"NT"]) {
+                   [selectValue isEqualToString:@"NT"]||
+                   [selectValue isEqualToString:@"AS"]) {
             self.platform = selectValue;
             self.provider = selectValue;
         } else if ([selectValue isEqualToString:@"全赔付"]) {
@@ -931,10 +932,17 @@
     model.gameId = gameModel.gameId;
     model.gameType = [NSString stringWithFormat:@"%@",@(gameModel.gameType)];
     model.gameStyle = gameModel.gameStyle;
+    if ([gameModel.provider isEqualToString:@"AS"])
+    {
+//        model.blockChainSingle = @"1";
+    }
     if (gameModel.gameCode!=nil) {
         if ([gameModel.provider isEqualToString:@"PS"]) {
             model.gameCode = BTTPSKEY;
-        }else{
+        }else if ([gameModel.provider isEqualToString:@"AS"]) {
+            model.gameCode = BTTASKEY;
+        }else
+        {
             model.gameCode = gameModel.gameCode;
         }
     }

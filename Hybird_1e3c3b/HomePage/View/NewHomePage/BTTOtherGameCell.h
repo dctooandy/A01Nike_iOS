@@ -7,11 +7,11 @@
 //
 
 #import "BTTBaseCollectionViewCell.h"
-
+#import "BTTASGameModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTOtherGameCell : BTTBaseCollectionViewCell
-
+@property (strong , nonatomic) BTTASGameModel * asGameData;
 @end
 
 NS_ASSUME_NONNULL_END

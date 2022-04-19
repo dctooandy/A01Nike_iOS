@@ -582,6 +582,8 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTIndexBannerDownloads                    @"_extra_/api/v1/app/banners?v=1.1"
 // 首页form
 #define BTTBrandHighlights                         @"_extra_/api/v1/wms/form"
+// 首页AS单厅电游接入
+#define BTTASWms                                   @"_extra_/api/v1/wms/as-wms"
 // 首页公告
 #define BTTHomeAnnouncementAPI                     @"_extra_/api/v1/other/announcement/common"
 // 优惠列表

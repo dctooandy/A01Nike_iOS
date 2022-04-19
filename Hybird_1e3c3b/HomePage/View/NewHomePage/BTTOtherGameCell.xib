@@ -45,13 +45,16 @@
                             <action selector="ysbBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="onr-Tg-NbM"/>
                         </connections>
                     </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="A01_H5APP_入口_04" translatesAutoresizingMaskIntoConstraints="NO" id="eiU-bS-pIB">
+                        <rect key="frame" x="15" y="190" width="168" height="83"/>
+                    </imageView>
                     <button opaque="NO" tag="1010" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N5n-pS-z6m">
                         <rect key="frame" x="15" y="190" width="168" height="83"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="168" id="HBc-Rx-PiP"/>
                             <constraint firstAttribute="height" constant="83" id="dT1-Ka-UQM"/>
                         </constraints>
-                        <state key="normal" backgroundImage="AS"/>
                         <connections>
                             <action selector="asBtnClick:" destination="gTV-IL-0wX" eventType="touchUpInside" id="yvD-9X-FEv"/>
                         </connections>
@@ -75,8 +78,8 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AS真人棋牌" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXr-aL-C7N">
-                        <rect key="frame" x="23" y="248" width="75.5" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="区块链游戏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXr-aL-C7N">
+                        <rect key="frame" x="23" y="248" width="71.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -100,6 +103,8 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="N5n-pS-z6m" firstAttribute="top" secondItem="nxo-c5-HXv" secondAttribute="bottom" constant="12.5" id="0NF-CC-adx"/>
                 <constraint firstItem="ZdN-1u-wR6" firstAttribute="leading" secondItem="Utd-7Q-sfN" secondAttribute="leading" id="0Ue-C3-O1k"/>
@@ -109,12 +114,16 @@
                 <constraint firstItem="LGI-fm-VZ5" firstAttribute="bottom" secondItem="Utd-7Q-sfN" secondAttribute="bottom" constant="-8" id="2vs-8O-6p7"/>
                 <constraint firstItem="MxN-PN-rST" firstAttribute="bottom" secondItem="ZdN-1u-wR6" secondAttribute="bottom" constant="-8" id="3OS-cE-3dv"/>
                 <constraint firstItem="ZdN-1u-wR6" firstAttribute="width" secondItem="N5n-pS-z6m" secondAttribute="width" id="6WH-H6-yzL"/>
+                <constraint firstItem="eiU-bS-pIB" firstAttribute="leading" secondItem="N5n-pS-z6m" secondAttribute="leading" id="9Se-9G-g9a"/>
                 <constraint firstItem="dmp-6G-yic" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="9bd-0q-yjg"/>
+                <constraint firstItem="eiU-bS-pIB" firstAttribute="bottom" secondItem="N5n-pS-z6m" secondAttribute="bottom" id="B9O-Xz-lbq"/>
                 <constraint firstItem="Utd-7Q-sfN" firstAttribute="bottom" secondItem="nxo-c5-HXv" secondAttribute="bottom" id="CUJ-kF-zYf"/>
                 <constraint firstItem="nxo-c5-HXv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="EyP-7f-E7T"/>
+                <constraint firstItem="eiU-bS-pIB" firstAttribute="top" secondItem="N5n-pS-z6m" secondAttribute="top" id="FbG-9J-FhP"/>
                 <constraint firstItem="hXr-aL-C7N" firstAttribute="bottom" secondItem="N5n-pS-z6m" secondAttribute="bottom" constant="-8" id="I0X-CT-ZMU"/>
                 <constraint firstItem="nxo-c5-HXv" firstAttribute="top" secondItem="dmp-6G-yic" secondAttribute="bottom" constant="10" id="OhC-5d-7VM"/>
                 <constraint firstItem="N5n-pS-z6m" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="SKi-xG-nWg"/>
+                <constraint firstItem="eiU-bS-pIB" firstAttribute="trailing" secondItem="N5n-pS-z6m" secondAttribute="trailing" id="UQV-dl-Ayc"/>
                 <constraint firstItem="ZdN-1u-wR6" firstAttribute="height" secondItem="N5n-pS-z6m" secondAttribute="height" id="Uzr-ba-YSD"/>
                 <constraint firstItem="LGI-fm-VZ5" firstAttribute="leading" secondItem="Utd-7Q-sfN" secondAttribute="leading" constant="8" id="VYS-lT-gbZ"/>
                 <constraint firstItem="ZdN-1u-wR6" firstAttribute="leading" secondItem="Utd-7Q-sfN" secondAttribute="leading" id="b2c-lC-3i2"/>
@@ -131,6 +140,7 @@
                 <outlet property="asBtn" destination="N5n-pS-z6m" id="DBC-ye-j9V"/>
                 <outlet property="asBtnHeight" destination="dT1-Ka-UQM" id="ZMR-JX-YNe"/>
                 <outlet property="asBtnWidth" destination="HBc-Rx-PiP" id="MNM-rt-jac"/>
+                <outlet property="asImageView" destination="eiU-bS-pIB" id="ocq-Hk-7m5"/>
                 <outlet property="asTryIcon" destination="2b6-MA-mMZ" id="kPX-mf-jx9"/>
                 <outlet property="cpBtn" destination="ZdN-1u-wR6" id="PIw-x3-cQM"/>
                 <outlet property="shabaBtn" destination="nxo-c5-HXv" id="t3F-4x-haF"/>
@@ -145,8 +155,8 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="A01_H5APP_入口_04" width="177" height="86.5"/>
         <image name="AGCP" width="167.5" height="82.5"/>
-        <image name="AS" width="167.5" height="82.5"/>
         <image name="YSB_Big" width="168" height="133.5"/>
         <image name="shaba" width="167.5" height="133"/>
         <image name="tryPlay" width="25" height="17.5"/>

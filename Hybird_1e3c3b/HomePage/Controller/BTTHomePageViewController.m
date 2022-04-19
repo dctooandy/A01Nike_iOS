@@ -47,6 +47,7 @@
 #import "AppDelegate.h"
 #import "BTTAssistiveButtonModel.h"
 #import "RedPacketsPreView.h"
+#import "BTTASGameModel.h"
 @interface BTTHomePageViewController ()<BTTElementsFlowLayoutDelegate>
 
 @property (nonatomic, assign) BOOL adCellShow;
@@ -410,6 +411,7 @@
         } else if (indexPath.row == 5) {
             BTTOtherGameCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTOtherGameCell" forIndexPath:indexPath];
             weakSelf(weakSelf);
+            cell.asGameData = self.asGameData.firstObject;
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
                 strongSelf.idDisable = true;
@@ -520,6 +522,7 @@
         } else if (indexPath.row == 4) {
             BTTOtherGameCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTOtherGameCell" forIndexPath:indexPath];
             weakSelf(weakSelf);
+            cell.asGameData = self.asGameData.firstObject;
             cell.buttonClickBlock = ^(UIButton * _Nonnull button) {
                 strongSelf(strongSelf);
                 strongSelf.idDisable = true;
@@ -876,6 +879,7 @@
 }
 
 -(void)checkMultiBetInfo:(NSInteger)tag currency:(NSString *)currency isShowPop:(BOOL)isShowPop {
+    BTTASGameModel *asGameModel = self.asGameData.count ? self.asGameData.firstObject : nil;
     [IVNetwork requestPostWithUrl:BTTMultiBetInfo paramters:nil completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
@@ -923,7 +927,7 @@
                         gameName = @"YSB体育";
                         break;
                     } else if ([gameCode isEqualToString:BTTASKEY]) {
-                        gameName = @"AS真人棋牌";
+                        gameName = asGameModel.gameName ? asGameModel.gameName:@"AS真人棋牌";
                         break;
                     } else if ([gameCode isEqualToString:BTTAGLotteryKEY]) {
 //                        gameName = @"AG彩票";
@@ -996,6 +1000,7 @@
 }
 
 - (void)gotoGameWithTag:(NSInteger)tag currency:(NSString *)currency {
+    BTTASGameModel *asGameModel = self.asGameData.count ? self.asGameData.firstObject : nil;
     if (tag==1000) {
         BTTAGQJViewController *vc = [BTTAGQJViewController new];
         [CNTimeLog startRecordTime:CNEventAGQJLaunch];
@@ -1022,11 +1027,14 @@
             model.platformCurrency = currency;
         }else if (tag==1010){
             model = [[IVGameModel alloc] init];
-            model.cnName = @"AS真人棋牌";
-            model.gameCode = BTTASKEY;
-            model.enName =  kASSlotEnName;
+            model.cnName = asGameModel.gameName ? asGameModel.gameName:@"AS真人棋牌";;
+            model.gameCode = asGameModel.gameCode;
+            model.enName = asGameModel.gameEnName;
             model.provider = kASSlotProvider;
             model.platformCurrency = currency;
+            model.gameType = asGameModel.gameType;
+            model.gameId = asGameModel.gameId;
+            model.gameKind = asGameModel.gameKind;
         } else if (tag==1003) {
             model = [[IVGameModel alloc] init];
             model.cnName =  kFishCnName;
@@ -1054,6 +1062,7 @@
     UIViewController *vc = nil;
     IVGameModel *model = nil;
     BTTVideoGamesListController *videoGamesVC = nil;
+    BTTASGameModel *asGameModel = self.asGameData.count ? self.asGameData.firstObject : nil;
     switch (tag) {
         case 1000://AG旗舰
             vc = [BTTAGQJViewController new];
@@ -1139,10 +1148,13 @@
             break;
         case 1010://AS电游
             model = [[IVGameModel alloc] init];
-            model.cnName = @"AS真人棋牌";
+            model.cnName = @"区块链游戏";
             model.gameCode = BTTASKEY;
-            model.enName =  kASSlotEnName;
+            model.enName =  asGameModel.gameEnName;
             model.provider = kASSlotProvider;
+            model.gameType = asGameModel.gameType;
+            model.gameId = asGameModel.gameId;
+            model.gameKind = asGameModel.gameKind;
             break;
         case 1011://AG彩票
             model = [[IVGameModel alloc] init];

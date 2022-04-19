@@ -71,7 +71,16 @@
 - (void)IVGameGetUrlWithParamters:(NSDictionary *)paramters gameController:(IVWKGameViewController *)gameController completion:(void (^)(BOOL, NSString *))completion
 {
     __weak typeof(self)weakSelf = self;
-    [[IVHttpManager shareManager] sendRequestWithUrl:@"game/inGame" parameters:paramters.copy callBack:^(IVJResponseObject * _Nullable response, NSError * _Nullable error) {
+    NSMutableDictionary *param = [NSMutableDictionary dictionaryWithCapacity:1];
+    [param setDictionary:paramters];
+    if ([paramters[@"gameCode"] isEqualToString:@"064"] && paramters[@"gameId"])
+    {
+        [param setObject:@"1" forKey:@"blockChainSingle"];
+        [param setObject:@"0" forKey:@"inclLog"];
+//        [param setObject:@"AS" forKey:@"text"];
+//        [param setObject:@"AS" forKey:@"key"];
+    }
+    [[IVHttpManager shareManager] sendRequestWithUrl:@"game/inGame" parameters:param.copy callBack:^(IVJResponseObject * _Nullable response, NSError * _Nullable error) {
         
         if ([response.head.errCode isEqualToString:@"GW_801607"]) {
             completion(YES,nil);

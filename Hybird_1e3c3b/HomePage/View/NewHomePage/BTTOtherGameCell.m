@@ -7,7 +7,8 @@
 //
 
 #import "BTTOtherGameCell.h"
-
+#import "UIButton+WebCache.h"
+#import "UIImageView+WebCache.h"
 @interface BTTOtherGameCell ()
 
 @property (weak, nonatomic) IBOutlet UIButton *shabaBtn;
@@ -17,6 +18,7 @@
 //@property (weak, nonatomic) IBOutlet UIButton *jingcaiBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *asBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *asImageView;
 
 @property (weak, nonatomic) IBOutlet UIButton *cpBtn;
 
@@ -119,7 +121,13 @@
         _asTryIcon.hidden = NO;
     }
 }
-
+- (void)setAsGameData:(BTTASGameModel *)asGameData
+{
+    if (asGameData.gameImg)
+    {
+        [self.asImageView sd_setImageWithURL:[NSURL URLWithString:asGameData.gameImg] placeholderImage:[UIImage imageNamed:@"AS"]];
+    }
+}
 - (IBAction)shabaBtnClick:(UIButton *)sender {
     if (self.buttonClickBlock) {
         [self lockGameBtnPress];
