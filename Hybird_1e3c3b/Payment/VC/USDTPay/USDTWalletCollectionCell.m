@@ -46,7 +46,7 @@
 //
 //        [youCanTrustLabel setHidden:YES];
         UIImageView *trustImgView = [[UIImageView alloc] initWithImage:ImageNamed(@"A01_H5APP_充值&取款")];
-        trustImgView.frame = CGRectMake((SCREEN_WIDTH-60)/3/2 - 8, -10, 34, 19);
+        trustImgView.frame = CGRectMake((SCREEN_WIDTH-60)/3/2 - 11, -10, 34, 19);
         [trustImgView setHidden:YES];
         [itemButton addSubview:trustImgView];
         [self.contentView addSubview:itemButton];
