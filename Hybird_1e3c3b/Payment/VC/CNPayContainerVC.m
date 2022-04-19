@@ -152,6 +152,7 @@
             break;
         case CNPaymentDCBOX:{
             BTTDcboxPayController *vc1 = [[BTTDcboxPayController alloc]init];
+            vc1.payments = self.payments;
             [viewControllers addObjectsFromArray:@[vc1]];
         }
             break;
