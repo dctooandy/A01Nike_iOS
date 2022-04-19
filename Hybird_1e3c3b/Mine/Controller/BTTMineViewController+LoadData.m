@@ -218,6 +218,7 @@
                             mainModel.paymentType = model.payType;
                             mainModel.payModel = model;
                             mainModel.desc = @"秒到-无痕";
+                            mainModel.protocolList = model.protocolList;
                             [self.bigDataSoure addObject:mainModel];
                         }
                     }

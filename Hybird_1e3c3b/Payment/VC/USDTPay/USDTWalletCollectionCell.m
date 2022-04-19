@@ -20,7 +20,7 @@
     self = [super initWithFrame:CGRectMake(0, 0, (SCREEN_WIDTH-60)/3, 36)];
     if (self) {
         UIButton *itemButton = [[UIButton alloc]init];
-        itemButton.size = CGSizeMake((SCREEN_WIDTH-60)/3, 36);
+        itemButton.size = CGSizeMake((SCREEN_WIDTH - 60.0 - 30.0)/3, 36);
         itemButton.imageView.contentMode = UIViewContentModeScaleToFill;
         itemButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         itemButton.titleLabel.font = [UIFont systemFontOfSize:12];
@@ -31,7 +31,7 @@
         
         [itemButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 6, 0)];
         [itemButton setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 6, 0)];
-        UILabel *youCanTrustLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-60)/3.0 - 20, 0, 20, 15)];
+        UILabel *youCanTrustLabel = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_WIDTH - 60.0 - 30.0)/3 - 20, 0, 20, 15)];
         youCanTrustLabel.backgroundColor = [UIColor redColor];
         youCanTrustLabel.font = [UIFont systemFontOfSize:8];;
         youCanTrustLabel.textColor = [UIColor whiteColor];

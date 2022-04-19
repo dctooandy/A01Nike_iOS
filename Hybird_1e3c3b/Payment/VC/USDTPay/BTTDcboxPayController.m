@@ -131,7 +131,18 @@
                         NSArray *protocolDetailArray = [protocolArray.firstObject componentsSeparatedByString:@":"];
 //                        self.selectedProtocol = protocolDetailArray.firstObject;
 //                        self.protocolArray = protocolArray;
-                        self.protocolArray = @[@"ERC20",@"TRC20"];
+                        if (self.payments && self.payments.count > 0)
+                        {
+                            for (CNPaymentModel *paymentModel in self.payments) {
+                                if (paymentModel.payType == 43)
+                                {
+                                    self.protocolArray = paymentModel.protocolList.copy;
+                                }
+                            }
+                        }else
+                        {
+                            self.protocolArray = @[@"ERC20",@"TRC20"];
+                        }
                         self.selectedProtocol = self.protocolArray.firstObject;
                         [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
                         
@@ -592,13 +603,14 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0)
     {
-        if ([self.selectedProtocol isEqualToString:@"TRC20"])
-        {
-            self.selectedProtocol = @"ERC20";
-        }else
-        {
-            self.selectedProtocol = @"TRC20";
-        }
+        self.selectedProtocol = self.protocolArray[indexPath.row];
+//        if ([self.selectedProtocol isEqualToString:@"TRC20"])
+//        {
+//            self.selectedProtocol = @"ERC20";
+//        }else
+//        {
+//            self.selectedProtocol = @"TRC20";
+//        }
         [UIView performWithoutAnimation:^{
             [self.walletCollectionView reloadData];
         }];
@@ -748,7 +760,7 @@
 {
     if (indexPath.section==0)
     {
-        return CGSizeMake((SCREEN_WIDTH - 60 - 60)/3, 36); //固定的itemsize
+        return CGSizeMake((SCREEN_WIDTH - 60.0 - 30.0)/ 3, 36); //固定的itemsize
     }else
     {
         return CGSizeMake((SCREEN_WIDTH - 60 - 36)/4, 36); //固定的itemsize
@@ -758,7 +770,7 @@
 {
     if (section==0)
     {
-        return 30; //列间距
+        return 10; //列间距
     }else
     {
         return 12; //列间距
