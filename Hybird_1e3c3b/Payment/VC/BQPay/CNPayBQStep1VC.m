@@ -221,9 +221,10 @@
 
 - (void)configDifferentUI {
     switch (self.paymentModel.payType) {
+        case 90:
         case 91:
         case 92:
-            _nameLb.text = @"真实姓名";
+            _nameLb.text = @"存款人姓名";
             self.bottomTipView.hidden = YES;
             self.bottomTipViewHeight.constant = 0;
             break;
