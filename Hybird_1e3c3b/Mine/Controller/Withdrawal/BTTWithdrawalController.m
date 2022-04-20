@@ -171,7 +171,7 @@
     if ([self.bankList[self.selectIndex].bankName isEqualToString:@"USDT"]&& [cellModel.name isEqualToString:@"协议"]) {
         BTTWithDrawProtocolView *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"BTTWithDrawProtocolView" forIndexPath:indexPath];
         if ([self.bankList[self.selectIndex].protocol isEqualToString:@""]) {
-            [cell setTypeData:@[@"OMNI",@"ERC20", @"TRC20"]];
+            [cell setTypeData:@[@"ERC20", @"TRC20",@"OMNI"]];
         }else{
             [cell setTypeData:@[self.bankList[self.selectIndex].protocol]];
         }
