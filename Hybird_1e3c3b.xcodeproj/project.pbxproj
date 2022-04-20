@@ -679,6 +679,8 @@
 		76F8643126E87ECE00320B60 /* BTTVIPClubHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
 		A1DA5A3F280013470036F2F7 /* BTTASGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DA5A3E280013470036F2F7 /* BTTASGameModel.m */; };
+		A1DA5A5B280FAEA90036F2F7 /* BTTChainGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DA5A59280FAEA90036F2F7 /* BTTChainGameCell.m */; };
+		A1DA5A5C280FAEA90036F2F7 /* BTTChainGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1DA5A5A280FAEA90036F2F7 /* BTTChainGameCell.xib */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
 		D318AC1724333BC500183407 /* BTTKSAddBfbWalletController.m in Sources */ = {isa = PBXBuildFile; fileRef = D318AC1524333BC500183407 /* BTTKSAddBfbWalletController.m */; };
@@ -2011,6 +2013,9 @@
 		76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTVIPClubHistoryCell.xib; sourceTree = "<group>"; };
 		A1DA5A3D280013470036F2F7 /* BTTASGameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTASGameModel.h; sourceTree = "<group>"; };
 		A1DA5A3E280013470036F2F7 /* BTTASGameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTASGameModel.m; sourceTree = "<group>"; };
+		A1DA5A58280FAEA90036F2F7 /* BTTChainGameCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTChainGameCell.h; sourceTree = "<group>"; };
+		A1DA5A59280FAEA90036F2F7 /* BTTChainGameCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTChainGameCell.m; sourceTree = "<group>"; };
+		A1DA5A5A280FAEA90036F2F7 /* BTTChainGameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BTTChainGameCell.xib; sourceTree = "<group>"; };
 		D317744D24D26471009B1814 /* DSBRedBagPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DSBRedBagPopView.h; sourceTree = "<group>"; };
 		D317744E24D26471009B1814 /* DSBRedBagPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DSBRedBagPopView.m; sourceTree = "<group>"; };
 		D317745024D2648C009B1814 /* DSBRedBagPopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DSBRedBagPopView.xib; sourceTree = "<group>"; };
@@ -2720,6 +2725,9 @@
 				3A14CC5C237A4B56009711CF /* BTTRealPersonGameCell.h */,
 				3A14CC5D237A4B56009711CF /* BTTRealPersonGameCell.m */,
 				3A14CC5E237A4B56009711CF /* BTTRealPersonGameCell.xib */,
+				A1DA5A58280FAEA90036F2F7 /* BTTChainGameCell.h */,
+				A1DA5A59280FAEA90036F2F7 /* BTTChainGameCell.m */,
+				A1DA5A5A280FAEA90036F2F7 /* BTTChainGameCell.xib */,
 				3A14CC61237A8D65009711CF /* BTTElectronicGamesCell.h */,
 				3A14CC62237A8D65009711CF /* BTTElectronicGamesCell.m */,
 				3A14CC63237A8D65009711CF /* BTTElectronicGamesCell.xib */,
@@ -5486,6 +5494,7 @@
 				4135C715266F736900C3A9E9 /* BTTLiCaiInRecordCell.xib in Resources */,
 				3AAE821F219A738B003EC8B0 /* BTTLoginCell.xib in Resources */,
 				D5475B2927BDE784007238D2 /* KYMWithdrewAmountListCell.xib in Resources */,
+				A1DA5A5C280FAEA90036F2F7 /* BTTChainGameCell.xib in Resources */,
 				4184DE0C251B32CE00D433D4 /* BTTPromoRecordCell.xib in Resources */,
 				3A289500237BE70C008EB579 /* BTTLoginOrRegisterBtsView.xib in Resources */,
 				4135A7142639420700D3BF17 /* BTTMeHeadernNicknameLoginCell.xib in Resources */,
@@ -5710,6 +5719,7 @@
 				41AB7FE826CA50950086AF9B /* BTTForgetAccountStepTwoController.m in Sources */,
 				3A8F51C6215F78230069D1B3 /* BTTNoticeView.m in Sources */,
 				3AF1B80B21AE59C300BF8C3A /* BTTVideoGameModel.m in Sources */,
+				A1DA5A5B280FAEA90036F2F7 /* BTTChainGameCell.m in Sources */,
 				413E324E251B3520000804E2 /* BTTCreditRecordController.m in Sources */,
 				416D787926C3D3B400CB9E6D /* BTTCantBindCardPopView.m in Sources */,
 				3ADD23EC2179B97A00FA959A /* TAAbstractDotView.m in Sources */,
