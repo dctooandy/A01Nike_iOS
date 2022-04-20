@@ -34,6 +34,8 @@ typedef void (^BTTAssistiveBlock)(BTTAssistiveButtonModel *model);
 
 @property (nonatomic, strong) NSMutableArray *imageUrls;
 
+@property (nonatomic, strong) NSMutableArray *asGameData;
+
 @property (nonatomic, assign) NSInteger nextGroup;
 //
 @property (nonatomic, assign) NSInteger chanceCount;

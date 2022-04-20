@@ -37,7 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) CNPaymentModel *payModel;
 
 @property (nonatomic, strong) NSArray<CNPaymentModel *> *payModels;
-
+/// 支付渠道
+@property (nonatomic, strong) NSArray *protocolList;
 @end
 
 NS_ASSUME_NONNULL_END

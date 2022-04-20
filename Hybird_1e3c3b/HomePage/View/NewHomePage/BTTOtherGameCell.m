@@ -7,7 +7,8 @@
 //
 
 #import "BTTOtherGameCell.h"
-
+#import "UIButton+WebCache.h"
+#import "UIImageView+WebCache.h"
 @interface BTTOtherGameCell ()
 
 @property (weak, nonatomic) IBOutlet UIButton *shabaBtn;
@@ -17,6 +18,7 @@
 //@property (weak, nonatomic) IBOutlet UIButton *jingcaiBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *asBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *asImageView;
 
 @property (weak, nonatomic) IBOutlet UIButton *cpBtn;
 

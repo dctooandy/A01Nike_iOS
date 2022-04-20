@@ -7,11 +7,9 @@
 //
 
 #import "BTTBaseCollectionViewCell.h"
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BTTOtherGameCell : BTTBaseCollectionViewCell
-
 @end
 
 NS_ASSUME_NONNULL_END

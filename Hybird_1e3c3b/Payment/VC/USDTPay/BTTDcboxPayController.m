@@ -131,7 +131,20 @@
                         NSArray *protocolDetailArray = [protocolArray.firstObject componentsSeparatedByString:@":"];
 //                        self.selectedProtocol = protocolDetailArray.firstObject;
 //                        self.protocolArray = protocolArray;
-                        self.protocolArray = @[@"TRC20",@"ERC20"];
+                        if (self.payments && self.payments.count > 0)
+                        {
+                            for (CNPaymentModel *paymentModel in self.payments) {
+                                if (paymentModel.payType == 43)
+                                {
+                                    self.protocolArray = paymentModel.protocolList.copy;
+//                                    self.protocolArray = @[@"OMNI",@"ERC20",@"TRC20"];
+                                    [self sortProtocolList];
+                                }
+                            }
+                        }else
+                        {
+                            self.protocolArray = @[@"ERC20",@"TRC20"];
+                        }
                         self.selectedProtocol = self.protocolArray.firstObject;
                         [self.walletCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionNone];
                         
@@ -142,7 +155,38 @@
         }
     }];
 }
-
+- (void)sortProtocolList
+{
+    self.protocolArray = [self sortProtocolListArray:self.protocolArray].mutableCopy;
+    self.protocolArray = [self sortProtocolListArray:self.protocolArray].mutableCopy;
+}
+- (NSMutableArray *)sortProtocolListArray:(NSArray *)currentArray
+{
+    __block NSMutableArray *models = @[].mutableCopy;
+    __block NSInteger ercIdx = 0;
+    __block NSInteger omnIdx = self.protocolArray.count - 1;
+    [currentArray enumerateObjectsUsingBlock:^(NSString * _Nonnull protocolName, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([protocolName caseInsensitiveCompare:@"ERC20"] == NSOrderedSame) {
+            [models addObject:protocolName];
+            ercIdx = idx;
+        }else if ([protocolName caseInsensitiveCompare:@"OMNI"] == NSOrderedSame) {
+            [models addObject:protocolName];
+            omnIdx = idx;
+        }else
+        {
+            [models addObject:protocolName];
+        }
+    }];
+    // 将ERC20排到第一位
+    if (ercIdx != 0) {
+        [models exchangeObjectAtIndex:0 withObjectAtIndex:ercIdx];
+    }
+    // 将Omni排到最后一位
+    if (omnIdx != (self.protocolArray.count - 1)) {
+        [models exchangeObjectAtIndex:(self.protocolArray.count - 1) withObjectAtIndex:omnIdx];
+    }
+    return models;
+}
 - (void)requestUSDTRate{
     [self showLoading];
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
@@ -592,13 +636,14 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0)
     {
-        if ([self.selectedProtocol isEqualToString:@"TRC20"])
-        {
-            self.selectedProtocol = @"ERC20";
-        }else
-        {
-            self.selectedProtocol = @"TRC20";
-        }
+        self.selectedProtocol = self.protocolArray[indexPath.row];
+//        if ([self.selectedProtocol isEqualToString:@"TRC20"])
+//        {
+//            self.selectedProtocol = @"ERC20";
+//        }else
+//        {
+//            self.selectedProtocol = @"TRC20";
+//        }
         [UIView performWithoutAnimation:^{
             [self.walletCollectionView reloadData];
         }];
@@ -703,7 +748,9 @@
             noticeLabel.textColor = COLOR_RGBA(129, 135, 145, 1);
             noticeLabel.font = [UIFont systemFontOfSize:12];
             noticeLabel.text = @"建议优先使用TRC20协议,手续费更低";
+            noticeLabel.textColor = [UIColor redColor];
             footer.userInteractionEnabled = false;
+            [footer setHidden:([self.selectedProtocol isEqualToString:@"ERC20"] ? NO:YES)];
             [footer addSubview:noticeLabel];
             return footer;
         } else if ([IVNetwork savedUserInfo].dcboxNum == 0) {
@@ -746,7 +793,7 @@
 {
     if (indexPath.section==0)
     {
-        return CGSizeMake((SCREEN_WIDTH - 60 - 60)/3, 36); //固定的itemsize
+        return CGSizeMake((SCREEN_WIDTH - 60.0 - 30.0)/ 3, 36); //固定的itemsize
     }else
     {
         return CGSizeMake((SCREEN_WIDTH - 60 - 36)/4, 36); //固定的itemsize
@@ -756,7 +803,7 @@
 {
     if (section==0)
     {
-        return 30; //列间距
+        return 10; //列间距
     }else
     {
         return 12; //列间距
