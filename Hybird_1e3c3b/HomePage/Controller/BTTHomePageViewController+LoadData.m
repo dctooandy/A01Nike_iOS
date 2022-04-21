@@ -21,6 +21,7 @@
 #import "BTTGamesTryAlertView.h"
 #import "BTTHomePageViewController+Nav.h"
 #import "BTTMidAutumnPopView.h"
+#import "BTTASGameModel.h"
 
 static const char *noticeStrKey = "noticeStr";
 
@@ -52,7 +53,7 @@ static const char *BTTChanceCountKey = "chanceCount";
     [self loadHightlightsBrand:group];
     
     dispatch_group_enter(group);
-    [self loadHightlightsBrand:group];
+    [self loadASGame:group];
 
     dispatch_group_notify(group,queue, ^{
         [self endRefreshing];
@@ -387,6 +388,31 @@ static const char *BTTChanceCountKey = "chanceCount";
         dispatch_group_leave(group);
     }];
 }
+- (void)loadASGame:(dispatch_group_t)group {
+    NSMutableArray *asGameData = [NSMutableArray array];
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    [IVNetwork requestPostWithUrl:BTTASWms paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body) {
+                [self.asGameData removeAllObjects];
+                for (NSMutableDictionary *imageDict in result.body) {
+                    BTTASGameModel *model = [BTTASGameModel yy_modelWithDictionary:imageDict];
+                    //测试
+//                    model.gameName = @"汪汪之家";
+//                    model.gameEnName = @"The Dog‘s House";
+//                    model.gameId = @"1547739735";
+//                    model.gameCode = @"067";
+//                    model.gameType = @"1";
+//                    model.gameKind = @"1";
+                    [asGameData addObject:model];
+                }
+                self.asGameData = asGameData.mutableCopy;
+            }
+        }
+        dispatch_group_leave(group);
+    }];
+}
 - (void)loadAssistiveDataWithBlock:(BTTAssistiveBlock)assistiveBlock
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
@@ -441,6 +467,20 @@ static const char *BTTChanceCountKey = "chanceCount";
 
 - (void)setHeaders:(NSMutableArray *)headers {
      objc_setAssociatedObject(self, @selector(headers), headers, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSMutableArray *)asGameData {
+    NSMutableArray *asGameData = objc_getAssociatedObject(self, _cmd);
+    if (!asGameData) {
+        asGameData = [NSMutableArray array];
+        [self setAsGameData:asGameData];
+    }
+    return asGameData;
+}
+
+- (void)setAsGameData:(NSMutableArray *)asGameData
+{
+    objc_setAssociatedObject(self, @selector(asGameData), asGameData, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSMutableArray *)Activities {

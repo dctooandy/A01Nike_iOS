@@ -71,6 +71,8 @@ typedef NS_ENUM(NSUInteger, CNPaymentType) {
 @property (nonatomic, copy) NSString *payTypeIcon;
 /// 支付类型
 @property (nonatomic, strong) NSDictionary *payTypeTipJson;
+/// 支付渠道
+@property (nonatomic, strong) NSArray *protocolList;
 
 @property (nonatomic, strong) NSArray *extras;
 
