@@ -42,7 +42,7 @@
                     _gateways = @[@"http://www.pt-gateway.com/_glaxy_1e3c3b_/"];
                     break;
                 case 1:
-                    _gateways = @[@"https://fm.918rr.com/_glaxy_1e3c3b_/"];
+                    _gateways = @[@"http://fm.918rr.com/_glaxy_1e3c3b_/"];
                     break;
                 case 2:
                     _gateways = @[@"https://wrd.58baili.com/pro/_glaxy_1e3c3b_/", @"https://m.pkyorjhn.com:9188/_glaxy_1e3c3b_/"];
@@ -73,7 +73,7 @@
                 _websides = @[@"http://m.a01.com/"];
                 break;
             case 1:
-                _websides = @[@"https://fm.918rr.com/"];
+                _websides = @[@"http://fm.918rr.com/"];
                 break;
             case 2:
                 _websides = @[@"https://wrd.58baili.com/pro/"];
