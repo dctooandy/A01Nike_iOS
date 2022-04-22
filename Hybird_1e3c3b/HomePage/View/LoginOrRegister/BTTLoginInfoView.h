@@ -22,7 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *ticketStr;
 @property (nonatomic, strong) UIButton *showBtn;
 
-@property (nonatomic, copy) void(^refreshCodeImage)(void);
+@property (nonatomic, copy) void(^refreshCodeImage)(NSUInteger);
+@property (nonatomic, assign) BOOL needCaptcha;     ///< 是否需要图型验证码[1: 是, 0:否]
+@property (nonatomic, assign) NSUInteger captchaType; /// 验证码类型[1: 数字验证码; 2:汉字验证码,
 @end
 
 NS_ASSUME_NONNULL_END

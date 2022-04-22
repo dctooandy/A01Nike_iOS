@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) BTTRegisterOrLoginType registerOrLoginType;
 
+@property (nonatomic, assign) NSUInteger captchaType;
+
 @end
 
 NS_ASSUME_NONNULL_END

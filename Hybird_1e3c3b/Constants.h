@@ -353,17 +353,23 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTCacheBTCRateKey                         @"BTTCacheBTCRateKey"
 
 /*********************************************平台API********************************************************/
+// 登录验证码类型
+#define BTTUserPreLogin                            @"customer/preLogin"
+// 注册验证码类型
+#define BTTUserPreCreateAccount                    @"customer/preCreateAccount"
 
 // 登录注册
 #define BTTUserLoginAPI                            @"customer/login"
 // 模糊登录
-#define BTTUserLoginEXAPI                          @"customer/loginEx"
+#define BTTUserLoginByName                         @"customer/loginByName"
 // 手機登入
-//#define BTTUserLoginEXAPI                          @"customer/loginByMobileEx"
+#define BTTUserLoginByMobileEX                     @"customer/loginByMobileEx"
+// 多账号登录
+#define BTTUserLoginByValidateId                   @"customer/loginByValidateId"
 // 異地登入
 #define BTTUserLoginWith2FA                        @"customer/loginWith2FA"
 // 验证登录名是否存在
-#define BTTCheckLoginname                         @"customer/checkLoginName"
+#define BTTCheckLoginname                          @"customer/checkLoginName"
 // 根据手机验证码登录
 #define BTTUserLoginByMobileNo                     @"customer/loginByMobileNo"
 // 生成图片验证
@@ -372,6 +378,10 @@ typedef void (^CompleteBlock)(IVJResponseObject *response);
 #define BTTChineseVerifyCaptcha                    @"captcha/generateCaptcha"
 // 驗證漢字圖片驗證碼
 #define BTTCheckChineseCaptcha                     @"captcha/validateCaptcha"
+// 生成滑块拼图验证码
+#define BTTPuzzleSliderCaptcha                     @"captcha/generateSlider"
+// 验证滑块拼图验证码
+#define BTTCheckPuzzleSliderCaptcha                @"captcha/validateSlider"
 // 创建账号
 #define BTTUserRegister                            @"customer/createRealAccount"
 // 手機创建账号

@@ -19,12 +19,13 @@
 #import "CNPayConstant.h"
 #import "IVPushManager.h"
 #import "AppDelegate.h"
+#import "PuzzleVerifyPopoverView.h"
 typedef enum {
     BTTRegisterSuccessTypeNormal,
     BTTRegisterSuccessTypeChangePwd
 }BTTRegisterSuccessType;
 
-@interface BTTRegisterSuccessController ()<BTTElementsFlowLayoutDelegate> {
+@interface BTTRegisterSuccessController ()<BTTElementsFlowLayoutDelegate, PuzzleVerifyPopoverViewDelegate> {
     NSString *_newPwd;
 }
 
@@ -44,6 +45,7 @@ typedef enum {
 @property (nonatomic, strong) UIImage * imgCodeImg;
 @property (nonatomic, copy) NSString *captchaId;
 @property (nonatomic, copy) NSString *ticketStr;
+@property (nonatomic, strong) PuzzleVerifyPopoverView *puzzleView;
 @end
 
 @implementation BTTRegisterSuccessController
@@ -181,9 +183,14 @@ typedef enum {
                 if (strongSelf.isSavedPwd) {
                     [strongSelf doLogin];
                 }else{
-                    [strongSelf imgCodeBtnPopView];
-                    [strongSelf showLoading];
-                    [strongSelf loadVerifyCode];
+                    if (strongSelf.captchaType == kBTTLoginOrRegisterCaptchaPuzzle) {
+                        [strongSelf initPuzzleVerifyPopView];
+                        [strongSelf generateSliderCaptcha];
+                    } else {
+                        [strongSelf imgCodeBtnPopView];
+                        [strongSelf showLoading];
+                        [strongSelf loadVerifyCode];
+                    }
                 }
                 
             };
@@ -280,6 +287,115 @@ typedef enum {
         [self.collectionView reloadData];
     });
 }
+
+#pragma mark - 滑块拼图验证
+
+- (void)initPuzzleVerifyPopView {
+    [self.view endEditing:YES];
+    PuzzleVerifyPopoverView *puzzleView = [[PuzzleVerifyPopoverView alloc] init];
+    puzzleView.delegate = self;
+    self.puzzleView = puzzleView;
+}
+
+- (void)generateSliderCaptcha {
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTPuzzleSliderCaptcha paramters:@{@"use":@2} completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body && ![result.body isKindOfClass:[NSNull class]]) {
+                self.captchaId = result.body[@"captchaId"];
+                self.puzzleView.position = CGPointMake([result.body[@"x"] floatValue],
+                                                       [result.body[@"y"] floatValue]);
+                if (result.body[@"cutoutImage"] && ![result.body[@"cutoutImage"] isKindOfClass:[NSNull class]]) {
+                    NSString *base64Str = result.body[@"cutoutImage"];
+                    // 将base64字符串转为NSData
+                    NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+                    // 将NSData转为UIImage
+                    UIImage *decodedImage = [UIImage imageWithData: decodeData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.puzzleView.cutoutImage = decodedImage;
+                    });
+                }
+                if (result.body[@"originImage"] && ![result.body[@"originImage"] isKindOfClass:[NSNull class]]) {
+                    NSString *base64Str = result.body[@"originImage"];
+                    // 将base64字符串转为NSData
+                    NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+                    // 将NSData转为UIImage
+                    UIImage *decodedImage = [UIImage imageWithData: decodeData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.puzzleView.originImage = decodedImage;
+                    });
+                }
+                if (result.body[@"shadeImage"] && ![result.body[@"shadeImage"] isKindOfClass:[NSNull class]]) {
+                    NSString *base64Str = result.body[@"shadeImage"];
+                    // 将base64字符串转为NSData
+                    NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+                    // 将NSData转为UIImage
+                    UIImage *decodedImage = [UIImage imageWithData: decodeData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.puzzleView.shadeImage = decodedImage;
+                    });
+                }
+                [self.puzzleView show];
+            }
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
+
+- (void)checkPuzzleSliderCaptcha:(NSString *)captchaStr {
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"use"] = @2;
+    params[@"captcha"] = captchaStr;
+    params[@"captchaId"] = self.captchaId;
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTCheckPuzzleSliderCaptcha paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [self hideLoading];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSNumber * validateResult = result.body[@"validateResult"];
+                if ([validateResult integerValue] == 1) {
+                    self.ticketStr = result.body[@"ticket"];
+                    [self checkChineseCaptchaSuccess];
+                    [self.puzzleView dismiss];
+                    self.puzzleView = nil;
+                } else {
+                    [self generateSliderCaptcha];
+                }
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD showError:@"验证失败，请重试" toView:nil];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self generateSliderCaptcha];
+                });
+            });
+        }
+    }];
+}
+
+#pragma mark - PuzzleVerifyPopoverViewDelegate
+
+- (void)puzzleViewCanceled {
+    self.puzzleView = nil;
+}
+
+- (void)puzzleViewDidChangePosition:(CGPoint)position {
+    NSDictionary * dict = @{@"x":@(position.x), @"y":@(position.y)};
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *result = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [self checkPuzzleSliderCaptcha:result];
+}
+
+- (void)puzzleViewRefresh {
+    [self generateSliderCaptcha];
+}
+
+
+#pragma mark - 汉字验证
 
 -(void)imgCodeBtnPopView {
     self.pressNum = 0;

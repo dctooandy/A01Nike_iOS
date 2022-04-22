@@ -10,13 +10,20 @@
 #import "BTTVideoFastRegisterView.h"
 #import "BTTLoginInfoView.h"
 #import "BTTDifferentLocPopView.h"
+#import "PuzzleVerifyPopoverView.h"
 
 typedef enum {
     BTTLoginCellTypeNormal,    // 无码
     BTTLoginCellTypeCode       // 有码
 }BTTLoginCellType;
 
-
+// 登录注册验证类型
+typedef NS_ENUM(NSUInteger, BTTLoginOrRegisterCaptchaType) {
+    BTTLoginOrRegisterCaptchaNone = 0,
+    BTTLoginOrRegisterCaptchaDigital = 1,   // 数字验证
+    BTTLoginOrRegisterCaptchaChinese = 2,   // 汉字验证
+    BTTLoginOrRegisterCaptchaPuzzle  = 3,   // 滑块拼图验证
+};
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -56,7 +63,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray * pressLocationArr;///< 使用者點擊圖片的座標Array
 @property (nonatomic, assign) NSInteger specifyWordNum;///< 漢字驗證碼需要點擊的次數
-@property (nonatomic, strong) UIImage * imgCodeImg;///< 漢字驗證碼的圖
+@property (nonatomic, strong) UIImage * imgCodeImg;///< 漢字驗證碼的圖 3:滑块验证码]
+@property (nonatomic, strong, nullable) PuzzleVerifyPopoverView *puzzleView;
+
 -(void)removeLocationView;///< 刪除使用者點擊的座標圖
 -(void)checkChineseCaptchaSuccess;///< 漢字驗證成功
 -(void)checkChineseCaptchaAgain;///< 重新驗證漢字驗證碼

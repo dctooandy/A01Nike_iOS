@@ -28,6 +28,8 @@
 		04C48B5727C4731C00623F5A /* BTTMeGoldenCCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C48B5527C4731C00623F5A /* BTTMeGoldenCCell.xib */; };
 		04C48B5B27C73D5400623F5A /* CNMUSDTChannelVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C48B5827C73D5400623F5A /* CNMUSDTChannelVC.xib */; };
 		04C48B5C27C73D5400623F5A /* CNMUSDTChannelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C48B5927C73D5400623F5A /* CNMUSDTChannelVC.m */; };
+		0A0E2696280D66C90022D274 /* PuzzleVerifyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E2695280D66C90022D274 /* PuzzleVerifyView.m */; };
+		0A0E269D280D6B390022D274 /* PuzzleVerifyPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A0E269C280D6B390022D274 /* PuzzleVerifyPopoverView.m */; };
 		3A0CCED2238B7FE000CFEE22 /* BTTNewAccountGuidePopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0CCED1238B7FE000CFEE22 /* BTTNewAccountGuidePopView.m */; };
 		3A0CCED4238B7FF000CFEE22 /* BTTNewAccountGuidePopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A0CCED3238B7FF000CFEE22 /* BTTNewAccountGuidePopView.xib */; };
 		3A11ADD321816E5800B1AFF4 /* SVRadialGradientLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A11ADC921816E5800B1AFF4 /* SVRadialGradientLayer.m */; };
@@ -916,6 +918,10 @@
 		04C48B5827C73D5400623F5A /* CNMUSDTChannelVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CNMUSDTChannelVC.xib; sourceTree = "<group>"; };
 		04C48B5927C73D5400623F5A /* CNMUSDTChannelVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNMUSDTChannelVC.m; sourceTree = "<group>"; };
 		04C48B5A27C73D5400623F5A /* CNMUSDTChannelVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNMUSDTChannelVC.h; sourceTree = "<group>"; };
+		0A0E2694280D66C90022D274 /* PuzzleVerifyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PuzzleVerifyView.h; sourceTree = "<group>"; };
+		0A0E2695280D66C90022D274 /* PuzzleVerifyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PuzzleVerifyView.m; sourceTree = "<group>"; };
+		0A0E269B280D6B390022D274 /* PuzzleVerifyPopoverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PuzzleVerifyPopoverView.h; sourceTree = "<group>"; };
+		0A0E269C280D6B390022D274 /* PuzzleVerifyPopoverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PuzzleVerifyPopoverView.m; sourceTree = "<group>"; };
 		147D64357C20B5867CCCA734 /* Pods-Hybird_1e3c3b.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hybird_1e3c3b.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hybird_1e3c3b/Pods-Hybird_1e3c3b.debug.xcconfig"; sourceTree = "<group>"; };
 		3A0CCED0238B7FE000CFEE22 /* BTTNewAccountGuidePopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTNewAccountGuidePopView.h; sourceTree = "<group>"; };
 		3A0CCED1238B7FE000CFEE22 /* BTTNewAccountGuidePopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTNewAccountGuidePopView.m; sourceTree = "<group>"; };
@@ -2441,6 +2447,25 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		0A0E2692280D66040022D274 /* PuzzleVerify */ = {
+			isa = PBXGroup;
+			children = (
+				0A0E2693280D66A20022D274 /* View */,
+				0A0E269B280D6B390022D274 /* PuzzleVerifyPopoverView.h */,
+				0A0E269C280D6B390022D274 /* PuzzleVerifyPopoverView.m */,
+			);
+			path = PuzzleVerify;
+			sourceTree = "<group>";
+		};
+		0A0E2693280D66A20022D274 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0A0E2694280D66C90022D274 /* PuzzleVerifyView.h */,
+				0A0E2695280D66C90022D274 /* PuzzleVerifyView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		190C82BCE38D114218405956 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -3781,6 +3806,7 @@
 		3ADD235F2176FF6100FA959A /* LoginAndRegister */ = {
 			isa = PBXGroup;
 			children = (
+				0A0E2692280D66040022D274 /* PuzzleVerify */,
 				D3C64B132477CFEE0063B0D7 /* OneKeyPhoneController.m */,
 				3AAE81F9219A737E003EC8B0 /* BTTLoginOrRegisterViewController.h */,
 				3AAE81F8219A737E003EC8B0 /* BTTLoginOrRegisterViewController.m */,
@@ -5817,6 +5843,7 @@
 				76F863DA26E0B65500320B60 /* VIPRightRightsCell.m in Sources */,
 				3A11ADFA2181A56000B1AFF4 /* BTTWithdrawalController+LoadData.m in Sources */,
 				76F863DD26E0B65500320B60 /* VIPRightWashRateCell.m in Sources */,
+				0A0E269D280D6B390022D274 /* PuzzleVerifyPopoverView.m in Sources */,
 				EA5F142021A2AEC1004305A7 /* BTTUserStatusManager.m in Sources */,
 				D599252A21AFF23B001E885A /* CNPayVC.m in Sources */,
 				3A5F7A9F21A8FD3100128E8B /* BTTXimaSuccessBtnsCell.m in Sources */,
@@ -5973,6 +6000,7 @@
 				EA5F141D21A28515004305A7 /* IVNetworkStatusDetailViewController.m in Sources */,
 				3A75A17B22115C9800584A35 /* BTTLoginAccountSelectView.m in Sources */,
 				D51ADEFB27E208A300F77C00 /* KYMWithdrawAlertVC.m in Sources */,
+				0A0E2696280D66C90022D274 /* PuzzleVerifyView.m in Sources */,
 				3A5F7A9A21A8E71100128E8B /* BTTXimaSuccessItemCell.m in Sources */,
 				3AD9CF54216EFD0700685B43 /* BTTBannerModel.m in Sources */,
 				3A11AE022181C16800B1AFF4 /* BTTWithdrawalSuccessController.m in Sources */,
