@@ -23,6 +23,7 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
 @property(nonatomic,strong) UIView *slidView;
 @property(nonatomic,strong) UILabel *slidTitle;
 @property(nonatomic,strong) UISlider *slider;
+@property(nonatomic,strong) UIView *innerView;
 
 @property(nonatomic,strong) UIButton *cancelButton;
 @property(nonatomic,assign) BOOL sliding;
@@ -53,6 +54,7 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
     [self addSubview:self.verifyView];
     
     [self addSubview:self.slidView];
+    [self.slidView addSubview:self.innerView];
     [self.slidView addSubview:self.slidTitle];
     [self.slidView addSubview:self.slider];
 
@@ -71,7 +73,7 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
         make.top.equalTo(self.verifyView.mas_bottom);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
-        make.height.mas_equalTo(36);
+        make.height.mas_equalTo(46);
     }];
     
     [self.slidTitle mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -81,11 +83,18 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
         make.bottom.mas_equalTo(0);
     }];
     
+    [self.innerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(12);
+        make.left.mas_equalTo(17);
+        make.right.mas_equalTo(-17);
+        make.bottom.mas_equalTo(-12);
+    }];
+    
     [self.slider mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(0);
         make.left.mas_equalTo(4);
         make.right.mas_equalTo(-4);
-        make.height.mas_equalTo(36);
+        make.height.mas_equalTo(46);
     }];
     
     [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -273,20 +282,38 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
 -(UIView *)slidView{
     
     if (!_slidView) {
-        _slidView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 36)];
-        _slidView.backgroundColor = [UIColor clearColor];
-        _slidView.layer.borderWidth = 1;
+        _slidView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 46)];
+        _slidView.backgroundColor = [UIColor whiteColor];
         _slidView.layer.masksToBounds = YES;
-        _slidView.layer.borderColor = [UIColor brownColor].CGColor;
     }
     return _slidView;
 }
 
+- (UIView *)innerView {
+    if (!_innerView) {
+        CGSize size = CGSizeMake(266, 22);
+        _innerView = [[UIView alloc] initWithFrame:CGRectMake(17, 12, size.width, size.height)];
+        _innerView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.15];
+        _innerView.layer.cornerRadius = 11.0;
+        _innerView.clipsToBounds = YES;
+        CALayer *shadowLayer = [[CALayer alloc] init];
+        shadowLayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.15].CGColor;
+        shadowLayer.position = CGPointMake(size.width / 2, -size.height/ 2 + 0.5);
+        shadowLayer.bounds = CGRectMake(0, 0, size.width, size.height);
+        shadowLayer.shadowColor = [UIColor blackColor].CGColor;
+        shadowLayer.shadowOffset = CGSizeMake(0.5, 0.5);
+        shadowLayer.shadowOpacity = 0.8;
+        shadowLayer.shadowRadius = 5.0;
+        [_innerView.layer addSublayer:shadowLayer];
+    }
+    return _innerView;
+}
+
 -(UILabel *)slidTitle {
     if (!_slidTitle) {
-        _slidTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 36)];
+        _slidTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 46)];
         _slidTitle.textColor = [UIColor clearColor];
-        _slidTitle.font = [UIFont boldSystemFontOfSize:16];
+        _slidTitle.font = [UIFont boldSystemFontOfSize:14];
         _slidTitle.textAlignment = NSTextAlignmentCenter;
         _slidTitle.text = @"拖动滑块完成拼图验证>>>";
     }
