@@ -839,6 +839,15 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
     }
     return YES;
 }
++ (BOOL)checkTextFieldString:(NSString *)realName {
+    //中文，英文，·符号，长度2~14位
+    NSString *realNameRegex = @"[a-zA-Z·\u4e00-\u9fa5]{1,14}";
+    NSPredicate *realNamePredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",realNameRegex];
+    if (![realNamePredicate evaluateWithObject:realName]) {
+        return NO;
+    }
+    return YES;
+}
 + (BOOL)checkBitcoinAddress:(NSString *)btcAddress {
     NSString *bitcoinRegex = @"^[a-zA-Z0-9]{6,40}";
     NSPredicate *bitcoinPredicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@",bitcoinRegex];
