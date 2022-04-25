@@ -799,7 +799,14 @@
     [self.view endEditing:true];
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     if (nameStr.length) {
-        params[@"realName"] = nameStr;
+        if (![PublicMethod checkRealName:nameStr]) {
+            [MBProgressHUD showError:@"输入的真实姓名格式有误！" toView:self.view];
+            return;
+        } else {
+            params[@"realName"] = nameStr;
+        }
+//        NSString *nameStringWithoutSpace = [nameStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//        params[@"realName"] = nameStringWithoutSpace;
     }
     if (phoneStr.length) {
         params[@"phone"] = [IVRsaEncryptWrapper encryptorString:phoneStr];
