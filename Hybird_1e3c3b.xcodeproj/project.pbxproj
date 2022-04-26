@@ -97,7 +97,6 @@
 		3A3DF1E7237BA445006129F6 /* BTTHotPromotionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A3DF1E5237BA445006129F6 /* BTTHotPromotionCell.xib */; };
 		3A49DF922179D62900FEFBDA /* BTTAccountBlanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49DF902179D62900FEFBDA /* BTTAccountBlanceCell.m */; };
 		3A49DF932179D62900FEFBDA /* BTTAccountBlanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A49DF912179D62900FEFBDA /* BTTAccountBlanceCell.xib */; };
-		3A49DF9B2179D90D00FEFBDA /* BTTBindingMobileOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49DF992179D90D00FEFBDA /* BTTBindingMobileOneCell.m */; };
 		3A49DF9C2179D90D00FEFBDA /* BTTBindingMobileOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A49DF9A2179D90D00FEFBDA /* BTTBindingMobileOneCell.xib */; };
 		3A49DFA02179DA0D00FEFBDA /* BTTBindingMobileTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49DF9E2179DA0D00FEFBDA /* BTTBindingMobileTwoCell.m */; };
 		3A49DFA12179DA0D00FEFBDA /* BTTBindingMobileTwoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A49DF9F2179DA0D00FEFBDA /* BTTBindingMobileTwoCell.xib */; };
@@ -679,6 +678,7 @@
 		A1DA5A5B280FAEA90036F2F7 /* BTTChainGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DA5A59280FAEA90036F2F7 /* BTTChainGameCell.m */; };
 		A1DA5A5C280FAEA90036F2F7 /* BTTChainGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1DA5A5A280FAEA90036F2F7 /* BTTChainGameCell.xib */; };
 		A1F0277827D0937500202ACA /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
+		A1A4123A27E8492100B806C9 /* BTTBindingMobileOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49DF992179D90D00FEFBDA /* BTTBindingMobileOneCell.m */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
 		D318AC1724333BC500183407 /* BTTKSAddBfbWalletController.m in Sources */ = {isa = PBXBuildFile; fileRef = D318AC1524333BC500183407 /* BTTKSAddBfbWalletController.m */; };
@@ -1159,7 +1159,7 @@
 		3A8D6E9B21633D83000530DF /* BTTBaseWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseWebViewController.m; sourceTree = "<group>"; };
 		3A8D6E9E21634306000530DF /* BridgeProtocolExternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeProtocolExternal.h; sourceTree = "<group>"; };
 		3A8D6E9F21634306000530DF /* BridgeProtocolExternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeProtocolExternal.m; sourceTree = "<group>"; };
-		3A8F512B215F74CF0069D1B3 /* Hybird_1e3c3b.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hybird_1e3c3b.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A8F512B215F74CF0069D1B3 /* 博天堂_dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "博天堂_dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A8F512E215F74CF0069D1B3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3A8F512F215F74CF0069D1B3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3A8F5135215F74CF0069D1B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -2971,7 +2971,7 @@
 		3A8F512C215F74CF0069D1B3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3A8F512B215F74CF0069D1B3 /* Hybird_1e3c3b.app */,
+				3A8F512B215F74CF0069D1B3 /* 博天堂_dev.app */,
 				3A8F5143215F74D00069D1B3 /* Hybird_1e3c3bTests.xctest */,
 				3A8F514E215F74D00069D1B3 /* Hybird_1e3c3bUITests.xctest */,
 			);
@@ -5236,7 +5236,7 @@
 			);
 			name = Hybird_1e3c3b;
 			productName = Hybird_1e3c3b;
-			productReference = 3A8F512B215F74CF0069D1B3 /* Hybird_1e3c3b.app */;
+			productReference = 3A8F512B215F74CF0069D1B3 /* 博天堂_dev.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3A8F5142215F74D00069D1B3 /* Hybird_1e3c3bTests */ = {
@@ -5836,7 +5836,6 @@
 				3ADD23F22179B97A00FA959A /* UIView+SDExtension.m in Sources */,
 				76F863A926E0B61100320B60 /* BTTVIPActivitiesPopView.m in Sources */,
 				3AFCD7D021AD179600B136C1 /* BTTVideoGameCell.m in Sources */,
-				3A49DF9B2179D90D00FEFBDA /* BTTBindingMobileOneCell.m in Sources */,
 				3ADD236C21772A1E00FA959A /* BTTMeInfoCell.m in Sources */,
 				3A929428219C3D6200764E7E /* BTTRegisterSuccessBtnsCell.m in Sources */,
 				D35BF24023B451340085D6A1 /* CNPayUSDTStep1VC.m in Sources */,
@@ -5865,6 +5864,7 @@
 				D5B42FD627C1E7E4008330CB /* KYMWidthdrewUtility.m in Sources */,
 				41D0DC7A26C37D99003E55E1 /* BTTAddBTCController+Nav.m in Sources */,
 				D31B0EEB23B451B0003666BA /* BTTAddUSDTController.m in Sources */,
+				A1A4123A27E8492100B806C9 /* BTTBindingMobileOneCell.m in Sources */,
 				3AD9CD552165B2C900685B43 /* BTTPopoverViewCell.m in Sources */,
 				413E326D251B3553000804E2 /* BTTXmRecordController+LoadData.m in Sources */,
 				3A11AE672186D94B00B1AFF4 /* BTTThisWeekCell.m in Sources */,
@@ -6424,11 +6424,12 @@
 				);
 				MARKETING_VERSION = 3.4.95;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = "博天堂_dev";
+				PROVISIONING_PROFILE = "62fdaebd-ee1d-48b0-a50f-308fe89d81ae";
 				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_btt;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -6442,6 +6443,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = TC9HF6MY92;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6467,11 +6469,12 @@
 				);
 				MARKETING_VERSION = 3.4.95;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
+				PRODUCT_NAME = "博天堂";
+				PROVISIONING_PROFILE = "62fdaebd-ee1d-48b0-a50f-308fe89d81ae";
 				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_btt;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -6489,6 +6492,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1e3c3biphone.Hybird-1e3c3bTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "62fdaebd-ee1d-48b0-a50f-308fe89d81ae";
+				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_btt;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hybird_1e3c3b.app/Hybird_1e3c3b";
 			};
@@ -6508,6 +6513,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1e3c3biphone.Hybird-1e3c3bTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "62fdaebd-ee1d-48b0-a50f-308fe89d81ae";
+				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_btt;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hybird_1e3c3b.app/Hybird_1e3c3b";
 			};
@@ -6526,6 +6533,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1e3c3biphone.Hybird-1e3c3bUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "62fdaebd-ee1d-48b0-a50f-308fe89d81ae";
+				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_btt;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Hybird_1e3c3b;
 			};
@@ -6544,6 +6553,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1e3c3biphone.Hybird-1e3c3bUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "62fdaebd-ee1d-48b0-a50f-308fe89d81ae";
+				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_btt;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Hybird_1e3c3b;
 			};
