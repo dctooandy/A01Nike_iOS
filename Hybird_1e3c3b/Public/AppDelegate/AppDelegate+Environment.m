@@ -107,7 +107,7 @@
         if (result.flag!=0) {
             IVOtherInfoModel *infoModel = [[IVOtherInfoModel alloc] init];
             if (infoModel.agentId.length != 0) {
-                [appDownUrl stringByAppendingFormat:@"&agentId=%@",infoModel.agentId];
+                appDownUrl = [appDownUrl stringByAppendingFormat:@"&agentId=%@",infoModel.agentId];
             }
             [IVKUpdateViewController showWithUrl:appDownUrl content:result.upgradeDesc originVersion:result.versionCode isForce:result.flag==2 isManual:NO];
         }
