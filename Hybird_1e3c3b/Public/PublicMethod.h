@@ -161,6 +161,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)isValidateLeaveMessage:(NSString *)leaveMessage;
 //检查真实姓名是否合法
 + (BOOL)checkRealName:(NSString *)realName;
+//检查TextField是否合法
++ (BOOL)checkTextFieldString:(NSString *)realName;
 //检查比特币地址是否合法
 + (BOOL)checkBitcoinAddress:(NSString *)btcAddress;
 //正则表达式验证手机号码

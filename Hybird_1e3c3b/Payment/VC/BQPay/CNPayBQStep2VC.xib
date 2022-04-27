@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,6 +18,7 @@
                 <outlet property="alertLb" destination="oqX-8b-TfQ" id="Kgn-lZ-HPq"/>
                 <outlet property="amountLb" destination="FKj-VK-eni" id="ntU-c2-2EQ"/>
                 <outlet property="bankBGIV" destination="PUj-4o-jn4" id="SKZ-RI-gyP"/>
+                <outlet property="bankIconIV" destination="edC-XS-alI" id="jgg-Ee-Jbq"/>
                 <outlet property="bankLogoIV" destination="SGl-sC-Ed3" id="iA7-qG-3Kj"/>
                 <outlet property="bankNameLb" destination="a9j-Nk-n4j" id="KWV-8d-ehy"/>
                 <outlet property="depositLb" destination="rLb-Ty-FPP" id="uZG-YG-Lfq"/>
@@ -268,6 +269,19 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PUj-4o-jn4">
                                             <rect key="frame" x="0.0" y="0.0" width="345" height="200"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="5"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="edC-XS-alI">
+                                            <rect key="frame" x="275" y="130" width="60" height="60"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="edC-XS-alI" secondAttribute="height" multiplier="1:1" id="wJS-9j-gMw"/>
+                                            </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ho-3u-J4t">
                                             <rect key="frame" x="0.0" y="0.0" width="345" height="200"/>
@@ -332,11 +346,14 @@
                                         <constraint firstAttribute="bottom" secondItem="7Ho-3u-J4t" secondAttribute="bottom" id="0FL-BF-KMR"/>
                                         <constraint firstItem="PUj-4o-jn4" firstAttribute="leading" secondItem="2lY-Of-wIa" secondAttribute="leading" id="7dg-gD-xD7"/>
                                         <constraint firstItem="7Ho-3u-J4t" firstAttribute="top" secondItem="2lY-Of-wIa" secondAttribute="top" id="9nZ-ix-cqu"/>
+                                        <constraint firstAttribute="trailing" secondItem="edC-XS-alI" secondAttribute="trailing" constant="10" id="E6b-at-oNv"/>
+                                        <constraint firstItem="edC-XS-alI" firstAttribute="width" secondItem="PUj-4o-jn4" secondAttribute="width" multiplier="0.173913" id="GDD-fL-h7c"/>
                                         <constraint firstItem="7Ho-3u-J4t" firstAttribute="leading" secondItem="2lY-Of-wIa" secondAttribute="leading" id="PPs-Ht-zlR"/>
                                         <constraint firstAttribute="bottom" secondItem="PUj-4o-jn4" secondAttribute="bottom" id="RC8-1z-Fhh"/>
                                         <constraint firstAttribute="trailing" secondItem="7Ho-3u-J4t" secondAttribute="trailing" id="RJL-ZQ-l8u"/>
                                         <constraint firstItem="PUj-4o-jn4" firstAttribute="top" secondItem="2lY-Of-wIa" secondAttribute="top" id="XaU-PQ-Zbx"/>
                                         <constraint firstAttribute="trailing" secondItem="PUj-4o-jn4" secondAttribute="trailing" id="ecg-XW-ist"/>
+                                        <constraint firstAttribute="bottom" secondItem="edC-XS-alI" secondAttribute="bottom" constant="10" id="gaq-9x-l2f"/>
                                         <constraint firstAttribute="height" constant="200" id="wLb-oy-rYf"/>
                                     </constraints>
                                 </view>

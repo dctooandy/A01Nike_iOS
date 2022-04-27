@@ -151,7 +151,12 @@
     
     NSMutableDictionary *params = @{}.mutableCopy;
     if ([IVNetwork savedUserInfo].realName.length == 0) {
-        params[@"realName"] = realNameTF.text;
+        if (![PublicMethod checkRealName:realNameTF.text]) {
+            [MBProgressHUD showError:@"输入的真实姓名格式有误！" toView:self.view];
+            return;
+        } else {
+            params[@"realName"] = realNameTF.text;
+        }
     }
     if ([IVNetwork savedUserInfo].email.length == 0) {
         if (emailTF.text.length !=0 && ![PublicMethod isValidateEmail:emailTF.text]) {

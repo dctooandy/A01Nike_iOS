@@ -97,7 +97,6 @@
 		3A3DF1E7237BA445006129F6 /* BTTHotPromotionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A3DF1E5237BA445006129F6 /* BTTHotPromotionCell.xib */; };
 		3A49DF922179D62900FEFBDA /* BTTAccountBlanceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49DF902179D62900FEFBDA /* BTTAccountBlanceCell.m */; };
 		3A49DF932179D62900FEFBDA /* BTTAccountBlanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A49DF912179D62900FEFBDA /* BTTAccountBlanceCell.xib */; };
-		3A49DF9B2179D90D00FEFBDA /* BTTBindingMobileOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49DF992179D90D00FEFBDA /* BTTBindingMobileOneCell.m */; };
 		3A49DF9C2179D90D00FEFBDA /* BTTBindingMobileOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A49DF9A2179D90D00FEFBDA /* BTTBindingMobileOneCell.xib */; };
 		3A49DFA02179DA0D00FEFBDA /* BTTBindingMobileTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49DF9E2179DA0D00FEFBDA /* BTTBindingMobileTwoCell.m */; };
 		3A49DFA12179DA0D00FEFBDA /* BTTBindingMobileTwoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A49DF9F2179DA0D00FEFBDA /* BTTBindingMobileTwoCell.xib */; };
@@ -619,15 +618,12 @@
 		76756F8626A6C5790065F99B /* BTTDefaultPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76756F8326A6C5780065F99B /* BTTDefaultPopView.xib */; };
 		76756F8726A6C5790065F99B /* BTTDefaultPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76756F8526A6C5790065F99B /* BTTDefaultPopView.m */; };
 		7675705A26A9657A0065F99B /* BTTPopViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7675705926A9657A0065F99B /* BTTPopViewModel.m */; };
-		767DF24827902F5300F50520 /* mammon2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 767DF24727902F5200F50520 /* mammon2.gif */; };
 		7682A7932795785E001AC772 /* RedPacketsInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7922795785D001AC772 /* RedPacketsInfoModel.m */; };
 		7682A7A02797A1A6001AC772 /* LuckyBagModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A79F2797A1A6001AC772 /* LuckyBagModel.m */; };
 		7682A7B02797E8A2001AC772 /* GiftCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7AF2797E8A2001AC772 /* GiftCardModel.m */; };
 		7682A7B32797EF29001AC772 /* PrizeRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7B22797EF29001AC772 /* PrizeRecordModel.m */; };
 		7682A7B62797F3F3001AC772 /* PrizeNamesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7B52797F3F3001AC772 /* PrizeNamesModel.m */; };
 		7682A7C22798095F001AC772 /* FusingBlessingCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7682A7C12798095F001AC772 /* FusingBlessingCardModel.m */; };
-		76B16908279FE23C0033F301 /* newYear1.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B16906279FE23C0033F301 /* newYear1.gif */; };
-		76B16909279FE23C0033F301 /* newYear2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 76B16907279FE23C0033F301 /* newYear2.gif */; };
 		76C9F151265E404B0002591D /* CNPayOrderModelV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F150265E404B0002591D /* CNPayOrderModelV2.m */; };
 		76C9F2D92665BEA80002591D /* BTTDragonBoatPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */; };
 		76C9F2DA2665BEA80002591D /* BTTDragonBoatPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C9F2D82665BEA80002591D /* BTTDragonBoatPopView.m */; };
@@ -678,9 +674,11 @@
 		76F8642F26E87E8E00320B60 /* VIPHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F8642E26E87E8E00320B60 /* VIPHistoryModel.m */; };
 		76F8643126E87ECE00320B60 /* BTTVIPClubHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F8643026E87ECE00320B60 /* BTTVIPClubHistoryCell.xib */; };
 		7729DAB2DEBC453514E22B44 /* libPods-Hybird_1e3c3b.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D756AF242857489AE4898B5 /* libPods-Hybird_1e3c3b.a */; };
+		A1A4123A27E8492100B806C9 /* BTTBindingMobileOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A49DF992179D90D00FEFBDA /* BTTBindingMobileOneCell.m */; };
 		A1DA5A3F280013470036F2F7 /* BTTASGameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DA5A3E280013470036F2F7 /* BTTASGameModel.m */; };
 		A1DA5A5B280FAEA90036F2F7 /* BTTChainGameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DA5A59280FAEA90036F2F7 /* BTTChainGameCell.m */; };
 		A1DA5A5C280FAEA90036F2F7 /* BTTChainGameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A1DA5A5A280FAEA90036F2F7 /* BTTChainGameCell.xib */; };
+		A1F0277827D0937500202ACA /* libboringssl_simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 76CC62BD265677E00042AEDF /* libboringssl_simulator.a */; };
 		D317744F24D26471009B1814 /* DSBRedBagPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = D317744E24D26471009B1814 /* DSBRedBagPopView.m */; };
 		D317745124D2648C009B1814 /* DSBRedBagPopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D317745024D2648C009B1814 /* DSBRedBagPopView.xib */; };
 		D318AC1724333BC500183407 /* BTTKSAddBfbWalletController.m in Sources */ = {isa = PBXBuildFile; fileRef = D318AC1524333BC500183407 /* BTTKSAddBfbWalletController.m */; };
@@ -1161,7 +1159,7 @@
 		3A8D6E9B21633D83000530DF /* BTTBaseWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTBaseWebViewController.m; sourceTree = "<group>"; };
 		3A8D6E9E21634306000530DF /* BridgeProtocolExternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeProtocolExternal.h; sourceTree = "<group>"; };
 		3A8D6E9F21634306000530DF /* BridgeProtocolExternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeProtocolExternal.m; sourceTree = "<group>"; };
-		3A8F512B215F74CF0069D1B3 /* Hybird_1e3c3b.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hybird_1e3c3b.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A8F512B215F74CF0069D1B3 /* 博天堂_dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "博天堂_dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A8F512E215F74CF0069D1B3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3A8F512F215F74CF0069D1B3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3A8F5135215F74CF0069D1B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -1917,7 +1915,6 @@
 		76756F8526A6C5790065F99B /* BTTDefaultPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTTDefaultPopView.m; sourceTree = "<group>"; };
 		7675705826A9657A0065F99B /* BTTPopViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTTPopViewModel.h; sourceTree = "<group>"; };
 		7675705926A9657A0065F99B /* BTTPopViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTTPopViewModel.m; sourceTree = "<group>"; };
-		767DF24727902F5200F50520 /* mammon2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = mammon2.gif; sourceTree = "<group>"; };
 		7682A7912795785D001AC772 /* RedPacketsInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedPacketsInfoModel.h; sourceTree = "<group>"; };
 		7682A7922795785D001AC772 /* RedPacketsInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedPacketsInfoModel.m; sourceTree = "<group>"; };
 		7682A79E2797A1A6001AC772 /* LuckyBagModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LuckyBagModel.h; sourceTree = "<group>"; };
@@ -1930,8 +1927,6 @@
 		7682A7B52797F3F3001AC772 /* PrizeNamesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PrizeNamesModel.m; sourceTree = "<group>"; };
 		7682A7C02798095F001AC772 /* FusingBlessingCardModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FusingBlessingCardModel.h; sourceTree = "<group>"; };
 		7682A7C12798095F001AC772 /* FusingBlessingCardModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FusingBlessingCardModel.m; sourceTree = "<group>"; };
-		76B16906279FE23C0033F301 /* newYear1.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = newYear1.gif; sourceTree = "<group>"; };
-		76B16907279FE23C0033F301 /* newYear2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = newYear2.gif; sourceTree = "<group>"; };
 		76C9F14F265E404B0002591D /* CNPayOrderModelV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNPayOrderModelV2.h; sourceTree = "<group>"; };
 		76C9F150265E404B0002591D /* CNPayOrderModelV2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNPayOrderModelV2.m; sourceTree = "<group>"; };
 		76C9F2D62665BEA70002591D /* BTTDragonBoatPopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BTTDragonBoatPopView.xib; sourceTree = "<group>"; };
@@ -2327,6 +2322,7 @@
 				3A8F52102161EB510069D1B3 /* libc++.tbd in Frameworks */,
 				3AD9CE322167107B00685B43 /* libresample-arm-apple-darwin9.a in Frameworks */,
 				3AD9CE342167107B00685B43 /* libvoip_sdk.a in Frameworks */,
+				A1F0277827D0937500202ACA /* libboringssl_simulator.a in Frameworks */,
 				3A8F520E2161EB370069D1B3 /* GLKit.framework in Frameworks */,
 				3AD9CE2C2167107B00685B43 /* libpj-arm-apple-darwin9.a in Frameworks */,
 				3A8F520C2161EB2D0069D1B3 /* VideoToolbox.framework in Frameworks */,
@@ -2975,7 +2971,7 @@
 		3A8F512C215F74CF0069D1B3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3A8F512B215F74CF0069D1B3 /* Hybird_1e3c3b.app */,
+				3A8F512B215F74CF0069D1B3 /* 博天堂_dev.app */,
 				3A8F5143215F74D00069D1B3 /* Hybird_1e3c3bTests.xctest */,
 				3A8F514E215F74D00069D1B3 /* Hybird_1e3c3bUITests.xctest */,
 			);
@@ -3022,9 +3018,6 @@
 		3A8F5160215F75010069D1B3 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				76B16906279FE23C0033F301 /* newYear1.gif */,
-				76B16907279FE23C0033F301 /* newYear2.gif */,
-				767DF24727902F5200F50520 /* mammon2.gif */,
 				4142CFB226E9F4F100650449 /* login_bg_video.mp4 */,
 				41EAF0F5260D94290091FE09 /* hot.gif */,
 				D3B47D5823B70A5400D37C7F /* app.zip */,
@@ -5243,7 +5236,7 @@
 			);
 			name = Hybird_1e3c3b;
 			productName = Hybird_1e3c3b;
-			productReference = 3A8F512B215F74CF0069D1B3 /* Hybird_1e3c3b.app */;
+			productReference = 3A8F512B215F74CF0069D1B3 /* 博天堂_dev.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3A8F5142215F74D00069D1B3 /* Hybird_1e3c3bTests */ = {
@@ -5416,9 +5409,7 @@
 				04163C3127EC01F700778A12 /* CNMUploadView.xib in Resources */,
 				76F863B926E0B64100320B60 /* UserRightTableViewCell.xib in Resources */,
 				3AAE8219219A738B003EC8B0 /* BTTRegisterQuickManualCell.xib in Resources */,
-				76B16908279FE23C0033F301 /* newYear1.gif in Resources */,
 				41B3127D269D1FC0002AF76D /* BTTPaymentWarningPopView.xib in Resources */,
-				76B16909279FE23C0033F301 /* newYear2.gif in Resources */,
 				3A34F79521B6631B007BC4D4 /* BTTGamesTryAlertView.xib in Resources */,
 				3A75A182221164BC00584A35 /* BTTLoginAccountSelectCell.xib in Resources */,
 				D339CE9924C03CAC009ACD1C /* OTCInsideController.xib in Resources */,
@@ -5478,7 +5469,6 @@
 				3A21AEB02394BCBF009E73FD /* BTTShowErcodePopview.xib in Resources */,
 				D3A9A71B240E2B6A007F672A /* BTTNormalRegisterSuccessController.xib in Resources */,
 				3ADD23772177328B00FA959A /* BTTMeSaveMoneyCell.xib in Resources */,
-				767DF24827902F5300F50520 /* mammon2.gif in Resources */,
 				D3B47D5923B70A5500D37C7F /* app.zip in Resources */,
 				3A11AE592186A71100B1AFF4 /* BTTBookMessageCell.xib in Resources */,
 				3AAE821A219A738B003EC8B0 /* BTTLoginOrRegisterBtnCell.xib in Resources */,
@@ -5846,7 +5836,6 @@
 				3ADD23F22179B97A00FA959A /* UIView+SDExtension.m in Sources */,
 				76F863A926E0B61100320B60 /* BTTVIPActivitiesPopView.m in Sources */,
 				3AFCD7D021AD179600B136C1 /* BTTVideoGameCell.m in Sources */,
-				3A49DF9B2179D90D00FEFBDA /* BTTBindingMobileOneCell.m in Sources */,
 				3ADD236C21772A1E00FA959A /* BTTMeInfoCell.m in Sources */,
 				3A929428219C3D6200764E7E /* BTTRegisterSuccessBtnsCell.m in Sources */,
 				D35BF24023B451340085D6A1 /* CNPayUSDTStep1VC.m in Sources */,
@@ -5875,6 +5864,7 @@
 				D5B42FD627C1E7E4008330CB /* KYMWidthdrewUtility.m in Sources */,
 				41D0DC7A26C37D99003E55E1 /* BTTAddBTCController+Nav.m in Sources */,
 				D31B0EEB23B451B0003666BA /* BTTAddUSDTController.m in Sources */,
+				A1A4123A27E8492100B806C9 /* BTTBindingMobileOneCell.m in Sources */,
 				3AD9CD552165B2C900685B43 /* BTTPopoverViewCell.m in Sources */,
 				413E326D251B3553000804E2 /* BTTXmRecordController+LoadData.m in Sources */,
 				3A11AE672186D94B00B1AFF4 /* BTTThisWeekCell.m in Sources */,
@@ -6432,13 +6422,14 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.98;
+				MARKETING_VERSION = 3.1.99;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PRODUCT_NAME = "博天堂_dev";
+				PROVISIONING_PROFILE = "62fdaebd-ee1d-48b0-a50f-308fe89d81ae";
 				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_btt;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -6452,6 +6443,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = TC9HF6MY92;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -6475,13 +6467,14 @@
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty/VOIP",
 					"$(PROJECT_DIR)/Hybird_1e3c3b/Public/Tools/ThirdParty",
 				);
-				MARKETING_VERSION = 3.1.98;
+				MARKETING_VERSION = 3.1.99;
 				PRODUCT_BUNDLE_IDENTIFIER = com.1e3c3biphone01.btt01;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cf030407-4b8e-455c-9715-511483f6426f";
+				PRODUCT_NAME = "博天堂";
+				PROVISIONING_PROFILE = "62fdaebd-ee1d-48b0-a50f-308fe89d81ae";
 				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_btt;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -6499,6 +6492,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1e3c3biphone.Hybird-1e3c3bTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "62fdaebd-ee1d-48b0-a50f-308fe89d81ae";
+				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_btt;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hybird_1e3c3b.app/Hybird_1e3c3b";
 			};
@@ -6518,6 +6513,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1e3c3biphone.Hybird-1e3c3bTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "62fdaebd-ee1d-48b0-a50f-308fe89d81ae";
+				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_btt;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hybird_1e3c3b.app/Hybird_1e3c3b";
 			};
@@ -6536,6 +6533,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1e3c3biphone.Hybird-1e3c3bUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "62fdaebd-ee1d-48b0-a50f-308fe89d81ae";
+				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_btt;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Hybird_1e3c3b;
 			};
@@ -6554,6 +6553,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.1e3c3biphone.Hybird-1e3c3bUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "62fdaebd-ee1d-48b0-a50f-308fe89d81ae";
+				PROVISIONING_PROFILE_SPECIFIER = ad_hoc_btt;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Hybird_1e3c3b;
 			};

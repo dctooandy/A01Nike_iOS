@@ -400,6 +400,10 @@ static const char *exModelKey = "exModelKey";
     IVOtherInfoModel *model = [[IVOtherInfoModel alloc] init];
     if (model.agentId.length != 0) {
         [IVHttpManager shareManager].parentId = model.agentId;  // 渠道号
+        if (EnvirmentType != 2)// 目前环境非运营
+        {
+            [MBProgressHUD showSuccess:model.agentId toView:nil];
+        }
     }
     [IVNetwork requestPostWithUrl:BTTOneKeyRegister paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         IVJResponseObject *result = response;
