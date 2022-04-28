@@ -29,7 +29,7 @@ FOUNDATION_EXTERN NSInteger const kBTTLoginOrRegisterCaptchaPuzzle;
 @property(nonatomic, weak)id<PuzzleVerifyPopoverViewDelegate> delegate;
 - (void)show;
 - (void)reset;
-- (void)dismiss;
+- (void)successAndDismiss;
 
 @end
 

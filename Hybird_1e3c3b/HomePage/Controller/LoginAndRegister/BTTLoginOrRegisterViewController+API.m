@@ -882,7 +882,7 @@ static const char *exModelKey = "exModelKey";
                 if ([validateResult integerValue] == 1) {
                     self.loginView.ticketStr = result.body[@"ticket"];
                     [self checkChineseCaptchaSuccess];
-                    [self.puzzleView dismiss];
+                    [self.puzzleView successAndDismiss];
                     self.puzzleView = nil;
                 } else {
                     [self generateSliderCaptcha];

@@ -62,7 +62,7 @@ static CGSize kBTTPuzzleDefaultSize;
     _frontImageView = [[UIImageView alloc] initWithFrame:self.bounds];
     _frontImageView.userInteractionEnabled = NO;
     _frontImageView.contentMode = UIViewContentModeScaleAspectFit;
-    _frontImageView.backgroundColor = [UIColor clearColor];
+    _frontImageView.backgroundColor = kHexColor(0xe0e0e0);
     [self addSubview:_frontImageView];
 
     // Puzzle piece container view

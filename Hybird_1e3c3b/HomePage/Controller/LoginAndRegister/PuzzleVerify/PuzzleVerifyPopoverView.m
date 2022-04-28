@@ -24,6 +24,8 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
 @property(nonatomic,strong) UILabel *slidTitle;
 @property(nonatomic,strong) UISlider *slider;
 @property(nonatomic,strong) UIView *innerView;
+@property(nonatomic,strong) UIView *topView;
+@property(nonatomic,strong) UIView *translucentView;
 
 @property(nonatomic,strong) UIButton *cancelButton;
 @property(nonatomic,assign) BOOL sliding;
@@ -51,10 +53,12 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
     self.layer.masksToBounds = YES;
     self.userInteractionEnabled = YES;
     self.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.verifyView];
     
+    [self addSubview:self.verifyView];
+    [self addSubview:self.topView];
     [self addSubview:self.slidView];
     [self.slidView addSubview:self.innerView];
+    [self.slidView addSubview:self.translucentView];
     [self.slidView addSubview:self.slidTitle];
     [self.slidView addSubview:self.slider];
 
@@ -63,8 +67,15 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
 }
 
 -(void)setLayout {
+    [self.topView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self);
+        make.top.equalTo(self);
+        make.height.mas_equalTo(30);
+    }];
+    
     [self.verifyView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.equalTo(self);
+        make.top.equalTo(self.topView.mas_bottom);
+        make.left.right.equalTo(self);
         make.width.mas_equalTo(300);
         make.height.mas_equalTo(95);
     }];
@@ -73,41 +84,46 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
         make.top.equalTo(self.verifyView.mas_bottom);
         make.left.mas_equalTo(0);
         make.right.mas_equalTo(0);
-        make.height.mas_equalTo(46);
-    }];
-    
-    [self.slidTitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(0);
-        make.left.mas_equalTo(50);
-        make.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(0);
-    }];
-    
-    [self.innerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(12);
-        make.left.mas_equalTo(17);
-        make.right.mas_equalTo(-17);
-        make.bottom.mas_equalTo(-12);
-    }];
-    
-    [self.slider mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(0);
-        make.left.mas_equalTo(4);
-        make.right.mas_equalTo(-4);
-        make.height.mas_equalTo(46);
-    }];
-    
-    [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.slidView.mas_bottom).offset(10);
-        make.left.mas_equalTo(0);
-        make.right.mas_equalTo(0);
         make.height.mas_equalTo(50);
         make.bottom.equalTo(self);
     }];
     
+    [self.slidTitle mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(8);
+        make.left.mas_equalTo(70);
+        make.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
+    }];
+    
+    [self.translucentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.bottom.equalTo(self.innerView);
+        make.right.equalTo(self.slider.mas_left).offset(10);
+    }];
+    
+    [self.innerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(8);
+        make.left.mas_equalTo(31);
+        make.right.mas_equalTo(-31);
+        make.bottom.mas_equalTo(-8);
+    }];
+    
+    [self.slider mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(7);
+        make.left.mas_equalTo(42);
+        make.right.mas_equalTo(-42);
+        make.height.mas_equalTo(34);
+    }];
+    
+    [self.cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.topView).offset(6);
+        make.left.equalTo(self.topView).offset(10);
+        make.width.height.mas_equalTo(20);
+    }];
+    
     [self.refreshButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.equalTo(self.verifyView);
-        make.width.height.offset(30);
+        make.top.equalTo(self.topView).offset(6);
+        make.right.equalTo(self.topView).offset(-11);
+        make.width.height.offset(20);
     }];
 }
 
@@ -158,10 +174,16 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
 - (void)reset {
     _verifyView.puzzleXPercentage = 0;
     _slider.value = 0.0;
+    [_translucentView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.slider.mas_left).offset(10);
+    }];
 }
 
-- (void)dismiss {
-    [self hide];
+- (void)successAndDismiss {
+    self.slider.selected = YES;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self hide];
+    });
 }
 
 - (void)layoutSubviews {
@@ -213,6 +235,9 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
 
 - (void)sliderChanged:(UISlider *)sender {
     _verifyView.puzzleXPercentage = sender.value;
+    [_translucentView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(sender.mas_left).offset(10+(sender.value*184));
+    }];
 }
 
 #pragma mark - PuzzleVerifyViewDelegate
@@ -244,13 +269,7 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
 -(UIButton *)cancelButton {
     if (!_cancelButton) {
         _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
-        [_cancelButton setTitleColor:[UIColor brownColor] forState:UIControlStateNormal];
-        [_cancelButton setBackgroundColor:[UIColor whiteColor]];
-        _cancelButton.layer.borderColor = [UIColor brownColor].CGColor;
-        _cancelButton.layer.borderWidth = 2.0;
-        _cancelButton.layer.cornerRadius = 5.0;
-        _cancelButton.clipsToBounds = true;
+        [_cancelButton setImage:[UIImage imageNamed:@"X_A01"] forState:UIControlStateNormal];
         _cancelButton.adjustsImageWhenHighlighted = NO;
         [_cancelButton addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -260,11 +279,19 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
 - (UIButton *)refreshButton {
     if (!_refreshButton) {
         _refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_refreshButton setImage:[UIImage imageNamed:@"bjl_refresh"] forState:UIControlStateNormal];
+        [_refreshButton setImage:[UIImage imageNamed:@"O_刷新"] forState:UIControlStateNormal];
         _refreshButton.adjustsImageWhenHighlighted = NO;
         [_refreshButton addTarget:self action:@selector(refresh) forControlEvents:UIControlEventTouchUpInside];
     }
     return _refreshButton;
+}
+
+- (UIView *)topView {
+    if (!_topView) {
+        _topView = [[UIView alloc] initWithFrame:CGRectZero];
+        _topView.backgroundColor = kHexColor(0x004F8F);
+    }
+    return _topView;
 }
 
 -(PuzzleVerifyView *)verifyView{
@@ -289,31 +316,34 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
     return _slidView;
 }
 
+- (UIView *)translucentView {
+    if (!_translucentView) {
+        _translucentView = [[UIView alloc] initWithFrame:CGRectZero];
+        _translucentView.backgroundColor = kHexColorAlpha(0x0994E7, 0.1);
+        _translucentView.layer.cornerRadius = 4.0;
+        _translucentView.layer.borderWidth = 1.0;
+        _translucentView.layer.borderColor = [kHexColor(0x0994E7) CGColor];
+    }
+    return _translucentView;
+}
+
 - (UIView *)innerView {
     if (!_innerView) {
         CGSize size = CGSizeMake(266, 22);
         _innerView = [[UIView alloc] initWithFrame:CGRectMake(17, 12, size.width, size.height)];
-        _innerView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.15];
-        _innerView.layer.cornerRadius = 11.0;
-        _innerView.clipsToBounds = YES;
-        CALayer *shadowLayer = [[CALayer alloc] init];
-        shadowLayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.15].CGColor;
-        shadowLayer.position = CGPointMake(size.width / 2, -size.height/ 2 + 0.5);
-        shadowLayer.bounds = CGRectMake(0, 0, size.width, size.height);
-        shadowLayer.shadowColor = [UIColor blackColor].CGColor;
-        shadowLayer.shadowOffset = CGSizeMake(0.5, 0.5);
-        shadowLayer.shadowOpacity = 0.8;
-        shadowLayer.shadowRadius = 5.0;
-        [_innerView.layer addSublayer:shadowLayer];
+        _innerView.backgroundColor = [UIColor clearColor];
+        _innerView.layer.cornerRadius = 4.0;
+        _innerView.layer.borderColor = [kHexColor(0xE7E8E8) CGColor];
+        _innerView.layer.borderWidth = 1.0;
     }
     return _innerView;
 }
 
 -(UILabel *)slidTitle {
     if (!_slidTitle) {
-        _slidTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 46)];
+        _slidTitle = [[UILabel alloc] initWithFrame:CGRectMake(100, 0, 200, 34)];
         _slidTitle.textColor = [UIColor clearColor];
-        _slidTitle.font = [UIFont boldSystemFontOfSize:14];
+        _slidTitle.font = [UIFont systemFontOfSize:14];
         _slidTitle.textAlignment = NSTextAlignmentCenter;
         _slidTitle.text = @"拖动滑块完成拼图验证>>>";
     }
@@ -327,6 +357,8 @@ NSInteger const kBTTLoginOrRegisterCaptchaPuzzle = 3;
         _slider.minimumValue = 0.0;
         _slider.maximumValue = 1.0;
         _slider.value = 0.0;
+        [_slider setThumbImage:[UIImage imageNamed:@"ic_puzzle_slider"] forState:UIControlStateNormal];
+        [_slider setThumbImage:[UIImage imageNamed:@"ic_puzzle_succ"] forState:UIControlStateSelected];
         _slider.backgroundColor = [UIColor clearColor];
         _slider.minimumTrackTintColor = [UIColor clearColor];
         _slider.maximumTrackTintColor = [UIColor clearColor];

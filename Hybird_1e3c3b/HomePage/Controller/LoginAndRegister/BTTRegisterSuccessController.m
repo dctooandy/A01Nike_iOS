@@ -360,7 +360,7 @@ typedef enum {
                 if ([validateResult integerValue] == 1) {
                     self.ticketStr = result.body[@"ticket"];
                     [self checkChineseCaptchaSuccess];
-                    [self.puzzleView dismiss];
+                    [self.puzzleView successAndDismiss];
                     self.puzzleView = nil;
                 } else {
                     [self generateSliderCaptcha];
