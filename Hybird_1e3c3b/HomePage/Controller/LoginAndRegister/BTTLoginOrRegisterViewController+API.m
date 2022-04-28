@@ -24,6 +24,7 @@
 #import "HAInitConfig.h"
 #import "IVWebViewManager.h"
 #import "IVOtherInfoModel.h"
+#import "PuzzleVerifyPopoverView.h"
 static const char *confirmKey = "confirmKey";
 static const char *exModelKey = "exModelKey";
 
@@ -31,6 +32,18 @@ static const char *exModelKey = "exModelKey";
 
 
 #pragma mark - 登录-----
+
+- (void)preLogin:(NSString *)account {
+    NSMutableDictionary *parms = [NSMutableDictionary dictionary];
+    parms[@"loginName"] = account;
+    [IVNetwork requestPostWithUrl:BTTUserPreLogin paramters:parms completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            self.loginView.needCaptcha = [result.body[@"needCaptcha"] boolValue];
+            self.loginView.captchaType = [result.body[@"captchaType"] integerValue];
+        }
+    }];
+}
 
 - (void)loginWithAccount:(NSString *)account pwd:(NSString *)pwd isSmsCode:(BOOL)isSmsCode codeStr:(NSString *)codeStr{
     
@@ -100,7 +113,7 @@ static const char *exModelKey = "exModelKey";
     [self showLoading];
     NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
     params[@"messageId"] = messageId;
-    params[@"smsCode"] = smsCode;
+//    params[@"smsCode"] = smsCode;
     params[@"validateId"] = validateId;
     params[@"loginName"] = loginName;
 //    NSDictionary *params = @{
@@ -110,7 +123,7 @@ static const char *exModelKey = "exModelKey";
 //        @"loginName":loginName
 //    };
     [IVHttpManager shareManager].userToken = @"";
-    [IVNetwork requestPostWithUrl:BTTUserLoginByMobileNo paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+    [IVNetwork requestPostWithUrl:BTTUserLoginByValidateId paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
         [self hideLoading];
         IVJResponseObject *result = response;
         if ([result.head.errCode isEqualToString:@"0000"]) {
@@ -133,15 +146,17 @@ static const char *exModelKey = "exModelKey";
         return;
     }
     NSInteger loginType = [PublicMethod isValidatePhone:model.login_name] ? 1 : 0;
-    NSString *loginUrl = loginType==0 ? BTTUserLoginAPI : BTTUserLoginEXAPI;
+    NSString *loginUrl = loginType==0 ? BTTUserLoginByName : BTTUserLoginByMobileEX;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    [parameters setValue:model.login_name forKey:BTTLoginName];
-    if (loginType==0) {
+    if (loginType==0) { // 用户名
+        [parameters setValue:model.login_name forKey:BTTLoginName];
         [parameters setValue:[IVRsaEncryptWrapper encryptorString:model.password] forKey:BTTPassword];
         [parameters setValue:model.timestamp forKey:BTTTimestamp];
         [parameters setValue:@(loginType) forKey:@"loginType"];
-    }else{
-        [parameters setValue:model.password forKey:@"verifyStr"];
+    }else{ // 手机
+        [parameters setValue:@(loginType) forKey:@"loginType"];
+        [parameters setValue:[IVRsaEncryptWrapper encryptorString:model.login_name] forKey:@"mobileNo"];
+        [parameters setValue:[IVRsaEncryptWrapper encryptorString:model.password] forKey:@"verifyStr"];
         [parameters setValue:self.messageId forKey:@"messageId"];
         [parameters setValue:@"" forKey:@"captcha"];
         [parameters setValue:@"" forKey:@"captchaId"];
@@ -170,7 +185,8 @@ static const char *exModelKey = "exModelKey";
         [[NSUserDefaults standardUserDefaults] setObject:model.login_name forKey:BTTCacheAccountName];
         [[NSUserDefaults standardUserDefaults] synchronize];
         IVJResponseObject *result = response;
-        if ([result.head.errCode isEqualToString:@"0000"]) {
+        if ([result.head.errCode isEqualToString:@"0000"] ||
+            [result.head.errCode isEqualToString:@"GW_800507"]) { // GW_800507 : 该手机被绑定多个账号
             self.uuid = @"";
             self.wrongPwdNum = 0;
             // 登入時 檢測是否多帳號
@@ -181,38 +197,34 @@ static const char *exModelKey = "exModelKey";
                 NSString *messageId = result.body[@"messageId"];
                 NSString *validateId = result.body[@"validateId"];
                 [self showPopViewWithAccounts:loginArray withPhone:model.login_name withValidateId:validateId messageId:messageId smsCode:model.password isBack:isback];
-            }else{
-                if ([result.body[@"loginName"] hasPrefix:@"f"] == YES)
-                {
-                    // 單帳號,但帳號開頭為F,仍顯示多帳號選單,但登入確定按鈕失效,不給選
-                    [self hideLoading];
-                    NSDictionary *loginDic = @{@"loginName":result.body[@"loginName"]};
-                    NSArray *loginArray = [[NSArray alloc] initWithObjects:loginDic, nil];
-                    NSString *messageId = result.body[@"messageId"];
-                    NSString *validateId = result.body[@"validateId"];
-                    [self showPopViewWithAccounts:loginArray withPhone:model.login_name withValidateId:validateId messageId:messageId smsCode:model.password isBack:isback];
-                }else
-                {
-                    [[NSUserDefaults standardUserDefaults]setObject:result.body[@"rfCode"] forKey:@"pushcustomerid"];
-                    //                [IVPushManager sharedManager].customerId = result.body[@"customerId"];
-                    if (result.body[@"beforeLoginDate"])
-                    {
-                        [[NSUserDefaults standardUserDefaults] setObject:result.body[@"beforeLoginDate"] forKey:BTTBeforeLoginDate];
-                    }else{
-                        [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:BTTBeforeLoginDate];
-                    }
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                    AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-                    [delegate reSendIVPushRequestIpsSuperSign:result.body[@"rfCode"]];
-                    [IVHttpManager shareManager].loginName = model.login_name;
-                    [IVHttpManager shareManager].userToken = result.body[@"token"];
-                    [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
-                    NSString *loginName = [NSString stringWithFormat:@"%@",result.body[@"loginName"]];
-                    [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
-                }
+                return;
             }
-            
-        }else{
+            if ([result.body[@"loginName"] hasPrefix:@"f"] == YES) {
+                // 單帳號,但帳號開頭為F,仍顯示多帳號選單,但登入確定按鈕失效,不給選
+                [self hideLoading];
+                NSDictionary *loginDic = @{@"loginName":result.body[@"loginName"]};
+                NSArray *loginArray = [[NSArray alloc] initWithObjects:loginDic, nil];
+                NSString *messageId = result.body[@"messageId"];
+                NSString *validateId = result.body[@"validateId"];
+                [self showPopViewWithAccounts:loginArray withPhone:model.login_name withValidateId:validateId messageId:messageId smsCode:model.password isBack:isback];
+                return;
+            }
+            [[NSUserDefaults standardUserDefaults]setObject:result.body[@"rfCode"] forKey:@"pushcustomerid"];
+            //                [IVPushManager sharedManager].customerId = result.body[@"customerId"];
+            if (result.body[@"beforeLoginDate"]) {
+                [[NSUserDefaults standardUserDefaults] setObject:result.body[@"beforeLoginDate"] forKey:BTTBeforeLoginDate];
+            } else {
+                [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:BTTBeforeLoginDate];
+            }
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            AppDelegate * delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            [delegate reSendIVPushRequestIpsSuperSign:result.body[@"rfCode"]];
+            [IVHttpManager shareManager].loginName = model.login_name;
+            [IVHttpManager shareManager].userToken = result.body[@"token"];
+            [[NSUserDefaults standardUserDefaults]setObject:result.body[@"token"] forKey:@"userToken"];
+            NSString *loginName = [NSString stringWithFormat:@"%@",result.body[@"loginName"]];
+            [self getCustomerInfoByLoginNameWithName:loginName isBack:isback];
+        } else {
             [self hideLoading];
             if ([result.head.errCode isEqualToString:@"GW_100002"]) {
                 self.isDifferentLoc = true;
@@ -352,6 +364,17 @@ static const char *exModelKey = "exModelKey";
 
 #pragma mark - 注册
 
+- (void)preCreateAccount:(NSString *)account {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"loginName"] = account;
+    [IVNetwork requestPostWithUrl:BTTUserPreCreateAccount paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            self.fastRegisterView.needCaptcha = [result.body[@"needCaptcha"] boolValue];
+            self.fastRegisterView.captchaType = [result.body[@"captchaType"] integerValue];
+        }
+    }];
+}
 
 - (void)createRealAccountWithModel:(BTTCreateAPIModel *)model{
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -421,6 +444,7 @@ static const char *exModelKey = "exModelKey";
             vc.account = account;
             vc.mainAccountName = mainAccountName;
             vc.pwd = pwd;
+            vc.captchaType = self.loginView.captchaType;
             [self.navigationController pushViewController:vc animated:YES];
             
             
@@ -551,6 +575,9 @@ static const char *exModelKey = "exModelKey";
     }
 }
 
+#pragma mark - 验证
+
+#pragma mark --- 短信验证 ---
 - (void)verifySmsCodeWithModel:(BTTCreateAPIModel *)model{
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setValue:self.messageId forKey:@"messageId"];
@@ -711,6 +738,7 @@ static const char *exModelKey = "exModelKey";
                     vc.account = result.body[@"loginName"];
                     vc.mainAccountName = result.body[@"mainAccountName"];
                     vc.pwd = pwd;
+                    vc.captchaType = self.loginView.captchaType;
                     [self.navigationController pushViewController:vc animated:YES];
 
                     
@@ -722,7 +750,7 @@ static const char *exModelKey = "exModelKey";
     }];
 }
 
-
+#pragma mark --- 汉字验证 ---
 // 图形验证码
 - (void)loadVerifyCode {
     [self showLoading];
@@ -788,6 +816,89 @@ static const char *exModelKey = "exModelKey";
                 [self loadVerifyCode];
             }
             [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
+
+#pragma mark --- 滑块拼图验证 ---
+// 生成滑块拼图验证码
+- (void)generateSliderCaptcha {
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTPuzzleSliderCaptcha paramters:@{@"use":@2} completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        [self hideLoading];
+        IVJResponseObject *result = response;
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            if (result.body && ![result.body isKindOfClass:[NSNull class]]) {
+                self.captchaId = result.body[@"captchaId"];
+                self.puzzleView.position = CGPointMake([result.body[@"x"] floatValue],
+                                                       [result.body[@"y"] floatValue]);
+                if (result.body[@"cutoutImage"] && ![result.body[@"cutoutImage"] isKindOfClass:[NSNull class]]) {
+                    NSString *base64Str = result.body[@"cutoutImage"];
+                    // 将base64字符串转为NSData
+                    NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+                    // 将NSData转为UIImage
+                    UIImage *decodedImage = [UIImage imageWithData: decodeData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.puzzleView.cutoutImage = decodedImage;
+                    });
+                }
+                if (result.body[@"originImage"] && ![result.body[@"originImage"] isKindOfClass:[NSNull class]]) {
+                    NSString *base64Str = result.body[@"originImage"];
+                    // 将base64字符串转为NSData
+                    NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+                    // 将NSData转为UIImage
+                    UIImage *decodedImage = [UIImage imageWithData: decodeData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.puzzleView.originImage = decodedImage;
+                    });
+                }
+                if (result.body[@"shadeImage"] && ![result.body[@"shadeImage"] isKindOfClass:[NSNull class]]) {
+                    NSString *base64Str = result.body[@"shadeImage"];
+                    // 将base64字符串转为NSData
+                    NSData *decodeData = [[NSData alloc]initWithBase64EncodedString:base64Str options:(NSDataBase64DecodingIgnoreUnknownCharacters)];
+                    // 将NSData转为UIImage
+                    UIImage *decodedImage = [UIImage imageWithData: decodeData];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.puzzleView.shadeImage = decodedImage;
+                    });
+                }
+                [self.puzzleView show];
+            }
+        }else{
+            [MBProgressHUD showError:result.head.errMsg toView:nil];
+        }
+    }];
+}
+
+// 验证滑块拼图验证码
+- (void)checkPuzzleSliderCaptcha:(NSString *)captchaStr {
+    NSMutableDictionary * params = [[NSMutableDictionary alloc] init];
+    params[@"use"] = @2;
+    params[@"captcha"] = captchaStr;
+    params[@"captchaId"] = self.captchaId;
+    [self showLoading];
+    [IVNetwork requestPostWithUrl:BTTCheckPuzzleSliderCaptcha paramters:params completionBlock:^(id  _Nullable response, NSError * _Nullable error) {
+        IVJResponseObject *result = response;
+        [self hideLoading];
+        if ([result.head.errCode isEqualToString:@"0000"]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSNumber * validateResult = result.body[@"validateResult"];
+                if ([validateResult integerValue] == 1) {
+                    self.loginView.ticketStr = result.body[@"ticket"];
+                    [self checkChineseCaptchaSuccess];
+                    [self.puzzleView successAndDismiss];
+                    self.puzzleView = nil;
+                } else {
+                    [self generateSliderCaptcha];
+                }
+            });
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD showError:@"验证失败，请重试" toView:nil];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self generateSliderCaptcha];
+                });
+            });
         }
     }];
 }

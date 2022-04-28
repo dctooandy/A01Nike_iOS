@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void(^tapRegister)(NSString *account,NSString *code , NSString *askInputCode);
 @property (nonatomic, copy) void(^tapOneKeyRegister)(void);
 @property (nonatomic, strong) UITextField *imgCodeField;
+@property (nonatomic, assign) BOOL needCaptcha;     ///< 是否需要图型验证码[1: 是, 0:否]
+@property (nonatomic, assign) NSUInteger captchaType; /// 验证码类型[1: 数字验证码; 2:汉字验证码,
 //@property (nonatomic, strong) UITextField *askInputCodeField;
 
 @end

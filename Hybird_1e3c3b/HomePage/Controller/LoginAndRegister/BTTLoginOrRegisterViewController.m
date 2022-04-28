@@ -27,7 +27,7 @@
 #import "AppInitializeConfig.h"
 #import "BTTForgetController.h"
 
-@interface BTTLoginOrRegisterViewController ()<UITextFieldDelegate>
+@interface BTTLoginOrRegisterViewController ()<UITextFieldDelegate, PuzzleVerifyPopoverViewDelegate>
 
 @property (nonatomic, assign) CGRect activedTextFieldRect;
 
@@ -48,8 +48,8 @@
 @property (nonatomic, assign) NSInteger pressNum;
 @property (nonatomic, strong) UIButton *imgCodeBtn;
 @property (nonatomic, strong) UIButton * cancelBtn;
-@property (nonatomic, strong)UIView * imgCodePopViewBg;
-@property (nonatomic, strong)AVPlayerLayer *exLayer;
+@property (nonatomic, strong) UIView * imgCodePopViewBg;
+@property (nonatomic, strong) AVPlayerLayer *exLayer;
 @end
 
 @implementation BTTLoginOrRegisterViewController
@@ -93,6 +93,7 @@
     }
     [self setUpView];
     [self handleShowOrHide];
+    [self preLogin:@""];
 }
 
 -(void)loadPlayer {
@@ -247,11 +248,22 @@
         strongSelf.fastRegisterView.hidden = NO;
     };
     
-    loginInfoView.refreshCodeImage = ^{
+    loginInfoView.refreshCodeImage = ^(BTTLoginOrRegisterCaptchaType captchaType){
         strongSelf(strongSelf);
-        [strongSelf.pressLocationArr removeAllObjects];
-        [self imgCodeBtnPopView];
-        [strongSelf loadVerifyCode];
+        switch (captchaType) {
+            case BTTLoginOrRegisterCaptchaNone:
+            case BTTLoginOrRegisterCaptchaDigital:
+                break;
+            case BTTLoginOrRegisterCaptchaChinese:
+                [strongSelf.pressLocationArr removeAllObjects];
+                [strongSelf imgCodeBtnPopView];
+                [strongSelf loadVerifyCode];
+                break;
+            case BTTLoginOrRegisterCaptchaPuzzle:
+                [strongSelf initPuzzleVerifyPopView];
+                [strongSelf generateSliderCaptcha];
+                break;
+        }
     };
     
     [self.view addSubview:loginInfoView];
@@ -284,6 +296,35 @@
     [self.view addSubview:fastRegisterView];
     _fastRegisterView = fastRegisterView;
 }
+
+#pragma mark - 滑块验证
+
+- (void)initPuzzleVerifyPopView {
+    [self.view endEditing:YES];
+    PuzzleVerifyPopoverView *puzzleView = [[PuzzleVerifyPopoverView alloc] init];
+    puzzleView.delegate = self;
+    self.puzzleView = puzzleView;
+}
+
+#pragma mark - PuzzleVerifyPopoverViewDelegate
+
+- (void)puzzleViewDidChangePosition:(CGPoint)position {
+    NSDictionary * dict = @{@"x":@(position.x), @"y":@(position.y)};
+    // 将JSON字串{"x":44, "y":55} base64编码后代入
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    NSString *result = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    [self checkPuzzleSliderCaptcha:result];
+}
+
+- (void)puzzleViewCanceled {
+    self.puzzleView = nil;
+}
+
+- (void)puzzleViewRefresh {
+    [self generateSliderCaptcha];
+}
+
+#pragma mark - 汉字验证
 
 -(void)imgCodeBtnPopView {
     self.pressNum = 0;

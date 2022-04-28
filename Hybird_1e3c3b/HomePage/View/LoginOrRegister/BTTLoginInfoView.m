@@ -199,7 +199,7 @@
 
 - (void)regetCodeImage:(UIButton *)sender {
     if (self.refreshCodeImage) {
-        self.refreshCodeImage();
+        self.refreshCodeImage(self.captchaType);
     }
 }
 

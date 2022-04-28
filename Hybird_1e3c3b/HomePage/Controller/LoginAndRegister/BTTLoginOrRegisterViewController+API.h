@@ -29,10 +29,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)onekeyRegisteAccount;
 
--(void)checkChineseCaptcha:(NSString *)captchaStr;
+- (void)checkChineseCaptcha:(NSString *)captchaStr;
 
--(void)loginWith2FA:(NSDictionary *)resultDic smsCode:(NSString *)smsCode model:(BTTLoginAPIModel *)model isBack:(BOOL)isback;
--(void)sendSmsCodeAgain:(NSString *)loginName model:(BTTLoginAPIModel *)model isBack:(BOOL)isback show:(BOOL)show;
+- (void)loginWith2FA:(NSDictionary *)resultDic smsCode:(NSString *)smsCode model:(BTTLoginAPIModel *)model isBack:(BOOL)isback;
+- (void)sendSmsCodeAgain:(NSString *)loginName model:(BTTLoginAPIModel *)model isBack:(BOOL)isback show:(BOOL)show;
+
+- (void)preLogin:(NSString *)account;
+- (void)preCreateAccount:(NSString *)account;
+
+- (void)generateSliderCaptcha;
+- (void)checkPuzzleSliderCaptcha:(NSString *)captchaStr;
 
 @property (nonatomic, strong) UIAlertAction *confirm;
 @property (nonatomic, strong) BTTLoginAPIModel *exModel;
